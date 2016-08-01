@@ -101,10 +101,13 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
+        $this->idTable = $this->str('class', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/db-test.phtml',
             array(
+                'idTable'      => $this->idTable,
+                'idTableVar'   => $this->str('var', $this->idTable),
                 'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
                 'insertArray'  => $this->getColumnService()->renderColumnPart('insertArray', true),
                 'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', true, true),

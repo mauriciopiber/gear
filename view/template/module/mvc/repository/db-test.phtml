@@ -72,9 +72,52 @@ class <?php echo $this->class;?>RepositoryTest extends AbstractTestCase
         $this->assertNull($resultSet);
     }
 
-<?php echo $this->oneBy;?>
+    public function testSelectOneByIdMyController()
+    {
+        $resultSet = $this->get<?php echo $this->class;?>()->selectOneBy(
+            array(
+                '<?php echo $this->idTableVar;?>' =>
+                    15
+            )
+        );
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(
+            15,
+            $resultSet->get<?php echo $this->idTable;?>()
+        );
+    }
 
-<?php echo $this->order;?>
+    public function testSelectAllOrderByIdMyControllerASC()
+    {
+        $resultSet = $this->get<?php echo $this->class;?>()->selectAll(
+            array(),
+            '<?php echo $this->idTableVar;?>',
+            'ASC'
+        );
+        $this->assertTrue(is_array($resultSet));
+        $this->assertEquals(30, count($resultSet));
+        $data = array_shift($resultSet);
+        $this->assertEquals(
+            '1',
+            $data['<?php echo $this->idTableVar;?>'***REMOVED***
+        );
+    }
+
+    public function testSelectAllOrderByIdMyControllerDESC()
+    {
+        $resultSet = $this->get<?php echo $this->class;?>()->selectAll(
+            array(),
+            '<?php echo $this->idTableVar;?>',
+            'DESC'
+        );
+        $this->assertTrue(is_array($resultSet));
+        $this->assertEquals(30, count($resultSet));
+        $data = array_shift($resultSet);
+        $this->assertEquals(
+            '30',
+            $data['<?php echo $this->idTableVar;?>'***REMOVED***
+        );
+    }
 
     public function testCreateNewData()
     {

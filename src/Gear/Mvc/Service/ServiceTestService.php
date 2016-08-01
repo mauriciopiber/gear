@@ -66,30 +66,6 @@ class ServiceTestService extends AbstractMvcTest
             ));
         }
 
-
-        $selectOneBy = $this->getSelectOneByForUnitTest();
-
-        $this->oneBy = '';
-        foreach ($selectOneBy as $select) {
-            $this->oneBy .= <<<EOS
-    public function testSelectOneBy{$select['class'***REMOVED***}()
-    {
-        \$resultSet = \$this->get{$select['method'***REMOVED***}()->selectOneBy(
-            array(
-                '{$select['var'***REMOVED***}' =>
-                    {$select['value'***REMOVED***}
-            )
-        );
-        \$this->assertInstanceOf('{$select['module'***REMOVED***}\Entity\\{$select['entityName'***REMOVED***}', \$resultSet);
-        \$this->assertEquals(
-            {$select['value'***REMOVED***},
-            \$resultSet->get{$select['class'***REMOVED***}()
-        );
-    }
-
-EOS;
-        }
-
         $onlyOneSetUp = [***REMOVED***;
         $this->setUp = '';
         $this->createMock = '';
@@ -143,8 +119,6 @@ EOS;
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            //'injection' => $this->getCodeTest()->getDependencyTest($this->src),
-            'oneBy' => $this->oneBy,
             'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
             'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
             'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),

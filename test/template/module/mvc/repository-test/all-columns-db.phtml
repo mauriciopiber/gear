@@ -6,38 +6,38 @@ use GearBaseTest\AbstractTestCase;
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group MyModule
- * @group MyRepository
+ * @group Table
  * @group Repository
  */
-class MyRepositoryRepositoryTest extends AbstractTestCase
+class TableRepositoryTest extends AbstractTestCase
 {
-    protected $myRepository;
+    protected $table;
 
-    public function getMyRepository()
+    public function getTable()
     {
-        if (!isset($this->myRepository)) {
-            $this->myRepository =
-                $this->bootstrap->getServiceLocator()->get('MyModule\Repository\MyRepositoryRepository');
+        if (!isset($this->table)) {
+            $this->table =
+                $this->bootstrap->getServiceLocator()->get('MyModule\Repository\TableRepository');
         }
-        return $this->myRepository;
+        return $this->table;
     }
 
     public function testServiceLocator()
     {
-        $serviceLocator = $this->getMyRepository()->getServiceLocator();
+        $serviceLocator = $this->getTable()->getServiceLocator();
         $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
     }
 
     public function testCallUsingServiceLocator()
     {
-        $myRepository = $this->getMyRepository();
-        $this->assertInstanceOf('MyModule\Repository\MyRepositoryRepository', $myRepository);
+        $table = $this->getTable();
+        $this->assertInstanceOf('MyModule\Repository\TableRepository', $table);
     }
 
 
     public function testSelectAll()
     {
-        $resultSet = $this->getMyRepository()->selectAll();
+        $resultSet = $this->getTable()->selectAll();
         $this->assertTrue(is_array($resultSet));
         $this->assertEquals(30, count($resultSet));
     }
@@ -45,166 +45,51 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
 
     public function testSelectAllWithBasicFilter()
     {
-        $resultSet = $this->getMyRepository()->selectAll(array('likeField' => ''));
+        $resultSet = $this->getTable()->selectAll(array('likeField' => ''));
         $this->assertTrue(is_array($resultSet));
         $this->assertEquals(30, count($resultSet));
     }
 
     public function testSelectAllWithBasicFilterFoundNone()
     {
-        $resultSet = $this->getMyRepository()->selectAll(array('likeField' => 'abcdefAhauhsdfguagdfaf'));
+        $resultSet = $this->getTable()->selectAll(array('likeField' => 'abcdefAhauhsdfguagdfaf'));
         $this->assertTrue(is_array($resultSet));
         $this->assertEquals(0, count($resultSet));
     }
 
     public function testSelectByIdReturnEntity()
     {
-        $resultSet = $this->getMyRepository()->selectById(1);
+        $resultSet = $this->getTable()->selectById(1);
         $this->assertNotNull($resultSet);
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
 
-        $this->assertEquals(1, $resultSet->getIdMyRepository());
+        $this->assertEquals(1, $resultSet->getIdTable());
     }
 
     public function testSelectByIdReturnNull()
     {
-        $resultSet = $this->getMyRepository()->selectById(60000);
+        $resultSet = $this->getTable()->selectById(60000);
         $this->assertNull($resultSet);
     }
 
-
     public function testSelectOneByIdMyController()
     {
-        $resultSet = $this->getMyRepository()->selectOneBy(
+        $resultSet = $this->getTable()->selectOneBy(
             array(
                 'idMyController' =>
                     15
             )
         );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(
             15,
             $resultSet->getIdMyController()
         );
     }
 
-
-    public function testSelectOneByHtmlColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'htmlColumn' =>
-                    '15Html Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            '15Html Column',
-            $resultSet->getHtmlColumn()
-        );
-    }
-
-
-    public function testSelectOneByTextColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'textColumn' =>
-                    '15Text Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            '15Text Column',
-            $resultSet->getTextColumn()
-        );
-    }
-
-
-    public function testSelectOneByEmailColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'emailColumn' =>
-                    'email.column15@gmail.com'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            'email.column15@gmail.com',
-            $resultSet->getEmailColumn()
-        );
-    }
-
-
-    public function testSelectOneByTelephoneColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'telephoneColumn' =>
-                    '(51) 9999-9915'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            '(51) 9999-9915',
-            $resultSet->getTelephoneColumn()
-        );
-    }
-
-
-    public function testSelectOneByUploadImageColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'uploadImageColumn' =>
-                    '/upload/table-uploadImageColumn/%s15uploadImageColumn.gif'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            '/upload/table-uploadImageColumn/%s15uploadImageColumn.gif',
-            $resultSet->getUploadImageColumn()
-        );
-    }
-
-
-    public function testSelectOneByUrlColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'urlColumn' =>
-                    'url.column15.com.br'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            'url.column15.com.br',
-            $resultSet->getUrlColumn()
-        );
-    }
-
-
-    public function testSelectOneByVarcharColumn()
-    {
-        $resultSet = $this->getMyRepository()->selectOneBy(
-            array(
-                'varcharColumn' =>
-                    '15Varchar Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(
-            '15Varchar Column',
-            $resultSet->getVarcharColumn()
-        );
-    }
-
-
-
     public function testSelectAllOrderByIdMyControllerASC()
     {
-        $resultSet = $this->getMyRepository()->selectAll(
+        $resultSet = $this->getTable()->selectAll(
             array(),
             'idMyController',
             'ASC'
@@ -218,10 +103,9 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
         );
     }
 
-
     public function testSelectAllOrderByIdMyControllerDESC()
     {
-        $resultSet = $this->getMyRepository()->selectAll(
+        $resultSet = $this->getTable()->selectAll(
             array(),
             'idMyController',
             'DESC'
@@ -235,248 +119,9 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
         );
     }
 
-
-    public function testSelectAllOrderByHtmlColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'htmlColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '01Html Column',
-            $data['htmlColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByHtmlColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'htmlColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '30Html Column',
-            $data['htmlColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByTextColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'textColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '01Text Column',
-            $data['textColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByTextColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'textColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '30Text Column',
-            $data['textColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByEmailColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'emailColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            'email.column01@gmail.com',
-            $data['emailColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByEmailColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'emailColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            'email.column30@gmail.com',
-            $data['emailColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByTelephoneColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'telephoneColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '(51) 9999-9901',
-            $data['telephoneColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByTelephoneColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'telephoneColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '(51) 9999-9930',
-            $data['telephoneColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByUploadImageColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'uploadImageColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '/upload/table-uploadImageColumn/%s01uploadImageColumn.gif',
-            $data['uploadImageColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByUploadImageColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'uploadImageColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '/upload/table-uploadImageColumn/%s30uploadImageColumn.gif',
-            $data['uploadImageColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByUrlColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'urlColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            'url.column01.com.br',
-            $data['urlColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByUrlColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'urlColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            'url.column30.com.br',
-            $data['urlColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByVarcharColumnASC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'varcharColumn',
-            'ASC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '01Varchar Column',
-            $data['varcharColumn'***REMOVED***
-        );
-    }
-
-
-    public function testSelectAllOrderByVarcharColumnDESC()
-    {
-        $resultSet = $this->getMyRepository()->selectAll(
-            array(),
-            'varcharColumn',
-            'DESC'
-        );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '30Varchar Column',
-            $data['varcharColumn'***REMOVED***
-        );
-    }
-
-
     public function testCreateNewData()
     {
-        $entity = new \MyModule\Entity\MyRepository;
+        $entity = new \MyModule\Entity\Table;
 
         $data = array();
 
@@ -485,19 +130,19 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
 
-        $this->getMyRepository()->setGearAdminHydrator($hydrator->reveal());
-        $this->getMyRepository()->setEntityManager($entityManager->reveal());
+        $this->getTable()->setGearAdminHydrator($hydrator->reveal());
+        $this->getTable()->setEntityManager($entityManager->reveal());
 
-        $resultSet = $this->getMyRepository()->insert($data);
+        $resultSet = $this->getTable()->insert($data);
 
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(null, $resultSet->getIdMyRepository());
+        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
+        $this->assertEquals(null, $resultSet->getIdTable());
     }
 
     public function testUpdateExistData()
     {
-        $entity = $this->getMockBuilder('MyModule\Entity\MyRepository', ['getIdMyRepository'***REMOVED***)->getMock();
-        $entity->expects($this->any())->method('getIdMyRepository')->willReturn(31);
+        $entity = $this->getMockBuilder('MyModule\Entity\Table', ['getIdTable'***REMOVED***)->getMock();
+        $entity->expects($this->any())->method('getIdTable')->willReturn(31);
 
         $data = array(
         );
@@ -505,32 +150,32 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
         $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $entityManager->persist($entity)->willReturn(true);
         $entityManager->flush()->willReturn(true);
-        $this->getMyRepository()->setEntityManager($entityManager->reveal());
+        $this->getTable()->setEntityManager($entityManager->reveal());
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
-        $this->getMyRepository()->setGearAdminHydrator($hydrator->reveal());
+        $this->getTable()->setGearAdminHydrator($hydrator->reveal());
 
 
         $entityRepository = $this->prophesize('Doctrine\\ORM\\EntityRepository');
-        $entityRepository->findOneBy(['idMyRepository' => 31***REMOVED***)->willReturn($entity);
-        $this->getMyRepository()->setRepository($entityRepository->reveal());
+        $entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity);
+        $this->getTable()->setRepository($entityRepository->reveal());
 
 
-        $resultSet = $this->getMyRepository()->update(31, $data);
+        $resultSet = $this->getTable()->update(31, $data);
 
-        $this->assertInstanceOf('MyModule\Entity\MyRepository', $resultSet);
-        $this->assertEquals(31, $resultSet->getIdMyRepository());
+        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdTable());
     }
 
     public function testDeleteNoExistData()
     {
         $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
-        $entityRepository->findOneBy(['idMyRepository' => 6000***REMOVED***)->willReturn(null);
+        $entityRepository->findOneBy(['idTable' => 6000***REMOVED***)->willReturn(null);
 
-        $this->getMyRepository()->setRepository($entityRepository->reveal());
+        $this->getTable()->setRepository($entityRepository->reveal());
 
-        $resultSet = $this->getMyRepository()->delete(6000);
+        $resultSet = $this->getTable()->delete(6000);
         $this->assertFalse($resultSet);
     }
 
@@ -538,21 +183,21 @@ class MyRepositoryRepositoryTest extends AbstractTestCase
     {
         $data = [***REMOVED***;
 
-        $entity = $this->prophesize('MyModule\Entity\MyRepository');
-        $entity->getIdMyRepository()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\Table');
+        $entity->getIdTable()->willReturn(31);
 
         $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
-        $entityRepository->findOneBy(['idMyRepository' => 31***REMOVED***)->willReturn($entity->reveal());
+        $entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity->reveal());
 
-        $this->getMyRepository()->setRepository($entityRepository->reveal());
+        $this->getTable()->setRepository($entityRepository->reveal());
 
         $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $entityManager->remove($entity)->willReturn(true);
         $entityManager->flush()->willReturn(true);
 
-        $this->getMyRepository()->setEntityManager($entityManager->reveal());
+        $this->getTable()->setEntityManager($entityManager->reveal());
 
-        $resultSet = $this->getMyRepository()->delete($entity);
+        $resultSet = $this->getTable()->delete($entity);
         $this->assertTrue($resultSet);
     }
 }
