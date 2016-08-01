@@ -83,7 +83,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group RefactoringUnitTest1
+     * @group RefactoringUnitTest
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {

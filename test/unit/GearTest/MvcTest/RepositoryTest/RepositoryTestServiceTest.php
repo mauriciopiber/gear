@@ -306,7 +306,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
         ***REMOVED***;
         */
         return [
-            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            [$this->getAllPossibleColumns(), '', true, 'table'***REMOVED***,
             //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
@@ -317,12 +317,14 @@ class RepositoryTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      */
-    public function testInstrospectTable($columns, $template, $nullable)
+    public function testInstrospectTable($columns, $template, $nullable, $tableName)
     {
+        $table = $this->string->str('class', $tableName);
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'MyRepository'***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
         $this->repository = new \Gear\Mvc\Repository\RepositoryTestService();
         $this->repository->setFileCreator($this->fileCreator);
@@ -347,10 +349,11 @@ class RepositoryTestServiceTest extends AbstractTestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
+        $this->table->getPrimaryKeyColumnName($this->db->getTable())->willReturn('idMyController')->shouldBeCalled();
 
         $this->repository->setTableService($this->table->reveal());
 
-        $repository = new \GearJson\Src\Src(['name' => 'MyRepository', 'type' => 'Repository'***REMOVED***);
+        $repository = new \GearJson\Src\Src(['name' => sprintf('%sRepository', $table), 'type' => 'Repository'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
