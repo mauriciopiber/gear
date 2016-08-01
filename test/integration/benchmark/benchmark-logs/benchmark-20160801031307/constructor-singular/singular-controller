@@ -1,0 +1,72 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 01/08/2016 03:13:22[22;39m[0;49m
+[22;39m[42mScript ended by 0.185 at 01/08/2016 03:13:22[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 01/08/2016 03:13:23[22;39m[0;49m
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/IntForeignKeyRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/IntForeignKeyServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/IntForeignKeyFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/IntForeignKeySearchFormTraitTest.php
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.815 at 01/08/2016 03:13:26[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Controller 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (18) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mIndexControllerTest:[39;22m Index action
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerTest:[39;22m Index action [32m(0.10s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Enter create page [32m(0.10s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Send post to create page redirect to get [32m(0.10s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Send post to create show validation [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create successful [32m(0.09s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful [32m(0.05s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.05s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Display edit successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Edit successfull [32m(0.08s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful [32m(0.05s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful [32m(0.06s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 2.13 seconds, Memory: 42.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (18 tests, 62 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 3 seconds
