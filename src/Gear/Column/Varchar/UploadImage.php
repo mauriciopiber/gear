@@ -14,6 +14,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
@@ -45,7 +46,8 @@ class UploadImage extends Varchar implements
     ServiceDeleteInterface,
     ControllerSetUpInterface,
     ControllerCreateAfterInterface,
-    ControllerCreateViewInterface
+    ControllerCreateViewInterface,
+    ServiceSetUpInterface
 {
     protected $settings;
 
@@ -68,14 +70,27 @@ class UploadImage extends Varchar implements
         parent::__construct($column);
     }
 
+    public function getSetUp()
+    {
+
+    }
+
+    public function getServiceSetUp()
+    {
+        $table = $this->str('class', $this->column->getTableName());
+
+        return <<<EOS
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
+        \$this->get{$table}Service()->setImageService(\$this->imageService->reveal());
+
+EOS;
+    }
+
     /**
      * Cria a configuração do Form para Upload de Image nos Controllers.
      */
     public function getControllerSetUp()
     {
-        $column = $this->str('var', $this->column->getName());
-        $table = $this->str('var', $this->column->getTableName());
-
         return <<<EOS
         \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
         \$this->controller->setImageService(\$this->imageService->reveal());
@@ -89,10 +104,25 @@ EOS;
      */
     public function getServiceCreateMock()
     {
-        $method = $this->str('class', $this->column->getTableName());
+        $table = $this->str('var', $this->column->getTableName());
+        $tableUrl = $this->str('url', $this->column->getTableName());
+        $columnUrl = $this->str('url', $this->column->getName());
+        $columnVar = $this->str('var', $this->column->getName());
+
+        $overwrite = strtolower($table.$columnVar);
+
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
-        \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
+        \$this->imageService->overwriteImage(
+            ["$columnVar" => "image123"***REMOVED***,
+            "{$tableUrl}",
+            "{$columnVar}"
+        )->willReturn('{$overwrite}')->shouldBeCalled();
+
+        \$this->imageService->createUploadImage(
+            '{$overwrite}',
+            '{$tableUrl}-{$columnVar}',
+            'image123'
+        )->shouldBeCalled();
 
 EOS;
 
@@ -103,13 +133,28 @@ EOS;
      */
     public function getServiceUpdateMock()
     {
-        $method = $this->str('class', $this->column->getTableName());
+        $table = $this->str('var', $this->column->getTableName());
+        $tableUrl = $this->str('url', $this->column->getTableName());
+        $columnUrl = $this->str('url', $this->column->getName());
+        $columnVar = $this->str('var', $this->column->getName());
+
+        $overwrite = strtolower($table.$columnVar);
 
         return <<<EOS
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
-        \$this->get{$method}Service()->setImageService(\$this->imageService->reveal());
+        \$this->imageService->overwriteImage(
+            ["$columnVar" => "image123"***REMOVED***,
+            "{$tableUrl}",
+            "{$columnVar}"
+        )->willReturn('{$overwrite}')->shouldBeCalled();
+
+        \$this->imageService->updateUploadImage(
+            '{$overwrite}',
+            '{$tableUrl}-{$columnVar}',
+            'image123'
+        )->shouldBeCalled();
 
 EOS;
+
     }
 
     /**

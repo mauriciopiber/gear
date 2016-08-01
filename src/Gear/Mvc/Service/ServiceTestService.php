@@ -5,6 +5,7 @@ use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
+use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
 
 class ServiceTestService extends AbstractMvcTest
 {
@@ -89,26 +90,29 @@ class ServiceTestService extends AbstractMvcTest
 EOS;
         }
 
-        $onlyOneCreate = [***REMOVED***;
+        $onlyOneSetUp = [***REMOVED***;
+        $this->setUp = '';
         $this->createMock = '';
-        $onlyOneUpdate = [***REMOVED***;
         $this->updateMock = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
 
-            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceCreateMock
-                && !in_array(get_class($column), $onlyOneCreate)
+            if (
+                $column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface
+                && !in_array(get_class($column), $onlyOneSetUp)
             ) {
-                $this->createMock .= $column->getServiceCreateMock();
-                $onlyOneCreate[***REMOVED*** = get_class($column);
+                $this->setUp .= $column->getServiceSetUp();
+                $onlyOneSetUp[***REMOVED*** = get_class($column);
             }
 
-            if (
-                $column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock
-                && !in_array(get_class($column), $onlyOneUpdate)
-            ) {
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceCreateMock) {
+                $this->createMock .= $column->getServiceCreateMock();
+                //$onlyOneCreate[***REMOVED*** = get_class($column);
+            }
+
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock) {
                 $this->updateMock .= $column->getServiceUpdateMock();
-                $onlyOneUpdate[***REMOVED*** = get_class($column);
+                //$onlyOneUpdate[***REMOVED*** = get_class($column);
             }
         }
 
@@ -117,6 +121,7 @@ EOS;
 
 
         $options = array(
+            'setUp' => $this->setUp,
             'updateMock' => $this->updateMock,
             'createMock' => $this->createMock,
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),

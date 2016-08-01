@@ -17,6 +17,8 @@ class TableServiceTest extends AbstractTestCase
     {
         parent::setUp();
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->getTableService()->setImageService($this->imageService->reveal());
     }
 
     public function getTableService()
@@ -249,8 +251,17 @@ class TableServiceTest extends AbstractTestCase
 
         $this->getTableService()->setTableRepository($this->repository->reveal());
 
-        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
-        $this->getTableService()->setImageService($this->imageService->reveal());
+        $this->imageService->overwriteImage(
+            ["uploadImageColumn" => "image123"***REMOVED***,
+            "table",
+            "uploadImageColumn"
+        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
+
+        $this->imageService->createUploadImage(
+            'tableuploadimagecolumn',
+            'table-uploadImageColumn',
+            'image123'
+        )->shouldBeCalled();
 
         $resultSet = $this->getTableService()->create($data);
 
@@ -278,8 +289,17 @@ class TableServiceTest extends AbstractTestCase
 
         $this->getTableService()->setCache($this->cache->reveal());
 
-        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
-        $this->getTableService()->setImageService($this->imageService->reveal());
+        $this->imageService->overwriteImage(
+            ["uploadImageColumn" => "image123"***REMOVED***,
+            "table",
+            "uploadImageColumn"
+        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
+
+        $this->imageService->updateUploadImage(
+            'tableuploadimagecolumn',
+            'table-uploadImageColumn',
+            'image123'
+        )->shouldBeCalled();
 
         $resultSet = $this->getTableService()
             ->update(31, $data);
