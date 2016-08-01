@@ -44,7 +44,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/service-test';
 
-        $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');
+        $this->codeTest = new \Gear\Creator\CodeTest;
 
         $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
@@ -83,7 +83,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group RefactoringUnitTest
+     * @group RefactoringUnitTest1
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
@@ -121,19 +121,31 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(['name' => sprintf('%sService', $table), 'type' => 'Service'***REMOVED***);
+        $service = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sService', $table),
+                'type' => 'Service',
+                'dependency' => [sprintf('Repository\%sRepository', $table)***REMOVED***
+        ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
-
-        $this->service->setCodeTest($this->codeTest->reveal());
-
         $this->service->setSchemaService($schemaService->reveal());
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+        $this->service->setSrcDependency($this->srcDependency);
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
+        $this->service->setCodeTest($this->codeTest);
+
+
 
         $this->service->setTraitTestService($this->traitTestService->reveal());
 
-        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->service->setSrcDependency($srcDependency->reveal());
+
         //$this->service->setFactoryService
 
         $file = $this->service->introspectFromTable($this->db);

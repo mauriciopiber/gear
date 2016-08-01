@@ -30,28 +30,6 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         }
         return $this-><?php echo $this->uline;?>;
     }
-
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->get<?php echo $this->serviceNameClass;?>()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-    */
-    public function testCallUsingServiceLocator()
-    {
-        $<?php echo $this->uline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $this->assertInstanceOf('<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>', $<?php echo $this->uline;?>);
-    }
-<?php echo $this->injection;?>
-
 <?php echo $this->extraColumns;?>
 
     public function testSetSelectAllCache()
@@ -101,24 +79,57 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
         $this->assertEquals('DESC', $this->get<?php echo $this->serviceNameClass;?>()->getOrder());
     }
 
-    public function testGetMappingInfo()
+    public function testTableHead()
     {
-        $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $resultSet = $<?php echo $this->serviceNameVar;?>->getTableHead();
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->get<?php echo $this->class;?>Service()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+
+        $allColumnsDbNotNul = $this->get<?php echo $this->class;?>Service();
+        $resultSet = $allColumnsDbNotNul->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
 
     public function testSelectById()
     {
-        $<?php echo $this->serviceNameVar;?> = $this->get<?php echo $this->serviceNameClass;?>();
-<?php echo $this->mockauthadapter.PHP_EOL;?>
-        $resultSet = $<?php echo $this->serviceNameVar;?>->selectById(1);
+        $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $this->entity->getId<?php echo $this->class;?>()->willReturn(1);
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->get<?php echo $this->class;?>Service()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $resultSet = $this->get<?php echo $this->class;?>Service()->selectById(1);
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
         $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
     }
-<?php echo $this->selectbyidnull;?>
 
-<?php echo $this->oneBy;?>
+    public function testSelectOne()
+    {
+        $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $this->entity->getId<?php echo $this->class;?>()->willReturn(30);
+
+        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository->selectOneBy(['id<?php echo $this->class;?>' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->get<?php echo $this->class;?>Service()->set<?php echo $this->class;?>Repository($this->repository->reveal());
+
+        $resultSet = $this->get<?php echo $this->class;?>Service()->selectOneBy(
+            array(
+                'id<?php echo $this->class;?>' =>
+                    30
+            )
+        );
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(
+            30,
+            $resultSet->getId<?php echo $this->class;?>()
+        );
+    }
+<?php echo $this->selectbyidnull;?>
 
     /**
      * @group service.create

@@ -143,7 +143,7 @@ EOS;
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'injection' => $this->getCodeTest()->getDependencyTest($this->src),
+            //'injection' => $this->getCodeTest()->getDependencyTest($this->src),
             'oneBy' => $this->oneBy,
             'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
             'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
