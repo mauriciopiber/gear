@@ -30,27 +30,6 @@ class SingleDbTableServiceTest extends AbstractTestCase
         return $this->singleDbTableServi;
     }
 
-    /**
-     * @group MyModule
-     * @group SingleDbTableService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getSingleDbTableService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group MyModule
-     * @group SingleDbTableService
-    */
-    public function testCallUsingServiceLocator()
-    {
-        $singleDbTableServi = $this->getSingleDbTableService();
-        $this->assertInstanceOf('MyModule\Service\SingleDbTableService', $singleDbTableServi);
-    }
-
-
     public function testSetSelectAllCache()
     {
         $this->getSingleDbTableService()->setSessionName('testing');
@@ -98,34 +77,54 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->assertEquals('DESC', $this->getSingleDbTableService()->getOrder());
     }
 
-    public function testGetMappingInfo()
+    public function testTableHead()
     {
-        $singleDbTableServi = $this->getSingleDbTableService();
-        $resultSet = $singleDbTableServi->getTableHead();
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+
+
+        $allColumnsDbNotNul = $this->getSingleDbTableService();
+        $resultSet = $allColumnsDbNotNul->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
 
     public function testSelectById()
     {
-        $singleDbTableServi = $this->getSingleDbTableService();
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(1);
 
-        $resultSet = $singleDbTableServi->selectById(1);
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->getSingleDbTableService()->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
         $this->assertEquals(1, $resultSet->getIdSingleDbTable());
     }
 
-    public function testSelectOneBySingleDbColumn()
+    public function testSelectOne()
     {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(30);
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectOneBy(['idSingleDbTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+
         $resultSet = $this->getSingleDbTableService()->selectOneBy(
             array(
-                'singleDbColumn' =>
-                    '15Single Db Column'
+                'idSingleDbTable' =>
+                    30
             )
         );
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
         $this->assertEquals(
-            '15Single Db Column',
-            $resultSet->getSingleDbColumn()
+            30,
+            $resultSet->getIdSingleDbTable()
         );
     }
 

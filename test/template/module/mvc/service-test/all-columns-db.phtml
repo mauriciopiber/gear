@@ -32,27 +32,6 @@ class TableServiceTest extends AbstractTestCase
         return $this->tableService;
     }
 
-    /**
-     * @group MyModule
-     * @group TableService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getTableService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group MyModule
-     * @group TableService
-    */
-    public function testCallUsingServiceLocator()
-    {
-        $tableService = $this->getTableService();
-        $this->assertInstanceOf('MyModule\Service\TableService', $tableService);
-    }
-
-
     public function mockUploadImage()
     {
         $maker = new \GearBaseTest\UploadImageMock();
@@ -106,132 +85,54 @@ class TableServiceTest extends AbstractTestCase
         $this->assertEquals('DESC', $this->getTableService()->getOrder());
     }
 
-    public function testGetMappingInfo()
+    public function testTableHead()
     {
-        $tableService = $this->getTableService();
-        $resultSet = $tableService->getTableHead();
+        $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
+        $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->getTableService()->setTableRepository($this->repository->reveal());
+
+
+        $allColumnsDbNotNul = $this->getTableService();
+        $resultSet = $allColumnsDbNotNul->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
 
     public function testSelectById()
     {
-        $tableService = $this->getTableService();
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+        $this->entity->getIdTable()->willReturn(1);
 
-        $resultSet = $tableService->selectById(1);
+        $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->getTableService()->setTableRepository($this->repository->reveal());
+
+        $resultSet = $this->getTableService()->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(1, $resultSet->getIdTable());
     }
 
-    public function testSelectOneByIdMyController()
+    public function testSelectOne()
     {
+        $this->entity = $this->prophesize('MyModule\Entity\Table');
+        $this->entity->getIdTable()->willReturn(30);
+
+        $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
+        $this->repository->selectOneBy(['idTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->getTableService()->setTableRepository($this->repository->reveal());
+
         $resultSet = $this->getTableService()->selectOneBy(
             array(
-                'idMyController' =>
-                    15
+                'idTable' =>
+                    30
             )
         );
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(
-            15,
-            $resultSet->getIdMyController()
-        );
-    }
-    public function testSelectOneByHtmlColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'htmlColumn' =>
-                    '15Html Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            '15Html Column',
-            $resultSet->getHtmlColumn()
-        );
-    }
-    public function testSelectOneByTextColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'textColumn' =>
-                    '15Text Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            '15Text Column',
-            $resultSet->getTextColumn()
-        );
-    }
-    public function testSelectOneByEmailColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'emailColumn' =>
-                    'email.column15@gmail.com'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            'email.column15@gmail.com',
-            $resultSet->getEmailColumn()
-        );
-    }
-    public function testSelectOneByTelephoneColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'telephoneColumn' =>
-                    '(51) 9999-9915'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            '(51) 9999-9915',
-            $resultSet->getTelephoneColumn()
-        );
-    }
-    public function testSelectOneByUploadImageColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'uploadImageColumn' =>
-                    '/upload/table-uploadImageColumn/%s15uploadImageColumn.gif'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            '/upload/table-uploadImageColumn/%s15uploadImageColumn.gif',
-            $resultSet->getUploadImageColumn()
-        );
-    }
-    public function testSelectOneByUrlColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'urlColumn' =>
-                    'url.column15.com.br'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            'url.column15.com.br',
-            $resultSet->getUrlColumn()
-        );
-    }
-    public function testSelectOneByVarcharColumn()
-    {
-        $resultSet = $this->getTableService()->selectOneBy(
-            array(
-                'varcharColumn' =>
-                    '15Varchar Column'
-            )
-        );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(
-            '15Varchar Column',
-            $resultSet->getVarcharColumn()
+            30,
+            $resultSet->getIdTable()
         );
     }
 
