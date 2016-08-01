@@ -93,6 +93,8 @@ EOS;
         $onlyOneSetUp = [***REMOVED***;
         $this->setUp = '';
         $this->createMock = '';
+        $this->createValues = '';
+        $this->updateValues = '';
         $this->updateMock = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
@@ -114,6 +116,12 @@ EOS;
                 $this->updateMock .= $column->getServiceUpdateMock();
                 //$onlyOneUpdate[***REMOVED*** = get_class($column);
             }
+
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface)
+            {
+                $this->createValues .= $column->getServiceFixtureData();
+                $this->updateValues .= $column->getServiceFixtureData();
+            }
         }
 
         //verificar se tem coluna de imagem.
@@ -121,6 +129,8 @@ EOS;
 
 
         $options = array(
+            'createValues' => $this->createValues,
+            'updateValues' => $this->updateValues,
             'setUp' => $this->setUp,
             'updateMock' => $this->updateMock,
             'createMock' => $this->createMock,

@@ -15,9 +15,12 @@ use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
+use Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
+
+
 /**
  * Cria um upload file de imagens.
  *
@@ -47,7 +50,8 @@ class UploadImage extends Varchar implements
     ControllerSetUpInterface,
     ControllerCreateAfterInterface,
     ControllerCreateViewInterface,
-    ServiceSetUpInterface
+    ServiceSetUpInterface,
+    ServiceFixtureDataInterface
 {
     protected $settings;
 
@@ -84,6 +88,17 @@ class UploadImage extends Varchar implements
         \$this->get{$table}Service()->setImageService(\$this->imageService->reveal());
 
 EOS;
+    }
+
+    public function getServiceFixtureData()
+    {
+        $columnName = $this->str('var', $this->column->getName());
+
+        return <<<EOS
+            '{$columnName}' => 'image123',
+
+EOS;
+
     }
 
     /**
