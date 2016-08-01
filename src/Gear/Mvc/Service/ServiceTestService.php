@@ -119,10 +119,6 @@ class ServiceTestService extends AbstractMvcTest
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'insertArray' => $this->getColumnService()->renderColumnPart('insertArray'),
-            'insertAssert' => $this->getColumnService()->renderColumnPart('insertAssert', false, true),
-            'updateArray'  => $this->getColumnService()->renderColumnPart('updateArray'),
-            'updateAssert' => $this->getColumnService()->renderColumnPart('updateAssert', false, true),
         );
 
         $location = $this->getModule()->getTestServiceFolder();

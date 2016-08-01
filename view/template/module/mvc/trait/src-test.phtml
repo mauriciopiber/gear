@@ -1,6 +1,8 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceManager;
 use <?php echo $this->fullclass;?>Trait;
 
 /**
@@ -8,9 +10,19 @@ use <?php echo $this->fullclass;?>Trait;
  * @group <?php echo $this->class.PHP_EOL; ?>
  * @group <?php echo $this->group.PHP_EOL; ?>
  */
-class <?php echo $this->class;?>TraitTest extends AbstractTestCase
+class <?php echo $this->class;?>TraitTest extends TestCase
 {
+    use ServiceLocatorAwareTrait;
+
     use <?php echo $this->class;?>Trait;
+
+    public function setUp()
+    {
+        $serviceManager = new ServiceManager();
+        $this->mocking = $this->prophesize('<?php echo $this->fullclass;?>');
+        $serviceManager->setService('<?php echo $this->fullclass;?>', $this->mocking->reveal());
+        $this->setServiceLocator($serviceManager);
+    }
 
     public function testGet()
     {

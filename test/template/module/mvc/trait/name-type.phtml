@@ -1,7 +1,9 @@
 <?php
 namespace GearItTest\ServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceManager;
 use GearIt\Service\MyServiceTrait;
 
 /**
@@ -9,9 +11,19 @@ use GearIt\Service\MyServiceTrait;
  * @group MyService
  * @group Service
  */
-class MyServiceTraitTest extends AbstractTestCase
+class MyServiceTraitTest extends TestCase
 {
+    use ServiceLocatorAwareTrait;
+
     use MyServiceTrait;
+
+    public function setUp()
+    {
+        $serviceManager = new ServiceManager();
+        $this->mocking = $this->prophesize('GearIt\Service\MyService');
+        $serviceManager->setService('GearIt\Service\MyService', $this->mocking->reveal());
+        $this->setServiceLocator($serviceManager);
+    }
 
     public function testGet()
     {
