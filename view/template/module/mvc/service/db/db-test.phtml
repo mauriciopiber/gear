@@ -17,6 +17,7 @@ class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
     {
         parent::setUp();
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+<?php echo $this->setUp;?>
     }
 
     public function get<?php echo $this->serviceNameClass;?>()
