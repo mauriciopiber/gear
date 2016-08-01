@@ -18,7 +18,6 @@ class RepositoryTestService extends AbstractMvcTest
 
     const KEY_UPDATE = 98;
 
-
     public function createAbstract($className = null)
     {
         if (empty($className)) {
@@ -89,9 +88,6 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->usePrimaryKey = true;
 
-        $this->setUpOrder();
-        $this->setUpOneBy();
-
         $location = $this->getModule()->getTestRepositoryFolder();
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
@@ -117,71 +113,9 @@ class RepositoryTestService extends AbstractMvcTest
                 'varLenght'    => $this->str('var-lenght', $this->tableName),
                 'class'        => $this->tableName,
                 'module'       => $this->getModule()->getModuleName(),
-                'order'        => $this->order,
-                'oneBy'        => $this->oneBy,
             ),
             $this->tableName.'RepositoryTest.php',
             $this->getModule()->getTestRepositoryFolder()
         );
-    }
-
-
-    public function setUpOrder()
-    {
-        $this->order = '';
-        $orders = $this->getOrderByForUnitTest();
-
-        $fixtureSize = $this->getFixtureSizeByTableName();
-
-        foreach ($orders as $order) {
-            $this->order .= <<<EOS
-
-    public function testSelectAllOrderBy{$order['class'***REMOVED***}{$order['order'***REMOVED***}()
-    {
-        \$resultSet = \$this->get{$order['method'***REMOVED***}()->selectAll(
-            array(),
-            '{$order['var'***REMOVED***}',
-            '{$order['order'***REMOVED***}'
-        );
-        \$this->assertTrue(is_array(\$resultSet));
-        \$this->assertEquals({$fixtureSize}, count(\$resultSet));
-        \$data = array_shift(\$resultSet);
-        \$this->assertEquals(
-            {$order['value'***REMOVED***},
-            \$data['{$order['var'***REMOVED***}'***REMOVED***
-        );
-    }
-
-
-EOS;
-        }
-    }
-
-    public function setUpOneBy()
-    {
-        $this->oneBy = '';
-        $oneBys = $this->getSelectOneByForUnitTest();
-
-        foreach ($oneBys as $oneBy) {
-            $this->oneBy .= <<<EOS
-
-    public function testSelectOneBy{$oneBy['class'***REMOVED***}()
-    {
-        \$resultSet = \$this->get{$oneBy['method'***REMOVED***}()->selectOneBy(
-            array(
-                '{$oneBy['var'***REMOVED***}' =>
-                    {$oneBy['value'***REMOVED***}
-            )
-        );
-        \$this->assertInstanceOf('{$oneBy['module'***REMOVED***}\Entity\\{$oneBy['method'***REMOVED***}', \$resultSet);
-        \$this->assertEquals(
-            {$oneBy['value'***REMOVED***},
-            \$resultSet->get{$oneBy['class'***REMOVED***}()
-        );
-    }
-
-
-EOS;
-        }
     }
 }
