@@ -1,0 +1,48 @@
+namespace <?php echo $this->module;?>\<?php echo $this->module;?>Test\EntityTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL;?>
+ * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+ * @group Entity
+ */
+class <?php echo $this->serviceNameClass;?>Test extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>;
+    }
+
+    public function testGetterInitiateByNull()
+    {
+<?php foreach ($this->assertNull as $line) : ?>
+        <?php echo $line.PHP_EOL;?>
+<?php endforeach;?>
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @dataProvider getProvider
+     */
+    public function testSetterAndGet(
+<?php echo implode(','.PHP_EOL, $this->params);echo PHP_EOL;?>
+    ) {
+<?php foreach ($this->assertSet as $line) : ?>
+        <?php echo $line.PHP_EOL;?>
+<?php endforeach;?>
+    }
+
+    public function getProvider()
+    {
+<?php foreach ($this->mocks as $mock) : ?>
+<?php echo $mock.PHP_EOL;?>
+<?php endforeach;?>
+        return array(
+            array(
+<?php echo implode(','.PHP_EOL, $this->provider);echo PHP_EOL;?>
+            )
+        );
+    }
+}

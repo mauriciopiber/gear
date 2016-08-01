@@ -1,0 +1,243 @@
+<?php
+namespace MyModuleTest\FilterTest;
+
+use GearBaseTest\FilterTest\AbstractFilterTestCase;
+
+/**
+ * @group MyModule
+ * @group TableNotNullFilter
+ * @group Filter
+ */
+class TableNotNullFilterTest extends AbstractFilterTestCase
+{
+    protected $tableNotNullFilter;
+
+    public function getTableNotNullFilter()
+    {
+        if (!isset($this->tableNotNullFilter)) {
+            $this->tableNotNullFilter = $this->bootstrap
+              ->getServiceLocator()
+              ->get('MyModule\Filter\TableNotNullFilter');
+
+            $this->tableNotNullFilter
+              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        }
+        return $this->tableNotNullFilter;
+    }
+
+    /**
+     * @group MyModule
+     * @group TableNotNullFilter
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getTableNotNullFilter()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group MyModule
+     * @group TableNotNullFilter
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $tableNotNullFilter = $this->getTableNotNullFilter();
+        $this->assertInstanceOf('MyModule\Filter\TableNotNullFilter', $tableNotNullFilter);
+    }
+
+    /**
+     * @group MyModule
+     * @group TableNotNullFilter
+    */
+    public function testGetInputFilter()
+    {
+        $tableNotNullFilter = $this->getTableNotNullFilter();
+        $className = $tableNotNullFilter->getInputFilter();
+        $this->assertInstanceOf('MyModule\Filter\TableNotNullFilter', $className);
+    }
+
+    /**
+     * @group MyModule
+     * @group TableNotNullFilter
+     */
+    public function testGetRequiredInvalidPost()
+    {
+        $tableNotNullFilter = $this->getTableNotNullFilter();
+        $inputFilter = $tableNotNullFilter->getInputFilter();
+        $inputFilter->setData(array());
+        $this->assertFalse($inputFilter->isValid());
+        $this->messages = $inputFilter->getMessages();
+
+        $this->assertFilterHasMessage(
+            'dateColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'datePtBrColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'datetimeColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'datetimePtBrColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'timeColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'decimalColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'moneyPtBrColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'checkboxColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'idForeignKeyColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'intColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'htmlColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'textColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'tinyintColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'checkboxColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'emailColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'passwordVerifyColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'telephoneColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'urlColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+
+        $this->assertFilterHasMessage(
+            'varcharColumnNotNull',
+            'isEmpty',
+            'O valor é obrigatório e não pode estar vazio'
+        );
+    }
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function validPost()
+    {
+        return array(
+            array(
+                array(
+                    'idMyController' => '99',
+                    'dateColumnNotNull' => '2007-03-09',
+                    'datePtBrColumnNotNull' => '09/03/2007',
+                    'datetimeColumnNotNull' => '2007-03-09 03:00:39',
+                    'datetimePtBrColumnNotNull' => '09/03/2007 03:00:39',
+                    'timeColumnNotNull' => '03:00:39',
+                    'decimalColumnNotNull' => '99.99',
+                    'moneyPtBrColumnNotNull' => 'R$ 99,99',
+                    'checkboxColumnNotNull' => 'Sim',
+                    'idForeignKeyColumnNotNull' => '9Foreign Key Column Not Null',
+                    'intColumnNotNull' => '99',
+                    'htmlColumnNotNull' => '99Html Column Not Null',
+                    'textColumnNotNull' => '99Text Column Not Null',
+                    'tinyintColumnNotNull' => 'Sim',
+                    'checkboxColumnNotNull' => 'Sim',
+                    'emailColumnNotNull' => 'email.column.not.null99@gmail.com',
+                    'passwordVerifyColumnNotNull' => '99PasswordVerifyColu',
+                    'passwordVerifyColumnNotNullVerify' => '99PasswordVerifyColu',
+                    'telephoneColumnNotNull' => '(51) 9999-9999',
+                    'uniqueIdColumnNotNull' => '99Unique Column Not Null',
+                    'uploadImageColumnNotNull' => array(
+                        'error' => 0,
+                        'name' => 'uploadImageColumnNotNull99insert.gif',
+                        'tmp_name' => $this->mockUploadImage(),
+                        'type'      =>  'image/gif',
+                        'size'      =>  42,
+                    ),
+                    'urlColumnNotNull' => 'url.column.not.null99.com.br',
+                    'varcharColumnNotNull' => '99Varchar Column Not Null',
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group MyModule
+     * @group TableNotNullFilter
+     * @dataProvider validPost
+     */
+    public function testReturnTrueWithValidPost($data)
+    {
+        $tableNotNullFilter = $this->getTableNotNullFilter();
+        $inputFilter = $tableNotNullFilter->getInputFilter();
+        $inputFilter->get('uploadImageColumnNotNull')->setAutoPrependUploadValidator(false);
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
+}

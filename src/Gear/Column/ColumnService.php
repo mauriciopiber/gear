@@ -126,7 +126,7 @@ class ColumnService implements ServiceLocatorAwareInterface
      *
      * @return array
      */
-    public function getColumns(Db $db = null)
+    public function getColumns(Db $db = null, $all = false)
     {
         if (empty($this->columns) && $db == null) {
             throw new \Exception('Missing config');
@@ -148,7 +148,7 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         foreach ($this->tableColumns as $column) {
-            if (in_array($column->getName(), Db::excludeList())) {
+            if ($all === false && in_array($column->getName(), Db::excludeList())) {
                 continue;
             }
 

@@ -11,39 +11,40 @@
  */
 namespace Gear\Mvc\Entity;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
+use Gear\Column\Int\ForeignKey;
 
-class EntityTestService extends AbstractJsonService
+class EntityTestService extends AbstractMvc
 {
     protected $mockColumns;
 
     public function introspectFromTable(Db $db)
     {
         $this->db = $db;
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function create(Src $src)
     {
         $this->src = $src;
         $this->db = $src->getDb();
-        $this->createDb();
+        return $this->createDb();
     }
 
     public function createDb()
     {
         //$metadata = $this->getMetadata();
-        $this->tableName = $this->str('uline', $this->db->getTableObject()->getName());
+        $this->tableName = $this->str('uline', $this->db->getTable());
         //$this->table = new \Gear\Table\TableService\Table($metadata->getTable());
-        $this->tableColumns = $this->getTableService()->getColumns($this->tableName);
+        $this->tableColumns = $this->getColumnService()->getColumns($this->db, true);
 
         $assertNull = $this->getTestGettersNull();
         $assertSet  = $this->getTestSetters();
 
-        $this->getFileCreator()->createFile(
-            'template/module/test/unit/entity/src.entity.phtml',
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/entity-test/src.entity.phtml',
             array(
                 'serviceNameUline' => $this->str('var-lenght', $this->tableName),
                 'serviceNameClass'   => $this->str('class', $this->tableName),
@@ -100,11 +101,12 @@ class EntityTestService extends AbstractJsonService
 
         $useMethods = [***REMOVED***;
 
-        foreach ($this->tableColumns as $column) {
+        foreach ($this->tableColumns as $columnData) {
+            $column = $columnData->getColumn();
             $method = sprintf('get%s', $this->str('class', $column->getName()));
 
             $useMethods[***REMOVED*** = $method;
-            $assertNull[***REMOVED*** = sprintf('$this->assertNull($entity->%s());', $method);
+            $assertNull[***REMOVED*** = sprintf('$this->assertNull($this->entity->%s());', $method);
         }
 
         $moreMethodsUse = $this->getExtraGetter($useMethods);
@@ -112,7 +114,7 @@ class EntityTestService extends AbstractJsonService
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $method) {
                 $assertNull[***REMOVED*** = sprintf(
-                    '$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$entity->%s());',
+                    '$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$this->entity->%s());',
                     $method
                 );
             }
@@ -131,21 +133,23 @@ class EntityTestService extends AbstractJsonService
 
         $assertNull = [***REMOVED***;
 
-        foreach ($this->tableColumns as $column) {
+        foreach ($this->tableColumns as $columnData) {
+            $column = $columnData->getColumn();
+
             if (in_array($column->getName(), $primaryKeyColumn)) {
                 continue;
             }
 
 
-            if ($this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column)) {
+            if ($columnData instanceof ForeignKey) {
                 $assertNull[***REMOVED*** = sprintf(
-                    '$entity->set%s($%s);',
+                    '$this->entity->set%s($%s);',
                     $this->str('class', $column->getName()),
                     $this->str('var-lenght', $column->getName())
                 );
 
                 $assertNull[***REMOVED*** = sprintf(
-                    '$this->assertEquals($%s, $entity->get%s());'.PHP_EOL,
+                    '$this->assertEquals($%s, $this->entity->get%s());'.PHP_EOL,
                     $this->str('var-lenght', $column->getName()),
                     $this->str('class', $column->getName())
                 );
@@ -153,12 +157,12 @@ class EntityTestService extends AbstractJsonService
                 continue;
             }
             $assertNull[***REMOVED*** = sprintf(
-                '$entity->set%s($%s);',
+                '$this->entity->set%s($%s);',
                 $this->str('class', $column->getName()),
                 $this->str('var-lenght', $column->getName())
             );
             $assertNull[***REMOVED*** = sprintf(
-                '$this->assertEquals($%s, $entity->get%s());'.PHP_EOL,
+                '$this->assertEquals($%s, $this->entity->get%s());'.PHP_EOL,
                 $this->str('var-lenght', $column->getName()),
                 $this->str('class', $column->getName())
             );
@@ -171,12 +175,12 @@ class EntityTestService extends AbstractJsonService
                 $classId    = str_replace('add', '', $newMock);
 
                 $assertNull[***REMOVED*** = sprintf(
-                    '$entity->add%s($%s);',
+                    '$this->entity->add%s($%s);',
                     $this->str('class', $classId),
                     $this->str('var-lenght', $classId)
                 );
                 $assertNull[***REMOVED*** = sprintf(
-                    '$entity->remove%s($%s);',
+                    '$this->entity->remove%s($%s);',
                     $this->str('class', $classId),
                     $this->str('var-lenght', $classId)
                 );
@@ -211,22 +215,28 @@ class EntityTestService extends AbstractJsonService
 
         $primaryKeyColumn = $this->getTableService()->getPrimaryKeyColumns($this->tableName);
 
-        foreach ($this->tableColumns as $column) {
+        foreach ($this->tableColumns as $columnData) {
+            $column = $columnData->getColumn();
+
             if (in_array($this->str('uline', $column->getName()), $primaryKeyColumn)) {
                 continue;
             }
 
-            if ($foreignKey = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column)) {
+            if ($columnData instanceof ForeignKey) {
+                $foreignKey = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column);
+
                 $referencedTable = $foreignKey->getReferencedTableName();
 
                 $columName = $this->str('class', $referencedTable). $this->str('class', $column->getName());
 
                 $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $columName));
 
-                $this->mockColumns[***REMOVED*** = $column;
+                $this->mockColumns[***REMOVED*** = $columnData;
 
                 continue;
+
             }
+
             $dataProvider[***REMOVED*** = '                \''.$this->str('label', $column->getName()).'\'';
         }
 
@@ -250,7 +260,14 @@ class EntityTestService extends AbstractJsonService
         $mocks = [***REMOVED***;
 
         if (count($this->mockColumns)>0) {
-            foreach ($this->mockColumns as $column) {
+            foreach ($this->mockColumns as $columnData) {
+
+                $column = $columnData->getColumn();
+
+                if (!($columnData instanceof ForeignKey)) {
+                    continue;
+                }
+
                 $refObject = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column);
 
                 if ($refObject === false) {
@@ -270,7 +287,7 @@ class EntityTestService extends AbstractJsonService
                   : $this->getModule()->getModuleName();
 
                 $mock .= sprintf(
-                    '$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();',
+                    '$this->prophesize(\'%s\\Entity\\%s\')->reveal();',
                     $mockModule,
                     $this->str('class', $refTable)
                 ).PHP_EOL;
@@ -288,7 +305,7 @@ class EntityTestService extends AbstractJsonService
                 $mock = '        ';
                 $mock .= sprintf('$%s = ', $this->str('var-lenght', $clearClass));
                 $mock .= sprintf(
-                    '$this->getMockBuilder(\'%s\\Entity\\%s\')->getMock();',
+                    '$this->prophesize(\'%s\\Entity\\%s\')->reveal();',
                     $this->getModule()->getModuleName(),
                     $this->str('class', $classId)
                 ).PHP_EOL;
@@ -306,12 +323,15 @@ class EntityTestService extends AbstractJsonService
 
         $params = [***REMOVED***;
 
-        foreach ($this->tableColumns as $column) {
-            if (in_array($column->getName(), $primaryKeyColumn)) {
+        foreach ($this->tableColumns as $columnData) {
+
+            $column = $columnData->getColumn();
+
+            if ($columnData instanceof PrimaryKey) {
                 continue;
             }
 
-            if ($this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $column)) {
+            if ($columnData instanceof ForeignKey) {
                 //$referencedTable = $foreignKey->getReferencedTableName();
 
                 $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));

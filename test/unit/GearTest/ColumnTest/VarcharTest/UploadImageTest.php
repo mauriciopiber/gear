@@ -17,6 +17,7 @@ class UploadImageTest extends AbstractTestCase
 
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $this->column->getName()->willReturn('my_column');
 
         $this->uploadImage = new UploadImage($this->column->reveal());
         $this->uploadImage->setStringService(new \GearBase\Util\String\StringService());

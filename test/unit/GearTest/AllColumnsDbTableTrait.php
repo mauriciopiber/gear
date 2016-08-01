@@ -142,6 +142,7 @@ trait AllColumnsDbTableTrait
         $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
         //$column->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_column'));
 
+
         $columns[***REMOVED*** = $column;
 
 
