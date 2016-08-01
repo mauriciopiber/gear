@@ -244,6 +244,7 @@ class TableServiceTest extends AbstractTestCase
         $entity->getIdTable()->willReturn(31);
 
         $data = array(
+            'uploadImageColumn' => 'image123',
         );
 
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
@@ -280,6 +281,7 @@ class TableServiceTest extends AbstractTestCase
         $entity->getIdTable()->willReturn(31);
 
         $data = array(
+            'uploadImageColumn' => 'image123',
         );
 
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
