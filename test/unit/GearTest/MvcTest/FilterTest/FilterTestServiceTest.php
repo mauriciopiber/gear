@@ -9,8 +9,9 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
 
 /**
+ * @group RefactoringUnitTest
  * @group src-filter
- * @group Filter
+ * @group Filter1
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
@@ -34,31 +35,34 @@ class FilterTestServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter';
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter-test';
 
     }
+
 
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'filter-test-table'***REMOVED***
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table'***REMOVED***,
+            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null'***REMOVED***,
+            [$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
+            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null'***REMOVED***,
         ***REMOVED***;
     }
-
-
-
 
     /**
      * @dataProvider tables
      */
-    public function testCreateDb($tableColumns, $expected)
+    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName)
     {
-        $db = new \GearJson\Db\Db(['table' => 'MyTable'***REMOVED***);
+        $table = $this->string->str('class', $tableName);
+
+        $db = new \GearJson\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
 
         $this->module->getTestFilterFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(['name' => 'MyTableFilter', 'type' => 'Filter'***REMOVED***);
+        $src = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
@@ -70,14 +74,14 @@ class FilterTestServiceTest extends AbstractTestCase
         $this->filter->setSchemaService($this->schema->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($tableColumns);
+        $this->column->getColumns($db)->willReturn($columns);
 
         $this->filter->setColumnService($this->column->reveal());
 
 
         $file = $this->filter->introspectFromTable($db);
 
-        $this->assertEquals(file_get_contents($this->template.'/'.$expected.'.phtml'), file_get_contents($file));
+        $this->assertEquals(file_get_contents($this->template.'/'.$expect.'.phtml'), file_get_contents($file));
 
     }
 

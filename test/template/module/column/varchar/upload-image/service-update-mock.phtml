@@ -1,2 +1,11 @@
-        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
-        $this->getMyTableService()->setImageService($this->imageService->reveal());
+        $this->imageService->overwriteImage(
+            ["myColumn" => "image123"***REMOVED***,
+            "my-table",
+            "myColumn"
+        )->willReturn('mytablemycolumn')->shouldBeCalled();
+
+        $this->imageService->updateUploadImage(
+            'mytablemycolumn',
+            'my-table-myColumn',
+            'image123'
+        )->shouldBeCalled();

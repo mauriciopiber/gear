@@ -1,0 +1,200 @@
+<?php
+namespace MyModule\MyModuleTest\EntityTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+
+/**
+ * @group MyModule
+ * @group Table
+ * @group Entity
+ */
+class TableTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->entity = new \MyModule\Entity\Table;
+    }
+
+    public function testGetterInitiateByNull()
+    {
+        $this->assertNull($this->entity->getIdMyController());
+        $this->assertNull($this->entity->getDateColumn());
+        $this->assertNull($this->entity->getDatePtBrColumn());
+        $this->assertNull($this->entity->getDatetimeColumn());
+        $this->assertNull($this->entity->getDatetimePtBrColumn());
+        $this->assertNull($this->entity->getTimeColumn());
+        $this->assertNull($this->entity->getDecimalColumn());
+        $this->assertNull($this->entity->getMoneyPtBrColumn());
+        $this->assertNull($this->entity->getCheckboxColumn());
+        $this->assertNull($this->entity->getIdForeignKeyColumn());
+        $this->assertNull($this->entity->getIntColumn());
+        $this->assertNull($this->entity->getHtmlColumn());
+        $this->assertNull($this->entity->getTextColumn());
+        $this->assertNull($this->entity->getTinyintColumn());
+        $this->assertNull($this->entity->getCheckboxColumn());
+        $this->assertNull($this->entity->getEmailColumn());
+        $this->assertNull($this->entity->getPasswordVerifyColumn());
+        $this->assertNull($this->entity->getTelephoneColumn());
+        $this->assertNull($this->entity->getUniqueIdColumn());
+        $this->assertNull($this->entity->getUploadImageColumn());
+        $this->assertNull($this->entity->getUrlColumn());
+        $this->assertNull($this->entity->getVarcharColumn());
+        $this->assertNull($this->entity->getCreatedBy());
+        $this->assertNull($this->entity->getCreated());
+        $this->assertNull($this->entity->getUpdatedBy());
+        $this->assertNull($this->entity->getUpdated());
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @dataProvider getProvider
+     */
+    public function testSetterAndGet(
+        $idMyController,
+        $dateColumn,
+        $datePtBrColumn,
+        $datetimeColumn,
+        $datetimePtBrColumn,
+        $timeColumn,
+        $decimalColumn,
+        $moneyPtBrColumn,
+        $checkboxColumn,
+        $idForeignKeyColumn,
+        $intColumn,
+        $htmlColumn,
+        $textColumn,
+        $tinyintColumn,
+        $checkboxColumn,
+        $emailColumn,
+        $passwordVerifyColumn,
+        $telephoneColumn,
+        $uniqueIdColumn,
+        $uploadImageColumn,
+        $urlColumn,
+        $varcharColumn,
+        $createdBy,
+        $created,
+        $updatedBy,
+        $updated
+    ) {
+        $this->entity->setIdMyController($idMyController);
+        $this->assertEquals($idMyController, $this->entity->getIdMyController());
+
+        $this->entity->setDateColumn($dateColumn);
+        $this->assertEquals($dateColumn, $this->entity->getDateColumn());
+
+        $this->entity->setDatePtBrColumn($datePtBrColumn);
+        $this->assertEquals($datePtBrColumn, $this->entity->getDatePtBrColumn());
+
+        $this->entity->setDatetimeColumn($datetimeColumn);
+        $this->assertEquals($datetimeColumn, $this->entity->getDatetimeColumn());
+
+        $this->entity->setDatetimePtBrColumn($datetimePtBrColumn);
+        $this->assertEquals($datetimePtBrColumn, $this->entity->getDatetimePtBrColumn());
+
+        $this->entity->setTimeColumn($timeColumn);
+        $this->assertEquals($timeColumn, $this->entity->getTimeColumn());
+
+        $this->entity->setDecimalColumn($decimalColumn);
+        $this->assertEquals($decimalColumn, $this->entity->getDecimalColumn());
+
+        $this->entity->setMoneyPtBrColumn($moneyPtBrColumn);
+        $this->assertEquals($moneyPtBrColumn, $this->entity->getMoneyPtBrColumn());
+
+        $this->entity->setCheckboxColumn($checkboxColumn);
+        $this->assertEquals($checkboxColumn, $this->entity->getCheckboxColumn());
+
+        $this->entity->setIdForeignKeyColumn($idForeignKeyColumn);
+        $this->assertEquals($idForeignKeyColumn, $this->entity->getIdForeignKeyColumn());
+
+        $this->entity->setIntColumn($intColumn);
+        $this->assertEquals($intColumn, $this->entity->getIntColumn());
+
+        $this->entity->setHtmlColumn($htmlColumn);
+        $this->assertEquals($htmlColumn, $this->entity->getHtmlColumn());
+
+        $this->entity->setTextColumn($textColumn);
+        $this->assertEquals($textColumn, $this->entity->getTextColumn());
+
+        $this->entity->setTinyintColumn($tinyintColumn);
+        $this->assertEquals($tinyintColumn, $this->entity->getTinyintColumn());
+
+        $this->entity->setCheckboxColumn($checkboxColumn);
+        $this->assertEquals($checkboxColumn, $this->entity->getCheckboxColumn());
+
+        $this->entity->setEmailColumn($emailColumn);
+        $this->assertEquals($emailColumn, $this->entity->getEmailColumn());
+
+        $this->entity->setPasswordVerifyColumn($passwordVerifyColumn);
+        $this->assertEquals($passwordVerifyColumn, $this->entity->getPasswordVerifyColumn());
+
+        $this->entity->setTelephoneColumn($telephoneColumn);
+        $this->assertEquals($telephoneColumn, $this->entity->getTelephoneColumn());
+
+        $this->entity->setUniqueIdColumn($uniqueIdColumn);
+        $this->assertEquals($uniqueIdColumn, $this->entity->getUniqueIdColumn());
+
+        $this->entity->setUploadImageColumn($uploadImageColumn);
+        $this->assertEquals($uploadImageColumn, $this->entity->getUploadImageColumn());
+
+        $this->entity->setUrlColumn($urlColumn);
+        $this->assertEquals($urlColumn, $this->entity->getUrlColumn());
+
+        $this->entity->setVarcharColumn($varcharColumn);
+        $this->assertEquals($varcharColumn, $this->entity->getVarcharColumn());
+
+        $this->entity->setCreatedBy($createdBy);
+        $this->assertEquals($createdBy, $this->entity->getCreatedBy());
+
+        $this->entity->setCreated($created);
+        $this->assertEquals($created, $this->entity->getCreated());
+
+        $this->entity->setUpdatedBy($updatedBy);
+        $this->assertEquals($updatedBy, $this->entity->getUpdatedBy());
+
+        $this->entity->setUpdated($updated);
+        $this->assertEquals($updated, $this->entity->getUpdated());
+
+    }
+
+    public function getProvider()
+    {
+        $foreignKeyColumnId = $this->prophesize('MyModule\Entity\ForeignKeyColumn')->reveal();
+
+        $userCreatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
+
+        $userUpdatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
+
+        return array(
+            array(
+                'My Controller',
+                'Date Column',
+                'Date Pt Br Column',
+                'Datetime Column',
+                'Datetime Pt Br Column',
+                'Time Column',
+                'Decimal Column',
+                'Money Pt Br Column',
+                'Checkbox Column',
+                $foreignKeyColumnId,
+                'Int Column',
+                'Html Column',
+                'Text Column',
+                'Tinyint Column',
+                'Checkbox Column',
+                'Email Column',
+                'Password Verify Column',
+                'Telephone Column',
+                'Unique Column',
+                'Upload Image Column',
+                'Url Column',
+                'Varchar Column',
+                $userCreatedBy,
+                'Created',
+                $userUpdatedBy,
+                'Updated'
+            )
+        );
+    }
+}

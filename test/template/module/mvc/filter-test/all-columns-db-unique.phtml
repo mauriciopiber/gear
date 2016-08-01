@@ -1,0 +1,116 @@
+<?php
+namespace MyModuleTest\FilterTest;
+
+use GearBaseTest\FilterTest\AbstractFilterTestCase;
+
+/**
+ * @group MyModule
+ * @group TableUniqueFilter
+ * @group Filter
+ */
+class TableUniqueFilterTest extends AbstractFilterTestCase
+{
+    protected $tableUniqueFilter;
+
+    public function getTableUniqueFilter()
+    {
+        if (!isset($this->tableUniqueFilter)) {
+            $this->tableUniqueFilter = $this->bootstrap
+              ->getServiceLocator()
+              ->get('MyModule\Filter\TableUniqueFilter');
+
+            $this->tableUniqueFilter
+              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+        }
+        return $this->tableUniqueFilter;
+    }
+
+    /**
+     * @group MyModule
+     * @group TableUniqueFilter
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getTableUniqueFilter()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group MyModule
+     * @group TableUniqueFilter
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $tableUniqueFilter = $this->getTableUniqueFilter();
+        $this->assertInstanceOf('MyModule\Filter\TableUniqueFilter', $tableUniqueFilter);
+    }
+
+    /**
+     * @group MyModule
+     * @group TableUniqueFilter
+    */
+    public function testGetInputFilter()
+    {
+        $tableUniqueFilter = $this->getTableUniqueFilter();
+        $className = $tableUniqueFilter->getInputFilter();
+        $this->assertInstanceOf('MyModule\Filter\TableUniqueFilter', $className);
+    }
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function validPost()
+    {
+        return array(
+            array(
+                array(
+                    'idMyController' => '99',
+                    'dateColumnUnique' => '2007-03-09',
+                    'datePtBrColumnUnique' => '09/03/2007',
+                    'datetimeColumnUnique' => '2007-03-09 03:00:39',
+                    'datetimePtBrColumnUnique' => '09/03/2007 03:00:39',
+                    'timeColumnUnique' => '03:00:39',
+                    'decimalColumnUnique' => '99.99',
+                    'moneyPtBrColumnUnique' => 'R$ 99,99',
+                    'checkboxColumnUnique' => 'Sim',
+                    'idForeignKeyColumnUnique' => '9Foreign Key Column Unique',
+                    'intColumnUnique' => '99',
+                    'htmlColumnUnique' => '99Html Column Unique',
+                    'textColumnUnique' => '99Text Column Unique',
+                    'tinyintColumnUnique' => 'Sim',
+                    'checkboxColumnUnique' => 'Sim',
+                    'emailColumnUnique' => 'email.column.unique99@gmail.com',
+                    'passwordVerifyColumnUnique' => '99PasswordVerifyColu',
+                    'passwordVerifyColumnUniqueVerify' => '99PasswordVerifyColu',
+                    'telephoneColumnUnique' => '(51) 9999-9999',
+                    'uniqueIdColumnUnique' => '99Unique Column Unique',
+                    'uploadImageColumnUnique' => array(
+                        'error' => 0,
+                        'name' => 'uploadImageColumnUnique99insert.gif',
+                        'tmp_name' => $this->mockUploadImage(),
+                        'type'      =>  'image/gif',
+                        'size'      =>  42,
+                    ),
+                    'urlColumnUnique' => 'url.column.unique99.com.br',
+                    'varcharColumnUnique' => '99Varchar Column Unique',
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group MyModule
+     * @group TableUniqueFilter
+     * @dataProvider validPost
+     */
+    public function testReturnTrueWithValidPost($data)
+    {
+        $tableUniqueFilter = $this->getTableUniqueFilter();
+        $inputFilter = $tableUniqueFilter->getInputFilter();
+        $inputFilter->get('uploadImageColumnUnique')->setAutoPrependUploadValidator(false);
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
+}
