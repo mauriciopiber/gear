@@ -11,6 +11,7 @@ class FormTestService extends AbstractMvcTest
 
     public function introspectFromTable($table)
     {
+        $this->db = $table;
         $src = $this->getSchemaService()->getSrcByDb($table, 'Form');
 
         $template = 'template/module/mvc/form/test-db.phtml';
@@ -31,6 +32,19 @@ class FormTestService extends AbstractMvcTest
         }
 
         $this->getTraitTestService()->createTraitTest($src, $location);
+
+        $inputs = '';
+       $data = $this->getColumnService()->getColumns($this->db);
+
+        foreach ($data as $columnData) {
+            if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
+                continue;
+            }
+
+            $inputs .= $columnData->getAssertFormElement();
+        }
+
+        $options['columns'***REMOVED*** = $inputs;
 
         $file = $this->getFileCreator();
         return $file->createFile($template, $options, $filename, $location);

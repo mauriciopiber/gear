@@ -108,6 +108,20 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     }
 
     /**
+     * Gera o teste unitário para verificar se o elemento existe no form
+     */
+    public function getAssertFormElement()
+    {
+        $template = '$this->assertInstanceOf(\'Zend\Form\Element\', $this->form->get(\'%s\'));';
+
+        $ndnt = str_repeat(' ', 4*2);
+
+        $name = $this->str('var', $this->column->getName());
+
+        return $ndnt.sprintf($template, $name).PHP_EOL;
+    }
+
+    /**
      * Gera os valores utilizados nos testes unitários, para enviar requisições.
      *
      * @param unknown $iterator

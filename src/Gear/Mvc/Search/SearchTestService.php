@@ -32,6 +32,8 @@ class SearchTestService extends AbstractMvcTest
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
+        $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+
 
         return $file->createFile($template, $options, $filename, $location);
     }

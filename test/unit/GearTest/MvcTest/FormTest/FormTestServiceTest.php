@@ -58,7 +58,7 @@ class FormTestServiceTest extends AbstractTestCase
         $this->module->getTestFormFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(['name' => $table, 'type' => 'Form'***REMOVED***);
+        $src = new \GearJson\Src\Src(['name' => $table.'Form', 'type' => 'Form'***REMOVED***);
 
         $this->form = new \Gear\Mvc\Form\FormTestService();
         $this->form->setStringService($this->string);
@@ -87,7 +87,7 @@ class FormTestServiceTest extends AbstractTestCase
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
 
-        $this->column->getColumns($db, true)->willReturn($tableColumns);
+        $this->column->getColumns($db)->willReturn($tableColumns);
 
         $this->form->setColumnService($this->column->reveal());
 
