@@ -1,41 +1,26 @@
-namespace <?php echo $this->module;?>;
+namespace <?php echo $this->module;?>Test\FormTest\SearchTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
  * @group <?php echo $this->class.PHP_EOL;?>
  * @group SearchForm
  */
-class <?php echo $this->class;?>Test extends AbstractTestCase
+class <?php echo $this->class;?>Test extends TestCase
 {
-    public function get<?php echo $this->class;?>()
+    public function setUp()
     {
-        if (!isset($this-><?php echo $this->var;?>)) {
-            $this-><?php echo $this->var;?> = $this->bootstrap->getServiceLocator()->get(
-                '<?php echo $this->callable; ?>'
-            );
-        }
-        return $this-><?php echo $this->var;?>;
+        parent::setUp();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->search = new \<?php echo $this->module;?>\Form\Search\<?php echo $this->class;?>($entityManager->reveal());
     }
 
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->class.PHP_EOL;?>
-     */
-    public function testServiceLocator()
+    public function testHasColumn()
     {
-        $serviceLocator = $this->get<?php echo $this->class;?>()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->class.PHP_EOL;?>
-     */
-    public function testCallUsingServiceLocator()
-    {
-        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
-        $this->assertInstanceOf('<?php echo $this->service; ?>', $<?php echo $this->var;?>);
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('likeField'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('clear'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('submit'));
     }
 }

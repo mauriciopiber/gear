@@ -58,7 +58,7 @@ class SearchTestServiceTest extends AbstractTestCase
         $this->module->getTestSearchFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(['name' => $table, 'type' => 'SearchForm'***REMOVED***);
+        $src = new \GearJson\Src\Src(['name' => $table.'SearchForm', 'type' => 'SearchForm'***REMOVED***);
 
         $this->form = new \Gear\Mvc\Search\SearchTestService();
         $this->form->setStringService($this->string);
