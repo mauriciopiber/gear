@@ -189,7 +189,12 @@ class TableRepository extends AbstractRepository
     {
         $entity = $this->selectById($idTable);
         $this->hydrate($data, $entity);
-        $entity->setUniqueIdColumn(uniqid(true, true));
+        $uniqueIdColumn = isset($data['uniqueIdColumn'***REMOVED***)
+          && !empty($data['uniqueIdColumn'***REMOVED***)
+          ?  $data['uniqueIdColumn'***REMOVED***
+          : uniqid(true, true);
+
+        $entity->setUniqueIdColumn($uniqueIdColumn);
         $entity->setUpdated(new \DateTime('now'));
         $entity->setUpdatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
@@ -202,7 +207,12 @@ class TableRepository extends AbstractRepository
     {
         $entity = new \MyModule\Entity\Table();
         $this->hydrate($data, $entity);
-        $entity->setUniqueIdColumn(uniqid(true, true));
+        $uniqueIdColumn = isset($data['uniqueIdColumn'***REMOVED***)
+          && !empty($data['uniqueIdColumn'***REMOVED***)
+          ?  $data['uniqueIdColumn'***REMOVED***
+          : uniqid(true, true);
+
+        $entity->setUniqueIdColumn($uniqueIdColumn);
         $entity->setCreated(new \DateTime('now'));
         $entity->setCreatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
