@@ -1,7 +1,7 @@
 <?php
 namespace MyModuleTest\ServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -9,72 +9,54 @@ use GearBaseTest\AbstractTestCase;
  * @group SingleDbTableService
  * @group Service
  */
-class SingleDbTableServiceTest extends AbstractTestCase
+class SingleDbTableServiceTest extends TestCase
 {
-    protected $singleDbTableServi;
-
     public function setUp()
     {
         parent::setUp();
-        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
-    }
 
-    public function getSingleDbTableService()
-    {
-        if (!isset($this->singleDbTableServi)) {
-            $this->singleDbTableServi =
-                $this->bootstrap->getServiceLocator()->get(
-                    'MyModule\Service\SingleDbTableService'
-                );
-        }
-        return $this->singleDbTableServi;
+        $this->service = new \MyModule\Service\SingleDbTableService();
+
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->service->setCache($this->cache->reveal());
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
     }
 
     public function testSetSelectAllCache()
     {
-        $this->getSingleDbTableService()->setSessionName('testing');
+        $this->service->setSessionName('testing');
 
-        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
-
-        if ($cache->hasItem('testingResult')) {
-            $cache->removeItem('testingResult');
-        }
-
-        $data = $this->getSingleDbTableService()->setSelectAllCache(array('data' => true));
+        $data = $this->service->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
-        $data = $this->getSingleDbTableService()->setSelectAllCache(array('data' => true));
+        $data = $this->service->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
     }
 
     public function testSelectAllCacheWithCache()
     {
-        $this->getSingleDbTableService()->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'DESC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'DESC'));
 
-        $this->assertEquals('idSingleDbTable', $this->getSingleDbTableService()->getOrderBy());
-        $this->assertEquals('DESC', $this->getSingleDbTableService()->getOrder());
+        $this->assertEquals('idSingleDbTable', $this->service->getOrderBy());
+        $this->assertEquals('DESC', $this->service->getOrder());
 
-        $this->getSingleDbTableService()->selectAll();
+        $this->service->selectAll();
 
-        $this->getSingleDbTableService()->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'ASC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'ASC'));
 
-        $this->assertEquals('idSingleDbTable', $this->getSingleDbTableService()->getOrderBy());
-        $this->assertEquals('ASC', $this->getSingleDbTableService()->getOrder());
+        $this->assertEquals('idSingleDbTable', $this->service->getOrderBy());
+        $this->assertEquals('ASC', $this->service->getOrder());
 
-        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
-
-        if ($cache->hasItem($this->getSingleDbTableService()->getSessionName())) {
-            $cache->removeItem($this->getSingleDbTableService()->getSessionName());
-        }
-
-        $this->getSingleDbTableService()->setRouteMatch(
+        $this->service->setRouteMatch(
             $this->getRouteMatch(1, 'idSingleDbTable', 'DESC')
         );
 
         $this->assertEquals(
             'idSingleDbTable',
-            $this->getSingleDbTableService()->getOrderBy()
+            $this->service->getOrderBy()
         );
-        $this->assertEquals('DESC', $this->getSingleDbTableService()->getOrder());
+        $this->assertEquals('DESC', $this->service->getOrder());
     }
 
     public function testTableHead()
@@ -82,11 +64,9 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-
-        $allColumnsDbNotNul = $this->getSingleDbTableService();
-        $resultSet = $allColumnsDbNotNul->getTableHead();
+        $resultSet = $this->service->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
 
@@ -98,9 +78,9 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $resultSet = $this->getSingleDbTableService()->selectById(1);
+        $resultSet = $this->service->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
         $this->assertEquals(1, $resultSet->getIdSingleDbTable());
     }
@@ -113,9 +93,9 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectOneBy(['idSingleDbTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $resultSet = $this->getSingleDbTableService()->selectOneBy(
+        $resultSet = $this->service->selectOneBy(
             array(
                 'idSingleDbTable' =>
                     30
@@ -142,10 +122,10 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
 
-        $resultSet = $this->getSingleDbTableService()->create($data);
+        $resultSet = $this->service->create($data);
 
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
         $this->assertEquals(31, $resultSet->getIdSingleDbTable());
@@ -167,12 +147,12 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $this->getSingleDbTableService()->setCache($this->cache->reveal());
+        $this->service->setCache($this->cache->reveal());
 
 
-        $resultSet = $this->getSingleDbTableService()
+        $resultSet = $this->service
             ->update(31, $data);
 
 
@@ -194,12 +174,10 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setCache($this->cache->reveal());
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setCache($this->cache->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $singleDbTableServi = $this->getSingleDbTableService();
-
-        $resultSet = $singleDbTableServi->delete(31);
+        $resultSet = $this->service->delete(31);
         $this->assertTrue($resultSet);
     }
 
@@ -208,15 +186,12 @@ class SingleDbTableServiceTest extends AbstractTestCase
      */
     public function testDeleteWithoutExistingData()
     {
-
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $singleDbTableServi = $this->getSingleDbTableService();
-
-        $resultSet = $singleDbTableServi->delete(31);
+        $resultSet = $this->service->delete(31);
         $this->assertFalse($resultSet['success'***REMOVED***);
         $this->assertEquals('EntityNotFound', $resultSet['error'***REMOVED***);
     }
@@ -233,12 +208,9 @@ class SingleDbTableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
 
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
-        $this->getSingleDbTableService()->setSingleDbTableRepository($this->repository->reveal());
-
-        $singleDbTableServi = $this->getSingleDbTableService();
-
-        $resultSet = $singleDbTableServi->extract($entity->reveal());
+        $resultSet = $this->service->extract($entity->reveal());
         $this->assertEquals($data, $resultSet);
     }
 

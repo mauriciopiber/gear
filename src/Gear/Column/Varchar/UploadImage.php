@@ -84,8 +84,9 @@ class UploadImage extends Varchar implements
         $table = $this->str('class', $this->column->getTableName());
 
         return <<<EOS
+
         \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
-        \$this->get{$table}Service()->setImageService(\$this->imageService->reveal());
+        \$this->service->setImageService(\$this->imageService->reveal());
 
 EOS;
     }

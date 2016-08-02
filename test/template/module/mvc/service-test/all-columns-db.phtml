@@ -1,7 +1,7 @@
 <?php
 namespace MyModuleTest\ServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -9,27 +9,22 @@ use GearBaseTest\AbstractTestCase;
  * @group TableService
  * @group Service
  */
-class TableServiceTest extends AbstractTestCase
+class TableServiceTest extends TestCase
 {
-    protected $tableService;
-
     public function setUp()
     {
         parent::setUp();
-        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
-        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
-        $this->getTableService()->setImageService($this->imageService->reveal());
-    }
 
-    public function getTableService()
-    {
-        if (!isset($this->tableService)) {
-            $this->tableService =
-                $this->bootstrap->getServiceLocator()->get(
-                    'MyModule\Service\TableService'
-                );
-        }
-        return $this->tableService;
+        $this->service = new \MyModule\Service\TableService();
+
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->service->setCache($this->cache->reveal());
+
+        $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
+        $this->service->setTableRepository($this->repository->reveal());
+
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+        $this->service->setImageService($this->imageService->reveal());
     }
 
     public function mockUploadImage()
@@ -40,49 +35,37 @@ class TableServiceTest extends AbstractTestCase
 
     public function testSetSelectAllCache()
     {
-        $this->getTableService()->setSessionName('testing');
+        $this->service->setSessionName('testing');
 
-        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
-
-        if ($cache->hasItem('testingResult')) {
-            $cache->removeItem('testingResult');
-        }
-
-        $data = $this->getTableService()->setSelectAllCache(array('data' => true));
+        $data = $this->service->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
-        $data = $this->getTableService()->setSelectAllCache(array('data' => true));
+        $data = $this->service->setSelectAllCache(array('data' => true));
         $this->assertEquals(array('data' => true), $data);
     }
 
     public function testSelectAllCacheWithCache()
     {
-        $this->getTableService()->setRouteMatch($this->getRouteMatch(1, 'idTable', 'DESC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idTable', 'DESC'));
 
-        $this->assertEquals('idTable', $this->getTableService()->getOrderBy());
-        $this->assertEquals('DESC', $this->getTableService()->getOrder());
+        $this->assertEquals('idTable', $this->service->getOrderBy());
+        $this->assertEquals('DESC', $this->service->getOrder());
 
-        $this->getTableService()->selectAll();
+        $this->service->selectAll();
 
-        $this->getTableService()->setRouteMatch($this->getRouteMatch(1, 'idTable', 'ASC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idTable', 'ASC'));
 
-        $this->assertEquals('idTable', $this->getTableService()->getOrderBy());
-        $this->assertEquals('ASC', $this->getTableService()->getOrder());
+        $this->assertEquals('idTable', $this->service->getOrderBy());
+        $this->assertEquals('ASC', $this->service->getOrder());
 
-        $cache = $this->bootstrap->getServiceLocator()->get('memcached');
-
-        if ($cache->hasItem($this->getTableService()->getSessionName())) {
-            $cache->removeItem($this->getTableService()->getSessionName());
-        }
-
-        $this->getTableService()->setRouteMatch(
+        $this->service->setRouteMatch(
             $this->getRouteMatch(1, 'idTable', 'DESC')
         );
 
         $this->assertEquals(
             'idTable',
-            $this->getTableService()->getOrderBy()
+            $this->service->getOrderBy()
         );
-        $this->assertEquals('DESC', $this->getTableService()->getOrder());
+        $this->assertEquals('DESC', $this->service->getOrder());
     }
 
     public function testTableHead()
@@ -90,11 +73,9 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-
-        $allColumnsDbNotNul = $this->getTableService();
-        $resultSet = $allColumnsDbNotNul->getTableHead();
+        $resultSet = $this->service->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
 
@@ -106,9 +87,9 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $resultSet = $this->getTableService()->selectById(1);
+        $resultSet = $this->service->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(1, $resultSet->getIdTable());
     }
@@ -121,9 +102,9 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->selectOneBy(['idTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $resultSet = $this->getTableService()->selectOneBy(
+        $resultSet = $this->service->selectOneBy(
             array(
                 'idTable' =>
                     30
@@ -151,7 +132,7 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
         $this->imageService->overwriteImage(
             ["uploadImageColumn" => "image123"***REMOVED***,
@@ -165,7 +146,7 @@ class TableServiceTest extends AbstractTestCase
             'image123'
         )->shouldBeCalled();
 
-        $resultSet = $this->getTableService()->create($data);
+        $resultSet = $this->service->create($data);
 
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(31, $resultSet->getIdTable());
@@ -188,9 +169,9 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $this->getTableService()->setCache($this->cache->reveal());
+        $this->service->setCache($this->cache->reveal());
 
         $this->imageService->overwriteImage(
             ["uploadImageColumn" => "image123"***REMOVED***,
@@ -204,7 +185,7 @@ class TableServiceTest extends AbstractTestCase
             'image123'
         )->shouldBeCalled();
 
-        $resultSet = $this->getTableService()
+        $resultSet = $this->service
             ->update(31, $data);
 
 
@@ -226,12 +207,10 @@ class TableServiceTest extends AbstractTestCase
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
 
-        $this->getTableService()->setCache($this->cache->reveal());
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setCache($this->cache->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $tableService = $this->getTableService();
-
-        $resultSet = $tableService->delete(31);
+        $resultSet = $this->service->delete(31);
         $this->assertTrue($resultSet);
     }
 
@@ -240,15 +219,12 @@ class TableServiceTest extends AbstractTestCase
      */
     public function testDeleteWithoutExistingData()
     {
-
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $tableService = $this->getTableService();
-
-        $resultSet = $tableService->delete(31);
+        $resultSet = $this->service->delete(31);
         $this->assertFalse($resultSet['success'***REMOVED***);
         $this->assertEquals('EntityNotFound', $resultSet['error'***REMOVED***);
     }
@@ -265,12 +241,9 @@ class TableServiceTest extends AbstractTestCase
         $this->repository = $this->prophesize('MyModule\Repository\TableRepository');
         $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
 
+        $this->service->setTableRepository($this->repository->reveal());
 
-        $this->getTableService()->setTableRepository($this->repository->reveal());
-
-        $tableService = $this->getTableService();
-
-        $resultSet = $tableService->extract($entity->reveal());
+        $resultSet = $this->service->extract($entity->reveal());
         $this->assertEquals($data, $resultSet);
     }
 
