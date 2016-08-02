@@ -5,6 +5,9 @@ use Gear\Column\Varchar\Varchar;
 //use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
+
 //use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
@@ -22,7 +25,9 @@ use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
  */
 class UniqueId extends Varchar implements
     RepositoryInsertBeforeInterface,
-    RepositoryUpdateBeforeInterface
+    RepositoryUpdateBeforeInterface,
+    RepositoryInsertTestInterface,
+    RepositoryUpdateTestInterface
 {
     protected $uniqueId;
 
@@ -48,6 +53,72 @@ class UniqueId extends Varchar implements
         ).PHP_EOL;
     }
 
+
+    /**
+     * Cria código responsável por adicionar o Hydrator nos Testes unitários do repositório, método editar.
+     * Poderá ser passada pra AbstractColumn após a evolução.
+     */
+    public function getRepositoryTestUpdateHydrator()
+    {
+        $ndnt = str_repeat(' ', 2*4);
+
+        $columnName = $this->str('class', $this->column->getName());
+
+        $template = '$entity->set%s(123)->shouldBeCalled();';
+
+        return $ndnt.sprintf($template, $columnName).PHP_EOL;
+    }
+
+
+    /**
+     * Cria código responsável por adicionar o Persist nos Testes unitários do repositório, método criar.
+     * Poderá ser passada pra AbstractColumn após a evolução.
+     */
+    public function getRepositoryTestUpdatePersist()
+    {
+        $ndnt = str_repeat(' ', 2*4);
+
+        $columnName = $this->str('class', $this->column->getName());
+
+        $template = '$entityPersist->set%s(123);';
+
+        return $ndnt.sprintf($template, $columnName).PHP_EOL;
+    }
+
+    /**
+     * Cria código responsável por adicionar a Data nos Testes unitários do repositório, método criar.
+     * Poderá ser passada pra AbstractColumn após a evolução.
+     */
+    public function getRepositoryTestUpdateData()
+    {
+        return $this->getRepositoryTestInsertData();
+
+    }
+
+    /**
+     * Cria código responsável por adicionar o Persist nos Testes unitários do repositório, método criar.
+     * Poderá ser passada pra AbstractColumn após a evolução.
+     */
+    public function getRepositoryTestInsertPersist()
+    {
+        return $this->getRepositoryTestUpdatePersist();
+    }
+
+    /**
+     * Cria código responsável por adicionar a Data nos Testes unitários do repositório, método criar.
+     * Poderá ser passada pra AbstractColumn após a evolução.
+     */
+    public function getRepositoryTestInsertData()
+    {
+        $ndnt = str_repeat(' ', 3*4);
+
+        $columnName = $this->str('var', $this->column->getName());
+
+        $template = '\'%s\' => 123,';
+
+        return $ndnt.sprintf($template, $columnName).PHP_EOL;
+    }
+
     /**
      * Cria o código para ser inserido no service em Gear\Mvc\Service\ServiceService
      *
@@ -60,8 +131,16 @@ class UniqueId extends Varchar implements
     {
         $elementName = $this->str('class', $this->column->getName());
 
+        $var = $this->str('var', $elementName);
+        $varlength = $this->str('var-length', $elementName);
+
         $element = <<<EOS
-        \$entity->set{$elementName}(uniqid(true, true));
+        \${$varlength} = isset(\$data['{$var}'***REMOVED***)
+          && !empty(\$data['{$var}'***REMOVED***)
+          ?  \$data['{$var}'***REMOVED***
+          : uniqid(true, true);
+
+        \$entity->set{$elementName}(\${$varlength});
 
 EOS;
 

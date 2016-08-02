@@ -5,6 +5,8 @@ use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
+use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
 
 class RepositoryTestService extends AbstractMvcTest
 {
@@ -78,8 +80,6 @@ class RepositoryTestService extends AbstractMvcTest
         $this->db           = $table;
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $this->getColumnService()->getColumns($table);
-
         $this->repository = true;
 
         $this->setBaseArray(array(
@@ -95,21 +95,38 @@ class RepositoryTestService extends AbstractMvcTest
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
+        $options = array(
+            'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
+            'varLenght'    => $this->str('var-lenght', $this->tableName),
+            'class'        => $this->tableName,
+            'module'       => $this->getModule()->getModuleName(),
+            'hydrator'     => ['update' => ''***REMOVED***,
+            'persist'      => ['create' => '', 'update' => ''***REMOVED***,
+            'data'         => ['create' => '', 'update' => ''***REMOVED***
+        );
+
+        foreach ($this->getColumnService()->getColumns($table) as $column) {
+
+            if ($column instanceof RepositoryInsertTestInterface) {
+                $options['persist'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertPersist();
+                $options['data'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertData();
+            }
+
+            if ($column instanceof RepositoryUpdateTestInterface) {
+                $options['persist'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdatePersist();
+                $options['data'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdateData();
+                $options['hydrator'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdateHydrator();
+            }
+        }
+
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
-        $this->idTable = $this->str('class', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
+        $options['idTable'***REMOVED*** = $this->str('class', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
+        $options['idTableVar'***REMOVED*** = $this->str('var', $options['idTable'***REMOVED***);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/db-test.phtml',
-            array(
-                'idTable'      => $this->idTable,
-                'idTableVar'   => $this->str('var', $this->idTable),
-                'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
-                'fixtureSize'  => $this->getFixtureSizeByTableName(),
-                'varLenght'    => $this->str('var-lenght', $this->tableName),
-                'class'        => $this->tableName,
-                'module'       => $this->getModule()->getModuleName(),
-            ),
+            $options,
             $this->tableName.'RepositoryTest.php',
             $this->getModule()->getTestRepositoryFolder()
         );

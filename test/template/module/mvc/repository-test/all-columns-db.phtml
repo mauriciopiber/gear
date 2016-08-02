@@ -170,7 +170,7 @@ class TableRepositoryTest extends TestCase
 
         $entity = $this->prophesize('MyModule\Entity\Table');
         $entity->getIdTable()->willReturn(31)->shouldBeCalled();
-        $entity->setVarcharUniqueIdNotNull(123)->shouldBeCalled();
+        $entity->setUniqueIdColumn(123)->shouldBeCalled();
         $entity->setUpdated($created)->shouldBeCalled();
         $entity->setUpdatedBy($this->userMock)->shouldBeCalled();
 

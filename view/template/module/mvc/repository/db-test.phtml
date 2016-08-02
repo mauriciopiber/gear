@@ -75,7 +75,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(1)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(1);
         $this->assertNotNull($resultSet);
@@ -86,7 +86,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
 
     public function testSelectByIdReturnNull()
     {
-        $this->entityRepository->findOneBy(['idTable' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(60000);
         $this->assertNull($resultSet);
@@ -97,7 +97,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(15)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectOneBy(
             array(
@@ -142,6 +142,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         $this->repository->setTimestamp($created);
 
         $data = array(
+<?php echo (isset($this->data['create'***REMOVED***)) ? $this->data['create'***REMOVED*** : '';?>
         );
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
@@ -149,6 +150,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         $this->repository->setGearAdminHydrator($hydrator->reveal());
 
         $entityPersist = clone $entity;
+<?php echo (isset($this->persist['create'***REMOVED***)) ? $this->persist['create'***REMOVED*** : '';?>
         $entityPersist->setCreated($created);
         $entityPersist->setCreatedBy($this->userMock);
 
@@ -168,12 +170,14 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
 
         $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(31)->shouldBeCalled();
+<?php echo (isset($this->hydrator['update'***REMOVED***)) ? $this->hydrator['update'***REMOVED*** : '';?>
         $entity->setUpdated($created)->shouldBeCalled();
         $entity->setUpdatedBy($this->userMock)->shouldBeCalled();
 
         $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity);
 
         $data = array(
+<?php echo (isset($this->data['update'***REMOVED***)) ? $this->data['update'***REMOVED*** : '';?>
         );
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
@@ -181,6 +185,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         $this->repository->setGearAdminHydrator($hydrator->reveal());
 
         $entityPersist = clone $entity;
+<?php echo (isset($this->persist['update'***REMOVED***)) ? $this->persist['update'***REMOVED*** : '';?>
         $entityPersist->setUpdated($created);
         $entityPersist->setUpdatedBy($this->userMock);
 
