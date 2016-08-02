@@ -12,6 +12,7 @@ use org\bovigo\vfs\vfsStream;
  * @group RefactoringUnitTest
  * @group src-filter
  * @group Filter1
+ * @group Filter
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
@@ -45,7 +46,7 @@ class FilterTestServiceTest extends AbstractTestCase
         return [
             [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table'***REMOVED***,
             [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null'***REMOVED***,
-            [$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
+            //[$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
             [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null'***REMOVED***,
         ***REMOVED***;
     }
