@@ -11,6 +11,7 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 
 /**
  * @group RefactoringSrc1
+ * @group Repository
  */
 class RepositoryTestServiceTest extends AbstractTestCase
 {
@@ -316,6 +317,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group RepositoryMvc
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName)
     {

@@ -1,21 +1,24 @@
-namespace <?php echo $this->module;?>Test\RepositoryTest;
+<?php
+namespace MyModuleTest\RepositoryTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\ServiceManager\ServiceManager;
 
 /**
- * @group <?php echo $this->module.PHP_EOL;?>
- * @group <?php echo $this->class.PHP_EOL;?>
- * @group Repository
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @group MyModule
+ * @group AllColumnsDbNotNull
+ * @group Repository1
  */
-class <?php echo $this->class;?>RepositoryTest extends TestCase
+class AllColumnsDbNotNullRepositoryTest extends TestCase
 {
-<?php echo $this->static;?>
+    static public $varcharUploadImage = '/public/upload/all-columns-db-not-null-varcharUploadImageNotNull';
+
     public function setUp()
     {
         parent::setUp();
 
-        $this->repository = new \<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository();
+        $this->repository = new \MyModule\Repository\AllColumnsDbNotNullRepository();
         $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $this->repository->setEntityManager($this->entityManager->reveal());
         $this->entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
@@ -58,97 +61,130 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
         return $this->authService->reveal();
     }
 
+    /**
+     * @group t2
+     */
     public function testGetUser()
     {
         $user = $this->repository->getUser();
         $this->assertEquals(1, $user->getIdUser());
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectAll()
     {
         $resultSet = $this->repository->selectAll();
         $this->assertNull($resultSet);
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectByIdReturnEntity()
     {
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $entity->getId<?php echo $this->class;?>()->willReturn(1)->shouldBeCalled();
+        $entity = $this->prophesize('MyModule\Entity\AllColumnsDbNotNull');
+        $entity->getIdAllColumnsDbNotNull()->willReturn(1)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idAllColumnsDbNotNull' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(1);
         $this->assertNotNull($resultSet);
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\AllColumnsDbNotNull', $resultSet);
 
-        $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
+        $this->assertEquals(1, $resultSet->getIdAllColumnsDbNotNull());
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectByIdReturnNull()
     {
-        $this->entityRepository->findOneBy(['idTable' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idAllColumnsDbNotNull' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(60000);
         $this->assertNull($resultSet);
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectOneByIdMyController()
     {
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $entity->getId<?php echo $this->class;?>()->willReturn(15)->shouldBeCalled();
+        $entity = $this->prophesize('MyModule\Entity\AllColumnsDbNotNull');
+        $entity->getIdAllColumnsDbNotNull()->willReturn(15)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idAllColumnsDbNotNull' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectOneBy(
             array(
-                '<?php echo $this->idTableVar;?>' =>
+                'idAllColumnsDbNotNull' =>
                     15
             )
         );
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\AllColumnsDbNotNull', $resultSet);
         $this->assertEquals(
             15,
-            $resultSet->get<?php echo $this->idTable;?>()
+            $resultSet->getIdAllColumnsDbNotNull()
         );
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectAllOrderByIdMyControllerASC()
     {
+        //$entity = $this->prophesize('MyModule\Entity\AllColumnsDbNotNull');
+        //$entity->getIdAllColumnsDbNotNull()->willReturn(1)->shouldBeCalled();
+
+
         $resultSet = $this->repository->selectAll(
             array(),
-            '<?php echo $this->idTableVar;?>',
+            'idAllColumnsDbNotNull',
             'ASC'
         );
 
         $this->assertNull($resultSet);
     }
 
+    /**
+     * @group t2
+     */
     public function testSelectAllOrderByIdMyControllerDESC()
     {
+
         $resultSet = $this->repository->selectAll(
             array(),
-            '<?php echo $this->idTableVar;?>',
+            'idAllColumnsDbNotNull',
             'DESC'
         );
-
         $this->assertNull($resultSet);
     }
 
+    /**
+     * @group t2
+     */
     public function testCreateNewData()
     {
-        $entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->class;?>();
+        $entity = new \MyModule\Entity\AllColumnsDbNotNull();
 
         $created = new \DateTime('now');
+
         $this->repository->setTimestamp($created);
 
         $data = array(
+            'varcharUniqueIdNotNull' => 123,
         );
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
+
         $this->repository->setGearAdminHydrator($hydrator->reveal());
+        $this->repository->setTimestamp($created);
 
         $entityPersist = clone $entity;
+        $entityPersist->setVarcharUniqueIdNotNull(123);
         $entityPersist->setCreated($created);
         $entityPersist->setCreatedBy($this->userMock);
 
@@ -157,45 +193,56 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
 
         $resultSet = $this->repository->insert($data);
 
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
-        $this->assertEquals(null, $resultSet->getId<?php echo $this->class;?>());
+        $this->assertInstanceOf('MyModule\Entity\AllColumnsDbNotNull', $resultSet);
+        $this->assertEquals(null, $resultSet->getIdAllColumnsDbNotNull());
     }
 
+    /**
+     * @group t2
+     */
     public function testUpdateExistData()
     {
         $created = new \DateTime('now');
         $this->repository->setTimestamp($created);
 
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $entity->getId<?php echo $this->class;?>()->willReturn(31)->shouldBeCalled();
+        $entity = $this->prophesize('MyModule\Entity\AllColumnsDbNotNull');
+        $entity->getIdAllColumnsDbNotNull()->willReturn(31);
+        $entity->setVarcharUniqueIdNotNull(123)->shouldBeCalled();
         $entity->setUpdated($created)->shouldBeCalled();
         $entity->setUpdatedBy($this->userMock)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity);
+        $this->entityRepository->findOneBy(['idAllColumnsDbNotNull' => 31***REMOVED***)->willReturn($entity);
 
         $data = array(
+            'varcharUniqueIdNotNull' => 123,
         );
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
-        $this->repository->setGearAdminHydrator($hydrator->reveal());
 
         $entityPersist = clone $entity;
+        $entityPersist->setVarcharUniqueIdNotNull(123);
         $entityPersist->setUpdated($created);
         $entityPersist->setUpdatedBy($this->userMock);
 
         $this->entityManager->persist($entityPersist)->willReturn(true)->shouldBeCalled();
         $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
 
+        $this->repository->setGearAdminHydrator($hydrator->reveal());
+
         $resultSet = $this->repository->update(31, $data);
 
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
-        $this->assertEquals(31, $resultSet->getId<?php echo $this->class;?>());
+        $this->assertInstanceOf('MyModule\Entity\AllColumnsDbNotNull', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdAllColumnsDbNotNull());
     }
 
     public function testDeleteNoExistData()
     {
-        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 6000***REMOVED***)->willReturn(null);
+        $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
+        $entityRepository->findOneBy(['idAllColumnsDbNotNull' => 6000***REMOVED***)->willReturn(null);
+
+        $this->repository->setRepository($entityRepository->reveal());
+
         $resultSet = $this->repository->delete(6000);
         $this->assertFalse($resultSet);
     }
@@ -204,10 +251,10 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
     {
         $data = [***REMOVED***;
 
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\AllColumnsDbNotNull');
+        $entity->getIdAllColumnsDbNotNull()->willReturn(31);
 
-        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity->reveal());
+        $this->entityRepository->findOneBy(['idAllColumnsDbNotNull' => 31***REMOVED***)->willReturn($entity->reveal());
 
         $this->entityManager->remove($entity)->willReturn(true)->shouldBeCalled();
         $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
