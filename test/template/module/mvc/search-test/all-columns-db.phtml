@@ -1,42 +1,27 @@
 <?php
-namespace MyModule;
+namespace MyModuleTest\FormTest\SearchTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group MyModule
- * @group Table
+ * @group TableSearchForm
  * @group SearchForm
  */
-class TableTest extends AbstractTestCase
+class TableSearchFormTest extends TestCase
 {
-    public function getTable()
+    public function setUp()
     {
-        if (!isset($this->table)) {
-            $this->table = $this->bootstrap->getServiceLocator()->get(
-                'MyModule\Form\Search\Table'
-            );
-        }
-        return $this->table;
+        parent::setUp();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->search = new \MyModule\Form\Search\TableSearchForm($entityManager->reveal());
     }
 
-    /**
-     * @group MyModule
-     * @group Table
-     */
-    public function testServiceLocator()
+    public function testHasColumn()
     {
-        $serviceLocator = $this->getTable()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group MyModule
-     * @group Table
-     */
-    public function testCallUsingServiceLocator()
-    {
-        $table = $this->getTable();
-        $this->assertInstanceOf('MyModule\Form\Search\Table', $table);
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('likeField'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('clear'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('submit'));
     }
 }
