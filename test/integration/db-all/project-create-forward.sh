@@ -41,7 +41,7 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 
-cd $modulepath && ant unit-group -Dgroup=SearchForm
-cd $modulepath && ant unit-coverage-group -Dgroup=SearchForm
+cd $modulepath && ant unit-group -Dgroup=Form
+cd $modulepath && ant unit-coverage-group -Dgroup=Form
 #cd $modulepath && ant unit
 #cd $modulepath && ant unit-coverage

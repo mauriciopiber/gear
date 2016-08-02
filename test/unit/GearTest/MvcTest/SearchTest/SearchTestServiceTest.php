@@ -73,6 +73,10 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
 
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+
+        $this->form->setFactoryTestService($this->factory->reveal());
+
         $this->form->setTraitTestService($this->trait->reveal());
 
         $serviceManager = new \Gear\Mvc\Config\ServiceManager();
