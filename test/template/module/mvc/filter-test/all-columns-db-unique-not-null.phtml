@@ -225,7 +225,7 @@ class TableUniqueNotNullFilterTest extends TestCase
         $stmt = $this->prophesize('Zend\Db\Adapter\Driver\Pdo\Statement');
 
         $driver->createStatement()->willReturn($stmt->reveal());
-        $driver->formatParameterName('where1')->shouldBeCalled();
+        $driver->formatParameterName('where1')->willReturn(null);
 
         $resultSet = $this->prophesize('Zend\Db\ResultSet\ResultSetInterface');
         $resultSet->current()->willReturn(false);
