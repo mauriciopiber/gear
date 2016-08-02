@@ -15,6 +15,7 @@ use Gear\Mvc\AbstractMvc;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
 use Gear\Column\Int\ForeignKey;
+use Gear\Column\Int\PrimaryKey;
 
 class EntityTestService extends AbstractMvc
 {
@@ -134,6 +135,11 @@ class EntityTestService extends AbstractMvc
         $assertNull = [***REMOVED***;
 
         foreach ($this->tableColumns as $columnData) {
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
             $column = $columnData->getColumn();
 
             if (in_array($column->getName(), $primaryKeyColumn)) {
@@ -212,6 +218,8 @@ class EntityTestService extends AbstractMvc
     public function getProvider()
     {
         $dataProvider = [***REMOVED***;
+
+        $this->mockColumns = [***REMOVED***;
 
         $primaryKeyColumn = $this->getTableService()->getPrimaryKeyColumns($this->tableName);
 

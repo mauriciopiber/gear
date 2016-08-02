@@ -51,7 +51,6 @@ class TableTest extends TestCase
      * @dataProvider getProvider
      */
     public function testSetterAndGet(
-        $idMyController,
         $dateColumn,
         $datePtBrColumn,
         $datetimeColumn,
@@ -78,9 +77,6 @@ class TableTest extends TestCase
         $updatedBy,
         $updated
     ) {
-        $this->entity->setIdMyController($idMyController);
-        $this->assertEquals($idMyController, $this->entity->getIdMyController());
-
         $this->entity->setDateColumn($dateColumn);
         $this->assertEquals($dateColumn, $this->entity->getDateColumn());
 

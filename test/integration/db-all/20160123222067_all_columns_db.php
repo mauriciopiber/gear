@@ -179,7 +179,7 @@ class AllColumnsDb extends AbstractMigration
                     foreach ($columnsType as $columnTyped) {
 
                         if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
-                            $table->addIndex($columnTyped.'_unique_not_null', ['unique' => true***REMOVED***);
+                            $table->addIndex($columnTyped.$suffix, ['unique' => true***REMOVED***);
                         }
                     }
                 }
@@ -213,9 +213,9 @@ class AllColumnsDb extends AbstractMigration
         $tableForeign->create();
 
         $this->createAllColumnsDb('', true, false);
-        $this->createAllColumnsDb('_not_null', true, false);
-        $this->createAllColumnsDb('_unique', true, false);
-        $this->createAllColumnsDb('_unique_not_null', true, false);
+        $this->createAllColumnsDb('_not_null', false, false);
+        $this->createAllColumnsDb('_unique', true, true);
+        $this->createAllColumnsDb('_unique_not_null', false, true);
 
 
         $this->createColumnTypeTable('', true, false);
