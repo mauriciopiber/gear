@@ -178,7 +178,7 @@ EOS;
      */
     public function getFilterValidPost()
     {
-        $ndnt = str_repeat(' ', 8);
+        $ndnt = str_repeat(' ', 4*2);
 
         $name = $this->str('var', $this->column->getName());
 
@@ -534,7 +534,7 @@ EOS;
      */
     public function getFilterData($iterator)
     {
-        $ndnt = str_repeat(' ', 4*5);
+        $ndnt = str_repeat(' ', 4*3);
 
         $columnName = $this->str('var', $this->column->getName());
         $template = <<<EOS

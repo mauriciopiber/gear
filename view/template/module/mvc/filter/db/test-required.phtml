@@ -5,10 +5,19 @@
      */
     public function testGetRequiredInvalidPost()
     {
-        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
-        $inputFilter = $<?php echo $this->var;?>->getInputFilter();
+        $inputFilter = $this->filter->getInputFilter();
         $inputFilter->setData(array());
         $this->assertFalse($inputFilter->isValid());
         $this->messages = $inputFilter->getMessages();
 <?php echo $this->messages;?>
+    }
+
+    public function assertMessage($column, $filter, $message)
+    {
+        $this->assertArrayHasKey($column, $this->messages);
+        $this->assertArrayHasKey($filter, $this->messages[$column***REMOVED***);
+        $this->assertEquals(
+            $message,
+            $this->translator->translate($this->messages[$column***REMOVED***[$filter***REMOVED***)
+        );
     }

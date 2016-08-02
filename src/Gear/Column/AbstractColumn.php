@@ -146,7 +146,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getFilterData($iterator)
     {
-        $ndnt = str_repeat(' ', 4*5);
+        $ndnt = str_repeat(' ', 4*3);
 
         $name = $this->str('var', $this->column->getName());
 

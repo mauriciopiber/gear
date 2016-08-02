@@ -39,7 +39,7 @@ class PasswordVerify extends Varchar implements
      */
     public function getFilterData($iterator)
     {
-        $ndnt = str_repeat(' ', 4*5);
+        $ndnt = str_repeat(' ', 4*3);
         $name = $this->str('var', $this->column->getName());
         $filter = $ndnt.sprintf('\'%s\' => \'%s\',', $name, $this->getValue($iterator)).PHP_EOL;
         $filter .= $ndnt.sprintf('\'%s\' => \'%s\',', $name.'Verify', $this->getValue($iterator)).PHP_EOL;

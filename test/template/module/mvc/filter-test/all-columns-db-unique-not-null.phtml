@@ -1,60 +1,31 @@
 <?php
 namespace MyModuleTest\FilterTest;
 
-use GearBaseTest\FilterTest\AbstractFilterTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group MyModule
  * @group TableUniqueNotNullFilter
  * @group Filter
  */
-class TableUniqueNotNullFilterTest extends AbstractFilterTestCase
+class TableUniqueNotNullFilterTest extends TestCase
 {
-    protected $tableUniqueNotNull;
+    public static $validate = 'vendor/zendframework/zend-i18n-resources/languages/pt_BR/Zend_Validate.php';
 
-    public function getTableUniqueNotNullFilter()
+    public function setUp()
     {
-        if (!isset($this->tableUniqueNotNull)) {
-            $this->tableUniqueNotNull = $this->bootstrap
-              ->getServiceLocator()
-              ->get('MyModule\Filter\TableUniqueNotNullFilter');
+        $this->filter = new \MyModule\Filter\TableUniqueNotNullFilter();
+        $this->filter->setAdapter($this->getAdapterMock());
 
-            $this->tableUniqueNotNull
-              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
-        }
-        return $this->tableUniqueNotNull;
+        $this->translator = new \Zend\I18n\Translator\Translator();
+        $this->translator->addTranslationFile(
+            'phpArray',
+            \GearBase\Module::getProjectFolder().'/'.static::$validate,
+            'default',
+            'pt_BR'
+        )->setLocale('pt_BR');
     }
 
-    /**
-     * @group MyModule
-     * @group TableUniqueNotNullFilter
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getTableUniqueNotNullFilter()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group MyModule
-     * @group TableUniqueNotNullFilter
-     */
-    public function testCallUsingServiceLocator()
-    {
-        $tableUniqueNotNull = $this->getTableUniqueNotNullFilter();
-        $this->assertInstanceOf('MyModule\Filter\TableUniqueNotNullFilter', $tableUniqueNotNull);
-    }
-
-    /**
-     * @group MyModule
-     * @group TableUniqueNotNullFilter
-    */
-    public function testGetInputFilter()
-    {
-        $tableUniqueNotNull = $this->getTableUniqueNotNullFilter();
-        $className = $tableUniqueNotNull->getInputFilter();
-        $this->assertInstanceOf('MyModule\Filter\TableUniqueNotNullFilter', $className);
-    }
 
     /**
      * @group MyModule
@@ -62,124 +33,133 @@ class TableUniqueNotNullFilterTest extends AbstractFilterTestCase
      */
     public function testGetRequiredInvalidPost()
     {
-        $tableUniqueNotNull = $this->getTableUniqueNotNullFilter();
-        $inputFilter = $tableUniqueNotNull->getInputFilter();
+        $inputFilter = $this->filter->getInputFilter();
         $inputFilter->setData(array());
         $this->assertFalse($inputFilter->isValid());
         $this->messages = $inputFilter->getMessages();
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'dateColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'datePtBrColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'datetimeColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'datetimePtBrColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'timeColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'decimalColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'moneyPtBrColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'checkboxColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'idForeignKeyColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'intColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'htmlColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'textColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'tinyintColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'checkboxColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'emailColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'passwordVerifyColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'telephoneColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'urlColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
         );
 
-        $this->assertFilterHasMessage(
+        $this->assertMessage(
             'varcharColumnUniqueNotNull',
             'isEmpty',
             'O valor é obrigatório e não pode estar vazio'
+        );
+    }
+
+    public function assertMessage($column, $filter, $message)
+    {
+        $this->assertArrayHasKey($column, $this->messages);
+        $this->assertArrayHasKey($filter, $this->messages[$column***REMOVED***);
+        $this->assertEquals(
+            $message,
+            $this->translator->translate($this->messages[$column***REMOVED***[$filter***REMOVED***)
         );
     }
     public function mockUploadImage()
@@ -188,56 +168,74 @@ class TableUniqueNotNullFilterTest extends AbstractFilterTestCase
         return $maker->mockUploadFile(\MyModule\Module::getLocation());
     }
 
-    public function validPost()
-    {
-        return array(
-            array(
-                array(
-                    'idMyController' => '99',
-                    'dateColumnUniqueNotNull' => '2007-03-09',
-                    'datePtBrColumnUniqueNotNull' => '09/03/2007',
-                    'datetimeColumnUniqueNotNull' => '2007-03-09 03:00:39',
-                    'datetimePtBrColumnUniqueNotNull' => '09/03/2007 03:00:39',
-                    'timeColumnUniqueNotNull' => '03:00:39',
-                    'decimalColumnUniqueNotNull' => '99.99',
-                    'moneyPtBrColumnUniqueNotNull' => 'R$ 99,99',
-                    'checkboxColumnUniqueNotNull' => 'Sim',
-                    'idForeignKeyColumnUniqueNotNull' => '9Foreign Key Column Unique Not Null',
-                    'intColumnUniqueNotNull' => '99',
-                    'htmlColumnUniqueNotNull' => '99Html Column Unique Not Null',
-                    'textColumnUniqueNotNull' => '99Text Column Unique Not Null',
-                    'tinyintColumnUniqueNotNull' => 'Sim',
-                    'checkboxColumnUniqueNotNull' => 'Sim',
-                    'emailColumnUniqueNotNull' => 'email.column.unique.not.null99@gmail.com',
-                    'passwordVerifyColumnUniqueNotNull' => '99PasswordVerifyColu',
-                    'passwordVerifyColumnUniqueNotNullVerify' => '99PasswordVerifyColu',
-                    'telephoneColumnUniqueNotNull' => '(51) 9999-9999',
-                    'uniqueIdColumnUniqueNotNull' => '99Unique Column Unique Not Null',
-                    'uploadImageColumnUniqueNotNull' => array(
-                        'error' => 0,
-                        'name' => 'uploadImageColumnUniqueNotNull99insert.gif',
-                        'tmp_name' => $this->mockUploadImage(),
-                        'type'      =>  'image/gif',
-                        'size'      =>  42,
-                    ),
-                    'urlColumnUniqueNotNull' => 'url.column.unique.not.null99.com.br',
-                    'varcharColumnUniqueNotNull' => '99Varchar Column Unique Not Null',
-                ),
-            ),
-        );
-    }
-
     /**
      * @group MyModule
      * @group TableUniqueNotNullFilter
-     * @dataProvider validPost
      */
-    public function testReturnTrueWithValidPost($data)
+    public function testReturnTrueWithValidPost()
     {
-        $tableUniqueNotNull = $this->getTableUniqueNotNullFilter();
-        $inputFilter = $tableUniqueNotNull->getInputFilter();
+        $data = [
+            'idMyController' => '99',
+            'dateColumnUniqueNotNull' => '2007-03-09',
+            'datePtBrColumnUniqueNotNull' => '09/03/2007',
+            'datetimeColumnUniqueNotNull' => '2007-03-09 03:00:39',
+            'datetimePtBrColumnUniqueNotNull' => '09/03/2007 03:00:39',
+            'timeColumnUniqueNotNull' => '03:00:39',
+            'decimalColumnUniqueNotNull' => '99.99',
+            'moneyPtBrColumnUniqueNotNull' => 'R$ 99,99',
+            'checkboxColumnUniqueNotNull' => 'Sim',
+            'idForeignKeyColumnUniqueNotNull' => '9Foreign Key Column Unique Not Null',
+            'intColumnUniqueNotNull' => '99',
+            'htmlColumnUniqueNotNull' => '99Html Column Unique Not Null',
+            'textColumnUniqueNotNull' => '99Text Column Unique Not Null',
+            'tinyintColumnUniqueNotNull' => 'Sim',
+            'checkboxColumnUniqueNotNull' => 'Sim',
+            'emailColumnUniqueNotNull' => 'email.column.unique.not.null99@gmail.com',
+            'passwordVerifyColumnUniqueNotNull' => '99PasswordVerifyColu',
+            'passwordVerifyColumnUniqueNotNullVerify' => '99PasswordVerifyColu',
+            'telephoneColumnUniqueNotNull' => '(51) 9999-9999',
+            'uniqueIdColumnUniqueNotNull' => '99Unique Column Unique Not Null',
+            'uploadImageColumnUniqueNotNull' => array(
+                'error' => 0,
+                'name' => 'uploadImageColumnUniqueNotNull99insert.gif',
+                'tmp_name' => $this->mockUploadImage(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
+            ),
+            'urlColumnUniqueNotNull' => 'url.column.unique.not.null99.com.br',
+            'varcharColumnUniqueNotNull' => '99Varchar Column Unique Not Null',
+        ***REMOVED***;
+
+        $inputFilter = $this->filter->getInputFilter();
         $inputFilter->get('uploadImageColumnUniqueNotNull')->setAutoPrependUploadValidator(false);
         $inputFilter->setData($data);
         $this->assertTrue($inputFilter->isValid());
+    }
+
+    protected function getAdapterMock()
+    {
+        $adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+        $driver = $this->prophesize('Zend\Db\Adapter\Driver\DriverInterface');
+
+        $platform = $this->prophesize('Zend\Db\Adapter\Platform\Mysql');
+
+        $adapter->getDriver()->willReturn($driver->reveal());
+        $adapter->getPlatform()->willReturn($platform->reveal());
+
+        $stmt = $this->prophesize('Zend\Db\Adapter\Driver\Pdo\Statement');
+
+        $driver->createStatement()->willReturn($stmt->reveal());
+        $driver->formatParameterName('where1')->shouldBeCalled();
+
+        $resultSet = $this->prophesize('Zend\Db\ResultSet\ResultSetInterface');
+        $resultSet->current()->willReturn(false);
+
+        $paramContainer = $this->prophesize('Zend\Db\Adapter\ParameterContainer');
+
+        $stmt->execute()->willReturn($resultSet->reveal());
+        $stmt->getParameterContainer()->willReturn($paramContainer->reveal());
+        $stmt->setSql("SELECT  WHERE  =")->willReturn($stmt->reveal());
+
+        return $adapter->reveal();
     }
 }

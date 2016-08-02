@@ -1,24 +1,15 @@
 
-    public function validPost()
-    {
-        return array(
-            array(
-                array(
-<?php echo $this->fixture;?>
-                ),
-            ),
-        );
-    }
-
     /**
      * @group <?php echo $this->module.PHP_EOL;?>
      * @group <?php echo $this->class.PHP_EOL;?>
-     * @dataProvider validPost
      */
-    public function testReturnTrueWithValidPost($data)
+    public function testReturnTrueWithValidPost()
     {
-        $<?php echo $this->var;?> = $this->get<?php echo $this->class;?>();
-        $inputFilter = $<?php echo $this->var;?>->getInputFilter();
+        $data = [
+<?php echo $this->fixture;?>
+        ***REMOVED***;
+
+        $inputFilter = $this->filter->getInputFilter();
 <?php echo $this->columns;?>
         $inputFilter->setData($data);
         $this->assertTrue($inputFilter->isValid());
