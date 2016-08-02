@@ -65,13 +65,15 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $src = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
-        $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
 
         $this->filter = new \Gear\Mvc\Filter\FilterTestService();
         $this->filter->setStringService($this->string);
         $this->filter->setFileCreator($this->fileCreator);
         $this->filter->setModule($this->module->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
+
         $this->filter->setSchemaService($this->schema->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');

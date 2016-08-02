@@ -42,17 +42,13 @@
         }
     },
     "repositories": [
-        { "type": "vcs", "url" : "git@github.com:mauriciopiber/phpunit-testlistener-xhprof.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-base.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-jenkins.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-version.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-deploy.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-email.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-json.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-acl.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-admin.git" },
-        { "type": "vcs", "url" : "git@bitbucket.org:mauriciopiber/gear-image.git" }        
+        {
+            "type": "composer",
+            "url": "https://mirror.pibernetwork.com"
+        },
+        {
+            "packagist": false
+        }
     ***REMOVED***,
     "bin": [
         "bin/memcached",

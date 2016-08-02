@@ -1,0 +1,42 @@
+<?php
+namespace MyModule;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group MyModule
+ * @group Table
+ * @group SearchForm
+ */
+class TableTest extends AbstractTestCase
+{
+    public function getTable()
+    {
+        if (!isset($this->table)) {
+            $this->table = $this->bootstrap->getServiceLocator()->get(
+                'MyModule\Form\Search\Table'
+            );
+        }
+        return $this->table;
+    }
+
+    /**
+     * @group MyModule
+     * @group Table
+     */
+    public function testServiceLocator()
+    {
+        $serviceLocator = $this->getTable()->getServiceLocator();
+        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+    }
+
+    /**
+     * @group MyModule
+     * @group Table
+     */
+    public function testCallUsingServiceLocator()
+    {
+        $table = $this->getTable();
+        $this->assertInstanceOf('MyModule\Form\Search\Table', $table);
+    }
+}
