@@ -1,65 +1,83 @@
 <?php
 namespace MyModuleTest\RepositoryTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceManager;
 
 /**
- * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group MyModule
  * @group Table
  * @group Repository
  */
-class TableRepositoryTest extends AbstractTestCase
+class TableRepositoryTest extends TestCase
 {
-    protected $table;
-
-    public function getTable()
+    public function setUp()
     {
-        if (!isset($this->table)) {
-            $this->table =
-                $this->bootstrap->getServiceLocator()->get('MyModule\Repository\TableRepository');
-        }
-        return $this->table;
+        parent::setUp();
+
+        $this->repository = new \MyModule\Repository\TableRepository();
+        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->repository->setEntityManager($this->entityManager->reveal());
+        $this->entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
+        $this->repository->setRepository($this->entityRepository->reveal());
+        $this->queryBuilder = $this->prophesize('GearBase\Repository\QueryBuilder');
+        $this->repository->setQueryBuilder($this->queryBuilder->reveal());
+
+        $this->userMock = $this->getUserMock();
     }
 
-    public function testServiceLocator()
+    public function getUserMock()
     {
-        $serviceLocator = $this->getTable()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
+        $this->entity = $this->prophesize('GearAdmin\Entity\User');
+        $this->entity->getIdUser()->willReturn(1);
+
+        $this->serviceManager = new ServiceManager;
+
+        $this->authService = $this->getAuthServiceMock();
+
+        $this->serviceManager->setService('zfcuser_auth_service', $this->authService);
+
+        $this->repository->setServiceLocator($this->serviceManager);
+
+        $this->entityRepository->findOneBy(['idUser' => 1***REMOVED***)->willReturn($this->entity->reveal());
+
+        $this->entityManager->getRepository('GearAdmin\Entity\User')->willReturn($this->entityRepository->reveal());
+
+        return $this->entity->reveal();
     }
 
-    public function testCallUsingServiceLocator()
+    public function getAuthServiceMock()
     {
-        $table = $this->getTable();
-        $this->assertInstanceOf('MyModule\Repository\TableRepository', $table);
+        $this->entity = $this->prophesize('GearAdmin\Entity\User');
+        $this->entity->getIdUser()->willReturn(1);
+
+        $this->authService = $this->prophesize('Zend\Authentication\AuthenticationService');
+        $this->authService->hasIdentity()->willReturn(true);
+        $this->authService->getIdentity()->willReturn($this->entity->reveal());
+
+        return $this->authService->reveal();
     }
 
+    public function testGetUser()
+    {
+        $user = $this->repository->getUser();
+        $this->assertEquals(1, $user->getIdUser());
+    }
 
     public function testSelectAll()
     {
-        $resultSet = $this->getTable()->selectAll();
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-    }
-
-
-    public function testSelectAllWithBasicFilter()
-    {
-        $resultSet = $this->getTable()->selectAll(array('likeField' => ''));
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-    }
-
-    public function testSelectAllWithBasicFilterFoundNone()
-    {
-        $resultSet = $this->getTable()->selectAll(array('likeField' => 'abcdefAhauhsdfguagdfaf'));
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(0, count($resultSet));
+        $resultSet = $this->repository->selectAll();
+        $this->assertNull($resultSet);
     }
 
     public function testSelectByIdReturnEntity()
     {
-        $resultSet = $this->getTable()->selectById(1);
+        $entity = $this->prophesize('MyModule\Entity\Table');
+        $entity->getIdTable()->willReturn(1)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['idTable' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectById(1);
         $this->assertNotNull($resultSet);
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
 
@@ -68,13 +86,20 @@ class TableRepositoryTest extends AbstractTestCase
 
     public function testSelectByIdReturnNull()
     {
-        $resultSet = $this->getTable()->selectById(60000);
+        $this->entityRepository->findOneBy(['idTable' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectById(60000);
         $this->assertNull($resultSet);
     }
 
     public function testSelectOneByIdMyController()
     {
-        $resultSet = $this->getTable()->selectOneBy(
+        $entity = $this->prophesize('MyModule\Entity\Table');
+        $entity->getIdTable()->willReturn(15)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['idTable' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectOneBy(
             array(
                 'idMyController' =>
                     15
@@ -89,51 +114,50 @@ class TableRepositoryTest extends AbstractTestCase
 
     public function testSelectAllOrderByIdMyControllerASC()
     {
-        $resultSet = $this->getTable()->selectAll(
+        $resultSet = $this->repository->selectAll(
             array(),
             'idMyController',
             'ASC'
         );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '1',
-            $data['idMyController'***REMOVED***
-        );
+
+        $this->assertNull($resultSet);
     }
 
     public function testSelectAllOrderByIdMyControllerDESC()
     {
-        $resultSet = $this->getTable()->selectAll(
+        $resultSet = $this->repository->selectAll(
             array(),
             'idMyController',
             'DESC'
         );
-        $this->assertTrue(is_array($resultSet));
-        $this->assertEquals(30, count($resultSet));
-        $data = array_shift($resultSet);
-        $this->assertEquals(
-            '30',
-            $data['idMyController'***REMOVED***
-        );
+
+        $this->assertNull($resultSet);
     }
 
     public function testCreateNewData()
     {
-        $entity = new \MyModule\Entity\Table;
+        $entity = new \MyModule\Entity\Table();
 
-        $data = array();
+        $created = new \DateTime('now');
+        $this->repository->setTimestamp($created);
 
-        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $data = array(
+            'uniqueIdColumn' => 123,
+        );
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
+        $this->repository->setGearAdminHydrator($hydrator->reveal());
 
-        $this->getTable()->setGearAdminHydrator($hydrator->reveal());
-        $this->getTable()->setEntityManager($entityManager->reveal());
+        $entityPersist = clone $entity;
+        $entityPersist->setUniqueIdColumn(123);
+        $entityPersist->setCreated($created);
+        $entityPersist->setCreatedBy($this->userMock);
 
-        $resultSet = $this->getTable()->insert($data);
+        $this->entityManager->persist($entityPersist)->shouldBeCalled();
+        $this->entityManager->flush()->shouldBeCalled();
+
+        $resultSet = $this->repository->insert($data);
 
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(null, $resultSet->getIdTable());
@@ -141,28 +165,34 @@ class TableRepositoryTest extends AbstractTestCase
 
     public function testUpdateExistData()
     {
-        $entity = $this->getMockBuilder('MyModule\Entity\Table', ['getIdTable'***REMOVED***)->getMock();
-        $entity->expects($this->any())->method('getIdTable')->willReturn(31);
+        $created = new \DateTime('now');
+        $this->repository->setTimestamp($created);
+
+        $entity = $this->prophesize('MyModule\Entity\Table');
+        $entity->getIdTable()->willReturn(31)->shouldBeCalled();
+        $entity->setVarcharUniqueIdNotNull(123)->shouldBeCalled();
+        $entity->setUpdated($created)->shouldBeCalled();
+        $entity->setUpdatedBy($this->userMock)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity);
 
         $data = array(
+            'uniqueIdColumn' => 123,
         );
-
-        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $entityManager->persist($entity)->willReturn(true);
-        $entityManager->flush()->willReturn(true);
-        $this->getTable()->setEntityManager($entityManager->reveal());
 
         $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
         $hydrator->hydrate($data, $entity)->willReturn($entity);
-        $this->getTable()->setGearAdminHydrator($hydrator->reveal());
+        $this->repository->setGearAdminHydrator($hydrator->reveal());
 
+        $entityPersist = clone $entity;
+        $entityPersist->setUniqueIdColumn(123);
+        $entityPersist->setUpdated($created);
+        $entityPersist->setUpdatedBy($this->userMock);
 
-        $entityRepository = $this->prophesize('Doctrine\\ORM\\EntityRepository');
-        $entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity);
-        $this->getTable()->setRepository($entityRepository->reveal());
+        $this->entityManager->persist($entityPersist)->willReturn(true)->shouldBeCalled();
+        $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
 
-
-        $resultSet = $this->getTable()->update(31, $data);
+        $resultSet = $this->repository->update(31, $data);
 
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
         $this->assertEquals(31, $resultSet->getIdTable());
@@ -170,12 +200,8 @@ class TableRepositoryTest extends AbstractTestCase
 
     public function testDeleteNoExistData()
     {
-        $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
-        $entityRepository->findOneBy(['idTable' => 6000***REMOVED***)->willReturn(null);
-
-        $this->getTable()->setRepository($entityRepository->reveal());
-
-        $resultSet = $this->getTable()->delete(6000);
+        $this->entityRepository->findOneBy(['idTable' => 6000***REMOVED***)->willReturn(null);
+        $resultSet = $this->repository->delete(6000);
         $this->assertFalse($resultSet);
     }
 
@@ -186,18 +212,12 @@ class TableRepositoryTest extends AbstractTestCase
         $entity = $this->prophesize('MyModule\Entity\Table');
         $entity->getIdTable()->willReturn(31);
 
-        $entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
-        $entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity->reveal());
+        $this->entityRepository->findOneBy(['idTable' => 31***REMOVED***)->willReturn($entity->reveal());
 
-        $this->getTable()->setRepository($entityRepository->reveal());
+        $this->entityManager->remove($entity)->willReturn(true)->shouldBeCalled();
+        $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
 
-        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $entityManager->remove($entity)->willReturn(true);
-        $entityManager->flush()->willReturn(true);
-
-        $this->getTable()->setEntityManager($entityManager->reveal());
-
-        $resultSet = $this->getTable()->delete($entity);
+        $resultSet = $this->repository->delete($entity);
         $this->assertTrue($resultSet);
     }
 }
