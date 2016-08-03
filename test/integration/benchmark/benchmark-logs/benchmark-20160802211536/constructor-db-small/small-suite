@@ -1,0 +1,350 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 02/08/2016 21:19:11[22;39m[0;49m
+[22;39m[42mScript ended by 0.146 at 02/08/2016 21:19:11[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 02/08/2016 21:19:11[22;39m[0;49m
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/IntForeignKeyRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/IntForeignKeyServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/IntForeignKeyFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/IntForeignKeySearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbNotNullRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbNotNullServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbNotNullFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbNotNullSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbUniqueRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbUniqueFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbUniqueSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbUniqueNotNullRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueNotNullServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbUniqueNotNullFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbUniqueNotNullSearchFormTraitTest.php
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 45.594 at 02/08/2016 21:19:57[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (277) [22m----------------------------------------------------
+     [exec***REMOVED*** - [35;1mAllColumnsDbControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Enter create page [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Send post to create page redirect to get [32m(0.11s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Send post to create show validation [32m(0.11s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Create successful [32m(0.17s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When edit display successful [32m(0.10s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.10s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Display edit successful [32m(0.12s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Edit successfull [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When list display successful [32m(0.10s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When view display successful with valid id [32m(0.12s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.12s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When view display successful [32m(0.14s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.15s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m When delete display successful [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Access upload image without id return to list
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Access upload image without id return to list [32m(0.13s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Access upload image with invalid id return to list
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Access upload image with invalid id return to list [32m(0.12s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Post upload image return prg plugin
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Post upload image return prg plugin [32m(0.14s)[39m- [35;1mAllColumnsDbControllerTest:[39;22m Post upload image process success
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbControllerTest:[39;22m Post upload image process success [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Enter create page [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Send post to create page redirect to get [32m(0.19s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Send post to create show validation [32m(0.18s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Create successful [32m(0.20s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit display successful [32m(0.15s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Display edit successful [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.17s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.16s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Edit successfull [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When list display successful [32m(0.09s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful with valid id [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When view display successful [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.15s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullControllerTest:[39;22m When delete display successful [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Enter create page [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Send post to create page redirect to get [32m(0.16s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Send post to create show validation [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Create successful [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit display successful [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.16s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Display edit successful [32m(0.18s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Edit successfull [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When list display successful [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful with valid id [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When view display successful [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueControllerTest:[39;22m When delete display successful [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Enter create page [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Send post to create page redirect to get [32m(0.20s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Send post to create show validation [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Create successful [32m(0.17s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit display successful [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Display edit successful [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Edit successfull [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When list display successful [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful with valid id [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When view display successful [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullControllerTest:[39;22m When delete display successful [32m(0.12s)[39m- [35;1mIndexControllerFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerFactoryTest:[39;22m Create factory [32m(0.11s)[39m- [35;1mIndexControllerTest:[39;22m Index action
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIndexControllerTest:[39;22m Index action [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Enter create page
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Enter create page [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Send post to create page redirect to get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Send post to create page redirect to get [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Send post to create show validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Send post to create show validation [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Create successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Create successful [32m(0.08s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit display successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When edit redirect with invalid id to listing [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Display edit successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Display edit successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list redirect successful prg with valid id return validation [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Edit successfull
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Edit successfull [32m(0.08s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When list display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When list display successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful with valid id [32m(0.07s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m View sucessfull and redirect to list with fail not found [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When view display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When view display successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with fail not found [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m Delete sucessfull and redirect to list with successful [32m(0.06s)[39m- [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyControllerTest:[39;22m When delete display successful [32m(0.06s)[39m- [35;1mAllColumnsDbNotNullTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mAllColumnsDbNotNullTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mAllColumnsDbTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mAllColumnsDbTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mAllColumnsDbUniqueNotNullTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mAllColumnsDbUniqueNotNullTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mAllColumnsDbUniqueTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mAllColumnsDbUniqueTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mIntForeignKeyTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mIntForeignKeyTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mUploadImageTest:[39;22m Getter initiate by null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mUploadImageTest:[39;22m Getter initiate by null [32m(0.00s)[39m- [35;1mUploadImageTest:[39;22m Setter and get | #0
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mUploadImageTest:[39;22m Setter and get | #0 [32m(0.00s)[39m- [35;1mAllColumnsDbFilterTest:[39;22m Return true with valid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbFilterTest:[39;22m Return true with valid post [32m(0.10s)[39m- [35;1mAllColumnsDbNotNullFilterTest:[39;22m Get required invalid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFilterTest:[39;22m Get required invalid post [32m(0.10s)[39m- [35;1mAllColumnsDbNotNullFilterTest:[39;22m Return true with valid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFilterTest:[39;22m Return true with valid post [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueFilterTest:[39;22m Return true with valid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueFilterTest:[39;22m Return true with valid post [32m(0.18s)[39m- [35;1mAllColumnsDbUniqueNotNullFilterTest:[39;22m Get required invalid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFilterTest:[39;22m Get required invalid post [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullFilterTest:[39;22m Return true with valid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFilterTest:[39;22m Return true with valid post [32m(0.11s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Get required invalid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Get required invalid post [32m(0.08s)[39m- [35;1mIntForeignKeyFilterTest:[39;22m Return true with valid post
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFilterTest:[39;22m Return true with valid post [32m(0.08s)[39m- [35;1mAllColumnsDbFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbFormFactoryTest:[39;22m Create factory [32m(0.21s)[39m- [35;1mAllColumnsDbFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mAllColumnsDbFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbFormTraitTest:[39;22m Set [32m(0.06s)[39m- [35;1mAllColumnsDbNotNullFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFormFactoryTest:[39;22m Create factory [32m(0.18s)[39m- [35;1mAllColumnsDbNotNullFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbNotNullFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mAllColumnsDbNotNullFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullFormTraitTest:[39;22m Set [32m(0.06s)[39m- [35;1mAllColumnsDbUniqueFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueFormFactoryTest:[39;22m Create factory [32m(0.18s)[39m- [35;1mAllColumnsDbUniqueFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueFormTraitTest:[39;22m Set [32m(0.06s)[39m- [35;1mAllColumnsDbUniqueNotNullFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFormFactoryTest:[39;22m Create factory [32m(0.19s)[39m- [35;1mAllColumnsDbUniqueNotNullFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueNotNullFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullFormTraitTest:[39;22m Set [32m(0.06s)[39m- [35;1mIntForeignKeyFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormFactoryTest:[39;22m Create factory [32m(0.17s)[39m- [35;1mIntForeignKeyFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormTest:[39;22m Has column [32m(0.03s)[39m- [35;1mIntForeignKeyFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mIntForeignKeyFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyFormTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbNotNullSearchFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullSearchFormFactoryTest:[39;22m Create factory [32m(0.04s)[39m- [35;1mAllColumnsDbNotNullSearchFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullSearchFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbNotNullSearchFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullSearchFormTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbNotNullSearchFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullSearchFormTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbSearchFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbSearchFormFactoryTest:[39;22m Create factory [32m(0.04s)[39m- [35;1mAllColumnsDbSearchFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbSearchFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbSearchFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbSearchFormTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbSearchFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbSearchFormTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullSearchFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullSearchFormFactoryTest:[39;22m Create factory [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullSearchFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullSearchFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullSearchFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullSearchFormTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueNotNullSearchFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullSearchFormTraitTest:[39;22m Set [32m(0.05s)[39m- [35;1mAllColumnsDbUniqueSearchFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueSearchFormFactoryTest:[39;22m Create factory [32m(0.05s)[39m- [35;1mAllColumnsDbUniqueSearchFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueSearchFormTest:[39;22m Has column [32m(0.05s)[39m- [35;1mAllColumnsDbUniqueSearchFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueSearchFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueSearchFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueSearchFormTraitTest:[39;22m Set [32m(0.06s)[39m- [35;1mIntForeignKeySearchFormFactoryTest:[39;22m Create factory
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormFactoryTest:[39;22m Create factory [32m(0.05s)[39m- [35;1mIntForeignKeySearchFormTest:[39;22m Has column
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormTest:[39;22m Has column [32m(0.04s)[39m- [35;1mIntForeignKeySearchFormTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormTraitTest:[39;22m Get [32m(0.03s)[39m- [35;1mIntForeignKeySearchFormTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeySearchFormTraitTest:[39;22m Set [32m(0.05s)[39m- [35;1mModuleTest:[39;22m Location
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mModuleTest:[39;22m Location [32m(0.00s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Get user [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all [32m(0.10s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return entity [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return null [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select one by id my controller [32m(0.17s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Create new data [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Update exist data [32m(0.16s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete exist data [32m(0.15s)[39m- [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Get user [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return entity [32m(0.13s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.13s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Create new data [32m(0.18s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Update exist data [32m(0.15s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Delete exist data [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Get user [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return entity [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Create new data [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Update exist data [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete exist data [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Get user [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return entity [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select one by id my controller [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Create new data [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Update exist data [32m(0.18s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete no exist data [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete exist data [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Get user [32m(0.13s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity [32m(0.12s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.12s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.13s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data [32m(0.15s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data [32m(0.13s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set [32m(0.02s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Set select all cache [32m(0.08s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select all cache with cache [32m(0.07s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Table head [32m(0.09s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select by id [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Select one [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Create [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Update [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Delete [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Delete without existing data [32m(0.09s)[39m- [35;1mAllColumnsDbNotNullServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTest:[39;22m Extract [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mAllColumnsDbNotNullServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullServiceTraitTest:[39;22m Set [32m(0.02s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Set select all cache [32m(0.07s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Select all cache with cache [32m(0.08s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Table head [32m(0.09s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Select by id [32m(0.11s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Select one [32m(0.11s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Create [32m(0.11s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Update [32m(0.12s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Delete [32m(0.11s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Delete without existing data [32m(0.09s)[39m- [35;1mAllColumnsDbServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTest:[39;22m Extract [32m(0.11s)[39m- [35;1mAllColumnsDbServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mAllColumnsDbServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbServiceTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Set select all cache [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select all cache with cache [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Table head [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select by id [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Select one [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Create [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Update [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Delete [32m(0.15s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Delete without existing data [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTest:[39;22m Extract [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueNotNullServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullServiceTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Set select all cache [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select all cache with cache [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Table head [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select by id [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Select one [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Create [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Update [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Delete [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Delete without existing data [32m(0.09s)[39m- [35;1mAllColumnsDbUniqueServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTest:[39;22m Extract [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueServiceTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Table head [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select by id [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select one [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Create [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Update [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete without existing data [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Extract [32m(0.06s)[39m- [35;1mIntForeignKeyServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mIntForeignKeyServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTraitTest:[39;22m Set [32m(0.02s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 29.91 seconds, Memory: 190.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (277 tests, 1186 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 30 seconds

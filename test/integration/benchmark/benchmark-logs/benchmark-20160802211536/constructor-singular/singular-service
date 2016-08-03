@@ -1,0 +1,66 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 02/08/2016 21:15:43[22;39m[0;49m
+[22;39m[42mScript ended by 0.152 at 02/08/2016 21:15:43[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 02/08/2016 21:15:43[22;39m[0;49m
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/IntForeignKeyRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/IntForeignKeyServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/IntForeignKeyFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/IntForeignKeySearchFormTraitTest.php
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 2.344 at 02/08/2016 21:15:46[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Service 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (12) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Set select all cache [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select all cache with cache [32m(0.04s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Table head
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Table head [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select by id
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select by id [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Select one
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Select one [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Create
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Create [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Update
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Update [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Delete without existing data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Delete without existing data [32m(0.04s)[39m- [35;1mIntForeignKeyServiceTest:[39;22m Extract
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTest:[39;22m Extract [32m(0.05s)[39m- [35;1mIntForeignKeyServiceTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mIntForeignKeyServiceTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyServiceTraitTest:[39;22m Set [32m(0.02s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 1.42 seconds, Memory: 27.25MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (12 tests, 32 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 2 seconds

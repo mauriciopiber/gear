@@ -1,0 +1,139 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-db-small
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 02/08/2016 21:16:07[22;39m[0;49m
+[22;39m[42mScript ended by 0.164 at 02/08/2016 21:16:07[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 02/08/2016 21:16:07[22;39m[0;49m
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/IntForeignKeyRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/IntForeignKeyServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/IntForeignKeyFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/IntForeignKeySearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbNotNullRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbNotNullServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbNotNullFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbNotNullSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbUniqueRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbUniqueFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbUniqueSearchFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/AllColumnsDbUniqueNotNullRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/AllColumnsDbUniqueNotNullServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/AllColumnsDbUniqueNotNullFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/AllColumnsDbUniqueNotNullSearchFormTraitTest.php
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDb" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbNotNull" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUnique" criado.[22;39m[0;49m
+[22;39m[42mDb tabela "AllColumnsDbUniqueNotNull" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 50.081 at 02/08/2016 21:16:57[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+buildHelper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** MyModule\UnitTester includes modules: Asserts
+     [exec***REMOVED*** UnitTester.php created.
+
+unit-group:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.3
+     [exec***REMOVED*** Powered by PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** Repository 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mMyModule.unit Tests (65) [22m-----------------------------------------------------
+     [exec***REMOVED*** - [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Get user [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return entity [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.11s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Create new data [32m(0.15s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Update exist data [32m(0.14s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete no exist data [32m(0.10s)[39m- [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTest:[39;22m Delete exist data [32m(0.13s)[39m- [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbNotNullRepositoryTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Get user [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return entity [32m(0.15s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select by id return null [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.10s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.09s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Create new data [32m(0.12s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Update exist data [32m(0.13s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mAllColumnsDbRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTest:[39;22m Delete exist data [32m(0.14s)[39m- [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbRepositoryTraitTest:[39;22m Set [32m(0.04s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Get user [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return entity [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select by id return null [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select one by id my controller [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Create new data [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Update exist data [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete no exist data [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTest:[39;22m Delete exist data [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueNotNullRepositoryTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Get user [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return entity [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select by id return null [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select one by id my controller [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.10s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Create new data [32m(0.13s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Update exist data [32m(0.14s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete no exist data [32m(0.11s)[39m- [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTest:[39;22m Delete exist data [32m(0.12s)[39m- [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Get [32m(0.02s)[39m- [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mAllColumnsDbUniqueRepositoryTraitTest:[39;22m Set [32m(0.03s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Get user
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Get user [32m(0.10s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all [32m(0.10s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return entity [32m(0.10s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select by id return null [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id my controller
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select one by id my controller [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller asc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller asc [32m(0.10s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller desc
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Select all order by id my controller desc [32m(0.11s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Create new data [32m(0.16s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Update exist data [32m(0.15s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete no exist data [32m(0.15s)[39m- [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTest:[39;22m Delete exist data [32m(0.12s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Get
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Get [32m(0.01s)[39m- [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set
+     [exec***REMOVED*** [32;1m✔[39;22m [35;1mIntForeignKeyRepositoryTraitTest:[39;22m Set [32m(0.02s)[39m------------------------------------------------------------------------------
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 10.61 seconds, Memory: 66.50MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [30;42mOK (65 tests, 164 assertions)[0m
+
+BUILD SUCCESSFUL
+Total time: 11 seconds
