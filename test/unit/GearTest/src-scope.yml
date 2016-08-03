@@ -1,0 +1,6 @@
+module: Gear
+
+src:
+  basic:
+    name: 'Basic%s'
+  
