@@ -44,63 +44,6 @@ abstract class AbstractInt extends AbstractColumn
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => %s,',
-            $this->str('var', $this->column->getName()),
-            sprintf('%d', $this->getReference())
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => %s,',
-            $this->str('var', $this->column->getName()),
-            sprintf('%d', $this->getReference())
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para assert com os dados do array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertAssertByColumn()
-    {
-
-        $insertAssert = '        ';
-        $insertAssert .= sprintf(
-            '$this->assertEquals(%s, $resultSet->get%s());',
-            sprintf('%d', $this->getReference()),
-            $this->str('class', $this->column->getName())
-        ).PHP_EOL;
-
-        return $insertAssert;
-    }
-
-
-    /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      *
      * @return string

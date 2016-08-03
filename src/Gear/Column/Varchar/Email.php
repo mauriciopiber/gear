@@ -20,62 +20,6 @@ use Gear\Column\UniqueInterface;
 class Email extends Varchar implements UniqueInterface
 {
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat($this->reference);
-
-        $insert = <<<EOS
-            '$columnVar' => '$columnValue',
-
-EOS;
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getValueFormat($this->reference);
-
-        $insert = <<<EOS
-            '$columnVar' => '$columnValue',
-
-EOS;
-
-        return $insert;
-    }
-
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para assert com os dados do array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertAssertByColumn()
-    {
-        $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getValueFormat($this->reference);
-
-        $insertAssert = <<<EOS
-        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
-
-EOS;
-        return $insertAssert;
-    }
-
-    /**
      * Retorna filtro para colunas únicas em Gear\Mvc\Filter\FilterService
      *
      * @return string
