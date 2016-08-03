@@ -1,5 +1,4 @@
-<?php
-namespace MyModuleTest\ControllerTest;
+namespace <?php echo $this->module;?>Test\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -14,10 +13,10 @@ class IndexControllerFactoryTest extends TestCase
         $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal())->shouldBeCalled();
 
-        $factory = new \MyModule\Controller\IndexControllerFactory();
+        $factory = new \<?php echo $this->module;?>\Controller\IndexControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 
-        $this->assertInstanceOf('MyModule\Controller\IndexController', $instance);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Controller\IndexController', $instance);
     }
 }

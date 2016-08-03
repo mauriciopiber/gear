@@ -181,6 +181,30 @@
             <arg value="test/unit/${test}"/>
         </exec>
     </target>
+    <target name="phpunit" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
+        </exec>
+    </target>
+    <target name="phpunit-group" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
+            <arg value="--group"/>
+            <arg value="${group}"/>
+        </exec>
+    </target>
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-coverage.xml"/>
+        </exec>
+    </target>
+    <target name="phpunit-coverage-group" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit-coverage.xml"/>
+            <arg value="--group"/>
+            <arg value="${group}"/>
+        </exec>
+    </target>
     <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
         <exec executable="${vendor}/bin/phpunit">
             <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>

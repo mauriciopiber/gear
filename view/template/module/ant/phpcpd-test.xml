@@ -1,0 +1,5 @@
+<target name="phpcpd-test" description="PHPCPD" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcpd">
+        <arg path="${basedir}/test/unit"/>
+    </exec>
+</target>

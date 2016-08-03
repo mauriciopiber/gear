@@ -1,8 +1,7 @@
-<?php
-namespace MyModuleTest\ControllerTest;
+namespace <?php echo $this->module;?>Test\ControllerTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Controller\IndexController;
+use <?php echo $this->module?>\Controller\IndexController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
