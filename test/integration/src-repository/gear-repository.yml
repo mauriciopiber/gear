@@ -52,6 +52,10 @@ src:
     type: Repository
     name: BasicAbstractRepository
     abstract: true       
+  99:
+    type: Repository
+    name: BasicFactoryRepository
+    service: factories
       
   0:
     type: Entity
