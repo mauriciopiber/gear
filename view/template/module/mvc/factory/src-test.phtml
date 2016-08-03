@@ -12,6 +12,7 @@ class <?php echo $this->class;?>FactoryTest extends AbstractTestCase
     public function testCreateFactory()
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+<?php echo $this->dependency;?>
 
         $factory = new \<?php echo $this->fullclass;?>Factory();
 
