@@ -20,23 +20,6 @@ class RepositoryTestService extends AbstractMvcTest
 
     const KEY_UPDATE = 98;
 
-    public function createAbstract($className = null)
-    {
-        if (empty($className)) {
-            $className = 'AbstractRepository';
-        }
-
-        return $this->getFileCreator()->createFile(
-            'template/module/test/unit/repository/abstract.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'className' => $className
-            ),
-            $className.'Test.php',
-            $this->getModule()->getTestRepositoryFolder()
-        );
-    }
-
     public function createFromSrc(Src $src)
     {
         $this->src = $src;
@@ -49,23 +32,27 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
-        $this->functions  = $this->dependency->getTests();
+        //$this->functions  = $this->dependency->getTests();
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        $this->getTraitTestService()->createTraitTest($this->src, $location);
-
+        if ($this->src->getAbstract() !== true) {
+            $this->getTraitTestService()->createTraitTest($this->src, $location);
+        }
 
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
+
+        $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'test-src';
+
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/test-src.phtml',
+            'template/module/mvc/repository-test/src/'.$templateView.'.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'mock'       => $mock,
-                'functions'  => $this->functions,
+                //'functions'  => $this->functions,
                 'var'        => $this->str('var-lenght', $this->src->getName()),
                 'className'  => $src->getName(),
                 'module'     => $this->getModule()->getModuleName()
@@ -128,7 +115,7 @@ class RepositoryTestService extends AbstractMvcTest
         $options['idTableVar'***REMOVED*** = $this->str('var', $options['idTable'***REMOVED***);
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/db-test.phtml',
+            'template/module/mvc/repository-test/db/db-test.phtml',
             $options,
             $this->tableName.'RepositoryTest.php',
             $this->getModule()->getTestRepositoryFolder()
