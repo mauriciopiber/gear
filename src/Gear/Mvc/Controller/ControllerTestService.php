@@ -121,9 +121,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $columnsImage = [***REMOVED***;
 
         foreach ($columns as $column) {
-
             if ($column instanceof \Gear\Column\Varchar\UploadImage) {
-
                 $hasImageColumn = true;
                 $columnsImage[***REMOVED*** = $column;
             }
@@ -168,10 +166,7 @@ class ControllerTestService extends AbstractMvcTest implements
          * @TODO fix 4
          */
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
-
             if ($columnData instanceof UploadImage) {
-
                 if ($this->hasImage === false) {
                     $this->setUp .= $columnData->getControllerSetUp();
                     $this->hasImage = true;

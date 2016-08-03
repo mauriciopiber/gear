@@ -6,6 +6,7 @@ use Gear\Column\Mvc\ControllerInterface;
 use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
+
 //use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
@@ -128,14 +129,13 @@ EOS;
         $columnLabel = $this->str('label', $this->column->getName());
 
         if ($this->column->isNullable() === true) {
-
             //retorna o template para input vazio.
             $text = $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel));
             $text .= $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel.' Verify'));
             return $text;
-       }
+        }
 
-       $verify = $columnLabel.' Verify';
+        $verify = $columnLabel.' Verify';
 
         //retorna o template com a mensagem de validação
         $column = sprintf(static::$mvcFeatureValidationTemplate, static::$mvcFeatureNotNullMessage, $columnLabel);
@@ -349,7 +349,14 @@ EOS;
 
         $output = $this->format($this->indent($indent), $text);
 
-        $text = sprintf(static::$mvcFeatureValidationTemplate, sprintf(static::$mvcFeatureMinMessage, 6), $columnLabel.' Verify');
+        $text = sprintf(
+            static::$mvcFeatureValidationTemplate,
+            sprintf(
+                static::$mvcFeatureMinMessage,
+                6
+            ),
+            $columnLabel.' Verify'
+        );
 
         $output .= $this->format($this->indent($indent), $text);
 

@@ -162,7 +162,9 @@ EOS;
      */
     public function getValue($iterator)
     {
-        $columName = $this->getTableService()->getReferencedTableValidColumnName($this->constraint->getReferencedTableName());
+        $columName = $this->getTableService()->getReferencedTableValidColumnName(
+            $this->constraint->getReferencedTableName()
+        );
 
         $iterator = $this->getValidForeignKeyId($iterator);
 
