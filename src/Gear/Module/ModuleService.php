@@ -320,7 +320,7 @@ class ModuleService
             case 'web':
                 $controllerTService = $this->getControllerTestService();
                 $controllerService     = $this->getMvcController();
-                $controllerTService->generateAbstractClass();
+
                 $controllerTService->module();
                 $controllerTService->moduleFactory();
                 $controllerService->module();

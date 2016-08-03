@@ -302,7 +302,7 @@ class ControllerTestService extends AbstractMvcTest implements
     public function moduleFactory()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/index/create-module-controller-factory.phtml',
+            'template/module/mvc/controller-test/module/module-controller-factory.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -318,7 +318,7 @@ class ControllerTestService extends AbstractMvcTest implements
     public function module()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/index/create-module-controller.phtml',
+            'template/module/mvc/controller-test/module/module-controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())

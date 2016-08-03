@@ -16,6 +16,7 @@ use GearTest\SingleDbTableTrait;
  * @group module-mvc
  * @group module-mvc-controller
  * @group module-mvc-controller-test
+ * @group Controller
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {

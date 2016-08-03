@@ -20,7 +20,13 @@ target:
   ## gear
   db-load: ''
   cache-load: ''
-    
+
+  ## test
+  
+  phpcs-test: 'set-vendor'
+  phpmd-test: 'set-vendor'
+  phpcpd-test: 'set-vendor'
+  test: 'set-vendor, phpcs-test, phpcpd-test, phpmd-test'    
     
   #build
   
@@ -46,6 +52,10 @@ target:
   unit-file: 'set-vendor, buildHelper'
   #build-file-js
   
+  phpunit: 'set-vendor'
+  phpunit-group: 'set-vendor'
+  phpunit-coverage: 'set-vendor'
+  phpunit-coverage-group: 'set-vendor'
   phpunit-coverage-benchmark: 'set-vendor'
   phpunit-coverage-benchmark-group: 'set-vendor'
   phpunit-benchmark-group: 'set-vendor'
