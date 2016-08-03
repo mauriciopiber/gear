@@ -23,6 +23,36 @@ src:
   91:
     type: Repository
     name: BasicRepository
+  92:
+    type: Repository
+    name: LongNamespaceRepository
+    namespace: Basic\Feature\Issue\Task    
+  93:
+    type: Repository
+    name: BasicNamespaceRepository
+    namespace: Basic
+  94:
+    type: Repository
+    name: BasicExtendsRepository
+    extends: Repository\BasicRepository        
+  95:
+    type: Repository
+    name: BasicImplementsRepository
+    implements: \Zend\ServiceManager\ServiceLocatorAwareInterface
+    dependency: \Zend\ServiceManager\ServiceLocatorAware
+  96:
+    type: Repository
+    name: BasicDependencyRepository
+    dependency: Repository\BasicRepository
+  97:
+    type: Repository
+    name: BasicDependenciesRepository
+    dependency: Repository\BasicRepository,Basic\Feature\Issue\Task\LongNamespaceRepository,Basic\BasicNamespaceRepository
+  98:
+    type: Repository
+    name: BasicAbstractRepository
+    abstract: true       
+      
   0:
     type: Entity
     name: IntForeignKey

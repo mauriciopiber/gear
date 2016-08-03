@@ -7,7 +7,7 @@ trait ScopeTrait
 {
     public function getScope($srcType)
     {
-        $namespace = 'Basic';
+
         return [
             /*
             [
@@ -23,36 +23,6 @@ trait ScopeTrait
                     ***REMOVED***
                 ),
                 'complete-factories',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicAbstract%s', $srcType),
-                        'type' => $srcType,
-                        'abstract' => true
-                    ***REMOVED***
-                ),
-                'basic-abstract',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependencies%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-dependencies',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependency%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependency'***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-dependency',
             ***REMOVED***,
             [
                 new \GearJson\Src\Src(
@@ -86,6 +56,37 @@ trait ScopeTrait
                 ),
                 'basic-factory',
             ***REMOVED***,
+            */
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicAbstract%s', $srcType),
+                        'type' => $srcType,
+                        'abstract' => true
+                    ***REMOVED***
+                ),
+                'basic-abstract',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicDependencies%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-dependencies',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicDependency%s', $srcType),
+                        'type' => $srcType,
+                        'dependency' => ['Repository\MyDependency'***REMOVED***
+                    ***REMOVED***
+                ),
+                'basic-dependency',
+            ***REMOVED***,
             [
                 new \GearJson\Src\Src(
                     [
@@ -105,26 +106,7 @@ trait ScopeTrait
             [
                 new \GearJson\Src\Src(
                     [
-                        'name' => sprintf('BasicImplementsDependencies%s', $srcType),
-                        'type' => $srcType,
-                        'implements' => [
-                            '\Zend\ServiceManager\ServiceLocatorAwareInterface',
-                            'Repository\DbQueryInterface',
-                            'Repository\DbAdapterInterface'
-                        ***REMOVED***,
-                        'dependency' => [
-                            '\Zend\ServiceManager\ServiceLocatorAware',
-                            'Repository\DbQuery',
-                            'Repository\DbAdapter'
-                        ***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-implements-dependencies',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('Basic%s', $srcType),
+                        'name' => sprintf('BasicExtends%s', $srcType),
                         'type' => $srcType,
                         'extends' => 'Repository\AbstractRepository'
                     ***REMOVED***
@@ -136,12 +118,11 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicNamespace%s', $srcType),
                         'type' => $srcType,
-                        'namespace' => $namespace
+                        'namespace' => 'Basic'
                     ***REMOVED***
                 ),
                 'basic-namespace',
             ***REMOVED***,
-            */
             [
                 new \GearJson\Src\Src(
                     [

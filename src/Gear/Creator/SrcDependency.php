@@ -154,6 +154,8 @@ EOS;
 
     public function getUseNamespace($eol = true)
     {
+        $this->namespace = '';
+
         if ($this->src->hasDependency() == null) {
             return '';
         }
@@ -183,6 +185,8 @@ EOS;
 
     public function getUseAttribute($eol = true)
     {
+        $this->attribute = '';
+
         if ($this->src->hasDependency() == null) {
             return '';
         }

@@ -56,7 +56,7 @@ class RepositoryService extends AbstractMvc
         $this->table   = $this->db->getTableObject();
         $this->specialites = $this->db->getColumns();
 
-        $this->template = 'template/module/mvc/repository/db.repository.phtml';
+        $this->template = 'template/module/mvc/repository/db/repository.phtml';
         $this->calculateAliasesStack();
         $this->setUp();
 
@@ -150,8 +150,9 @@ class RepositoryService extends AbstractMvc
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
+
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/src.repository.phtml',
+            'template/module/mvc/repository/src/repository.phtml',
             $options,
             $this->className.'.php',
             $location
@@ -175,10 +176,10 @@ class RepositoryService extends AbstractMvc
 
     public function getAbstractFromSrc()
     {
-        $this->getRepositoryTestService()->createAbstract($this->className);
+        $this->getRepositoryTestService()->createFromSrc($this->src);
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/abstract.phtml',
+            'template/module/mvc/repository/src/abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->str('class', $this->src->getName())

@@ -64,9 +64,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        if ($data->getAbstract()) {
-            $this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        } elseif (!empty($data->getNamespace())) {
+        if (!empty($data->getNamespace())) {
 
             $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
 
