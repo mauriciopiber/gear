@@ -195,7 +195,7 @@ class TableRepository extends AbstractRepository
           : uniqid(true, true);
 
         $entity->setUniqueIdColumn($uniqueIdColumn);
-        $entity->setUpdated(new \DateTime('now'));
+        $entity->setUpdated($this->getTimestamp());
         $entity->setUpdatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
@@ -213,7 +213,7 @@ class TableRepository extends AbstractRepository
           : uniqid(true, true);
 
         $entity->setUniqueIdColumn($uniqueIdColumn);
-        $entity->setCreated(new \DateTime('now'));
+        $entity->setCreated($this->getTimestamp());
         $entity->setCreatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);

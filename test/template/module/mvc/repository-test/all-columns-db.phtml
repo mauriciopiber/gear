@@ -75,7 +75,7 @@ class TableRepositoryTest extends TestCase
         $entity = $this->prophesize('MyModule\Entity\Table');
         $entity->getIdTable()->willReturn(1)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idMyController' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(1);
         $this->assertNotNull($resultSet);
@@ -86,7 +86,7 @@ class TableRepositoryTest extends TestCase
 
     public function testSelectByIdReturnNull()
     {
-        $this->entityRepository->findOneBy(['idTable' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idMyController' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
 
         $resultSet = $this->repository->selectById(60000);
         $this->assertNull($resultSet);
@@ -97,7 +97,7 @@ class TableRepositoryTest extends TestCase
         $entity = $this->prophesize('MyModule\Entity\Table');
         $entity->getIdTable()->willReturn(15)->shouldBeCalled();
 
-        $this->entityRepository->findOneBy(['idTable' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
+        $this->entityRepository->findOneBy(['idMyController' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
 
         $resultSet = $this->repository->selectOneBy(
             array(
