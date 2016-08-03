@@ -32,7 +32,14 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
-        //$this->functions  = $this->dependency->getTests();
+        $options = [
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
+            'var'        => $this->str('var-lenght', $this->src->getName()),
+            'className'  => $src->getName(),
+            'module'     => $this->getModule()->getModuleName()
+        ***REMOVED***;
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
@@ -44,23 +51,16 @@ class RepositoryTestService extends AbstractMvcTest
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
-
-
-        $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'test-src';
+        if ($this->src->getService() === 'factories') {
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'factory';
+        } else {
+            //add abstract-factory
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'test-src';
+        }
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository-test/src/'.$templateView.'.phtml',
-            array(
-                'callable' => $this->getServiceManager()->getServiceName($this->src),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
-                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-                'mock'       => $mock,
-                //'functions'  => $this->functions,
-                'var'        => $this->str('var-lenght', $this->src->getName()),
-                'className'  => $src->getName(),
-                'module'     => $this->getModule()->getModuleName()
-            ),
+            $options,
             $this->src->getName().'Test.php',
             $location
         );
