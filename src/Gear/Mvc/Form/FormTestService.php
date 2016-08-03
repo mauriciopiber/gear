@@ -34,7 +34,7 @@ class FormTestService extends AbstractMvcTest
         $this->getTraitTestService()->createTraitTest($src, $location);
 
         $inputs = '';
-       $data = $this->getColumnService()->getColumns($this->db);
+        $data = $this->getColumnService()->getColumns($this->db);
 
         foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {

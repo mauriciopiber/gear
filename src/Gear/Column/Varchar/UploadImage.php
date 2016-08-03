@@ -20,7 +20,6 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 
-
 /**
  * Cria um upload file de imagens.
  *
@@ -76,7 +75,6 @@ class UploadImage extends Varchar implements
 
     public function getSetUp()
     {
-
     }
 
     public function getServiceSetUp()
@@ -99,7 +97,6 @@ EOS;
             '{$columnName}' => 'image123',
 
 EOS;
-
     }
 
     /**
@@ -141,7 +138,6 @@ EOS;
         )->shouldBeCalled();
 
 EOS;
-
     }
 
     /**
@@ -170,7 +166,6 @@ EOS;
         )->shouldBeCalled();
 
 EOS;
-
     }
 
     /**
@@ -214,7 +209,8 @@ EOS;
     }
 
     /**
-     * Cria caminho da ímagem para ser utilizada exclusivamente na verificação de upload realizado com sucesso no e2e.
+     * Cria caminho da ímagem para ser utilizada exclusivamente
+     * na verificação de upload realizado com sucesso no e2e.
      *
      * @param int $iterator Número base
      *
@@ -549,7 +545,6 @@ EOS;
 EOS;
 
         return $this->formatLines($ndnt, $template).PHP_EOL;
-
     }
 
     /**
@@ -572,7 +567,6 @@ EOS;
 EOS;
 
         return $template;
-
     }
 
 
@@ -979,7 +973,8 @@ EOS;
     }
 
     /**
-     * Utilizado para criar o insert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     * Utilizado para criar o insert em Gear\Column\ColumnService
+     * para ser utilizado em Repository, Service e Controller.
      *
      * @return string
      */
@@ -999,7 +994,8 @@ EOF;
     }
 
     /**
-     * Utilizado para criar o assert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     * Utilizado para criar o assert em Gear\Column\ColumnService
+     * para ser utilizado em Repository, Service e Controller.
      *
      * @return string
      */

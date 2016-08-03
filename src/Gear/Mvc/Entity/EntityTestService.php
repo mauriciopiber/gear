@@ -135,7 +135,6 @@ class EntityTestService extends AbstractMvc
         $assertNull = [***REMOVED***;
 
         foreach ($this->tableColumns as $columnData) {
-
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
@@ -242,7 +241,6 @@ class EntityTestService extends AbstractMvc
                 $this->mockColumns[***REMOVED*** = $columnData;
 
                 continue;
-
             }
 
             $dataProvider[***REMOVED*** = '                \''.$this->str('label', $column->getName()).'\'';
@@ -269,7 +267,6 @@ class EntityTestService extends AbstractMvc
 
         if (count($this->mockColumns)>0) {
             foreach ($this->mockColumns as $columnData) {
-
                 $column = $columnData->getColumn();
 
                 if (!($columnData instanceof ForeignKey)) {
@@ -332,7 +329,6 @@ class EntityTestService extends AbstractMvc
         $params = [***REMOVED***;
 
         foreach ($this->tableColumns as $columnData) {
-
             $column = $columnData->getColumn();
 
             if ($columnData instanceof PrimaryKey) {

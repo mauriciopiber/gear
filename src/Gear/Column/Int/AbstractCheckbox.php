@@ -218,5 +218,4 @@ EOS;
 
         return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValueDatabase($iterator)).PHP_EOL;
     }
-
 }

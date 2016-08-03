@@ -62,7 +62,6 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
 
         if ($action->getDb() === null) {
-
             $contRouteName = $this->str('url', $this->action->getController()->getName());
         } else {
             $contRouteName = $this->str('url', $this->action->getController()->getNameOff());

@@ -231,7 +231,6 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $columnLabel = $this->str('label', $this->column->getName());
 
         if ($this->column->isNullable() === true) {
-
             //retorna o template para input vazio.
             return $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel));
         }
@@ -276,7 +275,6 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $sendKeys = '';
 
         for ($i = 0; $i < $maxLength; $i++) {
-
             if (!isset($text[$clock***REMOVED***)) {
                 $clock = 0;
             }

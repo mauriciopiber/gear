@@ -161,9 +161,7 @@ class FilterTestService extends AbstractMvcTest
 
         if (count($columnsDb)>0) {
             foreach ($columnsDb as $column) {
-
-                if (
-                    $column instanceof Gear\Column\Int\PrimaryKey
+                if ($column instanceof Gear\Column\Int\PrimaryKey
                     || $column instanceof Gear\Column\Varchar\UniqueId
                 ) {
                     continue;
@@ -173,8 +171,7 @@ class FilterTestService extends AbstractMvcTest
                     $columns .= $column->getFilterValidPost();
                 }
 
-                if (
-                    $column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
+                if ($column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
                     && !in_array(get_class($column), $onlyOneFunction)
                 ) {
                     $this->functions .= $column->getFilterFunction();

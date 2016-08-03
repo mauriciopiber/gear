@@ -74,9 +74,7 @@ class ServiceTestService extends AbstractMvcTest
         $this->updateMock = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-
-            if (
-                $column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface
                 && !in_array(get_class($column), $onlyOneSetUp)
             ) {
                 $this->setUp .= $column->getServiceSetUp();
@@ -93,8 +91,7 @@ class ServiceTestService extends AbstractMvcTest
                 //$onlyOneUpdate[***REMOVED*** = get_class($column);
             }
 
-            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface)
-            {
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface) {
                 $this->createValues .= $column->getServiceFixtureData();
                 $this->updateValues .= $column->getServiceFixtureData();
             }

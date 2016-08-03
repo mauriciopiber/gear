@@ -121,8 +121,6 @@ abstract class AbstractDateTime extends AbstractColumn
         }
 
         return $iterator;
-
-
     }
 
     /**

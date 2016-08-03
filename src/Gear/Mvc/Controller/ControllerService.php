@@ -125,7 +125,6 @@ class ControllerService extends AbstractMvc implements
          * @TODO 2 - Verificação de tabela, associação.
          */
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-
             $this->hasTableImage = true;
 
             $options['uploadImageAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
@@ -356,8 +355,6 @@ class ControllerService extends AbstractMvc implements
             if (method_exists($columnData, 'getControllerEditBeforeView')) {
                 $this->update[1***REMOVED*** .= $columnData->getControllerEditBeforeView();
             }
-
-
         }
     }
 

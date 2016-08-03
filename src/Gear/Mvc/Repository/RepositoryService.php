@@ -82,7 +82,6 @@ class RepositoryService extends AbstractMvc
         ***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-
             if ($column instanceof RepositoryInsertBeforeInterface) {
                 $options['insertBefore'***REMOVED*** .= $column->getRepositoryInsertBefore();
             }
@@ -90,7 +89,6 @@ class RepositoryService extends AbstractMvc
             if ($column instanceof RepositoryUpdateBeforeInterface) {
                 $options['updateBefore'***REMOVED*** .= $column->getRepositoryUpdateBefore();
             }
-
         }
 
         $template = $this->getFileCreator()->createFile(
@@ -146,8 +144,11 @@ class RepositoryService extends AbstractMvc
             'extends'    => $this->getCode()->getExtends($this->src),
             'uses'       => $this->getCode()->getUse($this->src, null),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
-            'constructor' => ($this->src->getService() == 'factories') ? $this->getCode()->getConstructor($this->src) : ''
         ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository/src.repository.phtml',

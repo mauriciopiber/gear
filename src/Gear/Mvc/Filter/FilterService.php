@@ -36,8 +36,7 @@ class FilterService extends AbstractMvc
 
         $filters = [***REMOVED***;
         foreach ($data as $columnData) {
-            if (
-                $columnData instanceof \Gear\Column\Int\PrimaryKey
+            if ($columnData instanceof \Gear\Column\Int\PrimaryKey
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId
             ) {
                 continue;

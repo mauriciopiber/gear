@@ -321,9 +321,7 @@ class Code extends AbstractCode implements
         $dependency = [***REMOVED***;
 
         if (!empty($data->getDependency())) {
-
             foreach ($data->getDependency() as $item) {
-
                 $fullname = explode('\\', $item);
                 $name = end($fullname);
                 $dependency[***REMOVED*** = $name;
@@ -345,7 +343,6 @@ class Code extends AbstractCode implements
         $attr = '';
 
         foreach ($dependency as $i => $item) {
-
             if ($howManyDep > 1) {
                 $args .= '        ';
             }
@@ -353,7 +350,6 @@ class Code extends AbstractCode implements
             $args .= $this->str('class', $item).' $'.$this->str('var', $item);
 
             if ($howManyDep > 1) {
-
                 if (isset($dependency[$i+1***REMOVED***)) {
                     $args .= ',';
                 }
@@ -408,7 +404,6 @@ class Code extends AbstractCode implements
         $this->uses = '';
 
         if ($data instanceof Src && !empty($data->getImplements())) {
-
             foreach ($data->getImplements() as $alias => $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
@@ -432,7 +427,6 @@ class Code extends AbstractCode implements
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $alias => $item) {
-
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }

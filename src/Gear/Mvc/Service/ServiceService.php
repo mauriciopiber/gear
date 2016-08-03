@@ -206,7 +206,6 @@ class ServiceService extends AbstractMvc
         $onlyOnceAttribute = [***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
             if ($columnData instanceof ServiceCreateBeforeInterface) {
                 $this->create[0***REMOVED*** .= $columnData->getServiceCreateBefore();
             }

@@ -37,7 +37,6 @@ class CodeTest extends AbstractCode
             $namespace = $implode;
         } else {
             if ($data instanceof Src) {
-
                 if ($data->getType() == 'SearchForm') {
                     $namespace = 'Form\Search';
                 } else {

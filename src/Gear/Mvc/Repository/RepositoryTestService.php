@@ -106,7 +106,6 @@ class RepositoryTestService extends AbstractMvcTest
         );
 
         foreach ($this->getColumnService()->getColumns($table) as $column) {
-
             if ($column instanceof RepositoryInsertTestInterface) {
                 $options['persist'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertPersist();
                 $options['data'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertData();
@@ -121,7 +120,11 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
-        $options['idTable'***REMOVED*** = $this->str('class', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
+        $options['idTable'***REMOVED*** = $this->str(
+            'class',
+            $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable())
+        );
+
         $options['idTableVar'***REMOVED*** = $this->str('var', $options['idTable'***REMOVED***);
 
         return $this->getFileCreator()->createFile(
