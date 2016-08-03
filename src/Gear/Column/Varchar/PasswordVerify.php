@@ -210,23 +210,6 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $value = $this->getValue($this->reference);
-
-        return <<<EOS
-            '{$this->str('var', $this->column->getName())}' => '{$value}',
-            '{$this->str('var', $this->column->getName())}Verify' => '{$value}',
-
-EOS;
-    }
-
-    /**
      * Código que é executado antes da validação do Controller
      *
      * {@inheritDoc}

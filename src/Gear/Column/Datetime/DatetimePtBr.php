@@ -70,46 +70,6 @@ class DatetimePtBr extends Datetime implements SearchFormInterface
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getInsertTime()->format('Y-m-d H:i:s'));
-
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%s\',',
-            $this->str('var', $this->column->getName()),
-            $date->format('d/m/Y H:i:s')
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-    *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getInsertTime()->format('Y-m-d H:i:s'));
-
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => new \DateTime(\'%s\'),',
-            $this->str('var', $this->column->getName()),
-            $date->format($this->getDateTimeGlobalFormat())
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-    /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues
      *
      * @return string
