@@ -34,7 +34,7 @@ class <?php echo $this->class;?> extends AbstractRepository
         $entity = $this->selectById($idTable);
         $this->hydrate($data, $entity);
 <?php echo $this->updateBefore;?>
-        $entity->setUpdated(new \DateTime('now'));
+        $entity->setUpdated($this->getTimestamp());
         $entity->setUpdatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
@@ -47,7 +47,7 @@ class <?php echo $this->class;?> extends AbstractRepository
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
         $this->hydrate($data, $entity);
 <?php echo $this->insertBefore;?>
-        $entity->setCreated(new \DateTime('now'));
+        $entity->setCreated($this->getTimestamp());
         $entity->setCreatedBy($this->getUser());
         $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
         $this->persist($entity);
