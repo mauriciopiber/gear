@@ -64,6 +64,9 @@ class RepositoryTestServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
+
+
+
         if (!empty($data->getNamespace())) {
 
             $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
@@ -79,12 +82,12 @@ class RepositoryTestServiceTest extends AbstractTestCase
             $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
 
             if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
+               $this->factory->createFactoryTest(
                    $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
+                   vfsStream::url('module/test/unit/MyModuleTest').'/'.str_replace('\\', '/', $data->getNamespace())
                )->shouldBeCalled();
             } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
+                $this->factory->createFactoryTest($data, vfsStream::url('module'))->shouldBeCalled();
             }
 
 

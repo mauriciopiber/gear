@@ -46,6 +46,7 @@ trait ScopeTrait
                 ),
                 'basic-dependency-factory',
             ***REMOVED***,
+            */
             [
                 new \GearJson\Src\Src(
                     [
@@ -56,7 +57,6 @@ trait ScopeTrait
                 ),
                 'basic-factory',
             ***REMOVED***,
-            */
             [
                 new \GearJson\Src\Src(
                     [

@@ -40,6 +40,10 @@ class RepositoryTestService extends AbstractMvcTest
             $this->getTraitTestService()->createTraitTest($this->src, $location);
         }
 
+        if ($this->src->getService() === 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
+
         $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
 
