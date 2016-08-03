@@ -8,6 +8,36 @@ use GearJson\App\App;
 
 class CodeTest extends AbstractCode
 {
+    public function getServiceManagerDependencies($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $template = <<<EOS
+        \$this->serviceLocator->get(
+            '%s',
+            \$this->prophesize('%s')->reveal()
+        )->shouldBeCalled();
+EOS;
+
+        $msg = PHP_EOL;
+
+        foreach ($src->getDependency() as $i => $dependency) {
+
+            $fullname = $this->resolveNamespace($dependency);
+
+
+            $msg .= sprintf($template, $fullname, $fullname);
+            $msg .= PHP_EOL;
+            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+                $msg .= PHP_EOL;
+            }
+        }
+
+        return $msg;
+    }
+
     public function getConstructor($src)
     {
         $template = '';
