@@ -79,22 +79,17 @@ class FactoryService extends AbstractMvc
         $namespace = $this->getCode()->getNamespace($src);
         $use = $this->getCode()->classNameToNamespace($src);
 
-        $depService = [***REMOVED***;
-        $dependencyVar            = [***REMOVED***;
-
-        return [
+        $options = [
             'className'                => $this->str('class', $src->getName()),
             'namespace'                => $namespace,
-            'use'                      => $use,
-            'dependencyServiceLocator' => $depService,
-            'dependencyVar'            => $dependencyVar,
-
-            /*
-            'class'   => $src->getName(),
-            'module'  => $this->getModule()->getModuleName(),
-            'uses'  => $this->uses,
-            */
+            'use'                      => $use
         ***REMOVED***;
+
+        if (!empty($src->getDependency())) {
+           $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($src);
+        }
+
+        return $options;
     }
 
     public function getOptionsTemplateFormFilter(Src $src)
@@ -153,7 +148,7 @@ class FactoryService extends AbstractMvc
         }
 
         if ($data instanceof Src) {
-            $this->createFactorySrc($data, $location);
+            return $this->createFactorySrc($data, $location);
         }
     }
 

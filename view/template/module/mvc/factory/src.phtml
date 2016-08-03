@@ -8,13 +8,8 @@ class <?php echo $this->className;?>Factory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-<?php foreach($this->dependencyServiceLocator as $dependency) : ?>
-<?php echo $dependency; ?>
-<?php endforeach; ?>
         $factory = new <?php echo $this->className;?>(
-<?php foreach($this->dependencyVar as $dependency) : ?>
-<?php echo $dependency; ?>
-<?php endforeach; ?>
+<?php echo $this->dependency;?>
         );
         unset($serviceLocator);
         return $factory;
