@@ -15,7 +15,7 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
  * @group module-mvc-service
  * @group module-mvc-service-service-test
  * @group do-it
- * @group Repository
+ * @group Repository6
  */
 class RepositoryServiceTest extends AbstractTestCase
 {
@@ -23,6 +23,7 @@ class RepositoryServiceTest extends AbstractTestCase
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
+    use \GearTest\ScopeTrait;
 
 
     public function setUp()
