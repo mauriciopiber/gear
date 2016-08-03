@@ -387,14 +387,6 @@ class Code extends AbstractCode implements
         return $html;
     }
 
-    public function resolveNamespace($item)
-    {
-        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-        $item = ltrim($item, '\\');
-        $extendsItem = explode('\\', $item);
-        return $namespace.implode('\\', $extendsItem);
-    }
-
     public function getUse($data, array $include = null, array $implements = null)
     {
         /* Load Dependency */

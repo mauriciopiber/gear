@@ -56,6 +56,11 @@ src:
     type: Repository
     name: BasicFactoryRepository
     service: factories
+  100:
+    type: Repository
+    name: BasicDependencyFactoryRepository
+    service: factories
+    dependency: Repository\BasicRepository
       
   0:
     type: Entity

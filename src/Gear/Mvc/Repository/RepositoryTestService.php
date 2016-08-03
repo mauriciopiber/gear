@@ -53,6 +53,11 @@ class RepositoryTestService extends AbstractMvcTest
 
         if ($this->src->getService() === 'factories') {
             $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'factory';
+
+            $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+            $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+
+
         } else {
             //add abstract-factory
             $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'test-src';
