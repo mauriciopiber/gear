@@ -15,10 +15,9 @@ class CodeTest extends AbstractCode
         }
 
         $template = <<<EOS
-        \$this->serviceLocator->get(
-            '%s',
-            \$this->prophesize('%s')->reveal()
-        )->shouldBeCalled();
+        \$this->serviceLocator->get('%s')
+            ->willReturn(\$this->prophesize('%s')->reveal())
+            ->shouldBeCalled();
 EOS;
 
         $msg = PHP_EOL;

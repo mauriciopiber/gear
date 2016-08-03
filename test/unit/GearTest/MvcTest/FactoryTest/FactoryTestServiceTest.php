@@ -23,7 +23,7 @@ class FactoryTestServiceTest extends AbstractTestCase
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
 
-        $this->templates = $this->baseDir.'/../../test/template/module/mvc/factory';
+        $this->templates = $this->baseDir.'/../../test/template/module/mvc/factory-test';
 
         $template       = new \Gear\Creator\TemplateService();
         $template->setRenderer($phpRenderer);

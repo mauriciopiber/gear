@@ -1,33 +1,19 @@
 <?php
-namespace MyModuleTest\FormTest;
+namespace MyModule\Service;
 
-use GearBaseTest\AbstractTestCase;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Service\MyService;
 
-/**
- * @group MyModule
- * @group MyForm
- * @group Form
- */
-class MyFormFactoryTest extends AbstractTestCase
+class MyServiceFactory implements FactoryInterface
 {
-    public function testCreateFactory()
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
-
-        $this->serviceLocator->get(
-            'MyModule\Repository\MyDependencyOne',
-            $this->prophesize('MyModule\Repository\MyDependencyOne')->reveal()
-        )->shouldBeCalled();
-
-        $this->serviceLocator->get(
-            'MyModule\Service\MyDependencyTwo',
-            $this->prophesize('MyModule\Service\MyDependencyTwo')->reveal()
-        )->shouldBeCalled();
-
-        $factory = new \MyModule\Form\MyFormFactory();
-
-        $instance = $factory->createService($this->serviceLocator->reveal());
-
-        $this->assertInstanceOf('MyModule\Form\MyForm', $instance);
+        $factory = new MyService(
+            $serviceLocator->get('MyModule\Repository\DependencyOne'),
+            $serviceLocator->get('MyModule\Service\DependencyTwo')
+        );
+        unset($serviceLocator);
+        return $factory;
     }
 }

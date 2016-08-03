@@ -37,6 +37,31 @@ class Code extends AbstractCode implements
         return $args;
     }
 
+    public function getFactoryServiceLocator($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+
+        }
+        $ndnt = str_repeat(' ', 4*3);
+
+        $template = '$serviceLocator->get(\'%s\')';
+
+        $text = '';
+
+        foreach ($src->getDependency() as $i => $dependency) {
+
+            $text .= $ndnt;
+            $text .= sprintf($template, $this->resolveNamespace($dependency));
+            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+                $text .= ',';
+            }
+            $text .= PHP_EOL;
+        }
+
+        return $text;
+    }
+
     /**
      * Retorna as atribuições dos argumentos nas variáveis dentro da Classe.
      */

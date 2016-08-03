@@ -1,0 +1,31 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use GearBaseTest\AbstractTestCase;
+
+/**
+ * @group MyModule
+ * @group MyForm
+ * @group Form
+ */
+class MyFormFactoryTest extends AbstractTestCase
+{
+    public function testCreateFactory()
+    {
+        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+
+        $this->serviceLocator->get('MyModule\Repository\MyDependencyOne')
+            ->willReturn($this->prophesize('MyModule\Repository\MyDependencyOne')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('MyModule\Service\MyDependencyTwo')
+            ->willReturn($this->prophesize('MyModule\Service\MyDependencyTwo')->reveal())
+            ->shouldBeCalled();
+
+        $factory = new \MyModule\Form\MyFormFactory();
+
+        $instance = $factory->createService($this->serviceLocator->reveal());
+
+        $this->assertInstanceOf('MyModule\Form\MyForm', $instance);
+    }
+}
