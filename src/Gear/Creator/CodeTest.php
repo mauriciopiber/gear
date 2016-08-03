@@ -8,6 +8,69 @@ use GearJson\App\App;
 
 class CodeTest extends AbstractCode
 {
+    public function getConstructor($src)
+    {
+        $template = '';
+
+        $open = '$this->repository = new %s(';
+
+        $ndnt = str_repeat(' ', 4*2);
+        $template .= $ndnt.sprintf($open, $this->str('class', $src->getName()));
+
+
+        if (empty($src->getDependency())) {
+
+            $template .= ');'.PHP_EOL;
+            return $template;
+        }
+
+        $template .= PHP_EOL;
+
+        $ndnt = str_repeat(' ', 4*3);
+
+        $defTemplate = '$this->%s->reveal()';
+
+        foreach ($src->getDependency() as $i => $dependency) {
+            $template .= $ndnt;
+            $template .= sprintf($defTemplate, $this->extractVar($dependency));
+            $template .= (isset($src->getDependency()[$i+1***REMOVED***)) ? ',' : '';
+            $template .PHP_EOL;
+        }
+
+        $ndnt = str_repeat(' ', 4*2);
+        $template .= PHP_EOL.$ndnt.');'.PHP_EOL;
+
+        return $template;
+    }
+
+    public function extractVar($dependency)
+    {
+        $allNames = explode('\\', $dependency);
+        return $this->str('var-lenght', end($allNames));
+    }
+
+
+    public function getConstructorDependency($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+
+
+        $ndnt = str_repeat(' ', 4*2);
+
+        $defTemplate = '$this->%s = $this->prophesize(\'%s\');';
+
+        $template = PHP_EOL;
+
+        foreach ($src->getDependency() as $dependency) {
+            $template .= $ndnt.sprintf($defTemplate, $this->extractVar($dependency), $this->resolveNamespace($dependency)).PHP_EOL;
+        }
+
+        return $template;
+    }
+
     public function getTestNamespace($data)
     {
         if (!empty($data->getNamespace())) {

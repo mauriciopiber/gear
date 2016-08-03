@@ -13,10 +13,10 @@ class BasicDependencyFactoryRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->myRepository = $this->prophesize('MyModule\Repository\MyDependency');
+        $this->myDependency = $this->prophesize('MyModule\Repository\MyDependency');
 
         $this->repository = new BasicDependencyFactoryRepository(
-            $this->myRepository->reveal()
+            $this->myDependency->reveal()
         );
     }
 

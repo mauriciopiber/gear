@@ -11,7 +11,9 @@ class <?php echo $this->className;?>Test extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->repository = new <?php echo $this->className;?>();
+<?php echo $this->dependency;?>
+
+<?php echo $this->constructor;?>
     }
 
     public function testClassExists()

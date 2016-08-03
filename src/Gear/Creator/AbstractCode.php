@@ -40,6 +40,13 @@ abstract class AbstractCode implements
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 
+    public function resolveNamespace($item)
+    {
+        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $item = ltrim($item, '\\');
+        $extendsItem = explode('\\', $item);
+        return $namespace.implode('\\', $extendsItem);
+    }
 
     public function loadDependencyService($data)
     {
