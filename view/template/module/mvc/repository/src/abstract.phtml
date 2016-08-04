@@ -1,6 +1,7 @@
 namespace <?php echo $this->namespace;?>;
 
 <?php echo $this->uses;?>
+<?php echo $this->classDocs;?>
 abstract class <?php echo $this->class;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo $this->implements;?>
 {
 <?php echo ($this->attributes) ? $this->attributes : '';?>

@@ -14,9 +14,9 @@ trait ScopeTrait
                     [
                         'name' => sprintf('AbstractCompleteInvokables%s', $srcType),
                         'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
+                        'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => $srcType.'\AbstractRepository',
                         'namespace' => 'Greatest',
                         'service' => 'invokables',
                         'abstract' => true
@@ -29,9 +29,9 @@ trait ScopeTrait
                     [
                         'name' => sprintf('AbstractCompleteFactories%s', $srcType),
                         'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
+                        'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => $srcType.'\AbstractRepository',
                         'namespace' => 'Greatest',
                         'service' => 'factories',
                         'abstract' => true
@@ -45,9 +45,9 @@ trait ScopeTrait
                     [
                         'name' => sprintf('CompleteInvokables%s', $srcType),
                         'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
+                        'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => $srcType.'\AbstractRepository',
                         'namespace' => 'Greatest',
                         'service' => 'invokables'
                     ***REMOVED***
@@ -59,9 +59,9 @@ trait ScopeTrait
                     [
                         'name' => sprintf('CompleteFactories%s', $srcType),
                         'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
+                        'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => $srcType.'\AbstractRepository',
                         'namespace' => 'Greatest',
                         'service' => 'factories'
                     ***REMOVED***
@@ -73,9 +73,9 @@ trait ScopeTrait
                     [
                         'name' => sprintf('CompleteFactories%s', $srcType),
                         'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
+                        'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => $srcType.'\AbstractRepository',
                         'namespace' => 'Greatest',
                         'service' => 'factories'
                     ***REMOVED***
@@ -87,7 +87,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicDependenciesFactory%s', $srcType),
                         'type' => $srcType,
-                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependencyOne', $srcType.'\MyDependencyTwo', $srcType.'\MyDependencyThree'***REMOVED***,
                         'service' => 'factories'
                     ***REMOVED***
                 ),
@@ -98,7 +98,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicDependencyFactory%s', $srcType),
                         'type' => $srcType,
-                        'dependency' => ['Repository\MyDependency'***REMOVED***,
+                        'dependency' => [$srcType.'\MyDependency'***REMOVED***,
                         'service' => 'factories'
                     ***REMOVED***
                 ),
@@ -140,7 +140,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicDependencies%s', $srcType),
                         'type' => $srcType,
-                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***
+                        'dependency' => [$srcType.'\MyDependencyOne', $srcType.'\MyDependencyTwo', $srcType.'\MyDependencyThree'***REMOVED***
                     ***REMOVED***
                 ),
                 'basic-dependencies',
@@ -150,7 +150,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicDependency%s', $srcType),
                         'type' => $srcType,
-                        'dependency' => ['Repository\MyDependency'***REMOVED***
+                        'dependency' => [$srcType.'\MyDependency'***REMOVED***
                     ***REMOVED***
                 ),
                 'basic-dependency',
@@ -176,7 +176,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicExtends%s', $srcType),
                         'type' => $srcType,
-                        'extends' => 'Repository\AbstractRepository'
+                        'extends' => $srcType.'\AbstractRepository'
                     ***REMOVED***
                 ),
                 'basic-extends',

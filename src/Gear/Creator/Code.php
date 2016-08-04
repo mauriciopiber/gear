@@ -18,6 +18,41 @@ class Code extends AbstractCode implements
 
     static protected $defaultNamespace;
 
+    public function getFileDocs($src)
+    {
+
+        $module = $src->getType();
+
+        if ($src->getNamespace() === null) {
+            $namespace = $this->getModule()->getModuleName().'\\'.$src->getType();
+        } else {
+            $namespace = $this->resolveNamespace($src->getNamespace());
+        }
+
+        $namespace = str_replace('\\', '/', $namespace);
+
+
+        $template = <<<EOS
+/**
+ * PHP Version 5
+ *
+ * @category {$module}
+ * @package {$namespace}
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+
+EOS;
+
+        return $template;
+    }
+
+    public function getClassDocs($src)
+    {
+        return $this->getFileDocs($src);
+    }
+
     /**
      * Retorna os parametros que são usados como argumento no construtor dentro da Classe.
      */
