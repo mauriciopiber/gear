@@ -1,7 +1,7 @@
-namespace <?php echo $this->module;?>\<?= $this->srcType;?>;
-<?php echo $this->use;?>
+namespace <?php echo $this->namespace;?>;
 
-interface <?= $this->srcName;?>Interface
+<?php echo $this->use;?>
+interface <?= $this->srcName;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo PHP_EOL;?>
 {
 <?php echo $this->dependency;?>
 }

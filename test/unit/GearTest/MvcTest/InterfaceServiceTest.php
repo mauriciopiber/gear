@@ -37,6 +37,12 @@ class InterfaceTestServiceTest extends AbstractTestCase
         $code->setStringService($this->string);
         $code->setDirService(new \GearBase\Util\Dir\DirService());
 
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $srcDependency->setStringService($this->string);
+
+        $code->setSrcDependency($srcDependency);
+
         $this->interface = new \Gear\Mvc\InterfaceService(
             /*
             $this->module->reveal(),
@@ -73,7 +79,7 @@ class InterfaceTestServiceTest extends AbstractTestCase
             ***REMOVED***,
             [
                 new \GearJson\Src\Src([
-                    'name' => 'SimpleExtendsInterface',
+                    'name' => 'ExtendsInterface',
                     'type' => 'Interface',
                     'extends' => 'Interfaces\MyAnotherInterface',
                     'namespace' => 'Interfaces'
@@ -84,15 +90,17 @@ class InterfaceTestServiceTest extends AbstractTestCase
                 new \GearJson\Src\Src([
                     'name' => 'SimpleDependencyInterface',
                     'type' => 'Interface',
-                    'dependency' => 'Repository\MyDependency'
+                    'dependency' => 'Repository\MyDependency',
+                    'namespace' => 'Interfaces'
                 ***REMOVED***),
                 'simple-dependency'
             ***REMOVED***,
             [
                 new \GearJson\Src\Src([
-                    'name' => 'SimpleDependenciesExtendsInterface',
+                    'name' => 'SimpleDependenciesInterface',
                     'type' => 'Interface',
-                    'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,Repository\MyDependencyThree'
+                    'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,Repository\MyDependencyThree',
+                    'namespace' => 'Interfaces'
                 ***REMOVED***),
                 'simple-dependencies'
             ***REMOVED***,
@@ -100,8 +108,8 @@ class InterfaceTestServiceTest extends AbstractTestCase
                 new \GearJson\Src\Src([
                     'name' => 'CompleteInterface',
                     'type' => 'Interface',
-                    'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,My\Very\Long\Namespace\MyDependencyThree',
-                    'extends' => 'Interface\MyAnotherInterface',
+                    'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,My\Very\Long\Namespaces\MyDependencyThree',
+                    'extends' => 'Interfaces\MyAnotherInterface',
                     'namespace' => 'My\Very\Long\Namespaces'
                 ***REMOVED***),
                 'complete-interface'
@@ -110,6 +118,7 @@ class InterfaceTestServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group src-mvc
      * @dataProvider getData
      */
     public function testCreateSrcInterface($src, $template)

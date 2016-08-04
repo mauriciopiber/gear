@@ -73,7 +73,29 @@ src:
     service: factories
     dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
     namespace: Complete\Repository
-              
+  103:
+    type: Repository
+    name: AbstractCompleteFactoryRepository
+    extends: Repository\BasicAbstractRepository
+    service: factories
+    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
+    namespace: Complete\Repository
+    abstract: true
+  104:
+    type: Repository
+    name: CompleteInvokablesRepository
+    extends: Repository\BasicAbstractRepository
+    service: invokables
+    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
+    namespace: Complete\Repository
+  104:
+    type: Repository
+    name: AbstractCompleteInvokablesRepository
+    extends: Repository\BasicAbstractRepository
+    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
+    namespace: Complete\Repository
+    service: invokables
+    abstract: true
   0:
     type: Entity
     name: IntForeignKey

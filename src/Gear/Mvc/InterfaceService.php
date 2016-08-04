@@ -31,21 +31,26 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $location = $this->getCode()->getLocation($this->src);
 
 
+        $options = array(
+            'module' => $this->getModule()->getModuleName(),
+            'class' => $this->str('class', $this->name),
+            'var'   => $this->str('var', $this->name),
+            'lenght' => $this->str('var-lenght', $this->name),
+            'srcType' => $this->srcType,
+            'srcName' => $this->name
+        );
+
+        $options['dependency'***REMOVED*** = $this->getCode()->getInterfaceDependency($this->src);
+        $options['namespace'***REMOVED*** = $this->getCode()->getNamespace($this->src);
+        $options['extends'***REMOVED*** = $this->getCode()->getExtends($this->src);
+        $options['use'***REMOVED*** = $this->getCode()->getInterfaceUse($this->src);
+
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/interface/src/interface.phtml');
         $trait->setFileName($this->name.'Interface.php');
         $trait->setLocation($location);
 
-        $trait->setOptions(
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->str('class', $this->name),
-                'var'   => $this->str('var', $this->name),
-                'lenght' => $this->str('var-lenght', $this->name),
-                'srcType' => $this->srcType,
-                'srcName' => $this->name
-            )
-        );
+        $trait->setOptions($options);
 
         return $trait->render();
     }

@@ -12,6 +12,65 @@ trait ScopeTrait
             [
                 new \GearJson\Src\Src(
                     [
+                        'name' => sprintf('AbstractCompleteInvokables%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
+                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => 'Repository\AbstractRepository',
+                        'namespace' => 'Greatest',
+                        'service' => 'invokables',
+                        'abstract' => true
+                  ***REMOVED***
+                ),
+                'abstract-complete-invokables',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('AbstractCompleteFactories%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
+                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => 'Repository\AbstractRepository',
+                        'namespace' => 'Greatest',
+                        'service' => 'factories',
+                        'abstract' => true
+                  ***REMOVED***
+                ),
+                'abstract-complete-factories',
+            ***REMOVED***,
+
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('CompleteInvokables%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
+                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => 'Repository\AbstractRepository',
+                        'namespace' => 'Greatest',
+                        'service' => 'invokables'
+                    ***REMOVED***
+                ),
+                'complete-invokables',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('CompleteFactories%s', $srcType),
+                        'type' => $srcType,
+                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
+                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
+                        'extends' => 'Repository\AbstractRepository',
+                        'namespace' => 'Greatest',
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'complete-factories',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
                         'name' => sprintf('CompleteFactories%s', $srcType),
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,

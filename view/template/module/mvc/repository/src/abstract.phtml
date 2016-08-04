@@ -1,6 +1,10 @@
-namespace <?php echo $this->module;?>\Repository;
+namespace <?php echo $this->namespace;?>;
 
-abstract class <?php echo $this->class.PHP_EOL;?>
+<?php echo $this->uses;?>
+abstract class <?php echo $this->class;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo $this->implements;?>
 {
-
+<?php echo ($this->attributes) ? $this->attributes : '';?>
+<?php echo (!empty($attributes) && !empty($constructor)) ? PHP_EOL : '';?>
+<?php echo $this->constructor;?>
+<?php echo (empty($attributes) && empty($constructor)) ? PHP_EOL : '';?>
 }

@@ -48,7 +48,7 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             $this->getTraitTestService()->createTraitTest($this->src, $location);
         }
 
-        if ($this->src->getService() === 'factories') {
+        if ($this->src->getService() === 'factories' && $this->src->getAbstract() == false) {
 
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
