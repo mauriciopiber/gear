@@ -17,6 +17,13 @@ class BasicDependencyFactoryRepository
 {
     use MyDependencyTrait;
 
+    /**
+     * Constructor
+     *
+     * @param MyDependency $myDependency My Dependency
+     *
+     * @return \MyModule\Repository\BasicDependencyFactoryRepository
+     */
     public function __construct(MyDependency $myDependency)
     {
         $this->myDependency = $myDependency;

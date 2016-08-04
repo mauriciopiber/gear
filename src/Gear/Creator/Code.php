@@ -18,10 +18,12 @@ class Code extends AbstractCode implements
 
     static protected $defaultNamespace;
 
-    public function getFileDocs($src)
+    public function getFileDocs($src, $type = null)
     {
 
-        $module = $src->getType();
+        if ($type === null) {
+            $type = $src->getType();
+        }
 
         if ($src->getNamespace() === null) {
             $namespace = $this->getModule()->getModuleName().'\\'.$src->getType();
@@ -36,7 +38,7 @@ class Code extends AbstractCode implements
 /**
  * PHP Version 5
  *
- * @category {$module}
+ * @category {$type}
  * @package {$namespace}
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
@@ -48,9 +50,9 @@ EOS;
         return $template;
     }
 
-    public function getClassDocs($src)
+    public function getClassDocs($src, $type = null)
     {
-        return $this->getFileDocs($src);
+        return $this->getFileDocs($src, $type);
     }
 
     /**
@@ -121,8 +123,20 @@ EOS;
     public function getInterfaceDependency($data)
     {
         $template = <<<EOS
+    /**
+     * Set %s
+     *
+     * @param %s \$%s %s
+     *
+     * @return self
+     */
     public function set%s(%s \$%s);
 
+    /**
+     * Get %s
+     *
+     * @return null|%s
+     */
     public function get%s();
 
 EOS;
@@ -136,7 +150,24 @@ EOS;
         foreach ($data->getDependency() as $i => $dependency) {
             $class = $this->str('class', $this->resolveName($dependency));
             $var = $this->str('var', $class);
-            $html .= sprintf($template, $class, $class, $var, $class);
+            $label = $this->str('label', $class);
+            $namespace = $this->resolveNamespace($dependency);
+
+            $html .= sprintf(
+                $template,
+                $label, //set
+                $class, //param 1
+                $var, //param var
+                $label, //param 2
+                $class, //set
+                $class, //set arg
+                $var,
+                $label, //set var
+                $namespace,
+                $class,
+                $class
+            );
+
             if (isset($data->getDependency()[$i+1***REMOVED***)) {
                 $html .= PHP_EOL;
             }
@@ -418,6 +449,69 @@ EOS;
         return 'use '.$namespace;
     }
 
+    public function getParams($src)
+    {
+        if (empty($src->getDependency())) {
+            return '     *';
+        }
+
+
+        $html = '';
+
+        $html = '     *'.PHP_EOL;
+
+        $lengthParam = 0;
+        $lengthVar = 0;
+
+        $template = '     * @param %s $%s %s';
+
+        $data = $src->getDependency();
+
+        foreach ($data as $item) {
+            $name = $this->str('class', $this->resolveName($item));
+            $var = $this->str('var', $name);
+            $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
+            $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
+        }
+
+        foreach ($data as $item) {
+            $name = $this->str('class', $this->resolveName($item));
+            $var = $this->str('var', $name);
+            $label = $this->str('label', $name);
+
+            $html .= sprintf(
+                $template,
+                $name.str_repeat(' ', ($lengthParam-strlen($name))),
+                $var.str_repeat(' ', ($lengthVar-strlen($var))),
+                $label
+            ).PHP_EOL;
+        }
+
+
+
+
+        $html .= '     *';
+
+        return $html;
+    }
+
+    public function getConstructorDocs($data)
+    {
+        $params = $this->getParams($data);
+        $namespace = $this->getNamespace($data).'\\'.$data->getName();
+
+        $docs = <<<EOS
+    /**
+     * Constructor
+{$params}
+     * @return \\{$namespace}
+     */
+
+EOS;
+
+        return $docs;
+    }
+
 
     /**
      * Função padrão para criar Constructors.
@@ -436,7 +530,9 @@ EOS;
             }
         }
 
-        $html = '    public function __construct(';
+        $html = $this->getConstructorDocs($data);
+
+        $html .= '    public function __construct(';
 
         if (count($dependency)==0) {
             $html .= ')'.PHP_EOL;

@@ -30,6 +30,15 @@ abstract class AbstractCompleteFactoriesRepository extends AbstractRepository im
 
     use MyDependencyThreeTrait;
 
+    /**
+     * Constructor
+     *
+     * @param MyDependencyOne   $myDependencyOne   My Dependency One
+     * @param MyDependencyTwo   $myDependencyTwo   My Dependency Two
+     * @param MyDependencyThree $myDependencyThree My Dependency Three
+     *
+     * @return \MyModule\Greatest\AbstractCompleteFactoriesRepository
+     */
     public function __construct(
         MyDependencyOne $myDependencyOne,
         MyDependencyTwo $myDependencyTwo,

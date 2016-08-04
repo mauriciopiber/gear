@@ -9,7 +9,7 @@ use MyModule\Service\MyService;
  * PHP Version 5
  *
  * @category Factory
- * @package MyModule\Service
+ * @package MyModule/Service
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
@@ -19,7 +19,7 @@ class MyServiceFactory implements FactoryInterface
     /**
      * Create MyService
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \MyModule\Service\MyService
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
