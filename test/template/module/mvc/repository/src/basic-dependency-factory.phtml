@@ -11,5 +11,7 @@ class BasicDependencyFactoryRepository
     public function __construct(MyDependency $myDependency)
     {
         $this->myDependency = $myDependency;
+
+        return $this;
     }
 }

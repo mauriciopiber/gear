@@ -405,7 +405,12 @@ EOS;
 
         if (count($dependency)==0) {
             $html .= ')'.PHP_EOL;
-            $html .= '    {'.PHP_EOL.PHP_EOL.'    }'.PHP_EOL;
+            $html .= '    {';
+            $html .= PHP_EOL;
+            $html .= '        return $this;';
+            $html .= PHP_EOL;
+            $html .= '    }';
+            $html .= PHP_EOL;
 
             return $html;
         }
@@ -451,10 +456,18 @@ EOS;
 
         $html .= $attr;
 
+        $html .= PHP_EOL;
+
+
+
         if ($howManyDep > 1) {
+
+            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
             $html .= '    }'.PHP_EOL;
         } else {
-            $html .= PHP_EOL.'    }'.PHP_EOL;
+            $html .= PHP_EOL;
+            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
+            $html .= '    }'.PHP_EOL;
         }
 
         return $html;
