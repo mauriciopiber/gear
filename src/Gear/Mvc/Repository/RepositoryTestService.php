@@ -7,8 +7,9 @@ use GearJson\Db\Db;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
+use Gear\Mvc\Repository\ColumnInterface\ShitInterface;
 
-class RepositoryTestService extends AbstractMvcTest
+class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 {
     use ServiceManagerTrait;
 
@@ -48,6 +49,7 @@ class RepositoryTestService extends AbstractMvcTest
         }
 
         if ($this->src->getService() === 'factories') {
+
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 

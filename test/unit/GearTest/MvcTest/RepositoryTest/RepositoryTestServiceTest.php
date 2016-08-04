@@ -62,33 +62,32 @@ class RepositoryTestServiceTest extends AbstractTestCase
      */
     public function testCreateSrc($data, $template)
     {
+        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService();
+
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-
-
-
         if (!empty($data->getNamespace())) {
-
             $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
-
         } else {
             $this->module->map('RepositoryTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService();
-
-
         if ($data->getService() == 'factories') {
+
             $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
 
+            /**
             if (!empty($data->getNamespace())) {
-               $this->factory->createFactoryTest(
-                   $data,
-                   vfsStream::url('module/test/unit/MyModuleTest').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
+
+               $folder = str_replace('\\', '/', $data->getNamespace());
+               $this->factory->createFactoryTest($data,vfsStream::url('module/test/unit/MyModuleTest').'/'.$folder)
+                   ->shouldBeCalled();
+
             } else {
                 $this->factory->createFactoryTest($data, vfsStream::url('module'))->shouldBeCalled();
             }
+            */
 
 
             $this->repository->setFactoryTestService($this->factory->reveal());

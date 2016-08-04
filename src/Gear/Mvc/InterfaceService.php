@@ -15,6 +15,11 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 
+    public function create(Src $src)
+    {
+
+    }
+
     public function createInterface(Src $src, $location)
     {
         $this->src = $src;

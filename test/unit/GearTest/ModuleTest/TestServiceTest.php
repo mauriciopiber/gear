@@ -62,7 +62,7 @@ class TestServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group bombando
+     * @group build
      */
     public function testCreateModuleBuild()
     {

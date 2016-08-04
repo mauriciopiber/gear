@@ -63,11 +63,11 @@ EOS;
             $template .= $ndnt;
             $template .= sprintf($defTemplate, $this->extractVar($dependency));
             $template .= (isset($src->getDependency()[$i+1***REMOVED***)) ? ',' : '';
-            $template .PHP_EOL;
+            $template .= PHP_EOL;
         }
 
         $ndnt = str_repeat(' ', 4*2);
-        $template .= PHP_EOL.$ndnt.');'.PHP_EOL;
+        $template .= $ndnt.');'.PHP_EOL;
 
         return $template;
     }

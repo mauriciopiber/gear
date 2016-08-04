@@ -1,0 +1,55 @@
+modules: MyModule
+
+src:
+## entity IntForeignKey
+## fixture IntForeignKey
+
+## entity AllColumnsDb
+## fixture AllColumnsDb
+## repository AllColumnsDb
+
+## entity AllColumnsDbNotNull
+## fixture AllColumnsDbNotNull
+## repository AllColumnsDbNotNull
+
+## entity AllColumnsDbUnique
+## fixture AllColumnsDbUnique
+## repository AllColumnsDbUnique
+
+## entity AllColumnsDbUniqueNotNull
+## fixture AllColumnsDbUniqueNotNull
+## repository AllColumnsDbUniqueNotNull
+
+  91:
+    type: Interface
+    name: BasicInterface
+  92:
+    type: Interface
+    name: LongNamespaceInterface
+    namespace: Basic\Feature\Issue\Task    
+  93:
+    type: Interface
+    name: BasicNamespaceInterface
+    namespace: Basic
+  94:
+    type: Interface
+    name: BasicExtendsInterface
+    extends: Interface\BasicInterface        
+  96:
+    type: Interface
+    name: BasicDependencyInterface
+    dependency: Interface\BasicInterface
+  97:
+    type: Interface
+    name: BasicDependenciesInterface
+    dependency: Interface\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+  98:
+    type: Interface
+    name: BasicDependenciesInterface
+    extends: Interface\BasicInterface
+    dependency: Interface\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+  99:
+    type: Repository
+    name: MyRepository
+    implements: Interface\BasicInterface, Basic\Feature\Issue\Task\LongNamespaceInterface                    
+                    

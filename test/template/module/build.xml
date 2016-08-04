@@ -94,7 +94,7 @@
             <arg path="${basedir}/test/unit"/>
         </exec>
     </target>
-    <target name="test" depends="set-vendor, phpcs-test, phpcpd-test, phpmd-test"/>    
+    <target name="test" depends="set-vendor, phpcs-test, phpcpd-test, phpmd-test"/>
     <target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish"/>
     <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">

@@ -19,6 +19,7 @@ use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
+use Gear\Mvc\InterfaceServiceTrait;
 
 class SrcService extends AbstractJsonService
 {
@@ -48,6 +49,8 @@ class SrcService extends AbstractJsonService
     use ServiceServiceTrait;
 
     use FixtureServiceTrait;
+
+    use InterfaceServiceTrait;
 
     public function create(array $data)
     {
@@ -126,6 +129,10 @@ class SrcService extends AbstractJsonService
                 case 'Fixture':
                     $fixture = $this->getFixtureService();
                     $status = $fixture->create($this->src);
+                    break;
+                case 'Interface':
+                    $interface = $this->getInterfaceService();
+                    $status = $interface->create($this->src);
                     break;
                 default:
                     throw new \Gear\Constructor\Src\Exception\SrcTypeNotFoundException();

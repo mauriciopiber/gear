@@ -9,7 +9,6 @@ trait ScopeTrait
     {
 
         return [
-            /*
             [
                 new \GearJson\Src\Src(
                     [
@@ -35,7 +34,6 @@ trait ScopeTrait
                 ),
                 'basic-dependencies-factory',
             ***REMOVED***,
-            */
             [
                 new \GearJson\Src\Src(
                     [
