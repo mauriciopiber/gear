@@ -20,5 +20,6 @@ sudo php public/index.php gear schema delete MyModule $base
 sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-repository.yml"
-cd $modulepath && ant unit
-cd $modulepath && ant unit-coverage
+cd $modulepath && ant phpcs-docs
+#cd $modulepath && ant unit
+#cd $modulepath && ant unit-coverage
