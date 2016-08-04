@@ -47,7 +47,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
 
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/interface/src/interface.phtml');
-        $trait->setFileName($this->name.'Interface.php');
+        $trait->setFileName($this->name.'.php');
         $trait->setLocation($location);
 
         $trait->setOptions($options);

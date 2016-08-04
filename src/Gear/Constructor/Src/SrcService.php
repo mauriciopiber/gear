@@ -67,7 +67,8 @@ class SrcService extends AbstractJsonService
             (isset($data['abstract'***REMOVED***) ? $data['abstract'***REMOVED*** : null),
             (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
             (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
-            (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null)
+            (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null),
+            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null)
         );
 
         if ($this->src->getDb() !== null) {

@@ -96,6 +96,22 @@ src:
     namespace: Complete\Repository
     service: invokables
     abstract: true
+  105:
+    type: Interface
+    name: BasicInterface
+    namespace: Interfaces
+  106:
+    type: Interface
+    name: BasicDependenciesInterface
+    extends: Interfaces\BasicInterface
+    dependency: Repository\BasicRepository
+    namespace: Interfaces
+  107:
+    type: Repository
+    name: BasicInterfaceUsage
+    implements: Interfaces\BasicDependenciesInterface
+    dependency: Repository\BasicRepository
+    
   0:
     type: Entity
     name: IntForeignKey
