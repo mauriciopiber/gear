@@ -54,15 +54,20 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         }
 
         if ($this->src->getService() === 'factories') {
-            $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'factory';
+
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
 
             $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
-            $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
 
+            if ($this->src->getAbstract() === true) {
+                $options['dependencyReveal'***REMOVED*** = $this->getCodeTest()->getDependencyReveal($this->src);
+            } else {
+                $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+            }
 
         } else {
             //add abstract-factory
-            $templateView = ($this->src->getAbstract() === true) ? 'abstract' : 'test-src';
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';
         }
 
         return $this->getFileCreator()->createFile(

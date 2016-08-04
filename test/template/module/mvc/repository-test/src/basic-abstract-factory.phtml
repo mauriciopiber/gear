@@ -1,0 +1,33 @@
+<?php
+namespace MyModuleTest\RepositoryTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Repository\BasicAbstractFactoryRepository;
+
+/**
+ * @group Repository
+ */
+class BasicAbstractFactoryRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->className = 'MyModule\Repository\BasicAbstractFactoryRepository';
+
+        $this->repository = $this->getMockBuilder($this->className)
+            ->disableoriginalConstructor()
+            ->getMockForAbstractClass();
+    }
+
+    public function testClassExists()
+    {
+        $reflectedClass = new \ReflectionClass($this->className);
+        $constructor = $reflectedClass->getConstructor();
+        $class = $constructor->invoke(
+            $this->repository
+        );
+
+        $this->assertInstanceOf('MyModule\Repository\BasicAbstractFactoryRepository', $class);
+    }
+}

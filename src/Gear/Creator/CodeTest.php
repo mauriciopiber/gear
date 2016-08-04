@@ -78,14 +78,36 @@ EOS;
         return $this->str('var-lenght', end($allNames));
     }
 
+    public function getDependencyReveal($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $template = '';
+
+        $ndnt = str_repeat(' ', 4*3);
+
+        $defTemplate = '$this->%s->reveal()';
+
+        foreach ($src->getDependency() as $i => $dependency) {
+            $template .= $ndnt;
+            $template .= sprintf($defTemplate, $this->extractVar($dependency), $this->resolveNamespace($dependency));
+
+            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+                $template .= ',';
+            }
+            $template .= PHP_EOL;
+        }
+
+        return $template;
+    }
 
     public function getConstructorDependency($src)
     {
         if (empty($src->getDependency())) {
             return '';
         }
-
-
 
         $ndnt = str_repeat(' ', 4*2);
 

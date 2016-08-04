@@ -13,13 +13,11 @@ class AbstractCompleteFactoriesRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->className = 'MyModule\Complete\Repository\AbstractCompleteFactoriesRepository';
+        $this->className = 'MyModule\Greatest\AbstractCompleteFactoriesRepository';
 
-        $this->basicRepository = $this->prophesize('MyModule\Repository\BasicRepository');
-
-        $this->basicDependencyRepository = $this->prophesize('MyModule\Repository\BasicDependencyRepository');
-
-        $this->basicImplementsRepository = $this->prophesize('MyModule\Repository\BasicImplementsRepository');
+        $this->myDependencyOne = $this->prophesize('MyModule\Repository\MyDependencyOne');
+        $this->myDependencyTwo = $this->prophesize('MyModule\Logic\MyDependencyTwo');
+        $this->myDependencyThree = $this->prophesize('MyModule\Mvc\MyDependencyThree');
 
         $this->repository = $this->getMockBuilder($this->className)
             ->disableoriginalConstructor()
@@ -32,11 +30,11 @@ class AbstractCompleteFactoriesRepositoryTest extends TestCase
         $constructor = $reflectedClass->getConstructor();
         $class = $constructor->invoke(
             $this->repository,
-            $this->basicRepository->reveal(),
-            $this->basicDependencyRepository->reveal(),
-            $this->basicImplementsRepository->reveal()
+            $this->myDependencyOne->reveal(),
+            $this->myDependencyTwo->reveal(),
+            $this->myDependencyThree->reveal()
         );
 
-        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteFactoryRepository', $class);
+        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteFactoriesRepository', $class);
     }
 }

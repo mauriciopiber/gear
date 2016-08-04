@@ -117,6 +117,17 @@ trait ScopeTrait
             [
                 new \GearJson\Src\Src(
                     [
+                        'name' => sprintf('BasicAbstractFactory%s', $srcType),
+                        'type' => $srcType,
+                        'abstract' => true,
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'basic-abstract-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
                         'name' => sprintf('BasicAbstract%s', $srcType),
                         'type' => $srcType,
                         'abstract' => true
