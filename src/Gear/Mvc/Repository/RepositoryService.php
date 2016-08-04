@@ -78,7 +78,8 @@ class RepositoryService extends AbstractMvc
             'aliase'  => $this->mainAliase,
             'map' => $this->getMap(),
             'updateBefore' => '',
-            'insertBefore' => ''
+            'insertBefore' => '',
+            'classDocs' => $this->getCode()->getClassDocs($this->src)
         ***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
@@ -143,6 +144,7 @@ class RepositoryService extends AbstractMvc
             'extends'    => $this->getCode()->getExtends($this->src),
             'uses'       => $this->getCode()->getUse($this->src, null),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
+            'classDocs'  => $this->getCode()->getClassDocs($this->src)
         ***REMOVED***;
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
