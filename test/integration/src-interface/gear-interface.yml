@@ -23,6 +23,7 @@ src:
   91:
     type: Interface
     name: BasicInterface
+    namespace: Interfaces
   92:
     type: Interface
     name: LongNamespaceInterface
@@ -34,22 +35,26 @@ src:
   94:
     type: Interface
     name: BasicExtendsInterface
-    extends: Interface\BasicInterface        
+    extends: Interfaces\BasicInterface
+    namespace: Interfaces            
   96:
     type: Interface
     name: BasicDependencyInterface
-    dependency: Interface\BasicInterface
+    dependency: Interfaces\BasicInterface
+    namespace: Interfaces    
   97:
     type: Interface
     name: BasicDependenciesInterface
-    dependency: Interface\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+    dependency: Interfaces\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+    namespace: Interfaces
   98:
     type: Interface
     name: BasicDependenciesInterface
-    extends: Interface\BasicInterface
-    dependency: Interface\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+    extends: Interfaces\BasicInterface
+    dependency: Interfaces\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+    namespace: Interfaces
   99:
     type: Repository
     name: MyRepository
-    implements: Interface\BasicInterface, Basic\Feature\Issue\Task\LongNamespaceInterface                    
+    implements: Interfaces\BasicInterface, Basic\Feature\Issue\Task\LongNamespaceInterface                    
                     

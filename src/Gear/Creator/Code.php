@@ -62,6 +62,54 @@ class Code extends AbstractCode implements
         return $text;
     }
 
+    public function getInterfaceUse($data)
+    {
+        if (empty($data->getExtends()) && empty($data->getDependency())) {
+            return '';
+        }
+
+        $this->uses = '';
+
+        if ($data->getExtends() !== null) {
+            $this->uses .= 'use '.$this->resolveNamespace($data->getExtends()).';'.PHP_EOL;
+        }
+
+        if (!empty($data->getDependency())) {
+            foreach ($data->getDependency() as $alias => $item) {
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+            }
+        }
+
+        return $this->uses.PHP_EOL;
+    }
+
+    public function getInterfaceDependency($data)
+    {
+        $template = <<<EOS
+    public function set%s(%s \$%s);
+
+    public function get%s();
+
+EOS;
+
+        if (empty($data->getDependency())) {
+            return PHP_EOL;
+        }
+
+        $html = '';
+
+        foreach ($data->getDependency() as $i => $dependency) {
+            $class = $this->str('class', $this->resolveName($dependency));
+            $var = $this->str('var', $class);
+            $html .= sprintf($template, $class, $class, $var, $class);
+            if (isset($data->getDependency()[$i+1***REMOVED***)) {
+                $html .= PHP_EOL;
+            }
+        }
+
+        return $html;
+    }
+
     /**
      * Retorna as atribuições dos argumentos nas variáveis dentro da Classe.
      */

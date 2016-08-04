@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\CompleteInvokablesRepository;
+
+/**
+ * @group Repository
+ */
+class CompleteInvokablesRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = new CompleteInvokablesRepository();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Greatest\CompleteInvokablesRepository', $this->repository);
+    }
+}

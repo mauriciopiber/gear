@@ -89,174 +89,20 @@ class RepositoryServiceTest extends AbstractTestCase
 
     public function src()
     {
-        $namespace = 'Basic';
-
         $srcType = 'Repository';
-        return [
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('CompleteFactories%s', $srcType),
-                        'type' => $srcType,
-                        'implements' => ['ColumnInterface\RepositoryBeforeInterface', 'ColumnInterface\RepositoryAfterInterface'***REMOVED***,
-                        'dependency' => ['Repository\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => 'Repository\AbstractRepository',
-                        'namespace' => 'Greatest',
-                        'service' => 'factories'
-                    ***REMOVED***
-                ),
-                'complete-factories',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicAbstract%s', $srcType),
-                        'type' => $srcType,
-                        'abstract' => true
-                    ***REMOVED***
-                ),
-                'basic-abstract',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependencies%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-dependencies',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependency%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependency'***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-dependency',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependenciesFactory%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependencyOne', 'Repository\MyDependencyTwo', 'Repository\MyDependencyThree'***REMOVED***,
-                        'service' => 'factories'
-                    ***REMOVED***
-                ),
-                'basic-dependencies-factory',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicDependencyFactory%s', $srcType),
-                        'type' => $srcType,
-                        'dependency' => ['Repository\MyDependency'***REMOVED***,
-                        'service' => 'factories'
-                    ***REMOVED***
-                ),
-                'basic-dependency-factory',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicFactory%s', $srcType),
-                        'type' => $srcType,
-                        'service' => 'factories'
-                    ***REMOVED***
-                ),
-                'basic-factory',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicImplements%s', $srcType),
-                        'type' => $srcType,
-                        'implements' => [
-                            '\Zend\ServiceManager\ServiceLocatorAwareInterface'
 
-                        ***REMOVED***,
-                        'dependency' => [
-                            '\Zend\ServiceManager\ServiceLocatorAware'
-                        ***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-implements',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicImplementsDependencies%s', $srcType),
-                        'type' => $srcType,
-                        'implements' => [
-                            '\Zend\ServiceManager\ServiceLocatorAwareInterface',
-                            'Repository\DbQueryInterface',
-                            'Repository\DbAdapterInterface'
-                        ***REMOVED***,
-                        'dependency' => [
-                            '\Zend\ServiceManager\ServiceLocatorAware',
-                            'Repository\DbQuery',
-                            'Repository\DbAdapter'
-                        ***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-implements-dependencies',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('Basic%s', $srcType),
-                        'type' => $srcType,
-                        'extends' => 'Repository\AbstractRepository'
-                    ***REMOVED***
-                ),
-                'basic-extends',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('BasicNamespace%s', $srcType),
-                        'type' => $srcType,
-                        'namespace' => $namespace
-                    ***REMOVED***
-                ),
-                'basic-namespace',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('LongNamespace%s', $srcType),
-                        'type' => $srcType,
-                        'namespace' => 'Basic\\Feature\\Issue\\Task'
-                    ***REMOVED***
-                ),
-                'long-namespace',
-            ***REMOVED***,
-            [
-                new \GearJson\Src\Src(
-                    [
-                        'name' => sprintf('Basic%s', $srcType),
-                        'type' => $srcType
-                    ***REMOVED***
-                ),
-                'basic',
-            ***REMOVED***,
-        ***REMOVED***;
+        return $this->getScope($srcType);
     }
 
     /**
-     * @group RefactoringSrc
+     * @group src-mvc
      * @dataProvider src
      */
     public function testCreateSrc($data, $template)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        if ($data->getAbstract()) {
-            $this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        } elseif (!empty($data->getNamespace())) {
+        if (!empty($data->getNamespace())) {
 
             $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
@@ -266,7 +112,7 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->repository = new \Gear\Mvc\Repository\RepositoryService();
 
-        if ($data->getService() == 'factories') {
+        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
             $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
 
             if (!empty($data->getNamespace())) {

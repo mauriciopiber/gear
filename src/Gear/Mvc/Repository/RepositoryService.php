@@ -107,10 +107,6 @@ class RepositoryService extends AbstractMvc
         $this->src = $src;
         $this->className = $this->src->getName();
 
-        if ($this->src->getAbstract() === true) {
-            return $this->getAbstractFromSrc();
-        }
-
         if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
             $this->db = $this->src->getDb();
 
@@ -130,9 +126,12 @@ class RepositoryService extends AbstractMvc
 
         //$this->getAbstract();
         $this->getRepositoryTestService()->createFromSrc($this->src);
-        $this->getTraitService()->createTrait($this->src, $location);
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->getAbstract() == false) {
+            $this->getTraitService()->createTrait($this->src, $location);
+        }
+
+        if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
@@ -150,9 +149,11 @@ class RepositoryService extends AbstractMvc
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
+        $template = ($this->src->getAbstract() == true) ? 'abstract.phtml' : 'repository.phtml';
+
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/src/repository.phtml',
+            'template/module/mvc/repository/src/'.$template,
             $options,
             $this->className.'.php',
             $location

@@ -1,0 +1,42 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\AbstractCompleteFactoriesRepository;
+
+/**
+ * @group Repository
+ */
+class AbstractCompleteFactoriesRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->className = 'MyModule\Complete\Repository\AbstractCompleteFactoriesRepository';
+
+        $this->basicRepository = $this->prophesize('MyModule\Repository\BasicRepository');
+
+        $this->basicDependencyRepository = $this->prophesize('MyModule\Repository\BasicDependencyRepository');
+
+        $this->basicImplementsRepository = $this->prophesize('MyModule\Repository\BasicImplementsRepository');
+
+        $this->repository = $this->getMockBuilder($this->className)
+            ->disableoriginalConstructor()
+            ->getMockForAbstractClass();
+    }
+
+    public function testClassExists()
+    {
+        $reflectedClass = new \ReflectionClass($this->className);
+        $constructor = $reflectedClass->getConstructor();
+        $class = $constructor->invoke(
+            $this->repository,
+            $this->basicRepository->reveal(),
+            $this->basicDependencyRepository->reveal(),
+            $this->basicImplementsRepository->reveal()
+        );
+
+        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteFactoryRepository', $class);
+    }
+}

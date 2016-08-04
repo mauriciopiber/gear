@@ -57,7 +57,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group RefactoringSrc
+     * @group src-mvc
      * @dataProvider src
      */
     public function testCreateSrc($data, $template)
