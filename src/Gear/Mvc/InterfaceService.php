@@ -9,6 +9,7 @@ use GearJson\Src\Src;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\CodeTrait;
 
 class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
@@ -16,6 +17,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
     use StringServiceTrait;
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
+    use CodeTrait;
 
     //namespace
     //extends
@@ -23,12 +25,14 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
     public function create(Src $src)
     {
         $this->src = $src;
-
         $this->name = $this->src->getName();
         $this->srcType = $this->src->getType();
 
+        $location = $this->getCode()->getLocation($this->src);
+
+
         $trait = $this->getFileCreator();
-        $trait->setTemplate('template/module/mvc/interface.phtml');
+        $trait->setTemplate('template/module/mvc/interface/src/interface.phtml');
         $trait->setFileName($this->name.'Interface.php');
         $trait->setLocation($location);
 
@@ -54,7 +58,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $this->srcType = $this->src->getType();
 
         $trait = $this->getFileCreator();
-        $trait->setTemplate('template/module/mvc/interface.phtml');
+        $trait->setTemplate('template/module/mvc/interface/db/interface.phtml');
         $trait->setFileName($this->name.'Interface.php');
         $trait->setLocation($location);
 
