@@ -1,0 +1,31 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\CompleteFactoriesRepository;
+
+/**
+ * @group Repository
+ */
+class CompleteFactoriesRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->myDependencyOne = $this->prophesize('MyModule\Repository\MyDependencyOne');
+        $this->myDependencyTwo = $this->prophesize('MyModule\Logic\MyDependencyTwo');
+        $this->myDependencyThree = $this->prophesize('MyModule\Mvc\MyDependencyThree');
+
+        $this->repository = new CompleteFactoriesRepository(
+            $this->myDependencyOne->reveal(),
+            $this->myDependencyTwo->reveal(),
+            $this->myDependencyThree->reveal()
+        );
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Greatest\CompleteFactoriesRepository', $this->repository);
+    }
+}

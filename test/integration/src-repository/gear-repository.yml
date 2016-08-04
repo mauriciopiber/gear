@@ -51,7 +51,7 @@ src:
   98:
     type: Repository
     name: BasicAbstractRepository
-    abstract: true       
+    abstract: true
   99:
     type: Repository
     name: BasicFactoryRepository
@@ -61,7 +61,19 @@ src:
     name: BasicDependencyFactoryRepository
     service: factories
     dependency: Repository\BasicRepository
-      
+  101:
+    type: Repository
+    name: BasicDependenciesFactoryRepository
+    service: factories
+    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
+  102:
+    type: Repository
+    name: CompleteFactoryRepository
+    extends: Repository\BasicAbstractRepository
+    service: factories
+    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
+    namespace: Complete\Repository
+              
   0:
     type: Entity
     name: IntForeignKey
