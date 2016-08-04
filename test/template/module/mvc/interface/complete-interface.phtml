@@ -1,0 +1,22 @@
+<?php
+namespace MyModule\My\Very\Long\Namespaces;
+
+use MyModule\Interfaces\MyAnotherInterface;
+use MyModule\Repository\MyDependencyOne;
+use MyModule\Repository\MyDependencyTwo;
+use MyModule\My\Very\Long\Namespaces\MyDependencyThree;
+
+interface CompleteInterface extends MyAnotherInterface
+{
+    public function setMyDependencyOne(MyDependencyOne $myDependencyOne);
+
+    public function getMyDependencyOne();
+
+    public function setMyDependencyTwo(MyDependencyTwo $myDependencyTwo);
+
+    public function getMyDependencyTwo();
+
+    public function setMyDependencyThree(MyDependencyThree $myDependencyThree);
+
+    public function getMyDependencyThree();
+}
