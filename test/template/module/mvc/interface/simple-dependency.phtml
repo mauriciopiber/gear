@@ -3,9 +3,30 @@ namespace MyModule\Interfaces;
 
 use MyModule\Repository\MyDependency;
 
+/**
+ * PHP Version 5
+ *
+ * @category Interface
+ * @package MyModule/Interfaces
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 interface SimpleDependencyInterface
 {
+    /**
+     * Set My Dependency
+     *
+     * @param MyDependency $myDependency My Dependency
+     *
+     * @return self
+     */
     public function setMyDependency(MyDependency $myDependency);
 
+    /**
+     * Get My Dependency
+     *
+     * @return null|MyModule\Repository\MyDependency
+     */
     public function getMyDependency();
 }

@@ -4,8 +4,15 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 <?php echo $this->use; ?>
 
+<?php echo $this->classDocs;?>
 class <?php echo $this->className;?>Factory implements FactoryInterface
 {
+    /**
+     * Create <?php echo $this->className.PHP_EOL;?>
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @return \<?php echo $this->namespace;?>\<?php echo $this->className.PHP_EOL;?>
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new <?php echo $this->className;?>(

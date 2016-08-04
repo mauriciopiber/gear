@@ -82,7 +82,8 @@ class FactoryService extends AbstractMvc
         $options = [
             'className'                => $this->str('class', $src->getName()),
             'namespace'                => $namespace,
-            'use'                      => $use
+            'use'                      => $use,
+            'classDocs'                => $this->getCode()->getClassDocs($src, 'Factory')
         ***REMOVED***;
 
         if (!empty($src->getDependency())) {

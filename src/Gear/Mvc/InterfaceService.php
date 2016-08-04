@@ -44,6 +44,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $options['namespace'***REMOVED*** = $this->getCode()->getNamespace($this->src);
         $options['extends'***REMOVED*** = $this->getCode()->getExtends($this->src);
         $options['use'***REMOVED*** = $this->getCode()->getInterfaceUse($this->src);
+        $options['classDocs'***REMOVED*** = $this->getCode()->getClassDocs($this->src, 'Interface');
 
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/interface/src/interface.phtml');
