@@ -7,9 +7,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 
 /**
- * @group module
- * @group module-mvc
- * @group module-mvc-console-controller
+ * @group Fix2
  */
 class ConsoleControllerTest extends AbstractTestCase
 {
@@ -26,8 +24,6 @@ class ConsoleControllerTest extends AbstractTestCase
         $this->assertFileExists('vfs://module/src/MyModule/Controller');
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->string = new \GearBase\Util\String\StringService();
 
@@ -38,18 +34,20 @@ class ConsoleControllerTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-cli';
+
+
+        $this->controller = new \Gear\Mvc\ConsoleController\ConsoleController();
+        $this->controller->setFileCreator($this->fileCreator);
+        $this->controller->setStringService($this->string);
+        $this->controller->setModule($this->module->reveal());
     }
 
     public function testCreateModuleController()
     {
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $controller = new \Gear\Mvc\ConsoleController\ConsoleController();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-
-        $file = $controller->module();
+        $file = $this->controller->module();
 
         $expected = $this->template.'/IndexController.phtml';
 
@@ -61,12 +59,10 @@ class ConsoleControllerTest extends AbstractTestCase
 
     public function testCreateModuleControllerFactory()
     {
-        $controller = new \Gear\Mvc\ConsoleController\ConsoleController();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $file = $controller->moduleFactory();
+        $file = $this->controller->moduleFactory();
 
         $expected = $this->template.'/IndexControllerFactory.phtml';
 

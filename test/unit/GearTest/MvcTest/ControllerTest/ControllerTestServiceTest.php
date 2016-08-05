@@ -12,11 +12,8 @@ use GearTest\SingleDbTableTrait;
 use GearTest\ControllerScopeTrait;
 
 /**
- * @group module
- * @group module-mvc
- * @group module-mvc-controller
- * @group module-mvc-controller-test
  * @group Controller
+ * @group Fix3
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
@@ -64,11 +61,18 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+
+        $this->controllerTest = new \Gear\Mvc\Controller\ControllerTestService();
+        $this->controllerTest->setFileCreator($this->fileCreator);
+        $this->controllerTest->setStringService($this->string);
+        $this->controllerTest->setModule($this->module->reveal());
+        $this->controllerTest->setInjector($this->injector);
+        $this->controllerTest->setCodeTest($this->codeTest->reveal());
+        $this->controllerTest->setFactoryTestService($this->factoryTestService->reveal());
     }
 
     public function testCreateTestController()
     {
-
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $controller = new \GearJson\Controller\Controller([
@@ -76,11 +80,6 @@ class ControllerTestServiceTest extends AbstractTestCase
             'object' => '%s\Controller\MyController',
             'service' => 'factories'
         ***REMOVED***);
-
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
 
         $this->factoryTestService->createControllerFactoryTest(
             $controller,
@@ -91,24 +90,8 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->codeTest->getNamespace($controller)->willReturn('ControllerTest')->shouldBeCalled();
         $this->codeTest->getTestNamespace($controller)->willReturn('Controller')->shouldBeCalled();
-        /**
 
-        $this->code->getExtends($controller)->willReturn('AbstractActionController')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-
-
-        */
-        //$this->factoryService->createFactory($controller, vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-
-
-        $controllerTestService->setInjector($this->injector);
-
-
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildController($controller);
+        $file = $this->controllerTest->buildController($controller);
 
 
         $expected = $this->templates.'/CreateTestController.phtml';
@@ -140,15 +123,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
-        $controllerTestService->setInjector($this->injector);
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildAction($controller);
+        $file = $this->controllerTest->buildAction($controller);
 
 
         $expected = $this->templates.'/CreateTestController.phtml';
@@ -191,15 +166,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
-        $controllerTestService->setInjector($this->injector);
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildAction($controller);
+        $file = $this->controllerTest->buildAction($controller);
 
 
         $expected = $this->templates.'/CreateTestActionController.phtml';
@@ -222,14 +189,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-
-        $controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-
-        $file = $controller->module();
+        $file = $this->controllerTest->module();
 
         $expected = $this->template.'/IndexControllerTest.phtml';
 
@@ -246,13 +206,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-
-        $controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-        $file = $controller->moduleFactory();
+        $file = $this->controllerTest->moduleFactory();
 
         $expected = $this->template.'/IndexControllerFactoryTest.phtml';
 
@@ -284,31 +238,19 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
 
-        $this->controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $this->controller->setFileCreator($this->fileCreator);
-        $this->controller->setStringService($this->string);
-        $this->controller->setModule($this->module->reveal());
-
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
-        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
 
-        $this->controller->setColumnService($this->column->reveal());
+        $this->controllerTest->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->controller->setTableService($this->table->reveal());
+        $this->controllerTest->setTableService($this->table->reveal());
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
@@ -318,9 +260,9 @@ class ControllerTestServiceTest extends AbstractTestCase
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getControllerByDb($this->db)->willReturn($controller);
 
-        $this->controller->setSchemaService($schemaService->reveal());
+        $this->controllerTest->setSchemaService($schemaService->reveal());
 
-        $file = $this->controller->introspectFromTable($this->db);
+        $file = $this->controllerTest->introspectFromTable($this->db);
 
         $expected = $this->templates.'/'.$template.'.phtml';
 

@@ -345,8 +345,14 @@ EOS;
             return $location;
         }
 
-
         $type = $this->str('class', $data->getType());
+
+        if ($data instanceof Controller) {
+            return $this->getModule()->map('Controller');
+        }
+
+
+
 
         if ($data instanceof App) {
             $type = 'App'.$type;
