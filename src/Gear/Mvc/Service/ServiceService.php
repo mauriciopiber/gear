@@ -66,6 +66,8 @@ class ServiceService extends AbstractMvc
         $fileName = $this->className.'.php';
         $location = $location;
         $options = array(
+            'implements' => $this->getCode()->getImplements($this->src, [***REMOVED***),
+            'classDocs'  => $this->getCode()->getClassDocs($this->src),
             'module'     => $this->getModule()->getModuleName(),
             'namespace'  => $this->getCode()->getNamespace($this->src),
             'abstract'   => $this->src->getAbstract(),
@@ -74,6 +76,11 @@ class ServiceService extends AbstractMvc
             'uses'       => $this->getCode()->getUse($this->src),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
         );
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
 
         $this->getServiceTestService()->create($this->src);
 
@@ -86,9 +93,8 @@ class ServiceService extends AbstractMvc
         }
 
         $this->srcFile = $this->getFileCreator();
-        $this->srcFile->createFile($template, $options, $fileName, $location);
+        return $this->srcFile->createFile($template, $options, $fileName, $location);
 
-        return true;
     }
 
     public function createDb()

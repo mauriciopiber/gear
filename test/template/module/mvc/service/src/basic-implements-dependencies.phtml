@@ -1,0 +1,30 @@
+<?php
+namespace MyModule\Service;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use MyModule\Service\DbQueryInterface;
+use MyModule\Service\DbAdapterInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use MyModule\Service\DbQueryTrait;
+use MyModule\Service\DbAdapterTrait;
+
+/**
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicImplementsDependenciesService implements
+    ServiceLocatorAwareInterface,
+    DbQueryInterface,
+    DbAdapterInterface
+{
+    use ServiceLocatorAwareTrait;
+
+    use DbQueryTrait;
+
+    use DbAdapterTrait;
+}

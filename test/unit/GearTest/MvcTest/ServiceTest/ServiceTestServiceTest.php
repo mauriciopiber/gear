@@ -48,6 +48,25 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->codeTest = new \Gear\Creator\CodeTest;
 
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setStringService($this->string);
+
+
+        $this->service = new \Gear\Mvc\Service\ServiceTestService();
+        $this->service->setFileCreator($this->fileCreator);
+        $this->service->setStringService($this->string);
+        $this->service->setModule($this->module->reveal());
+        $this->service->setCodeTest($this->codeTest);
+        $this->service->setSrcDependency($this->srcDependency);
+
         $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
 
@@ -96,11 +115,6 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->service = new \Gear\Mvc\Service\ServiceTestService();
-        $this->service->setFileCreator($this->fileCreator);
-        $this->service->setStringService($this->string);
-        $this->service->setModule($this->module->reveal());
-
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
@@ -127,23 +141,12 @@ class ServiceTestServiceTest extends AbstractTestCase
             [
                 'name' => sprintf('%sService', $table),
                 'type' => 'Service',
-                'dependency' => [sprintf('Repository\%sRepository', $table)***REMOVED***
+                'dependency' => [sprintf('Service\%sService', $table)***REMOVED***
         ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
         $this->service->setSchemaService($schemaService->reveal());
-
-        $this->srcDependency = new \Gear\Creator\SrcDependency;
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->service->setSrcDependency($this->srcDependency);
-        $this->codeTest->setSrcDependency($this->srcDependency);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-        $this->service->setCodeTest($this->codeTest);
-
-
 
         $this->service->setTraitTestService($this->traitTestService->reveal());
 
@@ -159,4 +162,55 @@ class ServiceTestServiceTest extends AbstractTestCase
             file_get_contents($file)
         );
     }
+
+    public function src()
+    {
+        return $this->getScope('Service');
+    }
+
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-service-test
+     * @dataProvider src
+     */
+    public function testCreateSrc($data, $template)
+    {
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
+
+        if (!empty($data->getNamespace())) {
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+        } else {
+            $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+            $this->service->setFactoryTestService($this->factory->reveal());
+        }
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setModule($this->module->reveal());
+        $serviceManager->setStringService($this->string);
+
+        $this->service->setServiceManager($serviceManager);
+
+        $this->service->setTraitTestService($this->traitTestService->reveal());
+
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $this->service->setSrcDependency($srcDependency);
+
+        $file = $this->service->create($data);
+
+        $expected = $this->templates.'/src/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
 }

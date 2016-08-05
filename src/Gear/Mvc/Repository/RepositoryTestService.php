@@ -84,11 +84,6 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->repository = true;
-
-        $this->setBaseArray(array(
-            'method' => $this->tableName, 'module' => $this->getModule()->getModuleName()
-        ));
-
         $this->usePrimaryKey = true;
 
         $location = $this->getModule()->getTestRepositoryFolder();
