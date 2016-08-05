@@ -4,6 +4,7 @@ namespace GearTest\MvcTest\ConsoleControllerTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\ControllerScopeTrait;
 
 /**
  * @group module
@@ -12,6 +13,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
  */
 class ConsoleControllerTest extends AbstractTestCase
 {
+    use ControllerScopeTrait;
 
     public function setUp()
     {
@@ -74,6 +76,20 @@ class ConsoleControllerTest extends AbstractTestCase
         );
     }
 
+    public function controller()
+    {
+        return $this->getControllerScope('Console');
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-console
+     * @dataProvider controller
+     */
+    public function testConstructController($controller, $expected)
+    {
+        $this->assertTrue(true);
+    }
 
 }
 

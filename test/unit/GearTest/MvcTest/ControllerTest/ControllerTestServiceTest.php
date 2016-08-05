@@ -9,7 +9,7 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
-
+use GearTest\ControllerScopeTrait;
 
 /**
  * @group module
@@ -25,6 +25,7 @@ class ControllerTestServiceTest extends AbstractTestCase
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
     use SingleDbTableTrait;
+    use ControllerScopeTrait;
 
     public function setUp()
     {
@@ -330,4 +331,18 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     }
 
+    public function controller()
+    {
+        return $this->getControllerScope('Web');
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-controller-test
+     * @dataProvider controller
+     */
+    public function testConstructControllerTest($controller, $expected)
+    {
+        $this->assertTrue(true);
+    }
 }
