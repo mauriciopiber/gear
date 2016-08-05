@@ -9,13 +9,7 @@ use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 
 /**
- * @group fix-table
- * @group module
- * @group module-mvc
- * @group module-mvc-service
- * @group module-mvc-service-service-test
- * @group do-it
- * @group Repository6
+ * @group src-mvc
  */
 class RepositoryServiceTest extends AbstractTestCase
 {
@@ -25,10 +19,10 @@ class RepositoryServiceTest extends AbstractTestCase
     use AllColumnsDbUniqueNotNullTableTrait;
     use \GearTest\ScopeTrait;
 
-
     public function setUp()
     {
         parent::setUp();
+
         vfsStream::setup('module');
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
