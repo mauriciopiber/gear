@@ -16,7 +16,7 @@ trait ScopeTrait
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
                         'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => $srcType.'\AbstractService',
+                        'extends' => $srcType.'\Abstract'.$srcType,
                         'namespace' => 'Greatest',
                         'service' => 'invokables',
                         'abstract' => true
@@ -31,7 +31,7 @@ trait ScopeTrait
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
                         'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => $srcType.'\AbstractService',
+                        'extends' => $srcType.'\Abstract'.$srcType,
                         'namespace' => 'Greatest',
                         'service' => 'factories',
                         'abstract' => true
@@ -47,7 +47,7 @@ trait ScopeTrait
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
                         'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => $srcType.'\AbstractService',
+                        'extends' => $srcType.'\Abstract'.$srcType,
                         'namespace' => 'Greatest',
                         'service' => 'invokables'
                     ***REMOVED***
@@ -61,7 +61,7 @@ trait ScopeTrait
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
                         'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => $srcType.'\AbstractService',
+                        'extends' => $srcType.'\Abstract'.$srcType,
                         'namespace' => 'Greatest',
                         'service' => 'factories'
                     ***REMOVED***
@@ -75,7 +75,7 @@ trait ScopeTrait
                         'type' => $srcType,
                         'implements' => ['ColumnInterface\\'.$srcType.'BeforeInterface', 'ColumnInterface\\'.$srcType.'AfterInterface'***REMOVED***,
                         'dependency' => [$srcType.'\MyDependencyOne', 'Logic\MyDependencyTwo', 'Mvc\MyDependencyThree'***REMOVED***,
-                        'extends' => $srcType.'\AbstractService',
+                        'extends' => $srcType.'\Abstract'.$srcType,
                         'namespace' => 'Greatest',
                         'service' => 'factories'
                     ***REMOVED***
@@ -176,7 +176,7 @@ trait ScopeTrait
                     [
                         'name' => sprintf('BasicExtends%s', $srcType),
                         'type' => $srcType,
-                        'extends' => $srcType.'\AbstractService'
+                        'extends' => $srcType.'\Abstract'.$srcType
                     ***REMOVED***
                 ),
                 'basic-extends',
