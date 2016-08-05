@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\SingleDbTableTrait;
+use GearTest\ControllerScopeTrait;
 
 /**
  * @group module
@@ -16,6 +17,7 @@ class ControllerServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
     use SingleDbTableTrait;
+    use ControllerScopeTrait;
 
     public function setUp()
     {
@@ -396,6 +398,18 @@ class ControllerServiceTest extends AbstractTestCase
 
     }
 
+    public function controller()
+    {
+        return $this->getControllerScope('Web');
+    }
 
+    /**
+     * @group src-mvc
+     * @group src-mvc-controller
+     * @dataProvider controller
+     */
+    public function testConstructController($controller, $expected)
+    {
+        $this->assertTrue(true);
+    }
 }
-
