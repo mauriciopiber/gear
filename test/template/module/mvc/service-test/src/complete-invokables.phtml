@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\CompleteInvokablesService;
+
+/**
+ * @group Service
+ */
+class CompleteInvokablesServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = new CompleteInvokablesService();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Greatest\CompleteInvokablesService', $this->service);
+    }
+}

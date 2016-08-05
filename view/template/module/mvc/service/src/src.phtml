@@ -1,11 +1,11 @@
 namespace <?php echo $this->namespace;?>;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 <?php echo $this->uses;?>
-
-<?= ($this->abstract) ? 'abstract ' : ''; ?>class <?php echo $this->class;?> <?php echo ($this->extends) ? 'extends '.$this->extends.' ' : ''; ?>implements ServiceLocatorAwareInterface<?php echo PHP_EOL;?>
+<?php echo $this->classDocs;?>
+<?= ($this->abstract) ? 'abstract ' : ''; ?>class <?php echo $this->class;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo $this->implements;?>
 {
-    use ServiceLocatorAwareTrait;
-<?php echo $this->attributes;?>
+<?php echo ($this->attributes) ? $this->attributes : '';?>
+<?php echo (!empty($attributes) && !empty($constructor)) ? PHP_EOL : '';?>
+<?php echo $this->constructor;?>
+<?php echo (empty($attributes) && empty($constructor)) ? PHP_EOL : '';?>
 }

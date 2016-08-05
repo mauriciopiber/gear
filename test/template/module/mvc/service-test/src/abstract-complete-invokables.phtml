@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\AbstractCompleteInvokablesService;
+
+/**
+ * @group Service
+ */
+class AbstractCompleteInvokablesServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = $this->getMockForAbstractClass('MyModule\Greatest\AbstractCompleteInvokablesService', [***REMOVED***, '', false);
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteInvokablesService', $this->service);
+    }
+}

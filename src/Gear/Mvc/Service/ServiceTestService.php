@@ -31,12 +31,6 @@ class ServiceTestService extends AbstractMvcTest
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 
-        $this->setBaseArray(array(
-            'method' => $this->tableName.'Service',
-            'module' => $this->getModule()->getModuleName(),
-            'entityName' => $this->tableName
-        ));
-
         $this->usePrimaryKey = true;
 
         $fileCreator = $this->getFileCreator();

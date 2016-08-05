@@ -1,0 +1,27 @@
+<?php
+namespace MyModuleTest\ServiceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\BasicDependencyFactoryService;
+
+/**
+ * @group Service
+ */
+class BasicDependencyFactoryServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->myDependency = $this->prophesize('MyModule\Service\MyDependency');
+
+        $this->service = new BasicDependencyFactoryService(
+            $this->myDependency->reveal()
+        );
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Service\BasicDependencyFactoryService', $this->service);
+    }
+}

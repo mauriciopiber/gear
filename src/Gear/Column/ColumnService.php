@@ -361,11 +361,6 @@ class ColumnService implements ServiceLocatorAwareInterface
     private function enableColumnParts($key)
     {
         $enableParts = [
-            'updateArray',
-            'updateAssert',
-            'insertSelect',
-            'insertAssert',
-            'insertArray',
             'staticTest',
         ***REMOVED***;
 
