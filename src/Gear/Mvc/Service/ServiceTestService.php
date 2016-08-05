@@ -136,32 +136,49 @@ class ServiceTestService extends AbstractMvcTest
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        if ($src->getService() == static::$factories) {
+        if ($src->getService() == static::$factories && $src->getAbstract() === false) {
             $this->getFactoryTestService()->createFactoryTest($src, $location);
         }
 
-        $this->getTraitTestService()->createTraitTest($src, $location);
+        if ($src->getAbstract() === false) {
+            $this->getTraitTestService()->createTraitTest($src, $location);
+        }
 
 
-        $template = 'template/module/mvc/service/src/src-test.phtml';
-
-        $fileName = $this->src->getName().'Test.php';
-
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
-
-
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $options = [
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-            'functions' => $this->dependency->getTests(),
             'var' => $this->str('var-lenght', $this->src->getName()),
-            'mock' => $mock,
             'className'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName()
         ***REMOVED***;
+
+        if ($this->src->getService() === 'factories') {
+
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
+
+            $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+
+            if ($this->src->getAbstract() === true) {
+                $options['dependencyReveal'***REMOVED*** = $this->getCodeTest()->getDependencyReveal($this->src);
+            } else {
+                $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+            }
+
+        } else {
+            //add abstract-factory
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';
+        }
+
+
+        $template = 'template/module/mvc/service-test/src/'.$templateView.'.phtml';
+
+        $fileName = $this->src->getName().'Test.php';
+
+
+
 
 
         $this->srcFile = $this->getFileCreator();

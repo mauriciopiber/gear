@@ -39,12 +39,14 @@ EOS;
 
     public function getConstructor($src)
     {
+        $names = $this->str('var', $src->getType());
+
         $template = '';
 
-        $open = '$this->repository = new %s(';
+        $open = '$this->%s = new %s(';
 
         $ndnt = str_repeat(' ', 4*2);
-        $template .= $ndnt.sprintf($open, $this->str('class', $src->getName()));
+        $template .= $ndnt.sprintf($open, $names, $this->str('class', $src->getName()));
 
 
         if (empty($src->getDependency())) {
