@@ -168,7 +168,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         return $this->getScope('Service');
     }
 
-
     /**
      * @group src-mvc
      * @group src-mvc-service-test

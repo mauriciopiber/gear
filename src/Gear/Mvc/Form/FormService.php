@@ -99,7 +99,7 @@ class FormService extends AbstractMvc
 
         $this->getFormTestService()->createFromSrc($this->src);
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/form/src.phtml',
             array(
                 'namespace' => $this->getCode()->getNamespace($this->src),
