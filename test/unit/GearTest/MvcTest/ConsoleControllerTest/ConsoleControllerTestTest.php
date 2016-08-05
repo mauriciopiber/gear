@@ -7,10 +7,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 
 /**
- * @group module
- * @group module-mvc
- * @group module-mvc-console-controller
- * @group module-mvc-controller-test
+ * @group Fix4
  */
 class ConsoleControllerTestTest extends AbstractTestCase
 {
@@ -28,8 +25,6 @@ class ConsoleControllerTestTest extends AbstractTestCase
         $this->assertFileExists('vfs://module/test/unit/MyModuleTest/ControllerTest');
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest/ControllerTest'))->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->string = new \GearBase\Util\String\StringService();
 
@@ -40,18 +35,19 @@ class ConsoleControllerTestTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-cli';
+
+        $this->controller = new \Gear\Mvc\ConsoleController\ConsoleControllerTest();
+        $this->controller->setFileCreator($this->fileCreator);
+        $this->controller->setStringService($this->string);
+        $this->controller->setModule($this->module->reveal());
     }
 
     public function testCreateModuleController()
     {
+        $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest/ControllerTest'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $controller = new \Gear\Mvc\ConsoleController\ConsoleControllerTest();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-
-        $file = $controller->module();
+        $file = $this->controller->module();
 
         $expected = $this->template.'/IndexControllerTest.phtml';
 
@@ -63,12 +59,10 @@ class ConsoleControllerTestTest extends AbstractTestCase
 
     public function testCreateModuleControllerFactory()
     {
-        $controller = new \Gear\Mvc\ConsoleController\ConsoleControllerTest();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
+        $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest/ControllerTest'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $file = $controller->moduleFactory();
+        $file = $this->controller->moduleFactory();
 
         $expected = $this->template.'/IndexControllerFactoryTest.phtml';
 
