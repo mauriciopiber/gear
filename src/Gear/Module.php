@@ -23,6 +23,13 @@ class Module implements
 
     protected $moduleManager;
 
+    /**
+     * Set Console Banner
+     *
+     * @param Console $console
+     *
+     * @return string
+     */
     public function getConsoleBanner(Console $console)
     {
         unset($console);
@@ -36,6 +43,13 @@ class Module implements
         return $banner;
     }
 
+    /**
+     * Set Module Manager
+     *
+     * @param ModuleManager $moduleManager
+     *
+     * @return \Gear\Module
+     */
     public function setModuleManager($moduleManager)
     {
         $this->moduleManager = $moduleManager;

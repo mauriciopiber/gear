@@ -29,6 +29,7 @@ class ServiceTestServiceTest extends AbstractTestCase
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
     use SingleDbTableTrait;
+    use \GearTest\ScopeTrait;
 
     public function setUp()
     {
