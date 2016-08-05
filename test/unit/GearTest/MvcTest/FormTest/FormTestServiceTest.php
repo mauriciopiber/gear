@@ -7,6 +7,7 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
+use GearTest\ScopeTrait;
 
 /**
  * @group src-form
@@ -18,6 +19,7 @@ class FormTestServiceTest extends AbstractTestCase
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
+    use ScopeTrait;
 
     public function setUp()
     {
@@ -35,6 +37,29 @@ class FormTestServiceTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/form-test';
+
+        $this->form = new \Gear\Mvc\Form\FormTestService();
+        $this->form->setStringService($this->string);
+        $this->form->setFileCreator($this->fileCreator);
+        $this->form->setModule($this->module->reveal());
+
+        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
+
+        $this->codeTest = new \Gear\Creator\CodeTest;
+
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setStringService($this->string);
+
+        $this->form->setCodeTest($this->codeTest);
 
     }
 
@@ -60,10 +85,6 @@ class FormTestServiceTest extends AbstractTestCase
 
         $src = new \GearJson\Src\Src(['name' => $table.'Form', 'type' => 'Form'***REMOVED***);
 
-        $this->form = new \Gear\Mvc\Form\FormTestService();
-        $this->form->setStringService($this->string);
-        $this->form->setFileCreator($this->fileCreator);
-        $this->form->setModule($this->module->reveal());
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Form')->willReturn($src);
@@ -96,4 +117,57 @@ class FormTestServiceTest extends AbstractTestCase
 
         $this->assertEquals(file_get_contents($this->template.'/'.$expected.'.phtml'), file_get_contents($file));
     }
+
+
+    public function src()
+    {
+        $srcType = 'Form';
+
+        return $this->getScopeForm($srcType);
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-form-test
+     * @dataProvider src
+     */
+    public function testCreateSrc($data, $template)
+    {
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
+
+        if (!empty($data->getNamespace())) {
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+        } else {
+            $this->module->map('FormTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+            $this->form->setFactoryTestService($this->factory->reveal());
+        }
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setModule($this->module->reveal());
+        $serviceManager->setStringService($this->string);
+
+        $this->form->setServiceManager($serviceManager);
+
+        $this->form->setTraitTestService($this->traitTestService->reveal());
+
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $this->form->setSrcDependency($srcDependency);
+
+        $file = $this->form->createFromSrc($data);
+
+        $expected = $this->template.'/src/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
 }

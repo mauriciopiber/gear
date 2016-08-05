@@ -7,6 +7,7 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
+use GearTest\ScopeTrait;
 
 /**
  * @group RefactoringUnitTest
@@ -20,6 +21,7 @@ class FilterTestServiceTest extends AbstractTestCase
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
+    use ScopeTrait;
 
     public function setUp()
     {
@@ -38,6 +40,30 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter-test';
 
+        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
+
+        $this->codeTest = new \Gear\Creator\CodeTest;
+
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setStringService($this->string);
+
+
+
+        $this->filter = new \Gear\Mvc\Filter\FilterTestService();
+        $this->filter->setStringService($this->string);
+        $this->filter->setFileCreator($this->fileCreator);
+        $this->filter->setModule($this->module->reveal());
+
+        $this->filter->setCodeTest($this->codeTest);
     }
 
 
@@ -65,12 +91,6 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $src = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
 
-
-        $this->filter = new \Gear\Mvc\Filter\FilterTestService();
-        $this->filter->setStringService($this->string);
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setModule($this->module->reveal());
-
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
 
@@ -85,7 +105,57 @@ class FilterTestServiceTest extends AbstractTestCase
         $file = $this->filter->introspectFromTable($db);
 
         $this->assertEquals(file_get_contents($this->template.'/'.$expect.'.phtml'), file_get_contents($file));
-
     }
 
+    public function src()
+    {
+        $srcType = 'Filter';
+
+        return $this->getScopeForm($srcType);
+    }
+
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-filter-test
+     * @dataProvider src
+     */
+    public function testCreateSrc($data, $template)
+    {
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
+
+        if (!empty($data->getNamespace())) {
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+        } else {
+            $this->module->map('FilterTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+            $this->filter->setFactoryTestService($this->factory->reveal());
+        }
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setModule($this->module->reveal());
+        $serviceManager->setStringService($this->string);
+
+        $this->filter->setServiceManager($serviceManager);
+
+        $this->filter->setTraitTestService($this->traitTestService->reveal());
+
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $this->filter->setSrcDependency($srcDependency);
+
+        $file = $this->filter->create($data);
+
+        $expected = $this->template.'/src/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
 }

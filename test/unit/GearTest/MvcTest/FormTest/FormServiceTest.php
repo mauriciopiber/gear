@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\FilterTest;
+namespace GearTest\MvcTest\FormTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
@@ -10,7 +10,7 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
-class FilterServiceTest extends AbstractTestCase
+class FormServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
     use AllColumnsDbNotNullTableTrait;
@@ -37,7 +37,7 @@ class FilterServiceTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         //template
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter';
+        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/form';
 
         //src-dependency
         $this->srcDependency = new \Gear\Creator\SrcDependency();
@@ -57,36 +57,36 @@ class FilterServiceTest extends AbstractTestCase
         //injector
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
 
-        $this->filter = new \Gear\Mvc\Filter\FilterService();
+        $this->form = new \Gear\Mvc\Form\FormService();
 
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setStringService($this->string);
-        $this->filter->setModule($this->module->reveal());
-        $this->filter->setCode($this->code);
+        $this->form->setFileCreator($this->fileCreator);
+        $this->form->setStringService($this->string);
+        $this->form->setModule($this->module->reveal());
+        $this->form->setCode($this->code);
 
-        $this->filter->setSrcDependency($this->srcDependency);
+        $this->form->setSrcDependency($this->srcDependency);
 
-        //filter-test
-        $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
-        $this->filter->setFilterTestService($this->filterTest->reveal());
+        //form-test
+        $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
+        $this->form->setFormTestService($this->formTest->reveal());
 
         //trait
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->filter->setTraitService($this->traitService->reveal());
+        $this->form->setTraitService($this->traitService->reveal());
 
         //factory
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->filter->setFactoryService($this->factory->reveal());
+        $this->form->setFactoryService($this->factory->reveal());
 
         //interface
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
-        $this->filter->setInterfaceService($this->interface->reveal());
+        $this->form->setInterfaceService($this->interface->reveal());
     }
 
 
     public function src()
     {
-        $srcType = 'Filter';
+        $srcType = 'Form';
 
         return $this->getScopeForm($srcType);
     }
@@ -94,7 +94,7 @@ class FilterServiceTest extends AbstractTestCase
 
     /**
      * @group src-mvc
-     * @group src-mvc-filter
+     * @group src-mvc-form
      * @dataProvider src
      */
     public function testCreateSrc($data, $template)
@@ -106,7 +106,7 @@ class FilterServiceTest extends AbstractTestCase
             $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
         } else {
-            $this->module->map('Filter')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+            $this->module->map('Form')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
         if ($data->getService() == 'factories' && $data->getAbstract() == false) {
@@ -121,7 +121,7 @@ class FilterServiceTest extends AbstractTestCase
             }
         }
 
-        $file = $this->filter->create($data);
+        $file = $this->form->create($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 

@@ -157,7 +157,7 @@ class FilterService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/filter/src.phtml',
             array(
                 'namespace' => $this->getCode()->getNamespace($this->src),

@@ -5,6 +5,31 @@ use Symfony\Component\Yaml\Parser;
 
 trait ScopeTrait
 {
+    public function getScopeForm($srcType)
+    {
+        return [
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('LongNamespace%s', $srcType),
+                        'type' => $srcType,
+                        'namespace' => 'Basic\\Feature\\Issue\\Task'
+                    ***REMOVED***
+                ),
+                'long-namespace',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('Basic%s', $srcType),
+                        'type' => $srcType
+                    ***REMOVED***
+                ),
+                'basic',
+            ***REMOVED***,
+        ***REMOVED***;
+    }
+
     public function getScope($srcType)
     {
 
