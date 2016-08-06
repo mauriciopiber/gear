@@ -22,7 +22,7 @@ class FilterTestService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($src);
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/filter/test-src.phtml',
+            'template/module/mvc/filter-test/src/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),

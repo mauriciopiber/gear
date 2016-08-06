@@ -1,11 +1,18 @@
 namespace <?php echo $this->namespace;?>;
 
-use GearBase\Form\AbstractForm;
-
-class <?php echo $this->class;?> extends AbstractForm
+<?php echo $this->use;?>
+<?php echo $this->classDocs;?>
+class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
+    /**
+     * Create the Form
+     *
+     * @return \<?php echo $this->namespace;?>\<?php echo $this->class.PHP_EOL;?>
+     */
     public function __construct()
     {
-        parent::__construct('<?php echo $this->class;?>');
+        parent::__construct('<?php echo $this->classUrl;?>');
+
+        return $this;
     }
 }

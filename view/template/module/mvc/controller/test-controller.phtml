@@ -1,6 +1,6 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
 
-use <?php echo $this->module?>Test\ControllerTest\AbstractControllerTestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
 use <?php echo $this->module?>\<?php echo $this->namespace;?>\<?php echo $this->controllerName;?>;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
@@ -10,7 +10,7 @@ use Zend\Mvc\Router\RouteMatch;
  * @group <?php echo $this->controllerName.PHP_EOL; ?>
  * @group Controller
  */
-class <?php echo $this->controllerName; ?>Test extends AbstractControllerTestCase
+class <?php echo $this->controllerName; ?>Test extends TestCase
 {
     protected $controller;
     protected $request;

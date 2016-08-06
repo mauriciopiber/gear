@@ -84,6 +84,6 @@ class ConsoleControllerTestTest extends AbstractTestCase
      */
     public function testConstructControllerTest($controller, $expected)
     {
-        $this->assertTrue(true);
+        $this->assertTrue(false);
     }
 }

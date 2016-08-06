@@ -307,7 +307,7 @@ class ControllerServiceTest extends AbstractTestCase
 
     public function controller()
     {
-        return $this->getControllerScope('Web');
+        return $this->getControllerScope('Action');
     }
 
     /**
@@ -319,11 +319,13 @@ class ControllerServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 
         $this->code = new \Gear\Creator\Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
         $this->code->setControllerDependency($this->controllerDependency);
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->controllerService->setCode($this->code);
 
