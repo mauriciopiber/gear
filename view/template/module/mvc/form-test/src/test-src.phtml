@@ -1,0 +1,25 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>;
+
+/**
+ * @group Form
+ */
+class <?php echo $this->className;?>Test extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new <?php echo $this->className;?>();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            '<?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>',
+            $this->form
+        );
+    }
+<?php echo $this->functions;?>
+}

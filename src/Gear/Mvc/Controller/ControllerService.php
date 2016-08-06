@@ -70,19 +70,25 @@ class ControllerService extends AbstractMvc implements
         $this->controller = $controller;
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
+
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
+            'extends' => $this->getCode()->getExtends($controller),
+            'use' => $this->getCode()->getUse($controller),
+            'namespace' => $this->getCode()->getNamespace($controller),
+            'module' => $this->module->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+            'actions' => $controller->getAction(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getName()),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($controller->getService()->getService() == 'factories')
+          ? $this->getCode()->getConstructor($controller)
+          : '';
+
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
-        $this->file->setOptions(
-            [
-                'extends' => $this->getCode()->getExtends($controller),
-                'use' => $this->getCode()->getUse($controller),
-                'namespace' => $this->getCode()->getNamespace($controller),
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName()),
-            ***REMOVED***
-        );
+        $this->file->setOptions($options);
 
         if ($controller->getService()->getService() == 'factories') {
             $this->getFactoryService()->createFactory($controller, $this->location);

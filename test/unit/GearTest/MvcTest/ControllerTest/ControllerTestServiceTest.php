@@ -69,6 +69,10 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->controllerTest->setInjector($this->injector);
         $this->controllerTest->setCodeTest($this->codeTest->reveal());
         $this->controllerTest->setFactoryTestService($this->factoryTestService->reveal());
+
+        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+        $this->controllerDependency->setStringService($this->string);
+        $this->controllerDependency->setModule($this->module->reveal());
     }
 
     public function testCreateTestController()
@@ -275,7 +279,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     public function controller()
     {
-        return $this->getControllerScope('Web');
+        return $this->getControllerScope('Action');
     }
 
     /**
@@ -285,6 +289,29 @@ class ControllerTestServiceTest extends AbstractTestCase
      */
     public function testConstructControllerTest($controller, $expected)
     {
-        $this->assertTrue(true);
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
+        $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
+
+        $this->codeTest = new \Gear\Creator\CodeTest();
+        $this->codeTest->setStringService($this->string);
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setControllerDependency($this->controllerDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $this->controllerTest->setCodeTest($this->codeTest);
+
+        $file = $this->controllerTest->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+
+            foreach ($controller->getActions() as $action) {
+                $this->controllerTest->buildAction($action);
+            }
+        }
+
+        $expected = $this->templates.'/src/'.$expected.'.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
 }

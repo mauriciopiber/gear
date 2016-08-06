@@ -17,6 +17,8 @@ use GearJson\Schema\SchemaServiceTrait;
 
 class FilterService extends AbstractMvc
 {
+    public static $extends = '\Zend\InputFilter\InputFilter';
+
     use SchemaServiceTrait;
 
     use FilterTestServiceTrait;
@@ -146,6 +148,10 @@ class FilterService extends AbstractMvc
             return $this->createDb();
         }
 
+        if (empty($this->src->getExtends())) {
+            $this->src->setExtends(static::$extends);
+        }
+
         $location = $this->getCode()->getLocation($this->src);
 
         $this->getTraitService()->createTrait($this->src, $location);
@@ -160,10 +166,11 @@ class FilterService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/mvc/filter/src.phtml',
             array(
+                'classDocs' => $this->getCode()->getClassDocs($this->src),
                 'namespace' => $this->getCode()->getNamespace($this->src),
                 'extends'    => $this->getCode()->getExtends($this->src),
-                'uses'       => $this->getCode()->getUse($this->src),
-                'attributes' => $this->getCode()->getUseAttribute($this->src),
+                'use'       => $this->getCode()->getUse($this->src),
+                //'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ),

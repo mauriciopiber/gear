@@ -4,6 +4,7 @@ namespace MyModule\Controller;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Mvc\Controller\AbstractActionController;
+use MyModule\Repository\MyRepositoryTrait;
 
 /**
  * PHP Version 5
@@ -14,7 +15,7 @@ use Zend\Mvc\Controller\AbstractActionController;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class BasicAction extends AbstractActionController
+class BasicDependencyAction extends AbstractActionController
 {
-
+    use MyRepositoryTrait;
 }

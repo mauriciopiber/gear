@@ -26,7 +26,13 @@ class Code extends AbstractCode implements
         }
 
         if ($src->getNamespace() === null) {
-            $namespace = $this->getModule()->getModuleName().'\\'.$src->getType();
+            $namespace = $this->getModule()->getModuleName().'\\';
+
+            if ($src instanceof Controller) {
+                $namespace .= 'Controller';
+            } else {
+                $namespace .= $src->getType();
+            }
         } else {
             $namespace = $this->resolveNamespace($src->getNamespace());
         }
@@ -283,7 +289,9 @@ EOS;
             //cria um diretório específico.
         }
 
-        if ($data->getType() == 'SearchForm') {
+        if ($data instanceof Controller) {
+            $type = 'Controller';
+        } elseif ($data->getType() == 'SearchForm') {
             $type = 'Form\\Search';
         } elseif ($data->getType() == 'ViewHelper') {
             $type = 'View\\Helper';

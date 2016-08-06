@@ -21,6 +21,8 @@ class FormService extends AbstractMvc
 
     static protected $defaultFolder = null;
 
+    static public $extends = '\Zend\Form\Form';
+
     use FormTestServiceTrait;
 
     use SchemaServiceTrait;
@@ -86,6 +88,11 @@ class FormService extends AbstractMvc
         }
 
         $this->src = $src;
+
+        if (empty($this->src->getExtends())) {
+            $this->src->setExtends(static::$extends);
+        }
+
         $this->className = $this->src->getName();
 
         $location = $this->getCode()->getLocation($this->src);
@@ -102,10 +109,12 @@ class FormService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/src.phtml',
             array(
+                'classDocs' => $this->getCode()->getClassDocs($this->src),
                 'namespace' => $this->getCode()->getNamespace($this->src),
                 'class'   => $this->className,
+                'classUrl' => $this->str('url', $this->className),
                 'extends'    => $this->getCode()->getExtends($this->src),
-                'uses'       => $this->getCode()->getUse($this->src),
+                'use'       => $this->getCode()->getUse($this->src),
                 'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'module'  => $this->getModule()->getModuleName()
             ),

@@ -233,7 +233,11 @@ EOS;
             return $location;
         }
 
-        $type = $this->str('class', $data->getType());
+        if ($data instanceof Controller) {
+            $type = 'Controller';
+        } else {
+            $type = $this->str('class', $data->getType());
+        }
 
         if ($data instanceof App) {
             $type = 'App'.$type.'Spec';
