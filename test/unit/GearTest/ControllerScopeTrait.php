@@ -27,6 +27,20 @@ trait ControllerScopeTrait
                 'basic-dependency'
             ***REMOVED***,
             */
+
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicFirst%s', $srcType),
+                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
+                    'type' => $srcType,
+                    'actions' => [
+                        [
+                            'name' => 'FirstAction'
+                        ***REMOVED***
+                    ***REMOVED***
+                ***REMOVED***),
+                'basic-first'
+            ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFactoryNamespace%s', $srcType),
@@ -56,7 +70,6 @@ trait ControllerScopeTrait
                 ***REMOVED***),
                 'basic-namespace'
             ***REMOVED***,
-
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),

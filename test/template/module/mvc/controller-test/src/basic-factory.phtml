@@ -21,6 +21,10 @@ class BasicFactoryActionTest extends TestCase
 
     public function setUp()
     {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
         parent::setUp();
 
         $this->controller = new BasicFactoryAction();

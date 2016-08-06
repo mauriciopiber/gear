@@ -333,9 +333,8 @@ class ControllerServiceTest extends AbstractTestCase
 
         if (!empty($controller->getActions())) {
 
-            foreach ($controller->getActions() as $action) {
-                $this->controllerService->buildAction($action);
-            }
+            $this->controllerService->buildAction($controller);
+
         }
 
         $expected = $this->templates.'/src/'.$expected.'.phtml';
