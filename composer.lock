@@ -955,17 +955,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.23",
+            "version": "0.2.24",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7"
+                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.23-cbb1d1.tar",
-                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7",
-                "shasum": "f67ae9b2d9c8aefedb73459b90c93ed91d498951"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.24-f61e9a.tar",
+                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba",
+                "shasum": "19e6aaec971fd5ec989bfba6bd96b89ffbd7271a"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -992,15 +992,21 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-07-28 01:45:44"
+            "time": "2016-08-02 21:18:57"
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.43",
+            "version": "0.2.45",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "3c7d463f75f4053c9da2a8f7d21c7eba2309e7ec"
+                "reference": "430a0d9bf6eeeeb5b236bb140981a2c10dce920c"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.45-f67d0a.tar",
+                "reference": "430a0d9bf6eeeeb5b236bb140981a2c10dce920c",
+                "shasum": "b6e6ecb62d9342184a3fedaf5f1ef5ac301c22fd"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1033,7 +1039,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-07-30 19:28:36"
+            "time": "2016-08-07 14:37:30"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1079,17 +1085,17 @@
         },
         {
             "name": "phpcollection/phpcollection",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-collection.git",
-                "reference": "b8bf55a0a929ca43b01232b36719f176f86c7e83"
+                "reference": "f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/b8bf55a0a929ca43b01232b36719f176f86c7e83",
-                "reference": "b8bf55a0a929ca43b01232b36719f176f86c7e83",
-                "shasum": "23c6f3e3f68fe269d4ddc2d68ff0c7ddd5837d03"
+                "url": "https://mirror.pibernetwork.com/dist/phpcollection-phpcollection-f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6-zip-ca7e06.tar",
+                "reference": "f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6",
+                "shasum": "20677c3fdbe07f02e6512ee5edca0ca40863551a"
             },
             "require": {
                 "phpoption/phpoption": "1.*"
@@ -1097,7 +1103,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4-dev"
                 }
             },
             "autoload": {
@@ -1111,10 +1117,8 @@
             ***REMOVED***,
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
                 }
             ***REMOVED***,
             "description": "General-Purpose Collection Library for PHP",
@@ -1125,7 +1129,7 @@
                 "sequence",
                 "set"
             ***REMOVED***,
-            "time": "2014-03-11 13:46:42"
+            "time": "2015-05-17 12:39:23"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1631,17 +1635,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.8",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6"
+                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3132365e1430c091f208e120b8845d39c25f20e6",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6",
-                "shasum": "1f0e0687ce5dfeaea85ae41a6d8cf1c4b79241dc"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b-zip-f06a39.tar",
+                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b",
+                "shasum": "29a35596975c09a1a36cb93514fac87e4acbf52b"
             },
             "require": {
                 "ext-dom": "*",
@@ -1679,7 +1683,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.4.x-dev"
+                    "dev-master": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -1705,7 +1709,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-07-26 14:48:00"
+            "time": "2016-08-05 04:49:02"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -6886,17 +6890,17 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "shasum": "b5346a46675864a66afa4ff9c6844d25a38451f8"
+                "url": "https://mirror.pibernetwork.com/dist/psr-http-message-f6561bf28d520154e4b0ec72be95418abe6d9363-zip-7ab320.tar",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": "6d16314c4047bf26057bbb1c79cb276d330cd92d"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -6923,6 +6927,7 @@
                 }
             ***REMOVED***,
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -6931,7 +6936,7 @@
                 "request",
                 "response"
             ***REMOVED***,
-            "time": "2015-05-04 20:22:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "sebastian/finder-facade",

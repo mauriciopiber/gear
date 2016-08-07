@@ -58,7 +58,7 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***
         );
 
-        if ($controller->getService()->getService() == 'factories') {
+        if ($controller->getService() == 'factories') {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
 

@@ -64,7 +64,7 @@ class ConsoleController extends AbstractMvc
             ***REMOVED***
         );
 
-        if ($controller->getService()->getService() == 'factories') {
+        if ($controller->getService() == 'factories') {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 
@@ -94,7 +94,7 @@ class ConsoleController extends AbstractMvc
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
 
-        /*      if ($this->controller->getService()->getService() == 'factories') {
+        /*      if ($this->controller->getService() == 'factories') {
 
         $this->getFactoryService()->createFactory($this->controller, $this->location);
         $arguments = $this->getCode()->getConstructorArguments($this->controller);
