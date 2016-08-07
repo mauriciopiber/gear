@@ -64,29 +64,7 @@ class ControllerDependency extends AbstractDependency
 
     public function getDependencies()
     {
-        $actions = $this->controller->getActions();
-        if (count($actions)<=0) {
-            return $this;
-        }
-
-        $dependencies = [***REMOVED***;
-
-        foreach ($actions as $action) {
-            $dependencyList = $action->getDependency();
-
-            foreach ($dependencyList as $dependency) {
-                if (in_array($dependency, $dependencies)) {
-                    continue;
-                }
-
-                $dependencies[***REMOVED*** = $dependency;
-                continue;
-            }
-        }
-        var_dump($this->controller->getDependency());
-        var_dump($dependencies);
-        $this->dependencies = array_merge($this->controller->getDependency(), $dependencies);
-        var_dump($this->dependencies);die();
+        $this->dependencies = $this->controller->getDependency();
         return $this;
     }
 

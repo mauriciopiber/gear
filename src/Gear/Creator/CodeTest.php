@@ -293,32 +293,4 @@ EOS;
 
         return $candidateFunctions;
     }
-
-    /**
-     *
-     * @param unknown $data
-     * @return boolean|string $html
-     */
-    public function getDependencyTest($data)
-    {
-        if (empty($data->getDependency())) {
-            return '';
-        }
-
-        /* Load Dependency */
-        $this->loadDependencyService($data);
-
-        $html = '';
-
-        $dependency = $this->dependency->getTestInjections($data);
-
-        foreach ($dependency as $item) {
-            $html .= $this->getFileCreator()->renderPartial(
-                'template/module/creator/dependency-test-partial.phtml',
-                $item
-            );
-        }
-
-        return $html;
-    }
 }
