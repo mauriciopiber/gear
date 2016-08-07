@@ -5,16 +5,39 @@ trait ControllerScopeTrait
 {
     public function getControllerScope($srcType)
     {
+        /**
         $service = ['invokables', 'factories'***REMOVED***;
+
+
+        $dependency = [
+            '',
+            'Repository\MyRepository',
+            'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
+        ***REMOVED***;
+
+
+        $namespace = [
+            null,
+            'Another\Long\Namespaces'
+        ***REMOVED***;
+
+
+        $actions = [
+            [***REMOVED***,
+            [
+                [
+                    'name' => 'FirstAction'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+        */
 
 
 
         return [
-            /**
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicDependencies%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
                 ***REMOVED***),
@@ -23,19 +46,15 @@ trait ControllerScopeTrait
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicDependency%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepository'
 
                 ***REMOVED***),
                 'basic-dependency'
             ***REMOVED***,
-            */
-
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFirst%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
                         [
@@ -48,7 +67,6 @@ trait ControllerScopeTrait
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFactoryNamespace%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
                     'service' => 'factories'
@@ -59,7 +77,6 @@ trait ControllerScopeTrait
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFactory%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'service' => 'factories'
                 ***REMOVED***),
@@ -68,7 +85,6 @@ trait ControllerScopeTrait
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces'
                 ***REMOVED***),
@@ -77,7 +93,6 @@ trait ControllerScopeTrait
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
-                    'object' => sprintf('MyModule\\Controller\\Basic%s', $srcType),
                     'type' => $srcType
                 ***REMOVED***),
                 'basic'

@@ -83,7 +83,10 @@ class ControllerDependency extends AbstractDependency
                 continue;
             }
         }
-        $this->dependencies = $dependencies;
+        var_dump($this->controller->getDependency());
+        var_dump($dependencies);
+        $this->dependencies = array_merge($this->controller->getDependency(), $dependencies);
+        var_dump($this->dependencies);die();
         return $this;
     }
 
