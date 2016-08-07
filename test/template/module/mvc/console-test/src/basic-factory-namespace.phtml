@@ -1,17 +1,17 @@
 <?php
-namespace MyModuleTest\ControllerTest;
+namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Action\BasicAction;
+use MyModule\Another\Long\Namespaces\BasicFactoryNamespaceAction;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
- * @group BasicAction
+ * @group BasicFactoryNamespaceAction
  * @group Controller
  */
-class BasicActionTest extends TestCase
+class BasicFactoryNamespaceActionTest extends TestCase
 {
     protected $controller;
     protected $request;
@@ -27,9 +27,9 @@ class BasicActionTest extends TestCase
 
         parent::setUp();
 
-        $this->controller = new BasicAction();
+        $this->controller = new BasicFactoryNamespaceAction();
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicAction'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryNamespaceAction'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
