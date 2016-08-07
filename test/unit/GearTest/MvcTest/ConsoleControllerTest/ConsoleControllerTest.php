@@ -98,7 +98,6 @@ class ConsoleControllerTest extends AbstractTestCase
      * @group src-mvc-console
      * @dataProvider controller
      */
-
     public function testConstructConsoleController($controller, $expected)
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
