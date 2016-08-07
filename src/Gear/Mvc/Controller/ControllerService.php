@@ -83,14 +83,14 @@ class ControllerService extends AbstractMvc implements
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($controller->getService()->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
           ? $this->getCode()->getConstructor($controller)
           : '';
 
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->getService()->getService() == 'factories') {
+        if ($controller->getService() == 'factories') {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 

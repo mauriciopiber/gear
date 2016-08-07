@@ -5,6 +5,10 @@ trait ControllerScopeTrait
 {
     public function getControllerScope($srcType)
     {
+        $service = ['invokables', 'factories'***REMOVED***;
+
+
+
         return [
             /**
             [

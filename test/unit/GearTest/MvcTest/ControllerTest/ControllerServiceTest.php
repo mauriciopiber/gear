@@ -9,7 +9,7 @@ use GearTest\SingleDbTableTrait;
 use GearTest\ControllerScopeTrait;
 
 /**
- * @group Fix1
+ * @group Fixing
  * @group Controller
  */
 class ControllerServiceTest extends AbstractTestCase
@@ -41,12 +41,8 @@ class ControllerServiceTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
+        $this->template =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller';
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller';
-
-
-        $this->code = $this->prophesize('Gear\Creator\Code');
 
         $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
 
@@ -59,161 +55,22 @@ class ControllerServiceTest extends AbstractTestCase
         $this->controllerService->setStringService($this->string);
         $this->controllerService->setModule($this->module->reveal());
         $this->controllerService->setInjector($this->injector);
-        $this->controllerService->setCode($this->code->reveal());
+
         $this->controllerService->setFactoryService($this->factoryService->reveal());
         $this->controllerService->setArrayService($this->arrayService);
 
         $this->controllerDependency = new \Gear\Creator\ControllerDependency();
         $this->controllerService->setControllerDependency($this->controllerDependency);
 
+
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setControllerDependency($this->controllerDependency);
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $this->controllerService->setCode($this->code);
     }
-
-
-    /**
-     * @group now2
-     */
-    public function testCreateController()
-    {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories'
-        ***REMOVED***);
-
-        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->code->getExtends($controller)->willReturn('AbstractActionController')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-        $this->code->getNamespace($controller)->willReturn('MyModule\Controller')->shouldBeCalled();
-
-        $this->factoryService->createFactory($controller, vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-
-        $file = $this->controllerService->buildController($controller);
-
-        $expected = $this->templates.'/CreateController.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
-    }
-
-
-    /**
-     * @group now6
-     */
-    public function testCreateMultipleActionController()
-    {
-        file_put_contents(
-            vfsStream::url('module/src/MyModule/Controller/MyController.php'),
-            file_get_contents($this->templates.'/CreateController.phtml')
-            );
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories',
-            'actions' => [
-                [
-                    'name' => 'MyOneAction',
-                    'controller' => 'MyController'
-                ***REMOVED***,
-                [
-                    'name' => 'MyTwoAction',
-                    'controller' => 'MyController'
-                ***REMOVED***,
-                [
-                    'name' => 'MyThreeAction',
-                    'controller' => 'MyController'
-                ***REMOVED***,
-                [
-                    'name' => 'MyFourAction',
-                    'controller' => 'MyController'
-                ***REMOVED***,
-                [
-                    'name' => 'MyFiveAction',
-                    'controller' => 'MyController'
-                ***REMOVED***,
-
-            ***REMOVED***
-        ***REMOVED***);
-
-        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->code->getUseAttribute($controller)->willReturn('')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-        $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $file = $this->controllerService->buildAction($controller);
-
-        $expected = $this->templates.'/CreateMultipleActionController.phtml';
-
-        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
-    }
-
-
-    /**
-     * @group now1
-     */
-    public function testCreateActionController()
-    {
-        file_put_contents(
-            vfsStream::url('module/src/MyModule/Controller/MyController.php'),
-            file_get_contents($this->templates.'/CreateController.phtml')
-        );
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories',
-            'actions' => [
-                [
-                    'name' => 'MyAction',
-                    'controller' => 'MyController'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***);
-
-        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->code->getUseAttribute($controller)->willReturn('')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-        $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $file = $this->controllerService->buildAction($controller);
-
-        $expected = $this->templates.'/CreateActionController.phtml';
-
-        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
-    }
-
-    /**
-     * @group now3
-     */
-    public function testCreateActionControllerWithNoAction()
-    {
-        file_put_contents(
-            vfsStream::url('module/src/MyModule/Controller/MyController.php'),
-            file_get_contents($this->templates.'/CreateController.phtml')
-        );
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories'
-        ***REMOVED***);
-
-        $this->code->getLocation($controller)->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->code->getUseAttribute($controller)->willReturn('')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-        $this->code->getFunctionsNameFromFile(vfsStream::url('module/src/MyModule/Controller/MyController.php'))->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $file = $this->controllerService->buildAction($controller);
-
-        $expected = $this->templates.'/CreateController.phtml';
-
-        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
-    }
-
 
     public function testCreateModuleController()
     {
@@ -222,7 +79,7 @@ class ControllerServiceTest extends AbstractTestCase
 
         $file = $this->controllerService->module();
 
-        $expected = $this->template.'/IndexController.phtml';
+        $expected = $this->template.'/module/IndexController.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -237,7 +94,7 @@ class ControllerServiceTest extends AbstractTestCase
 
         $file = $this->controllerService->moduleFactory();
 
-        $expected = $this->template.'/IndexControllerFactory.phtml';
+        $expected = $this->template.'/module/IndexControllerFactory.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -296,7 +153,7 @@ class ControllerServiceTest extends AbstractTestCase
 
         $file = $this->controllerService->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        $expected = $this->template.'/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -321,12 +178,6 @@ class ControllerServiceTest extends AbstractTestCase
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setControllerDependency($this->controllerDependency);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
-
         $this->controllerService->setCode($this->code);
 
         $file = $this->controllerService->buildController($controller);
@@ -337,7 +188,7 @@ class ControllerServiceTest extends AbstractTestCase
 
         }
 
-        $expected = $this->templates.'/src/'.$expected.'.phtml';
+        $expected = $this->template.'/src/'.$expected.'.phtml';
 
         $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
