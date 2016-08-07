@@ -408,10 +408,6 @@ class ControllerTestService extends AbstractMvcTest implements
                 $this->str('url', $method->getName())
             );
 
-            $serviceName = sprintf(
-                $this->controller->getService()->getObject(),
-                $this->getModule()->getModuleName()
-            );
 
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-dispatch.phtml',

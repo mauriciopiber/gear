@@ -35,6 +35,7 @@ trait ControllerScopeTrait
 
 
         return [
+            /*
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicDependencies%s', $srcType),
@@ -51,7 +52,7 @@ trait ControllerScopeTrait
 
                 ***REMOVED***),
                 'basic-dependency'
-            ***REMOVED***,
+            ***REMOVED***,*/
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFirst%s', $srcType),
@@ -82,6 +83,7 @@ trait ControllerScopeTrait
                 ***REMOVED***),
                 'basic-factory'
             ***REMOVED***,
+            /*
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
@@ -96,7 +98,7 @@ trait ControllerScopeTrait
                     'type' => $srcType
                 ***REMOVED***),
                 'basic'
-            ***REMOVED***
+            ***REMOVED****/
         ***REMOVED***;
     }
 }
