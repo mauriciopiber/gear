@@ -79,6 +79,7 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setArrayService($this->arrayService);
 
         $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+        $this->controllerDependency->setModule($this->module->reveal());
         $this->controllerService->setControllerDependency($this->controllerDependency);
 
 
