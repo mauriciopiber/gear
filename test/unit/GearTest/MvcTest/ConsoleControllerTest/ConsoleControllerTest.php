@@ -33,13 +33,29 @@ class ConsoleControllerTest extends AbstractTestCase
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-cli';
-
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/console';
 
         $this->controller = new \Gear\Mvc\ConsoleController\ConsoleController();
         $this->controller->setFileCreator($this->fileCreator);
         $this->controller->setStringService($this->string);
         $this->controller->setModule($this->module->reveal());
+
+
+        $this->array = new \Gear\Util\Vector\ArrayService();
+
+        $this->controller->setArrayService($this->array);
+
+
+        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+        $this->controllerDependency->setModule($this->module->reveal());
+        $this->controllerDependency->setStringService($this->string);
+
+
+        $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+        $this->controller->setFactoryService($this->factoryService->reveal());
+
+        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
+        $this->controller->setTraitService($this->traitService->reveal());
     }
 
     public function testCreateModuleController()
@@ -49,7 +65,7 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $file = $this->controller->module();
 
-        $expected = $this->template.'/IndexController.phtml';
+        $expected = $this->template.'/module/IndexController.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -64,7 +80,7 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $file = $this->controller->moduleFactory();
 
-        $expected = $this->template.'/IndexControllerFactory.phtml';
+        $expected = $this->template.'/module/IndexControllerFactory.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -82,9 +98,32 @@ class ConsoleControllerTest extends AbstractTestCase
      * @group src-mvc-console
      * @dataProvider controller
      */
-    public function testConstructController($controller, $expected)
+
+    public function testConstructConsoleController($controller, $expected)
     {
-        $this->assertTrue(false);
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('Controller')->willReturn(vfsStream::url('module'));
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setControllerDependency($this->controllerDependency);
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setArrayService($this->array);
+
+        $this->controller->setCode($this->code);
+
+        $file = $this->controller->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+            $this->controller->buildAction($controller);
+        }
+
+        $expected = $this->template.'/src/'.$expected.'.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
 
 }
