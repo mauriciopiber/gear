@@ -1,7 +1,7 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use MyModuleTest\ControllerTest\AbstractControllerTestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
 use MyModule\Controller\MyController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
@@ -11,7 +11,7 @@ use Zend\Mvc\Router\RouteMatch;
  * @group MyController
  * @group Controller
  */
-class MyControllerTest extends AbstractControllerTestCase
+class MyControllerTest extends TestCase
 {
     protected $controller;
     protected $request;
@@ -21,6 +21,10 @@ class MyControllerTest extends AbstractControllerTestCase
 
     public function setUp()
     {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
         parent::setUp();
 
         $this->controller = new MyController();
