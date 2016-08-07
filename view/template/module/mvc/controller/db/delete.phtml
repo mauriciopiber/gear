@@ -7,9 +7,9 @@
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $<?= $this->str('var-lenght', $this->data);?> = $this->get<?= $this->data?>Service();
+        $<?= $this->varLength;?> = $this->get<?= $this->data?>Service();
 
-        $delete = $<?= $this->str('var-lenght', $this->data);?>->delete($identifier);
+        $delete = $<?= $this->varLength;?>->delete($identifier);
 
         return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
     }
