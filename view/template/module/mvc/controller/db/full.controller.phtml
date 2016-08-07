@@ -7,10 +7,10 @@ use Zend\View\Model\JsonModel;
 <?php echo $this->use;?>
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
-    const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
-    const EDIT   = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/edit';
-    const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
-    const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/upload-image';
+    const CREATE = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/create';
+    const EDIT   = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit';
+    const LISTS  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list';
+    const IMAGE  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/upload-image';
 
 <?php echo $this->attribute;?>
 <?php echo $this->createAction;?>

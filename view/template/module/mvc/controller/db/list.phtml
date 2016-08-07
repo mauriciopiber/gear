@@ -2,13 +2,13 @@
     public function listAction()
     {
         $data = $this->getRequestPlugin()->prepareJson(
-            $this->get<?php echo $this->str('class', $this->data);?>Service()->selectAll()
+            $this->get<?php echo $this->data;?>Service()->selectAll()
         );
 
         return new ViewModel(
             array(
-                'search'    => $this->get<?php echo $this->str('class', $this->data);?>SearchForm(),
-                'tableService' => $this->get<?php echo $this->str('class', $this->data);?>Service(),
+                'search'    => $this->get<?php echo $this->data;?>SearchForm(),
+                'tableService' => $this->get<?php echo $this->data;?>Service(),
                 'data'      => $data,
             )
         );

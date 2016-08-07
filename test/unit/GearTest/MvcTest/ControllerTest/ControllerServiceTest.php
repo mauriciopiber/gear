@@ -1,18 +1,21 @@
 <?php
 namespace GearTest\MvcTest\ControllerTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ControllerScopeTrait;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\AggregateResolver;
+use Zend\View\Resolver\TemplatePathStack;
 
 /**
  * @group Fixing
  * @group Controller
  */
-class ControllerServiceTest extends AbstractTestCase
+class ControllerServiceTest extends TestCase
 {
     use AllColumnsDbTableTrait;
     use SingleDbTableTrait;
@@ -36,8 +39,24 @@ class ControllerServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
 
         $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
+        $templatePath = (new \Gear\Module)->getLocation().'/../../view';
+
+        $resolver = new AggregateResolver();
+
+        $map = new TemplatePathStack(array(
+            'script_paths' => array(
+                'template' => $templatePath,
+            )
+        ));
+
+        $resolver->attach($map);
+
+        $view = new PhpRenderer();
+
+        $view->setResolver($resolver);
+
+        $template->setRenderer($view);
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
