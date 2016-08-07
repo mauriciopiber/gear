@@ -6,5 +6,6 @@ use Zend\View\Model\JsonModel;
 <?php echo $this->classDocs;?>
 class <?php echo $this->controllerName;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
+<?php echo $this->attributes;?>
 <?php echo ($this->constructor) ? $this->constructor : PHP_EOL;?>
 }
