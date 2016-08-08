@@ -119,6 +119,7 @@ class SrcService extends AbstractJsonService
                     $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
+
                 case 'Factory':
                     $factory = $this->getFactoryService();
                     $status = $factory->create($this->src);

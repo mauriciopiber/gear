@@ -40,20 +40,22 @@ class FactoryTestService extends AbstractMvcTest
     {
         $name = $src->getName();
 
+
+        $options = [
+            'module'    => $this->getModule()->getModuleName(),
+            'namespace' => $this->getCodeTest()->getNamespace($src),
+            'fullclass' => $this->getCodeTest()->getFullClassName($src),
+            'class' => $this->str('class', $name),
+            'group' => 'Controller'
+        ***REMOVED***;
+
+        $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);
+
         $trait = $this->getFileCreator();
-        $trait->setTemplate('template/module/mvc/factory/controller-test.phtml');
+        $trait->setTemplate('template/module/mvc/factory-test/controller/controller-test.phtml');
         $trait->setFileName($src->getName().'FactoryTest.php');
         $trait->setLocation($location);
-        $trait->setOptions(
-            array(
-                //'piber' => 'test'
-                'module'    => $this->getModule()->getModuleName(),
-                'namespace' => $this->getCodeTest()->getNamespace($src),
-                'fullclass' => $this->getCodeTest()->getFullClassName($src),
-                'class' => $this->str('class', $name),
-                'group' => 'Controller'
-            )
-        );
+        $trait->setOptions($options);
 
         return $trait->render();
     }
