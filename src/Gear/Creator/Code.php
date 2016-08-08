@@ -626,7 +626,7 @@ EOS;
 
         $this->uses = '';
 
-        if ($data instanceof Src && !empty($data->getImplements())) {
+        if (!empty($data->getImplements())) {
             foreach ($data->getImplements() as $alias => $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
@@ -712,7 +712,7 @@ EOS;
         return $html;
     }
 
-    public function getImplements($data, array $additional)
+    public function getImplements($data, array $additional = null)
     {
         if (empty($data->getImplements()) && empty($additional)) {
             return PHP_EOL;
@@ -722,6 +722,10 @@ EOS;
             $imp = [***REMOVED***;
         } else {
             $imp = $data->getImplements();
+        }
+
+        if ($additional === null) {
+            $additional = [***REMOVED***;
         }
 
         $implements = array_merge($additional, $imp);
