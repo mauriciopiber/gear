@@ -1,17 +1,17 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Controller\BasicDependenciesManyAction;
-use Zend\Http\Request;
+use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as TestCase;
+use MyModule\Controller\BasicManyConsole;
+use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
- * @group BasicDependenciesManyAction
+ * @group BasicManyConsole
  * @group Controller
  */
-class BasicDependenciesManyActionTest extends TestCase
+class BasicManyConsoleTest extends TestCase
 {
     protected $controller;
     protected $request;
@@ -27,9 +27,9 @@ class BasicDependenciesManyActionTest extends TestCase
 
         parent::setUp();
 
-        $this->controller = new BasicDependenciesManyAction();
+        $this->controller = new BasicManyConsole();
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicDependenciesManyAction'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicManyConsole'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
@@ -49,7 +49,7 @@ class BasicDependenciesManyActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
     }
 
     public function testSecondActionAction()
@@ -58,7 +58,7 @@ class BasicDependenciesManyActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
     }
 
     public function testThirdActionAction()
@@ -67,7 +67,7 @@ class BasicDependenciesManyActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
     }
 
     public function testFourActionAction()
@@ -76,7 +76,7 @@ class BasicDependenciesManyActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
     }
 
     public function testFiveActionAction()
@@ -85,6 +85,6 @@ class BasicDependenciesManyActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $result);
     }
 }

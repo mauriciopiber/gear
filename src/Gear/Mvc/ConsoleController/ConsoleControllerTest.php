@@ -96,9 +96,9 @@ class ConsoleControllerTest extends AbstractMvcTest
 
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
-        $lines = $this->getCodeTest()->inject($this->fileCode, $this->functions);
+        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
 
-        $lines = $this->injectDependency($lines);
+       //$lines = $this->injectDependency($lines);
 
         $newFile = implode(PHP_EOL, $lines);
 
@@ -155,6 +155,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
+            /**
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/console-controller/test-action.phtml',
                 [
@@ -163,6 +164,7 @@ class ConsoleControllerTest extends AbstractMvcTest
                     'controllerVar' => $controllerVar
                 ***REMOVED***
             );
+            */
 
 
             if ($method->getDb() === null) {
@@ -186,18 +188,12 @@ class ConsoleControllerTest extends AbstractMvcTest
                 $this->str('url', $method->getName())
             );
 
-            $serviceName = sprintf(
-                $this->controller->getService()->getObject(),
-                $this->getModule()->getModuleName()
-            );
-
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/console-controller/test-dispatch.phtml',
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
                     'module' => $this->getModule()->getModuleName(),
-                    'controllerServiceName' => $serviceName,
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'routeMatch' => $routeMatch
@@ -217,7 +213,42 @@ class ConsoleControllerTest extends AbstractMvcTest
 
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
-        $this->template = 'template/module/mvc/console-controller/test-console-controller.phtml';
+        $options = [
+            'callable' => $this->getControllerManager()->getServiceName($controller),
+            'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
+            'namespace' => $this->getCodeTest()->getTestNamespace($controller),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'actions' => $controller->getActions(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getNameOff()),
+            'controllerCallname' => $this->str('class', $controller->getNameOff()),
+            'controllerVar' => $this->str('var-lenght', $controller->getName())
+        ***REMOVED***;
+
+
+        if ($controller->getService() === 'factories') {
+
+            $templateView ='factory';
+
+            $options['dependency'***REMOVED*** = str_replace(
+                '$this->action',
+                '$this->controller',
+                $this->getCodeTest()->getConstructorDependency($controller)
+            );
+
+            $options['constructor'***REMOVED*** = str_replace(
+                '$this->action',
+                '$this->controller',
+                $this->getCodeTest()->getConstructor($controller)
+            );
+
+        } else {
+
+            $templateView = 'invokable';
+        }
+
+        $this->template = 'template/module/mvc/console-test/src/'.$templateView.'.phtml';
 
         $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
@@ -231,21 +262,7 @@ class ConsoleControllerTest extends AbstractMvcTest
 
 
         $this->file->setFileName($this->fileName);
-        $this->file->setOptions(
-            [
-                'callable' => $this->getControllerManager()->getServiceName($controller),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
-                'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str('class', $controller->getNameOff()),
-                'controllerVar' => $this->str('var-lenght', $controller->getName())
-
-            ***REMOVED***
-        );
+        $this->file->setOptions($options);
 
         if ($controller->getService() == 'factories') {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);

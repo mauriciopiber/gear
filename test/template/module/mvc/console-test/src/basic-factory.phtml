@@ -1,17 +1,17 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Action\BasicFactoryAction;
-use Zend\Http\Request;
+use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as TestCase;
+use MyModule\Controller\BasicFactoryConsole;
+use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
- * @group BasicFactoryAction
+ * @group BasicFactoryConsole
  * @group Controller
  */
-class BasicFactoryActionTest extends TestCase
+class BasicFactoryConsoleTest extends TestCase
 {
     protected $controller;
     protected $request;
@@ -27,9 +27,10 @@ class BasicFactoryActionTest extends TestCase
 
         parent::setUp();
 
-        $this->controller = new BasicFactoryAction();
+        $this->controller = new BasicFactoryConsole();
+
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryAction'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryConsole'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);

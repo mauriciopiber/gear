@@ -39,7 +39,12 @@ EOS;
 
     public function getConstructor($src)
     {
-        $names = $this->str('var', $src->getType());
+        if ($src instanceof Controller) {
+            $names = 'controller';
+        } else {
+            $names = $this->str('var', $src->getType());
+        }
+
 
         $template = '';
 
@@ -129,6 +134,10 @@ EOS;
         if (!empty($data->getNamespace())) {
             $namespace = $data->getNamespace();
             return $namespace;
+        }
+
+        if ($data instanceof Controller) {
+            return 'Controller';
         }
 
         return str_replace('Test', '', $data->getType());
