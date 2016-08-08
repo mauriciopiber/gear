@@ -96,7 +96,7 @@ class ControllerDependency extends AbstractDependency
                 $this->useNamespaceToString($namespace);
             }
         }
-        return (!empty($this->namespace)) ? $this->namespace.PHP_EOL : PHP_EOL;
+        return (!empty($this->namespace)) ? $this->namespace : PHP_EOL;
     }
 
     public function getUseAttribute()
@@ -107,13 +107,17 @@ class ControllerDependency extends AbstractDependency
 
 
         if (!empty($dependencies)) {
-            foreach ($dependencies as $dependency) {
+            foreach ($dependencies as $i => $dependency) {
                 $srcName = $this->extractSrcNameFromDependency($dependency);
                 $namespace = sprintf('%sTrait', $srcName);
                 $this->useAttributeToString($namespace);
+
+                if (isset($dependencies[$i+1***REMOVED***)) {
+                    $this->attribute .= PHP_EOL;
+                }
             }
         }
 
-        return (!empty($this->attribute)) ? $this->attribute.PHP_EOL : PHP_EOL;
+        return (!empty($this->attribute)) ? $this->attribute : '';
     }
 }

@@ -70,12 +70,12 @@ class ControllerService extends AbstractMvc implements
         $this->controller = $controller;
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
-
         $options = [
             'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
             'extends' => $this->getCode()->getExtends($controller),
             'use' => $this->getCode()->getUse($controller),
             'attribute' => $this->getCode()->getUseAttribute($controller),
+            'implements' => $this->getCode()->getImplements($controller),
             'namespace' => $this->getCode()->getNamespace($controller),
             'module' => $this->module->getModuleName(),
             'moduleUrl' => $this->str('url', $this->module->getModuleName()),
@@ -87,6 +87,7 @@ class ControllerService extends AbstractMvc implements
         $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
           ? $this->getCode()->getConstructor($controller)
           : '';
+
 
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
@@ -479,6 +480,7 @@ EOS;
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
 
+
         $newFile = implode(PHP_EOL, $lines);
 
         file_put_contents($this->controllerFile, $newFile);
@@ -493,11 +495,11 @@ EOS;
 
         foreach ($insertMethods as $method) {
                 $this->functions .= <<<EOS
+
     public function {$this->str('var', $method->getName())}Action()
     {
         return new ViewModel([***REMOVED***);
     }
-
 
 EOS;
         }
