@@ -43,6 +43,9 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->array = new \Gear\Util\Vector\ArrayService();
 
+        $this->injector = new \Gear\Creator\File\Injector($this->array);
+
+        $this->controller->setInjector($this->injector);
         $this->controller->setArrayService($this->array);
 
 

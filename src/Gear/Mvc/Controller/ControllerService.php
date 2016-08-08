@@ -72,10 +72,11 @@ class ControllerService extends AbstractMvc implements
 
         $options = [
             'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
+            'implements' => $this->getCode()->getImplements($controller),
             'extends' => $this->getCode()->getExtends($controller),
             'use' => $this->getCode()->getUse($controller),
             'attribute' => $this->getCode()->getUseAttribute($controller),
-            'implements' => $this->getCode()->getImplements($controller),
+
             'namespace' => $this->getCode()->getNamespace($controller),
             'module' => $this->module->getModuleName(),
             'moduleUrl' => $this->str('url', $this->module->getModuleName()),
