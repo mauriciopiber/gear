@@ -8,6 +8,7 @@ use Gear\Constructor\Controller\ControllerService;
  * @group module
  * @group ConstructorController
  * @group Constructor
+ * @group fix11
  */
 class ControllerServiceTest extends AbstractTestCase
 {
@@ -62,7 +63,8 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            '%s\Controller\MyController'
+            null,
+            null
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
@@ -102,7 +104,8 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            '%s\Controller\MyController'
+            null,
+            null
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
@@ -136,7 +139,8 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            '%s\Controller\MyController'
+            null,
+            null
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
