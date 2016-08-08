@@ -28,6 +28,7 @@ class BasicFactoryActionTest extends TestCase
         parent::setUp();
 
         $this->controller = new BasicFactoryAction();
+
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryAction'));
         $this->event      = new MvcEvent();
