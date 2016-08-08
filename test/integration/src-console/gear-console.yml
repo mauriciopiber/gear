@@ -1,0 +1,262 @@
+modules: MyModule
+
+src:
+  01:
+    name: MyRepository
+    type: Repository
+  02:
+    name: MyRepositoryOne
+    type: Repository
+  03:
+    name: MyServiceTwo
+    type: Service
+    service: factories
+  04:
+    name: MyServiceThree
+    type: Service
+    service: factories
+    namespace: MyWorkspace\Service
+  05:
+    name: RepositoryInterface
+    type: Interface
+    namespace: Repository
+
+controller:
+  01:
+    name: Basic
+    type: Console
+  02:
+    name: BasicNamespaces
+    namespace: MyWorkspace\BasicUtil
+    type: Console    
+  03:
+    name: BasicFactory
+    service: factories
+    type: Console                        
+  04:
+    name: BasicDependency
+    dependency: 'Repository\MyRepository'
+    type: Console    
+  05:
+    name: BasicDependencies
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console        
+  06:
+    name: BasicFactoryDependency
+    service: factories
+    dependency: 'Repository\MyRepository'
+    type: Console                        
+  07:
+    name: BasicFactoryDependencies
+    service: factories
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console    
+  08:
+    name: BasicImplements
+    service: factories
+    implements: 'Repository\RepositoryInterface'
+    type: Console                        
+#### FIRST   
+  11:
+    name: BasicFirst
+    type: Console    
+    actions:
+      01:
+        name: First
+  12:
+    name: BasicNamespacesFirst
+    namespace: MyWorkspace\BasicUtil
+    type: Console    
+    actions:
+      01:
+        name: First    
+  13:
+    name: BasicFactoryFirst
+    service: factories
+    type: Console    
+    actions:
+      01:
+        name: First                        
+  14:
+    name: BasicDependencyFirst
+    dependency: 'Repository\MyRepository'
+    type: Console    
+    actions:
+      01:
+        name: First    
+  15:
+    name: BasicDependenciesFirst
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console    
+    actions:
+      01:
+        name: First        
+  16:
+    name: BasicFactoryDependencyFirst
+    service: factories
+    dependency: 'Repository\MyRepository'
+    type: Console                        
+    actions:
+      01:
+        name: First    
+  17:
+    name: BasicFactoryDependenciesFirst
+    service: factories
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console    
+    actions:
+      01:
+        name: First    
+  18:
+    name: BasicImplementsFirst
+    service: factories
+    type: Console    
+    implements: 'Repository\RepositoryInterface'   
+    actions:
+      01:
+        name: First
+### MANY
+            
+  21:
+    name: BasicFirstMany
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+  22:
+    name: BasicNamespacesFirstMany
+    namespace: MyWorkspace\BasicUtil
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+  
+  23:
+    name: BasicFactoryFirstMany
+    service: factories            
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+      
+  24:
+    name: BasicDependencyFirstMany
+    dependency: 'Repository\MyRepository'
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+    
+  25:
+    name: BasicDependenciesFirstMany
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+    
+  26:
+    name: BasicFactoryDependencyFirstMany
+    service: factories
+    dependency: 'Repository\MyRepository'      
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+  27:
+    name: BasicFactoryDependenciesFirstMany
+    service: factories
+    dependency: 'Repository\MyRepositoryOne,Service\MyServiceTwo,MyWorkspace\Service\MyServiceThree'
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+  28:
+    name: BasicImplementsFirstMany
+    service: factories
+    implements: 'Repository\RepositoryInterface'
+    type: Console    
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+       
