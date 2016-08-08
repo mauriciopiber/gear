@@ -494,8 +494,16 @@ EOS;
     {
 
         foreach ($insertMethods as $method) {
-                $this->functions .= <<<EOS
 
+            $label = $this->str('label', $method->getName());
+
+            $this->functions .= <<<EOS
+
+    /**
+     * {$label}
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function {$this->str('var', $method->getName())}Action()
     {
         return new ViewModel([***REMOVED***);
