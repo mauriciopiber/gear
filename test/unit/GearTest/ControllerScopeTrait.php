@@ -125,47 +125,6 @@ trait ControllerScopeTrait
             ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([
-                    'name' => sprintf('BasicDependencies%s', $srcType),
-                    'type' => $srcType,
-                    'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
-                ***REMOVED***),
-                'basic-dependencies'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('BasicImplements%s', $srcType),
-                    'type' => $srcType,
-                    'implements' => 'Repository\RepositoryInterface'
-
-                ***REMOVED***),
-                'basic-implements'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('BasicDependency%s', $srcType),
-                    'type' => $srcType,
-                    'dependency' => 'Repository\MyRepository'
-
-                ***REMOVED***),
-                'basic-dependency'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('Basic%s', $srcType),
-                    'type' => $srcType,
-                    'namespace' => 'Another\Long\Namespaces'
-                ***REMOVED***),
-                'basic-namespace'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('Basic%s', $srcType),
-                    'type' => $srcType
-                ***REMOVED***),
-                'basic'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicFirst%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -210,6 +169,47 @@ trait ControllerScopeTrait
                     'actions' => $manyActions
                 ***REMOVED***),
                 'basic-many'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicDependencies%s', $srcType),
+                    'type' => $srcType,
+                    'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
+                ***REMOVED***),
+                'basic-dependencies'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicImplements%s', $srcType),
+                    'type' => $srcType,
+                    'implements' => 'Repository\RepositoryInterface'
+
+                ***REMOVED***),
+                'basic-implements'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicDependency%s', $srcType),
+                    'type' => $srcType,
+                    'dependency' => 'Repository\MyRepository'
+
+                ***REMOVED***),
+                'basic-dependency'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('Basic%s', $srcType),
+                    'type' => $srcType,
+                    'namespace' => 'Another\Long\Namespaces'
+                ***REMOVED***),
+                'basic-namespace'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('Basic%s', $srcType),
+                    'type' => $srcType
+                ***REMOVED***),
+                'basic'
             ***REMOVED***,
         ***REMOVED***;
     }
