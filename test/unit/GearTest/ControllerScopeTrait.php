@@ -95,6 +95,25 @@ trait ControllerScopeTrait
                 ***REMOVED***),
                 'basic-factory-dependency'
             ***REMOVED***,
+
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicFactoryNamespace%s', $srcType),
+                    'type' => $srcType,
+                    'namespace' => 'Another\Long\Namespaces',
+                    'service' => 'factories'
+
+                ***REMOVED***),
+                'basic-factory-namespace'
+            ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicFactory%s', $srcType),
+                    'type' => $srcType,
+                    'service' => 'factories'
+                ***REMOVED***),
+                'basic-factory'
+            ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicDependenciesMany%s', $srcType),
@@ -129,24 +148,6 @@ trait ControllerScopeTrait
 
                 ***REMOVED***),
                 'basic-dependency'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('BasicFactoryNamespace%s', $srcType),
-                    'type' => $srcType,
-                    'namespace' => 'Another\Long\Namespaces',
-                    'service' => 'factories'
-
-                ***REMOVED***),
-                'basic-factory-namespace'
-            ***REMOVED***,
-            [
-                new \GearJson\Controller\Controller([
-                    'name' => sprintf('BasicFactory%s', $srcType),
-                    'type' => $srcType,
-                    'service' => 'factories'
-                ***REMOVED***),
-                'basic-factory'
             ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([

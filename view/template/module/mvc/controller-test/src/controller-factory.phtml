@@ -1,17 +1,16 @@
-<?php
-namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Another\Long\Namespaces\BasicFactoryNamespaceAction;
+use <?php echo $this->module?>\<?php echo $this->namespace;?>\<?php echo $this->controllerName;?>;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
- * @group BasicFactoryNamespaceAction
+ * @group <?php echo $this->controllerName.PHP_EOL; ?>
  * @group Controller
  */
-class BasicFactoryNamespaceActionTest extends TestCase
+class <?php echo $this->controllerName; ?>Test extends TestCase
 {
     protected $controller;
     protected $request;
@@ -26,11 +25,12 @@ class BasicFactoryNamespaceActionTest extends TestCase
         );
 
         parent::setUp();
+<?php echo $this->dependency;?>
 
-        $this->controller = new BasicFactoryNamespaceAction();
+<?php echo $this->constructor;?>
 
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryNamespaceAction'));
+        $this->routeMatch = new RouteMatch(array('controller' => '<?php echo $this->controllerName;?>'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
