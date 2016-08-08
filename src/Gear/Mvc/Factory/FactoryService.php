@@ -153,6 +153,14 @@ class FactoryService extends AbstractMvc
         }
     }
 
+    /**
+     * Cria Factory para classes Controller
+     *
+     * @param Controller $controller
+     * @param string $location
+     *
+     * @return string
+     */
     public function createFactoryController(Controller $controller, $location = null)
     {
         $file = $this->getFileCreator();
@@ -164,19 +172,16 @@ class FactoryService extends AbstractMvc
         $namespace = $this->getCode()->getNamespace($controller);
         $use = $this->getCode()->classNameToNamespace($controller);
 
-        $depService = [***REMOVED***;
-        $dependencyVar            = [***REMOVED***;
-/* * $this->getCode()->getConstructorServiceLocator($controller);
-        $dependencyVar            = $this->getCode()->getConstructorFactoryArguments($controller);
- */
-
         $options = [
             'className'                => $this->str('class', $controller->getName()),
             'namespace'                => $namespace,
             'use'                      => $use,
-            'dependencyServiceLocator' => $depService,
-            'dependencyVar'            => $dependencyVar,
+            'classDocs'                => $this->getCode()->getClassDocs($controller, 'Factory')
         ***REMOVED***;
+
+        if (!empty($controller->getDependency())) {
+           $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($controller);
+        }
 
 
         $filename = $controller->getName().'Factory.php';
@@ -187,6 +192,14 @@ class FactoryService extends AbstractMvc
         return $file->createFile($template, $options, $filename, $location);
     }
 
+    /**
+     * Cria Factory para classes SRC
+     *
+     * @param Src $src
+     * @param string $location
+     *
+     * @return string
+     */
     public function createFactorySrc(Src $src, $location = null)
     {
         $file = $this->getFileCreator();
@@ -216,6 +229,7 @@ class FactoryService extends AbstractMvc
 
         return $file->createFile($template, $options, $filename, $location);
     }
+
 
     public function create($src)
     {
@@ -329,6 +343,21 @@ EOS;
         );
     }
 
+    /**
+     * Cria Factory para classes Filter
+     *
+     * @return string
+     */
+    public function createFilterFactory()
+    {
+        die('implement');
+    }
+
+    /**
+     * Cria Factory para classes Form.
+     *
+     * @return string
+     */
     public function createFormFactory()
     {
         $src = $this->getSchemaService()->getSrcByDb($this->table, 'Factory');
@@ -376,6 +405,11 @@ EOS;
         return $fileCreator->render();
     }
 
+    /**
+     * Cria Factory para Classes SearchForm
+     *
+     * @return string
+     */
     public function createSearchFormFactory()
     {
         $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');

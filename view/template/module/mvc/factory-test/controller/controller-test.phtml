@@ -13,6 +13,10 @@ class <?php echo $this->class;?>FactoryTest extends AbstractTestCase
     {
         $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
+        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
+        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+<?php echo $this->dependency;?>
+
         $factory = new \<?php echo $this->fullclass;?>Factory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
