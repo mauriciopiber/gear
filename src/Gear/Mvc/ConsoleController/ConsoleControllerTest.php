@@ -16,7 +16,7 @@ class ConsoleControllerTest extends AbstractMvcTest
     public function module()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/console-controller/module.phtml',
+            'template/module/mvc/console-test/module/module.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),
@@ -28,7 +28,7 @@ class ConsoleControllerTest extends AbstractMvcTest
     public function moduleFactory()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/console-controller/module-factory.phtml',
+            'template/module/mvc/console-test/module/module-factory.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
             ),

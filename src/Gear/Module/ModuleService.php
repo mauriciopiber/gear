@@ -364,7 +364,6 @@ class ModuleService
             case 'cli':
                 $consoleTest = $this->getConsoleControllerTest();
                 $consoleController = $this->getConsoleController();
-                $consoleTest->generateAbstractClass();
                 $consoleTest->module();
                 $consoleTest->moduleFactory();
                 $consoleController->module();
