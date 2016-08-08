@@ -1,0 +1,37 @@
+<?php
+namespace MyModule\Filter;
+
+use Zend\InputFilter\InputFilter;
+
+/**
+ * PHP Version 5
+ *
+ * @category Filter
+ * @package MyModule/Filter
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicFactoryFilter extends InputFilter
+{
+    /**
+     * Constructor
+     *
+     * @return \MyModule\Filter\BasicFactoryFilter
+     */
+    public function __construct()
+    {
+        return $this;
+    }
+
+    /**
+     * Create the Filter to Form Elements
+     *
+     * @return \MyModule\Filter\BasicFactoryFilter
+     *
+     */
+    public function getInputFilter()
+    {
+        return $this;
+    }
+}

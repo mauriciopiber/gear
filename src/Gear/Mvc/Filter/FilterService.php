@@ -163,17 +163,23 @@ class FilterService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($this->src),
+            'namespace' => $this->getCode()->getNamespace($this->src),
+            'extends'    => $this->getCode()->getExtends($this->src),
+            'use'       => $this->getCode()->getUse($this->src),
+            //'attributes' => $this->getCode()->getUseAttribute($this->src),
+            'class'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
         return $this->getFileCreator()->createFile(
             'template/module/mvc/filter/src.phtml',
-            array(
-                'classDocs' => $this->getCode()->getClassDocs($this->src),
-                'namespace' => $this->getCode()->getNamespace($this->src),
-                'extends'    => $this->getCode()->getExtends($this->src),
-                'use'       => $this->getCode()->getUse($this->src),
-                //'attributes' => $this->getCode()->getUseAttribute($this->src),
-                'class'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName()
-            ),
+            $options,
             $this->src->getName().'.php',
             $location
         );

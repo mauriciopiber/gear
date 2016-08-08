@@ -1,0 +1,37 @@
+<?php
+namespace MyModule\Basic\Feature\Issue\Task;
+
+use MyModule\Filter\MyFilter;
+
+/**
+ * PHP Version 5
+ *
+ * @category Filter
+ * @package MyModule/Basic/Feature/Issue/Task
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicNamespaceExtendsFactoryFilter extends MyFilter
+{
+    /**
+     * Constructor
+     *
+     * @return \MyModule\Basic\Feature\Issue\Task\BasicNamespaceExtendsFactoryFilter
+     */
+    public function __construct()
+    {
+        return $this;
+    }
+
+    /**
+     * Create the Filter to Form Elements
+     *
+     * @return \MyModule\Basic\Feature\Issue\Task\BasicNamespaceExtendsFactoryFilter
+     *
+     */
+    public function getInputFilter()
+    {
+        return $this;
+    }
+}

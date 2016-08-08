@@ -1,0 +1,28 @@
+<?php
+namespace MyModule\Form;
+
+use Zend\Form\Form;
+
+/**
+ * PHP Version 5
+ *
+ * @category Form
+ * @package MyModule/Form
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicFactoryForm extends Form
+{
+    /**
+     * Create the Form
+     *
+     * @return \MyModule\Form\BasicFactoryForm
+     */
+    public function __construct()
+    {
+        parent::__construct('basic-factory-form');
+
+        return $this;
+    }
+}
