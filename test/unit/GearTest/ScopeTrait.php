@@ -11,6 +11,51 @@ trait ScopeTrait
             [
                 new \GearJson\Src\Src(
                     [
+                        'name' => sprintf('BasicNamespaceExtendsFactory%s', $srcType),
+                        'type' => $srcType,
+                        'extends' => sprintf('%s\My%s', $srcType, $srcType),
+                        'service' => 'factories',
+                        'namespace' => 'Basic\\Feature\\Issue\\Task'
+                    ***REMOVED***
+                ),
+                'basic-namespace-extends-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicNamespaceFactory%s', $srcType),
+                        'type' => $srcType,
+                        'service' => 'factories',
+                        'namespace' => 'Basic\\Feature\\Issue\\Task'
+                    ***REMOVED***
+                ),
+                'basic-namespace-factory',
+            ***REMOVED***,
+
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicFactory%s', $srcType),
+                        'type' => $srcType,
+                        'service' => 'factories'
+                    ***REMOVED***
+                ),
+                'basic-factory',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
+                        'name' => sprintf('BasicExtends%s', $srcType),
+                        'type' => $srcType,
+                        'extends' => sprintf('%s\My%s', $srcType, $srcType),
+                        //'namespace' => 'Basic\\Feature\\Issue\\Task'
+                    ***REMOVED***
+                ),
+                'basic-extends',
+            ***REMOVED***,
+            [
+                new \GearJson\Src\Src(
+                    [
                         'name' => sprintf('LongNamespace%s', $srcType),
                         'type' => $srcType,
                         'namespace' => 'Basic\\Feature\\Issue\\Task'
