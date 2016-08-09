@@ -13,6 +13,7 @@ use Zend\View\Resolver\TemplatePathStack;
 
 /**
  * @group Fixing
+ * @group fix8
  * @group Controller
  */
 class ControllerServiceTest extends TestCase
