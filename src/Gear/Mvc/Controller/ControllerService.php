@@ -12,6 +12,8 @@ use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
 
 class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
@@ -162,6 +164,13 @@ class ControllerService extends AbstractMvc implements
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 
+        $options['classDocs'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/class-phpdocs.phtml',
+            [
+                'package' => $this->getCode()->getClassDocsPackage($this->controller),
+                'tableLabel' => $this->str('label', $this->controller->getNameOff())
+            ***REMOVED***
+        );
 
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));

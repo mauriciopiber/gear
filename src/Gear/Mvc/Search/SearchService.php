@@ -71,6 +71,8 @@ class SearchService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/search/full.search.phtml',
             array(
+                'package' => $this->getCode()->getClassDocsPackage($this->src),
+                'tableLabel' => $this->str('label', $this->db->getTable()),
                 'class'   => $this->db->getTable(),
                 'var'     => $this->str('var', $this->db->getTable()),
                 'module'  => $this->getModule()->getModuleName(),

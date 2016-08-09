@@ -3,10 +3,28 @@ namespace <?php echo $this->module;?>\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 <?php echo $this->use;?>
+/**
+ * Fixture for <?php echo $this->tableLabel;?> Entity.
+ *
+ * PHP Version 5
+ *
+ * @category Fixture
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->implements;?>
 {
 <?php echo $this->attribute;?>
 
+    /**
+     * Load Fixture
+     *
+     * @param ObjectManager $manager Object Manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -29,7 +47,11 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
     }
 
     /**
+     * Return Fixture Data Generated.
+     *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
      */
     public function getFixture()
     {
@@ -44,7 +66,13 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
     }
 
     /**
+     * Load the User Entity.
+     *
+     * To be used on created_by and updated_by column.
+     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     *
+     * @return GearAdmin\Entity\User
      */
 <?php echo $this->userlaw;?>
         $userId = $this->getReference($referencedName);

@@ -56,6 +56,33 @@ EOS;
         return $template;
     }
 
+    public function getClassDocsPackage($controller)
+    {
+        $this->docs = '';
+
+        if (empty($controller->getNamespace())) {
+
+            if ($controller instanceof Controller) {
+                $type = 'Controller';
+            } else {
+
+                if ($controller->getType() === 'SearchForm') {
+                    $type = 'Form/Search';
+                } else {
+                    $type = $controller->getType();
+                }
+            }
+
+            $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
+
+
+        }
+
+
+        return $this->docs;
+
+    }
+
     public function getClassDocs($src, $type = null)
     {
         return $this->getFileDocs($src, $type);
