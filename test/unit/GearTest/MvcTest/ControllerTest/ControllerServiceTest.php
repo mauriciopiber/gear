@@ -139,6 +139,8 @@ class ControllerServiceTest extends TestCase
      * @dataProvider tables
      * @group unit-test
      * @group RefactoringUnitTest
+     * @group db-docs
+     * @group db-controller
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {

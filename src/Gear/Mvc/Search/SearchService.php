@@ -61,7 +61,14 @@ class SearchService extends AbstractMvc
             }
         }
 
-        $this->getFileCreator()->createFile(
+        $this->getSearchTestService()->introspectFromTable($this->db);
+
+        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
+
+        $this->getFactoryService()->createFactory($this->src, $this->getModule()->getSearchFolder());
+        $this->getTraitService()->createTrait($this->src, $this->getModule()->getSearchFolder());
+
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/form/search/full.search.phtml',
             array(
                 'class'   => $this->db->getTable(),
@@ -72,12 +79,5 @@ class SearchService extends AbstractMvc
             $this->db->getTable().'SearchForm.php',
             $this->getModule()->getSearchFolder()
         );
-
-        $this->getSearchTestService()->introspectFromTable($this->db);
-
-        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
-
-        $this->getFactoryService()->createFactory($this->src, $this->getModule()->getSearchFolder());
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getSearchFolder());
     }
 }

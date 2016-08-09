@@ -4,12 +4,9 @@ namespace GearTest\MvcTest\FixtureTest;
 use GearBaseTest\AbstractTestCase;
 use GearTest\SingleDbTableTrait;
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamWrapper;
 
 /**
- * @group module
- * @group module-mvc
- * @group module-mvc-controller
+ * @group db-docs
  */
 class FixtureServiceTest extends AbstractTestCase
 {
@@ -37,6 +34,7 @@ class FixtureServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
+     * @group db-fixture
      * @group RefactoringSrc
      */
     public function testCreateCreateControllerDb($columns, $template)
@@ -56,21 +54,6 @@ class FixtureServiceTest extends AbstractTestCase
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->fixture->setColumnService($this->column->reveal());
-        /**
-
-
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
-        $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
-        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
-
-        */
-
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getPrimaryKeyColumns('SingleDbTable')->willReturn(['id_single_db_table'***REMOVED***);
@@ -95,13 +78,6 @@ class FixtureServiceTest extends AbstractTestCase
         $this->code->setSrcDependency($srcDependency);
         $this->code->setModule($this->module->reveal());
         $this->fixture->setCode($this->code);
-
-
-
-        //$this->service->setTraitTestService($this->traitTestService->reveal());
-
-
-        //$this->service->setFactoryService
 
         $file = $this->fixture->introspectFromTable($this->db);
 

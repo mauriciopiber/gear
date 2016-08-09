@@ -54,33 +54,6 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
     }
 
-    public function tables()
-    {
-        /**
-        $db = new Db(['table' => 'Table'***REMOVED***);
-
-        $action = new Action([
-            'name' => 'MyAction',
-            'service' => new Service(['name' => 'Table', 'object' => '%s\Service\Table'***REMOVED***),
-            'db' => $db
-        ***REMOVED***);
-
-
-        return [
-            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
-        ***REMOVED***;
-        */
-        return [
-            [$this->getAllPossibleColumns(), '', true***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     public function src()
     {
         $srcType = 'Repository';
@@ -91,6 +64,7 @@ class RepositoryServiceTest extends AbstractTestCase
     /**
      * @group src-mvc
      * @group src-mvc-repository
+     *
      * @dataProvider src
      */
     public function testCreateSrc($data, $template)
@@ -154,9 +128,37 @@ class RepositoryServiceTest extends AbstractTestCase
         //$this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
     }
 
+    public function tables()
+    {
+        /**
+        $db = new Db(['table' => 'Table'***REMOVED***);
+
+        $action = new Action([
+            'name' => 'MyAction',
+            'service' => new Service(['name' => 'Table', 'object' => '%s\Service\Table'***REMOVED***),
+            'db' => $db
+        ***REMOVED***);
+
+
+        return [
+            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
+            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
+        ***REMOVED***;
+        */
+        return [
+            [$this->getAllPossibleColumns(), '', true***REMOVED***,
+            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
+            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
+            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
+        ***REMOVED***;
+    }
+
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group db-docs
      */
     public function testInstrospectTable($columns, $template, $nullable)
     {

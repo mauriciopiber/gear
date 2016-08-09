@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\FilterTest;
+namespace GearTest\MvcTest\SearchTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
@@ -10,7 +10,7 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
-class FilterServiceTest extends AbstractTestCase
+class SearchServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
     use AllColumnsDbNotNullTableTrait;
@@ -37,7 +37,7 @@ class FilterServiceTest extends AbstractTestCase
         $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         //template
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter';
+        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/search';
 
         //src-dependency
         $this->srcDependency = new \Gear\Creator\SrcDependency();
@@ -57,78 +57,30 @@ class FilterServiceTest extends AbstractTestCase
         //injector
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
 
-        $this->filter = new \Gear\Mvc\Filter\FilterService();
+        $this->search = new \Gear\Mvc\Search\SearchService();
 
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setStringService($this->string);
-        $this->filter->setModule($this->module->reveal());
-        $this->filter->setCode($this->code);
+        $this->search->setFileCreator($this->fileCreator);
+        $this->search->setStringService($this->string);
+        $this->search->setModule($this->module->reveal());
+        $this->search->setCode($this->code);
 
-        $this->filter->setSrcDependency($this->srcDependency);
+        $this->search->setSrcDependency($this->srcDependency);
 
-        //filter-test
-        $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
-        $this->filter->setFilterTestService($this->filterTest->reveal());
+        //search-test
+        $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');
+        $this->search->setSearchTestService($this->searchTest->reveal());
 
         //trait
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->filter->setTraitService($this->traitService->reveal());
+        $this->search->setTraitService($this->traitService->reveal());
 
         //factory
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->filter->setFactoryService($this->factory->reveal());
+        $this->search->setFactoryService($this->factory->reveal());
 
         //interface
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
-        $this->filter->setInterfaceService($this->interface->reveal());
-    }
-
-
-    public function src()
-    {
-        $srcType = 'Filter';
-
-        return $this->getScopeForm($srcType);
-    }
-
-
-    /**
-     * @group src-mvc
-     * @group src-mvc-filter
-     * @dataProvider src
-     */
-    public function testCreateSrc($data, $template)
-    {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-
-        if (!empty($data->getNamespace())) {
-
-            $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
-
-        } else {
-            $this->module->map('Filter')->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        }
-
-        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-
-            if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
-                   $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
-            } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
-            }
-        }
-
-        $file = $this->filter->create($data);
-
-        $expected = $this->templates.'/src/'.$template.'.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
+        $this->search->setInterfaceService($this->interface->reveal());
     }
 
     public function tables()
@@ -138,31 +90,27 @@ class FilterServiceTest extends AbstractTestCase
         ***REMOVED***;
     }
 
+
     /**
      * @dataProvider tables
      * @group db-docs
-     * @group db-filter
+     * @group db-search
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getFilterFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $this->module->getSearchFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
-
-        $this->filter = new \Gear\Mvc\Filter\FilterService();
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setStringService($this->string);
-        $this->filter->setModule($this->module->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
-        $this->filter->setColumnService($this->column->reveal());
+        $this->search->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->hasUniqueConstraint($table)->willReturn(false);
@@ -170,28 +118,28 @@ class FilterServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->filter->setTableService($this->table->reveal());
+        $this->search->setTableService($this->table->reveal());
 
-        $filter = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
+        $search = new \GearJson\Src\Src(['name' => sprintf('%sSearch', $table), 'type' => 'SearchForm'***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter);
+        $schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
 
-        $this->filter->setCode($this->code);
+        $this->search->setCode($this->code);
 
-        $this->filter->setSchemaService($schemaService->reveal());
+        $this->search->setSchemaService($schemaService->reveal());
 
-        $this->filter->setTraitService($this->traitService->reveal());
+        $this->search->setTraitService($this->traitService->reveal());
 
         $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->filter->setSrcDependency($srcDependency->reveal());
-        //$this->filter->setFactoryService
+        $this->search->setSrcDependency($srcDependency->reveal());
+        //$this->search->setFactoryService
 
-        $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
+        $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');
 
-        $this->filter->setFilterTestService($this->filterTest->reveal());
+        $this->search->setSearchTestService($this->searchTest->reveal());
 
-        $file = $this->filter->introspectFromTable($this->db);
+        $file = $this->search->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 

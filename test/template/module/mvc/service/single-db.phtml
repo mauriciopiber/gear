@@ -3,6 +3,17 @@ namespace MyModule\Service;
 
 use GearBase\Service\AbstractService;
 
+/**
+ * Interaction between SingleDbTableController and Services
+ *
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class SingleDbTableService extends AbstractService
 {
 
@@ -10,12 +21,22 @@ class SingleDbTableService extends AbstractService
 
     protected $authService;
 
+    /**
+     * Get the values used to generate Html Table on List Action.
+     *
+     * @return array
+     */
     public function getTableHead()
     {
         $map = $this->getSingleDbTableRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
+    /**
+     * Get the Service session name.
+     *
+     * @return string
+     */
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
@@ -24,11 +45,27 @@ class SingleDbTableService extends AbstractService
         return $this->sessionName;
     }
 
+    /**
+     * Select one row based on criteria.
+     *
+     * @param array $data Criteria
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function selectOneBy(array $data)
     {
         return $this->getSingleDbTableRepository()->selectOneBy($data);
     }
 
+    /**
+     * Select All Rows from Database.
+     *
+     * Use cache to store data until change.
+     *
+     * @param array $select Criteria
+     *
+     * @return array
+     */
     public function selectAll($select = array())
     {
         $this->cache      = $this->getCache();
@@ -38,6 +75,15 @@ class SingleDbTableService extends AbstractService
 
     }
 
+    /**
+     * Create a new Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function create($data)
     {
         $repository = $this->getSingleDbTableRepository();
@@ -50,6 +96,16 @@ class SingleDbTableService extends AbstractService
         return $singleDbTable;
     }
 
+    /**
+     * Update a existing Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
+     *
+     * @param integer $idTable Id
+     * @param array   $data    Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function update($idTable, $data = array())
     {
         $repository = $this->getSingleDbTableRepository();
@@ -62,6 +118,13 @@ class SingleDbTableService extends AbstractService
         return $singleDbTable;
     }
 
+    /**
+     * Delete a existing Table.
+     *
+     * @param integer $idTable Id
+     *
+     * @return boolean[***REMOVED***|string[***REMOVED***|unknown
+     */
     public function delete($idTable)
     {
         $entity = $this->selectById($idTable);
@@ -80,12 +143,26 @@ class SingleDbTableService extends AbstractService
         return $singleDbTable;
     }
 
+    /**
+     * Convert Entity to Array.
+     *
+     * @param \MyModule\Entity\SingleDbTable $data Single Db Table Entity
+     *
+     * @return array
+     */
     public function extract(\MyModule\Entity\SingleDbTable $data)
     {
         $repository = $this->getSingleDbTableRepository();
         return $repository->extract($data);
     }
 
+    /**
+     * Select one row based on Id.
+     *
+     * @param array $idToSelect Id
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function selectById($idToSelect)
     {
         $repository = $this->getSingleDbTableRepository();
