@@ -17,9 +17,18 @@ class FilterTestService extends AbstractMvcTest
             $this->db = $this->src->getDb();
             return $this->createDb();
         }
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $location = $this->getCodeTest()->getLocation($src);
+
+        if ($this->src->getAbstract() !== true) {
+
+            $this->getTraitTestService()->createTraitTest($src, $location);
+
+            if ($this->src->getService() == 'factories') {
+                $this->getFactoryTestService()->createFactoryTest($src, $location);
+            }
+        }
+
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/filter-test/src/test-src.phtml',
@@ -30,7 +39,6 @@ class FilterTestService extends AbstractMvcTest
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'mock'  => $mock
             ),
             $this->src->getName().'Test.php',
             $location
