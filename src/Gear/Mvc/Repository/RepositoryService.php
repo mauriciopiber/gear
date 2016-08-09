@@ -78,7 +78,8 @@ class RepositoryService extends AbstractMvc
         $options = [
             'specialityFields' => $this->specialites,
             'baseClass' => $this->str('class', $this->db->getTable()),
-            'baseClassCut' => $this->str('var-lenght', $this->db->getTable()),
+            'tableIdVar' => $this->str('var-lenght', 'id_'.$this->db->getTable()),
+            'tableId' => $this->str('var', 'id_'.$this->db->getTable()),
             'class'   => $this->className,
             'module'  => $this->getModule()->getModuleName(),
             'aliase'  => $this->mainAliase,
