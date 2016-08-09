@@ -82,6 +82,8 @@ class FilterService extends AbstractMvc
         $fileCreate->setTemplate('template/module/mvc/filter/full.filter.phtml');
         $fileCreate->setOptions(
             array(
+                'package' => $this->getCode()->getClassDocsPackage($this->src),
+                'tableLabel' => $this->str('label', $this->db->getTable()),
                 'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),

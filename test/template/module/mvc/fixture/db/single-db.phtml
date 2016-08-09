@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Fixture Data For Table Entity.
+ * Fixture for Single Db Table Entity.
  *
  * PHP Version 5
  *
@@ -23,8 +23,8 @@ class TableFixture extends AbstractFixture implements
 {
 
     /**
-     * Load fixture to Database
-
+     * Load Fixture
+     *
      * @param ObjectManager $manager Object Manager
      *
      * @return void
@@ -47,7 +47,7 @@ class TableFixture extends AbstractFixture implements
     }
 
     /**
-     * Return Fixture Data Generated based on Columns.
+     * Return Fixture Data Generated.
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      *

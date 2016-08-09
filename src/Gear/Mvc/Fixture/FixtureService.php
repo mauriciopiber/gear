@@ -25,7 +25,6 @@ use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 
 class FixtureService extends AbstractMvc
 {
-
     protected $loadedFixtures;
 
     protected $event;
@@ -89,6 +88,8 @@ class FixtureService extends AbstractMvc
 
         $this->file->setOptions(
             array(
+                'tableLabel'  => $this->str('label', $this->db->getTable()),
+                'package'     => $this->getCode()->getClassDocsPackage($this->src),
                 'var'         => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
                 'load'        => $this->load,
                 'preLoad'     => $this->preLoad,

@@ -71,6 +71,8 @@ class FormService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/full.form.phtml',
             array(
+                'package' => $this->getCode()->getClassDocsPackage($this->src),
+                'tableLabel' => $this->str('label', $this->db->getTable()),
                 'var' => $this->str('var', $this->src->getName()),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),

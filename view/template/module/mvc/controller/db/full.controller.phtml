@@ -9,15 +9,10 @@ use Zend\View\Model\JsonModel;
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
     const CREATE = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/create';
-
     const EDIT   = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit';
-
     const LISTS  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list';
-
-<?php if ($this->imageService) :?>
     const IMAGE  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/upload-image';
 
-<?php endif;?>
 <?php echo $this->attribute;?>
 <?php echo $this->createAction;?>
 <?php echo $this->editAction;?>
