@@ -3,6 +3,17 @@ namespace <?php echo $this->module;?>\Service;
 use GearBase\Service\AbstractService;
 <?php echo $this->use;?>
 
+/**
+ * Interaction between <?php echo $this->table;?>Controller and Services
+ *
+ * PHP Version 5
+ *
+ * @category Service
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
 <?php echo $this->attribute;?>
@@ -12,12 +23,22 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     protected $authService;
 <?php echo $this->authadapter;?>
 
+    /**
+     * Get the values used to generate Html Table on List Action.
+     *
+     * @return array
+     */
     public function getTableHead()
     {
         $map = $this->get<?php echo $this->repository;?>()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
+    /**
+     * Get the Service session name.
+     *
+     * @return string
+     */
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
@@ -26,12 +47,28 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $this->sessionName;
     }
 
+    /**
+     * Select one row based on criteria.
+     *
+     * @param array $data Criteria
+     *
+     * @return null|<?php echo $this->entity.PHP_EOL;?>
+     */
     public function selectOneBy(array $data)
     {
         return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
     }
 
 <?php echo $this->selectviewbyid;?>
+    /**
+     * Select All Rows from <?php echo $this->tableLabel;?> table.
+     *
+     * Use cache to store data until change.
+     *
+     * @param array $select Criteria
+     *
+     * @return array
+     */
     public function selectAll($select = array())
     {
         $this->cache      = $this->getCache();
@@ -42,6 +79,15 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     }
 <?php echo $this->overwrite;?>
 
+    /**
+     * Create a new <?php echo $this->tableLabel;?> on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return null|<?php echo $this->entity.PHP_EOL;?>
+     */
     public function create($data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
@@ -56,6 +102,16 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $<?php echo $this->var;?>;
     }
 
+    /**
+     * Update a existing <?php echo $this->tableLabel;?> on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
+     *
+     * @param integer $idTable Id
+     * @param array   $data    Valid $_POST
+     *
+     * @return null|<?php echo $this->entity.PHP_EOL;?>
+     */
     public function update($idTable, $data = array())
     {
         $repository = $this->get<?php echo $this->repository;?>();
@@ -70,6 +126,13 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $<?php echo $this->var;?>;
     }
 
+    /**
+     * Delete a existing <?php echo $this->tableLabel;?> by Id.
+     *
+     * @param integer $idTable Id
+     *
+     * @return array
+     */
     public function delete($idTable)
     {
         $entity = $this->selectById($idTable);
@@ -92,6 +155,13 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $<?php echo $this->var;?>;
     }
 
+    /**
+     * Convert Entity to Array.
+     *
+     * @param \<?php echo $this->entity;?> $data <?php echo $this->tableLabel;?> Entity
+     *
+     * @return array
+     */
     public function extract(\<?php echo $this->module;?>\Entity\<?= $this->str('class', $this->baseName)?> $data)
     {
         $repository = $this->get<?php echo $this->repository;?>();

@@ -13,10 +13,17 @@ class All
     }
 
 
-    public function getServiceSelectById($repository)
+    public function getServiceSelectById($repository, $label, $entity)
     {
 
         return <<<EOS
+    /**
+     * Select one {$label} by Id.
+     *
+     * @param array \$idToSelect Id
+     *
+     * @return null|{$entity}
+     */
     public function selectById(\$idToSelect)
     {
         \$repository = \$this->get{$repository}();

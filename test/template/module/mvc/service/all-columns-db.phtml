@@ -62,7 +62,7 @@ class TableService extends AbstractService
     }
 
     /**
-     * Select All Rows from Database.
+     * Select All Rows from Table table.
      *
      * Use cache to store data until change.
      *
@@ -149,11 +149,11 @@ class TableService extends AbstractService
     }
 
     /**
-     * Delete a existing Table.
+     * Delete a existing Table by Id.
      *
      * @param integer $idTable Id
      *
-     * @return boolean[***REMOVED***|string[***REMOVED***|unknown
+     * @return array
      */
     public function delete($idTable)
     {
@@ -189,7 +189,7 @@ class TableService extends AbstractService
     }
 
     /**
-     * Select one row based on Id.
+     * Select one Table by Id.
      *
      * @param array $idToSelect Id
      *

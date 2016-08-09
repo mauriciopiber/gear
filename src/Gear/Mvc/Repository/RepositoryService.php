@@ -60,6 +60,12 @@ class RepositoryService extends AbstractMvc
         $this->calculateAliasesStack();
         $this->setUp();
 
+        $this->entityName = sprintf(
+            '%s\Entity\%s',
+            $this->getModule()->getModuleName(),
+            $this->str('class', $this->db->getTable())
+        );
+
         $this->getRepositoryTestService()->introspectFromTable($this->db);
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
 
@@ -79,7 +85,9 @@ class RepositoryService extends AbstractMvc
             'map' => $this->getMap(),
             'updateBefore' => '',
             'insertBefore' => '',
-            'classDocs' => $this->getCode()->getClassDocs($this->src)
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'entity' => $this->entityName,
+            'tableLabel' => $this->str('label', $this->db->getTable()),
         ***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {

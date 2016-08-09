@@ -50,7 +50,7 @@ class SingleDbTableService extends AbstractService
      *
      * @param array $data Criteria
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\SingleDbTable
      */
     public function selectOneBy(array $data)
     {
@@ -58,7 +58,7 @@ class SingleDbTableService extends AbstractService
     }
 
     /**
-     * Select All Rows from Database.
+     * Select All Rows from Single Db Table table.
      *
      * Use cache to store data until change.
      *
@@ -76,13 +76,13 @@ class SingleDbTableService extends AbstractService
     }
 
     /**
-     * Create a new Table on database.
+     * Create a new Single Db Table on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
      *
      * @param array $data Valid $_POST
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\SingleDbTable
      */
     public function create($data)
     {
@@ -97,14 +97,14 @@ class SingleDbTableService extends AbstractService
     }
 
     /**
-     * Update a existing Table on database.
+     * Update a existing Single Db Table on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
      *
      * @param integer $idTable Id
      * @param array   $data    Valid $_POST
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\SingleDbTable
      */
     public function update($idTable, $data = array())
     {
@@ -119,11 +119,11 @@ class SingleDbTableService extends AbstractService
     }
 
     /**
-     * Delete a existing Table.
+     * Delete a existing Single Db Table by Id.
      *
      * @param integer $idTable Id
      *
-     * @return boolean[***REMOVED***|string[***REMOVED***|unknown
+     * @return array
      */
     public function delete($idTable)
     {
@@ -157,11 +157,11 @@ class SingleDbTableService extends AbstractService
     }
 
     /**
-     * Select one row based on Id.
+     * Select one Single Db Table by Id.
      *
      * @param array $idToSelect Id
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\SingleDbTable
      */
     public function selectById($idToSelect)
     {
