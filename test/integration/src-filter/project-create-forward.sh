@@ -5,7 +5,7 @@ build=${1}
 basedir=$(dirname "$0")
 fullpath=$(realpath $basedir)
 
-echo "Testing SRC - REPOSITORY"
+echo "Testing SRC - FILTER"
 
 base="/var/www/gear-package"
 
@@ -21,5 +21,5 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-filter.yml"
 cd $modulepath && ant phpcs-docs
-#cd $modulepath && ant unit
-#cd $modulepath && ant unit-coverage
+cd $modulepath && ant unit
+cd $modulepath && ant unit-coverage
