@@ -75,7 +75,8 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
                 'var'   => $this->str('var', $this->name),
                 'lenght' => $this->str('var-lenght', $this->name),
                 'srcType' => $this->srcType,
-                'srcName' => $this->name
+                'srcName' => $this->name,
+                'srcLabel' => $this->str('label', $this->name)
             )
         );
 

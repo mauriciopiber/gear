@@ -3,13 +3,24 @@ namespace <?php echo $this->module;?>\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package <?php echo $this->module;?>/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class IndexController extends AbstractActionController
 {
+    /**
+     * Index Action
+     *
+     * @return ViewModel
+     */
     public function indexAction()
     {
-        return new ViewModel(
-            array(
-            )
-        );
+        return new ViewModel();
     }
 }

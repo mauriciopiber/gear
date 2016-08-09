@@ -6,8 +6,24 @@ use Zend\Validator\AbstractValidator;
 use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
 
+/**
+ * PHP Version 5
+ *
+ * @category Module
+ * @package <?php echo $this->module.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class Module
 {
+    /**
+     * Init module settings
+     *
+     * @param ModuleManager $moduleManager Module Manager
+     *
+     * @return void
+     */
     public function init(ModuleManager $moduleManager)
     {
         $moduleManager->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function ($event) {
@@ -15,6 +31,13 @@ class Module
         });
     }
 
+    /**
+     * Config executed on Bootstrap
+     *
+     * @param MvcEvent $mvcEvent Mvc Event
+     *
+     * @return void
+     */
     public function onBootstrap(MvcEvent $mvcEvent)
     {
         $translator = $mvcEvent->getApplication()->getServiceManager()->get('translator');
@@ -39,6 +62,13 @@ class Module
         });
     }
 
+    /**
+     * Event before Route
+     *
+     * @param MvcEvent $event Mvc Event
+     *
+     * @return void
+     */
     public function onPreRoute(MvcEvent $event)
     {
         $app     = $event->getTarget();
@@ -50,7 +80,11 @@ class Module
         }
     }
 
-
+    /**
+     * Return default autoloader config
+     *
+     * @return array
+     */
     public function getAutoloaderConfig()
     {
         return array(
@@ -62,13 +96,22 @@ class Module
         );
     }
 
+    /**
+     * Return module configurations
+     *
+     * @return array
+     */
     public function getConfig()
     {
         return include __DIR__ . '/../../config/module.config.php';
     }
 
     /**
+     * Create Log Errors for exceptions.
+     *
      * @codeCoverageIgnore
+     *
+     * @return array
      */
     public function getServiceConfig()
     {
@@ -86,6 +129,11 @@ class Module
         );
     }
 
+    /**
+     * Return Class Location on filesystem.
+     *
+     * @return string
+     */
     public function getLocation()
     {
         return __DIR__;

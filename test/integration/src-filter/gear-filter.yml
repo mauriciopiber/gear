@@ -12,4 +12,10 @@ src:
     name: BasicFactory
     type: Filter
     service: factories
+  99:
+    name: FilterInterface
+    type: Interface
+    namespace: Interfaces
+    dependency: 'Filter\BasicFilter'  
     
+  
