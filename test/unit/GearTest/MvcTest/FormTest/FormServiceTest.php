@@ -131,4 +131,69 @@ class FormServiceTest extends AbstractTestCase
         );
 
     }
+
+    public function tables()
+    {
+        return [
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider tables
+     * @group db-docs
+     * @group db-form
+     */
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    {
+        $table = $this->string->str('class', $tableName);
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getFormFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
+
+        $this->form->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->hasUniqueConstraint($table)->willReturn(false);
+        //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
+        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
+
+        $this->form->setTableService($this->table->reveal());
+
+        $form = new \GearJson\Src\Src(['name' => sprintf('%sForm', $table), 'type' => 'Form'***REMOVED***);
+
+        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $schemaService->getSrcByDb($this->db, 'Form')->willReturn($form);
+
+        $this->form->setCode($this->code);
+
+        $this->form->setSchemaService($schemaService->reveal());
+
+        $this->form->setTraitService($this->traitService->reveal());
+
+        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
+        $this->form->setSrcDependency($srcDependency->reveal());
+        //$this->form->setFactoryService
+
+        $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
+
+        $this->form->setFormTestService($this->formTest->reveal());
+
+        $file = $this->form->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/db/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
 }

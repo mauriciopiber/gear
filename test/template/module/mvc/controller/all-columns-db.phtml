@@ -7,16 +7,36 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
 use GearImage\Service\ImageServiceTrait;
 
+/**
+ * Table Controller
+ *
+ * Actions for Table
+ *
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class TableController extends AbstractActionController
 {
     const CREATE = 'my-module/table/create';
+
     const EDIT   = 'my-module/table/edit';
+
     const LISTS  = 'my-module/table/list';
+
     const IMAGE  = 'my-module/table/upload-image';
 
     use ImageServiceTrait;
 
-
+    /**
+     * Create Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function createAction()
     {
         $this->error = false;
@@ -52,6 +72,11 @@ class TableController extends AbstractActionController
         );
     }
 
+    /**
+     * Edit Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function editAction()
     {
         $this->error = false;
@@ -106,6 +131,11 @@ class TableController extends AbstractActionController
         );
     }
 
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function viewAction()
     {
         $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
@@ -131,6 +161,11 @@ class TableController extends AbstractActionController
         );
     }
 
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
@@ -146,6 +181,11 @@ class TableController extends AbstractActionController
         return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
     }
 
+    /**
+     * Upload Image Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function uploadImageAction()
     {
         $this->getImageService()->appendPlugin();
@@ -186,6 +226,11 @@ class TableController extends AbstractActionController
         );
     }
 
+    /**
+     * List Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function listAction()
     {
         $data = $this->getRequestPlugin()->prepareJson(

@@ -5,6 +5,17 @@ use GearBase\Service\AbstractService;
 use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 
+/**
+ * Interaction between TableController and Services
+ *
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class TableService extends AbstractService
 {
     use PasswordVerifyTrait;
@@ -14,12 +25,22 @@ class TableService extends AbstractService
 
     protected $authService;
 
+    /**
+     * Get the values used to generate Html Table on List Action.
+     *
+     * @return array
+     */
     public function getTableHead()
     {
         $map = $this->getTableRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
+    /**
+     * Get the Service session name.
+     *
+     * @return string
+     */
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
@@ -28,11 +49,27 @@ class TableService extends AbstractService
         return $this->sessionName;
     }
 
+    /**
+     * Select one row based on criteria.
+     *
+     * @param array $data Criteria
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function selectOneBy(array $data)
     {
         return $this->getTableRepository()->selectOneBy($data);
     }
 
+    /**
+     * Select All Rows from Database.
+     *
+     * Use cache to store data until change.
+     *
+     * @param array $select Criteria
+     *
+     * @return array
+     */
     public function selectAll($select = array())
     {
         $this->cache      = $this->getCache();
@@ -42,6 +79,15 @@ class TableService extends AbstractService
 
     }
 
+    /**
+     * Create a new Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function create($data)
     {
         $repository = $this->getTableRepository();
@@ -67,6 +113,16 @@ class TableService extends AbstractService
         return $table;
     }
 
+    /**
+     * Update a existing Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
+     *
+     * @param integer $idTable Id
+     * @param array   $data    Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function update($idTable, $data = array())
     {
         $repository = $this->getTableRepository();
@@ -92,6 +148,13 @@ class TableService extends AbstractService
         return $table;
     }
 
+    /**
+     * Delete a existing Table.
+     *
+     * @param integer $idTable Id
+     *
+     * @return boolean[***REMOVED***|string[***REMOVED***|unknown
+     */
     public function delete($idTable)
     {
         $entity = $this->selectById($idTable);
@@ -112,12 +175,26 @@ class TableService extends AbstractService
         return $table;
     }
 
+    /**
+     * Convert Entity to Array.
+     *
+     * @param \MyModule\Entity\Table $data Table Entity
+     *
+     * @return array
+     */
     public function extract(\MyModule\Entity\Table $data)
     {
         $repository = $this->getTableRepository();
         return $repository->extract($data);
     }
 
+    /**
+     * Select one row based on Id.
+     *
+     * @param array $idToSelect Id
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function selectById($idToSelect)
     {
         $repository = $this->getTableRepository();

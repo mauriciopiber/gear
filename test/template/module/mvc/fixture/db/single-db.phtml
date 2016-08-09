@@ -6,11 +6,29 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * Fixture Data For Table Entity.
+ *
+ * PHP Version 5
+ *
+ * @category Fixture
+ * @package MyModule/Fixture
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class TableFixture extends AbstractFixture implements
     FixtureInterface,
     DependentFixtureInterface
 {
 
+    /**
+     * Load fixture to Database
+
+     * @param ObjectManager $manager Object Manager
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -29,7 +47,11 @@ class TableFixture extends AbstractFixture implements
     }
 
     /**
+     * Return Fixture Data Generated based on Columns.
+     *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
      */
     public function getFixture()
     {
@@ -130,7 +152,13 @@ class TableFixture extends AbstractFixture implements
     }
 
     /**
+     * Load the User Entity.
+     *
+     * To be used on created_by and updated_by column.
+     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     *
+     * @return GearAdmin\Entity\User
      */
     public function getReferenceToEntity()
     {
@@ -141,6 +169,11 @@ class TableFixture extends AbstractFixture implements
           ->findOneBy(array('idUser' => $userId->getIdUser()));
     }
 
+    /**
+     * Get The Table's Foreign Keys Dependencies.
+     *
+     * @return string[***REMOVED***
+     */
     public function getDependencies()
     {
         return array('GearAdmin\Fixture\LoadUser');

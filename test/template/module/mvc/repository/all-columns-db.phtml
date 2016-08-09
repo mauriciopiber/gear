@@ -3,10 +3,25 @@ namespace MyModule\Repository;
 
 use GearBase\Repository\AbstractRepository;
 
+/**
+ * Repository to interate with Table database table.
+ *
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package MyModule/Repository
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class TableRepository extends AbstractRepository
 {
     /**
+     * Config used to create Doctrine Query and Html Table Header on List.
+     *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
      */
     public function getMapReferences()
     {
@@ -168,16 +183,33 @@ class TableRepository extends AbstractRepository
         );
     }
 
+    /**
+     * Get the table Entity.
+     *
+     * @return string
+     */
     public function getRepositoryName()
     {
         return 'MyModule\Entity\Table';
     }
 
+    /**
+     * Get the table default Aliase to query on database.
+     *
+     * @return string
+     */
     public function getAliase()
     {
         return 't';
     }
 
+    /**
+     * Select one Table by Id.
+     *
+     * @param integer $idtable Id to search criteria
+     *
+     * @return null|MyModule\Entity\Table
+     */
     public function selectById($idtable)
     {
         return $this->getRepository()->findOneBy(
@@ -185,6 +217,14 @@ class TableRepository extends AbstractRepository
         );
     }
 
+    /**
+     * Update database.
+     *
+     * @param integer $idTable Id which should be updated
+     * @param array   $data    Valid $_POST
+     *
+     * @return MyModule\Entity\Table
+     */
     public function update($idTable, $data)
     {
         $entity = $this->selectById($idTable);
@@ -203,6 +243,13 @@ class TableRepository extends AbstractRepository
         return $entity;
     }
 
+    /**
+     * Create row in database.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return MyModule\Entity\Table
+     */
     public function insert($data)
     {
         $entity = new \MyModule\Entity\Table();

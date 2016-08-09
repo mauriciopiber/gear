@@ -1,4 +1,9 @@
 
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function deleteAction()
     {
         $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);

@@ -1,0 +1,60 @@
+<?php
+namespace MyModule\Form\Search;
+
+use GearBase\Form\Search\AbstractSearchForm;
+use Doctrine\ORM\EntityManager;
+use Zend\Form\Element;
+
+/**
+ * Search Form for Single Db Table Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Form
+ * @package MyModule/Form/Search
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class SingleDbTableSearchForm extends AbstractSearchForm
+{
+    /**
+     * Construct Controller
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @param EntityManager $entityManager EntityManager
+     *
+     * @return SingleDbTableSearchForm
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        parent::__construct('singleDbTableSearchForm');
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'singleDbTableSearch');
+        $this->setAttribute('class', 'form-inline');
+        $this->setEntityManager($entityManager);
+
+
+        $nome = new Element('likeField');
+        $nome->setAttributes(array(
+            'name' => 'likeField',
+            'id' => 'likeField',
+            'type' => 'text',
+            'data-ng-model' => 'list.search'
+        ));
+        $nome->setLabel('Palavra Chave');
+        $this->add($nome);
+
+
+        $submit = new Element('clear');
+        $submit->setValue('Limpar');
+        $submit->setAttributes(array(
+            'type'  => 'button',
+            'data-ng-click' => 'list.clearSearch()'
+        ));
+        $this->add($submit);
+
+        return $this;
+    }
+}
