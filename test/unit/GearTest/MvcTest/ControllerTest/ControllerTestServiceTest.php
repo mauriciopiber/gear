@@ -13,6 +13,7 @@ use GearTest\ControllerScopeTrait;
 
 /**
  * @group Controller
+ * @group fix8
  * @group Fix3
  */
 class ControllerTestServiceTest extends AbstractTestCase

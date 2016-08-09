@@ -62,6 +62,15 @@ class FormTestService extends AbstractMvcTest
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
+            if ($this->src->getAbstract() !== true) {
+
+            $this->getTraitTestService()->createTraitTest($src, $location);
+
+            if ($this->src->getService() == 'factories') {
+                $this->getFactoryTestService()->createFactoryTest($src, $location);
+            }
+        }
+
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form-test/src/test-src.phtml',
             array(
