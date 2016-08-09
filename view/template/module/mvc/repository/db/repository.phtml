@@ -2,26 +2,58 @@ namespace <?php echo $this->module;?>\Repository;
 
 use GearBase\Repository\AbstractRepository;
 
+/**
+ * Repository to interate with <?php echo $this->tableLabel;?> table.
+ *
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?> extends AbstractRepository
 {
     /**
+     * Config used to create Doctrine Query and Html Table Header on List.
+     *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
      */
     public function getMapReferences()
     {
 <?php echo $this->map.PHP_EOL;?>
     }
 
+    /**
+     * Get the table Entity.
+     *
+     * @return string
+     */
     public function getRepositoryName()
     {
         return '<?= $this->module;?>\Entity\<?= $this->baseClass;?>';
     }
 
+    /**
+     * Get the table default Aliase to query on database.
+     *
+     * @return string
+     */
     public function getAliase()
     {
         return '<?php echo $this->aliase;?>';
     }
 
+    /**
+     * Select one Table by Id.
+     *
+     * @param integer $idtable Id to search criteria
+     *
+     * @return null|<?php echo $this->entity.PHP_EOL;?>
+     */
     public function selectById($id<?= $this->baseClassCut;?>)
     {
         return $this->getRepository()->findOneBy(
@@ -29,6 +61,14 @@ class <?php echo $this->class;?> extends AbstractRepository
         );
     }
 
+    /**
+     * Update database.
+     *
+     * @param integer $idTable Id which should be updated
+     * @param array   $data    Valid $_POST
+     *
+     * @return <?php echo $this->entity.PHP_EOL;?>
+     */
     public function update($idTable, $data)
     {
         $entity = $this->selectById($idTable);
@@ -42,6 +82,13 @@ class <?php echo $this->class;?> extends AbstractRepository
         return $entity;
     }
 
+    /**
+     * Create row in database.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return <?php echo $this->entity.PHP_EOL;?>
+     */
     public function insert($data)
     {
         $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();

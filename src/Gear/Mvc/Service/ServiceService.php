@@ -115,6 +115,12 @@ class ServiceService extends AbstractMvc
         $this->functions  = '';
         $this->repository = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
 
+        $this->entityName = sprintf(
+            '%s\Entity\%s',
+            $this->getModule()->getModuleName(),
+            $this->str('class', $this->db->getTable())
+        );
+
         $this->use       = $this->getCode()->getUse($this->src);
         $this->attribute = $this->getCode()->getUseAttribute($this->src);
 
@@ -128,6 +134,10 @@ class ServiceService extends AbstractMvc
         }
 
         $this->file->setOptions(array(
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'entity' => $this->entityName,
+            'table' =>  $this->str('class', $this->name),
+            'tableLabel' => $this->str('label', $this->name),
             'tableUploadImage' => $this->tableUploadImage,
             'var' => $this->str('var-lenght', $this->name),
             'functions'     => $this->functions,
@@ -138,7 +148,7 @@ class ServiceService extends AbstractMvc
             'nameVar'       => $this->str('var', $this->name),
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
-            'entity'        => $this->name,
+            //'entity'        => $this->name,
             'class'         => $this->className,
             'extends'       => 'AbstractService',
             'use'           => $this->use,
@@ -181,7 +191,11 @@ class ServiceService extends AbstractMvc
         $user = '\Gear\UserType\\'.$this->str('class', $name);
         $userType = new $user();
         $this->selectAll .= $userType->getServiceSelectAll();
-        $this->functions .= $userType->getServiceSelectById($this->repository);
+        $this->functions .= $userType->getServiceSelectById(
+            $this->repository,
+            $this->str('label', $this->db->getTable()),
+            $this->entityName
+        );
 
         if ($this->db->getUser() == 'low-strict') {
             $dbType = 'strict';
