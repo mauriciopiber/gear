@@ -107,6 +107,7 @@ class FactoryService extends AbstractMvc
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
         return array(
+            'package'     => $this->getCode()->getClassDocsPackage($src),
             'namespace'   => $this->getCode()->getNamespace($src),
             'class'       => $src->getName(),
             'form'        => $this->getServiceManager()->getServiceName($form),
@@ -129,6 +130,7 @@ class FactoryService extends AbstractMvc
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
         return array(
+            'package'     => $this->getCode()->getClassDocsPackage($src),
             'namespace'   => $this->getCode()->getNamespace($src),
             'class'       => $src->getName(),
             'form'        => $this->getServiceManager()->getServiceName($src),

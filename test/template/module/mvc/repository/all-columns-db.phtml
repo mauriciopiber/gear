@@ -206,14 +206,14 @@ class TableRepository extends AbstractRepository
     /**
      * Select one Table by Id.
      *
-     * @param integer $idtable Id to search criteria
+     * @param integer $idTable Id to search criteria
      *
      * @return null|MyModule\Entity\Table
      */
-    public function selectById($idtable)
+    public function selectById($idTable)
     {
         return $this->getRepository()->findOneBy(
-            array('idTable' => $idtable)
+            array('idTable' => $idTable)
         );
     }
 

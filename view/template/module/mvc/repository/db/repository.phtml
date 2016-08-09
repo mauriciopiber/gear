@@ -50,14 +50,14 @@ class <?php echo $this->class;?> extends AbstractRepository
     /**
      * Select one Table by Id.
      *
-     * @param integer $idtable Id to search criteria
+     * @param integer $<?= $this->tableIdVar;?> Id to search criteria
      *
      * @return null|<?php echo $this->entity.PHP_EOL;?>
      */
-    public function selectById($id<?= $this->baseClassCut;?>)
+    public function selectById($<?= $this->tableIdVar;?>)
     {
         return $this->getRepository()->findOneBy(
-            array('id<?= $this->baseClass;?>' => $id<?= $this->baseClassCut;?>)
+            array('<?= $this->tableId;?>' => $<?= $this->tableIdVar;?>)
         );
     }
 
