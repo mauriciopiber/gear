@@ -369,20 +369,17 @@ EOS;
     public function fixSetterDocs($fileName)
     {
 
-        $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****/';
+        $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
 
         $file = file_get_contents($fileName);
 
         preg_match_all($pattern, $file, $matches);
 
-        //var_dump($matches);die();
 
-        foreach ($matches[0***REMOVED*** as $param) {
+        foreach ($matches[0***REMOVED*** as $exact) {
 
-            if (strpos($param, PHP_EOL) !== false) {
-                $explode = explode(PHP_EOL, $param);
-                $param = $explode[0***REMOVED***;
-            }
+            $explode = explode(PHP_EOL, $exact);
+            $param = $explode[0***REMOVED***;
 
             $all = explode(' ', $param);
             $name = end($all);
@@ -390,9 +387,9 @@ EOS;
 
             $label = $this->str('label', $name);
 
-            $replacement = $param.' '.$label;
+            $replacement = $param.' '.$label.'\n';
 
-            $file = str_replace($param, $replacement, $file);
+            $file = str_replace($exact, $replacement, $file);
 
 
         }
