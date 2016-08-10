@@ -76,6 +76,13 @@ EOS;
             $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
 
 
+        } else {
+
+            $module = $this->getModule()->getModuleName();
+
+            $namespace = $this->resolveNamespace($controller->getNamespace());
+
+            $this->docs = str_replace('\\', '/', $namespace);
         }
 
 

@@ -37,8 +37,8 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-            'var'        => $this->str('var-lenght', $this->src->getName()),
             'className'  => $src->getName(),
+            'var'        => $this->str('var-lenght', $this->src->getName()),
             'module'     => $this->getModule()->getModuleName()
         ***REMOVED***;
 
@@ -86,22 +86,26 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         $this->repository = true;
         $this->usePrimaryKey = true;
 
-        $location = $this->getModule()->getTestRepositoryFolder();
-
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
+
+        $location = $this->getCodeTest()->getLocation($this->src);
+
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
-        $options = array(
-            'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
-            'varLenght'    => $this->str('var-lenght', $this->tableName),
-            'class'        => $this->tableName,
-            'module'       => $this->getModule()->getModuleName(),
-            'hydrator'     => ['update' => ''***REMOVED***,
-            'persist'      => ['create' => '', 'update' => ''***REMOVED***,
-            'data'         => ['create' => '', 'update' => ''***REMOVED***
-        );
+        $options = [
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
+            'className'     => $this->src->getName(),
+            'static'        => $this->getColumnService()->renderColumnPart('staticTest'),
+            'varLenght'     => $this->str('var-lenght', $this->tableName),
+            'class'         => $this->tableName,
+            'module'        => $this->getModule()->getModuleName(),
+            'hydrator'      => ['update' => ''***REMOVED***,
+            'persist'       => ['create' => '', 'update' => ''***REMOVED***,
+            'data'          => ['create' => '', 'update' => ''***REMOVED***
+        ***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($table) as $column) {
             if ($column instanceof RepositoryInsertTestInterface) {
