@@ -128,8 +128,9 @@ class RepositoryServiceTest extends AbstractTestCase
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), '', true, null***REMOVED***,
-            [$this->getAllPossibleColumns(), '-namespace', true, 'Custom\CustomNamespace'***REMOVED***,
+            [$this->getAllPossibleColumns(), '', true, null, 'invokables'***REMOVED***,
+            [$this->getAllPossibleColumns(), '-namespace', true, 'Custom\CustomNamespace', 'invokables'***REMOVED***,
+            [$this->getAllPossibleColumns(), '-factory', true, null, 'factory'***REMOVED***,
             //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
@@ -143,7 +144,7 @@ class RepositoryServiceTest extends AbstractTestCase
      * @group db-repository
      * @group fixit
      */
-    public function testInstrospectTable($columns, $template, $nullable, $namespace)
+    public function testInstrospectTable($columns, $template, $nullable, $namespace, $service)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
@@ -161,7 +162,8 @@ class RepositoryServiceTest extends AbstractTestCase
         $repository = new \GearJson\Src\Src([
             'name' => 'TableRepository',
             'type' => 'Repository',
-            'namespace' => $namespace
+            'namespace' => $namespace,
+            'service' => $service
         ***REMOVED***);
 
         if (!empty($repository->getNamespace())) {
