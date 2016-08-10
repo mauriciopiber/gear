@@ -66,16 +66,19 @@ class RepositoryService extends AbstractMvc
             $this->str('class', $this->db->getTable())
         );
 
-        $this->getRepositoryTestService()->introspectFromTable($this->db);
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
+        $location = $this->getCode()->getLocation($this->src);
 
-        $location = $this->getModule()->getRepositoryFolder();
+        $this->getRepositoryTestService()->introspectFromTable($this->db);
+
+        $this->getTraitService()->createTrait($this->src, $location);
 
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
         $options = [
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'namespace' => $this->getCode()->getNamespace($this->src),
             'specialityFields' => $this->specialites,
             'baseClass' => $this->str('class', $this->db->getTable()),
             'tableIdVar' => $this->str('var-lenght', 'id_'.$this->db->getTable()),

@@ -3,6 +3,7 @@ namespace MyModuleTest\RepositoryTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\ServiceManager\ServiceManager;
+use MyModule\Repository\TableRepository;
 
 /**
  * @group MyModule
@@ -15,7 +16,7 @@ class TableRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->repository = new \MyModule\Repository\TableRepository();
+        $this->repository = new TableRepository();
         $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $this->repository->setEntityManager($this->entityManager->reveal());
         $this->entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
