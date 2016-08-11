@@ -1,0 +1,100 @@
+/var/www/gear-package/gear/test/integration/benchmark/constructor-singular
+Module As Project CLI
+Deletar schema de módulo MyModule
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mCreating new module MyModule 11/08/2016 00:05:22[22;39m[0;49m
+[22;39m[42mScript ended by 0.603 at 11/08/2016 00:05:23[22;39m[0;49m
+[0;37m[0;49m
+[22;39m[0;49m
+[22;39m[41mConstruct MyModule 11/08/2016 00:05:24[22;39m[0;49m
+/var/www/gear-package/my-module/test/unit/MyModuleTest/RepositoryTest/IntForeignKeyRepositoryTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/ServiceTest/IntForeignKeyServiceTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/IntForeignKeyFormTraitTest.php
+/var/www/gear-package/my-module/test/unit/MyModuleTest/FormTest/SearchTest/IntForeignKeySearchFormTraitTest.php
+[22;39m[42mDb tabela "IntForeignKey" criado.[22;39m[0;49m
+[22;39m[42mScript ended by 9.673 at 11/08/2016 00:05:33[22;39m[0;49m
+Unable to locate tools.jar. Expected to find it in /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+Buildfile: /var/www/gear-package/my-module/build.xml
+
+check.runningAsModule:
+
+isRunningAsModule:
+
+check.runningAsVendor:
+
+isRunningAsVendor:
+
+check.runningAsProject:
+
+isRunningAsProject:
+
+set-vendor:
+
+phpunit-benchmark-group:
+     [exec***REMOVED*** PHPUnit 5.5.0 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Runtime:       PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+     [exec***REMOVED*** Configuration: /var/www/gear-package/my-module/test/phpunit-benchmark.xml
+     [exec***REMOVED*** 
+     [exec***REMOVED*** ............                                                      12 / 12 (100%)
+     [exec***REMOVED*** 
+     [exec***REMOVED*** You should really fix these slow tests (>200ms)...
+     [exec***REMOVED***  1. 555ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSelectOne
+     [exec***REMOVED***  2. 546ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testExtract
+     [exec***REMOVED***  3. 516ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testDelete
+     [exec***REMOVED***  4. 516ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testUpdate
+     [exec***REMOVED***  5. 512ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testDeleteWithoutExistingData
+     [exec***REMOVED***  6. 510ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSelectById
+     [exec***REMOVED***  7. 502ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testCreate
+     [exec***REMOVED***  8. 467ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testTableHead
+     [exec***REMOVED***  9. 447ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSetSelectAllCache
+     [exec***REMOVED***  10. 446ms to run MyModuleTest\ServiceTest\IntForeignKeyServiceTest:testSelectAllCacheWithCache
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** XHProf runs: 12
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSetSelectAllCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb8041b79&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectAllCacheWithCache
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb80af87a&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testTableHead
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb812e229&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectById
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb81acebc&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testSelectOne
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb824166d&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testCreate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb82c66c9&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testUpdate
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb83514de&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testDelete
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb83d04a2&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testDeleteWithoutExistingData
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb845a5e1&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTest::testExtract
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb84e0b22&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTraitTest::testGet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb850ee2f&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED***  * MyModuleTest\ServiceTest\IntForeignKeyServiceTraitTest::testSet
+     [exec***REMOVED***    http://10.10.10.99:8888?run=57abeb853c5de&source=MyModule
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** Time: 6.18 seconds, Memory: 14.00MB
+     [exec***REMOVED*** 
+     [exec***REMOVED*** OK (12 tests, 32 assertions)
+
+BUILD SUCCESSFUL
+Total time: 7 seconds

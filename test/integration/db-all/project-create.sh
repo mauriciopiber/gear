@@ -45,10 +45,11 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### can be turned off
 cd $modulepath && sudo script/load.sh
 
-#cd $modulepath && sudo composer update
 
-#cd $modulepath && ant unit
-cd $modulepath && ant unit-group -Ds=Repository
+
+cd $modulepath && ant unit
+cd $modulepath && ant protractor
+
 #cd $modulepath && ant unit-group -Ds=Service
 #cd $modulepath && ant unit-group -Ds=Controller
 

@@ -15,6 +15,7 @@ use GearBase\Repository\AbstractRepository;
  */
 class <?php echo $this->class;?> extends AbstractRepository
 {
+<?php echo ($this->constructor) ? $this->constructor : '';?>
     /**
      * Config used to create Doctrine Query and Html Table Header on List.
      *
