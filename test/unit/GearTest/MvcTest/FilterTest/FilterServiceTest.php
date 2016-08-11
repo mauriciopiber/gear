@@ -141,8 +141,9 @@ class FilterServiceTest extends AbstractTestCase
     public function tables()
     {
         return [
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-namespace', true, false, false, 'single_db_table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
         ***REMOVED***;
     }
 
@@ -158,7 +159,8 @@ class FilterServiceTest extends AbstractTestCase
         $hasColumnImage,
         $hasTableImage,
         $tableName,
-        $service
+        $service,
+        $namespace
     ) {
 
         $table = $this->string->str('class', $tableName);
@@ -179,7 +181,8 @@ class FilterServiceTest extends AbstractTestCase
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',
-                'service' => $service
+                'service' => $service,
+                'namespace' => $namespace
             ***REMOVED***
         );
 
