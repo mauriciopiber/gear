@@ -10,10 +10,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 
 /**
- * @group RefactoringUnitTest
- * @group src-filter
- * @group Filter1
- * @group Filter
+ * @group working
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
@@ -70,17 +67,18 @@ class FilterTestServiceTest extends AbstractTestCase
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table'***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null'***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table', 'invokables'***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, false, 'table', 'factories'***REMOVED***,
+            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables'***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null'***REMOVED***,
+            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables'***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @dataProvider tables
      */
-    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName)
+    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName, $service)
     {
         $table = $this->string->str('class', $tableName);
 
@@ -89,7 +87,13 @@ class FilterTestServiceTest extends AbstractTestCase
         $this->module->getTestFilterFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
+        $src = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sFilter', $table),
+                'type' => 'Filter',
+                'service' => $service
+            ***REMOVED***
+        );
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
