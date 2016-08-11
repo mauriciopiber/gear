@@ -67,18 +67,19 @@ class FilterTestServiceTest extends AbstractTestCase
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table', 'invokables'***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, false, 'table', 'factories'***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables'***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table', 'invokables', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, false, 'table', 'factories', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-namespace', true, false, 'table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
+            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables', null***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables'***REMOVED***,
+            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables', null***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @dataProvider tables
      */
-    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName, $service)
+    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
@@ -91,7 +92,8 @@ class FilterTestServiceTest extends AbstractTestCase
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',
-                'service' => $service
+                'service' => $service,
+                'namespace' => $namespace
             ***REMOVED***
         );
 
@@ -108,7 +110,7 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $file = $this->filter->introspectFromTable($db);
 
-        $this->assertEquals(file_get_contents($this->template.'/'.$expect.'.phtml'), file_get_contents($file));
+        $this->assertEquals(file_get_contents($this->template.'/db/'.$expect.'.phtml'), file_get_contents($file));
     }
 
     public function src()
