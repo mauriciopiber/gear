@@ -10,6 +10,9 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
+/**
+ * @group working
+ */
 class FilterServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
@@ -81,16 +84,22 @@ class FilterServiceTest extends AbstractTestCase
         //interface
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
         $this->filter->setInterfaceService($this->interface->reveal());
-    }
 
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->filter->setSchemaService($this->schemaService->reveal());
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->filter->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->filter->setTableService($this->table->reveal());
+
+    }
 
     public function src()
     {
-        $srcType = 'Filter';
-
-        return $this->getScopeForm($srcType);
+        return $this->getScopeForm('Filter');
     }
-
 
     /**
      * @group src-mvc
@@ -102,20 +111,18 @@ class FilterServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {
-
             $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
-
         } else {
             $this->module->map('Filter')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
         if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-
             if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
-                   $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
+
+               $location = str_replace('\\', '/', $data->getNamespace());
+               $this->factory->createFactory($data, vfsStream::url('module/src/MyModule').'/'.$location)
+                 ->shouldBeCalled();
+
             } else {
                 $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
             }
@@ -134,7 +141,8 @@ class FilterServiceTest extends AbstractTestCase
     public function tables()
     {
         return [
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories'***REMOVED***,
         ***REMOVED***;
     }
 
@@ -143,8 +151,16 @@ class FilterServiceTest extends AbstractTestCase
      * @group db-docs
      * @group db-filter
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
-    {
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service
+    ) {
+
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -152,44 +168,22 @@ class FilterServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->filter = new \Gear\Mvc\Filter\FilterService();
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setStringService($this->string);
-        $this->filter->setModule($this->module->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
-        $this->filter->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->hasUniqueConstraint($table)->willReturn(false);
-        //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->filter->setTableService($this->table->reveal());
+        $filter = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sFilter', $table),
+                'type' => 'Filter',
+                'service' => $service
+            ***REMOVED***
+        );
 
-        $filter = new \GearJson\Src\Src(['name' => sprintf('%sFilter', $table), 'type' => 'Filter'***REMOVED***);
-
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter);
-
-        $this->filter->setCode($this->code);
-
-        $this->filter->setSchemaService($schemaService->reveal());
-
-        $this->filter->setTraitService($this->traitService->reveal());
-
-        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->filter->setSrcDependency($srcDependency->reveal());
-        //$this->filter->setFactoryService
-
-        $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
-
-        $this->filter->setFilterTestService($this->filterTest->reveal());
+        $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter);
 
         $file = $this->filter->introspectFromTable($this->db);
 
