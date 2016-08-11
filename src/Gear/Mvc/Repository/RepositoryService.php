@@ -94,6 +94,7 @@ class RepositoryService extends AbstractMvc
             'tableLabel' => $this->str('label', $this->db->getTable()),
         ***REMOVED***;
 
+
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
             if ($column instanceof RepositoryInsertBeforeInterface) {
                 $options['insertBefore'***REMOVED*** .= $column->getRepositoryInsertBefore();

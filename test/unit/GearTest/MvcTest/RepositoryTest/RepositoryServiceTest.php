@@ -130,7 +130,7 @@ class RepositoryServiceTest extends AbstractTestCase
         return [
             [$this->getAllPossibleColumns(), '', true, null, 'invokables'***REMOVED***,
             [$this->getAllPossibleColumns(), '-namespace', true, 'Custom\CustomNamespace', 'invokables'***REMOVED***,
-            [$this->getAllPossibleColumns(), '-factory', true, null, 'factory'***REMOVED***,
+            [$this->getAllPossibleColumns(), '-factory', true, null, 'factories'***REMOVED***,
             //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
