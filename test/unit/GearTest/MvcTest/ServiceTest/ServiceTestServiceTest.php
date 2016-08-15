@@ -20,6 +20,7 @@ use GearTest\SingleDbTableTrait;
  * @group module-mvc
  * @group module-mvc-service
  * @group module-mvc-service-service-test
+ * @group db-service
  * @group Service1
  */
 class ServiceTestServiceTest extends AbstractTestCase
@@ -76,35 +77,19 @@ class ServiceTestServiceTest extends AbstractTestCase
 
     public function tables()
     {
-        /**
-        $db = new Db(['table' => 'MyService'***REMOVED***);
-
-        $action = new Action([
-            'name' => 'MyAction',
-            'service' => new Service(['name' => 'MyService', 'object' => '%s\Service\MyService'***REMOVED***),
-            'db' => $db
-        ***REMOVED***);
-
-
         return [
-            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
-        ***REMOVED***;
-        */
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-namespace', true, false, false, 'single_db_table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group db-factory-namespace
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
     {
@@ -120,13 +105,6 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
-        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
 
         $this->service->setColumnService($this->column->reveal());
 

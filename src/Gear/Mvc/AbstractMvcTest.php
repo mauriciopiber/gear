@@ -11,9 +11,11 @@ use Gear\Mvc\TraitTestServiceTrait;
 use Gear\Creator\File\InjectorTrait;
 use Gear\Util\GearVersionTrait;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 abstract class AbstractMvcTest extends AbstractJsonService
 {
+    use ServiceManagerTrait;
     use SchemaServiceTrait;
     use GearVersionTrait;
     use InjectorTrait;

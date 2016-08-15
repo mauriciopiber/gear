@@ -3,13 +3,16 @@ namespace GearTest\MvcTest\Factory;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
+use GearJson\Src\Src;
 
 /**
- * @group Mvc
- * @group Factory
+ * @group db-factory
  */
 class FactoryServiceTest extends AbstractTestCase
 {
+    use FactoryDataTrait;
+
     public function setUp()
     {
         parent::setUp();
@@ -36,12 +39,92 @@ class FactoryServiceTest extends AbstractTestCase
         $code = new \Gear\Creator\Code();
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
+        $code->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->factory = new \Gear\Mvc\Factory\FactoryService();
         $this->factory->setStringService($this->string);
         $this->factory->setFileCreator($fileCreator);
         $this->factory->setModule($this->module->reveal());
         $this->factory->setCode($code);
+
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->factory->setServiceManager($this->serviceManager);
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->factory->setSchemaService($this->schema->reveal());
+
+    }
+
+    public function getData()
+    {
+        return $this->getFactoryData();
+    }
+
+
+    /**
+     * @dataProvider getData
+     * @group db-factory-namespace
+     */
+    public function testCreateDb($data, $template)
+    {
+        $this->module->map($data->getType())->willReturn(vfsStream::url('module'));
+        $this->module->map('Controller')->willReturn(vfsStream::url('module'));
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+
+        /**
+        if ($data instanceof Src && $data->getTemplate() == 'search-form') {
+
+
+            $this->filter = $this->prophesize('GearJson\Src\Src');
+            $this->filter->getName()->willReturn('MyTableFilter');
+            $this->filter->getType()->willReturn('Filter');
+
+            $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
+
+            $this->form = $this->prophesize('GearJson\Src\Src');
+            $this->form->getName()->willReturn('MyTableForm');
+            $this->form->getType()->willReturn('Form');
+            $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
+
+            $this->entity = $this->prophesize('GearJson\Src\Src');
+            $this->entity->getName()->willReturn('MyTableEntity');
+            $this->entity->getType()->willReturn('Entity');
+            $this->schema->getSrcByDb($data->getDb(), 'Entity')->willReturn($this->entity);
+        }*/
+
+        if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
+
+            $this->filter = $this->prophesize('GearJson\Src\Src');
+            $this->filter->getName()->willReturn('MyTableFilter');
+            $this->filter->getType()->willReturn('Filter');
+            $this->filter->getNamespace()->willReturn($data->getNamespace());
+
+
+            $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
+
+            $this->form = $this->prophesize('GearJson\Src\Src');
+            $this->form->getName()->willReturn('MyTableForm');
+            $this->form->getType()->willReturn('Form');
+            $this->form->getNamespace()->willReturn($data->getNamespace());
+
+
+            $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
+
+            $this->entity = $this->prophesize('GearJson\Src\Src');
+            $this->entity->getName()->willReturn('MyTable');
+            $this->entity->getType()->willReturn('Entity');
+            $this->entity->getNamespace()->willReturn(null);
+            $this->schema->getSrcByDb($data->getDb(), 'Entity')->willReturn($this->entity);
+        }
+
+
+        $file = $this->factory->createFactory($data, vfsStream::url('module'));
+
+        $this->assertEquals(
+            file_get_contents($this->template.'/db/'.$template.'.phtml'),
+            file_get_contents($file)
+        );
     }
 
     public function testCreateFactoryDependency()

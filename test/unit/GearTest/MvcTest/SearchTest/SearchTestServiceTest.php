@@ -11,6 +11,7 @@ use org\bovigo\vfs\vfsStream;
 /**
  * @group src-form
  * @group Search
+ * @group db-search
  */
 class SearchTestServiceTest extends AbstractTestCase
 {
@@ -36,6 +37,37 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/search-test';
 
+        $this->form = new \Gear\Mvc\Search\SearchTestService();
+        $this->form->setStringService($this->string);
+        $this->form->setFileCreator($this->fileCreator);
+        $this->form->setModule($this->module->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+
+        $this->form->setSchemaService($this->schema->reveal());
+
+
+        $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
+
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+
+        $this->form->setFactoryTestService($this->factory->reveal());
+
+        $this->form->setTraitTestService($this->trait->reveal());
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setStringService($this->string);
+        $serviceManager->setModule($this->module->reveal());
+
+        $this->form->setServiceManager($serviceManager);
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->form->setTableService($this->table->reveal());
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->form->setColumnService($this->column->reveal());
+
+
     }
 
     public function tables()
@@ -60,41 +92,11 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $src = new \GearJson\Src\Src(['name' => $table.'SearchForm', 'type' => 'SearchForm'***REMOVED***);
 
-        $this->form = new \Gear\Mvc\Search\SearchTestService();
-        $this->form->setStringService($this->string);
-        $this->form->setFileCreator($this->fileCreator);
-        $this->form->setModule($this->module->reveal());
-
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'SearchForm')->willReturn($src);
 
-        $this->form->setSchemaService($this->schema->reveal());
-
-
-        $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-
-        $this->form->setFactoryTestService($this->factory->reveal());
-
-        $this->form->setTraitTestService($this->trait->reveal());
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setStringService($this->string);
-        $serviceManager->setModule($this->module->reveal());
-
-        $this->form->setServiceManager($serviceManager);
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
-        $this->form->setTableService($this->table->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
 
         $this->column->getColumns($db, true)->willReturn($tableColumns);
-
-        $this->form->setColumnService($this->column->reveal());
-
 
         $file = $this->form->introspectFromTable($db);
 

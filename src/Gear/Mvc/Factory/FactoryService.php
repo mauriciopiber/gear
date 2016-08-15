@@ -104,7 +104,7 @@ class FactoryService extends AbstractMvc
         $form =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
         $entity =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Entity');
 
-        $var = $this->str('var-lenght', 'Id'.$src->getName());
+        $var = $this->str('var-lenght', 'Id'.$src->getDb()->getTable());
 
         return array(
             'package'     => $this->getCode()->getClassDocsPackage($src),
@@ -146,8 +146,7 @@ class FactoryService extends AbstractMvc
     public function createFactory($data, $location)
     {
         if ($data instanceof Controller) {
-            $this->createFactoryController($data, $location);
-            return;
+            return $this->createFactoryController($data, $location);
         }
 
         if ($data instanceof Src) {

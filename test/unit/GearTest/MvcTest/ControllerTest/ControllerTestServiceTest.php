@@ -15,6 +15,7 @@ use GearTest\ControllerScopeTrait;
  * @group Controller
  * @group fix8
  * @group Fix3
+ * @group db-controller
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
@@ -79,6 +80,13 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->controllerTest->setCodeTest($this->codeTest);
 
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->controllerTest->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->controllerTest->setTableService($this->table->reveal());
+
+
     }
 
     public function testCreateModuleController()
@@ -135,29 +143,24 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
+
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
 
-        $this->controllerTest->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
-
-        $this->controllerTest->setTableService($this->table->reveal());
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'object' => '%s/Controller/'.$this->string->str('class', $tableName).'Controller'
         ***REMOVED***);
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getControllerByDb($this->db)->willReturn($controller);
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService->getControllerByDb($this->db)->willReturn($controller);
 
-        $this->controllerTest->setSchemaService($schemaService->reveal());
+        $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
         $file = $this->controllerTest->introspectFromTable($this->db);
 

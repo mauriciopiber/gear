@@ -1,0 +1,33 @@
+<?php
+namespace MyModule\Custom\CustomNamespace;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Custom\CustomNamespace\MyTableFilter;
+
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableFilterFactory implements FactoryInterface
+{
+    /**
+     * Create MyTableFilter
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @return \MyModule\Custom\CustomNamespace\MyTableFilter
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $factory = new MyTableFilter(
+            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

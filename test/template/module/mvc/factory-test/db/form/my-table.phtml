@@ -1,0 +1,52 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+
+/**
+ * @group MyModule
+ * @group MyTableForm
+ * @group Form
+ */
+class MyTableFormFactoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->filter = $this->prophesize('MyModule\Filter\MyTableFilter');
+        $this->request = $this->prophesize('Zend\Http\Request');
+        $this->translator = $this->prophesize('Zend\Mvc\I18n\Translator');
+        $this->uri = $this->prophesize('Zend\Uri\Uri');
+        $this->adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+    }
+
+    public function testCreateFactory()
+    {
+        $this->uri->getPath()->willReturn('my-module/my-table/edit/30');
+        $this->request->getUri()->willReturn($this->uri->reveal());
+
+        $this->filter->setAdapter($this->adapter->reveal())->shouldNotBeCalled();
+        $this->filter->getInputFilter(30)->willReturn($this->filter->reveal());
+
+        $this->serviceLocator->get('doctrine.entitymanager.orm_default')
+          ->willReturn($this->entityManager->reveal())
+          ->shouldBeCalled();
+
+        $this->serviceLocator->get('MyModule\Filter\MyTableFilter')
+          ->willReturn($this->filter->reveal())
+          ->shouldBeCalled();
+
+        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')->willReturn($this->adapter->reveal());
+        $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
+        $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
+
+        $factory = new \MyModule\Form\MyTableFormFactory();
+
+        $instance = $factory->createService($this->serviceLocator->reveal());
+
+        $this->assertInstanceOf('MyModule\Form\MyTableForm', $instance);
+    }
+}

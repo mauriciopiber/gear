@@ -117,7 +117,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group RepositoryMvc
-     * @group fixit
+     * @group db-factory-namespace
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace)
     {

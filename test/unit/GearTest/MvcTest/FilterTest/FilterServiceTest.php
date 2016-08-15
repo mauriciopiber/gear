@@ -11,7 +11,7 @@ use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
 /**
- * @group working
+ * @group db-filter
  */
 class FilterServiceTest extends AbstractTestCase
 {

@@ -1,0 +1,37 @@
+<?php
+namespace MyModule\Service;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Service\MyTableService;
+
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableServiceFactory implements FactoryInterface
+{
+    /**
+     * Create MyTableService
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @return \MyModule\Service\MyTableService
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $factory = new MyTableService(
+            $serviceLocator->get('MyModule\Repository\AllColumnsDbRepository'),
+            (extension_loaded('memcached'))
+            ? $serviceLocator->get('memcached')
+            : $serviceLocator->get('filesystem'),
+            $serviceLocator->get('GearImage\Service\ImageService')
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

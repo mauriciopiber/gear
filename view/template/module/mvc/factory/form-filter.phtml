@@ -1,6 +1,5 @@
 namespace <?php echo $this->namespace;?>;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
@@ -29,10 +28,11 @@ class <?php echo $this->class;?>Factory extends AbstractFactory
         $form = new \<?php echo $this->form;?>(
             $serviceLocator->get('doctrine.entitymanager.orm_default')
         );
-        $filter = $serviceLocator->get('<?php echo $this->filter;?>');
 
         $<?php echo $this->var;?> = null;
 <?php echo $this->setId;?>
+
+        $filter = $serviceLocator->get('<?php echo $this->filter;?>');
         $form->setInputFilter($filter->getInputFilter($<?php echo $this->var;?>));
 
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');

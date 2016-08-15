@@ -1,1 +1,105 @@
 <?php
+namespace MyModuleTest\Custom\CustomNamespace;
+
+use PHPUnit_Framework_TestCase as TestCase;
+
+/**
+ * @group MyModule
+ * @group TableFilter
+ * @group Filter
+ */
+class TableFilterTest extends TestCase
+{
+    public static $validate = 'vendor/zendframework/zend-i18n-resources/languages/pt_BR/Zend_Validate.php';
+
+    public function setUp()
+    {
+        $this->filter = new \MyModule\Custom\CustomNamespace\TableFilter();
+        $this->filter->setAdapter($this->getAdapterMock());
+
+        $this->translator = new \Zend\I18n\Translator\Translator();
+        $this->translator->addTranslationFile(
+            'phpArray',
+            \GearBase\Module::getProjectFolder().'/'.static::$validate,
+            'default',
+            'pt_BR'
+        )->setLocale('pt_BR');
+    }
+
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    /**
+     * @group MyModule
+     * @group TableFilter
+     */
+    public function testReturnTrueWithValidPost()
+    {
+        $data = [
+            'idMyController' => '99',
+            'dateColumn' => '2007-03-09',
+            'datePtBrColumn' => '09/03/2007',
+            'datetimeColumn' => '2007-03-09 03:00:39',
+            'datetimePtBrColumn' => '09/03/2007 03:00:39',
+            'timeColumn' => '03:00:39',
+            'decimalColumn' => '99.99',
+            'moneyPtBrColumn' => 'R$ 99,99',
+            'checkboxColumn' => 'Sim',
+            'idForeignKeyColumn' => '9Foreign Key Column',
+            'intColumn' => '99',
+            'htmlColumn' => '99Html Column',
+            'textColumn' => '99Text Column',
+            'tinyintColumn' => 'Sim',
+            'checkboxColumn' => 'Sim',
+            'emailColumn' => 'email.column99@gmail.com',
+            'passwordVerifyColumn' => '99PasswordVerifyColu',
+            'passwordVerifyColumnVerify' => '99PasswordVerifyColu',
+            'telephoneColumn' => '(51) 9999-9999',
+            'uniqueIdColumn' => '99Unique Column',
+            'uploadImageColumn' => array(
+                'error' => 0,
+                'name' => 'uploadImageColumn99insert.gif',
+                'tmp_name' => $this->mockUploadImage(),
+                'type'      =>  'image/gif',
+                'size'      =>  42,
+            ),
+            'urlColumn' => 'url.column99.com.br',
+            'varcharColumn' => '99Varchar Column',
+        ***REMOVED***;
+
+        $inputFilter = $this->filter->getInputFilter();
+        $inputFilter->get('uploadImageColumn')->setAutoPrependUploadValidator(false);
+        $inputFilter->setData($data);
+        $this->assertTrue($inputFilter->isValid());
+    }
+
+    protected function getAdapterMock()
+    {
+        $adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+        $driver = $this->prophesize('Zend\Db\Adapter\Driver\DriverInterface');
+
+        $platform = $this->prophesize('Zend\Db\Adapter\Platform\Mysql');
+
+        $adapter->getDriver()->willReturn($driver->reveal());
+        $adapter->getPlatform()->willReturn($platform->reveal());
+
+        $stmt = $this->prophesize('Zend\Db\Adapter\Driver\Pdo\Statement');
+
+        $driver->createStatement()->willReturn($stmt->reveal());
+        $driver->formatParameterName('where1')->willReturn(null);
+
+        $resultSet = $this->prophesize('Zend\Db\ResultSet\ResultSetInterface');
+        $resultSet->current()->willReturn(false);
+
+        $paramContainer = $this->prophesize('Zend\Db\Adapter\ParameterContainer');
+
+        $stmt->execute()->willReturn($resultSet->reveal());
+        $stmt->getParameterContainer()->willReturn($paramContainer->reveal());
+        $stmt->setSql("SELECT  WHERE  =")->willReturn($stmt->reveal());
+
+        return $adapter->reveal();
+    }
+}
