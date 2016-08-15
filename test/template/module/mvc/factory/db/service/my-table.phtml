@@ -25,10 +25,10 @@ class MyTableServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MyTableService(
-            $serviceLocator->get('MyModule\Repository\AllColumnsDbRepository'),
             (extension_loaded('memcached'))
             ? $serviceLocator->get('memcached')
             : $serviceLocator->get('filesystem'),
+            $serviceLocator->get('MyModule\Repository\MyTableRepository'),
             $serviceLocator->get('GearImage\Service\ImageService')
         );
         unset($serviceLocator);

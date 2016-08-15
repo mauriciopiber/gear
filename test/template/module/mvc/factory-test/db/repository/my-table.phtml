@@ -14,13 +14,12 @@ class MyTableRepositoryFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $this->serviceManager->get('doctrine.entitymanager.orm_default')
-          ->willReturn($this->prophesize('Doctrine\ORM\EntityManager')->reveal())
-          ->shouldBeCalled();
-
-        $this->serviceManager->get('GearBase\Repository\QueryBuilder')
-          ->willReturn($this->prophesize('GearBase\Repository\QueryBuilder')->reveal())
-          ->shouldBeCalled();
+        $this->serviceLocator->get('doctrine.entitymanager.orm_default')
+            ->willReturn($this->prophesize('Doctrine\ORM\EntityManager')->reveal())
+            ->shouldBeCalled();
+        $this->serviceLocator->get('GearBase\Repository\QueryBuilder')
+            ->willReturn($this->prophesize('GearBase\Repository\QueryBuilder')->reveal())
+            ->shouldBeCalled();
 
         $factory = new \MyModule\Repository\MyTableRepositoryFactory();
 

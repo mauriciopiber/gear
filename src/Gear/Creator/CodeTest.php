@@ -26,8 +26,9 @@ EOS;
 
             $fullname = $this->resolveNamespace($dependency);
 
+            $name = (is_int($i)) ? $fullname : $i;
 
-            $msg .= sprintf($template, $fullname, $fullname);
+            $msg .= sprintf($template, $name, $fullname);
             $msg .= PHP_EOL;
             if (isset($src->getDependency()[$i+1***REMOVED***)) {
                 $msg .= PHP_EOL;

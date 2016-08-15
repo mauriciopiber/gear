@@ -1,1 +1,39 @@
 <?php
+namespace MyModuleTest\CustomTest\CustomNamespaceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+
+/**
+ * @group MyModule
+ * @group MyTableNamespaceController
+ * @group Controller
+ */
+class MyTableNamespaceControllerFactoryTest extends TestCase
+{
+    public function testCreateFactory()
+    {
+        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+
+        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
+
+        $this->serviceLocator->get('MyModule\Custom\CustomNamespace\MyTableService')
+            ->willReturn($this->prophesize('MyModule\Custom\CustomNamespace\MyTableService')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('MyModule\Custom\CustomNamespace\MyTableForm')
+            ->willReturn($this->prophesize('MyModule\Custom\CustomNamespace\MyTableForm')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('MyModule\Custom\CustomNamespace\MyTableSearchForm')
+            ->willReturn($this->prophesize('MyModule\Custom\CustomNamespace\MyTableSearchForm')->reveal())
+            ->shouldBeCalled();
+
+        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+
+        $factory = new \MyModule\Custom\CustomNamespace\MyTableNamespaceControllerFactory();
+
+        $instance = $factory->createService($this->controllerManager->reveal());
+
+        $this->assertInstanceOf('MyModule\Custom\CustomNamespace\MyTableNamespaceController', $instance);
+    }
+}
