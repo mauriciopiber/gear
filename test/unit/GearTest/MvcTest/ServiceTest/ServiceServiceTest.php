@@ -178,6 +178,8 @@ class ServiceServiceTest extends AbstractTestCase
             }
         }
 
+        $file = $this->service->create($data);
+
         $expected = $this->templates.'/src/'.$template.'.phtml';
 
         $this->assertEquals(

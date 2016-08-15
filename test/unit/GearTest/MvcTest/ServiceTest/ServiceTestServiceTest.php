@@ -133,7 +133,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $file = $this->service->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
