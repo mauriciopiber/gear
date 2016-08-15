@@ -328,6 +328,7 @@ class ConstructService extends AbstractJsonService
 
         $config = $yaml->parse(file_get_contents($this->getConfigLocation()));
 
+        //var_dump($config);die();
         return $config;
     }
 }

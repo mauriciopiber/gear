@@ -1,1 +1,37 @@
 <?php
+namespace MyModule\Controller;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Controller\MyTableController;
+
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableControllerFactory implements FactoryInterface
+{
+    /**
+     * Create MyTableController
+     *
+     * @param ServiceLocatorInterface $controllerManager Controller Manager
+     * @return \MyModule\Controller\MyTableController
+     */
+    public function createService(ServiceLocatorInterface $controllerManager)
+    {
+        $serviceLocator = $controllerManager->getServiceLocator();
+
+        $factory = new MyTableController(
+            $serviceLocator->get('MyModule\Service\MyTableService'),
+            $serviceLocator->get('MyModule\Form\MyTableForm'),
+            $serviceLocator->get('MyModule\Form\Search\MyTableSearchForm')
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

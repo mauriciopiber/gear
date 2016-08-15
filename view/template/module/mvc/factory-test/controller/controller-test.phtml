@@ -14,8 +14,9 @@ class <?php echo $this->class;?>FactoryTest extends TestCase
         $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
         $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
-        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
 <?php echo $this->dependency;?>
+
+        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
 
         $factory = new \<?php echo $this->fullclass;?>Factory();
 

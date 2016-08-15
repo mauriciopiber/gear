@@ -114,23 +114,51 @@ EOS;
         return $args;
     }
 
+    public function getCustomTemplate($indent, $templateName)
+    {
+        $templates = [***REMOVED***;
+
+        $templates['memcached'***REMOVED*** = <<<EOS
+{$indent}(extension_loaded('memcached'))
+{$indent}? \$serviceLocator->get('memcached')
+{$indent}: \$serviceLocator->get('filesystem')
+EOS;
+
+
+        return $templates[$templateName***REMOVED***;
+
+    }
+
     public function getFactoryServiceLocator($src)
     {
         if (empty($src->getDependency())) {
             return '';
-
         }
+
         $ndnt = str_repeat(' ', 4*3);
 
-        $template = '$serviceLocator->get(\'%s\')';
+        $defaultTemplate = '$serviceLocator->get(\'%s\')';
 
         $text = '';
 
+        $allDeps = count($src->getDependency());
+        $iterator = 0;
+
         foreach ($src->getDependency() as $i => $dependency) {
 
-            $text .= $ndnt;
-            $text .= sprintf($template, $this->resolveNamespace($dependency));
-            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
+                $text .= $this->getCustomTemplate($ndnt, $i);
+            } else {
+                $text .= $ndnt;
+
+                $fullname = (is_int($i)) ? $this->resolveNamespace($dependency) : $i;
+
+                $text .= sprintf($defaultTemplate, $fullname);
+            }
+
+
+            if ($iterator < $allDeps-1) {
+                $iterator += 1;
                 $text .= ',';
             }
             $text .= PHP_EOL;

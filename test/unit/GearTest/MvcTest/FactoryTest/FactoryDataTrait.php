@@ -16,39 +16,31 @@ trait FactoryDataTrait
             ***REMOVED***,
             'service' => [
                 'basic' => [
-                    '\Zend\Cache\Storage\Adapter\Memcached',
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached',
                     'Repository\MyTableRepository',
                     '\GearImage\Service\ImageService'
                 ***REMOVED***,
                 'namespace' => [
-                    '\Zend\Cache\Storage\Adapter\Memcached',
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached',
                     'Custom\CustomNamespace\MyTableRepository',
                     '\GearImage\Service\ImageService'
                 ***REMOVED***
             ***REMOVED***,
-            /*
+
             'repository' => [
                 'basic' => [
-
+                    'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                    '\GearBase\Repository\QueryBuilder'
                 ***REMOVED***,
                 'namespace' => [
-
+                    'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                    '\GearBase\Repository\QueryBuilder'
                 ***REMOVED***
-            ***REMOVED****/
+            ***REMOVED***
         ***REMOVED***;
-
-        $factoryData = [***REMOVED***;
-
-        $repositoryDep = [***REMOVED***;
-        $serviceDep = [
-            'Zend\Cache\Storage\Adapter\Memcached',
-            'Repository\MyTableRepository',
-            '\GearImage\Service\ImageService'
-        ***REMOVED***;
-        $filterDep = ['\Zend\Db\Adapter\Adapter'***REMOVED***;
 
         $types = [
-            //['type' => 'Repository', 'dependency' => $repositoryDep***REMOVED***,
+            ['type' => 'Repository'***REMOVED***,
             ['type' => 'Service'***REMOVED***,
             ['type' => 'Filter'***REMOVED***,
             ['type' => 'Form', 'template' => 'form-filter'***REMOVED***,
@@ -93,13 +85,16 @@ trait FactoryDataTrait
 
         }
 
-        /*
-
         $factoryData[***REMOVED*** = [
             new \GearJson\Controller\Controller([
                 'name' => 'MyTableController',
                 'service' => 'factories',
-                'db' => 'MyTable'
+                'db' => 'MyTable',
+                'dependency' => [
+                    'Service\MyTableService',
+                    'Form\MyTableForm',
+                    'Form\Search\MyTableSearchForm'
+                ***REMOVED***
             ***REMOVED***),
             'controller/my-table'
         ***REMOVED***;
@@ -109,11 +104,15 @@ trait FactoryDataTrait
                 'name' => 'MyTableNamespaceController',
                 'service' => 'factories',
                 'db' => 'MyTable',
-                'namespace' => 'Custom\CustomNamespace'
+                'namespace' => 'Custom\CustomNamespace',
+                'dependency' => [
+                    'Custom\CustomNamespace\MyTableService',
+                    'Custom\CustomNamespace\MyTableForm',
+                    'Custom\CustomNamespace\MyTableSearchForm'
+                ***REMOVED***
             ***REMOVED***),
             'controller/my-table-namespace'
         ***REMOVED***;
-        */
 
         return $factoryData;
 
