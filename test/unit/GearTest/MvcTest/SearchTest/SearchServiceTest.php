@@ -10,6 +10,10 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
+/**
+ * @group db-namespace-factory
+ * @group db-search
+ */
 class SearchServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
@@ -43,6 +47,7 @@ class SearchServiceTest extends AbstractTestCase
         $this->srcDependency = new \Gear\Creator\SrcDependency();
         $this->srcDependency->setModule($this->module->reveal());
         $this->srcDependency->setStringService($this->string);
+
 
         //code
         $this->code = new \Gear\Creator\Code();
@@ -81,6 +86,28 @@ class SearchServiceTest extends AbstractTestCase
         //interface
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
         $this->search->setInterfaceService($this->interface->reveal());
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->search->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->search->setTableService($this->table->reveal());
+
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->search->setSchemaService($this->schemaService->reveal());
+
+
+        $this->search->setCode($this->code);
+
+
+
+        $this->search->setTraitService($this->traitService->reveal());
+
+        $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');
+
+        $this->search->setSearchTestService($this->searchTest->reveal());
+
     }
 
     public function tables()
@@ -105,39 +132,19 @@ class SearchServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
+
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
-        $this->search->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->hasUniqueConstraint($table)->willReturn(false);
         //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->search->setTableService($this->table->reveal());
-
         $search = new \GearJson\Src\Src(['name' => sprintf('%sSearch', $table), 'type' => 'SearchForm'***REMOVED***);
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
-
-        $this->search->setCode($this->code);
-
-        $this->search->setSchemaService($schemaService->reveal());
-
-        $this->search->setTraitService($this->traitService->reveal());
-
-        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->search->setSrcDependency($srcDependency->reveal());
-        //$this->search->setFactoryService
-
-        $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');
-
-        $this->search->setSearchTestService($this->searchTest->reveal());
+        $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
 
         $file = $this->search->introspectFromTable($this->db);
 

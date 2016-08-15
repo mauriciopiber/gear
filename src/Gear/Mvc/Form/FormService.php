@@ -53,7 +53,6 @@ class FormService extends AbstractMvc
         return $inputs;
     }
 
-
     public function introspectFromTable($db)
     {
         $this->db = $db;

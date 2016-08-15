@@ -3,6 +3,7 @@ namespace Gear\Mvc\Factory;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
+use GearJson\Db\Db;
 use GearJson\Controller\Controller;
 
 class FactoryTestService extends AbstractMvcTest
@@ -24,6 +25,17 @@ class FactoryTestService extends AbstractMvcTest
             'class' => $this->str('class', $name),
             'group' => $src->getType()
         ***REMOVED***;
+
+
+        if ($src->getType() == 'Form' && $src->getDb() instanceof Db) {
+
+            $form = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
+            $filter = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
+
+            $options['filter'***REMOVED*** = $this->getServiceManager()->getServiceName($filter);
+            $options['form'***REMOVED*** = $this->getServiceManager()->getServiceName($form);
+
+        }
 
         $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);
 

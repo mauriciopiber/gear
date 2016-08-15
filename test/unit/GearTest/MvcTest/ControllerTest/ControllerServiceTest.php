@@ -15,6 +15,7 @@ use Zend\View\Resolver\TemplatePathStack;
  * @group Fixing
  * @group fix8
  * @group Controller
+ * @group db-controller
  */
 class ControllerServiceTest extends TestCase
 {

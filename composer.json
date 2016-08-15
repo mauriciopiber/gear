@@ -16,7 +16,7 @@
         "phpspec/prophecy": "~1.0",
         "sebastian/phpcpd": "^2.0.2",
         "sebastian/phpdcd": "^1.0.2",
-        "phpunit/phpunit": "^5.4.0",
+        "phpunit/phpunit": "~5.5.0",
         "phploc/phploc": "^2.1.5",
         "codeception/codeception": "~2.1.0",
         "squizlabs/php_codesniffer": "^2.0.0",

@@ -3,27 +3,30 @@ namespace GearTest\MvcTest\FactoryTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
+use GearJson\Src\Src;
 
 /**
- * @group Mvc
- * @group Factory
+ * @group db-factory
  */
 class FactoryTestServiceTest extends AbstractTestCase
 {
+    use FactoryDataTrait;
+
     public function setUp()
     {
         parent::setUp();
 
         $this->root = vfsStream::setup('module');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getModuleName()->willReturn('MyModule');
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn('MyModule');
 
         $this->baseDir = (new \Gear\Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
 
-        $this->templates = $this->baseDir.'/../../test/template/module/mvc/factory-test';
+        $this->template = $this->baseDir.'/../../test/template/module/mvc/factory-test';
 
         $template       = new \Gear\Creator\TemplateService();
         $template->setRenderer($phpRenderer);
@@ -33,74 +36,67 @@ class FactoryTestServiceTest extends AbstractTestCase
         $fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $codeTest = new \Gear\Creator\CodeTest();
-        $codeTest->setModule($module->reveal());
+        $codeTest->setModule($this->module->reveal());
+        $codeTest->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService();
         $this->factoryTest->setStringService($stringService);
         $this->factoryTest->setFileCreator($fileCreator);
-        $this->factoryTest->setModule($module->reveal());
+        $this->factoryTest->setModule($this->module->reveal());
         $this->factoryTest->setCodeTest($codeTest);
+
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->factoryTest->setServiceManager($this->serviceManager);
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->factoryTest->setSchemaService($this->schema->reveal());
     }
 
-    public function testCreateTraitTestController()
+    public function getData()
     {
-        $src = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'type' => 'Action',
-            'object' => '%s\Controller\MyController'
-        ***REMOVED***);
-
-        $link = $this->factoryTest->createControllerFactoryTest($src, vfsStream::url('module'));
-
-        $this->assertEquals('vfs://module/MyControllerFactoryTest.php', $link);
-
-        $this->assertEquals(file_get_contents($this->templates.'/factory-controller-001.phtml'), file_get_contents($link));
+        return $this->getFactoryData();
     }
 
-    public function testCreateFactoryTestFormSrc()
+    /**
+     * @dataProvider getData
+     * @group db-factory-namespace
+     */
+    public function testCreateFactoryForDb($data, $template)
     {
-        $src = new \GearJson\Src\Src([
-            'name' => 'MyForm',
-            'type' => 'Form',
-            'template' => 'form-filter'
-        ***REMOVED***);
+        if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
-        $link = $this->factoryTest->createFactoryTest($src, vfsStream::url('module'));
+            $this->filter = $this->prophesize('GearJson\Src\Src');
+            $this->filter->getName()->willReturn('MyTableFilter');
+            $this->filter->getType()->willReturn('Filter');
+            $this->filter->getNamespace()->willReturn($data->getNamespace());
 
-        $this->assertEquals('vfs://module/MyFormFactoryTest.php', $link);
 
-        $this->assertEquals(file_get_contents($this->templates.'/form-filter.phtml'), file_get_contents($link));
-    }
+            $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-    public function testCreateFactoryDependency()
-    {
-        $src = new \GearJson\Src\Src([
-            'name' => 'MyForm',
-            'type' => 'Form',
-            'service' => 'factories',
-            'dependency' => ['Repository\MyDependencyOne', 'Service\MyDependencyTwo'***REMOVED***
-        ***REMOVED***);
+            $this->form = $this->prophesize('GearJson\Src\Src');
+            $this->form->getName()->willReturn('MyTableForm');
+            $this->form->getType()->willReturn('Form');
+            $this->form->getNamespace()->willReturn($data->getNamespace());
 
-        $link = $this->factoryTest->createFactoryTest($src, vfsStream::url('module'));
 
-        $this->assertEquals('vfs://module/MyFormFactoryTest.php', $link);
+            $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form->reveal());
 
-        $this->assertEquals(file_get_contents($this->templates.'/dependencies.phtml'), file_get_contents($link));
+            /**
+            $this->entity = $this->prophesize('GearJson\Src\Src');
+            $this->entity->getName()->willReturn('MyTable');
+            $this->entity->getType()->willReturn('Entity');
+            $this->entity->getNamespace()->willReturn(null);
+            $this->schema->getSrcByDb($data->getDb(), 'Entity')->willReturn($this->entity);
+            */
+        }
 
-    }
+        $file = $this->factoryTest->createFactoryTest($data, vfsStream::url('module'));
 
-    public function testCreateTraitTestSrc()
-    {
-        $src = new \GearJson\Src\Src([
-            'name' => 'MyService',
-            'type' => 'Service'
-        ***REMOVED***);
-
-        $link = $this->factoryTest->createFactoryTest($src, vfsStream::url('module'));
-
-        $this->assertEquals('vfs://module/MyServiceFactoryTest.php', $link);
-
-        $this->assertEquals(file_get_contents($this->templates.'/name-type.phtml'), file_get_contents($link));
+        $this->assertEquals(
+            file_get_contents($this->template.'/db/'.$template.'.phtml'),
+            file_get_contents($file)
+        );
     }
 
     public function testDependency()

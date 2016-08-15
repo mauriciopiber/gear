@@ -10,8 +10,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 
 /**
- * @group src-form
- * @group Form
+ * @group db-form
  */
 class FormTestServiceTest extends AbstractTestCase
 {

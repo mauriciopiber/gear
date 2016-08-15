@@ -10,7 +10,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 
 /**
- * @group working
+ * @group db-filter
  */
 class FilterTestServiceTest extends AbstractTestCase
 {

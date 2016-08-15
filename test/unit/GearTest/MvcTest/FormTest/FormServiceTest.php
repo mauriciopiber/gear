@@ -10,6 +10,9 @@ use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 
+/**
+ * @group db-form
+ */
 class FormServiceTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
