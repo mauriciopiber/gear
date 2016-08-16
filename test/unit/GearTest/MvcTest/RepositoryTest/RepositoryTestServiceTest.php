@@ -3,24 +3,16 @@ namespace GearTest\MvcTest\RepositoryTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 
 /**
  * @group repository-1
  */
 class RepositoryTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
     use ScopeTrait;
-
+    use RepositoryDataTrait;
 
     public function setUp()
     {
@@ -105,21 +97,14 @@ class RepositoryTestServiceTest extends AbstractTestCase
         );
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), '', true, 'table', null***REMOVED***,
-            [$this->getAllPossibleColumns(), '-namespace', true, 'table', 'Custom\CustomNamespace'***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group RepositoryMvc
+     * @group db-repository
      * @group db-factory-namespace
      */
-    public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace)
+    public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
     {
         $table = $this->string->str('class', $tableName);
 

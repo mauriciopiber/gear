@@ -3,11 +3,8 @@ namespace GearTest\MvcTest\RepositoryTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 
 /**
  * @group src-mvc
@@ -15,11 +12,8 @@ use GearTest\ScopeTrait;
  */
 class RepositoryServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
     use ScopeTrait;
+    use RepositoryDataTrait;
 
     public function setUp()
     {
@@ -125,18 +119,6 @@ class RepositoryServiceTest extends AbstractTestCase
         );
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), '', true, null, 'invokables'***REMOVED***,
-            [$this->getAllPossibleColumns(), '-namespace', true, 'Custom\CustomNamespace', 'invokables'***REMOVED***,
-            [$this->getAllPossibleColumns(), '-factory', true, null, 'factories'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
@@ -144,11 +126,13 @@ class RepositoryServiceTest extends AbstractTestCase
      * @group db-repository
      * @group db-factory-namespace
      */
-    public function testInstrospectTable($columns, $template, $nullable, $namespace, $service)
+    public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->db = new \GearJson\Db\Db(['table' => 'Table'***REMOVED***);
+        $table = $this->string->str('class', $tableName);
+
+        $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
@@ -160,7 +144,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->table->getConstraintForeignKeyFromColumn($this->db->getTable(), $columns[9***REMOVED***->getColumn())->willReturn($columns[9***REMOVED***->getConstraint());
 
         $repository = new \GearJson\Src\Src([
-            'name' => 'TableRepository',
+            'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
             'namespace' => $namespace,
             'service' => $service
