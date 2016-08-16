@@ -2,6 +2,8 @@
 namespace MyModule\Repository;
 
 use GearBase\Repository\AbstractRepository;
+use Doctrine\ORM\EntityManager;
+use GearBase\Repository\QueryBuilder;
 
 /**
  * Repository to interate with Table table.
@@ -16,6 +18,24 @@ use GearBase\Repository\AbstractRepository;
  */
 class TableRepository extends AbstractRepository
 {
+    /**
+     * Constructor
+     *
+     * @param EntityManager $entityManager Doctrine Entity Manager
+     * @param QueryBuilder  $queryBuilder  Gear Query Builder
+     *
+     * @return \MyModule\Repository\TableRepository
+     */
+    public function __construct(
+        EntityManager $entityManager,
+        QueryBuilder $queryBuilder
+    ) {
+        $this->entityManager = $entityManager;
+        $this->queryBuilder = $queryBuilder;
+
+        return $this;
+    }
+
     /**
      * Config used to create Doctrine Query and Html Table Header on List.
      *
