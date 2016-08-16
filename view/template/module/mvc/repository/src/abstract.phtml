@@ -1,6 +1,6 @@
 namespace <?php echo $this->namespace;?>;
+<?php echo ($this->uses) ? PHP_EOL.$this->uses : '';?>
 
-<?php echo $this->uses;?>
 <?php echo $this->classDocs;?>
 abstract class <?php echo $this->class;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo $this->implements;?>
 {

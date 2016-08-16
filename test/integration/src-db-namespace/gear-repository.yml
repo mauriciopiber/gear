@@ -157,12 +157,45 @@ src:
     service: invokables
     db: IntForeignKey
     namespace: IntForeignKey\Repository\Doctrine           
-                  
-  13:
+  4: ##invokable - namespace
+    type: Repository
+    name: AllColumnsDbRepository
+    service: invokables
+    db: AllColumnsDb            
+    columns:
+        'varchar_password_verify': 'password-verify'
+        'varchar_url': 'url'
+        'varchar_unique_id': 'unique-id'
+        'varchar_telephone': 'telephone'
+        'varchar_email': 'email'
+        'tinyint_checkbox': 'checkbox'
+        'int_checkbox': 'checkbox'
+        'text_html': 'html'
+        'decimal_money_pt_br': 'money-pt-br'
+        'datetime_datetime_pt_br': 'datetime-pt-br'
+        'date_date_pt_br': 'date-pt-br'
+  7: ##factory - namespace
+    type: Repository
+    name: AllColumnsDbNotNullRepository
+    service: factories
+    db: AllColumnsDbNotNull            
+    columns:
+        'varchar_password_verify_not_null': 'password-verify'
+        'varchar_url_not_null': 'url'
+        'varchar_unique_id_not_null': 'unique-id'
+        'varchar_telephone_not_null': 'telephone'
+        'varchar_email_not_null': 'email'
+        'tinyint_checkbox_not_null': 'checkbox'
+        'int_checkbox_not_null': 'checkbox'
+        'text_html_not_null': 'html'
+        'decimal_money_pt_br_not_null': 'money-pt-br'
+        'datetime_datetime_pt_br_not_null': 'datetime-pt-br'
+        'date_date_pt_br_not_null': 'date-pt-br'                  
+  13: ##factory + namespace
     type: Repository
     name: AllColumnsDbUniqueNotNullRepository
-    service: invokables
-    namespace: AllColumnsDbUnique\Repository
+    service: factories
+    namespace: AllColumnsDbUniqueNotNull\Repository
     db: AllColumnsDbUniqueNotNull            
     columns:
         'varchar_password_verify_unique_not_null': 'password-verify'
@@ -175,4 +208,23 @@ src:
         'text_html_unique_not_null': 'html'
         'decimal_money_pt_br_unique_not_null': 'money-pt-br'
         'datetime_datetime_pt_br_unique_not_null': 'datetime-pt-br'
-        'date_date_pt_br_unique_not_null': 'date-pt-br'                       
+        'date_date_pt_br_unique_not_null': 'date-pt-br'                   
+  10: ##invokable + namespace
+    type: Repository
+    name: AllColumnsDbUniqueRepository
+    service: invokables
+    db: AllColumnsDbUnique
+    namespace: AllColumnsDbUnique\Repository
+    columns:
+        'varchar_password_verify_unique': 'password-verify'
+        'varchar_url_unique': 'url'
+        'varchar_unique_id_unique': 'unique-id'
+        'varchar_telephone_unique': 'telephone'
+        'varchar_email_unique': 'email'
+        'tinyint_checkbox_unique': 'checkbox'
+        'int_checkbox_unique': 'checkbox'
+        'text_html_unique': 'html'
+        'decimal_money_pt_br_unique': 'money-pt-br'
+        'datetime_datetime_pt_br_unique': 'datetime-pt-br'
+        'date_date_pt_br_unique': 'date-pt-br'
+     

@@ -746,7 +746,7 @@ EOS;
         }
 
         if (!empty($this->uses)) {
-            $this->uses .= PHP_EOL;
+            //$this->uses .= PHP_EOL;
         }
         return $this->uses;
     }
