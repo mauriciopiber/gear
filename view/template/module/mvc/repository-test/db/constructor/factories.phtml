@@ -1,0 +1,12 @@
+        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
+
+        $this->queryBuilder = $this->prophesize('GearBase\Repository\QueryBuilder');
+
+        $this->repository = new <?php echo $this->className;?>(
+            $this->entityManager->reveal(),
+            $this->queryBuilder->reveal()
+        );
+
+        $this->entityManager->getRepository($this->repository->getRepositoryName())
+            ->willReturn($this->entityRepository->reveal());

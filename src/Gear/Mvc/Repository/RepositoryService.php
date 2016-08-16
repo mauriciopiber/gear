@@ -77,6 +77,7 @@ class RepositoryService extends AbstractMvc
         }
 
         $options = [
+            'use' => ($this->src->getService() == 'factories') ? $this->getCode()->getUseConstructor($this->src) : '',
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'namespace' => $this->getCode()->getNamespace($this->src),
             'specialityFields' => $this->specialites,
@@ -104,6 +105,11 @@ class RepositoryService extends AbstractMvc
                 $options['updateBefore'***REMOVED*** .= $column->getRepositoryUpdateBefore();
             }
         }
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
 
         $template = $this->getFileCreator()->createFile(
             $this->template,

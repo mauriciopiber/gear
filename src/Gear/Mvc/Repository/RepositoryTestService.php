@@ -129,6 +129,13 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 
         $options['idTableVar'***REMOVED*** = $this->str('var', $options['idTable'***REMOVED***);
 
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/repository-test/db/constructor/'.$this->src->getService().'.phtml',
+            [
+                'className' => $this->src->getName()
+            ***REMOVED***
+        );
+
         return $this->getFileCreator()->createFile(
             'template/module/mvc/repository-test/db/db-test.phtml',
             $options,

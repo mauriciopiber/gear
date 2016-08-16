@@ -8,7 +8,7 @@ use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 
 /**
  * @group src-mvc
- * @group repository-1
+ * @group repository
  */
 class RepositoryServiceTest extends AbstractTestCase
 {
@@ -147,7 +147,11 @@ class RepositoryServiceTest extends AbstractTestCase
             'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
             'namespace' => $namespace,
-            'service' => $service
+            'service' => $service,
+            'dependency' => [
+                'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                '\GearBase\Repository\QueryBuilder'
+            ***REMOVED***
         ***REMOVED***);
 
         if (!empty($repository->getNamespace())) {

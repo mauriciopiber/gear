@@ -59,6 +59,36 @@ class CodeTest extends TestCase
     }
 
     /**
+     * @group Creator
+     */
+    public function testGetUse()
+    {
+        $src = new \GearJson\Src\Src(
+            [
+                'name' => 'MyRepository',
+                'type' => 'Repository',
+                'service' => 'factories',
+                'dependency' => [
+                    'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                    '\GearBase\Repository\QueryBuilder'
+                ***REMOVED***
+            ***REMOVED***
+        );
+
+        $template = <<<EOS
+use Doctrine\ORM\EntityManager;
+use GearBase\Repository\QueryBuilder;
+
+EOS;
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency();
+        $this->srcDependency->setModule($this->module->reveal());
+        $this->code->setSrcDependency($this->srcDependency);
+
+        $this->assertEquals($template, $this->code->getUseConstructor($src));
+    }
+
+    /**
      * @dataProvider getDataImplements
      */
     public function testImplements($src, $additional, $template = null)
