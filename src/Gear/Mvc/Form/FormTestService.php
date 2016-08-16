@@ -7,7 +7,7 @@ use GearJson\Src\Src;
 
 class FormTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     public function introspectFromTable($table)
     {

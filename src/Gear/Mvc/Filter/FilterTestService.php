@@ -8,7 +8,7 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 
 class FilterTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     public function create($src)
     {
