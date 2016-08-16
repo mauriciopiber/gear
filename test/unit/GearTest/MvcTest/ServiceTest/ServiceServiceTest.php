@@ -3,11 +3,7 @@ namespace GearTest\MvcTest\ServiceTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
-use GearTest\SingleDbTableTrait;
+use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 
 /**
  * @group src-mvc
@@ -15,11 +11,7 @@ use GearTest\SingleDbTableTrait;
  */
 class ServiceServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use ServiceDataTrait;
     use \GearTest\ScopeTrait;
 
     public function setUp()
@@ -89,29 +81,23 @@ class ServiceServiceTest extends AbstractTestCase
 
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-namespace', true, false, false, 'single_db_table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-docs1
-     * @group db-service
+     * @group db-service1
      * @group db-factory-namespace
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
-    {
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+    ) {
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -126,13 +112,23 @@ class ServiceServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $service = new \GearJson\Src\Src(['name' => sprintf('%sService', $table), 'type' => 'Service'***REMOVED***);
+        $serviceT = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sService', $table),
+                'type' => 'Service',
+                'namespace' => $namespace,
+                'service' => $service,
+                'dependency' => [
+                    sprintf('Custom\CustomNamespace\%sRepository', $table),
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
+                ***REMOVED***
+            ***REMOVED***);
 
-        $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
+        $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
 
         $file = $this->service->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

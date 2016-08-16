@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>\Service;
+namespace <?php echo $this->namespace;?>;
 
 use GearBase\Service\AbstractService;
 <?php echo $this->use;?>
@@ -16,13 +16,12 @@ use GearBase\Service\AbstractService;
  */
 class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
-<?php echo $this->attribute;?>
-
     protected $sessionName;
 
     protected $authService;
-<?php echo $this->authadapter;?>
 
+<?php echo $this->authadapter;?>
+<?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
     /**
      * Get the values used to generate Html Table on List Action.
      *

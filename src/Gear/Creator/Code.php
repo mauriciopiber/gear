@@ -588,6 +588,13 @@ EOS;
         return $docs;
     }
 
+    public function getDepVarTemplate($templateName)
+    {
+        $templates = [***REMOVED***;
+        $templates['memcached'***REMOVED*** = 'cache';
+
+        return $templates[$templateName***REMOVED***;
+    }
 
     /**
      * Função padrão para criar Constructors.
@@ -599,10 +606,10 @@ EOS;
         $dependency = [***REMOVED***;
 
         if (!empty($data->getDependency())) {
-            foreach ($data->getDependency() as $item) {
+            foreach ($data->getDependency() as $i => $item) {
                 $fullname = explode('\\', $item);
                 $name = end($fullname);
-                $dependency[***REMOVED*** = $name;
+                $dependency[$i***REMOVED*** = $name;
             }
         }
 
@@ -623,6 +630,7 @@ EOS;
         }
 
         $howManyDep = count($dependency);
+        $iterator = 0;
 
         $args = '';
         $attr = '';
@@ -635,14 +643,21 @@ EOS;
             $args .= $this->str('class', $item).' $'.$this->str('var', $item);
 
             if ($howManyDep > 1) {
-                if (isset($dependency[$i+1***REMOVED***)) {
+                if ($iterator < $howManyDep-1) {
                     $args .= ',';
+                    $iterator += 1;
                 }
 
                 $args .= PHP_EOL;
             }
 
-            $attr .= '        $this->'.$this->str('var', $item).' = $'.$this->str('var', $item).';';
+            if (!is_int($i)) {
+                $depVar = $this->getDepVarTemplate($i);
+            } else {
+                $depVar = $this->str('var', $item);
+            }
+
+            $attr .= '        $this->'.$depVar.' = $'.$this->str('var', $item).';';
 
             if ($howManyDep > 1) {
                 $attr .= PHP_EOL;

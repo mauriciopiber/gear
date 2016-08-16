@@ -121,7 +121,7 @@ class ServiceService extends AbstractMvc
             $this->str('class', $this->db->getTable())
         );
 
-        $this->use       = $this->getCode()->getUse($this->src);
+        $this->use       = $this->getCode()->getUseConstructor($this->src);
         $this->attribute = $this->getCode()->getUseAttribute($this->src);
 
         $this->tableUploadImage = false;
@@ -133,7 +133,8 @@ class ServiceService extends AbstractMvc
             $this->tableUploadImage = true;
         }
 
-        $this->file->setOptions(array(
+        $options = [
+            'namespace' => $this->getCode()->getNamespace($this->src),
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'entity' => $this->entityName,
             'table' =>  $this->str('class', $this->name),
@@ -155,7 +156,15 @@ class ServiceService extends AbstractMvc
             'attribute'     => $this->attribute,
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
-        ));
+        ***REMOVED***;
+
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
+
+        $this->file->setOptions($options);
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($this->getModule()->getServiceFolder());
         $this->file->setView('template/module/mvc/service/db/db.phtml');

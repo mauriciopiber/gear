@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>Test\ServiceTest;
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
@@ -15,14 +15,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
     {
         parent::setUp();
 
-        $this->service = new \<?php echo $this->module;?>\Service\<?php echo $this->serviceNameClass;?>();
-
-        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
-        $this->service->setCache($this->cache->reveal());
-
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
-        $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
-<?php echo $this->setUp;?>
+<?php echo $this->constructor;?>
     }
 <?php echo $this->extraColumns;?>
 
@@ -63,7 +56,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 
     public function testTableHead()
     {
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -77,7 +70,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $this->entity->getId<?php echo $this->class;?>()->willReturn(1);
 
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -92,7 +85,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $this->entity->getId<?php echo $this->class;?>()->willReturn(30);
 
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->selectOneBy(['id<?php echo $this->class;?>' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -123,7 +116,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 <?php echo $this->createValues;?>
         );
 
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -149,7 +142,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 <?php echo $this->updateValues;?>
         );
 
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -175,7 +168,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
 
@@ -191,7 +184,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
      */
     public function testDeleteWithoutExistingData()
     {
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
@@ -206,11 +199,11 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
      */
     public function testExtract()
     {
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity = $this->prophesize('<?php echo $this->entity;?>');
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
         $data = ['id<?php echo $this->serviceNameClass;?>' => 31***REMOVED***;
-        $this->repository = $this->prophesize('<?php echo $this->module;?>\Repository\<?php echo $this->class;?>Repository');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
         $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());

@@ -8,11 +8,8 @@ use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\HelperPluginManager;
 use PhpParser\ParserFactory;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
+use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 
 /**
  * @group fix-table
@@ -21,15 +18,10 @@ use GearTest\SingleDbTableTrait;
  * @group module-mvc-service
  * @group module-mvc-service-service-test
  * @group db-service
- * @group Service1
  */
 class ServiceTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use ServiceDataTrait;
     use \GearTest\ScopeTrait;
 
     public function setUp()
@@ -73,26 +65,32 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
-    }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-namespace', true, false, false, 'single_db_table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
-        ***REMOVED***;
+
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->service->setServiceManager($this->serviceManager);
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->service->setSchemaService($this->schema->reveal());
     }
 
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-factory-namespace
+     * @group db-service1
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
-    {
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+    ) {
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -115,18 +113,40 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTableService($this->table->reveal());
 
-        $service = new \GearJson\Src\Src(
+        $serviceT = new \GearJson\Src\Src(
             [
+                'db' => $table,
                 'name' => sprintf('%sService', $table),
                 'type' => 'Service',
-                'dependency' => [sprintf('Service\%sService', $table)***REMOVED***
+                'namespace' => $namespace,
+                'service' => $service,
+                'dependency' => [
+                    'Custom\CustomNamespace\Repository',
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
+                ***REMOVED***
         ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
+        $schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
+
+        $this->repository = $this->prophesize('GearJson\Src\Src');
+        $this->repository->getName()->willReturn(sprintf('%sRepository', $table));
+        $this->repository->getType()->willReturn('Repository');
+        $this->repository->getNamespace()->willReturn($namespace);
+        $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($this->repository->reveal())->shouldBeCalled();
+
+        $this->entity = $this->prophesize('GearJson\Src\Src');
+        $this->entity->getName()->willReturn(sprintf('%s', $table));
+        $this->entity->getType()->willReturn('Entity');
+        $this->entity->getNamespace()->willReturn(null);
+        $schemaService->getSrcByDb($this->db, 'Entity')->willReturn($this->entity->reveal())->shouldBeCalled();
+
+
         $this->service->setSchemaService($schemaService->reveal());
 
+
         $this->service->setTraitTestService($this->traitTestService->reveal());
+
 
 
         //$this->service->setFactoryService

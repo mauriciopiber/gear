@@ -1,0 +1,204 @@
+<?php
+namespace MyModule\Service;
+
+use GearBase\Service\AbstractService;
+use GearBase\Service\PasswordVerifyTrait;
+use GearImage\Service\ImageServiceTrait;
+
+/**
+ * Interaction between TableController and Services
+ *
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class TableService extends AbstractService
+{
+    use PasswordVerifyTrait;
+
+    use ImageServiceTrait;
+
+    protected $sessionName;
+
+    protected $authService;
+
+    /**
+     * Get the values used to generate Html Table on List Action.
+     *
+     * @return array
+     */
+    public function getTableHead()
+    {
+        $map = $this->getTableRepository()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    /**
+     * Get the Service session name.
+     *
+     * @return string
+     */
+    public function getSessionName()
+    {
+        if (!isset($this->sessionName)) {
+            $this->sessionName = 'tableSession';
+        }
+        return $this->sessionName;
+    }
+
+    /**
+     * Select one row based on criteria.
+     *
+     * @param array $data Criteria
+     *
+     * @return null|MyModule\Entity\Table
+     */
+    public function selectOneBy(array $data)
+    {
+        return $this->getTableRepository()->selectOneBy($data);
+    }
+
+    /**
+     * Select All Rows from Table table.
+     *
+     * Use cache to store data until change.
+     *
+     * @param array $select Criteria
+     *
+     * @return array
+     */
+    public function selectAll($select = array())
+    {
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getTableRepository();
+
+        return parent::selectAll($select);
+
+    }
+
+    /**
+     * Create a new Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
+    public function create($data)
+    {
+        $repository = $this->getTableRepository();
+
+        $this->createPassword('passwordVerifyColumn');
+        $uploadImageColumn = $this->getImageService()->overwriteImage(
+            $data,
+            'table',
+            'uploadImageColumn'
+        );
+
+        $table = $repository->insert($data);
+        if ($table) {
+            if (isset($data['uploadImageColumn'***REMOVED***)) {
+                $this->getImageService()->createUploadImage(
+                    $uploadImageColumn,
+                    'table-uploadImageColumn',
+                    $data['uploadImageColumn'***REMOVED***
+                );
+            }
+            $this->clearCache();
+        }
+        return $table;
+    }
+
+    /**
+     * Update a existing Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
+     *
+     * @param integer $idTable Id
+     * @param array   $data    Valid $_POST
+     *
+     * @return null|MyModule\Entity\Table
+     */
+    public function update($idTable, $data = array())
+    {
+        $repository = $this->getTableRepository();
+
+        $this->createPassword('passwordVerifyColumn');
+        $uploadImageColumn = $this->getImageService()->overwriteImage(
+            $data,
+            'table',
+            'uploadImageColumn'
+        );
+
+        $table = $repository->update($idTable, $data);
+        if ($table) {
+            if (isset($data['uploadImageColumn'***REMOVED***)) {
+                $this->getImageService()->updateUploadImage(
+                    $uploadImageColumn,
+                    'table-uploadImageColumn',
+                    $data['uploadImageColumn'***REMOVED***
+                );
+            }
+            $this->clearCache();
+        }
+        return $table;
+    }
+
+    /**
+     * Delete a existing Table by Id.
+     *
+     * @param integer $idTable Id
+     *
+     * @return array
+     */
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
+        }
+
+        $repository = $this->getTableRepository();
+        $table = $repository->deleteSafe($entity);
+
+
+        if ($table) {
+            $this->getImageService()->deleteImages($idTable, 'table');
+            $this->getImageService()->deleteUploadImage($idTable, 'table');
+            $this->clearCache();
+        }
+        return $table;
+    }
+
+    /**
+     * Convert Entity to Array.
+     *
+     * @param \MyModule\Entity\Table $data Table Entity
+     *
+     * @return array
+     */
+    public function extract(\MyModule\Entity\Table $data)
+    {
+        $repository = $this->getTableRepository();
+        return $repository->extract($data);
+    }
+
+    /**
+     * Select one Table by Id.
+     *
+     * @param array $idToSelect Id
+     *
+     * @return null|MyModule\Entity\Table
+     */
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getTableRepository();
+        return $repository->selectById($idToSelect);
+    }
+}

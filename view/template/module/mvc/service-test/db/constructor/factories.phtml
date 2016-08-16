@@ -1,0 +1,8 @@
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
+
+        $this->service = new \<?php echo $this->service;?>(
+            $this->cache->reveal(),
+            $this->repository->reveal()
+        );
+<?php echo $this->setUp;?>
