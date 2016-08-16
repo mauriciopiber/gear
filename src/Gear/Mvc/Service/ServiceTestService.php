@@ -9,7 +9,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
 
 class ServiceTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     const KEY_INSERT = 68;
 

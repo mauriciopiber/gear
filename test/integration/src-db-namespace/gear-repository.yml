@@ -162,6 +162,9 @@ src:
     name: AllColumnsDbRepository
     service: invokables
     db: AllColumnsDb            
+    dependency:
+      'doctrine.entitymanager.orm_default' : '\Doctrine\ORM\EntityManager'
+      0: '\GearBase\Repository\QueryBuilder'    
     columns:
         'varchar_password_verify': 'password-verify'
         'varchar_url': 'url'
@@ -179,6 +182,10 @@ src:
     name: AllColumnsDbNotNullRepository
     service: factories
     db: AllColumnsDbNotNull            
+    dependency:
+      'doctrine.entitymanager.orm_default' : '\Doctrine\ORM\EntityManager'
+      0: '\GearBase\Repository\QueryBuilder' 
+      
     columns:
         'varchar_password_verify_not_null': 'password-verify'
         'varchar_url_not_null': 'url'
@@ -197,6 +204,9 @@ src:
     service: factories
     namespace: AllColumnsDbUniqueNotNull\Repository
     db: AllColumnsDbUniqueNotNull            
+    dependency:
+      'doctrine.entitymanager.orm_default' : '\Doctrine\ORM\EntityManager'
+      0: '\GearBase\Repository\QueryBuilder'    
     columns:
         'varchar_password_verify_unique_not_null': 'password-verify'
         'varchar_url_unique_not_null': 'url'
@@ -215,6 +225,9 @@ src:
     service: invokables
     db: AllColumnsDbUnique
     namespace: AllColumnsDbUnique\Repository
+    dependency:
+      'doctrine.entitymanager.orm_default' : '\Doctrine\ORM\EntityManager'
+      0: '\GearBase\Repository\QueryBuilder'    
     columns:
         'varchar_password_verify_unique': 'password-verify'
         'varchar_url_unique': 'url'

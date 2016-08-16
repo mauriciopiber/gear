@@ -11,7 +11,7 @@ use Gear\Mvc\Repository\ColumnInterface\ShitInterface;
 
 class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     protected $tableName;
     protected $tableColumns;
