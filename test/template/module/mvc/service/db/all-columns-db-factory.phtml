@@ -1,7 +1,9 @@
 <?php
-namespace MyModule\Service;
+namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
+use MyModule\Custom\CustomNamespace\TableRepository;
+use Zend\Cache\Storage\Adapter\Memcached;
 use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 
@@ -11,7 +13,7 @@ use GearImage\Service\ImageServiceTrait;
  * PHP Version 5
  *
  * @category Service
- * @package MyModule/Service
+ * @package MyModule/Custom/CustomNamespace
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
@@ -19,11 +21,30 @@ use GearImage\Service\ImageServiceTrait;
 class TableService extends AbstractService
 {
     use PasswordVerifyTrait;
+
     use ImageServiceTrait;
 
     protected $sessionName;
 
     protected $authService;
+
+    /**
+     * Constructor
+     *
+     * @param TableRepository $tableRepository Table Repository
+     * @param Memcached       $memcached       Memcached
+     *
+     * @return \MyModule\Custom\CustomNamespace\TableService
+     */
+    public function __construct(
+        TableRepository $tableRepository,
+        Memcached $memcached
+    ) {
+        $this->tableRepository = $tableRepository;
+        $this->cache = $memcached;
+
+        return $this;
+    }
 
     /**
      * Get the values used to generate Html Table on List Action.

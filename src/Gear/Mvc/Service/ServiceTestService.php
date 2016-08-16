@@ -94,8 +94,14 @@ class ServiceTestService extends AbstractMvcTest
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
+        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
+        $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
-        $options = array(
+        $options = [
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
+            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'entity' => $this->getServiceManager()->getServiceName($this->entity),
             'createValues' => $this->createValues,
             'updateValues' => $this->updateValues,
             'setUp' => $this->setUp,
@@ -110,11 +116,21 @@ class ServiceTestService extends AbstractMvcTest
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/service-test/db/constructor/'.$this->src->getService().'.phtml',
+            [
+                'className' => $this->src->getName(),
+                'table' => $this->db->getTable(),
+                'service' => $this->getServiceManager()->getServiceName($this->src),
+                'repository' => $this->getServiceManager()->getServiceName($this->repository)
+            ***REMOVED***
         );
 
         $location = $this->getModule()->getTestServiceFolder();
 
-        $fileCreator->setView('template/module/mvc/service/db/db-test.phtml');
+        $fileCreator->setView('template/module/mvc/service-test/db/db-test.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setLocation($location);
         $fileCreator->setFileName($this->src->getName().'Test.php');
