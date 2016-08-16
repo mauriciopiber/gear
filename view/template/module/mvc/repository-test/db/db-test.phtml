@@ -16,13 +16,7 @@ class <?php echo $this->class;?>RepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->repository = new <?php echo $this->className;?>();
-        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->repository->setEntityManager($this->entityManager->reveal());
-        $this->entityRepository = $this->prophesize('Doctrine\ORM\EntityRepository');
-        $this->repository->setRepository($this->entityRepository->reveal());
-        $this->queryBuilder = $this->prophesize('GearBase\Repository\QueryBuilder');
-        $this->repository->setQueryBuilder($this->queryBuilder->reveal());
+<?php echo $this->constructor;?>
 
         $this->userMock = $this->getUserMock();
     }

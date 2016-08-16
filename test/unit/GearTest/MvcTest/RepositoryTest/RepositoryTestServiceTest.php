@@ -7,7 +7,8 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 
 /**
- * @group repository-1
+ * @group src-mvc
+ * @group repository
  */
 class RepositoryTestServiceTest extends AbstractTestCase
 {
@@ -101,7 +102,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group RepositoryMvc
-     * @group db-repository
+     * @group db-repository1
      * @group db-factory-namespace
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
@@ -114,7 +115,12 @@ class RepositoryTestServiceTest extends AbstractTestCase
             [
                 'name' => sprintf('%sRepository', $table),
                 'type' => 'Repository',
-                'namespace' => $namespace
+                'namespace' => $namespace,
+                'service' => $service,
+                'dependency' => [
+                    'doctrine.entitymanager.orm_default' => 'Doctrine\ORM\EntityManager',
+                    'GearBase\Repository\QueryBuilder'
+                ***REMOVED***
             ***REMOVED***
         );
 

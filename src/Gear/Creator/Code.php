@@ -185,7 +185,7 @@ EOS;
             }
         }
 
-        return $this->uses.PHP_EOL;
+        return $this->uses;
     }
 
     public function getInterfaceDependency($data)
@@ -678,6 +678,19 @@ EOS;
         }
 
         return $html;
+    }
+
+    public function getUseConstructor($data)
+    {
+        $this->uses = '';
+
+        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+            foreach ($data->getDependency() as $alias => $item) {
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+            }
+        }
+
+        return $this->uses;
     }
 
     public function getUse($data, array $include = null, array $implements = null)

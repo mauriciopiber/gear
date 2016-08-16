@@ -1,6 +1,7 @@
 namespace <?php echo $this->namespace;?>;
 
 use GearBase\Repository\AbstractRepository;
+<?php echo $this->use;?>
 
 /**
  * Repository to interate with <?php echo $this->tableLabel;?> table.
@@ -15,7 +16,7 @@ use GearBase\Repository\AbstractRepository;
  */
 class <?php echo $this->class;?> extends AbstractRepository
 {
-<?php echo ($this->constructor) ? $this->constructor : '';?>
+<?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
     /**
      * Config used to create Doctrine Query and Html Table Header on List.
      *

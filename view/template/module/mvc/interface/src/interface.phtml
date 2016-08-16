@@ -1,6 +1,6 @@
 namespace <?php echo $this->namespace;?>;
+<?php echo ($this->use) ? PHP_EOL.$this->use : '';?>
 
-<?php echo $this->use;?>
 <?php echo $this->classDocs;?>
 interface <?= $this->srcName;?><?php echo ($this->extends) ? ' extends '.$this->extends.'' : ''; ?><?php echo PHP_EOL;?>
 {
