@@ -1,0 +1,252 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\JsonModel;
+use GearImage\Service\ImageServiceTrait;
+use MyModule\Service\TableServiceTrait;
+use MyModule\Form\TableFormTrait;
+use MyModule\Form\Search\TableSearchFormTrait;
+
+/**
+ * Table Controller
+ *
+ * Actions for Table Table
+ *
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class TableController extends AbstractActionController
+{
+    const CREATE = 'my-module/table/create';
+    const EDIT   = 'my-module/table/edit';
+    const LISTS  = 'my-module/table/list';
+    const IMAGE  = 'my-module/table/upload-image';
+
+    use ImageServiceTrait;
+    use TableServiceTrait;
+
+    use TableFormTrait;
+    use TableSearchFormTrait;
+
+    /**
+     * Create Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function createAction()
+    {
+        $this->error = false;
+        $this->getImageService()->dropUploadImageSession();
+
+        $this->form    = $this->getTableForm();
+        $this->service = $this->getTableService();
+        $this->url     = self::CREATE;
+
+        $create = $this->getRequestPlugin()->fileCreate();
+
+        if ($create instanceof Response) {
+            return $create;
+        }
+
+        if ($create) {
+            $this->getImageService()->dropUploadImageSession();
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $create->getIdTable(), 'success' => 1)
+            );
+        }
+
+        $this->getImageService()->verifyErrors($this->form, 'uploadImageColumn');
+        $uploadImageColumn = $this->getImageService()->getTempUpload('uploadImageColumn');
+
+        return new ViewModel(
+            array(
+                'error' => $this->error,
+                'uploadImageColumn' => $uploadImageColumn,
+                'form' => $this->form,
+            )
+        );
+    }
+
+    /**
+     * Edit Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function editAction()
+    {
+        $this->error = false;
+
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->data = $this->getTableService()->selectById($idTable);
+
+        if (!$this->data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->form      = $this->getTableForm();
+        $this->service   = $this->getTableService();
+        $this->url       = self::EDIT;
+        $this->requestId = $idTable;
+
+        $update = $this->getRequestPlugin()->fileUpdate();
+        if ($update instanceof Response) {
+            return $update;
+        }
+
+        if ($update) {
+            $this->getImageService()->clearCache();
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $update->getIdTable(), 'success' => 1)
+            );
+        }
+
+        $this->data = $this->getTableService()->selectById($idTable);
+        $this->data->setPasswordVerifyColumn('');
+        $this->form->bind($this->data);
+
+        $uploadImageColumn = $this->getImageService()->getUploadImagePath($this->data, 'getUploadImageColumn');
+
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+
+        return new ViewModel(
+            array(
+                'form' => $this->form,
+                'error' => $this->error,
+                'success' => $sucesso,
+                'uploadImageColumn' => $uploadImageColumn,
+                'contexto' => 'table',
+                'idTable' => $idTable
+            )
+        );
+    }
+
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function viewAction()
+    {
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getTableService()->selectById($idTable);
+        $images = $this->getImageService()->query('table', array(), $idTable);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        return new ViewModel(
+            array_merge(
+                array(
+                    'id' => $data->getIdTable(),
+                    'images' => $images,                ),
+                $this->getTableService()->extract($data)
+            )
+        );
+    }
+
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function deleteAction()
+    {
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $table = $this->getTableService();
+
+        $delete = $table->delete($identifier);
+
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
+    }
+
+    /**
+     * Upload Image Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadImageAction()
+    {
+        $this->getImageService()->appendPlugin();
+
+        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getTableService()->selectById($idTable);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idTable));
+        $prg = $this->prg($redirectUrl, true);
+
+        $success = 0;
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+            $post = $prg;
+            $imageService = $this->getImageService();
+            $imageService->updateImages('table', $idTable);
+            $success = $imageService->updatePosition($post);
+            $this->getImageService()->clearCache();
+        }
+
+        return new ViewModel(
+            array(
+                'idTable' => $idTable,
+                'contexto' => 'table',
+                'success' => $success
+            )
+        );
+    }
+
+    /**
+     * List Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function listAction()
+    {
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->getTableService()->selectAll()
+        );
+
+        return new ViewModel(
+            array(
+                'search'    => $this->getTableSearchForm(),
+                'tableService' => $this->getTableService(),
+                'data'      => $data,
+            )
+        );
+    }
+}

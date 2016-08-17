@@ -1,0 +1,403 @@
+<?php
+namespace MyModuleTest\CustomTest\CustomNamespaceTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Custom\CustomNamespace\SingleDbTableController;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+
+/**
+ * @group MyModule
+ * @group SingleDbTable
+ * @group Controller
+ * @group SingleDbTableController
+ */
+class SingleDbTableControllerTest extends TestCase
+{
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+        parent::setUp();
+
+        $this->controller = new SingleDbTableController();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'SingleDbTableController'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $this->singleDbTableForm = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableForm');
+        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\Search\SingleDbTableSearchForm');
+        $this->singleDbTableService = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableService');
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+        $this->controller->setSingleDbTableForm($this->singleDbTableForm->reveal());
+        $this->controller->setSingleDbTableService($this->singleDbTableService->reveal());
+        $this->controller->setSingleDbTableSearchForm($this->singleDbTableSearchForm->reveal());
+    }
+
+    protected function tearDown()
+    {
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testEnterCreatePage()
+    {
+        $this->routeMatch->setParam('action', 'create');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreatePageRedirectToGet()
+    {
+        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreateShowValidation()
+    {
+        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/single-db-table/create', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    /**
+     * @group controller.create
+     */
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->fromRoute("my-module/single-db-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(SingleDbTableController::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/single-db-table/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+
+        $this->singleDbTableForm->setData($data)->shouldBeCalled();
+        $this->singleDbTableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->singleDbTableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->singleDbTableService->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditDisplaySuccessful()
+    {
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditRedirectWithInvalidIdToListing()
+    {
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->singleDbTableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testDisplayEditSuccessful()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidId()
+    {
+        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation()
+    {
+        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/single-db-table/edit/31', true)->willReturn([***REMOVED***);
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testEditSuccessfull()
+    {
+        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT);
+        $this->url->fromRoute("my-module/single-db-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::EDIT.'/31/1');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/single-db-table/edit', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+
+        $this->singleDbTableForm->setData($data)->shouldBeCalled();
+        $this->singleDbTableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->singleDbTableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->singleDbTableService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.list
+     */
+    public function testWhenListDisplaySuccessful()
+    {
+        $this->singleDbTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'list');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessfulWithValidId()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        //$this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+
+        $this->singleDbTableService->selectById(31)->willReturn($this->entity->reveal());
+        $this->singleDbTableService->extract($this->entity->reveal())->willReturn([***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testViewSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->singleDbTableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessful()
+    {
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'view');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->singleDbTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithSuccessful()
+    {
+        $this->singleDbTableService->delete(6000)->willReturn(['success' => true***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testWhenDeleteDisplaySuccessful()
+    {
+        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'delete');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+}

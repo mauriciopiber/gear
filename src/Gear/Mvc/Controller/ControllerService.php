@@ -157,7 +157,7 @@ class ControllerService extends AbstractMvc implements
 
         $lines = array_unique(explode(PHP_EOL, $this->use));
 
-        $this->use = implode(PHP_EOL, $lines).PHP_EOL;
+        $this->use = implode(PHP_EOL, $lines);
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
