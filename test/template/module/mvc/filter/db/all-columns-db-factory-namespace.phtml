@@ -1,5 +1,5 @@
 <?php
-namespace MyModule\Filter;
+namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Filter\AbstractFilter;
 use Zend\Db\Adapter\Adapter;
@@ -11,7 +11,7 @@ use Zend\Mvc\I18n\Translator;
  * PHP Version 5
  *
  * @category Filter
- * @package MyModule/Filter
+ * @package MyModule/Custom/CustomNamespace
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
@@ -24,7 +24,7 @@ class TableFilter extends AbstractFilter
      * @param Adapter    $adapter    Adapter
      * @param Translator $translator Translator
      *
-     * @return \MyModule\Filter\TableFilter
+     * @return \MyModule\Custom\CustomNamespace\TableFilter
      */
     public function __construct(
         Adapter $adapter,

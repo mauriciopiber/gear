@@ -63,6 +63,7 @@ class FilterTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
+     * @group db-filter2
      */
     public function testCreateDb(
         $columns,

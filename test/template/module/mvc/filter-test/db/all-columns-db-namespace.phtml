@@ -1,7 +1,8 @@
 <?php
-namespace MyModuleTest\Custom\CustomNamespace;
+namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\TableFilter;
 
 /**
  * @group MyModule
@@ -14,7 +15,7 @@ class TableFilterTest extends TestCase
 
     public function setUp()
     {
-        $this->filter = new \MyModule\Custom\CustomNamespace\TableFilter();
+        $this->filter = new TableFilter();
         $this->filter->setAdapter($this->getAdapterMock());
 
         $this->translator = new \Zend\I18n\Translator\Translator();

@@ -1,0 +1,10 @@
+        $this->filter = new <?php echo $this->className;?>();
+        $this->filter->setAdapter($this->getAdapterMock());
+
+        $this->translator = new \Zend\I18n\Translator\Translator();
+        $this->translator->addTranslationFile(
+            'phpArray',
+            \GearBase\Module::getProjectFolder().'/'.static::$validate,
+            'default',
+            'pt_BR'
+        )->setLocale('pt_BR');

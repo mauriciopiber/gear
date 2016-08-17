@@ -2,11 +2,9 @@
 namespace MyModule\Filter;
 
 use GearBase\Filter\AbstractFilter;
-use Zend\Db\Adapter\Adapter;
-use Zend\Mvc\I18n\Translator;
 
 /**
- * Filter for Table Controller.
+ * Filter for Table Not Null Controller.
  *
  * PHP Version 5
  *
@@ -16,124 +14,107 @@ use Zend\Mvc\I18n\Translator;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class TableFilter extends AbstractFilter
+class TableNotNullFilter extends AbstractFilter
 {
-    /**
-     * Constructor
-     *
-     * @param Adapter    $adapter    Adapter
-     * @param Translator $translator Translator
-     *
-     * @return \MyModule\Filter\TableFilter
-     */
-    public function __construct(
-        Adapter $adapter,
-        Translator $translator
-    ) {
-        $this->adapter = $adapter;
-        $this->translate = $translator;
-
-        return $this;
-    }
 
     /**
      * Get The Input Filter
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      *
-     * @return TableFilter
+     * @return TableNotNullFilter
      */
     public function getInputFilter()
     {
         $this->add(
             array(
-                'name' => 'dateColumn',
-                'required' => false,
+                'name' => 'dateColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'datePtBrColumn',
-                'required' => false,
+                'name' => 'datePtBrColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'datetimeColumn',
-                'required' => false,
+                'name' => 'datetimeColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'datetimePtBrColumn',
-                'required' => false,
+                'name' => 'datetimePtBrColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'timeColumn',
-                'required' => false,
+                'name' => 'timeColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'decimalColumn',
-                'required' => false,
+                'name' => 'decimalColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'moneyPtBrColumn',
-                'required' => false,
+                'name' => 'moneyPtBrColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'checkboxColumn',
-                'required' => false,
+                'name' => 'checkboxColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'idForeignKeyColumn',
-                'required' => false,
+                'name' => 'idForeignKeyColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'intColumn',
-                'required' => false,
+                'name' => 'intColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'htmlColumn',
-                'required' => false,
+                'name' => 'htmlColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'textColumn',
-                'required' => false,
+                'name' => 'textColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'tinyintColumn',
-                'required' => false,
+                'name' => 'tinyintColumnNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'checkboxColumn',
-                'required' => false,
+                'name' => 'checkboxColumnNotNull',
+                'required' => true,
             )
         );
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'emailColumn',
-                'required' => false,
+                'name' => 'emailColumnNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     array(
@@ -159,7 +140,7 @@ class TableFilter extends AbstractFilter
         $messageMax = 'O valor deve ter no máximo %max% caracteres';
         $messageMin = 'O valor deve ter no mínimo %min% caracteres';
         $this->add(array(
-            'name'       => 'passwordVerifyColumn',
+            'name'       => 'passwordVerifyColumnNotNull',
             'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
@@ -178,7 +159,7 @@ class TableFilter extends AbstractFilter
         ));
 
         $this->add(array(
-            'name'       => 'passwordVerifyColumnVerify',
+            'name'       => 'passwordVerifyColumnNotNullVerify',
             'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
@@ -197,7 +178,7 @@ class TableFilter extends AbstractFilter
                 array(
                     'name'    => 'Identical',
                     'options' => array(
-                        'token' => 'passwordVerifyColumn',
+                        'token' => 'passwordVerifyColumnNotNull',
                         'messages' => [
                             \Zend\Validator\Identical::NOT_SAME => 'Os dois valores digitados não combinam.'
                         ***REMOVED***
@@ -208,8 +189,8 @@ class TableFilter extends AbstractFilter
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'telephoneColumn',
-                'required' => false,
+                'name' => 'telephoneColumnNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                      array(
@@ -227,13 +208,13 @@ class TableFilter extends AbstractFilter
             )
         );
         // File Input
-        $fileInput = new \Zend\InputFilter\FileInput('uploadImageColumn');
+        $fileInput = new \Zend\InputFilter\FileInput('uploadImageColumnNotNull');
         $fileInput->setRequired(false);
         $fileInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
                 'target'    =>
-                \GearBase\Module::getProjectFolder().'/public/_temp/uploadImageColumntempimg.png',
+                \GearBase\Module::getProjectFolder().'/public/_temp/uploadImageColumnNotNulltempimg.png',
                 'randomize' => true,
             )
         );
@@ -241,8 +222,8 @@ class TableFilter extends AbstractFilter
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'urlColumn',
-                'required' => false,
+                'name' => 'urlColumnNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     [
@@ -270,8 +251,8 @@ class TableFilter extends AbstractFilter
         $messageMin = 'O valor deve ter no mínimo %min% caracteres';
         $this->add(
             array(
-                'name' => 'varcharColumn',
-                'required' => false,
+                'name' => 'varcharColumnNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     array(
