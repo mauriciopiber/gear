@@ -652,7 +652,7 @@ EOS;
                 $args .= PHP_EOL;
             }
 
-            if (!is_int($i)) {
+            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
                 $depVar = $this->getDepVarTemplate($i);
             } else {
                 $depVar = $this->str('var', $item);

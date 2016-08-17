@@ -8,7 +8,7 @@ use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 
 /**
  * @group src-mvc
- * @group repository
+ * @group db-repository
  */
 class RepositoryTestServiceTest extends AbstractTestCase
 {
