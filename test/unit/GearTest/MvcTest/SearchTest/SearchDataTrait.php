@@ -19,7 +19,6 @@ trait SearchDataTrait
     {
         return [
             [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
-            //
             [$this->getSingleColumns(), 'single-db-factory-namespace', true, false, false, 'single_db_table', 'factories', 'Custom\CustomNamespace'***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***
         ***REMOVED***;

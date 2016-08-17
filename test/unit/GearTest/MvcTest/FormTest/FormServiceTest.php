@@ -133,7 +133,7 @@ class FormServiceTest extends AbstractTestCase
      * @group db-docs
      * @group db-form
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
@@ -157,7 +157,14 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setTableService($this->table->reveal());
 
-        $form = new \GearJson\Src\Src(['name' => sprintf('%sForm', $table), 'type' => 'Form'***REMOVED***);
+        $form = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sForm', $table),
+                'type' => 'Form',
+                'namespace' => $namespace,
+                'service' => $service
+            ***REMOVED***
+        );
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Form')->willReturn($form);

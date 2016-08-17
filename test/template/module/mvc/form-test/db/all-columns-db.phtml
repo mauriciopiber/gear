@@ -2,6 +2,7 @@
 namespace MyModuleTest\FormTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\TableForm;
 
 /**
  * @group MyModule
@@ -15,7 +16,7 @@ class TableFormTest extends TestCase
         parent::setUp();
 
         $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->form = new \MyModule\Form\TableForm($entityManager->reveal());
+        $this->form = new TableForm($entityManager->reveal());
     }
 
     public function testHasColumn()

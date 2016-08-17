@@ -15,15 +15,31 @@ trait FilterDataTrait
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
 
+
+    /**
+     * $columns, $expect, $nullable, $unique, $tableName, $service, $namespace)
+     */
+
+    /**
+        $columns,
+        $template,
+        $unique
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+     */
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, false, 'table', 'factories', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-namespace', true, false, 'table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory-namespace', true, false, 'table', 'factories', 'Custom\CustomNamespace'***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', false, false, true, false, 'table', 'invokables', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-factory', false, false, true, false, 'table', 'factories', null***REMOVED***,
+            //[$this->getAllPossibleColumns(), 'all-columns-db-namespace', true, false, 'table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
+            //[$this->getAllPossibleColumns(), 'all-columns-db-factory-namespace', true, false, 'table', 'factories', 'Custom\CustomNamespace'***REMOVED***,
+            //[$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables', null***REMOVED***,
+            //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables', null***REMOVED***,
         ***REMOVED***;
     }
 }

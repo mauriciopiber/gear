@@ -56,55 +56,6 @@ class FormTestServiceTest extends AbstractTestCase
 
     }
 
-    /**
-     * @dataProvider tables
-     * @group n99
-     */
-    public function testCreateDb($tableColumns, $expected, $tableName)
-    {
-        $table = $this->string->str('class', $tableName);
-
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
-
-        $this->module->getTestFormFolder()->willReturn(vfsStream::url('module'));
-        $this->module->getModuleName()->willReturn('MyModule');
-
-        $src = new \GearJson\Src\Src(['name' => $table.'Form', 'type' => 'Form'***REMOVED***);
-
-
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
-        $this->schema->getSrcByDb($db, 'Form')->willReturn($src);
-
-        $this->form->setSchemaService($this->schema->reveal());
-
-
-        $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->form->setTraitTestService($this->trait->reveal());
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setStringService($this->string);
-        $serviceManager->setModule($this->module->reveal());
-
-        $this->form->setServiceManager($serviceManager);
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
-        $this->form->setTableService($this->table->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-
-        $this->column->getColumns($db)->willReturn($tableColumns);
-
-        $this->form->setColumnService($this->column->reveal());
-
-
-        $file = $this->form->introspectFromTable($db);
-
-        $this->assertEquals(file_get_contents($this->template.'/'.$expected.'.phtml'), file_get_contents($file));
-    }
-
-
     public function src()
     {
         $srcType = 'Form';
@@ -156,4 +107,58 @@ class FormTestServiceTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @dataProvider tables
+     * @group n99
+     */
+    public function testCreateDb($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
+    {
+        $table = $this->string->str('class', $tableName);
+
+        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+
+        $this->module->getTestFormFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule');
+
+        $src = new \GearJson\Src\Src(
+            [
+                'name' => $table.'Form',
+                'type' => 'Form',
+                'namespace' => $namespace,
+                'service' => $service
+            ***REMOVED***
+        );
+
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema->getSrcByDb($db, 'Form')->willReturn($src);
+
+        $this->form->setSchemaService($this->schema->reveal());
+
+
+        $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
+
+        $this->form->setTraitTestService($this->trait->reveal());
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setStringService($this->string);
+        $serviceManager->setModule($this->module->reveal());
+
+        $this->form->setServiceManager($serviceManager);
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
+        $this->form->setTableService($this->table->reveal());
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+
+        $this->column->getColumns($db)->willReturn($columns);
+
+        $this->form->setColumnService($this->column->reveal());
+
+
+        $file = $this->form->introspectFromTable($db);
+
+        $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
+    }
 }
