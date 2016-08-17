@@ -8,16 +8,14 @@ use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\FilterTest\FilterDataTrait;
 
 /**
  * @group db-filter
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
+    use FilterDataTrait;
     use ScopeTrait;
 
     public function setUp()
@@ -61,19 +59,6 @@ class FilterTestServiceTest extends AbstractTestCase
         $this->filter->setModule($this->module->reveal());
 
         $this->filter->setCodeTest($this->codeTest);
-    }
-
-
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, false, 'table', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, false, 'table', 'factories', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-namespace', true, false, 'table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, 'table_not_null', 'invokables', null***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), 'all-columns-db-unique', false, true, 'table_unique'***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, true, 'table_unique_not_null', 'invokables', null***REMOVED***,
-        ***REMOVED***;
     }
 
     /**

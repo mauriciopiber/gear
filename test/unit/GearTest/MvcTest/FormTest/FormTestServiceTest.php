@@ -2,22 +2,16 @@
 namespace GearTest\MvcTest\FormTest;
 
 use GearBaseTest\AbstractTestCase;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\FormTest\FormDataTrait;
 
 /**
  * @group db-form
  */
 class FormTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
+    use FormDataTrait;
     use ScopeTrait;
 
     public function setUp()
@@ -60,13 +54,6 @@ class FormTestServiceTest extends AbstractTestCase
 
         $this->form->setCodeTest($this->codeTest);
 
-    }
-
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', 'table'***REMOVED***
-        ***REMOVED***;
     }
 
     /**

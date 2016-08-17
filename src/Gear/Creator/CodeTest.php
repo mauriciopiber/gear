@@ -160,6 +160,10 @@ EOS;
             return 'Controller';
         }
 
+        if ($data->getType() == 'SearchForm') {
+            return 'Form\Search';
+        }
+
         return str_replace('Test', '', $data->getType());
     }
 
@@ -212,6 +216,9 @@ EOS;
         }
 
         if ($data instanceof Src) {
+            if ($data->getType() == 'SearchForm') {
+                return 'FormTest\SearchTest';
+            }
             return $data->getType().'Test';
         } else {
             return 'ControllerTest';

@@ -9,17 +9,14 @@ use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\FilterTest\FilterDataTrait;
 
 /**
  * @group db-filter
  */
 class FilterServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use FilterDataTrait;
     use ScopeTrait;
 
     public function setUp()
@@ -136,15 +133,6 @@ class FilterServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
-    }
-
-    public function tables()
-    {
-        return [
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-namespace', true, false, false, 'single_db_table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
-        ***REMOVED***;
     }
 
     /**

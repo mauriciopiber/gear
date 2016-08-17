@@ -22,6 +22,8 @@ class SearchTestService extends AbstractMvcTest
             'var' => $this->str('var-lenght', $this->src->getName()),
             'class'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
+            'namespace' => $this->getCodeTest()->getNamespace($this->src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'service' => $this->getServiceManager()->getServiceName($this->src)
         );
