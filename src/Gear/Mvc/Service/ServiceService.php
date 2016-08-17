@@ -85,6 +85,7 @@ class ServiceService extends AbstractMvc
     {
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
+
         $this->getTraitService()->createTrait($this->src, $this->getModule()->getServiceFolder());
 
         $this->file = $this->getFileCreator();

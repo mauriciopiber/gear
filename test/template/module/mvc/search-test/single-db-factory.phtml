@@ -1,21 +1,22 @@
-namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
+<?php
+namespace MyModuleTest\FormTest\SearchTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use <?php echo $this->module;?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>;
+use MyModule\Form\Search\SingleDbTableSearchForm;
 
 /**
- * @group <?php echo $this->module.PHP_EOL;?>
- * @group <?php echo $this->class.PHP_EOL;?>
+ * @group MyModule
+ * @group SingleDbTableSearchForm
  * @group SearchForm
  */
-class <?php echo $this->class;?>Test extends TestCase
+class SingleDbTableSearchFormTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
 
         $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->search = new <?php echo $this->class;?>($entityManager->reveal());
+        $this->search = new SingleDbTableSearchForm($entityManager->reveal());
     }
 
     public function testHasColumn()

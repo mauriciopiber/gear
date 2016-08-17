@@ -3,12 +3,8 @@ namespace GearTest\MvcTest\SearchTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
-use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\SearchTest\SearchDataTrait;
 
 /**
  * @group db-namespace-factory
@@ -16,11 +12,7 @@ use GearTest\ScopeTrait;
  */
 class SearchServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use SearchDataTrait;
     use ScopeTrait;
 
     public function setUp()
@@ -110,20 +102,12 @@ class SearchServiceTest extends AbstractTestCase
 
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-        ***REMOVED***;
-    }
-
-
     /**
      * @dataProvider tables
      * @group db-docs
      * @group db-search
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
@@ -142,7 +126,14 @@ class SearchServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $search = new \GearJson\Src\Src(['name' => sprintf('%sSearch', $table), 'type' => 'SearchForm'***REMOVED***);
+        $search = new \GearJson\Src\Src(
+            [
+                'name' => sprintf('%sSearch', $table),
+                'type' => 'SearchForm',
+                'service' => $service,
+                'namespace' => $namespace
+            ***REMOVED***
+        );
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
 

@@ -3,23 +3,16 @@ namespace GearTest\MvcTest\FormTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
+use GearTest\MvcTest\FormTest\FormDataTrait;
 
 /**
  * @group db-form
  */
 class FormServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use FormDataTrait;
     use ScopeTrait;
 
     public function setUp()
@@ -133,13 +126,6 @@ class FormServiceTest extends AbstractTestCase
             file_get_contents($file)
         );
 
-    }
-
-    public function tables()
-    {
-        return [
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-        ***REMOVED***;
     }
 
     /**
