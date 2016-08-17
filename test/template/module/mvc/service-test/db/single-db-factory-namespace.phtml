@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\SingleDbTableService;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -15,12 +16,12 @@ class SingleDbTableServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
         $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableRepository');
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
 
-        $this->service = new \MyModule\Custom\CustomNamespace\SingleDbTableService(
-            $this->cache->reveal(),
-            $this->repository->reveal()
+        $this->service = new SingleDbTableService(
+            $this->repository->reveal(),
+            $this->cache->reveal()
         );
     }
 

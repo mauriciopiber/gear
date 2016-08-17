@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\TableService;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -15,14 +16,14 @@ class TableServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
         $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
-        $this->imageService = $this->prophesize('GearImage\Service\Image');
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
 
-        $this->service = new \MyModule\Custom\CustomNamespace\TableService(
-            $this->cache->reveal(),
+        $this->service = new TableService(
             $this->repository->reveal(),
-            $this->imgeService->reveal()
+            $this->cache->reveal(),
+            $this->imageService->reveal()
         );
     }
 

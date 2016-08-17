@@ -1,6 +1,7 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->serviceNameClass;?>;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -14,7 +15,6 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
     public function setUp()
     {
         parent::setUp();
-
 <?php echo $this->constructor;?>
     }
 <?php echo $this->extraColumns;?>

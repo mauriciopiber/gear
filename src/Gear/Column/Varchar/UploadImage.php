@@ -659,12 +659,27 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUse()
+    public function getServiceUse($service = 'invokables')
     {
-        return <<<EOS
-use GearImage\Service\ImageServiceTrait;
+        $use = ['GearImage\Service\ImageServiceTrait'***REMOVED***;
 
-EOS;
+
+
+        if ($service === 'factories') {
+            $use[***REMOVED*** = 'GearImage\Service\ImageService';
+        }
+
+        $template = 'use %s;'.PHP_EOL;
+
+        $text = '';
+
+        foreach ($use as $name) {
+
+            $text .= sprintf($template, $name);
+        }
+
+        return $text;
+
     }
 
    /**
@@ -676,6 +691,7 @@ EOS;
     {
         return <<<EOS
     use ImageServiceTrait;
+
 
 EOS;
     }

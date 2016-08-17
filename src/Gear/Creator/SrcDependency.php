@@ -101,7 +101,7 @@ class SrcDependency extends AbstractDependency
     }
 
 
-    public function getUseAttribute($eol = true)
+    public function getUseAttribute($eol = true, array $ignoreList = null)
     {
         $this->attribute = '';
 
@@ -114,6 +114,15 @@ class SrcDependency extends AbstractDependency
         $count = count($dependencies);
 
         foreach ($dependencies as $i => $dependency) {
+
+            if (
+                in_array($dependency, $ignoreList)
+                || in_array($this->getModule()->getModuleName().'\\'.$dependency, $ignoreList)
+            ) {
+                continue;
+            }
+
+            //var_dump($i, $dependency);
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);
@@ -122,6 +131,8 @@ class SrcDependency extends AbstractDependency
                 $this->attribute .= PHP_EOL;
             }
         }
+        //die();
+
         $eol = ($eol) ? PHP_EOL : '';
 
         return (!empty($this->attribute)) ? $this->attribute.$eol : $eol;
