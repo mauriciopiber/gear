@@ -79,13 +79,18 @@ class ServiceServiceTest extends AbstractTestCase
         $this->serviceTest = $this->prophesize('Gear\Mvc\Service\ServiceTestService');
         $this->service->setServiceTestService($this->serviceTest->reveal());
 
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->serviceManager->setStringService($this->string);
+        $this->service->setServiceManager($this->serviceManager);
+
     }
 
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-docs1
-     * @group db-service1
+     * @group db-service2
      * @group db-factory-namespace
      */
     public function testInstrospectTable(
@@ -107,24 +112,34 @@ class ServiceServiceTest extends AbstractTestCase
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
 
         $this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $serviceT = new \GearJson\Src\Src(
-            [
-                'name' => sprintf('%sService', $table),
-                'type' => 'Service',
-                'namespace' => $namespace,
-                'service' => $service,
-                'dependency' => [
-                    sprintf('Custom\CustomNamespace\%sRepository', $table),
-                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
-                ***REMOVED***
-            ***REMOVED***);
+        [
+            'name' => sprintf('%sService', $table),
+            'type' => 'Service',
+            'namespace' => $namespace,
+            'service' => $service,
+            'dependency' => [
+                sprintf('Custom\CustomNamespace\%sRepository', $table),
+                'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
+            ***REMOVED***
+        ***REMOVED***);
+
+        $repository = new \GearJson\Src\Src(
+        [
+            'name' => sprintf('%sRepository', $table),
+            'type' => 'Repository',
+            'namespace' => 'Custom\CustomNamespace',
+            'service' => $service,
+        ***REMOVED***);
 
         $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
+        $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
         $file = $this->service->introspectFromTable($this->db);
 

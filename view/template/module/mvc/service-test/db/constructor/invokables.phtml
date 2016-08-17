@@ -1,4 +1,5 @@
-        $this->service = new \<?php echo $this->service;?>();
+
+        $this->service = new <?php echo $this->className;?>();
 
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
         $this->service->setCache($this->cache->reveal());

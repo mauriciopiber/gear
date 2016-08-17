@@ -67,11 +67,16 @@ EOS;
 
         $defTemplate = '$this->%s->reveal()';
 
+        $count = count($src->getDependency());
+        $iterator = 0;
+
         foreach ($src->getDependency() as $i => $dependency) {
             $template .= $ndnt;
-            $template .= sprintf($defTemplate, $this->extractVar($dependency));
-            $template .= (isset($src->getDependency()[$i+1***REMOVED***)) ? ',' : '';
+            $template .= sprintf($defTemplate, $this->extractVar($dependency, $src));
+            $template .= ($iterator < $count-1) ? ',' : '';
             $template .= PHP_EOL;
+
+            $iterator += 1;
         }
 
         $ndnt = str_repeat(' ', 4*2);
@@ -80,10 +85,24 @@ EOS;
         return $template;
     }
 
-    public function extractVar($dependency)
+    public function extractVar($dependency, $data = null)
     {
         $allNames = explode('\\', $dependency);
-        return $this->str('var-lenght', end($allNames));
+        $name = end($allNames);
+
+        if ($data !== null && $data->getDb() !== null) {
+
+
+            if (preg_match('/[a-zA-Z***REMOVED****Repository/', $dependency, $matches) === 1) {
+                return $this->str('var-lenght', 'repository');
+            }
+
+            if (preg_match('/Memcached/', $dependency, $matches) === 1) {
+                return $this->str('var-lenght', 'cache');
+            }
+        }
+
+        return $this->str('var-lenght', $name);
     }
 
     public function getDependencyReveal($src)
@@ -100,7 +119,7 @@ EOS;
 
         foreach ($src->getDependency() as $i => $dependency) {
             $template .= $ndnt;
-            $template .= sprintf($defTemplate, $this->extractVar($dependency), $this->resolveNamespace($dependency));
+            $template .= sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency));
 
             if (isset($src->getDependency()[$i+1***REMOVED***)) {
                 $template .= ',';
@@ -124,7 +143,7 @@ EOS;
         $template = PHP_EOL;
 
         foreach ($src->getDependency() as $dependency) {
-            $template .= $ndnt.sprintf($defTemplate, $this->extractVar($dependency), $this->resolveNamespace($dependency)).PHP_EOL;
+            $template .= $ndnt.sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency)).PHP_EOL;
         }
 
         return $template;

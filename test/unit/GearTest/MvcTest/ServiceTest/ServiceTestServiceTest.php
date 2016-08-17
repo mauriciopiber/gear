@@ -108,7 +108,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
-        $this->table->verifyTableAssociation($this->db->getTable())->willReturn($hasTableImage);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
         $this->service->setTableService($this->table->reveal());
@@ -121,10 +121,11 @@ class ServiceTestServiceTest extends AbstractTestCase
                 'namespace' => $namespace,
                 'service' => $service,
                 'dependency' => [
-                    'Custom\CustomNamespace\Repository',
+                    sprintf('%s\%sRepository', ($namespace == null) ? 'Repository' : $namespace, $table),
                     'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
                 ***REMOVED***
-        ***REMOVED***);
+            ***REMOVED***
+        );
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);

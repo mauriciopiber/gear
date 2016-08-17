@@ -104,7 +104,6 @@ class ServiceTestService extends AbstractMvcTest
             'entity' => $this->getServiceManager()->getServiceName($this->entity),
             'createValues' => $this->createValues,
             'updateValues' => $this->updateValues,
-            'setUp' => $this->setUp,
             'updateMock' => $this->updateMock,
             'createMock' => $this->createMock,
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),
@@ -118,14 +117,33 @@ class ServiceTestService extends AbstractMvcTest
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
         ***REMOVED***;
 
+        $construct = [
+            'className' => $this->src->getName(),
+            'table' => $this->db->getTable(),
+            'service' => $this->getServiceManager()->getServiceName($this->src),
+            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'setUp' => $this->setUp,
+        ***REMOVED***;
+
+
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
+        ) {
+            $dep = $this->src->getDependency();
+            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
+            $this->src->setDependency($dep);
+        }
+
+        if ($this->src->getService() === 'factories') {
+
+            $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+        }
+
         $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/service-test/db/constructor/'.$this->src->getService().'.phtml',
-            [
-                'className' => $this->src->getName(),
-                'table' => $this->db->getTable(),
-                'service' => $this->getServiceManager()->getServiceName($this->src),
-                'repository' => $this->getServiceManager()->getServiceName($this->repository)
-            ***REMOVED***
+            $construct
         );
 
         $location = $this->getModule()->getTestServiceFolder();

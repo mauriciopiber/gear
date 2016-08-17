@@ -605,6 +605,7 @@ EOS;
     {
         $dependency = [***REMOVED***;
 
+
         if (!empty($data->getDependency())) {
             foreach ($data->getDependency() as $i => $item) {
                 $fullname = explode('\\', $item);
@@ -830,12 +831,18 @@ EOS;
     }
 
 
-    public function getUseAttribute($data, array $include = null)
+    /**
+     * Cria os Atributos das Classes de acordo com as Dependências
+     *
+     * {@inheritDoc}
+     * @see \Gear\Creator\FileUseAttributeInterface::getUseAttribute()
+     */
+    public function getUseAttribute($data, array $include = null, array $default = [***REMOVED***)
     {
         /* Load Dependency */
         $this->loadDependencyService($data);
 
-        $attributes = $this->dependency->getUseAttribute(false);
+        $attributes = $this->dependency->getUseAttribute(false, $default);
 
         if (!empty($include)) {
             foreach ($include as $name => $item) {

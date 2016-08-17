@@ -1,18 +1,7 @@
 <?php
-/**
- *
- * @author piber
- * Um serviço é o ítem mais importante do DDD.
- * Um serviço precisa ser testado com TDD.
- * Um serviço não possui interface então não precisa ser testado com codeception.
- * Um serviço pode extender outro serviço.
- * Um serviço precisa ser adicionado ao invokables do Module.php ao final do processo.
- *
- */
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\Mvc\ServiceAwareInterface;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
@@ -20,24 +9,19 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
 class ServiceService extends AbstractMvc
 {
     use SchemaServiceTrait;
     use ServiceTestServiceTrait;
+    use ServiceManagerTrait;
 
     static protected $defaultNamespace = 'Service';
 
     static protected $defaultFolder = null;
 
     public $name;
-
-    /**
-     * need:
-     * src
-     * className
-     * dependency
-     */
 
     public function create($src)
     {
@@ -65,7 +49,7 @@ class ServiceService extends AbstractMvc
         $template = 'template/module/mvc/service/src/src.phtml';
         $fileName = $this->className.'.php';
         $location = $location;
-        $options = array(
+        $options = [
             'implements' => $this->getCode()->getImplements($this->src, [***REMOVED***),
             'classDocs'  => $this->getCode()->getClassDocs($this->src),
             'module'     => $this->getModule()->getModuleName(),
@@ -75,7 +59,7 @@ class ServiceService extends AbstractMvc
             'extends'    => $this->getCode()->getExtends($this->src),
             'uses'       => $this->getCode()->getUse($this->src),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
-        );
+        ***REMOVED***;
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
           ? $this->getCode()->getConstructor($this->src)
@@ -115,22 +99,40 @@ class ServiceService extends AbstractMvc
         $this->functions  = '';
         $this->repository = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
 
+        $this->repositoryFullname = $this->getServiceManager()
+            ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Repository'));
+
         $this->entityName = sprintf(
             '%s\Entity\%s',
             $this->getModule()->getModuleName(),
             $this->str('class', $this->db->getTable())
         );
 
-        $this->use       = $this->getCode()->getUseConstructor($this->src);
-        $this->attribute = $this->getCode()->getUseAttribute($this->src);
+        $this->use = $this->getCode()->getUseConstructor($this->src);
+
+        $this->attribute = $this->getCode()->getUseAttribute($this->src, null, [
+            '\Zend\Cache\Storage\Adapter\Memcached',
+            $this->repositoryFullname
+        ***REMOVED***);
 
         $this->tableUploadImage = false;
 
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
 
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')) {
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        ) {
             $this->tableUploadImage = true;
+        }
+
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
+        ) {
+            $dep = $this->src->getDependency();
+            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
+            $this->src->setDependency($dep);
         }
 
         $options = [
@@ -214,20 +216,24 @@ class ServiceService extends AbstractMvc
 
         //ADICIONA FUNCAO
         if ($this->db->getUser() == 'low-strict') {
-            $this->file->addChildView(array(
-                'template' => sprintf('template/module/mvc/service/db/selectviewbyid.phtml', $this->db->getUser()),
-                'placeholder' => 'selectviewbyid',
-                'config' => array('repository' => $this->repository)
-            ));
+            $this->file->addChildView(
+                [
+                    'template' => sprintf('template/module/mvc/service/db/selectviewbyid.phtml', $this->db->getUser()),
+                    'placeholder' => 'selectviewbyid',
+                    'config' => ['repository' => $this->repository***REMOVED***
+                ***REMOVED***
+            );
         }
 
         //ADICIONA FUNCAO
         if ($dbType == 'strict') {
-            $this->file->addChildView(array(
-                'template' => sprintf('template/module/mvc/service/db/authadapter.phtml', $this->db->getUser()),
-                'placeholder' => 'authadapter',
-                'config' => array('repository' => $this->repository)
-            ));
+            $this->file->addChildView(
+                [
+                    'template' => sprintf('template/module/mvc/service/db/authadapter.phtml', $this->db->getUser()),
+                    'placeholder' => 'authadapter',
+                    'config' => ['repository' => $this->repository***REMOVED***
+                ***REMOVED***
+            );
         }
         //$this->selectId  .= $userType->getServiceSelectById();
     }
@@ -263,7 +269,7 @@ class ServiceService extends AbstractMvc
 
             if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
                 $onlyOnceUse[***REMOVED*** = $className;
-                $this->use .= $columnData->getServiceUse();
+                $this->use .= $columnData->getServiceUse($this->src->getService());
             }
 
             if (method_exists($columnData, 'getServiceAttribute') && !in_array($className, $onlyOnceAttribute)) {
@@ -276,44 +282,4 @@ class ServiceService extends AbstractMvc
             }
         }
     }
-
-
-    public function delete()
-    {
-        throw new \Exception('Not implemented yet');
-    }
-    /*
-    public function getAbstract()
-    {
-        if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
-
-            $this->getFileCreator()->createFile(
-                'template/module/mvc/service/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName
-                ),
-                'AbstractService.php',
-                $this->getModule()->getServiceFolder()
-            );
-
-            $this->getFileCreator()->createFile(
-                'template/module/test/unit/service/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName
-                ),
-                'AbstractServiceTest.php',
-                $this->getModule()->getTestServiceFolder()
-            );
-
-        }
-    }
-
-    public function hasAbstract()
-     {
-    if (!is_file($this->getModule()->getServiceFolder().'/AbstractService.php')) {
-    return true;
-    } else {
-    return false;
-    }
-    } */
 }

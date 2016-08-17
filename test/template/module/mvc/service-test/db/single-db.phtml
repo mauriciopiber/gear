@@ -2,6 +2,7 @@
 namespace MyModuleTest\ServiceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\SingleDbTableService;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -15,7 +16,7 @@ class SingleDbTableServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = new \MyModule\Service\SingleDbTableService();
+        $this->service = new SingleDbTableService();
 
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
         $this->service->setCache($this->cache->reveal());

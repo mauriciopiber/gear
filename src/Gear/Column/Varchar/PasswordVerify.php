@@ -206,6 +206,7 @@ EOS;
         return <<<EOS
     use PasswordVerifyTrait;
 
+
 EOS;
     }
 
