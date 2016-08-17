@@ -71,29 +71,47 @@ class FilterService extends AbstractMvc
         $inputValues = $this->getFilterValues();
 
 
-        $fileCreate = $this->getFileCreator();
+        $this->file = $this->getFileCreator();
 
-        $fileCreate->addChildView(array(
+        $options = [
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'tableLabel' => $this->str('label', $this->db->getTable()),
+            'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
+            'class'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'namespace' => $this->getCode()->getNamespace($this->src)
+        ***REMOVED***;
+
+
+        $this->src->setDependency([
+            '\Zend\Db\Adapter\Adapter',
+            '\Zend\Mvc\I18n\Translator'
+        ***REMOVED***);
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
+        $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getUseConstructor($this->src)
+          : '';
+
+        $this->file->addChildView(array(
             'template' => 'template/module/mvc/filter/collection/element.phtml',
             'config' => array('elements' => $inputValues),
             'placeholder' => 'filterElements'
         ));
 
-        $fileCreate->setTemplate('template/module/mvc/filter/full.filter.phtml');
-        $fileCreate->setOptions(
-            array(
-                'package' => $this->getCode()->getClassDocsPackage($this->src),
-                'tableLabel' => $this->str('label', $this->db->getTable()),
-                'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
-                'class'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-            )
-        );
-        $fileCreate->setFileName($this->src->getName().'.php');
-        $fileCreate->setLocation($this->getModule()->getFilterFolder());
+
+        $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');
+
+        $this->file->setOptions($options);
+
+        $this->file->setFileName($this->src->getName().'.php');
+        $this->file->setLocation($this->getModule()->getFilterFolder());
 
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
-            $fileCreate->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
@@ -102,7 +120,7 @@ class FilterService extends AbstractMvc
                 'placeholder' => 'header'
             ));
         } else {
-            $fileCreate->addChildView(array(
+            $this->file->addChildView(array(
                 'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
@@ -115,7 +133,7 @@ class FilterService extends AbstractMvc
         $this->getFilterTestService()->introspectFromTable($this->db);
 
 
-        return $fileCreate->render();
+        return $this->file->render();
     }
 
 

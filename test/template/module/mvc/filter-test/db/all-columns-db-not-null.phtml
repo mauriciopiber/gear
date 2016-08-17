@@ -2,6 +2,7 @@
 namespace MyModuleTest\FilterTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Filter\TableNotNullFilter;
 
 /**
  * @group MyModule
@@ -14,7 +15,7 @@ class TableNotNullFilterTest extends TestCase
 
     public function setUp()
     {
-        $this->filter = new \MyModule\Filter\TableNotNullFilter();
+        $this->filter = new TableNotNullFilter();
         $this->filter->setAdapter($this->getAdapterMock());
 
         $this->translator = new \Zend\I18n\Translator\Translator();

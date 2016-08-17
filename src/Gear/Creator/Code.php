@@ -655,7 +655,14 @@ EOS;
             if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
                 $depVar = $this->getDepVarTemplate($i);
             } else {
-                $depVar = $this->str('var', $item);
+
+
+                if ($item == 'Translator') {
+                    $depVar = $this->str('var', 'translate');
+                } else {
+                    $depVar = $this->str('var', $item);
+                }
+
             }
 
             $attr .= '        $this->'.$depVar.' = $'.$this->str('var', $item).';';

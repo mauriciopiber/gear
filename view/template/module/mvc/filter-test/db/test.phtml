@@ -1,6 +1,7 @@
-namespace <?php echo $this->module;?>Test\FilterTest;
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->testNamespace;?>\<?php echo $this->className;?>;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
@@ -13,16 +14,7 @@ class <?php echo $this->className;?>Test extends TestCase
 
     public function setUp()
     {
-        $this->filter = new \<?php echo $this->module;?>\Filter\<?php echo $this->className;?>();
-        $this->filter->setAdapter($this->getAdapterMock());
-
-        $this->translator = new \Zend\I18n\Translator\Translator();
-        $this->translator->addTranslationFile(
-            'phpArray',
-            \GearBase\Module::getProjectFolder().'/'.static::$validate,
-            'default',
-            'pt_BR'
-        )->setLocale('pt_BR');
+<?php echo $this->constructor;?>
     }
 
 <?php echo $this->functions;?>

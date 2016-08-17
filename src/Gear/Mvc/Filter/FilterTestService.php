@@ -224,16 +224,26 @@ class FilterTestService extends AbstractMvcTest
 
         $module = $this->getModule()->getModuleName();
 
+        $options =  [
+            'var' => $this->str('var-lenght', $this->src->getName()),
+            'className'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'functions' => $this->functions,
+            'namespace' => $this->getCodeTest()->getNamespace($this->src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter-test/db/constructor/'.$this->src->getService().'.phtml',
+            [
+                'className' => $this->src->getName()
+            ***REMOVED***
+        );
         //criar teste com fixture correta, passando válido.
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/filter/db/test.phtml',
-            array(
-                'var' => $this->str('var-lenght', $this->src->getName()),
-                'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-                'functions' => $this->functions
-            ),
+            'template/module/mvc/filter-test/db/test.phtml',
+            $options,
             $this->src->getName().'Test.php',
             $this->getModule()->getTestFilterFolder()
         );

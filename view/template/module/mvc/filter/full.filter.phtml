@@ -1,6 +1,7 @@
-namespace <?php echo $this->module;?>\Filter;
+namespace <?php echo $this->namespace;?>;
 
 use GearBase\Filter\AbstractFilter;
+<?php echo $this->use;?>
 
 /**
  * Filter for <?php echo $this->tableLabel;?> Controller.
@@ -15,7 +16,7 @@ use GearBase\Filter\AbstractFilter;
  */
 class <?php echo $this->class;?> extends AbstractFilter
 {
-
+<?php echo ($this->constructor) ? $this->constructor.PHP_EOL : PHP_EOL;?>
 <?php echo $this->header;?>
     {
 <?php echo $this->filterElements;?>

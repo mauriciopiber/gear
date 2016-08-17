@@ -2,11 +2,9 @@
 namespace MyModule\Filter;
 
 use GearBase\Filter\AbstractFilter;
-use Zend\Db\Adapter\Adapter;
-use Zend\Mvc\I18n\Translator;
 
 /**
- * Filter for Table Controller.
+ * Filter for Table Unique Not Null Controller.
  *
  * PHP Version 5
  *
@@ -16,124 +14,206 @@ use Zend\Mvc\I18n\Translator;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class TableFilter extends AbstractFilter
+class TableUniqueNotNullFilter extends AbstractFilter
 {
-    /**
-     * Constructor
-     *
-     * @param Adapter    $adapter    Adapter
-     * @param Translator $translator Translator
-     *
-     * @return \MyModule\Filter\TableFilter
-     */
-    public function __construct(
-        Adapter $adapter,
-        Translator $translator
-    ) {
-        $this->adapter = $adapter;
-        $this->translate = $translator;
-
-        return $this;
-    }
 
     /**
      * Get The Input Filter
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      *
-     * @return TableFilter
+     * @return TableUniqueNotNullFilter
      */
     public function getInputFilter()
     {
         $this->add(
             array(
-                'name' => 'dateColumn',
-                'required' => false,
+                'name' => 'dateColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Date Column Unique Not Null',
+                        'table',
+                        'date_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'datePtBrColumn',
-                'required' => false,
+                'name' => 'datePtBrColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Date Pt Br Column Unique Not Null',
+                        'table',
+                        'date_pt_br_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'datetimeColumn',
-                'required' => false,
+                'name' => 'datetimeColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Datetime Column Unique Not Null',
+                        'table',
+                        'datetime_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'datetimePtBrColumn',
-                'required' => false,
+                'name' => 'datetimePtBrColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Datetime Pt Br Column Unique Not Null',
+                        'table',
+                        'datetime_pt_br_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'timeColumn',
-                'required' => false,
+                'name' => 'timeColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Time Column Unique Not Null',
+                        'table',
+                        'time_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'decimalColumn',
-                'required' => false,
+                'name' => 'decimalColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Decimal Column Unique Not Null',
+                        'table',
+                        'decimal_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'moneyPtBrColumn',
-                'required' => false,
+                'name' => 'moneyPtBrColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Money Pt Br Column Unique Not Null',
+                        'table',
+                        'money_pt_br_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'checkboxColumn',
-                'required' => false,
+                'name' => 'checkboxColumnUniqueNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'idForeignKeyColumn',
-                'required' => false,
+                'name' => 'idForeignKeyColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Foreign Key Column Unique Not Null',
+                        'table',
+                        'id_foreign_key_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'intColumn',
-                'required' => false,
+                'name' => 'intColumnUniqueNotNull',
+                'required' => true,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Int Column Unique Not Null',
+                        'table',
+                        'int_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
+                )
             )
         );
         $this->add(
             array(
-                'name' => 'htmlColumn',
-                'required' => false,
+                'name' => 'htmlColumnUniqueNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'textColumn',
-                'required' => false,
+                'name' => 'textColumnUniqueNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'tinyintColumn',
-                'required' => false,
+                'name' => 'tinyintColumnUniqueNotNull',
+                'required' => true,
             )
         );
         $this->add(
             array(
-                'name' => 'checkboxColumn',
-                'required' => false,
+                'name' => 'checkboxColumnUniqueNotNull',
+                'required' => true,
             )
         );
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'emailColumn',
-                'required' => false,
+                'name' => 'emailColumnUniqueNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     array(
@@ -152,6 +232,14 @@ class TableFilter extends AbstractFilter
                             ),
                         ),
                         'break_chain_on_failure' => true
+                    ),
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Email Column Unique Not Null',
+                        'table',
+                        'email_column_unique_not_null',
+                        'id_table',
+                        $idTable
                     )
                 )
             )
@@ -159,7 +247,7 @@ class TableFilter extends AbstractFilter
         $messageMax = 'O valor deve ter no máximo %max% caracteres';
         $messageMin = 'O valor deve ter no mínimo %min% caracteres';
         $this->add(array(
-            'name'       => 'passwordVerifyColumn',
+            'name'       => 'passwordVerifyColumnUniqueNotNull',
             'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
@@ -178,7 +266,7 @@ class TableFilter extends AbstractFilter
         ));
 
         $this->add(array(
-            'name'       => 'passwordVerifyColumnVerify',
+            'name'       => 'passwordVerifyColumnUniqueNotNullVerify',
             'required'   => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
@@ -197,7 +285,7 @@ class TableFilter extends AbstractFilter
                 array(
                     'name'    => 'Identical',
                     'options' => array(
-                        'token' => 'passwordVerifyColumn',
+                        'token' => 'passwordVerifyColumnUniqueNotNull',
                         'messages' => [
                             \Zend\Validator\Identical::NOT_SAME => 'Os dois valores digitados não combinam.'
                         ***REMOVED***
@@ -208,8 +296,8 @@ class TableFilter extends AbstractFilter
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'telephoneColumn',
-                'required' => false,
+                'name' => 'telephoneColumnUniqueNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                      array(
@@ -222,18 +310,26 @@ class TableFilter extends AbstractFilter
                                 \Zend\Validator\Regex::ERROROUS => $message
                             ***REMOVED***
                         )
+                    ),
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Telephone Column Unique Not Null',
+                        'table',
+                        'telephone_column_unique_not_null',
+                        'id_table',
+                        $idTable
                     )
                 )
             )
         );
         // File Input
-        $fileInput = new \Zend\InputFilter\FileInput('uploadImageColumn');
+        $fileInput = new \Zend\InputFilter\FileInput('uploadImageColumnUniqueNotNull');
         $fileInput->setRequired(false);
         $fileInput->getFilterChain()->attachByName(
             'filerenameupload',
             array(
                 'target'    =>
-                \GearBase\Module::getProjectFolder().'/public/_temp/uploadImageColumntempimg.png',
+                \GearBase\Module::getProjectFolder().'/public/_temp/uploadImageColumnUniqueNotNulltempimg.png',
                 'randomize' => true,
             )
         );
@@ -241,8 +337,8 @@ class TableFilter extends AbstractFilter
         $message = 'O valor é inválido';
         $this->add(
             array(
-                'name' => 'urlColumn',
-                'required' => false,
+                'name' => 'urlColumnUniqueNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     [
@@ -262,7 +358,15 @@ class TableFilter extends AbstractFilter
                                 \Zend\Validator\Hostname::UNKNOWN_TLD             => $message
                             ***REMOVED***
                         ***REMOVED***
-                    ***REMOVED***
+                    ***REMOVED***,
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Url Column Unique Not Null',
+                        'table',
+                        'url_column_unique_not_null',
+                        'id_table',
+                        $idTable
+                    )
                 )
             )
         );
@@ -270,8 +374,8 @@ class TableFilter extends AbstractFilter
         $messageMin = 'O valor deve ter no mínimo %min% caracteres';
         $this->add(
             array(
-                'name' => 'varcharColumn',
-                'required' => false,
+                'name' => 'varcharColumnUniqueNotNull',
+                'required' => true,
                 'filters'    => array(array('name' => 'StringTrim')),
                 'validators' => array(
                     array(
@@ -284,6 +388,14 @@ class TableFilter extends AbstractFilter
                                 \Zend\Validator\StringLength::TOO_LONG => $messageMax
                             ***REMOVED***
                         )
+                    ),
+                    $this->getNoRecordExistValidator(
+                        'Table',
+                        'Varchar Column Unique Not Null',
+                        'table',
+                        'varchar_column_unique_not_null',
+                        'id_table',
+                        $idTable
                     )
                 )
             )

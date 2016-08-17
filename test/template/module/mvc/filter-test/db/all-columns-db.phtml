@@ -2,6 +2,7 @@
 namespace MyModuleTest\FilterTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Filter\TableFilter;
 
 /**
  * @group MyModule
@@ -14,7 +15,7 @@ class TableFilterTest extends TestCase
 
     public function setUp()
     {
-        $this->filter = new \MyModule\Filter\TableFilter();
+        $this->filter = new TableFilter();
         $this->filter->setAdapter($this->getAdapterMock());
 
         $this->translator = new \Zend\I18n\Translator\Translator();
