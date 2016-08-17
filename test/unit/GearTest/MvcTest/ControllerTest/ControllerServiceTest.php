@@ -129,10 +129,11 @@ class ControllerServiceTest extends TestCase
      * @group unit-test
      * @group RefactoringUnitTest
      * @group db-docs
-     * @group db-controller
+     * @group db-controller1
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
+        $table = $this->string->str('class', $tableName);
         $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
         $this->controllerService->setControllerTestService($this->testing->reveal());
 
@@ -157,7 +158,12 @@ class ControllerServiceTest extends TestCase
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
-            'service' => $service
+            'service' => $service,
+            'dependency' => [
+                sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
+                sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
+                sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
+            ***REMOVED***
         ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');

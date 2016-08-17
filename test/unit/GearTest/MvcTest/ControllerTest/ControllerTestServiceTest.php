@@ -116,9 +116,12 @@ class ControllerTestServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group db-controller2
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
+        $table = $this->string->str('class', $tableName);
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
@@ -136,7 +139,10 @@ class ControllerTestServiceTest extends AbstractTestCase
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
-            'service' => $service
+            'service' => $service,
+            sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
+            sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
+            sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
         ***REMOVED***);
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
