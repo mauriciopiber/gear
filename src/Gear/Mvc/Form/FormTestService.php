@@ -12,26 +12,28 @@ class FormTestService extends AbstractMvcTest
     public function introspectFromTable($table)
     {
         $this->db = $table;
-        $src = $this->getSchemaService()->getSrcByDb($table, 'Form');
+        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Form');
 
         $template = 'template/module/mvc/form/test-db.phtml';
 
         $options = array(
-            'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 17),
-            'callable' => $this->getServiceManager()->getServiceName($src),
-            'service' => $this->getServiceManager()->getServiceName($src),
-            'serviceNameClass'   => $src->getName(),
+            'namespace' => $this->getCodeTest()->getNamespace($this->src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
+            'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 17),
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'service' => $this->getServiceManager()->getServiceName($this->src),
+            'serviceNameClass'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName()
         );
 
-        $filename = $src->getName().'Test.php';
+        $filename = $this->src->getName().'Test.php';
         $location = $this->getModule()->getTestFormFolder();
 
-        if ($src->getService() === 'factories') {
-            $this->getFactoryTestService()->createFactoryTest($src, $location);
+        if ($this->src->getService() === 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
-        $this->getTraitTestService()->createTraitTest($src, $location);
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
 
         $inputs = '';
         $data = $this->getColumnService()->getColumns($this->db);
@@ -64,10 +66,10 @@ class FormTestService extends AbstractMvcTest
 
             if ($this->src->getAbstract() !== true) {
 
-            $this->getTraitTestService()->createTraitTest($src, $location);
+            $this->getTraitTestService()->createTraitTest($this->src, $location);
 
             if ($this->src->getService() == 'factories') {
-                $this->getFactoryTestService()->createFactoryTest($src, $location);
+                $this->getFactoryTestService()->createFactoryTest($this->src, $location);
             }
         }
 

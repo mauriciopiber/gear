@@ -143,6 +143,7 @@ class FilterServiceTest extends AbstractTestCase
     public function testInstrospectTable(
         $columns,
         $template,
+        $unique,
         $nullable,
         $hasColumnImage,
         $hasTableImage,

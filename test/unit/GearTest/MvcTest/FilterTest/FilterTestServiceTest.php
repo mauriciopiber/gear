@@ -64,8 +64,17 @@ class FilterTestServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      */
-    public function testCreateDb($columns, $expect, $nullable, $unique, $tableName, $service, $namespace)
-    {
+    public function testCreateDb(
+        $columns,
+        $template,
+        $unique,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+    ) {
         $table = $this->string->str('class', $tableName);
 
         $db = new \GearJson\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
@@ -95,7 +104,7 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $file = $this->filter->introspectFromTable($db);
 
-        $this->assertEquals(file_get_contents($this->template.'/db/'.$expect.'.phtml'), file_get_contents($file));
+        $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
     }
 
     public function src()

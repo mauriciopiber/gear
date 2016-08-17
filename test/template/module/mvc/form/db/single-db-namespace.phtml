@@ -1,21 +1,22 @@
-namespace <?php echo $this->namespace;?>;
+<?php
+namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Form\AbstractForm;
 use Doctrine\ORM\EntityManager;
 use Zend\Form\Element;
 
 /**
- * Form for <?php echo $this->tableLabel;?> Controller.
+ * Form for Single Db Table Controller.
  *
  * PHP Version 5
  *
  * @category Form
- * @package <?php echo $this->package.PHP_EOL;?>
+ * @package MyModule/Custom/CustomNamespace
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class <?php echo $this->class;?> extends AbstractForm
+class SingleDbTableForm extends AbstractForm
 {
 
     /**
@@ -25,21 +26,26 @@ class <?php echo $this->class;?> extends AbstractForm
      *
      * @param EntityManager $entityManager EntityManager
      *
-     * @return <?php echo $this->class.PHP_EOL;?>
+     * @return SingleDbTableForm
      */
     public function __construct(EntityManager $entityManager)
     {
-        parent::__construct('<?php echo $this->var;?>');
+        parent::__construct('singleDbTableForm');
         $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'fileupload');
 
         $this->setEntityManager($entityManager);
 
-<?php
-foreach ($this->elements as $element):
-echo $element;
-endforeach;
-?>
+        $singleDbColumn = new Element('singleDbColumn');
+        $singleDbColumn->setLabel('Single Db Column');
+        $singleDbColumn->setAttributes(array(
+            'name' => 'singleDbColumn',
+            'id' => 'singleDbColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($singleDbColumn);
+
         $submit = new Element('submit');
         $submit->setValue('Salvar');
         $submit->setAttributes(array(
