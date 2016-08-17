@@ -10,6 +10,7 @@ use GearTest\ControllerScopeTrait;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
+use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 
 /**
  * @group Fixing
@@ -19,8 +20,7 @@ use Zend\View\Resolver\TemplatePathStack;
  */
 class ControllerServiceTest extends TestCase
 {
-    use AllColumnsDbTableTrait;
-    use SingleDbTableTrait;
+    use ControllerDataTrait;
     use ControllerScopeTrait;
 
     public function setUp()
@@ -124,18 +124,6 @@ class ControllerServiceTest extends TestCase
         );
     }
 
-
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columsn-db-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group unit-test
@@ -143,7 +131,7 @@ class ControllerServiceTest extends TestCase
      * @group db-docs
      * @group db-controller
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
         $this->controllerService->setControllerTestService($this->testing->reveal());
@@ -168,7 +156,8 @@ class ControllerServiceTest extends TestCase
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
-            'object' => '%s/Controller/'.$this->string->str('class', $tableName).'Controller'
+            'namespace' => $namespace,
+            'service' => $service
         ***REMOVED***);
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
@@ -177,7 +166,7 @@ class ControllerServiceTest extends TestCase
 
         $file = $this->controllerService->introspectFromTable($this->db);
 
-        $expected = $this->template.'/'.$template.'.phtml';
+        $expected = $this->template.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),

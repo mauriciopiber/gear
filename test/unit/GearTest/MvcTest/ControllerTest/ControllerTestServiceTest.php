@@ -4,12 +4,8 @@ namespace GearTest\MvcTest\ControllerTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
-use GearTest\SingleDbTableTrait;
 use GearTest\ControllerScopeTrait;
+use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 
 /**
  * @group Controller
@@ -19,11 +15,7 @@ use GearTest\ControllerScopeTrait;
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use ControllerDataTrait;
     use ControllerScopeTrait;
 
     public function setUp()
@@ -121,22 +113,11 @@ class ControllerTestServiceTest extends AbstractTestCase
         );
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
@@ -154,7 +135,8 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
-            'object' => '%s/Controller/'.$this->string->str('class', $tableName).'Controller'
+            'namespace' => $namespace,
+            'service' => $service
         ***REMOVED***);
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
@@ -164,7 +146,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $file = $this->controllerTest->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
