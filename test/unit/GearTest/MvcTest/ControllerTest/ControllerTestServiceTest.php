@@ -140,9 +140,11 @@ class ControllerTestServiceTest extends AbstractTestCase
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
-            sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
-            sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
-            sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
+            'dependency' => [
+                sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
+                sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
+                sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
+            ***REMOVED***
         ***REMOVED***);
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');

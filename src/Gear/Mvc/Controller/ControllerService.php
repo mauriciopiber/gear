@@ -144,7 +144,12 @@ class ControllerService extends AbstractMvc implements
             );
         }
 
+        $dependency = $this->controller->getDependency();
+
         if ($this->hasImage || $this->hasTableImage) {
+
+            $dependency[***REMOVED*** = 'GearImage\Service\ImageService';
+
             $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
             $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
         }
@@ -158,6 +163,7 @@ class ControllerService extends AbstractMvc implements
         $lines = array_unique(explode(PHP_EOL, $this->use));
 
         $this->use = implode(PHP_EOL, $lines);
+        $this->use .= $this->getCode()->getUseConstructor($this->controller);
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
@@ -172,12 +178,18 @@ class ControllerService extends AbstractMvc implements
             ***REMOVED***
         );
 
+        $this->controller->setDependency($dependency);
+        $options['constructor'***REMOVED*** = ($this->controller->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->controller)
+          : '';
+
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
         $this->file->setLocation($this->getModule()->getControllerFolder());
         $this->file->setOptions(array_merge(
             $options,
             [
+                'namespace' => $this->getCode()->getNamespace($this->controller),
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),

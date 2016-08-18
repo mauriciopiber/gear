@@ -1,10 +1,13 @@
 <?php
-namespace MyModule\Custom\CustomController;
+namespace MyModule\Custom\CustomNamespace;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
+use MyModule\Custom\CustomNamespace\SingleDbTableServiceTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableFormTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableSearchFormTrait;
 
 /**
  * Single Db Table Controller
@@ -26,7 +29,10 @@ class SingleDbTableController extends AbstractActionController
     const LISTS  = 'my-module/single-db-table/list';
     const IMAGE  = 'my-module/single-db-table/upload-image';
 
+    use SingleDbTableServiceTrait;
 
+    use SingleDbTableFormTrait;
+    use SingleDbTableSearchFormTrait;
 
     /**
      * Create Action

@@ -1,0 +1,16 @@
+<?php echo $this->dependency;?>
+
+<?php echo $this->constructor;?>
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => '<?php echo $this->controllerName; ?>'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());

@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>\Controller;
+namespace <?php echo $this->namespace;?>;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -15,6 +15,7 @@ class <?php echo $this->controllerName;?> extends AbstractActionController
     const IMAGE  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/upload-image';
 
 <?php echo $this->attribute;?>
+<?php echo ($this->constructor) ? PHP_EOL.$this->constructor : '';?>
 <?php echo $this->createAction;?>
 <?php echo $this->editAction;?>
 <?php echo $this->viewAction;?>

@@ -25,12 +25,12 @@ class SingleDbTableControllerTest extends TestCase
 
         $this->singleDbTableService = $this->prophesize('MyModule\Service\SingleDbTableService');
         $this->singleDbTableForm = $this->prophesize('MyModule\Form\SingleDbTableForm');
-        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Form\Search\SingleDbTableSearchForm');
+        $this->singleDbTableSearch = $this->prophesize('MyModule\Form\Search\SingleDbTableSearchForm');
 
         $this->controller = new SingleDbTableController(
             $this->singleDbTableService->reveal(),
             $this->singleDbTableForm->reveal(),
-            $this->singleDbTableSearchForm->reveal()
+            $this->singleDbTableSearch->reveal()
         );
 
         $this->request    = new Request();
