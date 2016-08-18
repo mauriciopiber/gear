@@ -106,7 +106,11 @@ class ControllerService extends AbstractMvc implements
     {
         $this->db = $db;
         $this->table = $db;
+
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
+
+        $location = $this->getCode()->getLocation($this->controller);
+
         $this->dependency = $this->getControllerDependency()->setController($this->controller);
         $this->tableName = ($this->str('class', $db->getTable()));
 
@@ -185,7 +189,7 @@ class ControllerService extends AbstractMvc implements
 
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
-        $this->file->setLocation($this->getModule()->getControllerFolder());
+        $this->file->setLocation($location);
         $this->file->setOptions(array_merge(
             $options,
             [
@@ -201,6 +205,10 @@ class ControllerService extends AbstractMvc implements
                 'imagemService' => $this->useImageService, /** @TODO 4 - Usar apenas Use e Attribute */
             ***REMOVED***
         ));
+
+        if ($this->controller->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->controller, $location);
+        }
 
         return $this->file->render();
     }

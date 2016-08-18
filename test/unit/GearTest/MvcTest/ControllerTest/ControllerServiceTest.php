@@ -65,7 +65,7 @@ class ControllerServiceTest extends TestCase
         $this->template =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller';
 
 
-        $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
@@ -77,7 +77,7 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setModule($this->module->reveal());
         $this->controllerService->setInjector($this->injector);
 
-        $this->controllerService->setFactoryService($this->factoryService->reveal());
+        $this->controllerService->setFactoryService($this->factory->reveal());
         $this->controllerService->setArrayService($this->arrayService);
 
         $this->controllerDependency = new \Gear\Creator\ControllerDependency();
@@ -92,6 +92,19 @@ class ControllerServiceTest extends TestCase
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->controllerService->setCode($this->code);
+
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->controllerService->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->controllerService->setTableService($this->table->reveal());
+
+        $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+        $this->controllerService->setControllerTestService($this->testing->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->controllerService->setSchemaService($this->schema->reveal());
     }
 
     public function testCreateModuleController()
@@ -131,29 +144,17 @@ class ControllerServiceTest extends TestCase
      * @group db-docs
      * @group db-controller1
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
-    {
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+    ) {
         $table = $this->string->str('class', $tableName);
-        $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
-        $this->controllerService->setControllerTestService($this->testing->reveal());
-
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-
-        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);//MyController'***REMOVED***);
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-
-        $this->controllerService->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
-
-        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
-
-        $this->controllerService->setTableService($this->table->reveal());
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
@@ -166,9 +167,42 @@ class ControllerServiceTest extends TestCase
             ***REMOVED***
         ***REMOVED***);
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getControllerByDb($this->db)->willReturn($controller);
-        $this->controllerService->setSchemaService($schemaService->reveal());
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        if ($namespace === null) {
+
+            $location = 'module/src/MyModule/Controller';
+
+            $this->module->map('Controller')
+                ->willReturn(vfsStream::url($location))
+                ->shouldBeCalled();
+        } else {
+
+            $location = 'module/src/MyModule';
+
+            $this->module->getSrcModuleFolder()
+                ->willReturn(vfsStream::url($location))
+                ->shouldBeCalled();
+
+            $location .= '/'.str_replace('\\', '/', $namespace);
+        }
+
+        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            ->willReturn($hasTableImage)
+            ->shouldBeCalled();
+
+        $this->schema->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
+
+
+        if ($service == 'factories') {
+            $this->factory->createFactory($controller, vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $this->testing->introspectFromTable($this->db)->shouldBeCalled();
 
         $file = $this->controllerService->introspectFromTable($this->db);
 

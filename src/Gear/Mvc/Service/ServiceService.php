@@ -83,6 +83,13 @@ class ServiceService extends AbstractMvc
 
     public function createDb()
     {
+
+        if ($this->src->getService() == 'factories' && !array_key_exists('memcached', $this->src->getDependency())) {
+            $dependency = $this->src->getDependency();
+            $dependency['memcached'***REMOVED*** = '\Zend\Cache\Storage\Adapter\Memcached';
+            $this->src->setDependency($dependency);
+        }
+
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
 

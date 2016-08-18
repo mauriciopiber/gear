@@ -996,17 +996,17 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.48",
+            "version": "0.2.50",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "b77b01ee41db64bf9832e3f9fa82d46e3051193b"
+                "reference": "a0104a4c1db9b5100d36611f394341986d6a8684"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.48-12c457.tar",
-                "reference": "b77b01ee41db64bf9832e3f9fa82d46e3051193b",
-                "shasum": "d3f6694f4fd9f7cd84866b029b9dfdf3cb967bac"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.50-428d16.tar",
+                "reference": "a0104a4c1db9b5100d36611f394341986d6a8684",
+                "shasum": "1c563783baf883dd53a2bd8d51496174f2009994"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1039,7 +1039,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-08-18 14:58:08"
+            "time": "2016-08-18 20:19:49"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4003,17 +4003,17 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.7.2",
+            "version": "2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12"
+                "reference": "0cf1bdcd8858a8583965310a7dae63ad75bd1237"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12",
-                "reference": "5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12",
-                "shasum": "b9ce7ec145458cbdc11137862b78a42e128e0abd"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-0cf1bdcd8858a8583965310a7dae63ad75bd1237-zip-310443.tar",
+                "reference": "0cf1bdcd8858a8583965310a7dae63ad75bd1237",
+                "shasum": "bdfbfcf8e5cb0e2c1befd4fcb2fc025bb5863d66"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4022,8 +4022,8 @@
                 "zendframework/zend-validator": "^2.6"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "^4.5",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.6.2",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
@@ -4054,7 +4054,7 @@
                 "inputfilter",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-06-11 19:35:33"
+            "time": "2016-08-18 18:40:34"
         },
         {
             "name": "zendframework/zend-json",

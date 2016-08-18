@@ -132,6 +132,8 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->controller = $this->getSchemaService()->getControllerByDb($mvc);
 
+        $this->location = $this->getCodeTest()->getLocation($this->controller);
+
         $columnsOptions = [***REMOVED***;
 
         $columns = $this->getColumnService()->getColumns($this->db);
@@ -304,9 +306,14 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->file = $this->getFileCreator();
         $this->file->setFileName(sprintf('%sTest.php', $this->controller->getName()));
-        $this->file->setLocation($this->getModule()->getTestControllerFolder());
+        $this->file->setLocation($this->location);
         $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);
+
+        if ($this->controller->getService() == 'factories') {
+            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
+        }
+
 
         return $this->file->render();
     }

@@ -3,3 +3,4 @@ modules: MyModule
 db:
   0:
     table: IntForeignKey
+    service: factories
