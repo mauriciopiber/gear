@@ -7,10 +7,10 @@
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this-><?php echo $this->tableVar;?>Form = $this->prophesize('<?php echo $this->module;?>\Form\<?php echo $this->tableName;?>Form');
+        $this-><?php echo $this->tableVar;?>Form = $this->prophesize('<?php echo $this->form;?>');
 <?php echo $this->setUp;?>
-        $this-><?php echo $this->tableVar;?>SearchForm = $this->prophesize('<?php echo $this->module;?>\Form\Search\<?php echo $this->tableName;?>SearchForm');
-        $this-><?php echo $this->tableVar;?>Service = $this->prophesize('<?php echo $this->module;?>\Service\<?php echo $this->tableName;?>Service');
+        $this-><?php echo $this->tableVar;?>SearchForm = $this->prophesize('<?php echo $this->search;?>');
+        $this-><?php echo $this->tableVar;?>Service = $this->prophesize('<?php echo $this->service;?>');
 
         $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
         $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);

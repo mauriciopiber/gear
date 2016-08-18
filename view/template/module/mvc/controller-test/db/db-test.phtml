@@ -1,7 +1,7 @@
-namespace <?php echo $this->module;?>Test\ControllerTest;
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use <?php echo $this->module?>\Controller\<?php echo $this->controllerName; ?>;
+use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->controllerName; ?>;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;

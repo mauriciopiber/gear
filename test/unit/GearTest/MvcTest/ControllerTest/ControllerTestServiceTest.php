@@ -78,7 +78,9 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->controllerTest->setTableService($this->table->reveal());
 
-
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->controllerTest->setServiceManager($this->serviceManager);
     }
 
     public function testCreateModuleController()
@@ -147,8 +149,30 @@ class ControllerTestServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
+
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schemaService->getControllerByDb($this->db)->willReturn($controller);
+
+        $this->service = $this->prophesize('GearJson\Src\Src');
+        $this->service->getName()->willReturn(sprintf('%sService', $table));
+        $this->service->getType()->willReturn('Service');
+        $this->service->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($this->service->reveal())->shouldBeCalled();
+
+        $this->form = $this->prophesize('GearJson\Src\Src');
+        $this->form->getName()->willReturn(sprintf('%sForm', $table));
+        $this->form->getType()->willReturn('Form');
+        $this->form->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'Form')->willReturn($this->form->reveal())->shouldBeCalled();
+
+        $this->search  = $this->prophesize('GearJson\Src\Src');
+        $this->search->getName()->willReturn(sprintf('%sSearchForm', $table));
+        $this->search->getType()->willReturn('SearchForm');
+        $this->search->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($this->search->reveal())->shouldBeCalled();
 
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
