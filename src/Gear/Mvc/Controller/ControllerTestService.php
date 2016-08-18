@@ -130,7 +130,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->db           = $mvc;
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $controller = $this->getSchemaService()->getControllerByDb($mvc);
+        $this->controller = $this->getSchemaService()->getControllerByDb($mvc);
 
         $columnsOptions = [***REMOVED***;
 
@@ -153,7 +153,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
             $localOptions = array(
                 'module' => $this->getModule()->getModuleName(),
-                'class' => $controller->getNameOff(),
+                'class' => $this->controller->getNameOff(),
                 'columns' => $finalValue,
             );
 
@@ -252,11 +252,11 @@ class ControllerTestService extends AbstractMvcTest implements
                 'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'controllerName' => $controller->getName(),
-                'tableName'  => $this->str('class', $controller->getNameOff()),
-                'tableVar'  => $this->str('var', $controller->getNameOff()),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'class' => $controller->getNameOff(),
+                'controllerName' => $this->controller->getName(),
+                'tableName'  => $this->str('class', $this->controller->getNameOff()),
+                'tableVar'  => $this->str('var', $this->controller->getNameOff()),
+                'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
+                'class' => $this->controller->getNameOff(),
             ***REMOVED***,
             [
                 'mockPRG' => $this->getMockPRG(),
@@ -267,8 +267,31 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***
         );
 
+        $construct = [***REMOVED***;
+
+
+        if ($this->controller->getService() === 'factories') {
+
+            if ($hasImageColumn || $hasImageTable) {
+                $dependency = $this->controller->getDependency();
+                $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
+                $this->controller->setDependency($dependency);
+            }
+
+
+
+            $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
+            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
+        }
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller-test/db/constructor/'.$this->controller->getService().'.phtml',
+            array_merge($options, $construct)
+        );
+
+
         $this->file = $this->getFileCreator();
-        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
+        $this->file->setFileName(sprintf('%sTest.php', $this->controller->getName()));
         $this->file->setLocation($this->getModule()->getTestControllerFolder());
         $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);

@@ -42,22 +42,22 @@ class TableController extends AbstractActionController
     /**
      * Constructor
      *
-     * @param TableService    $tableService    Single Db Table Service
-     * @param TableForm       $tableForm       Single Db Table Form
-     * @param TableSearchForm $tableSearchForm Single Db Table Search Form
-     * @param ImageService    $imageService    Image Upload
+     * @param TableService    $tableService    Table Service
+     * @param TableForm       $tableForm       Table Form
+     * @param TableSearchForm $tableSearchForm Table Search Form
+     * @param ImageService    $imageService    Image Service
      *
      * @return \MyModule\Controller\TableController
      */
     public function __construct(
         TableService $tableService,
         TableForm $tableForm,
-        SearchForm $tableSearchForm,
+        TableSearchForm $tableSearchForm,
         ImageService $imageService
     ) {
         $this->tableService = $tableService;
         $this->tableForm = $tableForm;
-        $this->tableSearchForm = $searchForm;
+        $this->tableSearchForm = $tableSearchForm;
         $this->imageService = $imageService;
 
         return $this;

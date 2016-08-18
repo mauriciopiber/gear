@@ -49,11 +49,11 @@ class SingleDbTableController extends AbstractActionController
     public function __construct(
         SingleDbTableService $singleDbTableService,
         SingleDbTableForm $singleDbTableForm,
-        SingleDbSearchForm $singleDbTableSearchForm
+        SingleDbTableSearchForm $singleDbTableSearchForm
     ) {
         $this->singleDbTableService = $singleDbTableService;
         $this->singleDbTableForm = $singleDbTableForm;
-        $this->singleDbSearchForm = $singleDbTableSearchForm;
+        $this->singleDbTableSearchForm = $singleDbTableSearchForm;
 
         return $this;
     }
