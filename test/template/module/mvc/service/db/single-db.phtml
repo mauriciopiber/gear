@@ -2,6 +2,7 @@
 namespace MyModule\Service;
 
 use GearBase\Service\AbstractService;
+use MyModule\Repository\SingleDbTableRepositoryTrait;
 
 /**
  * Interaction between SingleDbTableController and Services
@@ -16,6 +17,8 @@ use GearBase\Service\AbstractService;
  */
 class SingleDbTableService extends AbstractService
 {
+    use SingleDbTableRepositoryTrait;
+
     protected $sessionName;
 
     protected $authService;

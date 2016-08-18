@@ -2,12 +2,9 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvcTest;
-use Gear\Mvc\Config\ServiceManagerTrait;
 
 class SearchTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
-
     public function introspectFromTable($table)
     {
         $this->db = $table;

@@ -2,6 +2,7 @@
 namespace MyModule\Service;
 
 use GearBase\Service\AbstractService;
+use MyModule\Repository\TableRepositoryTrait;
 use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 
@@ -18,6 +19,8 @@ use GearImage\Service\ImageServiceTrait;
  */
 class TableService extends AbstractService
 {
+    use TableRepositoryTrait;
+
     use PasswordVerifyTrait;
 
     use ImageServiceTrait;

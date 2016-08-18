@@ -109,11 +109,12 @@ class ServiceService extends AbstractMvc
             $this->str('class', $this->db->getTable())
         );
 
-        $this->use = $this->getCode()->getUseConstructor($this->src);
+
+        $this->use .= $this->getCode()->getUseConstructor($this->src, ['\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
 
         $this->attribute = $this->getCode()->getUseAttribute($this->src, null, [
             '\Zend\Cache\Storage\Adapter\Memcached',
-            $this->repositoryFullname
+            //$this->repositoryFullname
         ***REMOVED***);
 
         $this->tableUploadImage = false;
