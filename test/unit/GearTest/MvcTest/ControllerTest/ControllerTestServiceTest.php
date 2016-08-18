@@ -47,7 +47,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller-test';
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
@@ -58,7 +58,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->controllerTest->setStringService($this->string);
         $this->controllerTest->setModule($this->module->reveal());
         $this->controllerTest->setInjector($this->injector);
-        $this->controllerTest->setFactoryTestService($this->factoryTestService->reveal());
+        $this->controllerTest->setFactoryTestService($this->factoryTest->reveal());
 
         $this->controllerDependency = new \Gear\Creator\ControllerDependency();
         $this->controllerDependency->setStringService($this->string);
@@ -81,6 +81,10 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());
         $this->controllerTest->setServiceManager($this->serviceManager);
+
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->controllerTest->setSchemaService($this->schemaService->reveal());
+
     }
 
     public function testCreateModuleController()
@@ -124,20 +128,6 @@ class ControllerTestServiceTest extends AbstractTestCase
     {
         $table = $this->string->str('class', $tableName);
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
-
-        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
-
-
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-        $this->column->renderColumnPart('staticTest')->willReturn('');
-
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
-        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
-
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
@@ -149,9 +139,35 @@ class ControllerTestServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
+        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $this->schemaService->getControllerByDb($this->db)->willReturn($controller);
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('ControllerTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->column->renderColumnPart('staticTest')->willReturn('');
+
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
+
+        $this->schemaService->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
 
         $this->service = $this->prophesize('GearJson\Src\Src');
         $this->service->getName()->willReturn(sprintf('%sService', $table));
@@ -174,7 +190,10 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($this->search->reveal())->shouldBeCalled();
 
-        $this->controllerTest->setSchemaService($this->schemaService->reveal());
+
+        if ($service == 'factories') {
+            $this->factoryTest->createControllerFactoryTest($controller, vfsStream::url($location))->shouldBeCalled();
+        }
 
         $file = $this->controllerTest->introspectFromTable($this->db);
 

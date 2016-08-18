@@ -67,6 +67,7 @@ class FilterService extends AbstractMvc
         $this->tableName   = $this->db->getTable();
         $this->tableObject = $this->db->getTableObject();
 
+        $location = $this->getCode()->getLocation($this->src);
 
         $inputValues = $this->getFilterValues();
 
@@ -85,7 +86,7 @@ class FilterService extends AbstractMvc
 
         $this->src->setDependency([
             '\Zend\Db\Adapter\Adapter',
-            '\Zend\Mvc\I18n\Translator'
+            '\Zend\I18n\Translator\Translator'
         ***REMOVED***);
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
@@ -95,7 +96,7 @@ class FilterService extends AbstractMvc
         $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
           ? $this->getCode()->getUseConstructor($this->src, [
               '\Zend\Db\Adapter\Adapter',
-              '\Zend\Mvc\I18n\Translator'
+              '\Zend\I18n\Translator\Translator'
           ***REMOVED***)
           : '';
 
@@ -111,7 +112,7 @@ class FilterService extends AbstractMvc
         $this->file->setOptions($options);
 
         $this->file->setFileName($this->src->getName().'.php');
-        $this->file->setLocation($this->getModule()->getFilterFolder());
+        $this->file->setLocation($location);
 
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
             $this->file->addChildView(array(
@@ -135,6 +136,9 @@ class FilterService extends AbstractMvc
 
         $this->getFilterTestService()->introspectFromTable($this->db);
 
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
 
         return $this->file->render();
     }

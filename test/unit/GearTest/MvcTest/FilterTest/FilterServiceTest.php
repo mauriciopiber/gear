@@ -154,17 +154,19 @@ class FilterServiceTest extends AbstractTestCase
 
         $table = $this->string->str('class', $tableName);
 
+        $location = vfsStream::url('module');
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getFilterFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $this->module->getFilterFolder()->willReturn($location)->shouldBeCalled();
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage)->shouldBeCalled();
 
-        $this->table->hasUniqueConstraint($table)->willReturn(false);
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
-        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
+        $this->table->hasUniqueConstraint($table)->willReturn(false)->shouldBeCalled();
+        //$this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
+        //$this->table->isNullable($this->db->getTable())->willReturn($nullable)->shouldBeCalled();
 
         $filter = new \GearJson\Src\Src(
             [
@@ -175,7 +177,11 @@ class FilterServiceTest extends AbstractTestCase
             ***REMOVED***
         );
 
-        $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter);
+        $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter)->shouldBeCalled();
+
+        if ($service == 'factories') {
+            $this->factory->createFactory($filter, $location)->shouldBeCalled();
+        }
 
         $file = $this->filter->introspectFromTable($this->db);
 
