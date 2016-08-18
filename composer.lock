@@ -996,17 +996,17 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.47",
+            "version": "0.2.48",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "e6fd77ff8ce895b12ff72f659d6f65d843e65194"
+                "reference": "b77b01ee41db64bf9832e3f9fa82d46e3051193b"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.47-bf1a66.tar",
-                "reference": "e6fd77ff8ce895b12ff72f659d6f65d843e65194",
-                "shasum": "7df3fd6426e0b0f234e155282eedd70106c63b88"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.48-12c457.tar",
+                "reference": "b77b01ee41db64bf9832e3f9fa82d46e3051193b",
+                "shasum": "d3f6694f4fd9f7cd84866b029b9dfdf3cb967bac"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1039,7 +1039,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-08-07 17:21:13"
+            "time": "2016-08-18 14:58:08"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1635,17 +1635,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.5.0",
+            "version": "5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b"
+                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b-zip-f06a39.tar",
-                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b",
-                "shasum": "29a35596975c09a1a36cb93514fac87e4acbf52b"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-46ec2d1522ae8c9a12aca6b7650e0be78bbb0502-zip-f28a68.tar",
+                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
+                "shasum": "f4047fd8f63f66d5f51e67668bead2b4a64eb5ff"
             },
             "require": {
                 "ext-dom": "*",
@@ -1709,21 +1709,21 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-08-05 04:49:02"
+            "time": "2016-08-18 11:10:44"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.3",
+            "version": "3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52"
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b13d0d9426ced06958bd32104653526a6c998a52",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52",
-                "shasum": "d4959ab38f905e814960c4134de865e68e60342b"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-4e83390f64e7ce04fcaec2ce95cd72823b431d19-zip-203a1e.tar",
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19",
+                "shasum": "c905a15db5f3b57090fbbb6aa31b4bc2c819926c"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -1768,7 +1768,7 @@
                 "mock",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-06-12 07:37:26"
+            "time": "2016-08-17 09:33:51"
         },
         {
             "name": "psr/log",
@@ -2037,23 +2037,23 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4e8f0da10ac5802913afc151413bc8c53b6c2716",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
-                "shasum": "36a231b5f27705a7df13001275430fbcb60b1f79"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-be2c607e43ce4c89ecd60e75c6a85c126e754aea-zip-edab34.tar",
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea",
+                "shasum": "6d956003a354a78fd6c414568c3a315e2295a601"
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -2083,7 +2083,7 @@
                 "environment",
                 "hhvm"
             ***REMOVED***,
-            "time": "2016-05-17 03:18:57"
+            "time": "2016-08-18 05:49:44"
         },
         {
             "name": "sebastian/exporter",
@@ -6095,24 +6095,26 @@
         },
         {
             "name": "facebook/webdriver",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "0b889d7de7461439f8a3bbcca46e0f696cb27986"
+                "reference": "b7186fb1bcfda956d237f59face250d06ef47253"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/0b889d7de7461439f8a3bbcca46e0f696cb27986",
-                "reference": "0b889d7de7461439f8a3bbcca46e0f696cb27986",
-                "shasum": "0cdf81f006df7d332a1eafc2c9af8962599febac"
+                "url": "https://mirror.pibernetwork.com/dist/facebook-webdriver-b7186fb1bcfda956d237f59face250d06ef47253-zip-18ca05.tar",
+                "reference": "b7186fb1bcfda956d237f59face250d06ef47253",
+                "shasum": "ab18c609dc409940a42b2c1de0964cbc583be8cf"
             },
             "require": {
                 "ext-curl": "*",
                 "php": ">=5.3.19"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.6.*"
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "4.6.* || ~5.0",
+                "squizlabs/php_codesniffer": "^2.6"
             },
             "suggest": {
                 "phpdocumentor/phpdocumentor": "2.*"
@@ -6135,7 +6137,7 @@
                 "selenium",
                 "webdriver"
             ***REMOVED***,
-            "time": "2016-06-04 00:02:34"
+            "time": "2016-08-10 00:44:08"
         },
         {
             "name": "guzzlehttp/guzzle",
