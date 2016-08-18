@@ -249,6 +249,8 @@ class ControllerTestService extends AbstractMvcTest implements
             $columnsOptions,
             $actionOptions,
             [
+                'namespace' => $this->getCodeTest()->getNamespace($this->controller),
+                'testNamespace' => $this->getCodeTest()->getTestNamespace($this->controller),
                 'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
@@ -284,11 +286,21 @@ class ControllerTestService extends AbstractMvcTest implements
             $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
         }
 
+
+
+        $options['service'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Service'));
+
+        $options['form'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Form'));
+
+        $options['search'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'SearchForm'));
+
         $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/controller-test/db/constructor/'.$this->controller->getService().'.phtml',
             array_merge($options, $construct)
         );
-
 
         $this->file = $this->getFileCreator();
         $this->file->setFileName(sprintf('%sTest.php', $this->controller->getName()));

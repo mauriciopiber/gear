@@ -32,7 +32,7 @@ class SingleDbTableControllerTest extends TestCase
         $this->controller->setEvent($this->event);
 
         $this->singleDbTableForm = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableForm');
-        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\Search\SingleDbTableSearchForm');
+        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableSearchForm');
         $this->singleDbTableService = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableService');
 
         $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
