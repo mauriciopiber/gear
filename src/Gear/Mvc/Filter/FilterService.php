@@ -93,7 +93,10 @@ class FilterService extends AbstractMvc
           : '';
 
         $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
-          ? $this->getCode()->getUseConstructor($this->src)
+          ? $this->getCode()->getUseConstructor($this->src, [
+              '\Zend\Db\Adapter\Adapter',
+              '\Zend\Mvc\I18n\Translator'
+          ***REMOVED***)
           : '';
 
         $this->file->addChildView(array(

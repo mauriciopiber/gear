@@ -2,6 +2,7 @@
 namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
+use MyModule\Custom\CustomNamespace\TableRepositoryTrait;
 use MyModule\Custom\CustomNamespace\TableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
 use GearBase\Service\PasswordVerifyTrait;
@@ -21,6 +22,8 @@ use GearImage\Service\ImageService;
  */
 class TableService extends AbstractService
 {
+    use TableRepositoryTrait;
+
     use PasswordVerifyTrait;
 
     use ImageServiceTrait;

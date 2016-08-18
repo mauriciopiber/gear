@@ -125,7 +125,7 @@ class ServiceServiceTest extends AbstractTestCase
             'namespace' => $namespace,
             'service' => $service,
             'dependency' => [
-                sprintf('Custom\CustomNamespace\%sRepository', $table),
+                sprintf('%s\%sRepository', ($namespace !== null) ? $namespace : 'Repository', $table),
                 'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
             ***REMOVED***
         ***REMOVED***);
@@ -134,7 +134,7 @@ class ServiceServiceTest extends AbstractTestCase
         [
             'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
-            'namespace' => 'Custom\CustomNamespace',
+            'namespace' => $namespace,
             'service' => $service,
         ***REMOVED***);
 

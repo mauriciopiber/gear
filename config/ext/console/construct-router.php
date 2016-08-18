@@ -50,7 +50,7 @@ return [
             /** 3.1 */
             'gear-db' => [
                 'options' => [
-                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** ' . $options,
+                    'route' => 'gear module db create <module> [<basepath>***REMOVED*** --table= [--user=***REMOVED*** [--default-role=***REMOVED*** [--columns=***REMOVED*** [--namespace=***REMOVED*** [--service=***REMOVED***' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module\Constructor\Db',
                         'action' => 'create'

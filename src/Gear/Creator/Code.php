@@ -703,15 +703,26 @@ EOS;
         return $html;
     }
 
-    public function getUseConstructor($data)
+    public function getUseConstructor($data, array $ignore = [***REMOVED***)
     {
         $this->uses = '';
+
+        foreach ($data->getDependency() as $alias => $item) {
+
+            //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
+            //que não precisam de Traits.
+            if (!in_array($item, $ignore) && !($data instanceof Controller)) {
+                $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
+            }
+        }
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $alias => $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
+
+
 
         return $this->uses;
     }
