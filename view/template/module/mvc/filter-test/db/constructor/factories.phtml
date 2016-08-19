@@ -6,6 +6,8 @@
             'pt_BR'
         )->setLocale('pt_BR');
 
+        $this->translator = new \Zend\Mvc\I18n\Translator($this->translator);
+
         $this->filter = new <?php echo $this->className;?>(
             $this->getAdapterMock(),
             $this->translator

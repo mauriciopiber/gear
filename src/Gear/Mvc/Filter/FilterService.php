@@ -86,7 +86,7 @@ class FilterService extends AbstractMvc
 
         $this->src->setDependency([
             '\Zend\Db\Adapter\Adapter',
-            '\Zend\I18n\Translator\Translator'
+            'translator' => '\Zend\Mvc\I18n\Translator'
         ***REMOVED***);
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
@@ -96,7 +96,7 @@ class FilterService extends AbstractMvc
         $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
           ? $this->getCode()->getUseConstructor($this->src, [
               '\Zend\Db\Adapter\Adapter',
-              '\Zend\I18n\Translator\Translator'
+              '\Zend\Mvc\I18n\Translator'
           ***REMOVED***)
           : '';
 
