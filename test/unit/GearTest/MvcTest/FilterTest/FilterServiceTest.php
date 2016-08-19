@@ -3,6 +3,7 @@ namespace GearTest\MvcTest\FilterTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -23,6 +24,9 @@ class FilterServiceTest extends AbstractTestCase
     {
         parent::setUp();
         vfsStream::setup('module');
+        vfsStream::newDirectory('src')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('src/MyModule')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('src/MyModule/Filter')->at(vfsStreamWrapper::getRoot());
 
         //module
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
@@ -157,7 +161,16 @@ class FilterServiceTest extends AbstractTestCase
         $location = vfsStream::url('module');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getFilterFolder()->willReturn($location)->shouldBeCalled();
+
+        if ($namespace === null) {
+            $location = vfsStream::url('module/src/MyModule/Filter');
+            $this->module->map('Filter')->willReturn($location)->shouldBeCalled();
+        } else {
+            $location = vfsStream::url('module/src/MyModule');
+            $this->module->getSrcModuleFolder()->willReturn($location)->shouldBeCalled();
+            $location .= '/'.str_replace('\\', '/', $namespace);
+        }
+
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
@@ -178,6 +191,10 @@ class FilterServiceTest extends AbstractTestCase
         );
 
         $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter)->shouldBeCalled();
+
+
+        $this->filterTest->introspectFromTable($this->db)->shouldBeCalled();
+
 
         if ($service == 'factories') {
             $this->factory->createFactory($filter, $location)->shouldBeCalled();

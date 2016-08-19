@@ -115,23 +115,23 @@ class FilterService extends AbstractMvc
         $this->file->setLocation($location);
 
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
-            $this->file->addChildView(array(
+            $this->file->addChildView([
                 'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
                     'var'     => $this->str('var-lenght', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
-            ));
+            ***REMOVED***);
         } else {
-            $this->file->addChildView(array(
+            $this->file->addChildView([
                 'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
                     'var'     => $this->str('var-lenght', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
-            ));
+            ***REMOVED***);
         }
 
         $this->getFilterTestService()->introspectFromTable($this->db);

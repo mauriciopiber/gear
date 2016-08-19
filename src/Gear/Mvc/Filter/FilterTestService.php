@@ -210,6 +210,8 @@ class FilterTestService extends AbstractMvcTest
         $this->class     = $this->str('class', $this->src->getName());
         $this->var       = $this->str('var-lenght', $this->src->getName());
 
+        $location = $this->getCodeTest()->getLocation($this->src);
+
         $this->functions = '';
 
         //validate-max
@@ -239,13 +241,17 @@ class FilterTestService extends AbstractMvcTest
                 'className' => $this->src->getName()
             ***REMOVED***
         );
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
         //criar teste com fixture correta, passando válido.
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/filter-test/db/test.phtml',
             $options,
             $this->src->getName().'Test.php',
-            $this->getModule()->getTestFilterFolder()
+            $location
         );
     }
 }
