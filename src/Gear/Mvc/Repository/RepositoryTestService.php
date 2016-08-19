@@ -90,6 +90,7 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
+
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
@@ -140,7 +141,7 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             'template/module/mvc/repository-test/db/db-test.phtml',
             $options,
             $this->tableName.'RepositoryTest.php',
-            $this->getModule()->getTestRepositoryFolder()
+            $location
         );
     }
 }

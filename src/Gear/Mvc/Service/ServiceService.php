@@ -92,8 +92,9 @@ class ServiceService extends AbstractMvc
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
+        $location = $this->getCode()->getLocation($this->src);
 
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getServiceFolder());
+        $this->getTraitService()->createTrait($this->src, $location);
 
         $this->file = $this->getFileCreator();
 
@@ -174,10 +175,13 @@ class ServiceService extends AbstractMvc
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
 
         $this->file->setOptions($options);
         $this->file->setFileName($this->className.'.php');
-        $this->file->setLocation($this->getModule()->getServiceFolder());
+        $this->file->setLocation($location);
         $this->file->setView('template/module/mvc/service/db/db.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();

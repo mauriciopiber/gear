@@ -711,7 +711,7 @@ EOS;
 
             //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
             //que não precisam de Traits.
-            if (!in_array($item, $ignore) && !($data instanceof Controller)) {
+            if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
                 $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
             }
         }

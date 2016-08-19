@@ -146,7 +146,9 @@ class ServiceTestService extends AbstractMvcTest
             $construct
         );
 
-        $location = $this->getModule()->getTestServiceFolder();
+        $location = $this->getCodeTest()->getLocation($this->src);
+
+
 
         $fileCreator->setView('template/module/mvc/service-test/db/db-test.phtml');
         $fileCreator->setOptions($options);
@@ -154,6 +156,10 @@ class ServiceTestService extends AbstractMvcTest
         $fileCreator->setFileName($this->src->getName().'Test.php');
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
 
         return $fileCreator->render();
     }

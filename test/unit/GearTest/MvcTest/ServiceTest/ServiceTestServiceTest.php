@@ -65,8 +65,10 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setCodeTest($this->codeTest);
         $this->service->setSrcDependency($this->srcDependency);
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
+        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->service->setFactoryTestService($this->factoryTest->reveal());
+
+        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
@@ -78,13 +80,19 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->service->setSchemaService($this->schema->reveal());
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->service->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->service->setTableService($this->table->reveal());
     }
 
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-factory-namespace
-     * @group db-service1
+     * @group db-service2
      */
     public function testInstrospectTable(
         $columns,
@@ -99,24 +107,36 @@ class ServiceTestServiceTest extends AbstractTestCase
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('ServiceTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
 
-        $this->service->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
-
-        $this->service->setTableService($this->table->reveal());
 
         $serviceT = new \GearJson\Src\Src(
             [
@@ -151,9 +171,14 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setSchemaService($schemaService->reveal());
 
 
-        $this->service->setTraitTestService($this->traitTestService->reveal());
+        $this->service->setTraitTestService($this->traitTest->reveal());
 
 
+        $this->traitTest->createTraitTest($serviceT, vfsStream::url($location))->shouldBeCalled();
+
+        if ($service == 'factories') {
+            $this->factoryTest->createFactoryTest($serviceT, vfsStream::url($location))->shouldBeCalled();
+        }
 
         //$this->service->setFactoryService
 
@@ -200,7 +225,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setServiceManager($serviceManager);
 
-        $this->service->setTraitTestService($this->traitTestService->reveal());
+        $this->service->setTraitTestService($this->traitTest->reveal());
 
         $srcDependency = new \Gear\Creator\SrcDependency();
         $srcDependency->setModule($this->module->reveal());
