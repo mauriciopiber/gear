@@ -20,7 +20,10 @@ class RepositoryTestServiceTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/RepositoryTest';
+        $this->createVirtualDir($this->vfsLocation);
+
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/repository-test';
 
@@ -43,8 +46,8 @@ class RepositoryTestServiceTest extends AbstractTestCase
         $this->serviceManager->setStringService($this->string);
         $this->repository->setServiceManager($this->serviceManager);
 
-        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
-        $this->repository->setTraitTestService($this->traitTestService->reveal());
+        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+        $this->repository->setTraitTestService($this->traitTest->reveal());
 
         $this->codeTest = new \Gear\Creator\CodeTest;
         $this->codeTest->setStringService($this->string);
@@ -104,7 +107,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group RepositoryMvc
-     * @group db-repository1
+     * @group db-repository2
      * @group db-factory-namespace
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
@@ -126,14 +129,26 @@ class RepositoryTestServiceTest extends AbstractTestCase
             ***REMOVED***
         );
 
-        if (!empty($repository->getNamespace())) {
-            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
         } else {
-            $this->module->map('RepositoryTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+            $location = $this->vfsLocation;
+            $this->module->map('RepositoryTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestRepositoryFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
@@ -145,6 +160,12 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
+        $this->traitTest->createTraitTest($repository, vfsStream::url($location))->shouldBeCalled();
+
+        if ($service == 'factories') {
+            $this->factoryTest->createFactoryTest($repository, vfsStream::url($location))->shouldBeCalled();
+        }
+
         $file = $this->repository->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/all-columns-db'.$template.'.phtml';
@@ -153,5 +174,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$repository->getName().'Test.php', $file);
     }
 }

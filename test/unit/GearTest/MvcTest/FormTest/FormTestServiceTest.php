@@ -19,10 +19,11 @@ class FormTestServiceTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
+        $this->createVirtualDir($this->vfsLocation);
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
 
         $this->string = new \GearBase\Util\String\StringService();
 
@@ -38,23 +39,40 @@ class FormTestServiceTest extends AbstractTestCase
         $this->form->setFileCreator($this->fileCreator);
         $this->form->setModule($this->module->reveal());
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->codeTest = new \Gear\Creator\CodeTest;
-
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-
-        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency = new \Gear\Creator\SrcDependency();
         $this->srcDependency->setStringService($this->string);
         $this->srcDependency->setModule($this->module->reveal());
 
+        $this->codeTest = new \Gear\Creator\CodeTest();
+
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
         $this->codeTest->setSrcDependency($this->srcDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
         $this->form->setCodeTest($this->codeTest);
+
+        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+        $this->form->setTraitTestService($this->traitTest->reveal());
+
+        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->form->setFactoryTestService($this->factoryTest->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->form->setTableService($this->table->reveal());
+
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->form->setColumnService($this->column->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->form->setSchemaService($this->schema->reveal());
+
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setStringService($this->string);
+        $this->serviceManager->setModule($this->module->reveal());
+
+        $this->form->setServiceManager($this->serviceManager);
 
     }
 
@@ -82,18 +100,13 @@ class FormTestServiceTest extends AbstractTestCase
             $this->module->map('FormTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        if ($data->getService() == 'factories') {
-            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-            $this->form->setFactoryTestService($this->factory->reveal());
-        }
-
         $serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $serviceManager->setModule($this->module->reveal());
         $serviceManager->setStringService($this->string);
 
         $this->form->setServiceManager($serviceManager);
 
-        $this->form->setTraitTestService($this->traitTestService->reveal());
+        $this->form->setTraitTestService($this->traitTest->reveal());
 
         $srcDependency = new \Gear\Creator\SrcDependency();
         $srcDependency->setModule($this->module->reveal());
@@ -112,6 +125,7 @@ class FormTestServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group n99
+     * @group db-form2
      */
     public function testCreateDb($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
@@ -119,8 +133,25 @@ class FormTestServiceTest extends AbstractTestCase
 
         $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->module->getTestFormFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('FormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
 
         $src = new \GearJson\Src\Src(
             [
@@ -131,36 +162,19 @@ class FormTestServiceTest extends AbstractTestCase
             ***REMOVED***
         );
 
-
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Form')->willReturn($src);
 
-        $this->form->setSchemaService($this->schema->reveal());
-
-
-        $this->trait = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->form->setTraitTestService($this->trait->reveal());
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setStringService($this->string);
-        $serviceManager->setModule($this->module->reveal());
-
-        $this->form->setServiceManager($serviceManager);
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
-        $this->form->setTableService($this->table->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
 
         $this->column->getColumns($db)->willReturn($columns);
 
-        $this->form->setColumnService($this->column->reveal());
-
+        $this->traitTest->createTraitTest($src, vfsStream::url($location))->shouldBeCalled();
+        $this->factoryTest->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
 
         $file = $this->form->introspectFromTable($db);
 
         $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
+
+        $this->assertStringEndsWith($location.'/'.$src->getName().'Test.php', $file);
     }
 }

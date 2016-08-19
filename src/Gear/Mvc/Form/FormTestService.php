@@ -27,7 +27,7 @@ class FormTestService extends AbstractMvcTest
         );
 
         $filename = $this->src->getName().'Test.php';
-        $location = $this->getModule()->getTestFormFolder();
+        $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getService() === 'factories') {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);

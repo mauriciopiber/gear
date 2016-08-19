@@ -22,7 +22,7 @@ class ServiceServiceTest extends AbstractTestCase
 
         $this->vfsLocation = 'module/src/MyModule/Service';
         $this->createVirtualDir($this->vfsLocation);
-        $this->assertFileExists(vfsStream::url($this->vfsLocation));
+
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/service';
 
@@ -63,8 +63,8 @@ class ServiceServiceTest extends AbstractTestCase
         $this->service->setFactoryService($this->factory->reveal());
 
         //trait
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->service->setTraitService($this->traitService->reveal());
+        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
+        $this->service->setTraitService($this->trait->reveal());
 
         //array
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
@@ -95,7 +95,7 @@ class ServiceServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-docs1
-     * @group db-service2
+     * @group db-service1
      * @group db-factory-namespace
      */
     public function testInstrospectTable(
@@ -111,7 +111,15 @@ class ServiceServiceTest extends AbstractTestCase
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        if ($namespace === null) {
+            $location = vfsStream::url('module/src/MyModule/Service');
+            $this->module->map('Service')->willReturn($location)->shouldBeCalled();
+        } else {
+            $location = vfsStream::url('module/src/MyModule');
+            $this->module->getSrcModuleFolder()->willReturn($location)->shouldBeCalled();
+            $location .= '/'.str_replace('\\', '/', $namespace);
+        }
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
@@ -123,8 +131,7 @@ class ServiceServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $serviceT = new \GearJson\Src\Src(
-        [
+        $serviceT = new \GearJson\Src\Src([
             'name' => sprintf('%sService', $table),
             'type' => 'Service',
             'namespace' => $namespace,
@@ -135,8 +142,7 @@ class ServiceServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
-        $repository = new \GearJson\Src\Src(
-        [
+        $repository = new \GearJson\Src\Src([
             'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
             'namespace' => $namespace,
@@ -146,6 +152,13 @@ class ServiceServiceTest extends AbstractTestCase
         $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
+        if ($service == 'factories') {
+            $this->factory->createFactory($serviceT, $location)->shouldBeCalled();
+        }
+
+        $this->trait->createTrait($serviceT, $location)->shouldBeCalled();
+        $this->serviceTest->introspectFromTable($this->db)->shouldBeCalled();
+
         $file = $this->service->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
@@ -154,6 +167,8 @@ class ServiceServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$serviceT->getName().'.php', $file);
     }
 
     public function src()

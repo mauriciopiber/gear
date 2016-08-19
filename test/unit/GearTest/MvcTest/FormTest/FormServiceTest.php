@@ -20,7 +20,9 @@ class FormServiceTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/src/MyModule/Form';
+        $this->createVirtualDir($this->vfsLocation);
 
         //module
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
@@ -69,8 +71,8 @@ class FormServiceTest extends AbstractTestCase
         $this->form->setFormTestService($this->formTest->reveal());
 
         //trait
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->form->setTraitService($this->traitService->reveal());
+        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
+        $this->form->setTraitService($this->trait->reveal());
 
         //factory
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
@@ -133,14 +135,24 @@ class FormServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group db-docs
-     * @group db-form
+     * @group db-form1
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getFormFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        if ($namespace === null) {
+            $location = $this->vfsLocation;
+            $this->module->map('Form')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        } else {
+            $location = 'module/src/MyModule';
+            $this->module->getSrcModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+            $location .= '/'.str_replace('\\', '/', $namespace);
+        }
+
+
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
@@ -175,7 +187,7 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setSchemaService($schemaService->reveal());
 
-        $this->form->setTraitService($this->traitService->reveal());
+        $this->form->setTraitService($this->trait->reveal());
 
         $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
         $this->form->setSrcDependency($srcDependency->reveal());
@@ -185,6 +197,9 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setFormTestService($this->formTest->reveal());
 
+        $this->trait->createTrait($form, vfsStream::url($location))->shouldBeCalled();
+        $this->factory->createFactory($form, vfsStream::url($location))->shouldBeCalled();
+
         $file = $this->form->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
@@ -193,5 +208,7 @@ class FormServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$form->getName().'.php', $file);
     }
 }

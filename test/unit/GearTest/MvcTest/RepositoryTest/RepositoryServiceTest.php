@@ -21,7 +21,9 @@ class RepositoryServiceTest extends AbstractTestCase
     {
         parent::setUp();
 
-        vfsStream::setup('module');
+        $this->vfsLocation = 'module/src/MyModule/Repository';
+        $this->createVirtualDir($this->vfsLocation);
+
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/repository';
 
@@ -55,8 +57,8 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
         $this->repository->setFactoryService($this->factory->reveal());
 
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->repository->setTraitService($this->traitService->reveal());
+        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
+        $this->repository->setTraitService($this->trait->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
@@ -125,7 +127,7 @@ class RepositoryServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-docs
-     * @group db-repository
+     * @group db-repository1
      * @group db-factory-namespace
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
@@ -156,13 +158,14 @@ class RepositoryServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
-        if (!empty($repository->getNamespace())) {
-            $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
+        if ($namespace === null) {
+            $location = vfsStream::url('module/src/MyModule/Repository');
+            $this->module->map('Repository')->willReturn($location)->shouldBeCalled();
         } else {
-            $this->module->map('Repository')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+            $location = vfsStream::url('module/src/MyModule');
+            $this->module->getSrcModuleFolder()->willReturn($location)->shouldBeCalled();
+            $location .= '/'.str_replace('\\', '/', $namespace);
         }
-
-        $this->module->getRepositoryFolder()->willReturn(vfsStream::url('module'));
 
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
@@ -172,6 +175,15 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->mapping->setTableService($this->table->reveal());
         $this->repository->setMappingService($this->mapping);
 
+
+        $this->repositoryTest->introspectFromTable($this->db)->shouldBeCalled();
+        $this->trait->createTrait($repository, $location)->shouldBeCalled();
+
+        if ($service === 'factories') {
+            $this->factory->createFactory($repository, $location)->shouldBeCalled();
+        }
+
+
         $file = $this->repository->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/all-columns-db'.$template.'.phtml';
@@ -180,5 +192,7 @@ class RepositoryServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$repository->getName().'.php', $file);
     }
 }
