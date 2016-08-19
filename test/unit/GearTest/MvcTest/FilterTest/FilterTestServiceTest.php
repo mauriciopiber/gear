@@ -7,6 +7,7 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FilterTest\FilterDataTrait;
 
@@ -22,6 +23,12 @@ class FilterTestServiceTest extends AbstractTestCase
     {
         parent::setUp();
         vfsStream::setup('module');
+        vfsStream::newDirectory('test')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('test/unit')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('test/unit/MyModuleTest')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('test/unit/MyModuleTest/FilterTest')->at(vfsStreamWrapper::getRoot());
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
@@ -35,7 +42,6 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter-test';
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
 
         $this->codeTest = new \Gear\Creator\CodeTest;
@@ -59,6 +65,9 @@ class FilterTestServiceTest extends AbstractTestCase
         $this->filter->setModule($this->module->reveal());
 
         $this->filter->setCodeTest($this->codeTest);
+
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->filter->setFactoryTestService($this->factory->reveal());
     }
 
     /**
@@ -81,6 +90,25 @@ class FilterTestServiceTest extends AbstractTestCase
         $db = new \GearJson\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
 
         $this->module->getTestFilterFolder()->willReturn(vfsStream::url('module'));
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('FilterTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
         $this->module->getModuleName()->willReturn('MyModule');
 
         $src = new \GearJson\Src\Src(
@@ -101,6 +129,11 @@ class FilterTestServiceTest extends AbstractTestCase
         $this->column->getColumns($db)->willReturn($columns);
 
         $this->filter->setColumnService($this->column->reveal());
+
+        if ($service === 'factories') {
+            $this->factory->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
+        }
+
 
 
         $file = $this->filter->introspectFromTable($db);
@@ -131,11 +164,6 @@ class FilterTestServiceTest extends AbstractTestCase
             $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
         } else {
             $this->module->map('FilterTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        }
-
-        if ($data->getService() == 'factories') {
-            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-            $this->filter->setFactoryTestService($this->factory->reveal());
         }
 
         $serviceManager = new \Gear\Mvc\Config\ServiceManager();
