@@ -4,41 +4,31 @@ namespace GearTest\MvcTest\FilterTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
-use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FilterTest\FilterDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-filter
  */
 class FilterServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use FilterDataTrait;
     use ScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('src')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('src/MyModule')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('src/MyModule/Filter')->at(vfsStreamWrapper::getRoot());
+
+        $this->vfsLocation = 'module/src/MyModule/Filter';
+        $this->createVirtualDir($this->vfsLocation);
 
         //module
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
         //string
         $this->string = new \GearBase\Util\String\StringService();
-
-        //file-render
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter';
@@ -63,7 +53,7 @@ class FilterServiceTest extends AbstractTestCase
 
         $this->filter = new \Gear\Mvc\Filter\FilterService();
 
-        $this->filter->setFileCreator($this->fileCreator);
+        $this->filter->setFileCreator($this->createFileCreator());
         $this->filter->setStringService($this->string);
         $this->filter->setModule($this->module->reveal());
         $this->filter->setCode($this->code);
@@ -208,5 +198,7 @@ class FilterServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$filter->getName().'.php', $file);
     }
 }

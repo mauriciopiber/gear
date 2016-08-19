@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group src-mvc
@@ -12,6 +13,7 @@ use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
  */
 class RepositoryTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use ScopeTrait;
     use RepositoryDataTrait;
 

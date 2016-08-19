@@ -4,6 +4,7 @@ namespace GearTest\MvcTest\ServiceTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group src-mvc
@@ -11,13 +12,17 @@ use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
  */
 class ServiceServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use ServiceDataTrait;
     use \GearTest\ScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/src/MyModule/Service';
+        $this->createVirtualDir($this->vfsLocation);
+        $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/service';
 

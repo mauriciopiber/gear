@@ -4,13 +4,12 @@ namespace GearTest\MvcTest\ControllerTest;
 use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\SingleDbTableTrait;
 use GearTest\ControllerScopeTrait;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
 use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Fixing
@@ -20,18 +19,16 @@ use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
  */
 class ControllerServiceTest extends TestCase
 {
+    use UtilTestTrait;
     use ControllerDataTrait;
     use ControllerScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('src')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('src/MyModule')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('src/MyModule/Controller')->at(vfsStreamWrapper::getRoot());
-
-        $this->assertFileExists('vfs://module/src/MyModule/Controller');
+        $this->vfsLocation = 'module/src/MyModule/Controller';
+        $this->createVirtualDir($this->vfsLocation);
+        $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
@@ -213,6 +210,7 @@ class ControllerServiceTest extends TestCase
             file_get_contents($file)
         );
 
+        $this->assertStringEndsWith($location.'/'.$controller->getName().'.php', $file);
     }
 
     public function controller()

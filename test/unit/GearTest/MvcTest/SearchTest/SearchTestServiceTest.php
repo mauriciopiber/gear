@@ -4,6 +4,7 @@ namespace GearTest\MvcTest\FormTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group src-form
@@ -12,12 +13,16 @@ use GearTest\MvcTest\SearchTest\SearchDataTrait;
  */
 class SearchTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use SearchDataTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/FormTest/SearchTest';
+        $this->createVirtualDir($this->vfsLocation);
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
@@ -80,16 +85,34 @@ class SearchTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
+     * @group db-search2
      * @group n99
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->module->getTestSearchFolder()->willReturn(vfsStream::url('module'));
-        $this->module->getModuleName()->willReturn('MyModule');
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('SearchFormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
         $src = new \GearJson\Src\Src(
             [
@@ -106,8 +129,13 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $this->column->getColumns($db, true)->willReturn($columns);
 
+        $this->trait->createTraitTest($src, vfsStream::url($location))->shouldBeCalled();
+        $this->factory->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
+
         $file = $this->form->introspectFromTable($db);
 
         $this->assertEquals(file_get_contents($this->template.'/'.$template.'.phtml'), file_get_contents($file));
+
+        $this->assertStringEndsWith($location.'/'.$src->getName().'Test.php', $file);
     }
 }
