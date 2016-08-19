@@ -3,4 +3,5 @@ modules: MyModule
 db:
   0:
     table: IntForeignKey
+    namespace: MyGodIsMe
     service: factories
