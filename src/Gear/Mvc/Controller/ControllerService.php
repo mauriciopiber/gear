@@ -152,7 +152,7 @@ class ControllerService extends AbstractMvc implements
 
         if ($this->hasImage || $this->hasTableImage) {
 
-            $dependency[***REMOVED*** = 'GearImage\Service\ImageService';
+            $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
 
             $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
             $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
