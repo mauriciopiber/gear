@@ -224,6 +224,12 @@ class FilterTestService extends AbstractMvcTest
         //sucesso
         $this->getTestValidReturnTrue();
 
+
+        $this->src->setDependency([
+            '\Zend\Db\Adapter\Adapter',
+            'translator' => '\Zend\Mvc\I18n\Translator'
+        ***REMOVED***);
+
         $module = $this->getModule()->getModuleName();
 
         $options =  [
@@ -245,6 +251,7 @@ class FilterTestService extends AbstractMvcTest
         if ($this->src->getService() == 'factories') {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
+
         //criar teste com fixture correta, passando válido.
 
         return $this->getFileCreator()->createFile(

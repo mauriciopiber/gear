@@ -8,10 +8,12 @@ trait FactoryDataTrait
         $dependencyMap = [
             'filter' => [
                 'basic' => [
-                    '\Zend\Db\Adapter\Adapter'
+                    '\Zend\Db\Adapter\Adapter',
+                    'translate' => '\Zend\Mvc\I18n\Translator'
                 ***REMOVED***,
                 'namespace' => [
-                    '\Zend\Db\Adapter\Adapter'
+                    '\Zend\Db\Adapter\Adapter',
+                    'translate' => '\Zend\Mvc\I18n\Translator'
                 ***REMOVED***
             ***REMOVED***,
             'service' => [

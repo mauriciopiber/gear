@@ -25,7 +25,8 @@ class MyTableFilterFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MyTableFilter(
-            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+            $serviceLocator->get('Zend\Db\Adapter\Adapter'),
+            $serviceLocator->get('translate')
         );
         unset($serviceLocator);
         return $factory;

@@ -23,6 +23,8 @@ class TableFilterTest extends TestCase
             'pt_BR'
         )->setLocale('pt_BR');
 
+        $this->translator = new \Zend\Mvc\I18n\Translator($this->translator);
+
         $this->filter = new TableFilter(
             $this->getAdapterMock(),
             $this->translator
