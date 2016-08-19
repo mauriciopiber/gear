@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Controller
@@ -15,50 +16,38 @@ use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use ControllerDataTrait;
     use ControllerScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('test')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest/ControllerTest')->at(vfsStreamWrapper::getRoot());
-
-        $this->assertFileExists('vfs://module/test/unit/MyModuleTest/ControllerTest');
 
         $this->vfsLocation = 'module/test/unit/MyModuleTest/ControllerTest';
+        $this->createVirtualDir($this->vfsLocation);
+
+        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
+        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller-test';
+
+
+        $this->controllerTest = new \Gear\Mvc\Controller\ControllerTestService();
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->controllerTest->setModule($this->module->reveal());
 
 
         $this->string = new \GearBase\Util\String\StringService();
-
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
-
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
-
-
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller-test';
+        $this->controllerTest->setStringService($this->string);
 
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->controllerTest->setFactoryTestService($this->factoryTest->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
-
-        $this->controllerTest = new \Gear\Mvc\Controller\ControllerTestService();
-        $this->controllerTest->setFileCreator($this->fileCreator);
-        $this->controllerTest->setStringService($this->string);
-        $this->controllerTest->setModule($this->module->reveal());
         $this->controllerTest->setInjector($this->injector);
-        $this->controllerTest->setFactoryTestService($this->factoryTest->reveal());
+        $this->controllerTest->setFileCreator($this->createFileCreator());
 
         $this->controllerDependency = new \Gear\Creator\ControllerDependency();
         $this->controllerDependency->setStringService($this->string);
@@ -203,6 +192,8 @@ class ControllerTestServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$controller->getName().'Test.php', $file);
 
     }
 

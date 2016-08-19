@@ -27,7 +27,7 @@ class SearchTestService extends AbstractMvcTest
 
         $filename = $this->src->getName().'Test.php';
 
-        $location = $this->getModule()->getTestSearchFolder();
+        $location = $this->getCodeTest()->getLocation($this->src);
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 

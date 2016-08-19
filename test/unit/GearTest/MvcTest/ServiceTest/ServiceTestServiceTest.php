@@ -10,6 +10,7 @@ use Zend\View\HelperPluginManager;
 use PhpParser\ParserFactory;
 use GearTest\SingleDbTableTrait;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group fix-table
@@ -21,13 +22,17 @@ use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
  */
 class ServiceTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use ServiceDataTrait;
     use \GearTest\ScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/ServiceTest';
+        $this->createVirtualDir($this->vfsLocation);
+        $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->string = new \GearBase\Util\String\StringService();

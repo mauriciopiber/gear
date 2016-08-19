@@ -10,12 +10,14 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FilterTest\FilterDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-filter
  */
 class FilterTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use FilterDataTrait;
     use ScopeTrait;
 
@@ -23,28 +25,23 @@ class FilterTestServiceTest extends AbstractTestCase
     {
         parent::setUp();
         vfsStream::setup('module');
-        vfsStream::newDirectory('test')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest/FilterTest')->at(vfsStreamWrapper::getRoot());
 
         $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
+        $this->createVirtualDir($this->vfsLocation);
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
 
         $this->string = new \GearBase\Util\String\StringService();
 
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter-test';
 
         $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
 
         $this->codeTest = new \Gear\Creator\CodeTest;
+
+        $this->fileCreator = $this->createFileCreator();
 
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
@@ -139,6 +136,8 @@ class FilterTestServiceTest extends AbstractTestCase
         $file = $this->filter->introspectFromTable($db);
 
         $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
+
+        $this->assertStringEndsWith($location.'/'.$src->getName().'Test.php', $file);
     }
 
     public function src()

@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-namespace-factory
@@ -12,13 +13,16 @@ use GearTest\MvcTest\SearchTest\SearchDataTrait;
  */
 class SearchServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use SearchDataTrait;
     use ScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/src/MyModule/Form/Search';
+        $this->createVirtualDir($this->vfsLocation);
 
         //module
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
@@ -68,8 +72,8 @@ class SearchServiceTest extends AbstractTestCase
         $this->search->setSearchTestService($this->searchTest->reveal());
 
         //trait
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->search->setTraitService($this->traitService->reveal());
+        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
+        $this->search->setTraitService($this->trait->reveal());
 
         //factory
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
@@ -94,7 +98,7 @@ class SearchServiceTest extends AbstractTestCase
 
 
 
-        $this->search->setTraitService($this->traitService->reveal());
+        $this->search->setTraitService($this->trait->reveal());
 
         $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');
 
@@ -105,14 +109,22 @@ class SearchServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group db-docs
-     * @group db-search
+     * @group db-search1
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getSearchFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        if ($namespace === null) {
+            $location = $this->vfsLocation;
+            $this->module->map('SearchForm')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        } else {
+            $location = 'module/src/MyModule';
+            $this->module->getSrcModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+            $location .= '/'.str_replace('\\', '/', $namespace);
+        }
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
@@ -137,6 +149,11 @@ class SearchServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
 
+        $this->searchTest->introspectFromTable($this->db)->shouldBeCalled();
+
+        $this->trait->createTrait($search, vfsStream::url($location))->shouldBeCalled();
+        $this->factory->createFactory($search, vfsStream::url($location))->shouldBeCalled();
+
         $file = $this->search->introspectFromTable($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
@@ -145,5 +162,7 @@ class SearchServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+
+        $this->assertStringEndsWith($location.'/'.$search->getName().'Form.php', $file);
     }
 }

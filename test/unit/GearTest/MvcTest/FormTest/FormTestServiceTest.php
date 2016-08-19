@@ -5,12 +5,14 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FormTest\FormDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-form
  */
 class FormTestServiceTest extends AbstractTestCase
 {
+    use UtilTestTrait;
     use FormDataTrait;
     use ScopeTrait;
 
