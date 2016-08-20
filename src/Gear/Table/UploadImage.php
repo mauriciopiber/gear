@@ -21,7 +21,9 @@ use Gear\Service\AbstractJsonService;
  */
 class UploadImage extends AbstractJsonService implements \Gear\Column\ImplementsInterface
 {
-    const USE_ATTRIBUTE = 'GearImage\Service\ImageServiceTrait';
+    const USE_ATTRIBUTE_TRAIT = 'GearImage\Service\ImageServiceTrait';
+
+    const USE_ATTRIBUTE = 'GearImage\Service\ImageService';
 
     const ATTRIBUTE = 'ImageServiceTrait';
 

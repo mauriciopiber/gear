@@ -154,19 +154,24 @@ class ControllerService extends AbstractMvc implements
 
             $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
 
-            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
+            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE_TRAIT.';'.PHP_EOL;
+
+            if ($this->controller->getService() == 'factories') {
+                $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
+            }
+
             $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
         }
 
         /**
          * @TODO 3 - USE e ATTRIBUTE
          */
-        $this->use .= $this->dependency->getUseNamespace(false);
+        $use = $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
-        $lines = array_unique(explode(PHP_EOL, $this->use));
+        $lines = array_unique(explode(PHP_EOL, $use));
 
-        $this->use = implode(PHP_EOL, $lines);
+        $this->use .= implode(PHP_EOL, $lines);
         $this->use .= $this->getCode()->getUseConstructor($this->controller);
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));

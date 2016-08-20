@@ -94,15 +94,15 @@ EOS;
 
 
             if (preg_match('/[a-zA-Z***REMOVED****Repository/', $dependency, $matches) === 1) {
-                return $this->str('var-lenght', 'repository');
+                return $this->str('var', 'repository');
             }
 
             if (preg_match('/Memcached/', $dependency, $matches) === 1) {
-                return $this->str('var-lenght', 'cache');
+                return $this->str('var', 'cache');
             }
         }
 
-        return $this->str('var-lenght', $name);
+        return $this->str('var', $name);
     }
 
     public function getDependencyReveal($src)
