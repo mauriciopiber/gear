@@ -1,19 +1,19 @@
 <?php
-namespace MyModuleTest\ControllerTest;
+namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
-use MyModule\Controller\SingleDbTableController;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 
 /**
  * @group MyModule
- * @group SingleDbTable
+ * @group MyVeryLongTableNameExample
  * @group Controller
- * @group SingleDbTableController
+ * @group MyVeryLongTableNameExampleController
  */
-class SingleDbTableControllerTest extends TestCase
+class MyVeryLongTableNameExampleControllerTest extends TestCase
 {
 
     public function setUp()
@@ -23,18 +23,18 @@ class SingleDbTableControllerTest extends TestCase
         );
         parent::setUp();
 
-        $this->singleDbTableService = $this->prophesize('MyModule\Service\SingleDbTableService');
-        $this->singleDbTableForm = $this->prophesize('MyModule\Form\SingleDbTableForm');
-        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Form\Search\SingleDbTableSearchForm');
+        $this->myVeryLongTableNameExampleService = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleService');
+        $this->myVeryLongTableNameExampleForm = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleForm');
+        $this->myVeryLongTableNameExampleSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchForm');
 
-        $this->controller = new SingleDbTableController(
-            $this->singleDbTableService->reveal(),
-            $this->singleDbTableForm->reveal(),
-            $this->singleDbTableSearchForm->reveal()
+        $this->controller = new MyVeryLongTableNameExampleController(
+            $this->myVeryLongTableNameExampleService->reveal(),
+            $this->myVeryLongTableNameExampleForm->reveal(),
+            $this->myVeryLongTableNameExampleSearchForm->reveal()
         );
 
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'SingleDbTableController'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'MyVeryLongTableNameExampleController'));
         $this->event      = new MvcEvent();
 
         $this->event->setRouteMatch($this->routeMatch);
@@ -77,7 +77,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testSendPostToCreatePageRedirectToGet()
     {
-        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::CREATE)->willReturn(MyVeryLongTableNameExampleController::CREATE);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'create');
@@ -93,12 +93,12 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testSendPostToCreateShowValidation()
     {
-        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::CREATE)->willReturn(MyVeryLongTableNameExampleController::CREATE);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
         $prg->setController($this->controller)->shouldBeCalled();
-        $prg->__invoke('my-module/single-db-table/create', true)->willReturn([***REMOVED***);
+        $prg->__invoke('my-module/my-very-long-table-name-example/create', true)->willReturn([***REMOVED***);
 
         $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
 
@@ -114,9 +114,9 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testCreateSuccessful()
     {
-        $this->url->fromRoute(SingleDbTableController::CREATE)->willReturn(SingleDbTableController::CREATE);
-        $this->url->fromRoute("my-module/single-db-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
-          ->willReturn(SingleDbTableController::EDIT.'/31/1');
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::CREATE)->willReturn(MyVeryLongTableNameExampleController::CREATE);
+        $this->url->fromRoute("my-module/my-very-long-table-name-example/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(MyVeryLongTableNameExampleController::EDIT.'/31/1');
 
         $this->url->setController($this->controller)->shouldBeCalled();
 
@@ -126,17 +126,17 @@ class SingleDbTableControllerTest extends TestCase
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
 
-        $this->prg->__invoke('my-module/single-db-table/create', true)->willReturn($data);
+        $this->prg->__invoke('my-module/my-very-long-table-name-example/create', true)->willReturn($data);
 
         $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
 
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
-        $this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
+        $this->entity->getIdMyVeryLongTableNameExample()->willReturn(31)->shouldBeCalled();
 
-        $this->singleDbTableForm->setData($data)->shouldBeCalled();
-        $this->singleDbTableForm->isValid()->willReturn(true)->shouldBeCalled();
-        $this->singleDbTableForm->getData()->willReturn($data)->shouldBeCalled();
-        $this->singleDbTableService->create($data)->willReturn($this->entity)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleForm->setData($data)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleService->create($data)->willReturn($this->entity)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'create');
         $this->request->setMethod('POST');
@@ -151,7 +151,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenEditDisplaySuccessful()
     {
-        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'edit');
@@ -166,10 +166,10 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenEditRedirectWithInvalidIdToListing()
     {
-        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
-        $this->singleDbTableService->selectById(6000)->willReturn(null);
+        $this->myVeryLongTableNameExampleService->selectById(6000)->willReturn(null);
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 6000);
@@ -184,9 +184,9 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
 
-        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity);
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -202,12 +202,12 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenListRedirectSuccessfulPRGWithValidId()
     {
-        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyVeryLongTableNameExampleController::EDIT);
         $this->url->setController($this->controller)->shouldBeCalled();
 
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
 
-        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity);
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -225,18 +225,18 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation()
     {
-        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT.'/31');
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyVeryLongTableNameExampleController::EDIT.'/31');
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
         $prg->setController($this->controller)->shouldBeCalled();
-        $prg->__invoke('my-module/single-db-table/edit/31', true)->willReturn([***REMOVED***);
+        $prg->__invoke('my-module/my-very-long-table-name-example/edit/31', true)->willReturn([***REMOVED***);
 
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
 
         $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
 
-        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity);
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -254,8 +254,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testEditSuccessfull()
     {
-        $this->url->fromRoute(SingleDbTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(SingleDbTableController::EDIT);
-        $this->url->fromRoute("my-module/single-db-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::EDIT.'/31/1');
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyVeryLongTableNameExampleController::EDIT);
+        $this->url->fromRoute("my-module/my-very-long-table-name-example/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::EDIT.'/31/1');
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $data = array(
@@ -264,18 +264,18 @@ class SingleDbTableControllerTest extends TestCase
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
 
-        $this->prg->__invoke('my-module/single-db-table/edit', true)->willReturn($data);
+        $this->prg->__invoke('my-module/my-very-long-table-name-example/edit', true)->willReturn($data);
 
         $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
 
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
-        $this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
+        $this->entity->getIdMyVeryLongTableNameExample()->willReturn(31)->shouldBeCalled();
 
-        $this->singleDbTableForm->setData($data)->shouldBeCalled();
-        $this->singleDbTableForm->isValid()->willReturn(true)->shouldBeCalled();
-        $this->singleDbTableForm->getData()->willReturn($data)->shouldBeCalled();
-        $this->singleDbTableService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
-        $this->singleDbTableService->selectById(31)->willReturn($this->entity);
+        $this->myVeryLongTableNameExampleForm->setData($data)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity);
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -293,7 +293,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->singleDbTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->myVeryLongTableNameExampleService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
         $result = $this->controller->dispatch($this->request);
@@ -307,11 +307,11 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
-        //$this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
+        //$this->entity->getIdMyVeryLongTableNameExample()->willReturn(31)->shouldBeCalled();
 
-        $this->singleDbTableService->selectById(31)->willReturn($this->entity->reveal());
-        $this->singleDbTableService->extract($this->entity->reveal())->willReturn([***REMOVED***);
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity->reveal());
+        $this->myVeryLongTableNameExampleService->extract($this->entity->reveal())->willReturn([***REMOVED***);
 
         $this->routeMatch->setParam('action', 'view');
         $this->routeMatch->setParam('id', 31);
@@ -327,10 +327,10 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testViewSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
-        $this->singleDbTableService->selectById(6000)->willReturn(null);
+        $this->myVeryLongTableNameExampleService->selectById(6000)->willReturn(null);
 
         $this->routeMatch->setParam('action', 'view');
         $this->routeMatch->setParam('id', 6000);
@@ -346,7 +346,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessful()
     {
-        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'view');
@@ -361,7 +361,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->singleDbTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
+        $this->myVeryLongTableNameExampleService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
         $this->routeMatch->setParam('id', 6000);
@@ -377,7 +377,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithSuccessful()
     {
-        $this->singleDbTableService->delete(6000)->willReturn(['success' => true***REMOVED***);
+        $this->myVeryLongTableNameExampleService->delete(6000)->willReturn(['success' => true***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
         $this->routeMatch->setParam('id', 6000);
@@ -393,7 +393,7 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenDeleteDisplaySuccessful()
     {
-        $this->url->fromRoute(SingleDbTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(SingleDbTableController::LISTS);
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'delete');
@@ -401,5 +401,94 @@ class SingleDbTableControllerTest extends TestCase
         $response = $this->controller->getResponse();
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithoutIdReturnToList()
+    {
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithInvalidIdReturnToList()
+    {
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyVeryLongTableNameExampleController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->myVeryLongTableNameExampleService->selectById(6000)->willReturn(null)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageReturnPRGPlugin()
+    {
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::IMAGE, ['id' => 31***REMOVED***)->willReturn(MyVeryLongTableNameExampleController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
+
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageProcessSuccess()
+    {
+        $this->url->fromRoute(MyVeryLongTableNameExampleController::IMAGE, ['id' => 31***REMOVED***)->willReturn(MyVeryLongTableNameExampleController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
+
+        $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->imageService->appendPlugin()->shouldBeCalled();
+        $this->imageService->updateImages('my-very-long-table-name-example', 31)->willReturn(true)->shouldBeCalled();
+        $this->imageService->updatePosition([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->imageService->clearCache()->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/my-very-long-table-name-example/upload-image/31', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 }

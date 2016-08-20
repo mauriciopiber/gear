@@ -25,12 +25,12 @@ class SingleDbTableControllerTest extends TestCase
 
         $this->singleDbTableService = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableService');
         $this->singleDbTableForm = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableForm');
-        $this->singleDbTableSearch = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableSearchForm');
+        $this->singleDbTableSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableSearchForm');
 
         $this->controller = new SingleDbTableController(
             $this->singleDbTableService->reveal(),
             $this->singleDbTableForm->reveal(),
-            $this->singleDbTableSearch->reveal()
+            $this->singleDbTableSearchForm->reveal()
         );
 
         $this->request    = new Request();
