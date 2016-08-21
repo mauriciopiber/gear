@@ -32,14 +32,14 @@ cd $modulepath && ant
 
 ## MVC
 
-#sudo rm $modulepath/data/migrations/40160123222067_all_columns_db.php
-#sudo cp "$fullpath/40160123222067_all_columns_db.php" $modulepath/data/migrations/
-#cd $modulepath && sudo vendor/bin/phinx migrate
-#cd $modulepath && sudo vendor/bin/unload-module BjyAuthorize
-#cd $modulepath && sudo php public/index.php gear database fix
+sudo rm $modulepath/data/migrations/40160123222067_all_columns_db.php
+sudo cp "$fullpath/40160123222067_all_columns_db.php" $modulepath/data/migrations/
+cd $modulepath && sudo vendor/bin/phinx migrate
+cd $modulepath && sudo vendor/bin/unload-module BjyAuthorize
+cd $modulepath && sudo php public/index.php gear database fix
 
-#cd $gearpath && sudo php public/index.php gear module construct $module $base --file="$basedir/gear-real.yml"
-#cd $modulepath && sudo script/load.sh
+cd $gearpath && sudo php public/index.php gear module construct $module $base --file="$basedir/gear-real.yml"
+cd $modulepath && sudo script/load.sh
 
-#cd $modulepath && ant
+cd $modulepath && ant
 
