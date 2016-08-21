@@ -1,0 +1,17 @@
+module: MyModule
+
+db:
+  0:
+    table: Category
+    namespace: Category
+    service: factories
+#  1: 
+#    table: Customer
+#    service: factories
+#  2:
+#    table: Product
+#    columns:
+#      'price': 'money-pt-br'
+#  3: 
+#    table: CustomerOrder
+#    namespace: CustomerOrder
