@@ -102,6 +102,13 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
             $table = $this->str('class', $action->getController()->getNameOff());
         }
 
+        $controllerInvokable = sprintf(
+            '%s\%s\%s',
+            $this->getModule()->getModuleName(),
+            ($action->getController()->getNamespace() !== null) ? $action->getController()->getNamespace() : 'Controller',
+            $table
+        );
+
         switch ($this->str('url', $action->getName())) {
             case 'create':
                 $action = array(
@@ -109,7 +116,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{create}',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'create'
                         ),
                     )
@@ -123,7 +130,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{edit}[/:id***REMOVED***[/:success***REMOVED***',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'edit'
                         ),
                         'constraints' => array(
@@ -139,7 +146,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{list}[/page/***REMOVED***[:page***REMOVED***[/orderBy***REMOVED***[/:orderBy***REMOVED***[/:order***REMOVED***[/:success***REMOVED***',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'list'
                         ),
                         'constraints' => array(
@@ -159,7 +166,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{view}[/:id***REMOVED***',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'view'
                         ),
                     )
@@ -172,7 +179,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{delete}[/:id***REMOVED***',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'delete'
                         ),
                         'constraints' => array(
@@ -190,7 +197,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                     'options' => array(
                         'route' => '/{upload-image}[/:id***REMOVED***',
                         'defaults' => array(
-                            'controller' => sprintf('%s\Controller\%s', $module, $table),
+                            'controller' => $controllerInvokable,
                             'action' => 'upload-image'
                         ),
                     )

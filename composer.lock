@@ -996,17 +996,17 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.50",
+            "version": "0.2.52",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "a0104a4c1db9b5100d36611f394341986d6a8684"
+                "reference": "712b23cb2bfa0c6598bc652421569e3b4a406b01"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.50-428d16.tar",
-                "reference": "a0104a4c1db9b5100d36611f394341986d6a8684",
-                "shasum": "1c563783baf883dd53a2bd8d51496174f2009994"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.52-872ced.tar",
+                "reference": "712b23cb2bfa0c6598bc652421569e3b4a406b01",
+                "shasum": "af8bb9fa3a92823b2cae3d53dd7fd6de833c5f97"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1039,7 +1039,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-08-18 20:19:49"
+            "time": "2016-08-21 06:43:19"
         },
         {
             "name": "myclabs/deep-copy",

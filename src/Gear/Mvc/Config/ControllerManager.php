@@ -40,9 +40,11 @@ class ControllerManager extends AbstractJsonService implements ModuleManagerInte
 
         $invokables = $controllerConfig[$controller->getService()***REMOVED***;
 
-        $object = '%s\Controller\%s';
+        $object = '%s\%s\%s';
 
-        $invokeName = sprintf($object, $this->module->getModuleName(), $this->controller->getNameOff());
+        $namespace = ($this->controller->getNamespace() !== null) ? $this->controller->getNamespace() : 'Controller';
+
+        $invokeName = sprintf($object, $this->module->getModuleName(), $namespace, $this->controller->getNameOff());
 
         if (!array_key_exists($invokeName, $invokables)) {
             if ($controller->getService() === 'factories') {
