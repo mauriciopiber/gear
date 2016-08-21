@@ -1,0 +1,53 @@
+<?php
+namespace MyModule\Greatest;
+
+use MyModule\ColumnInterface\RepositoryBeforeInterface;
+use MyModule\ColumnInterface\RepositoryAfterInterface;
+use MyModule\Repository\MyDependencyOneTrait;
+use MyModule\Logic\MyDependencyTwoTrait;
+use MyModule\Mvc\MyDependencyThreeTrait;
+use MyModule\Repository\AbstractRepository;
+use MyModule\Repository\MyDependencyOne;
+use MyModule\Logic\MyDependencyTwo;
+use MyModule\Mvc\MyDependencyThree;
+
+/**
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package MyModule/Greatest
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+abstract class AbstractCompleteFactoriesRepository extends AbstractRepository implements
+    RepositoryBeforeInterface,
+    RepositoryAfterInterface
+{
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyDependencyOne   $myDependencyOne   My Dependency One
+     * @param MyDependencyTwo   $myDependencyTwo   My Dependency Two
+     * @param MyDependencyThree $myDependencyThree My Dependency Three
+     *
+     * @return \MyModule\Greatest\AbstractCompleteFactoriesRepository
+     */
+    public function __construct(
+        MyDependencyOne $myDependencyOne,
+        MyDependencyTwo $myDependencyTwo,
+        MyDependencyThree $myDependencyThree
+    ) {
+        $this->myDependencyOne = $myDependencyOne;
+        $this->myDependencyTwo = $myDependencyTwo;
+        $this->myDependencyThree = $myDependencyThree;
+
+        return $this;
+    }
+}

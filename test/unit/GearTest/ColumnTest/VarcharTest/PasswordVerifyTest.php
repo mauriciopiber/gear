@@ -64,41 +64,6 @@ class PasswordVerifyTest extends AbstractTestCase
     }
 
     /**
-    public function testGetFilterUniqueElement()
-    {
-        $this->column->isNullable()->willReturn(true)->shouldBeCalled();
-        $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
-
-        $this->passwordVerify = new PasswordVerify($this->column->reveal());
-        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
-
-        $filter = $this->passwordVerify->filterUniqueElement();
-
-        $expected = $this->template.'/filter-unique-element.phtml';
-
-        $this->assertEquals(file_get_contents($expected), $filter);
-    }
-    */
-
-    public function testGetInsertArrayByColumn()
-    {
-        $this->passwordVerify = new PasswordVerify($this->column->reveal());
-        $this->passwordVerify->setStringService($this->string);
-
-        $expected = [***REMOVED***;
-        $expected[***REMOVED*** = "'myColumn' => '00MyColumn',";
-        $expected[***REMOVED*** = "'myColumnVerify' => '00MyColumn',";
-
-        $value = $this->passwordVerify->getInsertArrayByColumn();
-
-        $values = explode(PHP_EOL, $value);
-
-        foreach ($expected as $i => $expect) {
-            $this->assertEquals($expect, trim($values[$i***REMOVED***));
-        }
-    }
-
-    /**
      * @dataProvider valuesView
      */
     public function testGetValueView($iterator, $expected)

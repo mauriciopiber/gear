@@ -1,0 +1,26 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\SingleDbTableForm;
+
+/**
+ * @group MyModule
+ * @group SingleDbTableForm
+ * @group Form
+ */
+class SingleDbTableFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->form = new SingleDbTableForm($entityManager->reveal());
+    }
+
+    public function testHasColumn()
+    {
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('singleDbColumn'));
+    }
+}

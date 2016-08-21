@@ -1,12 +1,27 @@
 namespace <?php echo $this->namespace;?>;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
 
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?>Factory extends AbstractFactory
 {
+
+    /**
+     * Create <?php echo $this->class.PHP_EOL;?>
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     *
+     * @return \<?php echo $this->form.PHP_EOL;?>
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $form = new \<?php echo $this->form;?>(

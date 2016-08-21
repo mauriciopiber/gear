@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\RepositoryTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Repository\BasicDependenciesRepository;
+
+/**
+ * @group Repository
+ */
+class BasicDependenciesRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = new BasicDependenciesRepository();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Repository\BasicDependenciesRepository', $this->repository);
+    }
+}

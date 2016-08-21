@@ -81,6 +81,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 'module' => $this->getModule()->getModuleName(),
                 'namespace' => $this->getCode()->getNamespace($src),
                 'class' => $this->str('class', $name),
+                'label' => $this->str('label', $name),
                 'var'   => $this->str('var', $name),
                 'lenght' => $this->str('var-lenght', $name),
                 'srcType' => $src->getType(),

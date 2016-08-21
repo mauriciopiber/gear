@@ -43,6 +43,7 @@ class EntityService extends AbstractJsonService
             $this->getEntityTestService()->create($this->src);
             $this->fixSnifferErrors();
             $this->replaceUserEntity();
+            $this->fixDocsErrors();
             return true;
         }
 
@@ -72,6 +73,8 @@ class EntityService extends AbstractJsonService
         $this->fixSnifferErrors();
 
         $this->replaceUserEntity();
+
+        $this->fixDocsErrors();
 
 
         //aqui na puta que pariu, vo quebrar tudo essa porra.
@@ -363,6 +366,54 @@ EOS;
         $this->replace($getter, '');
     }
 
+    public function fixSetterDocs($fileName)
+    {
+
+        $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
+
+        $file = file_get_contents($fileName);
+
+        preg_match_all($pattern, $file, $matches);
+
+
+        foreach ($matches[0***REMOVED*** as $exact) {
+
+            $explode = explode(PHP_EOL, $exact);
+            $param = $explode[0***REMOVED***;
+
+            $all = explode(' ', $param);
+            $name = end($all);
+            $name = str_replace('$', '', $name);
+
+            $label = $this->str('label', $name);
+
+            $replacement = $param.' '.$label.'\n';
+
+            $file = str_replace($exact, $replacement, $file);
+
+
+        }
+
+        file_put_contents($fileName, $file);
+        return true;
+
+    }
+
+    /**
+     * Cria os códigos php docs para a entidade
+     */
+    public function fixDocsErrors()
+    {
+        $entityFolder = $this->getModule()->getEntityFolder();
+
+        foreach (glob($entityFolder.'/*') as $fileName) {
+            if (!is_file($fileName)) {
+                throw new \Exception(sprintf('Entity %s not created succesful, check errors', fileName));
+            }
+
+            $this->fixSetterDocs($fileName);
+        }
+    }
 
     /**
      * Função responsável por limpar o último caractere onde há espaço sobrando
@@ -519,8 +570,17 @@ EOL;
             $tableIndexes .= $singleIndex;
         }
 
+        $module = $this->getModule()->getModuleName();
 
         $notation = <<<EOL
+ * PHP Version 5
+ *
+ * @category Entity
+ * @package {$module}/Entity
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ *
  * @ORM\Table(
  *     name="$tableName",
  *     indexes={

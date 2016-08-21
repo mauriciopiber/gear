@@ -1,0 +1,270 @@
+<?php
+namespace MyModule\Custom\CustomNamespace;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\JsonModel;
+use GearImage\Service\ImageServiceTrait;
+use GearImage\Service\ImageService;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleServiceTrait;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleFormTrait;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchFormTrait;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleService;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleForm;
+use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchForm;
+
+/**
+ * My Very Long Table Name Example Controller
+ *
+ * Actions for My Very Long Table Name Example Table
+ *
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyVeryLongTableNameExampleController extends AbstractActionController
+{
+    const CREATE = 'my-module/my-very-long-table-name-example/create';
+    const EDIT   = 'my-module/my-very-long-table-name-example/edit';
+    const LISTS  = 'my-module/my-very-long-table-name-example/list';
+    const IMAGE  = 'my-module/my-very-long-table-name-example/upload-image';
+
+    use ImageServiceTrait;
+    use MyVeryLongTableNameExampleServiceTrait;
+
+    use MyVeryLongTableNameExampleFormTrait;
+    use MyVeryLongTableNameExampleSearchFormTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyVeryLongTableNameExampleService    $myVeryLongTableNameExampleService    My Very Long Table Name Example Service
+     * @param MyVeryLongTableNameExampleForm       $myVeryLongTableNameExampleForm       My Very Long Table Name Example Form
+     * @param MyVeryLongTableNameExampleSearchForm $myVeryLongTableNameExampleSearchForm My Very Long Table Name Example Search Form
+     * @param ImageService                         $imageService                         Image Service
+     *
+     * @return \MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleController
+     */
+    public function __construct(
+        MyVeryLongTableNameExampleService $myVeryLongTableNameExampleService,
+        MyVeryLongTableNameExampleForm $myVeryLongTableNameExampleForm,
+        MyVeryLongTableNameExampleSearchForm $myVeryLongTableNameExampleSearchForm,
+        ImageService $imageService
+    ) {
+        $this->myVeryLongTableNameExampleService = $myVeryLongTableNameExampleService;
+        $this->myVeryLongTableNameExampleForm = $myVeryLongTableNameExampleForm;
+        $this->myVeryLongTableNameExampleSearchForm = $myVeryLongTableNameExampleSearchForm;
+        $this->imageService = $imageService;
+
+        return $this;
+    }
+
+    /**
+     * Create Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function createAction()
+    {
+        $this->error = false;
+
+        $this->form    = $this->getMyVeryLongTableNameExampleForm();
+        $this->service = $this->getMyVeryLongTableNameExampleService();
+        $this->url     = self::CREATE;
+
+        $create = $this->getRequestPlugin()->create();
+
+        if ($create instanceof Response) {
+            return $create;
+        }
+
+        if ($create) {
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $create->getIdMyVeryLongTableNameExample(), 'success' => 1)
+            );
+        }
+
+
+        return new ViewModel(
+            array(
+                'error' => $this->error,
+                'form' => $this->form,
+            )
+        );
+    }
+
+    /**
+     * Edit Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function editAction()
+    {
+        $this->error = false;
+
+        $idMyVeryLongTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMyVeryLongTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->data = $this->getMyVeryLongTableNameExampleService()->selectById($idMyVeryLongTable);
+
+        if (!$this->data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->form      = $this->getMyVeryLongTableNameExampleForm();
+        $this->service   = $this->getMyVeryLongTableNameExampleService();
+        $this->url       = self::EDIT;
+        $this->requestId = $idMyVeryLongTable;
+
+        $update = $this->getRequestPlugin()->update();
+        if ($update instanceof Response) {
+            return $update;
+        }
+
+        if ($update) {
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $update->getIdMyVeryLongTableNameExample(), 'success' => 1)
+            );
+        }
+
+        $this->data = $this->getMyVeryLongTableNameExampleService()->selectById($idMyVeryLongTable);
+        $this->form->bind($this->data);
+
+
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+
+        return new ViewModel(
+            array(
+                'form' => $this->form,
+                'error' => $this->error,
+                'success' => $sucesso,
+                'idMyVeryLongTableNameExample' => $idMyVeryLongTable
+            )
+        );
+    }
+
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function viewAction()
+    {
+        $idMyVeryLongTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMyVeryLongTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getMyVeryLongTableNameExampleService()->selectById($idMyVeryLongTable);
+        $images = $this->getImageService()->query('my-very-long-table-name-example', array(), $idMyVeryLongTable);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        return new ViewModel(
+            array_merge(
+                array(
+                    'id' => $data->getIdMyVeryLongTableNameExample(),
+                    'images' => $images,                ),
+                $this->getMyVeryLongTableNameExampleService()->extract($data)
+            )
+        );
+    }
+
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function deleteAction()
+    {
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $myVeryLongTableName = $this->getMyVeryLongTableNameExampleService();
+
+        $delete = $myVeryLongTableName->delete($identifier);
+
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
+    }
+
+    /**
+     * Upload Image Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function uploadImageAction()
+    {
+        $this->getImageService()->appendPlugin();
+
+        $idMyVeryLongTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMyVeryLongTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getMyVeryLongTableNameExampleService()->selectById($idMyVeryLongTable);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idMyVeryLongTable));
+        $prg = $this->prg($redirectUrl, true);
+
+        $success = 0;
+
+        if ($prg instanceof Response) {
+            return $prg;
+        } elseif ($prg !== false) {
+            $post = $prg;
+            $imageService = $this->getImageService();
+            $imageService->updateImages('my-very-long-table-name-example', $idMyVeryLongTable);
+            $success = $imageService->updatePosition($post);
+            $this->getImageService()->clearCache();
+        }
+
+        return new ViewModel(
+            array(
+                'idMyVeryLongTableNameExample' => $idMyVeryLongTable,
+                'contexto' => 'my-very-long-table-name-example',
+                'success' => $success
+            )
+        );
+    }
+
+    /**
+     * List Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function listAction()
+    {
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->getMyVeryLongTableNameExampleService()->selectAll()
+        );
+
+        return new ViewModel(
+            array(
+                'search'    => $this->getMyVeryLongTableNameExampleSearchForm(),
+                'tableService' => $this->getMyVeryLongTableNameExampleService(),
+                'data'      => $data,
+            )
+        );
+    }
+}

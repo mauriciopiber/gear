@@ -4,12 +4,30 @@ namespace MyModule\Repository;
 use MyModule\Repository\MyDependencyTrait;
 use MyModule\Repository\MyDependency;
 
+/**
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package MyModule/Repository
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class BasicDependencyFactoryRepository
 {
     use MyDependencyTrait;
 
+    /**
+     * Constructor
+     *
+     * @param MyDependency $myDependency My Dependency
+     *
+     * @return \MyModule\Repository\BasicDependencyFactoryRepository
+     */
     public function __construct(MyDependency $myDependency)
     {
         $this->myDependency = $myDependency;
+
+        return $this;
     }
 }

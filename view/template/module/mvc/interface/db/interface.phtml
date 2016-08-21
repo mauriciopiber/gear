@@ -1,0 +1,31 @@
+namespace <?php echo $this->module;?>\<?= $this->srcType;?>;
+
+use <?php echo $this->module;?>\<?= $this->srcType;?>\<?= $this->srcName;?>;
+
+/**
+ * PHP Version 5
+ *
+ * @category Interface
+ * @package <?php echo $this->module;?>/<?= $this->srcType.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+interface <?= $this->srcName;?>Interface
+{
+    /**
+     * Get <?php echo $this->srcLabel.PHP_EOL?>
+     *
+     * @return null|<?php echo $this->module;?>\<?= $this->srcType;?>\<?php echo $this->srcName.PHP_EOL;?>
+     */
+    public function get<?= $this->srcName;?>();
+
+    /**
+     * Set <?php echo $this->srcLabel.PHP_EOL?>
+     *
+     * @param <?= $this->srcName;?> $<?= $this->lenght;?> <?php echo $this->srcLabel.PHP_EOL;?>
+     *
+     * @return self
+     */
+    public function set<?= $this->srcName;?>(<?= $this->srcName;?> $<?= $this->lenght;?>);
+}

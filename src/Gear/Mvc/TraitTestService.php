@@ -3,12 +3,9 @@ namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
-use Gear\Mvc\Config\ServiceManagerTrait;
 
 class TraitTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
-
     public function __construct($module, $fileCreator, $string, $codeTest)
     {
         $this->module = $module;

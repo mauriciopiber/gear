@@ -1,0 +1,4 @@
+constructor-singular/singular-repository: Time: 14.29 seconds, Memory: 18.00MB on 43s
+constructor-singular/singular-service: Time: 6.18 seconds, Memory: 14.00MB on 20s
+constructor-singular/singular-controller: Time: 11.31 seconds, Memory: 31.00MB on 25s
+constructor-singular/singular-suite: Time: 37.47 seconds, Memory: 45.50MB on 50s

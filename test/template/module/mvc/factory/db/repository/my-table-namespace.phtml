@@ -1,0 +1,34 @@
+<?php
+namespace MyModule\Custom\CustomNamespace;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Custom\CustomNamespace\MyTableRepository;
+
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableRepositoryFactory implements FactoryInterface
+{
+    /**
+     * Create MyTableRepository
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @return \MyModule\Custom\CustomNamespace\MyTableRepository
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $factory = new MyTableRepository(
+            $serviceLocator->get('doctrine.entitymanager.orm_default'),
+            $serviceLocator->get('GearBase\Repository\QueryBuilder')
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

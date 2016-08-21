@@ -8,11 +8,9 @@ use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\HelperPluginManager;
 use PhpParser\ParserFactory;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use GearTest\SingleDbTableTrait;
+use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group fix-table
@@ -20,20 +18,21 @@ use GearTest\SingleDbTableTrait;
  * @group module-mvc
  * @group module-mvc-service
  * @group module-mvc-service-service-test
- * @group Service1
+ * @group db-service
  */
 class ServiceTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use UtilTestTrait;
+    use ServiceDataTrait;
+    use \GearTest\ScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/ServiceTest';
+        $this->createVirtualDir($this->vfsLocation);
+        $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->string = new \GearBase\Util\String\StringService();
@@ -47,115 +46,199 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->codeTest = new \Gear\Creator\CodeTest;
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
-    }
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
 
-    public function tables()
-    {
-        /**
-        $db = new Db(['table' => 'MyService'***REMOVED***);
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setStringService($this->string);
 
-        $action = new Action([
-            'name' => 'MyAction',
-            'service' => new Service(['name' => 'MyService', 'object' => '%s\Service\MyService'***REMOVED***),
-            'db' => $db
-        ***REMOVED***);
-
-
-        return [
-            [$action, $this->getAllPossibleColumns(), '', true, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsNotNull(), '.not.null', false, false***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUnique(), '.unique', true, true***REMOVED***,
-            [$action, $this->getAllPossibleColumnsUniqueNotNull(), '.unique.not.null', false, true***REMOVED***,
-        ***REMOVED***;
-        */
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
-    /**
-     * @dataProvider tables
-     * @group RefactoringUnitTest
-     */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
-    {
-        $table = $this->string->str('class', $tableName);
-
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
         $this->service = new \Gear\Mvc\Service\ServiceTestService();
         $this->service->setFileCreator($this->fileCreator);
         $this->service->setStringService($this->string);
         $this->service->setModule($this->module->reveal());
+        $this->service->setCodeTest($this->codeTest);
+        $this->service->setSrcDependency($this->srcDependency);
+
+        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->service->setFactoryTestService($this->factoryTest->reveal());
+
+        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+
+
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->service->setServiceManager($this->serviceManager);
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->service->setSchemaService($this->schema->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->service->setColumnService($this->column->reveal());
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->service->setTableService($this->table->reveal());
+    }
+
+    /**
+     * @dataProvider tables
+     * @group RefactoringUnitTest
+     * @group db-factory-namespace
+     * @group db-service2
+     */
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace
+    ) {
+        $table = $this->string->str('class', $tableName);
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('ServiceTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
         $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
-        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
 
-        $this->service->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
-        $this->table->verifyTableAssociation($this->db->getTable())->willReturn($hasTableImage);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $this->service->setTableService($this->table->reveal());
-
-        $service = new \GearJson\Src\Src(
+        $serviceT = new \GearJson\Src\Src(
             [
+                'db' => $table,
                 'name' => sprintf('%sService', $table),
                 'type' => 'Service',
-                'dependency' => [sprintf('Repository\%sRepository', $table)***REMOVED***
-        ***REMOVED***);
+                'namespace' => $namespace,
+                'service' => $service,
+                'dependency' => [
+                    sprintf('%s\%sRepository', ($namespace == null) ? 'Repository' : $namespace, $table),
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
+                ***REMOVED***
+            ***REMOVED***
+        );
 
         $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getSrcByDb($this->db, 'Service')->willReturn($service);
+        $schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
+
+        $this->repository = $this->prophesize('GearJson\Src\Src');
+        $this->repository->getName()->willReturn(sprintf('%sRepository', $table));
+        $this->repository->getType()->willReturn('Repository');
+        $this->repository->getNamespace()->willReturn($namespace);
+        $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($this->repository->reveal())->shouldBeCalled();
+
+        $this->entity = $this->prophesize('GearJson\Src\Src');
+        $this->entity->getName()->willReturn(sprintf('%s', $table));
+        $this->entity->getType()->willReturn('Entity');
+        $this->entity->getNamespace()->willReturn(null);
+        $schemaService->getSrcByDb($this->db, 'Entity')->willReturn($this->entity->reveal())->shouldBeCalled();
+
+
         $this->service->setSchemaService($schemaService->reveal());
 
-        $this->srcDependency = new \Gear\Creator\SrcDependency;
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->service->setSrcDependency($this->srcDependency);
-        $this->codeTest->setSrcDependency($this->srcDependency);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-        $this->service->setCodeTest($this->codeTest);
+
+        $this->service->setTraitTestService($this->traitTest->reveal());
 
 
+        $this->traitTest->createTraitTest($serviceT, vfsStream::url($location))->shouldBeCalled();
 
-        $this->service->setTraitTestService($this->traitTestService->reveal());
-
+        if ($service == 'factories') {
+            $this->factoryTest->createFactoryTest($serviceT, vfsStream::url($location))->shouldBeCalled();
+        }
 
         //$this->service->setFactoryService
 
         $file = $this->service->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents($file)
         );
     }
+
+    public function src()
+    {
+        return $this->getScope('Service');
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-service-test
+     * @dataProvider src
+     */
+    public function testCreateSrc($data, $template)
+    {
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
+
+        if (!empty($data->getNamespace())) {
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+        } else {
+            $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+            $this->service->setFactoryTestService($this->factory->reveal());
+        }
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setModule($this->module->reveal());
+        $serviceManager->setStringService($this->string);
+
+        $this->service->setServiceManager($serviceManager);
+
+        $this->service->setTraitTestService($this->traitTest->reveal());
+
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $this->service->setSrcDependency($srcDependency);
+
+        $file = $this->service->create($data);
+
+        $expected = $this->templates.'/src/'.$template.'.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
 }

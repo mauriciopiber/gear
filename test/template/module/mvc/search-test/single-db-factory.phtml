@@ -1,0 +1,28 @@
+<?php
+namespace MyModuleTest\FormTest\SearchTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\Search\SingleDbTableSearchForm;
+
+/**
+ * @group MyModule
+ * @group SingleDbTableSearchForm
+ * @group SearchForm
+ */
+class SingleDbTableSearchFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->search = new SingleDbTableSearchForm($entityManager->reveal());
+    }
+
+    public function testHasColumn()
+    {
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('likeField'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('clear'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->search->get('submit'));
+    }
+}

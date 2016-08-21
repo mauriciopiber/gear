@@ -129,7 +129,6 @@ class Feature extends AbstractMvcTest
         $options['expectValidateMax'***REMOVED*** = $this->buildExpectValidateMax();
 
         if ($this->getTableService()->hasUniqueConstraint($this->db->getTable())) {
-
             $options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique();
             $options['expectUnique'***REMOVED*** = $this->buildExpectValidateUnique();
 
@@ -198,18 +197,15 @@ class Feature extends AbstractMvcTest
         */
 
         if ($this->getTableService()->isNullable($this->db->getTable()) == false) {
-
             $options['expectValidateNotNull'***REMOVED*** = $this->buildCreateActionValidateNotNull();
             $notNullCreator = $this->getFileCreator();
             $notNullCreator->setView('template/module/mvc/spec/feature/edit.validate.not.null.scenario.phtml');
             $notNullCreator->setOptions($options);
 
             $options['formValidateNotNull'***REMOVED*** = $notNullCreator->renderTemplate();
-
         }
 
         if ($this->getTableService()->hasUniqueConstraint($this->db->getTable())) {
-
             $options['sendKeysUnique'***REMOVED*** = $this->buildSendKeysValidateUnique(1);
             $options['expectUnique'***REMOVED*** = $this->buildExpectValidateUnique();
 
@@ -336,8 +332,7 @@ class Feature extends AbstractMvcTest
 
     public function validateMaxLengthRule($column)
     {
-        if (
-            get_class($column) == 'Gear\Column\Varchar\Varchar'
+        if (get_class($column) == 'Gear\Column\Varchar\Varchar'
             || get_class($column) == 'Gear\Column\Varchar\PasswordVerify'
         ) {
             return true;
@@ -364,8 +359,6 @@ class Feature extends AbstractMvcTest
         }
 
         return false;
-
-
     }
 
    /**
@@ -382,7 +375,6 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-
             if (get_class($column) == 'Gear\Column\Varchar\Varchar') {
                 $iterator = $column->getValue($iterator);
                 break;
@@ -398,7 +390,6 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
         foreach ($columns as $column) {
             if ($this->validateUniqueRule($column)) {
-
                 $fileText .= $column->getIntegrationActionSendKeys($iterator);
             }
         }
@@ -508,14 +499,13 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (
-                !($column instanceof \Gear\Column\Int\PrimaryKey
+            if (!($column instanceof \Gear\Column\Int\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             ) && (
                 !(($column instanceof \Gear\Column\Int\AbstractCheckbox
                 || $column instanceof \Gear\Column\Varchar\UploadImage)
                 && $column->getColumn()->isNullable() === false)
-          )) {
+            )) {
                 $fileText .= $column->getIntegrationActionIsNullable();
             }
         }

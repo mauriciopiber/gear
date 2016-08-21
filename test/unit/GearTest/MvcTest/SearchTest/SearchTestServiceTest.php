@@ -2,27 +2,27 @@
 namespace GearTest\MvcTest\FormTest;
 
 use GearBaseTest\AbstractTestCase;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
+use GearTest\MvcTest\SearchTest\SearchDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
  * @group src-form
  * @group Search
+ * @group db-search
  */
 class SearchTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
+    use UtilTestTrait;
+    use SearchDataTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
+
+
+        $this->vfsLocation = 'module/test/unit/MyModuleTest/FormTest/SearchTest';
+        $this->createVirtualDir($this->vfsLocation);
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
@@ -36,37 +36,12 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/search-test';
 
-    }
-
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', 'table'***REMOVED***
-        ***REMOVED***;
-    }
-
-    /**
-     * @dataProvider tables
-     * @group n99
-     */
-    public function testCreateDb($tableColumns, $expected, $tableName)
-    {
-        $table = $this->string->str('class', $tableName);
-
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
-
-        $this->module->getTestSearchFolder()->willReturn(vfsStream::url('module'));
-        $this->module->getModuleName()->willReturn('MyModule');
-
-        $src = new \GearJson\Src\Src(['name' => $table.'SearchForm', 'type' => 'SearchForm'***REMOVED***);
-
         $this->form = new \Gear\Mvc\Search\SearchTestService();
         $this->form->setStringService($this->string);
         $this->form->setFileCreator($this->fileCreator);
         $this->form->setModule($this->module->reveal());
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
-        $this->schema->getSrcByDb($db, 'SearchForm')->willReturn($src);
 
         $this->form->setSchemaService($this->schema->reveal());
 
@@ -86,18 +61,81 @@ class SearchTestServiceTest extends AbstractTestCase
         $this->form->setServiceManager($serviceManager);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
         $this->form->setTableService($this->table->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
-
-        $this->column->getColumns($db, true)->willReturn($tableColumns);
-
         $this->form->setColumnService($this->column->reveal());
 
+        $this->codeTest = new \Gear\Creator\CodeTest();
+
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setFileCreator($this->fileCreator);
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency;
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+
+        $this->codeTest->setSrcDependency($this->srcDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setStringService($this->string);
+
+        $this->form->setCodeTest($this->codeTest);
+
+    }
+
+    /**
+     * @dataProvider tables
+     * @group db-search2
+     * @group n99
+     */
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
+    {
+        $table = $this->string->str('class', $tableName);
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('SearchFormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+
+        $src = new \GearJson\Src\Src(
+            [
+                'name' => $table.'SearchForm',
+                'type' => 'SearchForm',
+                'namespace' => $namespace,
+                'service' => $service
+            ***REMOVED***
+        );
+
+        $this->schema->getSrcByDb($db, 'SearchForm')->willReturn($src);
+
+        $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
+
+        $this->column->getColumns($db, true)->willReturn($columns);
+
+        $this->trait->createTraitTest($src, vfsStream::url($location))->shouldBeCalled();
+        $this->factory->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
 
         $file = $this->form->introspectFromTable($db);
 
-        $this->assertEquals(file_get_contents($this->template.'/'.$expected.'.phtml'), file_get_contents($file));
+        $this->assertEquals(file_get_contents($this->template.'/'.$template.'.phtml'), file_get_contents($file));
+
+        $this->assertStringEndsWith($location.'/'.$src->getName().'Test.php', $file);
     }
 }

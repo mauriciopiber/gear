@@ -33,7 +33,41 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
 
-        $this->template = 'template/module/mvc/controller/test-controller.phtml';
+        $options = [
+            'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
+            'namespace' => $this->getCodeTest()->getTestNamespace($controller),
+            'module' => $this->module->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+            'actions' => $controller->getActions(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getNameOff()),
+            'controllerCallname' => $this->str('class', $controller->getNameOff()),
+            'controllerVar' => $this->str('var-lenght', $controller->getName())
+        ***REMOVED***;
+
+        if ($controller->getService() === 'factories') {
+
+            $templateView ='factory';
+
+            $options['dependency'***REMOVED*** = str_replace(
+                '$this->action',
+                '$this->controller',
+                $this->getCodeTest()->getConstructorDependency($controller)
+            );
+
+            $options['constructor'***REMOVED*** = str_replace(
+                '$this->action',
+                '$this->controller',
+                $this->getCodeTest()->getConstructor($controller)
+            );
+
+        } else {
+
+            $templateView = 'invokable';
+        }
+
+
+        $this->template = 'template/module/mvc/controller-test/src/controller-'.$templateView.'.phtml';
 
         $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
@@ -43,22 +77,9 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->controller = $controller;
 
         $this->file->setFileName($this->fileName);
-        $this->file->setOptions(
-            [
-                //'callable' => $this->getControllerManager()->getServiceName($controller),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
-                'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getActions(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'controllerCallname' => $this->str('class', $controller->getNameOff()),
-                'controllerVar' => $this->str('var-lenght', $controller->getName())
-            ***REMOVED***
-        );
+        $this->file->setOptions($options);
 
-        if ($controller->getService()->getService() == 'factories') {
+        if ($controller->getService() == 'factories') {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
 
@@ -109,7 +130,9 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->db           = $mvc;
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $controller = $this->getSchemaService()->getControllerByDb($mvc);
+        $this->controller = $this->getSchemaService()->getControllerByDb($mvc);
+
+        $this->location = $this->getCodeTest()->getLocation($this->controller);
 
         $columnsOptions = [***REMOVED***;
 
@@ -121,9 +144,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $columnsImage = [***REMOVED***;
 
         foreach ($columns as $column) {
-
             if ($column instanceof \Gear\Column\Varchar\UploadImage) {
-
                 $hasImageColumn = true;
                 $columnsImage[***REMOVED*** = $column;
             }
@@ -134,7 +155,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
             $localOptions = array(
                 'module' => $this->getModule()->getModuleName(),
-                'class' => $controller->getNameOff(),
+                'class' => $this->controller->getNameOff(),
                 'columns' => $finalValue,
             );
 
@@ -168,10 +189,7 @@ class ControllerTestService extends AbstractMvcTest implements
          * @TODO fix 4
          */
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
-
             if ($columnData instanceof UploadImage) {
-
                 if ($this->hasImage === false) {
                     $this->setUp .= $columnData->getControllerSetUp();
                     $this->hasImage = true;
@@ -233,14 +251,16 @@ class ControllerTestService extends AbstractMvcTest implements
             $columnsOptions,
             $actionOptions,
             [
+                'namespace' => $this->getCodeTest()->getNamespace($this->controller),
+                'testNamespace' => $this->getCodeTest()->getTestNamespace($this->controller),
                 'setUp' => $this->setUp,
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'controllerName' => $controller->getName(),
-                'tableName'  => $this->str('class', $controller->getNameOff()),
-                'tableVar'  => $this->str('var', $controller->getNameOff()),
-                'controllerUrl' => $this->str('url', $controller->getNameOff()),
-                'class' => $controller->getNameOff(),
+                'controllerName' => $this->controller->getName(),
+                'tableName'  => $this->str('class', $this->controller->getNameOff()),
+                'tableVar'  => $this->str('var', $this->controller->getNameOff()),
+                'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
+                'class' => $this->controller->getNameOff(),
             ***REMOVED***,
             [
                 'mockPRG' => $this->getMockPRG(),
@@ -251,11 +271,49 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***
         );
 
+        $construct = [***REMOVED***;
+
+
+        if ($this->controller->getService() === 'factories') {
+
+            if ($hasImageColumn || $hasImageTable) {
+                $dependency = $this->controller->getDependency();
+                $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
+                $this->controller->setDependency($dependency);
+            }
+
+
+
+            $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
+            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
+        }
+
+
+
+        $options['service'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Service'));
+
+        $options['form'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Form'));
+
+        $options['search'***REMOVED*** = $this->getServiceManager()
+          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'SearchForm'));
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller-test/db/constructor/'.$this->controller->getService().'.phtml',
+            array_merge($options, $construct)
+        );
+
         $this->file = $this->getFileCreator();
-        $this->file->setFileName(sprintf('%sTest.php', $controller->getName()));
-        $this->file->setLocation($this->getModule()->getTestControllerFolder());
+        $this->file->setFileName(sprintf('%sTest.php', $this->controller->getName()));
+        $this->file->setLocation($this->location);
         $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);
+
+        if ($this->controller->getService() == 'factories') {
+            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
+        }
+
 
         return $this->file->render();
     }
@@ -307,7 +365,7 @@ class ControllerTestService extends AbstractMvcTest implements
     public function moduleFactory()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/index/create-module-controller-factory.phtml',
+            'template/module/mvc/controller-test/module/module-controller-factory.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -323,7 +381,7 @@ class ControllerTestService extends AbstractMvcTest implements
     public function module()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/index/create-module-controller.phtml',
+            'template/module/mvc/controller-test/module/module-controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -413,10 +471,6 @@ class ControllerTestService extends AbstractMvcTest implements
                 $this->str('url', $method->getName())
             );
 
-            $serviceName = sprintf(
-                $this->controller->getService()->getObject(),
-                $this->getModule()->getModuleName()
-            );
 
             $this->functions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/controller/test-dispatch.phtml',
@@ -424,7 +478,6 @@ class ControllerTestService extends AbstractMvcTest implements
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
                     'module' => $this->getModule()->getModuleName(),
-                    'controllerServiceName' => $serviceName,
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'routeMatch' => $routeMatch

@@ -41,7 +41,14 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 
-cd $modulepath && ant unit-group -Dgroup=Repository
-cd $modulepath && ant unit-coverage-group -Dgroup=Repository
-#cd $modulepath && ant unit
-#cd $modulepath && ant unit-coverage
+### OK - cd $modulepath && ant phpunit
+### OK - cd $modulepath && ant phpunit-group -Dgroup=Repository
+### OK - cd $modulepath && ant phpunit-coverage
+### OK - cd $modulepath && ant phpunit-coverage-group -Dgroup=Repository
+### OK - cd $modulepath && ant phpunit-benchmark
+### OK - cd $modulepath && ant phpunit-benchmark-group -Dgroup=Repository
+### OK - cd $modulepath && ant phpunit-coverage-benchmark
+### OK - cd $modulepath && ant phpunit-coverage-benchmark-group -Ds=Repository
+cd $modulepath && ant phpcs-docs
+cd $modulepath && ant unit
+

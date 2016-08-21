@@ -7,34 +7,36 @@ use GearJson\Src\Src;
 
 class FormTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     public function introspectFromTable($table)
     {
         $this->db = $table;
-        $src = $this->getSchemaService()->getSrcByDb($table, 'Form');
+        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Form');
 
         $template = 'template/module/mvc/form/test-db.phtml';
 
         $options = array(
-            'serviceNameUline' => substr($this->str('var', $src->getName()), 0, 17),
-            'callable' => $this->getServiceManager()->getServiceName($src),
-            'service' => $this->getServiceManager()->getServiceName($src),
-            'serviceNameClass'   => $src->getName(),
+            'namespace' => $this->getCodeTest()->getNamespace($this->src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
+            'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 17),
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'service' => $this->getServiceManager()->getServiceName($this->src),
+            'serviceNameClass'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName()
         );
 
-        $filename = $src->getName().'Test.php';
-        $location = $this->getModule()->getTestFormFolder();
+        $filename = $this->src->getName().'Test.php';
+        $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($src->getService() === 'factories') {
-            $this->getFactoryTestService()->createFactoryTest($src, $location);
+        if ($this->src->getService() === 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
-        $this->getTraitTestService()->createTraitTest($src, $location);
+        $this->getTraitTestService()->createTraitTest($this->src, $location);
 
         $inputs = '';
-       $data = $this->getColumnService()->getColumns($this->db);
+        $data = $this->getColumnService()->getColumns($this->db);
 
         foreach ($data as $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId) {
@@ -60,17 +62,19 @@ class FormTestService extends AbstractMvcTest
 
         $this->className = $this->src->getName();
 
-        //$this->dependency = $this->getSrcDependency()->setSrc($this->src);
-
-        $this->functions  = $this->dependency->getTests();
-
         $location = $this->getCodeTest()->getLocation($this->src);
 
+            if ($this->src->getAbstract() !== true) {
 
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+            $this->getTraitTestService()->createTraitTest($this->src, $location);
 
-        $this->getFileCreator()->createFile(
-            'template/module/mvc/form/test-src.phtml',
+            if ($this->src->getService() == 'factories') {
+                $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+            }
+        }
+
+        return $this->getFileCreator()->createFile(
+            'template/module/mvc/form-test/src/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
@@ -78,7 +82,6 @@ class FormTestService extends AbstractMvcTest
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'mock' => $mock
             ),
             $this->src->getName().'Test.php',
             $location

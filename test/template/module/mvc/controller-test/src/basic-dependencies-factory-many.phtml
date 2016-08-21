@@ -1,0 +1,99 @@
+<?php
+namespace MyModuleTest\ControllerTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Controller\BasicDependenciesFactoryManyAction;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+
+/**
+ * @group BasicDependenciesFactoryManyAction
+ * @group Controller
+ */
+class BasicDependenciesFactoryManyActionTest extends TestCase
+{
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
+        parent::setUp();
+
+        $this->myRepositoryOne = $this->prophesize('MyModule\Repository\MyRepositoryOne');
+        $this->myRepositoryTwo = $this->prophesize('MyModule\Repository\MyRepositoryTwo');
+        $this->myRepositoryThree = $this->prophesize('MyModule\Repository\MyRepositoryThree');
+
+        $this->controller = new BasicDependenciesFactoryManyAction(
+            $this->myRepositoryOne->reveal(),
+            $this->myRepositoryTwo->reveal(),
+            $this->myRepositoryThree->reveal()
+        );
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicDependenciesFactoryManyAction'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+    }
+
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action-that-doesnt-exist');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    public function testFirstActionAction()
+    {
+        $this->routeMatch->setParam('action', 'first-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    public function testSecondActionAction()
+    {
+        $this->routeMatch->setParam('action', 'second-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    public function testThirdActionAction()
+    {
+        $this->routeMatch->setParam('action', 'third-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    public function testFourActionAction()
+    {
+        $this->routeMatch->setParam('action', 'four-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    public function testFiveActionAction()
+    {
+        $this->routeMatch->setParam('action', 'five-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+}

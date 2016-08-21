@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\BasicTest\FeatureTest\IssueTest\TaskTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\Feature\Issue\Task\LongNamespaceFilter;
+
+/**
+ * @group Filter
+ */
+class LongNamespaceFilterTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->filter = new LongNamespaceFilter();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Basic\Feature\Issue\Task\LongNamespaceFilter',
+            $this->filter->getInputFilter()
+        );
+    }
+}

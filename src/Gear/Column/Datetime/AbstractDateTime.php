@@ -26,11 +26,6 @@ abstract class AbstractDateTime extends AbstractColumn
 {
     protected $minuto = 0;
 
-
-    protected $insertTime;
-
-    protected $updateTime;
-
     const DATETIME_GLOBAL_FORMAT = 'Y-m-d H:i:s';
 
     const DATETIME_PTBR_FORMAT = 'd/m/Y H:i:s';
@@ -126,68 +121,6 @@ abstract class AbstractDateTime extends AbstractColumn
         }
 
         return $iterator;
-
-
-    }
-
-    /**
-     * @deprecated Acho que não é utilizado.
-     *
-     * Pega o tempo de atualização para testes antigos
-     *
-     * @return \DateTime|unknown
-     */
-    public function getUpdateTime()
-    {
-        if ($this->updateTime == null) {
-            $this->updateTime = new \DateTime();
-        }
-        return $this->updateTime;
-    }
-
-    /**
-     * @deprecated Acho que não é mais utilizada.
-     *
-     * Insere uma data padrão pra ser utilizada nos testes
-     *
-     * @param \DateTime $updateTime Data
-     *
-     * @return \Gear\Column\DateTime\AbstractDateTime
-     */
-    public function setUpdateTime($updateTime)
-    {
-        $this->updateTime = $updateTime;
-        return $this;
-    }
-
-    /**
-     * @deprecated Acho que não é utilizado.
-     *
-     * Pega o tempo de atualização para testes antigos
-     *
-     * @return \DateTime|unknown
-     */
-    public function getInsertTime()
-    {
-        if ($this->insertTime == null) {
-            $this->insertTime = new \DateTime();
-        }
-        return $this->insertTime;
-    }
-
-    /**
-     * @deprecated Acho que não é mais utilizada.
-     *
-     * Insere uma data padrão pra ser utilizada nos testes
-     *
-     * @param \DateTime $insertTime Data
-     *
-     * @return \Gear\Column\DateTime\AbstractDateTime
-     */
-    public function setInsertTime($insertTime)
-    {
-        $this->insertTime = $insertTime;
-        return $this;
     }
 
     /**

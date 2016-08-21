@@ -6,6 +6,11 @@ trait <?= $this->srcName;?>Trait
 {
     protected $<?= $this->var;?>;
 
+    /**
+     * Get <?php echo $this->label.PHP_EOL;?>
+     *
+     * @return <?php echo $this->namespace;?>\<?= $this->srcName.PHP_EOL;?>
+     */
     public function get<?= $this->srcName;?>()
     {
         if (!isset($this-><?= $this->var;?>)) {
@@ -15,6 +20,13 @@ trait <?= $this->srcName;?>Trait
         return $this-><?= $this->var;?>;
     }
 
+    /**
+     * Set <?php echo $this->label.PHP_EOL;?>
+     *
+     * @param <?= $this->srcName;?> $<?= $this->lenght;?> <?php echo $this->label.PHP_EOL;?>
+     *
+     * @return \<?php echo $this->namespace;?>\<?= $this->srcName.PHP_EOL;?>
+     */
     public function set<?= $this->srcName;?>(
         <?= $this->srcName;?> $<?= $this->lenght.PHP_EOL;?>
     ) {

@@ -1,0 +1,21 @@
+module: Gear
+
+src: 
+  0:
+    name: TestingDep
+    dependency: MyDepOne,MyDepTwo,MyDepThree
+    
+  1:
+    name: TestingDepTwo
+    dependency: 
+      - MyDepOne
+      - MyDepTwo
+      - MyDepThree
+      
+  2:
+    name: TestingDepThree
+    dependency:
+      0: MyDepOne
+      MyAliase: MyDepTwo
+      1: MyDepThree
+    

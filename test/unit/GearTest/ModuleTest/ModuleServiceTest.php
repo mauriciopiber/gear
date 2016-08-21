@@ -198,7 +198,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldBeCalled();
+        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
         $this->controllerTest->moduleFactory()->shouldBeCalled();
@@ -356,7 +356,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldBeCalled();
+        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
         $this->controllerTest->moduleFactory()->shouldBeCalled();
@@ -517,7 +517,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
 
-        $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
+        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();
@@ -650,7 +650,7 @@ class ModuleServiceTest extends AbstractTestCase
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
 
-        $this->consoleControllerTest->generateAbstractClass()->shouldBeCalled();
+        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();

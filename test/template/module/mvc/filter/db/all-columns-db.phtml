@@ -1,0 +1,274 @@
+<?php
+namespace MyModule\Filter;
+
+use GearBase\Filter\AbstractFilter;
+
+/**
+ * Filter for Table Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Filter
+ * @package MyModule/Filter
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class TableFilter extends AbstractFilter
+{
+
+    /**
+     * Get The Input Filter
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return TableFilter
+     */
+    public function getInputFilter()
+    {
+        $this->add(
+            array(
+                'name' => 'dateColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'datePtBrColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'datetimeColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'datetimePtBrColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'timeColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'decimalColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'moneyPtBrColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'checkboxColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'idForeignKeyColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'intColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'htmlColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'textColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'tinyintColumn',
+                'required' => false,
+            )
+        );
+        $this->add(
+            array(
+                'name' => 'checkboxColumn',
+                'required' => false,
+            )
+        );
+        $message = 'O valor é inválido';
+        $this->add(
+            array(
+                'name' => 'emailColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    array(
+                        'name' => 'EmailAddress',
+                        'options' => array(
+                            'messages' => array(
+                                \Zend\Validator\EmailAddress::INVALID            => $message,
+                                \Zend\Validator\EmailAddress::INVALID_FORMAT     => $message,
+                                \Zend\Validator\EmailAddress::INVALID_HOSTNAME   => $message,
+                                \Zend\Validator\EmailAddress::INVALID_MX_RECORD  => $message,
+                                \Zend\Validator\EmailAddress::INVALID_SEGMENT    => $message,
+                                \Zend\Validator\EmailAddress::DOT_ATOM           => $message,
+                                \Zend\Validator\EmailAddress::QUOTED_STRING      => $message,
+                                \Zend\Validator\EmailAddress::INVALID_LOCAL_PART => $message,
+                                \Zend\Validator\EmailAddress::LENGTH_EXCEEDED    => $message,
+                            ),
+                        ),
+                        'break_chain_on_failure' => true
+                    )
+                )
+            )
+        );
+        $messageMax = 'O valor deve ter no máximo %max% caracteres';
+        $messageMin = 'O valor deve ter no mínimo %min% caracteres';
+        $this->add(array(
+            'name'       => 'passwordVerifyColumn',
+            'required'   => true,
+            'filters'    => array(array('name' => 'StringTrim')),
+            'validators' => array(
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'min' => 6,
+                        'max' => 20,
+                        'messages' => [
+                            \Zend\Validator\StringLength::TOO_SHORT => $messageMin,
+                            \Zend\Validator\StringLength::TOO_LONG => $messageMax
+                        ***REMOVED***
+                    ),
+                ),
+            ),
+        ));
+
+        $this->add(array(
+            'name'       => 'passwordVerifyColumnVerify',
+            'required'   => true,
+            'filters'    => array(array('name' => 'StringTrim')),
+            'validators' => array(
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'min' => 6,
+                        'max' => 20,
+                        'messages' => [
+                            \Zend\Validator\StringLength::TOO_SHORT => $messageMin,
+                            \Zend\Validator\StringLength::TOO_LONG => $messageMax
+                        ***REMOVED***
+                    ),
+                    'break_chain_on_failure' => true
+                ),
+                array(
+                    'name'    => 'Identical',
+                    'options' => array(
+                        'token' => 'passwordVerifyColumn',
+                        'messages' => [
+                            \Zend\Validator\Identical::NOT_SAME => 'Os dois valores digitados não combinam.'
+                        ***REMOVED***
+                    ),
+                ),
+            ),
+        ));
+        $message = 'O valor é inválido';
+        $this->add(
+            array(
+                'name' => 'telephoneColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                     array(
+                        'name' => 'Regex',
+                        'options' =>  array(
+                            'pattern'   => '/^(\([0-9***REMOVED***{2}\))\s([9***REMOVED***{1})?([0-9***REMOVED***{4})-([0-9***REMOVED***{4})$/',
+                            'messages'  => [
+                                \Zend\Validator\Regex::INVALID => $message,
+                                \Zend\Validator\Regex::NOT_MATCH => $message,
+                                \Zend\Validator\Regex::ERROROUS => $message
+                            ***REMOVED***
+                        )
+                    )
+                )
+            )
+        );
+        // File Input
+        $fileInput = new \Zend\InputFilter\FileInput('uploadImageColumn');
+        $fileInput->setRequired(false);
+        $fileInput->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target'    =>
+                \GearBase\Module::getProjectFolder().'/public/_temp/uploadImageColumntempimg.png',
+                'randomize' => true,
+            )
+        );
+        $this->add($fileInput);
+        $message = 'O valor é inválido';
+        $this->add(
+            array(
+                'name' => 'urlColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    [
+                        'name' => 'Hostname',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Hostname::CANNOT_DECODE_PUNYCODE  => $message,
+                                \Zend\Validator\Hostname::INVALID                 => $message,
+                                \Zend\Validator\Hostname::INVALID_DASH            => $message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME        => $message,
+                                \Zend\Validator\Hostname::INVALID_HOSTNAME_SCHEMA => $message,
+                                \Zend\Validator\Hostname::INVALID_LOCAL_NAME      => $message,
+                                \Zend\Validator\Hostname::INVALID_URI             => $message,
+                                \Zend\Validator\Hostname::IP_ADDRESS_NOT_ALLOWED  => $message,
+                                \Zend\Validator\Hostname::LOCAL_NAME_NOT_ALLOWED  => $message,
+                                \Zend\Validator\Hostname::UNDECIPHERABLE_TLD      => $message,
+                                \Zend\Validator\Hostname::UNKNOWN_TLD             => $message
+                            ***REMOVED***
+                        ***REMOVED***
+                    ***REMOVED***
+                )
+            )
+        );
+        $messageMax = 'O valor deve ter no máximo %max% caracteres';
+        $messageMin = 'O valor deve ter no mínimo %min% caracteres';
+        $this->add(
+            array(
+                'name' => 'varcharColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 45,
+                            'messages' => [
+                                \Zend\Validator\StringLength::TOO_SHORT => $messageMin,
+                                \Zend\Validator\StringLength::TOO_LONG => $messageMax
+                            ***REMOVED***
+                        )
+                    )
+                )
+            )
+        );
+        return $this;
+    }
+}

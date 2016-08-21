@@ -124,6 +124,7 @@ class BasicModuleStructure implements
             'ViewHelper' => $this->getViewHelperFolder(),
             'ViewHelperTest' => $this->getTestViewHelperFolder(),
             'SearchForm' => $this->getSearchFolder(),
+            'SearchFormTest' => $this->getTestSearchFolder(),
         ***REMOVED***;
 
         if (!isset($resources[$resource***REMOVED***)) {

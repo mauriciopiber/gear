@@ -1,0 +1,294 @@
+<?php
+namespace MyModule\Form;
+
+use GearBase\Form\AbstractForm;
+use Doctrine\ORM\EntityManager;
+use Zend\Form\Element;
+
+/**
+ * Form for Table Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Form
+ * @package MyModule/Form
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class TableForm extends AbstractForm
+{
+
+    /**
+     * Construct Form
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @param EntityManager $entityManager EntityManager
+     *
+     * @return TableForm
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        parent::__construct('tableForm');
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'fileupload');
+
+        $this->setEntityManager($entityManager);
+
+        $idMyController = new Element('idMyController');
+        $idMyController->setLabel('My Controller');
+        $idMyController->setAttributes(array(
+            'name' => 'idMyController',
+            'id' => 'idMyController',
+            'type' => 'hidden',
+        ));
+        $this->add($idMyController);
+
+        $dateColumn = new Element\Date('dateColumn');
+        $dateColumn->setAttributes(array(
+            'name' => 'dateColumn',
+            'id' => 'dateColumn',
+            'type' => 'text',
+            'class' => 'form-control date'
+        ));
+        $dateColumn->setLabel('Date Column');
+        $this->add($dateColumn);
+
+        $datePtBrColumn = new Element\Date('datePtBrColumn');
+        $datePtBrColumn->setAttributes(array(
+            'name' => 'datePtBrColumn',
+            'id' => 'datePtBrColumn',
+            'type' => 'text',
+            'class' => 'form-control date-pt-br'
+        ));
+        $datePtBrColumn->setFormat('d/m/Y');
+        $datePtBrColumn->setLabel('Date Pt Br Column');
+        $this->add($datePtBrColumn);
+
+        $datetimeColumn = new Element\DateTime('datetimeColumn');
+        $datetimeColumn->setAttributes(array(
+            'name' => 'datetimeColumn',
+            'id' => 'datetimeColumn',
+            'type' => 'text',
+            'step' => 'any',
+            'class' => 'form-control datetime'
+        ));
+        $datetimeColumn->setFormat('Y-m-d H:i:s');
+        $datetimeColumn->setLabel('Datetime Column');
+        $this->add($datetimeColumn);
+
+        $datetimePtBr = new Element\DateTime('datetimePtBrColumn');
+        $datetimePtBr->setAttributes(array(
+            'name' => 'datetimePtBrColumn',
+            'id' => 'datetimePtBrColumn',
+            'type' => 'text',
+            'step' => 'any',
+            'class' => 'form-control datetime-pt-br'
+        ));
+        $datetimePtBr->setFormat('d/m/Y H:i:s');
+        $datetimePtBr->setLabel('Datetime Pt Br Column');
+        $this->add($datetimePtBr);
+
+        $timeColumn = new Element\Time('timeColumn');
+        $timeColumn->setAttributes(array(
+            'name' => 'timeColumn',
+            'id' => 'timeColumn',
+            'step' => 'any',
+            'type' => 'text',
+            'class' => 'form-control time'
+        ));
+        $timeColumn->setLabel('Time Column');
+        $this->add($timeColumn);
+
+        $decimalColumn = new Element('decimalColumn');
+        $decimalColumn->setLabel('Decimal Column');
+        $decimalColumn->setAttributes(array(
+            'name' => 'decimalColumn',
+            'id' => 'decimalColumn',
+            'type' => 'text',
+            'class' => 'form-control decimal'
+        ));
+        $this->add($decimalColumn);
+
+        $moneyPtBrColumn = new Element('moneyPtBrColumn');
+        $moneyPtBrColumn->setLabel('Money Pt Br Column');
+        $moneyPtBrColumn->setAttributes(array(
+            'name' => 'moneyPtBrColumn',
+            'id' => 'moneyPtBrColumn',
+            'type' => 'text',
+            'class' => 'form-control money'
+        ));
+        $this->add($moneyPtBrColumn);
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
+            'name' => 'checkboxColumn',
+            'options' => array(
+                'label' => 'Checkbox Column',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'default_value' => '0'
+            ),
+            'attributes' => array(
+                 'value' => '0',
+                 'id' => 'checkboxColumn'
+            )
+        ));
+        $idForeignKey = array(
+            'name' => 'idForeignKeyColumn',
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'attributes' => array(
+                'id' => 'idForeignKeyColumn',
+                'class' => 'form-control'
+            ),
+            'options' => array(
+                'label' => 'Foreign Key Column',
+                'object_manager' => $this->getEntityManager(),
+                'target_class' => '\Entity\ForeignKeyColumn',
+                'property' => 'foreignKeyColumn',
+                'empty_option' => 'Escolher:'
+            ),
+        );
+        $this->add($idForeignKey);
+
+        $intColumn = new Element('intColumn');
+        $intColumn->setLabel('Int Column');
+        $intColumn->setAttributes(array(
+            'name' => 'intColumn',
+            'id' => 'intColumn',
+            'type' => 'text',
+            'class' => 'form-control integer'
+        ));
+        $this->add($intColumn);
+
+        $htmlColumn = new Element\Textarea('htmlColumn');
+        $htmlColumn->setLabel('Html Column');
+        $htmlColumn->setAttributes(array(
+            'name' => 'htmlColumn',
+            'id' => 'htmlColumn',
+            'type' => 'textarea',
+            'class' => 'form-control simple',
+        ));
+        $this->add($htmlColumn);
+
+        $textColumn = new Element\Textarea('textColumn');
+        $textColumn->setLabel('Text Column');
+        $textColumn->setAttributes(array(
+            'name' => 'textColumn',
+            'id' => 'textColumn',
+            'type' => 'textarea',
+            'class' => 'form-control'
+        ));
+        $this->add($textColumn);
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
+            'name' => 'tinyintColumn',
+            'options' => array(
+                'label' => 'Tinyint Column',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'default_value' => '0'
+            ),
+            'attributes' => array(
+                 'value' => '0',
+                 'id' => 'tinyintColumn'
+            )
+        ));
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Checkbox',
+            'name' => 'checkboxColumn',
+            'options' => array(
+                'label' => 'Checkbox Column',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'default_value' => '0'
+            ),
+            'attributes' => array(
+                 'value' => '0',
+                 'id' => 'checkboxColumn'
+            )
+        ));
+        $emailColumn = new Element('emailColumn');
+        $emailColumn->setLabel('Email Column');
+        $emailColumn->setAttributes(array(
+            'name' => 'emailColumn',
+            'id' => 'emailColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($emailColumn);
+
+        $passwordVerify = new Element('passwordVerifyColumn');
+        $passwordVerify->setAttributes(array(
+            'name' => 'passwordVerifyColumn',
+            'id' => 'passwordVerifyColumn',
+            'type' => 'password',
+            'class' => 'form-control'
+        ));
+        $passwordVerify->setLabel('Password Verify Column');
+        $this->add($passwordVerify);
+
+        $passwordVerifyVerify = new Element('passwordVerifyColumnVerify');
+        $passwordVerifyVerify->setAttributes(array(
+            'name' => 'passwordVerifyColumnVerify',
+            'id' => 'passwordVerifyColumnVerify',
+            'type' => 'password',
+            'class' => 'form-control'
+        ));
+        $passwordVerifyVerify->setLabel('Password Verify Column Verify');
+        $this->add($passwordVerifyVerify);
+        $telephoneColumn = new Element('telephoneColumn');
+        $telephoneColumn->setLabel('Telephone Column');
+        $telephoneColumn->setAttributes(array(
+            'name' => 'telephoneColumn',
+            'id' => 'telephoneColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($telephoneColumn);
+
+        $uploadImageCo = new Element\File('uploadImageColumn');
+        $uploadImageCo->setLabel('Upload Image Column');
+        $uploadImageCo->setAttributes(array(
+            'name' => 'uploadImageColumn',
+            'id' => 'uploadImageColumn',
+            'type' => 'file',
+            'class' => 'form-control'
+        ));
+        $this->add($uploadImageCo);
+
+        $urlColumn = new Element('urlColumn');
+        $urlColumn->setLabel('Url Column');
+        $urlColumn->setAttributes(array(
+            'name' => 'urlColumn',
+            'id' => 'urlColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($urlColumn);
+
+        $varcharColumn = new Element('varcharColumn');
+        $varcharColumn->setLabel('Varchar Column');
+        $varcharColumn->setAttributes(array(
+            'name' => 'varcharColumn',
+            'id' => 'varcharColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($varcharColumn);
+
+        $submit = new Element('submit');
+        $submit->setValue('Salvar');
+        $submit->setAttributes(array(
+            'type'  => 'submit'
+        ));
+        $this->add($submit);
+
+        return $this;
+    }
+}

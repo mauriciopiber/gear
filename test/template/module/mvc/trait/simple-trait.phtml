@@ -1,0 +1,37 @@
+<?php
+namespace MyModule\Repository;
+
+use MyModule\Repository\MyTrait;
+
+trait MyTraitTrait
+{
+    protected $myTrait;
+
+    /**
+     * Get My Trait
+     *
+     * @return MyModule\Repository\MyTrait
+     */
+    public function getMyTrait()
+    {
+        if (!isset($this->myTrait)) {
+            $name = 'MyModule\Repository\MyTrait';
+            $this->myTrait = $this->getServiceLocator()->get($name);
+        }
+        return $this->myTrait;
+    }
+
+    /**
+     * Set My Trait
+     *
+     * @param MyTrait $myTrait My Trait
+     *
+     * @return \MyModule\Repository\MyTrait
+     */
+    public function setMyTrait(
+        MyTrait $myTrait
+    ) {
+        $this->myTrait = $myTrait;
+        return $this;
+    }
+}

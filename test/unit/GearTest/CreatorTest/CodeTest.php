@@ -1,15 +1,26 @@
 <?php
 namespace GearTest\CreatorTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group RefactoringSrc
  * @group Code
  */
-class CodeTest extends AbstractTestCase
+class CodeTest extends TestCase
 {
-    public function getData()
+    public function setUp()
+    {
+        parent::setUp();
+        $this->code = new \Gear\Creator\Code();
+
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn('MyModule');
+
+        $this->code->setModule($this->module->reveal());
+    }
+
+    public function getDataImplements()
     {
         return [
             [
@@ -48,11 +59,69 @@ class CodeTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getData
+     * @group Creator
+     */
+    public function testGetUse()
+    {
+        $src = new \GearJson\Src\Src(
+            [
+                'name' => 'MyRepository',
+                'type' => 'Repository',
+                'service' => 'factories',
+                'dependency' => [
+                    'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                    '\GearBase\Repository\QueryBuilder'
+                ***REMOVED***
+            ***REMOVED***
+        );
+
+        $template = <<<EOS
+use Doctrine\ORM\EntityManager;
+use GearBase\Repository\QueryBuilder;
+
+EOS;
+
+        $this->srcDependency = new \Gear\Creator\SrcDependency();
+        $this->srcDependency->setModule($this->module->reveal());
+        $this->code->setSrcDependency($this->srcDependency);
+
+        $this->assertEquals($template, $this->code->getUseConstructor($src));
+    }
+
+    /**
+     * @dataProvider getDataImplements
      */
     public function testImplements($src, $additional, $template = null)
     {
-        $code = new \Gear\Creator\Code();
-        $this->assertEquals($template, $code->getImplements($src, $additional));
+        $this->assertEquals($template, $this->code->getImplements($src, $additional));
+    }
+
+
+    public function testGetFileDocs()
+    {
+        $src = new \GearJson\Src\Src([
+            'name' => 'MyFileDocs',
+            'type' => 'Repository',
+            'namespace' => 'MyDocs'
+        ***REMOVED***);
+
+        $template = (new \Gear\Module())->getLocation().'/../../';
+        $template .= 'test/template/module/code/file-docs/simple.phtml';
+
+        $this->assertEquals(file_get_contents($template), $this->code->getFileDocs($src));
+    }
+
+    public function testGetClassDocs()
+    {
+        $src = new \GearJson\Src\Src([
+            'name' => 'MyFileDocs',
+            'type' => 'Repository',
+            'namespace' => 'MyDocs'
+        ***REMOVED***);
+
+        $template = (new \Gear\Module())->getLocation().'/../../';
+        $template .= 'test/template/module/code/class-docs/simple.phtml';
+
+        $this->assertEquals(file_get_contents($template), $this->code->getClassDocs($src));
     }
 }

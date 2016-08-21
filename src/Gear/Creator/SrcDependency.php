@@ -36,41 +36,6 @@ class SrcDependency extends AbstractDependency
         return sprintf('%s\%s', $this->getModule()->getModuleName(), $dependency);
     }
 
-    public function getTestInjections($src)
-    {
-        $text = [***REMOVED***;
-        if ($src instanceof Src && $src->hasDependency()) {
-            foreach ($src->getDependency() as $dependency) {
-                $dependsName = $this->extractSrcNameFromDependency($dependency);
-
-                $class     = sprintf('%s', $this->str('class', $dependsName));
-                $var       = sprintf('%s', $this->str('var-lenght', $dependsName));
-                $baseClass = sprintf('%s', $this->str('class', $src->getName()));
-                $baseVar   = sprintf('%s', $this->str('var-lenght', $src->getName()));
-                $service   = $this->getServiceManagerName($dependency);
-
-
-                if (strlen($var) > 18) {
-                    $var = substr($var, 0, 17);
-                }
-
-                if (strlen($baseVar) > 18) {
-                    $baseVar = substr($baseVar, 0, 17);
-                }
-
-                $text[***REMOVED*** = array(
-                    'baseClass' => $baseClass,
-                    'baseVar' => $baseVar,
-                    'class' => $class,
-                    'var' => $var,
-                    'service' => $service,
-                );
-            }
-        }
-
-        return $text;
-    }
-
     public function getFormName()
     {
         if ($this->src->hasDependency() == null) {
@@ -105,55 +70,10 @@ class SrcDependency extends AbstractDependency
         }
     }
 
-    public function getTests()
-    {
-        if ($this->src->hasDependency() == null) {
-            return '';
-        }
-
-        $tests = '';
-        $dependencies = $this->src->getDependency();
-        foreach ($dependencies as $dependency) {
-            $srcName = $this->extractSrcNameFromDependency($dependency);
-
-
-            $srcType = $this->extractSrcTypeFromDependency($dependency);
-
-            $string = new \GearBase\Util\String\StringService();
-            $mock = $string->str('var-lenght', 'mock'.$srcName);
-
-            if ($srcType[0***REMOVED*** == '\\') {
-                $factoryName = sprintf('%s\%s', ltrim($srcType, '\\'), $srcName);
-            } else {
-                $factoryName = sprintf('%s\%s\%s', $this->getModule()->getModuleName(), $srcType, $srcName);
-            }
-
-
-
-            $tests .= <<<EOS
-    public function testSet{$srcName}()
-    {
-        \${$mock} = \$this->getMockSingleClass('{$factoryName}');
-        \$this->get{$this->src->getName()}()->set{$srcName}(\${$mock});
-        \$this->assertEquals(\${$mock}, \$this->get{$this->src->getName()}()->get{$srcName}());
-    }
-
-    public function testGet{$srcName}()
-    {
-        \$this->assertInstanceOf(
-            '{$factoryName}',
-            \$this->get{$this->src->getName()}()->get{$srcName}()
-        );
-    }
-
-EOS;
-        }
-
-        return $tests;
-    }
-
     public function getUseNamespace($eol = true)
     {
+        $this->namespace = '';
+
         if ($this->src->hasDependency() == null) {
             return '';
         }
@@ -181,8 +101,10 @@ EOS;
     }
 
 
-    public function getUseAttribute($eol = true)
+    public function getUseAttribute($eol = true, array $ignoreList = null)
     {
+        $this->attribute = '';
+
         if ($this->src->hasDependency() == null) {
             return '';
         }
@@ -192,6 +114,15 @@ EOS;
         $count = count($dependencies);
 
         foreach ($dependencies as $i => $dependency) {
+
+            if (
+                in_array($dependency, $ignoreList)
+                || in_array($this->getModule()->getModuleName().'\\'.$dependency, $ignoreList)
+            ) {
+                continue;
+            }
+
+            //var_dump($i, $dependency);
             $srcName = $this->extractSrcNameFromDependency($dependency);
             $namespace = sprintf('%sTrait', $srcName);
             $this->useAttributeToString($namespace);
@@ -200,6 +131,8 @@ EOS;
                 $this->attribute .= PHP_EOL;
             }
         }
+        //die();
+
         $eol = ($eol) ? PHP_EOL : '';
 
         return (!empty($this->attribute)) ? $this->attribute.$eol : $eol;

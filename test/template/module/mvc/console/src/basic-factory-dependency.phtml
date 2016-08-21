@@ -1,0 +1,35 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\View\Model\ConsoleModel;
+use MyModule\Repository\MyRepositoryTrait;
+use Zend\Mvc\Controller\AbstractConsoleController;
+use MyModule\Repository\MyRepository;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicFactoryDependencyConsole extends AbstractConsoleController
+{
+    use MyRepositoryTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyRepository $myRepository My Repository
+     *
+     * @return \MyModule\Controller\BasicFactoryDependencyConsole
+     */
+    public function __construct(MyRepository $myRepository)
+    {
+        $this->myRepository = $myRepository;
+
+        return $this;
+    }
+}

@@ -56,33 +56,47 @@ class RepositoryService extends AbstractMvc
         $this->table   = $this->db->getTableObject();
         $this->specialites = $this->db->getColumns();
 
-        $this->template = 'template/module/mvc/repository/db.repository.phtml';
+        $this->template = 'template/module/mvc/repository/db/repository.phtml';
         $this->calculateAliasesStack();
         $this->setUp();
 
-        $this->getRepositoryTestService()->introspectFromTable($this->db);
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getRepositoryFolder());
+        $this->entityName = sprintf(
+            '%s\Entity\%s',
+            $this->getModule()->getModuleName(),
+            $this->str('class', $this->db->getTable())
+        );
 
-        $location = $this->getModule()->getRepositoryFolder();
+        $location = $this->getCode()->getLocation($this->src);
+
+        $this->getRepositoryTestService()->introspectFromTable($this->db);
+
+        $this->getTraitService()->createTrait($this->src, $location);
 
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
         $options = [
+            'use' => ($this->src->getService() == 'factories') ? $this->getCode()->getUseConstructor($this->src) : '',
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'namespace' => $this->getCode()->getNamespace($this->src),
             'specialityFields' => $this->specialites,
             'baseClass' => $this->str('class', $this->db->getTable()),
-            'baseClassCut' => $this->str('var-lenght', $this->db->getTable()),
+            'tableIdVar' => $this->str('var-lenght', 'id_'.$this->db->getTable()),
+            'tableId' => $this->str('var', 'id_'.$this->db->getTable()),
             'class'   => $this->className,
             'module'  => $this->getModule()->getModuleName(),
             'aliase'  => $this->mainAliase,
             'map' => $this->getMap(),
             'updateBefore' => '',
-            'insertBefore' => ''
+            'insertBefore' => '',
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'entity' => $this->entityName,
+            'tableLabel' => $this->str('label', $this->db->getTable()),
         ***REMOVED***;
 
-        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
 
+        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
             if ($column instanceof RepositoryInsertBeforeInterface) {
                 $options['insertBefore'***REMOVED*** .= $column->getRepositoryInsertBefore();
             }
@@ -90,8 +104,12 @@ class RepositoryService extends AbstractMvc
             if ($column instanceof RepositoryUpdateBeforeInterface) {
                 $options['updateBefore'***REMOVED*** .= $column->getRepositoryUpdateBefore();
             }
-
         }
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
 
         $template = $this->getFileCreator()->createFile(
             $this->template,
@@ -108,10 +126,6 @@ class RepositoryService extends AbstractMvc
     {
         $this->src = $src;
         $this->className = $this->src->getName();
-
-        if ($this->src->getAbstract() === true) {
-            return $this->getAbstractFromSrc();
-        }
 
         if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
             $this->db = $this->src->getDb();
@@ -132,9 +146,12 @@ class RepositoryService extends AbstractMvc
 
         //$this->getAbstract();
         $this->getRepositoryTestService()->createFromSrc($this->src);
-        $this->getTraitService()->createTrait($this->src, $location);
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->getAbstract() == false) {
+            $this->getTraitService()->createTrait($this->src, $location);
+        }
+
+        if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
@@ -146,11 +163,18 @@ class RepositoryService extends AbstractMvc
             'extends'    => $this->getCode()->getExtends($this->src),
             'uses'       => $this->getCode()->getUse($this->src, null),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
-            'constructor' => ($this->src->getService() == 'factories') ? $this->getCode()->getConstructor($this->src) : ''
+            'classDocs'  => $this->getCode()->getClassDocs($this->src)
         ***REMOVED***;
 
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
+        $template = ($this->src->getAbstract() == true) ? 'abstract.phtml' : 'repository.phtml';
+
+
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/src.repository.phtml',
+            'template/module/mvc/repository/src/'.$template,
             $options,
             $this->className.'.php',
             $location
@@ -174,10 +198,10 @@ class RepositoryService extends AbstractMvc
 
     public function getAbstractFromSrc()
     {
-        $this->getRepositoryTestService()->createAbstract($this->className);
+        $this->getRepositoryTestService()->createFromSrc($this->src);
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/abstract.phtml',
+            'template/module/mvc/repository/src/abstract.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->str('class', $this->src->getName())

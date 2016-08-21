@@ -1,0 +1,26 @@
+modules: MyModule
+
+src:
+  01:
+    name: BasicForm
+    type: Form
+  02:
+    name: BasicNamespaceForm
+    type: Form
+    namespace: My\GoodForm\Working
+  03:
+    name: BasicFactory
+    type: Form
+    service: factories
+  04:
+    name: BasicFactoryNamespace
+    type: Form
+    service: Factories
+    namespace: My\GoodForm\Working
+  99:
+    name: FormInterface
+    type: Interface
+    namespace: Interfaces
+    dependency: 'Form\BasicForm'  
+    
+  

@@ -1,0 +1,40 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\AbstractCompleteFactoriesService;
+
+/**
+ * @group Service
+ */
+class AbstractCompleteFactoriesServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->className = 'MyModule\Greatest\AbstractCompleteFactoriesService';
+
+        $this->myDependencyOne = $this->prophesize('MyModule\Service\MyDependencyOne');
+        $this->myDependencyTwo = $this->prophesize('MyModule\Logic\MyDependencyTwo');
+        $this->myDependencyThree = $this->prophesize('MyModule\Mvc\MyDependencyThree');
+
+        $this->service = $this->getMockBuilder($this->className)
+            ->disableoriginalConstructor()
+            ->getMockForAbstractClass();
+    }
+
+    public function testClassExists()
+    {
+        $reflectedClass = new \ReflectionClass($this->className);
+        $constructor = $reflectedClass->getConstructor();
+        $class = $constructor->invoke(
+            $this->service,
+            $this->myDependencyOne->reveal(),
+            $this->myDependencyTwo->reveal(),
+            $this->myDependencyThree->reveal()
+        );
+
+        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteFactoriesService', $class);
+    }
+}

@@ -1,0 +1,106 @@
+namespace <?php echo $this->namespace;?>;
+
+use GearBase\Repository\AbstractRepository;
+<?php echo $this->use;?>
+
+/**
+ * Repository to interate with <?php echo $this->tableLabel;?> table.
+ *
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class <?php echo $this->class;?> extends AbstractRepository
+{
+<?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
+    /**
+     * Config used to create Doctrine Query and Html Table Header on List.
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
+     */
+    public function getMapReferences()
+    {
+<?php echo $this->map.PHP_EOL;?>
+    }
+
+    /**
+     * Get the table Entity.
+     *
+     * @return string
+     */
+    public function getRepositoryName()
+    {
+        return '<?= $this->module;?>\Entity\<?= $this->baseClass;?>';
+    }
+
+    /**
+     * Get the table default Aliase to query on database.
+     *
+     * @return string
+     */
+    public function getAliase()
+    {
+        return '<?php echo $this->aliase;?>';
+    }
+
+    /**
+     * Select one Table by Id.
+     *
+     * @param integer $<?= $this->tableIdVar;?> Id to search criteria
+     *
+     * @return null|<?php echo $this->entity.PHP_EOL;?>
+     */
+    public function selectById($<?= $this->tableIdVar;?>)
+    {
+        return $this->getRepository()->findOneBy(
+            array('<?= $this->tableId;?>' => $<?= $this->tableIdVar;?>)
+        );
+    }
+
+    /**
+     * Update database.
+     *
+     * @param integer $idTable Id which should be updated
+     * @param array   $data    Valid $_POST
+     *
+     * @return <?php echo $this->entity.PHP_EOL;?>
+     */
+    public function update($idTable, $data)
+    {
+        $entity = $this->selectById($idTable);
+        $this->hydrate($data, $entity);
+<?php echo $this->updateBefore;?>
+        $entity->setUpdated($this->getTimestamp());
+        $entity->setUpdatedBy($this->getUser());
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+
+    /**
+     * Create row in database.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return <?php echo $this->entity.PHP_EOL;?>
+     */
+    public function insert($data)
+    {
+        $entity = new \<?= $this->module;?>\Entity\<?= $this->baseClass;?>();
+        $this->hydrate($data, $entity);
+<?php echo $this->insertBefore;?>
+        $entity->setCreated($this->getTimestamp());
+        $entity->setCreatedBy($this->getUser());
+        $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $entity);
+        $this->persist($entity);
+        $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, $entity);
+        return $entity;
+    }
+}

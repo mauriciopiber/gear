@@ -1,10 +1,5 @@
 namespace: <?php echo $this->module.PHP_EOL;?>
 actor: Tester
-extensions:
-    enabled: [Codeception\Extension\Recorder***REMOVED***
-    config:
-        Codeception\Extension\Recorder:
-            delete_successful: false
 paths:
     tests: test
     log: build
@@ -22,12 +17,3 @@ coverage:
           exclude:
               - src/<?php echo $this->module;?>/Fixture/*
               - src/<?php echo $this->module;?>/Module.php*
-modules:
-    config:
-      Db:
-          dsn: 'mysql:dbname=<?php echo $this->moduleUline;?>;host=localhost'
-          user: 'root'
-          password: 'gear'
-          dump: data/<?php echo $this->moduleUrl;?>.mysql.sql
-      Doctrine2:
-          cleanup: false

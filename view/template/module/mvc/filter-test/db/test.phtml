@@ -1,0 +1,48 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->testNamespace;?>\<?php echo $this->className;?>;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL;?>
+ * @group <?php echo $this->className.PHP_EOL;?>
+ * @group Filter
+ */
+class <?php echo $this->className;?>Test extends TestCase
+{
+    public static $validate = 'vendor/zendframework/zend-i18n-resources/languages/pt_BR/Zend_Validate.php';
+
+    public function setUp()
+    {
+<?php echo $this->constructor;?>
+    }
+
+<?php echo $this->functions;?>
+
+    protected function getAdapterMock()
+    {
+        $adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+        $driver = $this->prophesize('Zend\Db\Adapter\Driver\DriverInterface');
+
+        $platform = $this->prophesize('Zend\Db\Adapter\Platform\Mysql');
+
+        $adapter->getDriver()->willReturn($driver->reveal());
+        $adapter->getPlatform()->willReturn($platform->reveal());
+
+        $stmt = $this->prophesize('Zend\Db\Adapter\Driver\Pdo\Statement');
+
+        $driver->createStatement()->willReturn($stmt->reveal());
+        $driver->formatParameterName('where1')->willReturn(null);
+
+        $resultSet = $this->prophesize('Zend\Db\ResultSet\ResultSetInterface');
+        $resultSet->current()->willReturn(false);
+
+        $paramContainer = $this->prophesize('Zend\Db\Adapter\ParameterContainer');
+
+        $stmt->execute()->willReturn($resultSet->reveal());
+        $stmt->getParameterContainer()->willReturn($paramContainer->reveal());
+        $stmt->setSql("SELECT  WHERE  =")->willReturn($stmt->reveal());
+
+        return $adapter->reveal();
+    }
+}

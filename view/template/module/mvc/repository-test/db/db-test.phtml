@@ -1,0 +1,218 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceManager;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>;
+
+/**
+ * @group <?php echo $this->module.PHP_EOL;?>
+ * @group <?php echo $this->class.PHP_EOL;?>
+ * @group Repository
+ */
+class <?php echo $this->class;?>RepositoryTest extends TestCase
+{
+<?php echo $this->static;?>
+    public function setUp()
+    {
+        parent::setUp();
+
+<?php echo $this->constructor;?>
+
+        $this->userMock = $this->getUserMock();
+    }
+
+    public function getUserMock()
+    {
+        $this->entity = $this->prophesize('GearAdmin\Entity\User');
+        $this->entity->getIdUser()->willReturn(1);
+
+        $this->serviceManager = new ServiceManager;
+
+        $this->authService = $this->getAuthServiceMock();
+
+        $this->serviceManager->setService('zfcuser_auth_service', $this->authService);
+
+        $this->repository->setServiceLocator($this->serviceManager);
+
+        $this->entityRepository->findOneBy(['idUser' => 1***REMOVED***)->willReturn($this->entity->reveal());
+
+        $this->entityManager->getRepository('GearAdmin\Entity\User')->willReturn($this->entityRepository->reveal());
+
+        return $this->entity->reveal();
+    }
+
+    public function getAuthServiceMock()
+    {
+        $this->entity = $this->prophesize('GearAdmin\Entity\User');
+        $this->entity->getIdUser()->willReturn(1);
+
+        $this->authService = $this->prophesize('Zend\Authentication\AuthenticationService');
+        $this->authService->hasIdentity()->willReturn(true);
+        $this->authService->getIdentity()->willReturn($this->entity->reveal());
+
+        return $this->authService->reveal();
+    }
+
+    public function testGetUser()
+    {
+        $user = $this->repository->getUser();
+        $this->assertEquals(1, $user->getIdUser());
+    }
+
+    public function testSelectAll()
+    {
+        $resultSet = $this->repository->selectAll();
+        $this->assertNull($resultSet);
+    }
+
+    public function testSelectByIdReturnEntity()
+    {
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(1)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 1***REMOVED***)->willReturn($entity)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectById(1);
+        $this->assertNotNull($resultSet);
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+
+        $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
+    }
+
+    public function testSelectByIdReturnNull()
+    {
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 60000***REMOVED***)->willReturn(null)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectById(60000);
+        $this->assertNull($resultSet);
+    }
+
+    public function testSelectOneByIdMyController()
+    {
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(15)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['<?php echo $this->idTableVar;?>' => 15***REMOVED***)->willReturn($entity)->shouldBeCalled();
+
+        $resultSet = $this->repository->selectOneBy(
+            array(
+                '<?php echo $this->idTableVar;?>' =>
+                    15
+            )
+        );
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(
+            15,
+            $resultSet->get<?php echo $this->idTable;?>()
+        );
+    }
+
+    public function testSelectAllOrderByIdMyControllerASC()
+    {
+        $resultSet = $this->repository->selectAll(
+            array(),
+            '<?php echo $this->idTableVar;?>',
+            'ASC'
+        );
+
+        $this->assertNull($resultSet);
+    }
+
+    public function testSelectAllOrderByIdMyControllerDESC()
+    {
+        $resultSet = $this->repository->selectAll(
+            array(),
+            '<?php echo $this->idTableVar;?>',
+            'DESC'
+        );
+
+        $this->assertNull($resultSet);
+    }
+
+    public function testCreateNewData()
+    {
+        $entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->class;?>();
+
+        $created = new \DateTime('now');
+        $this->repository->setTimestamp($created);
+
+        $data = array(
+<?php echo (isset($this->data['create'***REMOVED***)) ? $this->data['create'***REMOVED*** : '';?>
+        );
+
+        $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
+        $hydrator->hydrate($data, $entity)->willReturn($entity);
+        $this->repository->setGearAdminHydrator($hydrator->reveal());
+
+        $entityPersist = clone $entity;
+<?php echo (isset($this->persist['create'***REMOVED***)) ? $this->persist['create'***REMOVED*** : '';?>
+        $entityPersist->setCreated($created);
+        $entityPersist->setCreatedBy($this->userMock);
+
+        $this->entityManager->persist($entityPersist)->shouldBeCalled();
+        $this->entityManager->flush()->shouldBeCalled();
+
+        $resultSet = $this->repository->insert($data);
+
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(null, $resultSet->getId<?php echo $this->class;?>());
+    }
+
+    public function testUpdateExistData()
+    {
+        $created = new \DateTime('now');
+        $this->repository->setTimestamp($created);
+
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31)->shouldBeCalled();
+<?php echo (isset($this->hydrator['update'***REMOVED***)) ? $this->hydrator['update'***REMOVED*** : '';?>
+        $entity->setUpdated($created)->shouldBeCalled();
+        $entity->setUpdatedBy($this->userMock)->shouldBeCalled();
+
+        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity);
+
+        $data = array(
+<?php echo (isset($this->data['update'***REMOVED***)) ? $this->data['update'***REMOVED*** : '';?>
+        );
+
+        $hydrator = $this->prophesize('GearBase\Hydrator\DateHydrator');
+        $hydrator->hydrate($data, $entity)->willReturn($entity);
+        $this->repository->setGearAdminHydrator($hydrator->reveal());
+
+        $entityPersist = clone $entity;
+<?php echo (isset($this->persist['update'***REMOVED***)) ? $this->persist['update'***REMOVED*** : '';?>
+        $entityPersist->setUpdated($created);
+        $entityPersist->setUpdatedBy($this->userMock);
+
+        $this->entityManager->persist($entityPersist)->willReturn(true)->shouldBeCalled();
+        $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
+
+        $resultSet = $this->repository->update(31, $data);
+
+        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
+        $this->assertEquals(31, $resultSet->getId<?php echo $this->class;?>());
+    }
+
+    public function testDeleteNoExistData()
+    {
+        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 6000***REMOVED***)->willReturn(null);
+        $resultSet = $this->repository->delete(6000);
+        $this->assertFalse($resultSet);
+    }
+
+    public function testDeleteExistData()
+    {
+        $data = [***REMOVED***;
+
+        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
+        $entity->getId<?php echo $this->class;?>()->willReturn(31);
+
+        $this->entityRepository->findOneBy(['id<?php echo $this->class;?>' => 31***REMOVED***)->willReturn($entity->reveal());
+
+        $this->entityManager->remove($entity)->willReturn(true)->shouldBeCalled();
+        $this->entityManager->flush()->willReturn(true)->shouldBeCalled();
+
+        $resultSet = $this->repository->delete($entity);
+        $this->assertTrue($resultSet);
+    }
+}

@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\FilterTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Filter\BasicExtendsFilter;
+
+/**
+ * @group Filter
+ */
+class BasicExtendsFilterTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->filter = new BasicExtendsFilter();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Filter\BasicExtendsFilter',
+            $this->filter->getInputFilter()
+        );
+    }
+}

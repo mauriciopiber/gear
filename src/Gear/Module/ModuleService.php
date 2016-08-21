@@ -320,7 +320,7 @@ class ModuleService
             case 'web':
                 $controllerTService = $this->getControllerTestService();
                 $controllerService     = $this->getMvcController();
-                $controllerTService->generateAbstractClass();
+
                 $controllerTService->module();
                 $controllerTService->moduleFactory();
                 $controllerService->module();
@@ -364,7 +364,6 @@ class ModuleService
             case 'cli':
                 $consoleTest = $this->getConsoleControllerTest();
                 $consoleController = $this->getConsoleController();
-                $consoleTest->generateAbstractClass();
                 $consoleTest->module();
                 $consoleTest->moduleFactory();
                 $consoleController->module();

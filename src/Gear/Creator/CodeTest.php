@@ -8,11 +8,160 @@ use GearJson\App\App;
 
 class CodeTest extends AbstractCode
 {
+    public function getServiceManagerDependencies($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $template = <<<EOS
+        \$this->serviceLocator->get('%s')
+            ->willReturn(\$this->prophesize('%s')->reveal())
+            ->shouldBeCalled();
+EOS;
+
+        $msg = PHP_EOL;
+
+        foreach ($src->getDependency() as $i => $dependency) {
+
+            $fullname = $this->resolveNamespace($dependency);
+
+            $name = (is_int($i)) ? $fullname : $i;
+
+            $msg .= sprintf($template, $name, $fullname);
+            $msg .= PHP_EOL;
+            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+                $msg .= PHP_EOL;
+            }
+        }
+
+        return $msg;
+    }
+
+    public function getConstructor($src)
+    {
+        if ($src instanceof Controller) {
+            $names = 'controller';
+        } else {
+            $names = $this->str('var', $src->getType());
+        }
+
+
+        $template = '';
+
+        $open = '$this->%s = new %s(';
+
+        $ndnt = str_repeat(' ', 4*2);
+        $template .= $ndnt.sprintf($open, $names, $this->str('class', $src->getName()));
+
+
+        if (empty($src->getDependency())) {
+
+            $template .= ');'.PHP_EOL;
+            return $template;
+        }
+
+        $template .= PHP_EOL;
+
+        $ndnt = str_repeat(' ', 4*3);
+
+        $defTemplate = '$this->%s->reveal()';
+
+        $count = count($src->getDependency());
+        $iterator = 0;
+
+        foreach ($src->getDependency() as $i => $dependency) {
+            $template .= $ndnt;
+            $template .= sprintf($defTemplate, $this->extractVar($dependency, $src));
+            $template .= ($iterator < $count-1) ? ',' : '';
+            $template .= PHP_EOL;
+
+            $iterator += 1;
+        }
+
+        $ndnt = str_repeat(' ', 4*2);
+        $template .= $ndnt.');'.PHP_EOL;
+
+        return $template;
+    }
+
+    public function extractVar($dependency, $data = null)
+    {
+        $allNames = explode('\\', $dependency);
+        $name = end($allNames);
+
+        if ($data !== null && $data->getDb() !== null) {
+
+
+            if (preg_match('/[a-zA-Z***REMOVED****Repository/', $dependency, $matches) === 1) {
+                return $this->str('var', 'repository');
+            }
+
+            if (preg_match('/Memcached/', $dependency, $matches) === 1) {
+                return $this->str('var', 'cache');
+            }
+        }
+
+        return $this->str('var', $name);
+    }
+
+    public function getDependencyReveal($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $template = '';
+
+        $ndnt = str_repeat(' ', 4*3);
+
+        $defTemplate = '$this->%s->reveal()';
+
+        foreach ($src->getDependency() as $i => $dependency) {
+            $template .= $ndnt;
+            $template .= sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency));
+
+            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+                $template .= ',';
+            }
+            $template .= PHP_EOL;
+        }
+
+        return $template;
+    }
+
+    public function getConstructorDependency($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $ndnt = str_repeat(' ', 4*2);
+
+        $defTemplate = '$this->%s = $this->prophesize(\'%s\');';
+
+        $template = PHP_EOL;
+
+        foreach ($src->getDependency() as $dependency) {
+            $template .= $ndnt.sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency)).PHP_EOL;
+        }
+
+        return $template;
+    }
+
     public function getTestNamespace($data)
     {
         if (!empty($data->getNamespace())) {
             $namespace = $data->getNamespace();
             return $namespace;
+        }
+
+        if ($data instanceof Controller) {
+            return 'Controller';
+        }
+
+        if ($data->getType() == 'SearchForm') {
+            return 'Form\Search';
         }
 
         return str_replace('Test', '', $data->getType());
@@ -37,7 +186,6 @@ class CodeTest extends AbstractCode
             $namespace = $implode;
         } else {
             if ($data instanceof Src) {
-
                 if ($data->getType() == 'SearchForm') {
                     $namespace = 'Form\Search';
                 } else {
@@ -68,6 +216,9 @@ class CodeTest extends AbstractCode
         }
 
         if ($data instanceof Src) {
+            if ($data->getType() == 'SearchForm') {
+                return 'FormTest\SearchTest';
+            }
             return $data->getType().'Test';
         } else {
             return 'ControllerTest';
@@ -118,7 +269,11 @@ class CodeTest extends AbstractCode
             return $location;
         }
 
-        $type = $this->str('class', $data->getType());
+        if ($data instanceof Controller) {
+            $type = 'Controller';
+        } else {
+            $type = $this->str('class', $data->getType());
+        }
 
         if ($data instanceof App) {
             $type = 'App'.$type.'Spec';
@@ -173,33 +328,5 @@ class CodeTest extends AbstractCode
         }
 
         return $candidateFunctions;
-    }
-
-    /**
-     *
-     * @param unknown $data
-     * @return boolean|string $html
-     */
-    public function getDependencyTest($data)
-    {
-        if (empty($data->getDependency())) {
-            return '';
-        }
-
-        /* Load Dependency */
-        $this->loadDependencyService($data);
-
-        $html = '';
-
-        $dependency = $this->dependency->getTestInjections($data);
-
-        foreach ($dependency as $item) {
-            $html .= $this->getFileCreator()->renderPartial(
-                'template/module/creator/dependency-test-partial.phtml',
-                $item
-            );
-        }
-
-        return $html;
     }
 }

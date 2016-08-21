@@ -231,7 +231,6 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $columnLabel = $this->str('label', $this->column->getName());
 
         if ($this->column->isNullable() === true) {
-
             //retorna o template para input vazio.
             return $this->format($ndnt, sprintf(static::$mvcFeatureNullTemplate, $columnLabel));
         }
@@ -276,7 +275,6 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
         $sendKeys = '';
 
         for ($i = 0; $i < $maxLength; $i++) {
-
             if (!isset($text[$clock***REMOVED***)) {
                 $clock = 0;
             }
@@ -539,38 +537,6 @@ EOS;
     }
 
     /**
-     * @deprecated Deve ser removido na próxima versão
-     *
-     * @param unknown $base         Texto Basico.
-     * @param string  $whitespace   Se utiliza espaço em branco.
-     * @param string  $isPrimaryKey Se é primary_key da tabela.
-     *
-     * @return unknown|string
-     */
-    public function getBaseMessage($base, $whitespace = false, $isPrimaryKey = false)
-    {
-        if ($whitespace) {
-            $data = '%s %s';
-        } else {
-            $data = '%s%s';
-        }
-
-        if ($isPrimaryKey) {
-            $baseMessage = $base;
-        } else {
-            $baseMessage = sprintf($data, $base, $this->str('label', $this->column->getName()));
-        }
-
-        if (strlen($baseMessage) > $this->column->getCharacterMaximumLength() &&
-            $this->column->getDataType() == 'varchar'
-        ) {
-            $baseMessage = substr($baseMessage, 0, $this->column->getCharacterMaximumLength());
-        }
-        return $baseMessage;
-    }
-
-
-    /**
      * Função usada em \Gear\Service\Mvc\Fixture::getEntityFixture
      * Função default que será chamada caso não esteja declarada nenhuma função de fixture nas classes filhas.
      *
@@ -602,63 +568,6 @@ EOS;
             sprintf('%s%02d', $this->str('var', $this->column->getName()), $number)
         );
     }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getBaseMessage('insert', $this->column);
-
-        $insert = <<<EOS
-            '$columnVar' => '$columnValue',
-
-EOS;
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $columnVar = $this->str('var', $this->column->getName());
-        $columnValue = $this->getBaseMessage('insert', $this->column);
-
-        $insert = <<<EOS
-            '$columnVar' => '$columnValue',
-
-EOS;
-
-        return $insert;
-    }
-
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertAssertByColumn()
-    {
-        $columnClass = $this->str('class', $this->column->getName());
-        $columnValue = $this->getBaseMessage('insert', $this->column);
-
-        $insertAssert = <<<EOS
-        \$this->assertEquals('$columnValue', \$resultSet->get$columnClass());
-
-EOS;
-        return $insertAssert;
-    }
-
 
     /**
      * Função usada em \Gear\Service\Mvc\FormService::getFormInputValues

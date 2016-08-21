@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\BasicTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\BasicNamespaceRepository;
+
+/**
+ * @group Repository
+ */
+class BasicNamespaceRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = new BasicNamespaceRepository();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Basic\BasicNamespaceRepository', $this->repository);
+    }
+}

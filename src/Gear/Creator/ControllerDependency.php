@@ -64,26 +64,7 @@ class ControllerDependency extends AbstractDependency
 
     public function getDependencies()
     {
-        $actions = $this->controller->getActions();
-        if (count($actions)<=0) {
-            return $this;
-        }
-
-        $dependencies = [***REMOVED***;
-
-        foreach ($actions as $action) {
-            $dependencyList = $action->getDependency();
-
-            foreach ($dependencyList as $dependency) {
-                if (in_array($dependency, $dependencies)) {
-                    continue;
-                }
-
-                $dependencies[***REMOVED*** = $dependency;
-                continue;
-            }
-        }
-        $this->dependencies = $dependencies;
+        $this->dependencies = $this->controller->getDependency();
         return $this;
     }
 
@@ -115,7 +96,7 @@ class ControllerDependency extends AbstractDependency
                 $this->useNamespaceToString($namespace);
             }
         }
-        return (!empty($this->namespace)) ? $this->namespace.PHP_EOL : PHP_EOL;
+        return (!empty($this->namespace)) ? $this->namespace : PHP_EOL;
     }
 
     public function getUseAttribute()
@@ -126,13 +107,17 @@ class ControllerDependency extends AbstractDependency
 
 
         if (!empty($dependencies)) {
-            foreach ($dependencies as $dependency) {
+            foreach ($dependencies as $i => $dependency) {
                 $srcName = $this->extractSrcNameFromDependency($dependency);
                 $namespace = sprintf('%sTrait', $srcName);
                 $this->useAttributeToString($namespace);
+
+                if (isset($dependencies[$i+1***REMOVED***)) {
+                    $this->attribute .= PHP_EOL;
+                }
             }
         }
 
-        return (!empty($this->attribute)) ? $this->attribute.PHP_EOL : PHP_EOL;
+        return (!empty($this->attribute)) ? $this->attribute : '';
     }
 }

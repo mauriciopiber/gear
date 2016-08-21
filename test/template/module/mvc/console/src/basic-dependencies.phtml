@@ -1,0 +1,26 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\View\Model\ConsoleModel;
+use MyModule\Repository\MyRepositoryOneTrait;
+use MyModule\Repository\MyRepositoryTwoTrait;
+use MyModule\Repository\MyRepositoryThreeTrait;
+use Zend\Mvc\Controller\AbstractConsoleController;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicDependenciesConsole extends AbstractConsoleController
+{
+    use MyRepositoryOneTrait;
+
+    use MyRepositoryTwoTrait;
+
+    use MyRepositoryThreeTrait;
+}

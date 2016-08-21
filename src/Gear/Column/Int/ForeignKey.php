@@ -162,7 +162,9 @@ EOS;
      */
     public function getValue($iterator)
     {
-        $columName = $this->getTableService()->getReferencedTableValidColumnName($this->constraint->getReferencedTableName());
+        $columName = $this->getTableService()->getReferencedTableValidColumnName(
+            $this->constraint->getReferencedTableName()
+        );
 
         $iterator = $this->getValidForeignKeyId($iterator);
 
@@ -254,62 +256,6 @@ EOS;
             $this->str('label', $this->column->getName()),
             sprintf('$this->%s->get%s()', $this->str('var', $this->column->getName()), $get)
         );
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%d\','.PHP_EOL,
-            $this->str('var', $this->column->getName()),
-            $this->helperStack['insert'***REMOVED***
-        );
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => \'%d\','.PHP_EOL,
-            $this->str('var', $this->column->getName()),
-            $this->helperStack['insert'***REMOVED***
-        );
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     * Controller para assert com os dados do array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertAssertByColumn()
-    {
-        $insertAssert = '        ';
-
-        $insertAssert .= sprintf(
-            '$this->assertEquals(\'%s\', $resultSet->get%s()->getId%s());'.PHP_EOL,
-            $this->helperStack['insert'***REMOVED***,
-            $this->str('class', $this->column->getName()),
-            $this->str('class', $this->getReferencedTableName())
-        );
-
-        return $insertAssert;
     }
 
     /**
