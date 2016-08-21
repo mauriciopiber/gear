@@ -1,0 +1,231 @@
+<?php
+namespace MyModuleTest\ServiceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\SingleDbTableService;
+
+/**
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @group MyModule
+ * @group SingleDbTableService
+ * @group Service
+ */
+class SingleDbTableServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+
+        $this->service = new SingleDbTableService(
+            $this->repository->reveal(),
+            $this->cache->reveal()
+        );
+    }
+
+    public function testSetSelectAllCache()
+    {
+        $this->service->setSessionName('testing');
+
+        $data = $this->service->setSelectAllCache(array('data' => true));
+        $this->assertEquals(array('data' => true), $data);
+        $data = $this->service->setSelectAllCache(array('data' => true));
+        $this->assertEquals(array('data' => true), $data);
+    }
+
+    public function testSelectAllCacheWithCache()
+    {
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'DESC'));
+
+        $this->assertEquals('idSingleDbTable', $this->service->getOrderBy());
+        $this->assertEquals('DESC', $this->service->getOrder());
+
+        $this->service->selectAll();
+
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idSingleDbTable', 'ASC'));
+
+        $this->assertEquals('idSingleDbTable', $this->service->getOrderBy());
+        $this->assertEquals('ASC', $this->service->getOrder());
+
+        $this->service->setRouteMatch(
+            $this->getRouteMatch(1, 'idSingleDbTable', 'DESC')
+        );
+
+        $this->assertEquals(
+            'idSingleDbTable',
+            $this->service->getOrderBy()
+        );
+        $this->assertEquals('DESC', $this->service->getOrder());
+    }
+
+    public function testTableHead()
+    {
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->getTableHead();
+        $this->assertTrue(is_array($resultSet));
+    }
+
+    public function testSelectById()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(1);
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->selectById(1);
+        $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
+        $this->assertEquals(1, $resultSet->getIdSingleDbTable());
+    }
+
+    public function testSelectOne()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(30);
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectOneBy(['idSingleDbTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->selectOneBy(
+            array(
+                'idSingleDbTable' =>
+                    30
+            )
+        );
+        $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
+        $this->assertEquals(
+            30,
+            $resultSet->getIdSingleDbTable()
+        );
+    }
+
+    /**
+     * @group service.create
+     */
+    public function testCreate()
+    {
+        $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $entity->getIdSingleDbTable()->willReturn(31);
+
+        $data = array(
+        );
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+
+        $resultSet = $this->service->create($data);
+
+        $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdSingleDbTable());
+
+        return $resultSet;
+    }
+
+    /**
+     * @group service.update
+     */
+    public function testUpdate()
+    {
+        $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $entity->getIdSingleDbTable()->willReturn(31);
+
+        $data = array(
+        );
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $this->service->setCache($this->cache->reveal());
+
+
+        $resultSet = $this->service
+            ->update(31, $data);
+
+
+        $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdSingleDbTable());
+
+        return $resultSet;
+    }
+
+    /**
+     * @group service.delete
+     */
+    public function testDelete()
+    {
+        $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $entity->getIdSingleDbTable()->willReturn(31);
+
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
+        $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
+
+        $this->service->setCache($this->cache->reveal());
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->delete(31);
+        $this->assertTrue($resultSet);
+    }
+
+    /**
+     * @group service.delete
+     */
+    public function testDeleteWithoutExistingData()
+    {
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->delete(31);
+        $this->assertFalse($resultSet['success'***REMOVED***);
+        $this->assertEquals('EntityNotFound', $resultSet['error'***REMOVED***);
+    }
+
+    /**
+     * @group service.extract
+     */
+    public function testExtract()
+    {
+        $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $entity->getIdSingleDbTable()->willReturn(31);
+
+        $data = ['idSingleDbTableService' => 31***REMOVED***;
+        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
+        $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
+
+        $this->service->setSingleDbTableRepository($this->repository->reveal());
+
+        $resultSet = $this->service->extract($entity->reveal());
+        $this->assertEquals($data, $resultSet);
+    }
+
+    public function getRouteMatch($page, $orderBy = 'idSingleDbTable', $order = 'DESC')
+    {
+        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+            'controller' => 'MyModule\Controller\SingleDbTable',
+            'action'     => 'list',
+            'page' => $page,
+            'orderBy' => $orderBy,
+            'order' => $order
+        ));
+
+        $routeMatch->setMatchedRouteName('my-module/single-db-table');
+        return $routeMatch;
+    }
+}

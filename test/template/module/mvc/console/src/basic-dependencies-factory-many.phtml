@@ -1,0 +1,100 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\View\Model\ConsoleModel;
+use MyModule\Repository\MyRepositoryOneTrait;
+use MyModule\Repository\MyRepositoryTwoTrait;
+use MyModule\Repository\MyRepositoryThreeTrait;
+use Zend\Mvc\Controller\AbstractConsoleController;
+use MyModule\Repository\MyRepositoryOne;
+use MyModule\Repository\MyRepositoryTwo;
+use MyModule\Repository\MyRepositoryThree;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicDependenciesFactoryManyConsole extends AbstractConsoleController
+{
+    use MyRepositoryOneTrait;
+
+    use MyRepositoryTwoTrait;
+
+    use MyRepositoryThreeTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyRepositoryOne   $myRepositoryOne   My Repository One
+     * @param MyRepositoryTwo   $myRepositoryTwo   My Repository Two
+     * @param MyRepositoryThree $myRepositoryThree My Repository Three
+     *
+     * @return \MyModule\Controller\BasicDependenciesFactoryManyConsole
+     */
+    public function __construct(
+        MyRepositoryOne $myRepositoryOne,
+        MyRepositoryTwo $myRepositoryTwo,
+        MyRepositoryThree $myRepositoryThree
+    ) {
+        $this->myRepositoryOne = $myRepositoryOne;
+        $this->myRepositoryTwo = $myRepositoryTwo;
+        $this->myRepositoryThree = $myRepositoryThree;
+
+        return $this;
+    }
+
+    /**
+     * First Action
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function firstActionAction()
+    {
+        return new ConsoleModel([***REMOVED***);
+    }
+
+    /**
+     * Second Action
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function secondActionAction()
+    {
+        return new ConsoleModel([***REMOVED***);
+    }
+
+    /**
+     * Third Action
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function thirdActionAction()
+    {
+        return new ConsoleModel([***REMOVED***);
+    }
+
+    /**
+     * Four Action
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function fourActionAction()
+    {
+        return new ConsoleModel([***REMOVED***);
+    }
+
+    /**
+     * Five Action
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function fiveActionAction()
+    {
+        return new ConsoleModel([***REMOVED***);
+    }
+}

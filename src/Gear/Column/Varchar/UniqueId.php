@@ -92,7 +92,6 @@ class UniqueId extends Varchar implements
     public function getRepositoryTestUpdateData()
     {
         return $this->getRepositoryTestInsertData();
-
     }
 
     /**

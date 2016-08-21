@@ -38,7 +38,23 @@ class ConsoleController extends AbstractMvc
         $this->fileName = sprintf('%s.php', $controller->getName());
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
+            'implements' => $this->getCode()->getImplements($controller),
+            'extends' => $this->getCode()->getExtends($controller),
+            'attribute' => $this->getCode()->getUseAttribute($controller),
+            'use' => $this->getCode()->getUse($controller),
+            'namespace' => $this->getCode()->getNamespace($controller),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'actions' => $controller->getAction(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getName()),
+        ***REMOVED***;
 
+        $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
+          ? $this->getCode()->getConstructor($controller)
+          : '';
 
         $this->template = 'template/module/mvc/console-controller/controller.phtml';
 
@@ -50,21 +66,9 @@ class ConsoleController extends AbstractMvc
 
 
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
-        $this->file->setOptions(
-            [
-                'extends' => $this->getCode()->getExtends($controller),
-                'use' => $this->getCode()->getUse($controller),
-                'namespace' => $this->getCode()->getNamespace($controller),
-                'module' => $this->getModule()->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName()),
+        $this->file->setOptions($options);
 
-            ***REMOVED***
-        );
-
-        if ($controller->getService()->getService() == 'factories') {
+        if ($controller->getService() == 'factories') {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 
@@ -90,19 +94,9 @@ class ConsoleController extends AbstractMvc
         $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
 
 
-        $lines = $this->getCode()->inject($this->fileCode, $this->functions);
+        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
-
-        /*      if ($this->controller->getService()->getService() == 'factories') {
-
-        $this->getFactoryService()->createFactory($this->controller, $this->location);
-        $arguments = $this->getCode()->getConstructorArguments($this->controller);
-        var_dump($arguments);
-        $params = $this->getCode()->getConstructorParams($this->controller);
-        var_dump($params);
-        } */
-
 
         $newFile = implode(PHP_EOL, $lines);
 
@@ -118,14 +112,20 @@ class ConsoleController extends AbstractMvc
         $this->functions = '';
 
         foreach ($insertMethods as $method) {
+            $label = $this->str('label', $method->getName());
+
             $this->functions .= <<<EOS
+
+    /**
+     * {$label}
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
     public function {$this->str('var', $method->getName())}Action()
     {
-        return new ConsoleModel(
-            array(
-            )
-        );
+        return new ConsoleModel([***REMOVED***);
     }
+
 EOS;
         }
 

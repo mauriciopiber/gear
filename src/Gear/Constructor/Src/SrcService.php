@@ -19,6 +19,7 @@ use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
+use Gear\Mvc\InterfaceServiceTrait;
 
 class SrcService extends AbstractJsonService
 {
@@ -49,6 +50,8 @@ class SrcService extends AbstractJsonService
 
     use FixtureServiceTrait;
 
+    use InterfaceServiceTrait;
+
     public function create(array $data)
     {
         $module = $this->getModule()->getModuleName();
@@ -64,7 +67,8 @@ class SrcService extends AbstractJsonService
             (isset($data['abstract'***REMOVED***) ? $data['abstract'***REMOVED*** : null),
             (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
             (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
-            (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null)
+            (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null),
+            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null)
         );
 
         if ($this->src->getDb() !== null) {
@@ -115,6 +119,7 @@ class SrcService extends AbstractJsonService
                     $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
+
                 case 'Factory':
                     $factory = $this->getFactoryService();
                     $status = $factory->create($this->src);
@@ -126,6 +131,10 @@ class SrcService extends AbstractJsonService
                 case 'Fixture':
                     $fixture = $this->getFixtureService();
                     $status = $fixture->create($this->src);
+                    break;
+                case 'Interface':
+                    $interface = $this->getInterfaceService();
+                    $status = $interface->create($this->src);
                     break;
                 default:
                     throw new \Gear\Constructor\Src\Exception\SrcTypeNotFoundException();

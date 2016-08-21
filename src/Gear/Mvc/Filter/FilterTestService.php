@@ -8,7 +8,7 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 
 class FilterTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     public function create($src)
     {
@@ -17,12 +17,21 @@ class FilterTestService extends AbstractMvcTest
             $this->db = $this->src->getDb();
             return $this->createDb();
         }
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $location = $this->getCodeTest()->getLocation($src);
 
+        if ($this->src->getAbstract() !== true) {
+
+            $this->getTraitTestService()->createTraitTest($src, $location);
+
+            if ($this->src->getService() == 'factories') {
+                $this->getFactoryTestService()->createFactoryTest($src, $location);
+            }
+        }
+
+
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/filter/test-src.phtml',
+            'template/module/mvc/filter-test/src/test-src.phtml',
             array(
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
@@ -30,7 +39,6 @@ class FilterTestService extends AbstractMvcTest
                 'var' => $this->str('var-lenght', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'mock'  => $mock
             ),
             $this->src->getName().'Test.php',
             $location
@@ -161,9 +169,7 @@ class FilterTestService extends AbstractMvcTest
 
         if (count($columnsDb)>0) {
             foreach ($columnsDb as $column) {
-
-                if (
-                    $column instanceof Gear\Column\Int\PrimaryKey
+                if ($column instanceof Gear\Column\Int\PrimaryKey
                     || $column instanceof Gear\Column\Varchar\UniqueId
                 ) {
                     continue;
@@ -173,8 +179,7 @@ class FilterTestService extends AbstractMvcTest
                     $columns .= $column->getFilterValidPost();
                 }
 
-                if (
-                    $column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
+                if ($column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
                     && !in_array(get_class($column), $onlyOneFunction)
                 ) {
                     $this->functions .= $column->getFilterFunction();
@@ -205,6 +210,8 @@ class FilterTestService extends AbstractMvcTest
         $this->class     = $this->str('class', $this->src->getName());
         $this->var       = $this->str('var-lenght', $this->src->getName());
 
+        $location = $this->getCodeTest()->getLocation($this->src);
+
         $this->functions = '';
 
         //validate-max
@@ -217,20 +224,41 @@ class FilterTestService extends AbstractMvcTest
         //sucesso
         $this->getTestValidReturnTrue();
 
+
+        $this->src->setDependency([
+            '\Zend\Db\Adapter\Adapter',
+            'translator' => '\Zend\Mvc\I18n\Translator'
+        ***REMOVED***);
+
         $module = $this->getModule()->getModuleName();
+
+        $options =  [
+            'var' => $this->str('var-lenght', $this->src->getName()),
+            'className'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'functions' => $this->functions,
+            'namespace' => $this->getCodeTest()->getNamespace($this->src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter-test/db/constructor/'.$this->src->getService().'.phtml',
+            [
+                'className' => $this->src->getName()
+            ***REMOVED***
+        );
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
 
         //criar teste com fixture correta, passando válido.
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/filter/db/test.phtml',
-            array(
-                'var' => $this->str('var-lenght', $this->src->getName()),
-                'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-                'functions' => $this->functions
-            ),
+            'template/module/mvc/filter-test/db/test.phtml',
+            $options,
             $this->src->getName().'Test.php',
-            $this->getModule()->getTestFilterFolder()
+            $location
         );
     }
 }

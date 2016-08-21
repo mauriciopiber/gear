@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\BasicExtendsForm;
+
+/**
+ * @group Form
+ */
+class BasicExtendsFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new BasicExtendsForm();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Form\BasicExtendsForm',
+            $this->form
+        );
+    }
+}

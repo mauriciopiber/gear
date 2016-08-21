@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\BasicTest\FeatureTest\IssueTest\TaskTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\Feature\Issue\Task\LongNamespaceRepository;
+
+/**
+ * @group Repository
+ */
+class LongNamespaceRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = new LongNamespaceRepository();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Basic\Feature\Issue\Task\LongNamespaceRepository', $this->repository);
+    }
+}

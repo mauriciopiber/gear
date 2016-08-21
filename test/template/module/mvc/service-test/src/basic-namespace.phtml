@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\BasicTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\BasicNamespaceService;
+
+/**
+ * @group Service
+ */
+class BasicNamespaceServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = new BasicNamespaceService();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Basic\BasicNamespaceService', $this->service);
+    }
+}

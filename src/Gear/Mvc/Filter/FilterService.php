@@ -17,6 +17,8 @@ use GearJson\Schema\SchemaServiceTrait;
 
 class FilterService extends AbstractMvc
 {
+    public static $extends = '\Zend\InputFilter\InputFilter';
+
     use SchemaServiceTrait;
 
     use FilterTestServiceTrait;
@@ -36,8 +38,7 @@ class FilterService extends AbstractMvc
 
         $filters = [***REMOVED***;
         foreach ($data as $columnData) {
-            if (
-                $columnData instanceof \Gear\Column\Int\PrimaryKey
+            if ($columnData instanceof \Gear\Column\Int\PrimaryKey
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId
             ) {
                 continue;
@@ -66,50 +67,80 @@ class FilterService extends AbstractMvc
         $this->tableName   = $this->db->getTable();
         $this->tableObject = $this->db->getTableObject();
 
+        $location = $this->getCode()->getLocation($this->src);
 
         $inputValues = $this->getFilterValues();
 
 
-        $fileCreate = $this->getFileCreator();
+        $this->file = $this->getFileCreator();
 
-        $fileCreate->addChildView(array(
+        $options = [
+            'package' => $this->getCode()->getClassDocsPackage($this->src),
+            'tableLabel' => $this->str('label', $this->db->getTable()),
+            'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
+            'class'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName(),
+            'namespace' => $this->getCode()->getNamespace($this->src)
+        ***REMOVED***;
+
+
+        $this->src->setDependency([
+            '\Zend\Db\Adapter\Adapter',
+            'translator' => '\Zend\Mvc\I18n\Translator'
+        ***REMOVED***);
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
+        $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getUseConstructor($this->src, [
+              '\Zend\Db\Adapter\Adapter',
+              '\Zend\Mvc\I18n\Translator'
+          ***REMOVED***)
+          : '';
+
+        $this->file->addChildView(array(
             'template' => 'template/module/mvc/filter/collection/element.phtml',
             'config' => array('elements' => $inputValues),
             'placeholder' => 'filterElements'
         ));
 
-        $fileCreate->setTemplate('template/module/mvc/filter/full.filter.phtml');
-        $fileCreate->setOptions(
-            array(
-                'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
-                'class'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
-            )
-        );
-        $fileCreate->setFileName($this->src->getName().'.php');
-        $fileCreate->setLocation($this->getModule()->getFilterFolder());
+
+        $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');
+
+        $this->file->setOptions($options);
+
+        $this->file->setFileName($this->src->getName().'.php');
+        $this->file->setLocation($location);
 
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
-            $fileCreate->addChildView(array(
-                'template' => 'template/module/mvc/filter/full.filter.header.unique.phtml',
+            $this->file->addChildView([
+                'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
                 'config' => array(
-                    'class' => $this->str('class', $this->tableName),
+                    'class' => $this->str('class', $this->src->getName()),
                     'var'     => $this->str('var-lenght', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
-            ));
+            ***REMOVED***);
         } else {
-            $fileCreate->addChildView(array(
-                'template' => 'template/module/mvc/filter/full.filter.header.phtml',
-                'config' => array(),
+            $this->file->addChildView([
+                'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
+                'config' => array(
+                    'class' => $this->str('class', $this->src->getName()),
+                    'var'     => $this->str('var-lenght', 'id'.$this->tableName),
+                ),
                 'placeholder' => 'header'
-            ));
+            ***REMOVED***);
         }
 
         $this->getFilterTestService()->introspectFromTable($this->db);
 
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
 
-        return $fileCreate->render();
+        return $this->file->render();
     }
 
 
@@ -147,6 +178,10 @@ class FilterService extends AbstractMvc
             return $this->createDb();
         }
 
+        if (empty($this->src->getExtends())) {
+            $this->src->setExtends(static::$extends);
+        }
+
         $location = $this->getCode()->getLocation($this->src);
 
         $this->getTraitService()->createTrait($this->src, $location);
@@ -158,16 +193,23 @@ class FilterService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
-        $this->getFileCreator()->createFile(
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($this->src),
+            'namespace' => $this->getCode()->getNamespace($this->src),
+            'extends'    => $this->getCode()->getExtends($this->src),
+            'use'       => $this->getCode()->getUse($this->src),
+            //'attributes' => $this->getCode()->getUseAttribute($this->src),
+            'class'   => $this->src->getName(),
+            'module'  => $this->getModule()->getModuleName()
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->src)
+          : '';
+
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/filter/src.phtml',
-            array(
-                'namespace' => $this->getCode()->getNamespace($this->src),
-                'extends'    => $this->getCode()->getExtends($this->src),
-                'uses'       => $this->getCode()->getUse($this->src),
-                'attributes' => $this->getCode()->getUseAttribute($this->src),
-                'class'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName()
-            ),
+            $options,
             $this->src->getName().'.php',
             $location
         );

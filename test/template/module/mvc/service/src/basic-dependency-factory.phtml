@@ -1,0 +1,33 @@
+<?php
+namespace MyModule\Service;
+
+use MyModule\Service\MyDependencyTrait;
+use MyModule\Service\MyDependency;
+
+/**
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicDependencyFactoryService
+{
+    use MyDependencyTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyDependency $myDependency My Dependency
+     *
+     * @return \MyModule\Service\BasicDependencyFactoryService
+     */
+    public function __construct(MyDependency $myDependency)
+    {
+        $this->myDependency = $myDependency;
+
+        return $this;
+    }
+}

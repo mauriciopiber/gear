@@ -1,14 +1,33 @@
-namespace <?php echo $this->module;?>\Form\Search;
+namespace <?php echo $this->namespace;?>;
 
 use GearBase\Form\Search\AbstractSearchForm;
+use Doctrine\ORM\EntityManager;
 use Zend\Form\Element;
 
+/**
+ * Search Form for <?php echo $this->tableLabel;?> Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Form
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?>SearchForm extends AbstractSearchForm
 {
+
     /**
+     * Construct Controller
+     *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @param EntityManager $entityManager EntityManager
+     *
+     * @return <?php echo $this->class;?>SearchForm
      */
-    public function __construct($entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         parent::__construct('<?php echo $this->var;?>SearchForm');
         $this->setAttribute('method', 'post');
@@ -40,5 +59,7 @@ endforeach;
             'data-ng-click' => 'list.clearSearch()'
         ));
         $this->add($submit);
+
+        return $this;
     }
 }

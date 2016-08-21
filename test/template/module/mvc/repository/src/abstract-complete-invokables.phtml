@@ -1,0 +1,29 @@
+<?php
+namespace MyModule\Greatest;
+
+use MyModule\ColumnInterface\RepositoryBeforeInterface;
+use MyModule\ColumnInterface\RepositoryAfterInterface;
+use MyModule\Repository\MyDependencyOneTrait;
+use MyModule\Logic\MyDependencyTwoTrait;
+use MyModule\Mvc\MyDependencyThreeTrait;
+use MyModule\Repository\AbstractRepository;
+
+/**
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package MyModule/Greatest
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+abstract class AbstractCompleteInvokablesRepository extends AbstractRepository implements
+    RepositoryBeforeInterface,
+    RepositoryAfterInterface
+{
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+}

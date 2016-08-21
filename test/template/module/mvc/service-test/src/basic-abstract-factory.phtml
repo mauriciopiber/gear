@@ -1,0 +1,33 @@
+<?php
+namespace MyModuleTest\ServiceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\BasicAbstractFactoryService;
+
+/**
+ * @group Service
+ */
+class BasicAbstractFactoryServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->className = 'MyModule\Service\BasicAbstractFactoryService';
+
+        $this->service = $this->getMockBuilder($this->className)
+            ->disableoriginalConstructor()
+            ->getMockForAbstractClass();
+    }
+
+    public function testClassExists()
+    {
+        $reflectedClass = new \ReflectionClass($this->className);
+        $constructor = $reflectedClass->getConstructor();
+        $class = $constructor->invoke(
+            $this->service
+        );
+
+        $this->assertInstanceOf('MyModule\Service\BasicAbstractFactoryService', $class);
+    }
+}

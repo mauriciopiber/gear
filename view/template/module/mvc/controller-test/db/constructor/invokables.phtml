@@ -1,0 +1,23 @@
+
+        $this->controller = new <?php echo $this->controllerName; ?>();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => '<?php echo $this->controllerName; ?>'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $this-><?php echo $this->tableVar;?>Form = $this->prophesize('<?php echo $this->form;?>');
+<?php echo $this->setUp;?>
+        $this-><?php echo $this->tableVar;?>SearchForm = $this->prophesize('<?php echo $this->search;?>');
+        $this-><?php echo $this->tableVar;?>Service = $this->prophesize('<?php echo $this->service;?>');
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+        $this->controller->set<?php echo $this->tableName;?>Form($this-><?php echo $this->tableVar;?>Form->reveal());
+        $this->controller->set<?php echo $this->tableName;?>Service($this-><?php echo $this->tableVar;?>Service->reveal());
+        $this->controller->set<?php echo $this->tableName;?>SearchForm($this-><?php echo $this->tableVar;?>SearchForm->reveal());

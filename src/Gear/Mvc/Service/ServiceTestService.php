@@ -9,7 +9,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
 
 class ServiceTestService extends AbstractMvcTest
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     const KEY_INSERT = 68;
 
@@ -30,12 +30,6 @@ class ServiceTestService extends AbstractMvcTest
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
-
-        $this->setBaseArray(array(
-            'method' => $this->tableName.'Service',
-            'module' => $this->getModule()->getModuleName(),
-            'entityName' => $this->tableName
-        ));
 
         $this->usePrimaryKey = true;
 
@@ -74,9 +68,7 @@ class ServiceTestService extends AbstractMvcTest
         $this->updateMock = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-
-            if (
-                $column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface
                 && !in_array(get_class($column), $onlyOneSetUp)
             ) {
                 $this->setUp .= $column->getServiceSetUp();
@@ -93,8 +85,7 @@ class ServiceTestService extends AbstractMvcTest
                 //$onlyOneUpdate[***REMOVED*** = get_class($column);
             }
 
-            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface)
-            {
+            if ($column instanceof \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface) {
                 $this->createValues .= $column->getServiceFixtureData();
                 $this->updateValues .= $column->getServiceFixtureData();
             }
@@ -103,11 +94,16 @@ class ServiceTestService extends AbstractMvcTest
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
+        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
+        $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
-        $options = array(
+        $options = [
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
+            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'entity' => $this->getServiceManager()->getServiceName($this->entity),
             'createValues' => $this->createValues,
             'updateValues' => $this->updateValues,
-            'setUp' => $this->setUp,
             'updateMock' => $this->updateMock,
             'createMock' => $this->createMock,
             'static' => $this->getColumnService()->renderColumnPart('staticTest'),
@@ -119,16 +115,51 @@ class ServiceTestService extends AbstractMvcTest
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+        ***REMOVED***;
+
+        $construct = [
+            'className' => $this->src->getName(),
+            'table' => $this->db->getTable(),
+            'service' => $this->getServiceManager()->getServiceName($this->src),
+            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'setUp' => $this->setUp,
+        ***REMOVED***;
+
+
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
+        ) {
+            $dep = $this->src->getDependency();
+            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
+            $this->src->setDependency($dep);
+        }
+
+        if ($this->src->getService() === 'factories') {
+
+            $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+        }
+
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/service-test/db/constructor/'.$this->src->getService().'.phtml',
+            $construct
         );
 
-        $location = $this->getModule()->getTestServiceFolder();
+        $location = $this->getCodeTest()->getLocation($this->src);
 
-        $fileCreator->setView('template/module/mvc/service/db/db-test.phtml');
+
+
+        $fileCreator->setView('template/module/mvc/service-test/db/db-test.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setLocation($location);
         $fileCreator->setFileName($this->src->getName().'Test.php');
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
 
         return $fileCreator->render();
     }
@@ -145,32 +176,49 @@ class ServiceTestService extends AbstractMvcTest
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        if ($src->getService() == static::$factories) {
+        if ($src->getService() == static::$factories && $src->getAbstract() === false) {
             $this->getFactoryTestService()->createFactoryTest($src, $location);
         }
 
-        $this->getTraitTestService()->createTraitTest($src, $location);
+        if ($src->getAbstract() === false) {
+            $this->getTraitTestService()->createTraitTest($src, $location);
+        }
 
 
-        $template = 'template/module/mvc/service/src/src-test.phtml';
-
-        $fileName = $this->src->getName().'Test.php';
-
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
-
-
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
 
         $options = [
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-            'functions' => $this->dependency->getTests(),
             'var' => $this->str('var-lenght', $this->src->getName()),
-            'mock' => $mock,
             'className'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName()
         ***REMOVED***;
+
+        if ($this->src->getService() === 'factories') {
+
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
+
+            $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+
+            if ($this->src->getAbstract() === true) {
+                $options['dependencyReveal'***REMOVED*** = $this->getCodeTest()->getDependencyReveal($this->src);
+            } else {
+                $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+            }
+
+        } else {
+            //add abstract-factory
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';
+        }
+
+
+        $template = 'template/module/mvc/service-test/src/'.$templateView.'.phtml';
+
+        $fileName = $this->src->getName().'Test.php';
+
+
+
 
 
         $this->srcFile = $this->getFileCreator();

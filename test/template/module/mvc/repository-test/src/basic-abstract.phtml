@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\RepositoryTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Repository\BasicAbstractRepository;
+
+/**
+ * @group Repository
+ */
+class BasicAbstractRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = $this->getMockForAbstractClass('MyModule\Repository\BasicAbstractRepository', [***REMOVED***, '', false);
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Repository\BasicAbstractRepository', $this->repository);
+    }
+}

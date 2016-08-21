@@ -1,0 +1,53 @@
+<?php
+namespace MyModule\Filter;
+
+use GearBase\Filter\AbstractFilter;
+
+/**
+ * Filter for Single Db Table Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Filter
+ * @package MyModule/Filter
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class SingleDbTableFilter extends AbstractFilter
+{
+
+    /**
+     * Get The Input Filter
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return SingleDbTableFilter
+     */
+    public function getInputFilter()
+    {
+        $messageMax = 'O valor deve ter no máximo %max% caracteres';
+        $messageMin = 'O valor deve ter no mínimo %min% caracteres';
+        $this->add(
+            array(
+                'name' => 'singleDbColumn',
+                'required' => false,
+                'filters'    => array(array('name' => 'StringTrim')),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'min' => 3,
+                            'max' => 60,
+                            'messages' => [
+                                \Zend\Validator\StringLength::TOO_SHORT => $messageMin,
+                                \Zend\Validator\StringLength::TOO_LONG => $messageMax
+                            ***REMOVED***
+                        )
+                    )
+                )
+            )
+        );
+        return $this;
+    }
+}

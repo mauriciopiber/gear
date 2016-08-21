@@ -3,14 +3,28 @@ namespace <?php echo $this->module;?>\Controller;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package <?php echo $this->module;?>/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class IndexControllerFactory implements FactoryInterface
 {
+    /**
+     * Create Index Controller
+     *
+     * @param ServiceLocatorInterface $controllerManager Controller Manager
+     *
+     * @return <?php echo $this->module;?>\Controller\IndexController
+     */
     public function createService(ServiceLocatorInterface $controllerManager)
     {
+        unset($controllerManager);
         $indexController = new \<?php echo $this->module;?>\Controller\IndexController();
-        $serviceLocator = $controllerManager->getServiceLocator();
-        $eventManager = $serviceLocator->get('eventManager');
-        $application = $serviceLocator->get('application');
         return $indexController;
     }
 }

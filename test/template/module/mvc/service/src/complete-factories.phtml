@@ -1,0 +1,53 @@
+<?php
+namespace MyModule\Greatest;
+
+use MyModule\ColumnInterface\ServiceBeforeInterface;
+use MyModule\ColumnInterface\ServiceAfterInterface;
+use MyModule\Service\MyDependencyOneTrait;
+use MyModule\Logic\MyDependencyTwoTrait;
+use MyModule\Mvc\MyDependencyThreeTrait;
+use MyModule\Service\AbstractService;
+use MyModule\Service\MyDependencyOne;
+use MyModule\Logic\MyDependencyTwo;
+use MyModule\Mvc\MyDependencyThree;
+
+/**
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Greatest
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class CompleteFactoriesService extends AbstractService implements
+    ServiceBeforeInterface,
+    ServiceAfterInterface
+{
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyDependencyOne   $myDependencyOne   My Dependency One
+     * @param MyDependencyTwo   $myDependencyTwo   My Dependency Two
+     * @param MyDependencyThree $myDependencyThree My Dependency Three
+     *
+     * @return \MyModule\Greatest\CompleteFactoriesService
+     */
+    public function __construct(
+        MyDependencyOne $myDependencyOne,
+        MyDependencyTwo $myDependencyTwo,
+        MyDependencyThree $myDependencyThree
+    ) {
+        $this->myDependencyOne = $myDependencyOne;
+        $this->myDependencyTwo = $myDependencyTwo;
+        $this->myDependencyThree = $myDependencyThree;
+
+        return $this;
+    }
+}

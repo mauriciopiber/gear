@@ -18,13 +18,12 @@ class TestService extends AbstractMvc
 
     public function createTestsModuleAsProject($type = 'web')
     {
-        $this->createBootstrapModuleAsProject();
         $this->copyBuildXmlFile($type);
         $this->copyphpdox();
         $this->copyphpmd();
         $this->copyphpunit();
         $this->copyphpunitcoverage();
-        $this->copyphpunitfast();
+        //$this->copyphpunitfast();
         $this->copyDocSniff();
         $this->copyphpunitbenchmark();
         $this->copyphpunitcoveragebenchmark();
@@ -37,31 +36,6 @@ class TestService extends AbstractMvc
         $this->createBootstrap();
         return true;
     }
-
-    public function createBootstrapModuleAsProject()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/test/zend-service-locator-as-project.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-            ),
-            'ZendServiceLocator.php',
-            $this->getModule()->getTestFolder()
-        );
-    }
-
-    public function createBootstrap()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/test/zend-service-locator.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-            ),
-            'ZendServiceLocator.php',
-            $this->getModule()->getTestFolder()
-        );
-    }
-
 
     public function copyphpdox()
     {
@@ -105,11 +79,11 @@ class TestService extends AbstractMvc
     public function copyphpunitcoverage()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/phpunitci.xml.phtml',
+            'template/module/test/phpunit-coverage.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
-            'phpunitci.xml',
+            'phpunit-coverage.xml',
             $this->getModule()->getTestFolder()
         );
     }

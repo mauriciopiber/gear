@@ -5,8 +5,25 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Factory\AbstractFactory;
 use <?php echo $this->module;?>\Form\Search\<?php echo str_replace('Factory', '', $this->class)?>Form;
 
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?> extends AbstractFactory
 {
+
+    /**
+     * Create  <?php echo str_replace('Factory', '', $this->class)?>Form
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     *
+     * @return \<?php echo $this->module;?>\Form\Search\<?php echo str_replace('Factory', '', $this->class)?>Form
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $form = new <?php echo str_replace('Factory', '', $this->class)?>Form(

@@ -1,0 +1,46 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\TableForm;
+
+/**
+ * @group MyModule
+ * @group TableForm
+ * @group Form
+ */
+class TableFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->form = new TableForm($entityManager->reveal());
+    }
+
+    public function testHasColumn()
+    {
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('idMyController'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('dateColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('datePtBrColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('datetimeColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('datetimePtBrColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('timeColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('decimalColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('moneyPtBrColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('checkboxColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('idForeignKeyColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('intColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('htmlColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('textColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('tinyintColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('checkboxColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('emailColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('passwordVerifyColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('telephoneColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('uploadImageColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('urlColumn'));
+        $this->assertInstanceOf('Zend\Form\Element', $this->form->get('varcharColumn'));
+    }
+}

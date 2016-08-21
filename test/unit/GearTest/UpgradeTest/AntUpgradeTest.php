@@ -229,6 +229,14 @@ EOS;
             ['phpunit-coverage-benchmark'***REMOVED***,
             ['phpcs-docs'***REMOVED***,
             ['phpcs-docs-file'***REMOVED***,
+            ['phpunit'***REMOVED***,
+            ['phpunit-group'***REMOVED***,
+            ['phpunit-coverage'***REMOVED***,
+            ['phpunit-coverage-group'***REMOVED***,
+            ['phpmd-test'***REMOVED***,
+            ['phpcpd-test'***REMOVED***,
+            ['phpcs-test'***REMOVED***,
+            ['test'***REMOVED***
         ***REMOVED***;
     }
 

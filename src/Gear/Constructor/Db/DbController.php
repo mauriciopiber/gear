@@ -17,7 +17,9 @@ class DbController extends AbstractConsoleController
             'table'   => $this->getRequest()->getParam('table'),
             'columns' => $this->getRequest()->getParam('columns', array()),
             'user'    => $this->getRequest()->getParam('user', 'all'),
-            'role'    => $this->getRequest()->getParam('role', 'admin')
+            'role'    => $this->getRequest()->getParam('role', 'admin'),
+            'namespace' => $this->getRequest()->getParam('namespace', null),
+            'service' => $this->getRequest()->getParam('service', 'invokabls')
         ***REMOVED***;
 
         $this->getDbConstructor()->create($params);

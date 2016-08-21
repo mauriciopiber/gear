@@ -7,10 +7,11 @@ use GearJson\Db\Db;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
+use Gear\Mvc\Repository\ColumnInterface\ShitInterface;
 
-class RepositoryTestService extends AbstractMvcTest
+class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 {
-    use ServiceManagerTrait;
+    //use ServiceManagerTrait;
 
     protected $tableName;
     protected $tableColumns;
@@ -19,23 +20,6 @@ class RepositoryTestService extends AbstractMvcTest
     const KEY_INSERT = 88;
 
     const KEY_UPDATE = 98;
-
-    public function createAbstract($className = null)
-    {
-        if (empty($className)) {
-            $className = 'AbstractRepository';
-        }
-
-        return $this->getFileCreator()->createFile(
-            'template/module/test/unit/repository/abstract.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'className' => $className
-            ),
-            $className.'Test.php',
-            $this->getModule()->getTestRepositoryFolder()
-        );
-    }
 
     public function createFromSrc(Src $src)
     {
@@ -49,27 +33,46 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
-        $this->functions  = $this->dependency->getTests();
+        $options = [
+            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
+            'className'  => $src->getName(),
+            'var'        => $this->str('var-lenght', $this->src->getName()),
+            'module'     => $this->getModule()->getModuleName()
+        ***REMOVED***;
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        $this->getTraitTestService()->createTraitTest($this->src, $location);
+        if ($this->src->getAbstract() !== true) {
+            $this->getTraitTestService()->createTraitTest($this->src, $location);
+        }
 
+        if ($this->src->getService() === 'factories' && $this->src->getAbstract() == false) {
 
-        $mock = $this->str('var-lenght', 'mock'.$this->src->getName());
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
+
+        if ($this->src->getService() === 'factories') {
+
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
+
+            $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
+
+            if ($this->src->getAbstract() === true) {
+                $options['dependencyReveal'***REMOVED*** = $this->getCodeTest()->getDependencyReveal($this->src);
+            } else {
+                $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
+            }
+
+        } else {
+            //add abstract-factory
+            $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';
+        }
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/test-src.phtml',
-            array(
-                'callable' => $this->getServiceManager()->getServiceName($this->src),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
-                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-                'mock'       => $mock,
-                'functions'  => $this->functions,
-                'var'        => $this->str('var-lenght', $this->src->getName()),
-                'className'  => $src->getName(),
-                'module'     => $this->getModule()->getModuleName()
-            ),
+            'template/module/mvc/repository-test/src/'.$templateView.'.phtml',
+            $options,
             $this->src->getName().'Test.php',
             $location
         );
@@ -81,32 +84,31 @@ class RepositoryTestService extends AbstractMvcTest
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->repository = true;
-
-        $this->setBaseArray(array(
-            'method' => $this->tableName, 'module' => $this->getModule()->getModuleName()
-        ));
-
         $this->usePrimaryKey = true;
 
-        $location = $this->getModule()->getTestRepositoryFolder();
-
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
+
+        $location = $this->getCodeTest()->getLocation($this->src);
+
+
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
-        $options = array(
-            'static'       => $this->getColumnService()->renderColumnPart('staticTest'),
-            'varLenght'    => $this->str('var-lenght', $this->tableName),
-            'class'        => $this->tableName,
-            'module'       => $this->getModule()->getModuleName(),
-            'hydrator'     => ['update' => ''***REMOVED***,
-            'persist'      => ['create' => '', 'update' => ''***REMOVED***,
-            'data'         => ['create' => '', 'update' => ''***REMOVED***
-        );
+        $options = [
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
+            'className'     => $this->src->getName(),
+            'static'        => $this->getColumnService()->renderColumnPart('staticTest'),
+            'varLenght'     => $this->str('var-lenght', $this->tableName),
+            'class'         => $this->tableName,
+            'module'        => $this->getModule()->getModuleName(),
+            'hydrator'      => ['update' => ''***REMOVED***,
+            'persist'       => ['create' => '', 'update' => ''***REMOVED***,
+            'data'          => ['create' => '', 'update' => ''***REMOVED***
+        ***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($table) as $column) {
-
             if ($column instanceof RepositoryInsertTestInterface) {
                 $options['persist'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertPersist();
                 $options['data'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertData();
@@ -121,14 +123,25 @@ class RepositoryTestService extends AbstractMvcTest
 
         $this->getTraitTestService()->createTraitTest($this->src, $location);
 
-        $options['idTable'***REMOVED*** = $this->str('class', $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable()));
+        $options['idTable'***REMOVED*** = $this->str(
+            'class',
+            $this->getTableService()->getPrimaryKeyColumnName($this->db->getTable())
+        );
+
         $options['idTableVar'***REMOVED*** = $this->str('var', $options['idTable'***REMOVED***);
 
+        $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/repository-test/db/constructor/'.$this->src->getService().'.phtml',
+            [
+                'className' => $this->src->getName()
+            ***REMOVED***
+        );
+
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/db-test.phtml',
+            'template/module/mvc/repository-test/db/db-test.phtml',
             $options,
             $this->tableName.'RepositoryTest.php',
-            $this->getModule()->getTestRepositoryFolder()
+            $location
         );
     }
 }

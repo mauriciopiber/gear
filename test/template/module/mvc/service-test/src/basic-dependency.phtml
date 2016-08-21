@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\ServiceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\BasicDependencyService;
+
+/**
+ * @group Service
+ */
+class BasicDependencyServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = new BasicDependencyService();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Service\BasicDependencyService', $this->service);
+    }
+}

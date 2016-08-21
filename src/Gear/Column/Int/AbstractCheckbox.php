@@ -160,59 +160,6 @@ EOS;
     }
 
     /**
-     * Usado nos testes unitários de Repository, Service, Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => %s,',
-            $this->str('var', $this->column->getName()),
-            sprintf('%d', $this->getMatchReference())
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $insert = '            ';
-        $insert .= sprintf(
-            '\'%s\' => %s,',
-            $this->str('var', $this->column->getName()),
-            sprintf('%d', $this->getMatchReference())
-        ).PHP_EOL;
-
-        return $insert;
-    }
-
-
-    /**
-     * Usado nos testes unitários de Repository, Service, Controller para assert com os dados do array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertAssertByColumn()
-    {
-        $insertAssert = '        ';
-        $insertAssert .= sprintf(
-            '$this->assertEquals(%s, $resultSet->get%s());',
-            sprintf('%d', $this->getMatchReference()),
-            $this->str('class', $this->column->getName())
-        ).PHP_EOL;
-
-        return $insertAssert;
-    }
-
-
-    /**
      * Função default que será chamado em \Gear\Service\Mvc\ViewService\FormService::getViewValues
      * caso não esteja declarada a função nas classes filhas.
      *
@@ -271,5 +218,4 @@ EOS;
 
         return $ndnt.sprintf(self::$mvcArrayTemplate, $name, $this->getValueDatabase($iterator)).PHP_EOL;
     }
-
 }

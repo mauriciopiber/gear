@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\BasicTest\FeatureTest\IssueTest\TaskTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\Feature\Issue\Task\BasicNamespaceExtendsFactoryForm;
+
+/**
+ * @group Form
+ */
+class BasicNamespaceExtendsFactoryFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new BasicNamespaceExtendsFactoryForm();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Basic\Feature\Issue\Task\BasicNamespaceExtendsFactoryForm',
+            $this->form
+        );
+    }
+}

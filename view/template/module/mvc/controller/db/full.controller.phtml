@@ -1,18 +1,21 @@
-namespace <?php echo $this->module;?>\Controller;
+namespace <?php echo $this->namespace;?>;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
 <?php echo $this->use;?>
+
+<?php echo $this->classDocs;?>
 class <?php echo $this->controllerName;?> extends AbstractActionController
 {
-    const CREATE = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/create';
-    const EDIT   = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/edit';
-    const LISTS  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/list';
-    const IMAGE  = '<?php echo $this->str('url', $this->module);?>/<?php echo $this->str('url', str_replace('Controller', '', $this->controllerName));?>/upload-image';
+    const CREATE = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/create';
+    const EDIT   = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/edit';
+    const LISTS  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/list';
+    const IMAGE  = '<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/upload-image';
 
 <?php echo $this->attribute;?>
+<?php echo ($this->constructor) ? PHP_EOL.$this->constructor : '';?>
 <?php echo $this->createAction;?>
 <?php echo $this->editAction;?>
 <?php echo $this->viewAction;?>

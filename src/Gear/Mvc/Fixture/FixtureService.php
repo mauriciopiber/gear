@@ -25,7 +25,6 @@ use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 
 class FixtureService extends AbstractMvc
 {
-
     protected $loadedFixtures;
 
     protected $event;
@@ -89,6 +88,8 @@ class FixtureService extends AbstractMvc
 
         $this->file->setOptions(
             array(
+                'tableLabel'  => $this->str('label', $this->db->getTable()),
+                'package'     => $this->getCode()->getClassDocsPackage($this->src),
                 'var'         => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
                 'load'        => $this->load,
                 'preLoad'     => $this->preLoad,
@@ -191,11 +192,13 @@ class FixtureService extends AbstractMvc
 
         $fields = [***REMOVED***;
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-
             $field = $column->getColumn();
 
             if ($column instanceof ForeignKey) {
-                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableName, $field);
+                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn(
+                    $this->tableName,
+                    $field
+                );
                 if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
                     continue;
                 }
@@ -238,7 +241,6 @@ class FixtureService extends AbstractMvc
         $entityArrayAsText = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
@@ -279,7 +281,6 @@ class FixtureService extends AbstractMvc
         $this->getFixture = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-
             $columnClass = get_class($columnData);
 
             if ($columnData instanceof GetFixtureTopInterface && !in_array($columnClass, $columnOnlyOnceTop)) {

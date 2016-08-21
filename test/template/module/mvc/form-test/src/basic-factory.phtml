@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\FormTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\BasicFactoryForm;
+
+/**
+ * @group Form
+ */
+class BasicFactoryFormTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->form = new BasicFactoryForm();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Form\BasicFactoryForm',
+            $this->form
+        );
+    }
+}

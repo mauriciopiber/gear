@@ -73,18 +73,34 @@ abstract class AbstractMvc extends AbstractJsonService
         $useAttributesFile = preg_grep('/^    use [0-9a-zA-Z***REMOVED***/', $lines, PREG_OFFSET_CAPTURE);
 
 
-        $useAttribute = explode(PHP_EOL, $this->getCode()->getUseAttribute($controller));
+        //pega as dependency do controller + action
+
+        $useAttrText = $this->getCode()->getUseAttribute($controller);
+        $useAttribute = explode(PHP_EOL, $useAttrText);
+
+        if (empty($useAttrText)) {
+            return $lines;
+        }
+
+
+        //junta com os ítens atuais
         $useAttributes = array_merge($useAttributesFile, $useAttribute);
+
+        //separa os únicos
         $useAttributes = array_unique($useAttributes, SORT_REGULAR);
 
 
 
-        foreach ($useAttributes as $key => $link) {
-            if ($link === '') {
-                unset($useAttributes[$key***REMOVED***);
+        $filtered = [***REMOVED***;
+
+        foreach ($useAttributes as $i => $link) {
+
+            $filtered[***REMOVED*** = $link;
+
+            if (isset($useAttributes[$i+1***REMOVED***)) {
+                $filtered[***REMOVED*** = '';
             }
         }
-
 
         if (count($useAttributesFile) == 0) {
             $line = array_search('{', $lines);
@@ -100,12 +116,10 @@ abstract class AbstractMvc extends AbstractJsonService
 
         $offset = min(array_keys($useAttributesFile));
 
-        $limit = max(array_keys($useAttributesFile))-$offset+1;
-
-
+        $limit = max(array_keys($useAttributesFile))-$offset+2;
 
         if (!empty($useAttributes)) {
-            $lines = $this->getArrayService()->replaceRange($lines, $offset, $limit, $useAttributes);
+            $lines = $this->getArrayService()->replaceRange($lines, $offset, $limit, $filtered);
         }
 
         return $lines;

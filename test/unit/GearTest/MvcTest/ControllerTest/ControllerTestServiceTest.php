@@ -4,230 +4,84 @@ namespace GearTest\MvcTest\ControllerTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\AllColumnsDbTableTrait;
-use GearTest\AllColumnsDbNotNullTableTrait;
-use GearTest\AllColumnsDbUniqueTableTrait;
-use GearTest\AllColumnsDbUniqueNotNullTableTrait;
-use GearTest\SingleDbTableTrait;
-
+use GearTest\ControllerScopeTrait;
+use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
+use GearTest\UtilTestTrait;
 
 /**
- * @group module
- * @group module-mvc
- * @group module-mvc-controller
- * @group module-mvc-controller-test
+ * @group Controller
+ * @group fix8
+ * @group Fix3
+ * @group db-controller
  */
 class ControllerTestServiceTest extends AbstractTestCase
 {
-    use AllColumnsDbTableTrait;
-    use AllColumnsDbNotNullTableTrait;
-    use AllColumnsDbUniqueTableTrait;
-    use AllColumnsDbUniqueNotNullTableTrait;
-    use SingleDbTableTrait;
+    use UtilTestTrait;
+    use ControllerDataTrait;
+    use ControllerScopeTrait;
 
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('test')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('test/unit/MyModuleTest/ControllerTest')->at(vfsStreamWrapper::getRoot());
-
-        $this->assertFileExists('vfs://module/test/unit/MyModuleTest/ControllerTest');
 
         $this->vfsLocation = 'module/test/unit/MyModuleTest/ControllerTest';
-
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-
-        $this->string = new \GearBase\Util\String\StringService();
-
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->createVirtualDir($this->vfsLocation);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
-
-
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller-test';
 
 
-        $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');
+        $this->controllerTest = new \Gear\Mvc\Controller\ControllerTestService();
 
-        $this->factoryTestService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->controllerTest->setModule($this->module->reveal());
+
+
+        $this->string = new \GearBase\Util\String\StringService();
+        $this->controllerTest->setStringService($this->string);
+
+        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        $this->controllerTest->setFactoryTestService($this->factoryTest->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
-    }
+        $this->controllerTest->setInjector($this->injector);
+        $this->controllerTest->setFileCreator($this->createFileCreator());
 
-    public function testCreateTestController()
-    {
+        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+        $this->controllerDependency->setStringService($this->string);
+        $this->controllerDependency->setModule($this->module->reveal());
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->codeTest = new \Gear\Creator\CodeTest();
+        $this->codeTest->setStringService($this->string);
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setControllerDependency($this->controllerDependency);
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
 
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories'
-        ***REMOVED***);
+        $this->controllerTest->setCodeTest($this->codeTest);
 
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
+        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->controllerTest->setColumnService($this->column->reveal());
 
-        $this->factoryTestService->createControllerFactoryTest(
-            $controller,
-            vfsStream::url($this->vfsLocation)
-        )->shouldBeCalled();
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->controllerTest->setTableService($this->table->reveal());
 
-        $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager->setModule($this->module->reveal());
+        $this->controllerTest->setServiceManager($this->serviceManager);
 
-        $this->codeTest->getNamespace($controller)->willReturn('ControllerTest')->shouldBeCalled();
-        $this->codeTest->getTestNamespace($controller)->willReturn('Controller')->shouldBeCalled();
-        /**
-
-        $this->code->getExtends($controller)->willReturn('AbstractActionController')->shouldBeCalled();
-        $this->code->getUse($controller)->willReturn('use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL)->shouldBeCalled();
-
-
-        */
-        //$this->factoryService->createFactory($controller, vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-
-
-        $controllerTestService->setInjector($this->injector);
-
-
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildController($controller);
-
-
-        $expected = $this->templates.'/CreateTestController.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
-    }
-
-    public function testCreateActionControllerWithNoAction()
-    {
-        file_put_contents(
-            vfsStream::url($this->vfsLocation.'/MyControllerTest.php'),
-            file_get_contents($this->templates.'/CreateTestController.phtml')
-        );
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories'
-        ***REMOVED***);
-
-        $fileInject = file_get_contents(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'));
-        $fileExplode = explode(PHP_EOL, $fileInject);
-
-        $this->codeTest->getFunctionsNameFromFile(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'))->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->codeTest->getDependencyToInject($controller, $fileExplode)->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
-
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
-        $controllerTestService->setInjector($this->injector);
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildAction($controller);
-
-
-        $expected = $this->templates.'/CreateTestController.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
-    }
-
-    /**
-     * @group now11
-     */
-    public function testCreateTestActionController()
-    {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-
-        file_put_contents(
-            vfsStream::url($this->vfsLocation.'/MyControllerTest.php'),
-            file_get_contents($this->templates.'/CreateTestController.phtml')
-        );
-
-        $controller = new \GearJson\Controller\Controller([
-            'name' => 'MyController',
-            'object' => '%s\Controller\MyController',
-            'service' => 'factories',
-            'actions' => [
-                [
-                    'name' => 'MyAction',
-                    'controller' => 'MyController'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***);
-
-        $fileInject = file_get_contents(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'));
-        $fileExplode = explode(PHP_EOL, $fileInject);
-
-        $this->codeTest->getFunctionsNameFromFile(vfsStream::url($this->vfsLocation.'/MyControllerTest.php'))->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->codeTest->getDependencyToInject($controller, $fileExplode)->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $this->codeTest->getLocation($controller)->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
-
-        $controllerTestService = new \Gear\Mvc\Controller\ControllerTestService();
-        $controllerTestService->setFileCreator($this->fileCreator);
-        $controllerTestService->setStringService($this->string);
-        $controllerTestService->setModule($this->module->reveal());
-        $controllerTestService->setInjector($this->injector);
-        $controllerTestService->setCodeTest($this->codeTest->reveal());
-        $controllerTestService->setFactoryTestService($this->factoryTestService->reveal());
-
-        $file = $controllerTestService->buildAction($controller);
-
-
-        $expected = $this->templates.'/CreateTestActionController.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-         );
-    }
-
-    /**
-    public function testCreateTestMultipleActionController()
-    {
+        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
     }
-    */
 
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-
-        $controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-
-        $file = $controller->module();
+        $file = $this->controllerTest->module();
 
         $expected = $this->template.'/IndexControllerTest.phtml';
 
@@ -244,13 +98,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
-
-        $controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $controller->setFileCreator($this->fileCreator);
-        $controller->setStringService($this->string);
-        $controller->setModule($this->module->reveal());
-
-        $file = $controller->moduleFactory();
+        $file = $this->controllerTest->moduleFactory();
 
         $expected = $this->template.'/IndexControllerFactoryTest.phtml';
 
@@ -260,73 +108,119 @@ class ControllerTestServiceTest extends AbstractTestCase
         );
     }
 
-    public function tables()
-    {
-        return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table'***REMOVED***,
-            //[$this->getAllPossibleColumnsNotNull(), '-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), '-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), '-unique-not-null', false***REMOVED***,
-        ***REMOVED***;
-    }
-
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group db-controller2
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
-
-        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
-
-        $this->controller = new \Gear\Mvc\Controller\ControllerTestService();
-        $this->controller->setFileCreator($this->fileCreator);
-        $this->controller->setStringService($this->string);
-        $this->controller->setModule($this->module->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-        $this->column->renderColumnPart('staticTest')->willReturn('');
-        $this->column->renderColumnPart('insertArray')->willReturn('');
-        //$this->column->renderColumnPart('insertArray', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertAssert')->willReturn('');
-        $this->column->renderColumnPart('insertAssert', false, true)->willReturn('');
-        $this->column->renderColumnPart('insertSelect')->willReturn('');
-        $this->column->renderColumnPart('updateArray')->willReturn('');
-        $this->column->renderColumnPart('updateAssert', false, true)->willReturn('');
-
-        $this->controller->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
-        $this->table->isNullable($this->db->getTable())->willReturn($nullable);
-
-        $this->controller->setTableService($this->table->reveal());
+        $table = $this->string->str('class', $tableName);
 
         $controller = new \GearJson\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
-            'object' => '%s/Controller/'.$this->string->str('class', $tableName).'Controller'
+            'namespace' => $namespace,
+            'service' => $service,
+            'dependency' => [
+                sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
+                sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
+                sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
+            ***REMOVED***
         ***REMOVED***);
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $schemaService->getControllerByDb($this->db)->willReturn($controller);
+        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
 
-        $this->controller->setSchemaService($schemaService->reveal());
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $file = $this->controller->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/'.$template.'.phtml';
+        if ($namespace !== null) {
+
+            $location = 'module/test/unit/MyModuleTest';
+
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url($location))->shouldBeCalled();
+
+            $data = explode('\\', $namespace);
+
+            foreach ($data as $item) {
+                $location .= '/'.$item.'Test';
+            }
+
+        } else {
+
+            $location = $this->vfsLocation;
+            $this->module->map('ControllerTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->column->renderColumnPart('staticTest')->willReturn('');
+
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
+
+        $this->schemaService->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
+
+        $this->service = $this->prophesize('GearJson\Src\Src');
+        $this->service->getName()->willReturn(sprintf('%sService', $table));
+        $this->service->getType()->willReturn('Service');
+        $this->service->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($this->service->reveal())->shouldBeCalled();
+
+        $this->form = $this->prophesize('GearJson\Src\Src');
+        $this->form->getName()->willReturn(sprintf('%sForm', $table));
+        $this->form->getType()->willReturn('Form');
+        $this->form->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'Form')->willReturn($this->form->reveal())->shouldBeCalled();
+
+        $this->search  = $this->prophesize('GearJson\Src\Src');
+        $this->search->getName()->willReturn(sprintf('%sSearchForm', $table));
+        $this->search->getType()->willReturn('SearchForm');
+        $this->search->getNamespace()->willReturn($namespace);
+
+        $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($this->search->reveal())->shouldBeCalled();
+
+
+        if ($service == 'factories') {
+            $this->factoryTest->createControllerFactoryTest($controller, vfsStream::url($location))->shouldBeCalled();
+        }
+
+        $file = $this->controllerTest->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents($file)
         );
 
+        $this->assertStringEndsWith($location.'/'.$controller->getName().'Test.php', $file);
+
     }
 
+    public function controller()
+    {
+        return $this->getControllerScope('Action');
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-controller-test
+     * @dataProvider controller
+     */
+    public function testConstructControllerTest($controller, $expected)
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
+        $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
+
+        $file = $this->controllerTest->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+            $this->controllerTest->buildAction($controller);
+        }
+
+        $expected = $this->templates.'/src/'.$expected.'.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+    }
 }

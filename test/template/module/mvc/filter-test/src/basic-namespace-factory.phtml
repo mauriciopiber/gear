@@ -1,0 +1,25 @@
+<?php
+namespace MyModuleTest\BasicTest\FeatureTest\IssueTest\TaskTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\Feature\Issue\Task\BasicNamespaceFactoryFilter;
+
+/**
+ * @group Filter
+ */
+class BasicNamespaceFactoryFilterTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->filter = new BasicNamespaceFactoryFilter();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            'MyModule\Basic\Feature\Issue\Task\BasicNamespaceFactoryFilter',
+            $this->filter->getInputFilter()
+        );
+    }
+}

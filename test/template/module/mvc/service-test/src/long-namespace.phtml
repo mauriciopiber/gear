@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\BasicTest\FeatureTest\IssueTest\TaskTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Basic\Feature\Issue\Task\LongNamespaceService;
+
+/**
+ * @group Service
+ */
+class LongNamespaceServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = new LongNamespaceService();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Basic\Feature\Issue\Task\LongNamespaceService', $this->service);
+    }
+}

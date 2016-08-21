@@ -1,12 +1,22 @@
-namespace <?php echo $this->module;?>\Filter;
+namespace <?php echo $this->namespace;?>;
 
 use GearBase\Filter\AbstractFilter;
+<?php echo $this->use;?>
 
+/**
+ * Filter for <?php echo $this->tableLabel;?> Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Filter
+ * @package <?php echo $this->package.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class <?php echo $this->class;?> extends AbstractFilter
 {
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
+<?php echo ($this->constructor) ? $this->constructor.PHP_EOL : PHP_EOL;?>
 <?php echo $this->header;?>
     {
 <?php echo $this->filterElements;?>

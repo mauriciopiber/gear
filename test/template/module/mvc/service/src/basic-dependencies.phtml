@@ -1,0 +1,24 @@
+<?php
+namespace MyModule\Service;
+
+use MyModule\Service\MyDependencyOneTrait;
+use MyModule\Service\MyDependencyTwoTrait;
+use MyModule\Service\MyDependencyThreeTrait;
+
+/**
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Service
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicDependenciesService
+{
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+}

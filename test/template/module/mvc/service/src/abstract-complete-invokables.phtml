@@ -1,0 +1,29 @@
+<?php
+namespace MyModule\Greatest;
+
+use MyModule\ColumnInterface\ServiceBeforeInterface;
+use MyModule\ColumnInterface\ServiceAfterInterface;
+use MyModule\Service\MyDependencyOneTrait;
+use MyModule\Logic\MyDependencyTwoTrait;
+use MyModule\Mvc\MyDependencyThreeTrait;
+use MyModule\Service\AbstractService;
+
+/**
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Greatest
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+abstract class AbstractCompleteInvokablesService extends AbstractService implements
+    ServiceBeforeInterface,
+    ServiceAfterInterface
+{
+    use MyDependencyOneTrait;
+
+    use MyDependencyTwoTrait;
+
+    use MyDependencyThreeTrait;
+}

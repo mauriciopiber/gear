@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "a0f7af76b524b92a608c85d01f72b62f",
-    "content-hash": "bea9f06e20e5f67c3d8ba5714fa134b2",
+    "hash": "cea82601398c170320b6a544f0279bc9",
+    "content-hash": "3a04d7004d9791dba6f0355f80cae33b",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -955,17 +955,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.23",
+            "version": "0.2.24",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7"
+                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.23-cbb1d1.tar",
-                "reference": "0cc110ab9ed610bd497329ba606cd503d90b8ee7",
-                "shasum": "f67ae9b2d9c8aefedb73459b90c93ed91d498951"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.24-f61e9a.tar",
+                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba",
+                "shasum": "19e6aaec971fd5ec989bfba6bd96b89ffbd7271a"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -992,15 +992,21 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-07-28 01:45:44"
+            "time": "2016-08-02 21:18:57"
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.43",
+            "version": "0.2.52",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "3c7d463f75f4053c9da2a8f7d21c7eba2309e7ec"
+                "reference": "712b23cb2bfa0c6598bc652421569e3b4a406b01"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.52-872ced.tar",
+                "reference": "712b23cb2bfa0c6598bc652421569e3b4a406b01",
+                "shasum": "af8bb9fa3a92823b2cae3d53dd7fd6de833c5f97"
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -1033,7 +1039,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-07-30 19:28:36"
+            "time": "2016-08-21 06:43:19"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1079,17 +1085,17 @@
         },
         {
             "name": "phpcollection/phpcollection",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-collection.git",
-                "reference": "b8bf55a0a929ca43b01232b36719f176f86c7e83"
+                "reference": "f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/schmittjoh/php-collection/zipball/b8bf55a0a929ca43b01232b36719f176f86c7e83",
-                "reference": "b8bf55a0a929ca43b01232b36719f176f86c7e83",
-                "shasum": "23c6f3e3f68fe269d4ddc2d68ff0c7ddd5837d03"
+                "url": "https://mirror.pibernetwork.com/dist/phpcollection-phpcollection-f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6-zip-ca7e06.tar",
+                "reference": "f2bcff45c0da7c27991bbc1f90f47c4b7fb434a6",
+                "shasum": "20677c3fdbe07f02e6512ee5edca0ca40863551a"
             },
             "require": {
                 "phpoption/phpoption": "1.*"
@@ -1097,7 +1103,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4-dev"
                 }
             },
             "autoload": {
@@ -1111,10 +1117,8 @@
             ***REMOVED***,
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "name": "Johannes M. Schmitt",
+                    "email": "schmittjoh@gmail.com"
                 }
             ***REMOVED***,
             "description": "General-Purpose Collection Library for PHP",
@@ -1125,7 +1129,7 @@
                 "sequence",
                 "set"
             ***REMOVED***,
-            "time": "2014-03-11 13:46:42"
+            "time": "2015-05-17 12:39:23"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1631,17 +1635,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.8",
+            "version": "5.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6"
+                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3132365e1430c091f208e120b8845d39c25f20e6",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6",
-                "shasum": "1f0e0687ce5dfeaea85ae41a6d8cf1c4b79241dc"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-46ec2d1522ae8c9a12aca6b7650e0be78bbb0502-zip-f28a68.tar",
+                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
+                "shasum": "f4047fd8f63f66d5f51e67668bead2b4a64eb5ff"
             },
             "require": {
                 "ext-dom": "*",
@@ -1679,7 +1683,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.4.x-dev"
+                    "dev-master": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -1705,21 +1709,21 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-07-26 14:48:00"
+            "time": "2016-08-18 11:10:44"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.3",
+            "version": "3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52"
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b13d0d9426ced06958bd32104653526a6c998a52",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52",
-                "shasum": "d4959ab38f905e814960c4134de865e68e60342b"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-4e83390f64e7ce04fcaec2ce95cd72823b431d19-zip-203a1e.tar",
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19",
+                "shasum": "c905a15db5f3b57090fbbb6aa31b4bc2c819926c"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -1764,7 +1768,7 @@
                 "mock",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-06-12 07:37:26"
+            "time": "2016-08-17 09:33:51"
         },
         {
             "name": "psr/log",
@@ -2033,23 +2037,23 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.3.7",
+            "version": "1.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4e8f0da10ac5802913afc151413bc8c53b6c2716",
-                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
-                "shasum": "36a231b5f27705a7df13001275430fbcb60b1f79"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-be2c607e43ce4c89ecd60e75c6a85c126e754aea-zip-edab34.tar",
+                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea",
+                "shasum": "6d956003a354a78fd6c414568c3a315e2295a601"
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.4"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -2079,7 +2083,7 @@
                 "environment",
                 "hhvm"
             ***REMOVED***,
-            "time": "2016-05-17 03:18:57"
+            "time": "2016-08-18 05:49:44"
         },
         {
             "name": "sebastian/exporter",
@@ -2745,28 +2749,29 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde"
+                "reference": "bb2d123231c095735130cc8f6d31385a44c7b308"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
-                "reference": "30eed06dd6bc88410a4ff7f77b6d22f3ce13dbde",
-                "shasum": "9f2a5b9efbcca3897f5e6e52dd2bf3f0f0bf5ae1"
+                "url": "https://mirror.pibernetwork.com/dist/webmozart-assert-bb2d123231c095735130cc8f6d31385a44c7b308-zip-d562b0.tar",
+                "reference": "bb2d123231c095735130cc8f6d31385a44c7b308",
+                "shasum": "909dafc1cb3a736ace8f041528e991386d520417"
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3|^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.6"
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -2790,7 +2795,7 @@
                 "check",
                 "validate"
             ***REMOVED***,
-            "time": "2015-08-24 13:29:44"
+            "time": "2016-08-09 15:02:57"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -3245,17 +3250,17 @@
         },
         {
             "name": "zendframework/zend-db",
-            "version": "2.8.1",
+            "version": "2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-db.git",
-                "reference": "c9fa8fdab194093fff58e4f1180c7e15d80a2cb5"
+                "reference": "5926a1a2e7e035546b690cb7d4c11a3c47db2c98"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/c9fa8fdab194093fff58e4f1180c7e15d80a2cb5",
-                "reference": "c9fa8fdab194093fff58e4f1180c7e15d80a2cb5",
-                "shasum": "29c6928144e08ba2f7a635c86ab4c75b063be698"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-db-5926a1a2e7e035546b690cb7d4c11a3c47db2c98-zip-e22000.tar",
+                "reference": "5926a1a2e7e035546b690cb7d4c11a3c47db2c98",
+                "shasum": "47a141a39204e79dd1066c6e80c66579f7ad68ec"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3298,7 +3303,7 @@
                 "db",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-04-14 14:27:16"
+            "time": "2016-08-09 19:28:55"
         },
         {
             "name": "zendframework/zend-debug",
@@ -3788,17 +3793,17 @@
         },
         {
             "name": "zendframework/zend-http",
-            "version": "2.5.4",
+            "version": "2.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-http.git",
-                "reference": "7b920b4ec34b5ee58f76eb4e8c408b083121953c"
+                "reference": "98b1cac0bc7a91497c5898184281abcd0e24c8d6"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/zendframework/zend-http/zipball/7b920b4ec34b5ee58f76eb4e8c408b083121953c",
-                "reference": "7b920b4ec34b5ee58f76eb4e8c408b083121953c",
-                "shasum": "ae25c03e5fb85397433f743f324547da0d60e7b2"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-http-98b1cac0bc7a91497c5898184281abcd0e24c8d6-zip-8a2699.tar",
+                "reference": "98b1cac0bc7a91497c5898184281abcd0e24c8d6",
+                "shasum": "d36c8f81912d5551548f0d15409d7d5c3c7d5066"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3834,7 +3839,7 @@
                 "http",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-02-04 20:36:48"
+            "time": "2016-08-08 15:01:54"
         },
         {
             "name": "zendframework/zend-hydrator",
@@ -3998,17 +4003,17 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.7.2",
+            "version": "2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12"
+                "reference": "0cf1bdcd8858a8583965310a7dae63ad75bd1237"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/zendframework/zend-inputfilter/zipball/5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12",
-                "reference": "5630ef49e8c16a6fe0c2bd0d2a519869b14d5b12",
-                "shasum": "b9ce7ec145458cbdc11137862b78a42e128e0abd"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-inputfilter-0cf1bdcd8858a8583965310a7dae63ad75bd1237-zip-310443.tar",
+                "reference": "0cf1bdcd8858a8583965310a7dae63ad75bd1237",
+                "shasum": "bdfbfcf8e5cb0e2c1befd4fcb2fc025bb5863d66"
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -4017,8 +4022,8 @@
                 "zendframework/zend-validator": "^2.6"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "^4.5",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.6.2",
                 "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
             },
             "suggest": {
@@ -4049,7 +4054,7 @@
                 "inputfilter",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-06-11 19:35:33"
+            "time": "2016-08-18 18:40:34"
         },
         {
             "name": "zendframework/zend-json",
@@ -4152,17 +4157,17 @@
         },
         {
             "name": "zendframework/zend-log",
-            "version": "2.9.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-log.git",
-                "reference": "0325ad00505b8f39d79f26e666dc851bfd25fdaa"
+                "reference": "115d75db1f8fb29efbf1b9a49cb91c662b7195dc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/zendframework/zend-log/zipball/0325ad00505b8f39d79f26e666dc851bfd25fdaa",
-                "reference": "0325ad00505b8f39d79f26e666dc851bfd25fdaa",
-                "shasum": "2c50d1eb5e913bfee944e5ea6ef0d8d20fb2fdd8"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-log-115d75db1f8fb29efbf1b9a49cb91c662b7195dc-zip-7964d2.tar",
+                "reference": "115d75db1f8fb29efbf1b9a49cb91c662b7195dc",
+                "shasum": "5ca061ab5421f38c8f6e751d252a5b21f7185355"
             },
             "require": {
                 "php": "^5.6 || ^7.0",
@@ -4174,10 +4179,9 @@
                 "psr/log-implementation": "1.0.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
+                "friendsofphp/php-cs-fixer": "~1.7.0",
                 "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "~4.0",
-                "zendframework/zend-console": "^2.6",
                 "zendframework/zend-db": "^2.6",
                 "zendframework/zend-escaper": "^2.5",
                 "zendframework/zend-filter": "^2.5",
@@ -4185,6 +4189,7 @@
                 "zendframework/zend-validator": "^2.6"
             },
             "suggest": {
+                "ext-mongo": "mongo extension to use Mongo writer",
                 "ext-mongodb": "mongodb extension to use MongoDB writer",
                 "zendframework/zend-console": "Zend\\Console component to use the RequestID log processor",
                 "zendframework/zend-db": "Zend\\Db component to use the database log writer",
@@ -4219,7 +4224,7 @@
                 "logging",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-06-22 22:25:25"
+            "time": "2016-08-11 13:44:10"
         },
         {
             "name": "zendframework/zend-mail",
@@ -6015,7 +6020,7 @@
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-8a24ed556b8d6a9d795d052e9074e8483cb7c15f-zip-f4e8a3.tar",
                 "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
                 "shasum": "4a6630d53c8393589215470333f6f32ba73b4b5a"
             },
@@ -6090,24 +6095,26 @@
         },
         {
             "name": "facebook/webdriver",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "0b889d7de7461439f8a3bbcca46e0f696cb27986"
+                "reference": "b7186fb1bcfda956d237f59face250d06ef47253"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/0b889d7de7461439f8a3bbcca46e0f696cb27986",
-                "reference": "0b889d7de7461439f8a3bbcca46e0f696cb27986",
-                "shasum": "0cdf81f006df7d332a1eafc2c9af8962599febac"
+                "url": "https://mirror.pibernetwork.com/dist/facebook-webdriver-b7186fb1bcfda956d237f59face250d06ef47253-zip-18ca05.tar",
+                "reference": "b7186fb1bcfda956d237f59face250d06ef47253",
+                "shasum": "ab18c609dc409940a42b2c1de0964cbc583be8cf"
             },
             "require": {
                 "ext-curl": "*",
                 "php": ">=5.3.19"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.6.*"
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "4.6.* || ~5.0",
+                "squizlabs/php_codesniffer": "^2.6"
             },
             "suggest": {
                 "phpdocumentor/phpdocumentor": "2.*"
@@ -6130,7 +6137,7 @@
                 "selenium",
                 "webdriver"
             ***REMOVED***,
-            "time": "2016-06-04 00:02:34"
+            "time": "2016-08-10 00:44:08"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -6886,17 +6893,17 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "shasum": "b5346a46675864a66afa4ff9c6844d25a38451f8"
+                "url": "https://mirror.pibernetwork.com/dist/psr-http-message-f6561bf28d520154e4b0ec72be95418abe6d9363-zip-7ab320.tar",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": "6d16314c4047bf26057bbb1c79cb276d330cd92d"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -6923,6 +6930,7 @@
                 }
             ***REMOVED***,
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -6931,7 +6939,7 @@
                 "request",
                 "response"
             ***REMOVED***,
-            "time": "2015-05-04 20:22:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "sebastian/finder-facade",

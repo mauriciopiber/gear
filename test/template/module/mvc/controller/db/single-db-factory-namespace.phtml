@@ -1,0 +1,218 @@
+<?php
+namespace MyModule\Custom\CustomNamespace;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\JsonModel;
+use MyModule\Custom\CustomNamespace\SingleDbTableServiceTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableFormTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableSearchFormTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableService;
+use MyModule\Custom\CustomNamespace\SingleDbTableForm;
+use MyModule\Custom\CustomNamespace\SingleDbTableSearchForm;
+
+/**
+ * Single Db Table Controller
+ *
+ * Actions for Single Db Table Table
+ *
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class SingleDbTableController extends AbstractActionController
+{
+    const CREATE = 'my-module/single-db-table/create';
+    const EDIT   = 'my-module/single-db-table/edit';
+    const LISTS  = 'my-module/single-db-table/list';
+    const IMAGE  = 'my-module/single-db-table/upload-image';
+
+    use SingleDbTableServiceTrait;
+
+    use SingleDbTableFormTrait;
+    use SingleDbTableSearchFormTrait;
+
+    /**
+     * Constructor
+     *
+     * @param SingleDbTableService    $singleDbTableService    Single Db Table Service
+     * @param SingleDbTableForm       $singleDbTableForm       Single Db Table Form
+     * @param SingleDbTableSearchForm $singleDbTableSearchForm Single Db Table Search Form
+     *
+     * @return \MyModule\Custom\CustomNamespace\SingleDbTableController
+     */
+    public function __construct(
+        SingleDbTableService $singleDbTableService,
+        SingleDbTableForm $singleDbTableForm,
+        SingleDbTableSearchForm $singleDbTableSearchForm
+    ) {
+        $this->singleDbTableService = $singleDbTableService;
+        $this->singleDbTableForm = $singleDbTableForm;
+        $this->singleDbTableSearchForm = $singleDbTableSearchForm;
+
+        return $this;
+    }
+
+    /**
+     * Create Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function createAction()
+    {
+        $this->error = false;
+
+        $this->form    = $this->getSingleDbTableForm();
+        $this->service = $this->getSingleDbTableService();
+        $this->url     = self::CREATE;
+
+        $create = $this->getRequestPlugin()->create();
+
+        if ($create instanceof Response) {
+            return $create;
+        }
+
+        if ($create) {
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $create->getIdSingleDbTable(), 'success' => 1)
+            );
+        }
+
+
+        return new ViewModel(
+            array(
+                'error' => $this->error,
+                'form' => $this->form,
+            )
+        );
+    }
+
+    /**
+     * Edit Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function editAction()
+    {
+        $this->error = false;
+
+        $idSingleDbTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idSingleDbTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->data = $this->getSingleDbTableService()->selectById($idSingleDbTable);
+
+        if (!$this->data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->form      = $this->getSingleDbTableForm();
+        $this->service   = $this->getSingleDbTableService();
+        $this->url       = self::EDIT;
+        $this->requestId = $idSingleDbTable;
+
+        $update = $this->getRequestPlugin()->update();
+        if ($update instanceof Response) {
+            return $update;
+        }
+
+        if ($update) {
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                array('id' => $update->getIdSingleDbTable(), 'success' => 1)
+            );
+        }
+
+        $this->data = $this->getSingleDbTableService()->selectById($idSingleDbTable);
+        $this->form->bind($this->data);
+
+
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+
+        return new ViewModel(
+            array(
+                'form' => $this->form,
+                'error' => $this->error,
+                'success' => $sucesso,
+                'idSingleDbTable' => $idSingleDbTable
+            )
+        );
+    }
+
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function viewAction()
+    {
+        $idSingleDbTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idSingleDbTable) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getSingleDbTableService()->selectById($idSingleDbTable);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        return new ViewModel(
+            array_merge(
+                array(
+                    'id' => $data->getIdSingleDbTable(),
+                ),
+                $this->getSingleDbTableService()->extract($data)
+            )
+        );
+    }
+
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function deleteAction()
+    {
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $singleDbTable = $this->getSingleDbTableService();
+
+        $delete = $singleDbTable->delete($identifier);
+
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
+    }
+
+    /**
+     * List Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function listAction()
+    {
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->getSingleDbTableService()->selectAll()
+        );
+
+        return new ViewModel(
+            array(
+                'search'    => $this->getSingleDbTableSearchForm(),
+                'tableService' => $this->getSingleDbTableService(),
+                'data'      => $data,
+            )
+        );
+    }
+}

@@ -1,11 +1,19 @@
 namespace <?php echo $this->namespace;?>;
 
-use GearBase\Filter\AbstractFilter;
+<?php echo $this->use;?>
 
-class <?php echo $this->class;?> extends AbstractFilter
+<?php echo $this->classDocs;?>
+class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 {
+<?php echo ($this->attributes) ? $this->attributes : '';?>
+<?php echo (!empty($attributes) && !empty($constructor)) ? PHP_EOL : '';?>
+<?php echo $this->constructor;?>
+<?php echo (empty($attributes) && !empty($constructor)) ? PHP_EOL : '';?>
     /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * Create the Filter to Form Elements
+     *
+     * @return \<?php echo $this->namespace;?>\<?php echo $this->class.PHP_EOL;?>
+     *
      */
     public function getInputFilter()
     {

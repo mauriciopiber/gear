@@ -20,7 +20,6 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 
-
 /**
  * Cria um upload file de imagens.
  *
@@ -76,7 +75,6 @@ class UploadImage extends Varchar implements
 
     public function getSetUp()
     {
-
     }
 
     public function getServiceSetUp()
@@ -99,7 +97,6 @@ EOS;
             '{$columnName}' => 'image123',
 
 EOS;
-
     }
 
     /**
@@ -141,7 +138,6 @@ EOS;
         )->shouldBeCalled();
 
 EOS;
-
     }
 
     /**
@@ -170,7 +166,6 @@ EOS;
         )->shouldBeCalled();
 
 EOS;
-
     }
 
     /**
@@ -214,7 +209,8 @@ EOS;
     }
 
     /**
-     * Cria caminho da ímagem para ser utilizada exclusivamente na verificação de upload realizado com sucesso no e2e.
+     * Cria caminho da ímagem para ser utilizada exclusivamente
+     * na verificação de upload realizado com sucesso no e2e.
      *
      * @param int $iterator Número base
      *
@@ -549,7 +545,6 @@ EOS;
 EOS;
 
         return $this->formatLines($ndnt, $template).PHP_EOL;
-
     }
 
     /**
@@ -572,7 +567,6 @@ EOS;
 EOS;
 
         return $template;
-
     }
 
 
@@ -665,12 +659,27 @@ EOS;
      *
      * @return string
      */
-    public function getServiceUse()
+    public function getServiceUse($service = 'invokables')
     {
-        return <<<EOS
-use GearImage\Service\ImageServiceTrait;
+        $use = ['GearImage\Service\ImageServiceTrait'***REMOVED***;
 
-EOS;
+
+
+        if ($service === 'factories') {
+            $use[***REMOVED*** = 'GearImage\Service\ImageService';
+        }
+
+        $template = 'use %s;'.PHP_EOL;
+
+        $text = '';
+
+        foreach ($use as $name) {
+
+            $text .= sprintf($template, $name);
+        }
+
+        return $text;
+
     }
 
    /**
@@ -682,6 +691,7 @@ EOS;
     {
         return <<<EOS
     use ImageServiceTrait;
+
 
 EOS;
     }
@@ -902,75 +912,6 @@ EOS;
         return $insert;
     }
 
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertArrayByColumn()
-    {
-        $columnName = $this->str('var', $this->column->getName());
-
-
-        $insert = <<<EOS
-            '$columnName' => array(
-                'error' => 0,
-                'name' => '{$columnName}{$this->rand}insert.gif',
-                'tmp_name' => \$this->mockUploadImage(),
-                'type'      =>  'image/gif',
-                'size'      =>  42,
-            ),
-
-EOS;
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\Varchar\Varchar::getInsertAssertByColumn()
-     *
-     * @return string
-     */
-    public function getInsertAssertByColumn()
-    {
-        $className = $this->str('class', $this->column->getName());
-        $fullpath = $this->getStaticPath('insert');
-
-        $insert = <<<EOS
-        \$this->assertEquals(
-            $fullpath,
-            \$resultSet->get$className()
-        );
-
-EOS;
-
-        return $insert;
-    }
-
-    /**
-     * Usado nos testes unitários de Repository, Service,
-     *  Controller para array de inserção de dados.
-     *
-     * @return string Texto para inserir no template
-     */
-    public function getInsertSelectByColumn()
-    {
-        $columnName = $this->str('var', $this->column->getName());
-
-        $fullpath = $this->getStaticPath('insert');
-
-        $insert = <<<EOS
-            '$columnName' =>
-                $fullpath,
-
-EOS;
-        return $insert;
-    }
-
     /**
      * Retorna o nome relativo ao arquivo que será estocado como imagem nos testes.
      *
@@ -1048,7 +989,8 @@ EOS;
     }
 
     /**
-     * Utilizado para criar o insert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     * Utilizado para criar o insert em Gear\Column\ColumnService
+     * para ser utilizado em Repository, Service e Controller.
      *
      * @return string
      */
@@ -1068,7 +1010,8 @@ EOF;
     }
 
     /**
-     * Utilizado para criar o assert em Gear\Column\ColumnService para ser utilizado em Repository, Service e Controller.
+     * Utilizado para criar o assert em Gear\Column\ColumnService
+     * para ser utilizado em Repository, Service e Controller.
      *
      * @return string
      */

@@ -18,6 +18,83 @@ class Code extends AbstractCode implements
 
     static protected $defaultNamespace;
 
+    public function getFileDocs($src, $type = null)
+    {
+
+        if ($type === null) {
+            $type = $src->getType();
+        }
+
+        if ($src->getNamespace() === null) {
+            $namespace = $this->getModule()->getModuleName().'\\';
+
+            if ($src instanceof Controller) {
+                $namespace .= 'Controller';
+            } else {
+                $namespace .= $src->getType();
+            }
+        } else {
+            $namespace = $this->resolveNamespace($src->getNamespace());
+        }
+
+        $namespace = str_replace('\\', '/', $namespace);
+
+
+        $template = <<<EOS
+/**
+ * PHP Version 5
+ *
+ * @category {$type}
+ * @package {$namespace}
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+
+EOS;
+
+        return $template;
+    }
+
+    public function getClassDocsPackage($controller)
+    {
+        $this->docs = '';
+
+        if (empty($controller->getNamespace())) {
+
+            if ($controller instanceof Controller) {
+                $type = 'Controller';
+            } else {
+
+                if ($controller->getType() === 'SearchForm') {
+                    $type = 'Form/Search';
+                } else {
+                    $type = $controller->getType();
+                }
+            }
+
+            $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
+
+
+        } else {
+
+            $module = $this->getModule()->getModuleName();
+
+            $namespace = $this->resolveNamespace($controller->getNamespace());
+
+            $this->docs = str_replace('\\', '/', $namespace);
+        }
+
+
+        return $this->docs;
+
+    }
+
+    public function getClassDocs($src, $type = null)
+    {
+        return $this->getFileDocs($src, $type);
+    }
+
     /**
      * Retorna os parametros que são usados como argumento no construtor dentro da Classe.
      */
@@ -35,6 +112,136 @@ class Code extends AbstractCode implements
         }
 
         return $args;
+    }
+
+    public function getCustomTemplate($indent, $templateName)
+    {
+        $templates = [***REMOVED***;
+
+        $templates['memcached'***REMOVED*** = <<<EOS
+{$indent}(extension_loaded('memcached'))
+{$indent}? \$serviceLocator->get('memcached')
+{$indent}: \$serviceLocator->get('filesystem')
+EOS;
+
+
+        return $templates[$templateName***REMOVED***;
+
+    }
+
+    public function getFactoryServiceLocator($src)
+    {
+        if (empty($src->getDependency())) {
+            return '';
+        }
+
+        $ndnt = str_repeat(' ', 4*3);
+
+        $defaultTemplate = '$serviceLocator->get(\'%s\')';
+
+        $text = '';
+
+        $allDeps = count($src->getDependency());
+        $iterator = 0;
+
+        foreach ($src->getDependency() as $i => $dependency) {
+
+            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
+                $text .= $this->getCustomTemplate($ndnt, $i);
+            } else {
+                $text .= $ndnt;
+
+                $fullname = (is_int($i)) ? $this->resolveNamespace($dependency) : $i;
+
+                $text .= sprintf($defaultTemplate, $fullname);
+            }
+
+
+            if ($iterator < $allDeps-1) {
+                $iterator += 1;
+                $text .= ',';
+            }
+            $text .= PHP_EOL;
+        }
+
+        return $text;
+    }
+
+    public function getInterfaceUse($data)
+    {
+        if (empty($data->getExtends()) && empty($data->getDependency())) {
+            return '';
+        }
+
+        $this->uses = '';
+
+        if ($data->getExtends() !== null) {
+            $this->uses .= 'use '.$this->resolveNamespace($data->getExtends()).';'.PHP_EOL;
+        }
+
+        if (!empty($data->getDependency())) {
+            foreach ($data->getDependency() as $alias => $item) {
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+            }
+        }
+
+        return $this->uses;
+    }
+
+    public function getInterfaceDependency($data)
+    {
+        $template = <<<EOS
+    /**
+     * Set %s
+     *
+     * @param %s \$%s %s
+     *
+     * @return self
+     */
+    public function set%s(%s \$%s);
+
+    /**
+     * Get %s
+     *
+     * @return null|%s
+     */
+    public function get%s();
+
+EOS;
+
+        if (empty($data->getDependency())) {
+            return PHP_EOL;
+        }
+
+        $html = '';
+
+        foreach ($data->getDependency() as $i => $dependency) {
+            $class = $this->str('class', $this->resolveName($dependency));
+            $var = $this->str('var', $class);
+            $label = $this->str('label', $class);
+            $namespace = $this->resolveNamespace($dependency);
+
+            $html .= sprintf(
+                $template,
+                $label, //set
+                $class, //param 1
+                $var, //param var
+                $label, //param 2
+                $class, //set
+                $class, //set arg
+                $var,
+                $label, //set var
+                $namespace,
+                $class,
+                $class
+            );
+
+            if (isset($data->getDependency()[$i+1***REMOVED***)) {
+                $html .= PHP_EOL;
+            }
+        }
+
+        return $html;
     }
 
     /**
@@ -144,7 +351,9 @@ class Code extends AbstractCode implements
             //cria um diretório específico.
         }
 
-        if ($data->getType() == 'SearchForm') {
+        if ($data instanceof Controller) {
+            $type = 'Controller';
+        } elseif ($data->getType() == 'SearchForm') {
             $type = 'Form\\Search';
         } elseif ($data->getType() == 'ViewHelper') {
             $type = 'View\\Helper';
@@ -206,8 +415,14 @@ class Code extends AbstractCode implements
             return $location;
         }
 
-
         $type = $this->str('class', $data->getType());
+
+        if ($data instanceof Controller) {
+            return $this->getModule()->map('Controller');
+        }
+
+
+
 
         if ($data instanceof App) {
             $type = 'App'.$type;
@@ -310,6 +525,76 @@ class Code extends AbstractCode implements
         return 'use '.$namespace;
     }
 
+    public function getParams($src)
+    {
+        if (empty($src->getDependency())) {
+            return '     *';
+        }
+
+
+        $html = '';
+
+        $html = '     *'.PHP_EOL;
+
+        $lengthParam = 0;
+        $lengthVar = 0;
+
+        $template = '     * @param %s $%s %s';
+
+        $data = $src->getDependency();
+
+        foreach ($data as $item) {
+            $name = $this->str('class', $this->resolveName($item));
+            $var = $this->str('var', $name);
+            $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
+            $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
+        }
+
+        foreach ($data as $item) {
+            $name = $this->str('class', $this->resolveName($item));
+            $var = $this->str('var', $name);
+            $label = $this->str('label', $name);
+
+            $html .= sprintf(
+                $template,
+                $name.str_repeat(' ', ($lengthParam-strlen($name))),
+                $var.str_repeat(' ', ($lengthVar-strlen($var))),
+                $label
+            ).PHP_EOL;
+        }
+
+
+
+
+        $html .= '     *';
+
+        return $html;
+    }
+
+    public function getConstructorDocs($data)
+    {
+        $params = $this->getParams($data);
+        $namespace = $this->getNamespace($data).'\\'.$data->getName();
+
+        $docs = <<<EOS
+    /**
+     * Constructor
+{$params}
+     * @return \\{$namespace}
+     */
+
+EOS;
+
+        return $docs;
+    }
+
+    public function getDepVarTemplate($templateName)
+    {
+        $templates = [***REMOVED***;
+        $templates['memcached'***REMOVED*** = 'cache';
+
+        return $templates[$templateName***REMOVED***;
+    }
 
     /**
      * Função padrão para criar Constructors.
@@ -320,32 +605,38 @@ class Code extends AbstractCode implements
     {
         $dependency = [***REMOVED***;
 
+
         if (!empty($data->getDependency())) {
-
-            foreach ($data->getDependency() as $item) {
-
+            foreach ($data->getDependency() as $i => $item) {
                 $fullname = explode('\\', $item);
                 $name = end($fullname);
-                $dependency[***REMOVED*** = $name;
+                $dependency[$i***REMOVED*** = $name;
             }
         }
 
-        $html = '    public function __construct(';
+        $html = $this->getConstructorDocs($data);
+
+        $html .= '    public function __construct(';
 
         if (count($dependency)==0) {
             $html .= ')'.PHP_EOL;
-            $html .= '    {'.PHP_EOL.PHP_EOL.'    }'.PHP_EOL;
+            $html .= '    {';
+            $html .= PHP_EOL;
+            $html .= '        return $this;';
+            $html .= PHP_EOL;
+            $html .= '    }';
+            $html .= PHP_EOL;
 
             return $html;
         }
 
         $howManyDep = count($dependency);
+        $iterator = 0;
 
         $args = '';
         $attr = '';
 
         foreach ($dependency as $i => $item) {
-
             if ($howManyDep > 1) {
                 $args .= '        ';
             }
@@ -353,15 +644,28 @@ class Code extends AbstractCode implements
             $args .= $this->str('class', $item).' $'.$this->str('var', $item);
 
             if ($howManyDep > 1) {
-
-                if (isset($dependency[$i+1***REMOVED***)) {
+                if ($iterator < $howManyDep-1) {
                     $args .= ',';
+                    $iterator += 1;
                 }
 
                 $args .= PHP_EOL;
             }
 
-            $attr .= '        $this->'.$this->str('var', $item).' = $'.$this->str('var', $item).';';
+            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
+                $depVar = $this->getDepVarTemplate($i);
+            } else {
+
+
+                if ($item == 'Translator') {
+                    $depVar = $this->str('var', 'translate');
+                } else {
+                    $depVar = $this->str('var', $item);
+                }
+
+            }
+
+            $attr .= '        $this->'.$depVar.' = $'.$this->str('var', $item).';';
 
             if ($howManyDep > 1) {
                 $attr .= PHP_EOL;
@@ -382,21 +686,45 @@ class Code extends AbstractCode implements
 
         $html .= $attr;
 
+        $html .= PHP_EOL;
+
+
+
         if ($howManyDep > 1) {
+
+            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
             $html .= '    }'.PHP_EOL;
         } else {
-            $html .= PHP_EOL.'    }'.PHP_EOL;
+            $html .= PHP_EOL;
+            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
+            $html .= '    }'.PHP_EOL;
         }
 
         return $html;
     }
 
-    public function resolveNamespace($item)
+    public function getUseConstructor($data, array $ignore = [***REMOVED***)
     {
-        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-        $item = ltrim($item, '\\');
-        $extendsItem = explode('\\', $item);
-        return $namespace.implode('\\', $extendsItem);
+        $this->uses = '';
+
+        foreach ($data->getDependency() as $alias => $item) {
+
+            //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
+            //que não precisam de Traits.
+            if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
+                $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
+            }
+        }
+
+        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+            foreach ($data->getDependency() as $alias => $item) {
+                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+            }
+        }
+
+
+
+        return $this->uses;
     }
 
     public function getUse($data, array $include = null, array $implements = null)
@@ -407,8 +735,7 @@ class Code extends AbstractCode implements
 
         $this->uses = '';
 
-        if ($data instanceof Src && !empty($data->getImplements())) {
-
+        if (!empty($data->getImplements())) {
             foreach ($data->getImplements() as $alias => $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
@@ -432,7 +759,6 @@ class Code extends AbstractCode implements
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $alias => $item) {
-
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
@@ -454,7 +780,7 @@ class Code extends AbstractCode implements
         }
 
         if (!empty($this->uses)) {
-            $this->uses .= PHP_EOL;
+            //$this->uses .= PHP_EOL;
         }
         return $this->uses;
     }
@@ -495,7 +821,7 @@ class Code extends AbstractCode implements
         return $html;
     }
 
-    public function getImplements($data, array $additional)
+    public function getImplements($data, array $additional = null)
     {
         if (empty($data->getImplements()) && empty($additional)) {
             return PHP_EOL;
@@ -505,6 +831,10 @@ class Code extends AbstractCode implements
             $imp = [***REMOVED***;
         } else {
             $imp = $data->getImplements();
+        }
+
+        if ($additional === null) {
+            $additional = [***REMOVED***;
         }
 
         $implements = array_merge($additional, $imp);
@@ -519,12 +849,18 @@ class Code extends AbstractCode implements
     }
 
 
-    public function getUseAttribute($data, array $include = null)
+    /**
+     * Cria os Atributos das Classes de acordo com as Dependências
+     *
+     * {@inheritDoc}
+     * @see \Gear\Creator\FileUseAttributeInterface::getUseAttribute()
+     */
+    public function getUseAttribute($data, array $include = null, array $default = [***REMOVED***)
     {
         /* Load Dependency */
         $this->loadDependencyService($data);
 
-        $attributes = $this->dependency->getUseAttribute(false);
+        $attributes = $this->dependency->getUseAttribute(false, $default);
 
         if (!empty($include)) {
             foreach ($include as $name => $item) {

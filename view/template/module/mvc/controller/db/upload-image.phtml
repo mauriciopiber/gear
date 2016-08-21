@@ -1,4 +1,9 @@
 
+    /**
+     * Upload Image Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function uploadImageAction()
     {
         $this->getImageService()->appendPlugin();
@@ -25,7 +30,7 @@
         } elseif ($prg !== false) {
             $post = $prg;
             $imageService = $this->getImageService();
-            $imageService->updateImages('<?= $this->str('url', $this->data)?>', $<?php echo $this->idVar;?>);
+            $imageService->updateImages('<?= $this->dataUrl;?>', $<?php echo $this->idVar;?>);
             $success = $imageService->updatePosition($post);
             $this->getImageService()->clearCache();
         }
@@ -33,7 +38,7 @@
         return new ViewModel(
             array(
                 'id<?= $this->data?>' => $<?php echo $this->idVar;?>,
-                'contexto' => '<?php echo $this->str('url', $this->data);?>',
+                'contexto' => '<?php echo $this->dataUrl;?>',
                 'success' => $success
             )
         );

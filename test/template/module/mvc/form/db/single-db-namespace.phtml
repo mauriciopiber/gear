@@ -1,0 +1,58 @@
+<?php
+namespace MyModule\Custom\CustomNamespace;
+
+use GearBase\Form\AbstractForm;
+use Doctrine\ORM\EntityManager;
+use Zend\Form\Element;
+
+/**
+ * Form for Single Db Table Controller.
+ *
+ * PHP Version 5
+ *
+ * @category Form
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class SingleDbTableForm extends AbstractForm
+{
+
+    /**
+     * Construct Form
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @param EntityManager $entityManager EntityManager
+     *
+     * @return SingleDbTableForm
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        parent::__construct('singleDbTableForm');
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'fileupload');
+
+        $this->setEntityManager($entityManager);
+
+        $singleDbColumn = new Element('singleDbColumn');
+        $singleDbColumn->setLabel('Single Db Column');
+        $singleDbColumn->setAttributes(array(
+            'name' => 'singleDbColumn',
+            'id' => 'singleDbColumn',
+            'type' => 'text',
+            'class' => 'form-control'
+        ));
+        $this->add($singleDbColumn);
+
+        $submit = new Element('submit');
+        $submit->setValue('Salvar');
+        $submit->setAttributes(array(
+            'type'  => 'submit'
+        ));
+        $this->add($submit);
+
+        return $this;
+    }
+}

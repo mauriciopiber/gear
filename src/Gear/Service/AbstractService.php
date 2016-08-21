@@ -18,7 +18,6 @@ use GearBase\RequestTrait;
 use Gear\Table\TableService\TableServiceTrait;
 
 /**
- * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @author piber
  */
 abstract class AbstractService implements

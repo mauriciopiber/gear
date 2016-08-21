@@ -1,0 +1,66 @@
+<?php
+namespace MyModule\Interfaces;
+
+use MyModule\Repository\MyDependencyOne;
+use MyModule\Repository\MyDependencyTwo;
+use MyModule\Repository\MyDependencyThree;
+
+/**
+ * PHP Version 5
+ *
+ * @category Interface
+ * @package MyModule/Interfaces
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+interface SimpleDependenciesInterface
+{
+    /**
+     * Set My Dependency One
+     *
+     * @param MyDependencyOne $myDependencyOne My Dependency One
+     *
+     * @return self
+     */
+    public function setMyDependencyOne(MyDependencyOne $myDependencyOne);
+
+    /**
+     * Get My Dependency One
+     *
+     * @return null|MyModule\Repository\MyDependencyOne
+     */
+    public function getMyDependencyOne();
+
+    /**
+     * Set My Dependency Two
+     *
+     * @param MyDependencyTwo $myDependencyTwo My Dependency Two
+     *
+     * @return self
+     */
+    public function setMyDependencyTwo(MyDependencyTwo $myDependencyTwo);
+
+    /**
+     * Get My Dependency Two
+     *
+     * @return null|MyModule\Repository\MyDependencyTwo
+     */
+    public function getMyDependencyTwo();
+
+    /**
+     * Set My Dependency Three
+     *
+     * @param MyDependencyThree $myDependencyThree My Dependency Three
+     *
+     * @return self
+     */
+    public function setMyDependencyThree(MyDependencyThree $myDependencyThree);
+
+    /**
+     * Get My Dependency Three
+     *
+     * @return null|MyModule\Repository\MyDependencyThree
+     */
+    public function getMyDependencyThree();
+}

@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\ServiceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\BasicAbstractService;
+
+/**
+ * @group Service
+ */
+class BasicAbstractServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = $this->getMockForAbstractClass('MyModule\Service\BasicAbstractService', [***REMOVED***, '', false);
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Service\BasicAbstractService', $this->service);
+    }
+}

@@ -1,5 +1,5 @@
 <phpunit
-    bootstrap="_bootstrap.php"
+    bootstrap="./../vendor/autoload.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -12,13 +12,14 @@
 >
     <testsuites>
         <testsuite name="sites">
-            <directory suffix="Test.php">unit</directory>
+            <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
             <directory suffix=".php">./../src</directory>
             <exclude>
+       	 	    <directory suffix=".php">./../src/<?php echo $this->module;?>/Fixture</directory>
                 <directory suffix=".php">./../build</directory>
                 <directory suffix=".php">./../config</directory>
                 <directory suffix=".php">./../require</directory>
@@ -27,13 +28,14 @@
                 <directory suffix=".php">./../test</directory>
                 <directory suffix=".php">./../view</directory>
                 <directory suffix=".php">./../public</directory>
+                <file>./../src/<?php echo $this->module;?>/Module.php</file>
                 <file>./../Module.php</file>
                 <file>./../autoload_classmap.php</file>
             </exclude>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="../build/coverage"/>
+        <log type="coverage-html" target="./../build/coverage"/>
     </logging>
     <listeners>
         <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener">
@@ -58,10 +60,10 @@
 					    <string>http://10.10.10.99:8888</string>
 				    </element>
 				    <element key="xhprofLibFile">
-					    <string>./../vendor/lox/xhprof/xhprof_lib/utils/xhprof_lib.php</string>
+					    <string>vendor/lox/xhprof/xhprof_lib/utils/xhprof_lib.php</string>
 				    </element>
 				    <element key="xhprofRunsFile">
-					    <string>./../vendor/lox/xhprof/xhprof_lib/utils/xhprof_runs.php</string>
+					    <string>vendor/lox/xhprof/xhprof_lib/utils/xhprof_runs.php</string>
 				    </element>
 				    <element key="xhprofFlags">
 					    <string>XHPROF_FLAGS_CPU,XHPROF_FLAGS_MEMORY</string>

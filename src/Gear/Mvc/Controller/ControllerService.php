@@ -12,6 +12,8 @@ use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
+use Zend\Code\Generator\ClassGenerator;
+use Zend\Code\Generator\DocBlockGenerator;
 
 class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
@@ -70,21 +72,30 @@ class ControllerService extends AbstractMvc implements
         $this->controller = $controller;
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
-        $this->file->setFileName(sprintf('%s.php', $controller->getName()));
-        $this->file->setOptions(
-            [
-                'extends' => $this->getCode()->getExtends($controller),
-                'use' => $this->getCode()->getUse($controller),
-                'namespace' => $this->getCode()->getNamespace($controller),
-                'module' => $this->module->getModuleName(),
-                'moduleUrl' => $this->str('url', $this->module->getModuleName()),
-                'actions' => $controller->getAction(),
-                'controllerName' => $controller->getName(),
-                'controllerUrl' => $this->str('url', $controller->getName()),
-            ***REMOVED***
-        );
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
+            'implements' => $this->getCode()->getImplements($controller),
+            'extends' => $this->getCode()->getExtends($controller),
+            'use' => $this->getCode()->getUse($controller),
+            'attribute' => $this->getCode()->getUseAttribute($controller),
 
-        if ($controller->getService()->getService() == 'factories') {
+            'namespace' => $this->getCode()->getNamespace($controller),
+            'module' => $this->module->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+            'actions' => $controller->getAction(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getName()),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
+          ? $this->getCode()->getConstructor($controller)
+          : '';
+
+
+        $this->file->setFileName(sprintf('%s.php', $controller->getName()));
+        $this->file->setOptions($options);
+
+        if ($controller->getService() == 'factories') {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 
@@ -95,7 +106,11 @@ class ControllerService extends AbstractMvc implements
     {
         $this->db = $db;
         $this->table = $db;
+
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
+
+        $location = $this->getCode()->getLocation($this->controller);
+
         $this->dependency = $this->getControllerDependency()->setController($this->controller);
         $this->tableName = ($this->str('class', $db->getTable()));
 
@@ -125,7 +140,6 @@ class ControllerService extends AbstractMvc implements
          * @TODO 2 - Verificação de tabela, associação.
          */
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-
             $this->hasTableImage = true;
 
             $options['uploadImageAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
@@ -134,43 +148,72 @@ class ControllerService extends AbstractMvc implements
             );
         }
 
+        $dependency = $this->controller->getDependency();
+
         if ($this->hasImage || $this->hasTableImage) {
-            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
+
+            $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
+
+            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE_TRAIT.';'.PHP_EOL;
+
+            if ($this->controller->getService() == 'factories') {
+                $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
+            }
+
             $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
         }
 
         /**
          * @TODO 3 - USE e ATTRIBUTE
          */
-        $this->use .= $this->dependency->getUseNamespace(false);
+        $use = $this->dependency->getUseNamespace(false);
         $this->attribute .= $this->dependency->getUseAttribute(false);
 
-        $lines = array_unique(explode(PHP_EOL, $this->use));
+        $lines = array_unique(explode(PHP_EOL, $use));
 
-        $this->use = implode(PHP_EOL, $lines).PHP_EOL;
+        $this->use .= implode(PHP_EOL, $lines);
+        $this->use .= $this->getCode()->getUseConstructor($this->controller);
 
         $lines = array_unique(explode(PHP_EOL, $this->attribute));
         $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 
+        $options['classDocs'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/class-phpdocs.phtml',
+            [
+                'package' => $this->getCode()->getClassDocsPackage($this->controller),
+                'tableLabel' => $this->str('label', $this->controller->getNameOff())
+            ***REMOVED***
+        );
+
+        $this->controller->setDependency($dependency);
+        $options['constructor'***REMOVED*** = ($this->controller->getService() == 'factories')
+          ? $this->getCode()->getConstructor($this->controller)
+          : '';
 
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
-        $this->file->setLocation($this->getModule()->getControllerFolder());
+        $this->file->setLocation($location);
         $this->file->setOptions(array_merge(
             $options,
             [
+                'namespace' => $this->getCode()->getNamespace($this->controller),
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),
                 'controllerUrl' => $this->str('url', $this->controller->getName()),
+                'tableUrl' => $this->str('url', $this->controller->getNameOff()),
                 'actions' => $this->controller->getAction(),
                 'use' => $this->use,
                 'attribute' => $this->attribute,
                 'imagemService' => $this->useImageService, /** @TODO 4 - Usar apenas Use e Attribute */
             ***REMOVED***
         ));
+
+        if ($this->controller->getService() == 'factories') {
+            $this->getFactoryService()->createFactory($this->controller, $location);
+        }
 
         return $this->file->render();
     }
@@ -306,10 +349,12 @@ class ControllerService extends AbstractMvc implements
             'prg'  => $this->postRedirectGet,
             'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
             'data' => $this->controller->getNameOff(),
-            'moduleUrl' => $this->getModule()->getModuleName(),
+            'dataUrl' => $this->str('url', $this->controller->getNameOff()),
+            'tableUrl' => $this->str('url', $this->controller->getNameOff()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'module' => $this->getModule()->getModuleName(),
             'var' => $this->str('var', $this->controller->getNameOff()),
-            'varLenght' =>  $this->str('var-lenght', $this->controller->getNameOff())
+            'varLength' =>  $this->str('var-lenght', $this->controller->getNameOff())
         );
     }
 
@@ -356,8 +401,6 @@ class ControllerService extends AbstractMvc implements
             if (method_exists($columnData, 'getControllerEditBeforeView')) {
                 $this->update[1***REMOVED*** .= $columnData->getControllerEditBeforeView();
             }
-
-
         }
     }
 
@@ -472,6 +515,7 @@ EOS;
         $lines = $this->createUse($this->controller, $lines);
         $lines = $this->createUseAttributes($this->controller, $lines);
 
+
         $newFile = implode(PHP_EOL, $lines);
 
         file_put_contents($this->controllerFile, $newFile);
@@ -485,12 +529,20 @@ EOS;
     {
 
         foreach ($insertMethods as $method) {
-                $this->functions .= <<<EOS
+
+            $label = $this->str('label', $method->getName());
+
+            $this->functions .= <<<EOS
+
+    /**
+     * {$label}
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function {$this->str('var', $method->getName())}Action()
     {
         return new ViewModel([***REMOVED***);
     }
-
 
 EOS;
         }

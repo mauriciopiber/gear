@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\GreatestTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Greatest\AbstractCompleteInvokablesRepository;
+
+/**
+ * @group Repository
+ */
+class AbstractCompleteInvokablesRepositoryTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->repository = $this->getMockForAbstractClass('MyModule\Greatest\AbstractCompleteInvokablesRepository', [***REMOVED***, '', false);
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\Greatest\AbstractCompleteInvokablesRepository', $this->repository);
+    }
+}

@@ -1,0 +1,46 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+
+use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as TestCase;
+use <?php echo $this->module?>\<?php echo $this->namespace;?>\<?php echo $this->controllerName;?>;
+use Zend\Console\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+
+/**
+ * @group <?php echo $this->controllerName.PHP_EOL; ?>
+ * @group Controller
+ */
+class <?php echo $this->controllerName; ?>Test extends TestCase
+{
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
+        parent::setUp();
+<?php echo $this->dependency;?>
+
+<?php echo $this->constructor;?>
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => '<?php echo $this->controllerName;?>'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+    }
+
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action-that-doesnt-exist');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+}

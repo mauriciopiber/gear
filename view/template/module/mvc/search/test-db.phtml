@@ -1,6 +1,7 @@
-namespace <?php echo $this->module;?>Test\FormTest\SearchTest;
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
@@ -14,7 +15,7 @@ class <?php echo $this->class;?>Test extends TestCase
         parent::setUp();
 
         $entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->search = new \<?php echo $this->module;?>\Form\Search\<?php echo $this->class;?>($entityManager->reveal());
+        $this->search = new <?php echo $this->class;?>($entityManager->reveal());
     }
 
     public function testHasColumn()

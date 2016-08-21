@@ -63,14 +63,24 @@ class DbService extends AbstractJsonService
             $params['role'***REMOVED*** = 'admin';
         }
 
+        if (!isset($params['namespace'***REMOVED***) || empty($params['namespace'***REMOVED***)) {
+            $params['namespace'***REMOVED*** = null;
+        }
+
+        if (!isset($params['service'***REMOVED***) || empty($params['service'***REMOVED***)) {
+            $params['service'***REMOVED*** = 'invokables';
+        }
+
         $table = $params['table'***REMOVED***;
         $columns = $params['columns'***REMOVED***;
         $user = $params['user'***REMOVED***;
         $role = $params['role'***REMOVED***;
+        $namespace = $params['namespace'***REMOVED***;
+        $service = $params['service'***REMOVED***;
 
         $module = $this->getModule()->getModuleName();
 
-        $db = $this->getDbService()->create($module, $table, $columns, $user, $role);
+        $db = $this->getDbService()->create($module, $table, $columns, $user, $role, $service, $namespace);
 
 
         if ($this->getTableService()->verifyTableAssociation($table)) {

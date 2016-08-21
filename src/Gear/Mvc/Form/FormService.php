@@ -21,6 +21,8 @@ class FormService extends AbstractMvc
 
     static protected $defaultFolder = null;
 
+    static public $extends = '\Zend\Form\Form';
+
     use FormTestServiceTrait;
 
     use SchemaServiceTrait;
@@ -51,7 +53,6 @@ class FormService extends AbstractMvc
         return $inputs;
     }
 
-
     public function introspectFromTable($db)
     {
         $this->db = $db;
@@ -60,23 +61,27 @@ class FormService extends AbstractMvc
         $this->getFormTestService()->introspectFromTable($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
+        $location = $this->getCode()->getLocation($this->src);
 
         $inputValues = $this->getFormInputValues($this->db);
 
-        $this->getFileCreator()->createFile(
+        $this->getFactoryService()->createFactory($this->src, $location);
+        $this->getTraitService()->createTrait($this->src, $location);
+
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/form/full.form.phtml',
             array(
+                'namespace' => $this->getCode()->getNamespace($this->src),
+                'package' => $this->getCode()->getClassDocsPackage($this->src),
+                'tableLabel' => $this->str('label', $this->db->getTable()),
                 'var' => $this->str('var', $this->src->getName()),
                 'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
                 'elements' => $inputValues
             ),
             $this->src->getName().'.php',
-            $this->getModule()->getFormFolder()
+            $location
         );
-
-        $this->getFactoryService()->createFactory($this->src, $this->getModule()->getFormFolder());
-        $this->getTraitService()->createTrait($this->src, $this->getModule()->getFormFolder());
     }
 
     public function create($src)
@@ -86,6 +91,11 @@ class FormService extends AbstractMvc
         }
 
         $this->src = $src;
+
+        if (empty($this->src->getExtends())) {
+            $this->src->setExtends(static::$extends);
+        }
+
         $this->className = $this->src->getName();
 
         $location = $this->getCode()->getLocation($this->src);
@@ -99,13 +109,15 @@ class FormService extends AbstractMvc
 
         $this->getFormTestService()->createFromSrc($this->src);
 
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/form/src.phtml',
             array(
+                'classDocs' => $this->getCode()->getClassDocs($this->src),
                 'namespace' => $this->getCode()->getNamespace($this->src),
                 'class'   => $this->className,
+                'classUrl' => $this->str('url', $this->className),
                 'extends'    => $this->getCode()->getExtends($this->src),
-                'uses'       => $this->getCode()->getUse($this->src),
+                'use'       => $this->getCode()->getUse($this->src),
                 'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'module'  => $this->getModule()->getModuleName()
             ),

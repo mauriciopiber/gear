@@ -1,0 +1,45 @@
+<?php
+namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Another\Long\Namespaces\BasicAction;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+
+/**
+ * @group BasicAction
+ * @group Controller
+ */
+class BasicActionTest extends TestCase
+{
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
+        parent::setUp();
+
+        $this->controller = new BasicAction();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicAction'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+    }
+
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action-that-doesnt-exist');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+}
