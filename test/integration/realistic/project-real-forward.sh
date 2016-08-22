@@ -28,8 +28,6 @@ cd $modulepath && sudo script/deploy-development.sh
 
 sudo chmod 777 -R $modulepath
 
-cd $modulepath && ant 
-
 ## MVC
 
 sudo rm $modulepath/data/migrations/40160123222067_all_columns_db.php
