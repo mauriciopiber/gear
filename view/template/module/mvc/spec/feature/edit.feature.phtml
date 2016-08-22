@@ -33,6 +33,7 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
 <?php echo $this->expectValues;?>
 <?php echo $this->formValidateNotNull;?>
 
+<?php if (!empty($this->sendKeysInvalid && !empty($this->expectValidateInvalid))) : ?>
     @form-validate-invalid
     Cenário: Edito <?php echo $this->tableLabel;?> com formatos inválidos
       Dado que eu estou logado na página principal
@@ -43,6 +44,7 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
 <?php echo $this->expectValidateInvalid; ?>
+<?php endif;?>
 
     @form-validate-max
     Cenário: Edito <?php echo $this->tableLabel;?> com valores com numero de caracteres acima do permitido.
