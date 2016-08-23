@@ -443,6 +443,7 @@ EOS;
         \$this->add(array(
             'name'       => '$elementName',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -462,6 +463,7 @@ EOS;
         \$this->add(array(
             'name'       => '{$elementName}Verify',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
