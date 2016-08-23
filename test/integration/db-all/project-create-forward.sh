@@ -15,6 +15,7 @@ gearpath="$base/gear"
 
 sudo rm -R "$modulepath/src"
 sudo rm -R "$modulepath/test"
+sudo rm -R "$modulepath/public"
 
 
 ### can be turned off
@@ -49,6 +50,10 @@ cd $gearpath && sudo php public/index.php gear module construct MyModule $base -
 ### OK - cd $modulepath && ant phpunit-benchmark-group -Dgroup=Repository
 ### OK - cd $modulepath && ant phpunit-coverage-benchmark
 ### OK - cd $modulepath && ant phpunit-coverage-benchmark-group -Ds=Repository
-cd $modulepath && ant phpcs-docs
-cd $modulepath && ant unit
+#cd $modulepath && ant phpcs-docs
+#cd $modulepath && ant unit
+cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
+#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-not-null"
+#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique"
+#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique-not-null"
 

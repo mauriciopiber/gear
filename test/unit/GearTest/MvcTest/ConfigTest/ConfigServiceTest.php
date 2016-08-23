@@ -43,7 +43,7 @@ class ConfigServiceTest extends AbstractTestCase
         $this->controllerPluginManager = $this->prophesize('Gear\Mvc\Config\ControllerPluginManager');
         $this->controllerManager  = $this->prophesize('Gear\Mvc\Config\ControllerManager');
 
-        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+        $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
         $this->controllerManager->module($controllers)->willReturn(true)->shouldBeCalled();
 
@@ -65,7 +65,7 @@ class ConfigServiceTest extends AbstractTestCase
      */
     public function testConfigWeb()
     {
-        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+        $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
         $this->assetManager->module($controllers)->willReturn(true)->shouldBeCalled();
         $this->routerManager->module($controllers)->willReturn(true)->shouldBeCalled();
@@ -99,7 +99,7 @@ class ConfigServiceTest extends AbstractTestCase
 
     public function testConfigCli()
     {
-        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+        $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
 
         $this->consoleRouterManager->module($controllers)->willReturn(true)->shouldBeCalled();
