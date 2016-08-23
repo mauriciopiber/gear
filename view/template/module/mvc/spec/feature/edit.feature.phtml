@@ -46,6 +46,7 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
 <?php echo $this->expectValidateInvalid; ?>
 <?php endif;?>
 
+<?php if (!empty($this->sendKeysMax) && !empty($this->expectValidateMax)) : ?>
     @form-validate-max
     Cenário: Edito <?php echo $this->tableLabel;?> com valores com numero de caracteres acima do permitido.
       Dado que eu estou logado na página principal
@@ -56,7 +57,9 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
 <?php echo $this->expectValidateMax;?>
+<?php endif;?>
 
+<?php if (!empty($this->sendKeysMin) && !empty($this->expectValidateMin)) : ?>
     @form-validate-min
     Cenário: Edito <?php echo $this->tableLabel;?> com valores com numero de caracteres menor que o permitido.
       Dado que eu estou logado na página principal
@@ -67,4 +70,5 @@ Funcionalidade: Editar <?php echo $this->tableLabel;?> existente.
       E eu clico no botão Salvar
       Então eu vejo o alerta com a mensagem  "Ops! Verificar a validação dos campos para continuar"
 <?php echo $this->expectValidateMin;?>
+<?php endif;?>
 <?php echo $this->formValidateUnique;?>
