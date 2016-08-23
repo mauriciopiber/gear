@@ -18,8 +18,8 @@ sudo rm -R "$modulepath/test"
 
 
 
- $modulepath/vendor/bin/database my_module root gear
- sudo rm $modulepath/data/my-module.mysql.sql
+$modulepath/vendor/bin/database my_module root gear
+sudo rm $modulepath/data/my-module.mysql.sql
 
 sudo php public/index.php gear schema delete MyModule $base
 sudo php public/index.php gear module-as-project create MyModule $base --type=web --force
