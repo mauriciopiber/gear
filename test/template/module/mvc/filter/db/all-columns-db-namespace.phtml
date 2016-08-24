@@ -142,6 +142,7 @@ class TableFilter extends AbstractFilter
         $this->add(array(
             'name'       => 'passwordVerifyColumn',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -161,6 +162,7 @@ class TableFilter extends AbstractFilter
         $this->add(array(
             'name'       => 'passwordVerifyColumnVerify',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
