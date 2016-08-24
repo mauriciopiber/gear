@@ -249,6 +249,7 @@ class TableUniqueNotNullFilter extends AbstractFilter
         $this->add(array(
             'name'       => 'passwordVerifyColumnUniqueNotNull',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -268,6 +269,7 @@ class TableUniqueNotNullFilter extends AbstractFilter
         $this->add(array(
             'name'       => 'passwordVerifyColumnUniqueNotNullVerify',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(

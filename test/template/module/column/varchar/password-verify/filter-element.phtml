@@ -3,6 +3,7 @@
         $this->add(array(
             'name'       => 'myColumn',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
@@ -22,6 +23,7 @@
         $this->add(array(
             'name'       => 'myColumnVerify',
             'required'   => true,
+            'allow_empty' => true,
             'filters'    => array(array('name' => 'StringTrim')),
             'validators' => array(
                 array(
