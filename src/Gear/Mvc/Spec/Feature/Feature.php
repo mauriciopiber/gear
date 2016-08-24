@@ -146,7 +146,7 @@ class Feature extends AbstractMvcTest
         $fileCreator->setView('template/module/mvc/spec/feature/create.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
+        $fileCreator->setLocation($this->getLocation($action->getController()->getNameOff()));
 
         return $fileCreator->render();
     }
@@ -219,7 +219,7 @@ class Feature extends AbstractMvcTest
         $fileCreator->setView('template/module/mvc/spec/feature/edit.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
+        $fileCreator->setLocation($this->getLocation($action->getController()->getNameOff()));
 
         return $fileCreator->render();
     }
@@ -247,7 +247,7 @@ class Feature extends AbstractMvcTest
         $fileCreator->setView('template/module/mvc/spec/feature/list.feature.phtml');
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
-        $fileCreator->setLocation($this->getLocation($action->getController()->getName()));
+        $fileCreator->setLocation($this->getLocation($action->getController()->getNameOff()));
 
         return $fileCreator->render();
     }
@@ -263,7 +263,7 @@ class Feature extends AbstractMvcTest
     {
         $this->db = $action->getDb();
 
-        $controllerName = $action->getController()->getName();
+        $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
         $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
@@ -301,7 +301,7 @@ class Feature extends AbstractMvcTest
     {
         $this->db = $action->getDb();
 
-        $controllerName = $action->getController()->getName();
+        $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
         $location = $this->getModule()->getPublicJsSpecEndFolder().'/'.$this->str('url', $controllerName);
@@ -503,7 +503,10 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             ) && (
                 !(($column instanceof \Gear\Column\Int\AbstractCheckbox
-                || $column instanceof \Gear\Column\Varchar\UploadImage)
+                || $column instanceof \Gear\Column\Varchar\UploadImage
+                || $column instanceof \Gear\Column\Varchar\PasswordVerify
+                || $column instanceof \Gear\Column\Decimal\MoneyPtBr
+                || $column instanceof \Gear\Column\Text\Text)
                 && $column->getColumn()->isNullable() === false)
             )) {
                 $fileText .= $column->getIntegrationActionIsNullable();
