@@ -13,7 +13,14 @@
     * [ ***REMOVED*** Fixture
     * [ ***REMOVED*** Repository
     * [ ***REMOVED*** Service
-    * [ ***REMOVED*** Interface       
+    * [ ***REMOVED*** Interface
+- [ ***REMOVED*** Db
+    * [X***REMOVED*** All Columns Db
+    * [ ***REMOVED*** All Columns Db Not Null
+    * [ ***REMOVED*** All Columns Db Unique
+    * [ ***REMOVED*** All Columns Db Unique Not Null
+    * [X***REMOVED*** Factory
+    * [X***REMOVED*** Namespace       
 - [ ***REMOVED*** Module as Project
     * [ ***REMOVED*** Cli
         * [ ***REMOVED*** Módulo

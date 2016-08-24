@@ -70,7 +70,7 @@ class Decimal extends AbstractColumn implements SearchFormInterface
     public function getFixtureData($iterator)
     {
         return sprintf(
-            '                \'%s\' => \'%d.%d\',',
+            '                \'%s\' => \'%d.%02d\',',
             $this->str('var', $this->column->getName()),
             $iterator,
             $iterator

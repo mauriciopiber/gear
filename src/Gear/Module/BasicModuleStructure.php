@@ -222,6 +222,7 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getPublicFolder());
         $this->getDirService()->mkDir($this->getPublicUploadFolder());
         $this->getDirService()->mkDir($this->getPublicJsFolder());
+        $this->getDirService()->mkDir($this->getPublicInfoFolder());
         $this->getDirService()->mkDir($this->getPublicJsAppFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
         $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
@@ -366,6 +367,11 @@ EOS;
     public function getPublicFolder()
     {
         return $this->getMainFolder().'/public';
+    }
+
+    public function getPublicInfoFolder()
+    {
+        return $this->getPublicFolder().'/info';
     }
 
     public function getPublicUploadFolder()
