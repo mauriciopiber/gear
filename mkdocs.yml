@@ -10,6 +10,7 @@ pages:
       - 'Mvc':
         - 'Entity' : 'mvc/entity.md'
         - 'Spec' : 'mvc/spec.md'
+        - 'Config' : 'mvc/config.md'
     - 'Project': 'project.md'
     - 'Cache': 'cache.md'    
     - 'Database': 'database.md'
