@@ -48,7 +48,8 @@ cd $modulepath && sudo script/load.sh
 
 
 cd $modulepath && ant unit
-cd $modulepath && ant protractor
+cd $modulepath && ant protractor-tag -Dtag="@upload-image"
+#cd $modulepath && ant protractor
 
 #cd $modulepath && ant unit-group -Ds=Service
 #cd $modulepath && ant unit-group -Ds=Controller
