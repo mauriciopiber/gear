@@ -443,4 +443,27 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @group Spec1
+     */
+    public function testBuildUploadImageAction()
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(['name' => 'MyTableController'***REMOVED***),
+            'db' => new Db(['table' => 'MyTable'***REMOVED***)
+        ***REMOVED***);
+
+        $this->feature->setModule($this->module->reveal());
+
+        $file = $this->feature->buildUploadImageAction($action);
+
+        $expected = $this->template.'/upload-image.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
 }
