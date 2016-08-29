@@ -133,7 +133,7 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('Gear\Mvc\LanguageService', $language);
 
-        $controller = $this->getMockBuilder('Gear\Mvc\Controller\Controller')
+        $controller = $this->getMockBuilder('Gear\Mvc\Controller\ControllerService')
         ->disableOriginalConstructor()
         ->setMethods(['introspectFromTable'***REMOVED***)
         ->getMock();
@@ -297,7 +297,7 @@ class DbServiceTest extends AbstractTestCase
 
         $serviceManager->setService('Gear\Mvc\LanguageService', $language);
 
-        $controller = $this->getMockBuilder('Gear\Mvc\Controller\Controller')
+        $controller = $this->getMockBuilder('Gear\Mvc\Controller\ControllerService')
         ->disableOriginalConstructor()
         ->setMethods(['introspectFromTable'***REMOVED***)
         ->getMock();
