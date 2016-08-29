@@ -57,7 +57,31 @@ class Feature extends AbstractMvcTest
 
     public function buildUploadImageAction(Action $action)
     {
-        return true;
+        $this->db = $action->getDb();
+
+        $controllerName = $action->getController()->getName();
+        $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
+
+
+        $options = $this->getSpecOptions($action);
+        /*
+
+
+        $options['assert'***REMOVED*** = $this->buildListActionCreateAssert();
+        $options['firstValue'***REMOVED*** = $this->buildListFirstValue();
+        $options['tableName'***REMOVED*** = $this->str('label', $this->db->getTable());
+        */
+
+        $fileCreator = $this->getFileCreator();
+
+        $fileCreator->setView('template/module/mvc/spec/feature/upload-image.feature.phtml');
+        $fileCreator->setOptions($options);
+        $fileCreator->setFileName($nameFile);
+        $fileCreator->setLocation($this->getLocation($action->getController()->getNameOff()));
+
+        return $fileCreator->render();
+
+
     }
 
     /**
