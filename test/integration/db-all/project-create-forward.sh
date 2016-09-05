@@ -42,7 +42,7 @@ sudo php public/index.php gear module-as-project create MyModule $base --type=we
 
 cd $gearpath && sudo php public/index.php gear module construct MyModule $base --file="$basedir/gear-all-columns.yml"
 
-cd $modulepath && sudo composer update
+#cd $modulepath && sudo composer update
 cd $modulepath && sudo script/load.sh
 
 ### OK - cd $modulepath && ant phpunit
@@ -57,6 +57,7 @@ cd $modulepath && sudo script/load.sh
 #cd $modulepath && ant unit
 #cd $modulepath && ant protractor
 cd $modulepath && ant protractor-tag -Dtag="@upload-image"
+cd $modulepath && ant protractor-debug
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-not-null"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique"
