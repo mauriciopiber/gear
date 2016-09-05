@@ -88,4 +88,5 @@ target:
   unit-file-coverage: 'set-vendor, buildHelper'
   jshint: ''
   protractor-tag: 'db-load, cache-load'
+  protractor-debug: 'db-load, cache-load'
   
