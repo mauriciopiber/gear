@@ -8,7 +8,6 @@ return [
                 'options' => [
                     'route' => 'gear database mock <module> <table>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mock-table'
                     ***REMOVED***
@@ -18,7 +17,6 @@ return [
                 'options' => [
                     'route' => 'gear database analyse' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'analyse-database'
                     ***REMOVED***
@@ -28,7 +26,6 @@ return [
                 'options' => [
                     'route' => 'gear database analyse table <table>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'analyse-table'
                     ***REMOVED***
@@ -38,7 +35,6 @@ return [
                 'options' => [
                     'route' => 'gear database fix' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-database'
                     ***REMOVED***
@@ -48,7 +44,6 @@ return [
                 'options' => [
                     'route' => 'gear database fix table <table> [--no-truncate***REMOVED*** ' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'fix-table'
                     ***REMOVED***
@@ -58,7 +53,6 @@ return [
                 'options' => [
                     'route' => 'gear database clear table <table>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'clear-table'
                     ***REMOVED***
@@ -68,7 +62,6 @@ return [
                 'options' => [
                     'route' => 'gear database autoincrement' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'autoincrement-database'
                     ***REMOVED***
@@ -78,7 +71,6 @@ return [
                 'options' => [
                     'route' => 'gear database autoincrement table <table>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'autoincrement-table'
                     ***REMOVED***
@@ -88,7 +80,6 @@ return [
                 'options' => [
                     'route' => 'gear database load <location>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mysql-load'
                     ***REMOVED***
@@ -98,7 +89,6 @@ return [
                 'options' => [
                     'route' => 'gear database dump <location> [<name>***REMOVED***' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'mysql-dump'
                     ***REMOVED***
@@ -108,7 +98,6 @@ return [
                 'options' => [
                     'route' => 'gear database module dump <module>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'module-dump'
                     ***REMOVED***
@@ -118,7 +107,6 @@ return [
                 'options' => [
                     'route' => 'gear database module load <module>' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'module-load'
                     ***REMOVED***
@@ -128,7 +116,6 @@ return [
                 'options' => [
                     'route' => 'gear database project dump' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'project-dump'
                     ***REMOVED***
@@ -138,7 +125,6 @@ return [
                 'options' => [
                     'route' => 'gear database project load' . $options,
                     'defaults' => [
-                        '__NAMESPACE__' => 'Gear\Database\Controller',
                         'controller' => 'Gear\Controller\Db',
                         'action' => 'project-load'
                     ***REMOVED***
