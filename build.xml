@@ -252,6 +252,7 @@
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
+            <arg value="--xml"/>
         </exec>
     </target>
     <target name="unit-group" depends="set-vendor, buildHelper">
