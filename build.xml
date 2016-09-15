@@ -249,7 +249,7 @@
     </target>
     <target name="test" depends="set-vendor, phpcs-test, phpcpd-test, phpmd-test"/>
     <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept">
+        <exec executable="${vendor}/bin/codecept" failonerror="true">
             <arg value="run"/>
             <arg value="unit"/>
             <arg value="--xml"/>
