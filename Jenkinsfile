@@ -7,8 +7,8 @@ node {
        /* git url: 'git@bitbucket.org:mauriciopiber/gear-pibernetwork.git' */
    }
    stage('Prepare') {
-       //sh "script/deploy-testing.sh"    
-        sh '/usr/bin/ant prepare'
+       sh "script/deploy-testing.sh"    
+       sh '/usr/bin/ant prepare'
    }
    stage('Unit PHP') {
        sh '/usr/bin/ant unit'    
