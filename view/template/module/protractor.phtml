@@ -15,7 +15,8 @@ exports.config = {
   cucumberOpts: {
     require: [
         '../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/env/env.js',
-        '../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/step/admin.stepDefinitions.js',
+        '../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/**/*.stepDefinitions.js',
+        '../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/*.stepDefinitions.js',
         '../../../vendor/mauriciopiber/gear-admin/public/js/spec/e2e/support/helper/admin.js',
         'e2e/**/*.stepDefinitions.js',
         'e2e/support/*.js',

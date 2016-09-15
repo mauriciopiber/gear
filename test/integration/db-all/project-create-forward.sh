@@ -56,9 +56,10 @@ cd $modulepath && sudo script/load.sh
 #cd $modulepath && ant phpcs-docs
 #cd $modulepath && ant unit
 #cd $modulepath && ant protractor
+cd $modulepath && ant unit
 cd $modulepath && ant protractor-tag -Dtag="@upload-image"
-cd $modulepath && ant protractor-debug
-#cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
+#cd $modulepath && ant protractor-debug
+cd $modulepath && ant protractor-tag -Dtag="@all-columns-db"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-not-null"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique"
 #cd $modulepath && ant protractor-tag -Dtag="@all-columns-db-unique-not-null"
