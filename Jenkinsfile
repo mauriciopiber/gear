@@ -3,9 +3,9 @@
 node {
 
 
-    currentBuild.result = "SUCCESS"
+    //currentBuild.result = "SUCCESS"
    
-    try { 
+    //try { 
         stage('Clone') {
    
             checkout scm
@@ -31,12 +31,14 @@ node {
         stage('Clean') {
             deleteDir()
         }
-    }
+    //}
     
+    /*
     catch (err) {
 
         currentBuild.result = "FAILURE"
-        deleteDir()
+        //deleteDir()
         throw err
     }
+    */
 }
