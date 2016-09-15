@@ -17,7 +17,6 @@ basepath = (fs.existsSync(tryModule)) ? tryModule : null;
 basepath = (basepath == null && fs.existsSync(tryProject)) ? tryProject : basepath;
 
 var expect = require(basepath + '/public/js/spec/e2e/support/expect/expect');
-var login = require(basepath + '/public/js/spec/e2e/login/login.page.js');
 var indexPage = require('./index.page.js');
 
 module.exports = function () {
