@@ -10,10 +10,5 @@ bin/database $database $username $password
 mysql -u$username -p$password $database < data/gear.mysql.sql
 
 chmod 777 -R build
-chmod 777 -R data/session
-chmod 777 -R data/logs
-chmod 777 -R data/cache
-chmod 777 -R data/DoctrineModule
-chmod 777 -R data/DoctrineORMModule
 
-php public/index.php gear module dump-autoload Gear
+sudo php public/index.php gear module dump-autoload Gear
