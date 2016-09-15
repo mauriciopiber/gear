@@ -29,7 +29,7 @@ node {
             junit 'build/report.xml'
         }
         stage('Clean') {
-            deleteDir()
+            //deleteDir()
         }
     //}
     
