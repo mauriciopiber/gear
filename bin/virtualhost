@@ -21,9 +21,9 @@ projectEnvironment=${3}
 sudo ls -l /etc/apache2/sites-available/$projectHost.conf &> /dev/null
 
 if [ "$?" == 0 ***REMOVED***; then
-    #rm /etc/apache2/sites-available/$projectHost.conf
+    
     sudo /usr/sbin/a2dissite $projectHost
-    #apache2ctl -S
+    sudo rm /etc/apache2/sites-available/$projectHost.conf
 fi
 
 
@@ -41,5 +41,6 @@ echo "<VirtualHost *:80>
 
 sudo /usr/sbin/a2ensite $projectHost
 
-echo "127.0.0.1 $projectHost" | sudo tee -a /etc/hosts
+sudo grep -q -F "127.0.0.1 $projectHost" /etc/hosts || sudo echo "127.0.0.1 $projectHost" >> /etc/hosts
+
 sudo /etc/init.d/apache2 force-reload
