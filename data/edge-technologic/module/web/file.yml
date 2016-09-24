@@ -16,3 +16,4 @@ files:
     16: test/phpcs-docs.xml
     17: test/phpunit-benchmark.xml
     18: test/phpunit-coverage-benchmark.xml
+    19: jenkins/quality    

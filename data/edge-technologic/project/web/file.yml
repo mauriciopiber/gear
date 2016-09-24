@@ -17,3 +17,4 @@ files:
   16: phinx.yml
   17: phpmd.xml
   18: phpcs-docs.xml
+  19: jenkins/quality      
