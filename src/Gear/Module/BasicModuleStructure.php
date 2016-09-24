@@ -141,6 +141,9 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getMainFolder());
 
 
+        $this->getDirService()->mkDir($this->getJenkinsFolder());
+
+
         $this->getDirService()->mkDir($this->getDocsFolder());
         //script
         $this->getDirService()->mkDir($this->getScriptFolder());
@@ -362,6 +365,11 @@ EOS;
     public function getDataMigrationFolder()
     {
         return $this->getDataFolder().'/migrations';
+    }
+
+    public function getJenkinsFolder()
+    {
+        return $this->getMainFolder().'/jenkins';
     }
 
     public function getPublicFolder()
