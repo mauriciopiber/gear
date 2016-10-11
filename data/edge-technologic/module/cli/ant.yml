@@ -63,6 +63,7 @@ target:
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'
   unit: 'set-vendor'
+  unit-ci: 'set-vendor'
   unit-group: 'set-vendor, buildHelper'
   unit-coverage-group: 'set-vendor, buildHelper'
   

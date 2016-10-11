@@ -5,5 +5,6 @@
     <mkdir dir="${basedir}/build/pdepend"/>
     <mkdir dir="${basedir}/build/phpdox"/>
     <mkdir dir="${basedir}/build/features"/>
+    <mkdir dir="${basedir}/build/docs"/>    
     <mkdir dir="${basedir}/public/info"/>
 </target>

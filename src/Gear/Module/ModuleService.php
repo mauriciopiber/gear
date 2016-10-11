@@ -388,6 +388,9 @@ class ModuleService
         $this->createModuleFile();
         $this->createModuleFileAlias();
 
+
+        $this->createJenkinsFile($this->type);
+
         return true;
     }
 
@@ -446,6 +449,23 @@ class ModuleService
     public function cache()
     {
         $this->getCacheService()->renewFileCache();
+    }
+
+    /**
+     * Cria arquivo config/application.config.php para módulos as project
+     *
+     * @param string $type Tipo do módulo Web|Cli
+     *
+     * @return string
+     */
+    public function createJenkinsFile($type = 'web')
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/jenkinsfile-%s.phtml', $type));
+        $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('Jenkinsfile');
+        $file->setLocation($this->getModule()->getMainFolder());
+        return $file->render();
     }
 
     /**
