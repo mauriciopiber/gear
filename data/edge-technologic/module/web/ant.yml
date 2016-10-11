@@ -82,6 +82,7 @@ target:
   phpcs: 'set-vendor'
   phpmd: 'set-vendor'
   phpcpd: 'set-vendor'
+  unit-ci: 'set-vendor'  
   unit-group: 'set-vendor, buildHelper'  
   unit: 'set-vendor, buildHelper'
   unit-coverage-group: 'set-vendor, buildHelper'

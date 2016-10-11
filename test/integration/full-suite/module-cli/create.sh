@@ -17,16 +17,15 @@ gearpath="$base/gear"
 
 #### Remove
 
-php public/index.php gear git repository delete $module --force
-
-php public/index.php gear jenkins job delete $module
+cd $modulepath && php public/index.php gear git repository delete $module --force
+cd $modulepath && php public/index.php gear jenkins suite delete
 
 sudo rm -R $modulepath/.git
 sudo rm -R $modulepath/schema
 
 #### Create
 
-sudo php public/index.php gear module-as-project create $module $base --type=cli --force
+cd $gearpath && sudo php public/index.php gear module-as-project create $module $base --type=cli --force
 
 cd $modulepath && sudo script/deploy-development.sh
 
@@ -42,20 +41,20 @@ cd $modulepath && sudo script/deploy-development.sh
 ### can be turned off
 ###cd $modulepath && sudo script/load.sh
 
-cd $modulepath && ant
+#cd $modulepath && ant
 
 
 #### CREATE GIT.
 
 #### INITIATE.
 
-php public/index.php gear git repository create $module
+cd $modulepath && php public/index.php gear git repository create $module
 
-php public/index.php gear git repository init
+cd $modulepath && php public/index.php gear git repository init
 
-php public/index.php gear jenkins suite create module-cli
+cd $modulepath && php public/index.php gear jenkins suite create module-cli
 
-php public/index.php gear deploy build "Iniciando os trabalhos"
+cd $modulepath && php public/index.php gear deploy build "Primeiro Build com sucesso"
 
 
 
