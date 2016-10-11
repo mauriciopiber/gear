@@ -357,5 +357,5 @@
             <arg value="public/js/spec/end2end.conf.js"/>
             <arg value="--cucumberOpts.fail-fast"/>
         </exec>
-    </target>    
+    </target>
 </project>
