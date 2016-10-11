@@ -43,6 +43,11 @@ cd $modulepath && sudo script/deploy-development.sh
 
 #cd $modulepath && ant
 
+echo "
+*
+!.gitignore" > build/.gitignore
+
+echo "vendor" > .gitignore
 
 #### CREATE GIT.
 

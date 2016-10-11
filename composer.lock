@@ -6581,16 +6581,16 @@
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.19",
+            "version": "0.2.20",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "e22a15e2923276b9cb6577068e86ddbf58bd656d"
+                "reference": "875c9ace246e3fee1e0740a716dedb7bb07f1f1e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.19-87e8bc.tar",
-                "reference": "e22a15e2923276b9cb6577068e86ddbf58bd656d",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.20-8b13ab.tar",
+                "reference": "875c9ace246e3fee1e0740a716dedb7bb07f1f1e",
                 "shasum": null
             },
             "require": {
@@ -6621,7 +6621,7 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2016-10-11 15:15:00"
+            "time": "2016-10-11 16:30:05"
         },
         {
             "name": "mauriciopiber/gear-version",
