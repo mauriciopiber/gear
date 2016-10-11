@@ -17,7 +17,7 @@ gearpath="$base/gear"
 
 #### Remove
 
-php public/index.php gear git repository delete $module
+php public/index.php gear git repository delete $module --force
 
 php public/index.php gear jenkins job delete $module
 
@@ -42,8 +42,6 @@ cd $modulepath && sudo script/deploy-development.sh
 ### can be turned off
 ###cd $modulepath && sudo script/load.sh
 
-
-
 cd $modulepath && ant
 
 
@@ -55,13 +53,11 @@ php public/index.php gear git repository create $module
 
 php public/index.php gear git repository init
 
-php public/index.php gear jenkins job create $module pipeline-dev
+php public/index.php gear jenkins suite create module-cli
 
-php public/index.php gear deploy build $module pipeline-dev
+php public/index.php gear deploy build "Iniciando os trabalhos"
 
-#### 
 
-#### PUSH
 
 
 

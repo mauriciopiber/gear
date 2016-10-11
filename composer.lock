@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "hash": "cea82601398c170320b6a544f0279bc9",
     "content-hash": "3a04d7004d9791dba6f0355f80cae33b",
     "packages": [
         {
@@ -955,17 +954,17 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.24",
+            "version": "0.2.31",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba"
+                "reference": "feeee6965a2991de1bbe39def87b21f8fc699173"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.24-f61e9a.tar",
-                "reference": "f1c2f0ad420af434da13af467bb48351e902f6ba",
-                "shasum": "19e6aaec971fd5ec989bfba6bd96b89ffbd7271a"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.31-334d04.tar",
+                "reference": "feeee6965a2991de1bbe39def87b21f8fc699173",
+                "shasum": null
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
@@ -977,6 +976,9 @@
             "require-dev": {
                 "codeception/codeception": "^2.2.0",
                 "jakub-onderka/php-parallel-lint": "^0.9",
+                "mauriciopiber/gear-deploy": "~0.2.0",
+                "mauriciopiber/gear-jenkins": "~0.2.0",
+                "mauriciopiber/gear-version": "~0.2.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
@@ -992,7 +994,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-08-02 21:18:57"
+            "time": "2016-10-09 02:31:04"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -1043,17 +1045,17 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991"
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/myclabs-deep-copy-94e5ca3e90aa5b34663780393e10914f7438f991-zip-d65903.tar",
-                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991",
-                "shasum": "a3deb9bcd439d2e211fecb248140dd7cc73ef2ec"
+                "url": "https://mirror.pibernetwork.com/dist/myclabs-deep-copy-ea74994a3dc7f8d2f65a06009348f2d63c81e61f-zip-9394a6.tar",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -1081,7 +1083,7 @@
                 "object",
                 "object graph"
             ***REMOVED***,
-            "time": "2016-09-07 15:34:10"
+            "time": "2016-09-16 13:37:59"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -1187,17 +1189,17 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
-                "shasum": "a84cde4dcc164ce7712e7b514c396acd61c8936a"
+                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-reflection-docblock-8331b5efe816ae05461b7ca1e721c01b46bafb3e-zip-319752.tar",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
@@ -1228,7 +1230,7 @@
                 }
             ***REMOVED***,
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -1635,24 +1637,24 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.5.4",
+            "version": "5.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5"
+                "reference": "3f67cee782c9abfaee5e32fd2f57cdd54bc257ba"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-3e6e88e56c912133de6e99b87728cca7ed70c5f5-zip-fa68a5.tar",
-                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5",
-                "shasum": "8cb57064fc1edad249312ced2aa43402988bc551"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-3f67cee782c9abfaee5e32fd2f57cdd54bc257ba-zip-66e600.tar",
+                "reference": "3f67cee782c9abfaee5e32fd2f57cdd54bc257ba",
+                "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-json": "*",
-                "ext-pcre": "*",
-                "ext-reflection": "*",
-                "ext-spl": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-xml": "*",
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.3.1",
@@ -1674,7 +1676,12 @@
             "conflict": {
                 "phpdocumentor/reflection-docblock": "3.0.2"
             },
+            "require-dev": {
+                "ext-pdo": "*"
+            },
             "suggest": {
+                "ext-tidy": "*",
+                "ext-xdebug": "*",
                 "phpunit/php-invoker": "~1.1"
             },
             "bin": [
@@ -1709,21 +1716,21 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-08-26 07:11:44"
+            "time": "2016-10-03 13:04:15"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.7",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "546898a2c0c356ef2891b39dd7d07f5d82c8ed0a"
+                "reference": "238d7a2723bce689c79eeac9c7d5e1d623bb9dc2"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-546898a2c0c356ef2891b39dd7d07f5d82c8ed0a-zip-a64bfc.tar",
-                "reference": "546898a2c0c356ef2891b39dd7d07f5d82c8ed0a",
-                "shasum": "3094a9d1af300fdbef79c16bcfc733b2630f72a2"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-238d7a2723bce689c79eeac9c7d5e1d623bb9dc2-zip-d45e80.tar",
+                "reference": "238d7a2723bce689c79eeac9c7d5e1d623bb9dc2",
+                "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
@@ -1768,26 +1775,34 @@
                 "mock",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-09-06 16:07:45"
+            "time": "2016-10-09 07:01:45"
         },
         {
             "name": "psr/log",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": "2b97f0ffbef756c854283677034e1e174b8fa85e"
+                "url": "https://mirror.pibernetwork.com/dist/psr-log-4ebe3a8bf773a19edfe0a84b6585ba3d401b724d-zip-6434e8.tar",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1801,12 +1816,13 @@
                 }
             ***REMOVED***,
             "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
                 "psr-3"
             ***REMOVED***,
-            "time": "2012-12-21 11:40:51"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "robmorgan/phinx",
@@ -2381,17 +2397,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "431d28df9c7bb6e77f8f6289d8670b044fabb9e8"
+                "reference": "949e7e846743a7f9e46dc50eb639d5fde1f53341"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-config-431d28df9c7bb6e77f8f6289d8670b044fabb9e8-zip-b2a625.tar",
-                "reference": "431d28df9c7bb6e77f8f6289d8670b044fabb9e8",
-                "shasum": "39fdef9467ca88104528211afc3204e3d8b565d0"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-config-949e7e846743a7f9e46dc50eb639d5fde1f53341-zip-749c89.tar",
+                "reference": "949e7e846743a7f9e46dc50eb639d5fde1f53341",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
@@ -2430,24 +2446,25 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-27 18:50:07"
+            "time": "2016-09-25 08:27:07"
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.11",
+            "version": "v2.8.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "3d3e4fa5f0614c8e45220e5de80332322e33bd90"
+                "reference": "d7a5a88178f94dcc29531ea4028ea614e35452d4"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-console-3d3e4fa5f0614c8e45220e5de80332322e33bd90-zip-f90d67.tar",
-                "reference": "3d3e4fa5f0614c8e45220e5de80332322e33bd90",
-                "shasum": "06753c35be5f4514fc10a82c5cd2d66665c311b7"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-console-d7a5a88178f94dcc29531ea4028ea614e35452d4-zip-344305.tar",
+                "reference": "d7a5a88178f94dcc29531ea4028ea614e35452d4",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9",
+                "symfony/debug": "~2.7,>=2.7.2|~3.0.0",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
@@ -2490,21 +2507,78 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-06 10:55:00"
+            "time": "2016-09-28 00:10:16"
         },
         {
-            "name": "symfony/filesystem",
-            "version": "v3.1.4",
+            "name": "symfony/debug",
+            "version": "v3.0.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/filesystem.git",
-                "reference": "bb29adceb552d202b6416ede373529338136e84f"
+                "url": "https://github.com/symfony/debug.git",
+                "reference": "697c527acd9ea1b2d3efac34d9806bf255278b0a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-bb29adceb552d202b6416ede373529338136e84f-zip-4aa7fc.tar",
-                "reference": "bb29adceb552d202b6416ede373529338136e84f",
-                "shasum": "e36a63b4c86fae3f05bfca8514b9848a3eb0b5b2"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-debug-697c527acd9ea1b2d3efac34d9806bf255278b0a-zip-ff5336.tar",
+                "reference": "697c527acd9ea1b2d3efac34d9806bf255278b0a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "psr/log": "~1.0"
+            },
+            "conflict": {
+                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
+            },
+            "require-dev": {
+                "symfony/class-loader": "~2.8|~3.0",
+                "symfony/http-kernel": "~2.8|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Debug\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ***REMOVED***,
+            "description": "Symfony Debug Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-07-30 07:22:48"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v3.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "682fd8fdb3135fdf05fc496a01579ccf6c85c0e5"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/symfony-filesystem-682fd8fdb3135fdf05fc496a01579ccf6c85c0e5-zip-dd7425.tar",
+                "reference": "682fd8fdb3135fdf05fc496a01579ccf6c85c0e5",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2539,21 +2613,21 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-20 05:44:26"
+            "time": "2016-09-14 00:18:46"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "e568ef1784f447a0e54dcb6f6de30b9747b0f577"
+                "reference": "205b5ffbb518a98ba2ae60a52656c4a31ab00c6f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-e568ef1784f447a0e54dcb6f6de30b9747b0f577-zip-e89cb3.tar",
-                "reference": "e568ef1784f447a0e54dcb6f6de30b9747b0f577",
-                "shasum": "75d49da52643a232f9873d2570ad50e9a081be28"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-finder-205b5ffbb518a98ba2ae60a52656c4a31ab00c6f-zip-0223cd.tar",
+                "reference": "205b5ffbb518a98ba2ae60a52656c4a31ab00c6f",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2588,7 +2662,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-26 12:04:02"
+            "time": "2016-09-28 00:11:12"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2651,17 +2725,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "e64e93041c80e77197ace5ab9385dedb5a143697"
+                "reference": "66de154ae86b1a07001da9fbffd620206e4faf94"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-process-e64e93041c80e77197ace5ab9385dedb5a143697-zip-0bb1a7.tar",
-                "reference": "e64e93041c80e77197ace5ab9385dedb5a143697",
-                "shasum": "31aace27c0353cf42cfa1dc44c8cc0d9442048f6"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-process-66de154ae86b1a07001da9fbffd620206e4faf94-zip-f0830c.tar",
+                "reference": "66de154ae86b1a07001da9fbffd620206e4faf94",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2696,21 +2770,21 @@
             ***REMOVED***,
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-16 14:58:24"
+            "time": "2016-09-29 14:13:09"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f291ed25eb1435bddbe8a96caaef16469c2a092d"
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-f291ed25eb1435bddbe8a96caaef16469c2a092d-zip-c46ff9.tar",
-                "reference": "f291ed25eb1435bddbe8a96caaef16469c2a092d",
-                "shasum": "104df6acdf7ccba2031a52fc1d98f20b151c05e4"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-yaml-368b9738d4033c8b93454cb0dbd45d305135a6d3-zip-04aa57.tar",
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -2745,7 +2819,7 @@
             ***REMOVED***,
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-02 02:12:52"
+            "time": "2016-09-25 08:27:07"
         },
         {
             "name": "webmozart/assert",
@@ -3716,17 +3790,17 @@
         },
         {
             "name": "zendframework/zend-form",
-            "version": "2.9.1",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-form.git",
-                "reference": "a0f0ce0f4c11e1c78939b4e8a212f6ba44559253"
+                "reference": "2d076100e4c6a779b7676d098192e3d1cf74f34e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-a0f0ce0f4c11e1c78939b4e8a212f6ba44559253-zip-42b377.tar",
-                "reference": "a0f0ce0f4c11e1c78939b4e8a212f6ba44559253",
-                "shasum": "146b4c674eb88ed9e4ea2e8e00c8f180a5511bfa"
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-form-2d076100e4c6a779b7676d098192e3d1cf74f34e-zip-c1041e.tar",
+                "reference": "2d076100e4c6a779b7676d098192e3d1cf74f34e",
+                "shasum": ""
             },
             "require": {
                 "php": "^5.5 || ^7.0",
@@ -3789,7 +3863,7 @@
                 "form",
                 "zf2"
             ***REMOVED***,
-            "time": "2016-09-14 17:47:35"
+            "time": "2016-09-22 15:56:15"
         },
         {
             "name": "zendframework/zend-http",
@@ -5834,34 +5908,35 @@
         },
         {
             "name": "behat/behat",
-            "version": "v3.1.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "359d987b3064d78f2d3a6ba3a355277f3b09b47f"
+                "reference": "df7d9225e9ee37fdaa54273e3e0aecf2515bbe76"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/359d987b3064d78f2d3a6ba3a355277f3b09b47f",
-                "reference": "359d987b3064d78f2d3a6ba3a355277f3b09b47f",
-                "shasum": "15c44bf690b5707cd373b4d19986be20fa1801ad"
+                "url": "https://mirror.pibernetwork.com/dist/behat-behat-df7d9225e9ee37fdaa54273e3e0aecf2515bbe76-zip-876a25.tar",
+                "reference": "df7d9225e9ee37fdaa54273e3e0aecf2515bbe76",
+                "shasum": ""
             },
             "require": {
-                "behat/gherkin": "~4.4",
+                "behat/gherkin": "^4.4.4",
                 "behat/transliterator": "~1.0",
                 "ext-mbstring": "*",
                 "php": ">=5.3.3",
-                "symfony/class-loader": "~2.1|~3.0",
-                "symfony/config": "~2.3|~3.0",
-                "symfony/console": "~2.1|~3.0",
-                "symfony/dependency-injection": "~2.1|~3.0",
-                "symfony/event-dispatcher": "~2.1|~3.0",
-                "symfony/translation": "~2.3|~3.0",
-                "symfony/yaml": "~2.1|~3.0"
+                "symfony/class-loader": "~2.1||~3.0",
+                "symfony/config": "~2.3||~3.0",
+                "symfony/console": "~2.5||~3.0",
+                "symfony/dependency-injection": "~2.1||~3.0",
+                "symfony/event-dispatcher": "~2.1||~3.0",
+                "symfony/translation": "~2.3||~3.0",
+                "symfony/yaml": "~2.1||~3.0"
             },
             "require-dev": {
+                "herrera-io/box": "~1.6.1",
                 "phpunit/phpunit": "~4.5",
-                "symfony/process": "~2.1|~3.0"
+                "symfony/process": "~2.5|~3.0"
             },
             "suggest": {
                 "behat/mink-extension": "for integration with Mink testing framework",
@@ -5874,7 +5949,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -5910,21 +5985,21 @@
                 "symfony",
                 "testing"
             ***REMOVED***,
-            "time": "2016-03-28 07:04:45"
+            "time": "2016-09-25 09:40:39"
         },
         {
             "name": "behat/gherkin",
-            "version": "v4.4.2",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "d26757dc970e67b50ed0ee47b95273daeb84fea6"
+                "reference": "cf8cc94647101e02a33d690245896d83d880aea1"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/behat-gherkin-d26757dc970e67b50ed0ee47b95273daeb84fea6-zip-00c72d.tar",
-                "reference": "d26757dc970e67b50ed0ee47b95273daeb84fea6",
-                "shasum": "4407d8a978a6190f476a6520c76053b34e74709e"
+                "url": "https://mirror.pibernetwork.com/dist/behat-gherkin-cf8cc94647101e02a33d690245896d83d880aea1-zip-f4f4d8.tar",
+                "reference": "cf8cc94647101e02a33d690245896d83d880aea1",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.1"
@@ -5969,7 +6044,7 @@
                 "gherkin",
                 "parser"
             ***REMOVED***,
-            "time": "2016-09-03 07:28:57"
+            "time": "2016-09-18 12:16:14"
         },
         {
             "name": "behat/transliterator",
@@ -6142,17 +6217,17 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.1",
+            "version": "6.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
-                "shasum": "044c285dabf6c969c889b1b55800c682f68cf3e7"
+                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-guzzle-ebf29dee597f02f09f4d5bbecc68230ea9b08f60-zip-147bdd.tar",
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/promises": "^1.0",
@@ -6200,7 +6275,7 @@
                 "rest",
                 "web service"
             ***REMOVED***,
-            "time": "2016-07-15 17:22:37"
+            "time": "2016-10-08 15:01:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -6449,36 +6524,36 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.31",
+            "version": "0.2.42",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "5e8a5e70cab20e1bb3c73145f5ebbeb93bd66efa"
+                "reference": "ac59c3f161e31321b1387cdb6633ddb402b4a782"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.31-2c5dbe.tar",
-                "reference": "5e8a5e70cab20e1bb3c73145f5ebbeb93bd66efa",
-                "shasum": "5aaef23134cc0165ba95ec818dc1c90dfa59cbb6"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.42-2123fa.tar",
+                "reference": "ac59c3f161e31321b1387cdb6633ddb402b4a782",
+                "shasum": null
             },
             "require": {
                 "cypresslab/gitelephant": "^1.0.14",
-                "mauriciopiber/gear-base": "^0.2.0",
                 "php": ">=5.5",
                 "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
-                "codeception/codeception": "^2.1.4",
+                "codeception/codeception": "^2.2.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear": "~0.2.0",
+                "mauriciopiber/gear-base": "^0.2.0",
                 "mauriciopiber/gear-jenkins": "~0.2.0",
                 "mauriciopiber/gear-version": "^0.2.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^4.8.19",
+                "phpunit/phpunit": "^5.0.0",
                 "sebastian/phpcpd": "^2.0.2",
                 "sebastian/phpdcd": "^1.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
@@ -6495,24 +6570,23 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2016-08-26 07:17:41"
+            "time": "2016-10-10 13:59:31"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.6",
+            "version": "0.2.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "ef0d129bacd82d991228fe6649b70b6c2075e958"
+                "reference": "bcaf11a78e247995deef203aaefcae45a742443e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.6-4b3964.tar",
-                "reference": "ef0d129bacd82d991228fe6649b70b6c2075e958",
-                "shasum": "0b6a75d6b1263873af0bd6830e382abd3356c787"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.18-f0803f.tar",
+                "reference": "bcaf11a78e247995deef203aaefcae45a742443e",
+                "shasum": null
             },
             "require": {
-                "mauriciopiber/gear-base": "^0.2.0",
                 "php": ">=5.5",
                 "zendframework/zendframework": "^2.5.1"
             },
@@ -6520,8 +6594,11 @@
                 "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
                 "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-base": "^0.2.0",
                 "mauriciopiber/gear-deploy": "~0.2.0",
+                "mauriciopiber/gear-json": "^0.2.0",
                 "mauriciopiber/gear-version": "^0.2.0",
+                "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
@@ -6537,24 +6614,23 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2016-06-15 11:59:02"
+            "time": "2016-10-11 05:47:09"
         },
         {
             "name": "mauriciopiber/gear-version",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
-                "reference": "6b981f5d0ff9c1e7282cb1eac07d62bff9e2fd3f"
+                "reference": "e1a29d6e5b9a5494247b9012ce6d3607c6e6b803"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.3-0a2979.tar",
-                "reference": "6b981f5d0ff9c1e7282cb1eac07d62bff9e2fd3f",
-                "shasum": "c6432accedc956f2186157e2d9c1a4e43a632e1f"
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.4-f87fe4.tar",
+                "reference": "e1a29d6e5b9a5494247b9012ce6d3607c6e6b803",
+                "shasum": null
             },
             "require": {
-                "mauriciopiber/gear-base": "^0.2.0",
                 "php": "^5.5",
                 "zendframework/zendframework": "^2.5.1"
             },
@@ -6562,6 +6638,7 @@
                 "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
                 "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-base": "^0.2.0",
                 "mauriciopiber/gear-deploy": "^0.2.0",
                 "mauriciopiber/gear-jenkins": "0.2.4",
                 "pdepend/pdepend": "^2.0.3",
@@ -6579,7 +6656,7 @@
                     "GearVersion": "src"
                 }
             },
-            "time": "2016-06-15 12:01:45"
+            "time": "2016-10-06 11:43:54"
         },
         {
             "name": "mauriciopiber/test-listener-xhprof",
@@ -6685,17 +6762,17 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-                "shasum": "dd8bba8222458a6f76d4c662a788915bf5e689f6"
+                "url": "https://mirror.pibernetwork.com/dist/nikic-php-parser-4dd659edadffdc2143e4753df655d866dbfeedf0-zip-d00c8b.tar",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -6732,7 +6809,7 @@
                 "parser",
                 "php"
             ***REMOVED***,
-            "time": "2016-04-19 13:41:41"
+            "time": "2016-09-16 12:04:44"
         },
         {
             "name": "pdepend/pdepend",
@@ -7211,17 +7288,17 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "d2a07cc11c5fa94820240b1e67592ffb18e347b9"
+                "reference": "901319a31c9b3cee7857b4aeeb81b5d64dfa34fc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-d2a07cc11c5fa94820240b1e67592ffb18e347b9-zip-93acb4.tar",
-                "reference": "d2a07cc11c5fa94820240b1e67592ffb18e347b9",
-                "shasum": "8d4b6755715dbe15270781f7efeaf57efb130678"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-browser-kit-901319a31c9b3cee7857b4aeeb81b5d64dfa34fc-zip-20d725.tar",
+                "reference": "901319a31c9b3cee7857b4aeeb81b5d64dfa34fc",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7264,21 +7341,21 @@
             ***REMOVED***,
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-26 08:04:17"
+            "time": "2016-09-06 11:02:40"
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "2d0ba77c46ecc96a6641009a98f72632216811ba"
+                "reference": "bcb072aba46ddf3b1a496438c63be6be647739aa"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-2d0ba77c46ecc96a6641009a98f72632216811ba-zip-be6922.tar",
-                "reference": "2d0ba77c46ecc96a6641009a98f72632216811ba",
-                "shasum": "f5362ffa9be23ae1fe3420928afbd83bf56e2955"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-class-loader-bcb072aba46ddf3b1a496438c63be6be647739aa-zip-6d77f7.tar",
+                "reference": "bcb072aba46ddf3b1a496438c63be6be647739aa",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7320,21 +7397,21 @@
             ***REMOVED***,
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-23 13:39:15"
+            "time": "2016-09-06 23:30:54"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "2851e1932d77ce727776154d659b232d061e816a"
+                "reference": "ca809c64072e0fe61c1c7fb3c76cdc32265042ac"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-2851e1932d77ce727776154d659b232d061e816a-zip-969404.tar",
-                "reference": "2851e1932d77ce727776154d659b232d061e816a",
-                "shasum": "e1472d97496474a18837b03831e37bde713c3c5d"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-css-selector-ca809c64072e0fe61c1c7fb3c76cdc32265042ac-zip-c54ea0.tar",
+                "reference": "ca809c64072e0fe61c1c7fb3c76cdc32265042ac",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7373,21 +7450,21 @@
             ***REMOVED***,
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:41:56"
+            "time": "2016-09-06 11:02:40"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "6e4f3316afdc9783d7b48a136db89bd791b55698"
+                "reference": "8fa4be9a36f41e49b0c3969678c41c81ed463816"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-6e4f3316afdc9783d7b48a136db89bd791b55698-zip-d753a2.tar",
-                "reference": "6e4f3316afdc9783d7b48a136db89bd791b55698",
-                "shasum": "24f3c0444240b1a8ab033a1a1832588ea6187f69"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-dependency-injection-8fa4be9a36f41e49b0c3969678c41c81ed463816-zip-24f730.tar",
+                "reference": "8fa4be9a36f41e49b0c3969678c41c81ed463816",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7433,11 +7510,11 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-23 13:39:15"
+            "time": "2016-09-24 15:56:48"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -7447,7 +7524,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-dom-crawler-bb7395e8b1db3654de82b9f35d019958276de4d7-zip-c35a3f.tar",
                 "reference": "bb7395e8b1db3654de82b9f35d019958276de4d7",
-                "shasum": "d0697bd05bc7f2b9d7d60501a085fa32138e3aa4"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7493,7 +7570,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -7503,7 +7580,7 @@
                 "type": "tar",
                 "url": "https://mirror.pibernetwork.com/dist/symfony-event-dispatcher-c0c00c80b3a69132c4e55c3e7db32b4a387615e5-zip-f96986.tar",
                 "reference": "c0c00c80b3a69132c4e55c3e7db32b4a387615e5",
-                "shasum": "185b845997ff01b7192e56771a0a070839c9969c"
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9"
@@ -7553,17 +7630,17 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "a35edc277513c9bc0f063ca174c36b346f974528"
+                "reference": "93013a18d272e59dab8e67f583155b78c68947eb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-a35edc277513c9bc0f063ca174c36b346f974528-zip-4fce5d.tar",
-                "reference": "a35edc277513c9bc0f063ca174c36b346f974528",
-                "shasum": "3f23ba79a50857af3d1e4a0c317531a84b816896"
+                "url": "https://mirror.pibernetwork.com/dist/symfony-translation-93013a18d272e59dab8e67f583155b78c68947eb-zip-76c0fa.tar",
+                "reference": "93013a18d272e59dab8e67f583155b78c68947eb",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5.9",
@@ -7613,7 +7690,7 @@
             ***REMOVED***,
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-05 08:37:39"
+            "time": "2016-09-06 11:02:40"
         },
         {
             "name": "theseer/fdomdocument",
@@ -7657,17 +7734,17 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.2",
+            "version": "v1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7"
+                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/twig-twig-33093f6e310e6976baeac7b14f3a6ec02f2d79b7-zip-0f83be.tar",
-                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7",
-                "shasum": "1f001cb4c367d182bb6dbd46cbb34f66525d647f"
+                "url": "https://mirror.pibernetwork.com/dist/twig-twig-a09d8ee17ac1cfea29ed60c83960ad685c6a898d-zip-0e7fb5.tar",
+                "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.2.7"
@@ -7679,7 +7756,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.24-dev"
+                    "dev-master": "1.26-dev"
                 }
             },
             "autoload": {
@@ -7714,7 +7791,7 @@
             "keywords": [
                 "templating"
             ***REMOVED***,
-            "time": "2016-09-01 17:50:53"
+            "time": "2016-10-05 18:57:41"
         },
         {
             "name": "zf-commons/zfc-twig",
