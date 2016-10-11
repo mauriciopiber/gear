@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "3a04d7004d9791dba6f0355f80cae33b",
+    "content-hash": "664a98e7c1d9d7935ef49d9ab07cd0e8",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -954,16 +954,16 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.31",
+            "version": "0.2.32",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "feeee6965a2991de1bbe39def87b21f8fc699173"
+                "reference": "2a20483f227ba36b11e976e7793a697774f923bf"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.31-334d04.tar",
-                "reference": "feeee6965a2991de1bbe39def87b21f8fc699173",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.32-148375.tar",
+                "reference": "2a20483f227ba36b11e976e7793a697774f923bf",
                 "shasum": null
             },
             "require": {
@@ -994,7 +994,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-10-09 02:31:04"
+            "time": "2016-10-11 11:06:46"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -1637,16 +1637,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.5.7",
+            "version": "5.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3f67cee782c9abfaee5e32fd2f57cdd54bc257ba"
+                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-3f67cee782c9abfaee5e32fd2f57cdd54bc257ba-zip-66e600.tar",
-                "reference": "3f67cee782c9abfaee5e32fd2f57cdd54bc257ba",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-60c32c5b5e79c2248001efa2560f831da11cc2d7-zip-5497a9.tar",
+                "reference": "60c32c5b5e79c2248001efa2560f831da11cc2d7",
                 "shasum": ""
             },
             "require": {
@@ -1680,7 +1680,6 @@
                 "ext-pdo": "*"
             },
             "suggest": {
-                "ext-tidy": "*",
                 "ext-xdebug": "*",
                 "phpunit/php-invoker": "~1.1"
             },
@@ -1690,7 +1689,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.5.x-dev"
+                    "dev-master": "5.6.x-dev"
                 }
             },
             "autoload": {
@@ -1716,7 +1715,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-10-03 13:04:15"
+            "time": "2016-10-07 13:03:26"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -6088,50 +6087,58 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.1.9",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f"
+                "reference": "b4729341e469d0f174f3cade85718ff5bf8dd751"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-8a24ed556b8d6a9d795d052e9074e8483cb7c15f-zip-f4e8a3.tar",
-                "reference": "8a24ed556b8d6a9d795d052e9074e8483cb7c15f",
-                "shasum": "4a6630d53c8393589215470333f6f32ba73b4b5a"
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-b4729341e469d0f174f3cade85718ff5bf8dd751-zip-5f7af4.tar",
+                "reference": "b4729341e469d0f174f3cade85718ff5bf8dd751",
+                "shasum": ""
             },
             "require": {
+                "behat/gherkin": "~4.4.0",
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "facebook/webdriver": ">=1.0.1 <2.0",
                 "guzzlehttp/guzzle": ">=4.1.4 <7.0",
                 "guzzlehttp/psr7": "~1.0",
                 "php": ">=5.4.0 <8.0",
-                "phpunit/php-code-coverage": ">=2.1.3",
+                "phpunit/php-code-coverage": ">=2.1.3 <5.0",
                 "phpunit/phpunit": ">4.8.20 <6.0",
-                "symfony/browser-kit": ">=2.5 <3.2",
-                "symfony/console": ">=2.5 <3.2",
-                "symfony/css-selector": ">=2.5 <3.2",
-                "symfony/dom-crawler": ">=2.5 <3.2",
-                "symfony/event-dispatcher": ">=2.5 <3.2",
-                "symfony/finder": ">=2.5 <3.2",
-                "symfony/yaml": ">=2.5 <3.2"
+                "sebastian/comparator": "~1.1",
+                "sebastian/diff": "^1.4",
+                "symfony/browser-kit": ">=2.7 <4.0",
+                "symfony/console": ">=2.7 <4.0",
+                "symfony/css-selector": ">=2.7 <4.0",
+                "symfony/dom-crawler": ">=2.7 <4.0",
+                "symfony/event-dispatcher": ">=2.7 <4.0",
+                "symfony/finder": ">=2.7 <4.0",
+                "symfony/yaml": ">=2.7 <4.0"
             },
             "require-dev": {
                 "codeception/specify": "~0.3",
-                "facebook/php-sdk-v4": "~5.0",
+                "facebook/graph-sdk": "~5.3",
                 "flow/jsonpath": "~0.2",
+                "league/factory-muffin": "^3.0",
+                "league/factory-muffin-faker": "^1.0",
+                "mongodb/mongodb": "^1.0",
                 "monolog/monolog": "~1.8",
-                "pda/pheanstalk": "~2.0",
+                "pda/pheanstalk": "~3.0",
                 "php-amqplib/php-amqplib": "~2.4",
+                "predis/predis": "^1.0",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
-                "codeception/phpbuiltinserver": "Extension to start and stop PHP built-in web server for your tests",
                 "codeception/specify": "BDD-style code blocks",
                 "codeception/verify": "BDD-style assertions",
-                "monolog/monolog": "Log test steps",
-                "phpseclib/phpseclib": "Extension required to use the SFTP option in the FTP Module.",
+                "flow/jsonpath": "For using JSONPath in REST module",
+                "league/factory-muffin": "For DataFactory module",
+                "league/factory-muffin-faker": "For Faker support in DataFactory module",
+                "phpseclib/phpseclib": "for SFTP option in FTP Module",
                 "symfony/phpunit-bridge": "For phpunit-bridge support"
             },
             "bin": [
@@ -6167,7 +6174,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-05-30 23:06:07"
+            "time": "2016-09-29 01:29:59"
         },
         {
             "name": "facebook/webdriver",
@@ -6618,16 +6625,16 @@
         },
         {
             "name": "mauriciopiber/gear-version",
-            "version": "0.2.4",
+            "version": "0.2.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
-                "reference": "e1a29d6e5b9a5494247b9012ce6d3607c6e6b803"
+                "reference": "4559fe1c641fba445cfbd3afac568487c1022166"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.4-f87fe4.tar",
-                "reference": "e1a29d6e5b9a5494247b9012ce6d3607c6e6b803",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.5-89a39d.tar",
+                "reference": "4559fe1c641fba445cfbd3afac568487c1022166",
                 "shasum": null
             },
             "require": {
@@ -6640,14 +6647,15 @@
                 "mauriciopiber/gear": "^0.2.0",
                 "mauriciopiber/gear-base": "^0.2.0",
                 "mauriciopiber/gear-deploy": "^0.2.0",
-                "mauriciopiber/gear-jenkins": "0.2.4",
+                "mauriciopiber/gear-jenkins": "^0.2.0",
+                "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
                 "phpunit/phpunit": "^4.8.19",
                 "sebastian/phpcpd": "^2.0.2",
                 "sebastian/phpdcd": "^1.0.2",
-                "squizlabs/php_codesniffer": "^1.5.6"
+                "squizlabs/php_codesniffer": "^2.0.0"
             },
             "type": "library",
             "autoload": {
@@ -6656,7 +6664,7 @@
                     "GearVersion": "src"
                 }
             },
-            "time": "2016-10-06 11:43:54"
+            "time": "2016-10-11 10:56:17"
         },
         {
             "name": "mauriciopiber/test-listener-xhprof",
@@ -7206,6 +7214,7 @@
             ***REMOVED***,
             "description": "Dead Code Detector (DCD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpdcd",
+            "abandoned": true,
             "time": "2014-04-27 06:42:32"
         },
         {

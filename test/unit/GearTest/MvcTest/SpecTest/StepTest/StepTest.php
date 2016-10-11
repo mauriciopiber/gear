@@ -45,6 +45,9 @@ class StepTest extends AbstractTestCase
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/step';
     }
 
+    /**
+     * @group n1s
+     */
     public function testCreateIndexFeature()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

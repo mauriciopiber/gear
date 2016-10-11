@@ -1,5 +1,5 @@
 <?php
-namespace GearBase\Project;
+namespace Gear\Project;
 
 trait ProjectLocationTrait
 {

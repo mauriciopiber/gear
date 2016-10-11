@@ -63,6 +63,7 @@ class TestServiceTest extends AbstractTestCase
 
     /**
      * @group build
+     * @group n1s
      */
     public function testCreateModuleBuild()
     {
