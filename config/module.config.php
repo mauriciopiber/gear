@@ -56,6 +56,7 @@ return [
                 'version' => '0.2.86',
                 'acl' => true,
                 'name' => __NAMESPACE__,
+                'git' => 'git@bitbucket.org:mauriciopiber/gear.git'
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***,
