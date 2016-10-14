@@ -144,19 +144,76 @@ Possuir versão Gear.
 
 #### Funções básicas
 
-| Target | Descrição |
-|:--|:--|
-| clean | Limpa as pastas |
-| prepare | Cria as pastas |
-| set-vendor | Descobre onde está a pasta vendor |
-| isRunningAsVendor | |
-| isRunningAsModule | |
-| isRunningAsProject | |
-| check.runningAsVendor | | 
-| check.runningAsModule | |
-| check.runningAsProject | |
-| db.load | |
-| cache.load | |
+1. [ ***REMOVED*** - clean - Limpa as pastas
+1. [ ***REMOVED*** - prepare - Cria as pastas
+1. [ ***REMOVED*** - set-vendor - Descobre onde está a pasta vendor
+    1. [ ***REMOVED*** - isRunningAsVendor
+    1. [ ***REMOVED*** - isRunningAsModule
+    1. [ ***REMOVED*** - isRunningAsProject
+    1. [ ***REMOVED*** - check.runningAsVendor 
+    1. [ ***REMOVED*** - check.runningAsModule
+    1. [ ***REMOVED*** - check.runningAsProject
+1. [ ***REMOVED*** - db.load
+1. [ ***REMOVED*** - cache.load
+
+
+#### Build Web
+
+1. [ ***REMOVED*** - build
+1. [ ***REMOVED*** - file-php
+1. [ ***REMOVED*** - file-js
+1. [ ***REMOVED*** - dev
+1. [ ***REMOVED*** - benchmark
+1. [ ***REMOVED*** - acceptance
+1. [ ***REMOVED*** - measure
+1. [ ***REMOVED*** - namespace
+
+
+#### Build Cli
+
+
+
+#### Target
+
+1. [ ***REMOVED*** - phpcs-dev | dev |
+1. [ ***REMOVED*** - phpmd-dev | dev |
+1. [ ***REMOVED*** - phpcpd-dev | dev |
+1. [ ***REMOVED*** - unit-dev | dev |
+1. [ ***REMOVED*** - karma-dev | dev |
+1. [ ***REMOVED*** - jshint | acceptance |
+1. [ ***REMOVED*** - phpcs | acceptance |
+1. [ ***REMOVED*** - phpmd | acceptance |
+1. [ ***REMOVED*** - phpcpd | acceptance |
+1. [ ***REMOVED*** - karma-group | acceptance |
+1. [ ***REMOVED*** - unit-group | acceptance |
+1. [ ***REMOVED*** - protractor-group | acceptance |
+1. [ ***REMOVED*** - phpmd-file | file-php |
+1. [ ***REMOVED*** - phpcs-file | file-php |
+1. [ ***REMOVED*** - phpcpd-file | file-php |
+1. [ ***REMOVED*** - jshint-file | file-js |
+1. [ ***REMOVED*** - phpunit-benchmark | benchmark |
+1. [ ***REMOVED*** - parallel-lint | build |
+1. [ ***REMOVED*** - unit-ci | build |
+1. [ ***REMOVED*** - karma-ci | build |
+1. [ ***REMOVED*** - jshint-ci | build |
+1. [ ***REMOVED*** - phpcs-ci | build |
+1. [ ***REMOVED*** - phpmd-ci | build |
+1. [ ***REMOVED*** - phpcpd-ci | build |
+1. [ ***REMOVED*** - protractor | build |
+1. [ ***REMOVED*** - phpdox | build | 
+1. [ ***REMOVED*** - pdepend | build |
+1. [ ***REMOVED*** - phploc-ci | build |
+1. [ ***REMOVED*** - publish | build |
+
+
+
+##### Exclusívos Web
+ 
+    
+
+
+
+
 
 #### Build de processos
 
@@ -170,41 +227,7 @@ Possuir versão Gear.
 | acceptance(6) | jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-group | phpcs, phpmd, phpcpd, unit-group |
 
 
-#### Tarefas 
 
-| Target | Used By | Depends |
-|:--|:--|
-| phpcs-dev | dev |
-| phpmd-dev | dev |
-| phpcpd-dev | dev |
-| unit-dev | dev |
-| karma-dev | dev |
-| jshint | acceptance | 
-| phpcs | acceptance |
-| phpmd | acceptance |
-| phpcpd | acceptance |
-| karma-group | acceptance |
-| unit-group | acceptance |
-| protractor-group | acceptance |
-| phpmd-file | file-php |
-| phpcs-file | file-php |
-| phpcpd-file | file-php |
-| jshint-file | file-js |
-| phpunit-benchmark | benchmark |
-| parallel-lint | build |
-| unit-ci | build |
-| karma-ci | build |
-| jshint-ci | build |
-| phpcs-ci | build |
-| phpmd-ci | build |
-| phpcpd-ci | build |
-| protractor | build |
-| phpdox | build | 
-| pdepend | build |
-| phploc-ci | build |
-| publish | build |
-
----
 
 
 

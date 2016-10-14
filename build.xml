@@ -190,7 +190,7 @@
             <arg path="${basedir}/src/${namespace}"/>
         </exec>
     </target>
-    <target name="unit-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-coverage-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
@@ -198,6 +198,21 @@
             <arg value="--xml"/>
             <arg value="--coverage-xml"/>
             <arg value="--coverage-html"/>
+        </exec>
+    </target>
+    <target name="unit-ci-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>            
+            <arg value="--xml"/>
+        </exec>
+    </target>
+    <target name="unit-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>            
         </exec>
     </target>    
     

@@ -1,5 +1,5 @@
 site_name: Gear 1.0.0
-theme: readthedocs
+theme: simplex
 pages:
     - 'Introdução': 'index.md'
     - 'Module': 
@@ -22,3 +22,4 @@ markdown_extensions:
     - pymdownx.tasklist
 extra_css:
     - css/custom.css    
+    
