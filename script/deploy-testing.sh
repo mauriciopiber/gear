@@ -10,5 +10,7 @@ bin/database $database $username $password
 mysql -u$username -p$password $database < data/gear.mysql.sql
 
 chmod 777 -R build
+sudo chmod 777 -R data
+sudo chmod 777 -R data/*
 
 sudo php public/index.php gear module dump-autoload Gear
