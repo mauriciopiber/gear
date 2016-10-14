@@ -14,6 +14,8 @@
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
     </target>
+
+    
     <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
     <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
         <property name="vendor" value="${basedir}/../../vendor"/>
@@ -162,6 +164,43 @@
             <arg value="test/unit/${test}"/>
         </exec>
     </target>
+    
+    <target name="namespace" depends="set-vendor, unit-namespace, phpcs-namespace, phpmd-namespace, phpcpd-namespace"/>
+    <target name="phpcs-namespace" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src/${namespace}"/>
+        </exec>
+    </target>
+    <target name="phpmd-namespace" description="PHPMD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd">
+            <arg path="${basedir}/src/${namespace}"/>
+            <arg value="xml"/>
+            <arg value="${basedir}/test/phpmd.xml"/>
+            <arg value="--reportfile"/>
+            <arg value="${basedir}/build/logs/pmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd-namespace" description="Find duplicate code using PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd">
+            <arg value="--log-pmd"/>
+            <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
+            <arg path="${basedir}/src/${namespace}"/>
+        </exec>
+    </target>
+    <target name="unit-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>            
+            <arg value="--xml"/>
+            <arg value="--coverage-xml"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>    
+    
     <target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
