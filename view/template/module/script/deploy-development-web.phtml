@@ -66,10 +66,8 @@ if [ "$?" != "0" ***REMOVED***; then
     php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
     echo "Deploy Develoment - Dump DB"
     php public/index.php gear database module dump <?php echo $this->module.PHP_EOL;?>
-    echo "Deploy Develoment - Add Autoload to Composer"
-    php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
     echo "Deploy Develoment - Run Gulp"
-    vendor/bin/gulp
+    sudo vendor/bin/gulp
 fi
 
 

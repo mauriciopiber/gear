@@ -1,0 +1,39 @@
+#!groovy
+
+node {
+    stage('Prepare') {
+        checkout scm
+        sh 'script/deploy-testing.sh'
+        sh '/usr/bin/ant prepare'
+        sh '/usr/bin/ant parallel-lint'
+    }
+    stage('Unit PHP') {
+        sh '/usr/bin/ant unit-ci'
+    }
+    stage('Quality') {
+        sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci jshint-ci'
+    }
+    stage('Unit JS') {
+        sh '/usr/bin/ant karma'
+    }
+    stage('Integration') {
+        sh '/usr/bin/ant protractor'
+    }
+    stage('Report') {
+        archiveArtifacts artifacts: "build/**/*", fingerprint: true
+    }
+    if (env.BRANCH_NAME == "master") {
+        stage('Version') {
+            sh '/usr/bin/php public/index.php gear deploy bump --hotfix'
+        }
+        stage('Measure') {
+            build job: '<?php echo $this->moduleUrl;?>-release', parameters: [
+                [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+            ***REMOVED***
+        }
+    }
+    stage('Tear Down') {
+        sh 'sudo chmod 777 -R data'
+        deleteDir()
+    }
+}

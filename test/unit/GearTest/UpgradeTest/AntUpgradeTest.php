@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\AntUpgrade;
 
@@ -10,7 +10,7 @@ use Gear\Upgrade\AntUpgrade;
  * @group Service
  * @group AntUpgrade
  */
-class AntUpgradeTest extends AbstractTestCase
+class AntUpgradeTest extends TestCase
 {
     public function setUp()
     {
