@@ -165,7 +165,7 @@
         </exec>
     </target>
     
-    <target name="namespace" depends="set-vendor, unit-namespace, phpcs-namespace, phpmd-namespace, phpcpd-namespace"/>
+    <target name="namespace" depends="prepare, set-vendor, unit-namespace, phpcs-namespace, phpmd-namespace, phpcpd-namespace"/>
     <target name="phpcs-namespace" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
