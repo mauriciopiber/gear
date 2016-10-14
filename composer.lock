@@ -6531,16 +6531,16 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.42",
+            "version": "0.2.45",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "ac59c3f161e31321b1387cdb6633ddb402b4a782"
+                "reference": "2984c4e0dd2fc3c26614efd6939f078b49d1eb5a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.42-2123fa.tar",
-                "reference": "ac59c3f161e31321b1387cdb6633ddb402b4a782",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.45-353351.tar",
+                "reference": "2984c4e0dd2fc3c26614efd6939f078b49d1eb5a",
                 "shasum": null
             },
             "require": {
@@ -6577,20 +6577,20 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2016-10-10 13:59:31"
+            "time": "2016-10-13 22:10:24"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.20",
+            "version": "0.2.25",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "875c9ace246e3fee1e0740a716dedb7bb07f1f1e"
+                "reference": "84f60cf73a96ffe490fabe89c86cbd4f8a1f9aca"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.20-8b13ab.tar",
-                "reference": "875c9ace246e3fee1e0740a716dedb7bb07f1f1e",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.25-dc6873.tar",
+                "reference": "84f60cf73a96ffe490fabe89c86cbd4f8a1f9aca",
                 "shasum": null
             },
             "require": {
@@ -6621,7 +6621,7 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2016-10-11 16:30:05"
+            "time": "2016-10-13 21:39:19"
         },
         {
             "name": "mauriciopiber/gear-version",
