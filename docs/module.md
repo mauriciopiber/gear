@@ -142,20 +142,20 @@ Possuir versão Gear.
 
 ### Build 
 
-#### Funções básicas
+#### ant-basic.xml
 
 1. [ ***REMOVED*** - clean - Limpa as pastas
 1. [ ***REMOVED*** - prepare - Cria as pastas
 1. [ ***REMOVED*** - set-vendor - Descobre onde está a pasta vendor
-    1. [ ***REMOVED*** - isRunningAsVendor
-    1. [ ***REMOVED*** - isRunningAsModule
-    1. [ ***REMOVED*** - isRunningAsProject
-    1. [ ***REMOVED*** - check.runningAsVendor 
-    1. [ ***REMOVED*** - check.runningAsModule
-    1. [ ***REMOVED*** - check.runningAsProject
-1. [ ***REMOVED*** - db.load
-1. [ ***REMOVED*** - cache.load
-
+    1. [ ***REMOVED*** - is-as-vendor
+    1. [ ***REMOVED*** - is-as-module
+    1. [ ***REMOVED*** - is-as-project
+    1. [ ***REMOVED*** - as-vendor 
+    1. [ ***REMOVED*** - as-module
+    1. [ ***REMOVED*** - as-project
+1. [ ***REMOVED*** - db-load
+1. [ ***REMOVED*** - cache-load
+1. [ ***REMOVED*** - build-helper
 
 #### Build Web
 
@@ -166,7 +166,19 @@ Possuir versão Gear.
 1. [ ***REMOVED*** - benchmark
 1. [ ***REMOVED*** - acceptance
 1. [ ***REMOVED*** - measure
+    1. [ ***REMOVED*** - prepare
+    1. [ ***REMOVED*** - set-vendor
+    1. [ ***REMOVED*** - parallel-lint
+    1. [ ***REMOVED*** - unit-coverage-ci 
+    1. [ ***REMOVED*** - phploc-ci 
+    1. [ ***REMOVED*** - pdepend 
+    1. [ ***REMOVED*** - phpdox 
+    1. [ ***REMOVED*** - publish
 1. [ ***REMOVED*** - namespace
+    1. [ ***REMOVED*** unit-coverage-namespace
+    1. [ ***REMOVED*** phpcs-namespace
+    1. [ ***REMOVED*** phpcpd-namespace
+    1. [ ***REMOVED*** phpmd-namespace
 
 
 #### Build Cli

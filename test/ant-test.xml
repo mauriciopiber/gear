@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gear" default="build" basedir=".">
+    <target name="test" depends="set-vendor, phpcs-test, phpcpd-test, phpmd-test"/>
+    <target name="phpcs-test" description="Code Sniffer" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/test/unit"/>
+        </exec>
+    </target>
+    <target name="phpmd-test" description="MessDetector" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd">
+            <arg path="${basedir}/test/unit"/>
+            <arg value="text"/>
+            <arg value="${basedir}/test/phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd-test" description="PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd">
+            <arg path="${basedir}/test/unit"/>
+        </exec>
+    </target>
+</project>
