@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gear" default="build" basedir=".">
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/pdepend"/>
+        <delete dir="${basedir}/build/phpdox"/>
+    </target>
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+        <mkdir dir="${basedir}/build/phpdox"/>
+    </target>
+    <target name="set-vendor" depends="isRunningAsModule, isRunningAsVendor, isRunningAsProject"/>
+    <target name="isRunningAsModule" depends="check.runningAsModule" if="dir.exists">
+        <property name="vendor" value="${basedir}/../../vendor"/>
+    </target>
+    <target name="isRunningAsVendor" depends="check.runningAsVendor" if="dir.exists">
+        <property name="vendor" value="${basedir}/../../../vendor"/>
+    </target>
+    <target name="isRunningAsProject" depends="check.runningAsProject" if="dir.exists">
+        <property name="vendor" value="${basedir}/vendor"/>
+    </target>
+    <target name="check.runningAsModule">
+        <condition property="dir.exists">
+            <available file="${basedir}/../../vendor" type="dir"/>
+        </condition>
+    </target>
+    <target name="check.runningAsVendor">
+        <condition property="dir.exists">
+            <available file="${basedir}/../../../vendor" type="dir"/>
+        </condition>
+    </target>
+    <target name="check.runningAsProject">
+        <condition property="dir.exists">
+            <available file="${basedir}/vendor" type="dir"/>
+        </condition>
+    </target>
+    <target name="buildHelper" depends="set-vendor">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="build"/>
+        </exec>
+    </target>
+    <target name="db-load">
+        <exec executable="/usr/bin/php">
+            <arg value="${basedir}/public/index.php"/>
+            <arg value="gear"/>
+            <arg value="database"/>
+            <arg value="load"/>
+            <arg value="${basedir}/data/gear.mysql.sql"/>
+        </exec>
+    </target>
+    <target name="cache-load">
+        <exec executable="/usr/bin/php">
+            <arg value="${basedir}/public/index.php"/>
+            <arg value="gear"/>
+            <arg value="cache"/>
+            <arg value="renew"/>
+            <arg value="--memcached"/>
+        </exec>
+    </target>
+    <target name="publish">
+        <mkdir dir="${basedir}/public/info"/>
+        <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
+        <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
+    </target>        
+</project>

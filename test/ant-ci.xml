@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gear" default="build" basedir=".">
+    <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
+        <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
+            <arg line="--exclude"/>
+            <arg path="${basedir}/vendor"/>
+            <arg path="${basedir}"/>
+        </exec>
+    </target>
+    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpmd">
+            <arg path="${basedir}/src"/>
+            <arg value="xml"/>
+            <arg value="${basedir}/test/phpmd.xml"/>
+            <arg value="--reportfile"/>
+            <arg value="${basedir}/build/logs/pmd.xml"/>
+        </exec>
+    </target>
+    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpcpd">
+            <arg value="--log-pmd"/>
+            <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="unit-coverage-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="--xml"/>
+            <arg value="--coverage-xml"/>
+            <arg value="--coverage-html"/>
+        </exec>
+    </target>    
+    <target name="unit-ci" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept" failonerror="true">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="--xml"/>
+        </exec>
+    </target>
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">
+        <exec executable="${vendor}/bin/pdepend">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="phploc-ci" depends="set-vendor" description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${vendor}/bin/phploc">
+            <arg value="--count-tests"/>
+            <arg value="--log-csv"/>
+            <arg path="${basedir}/build/logs/phploc.csv"/>
+            <arg value="--log-xml"/>
+            <arg path="${basedir}/build/logs/phploc.xml"/>
+            <arg path="${basedir}/src"/>
+        </exec>
+    </target>
+    <target name="phpdox" description="Generate API documentation using phpDox">
+        <exec executable="phpdox"/>
+    </target>
+</project>
