@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear" default="build" basedir=".">
     <import file="./test/ant-basic.xml"/>
+    <import file="./test/ant-dev.xml"/>
+    <import file="./test/ant-ci.xml"/>
 
     <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage-ci, phploc-ci, pdepend, phpdox, publish"/>
     <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>

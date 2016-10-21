@@ -65,13 +65,15 @@ class ModuleController extends AbstractConsoleController
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
 
-        $cli = $this->getRequest()->getParam('type', 'web');
+        $type = $this->getRequest()->getParam('type', 'web');
 
-        if ($cli == false) {
-            $cli = 'web';
+        if ($type == false) {
+            $type = 'web';
         }
 
-        $this->getDiagnosticService()->diagnostic($cli);
+        $just = $this->getRequest()->getParam('just', null);
+
+        $this->getDiagnosticService()->diagnostic($type, $just);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

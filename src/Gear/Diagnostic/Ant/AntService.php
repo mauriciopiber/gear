@@ -67,12 +67,21 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
     }
 
+    public function getBuildFiles()
+    {
+
+    }
+
     public function diagnostic($build, $edge, $function = null)
     {
         if (!is_file($build)) {
             $this->errors[***REMOVED*** = sprintf('Está faltando o arquivo %s', $build);
             return $this->errors;
         }
+
+        var_dump($edge);
+
+        die();
 
         $this->build = simplexml_load_file($build);
 

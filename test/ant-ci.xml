@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gear" default="build" basedir=".">
+<project name="gear-ci" default="build" basedir=".">
     <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
         <exec executable="${vendor}/bin/parallel-lint" failonerror="true">
             <arg line="--exclude"/>

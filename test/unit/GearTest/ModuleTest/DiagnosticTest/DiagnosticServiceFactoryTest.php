@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group Module
@@ -9,7 +9,7 @@ use GearBaseTest\AbstractTestCase;
  * @group Dig
  * @group ModuleConstruct
  */
-class DiagnosticServiceFactoryTest extends AbstractTestCase
+class DiagnosticServiceFactoryTest extends TestCase
 {
     public function testCreateDiagnostic()
     {
