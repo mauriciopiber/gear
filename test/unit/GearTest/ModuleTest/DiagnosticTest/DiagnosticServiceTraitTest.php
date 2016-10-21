@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group Module
@@ -9,19 +9,9 @@ use GearBaseTest\AbstractTestCase;
  * @group Dig
  * @group ModuleConstruct
  */
-class DiagnosticServiceTraitTest extends AbstractTestCase
+class DiagnosticServiceTraitTest extends TestCase
 {
     use \Gear\Module\Diagnostic\DiagnosticServiceTrait;
-
-    /**
-     * @group Gear
-     * @group ComposerUpgrade
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDiagnosticService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

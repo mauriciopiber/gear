@@ -1,69 +1,59 @@
-default: build
+default: ci
 
+imports:
+  0: './test/ant-basic.xml'
+  1: './test/ant-dev.xml'
+  2: './test/ant-ci.xml'
+  3: './test/ant-namespace.xml'
+  4: './test/ant-measure.xml'      
+  5: './test/ant-benchmark'
+  
 target:
-  ## basic
-  clean: ''
-  prepare: 'clean'
-  ## config vendor
-  set-vendor: 'isRunningAsModule, isRunningAsVendor, isRunningAsProject'
-  isRunningAsModule: 'check.runningAsModule'
-  isRunningAsVendor: 'check.runningAsVendor'
-  isRunningAsProject: 'check.runningAsProject'
-  check.runningAsModule: ''
-  check.runningAsVendor: ''
-  check.runningAsProject: ''
-  
-  ## trivial
-  parallel-lint: 'set-vendor'
-  buildHelper: 'set-vendor'
-  
-  ## gear
-  db-load: ''
-  cache-load: ''
-  publish: ''
-    
-  #build
-  
-  build: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish'
-  parallel-lint: 'set-vendor'
-  phpcs-ci: 'set-vendor'
-  phpmd-ci: 'set-vendor'
-  phpcpd-ci: 'set-vendor'
-  unit-coverage: 'buildHelper, set-vendor'
-  pdepend: 'set-vendor'
-  phploc-ci: 'set-vendor'
-  phpdox: ''
-  
-  #build-file
-  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file'
-  phpcs-file: 'set-vendor'
-  phpmd-file: 'set-vendor'
-  phpcpd-file: 'set-vendor'
-  unit-file: 'set-vendor, buildHelper'
-  unit-file-coverage: 'set-vendor, buildHelper'
-  #build-dev
-  
-  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev'
-  phpcs-dev: 'set-vendor'
-  phpmd-dev: 'set-vendor'
-  phpcpd-dev: 'set-vendor'
-  unit-dev: 'set-vendor, buildHelper'
-  
-  #build-benchmark
-  phpunit-benchmark: 'set-vendor'
-  phpunit-benchmark-group: 'set-vendor'
-  phpunit-coverage-benchmark: 'set-vendor'
-  phpunit-coverage-benchmark-group: 'set-vendor'
-  phpcs-docs: 'set-vendor'
-  phpcs-docs-file: 'set-vendor'
-  
-  #build-acceptance
-  acceptance: 'set-vendor, phpcs, phpmd, phpcpd, unit-group'
-  phpcs: 'set-vendor'
-  phpmd: 'set-vendor'
-  phpcpd: 'set-vendor'
-  unit: 'set-vendor'
-  unit-ci: 'set-vendor'
-  unit-group: 'set-vendor, buildHelper'
-  unit-coverage-group: 'set-vendor, buildHelper'
-  
+  namespace: 'set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace'
+  dev: 'parallel-lint, phpcs, phpmd, phpcpd, unit'
+  ci: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci'
+  measure: 'prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox'
+  ant-basic:
+    clean: ''
+    prepare: 'clean'
+    set-vendor: 'is-as-module, is-as-vendor, is-as-project'
+    is-as-module: 'as-module'
+    is-as-vendor: 'as-vendor'
+    is-as-project: 'as-project'
+    as-module: ''
+    as-vendor: ''
+    as-project: ''
+    build-helper: 'set-vendor'
+    db-load: ''
+    cache-load: ''  
+  ant-ci:
+    phpcs-ci: 'set-vendor'
+    phpmd-ci: 'set-vendor'
+    phpcpd-ci: 'set-vendor'
+    unit-ci: 'set-vendor'
+  ant-measure:
+    parallel-lint: 'set-vendor'
+    unit-coverage-ci: 'buildHelper, set-vendor'
+    pdepend: 'set-vendor'
+    phploc-ci: 'set-vendor'
+    phpdox: ''
+  ant-dev:
+    phpcs: 'set-vendor'
+    phpmd: 'set-vendor'
+    phpcpd: 'set-vendor'
+    unit: 'set-vendor'
+    unit-group: 'set-vendor, build-helper'
+    unit-coverage-group: 'set-vendor, build-helper'
+    phpcs-docs: 'set-vendor'
+    phpcs-docs-file: 'set-vendor'
+  ant-namespace:
+    phpcs-namespace: 'set-vendor'
+    phpmd-namespace: 'set-vendor'
+    phpcpd-namespace: 'set-vendor'
+    unit-namespace: 'set-vendor, build-helper'
+    unit-coverage-namespace: 'set-vendor, build-helper'
+  ant-benchmark:
+    phpunit-benchmark: 'set-vendor'
+    phpunit-benchmark-group: 'set-vendor'
+    phpunit-coverage-benchmark: 'set-vendor'
+    phpunit-coverage-benchmark-group: 'set-vendor' 

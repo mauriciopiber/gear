@@ -81,7 +81,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
 
-        $diagnostic->diagnostic($type)->willReturn(true);
+        $diagnostic->diagnostic($type, null)->willReturn(true);
 
         $this->controller->setDiagnosticService($diagnostic->reveal());
 

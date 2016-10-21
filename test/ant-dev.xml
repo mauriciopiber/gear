@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gear" default="build" basedir=".">
+<project name="gear-dev" default="build" basedir=".">
    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
