@@ -1,18 +1,19 @@
 default: ci
 
-imports:
-  0: './test/ant-basic.xml'
-  1: './test/ant-dev.xml'
-  2: './test/ant-ci.xml'
-  3: './test/ant-namespace.xml'
-  4: './test/ant-measure.xml'      
-  5: './test/ant-benchmark'
+import:
+  0: 'ant-basic'
+  1: 'ant-dev'
+  2: 'ant-ci'
+  3: 'ant-namespace'
+  4: 'ant-measure'      
+  5: 'ant-benchmark'
   
 target:
   namespace: 'set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace'
   dev: 'parallel-lint, phpcs, phpmd, phpcpd, unit'
   ci: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci'
   measure: 'prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox'
+files:  
   ant-basic:
     clean: ''
     prepare: 'clean'

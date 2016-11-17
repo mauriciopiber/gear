@@ -3,7 +3,10 @@
     <import file="./test/ant-basic.xml"/>
     <import file="./test/ant-dev.xml"/>
     <import file="./test/ant-ci.xml"/>
-
+    <import file="./test/ant-namespace.xml"/>
+    <import file="./test/ant-benchmark.xml"/>
+    <import file="./test/ant-measure.xml"/>
+    
     <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage-ci, phploc-ci, pdepend, phpdox, publish"/>
     <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
     <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
@@ -75,6 +78,15 @@
             <arg value="--xml"/>
         </exec>
     </target>
+    <target name="unit-namespace-group" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>
+            <arg value="-g"/>
+            <arg value="${group}"/>            
+        </exec>
+    </target>     
     <target name="unit-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
