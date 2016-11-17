@@ -6,6 +6,14 @@ use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\AntEdge\AntEdgeTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Diagnostic\ProjectDiagnosticInterface;
+use SimpleXmlElement;
+use Gear\Edge\AntEdge\Exception\MissingTarget;
+use Gear\Edge\AntEdge\Exception\MissingDefault;
+use Gear\Edge\AntEdge\Exception\MissingImport;
+use Gear\Edge\AntEdge\Exception\MissingFiles;
+use GearBase\Config\GearConfigTrait;
+use GearBase\Config\GearConfig;
+use Exception;
 
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
@@ -14,21 +22,33 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 {
     public $errors;
 
-    static public $missingTarget = 'Ant - Está faltando target %s no arquivo build.xml';
+    static public $missingTarget = 'Ant - Está faltando target "%s" no arquivo %s';
 
-    static public $missingDepends = 'Ant - Corrigir depends do Target %s para "%s" no arquivo build.xml';
+    static public $missingTargetDepend = 'Ant - Está faltando target "%s" com depends "%s" no arquivo %s';
 
-    static public $missingName = 'Ant - Está faltando o nome corretamente na build.xml';
+    static public $missingDepends = 'Ant - Corrigir depends do Target "%s" para "%s" no arquivo %s';
+
+    static public $missingName = 'Ant - Está faltando o nome %s no arquivo %s';
+
+    public $build;
+
+    const MISSING_FILE = 'Está faltando o arquivo %s';
+
+    const MISSING_IMPORT = 'Está faltando o import %s';
 
     use ProjectLocationTrait;
 
     use AntEdgeTrait;
 
-    public function __construct($stringService, $module = null)
+    use GearConfigTrait;
+
+    public function __construct($stringService, $module = null, GearConfig $gearConfig)
     {
         $this->errors = [***REMOVED***;
         $this->stringService = $stringService;
         $this->module = $module;
+        $this->gearConfig = $gearConfig;
+
     }
 
     public function diagnosticProject($type = 'web')
@@ -37,7 +57,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         $this->diagnosticEdge($edge);
 
-        $build = $this->getProject().'/build.xml';
+        $build = $this->getProject();
 
         return $this->diagnostic($build, $edge, __FUNCTION__);
     }
@@ -51,49 +71,143 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         $this->diagnosticEdge($edge);
 
-        $build = $this->module->getMainFolder().'/build.xml';
+        $build = $this->module->getMainFolder();
 
         return $this->diagnostic($build, $edge, __FUNCTION__);
     }
 
     public function diagnosticEdge($edge)
     {
-        if (!isset($edge['target'***REMOVED***) || empty($edge['target'***REMOVED***)) {
-            throw new \Gear\Edge\AntEdge\Exception\MissingTarget();
+        if (!isset($edge['target'***REMOVED***) || !is_array($edge['target'***REMOVED***)) {
+            throw new MissingTarget();
         }
 
         if (!isset($edge['default'***REMOVED***) || empty($edge['default'***REMOVED***)) {
-            throw new \Gear\Edge\AntEdge\Exception\MissingDefault();
+            throw new MissingDefault();
+        }
+
+        if (!isset($edge['import'***REMOVED***) || !is_array($edge['import'***REMOVED***)) {
+            throw new MissingImport();
+        }
+
+        if (!isset($edge['files'***REMOVED***) || !is_array($edge['files'***REMOVED***)) {
+            throw new MissingFiles();
         }
     }
+
+
 
     public function getBuildFiles()
     {
 
     }
 
-    public function diagnostic($build, $edge, $function = null)
+    public function getImports(SimpleXmlElement $build, $edge)
     {
-        if (!is_file($build)) {
-            $this->errors[***REMOVED*** = sprintf('Está faltando o arquivo %s', $build);
-            return $this->errors;
-        }
+        $errors = [***REMOVED***;
 
-        var_dump($edge);
+        foreach ($edge as $name) {
 
-        die();
+            $isPresent = $this->hasImport($build, sprintf('./test/%s.xml', $name));
 
-        $this->build = simplexml_load_file($build);
-
-
-        if ($function == 'diagnosticModule') {
-            if (!$this->hasName()) {
-                $this->errors[***REMOVED*** = static::$missingName;
+            if ($isPresent === false) {
+                $errors[***REMOVED*** = sprintf(self::MISSING_IMPORT, $name);
             }
         }
 
+
+
+        return $errors;
+    }
+
+    public function getNames($base, array $edge)
+    {
+        $errors = [***REMOVED***;
+
+        $name = $this->getGearConfig()->getCurrentName();
+
+        if (!$this->hasName($this->build, $name)) {
+            $errors[***REMOVED*** = sprintf(static::$missingName, $name, 'build.xml');
+        }
+
+
+        foreach ($edge['files'***REMOVED*** as $fileName => $config) {
+            $config = null;
+
+            if (!is_file(sprintf($base.'/test/%s.xml', $fileName))) {
+                throw new Exception('File Not Found');
+            }
+
+            $string = file_get_contents(sprintf($base.'/test/%s.xml', $fileName));
+
+            if (empty($string)) {
+                throw new Exception('Empty XML');
+            }
+
+            $build = simplexml_load_string($string);
+
+            $matches = array();
+            preg_match('/ant-([a-z***REMOVED***+)/', $fileName, $matches);
+
+            $hasName = sprintf('%s-%s', $name, $matches[1***REMOVED***);
+
+            if (!$this->hasName($build, $hasName)) {
+                $errors[***REMOVED*** = sprintf(static::$missingName, $hasName, sprintf('test/%s.xml', $fileName));
+            }
+        }
+
+        return $errors;
+    }
+
+    public function diagnostic($build, $edge, $function = null)
+    {
+
+
+        if (!is_file($build.'/build.xml')) {
+            $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'build.xml');
+        }
+
+        foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
+
+
+            if (strpos($expectedFile, 'ant-') === false) {
+                continue;
+            }
+
+            if (!is_file($build . '/test/'.$expectedFile.'.xml')) {
+                $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'test/'.$expectedFile.'.xml');
+            }
+        }
+
+        if (count($this->errors) > 0) {
+            return $this->errors;
+        }
+
+        $this->build = simplexml_load_file($build.'/build.xml');
+
+        $this->errors = $this->getImports($this->build, $edge['import'***REMOVED***);
+
+        if (count($this->errors) > 0) {
+            return $this->errors;
+        }
+
+
+        $this->errors = $this->getNames($build, $edge);
+
+
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-            $this->checkTarget($target, $dependency);
+            $this->checkTarget($target, $dependency, 'build.xml');
+        }
+
+        if (empty($edge['files'***REMOVED***) || !is_array($edge['files'***REMOVED***)) {
+            return $this->errors;
+        }
+
+        foreach ($edge['files'***REMOVED*** as $file => $targets) {
+            foreach ($targets as $target => $dependency) {
+                $this->checkTarget($target, $dependency, sprintf('test/%s.xml', $file));
+
+            }
         }
 
         return $this->errors;
@@ -102,16 +216,22 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
     /**
      * Verifica se um determinado target existe no arquivo build, se não existe incrementa os erros.
      */
-    public function checkTarget($targetName, $depend = '')
+    public function checkTarget($targetName, $depend = '', $file)
     {
         if (!$this->hasTarget($targetName)) {
-            $this->errors[***REMOVED*** = sprintf(static::$missingTarget, $targetName);
+
+            $this->errors[***REMOVED*** = (empty($depend))
+                ? sprintf(static::$missingTarget, $targetName, $file)
+                : sprintf(static::$missingTargetDepend, $targetName, (is_array($depend)) ? implode(' ', $depend) : $depend, $file);
+
             return;
         }
 
         if (!$this->hasDepend($targetName, $depend)) {
-            $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName, $depend);
+            $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName, $depend, $file);
         }
+
+        return;
     }
 
     /**
@@ -133,6 +253,17 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return false;
     }
 
+    public function hasImport($build, $search)
+    {
+        foreach ($build[0***REMOVED***->import as $target) {
+            $name = (string) $target[0***REMOVED***->attributes()->file;
+            if ($name === $search) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Verificar se há determinado Target no arquivo build.xml
@@ -155,10 +286,10 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
      * Verificar se o nome está respeitando o nome do módulo
      * @return boolean
      */
-    public function hasName()
+    public function hasName(SimpleXmlElement $build, $name)
     {
-        if ((string) $this->build->attributes()->name
-            === $this->getStringService()->str('url', $this->module->getModuleName())
+        if ((string) $build->attributes()->name
+            === $this->getStringService()->str('url', $name)
         ) {
             return true;
         }
