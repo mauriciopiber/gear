@@ -1,4 +1,4 @@
-<target name="check.runningAsModule">
+<target name="as-module">
     <condition property="dir.exists">
         <available file="${basedir}/../../vendor" type="dir"/>
     </condition>

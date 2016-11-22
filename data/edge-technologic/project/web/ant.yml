@@ -6,7 +6,7 @@ target:
   
   ## trivial
   parallel-lint: ''
-  buildHelper: ''
+  build-helper: ''
   
   ## gear
   db-load: ''
@@ -20,8 +20,8 @@ target:
   karma: ''
   jshint-ci: ''
   jshint: ''
-  unit-ci: 'buildHelper'
-  unit: 'buildHelper'
+  unit-ci: 'build-helper'
+  unit: 'build-helper'
   phploc-ci: 'prepare'
   phpmd: ''
   phpmd-ci: ''

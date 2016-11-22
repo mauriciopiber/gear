@@ -1,93 +1,82 @@
 default: build
 
-target:
-  ## basic
-  clean: ''
-  prepare: 'clean'
-  ## config vendor
-  set-vendor: 'isRunningAsModule, isRunningAsVendor, isRunningAsProject'
-  isRunningAsModule: 'check.runningAsModule'
-  isRunningAsVendor: 'check.runningAsVendor'
-  isRunningAsProject: 'check.runningAsProject'
-  check.runningAsModule: ''
-  check.runningAsVendor: ''
-  check.runningAsProject: ''
-  
-  ## trivial
-  parallel-lint: 'set-vendor'
-  buildHelper: 'set-vendor'
-  
-  ## gear
-  db-load: ''
-  cache-load: ''
-
-  ## test
-  
-  phpcs-test: 'set-vendor'
-  phpmd-test: 'set-vendor'
-  phpcpd-test: 'set-vendor'
-  test: 'set-vendor, phpcs-test, phpcpd-test, phpmd-test'    
+import:
+  0: 'ant-basic'
+  1: 'ant-dev'
+  2: 'ant-ci'
+  3: 'ant-namespace'
+  4: 'ant-measure'      
+  5: 'ant-benchmark'
     
-  #build
-  
-  build: 'prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish'
-  parallel-lint: 'set-vendor'
-  phpcs-ci: 'set-vendor'
-  phpmd-ci: 'set-vendor'
-  phpcpd-ci: 'set-vendor'
-  unit-coverage: 'set-vendor, buildHelper'
-  pdepend: 'set-vendor'
-  phploc-ci: 'set-vendor'
-  jshint-ci: ''
-  protractor: 'db-load, cache-load'
-  karma: ''
-  phpdox: ''
-  publish: ''
-  
-  #build-file-php
-  file-php: 'set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file'
-  phpcs-file: 'set-vendor'
-  phpmd-file: 'set-vendor'
-  phpcpd-file: 'set-vendor'
-  unit-file: 'set-vendor, buildHelper'
-  #build-file-js
-  
-  phpunit: 'set-vendor'
-  phpunit-group: 'set-vendor'
-  phpunit-coverage: 'set-vendor'
-  phpunit-coverage-group: 'set-vendor'
-  phpunit-coverage-benchmark: 'set-vendor'
-  phpunit-coverage-benchmark-group: 'set-vendor'
-  phpunit-benchmark-group: 'set-vendor'
-  phpcs-docs: 'set-vendor'
-  phpcs-docs-file: 'set-vendor'
-  
-  file-js: 'jshint-file'
-  jshint-file: ''
-  
-  #build-dev
-  
-  dev: 'parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev, karma'
-  phpcs-dev: 'set-vendor'
-  phpmd-dev: 'set-vendor'
-  phpcpd-dev: 'set-vendor'
-  unit-dev: 'set-vendor, buildHelper'
-  #karma-dev: ''
-  
-  #build-benchmark
-  phpunit-benchmark: 'set-vendor'
-  
-  #build-acceptance
-  acceptance: 'set-vendor, jshint, karma, phpcs, phpmd, phpcpd, unit-group, protractor-tag'
-  phpcs: 'set-vendor'
-  phpmd: 'set-vendor'
-  phpcpd: 'set-vendor'
-  unit-ci: 'set-vendor'  
-  unit-group: 'set-vendor, buildHelper'  
-  unit: 'set-vendor, buildHelper'
-  unit-coverage-group: 'set-vendor, buildHelper'
-  unit-file-coverage: 'set-vendor, buildHelper'
-  jshint: ''
-  protractor-tag: 'db-load, cache-load'
-  protractor-debug: 'db-load, cache-load'
+target:
+  namespace: 'set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace'
+  dev: 'parallel-lint, phpcs, phpmd, phpcpd, unit, karma'
+  ci: 'prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci'
+  measure: 'prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox'
+files:  
+  ant-basic:
+    clean: ''
+    prepare: 'clean'
+    set-vendor: 'is-as-module, is-as-vendor, is-as-project'
+    is-as-module: 'as-module'
+    is-as-vendor: 'as-vendor'
+    is-as-project: 'as-project'
+    as-module: ''
+    as-vendor: ''
+    as-project: ''
+    build-helper: 'set-vendor'
+    db-load: ''
+    cache-load: ''  
+  ant-ci:
+    parallel-lint: 'set-vendor'
+    phpcs-ci: 'set-vendor'
+    phpmd-ci: 'set-vendor'
+    phpcpd-ci: 'set-vendor'
+    unit-ci: 'set-vendor, build-helper'
+    jshint-ci: ''
+    karma: ''
+    protractor: 'db-load, cache-load'
+  ant-measure:
+    parallel-lint: 'set-vendor'
+    unit-coverage-ci: 'set-vendor, build-helper'
+    phploc-ci: 'set-vendor'
+    pdepend: 'set-vendor'
+    phpdox: ''
+  ant-dev:
+    phpcs: 'set-vendor'
+    phpcs-docs: 'set-vendor'    
+    phpmd: 'set-vendor'
+    phpcpd: 'set-vendor'
+    unit: 'set-vendor, build-helper'
+    unit-coverage: 'set-vendor, build-helper'
+    unit-group: 'set-vendor, build-helper'
+    unit-coverage-group: 'set-vendor, build-helper'
+    unit-file-coverage: 'set-vendor, build-helper'
+    phpunit: 'set-vendor'
+    phpunit-group: 'set-vendor'
+    phpunit-coverage: 'set-vendor'
+    phpunit-coverage-group: 'set-vendor'
+    protractor-tag: 'db-load, cache-load'
+    protractor-debug: 'db-load, cache-load'
+    jshint: ''
+  ant-benchmark:
+    phpunit-benchmark: 'set-vendor'
+    phpunit-benchmark-group: 'set-vendor'
+    phpunit-coverage-benchmark: 'set-vendor'
+    phpunit-coverage-benchmark-group: 'set-vendor' 
+  ant-namespace:
+    phpcs-namespace: 'set-vendor'
+    phpmd-namespace: 'set-vendor'
+    phpcpd-namespace: 'set-vendor'
+    phpcs-docs-namespace: 'set-vendor'
+    unit-namespace: 'set-vendor, build-helper'
+    unit-group-namespace: 'set-vendor, build-helper'
+    unit-coverage-namespace: 'set-vendor, build-helper'
+    unit-group-coverage-namespace: 'set-vendor, build-helper'
+  ant-test:
+    phpcs-test: 'set-vendor'
+    phpmd-test: 'set-vendor'
+    phpcpd-test: 'set-vendor'
+    test: 'set-vendor, phpcs-test, phpcpd-test, phpmd-test'    
+    
   

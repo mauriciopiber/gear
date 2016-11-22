@@ -1,0 +1,5 @@
+<target name="phpcpd-namespace" description="PHPCPD" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpcpd">
+        <arg path="${basedir}/src/${file}"/>
+    </exec>
+</target>

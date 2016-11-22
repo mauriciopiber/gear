@@ -1,4 +1,4 @@
-<target name="check.runningAsVendor">
+<target name="as-vendor">
     <condition property="dir.exists">
         <available file="${basedir}/../../../vendor" type="dir"/>
     </condition>
