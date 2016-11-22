@@ -6,6 +6,8 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\AntEdge\AntEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
+use GearBase\Config\GearConfigTrait;
+use GearBase\Config\GearConfig;
 
 /**
  * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
@@ -30,6 +32,8 @@ class AntUpgrade extends AbstractJsonService
     use ConsolePromptTrait;
 
     use ConsoleAwareTrait;
+
+    use GearConfigTrait;
 
     /**
      * @var array
@@ -69,13 +73,14 @@ class AntUpgrade extends AbstractJsonService
      * @param array                              $config        Configuração
      * @param Gear\Module\BasicModuleStructure   $module        Estrutura do Módulo
      */
-    public function __construct($console, $consolePrompt, $string, $config, $module = null)
+    public function __construct($console, $consolePrompt, $string, $config, $module = null, GearConfig $gearConfig)
     {
         $this->console = $console;
         $this->module = $module;
         $this->stringService = $string;
         $this->config = $config;
         $this->consolePrompt = $consolePrompt;
+        $this->gearConfig = $gearConfig;
     }
 
     /**
@@ -183,9 +188,15 @@ class AntUpgrade extends AbstractJsonService
      */
     public function projectFactory($target, $type = 'web')
     {
-        $template = (new \Gear\Module())->getLocation().'/../../view/template/project/ant';
+        $template = $this->getProjectTemplate();
 
         return $this->factory($target, $template, $type);
+    }
+
+
+    public function getProjectTemplate()
+    {
+        return (new \Gear\Module())->getLocation().'/../../view/template/project/ant';
     }
 
 
@@ -251,9 +262,13 @@ class AntUpgrade extends AbstractJsonService
      */
     public function moduleFactory($target, $type = 'web')
     {
-        $template = (new \Gear\Module())->getLocation().'/../../view/template/module/ant';
+        return $this->factory($target, $this->getModuleTemplate(), $type);
+    }
 
-        return $this->factory($target, $template, $type);
+    public function getModuleTemplate()
+    {
+        $template = (new \Gear\Module())->getLocation().'/../../view/template/module/ant';
+        return $template;
     }
 
     /**

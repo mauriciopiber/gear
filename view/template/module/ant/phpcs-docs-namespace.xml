@@ -1,4 +1,4 @@
-<target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
+<target name="phpcs-docs-namespace" description="Code Sniffer" depends="set-vendor">
    <exec executable="${vendor}/bin/phpcs">
         <arg value="--standard=test/phpcs-docs.xml"/>
         <arg path="${basedir}/src/${file}"/>

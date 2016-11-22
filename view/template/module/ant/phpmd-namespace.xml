@@ -1,0 +1,7 @@
+<target name="phpmd-namespace" description="MessDetector" depends="set-vendor">
+    <exec executable="${vendor}/bin/phpmd">
+        <arg path="${basedir}/src/${file}"/>
+        <arg value="text"/>
+        <arg value="${basedir}/test/phpmd.xml"/>
+    </exec>
+</target>

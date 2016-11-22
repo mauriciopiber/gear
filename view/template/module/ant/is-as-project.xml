@@ -1,0 +1,3 @@
+<target name="is-as-project" depends="as-project" if="dir.exists">
+    <property name="vendor" value="${basedir}/vendor"/>
+</target>

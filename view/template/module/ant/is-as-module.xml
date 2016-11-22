@@ -1,0 +1,3 @@
+<target name="is-as-module" depends="as-module" if="dir.exists">
+    <property name="vendor" value="${basedir}/../../vendor"/>
+</target>

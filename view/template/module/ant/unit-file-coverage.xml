@@ -1,4 +1,4 @@
-<target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+<target name="unit-file-coverage" depends="set-vendor, build-helper" description="Run unit tests with Codeception For Continuous Integration">
     <exec executable="${vendor}/bin/codecept">
         <arg value="run"/>
         <arg value="unit"/>

@@ -1,4 +1,4 @@
-<target name="unit-ci" depends="buildHelper">
+<target name="unit-ci" depends="build-helper">
     <exec executable="${basedir}/vendor/bin/codecept" >
         <arg value="run" />
         <arg value="--xml"/>
