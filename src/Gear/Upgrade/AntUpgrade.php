@@ -58,13 +58,13 @@ class AntUpgrade extends AbstractJsonService
 
     static public $shouldDefault = 'Ant - Deve mudar o atributo default de %s para %s?';
 
-    static public $shouldDepends = 'Ant - Deve mudar a dependência da build %s para %s?';
+    static public $shouldDepends = 'Ant - Deve mudar a dependência "%s" para "%s" em %s no arquivo %s?';
 
     static public $shouldImport = 'Ant - Deve adicionar o import %s para %s?';
 
     static public $import = 'Ant - Adicionado import %s para %s';
 
-    static public $depends = 'Ant - Adicionado dependência do target %s para %s';
+    static public $depends = 'Ant - Alterado dependência de "%s" para "%s" em %s no arquivo %s';
 
     static public $created = 'Ant - Arquivo %s do %s criado';
 
@@ -147,20 +147,24 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return \SimpleXmlElement
      */
-    public function appendDepends(SimpleXmlElement $build, $search, $depends)
+    public function appendDepends(SimpleXmlElement $build, $search, $depends, $identity = 'build.xml')
     {
         foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
 
-
             if ($name === $search) {
-                if (empty((string) $target[0***REMOVED***->attributes()->depends)) {
+
+                $attrs = $target[0***REMOVED***->attributes();
+
+                if (!isset($attrs['depends'***REMOVED***)) {
+                    $attrsDepends = '';
                     $target[0***REMOVED***->addAttribute('depends', $depends);
                 } else {
+                    $attrsDepends = (string) $target[0***REMOVED***->attributes()->depends;
                     $target[0***REMOVED***->attributes()->depends = $depends;
                 }
 
-                $this->upgrades[***REMOVED*** = sprintf(static::$depends, $search, $depends);
+                $this->upgrades[***REMOVED*** = sprintf(static::$depends, $attrsDepends, $depends, $search, $identity);
                 break;
             }
         }
@@ -391,9 +395,18 @@ class AntUpgrade extends AbstractJsonService
         return $builds;
     }
 
-    public function shouldDepends($target, $dependency)
+    public function shouldDepends($build, $target, $dependency, $identify = 'build.xml')
     {
-        return $this->getConsolePrompt()->show(sprintf(static::$shouldDepends, $target, $dependency));
+        $old = '';
+        foreach ($build[0***REMOVED***->target as $targetType) {
+            $name = (string) $targetType[0***REMOVED***->attributes()->name;
+
+            if ($name === $target) {
+                $old = (string) $targetType[0***REMOVED***->attributes()->depends;
+            }
+        }
+
+        return $this->getConsolePrompt()->show(sprintf(static::$shouldDepends, $old, $dependency, $target, $identify));
     }
 
     /**
@@ -490,12 +503,12 @@ class AntUpgrade extends AbstractJsonService
             if (
                 empty($dependency)
                 || $this->buildTargetHasDepends($build, $target, $dependency) === true
-              || $this->shouldDepends($target, $dependency) === false
+              || $this->shouldDepends($build, $target, $dependency, $identify) === false
            ) {
                 return $build;
             }
 
-            $build = $this->appendDepends($build, $target, $dependency);
+            $build = $this->appendDepends($build, $target, $dependency, $identify);
 
             return $build;
         }
