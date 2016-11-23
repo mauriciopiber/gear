@@ -327,7 +327,7 @@ EOS;
         ***REMOVED***;
 
         $this->consolePrompt->show(
-            sprintf(AntUpgrade::$shouldDepends, 'clean', 'one, two, three, four, five')
+            sprintf(AntUpgrade::$shouldDepends, '', 'one, two, three, four, five', 'clean', 'build.xml')
         )->shouldBeCalled();
 
 
@@ -442,26 +442,58 @@ EOS;
 
     /**
      * @dataProvider types
+     * @group Yea
      */
     public function testUpgradeModule($type)
     {
+        vfsStream::newDirectory('test')->at($this->root);
 
         $this->file = vfsStream::url('module/build.xml');
 
         $fileConfig = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear" default="" basedir=".">
+    <target name="phpcs" description="Code Sniffer" depends="">
+        <exec executable="\${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="\${basedir}/src"/>
+        </exec>
+    </target>
 </project>
 EOS;
 
-        file_put_contents($this->file, $fileConfig);
+        file_put_contents(vfsStream::url('module/build.xml'), $fileConfig);
 
+        $fileConfig = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wrong-name" default="" basedir=".">
+    <target name="phpmd" description="MessDetector" depends="">
+        <exec executable="\${vendor}/bin/phpmd">
+            <arg path="\${basedir}/src"/>
+            <arg value="text"/>
+            <arg value="\${basedir}/test/phpmd.xml"/>
+        </exec>
+    </target>
+</project>
+EOS;
+
+        file_put_contents(vfsStream::url('module/test/ant-ci.xml'), $fileConfig);
 
         $this->edge->getAntModule($type)->willReturn(
             [
                 'default' => 'clean',
                 'target' => [
                     'clean' => null,
+                    'phpcs' => 'set-vendor'
+                ***REMOVED***,
+                'import' => [
+                    'ant-ci'
+                ***REMOVED***,
+                'files' => [
+                    'ant-ci' => [
+                        'clean' => null,
+                        'phpmd' => 'set-vendor'
+                    ***REMOVED***
                 ***REMOVED***
             ***REMOVED***
         )->shouldBeCalled();
@@ -470,10 +502,15 @@ EOS;
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, 'gear', 'gearing'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, 'gear', 'gearing', 'build.xml'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, 'wrong-name', 'gearing-ci', 'test/ant-ci.xml'))->shouldBeCalled();
         $this->consolePrompt->show(sprintf(AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'clean'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldImport, 'ant-ci', 'build.xml'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'clean', 'build.xml'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldDepends, '', 'set-vendor', 'phpcs', 'build.xml'))->shouldBeCalled();
 
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'clean', 'test/ant-ci.xml'))->shouldBeCalled();
+        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldDepends, '', 'set-vendor', 'phpmd', 'test/ant-ci.xml'))->shouldBeCalled();
 
         $this->antUpgrade->setAntEdge($this->edge->reveal());
 
@@ -481,9 +518,14 @@ EOS;
 
         $this->assertEquals(
             [
+                sprintf(AntUpgrade::$import, 'ant-ci', 'build.xml'),
                 sprintf(AntUpgrade::$default, 'clean'),
                 sprintf(AntUpgrade::$named, 'gearing', 'build.xml'),
-                sprintf(AntUpgrade::$added, 'clean', 'build.xml')
+                sprintf(AntUpgrade::$named, 'gearing-ci', 'test/ant-ci.xml'),
+                sprintf(AntUpgrade::$added, 'clean', 'build.xml'),
+                sprintf(AntUpgrade::$depends, '', 'set-vendor', 'phpcs', 'build.xml'),
+                sprintf(AntUpgrade::$added, 'clean', 'test/ant-ci.xml'),
+                sprintf(AntUpgrade::$depends, '', 'set-vendor', 'phpmd', 'test/ant-ci.xml')
 
             ***REMOVED***, $upgraded
         );
@@ -491,9 +533,57 @@ EOS;
         //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
         //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
 
-        $expectedFile = $this->getCleanXml();
+        $expectedFile =  <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="clean" basedir=".">
+    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
+        <exec executable="\${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="\${basedir}/src"/>
+        </exec>
+    </target>
+    <import file="./test/ant-ci.xml"/>
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/build/features"/>
+        <delete dir="\${basedir}/build/docs"/>
+        <delete dir="\${basedir}/public/info"/>
+    </target>
+</project>
+
+EOS;
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/build.xml')));
+
+        $expectedFile =  <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing-ci" default="" basedir=".">
+    <target name="phpmd" description="MessDetector" depends="set-vendor">
+        <exec executable="\${vendor}/bin/phpmd">
+            <arg path="\${basedir}/src"/>
+            <arg value="text"/>
+            <arg value="\${basedir}/test/phpmd.xml"/>
+        </exec>
+    </target>
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="\${basedir}/build/api"/>
+        <delete dir="\${basedir}/build/coverage"/>
+        <delete dir="\${basedir}/build/logs"/>
+        <delete dir="\${basedir}/build/pdepend"/>
+        <delete dir="\${basedir}/build/phpdox"/>
+        <delete dir="\${basedir}/build/features"/>
+        <delete dir="\${basedir}/build/docs"/>
+        <delete dir="\${basedir}/public/info"/>
+    </target>
+</project>
+
+EOS;
+
+        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/test/ant-ci.xml')));
 
     }
 
