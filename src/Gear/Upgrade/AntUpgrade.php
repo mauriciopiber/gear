@@ -8,6 +8,8 @@ use Gear\Edge\AntEdge\AntEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
+use SimpleXmlElement;
+use Exception;
 
 /**
  * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
@@ -40,13 +42,15 @@ class AntUpgrade extends AbstractJsonService
      */
     public $config = [***REMOVED***;
 
-    static public $shouldFile = 'Ant - Você quer criar o arquivo build.xml?';
+    public $upgrades = [***REMOVED***;
 
-    static public $fileCreated = 'Ant - Arquivo build.xml criado';
+    static public $shouldFile = 'Ant - Você quer criar o arquivo %s?';
 
-    static public $named = 'Ant - Adicionado Nome %s';
+    static public $fileCreated = 'Ant - Arquivo %s criado';
 
-    static public $added = 'Ant - Criado Target %s';
+    static public $named = 'Ant - Adicionado nome %s no arquivo %s';
+
+    static public $added = 'Ant - Criado Target %s no arquivo %s';
 
     static public $shouldAdd = 'Ant - Deve adicionar o Target %s?';
 
@@ -55,6 +59,10 @@ class AntUpgrade extends AbstractJsonService
     static public $shouldDefault = 'Ant - Deve mudar o atributo default de %s para %s?';
 
     static public $shouldDepends = 'Ant - Deve mudar a dependência da build %s para %s?';
+
+    static public $shouldImport = 'Ant - Deve adicionar o import %s para %s?';
+
+    static public $import = 'Ant - Adicionado import %s para %s';
 
     static public $depends = 'Ant - Adicionado dependência do target %s para %s';
 
@@ -81,6 +89,7 @@ class AntUpgrade extends AbstractJsonService
         $this->config = $config;
         $this->consolePrompt = $consolePrompt;
         $this->gearConfig = $gearConfig;
+        $this->upgrades = [***REMOVED***;
     }
 
     /**
@@ -91,7 +100,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return boolean
      */
-    public function buildHasTarget(\SimpleXMLElement $build, $search)
+    public function buildHasTarget(SimpleXMLElement $build, $search)
     {
         foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
@@ -111,7 +120,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return boolean
      */
-    public function buildTargetHasDepends(\SimpleXmlElement $build, $search, $depends)
+    public function buildTargetHasDepends(SimpleXmlElement $build, $search, $depends)
     {
         foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
@@ -138,7 +147,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return \SimpleXmlElement
      */
-    public function appendDepends(\SimpleXmlElement $build, $search, $depends)
+    public function appendDepends(SimpleXmlElement $build, $search, $depends)
     {
         foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
@@ -159,6 +168,14 @@ class AntUpgrade extends AbstractJsonService
         return $build;
     }
 
+    public function factoryImport($name)
+    {
+        $import = file_get_contents($this->getModuleTemplate().'/import.xml');
+        $import = str_replace('{$IMPORT}', $name, $import);
+
+        return $import;
+    }
+
     /**
      * Format XML before print
      *
@@ -166,7 +183,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return string
      */
-    public function prepare(\SimpleXmlElement $build)
+    public function prepare(SimpleXmlElement $build)
     {
         $doc = new \DomDocument('1.0', 'utf-8');
         $doc->preserveWhiteSpace = false;
@@ -279,7 +296,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return SimpleXMLElement
      */
-    public function appendChild(\SimpleXMLElement &$to, \SimpleXMLElement $from)
+    public function appendChild(SimpleXMLElement &$to, SimpleXMLElement $from)
     {
         $toDom = dom_import_simplexml($to);
         $fromDom = dom_import_simplexml($from);
@@ -295,29 +312,31 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return \SimpleXmlElement
      */
-    public function upgradeName($name, \SimpleXmlElement $file)
+    public function upgradeName(SimpleXmlElement $file, $dir, $name, $identify = 'build.xml')
     {
         $buildName = $this->str('url', $name);
 
-        if ((string) $file->attributes()->name == $buildName) {
-            return $file;
+        if (((string) $file->attributes()->name == $buildName) === false) {
+
+            if (($confirm = $this->shouldRename($file, $buildName)) !== false) {
+                $this->upgrades[***REMOVED*** = sprintf(static::$named, $buildName, $identify);
+                $file->attributes()->name = $buildName;
+            }
         }
 
-        $confirm = $this->getConsolePrompt()->show(
+        return $file;
+    }
+
+
+    public function shouldRename(SimpleXmlElement $file, $buildName)
+    {
+        return $this->getConsolePrompt()->show(
             sprintf(
                 static::$shouldName,
                 $file->attributes()->name,
                 $buildName
             )
         );
-
-        if ($confirm === false) {
-            return $file;
-        }
-
-        $this->upgrades[***REMOVED*** = sprintf(static::$named, $buildName);
-        $file->attributes()->name = $buildName;
-        return $file;
     }
 
     /**
@@ -328,7 +347,7 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return \SimpleXmlElement
      */
-    public function upgradeDefault(\SimpleXmlElement $file, $default)
+    public function upgradeDefault(SimpleXmlElement $file, $default)
     {
 
         if ((string) $file->attributes()->default == $default) {
@@ -353,6 +372,30 @@ class AntUpgrade extends AbstractJsonService
         return $file;
     }
 
+    public function getImport($dir, array $edge)
+    {
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            return null;
+        }
+
+        $builds = [***REMOVED***;
+
+        foreach ($edge['files'***REMOVED*** as $file => $targets) {
+            unset($targets);
+
+            $name = sprintf('test/%s.xml', $file);
+
+            $builds[$file***REMOVED*** = simplexml_load_string(file_get_contents($dir.'/'.$name));
+        }
+
+        return $builds;
+    }
+
+    public function shouldDepends($target, $dependency)
+    {
+        return $this->getConsolePrompt()->show(sprintf(static::$shouldDepends, $target, $dependency));
+    }
+
     /**
      * Upgrade build file
      *
@@ -363,61 +406,211 @@ class AntUpgrade extends AbstractJsonService
      *
      * @return SimpleXmlElement|\Gear\Upgrade\SimpleXMLElement
      */
-    public function upgrade($dir, $name, $edge, $function, $type = 'web')
+    public function upgrade($dir, $type = 'web', $edge, $function)
     {
+        $name = $this->getGearConfig()->getCurrentName();
+        $name = $this->str('url', $name);
 
-        $file = simplexml_load_file($dir.'/build.xml');
+        $this->createFiles($dir, $edge);
+
+        $this->main = simplexml_load_file($dir.'/build.xml');
+
+        $this->import = $this->getImport($dir, $edge);
+
+        $this->upgradeImport($this->main, $dir, $edge);
+
+        $this->upgradeDefault($this->main, $edge['default'***REMOVED***);
+
+        $this->upgradeName($this->main, $dir, $name);
 
 
-        $file = $this->upgradeName($name, $file);
+        if (!empty($this->import)) {
 
-        $file = $this->upgradeDefault($file, $edge['default'***REMOVED***);
+            foreach ($this->import as $nameImport => $build) {
+
+                $matches = array();
+                preg_match('/ant-([a-z***REMOVED***+)/', $nameImport, $matches);
+
+                $hasName = sprintf('%s-%s', $name, $matches[1***REMOVED***);
+
+                $this->import[$nameImport***REMOVED*** = $this->upgradeName($build, $dir, $hasName, sprintf('test/%s.xml', $nameImport));
+            }
+
+        }
+
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-            $hasTarget = $this->buildHasTarget($file, $target);
+            $this->main = $this->upgradeTarget($this->main, $target, $dependency, $function, $type, 'build.xml');
+        }
 
-            if ($hasTarget) {
-                if (empty($dependency)) {
-                    continue;
+
+        if (!empty($this->import)) {
+
+            foreach ($this->import as $name => $build) {
+
+                if (!isset($edge['files'***REMOVED***[$name***REMOVED***) || empty($edge['files'***REMOVED***[$name***REMOVED***)) {
+                   continue;
                 }
 
-                $hasDepends = $this->buildTargetHasDepends($file, $target, $dependency);
+                foreach ($edge['files'***REMOVED***[$name***REMOVED*** as $target => $dependency) {
 
-                if ($hasDepends === true) {
-                    continue;
+                    $identify = sprintf('test/%s.xml', $name);
+
+                    $this->import[$name***REMOVED*** = $this->upgradeTarget(
+                        $this->import[$name***REMOVED***,
+                        $target,
+                        $dependency,
+                        $function,
+                        $type,
+                        $identify
+                    );
                 }
 
-                $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldDepends, $target, $dependency));
+            }
+        }
+
+        file_put_contents($dir.'/build.xml', $this->prepare($this->main));
+
+        if (!empty($this->import)) {
+            foreach ($this->import as $name => $build) {
+
+                $final = sprintf('%s/test/%s.xml', $dir, $name);
+                file_put_contents($final, $this->prepare($build));
+            }
+        }
+
+        return $this->main;
+    }
+
+    public function upgradeTarget(SimpleXmlElement $build, $target, $dependency, $function, $type, $identify = 'build.xml')
+    {
+         $hasTarget = $this->buildHasTarget($build, $target);
+
+         if ($hasTarget) {
+            if (
+                empty($dependency)
+                || $this->buildTargetHasDepends($build, $target, $dependency) === true
+              || $this->shouldDepends($target, $dependency) === false
+           ) {
+                return $build;
+            }
+
+            $build = $this->appendDepends($build, $target, $dependency);
+
+            return $build;
+        }
+
+        if (($confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldAdd, $target))) === false) {
+            continue;
+        }
+
+        switch ($function) {
+            case 'upgradeModule':
+                $build = $this->appendChild($build, $this->moduleFactory($target, $type));
+                break;
+            case 'upgradeProject':
+                $build = $this->appendChild($build, $this->projectFactory($target, $type));
+                break;
+        }
+
+
+        $this->upgrades[***REMOVED*** = sprintf(static::$added, $target, $identify);
+
+        return $build;
+    }
+
+    public function hasImport(SimpleXmlElement $build, $importName)
+    {
+        $search = sprintf('./test/%s.xml', $importName);
+
+        foreach ($build[0***REMOVED***->import as $target) {
+            $name = (string) $target[0***REMOVED***->attributes()->file;
+            if ($name === $search) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function addImport(SimpleXmlElement $build, $importName)
+    {
+        $factory = $this->factoryImport($importName);
+
+        $this->appendChild($build, simplexml_load_string($factory));
+
+        $this->upgrades[***REMOVED*** = sprintf(static::$import, $importName, 'build.xml');
+
+        return $build;
+    }
+
+    public function upgradeImport(SimpleXmlElement $build, $dir, array $edge)
+    {
+        if (empty($edge['import'***REMOVED***)) {
+            return true;
+        }
+
+
+        foreach ($edge['import'***REMOVED*** as $importName) {
+
+            if ($this->hasImport($build, $importName) === false) {
+                $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldImport, $importName, 'build.xml'));
 
                 if ($confirm === false) {
                     continue;
                 }
 
-                $file = $this->appendDepends($file, $target, $dependency);
-
-                continue;
+                $build = $this->addImport($build, $importName);
             }
-
-            $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldAdd, $target));
-
-            if ($confirm === false) {
-                continue;
-            }
-
-            switch ($function) {
-                case 'upgradeModule':
-                    $file = $this->appendChild($file, $this->moduleFactory($target, $type));
-                    break;
-                case 'upgradeProject':
-                    $file = $this->appendChild($file, $this->projectFactory($target, $type));
-                    break;
-            }
-
-
-            $this->upgrades[***REMOVED*** = sprintf(static::$added, $target);
         }
 
-        return $file;
+        return $build;
+    }
+
+
+    public function createFiles($dir, array $edge)
+    {
+
+        if (!is_file($dir.'/build.xml')) {
+            $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldFile, 'build.xml'));
+
+            if ($confirm === false) {
+                return [***REMOVED***;
+            }
+
+            $this->createBasicFile($dir, 'build.xml');
+            //$this->upgrades[***REMOVED*** = sprintf(static::$fileCreated, 'build.xml');
+        }
+
+
+        if (!isset($edge['files'***REMOVED***) || count($edge['files'***REMOVED***)<1) {
+            return;
+        }
+
+
+        foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
+
+
+            if (strpos($expectedFile, 'ant-') === false) {
+                continue;
+            }
+
+            if (!is_file($dir . '/test/'.$expectedFile.'.xml')) {
+
+                $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldFile, 'test/'.$expectedFile.'.xml'));
+
+                if ($confirm === false) {
+                    continue;
+                }
+
+
+                $this->createBasicFile($dir, 'test/'.$expectedFile.'.xml');
+                //$this->upgrades[***REMOVED*** = sprintf(static::$fileCreated, $expectedFile.'.xml');
+
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -439,37 +632,9 @@ class AntUpgrade extends AbstractJsonService
 
         $dir = $this->getModule()->getMainFolder();
 
-        if (!is_file($dir.'/build.xml')) {
-            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
-
-            if ($confirm === false) {
-                return [***REMOVED***;
-            }
-
-            $this->createBasicFile($dir);
-        }
-
-        $name = $this->getModule()->getModuleName();
-
-        $newAnt = $this->upgrade($dir, $name, $edge, __FUNCTION__, $type);
-
-        file_put_contents($dir.'/build.xml', $this->prepare($newAnt));
+        $this->upgrade($dir, $type, $edge, __FUNCTION__);
 
         return $this->upgrades;
-    }
-
-    public function createBasicFile($dir)
-    {
-
-        $basic = <<<EOS
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="" default="" basedir=".">
-</project>
-
-EOS;
-        file_put_contents($dir.'/build.xml', $this->prepare(simplexml_load_string($basic)));
-
-        $this->upgrades[***REMOVED*** = static::$fileCreated;
     }
 
     /**
@@ -491,28 +656,22 @@ EOS;
 
         $dir = $this->getProject();
 
-        if (!is_file($dir.'/build.xml')) {
-            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
-
-            if ($confirm === false) {
-                return [***REMOVED***;
-            }
-
-            $this->createBasicFile($dir);
-        }
-
-        if ($name === null) {
-            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
-        }
-
-        $name = $this->str('url', $name);
-
-        $newAnt = $this->upgrade($dir, $name, $edge, __FUNCTION__, $type);
-
-        $pretty = $this->prepare($newAnt);
-
-        file_put_contents($dir.'/build.xml', $pretty);
+        $this->upgrade($dir, $type, $edge, __FUNCTION__);
 
         return $this->upgrades;
+    }
+
+    public function createBasicFile($dir, $name = 'build.xml')
+    {
+
+        $basic = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="" default="" basedir=".">
+</project>
+
+EOS;
+        file_put_contents(sprintf('%s/%s', $dir, $name), $this->prepare(simplexml_load_string($basic)));
+
+        $this->upgrades[***REMOVED*** = sprintf(static::$fileCreated, $name);
     }
 }
