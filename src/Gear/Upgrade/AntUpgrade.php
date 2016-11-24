@@ -44,6 +44,8 @@ class AntUpgrade extends AbstractJsonService
 
     public $upgrades = [***REMOVED***;
 
+    public $import = [***REMOVED***;
+
     static public $shouldFile = 'Ant - Você quer criar o arquivo %s?';
 
     static public $fileCreated = 'Ant - Arquivo %s criado';
@@ -62,7 +64,7 @@ class AntUpgrade extends AbstractJsonService
 
     static public $shouldImport = 'Ant - Deve adicionar o import %s para %s?';
 
-    static public $import = 'Ant - Adicionado import %s para %s';
+    static public $imports = 'Ant - Adicionado import %s para %s';
 
     static public $depends = 'Ant - Alterado dependência de "%s" para "%s" em %s no arquivo %s';
 
@@ -552,7 +554,7 @@ class AntUpgrade extends AbstractJsonService
 
         $this->appendChild($build, simplexml_load_string($factory));
 
-        $this->upgrades[***REMOVED*** = sprintf(static::$import, $importName, 'build.xml');
+        $this->upgrades[***REMOVED*** = sprintf(static::$imports, $importName, 'build.xml');
 
         return $build;
     }

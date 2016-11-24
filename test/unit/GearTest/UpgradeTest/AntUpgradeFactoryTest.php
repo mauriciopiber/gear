@@ -35,6 +35,10 @@ class AntUpgradeFactoryTest extends AbstractTestCase
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
 
+        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
+            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        )->shouldBeCalled();
+
         $factory = new \Gear\Upgrade\AntUpgradeFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());

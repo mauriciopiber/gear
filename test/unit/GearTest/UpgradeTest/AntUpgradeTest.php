@@ -105,10 +105,11 @@ class AntUpgradeTest extends TestCase
         return $check;
     }
 
-    /*
+    /**
      * @group ftm
+     * @group Large
      * @dataProvider getBuildTargets
-
+     */
     public function testFactoryTargetModule($buildName, $dependency, $type, $folder)
     {
         $template = ($folder === 'module') ? $this->antUpgrade->getModuleTemplate() : $this->antUpgrade->getProjectTemplate();
@@ -117,7 +118,7 @@ class AntUpgradeTest extends TestCase
         $this->assertEquals($buildName, (string) $factory->attributes()->name);
         $this->assertEquals($dependency, (string) $factory->attributes()->depends);
     }
-*/
+
 
     public function testPrepare()
     {
