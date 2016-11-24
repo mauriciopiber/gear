@@ -283,6 +283,8 @@ class ModuleService
      */
     public function moduleComponents($collection = 2)
     {
+        $configService         = $this->getConfigService();
+        $configService->module($this->type);
 
         if ($collection == 1) {
             $this->getComposerService()->createComposerAsProject($this->type);
@@ -308,13 +310,8 @@ class ModuleService
 
         $this->registerJson();
 
-
         $codeceptionService = $this->getCodeceptionService();
         $codeceptionService->createFullSuite();
-
-        $configService         = $this->getConfigService();
-        $configService->module($this->type);
-
 
         switch ($this->type) {
             case 'web':

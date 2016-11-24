@@ -17,6 +17,7 @@ gearpath="$base/gear"
 
 #### Remove
 
+
 cd $modulepath && php public/index.php gear git repository delete $module --force
 cd $modulepath && php public/index.php gear jenkins suite delete
 
@@ -30,21 +31,22 @@ cd $gearpath && sudo php public/index.php gear module-as-project create $module 
 cd $modulepath && sudo script/deploy-development.sh
 
 ### can be turned off
-###cd $modulepath && sudo vendor/bin/phinx migrate
+cd $modulepath && sudo vendor/bin/phinx migrate
 
 ### can be turned off
-###cd $modulepath && sudo vendor/bin/unload-module BjyAuthorize
+cd $modulepath && sudo vendor/bin/unload-module BjyAuthorize
 
 ### can be turned off
-###cd $modulepath && sudo php public/index.php gear database fix
+cd $modulepath && sudo php public/index.php gear database fix
 
 ### can be turned off
-###cd $modulepath && sudo script/load.sh
+cd $modulepath && sudo script/load.sh
 
 #cd $modulepath && ant
 
-
 exit 1
+
+
 echo "
 *
 !.gitignore" > build/.gitignore
