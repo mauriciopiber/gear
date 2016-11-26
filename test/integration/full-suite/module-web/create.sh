@@ -44,9 +44,6 @@ cd $modulepath && sudo script/load.sh
 
 #cd $modulepath && ant
 
-exit 1
-
-
 echo "
 *
 !.gitignore" > build/.gitignore
@@ -61,7 +58,7 @@ cd $modulepath && php public/index.php gear git repository create $module
 
 cd $modulepath && php public/index.php gear git repository init
 
-cd $modulepath && php public/index.php gear jenkins suite create module-web
+cd $modulepath && php public/index.php gear jenkins suite create $moduleUrl
 
 cd $modulepath && php public/index.php gear deploy build "Primeiro Build com sucesso módule web"
 
