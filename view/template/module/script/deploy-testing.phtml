@@ -11,7 +11,7 @@ password=$(php -r '$local = require_once("config/autoload/local.php"); echo $loc
 vendor/bin/database $database $username $password
 mysql -u$username -p$password $database < data/<?php echo $this->moduleUrl;?>.mysql.sql
 
-vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev development
+sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev development
 
 chmod 777 -R build
 chmod 777 -R data/session
