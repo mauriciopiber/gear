@@ -123,7 +123,7 @@ EOS;
 
     public function testRunComposerUpdateOnAnotherProject()
     {
-        $cmd = '/var/www/gear-package/gear/bin/installer-utils/composer-update vfs://project';
+        $cmd = \GearBase\Module::getProjectFolder().'/bin/installer-utils/composer-update vfs://project';
         $this->scriptService->setLocation(vfsStream::url('project'))->willReturn(true)->shouldBeCalled();
         $this->scriptService->run($cmd)->willReturn(true)->shouldBeCalled();
 
