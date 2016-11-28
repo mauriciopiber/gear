@@ -32,7 +32,8 @@ class TestServiceTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module';
 
-        vfsStream::setup('module');
+        $this->root = vfsStream::setup('module');
+        vfsStream::newDirectory('test')->at($this->root);
 
         $parser = new Parser();
 
@@ -48,6 +49,8 @@ class TestServiceTest extends AbstractTestCase
         $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
         $this->edge->getAntModule('web')->willReturn($files)->shouldBeCalled();
 
+        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+
 
 
         $this->upgrade = new \Gear\Upgrade\AntUpgrade(
@@ -55,7 +58,8 @@ class TestServiceTest extends AbstractTestCase
             $this->consolePrompt->reveal(),
             $this->string,
             $this->config,
-            $this->module->reveal()
+            $this->module->reveal(),
+            $this->gearConfig->reveal()
         );
 
         $this->upgrade->setAntEdge($this->edge->reveal());
@@ -77,11 +81,6 @@ class TestServiceTest extends AbstractTestCase
 
         $file = $test->copyBuildXmlFile();
 
-        $expected = $this->template.'/build.xml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
+        $this->assertFileExists($file);
     }
 }

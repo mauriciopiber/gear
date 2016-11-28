@@ -627,6 +627,7 @@ class ModuleServiceTest extends AbstractTestCase
 
     /**
      * @group mod1
+     * @group vamov
      */
     public function testCreateModuleAsProjectCli()
     {

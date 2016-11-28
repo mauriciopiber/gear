@@ -4,6 +4,13 @@ namespace GearTest\ProjectTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use Gear\Project\Config\Globally;
+use Gear\Project\Config\Local;
+use Gear\Creator\TemplateService;
+use GearBase\Util\File\FileService;
+use Gear\Creator\File;
+use GearBase\Util\String\StringService;
+use Gear\Project\Docs\Docs;
 
 /**
  * @group Project
@@ -16,13 +23,13 @@ class ProjectServiceTest extends AbstractTestCase
         parent::setUp();
         $this->projectDir = vfsStream::setUp('project');
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new File($fileService, $template);
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->templates = (new \Gear\Module())->getLocation().'/../../test/template/project/config/autoload';
 
@@ -48,7 +55,7 @@ class ProjectServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***;
 
-        $this->docs = new \Gear\Project\Docs\Docs(
+        $this->docs = new Docs(
             $this->config,
             $this->string,
             $this->fileCreator
@@ -339,8 +346,6 @@ EOS
      */
     public function testCreateProject($name, $host, $git, $database, $user, $pass, $nfs)
     {
-
-
         $root = vfsStream::setup('project');
 
         $project = vfsStream::newDirectory('GearProject')->at($root);
@@ -383,13 +388,13 @@ EOS
         ));
 
 
-        $global = new \Gear\Project\Config\Globally(array(
+        $global = new Globally(array(
             'dbms' => 'mysql',
             'dbname' => $database,
             'dbhost' => 'localhost'
         ));
 
-        $local = new \Gear\Project\Config\Local(array(
+        $local = new Local(array(
             'username' => $user,
             'password' => $pass,
             'host'     => $host,
@@ -414,33 +419,15 @@ EOS
         $script->setLocation('vfs://project/GearProject')->willReturn(true)->shouldBeCalled();
         //$script->setLocation(null)->willReturn(true)->shouldBeCalled();
 
+        $basePath = \GearBase\Module::getProjectFolder();
 
-
-        $cmd = '/var/www/gear-package/gear/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
+        $cmd = $basePath.'/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
-
-        /*
-        $cmd = '/var/www/gear-package/gear/bin/installer '
-             . '"/var/www/gear-package/gear/bin" "" "GearProject" '
-             . '"/GearProject" "gear-project.gear.dev" '
-             . '"git@bitbucket.org:mauriciopiber/gear-project.git" '
-             . '"gear_project" "root" "password" "gear-project"';
-
+        $cmd = $basePath.'/bin/nfs vfs://project/GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
-        $cmd = '/var/www/gear-package/gear/bin/installer-utils/run-gear.sh /GearProject';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
-
-
-        $cmd = '/var/www/gear-package/gear/bin/virtualhost /GearProject gear-project.gear.dev development';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
-*/
-        $cmd = '/var/www/gear-package/gear/bin/nfs vfs://project/GearProject';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
-
-
-        $cmd = '/var/www/gear-package/gear/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
+        $cmd = $basePath.'/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         $dirService = $this->prophesize('GearBase\Util\Dir\DirService');

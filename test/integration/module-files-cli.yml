@@ -68,4 +68,10 @@ files:
       moduleUrl: 'my-module'
       layout: 'gear-admin-interno'
     location: 'src/MyModule'
-    filename: 'Module.php'                         
+    filename: 'Module.php'                 
+    
+  13:
+    template: 'template/module/jenkinsfile-cli.phtml'
+    options:
+      moduleUrl: 'my-module'
+    filename: 'Jenkinsfile'            
