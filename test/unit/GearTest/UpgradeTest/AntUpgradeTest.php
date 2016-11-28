@@ -519,7 +519,7 @@ EOS;
 
         $this->assertEquals(
             [
-                sprintf(AntUpgrade::$import, 'ant-ci', 'build.xml'),
+                sprintf(AntUpgrade::$imports, 'ant-ci', 'build.xml'),
                 sprintf(AntUpgrade::$default, 'clean'),
                 sprintf(AntUpgrade::$named, 'gearing', 'build.xml'),
                 sprintf(AntUpgrade::$named, 'gearing-ci', 'test/ant-ci.xml'),
@@ -711,7 +711,7 @@ EOS;
             [
                 sprintf(AntUpgrade::$fileCreated, 'build.xml'),
                 sprintf(AntUpgrade::$fileCreated, 'test/ant-ci.xml'),
-                sprintf(AntUpgrade::$import, 'ant-ci', 'build.xml'),
+                sprintf(AntUpgrade::$imports, 'ant-ci', 'build.xml'),
                 sprintf(AntUpgrade::$default, 'clean'),
                 sprintf(AntUpgrade::$named, 'my-project', 'build.xml'),
                 sprintf(AntUpgrade::$named, 'my-project-ci', 'test/ant-ci.xml'),
@@ -900,8 +900,8 @@ EOS;
 
         $this->assertEquals(
             [
-                sprintf(AntUpgrade::$import, 'ant-ci', 'build.xml'),
-                sprintf(AntUpgrade::$import, 'ant-namespace', 'build.xml'),
+                sprintf(AntUpgrade::$imports, 'ant-ci', 'build.xml'),
+                sprintf(AntUpgrade::$imports, 'ant-namespace', 'build.xml'),
             ***REMOVED***,
             $this->antUpgrade->upgrades
         );
