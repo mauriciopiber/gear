@@ -367,8 +367,8 @@ EOS
         $request->getParam('host', null)->willReturn($host);
         $request->getParam('git', null)->willReturn($git);
         $request->getParam('database', null)->willReturn($database);
-        $request->getParam('username', null)->willReturn($user);
-        $request->getParam('password', null)->willReturn($pass);
+        $request->getParam('username', 'root')->willReturn($user);
+        $request->getParam('password', 'gear')->willReturn($pass);
         $request->getParam('nfs', null)->willReturn($nfs);
 
 
