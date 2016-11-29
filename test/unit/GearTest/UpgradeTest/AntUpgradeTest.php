@@ -110,7 +110,7 @@ class AntUpgradeTest extends TestCase
      * @group Large
      * @dataProvider getBuildTargets
      */
-    public function testFactoryTargetModule($buildName, $dependency, $type, $folder)
+    public function testFactoryTargetAll($buildName, $dependency, $type, $folder)
     {
         $template = ($folder === 'module') ? $this->antUpgrade->getModuleTemplate() : $this->antUpgrade->getProjectTemplate();
 

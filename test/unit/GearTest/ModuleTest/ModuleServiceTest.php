@@ -1,15 +1,18 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\AggregateResolver;
+use Zend\View\Resolver\TemplatePathStack;
 
 /**
  * @group Module
  * @group ModuleService
  */
-class ModuleServiceTest extends AbstractTestCase
+class ModuleServiceTest extends TestCase
 {
     public function setUp()
     {
@@ -109,12 +112,29 @@ class ModuleServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group module1
+     * Cria Zend\View\Renderer\PhpRenderer
      */
-    public function testScriptDeploy()
+    public function mockPhpRenderer($templatePath)
     {
-        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $view = new PhpRenderer();
 
+        $resolver = new AggregateResolver();
+
+        $map = new TemplatePathStack(array(
+            'script_paths' => array(
+                'template' => $templatePath,
+            )
+        ));
+
+        $resolver->attach($map);
+
+        $view->setResolver($resolver);
+
+        return $view;
+    }
+
+    public function createModuleRealFiles()
+    {
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator,
             $this->stringService,
@@ -150,6 +170,16 @@ class ModuleServiceTest extends AbstractTestCase
             $this->autoload->reveal(),
             $this->config
         );
+    }
+
+    /**
+     * @group module1
+     */
+    public function testScriptDeploy()
+    {
+        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->createModuleRealFiles();
 
         //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getScriptDevelopment('cli');
@@ -161,6 +191,47 @@ class ModuleServiceTest extends AbstractTestCase
             file_get_contents(vfsStream::url('module/deploy-development.sh'))
         );
     }
+
+    /**
+     * @group gitignore
+     */
+    public function testGitIgnoreWeb()
+    {
+        $this->createModuleRealFiles();
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        //$this->moduleService->setModule($this->module->reveal());
+        $this->moduleService->createGitIgnore('web');
+
+        $expected = $this->templates.'/../gitignore-web';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('module/.gitignore'))
+        );
+    }
+
+    /**
+     * @group gitignore
+     */
+    public function testGitIgnoreCli()
+    {
+        $this->createModuleRealFiles();
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        //$this->moduleService->setModule($this->module->reveal());
+        $this->moduleService->createGitIgnore('cli');
+
+        $expected = $this->templates.'/../gitignore-cli';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('module/.gitignore'))
+        );
+    }
+
+
 
     /**
      * @group mod2

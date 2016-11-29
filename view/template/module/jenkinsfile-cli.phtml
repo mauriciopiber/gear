@@ -26,6 +26,7 @@ node('master') {
     }
 
     stage('Report') {
+
         archiveCopyPastResults()
         archiveMessDetectorResults()
         archiveCheckstyleResults()
@@ -38,7 +39,10 @@ node('master') {
         }
     }
     stage('Measure') {
-        build '<?php echo $this->moduleUrl;?>-release'
+        archiveArtifacts artifacts: "build/**/*", fingerprint: true
+        build job: '<?php echo $this->moduleUrl;?>-release', parameters: [
+            [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+        ***REMOVED***
     }
     stage('Tear Down') {
         deleteDir();

@@ -954,16 +954,16 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.36",
+            "version": "0.2.37",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "19e2122e436c34789d1090a7d30b7d526ece2275"
+                "reference": "ced5b5e79cb36f8c7c4683aca76c521399f4da21"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.36-cbb989.tar",
-                "reference": "19e2122e436c34789d1090a7d30b7d526ece2275",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.37-e048d8.tar",
+                "reference": "ced5b5e79cb36f8c7c4683aca76c521399f4da21",
                 "shasum": null
             },
             "require": {
@@ -994,7 +994,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2016-11-23 20:17:53"
+            "time": "2016-11-28 21:50:56"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -1234,17 +1234,17 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.2",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443"
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b39c7a5b194f9ed7bd0dd345c751007a41862443",
-                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443",
-                "shasum": "96279b1781565f909078cf695efb5e8d53b9a0af"
+                "url": "https://mirror.pibernetwork.com/dist/phpdocumentor-type-resolver-e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb-zip-e5468a.tar",
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
@@ -1277,7 +1277,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ***REMOVED***,
-            "time": "2016-06-10 07:14:17"
+            "time": "2016-11-25 06:54:22"
         },
         {
             "name": "phpoption/phpoption",
@@ -1394,16 +1394,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6cba06ff75a1a63a71033e1a01b89056f3af1e8d"
+                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-6cba06ff75a1a63a71033e1a01b89056f3af1e8d-zip-9d5cbc.tar",
-                "reference": "6cba06ff75a1a63a71033e1a01b89056f3af1e8d",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-903fd6318d0a90b4770a009ff73e4a4e9c437929-zip-096537.tar",
+                "reference": "903fd6318d0a90b4770a009ff73e4a4e9c437929",
                 "shasum": ""
             },
             "require": {
@@ -1453,21 +1453,21 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-11-01 05:06:24"
+            "time": "2016-11-28 16:00:31"
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "6150bf2c35d3fc379e50c7602b75caceaa39dbf0"
+                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/6150bf2c35d3fc379e50c7602b75caceaa39dbf0",
-                "reference": "6150bf2c35d3fc379e50c7602b75caceaa39dbf0",
-                "shasum": "d79f9cc79eee84fa1f77f8eb9f4a6185333124a5"
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-file-iterator-3cc8f69b3028d0f96a9078e6295d86e9bf019be5-zip-184bc9.tar",
+                "reference": "3cc8f69b3028d0f96a9078e6295d86e9bf019be5",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1500,7 +1500,7 @@
                 "filesystem",
                 "iterator"
             ***REMOVED***,
-            "time": "2015-06-21 13:08:43"
+            "time": "2016-10-03 07:40:28"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1638,16 +1638,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.6.5",
+            "version": "5.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "875145fabfa261fa9c1aea663dd29ddce92dca8f"
+                "reference": "38810e97481723ef918f6e35c03cb1014a645bd5"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-875145fabfa261fa9c1aea663dd29ddce92dca8f-zip-5a1164.tar",
-                "reference": "875145fabfa261fa9c1aea663dd29ddce92dca8f",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-38810e97481723ef918f6e35c03cb1014a645bd5-zip-438ea0.tar",
+                "reference": "38810e97481723ef918f6e35c03cb1014a645bd5",
                 "shasum": ""
             },
             "require": {
@@ -1659,7 +1659,7 @@
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.3.1",
-                "phpunit/php-code-coverage": "^4.0.1",
+                "phpunit/php-code-coverage": "^4.0.3",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
@@ -1716,20 +1716,20 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-11-21 15:23:34"
+            "time": "2016-11-28 16:04:24"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.4.1",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "45026c8383187ad1dcb14fbfec77dced265b9cfc"
+                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-45026c8383187ad1dcb14fbfec77dced265b9cfc-zip-990518.tar",
-                "reference": "45026c8383187ad1dcb14fbfec77dced265b9cfc",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-mock-objects-90a08f5deed5f7ac35463c161f2e8fa0e5652faf-zip-779c8e.tar",
+                "reference": "90a08f5deed5f7ac35463c161f2e8fa0e5652faf",
                 "shasum": ""
             },
             "require": {
@@ -1775,7 +1775,7 @@
                 "mock",
                 "xunit"
             ***REMOVED***,
-            "time": "2016-11-19 09:07:46"
+            "time": "2016-11-27 07:52:03"
         },
         {
             "name": "psr/log",
@@ -2053,28 +2053,28 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "1.3.8",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea"
+                "reference": "5795ffe5dc5b02460c3e34222fee8cbe245d8fac"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-be2c607e43ce4c89ecd60e75c6a85c126e754aea-zip-edab34.tar",
-                "reference": "be2c607e43ce4c89ecd60e75c6a85c126e754aea",
-                "shasum": "6d956003a354a78fd6c414568c3a315e2295a601"
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-environment-5795ffe5dc5b02460c3e34222fee8cbe245d8fac-zip-f320b8.tar",
+                "reference": "5795ffe5dc5b02460c3e34222fee8cbe245d8fac",
+                "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8 || ^5.0"
+                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -2099,7 +2099,7 @@
                 "environment",
                 "hhvm"
             ***REMOVED***,
-            "time": "2016-08-18 05:49:44"
+            "time": "2016-11-26 07:53:53"
         },
         {
             "name": "sebastian/exporter",
@@ -6823,16 +6823,16 @@
         },
         {
             "name": "pdepend/pdepend",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "132c0a58dae0a92c4e091857515f4afcd5d27413"
+                "reference": "8d7ab8fe8c1f9de5056bb7ea2c0852f4ddd44f90"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/pdepend-pdepend-132c0a58dae0a92c4e091857515f4afcd5d27413-zip-dcda62.tar",
-                "reference": "132c0a58dae0a92c4e091857515f4afcd5d27413",
+                "url": "https://mirror.pibernetwork.com/dist/pdepend-pdepend-8d7ab8fe8c1f9de5056bb7ea2c0852f4ddd44f90-zip-ca0b1a.tar",
+                "reference": "8d7ab8fe8c1f9de5056bb7ea2c0852f4ddd44f90",
                 "shasum": ""
             },
             "require": {
@@ -6859,7 +6859,7 @@
                 "BSD-3-Clause"
             ***REMOVED***,
             "description": "Official version of pdepend to be handled with Composer",
-            "time": "2016-11-23 12:21:10"
+            "time": "2016-11-23 20:25:02"
         },
         {
             "name": "phploc/phploc",
@@ -6916,16 +6916,16 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "2.4.4",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "148b605040ae6f7cc839e14a9e206beec9868d97"
+                "reference": "9298602a922cd8c46666df8d540a60bc5925ce55"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpmd-phpmd-148b605040ae6f7cc839e14a9e206beec9868d97-zip-ad14a2.tar",
-                "reference": "148b605040ae6f7cc839e14a9e206beec9868d97",
+                "url": "https://mirror.pibernetwork.com/dist/phpmd-phpmd-9298602a922cd8c46666df8d540a60bc5925ce55-zip-0ab368.tar",
+                "reference": "9298602a922cd8c46666df8d540a60bc5925ce55",
                 "shasum": ""
             },
             "require": {
@@ -6977,7 +6977,7 @@
                 "phpmd",
                 "pmd"
             ***REMOVED***,
-            "time": "2016-11-22 14:35:17"
+            "time": "2016-11-23 20:33:32"
         },
         {
             "name": "psr/http-message",

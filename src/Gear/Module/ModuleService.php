@@ -356,6 +356,7 @@ class ModuleService
                 $this->getPage()->createIndexPage();
                 $this->getStep()->createIndexStep();
 
+
                 break;
 
             case 'cli':
@@ -367,9 +368,11 @@ class ModuleService
                 $consoleController->moduleFactory();
 
 
+
                 break;
         }
 
+        $this->createGitIgnore($this->type);
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
 
@@ -389,6 +392,16 @@ class ModuleService
         $this->createJenkinsFile($this->type);
 
         return true;
+    }
+
+    public function createGitIgnore($type)
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/gitignore-%s.phtml', $type));
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('.gitignore');
+        $file->setLocation($this->getModule()->getMainFolder());
+        return $file->render();
     }
 
     /**
@@ -579,10 +592,10 @@ class ModuleService
      *
      * @return string
      */
-    public function getScriptTesting()
+    public function getScriptTesting($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/deploy-testing.phtml');
+        $file->setTemplate(sprintf('template/module/script/deploy-testing-%s.phtml', $type));
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -597,10 +610,10 @@ class ModuleService
      *
      * @return string
      */
-    public function getScriptLoad()
+    public function getScriptLoad($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/load.phtml');
+        $file->setTemplate(sprintf('template/module/script/load-%s.phtml', $type));
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -617,7 +630,7 @@ class ModuleService
     {
         $this->getScriptDevelopment($this->type);
         $this->getScriptTesting($this->type);
-        $this->getScriptLoad();
+        $this->getScriptLoad($this->type);
     }
 
     /**
