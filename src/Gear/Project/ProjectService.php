@@ -7,13 +7,14 @@ use Gear\Script\ScriptServiceTrait;
 use Gear\Project\Project;
 use Gear\Project\Composer\ComposerServiceTrait;
 use GearVersion\Service\VersionServiceTrait;
-use Gear\Project\DeployServiceTrait;
+//use Gear\Project\DeployServiceTrait;
 use Gear\Edge\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Project\Docs\DocsTrait;
 use Gear\Upgrade\AntUpgradeTrait;
 use Gear\Upgrade\NpmUpgradeTrait;
 use Gear\Project\ProjectConfigTrait;
+use Gear\Project\Exception\BasePathNotFoundException;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -57,21 +58,33 @@ class ProjectService extends AbstractJsonService
 
         $type = $request->getParam('type', 'web');
 
-        if (!is_dir($basepath)) {
-            return false;
+        if ($basepath !== null && !is_dir($basepath)) {
+            throw new BasePathNotFoundException();
+        }
+
+        if ($basepath === null) {
+            $basepath = \GearBase\Module::getProjectParentFolder();
         }
 
         if (($host = $request->getParam('host', null)) === null) {
-            $host = $this->str('url', $request->getParam('project')).'.gear.dev';
+            $host = sprintf('%s.gear.dev', $this->str('url', $request->getParam('project')));
         }
 
-        $this->projectConfig = new \Gear\Project\Project(array(
+        if (($git = $request->getParam('git', null)) === null) {
+            $git = sprintf('git@bitbucket.org:mauriciopiber/%s.git', $this->str('url', $request->getParam('project')));
+        }
+
+        if (($database = $request->getParam('database', null)) === null) {
+            $database = $this->str('uline', $request->getParam('project'));
+        }
+
+        $this->projectConfig = new Project(array(
             'project'  => $request->getParam('project', null),
             'host'     => $host,
-            'git'      => $request->getParam('git', null),
-            'database' => $request->getParam('database', null),
-            'username' => $request->getParam('username', null),
-            'password' => $request->getParam('password', null),
+            'git'      => $git,
+            'database' => $database,
+            'username' => $request->getParam('username', 'root'),
+            'password' => $request->getParam('password', 'gear'),
             'nfs'      => $request->getParam('nfs', null),
             'type'     => $type,
             'folder'   => $basepath
@@ -83,6 +96,16 @@ class ProjectService extends AbstractJsonService
 
 
         $this->executeClone();
+
+
+        //cria($dbname, $username, $password, $host, $environment)
+        $this->setUpConfig(
+            $this->projectConfig->getDatabase(),
+            $this->projectConfig->getUsername(),
+            $this->projectConfig->getPassword(),
+            $this->str('url', $this->projectConfig->getProject()).'.gear.dev',
+            'development'
+        );
 
 
         //cria
@@ -108,15 +131,6 @@ class ProjectService extends AbstractJsonService
 
         //cria
         $this->createScriptDeploy();
-
-        //cria($dbname, $username, $password, $host, $environment)
-        $this->setUpConfig(
-            $this->projectConfig->getDatabase(),
-            $this->projectConfig->getUsername(),
-            $this->projectConfig->getPassword(),
-            $this->str('url', $this->projectConfig->getProject()).'.gear.dev',
-            'development'
-        );
 
         //cria
         $this->getConfigDocs();
