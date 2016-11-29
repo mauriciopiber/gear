@@ -17,3 +17,4 @@ files:
     17: test/phpunit-benchmark.xml
     18: test/phpunit-coverage-benchmark.xml
     19: jenkins/quality    
+    20: .gitignore    

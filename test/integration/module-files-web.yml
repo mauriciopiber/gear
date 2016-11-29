@@ -36,13 +36,13 @@ files:
     location: 'script'
     filename: 'deploy-development.sh'    
   7:
-    template: 'template/module/script/deploy-testing.phtml'
+    template: 'template/module/script/deploy-testing-web.phtml'
     options:
       module: 'my_module'
     location: 'script'
     filename: 'deploy-testing.sh'    
   8:
-    template: 'template/module/script/load.phtml'
+    template: 'template/module/script/load-web.phtml'
     options:
       module: 'my_module'
     location: 'script'
@@ -74,4 +74,8 @@ files:
     template: 'template/module/jenkinsfile-web.phtml'
     options:
       moduleUrl: 'my-module'
-    filename: 'Jenkinsfile'                         
+    filename: 'Jenkinsfile'      
+    
+  14:
+    template: 'template/module/gitignore-web.phtml'
+    filename: '.gitignore'                       

@@ -1,0 +1,8 @@
+vendor
+node_modules
+.buildpath
+.project
+.settings/
+php_errors.log
+cache.properties
+tests/_output/*
