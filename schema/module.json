@@ -806,7 +806,7 @@
             },
             {
                 "name": "Module",
-                "object": "%s\\Module",
+                "namespace": "",
                 "actions": [
                     {
                         "name": "entities",

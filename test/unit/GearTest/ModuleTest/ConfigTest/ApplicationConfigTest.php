@@ -123,7 +123,7 @@ class ApplicationConfigTest extends AbstractTestCase
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $module->getModuleName()->willReturn('GearDeploy')->shouldBeCalled();
         $this->applicationConfig->setModule($module->reveal());
-        $array = $this->applicationConfig->unregisterModule();
+        $array = $this->applicationConfig->removeModuleFromProject();
 
         $this->assertTrue($array);
 
@@ -177,7 +177,7 @@ class ApplicationConfigTest extends AbstractTestCase
         $module->getModuleName()->willReturn('MyNewModule')->shouldBeCalled();
 
         $this->applicationConfig->setModule($module->reveal());
-        $array = $this->applicationConfig->registerModule();
+        $array = $this->applicationConfig->addModuleToProject();
 
         $this->assertTrue($array);
 

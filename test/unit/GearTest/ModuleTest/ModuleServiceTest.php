@@ -17,7 +17,7 @@ class ModuleServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->module = vfsStream::setup('module');
+        $this->root = vfsStream::setup('module');
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('GearIt');
@@ -80,6 +80,7 @@ class ModuleServiceTest extends TestCase
 
         $this->docs = $this->prophesize('Gear\Module\Docs\Docs');
 
+        $this->dir = new \GearBase\Util\Dir\DirService();
 
         $this->feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
 
@@ -168,7 +169,8 @@ class ModuleServiceTest extends TestCase
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
-            $this->config
+            $this->config,
+            $this->dir
         );
     }
 
@@ -392,7 +394,8 @@ class ModuleServiceTest extends TestCase
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
-            $this->config
+            $this->config,
+            $this->dir
         );
 
 
@@ -418,8 +421,6 @@ class ModuleServiceTest extends TestCase
 
 
         $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
-        $this->testService->createTests('web')->willReturn(true)->shouldBeCalled();
-
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
@@ -433,7 +434,7 @@ class ModuleServiceTest extends TestCase
         $this->controllerTest->moduleFactory()->shouldBeCalled();
         $this->controller->moduleFactory()->shouldBeCalled();
 
-        $this->codeception->appendIntoCodeceptionProject()->willReturn(true)->shouldBeCalled();
+        $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type)->shouldBeCalled();
@@ -554,7 +555,8 @@ class ModuleServiceTest extends TestCase
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
-            $this->config
+            $this->config,
+            $this->dir
         );
 
 
@@ -579,7 +581,7 @@ class ModuleServiceTest extends TestCase
 
 
         $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
-        $this->testService->createTests($type)->willReturn(true)->shouldBeCalled();
+
 
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
@@ -595,7 +597,7 @@ class ModuleServiceTest extends TestCase
         $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
         $this->consoleController->moduleFactory()->shouldBeCalled();
 
-        $this->codeception->appendIntoCodeceptionProject()->willReturn(true)->shouldBeCalled();
+        $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type)->shouldBeCalled();
@@ -687,7 +689,8 @@ class ModuleServiceTest extends TestCase
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
-            $this->config
+            $this->config,
+            $this->dir
         );
 
 
@@ -815,7 +818,8 @@ class ModuleServiceTest extends TestCase
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
-            $this->config
+            $this->config,
+            $this->dir
         );
 
 
@@ -823,4 +827,174 @@ class ModuleServiceTest extends TestCase
 
         $this->assertTrue($created);
     }
+
+
+    public function createModuleService()
+    {
+        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+
+        $this->moduleService = new \Gear\Module\ModuleService(
+            $this->fileCreator->reveal(),
+            $this->stringService,
+            $this->module->reveal(),
+            $this->docs->reveal(),
+            $this->composer->reveal(),
+            $this->codeception->reveal(),
+            $this->testService->reveal(),
+            $this->karma->reveal(),
+            $this->protractor->reveal(),
+            $this->package->reveal(),
+            $this->gulpfile->reveal(),
+            $this->languageService->reveal(),
+            $this->schema->reveal(),
+            $this->schemaLoader->reveal(),
+            $this->schemaController->reveal(),
+            $this->schemaAction->reveal(),
+            $this->configService->reveal(),
+            $this->controller->reveal(),
+            $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
+            $this->consoleControllerTest->reveal(),
+            $this->viewService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
+            $this->feature->reveal(),
+            $this->step->reveal(),
+            $this->page->reveal(),
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal(),
+            $this->config,
+            $this->dir
+        );
+    }
+
+    /**
+     * @group abcd
+     * @group abcd1
+     */
+    public function testAddModuleToProject()
+    {
+
+        $this->createModuleService();
+
+        $this->applicationConfig->addModuleToProject()->shouldBeCalled();
+        $this->autoload->addModuleToProject()->shouldBeCalled();
+        $this->codeception->addModuleToProject()->shouldBeCalled();
+        $this->cache->renewFileCache()->shouldBeCalled();
+
+        $this->assertTrue($this->moduleService->addModuleToProject());
+    }
+
+
+    /**
+     * @group abcd
+     */
+    public function testDeleteModuleNotExist()
+    {
+        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module/fake'))->shouldBeCalled();
+
+        $this->moduleService = new \Gear\Module\ModuleService(
+            $this->fileCreator->reveal(),
+            $this->stringService,
+            $this->module->reveal(),
+            $this->docs->reveal(),
+            $this->composer->reveal(),
+            $this->codeception->reveal(),
+            $this->testService->reveal(),
+            $this->karma->reveal(),
+            $this->protractor->reveal(),
+            $this->package->reveal(),
+            $this->gulpfile->reveal(),
+            $this->languageService->reveal(),
+            $this->schema->reveal(),
+            $this->schemaLoader->reveal(),
+            $this->schemaController->reveal(),
+            $this->schemaAction->reveal(),
+            $this->configService->reveal(),
+            $this->controller->reveal(),
+            $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
+            $this->consoleControllerTest->reveal(),
+            $this->viewService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
+            $this->feature->reveal(),
+            $this->step->reveal(),
+            $this->page->reveal(),
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal(),
+            $this->config,
+            $this->dir
+        );
+
+        $this->applicationConfig->removeModuleFromProject()->shouldNotBeCalled();
+        $this->autoload->removeModuleFromProject()->shouldNotBeCalled();
+        $this->codeception->removeModuleFromProject()->shouldNotBeCalled();
+
+
+        $this->assertFalse($this->moduleService->removeModuleFromProject());
+    }
+
+
+    /**
+     * @group abcd
+     */
+    public function testDeleteModuleFromProject()
+    {
+        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->moduleService = new \Gear\Module\ModuleService(
+            $this->fileCreator->reveal(),
+            $this->stringService,
+            $this->module->reveal(),
+            $this->docs->reveal(),
+            $this->composer->reveal(),
+            $this->codeception->reveal(),
+            $this->testService->reveal(),
+            $this->karma->reveal(),
+            $this->protractor->reveal(),
+            $this->package->reveal(),
+            $this->gulpfile->reveal(),
+            $this->languageService->reveal(),
+            $this->schema->reveal(),
+            $this->schemaLoader->reveal(),
+            $this->schemaController->reveal(),
+            $this->schemaAction->reveal(),
+            $this->configService->reveal(),
+            $this->controller->reveal(),
+            $this->controllerTest->reveal(),
+            $this->consoleController->reveal(),
+            $this->consoleControllerTest->reveal(),
+            $this->viewService->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
+            $this->feature->reveal(),
+            $this->step->reveal(),
+            $this->page->reveal(),
+            $this->unitTest->reveal(),
+            $this->request->reveal(),
+            $this->cache->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->autoload->reveal(),
+            $this->config,
+            $this->dir
+        );
+
+        $this->applicationConfig->removeModuleFromProject()->shouldBeCalled();
+        $this->autoload->removeModuleFromProject()->shouldBeCalled();
+        $this->codeception->removeModuleFromProject()->shouldBeCalled();
+
+        $this->assertTrue($this->moduleService->removeModuleFromProject());
+    }
+
 }

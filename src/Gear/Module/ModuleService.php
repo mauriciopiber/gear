@@ -79,6 +79,8 @@ use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Creator\FileCreatorTrait;
 use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Mvc\View\ViewService;
 
@@ -132,6 +134,7 @@ class ModuleService
     use ConsoleControllerTestTrait;
     use ApplicationConfigTrait;
     use ComposerAutoloadTrait;
+    use DirServiceTrait;
 
     protected $type;
 
@@ -172,7 +175,8 @@ class ModuleService
         CacheService $cache,
         ApplicationConfig $applicationConfig,
         ComposerAutoload $autoload,
-        array $config
+        array $config,
+        DirService $dirService
     ) {
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -214,6 +218,8 @@ class ModuleService
         $this->applicationConfig = $applicationConfig;
         $this->composerAutoload = $autoload;
         $this->config = $config;
+
+        $this->dirService = $dirService;
     }
 
     /**
@@ -232,19 +238,48 @@ class ModuleService
         $moduleStructure = $this->getModule();
         $moduleStructure->prepare($module)->write();
 
-        //adiciona os componentes do módulo.
         $this->moduleComponents();
 
-        $this->getApplicationConfig()->registerModule();
+        return $this->addModuleToProject();
+    }
+
+    public function addModuleToProject()
+    {
+        $this->getApplicationConfig()->addModuleToProject();
         //karma
         //end2end
         //gulpfile
-        $this->getCodeceptionService()->appendIntoCodeceptionProject();
-        $this->getComposerAutoload()->dumpModule();
+        $this->getCodeceptionService()->addModuleToProject();
+        $this->getComposerAutoload()->addModuleToProject();
         $this->getCacheService()->renewFileCache();
 
         return true;
     }
+
+
+    /**
+     * Deletar todo módulo, com todas configurações e reiniciar as configurações do projeto para esquecer o módulo
+     *
+     * @return string
+     */
+    public function removeModuleFromProject()
+    {
+        if (!is_dir($this->getModule()->getMainFolder())) {
+            return false;
+        }
+
+        $this->getDirService()->rmDir($this->getModule()->getMainFolder());
+
+        $this->getApplicationConfig()->removeModuleFromProject();
+
+        $this->getComposerAutoload()->removeModuleFromProject();
+
+        $this->getCodeceptionService()->removeModuleFromProject();
+
+        return true;
+        //return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
+    }
+
 
     /**
      * Cria módulos livres para ser utilizados as project.
@@ -302,7 +337,7 @@ class ModuleService
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
             //vaar_dump($this->type);die();
-            $this->getTestService()->createTests($this->type);
+            //$this->getTestService()->createTests($this->type);
         }
 
 
@@ -887,39 +922,5 @@ class ModuleService
 
         $json = $this->getSchemaLoaderService()->loadSchema();
         return $json;
-    }
-
-    /**
-     * Deleta o módulo todo, pela página principal
-     *
-     * @return boolean
-     */
-    public function deleteModuleFolder()
-    {
-        return $this->getDirService()->rmDir($this->getModule()->getMainFolder());
-    }
-
-    /**
-     * Deletar todo módulo, com todas configurações e reiniciar as configurações do projeto para esquecer o módulo
-     *
-     * @return string
-     */
-    public function delete()
-    {
-        $this->unregisterModule();
-        $this->deleteModuleFolder();
-
-        //$this->getJenkins()->deleteItem($this->str('url', $this->getModule()->getModuleName()));
-
-        $autoloadNamespace = new \Gear\Autoload\Namespaces();
-
-        $autoloadNamespace
-          ->deleteNamespaceFromComposer($this->getModule()->getModuleName())
-          ->deleteNamespaceFromComposer($this->getModule()->getModuleName().'Test')
-        ->write();
-
-        $this->dropFromCodeceptionProject();
-
-        return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
     }
 }

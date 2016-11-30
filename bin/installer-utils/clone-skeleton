@@ -6,6 +6,7 @@ baseDir=${1}
 projectDir=${2}
 projectName=${3}
 
+
 skeleton="https://github.com/zendframework/ZendSkeletonApplication.git"
 
 function exclude()
@@ -18,11 +19,18 @@ function exclude()
 }
 
 #exclude $baseDir/ZendSkeletonApplication
-#exclude $projectDir
+#exclude $baseDir/$projectName
 
-mkdir $projectDir
+ls -l $1 &> /dev/null
+
+if [ "$?" != 0 ***REMOVED***; then
+	mkdir $projectDir
+fi
+	
 
 cd $baseDir
 git clone $skeleton
-mv $baseDir/ZendSkeletonApplication/* $projectName/
+cd $baseDir/ZendSkeletonApplication
+git checkout zf/release-2.2.6
+mv $baseDir/ZendSkeletonApplication/* $projectDir
 sudo rm  -r $baseDir/ZendSkeletonApplication
