@@ -8,7 +8,7 @@ gearpath="$base/gear"
 
 project="ProjectModuleCli"
 projectUrl="project-module-cli"
-projectpath="$base/$projectUrl"
+projectpath="$base/$project"
 
 
 source "$gearpath/test/integration/full-suite/functions.sh"
@@ -17,12 +17,15 @@ tearDown $project $projectpath
 
 cd $gearpath && sudo php public/index.php gear project create $project --basepath=$base --force
 
+cd $modulepath && sudo script/deploy-development.sh
+
+cd $projectpath && sudo php public/index.php gear module create $module --type=cli
 
 exit 1
 
-cd $projectpath && sudo php public/index.php gear module create $module --type=cli --force
 
-cd $modulepath && sudo script/deploy-development.sh
+
+
 
 ### can be turned off
 cd $modulepath && sudo vendor/bin/phinx migrate

@@ -15,7 +15,6 @@ require:
     mauriciopiber/gear-json: '^0.2.0'
 
 require-dev:
-    zendframework/zend-developer-tools: 'dev-master'
     johnkary/phpunit-speedtrap: '^1.0'
     atrapalo/phpunit-memory-and-time-usage-listener: 'dev-master'
     mauriciopiber/gear-deploy: '^0.2.0' 

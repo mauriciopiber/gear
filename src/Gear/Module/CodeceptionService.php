@@ -126,7 +126,7 @@ class CodeceptionService extends AbstractJsonService
      *
      * @return NULL|boolean
      */
-    public function dropFromCodeceptionProject()
+    public function removeModuleFromProject()
     {
         $yaml = new Parser();
 
@@ -158,7 +158,7 @@ class CodeceptionService extends AbstractJsonService
      *
      * @return boolean
      */
-    public function appendIntoCodeceptionProject()
+    public function addModuleToProject()
     {
 
         $yaml = new Parser();

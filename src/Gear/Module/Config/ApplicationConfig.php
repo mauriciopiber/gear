@@ -56,7 +56,7 @@ class ApplicationConfig
      *
      * @return boolean
      */
-    public function registerModule()
+    public function addModuleToProject()
     {
 
         if (isset($this->before) && $this->before !== null) {
@@ -101,7 +101,7 @@ class ApplicationConfig
      *
      * @return boolean
      */
-    public function unregisterModule()
+    public function removeModuleFromProject()
     {
         $applicationConfig = $this->getApplicationConfig();
 

@@ -18,7 +18,7 @@ class ComposerAutoload
      *
      * @return boolean
      */
-    public function dumpModule()
+    public function addModuleToProject()
     {
         $src  = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/src');
         $unit = str_replace(\GearBase\Module::getProjectFolder(), '', $this->getModule()->getMainFolder().'/test/unit');
@@ -28,6 +28,11 @@ class ComposerAutoload
         ->addNamespaceIntoComposer($this->getModule()->getModuleName(), $src)
         ->addNamespaceIntoComposer($this->getModule()->getModuleName().'Test', $unit)
         ->write();
+        return true;
+    }
+
+    public function removeModuleFromProject()
+    {
         return true;
     }
 }

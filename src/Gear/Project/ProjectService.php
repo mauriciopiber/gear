@@ -97,6 +97,7 @@ class ProjectService extends AbstractJsonService
 
         $this->executeClone();
 
+        $this->createDir($this->projectConfig->getProjectLocation());
 
         //cria($dbname, $username, $password, $host, $environment)
         $this->setUpConfig(
@@ -123,8 +124,6 @@ class ProjectService extends AbstractJsonService
         //script
         //$this->getComposerService()->runComposerUpdate($this->projectConfig);
 
-        $this->createDir($this->projectConfig->getProjectLocation());
-
         $this->createBuild();
 
         $this->createGulp();
@@ -142,10 +141,10 @@ class ProjectService extends AbstractJsonService
         $this->getReadme();
 
         //cria
-        $this->createNFS();
+        //$this->createNFS();
 
         //cria
-        $this->createGit();
+        //$this->createGit();
 
         return true;
     }
