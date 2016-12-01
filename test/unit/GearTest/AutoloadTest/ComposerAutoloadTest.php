@@ -44,6 +44,11 @@ class ComposerAutoloadTest extends TestCase
 
         $this->assertEquals('module/NewModule/src', $file['autoload'***REMOVED***['psr-0'***REMOVED***['NewModule'***REMOVED***);
         $this->assertEquals('module/NewModule/test/unit', $file['autoload'***REMOVED***['psr-0'***REMOVED***['NewModuleTest'***REMOVED***);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__.'/_files/add-composer.json'),
+            file_get_contents(vfsStream::url('project/composer.json'))
+        );
     }
 
     public function testRemoveModuleFromProject()
@@ -60,6 +65,10 @@ class ComposerAutoloadTest extends TestCase
         $this->assertArrayHasKey('psr-0', $file['autoload'***REMOVED***);
         $this->assertArrayNotHasKey('MyModuleCli', $file['autoload'***REMOVED***['psr-0'***REMOVED***);
         $this->assertArrayNotHasKey('MyModuleCliTest', $file['autoload'***REMOVED***['psr-0'***REMOVED***);
-        //$this->assertTrue(false);
+
+        $this->assertEquals(
+            file_get_contents(__DIR__.'/_files/del-composer.json'),
+            file_get_contents(vfsStream::url('project/composer.json'))
+        );
     }
 }
