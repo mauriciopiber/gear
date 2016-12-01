@@ -169,7 +169,7 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
 
         $module = $this->getApplicationConfig();
-        $module->load();
+        $module->addModuleToProject();
 
         $this->getCacheService()->renewFileCache();
 

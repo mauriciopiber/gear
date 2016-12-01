@@ -184,7 +184,7 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $diagnostic = $this->prophesize('Gear\Module\Config\ApplicationConfig');
         $cache = $this->prophesize('Gear\Cache\CacheService');
 
-        $diagnostic->load()->willReturn(true)->shouldBeCalled();
+        $diagnostic->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $cache->renewFileCache()->willReturn(true)->shouldBeCalled();
 
         $this->controller->setApplicationConfig($diagnostic->reveal());

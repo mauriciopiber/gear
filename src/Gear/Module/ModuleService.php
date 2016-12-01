@@ -389,7 +389,7 @@ class ModuleService implements ModuleProjectConnectorInterface
                 $this->getAppControllerService()->createIndexController();
 
                 if ($collection == 2) {
-                    $this->getFeature()->createIndexFeature($this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***);
+                    $this->getFeature()->createIndexFeature($this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***));
                 } else {
                     $this->getFeature()->createIndexFeature();
                 }
