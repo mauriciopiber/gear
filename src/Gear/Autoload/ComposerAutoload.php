@@ -34,7 +34,12 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
     {
         $this->fileLocation = $this->getProjectFolder().'/composer.json';
 
-        return file_put_contents($this->fileLocation, Json::prettyPrint(Json::encode($this->actualFile, 1)));
+        $pretty = Json::prettyPrint(Json::encode($this->actualFile, 1));
+
+        $pretty = str_replace('\/', '/', $pretty);
+        //$pretty = str_replace('" :', '":', $pretty);
+
+        return file_put_contents($this->fileLocation, $pretty);
     }
 
 

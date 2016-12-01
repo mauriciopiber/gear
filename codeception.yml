@@ -12,10 +12,13 @@ settings:
     memory_limit: 2048M
     strict_xml: true
 extensions:
-    enabled: [Codeception\Extension\RunFailed***REMOVED***
+    enabled:
+        - Codeception\Extension\RunFailed
 coverage:
-    whitelist:  
-        include: ['src/*'***REMOVED***
-        exclude: ['src/Gear/Module.php*'***REMOVED*** 
-    
-    
+    whitelist:
+        include:
+            - 'src/*'
+        exclude:
+            - 'src/Gear/Module.php*'
+include:
+    - module/NewModule

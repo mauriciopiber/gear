@@ -6,6 +6,7 @@ use Gear\Module\BasicModuleStructure;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 use Gear\Module\ModuleProjectConnectorInterface;
+use GearBase\Project\ProjectLocationTrait;
 
 /**
  * Cria os arquivos necessários para rodar os testes utilizando codeception/codeception.
@@ -15,6 +16,8 @@ use Gear\Module\ModuleProjectConnectorInterface;
  */
 class CodeceptionService extends AbstractJsonService implements ModuleProjectConnectorInterface
 {
+    use ProjectLocationTrait;
+
     protected $module;
 
     /**
@@ -131,16 +134,17 @@ class CodeceptionService extends AbstractJsonService implements ModuleProjectCon
     {
         $yaml = new Parser();
 
-        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+        $value = $yaml->parse(file_get_contents($this->getProjectFolder().'/codeception.yml'));
+
 
         if (!isset($value['include'***REMOVED***)) {
-            return null;
+            return false;
         }
 
         $key = array_search('module/'.$this->getModule()->getModuleName(), $value['include'***REMOVED***);
 
-        if (!$key) {
-            return null;
+        if ($key === false) {
+            return false;
         }
 
         unset($value['include'***REMOVED***[$key***REMOVED***);
@@ -149,7 +153,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleProjectCon
 
         $yaml = $dumper->dump($value, 4);
 
-        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
+        file_put_contents($this->getProjectFolder().'/codeception.yml', $yaml);
 
         return true;
     }
@@ -164,7 +168,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleProjectCon
 
         $yaml = new Parser();
 
-        $value = $yaml->parse(file_get_contents(\GearBase\Module::getProjectFolder().'/codeception.yml'));
+        $value = $yaml->parse(file_get_contents($this->getProjectFolder().'/codeception.yml'));
 
         if (!isset($value['include'***REMOVED***)) {
             $value['include'***REMOVED*** = [***REMOVED***;
@@ -188,7 +192,7 @@ class CodeceptionService extends AbstractJsonService implements ModuleProjectCon
 
         $yaml = $dumper->dump($value, 4);
 
-        file_put_contents(\GearBase\Module::getProjectFolder().'/codeception.yml', $yaml);
+        file_put_contents($this->getProjectFolder().'/codeception.yml', $yaml);
 
         return true;
     }

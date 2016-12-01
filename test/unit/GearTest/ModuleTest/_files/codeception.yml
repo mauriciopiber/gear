@@ -1,0 +1,7 @@
+include:
+    - module/MyModuleCli
+    - module/MyModuleWeb
+paths:
+    log: build
+settings:
+    colors: true
