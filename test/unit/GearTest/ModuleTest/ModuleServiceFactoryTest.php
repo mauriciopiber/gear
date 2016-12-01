@@ -52,7 +52,8 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Request' => 'Zend\Console\Request',
             'cacheService' => 'Gear\Cache\CacheService',
             'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoload',
-            'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig'
+            'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig',
+            'GearBase\Util\Dir' => 'GearBase\Util\Dir\DirService'
         ***REMOVED***;
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();

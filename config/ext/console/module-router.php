@@ -105,15 +105,6 @@ return [
                     )
                 )
             ),
-            'gear-module-autoload' => array(
-                'options' => array(
-                    'route' => 'gear module dump-autoload <module>',
-                    'defaults' => array(
-                        'controller' => 'Gear\Module',
-                        'action' => 'dump-autoload'
-                    )
-                )
-            ),
            'gear-module-fixture' => [
                 'options' => [
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',

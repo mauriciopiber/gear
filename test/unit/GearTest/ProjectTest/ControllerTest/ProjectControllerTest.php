@@ -213,25 +213,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     /**
      * @group con1
      */
-    public function testDumpAutoload()
-    {
-        $diagnostic = $this->prophesize('Gear\Project\ProjectService');
-
-        $diagnostic->dumpAutoload()->willReturn(true)->shouldBeCalled();
-
-        $this->controller->setProjectService($diagnostic->reveal());
-
-        $this->request->setParams(new Parameters());
-
-        $this->routeMatch->setParam('action', 'dump-autoload');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /**
-     * @group con1
-     */
     public function testGit()
     {
         $diagnostic = $this->prophesize('Gear\Project\ProjectService');

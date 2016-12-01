@@ -21,19 +21,6 @@ class ProjectController extends AbstractConsoleController
     use ProjectUpgradeTrait;
     use DiagnosticServiceTrait;
 
-
-    public function dumpAutoloadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-autoload'));
-
-        $projectService = $this->getProjectService();
-        $projectService->dumpAutoload();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
-
-
     public function diagnosticsAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
