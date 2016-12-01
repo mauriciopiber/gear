@@ -518,7 +518,7 @@ class ModuleServiceTest extends TestCase
          */
 
 
-        $this->feature->createIndexFeature('GearProject')->willReturn(true)->shouldBeCalled();
+        $this->feature->createIndexFeature('Gear Project')->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 

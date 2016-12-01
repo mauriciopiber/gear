@@ -59,6 +59,9 @@ class ApplicationConfig
     public function addModuleToProject()
     {
 
+        $this->before = $this->request->getParam('before', null);
+        $this->after = $this->request->getParam('after', null);
+
         if (isset($this->before) && $this->before !== null) {
             return $this->registerBeforeModule();
         }
