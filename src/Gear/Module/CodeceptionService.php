@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Module\BasicModuleStructure;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
+use Gear\Module\ModuleProjectConnectorInterface;
 
 /**
  * Cria os arquivos necessários para rodar os testes utilizando codeception/codeception.
@@ -12,7 +13,7 @@ use Symfony\Component\Yaml\Dumper;
  * São necessários arquivos auxiliares, além do phpunit.
  *
  */
-class CodeceptionService extends AbstractJsonService
+class CodeceptionService extends AbstractJsonService implements ModuleProjectConnectorInterface
 {
     protected $module;
 

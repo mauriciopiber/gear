@@ -83,6 +83,7 @@ use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Mvc\View\ViewService;
+use Gear\Module\ModuleProjectConnectorInterface;
 
 /**
  *
@@ -99,7 +100,7 @@ use Gear\Mvc\View\ViewService;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ModuleService
+class ModuleService implements ModuleProjectConnectorInterface
 {
     use RequestTrait;
     use ConsoleControllerTrait;

@@ -194,18 +194,4 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
-
-    public function testDumpAutoload()
-    {
-        $autoload = $this->prophesize('Gear\Autoload\ComposerAutoload');
-
-        $autoload->dumpModule()->willReturn(true)->shouldBeCalled();
-
-        $this->controller->setComposerAutoload($autoload->reveal());
-
-        $this->routeMatch->setParam('action', 'dump-autoload');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
 }

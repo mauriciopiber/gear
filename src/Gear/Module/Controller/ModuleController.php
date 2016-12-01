@@ -135,18 +135,6 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function dumpAutoloadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-autoload'));
-
-        $module = $this->getComposerAutoload();
-        $module->dumpModule();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
     public function fixtureAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-fixture'));

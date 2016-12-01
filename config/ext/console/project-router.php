@@ -116,15 +116,6 @@ return [
                     )
                 )
             ),
-            'gear-project-autoload' => array(
-                'options' => array(
-                    'route' => 'gear project dump-autoload',
-                    'defaults' => array(
-                        'controller' => 'Gear\Controller\Project',
-                        'action' => 'dump-autoload'
-                    )
-                )
-            ),
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

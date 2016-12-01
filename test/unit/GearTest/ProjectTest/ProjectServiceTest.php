@@ -424,11 +424,13 @@ EOS
         $cmd = $basePath.'/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
+        /*
         $cmd = $basePath.'/bin/nfs vfs://project/GearProject';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         $cmd = $basePath.'/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
         $script->run($cmd)->willReturn(true)->shouldBeCalled();
+        */
 
         $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
 
