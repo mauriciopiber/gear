@@ -178,6 +178,33 @@ class AntServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group maf4
+     */
+    public function testEmptyEdge()
+    {
+        file_put_contents(vfsStream::url('module/build.xml'), $this->createConfig('project'));
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('Project');
+
+        $this->gearConfig->getCurrentName()->willReturn('Project')->shouldBeCalled();
+
+        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml->getAntModule('web')->willReturn([
+            'target' => [
+                'namespace' => 'unit-namespace'
+            ***REMOVED***,
+            'default' => 'clean'
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->ant->setAntEdge($yaml->reveal());
+
+        $this->assertEquals([
+            sprintf(AntService::$missingTargetDepend, 'namespace', 'unit-namespace', 'build.xml')
+        ***REMOVED***, $this->ant->diagnosticModule('web'));
+    }
+
+    /**
      * @group maf2
      */
     public function testEmptyFiles()

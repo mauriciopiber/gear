@@ -86,11 +86,11 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             throw new MissingDefault();
         }
 
-        if (!isset($edge['import'***REMOVED***) || !is_array($edge['import'***REMOVED***)) {
+        if (isset($edge['import'***REMOVED***) && !is_array($edge['import'***REMOVED***)) {
             throw new MissingImport();
         }
 
-        if (!isset($edge['files'***REMOVED***) || !is_array($edge['files'***REMOVED***)) {
+        if (isset($edge['files'***REMOVED***) && !is_array($edge['files'***REMOVED***)) {
             throw new MissingFiles();
         }
     }
@@ -130,6 +130,9 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             $errors[***REMOVED*** = sprintf(static::$missingName, $name, 'build.xml');
         }
 
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            return $errors;
+        }
 
         foreach ($edge['files'***REMOVED*** as $fileName => $config) {
             $config = null;
@@ -161,21 +164,21 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     public function diagnostic($build, $edge, $function = null)
     {
-
-
         if (!is_file($build.'/build.xml')) {
             $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'build.xml');
         }
 
-        foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
+        if (isset($edge['files'***REMOVED***) && !empty($edge['files'***REMOVED***)) {
 
+            foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
 
-            if (strpos($expectedFile, 'ant-') === false) {
-                continue;
-            }
+                if (strpos($expectedFile, 'ant-') === false) {
+                    continue;
+                }
 
-            if (!is_file($build . '/test/'.$expectedFile.'.xml')) {
-                $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'test/'.$expectedFile.'.xml');
+                if (!is_file($build . '/test/'.$expectedFile.'.xml')) {
+                    $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'test/'.$expectedFile.'.xml');
+                }
             }
         }
 
@@ -185,7 +188,11 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         $this->build = simplexml_load_file($build.'/build.xml');
 
-        $this->errors = $this->getImports($this->build, $edge['import'***REMOVED***);
+        if (isset($edge['import'***REMOVED***) && !empty($edge['import'***REMOVED***)) {
+            $this->errors = $this->getImports($this->build, $edge['import'***REMOVED***);
+        }
+
+
 
         if (count($this->errors) > 0) {
             return $this->errors;
@@ -203,12 +210,15 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             return $this->errors;
         }
 
-        foreach ($edge['files'***REMOVED*** as $file => $targets) {
-            foreach ($targets as $target => $dependency) {
-                $this->checkTarget($target, $dependency, sprintf('test/%s.xml', $file));
-
-            }
+        if (isset($edge['files'***REMOVED***) && count($edge['files'***REMOVED***) > 0) {
+            foreach ($edge['files'***REMOVED*** as $file => $targets) {
+                foreach ($targets as $target => $dependency) {
+                    $this->checkTarget($target, $dependency, sprintf('test/%s.xml', $file));
+               }
+           }
         }
+
+
 
         return $this->errors;
     }
