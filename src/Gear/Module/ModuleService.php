@@ -281,6 +281,11 @@ class ModuleService implements ModuleProjectConnectorInterface
         //return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
     }
 
+    public function delete()
+    {
+        return $this->removeModuleFromProject();
+    }
+
 
     /**
      * Cria módulos livres para ser utilizados as project.
