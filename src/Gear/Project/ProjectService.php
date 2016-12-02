@@ -272,10 +272,7 @@ EOS
         echo $scriptService->run($cmd);
     }
 
-    public function dumpAutoload()
-    {
-        return true;
-    }
+
 
     public function delete()
     {
@@ -543,6 +540,20 @@ EOS
                 'project' => $this->str('label', $this->getProjectName())
             ),
             'phpcs-docs.xml',
+            $project
+        );
+    }
+
+    public function getJenkinsFile()
+    {
+        $project = $this->getProjectRealFolder();
+
+        return $this->getFileCreator()->createFile(
+            'template/project/jenkinsfile.phtml',
+            array(
+                'project' => $this->str('url', $this->getProjectName())
+            ),
+            'Jenkinsfile',
             $project
         );
     }

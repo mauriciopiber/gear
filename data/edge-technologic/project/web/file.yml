@@ -6,7 +6,7 @@ files:
   5: script/load.sh
   7: gulpfile.js
   8: data/config.json
-  19: data/report.js
+  29: data/report.js
   9: mkdocs.yml
   10: docs/index.md
   11: README.md
@@ -17,4 +17,5 @@ files:
   16: phinx.yml
   17: phpmd.xml
   18: phpcs-docs.xml
-  19: jenkins/quality      
+  19: Jenkinsfile
+  30: .gitignore

@@ -72,11 +72,13 @@ class ProjectServiceTest extends AbstractTestCase
     public function scriptData()
     {
         return [
+            ['getJenkinsfile', 'Jenkinsfile'***REMOVED***,
+            ['getScriptLoad', 'script/load'***REMOVED***,
             ['getScriptDevelopment', 'script/deploy-development'***REMOVED***,
             ['getScriptStaging', 'script/deploy-staging'***REMOVED***,
             ['getScriptProduction', 'script/deploy-production'***REMOVED***,
             ['getScriptTesting', 'script/deploy-testing'***REMOVED***,
-            ['getScriptLoad', 'script/load'***REMOVED***,
+
             ['getGulpfileJs', 'gulpfile.js'***REMOVED***,
             ['getGulpfileConfig', 'data/config.json'***REMOVED***,
             ['getConfigDocs', 'mkdocs.yml'***REMOVED***,
@@ -89,8 +91,7 @@ class ProjectServiceTest extends AbstractTestCase
             ['getPhpDoxConfig', 'phpdox.xml'***REMOVED***,
             ['getPhinxConfig', 'phinx.yml'***REMOVED***,
             ['copyPHPMD', 'phpmd.xml'***REMOVED***,
-            ['getPhpcsDocs', 'phpcs-docs.xml'***REMOVED***
-
+            ['getPhpcsDocs', 'phpcs-docs.xml'***REMOVED***,
         ***REMOVED***;
     }
 

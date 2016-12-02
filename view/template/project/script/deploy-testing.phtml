@@ -40,13 +40,13 @@ fi;
 
 echo "Deploy Develoment - VirtualHost"
 
-ls -l /etc/apache2/sites-enabled/my-project.gear.dev.conf > /dev/null
+ls -l /etc/apache2/sites-enabled/<?php echo $this->projectUrl;?>.gear.dev.conf > /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
-    vendor/bin/virtualhost  $(pwd) my-project.gear.dev testing
+    sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->projectUrl;?>.gear.dev testing
 fi
 
-ls -l data/my-project.mysql.sql &> /dev/null
+ls -l data/<?php echo $this->projectUrl;?>.mysql.sql &> /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
 
