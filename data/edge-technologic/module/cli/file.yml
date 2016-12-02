@@ -12,5 +12,5 @@ files:
     10: test/phpcs-docs.xml
     11: test/phpunit-benchmark.xml
     12: test/phpunit-coverage-benchmark.xml
-    13: jenkins/quality
+    13: Jenkinsfile
     14: .gitignore
