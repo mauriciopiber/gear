@@ -11,7 +11,7 @@ password=$(php -r '$local = require_once("config/autoload/local.php"); echo $loc
 echo "Deploy Develoment - Migrations/DB"
 vendor/bin/database $database $username $password
 
-ls -l data/$projectMysql &> /dev/null
+ls -l data/$moduleMysql &> /dev/null
 
 if [ "$?" == "0" ***REMOVED***; then
 
