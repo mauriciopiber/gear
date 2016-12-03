@@ -1,16 +1,10 @@
 var gulp = require('gulp');
-var Server = require('karma').Server;
-var jshint = require('gulp-jshint');
-var protractor = require("gulp-protractor").protractor;
-var codecept = require('gulp-codeception');
-var gutil = require('gulp-util');
+
 var watch = require('gulp-watch');
 var argv = require('yargs').argv;
 var gulpif = require('gulp-if');
 var shell = require('gulp-shell')
-var phpcpd = require('gulp-phpcpd');
 var exec = require('child_process').exec;
-var phplint = require('phplint').lint
 var requireDir = require('require-dir');
 var runSequence = require('run-sequence');
 
@@ -31,7 +25,7 @@ gulp.task('optimize:js:internal', function() {
         .pipe(concat('internal.js'))
         //.pipe(uglify())
         .pipe(gulp.dest('public/dist'));
-        ;
+
 });
 
 gulp.task('optimize:js:external', function() {
@@ -40,7 +34,7 @@ gulp.task('optimize:js:external', function() {
         .pipe(concat('external.js'))
         //.pipe(uglify())
         .pipe(gulp.dest('public/dist'));
-        ;
+
 });
 
 gulp.task('optimize:css', function() {
@@ -50,7 +44,7 @@ gulp.task('optimize:css', function() {
         .pipe(stripCssComments({all: true}))
         //.pipe(cssmin())
         .pipe(gulp.dest('public/dist'));
-        ;
+
 });
 
 gulp.task('optimize', function(callback) {
