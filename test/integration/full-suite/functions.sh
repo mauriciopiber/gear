@@ -47,6 +47,48 @@ function tearDown {
 }
 
 
+
+function tearDownProject {
+    
+    project=${1}
+    projectpath=${2}
+    
+    ls -l $projectpath &> /dev/null
+    
+    if [ "${?}" != 0 ***REMOVED***; then
+    
+        echo "Module Not Created Yet"
+        return
+        
+    fi;
+
+    ls -l $projectpath/vendor/autoload.php &> /dev/null
+    
+    if [ "${?}" == 0 ***REMOVED***; then
+     
+        cd $projectpath && php public/index.php gear git repository delete $project --force
+        cd $projectpath && php public/index.php gear jenkins suite delete    
+        
+    fi;
+
+    ls -l $projectpath/.git &> /dev/null
+    
+    if [ "${?}" == 0 ***REMOVED***; then
+     
+        sudo rm -R $projectpath/.git
+        
+    fi;
+    
+    ls -l $projectpath/module &> /dev/null
+    
+    if [ "${?}" == 0 ***REMOVED***; then
+     
+        sudo rm -R $projectpath/module
+        
+    fi;
+
+}
+
 function complete {
 
     module=${1}

@@ -13,7 +13,7 @@ projectpath="$base/$project"
 
 source "$gearpath/test/integration/full-suite/functions.sh"
 
-#tearDown $project $projectpath
+tearDownProject $project $projectpath
 
 cd $gearpath && sudo php public/index.php gear project create $project --basepath=$base --force
 
