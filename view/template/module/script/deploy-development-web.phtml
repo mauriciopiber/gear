@@ -21,7 +21,7 @@ fi
 
 
 echo "Deploy Development - Database"
-sudo vendor/bin/install-db <?php echo $this->moduleUrl;?>.mysql.sql <?php echo $this->module.PHP_EOL;?>
+sudo vendor/bin/install-db-module <?php echo $this->moduleUrl;?>.mysql.sql <?php echo $this->module.PHP_EOL;?>
 
 echo "Deploy Development - Gulp"
 sudo vendor/bin/gulp
