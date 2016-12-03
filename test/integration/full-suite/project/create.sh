@@ -24,4 +24,6 @@ cd $projectpath && sudo php public/index.php gear module create MyModuleWeb --ty
 
 cd $projectpath && sudo script/load.sh
 
-complete $module $projectpath project-web
+cd $projectpath && ant
+
+#complete $module $projectpath project-web
