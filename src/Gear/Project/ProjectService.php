@@ -165,7 +165,7 @@ class ProjectService extends AbstractJsonService
     {
         $file = $this->getFileCreator();
         $file->setTemplate('template/project/jenkinsfile.phtml');
-        $file->setOptions(['projectUrl' => $this->getProjectName()***REMOVED***);
+        $file->setOptions(['projectUrl' => $this->str('url', $this->getProjectName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
         $file->setLocation($this->projectConfig->getProjectLocation());
         return $file->render();
