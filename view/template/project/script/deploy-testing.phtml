@@ -2,35 +2,7 @@
 
 cp config/autoload/local.php.dist config/autoload/local.php
 
-echo "Deploy Develoment - NodeJS"
-
-ls -l node_modules/.bin/webdriver-manager &> /dev/null
-
-if [ "$?" != "0" ***REMOVED***; then
-
-
-    ls -l ../node_modules.tar.gz &> /dev/null
-
-    if [ "$?" == "0" ***REMOVED***;
-    then
-        echo "COPIANDO NODE-JS"
-        tar -zxvf ../node_modules.tar.gz node_modules &> /dev/null
-        sudo chmod +x -R node_modules/.bin
-        npm install
-        node_modules/.bin/webdriver-manager update
-
-
-    else
-        echo "INSTALANDO NODE-JS"
-
-        npm install
-        node_modules/.bin/webdriver-manager update
-        tar -zcvf ../node_modules.tar.gz node_modules
-    fi
-
-fi
-
-echo "Deploy Develoment - Composer"
+echo "Deploy Testing - Composer"
 
 ls -l vendor/autoload.php &> /dev/null
 
@@ -38,37 +10,18 @@ if [ "$?" != "0" ***REMOVED***; then
     composer update
 fi;
 
-echo "Deploy Develoment - VirtualHost"
+echo "Deploy Testing - NodeJS"
+vendor/bin/install-nodejs
+
+echo "Deploy Testing - VirtualHost"
 
 ls -l /etc/apache2/sites-enabled/<?php echo $this->projectUrl;?>.gear.dev.conf > /dev/null
-
 if [ "$?" != "0" ***REMOVED***; then
     sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->projectUrl;?>.gear.dev testing
 fi
 
-ls -l data/<?php echo $this->projectUrl;?>.mysql.sql &> /dev/null
+echo "Deploy Testing - Database"
+vendor/bin/install-db <?php echo $this->projectUrl;?>.mysql.sql
 
-if [ "$?" != "0" ***REMOVED***; then
-
-    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
-    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
-    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
-
-    echo "Deploy Develoment - Migrations/DB"
-    vendor/bin/database $database $username $password
-    vendor/bin/merge-migrations
-    vendor/bin/phinx migrate
-
-    echo "Deploy Development - Unload Bjy"
-    vendor/bin/unload-module BjyAuthorize
-    echo "Deploy Development - Load Fixtures"
-    php public/index.php gear project fixture --reset-autoincrement
-    echo "Deploy Develoment - Load ACL"
-    php public/index.php gear project setUpAcl --memcached
-    echo "Deploy Develoment - Load Bjy Authorizate"
-    php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
-    echo "Deploy Develoment - Dump DB"
-    php public/index.php gear database project dump
-
-    vendor/bin/gulp
-fi
+echo "Deploy Testing - Gulp"
+vendor/bin/gulp
