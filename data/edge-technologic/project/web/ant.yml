@@ -14,6 +14,7 @@ target:
   publish: ''
   
   build: 'prepare, parallel-lint, protractor, karma, jshint-ci, phpmd-ci, phpcs-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
+  measure: 'prepare, parallel-lint, unit-ci, phploc-ci, pdepend, phpdox'
   parallel-lint: ''
   protractor: 'db-load, cache-load'
   protractor-tag: 'db-load, cache-load'

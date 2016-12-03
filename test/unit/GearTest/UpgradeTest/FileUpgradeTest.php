@@ -100,7 +100,7 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getScriptTesting()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getScriptTesting($type)->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 

@@ -32,5 +32,10 @@ cd $baseDir
 git clone $skeleton
 cd $baseDir/ZendSkeletonApplication
 git checkout zf/release-2.2.6
-mv $baseDir/ZendSkeletonApplication/* $projectDir
+
+rm $projectDir
+mkdir $projectDir
+
+mv $baseDir/ZendSkeletonApplication/* $projectDir/
 sudo rm  -r $baseDir/ZendSkeletonApplication
+

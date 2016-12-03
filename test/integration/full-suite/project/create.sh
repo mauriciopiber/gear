@@ -1,63 +1,27 @@
 #!/bin/bash
 
-
 #### MODULE INFO
 
-project="ProjectWeb"
-projectUrl="project-web"
-
-#### Path Config
-
-basedir=$(dirname "$0")
-fullpath=$(realpath $basedir)
-
 base="/var/www/gear-package"
-path="$base/$projectUrl"
 gearpath="$base/gear"
 
-#### Remove
 
-cd $path && php public/index.php gear git repository delete $project --force
+project="ProjectModule"
+projectUrl="project-module"
+projectpath="$base/$project"
 
-cd $path && php public/index.php gear jenkins suite delete
 
-sudo rm -R $path/.git
-sudo rm -R $path/schema
+source "$gearpath/test/integration/full-suite/functions.sh"
 
-#### Create
+#tearDown $project $projectpath
 
-cd $gearpath && sudo php public/index.php gear project create $module $base --type=web --force
+cd $gearpath && sudo php public/index.php gear project create $project --basepath=$base --force
 
-cd $path && sudo script/deploy-development.sh
+cd $projectpath && sudo script/deploy-development.sh
 
-### can be turned off
-cd $path && sudo vendor/bin/phinx migrate
+cd $projectpath && sudo php public/index.php gear module create MyModuleCli --type=cli
+cd $projectpath && sudo php public/index.php gear module create MyModuleWeb --type=web
 
-### can be turned off
-cd $path && sudo vendor/bin/unload-module BjyAuthorize
+cd $projectpath && sudo script/load.sh
 
-### can be turned off
-cd $path && sudo php public/index.php gear database fix
-
-### can be turned off
-cd $path && sudo script/load.sh
-
-#cd $path && ant
-
-echo "
-*
-!.gitignore" > build/.gitignore
-
-echo "vendor" > .gitignore
-
-#### CREATE GIT.
-
-#### INITIATE.
-
-cd $path && php public/index.php gear git repository create $project
-
-cd $path && php public/index.php gear git repository init
-
-cd $path && php public/index.php gear jenkins suite create $projectUrl
-
-cd $path && php public/index.php gear deploy build "Primeiro Build com sucesso project"
+complete $module $projectpath project-web

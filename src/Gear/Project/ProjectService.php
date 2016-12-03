@@ -140,6 +140,10 @@ class ProjectService extends AbstractJsonService
         //cria
         $this->getReadme();
 
+        $this->createGitIgnore();
+
+        $this->createJenkinsFile();
+
         //cria
         //$this->createNFS();
 
@@ -147,6 +151,35 @@ class ProjectService extends AbstractJsonService
         //$this->createGit();
 
         return true;
+    }
+
+
+    /**
+     * Cria arquivo config/application.config.php para módulos as project
+     *
+     * @param string $type Tipo do módulo Web|Cli
+     *
+     * @return string
+     */
+    public function createJenkinsFile()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/project/jenkinsfile.phtml');
+        $file->setOptions(['projectUrl' => $this->getProjectName()***REMOVED***);
+        $file->setFileName('Jenkinsfile');
+        $file->setLocation($this->projectConfig->getProjectLocation());
+        return $file->render();
+    }
+
+
+    public function createGitIgnore()
+    {
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/project/gitignore.phtml');
+        $file->setOptions([***REMOVED***);
+        $file->setFileName('.gitignore');
+        $file->setLocation($this->projectConfig->getProjectLocation());
+        return $file->render();
     }
 
 
@@ -551,7 +584,7 @@ EOS
         return $this->getFileCreator()->createFile(
             'template/project/jenkinsfile.phtml',
             array(
-                'project' => $this->str('url', $this->getProjectName())
+                'projectUrl' => $this->str('url', $this->getProjectName())
             ),
             'Jenkinsfile',
             $project
