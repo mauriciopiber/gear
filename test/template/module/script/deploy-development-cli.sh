@@ -12,4 +12,4 @@ password=$(php -r '$local = require_once("config/autoload/local.php"); echo $loc
 
 vendor/bin/database $database $username $password
 
-php public/index.php gear module dump-autoload GearIt
+composer dump-autoload

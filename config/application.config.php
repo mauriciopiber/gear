@@ -1,5 +1,5 @@
 <?php return array (
-  'modules' =>
+  'modules' => 
   array (
       'DoctrineModule',
       'DoctrineORMModule',
@@ -9,16 +9,17 @@
       'Gear',
       'GearDeploy',
       'GearJenkins',
-      'GearVersion'
+      'GearVersion',
+       
   ),
-  'module_listener_options' =>
+  'module_listener_options' => 
   array (
-    'module_paths' =>
+    'module_paths' => 
     array (
         '../.',
         './vendor',
     ),
-    'config_glob_paths' =>
+    'config_glob_paths' => 
     array (
         'config/autoload/{,*.}{global,local}.php',
     ),
