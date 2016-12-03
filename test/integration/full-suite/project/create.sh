@@ -6,8 +6,8 @@ base="/var/www/gear-package"
 gearpath="$base/gear"
 
 
-project="ProjectModule"
-projectUrl="project-module"
+project="ProjectModuleTwo"
+projectUrl="project-module-two"
 projectpath="$base/$project"
 
 
@@ -24,6 +24,6 @@ cd $projectpath && sudo php public/index.php gear module create MyModuleWeb --ty
 
 cd $projectpath && sudo script/load.sh
 
-cd $projectpath && ant
+#cd $projectpath && ant
 
-#complete $module $projectpath project-web
+complete $project $projectpath project-web

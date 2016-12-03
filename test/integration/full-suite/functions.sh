@@ -107,10 +107,10 @@ function complete {
     
     fi    
 
-    cd $modulepath && php public/index.php gear git repository create $module
-    cd $modulepath && php public/index.php gear git repository init
-    cd $modulepath && php public/index.php gear jenkins suite create $type
-    cd $modulepath && php public/index.php gear deploy build "Primeiro Build com sucesso $module $type"
+    cd $modulepath && sudo php public/index.php gear git repository create $module
+    cd $modulepath && sudo php public/index.php gear git repository init
+    cd $modulepath && sudo php public/index.php gear jenkins suite create $type
+    cd $modulepath && sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type"
 
 
 }
