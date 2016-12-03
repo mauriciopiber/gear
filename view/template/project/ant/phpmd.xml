@@ -2,6 +2,6 @@
     <exec executable="${basedir}/vendor/bin/phpmd"  >
         <arg path="${basedir}/module" />
         <arg value="text" />
-        <arg value="${basedir}/config/jenkins/phpmd.xml" />
+        <arg value="${basedir}/phpmd.xml" />
     </exec>
 </target>

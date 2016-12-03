@@ -169,7 +169,7 @@ class FileUpgrade extends AbstractJsonService
                 $found = $this->getModuleService()->getUnitSuiteConfig();
                 break;
             case 'script/deploy-testing.sh':
-                $found = $this->getModuleService()->getScriptTesting();
+                $found = $this->getModuleService()->getScriptTesting($type);
                 break;
             case 'README.md':
                 $found = $this->getModuleService()->getReadme();

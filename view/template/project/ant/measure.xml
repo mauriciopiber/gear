@@ -1,0 +1,1 @@
+<target name="measure" depends="prepare, parallel-lint, unit-ci, phploc-ci, pdepend, phpdox"/>

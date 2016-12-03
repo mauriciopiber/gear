@@ -27,7 +27,7 @@ node {
             sh '/usr/bin/php public/index.php gear deploy bump --hotfix'
         }
         stage('Measure') {
-            build job: '<?php echo $this->project;?>-release', parameters: [
+            build job: '<?php echo $this->projectUrl;?>-release', parameters: [
                 [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
             ***REMOVED***
         }
