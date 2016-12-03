@@ -21,7 +21,7 @@ if [ "$?" != "0" ***REMOVED***; then
 fi
 
 echo "Deploy Testing - Database"
-vendor/bin/install-db <?php echo $this->projectUrl;?>.mysql.sql
+vendor/bin/install-db-project <?php echo $this->projectUrl;?>.mysql.sql
 
 echo "Deploy Testing - Gulp"
 vendor/bin/gulp
