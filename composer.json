@@ -52,7 +52,8 @@
     ***REMOVED***,
     "bin": [
         "bin/install-nodejs",
-        "bin/install-db",
+        "bin/install-db-module",
+        "bin/install-db-project",
         "bin/drop-nodejs-cache",
         "bin/memcached",
         "bin/database",

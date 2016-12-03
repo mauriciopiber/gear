@@ -1,17 +1,30 @@
 #!/bin/bash
-npm install
-node_modules/.bin/webdriver-manager update
 
-composer install
+cp config/autoload/local.php.dist config/autoload/local.php
 
-database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
-username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
-password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
+echo "Deploy Testing - Composer"
 
-vendor/bin/database $database $username $password
-mysql -u$username -p$password $database < data/<?php echo $this->moduleUrl;?>.mysql.sql
+ls -l vendor/autoload.php &> /dev/null
 
-sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev development
+if [ "$?" != "0" ***REMOVED***; then
+    composer update
+fi;
+
+echo "Deploy Testing - NodeJS"
+vendor/bin/install-nodejs
+
+echo "Deploy Testing - VirtualHost"
+
+ls -l /etc/apache2/sites-enabled/<?php echo $this->moduleUrl;?>.gear.dev.conf > /dev/null
+if [ "$?" != "0" ***REMOVED***; then
+    sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev testing
+fi
+
+echo "Deploy Testing - Database"
+sudo vendor/bin/install-db <?php echo $this->moduleUrl;?>.mysql.sql <?php echo $this->module.PHP_EOL;?>
+
+echo "Deploy Testing - Gulp"
+vendor/bin/gulp
 
 chmod 777 -R build
 chmod 777 -R data/session
@@ -20,5 +33,4 @@ chmod 777 -R data/cache
 chmod 777 -R data/DoctrineModule
 chmod 777 -R data/DoctrineORMModule
 
-php public/index.php gear module dump-autoload <?php echo $this->module.PHP_EOL;?>
 echo "flush_all" | nc -q 2 localhost 11211

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-projectMysql=${1}
+moduleMysql=${1}
+moduleName=${2}
 
 database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
 username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
@@ -18,7 +19,7 @@ echo "Deploy Development - Unload Bjy"
 vendor/bin/unload-module BjyAuthorize
   
 echo "Deploy Develoment - Load DB"
-php public/index.php gear database project load
+php public/index.php gear database module load $moduleName
   
 echo "Deploy Develoment - Load Bjy Authorizate"
 php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
@@ -43,6 +44,6 @@ echo "Deploy Develoment - Load Bjy Authorizate"
 php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 
 echo "Deploy Develoment - Dump DB"
-php public/index.php gear database project dump
+php public/index.php gear database module dump $moduleName
 
 
