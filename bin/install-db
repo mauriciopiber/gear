@@ -2,6 +2,8 @@
 
 projectMysql=${1}
 
+ls -l data/$projectMysql &> /dev/null
+
 if [ "$?" == "0" ***REMOVED***; then
 
 echo "Deploy Development - Unload Bjy"

@@ -11,7 +11,7 @@ if [ "$?" != "0" ***REMOVED***; then
 fi;
 
 echo "Deploy Develoment - NodeJS"
-vendor/bin/install-nodejs
+sudo vendor/bin/install-nodejs
 
 
 echo "Deploy Develoment - VirtualHost"
@@ -19,11 +19,11 @@ echo "Deploy Develoment - VirtualHost"
 ls -l /etc/apache2/sites-enabled/<?php echo $this->projectUrl;?>.gear.dev.conf > /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
-    vendor/bin/virtualhost  $(pwd) <?php echo $this->projectUrl;?>.gear.dev development
+    sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->projectUrl;?>.gear.dev development
 fi
 
 echo "Deploy Development - Database"
-vendor/bin/install-db <?php echo $this->projectUrl;?>.mysql.sql
+sudo vendor/bin/install-db <?php echo $this->projectUrl;?>.mysql.sql
 
 echo "Deploy Development - Gulp"
-vendor/bin/gulp
+sudo vendor/bin/gulp
