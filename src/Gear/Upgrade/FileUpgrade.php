@@ -117,7 +117,12 @@ class FileUpgrade extends AbstractJsonService
             case 'phpcs-docs.xml':
                 $found = $this->getProjectService()->getPhpcsDocs();
                 break;
-
+            case 'Jenkinsfile':
+                $found = $this->getProjectService()->createJenkinsFile();
+                break;
+            case '.gitignore':
+                $found = $this->getProjectService()->createGitIgnore();
+                break;
             default:
                 $found = false;
         }
@@ -171,6 +176,9 @@ class FileUpgrade extends AbstractJsonService
             case 'script/deploy-testing.sh':
                 $found = $this->getModuleService()->getScriptTesting($type);
                 break;
+            case 'script/load.sh':
+                $found = $this->getModuleService()->getScriptLoad($type);
+                break;
             case 'README.md':
                 $found = $this->getModuleService()->getReadme();
                 break;
@@ -191,7 +199,12 @@ class FileUpgrade extends AbstractJsonService
             case 'test/phpcs-docs.xml':
                 $found = $this->getModuleService()->getPhpcsDocsConfig();
                 break;
-
+            case 'Jenkinsfile':
+                $found = $this->getModuleService()->createJenkinsFile($type);
+                break;
+            case '.gitignore':
+                $found = $this->getModuleService()->createGitIgnore($type);
+                break;
             default:
                 $found = false;
         }
