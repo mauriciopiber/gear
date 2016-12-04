@@ -111,6 +111,81 @@ class AntServiceTest extends AbstractTestCase
         $this->ant->diagnosticProject('web');
     }
 
+    /**
+     * @group mtof
+     */
+    public function testMissingTargetOnFile()
+    {
+
+        $namespace = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing-namespace" default="build" basedir=".">
+    <target name="parallel-lint" depends="set-vendor" description="Run PHP parallel lint For Continuous Integration">
+        <exec executable="\${vendor}/bin/parallel-lint" failonerror="true">
+            <arg line="--exclude"/>
+            <arg path="\${basedir}/vendor"/>
+            <arg path="\${basedir}"/>
+        </exec>
+    </target>
+    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
+        <exec executable="\${vendor}/bin/phpcs" output="/dev/null">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=\${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg path="\${basedir}/src"/>
+        </exec>
+    </target>
+</project>
+
+EOS;
+
+        $build = <<<EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gearing" default="build" basedir=".">
+    <import file="./test/ant-namespace.xml"/>
+    <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
+        <exec executable="\${vendor}/bin/phpcs">
+            <arg value="--standard=PSR2"/>
+            <arg path="\${basedir}/src/\${file}"/>
+        </exec>
+    </target>
+</project>
+
+EOS;
+
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        $this->gearConfig->getCurrentName()->willReturn('Gearing')->shouldBeCalled();
+
+        $this->ant->setModule($this->module->reveal());
+
+        file_put_contents(vfsStream::url('module/build.xml'), $build);
+        file_put_contents(vfsStream::url('module/test/ant-namespace.xml'), $namespace);
+
+        $this->yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $this->yaml->getAntModule('web')->willReturn([
+            'import' => [
+                'ant-namespace'
+            ***REMOVED***,
+            'target' => [
+                'phpcs-file' => 'set-vendor'
+            ***REMOVED***,
+            'files' => [
+                'ant-namespace' => [
+                    'parallel-lint' => 'set-vendor',
+                    'phpcs-ci' => 'set-vendor',
+                    'phpmd-ci' => 'set-vendor',
+                ***REMOVED***,
+            ***REMOVED***,
+            'default' => 'clean'
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->ant->setAntEdge($this->yaml->reveal());
+
+        $this->assertEquals([
+            sprintf(AntService::$missingTargetDepend, 'phpmd-ci', 'set-vendor', 'test/ant-namespace.xml'),
+        ***REMOVED***, $this->ant->diagnosticModule('web'));
+
+    }
 
     /**
      * @group maf
