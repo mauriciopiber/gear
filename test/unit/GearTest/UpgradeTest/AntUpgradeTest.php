@@ -152,7 +152,6 @@ class AntUpgradeTest extends TestCase
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -258,7 +257,6 @@ EOS;
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -350,7 +348,6 @@ EOS;
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -552,7 +549,6 @@ EOS;
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
@@ -578,7 +574,7 @@ EOS;
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
+
     </target>
 </project>
 
@@ -736,7 +732,6 @@ EOS;
         <delete dir="\${basedir}/build/phpdox"/>
         <delete dir="\${basedir}/build/features"/>
         <delete dir="\${basedir}/build/docs"/>
-        <delete dir="\${basedir}/public/info"/>
     </target>
 </project>
 
