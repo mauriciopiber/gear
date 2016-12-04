@@ -25,12 +25,17 @@ class ProjectController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
 
-        $type = $this->getRequest()->getParam('type', 'web');
-
         $projectService = $this->getDiagnosticService();
 
-        $projectService->diagnostic($type);
+        $type = $this->getRequest()->getParam('type', 'web');
 
+        if ($type == false) {
+            $type = 'web';
+        }
+
+        $just = $this->getRequest()->getParam('just', null);
+
+        $this->getDiagnosticService()->diagnostic($type, $just);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();

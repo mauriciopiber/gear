@@ -25,6 +25,10 @@ class DiagnosticService extends AbstractDiagnostic
     {
         $this->errors = [***REMOVED***;
 
+        if ($this->checkJust($just) === false) {
+            return false;
+        }
+
         if ($just === null) {
             $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
             $this->errors = array_merge($this->errors, $this->getNpmService()->diagnosticModule($type));
@@ -57,6 +61,10 @@ class DiagnosticService extends AbstractDiagnostic
 
             case 'dir':
                 $this->errors = array_merge($this->errors, $this->getDirDiagnosticService()->diagnosticModule($type));
+                break;
+
+            default:
+                $this->errors[***REMOVED*** = sprintf(self::NO_FOUND, $just);
                 break;
         }
 
