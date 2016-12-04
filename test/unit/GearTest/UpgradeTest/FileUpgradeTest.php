@@ -4,6 +4,7 @@ namespace GearTest\UpgradeTest;
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\FileUpgrade;
+use Gear\Util\Yaml\YamlService;
 
 /**
  * @group FileUpgrade
@@ -21,6 +22,18 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService = $this->prophesize('Gear\Project\ProjectService');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+
+
+        $this->fileUpgrade = new FileUpgrade(
+            $this->console->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->moduleService->reveal(),
+            $this->projectService->reveal(),
+            $this->module->reveal()
+        );
+
+        $this->yaml = new YamlService();
+
     }
 
 
@@ -29,14 +42,8 @@ class FileUpgradeTest extends AbstractTestCase
      */
     public function testProjectTrait()
     {
-        $ant = new FileUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->moduleService->reveal(),
-            $this->projectService->reveal()
-        );
-        $ant->setProject('testing');
-        $this->assertEquals('testing', $ant->getProject());
+        $this->fileUpgrade->setProject('testing');
+        $this->assertEquals('testing', $this->fileUpgrade->getProject());
     }
 
     /**
@@ -44,41 +51,22 @@ class FileUpgradeTest extends AbstractTestCase
      */
     public function testDependency()
     {
-
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-
-        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->moduleService->reveal(),
-            $this->projectService->reveal(),
-            $this->module->reveal()
-        );
-
-        $this->assertEquals($fileUpgrade->getModuleService(), $this->moduleService->reveal());
-        $this->assertEquals($fileUpgrade->getProjectService(), $this->projectService->reveal());
-        $this->assertEquals($fileUpgrade->getConsole(), $this->console->reveal());
-        $this->assertEquals($fileUpgrade->getModule(), $this->module->reveal());
-        $this->assertEquals($fileUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
+        $this->assertEquals($this->fileUpgrade->getModuleService(), $this->moduleService->reveal());
+        $this->assertEquals($this->fileUpgrade->getProjectService(), $this->projectService->reveal());
+        $this->assertEquals($this->fileUpgrade->getConsole(), $this->console->reveal());
+        $this->assertEquals($this->fileUpgrade->getModule(), $this->module->reveal());
+        $this->assertEquals($this->fileUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
     }
 
-
-    public function types()
-    {
-        return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
-    }
 
     /**
-     * @group fil1
-     * @dataProvider types
+     * @group xmxm
      */
-    public function testFactoryUpgradeModule($type)
+    public function testFactoryUpgradeModuleWeb()
     {
         $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getScriptDevelopment($type)->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getScriptDevelopment('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
 
@@ -100,7 +88,13 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getScriptTesting($type)->willReturn(true)->shouldBeCalled();
+        $this->moduleService->getScriptTesting('web')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getScriptLoad('web')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createGitIgnore('web')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createJenkinsFile('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
@@ -112,57 +106,84 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getPhpunitBenchmarkConfig()->willReturn(true)->shouldBeCalled();
 
-        $files = [
-            'data/config.json',
-            'schema/module.json',
-            'docs/index.md',
-            'public/js/spec/end2end.conf.js',
-            'public/js/spec/karma.conf.js',
-            'test/phpunit-coverage-benchmark.xml',
-            'test/phpunit-benchmark.xml',
-            'test/phpmd.xml',
-            'test/phpcs-docs.xml',
-            'test/unit.suite.yml',
-            'script/deploy-development.sh',
-            'script/deploy-testing.sh',
-            'gulpfile.js',
-            'phinx.yml',
-            'mkdocs.yml',
-            'phpdox.xml',
-            'codeception.yml',
-            'README.md'
-        ***REMOVED***;
+        $yaml = new YamlService();
+        $target = $yaml->load((new \Gear\Module())->getLocation().'/../../data/edge-technologic/module/web/file.yml');
 
-        $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
-        $fileEdge->getFileModule($type)->willReturn(
-            [
-                'files' => $files
-            ***REMOVED***
-        )->shouldBeCalled();
+        $this->fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
 
-        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->moduleService->reveal(),
-            $this->projectService->reveal(),
-            $this->module->reveal()
-        );
+        $this->fileUpgrade->setFileEdge($this->fileEdge->reveal());
 
-        $fileUpgrade->setFileEdge($fileEdge->reveal());
-
-        $upgrades = $fileUpgrade->upgradeModule($type, $force = true);
+        $upgrades = $this->fileUpgrade->upgradeModule('web', true);
 
         $expected = [***REMOVED***;
 
-        foreach ($files as $file) {
+        foreach ($target['files'***REMOVED*** as $file) {
             $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Module');
         }
 
         $this->assertEquals($expected, $upgrades);
+
     }
 
     /**
-     * @group fil2
+     * @group xmxm
+     */
+    public function testFactoryUpgradeModuleCli()
+    {
+        $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getScriptDevelopment('cli')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getScriptTesting('cli')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createGitIgnore('cli')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createJenkinsFile('cli')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpunitCoverageBenchmarkConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpunitBenchmarkConfig()->willReturn(true)->shouldBeCalled();
+
+
+        $target = $this->yaml->load((new \Gear\Module())->getLocation().'/../../data/edge-technologic/module/cli/file.yml');
+
+        $this->fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $this->fileEdge->getFileModule('cli')->willReturn($target)->shouldBeCalled();
+
+        $this->fileUpgrade->setFileEdge($this->fileEdge->reveal());
+
+        $upgrades = $this->fileUpgrade->upgradeModule('cli', true);
+
+        $expected = [***REMOVED***;
+
+        foreach ($target['files'***REMOVED*** as $file) {
+            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Module');
+        }
+
+        $this->assertEquals($expected, $upgrades);
+
+    }
+    /**
+     * @group xmxm1
      */
     public function testFactoryUpgradeProject($type = 'web')
     {
@@ -198,53 +219,31 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();
 
-        $this->projectService->getBuildpath()->willReturn(true)->shouldBeCalled();
+        //$this->projectService->getBuildpath()->willReturn(true)->shouldBeCalled();
 
-        $files = [
-            '.buildpath',
-            'gulpfile.js',
-            'data/config.json',
-            'data/report.js',
-            'end2end.conf.js',
-            'karma.conf.js',
-            'phinx.yml',
-            'mkdocs.yml',
-            'docs/index.md',
-            'phpdox.xml',
-            'script/deploy-development.sh',
-            'script/deploy-testing.sh',
-            'script/deploy-production.sh',
-            'script/deploy-staging.sh',
-            'script/load.sh',
-            'codeception.yml',
-            'README.md'
-        ***REMOVED***;
+        $this->projectService->copyPHPMD()->willReturn(true)->shouldBeCalled();
 
-        $fileEdge = $this->prophesize('Gear\Edge\FileEdge');
-        $fileEdge->getFileProject($type)->willReturn(
-            [
-                'files' => $files
-            ***REMOVED***
-        )->shouldBeCalled();
+        $this->projectService->createJenkinsFile()->willReturn(true)->shouldBeCalled();
 
-        $fileUpgrade = new \Gear\Upgrade\FileUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->moduleService->reveal(),
-            $this->projectService->reveal(),
-            $this->module->reveal()
-        );
+        $this->projectService->createGitIgnore()->willReturn(true)->shouldBeCalled();
+
+        $this->projectService->getPhpcsDocs()->willReturn(true)->shouldBeCalled();
+
+        $target = $this->yaml->load((new \Gear\Module())->getLocation().'/../../data/edge-technologic/project/web/file.yml');
+
+        $this->edge = $this->prophesize('Gear\Edge\FileEdge');
+        $this->edge->getFileProject('web')->willReturn($target)->shouldBeCalled();
 
         vfsStream::setup('project');
-        $fileUpgrade->setProject(vfsStream::url('project'));
+        $this->fileUpgrade->setProject(vfsStream::url('project'));
 
-        $fileUpgrade->setFileEdge($fileEdge->reveal());
+        $this->fileUpgrade->setFileEdge($this->edge->reveal());
 
-        $upgrades = $fileUpgrade->upgradeProject($type, $force = true);
+        $upgrades = $this->fileUpgrade->upgradeProject('web', $force = true);
 
         $expected = [***REMOVED***;
 
-        foreach ($files as $file) {
+        foreach ($target['files'***REMOVED*** as $file) {
             $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Project');
         }
 
