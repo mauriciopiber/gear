@@ -3,6 +3,7 @@ namespace GearTest\ProjectTest\DiagnosticTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Project\Diagnostic\DiagnosticService;
 
 /**
  * @group Project
@@ -24,6 +25,27 @@ class DiagnosticServiceTest extends AbstractTestCase
         parent::setUp();
 
         $this->root = vfsStream::setup('project');
+
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+
+        $this->diagnostic = new DiagnosticService($this->console->reveal());
+        $this->diagnostic->setBaseDir(vfsStream::url('project'));
+
+        $this->composer = $this->prophesize('Gear\Diagnostic\ComposerService');
+        $this->diagnostic->setComposerDiagnosticService($this->composer->reveal());
+
+        $this->npm = $this->prophesize('Gear\Diagnostic\NpmService');
+        $this->diagnostic->setNpmService($this->npm->reveal());
+
+        $this->ant = $this->prophesize('Gear\Diagnostic\Ant\AntService');
+        $this->diagnostic->setAntService($this->ant->reveal());
+
+        $this->file = $this->prophesize('Gear\Diagnostic\File\FileService');
+        $this->diagnostic->setFileDiagnosticService($this->file->reveal());
+
+        $this->dir = $this->prophesize('Gear\Diagnostic\Dir\DirService');
+        $this->diagnostic->setDirDiagnosticService($this->dir->reveal());
+
     }
 
     /**
@@ -33,35 +55,43 @@ class DiagnosticServiceTest extends AbstractTestCase
      */
     public function testDiagostic($type)
     {
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        $this->diagnostic = new \Gear\Project\Diagnostic\DiagnosticService($console->reveal());
-        $this->diagnostic->setBaseDir(vfsStream::url('project'));
-
-        $composer = $this->prophesize('Gear\Diagnostic\ComposerService');
-        $composer->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $this->diagnostic->setComposerDiagnosticService($composer->reveal());
-
-
-        $npm = $this->prophesize('Gear\Diagnostic\NpmService');
-        $npm->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $this->diagnostic->setNpmService($npm->reveal());
-
-        $ant = $this->prophesize('Gear\Diagnostic\Ant\AntService');
-        $ant->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->diagnostic->setAntService($ant->reveal());
-
-        $file = $this->prophesize('Gear\Diagnostic\File\FileService');
-        $file->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->diagnostic->setFileDiagnosticService($file->reveal());
-
-        $dir = $this->prophesize('Gear\Diagnostic\Dir\DirService');
-        $dir->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
-        $this->diagnostic->setDirDiagnosticService($dir->reveal());
+        $this->composer->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->npm->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->ant->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->file->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->dir->diagnosticProject($type)->willReturn([***REMOVED***)->shouldBeCalled();
 
         $status = $this->diagnostic->diagnostic($type);
+
+        $this->assertTrue($status);
+    }
+
+    public function testNotFoundJust()
+    {
+        $status = $this->diagnostic->diagnostic('web', 'nonono');
+        $this->assertEquals($this->diagnostic->errors, [sprintf(DiagnosticService::NO_FOUND, 'nonono')***REMOVED***);
+        $this->assertFalse($status);
+    }
+
+    public function getSpec()
+    {
+        return [
+            ['composer'***REMOVED***,
+            ['ant'***REMOVED***,
+            ['file'***REMOVED***,
+            ['dir'***REMOVED***,
+            ['npm'***REMOVED***
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider getSpec
+     */
+    public function testJustDiagnostic($spec)
+    {
+        $this->{$spec}->diagnosticProject('web')->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $status = $this->diagnostic->diagnostic('web', $spec);
 
         $this->assertTrue($status);
     }

@@ -5,6 +5,8 @@ use Gear\Service\AbstractJsonService;
 
 abstract class AbstractDiagnostic extends AbstractJsonService
 {
+    const NO_FOUND = 'Não encontrado %s';
+
     /**
      * @var array $errors Erros encontrados
      */
@@ -19,6 +21,19 @@ abstract class AbstractDiagnostic extends AbstractJsonService
     use \Gear\Diagnostic\NpmServiceTrait;
 
     use \Gear\Diagnostic\ComposerServiceTrait;
+
+
+    public function checkJust($just)
+    {
+        if (!empty($just) && !in_array($just, ['composer', 'ant', 'npm', 'file', 'dir'***REMOVED***)) {
+            $this->errors[***REMOVED*** = sprintf(self::NO_FOUND, $just);
+            $this->show();
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Responsável por mostrar as mensagens de erro conforme vão aparecendo.
      *

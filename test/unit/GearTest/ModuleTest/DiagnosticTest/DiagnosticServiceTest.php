@@ -62,6 +62,13 @@ class DiagnosticServiceTest extends TestCase
         $this->assertTrue($status);
     }
 
+    public function testNotFoundJust()
+    {
+        $status = $this->diagnostic->diagnostic('web', 'nonono');
+        $this->assertEquals($this->diagnostic->errors, [sprintf(DiagnosticService::NO_FOUND, 'nonono')***REMOVED***);
+        $this->assertFalse($status);
+    }
+
     public function getSpec()
     {
         return [

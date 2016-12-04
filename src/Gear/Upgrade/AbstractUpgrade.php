@@ -11,6 +11,8 @@ use Gear\Upgrade\AntUpgradeTrait;
 
 abstract class AbstractUpgrade extends AbstractJsonService
 {
+    const NO_FOUND = 'Não encontrado %s';
+
     use ComposerUpgradeTrait;
 
     use NpmUpgradeTrait;
@@ -50,6 +52,18 @@ abstract class AbstractUpgrade extends AbstractJsonService
     {
         $this->console = $console;
         return $this;
+    }
+
+
+    public function checkJust($just)
+    {
+        if (!empty($just) && !in_array($just, ['composer', 'ant', 'npm', 'file', 'dir'***REMOVED***)) {
+            $this->errors[***REMOVED*** = sprintf(self::NO_FOUND, $just);
+            $this->showUpgrades();
+            return false;
+        }
+
+        return true;
     }
 
     /**
