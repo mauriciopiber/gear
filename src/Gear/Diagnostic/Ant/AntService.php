@@ -162,6 +162,26 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return $errors;
     }
 
+
+    public function getImport($dir, array $edge)
+    {
+        if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
+            return null;
+        }
+
+        $builds = [***REMOVED***;
+
+        foreach ($edge['files'***REMOVED*** as $file => $targets) {
+            unset($targets);
+
+            $name = sprintf('test/%s.xml', $file);
+
+            $builds[$file***REMOVED*** = simplexml_load_string(file_get_contents($dir.'/'.$name));
+        }
+
+        return $builds;
+    }
+
     public function diagnostic($build, $edge, $function = null)
     {
         if (!is_file($build.'/build.xml')) {
@@ -198,37 +218,47 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             return $this->errors;
         }
 
-
         $this->errors = $this->getNames($build, $edge);
 
 
-        foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-            $this->checkTarget($target, $dependency, 'build.xml');
+        if (count($edge['target'***REMOVED***)>0) {
+            $this->checkTargetFile($this->build, $edge['target'***REMOVED***, 'build.xml');
         }
 
         if (empty($edge['files'***REMOVED***) || !is_array($edge['files'***REMOVED***)) {
             return $this->errors;
         }
 
-        if (isset($edge['files'***REMOVED***) && count($edge['files'***REMOVED***) > 0) {
-            foreach ($edge['files'***REMOVED*** as $file => $targets) {
-                foreach ($targets as $target => $dependency) {
-                    $this->checkTarget($target, $dependency, sprintf('test/%s.xml', $file));
-               }
-           }
+        $this->import = $this->getImport($build, $edge);
+
+        if (!empty($this->import)) {
+
+            foreach ($this->import as $name => $build) {
+
+                if (!isset($edge['files'***REMOVED***[$name***REMOVED***) || empty($edge['files'***REMOVED***[$name***REMOVED***)) {
+                    continue;
+                }
+
+                $this->checkTargetFile($build, $edge['files'***REMOVED***[$name***REMOVED***, sprintf('test/%s.xml', $name));
+            }
         }
 
-
-
         return $this->errors;
+    }
+
+    public function checkTargetFile(SimpleXmlElement $build, $targets, $name)
+    {
+        foreach ($targets as $target => $dependency) {
+             $this->checkTarget($build, $target, $dependency, $name);
+        }
     }
 
     /**
      * Verifica se um determinado target existe no arquivo build, se não existe incrementa os erros.
      */
-    public function checkTarget($targetName, $depend = '', $file)
+    public function checkTarget($build, $targetName, $depend = '', $file)
     {
-        if (!$this->hasTarget($targetName)) {
+        if (!$this->hasTarget($build, $targetName)) {
 
             $this->errors[***REMOVED*** = (empty($depend))
                 ? sprintf(static::$missingTarget, $targetName, $file)
@@ -237,7 +267,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
             return;
         }
 
-        if (!$this->hasDepend($targetName, $depend)) {
+        if (!$this->hasDepend($build, $targetName, $depend)) {
             $this->errors[***REMOVED*** = sprintf(static::$missingDepends, $targetName, $depend, $file);
         }
 
@@ -247,9 +277,9 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
     /**
      * Verifica se o Target tem a dependência exigida corretamente.
      */
-    public function hasDepend($targetName, $depend)
+    public function hasDepend(SimpleXmlElement $build, $targetName, $depend)
     {
-        foreach ($this->build[0***REMOVED***->target as $target) {
+        foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
 
             if ($name === $targetName) {
@@ -280,9 +310,9 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
      * @param string $search Nome do Target.
      * @return boolean
      */
-    public function hasTarget($search)
+    public function hasTarget($build, $search)
     {
-        foreach ($this->build[0***REMOVED***->target as $target) {
+        foreach ($build[0***REMOVED***->target as $target) {
             $name = (string) $target[0***REMOVED***->attributes()->name;
             if ($name === $search) {
                 return true;
