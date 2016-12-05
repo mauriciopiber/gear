@@ -15,40 +15,43 @@ Possuir versão Gear.
 
 ### Diretórios que precisam ter permissão de escrita
 
-| Pasta/Arquivo | Descrição | Web | Cli | Ignore |
-| : -- | --- | --- | --- | --- |
-| build/.gitignore | Onde é gravado os resultados da build. | X | X | X |
-| data/logs/.gitignore | Onde grava exceptions geradas por GearAdmin. | X | - | X |
-| data/cache/configcache/.gitignore | Onde grava o cache da configuração dos módulos. | X | - | X | 
-| data/DoctrineModule/cache/.gitignore | Onde grava as consultas do DoctrineModule. | X | - | X |
-| data/DoctrineORMModule/Proxy/.gitignore | Onde grava os proxys do DoctrineORMModule. | X | - | X |
-| data/session/.gitignore | Onde grava as sessões do módulo. | X | - | X | 
-| data/migrations | Onde grava as migrations para banco de dados. | X | X | - |
-| node_modules | Onde grava os módulos de teste frontend. | X | - | X | 
+| ID | Pasta/Arquivo | Web | Cli | Ignore |
+| :--| : -- | --- | --- | --- |
+| Build | build | X | X | X |
+| Migrations | data/migrations |  X | X | - |
+| Logs | data/logs | X | - | X |
+| Config Cache |data/cache/configcache | X | - | X | 
+| DoctrineModule | data/DoctrineModule/cache  | X | - | X |
+| DoctrineORMModule | data/DoctrineORMModule/Proxy  | X | - | X |
+| Session |  data/session |  X | - | X |
+| NodeJS |  node_modules |  X | - | X | 
 
 
 ### Arquivos necessários
 
 | Script | Web | Cli |
 |:--|---|---|
-| deploy-development.sh | X | X |
-| deploy-testing.sh | X | X |
-| data/config.json | X | - |
 | schema/module.json | X | - |
+| script/deploy-development.sh | X | X |
+| script/deploy-testing.sh | X | X |
+| script/load.sh | X | X |
+| data/config.json | X | - |
 | public/js/spec/end2end.conf.js | X | - |
 | public/js/spec/karma.conf.js | X | - |
+| codeception.yml | X | X |
 | test/unit.suite.yml | X | X |
 | phinx.yml | X | X |
-| codeception.yml | X | X |
 | mkdocs.yml | X | X |
-| phpdox.xml | X | X |
 | README.md | X | X |
 | docs/index.md | X | X |
-| mkdocs.md | X | X |
+| phpdox.xml | X | X |
 | test/phpmd.xml | X | X |
 | test/phpcs-docs.xml | X | X |
 | test/phpunit-benchmark.xml | X | X |
 | test/phpunit-coverage-benchmark.xml | X | X |
+| Jenkinsfile | X | X |
+| .gitignore | X | X | 
+| gulpfile.js | X | - |
 
 ### Composer
 

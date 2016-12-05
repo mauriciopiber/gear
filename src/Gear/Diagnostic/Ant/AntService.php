@@ -124,7 +124,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
     {
         $errors = [***REMOVED***;
 
-        $name = $this->getGearConfig()->getCurrentName();
+        $name = $this->str('url', $this->getGearConfig()->getCurrentName());
 
         if (!$this->hasName($this->build, $name)) {
             $errors[***REMOVED*** = sprintf(static::$missingName, $name, 'build.xml');

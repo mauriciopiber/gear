@@ -9,7 +9,6 @@ writable:
   7: data/session
   8: build
   9: docs  
-  10: public/info
    
 ignore:
   1: node_modules
@@ -18,5 +17,4 @@ ignore:
   4: data/logs
   5: data/cache/configcache
   6: data/session
-  7: build
-  10: public/info  
+  7: build  
