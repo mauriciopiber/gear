@@ -27,7 +27,7 @@ return [
             ),
             'gear-project-upgrade' => array(
                 'options' => array(
-                    'route' => 'gear project upgrade [--type=***REMOVED*** [--force***REMOVED***',
+                    'route' => 'gear project upgrade [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'upgrade'
@@ -36,7 +36,7 @@ return [
             ),
             'gear-project-diagnostics' => array(
                 'options' => array(
-                    'route' => 'gear project diagnostic',
+                    'route' => 'gear project diagnostic [--just=***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Controller\Project',
                         'action' => 'diagnostics'

@@ -89,7 +89,7 @@ return [
             ),
 			'gear-module-upgrade' => array(
                 'options' => array(
-                    'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED***',
+                    'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Module',
                         'action' => 'upgrade'
