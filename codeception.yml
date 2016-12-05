@@ -20,5 +20,3 @@ coverage:
             - 'src/*'
         exclude:
             - 'src/Gear/Module.php*'
-include:
-    - module/NewModule

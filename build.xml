@@ -1,100 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gear" default="build" basedir=".">
+<project name="gear" default="ci" basedir=".">
     <import file="./test/ant-basic.xml"/>
     <import file="./test/ant-dev.xml"/>
     <import file="./test/ant-ci.xml"/>
     <import file="./test/ant-namespace.xml"/>
-    <import file="./test/ant-benchmark.xml"/>
     <import file="./test/ant-measure.xml"/>
-    
-    <target name="build" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage-ci, phploc-ci, pdepend, phpdox, publish"/>
-    <target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
-    <target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>
-    <target name="phpmd-file" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/${file}"/>
-            <arg value="text"/>
-            <arg value="${basedir}/test/phpmd.xml"/>
-        </exec>
-    </target>
-    <target name="phpcpd-file" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>
-    <target name="unit-file" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${test}"/>
-        </exec>
-    </target>
-    
-    <target name="namespace" depends="prepare, set-vendor, unit-namespace, phpcs-namespace, phpmd-namespace, phpcpd-namespace"/>
-    <target name="phpcs-namespace" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
-            <arg value="--report=checkstyle"/>
-            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src/${namespace}"/>
-        </exec>
-    </target>
-    <target name="phpmd-namespace" description="PHPMD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/${namespace}"/>
-            <arg value="xml"/>
-            <arg value="${basedir}/test/phpmd.xml"/>
-            <arg value="--reportfile"/>
-            <arg value="${basedir}/build/logs/pmd.xml"/>
-        </exec>
-    </target>
-    <target name="phpcpd-namespace" description="Find duplicate code using PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
-            <arg value="--log-pmd"/>
-            <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
-            <arg path="${basedir}/src/${namespace}"/>
-        </exec>
-    </target>
-    <target name="unit-coverage-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${testNamespace}"/>            
-            <arg value="--xml"/>
-            <arg value="--coverage-xml"/>
-            <arg value="--coverage-html"/>
-        </exec>
-    </target>
-    <target name="unit-ci-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${testNamespace}"/>            
-            <arg value="--xml"/>
-        </exec>
-    </target>
-    <target name="unit-namespace-group" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${testNamespace}"/>
-            <arg value="-g"/>
-            <arg value="${group}"/>            
-        </exec>
-    </target>     
-    <target name="unit-namespace" depends="set-vendor" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${testNamespace}"/>            
-        </exec>
-    </target>    
-
-    <target name="acceptance" depends="set-vendor, phpcs, phpmd, phpcpd, unit-group"/>
- 
+    <import file="./test/ant-benchmark.xml"/>
+    <target name="namespace" depends="set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace"/>
+    <target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, unit"/>
+    <target name="ci" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci"/>
+    <target name="measure" depends="prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox"/>
 </project>

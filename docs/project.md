@@ -21,16 +21,6 @@ Possuir versão Gear.
 | data/migrations | X |
 
 
-### Scripts para agilizar o trabalho interno
-
-| Script | Web |
-|:--|---|---|
-| deploy-development.sh | X |
-| deploy-staging.sh | X |
-| deploy-testing.sh | X |
-| deploy-production.sh | X | 
-
-
 ### Composer
 
 | Package | Version | Group | Web | Cli |
@@ -111,15 +101,6 @@ Possuir versão Gear.
 | run-sequence | ~1.0| Assets |
 | yargs | ~3.0" | Assets |
 
-### Gulpfile
-
-
-| Ação |
-|:--|
-| Optimize CSS |
-| Optimize JS Login |
-| Optimize JS Admin |
-
 
 ### Build 
 
@@ -186,6 +167,26 @@ Possuir versão Gear.
 | publish | build |
 
 ---
+
+
+
+### Scripts para agilizar o trabalho interno
+
+| Script | Web |
+|:--|---|---|
+| deploy-development.sh | X |
+| deploy-staging.sh | X |
+| deploy-testing.sh | X |
+| deploy-production.sh | X | 
+
+### Gulpfile
+
+
+| Ação |
+|:--|
+| Optimize CSS |
+| Optimize JS Login |
+| Optimize JS Admin |
 
 
 #### Arquivos necessários para funcionar corretamente que não são naturais ao Zend Framework

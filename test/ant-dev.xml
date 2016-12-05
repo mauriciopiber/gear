@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="gear-dev" default="build" basedir=".">
-   <target name="phpcs" description="Code Sniffer" depends="set-vendor">
+<project name="gear-dev" default="" basedir=".">
+    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
             <arg path="${basedir}/src"/>
@@ -18,22 +18,21 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
+    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, build-helper">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
-            <arg value="--xml"/>
         </exec>
     </target>
-    <target name="unit-group" depends="set-vendor, buildHelper">
+    <target name="unit-group" depends="set-vendor, build-helper">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
             <arg value="-g"/>
-            <arg value="${s}"/>
+            <arg value="${group}"/>
         </exec>
     </target>
-    <target name="unit-group-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
+    <target name="unit-coverage-group" depends="set-vendor, build-helper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
@@ -42,61 +41,10 @@
             <arg value="${group}"/>
         </exec>
     </target>
-    <target name="dev" depends="parallel-lint, phpcs-dev, phpcpd-dev, phpmd-dev, unit-dev"/>
-    <target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs" failonerror="true">
-            <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/src"/>
-        </exec>
-    </target>
-    <target name="phpmd-dev" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd" failonerror="true">
-            <arg path="${basedir}/src"/>
-            <arg value="text"/>
-            <arg value="${basedir}/config/jenkins/phpmd.xml"/>
-        </exec>
-    </target>
-    <target name="phpcpd-dev" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd" failonerror="true">
-            <arg path="${basedir}/src"/>
-        </exec>
-    </target>
-    <target name="unit-dev" description="Run unit tests with PHPUnit" depends="set-vendor, buildHelper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-        </exec>
-    </target>
-    <target name="phpunit-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
-            <arg value="--configuration=${basedir}/test/phpunit-benchmark.xml"/>
-        </exec>
-    </target>
-    <target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
-            <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
-        </exec>
-    </target>    
-    
-    <target name="unit-file-coverage" depends="set-vendor, buildHelper" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="${test}"/>
-            <arg value="--coverage-html"/>
-        </exec>
-    </target>
-
     <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=test/phpcs-docs.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="phpcs-docs-file" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src/${file}"/>
-        </exec>
-    </target>    
 </project>

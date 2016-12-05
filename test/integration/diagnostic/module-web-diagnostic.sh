@@ -69,24 +69,3 @@ clean $modulepath
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
 exit 1
-
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=composer
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=npm
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=file
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=dir
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=ant
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --just=composer --force
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --just=npm --force
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --just=file --force
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --just=dir --force
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --just=ant --force
-
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=composer
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=npm
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=file
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=dir
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=ant
-
-cd $modulepath && ant
-
-exit 1

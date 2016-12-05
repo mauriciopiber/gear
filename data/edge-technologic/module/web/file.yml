@@ -19,4 +19,4 @@ files:
     17: test/phpunit-coverage-benchmark.xml
     18: Jenkinsfile  
     19: .gitignore    
-    20: schema/module.json
+    20: schema/module.json    
