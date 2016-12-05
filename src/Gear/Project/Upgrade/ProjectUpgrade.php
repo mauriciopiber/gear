@@ -5,7 +5,7 @@ use Gear\Upgrade\AbstractUpgrade;
 
 class ProjectUpgrade extends AbstractUpgrade
 {
-    public function upgrade($type = 'web', $just = null)
+    public function upgrade($type = 'web', $just = null, $force = false)
     {
         //$module = $this->module->getProject();
         if ($this->checkJust($just) === false) {
@@ -37,7 +37,6 @@ class ProjectUpgrade extends AbstractUpgrade
             return true;
         }
 
-
         switch ($just) {
             case 'composer':
                 $this->upgrades = array_merge($this->upgrades, $this->getComposerUpgrade()->upgradeProject($type));
@@ -64,6 +63,5 @@ class ProjectUpgrade extends AbstractUpgrade
         $this->showUpgrades();
 
         return true;
-
     }
 }

@@ -53,7 +53,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Project\Diagnostic\DiagnosticService');
 
-        $diagnostic->diagnostic($type)->willReturn(true);
+        $diagnostic->diagnostic($type, null)->willReturn(true);
 
         $this->controller->setDiagnosticService($diagnostic->reveal());
 
@@ -74,7 +74,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Project\Upgrade\ProjectUpgrade');
 
-        $diagnostic->upgrade($type, false)->willReturn(true);
+        $diagnostic->upgrade($type, null, false)->willReturn(true);
 
         $this->controller->setProjectUpgrade($diagnostic->reveal());
 

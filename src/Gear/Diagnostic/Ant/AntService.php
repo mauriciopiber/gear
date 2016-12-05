@@ -32,9 +32,9 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     public $build;
 
-    const MISSING_FILE = 'Está faltando o arquivo %s';
+    const MISSING_FILE = 'Ant - Está faltando o arquivo %s';
 
-    const MISSING_IMPORT = 'Está faltando o import %s';
+    const MISSING_IMPORT = 'Ant - Está faltando o import %s';
 
     use ProjectLocationTrait;
 

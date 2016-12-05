@@ -5,7 +5,7 @@ use Gear\Upgrade\AbstractUpgrade;
 
 class ModuleUpgrade extends AbstractUpgrade
 {
-    public function upgrade($type = 'web', $just = null)
+    public function upgrade($type = 'web', $just = null, $force = false)
     {
 
         if ($this->checkJust($just) === false) {
