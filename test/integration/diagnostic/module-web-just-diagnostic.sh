@@ -16,7 +16,6 @@ function clean()
     rm -R $modulepath/data/DoctrineModule
     rm -R $modulepath/data/DoctrineORMModule
     rm -R $modulepath/data/migrations
-    rm -R $modulepath/data/node_modules
     rm $modulepath/README.md
     rm $modulepath/mkdocs.yml
     rm $modulepath/docs/index.md
@@ -41,27 +40,26 @@ function clean()
 
 }
 
-#php public/index.php gear module-as-project create MyModule $base --type=web --force
 
-#cd $modulepath && script/deploy-development.sh
+ls -l $modulepath/schema/module.json &> /dev/null
 
-#cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+if [ "${?}" == 0 ***REMOVED***; then
+    rm $modulepath/schema/module.json
+fi
 
-#clean $modulepath
+php public/index.php gear module-as-project create MyModule $base --type=web --force
 
-#cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+cd $modulepath && script/deploy-development.sh
 
-#exit 1
 
-cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --force
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=composer
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=npm
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=file
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=dir
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=ant
 
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
 clean $modulepath
-
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
-
-exit 1
 
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=composer
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=npm
@@ -80,6 +78,6 @@ cd $modulepath && php public/index.php gear module diagnostic MyModule $base --t
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=dir
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=ant
 
-cd $modulepath && ant
+#cd $modulepath && ant
 
 exit 1
