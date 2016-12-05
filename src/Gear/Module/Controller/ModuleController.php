@@ -124,11 +124,12 @@ class ModuleController extends AbstractConsoleController
     {
         $type = $this->getRequest()->getParam('type', 'web');
         $force = $this->getRequest()->getParam('force', false);
+        $just = $this->getRequest()->getParam('just', null);
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-upgrade'));
 
         $module = $this->getModuleUpgrade();
-        $module->upgrade($type, $force);
+        $module->upgrade($type, $just, $force);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

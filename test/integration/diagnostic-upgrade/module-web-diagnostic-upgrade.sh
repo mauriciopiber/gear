@@ -5,6 +5,7 @@ modulepath="$base/my-module"
 
 function clean() 
 {
+    modulepath=${1}
     rm $modulepath/build.xml
     rm $modulepath/test/ant-*
     rm $modulepath/package.json
@@ -40,23 +41,27 @@ function clean()
 
 }
 
-php public/index.php gear module-as-project create MyModule $base --type=web --force
+#php public/index.php gear module-as-project create MyModule $base --type=web --force
 
-cd $modulepath && script/deploy-development.sh
+#cd $modulepath && script/deploy-development.sh
 
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+#cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
-exit 1
+#clean $modulepath
 
-clean
+#cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
-cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+#exit 1
 
 cd $modulepath && php public/index.php gear module upgrade MyModule $base --type=web --force
 
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
 
-clean
+clean $modulepath
+
+cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web
+
+exit 1
 
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=composer
 cd $modulepath && php public/index.php gear module diagnostic MyModule $base --type=web --just=npm
