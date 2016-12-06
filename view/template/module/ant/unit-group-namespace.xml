@@ -2,6 +2,7 @@
     <exec executable="${vendor}/bin/codecept">
         <arg value="run"/>
         <arg value="unit"/>
+        <arg value="test/unit/${testNamespace}"/>        
         <arg value="-g"/>
         <arg value="${group}"/>
     </exec>

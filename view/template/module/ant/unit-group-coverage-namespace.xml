@@ -2,7 +2,11 @@
     <exec executable="${vendor}/bin/codecept">
         <arg value="run"/>
         <arg value="unit"/>
+        <arg value="test/unit/${testNamespace}"/>                
         <arg value="-g"/>
         <arg value="${group}"/>
+        <arg value="--xml"/>
+        <arg value="--coverage-xml"/>
+        <arg value="--coverage-html"/>        
     </exec>
 </target>
