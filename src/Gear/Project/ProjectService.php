@@ -167,7 +167,7 @@ class ProjectService extends AbstractJsonService
         $file->setTemplate('template/project/jenkinsfile.phtml');
         $file->setOptions(['projectUrl' => $this->str('url', $this->getProjectName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
-        $file->setLocation($this->projectConfig->getProjectLocation());
+        $file->setLocation($this->getProjectRealFolder());
         return $file->render();
     }
 
@@ -178,7 +178,7 @@ class ProjectService extends AbstractJsonService
         $file->setTemplate('template/project/gitignore.phtml');
         $file->setOptions([***REMOVED***);
         $file->setFileName('.gitignore');
-        $file->setLocation($this->projectConfig->getProjectLocation());
+        $file->setLocation($this->getProjectRealFolder());
         return $file->render();
     }
 
