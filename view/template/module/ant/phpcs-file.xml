@@ -1,6 +1,0 @@
-<target name="phpcs-file" description="Code Sniffer" depends="set-vendor">
-   <exec executable="${vendor}/bin/phpcs">
-        <arg value="--standard=PSR2"/>
-        <arg path="${basedir}/src/${file}"/>
-    </exec>
-</target>

@@ -47,6 +47,7 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     /**
      * @covers \Gear\Project\Controller\ProjectController::diagnosticsAction
      * @group Diagnostic
+     * @group ABC
      * @dataProvider getTypes
      */
     public function testDiagnosticAction($type)

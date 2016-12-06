@@ -51,7 +51,6 @@ files:
     unit-coverage: 'set-vendor, build-helper'
     unit-group: 'set-vendor, build-helper'
     unit-coverage-group: 'set-vendor, build-helper'
-    unit-file-coverage: 'set-vendor, build-helper'
     phpunit: 'set-vendor'
     phpunit-group: 'set-vendor'
     phpunit-coverage: 'set-vendor'
