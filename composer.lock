@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "664a98e7c1d9d7935ef49d9ab07cd0e8",
+    "content-hash": "6f7385eeed6229f1dbc77f48ce318234",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -995,53 +995,6 @@
                 }
             },
             "time": "2016-11-29 06:09:01"
-        },
-        {
-            "name": "mauriciopiber/gear-json",
-            "version": "0.2.53",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "0f770973833a40baf4edcce245fd45c14614c400"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.53-419cc6.tar",
-                "reference": "0f770973833a40baf4edcce245fd45c14614c400",
-                "shasum": "75dab05f3da8046e9f73bed3229803f25cf9fe37"
-            },
-            "require": {
-                "doctrine/doctrine-module": "0.8.*",
-                "doctrine/doctrine-orm-module": "0.8.*",
-                "mauriciopiber/gear-base": "^0.2.0",
-                "php": ">=5.5",
-                "zendframework/zend-mvc": "~2.6.0",
-                "zendframework/zendframework": "^2.5.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^2.1.4",
-                "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "^0.2.0",
-                "mauriciopiber/gear-deploy": "^0.2.0",
-                "mauriciopiber/gear-jenkins": "^0.2.0",
-                "mauriciopiber/gear-version": "^0.2.0",
-                "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.0.3",
-                "phploc/phploc": "^2.1.5",
-                "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^4.8.19",
-                "sebastian/phpcpd": "^2.0.2",
-                "sebastian/phpdcd": "^1.0.2",
-                "squizlabs/php_codesniffer": "^2.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "GearJsonTest": "test/unit",
-                    "GearJson": "src"
-                }
-            },
-            "time": "2016-08-24 17:22:52"
         },
         {
             "name": "myclabs/deep-copy",
@@ -6097,16 +6050,16 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "2.2.6",
+            "version": "2.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "5fbe312c8138e71458ec1e715b0ce262331ca5a2"
+                "reference": "86770e89d266557c20dd0b1de5390e706f4770c1"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-5fbe312c8138e71458ec1e715b0ce262331ca5a2-zip-35ed82.tar",
-                "reference": "5fbe312c8138e71458ec1e715b0ce262331ca5a2",
+                "url": "https://mirror.pibernetwork.com/dist/codeception-codeception-86770e89d266557c20dd0b1de5390e706f4770c1-zip-0f0b2c.tar",
+                "reference": "86770e89d266557c20dd0b1de5390e706f4770c1",
                 "shasum": ""
             },
             "require": {
@@ -6124,7 +6077,7 @@
                 "symfony/browser-kit": ">=2.7 <4.0",
                 "symfony/console": ">=2.7 <4.0",
                 "symfony/css-selector": ">=2.7 <4.0",
-                "symfony/dom-crawler": ">=2.7 <4.0",
+                "symfony/dom-crawler": ">=2.7.5 <4.0",
                 "symfony/event-dispatcher": ">=2.7 <4.0",
                 "symfony/finder": ">=2.7 <4.0",
                 "symfony/yaml": ">=2.7 <4.0"
@@ -6140,7 +6093,8 @@
                 "pda/pheanstalk": "~3.0",
                 "php-amqplib/php-amqplib": "~2.4",
                 "predis/predis": "^1.0",
-                "squizlabs/php_codesniffer": "~2.0"
+                "squizlabs/php_codesniffer": "~2.0",
+                "vlucas/phpdotenv": "^2.4.0"
             },
             "suggest": {
                 "codeception/specify": "BDD-style code blocks",
@@ -6184,7 +6138,7 @@
                 "functional testing",
                 "unit testing"
             ***REMOVED***,
-            "time": "2016-10-27 00:00:34"
+            "time": "2016-12-05 04:12:24"
         },
         {
             "name": "facebook/webdriver",
@@ -6633,6 +6587,53 @@
                 }
             },
             "time": "2016-12-02 09:49:24"
+        },
+        {
+            "name": "mauriciopiber/gear-json",
+            "version": "0.2.53",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
+                "reference": "0f770973833a40baf4edcce245fd45c14614c400"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.53-419cc6.tar",
+                "reference": "0f770973833a40baf4edcce245fd45c14614c400",
+                "shasum": "75dab05f3da8046e9f73bed3229803f25cf9fe37"
+            },
+            "require": {
+                "doctrine/doctrine-module": "0.8.*",
+                "doctrine/doctrine-orm-module": "0.8.*",
+                "mauriciopiber/gear-base": "^0.2.0",
+                "php": ">=5.5",
+                "zendframework/zend-mvc": "~2.6.0",
+                "zendframework/zendframework": "^2.5.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.1.4",
+                "jakub-onderka/php-parallel-lint": "^0.9",
+                "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-deploy": "^0.2.0",
+                "mauriciopiber/gear-jenkins": "^0.2.0",
+                "mauriciopiber/gear-version": "^0.2.0",
+                "mikey179/vfsstream": "^1.6.2",
+                "pdepend/pdepend": "^2.0.3",
+                "phploc/phploc": "^2.1.5",
+                "phpmd/phpmd": "^2.3.2",
+                "phpunit/phpunit": "^4.8.19",
+                "sebastian/phpcpd": "^2.0.2",
+                "sebastian/phpdcd": "^1.0.2",
+                "squizlabs/php_codesniffer": "^2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "GearJsonTest": "test/unit",
+                    "GearJson": "src"
+                }
+            },
+            "time": "2016-08-24 17:22:52"
         },
         {
             "name": "mauriciopiber/gear-version",
