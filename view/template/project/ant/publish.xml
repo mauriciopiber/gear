@@ -1,6 +1,0 @@
-<target name="publish">
-    <symlink link="${basedir}/public/info/php" resource="${basedir}/build/coverage"/>
-    <symlink link="${basedir}/public/info/javascript" resource="${basedir}/build/coverage-js/PhantomJS 1.9.8 (Linux 0.0.0)"/>
-    <symlink link="${basedir}/public/info/api" resource="${basedir}/build/api"/>
-    <symlink link="${basedir}/public/info/features" resource="${basedir}/build/features"/>
-</target>
