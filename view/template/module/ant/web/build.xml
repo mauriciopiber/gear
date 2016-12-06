@@ -1,1 +1,1 @@
-<target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox, publish"/>
+<target name="build" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-coverage, phploc-ci, pdepend, phpdox"/>

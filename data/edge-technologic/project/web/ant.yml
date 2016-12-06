@@ -11,9 +11,8 @@ target:
   ## gear
   db-load: ''
   cache-load: ''
-  publish: ''
-  
-  build: 'prepare, parallel-lint, protractor, karma, jshint-ci, phpmd-ci, phpcs-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox, publish'
+    
+  build: 'prepare, parallel-lint, protractor, karma, jshint-ci, phpmd-ci, phpcs-ci, phpcpd-ci, unit-ci, phploc-ci, pdepend, phpdox'
   measure: 'prepare, parallel-lint, unit-ci, phploc-ci, pdepend, phpdox'
   parallel-lint: ''
   protractor: 'db-load, cache-load'
