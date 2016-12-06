@@ -32,16 +32,17 @@ node('master') {
         archiveUnitTestResults()
 
     }
-    /*
+    
     if (env.BRANCH_NAME == "master") {
         stage('Version') {
             sh '/usr/bin/php public/index.php gear deploy bump --hotfix'
         }
     }
-    */
+    /*
     stage('Measure') {
         build 'gear-release'
     }
+    */
     stage('Tear Down') {
         deleteDir();
     }
