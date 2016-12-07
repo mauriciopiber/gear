@@ -45,4 +45,3 @@ devDependencies:
   require-dir: "~0.3"
   run-sequence: "~1.0"
   yargs: "~3.0"
-

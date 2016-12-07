@@ -3,38 +3,39 @@
     <target name="phpcs-namespace" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=PSR2"/>
-            <arg path="${basedir}/test/unit"/>
+            <arg path="${basedir}/src/${namespace}"/>
         </exec>
     </target>
     <target name="phpmd-namespace" description="MessDetector" depends="set-vendor">
         <exec executable="${vendor}/bin/phpmd">
-            <arg path="${basedir}/src/${file}"/>
+            <arg path="${basedir}/src/${namespace}"/>
             <arg value="text"/>
             <arg value="${basedir}/test/phpmd.xml"/>
         </exec>
     </target>
     <target name="phpcpd-namespace" description="PHPCPD" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcpd">
-            <arg path="${basedir}/src/${file}"/>
+            <arg path="${basedir}/src/${namespace}"/>
         </exec>
     </target>
     <target name="phpcs-docs-namespace" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
             <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src/${file}"/>
+            <arg path="${basedir}/src/${namespace}"/>
         </exec>
     </target>
     <target name="unit-namespace" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, build-helper">
         <exec executable="${vendor}/bin/codecept" failonerror="true">
             <arg value="run"/>
             <arg value="unit"/>
-            <arg value="test/unit/${test}"/>
+            <arg value="test/unit/${testNamespace}"/>
         </exec>
     </target>
     <target name="unit-coverage-namespace" depends="set-vendor, build-helper" description="Run unit tests with Codeception For Continuous Integration">
         <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>
             <arg value="--xml"/>
             <arg value="--coverage-xml"/>
             <arg value="--coverage-html"/>
