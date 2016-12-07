@@ -229,8 +229,8 @@ EOS
         $result = $composer->diagnosticModule('web');
 
         $this->assertCount(2, $result);
-        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'bower', '3.1.0'), $result[0***REMOVED***);
-        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'protractor', '4.1.0'), $result[1***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'bower', '~1.6', '3.1.0'), $result[0***REMOVED***);
+        $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'protractor', '^3.0.0', '4.1.0'), $result[1***REMOVED***);
     }
 
 }

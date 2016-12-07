@@ -8,7 +8,6 @@
         <delete dir="${basedir}/build/phpdox"/>
         <delete dir="${basedir}/build/features"/>
         <delete dir="${basedir}/build/docs"/>
-        <delete dir="${basedir}/public/info"/>
     </target>
     <target name="prepare" depends="clean" description="Prepare for build">
         <mkdir dir="${basedir}/build/api"/>
@@ -18,7 +17,6 @@
         <mkdir dir="${basedir}/build/phpdox"/>
         <mkdir dir="${basedir}/build/features"/>
         <mkdir dir="${basedir}/build/docs"/>
-        <mkdir dir="${basedir}/public/info"/>
     </target>
     <target name="set-vendor" depends="is-as-module, is-as-vendor, is-as-project"/>
     <target name="is-as-module" depends="as-module" if="dir.exists">

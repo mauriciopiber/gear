@@ -28,7 +28,6 @@ exit 1
 
 fi
   
-vendor/bin/merge-migrations
 vendor/bin/phinx migrate
 
 echo "Deploy Development - Unload Bjy"

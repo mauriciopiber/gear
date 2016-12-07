@@ -14,7 +14,7 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     static public $requireDevNotFound = 'Nodejs - DevDependency "%s" com versão "%s"';
 
-    static public $requireDevVersion = 'Nodejs - DevDependency "%s" mudar para versão "%s"';
+    static public $requireDevVersion = 'Nodejs - DevDependency "%s" mudar para versão de %s para "%s"';
 
     static public $requireRun = 'Nodejs - Você deve rodar o comando npm install para utilizar os testes';
 
@@ -104,7 +104,7 @@ class NpmService extends AbstractJsonService implements ModuleDiagnosticInterfac
             }
 
             if ($composer[$package***REMOVED*** !== $version) {
-                $errors[***REMOVED*** = sprintf($requireDev, $package, $version);
+                $errors[***REMOVED*** = sprintf($requireDev, $package, $composer[$package***REMOVED***, $version);
             }
         }
 
