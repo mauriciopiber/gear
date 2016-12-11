@@ -7,11 +7,11 @@
         "robmorgan/phinx": "*",
         "doctrine/doctrine-module": "0.8.*",
         "php": ">=5.5",
-        "mauriciopiber/gear-base": "^0.2.0",
         "zendframework/zend-mvc": "~2.6.0",
         "zendframework/zendframework": "~2.5.0"
     },
     "require-dev": {
+        "mauriciopiber/gear-base": "^0.2.0",
         "phpspec/prophecy": "~1.0",
         "sebastian/phpcpd": "^2.0.2",
         "sebastian/phpdcd": "^1.0.2",
