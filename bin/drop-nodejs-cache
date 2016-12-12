@@ -6,7 +6,7 @@ ls -l $nodepath &> /dev/null
 
 if [ "$?" == "0" ***REMOVED***; then
 
-    rm -R $nodepath
+    sudo rm -R $nodepath
 
     echo "Cache NodeJS Removido com sucesso"
     
