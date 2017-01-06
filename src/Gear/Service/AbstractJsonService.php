@@ -15,7 +15,6 @@ use Gear\Table\TableService\TableTrait;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Column\Int\PrimaryKey;
-use Gear\Column\Int;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Creator\ControllerDependencyTrait;

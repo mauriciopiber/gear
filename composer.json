@@ -32,8 +32,7 @@
         "atrapalo/phpunit-memory-and-time-usage-listener": "dev-master",
         "zf-commons/zfc-twig": "^1.2.0",
         "nikic/php-parser": "^2.0.1",
-        "lox/xhprof" : "dev-master",
-        "mauriciopiber/test-listener-xhprof" : "~1.0.0"
+        "lox/xhprof" : "dev-master"
     },
     "autoload": {
         "psr-0": {
