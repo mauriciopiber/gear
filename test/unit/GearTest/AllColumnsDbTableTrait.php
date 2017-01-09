@@ -33,7 +33,7 @@ trait AllColumnsDbTableTrait
 
         $columns = [***REMOVED***;
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
             $this->prophesizeColumn('my_controller', 'id_my_controller', 'int'),
             $this->prophesizeForeignKey('my_controller', 'id_my_controller', 'PRIMARY KEY')
         );
@@ -63,11 +63,11 @@ trait AllColumnsDbTableTrait
             $this->prophesizeColumn('table', 'money_pt_br_column', 'decimal')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\Checkbox(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Checkbox(
             $this->prophesizeColumn('table', 'checkbox_column', 'int')
         );
 
-        $foreignKey = new \Gear\Column\Int\ForeignKey(
+        $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumn('table', 'id_foreign_key_column', 'int'),
             $this->prophesizeForeignKey('table', 'id_foreign_key_column', 'FOREIGN KEY', 'foreign_key_column')
         );
@@ -80,7 +80,7 @@ trait AllColumnsDbTableTrait
 
         $columns[***REMOVED*** = $foreignKey;
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\Int(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Int(
             $this->prophesizeColumn('table', 'int_column', 'int')
         );
 

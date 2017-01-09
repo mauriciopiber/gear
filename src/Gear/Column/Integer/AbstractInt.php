@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Column\Int;
+namespace Gear\Column\Integer;
 
 use Gear\Column\AbstractColumn;
 
@@ -35,7 +35,7 @@ abstract class AbstractInt extends AbstractColumn
      *
      * @param int $reference Número Base
      *
-     * @return \Gear\Column\Int\AbstractInt
+     * @return \Gear\Column\Integer\AbstractInt
      */
     public function setReference($reference)
     {

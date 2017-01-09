@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Column\Int;
+namespace Gear\Column\Integer;
 
 /**
  *
@@ -14,7 +14,7 @@ namespace Gear\Column\Int;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class Int extends AbstractInt
+class Integer extends AbstractInt
 {
     /**
      * @param ColumnObject $column Coluna

@@ -45,7 +45,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
 
         $columns = [***REMOVED***;
 
-        $columns[0***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+        $columns[0***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
             $this->prophesizeColumnUniqueNotNull('my_controller', 'id_my_controller', 'int'),
             $this->prophesizeForeignKeyUniqueNotNull('my_controller', 'id_my_controller', 'PRIMARY KEY')
         );
@@ -84,12 +84,12 @@ trait AllColumnsDbUniqueNotNullTableTrait
         );
         $columns[7***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'money_pt_br_column_unique_not_null'));
 
-        $columns[8***REMOVED*** = new \Gear\Column\Int\Checkbox(
+        $columns[8***REMOVED*** = new \Gear\Column\Integer\Checkbox(
             $this->prophesizeColumnUniqueNotNull('table', 'checkbox_column_unique_not_null', 'int')
         );
 
 
-        $foreignKey = new \Gear\Column\Int\ForeignKey(
+        $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnUniqueNotNull('table', 'id_foreign_key_column_unique_not_null', 'int'),
             $this->prophesizeForeignKeyUniqueNotNull('table', 'id_foreign_key_column_unique_not_null', 'FOREIGN KEY', 'foreign_key_column_unique_not_null')
         );
@@ -105,7 +105,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
         $columns[9***REMOVED*** = $foreignKey;
         $columns[9***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'id_foreign_key_column_unique_not_null'));
 
-        $columns[10***REMOVED*** = new \Gear\Column\Int\Int(
+        $columns[10***REMOVED*** = new \Gear\Column\Integer\Int(
             $this->prophesizeColumnUniqueNotNull('table', 'int_column_unique_not_null', 'int')
         );
         $columns[10***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'int_column_unique_not_null'));

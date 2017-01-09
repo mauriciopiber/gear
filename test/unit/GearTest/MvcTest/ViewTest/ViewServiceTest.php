@@ -42,7 +42,7 @@ class ViewServiceTest extends AbstractTestCase
         $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
         $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
 
-        $primaryKey = new \Gear\Column\Int\PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
+        $primaryKey = new \Gear\Column\Integer\PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
         $this->string = new \GearBase\Util\String\StringService();
         $primaryKey->setStringService($this->string);
 
@@ -55,7 +55,7 @@ class ViewServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
         $foreignKey->setStringService($this->string);
 
-        //$columnTest = $this->prophesize('Gear\Column\Int\ForeignKey');
+        //$columnTest = $this->prophesize('Gear\Column\Integer\ForeignKey');
 
         //$columns = $this->prophesize('Gear')
 

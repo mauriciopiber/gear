@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Column\Int;
+namespace Gear\Column\Integer;
 
-use Gear\Column\Int\AbstractCheckbox;
+use Gear\Column\Integer\AbstractCheckbox;
 
 /**
  *

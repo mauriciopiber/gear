@@ -94,7 +94,7 @@ class EntityTestServiceTest extends AbstractTestCase
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Int\ForeignKey(
+        $tableColumns[***REMOVED*** = new \Gear\Column\Integer\ForeignKey(
             $this->createColumn('table', 'created_by', 'int'),
             $this->createForeign('table', 'created_by', 'FOREIGN KEY', 'id_user', 'user')
         );
@@ -103,7 +103,7 @@ class EntityTestServiceTest extends AbstractTestCase
             $this->createColumn('table', 'created', 'datetime')
         );
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Int\ForeignKey(
+        $tableColumns[***REMOVED*** = new \Gear\Column\Integer\ForeignKey(
             $this->createColumn('table', 'updated_by', 'int'),
             $this->createForeign('table', 'updated_by', 'FOREIGN KEY', 'id_user', 'user')
         );

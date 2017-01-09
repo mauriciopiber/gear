@@ -1,13 +1,13 @@
 <?php
-namespace GearTest\ColumnTest\IntTest;
+namespace GearTest\ColumnTest\IntegerTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Int\Int;
+use Gear\Column\Integer\Integer;
 
 /**
  * @group AbstractColumn
  * @group Column\Int
- * @group Column\Int\Int
+ * @group Column\Integer\Int
  */
 class IntTest extends AbstractTestCase
 {
@@ -19,7 +19,7 @@ class IntTest extends AbstractTestCase
         $column->getDataType()->willReturn('int')->shouldBeCalled();
 
 
-        $this->int = new Int($column->reveal());
+        $this->int = new Integer($column->reveal());
 
     }
 

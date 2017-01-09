@@ -16,7 +16,7 @@ use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Int\ForeignKey;
 use Gear\Column\AbstractDateTime;
 use Gear\Column\Decimal\Decimal;
-use Gear\Column\Int\Int;
+use Gear\Column\Integer\Integer;
 use Gear\Column\TinyInt\TinyInt;
 use Gear\Column\Varchar\Varchar;
 use Gear\Column\Varchar\UniqueId;
