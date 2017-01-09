@@ -17,6 +17,7 @@ class MyTableRepositoryFactoryTest extends TestCase
         $this->serviceLocator->get('doctrine.entitymanager.orm_default')
             ->willReturn($this->prophesize('Doctrine\ORM\EntityManager')->reveal())
             ->shouldBeCalled();
+
         $this->serviceLocator->get('GearBase\Repository\QueryBuilder')
             ->willReturn($this->prophesize('GearBase\Repository\QueryBuilder')->reveal())
             ->shouldBeCalled();

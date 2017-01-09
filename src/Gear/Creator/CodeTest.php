@@ -22,7 +22,11 @@ EOS;
 
         $msg = PHP_EOL;
 
+        $alldep = count($src->getDependency());
+        
         foreach ($src->getDependency() as $i => $dependency) {
+        	
+        	$alldep -= 1;
 
             $fullname = $this->resolveNamespace($dependency);
 
@@ -30,7 +34,7 @@ EOS;
 
             $msg .= sprintf($template, $name, $fullname);
             $msg .= PHP_EOL;
-            if (isset($src->getDependency()[$i+1***REMOVED***)) {
+            if (is_integer($i) && isset($src->getDependency()[$i+1***REMOVED***) || $alldep > 0) {
                 $msg .= PHP_EOL;
             }
         }

@@ -47,4 +47,13 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
+    <target name="unit-group-namespace" depends="set-vendor, build-helper">
+        <exec executable="${vendor}/bin/codecept">
+            <arg value="run"/>
+            <arg value="unit"/>
+            <arg value="test/unit/${testNamespace}"/>
+            <arg value="-g"/>
+            <arg value="${group}"/>
+        </exec>
+    </target>
 </project>

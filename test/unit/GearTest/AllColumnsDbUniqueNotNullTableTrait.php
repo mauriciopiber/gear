@@ -105,7 +105,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
         $columns[9***REMOVED*** = $foreignKey;
         $columns[9***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'id_foreign_key_column_unique_not_null'));
 
-        $columns[10***REMOVED*** = new \Gear\Column\Integer\Int(
+        $columns[10***REMOVED*** = new \Gear\Column\Integer\Integer(
             $this->prophesizeColumnUniqueNotNull('table', 'int_column_unique_not_null', 'int')
         );
         $columns[10***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'int_column_unique_not_null'));

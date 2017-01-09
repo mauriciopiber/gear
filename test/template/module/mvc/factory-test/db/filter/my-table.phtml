@@ -17,6 +17,7 @@ class MyTableFilterFactoryTest extends TestCase
         $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
             ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
             ->shouldBeCalled();
+
         $this->serviceLocator->get('translate')
             ->willReturn($this->prophesize('Zend\Mvc\I18n\Translator')->reveal())
             ->shouldBeCalled();

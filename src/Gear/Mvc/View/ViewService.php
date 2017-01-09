@@ -205,7 +205,7 @@ class ViewService extends AbstractJsonService
         $formElements = [***REMOVED***;
         foreach ($dbColumns as $i => $columnData) {
             if ($columnData instanceof \Gear\Column\Varchar\UniqueId
-                || $columnData instanceof \Gear\Column\Int\PrimaryKey
+                || $columnData instanceof \Gear\Column\Integer\PrimaryKey
                 || !$columnData instanceof \Gear\Column\AbstractColumn
             ) {
                 continue;
@@ -593,7 +593,7 @@ EOS;
                 || $columnData instanceof \Gear\Column\Varchar\UploadImage
                 || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
                 || $columnData instanceof \Gear\Column\Varchar\UniqueId
-                || $columnData instanceof \Gear\Column\Int\Checkbox
+                || $columnData instanceof \Gear\Column\Integer\Checkbox
                 || $columnData instanceof \Gear\Column\Tinyint\Checkbox
 
             ) {

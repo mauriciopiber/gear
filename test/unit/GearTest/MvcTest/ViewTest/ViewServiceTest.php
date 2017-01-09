@@ -72,6 +72,7 @@ class ViewServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group ppfx
      * @dataProvider setUpBasicColumn
      */
     public function testCreateAction($columns)

@@ -14,8 +14,8 @@ namespace Gear\Mvc\Entity;
 use Gear\Mvc\AbstractMvc;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
-use Gear\Column\Int\ForeignKey;
-use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Integer\ForeignKey;
+use Gear\Column\Integer\PrimaryKey;
 
 class EntityTestService extends AbstractMvc
 {
