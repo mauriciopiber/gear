@@ -14,7 +14,7 @@ class AbstractCheckboxTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->abstractCheckbox = $this->getMockForAbstractClass('Gear\Column\Int\AbstractCheckbox', [***REMOVED***, '', false);
+        $this->abstractCheckbox = $this->getMockForAbstractClass('Gear\Column\Integer\AbstractCheckbox', [***REMOVED***, '', false);
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getName()->willReturn('my_column')->shouldBeCalled();
 

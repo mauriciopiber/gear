@@ -2,12 +2,12 @@
 namespace GearTest\ColumnTest\IntTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Integer\PrimaryKey;
 
 /**
  * @group AbstractColumn
  * @group Column\Int
- * @group Column\Int\PrimaryKey
+ * @group Column\Integer\PrimaryKey
  */
 class PrimaryKeyTest extends AbstractTestCase
 {

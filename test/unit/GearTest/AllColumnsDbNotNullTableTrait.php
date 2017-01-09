@@ -34,7 +34,7 @@ trait AllColumnsDbNotNullTableTrait
 
         $columns = [***REMOVED***;
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
             $this->prophesizeColumnNull('my_controller', 'id_my_controller', 'int'),
             $this->prophesizeForeignKeyNull('my_controller', 'id_my_controller', 'PRIMARY KEY')
         );
@@ -64,11 +64,11 @@ trait AllColumnsDbNotNullTableTrait
             $this->prophesizeColumnNull('table', 'money_pt_br_column_not_null', 'decimal')
         );
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\Checkbox(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Checkbox(
             $this->prophesizeColumnNull('table', 'checkbox_column_not_null', 'int')
         );
 
-        $foreignKey = new \Gear\Column\Int\ForeignKey(
+        $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnNull('table', 'id_foreign_key_column_not_null', 'int'),
             $this->prophesizeForeignKeyNull('table', 'id_foreign_key_column_not_null', 'FOREIGN KEY', 'foreign_key_column_not_null')
         );
@@ -81,7 +81,7 @@ trait AllColumnsDbNotNullTableTrait
 
         $columns[***REMOVED*** = $foreignKey;
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\Int(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Int(
             $this->prophesizeColumnNull('table', 'int_column_not_null', 'int')
         );
 

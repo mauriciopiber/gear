@@ -44,7 +44,7 @@ trait AllColumnsDbUniqueTableTrait
 
         $columns = [***REMOVED***;
 
-        $columns[0***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+        $columns[0***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
             $this->prophesizeColumnUnique('my_controller', 'id_my_controller', 'int'),
             $this->prophesizeForeignKeyUnique('my_controller', 'id_my_controller', 'PRIMARY KEY')
         );
@@ -83,12 +83,12 @@ trait AllColumnsDbUniqueTableTrait
         );
         $columns[7***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'money_pt_br_column_unique'));
 
-        $columns[8***REMOVED*** = new \Gear\Column\Int\Checkbox(
+        $columns[8***REMOVED*** = new \Gear\Column\Integer\Checkbox(
             $this->prophesizeColumnUnique('table', 'checkbox_column_unique', 'int')
         );
 
 
-        $foreignKey = new \Gear\Column\Int\ForeignKey(
+        $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnUnique('table', 'id_foreign_key_column_unique', 'int'),
             $this->prophesizeForeignKeyUnique('table', 'id_foreign_key_column_unique', 'FOREIGN KEY', 'foreign_key_column_unique')
         );
@@ -104,7 +104,7 @@ trait AllColumnsDbUniqueTableTrait
         $columns[9***REMOVED*** = $foreignKey;
         $columns[9***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'id_foreign_key_column_unique'));
 
-        $columns[10***REMOVED*** = new \Gear\Column\Int\Int(
+        $columns[10***REMOVED*** = new \Gear\Column\Integer\Int(
             $this->prophesizeColumnUnique('table', 'int_column_unique', 'int')
         );
         $columns[10***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'int_column_unique'));

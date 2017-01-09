@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Column\Int;
+namespace Gear\Column\Integer;
 
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
-use Gear\Column\Int\Int;
+use Gear\Column\Integer\Integer;
 use Gear\Column\Mvc\SearchFormInterface;
 
 /**
@@ -18,7 +18,7 @@ use Gear\Column\Mvc\SearchFormInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ForeignKey extends Int implements SearchFormInterface
+class ForeignKey extends Integer implements SearchFormInterface
 {
     protected $constraint;
 
@@ -156,7 +156,7 @@ EOS;
      * @param int $iterator Número Base
      *
      * {@inheritDoc}
-     * @see \Gear\Column\Int\Int::getValue()
+     * @see \Gear\Column\Integer\Integer::getValue()
      *
      * @return string
      */
@@ -273,7 +273,7 @@ EOS;
      *
      * @param ConstraintObject $constraint Constraint
      *
-     * @return \Gear\Column\Int\ForeignKey
+     * @return \Gear\Column\Integer\ForeignKey
      */
     public function setConstraint($constraint)
     {
@@ -296,7 +296,7 @@ EOS;
      *
      * @param array $helperStack Array com os helpers.
      *
-     * @return \Gear\Column\Int\ForeignKey
+     * @return \Gear\Column\Integer\ForeignKey
      */
     public function setHelperStack($helperStack)
     {
@@ -430,7 +430,7 @@ EOS;
      *
      * @param string $moduleName Nome do Módulo
      *
-     * @return \Gear\Column\Int\ForeignKey
+     * @return \Gear\Column\Integer\ForeignKey
      */
     public function setModuleName($moduleName)
     {

@@ -516,7 +516,7 @@ class AntUpgrade extends AbstractJsonService
         }
 
         if (($confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldAdd, $target))) === false) {
-            continue;
+            return $build;
         }
 
         switch ($function) {

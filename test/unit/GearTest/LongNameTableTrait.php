@@ -33,7 +33,7 @@ trait LongNameTableTrait
 
         $columns = [***REMOVED***;
 
-        $columns[***REMOVED*** = new \Gear\Column\Int\PrimaryKey(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
             $this->prophesizeColumnLongName('my_very_long_table_name_example', 'id_my_very_long_table_name_example', 'int'),
             $this->prophesizeForeignKeyLongName('my_very_long_table_name_example', 'id_my_very_long_table_name_example', 'PRIMARY KEY')
         );

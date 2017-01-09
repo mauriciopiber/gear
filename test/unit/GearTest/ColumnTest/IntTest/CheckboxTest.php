@@ -2,12 +2,12 @@
 namespace GearTest\ColumnTest\CheckboxTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Column\Int\Checkbox;
+use Gear\Column\Integer\Checkbox;
 
 /**
  * @group AbstractColumn
  * @group Column\Int
- * @group Column\Int\Checkbox
+ * @group Column\Integer\Checkbox
  */
 class CheckboxTest extends AbstractTestCase
 {

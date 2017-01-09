@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Column\Int;
+namespace Gear\Column\Integer;
 
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
-use Gear\Column\Int\Int;
+use Gear\Column\Integer\Integer;
 
 /**
  *
@@ -18,7 +18,7 @@ use Gear\Column\Int\Int;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class PrimaryKey extends Int
+class PrimaryKey extends Integer
 {
     /**
      * @param ColumnObject     $column     Coluna
