@@ -44,6 +44,7 @@ files:
     phpcpd: 'set-vendor'
     unit: 'set-vendor, build-helper'
     unit-group: 'set-vendor, build-helper'
+    unit-group-namespace: 'set-vendor, build-helper'    
     unit-coverage-group: 'set-vendor, build-helper'
     phpcs-docs: 'set-vendor'
   ant-namespace:

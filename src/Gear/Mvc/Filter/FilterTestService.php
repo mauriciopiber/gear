@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Filter;
 
 use Gear\Mvc\AbstractMvcTest;
-use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Mvc\Config\ServiceManagerTrait;
 
@@ -169,7 +169,7 @@ class FilterTestService extends AbstractMvcTest
 
         if (count($columnsDb)>0) {
             foreach ($columnsDb as $column) {
-                if ($column instanceof Gear\Column\Int\PrimaryKey
+                if ($column instanceof Gear\Column\Integer\PrimaryKey
                     || $column instanceof Gear\Column\Varchar\UniqueId
                 ) {
                     continue;

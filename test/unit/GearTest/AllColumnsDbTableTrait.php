@@ -80,7 +80,7 @@ trait AllColumnsDbTableTrait
 
         $columns[***REMOVED*** = $foreignKey;
 
-        $columns[***REMOVED*** = new \Gear\Column\Integer\Int(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Integer(
             $this->prophesizeColumn('table', 'int_column', 'int')
         );
 

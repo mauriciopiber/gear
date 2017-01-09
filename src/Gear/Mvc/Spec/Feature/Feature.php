@@ -371,10 +371,10 @@ class Feature extends AbstractMvcTest
             $column instanceof \Gear\Column\Varchar\UniqueId
             || $column instanceof \Gear\Column\Varchar\PasswordVerify
             || $column instanceof \Gear\Column\Varchar\UploadImage
-            || $column instanceof \Gear\Column\Int\AbstractCheckbox
-            || $column instanceof \Gear\Column\Int\PrimaryKey
+            || $column instanceof \Gear\Column\Integer\AbstractCheckbox
+            || $column instanceof \Gear\Column\Integer\PrimaryKey
             || $column instanceof \Gear\Column\Text\Text
-            || $column instanceof \Gear\Column\Int\ForeignKey
+            || $column instanceof \Gear\Column\Integer\ForeignKey
             || $column instanceof \Gear\Column\Decimal\MoneyPtBr
             || $column instanceof \Gear\Column\Datetime\DatetimePtBr
             || $column instanceof \Gear\Column\Date\DatePtBr
@@ -523,10 +523,10 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+            if (!($column instanceof \Gear\Column\Integer\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             ) && (
-                !(($column instanceof \Gear\Column\Int\AbstractCheckbox
+                !(($column instanceof \Gear\Column\Integer\AbstractCheckbox
                 || $column instanceof \Gear\Column\Varchar\UploadImage
                 || $column instanceof \Gear\Column\Varchar\PasswordVerify
                 || $column instanceof \Gear\Column\Decimal\MoneyPtBr
@@ -564,7 +564,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+            if (!($column instanceof \Gear\Column\Integer\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
             )) {
                 $fileText .= $column->getIntegrationActionSendKeys(55);
@@ -577,16 +577,16 @@ class Feature extends AbstractMvcTest
 
     public function validateInvalidRule($column)
     {
-        if (!($column instanceof \Gear\Column\Int\PrimaryKey
+        if (!($column instanceof \Gear\Column\Integer\PrimaryKey
             || $column instanceof \Gear\Column\Varchar\UniqueId
             || $column instanceof \Gear\Column\Text\Text
             || $column instanceof \Gear\Column\Varchar\PasswordVerify
-            || $column instanceof \Gear\Column\Int\ForeignKey
-            || $column instanceof \Gear\Column\Int\AbstractCheckbox
+            || $column instanceof \Gear\Column\Integer\ForeignKey
+            || $column instanceof \Gear\Column\Integer\AbstractCheckbox
             || $column instanceof \Gear\Column\Varchar\UploadImage
             || $column instanceof \Gear\Column\DateTime\AbstractDateTime
             || $column instanceof \Gear\Column\Decimal\Decimal
-            || $column instanceof \Gear\Column\Int\Int
+            || $column instanceof \Gear\Column\Integer\Integer
             || get_class($column) == 'Gear\Column\Varchar\Varchar'
         )) {
                 return true;
@@ -647,7 +647,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
+            if (!($column instanceof \Gear\Column\Integer\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
                 $fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
             }
         }
@@ -668,7 +668,7 @@ class Feature extends AbstractMvcTest
                 || $column instanceof \Gear\Column\Varchar\UploadImage
                 || $column instanceof \Gear\Column\Text\Html
                 || $column instanceof \Gear\Column\Text\Text
-                || $column instanceof \Gear\Column\Int\Checkbox
+                || $column instanceof \Gear\Column\Integer\Checkbox
                 || $column instanceof \Gear\Column\Tinyint\Checkbox
             )) {
                 $fileText .= $column->getIntegrationActionList();
@@ -686,7 +686,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Int\PrimaryKey
+            if (!($column instanceof \Gear\Column\Integer\PrimaryKey
                 || $column instanceof \Gear\Column\Varchar\UniqueId
                 || $column instanceof \Gear\Column\Varchar\PasswordVerify
             )) {

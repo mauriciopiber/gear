@@ -81,7 +81,7 @@ trait AllColumnsDbNotNullTableTrait
 
         $columns[***REMOVED*** = $foreignKey;
 
-        $columns[***REMOVED*** = new \Gear\Column\Integer\Int(
+        $columns[***REMOVED*** = new \Gear\Column\Integer\Integer(
             $this->prophesizeColumnNull('table', 'int_column_not_null', 'int')
         );
 

@@ -68,8 +68,8 @@ class MappingService extends AbstractJsonService
                 $type = 'text';
                 break;
 
-            case 'Gear\\Column\\Int\\Int':
-            case 'Gear\\Column\\Int\\Checkbox':
+            case 'Gear\\Column\\Integer\\Integer':
+            case 'Gear\\Column\\Integer\\Checkbox':
             case 'Gear\\Column\\Tinyint\\Tinyint':
             case 'Gear\\Column\\Tinyint\\Checkbox':
                 $type = 'int';
@@ -123,12 +123,12 @@ class MappingService extends AbstractJsonService
 
     public function extractTypeFromColumn($column)
     {
-        if ($column instanceof \Gear\Column\Int\ForeignKey) {
+        if ($column instanceof \Gear\Column\Integer\ForeignKey) {
             $this->type = 'join';
             return $this;
         }
 
-        if ($column instanceof \Gear\Column\Int\PrimaryKey) {
+        if ($column instanceof \Gear\Column\Integer\PrimaryKey) {
             $this->type = 'primary';
             return $this;
         }
@@ -142,7 +142,7 @@ class MappingService extends AbstractJsonService
 
         $column = $columnData->getColumn();
 
-        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
+        if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
             $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
             $tableReference = $tableReference->getReferencedTableName();
 
@@ -164,7 +164,7 @@ class MappingService extends AbstractJsonService
     {
         $column = $columnData->getColumn();
 
-        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
+        if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
             $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
             $tableReference = $tableReference->getReferencedTableName();
 
@@ -183,7 +183,7 @@ class MappingService extends AbstractJsonService
             'Gear\Column\Varchar\UploadImage',
             'Gear\Column\Text\Text',
             'Gear\Column\Text\Html',
-            'Gear\Column\Int\Checkbox',
+            'Gear\Column\Integer\Checkbox',
             'Gear\Column\Tinyint\Checkbox',
         ***REMOVED***)) {
             $this->tableName = $this->convertBooleanToString(false);
@@ -199,7 +199,7 @@ class MappingService extends AbstractJsonService
     {
         $column = $columnData->getColumn();
 
-        if ($columnData instanceof \Gear\Column\Int\ForeignKey) {
+        if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
             $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
             $tableReference = $tableReference->getReferencedTableName();
 
