@@ -32,6 +32,7 @@ if [ "$?" != "0" ***REMOVED***; then
         sudo npm install
         sudo node_modules/.bin/webdriver-manager update
         sudo tar -zcvf $nodepath/node_modules.tar.gz node_modules
+        sudo chown $(id -gn):$(id -gn) -R node_modules        
     fi
 
 fi
