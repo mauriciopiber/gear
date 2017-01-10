@@ -15,16 +15,16 @@ ls -l data/$moduleMysql &> /dev/null
 
 if [ "$?" == "0" ***REMOVED***; then
 
-echo "Deploy Development - Unload Bjy"
-vendor/bin/unload-module BjyAuthorize
+    echo "Deploy Development - Unload Bjy"
+    vendor/bin/unload-module BjyAuthorize
   
-echo "Deploy Develoment - Load DB"
-php public/index.php gear database module load $moduleName
+    echo "Deploy Develoment - Load DB"
+    php public/index.php gear database module load $moduleName
   
-echo "Deploy Develoment - Load Bjy Authorizate"
-php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+    echo "Deploy Develoment - Load Bjy Authorizate"
+    php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 
-exit 1
+    exit 1
 
 fi
   

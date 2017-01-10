@@ -2,8 +2,8 @@
 
 #### MODULE INFO
 
-module="ModuleWebTwo"
-moduleUrl="module-web-two"
+module="ModuleWeb"
+moduleUrl="module-web"
 base="/var/www/gear-package"
 modulepath="$base/$moduleUrl"
 gearpath="$base/gear"
