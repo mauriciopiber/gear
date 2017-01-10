@@ -5822,7 +5822,7 @@
             ***REMOVED***,
             "description": "PHPUnit Listener for measure time and memory usage",
             "homepage": "https://github.com/atrapalo/phpunit-memory-and-time-usage-listener",
-            "time": "2015-04-19T16:29:45+00:00"
+            "time": "2015-04-19 16:29:45"
         },
         {
             "name": "behat/behat",
@@ -6449,7 +6449,7 @@
                 "performance",
                 "profiling"
             ***REMOVED***,
-            "time": "2015-08-31T22:07:48+00:00"
+            "time": "2015-08-31 22:07:48"
         },
         {
             "name": "mauriciopiber/gear-base",
