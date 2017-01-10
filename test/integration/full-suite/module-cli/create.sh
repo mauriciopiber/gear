@@ -2,8 +2,8 @@
 
 #### MODULE INFO
 
-module="ModuleCliOne"
-moduleUrl="module-cli-one"
+module="ModuleCli"
+moduleUrl="module-cli"
 base="/var/www/gear-package"
 modulepath="$base/$moduleUrl"
 gearpath="$base/gear"
