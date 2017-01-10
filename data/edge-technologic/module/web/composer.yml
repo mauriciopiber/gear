@@ -25,6 +25,6 @@ require-dev:
   mauriciopiber/gear-jenkins: ^0.2.0
   mauriciopiber/gear-version: ^0.2.0
   johnkary/phpunit-speedtrap: ^1.0
-  lox/xhprof: dev-master
-  mauriciopiber/test-listener-xhprof : ~1.0.0
+#  lox/xhprof: dev-master
+#  mauriciopiber/test-listener-xhprof : ~1.0.0
   

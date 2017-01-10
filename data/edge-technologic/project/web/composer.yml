@@ -1,5 +1,4 @@
 require:
-    mrclay/minify : '2.2.*'
     rwoverdijk/assetmanager: '1.4.*'
     zendframework/zendframework: '^2.5.0'
     zendframework/zend-mvc: '~2.6.0'
