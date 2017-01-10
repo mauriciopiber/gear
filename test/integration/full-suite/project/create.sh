@@ -6,8 +6,8 @@ base="/var/www/gear-package"
 gearpath="$base/gear"
 
 
-project="ProjectModuleSix"
-projectUrl="project-module-six"
+project="ProjectModule"
+projectUrl="project-module"
 projectpath="$base/$project"
 
 
