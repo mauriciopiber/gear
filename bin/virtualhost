@@ -36,6 +36,7 @@ echo "<VirtualHost *:80>
 		AllowOverride All
 		Order allow,deny
 		Allow from all
+        Require all granted		
 	</Directory>
 </VirtualHost>" | sudo tee -a /etc/apache2/sites-available/$projectHost.conf
 
