@@ -53,7 +53,7 @@ return [
     'gear' => [
         'modules' => [
             'gear' => [
-                'version' => '0.2.110',
+                'version' => '0.2.111',
                 'acl' => true,
                 'name' => __NAMESPACE__,
                 'git' => 'git@bitbucket.org:mauriciopiber/gear.git'
