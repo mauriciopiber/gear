@@ -160,6 +160,23 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $this->columns;
     }
 
+    public function mapDataType($match)
+    {
+        switch ($match) {
+            case 'int':
+            case 'Int':
+
+                $word = 'Integer';
+                break;
+            default:
+
+                $word = $match;
+
+        }
+
+        return $this->str('class', $word);
+    }
+
     /**
      * Transforma uma metadata de coluna simples em Gear\Column.
      *
@@ -172,7 +189,11 @@ class ColumnService implements ServiceLocatorAwareInterface
     {
         $defaultNamespace = 'Gear\\Column';
 
-        $dataType = $this->str('class', $column->getDataType());
+        $dataType = $this->mapDataType($this->str('class', $column->getDataType()));
+
+
+
+
         $specialityName = $db->getColumnSpeciality($column->getName());
         $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($db->getTable(), $column);
 
