@@ -125,8 +125,6 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
             $controllerUrl  = $this->str('url', $this->action->getController()->getNameOff());
         }
 
-
-
         $page = [
             'label' => $this->str('label', $this->action->getRoute()),
         ***REMOVED***;
@@ -140,12 +138,32 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $page['route'***REMOVED*** = sprintf('%s/%s/%s', $moduleUrl, $controllerUrl, $this->str('url', $this->action->getRoute()));
 
-
+        //verify if route already exists
         foreach ($this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED*** as $i => $navigation) {
+
             if ($navigation['route'***REMOVED*** == sprintf('%s/%s', $moduleUrl, $controllerUrl)) {
+
+                $pageAlreadyExist = $this->verifyPage($navigation, $page['route'***REMOVED***);
+
+                if ($pageAlreadyExist === true) {
+                    continue;
+                }
                 $this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED***[$i***REMOVED***['pages'***REMOVED***[***REMOVED*** = $page;
             }
         }
+    }
+
+    public function verifyPage(array $navigation, $route)
+    {
+        if (isset($navigation['pages'***REMOVED***)) {
+            foreach ($navigation['pages'***REMOVED*** as $pag) {
+                if ($pag['route'***REMOVED*** === $route) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public function addControllerToNavigation()

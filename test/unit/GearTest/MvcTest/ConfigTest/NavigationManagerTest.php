@@ -142,11 +142,6 @@ class NavigationManagerTest extends AbstractTestCase
             $controller->addAction(new \GearJson\Action\Action($action));
         }
 
-
-
-
-
-
         $this->array = new \Gear\Util\Vector\ArrayService();
         //$this->array->setStringService($this->string);
 
@@ -154,6 +149,7 @@ class NavigationManagerTest extends AbstractTestCase
         $this->navigation->setModule($this->module->reveal());
         $this->navigation->setArrayService($this->array);
 
+        $file = $this->navigation->createDb($controller->getActions());
         $file = $this->navigation->createDb($controller->getActions());
 
         $this->assertEquals(

@@ -107,9 +107,13 @@ function complete {
     
     fi    
 
+    echo "repository create"
     cd $modulepath && sudo php public/index.php gear git repository create $module
+    echo "repository init"
     cd $modulepath && sudo php public/index.php gear git repository init
+    echo "jenkins create"
     cd $modulepath && sudo php public/index.php gear jenkins suite create $type
+    echo "build"
     cd $modulepath && sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type"
 
 
