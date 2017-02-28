@@ -1,113 +1,69 @@
 #!groovy
+@Library('gear-jenkins-library') _
 
-properties([[$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false***REMOVED***, parameters([booleanParam(defaultValue: false, description: '', name: 'publish'), string(defaultValue: '--hofix', description: '', name: 'increment')***REMOVED***), pipelineTriggers([***REMOVED***)***REMOVED***)
-
-
-node('master') {
-
-    stage('Prepare') {
-        checkout scm
-        sh 'script/deploy-testing.sh'
-        sh '/usr/bin/ant prepare'
+pipeline {
+    agent any
+    parameters {
+        string(name: 'increment', defaultValue: '--hotfix', description: 'What type of increment should be?')
+        booleanParam(name: 'publish', defaultValue: false, description: 'Should be published?')
     }
-    stage('Quality') {
-        sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci'
-    }
-    try {
-        stage('Unit PHP') {
-            sh '/usr/bin/ant unit-ci'
-        }
-    }
-    catch (err) {
-
-        archiveCopyPastResults()
-        archiveMessDetectorResults()
-        archiveCheckstyleResults()
-        archiveUnitTestResults()
-
-        throw err
-    }
-
-    stage('Report') {
-
-        archiveCopyPastResults()
-        archiveMessDetectorResults()
-        archiveCheckstyleResults()
-        archiveUnitTestResults()
-    }
-    if (env.BRANCH_NAME == "master") {
-        stage('Version') {
-        
-            if (params.publish) { 
-                sh "bin/release-version $increment"
-            } else {
-                sh "echo Skipping"
+    stages {
+        stage('Prepare') {
+            steps {
+                notifyBuild()
+                checkout scm
+                sh 'script/deploy-testing.sh'
+                sh '/usr/bin/ant prepare'
             }
         }
+        stage('Quality') {
+            steps {
+                sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci'
+            }
+        }
+        stage('Unit PHP') {
+            post { 
+                failure {
+                    postAction()    
+                }
+            }
+            steps { 
+                sh '/usr/bin/ant unit-ci'
+            }    
+        }        
+        stage('Report') {
+            steps { 
+                archiveArtifacts artifacts: "build/**/*", fingerprint: true
+                postAction()
+            }    
+        }
+        stage('Version') {
+            when {
+                expression {
+                    return params.publish
+                }
+            }
+            steps {
+                publishVersion(currentBuild, params.increment)
+            }
+        }
+        stage('Measure') {
+            when {
+                expression {
+                    return params.publish
+                }
+            }
+            steps { 
+                build job: 'gear-release', parameters: [
+                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+                ***REMOVED***
+            }
+        }           
     }
-    stage('Measure') {
-    
-        if (params.publish) {
-            archiveArtifacts artifacts: "build/**/*", fingerprint: true
-            build job: 'gear-release', parameters: [
-                [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
-            ***REMOVED***
-        } else {
-            sh "echo Skipping"
+    post {
+        always {
+            notifyBuild(currentBuild.result)
+            deleteDir() /* clean up our workspace */
         }
     }
-    stage('Satis') {
-        build job: 'publish-satis'
-    }
-    stage('Tear Down') {
-    
-        if (params.publish) {
-            actualVersion = sh (
-                script: "/usr/bin/php public/index.php gear version --clean",
-                returnStdout: true
-            ).trim()
-
-            currentBuild.description = "${actualVersion}"
-        } 
-        
-        deleteDir();
-    }
-}
-
-def archiveCopyPastResults() {
-
-    step([$class: "DryPublisher",
-            canComputeNew: false,
-            defaultEncoding: "",
-            healthy: "100",
-            pattern: "build/logs/pmd-cpd.xml",
-            unHealthy: "80"***REMOVED***)
-
-}
-
-def archiveCheckstyleResults() {
-
-    step([$class: "CheckStylePublisher",
-            canComputeNew: false,
-            defaultEncoding: "",
-            healthy: "100",
-            pattern: "build/logs/checkstyle.xml",
-            unHealthy: "80"***REMOVED***)
-
-}
-
-def archiveMessDetectorResults() {
-
-    step([$class: "PmdPublisher",
-            canComputeNew: false,
-            defaultEncoding: "",
-            healthy: "100",
-            pattern: "build/logs/pmd.xml",
-            unHealthy: "80"***REMOVED***)
-
-}
-
-def archiveUnitTestResults() {
-
-    junit 'build/report.xml'
 }

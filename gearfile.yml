@@ -7,3 +7,4 @@ src:
         namespace: Util\Yaml
         service: invokables
         extends: Service\AbstractJsonService                                     
+        
