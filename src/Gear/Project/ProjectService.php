@@ -136,6 +136,8 @@ class ProjectService extends AbstractJsonService
 
         //cria
         $this->getIndexDocs();
+        
+        $this->getChangelogDocs();
 
         //cria
         $this->getReadme();
