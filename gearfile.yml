@@ -7,4 +7,8 @@ src:
         namespace: Util\Yaml
         service: invokables
         extends: Service\AbstractJsonService                                     
-        
+    migrations:
+        name: MigrationsService
+        type: Service
+        namespace: Phinx
+        service: factories

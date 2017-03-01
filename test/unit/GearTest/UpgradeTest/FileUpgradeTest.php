@@ -8,6 +8,7 @@ use Gear\Util\Yaml\YamlService;
 
 /**
  * @group FileUpgrade
+ * @group EdgeFile
  */
 class FileUpgradeTest extends AbstractTestCase
 {

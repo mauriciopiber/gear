@@ -2,6 +2,7 @@ files:
     0: README.md
     1: mkdocs.yml
     2: docs/index.md
+    21: docs/CHANGELOG.md
     3: phpdox.xml
     4: phinx.yml
     5: script/deploy-testing.sh
