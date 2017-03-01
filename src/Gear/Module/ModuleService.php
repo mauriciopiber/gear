@@ -425,6 +425,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->getReadme();
         $this->getConfigDocs();
         $this->getIndexDocs();
+        $this->getChangelogDocs();
 
         $this->createModuleFile();
         $this->createModuleFileAlias();
@@ -748,6 +749,16 @@ class ModuleService implements ModuleProjectConnectorInterface
         return $this->getDocs()->createConfig();
     }
 
+    /**
+     * Cria arquivo docs/index.md para página inicial da configuração.
+     *
+     * @return string
+     */
+    public function getChangelogDocs()
+    {
+        return $this->getDocs()->createChangelog();
+    }
+    
     /**
      * Cria arquivo docs/index.md para página inicial da configuração.
      *

@@ -93,6 +93,9 @@ class FileUpgrade extends AbstractJsonService
             case 'docs/index.md':
                 $found = $this->getProjectService()->getIndexDocs();
                 break;
+            case 'docs/CHANGELOG.md':
+                $found = $this->getProjectService()->getChangelogDocs();
+                break;
             case 'phpdox.xml':
                 $found = $this->getProjectService()->getPhpdoxConfig();
                 break;
@@ -166,6 +169,9 @@ class FileUpgrade extends AbstractJsonService
                 break;
             case 'docs/index.md':
                 $found = $this->getModuleService()->getIndexDocs();
+                break;
+            case 'docs/CHANGELOG.md':
+                $found = $this->getModuleService()->getChangelogDocs();
                 break;
             case 'phpdox.xml':
                 $found = $this->getModuleService()->getPhpdoxConfig();

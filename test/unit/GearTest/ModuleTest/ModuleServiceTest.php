@@ -314,6 +314,7 @@ class ModuleServiceTest extends TestCase
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
         $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createChangelog()->shouldBeCalled();
 
         $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml';
 
@@ -472,6 +473,7 @@ class ModuleServiceTest extends TestCase
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
         $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createChangelog()->shouldBeCalled();
 
         /**
         $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml';
@@ -607,6 +609,7 @@ class ModuleServiceTest extends TestCase
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
         $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createChangelog()->shouldBeCalled();
 
 
         /**
@@ -743,6 +746,7 @@ class ModuleServiceTest extends TestCase
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
         $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createChangelog()->shouldBeCalled();
 
         $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml';
 
