@@ -9,6 +9,7 @@ use Gear\Diagnostic\File\FileService;
  * @group Diagnostic
  * @group FileService
  * @group FileDiagnostic
+ * @group EdgeFile
  */
 class FileServiceTest extends AbstractTestCase
 {

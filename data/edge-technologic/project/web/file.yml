@@ -19,3 +19,4 @@ files:
   18: phpcs-docs.xml
   19: Jenkinsfile
   30: .gitignore
+  31: docs/CHANGELOG.md
