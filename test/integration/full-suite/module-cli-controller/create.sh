@@ -2,8 +2,8 @@
 
 #### MODULE INFO
 
-module="ModuleCliController"
-moduleUrl="module-cli-controller"
+module="ModuleCli"
+moduleUrl="module-cli"
 base="/var/www/gear-package"
 modulepath="$base/$moduleUrl"
 gearpath="$base/gear"
@@ -16,8 +16,8 @@ cd $gearpath && sudo php public/index.php gear module-as-project create $module 
 cd $modulepath && sudo script/deploy-development.sh
 
 
-cd $gearpath && cp test/integration/full-suite/module-cli-controller/gearfile.yml "$modulepath"
-cd $modulepath && sudo php public/index.php gear module construct ModuleCliController "$base" 
+cd $gearpath && cp test/integration/full-suite/module-cli/gearfile.yml "$modulepath"
+cd $modulepath && sudo php public/index.php gear module construct ModuleCli "$base" 
 
 cd $modulepath && sudo script/load.sh
 
@@ -27,4 +27,4 @@ ant phpcpd
 ant unit
 ant phpcs-docs
 
-#complete $module $modulepath module-cli
+complete $module $modulepath module-cli
