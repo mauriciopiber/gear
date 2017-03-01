@@ -13,6 +13,24 @@ class Docs extends AbstractJsonService
         $this->fileCreator = $file;
     }
 
+    public function createChangelog()
+    {
+    
+        $config = [
+            'label' => $this->str('label', $this->getModule()->getModuleName()),
+        ***REMOVED***;
+    
+        $location = $this->getModule()->getDocsFolder();
+    
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/docs/CHANGELOG.phtml'));
+        $file->setOptions($config);
+        $file->setLocation($location);
+        $file->setFileName('CHANGELOG.md');
+    
+        return $file->render();
+    }
+    
     public function createIndex($type = 'web')
     {
 

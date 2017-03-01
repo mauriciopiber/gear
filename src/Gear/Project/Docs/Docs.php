@@ -17,6 +17,39 @@ class Docs extends AbstractJsonService
         $this->fileCreator = $file;
     }
 
+
+    public function createChangelog($name = null, $location = null)
+    {
+    
+        if ($name === null) {
+            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+        }
+    
+        $label = $this->str('label', $name);
+    
+        if (is_dir($location)) {
+            $this->setProject($location);
+        }
+    
+        $config = [
+            'label' => $label,
+        ***REMOVED***;
+    
+        $location = $this->getProject().'/docs';
+    
+        if (!is_dir($location)) {
+            mkdir($location);
+        }
+    
+        $file = $this->getFileCreator();
+        $file->setTemplate('template/project/docs/CHANGELOG.phtml');
+        $file->setOptions($config);
+        $file->setLocation($location);
+        $file->setFileName('CHANGELOG.md');
+    
+        return $file->render();
+    }
+    
     public function createIndex($name = null, $location = null)
     {
 

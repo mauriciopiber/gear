@@ -82,6 +82,8 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
+        
+        $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 
@@ -141,6 +143,8 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
+        
+        $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 
@@ -207,6 +211,8 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getIndexDocs()->willReturn(true)->shouldBeCalled();
+        
+        $this->projectService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 

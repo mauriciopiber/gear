@@ -188,6 +188,7 @@ class ProjectService extends AbstractJsonService
         return $this->getDocs()->createReadme($this->getProjectName(), $this->getProjectRealFolder());
     }
 
+    
     public function getConfigDocs()
     {
         return $this->getDocs()->createConfig($this->getProjectName(), $this->getProjectRealFolder());
@@ -199,6 +200,14 @@ class ProjectService extends AbstractJsonService
         return $this->getDocs()->createIndex($this->getProjectName(), $this->getProjectRealFolder());
     }
 
+
+    public function getChangelogDocs()
+    {
+    
+        return $this->getDocs()->createChangelog($this->getProjectName(), $this->getProjectRealFolder());
+    }
+    
+    
     /**
      * Cria diretórios extras e ignores.
      * @param string $projectLocation
