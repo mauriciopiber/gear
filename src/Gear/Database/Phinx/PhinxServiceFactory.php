@@ -25,6 +25,8 @@ class PhinxServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new PhinxService(
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\FileCreator')
         );
         unset($serviceLocator);
         return $factory;
