@@ -4,6 +4,15 @@ $options = ' '.implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
+            'gear-database-migration-create' => [
+                'options' => [
+                    'route' => 'gear database migration create [<module>***REMOVED*** [<name>***REMOVED***',
+                    'defaults' => [
+                        'controller' => 'Gear\Controller\Db',
+                        'action' => 'create-migration'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
             'gear-database-mock' => [
                 'options' => [
                     'route' => 'gear database mock <module> <table>' . $options,
