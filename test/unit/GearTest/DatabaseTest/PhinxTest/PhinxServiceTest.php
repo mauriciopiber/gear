@@ -22,8 +22,9 @@ class PhinxServiceTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+
         
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        //$this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         //$this->module->getPublicJsSpecEndFolder()
         //->willReturn(vfsStream::url('module/public/js/spec/e2e'))
         //->shouldBeCalled();
@@ -58,32 +59,76 @@ class PhinxServiceTest extends TestCase
         //$this->file = new FileService();
 
         $this->service = new PhinxService(
-            $this->module->reveal(),
-            $this->fileCreator,
-            $this->string
+            $this->string,
+            $this->fileCreator
         );
+        
+        $this->root = vfsStream::setup('base');
+        
+        $this->service->setProject(vfsStream::url('base'));
+        
+        vfsStream::newDirectory('data')->at($this->root);
+        vfsStream::newDirectory('data/migrations')->at($this->root);
     }
     
     
     public function migrationData()
     {
         return [
-            ['2017-01-01 02:03:54', 'myMigration'***REMOVED***,
-            ['2017-01-01 02:06:54', 'myssX Migration'***REMOVED***,
-            ['2017-01-01 02:09:54', 'myssX-igration'***REMOVED***,
-            ['2017-01-01 02:12:54', 'myssX igration'***REMOVED***,
-            ['2017-01-01 02:15:54', 'MyssX Igration'***REMOVED***
+            [null, '2017-01-01 02:03:54', 'myMigration', '20170101020354_my_migration'***REMOVED***,
+            //['2017-01-01 02:06:54', 'myssX Migration'***REMOVED***,
+            //['2017-01-01 02:09:54', 'myssX-igration'***REMOVED***,
+            //['2017-01-01 02:12:54', 'myssX igration'***REMOVED***,
+            //['2017-01-01 02:15:54', 'MyssX Igration'***REMOVED***
+        ***REMOVED***;
+    }
+
+    public function generateNameData()
+    {
+        return [
+            ['2017-01-01 02:03:54', 'myMigration', '20170101020354_my_migration.php', 'MyMigration'***REMOVED***,
+            ['2017-01-01 23:03:54', 'my-Migration', '20170101230354_my_migration.php', 'MyMigration'***REMOVED***,
+            //['2017-01-01 02:06:54', 'myssX Migration'***REMOVED***,
+            //['2017-01-01 02:09:54', 'myssX-igration'***REMOVED***,
+            //['2017-01-01 02:12:54', 'myssX igration'***REMOVED***,
+            //['2017-01-01 02:15:54', 'MyssX Igration'***REMOVED***
         ***REMOVED***;
     }
     
     /**
-     * @dataProvider migrationData
+     * @dataProvider generateNameData
      */
-    public function testCreateMigration($date, $name)
+    public function testGenerateValidFileName($data, $input, $file, $class)
+    {
+        $this->service->setNow(new DateTime($data));
+        $this->assertEquals($file, $this->service->createFileName($input));
+    }
+
+    /**
+     * @dataProvider generateNameData
+     */
+    public function testGenerateValidClassName($data, $input, $file, $class)
+    {
+        $this->assertEquals($class, $this->service->createClassName($input));
+    }
+    
+    /**
+     * @dataProvider migrationData
+     * @group fucku
+     */
+    public function testCreateMigration($module, $date, $name, $expected)
     {
         $this->service->setNow(new DateTime($date));
         
-        $this->assertTrue($this->service->createMigration(null, $name));
+        $location = $this->service->createMigration($name);
+        
+        $this->assertFileExists($location);
+        
+        
+        $expectedFile = file_get_contents(__DIR__.'/_files/'.$expected.'.phtml');
+        $result = file_get_contents($location);
+        
+        $this->assertEquals($expectedFile, $result);
         
     }
 

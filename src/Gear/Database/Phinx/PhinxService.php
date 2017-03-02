@@ -2,6 +2,11 @@
 namespace Gear\Database\Phinx;
 
 use DateTime;
+use Gear\Project\ProjectLocationTrait;
+use GearBase\Util\String\StringService;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Creator\File;
+use Gear\Creator\FileCreatorTrait;
 
 /**
  * PHP Version 5
@@ -16,13 +21,21 @@ class PhinxService
 {
     private $now;
     
+    use ProjectLocationTrait;
+    
+    use StringServiceTrait;
+    
+    use FileCreatorTrait;
+    
     /**
      * Constructor
      *
      * @return \Gear\Database\Phinx\PhinxService
      */
-    public function __construct()
+    public function __construct(StringService $stringService, File $fileCreator)
     {
+        $this->stringService = $stringService;
+        $this->fileCreator = $fileCreator;
         return $this;
     }
 
@@ -40,14 +53,32 @@ class PhinxService
         return $this->now;
     }
     
-    public function createMigration($module = null, $name)
+    public function createClassName($name)
+    {
+        $string = $this->str('class', $name);
+        return $string;
+    }
+    
+    public function createFileName($name)
+    {
+        $uline = $this->str('uline', $name);
+        $string = sprintf('%s_%s.php', $this->getNow()->format('YmdHis'), $uline);
+        
+        return $string;
+    }
+    
+    
+    public function createMigration($name)
     {
         
-        //se módulo não foi passado, utilizar getProjectLocation()
+        $this->file = $this->getFileCreator();
+        $this->file->setTemplate('template/database/migration.phtml');
+        $this->file->setFileName($this->createFileName($name));
+        $this->file->setLocation($this->getProject().'/data/migrations');
+        $this->file->setOptions(
+            ['name' => $this->createClassName($name)***REMOVED***    
+        );
         
-        
-        //se módulo foi passado, usar $module->getMIgrationFolder()
-        return true;
-        
+        return $this->file->render();
     }
 }
