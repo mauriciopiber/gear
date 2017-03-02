@@ -453,6 +453,7 @@ EOS
         $this->docs->createReadme('GearProject', "vfs://project/GearProject")->shouldBeCalled();
         $this->docs->createConfig('GearProject', "vfs://project/GearProject")->shouldBeCalled();
         $this->docs->createIndex('GearProject', "vfs://project/GearProject")->shouldBeCalled();
+        $this->docs->createChangelog('GearProject', "vfs://project/GearProject")->shouldBeCalled();
 
 
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');

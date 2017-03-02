@@ -1,39 +1,105 @@
 #!groovy
+@Library('gear-jenkins-library') _
 
-node {
-    stage('Prepare') {
-        checkout scm
-        sh 'script/deploy-testing.sh'
-        sh '/usr/bin/ant prepare'
-        sh '/usr/bin/ant parallel-lint'
+pipeline {
+    agent any
+    parameters {
+        string(name: 'increment', defaultValue: '--hotfix', description: 'What type of increment should be?')
+        booleanParam(name: 'publish', defaultValue: false, description: 'Should be published?')
     }
-    stage('Unit PHP') {
-        sh '/usr/bin/ant unit-ci'
-    }
-    stage('Quality') {
-        sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci jshint-ci'
-    }
-    stage('Unit JS') {
-        sh '/usr/bin/ant karma'
-    }
-    stage('Integration') {
-        sh '/usr/bin/ant protractor'
-    }
-    stage('Report') {
-        archiveArtifacts artifacts: "build/**/*", fingerprint: true
-    }
-    if (env.BRANCH_NAME == "master") {
+    stages {
+        stage('Prepare') {
+            steps {
+                notifyBuild()
+                checkout scm
+                sh 'script/deploy-testing.sh'
+                sh '/usr/bin/ant prepare'
+                sh '/usr/bin/ant parallel-lint'                
+            }
+        }
+        stage('Quality') {
+            steps {
+                sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci jshint-ci'
+            }
+        }
+        stage('Unit PHP') {
+            post { 
+                failure {
+                    postAction()    
+                }
+            }
+            steps { 
+                sh '/usr/bin/ant unit-ci'
+            }    
+        }
+        stage('Unit JS') {
+            post { 
+                failure {
+                    postKarma()
+                    postAction()    
+                }
+            }
+            steps { 
+                sh '/usr/bin/ant karma'
+            }    
+        }          
+        stage('Integration') {
+            post { 
+                failure {
+                    postProtractor()
+                    postKarma()
+                    postAction()    
+                }
+            }
+            steps { 
+                sh '/usr/bin/ant protractor'
+            }    
+        }                                  
+        stage('Report') {
+            steps { 
+                archiveArtifacts artifacts: "build/**/*", fingerprint: true
+                postKarma()
+                postProtractor()                   
+                postAction()
+            }    
+        }
         stage('Version') {
-            sh '/usr/bin/php public/index.php gear deploy bump --hotfix'
+            when {
+                expression {
+                    return params.publish
+                }
+            }
+            steps {
+                publishVersion(currentBuild, params.increment)
+            }
         }
+        stage('Staging') {
+            steps {
+                echo "Sending to Staging"
+            }
+        }
+        stage('Production') {
+            steps {
+                echo "Sending to Staging"
+            }
+        }        
         stage('Measure') {
-            build job: 'my-project-release', parameters: [
-                [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
-            ***REMOVED***
-        }
+            when {
+                expression {
+                    return params.publish
+                }
+            }
+            steps {
+                build job: 'my-project-release', parameters: [
+                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+                ***REMOVED***
+            }
+        }           
     }
-    stage('Tear Down') {
-        sh 'sudo chmod 777 -R data'
-        deleteDir()
+    post {
+        always {
+            notifyBuild(currentBuild.result)
+            deleteDir() /* clean up our workspace */
+        }
     }
 }
