@@ -2,6 +2,7 @@ site_name: Gear 1.0.0
 theme: simplex
 pages:
     - 'Introdução': 'index.md'
+    - 'Changelog': 'CHANGELOG.md'
     - 'Module': 
       - 'Geral' : 'module.md'
       - 'Column' : 'column.md'
