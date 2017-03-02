@@ -14,6 +14,8 @@ function tearDown {
     
     module=${1}
     modulepath=${2}
+    
+    moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "$module")
 
 
     ls -l $modulepath/vendor/autoload.php &> /dev/null
@@ -21,7 +23,8 @@ function tearDown {
     if [ "${?}" == 0 ***REMOVED***; then
      
         cd $modulepath && php public/index.php gear git repository delete $module --force
-        cd $modulepath && php public/index.php gear jenkins suite delete    
+        cd $modulepath && php public/index.php gear jenkins suite delete
+        cd $modulepath && php public/index.php gear jira version delete "$moduleUrl-0.1.1"    
         
     fi;
 
@@ -40,10 +43,6 @@ function tearDown {
         sudo rm -R $modulepath/schema
         
     fi;
-
-    
-
-
 }
 
 
@@ -113,8 +112,10 @@ function complete {
     cd $modulepath && sudo php public/index.php gear git repository init
     echo "jenkins create"
     cd $modulepath && sudo php public/index.php gear jenkins suite create $type
+    echo "create first version"
+    cd $modulepath && vendor/bin/fast-release --hotfix "Fast Release" "Fast Release" "1h" "30" "12:00" "12:10"
     echo "build"
-    cd $modulepath && sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type"
+    cd $modulepath && sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type" --hotfix
 
 
 }
