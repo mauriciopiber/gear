@@ -7,6 +7,7 @@ use Gear\Database\SchemaToolServiceTrait;
 use Gear\Database\TableServiceTrait;
 use Gear\Database\BackupServiceTrait;
 use Gear\Database\AutoincrementServiceTrait;
+use Gear\Database\Phinx\PhinxServiceTrait;
 
 class DbController extends AbstractConsoleController
 {
@@ -15,7 +16,25 @@ class DbController extends AbstractConsoleController
     use TableServiceTrait;
     use BackupServiceTrait;
     use AutoincrementServiceTrait;
+    use PhinxServiceTrait;
 
+    
+    public function createMigrationAction()
+    {
+        $module = $this->getRequest()->getParam('module', null);
+        $name = $this->getRequest()->getParam('name');
+        
+        $result = $this->getPhinxService()->createMigration($module, $name);
+        
+        $model = new ConsoleModel();
+        
+        if ($result === false) {
+            $model->setErrorLevel(1);
+        }
+        
+        return $model;
+    }
+    
     public function createColumnAction()
     {
         $tableName = $this->getRequest()->getParam('table');

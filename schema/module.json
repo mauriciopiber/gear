@@ -574,6 +574,22 @@
                 "abstract": false,
                 "service": "factories",
                 "template": null
+            },
+            {
+                "name": "PhinxService",
+                "type": "Service",
+                "dependency": [
+
+                ***REMOVED***,
+                "db": null,
+                "namespace": "Database\\Phinx",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": [
+
+                ***REMOVED***
             }
         ***REMOVED***,
         "controller": [
@@ -587,6 +603,10 @@
                     },
                     {
                         "name": "drop-table",
+                        "role": "guest"
+                    },
+                    {
+                        "name": "create-migration",
                         "role": "guest"
                     },
                     {

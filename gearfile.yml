@@ -8,7 +8,7 @@ src:
         service: invokables
         extends: Service\AbstractJsonService                                     
     migrations:
-        name: MigrationsService
+        name: PhinxService
         type: Service
-        namespace: Phinx
+        namespace: Database\Phinx
         service: factories

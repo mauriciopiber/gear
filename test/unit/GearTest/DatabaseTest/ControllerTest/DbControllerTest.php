@@ -52,6 +52,24 @@ class DbControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+
+    public function testCreateMigration()
+    {
+        $phinx = $this->prophesize('Gear\Database\Phinx\PhinxService');
+    
+        $phinx->createMigration(null, null)->willReturn(true);
+    
+        $this->controller->setPhinxService($phinx->reveal());
+    
+        $this->request->setParams(new Parameters([***REMOVED***));
+    
+        $this->routeMatch->setParam('action', 'create-migration');
+        $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+    
+    
     public function testProjectLoad()
     {
         $backup = $this->prophesize('Gear\Database\BackupService');
