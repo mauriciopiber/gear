@@ -104,7 +104,8 @@ class ModuleServiceTest extends TestCase
         $this->config = [
             'gear' => [
                 'project' => [
-                    'name' => 'GearProject'
+                    'name' => 'GearProject',
+                    'git' => 'git@pibernetwork.com/gear-project.git',
                 ***REMOVED***
             ***REMOVED***
 
@@ -191,6 +192,51 @@ class ModuleServiceTest extends TestCase
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents(vfsStream::url('module/deploy-development.sh'))
+        );
+    }
+    
+    /**
+     * @group script2
+     */
+    public function testScriptInstallStaging()
+    {
+        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        
+        $this->createModuleRealFiles();
+        
+        $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
+        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/gear-it.git')->shouldBeCalled();
+        
+        //$this->moduleService->setModule($this->module->reveal());
+        $this->moduleService->getInstallStagingScript();
+        
+        $expected = $this->templates.'/install-staging.sh';
+        
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('module/install-staging.sh'))
+        );
+        
+    }
+    
+    /**
+     * @group script2
+     */
+    public function testScriptDeployStaging()
+    {
+        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        
+        $this->createModuleRealFiles();
+        
+        $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
+        //$this->moduleService->setModule($this->module->reveal());
+        $this->moduleService->getStagingScript();
+        
+        $expected = $this->templates.'/deploy-staging.sh';
+        
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents(vfsStream::url('module/deploy-staging.sh'))
         );
     }
 

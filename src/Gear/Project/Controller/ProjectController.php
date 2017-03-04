@@ -131,9 +131,12 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
 
         $type = $this->getRequest()->getParam('type', 'web');
+        
+        $staging = $this->getRequest()->getParam('staging', null);
+        $production = $this->getRequest()->getParam('production', null);
 
         $projectService = $this->getProjectService();
-        $projectService->create($type);
+        $projectService->create($type, $staging, $production);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();

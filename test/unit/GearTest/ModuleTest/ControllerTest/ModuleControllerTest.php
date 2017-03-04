@@ -166,11 +166,16 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type)->willReturn(true);
+        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br')->willReturn(true);
 
         $this->controller->setModuleService($diagnostic->reveal());
 
-        $this->request->setParams(new Parameters(['type' => $type, 'module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
+        $this->request->setParams(new Parameters([
+            'type' => $type, 
+            'module' => 'Gearing', 
+            'basepath' => '/var/www/teste',
+            'staging' => 'stag.com.br',
+        ***REMOVED***));
 
         $this->routeMatch->setParam('action', 'module-as-project');
         $this->controller->dispatch($this->request);

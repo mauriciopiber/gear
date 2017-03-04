@@ -14,7 +14,7 @@ class Env {
             return;
         }
 
-        if (!in_array($environment, ['development', 'testing'***REMOVED***)) {
+        if (!in_array($environment, ['DEVELOPMENT', 'TESTING', 'STAGING', 'PRODUCTION'***REMOVED***)) {
             throw new \Exception('Não é seguro iniciar o sistema com o enviroment definido incorretamente: '.$environment);
         }
 

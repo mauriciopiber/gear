@@ -363,6 +363,8 @@ EOS
 
         $request = $this->prophesize('Zend\Console\Request');
         $request->getParam('type', 'web')->willReturn('web');
+        $request->getParam('staging', null)->willReturn('staging.com.br');
+        $request->getParam('production', null)->willReturn('production.com.br');
         $request->getParam('basepath', null)->willReturn(vfsStream::url('project'));
         $request->getParam('project', null)->willReturn($name);
         $request->getParam('host', null)->willReturn($host);
@@ -487,7 +489,7 @@ EOS
         $this->project->setFileService($fileService->reveal());
         $this->project->setComposerService($composerService->reveal());
 
-        $result = $this->project->create();
+        $result = $this->project->create('web');
         $this->assertTrue($result);
 
         /**

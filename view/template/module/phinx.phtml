@@ -2,8 +2,8 @@ paths:
     migrations: %%PHINX_CONFIG_DIR%%/{data/migrations,vendor/mauriciopiber/**/migrations,,vendor/mauriciopiber/**/data/migrations}
 environments:
     default_migration_table: migrations
-    default_database: development
-    development:
+    default_database: DEVELOPMENT
+    DEVELOPMENT:
         adapter: mysql
         host: localhost
         name: <?php echo $this->module.PHP_EOL;?>
@@ -11,7 +11,7 @@ environments:
         pass: gear
         port: 3306
         charset: utf8
-    testing:
+    TESTING:
         adapter: mysql
         host: localhost
         name: <?php echo $this->module.PHP_EOL;?>
@@ -19,3 +19,12 @@ environments:
         pass: gear
         port: 3306
         charset: utf8
+    STAGING:
+        adapter: mysql
+        host: localhost
+        name: <?php echo $this->module.PHP_EOL;?>
+        user: root
+        pass: gear
+        port: 3306
+        charset: utf8
+        

@@ -12,7 +12,7 @@ source "$gearpath/test/integration/full-suite/functions.sh"
 
 tearDown $module $modulepath
 
-cd $gearpath && sudo php public/index.php gear module-as-project create $module $base --type=web --force
+cd $gearpath && sudo php public/index.php gear module-as-project create $module $base --type=web --force --staging="module-web.stag01.pibernetwork.com"
 
 cd $modulepath && sudo script/deploy-development.sh
 
@@ -29,3 +29,4 @@ cd $modulepath && sudo php public/index.php gear database fix
 cd $modulepath && sudo script/load.sh
 
 complete $module $modulepath module-web
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ssh deployer@<?php echo $this->host;?> << EOF
+    cd /var/www/staging/<?php echo $this->moduleUrl.PHP_EOL;?>
+    sudo git pull
+    sudo composer install -o
+    export PHINX_ENVIRONMENT=STAGING
+    sudo vendor/bin/phinx migrate
+EOF

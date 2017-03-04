@@ -11,11 +11,11 @@ class Env {
         $environment = getenv('PHINX_ENVIRONMENT');
 
         if (empty($environment)) {
-            define('PHINX_ENVIRONMENT', 'development');
+            define('PHINX_ENVIRONMENT', 'DEVELOPMENT');
             return;
         }
 
-        if (!in_array($environment, ['development', 'testing'***REMOVED***)) {
+        if (!in_array($environment, ['DEVELOPMENT', 'TESTING'***REMOVED***)) {
             throw new \Exception('Não é seguro iniciar o sistema com o enviroment definido incorretamente: '.$environment);
         }
 

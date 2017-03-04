@@ -17,7 +17,7 @@ echo "Deploy Testing - VirtualHost"
 
 ls -l /etc/apache2/sites-enabled/<?php echo $this->moduleUrl;?>.gear.dev.conf > /dev/null
 if [ "$?" != "0" ***REMOVED***; then
-    sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev testing
+    sudo vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev TESTING
 fi
 
 echo "Deploy Testing - Database"
