@@ -92,6 +92,10 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptTesting('web')->willReturn(true)->shouldBeCalled();
+        
+        $this->moduleService->getStagingScript()->willReturn(true)->shouldBeCalled();
+        
+        $this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptLoad('web')->willReturn(true)->shouldBeCalled();
 

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+ssh deployer@<?php echo $this->host;?> << EOF
+    cd /var/www/staging
+    sudo git clone <?php echo $this->git.PHP_EOL;?>
+    cd <?php echo $this->moduleUrl.PHP_EOL;?>
+    sudo git pull
+    sudo composer install -o
+    export PHINX_ENVIRONMENT=STAGING
+
+    sudo vendor/bin/virtualhost  /var/www/staging/<?php echo $this->moduleUrl;?> <?php echo $this->host;?> STAGING
+    sudo chmod 777 -R data/DoctrineModule/cache
+    sudo chmod 777 -R data/DoctrineORMModule/Proxy
+    sudo chmod 777 -R data/cache/configcache
+    sudo chmod 777 -R data/session
+    sudo chmod 777 -R data/logs
+    
+    sudo vendor/bin/install-db-module <?php echo $this->dbFile;?> <?php echo $this->module.PHP_EOL;?>
+    
+    sudo vendor/bin/phinx migrate
+EOF

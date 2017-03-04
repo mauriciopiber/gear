@@ -182,6 +182,12 @@ class FileUpgrade extends AbstractJsonService
             case 'script/deploy-testing.sh':
                 $found = $this->getModuleService()->getScriptTesting($type);
                 break;
+            case 'script/deploy-staging.sh':
+                $found = $this->getModuleService()->getStagingScript();
+                break;
+            case 'script/install-staging.sh':
+                $found = $this->getModuleService()->getInstallStagingScript();
+                break;
             case 'script/load.sh':
                 $found = $this->getModuleService()->getScriptLoad($type);
                 break;

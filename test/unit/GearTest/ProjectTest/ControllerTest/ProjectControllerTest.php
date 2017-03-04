@@ -96,11 +96,15 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
     {
         $diagnostic = $this->prophesize('Gear\Project\ProjectService');
 
-        $diagnostic->create($type)->willReturn(true);
+        $diagnostic->create($type, 'stag.com.br', 'prod.com.br')->willReturn(true);
 
         $this->controller->setProjectService($diagnostic->reveal());
 
-        $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
+        $this->request->setParams(new Parameters([
+            'type' => $type,
+            'staging' => 'stag.com.br',
+            'production' => 'prod.com.br'
+        ***REMOVED***));
 
         $this->routeMatch->setParam('action', 'create');
         $this->controller->dispatch($this->request);

@@ -20,7 +20,8 @@ return [
             /** 2.1 */
             'gear-module-as-project-create' => [
                 'options' => [
-                    'route' => 'gear module-as-project create <module> <basepath> [--type=***REMOVED*** [--force***REMOVED*** ' . $options,
+                    'route' => 'gear module-as-project create <module>'
+                    . ' <basepath> [--type=***REMOVED*** [--force***REMOVED*** [--staging=***REMOVED*** ' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'module-as-project'

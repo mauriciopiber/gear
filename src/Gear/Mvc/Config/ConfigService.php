@@ -25,6 +25,8 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
     protected $languageService;
 
+    const GIT_PATTERN = 'git@bitbucket.org:mauriciopiber/%s.git';
+    
    /**
      * Função responsável por adicionar as configurações de um DB à um módulo já existente.
      *
@@ -126,15 +128,29 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
         return true;
     }
-
-    public function getModuleConfig($type, $controllers)
+    
+    
+    public function getGit($git = null)
     {
+        if (!empty($git)) {
+            return $git;
+        }
+        
+        return sprintf(self::GIT_PATTERN, $this->str('url', $this->getModule()->getModuleName()));
+    }
+
+    public function getModuleConfig($type, $controllers, $git = null)
+    {
+        $git = $this->getGit($git);
+        
+        
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
         $file->setOptions(array(
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'controllers' => $controllers
+            'controllers' => $controllers,
+            'git' => $git
         ));
         $file->setFileName('module.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());

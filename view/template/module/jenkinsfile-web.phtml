@@ -75,7 +75,7 @@ pipeline {
         }
         stage('Staging') {
             steps {
-                echo "Sending to Stage"
+                sh 'script/deploy-staging.sh'
             }
         }
         stage('Measure') {

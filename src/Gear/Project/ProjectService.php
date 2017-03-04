@@ -43,6 +43,10 @@ class ProjectService extends AbstractJsonService
 
     static public $clone = 'installer-utils/clone-skeleton';
 
+    protected $staging;
+    
+    protected $production;
+    
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
@@ -50,13 +54,15 @@ class ProjectService extends AbstractJsonService
      * Gerará projetos na pasta irmã ao projeto específico
      * @return string
      */
-    public function create()
+    public function create($type, $staging = null, $production = null)
     {
         $request = $this->getRequest();
 
         $basepath = $request->getParam('basepath', null);
 
         $type = $request->getParam('type', 'web');
+        $this->staging = $request->getParam('staging', null);
+        $this->production = $request->getParam('production', null);
 
         if ($basepath !== null && !is_dir($basepath)) {
             throw new BasePathNotFoundException();
@@ -696,6 +702,30 @@ EOS
 
         return $script;
     }
+    
+    public function getScriptInstallProduction()
+    {
+        $script = $this->getProjectScript();
+        
+        return $this->getFileCreator()->createFile(
+            'template/project/script/install-remote-production.phtml',
+            [***REMOVED***,
+            'install-production.sh',
+            $script
+        );
+    }
+    
+    public function getScriptInstallStaging()
+    {
+        $script = $this->getProjectScript();
+        
+        return $this->getFileCreator()->createFile(
+            'template/project/script/install-remote-staging.phtml',
+            [***REMOVED***,
+            'install-staging.sh',
+            $script
+        );
+    }
 
     public function getScriptDevelopment()
     {
@@ -788,11 +818,13 @@ EOS
     {
         $this->getScriptDevelopment();
         $this->getScriptStaging();
+        $this->getScriptInstallStaging();
+        $this->getScriptInstallProduction();
         $this->getScriptProduction();
         $this->getScriptTesting();
         $this->getScriptLoad();
     }
-
+    
 
     public function getPackageConfig()
     {

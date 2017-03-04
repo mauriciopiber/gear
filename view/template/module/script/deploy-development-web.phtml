@@ -16,7 +16,7 @@ echo "Deploy Develoment - VirtualHost"
 ls -l /etc/apache2/sites-enabled/<?php echo $this->moduleUrl;?>.gear.dev.conf > /dev/null
 
 if [ "$?" != "0" ***REMOVED***; then
-    vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev development
+    vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev DEVELOPMENT
 fi
 
 

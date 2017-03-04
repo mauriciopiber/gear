@@ -40,7 +40,15 @@ files:
     options:
       module: 'my_module'
     location: 'script'
-    filename: 'deploy-testing.sh'    
+    filename: 'deploy-testing.sh'
+  91:
+    template: 'template/module/script/deploy-staging.phtml'
+    location: 'script'
+    filename: 'deploy-staging.sh'   
+  90:
+    template: 'template/module/script/install-remote-staging.phtml'
+    location: 'script'
+    filename: 'install-staging.sh'               
   8:
     template: 'template/module/script/load-web.phtml'
     options:
