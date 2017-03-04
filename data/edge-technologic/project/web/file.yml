@@ -3,6 +3,8 @@ files:
   2: script/deploy-development.sh
   3: script/deploy-production.sh
   4: script/deploy-staging.sh
+  32: script/install-staging.sh
+  33: script/install-production.sh
   5: script/load.sh
   7: gulpfile.js
   8: data/config.json

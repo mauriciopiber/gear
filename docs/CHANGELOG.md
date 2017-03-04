@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.119***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12208) - 04/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Adicionado installer staging e production ao File Upgrade [[#GP-193***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-193)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.118***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12207) - 04/03/2017
 
 ### Adicionados
