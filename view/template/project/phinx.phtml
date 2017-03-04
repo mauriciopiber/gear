@@ -3,8 +3,8 @@ paths:
 
 environments:
     default_migration_table: migrations
-    default_database: development
-    development:
+    default_database: DEVELOPMENT
+    DEVELOPMENT:
         adapter: mysql
         host: localhost
         name: <?php echo $this->database.PHP_EOL;?>
@@ -12,7 +12,7 @@ environments:
         pass: <?php echo $this->password.PHP_EOL;?>
         port: 3306
         charset: utf8
-    testing:
+    TESTING:
         adapter: mysql
         host: localhost
         name: <?php echo $this->database.PHP_EOL;?>
@@ -20,19 +20,19 @@ environments:
         pass: <?php echo $this->password.PHP_EOL;?>
         port: 3306
         charset: utf8
-    staging:
+    STAGING:
         adapter: mysql
-        host: ''
-        name: ''
-        user: ''
-        pass: ''
+        host: localhost
+        name: <?php echo $this->database.PHP_EOL;?>
+        user: <?php echo $this->username.PHP_EOL;?>
+        pass: <?php echo $this->password.PHP_EOL;?>
         port: 3306
         charset: utf8
-    production:
+    PRODUCTION:
         adapter: mysql
-        host: ''
-        name: ''
-        user: ''
-        pass: ''
+        host: localhost
+        name: <?php echo $this->database.PHP_EOL;?>
+        user: <?php echo $this->username.PHP_EOL;?>
+        pass: <?php echo $this->password.PHP_EOL;?>
         port: 3306
         charset: utf8

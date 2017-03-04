@@ -16,7 +16,7 @@ source "$gearpath/test/integration/full-suite/functions.sh"
 tearDownProject $project $projectpath
 
 cd $gearpath && sudo php public/index.php gear project create $project --basepath=$base --force \
- --staging=project-web.stag01.pibernetwork.com
+ --staging=project-web.stag01.pibernetwork.com \
  --production=project-web.pibernetwork.com
 
 cd $projectpath && sudo script/deploy-development.sh

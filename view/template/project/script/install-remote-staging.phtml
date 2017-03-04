@@ -7,7 +7,8 @@ ssh -o "StrictHostKeyChecking no" deployer@<?php echo $this->host;?> << EOF
     sudo git pull
     sudo composer install -o
     export PHINX_ENVIRONMENT=STAGING
-
+    sudo cp config/autoload/local.php.dist config/autoload/local.php
+    
     sudo vendor/bin/virtualhost  /var/www/staging/<?php echo $this->projectUrl?> <?php echo $this->host;?> STAGING
     sudo chmod 777 -R data/DoctrineModule/cache
     sudo chmod 777 -R data/DoctrineORMModule/Proxy
