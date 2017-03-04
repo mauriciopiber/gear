@@ -227,6 +227,10 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService->getScriptStaging()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getScriptProduction()->willReturn(true)->shouldBeCalled();
+        
+        $this->projectService->getScriptInstallProduction()->willReturn(true)->shouldBeCalled();
+        
+        $this->projectService->getScriptInstallStaging()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();
 

@@ -114,6 +114,12 @@ class FileUpgrade extends AbstractJsonService
             case 'script/deploy-production.sh':
                 $found = $this->getProjectService()->getScriptProduction();
                 break;
+            case 'script/install-production.sh':
+                $found = $this->getProjectService()->getScriptInstallProduction();
+                break;
+            case 'script/install-staging.sh':
+                $found = $this->getProjectService()->getScriptInstallStaging();
+                break;
             case 'phpmd.xml':
                 $found = $this->getProjectService()->copyPHPMD();
                 break;
