@@ -7,6 +7,7 @@ ssh -o "StrictHostKeyChecking no" deployer@my-project.pibernetwork.com << EOF
     sudo git pull
     sudo composer install -o
     export PHINX_ENVIRONMENT=PRODUCTION
+    sudo cp config/autoload/local.php.dist config/autoload/local.php
 
     sudo vendor/bin/virtualhost  /var/www/production/my-project my-project.pibernetwork.com PRODUCTION
     sudo chmod 777 -R data/DoctrineModule/cache

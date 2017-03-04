@@ -74,11 +74,31 @@ pipeline {
             }
         }
         stage('Staging') {
+            when {
+                expression {
+                    return params.publish
+                }
+            }        
             steps {
                 sh 'script/deploy-staging.sh'
             }
         }
+        stage('Approve') {
+            when {
+                expression {
+                    return params.publish
+                }
+            }        
+            steps {
+                input 'Deploy?'
+            }
+        }
         stage('Production') {
+            when {
+                expression {
+                    return params.publish
+                }
+            }        
             steps {
                 sh 'script/deploy-production.sh'
             }
