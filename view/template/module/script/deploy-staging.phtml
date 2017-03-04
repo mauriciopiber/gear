@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh deployer@<?php echo $this->host;?> << EOF
+ssh -o "StrictHostKeyChecking no" deployer@<?php echo $this->host;?> << EOF
     cd /var/www/staging/<?php echo $this->moduleUrl.PHP_EOL;?>
     sudo git pull
     sudo composer install -o

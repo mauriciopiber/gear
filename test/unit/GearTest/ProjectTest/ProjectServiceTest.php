@@ -39,7 +39,8 @@ class ProjectServiceTest extends AbstractTestCase
             'gear' => [
                 'project' => [
                     'name' => 'MyProject',
-                    'host' => 'my-project.gear.dev'
+                    'host' => 'my-project.gear.dev',
+                    'git' => 'git@bitbucket.org:mauriciopiber/my-project.git'
                 ***REMOVED***
             ***REMOVED***,
             'doctrine' => [
@@ -77,8 +78,9 @@ class ProjectServiceTest extends AbstractTestCase
             ['getScriptDevelopment', 'script/deploy-development'***REMOVED***,
             ['getScriptStaging', 'script/deploy-staging'***REMOVED***,
             ['getScriptProduction', 'script/deploy-production'***REMOVED***,
+            ['getScriptInstallStaging', 'script/install-staging'***REMOVED***,
+            ['getScriptInstallProduction', 'script/install-production'***REMOVED***,
             ['getScriptTesting', 'script/deploy-testing'***REMOVED***,
-
             ['getGulpfileJs', 'gulpfile.js'***REMOVED***,
             ['getGulpfileConfig', 'data/config.json'***REMOVED***,
             ['getConfigDocs', 'mkdocs.yml'***REMOVED***,
@@ -104,8 +106,9 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::newDirectory('script')->at($this->projectDir);
         vfsStream::newDirectory('data')->at($this->projectDir);
 
-
         $this->project = new \Gear\Project\ProjectService();
+        $this->project->setStaging('my-project.stag01.pibernetwork.com');
+        $this->project->setProduction('my-project.pibernetwork.com');
         $this->project->setConfig($this->config);
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project'));

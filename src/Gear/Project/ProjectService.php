@@ -703,13 +703,57 @@ EOS
         return $script;
     }
     
+    public function getProduction()
+    {
+        return $this->production;
+    }
+    
+    public function setProduction($production)
+    {
+        $this->production = $production;
+        return $this;
+    }
+     
+    public function getStaging()
+    {
+        return $this->staging;
+    }
+    
+    public function setStaging($staging)
+    {
+        $this->staging = $staging;    
+        return $this;
+    }
+    
+    public function getProjectGit()
+    {
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            $projectName = $this->projectConfig->getGit();
+        } else {
+            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['git'***REMOVED***;
+        }
+        
+        return $projectName;
+    }
+    
     public function getScriptInstallProduction()
     {
+        $projectName = $this->str('class', $this->getProjectName());
+        
+        $projectUrl = $this->str('url', $projectName);
+        
+        $options = [***REMOVED***;
+        $options['host'***REMOVED*** = $this->getProduction();
+        $options['projectUrl'***REMOVED*** = $projectUrl;
+        $options['git'***REMOVED*** = $this->getProjectGit();
+        $options['project'***REMOVED*** = $projectName;
+        $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $projectUrl);
+        
         $script = $this->getProjectScript();
         
         return $this->getFileCreator()->createFile(
             'template/project/script/install-remote-production.phtml',
-            [***REMOVED***,
+            $options,
             'install-production.sh',
             $script
         );
@@ -717,11 +761,22 @@ EOS
     
     public function getScriptInstallStaging()
     {
+        $projectName = $this->str('class', $this->getProjectName());
+        
+        $projectUrl = $this->str('url', $projectName);
+        
+        $options = [***REMOVED***;
+        $options['host'***REMOVED*** = $this->getStaging();
+        $options['projectUrl'***REMOVED*** = $projectUrl;
+        $options['git'***REMOVED*** = $this->getProjectGit();
+        $options['project'***REMOVED*** = $projectName;
+        $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $projectUrl);
+        
         $script = $this->getProjectScript();
         
         return $this->getFileCreator()->createFile(
             'template/project/script/install-remote-staging.phtml',
-            [***REMOVED***,
+            $options,
             'install-staging.sh',
             $script
         );
@@ -747,17 +802,18 @@ EOS
     public function getScriptStaging()
     {
         $script = $this->getProjectScript();
-        $projectName = $this->getProjectName();
+        
+        $projectName = $this->str('class', $this->getProjectName());
+        
         $projectUrl = $this->str('url', $projectName);
-
-
-
+        
+        $options = [***REMOVED***;
+        $options['host'***REMOVED*** = $this->getStaging();
+        $options['projectUrl'***REMOVED*** = $projectUrl;
+        
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-staging.phtml',
-            array(
-                'project' => $projectName,
-                'projectUrl' => $projectUrl,
-            ),
+            $options,
             'deploy-staging.sh',
             $script
         );
@@ -799,16 +855,18 @@ EOS
     public function getScriptProduction()
     {
         $script = $this->getProjectScript();
-        $projectName = $this->getProjectName();
+        
+        $projectName = $this->str('class', $this->getProjectName());
+        
         $projectUrl = $this->str('url', $projectName);
-
-
+        
+        $options = [***REMOVED***;
+        $options['host'***REMOVED*** = $this->getProduction();
+        $options['projectUrl'***REMOVED*** = $projectUrl;
+        
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-production.phtml',
-            array(
-                'project' => $projectName,
-                'projectUrl' => $projectUrl,
-            ),
+            $options,
             'deploy-production.sh',
             $script
         );
