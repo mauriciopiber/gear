@@ -11,6 +11,7 @@ use GearBase\Util\File\FileService;
 use Gear\Creator\File;
 use GearBase\Util\String\StringService;
 use Gear\Project\Docs\Docs;
+use Gear\Project\ProjectService;
 
 /**
  * @group Project
@@ -69,7 +70,25 @@ class ProjectServiceTest extends AbstractTestCase
 
 
     }
+    
+    /**
+     * @group stag1
 
+    public function testCreateStaging()
+    {
+        vfsStream::newDirectory('script')->at($this->projectDir);
+        
+        $this->project = new ProjectService();
+        
+        $file = $this->project->getScriptStaging();
+        
+        $this->assertEquals(
+            file_get_contents(sprintf($this->template.'/script/deploy-staging.phtml', $template)),
+            file_get_contents($file)
+        );
+    }
+     */
+    
     public function scriptData()
     {
         return [

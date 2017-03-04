@@ -7,6 +7,7 @@ ssh -o "StrictHostKeyChecking no" deployer@my-project.stag01.pibernetwork.com <<
     sudo git pull
     sudo composer install -o
     export PHINX_ENVIRONMENT=STAGING
+    sudo cp config/autoload/local.php.dist config/autoload/local.php
 
     sudo vendor/bin/virtualhost  /var/www/staging/my-project my-project.stag01.pibernetwork.com STAGING
     sudo chmod 777 -R data/DoctrineModule/cache

@@ -403,6 +403,7 @@ class ModuleServiceTest extends TestCase
         $this->fileCreator->render()->shouldBeCalled();
          */
 
+        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
@@ -569,6 +570,8 @@ class ModuleServiceTest extends TestCase
         $this->feature->createIndexFeature('Gear Project')->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
+        
+        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),
