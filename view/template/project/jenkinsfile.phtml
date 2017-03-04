@@ -75,12 +75,12 @@ pipeline {
         }
         stage('Staging') {
             steps {
-                echo "Sending to Staging"
+                sh 'script/deploy-staging.sh'
             }
         }
         stage('Production') {
             steps {
-                echo "Sending to Staging"
+                sh 'script/deploy-production.sh'
             }
         }        
         stage('Measure') {

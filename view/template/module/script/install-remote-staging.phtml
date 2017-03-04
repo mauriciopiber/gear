@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh deployer@<?php echo $this->host;?> << EOF
+ssh -o "StrictHostKeyChecking no" deployer@<?php echo $this->host;?> << EOF
     cd /var/www/staging
     sudo git clone <?php echo $this->git.PHP_EOL;?>
     cd <?php echo $this->moduleUrl.PHP_EOL;?>

@@ -1,1 +1,21 @@
 #!/bin/bash
+
+ssh -o "StrictHostKeyChecking no" deployer@<?php echo $this->host;?> << EOF
+    cd /var/www/production
+    sudo git clone <?php echo $this->git.PHP_EOL;?>
+    cd <?php echo $this->projectUrl.PHP_EOL;?>
+    sudo git pull
+    sudo composer install -o
+    export PHINX_ENVIRONMENT=PRODUCTION
+
+    sudo vendor/bin/virtualhost  /var/www/production/<?php echo $this->projectUrl?> <?php echo $this->host;?> PRODUCTION
+    sudo chmod 777 -R data/DoctrineModule/cache
+    sudo chmod 777 -R data/DoctrineORMModule/Proxy
+    sudo chmod 777 -R data/cache/configcache
+    sudo chmod 777 -R data/session
+    sudo chmod 777 -R data/logs
+    
+    sudo vendor/bin/install-db-project <?php echo $this->dbFile?> <?php echo $this->project.PHP_EOL;?>
+    
+    sudo vendor/bin/phinx migrate
+EOF
