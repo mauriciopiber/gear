@@ -4,6 +4,46 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.118***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12207) - 04/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Adicionado Scripts [[#GP-192***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-192)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
+## [0.2.117***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12206) - 04/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Adicionado Scripts [[#GP-191***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-191)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.115***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/11703) - 02/03/2017
 
 ### Adicionados
