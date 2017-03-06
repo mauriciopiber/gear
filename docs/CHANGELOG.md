@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.121***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12213) - 06/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Mudar estrutura de ProjectService de invokables para factories [[#GP-195***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-195)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.120***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12211) - 06/03/2017
 
 ### Adicionados
