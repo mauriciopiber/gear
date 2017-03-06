@@ -15,6 +15,8 @@ use Gear\Upgrade\AntUpgradeTrait;
 use Gear\Upgrade\NpmUpgradeTrait;
 use Gear\Project\ProjectConfigTrait;
 use Gear\Project\Exception\BasePathNotFoundException;
+use GearBase\Config\GearConfig;
+use GearBase\Config\GearConfigTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -23,6 +25,8 @@ use Gear\Project\Exception\BasePathNotFoundException;
  */
 class ProjectService extends AbstractJsonService
 {
+    use GearConfigTrait;
+
     use AntUpgradeTrait;
 
     use NpmUpgradeTrait;
@@ -44,9 +48,9 @@ class ProjectService extends AbstractJsonService
     static public $clone = 'installer-utils/clone-skeleton';
 
     protected $staging;
-    
+
     protected $production;
-    
+
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 
     /*
@@ -143,7 +147,7 @@ class ProjectService extends AbstractJsonService
 
         //cria
         $this->getIndexDocs();
-        
+
         $this->getChangelogDocs();
 
         //cria
@@ -197,7 +201,7 @@ class ProjectService extends AbstractJsonService
         return $this->getDocs()->createReadme($this->getProjectName(), $this->getProjectRealFolder());
     }
 
-    
+
     public function getConfigDocs()
     {
         return $this->getDocs()->createConfig($this->getProjectName(), $this->getProjectRealFolder());
@@ -212,11 +216,11 @@ class ProjectService extends AbstractJsonService
 
     public function getChangelogDocs()
     {
-    
+
         return $this->getDocs()->createChangelog($this->getProjectName(), $this->getProjectRealFolder());
     }
-    
-    
+
+
     /**
      * Cria diretórios extras e ignores.
      * @param string $projectLocation
@@ -665,7 +669,7 @@ EOS
         if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
             $projectHost = $this->projectConfig->getHost();
         } else {
-            $projectHost = $this->config['gear'***REMOVED***['project'***REMOVED***['host'***REMOVED***;
+            $projectHost = $this->getGearConfig()->getCurrentDevelopment();
         }
 
         return $projectHost;
@@ -676,7 +680,7 @@ EOS
         if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
             $projectName = $this->projectConfig->getProject();
         } else {
-            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+            $projectName = $this->str('class', $this->getGearConfig()->getCurrentName());
         }
 
         return $projectName;
@@ -703,55 +707,63 @@ EOS
 
         return $script;
     }
-    
+
     public function getProduction()
     {
-        return $this->production;
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            return $this->production;
+        }
+
+        return $this->getGearConfig()->getCurrentProduction();
     }
-    
+
     public function setProduction($production)
     {
         $this->production = $production;
         return $this;
     }
-     
+
     public function getStaging()
     {
-        return $this->staging;
+        if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
+            return $this->staging;
+        }
+
+        return $this->getGearConfig()->getCurrentStaging();
     }
-    
+
     public function setStaging($staging)
     {
-        $this->staging = $staging;    
+        $this->staging = $staging;
         return $this;
     }
-    
+
     public function getProjectGit()
     {
         if (isset($this->projectConfig) && $this->projectConfig instanceof Project) {
             $projectName = $this->projectConfig->getGit();
         } else {
-            $projectName = $this->config['gear'***REMOVED***['project'***REMOVED***['git'***REMOVED***;
+            $projectName = $this->getGearConfig()->getCurrentGit();
         }
-        
+
         return $projectName;
     }
-    
+
     public function getScriptInstallProduction()
     {
         $projectName = $this->str('class', $this->getProjectName());
-        
+
         $projectUrl = $this->str('url', $projectName);
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getProduction();
         $options['projectUrl'***REMOVED*** = $projectUrl;
         $options['git'***REMOVED*** = $this->getProjectGit();
         $options['project'***REMOVED*** = $projectName;
         $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $projectUrl);
-        
+
         $script = $this->getProjectScript();
-        
+
         return $this->getFileCreator()->createFile(
             'template/project/script/install-remote-production.phtml',
             $options,
@@ -759,22 +771,22 @@ EOS
             $script
         );
     }
-    
+
     public function getScriptInstallStaging()
     {
         $projectName = $this->str('class', $this->getProjectName());
-        
+
         $projectUrl = $this->str('url', $projectName);
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getStaging();
         $options['projectUrl'***REMOVED*** = $projectUrl;
         $options['git'***REMOVED*** = $this->getProjectGit();
         $options['project'***REMOVED*** = $projectName;
         $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $projectUrl);
-        
+
         $script = $this->getProjectScript();
-        
+
         return $this->getFileCreator()->createFile(
             'template/project/script/install-remote-staging.phtml',
             $options,
@@ -803,15 +815,15 @@ EOS
     public function getScriptStaging()
     {
         $script = $this->getProjectScript();
-        
+
         $projectName = $this->str('class', $this->getProjectName());
-        
+
         $projectUrl = $this->str('url', $projectName);
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getStaging();
         $options['projectUrl'***REMOVED*** = $projectUrl;
-        
+
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-staging.phtml',
             $options,
@@ -856,15 +868,15 @@ EOS
     public function getScriptProduction()
     {
         $script = $this->getProjectScript();
-        
+
         $projectName = $this->str('class', $this->getProjectName());
-        
+
         $projectUrl = $this->str('url', $projectName);
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getProduction();
         $options['projectUrl'***REMOVED*** = $projectUrl;
-        
+
         return $this->getFileCreator()->createFile(
             'template/project/script/deploy-production.phtml',
             $options,
@@ -883,7 +895,7 @@ EOS
         $this->getScriptTesting();
         $this->getScriptLoad();
     }
-    
+
 
     public function getPackageConfig()
     {
@@ -1027,14 +1039,10 @@ EOS
      * Modificar o export e o .htaccess do sistema para rodar no staging correto.
      */
 
-    public function setUpEnvironment($environment)
+    public function setUpEnvironment()
     {
-        if (!in_array($environment, ['development', 'testing', 'staging', 'production'***REMOVED***)) {
-            return false;
-        }
 
         $htaccess = 'RewriteEngine On'."\n".
-        'SetEnv APP_ENV '.$environment."\n".
         'RewriteCond %{REQUEST_FILENAME} -s [OR***REMOVED***'."\n".
         'RewriteCond %{REQUEST_FILENAME} -l [OR***REMOVED***'."\n".
         'RewriteCond %{REQUEST_FILENAME} -d'."\n".
@@ -1052,7 +1060,7 @@ EOS
     {
         $this->setUpGlobal($dbname, $staging, $production);
         $this->setUpLocal($username, $password);
-        $this->setUpEnvironment($environment);
+        $this->setUpEnvironment();
 
         return true;
     }
@@ -1070,6 +1078,10 @@ EOS
         $name = $globalFile['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
 
         return [
+            'development' => $this->getGearConfig()->getCurrentDevelopment(),
+            'testing' => $this->getGearConfig()->getCurrentTesting(),
+            'staging' => $this->getGearConfig()->getCurrentStaging(),
+            'production' => $this->getGearConfig()->getCurrentProduction(),
             'version' => $version,
             'git' => $git,
             'label' => $label,
@@ -1104,6 +1116,10 @@ EOS
         $aclKey = $this->str('uline', $name);
 
         return [
+            'development' => $this->projectConfig->getHost(),
+            'testing' => $this->projectConfig->getHost(),
+            'staging' => $this->staging,
+            'production' => $this->production,
             'version' => $version,
             'git' => $git,
             'label' => $label,
@@ -1145,8 +1161,6 @@ EOS
      */
     public function setUpGlobal($dbname, $host, $environment)
     {
-
-
         $configRender = $this->getGlobalConfig();
 
 
@@ -1155,8 +1169,6 @@ EOS
             array_merge(
                 [
                     'dbname' => $dbname,
-                    'host' => $host,
-                    'environment' => $environment,
                 ***REMOVED***,
                 $configRender
             ),
