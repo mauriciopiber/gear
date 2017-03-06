@@ -93,14 +93,14 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     /**
      * Cria toda configuração inicial para novos módulos
      */
-    public function module($type = 'web')
+    public function module($type = 'web', $staging = null)
     {
         $controller = array(
             sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
             sprintf('%s\Controller\IndexControllerFactory', $this->getModule()->getModuleName())
         );
 
-        $this->getModuleConfig($type, $controller);
+        $this->getModuleConfig($type, $controller, null, $staging);
 
 
         switch ($type) {
@@ -139,19 +139,29 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         return sprintf(self::GIT_PATTERN, $this->str('url', $this->getModule()->getModuleName()));
     }
 
-    public function getModuleConfig($type, $controllers, $git = null)
+    public function getModuleConfig($type, $controllers, $git = null, $staging = null)
     {
         $git = $this->getGit($git);
         
-        
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
-        $file->setOptions(array(
+        $options = array(
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'controllers' => $controllers,
             'git' => $git
-        ));
+        );
+        
+        if ($type == 'web') {
+            
+            $host = sprintf('%s.gear.dev', $this->str('url', $this->getModule()->getModuleName()));
+            
+            $options['staging'***REMOVED*** = $staging;
+            $options['development'***REMOVED*** = $host;
+            $options['testing'***REMOVED*** = $host;
+        }
+        
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
+        $file->setOptions($options);
         $file->setFileName('module.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
 

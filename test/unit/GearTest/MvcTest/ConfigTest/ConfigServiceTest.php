@@ -88,7 +88,7 @@ class ConfigServiceTest extends AbstractTestCase
         $config->setNavigationManager($this->navigationManager->reveal());
         $config->setUploadImageManager($this->uploadImageManager->reveal());
 
-        $this->assertTrue($config->module('web'));
+        $this->assertTrue($config->module('web', 'my-module.stag01.pibernetwork.com'));
 
         $this->assertEquals(
             file_get_contents(vfsStream::url('module/config/module.config.php')),

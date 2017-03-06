@@ -84,6 +84,8 @@ use GearBase\Util\Dir\DirService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Mvc\View\ViewService;
 use Gear\Module\ModuleProjectConnectorInterface;
+use GearBase\Config\GearConfig;
+use GearBase\Config\GearConfigTrait;
 
 /**
  *
@@ -136,9 +138,10 @@ class ModuleService implements ModuleProjectConnectorInterface
     use ApplicationConfigTrait;
     use ComposerAutoloadTrait;
     use DirServiceTrait;
+    use GearConfigTrait;
 
     protected $type;
-    
+
     protected $staging;
 
     const MODULE_AS_PROJECT = 1;
@@ -179,8 +182,10 @@ class ModuleService implements ModuleProjectConnectorInterface
         ApplicationConfig $applicationConfig,
         ComposerAutoload $autoload,
         array $config,
-        DirService $dirService
+        DirService $dirService,
+        GearConfig $gearConfig
     ) {
+        $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
         $this->module = $module;
@@ -328,7 +333,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function moduleComponents($collection = 2)
     {
         $configService         = $this->getConfigService();
-        $configService->module($this->type);
+        $configService->module($this->type, $this->staging);
 
         if ($collection == 1) {
             $this->getComposerService()->createComposerAsProject($this->type);
@@ -399,7 +404,7 @@ class ModuleService implements ModuleProjectConnectorInterface
 
                 $this->getPage()->createIndexPage();
                 $this->getStep()->createIndexStep();
-                
+
                 $this->getStagingScript();
                 $this->getInstallStagingScript();
 
@@ -634,16 +639,16 @@ class ModuleService implements ModuleProjectConnectorInterface
         $file->setLocation($this->getModule()->getScriptFolder());
         return $file->render();
     }
-    
+
 
     public function getStagingScript()
     {
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getStaging();
         $options['moduleUrl'***REMOVED*** = $moduleUrl;
-        
+
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/deploy-staging.phtml');
         $file->setOptions($options);
@@ -651,29 +656,32 @@ class ModuleService implements ModuleProjectConnectorInterface
         $file->setLocation($this->getModule()->getScriptFolder());
         return $file->render();
     }
-    
+
     public function getStaging()
     {
+        if (empty($this->staging)) {
+            $this->staging = $this->getGearConfig()->getCurrentStaging();
+        }
         return $this->staging;
     }
-    
+
     public function setStaging($staging)
     {
         $this->staging = $staging;
         return $this;
     }
-    
+
     public function getInstallStagingScript()
     {
         $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-        
+
         $options = [***REMOVED***;
         $options['host'***REMOVED*** = $this->getStaging();
         $options['moduleUrl'***REMOVED*** = $moduleUrl;
         $options['git'***REMOVED*** = $this->getConfigService()->getGit();
         $options['module'***REMOVED*** = $this->str('class', $this->getModule()->getModuleName());
         $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $moduleUrl);
-        
+
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/script/install-remote-staging.phtml');
         $file->setOptions($options);
@@ -681,7 +689,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         $file->setLocation($this->getModule()->getScriptFolder());
         return $file->render();
     }
-    
+
 
     /**
      * Cria script de deploy para ambiente de teste
@@ -812,7 +820,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     {
         return $this->getDocs()->createChangelog();
     }
-    
+
     /**
      * Cria arquivo docs/index.md para página inicial da configuração.
      *

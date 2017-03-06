@@ -111,6 +111,7 @@ class ModuleServiceTest extends TestCase
 
         ***REMOVED***;
 
+        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
     }
 
     /**
@@ -171,7 +172,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
     }
 
@@ -443,7 +445,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
 
@@ -607,7 +610,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
 
@@ -742,7 +746,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
 
@@ -872,7 +877,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
 
@@ -920,7 +926,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
     }
 
@@ -985,7 +992,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
         $this->applicationConfig->removeModuleFromProject()->shouldNotBeCalled();
@@ -1040,7 +1048,8 @@ class ModuleServiceTest extends TestCase
             $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
-            $this->dir
+            $this->dir,
+            $this->gearConfig->reveal()
         );
 
         $this->applicationConfig->removeModuleFromProject()->shouldBeCalled();
