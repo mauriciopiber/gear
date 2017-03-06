@@ -196,46 +196,46 @@ class ModuleServiceTest extends TestCase
             file_get_contents(vfsStream::url('module/deploy-development.sh'))
         );
     }
-    
+
     /**
      * @group script2
      */
     public function testScriptInstallStaging()
     {
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        
+
         $this->createModuleRealFiles();
-        
+
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
         $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/gear-it.git')->shouldBeCalled();
-        
+
         //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getInstallStagingScript();
-        
+
         $expected = $this->templates.'/install-staging.sh';
-        
+
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents(vfsStream::url('module/install-staging.sh'))
         );
-        
+
     }
-    
+
     /**
      * @group script2
      */
     public function testScriptDeployStaging()
     {
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        
+
         $this->createModuleRealFiles();
-        
+
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
         //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getStagingScript();
-        
+
         $expected = $this->templates.'/deploy-staging.sh';
-        
+
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents(vfsStream::url('module/deploy-staging.sh'))
@@ -327,7 +327,7 @@ class ModuleServiceTest extends TestCase
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module($type)->shouldBeCalled();
+        $this->configService->module($type, null)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
 
@@ -488,7 +488,7 @@ class ModuleServiceTest extends TestCase
         $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module($type)->shouldBeCalled();
+        $this->configService->module($type, null)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
 
@@ -573,7 +573,7 @@ class ModuleServiceTest extends TestCase
         $this->feature->createIndexFeature('Gear Project')->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
-        
+
         $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->moduleService = new \Gear\Module\ModuleService(
@@ -655,7 +655,7 @@ class ModuleServiceTest extends TestCase
         $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module($type)->shouldBeCalled();
+        $this->configService->module($type, null)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
 
@@ -793,7 +793,7 @@ class ModuleServiceTest extends TestCase
 
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module($type)->shouldBeCalled();
+        $this->configService->module($type, null)->shouldBeCalled();
 
         $this->languageService->create()->shouldBeCalled();
 
