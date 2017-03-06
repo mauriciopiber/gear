@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.120***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12211) - 06/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Adicionar Gear Config ao Module/Project e corrigir upgrade [[#GP-194***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-194)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.119***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12208) - 04/03/2017
 
 ### Adicionados

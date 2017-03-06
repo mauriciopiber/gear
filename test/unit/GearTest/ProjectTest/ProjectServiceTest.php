@@ -65,30 +65,28 @@ class ProjectServiceTest extends AbstractTestCase
         );
 
         $this->file = $this->prophesize('GearBase\Util\File\FileService');
-        //$this->docs->setStringService($this->string);
-        //$this->docs->setFileCreator($this->fileCreator);
 
-
+        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
     }
-    
+
     /**
      * @group stag1
 
     public function testCreateStaging()
     {
         vfsStream::newDirectory('script')->at($this->projectDir);
-        
+
         $this->project = new ProjectService();
-        
+
         $file = $this->project->getScriptStaging();
-        
+
         $this->assertEquals(
             file_get_contents(sprintf($this->template.'/script/deploy-staging.phtml', $template)),
             file_get_contents($file)
         );
     }
      */
-    
+
     public function scriptData()
     {
         return [
@@ -125,19 +123,25 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::newDirectory('script')->at($this->projectDir);
         vfsStream::newDirectory('data')->at($this->projectDir);
 
+        $this->gearConfig->getCurrentName()->willReturn('MyProject');
+        $this->gearConfig->getCurrentGit()->willReturn('git@bitbucket.org:mauriciopiber/my-project.git');
+        $this->gearConfig->getCurrentDevelopment()->willReturn('my-project.gear.dev');
+        $this->gearConfig->getCurrentStaging()->willReturn('my-project.stag01.pibernetwork.com');
+        $this->gearConfig->getCurrentProduction()->willReturn('my-project.pibernetwork.com');
+
         $this->project = new \Gear\Project\ProjectService();
-        $this->project->setStaging('my-project.stag01.pibernetwork.com');
-        $this->project->setProduction('my-project.pibernetwork.com');
+        //$this->project->setStaging('my-project.stag01.pibernetwork.com');
+        //$this->project->setProduction('my-project.pibernetwork.com');
         $this->project->setConfig($this->config);
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project'));
         $this->project->setFileService($this->file->reveal());
+        $this->project->setGearConfig($this->gearConfig->reveal());
 
         $this->project->setStringService($this->string);
         $this->project->setDocs($this->docs);
 
         $file = $this->project->{$method}();
-
 
         $this->assertEquals(
             file_get_contents(sprintf($this->template.'/%s.phtml', $template)),
@@ -183,9 +187,16 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
         vfsStream::newDirectory('GearProject/public')->at(vfsStreamWrapper::getRoot());
 */
+
+        $this->gearConfig->getCurrentDevelopment()->willReturn('gear-project.gear.dev');
+        $this->gearConfig->getCurrentTesting()->willReturn('gear-project.gear.com');
+        $this->gearConfig->getCurrentStaging()->willReturn('gear-project.stag55.pibernetwork.com');
+        $this->gearConfig->getCurrentProduction()->willReturn('gear-project.pibernetwork.com');
+
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
+        $this->project->setGearConfig($this->gearConfig->reveal());
 
     //    $this->createMockGlobal();
 
@@ -321,11 +332,15 @@ EOS
 
         $this->createMockGlobal();
 
-
+        $this->gearConfig->getCurrentDevelopment()->willReturn('gear-project.gear.dev');
+        $this->gearConfig->getCurrentTesting()->willReturn('gear-project.gear.com');
+        $this->gearConfig->getCurrentStaging()->willReturn('gear-project.stag55.pibernetwork.com');
+        $this->gearConfig->getCurrentProduction()->willReturn('gear-project.pibernetwork.com');
 
         $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
+        $this->project->setGearConfig($this->gearConfig->reveal());
 
         $result = $this->project->setUpGlobal($dbname, $host, $environment);
 

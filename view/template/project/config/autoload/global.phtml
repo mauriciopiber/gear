@@ -6,7 +6,12 @@ return [
             'version' => '<?php echo $this->version;?>',
             'git' => '<?php echo $this->git;?>',
             'label' => '<?php echo $this->label;?>',
-            'host' => '<?php echo $this->host;?>'
+            'environment' => [
+                'DEVELOPMENT' => '<?php echo $this->development;?>',
+                'TESTING' => '<?php echo $this->testing;?>',
+                'STAGING' => '<?php echo $this->staging;?>',
+                'PRODUCTION' => '<?php echo $this->production;?>'
+            ***REMOVED***
         ***REMOVED***,
     ***REMOVED***,
     'bjyauthorize' => ['acl_key' => '<?php echo $this->aclKey;?>'***REMOVED***,
@@ -28,8 +33,6 @@ return [
         'host' => 'localhost',
         'name' => '<?php echo $this->dbname;?>'
     ***REMOVED***,
-    'webhost' => '<?php echo $this->host;?>',
-    'environment' => '<?php echo $this->environment;?>',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
