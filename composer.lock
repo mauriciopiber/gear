@@ -1245,27 +1245,27 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.6.2",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb"
+                "reference": "93d39f1f7f9326d746203c7c056f300f7f126073"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-6c52c2722f8460122f96f86346600e1077ce22cb-zip-573078.tar",
-                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb",
+                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-93d39f1f7f9326d746203c7c056f300f7f126073-zip-f944ab.tar",
+                "reference": "93d39f1f7f9326d746203c7c056f300f7f126073",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
                 "phpdocumentor/reflection-docblock": "^2.0|^3.0.2",
-                "sebastian/comparator": "^1.1",
-                "sebastian/recursion-context": "^1.0|^2.0"
+                "sebastian/comparator": "^1.1|^2.0",
+                "sebastian/recursion-context": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "^2.0",
+                "phpspec/phpspec": "^2.5|^3.2",
                 "phpunit/phpunit": "^4.8 || ^5.6.5"
             },
             "type": "library",
@@ -1304,39 +1304,39 @@
                 "spy",
                 "stub"
             ***REMOVED***,
-            "time": "2016-11-21T14:58:47+00:00"
+            "time": "2017-03-02T20:05:34+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.6",
+            "version": "4.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "ca060f645beeddebedb1885c97bf163e93264c35"
+                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-ca060f645beeddebedb1885c97bf163e93264c35-zip-a1e3c7.tar",
-                "reference": "ca060f645beeddebedb1885c97bf163e93264c35",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-php-code-coverage-09e2277d14ea467e5a984010f501343ef29ffc69-zip-df6a68.tar",
+                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69",
                 "shasum": ""
             },
             "require": {
+                "ext-dom": "*",
+                "ext-xmlwriter": "*",
                 "php": "^5.6 || ^7.0",
-                "phpunit/php-file-iterator": "~1.3",
-                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-file-iterator": "^1.3",
+                "phpunit/php-text-template": "^1.2",
                 "phpunit/php-token-stream": "^1.4.2 || ^2.0",
-                "sebastian/code-unit-reverse-lookup": "~1.0",
+                "sebastian/code-unit-reverse-lookup": "^1.0",
                 "sebastian/environment": "^1.3.2 || ^2.0",
-                "sebastian/version": "~1.0|~2.0"
+                "sebastian/version": "^1.0 || ^2.0"
             },
             "require-dev": {
-                "ext-xdebug": ">=2.1.4",
-                "phpunit/phpunit": "^5.4"
+                "ext-xdebug": "^2.1.4",
+                "phpunit/phpunit": "^5.7"
             },
             "suggest": {
-                "ext-dom": "*",
-                "ext-xdebug": ">=2.4.0",
-                "ext-xmlwriter": "*"
+                "ext-xdebug": "^2.5.1"
             },
             "type": "library",
             "extra": {
@@ -1367,7 +1367,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2017-02-23T07:38:02+00:00"
+            "time": "2017-03-01T09:12:17+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1557,16 +1557,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.14",
+            "version": "5.7.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4906b8faf23e42612182fd212eb6f4c0f2954b57"
+                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-4906b8faf23e42612182fd212eb6f4c0f2954b57-zip-593830.tar",
-                "reference": "4906b8faf23e42612182fd212eb6f4c0f2954b57",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-b99112aecc01f62acf3d81a3f59646700a1849e5-zip-241c4c.tar",
+                "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5",
                 "shasum": ""
             },
             "require": {
@@ -1635,7 +1635,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2017-02-19T07:22:16+00:00"
+            "time": "2017-03-02T15:22:43+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1794,16 +1794,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "v0.7.1",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robmorgan/phinx.git",
-                "reference": "4e058f2df00f58f654d7983f3943b327bf046c7c"
+                "reference": "15e43d10dd99ac818c8d65735c50191bcbeafdbc"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-4e058f2df00f58f654d7983f3943b327bf046c7c-zip-eee4e1.tar",
-                "reference": "4e058f2df00f58f654d7983f3943b327bf046c7c",
+                "url": "https://mirror.pibernetwork.com/dist/robmorgan-phinx-15e43d10dd99ac818c8d65735c50191bcbeafdbc-zip-d5eba1.tar",
+                "reference": "15e43d10dd99ac818c8d65735c50191bcbeafdbc",
                 "shasum": ""
             },
             "require": {
@@ -1856,27 +1856,27 @@
                 "migrations",
                 "phinx"
             ***REMOVED***,
-            "time": "2017-02-19T12:16:03+00:00"
+            "time": "2017-02-28T18:34:31+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup.git",
-                "reference": "c36f5e7cfce482fde5bf8d10d41a53591e0198fe"
+                "reference": "4419fcdb5eabb9caa61a27c7a1db532a6b55dd18"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-code-unit-reverse-lookup-c36f5e7cfce482fde5bf8d10d41a53591e0198fe-zip-91f3fd.tar",
-                "reference": "c36f5e7cfce482fde5bf8d10d41a53591e0198fe",
+                "url": "https://mirror.pibernetwork.com/dist/sebastian-code-unit-reverse-lookup-4419fcdb5eabb9caa61a27c7a1db532a6b55dd18-zip-2b8d33.tar",
+                "reference": "4419fcdb5eabb9caa61a27c7a1db532a6b55dd18",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5"
+                "phpunit/phpunit": "^5.7 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -1901,7 +1901,7 @@
             ***REMOVED***,
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-            "time": "2016-02-13T06:45:14+00:00"
+            "time": "2017-03-04T06:30:41+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -2421,21 +2421,21 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.17",
+            "version": "v2.8.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4"
+                "reference": "81508e6fac4476771275a3f4f53c3fee9b956bfa"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/symfony-console-f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4-zip-6e220d.tar",
-                "reference": "f3c234cd8db9f7e520a91d695db7d8bb5daeb7a4",
+                "url": "https://mirror.pibernetwork.com/dist/symfony-console-81508e6fac4476771275a3f4f53c3fee9b956bfa-zip-0e0a1e.tar",
+                "reference": "81508e6fac4476771275a3f4f53c3fee9b956bfa",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9",
-                "symfony/debug": "~2.7,>=2.7.2|~3.0.0",
+                "symfony/debug": "^2.7.2|~3.0.0",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
@@ -2478,7 +2478,7 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-06T12:04:06+00:00"
+            "time": "2017-03-04T11:00:12+00:00"
         },
         {
             "name": "symfony/debug",
@@ -6208,21 +6208,21 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.2",
+            "version": "6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
+                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-guzzle-ebf29dee597f02f09f4d5bbecc68230ea9b08f60-zip-147bdd.tar",
-                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "url": "https://mirror.pibernetwork.com/dist/guzzlehttp-guzzle-8d6c6cc55186db87b7dc5009827429ba4e9dc006-zip-fdc331.tar",
+                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.3.1",
+                "guzzlehttp/psr7": "^1.4",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -6266,7 +6266,7 @@
                 "rest",
                 "web service"
             ***REMOVED***,
-            "time": "2016-10-08T15:01:37+00:00"
+            "time": "2017-02-28T22:50:30+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -6520,21 +6520,21 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.41",
+            "version": "0.2.43",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "a2498495816f8b62b1d98b3c545f06658ca6527d"
+                "reference": "259042e738954ed1943a0b48f2b9b22ba1e88408"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.41-c5e303.tar",
-                "reference": "a2498495816f8b62b1d98b3c545f06658ca6527d",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.43-94cfc5.tar",
+                "reference": "259042e738954ed1943a0b48f2b9b22ba1e88408",
                 "shasum": null
             },
             "require": {
-                "doctrine/doctrine-module": "0.8.*",
-                "doctrine/doctrine-orm-module": "0.8.*",
+                "doctrine/doctrine-module": "~0.8.0",
+                "doctrine/doctrine-orm-module": "~0.8.0",
                 "php": "^5.6 || ^7.0",
                 "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.1"
@@ -6542,10 +6542,10 @@
             "require-dev": {
                 "codeception/codeception": "^2.2.0",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "~0.2.0",
-                "mauriciopiber/gear-deploy": "~0.2.0",
-                "mauriciopiber/gear-jenkins": "~0.2.0",
-                "mauriciopiber/gear-version": "~0.2.0",
+                "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-deploy": "^0.2.0",
+                "mauriciopiber/gear-jenkins": "^0.2.0",
+                "mauriciopiber/gear-version": "^0.2.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
@@ -6561,20 +6561,20 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2017-01-04T07:23:21+00:00"
+            "time": "2017-03-06T18:49:55+00:00"
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.71",
+            "version": "0.2.72",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "1b1ebe506e4ff813e1acfdb8cb869107eb657955"
+                "reference": "7ff6936f5930c5cb4d48985aae19d759446bf023"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.71-655ece.tar",
-                "reference": "1b1ebe506e4ff813e1acfdb8cb869107eb657955",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.72-e922b7.tar",
+                "reference": "7ff6936f5930c5cb4d48985aae19d759446bf023",
                 "shasum": null
             },
             "require": {
@@ -6623,20 +6623,20 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2017-02-28T02:26:13+00:00"
+            "time": "2017-03-01T16:48:11+00:00"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.43",
+            "version": "0.2.46",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "9c7ff6c09d5a36444edf1992808f56eb13e3e491"
+                "reference": "ab77ea5f87d8a3d5ca67cb722a06c42b1d519626"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.43-4c267f.tar",
-                "reference": "9c7ff6c09d5a36444edf1992808f56eb13e3e491",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.46-0d1b1d.tar",
+                "reference": "ab77ea5f87d8a3d5ca67cb722a06c42b1d519626",
                 "shasum": null
             },
             "require": {
@@ -6667,7 +6667,7 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2017-02-27T20:49:47+00:00"
+            "time": "2017-02-28T04:33:45+00:00"
         },
         {
             "name": "mauriciopiber/gear-json",
@@ -7257,16 +7257,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "86dd55a522238211f9f3631e3361703578941d9a"
+                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/squizlabs-php_codesniffer-86dd55a522238211f9f3631e3361703578941d9a-zip-a8188e.tar",
-                "reference": "86dd55a522238211f9f3631e3361703578941d9a",
+                "url": "https://mirror.pibernetwork.com/dist/squizlabs-php_codesniffer-d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d-zip-43e65a.tar",
+                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d",
                 "shasum": ""
             },
             "require": {
@@ -7331,7 +7331,7 @@
                 "phpcs",
                 "standards"
             ***REMOVED***,
-            "time": "2017-02-02T03:30:00+00:00"
+            "time": "2017-03-01T22:17:45+00:00"
         },
         {
             "name": "symfony/browser-kit",

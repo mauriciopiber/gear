@@ -111,7 +111,8 @@ class ProjectService extends AbstractJsonService
             $this->projectConfig->getUsername(),
             $this->projectConfig->getPassword(),
             $this->str('url', $this->projectConfig->getProject()).'.gear.dev',
-            'development'
+            $this->staging,
+            $this->production
         );
 
 
@@ -1047,9 +1048,9 @@ EOS
         return true;
     }
 
-    public function setUpConfig($dbname, $username, $password, $host, $environment)
+    public function setUpConfig($dbname, $username, $password, $staging = null, $production = null)
     {
-        $this->setUpGlobal($dbname, $host, $environment);
+        $this->setUpGlobal($dbname, $staging, $production);
         $this->setUpLocal($username, $password);
         $this->setUpEnvironment($environment);
 

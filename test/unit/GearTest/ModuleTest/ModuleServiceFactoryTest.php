@@ -53,7 +53,8 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'cacheService' => 'Gear\Cache\CacheService',
             'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoload',
             'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig',
-            'GearBase\Util\Dir' => 'GearBase\Util\Dir\DirService'
+            'GearBase\Util\Dir' => 'GearBase\Util\Dir\DirService',
+            'GearBase\GearConfig' => 'GearBase\Config\GearConfig'
         ***REMOVED***;
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();

@@ -22,7 +22,12 @@ $gear = [
             'version' => '0.1.0',
             'acl' => true,
             'name' => __NAMESPACE__,
-            'git' => '<?php echo $this->git;?>'
+            'git' => '<?php echo $this->git;?>',
+            'environment' => [
+                'DEVELOPMENT' => '<?php echo $this->development;?>',
+                'TESTING' => '<?php echo $this->testing;?>',
+                'STAGING' => '<?php echo $this->staging;?>'
+            ***REMOVED***
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;
