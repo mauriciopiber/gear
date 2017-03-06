@@ -12,11 +12,23 @@ use Gear\Edge\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Project\Docs\DocsTrait;
 use Gear\Upgrade\AntUpgradeTrait;
+use Gear\Upgrade\AntUpgrade;
 use Gear\Upgrade\NpmUpgradeTrait;
+use Gear\Upgrade\NpmUpgrade;
 use Gear\Project\ProjectConfigTrait;
 use Gear\Project\Exception\BasePathNotFoundException;
 use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirService;
+use Gear\Creator\File;
+use Gear\Creator\FileCreatorTrait;
+use Gear\Edge\DirEdge;
+use Gear\Project\Docs\Docs;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Project\Composer\ComposerService;
+use GearBase\Util\File\FileServiceTrait;
+use GearBase\Util\File\FileService;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -39,6 +51,8 @@ class ProjectService extends AbstractJsonService
 
     use DirEdgeTrait;
 
+    use FileServiceTrait;
+
     use ComposerServiceTrait;
 
     use VersionServiceTrait;
@@ -50,6 +64,33 @@ class ProjectService extends AbstractJsonService
     protected $staging;
 
     protected $production;
+
+    public function __construct(
+        GearConfig $gearConfig,
+        DirService $dirService,
+        FileService $fileService,
+        File $file,
+        DirEdge $dirEdge,
+        Docs $docs,
+        ConsolePrompt $consolePrompt,
+        AntUpgrade $antUpgrade,
+        NpmUpgrade $npmUpgrade,
+        array $config,
+        ComposerService $composerService
+     ) {
+
+         $this->fileService = $fileService;
+         $this->gearConfig = $gearConfig;
+         $this->dirService = $dirService;
+         $this->fileCreator = $file;
+         $this->dirEdge = $dirEdge;
+         $this->docs = $docs;
+         $this->consolePrompt = $consolePrompt;
+         $this->antUpgrade = $antUpgrade;
+         $this->npmUpgrade = $npmUpgrade;
+         $this->config = $config;
+         $this->composerService = $composerService;
+    }
 
     //use \Gear\ContinuousIntegration\JenkinsTrait;
 

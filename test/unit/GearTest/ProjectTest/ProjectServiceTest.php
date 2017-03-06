@@ -27,8 +27,8 @@ class ProjectServiceTest extends AbstractTestCase
         $template       = new TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
-        $fileService    = new FileService();
-        $this->fileCreator    = new File($fileService, $template);
+        $this->fileService    = new FileService();
+        $this->fileCreator    = new File($this->fileService, $template);
 
         $this->string = new StringService();
 
@@ -57,7 +57,7 @@ class ProjectServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***;
 
-        $this->docs = new Docs(
+        $this->docsReal = new Docs(
             $this->config,
             $this->string,
             $this->fileCreator
@@ -67,6 +67,48 @@ class ProjectServiceTest extends AbstractTestCase
         $this->file = $this->prophesize('GearBase\Util\File\FileService');
 
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->dirService = $this->prophesize('GearBase\Util\Dir\DirService');
+        $this->edge = $this->prophesize('Gear\Edge\DirEdge');
+        $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
+        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');
+        $this->npmUpgrade = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $this->composerService = $this->prophesize('Gear\Project\Composer\ComposerService');
+        $this->fileService = $this->prophesize('GearBase\Util\File\FileService');
+
+        $this->project = new ProjectService(
+            $this->gearConfig->reveal(),
+            $this->dirService->reveal(),
+            $this->fileService->reveal(),
+            $this->fileCreator,
+            $this->edge->reveal(),
+            $this->docsReal,
+            $this->consolePrompt->reveal(),
+            $this->antUpgrade->reveal(),
+            $this->npmUpgrade->reveal(),
+            $this->config,
+            $this->composerService->reveal()
+            /*
+             use GearConfigTrait;
+
+             use DocsTrait;
+
+             use DirEdgeTrait;
+
+             use AntUpgradeTrait;
+
+             use NpmUpgradeTrait;
+
+             use ComposerServiceTrait;
+
+             use VersionServiceTrait;
+
+             use ScriptServiceTrait;
+             */
+
+        );
+
+        //$this->project->setProject($this->projectDir);
     }
 
     /**
@@ -129,7 +171,6 @@ class ProjectServiceTest extends AbstractTestCase
         $this->gearConfig->getCurrentStaging()->willReturn('my-project.stag01.pibernetwork.com');
         $this->gearConfig->getCurrentProduction()->willReturn('my-project.pibernetwork.com');
 
-        $this->project = new \Gear\Project\ProjectService();
         //$this->project->setStaging('my-project.stag01.pibernetwork.com');
         //$this->project->setProduction('my-project.pibernetwork.com');
         $this->project->setConfig($this->config);
@@ -139,9 +180,9 @@ class ProjectServiceTest extends AbstractTestCase
         $this->project->setGearConfig($this->gearConfig->reveal());
 
         $this->project->setStringService($this->string);
-        $this->project->setDocs($this->docs);
 
         $file = $this->project->{$method}();
+
 
         $this->assertEquals(
             file_get_contents(sprintf($this->template.'/%s.phtml', $template)),
@@ -193,7 +234,6 @@ class ProjectServiceTest extends AbstractTestCase
         $this->gearConfig->getCurrentStaging()->willReturn('gear-project.stag55.pibernetwork.com');
         $this->gearConfig->getCurrentProduction()->willReturn('gear-project.pibernetwork.com');
 
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
         $this->project->setGearConfig($this->gearConfig->reveal());
@@ -245,7 +285,6 @@ class ProjectServiceTest extends AbstractTestCase
 
         vfsStream::newDirectory('GearProject/public')->at(vfsStreamWrapper::getRoot());
 
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
 
@@ -275,7 +314,6 @@ class ProjectServiceTest extends AbstractTestCase
         vfsStream::newDirectory('GearProject/config/autoload')->at(vfsStreamWrapper::getRoot());
         //vfsStream::newDirectory('not-writable')->at(vfsStreamWrapper::getRoot());
 
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
 
@@ -337,7 +375,6 @@ EOS
         $this->gearConfig->getCurrentStaging()->willReturn('gear-project.stag55.pibernetwork.com');
         $this->gearConfig->getCurrentProduction()->willReturn('gear-project.pibernetwork.com');
 
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setProject(vfsStream::url('project/GearProject'));
         $this->project->setGearConfig($this->gearConfig->reveal());
@@ -394,6 +431,9 @@ EOS
 
         vfsStream::newDirectory('public')->at($project);
 
+        vfsStream::newDirectory('data')->at($project);
+        vfsStream::newDirectory('script')->at($project);
+
         $this->assertFileExists(vfsStream::url('project/GearProject/config/autoload'));
         $this->assertFileExists(vfsStream::url('project/GearProject/public'));
 
@@ -441,90 +481,69 @@ EOS
             'environment' => 'development'
         ));
 
+        $this->composerService->createComposer($project)->willReturn(true)->shouldBeCalled();
+        //$this->composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
 
 
-        //$request->getParam('project', null)->willReturn('GearProject');
+        $this->script = $this->prophesize('Gear\Script\ScriptService');
 
-        $fileCreator = $this->prophesize('Gear\Creator\File');
-
-
-        $composerService = $this->prophesize('Gear\Project\Composer\ComposerService');
-        $composerService->createComposer($project)->willReturn(true)->shouldBeCalled();
-        //$composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
-
-
-        $script = $this->prophesize('Gear\Script\ScriptService');
-
-        $script->setLocation('vfs://project')->willReturn(true)->shouldBeCalled();
-        $script->setLocation('vfs://project/GearProject')->willReturn(true)->shouldBeCalled();
-        //$script->setLocation(null)->willReturn(true)->shouldBeCalled();
+        $this->script->setLocation('vfs://project')->willReturn(true)->shouldBeCalled();
+        $this->script->setLocation('vfs://project/GearProject')->willReturn(true)->shouldBeCalled();
+        //$this->script->setLocation(null)->willReturn(true)->shouldBeCalled();
 
         $basePath = \GearBase\Module::getProjectFolder();
 
         $cmd = $basePath.'/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+        $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         /*
         $cmd = $basePath.'/bin/nfs vfs://project/GearProject';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+        $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
 
         $cmd = $basePath.'/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
-        $script->run($cmd)->willReturn(true)->shouldBeCalled();
+        $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
         */
 
-        $dirService = $this->prophesize('GearBase\Util\Dir\DirService');
+        $this->fileService->chmod(0777, 'vfs://project/GearProject/phpmd.xml')->willReturn(true)->shouldBeCalled();
+        $this->fileService->chmod(0777, 'vfs://project/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
+        $this->fileService->chmod(0777, 'vfs://project/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
+        $this->fileService->chmod(0777, 'vfs://project/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
+        $this->fileService->chmod(0777, 'vfs://project/GearProject/package.json')->willReturn(true)->shouldBeCalled();
 
-
-        $fileService = $this->prophesize('GearBase\Util\File\FileService');
-        $fileService->chmod(0777, 'vfs://project/GearProject/phpmd.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, 'vfs://project/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, 'vfs://project/GearProject/build.xml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, 'vfs://project/GearProject/codeception.yml')->willReturn(true)->shouldBeCalled();
-        $fileService->chmod(0777, 'vfs://project/GearProject/package.json')->willReturn(true)->shouldBeCalled();
-
-        $edge = $this->prophesize('Gear\Edge\DirEdge');
-        $edge->getDirProject('web')->willReturn([
+        $this->edge->getDirProject('web')->willReturn([
             'writable' => [***REMOVED***,
             'ignore' => [***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
         $this->docs = $this->prophesize('Gear\Project\Docs\Docs');
+
         $this->docs->createReadme('GearProject', "vfs://project/GearProject")->shouldBeCalled();
         $this->docs->createConfig('GearProject', "vfs://project/GearProject")->shouldBeCalled();
         $this->docs->createIndex('GearProject', "vfs://project/GearProject")->shouldBeCalled();
         $this->docs->createChangelog('GearProject', "vfs://project/GearProject")->shouldBeCalled();
 
-
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-
-        $this->antUpgrade = $this->prophesize('Gear\Upgrade\AntUpgrade');
         $this->antUpgrade->getConsolePrompt()->willReturn($this->consolePrompt->reveal())->shouldBeCalled();
         $this->antUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->antUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
-
-
-
-        $this->npmUpgrade = $this->prophesize('Gear\Upgrade\NpmUpgrade');
         $this->npmUpgrade->getConsolePrompt()->willReturn($this->consolePrompt->reveal())->shouldBeCalled();
 
         $this->npmUpgrade->setProject('vfs://project/GearProject')->shouldBeCalled();
         $this->npmUpgrade->upgradeProject('web')->willReturn(true)->shouldBeCalled();
 
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setAntUpgrade($this->antUpgrade->reveal());
         $this->project->setNpmUpgrade($this->npmUpgrade->reveal());
-        $this->project->setDocs($this->docs->reveal());
-        $this->project->setDirEdge($edge->reveal());
-        $this->project->setFileCreator($fileCreator->reveal());
+
         $this->project->setRequest($request->reveal());
         $this->project->setStringService($this->string);
-        $this->project->setScriptService($script->reveal());
+        $this->project->setScriptService($this->script->reveal());
 
         //$this->project->setConfigService($this->config->reveal());
-        $this->project->setDirService($dirService->reveal());
-        $this->project->setFileService($fileService->reveal());
-        $this->project->setComposerService($composerService->reveal());
+        $this->project->setDirService($this->dirService->reveal());
+        $this->project->setFileService($this->fileService->reveal());
+        $this->project->setDocs($this->docs->reveal());
+
+
 
         $result = $this->project->create('web');
         $this->assertTrue($result);
@@ -548,7 +567,6 @@ EOS
 
     public function testCreateIndexFile()
     {
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
 
         vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
@@ -562,7 +580,6 @@ EOS
 
     public function testCreateApplicationConfigFile()
     {
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
 
         vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
@@ -579,7 +596,6 @@ EOS
      */
     public function testCreatePhinxFile()
     {
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
         $this->project->setConfig($this->config);
 
@@ -596,11 +612,10 @@ EOS
      */
     public function testCreateDir()
     {
-        $this->project = new \Gear\Project\ProjectService();
         $this->project->setFileCreator($this->fileCreator);
 
-        $edge = $this->prophesize('Gear\Edge\DirEdge');
-        $edge->getDirProject('web')->willReturn([
+        $this->edge = $this->prophesize('Gear\Edge\DirEdge');
+        $this->edge->getDirProject('web')->willReturn([
             'writable' => [
                 'node_modules',
                 'script',
@@ -619,7 +634,7 @@ EOS
             ***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->project->setDirEdge($edge->reveal());
+        $this->project->setDirEdge($this->edge->reveal());
 
         $this->project->setDirService(new \GearBase\Util\Dir\DirService());
 
