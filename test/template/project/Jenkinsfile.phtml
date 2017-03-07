@@ -14,7 +14,7 @@ pipeline {
                 checkout scm
                 sh 'script/deploy-testing.sh'
                 sh '/usr/bin/ant prepare'
-                sh '/usr/bin/ant parallel-lint'                
+                sh '/usr/bin/ant parallel-lint'
             }
         }
         stage('Quality') {
@@ -23,45 +23,45 @@ pipeline {
             }
         }
         stage('Unit PHP') {
-            post { 
+            post {
                 failure {
-                    postAction()    
+                    postAction()
                 }
             }
-            steps { 
+            steps {
                 sh '/usr/bin/ant unit-ci'
-            }    
+            }
         }
         stage('Unit JS') {
-            post { 
+            post {
                 failure {
                     postKarma()
-                    postAction()    
+                    postAction()
                 }
             }
-            steps { 
+            steps {
                 sh '/usr/bin/ant karma'
-            }    
-        }          
+            }
+        }
         stage('Integration') {
-            post { 
+            post {
                 failure {
                     postProtractor()
                     postKarma()
-                    postAction()    
+                    postAction()
                 }
             }
-            steps { 
+            steps {
                 sh '/usr/bin/ant protractor'
-            }    
-        }                                  
+            }
+        }
         stage('Report') {
-            steps { 
+            steps {
                 archiveArtifacts artifacts: "build/**/*", fingerprint: true
                 postKarma()
-                postProtractor()                   
+                postProtractor()
                 postAction()
-            }    
+            }
         }
         stage('Version') {
             when {
@@ -78,7 +78,7 @@ pipeline {
                 expression {
                     return params.publish
                 }
-            }        
+            }
             steps {
                 sh 'script/deploy-staging.sh'
             }
@@ -88,7 +88,7 @@ pipeline {
                 expression {
                     return params.publish
                 }
-            }        
+            }
             steps {
                 input 'Deploy?'
             }
@@ -98,11 +98,11 @@ pipeline {
                 expression {
                     return params.publish
                 }
-            }        
+            }
             steps {
                 sh 'script/deploy-production.sh'
             }
-        }        
+        }
         stage('Measure') {
             when {
                 expression {
@@ -110,11 +110,12 @@ pipeline {
                 }
             }
             steps {
-                build job: 'my-project-release', parameters: [
-                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+                build job: 'release-my-project', parameters: [
+                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***,
+                    [$class: 'StringParameterValue', name: 'upWorkspace', value: "${env.WORKSPACE}"***REMOVED***
                 ***REMOVED***
             }
-        }           
+        }
     }
     post {
         always {
