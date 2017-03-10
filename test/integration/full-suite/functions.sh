@@ -1,5 +1,40 @@
 #!/bin/bash
 
+function tearDownForce {
+
+    ls -l $modulepath &> /dev/null
+    
+    if [ "${?}" != 0 ***REMOVED***; then
+    
+        echo "Module Not Created Yet"
+        return
+        
+    fi;
+    
+    module=${1}
+    modulepath=${2}
+    
+    moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "$module")
+
+
+    ls -l $modulepath/vendor/autoload.php &> /dev/null
+    
+    if [ "${?}" == 0 ***REMOVED***; then
+     
+        cd $modulepath && php public/index.php gear git repository delete $module --force
+        cd $modulepath && php public/index.php gear jenkins suite delete
+        cd $modulepath && php public/index.php gear jira version delete "$moduleUrl-0.1.1"    
+        
+    fi;
+
+    ls -l $modulepath &> /dev/null
+    
+    if [ "${?}" == 0 ***REMOVED***; then
+     
+        sudo rm -R $modulepath
+        
+    fi;
+}
 
 function tearDown {
 
@@ -52,6 +87,8 @@ function tearDownProject {
     project=${1}
     projectpath=${2}
     
+    projectUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "$project")
+    
     ls -l $projectpath &> /dev/null
     
     if [ "${?}" != 0 ***REMOVED***; then
@@ -67,6 +104,7 @@ function tearDownProject {
      
         cd $projectpath && php public/index.php gear git repository delete $project --force
         cd $projectpath && php public/index.php gear jenkins suite delete    
+        cd $projectpath && php public/index.php gear jira version delete "$projectUrl-0.1.1"
         
     fi;
 
@@ -93,6 +131,7 @@ function complete {
     module=${1}
     modulepath=${2}
     type=${3}
+    moduleUrl=$(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "$module")
     
     if [ "$module" == "" ***REMOVED***; then
     
@@ -116,6 +155,8 @@ function complete {
     cd $modulepath && vendor/bin/fast-release --hotfix "Fast Release" "Fast Release" "1h" "30" "12:00" "12:10"
     echo "build"
     cd $modulepath && sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type" --hotfix
+    echo "run scan"
+    cd $modulepath && sudo php public/index.php gear jenkins job build "$moduleUrl" --indexing
 
 
 }

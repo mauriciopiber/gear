@@ -1,6 +1,5 @@
 writable:
     0: build
-    1: data/migrations
     
 ignore:
     0: build
