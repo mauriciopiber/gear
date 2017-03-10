@@ -10,7 +10,7 @@ class Env {
         $environment = getenv('PHINX_ENVIRONMENT');
 
         if (empty($environment)) {
-            define('PHINX_ENVIRONMENT', 'development');
+            define('PHINX_ENVIRONMENT', 'DEVELOPMENT');
             return;
         }
 
