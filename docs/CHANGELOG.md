@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.122***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12500) - 11/03/2017
+
+### Adicionados
+
+- [X***REMOVED*** Colocar todas configurações restantes ao Gear [[#GP-196***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-196)***REMOVED***
+- [X***REMOVED*** Testar GearModule Cli com a configuração completa [[#GP-197***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-197)***REMOVED***
+- [X***REMOVED*** Testar GearModule Web com a configuração completa [[#GP-198***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-198)***REMOVED***
+- [X***REMOVED*** Testar Gear Project Web com a configuração completa [[#GP-199***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-199)***REMOVED***
+
+### Corrigidos
+
+- Nada.
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.121***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12213) - 06/03/2017
 
 ### Adicionados
