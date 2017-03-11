@@ -8,7 +8,6 @@ require:
   zendframework/zend-mvc: "~2.6.0"
   
 require-dev: 
-  mauriciopiber/gear-json: "^0.2.0"
   sebastian/phpcpd: "^2.0.2"
   phploc/phploc: "^2.1.5"
   phpunit/phpunit: "~5.0"  
@@ -17,6 +16,7 @@ require-dev:
   phpmd/phpmd: "^2.3.2"
   jakub-onderka/php-parallel-lint: "^0.9"
   pdepend/pdepend: "^2.0.3"
+  mauriciopiber/gear-json: "~0.2 || ~1.0"  
   mauriciopiber/gear: "~0.2 || ~1.0"
   mauriciopiber/gear-deploy: "~0.2 || ~1.0"
   mauriciopiber/gear-jenkins: "~0.2 || ~1.0"
