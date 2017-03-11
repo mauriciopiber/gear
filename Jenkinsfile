@@ -22,9 +22,9 @@ pipeline {
             }
         }
         stage('Unit PHP') {
-            post { 
+            post {
                 failure {
-                    postAction()    
+                    postAction()
                 }
             }
             steps { 
@@ -55,7 +55,8 @@ pipeline {
             }
             steps { 
                 build job: 'gear-release', parameters: [
-                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***
+                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***,
+                    [$class: 'StringParameterValue', name: 'upWorkspace', value: "${env.WORKSPACE}"***REMOVED***
                 ***REMOVED***
             }
         }           
