@@ -6520,16 +6520,16 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.43",
+            "version": "0.2.45",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "259042e738954ed1943a0b48f2b9b22ba1e88408"
+                "reference": "dcdd7a78fd39a67e03e423f71ac0e6cb4f3f4a9d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.43-94cfc5.tar",
-                "reference": "259042e738954ed1943a0b48f2b9b22ba1e88408",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.45-c9c1e7.tar",
+                "reference": "dcdd7a78fd39a67e03e423f71ac0e6cb4f3f4a9d",
                 "shasum": null
             },
             "require": {
@@ -6540,17 +6540,18 @@
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
-                "codeception/codeception": "^2.2.0",
+                "codeception/codeception": "~2.2",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "^0.2.0",
-                "mauriciopiber/gear-deploy": "^0.2.0",
-                "mauriciopiber/gear-jenkins": "^0.2.0",
-                "mauriciopiber/gear-version": "^0.2.0",
+                "mauriciopiber/gear": "~0.2 || ~1.0",
+                "mauriciopiber/gear-deploy": "~0.2 || ~1.0",
+                "mauriciopiber/gear-jenkins": "~0.2 || ~1.0",
+                "mauriciopiber/gear-json": "~0.2 || ~1.0",
+                "mauriciopiber/gear-version": "~0.2 || ~1.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^5.4.0",
+                "phpunit/phpunit": "~5.0",
                 "sebastian/phpcpd": "^2.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
             },
@@ -6561,7 +6562,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2017-03-06T18:49:55+00:00"
+            "time": "2017-03-12T03:35:48+00:00"
         },
         {
             "name": "mauriciopiber/gear-deploy",
@@ -6628,16 +6629,16 @@
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.47",
+            "version": "0.2.48",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "a2d06d909a55b916d77b1dc85fcc16305952b08e"
+                "reference": "384cbd38bc244d7aab52d42e26d48eed956e9192"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.47-b6a575.tar",
-                "reference": "a2d06d909a55b916d77b1dc85fcc16305952b08e",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.48-df4234.tar",
+                "reference": "384cbd38bc244d7aab52d42e26d48eed956e9192",
                 "shasum": null
             },
             "require": {
@@ -6668,27 +6669,26 @@
                     "GearJenkinsTest": "test/unit"
                 }
             },
-            "time": "2017-03-09T19:07:29+00:00"
+            "time": "2017-03-12T03:51:01+00:00"
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.54",
+            "version": "0.2.58",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "0de204f328e46bfcd34d3bd709e5a65b1c51e239"
+                "reference": "ef8c6c9f9999d1b9d5c4c4d68a1f6785fb060f74"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.54-d89f7d.tar",
-                "reference": "0de204f328e46bfcd34d3bd709e5a65b1c51e239",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.58-40e7ad.tar",
+                "reference": "ef8c6c9f9999d1b9d5c4c4d68a1f6785fb060f74",
                 "shasum": null
             },
             "require": {
                 "doctrine/doctrine-module": "0.8.*",
                 "doctrine/doctrine-orm-module": "0.8.*",
-                "mauriciopiber/gear-base": "^0.2.0",
-                "php": ">=5.5",
+                "php": ">=5.5 || ~7.0",
                 "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.0"
             },
@@ -6696,6 +6696,7 @@
                 "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
                 "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear-base": "^0.2.0",
                 "mauriciopiber/gear-deploy": "^0.2.0",
                 "mauriciopiber/gear-jenkins": "^0.2.0",
                 "mauriciopiber/gear-version": "^0.2.0",
@@ -6715,20 +6716,20 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2016-12-06T19:28:53+00:00"
+            "time": "2017-03-12T04:14:11+00:00"
         },
         {
             "name": "mauriciopiber/gear-version",
-            "version": "0.2.13",
+            "version": "0.2.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
-                "reference": "0485699ff6b2cf8acb1ce8502c0cbbe0e6d2014e"
+                "reference": "b527fdbbaad574592088a25ca302dabf10268b3d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.13-6271b4.tar",
-                "reference": "0485699ff6b2cf8acb1ce8502c0cbbe0e6d2014e",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.14-d4a6eb.tar",
+                "reference": "b527fdbbaad574592088a25ca302dabf10268b3d",
                 "shasum": null
             },
             "require": {
@@ -6736,17 +6737,18 @@
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
-                "codeception/codeception": "^2.1.4",
+                "codeception/codeception": "~2.2",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "^0.2.0",
+                "mauriciopiber/gear": "~0.2 || ~1.0",
                 "mauriciopiber/gear-base": "^0.2.0",
-                "mauriciopiber/gear-deploy": "^0.2.0",
-                "mauriciopiber/gear-jenkins": "^0.2.0",
+                "mauriciopiber/gear-deploy": "~0.2 || ~1.0",
+                "mauriciopiber/gear-jenkins": "~0.2 || ~1.0",
+                "mauriciopiber/gear-json": "~0.2 || ~1.0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^4.8.19",
+                "phpunit/phpunit": "~5.0",
                 "sebastian/phpcpd": "^2.0.2",
                 "sebastian/phpdcd": "^1.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
@@ -6758,7 +6760,7 @@
                     "GearVersion": "src"
                 }
             },
-            "time": "2017-02-24T16:02:42+00:00"
+            "time": "2017-03-11T19:42:28+00:00"
         },
         {
             "name": "mikey179/vfsStream",
