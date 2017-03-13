@@ -32,7 +32,7 @@ class TableTest extends TestCase
         $this->assertNull($this->entity->getHtmlColumn());
         $this->assertNull($this->entity->getTextColumn());
         $this->assertNull($this->entity->getTinyintColumn());
-        $this->assertNull($this->entity->getCheckboxColumn());
+        $this->assertNull($this->entity->getTinyintCheckboxColumn());
         $this->assertNull($this->entity->getEmailColumn());
         $this->assertNull($this->entity->getPasswordVerifyColumn());
         $this->assertNull($this->entity->getTelephoneColumn());
@@ -64,7 +64,7 @@ class TableTest extends TestCase
         $htmlColumn,
         $textColumn,
         $tinyintColumn,
-        $checkboxColumn,
+        $tinyintCheckbox,
         $emailColumn,
         $passwordVerifyColumn,
         $telephoneColumn,
@@ -116,8 +116,8 @@ class TableTest extends TestCase
         $this->entity->setTinyintColumn($tinyintColumn);
         $this->assertEquals($tinyintColumn, $this->entity->getTinyintColumn());
 
-        $this->entity->setCheckboxColumn($checkboxColumn);
-        $this->assertEquals($checkboxColumn, $this->entity->getCheckboxColumn());
+        $this->entity->setTinyintCheckboxColumn($tinyintCheckbox);
+        $this->assertEquals($tinyintCheckbox, $this->entity->getTinyintCheckboxColumn());
 
         $this->entity->setEmailColumn($emailColumn);
         $this->assertEquals($emailColumn, $this->entity->getEmailColumn());
@@ -178,7 +178,7 @@ class TableTest extends TestCase
                 'Html Column',
                 'Text Column',
                 'Tinyint Column',
-                'Checkbox Column',
+                'Tinyint Checkbox Column',
                 'Email Column',
                 'Password Verify Column',
                 'Telephone Column',
