@@ -14,6 +14,7 @@ pipeline {
                 checkout scm
                 sh 'script/deploy-testing.sh'
                 sh '/usr/bin/ant prepare'
+                sh '/usr/bin/ant parallel-lint'
             }
         }
         stage('Quality') {
@@ -27,15 +28,15 @@ pipeline {
                     postAction()
                 }
             }
-            steps { 
+            steps {
                 sh '/usr/bin/ant unit-ci'
-            }    
-        }        
+            }
+        }
         stage('Report') {
-            steps { 
+            steps {
                 archiveArtifacts artifacts: "build/**/*", fingerprint: true
                 postAction()
-            }    
+            }
         }
         stage('Version') {
             when {
@@ -53,18 +54,18 @@ pipeline {
                     return params.publish
                 }
             }
-            steps { 
-                build job: 'gear-release', parameters: [
+            steps {
+                build job: 'release-gear', parameters: [
                     [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***,
                     [$class: 'StringParameterValue', name: 'upWorkspace', value: "${env.WORKSPACE}"***REMOVED***
                 ***REMOVED***
             }
-        }           
+        }
     }
     post {
         always {
-            notifyBuild(currentBuild.result)
             deleteDir() /* clean up our workspace */
+            notifyBuild(currentBuild.result)
         }
     }
 }
