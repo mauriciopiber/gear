@@ -1,0 +1,121 @@
+work-time: 
+  0:
+    0: '08:30:00'
+    1: '12:00:00'
+  1:
+    0: '13:00:00'
+    1: '17:00:00'
+  2:
+    0: '17:30:00'
+    1: '19:00:00' 
+  
+exception:
+  0:
+    'date': '2017-02-15'
+    'less': '14:00:00'
+#  1:
+#    'date': '2016-12-15'
+#  2:
+#    'date': '2016-12-07'    
+#  1:
+#    'date': '2016-10-26'
+#    'less': '16:00:00'
+#  2:
+#    'date': '2016-10-27'
+#    'more': '16:00:00'
+#  3:
+#    'date': '2016-10-28'
+#    'between': 
+#      0: '13:00:00'
+#      1: '15:00:00'        
+
+vacation-time: 
+  3:
+    fixed: true    
+          
+## Values on %
+cost-time:
+  cost:
+    day: -60 # $ custo diário
+    weekend: -160
+    holiday: -200
+    vacation:
+      day: -200
+      season: -1000
+  invest:
+    rate: -20
+    tax: 0.6775
+    min: -500
+  fixed:
+    stakeholder: 
+      tax: -10 # % de dinheiro enviado para o investidor
+      min: 500
+    tax: -15 # % impostos previstos para serem pagos no mes   
+    personal: -1270 # Soma do custo total das contas Fixas pessoais.
+    office: -445 # Soma dos custos totais das contas Fixas da Empresa.
+  
+money-time:
+  objetives: 
+    'liquidity':
+      'balance':
+        month: '15'
+        total: '15'
+#      'invest':
+#        month: '10'
+#        total: '10'
+    'earn':
+      'invest-earn':
+        month: 'WorkPay'
+#        total: '100000'
+    'amount':
+      'work-pay':
+        month: '6000'
+#        total: '5000000'
+#      'gross-profit': 
+#        month: '5000'
+#        total: '50000000'        
+      'invest':
+        month: '500'
+        total: '200000'
+      'balance':
+        month: '500'
+        total: '1000000'
+  objetive: -500
+  default: 120
+  type:
+    Crises: 0
+    Analize: 0
+    Bug: 0
+  project:
+#   GP: 0
+#   GA: 0  
+    
+  
+motivation-time:
+  0: 'Nenhum homem realmente produtivo pensa como se estivesse escrevendo uma dissertação. Albert Einstein'
+  1: 'A questão essencial não é "o quanto ocupado você está", mas sim "com o que você está ocupado". Oprah Winfrey'
+  2: 'O conceito de produtividade é um indicador de desempenho e satisfação de pessoas comprometidas com a mesma natureza de trabalho em grupo.'
+  3: 'Formigas. Exemplo de produtividade em miniatura.'
+  4: 'Produtividade a cem porcentos é conseguida com dificuldades que tendem a zero.'
+  5: 'A Produção da Produtividade Da Mente começa pela Produção da Filosofia no Dia a Dia.'
+  6: 'Produtividade só se atinge com muito suor e dedicação. O dinheiro só dita o ritmo deste crescimento, jamais o seu sucesso.'
+  7: 'A ansiedade é inimiga da produtividade e da acção consciente'
+  8: 'Vejo que o avanço tecnológico esta com uma grande produtividade instantânea, a ponto da tecnologia acabar com o ser humano.'
+  9: 'O que seria de mim se não fosse eu?'
+  10: 'Para realizar um sonho é preciso esquecê-lo, distrair dele a atenção. Por isso realizar é não realizar.'
+  11: 'A única coisa que vale a pena é fixar o olhar com mais atenção no presente; o futuro chegará sozinho, inesperadamente. É tolo quem pensa no futuro antes de pensar no presente.'
+  11: 'A atenção é a mais importante de todas as faculdades para o desenvolvimento da inteligência humana. Charles Darwin '
+  12: 'Aplica-te a todo o instante com toda a atenção... para terminar o trabalho que tens nas tuas mãos... e liberta-te de todas as outras preocupações. Delas ficarás livre se executares cada ação da tua vida como se fosse a última.'
+  13: 'A verdadeira arte da memória é a arte da atenção.'
+  14: 'Mesmo os mais perfeitos espíritos terão necessidade de dispor de muito tempo e atenção. René Descartes'
+  15: 'Saber o que é correto e não o fazer é falta de coragem. Confúcio '
+  16: 'Quem perde seus bens perde muito; quem perde um amigo perde mais; mas quem perde a coragem perde tudo. Miguel de Cervantes '
+  17: 'Pois a coragem cresce com a ocasião. William Shakespeare '
+  18: 'A maior prova de coragem é suportar as derrotas sem perder o ânimo.'
+  19: 'Para ter um negócio de sucesso, alguém, algum dia, teve que tomar uma atitude de coragem. Peter Drucker '
+  20: 'Aqueles que têm coragem para amar deveriam ter coragem para sofrer. Anthony Trollope '
+  21: 'A bravura provém do sangue, a coragem provém do pensamento. Napoleão Bonaparte '
+  22: 'Frequentemente é necessário mais coragem para ousar fazer certo do que temer fazer errado. Abraham Lincoln '
+  23: 'A vida vai ficando cada vez mais dura perto do topo. Friedrich Nietzsche'
+  24: 'Não há fatos eternos, como não há verdades absolutas. Friedrich Nietzsche'
+  25: 'Torna-te aquilo que és. Friedrich Nietzsche '  
