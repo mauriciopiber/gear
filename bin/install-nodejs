@@ -1,6 +1,6 @@
 #!/bin/bash
 
-nodepath="/tmp/node_modules"
+nodepath="/opt/node_modules"
 
 ls -l $nodepath &> /dev/null
 
