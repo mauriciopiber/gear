@@ -73,6 +73,9 @@ class EntityTestServiceTest extends AbstractTestCase
     public function testCreateDb($tableColumns, $expected, $tableName)
     {
 
+        $tableColumns[14***REMOVED*** = new \Gear\Column\Tinyint\Checkbox(
+            $this->prophesizeColumn('table', 'tinyint_checkbox_column', 'tinyint')
+        );
 
         $table = $this->string->str('class', $tableName);
 
