@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.124***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12523) - 13/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Rodar Build Completa [[#GP-202***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-202)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.123***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12521) - 13/03/2017
 
 ### Adicionados
