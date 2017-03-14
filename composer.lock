@@ -5882,7 +5882,7 @@
             ***REMOVED***,
             "description": "PHPUnit Listener for measure time and memory usage",
             "homepage": "https://github.com/atrapalo/phpunit-memory-and-time-usage-listener",
-            "time": "2015-04-19T16:29:45+00:00"
+            "time": "2015-04-19 16:29:45"
         },
         {
             "name": "behat/behat",
@@ -6516,7 +6516,7 @@
                 "performance",
                 "profiling"
             ***REMOVED***,
-            "time": "2015-08-31T22:07:48+00:00"
+            "time": "2015-08-31 22:07:48"
         },
         {
             "name": "mauriciopiber/gear-base",
@@ -6566,16 +6566,16 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.73",
+            "version": "0.2.74",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "4ff0bf8781653b779628c1258c0b873483c597cb"
+                "reference": "4f7eb735d2c7b4ed0b4ba64965bee7ea42ac6b5e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.73-a417cc.tar",
-                "reference": "4ff0bf8781653b779628c1258c0b873483c597cb",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.74-710d1d.tar",
+                "reference": "4f7eb735d2c7b4ed0b4ba64965bee7ea42ac6b5e",
                 "shasum": null
             },
             "require": {
@@ -6625,7 +6625,7 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2017-03-10T14:51:24+00:00"
+            "time": "2017-03-14T08:30:10+00:00"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
