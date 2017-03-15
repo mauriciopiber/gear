@@ -1,0 +1,38 @@
+modules: MyModule
+
+controller:
+                   
+#### FIRST   
+  27:
+    name: Championship
+    service: factories
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+  28:
+    name: Teams
+    service: factories
+    actions:
+      01:
+        name: Seven
+      02:
+        name: Eight
+      03:
+        name: Nine
+      04:
+        name: Teen
+      05:
+        name: Eleven
+      06:
+        name: Twelve
+       
