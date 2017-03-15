@@ -46,11 +46,6 @@ function copyMigration
     cp "${2}" "${1}/data/migrations/"	
 }
 
-function copyGearfileProject
-{
-    cp "${1}" "${1}"	
-}
-
 function copyGearfile
 {
     cp "${2}" "${1}/gearfile.yml"	

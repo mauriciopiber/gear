@@ -11,22 +11,21 @@ removeModuleFromProject "$project" "MyProjectModuleCli"
 removeModuleFromProject "$project" "MyProjectModuleWeb"
 removeModuleFromProject "$project" "MyProjectModuleMvc"
 
-exit 1
+createModuleCli "$project" "MyProjectModuleCli"
+createModuleWeb "$project" "MyProjectModuleWeb"
+createModuleWeb "$project" "MyProjectModuleMvc"
+
+constructModuleProject "$project" "MyProjectModuleCli" "$scriptDir" "module-cli.yml"
+constructModuleProject "$project" "MyProjectModuleWeb" "$scriptDir" "module-web.yml"
 
 
-#constructModuleProject "$project" "MyProjectModuleCli" "$scriptsDir/module-cli.yml"
-
-#constructModuleProject "$project" "MyProjectModuleWeb" "$scriptsDir/module-web.yml"
-
-#prepareConstruct "$project" "$scriptsDir/20160123222068_all_columns.php"
-
-#constructModuleProject "$project" "MyProjectModuleMvc" "$scriptsDir/module-mvc.yml"
-
-#reload "$project"
-
-#testProject "$project"
+prepareConstruct "$project" "$scriptsDir/20160123222068_all_columns.php"
 
 
+constructModuleProject "$project" "MyProjectModuleMvc" "$scriptDir" "module-mvc.yml"
 
+reload "$project"
 
+testProject "$project"
 
+exit 0

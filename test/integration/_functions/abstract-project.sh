@@ -55,7 +55,7 @@ function testProject
     ant prepare phpcs phpcs-docs phpmd phpcpd unit karma protractor 
 }
 
-function constructModuleCliInProject
+function constructModuleProject
 {
 	
     # PARAMS
@@ -70,22 +70,42 @@ function constructModuleCliInProject
     copyGearfileProject "$scriptsDir/$gearfileName" "$projectPath/$gearfileName"
 
     # CONSTRUCT 
-    constructProject "$projectPath" "$module" 	
+    constructInProject "$projectPath" "$module" "$gearfileName" 	
 }
 
 
-function constructModuleWebInProject
+function prepareConstruct
 {
+	project=${1}
+	projectPath=$(getPath "$project")
+	migrations=${2}
 	
+	copyMigration "$projectPath" "$migrations"
 	
+	cd $projectPath
 	
+	sudo vendor/bin/phinx migrate
+	vendor/bin/unload-module BjyAuthorize	
+	sudo php public/index.php gear database fix
 }
 
-function constructModuleDbInProject
+
+function copyGearfileProject
 {
-	
-	
+    cp "${1}" "${2}"	
 }
+
+
+function constructInProject
+{
+	projectPath=${1}
+	module=${2}
+	gearfileName=${3}
+	
+    cd $projectPath 
+    sudo php public/index.php gear module construct $module --file=$gearfileName
+
+} 
 
 function removeModuleFromProject
 {
