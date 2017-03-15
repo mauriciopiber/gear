@@ -114,9 +114,7 @@ class SrcDependency extends AbstractDependency
         $count = count($dependencies);
 
         foreach ($dependencies as $i => $dependency) {
-
-            if (
-                in_array($dependency, $ignoreList)
+            if (in_array($dependency, $ignoreList)
                 || in_array($this->getModule()->getModuleName().'\\'.$dependency, $ignoreList)
             ) {
                 continue;

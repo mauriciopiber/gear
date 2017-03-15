@@ -14,7 +14,6 @@ class ModuleUpgrade extends AbstractUpgrade
 
 
         if ($just === null) {
-
             $this->upgrades = [***REMOVED***;
 
             $this->upgrade1 = $this->getComposerUpgrade()->upgradeModule($type);
@@ -34,7 +33,6 @@ class ModuleUpgrade extends AbstractUpgrade
             $this->showUpgrades();
 
             return true;
-
         }
 
 
@@ -58,12 +56,10 @@ class ModuleUpgrade extends AbstractUpgrade
             case 'dir':
                 $this->upgrades = array_merge($this->upgrades, $this->getDirUpgrade()->upgradeModule($type));
                 break;
-
         }
 
         $this->showUpgrades();
 
         return true;
-
     }
 }

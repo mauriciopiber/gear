@@ -78,7 +78,6 @@ class ServiceService extends AbstractMvc
 
         $this->srcFile = $this->getFileCreator();
         return $this->srcFile->createFile($template, $options, $fileName, $location);
-
     }
 
     public function createDb()
@@ -130,14 +129,12 @@ class ServiceService extends AbstractMvc
         $this->getColumnsSpecifications();
         $this->getUserSpecifications();
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
         ) {
             $this->tableUploadImage = true;
         }
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
             || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
         ) {
             $dep = $this->src->getDependency();

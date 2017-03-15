@@ -126,8 +126,7 @@ class ServiceTestService extends AbstractMvcTest
         ***REMOVED***;
 
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
             || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
         ) {
             $dep = $this->src->getDependency();
@@ -136,7 +135,6 @@ class ServiceTestService extends AbstractMvcTest
         }
 
         if ($this->src->getService() === 'factories') {
-
             $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
             $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
         }
@@ -196,7 +194,6 @@ class ServiceTestService extends AbstractMvcTest
         ***REMOVED***;
 
         if ($this->src->getService() === 'factories') {
-
             $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
 
             $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
@@ -206,7 +203,6 @@ class ServiceTestService extends AbstractMvcTest
             } else {
                 $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
             }
-
         } else {
             //add abstract-factory
             $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';

@@ -94,7 +94,6 @@ abstract class AbstractMvc extends AbstractJsonService
         $filtered = [***REMOVED***;
 
         foreach ($useAttributes as $i => $link) {
-
             $filtered[***REMOVED*** = $link;
 
             if (isset($useAttributes[$i+1***REMOVED***)) {

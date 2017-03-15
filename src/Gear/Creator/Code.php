@@ -61,11 +61,9 @@ EOS;
         $this->docs = '';
 
         if (empty($controller->getNamespace())) {
-
             if ($controller instanceof Controller) {
                 $type = 'Controller';
             } else {
-
                 if ($controller->getType() === 'SearchForm') {
                     $type = 'Form/Search';
                 } else {
@@ -74,10 +72,7 @@ EOS;
             }
 
             $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
-
-
         } else {
-
             $module = $this->getModule()->getModuleName();
 
             $namespace = $this->resolveNamespace($controller->getNamespace());
@@ -87,7 +82,6 @@ EOS;
 
 
         return $this->docs;
-
     }
 
     public function getClassDocs($src, $type = null)
@@ -126,7 +120,6 @@ EOS;
 
 
         return $templates[$templateName***REMOVED***;
-
     }
 
     public function getFactoryServiceLocator($src)
@@ -145,7 +138,6 @@ EOS;
         $iterator = 0;
 
         foreach ($src->getDependency() as $i => $dependency) {
-
             if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
                 $text .= $this->getCustomTemplate($ndnt, $i);
             } else {
@@ -655,14 +647,11 @@ EOS;
             if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
                 $depVar = $this->getDepVarTemplate($i);
             } else {
-
-
                 if ($item == 'Translator') {
                     $depVar = $this->str('var', 'translate');
                 } else {
                     $depVar = $this->str('var', $item);
                 }
-
             }
 
             $attr .= '        $this->'.$depVar.' = $'.$this->str('var', $item).';';
@@ -691,7 +680,6 @@ EOS;
 
 
         if ($howManyDep > 1) {
-
             $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
             $html .= '    }'.PHP_EOL;
         } else {
@@ -708,7 +696,6 @@ EOS;
         $this->uses = '';
 
         foreach ($data->getDependency() as $alias => $item) {
-
             //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
             //que não precisam de Traits.
             if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {

@@ -48,7 +48,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $this->stringService = $stringService;
         $this->module = $module;
         $this->gearConfig = $gearConfig;
-
     }
 
     public function diagnosticProject($type = 'web')
@@ -99,7 +98,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     public function getBuildFiles()
     {
-
     }
 
     public function getImports(SimpleXmlElement $build, $edge)
@@ -107,7 +105,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $errors = [***REMOVED***;
 
         foreach ($edge as $name) {
-
             $isPresent = $this->hasImport($build, sprintf('./test/%s.xml', $name));
 
             if ($isPresent === false) {
@@ -189,9 +186,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
 
         if (isset($edge['files'***REMOVED***) && !empty($edge['files'***REMOVED***)) {
-
             foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
-
                 if (strpos($expectedFile, 'ant-') === false) {
                     continue;
                 }
@@ -232,9 +227,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         $this->import = $this->getImport($build, $edge);
 
         if (!empty($this->import)) {
-
             foreach ($this->import as $name => $build) {
-
                 if (!isset($edge['files'***REMOVED***[$name***REMOVED***) || empty($edge['files'***REMOVED***[$name***REMOVED***)) {
                     continue;
                 }
@@ -259,7 +252,6 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
     public function checkTarget($build, $targetName, $depend = '', $file)
     {
         if (!$this->hasTarget($build, $targetName)) {
-
             $this->errors[***REMOVED*** = (empty($depend))
                 ? sprintf(static::$missingTarget, $targetName, $file)
                 : sprintf(static::$missingTargetDepend, $targetName, (is_array($depend)) ? implode(' ', $depend) : $depend, $file);

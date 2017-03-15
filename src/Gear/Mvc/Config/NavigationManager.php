@@ -140,9 +140,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         //verify if route already exists
         foreach ($this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED*** as $i => $navigation) {
-
             if ($navigation['route'***REMOVED*** == sprintf('%s/%s', $moduleUrl, $controllerUrl)) {
-
                 $pageAlreadyExist = $this->verifyPage($navigation, $page['route'***REMOVED***);
 
                 if ($pageAlreadyExist === true) {

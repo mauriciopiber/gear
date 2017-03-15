@@ -49,12 +49,10 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         }
 
         if ($this->src->getService() === 'factories' && $this->src->getAbstract() == false) {
-
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
         }
 
         if ($this->src->getService() === 'factories') {
-
             $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
 
             $options['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->src);
@@ -64,7 +62,6 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             } else {
                 $options['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->src);
             }
-
         } else {
             //add abstract-factory
             $templateView = ($this->src->getAbstract() === true) ? 'abstract-invokable' : 'invokable';
