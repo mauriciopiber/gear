@@ -6,10 +6,20 @@
     
 issues:
   0:
-    summary: "Está passando o horário de início e não o horário de fim na verificação de Horário no workflow."
-    description: "Você encerrou o trabalho às 11:21, deveria ter encerrado ás 12:00, deveria aparecer 12:05"
+    summary: "Exibir mensagem que o módulo não existe ao tentar deletá-lo"
+    description: "Quando tento deletar um módulo e o mesmo não existe, está exibindo a mensagem de módulo deletado com sucesso."
+    type: Bug
+    project: GP
+    version: gear-0.2.127
+    estimate: 0.5h
+    sprint: 27
+    dueDate: 16/03/2017
+  1:
+    summary: "Mensagem de Erro no MYSQL não permite que faça os comandos para arrumar as tabelas"
+    description: "Corrigir"
+    version: gear-0.2.127
     type: Story
-    project: GD
+    project: GP
     estimate: 0.25h
     sprint: 27
     dueDate: 16/03/2017
