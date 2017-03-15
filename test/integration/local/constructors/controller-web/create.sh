@@ -1,10 +1,15 @@
 #!/bin/bash
 
+#!/bin/bash
+
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../_functions && pwd )"
 
-source "$headersDir/abstract-cli.sh"
+source "$headersDir/abstract-web.sh"
 
-removeModule "ConstructorCli"
-constructModuleCli "ConstructorCli"
-runConstructCli "ConstructorCli" "$scriptDir/cli.yml"
+removeModule "ControllerWeb"
+
+constructModuleWeb "ControllerWeb"
+
+runConstructWeb "ControllerWeb" "$scriptDir/gear-controller.yml"
+

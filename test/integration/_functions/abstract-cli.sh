@@ -45,26 +45,3 @@ function constructModuleCli
     sudo php public/index.php gear module-as-project create $module $basePath --type=cli --force
     cd $modulePath && sudo script/deploy-development.sh
 }
-
-function removeModule
-{
-    module=$(moduleName "${1}")
-    moduleUrl=$(moduleUrl "$module")
-    modulePath=$(modulepath "$moduleUrl")
-
-    sudo rm -R $modulePath
-}
-
-function resetModule
-{
-    # PARAMS
-    basePath=$(basepath)
-
-    module=$(moduleName "${1}")
-    moduleUrl=$(moduleUrl "$module")
-    modulePath=$(modulepath "$moduleUrl")
-    	
-    cd $modulePath 
-    sudo php public/index.php gear schema delete $module $basePath
-    sudo php public/index.php gear schema create $module $basePath	
-}

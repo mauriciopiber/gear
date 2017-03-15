@@ -1,0 +1,16 @@
+modules: MyModule
+
+db:
+  0:
+    table: AllColumns
+
+src:
+  1:
+    name: IntForeignKeyEntity
+    type: Entity
+    db: IntForeignKey
+  2:
+    name: IntForeignKeyFixture
+    type: Fixture
+    db: IntForeignKey
+   
