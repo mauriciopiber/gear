@@ -5,6 +5,8 @@ use GearBaseTest\AbstractTestCase;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearJson\Controller\Controller;
+use GearJson\Action\Action;
 
 /**
  * @group Mvc
@@ -59,6 +61,51 @@ class NavigationManagerTest extends AbstractTestCase
             file_get_contents($file)
         );
     }
+
+    /**
+     * @group scma
+
+    public function testSimulateCreateManyActions()
+    {
+        $actualFile = $this->templates.'/navigation.module.phtml';
+        file_put_contents(vfsStream::url('module/config/ext/navigation.config.php'), file_get_contents($actualFile));
+
+        $controller = new Controller([
+            'name' => 'MyController',
+            'object' => '%s\Controller\MyController'
+        ***REMOVED***);
+
+        $action = new Action([
+            'controller' => $controller,
+            'name' => 'First'
+        ***REMOVED***);
+
+        $action2 = new Action([
+            'controller' => $controller,
+            'name' => 'Two'
+        ***REMOVED***);
+
+        $controller->addAction($action);
+        $controller->addAction($action2);
+
+
+
+        $this->array = new \Gear\Util\Vector\ArrayService();
+        //$this->array->setStringService($this->string);
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->navigation->setModule($this->module->reveal());
+        $this->navigation->setArrayService($this->array);
+
+        $this->navigation->create($action);
+        $file = $this->navigation->create($action2);
+
+        $this->assertEquals(
+            file_get_contents($this->templates.'/navigation.many.action.phtml'),
+            file_get_contents($file)
+        );
+    }
+    */
 
     public function testCreateAction()
     {
