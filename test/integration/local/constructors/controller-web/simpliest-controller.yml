@@ -1,4 +1,4 @@
-modules: MyModule
+module: ControllerWeb
 
 controller:
                    
@@ -19,6 +19,8 @@ controller:
         name: Five
       06:
         name: Six
+      07:
+        name: Seven        
   28:
     name: Teams
     service: factories

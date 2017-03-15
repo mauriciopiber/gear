@@ -1,4 +1,4 @@
-modules: MyModule
+module: ControllerWeb
 
 src:
   01:
