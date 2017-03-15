@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.127***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12601) - 15/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Mensagem de Erro no MYSQL não permite que faça os comandos para arrumar as tabelas [[#GP-214***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-214)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.126***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12527) - 15/03/2017
 
 ### Adicionados
