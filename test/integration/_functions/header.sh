@@ -1,7 +1,8 @@
 #!/bin/bash
 
-headerDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
+set -ex
 
+headerDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 #basedir=$(dirname "$0")
 #fullpath=$(realpath $basedir)
 
@@ -43,6 +44,11 @@ function modulepath
 function copyMigration
 {
     cp "${2}" "${1}/data/migrations/"	
+}
+
+function copyGearfileProject
+{
+    cp "${1}" "${1}"	
 }
 
 function copyGearfile

@@ -1,16 +1,15 @@
-versions:
-  0:
-    version: gear-0.2.127
-    description: Correção da maioria dos bugs 2
-    project: GP
+#versions:
+#  0:
+#    version: gear-0.2.127
+#    description: Correção da maioria dos bugs 2
+#    project: GP
     
 issues:
   0:
-    summary: "Passar todos testes de Src/Controller para pasta Local."
-    description: "Passar os testes antigos para deprecated"
+    summary: "Está passando o horário de início e não o horário de fim na verificação de Horário no workflow."
+    description: "Você encerrou o trabalho às 11:21, deveria ter encerrado ás 12:00, deveria aparecer 12:05"
     type: Story
-    project: GP
-    estimate: 0.5h
+    project: GD
+    estimate: 0.25h
     sprint: 27
-    version: gear-0.2.127
     dueDate: 16/03/2017
