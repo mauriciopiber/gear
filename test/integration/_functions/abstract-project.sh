@@ -52,5 +52,63 @@ function testProject
 {
     projectPath=$(getPath "${1}")
     cd $projectPath 
-    ant prepare phpcs phpmd phpcpd unit karma protractor 
+    ant prepare phpcs phpcs-docs phpmd phpcpd unit karma protractor 
+}
+
+function constructModuleCliInProject
+{
+	
+    # PARAMS
+    basePath=$(basepath)
+    projectPath=$(getPath "${1}")
+    project=${1}
+    module=${2}
+    scriptsDir=${3}
+    gearfileName=${4}
+
+    # COPY GEARFILE
+    copyGearfileProject "$scriptsDir/$gearfileName" "$projectPath/$gearfileName"
+
+    # CONSTRUCT 
+    constructProject "$projectPath" "$module" 	
+}
+
+
+function constructModuleWebInProject
+{
+	
+	
+	
+}
+
+function constructModuleDbInProject
+{
+	
+	
+}
+
+function removeModuleFromProject
+{
+    basePath=$(basepath)
+    projectPath=$(getPath "${1}")
+    module=${2}
+    
+    cd $projectPath
+    sudo php public/index.php gear module delete "$module"	
+	
+	
+}
+
+function resetModuleInProject
+{
+    # PARAMS
+    basePath=$(basepath)
+    
+    projectPath=$(getPath "${1}")
+    module=${2}
+    	
+    cd $projectPath 
+    vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
+    sudo php public/index.php gear schema delete $module
+    sudo php public/index.php gear schema create $module	
 }
