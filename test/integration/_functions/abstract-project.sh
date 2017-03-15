@@ -43,7 +43,9 @@ function createModuleCli
 function reload
 {
     projectPath=$(getPath "${1}")
-    cd $projectPath && sudo script/load.sh
+    cd $projectPath
+    sudo script/load.sh
+    sudo php public/index.php gear database project dump
 }
 
 function testProject
