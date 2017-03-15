@@ -80,8 +80,6 @@ class Feature extends AbstractMvcTest
         $fileCreator->setLocation($this->getLocation($action->getController()->getNameOff()));
 
         return $fileCreator->render();
-
-
     }
 
     /**

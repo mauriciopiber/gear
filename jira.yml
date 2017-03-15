@@ -1,25 +1,16 @@
-#versions:
-#  0:
-#    version: gear-0.2.127
-#    description: Correção da maioria dos bugs 2
-#    project: GP
-    
-issues:
+versions:
   0:
-    summary: "Exibir mensagem que o módulo não existe ao tentar deletá-lo"
-    description: "Quando tento deletar um módulo e o mesmo não existe, está exibindo a mensagem de módulo deletado com sucesso."
+    version: gear-0.2.128
+    description: Correção da maioria dos bugs 2
+    project: GP
+issues:
+  6:
+    summary: "Adicionar Issue ao Gear Deploy Bump para deploy rápido sem CI"
+    description: "No fluxo do Gear, GearAdmin, para deploy extremamente rápido, é interessante ter esse recurso, só não deve ser usado como padrão, o padrão é passar pela CI"
     type: Bug
-    project: GP
-    version: gear-0.2.127
-    estimate: 0.5h
+    project: GD
+    estimate: 1h
     sprint: 27
-    dueDate: 16/03/2017
-  1:
-    summary: "Mensagem de Erro no MYSQL não permite que faça os comandos para arrumar as tabelas"
-    description: "Corrigir"
-    version: gear-0.2.127
-    type: Story
-    project: GP
-    estimate: 0.25h
-    sprint: 27
-    dueDate: 16/03/2017
+    version: gear-deploy-0.2.74
+    dueDate: 14/03/2017
+    

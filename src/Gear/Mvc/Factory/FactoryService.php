@@ -87,7 +87,7 @@ class FactoryService extends AbstractMvc
         ***REMOVED***;
 
         if (!empty($src->getDependency())) {
-           $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($src);
+            $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($src);
         }
 
         return $options;
@@ -181,7 +181,7 @@ class FactoryService extends AbstractMvc
         ***REMOVED***;
 
         if (!empty($controller->getDependency())) {
-           $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($controller);
+            $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($controller);
         }
 
 

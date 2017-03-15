@@ -20,7 +20,6 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
         $this->fileLocation = $this->getProjectFolder().'/composer.json';
 
         $this->actualFile = Json::decode(file_get_contents($this->fileLocation), 1);
-
     }
 
     public function loadFile()
@@ -45,7 +44,6 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
 
     public function forceReload()
     {
-
     }
 
     /**
@@ -61,8 +59,7 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
 
         $moduleTest = sprintf('%sTest', $moduleName);
 
-        if (
-            isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleName***REMOVED***)
+        if (isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleName***REMOVED***)
             && isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleTest***REMOVED***)
         ) {
             return false;
@@ -74,7 +71,6 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
         }
 
         if (!isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleTest***REMOVED***)) {
-
             $this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleTest***REMOVED*** = sprintf('module/%s/test/unit', $moduleName);
         }
 
@@ -91,8 +87,7 @@ class ComposerAutoload implements ModuleProjectConnectorInterface
 
         $moduleTest = sprintf('%sTest', $moduleName);
 
-        if (
-            !isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleName***REMOVED***)
+        if (!isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleName***REMOVED***)
             && !isset($this->actualFile['autoload'***REMOVED***['psr-0'***REMOVED***[$moduleTest***REMOVED***)
         ) {
             return false;

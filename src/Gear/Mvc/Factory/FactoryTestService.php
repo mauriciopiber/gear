@@ -31,13 +31,11 @@ class FactoryTestService extends AbstractMvcTest
 
 
         if ($src->getType() == 'Form' && $src->getDb() instanceof Db) {
-
             $form = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
             $filter = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
 
             $options['filter'***REMOVED*** = $this->getServiceManager()->getServiceName($filter);
             $options['form'***REMOVED*** = $this->getServiceManager()->getServiceName($form);
-
         }
 
         $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);

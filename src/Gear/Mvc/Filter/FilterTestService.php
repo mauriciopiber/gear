@@ -21,7 +21,6 @@ class FilterTestService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($src);
 
         if ($this->src->getAbstract() !== true) {
-
             $this->getTraitTestService()->createTraitTest($src, $location);
 
             if ($this->src->getService() == 'factories') {

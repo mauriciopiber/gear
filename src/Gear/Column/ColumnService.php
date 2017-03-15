@@ -165,13 +165,10 @@ class ColumnService implements ServiceLocatorAwareInterface
         switch ($match) {
             case 'int':
             case 'Int':
-
                 $word = 'Integer';
                 break;
             default:
-
                 $word = $match;
-
         }
 
         return $this->str('class', $word);

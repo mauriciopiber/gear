@@ -151,7 +151,6 @@ class ControllerService extends AbstractMvc implements
         $dependency = $this->controller->getDependency();
 
         if ($this->hasImage || $this->hasTableImage) {
-
             $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
 
             $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE_TRAIT.';'.PHP_EOL;
@@ -529,7 +528,6 @@ EOS;
     {
 
         foreach ($insertMethods as $method) {
-
             $label = $this->str('label', $method->getName());
 
             $this->functions .= <<<EOS

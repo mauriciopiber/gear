@@ -77,7 +77,7 @@ class ProjectService extends AbstractJsonService
         NpmUpgrade $npmUpgrade,
         array $config,
         ComposerService $composerService
-     ) {
+    ) {
 
          $this->fileService = $fileService;
          $this->gearConfig = $gearConfig;

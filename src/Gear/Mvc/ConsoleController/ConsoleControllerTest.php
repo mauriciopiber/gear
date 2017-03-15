@@ -228,7 +228,6 @@ class ConsoleControllerTest extends AbstractMvcTest
 
 
         if ($controller->getService() === 'factories') {
-
             $templateView ='factory';
 
             $options['dependency'***REMOVED*** = str_replace(
@@ -242,9 +241,7 @@ class ConsoleControllerTest extends AbstractMvcTest
                 '$this->controller',
                 $this->getCodeTest()->getConstructor($controller)
             );
-
         } else {
-
             $templateView = 'invokable';
         }
 

@@ -155,7 +155,6 @@ class AntUpgrade extends AbstractJsonService
             $name = (string) $target[0***REMOVED***->attributes()->name;
 
             if ($name === $search) {
-
                 $attrs = $target[0***REMOVED***->attributes();
 
                 if (!isset($attrs['depends'***REMOVED***)) {
@@ -323,7 +322,6 @@ class AntUpgrade extends AbstractJsonService
         $buildName = $this->str('url', $name);
 
         if (((string) $file->attributes()->name == $buildName) === false) {
-
             if (($confirm = $this->shouldRename($file, $buildName)) !== false) {
                 $this->upgrades[***REMOVED*** = sprintf(static::$named, $buildName, $identify);
                 $file->attributes()->name = $buildName;
@@ -440,9 +438,7 @@ class AntUpgrade extends AbstractJsonService
 
 
         if (!empty($this->import)) {
-
             foreach ($this->import as $nameImport => $build) {
-
                 $matches = array();
                 preg_match('/ant-([a-z***REMOVED***+)/', $nameImport, $matches);
 
@@ -450,7 +446,6 @@ class AntUpgrade extends AbstractJsonService
 
                 $this->import[$nameImport***REMOVED*** = $this->upgradeName($build, $dir, $hasName, sprintf('test/%s.xml', $nameImport));
             }
-
         }
 
 
@@ -460,15 +455,12 @@ class AntUpgrade extends AbstractJsonService
 
 
         if (!empty($this->import)) {
-
             foreach ($this->import as $name => $build) {
-
                 if (!isset($edge['files'***REMOVED***[$name***REMOVED***) || empty($edge['files'***REMOVED***[$name***REMOVED***)) {
-                   continue;
+                    continue;
                 }
 
                 foreach ($edge['files'***REMOVED***[$name***REMOVED*** as $target => $dependency) {
-
                     $identify = sprintf('test/%s.xml', $name);
 
                     $this->import[$name***REMOVED*** = $this->upgradeTarget(
@@ -480,7 +472,6 @@ class AntUpgrade extends AbstractJsonService
                         $identify
                     );
                 }
-
             }
         }
 
@@ -488,7 +479,6 @@ class AntUpgrade extends AbstractJsonService
 
         if (!empty($this->import)) {
             foreach ($this->import as $name => $build) {
-
                 $final = sprintf('%s/test/%s.xml', $dir, $name);
                 file_put_contents($final, $this->prepare($build));
             }
@@ -501,12 +491,11 @@ class AntUpgrade extends AbstractJsonService
     {
          $hasTarget = $this->buildHasTarget($build, $target);
 
-         if ($hasTarget) {
-            if (
-                empty($dependency)
-                || $this->buildTargetHasDepends($build, $target, $dependency) === true
-              || $this->shouldDepends($build, $target, $dependency, $identify) === false
-           ) {
+        if ($hasTarget) {
+            if (empty($dependency)
+              || $this->buildTargetHasDepends($build, $target, $dependency) === true
+            || $this->shouldDepends($build, $target, $dependency, $identify) === false
+            ) {
                 return $build;
             }
 
@@ -567,7 +556,6 @@ class AntUpgrade extends AbstractJsonService
 
 
         foreach ($edge['import'***REMOVED*** as $importName) {
-
             if ($this->hasImport($build, $importName) === false) {
                 $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldImport, $importName, 'build.xml'));
 
@@ -604,14 +592,11 @@ class AntUpgrade extends AbstractJsonService
 
 
         foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
-
-
             if (strpos($expectedFile, 'ant-') === false) {
                 continue;
             }
 
             if (!is_file($dir . '/test/'.$expectedFile.'.xml')) {
-
                 $confirm = $this->getConsolePrompt()->show(sprintf(static::$shouldFile, 'test/'.$expectedFile.'.xml'));
 
                 if ($confirm === false) {
@@ -621,7 +606,6 @@ class AntUpgrade extends AbstractJsonService
 
                 $this->createBasicFile($dir, 'test/'.$expectedFile.'.xml');
                 //$this->upgrades[***REMOVED*** = sprintf(static::$fileCreated, $expectedFile.'.xml');
-
             }
         }
 

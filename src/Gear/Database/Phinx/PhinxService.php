@@ -76,7 +76,7 @@ class PhinxService
         $this->file->setFileName($this->createFileName($name));
         $this->file->setLocation($this->getProject().'/data/migrations');
         $this->file->setOptions(
-            ['name' => $this->createClassName($name)***REMOVED***    
+            ['name' => $this->createClassName($name)***REMOVED***
         );
         
         return $this->file->render();

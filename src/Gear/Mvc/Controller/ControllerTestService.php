@@ -46,7 +46,6 @@ class ControllerTestService extends AbstractMvcTest implements
         ***REMOVED***;
 
         if ($controller->getService() === 'factories') {
-
             $templateView ='factory';
 
             $options['dependency'***REMOVED*** = str_replace(
@@ -60,9 +59,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 '$this->controller',
                 $this->getCodeTest()->getConstructor($controller)
             );
-
         } else {
-
             $templateView = 'invokable';
         }
 
@@ -275,7 +272,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
 
         if ($this->controller->getService() === 'factories') {
-
             if ($hasImageColumn || $hasImageTable) {
                 $dependency = $this->controller->getDependency();
                 $dependency[***REMOVED*** = '\GearImage\Service\ImageService';

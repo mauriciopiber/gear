@@ -151,7 +151,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         );
         
         if ($type == 'web') {
-            
             $host = sprintf('%s.gear.dev', $this->str('url', $this->getModule()->getModuleName()));
             
             $options['staging'***REMOVED*** = $staging;

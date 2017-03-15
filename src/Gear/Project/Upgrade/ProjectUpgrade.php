@@ -14,7 +14,6 @@ class ProjectUpgrade extends AbstractUpgrade
 
 
         if ($just === null) {
-
             $this->upgrades = [***REMOVED***;
 
             $this->upgrade1 = $this->getComposerUpgrade()->upgradeProject($type);
@@ -57,7 +56,6 @@ class ProjectUpgrade extends AbstractUpgrade
             case 'dir':
                 $this->upgrades = array_merge($this->upgrades, $this->getDirUpgrade()->upgradeProject($type));
                 break;
-
         }
 
         $this->showUpgrades();

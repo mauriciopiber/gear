@@ -377,7 +377,6 @@ EOS;
 
 
         foreach ($matches[0***REMOVED*** as $exact) {
-
             $explode = explode(PHP_EOL, $exact);
             $param = $explode[0***REMOVED***;
 
@@ -390,13 +389,10 @@ EOS;
             $replacement = $param.' '.$label.'\n';
 
             $file = str_replace($exact, $replacement, $file);
-
-
         }
 
         file_put_contents($fileName, $file);
         return true;
-
     }
 
     /**

@@ -25,8 +25,7 @@ EOS;
         $alldep = count($src->getDependency());
         
         foreach ($src->getDependency() as $i => $dependency) {
-        	
-        	$alldep -= 1;
+            $alldep -= 1;
 
             $fullname = $this->resolveNamespace($dependency);
 
@@ -60,7 +59,6 @@ EOS;
 
 
         if (empty($src->getDependency())) {
-
             $template .= ');'.PHP_EOL;
             return $template;
         }
@@ -95,8 +93,6 @@ EOS;
         $name = end($allNames);
 
         if ($data !== null && $data->getDb() !== null) {
-
-
             if (preg_match('/[a-zA-Z***REMOVED****Repository/', $dependency, $matches) === 1) {
                 return $this->str('var', 'repository');
             }

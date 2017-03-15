@@ -674,12 +674,10 @@ EOS;
         $text = '';
 
         foreach ($use as $name) {
-
             $text .= sprintf($template, $name);
         }
 
         return $text;
-
     }
 
    /**

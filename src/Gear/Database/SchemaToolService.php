@@ -12,7 +12,25 @@ class SchemaToolService extends DbAbstractService
     use AutoincrementServiceTrait;
     use TableServiceTrait;
 
+    protected $dbAdapter;
+
     protected static $rowCount = 1;
+
+
+    public function getDbAdapter()
+    {
+        if (!isset($this->dbAdapter)) {
+            $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        }
+
+        return $this->dbAdapter;
+    }
+
+    public function setDbAdapter($dbAdapter)
+    {
+        $this->dbAdapter = $dbAdapter;
+        return $this;
+    }
 
 
     public function getTableDeep($tableObject)
@@ -121,46 +139,46 @@ class SchemaToolService extends DbAbstractService
 
         if ($table->hasColumn('created')) {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
+            ->get('console')
+            ->writeLine(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
             $this->dropCreated($table);
         } else {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Column %s was dropped already from %s', 'created', $table->getName()), 2);
+            ->get('console')
+            ->writeLine(sprintf('Column %s was dropped already from %s', 'created', $table->getName()), 2);
         }
 
         if ($table->hasColumn('updated')) {
-             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
-             $this->dropUpdated($table);
+            $this->getServiceLocator()
+            ->get('console')
+            ->writeLine(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
+            $this->dropUpdated($table);
         } else {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Column %s was dropped already from %s', 'updated', $table->getName()), 2);
+            ->get('console')
+            ->writeLine(sprintf('Column %s was dropped already from %s', 'updated', $table->getName()), 2);
         }
 
         if ($table->hasColumn('created_by')) {
-             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
-             $this->dropCreatedBy($table);
+            $this->getServiceLocator()
+            ->get('console')
+            ->writeLine(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
+            $this->dropCreatedBy($table);
         } else {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Column %s was dropped already from %s', 'created_by', $table->getName()), 2);
+            ->get('console')
+            ->writeLine(sprintf('Column %s was dropped already from %s', 'created_by', $table->getName()), 2);
         }
 
         if ($table->hasColumn('updated_by')) {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
+            ->get('console')
+            ->writeLine(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
             $this->dropUpdatedBy($table);
         } else {
             $this->getServiceLocator()
-              ->get('console')
-              ->writeLine(sprintf('Column %s was dropped already from %s', 'updated_by', $table->getName()), 2);
+            ->get('console')
+            ->writeLine(sprintf('Column %s was dropped already from %s', 'updated_by', $table->getName()), 2);
         }
 
         //var_dump($table);
@@ -358,7 +376,7 @@ class SchemaToolService extends DbAbstractService
 
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
-        $this->updateCreated($name);
+        //$this->updateCreated($name);
 
         echo sprintf('Criado %s', 'created')."\n";
     }
@@ -430,12 +448,14 @@ class SchemaToolService extends DbAbstractService
 
         $table->addColumn('created_by', 'integer', array_merge(array('limit' => 1), $options));
 
-        $tableHasData = $this->tableHasData($name);
+        /**
+         $tableHasData = $this->tableHasData($name);
 
-        if ($tableHasData) {
-            $table->update();
-            $this->updateCreatedBy($name);
-        }
+         if ($tableHasData) {
+         $table->update();
+         $this->updateCreatedBy($name);
+         }
+         */
 
         $table->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
@@ -445,14 +465,12 @@ class SchemaToolService extends DbAbstractService
 
     public function tableHasData($tableName)
     {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $dbAdapter = $this->getDbAdapter();
 
         $select = new \Zend\Db\Sql\Select();
         $select->from($tableName);
 
-
         $sql = $select->getSqlString($dbAdapter->getPlatform());
-
         $data = $dbAdapter->query($sql)->execute();
 
         if ($data->count() >= 1) {
@@ -464,7 +482,7 @@ class SchemaToolService extends DbAbstractService
 
     public function updateCreatedBy($tableName)
     {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $dbAdapter = $this->getDbAdapter();
 
 
         $update = new \Zend\Db\Sql\Update($tableName);
@@ -481,14 +499,14 @@ class SchemaToolService extends DbAbstractService
             $where->isNotNull($primaryKey);
         });
 
-        $sql = $update->getSqlString($dbAdapter->getPlatform());
+            $sql = $update->getSqlString($dbAdapter->getPlatform());
 
-        return $dbAdapter->query($sql)->execute();
+            return $dbAdapter->query($sql)->execute();
     }
 
     public function updateCreated($tableName)
     {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+        $dbAdapter = $this->getDbAdapter();
 
 
         $update = new \Zend\Db\Sql\Update($tableName);
@@ -505,9 +523,9 @@ class SchemaToolService extends DbAbstractService
             $where->isNotNull($primaryKey);
         });
 
-        $sql = $update->getSqlString($dbAdapter->getPlatform());
+            $sql = $update->getSqlString($dbAdapter->getPlatform());
 
-        return $dbAdapter->query($sql)->execute();
+            return $dbAdapter->query($sql)->execute();
     }
 
     /**
