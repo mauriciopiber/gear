@@ -4,13 +4,13 @@ versions:
     description: Correção da maioria dos bugs 2
     project: GP
     
-#issues:
-#  0:
-#    summary: "Bug ao ler texto das páginas do Create Action."
-#    description: "TypeError: page.indexText is not a function"
-#    type: Bug
-#    project: GP
-#    estimate: 0.25h
-#    sprint: 27
-#    version: gear-0.2.126
-#    dueDate: 16/03/2017
+issues:
+  0:
+    summary: "Passar todos testes de Src/Controller para pasta Local."
+    description: "Passar os testes antigos para deprecated"
+    type: Story
+    project: GP
+    estimate: 0.5h
+    sprint: 27
+    version: gear-0.2.127
+    dueDate: 16/03/2017

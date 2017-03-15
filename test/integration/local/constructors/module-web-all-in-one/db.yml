@@ -1,0 +1,37 @@
+modules: MyModule
+
+db:
+  0:
+    table: AllColumns
+
+src:
+  1:
+    name: IntForeignKey
+    type: Entity
+    db: IntForeignKey
+  2:
+    name: IntForeignKeyFixture
+    type: Fixture
+    db: IntForeignKey
+   
+
+controller:
+                   
+  27:
+    name: AllColumnsController
+    service: factories
+    actions:
+      01:
+        name: First
+      02:
+        name: Second
+      03:
+        name: Third
+      04:
+        name: Four
+      05:
+        name: Five
+      06:
+        name: Six
+      07:
+        name: Seven        
