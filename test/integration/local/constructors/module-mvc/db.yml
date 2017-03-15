@@ -6,7 +6,7 @@ db:
 
 src:
   1:
-    name: IntForeignKeyEntity
+    name: IntForeignKey
     type: Entity
     db: IntForeignKey
   2:
