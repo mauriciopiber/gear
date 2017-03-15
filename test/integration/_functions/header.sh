@@ -40,8 +40,18 @@ function modulepath
     echo $file
 }
 
+function copyMigration
+{
+    cp "${2}" "${1}/data/migrations/"	
+}
+
 function copyGearfile
 {
     cp "${2}" "${1}/gearfile.yml"	
 }
 
+function staging
+{
+	
+    echo "stag01.pibernetwork.com"
+}

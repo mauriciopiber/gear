@@ -5,5 +5,11 @@ src:
     name: FirstService
     service: factories
     type: Service
-    namespace: StarterPack
-    
+    namespace: StarterPack\First
+  1: 
+    name: SecondService
+    service: factories
+    type: Service
+    namespace: StarterPack\Second
+    dependency:
+      0: StarterPack\First\FirstService
