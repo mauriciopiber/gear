@@ -405,8 +405,11 @@ class ModuleService implements ModuleProjectConnectorInterface
                 $this->getPage()->createIndexPage();
                 $this->getStep()->createIndexStep();
 
-                $this->getStagingScript();
-                $this->getInstallStagingScript();
+                if ($collection==1 && !empty($this->staging)) {
+                    $this->getStagingScript();
+                    $this->getInstallStagingScript();
+                }
+
 
 
                 break;

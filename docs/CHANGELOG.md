@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.126***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12527) - 15/03/2017
+
+### Adicionados
+
+- [X***REMOVED*** Routes/Navigation apresentando problemas, está criando todas ações mas só aparece a última criada. [[#GP-205***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-205)***REMOVED***
+
+### Corrigidos
+
+- [X***REMOVED*** Bug ao ler texto das páginas do Create Action. [[#GP-211***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-211)***REMOVED***
+- [X***REMOVED*** Staging não pode ser obrigatório à ponto de ocasionar exceptions ao criar sem Módulo sem staging [[#GP-208***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-208)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.125***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12524) - 13/03/2017
 
 ### Adicionados
