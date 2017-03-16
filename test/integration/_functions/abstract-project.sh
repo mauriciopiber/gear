@@ -18,7 +18,12 @@ function deleteProject
 	project=${1}
     basepath=$(basepath)
     projectPath=$(getPath "$project")
-    sudo rm -R $projectPath
+    
+    ls -l "$projectPath" > /dev/null
+
+    if [ "${?}" == 0 ***REMOVED***; then
+        sudo rm -R $projectPath	
+    fi    
 }
 
 function createProject
