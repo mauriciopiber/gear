@@ -13,6 +13,14 @@ function getPath
 }
 
 
+function deleteProject
+{
+	project=${1}
+    basepath=$(basepath)
+    projectPath=$(getPath "$project")
+    sudo rm -R $projectPath
+}
+
 function createProject
 {
     project=${1}
@@ -52,7 +60,8 @@ function testProject
 {
     projectPath=$(getPath "${1}")
     cd $projectPath 
-    ant prepare phpcs phpcs-docs phpmd phpcpd unit karma protractor 
+    #ant phpcs-docs
+    ant prepare phpcs phpmd phpcpd unit karma protractor 
 }
 
 function constructModuleProject
@@ -92,7 +101,7 @@ function prepareConstruct
 
 function copyGearfileProject
 {
-    cp "${1}" "${2}"	
+    sudo cp "${1}" "${2}"	
 }
 
 

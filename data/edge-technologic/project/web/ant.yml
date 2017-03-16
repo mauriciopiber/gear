@@ -27,6 +27,7 @@ target:
   phpmd-ci: ''
   phpcs: ''
   phpcs-ci: ''
+  phpcs-docs: ''
   phpcpd: ''
   phpcpd-ci: ''
   pdepend: ''
