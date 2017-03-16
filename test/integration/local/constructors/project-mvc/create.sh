@@ -8,7 +8,15 @@ source "$headersDir/abstract-project.sh"
 project="ProjectMvc"
 
 createProject "$project"
-createModuleWeb "$project" "MyProjectModuleWeb"
 createModuleCli "$project" "MyProjectModuleCli"
+createModuleWeb "$project" "MyProjectModuleWeb"
+createModuleWeb "$project" "MyProjectModuleMvc"
+
+constructModuleProject "$project" "MyProjectModuleCli" "$scriptDir" "module-cli.yml"
+constructModuleProject "$project" "MyProjectModuleWeb" "$scriptDir" "module-web.yml"
+
+prepareConstruct "$project" "$scriptDir/20160123222068_all_columns.php"
+constructModuleProject "$project" "MyProjectModuleMvc" "$scriptDir" "module-mvc.yml"
+
 reload "$project"
 testProject "$project"

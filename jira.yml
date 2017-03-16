@@ -4,20 +4,5 @@ versions:
     description: Correção da maioria dos bugs 2
     project: GP
 issues:
-  6:
-    summary: "Adicionar Issue ao Gear Deploy Bump para deploy rápido sem CI"
-    description: "No fluxo do Gear, GearAdmin, para deploy extremamente rápido, é interessante ter esse recurso, só não deve ser usado como padrão, o padrão é passar pela CI"
-    type: Bug
-    project: GD
-    estimate: 1h
-    sprint: 27
-    dueDate: 14/03/2017
-  7:
-    summary: "Bug no MYSQL ao rodar comandos no contexto do Projeto"
-    description: "Está acontecendo um erro sinistro ao gerar DB pelo Projeto, resolver."
-    type: Bug
-    project: GP
-    estimate: 1h
-    sprint: 27
-    dueDate: 14/03/2017
-    
+  0:
+    summary: "falta phpcs-docs na build.xml de project"    
