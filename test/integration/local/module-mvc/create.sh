@@ -5,8 +5,10 @@ headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../_
 
 source "$headersDir/abstract-web.sh"
 
-removeModule "ModuleMvc"
+module="ModuleMvc"
 
-constructModuleWeb "ModuleMvc"
+removeModule "$module"
 
-runConstructDb "ModuleMvc" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"
+constructModuleWeb "$module"
+
+runConstructDb "$module" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"
