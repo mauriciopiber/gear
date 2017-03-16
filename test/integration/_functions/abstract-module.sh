@@ -11,7 +11,9 @@ function removeModule
     moduleUrl=$(moduleUrl "$module")
     modulePath=$(modulepath "$moduleUrl")
 
-    sudo rm -R $modulePath
+    if [ -d "$modulePath" ***REMOVED***; then
+    	sudo rm -R $modulePath
+    fi
 }
 
 function resetModule
