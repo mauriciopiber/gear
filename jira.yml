@@ -11,6 +11,13 @@ issues:
     project: GD
     estimate: 1h
     sprint: 27
-    version: gear-deploy-0.2.74
+    dueDate: 14/03/2017
+  7:
+    summary: "Bug no MYSQL ao rodar comandos no contexto do Projeto"
+    description: "Está acontecendo um erro sinistro ao gerar DB pelo Projeto, resolver."
+    type: Bug
+    project: GP
+    estimate: 1h
+    sprint: 27
     dueDate: 14/03/2017
     

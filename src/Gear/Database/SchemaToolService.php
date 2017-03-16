@@ -12,25 +12,7 @@ class SchemaToolService extends DbAbstractService
     use AutoincrementServiceTrait;
     use TableServiceTrait;
 
-    protected $dbAdapter;
-
     protected static $rowCount = 1;
-
-
-    public function getDbAdapter()
-    {
-        if (!isset($this->dbAdapter)) {
-            $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        }
-
-        return $this->dbAdapter;
-    }
-
-    public function setDbAdapter($dbAdapter)
-    {
-        $this->dbAdapter = $dbAdapter;
-        return $this;
-    }
 
 
     public function getTableDeep($tableObject)
@@ -350,7 +332,7 @@ class SchemaToolService extends DbAbstractService
                 'ALTER TABLE %s ADD %s INT PRIMARY KEY AUTO_INCREMENT;',
                 $db->getTable(),
                 $namePrimaryToCompare
-            );
+                );
             $this->getAdapter()->query($sql);
         }
 
@@ -376,7 +358,7 @@ class SchemaToolService extends DbAbstractService
 
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
-        //$this->updateCreated($name);
+        $this->updateCreated($name);
 
         echo sprintf('Criado %s', 'created')."\n";
     }
@@ -448,14 +430,12 @@ class SchemaToolService extends DbAbstractService
 
         $table->addColumn('created_by', 'integer', array_merge(array('limit' => 1), $options));
 
-        /**
-         $tableHasData = $this->tableHasData($name);
+        $tableHasData = $this->tableHasData($name);
 
-         if ($tableHasData) {
-         $table->update();
-         $this->updateCreatedBy($name);
-         }
-         */
+        if ($tableHasData) {
+            $table->update();
+            $this->updateCreatedBy($name);
+        }
 
         $table->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
@@ -465,12 +445,14 @@ class SchemaToolService extends DbAbstractService
 
     public function tableHasData($tableName)
     {
-        $dbAdapter = $this->getDbAdapter();
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 
         $select = new \Zend\Db\Sql\Select();
         $select->from($tableName);
 
+
         $sql = $select->getSqlString($dbAdapter->getPlatform());
+
         $data = $dbAdapter->query($sql)->execute();
 
         if ($data->count() >= 1) {
@@ -482,7 +464,7 @@ class SchemaToolService extends DbAbstractService
 
     public function updateCreatedBy($tableName)
     {
-        $dbAdapter = $this->getDbAdapter();
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 
 
         $update = new \Zend\Db\Sql\Update($tableName);
@@ -490,7 +472,7 @@ class SchemaToolService extends DbAbstractService
             [
                 'created_by' => 1
             ***REMOVED***
-        );
+            );
 
         $primaryKey = 'id_'.$this->str('uline', $tableName);
 
@@ -506,7 +488,7 @@ class SchemaToolService extends DbAbstractService
 
     public function updateCreated($tableName)
     {
-        $dbAdapter = $this->getDbAdapter();
+        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
 
 
         $update = new \Zend\Db\Sql\Update($tableName);
@@ -514,7 +496,7 @@ class SchemaToolService extends DbAbstractService
             [
                 'created' => (new \DateTime('now'))->format('Y-m-d H:i:s')
             ***REMOVED***
-        );
+            );
 
         $primaryKey = 'id_'.$this->str('uline', $tableName);
 
@@ -560,7 +542,7 @@ class SchemaToolService extends DbAbstractService
                 'Updated Time',
                 'Updated By'
             )
-        );
+            );
         return $tableScreen;
     }
 

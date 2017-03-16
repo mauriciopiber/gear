@@ -9,4 +9,4 @@ removeModule "ModuleMvc"
 
 constructModuleWeb "ModuleMvc"
 
-runConstructDb "ModuleMvc" "$scriptDir/db.yml" "$scriptDir/20160123222067_all_columns_db.php"
+runConstructDb "ModuleMvc" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"
