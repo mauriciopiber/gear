@@ -96,6 +96,8 @@ class AllColumns extends AbstractMigration
 
         $table->addForeignKey('id_int_foreign_key', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
+        $this->setUser($table);
+
         $table->create();
     }
 
@@ -141,4 +143,16 @@ class AllColumns extends AbstractMigration
 */
 
     }
+
+    public function setUser(&$table)
+    {
+        $table->addColumn('created', 'datetime', array('null' => false))
+        ->addColumn('created_by', 'integer', array('null' => false))
+        ->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
+
+        ->addColumn('updated', 'datetime', array('null' => true))
+        ->addColumn('updated_by', 'integer', array('null' => true))
+        ->addForeignKey('updated_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+    }
+
 }
