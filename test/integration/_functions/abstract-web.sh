@@ -62,7 +62,7 @@ function constructWeb
     sudo php public/index.php gear module construct $module $basePath
     sudo script/load.sh
     sudo php public/index.php gear database module dump $module
-    ant phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor
+    ant prepare phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor
 }
 
 function constructModuleWeb
