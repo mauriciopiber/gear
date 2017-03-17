@@ -1,0 +1,5 @@
+module: Food
+
+db:
+  0:
+    table: Food
