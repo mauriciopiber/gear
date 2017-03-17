@@ -21,11 +21,12 @@ return [
         'welcome' => '<?php echo $this->adminWelcome;?>'
      ***REMOVED***,
     'db' => [
-        'dsn' => 'mysql:dbname=<?php echo $this->dbname;?>;host=localhost',
         'driver' => 'Pdo',
-        'charset' => 'UTF8',
+        'username' => 'root',
+        'password' => 'gear',
+        'dsn' => 'mysql:dbname=<?php echo $this->dbname;?>;host=localhost',
         'driver_options' => [
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ***REMOVED***
     ***REMOVED***,
     'phinx' => [

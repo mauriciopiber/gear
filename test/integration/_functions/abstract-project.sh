@@ -35,6 +35,19 @@ function createProject
     sudo script/deploy-development.sh    
 }
 
+function clearModuleProject
+{
+    project=${1}
+    basepath=$(basepath)
+    projectPath=$(getPath "$project")
+    module=${2}
+    
+    
+    cd $projectPath
+    sudo php public/index.php gear schema delete $module
+    sudo php public/index.php gear schema create $module		
+}
+
 function createModuleWeb
 {
     projectPath=$(getPath "${1}")

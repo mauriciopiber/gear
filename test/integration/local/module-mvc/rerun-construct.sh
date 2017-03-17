@@ -7,4 +7,5 @@ headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../_
 
 source "$headersDir/abstract-web.sh"
 
+resetModule "ModuleMvc"
 runConstructDb "ModuleMvc" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"

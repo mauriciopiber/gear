@@ -2,7 +2,7 @@ return [
     'driver' => 'Pdo',
     'username' => 'root',
     'password' => 'gear',
-    'dsn' => 'mysql:dbname=my_module;host=localhost',
+    'dsn' => 'mysql:dbname=<?php echo $this->moduleDb;?>;host=localhost',
     'driver_options' => [
         \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
     ***REMOVED***

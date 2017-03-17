@@ -26,7 +26,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     protected $languageService;
 
     const GIT_PATTERN = 'git@bitbucket.org:mauriciopiber/%s.git';
-    
+
    /**
      * Função responsável por adicionar as configurações de um DB à um módulo já existente.
      *
@@ -128,36 +128,36 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
         return true;
     }
-    
-    
+
+
     public function getGit($git = null)
     {
         if (!empty($git)) {
             return $git;
         }
-        
+
         return sprintf(self::GIT_PATTERN, $this->str('url', $this->getModule()->getModuleName()));
     }
 
     public function getModuleConfig($type, $controllers, $git = null, $staging = null)
     {
         $git = $this->getGit($git);
-        
+
         $options = array(
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'controllers' => $controllers,
             'git' => $git
         );
-        
+
         if ($type == 'web') {
             $host = sprintf('%s.gear.dev', $this->str('url', $this->getModule()->getModuleName()));
-            
+
             $options['staging'***REMOVED*** = $staging;
             $options['development'***REMOVED*** = $host;
             $options['testing'***REMOVED*** = $host;
         }
-        
+
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
         $file->setOptions($options);
@@ -171,7 +171,10 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     {
         $this->getFileCreator()->createFile(
             'template/module/config/db.mysql.config.phtml',
-            array('module' => $this->getModule()->getModuleName()),
+            [
+                'module' => $this->getModule()->getModuleName(),
+                'moduleDb' => $this->str('uline', $this->getModule()->getModuleName()),
+            ***REMOVED***,
             'db.config.php',
             $this->getModule()->getConfigExtFolder()
         );
