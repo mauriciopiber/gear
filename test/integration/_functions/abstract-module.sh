@@ -27,6 +27,6 @@ function resetModule
     	
     cd $modulePath 
     vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
-    sudo php public/index.php gear schema delete $module $basePath
-    sudo php public/index.php gear schema create $module $basePath	
+    sudo php public/index.php gear schema delete $module --basepath=$basePath
+    sudo php public/index.php gear schema create $module --basepath=$basePath	
 }

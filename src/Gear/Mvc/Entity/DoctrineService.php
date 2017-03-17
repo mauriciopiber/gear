@@ -20,7 +20,13 @@ class DoctrineService extends ScriptService
      */
     public function getDoctrineModule()
     {
-        return $this->getModule()->getMainFolder().'/vendor/bin/doctrine-module';
+        $fromModule = $this->getModule()->getMainFolder().'/vendor/bin/doctrine-module';
+
+        if (is_file($fromModule) || is_link($fromModule)) {
+            return $fromModule;
+        }
+
+        return \GearBase\Module::getProjectFolder().'/vendor/bin/doctrine-module';
     }
 
     /**
