@@ -1,0 +1,5 @@
+module: Book
+
+db:
+  0:
+    table: Book

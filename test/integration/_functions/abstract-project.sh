@@ -92,7 +92,7 @@ function constructModuleProject
     gearfileName=${4}
 
     # COPY GEARFILE
-    copyGearfileProject "$scriptsDir/$gearfileName" "$projectPath/$gearfileName"
+    copyGearfileProject "$scriptsDir/gearfiles/$gearfileName" "$projectPath/$gearfileName"
 
     # CONSTRUCT 
     constructInProject "$projectPath" "$module" "$gearfileName" 	

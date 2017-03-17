@@ -6,12 +6,8 @@ versions:
 issues:
 
   6:
-    summary: "Corrigido EntityService que estava não estava puxando pela pasta do projeto."
-    description: "Mudar para pegar em projeto no último caso"
+    summary: "Foi corrigido o erro do Mysql, porém não de forma objetiva, removendo o módulo CLI funciona."
+    description: "Descobrir o motivo técnico que causa a deformidade do projeto não conseguir usar o banco de dados quando há um projeto virgem cli junto à ele."
     type: Bug
     project: GP
-    estimate: 1h
-    sprint: 27
-    version: gear-0.2.128
-    dueDate: 17/03/2017
-
+    estimate: 4h
