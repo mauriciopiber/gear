@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.129***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12800) - 18/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Corrigir SchemaTool do Database [[#GP-218***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-218)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.127***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12601) - 15/03/2017
 
 ### Adicionados

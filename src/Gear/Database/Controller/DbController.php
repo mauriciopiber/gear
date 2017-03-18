@@ -4,7 +4,6 @@ namespace Gear\Database\Controller;
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Database\SchemaToolServiceTrait;
-use Gear\Database\TableServiceTrait;
 use Gear\Database\BackupServiceTrait;
 use Gear\Database\AutoincrementServiceTrait;
 use Gear\Database\Phinx\PhinxServiceTrait;
@@ -13,68 +12,25 @@ class DbController extends AbstractConsoleController
 {
 
     use SchemaToolServiceTrait;
-    use TableServiceTrait;
     use BackupServiceTrait;
     use AutoincrementServiceTrait;
     use PhinxServiceTrait;
 
-    
     public function createMigrationAction()
     {
         $module = $this->getRequest()->getParam('module', null);
         $name = $this->getRequest()->getParam('name');
-        
+
         $result = $this->getPhinxService()->createMigration($module, $name);
-        
+
         $model = new ConsoleModel();
-        
+
         if ($result === false) {
             $model->setErrorLevel(1);
         }
-        
+
         return $model;
     }
-    
-    public function createColumnAction()
-    {
-        $tableName = $this->getRequest()->getParam('table');
-        $columnName = $this->getRequest()->getParam('name');
-        $columnType = $this->getRequest()->getParam('type');
-        $columnLimit = $this->getRequest()->getParam('limit', null);
-        $columnNull  = (bool) $this->getRequest()->getParam('null', null);
-
-        $tableService = $this->getTableService();
-
-        $tableService->createColumn($tableName, $columnName, $columnType, $columnLimit, $columnNull);
-
-        return new ConsoleModel();
-    }
-
-    public function mockTableAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-mock-table'));
-
-        $tableService = $this->getTableService();
-
-        $tableService->mockTable();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
-
-    public function dropTableAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-drop-table'));
-        $tableName = $this->getRequest()->getParam('table');
-
-        $tableService = $this->getTableService();
-
-        $tableService->dropTable($tableName);
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
-    }
-
 
     public function autoincrementTableAction()
     {
@@ -139,21 +95,6 @@ class DbController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function getOrderAction()
-    {
-        $schemaToolService = $this->getSchemaToolService();
-        $schemaToolService->getOrder();
-        return new ConsoleModel();
-    }
-
-    public function mysqlDumpAction()
-    {
-        $this->getBackupService()->mysqlDump();
-
-        return new ConsoleModel();
-    }
-
-
     public function projectDumpAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'database-project-dump'));
@@ -198,10 +139,15 @@ class DbController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-
-
-    public function mysqlLoadAction()
+    public function dumpAction()
     {
-        $this->getBackupService()->mysqlLoad();
+        $this->getBackupService()->dump();
+
+        return new ConsoleModel();
+    }
+
+    public function loadAction()
+    {
+        $this->getBackupService()->load();
     }
 }

@@ -28,22 +28,6 @@ class BackupService extends DbAbstractService
         $this->module = $module;
     }
 
-    public function getBackupName()
-    {
-        $name = $this->getRequest()->getParam('name', null);
-
-        if (!$name) {
-            $backupName = sprintf(
-                '%s_backup_%s.txt',
-                $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***,
-                date('H.i.s.d.m.Y')
-            );
-
-            return $backupName;
-        }
-        return $name;
-    }
-
     public function projectLoad()
     {
         if (!isset($this->config['gear'***REMOVED***['project'***REMOVED***)) {
@@ -120,12 +104,6 @@ class BackupService extends DbAbstractService
     public function getLocation()
     {
         $location = $this->getRequest()->getParam('location');
-
-
-        if (realpath($location) == false) {
-            throw new \Exception('Location not found');
-        }
-
         return $location;
     }
 
@@ -172,27 +150,20 @@ class BackupService extends DbAbstractService
             throw new \Exception('Dump não foi criado com sucesso');
         }
 
-        $this->console->writeLine(sprintf('Criado %s', $this->backupName));
-        $this->console->writeLine(sprintf($this->file));
+        $this->console->writeLine(sprintf('Criado dump de %s', $this->file));
 
         return $this->file;
     }
 
-    public function mysqlDump()
+    public function dump()
     {
         $this->init();
 
         $location = $this->getLocation();
 
-        $path = realpath($location).'/';
 
-        $this->file = sprintf(
-            '%s%s',
-            $path,
-            $this->getBackupName()
-        );
+        $this->file = $location;
 
-        $this->backupName = $this->getBackupName();
 
         $this->runDump();
 
@@ -200,7 +171,7 @@ class BackupService extends DbAbstractService
         return true;
     }
 
-    public function mysqlLoad()
+    public function load()
     {
         $this->init();
 
@@ -224,7 +195,7 @@ class BackupService extends DbAbstractService
         $this->getScriptService()->runScriptAt($command);
 
         if (is_file($this->file)) {
-            echo sprintf('Carregado backup de %s', $this->file)."\n";
+            echo sprintf('Carregado database de %s', $this->file)."\n";
         } else {
             throw new \Exception('Dump não foi criado com sucesso');
         }

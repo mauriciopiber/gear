@@ -53,7 +53,7 @@ return [
     'gear' => [
         'modules' => [
             'gear' => [
-                'version' => '0.2.128',
+                'version' => '0.2.129',
                 'acl' => true,
                 'name' => __NAMESPACE__,
                 'git' => 'git@bitbucket.org:mauriciopiber/gear.git'
@@ -92,7 +92,7 @@ return [
     ***REMOVED***,
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=gear;host=localhost',
+        'dsn' => 'mysql:dbname=project_mvc;host=localhost',
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ***REMOVED***
@@ -106,7 +106,7 @@ return [
                 'params' => [
                     'host' => 'localhost',
                     'port' => '3306',
-                    'dbname' => 'gear',
+                    'dbname' => 'project_mvc',
                     'charset' => 'utf8'
                 ***REMOVED***
             ***REMOVED***

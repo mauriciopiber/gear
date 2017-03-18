@@ -4,185 +4,35 @@ namespace Gear\Database;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Database\TableValidation;
 use Gear\Database\AutoincrementServiceTrait;
-use Gear\Database\TableServiceTrait;
+use Gear\Database\Connector\DbConnector\DbConnectorTrait;
+use Gear\Database\Connector\PhinxConnector\PhinxConnectorTrait;
+use Gear\Table\TableService\TableServiceTrait;
+use Zend\Db\Sql\Update;
+use Zend\Text\Table\Column;
 
 class SchemaToolService extends DbAbstractService
 {
-
     use AutoincrementServiceTrait;
-    use TableServiceTrait;
+
+    use DbConnectorTrait;
+
+    use PhinxConnectorTrait;
 
     protected static $rowCount = 1;
 
-
-    public function getTableDeep($tableObject)
+    public function notifyDropColumn($name, $table)
     {
-        return "".$this->stats[$tableObject***REMOVED***;
+        $this->getServiceLocator()
+            ->get('console')
+            ->writeLine(sprintf('Dropping Column %s for %s', $name, $table->getName()), 3);
+
     }
 
-    public function getTableOrder($mix)
+    public function notifyColumnAlreadyDrop($name, $table)
     {
-        return "".(10000-$mix);
-    }
-
-    public function getConstraintsByName($name)
-    {
-        if (!isset($this->stats[$name***REMOVED***)) {
-            return;
-        }
-
-        $this->stats[$name***REMOVED*** = $this->stats[$name***REMOVED***+1;
-        $constraints = $this->tables[$name***REMOVED***->getConstraints();
-
-        $goingDeep = [***REMOVED***;
-
-        if (count($constraints)>0) {
-            foreach ($constraints as $constraint) {
-                if ($constraint->getType() == 'FOREIGN KEY') {
-                    $goingDeep[***REMOVED*** = $constraint;
-                }
-            }
-        }
-
-
-        if (count($goingDeep)>0) {
-            foreach ($goingDeep as $constraint) {
-                if ($constraint->getReferencedTableName() != $name) {
-                    if (!in_array($constraint->getReferencedTableName(), $this->history)) {
-                        $this->history[***REMOVED*** = $constraint->getReferencedTableName();
-                        $this->getConstraintsByName($constraint->getReferencedTableName());
-                    } else {
-                        $this->stats[$name***REMOVED*** += 1;
-                    }
-                }
-            }
-        }
-    }
-
-
-    public function createBorder()
-    {
-        foreach (array_keys($this->tables) as $name) {
-            $this->history = array();
-            $this->getConstraintsByName($name);
-        }
-    }
-
-    public function setUpStats()
-    {
-        $schema = $this->getSchema();
-
-        $tables = $schema->getTables();
-
-        $options = [***REMOVED***;
-        $stats   = [***REMOVED***;
-
-        foreach ($tables as $table) {
-            $options[$table->getName()***REMOVED*** = $table;
-            $stats[$table->getName()***REMOVED*** = 1;
-        }
-
-        $this->tables = $options;
-        $this->stats  = $stats;
-
-        $this->createBorder();
-    }
-
-    public function getOrderNumber($tableName)
-    {
-        $this->setUpStats();
-        return $this->getTableOrder($this->getTableDeep($tableName));
-    }
-
-    public function getOrder()
-    {
-
-        $this->setUpStats();
-
-        $tableScreen = $this->getOrderTable();
-
-        foreach ($this->tables as $table) {
-            $row = new \Zend\Text\Table\Row();
-            $row->appendColumn(new \Zend\Text\Table\Column($this->str('label', $table->getName())));
-
-            $deep = $this->getTableDeep($table->getName());
-            $row->appendColumn(new \Zend\Text\Table\Column($deep));
-            $row->appendColumn(new \Zend\Text\Table\Column($this->getTableOrder($deep)));
-            $tableScreen->appendRow($row);
-        }
-
-        echo $tableScreen;
-    }
-
-
-    public function dropSystematicColumns(TableObject $table)
-    {
-        $table = $this->table($table->getName());
-
-        if ($table->hasColumn('created')) {
-            $this->getServiceLocator()
+        $this->getServiceLocator()
             ->get('console')
-            ->writeLine(sprintf('Dropping Column %s for %s', 'created', $table->getName()), 3);
-            $this->dropCreated($table);
-        } else {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Column %s was dropped already from %s', 'created', $table->getName()), 2);
-        }
-
-        if ($table->hasColumn('updated')) {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Dropping Column %s for %s', 'updated', $table->getName()), 3);
-            $this->dropUpdated($table);
-        } else {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Column %s was dropped already from %s', 'updated', $table->getName()), 2);
-        }
-
-        if ($table->hasColumn('created_by')) {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Dropping Column %s for %s', 'created_by', $table->getName()), 3);
-            $this->dropCreatedBy($table);
-        } else {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Column %s was dropped already from %s', 'created_by', $table->getName()), 2);
-        }
-
-        if ($table->hasColumn('updated_by')) {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Dropping Column %s for %s', 'updated_by', $table->getName()), 3);
-            $this->dropUpdatedBy($table);
-        } else {
-            $this->getServiceLocator()
-            ->get('console')
-            ->writeLine(sprintf('Column %s was dropped already from %s', 'updated_by', $table->getName()), 2);
-        }
-
-        //var_dump($table);
-
-        return true;
-    }
-
-    public function clearTable($tableName)
-    {
-        $table = $this->getSchema()->getTable($this->str('uline', $tableName));
-        $tableScreen = $this->getTextTable();
-        $tableScreen->appendRow($this->getTableObjectToRow($table));
-        echo $tableScreen;
-        //show table before execution.
-
-        $this->dropSystematicColumns($table);
-
-        $table = $this->getSchema()->getTable($this->str('uline', $tableName));
-        $tableScreen = $this->getTextTable();
-        $tableScreen->appendRow($this->getTableObjectToRow($table));
-        echo $tableScreen;
-        //show table after execution.
+            ->writeLine(sprintf('Column %s was dropped already from %s', $name, $table->getName()), 2);
     }
 
 
@@ -216,8 +66,6 @@ class SchemaToolService extends DbAbstractService
         echo $tableScreen;
     }
 
-
-
     public function fixTable($tableName)
     {
 
@@ -228,7 +76,7 @@ class SchemaToolService extends DbAbstractService
         $this->executeFix($table);
 
 
-        $this->getTableService()->dropTable('phinxlog');
+        $this->dropTable('phinxlog');
 
         return true;
     }
@@ -240,9 +88,9 @@ class SchemaToolService extends DbAbstractService
 
     public function executeFix(TableObject $tableObject)
     {
-        //if ($table)
+        // Caso seja uma tabela exceptional que não deve ser alterada, volta.
         if (in_array($tableObject->getName(), $this->except())) {
-            return;
+            return true;
         }
 
         $tableValidation = new TableValidation($tableObject);
@@ -252,6 +100,10 @@ class SchemaToolService extends DbAbstractService
 
         if ($noTruncate === false) {
             $this->getAutoincrementService()->truncate($tableObject);
+        }
+
+        if (!$this->validatePrimaryKey($tableObject->getName())) {
+            $this->fixPrimaryKey($tableObject->getName());
         }
 
         if ($tableValidation->getCreated() != 'ok') {
@@ -267,15 +119,12 @@ class SchemaToolService extends DbAbstractService
             $this->createUpdatedBy($tableObject->getName());
         }
 
-        $db = $this->injectDbWithTable($tableObject);
-
-        if (!$this->validatePrimaryKey($db)) {
-            $this->fixPrimaryKey($db);
-        }
-
         return true;
     }
 
+    /**
+     * Corrige o banco de dados
+     */
     public function fixDatabase()
     {
         $schema = $this->getSchema();
@@ -285,6 +134,19 @@ class SchemaToolService extends DbAbstractService
         foreach ($tables as $table) {
             $this->executeFix($table);
         }
+
+        $this->dropTable('phinxlog');
+    }
+
+    public function dropTable($tableName)
+    {
+        $adapter = $this->getPhinxConnector()->getAdapter();
+        if ($adapter->hasTable($tableName)) {
+            $table = $this->getPhinxConnector()->getTable($tableName);
+            $table->drop();
+        }
+
+        $adapter->disconnect();
     }
 
     /**
@@ -292,21 +154,19 @@ class SchemaToolService extends DbAbstractService
      * @param GearJson\Db\Db $db
      * @return boolean
      */
-    public function validatePrimaryKey($db)
+    public function validatePrimaryKey($tableName)
     {
         $actualPrimaryKey = '';
+
         try {
-            $actualPrimaryKey = $db->getPrimaryKeyColumnName();
+            $actualPrimaryKey = $this->getPrimaryKeyColumnName($tableName);
         } catch (\Exception $e) {
             $actualPrimaryKey = false;
         }
-        $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
 
-        if ($actualPrimaryKey == $namePrimaryToCompare) {
-            $statusPrimary =  true;
-        } else {
-            $statusPrimary = false;
-        }
+        $namePrimaryToCompare = sprintf('id_%s', $this->str('uline', $tableName));
+
+        $statusPrimary = ($actualPrimaryKey == $namePrimaryToCompare);
 
         return $statusPrimary;
     }
@@ -314,26 +174,20 @@ class SchemaToolService extends DbAbstractService
     /**
      * @param GearJson\Db\Db $db
      */
-    public function fixPrimaryKey($db)
+    public function fixPrimaryKey($tableName)
     {
-        $actualPrimaryKey = '';
-        try {
-            $actualPrimaryKey = $db->getPrimaryKeyColumnName();
-        } catch (\Exception $e) {
-            $actualPrimaryKey = false;
-        }
-        $namePrimaryToCompare = 'id_'.$this->str('uline', $db->getTable());
+        $namePrimaryToCompare = 'id_'.$this->str('uline', $tableName);
 
-        $table = $this->table($db->getTable());
-
+        $table = $this->getPhinxConnector()->getTable($tableName);
 
         if (false === $table->hasColumn($namePrimaryToCompare)) {
             $sql = sprintf(
                 'ALTER TABLE %s ADD %s INT PRIMARY KEY AUTO_INCREMENT;',
-                $db->getTable(),
+                $tableName,
                 $namePrimaryToCompare
-                );
-            $this->getAdapter()->query($sql);
+            );
+            $this->getDbConnector()->query($sql);
+            $this->getDbConnector()->disconnect();
         }
 
         return;
@@ -347,18 +201,17 @@ class SchemaToolService extends DbAbstractService
         if ($name == 'user_role_linker') {
             return;
         }
-        $table = $this->table($name);
+        $table = $this->getPhinxConnector()->getTable($name);
 
-        $table->hasColumn('created');
-
-        if ($table->hasColumn('created')) {
-            $table->removeColumn('created');
-            $table->update();
-        }
+        $this->dropColumn($table, 'created', false);
 
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
-        $this->updateCreated($name);
+        $this->updateReference($name,
+            [
+                'created' => (new \DateTime('now'))->format('Y-m-d H:i:s')
+            ***REMOVED***
+        );
 
         echo sprintf('Criado %s', 'created')."\n";
     }
@@ -371,14 +224,9 @@ class SchemaToolService extends DbAbstractService
         if ($name == 'user_role_linker') {
             return;
         }
-        $table = $this->table($name);
+        $table = $this->getPhinxConnector()->getTable($name);
 
-        if ($table->hasColumn('updated')) {
-            $table->removeColumn('updated');
-            $table->update();
-        }
-
-
+        $this->dropColumn($table, 'updated', false);
 
         $table->addColumn('updated', 'datetime', array('null' => true));
         $table->update();
@@ -394,15 +242,26 @@ class SchemaToolService extends DbAbstractService
             return;
         }
 
-        $table = $this->table($name);
-        if ($table->hasColumn('updated_by')) {
-            $this->dropUpdatedBy($table);
-        }
+        $table = $this->getPhinxConnector()->getTable($name);
+
+        $this->dropColumn($table, 'updated_by', true);
 
         $table->addColumn('updated_by', 'integer', array('limit' => 1, 'null' => true))
         ->addForeignKey('updated_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         $table->update();
         echo sprintf('Criado %s', 'updated_by')."\n";
+    }
+
+    public function dropColumn($table, $name, $foreignKey = false)
+    {
+        if ($table->hasColumn($name)) {
+
+            if ($foreignKey) {
+                $table->dropForeignKey($name);
+            }
+            $table->removeColumn($name);
+            $table->update();
+        }
     }
 
     /**
@@ -413,20 +272,11 @@ class SchemaToolService extends DbAbstractService
         if ($name == 'user_role_linker') {
             return;
         }
-        $table = $this->table($name);
+        $table = $this->getPhinxConnector()->getTable($name);
 
+        $this->dropColumn($table, 'created_by', true);
 
-        if ($table->hasColumn('created_by')) {
-            $table->dropForeignKey('created_by');
-            $table->removeColumn('created_by');
-            $table->update();
-        }
-
-        if ($name == 'user') {
-            $options = array('null' => true);
-        } else {
-            $options = array('null' => false);
-        }
+        $options = ($name == 'user') ? array('null' => true) : array('null' => false);
 
         $table->addColumn('created_by', 'integer', array_merge(array('limit' => 1), $options));
 
@@ -434,26 +284,34 @@ class SchemaToolService extends DbAbstractService
 
         if ($tableHasData) {
             $table->update();
-            $this->updateCreatedBy($name);
+            $this->updateReference($name, [
+                'created_by' => 1
+            ***REMOVED***);
         }
 
-        $table->addForeignKey('created_by', 'user', 'id_user', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+        $this->addForeignKey($table, 'created_by', 'user', 'id_user');
 
+        $this->notifyCreated('created_by');
+
+    }
+
+    public function notifyCreated($columnName)
+    {
+        $this->getServiceLocator()->get('console')->writeLine(sprintf('Criado %s', $columnName));
+    }
+
+    public function addForeignKey($table, $column, $tableReference, $reference)
+    {
+        $table->addForeignKey($column, $tableReference, $reference, array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
         $table->update();
-        echo sprintf('Criado %s', 'created_by')."\n";
     }
 
     public function tableHasData($tableName)
     {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-
         $select = new \Zend\Db\Sql\Select();
         $select->from($tableName);
 
-
-        $sql = $select->getSqlString($dbAdapter->getPlatform());
-
-        $data = $dbAdapter->query($sql)->execute();
+        $data = $this->getDbConnector()->select($select);
 
         if ($data->count() >= 1) {
             return true;
@@ -462,17 +320,10 @@ class SchemaToolService extends DbAbstractService
         return false;
     }
 
-    public function updateCreatedBy($tableName)
+    public function updateReference($tableName, $where)
     {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-
-
-        $update = new \Zend\Db\Sql\Update($tableName);
-        $update->set(
-            [
-                'created_by' => 1
-            ***REMOVED***
-            );
+        $update = new Update($tableName);
+        $update->set($where);
 
         $primaryKey = 'id_'.$this->str('uline', $tableName);
 
@@ -481,50 +332,7 @@ class SchemaToolService extends DbAbstractService
             $where->isNotNull($primaryKey);
         });
 
-            $sql = $update->getSqlString($dbAdapter->getPlatform());
-
-            return $dbAdapter->query($sql)->execute();
-    }
-
-    public function updateCreated($tableName)
-    {
-        $dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-
-
-        $update = new \Zend\Db\Sql\Update($tableName);
-        $update->set(
-            [
-                'created' => (new \DateTime('now'))->format('Y-m-d H:i:s')
-            ***REMOVED***
-            );
-
-        $primaryKey = 'id_'.$this->str('uline', $tableName);
-
-
-        $update->where(function ($where) use ($primaryKey) {
-            $where->isNotNull($primaryKey);
-        });
-
-            $sql = $update->getSqlString($dbAdapter->getPlatform());
-
-            return $dbAdapter->query($sql)->execute();
-    }
-
-    /**
-     *
-     * @param Zend\Db\Metadata\TableObject $table
-     * @return \GearJson\Db\Db
-     */
-    public function injectDbWithTable($table)
-    {
-        $data = array(
-            'table' => $this->str('uline', $table->getName()),
-            'tableObject' => $table,
-            'columns' => array()
-        );
-
-        $db = new \GearJson\Db\Db($data);
-        return $db;
+        return $this->getDbConnector()->update($update);
     }
 
     public function getTextTable()
@@ -542,16 +350,7 @@ class SchemaToolService extends DbAbstractService
                 'Updated Time',
                 'Updated By'
             )
-            );
-        return $tableScreen;
-    }
-
-    public function getOrderTable()
-    {
-        $tableScreen = new \Zend\Text\Table\Table(array('columnWidths' => array(30, 10, 10)));
-        // Either simple
-        $tableScreen->appendRow(array('Name', 'Deep', 'Order'));
-
+        );
         return $tableScreen;
     }
 
@@ -571,14 +370,44 @@ class SchemaToolService extends DbAbstractService
     }
 
 
+    /**
+     * Retorna exclusivamente o nome da Coluna em uma String. Chaves compostas vem divididas com ",".
+     *
+     * @param string $tableName Table Name
+     *
+     * @throws \Exception
+     *
+     * @return string
+     */
+    public function getPrimaryKeyColumnName($tableName)
+    {
+        $table = $this->getSchema()->getTable($this->str('uline', $tableName));
+
+        if ($table) {
+            $contraints = $table->getConstraints();
+
+            foreach ($contraints as $contraint) {
+                if ($contraint->getType() == 'PRIMARY KEY') {
+                    $columns = $contraint->getColumns();
+
+                    $column = implode(',', $columns);
+
+                    return $column;
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        throw new \Exception(sprintf('Tabela %s não possui Primary Key', $this->table));
+    }
+
 
     public function getTableObjectToRow(TableObject $tableObject)
     {
-        $db = $this->injectDbWithTable($tableObject);
-
         $tableValidation = new TableValidation($tableObject);
 
-        if ($this->validatePrimaryKey($db)) {
+        if ($this->validatePrimaryKey($tableObject->getName())) {
             $statusPrimary = 'ok';
         } else {
             $statusPrimary = 'fix';
@@ -586,41 +415,57 @@ class SchemaToolService extends DbAbstractService
 
         // Or verbose
         $row = new \Zend\Text\Table\Row();
-        $row->appendColumn(new \Zend\Text\Table\Column("".static::$rowCount));
-        $row->appendColumn(new \Zend\Text\Table\Column($this->str('label', $tableObject->getName())));
-        $row->appendColumn(new \Zend\Text\Table\Column($this->getPrimaryKeyName($db)));
-        $row->appendColumn(new \Zend\Text\Table\Column($statusPrimary));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreated()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getCreatedBy()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdated()));
-        $row->appendColumn(new \Zend\Text\Table\Column($tableValidation->getUpdatedBy()));
+        $row->appendColumn(new Column("".static::$rowCount));
+        $row->appendColumn(new Column($this->str('label', $tableObject->getName())));
+        $row->appendColumn(new Column($this->getPrimaryKeyColumnName($tableObject->getName())));
+        $row->appendColumn(new Column($statusPrimary));
+        $row->appendColumn(new Column($tableValidation->getCreated()));
+        $row->appendColumn(new Column($tableValidation->getCreatedBy()));
+        $row->appendColumn(new Column($tableValidation->getUpdated()));
+        $row->appendColumn(new Column($tableValidation->getUpdatedBy()));
 
         return $row;
     }
 
-    public function dropCreatedBy($table)
+    public function verifyAndDrop($table, $column, $foreignKey)
     {
-        $table->dropForeignKey('created_by');
-        $table->removeColumn('created_by');
-        $table->update();
+        if ($table->hasColumn($column)) {
+            $this->notifyDropColumn($column, $table);
+            $this->dropColumn($table, $column, $foreignKey);
+            return true;
+        }
+
+        return false;
     }
 
-    public function dropUpdatedBy($table)
+
+    public function dropSystematicColumns(TableObject $table)
     {
-        $table->dropForeignKey('updated_by');
-        $table->removeColumn('updated_by');
-        $table->update();
+        $table = $this->getPhinxConnector()->getTable($table->getName());
+
+        $this->verifyAndDrop($table, 'created', false);
+        $this->verifyAndDrop($table, 'updated', false);
+        $this->verifyAndDrop($table, 'created_by', true);
+        $this->verifyAndDrop($table, 'updated_by', true);
+
+        return true;
     }
 
-    public function dropCreated($table)
+    public function printTableStatus($table)
     {
-        $table->removeColumn('created');
-        $table->update();
+        $tableScreen = $this->getTextTable();
+        $tableScreen->appendRow($this->getTableObjectToRow($table));
+        echo $tableScreen;
     }
 
-    public function dropUpdated($table)
+    public function clearTable($tableName)
     {
-        $table->removeColumn('updated');
-        $table->update();
+        $table = $this->getSchema()->getTable($this->str('uline', $tableName));
+
+        $this->printTableStatus($table);
+
+        $this->dropSystematicColumns($table);
+
+        $this->printTableStatus($table);
     }
 }

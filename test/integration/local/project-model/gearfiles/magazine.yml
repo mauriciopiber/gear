@@ -1,0 +1,5 @@
+module: Magazine
+
+db:
+  0:
+    table: Magazine
