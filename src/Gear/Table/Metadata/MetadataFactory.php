@@ -9,12 +9,15 @@ class MetadataFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+
+        //se tem parametro módule
         $module = $serviceLocator->get('moduleStructure');
         $module->prepare();
 
 
         $moduleName = $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('module');
 
+        //se tem parametro basepath
         if ($serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')) {
             $location =
             $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')

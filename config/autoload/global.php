@@ -2,7 +2,7 @@
 return array(
     'db' => array(
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=gear;host=localhost',
+        'dsn' => 'mysql:dbname=seller;host=localhost',
         'driver_options' => array(
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -16,7 +16,7 @@ return array(
                 'params' => array(
                     'host' => 'localhost',
                     'port' => '3306',
-                    'dbname' => 'gear',
+                    'dbname' => 'project_mvc',
                     'charset' => 'utf8'
                 )
             )
@@ -33,7 +33,7 @@ return array(
     'phinx' => array(
         'adapter' => 'mysql',
         'host' => 'localhost',
-        'name'=> 'gear'
+        'name'=> 'seller'
     ),
     'jenkins' => [
         'integrate' => [

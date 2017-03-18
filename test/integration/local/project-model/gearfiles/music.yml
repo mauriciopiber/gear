@@ -1,0 +1,5 @@
+module: Music
+
+db:
+  0:
+    table: Music

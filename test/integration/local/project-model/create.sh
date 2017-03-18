@@ -19,5 +19,18 @@ createModuleWeb "$project" "Book"
 prepareConstruct "$project" "$scriptDir/migrations/20160123222069_book.php"
 constructModuleProject "$project" "Book" "$scriptDir" "book.yml"
 
+createModuleWeb "$project" "Magazine"
+prepareConstruct "$project" "$scriptDir/migrations/20160123222070_magazine.php"
+constructModuleProject "$project" "Magazine" "$scriptDir" "magazine.yml"
+
+createModuleWeb "$project" "Music"
+prepareConstruct "$project" "$scriptDir/migrations/20160123222071_music.php"
+constructModuleProject "$project" "Music" "$scriptDir" "music.yml"
+
+createModuleWeb "$project" "Games"
+prepareConstruct "$project" "$scriptDir/migrations/20160123222072_games.php"
+constructModuleProject "$project" "Games" "$scriptDir" "games.yml"
+
+
 reload "$project"
 testProject "$project"

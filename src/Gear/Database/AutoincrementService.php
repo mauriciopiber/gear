@@ -2,42 +2,11 @@
 namespace Gear\Database;
 
 use Zend\Db\Metadata\Object\TableObject;
+use Gear\Database\Connector\DbConnector\DbConnectorTrait;
 
 class AutoincrementService extends DbAbstractService
 {
-    /**
-     * Executa Truncate na tabela $tableName
-     * @param string $tableName
-     */
-    public function autoincrementTable($tableName)
-    {
-        $schema = $this->getSchema();
-        $table = $schema->getTable($this->str('uline', $tableName));
-
-        return $this->truncate($table);
-    }
-
-    public function truncate(TableObject $table)
-    {
-        $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        if ($table->getName() == 'migrations') {
-            return;
-        }
-
-        $this->getServiceLocator()->get('console')->writeLine(sprintf('Truncate Table %s', $table->getName()), 3);
-        $connection = $em->getConnection();
-        $connection->beginTransaction();
-        try {
-            $connection->query('SET FOREIGN_KEY_CHECKS=0');
-            $connection->query(sprintf('TRUNCATE %s;', $table->getName()));
-            $connection->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = 1;', $table->getName()));
-            $connection->query('SET FOREIGN_KEY_CHECKS=1');
-            $connection->commit();
-        } catch (\Exception $e) {
-            $connection->rollback();
-        }
-    }
-
+    use DbConnectorTrait;
     /**
      * Executa Truncate em todas tabelas da database descrita em global.php
      */
@@ -52,5 +21,42 @@ class AutoincrementService extends DbAbstractService
         }
 
         return true;
+    }
+
+    /**
+     * Executa Truncate na tabela $tableName
+     * @param string $tableName
+     */
+    public function autoincrementTable($tableName)
+    {
+        $schema = $this->getSchema();
+        $table = $schema->getTable($this->str('uline', $tableName));
+
+        return $this->truncate($table);
+    }
+
+    public function truncate(TableObject $table)
+    {
+        if ($table->getName() == 'migrations') {
+            return;
+        }
+
+        $this->getDbConnector()->beginTransaction();
+
+        try {
+
+            $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=0');
+            $this->getDbConnector()->query(sprintf('TRUNCATE %s;', $table->getName()));
+            $this->getDbConnector()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = 1;', $table->getName()));
+            $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=1');
+            $this->getDbConnector()->commit();
+
+        } catch (\Exception $e) {
+            $this->getDbConnector()->rollback();
+        }
+
+        $this->getDbConnector()->disconnect();
+
+        $this->getServiceLocator()->get('console')->writeLine(sprintf('Table truncaded %s', $table->getName()), 3);
     }
 }

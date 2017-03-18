@@ -1,0 +1,5 @@
+module: Games
+
+db:
+  0:
+    table: Games

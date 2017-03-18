@@ -13,15 +13,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            'gear-database-mock' => [
-                'options' => [
-                    'route' => 'gear database mock <module> <table>' . $options,
-                    'defaults' => [
-                        'controller' => 'Gear\Controller\Db',
-                        'action' => 'mock-table'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
             'gear-database-analyse' => [
                 'options' => [
                     'route' => 'gear database analyse' . $options,
@@ -90,16 +81,16 @@ return [
                     'route' => 'gear database load <location>' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Controller\Db',
-                        'action' => 'mysql-load'
+                        'action' => 'load'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
             'gear-database-mysq-dump' => [
                 'options' => [
-                    'route' => 'gear database dump <location> [<name>***REMOVED***' . $options,
+                    'route' => 'gear database dump <location>' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Controller\Db',
-                        'action' => 'mysql-dump'
+                        'action' => 'dump'
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,

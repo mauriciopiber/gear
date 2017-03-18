@@ -3,6 +3,10 @@ namespace Gear\Table\TableService;
 
 use Zend\Db\Metadata\Object\TableObject;
 
+/**
+ * @deprecated
+ * @author piber
+ */
 class Table
 {
     public $table;

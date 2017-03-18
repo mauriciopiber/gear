@@ -1,13 +1,17 @@
 versions:
   0:
-    version: gear-json-0.2.59
-    description: Remover a obrigatoriedade de passar basepath
-    project: GS
+    version: gear-0.2.129
+    description: Resolver Mysql
+    project: GP
 issues:
 
   6:
-    summary: "Foi corrigido o erro do Mysql, porém não de forma objetiva, removendo o módulo CLI funciona."
-    description: "Descobrir o motivo técnico que causa a deformidade do projeto não conseguir usar o banco de dados quando há um projeto virgem cli junto à ele."
+    summary: "Corrigir SchemaTool do Database"
+    description: "Dale"
     type: Bug
     project: GP
-    estimate: 4h
+    estimate: 1h
+    sprint: 27
+    version: gear-0.2.129
+    dueDate: 18/03/2017
+
