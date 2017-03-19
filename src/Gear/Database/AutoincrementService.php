@@ -41,19 +41,10 @@ class AutoincrementService extends DbAbstractService
             return;
         }
 
-        $this->getDbConnector()->beginTransaction();
-
-        try {
-
-            $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=0');
-            $this->getDbConnector()->query(sprintf('TRUNCATE %s;', $table->getName()));
-            $this->getDbConnector()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = 1;', $table->getName()));
-            $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=1');
-            $this->getDbConnector()->commit();
-
-        } catch (\Exception $e) {
-            $this->getDbConnector()->rollback();
-        }
+        $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=0');
+        $this->getDbConnector()->query(sprintf('TRUNCATE %s;', $table->getName()));
+        $this->getDbConnector()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = 1;', $table->getName()));
+        $this->getDbConnector()->query('SET FOREIGN_KEY_CHECKS=1');
 
         $this->getDbConnector()->disconnect();
 
