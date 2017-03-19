@@ -1,17 +1,16 @@
 versions:
   0:
-    version: gear-0.2.129
-    description: Resolver Mysql
+    version: gear-0.2.130
+    description: "Corrigir erro do Mysql has gone away"
     project: GP
 issues:
 
   6:
-    summary: "Corrigir SchemaTool do Database"
-    description: "Dale"
+    summary: "Refatorar o Gear para passar pelo erro do Mysql has gone away"
+    description: "Um bug aconteceu ao criar um sistema grande, que é o Mysql has gone away, será buscando uma solução concreta."
     type: Bug
     project: GP
-    estimate: 1h
+    estimate: 5h
     sprint: 27
-    version: gear-0.2.129
-    dueDate: 18/03/2017
-
+    version: gear-0.2.130
+    dueDate: 19/03/2017
