@@ -296,6 +296,7 @@ class ModuleServiceTest extends TestCase
     /**
      * @group mod1
      * @group mod4
+     * @group x1
      */
     public function testCreateModuleAsProjectWeb()
     {
@@ -364,14 +365,14 @@ class ModuleServiceTest extends TestCase
         $this->docs->createReadme()->shouldBeCalled();
         $this->docs->createChangelog()->shouldBeCalled();
 
-        $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml';
+        $files = __DIR__.'/_files/module-files-web.yml';
 
         $this->assertFileExists($files);
 
         $parser = new Parser();
 
         $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml')
+            file_get_contents(__DIR__.'/_files/module-files-web.yml')
         );
 
         $this->fileCreator = $this->prophesize('Gear\Creator\File');
@@ -405,7 +406,7 @@ class ModuleServiceTest extends TestCase
         $this->fileCreator->render()->shouldBeCalled();
          */
 
-        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
+        //$this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
@@ -457,6 +458,7 @@ class ModuleServiceTest extends TestCase
 
     /**
      * @group create2
+     * @group x1
      */
     public function testCreateModuleWeb()
     {
@@ -574,7 +576,7 @@ class ModuleServiceTest extends TestCase
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
+        //$this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),
@@ -802,14 +804,14 @@ class ModuleServiceTest extends TestCase
         $this->docs->createReadme()->shouldBeCalled();
         $this->docs->createChangelog()->shouldBeCalled();
 
-        $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml';
+        $files = __DIR__.'/_files/module-files-cli.yml';
 
         $this->assertFileExists($files);
 
         $parser = new Parser();
 
         $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml')
+            file_get_contents($files)
         );
 
         $this->fileCreator = $this->prophesize('Gear\Creator\File');

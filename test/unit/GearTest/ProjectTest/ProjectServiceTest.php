@@ -351,8 +351,10 @@ class ProjectServiceTest extends AbstractTestCase
 EOS
             );
     }
+
     /**
      * @group con13
+     * @group poxs
      */
     public function testSetUpGlobal()
     {

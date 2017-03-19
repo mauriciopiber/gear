@@ -13,7 +13,8 @@ class BackupServiceFactory implements FactoryInterface
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('GearBase\Script'),
             $serviceLocator->get('console'),
-            $serviceLocator->get('moduleStructure')
+            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('request')
         );
     }
 }

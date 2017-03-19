@@ -7,25 +7,45 @@ use GearBase\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Project\ProjectLocationTrait;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\Util\String\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\RequestTrait;
+use Zend\Console\Request;
 
-class BackupService extends DbAbstractService
+class BackupService implements ModuleAwareInterface, StringServiceAwareInterface
 {
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     use ProjectLocationTrait;
 
     use ScriptServiceTrait;
+
+    use RequestTrait;
+
+    const LOADED = 'Carregado dump de %s';
+
+    const DUMPED = 'Criado dump de %s';
+
+    const DUMP_ERROR = 'Dump não foi criado com sucesso';
 
     public function __construct(
         array $config,
         StringService $string,
         ScriptService $service,
         Posix $console,
-        BasicModuleStructure $module = null
+        BasicModuleStructure $module = null,
+        Request $request
     ) {
         $this->config = $config;
         $this->console = $console;
         $this->scriptService = $service;
         $this->stringService = $string;
         $this->module = $module;
+        $this->request = $request;
     }
 
     public function projectLoad()
@@ -128,8 +148,8 @@ class BackupService extends DbAbstractService
 
 
 
-        $this->console->writeLine(sprintf('Carregado %s', $this->backupName));
-        $this->console->writeLine(sprintf($this->file));
+        $this->console->writeLine(sprintf(self::LOADED, $this->file));
+        //$this->console->writeLine(sprintf($this->file));
 
         return $this->file;
     }
@@ -147,10 +167,10 @@ class BackupService extends DbAbstractService
         $this->getScriptService()->runScriptAt($command);
 
         if (!is_file($this->file)) {
-            throw new \Exception('Dump não foi criado com sucesso');
+            throw new \Exception(self::DUMP_ERROR);
         }
 
-        $this->console->writeLine(sprintf('Criado dump de %s', $this->file));
+        $this->console->writeLine(sprintf(self::DUMPED, $this->file));
 
         return $this->file;
     }
@@ -159,11 +179,11 @@ class BackupService extends DbAbstractService
     {
         $this->init();
 
-        $location = $this->getLocation();
-
-
-        $this->file = $location;
-
+        $this->file = sprintf(
+            '%s/%s',
+            $this->getProject(),
+            $this->getLocation()
+        );
 
         $this->runDump();
 
@@ -176,7 +196,8 @@ class BackupService extends DbAbstractService
         $this->init();
 
         $this->file = sprintf(
-            '%s',
+            '%s/%s',
+            $this->getProject(),
             $this->getLocation()
         );
 
