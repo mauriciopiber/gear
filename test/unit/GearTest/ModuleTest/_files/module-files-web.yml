@@ -41,23 +41,23 @@ files:
       module: 'my_module'
     location: 'script'
     filename: 'deploy-testing.sh'
-  91:
-    template: 'template/module/script/deploy-staging.phtml'
-    location: 'script'
-    options:
-      host: null
-      moduleUrl: 'my-module'
-      git: 'git@bitbucket.org:mauriciopiber/module.git'
-      module: 'MyModule'
-      dbFile: 'my-module.mysql.sql'
-    filename: 'deploy-staging.sh'   
-  90:
-    template: 'template/module/script/install-remote-staging.phtml'
-    location: 'script'
-    options:
-      host: null
-      moduleUrl: 'my-module'
-    filename: 'install-staging.sh'               
+#  91:
+#    template: 'template/module/script/deploy-staging.phtml'
+#    location: 'script'
+#    options:
+#      host: null
+#      moduleUrl: 'my-module'
+#      git: 'git@bitbucket.org:mauriciopiber/module.git'
+#      module: 'MyModule'
+#      dbFile: 'my-module.mysql.sql'
+#    filename: 'deploy-staging.sh'   
+#  90:
+#    template: 'template/module/script/install-remote-staging.phtml'
+#    location: 'script'
+#    options:
+#      host: null
+#      moduleUrl: 'my-module'
+#    filename: 'install-staging.sh'               
   8:
     template: 'template/module/script/load-web.phtml'
     options:

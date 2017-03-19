@@ -15,6 +15,7 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\RequestTrait;
 use Gear\Table\Metadata\MetadataTrait;
+use Gear\Database\Connector\DbConnector\DbConnectorTrait;
 
 abstract class DbAbstractService implements
     ServiceLocatorAwareInterface,
@@ -24,6 +25,8 @@ abstract class DbAbstractService implements
     ArrayServiceAwareInterface,
     ModuleAwareInterface
 {
+    use DbConnectorTrait;
+
     use MetadataTrait;
 
     use RequestTrait;
@@ -55,17 +58,14 @@ abstract class DbAbstractService implements
     public function getSchema()
     {
         if (!isset($this->schema)) {
+            /**
             $global = require $this->getProjectFolder().'/config/autoload/global.php';
 
             $global = array_merge(array('default_migration_table' => 'migrations'), $global);
 
             $local  = require $this->getProjectFolder().'/config/autoload/local.php';
-
-            $schema = new \Zend\Db\Metadata\Metadata(
-                new \Zend\Db\Adapter\Adapter(array_merge($global['db'***REMOVED***, $local['db'***REMOVED***))
-            );
-
-            $this->schema = $schema;
+            */
+            $this->schema = new \Zend\Db\Metadata\Metadata($this->getDbConnector()->getAdapter());
         }
 
         return $this->schema;

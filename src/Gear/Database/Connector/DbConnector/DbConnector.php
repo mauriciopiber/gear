@@ -11,6 +11,7 @@ class DbConnector
         $this->adapter = $adapter;
     }
 
+    /**
     public function beginTransaction()
     {
         $this->adapter->getDriver()->getConnection()->beginTransaction();
@@ -26,6 +27,12 @@ class DbConnector
     {
         $this->adapter->getDriver()->getConnection()->rollback();
 
+    }
+    */
+
+    public function getAdapter()
+    {
+        return $this->adapter;
     }
 
     public function disconnect()

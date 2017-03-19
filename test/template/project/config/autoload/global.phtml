@@ -24,10 +24,7 @@ return [
     'db' => [
         'dsn' => 'mysql:dbname=database_for_development;host=localhost',
         'driver' => 'Pdo',
-        'charset' => 'UTF8',
-        'driver_options' => [
-            \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
-        ***REMOVED***
+        'charset' => 'UTF8'
     ***REMOVED***,
     'phinx' => [
         'adapter' => 'mysql',
