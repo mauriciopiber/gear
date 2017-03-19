@@ -24,6 +24,11 @@ class BackupServiceFactoryTest extends AbstractTestCase
           ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
           ->shouldBeCalled();
 
+          $this->serviceLocator
+          ->get('request')
+          ->willReturn($this->prophesize('Zend\Console\Request')->reveal())
+          ->shouldBeCalled();
+
 
         $this->serviceLocator
           ->get('GearBase\Script')
