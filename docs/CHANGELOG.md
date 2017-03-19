@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 [comment***REMOVED***: ###ADD###
 
+## [0.2.130***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12801) - 19/03/2017
+
+### Adicionados
+
+- Nada.
+
+### Corrigidos
+
+- [X***REMOVED*** Refatorar o Gear para passar pelo erro do Mysql has gone away [[#GP-219***REMOVED***(https://pibernetwork.atlassian.net/browse/GP-219)***REMOVED***
+
+### Descontinuados
+
+- Nada.
+
+### Removidos
+
+- Nada.
+
+---
+
 ## [0.2.129***REMOVED***(https://pibernetwork.atlassian.net/projects/GP/versions/12800) - 18/03/2017
 
 ### Adicionados
