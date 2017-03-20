@@ -8,8 +8,8 @@ source "$headersDir/abstract.sh"
 function runCreateModule
 {
 	# Params
-	if [ $# -ne 6 ***REMOVED***; then
-        echo "usage: module type gearfile migration shouldTest shouldIntegrate"
+	if [ $# -ne 7 ***REMOVED***; then
+        echo "usage: module type gearfile migration shouldTestLocal shouldTestCI shouldIntegrate"
         return
     fi
 
@@ -17,13 +17,18 @@ function runCreateModule
     type=${2}
     gearfile=${3}
     migration=${4}
-    shouldTest=${5}
-    shouldIntegrate=${6}
+    shouldTestLocal=${5}
+    shouldTestCI=${6}
+    shouldIntegrate=${7}
 
     # Do the Work.    
 
+    if [ "$shouldTestCI" == "1" ***REMOVED***; then
+    	tearDownCi "$module"
+    fi
+   
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	tearDown "$module"
+    	tearDownVersion "$module"
     fi
     
     removeModule "$module"
@@ -32,20 +37,40 @@ function runCreateModule
     
     runConstruct "$module" "$type" "$gearfile" "$migration" ""
     
-    if [ "$shouldTest" == "1" ***REMOVED***; then 
+    if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
     	runModuleTest "$module" "$type"
     fi 
     
+    if [ "$shouldTestCI" == "1" ***REMOVED***; then
+    	setUpCi "$module" "$type"
+    fi
+   
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	setUp "$module" "$type"
+    	setUpVersion "$module"
+    fi 
+   
+    if [ "$shouldTestCI" == "1" ***REMOVED*** || [ "$shouldIntegrate" == "1" ***REMOVED***; then
+    	build "$module" "$shouldIntegrate"
     fi
 }
 
-function tearDown
+function tearDownVersion
 {
-	# PARAMS
-    basePath=$(basepath)
+    module=$(moduleName "${1}")
+    moduleUrl=$(moduleUrl "$module")
+    modulePath=$(modulepath "$moduleUrl")
+    
+	
+	if ! [[ -d "$modulePath" ***REMOVED******REMOVED***; then
+        echo "Module Not Created Yet"
+        return 0
+    fi
 
+    cd $modulePath && php public/index.php gear jira version delete "$moduleUrl-0.1.1"   	
+}
+
+function tearDownCi
+{
     module=$(moduleName "${1}")
     moduleUrl=$(moduleUrl "$module")
     modulePath=$(modulepath "$moduleUrl")
@@ -58,10 +83,37 @@ function tearDown
     
     cd $modulePath && php public/index.php gear git repository delete $module --force
     cd $modulePath && php public/index.php gear jenkins suite delete
-    cd $modulePath && php public/index.php gear jira version delete "$moduleUrl-0.1.1"    
 }
 
-function setUp
+function build
+{
+    module=$(moduleName "${1}")
+    moduleUrl=$(moduleUrl "$module")
+    modulePath=$(modulepath "$moduleUrl")
+	#incrementCod=${2}
+	
+	#if [ "$incrementCod" == "1" ***REMOVED***; then
+	#    increment="--hotfix"	
+	#fi
+
+	cd $modulePath	    
+    sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type" "$increment"
+    sudo php public/index.php gear jenkins job build "$moduleUrl" 
+    ##--indexing	
+}
+
+function setUpVersion
+{
+    module=$(moduleName "${1}")
+    moduleUrl=$(moduleUrl "$module")
+    modulePath=$(modulepath "$moduleUrl")
+
+    cd $modulePath
+	echo "create first version"
+    vendor/bin/fast-release --hotfix "Fast Release" "Fast Release" "1h" "30" "19/03/2017 12:01:00" "19/03/2017 12:02:00"
+}
+
+function setUpCi
 {
     module=$(moduleName "${1}")
     moduleUrl=$(moduleUrl "$module")
@@ -76,12 +128,6 @@ function setUp
     sudo php public/index.php gear git repository init
     echo "jenkins create"
     sudo php public/index.php gear jenkins suite create module-$type
-    echo "run scan"
-    sudo php public/index.php gear jenkins job build "$moduleUrl" --indexing
-    echo "create first version"
-    vendor/bin/fast-release --hotfix "Fast Release" "Fast Release" "1h" "30" "19/03/2017 12:01:00" "19/03/2017 12:02:00"
-    echo "build"
-    sudo php public/index.php gear deploy build "Primeiro Build com sucesso $module $type" --hotfix
 }
 
 
@@ -141,7 +187,7 @@ function runModuleTest
     	return
     fi
    
-   if "$type" == "web" ***REMOVED***; then
+   if [ "$type" == "web" ***REMOVED***; then
    	    testModuleWeb "$module"
    	    return
    fi	
