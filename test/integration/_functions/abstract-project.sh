@@ -12,6 +12,40 @@ function getPath
     echo "$basepath/$project"
 }
 
+# 1. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
+function runCreateProject
+{
+	project=${1}
+    deleteProject "$project"
+    createProject "$project"
+}
+
+# 2. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
+function runCreateModuleProject
+{
+
+    project=${1}
+    module=${2}
+    type=${3}
+    scriptDir=${4}
+    gearfile=${5}
+    reload=${6}
+    migration=${7}
+
+    if [ "$type" == "web" ***REMOVED***; then
+        createModuleWeb "$project" "$module"	
+    fi
+   
+    if [ "$type" == "cli" ***REMOVED***; then
+    	createModuleCli "$project" "$module"
+    fi
+   
+    if [ "$reload" == "1" && "$migration" != "" ***REMOVED***; then
+        reload "$project"
+    fi
+    
+    constructModuleProject "$project" "$module" "$scriptDir" "$gearfile"
+}
 
 function deleteProject
 {

@@ -9,8 +9,4 @@ source "$headersDir/abstract-web.sh"
 
 module="ModuleWeb"
 
-removeModule "$module"
-
-constructModuleWeb "$module"
-
-runConstructWeb "$module" "$scriptDir/web.yml"
+runCreateModule "$module" "web" "$scriptDir/web.yml"

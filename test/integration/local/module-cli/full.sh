@@ -3,8 +3,8 @@
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../_functions && pwd )"
 
-source "$headersDir/abstract-web.sh"
+source "$headersDir/abstract-cli.sh"
 
-module="ModuleMvc"
+module="ModuleCli"
 
-runCreateModule "$module" "web" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"
+runCreateModule "$module" "cli" "$scriptDir/cli.yml" "" "0" "1"
