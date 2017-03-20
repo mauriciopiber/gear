@@ -7,4 +7,4 @@ source "$headersDir/abstract-cli.sh"
 
 module="ModuleCli"
 
-runCreateModule "$module" "cli" "$scriptDir/cli.yml" "" "1" "0"
+runCreateModule "$module" "cli" "$scriptDir/cli.yml" "" "1" "0" "0"
