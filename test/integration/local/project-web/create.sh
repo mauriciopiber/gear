@@ -8,19 +8,9 @@ source "$headersDir/abstract-project.sh"
 # Params
 project="ProjectWeb"
 
-
-deleteProject "$project"
-
-# Create Project
-createProject "$project"
-
-# Create Cli
-createModuleWeb "$project" "MyProjectModuleWeb"
-constructModuleProject "$project" "MyProjectModuleWeb" "$scriptDir" "web.yml"
-
-# Create Web
-createModuleCli "$project" "MyProjectModuleCli"
-constructModuleProject "$project" "MyProjectModuleCli" "$scriptDir" "cli.yml"
+runCreateProject "$project"  
+runCreateModuleProject "$project" "MyProjectModuleWeb" "web" "$scriptDir" "web.yml" 0
+runCreateModuleProject "$project" "MyProjectModuleCli" "cli" "$scriptDir" "cli.yml" 0
 
 # Flush & Test
 reload "$project"
