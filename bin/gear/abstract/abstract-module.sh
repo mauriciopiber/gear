@@ -4,15 +4,29 @@ headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 source "$headersDir/abstract.sh"
 
+
+
+#function Gear_Module_Construct
+#{
+	
+	
+#}
+
+#function Gear_Module_Rest
+#{
+
+#}
+
+
 # 3. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
-function runCreateModule
+function Gear_Module_Create
 {
 	# Params
-	if [ $# -ne 7 ***REMOVED***; then
-        echo "usage: module type gearfile migration shouldTestLocal shouldTestCI shouldIntegrate"
-        return
+	if [ $# -ne 8 ***REMOVED***; then
+        echo "usage: module type scriptDir gearfile migration shouldTestLocal shouldTestCI shouldIntegrate"
+        exit 1
     fi
-
+   
     module=$(moduleName "${1}")
     moduleUrl=$(moduleUrl "$module")
     modulePath=$(modulepath "$moduleUrl")

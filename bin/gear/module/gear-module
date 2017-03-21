@@ -14,11 +14,11 @@ source "$functions/init.sh"
 if [ "$cmd" == "create" ***REMOVED***; then
 
     # Params
-    if [ $# -lt 7 ***REMOVED***; then
+    if [ $# -lt 9 ***REMOVED***; then
         echo "usage $0: command module type scriptsDir gearfile migration local ci jira"
         exit 1
     fi
-   
+    
     Gear_Module_Create "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}" "${9}"
 	
 	exit 0
