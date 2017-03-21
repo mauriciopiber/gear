@@ -11,7 +11,25 @@ function gearPath
 	
 }
 
-function Gear_CreateProject
+function Gear_Project_Reset
+{
+	if [ $# -ne 4 ***REMOVED***; then
+        echo "usage $0: project modules shouldTestLocal shouldTestCI"
+        return
+    fi
+}
+
+function Gear_Project_Construct
+{
+	# Params
+	if [ $# -ne 5 ***REMOVED***; then
+        echo "usage $0: project modules scriptDir shouldTestLocal shouldTestCI"
+        return
+    fi	
+	
+}
+
+function Gear_Project_Create
 {
 	# Params
 	if [ $# -ne 6 ***REMOVED***; then
@@ -168,40 +186,6 @@ function getPath
     echo "$basepath/$project"
 }
 
-# 1. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
-function runCreateProject
-{
-	project=${1}
-    deleteProject "$project"
-    createProject "$project"
-}
-
-# 2. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
-function runCreateModuleProject
-{
-    project=${1}
-    module=${2}
-    type=${3}
-    scriptDir=${4}
-    gearfile=${5}
-    reload=${6}
-    migration=${7}
-
-    if [ "$type" == "web" ***REMOVED***; then
-        createModuleWeb "$project" "$module"	
-    fi
-   
-    if [ "$type" == "cli" ***REMOVED***; then
-    	createModuleCli "$project" "$module"
-    fi
-   
-    if [ "$reload" == "1" && "$migration" != "" ***REMOVED***; then
-        reload "$project"
-    fi
-    
-    constructModuleProject "$project" "$module" "$scriptDir" "$gearfile"
-}
-
 function deleteProject
 {
 	project=${1}
@@ -237,24 +221,7 @@ function clearModuleProject
     sudo php public/index.php gear schema create $module		
 }
 
-function createModuleWeb
-{
-    projectPath=$(getPath "${1}")
-    module=${2}    
-
-    cd $projectPath && sudo php public/index.php gear module create "$module" --type=web
-}
-
 function Cmd_ProjectCreateModule
-{
-    projectPath=$(getPath "${1}")
-    module=${2}    
-            
-    cd $projectPath && sudo php public/index.php gear module create "$module" --type=cli
-}
-
-
-function createModuleCli
 {
     projectPath=$(getPath "${1}")
     module=${2}    
