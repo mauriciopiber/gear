@@ -1,0 +1,50 @@
+#!/bin/bash
+
+functions="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../abstract/ && pwd )"
+
+source "$functions/abstract-project.sh"
+source "$functions/abstract-docs.sh"
+
+worker="project"
+
+source "$functions/init.sh"
+
+if [ "$cmd" == "create" ***REMOVED***; then
+
+    # Params
+    if [ $# -lt 7 ***REMOVED***; then
+        echo "usage $0: command project scriptsDir modules local ci jira"
+        exit 1
+    fi
+   
+    Gear_Project_Create "${2}" "${3}" "${4}" "${5}" "${6}" "${7}"
+	
+	exit 0
+fi
+
+if [ "$cmd" == "construct" ***REMOVED***; then
+	
+	# Params
+    if [ $# -lt 6 ***REMOVED***; then
+        echo "usage $0: command project scriptsDir modules local ci"
+        exit 1
+    fi
+   
+    Gear_Project_Construct "${2}" "${3}" "${4}" "${5}" "${6}"
+    
+	exit 0
+fi
+
+if [ "$cmd" == "reset" ***REMOVED***; then
+	
+	# Params
+    if [ $# -lt 5 ***REMOVED***; then
+        echo "usage $0: command project modules local ci"
+        exit 1
+    fi
+   
+    Gear_Project_Reset "${2}" "${3}" "${4}" "${5}" "${6}"
+
+	exit 0
+   
+fi

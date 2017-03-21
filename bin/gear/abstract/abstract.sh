@@ -5,6 +5,16 @@ headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 source "$headersDir/header.sh"
 
+function not_in_array() {
+    local haystack=${1}[@***REMOVED***
+    local needle=${2}
+    for i in ${!haystack}; do
+        if [[ ${i} == ${needle} ***REMOVED******REMOVED***; then
+            return 1
+        fi
+    done
+    return 0
+}
 
 function tearDownCi
 {
