@@ -25,15 +25,6 @@ function runConstructDb
     constructWeb "$modulePath" "$module" "$basePath" 	
 }
 
-function prepareForDb
-{
-	cd ${1}
-	sudo vendor/bin/phinx migrate
-	vendor/bin/unload-module BjyAuthorize	
-	sudo php public/index.php gear database fix
-}
-
-
 function runConstructWeb
 {
     # PARAMS

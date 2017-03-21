@@ -7,4 +7,4 @@ source "$headersDir/abstract-web.sh"
 
 module="ModuleMvc"
 
-runCreateModule "$module" "web" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"
+runCreateModule "$module" "web" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php" "1" "0" "0"

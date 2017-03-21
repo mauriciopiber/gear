@@ -35,7 +35,7 @@ function runCreateModule
     
     constructModule "$module" "$type"
     
-    runConstruct "$module" "$type" "$gearfile" "$migration" ""
+    runConstruct "$module" "$type" "$gearfile" "$migration"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
     	runModuleTest "$module" "$type"
@@ -158,6 +158,15 @@ function runConstruct
     fi
    
     construct "$modulePath" "$module" "$basePath" "$type"
+}
+
+
+function prepareForDb
+{
+	cd ${1}
+	sudo vendor/bin/phinx migrate
+	vendor/bin/unload-module BjyAuthorize	
+	sudo php public/index.php gear database fix
 }
 
 function construct

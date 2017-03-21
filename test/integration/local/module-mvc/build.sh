@@ -1,12 +1,10 @@
 #!/bin/bash
 
-#!/bin/bash
-
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../_functions && pwd )"
 
 source "$headersDir/abstract-web.sh"
 
-module="ModuleWeb"
+module="ModuleMvc"
 
-runCreateModule "$module" "web" "$scriptDir/web.yml" "" "1" "0" "0"
+runCreateModule "$module" "web" "$scriptDir/db.yml" "$scriptDir/20160123222068_all_columns.php"  "0" "1" "0"
