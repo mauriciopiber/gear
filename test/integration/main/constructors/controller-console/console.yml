@@ -6,4 +6,12 @@ controller:
     type: Console
     namespace: PowerfullGear
     service: factories
-    
+    actions:
+      01:
+        name: Create        
+      02:
+        name: Delete
+      03:
+        name: Read
+      04:
+        name: Lists                    
