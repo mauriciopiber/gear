@@ -7,10 +7,9 @@ Não é possível preparar a versão automaticamente ainda.
 
 Outros: create, reset
 
-vendor/bin/gear-project-module reset Exemplo $(pwd) "ModuloDeExemplo" "1" "1"
+vendor/bin/gear-project-module reset Exemplo "ModuloDeExemplo" "1" "1"
 
 projeto    -> Nome do Projeto que será criado.
-scripts    -> Nome do diretório base onde estão os arquivos que serão copiados
 modulo     -> Nome do módulo que será resetado
 test local -> 0 ou 1 para rodar os testes localmente.
 test ci    -> 0 ou 1 para rodar os testes na integração contínua.

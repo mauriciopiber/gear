@@ -43,7 +43,7 @@ if [ "$cmd" == "reset" ***REMOVED***; then
         exit 1
     fi
    
-    Gear_Project_Reset "${2}" "${3}" "${4}" "${5}" "${6}"
+    Gear_Project_Reset "${2}" "${3}" "${4}" "${5}"
 
 	exit 0
    

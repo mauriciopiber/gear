@@ -17,6 +17,11 @@ function Gear_Project_Reset
         echo "usage $0: project modules shouldTestLocal shouldTestCI"
         return
     fi
+   
+    project=${1}
+    modules=${2}
+    
+    Gear_ResolveResetModules "$project" "$modules"
 }
 
 function Gear_Project_Construct
@@ -26,7 +31,14 @@ function Gear_Project_Construct
         echo "usage $0: project modules scriptDir shouldTestLocal shouldTestCI"
         return
     fi	
-	
+   
+    project=${1}
+    modules=${2}
+    scriptDir=${3}
+    
+    Gear_ResolveConstructModules "$project" "$modules" "$scriptDir"
+
+    reload "$project"	
 }
 
 function Gear_Project_Create
@@ -63,22 +75,9 @@ function Gear_Project_Create
     createProject "$project"
     
     if [ "$modules" != "" ***REMOVED***; then
-    	Gear_ResolveModules "$project" "$modules" "$scripts"
+    	Gear_ResolveCreateModules "$project" "$modules" "$scripts"
         reload "$project"	
     fi 
-    
-    
-    
-    #delete project
-    
-    #create project
-    
-    #foreach module, create module, prepare if needed
-    
-    #run reload
-    
-    #complete
-    
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then
     	testProject "$project"
@@ -103,7 +102,26 @@ function Gear_Project_Create
 		
 }
 
-function Gear_ResolveModules
+function Gear_ResolveResetModules
+{
+	project=${1}
+	modules=${2}
+
+	IFS="|"
+    params=($modules)
+    for key in "${!params[@***REMOVED***}"; do 
+   
+        moduleParams=${params[$key***REMOVED***}
+        
+        IFS=";"
+        inputs=($moduleParams)
+        Gear_Project_Module_Reset $project ${inputs[@***REMOVED***}
+    
+   done	
+	
+}
+
+function Gear_ResolveConstructModules
 {
 	project=${1}
 	modules=${2}
@@ -117,13 +135,34 @@ function Gear_ResolveModules
         
         IFS=";"
         inputs=($moduleParams)
-        Gear_CreateProjectModule $project $scripts ${inputs[@***REMOVED***}
+        Gear_Project_Module_Construct $project $scripts ${inputs[@***REMOVED***}
+    
+   done	
+	
+}
+
+
+function Gear_ResolveCreateModules
+{
+	project=${1}
+	modules=${2}
+	scripts=${3}
+
+	IFS="|"
+    params=($modules)
+    for key in "${!params[@***REMOVED***}"; do 
+   
+        moduleParams=${params[$key***REMOVED***}
+        
+        IFS=";"
+        inputs=($moduleParams)
+        Gear_Project_Module_Create $project $scripts ${inputs[@***REMOVED***}
     
    done
 }
 
 
-function Gear_CreateProjectModule
+function Gear_Project_Module_Create
 {
     # Params
 	if [ $# -lt 5 ***REMOVED***; then
@@ -143,37 +182,34 @@ function Gear_CreateProjectModule
     cd $projectPath 
     sudo php public/index.php gear module create "$module" --type=$type
     
-    Gear_ConstructProjectModule "$project" "$scriptDir" "$module" "$type" "$gearfile" "$migration"
-	
-	echo "1- $project, 1.1 $scriptDir 2- $module, 3- $type, 4- $gearfile, 5- $migration"
-    	
+    Gear_Project_Module_Construct "$project" "$scriptDir" "$module" "$gearfile" "$migration"
 }
 
-function Gear_ConstructProjectModule
+function Gear_Project_Module_Construct
 {
 	# Params
-	if [ $# -lt 5 ***REMOVED***; then
-        echo "usage $0: project scriptDir module type gearfile migration"
-        return
+	if [ $# -lt 4 ***REMOVED***; then
+        echo "usage $0: project scriptDir module gearfile migration shouldTest shouldCi"
+        exit 1
     fi
    
     project=${1}
     scriptsDir=${2}
     module=${3}
-    type=${4}
-    gearfile=${5}
-    migration=${6}
-    
+    gearfile=${4}
+    migration=${5}
+      
     # PARAMS
     basePath=$(basepath)
     projectPath=$(getPath "${1}")
 
-    if [ "$type" == "web" ***REMOVED*** && [ "$migration" != "" ***REMOVED***; then
-    	prepareConstruct "$project" "$scriptsDir/$migration" 
+    if [ "$migration" != "" ***REMOVED***; then
+    	copyMigration "$scriptsDir" "$migration" "$projectPath"
+    	prepareForDb "$projectPath" 
     fi     
 
     # COPY GEARFILE
-    copyGearfileProject "$scriptsDir/gearfiles/$gearfile" "$projectPath/$gearfile"
+    copyGearfile "$scriptsDir" "$gearfile" "$projectPath"
 
     # CONSTRUCT 
     constructInProject "$projectPath" "$module" "$gearfile" 	
@@ -208,7 +244,7 @@ function createProject
     sudo script/deploy-development.sh    
 }
 
-function clearModuleProject
+function Gear_Project_Module_Reset
 {
     project=${1}
     basepath=$(basepath)
@@ -217,8 +253,10 @@ function clearModuleProject
     
     
     cd $projectPath
+    vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
     sudo php public/index.php gear schema delete $module
     sudo php public/index.php gear schema create $module		
+    sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 }
 
 function Cmd_ProjectCreateModule
@@ -257,34 +295,11 @@ function constructModuleProject
     gearfileName=${4}
 
     # COPY GEARFILE
-    copyGearfileProject "$scriptsDir/gearfiles/$gearfileName" "$projectPath/$gearfileName"
+    copyGearfile "$scriptsDir/gearfiles/$gearfileName" "$projectPath/$gearfileName"
 
     # CONSTRUCT 
     constructInProject "$projectPath" "$module" "$gearfileName" 	
 }
-
-
-function prepareConstruct
-{
-	project=${1}
-	projectPath=$(getPath "$project")
-	migrations=${2}
-	
-	copyMigration "$projectPath" "$migrations"
-	
-	cd $projectPath
-	
-	sudo vendor/bin/phinx migrate
-	vendor/bin/unload-module BjyAuthorize	
-	sudo php public/index.php gear database fix
-}
-
-
-function copyGearfileProject
-{
-    sudo cp "${1}" "${2}"	
-}
-
 
 function constructInProject
 {
@@ -307,18 +322,4 @@ function removeModuleFromProject
     sudo php public/index.php gear module delete "$module"	
 	
 	
-}
-
-function resetModuleInProject
-{
-    # PARAMS
-    basePath=$(basepath)
-    
-    projectPath=$(getPath "${1}")
-    module=${2}
-    	
-    cd $projectPath 
-    vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
-    sudo php public/index.php gear schema delete $module
-    sudo php public/index.php gear schema create $module	
 }

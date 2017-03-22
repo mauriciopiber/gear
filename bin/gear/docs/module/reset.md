@@ -9,6 +9,7 @@ Outros: construct, create
 
 vendor/bin/gear-module reset Exemplo "1" "1"
 
-modulo     -> Nome do Projeto que será criado.
-test ci    -> 0 ou 1 para rodar os testes na integração contínua.
-version    -> 0 ou 1 se quiser criar a primeira versão no Jira.
+modulo  -> Nome do módulo que será resetado
+local   -> 0 ou 1 para rodar os tetes do módulo localmente após resetar o módulo.
+ci      -> 0 ou 1 para rodar os testes na integração contínua após resetar o módulo.
+
