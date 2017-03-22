@@ -173,7 +173,7 @@ function constructModule
     type=${2}
 
     cd $basePath/gear
-    sudo php public/index.php gear module-as-project create $module $basePath --type=$type --force
+    sudo php public/index.php gear module-as-project create $module $basePath --type=$type --force --staging="${moduleUrl}.$(getStaging)"
     cd $modulePath && sudo script/deploy-development.sh
 }
 

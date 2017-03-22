@@ -39,10 +39,3 @@ function modulepath
     file="$(basepath)/${1}"
     echo $file
 }
-
-
-function staging
-{
-	
-    echo "stag01.pibernetwork.com"
-}
