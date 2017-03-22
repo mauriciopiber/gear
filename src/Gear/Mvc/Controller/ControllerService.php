@@ -25,8 +25,8 @@ class ControllerService extends AbstractMvc implements
     use SchemaServiceTrait;
 
     protected $templates = [
-        'module'         => 'template/module/index/simple.module.phtml',
-        'module-factory' => 'template/module/index/simple.module.factory.phtml',
+        'module'         => 'template/module/mvc/controller/simple.module.phtml',
+        'module-factory' => 'template/module/mvc/controller/simple.module.factory.phtml',
         'db'             => 'template/module/mvc/controller/db/full.controller.phtml',
         'src'            => 'template/module/mvc/controller/controller.phtml'
     ***REMOVED***;

@@ -3,13 +3,25 @@ namespace <?php echo $this->module;?>\Controller;
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package <?php echo $this->module;?>/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
 class IndexController extends AbstractConsoleController
 {
+    /**
+     * Index Action
+     *
+     * @return ViewModel
+     */
     public function indexAction()
     {
-        return new ConsoleModel(
-            array(
-            )
-        );
+        $consoleModel = new ConsoleModel([***REMOVED***);
+        return $consoleModel;
     }
 }
