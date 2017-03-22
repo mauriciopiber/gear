@@ -1,0 +1,8 @@
+modules: ControllerWeb
+
+controller:
+  01:
+    name: MyController
+    namespace: PowerfullGear
+    service: factories
+    

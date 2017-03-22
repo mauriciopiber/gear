@@ -1,0 +1,9 @@
+modules: ControllerConsole
+
+controller:
+  01:
+    name: MyController
+    type: Console
+    namespace: PowerfullGear
+    service: factories
+    
