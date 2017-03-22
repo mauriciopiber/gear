@@ -40,7 +40,7 @@ fi
 if [ "$cmd" == "reset" ***REMOVED***; then
 	
 	# Params
-    if [ $# -lt 5 ***REMOVED***; then
+    if [ $# -lt 4 ***REMOVED***; then
         echo "usage $0: command module local ci"
         exit 1
     fi

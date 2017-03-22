@@ -12,6 +12,7 @@ vendor/bin/gear-project-module create Exemplo $(pwd) "ModuloDeExemplo" "web" "es
 projeto    -> Nome do Projeto que será criado.
 scripts    -> Nome do diretório base onde estão os arquivos que serão copiados
 modulo     -> Nome do módulo que será construido
+type       -> Tipo do módulo que será criado.
 gear file  -> Nome do arquivo gearfile que será copiado.
 migration  -> Nome do migration que será copiado.
 test local -> 0 ou 1 para rodar os testes localmente.

@@ -5,19 +5,6 @@ headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 source "$headersDir/abstract.sh"
 
 
-
-#function Gear_Module_Construct
-#{
-	
-	
-#}
-
-#function Gear_Module_Rest
-#{
-
-#}
-
-
 # 3. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
 function Gear_Module_Create
 {
@@ -32,13 +19,12 @@ function Gear_Module_Create
     modulePath=$(modulepath "$moduleUrl")
     
     type=${2}
-    gearfile=${3}
-    migration=${4}
-    shouldTestLocal=${5}
-    shouldTestCI=${6}
-    shouldIntegrate=${7}
-
-    # Do the Work.    
+    scriptDir=${3}
+    gearfile=${4}
+    migration=${5}
+    shouldTestLocal=${6}
+    shouldTestCI=${7}
+    shouldIntegrate=${8}
 
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
     	tearDownCi "$module" "$modulePath"
@@ -52,14 +38,14 @@ function Gear_Module_Create
     
     constructModule "$module" "$type"
     
-    runConstruct "$module" "$type" "$gearfile" "$migration"
+    Gear_Module_Construct "$module" "$type" "$scriptDir" "$gearfile" "$migration" "0" "0"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
     	runModuleTest "$module" "$type"
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
-    	setUpCi "$module" "$modulePath" "$type"
+    	setUpCi "$module" "$modulePath" "module-$type"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
@@ -72,11 +58,31 @@ function Gear_Module_Create
 }
 
 
-function runConstruct
+function Gear_Module_Reset
 {
-    if [ $# -ne 4 ***REMOVED***; then
-        echo "usage: module type gearfile migration"
-        return
+	# Params
+	if [ $# -lt 3 ***REMOVED***; then
+        echo "usage: module shouldTestLocal shouldTestCI"
+        exit 1
+    fi
+   
+    # PARAMS
+    basePath=$(basepath)
+
+    module=$(moduleName "${1}")
+    moduleUrl=$(moduleUrl "$module")
+    modulePath=$(modulepath "$moduleUrl")
+    	
+    cd $modulePath 
+    sudo php public/index.php gear schema delete $module --basepath=$basePath
+    sudo php public/index.php gear schema create $module --basepath=$basePath	
+}
+
+function Gear_Module_Construct
+{
+    if [ $# -ne 7 ***REMOVED***; then
+        echo "usage: module type scriptDir gearfile migration testLocal testCI"
+        exit 1
     fi
 
     # PARAMS
@@ -87,28 +93,21 @@ function runConstruct
     modulePath=$(modulepath "$moduleUrl")
     
     type=${2}
-    gearfile=${3}
-    migration=${4}
+    scriptDir=${3}
+    gearfile=${4}
+    migration=${5}
 
     # COPY GEARFILE
-    copyGearfile "$modulePath" "$gearfile"
+    copyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
-    if [ "$migration" != "" ***REMOVED*** && [ "$type" == "web" ***REMOVED***; then
-    	copyMigration "$modulePath" "$migration"
+    if [ "$migration" != "" ***REMOVED***; then
+    	copyMigration "$scriptDir" "$migration" "$modulePath"
     	prepareForDb "$modulePath"
     fi
    
-    construct "$modulePath" "$module" "$basePath" "$type"
+    construct "$modulePath" "$module" "$basePath" "$type" "$gearfile"
 }
 
-
-function prepareForDb
-{
-	cd ${1}
-	sudo vendor/bin/phinx migrate
-	vendor/bin/unload-module BjyAuthorize	
-	sudo php public/index.php gear database fix
-}
 
 function construct
 {
@@ -116,9 +115,10 @@ function construct
 	module=${2}
 	basePath=${3}
 	type=${4}
+	gearfile=${5}
 	
     cd $modulePath 
-    sudo php public/index.php gear module construct $module $basePath
+    sudo php public/index.php gear module construct $module $basePath --file=$gearfile
     
     if [ "$type" == "web" ***REMOVED***; then
         sudo script/load.sh
@@ -187,19 +187,4 @@ function removeModule
     if [ -d "$modulePath" ***REMOVED***; then
     	sudo rm -R $modulePath
     fi
-}
-
-function resetModule
-{
-    # PARAMS
-    basePath=$(basepath)
-
-    module=$(moduleName "${1}")
-    moduleUrl=$(moduleUrl "$module")
-    modulePath=$(modulepath "$moduleUrl")
-    	
-    cd $modulePath 
-    vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
-    sudo php public/index.php gear schema delete $module --basepath=$basePath
-    sudo php public/index.php gear schema create $module --basepath=$basePath	
 }

@@ -7,12 +7,13 @@ Escolha se quer lançar a versão inicial do projeto.
 
 Outros: construct, reset
 
-vendor/bin/gear-module create Exemplo "web" "estrutura.yml" "20170101232323_banco.php" $(pwd) "1" "1" "1"
+vendor/bin/gear-module create Exemplo "web" $(pwd) "estrutura.yml" "20170101232323_banco.php" "1" "1" "1"
 
-modulo     -> Nome do Projeto que será criado.
-tipo       -> Tipo do Módulo
-gear file  -> Nome do arquivo gearfile que será copiado.
-migration  -> Nome do migration que será copiado.
-test local -> 0 ou 1 para rodar os testes localmente.
-test ci    -> 0 ou 1 para rodar os testes na integração contínua.
-version    -> 0 ou 1 se quiser criar a primeira versão no Jira.
+modulo    -> Nome do Módulo que será criado.
+tipo      -> Tipo de Módulo que será criado.
+scriptDir -> Diretório onde estão os arquivos
+gearfile  -> Nome do arquivo gearfile que será usado no novo módulo.
+migration -> Nome do migration que será usado no novo módulo.
+local     -> 0 ou 1 para rodar os testes localmente.
+ci        -> 0 ou 1 para rodar os testes na integração contínua.
+version   -> 0 ou 1 se quiser criar a primeira versão no Jira.

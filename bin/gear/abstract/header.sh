@@ -9,7 +9,6 @@ headerDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 #echo "Testing SRC - CONSOLE"
 
 #base="/var/www/gear-package"
-
 function moduleName
 {
     if [ "${1}" == "" ***REMOVED***; then
@@ -41,15 +40,6 @@ function modulepath
     echo $file
 }
 
-function copyMigration
-{
-    cp "${2}" "${1}/data/migrations/"	
-}
-
-function copyGearfile
-{
-    cp "${2}" "${1}/gearfile.yml"	
-}
 
 function staging
 {
