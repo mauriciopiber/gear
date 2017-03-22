@@ -27,12 +27,12 @@ fi
 if [ "$cmd" == "construct" ***REMOVED***; then
 	
 	# Params
-    if [ $# -lt 6 ***REMOVED***; then
-        echo "usage $0: command module scriptsDir gearfile migrations local ci"
+    if [ $# -lt 5 ***REMOVED***; then
+        echo "usage $0: command module type scriptsDir gearfile migrations local ci"
         exit 1
     fi
    
-    Gear_Module_Construct "${2}" "${3}" "${4}" "${5}" "${6}" "${7}"
+    Gear_Module_Construct "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}"
     
 	exit 0
 fi
