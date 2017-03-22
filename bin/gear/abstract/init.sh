@@ -5,11 +5,11 @@ if [ $# -lt 2 ***REMOVED***; then
     exit 1
 fi
     
-declare -a availableCmds=("create" "reset" "construct")
+declare -a availableCmds=("create" "reset" "construct" "test")
 
 cmd=${1}
 
-if not_in_array availableCmds "${cmd}"; then
+if Gear_Util_NotInArray availableCmds "${cmd}"; then
 	
 	echo "Exiting with invalid command ${cmd}"
 	exit 1

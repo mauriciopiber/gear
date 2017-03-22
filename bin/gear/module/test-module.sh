@@ -38,3 +38,9 @@ if [ "$cmd" == "reload" ***REMOVED***; then
 fi
 
 
+if [ "$cmd" == "test" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type"
+	exit 0	
+fi
+

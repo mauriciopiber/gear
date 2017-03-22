@@ -4,8 +4,6 @@ functions="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../abstr
 
 source "$functions/abstract-module.sh"
 
-source "$functions/abstract-docs.sh"
-
 worker="module"
 
 source "$functions/init.sh"
@@ -49,4 +47,18 @@ if [ "$cmd" == "reset" ***REMOVED***; then
 
 	exit 0
    
+fi
+
+if [ "$cmd" == "test" ***REMOVED***; then
+	
+	# Params
+    if [ $# -lt 3 ***REMOVED***; then
+        echo "usage $0: command module type"
+        exit 1
+    fi
+   
+    Gear_Module_Run_Ant "${2}" "${3}"
+
+	exit 0
+
 fi

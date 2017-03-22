@@ -3,7 +3,6 @@
 functions="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../abstract/ && pwd )"
 
 source "$functions/abstract-project.sh"
-source "$functions/abstract-docs.sh"
 
 worker="project"
 
