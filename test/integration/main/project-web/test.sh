@@ -1,12 +1,13 @@
 #!/bin/bash
 
-scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
-
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../bin && pwd )"
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 
 # Params
 project="ProjectWeb"
 modules="MyProjectModuleCli;cli;cli.yml|MyProjectModuleWeb;web;web.yml"
+modulesClear="MyProjectModuleCli|MyProjectModuleWeb"
 
-/bin/bash "$bin/gear/project/gear-project" "create" "$project" "$modules" "$scriptDir" "1" "0" "0"
+source "$bin/gear/project/test-project.sh"
+	

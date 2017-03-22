@@ -236,9 +236,12 @@ function deleteProject
 function createProject
 {
     project=${1}
+    url=$(toUrl "$project")
     basepath=$(basepath)
     projectPath=$(getPath "$project")
-    sudo php public/index.php gear project create $project --basepath=$basepath --force
+    sudo php public/index.php gear project create $project --basepath=$basepath --force \
+    --staging="${url}.$(getStaging)" \
+    --production="${url}.$(getProduction)" 
     
     cd $projectPath 
     sudo script/deploy-development.sh    

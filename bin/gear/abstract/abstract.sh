@@ -132,7 +132,16 @@ function setUpCi
     sudo php public/index.php gear jenkins suite create $type
 }
 
+function getStaging
+{
+	
+    echo "stag01.pibernetwork.com"
+}
 
+function getProduction
+{
+    echo "pibernetwork.com"	
+}
 function toUrl
 {
     echo $(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "${1}")	
