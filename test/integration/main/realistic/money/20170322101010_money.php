@@ -16,7 +16,7 @@ class Money extends AbstractMigration
      **/
     public function change()
     {
-        $tableForeign = $this->table('wallet', ['id' => 'id_montly'***REMOVED***);
+        $tableForeign = $this->table('wallet', ['id' => 'id_wallet'***REMOVED***);
         $tableForeign->addColumn('name', 'string', ['null' => false***REMOVED***);
         $tableForeign->addColumn('balance', 'decimal', ['null' => false***REMOVED***);
         $this->setUser($tableForeign);

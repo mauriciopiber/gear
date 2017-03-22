@@ -4,12 +4,10 @@
 headersDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 source "$headersDir/abstract.sh"
+source "$headersDir/abstract-docs.sh"
+source "$headersDir/abstract-ci.sh"
+source "$headersDir/abstract-version.sh"
 
-function gearPath
-{
-    echo "/var/www/gear-package/gear"	
-	
-}
 
 function Gear_Project_Reset
 {
@@ -21,7 +19,7 @@ function Gear_Project_Reset
     project=${1}
     modules=${2}
     
-    Gear_ResolveResetModules "$project" "$modules"
+    Gear_Project_ResolveModules_Reset "$project" "$modules"
 }
 
 function Gear_Project_Construct
@@ -36,9 +34,9 @@ function Gear_Project_Construct
     modules=${2}
     scriptDir=${3}
     
-    Gear_ResolveConstructModules "$project" "$modules" "$scriptDir"
+    Gear_Project_ResolveModules_Construct "$project" "$modules" "$scriptDir"
 
-    reload "$project"	
+    Gear_Project_Run_Reload "$project"	
 }
 
 function Gear_Project_Create
@@ -56,45 +54,43 @@ function Gear_Project_Create
     shouldTestCI=${5}
     shouldIntegrate=${6}
 
-    projectPath=$(getPath "${project}")
-    gearPath=$(gearPath)
+    projectPath=$(Gear_Project_Util_GetProjectPath "${project}")
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
     	echo "tearDownCi"
-   	    tearDownCi "$project" "$projectPath"
+   	    Gear_CI_TearDown "$project" "$projectPath"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
         echo "tearDownVersion"
-    	tearDownVersion "$project" "$projectPath"
+    	Gear_Version_TearDown "$project" "$projectPath"
     fi
 
-    deleteProject "$project"
+    Gear_Project_Run_DeleteProject "$project"
     
-    cd $gearPath
-    createProject "$project"
+    Gear_Project_Run_CreateProject "$project"
     
     if [ "$modules" != "" ***REMOVED***; then
-    	Gear_ResolveCreateModules "$project" "$modules" "$scripts"
-        reload "$project"	
+    	Gear_Project_ResolveModules_Create "$project" "$modules" "$scripts"
+        Gear_Project_Run_Reload "$project"	
     fi 
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then
-    	testProject "$project"
+    	Gear_Project_Run_Ant "$project"
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
     	echo "configureCi"
-    	setUpCi "$project" "$projectPath" "project-web"
+    	Gear_CI_SetUp "$project" "$projectPath" "project-web"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	setUpVersion "$project" "$projectPath"
+    	Gear_Version_SetUp "$project" "$projectPath"
     fi 
    
     if [ "$shouldTestCI" == "1" ***REMOVED*** || [ "$shouldIntegrate" == "1" ***REMOVED***; then
     	echo "build"
-    	build "$project" "$projectPath" "$shouldIntegrate"
+    	Gear_CI_Build "$project" "$projectPath" "$shouldIntegrate"
     fi
     
     
@@ -102,7 +98,7 @@ function Gear_Project_Create
 		
 }
 
-function Gear_ResolveResetModules
+function Gear_Project_ResolveModules_Reset
 {
 	project=${1}
 	modules=${2}
@@ -121,7 +117,7 @@ function Gear_ResolveResetModules
 	
 }
 
-function Gear_ResolveConstructModules
+function Gear_Project_ResolveModules_Construct
 {
 	project=${1}
 	modules=${2}
@@ -142,7 +138,7 @@ function Gear_ResolveConstructModules
 }
 
 
-function Gear_ResolveCreateModules
+function Gear_Project_ResolveModules_Create
 {
 	project=${1}
 	modules=${2}
@@ -177,7 +173,7 @@ function Gear_Project_Module_Create
 	gearfile=${5}
 	migration=${6}
 	
-	projectPath=$(getPath "${project}")
+	projectPath=$(Gear_Project_Util_GetProjectPath "${project}")
 	
     cd $projectPath 
     sudo php public/index.php gear module create "$module" --type=$type
@@ -200,58 +196,26 @@ function Gear_Project_Module_Construct
     migration=${5}
       
     # PARAMS
-    basePath=$(basepath)
-    projectPath=$(getPath "${1}")
+    basePath=$(Gear_Util_GetBasePath)
+    projectPath=$(Gear_Project_Util_GetProjectPath "${1}")
 
     if [ "$migration" != "" ***REMOVED***; then
-    	copyMigration "$scriptsDir" "$migration" "$projectPath"
-    	prepareForDb "$projectPath" 
+    	Gear_Util_CopyMigration "$scriptsDir" "$migration" "$projectPath"
+    	Gear_Util_PrepareForDb "$projectPath" 
     fi     
 
     # COPY GEARFILE
-    copyGearfile "$scriptsDir" "$gearfile" "$projectPath"
+    Gear_Util_CopyGearfile "$scriptsDir" "$gearfile" "$projectPath"
 
     # CONSTRUCT 
-    constructInProject "$projectPath" "$module" "$gearfile" 	
-}
-
-function getPath
-{
-    project=${1}
-    basepath=$(basepath)
-    echo "$basepath/$project"
-}
-
-function deleteProject
-{
-	project=${1}
-    basepath=$(basepath)
-    projectPath=$(getPath "$project")
-    
-    if [ -d "$projectPath" ***REMOVED***; then
-    	sudo rm -R $projectPath
-    fi
-}
-
-function createProject
-{
-    project=${1}
-    url=$(toUrl "$project")
-    basepath=$(basepath)
-    projectPath=$(getPath "$project")
-    sudo php public/index.php gear project create $project --basepath=$basepath --force \
-    --staging="${url}.$(getStaging)" \
-    --production="${url}.$(getProduction)" 
-    
-    cd $projectPath 
-    sudo script/deploy-development.sh    
+    Gear_Project_Run_Construct "$projectPath" "$module" "$gearfile" 	
 }
 
 function Gear_Project_Module_Reset
 {
     project=${1}
-    basepath=$(basepath)
-    projectPath=$(getPath "$project")
+    basepath=$(Gear_Util_GetBasePath)
+    projectPath=$(Gear_Project_Util_GetProjectPath "$project")
     module=${2}
     
     
@@ -262,49 +226,24 @@ function Gear_Project_Module_Reset
     sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
 }
 
-function Cmd_ProjectCreateModule
+function Gear_Project_Run_Reload
 {
-    projectPath=$(getPath "${1}")
-    module=${2}    
-            
-    cd $projectPath && sudo php public/index.php gear module create "$module" --type=cli
-}
-
-function reload
-{
-    projectPath=$(getPath "${1}")
+    projectPath=$(Gear_Project_Util_GetProjectPath "${1}")
     cd $projectPath
     sudo script/load.sh
     sudo php public/index.php gear database project dump
 }
 
-function testProject
+function Gear_Project_Run_Ant
 {
-    projectPath=$(getPath "${1}")
+    projectPath=$(Gear_Project_Util_GetProjectPath "${1}")
     cd $projectPath 
     #ant phpcs-docs
-    ant prepare phpcs phpmd phpcpd unit karma protractor 
+    ant prepare phpcs phpcs-docs phpmd phpcpd unit karma protractor 
 }
 
-function constructModuleProject
-{
-	
-    # PARAMS
-    basePath=$(basepath)
-    projectPath=$(getPath "${1}")
-    project=${1}
-    module=${2}
-    scriptsDir=${3}
-    gearfileName=${4}
 
-    # COPY GEARFILE
-    copyGearfile "$scriptsDir/gearfiles/$gearfileName" "$projectPath/$gearfileName"
-
-    # CONSTRUCT 
-    constructInProject "$projectPath" "$module" "$gearfileName" 	
-}
-
-function constructInProject
+function Gear_Project_Run_Construct
 {
 	projectPath=${1}
 	module=${2}
@@ -315,14 +254,36 @@ function constructInProject
 
 } 
 
-function removeModuleFromProject
+function Gear_Project_Util_GetProjectPath
 {
-    basePath=$(basepath)
-    projectPath=$(getPath "${1}")
-    module=${2}
+    project=${1}
+    basepath=$(Gear_Util_GetBasePath)
+    echo "$basepath/$project"
+}
+
+function Gear_Project_Run_DeleteProject
+{
+	project=${1}
+    projectPath=$(Gear_Project_Util_GetProjectPath "$project")
     
-    cd $projectPath
-    sudo php public/index.php gear module delete "$module"	
-	
-	
+    if [ -d "$projectPath" ***REMOVED***; then
+    	sudo rm -R $projectPath
+    fi
+}
+
+function Gear_Project_Run_CreateProject
+{
+    project=${1}
+    url=$(Gear_Util_ToUrl "$project")
+    basepath=$(Gear_Util_GetBasePath)
+    projectPath=$(Gear_Project_Util_GetProjectPath "$project")
+    
+    cd $(Gear_Util_GetGearPath)
+    
+    sudo php public/index.php gear project create $project --basepath=$basepath --force \
+    --staging="${url}.$(Gear_Util_GetStaging)" \
+    --production="${url}.$(Gear_Util_GetProduction)" 
+    
+    cd $projectPath 
+    sudo script/deploy-development.sh    
 }

@@ -1,5 +1,5 @@
-module: Evolution
+module: Money
 
 db:
   0:
-    table: Monthly
+    table: Wallet
