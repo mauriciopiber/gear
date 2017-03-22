@@ -9,7 +9,7 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
     public function module(array $controllers)
     {
         $this->getFileCreator()->createFile(
-            'template/module/mvc/config/console.phtml',
+            'template/module/config/console.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
