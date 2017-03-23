@@ -15,6 +15,7 @@ class ModuleInitializer implements InitializerInterface
             if ($request instanceof  \Zend\Console\Request) {
                 //old module
                 $moduleName = $request->getParam('module');
+                $type = $request->getParam('type', null);
 
                 if (empty($moduleName)) {
                     return;
@@ -22,6 +23,7 @@ class ModuleInitializer implements InitializerInterface
 
                 $structure = new \Gear\Module\BasicModuleStructure();
                 $structure->setModuleName($moduleName);
+                $structure->setType($type);
                 $structure->setServiceLocator($serviceLocator);
 
                 $location = $request->getParam('basepath');
