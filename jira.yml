@@ -1,16 +1,47 @@
-versions:
-  0:
-    version: gear-0.2.130
-    description: "Corrigir erro do Mysql has gone away"
-    project: GP
+#versions:
+#  0:
+#    version: gear-0.2.130
+#    description: "Corrigir erro do Mysql has gone away"
+#    project: GP
 issues:
 
   6:
-    summary: "Refatorar o Gear para passar pelo erro do Mysql has gone away"
-    description: "Um bug aconteceu ao criar um sistema grande, que é o Mysql has gone away, será buscando uma solução concreta."
+    summary: "Após a transformação das Navigations em getNameOff, ocorreu erro nos testes de integração que usam o nome do menu"
+    description: "Mudar o nome do Menu para getNameOff"
     type: Bug
     project: GP
-    estimate: 5h
+    estimate: 1h
     sprint: 27
-    version: gear-0.2.130
-    dueDate: 19/03/2017
+    dueDate: 23/03/2017
+  7:
+    summary: "Subir módulos do main para o Jenkins, com view e prefixo."
+    description: "Usar prefixo pfx"
+    type: Story
+    project: GP
+    estimate: 2h
+    sprint: 27
+    dueDate: 23/03/2017  
+  8:
+    summary: "Resolver todos bugs que surgir em meio à tarefa de subir os módulos main para o Jenkins."
+    description: "Usar prefixo pfx"
+    type: Story
+    project: GP
+    estimate: 2h
+    sprint: 27
+    dueDate: 23/03/2017
+  9:
+    summary: "Restaurar phpunit para contexto de Módulo cli e web"
+    description: "Por algum motivo desconhecido o phpunit foi descontinuado do módulo, ele deve ficar fora apenas de projeto."
+    type: Story
+    project: GP
+    estimate: 2h
+    sprint: 27
+    dueDate: 23/03/2017
+  10:
+    summary: "Melhorar a exibição dos resultados dos testes unitários."
+    description: "Por algum motivo desconhecido, aparece apenas o nome do teste, achar uma forma, por meio da estrutura ou do próprio plugin, de melhorar isso."
+    type: Story
+    project: JE
+    estimate: 2h
+    sprint: 27
+    dueDate: 23/03/2017
