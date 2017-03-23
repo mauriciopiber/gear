@@ -2,6 +2,7 @@
 namespace MyModuleTest\FilterTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Filter\MyTableFilterFactory;
 
 /**
  * @group MyModule
@@ -22,7 +23,7 @@ class MyTableFilterFactoryTest extends TestCase
             ->willReturn($this->prophesize('Zend\Mvc\I18n\Translator')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Filter\MyTableFilterFactory();
+        $factory = new MyTableFilterFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

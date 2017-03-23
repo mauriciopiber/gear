@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
+use GearJson\Src\Src;
 
 /**
  * @group src-mvc
@@ -88,7 +89,31 @@ class ServiceServiceTest extends AbstractTestCase
         $this->serviceManager->setModule($this->module->reveal());
         $this->serviceManager->setStringService($this->string);
         $this->service->setServiceManager($this->serviceManager);
+    }
 
+    /**
+     * @group fix-dependency
+     */
+    public function testCreateServiceWithSpecialDependency()
+    {
+        $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
+
+        $this->factory->createFactory(
+            $data,
+            vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
+        )->shouldBeCalled();
+
+        $file = $this->service->create($data);
+
+        $expected = $this->templates.'/src/service-with-special-dependency.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 
     /**
@@ -131,7 +156,7 @@ class ServiceServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $serviceT = new \GearJson\Src\Src([
+        $serviceT = new Src([
             'name' => sprintf('%sService', $table),
             'type' => 'Service',
             'namespace' => $namespace,
@@ -142,7 +167,7 @@ class ServiceServiceTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
-        $repository = new \GearJson\Src\Src([
+        $repository = new Src([
             'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
             'namespace' => $namespace,

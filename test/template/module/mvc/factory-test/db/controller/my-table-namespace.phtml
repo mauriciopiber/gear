@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\MyTableNamespaceControllerFactory;
 
 /**
  * @group MyModule
@@ -30,7 +31,7 @@ class MyTableNamespaceControllerFactoryTest extends TestCase
 
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
 
-        $factory = new \MyModule\Custom\CustomNamespace\MyTableNamespaceControllerFactory();
+        $factory = new MyTableNamespaceControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 

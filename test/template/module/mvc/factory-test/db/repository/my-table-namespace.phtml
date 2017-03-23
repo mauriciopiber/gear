@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\MyTableRepositoryFactory;
 
 /**
  * @group MyModule
@@ -22,7 +23,7 @@ class MyTableRepositoryFactoryTest extends TestCase
             ->willReturn($this->prophesize('GearBase\Repository\QueryBuilder')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Custom\CustomNamespace\MyTableRepositoryFactory();
+        $factory = new MyTableRepositoryFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

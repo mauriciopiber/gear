@@ -2,6 +2,7 @@
 namespace MyModuleTest\FormTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\MyFormFactory;
 
 /**
  * @group MyModule
@@ -22,7 +23,7 @@ class MyFormFactoryTest extends TestCase
             ->willReturn($this->prophesize('MyModule\Service\MyDependencyTwo')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Form\MyFormFactory();
+        $factory = new MyFormFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

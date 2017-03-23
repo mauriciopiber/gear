@@ -2,6 +2,7 @@
 namespace MyModuleTest\FormTest\SearchTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\Search\MyTableSearchFormFactory;
 
 /**
  * @group MyModule
@@ -17,7 +18,7 @@ class MyTableSearchFormFactoryTest extends TestCase
         $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $this->serviceLocator->get('doctrine.entitymanager.orm_default')->willReturn($this->entityManager);
 
-        $factory = new \MyModule\Form\Search\MyTableSearchFormFactory();
+        $factory = new MyTableSearchFormFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

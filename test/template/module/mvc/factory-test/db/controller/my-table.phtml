@@ -2,6 +2,7 @@
 namespace MyModuleTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Controller\MyTableControllerFactory;
 
 /**
  * @group MyModule
@@ -30,7 +31,7 @@ class MyTableControllerFactoryTest extends TestCase
 
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
 
-        $factory = new \MyModule\Controller\MyTableControllerFactory();
+        $factory = new MyTableControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 

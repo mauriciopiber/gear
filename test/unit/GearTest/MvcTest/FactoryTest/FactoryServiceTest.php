@@ -53,7 +53,22 @@ class FactoryServiceTest extends AbstractTestCase
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->factory->setSchemaService($this->schema->reveal());
+    }
 
+    /**
+     * @group fix-dependency
+     */
+    public function testFixSpecialDependency()
+    {
+        $location = vfsStream::url('module');
+
+        $this->module->getSrcModuleFolder()->willReturn($location);
+
+        $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
+
+        $file = $this->factory->createFactory($data, $location);
+
+        $this->assertEquals(file_get_contents($this->template.'/src/service-with-special-dependency.phtml'), file_get_contents($file));
     }
 
     public function getData()
