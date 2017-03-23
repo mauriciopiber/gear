@@ -42,12 +42,22 @@ abstract class AbstractCode implements
 
     public function resolveName($item)
     {
+        if (is_array($item) && isset($item['class'***REMOVED***)) {
+            $item = $item['class'***REMOVED***;
+        }
+
         $names = explode('\\', $item);
         $name = end($names);
         return $name;
     }
+
     public function resolveNamespace($item)
     {
+        //extract class name if is an array
+        if (is_array($item) && isset($item['class'***REMOVED***)) {
+            $item = $item['class'***REMOVED***;
+        }
+
         $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
         $item = ltrim($item, '\\');
         $extendsItem = explode('\\', $item);
