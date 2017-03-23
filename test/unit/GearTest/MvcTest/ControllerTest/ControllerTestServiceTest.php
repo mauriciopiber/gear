@@ -27,7 +27,7 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/ControllerTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/index-web';
+
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller-test';
 
 
@@ -83,7 +83,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $file = $this->controllerTest->module();
 
-        $expected = $this->template.'/IndexControllerTest.phtml';
+        $expected = $this->templates.'/module/IndexControllerTest.phtml';
 
 
 
@@ -100,7 +100,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $file = $this->controllerTest->moduleFactory();
 
-        $expected = $this->template.'/IndexControllerFactoryTest.phtml';
+        $expected = $this->templates.'/module/IndexControllerFactoryTest.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -112,6 +112,7 @@ class ControllerTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group RefactoringUnitTest
      * @group db-controller2
+     * @group db-x
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {

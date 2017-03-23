@@ -6,6 +6,7 @@ use MyModule\Controller\BasicDependenciesManyConsole;
 use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicDependenciesManyConsole
@@ -13,6 +14,8 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class BasicDependenciesManyConsoleTest extends TestCase
 {
+    use AclAssertTrait;
+
     protected $controller;
     protected $request;
     protected $response;
@@ -33,6 +36,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     public function test404()
@@ -45,6 +50,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
 
     public function testFirstActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesManyConsole', 'FirstAction');
+
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -54,6 +61,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
 
     public function testSecondActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesManyConsole', 'SecondAction');
+
         $this->routeMatch->setParam('action', 'second-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -63,6 +72,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
 
     public function testThirdActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesManyConsole', 'ThirdAction');
+
         $this->routeMatch->setParam('action', 'third-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -72,6 +83,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
 
     public function testFourActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesManyConsole', 'FourAction');
+
         $this->routeMatch->setParam('action', 'four-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -81,6 +94,8 @@ class BasicDependenciesManyConsoleTest extends TestCase
 
     public function testFiveActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesManyConsole', 'FiveAction');
+
         $this->routeMatch->setParam('action', 'five-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

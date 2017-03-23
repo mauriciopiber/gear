@@ -166,13 +166,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             );
             */
 
-
-            if ($method->getDb() === null) {
-                $controller = $this->controller->getName();
-            } else {
-                $controller = $this->controller->getNameOff();
-            }
-
+            $controller = $this->controller->getName();
 
             $routeUrl = sprintf(
                 '%s %s %s',

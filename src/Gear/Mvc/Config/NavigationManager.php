@@ -48,12 +48,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         $this->navModule = $this->str('url', $this->module->getModuleName());
 
-
-        if ($action->getDb() === null) {
-            $controllerName = $this->str('url', $this->action->getController()->getName());
-        } else {
-            $controllerName = $this->str('url', $this->action->getController()->getNameOff());
-        }
+        $controllerName = $this->str('url', $this->action->getController()->getNameOff());
 
         $this->navController = sprintf(
             '%s/%s',
@@ -118,12 +113,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
     {
         $moduleUrl = $this->str('url', $this->module->getModuleName());
 
-
-        if ($this->action->getDb() === null) {
-            $controllerUrl  = $this->str('url', $this->action->getController()->getName());
-        } else {
-            $controllerUrl  = $this->str('url', $this->action->getController()->getNameOff());
-        }
+        $controllerUrl  = $this->str('url', $this->action->getController()->getNameOff());
 
         $page = [
             'label' => $this->str('label', $this->action->getRoute()),
@@ -170,12 +160,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
         $moduleUrl = $this->str('url', $this->module->getModuleName());
 
 
-        if ($this->action->getDb() === null) {
-            $controller = $this->action->getController()->getName();
-        } else {
-            $controller = $this->action->getController()->getNameOff();
-        }
-
+        $controller = $this->action->getController()->getNameOff();
         $controllerUrl  = $this->str('url', $controller);
         $controllerLabel = $this->str('label', $controller);
 
@@ -186,75 +171,6 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
         ***REMOVED***;
 
         $this->navigation['default'***REMOVED***[$this->hasModule***REMOVED***['pages'***REMOVED***[***REMOVED*** = $new;
-    }
-
-
-    /**
-     * @deprecated Não está sendo utilizado
-     * @return string
-     */
-    public function render()
-    {
-
-
-        $navigation = <<<EOS
-<?php
-return array(
-    'default' => array(
-        array(
-            'label' => '{$this->moduleLabel}',
-            'route' => '{$this->moduleUrl}',
-            'pages' => array(
-
-EOS;
-
-        if (!empty($this->controllers)) {
-            foreach ($this->controllers as $controller) {
-                $controllerLabel = $this->str('label', $controller->getNameOff());
-                $controllerUrl   = $this->str('url', $controller->getNameOff());
-
-                $navigation .= <<<EOS
-                array(
-                    'label' => '{$controllerLabel}',
-                    'route' => '{$this->moduleUrl}/{$controllerUrl}',
-                    'pages' => array(
-
-EOS;
-
-                if (!empty($controller->getActions())) {
-                    foreach ($controller->getActions() as $action) {
-                        $actionName = $this->str('label', $action->getName());
-                        $actionUrl  = $this->str('url', $action->getRoute());
-
-                        $navigation .= <<<EOS
-                        array(
-                            'label' => '{$actionName}',
-                            'route' => '{$this->moduleUrl}/{$controllerUrl}/{$actionUrl}'
-                        ),
-
-EOS;
-                    }
-                }
-
-
-                $navigation .= <<<EOS
-                    ),
-                ),
-
-EOS;
-            }
-        }
-
-
-
-        $navigation .= <<<EOS
-            ),
-        ),
-    ),
-);
-
-EOS;
-        return $navigation;
     }
 
     public function delete(Action $controller)

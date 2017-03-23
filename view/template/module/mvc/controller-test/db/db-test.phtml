@@ -5,6 +5,7 @@ use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $th
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
@@ -14,6 +15,7 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class <?php echo $this->controllerName; ?>Test extends TestCase
 {
+    use AclAssertTrait;
 <?php echo $this->extraColumns;?>
 <?php echo $this->extraFilter;?>
 <?php echo $this->static;?>
@@ -25,6 +27,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         );
         parent::setUp();
 <?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
+
+        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../../schema/module.json';
     }
 
     protected function tearDown()
@@ -43,6 +47,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testEnterCreatePage()
     {
+        $this->assertAcl($this->schema, '<?php echo $this->module;?>', '<?php echo $this->controllerName; ?>', 'Create');
+
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -105,6 +111,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
+        $this->assertAcl($this->schema, '<?php echo $this->module;?>', '<?php echo $this->controllerName; ?>', 'Edit');
+
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
 
         $this-><?php echo $this->tableVar;?>Service->selectById(31)->willReturn($this->entity);
@@ -138,6 +146,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
+        $this->assertAcl($this->schema, '<?php echo $this->module;?>', '<?php echo $this->controllerName; ?>', 'List');
+
         $this-><?php echo $this->tableVar;?>Service->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -152,6 +162,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
+        $this->assertAcl($this->schema, '<?php echo $this->module;?>', '<?php echo $this->controllerName; ?>', 'View');
+
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
         //$this->entity->getId<?php echo $this->table;?>()->willReturn(31)->shouldBeCalled();
 
@@ -206,6 +218,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
+        $this->assertAcl($this->schema, '<?php echo $this->module;?>', '<?php echo $this->controllerName; ?>', 'Delete');
+
         $this-><?php echo $this->tableVar;?>Service->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');

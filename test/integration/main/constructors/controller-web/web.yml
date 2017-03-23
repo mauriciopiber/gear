@@ -5,4 +5,12 @@ controller:
     name: MyController
     namespace: PowerfullGear
     service: factories
-    
+    actions:
+      01:
+        name: Creation        
+      02:
+        name: Deletion
+      03:
+        name: Reading
+      04:
+        name: Lists     

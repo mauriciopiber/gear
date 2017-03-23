@@ -6,6 +6,7 @@ use MyModule\Controller\TableController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group MyModule
@@ -15,6 +16,7 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class TableControllerTest extends TestCase
 {
+    use AclAssertTrait;
 
     public function mockUploadImage()
     {
@@ -86,6 +88,7 @@ class TableControllerTest extends TestCase
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
 
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     protected function tearDown()
@@ -104,6 +107,8 @@ class TableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Create');
+
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -229,6 +234,8 @@ class TableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Edit');
+
         $this->entity = $this->prophesize('MyModule\Entity\Table');
 
         $this->tableService->selectById(31)->willReturn($this->entity);
@@ -345,6 +352,8 @@ class TableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'List');
+
         $this->tableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -359,6 +368,8 @@ class TableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'View');
+
         $this->entity = $this->prophesize('MyModule\Entity\Table');
         //$this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
 
@@ -413,6 +424,8 @@ class TableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Delete');
+
         $this->tableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
