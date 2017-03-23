@@ -2,6 +2,7 @@
 namespace MyModuleTest\RepositoryTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Repository\MyTableRepositoryFactory;
 
 /**
  * @group MyModule
@@ -22,7 +23,7 @@ class MyTableRepositoryFactoryTest extends TestCase
             ->willReturn($this->prophesize('GearBase\Repository\QueryBuilder')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Repository\MyTableRepositoryFactory();
+        $factory = new MyTableRepositoryFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

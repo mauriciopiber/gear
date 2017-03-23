@@ -2,6 +2,7 @@
 namespace MyModuleTest\FormTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Form\MyTableFormFactory;
 
 /**
  * @group MyModule
@@ -43,7 +44,7 @@ class MyTableFormFactoryTest extends TestCase
         $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
         $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
-        $factory = new \MyModule\Form\MyTableFormFactory();
+        $factory = new MyTableFormFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

@@ -2,6 +2,7 @@
 namespace MyModuleTest\ServiceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Service\MyTableServiceFactory;
 
 /**
  * @group MyModule
@@ -26,7 +27,7 @@ class MyTableServiceFactoryTest extends TestCase
             ->willReturn($this->prophesize('GearImage\Service\ImageService')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Service\MyTableServiceFactory();
+        $factory = new MyTableServiceFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

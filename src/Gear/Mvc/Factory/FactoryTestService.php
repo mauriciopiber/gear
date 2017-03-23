@@ -24,6 +24,7 @@ class FactoryTestService extends AbstractMvcTest
             'module'    => $this->getModule()->getModuleName(),
             'moduleUrl'    => $this->str('url', $this->getModule()->getModuleName()),
             'namespace' => $this->getCodeTest()->getNamespace($src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($src),
             'fullclass' => $this->getCodeTest()->getFullClassName($src),
             'class' => $this->str('class', $name),
             'group' => $src->getType()
@@ -58,6 +59,7 @@ class FactoryTestService extends AbstractMvcTest
             'module'    => $this->getModule()->getModuleName(),
             'namespace' => $this->getCodeTest()->getNamespace($src),
             'fullclass' => $this->getCodeTest()->getFullClassName($src),
+            'testNamespace' => $this->getCodeTest()->getTestNamespace($src),
             'class' => $this->str('class', $name),
             'group' => 'Controller'
         ***REMOVED***;

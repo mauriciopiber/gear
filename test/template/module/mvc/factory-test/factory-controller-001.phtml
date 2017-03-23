@@ -2,6 +2,7 @@
 namespace MyModuleTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Controller\MyControllerFactory;
 
 /**
  * @group MyModule
@@ -17,7 +18,7 @@ class MyControllerFactoryTest extends TestCase
         $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
 
-        $factory = new \MyModule\Controller\MyControllerFactory();
+        $factory = new MyControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 

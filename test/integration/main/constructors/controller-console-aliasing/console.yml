@@ -1,0 +1,45 @@
+modules: ControllerConsole
+
+controller:
+  01:
+    name: MyController
+    type: Console
+    namespace: PowerfullGear
+    service: factories
+    actions:
+      01:
+        name: Create        
+      02:
+        name: Delete
+      03:
+        name: Read
+      04:
+        name: Lists                    
+  02:
+    name: YourController
+    type: Console
+    namespace: PowerfullGear
+    service: factories
+    actions:
+      01:
+        name: Create        
+      02:
+        name: Delete
+      03:
+        name: Read
+      04:
+        name: Lists           
+        
+       
+src:
+  1:
+    name: MainService
+    service: factories
+    type: Service
+    namespace: Main
+  2:
+    name: TestingNormalDependency
+    service: factories
+    type: Service
+    dependency:
+    

@@ -1,6 +1,7 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->basename;?>FormFactory;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
@@ -42,7 +43,7 @@ class <?php echo $this->basename;?>FormFactoryTest extends TestCase
         $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
         $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
-        $factory = new \<?php echo $this->form;?>Factory();
+        $factory = new <?php echo $this->basename;?>FormFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

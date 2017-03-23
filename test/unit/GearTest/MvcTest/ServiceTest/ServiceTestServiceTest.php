@@ -11,6 +11,7 @@ use PhpParser\ParserFactory;
 use GearTest\SingleDbTableTrait;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
+use GearJson\Src\Src;
 
 /**
  * @group fix-table
@@ -138,7 +139,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $serviceT = new \GearJson\Src\Src(
+        $serviceT = new Src(
             [
                 'db' => $table,
                 'name' => sprintf('%sService', $table),
@@ -195,6 +196,46 @@ class ServiceTestServiceTest extends AbstractTestCase
     public function src()
     {
         return $this->getScope('Service');
+    }
+
+
+    /**
+     * @group fix-dependency
+     */
+    public function testFixSpecialDependency()
+    {
+        $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
+
+        $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+
+        if ($data->getService() == 'factories') {
+            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+            $this->service->setFactoryTestService($this->factory->reveal());
+        }
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $serviceManager->setModule($this->module->reveal());
+        $serviceManager->setStringService($this->string);
+
+        $this->service->setServiceManager($serviceManager);
+
+        $this->service->setTraitTestService($this->traitTest->reveal());
+
+        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency->setModule($this->module->reveal());
+        $this->service->setSrcDependency($srcDependency);
+
+        $file = $this->service->create($data);
+
+        $expected = $this->templates.'/src/service-with-special-dependency.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 
     /**

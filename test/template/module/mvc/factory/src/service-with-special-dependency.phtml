@@ -1,0 +1,32 @@
+<?php
+namespace MyModule\BestNamespace;
+
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\BestNamespace\MySrcWithSpecialDependency;
+
+/**
+ * PHP Version 5
+ *
+ * @category Factory
+ * @package MyModule/BestNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MySrcWithSpecialDependencyFactory implements FactoryInterface
+{
+    /**
+     * Create MySrcWithSpecialDependency
+     *
+     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @return \MyModule\BestNamespace\MySrcWithSpecialDependency
+     */
+    public function createService(ServiceLocatorInterface $serviceLocator)
+    {
+        $factory = new MySrcWithSpecialDependency(
+        );
+        unset($serviceLocator);
+        return $factory;
+    }
+}

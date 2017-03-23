@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Custom\CustomNamespace\MyTableFilterFactory;
 
 /**
  * @group MyModule
@@ -22,7 +23,7 @@ class MyTableFilterFactoryTest extends TestCase
             ->willReturn($this->prophesize('Zend\Mvc\I18n\Translator')->reveal())
             ->shouldBeCalled();
 
-        $factory = new \MyModule\Custom\CustomNamespace\MyTableFilterFactory();
+        $factory = new MyTableFilterFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

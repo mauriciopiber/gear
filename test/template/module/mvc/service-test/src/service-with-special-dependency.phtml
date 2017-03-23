@@ -1,0 +1,23 @@
+<?php
+namespace MyModuleTest\BestNamespaceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\BestNamespace\MySrcWithSpecialDependency;
+
+/**
+ * @group Service
+ */
+class MySrcWithSpecialDependencyTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->service = new MySrcWithSpecialDependency();
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\BestNamespace\MySrcWithSpecialDependency', $this->service);
+    }
+}
