@@ -34,7 +34,20 @@ class BasicModuleStructure implements
 
     protected $moduleName;
 
+    protected $type;
+
     public $basePath;
+
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
 
     public function __construct($moduleName = null)
     {
@@ -66,18 +79,9 @@ class BasicModuleStructure implements
     }
 
 
-    public function prepare($moduleName = null)
+    public function prepare($moduleName = null, $type = 'web')
     {
-
-        if (!empty($this->getModuleName())) {
-            $module = $this->getModuleName();
-        } elseif (!empty($moduleName)) {
-            $module = $moduleName;
-        } elseif (null !== $this->getRequestName()) {
-            $module = $this->getRequestName();
-        } else {
-            throw new \Exception('No Module Name to prepare module');
-        }
+        $this->setType($type);
 
         if (empty($moduleName)) {
             $moduleName = $this->getModuleName();
@@ -97,7 +101,6 @@ class BasicModuleStructure implements
                 $this->setMainFolder($folder);
             }
         }
-
 
         return $this;
     }
@@ -141,7 +144,7 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getMainFolder());
 
 
-        $this->getDirService()->mkDir($this->getJenkinsFolder());
+        //$this->getDirService()->mkDir($this->getJenkinsFolder());
 
 
         $this->getDirService()->mkDir($this->getDocsFolder());
@@ -195,7 +198,7 @@ class BasicModuleStructure implements
         $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
 
 
-        $this->getDirService()->mkDir($this->getLanguageFolder());
+
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
         $this->getDirService()->mkDir($this->getControllerFolder());
@@ -214,41 +217,47 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getFixtureFolder());
         $this->createGitIgnore($this->getFixtureFolder());
 
+        if ($this->getType() === 'web') {
+            $this->getDirService()->mkDir($this->getViewFolder());
+            $this->getDirService()->mkDir($this->getViewModuleFolder());
+            $this->getDirService()->mkDir($this->getViewErrorFolder());
+            $this->getDirService()->mkDir($this->getViewLayoutFolder());
+            $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
+        }
         //view
-        $this->getDirService()->mkDir($this->getViewFolder());
-        $this->getDirService()->mkDir($this->getViewModuleFolder());
-        $this->getDirService()->mkDir($this->getViewErrorFolder());
-        $this->getDirService()->mkDir($this->getViewLayoutFolder());
-        $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
 
         //public
         $this->getDirService()->mkDir($this->getPublicFolder());
-        $this->getDirService()->mkDir($this->getPublicUploadFolder());
-        $this->getDirService()->mkDir($this->getPublicJsFolder());
-        $this->getDirService()->mkDir($this->getPublicInfoFolder());
-        $this->getDirService()->mkDir($this->getPublicJsAppFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder().'/index');
-        $this->getDirService()->mkDir($this->getPublicJsSpecEndSupportFolder().'/index');
-        $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
-        $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
-        $this->getDirService()->mkDir($this->getPublicCssFolder());
-        $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
-        $this->getDirService()->mkDir($this->getPublicJsServiceFolder());
-        $this->getDirService()->mkDir($this->getPublicJsControllerSpecFolder());
-        $this->getDirService()->mkDir($this->getPublicJsServiceSpecFolder());
-        $this->writable($this->getPublicUploadFolder());
+
+        if ($this->getType() === 'web') {
+
+            $this->getDirService()->mkDir($this->getPublicUploadFolder());
+            $this->getDirService()->mkDir($this->getPublicJsFolder());
+            $this->getDirService()->mkDir($this->getPublicJsAppFolder());
+            $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
+            $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
+            $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder());
+            $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder().'/index');
+            $this->getDirService()->mkDir($this->getPublicJsSpecEndSupportFolder().'/index');
+            $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
+            $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
+            $this->getDirService()->mkDir($this->getPublicCssFolder());
+            $this->getDirService()->mkDir($this->getPublicJsControllerFolder());
+            $this->getDirService()->mkDir($this->getPublicJsServiceFolder());
+            $this->getDirService()->mkDir($this->getPublicJsControllerSpecFolder());
+            $this->getDirService()->mkDir($this->getPublicJsServiceSpecFolder());
+            $this->writable($this->getPublicUploadFolder());
+
+            $this->getDirService()->mkDir($this->getPublicTempFolder());
+            $this->writable($this->getPublicTempFolder());
+            $this->createGitIgnore($this->getPublicTempFolder());
+        }
         //$this->createGitIgnore($this->getPublicJsControllerFolder());
         //test
         $this->getDirService()->mkDir($this->getTestFolder());
         $this->getDirService()->mkDir($this->getTestUnitFolder());
         $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
 
-        $this->getDirService()->mkDir($this->getPublicTempFolder());
-        $this->writable($this->getPublicTempFolder());
-        $this->createGitIgnore($this->getPublicTempFolder());
 
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
@@ -260,27 +269,33 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getTestFormFolder());
         $this->getDirService()->mkDir($this->getTestSearchFolder());
 
-        $this->getDirService()->mkDir($this->getModuleViewFolder());
-        $this->getDirService()->mkDir($this->getViewHelperFolder());
-
-        $this->getDirService()->mkDir($this->getTestViewFolder());
-        $this->getDirService()->mkDir($this->getTestViewHelperFolder());
         $this->getDirService()->mkDir($this->getTestFilterFolder());
         $this->getDirService()->mkDir($this->getTestFactoryFolder());
         $this->getDirService()->mkDir($this->getTestValueObjectFolder());
         $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
         $this->writable($this->getTestSupportFolder());
 
-        //language
-        $this->getDirService()->mkDir($this->getLanguageRouteFolder());
+        if ($this->getType() === 'web') {
+            $this->getDirService()->mkDir($this->getModuleViewFolder());
+            $this->getDirService()->mkDir($this->getViewHelperFolder());
+            $this->getDirService()->mkDir($this->getTestViewFolder());
+            $this->getDirService()->mkDir($this->getTestViewHelperFolder());
+
+
+            $this->getDirService()->mkDir($this->getLanguageFolder());
+            $this->getDirService()->mkDir($this->getLanguageRouteFolder());
+        }
 
         $this->getDirService()->mkDir($this->getDataCacheFolder());
         $this->getDirService()->mkDir($this->getDataCacheConfigFolder());
         $this->writable($this->getDataCacheConfigFolder());
         $this->createGitIgnore($this->getDataCacheConfigFolder());
-        $this->getDirService()->mkDir($this->getNodejsFolder());
-        $this->writable($this->getNodejsFolder());
-        $this->createGitIgnore($this->getNodejsFolder());
+
+        if ($this->getType() == 'web') {
+            $this->getDirService()->mkDir($this->getNodejsFolder());
+            $this->writable($this->getNodejsFolder());
+            $this->createGitIgnore($this->getNodejsFolder());
+        }
 
         return $this;
     }

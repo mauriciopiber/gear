@@ -244,7 +244,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->type = $type;
                 //module structure
         $moduleStructure = $this->getModule();
-        $moduleStructure->prepare($module)->write();
+        $moduleStructure->prepare($module, $type)->write();
 
         $this->moduleComponents();
 
@@ -318,7 +318,7 @@ class ModuleService implements ModuleProjectConnectorInterface
             $moduleStructure->setMainFolder($mainFolder);
         }
 
-        $module = $moduleStructure->prepare($module)->write();
+        $module = $moduleStructure->prepare($module, $type)->write();
 
         return $this->moduleComponents(self::MODULE_AS_PROJECT);
     }
@@ -410,7 +410,8 @@ class ModuleService implements ModuleProjectConnectorInterface
                     $this->getInstallStagingScript();
                 }
 
-
+                $languageService = $this->getLanguageService();
+                $languageService->create();
 
                 break;
 
@@ -431,8 +432,7 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         /* @var $configService \Gear\Service\Mvc\ConfigService */
 
-        $languageService = $this->getLanguageService();
-        $languageService->create();
+
 
 
 

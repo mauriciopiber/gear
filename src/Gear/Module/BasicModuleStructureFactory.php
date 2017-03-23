@@ -10,14 +10,16 @@ class BasicModuleStructureFactory implements FactoryInterface
     {
         $request = $serviceLocator->get('request');
         $moduleName = $request->getParam('module');
+        $type = $request->getParam('type', null);
+
+        $structure = new \Gear\Module\BasicModuleStructure();
 
         if (empty($moduleName)) {
-            $structure = new \Gear\Module\BasicModuleStructure();
             $structure->setModuleName(null);
+            $structure->setType($type);
             return $structure;
         }
 
-        $structure = new \Gear\Module\BasicModuleStructure();
         $structure->setModuleName($moduleName);
         $structure->setServiceLocator($serviceLocator);
 
