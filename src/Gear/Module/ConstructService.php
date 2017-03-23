@@ -93,7 +93,7 @@ class ConstructService extends AbstractJsonService
 
         $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
 
-        if (!empty($fileConfig)) {
+        if (!empty($fileConfig) && empty($this->configLocation)) {
             $this->setConfigLocation($fileConfig);
         }
 
@@ -281,12 +281,14 @@ class ConstructService extends AbstractJsonService
      */
     public function setConfigLocation($configLocation)
     {
-        if ($configLocation) {
+        if ($configLocation && is_file($configLocation)) {
 
-            if (is_file($configLocation)) {
-                $this->configLocation = $configLocation;
-                return $this;
-            }
+            $this->configLocation = $configLocation;
+            return $this;
+        }
+
+
+        if ($configLocation) {
 
             $basePath = $this->getBaseDir();
 

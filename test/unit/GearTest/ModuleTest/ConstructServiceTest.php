@@ -68,6 +68,9 @@ class ConstructServiceTest extends AbstractTestCase
         $this->assertEquals($this->construct->getActionConstructor(), $actionservice->reveal());
     }
 
+    /**
+     * @group vamo2
+     */
     public function testSrcCreate()
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
@@ -101,7 +104,9 @@ EOS
         $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Src nome "Gearing" do tipo "Service" criado.');
     }
 
-
+    /**
+     * @group vamo
+     */
     public function testControllerCreate()
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
@@ -554,7 +559,7 @@ EOS;
 
         //var_dump($gearfile);
 
-        return 'gearfile.yml';
+        return vfsStream::url('basepath/gearfile.yml');
     }
 
     /**
@@ -564,7 +569,7 @@ EOS;
     {
         $file = $this->gearfileHelper();
 
-        $this->assertFileExists($this->construct->getBaseDir().'/'.$file);
+        $this->assertFileExists($file);
 
         $this->construct->setConfigLocation($file);
 
