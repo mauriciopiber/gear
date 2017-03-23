@@ -78,8 +78,10 @@ function Gear_Module_Reset
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     	
     cd $modulePath 
+    vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
     sudo php public/index.php gear schema delete $module --basepath=$basePath
     sudo php public/index.php gear schema create $module --basepath=$basePath	
+    sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM    
 }
 
 function Gear_Module_Construct

@@ -5,6 +5,7 @@ use <?php echo $this->module?>\<?php echo $this->namespace;?>\<?php echo $this->
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group <?php echo $this->controllerName.PHP_EOL; ?>
@@ -12,6 +13,8 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class <?php echo $this->controllerName; ?>Test extends TestCase
 {
+    use AclAssertTrait;
+
     protected $controller;
     protected $request;
     protected $response;
@@ -32,6 +35,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
+
+        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../../schema/module.json';
     }
 
     public function test404()

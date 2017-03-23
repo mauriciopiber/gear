@@ -2,6 +2,7 @@
 namespace MyModuleTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\Controller\IndexControllerFactory;
 
 class IndexControllerFactoryTest extends TestCase
 {
@@ -9,7 +10,7 @@ class IndexControllerFactoryTest extends TestCase
     {
         $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
-        $factory = new \MyModule\Controller\IndexControllerFactory();
+        $factory = new IndexControllerFactory();
 
         $instance = $factory->createService($this->controllerManager->reveal());
 

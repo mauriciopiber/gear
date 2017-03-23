@@ -3,6 +3,7 @@ namespace MyModule\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use MyModule\Controller\IndexController;
 
 /**
  * PHP Version 5
@@ -25,7 +26,7 @@ class IndexControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $controllerManager)
     {
         unset($controllerManager);
-        $indexController = new \MyModule\Controller\IndexController();
+        $indexController = new IndexController();
         return $indexController;
     }
 }

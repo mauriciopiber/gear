@@ -6,6 +6,7 @@ use MyModule\Controller\SingleDbTableController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group MyModule
@@ -15,6 +16,7 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class SingleDbTableControllerTest extends TestCase
 {
+    use AclAssertTrait;
 
     public function setUp()
     {
@@ -44,6 +46,8 @@ class SingleDbTableControllerTest extends TestCase
         $this->controller->setSingleDbTableForm($this->singleDbTableForm->reveal());
         $this->controller->setSingleDbTableService($this->singleDbTableService->reveal());
         $this->controller->setSingleDbTableSearchForm($this->singleDbTableSearchForm->reveal());
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     protected function tearDown()
@@ -62,6 +66,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Create');
+
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -182,6 +188,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Edit');
+
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
 
         $this->singleDbTableService->selectById(31)->willReturn($this->entity);
@@ -291,6 +299,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'List');
+
         $this->singleDbTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -305,6 +315,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'View');
+
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
         //$this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
 
@@ -359,6 +371,8 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Delete');
+
         $this->singleDbTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');

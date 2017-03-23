@@ -6,6 +6,7 @@ use MyModule\Controller\BasicDependenciesFirstAction;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicDependenciesFirstAction
@@ -13,6 +14,8 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class BasicDependenciesFirstActionTest extends TestCase
 {
+    use AclAssertTrait;
+
     protected $controller;
     protected $request;
     protected $response;
@@ -33,6 +36,8 @@ class BasicDependenciesFirstActionTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     public function test404()
@@ -45,6 +50,8 @@ class BasicDependenciesFirstActionTest extends TestCase
 
     public function testFirstActionAction()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesFirstAction', 'FirstAction');
+
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

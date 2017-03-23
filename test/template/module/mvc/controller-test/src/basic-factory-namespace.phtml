@@ -6,6 +6,7 @@ use MyModule\Another\Long\Namespaces\BasicFactoryNamespaceAction;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicFactoryNamespaceAction
@@ -13,6 +14,8 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class BasicFactoryNamespaceActionTest extends TestCase
 {
+    use AclAssertTrait;
+
     protected $controller;
     protected $request;
     protected $response;
@@ -34,6 +37,8 @@ class BasicFactoryNamespaceActionTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     public function test404()

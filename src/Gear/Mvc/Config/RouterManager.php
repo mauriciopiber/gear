@@ -60,13 +60,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
         }
 
-
-        if ($action->getDb() === null) {
-            $contRouteName = $this->str('url', $this->action->getController()->getName());
-        } else {
-            $contRouteName = $this->str('url', $this->action->getController()->getNameOff());
-        }
-
+        $contRouteName = $this->str('url', $this->action->getController()->getNameOff());
 
         if (!array_key_exists($contRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
             $controllerRoute = $this->getControllerRoute($action);
@@ -230,13 +224,12 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
     {
         $urlName = $this->str('url', $action->getRoute());
 
-        if ($action->getDb() === null) {
-            $controllerName = $action->getController()->getName();
-        } else {
-            $controllerName = $action->getController()->getNameOff();
-        }
 
-        $controller = $this->getCode()->getClassName($action->getController());
+        $object = '%s\%s\%s';
+
+        $namespace = ($action->getController()->getNamespace() !== null) ? $action->getController()->getNamespace() : 'Controller';
+
+        $invokeName = sprintf($object, $this->module->getModuleName(), $namespace, $action->getController()->getNameOff());
 
         $actionName = $this->str('url', $action->getName());
 
@@ -246,7 +239,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
                 'options' => array(
                     'route' => '/'.$urlName,
                     'defaults' => array(
-                        'controller' => $controller,
+                        'controller' => $invokeName,
                         'action' => $actionName
                     )
                 ),

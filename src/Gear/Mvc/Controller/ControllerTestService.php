@@ -446,11 +446,9 @@ class ControllerTestService extends AbstractMvcTest implements
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
-            if ($method->getDb() === null) {
-                $controller = $this->controller->getName();
-            } else {
-                $controller = $this->controller->getNameOff();
-            }
+
+            $controller = $this->controller->getName();
+
 
 
             $routeUrl = sprintf(
@@ -469,7 +467,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
 
             $this->functions .= $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/test-dispatch.phtml',
+                'template/module/mvc/controller-test/action/action-web.phtml',
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,

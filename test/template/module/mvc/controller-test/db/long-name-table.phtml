@@ -6,6 +6,7 @@ use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group MyModule
@@ -15,6 +16,7 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class MyVeryLongTableNameExampleControllerTest extends TestCase
 {
+    use AclAssertTrait;
 
     public function setUp()
     {
@@ -46,6 +48,7 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
 
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     protected function tearDown()
@@ -64,6 +67,8 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'MyVeryLongTableNameExampleController', 'Create');
+
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -184,6 +189,8 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'MyVeryLongTableNameExampleController', 'Edit');
+
         $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
 
         $this->myVeryLongTableNameExampleService->selectById(31)->willReturn($this->entity);
@@ -293,6 +300,8 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'MyVeryLongTableNameExampleController', 'List');
+
         $this->myVeryLongTableNameExampleService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -307,6 +316,8 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'MyVeryLongTableNameExampleController', 'View');
+
         $this->entity = $this->prophesize('MyModule\Entity\MyVeryLongTableNameExample');
         //$this->entity->getIdMyVeryLongTableNameExample()->willReturn(31)->shouldBeCalled();
 
@@ -361,6 +372,8 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
+        $this->assertAcl($this->schema, 'MyModule', 'MyVeryLongTableNameExampleController', 'Delete');
+
         $this->myVeryLongTableNameExampleService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
