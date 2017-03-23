@@ -25,7 +25,7 @@
         </exec>
     </target>
     <target name="unit-namespace" description="Run unit tests with Codeception on a File or Folder" depends="set-vendor, build-helper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
+        <exec executable="${vendor}/bin/codecept">
             <arg value="run"/>
             <arg value="unit"/>
             <arg value="test/unit/${testNamespace}"/>

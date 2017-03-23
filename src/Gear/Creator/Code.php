@@ -600,6 +600,11 @@ EOS;
 
         if (!empty($data->getDependency())) {
             foreach ($data->getDependency() as $i => $item) {
+
+                if (is_array($item) && isset($item['class'***REMOVED***)) {
+                    $item = $item['class'***REMOVED***;
+                }
+
                 $fullname = explode('\\', $item);
                 $name = end($fullname);
                 $dependency[$i***REMOVED*** = $name;

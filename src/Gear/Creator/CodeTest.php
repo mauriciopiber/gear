@@ -23,7 +23,7 @@ EOS;
         $msg = PHP_EOL;
 
         $alldep = count($src->getDependency());
-        
+
         foreach ($src->getDependency() as $i => $dependency) {
             $alldep -= 1;
 
@@ -89,6 +89,10 @@ EOS;
 
     public function extractVar($dependency, $data = null)
     {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
         $allNames = explode('\\', $dependency);
         $name = end($allNames);
 

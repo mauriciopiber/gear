@@ -80,6 +80,12 @@ class SrcDependency extends AbstractDependency
 
         $dependencies = $this->src->getDependency();
         foreach ($dependencies as $dependency) {
+
+
+            if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
+                continue;
+            }
+
             $srcType = $this->extractSrcTypeFromDependency($dependency);
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
@@ -114,6 +120,11 @@ class SrcDependency extends AbstractDependency
         $count = count($dependencies);
 
         foreach ($dependencies as $i => $dependency) {
+
+            if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+                $dependency = $dependency['class'***REMOVED***;
+            }
+
             if (in_array($dependency, $ignoreList)
                 || in_array($this->getModule()->getModuleName().'\\'.$dependency, $ignoreList)
             ) {

@@ -17,6 +17,10 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
 
     public function extractSrcTypeFromDependency($dependency)
     {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
         $srcType = $this->extractSrcType($dependency);
         if ($srcType == 'SearchForm') {
             return 'Form\\Search';
@@ -33,6 +37,10 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
 
     public function extractSrcNameFromDependency($dependency)
     {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
         $data = explode('\\', $dependency);
         return end($data);
     }
