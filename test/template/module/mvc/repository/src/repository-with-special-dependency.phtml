@@ -1,0 +1,43 @@
+<?php
+namespace MyModule\FastestNamespace;
+
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
+use Zend\Console\Adapter\Posix;
+use Zend\Db\Adapter\Adapter;
+
+/**
+ * PHP Version 5
+ *
+ * @category Repository
+ * @package MyModule/FastestNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MySrcWithSpecialDependency
+{
+    use StringServiceTrait;
+
+
+    /**
+     * Constructor
+     *
+     * @param StringService $stringService String Service
+     * @param Posix         $console       Posix
+     * @param Adapter       $adapter       Adapter
+     *
+     * @return \MyModule\FastestNamespace\MySrcWithSpecialDependency
+     */
+    public function __construct(
+        StringService $stringService,
+        Posix $console,
+        Adapter $adapter
+    ) {
+        $this->stringService = $stringService;
+        $this->console = $console;
+        $this->adapter = $adapter;
+
+        return $this;
+    }
+}

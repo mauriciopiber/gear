@@ -1,0 +1,40 @@
+<?php
+namespace MyModuleTest\ConsolistsNamespaceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\ConsolistsNamespace\SpecialDependencyConsoleFactory;
+
+/**
+ * @group MyModule
+ * @group SpecialDependencyConsole
+ * @group Controller
+ */
+class SpecialDependencyConsoleFactoryTest extends TestCase
+{
+    public function testCreateFactory()
+    {
+        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+
+        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
+
+        $this->serviceLocator->get('GearBase\Util\String')
+            ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('console')
+            ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
+            ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
+            ->shouldBeCalled();
+
+        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+
+        $factory = new SpecialDependencyConsoleFactory();
+
+        $instance = $factory->createService($this->controllerManager->reveal());
+
+        $this->assertInstanceOf('MyModule\ConsolistsNamespace\SpecialDependencyConsole', $instance);
+    }
+}

@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
+use GearJson\Src\Src;
 
 /**
  * @group src-mvc
@@ -70,6 +71,27 @@ class RepositoryTestServiceTest extends AbstractTestCase
         $this->srcDependency = new \Gear\Creator\SrcDependency();
         $this->srcDependency->setModule($this->module->reveal());
         $this->repository->setSrcDependency($this->srcDependency);
+    }
+
+    /**
+     * @group fix-dependency2
+     */
+    public function testCreateRepositoryTestWithSpecialDependency()
+    {
+        $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+        $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
+
+        $file = $this->repository->createFromSrc($data);
+
+        $expected = $this->templates.'/src/repository-with-special-dependency.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 
 

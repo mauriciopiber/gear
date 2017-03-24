@@ -1,8 +1,8 @@
 <?php
 return [
-    'name' => 'MySrcWithSpecialDependency',
-    'type' => 'Service',
+    'name' => 'SpecialDependencyController',
+    'type' => 'action',
     'dependency' => require __DIR__.'/special-dependency.php',
-    'namespace' => 'BestNamespace',
+    'namespace' => 'SpecialistNamespace',
     'service' => 'factories'
 ***REMOVED***;

@@ -104,6 +104,11 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setSchemaService($this->schema->reveal());
     }
 
+    public function testCreateControllerWithSpecialDependency()
+    {
+        $this->assertFalse(true);
+    }
+
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

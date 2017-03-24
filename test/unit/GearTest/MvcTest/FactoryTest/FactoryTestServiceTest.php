@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use GearJson\Src\Src;
+use GearJson\Controller\Controller;
 
 /**
  * @group db-factory
@@ -54,9 +55,25 @@ class FactoryTestServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group fix-dependency3
+     */
+    public function testCreateConsoleTestWithSpecialDependency()
+    {
+        $location = vfsStream::url('module');
+
+        $this->module->getSrcModuleFolder()->willReturn($location);
+
+        $data = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
+
+        $file = $this->factoryTest->createFactoryTest($data, $location);
+
+        $this->assertEquals(file_get_contents($this->template.'/controller/console-with-special-dependency.phtml'), file_get_contents($file));
+    }
+
+    /**
      * @group fix-dependency
      */
-    public function testFixSpecialDependency()
+    public function testCreateServiceTestWithSpecialDependency()
     {
         $location = vfsStream::url('module');
 
@@ -68,6 +85,23 @@ class FactoryTestServiceTest extends AbstractTestCase
 
         $this->assertEquals(file_get_contents($this->template.'/src/service-with-special-dependency.phtml'), file_get_contents($file));
     }
+
+    /**
+     * @group fix-dependency2
+     */
+    public function testCreateRepositoryTestWithSpecialDependency()
+    {
+        $location = vfsStream::url('module');
+
+        $this->module->getSrcModuleFolder()->willReturn($location);
+
+        $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
+
+        $file = $this->factoryTest->createFactoryTest($data, $location);
+
+        $this->assertEquals(file_get_contents($this->template.'/src/repository-with-special-dependency.phtml'), file_get_contents($file));
+    }
+
 
     public function getData()
     {

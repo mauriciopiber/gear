@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
+use \GearJson\Src\Src;
 
 /**
  * @group src-mvc
@@ -78,6 +79,31 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->repository->setRepositoryTestService($this->repositoryTest->reveal());
     }
 
+    /**
+     * @group fix-dependency2
+     */
+    public function testCreateRepositoryWithSpecialDependency()
+    {
+        $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
+
+        $this->factory->createFactory(
+            $data,
+            vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
+        )->shouldBeCalled();
+
+        $file = $this->repository->create($data);
+
+        $expected = $this->templates.'/src/repository-with-special-dependency.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
     public function src()
     {
         $srcType = 'Repository';
@@ -148,7 +174,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->table->getReferencedTableValidColumnName('foreign_key_column')->willReturn('idForeignKeyColumn');
         $this->table->getConstraintForeignKeyFromColumn($this->db->getTable(), $columns[9***REMOVED***->getColumn())->willReturn($columns[9***REMOVED***->getConstraint());
 
-        $repository = new \GearJson\Src\Src([
+        $repository = new Src([
             'name' => sprintf('%sRepository', $table),
             'type' => 'Repository',
             'namespace' => $namespace,
