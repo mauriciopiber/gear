@@ -1,0 +1,31 @@
+<?php
+namespace MyModuleTest\FastestNamespaceTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use MyModule\FastestNamespace\MySrcWithSpecialDependency;
+
+/**
+ * @group Repository
+ */
+class MySrcWithSpecialDependencyTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+
+        $this->repository = new MySrcWithSpecialDependency(
+            $this->stringService->reveal(),
+            $this->console->reveal(),
+            $this->adapter->reveal()
+        );
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf('MyModule\FastestNamespace\MySrcWithSpecialDependency', $this->repository);
+    }
+}

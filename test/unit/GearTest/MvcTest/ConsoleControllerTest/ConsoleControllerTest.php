@@ -5,6 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
+use GearJson\Controller\Controller;
 
 /**
  * @group Fix2
@@ -59,6 +60,40 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
         $this->controller->setTraitService($this->traitService->reveal());
+    }
+
+
+    /**
+     * @group fix-dependency3
+     */
+    public function testCreateConsoleControllerWithSpecialDependency()
+    {
+        $controller = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
+
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('Controller')->willReturn(vfsStream::url('module'));
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setControllerDependency($this->controllerDependency);
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setArrayService($this->array);
+
+        $this->controller->setCode($this->code);
+
+        $file = $this->controller->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+            $this->controller->buildAction($controller);
+        }
+
+        $expected = $this->template.'/src/console-with-special-dependency.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
+
     }
 
     public function testCreateModuleController()
