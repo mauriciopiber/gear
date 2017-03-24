@@ -8,6 +8,24 @@ use GearJson\App\App;
 
 class CodeTest extends AbstractCode
 {
+
+    public function extractServiceManagerFromDependency($dependency, $i)
+    {
+        if (is_string($i) && strlen($i) > 0) {
+            return $i;
+        }
+
+        if (is_array($dependency) && isset($dependency['aliase'***REMOVED***)) {
+            return $dependency['aliase'***REMOVED***;
+        }
+
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            return $this->resolveNamespace($dependency['class'***REMOVED***);
+        }
+
+        return $this->resolveNamespace($dependency);
+    }
+
     public function getServiceManagerDependencies($src)
     {
         if (empty($src->getDependency())) {
@@ -28,10 +46,9 @@ EOS;
             $alldep -= 1;
 
             $fullname = $this->resolveNamespace($dependency);
+            $variable = $this->extractServiceManagerFromDependency($dependency, $i);
 
-            $name = (is_int($i)) ? $fullname : $i;
-
-            $msg .= sprintf($template, $name, $fullname);
+            $msg .= sprintf($template, $variable, $fullname);
             $msg .= PHP_EOL;
             if (is_integer($i) && isset($src->getDependency()[$i+1***REMOVED***) || $alldep > 0) {
                 $msg .= PHP_EOL;
@@ -89,6 +106,10 @@ EOS;
 
     public function extractVar($dependency, $data = null)
     {
+        if (is_array($dependency) && isset($dependency['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependency['aliase'***REMOVED***)) {
+            $dependency = $dependency['aliase'***REMOVED***;
+        }
+
         if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
             $dependency = $dependency['class'***REMOVED***;
         }

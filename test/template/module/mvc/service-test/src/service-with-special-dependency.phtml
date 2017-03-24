@@ -13,7 +13,15 @@ class MySrcWithSpecialDependencyTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = new MySrcWithSpecialDependency();
+        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+
+        $this->service = new MySrcWithSpecialDependency(
+            $this->stringService->reveal(),
+            $this->console->reveal(),
+            $this->adapter->reveal()
+        );
     }
 
     public function testClassExists()

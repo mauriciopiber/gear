@@ -143,7 +143,15 @@ EOS;
             } else {
                 $text .= $ndnt;
 
-                $fullname = (is_int($i)) ? $this->resolveNamespace($dependency) : $i;
+                if (is_string($i) && strlen($i) > 0) {
+                    $fullname = $i;
+                } elseif (is_array($dependency) && isset($dependency['aliase'***REMOVED***)) {
+                    $fullname = $dependency['aliase'***REMOVED***;
+                } elseif (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+                    $fullname = $this->resolveNamespace($dependency['class'***REMOVED***);
+                } else {
+                    $fullname = $this->resolveNamespace($dependency);
+                }
 
                 $text .= sprintf($defaultTemplate, $fullname);
             }
@@ -517,6 +525,12 @@ EOS;
         return 'use '.$namespace;
     }
 
+    /**
+     * Create Docs Params for All Classes.
+     *
+     * @param unknown $src
+     * @return string
+     */
     public function getParams($src)
     {
         if (empty($src->getDependency())) {
@@ -537,14 +551,14 @@ EOS;
 
         foreach ($data as $item) {
             $name = $this->str('class', $this->resolveName($item));
-            $var = $this->str('var', $name);
+            $var = $this->extractClassVariableFromDependency($name);
             $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
             $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
         }
 
         foreach ($data as $item) {
             $name = $this->str('class', $this->resolveName($item));
-            $var = $this->str('var', $name);
+            $var = $this->extractClassVariableFromDependency($item);
             $label = $this->str('label', $name);
 
             $html .= sprintf(
@@ -561,6 +575,26 @@ EOS;
         $html .= '     *';
 
         return $html;
+    }
+
+    public function extractClassVariableFromDependency($dependencyInstance)
+    {
+        if (is_array($dependencyInstance)) {
+
+            $variable = (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***))
+                ? $dependencyInstance['aliase'***REMOVED***
+                : $dependencyInstance['class'***REMOVED***;
+
+            $fullname = explode('\\', $variable);
+            $variable = end($fullname);
+
+            return $this->str('var', $variable);
+        }
+
+        $variable = $dependencyInstance;
+        $fullname = explode('\\', $variable);
+        $variable = end($fullname);
+        return $this->str('var', $variable);
     }
 
     public function getConstructorDocs($data)
@@ -595,10 +629,11 @@ EOS;
      */
     public function getConstructor($data)
     {
-        $dependency = [***REMOVED***;
+        $dependency = $data->getDependency();
 
+        /**
 
-        if (!empty($data->getDependency())) {
+        if (!empty()) {
             foreach ($data->getDependency() as $i => $item) {
 
                 if (is_array($item) && isset($item['class'***REMOVED***)) {
@@ -610,6 +645,7 @@ EOS;
                 $dependency[$i***REMOVED*** = $name;
             }
         }
+        */
 
         $html = $this->getConstructorDocs($data);
 
@@ -633,12 +669,40 @@ EOS;
         $args = '';
         $attr = '';
 
-        foreach ($dependency as $i => $item) {
+        foreach ($dependency as $i => $dependencyInstance) {
+
+            if (is_array($dependencyInstance)) {
+                $item = $dependencyInstance['class'***REMOVED***;
+
+                $fullname = explode('\\', $item);
+                $item = end($fullname);
+
+                if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
+                    $variable = $dependencyInstance['aliase'***REMOVED***;
+
+                } else {
+                    $variable = $dependencyInstance['class'***REMOVED***;
+                }
+
+                $fullname = explode('\\', $variable);
+                $variable = end($fullname);
+
+            } else {
+                $item = $dependencyInstance;
+                $fullname = explode('\\', $item);
+                $item = end($fullname);
+
+                $variable = $dependencyInstance;
+
+                $fullname = explode('\\', $variable);
+                $variable = end($fullname);
+            }
+
             if ($howManyDep > 1) {
                 $args .= '        ';
             }
 
-            $args .= $this->str('class', $item).' $'.$this->str('var', $item);
+            $args .= $this->str('class', $item).' $'.$this->str('var', $variable);
 
             if ($howManyDep > 1) {
                 if ($iterator < $howManyDep-1) {
@@ -649,17 +713,15 @@ EOS;
                 $args .= PHP_EOL;
             }
 
-            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
+            if (is_string($i) && strlen($i) > 0) {
                 $depVar = $this->getDepVarTemplate($i);
+            } elseif ($item == 'Translator') {
+                $depVar = $this->str('var', 'translate');
             } else {
-                if ($item == 'Translator') {
-                    $depVar = $this->str('var', 'translate');
-                } else {
-                    $depVar = $this->str('var', $item);
-                }
+                $depVar = $variable;
             }
 
-            $attr .= '        $this->'.$depVar.' = $'.$this->str('var', $item).';';
+            $attr .= '        $this->'.$this->str('var', $depVar).' = $'.$this->str('var', $variable).';';
 
             if ($howManyDep > 1) {
                 $attr .= PHP_EOL;
@@ -750,7 +812,9 @@ EOS;
         }
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
-            foreach ($data->getDependency() as $alias => $item) {
+            foreach ($data->getDependency() as $item) {
+
+
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }

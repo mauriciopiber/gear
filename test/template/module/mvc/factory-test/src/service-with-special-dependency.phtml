@@ -15,6 +15,18 @@ class MySrcWithSpecialDependencyFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
+        $this->serviceLocator->get('GearBase\Util\String')
+            ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('console')
+            ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
+            ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
+            ->shouldBeCalled();
+
         $factory = new MySrcWithSpecialDependencyFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
