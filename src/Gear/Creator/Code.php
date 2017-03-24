@@ -618,6 +618,7 @@ EOS;
     {
         $templates = [***REMOVED***;
         $templates['memcached'***REMOVED*** = 'cache';
+        $templates['doctrine.entitymanager.orm_default'***REMOVED*** = 'entityManager';
 
         return $templates[$templateName***REMOVED***;
     }
@@ -713,10 +714,10 @@ EOS;
                 $args .= PHP_EOL;
             }
 
-            if (is_string($i) && strlen($i) > 0) {
-                $depVar = $this->getDepVarTemplate($i);
-            } elseif ($item == 'Translator') {
+            if ($item == 'Translator') {
                 $depVar = $this->str('var', 'translate');
+            } elseif (is_string($i) && strlen($i) > 0) {
+                $depVar = $this->getDepVarTemplate($i);
             } else {
                 $depVar = $variable;
             }
