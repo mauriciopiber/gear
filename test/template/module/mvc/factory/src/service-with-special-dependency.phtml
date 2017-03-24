@@ -25,6 +25,9 @@ class MySrcWithSpecialDependencyFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MySrcWithSpecialDependency(
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('console'),
+            $serviceLocator->get('Zend\Db\Adapter\Adapter')
         );
         unset($serviceLocator);
         return $factory;

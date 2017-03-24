@@ -1,6 +1,11 @@
 <?php
 namespace MyModule\BestNamespace;
 
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
+use Zend\Console\Adapter\Posix;
+use Zend\Db\Adapter\Adapter;
+
 /**
  * PHP Version 5
  *
@@ -12,13 +17,27 @@ namespace MyModule\BestNamespace;
  */
 class MySrcWithSpecialDependency
 {
+    use StringServiceTrait;
+
+
     /**
      * Constructor
      *
+     * @param StringService $stringService String Service
+     * @param Posix         $console       Posix
+     * @param Adapter       $adapter       Adapter
+     *
      * @return \MyModule\BestNamespace\MySrcWithSpecialDependency
      */
-    public function __construct()
-    {
+    public function __construct(
+        StringService $stringService,
+        Posix $console,
+        Adapter $adapter
+    ) {
+        $this->stringService = $stringService;
+        $this->console = $console;
+        $this->adapter = $adapter;
+
         return $this;
     }
 }
