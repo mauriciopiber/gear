@@ -659,7 +659,7 @@ class ModuleServiceTest extends TestCase
 
         $this->configService->module($type, null)->shouldBeCalled();
 
-        $this->languageService->create()->shouldBeCalled();
+        //$this->languageService->create()->shouldBeCalled();
 
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
@@ -797,7 +797,7 @@ class ModuleServiceTest extends TestCase
 
         $this->configService->module($type, null)->shouldBeCalled();
 
-        $this->languageService->create()->shouldBeCalled();
+        //$this->languageService->create()->shouldBeCalled();
 
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
