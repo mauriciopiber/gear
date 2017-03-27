@@ -2,22 +2,23 @@ modules: MyModule
 
 controller:
   0:
-    'name': 'Invalid\Name*Two'
+    'name': 'Invalid///AHUHUIDIUHAhd DUIhu dhuihd dName*Two'
   1:
     'name': 'ValidNameTwo'
   2:
     'name': 'ValidNameTwo'        
-#  3:
-#    'name': 'ValidNameFour'
-#    'actions': 
-#      0: 
-#        'name': 'Invalid*\Name'
-#      1:
-#        'name': 'ValidNameOne'
-#      2:
-#        'name': 'ValidNameOne'        
-#      3:
-#        'name': 'ValidNameFour'        
+  3:
+    'name': 'ValidNameFour'
+    'type': 'console'
+    'actions': 
+      0: 
+        'name': 'Invalid*\Name'
+      1:
+        'name': 'ValidNameOne'
+      2:
+        'name': 'ValidNameOne'        
+      3:
+        'name': 'ValidNameFour'        
 db: 
   0:
     table: 'Inv\\*'

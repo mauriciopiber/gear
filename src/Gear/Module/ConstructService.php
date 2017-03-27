@@ -233,8 +233,8 @@ class ConstructService extends AbstractJsonService
 
         $created = $this->getControllerConstructor()->createController($controller);
 
-        if ($created instanceof ConsoleValidationSatatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
+        if ($created instanceof ConsoleValidationStatus) {
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerSkip, $controllerItem->getName());
 
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
@@ -270,7 +270,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getActionConstructor()->createControllerAction($action);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$actionCreate, $action->getName(), $controller);
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$actionSkip, $actionItem->getName(), $controller);
 
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
