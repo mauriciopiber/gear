@@ -46,6 +46,7 @@ pipeline {
         stage('Integration') {
             post {
                 failure {
+                    archiveArtifacts artifacts: "build/**/*", fingerprint: true
                     postProtractor()
                     postKarma()
                     postAction()
@@ -100,6 +101,7 @@ pipeline {
     post {
         always {
             notifyBuild(currentBuild.result)
+            sh 'sudo chmod -R 777 data'
             deleteDir() /* clean up our workspace */
         }
     }
