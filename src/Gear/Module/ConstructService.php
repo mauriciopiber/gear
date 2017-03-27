@@ -19,6 +19,7 @@ use Gear\Constructor\Src\SrcServiceTrait as SrcService;
 use Gear\Constructor\Controller\ControllerServiceTrait as ControllerService;
 use Gear\Constructor\Action\ActionServiceTrait as ActionService;
 use Gear\Module\Exception\GearfileNotFoundException;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.
@@ -91,7 +92,7 @@ class ConstructService extends AbstractJsonService
     {
         unset($basepath);
 
-        $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***, 'invalid-msg' => [***REMOVED******REMOVED***;
 
         if (!empty($fileConfig) && empty($this->configLocation)) {
             $this->setConfigLocation($fileConfig);
@@ -145,7 +146,7 @@ class ConstructService extends AbstractJsonService
 
     public function constructSrc($module, array $src)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $srcItem = new Src($src);
 
@@ -157,16 +158,21 @@ class ConstructService extends AbstractJsonService
 
         $created = $this->getSrcConstructor()->create($src);
 
-        if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcCreate, $srcItem->getName(), $srcItem->getType());
+        if ($created instanceof ConsoleValidationStatus) {
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcSkip, $srcItem->getName(), $srcItem->getType());
+            foreach ($created->getErrors() as $errors) {
+                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
+            }
+            return $constructList;
         }
 
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcCreate, $srcItem->getName(), $srcItem->getType());
         return $constructList;
     }
 
     public function constructApp($module, array $app)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $appItem = new App($app);
 
@@ -187,7 +193,7 @@ class ConstructService extends AbstractJsonService
 
     public function constructDb($module, array $db)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $dbItem = new Db($db);
 
@@ -199,16 +205,23 @@ class ConstructService extends AbstractJsonService
 
         $created = $this->getDbConstructor()->create($db);
 
-        if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
+        if ($created instanceof ConsoleValidationStatus) {
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
+
+            foreach ($created->getErrors() as $errors) {
+                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
+            }
+
+            return $constructList;
         }
 
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
         return $constructList;
     }
 
     public function constructController($module, array $controller)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $controllerItem = new Controller($controller);
 
@@ -220,16 +233,24 @@ class ConstructService extends AbstractJsonService
 
         $created = $this->getControllerConstructor()->createController($controller);
 
-        if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
+        if ($created instanceof ConsoleValidationSatatus) {
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
+
+            foreach ($created->getErrors() as $errors) {
+                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
+            }
+
+            return $constructList;
         }
 
+
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
         return $constructList;
     }
 
     public function constructAction($module, $controller, array $action)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $actionItem = new Action($action);
 
@@ -248,15 +269,21 @@ class ConstructService extends AbstractJsonService
 
         $created = $this->getActionConstructor()->createControllerAction($action);
 
+        if ($created instanceof ConsoleValidationStatus) {
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$actionCreate, $action->getName(), $controller);
 
+            foreach ($created->getErrors() as $errors) {
+                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
+            }
 
-        if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
-                static::$actionCreate,
-                $actionItem->getName(),
-                $controller//->getName()
-            );
+            return $constructList;
         }
+
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
+            static::$actionCreate,
+            $actionItem->getName(),
+            $controller//->getName()
+        );
 
         return $constructList;
     }

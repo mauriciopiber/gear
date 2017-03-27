@@ -36,7 +36,7 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
 
     public function create(Action $action)
     {
-        if ($action->getDb() === null) {
+        if ($action->getController()->getDb() === null) {
             $controller = $action->getController()->getName();
         } else {
             $controller = $action->getController()->getNameOff();

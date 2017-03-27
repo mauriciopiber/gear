@@ -20,6 +20,7 @@ use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 class SrcService extends AbstractJsonService
 {
@@ -68,8 +69,13 @@ class SrcService extends AbstractJsonService
             (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
             (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
             (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null),
-            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null)
-        );
+            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null),
+            false
+       );
+
+        if ($this->src instanceof ConsoleValidationStatus) {
+            return $this->src;
+        }
 
         if ($this->src->getDb() !== null) {
             $tableObject = $this->getTableService()->getTableObject($this->src->getDb()->getTable());

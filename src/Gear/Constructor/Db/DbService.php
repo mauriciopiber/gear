@@ -18,6 +18,7 @@ use Gear\Mvc\LanguageServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 class DbService extends AbstractJsonService
 {
@@ -80,8 +81,11 @@ class DbService extends AbstractJsonService
 
         $module = $this->getModule()->getModuleName();
 
-        $db = $this->getDbService()->create($module, $table, $columns, $user, $role, $service, $namespace);
+        $db = $this->getDbService()->create($module, $table, $columns, $user, $role, $service, $namespace, false);
 
+        if ($db instanceof ConsoleValidationStatus) {
+            return $db;
+        }
 
         if ($this->getTableService()->verifyTableAssociation($table)) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');

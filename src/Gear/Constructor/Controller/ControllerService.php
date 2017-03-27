@@ -9,16 +9,15 @@ namespace Gear\Constructor\Controller;
 use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
-
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
 use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvc;
 use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTest;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
-
 use GearJson\Controller\Controller;
 use GearJson\Controller\ControllerServiceTrait as JsonController;
 use Gear\Mvc\LanguageServiceTrait;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 class ControllerService extends AbstractJsonService
 {
@@ -74,6 +73,11 @@ class ControllerService extends AbstractJsonService
             (isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null),
             (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null)
         );
+
+
+        if ($this->controller instanceof ConsoleValidationStatus) {
+            return $this->controller;
+        }
 
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
