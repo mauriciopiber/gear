@@ -1,0 +1,6 @@
+modules: MvcVarchar
+
+db:
+  0:
+    table: SimpleVarcharTable
+    namespace: SimpleVarcharTable
