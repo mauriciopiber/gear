@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Action\Action;
 use Gear\Creator\File;
+use GearJson\Db\Db;
 
 class NavigationManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
 {
@@ -119,8 +120,8 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
             'label' => $this->str('label', $this->action->getRoute()),
         ***REMOVED***;
 
-        if ($this->action->getDb() !== null
-          && $this->action->getDb() instanceof \GearJson\Db\Db
+        if ($this->action->getController()->getDb() !== null
+          && $this->action->getController()->getDb() instanceof Db
             && in_array($this->action->getName(), ['Edit', 'Delete', 'View'***REMOVED***)
         ) {
             $page['show_in_menu'***REMOVED*** = false;

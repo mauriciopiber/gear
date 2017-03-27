@@ -701,13 +701,7 @@ class Feature extends AbstractMvcTest
     {
         $version = $this->getGearVersion();
 
-
-
-        if ($action->getController() instanceof \GearJson\Controller\Controller) {
-            $controllerName = $action->getController()->getName();
-        } else {
-            $controllerName = $action->getController();
-        }
+        $controllerName = $action->getController()->getNameOff();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $nameClass = sprintf('%s%sAction', $controllerName, $action->getName());

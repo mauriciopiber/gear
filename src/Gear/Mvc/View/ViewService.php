@@ -46,10 +46,10 @@ class ViewService extends AbstractJsonService
         $this->file->setOptions(array(
             'className' => $nameClass,
             'module' => $this->str('class', $this->module->getModuleName()),
-            'controller' => $action->getController()->getName(),
+            'controller' => $controllerName,
             'action' => $this->str('class', $action->getName()),
             'moduleLabel' => $this->str('label', $this->module->getModuleName()),
-            'controllerLabel' => $this->str('label', $action->getController()->getName()),
+            'controllerLabel' => $this->str('label', $controllerName),
             'actionLabel' => $this->str('label', $action->getName())
         ));
 
