@@ -233,7 +233,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
         $actionName = $this->str('url', $action->getName());
 
-        if ($action->getDb() === null) {
+        if ($action->getController()->getDb() === null) {
             $action = [
                 'type' => 'segment',
                 'options' => array(
