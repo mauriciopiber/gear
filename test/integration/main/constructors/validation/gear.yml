@@ -1,0 +1,31 @@
+modules: MyModule
+
+controller:
+  0:
+    'name': 'Invalid\Name*Two'
+  1:
+    'name': 'ValidNameTwo'
+  2:
+    'name': 'ValidNameTwo'        
+#  3:
+#    'name': 'ValidNameFour'
+#    'actions': 
+#      0: 
+#        'name': 'Invalid*\Name'
+#      1:
+#        'name': 'ValidNameOne'
+#      2:
+#        'name': 'ValidNameOne'        
+#      3:
+#        'name': 'ValidNameFour'        
+db: 
+  0:
+    table: 'Inv\\*'
+    
+src:
+  0:
+    name: 'Invalid*\Name'
+    type: 'Invalid'
+  1:
+    name: 'ValidNameService'
+    type: 'Service'

@@ -24,6 +24,7 @@ use Gear\Mvc\View\App\AppControllerServiceTrait;
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 class ActionService extends AbstractJsonService
 {
@@ -73,6 +74,10 @@ class ActionService extends AbstractJsonService
             isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null,
             isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null
         );
+
+        if ($this->action instanceof ConsoleValidationStatus) {
+            return $this->action;
+        }
 
         $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
         $this->controller = new Controller($this->controller);

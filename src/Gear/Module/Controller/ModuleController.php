@@ -54,6 +54,11 @@ class ModuleController extends AbstractConsoleController
             }
         }
 
+        if (count($data['invalid-msg'***REMOVED***)) {
+            foreach ($data['invalid-msg'***REMOVED*** as $msg) {
+                $this->console->writeLine($msg, 0, 2);
+            }
+        }
 
 
         $this->getEventManager()->trigger('gear.pos', $this);
