@@ -44,7 +44,6 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
             $this->addReference("<?php echo $this->str('url', str_replace('Fixture', '', $this->name)); ?>-$reference", $<?php echo $this->var;?>);
 <?php echo $this->load;?>
         }
-
     }
 
     /**
@@ -63,7 +62,6 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
 <?php endforeach;?>
 
         );
-
     }
 
     /**

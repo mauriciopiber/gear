@@ -39,6 +39,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->db = $db;
 
         $controller = $this->getSchemaService()->getControllerByDb($this->db);
+        $controller->setDb($this->db);
         $actions = $controller->getActions();
 
         $srcs = $this->getSchemaService()->getAllSrcByDb($this->db);
