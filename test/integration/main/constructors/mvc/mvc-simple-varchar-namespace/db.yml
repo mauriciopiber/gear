@@ -4,3 +4,4 @@ db:
   0:
     table: SimpleVarcharTable
     namespace: SimpleVarcharTable
+    service: factories
