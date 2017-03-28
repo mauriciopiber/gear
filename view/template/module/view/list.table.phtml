@@ -13,7 +13,7 @@
              <?php echo sprintf('<?php echo $this->render(\'%s/%s/search-form.phtml\');?>', $this->moduleUrl, $this->tableUrl).PHP_EOL;?>
          </div>
          <div class="col-lg-4">
-            <a id="createBtn" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
+            <a id="btn-create" class="btn btn-success pull-left" href="<?php echo sprintf('<?php echo $this->url(\'%s/%s/create\');?>', $this->moduleUrl, $this->tableUrl);?>">
                 <?php echo '<?php echo $this->translate(\'Criar\');?>'.PHP_EOL;?>
             </a>&nbsp;
             <a href="#" id="filterBtn" class="btn btn-primary" ng-click="list.filter.toggleFilter()">

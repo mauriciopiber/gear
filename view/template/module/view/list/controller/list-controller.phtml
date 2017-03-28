@@ -11,6 +11,8 @@
         vm.data                  = data;
 
         vm.order                 = order.order;
+        vm.order.sortKey         = 'id<?=$this->controller;?>';
+        vm.order.reverse         = true;
 
         vm.filter                = filter.filter;
 
