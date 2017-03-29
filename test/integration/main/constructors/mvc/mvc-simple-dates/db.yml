@@ -1,0 +1,7 @@
+modules: MvcVarchar
+
+db:
+  0:
+    table: SimpleDatesTable
+    namespace: SimpleDatesTable
+    service: factories
