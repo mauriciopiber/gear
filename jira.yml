@@ -13,12 +13,3 @@ issues:
     sprint: 27
     dueDate: 24/03/2017
     sprint: gear-base-0.2.46
-  2:
-    summary: "Criar ConsoleValidationStatus para passar o status entre o sistema"
-    description: "Criar uma espécie de Status para passar as informações entre os códigos"
-    type: Story
-    project: GB
-    estimate: 1h
-    sprint: 27
-    dueDate: 24/03/2017
-    sprint: gear-base-0.2.46
