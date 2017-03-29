@@ -26,7 +26,8 @@ for i in "${suite[@***REMOVED***}"
 do
    if [ -f "$testDir/constructors/$i/test.sh" ***REMOVED***; then
    	
-       { time echo "Test $i found, the war will begin."; }  2>&1 |  cat >> /opt/gear/gear-log.txt
+   	   #echo "Test $i found, the war will begin." 2>&1 | cat >> /opt/gear/gear-log.txt
+       /bin/bash "$testDir/constructors/$i/test.sh" build
    
    fi	
    	
