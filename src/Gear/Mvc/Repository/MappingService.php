@@ -226,7 +226,7 @@ class MappingService extends AbstractJsonService
 
         $this->db = $db;
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->getColumnService()->getColumns($this->db, false, ['created_by'***REMOVED***);
 
         if (!empty($columns)) {
             foreach ($columns as $column) {
@@ -277,7 +277,7 @@ class MappingService extends AbstractJsonService
 
     public function toString()
     {
-        $line = '        return array('.PHP_EOL;
+        $line = '        return ['.PHP_EOL;
         if (!empty($this->columnsStack)) {
             foreach ($this->columnsStack as $column) {
                 $line .= $this->printArray(
@@ -290,7 +290,7 @@ class MappingService extends AbstractJsonService
                 );
             }
         }
-        $line .= '        );';
+        $line .= '        ***REMOVED***;';
 
         return $line;
     }
@@ -298,13 +298,13 @@ class MappingService extends AbstractJsonService
     public function printArray($name, $label, $ref, $type, $aliase, $table)
     {
         return sprintf(
-            '            \'%s\' => array('.PHP_EOL.
+            '            \'%s\' => ['.PHP_EOL.
             '                \'label\'  => \'%s\','.PHP_EOL.
             '                \'ref\'    => \'%s\','.PHP_EOL.
             '                \'type\'   => \'%s\','.PHP_EOL.
             '                \'aliase\' => \'%s\','.PHP_EOL.
             '                \'table\'  => %s'.PHP_EOL.
-            '            ),',
+            '            ***REMOVED***,',
             $name,
             $label,
             $ref,

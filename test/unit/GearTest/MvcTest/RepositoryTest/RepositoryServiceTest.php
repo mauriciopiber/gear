@@ -165,14 +165,17 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
+        $this->column->getColumns($this->db, false, ['created_by'***REMOVED***)->willReturn($columns)->shouldBeCalled();
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
 
         $this->table->getReferencedTableValidColumnName('Table')->willReturn('idMyController');
+        $this->table->getReferencedTableValidColumnName('user')->willReturn('email');
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
         $this->table->getReferencedTableValidColumnName('foreign_key_column')->willReturn('idForeignKeyColumn');
         $this->table->getConstraintForeignKeyFromColumn($this->db->getTable(), $columns[9***REMOVED***->getColumn())->willReturn($columns[9***REMOVED***->getConstraint());
+        $this->table->getConstraintForeignKeyFromColumn($this->db->getTable(), $columns[22***REMOVED***->getColumn())->willReturn($columns[22***REMOVED***->getConstraint());
 
         $repository = new Src([
             'name' => sprintf('%sRepository', $table),
