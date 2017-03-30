@@ -165,8 +165,6 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
-
-
         $createdBy = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumn('table', 'created_by', 'int'),
             $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user')
