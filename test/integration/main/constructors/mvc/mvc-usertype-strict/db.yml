@@ -1,0 +1,8 @@
+modules: MvcVarchar
+
+db:
+  2:
+    table: UserTypeLowStrict
+    namespace: UserTypeLowStrict
+    service: factories
+    user: low-strict    

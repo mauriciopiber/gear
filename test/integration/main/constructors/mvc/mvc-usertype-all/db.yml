@@ -1,0 +1,8 @@
+modules: MvcVarchar
+
+db:
+  0:
+    table: UserTypeAll
+    namespace: UserTypeAll
+    service: factories
+    user: all
