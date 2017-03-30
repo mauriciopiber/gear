@@ -5,7 +5,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use <?php echo $this->module?>\Entity\<?php echo str_replace('Fixture', '', $this->name);?>;
 <?php echo $this->use;?>
 
-
 /**
  * Fixture for <?php echo $this->tableLabel;?> Entity.
  *
@@ -62,7 +61,6 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
 <?php foreach ($this->data as $item):?>
 <?php echo $item;?>
 <?php endforeach;?>
-
         ***REMOVED***;
     }
 
@@ -70,8 +68,6 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
      * Load the User Entity.
      *
      * To be used on created_by and updated_by column.
-     *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      *
      * @return GearAdmin\Entity\User
      */

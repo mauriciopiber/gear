@@ -146,6 +146,19 @@ trait AllColumnsDbTableTrait
         $columns[***REMOVED*** = $column;
 
 
+        $createdBy = new \Gear\Column\Integer\ForeignKey(
+            $this->prophesizeColumn('table', 'created_by', 'int'),
+            $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user')
+        );
+
+        $schema = $this->prophesize('Gear\Table\TableService\TableService');
+        $schema->getReferencedTableValidColumnName('user')
+        ->willReturn('email');
+
+        $createdBy->setTableService($schema->reveal());
+
+        $columns[***REMOVED*** = $createdBy;
+
         //varchar
 
         foreach ($columns as $column) {

@@ -126,7 +126,7 @@ class ColumnService implements ServiceLocatorAwareInterface
      *
      * @return array
      */
-    public function getColumns(Db $db = null, $all = false)
+    public function getColumns(Db $db = null, $all = false, array $include = [***REMOVED***)
     {
         if (empty($this->columns) && $db == null) {
             throw new \Exception('Missing config');
@@ -149,7 +149,9 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         foreach ($this->tableColumns as $column) {
             if ($all === false && in_array($column->getName(), Db::excludeList())) {
-                continue;
+                if (!in_array($column->getName(), $include)) {
+                    continue;
+                }
             }
 
             $instance = $this->factory($column, $db);

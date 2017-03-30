@@ -3,6 +3,7 @@ namespace MyModule\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use MyModule\Entity\Table;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -34,7 +35,7 @@ class TableFixture extends AbstractFixture implements
         $this->manager = $manager;
         foreach ($this->getFixture() as $i => $fixture) {
             $reference = $i+1;
-            $table = new \MyModule\Entity\Table();
+            $table = new Table();
             $singleDbTable->setSingleDbColumn($fixture['singleDbColumn'***REMOVED***);
             $userReferenced = $this->getReferenceToEntity($reference);
             $table->setCreated(new \DateTime('now'));
@@ -43,7 +44,6 @@ class TableFixture extends AbstractFixture implements
             $this->manager->flush();
             $this->addReference("table-$reference", $table);
         }
-
     }
 
     /**
@@ -55,100 +55,98 @@ class TableFixture extends AbstractFixture implements
      */
     public function getFixture()
     {
-        return array(
-            array(
+        return [
+            [
                 'singleDbColumn' => '01Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '02Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '03Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '04Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '05Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '06Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '07Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '08Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '09Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '10Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '11Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '12Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '13Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '14Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '15Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '16Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '17Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '18Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '19Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '20Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '21Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '22Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '23Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '24Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '25Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '26Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '27Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '28Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '29Single Db Column',
-            ),
-            array(
+            ***REMOVED***,
+            [
                 'singleDbColumn' => '30Single Db Column',
-            ),
-
-        );
-
+            ***REMOVED***,
+        ***REMOVED***;
     }
 
     /**
@@ -156,13 +154,11 @@ class TableFixture extends AbstractFixture implements
      *
      * To be used on created_by and updated_by column.
      *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     *
      * @return GearAdmin\Entity\User
      */
-    public function getReferenceToEntity()
+    public function getReferenceToEntity($referenced = 1)
     {
-        $referencedName = 'usuariogear1';
+        $referencedName = sprintf('usuariogear%d', ($referenced <= 6) ? $referenced : (($referenced%6)+1));
         $userId = $this->getReference($referencedName);
         return $this->manager
           ->getRepository('GearAdmin\Entity\User')
