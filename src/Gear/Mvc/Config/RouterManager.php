@@ -90,7 +90,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
         $module = $this->getModule()->getModuleName();
 
-        if ($action->getDb() === null) {
+        if ($action->getController()->getDb() === null) {
             $table = $this->str('class', $action->getController()->getName());
         } else {
             $table = $this->str('class', $action->getController()->getNameOff());

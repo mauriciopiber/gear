@@ -1,62 +1,77 @@
 modules: MvcVarchar
 
 src:
-  0:
+  0: #Entity 
     name: SrcMvc
     type: Entity
     db: SrcMvc
     user: all
-  1:
+  1: #Fixture
     name: SrcMvcFixture
     type: Fixture
     db: SrcMvc
     user: all    
-  2:
+  2: #Repository
     name: SrcMvcRepository
     type: Repository
+    service: factories
+    namespace: SrcMvc\Repository
+    dependency: 
+      'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+      1: '\GearBase\Repository\QueryBuilder'
     db: SrcMvc
     user: all        
-  3:
+  3: #Service
     name: SrcMvcService
     type: Service
     db: SrcMvc
     user: all            
-    dependency: Repository\SrcMvcRepository
-  4:
+    service: factories
+    namespace: SrcMvc\Service
+    dependency: 
+      'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
+      1: SrcMvc\Repository\SrcMvcRepository
+  4: #Filter
     name: SrcMvcFilter
     type: Filter
     db: SrcMvc
     user: all        
-  5:
+    service: factories
+    namespace: SrcMvc\Filter    
+  5: #Form
     name: SrcMvcForm
     type: Form
     db: SrcMvc
     user: all
     service: factories
     template: form-filter
+    namespace: SrcMvc\Form    
     dependency:
       0:
         class: '\Doctrine\ORM\EntityManager'
         aliase: 'doctrine.entitymanager.orm_default'
-  6:
+  6: #SearchForm
     name: SrcMvcSearchForm
     type: SearchForm
     db: SrcMvc
     user: all     
     service: factories
     template: search-form
+    namespace: SrcMvc\Search    
     dependency:
       0:
         class: '\Doctrine\ORM\EntityManager'
-        aliase: 'doctrine.entitymanager.orm_default'
-
+        aliase: 'doctrine.entitymanager.orm_default'      
+        
     
 controller:
   1:
     name: SrcMvcController
     type: 'Action'
     db: SrcMvc
-    dependency: 'Service\SrcMvcService,Form\SrcMvcForm,Form\Search\SrcMvcSearchForm'
+    namespace: SrcMvc\Controller
+    service: factories
+    dependency: 'SrcMvc\Service\SrcMvcService,SrcMvc\Form\SrcMvcForm,SrcMvc\Search\SrcMvcSearchForm'
     actions:
       0:
         name: Create
@@ -77,4 +92,4 @@ controller:
       4:
         name: View
         route: view
-        role: admin
+        role: admin        

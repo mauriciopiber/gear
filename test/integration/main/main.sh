@@ -5,6 +5,9 @@ testDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 suite=(
 #"constructors/mvc/mvc-dates"
 #"constructors/mvc/mvc-varchar"
+#"constructors/src/src-db"
+#"constructors/src/src-db-ideal"
+
 "constructors/mvc/mvc-usertype-all"
 "constructors/mvc/mvc-usertype-low-strict"
 "constructors/mvc/mvc-usertype-strict"
