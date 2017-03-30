@@ -131,14 +131,17 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setDirService($this->dir);
         $this->feature->setGearVersion('0.0.99');
         $this->feature->setModule($this->module->reveal());
+
+        $controller = new \GearJson\Controller\Controller(['name' => 'MyController'***REMOVED***);
+
         $action = new \GearJson\Action\Action([
             'name' => 'MyAction',
-            'controller' => 'MyController'
+            'controller' => $controller
         ***REMOVED***);
 
         $file = $this->feature->build($action);
 
-        $this->assertStringEndsWith('/my-controller/my-action.feature', $file);
+        $this->assertStringEndsWith('/my/my-action.feature', $file);
 
         $this->assertEquals(
             file_get_contents($this->template.'/action.feature.phtml'),

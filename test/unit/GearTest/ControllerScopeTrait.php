@@ -141,10 +141,10 @@ trait ControllerScopeTrait
                     'type' => $srcType,
                     'actions' => [
                         [
-                            'name' => 'FirstAction',
-                            'dependency' => 'Repository\MyRepository',
+                            'name' => 'FirstAction'
                         ***REMOVED***
-                    ***REMOVED***
+                    ***REMOVED***,
+                    'dependency' => 'Repository\MyRepository',
                 ***REMOVED***),
                 'basic-dependency-first'
             ***REMOVED***,
@@ -155,9 +155,9 @@ trait ControllerScopeTrait
                     'actions' => [
                         [
                             'name' => 'FirstAction',
-                            'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
                         ***REMOVED***
-                    ***REMOVED***
+                    ***REMOVED***,
+                    'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
                 ***REMOVED***),
                 'basic-dependencies-first'
             ***REMOVED***,

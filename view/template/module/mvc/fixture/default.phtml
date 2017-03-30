@@ -2,7 +2,9 @@ namespace <?php echo $this->module;?>\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use <?php echo $this->module?>\Entity\<?php echo str_replace('Fixture', '', $this->name);?>;
 <?php echo $this->use;?>
+
 
 /**
  * Fixture for <?php echo $this->tableLabel;?> Entity.
@@ -32,7 +34,7 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
 <?php echo $this->preLoad;?>
         foreach ($this->getFixture() as $i => $fixture) {
             $reference = $i+1;
-            $<?php echo $this->var;?> = new \<?php echo $this->module?>\Entity\<?php echo str_replace('Fixture', '', $this->name);?>();
+            $<?php echo $this->var;?> = new <?php echo str_replace('Fixture', '', $this->name);?>();
 <?php foreach ($this->fields as $field):?>
 <?php echo $field.PHP_EOL;?>
 <?php endforeach;?>
@@ -56,12 +58,12 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
     public function getFixture()
     {
 <?php echo $this->getFixture;?>
-        return array(
+        return [
 <?php foreach ($this->data as $item):?>
 <?php echo $item;?>
 <?php endforeach;?>
 
-        );
+        ***REMOVED***;
     }
 
     /**
@@ -73,7 +75,9 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
      *
      * @return GearAdmin\Entity\User
      */
-<?php echo $this->userlaw;?>
+    public function getReferenceToEntity($referenced = 1)
+    {
+        $referencedName = sprintf('usuariogear%d', ($referenced <= 6) ? $referenced : (($referenced%6)+1));
         $userId = $this->getReference($referencedName);
         return $this->manager
           ->getRepository('GearAdmin\Entity\User')

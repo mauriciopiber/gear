@@ -160,30 +160,27 @@ class NavigationManagerTest extends AbstractTestCase
         $actions = [
             [
                 'name' => 'Create',
-                'db' => $db,
                 'controller' => $controller
             ***REMOVED***,
             [
                 'name' => 'Edit',
-                'db' => $db,
                 'controller' => $controller
             ***REMOVED***,
             [
                 'name' => 'List',
-                'db' => $db,
                 'controller' => $controller
             ***REMOVED***,
             [
                 'name' => 'Delete',
-                'db' => $db,
                 'controller' => $controller
             ***REMOVED***,
             [
                 'name' => 'View',
-                'db' => $db,
                 'controller' => $controller
             ***REMOVED***
         ***REMOVED***;
+
+        $controller->setDb($db);
 
         foreach ($actions as $action) {
             $controller->addAction(new \GearJson\Action\Action($action));

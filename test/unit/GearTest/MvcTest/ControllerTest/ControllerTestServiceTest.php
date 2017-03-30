@@ -76,11 +76,6 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     }
 
-    public function testCreateControllerTestWithSpecialDependency()
-    {
-        $this->assertFalse(true);
-    }
-
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

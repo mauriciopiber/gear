@@ -70,14 +70,9 @@ class FixtureService extends AbstractMvc
 
         $this->getTableSpecifications();
 
-        $this->getUserSpecifications();
-
         $arrayData = $this->getArrayData();
 
         $fieldsData = $this->getFieldData();
-
-        $userLaw = $this->getUserSpecifications();
-
 
         $dependency = $this->fixtureDependency($this->db);
 
@@ -98,7 +93,6 @@ class FixtureService extends AbstractMvc
                 'data'        => $arrayData,
                 'name'        => $this->srcName,
                 'module'      => $this->getModule()->getModuleName(),
-                'userlaw'     => $userLaw,
                 'use'         => $this->getCode()->getUse($this->src, $this->include, $this->implements),
                 'attribute'   => $this->getCode()->getUseAttribute($this->src, $this->include),
                 'implements'  => $this->getCode()->getImplements($this->src, $this->implements),
@@ -299,33 +293,6 @@ class FixtureService extends AbstractMvc
                 }
             }
         }
-    }
-
-    public function getUserSpecifications()
-    {
-        $templateUser = !empty($this->db) ? $this->db->getUserClass() : null;
-
-        $userClass = 'Gear\UserType\\'.$this->str('class', $templateUser);
-
-        $userType = new $userClass();
-
-
-        if ($userType instanceof \Gear\Column\ImplementsInterface) {
-            $this->implements[***REMOVED*** = $userType->getImplements('Fixture');
-        }
-
-        if (!$templateUser || $templateUser == 'all') {
-            $userType = 'all';
-        } else {
-            $userType = 'strict';
-        }
-
-        return $this->getFileCreator()->renderPartial(
-            sprintf('template/module/mvc/fixture/user-%s.phtml', $userType),
-            array(
-                'user-law' => !empty($this->db) ? $this->db->getUser() : 'all',
-            )
-        );
     }
 
     /**

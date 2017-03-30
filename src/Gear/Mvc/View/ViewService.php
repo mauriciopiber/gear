@@ -496,7 +496,22 @@ class ViewService extends AbstractJsonService
 
         switch ($dbType) {
             case 'low-strict':
-                $template = '';
+                $template = <<<EOS
+{$indent}<td class="col-lg-1">
+{$indent}    <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
+{$indent}        <span class="glyphicon glyphicon-resize-full"></span>
+{$indent}    </a>
+{$indent}    <a class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
+{$indent}        <span class="glyphicon glyphicon-pencil"></span>
+{$indent}    </a>
+{$indent}    <a class="btn btn-danger btn-xs"
+{$indent}        ng-click="\$event.preventDefault();list.exclude.showDialog({$primaryName});"
+{$indent}        ng-href="{$delHref}">
+{$indent}        <i class="glyphicon glyphicon-trash"></i>
+{$indent}    </a>
+{$indent}</td>
+
+EOS;
                 break;
             default:
                 $template = <<<EOS
@@ -535,6 +550,7 @@ EOS;
         return $elements;
     }
 
+    /**
     public function createListRowView()
     {
 
@@ -543,6 +559,8 @@ EOS;
         } else {
             $dbType = $this->action->getDb()->getUser();
         }
+
+        var_dump($dbType);
 
         $this->addChildView(
             array(
@@ -571,6 +589,7 @@ EOS;
 
         return $this->render();
     }
+    */
 
     public function getListRowElements()
     {
