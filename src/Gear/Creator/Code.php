@@ -469,7 +469,7 @@ EOS;
         if ($data instanceof Action) {
             $controller = $data->getController();
 
-            if ($data->getDb() === null) {
+            if ($data->getController()->getDb() === null) {
                 $name = $controller->getName();
             } else {
                 $name = $controller->getNameOff();
@@ -558,7 +558,7 @@ EOS;
 
         foreach ($data as $item) {
             $name = $this->str('class', $this->resolveName($item));
-            $var = $this->extractClassVariableFromDependency($item);
+            $var = $this->extractClassVariableFromDependency($name);
             $label = $this->str('label', $name);
 
             $html .= sprintf(

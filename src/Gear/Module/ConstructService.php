@@ -123,8 +123,12 @@ class ConstructService extends AbstractJsonService
                 if (isset($controller['actions'***REMOVED***)) {
                     foreach ($controller['actions'***REMOVED*** as $action) {
                         $action['controller'***REMOVED*** = $controller['name'***REMOVED***;
-
-
+                        if (isset($controller['db'***REMOVED***)) {
+                            $action['db'***REMOVED*** = $controller['db'***REMOVED***;
+                        }
+                        if (isset($controller['columns'***REMOVED***)) {
+                            $action['columns'***REMOVED*** = $controller['columns'***REMOVED***;
+                        }
 
                         $constructList = array_merge_recursive(
                             $constructList,
