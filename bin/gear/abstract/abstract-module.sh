@@ -10,8 +10,8 @@ source "$headersDir/abstract-version.sh"
 # 3. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
 function Gear_Module_Create
 {
-	# Params
-	if [ $# -ne 8 ***REMOVED***; then
+    # Params
+    if [ $# -ne 8 ***REMOVED***; then
         echo "usage: module type scriptDir gearfile migration shouldTestLocal shouldTestCI shouldIntegrate"
         exit 1
     fi
@@ -29,11 +29,11 @@ function Gear_Module_Create
     shouldIntegrate=${8}
 
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
-    	Gear_CI_TearDown "$module" "$modulePath"
+        Gear_CI_TearDown "$module" "$modulePath"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	Gear_Version_TearDown "$module" "$modulePath"
+        Gear_Version_TearDown "$module" "$modulePath"
     fi
     
     Gear_Module_Run_DeleteModule "$module"
@@ -43,19 +43,19 @@ function Gear_Module_Create
     Gear_Module_Construct "$module" "$type" "$scriptDir" "$gearfile" "$migration" "0" "0"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
-    	Gear_Module_Run_Ant "$module" "$type"
+        Gear_Module_Run_Ant "$module" "$type"
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
-    	Gear_CI_SetUp "$module" "$modulePath" "module-$type"
+        Gear_CI_SetUp "$module" "$modulePath" "module-$type"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	Gear_Version_SetUp "$module" "$modulePath"
+        Gear_Version_SetUp "$module" "$modulePath"
     fi 
    
     if [ "$shouldTestCI" == "1" ***REMOVED*** || [ "$shouldIntegrate" == "1" ***REMOVED***; then
-    	Gear_CI_Build "$module" "$modulePath" "$shouldIntegrate"
+        Gear_CI_Build "$module" "$modulePath" "$shouldIntegrate"
     fi
    
     exit 0
@@ -64,8 +64,8 @@ function Gear_Module_Create
 
 function Gear_Module_Reset
 {
-	# Params
-	if [ $# -lt 3 ***REMOVED***; then
+    # Params
+    if [ $# -lt 3 ***REMOVED***; then
         echo "usage: module shouldTestLocal shouldTestCI"
         exit 1
     fi
@@ -76,11 +76,11 @@ function Gear_Module_Reset
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-    	
+        
     cd $modulePath 
     vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
     sudo php public/index.php gear schema delete $module --basepath=$basePath
-    sudo php public/index.php gear schema create $module --basepath=$basePath	
+    sudo php public/index.php gear schema create $module --basepath=$basePath    
     sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
     sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
 }
@@ -108,8 +108,8 @@ function Gear_Module_Construct
     Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
     if [ "$migration" != "" ***REMOVED***; then
-    	Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
-    	Gear_Util_PrepareForDb "$modulePath"
+        Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
+        Gear_Util_PrepareForDb "$modulePath"
     fi
    
     Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$gearfile"
@@ -118,36 +118,36 @@ function Gear_Module_Construct
 
 function Gear_Module_Run_Construct
 {
-	modulePath=${1}
-	module=${2}
-	basePath=${3}
-	type=${4}
-	gearfile=${5}
-	
-	if [ "$useOwnConstructor" == "0" ***REMOVED***; then
-	    cd $modulePath	
-	else
+    modulePath=${1}
+    module=${2}
+    basePath=${3}
+    type=${4}
+    gearfile=${5}
+    
+    if [ "$useOwnConstructor" == "0" ***REMOVED***; then
+        cd $modulePath    
+    else
         cd $(Gear_Util_GetGearPath)
     fi
      
     sudo php public/index.php gear module construct $module $basePath --file=$modulePath/$gearfile
     
     if [ "$type" == "web" ***REMOVED***; then
-    	Gear_Module_Reload "$module"
+        Gear_Module_Reload "$module"
     fi 
 }
 
 
 function Gear_Module_Reload
 {
-	module=$(Gear_Module_Util_GetModuleName "${1}")
+    module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-	modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-	cd $modulePath
-	
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    cd $modulePath
+    
     sudo script/load.sh
-    sudo php public/index.php gear database module dump $module	
-	
+    sudo php public/index.php gear database module dump $module    
+    
 }
 
 function Gear_Module_Run_Ant
@@ -157,17 +157,22 @@ function Gear_Module_Run_Ant
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     
     type=${2}
+    build=${3}
+    params=${4}
     
     if [ "$type" == "cli" ***REMOVED***; then
-    	cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit
-    	return
+        cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit
+        return
     fi
    
-   if [ "$type" == "web" ***REMOVED***; then
-   	    cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor	
-   	    return
-   fi	
-	
+    if [ "$type" == "web" ***REMOVED***; then
+        if [ "$build" == "" ***REMOVED***; then
+        	build="prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor"
+        fi       
+        cd $modulePath && ant $build
+        return
+    fi    
+    
 }
 
 
@@ -197,30 +202,29 @@ function Gear_Module_Run_DeleteModule
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
 
     if [ -d "$modulePath" ***REMOVED***; then
-    	sudo rm -R $modulePath
+        sudo rm -R $modulePath
     fi
 }
 
 function Gear_Module_Util_GetModuleName
 {
     if [ "${1}" == "" ***REMOVED***; then
-    	
+        
         echo "Module"
-        return	
-    	
-    fi	
-	
-	echo "${1}"
+        return    
+        
+    fi    
+    
+    echo "${1}"
 }
 
 function Gear_Module_Util_GetModuleUrl
 {
-    echo $(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "${1}")	
+    echo $(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "${1}")    
 }
 
 function Gear_Module_Util_GetModulePath
 {
-	
     file="$(Gear_Util_GetBasePath)/${1}"
     echo $file
 }

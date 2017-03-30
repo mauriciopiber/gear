@@ -245,6 +245,7 @@ class ConstructService extends AbstractJsonService
 
 
         $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
+
         return $constructList;
     }
 
