@@ -223,9 +223,9 @@ class FixtureService extends AbstractMvc
     {
         $arrayData = [***REMOVED***;
         for ($iterator = 1; $iterator <= $count; $iterator++) {
-            $arrayData[***REMOVED*** = '            array('.PHP_EOL;
+            $arrayData[***REMOVED*** = '            ['.PHP_EOL;
             $arrayData[***REMOVED*** = $this->getEntityFixture($iterator);
-            $arrayData[***REMOVED*** = '            ),'.PHP_EOL;
+            $arrayData[***REMOVED*** = '            ***REMOVED***,'.PHP_EOL;
         }
         return $arrayData;
     }
