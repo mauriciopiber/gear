@@ -165,6 +165,21 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
+
+
+        $createdBy = new \Gear\Column\Integer\ForeignKey(
+            $this->prophesizeColumn('table', 'created_by', 'int'),
+            $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user')
+        );
+
+        $schema = $this->prophesize('Gear\Table\TableService\TableService');
+        $schema->getReferencedTableValidColumnName('user')
+        ->willReturn('email');
+
+        $createdBy->setTableService($schema->reveal());
+
+        $columns[***REMOVED*** = $createdBy;
+
         $this->column->getColumns($this->db, false, ['created_by'***REMOVED***)->willReturn($columns)->shouldBeCalled();
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
