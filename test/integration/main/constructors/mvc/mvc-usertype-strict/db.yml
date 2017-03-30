@@ -2,7 +2,7 @@ modules: MvcVarchar
 
 db:
   2:
-    table: UserTypeLowStrict
-    namespace: UserTypeLowStrict
+    table: UserTypeStrict
+    namespace: UserTypeStrict
     service: factories
     user: low-strict    
