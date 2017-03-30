@@ -1,0 +1,71 @@
+modules: MvcVarchar
+
+src:
+  0:
+    name: SrcMvc
+    type: Entity
+    db: SrcMvc
+    user: all
+  1:
+    name: SrcMvcFixture
+    type: Fixture
+    db: SrcMvc
+    user: all    
+  2:
+    name: SrcMvcRepository
+    type: Repository
+    db: SrcMvc
+    user: all        
+  3:
+    name: SrcMvcService
+    type: Service
+    db: SrcMvc
+    user: all            
+    dependency: Repository\SrcMvcRepository
+  4:
+    name: SrcMvcForm
+    type: Form
+    db: SrcMvc
+    user: all            
+  5:
+    name: SrcMvcSearchForm
+    type: SearchForm
+    db: SrcMvc
+    user: all     
+    dependency:
+      0:
+        class: '\Doctrine\ORM\EntityManager'
+        aliase: 'doctrine.entitymanager.orm_default'
+  6:
+    name: SrcMvcFilter
+    type: Filter
+    db: SrcMvc
+    user: all    
+    
+controller:
+  1:
+    name: SrcMvcController
+    type: 'Action'
+    db: SrcMvc
+    dependency: 'Service\SrcMvcService,Form\SrcMvcForm,Form\Search\SrcMvcSearchForm'
+    actions:
+      0:
+        name: Create
+        route: create
+        role: admin
+      1: 
+        name: Edit
+        route: edit
+        role: admin
+      2:
+        name: List
+        route: list
+        role: admin
+      3: 
+        name: Delete
+        route: delete
+        role: admin
+      4:
+        name: View
+        route: view
+        role: admin
