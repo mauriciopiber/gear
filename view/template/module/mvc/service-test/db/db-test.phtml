@@ -160,23 +160,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 
         return $resultSet;
     }
-
-    /**
-     * @group service.delete
-     */
-    public function testDelete()
-    {
-        $entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $entity->getId<?php echo $this->class;?>()->willReturn(31);
-
-        $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
-        $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
-
-        $this->service->setCache($this->cache->reveal());
-
-        $resultSet = $this->service->delete(31);
-        $this->assertTrue($resultSet);
-    }
+<?php echo $this->delete;?>
 
     /**
      * @group service.delete

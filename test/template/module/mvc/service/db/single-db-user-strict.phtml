@@ -1,1 +1,203 @@
 <?php
+namespace MyModule\Custom\CustomNamespace;
+
+use GearBase\Service\AbstractService;
+use MyModule\Custom\CustomNamespace\SingleDbTableRepositoryTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableRepository;
+use Zend\Cache\Storage\Adapter\Memcached;
+use Zend\Authentication\AuthenticationService;
+
+/**
+ * Interaction between SingleDbTableController and Services
+ *
+ * PHP Version 5
+ *
+ * @category Service
+ * @package MyModule/Custom/CustomNamespace
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class SingleDbTableService extends AbstractService
+{
+    use SingleDbTableRepositoryTrait;
+
+    protected $sessionName;
+
+    protected $authService;
+
+    /**
+     * Constructor
+     *
+     * @param SingleDbTableRepository $singleDbTableRepository Single Db Table Repository
+     * @param Memcached               $memcached               Memcached
+     * @param AuthenticationService   $zfcuserAuthService      Authentication Service
+     *
+     * @return \MyModule\Custom\CustomNamespace\SingleDbTableService
+     */
+    public function __construct(
+        SingleDbTableRepository $singleDbTableRepository,
+        Memcached $memcached,
+        AuthenticationService $zfcuserAuthService
+    ) {
+        $this->singleDbTableRepository = $singleDbTableRepository;
+        $this->cache = $memcached;
+        $this->zfcuserAuthService = $zfcuserAuthService;
+
+        return $this;
+    }
+
+    /**
+     * Get the values used to generate Html Table on List Action.
+     *
+     * @return array
+     */
+    public function getTableHead()
+    {
+        $map = $this->getSingleDbTableRepository()->getMapReferences();
+        return $this->getTableHeadFromMap($map);
+    }
+
+    /**
+     * Get the Service session name.
+     *
+     * @return string
+     */
+    public function getSessionName()
+    {
+        if (!isset($this->sessionName)) {
+            $this->sessionName = 'singleDbTableSession';
+        }
+        return $this->sessionName;
+    }
+
+    /**
+     * Select one row based on criteria.
+     *
+     * @param array $data Criteria
+     *
+     * @return null|MyModule\Entity\SingleDbTable
+     */
+    public function selectOneBy(array $data)
+    {
+        return $this->getSingleDbTableRepository()->selectOneBy($data);
+    }
+
+    /**
+     * Select All Rows from Single Db Table table.
+     *
+     * Use cache to store data until change.
+     *
+     * @param array $select Criteria
+     *
+     * @return array
+     */
+    public function selectAll($select = array())
+    {
+        $this->cache      = $this->getCache();
+        $this->repository = $this->getSingleDbTableRepository();
+
+        if ($this->zfcuserAuthService->hasIdentity()) {
+            $select = array_merge($select, array('createdBy' => $this->zfcuserAuthService->getIdentity()->getId()));
+        }
+        return parent::selectAll($select);
+    }
+
+    /**
+     * Create a new Single Db Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
+     *
+     * @param array $data Valid $_POST
+     *
+     * @return null|MyModule\Entity\SingleDbTable
+     */
+    public function create($data)
+    {
+        $repository = $this->getSingleDbTableRepository();
+
+
+        $singleDbTable = $repository->insert($data);
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    /**
+     * Update a existing Single Db Table on database.
+     *
+     * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
+     *
+     * @param integer $idTable Id
+     * @param array   $data    Valid $_POST
+     *
+     * @return null|MyModule\Entity\SingleDbTable
+     */
+    public function update($idTable, $data = array())
+    {
+        $repository = $this->getSingleDbTableRepository();
+
+
+        $singleDbTable = $repository->update($idTable, $data);
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    /**
+     * Delete a existing Single Db Table by Id.
+     *
+     * @param integer $idTable Id
+     *
+     * @return array
+     */
+    public function delete($idTable)
+    {
+        $entity = $this->selectById($idTable);
+
+        if (!$entity) {
+            return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
+        }
+
+        $repository = $this->getSingleDbTableRepository();
+        $singleDbTable = $repository->deleteSafe($entity);
+
+
+        if ($singleDbTable) {
+            $this->clearCache();
+        }
+        return $singleDbTable;
+    }
+
+    /**
+     * Convert Entity to Array.
+     *
+     * @param \MyModule\Entity\SingleDbTable $data Single Db Table Entity
+     *
+     * @return array
+     */
+    public function extract(\MyModule\Entity\SingleDbTable $data)
+    {
+        $repository = $this->getSingleDbTableRepository();
+        return $repository->extract($data);
+    }
+
+    public function selectById($idToSelect)
+    {
+        $repository = $this->getSingleDbTableRepository();
+
+        $entity = $repository->selectById($idToSelect);
+
+        if (!$this->zfcuserAuthService->hasIdentity() || !$entity) {
+            return null;
+        }
+
+        if ($entity->getCreatedBy()->getIdUser() === $this->zfcuserAuthService->getIdentity()->getIdUser()) {
+            return $entity;
+        }
+
+        return null;
+    }
+}
