@@ -13,11 +13,11 @@ class Strict
 
         \$entity = \$repository->selectById(\$idToSelect);
 
-        if (!\$this->getAuthService()->hasIdentity() || !\$entity) {
+        if (!\$this->zfcuserAuthService->hasIdentity() || !\$entity) {
             return null;
         }
 
-        if (\$entity->getCreatedBy()->getIdUser() === \$this->getAuthService()->getIdentity()->getIdUser()) {
+        if (\$entity->getCreatedBy()->getIdUser() === \$this->zfcuserAuthService->getIdentity()->getIdUser()) {
             return \$entity;
         }
 
@@ -30,8 +30,8 @@ EOS;
     public function getServiceSelectAll()
     {
         return <<<EOS
-        if (\$this->getAuthService()->hasIdentity()) {
-            \$select = array_merge(\$select, array('createdBy' => \$this->getAuthService()->getIdentity()->getId()));
+        if (\$this->zfcuserAuthService->hasIdentity()) {
+            \$select = array_merge(\$select, array('createdBy' => \$this->zfcuserAuthService->getIdentity()->getId()));
         }
         return parent::selectAll(\$select);
 

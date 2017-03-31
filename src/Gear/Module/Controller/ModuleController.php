@@ -62,7 +62,13 @@ class ModuleController extends AbstractConsoleController
 
 
         $this->getEventManager()->trigger('gear.pos', $this);
-        return new ConsoleModel();
+        $model = new ConsoleModel();
+
+        if (count($data['invalid-msg'***REMOVED***) > 0) {
+            $model->setErrorLevel(1);
+        }
+
+        return $model;
     }
 
     public function diagnosticAction()

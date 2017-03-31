@@ -3,9 +3,19 @@ namespace GearTest;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Resolver\AggregateResolver;
+use Zend\View\Resolver\TemplatePathStack;
+use Gear\Creator\TemplateService;
+use GearBase\Util\File\FileService;
+use Gear\Creator\File;
+use Gear\Module;
+
 
 trait UtilTestTrait
 {
+    protected $fileCreator;
+
     public function createVirtualDir($location)
     {
         $folders = explode('/', $location);
@@ -25,12 +35,39 @@ trait UtilTestTrait
         return $base.'/'.$workFolder;
     }
 
+
+    /**
+     * Cria Zend\View\Renderer\PhpRenderer
+     */
+    public function mockPhpRenderer($templatePath)
+    {
+        $view = new PhpRenderer();
+
+        $resolver = new AggregateResolver();
+
+        $map = new TemplatePathStack([
+            'script_paths' => [
+                'template' => $templatePath,
+            ***REMOVED***
+        ***REMOVED***);
+
+        $resolver->attach($map);
+
+        $view->setResolver($resolver);
+
+        return $view;
+    }
+
     public function createFileCreator()
     {
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+        if ($this->fileCreator === null) {
+            $template       = new TemplateService();
+            $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        return new \Gear\Creator\File($fileService, $template);
+            $fileService    = new FileService();
+            $this->fileCreator = new File($fileService, $template);
+        }
+
+        return $this->fileCreator;
     }
 }

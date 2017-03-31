@@ -5,6 +5,7 @@ use GearBase\Service\AbstractService;
 use MyModule\Custom\CustomNamespace\TableRepositoryTrait;
 use MyModule\Custom\CustomNamespace\TableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
+use Zend\Authentication\AuthenticationService;
 use GearBase\Service\PasswordVerifyTrait;
 use GearImage\Service\ImageServiceTrait;
 use GearImage\Service\ImageService;
@@ -35,19 +36,22 @@ class TableService extends AbstractService
     /**
      * Constructor
      *
-     * @param TableRepository $tableRepository Table Repository
-     * @param Memcached       $memcached       Memcached
-     * @param ImageService    $imageService    Image Service
+     * @param TableRepository       $tableRepository    Table Repository
+     * @param Memcached             $memcached          Memcached
+     * @param AuthenticationService $zfcuserAuthService Authentication Service
+     * @param ImageService          $imageService       Image Service
      *
      * @return \MyModule\Custom\CustomNamespace\TableService
      */
     public function __construct(
         TableRepository $tableRepository,
         Memcached $memcached,
+        AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
         $this->tableRepository = $tableRepository;
         $this->cache = $memcached;
+        $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;
 
         return $this;

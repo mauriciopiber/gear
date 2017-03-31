@@ -5,6 +5,7 @@ use GearBase\Service\AbstractService;
 use MyModule\Repository\SingleDbTableRepositoryTrait;
 use MyModule\Repository\SingleDbTableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
+use Zend\Authentication\AuthenticationService;
 
 /**
  * Interaction between SingleDbTableController and Services
@@ -30,15 +31,18 @@ class SingleDbTableService extends AbstractService
      *
      * @param SingleDbTableRepository $singleDbTableRepository Single Db Table Repository
      * @param Memcached               $memcached               Memcached
+     * @param AuthenticationService   $zfcuserAuthService      Authentication Service
      *
      * @return \MyModule\Service\SingleDbTableService
      */
     public function __construct(
         SingleDbTableRepository $singleDbTableRepository,
-        Memcached $memcached
+        Memcached $memcached,
+        AuthenticationService $zfcuserAuthService
     ) {
         $this->singleDbTableRepository = $singleDbTableRepository;
         $this->cache = $memcached;
+        $this->zfcuserAuthService = $zfcuserAuthService;
 
         return $this;
     }

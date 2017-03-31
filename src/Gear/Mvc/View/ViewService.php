@@ -20,6 +20,11 @@ class ViewService extends AbstractJsonService
     public function build(Action $action)
     {
 
+        if ($action->getController()->getDb() !== null) {
+            $this->factoryMvc($action);
+            return;
+        }
+
         $this->file = $this->getFileCreator();
 
         $this->template = 'template/module/mvc/view/controller/controller-action-view.phtml';
@@ -43,7 +48,7 @@ class ViewService extends AbstractJsonService
         $this->getDirService()->mkDir($fileLocationDir);
         $this->file->setLocation($fileLocationDir);
 
-        $this->file->setOptions(array(
+        $this->file->setOptions([
             'className' => $nameClass,
             'module' => $this->str('class', $this->module->getModuleName()),
             'controller' => $controllerName,
@@ -51,12 +56,39 @@ class ViewService extends AbstractJsonService
             'moduleLabel' => $this->str('label', $this->module->getModuleName()),
             'controllerLabel' => $this->str('label', $controllerName),
             'actionLabel' => $this->str('label', $action->getName())
-        ));
+        ***REMOVED***);
 
         $this->file->setTemplate($this->template);
 
 
         return $this->file->render();
+    }
+
+    public function factoryMvc(Action $action)
+    {
+        switch ($action->getName()) {
+            case 'List':
+                $this->createActionList($action);
+                $this->getAngularService()->createListAction($action);
+                break;
+            case 'Create':
+                $this->createActionAdd($action);
+                $this->getAngularService()->createCreateAction($action);
+                break;
+            case 'Edit':
+                $this->createActionEdit($action);
+                $this->getAngularService()->createEditAction($action);
+                break;
+            case 'UploadImage':
+                $this->createActionImage($action);
+                break;
+            case 'View':
+                $this->createActionView($action);
+                $this->getAngularService()->createViewAction($action);
+                 break;
+            default:
+                 break;
+        }
     }
 
     /**
@@ -74,32 +106,10 @@ class ViewService extends AbstractJsonService
         $this->createDirectoryFromIntrospect($controller);
 
         foreach ($controller->getAction() as $action) {
+            $controller->setDb($this->db);
             $action->setController($controller);
-            $action->setDb($table);
 
-            switch ($action->getName()) {
-                case 'List':
-                    $this->createActionList($action);
-                    $this->getAngularService()->createListAction($action);
-                    break;
-                case 'Create':
-                    $this->createActionAdd($action);
-                    $this->getAngularService()->createCreateAction($action);
-                    break;
-                case 'Edit':
-                    $this->createActionEdit($action);
-                    $this->getAngularService()->createEditAction($action);
-                    break;
-                case 'UploadImage':
-                    $this->createActionImage($action);
-                    break;
-                case 'View':
-                    $this->createActionView($action);
-                    $this->getAngularService()->createViewAction($action);
-                    break;
-                default:
-                    break;
-            }
+            $this->factoryMvc($action);
         }
     }
 
@@ -233,7 +243,7 @@ class ViewService extends AbstractJsonService
 
     public function createActionAdd($action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
         $this->tableName = $this->db->getTable();
 
         $module = $this->getModule()->getModuleName();
@@ -273,13 +283,12 @@ class ViewService extends AbstractJsonService
 
     public function createActionEdit($action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
         $this->tableName = $this->db->getTable();
 
         if ($this->getTableService()->verifyTableAssociation(
             $this->str('class', $action->getController()->getNameOff())
-        )
-        ) {
+        )) {
             $imageContainer = true;
         } else {
             $imageContainer = false;
@@ -333,7 +342,7 @@ class ViewService extends AbstractJsonService
     public function createActionView($action)
     {
         $this->action = $action;
-        $this->db = $this->action->getDb();
+        $this->db = $this->action->getController()->getDb();
         $this->tableName = $this->db->getTable();
 
         $viewValues = $this->getViewValues($action);
@@ -342,10 +351,10 @@ class ViewService extends AbstractJsonService
         $tableUrl  = $this->str('url', $action->getController()->getNameOff());
 
 
-        if ($action->getDb()->getUser() == 'strict') {
+        if ($action->getController()->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
-            $dbType = $action->getDb()->getUser();
+            $dbType = $action->getController()->getDb()->getUser();
         }
 
 
@@ -392,7 +401,7 @@ class ViewService extends AbstractJsonService
     public function createSearch($action)
     {
         $this->action = $action;
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
         $this->tableName = $this->db->getTable();
 
         return $this->getFileCreator()->createFile(
@@ -426,7 +435,7 @@ class ViewService extends AbstractJsonService
     public function createListView($action)
     {
         $this->action = $action;
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
         $this->tableName = $this->db->getTable();
 
         return $this->getFileCreator()->createFile(
@@ -455,10 +464,10 @@ class ViewService extends AbstractJsonService
 
     public function getActionButtons()
     {
-        if ($this->action->getDb()->getUser() == 'strict') {
+        if ($this->action->getController()->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
-            $dbType = $this->action->getDb()->getUser();
+            $dbType = $this->action->getController()->getDb()->getUser();
         }
 
 
@@ -554,10 +563,10 @@ EOS;
     public function createListRowView()
     {
 
-        if ($this->action->getDb()->getUser() == 'strict') {
+        if ($this->action->getController()->getDb()->getUser() == 'strict') {
             $dbType = 'all';
         } else {
-            $dbType = $this->action->getDb()->getUser();
+            $dbType = $this->action->getController()->getDb()->getUser();
         }
 
         var_dump($dbType);
@@ -570,7 +579,7 @@ EOS;
                     'routeEdit' => $this->getActionRoute('edit', $this->action->getController()),
                     'routeDelete' => $this->getActionRoute('delete', $this->action->getController()),
                     'routeView' => $this->getActionRoute('view', $this->action->getController()),
-                    'getId' => $this->str('var', $this->action->getDb()->getPrimaryKeyColumnName()),
+                    'getId' => $this->str('var', $this->action->getController()->getDb()->getPrimaryKeyColumnName()),
                     'classLabel' => $this->str('label', $this->action->getController()->getNameOff())
                 ),
             )
@@ -629,7 +638,7 @@ EOS;
     public function createActionList($action)
     {
         $this->action = $action;
-        $this->columns = $action->getDb()->getTableColumns();
+        $this->columns = $this->getColumnService()->getColumns($action->getController()->getDb());
 
         $this->createSearch($action);
         $this->createListView($action);
