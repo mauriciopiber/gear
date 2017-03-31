@@ -31,6 +31,10 @@ src:
     dependency: 
       'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
       1: SrcMvc\Repository\SrcMvcRepository
+      2:
+        class: \Zend\Authentication\AuthenticationService
+        aliase: zfcuser_auth_service
+        ig_t: true      
   4: #Filter
     name: SrcMvcFilter
     type: Filter
