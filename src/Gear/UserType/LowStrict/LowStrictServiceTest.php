@@ -35,8 +35,8 @@ EOS;
         \$this->user = \$this->prophesize('GearAdmin\Entity\User');
         \$this->user->getIdUser()->willReturn(1)->shouldBeCalled();
 
-        \$this->auth->hasIdentity()->willReturn(true)->shouldBeCalled();
-        \$this->auth->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
 
         \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
         \$this->entity->getId{$class}()->willReturn(31);

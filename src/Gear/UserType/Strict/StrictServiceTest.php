@@ -31,11 +31,18 @@ EOS;
      */
     public function testDelete()
     {
-        \$entity = \$this->prophesize('{$module}\Entity\\$class');
-        \$entity->getId{$class}()->willReturn(31);
+        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->user->getIdUser()->willReturn(1)->shouldBeCalled();
 
-        \$this->repository->selectById(31)->willReturn(\$entity->reveal())->shouldBeCalled();
-        \$this->repository->deleteSafe(\$entity->reveal())->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
+        \$this->entity->getId{$class}()->willReturn(31);
+        \$this->entity->getCreatedBy()->willReturn(\$this->user->reveal());
+
+        \$this->repository->selectById(31)->willReturn(\$this->entity->reveal())->shouldBeCalled();
+        \$this->repository->deleteSafe(\$this->entity->reveal())->willReturn(true)->shouldBeCalled();
 
         \$this->service->setCache(\$this->cache->reveal());
 
