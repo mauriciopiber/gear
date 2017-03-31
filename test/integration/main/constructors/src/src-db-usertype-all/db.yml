@@ -5,12 +5,12 @@ src:
     name: SrcMvc
     type: Entity
     db: SrcMvc
-    user: low-strict
+    user: all
   1: #Fixture
     name: SrcMvcFixture
     type: Fixture
     db: SrcMvc
-    user: low-strict    
+    user: all    
   2: #Repository
     name: SrcMvcRepository
     type: Repository
@@ -20,33 +20,29 @@ src:
       'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
       1: '\GearBase\Repository\QueryBuilder'
     db: SrcMvc
-    user: low-strict        
+    user: all        
   3: #Service
     name: SrcMvcService
     type: Service
     db: SrcMvc
-    user: low-strict            
+    user: all            
     service: factories
     namespace: SrcMvc\Service
     dependency: 
       'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
       1: SrcMvc\Repository\SrcMvcRepository
-      2:
-        class: \Zend\Authentication\AuthenticationService
-        aliase: zfcuser_auth_service
-        ig_t: true
   4: #Filter
     name: SrcMvcFilter
     type: Filter
     db: SrcMvc
-    user: low-strict        
+    user: all        
     service: factories
     namespace: SrcMvc\Filter    
   5: #Form
     name: SrcMvcForm
     type: Form
     db: SrcMvc
-    user: low-strict
+    user: all
     service: factories
     template: form-filter
     namespace: SrcMvc\Form    
@@ -58,7 +54,7 @@ src:
     name: SrcMvcSearchForm
     type: SearchForm
     db: SrcMvc
-    user: low-strict     
+    user: all     
     service: factories
     template: search-form
     namespace: SrcMvc\Search    
@@ -76,7 +72,7 @@ controller:
     namespace: SrcMvc\Controller
     service: factories
     dependency: 'SrcMvc\Service\SrcMvcService,SrcMvc\Form\SrcMvcForm,SrcMvc\Search\SrcMvcSearchForm'
-    user: low-strict
+    user: all
     actions:
       0:
         name: Create

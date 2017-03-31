@@ -62,3 +62,35 @@ src:
       0:
         class: '\Doctrine\ORM\EntityManager'
         aliase: 'doctrine.entitymanager.orm_default'      
+        
+    
+controller:
+  1:
+    name: SrcMvcController
+    type: 'Action'
+    db: SrcMvc
+    namespace: SrcMvc\Controller
+    service: factories
+    dependency: 'SrcMvc\Service\SrcMvcService,SrcMvc\Form\SrcMvcForm,SrcMvc\Search\SrcMvcSearchForm'
+    user: strict
+    actions:
+      0:
+        name: Create
+        route: create
+        role: admin
+      1: 
+        name: Edit
+        route: edit
+        role: admin
+      2:
+        name: List
+        route: list
+        role: admin
+      3: 
+        name: Delete
+        route: delete
+        role: admin
+      4:
+        name: View
+        route: view
+        role: admin        

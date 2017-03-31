@@ -72,6 +72,7 @@ class ControllerService extends AbstractJsonService
             (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
             (isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null),
             (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null),
+            (isset($data['user'***REMOVED***) ? $data['user'***REMOVED*** : null),
             false
        );
 
