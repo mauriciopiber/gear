@@ -38,4 +38,36 @@ EOS;
 
 
     }
+
+    public function renderSelectViewById(array $options)
+    {
+        return '';
+    }
+
+    public function renderSelectByIdReturnInvalid(array $options)
+    {
+        return '';
+    }
+
+    public function renderSelectById(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+        return <<<EOS
+
+    public function testSelectById()
+    {
+        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
+        \$this->entity->getId{$class}()->willReturn(1);
+
+        \$this->repository->selectById(1)->willReturn(\$this->entity->reveal())->shouldBeCalled();
+
+        \$resultSet = \$this->service->selectById(1);
+        \$this->assertInstanceOf('{$module}\Entity\\$class', \$resultSet);
+        \$this->assertEquals(1, \$resultSet->getId{$class}());
+    }
+
+EOS;
+
+    }
 }

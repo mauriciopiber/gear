@@ -41,16 +41,24 @@ class ServiceTestService extends AbstractMvcTest
 
         $userClass = sprintf('\Gear\UserType\%s\%sServiceTest', $userType, $userType);
 
+        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
+        $repositoryName = $this->getServiceManager()->getServiceName($this->repository);
+
         $user = new $userClass();
 
+        $partialOptions = [
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'class'  => $this->str('class', $this->db->getTable())
+        ***REMOVED***;
+
         if (in_array($this->db->getUser(), ['strict', 'low-strict'***REMOVED***)) {
-            $options['selectbyidnull'***REMOVED*** = $user->renderSelectByIdNull();
+            $options['selectbyidnull'***REMOVED*** = $user->renderSelectByIdNull($partialOptions);
+            $options['selectbyidinvalid'***REMOVED*** = $user->renderSelectByIdReturnInvalid($partialOptions);
+            $options['selectviewbyid'***REMOVED*** = $user->renderSelectViewById($partialOptions);
         }
 
-        $options['delete'***REMOVED*** = $user->renderDelete([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'class' => $this->str('class', $this->db->getTable())
-        ***REMOVED***);
+        $options['selectbyid'***REMOVED*** = $user->renderSelectById($partialOptions);
+        $options['delete'***REMOVED*** = $user->renderDelete($partialOptions);
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $fileCreator->addChildView(array(
@@ -94,7 +102,6 @@ class ServiceTestService extends AbstractMvcTest
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
-        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
         $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
         $options = array_merge($options, [
@@ -121,7 +128,7 @@ class ServiceTestService extends AbstractMvcTest
             'className' => $this->src->getName(),
             'table' => $this->db->getTable(),
             'service' => $this->getServiceManager()->getServiceName($this->src),
-            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'repository' => $repositoryName,
             'setUp' => $this->setUp,
         ***REMOVED***;
 

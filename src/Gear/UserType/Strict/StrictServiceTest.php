@@ -54,4 +54,74 @@ EOS;
 
 
     }
+
+    public function renderSelectViewById(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+
+        return '';
+
+    }
+
+    public function renderSelectByIdReturnInvalid(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+
+        return <<<EOS
+
+    public function testSelect{$class}ByIdWithoutPermissionsReturnNull()
+    {
+        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->user->getIdUser()->willReturn(1)->shouldBeCalled();
+
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
+        \$this->entity->getId{$class}()->willReturn(1);
+
+        \$this->creator = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->creator->getIdUser()->willReturn(2)->shouldBeCalled();
+
+        \$this->entity->getCreatedBy()->willReturn(\$this->creator->reveal())->shouldBeCalled();
+
+        \$this->repository->selectById(1)->willReturn(\$this->entity->reveal())->shouldBeCalled();
+
+        \$this->assertNull(\$this->service->selectById(1));
+    }
+
+EOS;
+
+    }
+
+    public function renderSelectById(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+        return <<<EOS
+
+    public function testSelectById()
+    {
+        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->user->getIdUser()->willReturn(1)->shouldBeCalled();
+
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
+        \$this->entity->getId{$class}()->willReturn(1);
+        \$this->entity->getCreatedBy()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->repository->selectById(1)->willReturn(\$this->entity->reveal())->shouldBeCalled();
+
+        \$resultSet = \$this->service->selectById(1);
+        \$this->assertInstanceOf('{$module}\Entity\\$class', \$resultSet);
+        \$this->assertEquals(1, \$resultSet->getId{$class}());
+    }
+
+EOS;
+
+    }
 }
