@@ -2,6 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\Http\RouteMatch;
 use MyModule\Custom\CustomNamespace\TableService;
 
 /**
@@ -18,11 +19,13 @@ class TableServiceTest extends TestCase
 
         $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->zfcuserAuthService = $this->prophesize('Zend\Authentication\AuthenticationService');
         $this->imageService = $this->prophesize('GearImage\Service\ImageService');
 
         $this->service = new TableService(
             $this->repository->reveal(),
             $this->cache->reveal(),
+            $this->zfcuserAuthService->reveal(),
             $this->imageService->reveal()
         );
     }
@@ -84,10 +87,7 @@ class TableServiceTest extends TestCase
         $this->entity = $this->prophesize('MyModule\Entity\Table');
         $this->entity->getIdTable()->willReturn(1);
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
-
-        $this->service->setTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
@@ -203,12 +203,10 @@ class TableServiceTest extends TestCase
         $entity = $this->prophesize('MyModule\Entity\Table');
         $entity->getIdTable()->willReturn(31);
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
 
         $this->service->setCache($this->cache->reveal());
-        $this->service->setTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->delete(31);
         $this->assertTrue($resultSet);
@@ -219,10 +217,7 @@ class TableServiceTest extends TestCase
      */
     public function testDeleteWithoutExistingData()
     {
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
         $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
-
-        $this->service->setTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->delete(31);
         $this->assertFalse($resultSet['success'***REMOVED***);
@@ -249,7 +244,7 @@ class TableServiceTest extends TestCase
 
     public function getRouteMatch($page, $orderBy = 'idTable', $order = 'DESC')
     {
-        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+        $routeMatch = new RouteMatch(array(
             'controller' => 'MyModule\Controller\Table',
             'action'     => 'list',
             'page' => $page,

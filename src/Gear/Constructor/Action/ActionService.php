@@ -10,6 +10,7 @@ use Gear\Service\AbstractJsonService;
 
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
+use GearJson\Db\Db;
 use GearJson\Action\ActionServiceTrait as JsonAction;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\RouterManagerTrait;
@@ -81,7 +82,18 @@ class ActionService extends AbstractJsonService
 
         $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
         $this->controller = new Controller($this->controller);
+
+        if (isset($data['db'***REMOVED***)) {
+            $db = new Db([
+                'table' => $data['db'***REMOVED***,
+                'columns' => (isset($data['columns'***REMOVED***)) ? $data['columns'***REMOVED*** : null
+            ***REMOVED***);
+            $this->controller->setDb($db);
+        //$this->controller->setDb
+        }
+
         $this->action->setController($this->controller);
+
 
         if ($this->str('class', $this->controller->getType()) == 'Action') {
             $this->getMvcController()->buildAction($this->controller);

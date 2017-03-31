@@ -35,22 +35,30 @@ class ServiceTestService extends AbstractMvcTest
 
         $fileCreator = $this->getFileCreator();
 
-        if ($this->db->getUser() == 'strict' || $this->db->getUser() == 'low-strict') {
-            $fileCreator->addChildView(array(
-                'template' => 'template/module/test/unit/service/setmockauthadapter',
-                'placeholder' => 'mockauthadapter',
-                'config' => array('var' => substr($this->str('var', $this->src->getName()), 0, 18))
-            ));
+        $options = [***REMOVED***;
 
-            $fileCreator->addChildView(array(
-                'template' => 'template/module/test/unit/service/selectbyidnull',
-                'placeholder' => 'selectbyidnull',
-                'config' => array(
-                    'var' => substr($this->str('var', $this->src->getName()), 0, 18),
-                    'class' => $this->str('class', $this->src->getName())
-                )
-            ));
+        $userType = $this->str('class', $this->db->getUser());
+
+        $userClass = sprintf('\Gear\UserType\%s\%sServiceTest', $userType, $userType);
+
+        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
+        $repositoryName = $this->getServiceManager()->getServiceName($this->repository);
+
+        $user = new $userClass();
+
+        $partialOptions = [
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'class'  => $this->str('class', $this->db->getTable())
+        ***REMOVED***;
+
+        if (in_array($this->db->getUser(), ['strict', 'low-strict'***REMOVED***)) {
+            $options['selectbyidnull'***REMOVED*** = $user->renderSelectByIdNull($partialOptions);
+            $options['selectbyidinvalid'***REMOVED*** = $user->renderSelectByIdReturnInvalid($partialOptions);
+            $options['selectviewbyid'***REMOVED*** = $user->renderSelectViewById($partialOptions);
         }
+
+        $options['selectbyid'***REMOVED*** = $user->renderSelectById($partialOptions);
+        $options['delete'***REMOVED*** = $user->renderDelete($partialOptions);
 
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $fileCreator->addChildView(array(
@@ -94,10 +102,9 @@ class ServiceTestService extends AbstractMvcTest
         //verificar se tem coluna de imagem.
         $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
-        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
         $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
-        $options = [
+        $options = array_merge($options, [
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
             'repository' => $this->getServiceManager()->getServiceName($this->repository),
@@ -115,13 +122,13 @@ class ServiceTestService extends AbstractMvcTest
             'classUrl' => $this->str('url', str_replace('Service', '', $this->src->getName())),
             'module'  => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-        ***REMOVED***;
+        ***REMOVED***);
 
         $construct = [
             'className' => $this->src->getName(),
             'table' => $this->db->getTable(),
             'service' => $this->getServiceManager()->getServiceName($this->src),
-            'repository' => $this->getServiceManager()->getServiceName($this->repository),
+            'repository' => $repositoryName,
             'setUp' => $this->setUp,
         ***REMOVED***;
 

@@ -167,7 +167,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
         //$this->entity->getId<?php echo $this->table;?>()->willReturn(31)->shouldBeCalled();
 
-        $this-><?php echo $this->tableVar;?>Service->selectById(31)->willReturn($this->entity->reveal());
+        $this-><?php echo $this->tableVar;?>Service-><?php echo $this->selectView;?>(31)->willReturn($this->entity->reveal());
         $this-><?php echo $this->tableVar;?>Service->extract($this->entity->reveal())->willReturn([***REMOVED***);
 
         $this->routeMatch->setParam('action', 'view');
@@ -187,7 +187,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->url->fromRoute(<?php echo $this->table;?>Controller::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(<?php echo $this->table;?>Controller::LISTS);
         $this->url->setController($this->controller)->shouldBeCalled();
 
-        $this-><?php echo $this->tableVar;?>Service->selectById(6000)->willReturn(null);
+        $this-><?php echo $this->tableVar;?>Service-><?php echo $this->selectView;?>(6000)->willReturn(null);
 
         $this->routeMatch->setParam('action', 'view');
         $this->routeMatch->setParam('id', 6000);

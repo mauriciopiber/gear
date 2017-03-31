@@ -13,11 +13,11 @@ class LowStrict
 
         \$entity = \$repository->selectById(\$idToSelect);
 
-        if (!\$this->getAuthService()->hasIdentity() || !\$entity) {
+        if (!\$this->zfcuserAuthService->hasIdentity() || !\$entity) {
             return null;
         }
 
-        if (\$entity->getCreatedBy()->getIdUser() === \$this->getAuthService()->getIdentity()->getIdUser()) {
+        if (\$entity->getCreatedBy()->getIdUser() === \$this->zfcuserAuthService->getIdentity()->getIdUser()) {
             return \$entity;
         }
 

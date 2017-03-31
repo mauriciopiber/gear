@@ -40,9 +40,28 @@ abstract class AbstractCode implements
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
 
+    /**
+    public function resolveAliase($item)
+    {
+        if (is_array($item) && isset($item['class'***REMOVED***)) {
+
+            if (isset($item['aliase'***REMOVED***)) {
+                $item = $item['aliase'***REMOVED***;
+            } else {
+                $item = $item['class'***REMOVED***;
+            }
+        }
+
+        $names = explode('\\', $item);
+        $name = end($names);
+        return $name;
+    }
+    */
+
     public function resolveName($item)
     {
         if (is_array($item) && isset($item['class'***REMOVED***)) {
+
             $item = $item['class'***REMOVED***;
         }
 

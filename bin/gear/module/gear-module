@@ -52,12 +52,12 @@ fi
 if [ "$cmd" == "test" ***REMOVED***; then
 	
 	# Params
-    if [ $# -lt 3 ***REMOVED***; then
-        echo "usage $0: command module type"
+    if [ $# -lt 4 ***REMOVED***; then
+        echo "usage $0: command module type target"
         exit 1
     fi
    
-    Gear_Module_Run_Ant "${2}" "${3}"
+    Gear_Module_Run_Ant "${2}" "${3}" "${4}"
 
 	exit 0
 
