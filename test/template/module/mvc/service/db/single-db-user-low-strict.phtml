@@ -1,9 +1,9 @@
 <?php
-namespace MyModule\Service;
+namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
-use MyModule\Repository\SingleDbTableRepositoryTrait;
-use MyModule\Repository\SingleDbTableRepository;
+use MyModule\Custom\CustomNamespace\SingleDbTableRepositoryTrait;
+use MyModule\Custom\CustomNamespace\SingleDbTableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Authentication\AuthenticationService;
 
@@ -13,7 +13,7 @@ use Zend\Authentication\AuthenticationService;
  * PHP Version 5
  *
  * @category Service
- * @package MyModule/Service
+ * @package MyModule/Custom/CustomNamespace
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
@@ -33,7 +33,7 @@ class SingleDbTableService extends AbstractService
      * @param Memcached               $memcached               Memcached
      * @param AuthenticationService   $zfcuserAuthService      Authentication Service
      *
-     * @return \MyModule\Service\SingleDbTableService
+     * @return \MyModule\Custom\CustomNamespace\SingleDbTableService
      */
     public function __construct(
         SingleDbTableRepository $singleDbTableRepository,
@@ -83,6 +83,12 @@ class SingleDbTableService extends AbstractService
         return $this->getSingleDbTableRepository()->selectOneBy($data);
     }
 
+
+    public function selectViewById($idToSelect)
+    {
+        $entity = $this->getSingleDbTableRepository()->selectById($idToSelect);
+        return $entity;
+    }
     /**
      * Select All Rows from Single Db Table table.
      *
@@ -181,16 +187,20 @@ class SingleDbTableService extends AbstractService
         return $repository->extract($data);
     }
 
-    /**
-     * Select one Single Db Table by Id.
-     *
-     * @param array $idToSelect Id
-     *
-     * @return null|MyModule\Entity\SingleDbTable
-     */
     public function selectById($idToSelect)
     {
         $repository = $this->getSingleDbTableRepository();
-        return $repository->selectById($idToSelect);
+
+        $entity = $repository->selectById($idToSelect);
+
+        if (!$this->zfcuserAuthService->hasIdentity() || !$entity) {
+            return null;
+        }
+
+        if ($entity->getCreatedBy()->getIdUser() === $this->zfcuserAuthService->getIdentity()->getIdUser()) {
+            return $entity;
+        }
+
+        return null;
     }
 }

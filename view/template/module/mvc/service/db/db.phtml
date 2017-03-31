@@ -161,7 +161,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
      *
      * @return array
      */
-    public function extract(\<?php echo $this->module;?>\Entity\<?= $this->str('class', $this->baseName)?> $data)
+    public function extract(\<?php echo $this->entity?> $data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->extract($data);

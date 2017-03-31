@@ -551,14 +551,17 @@ EOS;
 
         foreach ($data as $item) {
             $name = $this->str('class', $this->resolveName($item));
-            $var = $this->extractClassVariableFromDependency($name);
+            $var = $this->resolveDependencyVariableName($item);
             $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
             $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
         }
 
+        /**
+         * @STAG-1
+         */
         foreach ($data as $item) {
             $name = $this->str('class', $this->resolveName($item));
-            $var = $this->extractClassVariableFromDependency($name);
+            $var = $this->resolveDependencyVariableName($item);
             $label = $this->str('label', $name);
 
             $html .= sprintf(
@@ -621,6 +624,34 @@ EOS;
         $templates['doctrine.entitymanager.orm_default'***REMOVED*** = 'entityManager';
 
         return $templates[$templateName***REMOVED***;
+    }
+
+    public function resolveDependencyVariableName($dependencyInstance)
+    {
+        if (is_array($dependencyInstance)) {
+
+            if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
+                $variable = $dependencyInstance['aliase'***REMOVED***;
+
+            } else {
+                $variable = $dependencyInstance['class'***REMOVED***;
+            }
+
+            $fullname = explode('\\', $variable);
+            $variable = end($fullname);
+
+        } else {
+
+            $variable = $dependencyInstance;
+
+
+            $fullname = explode('\\', $variable);
+
+            $variable = end($fullname);
+        }
+
+        return $this->str('var', $variable);
+
     }
 
     /**
@@ -764,9 +795,16 @@ EOS;
         $this->uses = '';
 
         foreach ($data->getDependency() as $alias => $item) {
+
+
+            if (is_array($item) && isset($item['ig_t'***REMOVED***) && $item['ig_t'***REMOVED*** === true) {
+                continue;
+            }
+
             //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
             //que não precisam de Traits.
             if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
+
                 $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
             }
         }

@@ -112,6 +112,12 @@ class SingleDbTableServiceTest extends TestCase
         );
     }
 
+    public function testSelectByIdAnotherUserReturnNull()
+    {
+        $resultSet = $this->service->selectById(30);
+        $this->assertNull($resultSet);
+    }
+
     /**
      * @group service.create
      */
