@@ -79,10 +79,7 @@ class SingleDbTableServiceTest extends TestCase
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
         $this->entity->getIdSingleDbTable()->willReturn(1);
 
-        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
-
-        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);

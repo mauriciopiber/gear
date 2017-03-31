@@ -74,15 +74,40 @@ class SingleDbTableServiceTest extends TestCase
         $this->assertTrue(is_array($resultSet));
     }
 
-    public function testSelectById()
+    public function testSelectSingleDbTableByIdWithoutPermissionsReturnNull()
     {
+        $this->user = $this->prophesize('GearAdmin\Entity\User');
+        $this->user->getIdUser()->willReturn(1)->shouldBeCalled();
+
+        $this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        $this->zfcuserAuthService->getIdentity()->willReturn($this->user->reveal())->shouldBeCalled();
+
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
         $this->entity->getIdSingleDbTable()->willReturn(1);
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\SingleDbTableRepository');
+        $this->creator = $this->prophesize('GearAdmin\Entity\User');
+        $this->creator->getIdUser()->willReturn(2)->shouldBeCalled();
+
+        $this->entity->getCreatedBy()->willReturn($this->creator->reveal())->shouldBeCalled();
+
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->service->setSingleDbTableRepository($this->repository->reveal());
+        $this->assertNull($this->service->selectById(1));
+    }
+
+    public function testSelectById()
+    {
+        $this->user = $this->prophesize('GearAdmin\Entity\User');
+        $this->user->getIdUser()->willReturn(1)->shouldBeCalled();
+
+        $this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        $this->zfcuserAuthService->getIdentity()->willReturn($this->user->reveal())->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(1);
+        $this->entity->getCreatedBy()->willReturn($this->user->reveal())->shouldBeCalled();
+
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
         $resultSet = $this->service->selectById(1);
         $this->assertInstanceOf('MyModule\Entity\SingleDbTable', $resultSet);
@@ -177,11 +202,18 @@ class SingleDbTableServiceTest extends TestCase
      */
     public function testDelete()
     {
-        $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
-        $entity->getIdSingleDbTable()->willReturn(31);
+        $this->user = $this->prophesize('GearAdmin\Entity\User');
+        $this->user->getIdUser()->willReturn(1)->shouldBeCalled();
 
-        $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
-        $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
+        $this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        $this->zfcuserAuthService->getIdentity()->willReturn($this->user->reveal())->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
+        $this->entity->getIdSingleDbTable()->willReturn(31);
+        $this->entity->getCreatedBy()->willReturn($this->user->reveal());
+
+        $this->repository->selectById(31)->willReturn($this->entity->reveal())->shouldBeCalled();
+        $this->repository->deleteSafe($this->entity->reveal())->willReturn(true)->shouldBeCalled();
 
         $this->service->setCache($this->cache->reveal());
 

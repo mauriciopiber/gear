@@ -65,21 +65,9 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $resultSet = $this->service->getTableHead();
         $this->assertTrue(is_array($resultSet));
     }
-
-    public function testSelectById()
-    {
-        $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>');
-        $this->entity->getId<?php echo $this->class;?>()->willReturn(1);
-
-        $this->repository = $this->prophesize('<?php echo $this->repository;?>');
-        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
-
-        $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
-
-        $resultSet = $this->service->selectById(1);
-        $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
-        $this->assertEquals(1, $resultSet->getId<?php echo $this->class;?>());
-    }
+<?php echo $this->selectviewbyid;?>
+<?php echo $this->selectbyidinvalid;?>
+<?php echo $this->selectbyid;?>
 
     public function testSelectOne()
     {
