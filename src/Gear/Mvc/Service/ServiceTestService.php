@@ -36,14 +36,9 @@ class ServiceTestService extends AbstractMvcTest
         $fileCreator = $this->getFileCreator();
 
         if ($this->db->getUser() == 'strict' || $this->db->getUser() == 'low-strict') {
-            $fileCreator->addChildView(array(
-                'template' => 'template/module/test/unit/service/setmockauthadapter',
-                'placeholder' => 'mockauthadapter',
-                'config' => array('var' => substr($this->str('var', $this->src->getName()), 0, 18))
-            ));
 
             $fileCreator->addChildView(array(
-                'template' => 'template/module/test/unit/service/selectbyidnull',
+                'template' => 'template/module/mvc/service-test/selectbyidnull',
                 'placeholder' => 'selectbyidnull',
                 'config' => array(
                     'var' => substr($this->str('var', $this->src->getName()), 0, 18),

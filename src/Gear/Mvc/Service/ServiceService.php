@@ -234,18 +234,6 @@ class ServiceService extends AbstractMvc
                 ***REMOVED***
             );
         }
-
-        //ADICIONA FUNCAO
-        if ($dbType == 'strict') {
-            $this->file->addChildView(
-                [
-                    'template' => sprintf('template/module/mvc/service/db/authadapter.phtml', $this->db->getUser()),
-                    'placeholder' => 'authadapter',
-                    'config' => ['repository' => $this->repository***REMOVED***
-                ***REMOVED***
-            );
-        }
-        //$this->selectId  .= $userType->getServiceSelectById();
     }
 
     public function getColumnsSpecifications()
