@@ -1,0 +1,120 @@
+modules: MyModule
+
+src:
+  0: 
+    name: SrcMvcAll
+    type: Entity
+    db: SrcMvcAll
+  1: 
+    name: SrcMvcStrict
+    type: Entity
+    db: SrcMvcStrict
+  2: 
+    name: SrcMvcLowStrict
+    type: Entity
+    db: SrcMvcLowStrict
+  3: 
+    name: SrcMvcAllFixture
+    type: Fixture
+    db: SrcMvcAll
+  4: 
+    name: SrcMvcStrictFixture
+    type: Fixture
+    db: SrcMvcStrict
+  5: 
+    name: SrcMvcLowStrictFixture
+    type: Fixture
+    db: SrcMvcLowStrict
+  6: #Repository
+    name: SrcMvcAllRepository
+    type: Repository
+    service: factories
+    namespace: SrcMvcAll\Repository
+    dependency: 
+      'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+      1: '\GearBase\Repository\QueryBuilder'
+    db: SrcMvcAll
+    user: all      
+  7: #Repository
+    name: SrcMvcStrictRepository
+    type: Repository
+    service: factories
+    namespace: SrcMvcStrict\Repository
+    dependency: 
+      'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+      1: '\GearBase\Repository\QueryBuilder'
+    db: SrcMvcStrict
+    user: strict
+  8: #Repository
+    name: SrcMvcLowStrictRepository
+    type: Repository
+    service: factories
+    namespace: SrcMvcLowStrict\Repository
+    dependency: 
+      'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+      1: '\GearBase\Repository\QueryBuilder'
+    db: SrcMvcLowStrict
+    user: strict
+    
+  9: #Service
+    name: SrcMvcAllService
+    type: Service
+    db: SrcMvcAll
+    user: all            
+    service: factories
+    namespace: SrcMvcAll\Service
+    dependency: 
+      'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
+      1: SrcMvcAll\Repository\SrcMvcAllRepository
+      2:
+        class: \Zend\Authentication\AuthenticationService
+        aliase: zfcuser_auth_service
+        ig_t: true
+  10: #Service
+    name: SrcMvcStrictService
+    type: Service
+    db: SrcMvcStrict
+    user: strict            
+    service: factories
+    namespace: SrcMvcStrict\Service
+    dependency: 
+      'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
+      1: SrcMvcStrict\Repository\SrcMvcStrictRepository
+      2:
+        class: \Zend\Authentication\AuthenticationService
+        aliase: zfcuser_auth_service
+        ig_t: true                
+  11: #Service
+    name: SrcMvcLowStrictService
+    type: Service
+    db: SrcMvcLowStrict
+    user: low-strict            
+    service: factories
+    namespace: SrcMvcLowStrict\Service
+    dependency: 
+      'memcached': '\Zend\Cache\Storage\Adapter\Memcached'
+      1: SrcMvcLowStrict\Repository\SrcMvcLowStrictRepository
+      2:
+        class: \Zend\Authentication\AuthenticationService
+        aliase: zfcuser_auth_service
+        ig_t: true        
+## entity IntForeignKey
+## fixture IntForeignKey
+
+## entity AllColumnsDb
+## fixture AllColumnsDb
+## repository AllColumnsDb
+
+## entity AllColumnsDbNotNull
+## fixture AllColumnsDbNotNull
+## repository AllColumnsDbNotNull
+
+## entity AllColumnsDbUnique
+## fixture AllColumnsDbUnique
+## repository AllColumnsDbUnique
+
+## entity AllColumnsDbUniqueNotNull
+## fixture AllColumnsDbUniqueNotNull
+## repository AllColumnsDbUniqueNotNull
+
+                    
