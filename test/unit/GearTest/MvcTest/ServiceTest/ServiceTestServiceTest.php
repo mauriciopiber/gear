@@ -92,6 +92,7 @@ class ServiceTestServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group fix-usertype
      * @group db-factory-namespace
      * @group db-service2
      */
@@ -103,7 +104,8 @@ class ServiceTestServiceTest extends AbstractTestCase
         $hasTableImage,
         $tableName,
         $service,
-        $namespace
+        $namespace,
+        $user = 'all'
     ) {
         $table = $this->string->str('class', $tableName);
 
@@ -128,7 +130,7 @@ class ServiceTestServiceTest extends AbstractTestCase
             $this->module->map('ServiceTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
@@ -148,7 +150,12 @@ class ServiceTestServiceTest extends AbstractTestCase
                 'service' => $service,
                 'dependency' => [
                     sprintf('%s\%sRepository', ($namespace == null) ? 'Repository' : $namespace, $table),
-                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
+                    'memcached' => '\Zend\Cache\Storage\Adapter\Memcached',
+                    [
+                       'class' => '\Zend\Authentication\AuthenticationService',
+                       'aliase' => 'zfcuser_auth_service',
+                       'ig_t' => true
+                   ***REMOVED***
                 ***REMOVED***
             ***REMOVED***
         );

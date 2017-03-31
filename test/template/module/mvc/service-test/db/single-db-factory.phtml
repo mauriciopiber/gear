@@ -2,6 +2,7 @@
 namespace MyModuleTest\ServiceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\Http\RouteMatch;
 use MyModule\Service\SingleDbTableService;
 
 /**
@@ -18,10 +19,12 @@ class SingleDbTableServiceTest extends TestCase
 
         $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->zfcuserAuthService = $this->prophesize('Zend\Authentication\AuthenticationService');
 
         $this->service = new SingleDbTableService(
             $this->repository->reveal(),
-            $this->cache->reveal()
+            $this->cache->reveal(),
+            $this->zfcuserAuthService->reveal()
         );
     }
 
@@ -171,12 +174,10 @@ class SingleDbTableServiceTest extends TestCase
         $entity = $this->prophesize('MyModule\Entity\SingleDbTable');
         $entity->getIdSingleDbTable()->willReturn(31);
 
-        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
 
         $this->service->setCache($this->cache->reveal());
-        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->delete(31);
         $this->assertTrue($resultSet);
@@ -187,10 +188,7 @@ class SingleDbTableServiceTest extends TestCase
      */
     public function testDeleteWithoutExistingData()
     {
-        $this->repository = $this->prophesize('MyModule\Repository\SingleDbTableRepository');
         $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
-
-        $this->service->setSingleDbTableRepository($this->repository->reveal());
 
         $resultSet = $this->service->delete(31);
         $this->assertFalse($resultSet['success'***REMOVED***);
@@ -217,7 +215,7 @@ class SingleDbTableServiceTest extends TestCase
 
     public function getRouteMatch($page, $orderBy = 'idSingleDbTable', $order = 'DESC')
     {
-        $routeMatch = new \Zend\Mvc\Router\Http\RouteMatch(array(
+        $routeMatch = new RouteMatch(array(
             'controller' => 'MyModule\Controller\SingleDbTable',
             'action'     => 'list',
             'page' => $page,

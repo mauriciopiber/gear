@@ -1,21 +1,22 @@
 <?php
 namespace GearTest\MvcTest\ServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
 use GearJson\Src\Src;
+use GearTest\ScopeTrait;
 
 /**
  * @group src-mvc
  * @group db-service
  */
-class ServiceServiceTest extends AbstractTestCase
+class ServiceServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ServiceDataTrait;
-    use \GearTest\ScopeTrait;
+    use ScopeTrait;
 
     public function setUp()
     {
@@ -37,11 +38,7 @@ class ServiceServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
         $this->service->setStringService($this->string);
 
-        //file-render
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
         $this->service->setFileCreator($this->fileCreator);
 
         //src-dependency
@@ -119,6 +116,7 @@ class ServiceServiceTest extends AbstractTestCase
     /**
      * @dataProvider tables
      * @group RefactoringUnitTest
+     * @group fix-usertype
      * @group db-docs1
      * @group db-service1
      * @group db-factory-namespace
@@ -131,7 +129,8 @@ class ServiceServiceTest extends AbstractTestCase
         $hasTableImage,
         $tableName,
         $service,
-        $namespace
+        $namespace,
+        $user = 'all'
     ) {
         $table = $this->string->str('class', $tableName);
 
@@ -146,7 +145,7 @@ class ServiceServiceTest extends AbstractTestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new \GearJson\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
@@ -163,9 +162,13 @@ class ServiceServiceTest extends AbstractTestCase
             'service' => $service,
             'dependency' => [
                 sprintf('%s\%sRepository', ($namespace !== null) ? $namespace : 'Repository', $table),
-                'memcached' => '\Zend\Cache\Storage\Adapter\Memcached'
-            ***REMOVED***
-        ***REMOVED***);
+                'memcached' => '\Zend\Cache\Storage\Adapter\Memcached',
+               [
+                   'class' => '\Zend\Authentication\AuthenticationService',
+                   'aliase' => 'zfcuser_auth_service',
+                   'ig_t' => true
+               ***REMOVED***
+        ***REMOVED******REMOVED***);
 
         $repository = new Src([
             'name' => sprintf('%sRepository', $table),
