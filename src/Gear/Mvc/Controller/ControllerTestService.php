@@ -258,7 +258,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 'tableVar'  => $this->str('var', $this->controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
                 'class' => $this->controller->getNameOff(),
-                'selectView' => ($this->db->getUser() === 'all' ? 'selectById' : 'selectViewById')
+                'selectView' => ($this->db->getUser() === 'low-strict' ? 'selectViewById' : 'selectById')
             ***REMOVED***,
             [
                 'mockPRG' => $this->getMockPRG(),
