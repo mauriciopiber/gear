@@ -6674,16 +6674,16 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.62",
+            "version": "0.2.63",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "1c13b8c34cd99fe37a62af4909a41abbf87f6b64"
+                "reference": "ca59962ee2c5d6741d90ccba0b79ccca3776dd98"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.62-3b94b8.tar",
-                "reference": "1c13b8c34cd99fe37a62af4909a41abbf87f6b64",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.63-869301.tar",
+                "reference": "ca59962ee2c5d6741d90ccba0b79ccca3776dd98",
                 "shasum": null
             },
             "require": {
@@ -6717,7 +6717,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2017-03-30T15:25:06+00:00"
+            "time": "2017-03-31T12:57:49+00:00"
         },
         {
             "name": "mauriciopiber/gear-version",
