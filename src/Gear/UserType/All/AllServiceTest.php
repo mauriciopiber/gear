@@ -39,6 +39,12 @@ EOS;
 
     }
 
+
+    public function renderSelectAll(array $options)
+    {
+        return '';
+    }
+
     public function renderSelectViewById(array $options)
     {
         return '';

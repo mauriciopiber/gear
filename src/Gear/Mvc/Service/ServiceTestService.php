@@ -57,6 +57,10 @@ class ServiceTestService extends AbstractMvcTest
             $options['selectviewbyid'***REMOVED*** = $user->renderSelectViewById($partialOptions);
         }
 
+        if (in_array($this->db->getUser(), ['strict'***REMOVED***)) {
+            $options['selectall'***REMOVED*** = $user->renderSelectAll($partialOptions);
+        }
+
         $options['selectbyid'***REMOVED*** = $user->renderSelectById($partialOptions);
         $options['delete'***REMOVED*** = $user->renderDelete($partialOptions);
 

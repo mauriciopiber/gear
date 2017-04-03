@@ -19,6 +19,36 @@ EOS;
 
     }
 
+    public function renderSelectAll(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+
+
+        return <<<EOS
+
+    public function testSelectAll()
+    {
+        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->user->getId()->willReturn(1)->shouldBeCalled();
+
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->service->setRouteMatch(
+            \$this->getRouteMatch(1, 'id{$class}', 'DESC')
+        );
+
+        \$this->repository->selectAll(['createdBy' => 1***REMOVED***, 'id{$class}', 'DESC')->willReturn(['id{$class}' => 5***REMOVED***)->shouldBeCalled();
+
+        \$data = \$this->service->selectAll();
+        \$this->assertEquals(5, \$data['id{$class}'***REMOVED***);
+    }
+
+EOS;
+
+    }
+
     public function renderDelete(array $options)
     {
         $module = $options['module'***REMOVED***;
