@@ -5,4 +5,4 @@ db:
     table: UserTypeStrict
     namespace: UserTypeStrict
     service: factories
-    user: low-strict    
+    user: strict
