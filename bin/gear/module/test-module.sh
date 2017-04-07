@@ -45,6 +45,7 @@ if [ "$cmd" == "test" ***REMOVED***; then
 fi
 
 if [ "$cmd" == "reload-test" ***REMOVED***; then
+	
 	/bin/bash "$bin/gear/module/gear-module" "reset" "$module" "0" "0"
 	/bin/bash "$bin/gear/module/gear-module" "construct" "$module" "$type" "$scriptDir" "$gearfile" "$migration" "0" "0"	
 	/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"

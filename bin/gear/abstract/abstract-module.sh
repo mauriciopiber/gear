@@ -158,7 +158,6 @@ function Gear_Module_Run_Ant
     
     type=${2}
     build=${3}
-    params=${4}
     
     if [ "$type" == "cli" ***REMOVED***; then
         cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit
