@@ -19,6 +19,11 @@ EOS;
 
     }
 
+    public function renderSelectAll(array $options)
+    {
+        return '';
+
+    }
 
     public function renderDelete(array $options)
     {
