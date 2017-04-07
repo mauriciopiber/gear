@@ -11,5 +11,7 @@ interface UserTypeServiceTestInterface
 
     public function renderSelectById(array $options);
 
+    public function renderSelectAll(array $options);
+
     public function renderSelectByIdReturnInvalid(array $options);
 }
