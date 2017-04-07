@@ -7,5 +7,6 @@ module="PbxUserTypes"
 type="web"
 migration="20160123222068_simple_dates_table.php"
 gearfile="db.yml"
+build=${2}
 
 source "$bin/gear/module/test-module.sh"
