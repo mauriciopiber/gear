@@ -3,13 +3,22 @@ namespace GearTest\MvcTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamWrapper;
-use GearTest\ControllerScopeTrait;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
+use GearBase\Util\String\StringService;
+use GearBase\Util\File\FileService;
+use Gear\Module;
+use Gear\Mvc\Controller\ControllerService;
+use Gear\Creator\File;
+use Gear\Creator\TemplateService;
+use Gear\Creator\File\Injector;
+use Gear\Creator\ControllerDependency;
+use Gear\Creator\Code;
+use Gear\Util\Vector\ArrayService;
 use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
+use GearTest\ControllerScopeTrait;
 
 /**
  * @group Fixing
@@ -33,13 +42,13 @@ class ControllerServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new StringService();
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new TemplateService();
 
-        $templatePath = (new \Gear\Module)->getLocation().'/../../view';
+        $templatePath = (new Module)->getLocation().'/../../view';
 
         $resolver = new AggregateResolver();
 
@@ -56,19 +65,18 @@ class ControllerServiceTest extends TestCase
         $view->setResolver($resolver);
 
         $template->setRenderer($view);
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new File($fileService, $template);
 
-        $this->template =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/controller';
+        $this->template =  (new Module())->getLocation().'/../../test/template/module/mvc/controller';
 
 
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new Injector($this->arrayService);
 
-        $this->controllerService = new \Gear\Mvc\Controller\ControllerService();
+        $this->controllerService = new ControllerService();
         $this->controllerService->setFileCreator($this->fileCreator);
         $this->controllerService->setStringService($this->string);
         $this->controllerService->setModule($this->module->reveal());
@@ -77,12 +85,12 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setFactoryService($this->factory->reveal());
         $this->controllerService->setArrayService($this->arrayService);
 
-        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
+        $this->controllerDependency = new ControllerDependency();
         $this->controllerDependency->setModule($this->module->reveal());
         $this->controllerService->setControllerDependency($this->controllerDependency);
 
 
-        $this->code = new \Gear\Creator\Code();
+        $this->code = new Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
         $this->code->setControllerDependency($this->controllerDependency);

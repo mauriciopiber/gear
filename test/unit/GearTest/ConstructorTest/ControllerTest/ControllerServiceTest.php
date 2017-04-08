@@ -64,7 +64,9 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            null
+            null,
+            null,
+            false
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
@@ -105,7 +107,9 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            null
+            null,
+            null,
+            false
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
@@ -140,7 +144,9 @@ class ControllerServiceTest extends AbstractTestCase
             null,
             null,
             null,
-            null
+            null,
+            null,
+            false
        )->willReturn($controller)->shouldBeCalled();
 
         $this->controllerService = new ControllerService();
