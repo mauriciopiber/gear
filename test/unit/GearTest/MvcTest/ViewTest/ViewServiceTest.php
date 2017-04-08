@@ -3,6 +3,8 @@ namespace GearTest\MvcTest\ViewTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use GearJson\Controller\Controller;
+use GearJson\Action\Action;
 
 /**
  * @group View
@@ -89,10 +91,14 @@ class ViewServiceTest extends AbstractTestCase
         $view->setColumnService($columns);
         $view->setLocationDir(vfsStream::url('module'));
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'Create',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(
+            [
+                'name' => 'MyController',
+                'object' => '%s\Controller\MyController',
+                'db' => 'My'
+            ***REMOVED***),
         ***REMOVED***);
 
         $file = $view->createActionAdd($action);
@@ -122,10 +128,16 @@ class ViewServiceTest extends AbstractTestCase
         $view->setColumnService($columns);
         $view->setLocationDir(vfsStream::url('module'));
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'Create',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'My'
+
+                ***REMOVED***
+            ),
         ***REMOVED***);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
@@ -160,9 +172,15 @@ class ViewServiceTest extends AbstractTestCase
         $view->setColumnService($columns);
         $view->setLocationDir(vfsStream::url('module'));
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'Create',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'My'
+                ***REMOVED***
+            ),
             'db' => $db
         ***REMOVED***);
 
@@ -193,10 +211,15 @@ class ViewServiceTest extends AbstractTestCase
         $view->setColumnService($columns);
         $view->setLocationDir(vfsStream::url('module'));
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'Create',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'My'
+                ***REMOVED***
+            ),
         ***REMOVED***);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
@@ -231,10 +254,15 @@ class ViewServiceTest extends AbstractTestCase
         $view->setColumnService($columns);
         $view->setLocationDir(vfsStream::url('module'));
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'Create',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'My'
+                ***REMOVED***
+            ),
         ***REMOVED***);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
@@ -275,9 +303,14 @@ class ViewServiceTest extends AbstractTestCase
         $view->setFileCreator($this->fileCreator);
         $view->setModule($this->module->reveal());
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'MyAction',
-            'controller' => new \GearJson\Controller\Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***)
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController'
+                ***REMOVED***
+            )
         ***REMOVED***);
 
 

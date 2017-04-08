@@ -69,6 +69,8 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
      *
      * To be used on created_by and updated_by column.
      *
+     * @param Integer $referenced Número de Referência
+     *
      * @return GearAdmin\Entity\User
      */
     public function getReferenceToEntity($referenced = 1)
