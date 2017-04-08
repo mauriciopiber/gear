@@ -113,9 +113,19 @@ class ControllerTestServiceTest extends AbstractTestCase
      * @group RefactoringUnitTest
      * @group db-controller2
      * @group db-x
+     * @group fixR
      */
-    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
-    {
+    public function testInstrospectTable(
+        $columns,
+        $template,
+        $nullable,
+        $hasColumnImage,
+        $hasTableImage,
+        $tableName,
+        $service,
+        $namespace,
+        $userType
+    ) {
         $table = $this->string->str('class', $tableName);
 
         $controller = new \GearJson\Controller\Controller([
@@ -126,10 +136,17 @@ class ControllerTestServiceTest extends AbstractTestCase
                 sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
                 sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
                 sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
-            ***REMOVED***
+            ***REMOVED***,
+            'db' => $this->string->str('class', $tableName),
+            'user' => $userType
         ***REMOVED***);
 
-        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
+        $this->db = new \GearJson\Db\Db(
+            [
+                'table' => $this->string->str('class', $tableName),
+                'user' => $userType
+            ***REMOVED***
+        );
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 

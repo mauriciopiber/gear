@@ -14,9 +14,9 @@ trait ControllerDataTrait
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
+            [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,
+            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null, 'all'***REMOVED***,
             [
                 $this->getSingleColumns(),
                 'single-db-namespace',
@@ -25,9 +25,32 @@ trait ControllerDataTrait
                 false,
                 'single_db_table',
                 'invokables',
-                'Custom\CustomNamespace'
+                'Custom\CustomNamespace',
+                'all'
             ***REMOVED***,
-            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null***REMOVED***,
+            [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null, 'all'***REMOVED***,
+            [
+                $this->getSingleColumns(),
+                'single-db-usertype-low-strict',
+                true,
+                false,
+                false,
+                'single_db_table',
+                'factories',
+                'Custom\CustomNamespace',
+                'low-strict'
+            ***REMOVED***,
+            [
+                $this->getSingleColumns(),
+                'single-db-usertype-strict',
+                true,
+                false,
+                false,
+                'single_db_table',
+                'factories',
+                'Custom\CustomNamespace',
+                'strict'
+            ***REMOVED***,
             [
                 $this->getSingleColumns(),
                 'single-db-factory-namespace',
@@ -36,7 +59,8 @@ trait ControllerDataTrait
                 false,
                 'single_db_table',
                 'factories',
-                'Custom\CustomNamespace'
+                'Custom\CustomNamespace',
+                'all'
             ***REMOVED***,
             [
                 $this->getLongNameTableColumns(),
@@ -46,7 +70,8 @@ trait ControllerDataTrait
                 true,
                 'my_very_long_table_name_example',
                 'factories',
-                'Custom\CustomNamespace'
+                'Custom\CustomNamespace',
+                'all'
             ***REMOVED***
             //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
