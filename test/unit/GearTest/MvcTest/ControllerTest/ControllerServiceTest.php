@@ -148,6 +148,7 @@ class ControllerServiceTest extends TestCase
      * @group RefactoringUnitTest
      * @group db-docs
      * @group db-controller1
+     * @group fixR
      */
     public function testInstrospectTable(
         $columns,
@@ -157,7 +158,8 @@ class ControllerServiceTest extends TestCase
         $hasTableImage,
         $tableName,
         $service,
-        $namespace
+        $namespace,
+        $userType
     ) {
         $table = $this->string->str('class', $tableName);
 
@@ -169,7 +171,9 @@ class ControllerServiceTest extends TestCase
                 sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
                 sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
                 sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
-            ***REMOVED***
+            ***REMOVED***,
+            'user' => $userType,
+            'db' =>  $this->string->str('class', $tableName)
         ***REMOVED***);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -192,7 +196,12 @@ class ControllerServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $this->string->str('class', $tableName)***REMOVED***);
+        $this->db = new \GearJson\Db\Db(
+            [
+                'table' => $this->string->str('class', $tableName),
+                'user' => $userType
+            ***REMOVED***
+        );
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
