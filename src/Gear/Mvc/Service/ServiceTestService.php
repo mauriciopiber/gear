@@ -84,11 +84,11 @@ class ServiceTestService extends AbstractMvcTest
          * @TODO Columns
          */
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
-            $fileCreator->addChildView(array(
+            $fileCreator->addChildView([
                 'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
-                'config' => array('module' => $this->getModule()->getModuleName())
-            ));
+                'config' => ['module' => $this->getModule()->getModuleName()***REMOVED***
+            ***REMOVED***);
         }
 
         $onlyOneSetUp = [***REMOVED***;
