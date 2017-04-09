@@ -86,16 +86,16 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         if ($create) {
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $create->getIdMyVeryLongTableNameExample(), 'success' => 1)
+                ['id' => $create->getIdMyVeryLongTableNameExample(), 'success' => 1***REMOVED***
             );
         }
 
 
         return new ViewModel(
-            array(
+            [
                 'error' => $this->error,
                 'form' => $this->form,
-            )
+            ***REMOVED***
         );
     }
 
@@ -133,7 +133,7 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         if ($update) {
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $update->getIdMyVeryLongTableNameExample(), 'success' => 1)
+                ['id' => $update->getIdMyVeryLongTableNameExample(), 'success' => 1***REMOVED***
             );
         }
 
@@ -144,12 +144,12 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
-            array(
+            [
                 'form' => $this->form,
                 'error' => $this->error,
                 'success' => $sucesso,
                 'idMyVeryLongTableNameExample' => $idMyVeryLongTable
-            )
+            ***REMOVED***
         );
     }
 
@@ -175,9 +175,10 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
 
         return new ViewModel(
             array_merge(
-                array(
+                [
                     'id' => $data->getIdMyVeryLongTableNameExample(),
-                    'images' => $images,                ),
+                    'images' => $images,
+                ***REMOVED***,
                 $this->getMyVeryLongTableNameExampleService()->extract($data)
             )
         );
@@ -240,11 +241,11 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         }
 
         return new ViewModel(
-            array(
+            [
                 'idMyVeryLongTableNameExample' => $idMyVeryLongTable,
                 'contexto' => 'my-very-long-table-name-example',
                 'success' => $success
-            )
+            ***REMOVED***
         );
     }
 
@@ -260,11 +261,11 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         );
 
         return new ViewModel(
-            array(
+            [
                 'search'    => $this->getMyVeryLongTableNameExampleSearchForm(),
                 'tableService' => $this->getMyVeryLongTableNameExampleService(),
                 'data'      => $data,
-            )
+            ***REMOVED***
         );
     }
 }

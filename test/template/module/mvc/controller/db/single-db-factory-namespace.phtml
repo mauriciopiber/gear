@@ -80,16 +80,16 @@ class SingleDbTableController extends AbstractActionController
         if ($create) {
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $create->getIdSingleDbTable(), 'success' => 1)
+                ['id' => $create->getIdSingleDbTable(), 'success' => 1***REMOVED***
             );
         }
 
 
         return new ViewModel(
-            array(
+            [
                 'error' => $this->error,
                 'form' => $this->form,
-            )
+            ***REMOVED***
         );
     }
 
@@ -127,7 +127,7 @@ class SingleDbTableController extends AbstractActionController
         if ($update) {
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $update->getIdSingleDbTable(), 'success' => 1)
+               ['id' => $update->getIdSingleDbTable(), 'success' => 1***REMOVED***
             );
         }
 
@@ -138,12 +138,12 @@ class SingleDbTableController extends AbstractActionController
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
-            array(
+            [
                 'form' => $this->form,
                 'error' => $this->error,
                 'success' => $sucesso,
                 'idSingleDbTable' => $idSingleDbTable
-            )
+            ***REMOVED***
         );
     }
 
@@ -168,9 +168,9 @@ class SingleDbTableController extends AbstractActionController
 
         return new ViewModel(
             array_merge(
-                array(
+                [
                     'id' => $data->getIdSingleDbTable(),
-                ),
+                ***REMOVED***,
                 $this->getSingleDbTableService()->extract($data)
             )
         );
@@ -208,11 +208,11 @@ class SingleDbTableController extends AbstractActionController
         );
 
         return new ViewModel(
-            array(
+            [
                 'search'    => $this->getSingleDbTableSearchForm(),
                 'tableService' => $this->getSingleDbTableService(),
                 'data'      => $data,
-            )
+            ***REMOVED***
         );
     }
 }

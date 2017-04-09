@@ -1,9 +1,9 @@
 <?php
-namespace Gear\UserType\Strict;
+namespace Gear\UserType\ServiceTest;
 
-use Gear\UserType\UserTypeServiceTestInterface;
+use Gear\UserType\ServiceTest\UserTypeServiceTestInterface;
 
-class StrictServiceTest implements UserTypeServiceTestInterface
+class LowStrict implements UserTypeServiceTestInterface
 {
     public function renderSelectByIdNull()
     {
@@ -13,36 +13,6 @@ class StrictServiceTest implements UserTypeServiceTestInterface
     {
         \$resultSet = \$this->service->selectById(30);
         \$this->assertNull(\$resultSet);
-    }
-
-EOS;
-
-    }
-
-    public function renderSelectAll(array $options)
-    {
-        $module = $options['module'***REMOVED***;
-        $class = $options['class'***REMOVED***;
-
-
-        return <<<EOS
-
-    public function testSelectAll()
-    {
-        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
-        \$this->user->getId()->willReturn(1)->shouldBeCalled();
-
-        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
-        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
-
-        \$this->service->setRouteMatch(
-            \$this->getRouteMatch(1, 'id{$class}', 'DESC')
-        );
-
-        \$this->repository->selectAll(['createdBy' => 1***REMOVED***, 'id{$class}', 'DESC')->willReturn(['id{$class}' => 5***REMOVED***)->shouldBeCalled();
-
-        \$data = \$this->service->selectAll();
-        \$this->assertEquals(5, \$data['id{$class}'***REMOVED***);
     }
 
 EOS;
@@ -90,7 +60,21 @@ EOS;
         $module = $options['module'***REMOVED***;
         $class = $options['class'***REMOVED***;
 
-        return '';
+        return <<<EOS
+
+    public function testSelectViewById()
+    {
+        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
+        \$this->entity->getId{$class}()->willReturn(1);
+        \$this->repository->selectById(1)->willReturn(\$this->entity->reveal())->shouldBeCalled();
+
+        \$resultSet = \$this->service->selectViewById(1);
+        \$this->assertInstanceOf('{$module}\Entity\\$class', \$resultSet);
+        \$this->assertEquals(1, \$resultSet->getId{$class}());
+    }
+
+EOS;
+
 
     }
 
@@ -149,6 +133,67 @@ EOS;
         \$resultSet = \$this->service->selectById(1);
         \$this->assertInstanceOf('{$module}\Entity\\$class', \$resultSet);
         \$this->assertEquals(1, \$resultSet->getId{$class}());
+    }
+
+EOS;
+
+    }
+
+    /**
+     * Ignored on this Type
+     */
+    public function renderSelectAll(array $options)
+    {
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+
+        return <<<EOS
+
+    public function testSelectAll()
+    {
+        \$this->service->setRouteMatch(
+            \$this->getRouteMatch(1, 'id{$class}', 'DESC')
+        );
+
+        \$input = [
+            [
+                'id{$class}' => 5,
+                'createdBy' => [
+                    'idUser' => 3
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        \$expected = [
+            [
+                'id{$class}' => 5,
+                'user' => 3,
+                'createdBy' => [
+                    'idUser' => 3
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        \$this->repository->selectAll([***REMOVED***, 'id{$class}', 'DESC')->willReturn(\$input)->shouldBeCalled();
+
+        \$data = \$this->service->selectAll();
+
+        \$this->assertEquals(\$expected, \$data);
+    }
+
+    public function testSelectAllNull()
+    {
+        \$this->service->setRouteMatch(
+            \$this->getRouteMatch(1, 'id{$class}', 'DESC')
+        );
+
+        \$input = [***REMOVED***;
+
+        \$this->repository->selectAll([***REMOVED***, 'id{$class}', 'DESC')->willReturn(\$input)->shouldBeCalled();
+
+        \$data = \$this->service->selectAll();
+
+        \$this->assertEquals(\$input, \$data);
     }
 
 EOS;

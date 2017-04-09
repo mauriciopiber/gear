@@ -1,19 +1,11 @@
 <?php
-namespace Gear\UserType;
+namespace Gear\UserType\Service;
 
-class All
+use Gear\UserType\Service\UserTypeServiceInterface;
+
+class All implements UserTypeServiceInterface
 {
-
-    public function getServiceAttributes()
-    {
-    }
-
-    public function getServiceFunctions()
-    {
-    }
-
-
-    public function getServiceSelectById($repository, $label, $entity)
+    public function getServiceSelectById($repository, $label = null, $entity = null)
     {
 
         return <<<EOS
@@ -39,5 +31,10 @@ EOS;
         return parent::selectAll(\$select);
 
 EOS;
+    }
+
+    public function getServiceSelectViewById($repository)
+    {
+        return '';
     }
 }

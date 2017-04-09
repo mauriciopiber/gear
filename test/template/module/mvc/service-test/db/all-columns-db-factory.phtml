@@ -40,10 +40,16 @@ class TableServiceTest extends TestCase
     {
         $this->service->setSessionName('testing');
 
-        $data = $this->service->setSelectAllCache(array('data' => true));
-        $this->assertEquals(array('data' => true), $data);
-        $data = $this->service->setSelectAllCache(array('data' => true));
-        $this->assertEquals(array('data' => true), $data);
+        $data = ['data' => true***REMOVED***;
+
+        $this->cache->hasItem('testingResult')->willReturn(null);
+        $this->cache->addItem('testingResult', $data)->willReturn(null);
+        $this->cache->getItem('testingResult')->willReturn($data);
+
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
     }
 
     public function testSelectAllCacheWithCache()

@@ -10,6 +10,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
+use GearJson\Db\Db;
 
 class ServiceService extends AbstractMvc
 {
@@ -80,6 +81,7 @@ class ServiceService extends AbstractMvc
         return $this->srcFile->createFile($template, $options, $fileName, $location);
     }
 
+
     public function createDb()
     {
 
@@ -127,7 +129,7 @@ class ServiceService extends AbstractMvc
         $this->tableUploadImage = false;
 
         $this->getColumnsSpecifications();
-        $this->getUserSpecifications();
+        $userOptions = $this->getUserSpecifications($this->db);
 
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
         ) {
@@ -154,7 +156,6 @@ class ServiceService extends AbstractMvc
             'update'        => $this->update,
             'create'        => $this->create,
             'delete'        => $this->delete,
-            'selectAll'     => $this->selectAll,
             'nameVar'       => $this->str('var', $this->name),
             'imagemService' => $this->useImageService,
             'baseName'      => $this->name,
@@ -166,6 +167,8 @@ class ServiceService extends AbstractMvc
             'module'        => $this->getModule()->getModuleName(),
             'repository'    => $this->repository
         ***REMOVED***;
+
+        $options = array_merge($options, $userOptions);
 
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
@@ -205,35 +208,29 @@ class ServiceService extends AbstractMvc
         return $this->createDb();
     }
 
-    public function getUserSpecifications()
+    public function getUserType(Db $db)
     {
-        $name = $this->db->getUserClass();
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\Service\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
 
-        $user = '\Gear\UserType\\'.$this->str('class', $name);
-        $userType = new $user();
-        $this->selectAll .= $userType->getServiceSelectAll();
-        $this->functions .= $userType->getServiceSelectById(
+    public function getUserSpecifications(Db $db)
+    {
+        $userType = $this->getUserType($db);
+
+        $options = [***REMOVED***;
+
+        $options['selectall'***REMOVED*** = $userType->getServiceSelectAll();
+        $options['selectbyid'***REMOVED*** = $userType->getServiceSelectById(
             $this->repository,
             $this->str('label', $this->db->getTable()),
             $this->entityName
         );
+        $options['selectviewbyid'***REMOVED*** = $userType->getServiceSelectViewById($this->repository);
 
-        if ($this->db->getUser() == 'low-strict') {
-            $dbType = 'strict';
-        } else {
-            $dbType = $this->db->getUser();
-        }
-
-        //ADICIONA FUNCAO
-        if ($this->db->getUser() == 'low-strict') {
-            $this->file->addChildView(
-                [
-                    'template' => sprintf('template/module/mvc/service/db/selectviewbyid.phtml', $this->db->getUser()),
-                    'placeholder' => 'selectviewbyid',
-                    'config' => ['repository' => $this->repository***REMOVED***
-                ***REMOVED***
-            );
-        }
+        return $options;
     }
 
     public function getColumnsSpecifications()

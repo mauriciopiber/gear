@@ -24,6 +24,38 @@ class ServiceTestService extends AbstractMvcTest
         return $this->str('var', $this->getTableService()->getReferencedTableValidColumnName($this->db->getTable()));
     }
 
+    public function getUserType(Db $db)
+    {
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\ServiceTest\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
+
+    public function getUserTypeOptions(Db $db)
+    {
+        $options = [***REMOVED***;
+
+        $user = $this->getUserType($this->db);
+
+        $partialOptions = [
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'class'  => $this->str('class', $this->db->getTable())
+        ***REMOVED***;
+
+        if (in_array($this->db->getUser(), ['strict', 'low-strict'***REMOVED***)) {
+            $options['selectbyidnull'***REMOVED*** = $user->renderSelectByIdNull($partialOptions);
+            $options['selectbyidinvalid'***REMOVED*** = $user->renderSelectByIdReturnInvalid($partialOptions);
+            $options['selectviewbyid'***REMOVED*** = $user->renderSelectViewById($partialOptions);
+            $options['selectall'***REMOVED*** = $user->renderSelectAll($partialOptions);
+        }
+
+        $options['selectbyid'***REMOVED*** = $user->renderSelectById($partialOptions);
+        $options['delete'***REMOVED*** = $user->renderDelete($partialOptions);
+
+        return $options;
+    }
+
     public function introspectFromTable(Db $table)
     {
         $this->db           = $table;
@@ -37,33 +69,20 @@ class ServiceTestService extends AbstractMvcTest
 
         $options = [***REMOVED***;
 
-        $userType = $this->str('class', $this->db->getUser());
+        $userOptions = $this->getUserTypeOptions($this->db);
 
-        $userClass = sprintf('\Gear\UserType\%s\%sServiceTest', $userType, $userType);
+        $options = array_merge($options, $userOptions);
 
+
+        //get dependencies.
+        //get repository.
         $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
         $repositoryName = $this->getServiceManager()->getServiceName($this->repository);
 
-        $user = new $userClass();
 
-        $partialOptions = [
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'class'  => $this->str('class', $this->db->getTable())
-        ***REMOVED***;
-
-        if (in_array($this->db->getUser(), ['strict', 'low-strict'***REMOVED***)) {
-            $options['selectbyidnull'***REMOVED*** = $user->renderSelectByIdNull($partialOptions);
-            $options['selectbyidinvalid'***REMOVED*** = $user->renderSelectByIdReturnInvalid($partialOptions);
-            $options['selectviewbyid'***REMOVED*** = $user->renderSelectViewById($partialOptions);
-        }
-
-        if (in_array($this->db->getUser(), ['strict'***REMOVED***)) {
-            $options['selectall'***REMOVED*** = $user->renderSelectAll($partialOptions);
-        }
-
-        $options['selectbyid'***REMOVED*** = $user->renderSelectById($partialOptions);
-        $options['delete'***REMOVED*** = $user->renderDelete($partialOptions);
-
+        /**
+         * @TODO Columns
+         */
         if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
             $fileCreator->addChildView(array(
                 'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',

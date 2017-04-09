@@ -120,6 +120,7 @@ class ServiceServiceTest extends TestCase
      * @group db-docs1
      * @group db-service1
      * @group db-factory-namespace
+     * @group fixR
      */
     public function testInstrospectTable(
         $columns,

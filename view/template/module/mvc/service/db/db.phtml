@@ -74,7 +74,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         $this->cache      = $this->getCache();
         $this->repository = $this->get<?php echo $this->repository;?>();
 
-<?php echo $this->selectAll;?>
+<?php echo $this->selectall;?>
     }
 <?php echo $this->overwrite;?>
 
@@ -168,4 +168,5 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     }
 
 <?php echo $this->functions;?>
+<?php echo $this->selectbyid;?>
 }

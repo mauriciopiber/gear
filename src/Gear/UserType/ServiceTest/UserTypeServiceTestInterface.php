@@ -1,5 +1,5 @@
 <?php
-namespace Gear\UserType;
+namespace Gear\UserType\ServiceTest;
 
 interface UserTypeServiceTestInterface
 {

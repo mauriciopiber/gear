@@ -1,15 +1,10 @@
 <?php
-namespace Gear\UserType\All;
+namespace Gear\UserType\ServiceTest;
 
-use Gear\UserType\UserTypeServiceTestInterface;
+use Gear\UserType\ServiceTest\UserTypeServiceTestInterface;
 
-class AllServiceTest implements UserTypeServiceTestInterface
+class All implements UserTypeServiceTestInterface
 {
-    public function renderSelectByIdNull()
-    {
-        return '';
-    }
-
     public function renderDelete(array $options)
     {
         $module = $options['module'***REMOVED***;
@@ -39,22 +34,6 @@ EOS;
 
     }
 
-
-    public function renderSelectAll(array $options)
-    {
-        return '';
-    }
-
-    public function renderSelectViewById(array $options)
-    {
-        return '';
-    }
-
-    public function renderSelectByIdReturnInvalid(array $options)
-    {
-        return '';
-    }
-
     public function renderSelectById(array $options)
     {
         $module = $options['module'***REMOVED***;
@@ -75,5 +54,25 @@ EOS;
 
 EOS;
 
+    }
+
+    public function renderSelectByIdNull()
+    {
+        return '';
+    }
+
+    public function renderSelectAll(array $options)
+    {
+        return '';
+    }
+
+    public function renderSelectViewById(array $options)
+    {
+        return '';
+    }
+
+    public function renderSelectByIdReturnInvalid(array $options)
+    {
+        return '';
     }
 }
