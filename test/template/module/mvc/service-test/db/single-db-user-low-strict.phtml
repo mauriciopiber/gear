@@ -28,14 +28,67 @@ class SingleDbTableServiceTest extends TestCase
         );
     }
 
+    public function testSelectAll()
+    {
+        $this->service->setRouteMatch(
+            $this->getRouteMatch(1, 'idSingleDbTable', 'DESC')
+        );
+
+        $input = [
+            [
+                'idSingleDbTable' => 5,
+                'createdBy' => [
+                    'idUser' => 3
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $expected = [
+            [
+                'idSingleDbTable' => 5,
+                'user' => 3,
+                'createdBy' => [
+                    'idUser' => 3
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $this->repository->selectAll([***REMOVED***, 'idSingleDbTable', 'DESC')->willReturn($input)->shouldBeCalled();
+
+        $data = $this->service->selectAll();
+
+        $this->assertEquals($expected, $data);
+    }
+
+    public function testSelectAllNull()
+    {
+        $this->service->setRouteMatch(
+            $this->getRouteMatch(1, 'idSingleDbTable', 'DESC')
+        );
+
+        $input = [***REMOVED***;
+
+        $this->repository->selectAll([***REMOVED***, 'idSingleDbTable', 'DESC')->willReturn($input)->shouldBeCalled();
+
+        $data = $this->service->selectAll();
+
+        $this->assertEquals($input, $data);
+    }
+
     public function testSetSelectAllCache()
     {
         $this->service->setSessionName('testing');
 
-        $data = $this->service->setSelectAllCache(array('data' => true));
-        $this->assertEquals(array('data' => true), $data);
-        $data = $this->service->setSelectAllCache(array('data' => true));
-        $this->assertEquals(array('data' => true), $data);
+        $data = ['data' => true***REMOVED***;
+
+        $this->cache->hasItem('testingResult')->willReturn(null);
+        $this->cache->addItem('testingResult', $data)->willReturn(null);
+        $this->cache->getItem('testingResult')->willReturn($data);
+
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
     }
 
     public function testSelectAllCacheWithCache()

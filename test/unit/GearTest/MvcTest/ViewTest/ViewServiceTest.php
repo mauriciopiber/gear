@@ -238,6 +238,7 @@ class ViewServiceTest extends AbstractTestCase
     }
 
     /**
+     * @group fixR
      * @dataProvider setUpBasicColumn
      */
     public function testListAction($columns)

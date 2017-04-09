@@ -103,7 +103,17 @@ class SingleDbTableService extends AbstractService
         $this->cache      = $this->getCache();
         $this->repository = $this->getSingleDbTableRepository();
 
-        return parent::selectAll($select);
+        $data = parent::selectAll($select);
+
+        if (count($data) === 0) {
+        	return $data;
+        }
+
+        foreach ($data as $i => $item) {
+        	$data[$i***REMOVED***['user'***REMOVED*** = $item['createdBy'***REMOVED***['idUser'***REMOVED***;
+        }
+
+        return $data;
     }
 
     /**

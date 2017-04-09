@@ -1,9 +1,11 @@
 <?php
-namespace Gear\UserType;
+namespace Gear\UserType\Service;
 
-class Strict
+use Gear\UserType\Service\UserTypeServiceInterface;
+
+class Strict implements UserTypeServiceInterface
 {
-    public function getServiceSelectById($repository)
+    public function getServiceSelectById($repository, $label = null, $entity = null)
     {
 
         return <<<EOS
@@ -38,19 +40,8 @@ EOS;
 EOS;
     }
 
-    public function getFixtureUse()
+    public function getServiceSelectViewById($repository)
     {
-        return <<<EOS
-use GearBase\Fixture\UserChooseTrait;
-
-EOS;
-    }
-
-    public function getFixtureAttribute()
-    {
-        return <<<EOS
-    use UserChooseTrait;
-
-EOS;
+        return '';
     }
 }

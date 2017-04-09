@@ -95,6 +95,7 @@ class ServiceTestServiceTest extends AbstractTestCase
      * @group fix-usertype
      * @group db-factory-namespace
      * @group db-service2
+     * @group fixR
      */
     public function testInstrospectTable(
         $columns,

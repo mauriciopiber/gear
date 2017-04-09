@@ -1,9 +1,9 @@
 <?php
-namespace Gear\UserType\LowStrict;
+namespace Gear\UserType\ServiceTest;
 
-use Gear\UserType\UserTypeServiceTestInterface;
+use Gear\UserType\ServiceTest\UserTypeServiceTestInterface;
 
-class LowStrictServiceTest implements UserTypeServiceTestInterface
+class Strict implements UserTypeServiceTestInterface
 {
     public function renderSelectByIdNull()
     {
@@ -21,7 +21,31 @@ EOS;
 
     public function renderSelectAll(array $options)
     {
-        return '';
+        $module = $options['module'***REMOVED***;
+        $class = $options['class'***REMOVED***;
+
+
+        return <<<EOS
+
+    public function testSelectAll()
+    {
+        \$this->user = \$this->prophesize('GearAdmin\Entity\User');
+        \$this->user->getId()->willReturn(1)->shouldBeCalled();
+
+        \$this->zfcuserAuthService->hasIdentity()->willReturn(true)->shouldBeCalled();
+        \$this->zfcuserAuthService->getIdentity()->willReturn(\$this->user->reveal())->shouldBeCalled();
+
+        \$this->service->setRouteMatch(
+            \$this->getRouteMatch(1, 'id{$class}', 'DESC')
+        );
+
+        \$this->repository->selectAll(['createdBy' => 1***REMOVED***, 'id{$class}', 'DESC')->willReturn(['id{$class}' => 5***REMOVED***)->shouldBeCalled();
+
+        \$data = \$this->service->selectAll();
+        \$this->assertEquals(5, \$data['id{$class}'***REMOVED***);
+    }
+
+EOS;
 
     }
 
@@ -54,29 +78,6 @@ EOS;
 
         \$resultSet = \$this->service->delete(31);
         \$this->assertTrue(\$resultSet);
-    }
-
-EOS;
-
-
-    }
-
-    public function renderSelectViewById(array $options)
-    {
-        $module = $options['module'***REMOVED***;
-        $class = $options['class'***REMOVED***;
-
-        return <<<EOS
-
-    public function testSelectViewById()
-    {
-        \$this->entity = \$this->prophesize('{$module}\Entity\\$class');
-        \$this->entity->getId{$class}()->willReturn(1);
-        \$this->repository->selectById(1)->willReturn(\$this->entity->reveal())->shouldBeCalled();
-
-        \$resultSet = \$this->service->selectViewById(1);
-        \$this->assertInstanceOf('{$module}\Entity\\$class', \$resultSet);
-        \$this->assertEquals(1, \$resultSet->getId{$class}());
     }
 
 EOS;
@@ -143,5 +144,10 @@ EOS;
 
 EOS;
 
+    }
+
+    public function renderSelectViewById(array $options)
+    {
+        return '';
     }
 }

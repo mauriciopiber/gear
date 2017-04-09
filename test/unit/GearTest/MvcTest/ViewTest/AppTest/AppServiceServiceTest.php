@@ -43,6 +43,7 @@ class AppServiceServiceTest extends AbstractTestCase
         $this->setAppServiceService($mockAppService);
         $this->assertEquals($mockAppService, $this->getAppServiceService());
     }
+
     public function testSetAppServiceSpecService()
     {
         $mockAppServiceSpec = $this->getMockSingleClass('Gear\Mvc\View\App\AppServiceSpecService');

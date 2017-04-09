@@ -88,7 +88,7 @@ class TableController extends AbstractActionController
             $this->getImageService()->dropUploadImageSession();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $create->getIdTable(), 'success' => 1)
+                ['id' => $create->getIdTable(), 'success' => 1***REMOVED***
             );
         }
 
@@ -96,11 +96,11 @@ class TableController extends AbstractActionController
         $uploadImageColumn = $this->getImageService()->getTempUpload('uploadImageColumn');
 
         return new ViewModel(
-            array(
+            [
                 'error' => $this->error,
                 'uploadImageColumn' => $uploadImageColumn,
                 'form' => $this->form,
-            )
+            ***REMOVED***
         );
     }
 
@@ -139,7 +139,7 @@ class TableController extends AbstractActionController
             $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $update->getIdTable(), 'success' => 1)
+                ['id' => $update->getIdTable(), 'success' => 1***REMOVED***
             );
         }
 
@@ -152,14 +152,14 @@ class TableController extends AbstractActionController
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
-            array(
+            [
                 'form' => $this->form,
                 'error' => $this->error,
                 'success' => $sucesso,
                 'uploadImageColumn' => $uploadImageColumn,
                 'contexto' => 'table',
                 'idTable' => $idTable
-            )
+            ***REMOVED***
         );
     }
 
@@ -185,9 +185,10 @@ class TableController extends AbstractActionController
 
         return new ViewModel(
             array_merge(
-                array(
+                [
                     'id' => $data->getIdTable(),
-                    'images' => $images,                ),
+                    'images' => $images,
+                ***REMOVED***,
                 $this->getTableService()->extract($data)
             )
         );
@@ -250,11 +251,11 @@ class TableController extends AbstractActionController
         }
 
         return new ViewModel(
-            array(
+            [
                 'idTable' => $idTable,
                 'contexto' => 'table',
                 'success' => $success
-            )
+            ***REMOVED***
         );
     }
 
@@ -270,11 +271,11 @@ class TableController extends AbstractActionController
         );
 
         return new ViewModel(
-            array(
+            [
                 'search'    => $this->getTableSearchForm(),
                 'tableService' => $this->getTableService(),
                 'data'      => $data,
-            )
+            ***REMOVED***
         );
     }
 }
