@@ -317,24 +317,32 @@ class ControllerService extends AbstractMvc implements
 
         if ($this->table->getUser() == 'low-strict') {
             $this->file->addChildView(
-                array(
-
+                [
                     'template' => 'template/module/mvc/controller/db/view-low-strict.phtml',
-                    'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
-                    'imageView'  => $this->imageView), $this->getCommonActionData()),
+                    'config' => array_merge(
+                        [
+                            'imageQuery' => $this->imageQuery,
+                            'imageView'  => $this->imageView
+                        ***REMOVED***,
+                        $this->getCommonActionData()
+                    ),
                     'placeholder' => 'viewAction'
-                )
+                ***REMOVED***
             );
         } else {
             $this->file->addChildView(
-                array(
+                [
                     'imageQuery' => $this->imageQuery,
                     'imageView'  => $this->imageView,
                     'template' => 'template/module/mvc/controller/db/view.phtml',
-                    'config' => array_merge(array(  'imageQuery' => $this->imageQuery,
-                    'imageView'  => $this->imageView), $this->getCommonActionData()),
+                    'config' => array_merge(
+                        [
+                            'imageQuery' => $this->imageQuery,
+                            'imageView'  => $this->imageView
+                        ***REMOVED***,
+                        $this->getCommonActionData()),
                     'placeholder' => 'viewAction'
-                )
+                ***REMOVED***
             );
         }
     }
