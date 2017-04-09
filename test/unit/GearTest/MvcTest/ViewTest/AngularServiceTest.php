@@ -57,7 +57,7 @@ class AngularServiceTest extends AbstractTestCase
         //$this->angular->setLocationDir(vfsStream::url('module'));
     }
 
-    public function createAction($actionName)
+    public function createAction($actionName, $userType = 'all')
     {
         return new Action([
             'name' => $actionName,
@@ -65,7 +65,8 @@ class AngularServiceTest extends AbstractTestCase
                 [
                     'name' => 'MyController',
                     'object' => '%s\Controller\MyController',
-                    'db' => 'My'
+                    'db' => 'My',
+                    'user' => $userType
                 ***REMOVED***
             ),
         ***REMOVED***);
@@ -81,7 +82,7 @@ class AngularServiceTest extends AbstractTestCase
 
         foreach (['low-strict', 'all', 'strict'***REMOVED*** as $userType) {
             $dbs[***REMOVED*** = [
-                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $columns->reveal(), sprintf('list-%s', $userType)
+                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $columns->reveal(), sprintf('list-%s', $userType), $userType
             ***REMOVED***;
         }
 
@@ -93,21 +94,21 @@ class AngularServiceTest extends AbstractTestCase
      * @group fixR
      * @dataProvider getListDbUserType
      */
-    public function testListAction($db, $columns, $userType)
+    public function testListAction($db, $columns, $template, $userType)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getPublicJsControllerFolder()->willReturn(vfsStream::url('module/public'))->shouldBeCalled();
 
         $this->angular->setColumnService($columns);
 
-        $action = $this->createAction('List');
+        $action = $this->createAction('List', $userType);
 
         $file = $this->angular->createListAction($action);
 
         $this->assertStringEndsWith('MyListController.js', $file);
 
         $this->assertEquals(
-            file_get_contents($this->template.'/'.$userType.'.phtml'),
+            file_get_contents($this->template.'/'.$template.'.phtml'),
             file_get_contents($file)
         );
     }

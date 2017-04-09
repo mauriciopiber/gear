@@ -22,7 +22,7 @@ use Gear\Column\Varchar\Varchar;
 class ViewServiceTest extends AbstractTestCase
 {
 
-    public function setUpBasicColumn()
+    public function setUpBasicColumn($userType = 'all')
     {
         $this->string = new StringService();
 
@@ -46,7 +46,7 @@ class ViewServiceTest extends AbstractTestCase
         $foreignKey = new Varchar($column->reveal());
         $foreignKey->setStringService($this->string);
 
-        $db = new Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My', 'user' => $userType***REMOVED***);
 
         $this->columns = $this->prophesize('Gear\Column\ColumnService');
         $this->columns->getColumns($db)->willReturn([$primaryKey, $foreignKey***REMOVED***)->shouldBeCalled();
@@ -86,7 +86,7 @@ class ViewServiceTest extends AbstractTestCase
         $this->view->setLocationDir(vfsStream::url('module'));
     }
 
-    public function createAction($actionName)
+    public function createAction($actionName, $userType = 'all')
     {
         return new Action([
             'name' => $actionName,
@@ -94,7 +94,8 @@ class ViewServiceTest extends AbstractTestCase
                 [
                     'name' => 'MyController',
                     'object' => '%s\Controller\MyController',
-                    'db' => 'My'
+                    'db' => 'My',
+                    'user' => $userType
                 ***REMOVED***
             ),
         ***REMOVED***);
@@ -107,8 +108,6 @@ class ViewServiceTest extends AbstractTestCase
     public function testCreateAction($columns)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-
-        $db = new Db(['table' => 'My'***REMOVED***);
 
         $this->view->setColumnService($columns);
 
@@ -206,13 +205,11 @@ class ViewServiceTest extends AbstractTestCase
 
     public function getListDbUserType()
     {
-        $columns = $this->setUpBasicColumn()[0***REMOVED***[0***REMOVED***;
-
         $dbs = [***REMOVED***;
 
         foreach (['low-strict', 'all', 'strict'***REMOVED*** as $userType) {
             $dbs[***REMOVED*** = [
-                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $columns, sprintf('list-%s', $userType)
+                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $this->setUpBasicColumn($userType)[0***REMOVED***[0***REMOVED***, sprintf('list-%s', $userType), $userType
             ***REMOVED***;
         }
 
@@ -224,7 +221,7 @@ class ViewServiceTest extends AbstractTestCase
      * @group fixR
      * @dataProvider getListDbUserType
      */
-    public function testListAction($db, $columns, $userType)
+    public function testListAction($db, $columns, $template, $userType)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
@@ -232,7 +229,7 @@ class ViewServiceTest extends AbstractTestCase
 
         $this->view->setColumnService($columns);
 
-        $action = $this->createAction('List');
+        $action = $this->createAction('List', $userType);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
@@ -245,7 +242,7 @@ class ViewServiceTest extends AbstractTestCase
         $this->assertStringEndsWith('list.phtml', $file);
 
         $this->assertEquals(
-            file_get_contents($this->template.'/'.$userType.'.phtml'),
+            file_get_contents($this->template.'/'.$template.'.phtml'),
             file_get_contents($file)
         );
     }

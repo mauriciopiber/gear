@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Column\Mvc\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
 use GearJson\Action\Action;
+use GearJson\Db\Db;
 use Gear\Constructor\Helper;
 use GearJson\Schema\SchemaServiceTrait;
 
@@ -90,6 +91,15 @@ class ViewService extends AbstractJsonService
                  break;
         }
     }
+
+    public function getUserType(Db $db)
+    {
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\View\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
+
 
     /**
      * Cria a coleção de View para o Mvc
@@ -436,26 +446,32 @@ class ViewService extends AbstractJsonService
     {
         $this->action = $action;
         $this->db = $action->getController()->getDb();
+        $this->user = $this->getUserType($this->db);
+
         $this->tableName = $this->db->getTable();
+
+        $options = [
+            'row' => $this->getListRow(),
+            'label' => $this->str('label', $this->action->getController()->getNameOff()),
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'controller' => $this->str('class', $this->action->getController()->getName()),
+            'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
+            'var' => $this->str('var', $this->action->getController()->getNameOff()),
+            'action' => $this->str('class', $this->action->getName()),
+            'controllerViewFolder' => sprintf(
+                '%s/%s',
+                $this->str('url', $this->getModule()->getModuleName()),
+                $this->str('url', $this->action->getController()->getNameOff())
+            )
+        ***REMOVED***;
+
+        $options['userId'***REMOVED*** = $this->user->getUserIdList();
 
         return $this->getFileCreator()->createFile(
             'template/module/view/list.table.phtml',
-            array(
-                'row' => $this->getListRow(),
-                'label' => $this->str('label', $this->action->getController()->getNameOff()),
-                'module' => $this->str('class', $this->getModule()->getModuleName()),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-                'class' => $this->str('class', $action->getController()->getNameOff()),
-                'controller' => $this->str('class', $this->action->getController()->getName()),
-                'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
-                'var' => $this->str('var', $this->action->getController()->getNameOff()),
-                'action' => $this->str('class', $this->action->getName()),
-                'controllerViewFolder' => sprintf(
-                    '%s/%s',
-                    $this->str('url', $this->getModule()->getModuleName()),
-                    $this->str('url', $this->action->getController()->getNameOff())
-                )
-            ),
+            $options,
             'list.phtml',
             $this->getLocationDir()
         );
@@ -498,6 +514,8 @@ class ViewService extends AbstractJsonService
 
         $template = '';
 
+        $tableName = $this->str('var', $this->db->getTable());
+
         $delHref = "<?php echo \$this->url('{$delAction}',"
                  . "array('id' => \$this->{$primaryKey})); ?>/{{{$primaryName}}}";
 
@@ -510,10 +528,11 @@ class ViewService extends AbstractJsonService
 {$indent}    <a class="btn btn-info btn-xs" href="<?php echo \$this->url('{$viewAction}');?>/{{{$primaryName}}}">
 {$indent}        <span class="glyphicon glyphicon-resize-full"></span>
 {$indent}    </a>
-{$indent}    <a class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
+{$indent}    <a ng-show="list.id == ${tableName}.user" class="btn btn-primary btn-xs" href="<?php echo \$this->url('{$editAction}');?>/{{{$primaryName}}}">
 {$indent}        <span class="glyphicon glyphicon-pencil"></span>
 {$indent}    </a>
-{$indent}    <a class="btn btn-danger btn-xs"
+{$indent}    <a ng-show="list.id == ${tableName}.user"
+{$indent}        class="btn btn-danger btn-xs"
 {$indent}        ng-click="\$event.preventDefault();list.exclude.showDialog({$primaryName});"
 {$indent}        ng-href="{$delHref}">
 {$indent}        <i class="glyphicon glyphicon-trash"></i>
@@ -596,7 +615,10 @@ EOS;
 
     public function createActionList($action)
     {
+
         $this->action = $action;
+        $this->db = $action->getController()->getDb();
+        $this->user = $this->getUserType($this->db);
         $this->columns = $this->getColumnService()->getColumns($action->getController()->getDb());
 
         $this->createSearch($action);
