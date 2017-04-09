@@ -38,7 +38,7 @@
 <?php endif;?>
             return $this->redirect()->toRoute(
                 self::EDIT,
-                array('id' => $update->getId<?= $this->data?>(), 'success' => 1)
+                ['id' => $update->getId<?= $this->data?>(), 'success' => 1***REMOVED***
             );
         }
 
@@ -51,7 +51,7 @@
         $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
-            array(
+            [
                 'form' => $this->form,
                 'error' => $this->error,
                 'success' => $sucesso,
@@ -60,6 +60,6 @@
                 'contexto' => '<?php echo $this->dataUrl;?>',
 <?php endif; ?>
                 'id<?= $this->data?>' => $<?php echo $this->idVar.PHP_EOL;?>
-            )
+            ***REMOVED***
         );
     }

@@ -21,10 +21,10 @@
 
         return new ViewModel(
             array_merge(
-                array(
+                [
                     'id' => $data->getId<?= $this->data?>(),
-<?php echo $this->imageView;?>
-                ),
+<?php echo ($this->imageView) ? $this->imageView.PHP_EOL : '';?>
+                ***REMOVED***,
                 $this->get<?= $this->data?>Service()->extract($data)
             )
         );
