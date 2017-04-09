@@ -17,6 +17,7 @@
 
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+<?php echo $this->mockusertype;?>
 
         $this->controller->set<?php echo $this->tableName;?>Form($this-><?php echo $this->tableVar;?>Form->reveal());
         $this->controller->set<?php echo $this->tableName;?>Service($this-><?php echo $this->tableVar;?>Service->reveal());

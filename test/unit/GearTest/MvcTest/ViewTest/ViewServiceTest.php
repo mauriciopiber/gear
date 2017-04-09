@@ -5,35 +5,26 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
+use GearJson\Db\Db;
+use GearBase\Util\String\StringService;
+use GearBase\Util\File\FileService;
+use GearBase\Util\Dir\DirService;
+use Gear\Module;
+use Gear\Creator\TemplateService;
+use Gear\Creator\File;
+use Gear\Mvc\View\ViewService;
+use Gear\Column\Integer\PrimaryKey;
+use Gear\Column\Varchar\Varchar;
 
 /**
  * @group View
  */
 class ViewServiceTest extends AbstractTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        vfsStream::setup('module');
-
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/view';
-
-        $this->string = new \GearBase\Util\String\StringService();
-
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
-
-        $this->dir = new \GearBase\Util\Dir\DirService();
-    }
 
     public function setUpBasicColumn()
     {
+        $this->string = new StringService();
 
         $primaryKeyConst = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
         $primaryKeyConst->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
@@ -44,8 +35,7 @@ class ViewServiceTest extends AbstractTestCase
         $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
         $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
 
-        $primaryKey = new \Gear\Column\Integer\PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
-        $this->string = new \GearBase\Util\String\StringService();
+        $primaryKey = new PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
         $primaryKey->setStringService($this->string);
 
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
@@ -53,15 +43,10 @@ class ViewServiceTest extends AbstractTestCase
         $column->getName()->willReturn('dep_name')->shouldBeCalled();
         $column->getTableName()->willReturn('my')->shouldBeCalled();
 
-        $foreignKey = new \Gear\Column\Varchar\Varchar($column->reveal());
-        $this->string = new \GearBase\Util\String\StringService();
+        $foreignKey = new Varchar($column->reveal());
         $foreignKey->setStringService($this->string);
 
-        //$columnTest = $this->prophesize('Gear\Column\Integer\ForeignKey');
-
-        //$columns = $this->prophesize('Gear')
-
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My'***REMOVED***);
 
         $this->columns = $this->prophesize('Gear\Column\ColumnService');
         $this->columns->getColumns($db)->willReturn([$primaryKey, $foreignKey***REMOVED***)->shouldBeCalled();
@@ -73,6 +58,48 @@ class ViewServiceTest extends AbstractTestCase
         ***REMOVED***;
     }
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        vfsStream::setup('module');
+
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+        $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/view';
+
+        $this->string = new StringService();
+
+        $template = new TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
+
+        $fileService        = new FileService();
+        $this->fileCreator  = new File($fileService, $template);
+
+        $this->dir = new DirService();
+
+        $this->view = new ViewService();
+        $this->view->setDirService($this->dir);
+        $this->view->setStringService($this->string);
+        $this->view->setFileCreator($this->fileCreator);
+        $this->view->setModule($this->module->reveal());
+        $this->view->setLocationDir(vfsStream::url('module'));
+    }
+
+    public function createAction($actionName)
+    {
+        return new Action([
+            'name' => $actionName,
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'My'
+                ***REMOVED***
+            ),
+        ***REMOVED***);
+    }
+
     /**
      * @group ppfx
      * @dataProvider setUpBasicColumn
@@ -81,27 +108,13 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
-        $view->setColumnService($columns);
-        $view->setLocationDir(vfsStream::url('module'));
+        $this->view->setColumnService($columns);
 
-        $action = new Action([
-            'name' => 'Create',
-            'controller' => new Controller(
-            [
-                'name' => 'MyController',
-                'object' => '%s\Controller\MyController',
-                'db' => 'My'
-            ***REMOVED***),
-        ***REMOVED***);
+        $action = $this->createAction('Create');
 
-        $file = $view->createActionAdd($action);
+        $file = $this->view->createActionAdd($action);
 
         $this->assertStringEndsWith('create.phtml', $file);
 
@@ -118,34 +131,18 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
-        $view->setColumnService($columns);
-        $view->setLocationDir(vfsStream::url('module'));
+        $this->view->setColumnService($columns);
 
-        $action = new Action([
-            'name' => 'Create',
-            'controller' => new Controller(
-                [
-                    'name' => 'MyController',
-                    'object' => '%s\Controller\MyController',
-                    'db' => 'My'
-
-                ***REMOVED***
-            ),
-        ***REMOVED***);
+        $action = $this->createAction('Edit');
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
-        $view->setTableService($this->table->reveal());
+        $this->view->setTableService($this->table->reveal());
 
-        $file = $view->createActionEdit($action);
+        $file = $this->view->createActionEdit($action);
 
         $this->assertStringEndsWith('edit.phtml', $file);
 
@@ -162,29 +159,13 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
-        $view->setColumnService($columns);
-        $view->setLocationDir(vfsStream::url('module'));
+        $this->view->setColumnService($columns);
 
-        $action = new Action([
-            'name' => 'Create',
-            'controller' => new Controller(
-                [
-                    'name' => 'MyController',
-                    'object' => '%s\Controller\MyController',
-                    'db' => 'My'
-                ***REMOVED***
-            ),
-            'db' => $db
-        ***REMOVED***);
+        $action = $this->createAction('SearchForm');
 
-        $file = $view->createSearch($action);
+        $file = $this->view->createSearch($action);
 
         $this->assertStringEndsWith('search-form.phtml', $file);
 
@@ -201,83 +182,70 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
-        $view->setColumnService($columns);
-        $view->setLocationDir(vfsStream::url('module'));
+        $this->view->setColumnService($columns);
 
-        $action = new Action([
-            'name' => 'Create',
-            'controller' => new Controller(
-                [
-                    'name' => 'MyController',
-                    'object' => '%s\Controller\MyController',
-                    'db' => 'My'
-                ***REMOVED***
-            ),
-        ***REMOVED***);
+        $action = $this->createAction('View');
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
-        $view->setTableService($this->table->reveal());
+        $this->view->setTableService($this->table->reveal());
 
-        $file = $view->createActionView($action);
+        $file = $this->view->createActionView($action);
 
         $this->assertStringEndsWith('view.phtml', $file);
 
         $this->assertEquals(
             file_get_contents($this->template.'/view.phtml'),
             file_get_contents($file)
-            );
+        );
     }
+
+
+    public function getListDbUserType()
+    {
+        $columns = $this->setUpBasicColumn()[0***REMOVED***[0***REMOVED***;
+
+        $dbs = [***REMOVED***;
+
+        foreach (['low-strict', 'all', 'strict'***REMOVED*** as $userType) {
+            $dbs[***REMOVED*** = [
+                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $columns, sprintf('list-%s', $userType)
+            ***REMOVED***;
+        }
+
+        return $dbs;
+    }
+
 
     /**
      * @group fixR
-     * @dataProvider setUpBasicColumn
+     * @dataProvider getListDbUserType
      */
-    public function testListAction($columns)
+    public function testListAction($db, $columns, $userType)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new \GearJson\Db\Db(['table' => 'My'***REMOVED***);
+        //$db = new Db(['table' => 'My'***REMOVED***);
 
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
-        $view->setColumnService($columns);
-        $view->setLocationDir(vfsStream::url('module'));
+        $this->view->setColumnService($columns);
 
-        $action = new Action([
-            'name' => 'Create',
-            'controller' => new Controller(
-                [
-                    'name' => 'MyController',
-                    'object' => '%s\Controller\MyController',
-                    'db' => 'My'
-                ***REMOVED***
-            ),
-        ***REMOVED***);
+        $action = $this->createAction('List');
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
         $this->table->getPrimaryKeyColumnName('My')->willreturn('id_my')->shouldBeCalled();
 
-        $view->setTableService($this->table->reveal());
+        $this->view->setTableService($this->table->reveal());
 
-        $file = $view->createListView($action);
+        $file = $this->view->createListView($action);
 
         $this->assertStringEndsWith('list.phtml', $file);
 
         $this->assertEquals(
-            file_get_contents($this->template.'/list.phtml'),
+            file_get_contents($this->template.'/'.$userType.'.phtml'),
             file_get_contents($file)
         );
     }
@@ -288,21 +256,8 @@ class ViewServiceTest extends AbstractTestCase
      */
     public function testBuildAction()
     {
-        /**
-        $this->module->getPublicJsSpecEndFolder()
-        ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
-        ->shouldBeCalled();
-        */
-
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-
-        $view = new \Gear\Mvc\View\ViewService();
-        $view->setDirService($this->dir);
-        $view->setStringService($this->string);
-        $view->setFileCreator($this->fileCreator);
-        $view->setModule($this->module->reveal());
 
         $action = new Action([
             'name' => 'MyAction',
@@ -314,11 +269,9 @@ class ViewServiceTest extends AbstractTestCase
             )
         ***REMOVED***);
 
-
-        $file = $view->build($action);
+        $file = $this->view->build($action);
 
         $this->assertStringEndsWith('/my/my-action.phtml', $file);
-
 
         $this->assertEquals(
             file_get_contents($this->template.'/action.phtml'),

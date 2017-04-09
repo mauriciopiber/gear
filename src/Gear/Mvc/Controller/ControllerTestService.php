@@ -122,6 +122,14 @@ class ControllerTestService extends AbstractMvcTest implements
         );
     }
 
+    public function getUserType(Db $db)
+    {
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\ControllerTest\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
+
     public function introspectFromTable(Db $mvc)
     {
         $this->db           = $mvc;
@@ -268,6 +276,7 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***
         );
 
+        $user = $this->getUserType($this->db);
 
         $options['selectView'***REMOVED*** = ($this->db->getUser() === 'low-strict' ? 'selectViewById' : 'selectById');
         //$options['mockZfc'***REMOVED*** =
@@ -286,8 +295,12 @@ class ControllerTestService extends AbstractMvcTest implements
 
             $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
             $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
+
         }
 
+        if ($this->db->getUser() == 'low-strict') {
+            $construct['mockusertype'***REMOVED*** = $user->getMockZfcAuthenticate();
+        }
 
 
         $options['service'***REMOVED*** = $this->getServiceManager()

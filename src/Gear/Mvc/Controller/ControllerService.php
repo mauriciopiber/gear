@@ -102,6 +102,14 @@ class ControllerService extends AbstractMvc implements
         return $this->file->render();
     }
 
+    public function getUserType(Db $db)
+    {
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\Controller\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
+
     public function introspectFromTable(Db $db)
     {
         $this->db = $db;
@@ -154,15 +162,19 @@ class ControllerService extends AbstractMvc implements
             )
         );
 
-        //$user
+        $user = $this->getUserType($this->db);
 
 
-        //$optionsList = [***REMOVED***
+        $optionsList = [***REMOVED***;
+        $optionsList['idUser'***REMOVED*** = $user->getZfcAuthenticateId();
         //$optionsList =
 
         $options['listAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/controller/db/list.phtml',
-            $this->getCommonActionData()
+            array_merge(
+                $optionsList,
+                $this->getCommonActionData()
+            )
         );
 
         $options['deleteAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
