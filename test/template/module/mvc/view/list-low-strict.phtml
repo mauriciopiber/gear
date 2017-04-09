@@ -2,6 +2,7 @@
 <div ng-controller="MyListController as list">
     <script>
         {{ data = <?php echo $this->data;?> }}
+        {{ id = <?php echo $this->id;?> }}
     </script>
     <div class="row">
         <div class="col-lg-4">
@@ -51,10 +52,11 @@
                             <a class="btn btn-info btn-xs" href="<?php echo $this->url('my-module/my/view');?>/{{my.idMy}}">
                                 <span class="glyphicon glyphicon-resize-full"></span>
                             </a>
-                            <a class="btn btn-primary btn-xs" href="<?php echo $this->url('my-module/my/edit');?>/{{my.idMy}}">
+                            <a ng-show="list.id == my.user" class="btn btn-primary btn-xs" href="<?php echo $this->url('my-module/my/edit');?>/{{my.idMy}}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
-                            <a class="btn btn-danger btn-xs"
+                            <a ng-show="list.id == my.user"
+                                class="btn btn-danger btn-xs"
                                 ng-click="$event.preventDefault();list.exclude.showDialog(my.idMy);"
                                 ng-href="<?php echo $this->url('my-module/my/delete',array('id' => $this->idMy)); ?>/{{my.idMy}}">
                                 <i class="glyphicon glyphicon-trash"></i>
