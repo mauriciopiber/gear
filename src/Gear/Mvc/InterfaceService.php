@@ -31,14 +31,14 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $location = $this->getCode()->getLocation($this->src);
 
 
-        $options = array(
+        $options = [
             'module' => $this->getModule()->getModuleName(),
             'class' => $this->str('class', $this->name),
             'var'   => $this->str('var', $this->name),
             'lenght' => $this->str('var-lenght', $this->name),
             'srcType' => $this->srcType,
             'srcName' => $this->name
-        );
+        ***REMOVED***;
 
         $options['dependency'***REMOVED*** = $this->getCode()->getInterfaceDependency($this->src);
         $options['namespace'***REMOVED*** = $this->getCode()->getNamespace($this->src);
@@ -69,7 +69,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $trait->setLocation($location);
 
         $trait->setOptions(
-            array(
+            [
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->str('class', $this->name),
                 'var'   => $this->str('var', $this->name),
@@ -77,7 +77,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
                 'srcType' => $this->srcType,
                 'srcName' => $this->name,
                 'srcLabel' => $this->str('label', $this->name)
-            )
+            ***REMOVED***
         );
 
         return $trait->render();

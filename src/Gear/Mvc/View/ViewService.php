@@ -559,47 +559,6 @@ EOS;
         return $elements;
     }
 
-    /**
-    public function createListRowView()
-    {
-
-        if ($this->action->getController()->getDb()->getUser() == 'strict') {
-            $dbType = 'all';
-        } else {
-            $dbType = $this->action->getController()->getDb()->getUser();
-        }
-
-        var_dump($dbType);
-
-        $this->addChildView(
-            array(
-                'template' => sprintf('template/module/view/list-row-actions-%s.phtml', $dbType),
-                'placeholder' => 'actions',
-                'config' => array(
-                    'routeEdit' => $this->getActionRoute('edit', $this->action->getController()),
-                    'routeDelete' => $this->getActionRoute('delete', $this->action->getController()),
-                    'routeView' => $this->getActionRoute('view', $this->action->getController()),
-                    'getId' => $this->str('var', $this->action->getController()->getDb()->getPrimaryKeyColumnName()),
-                    'classLabel' => $this->str('label', $this->action->getController()->getNameOff())
-                ),
-            )
-        );
-
-
-        $this->setLocation($this->getLocationDir());
-        $this->setFileName('row.phtml');
-        $this->setView('template/module/view/list-row.table.phtml');
-        $this->setConfigVars(array(
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'controller' => $this->str('class', $this->action->getController()->getName()),
-            'action' => $this->str('class', $this->action->getName()),
-            'elements' => $this->getListRowElements(),
-        ));
-
-        return $this->render();
-    }
-    */
-
     public function getListRowElements()
     {
         $dbColumns = $this->getColumnService()->getColumns($this->db);

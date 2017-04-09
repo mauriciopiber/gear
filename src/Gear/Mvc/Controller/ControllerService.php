@@ -128,13 +128,68 @@ class ControllerService extends AbstractMvc implements
 
         $this->setPrg($this->hasImage);
 
-        $this->addCreateAction();
-        $this->addEditAction();
-        $this->addListAction();
-        $this->addDeleteAction();
-        $this->addViewAction();
-
         $options = [***REMOVED***;
+
+        $options['createAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/create.phtml',
+            array_merge(
+                $this->getCommonActionData(),
+                [
+                    'preValidate' => $this->setPreValidateFromColumns(),
+                    'preShow'     => $this->setPreShowFromColumns(),
+                    'create' => $this->create,
+                ***REMOVED***
+            )
+        );
+
+        $options['editAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/edit.phtml',
+            array_merge(
+                $this->getCommonActionData(),
+                [
+                    'preValidate' => $this->setPreValidateFromColumns(),
+                    'preShow'     => $this->setPreShowFromColumns(),
+                    'update' => $this->update,
+                ***REMOVED***
+            )
+        );
+
+        //$user
+
+
+        //$optionsList = [***REMOVED***
+        //$optionsList =
+
+        $options['listAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/list.phtml',
+            $this->getCommonActionData()
+        );
+
+        $options['deleteAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/delete.phtml',
+            $this->getCommonActionData()
+        );
+
+        $optionsView = [***REMOVED***;
+        //$optionsView['imageQuery = '';
+        //$this->imageView = '';
+
+        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
+            $uploadImage = new \Gear\Table\UploadImage();
+            $uploadImage->setStringService($this->getStringService());
+            //$uploadImage->setServiceLocator($this->getServiceLocator());
+            $optionsView['imageQuery'***REMOVED*** = $uploadImage->getControllerViewQuery($this->tableName);
+            $optionsView['imageView'***REMOVED*** = $uploadImage->getControllerViewView($this->tableName);
+        }
+
+
+        $options['viewAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/mvc/controller/db/'.(($this->table->getUser() == 'low-strict') ? 'view-low-strict' : 'view').'.phtml',
+            array_merge(
+                $optionsView,
+                $this->getCommonActionData()
+            )
+        );
 
         /**
          * @TODO 2 - Verificação de tabela, associação.
@@ -215,136 +270,6 @@ class ControllerService extends AbstractMvc implements
         }
 
         return $this->file->render();
-    }
-
-    public function getControllerSpeciality()
-    {
-        return array(
-            'upload-image'
-        );
-    }
-
-    public function checkImagemService()
-    {
-
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')
-        ) {
-            $this->useImageService = true;
-
-            $this->file->addChildView(
-                array(
-                    'template' => 'template/module/table/upload-image/images-service.phtml',
-                    'config' => array(),
-                    'placeholder' => 'imagemService'
-                )
-            );
-        }
-    }
-
-
-    public function addCreateAction()
-    {
-        $this->file->addChildView(
-            array(
-                'template' => 'template/module/mvc/controller/db/create.phtml',
-                'config' => array_merge(
-                    $this->getCommonActionData(),
-                    array(
-                        'preValidate' => $this->setPreValidateFromColumns(),
-                        'preShow'     => $this->setPreShowFromColumns(),
-                        'create' => $this->create,
-                    )
-                ),
-                'placeholder' => 'createAction'
-            )
-        );
-    }
-
-    public function addEditAction()
-    {
-        $this->file->addChildView(
-            array(
-                'template' => 'template/module/mvc/controller/db/edit.phtml',
-                'config' => array_merge(
-                    $this->getCommonActionData(),
-                    array(
-                        'preValidate' => $this->setPreValidateFromColumns(),
-                        'preShow'     => $this->setPreShowFromColumns(),
-                        'update' => $this->update
-                    )
-                ),
-                'placeholder' => 'editAction'
-            )
-        );
-    }
-
-    public function addListAction()
-    {
-        $this->file->addChildView(
-            array(
-                'template' => 'template/module/mvc/controller/db/list.phtml',
-                'config' => $this->getCommonActionData(),
-                'placeholder' => 'listAction'
-            )
-        );
-    }
-
-    public function addDeleteAction()
-    {
-        $this->file->addChildView(
-            array(
-                'template' => 'template/module/mvc/controller/db/delete.phtml',
-                'config' => $this->getCommonActionData(),
-                'placeholder' => 'deleteAction'
-            )
-        );
-    }
-
-    public function addViewAction()
-    {
-
-        $this->imageQuery = '';
-        $this->imageView = '';
-
-        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-            $uploadImage = new \Gear\Table\UploadImage();
-            $uploadImage->setStringService($this->getStringService());
-            //$uploadImage->setServiceLocator($this->getServiceLocator());
-            $this->imageQuery = $uploadImage->getControllerViewQuery($this->tableName);
-            $this->imageView = $uploadImage->getControllerViewView($this->tableName);
-        }
-
-        if ($this->table->getUser() == 'low-strict') {
-            $this->file->addChildView(
-                [
-                    'template' => 'template/module/mvc/controller/db/view-low-strict.phtml',
-                    'config' => array_merge(
-                        [
-                            'imageQuery' => $this->imageQuery,
-                            'imageView'  => $this->imageView
-                        ***REMOVED***,
-                        $this->getCommonActionData()
-                    ),
-                    'placeholder' => 'viewAction'
-                ***REMOVED***
-            );
-        } else {
-            $this->file->addChildView(
-                [
-                    'imageQuery' => $this->imageQuery,
-                    'imageView'  => $this->imageView,
-                    'template' => 'template/module/mvc/controller/db/view.phtml',
-                    'config' => array_merge(
-                        [
-                            'imageQuery' => $this->imageQuery,
-                            'imageView'  => $this->imageView
-                        ***REMOVED***,
-                        $this->getCommonActionData()),
-                    'placeholder' => 'viewAction'
-                ***REMOVED***
-            );
-        }
     }
 
     public function getCommonActionData()
