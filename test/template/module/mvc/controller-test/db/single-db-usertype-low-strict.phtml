@@ -65,7 +65,7 @@ class SingleDbTableControllerTest extends TestCase
             ->will($this->returnValue($this->zfcUserMock));
 
         $this->controller->getPluginManager()
-            ->setService('zfcUserAuthentication', $this->authMock);
+            ->setService('zfcUserAuthentication', $this->auth);
 
         $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
