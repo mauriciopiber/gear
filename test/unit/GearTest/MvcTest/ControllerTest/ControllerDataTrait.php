@@ -14,9 +14,10 @@ trait ControllerDataTrait
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
+            //[$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,
-            [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null, 'all'***REMOVED***,
+            //[$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null, 'all'***REMOVED***,
+            /*
             [
                 $this->getSingleColumns(),
                 'single-db-namespace',
@@ -27,7 +28,7 @@ trait ControllerDataTrait
                 'invokables',
                 'Custom\CustomNamespace',
                 'all'
-            ***REMOVED***,
+            ***REMOVED***,*/
             [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null, 'all'***REMOVED***,
             [
                 $this->getSingleColumns(),
