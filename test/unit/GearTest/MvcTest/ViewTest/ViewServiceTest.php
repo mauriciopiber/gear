@@ -22,7 +22,7 @@ use Gear\Column\Varchar\Varchar;
 class ViewServiceTest extends AbstractTestCase
 {
 
-    public function setUpBasicColumn($userType = 'all')
+    public function setUpBasicColumn($fuck = null, $userType = 'all')
     {
         $this->string = new StringService();
 
@@ -209,7 +209,7 @@ class ViewServiceTest extends AbstractTestCase
 
         foreach (['low-strict', 'all', 'strict'***REMOVED*** as $userType) {
             $dbs[***REMOVED*** = [
-                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $this->setUpBasicColumn($userType)[0***REMOVED***[0***REMOVED***, sprintf('list-%s', $userType), $userType
+                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $this->setUpBasicColumn(null, $userType)[0***REMOVED***[0***REMOVED***, sprintf('list-%s', $userType), $userType
             ***REMOVED***;
         }
 
