@@ -230,7 +230,6 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getPublicFolder());
 
         if ($this->getType() === 'web') {
-
             $this->getDirService()->mkDir($this->getPublicUploadFolder());
             $this->getDirService()->mkDir($this->getPublicJsFolder());
             $this->getDirService()->mkDir($this->getPublicJsAppFolder());

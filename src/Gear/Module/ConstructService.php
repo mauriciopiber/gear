@@ -314,14 +314,12 @@ class ConstructService extends AbstractJsonService
     public function setConfigLocation($configLocation)
     {
         if ($configLocation && is_file($configLocation)) {
-
             $this->configLocation = $configLocation;
             return $this;
         }
 
 
         if ($configLocation) {
-
             $basePath = $this->getBaseDir();
 
             $configPath = $basePath.'/'.$configLocation;

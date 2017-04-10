@@ -16,7 +16,6 @@ class Strict implements UserTypeServiceTestInterface
     }
 
 EOS;
-
     }
 
     public function renderSelectAll(array $options)
@@ -46,7 +45,6 @@ EOS;
     }
 
 EOS;
-
     }
 
     public function renderDelete(array $options)
@@ -81,8 +79,6 @@ EOS;
     }
 
 EOS;
-
-
     }
 
     public function renderSelectByIdReturnInvalid(array $options)
@@ -114,7 +110,6 @@ EOS;
     }
 
 EOS;
-
     }
 
     public function renderSelectById(array $options)
@@ -143,7 +138,6 @@ EOS;
     }
 
 EOS;
-
     }
 
     public function renderSelectViewById(array $options)

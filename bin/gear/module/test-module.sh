@@ -51,3 +51,7 @@ if [ "$cmd" == "reload-test" ***REMOVED***; then
 	/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"
 	exit 0	
 fi
+
+
+echo "Command $cmd is not defined"
+exit 1

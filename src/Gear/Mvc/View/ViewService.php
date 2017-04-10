@@ -86,9 +86,9 @@ class ViewService extends AbstractJsonService
             case 'View':
                 $this->createActionView($action);
                 $this->getAngularService()->createViewAction($action);
-                 break;
+                break;
             default:
-                 break;
+                break;
         }
     }
 

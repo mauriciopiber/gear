@@ -583,7 +583,6 @@ EOS;
     public function extractClassVariableFromDependency($dependencyInstance)
     {
         if (is_array($dependencyInstance)) {
-
             $variable = (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***))
                 ? $dependencyInstance['aliase'***REMOVED***
                 : $dependencyInstance['class'***REMOVED***;
@@ -629,19 +628,15 @@ EOS;
     public function resolveDependencyVariableName($dependencyInstance)
     {
         if (is_array($dependencyInstance)) {
-
             if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
                 $variable = $dependencyInstance['aliase'***REMOVED***;
-
             } else {
                 $variable = $dependencyInstance['class'***REMOVED***;
             }
 
             $fullname = explode('\\', $variable);
             $variable = end($fullname);
-
         } else {
-
             $variable = $dependencyInstance;
 
 
@@ -651,7 +646,6 @@ EOS;
         }
 
         return $this->str('var', $variable);
-
     }
 
     /**
@@ -702,7 +696,6 @@ EOS;
         $attr = '';
 
         foreach ($dependency as $i => $dependencyInstance) {
-
             if (is_array($dependencyInstance)) {
                 $item = $dependencyInstance['class'***REMOVED***;
 
@@ -711,14 +704,12 @@ EOS;
 
                 if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
                     $variable = $dependencyInstance['aliase'***REMOVED***;
-
                 } else {
                     $variable = $dependencyInstance['class'***REMOVED***;
                 }
 
                 $fullname = explode('\\', $variable);
                 $variable = end($fullname);
-
             } else {
                 $item = $dependencyInstance;
                 $fullname = explode('\\', $item);
@@ -795,8 +786,6 @@ EOS;
         $this->uses = '';
 
         foreach ($data->getDependency() as $alias => $item) {
-
-
             if (is_array($item) && isset($item['ig_t'***REMOVED***) && $item['ig_t'***REMOVED*** === true) {
                 continue;
             }
@@ -804,7 +793,6 @@ EOS;
             //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
             //que não precisam de Traits.
             if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
-
                 $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
             }
         }
@@ -852,8 +840,6 @@ EOS;
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $item) {
-
-
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }

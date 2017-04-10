@@ -25,7 +25,6 @@ class SchemaToolService extends DbAbstractService
         $this->getServiceLocator()
             ->get('console')
             ->writeLine(sprintf('Dropping Column %s for %s', $name, $table->getName()), 3);
-
     }
 
     public function notifyColumnAlreadyDrop($name, $table)
@@ -207,7 +206,8 @@ class SchemaToolService extends DbAbstractService
 
         $table->addColumn('created', 'datetime', array('null' => false));
         $table->update();
-        $this->updateReference($name,
+        $this->updateReference(
+            $name,
             [
                 'created' => (new \DateTime('now'))->format('Y-m-d H:i:s')
             ***REMOVED***
@@ -255,7 +255,6 @@ class SchemaToolService extends DbAbstractService
     public function dropColumn($table, $name, $foreignKey = false)
     {
         if ($table->hasColumn($name)) {
-
             if ($foreignKey) {
                 $table->dropForeignKey($name);
             }
@@ -292,7 +291,6 @@ class SchemaToolService extends DbAbstractService
         $this->addForeignKey($table, 'created_by', 'user', 'id_user');
 
         $this->notifyCreated('created_by');
-
     }
 
     public function notifyCreated($columnName)

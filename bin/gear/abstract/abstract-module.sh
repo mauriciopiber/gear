@@ -83,6 +83,14 @@ function Gear_Module_Reset
     sudo php public/index.php gear schema create $module --basepath=$basePath    
     sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
     sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
+    
+    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
+    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
+    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
+
+
+    echo "Deploy Develoment - Migrations/DB"
+    vendor/bin/database $database $username $password
 }
 
 function Gear_Module_Construct

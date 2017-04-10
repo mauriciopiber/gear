@@ -295,7 +295,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
             $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
             $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
-
         }
 
         if ($this->db->getUser() == 'low-strict') {

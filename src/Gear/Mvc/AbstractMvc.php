@@ -40,6 +40,12 @@ abstract class AbstractMvc extends AbstractJsonService
         return $insertMethods;
     }
 
+    /**
+     * @deprecated Should use Code directly
+     *
+     * @param Controller $controller
+     * @param unknown $lines
+     */
     public function createUse(Controller $controller, $lines)
     {
         $useFile = preg_grep('/^use [0-9a-zA-Z***REMOVED***/', $lines, PREG_OFFSET_CAPTURE);
@@ -66,6 +72,9 @@ abstract class AbstractMvc extends AbstractJsonService
         return $lines;
     }
 
+    /**
+     * @deprecated Should use Code directly
+     */
     public function createUseAttributes(Controller $controller, $lines)
     {
         //pegar os attributes

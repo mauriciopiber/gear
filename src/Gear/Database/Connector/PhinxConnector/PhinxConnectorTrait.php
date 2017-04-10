@@ -18,7 +18,7 @@ trait PhinxConnectorTrait
 
     public function setPhinxConnector(
         PhinxConnector $phinxConnector
-        ) {
+    ) {
             $this->phinxConnector = $phinxConnector;
             return $this;
     }

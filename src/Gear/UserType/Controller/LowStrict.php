@@ -11,6 +11,5 @@ class LowStrict implements UserTypeControllerInterface
                     : null
 
 EOS;
-
     }
 }
