@@ -2,12 +2,13 @@
 
 set -e
 
-bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
+bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="SrcRepository"
 type="cli"
-migration=""
-gearfile="gear-repository.yml"
+construct=()
+construct[1***REMOVED***="gear-repository.yml;"
+build=${2}
 
 source "$bin/gear/module/test-module.sh"
