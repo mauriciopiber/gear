@@ -227,6 +227,7 @@ class Columns extends AbstractMigration
         $imageupload->addColumn('id_columns', 'integer', ['null' => true***REMOVED***);
         $imageupload->addForeignKey('id_columns', 'columns', 'id_columns', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
 
+
         $imageupload->update();
 
 
