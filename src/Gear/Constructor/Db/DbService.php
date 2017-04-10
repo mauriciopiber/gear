@@ -88,7 +88,7 @@ class DbService extends AbstractJsonService
         }
 
         if ($this->getTableService()->verifyTableAssociation($table)) {
-            $this->getActionService()->create($module, $db->getTable().'Controller', 'upload-image');
+            $this->getActionService()->create($module, $db->getTable().'Controller', 'UploadImage');
         }
 
         $db->setTableObject($this->getTableService()->getTableObject($db->getTable()));
