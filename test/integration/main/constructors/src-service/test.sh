@@ -10,4 +10,8 @@ type="cli"
 gearfile="gear-service.yml"
 build=${2}
 
+construct=()
+construct[0***REMOVED***="gear-invokables.yml;"
+construct[1***REMOVED***="gear-factories.yml;"
+
 source "$bin/gear/module/test-module.sh"

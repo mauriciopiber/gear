@@ -44,7 +44,10 @@ class DiagnosticService extends AbstractDiagnostic
 
         switch ($just) {
             case 'composer':
-                $this->errors = array_merge($this->errors, $this->getComposerDiagnosticService()->diagnosticModule($type));
+                $this->errors = array_merge(
+                    $this->errors,
+                    $this->getComposerDiagnosticService()->diagnosticModule($type)
+                );
                 break;
 
             case 'ant':

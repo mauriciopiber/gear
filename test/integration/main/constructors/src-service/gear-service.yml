@@ -1,95 +1,21 @@
 modules: PbrSrcService
 
 src:
-  91:
-    type: Service
+  10:
     name: BasicService
-  92:
     type: Service
-    name: LongNamespaceService
-    namespace: Basic\Feature\Issue\Task    
-  93:
+  1:
+    name: BasicExtends
     type: Service
-    name: BasicNamespaceService
-    namespace: Basic
-  94:
+    extends: Service\BasicService
+  11:
+    name: BasicServiceTwo
+    type: Service    
+    service: factories    
+  2:
+    name: BasicServiceFactories
     type: Service
-    name: BasicExtendsService
-    extends: Service\BasicService        
-  95:
-    type: Service
-    name: BasicImplementsService
-    implements: \Zend\ServiceManager\ServiceLocatorAwareInterface
-    dependency: \Zend\ServiceManager\ServiceLocatorAware
-  96:
-    type: Service
-    name: BasicDependencyService
-    dependency: Service\BasicService
-  97:
-    type: Service
-    name: BasicDependenciesService
-    dependency: Service\BasicService,Basic\Feature\Issue\Task\LongNamespaceService,Basic\BasicNamespaceService
-  98:
-    type: Service
-    name: BasicAbstractService
-    abstract: true
-  99:
-    type: Service
-    name: BasicFactoryService
-    service: factories
-  100:
-    type: Service
-    name: BasicDependencyFactoryService
-    service: factories
-    dependency: Service\BasicService
-  101:
-    type: Service
-    name: BasicDependenciesFactoryService
-    service: factories
-    dependency: Service\BasicService,Service\BasicDependencyService,Service\BasicImplementsService
-  102:
-    type: Service
-    name: CompleteFactoryService
-    extends: Service\BasicAbstractService
-    service: factories
-    dependency: Service\BasicService,Service\BasicDependencyService,Service\BasicImplementsService
-    namespace: Complete\Service
-  103:
-    type: Service
-    name: AbstractCompleteFactoryService
-    extends: Service\BasicAbstractService
-    service: factories
-    dependency: Service\BasicService,Service\BasicDependencyService,Service\BasicImplementsService
-    namespace: Complete\Service
-    abstract: true
-  104:
-    type: Service
-    name: CompleteInvokablesService
-    extends: Service\BasicAbstractService
-    service: invokables
-    dependency: Service\BasicService,Service\BasicDependencyService,Service\BasicImplementsService
-    namespace: Complete\Service
-  104:
-    type: Service
-    name: AbstractCompleteInvokablesService
-    extends: Service\BasicAbstractService
-    dependency: Service\BasicService,Service\BasicDependencyService,Service\BasicImplementsService
-    namespace: Complete\Service
-    service: invokables
-    abstract: true
-  105:
-    type: Interface
-    name: BasicInterface
-    namespace: Interfaces
-  106:
-    type: Interface
-    name: BasicDependenciesInterface
-    extends: Interfaces\BasicInterface
-    dependency: Service\BasicService
-    namespace: Interfaces
-  107:
-    type: Service
-    name: BasicInterfaceUsage
-    implements: Interfaces\BasicDependenciesInterface
-    dependency: Service\BasicService
-                    
+    extends: Service\BasicService
+    service: factories   
+    dependency: Service\BasicServiceTwo 
+    

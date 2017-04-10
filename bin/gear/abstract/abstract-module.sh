@@ -61,6 +61,18 @@ function Gear_Module_Create
     exit 0
 }
 
+function Gear_Module_Clear
+{
+	echo "Running Clear"
+	
+	
+}
+
+function Gear_Module_Integrate
+{
+	echo "Running Integrate"
+}
+
 
 function Gear_Module_Reset
 {

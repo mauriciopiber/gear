@@ -79,13 +79,13 @@ class ArrayService implements ServiceLocatorAwareInterface
                 return '\'' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '\'';
             case "array":
                 $indexed = array_keys($var) === range(0, count($var) - 1);
-                $r = [***REMOVED***;
+                $rTemp = [***REMOVED***;
                 foreach ($var as $key => $value) {
-                    $r[***REMOVED*** = "$indent    "
+                    $rTemp[***REMOVED*** = "$indent    "
                     . ($indexed ? "" : $this->varExport54($key) . " => ")
                     . $this->varExport54($value, "$indent    ");
                 }
-                return "[\n" . implode(",\n", $r) . "\n" . $indent . "***REMOVED***";
+                return "[\n" . implode(",\n", $rTemp) . "\n" . $indent . "***REMOVED***";
             case "boolean":
                 return $var ? "true" : "false";
             default:

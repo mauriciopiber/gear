@@ -5,7 +5,7 @@ versions:
     project: GB
 issues:
   1:
-    summary: "Migrar código ConsoleValidation para GearBase"
+    summary: "Adicionar uma regra de validação pra não poder adicionar invokables com dependência."
     description: "Migrar código ConsoleValidation de GearDeploy para GearBase"
     type: Story
     project: GB
@@ -13,3 +13,5 @@ issues:
     sprint: 27
     dueDate: 24/03/2017
     sprint: gear-base-0.2.46
+  2:
+    summary: "Validação para dependency e extends sem namespace correto"

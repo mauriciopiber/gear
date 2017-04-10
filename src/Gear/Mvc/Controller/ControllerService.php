@@ -195,8 +195,9 @@ class ControllerService extends AbstractMvc implements
         }
 
 
+        $viewTemplate = (($this->table->getUser() == 'low-strict') ? 'view-low-strict' : 'view');
         $options['viewAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
-            'template/module/mvc/controller/db/'.(($this->table->getUser() == 'low-strict') ? 'view-low-strict' : 'view').'.phtml',
+            'template/module/mvc/controller/db/'.$viewTemplate.'.phtml',
             array_merge(
                 $optionsView,
                 $this->getCommonActionData()
