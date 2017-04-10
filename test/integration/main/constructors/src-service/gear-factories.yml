@@ -1,13 +1,6 @@
 modules: PbrSrcService
 
 src:
-  10:
-    name: BasicService
-    type: Service
-  1:
-    name: BasicExtends
-    type: Service
-    extends: Service\BasicService
   11:
     name: BasicServiceTwo
     type: Service    

@@ -1,0 +1,20 @@
+modules: PbrSrcEntity
+
+src:
+### DEPENDENCIES
+    0:
+      name: EntityOneFixture
+      db: EntityOne
+      type: Fixture 
+    1:
+      name: EntityTwoFixture
+      db: EntityTwo
+      type: Fixture
+    2:
+      name: EntityThreeFixture
+      db: EntityThree
+      type: Fixture
+    3:
+      name: EntityFourFixture
+      db: EntityFour
+      type: Fixture
