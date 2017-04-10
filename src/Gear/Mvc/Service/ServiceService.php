@@ -68,12 +68,11 @@ class ServiceService extends AbstractMvc
 
 
         $this->getServiceTestService()->create($this->src);
-
-        if ($this->src->getAbstract() === false) {
+        if ($this->src->getAbstract() !== true) {
             $this->getTraitService()->createTrait($this->src, $location);
         }
 
-        if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {
+        if ($this->src->getService() == 'factories' && $this->src->getAbstract() !== false) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 

@@ -144,7 +144,11 @@ EOS;
 
         foreach ($src->getDependency() as $i => $dependency) {
             $template .= $ndnt;
-            $template .= sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency));
+            $template .= sprintf(
+                $defTemplate,
+                $this->extractVar($dependency, $src),
+                $this->resolveNamespace($dependency)
+            );
 
             if (isset($src->getDependency()[$i+1***REMOVED***)) {
                 $template .= ',';
@@ -168,7 +172,11 @@ EOS;
         $template = PHP_EOL;
 
         foreach ($src->getDependency() as $dependency) {
-            $template .= $ndnt.sprintf($defTemplate, $this->extractVar($dependency, $src), $this->resolveNamespace($dependency)).PHP_EOL;
+            $template .= $ndnt.sprintf(
+                $defTemplate,
+                $this->extractVar($dependency, $src),
+                $this->resolveNamespace($dependency)
+            ).PHP_EOL;
         }
 
         return $template;

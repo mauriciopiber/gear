@@ -5,7 +5,7 @@ if [ $# -lt 2 ***REMOVED***; then
     exit 1
 fi
     
-declare -a availableCmds=("create" "reset" "construct" "test")
+declare -a availableCmds=("create" "reset" "construct" "test" "integrate" "clear")
 
 cmd=${1}
 

@@ -95,11 +95,15 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         } else {
             $table = $this->str('class', $action->getController()->getNameOff());
         }
+        
+        $namespace = ($action->getController()->getNamespace() !== null)
+            ? $action->getController()->getNamespace()
+            : 'Controller';
 
         $controllerInvokable = sprintf(
             '%s\%s\%s',
             $this->getModule()->getModuleName(),
-            ($action->getController()->getNamespace() !== null) ? $action->getController()->getNamespace() : 'Controller',
+            $namespace,
             $table
         );
 
@@ -227,9 +231,16 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
 
         $object = '%s\%s\%s';
 
-        $namespace = ($action->getController()->getNamespace() !== null) ? $action->getController()->getNamespace() : 'Controller';
+        $namespace = ($action->getController()->getNamespace() !== null)
+            ? $action->getController()->getNamespace()
+            : 'Controller';
 
-        $invokeName = sprintf($object, $this->module->getModuleName(), $namespace, $action->getController()->getNameOff());
+        $invokeName = sprintf(
+            $object,
+            $this->module->getModuleName(),
+            $namespace,
+            $action->getController()->getNameOff()
+        );
 
         $actionName = $this->str('url', $action->getName());
 

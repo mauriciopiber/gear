@@ -65,12 +65,16 @@ class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface
 
         $object = '%s\%s\%s';
 
-        $namespace = ($action->getController()->getNamespace() !== null) ? $action->getController()->getNamespace() : 'Controller';
+        $namespace = ($action->getController()->getNamespace() !== null)
+            ? $action->getController()->getNamespace()
+            : 'Controller';
 
-        $invokeName = sprintf($object, $this->module->getModuleName(), $namespace, $action->getController()->getNameOff());
-
-
-
+        $invokeName = sprintf(
+            $object,
+            $this->module->getModuleName(),
+            $namespace,
+            $action->getController()->getNameOff()
+        );
 
         $actionRoute = [
             'options' => [

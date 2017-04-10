@@ -137,7 +137,6 @@ EOS;
      */
     public function renderSelectAll(array $options)
     {
-        $module = $options['module'***REMOVED***;
         $class = $options['class'***REMOVED***;
 
         return <<<EOS

@@ -521,6 +521,9 @@ class ViewService extends AbstractJsonService
 
         $indent = '                        ';
 
+        /**
+         * @TODO
+         */
         switch ($dbType) {
             case 'low-strict':
                 $template = <<<EOS

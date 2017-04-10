@@ -1,0 +1,21 @@
+modules: PbrSrcService
+
+src:
+  10:
+    name: BasicService
+    type: Service
+  1:
+    name: BasicExtends
+    type: Service
+    extends: Service\BasicService
+  11:
+    name: BasicServiceTwo
+    type: Service    
+    service: factories    
+  2:
+    name: BasicServiceFactories
+    type: Service
+    extends: Service\BasicService
+    service: factories   
+    dependency: Service\BasicServiceTwo 
+    

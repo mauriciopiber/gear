@@ -4,6 +4,8 @@ namespace Gear\Mvc\Spec\Feature;
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Action\Action;
 use GearJson\Db\Db;
+use Gear\Column\Varchar\UniqueId;
+use Gear\Column\Integer\PrimaryKey;
 
 class Feature extends AbstractMvcTest
 {
@@ -645,7 +647,7 @@ class Feature extends AbstractMvcTest
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
-            if (!($column instanceof \Gear\Column\Integer\PrimaryKey || $column instanceof \Gear\Column\Varchar\UniqueId)) {
+            if (!($column instanceof PrimaryKey || $column instanceof UniqueId)) {
                 $fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
             }
         }
