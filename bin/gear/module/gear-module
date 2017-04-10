@@ -26,11 +26,11 @@ if [ "$cmd" == "integrate" ***REMOVED***; then
 
     # Params
     if [ $# -lt 7 ***REMOVED***; then
-        echo "usage $0: command module type scriptsDir construct local ci jira"
+        echo "usage $0: command module type scriptsDir construct local ci"
         exit 1
     fi
     
-    Gear_Module_Integrate "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}"
+    Gear_Module_Integrate "${2}" "${3}" "${4}" "${5}" "${6}" "${7}"
 	
 	exit 0
 fi

@@ -11,8 +11,8 @@ source "$headersDir/abstract-version.sh"
 function Gear_Module_Create
 {
     # Params
-    if [ $# -ne 8 ***REMOVED***; then
-        echo "usage: module type scriptDir gearfile migration shouldTestLocal shouldTestCI shouldIntegrate"
+    if [ $# -ne 7 ***REMOVED***; then
+        echo "usage: module type scriptDir construct shouldTestLocal shouldTestCI shouldIntegrate"
         exit 1
     fi
    
@@ -22,11 +22,11 @@ function Gear_Module_Create
     
     type=${2}
     scriptDir=${3}
-    gearfile=${4}
-    migration=${5}
-    shouldTestLocal=${6}
-    shouldTestCI=${7}
-    shouldIntegrate=${8}
+    construct=${4}
+    
+    shouldTestLocal=${5}
+    shouldTestCI=${6}
+    shouldIntegrate=${7}
 
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
         Gear_CI_TearDown "$module" "$modulePath"
@@ -40,7 +40,7 @@ function Gear_Module_Create
     
     Gear_Module_Run_CreateModule "$module" "$type"
     
-    Gear_Module_Construct "$module" "$type" "$scriptDir" "$gearfile" "$migration" "0" "0"
+    Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
         Gear_Module_Run_Ant "$module" "$type"
@@ -89,6 +89,11 @@ function Gear_Module_Reset
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
         
+    if ! [[ -d $modulePath ***REMOVED******REMOVED***; then 
+    	
+    	return
+    fi    
+        
     cd $modulePath 
     vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
     sudo php public/index.php gear schema delete $module --basepath=$basePath
@@ -107,8 +112,8 @@ function Gear_Module_Reset
 
 function Gear_Module_Construct
 {
-    if [ $# -ne 7 ***REMOVED***; then
-        echo "usage: module type scriptDir gearfile migration testLocal testCI"
+    if [ $# -ne 6 ***REMOVED***; then
+        echo "usage: module type scriptDir construct testLocal testCI"
         exit 1
     fi
 
@@ -121,18 +126,36 @@ function Gear_Module_Construct
     
     type=${2}
     scriptDir=${3}
-    gearfile=${4}
-    migration=${5}
+    construct=${4}
+    
+    #echo "Array size: ${#construct[****REMOVED***}"
 
-    # COPY GEARFILE
-    Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
+    #echo "Array items:"
+    for item in ${construct[****REMOVED***}
+    do
+    	
+    	IFS=";"
+        params=($item)
+        
+        gearfile=${params[0***REMOVED***}
+        migration=${params[1***REMOVED***}
+        
+         # COPY GEARFILE
+        Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
-    if [ "$migration" != "" ***REMOVED***; then
-        Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
-        Gear_Util_PrepareForDb "$modulePath"
-    fi
+        if [ "$migration" != "" ***REMOVED***; then
+            Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
+            Gear_Util_PrepareForDb "$modulePath"
+        fi
    
-    Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$gearfile"
+        Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$gearfile"
+    done;
+  
+    exit 1
+    
+    #migration=${5}
+
+   
 }
 
 
