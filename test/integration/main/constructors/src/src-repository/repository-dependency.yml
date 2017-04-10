@@ -1,0 +1,11 @@
+module: Repository
+
+src:
+  0:
+    name: RepositoryDependencyOne
+    type: Repository
+  1:
+    name: RepositoryDependencyTwo
+    type: Repository    
+    dependency: Repository\DependencyTwo
+   
