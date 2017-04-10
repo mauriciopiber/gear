@@ -1,0 +1,44 @@
+modules: PbrSrcEntity
+
+src:
+### DEPENDENCIES
+    0:
+      name: EntityOneForm
+      db: EntityOne
+      type: Form 
+      service: factories
+      template: form-filter
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      
+    1:
+      name: EntityTwoForm
+      db: EntityTwo
+      type: Form
+      service: factories
+      template: form-filter
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'            
+    2:
+      name: EntityThreeForm
+      db: EntityThree
+      type: Form
+      service: factories      
+      template: form-filter
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      
+    3:
+      name: EntityFourForm
+      db: EntityFour
+      type: Form
+      service: factories      
+      template: form-filter
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      

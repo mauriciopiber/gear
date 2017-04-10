@@ -1,0 +1,44 @@
+modules: PbrSrcEntity
+
+src:
+### DEPENDENCIES
+    0:
+      name: EntityOneSearchForm
+      db: EntityOne
+      type: SearchForm 
+      service: factories
+      template: search-form
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'           
+    1:
+      name: EntityTwoSearchForm
+      db: EntityTwo
+      type: SearchForm
+      service: factories      
+      template: search-form
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      
+    2:
+      name: EntityThreeSearchForm
+      db: EntityThree
+      type: SearchForm
+      service: factories      
+      template: search-form
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      
+    3:
+      name: EntityFourSearchForm
+      db: EntityFour
+      type: SearchForm
+      service: factories      
+      template: search-form
+      dependency:
+        0:
+          class: '\Doctrine\ORM\EntityManager'
+          aliase: 'doctrine.entitymanager.orm_default'      
