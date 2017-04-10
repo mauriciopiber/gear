@@ -1,0 +1,39 @@
+modules: PbrSrcEntity
+
+src:
+### DEPENDENCIES
+    0:
+      name: EntityOneRepository
+      db: EntityOne
+      type: Repository 
+      service: factories
+      dependency: 
+        'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+        1: '\GearBase\Repository\QueryBuilder'      
+    1:
+      name: EntityTwoRepository
+      db: EntityTwo
+      type: Repository
+      service: factories
+      dependency: 
+        'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+        1: '\GearBase\Repository\QueryBuilder'      
+    2:
+      name: EntityThreeRepository
+      db: EntityThree
+      type: Repository
+      service: factories
+      dependency: 
+        'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+        1: '\GearBase\Repository\QueryBuilder'      
+    3:
+      name: EntityFourRepository
+      db: EntityFour
+      type: Repository
+      service: factories
+      dependency: 
+        'doctrine.entitymanager.orm_default': '\Doctrine\ORM\EntityManager'
+        1: '\GearBase\Repository\QueryBuilder'      
+      
+      
+      

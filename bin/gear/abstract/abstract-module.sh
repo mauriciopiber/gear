@@ -148,14 +148,12 @@ function Gear_Module_Construct
             Gear_Util_PrepareForDb "$modulePath"
         fi
    
-        Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$gearfile"
+        Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
     done;
-  
-    exit 1
-    
-    #migration=${5}
-
    
+    if [ "$type" == "web" ***REMOVED***; then
+        Gear_Module_Reload "$module"
+    fi
 }
 
 
@@ -166,6 +164,7 @@ function Gear_Module_Run_Construct
     basePath=${3}
     type=${4}
     gearfile=${5}
+    ignore=${6}
     
     if [ "$useOwnConstructor" == "0" ***REMOVED***; then
         cd $modulePath    
@@ -174,10 +173,6 @@ function Gear_Module_Run_Construct
     fi
      
     sudo php public/index.php gear module construct $module $basePath --file=$modulePath/$gearfile
-    
-    if [ "$type" == "web" ***REMOVED***; then
-        Gear_Module_Reload "$module"
-    fi 
 }
 
 
