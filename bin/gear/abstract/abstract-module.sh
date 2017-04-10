@@ -197,19 +197,18 @@ function Gear_Module_Run_Ant
     type=${2}
     build=${3}
     
+    if [ "$build" != "" ***REMOVED***; then
+    	cd $modulePath && ant $build
+    	return
+    fi 
+    
     if [ "$type" == "cli" ***REMOVED***; then
         cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit
         return
     fi
    
-    if [ "$type" == "web" ***REMOVED***; then
-        if [ "$build" == "" ***REMOVED***; then
-        	build="prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor"
-        fi       
-        cd $modulePath && ant $build
-        return
-    fi    
-    
+    cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor
+    return
 }
 
 

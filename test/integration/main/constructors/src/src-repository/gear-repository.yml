@@ -1,25 +1,6 @@
 modules: MyModule
 
 src:
-## entity IntForeignKey
-## fixture IntForeignKey
-
-## entity AllColumnsDb
-## fixture AllColumnsDb
-## repository AllColumnsDb
-
-## entity AllColumnsDbNotNull
-## fixture AllColumnsDbNotNull
-## repository AllColumnsDbNotNull
-
-## entity AllColumnsDbUnique
-## fixture AllColumnsDbUnique
-## repository AllColumnsDbUnique
-
-## entity AllColumnsDbUniqueNotNull
-## fixture AllColumnsDbUniqueNotNull
-## repository AllColumnsDbUniqueNotNull
-
   91:
     type: Repository
     name: BasicRepository
@@ -111,21 +92,4 @@ src:
     name: BasicInterfaceUsage
     implements: Interfaces\BasicDependenciesInterface
     dependency: Repository\BasicRepository
-    
-  0:
-    type: Entity
-    name: IntForeignKey
-    db: IntForeignKey
-    service: invokables
-  1:
-    type: Fixture
-    name: IntForeignKeyFixture
-    service: invokables
-    db: IntForeignKey            
-  2:
-    type: Repository
-    name: IntForeignKeyRepository
-    service: invokables
-    db: IntForeignKey            
-                    
-                    
+                   
