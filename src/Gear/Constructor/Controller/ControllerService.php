@@ -74,7 +74,7 @@ class ControllerService extends AbstractJsonService
             (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null),
             (isset($data['user'***REMOVED***) ? $data['user'***REMOVED*** : null),
             false
-       );
+        );
 
 
         if ($this->controller instanceof ConsoleValidationStatus) {

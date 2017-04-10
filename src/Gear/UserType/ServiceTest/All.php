@@ -30,8 +30,6 @@ class All implements UserTypeServiceTestInterface
     }
 
 EOS;
-
-
     }
 
     public function renderSelectById(array $options)
@@ -53,7 +51,6 @@ EOS;
     }
 
 EOS;
-
     }
 
     public function renderSelectByIdNull()

@@ -27,6 +27,5 @@ class LowStrict implements UserTypeControllerTestInterface
         \$this->controller->getPluginManager()
             ->setService('zfcUserAuthentication', \$this->auth);
 EOS;
-
     }
 }

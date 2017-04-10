@@ -23,6 +23,8 @@ class EntityDatabase extends AbstractMigration
             'entity_four' => ['entity_three', 'entity_two'***REMOVED***
         ***REMOVED***;
         
+        $entitys =[***REMOVED***;
+        
         foreach ($tables as $tableName => $assoc) {http://192.168.1.100:8080/job/gear/job/master/badge/icon
             
             $entity = $this->table($tableName, ['id' => sprintf('id_%s', $tableName)***REMOVED***);
@@ -32,17 +34,21 @@ class EntityDatabase extends AbstractMigration
                 
                 $entity->addColumn(sprintf('id_%s', $dep), 'integer', ['null' => true***REMOVED***);
                 
+                
                 $entity->addForeignKey(
-                    sprintf('id_%s', $tableName), 
-                    $tableName, 
-                    sprintf('id_%s', $tableName), 
+                    sprintf('id_%s', $dep), 
+                    $dep, 
+                    sprintf('id_%s', $dep), 
                     ['delete'=> 'CASCADE', 'update'=> 'CASCADE'***REMOVED***
                 );
+                
             }
             
-            
-            $entity->create();
+            $entitys[***REMOVED*** = $entity;
         }
         
+        foreach ($entitys as $entity) {
+            $entity->create();
+        }
     }
 }

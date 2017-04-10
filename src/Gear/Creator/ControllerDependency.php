@@ -85,8 +85,6 @@ class ControllerDependency extends AbstractDependency
 
         if (!empty($dependencies)) {
             foreach ($dependencies as $dependency) {
-
-
                 if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                     continue;
                 }
@@ -115,7 +113,6 @@ class ControllerDependency extends AbstractDependency
 
         if (!empty($dependencies)) {
             foreach ($dependencies as $i => $dependency) {
-
                 if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                     continue;
                 }

@@ -1,25 +1,6 @@
-modules: MyModule
+modules: PbrSrcService
 
 src:
-## entity IntForeignKey
-## fixture IntForeignKey
-
-## entity AllColumnsDb
-## fixture AllColumnsDb
-## repository AllColumnsDb
-
-## entity AllColumnsDbNotNull
-## fixture AllColumnsDbNotNull
-## repository AllColumnsDbNotNull
-
-## entity AllColumnsDbUnique
-## fixture AllColumnsDbUnique
-## repository AllColumnsDbUnique
-
-## entity AllColumnsDbUniqueNotNull
-## fixture AllColumnsDbUniqueNotNull
-## repository AllColumnsDbUniqueNotNull
-
   91:
     type: Service
     name: BasicService

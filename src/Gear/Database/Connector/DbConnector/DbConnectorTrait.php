@@ -18,7 +18,7 @@ trait DbConnectorTrait
 
     public function setDbConnector(
         DbConnector $dbConnector
-        ) {
+    ) {
             $this->dbConnector = $dbConnector;
             return $this;
     }

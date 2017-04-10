@@ -61,7 +61,6 @@ abstract class AbstractCode implements
     public function resolveName($item)
     {
         if (is_array($item) && isset($item['class'***REMOVED***)) {
-
             $item = $item['class'***REMOVED***;
         }
 
