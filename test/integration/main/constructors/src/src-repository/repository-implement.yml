@@ -1,0 +1,19 @@
+module: Repository
+
+src:
+  1:
+    type: Repository
+    name: RepositoryNamespaceOne
+    namespace: Basic\Feature\Issue\Task
+  2:
+    type: Repository
+    name: RepositoryNamespaceTwo
+    service: factories
+    namespace: Basic\Feature\Issue\Task
+  3:
+    type: Repository
+    name: RepositoryNamespaceThree
+  4:
+    type: Repository
+    name: RepositoryNamespaceFour
+    service: factories
