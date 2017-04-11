@@ -6,6 +6,6 @@ src:
     type: Repository
   1:
     name: RepositoryDependencyTwo
-    type: Repository    
+    type: Repository
     dependency: Repository\DependencyTwo
    
