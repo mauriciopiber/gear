@@ -17,9 +17,24 @@ class Code extends AbstractCode implements
     
     const TEMPLATE_DOCS_PARAMS = '     * @param %s $%s %s';
     
+    const INDENT_CONSTRUCTOR_PARAM = '        ';
+    
+    const SEPARATOR_CONSTRUCTOR_PARAM = ',';
+    
+    const CONSTRUCTOR_ARGS = '%s $%s';
+    
+    const FACTORY_SERVICE_LOCATOR = '$serviceLocator->get(\'%s\')';
+    
     static protected $defaultLocation;
 
     static protected $defaultNamespace;
+    
+    public $varTemplate = [
+        'memcached' => 'cache',
+        'doctrine.entitymanager.orm_default' => 'EntityManager',
+        'translator' => 'translate'
+    ***REMOVED***;
+    
 
     public function getFileDocs($src, $type = null)
     {
@@ -76,7 +91,7 @@ EOS;
 
             $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
         } else {
-            $module = $this->getModule()->getModuleName();
+            //$module = $this->getModule()->getModuleName();
 
             $namespace = $this->resolveNamespace($controller->getNamespace());
 
@@ -125,6 +140,9 @@ EOS;
         return $templates[$templateName***REMOVED***;
     }
 
+    /**
+     * @TODO FIX
+     */
     public function getFactoryServiceLocator($src)
     {
         if (empty($src->getDependency())) {
@@ -132,8 +150,6 @@ EOS;
         }
 
         $ndnt = str_repeat(' ', 4*3);
-
-        $defaultTemplate = '$serviceLocator->get(\'%s\')';
 
         $text = '';
 
@@ -156,7 +172,7 @@ EOS;
                     $fullname = $this->resolveNamespace($dependency);
                 }
 
-                $text .= sprintf($defaultTemplate, $fullname);
+                $text .= sprintf(self::FACTORY_SERVICE_LOCATOR, $fullname);
             }
 
 
@@ -183,7 +199,7 @@ EOS;
         }
 
         if (!empty($data->getDependency())) {
-            foreach ($data->getDependency() as $alias => $item) {
+            foreach ($data->getDependency() as $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
@@ -246,83 +262,7 @@ EOS;
 
         return $html;
     }
-
-    /**
-     * Retorna as atribuições dos argumentos nas variáveis dentro da Classe.
-     */
-    public function getConstructorParams($data)
-    {
-        $args = [***REMOVED***;
-
-        $dependency = $data->getDependency();
-
-        foreach ($dependency as $dependency) {
-            $fullname = explode('\\', $dependency[0***REMOVED***);
-            $name = end($fullname);
-
-            $args[***REMOVED*** = '$this->'.$this->str('var', $name).' = $'.$this->str('var-lenght', $name);
-        }
-
-        return $args;
-    }
-
-    /**
-     * Retorna as chamadas das dependências utiilzando o serviceLocator dentro da Factory.
-     * Diferença entre Service/Controller.
-     */
-    public function getConstructorServiceLocator($data)
-    {
-        $args = [***REMOVED***;
-
-        $dependency = $data->getDependency();
-
-        foreach ($dependency as $dependency) {
-            $fullname = explode('\\', $dependency[0***REMOVED***);
-            $name = end($fullname);
-
-            if ($data instanceof Controller) {
-                $fullname = explode('\\', $dependency[0***REMOVED***);
-                $name = end($fullname);
-                array_pop($fullname);
-
-                $serviceName = $this->getModule()->getModuleName().'\\';
-                $serviceName .= implode('\\', $fullname).'\\';
-                $serviceName .= $name;
-
-                $args[***REMOVED*** = '$'.$this->str('var', $name).' = $serviceLocator'.PHP_EOL
-                .'->getServiceLocator()'.PHP_EOL
-                .'->get(\''.$serviceName.'\')'.PHP_EOL;
-            } else {
-            }
-        }
-
-        return $args;
-    }
-
-    /**
-     * Retorna a sequência de variáveis que é passada para o constructor dentro da Factory.
-     */
-    public function getConstructorFactoryArguments($data)
-    {
-        $args = [***REMOVED***;
-
-        $dependency = $data->getDependency();
-
-        foreach ($dependency as $dependency) {
-            $fullname = explode('\\', $dependency[0***REMOVED***);
-            $name = end($fullname);
-
-            if ($data instanceof Controller) {
-                $fullname = explode('\\', $dependency[0***REMOVED***);
-                $name = end($fullname);
-
-                $args[***REMOVED*** = '$'.$this->str('var', $name);
-            }
-        }
-
-        return $args;
-    }
-
+    
     public function getExtends($data)
     {
         if ($data->getExtends() === null) {
@@ -345,28 +285,10 @@ EOS;
 
     public function getNamespace($data)
     {
-        if (!empty($data->getNamespace())) {
-            $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-
-            $namespace .= $data->getNamespace();
-            return $namespace;
-            //cria um diretório específico.
-        }
-
-        if ($data instanceof Controller) {
-            $type = 'Controller';
-        } elseif ($data->getType() == 'SearchForm') {
-            $type = 'Form\\Search';
-        } elseif ($data->getType() == 'ViewHelper') {
-            $type = 'View\\Helper';
-        } else {
-            $type = $data->getType();
-        }
-
-        return $this->getModule()->getModuleName().'\\'.$type;
+        $class = new ClassObject($data, $this->getModule()->getModuleName());
+        
+        return $class->getNamespace();
     }
-
 
     public function getLocationPath($data)
     {
@@ -553,7 +475,13 @@ EOS;
         foreach ($dependencies as $classDependency) {
             
             $name = $this->str('class', $classDependency->getName());
-            $var = $this->str('var', $classDependency->getVar());
+            $var = $classDependency->getVar();
+           
+            if (array_key_exists($var, $this->varTemplate)) {
+                $var = $this->varTemplate[$var***REMOVED***;
+            }
+            $var = $this->str('var', $var);
+            
             $label = $this->str('label', $name);
             $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
             $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
@@ -590,28 +518,7 @@ EOS;
         
     }
 
-    /*
-    public function extractClassVariableFromDependency($dependencyInstance)
-    {
-        if (is_array($dependencyInstance)) {
-            $variable = (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***))
-                ? $dependencyInstance['aliase'***REMOVED***
-                : $dependencyInstance['class'***REMOVED***;
-
-            $fullname = explode('\\', $variable);
-            $variable = end($fullname);
-
-            return $this->str('var', $variable);
-        }
-
-        $variable = $dependencyInstance;
-        $fullname = explode('\\', $variable);
-        $variable = end($fullname);
-        return $this->str('var', $variable);
-    }
-    */
-
-    public function getConstructorDocs($data)
+     public function getConstructorDocs($data)
     {
         $classObject = new ClassObject($data, $this->getModule()->getModuleName());
         
@@ -632,11 +539,11 @@ EOS;
 
     public function getDepVarTemplate($templateName)
     {
-        $templates = [***REMOVED***;
-        $templates['memcached'***REMOVED*** = 'cache';
-        $templates['doctrine.entitymanager.orm_default'***REMOVED*** = 'entityManager';
-
-        return $templates[$templateName***REMOVED***;
+        if (array_key_exists($templateName, $this->varTemplate)) {
+            return $this->varTemplate[$templateName***REMOVED***;
+        }
+        return $templateName;
+        
     }
     
     public function constructEmptyConstructor($html)
@@ -676,56 +583,33 @@ EOS;
         $attr = '';
 
         foreach ($dependency as $i => $dependencyInstance) {
-            if (is_array($dependencyInstance)) {
-                $item = $dependencyInstance['class'***REMOVED***;
-
-                $fullname = explode('\\', $item);
-                $item = end($fullname);
-
-                if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
-                    $variable = $dependencyInstance['aliase'***REMOVED***;
-                } else {
-                    $variable = $dependencyInstance['class'***REMOVED***;
-                }
-
-                $fullname = explode('\\', $variable);
-                $variable = end($fullname);
-            } else {
-                $item = $dependencyInstance;
-                $fullname = explode('\\', $item);
-                $item = end($fullname);
-
-                $variable = $dependencyInstance;
-
-                $fullname = explode('\\', $variable);
-                $variable = end($fullname);
+        
+            $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getModuleName(), $i);
+            $item = $dependencyObject->getName();
+            $variable = $dependencyObject->getVar();
+            
+            $depVar = $this->getDepVarTemplate($variable);
+            
+            if ($howManyDep > 1) {
+                $args .= self::INDENT_CONSTRUCTOR_PARAM;
             }
 
-            if ($howManyDep > 1) {
-                $args .= '        ';
+            $args .= sprintf(self::CONSTRUCTOR_ARGS, $this->str('class', $item), $this->str('var', $depVar));
+
+            //só coloca o separador se for mais de um parametro
+            if ($howManyDep > 1 && $iterator < $howManyDep-1) {
+                $args .= self::SEPARATOR_CONSTRUCTOR_PARAM;
+                $iterator += 1;
             }
-
-            $args .= $this->str('class', $item).' $'.$this->str('var', $variable);
-
+            
+            //só vai pra nova linha se for mais de um parámetro.
             if ($howManyDep > 1) {
-                if ($iterator < $howManyDep-1) {
-                    $args .= ',';
-                    $iterator += 1;
-                }
-
                 $args .= PHP_EOL;
             }
 
-            if ($item == 'Translator') {
-                $depVar = $this->str('var', 'translate');
-            } elseif (is_string($i) && strlen($i) > 0) {
-                $depVar = $this->getDepVarTemplate($i);
-            } else {
-                $depVar = $variable;
-            }
+            $attr .= '        $this->'.$this->str('var', $depVar).' = $'.$this->str('var', $depVar).';';
 
-            $attr .= '        $this->'.$this->str('var', $depVar).' = $'.$this->str('var', $variable).';';
-
+            //só pula para a próxima linha se for mais de um parametro
             if ($howManyDep > 1) {
                 $attr .= PHP_EOL;
             }

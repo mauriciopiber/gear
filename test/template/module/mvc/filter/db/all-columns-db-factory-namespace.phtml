@@ -21,17 +21,17 @@ class TableFilter extends AbstractFilter
     /**
      * Constructor
      *
-     * @param Adapter    $adapter    Adapter
-     * @param Translator $translator Translator
+     * @param Adapter    $adapter   Adapter
+     * @param Translator $translate Translator
      *
      * @return \MyModule\Custom\CustomNamespace\TableFilter
      */
     public function __construct(
         Adapter $adapter,
-        Translator $translator
+        Translator $translate
     ) {
         $this->adapter = $adapter;
-        $this->translate = $translator;
+        $this->translate = $translate;
 
         return $this;
     }

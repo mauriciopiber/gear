@@ -18,7 +18,7 @@ class ClassObject
     
     public function __construct($data, $module)
     {
-        $this->module = $module;
+        $this->moduleName = $module;
         $this->name = $data->getName();
         
         if (!empty($data->getNamespace())) {
@@ -52,7 +52,7 @@ class ClassObject
     public function addDependency(array $dependencies)
     {
         foreach ($dependencies as $i => $item) {
-            $this->dependency[***REMOVED*** = new ClassDependencyObject($item, $this->module, $i);
+            $this->dependency[***REMOVED*** = new ClassDependencyObject($item, $this->moduleName, $i);
         }
         return $this;
     }
