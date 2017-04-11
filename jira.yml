@@ -15,3 +15,5 @@ issues:
     sprint: gear-base-0.2.46
   2:
     summary: "Validação para dependency e extends sem namespace correto"
+  3:
+    summary: "Validação para não adicionar mesma classe como dependência/extends/implements ao mesmo tempo"

@@ -134,7 +134,7 @@ class RepositoryService extends AbstractMvc
                 $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
             }
 
-            $this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
+            //$this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
             return $this->createDb();
         }
         return $this->createSrc();

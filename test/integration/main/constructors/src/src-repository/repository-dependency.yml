@@ -4,8 +4,20 @@ src:
   0:
     name: RepositoryDependencyOne
     type: Repository
+    
   1:
     name: RepositoryDependencyTwo
     type: Repository
-    dependency: Repository\DependencyTwo
+    service: factories
+  2:
+    name: RepositoryDependencyThree
+    type: Repository
+    service: factories
+    dependency: Repository\RepositoryDependencyOne
+  3:
+    name: RepositoryDependencyFour
+    type: Repository
+    service: factories
+    dependency: Repository\RepositoryDependencyOne,Repository\RepositoryDependencyTwo,Repository\RepositoryDependencyThree
+
    
