@@ -19,6 +19,7 @@ trait RepositoryDataTrait
         //($columns, $template, $nullable, $namespace, $service)
 
         return [
+            /*
             [
                 $this->getAllPossibleColumns(), //columns
                 '', //template
@@ -35,6 +36,7 @@ trait RepositoryDataTrait
                 'Custom\CustomNamespace',
                 'invokables'
             ***REMOVED***,
+            */
             [
                 $this->getAllPossibleColumns(),
                 '-factory',

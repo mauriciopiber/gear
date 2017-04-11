@@ -37,7 +37,7 @@ class TableService extends AbstractService
      * Constructor
      *
      * @param TableRepository       $tableRepository    Table Repository
-     * @param Memcached             $memcached          Memcached
+     * @param Memcached             $cache              Memcached
      * @param AuthenticationService $zfcuserAuthService Authentication Service
      * @param ImageService          $imageService       Image Service
      *
@@ -45,12 +45,12 @@ class TableService extends AbstractService
      */
     public function __construct(
         TableRepository $tableRepository,
-        Memcached $memcached,
+        Memcached $cache,
         AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
         $this->tableRepository = $tableRepository;
-        $this->cache = $memcached;
+        $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;
 
