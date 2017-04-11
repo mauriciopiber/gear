@@ -28,6 +28,36 @@ class CodeTest extends TestCase
         $this->template = (new \Gear\Module())->getLocation().'/../../';
         $this->template .= 'test/template/module/code';
     }
+
+    public function testConstructorEmpty()
+    {
+        $src = new Src(
+            [
+                'name' => 'Test',
+                'type' => 'Service',
+                'service' => 'factories'
+            ***REMOVED***
+        );
+    
+    
+        $constructor = $this->code->getConstructor($src);
+    
+        $expect = <<<EOS
+    /**
+     * Constructor
+     *
+     * @return \MyModule\Service\Test
+     */
+    public function __construct()
+    {
+        return \$this;
+    }
+
+EOS;
+    
+        $this->assertEquals($expect, $constructor);
+    
+    }
     
     public function testConstructorWithDependencies()
     {
@@ -39,7 +69,7 @@ class CodeTest extends TestCase
                 'dependency' => [
                     'Repository\RepositoryOne',
                     'Service\ExternalService',
-                    'Service\ExternalLongNameServiceWillBeCut',
+                    'Service\ExternalLong',
                     'Service\TestingService'
                 ***REMOVED***
             ***REMOVED***
@@ -52,22 +82,22 @@ class CodeTest extends TestCase
     /**
      * Constructor
      *
-     * @param RepositoryOne                    \$repositoryOne        Repository One
-     * @param ExternalService                  \$externalService      External Service
-     * @param ExternalLongNameServiceWillBeCut \$externalLongNameWill External Long Name Service Will Be Cut
-     * @param TestingService                   \$testingService       Testing Service
+     * @param RepositoryOne   \$repositoryOne   Repository One
+     * @param ExternalService \$externalService External Service
+     * @param ExternalLong    \$externalLong    External Long
+     * @param TestingService  \$testingService  Testing Service
      *
      * @return \MyModule\Service\Test
      */
     public function __construct(
         RepositoryOne \$repositoryOne,
         ExternalService \$externalService,
-        ExternalLongNameServiceWillBeCut \$externalLongNameWill,
+        ExternalLong \$externalLong,
         TestingService \$testingService
     ) {
         \$this->repositoryOne = \$repositoryOne;
         \$this->externalService = \$externalService;
-        \$this->externalLongNameServiceWillBeCut = \$externalLongNameWill;
+        \$this->externalLong = \$externalLong;
         \$this->testingService = \$testingService;
 
         return \$this;
@@ -77,6 +107,57 @@ EOS;
         
         $this->assertEquals($expect, $constructor);
 
+    }
+    
+
+    public function testConstructorWithDependenciesLongName()
+    {
+        $src = new Src(
+            [
+                'name' => 'Test',
+                'type' => 'Service',
+                'service' => 'factories',
+                'dependency' => [
+                    'Repository\RepositoryDependencyLongOne',
+                    'Repository\RepositoryDependencyLongTwo',
+                    'Repository\RepositoryDependencyLongThree',
+                    'Repository\RepositoryDependencyLongFour',
+                ***REMOVED***
+            ***REMOVED***
+        );
+    
+    
+        $constructor = $this->code->getConstructor($src);
+    
+        $expect = <<<EOS
+    /**
+     * Constructor
+     *
+     * @param RepositoryDependencyLongOne   \$repositoryOne   Repository Dependency Long One
+     * @param RepositoryDependencyLongTwo   \$repositoryTwo   Repository Dependency Long Two
+     * @param RepositoryDependencyLongThree \$repositoryThree Repository Dependency Long Three
+     * @param RepositoryDependencyLongFour  \$repositoryFour  Repository Dependency Long Four            
+     *
+     * @return \MyModule\Service\Test
+     */
+    public function __construct(
+        RepositoryDependencyLongOne \$repositoryOne,
+        RepositoryDependencyLongTwo \$repositoryTwo,
+        RepositoryDependencyLongThree \$repositoryThree,
+        RepositoryDependencyLongFour \$repositoryFour,            
+    ) {
+        \$this->repositoryDependencyLongOne = \$repositoryOne;
+        \$this->repositoryDependencyLongTwo = \$repositoryTwo;
+        \$this->repositoryDependencyLongThree = \$repositoryThree;
+        \$this->repositoryDependencyLongFour = \$repositoryFour;            
+    
+        return \$this;
+    }
+    
+EOS;
+    
+        $this->assertEquals($expect, $constructor);
+    
     }
 
     public function getDataImplements()
