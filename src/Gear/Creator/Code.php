@@ -14,6 +14,9 @@ class Code extends AbstractCode implements
     FileUseAttributeInterface,
     FileUseInterface
 {
+    
+    const TEMPLATE_DOCS_PARAMS = '     * @param %s $%s %s';
+    
     static protected $defaultLocation;
 
     static protected $defaultNamespace;
@@ -531,55 +534,63 @@ EOS;
      * @param unknown $src
      * @return string
      */
-    public function getParams($src)
+    public function getDocsParams($dependencies)
     {
-        if (empty($src->getDependency())) {
-            return '     *';
+        if (empty($dependencies)) {
+            return $this->printEmptyParams();
         }
-
-
-        $html = '';
-
-        $html = '     *'.PHP_EOL;
+        
 
         $lengthParam = 0;
         $lengthVar = 0;
+        $prepare = [***REMOVED***;
+        /**
+         * 
+         */
+        $this->paramsStack = [***REMOVED***;
 
-        $template = '     * @param %s $%s %s';
-
-        $data = $src->getDependency();
-
-        foreach ($data as $item) {
-            $name = $this->str('class', $this->resolveName($item));
-            $var = $this->resolveDependencyVariableName($item);
+        
+        foreach ($dependencies as $classDependency) {
+            
+            $name = $this->str('class', $classDependency->getName());
+            $var = $this->str('var', $classDependency->getVar());
+            $label = $this->str('label', $name);
             $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
             $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
+            
+            $prepare[***REMOVED*** = ['name' => $name, 'var' => $var, 'label' => $label***REMOVED***;
         }
 
-        /**
-         * @STAG-1
-         */
-        foreach ($data as $item) {
-            $name = $this->str('class', $this->resolveName($item));
-            $var = $this->resolveDependencyVariableName($item);
-            $label = $this->str('label', $name);
-
+        return $this->printConstructorParams($lengthParam, $lengthVar, $prepare);
+    }
+    
+    public function printEmptyParams()
+    {
+        return  '     *';
+    }
+    
+    public function printConstructorParams($lengthParam, $lengthVar, array $prepare)
+    {
+   
+        $html = '     *'.PHP_EOL;
+        
+        foreach ($prepare as $item) {
+        
             $html .= sprintf(
-                $template,
-                $name.str_repeat(' ', ($lengthParam-strlen($name))),
-                $var.str_repeat(' ', ($lengthVar-strlen($var))),
-                $label
+                self::TEMPLATE_DOCS_PARAMS,
+                $item['name'***REMOVED***.str_repeat(' ', ($lengthParam-strlen($item['name'***REMOVED***))),
+                $item['var'***REMOVED***.str_repeat(' ', ($lengthVar-strlen($item['var'***REMOVED***))),
+                $item['label'***REMOVED***
             ).PHP_EOL;
         }
-
-
-
-
+        
         $html .= '     *';
-
+        
         return $html;
+        
     }
 
+    /*
     public function extractClassVariableFromDependency($dependencyInstance)
     {
         if (is_array($dependencyInstance)) {
@@ -598,17 +609,20 @@ EOS;
         $variable = end($fullname);
         return $this->str('var', $variable);
     }
+    */
 
     public function getConstructorDocs($data)
     {
-        $params = $this->getParams($data);
-        $namespace = $this->getNamespace($data).'\\'.$data->getName();
+        $classObject = new ClassObject($data, $this->getModule()->getModuleName());
+        
+        $params = $this->getDocsParams($classObject->getDependency());
+        $namespace = $classObject->getAbsoluteFullName();
 
         $docs = <<<EOS
     /**
      * Constructor
 {$params}
-     * @return \\{$namespace}
+     * @return {$namespace}
      */
 
 EOS;
@@ -624,28 +638,18 @@ EOS;
 
         return $templates[$templateName***REMOVED***;
     }
-
-    public function resolveDependencyVariableName($dependencyInstance)
+    
+    public function constructEmptyConstructor($html)
     {
-        if (is_array($dependencyInstance)) {
-            if (isset($dependencyInstance['aliase'***REMOVED***) && !preg_match('#\\\\#', $dependencyInstance['aliase'***REMOVED***)) {
-                $variable = $dependencyInstance['aliase'***REMOVED***;
-            } else {
-                $variable = $dependencyInstance['class'***REMOVED***;
-            }
-
-            $fullname = explode('\\', $variable);
-            $variable = end($fullname);
-        } else {
-            $variable = $dependencyInstance;
-
-
-            $fullname = explode('\\', $variable);
-
-            $variable = end($fullname);
-        }
-
-        return $this->str('var', $variable);
+        $html .= ')'.PHP_EOL;
+        $html .= '    {';
+        $html .= PHP_EOL;
+        $html .= '        return $this;';
+        $html .= PHP_EOL;
+        $html .= '    }';
+        $html .= PHP_EOL;
+        
+        return $html;
     }
 
     /**
@@ -662,15 +666,7 @@ EOS;
         $html .= '    public function __construct(';
 
         if (count($dependency)==0) {
-            $html .= ')'.PHP_EOL;
-            $html .= '    {';
-            $html .= PHP_EOL;
-            $html .= '        return $this;';
-            $html .= PHP_EOL;
-            $html .= '    }';
-            $html .= PHP_EOL;
-
-            return $html;
+            return $this->constructEmptyConstructor($html);
         }
 
         $howManyDep = count($dependency);
