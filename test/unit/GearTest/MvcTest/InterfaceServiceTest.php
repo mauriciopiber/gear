@@ -3,6 +3,15 @@ namespace GearTest\ServiceTest\MvcTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Module;
+use Gear\Creator\TemplateService;
+use GearBase\Util\File\FileService;
+use GearBase\Util\String\StringService;
+use Gear\Creator\File;
+use Gear\Creator\Code;
+use GearBase\Util\Dir\DirService;
+use Gear\Creator\SrcDependency;
+use Gear\Mvc\InterfaceService;
 
 /**
  * @group Mvc
@@ -19,31 +28,31 @@ class InterfaceTestServiceTest extends AbstractTestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
 
         $this->templates = $this->baseDir.'/../../test/template/module/mvc/interface';
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new TemplateService();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->string  = new \GearBase\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $fileService    = new FileService();
+        $this->string  = new StringService();
+        $fileCreator    = new File($fileService, $template);
 
-        $code = new \Gear\Creator\Code();
+        $code = new Code();
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
-        $code->setDirService(new \GearBase\Util\Dir\DirService());
+        $code->setDirService(new DirService());
 
-        $srcDependency = new \Gear\Creator\SrcDependency();
+        $srcDependency = new SrcDependency();
         $srcDependency->setModule($this->module->reveal());
         $srcDependency->setStringService($this->string);
 
         $code->setSrcDependency($srcDependency);
 
-        $this->interface = new \Gear\Mvc\InterfaceService(
+        $this->interface = new InterfaceService(
             /*
             $this->module->reveal(),
             $fileCreator,

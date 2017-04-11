@@ -217,7 +217,7 @@ EOS;
 
         foreach ($data->getDependency() as $i => $dependency) {
             $class = $this->str('class', $this->resolveName($dependency));
-            $var = $this->str('var', $class);
+            $var = $this->str('var-lenght', $class);
             $label = $this->str('label', $class);
             $namespace = $this->resolveNamespace($dependency);
 
@@ -656,22 +656,6 @@ EOS;
     public function getConstructor($data)
     {
         $dependency = $data->getDependency();
-
-        /**
-
-        if (!empty()) {
-            foreach ($data->getDependency() as $i => $item) {
-
-                if (is_array($item) && isset($item['class'***REMOVED***)) {
-                    $item = $item['class'***REMOVED***;
-                }
-
-                $fullname = explode('\\', $item);
-                $name = end($fullname);
-                $dependency[$i***REMOVED*** = $name;
-            }
-        }
-        */
 
         $html = $this->getConstructorDocs($data);
 
