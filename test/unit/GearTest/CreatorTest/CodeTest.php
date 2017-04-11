@@ -2,6 +2,9 @@
 namespace GearTest\CreatorTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use GearJson\Src\Src;
+use Gear\Creator\Code;
+use GearBase\Util\String\StringService;
 
 /**
  * @group RefactoringSrc
@@ -12,29 +15,85 @@ class CodeTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->code = new \Gear\Creator\Code();
+        $this->code = new Code();
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
+        
 
         $this->code->setModule($this->module->reveal());
+        
+        $this->code->setStringService(new StringService());
+        
+        $this->template = (new \Gear\Module())->getLocation().'/../../';
+        $this->template .= 'test/template/module/code';
+    }
+    
+    public function testConstructorWithDependencies()
+    {
+        $src = new Src(
+            [
+                'name' => 'Test', 
+                'type' => 'Service',
+                'service' => 'factories',
+                'dependency' => [
+                    'Repository\RepositoryOne',
+                    'Service\ExternalService',
+                    'Service\ExternalLongNameServiceWillBeCut',
+                    'Service\TestingService'
+                ***REMOVED***
+            ***REMOVED***
+        );
+        
+        
+        $constructor = $this->code->getConstructor($src);
+        
+        $expect = <<<EOS
+    /**
+     * Constructor
+     *
+     * @param RepositoryOne                    \$repositoryOne        Repository One
+     * @param ExternalService                  \$externalService      External Service
+     * @param ExternalLongNameServiceWillBeCut \$externalLongNameWill External Long Name Service Will Be Cut
+     * @param TestingService                   \$testingService       Testing Service
+     *
+     * @return \MyModule\Service\Test
+     */
+    public function __construct(
+        RepositoryOne \$repositoryOne,
+        ExternalService \$externalService,
+        ExternalLongNameServiceWillBeCut \$externalLongNameWill,
+        TestingService \$testingService
+    ) {
+        \$this->repositoryOne = \$repositoryOne;
+        \$this->externalService = \$externalService;
+        \$this->externalLongNameServiceWillBeCut = \$externalLongNameWill;
+        \$this->testingService = \$testingService;
+
+        return \$this;
+    }
+
+EOS;
+        
+        $this->assertEquals($expect, $constructor);
+
     }
 
     public function getDataImplements()
     {
         return [
             [
-                new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service'***REMOVED***),
+                new Src(['name' => 'Test', 'type' => 'Service'***REMOVED***),
                 [***REMOVED***,
                 PHP_EOL
             ***REMOVED***,
             [
-                new \GearJson\Src\Src(['name' => 'Test', 'type' => 'Service', 'implements' => 'Repository\ImplementsInterface'***REMOVED***),
+                new Src(['name' => 'Test', 'type' => 'Service', 'implements' => 'Repository\ImplementsInterface'***REMOVED***),
                 [***REMOVED***,
                 ' implements ImplementsInterface'."\n",
             ***REMOVED***,
             [
-                new \GearJson\Src\Src(
+                new Src(
                     [
                         'name' => 'Test',
                         'type' => 'Service',
@@ -45,7 +104,7 @@ class CodeTest extends TestCase
                 ' implements'."\n".'    ImplementsInterface,'."\n".'    SecondInterface'."\n",
             ***REMOVED***,
             [
-                new \GearJson\Src\Src(
+                new Src(
                     [
                         'name' => 'Test',
                         'type' => 'Service',
@@ -63,7 +122,7 @@ class CodeTest extends TestCase
      */
     public function testGetUse()
     {
-        $src = new \GearJson\Src\Src(
+        $src = new Src(
             [
                 'name' => 'MyRepository',
                 'type' => 'Repository',
@@ -99,29 +158,23 @@ EOS;
 
     public function testGetFileDocs()
     {
-        $src = new \GearJson\Src\Src([
+        $src = new Src([
             'name' => 'MyFileDocs',
             'type' => 'Repository',
             'namespace' => 'MyDocs'
         ***REMOVED***);
 
-        $template = (new \Gear\Module())->getLocation().'/../../';
-        $template .= 'test/template/module/code/file-docs/simple.phtml';
-
-        $this->assertEquals(file_get_contents($template), $this->code->getFileDocs($src));
+        $this->assertEquals(file_get_contents($this->template.'/file-docs/simple.phtml'), $this->code->getFileDocs($src));
     }
 
     public function testGetClassDocs()
     {
-        $src = new \GearJson\Src\Src([
+        $src = new Src([
             'name' => 'MyFileDocs',
             'type' => 'Repository',
             'namespace' => 'MyDocs'
         ***REMOVED***);
 
-        $template = (new \Gear\Module())->getLocation().'/../../';
-        $template .= 'test/template/module/code/class-docs/simple.phtml';
-
-        $this->assertEquals(file_get_contents($template), $this->code->getClassDocs($src));
+        $this->assertEquals(file_get_contents($this->template.'/class-docs/simple.phtml'), $this->code->getClassDocs($src));
     }
 }
