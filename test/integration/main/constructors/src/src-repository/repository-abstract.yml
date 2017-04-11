@@ -1,0 +1,18 @@
+module: Repository
+
+src:
+  0:
+    name: RepositoryAbstractOne
+    type: Repository
+    abstract: true
+  1:
+    name: RepositoryAbstractTwo
+    type: Repository
+    abstract: true
+    dependency: Repository\DependencyTwo
+  2:
+    name: RepositoryAbstractThree
+    type: Repository
+    abstract: true
+    namespace: AbstractRepository
+   
