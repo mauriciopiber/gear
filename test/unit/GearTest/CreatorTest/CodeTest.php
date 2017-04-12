@@ -114,6 +114,27 @@ EOS;
 
     /**
      * @group token
+     * @group tokenx4
+     */
+    public function testTokenizeAMothafuckerDependency()
+    {
+
+        $data = [
+            ['cache'***REMOVED***,
+            ['entity', 'Three', 'Repository'***REMOVED***,
+            ['zfcuser', 'Auth', 'Service'***REMOVED***,
+        ***REMOVED***;
+
+        $token = $this->code->tokenizeParams($data);
+
+        $this->assertEquals(
+            ['cache', 'threeRepository', 'zfcuserAuthService'***REMOVED***,
+            $token
+        );
+    }
+
+    /**
+     * @group token
      */
     public function testTokenizeParamsEnd()
     {
@@ -130,6 +151,32 @@ EOS;
         $this->assertEquals(
             ['dependencyLongOne', 'dependencyLongTwo', 'dependencyLongThree', 'dependencyLongFour'***REMOVED***,
             $token
+        );
+    }
+
+
+
+    /**
+     * @group token
+     * @group tokenx4
+     * @group tokenx4.1
+     */
+    public function testCutAMothafuckerDependency()
+    {
+
+        $data = [
+            ['cache'***REMOVED***,
+            ['entity', 'Three', 'Repository'***REMOVED***,
+            ['zfcuser', 'Auth', 'Service'***REMOVED***,
+        ***REMOVED***;
+
+        $this->code->cutVars($data);
+
+        $this->assertEquals(
+            [['cache'***REMOVED***,
+            ['Three', 'Repository'***REMOVED***,
+            ['zfcuser', 'Auth', 'Service'***REMOVED******REMOVED***,
+            $data
         );
     }
 

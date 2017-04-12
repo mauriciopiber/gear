@@ -79,7 +79,7 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
         $userId = $this->getReference($referencedName);
         return $this->manager
           ->getRepository('GearAdmin\Entity\User')
-          ->findOneBy(array('idUser' => $userId->getIdUser()));
+          ->findOneBy(['idUser' => $userId->getIdUser()***REMOVED***);
     }
 <?php echo $this->dependency;?>
 }

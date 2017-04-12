@@ -1,9 +1,8 @@
 #!/bin/bash
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../ && pwd )"
+
 cmd=${1}
-
-
-#echo $construct;
+build=${2}
 
 if [ "${construct[****REMOVED***}" == "" ***REMOVED***; then
 	
@@ -22,6 +21,12 @@ fi
 if [ "$cmd" == "integrate" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "integrate" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}" "1" "1"
+	exit 0
+fi
+
+if [ "$cmd" == "single-construct" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "construct" "$module" "$type" "$scriptDir" "${build[****REMOVED***}" "1" "1"
 	exit 0
 fi
 
@@ -44,7 +49,7 @@ fi
 
 if [ "$cmd" == "clear" ***REMOVED***; then
 	
-	/bin/bash "$bin/gear/module/gear-module" "clear" "$module" "0" "0"
+	/bin/bash "$bin/gear/module/gear-module" "clear" "$module" "$type" "0" "0"
 	exit 0	
 fi
 

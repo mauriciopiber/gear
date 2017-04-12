@@ -459,27 +459,25 @@ EOS;
                     }
                 }
 
-
-                //var_dump($i, $name, $historyStep[$i***REMOVED***, in_array($name, $historyStep[$i***REMOVED***));
                 if (in_array($name, $historyStep[$i***REMOVED***)) {
                     $issueStep[$index***REMOVED***[***REMOVED*** = $i;
                 } else {
                     $historyStep[$i***REMOVED***[***REMOVED*** = $name;
                 }
             }
-
-            //$totalLength = array_sum(array_map('strlen', $nameArray));
         }
 
-        //var_dump($historyStep);
 
-        //var_dump($historyStep, $issueStep, $goodStep);
+        $all = 0;
 
-        if (count($issueStep) <= 0) {
+        foreach ($issueStep as $step) {
+            $all += count($step);
+        }
+
+        if ($all <= 0) {
             return;
         }
 
-        //verifica o peso se é pra frente ou voltar.
         $greaterIndex = null;
         $max = 0;
 
@@ -489,9 +487,6 @@ EOS;
                 $max = count($history);
             }
         }
-        //var_dump($historyStep);
-
-        //die();
 
         $move = null;
 
@@ -533,20 +528,21 @@ EOS;
             reset($toRemove);
         }
 
-        //retorna a key [primeira ou última***REMOVED***
-        $toRemoveKey = key($toRemove);
-        //var_dump($toRemoveKey);die();
-        $refKeyToRemove = $toRemove[$toRemoveKey***REMOVED***;
-        var_dump($refKeyToRemove);
-        unset($names[$refKeyToRemove***REMOVED***); //deleta a chave esperada.
-
-        unset($toRemove[$toRemoveKey***REMOVED***);
-
-        reset($toRemove);
-
-        //$names = array_values($names);
-
+        if (empty($toRemove)) {
+            $this->removeName($names, 0);
+            $names = array_values($names);
+        } else {
+            $toRemoveKey = key($toRemove);
+            $this->removeName($names, $toRemoveKey);
+            unset($toRemove[$toRemoveKey***REMOVED***);
+            $toRemove = array_values($toRemove);
+        }
         return $this->iterateRemoveNames($names, $toRemove, $move);
+    }
+
+    public function removeName(&$names, $toRemoveKey)
+    {
+        unset($names[$toRemoveKey***REMOVED***); //deleta a chave esperada.
     }
 
     public function tokenizeParams($paramsStack)

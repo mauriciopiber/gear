@@ -11,6 +11,5 @@ construct=()
 construct[1***REMOVED***="repository.yml;"
 construct[2***REMOVED***="repository-namespace.yml;"
 construct[3***REMOVED***="repository-dependency.yml;"
-build=${2}
 
 source "$bin/gear/module/test-module.sh"
