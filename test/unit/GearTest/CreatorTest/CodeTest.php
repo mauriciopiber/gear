@@ -19,12 +19,12 @@ class CodeTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
-        
+
 
         $this->code->setModule($this->module->reveal());
-        
+
         $this->code->setStringService(new StringService());
-        
+
         $this->template = (new \Gear\Module())->getLocation().'/../../';
         $this->template .= 'test/template/module/code';
     }
@@ -38,10 +38,10 @@ class CodeTest extends TestCase
                 'service' => 'factories'
             ***REMOVED***
         );
-    
-    
+
+
         $constructor = $this->code->getConstructor($src);
-    
+
         $expect = <<<EOS
     /**
      * Constructor
@@ -54,16 +54,19 @@ class CodeTest extends TestCase
     }
 
 EOS;
-    
+
         $this->assertEquals($expect, $constructor);
-    
+
     }
-    
+
+    /**
+     * @group fx2
+     */
     public function testConstructorWithDependencies()
     {
         $src = new Src(
             [
-                'name' => 'Test', 
+                'name' => 'Test',
                 'type' => 'Service',
                 'service' => 'factories',
                 'dependency' => [
@@ -74,10 +77,10 @@ EOS;
                 ***REMOVED***
             ***REMOVED***
         );
-        
-        
+
+
         $constructor = $this->code->getConstructor($src);
-        
+
         $expect = <<<EOS
     /**
      * Constructor
@@ -104,12 +107,156 @@ EOS;
     }
 
 EOS;
-        
+
         $this->assertEquals($expect, $constructor);
 
     }
-    
 
+    /**
+     * @group token
+     */
+    public function testTokenizeParamsEnd()
+    {
+        $data = [
+            ['Repository', 'Dependency', 'Long', 'One'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Two'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Three'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Four'***REMOVED***
+        ***REMOVED***;
+
+        $token = $this->code->tokenizeParams($data);
+
+
+        $this->assertEquals(
+            ['dependencyLongOne', 'dependencyLongTwo', 'dependencyLongThree', 'dependencyLongFour'***REMOVED***,
+            $token
+        );
+    }
+
+    /**
+     * @group x1
+     * @group x1.1
+     *
+     */
+    public function testCutVarStart()
+    {
+        $data = [
+            ['One', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Two', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Three', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Four', 'Repository', 'Dependency', 'Long'***REMOVED***
+        ***REMOVED***;
+
+        $this->code->cutVars($data);
+
+        $expected = [
+            ['One', 'Repository'***REMOVED***,
+            ['Two', 'Repository'***REMOVED***,
+            ['Three', 'Repository'***REMOVED***,
+            ['Four', 'Repository'***REMOVED***,
+        ***REMOVED***;
+
+        $this->assertEquals($expected, $data);
+    }
+
+    /**
+     * @group x1
+     * @group x1.2
+     */
+    public function testCutVarMiddle()
+    {
+        $data = [
+            ['Repository', 'One', 'Dependency'***REMOVED***,
+            ['Repository', 'Two', 'Dependency'***REMOVED***,
+            ['Repository', 'Three', 'Dependency'***REMOVED***,
+            ['Repository', 'Four', 'Dependency'***REMOVED***
+        ***REMOVED***;
+
+        $this->code->cutVars($data);
+
+        $expected = [
+            ['Repository', 'One'***REMOVED***,
+            ['Repository', 'Two'***REMOVED***,
+            ['Repository', 'Three'***REMOVED***,
+            ['Repository', 'Four'***REMOVED***
+        ***REMOVED***;
+
+        $this->assertEquals($expected, $data);
+    }
+
+
+    /**
+     * @group x1
+     * @group x1.3
+     */
+    public function testCutVarEnd()
+    {
+        $data = [
+            ['Repository', 'Dependency', 'Long', 'One'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Two'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Three'***REMOVED***,
+            ['Repository', 'Dependency', 'Long', 'Four'***REMOVED***
+        ***REMOVED***;
+
+        $this->code->cutVars($data);
+
+        $expected = [
+            ['Dependency', 'Long', 'One'***REMOVED***,
+            ['Dependency', 'Long', 'Two'***REMOVED***,
+            ['Dependency', 'Long', 'Three'***REMOVED***,
+            ['Dependency', 'Long', 'Four'***REMOVED***
+        ***REMOVED***;
+
+        $this->assertEquals($expected, $data);
+    }
+
+    /**
+     * @group token
+     */
+    public function testNormalTokenizerStart()
+    {
+        $data = [
+            ['One', 'Repository'***REMOVED***,
+            ['Two', 'Repository'***REMOVED***,
+            ['Three', 'Repository'***REMOVED***,
+            ['Four', 'Repository'***REMOVED***
+        ***REMOVED***;
+
+        $token = $this->code->tokenizeParams($data);
+
+
+        $this->assertEquals(
+            ['oneRepository', 'twoRepository', 'threeRepository', 'fourRepository'***REMOVED***,
+            $token
+        );
+    }
+
+    /**
+     * @group token
+     * @group x2
+     */
+    public function testTokenizeParamsStart()
+    {
+        $data = [
+            ['One', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Two', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Three', 'Repository', 'Dependency', 'Long'***REMOVED***,
+            ['Four', 'Repository', 'Dependency', 'Long'***REMOVED***
+        ***REMOVED***;
+
+        $token = $this->code->tokenizeParams($data);
+
+
+        $this->assertEquals(
+            ['oneRepository', 'twoRepository', 'threeRepository', 'fourRepository'***REMOVED***,
+            $token
+        );
+    }
+
+
+    /**
+     * @group fx2
+     */
     public function testConstructorWithDependenciesLongName()
     {
         $src = new Src(
@@ -125,39 +272,39 @@ EOS;
                 ***REMOVED***
             ***REMOVED***
         );
-    
-    
+
+
         $constructor = $this->code->getConstructor($src);
-    
+
         $expect = <<<EOS
     /**
      * Constructor
      *
-     * @param RepositoryDependencyLongOne   \$repositoryOne   Repository Dependency Long One
-     * @param RepositoryDependencyLongTwo   \$repositoryTwo   Repository Dependency Long Two
-     * @param RepositoryDependencyLongThree \$repositoryThree Repository Dependency Long Three
-     * @param RepositoryDependencyLongFour  \$repositoryFour  Repository Dependency Long Four            
+     * @param RepositoryDependencyLongOne   \$dependencyLongOne   Repository Dependency Long One
+     * @param RepositoryDependencyLongTwo   \$dependencyLongTwo   Repository Dependency Long Two
+     * @param RepositoryDependencyLongThree \$dependencyLongThree Repository Dependency Long Three
+     * @param RepositoryDependencyLongFour  \$dependencyLongFour  Repository Dependency Long Four
      *
      * @return \MyModule\Service\Test
      */
     public function __construct(
-        RepositoryDependencyLongOne \$repositoryOne,
-        RepositoryDependencyLongTwo \$repositoryTwo,
-        RepositoryDependencyLongThree \$repositoryThree,
-        RepositoryDependencyLongFour \$repositoryFour,            
+        RepositoryDependencyLongOne \$dependencyLongOne,
+        RepositoryDependencyLongTwo \$dependencyLongTwo,
+        RepositoryDependencyLongThree \$dependencyLongThree,
+        RepositoryDependencyLongFour \$dependencyLongFour
     ) {
-        \$this->repositoryDependencyLongOne = \$repositoryOne;
-        \$this->repositoryDependencyLongTwo = \$repositoryTwo;
-        \$this->repositoryDependencyLongThree = \$repositoryThree;
-        \$this->repositoryDependencyLongFour = \$repositoryFour;            
-    
+        \$this->repositoryDependencyLongOne = \$dependencyLongOne;
+        \$this->repositoryDependencyLongTwo = \$dependencyLongTwo;
+        \$this->repositoryDependencyLongThree = \$dependencyLongThree;
+        \$this->repositoryDependencyLongFour = \$dependencyLongFour;
+
         return \$this;
     }
-    
+
 EOS;
-    
+
         $this->assertEquals($expect, $constructor);
-    
+
     }
 
     public function getDataImplements()
