@@ -14,27 +14,31 @@ class Code extends AbstractCode implements
     FileUseAttributeInterface,
     FileUseInterface
 {
-    
+
     const TEMPLATE_DOCS_PARAMS = '     * @param %s $%s %s';
-    
+
     const INDENT_CONSTRUCTOR_PARAM = '        ';
-    
+
     const SEPARATOR_CONSTRUCTOR_PARAM = ',';
-    
+
     const CONSTRUCTOR_ARGS = '%s $%s';
-    
+
+    const CONSTRUCTOR_BODY = '        $this->%s = $%s;';
+
     const FACTORY_SERVICE_LOCATOR = '$serviceLocator->get(\'%s\')';
-    
+
+    const LIMIT_PARAM_SIZE = 20;
+
     static protected $defaultLocation;
 
     static protected $defaultNamespace;
-    
+
     public $varTemplate = [
         'memcached' => 'cache',
         'doctrine.entitymanager.orm_default' => 'EntityManager',
         'translator' => 'translate'
     ***REMOVED***;
-    
+
 
     public function getFileDocs($src, $type = null)
     {
@@ -105,25 +109,6 @@ EOS;
     public function getClassDocs($src, $type = null)
     {
         return $this->getFileDocs($src, $type);
-    }
-
-    /**
-     * Retorna os parametros que são usados como argumento no construtor dentro da Classe.
-     */
-    public function getConstructorArguments($data)
-    {
-        $args = [***REMOVED***;
-
-        $dependency = $data->getDependency();
-
-        foreach ($dependency as $dependency) {
-            $fullname = explode('\\', $dependency[0***REMOVED***);
-            $name = end($fullname);
-
-            $args[***REMOVED*** = $this->str('class', $name).' $'.$this->str('var-lenght', $name);
-        }
-
-        return $args;
     }
 
     public function getCustomTemplate($indent, $templateName)
@@ -262,7 +247,7 @@ EOS;
 
         return $html;
     }
-    
+
     public function getExtends($data)
     {
         if ($data->getExtends() === null) {
@@ -286,7 +271,7 @@ EOS;
     public function getNamespace($data)
     {
         $class = new ClassObject($data, $this->getModule()->getModuleName());
-        
+
         return $class->getNamespace();
     }
 
@@ -450,6 +435,123 @@ EOS;
         return 'use '.$namespace;
     }
 
+    public function cutVars(&$paramsStack)
+    {
+        $historyStep = [***REMOVED***;
+        $addNames = [***REMOVED***;
+        $issueStep = [***REMOVED***;
+        $goodStep = [***REMOVED***;
+
+
+        foreach ($paramsStack as $index => $names) {
+
+            foreach ($names as $i => $name) {
+
+                if (!isset($historyStep[$i***REMOVED***)) {
+                    $historyStep[$i***REMOVED*** = [$name***REMOVED***;
+                }
+                if (!isset($issueStep[$index***REMOVED***)) {
+                    $issueStep[$index***REMOVED*** = [***REMOVED***;
+                }
+                if (!isset($goodStep[$index***REMOVED***)) {
+                    $goodStep[$index***REMOVED*** = [***REMOVED***;
+                }
+
+                if (in_array($name, $historyStep[$i***REMOVED***)) {
+                    $issueStep[$index***REMOVED***[***REMOVED*** = $i;
+                } else {
+                    $historyStep[$i***REMOVED***[***REMOVED*** = $name;
+                    $goodStep[$index***REMOVED***[***REMOVED*** = $i;
+                }
+            }
+
+            //$totalLength = array_sum(array_map('strlen', $nameArray));
+        }
+
+        if (count($issueStep) <= 0) {
+            return;
+        }
+
+        //verifica o peso se é pra frente ou voltar.
+        $greaterIndex = null;
+        $max = 0;
+
+        foreach ($historyStep as $index => $history) {
+            if (count($history) > $max) {
+                $greaterIndex = $index;
+                $max = count($history);
+            }
+        }
+
+        $move = null;
+
+        if ($greaterIndex === 0) {
+            $move = true;
+        } else {
+            $final = $greaterIndex/count($historyStep);
+            $move = ($final <= 0.5) ? true : false;
+        }
+
+        //executa os iterates.
+        $tempParams = $paramsStack;
+
+        foreach ($tempParams as $index => $names) {
+            $tempParams[$index***REMOVED*** = $this->iterateRemoveNames($names, $issueStep[$index***REMOVED***, $goodStep[$index***REMOVED***, $move);
+        }
+
+        $paramsStack = $tempParams;
+    }
+
+
+    public function iterateRemoveNames(array $names, array $toRemove, array $toKeep, $move = true)
+    {
+        $size = implode('', $names);
+
+        if (strlen($size) <= self::LIMIT_PARAM_SIZE) {
+            return $names;
+        }
+
+        if ($move === true) {
+            end($toRemove);
+        }
+
+        $toRemoveKey = key($toRemove);
+
+        reset($toRemove);
+
+        $refKeyToRemove = $toRemove[$toRemoveKey***REMOVED***;
+
+        unset($toRemove[$toRemoveKey***REMOVED***);
+
+        //$toR($toRemove);
+
+        unset($names[$refKeyToRemove***REMOVED***);
+
+        $names = array_values($names);
+        /*
+        var_dump($names);
+        var_dump($toRemove);
+        var_dump($toKeep);
+        die();
+        */
+
+
+        return $this->iterateRemoveNames($names, $toRemove, $toKeep, $move);
+    }
+
+    public function tokenizeParams($paramsStack)
+    {
+        $history = [***REMOVED***;
+        $names = [***REMOVED***;
+
+        $this->cutVars($paramsStack);
+
+        foreach ($paramsStack as $index => $nameArray) {
+            $names[***REMOVED*** = $this->str('var', implode('', $nameArray));
+        }
+        return $names;
+    }
+
     /**
      * Create Docs Params for All Classes.
      *
@@ -461,49 +563,42 @@ EOS;
         if (empty($dependencies)) {
             return $this->printEmptyParams();
         }
-        
+
 
         $lengthParam = 0;
         $lengthVar = 0;
         $prepare = [***REMOVED***;
         /**
-         * 
+         *
          */
-        $this->paramsStack = [***REMOVED***;
 
-        
-        foreach ($dependencies as $classDependency) {
-            
+        foreach ($dependencies as $index => $classDependency) {
+
             $name = $this->str('class', $classDependency->getName());
-            $var = $classDependency->getVar();
-           
-            if (array_key_exists($var, $this->varTemplate)) {
-                $var = $this->varTemplate[$var***REMOVED***;
-            }
+            $var = $this->params[$index***REMOVED***;
             $var = $this->str('var', $var);
-            
             $label = $this->str('label', $name);
             $lengthParam = (strlen($name) > $lengthParam) ? strlen($name) : $lengthParam;
             $lengthVar = strlen($var) > $lengthVar ? strlen($var) : $lengthVar;
-            
+
             $prepare[***REMOVED*** = ['name' => $name, 'var' => $var, 'label' => $label***REMOVED***;
         }
 
         return $this->printConstructorParams($lengthParam, $lengthVar, $prepare);
     }
-    
+
     public function printEmptyParams()
     {
         return  '     *';
     }
-    
+
     public function printConstructorParams($lengthParam, $lengthVar, array $prepare)
     {
-   
+
         $html = '     *'.PHP_EOL;
-        
+
         foreach ($prepare as $item) {
-        
+
             $html .= sprintf(
                 self::TEMPLATE_DOCS_PARAMS,
                 $item['name'***REMOVED***.str_repeat(' ', ($lengthParam-strlen($item['name'***REMOVED***))),
@@ -511,17 +606,17 @@ EOS;
                 $item['label'***REMOVED***
             ).PHP_EOL;
         }
-        
+
         $html .= '     *';
-        
+
         return $html;
-        
+
     }
 
      public function getConstructorDocs($data)
     {
         $classObject = new ClassObject($data, $this->getModule()->getModuleName());
-        
+
         $params = $this->getDocsParams($classObject->getDependency());
         $namespace = $classObject->getAbsoluteFullName();
 
@@ -543,9 +638,9 @@ EOS;
             return $this->varTemplate[$templateName***REMOVED***;
         }
         return $templateName;
-        
+
     }
-    
+
     public function constructEmptyConstructor($html)
     {
         $html .= ')'.PHP_EOL;
@@ -555,7 +650,7 @@ EOS;
         $html .= PHP_EOL;
         $html .= '    }';
         $html .= PHP_EOL;
-        
+
         return $html;
     }
 
@@ -568,46 +663,80 @@ EOS;
     {
         $dependency = $data->getDependency();
 
-        $html = $this->getConstructorDocs($data);
-
-        $html .= '    public function __construct(';
-
         if (count($dependency)==0) {
+            $html = $this->getConstructorDocs($data);
+            $html .= '    public function __construct(';
             return $this->constructEmptyConstructor($html);
         }
 
-        $howManyDep = count($dependency);
+        $constructorData = [***REMOVED***;
+
+        foreach ($dependency as $i => $dependencyInstance) {
+
+            $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getModuleName(), $i);
+            $item = $dependencyObject->getName();
+            $name = $this->str('class', $item);
+
+            $variable = $dependencyObject->getVar();
+            $depVar = $this->getDepVarTemplate($variable);
+            $depVar = $this->str('var', $depVar);
+
+            $constructorData[***REMOVED*** = [
+                'var' => $depVar,
+                'name' => $name
+            ***REMOVED***;
+        }
+
+        $this->paramsStack = [***REMOVED***;
+
+        foreach ($constructorData as $classDependency)
+        {
+            $var = $classDependency['var'***REMOVED***;
+
+            preg_match_all('/((?:^|[A-Z***REMOVED***)[a-z***REMOVED***+)/', $var, $matches);
+
+            $this->paramsStack[***REMOVED*** = $matches[0***REMOVED***;
+        }
+
+        $this->params = $this->tokenizeParams($this->paramsStack);
+
+
+        $html = $this->getConstructorDocs($data);
+        $html .= '    public function __construct(';
+        return $this->printConstructor($html, $constructorData);
+    }
+
+    public function printConstructor($html, $constructorData)
+    {
+        $howManyDep = count($constructorData);
         $iterator = 0;
 
         $args = '';
         $attr = '';
 
-        foreach ($dependency as $i => $dependencyInstance) {
-        
-            $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getModuleName(), $i);
-            $item = $dependencyObject->getName();
-            $variable = $dependencyObject->getVar();
-            
-            $depVar = $this->getDepVarTemplate($variable);
-            
+        foreach ($constructorData as $index => $dependency) {
+
+            $item = $dependency['name'***REMOVED***;
+            $depVar = $this->params[$index***REMOVED***;
+
             if ($howManyDep > 1) {
                 $args .= self::INDENT_CONSTRUCTOR_PARAM;
             }
 
-            $args .= sprintf(self::CONSTRUCTOR_ARGS, $this->str('class', $item), $this->str('var', $depVar));
+            $args .= sprintf(self::CONSTRUCTOR_ARGS, $item, $depVar);
 
             //só coloca o separador se for mais de um parametro
-            if ($howManyDep > 1 && $iterator < $howManyDep-1) {
+            if ($howManyDep > 1 && $iterator < ($howManyDep-1)) {
                 $args .= self::SEPARATOR_CONSTRUCTOR_PARAM;
                 $iterator += 1;
             }
-            
+
             //só vai pra nova linha se for mais de um parámetro.
             if ($howManyDep > 1) {
                 $args .= PHP_EOL;
             }
 
-            $attr .= '        $this->'.$this->str('var', $depVar).' = $'.$this->str('var', $depVar).';';
+            $attr .= sprintf(self::CONSTRUCTOR_BODY, $dependency['var'***REMOVED***, $depVar);
 
             //só pula para a próxima linha se for mais de um parametro
             if ($howManyDep > 1) {
@@ -618,29 +747,16 @@ EOS;
         if ($howManyDep > 1) {
             $html .= PHP_EOL;
         }
-
         $html .= $args;
-
-        if ($howManyDep > 1) {
-            $html .= '    ) {'.PHP_EOL;
-        } else {
-            $html .= ')'.PHP_EOL.'    {'.PHP_EOL;
-        }
-
+        $html .= ($howManyDep > 1) ? '    ) {'.PHP_EOL : ')'.PHP_EOL.'    {'.PHP_EOL;
         $html .= $attr;
-
         $html .= PHP_EOL;
 
 
+        $html .= (!($howManyDep > 1)) ? PHP_EOL : '';
+        $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
+        $html .= '    }'.PHP_EOL;
 
-        if ($howManyDep > 1) {
-            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
-            $html .= '    }'.PHP_EOL;
-        } else {
-            $html .= PHP_EOL;
-            $html .= str_repeat(' ', 4*2).'return $this;'.PHP_EOL;
-            $html .= '    }'.PHP_EOL;
-        }
 
         return $html;
     }
