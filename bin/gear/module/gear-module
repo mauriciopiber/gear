@@ -51,12 +51,12 @@ fi
 if [ "$cmd" == "clear" ***REMOVED***; then
 	
 	# Params
-    if [ $# -lt 4 ***REMOVED***; then
-        echo "usage $0: command module local ci"
+    if [ $# -lt 5 ***REMOVED***; then
+        echo "usage $0: command module type local ci"
         exit 1
     fi
    
-    Gear_Module_Clear "${2}" "${3}" "${4}"
+    Gear_Module_Clear "${2}" "${3}" "${4}" "${5}"
 
 	exit 0
    

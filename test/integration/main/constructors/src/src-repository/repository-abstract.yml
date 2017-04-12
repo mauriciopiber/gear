@@ -9,7 +9,7 @@ src:
     name: RepositoryAbstractTwo
     type: Repository
     abstract: true
-    dependency: Repository\DependencyTwo
+    #dependency: Repository\DependencyTwo
   2:
     name: RepositoryAbstractThree
     type: Repository

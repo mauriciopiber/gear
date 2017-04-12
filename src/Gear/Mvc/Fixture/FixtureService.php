@@ -25,6 +25,10 @@ use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 
 class FixtureService extends AbstractMvc
 {
+    const DEPENDENCY_SEPARATOR = ',';
+
+    const INDENT_12 = '            ';
+
     protected $loadedFixtures;
 
     protected $event;
@@ -102,6 +106,11 @@ class FixtureService extends AbstractMvc
         return $this->file->render();
     }
 
+    public function quote($userName)
+    {
+        return '\''.$userName.'\'';
+    }
+
     /**
      * Cria as Dependências da Fixture, utilizada para ordem de carregar.
      *
@@ -118,11 +127,9 @@ class FixtureService extends AbstractMvc
         $count = count($foreign);
 
         if ($count == 0) {
-            $fixture = '\''.$userName.'\'';
-        } elseif ($count > 1) {
-            $fixture = PHP_EOL.'        \''.$userName.'\','.PHP_EOL;
+            $fixture = $this->quote($userName);
         } else {
-            $fixture = '\''.$userName.'\','.PHP_EOL;
+            $fixture = PHP_EOL.self::INDENT_12.$this->quote($userName).self::DEPENDENCY_SEPARATOR.PHP_EOL;
         }
 
         if ($count === 0) {
@@ -139,16 +146,16 @@ class FixtureService extends AbstractMvc
 
             $name = $namespace.'\\'.$fixtureName;
 
-            $fixture .= '            \''.$name.'\'';
+            $fixture .= self::INDENT_12.$this->quote($name);
 
             if (isset($foreign[$i+1***REMOVED***)) {
-                $fixture .= ',';
+                $fixture .= self::DEPENDENCY_SEPARATOR;
             }
 
             $fixture .= PHP_EOL;
         }
 
-        if ($count > 1) {
+        if ($count > 0) {
             $fixture .= '        ';
         }
 

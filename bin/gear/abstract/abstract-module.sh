@@ -63,9 +63,35 @@ function Gear_Module_Create
 
 function Gear_Module_Clear
 {
-	echo "Running Clear"
-	
-	
+    # Params
+    if [ $# -lt 3 ***REMOVED***; then
+        echo "usage: module shouldTestLocal shouldTestCI"
+        exit 1
+    fi
+   
+    # PARAMS
+    basePath=$(Gear_Util_GetBasePath)
+
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    
+    if ! [[ -d $modulePath ***REMOVED******REMOVED***; then 
+    	
+    	return
+    fi    
+        
+    cd $modulePath 
+        
+    sudo rm -R schema
+    sudo rm -R src/$module
+    sudo rm -R test/unit/$moduleTest
+            
+    cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
+    --type=$type \
+    --force \
+    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
 }
 
 function Gear_Module_Integrate
@@ -116,7 +142,7 @@ function Gear_Module_Construct
         echo "usage: module type scriptDir construct testLocal testCI"
         exit 1
     fi
-
+   
     # PARAMS
     basePath=$(Gear_Util_GetBasePath)
 
@@ -127,7 +153,11 @@ function Gear_Module_Construct
     type=${2}
     scriptDir=${3}
     construct=${4}
-    
+
+    if [ "$construct" == "" ***REMOVED***; then
+    	echo "Missing Construct"
+    	exit 1
+    fi    
     #echo "Array size: ${#construct[****REMOVED***}"
 
     #echo "Array items:"
