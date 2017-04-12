@@ -43,22 +43,22 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
     /**
      * Constructor
      *
-     * @param MyVeryLongTableNameExampleService    $myVeryLongTableNameExampleService    My Very Long Table Name Example Service
-     * @param MyVeryLongTableNameExampleForm       $myVeryLongTableNameExampleForm       My Very Long Table Name Example Form
-     * @param MyVeryLongTableNameExampleSearchForm $myVeryLongTableNameExampleSearchForm My Very Long Table Name Example Search Form
-     * @param ImageService                         $imageService                         Image Service
+     * @param MyVeryLongTableNameExampleService    $nameExampleService   My Very Long Table Name Example Service
+     * @param MyVeryLongTableNameExampleForm       $tableNameExampleForm My Very Long Table Name Example Form
+     * @param MyVeryLongTableNameExampleSearchForm $exampleSearchForm    My Very Long Table Name Example Search Form
+     * @param ImageService                         $imageService         Image Service
      *
      * @return \MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleController
      */
     public function __construct(
-        MyVeryLongTableNameExampleService $myVeryLongTableNameExampleService,
-        MyVeryLongTableNameExampleForm $myVeryLongTableNameExampleForm,
-        MyVeryLongTableNameExampleSearchForm $myVeryLongTableNameExampleSearchForm,
+        MyVeryLongTableNameExampleService $nameExampleService,
+        MyVeryLongTableNameExampleForm $tableNameExampleForm,
+        MyVeryLongTableNameExampleSearchForm $exampleSearchForm,
         ImageService $imageService
     ) {
-        $this->myVeryLongTableNameExampleService = $myVeryLongTableNameExampleService;
-        $this->myVeryLongTableNameExampleForm = $myVeryLongTableNameExampleForm;
-        $this->myVeryLongTableNameExampleSearchForm = $myVeryLongTableNameExampleSearchForm;
+        $this->myVeryLongTableNameExampleService = $nameExampleService;
+        $this->myVeryLongTableNameExampleForm = $tableNameExampleForm;
+        $this->myVeryLongTableNameExampleSearchForm = $exampleSearchForm;
         $this->imageService = $imageService;
 
         return $this;

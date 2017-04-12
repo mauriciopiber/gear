@@ -40,20 +40,20 @@ class SingleDbTableController extends AbstractActionController
     /**
      * Constructor
      *
-     * @param SingleDbTableService    $singleDbTableService    Single Db Table Service
-     * @param SingleDbTableForm       $singleDbTableForm       Single Db Table Form
-     * @param SingleDbTableSearchForm $singleDbTableSearchForm Single Db Table Search Form
+     * @param SingleDbTableService    $singleDbTableService Single Db Table Service
+     * @param SingleDbTableForm       $singleDbTableForm    Single Db Table Form
+     * @param SingleDbTableSearchForm $dbTableSearchForm    Single Db Table Search Form
      *
      * @return \MyModule\Custom\CustomNamespace\SingleDbTableController
      */
     public function __construct(
         SingleDbTableService $singleDbTableService,
         SingleDbTableForm $singleDbTableForm,
-        SingleDbTableSearchForm $singleDbTableSearchForm
+        SingleDbTableSearchForm $dbTableSearchForm
     ) {
         $this->singleDbTableService = $singleDbTableService;
         $this->singleDbTableForm = $singleDbTableForm;
-        $this->singleDbTableSearchForm = $singleDbTableSearchForm;
+        $this->singleDbTableSearchForm = $dbTableSearchForm;
 
         return $this;
     }

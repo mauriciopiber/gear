@@ -184,6 +184,89 @@ EOS;
         $this->assertEquals($expected, $data);
     }
 
+    /**
+     * @group token
+     * @group tokenx3
+     * @group tokenx3.1
+     * @group tokenx3.1.1
+     */
+    public function testIterateRemoveNamesBackward()
+    {
+        $issues = [
+            0 => 0,
+            1 => 1,
+            2 => 2,
+            3 => 3,
+            4 => 4,
+            5 => 5,
+        ***REMOVED***;
+
+        $names = [
+            0 => 'My',
+            1 => 'Very',
+            2 => 'Long',
+            3 => 'Table',
+            4 => 'Name',
+            5 => 'Example',
+            6 => 'Search',
+            7 => 'Form',
+        ***REMOVED***;
+
+        $move = false;
+
+        $expected = [
+            0 => 'Example',
+            1 => 'Search',
+            2 => 'Form'
+        ***REMOVED***;
+
+        $this->assertEquals($expected, array_values($this->code->iterateRemoveNames($names, $issues, $move)));
+    }
+
+    /**
+     * @group token
+     * @group tokenx3
+     * @group tokenx3.1
+     * @group tokenx3.1.2
+     */
+    public function testIterateRemoveNamesForward()
+    {
+        $issues = [
+            0 => 0,
+            1 => 1,
+            2 => 2,
+            3 => 3,
+            4 => 4,
+            5 => 5,
+        ***REMOVED***;
+
+        $names = [
+            0 => 'My',
+            1 => 'Very',
+            2 => 'Long',
+            3 => 'Table',
+            4 => 'Name',
+            5 => 'Example',
+            6 => 'Search',
+            7 => 'Form',
+        ***REMOVED***;
+
+        $move = true;
+
+
+        $expected = [
+            'My',
+            'Very',
+            'Long',
+            'Search',
+            'Form'
+        ***REMOVED***;
+
+        $data = $this->code->iterateRemoveNames($names, $issues, $move);
+        $this->assertEquals($expected, array_values($data));
+
+    }
+
 
     /**
      * @group x1
@@ -208,6 +291,45 @@ EOS;
         ***REMOVED***;
 
         $this->assertEquals($expected, $data);
+    }
+
+    /**
+     * @group token
+     * @group tokenx3
+     */
+    public function testTokenizeControllerDbVeryLongDiffName()
+    {
+        $data = [***REMOVED***;
+        $data[***REMOVED*** = explode(' ', 'My Very Long Table Name Example Service');
+        $data[***REMOVED*** = explode(' ', 'My Very Long Table Name Example Form');
+        $data[***REMOVED*** = explode(' ', 'My Very Long Table Name Example Search Form');
+        $data[***REMOVED*** = explode(' ', 'Image Service');
+
+        $token = $this->code->tokenizeParams($data);
+
+        $this->assertEquals(
+            ['nameExampleService', 'tableNameExampleForm', 'exampleSearchForm', 'imageService'***REMOVED***,
+            $token
+        );
+    }
+
+    /**
+     * @group token
+     * @group tokenx2
+     */
+    public function testTokenizeControllerDb()
+    {
+        $data = [***REMOVED***;
+        $data[***REMOVED*** = explode(' ', 'Single Db Table Service');
+        $data[***REMOVED*** = explode(' ', 'Single Db Table Form');
+        $data[***REMOVED*** = explode(' ', 'Single Db Table Search Form');
+
+        $token = $this->code->tokenizeParams($data);
+
+        $this->assertEquals(
+            ['singleDbTableService', 'singleDbTableForm', 'dbTableSearchForm'***REMOVED***,
+            $token
+        );
     }
 
     /**
