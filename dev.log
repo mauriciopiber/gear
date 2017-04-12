@@ -1,0 +1,296 @@
+Buildfile: /var/www/gear-package/gear/build.xml
+
+as-module:
+
+is-as-module:
+
+as-vendor:
+
+is-as-vendor:
+
+as-project:
+
+is-as-project:
+
+set-vendor:
+
+build-helper:
+     [exec***REMOVED*** Building Actor classes for suites: unit
+     [exec***REMOVED***  -> UnitTesterActions.php generated successfully. 0 methods added
+     [exec***REMOVED*** Gear\UnitTester includes modules: Asserts
+
+unit-group-namespace:
+     [exec***REMOVED*** Codeception PHP Testing Framework v2.2.10
+     [exec***REMOVED*** Powered by PHPUnit 5.7.17 by Sebastian Bergmann and contributors.
+     [exec***REMOVED*** [Groups***REMOVED*** tokenx3 
+     [exec***REMOVED*** 
+     [exec***REMOVED*** [1mGear.unit Tests (1) [22m----------------------------------------------------------
+     [exec***REMOVED*** - [35;1mCodeTest:[39;22m Tokenize controller db very long diff name/var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(0)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(2) "My"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(2) "My"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(1)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Very"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Very"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(2)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Long"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Long"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(3)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(5) "Table"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(5) "Table"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(4)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Name"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Name"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(5)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(7) "Example"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Example"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(6)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(7) "Service"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Service"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(0)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(2) "My"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(2) "My"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(1)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Very"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Very"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(2)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Long"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Long"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(3)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(5) "Table"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(5) "Table"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(4)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Name"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Name"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(5)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(7) "Example"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Example"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(6)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Form"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Service"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(false)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(0)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(2) "My"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(2) "My"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(1)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Very"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Very"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(2)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Long"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Long"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(3)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(5) "Table"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(5) "Table"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(4)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Name"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Name"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(5)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(7) "Example"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Example"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(6)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(6) "Search"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(2) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(7) "Service"
+     [exec***REMOVED***   [1***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Form"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(false)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(7)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(4) "Form"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Form"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(true)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(0)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(5) "Image"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(2) "My"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(false)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** int(1)
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** string(7) "Service"
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** array(1) {
+     [exec***REMOVED***   [0***REMOVED*** =>
+     [exec***REMOVED***   string(4) "Very"
+     [exec***REMOVED*** }
+     [exec***REMOVED*** /var/www/gear-package/gear/src/Gear/Creator/Code.php:463:
+     [exec***REMOVED*** bool(false)
+
+BUILD SUCCESSFUL
+Total time: 2 seconds

@@ -440,33 +440,40 @@ EOS;
         $historyStep = [***REMOVED***;
         $addNames = [***REMOVED***;
         $issueStep = [***REMOVED***;
-        $goodStep = [***REMOVED***;
 
-
+        //$index is the PARAM index.
+        //$i is the POSITION index.
         foreach ($paramsStack as $index => $names) {
+
+            if (!isset($issueStep[$index***REMOVED***)) {
+                $issueStep[$index***REMOVED*** = [***REMOVED***;
+            }
 
             foreach ($names as $i => $name) {
 
                 if (!isset($historyStep[$i***REMOVED***)) {
-                    $historyStep[$i***REMOVED*** = [$name***REMOVED***;
-                }
-                if (!isset($issueStep[$index***REMOVED***)) {
-                    $issueStep[$index***REMOVED*** = [***REMOVED***;
-                }
-                if (!isset($goodStep[$index***REMOVED***)) {
-                    $goodStep[$index***REMOVED*** = [***REMOVED***;
+                    $historyStep[$i***REMOVED*** = [***REMOVED***;
+
+                    if ($index == 0) {
+                        $historyStep[$i***REMOVED***[***REMOVED*** = $name;
+                    }
                 }
 
+
+                //var_dump($i, $name, $historyStep[$i***REMOVED***, in_array($name, $historyStep[$i***REMOVED***));
                 if (in_array($name, $historyStep[$i***REMOVED***)) {
                     $issueStep[$index***REMOVED***[***REMOVED*** = $i;
                 } else {
                     $historyStep[$i***REMOVED***[***REMOVED*** = $name;
-                    $goodStep[$index***REMOVED***[***REMOVED*** = $i;
                 }
             }
 
             //$totalLength = array_sum(array_map('strlen', $nameArray));
         }
+
+        //var_dump($historyStep);
+
+        //var_dump($historyStep, $issueStep, $goodStep);
 
         if (count($issueStep) <= 0) {
             return;
@@ -482,13 +489,16 @@ EOS;
                 $max = count($history);
             }
         }
+        //var_dump($historyStep);
+
+        //die();
 
         $move = null;
 
         if ($greaterIndex === 0) {
             $move = true;
         } else {
-            $final = $greaterIndex/count($historyStep);
+            $final = ($greaterIndex)/count($historyStep);
             $move = ($final <= 0.5) ? true : false;
         }
 
@@ -496,47 +506,47 @@ EOS;
         $tempParams = $paramsStack;
 
         foreach ($tempParams as $index => $names) {
-            $tempParams[$index***REMOVED*** = $this->iterateRemoveNames($names, $issueStep[$index***REMOVED***, $goodStep[$index***REMOVED***, $move);
+
+            $tempParams[$index***REMOVED*** = array_values($this->iterateRemoveNames($names, $issueStep[$index***REMOVED***, $move));
         }
 
         $paramsStack = $tempParams;
     }
 
 
-    public function iterateRemoveNames(array $names, array $toRemove, array $toKeep, $move = true)
+    public function iterateRemoveNames(array $names, array $toRemove, $move = true)
     {
         $size = implode('', $names);
 
+        //se o tamanho de todo names for menor que o limite, pode retornar.
         if (strlen($size) <= self::LIMIT_PARAM_SIZE) {
             return $names;
         }
 
+        //se for forward, deve ir para a primeira duplicidade e remover.
+        //se for backward, deve ir para a última duplicidade e remover.
+
+        //fix
         if ($move === true) {
             end($toRemove);
+        } else {
+            reset($toRemove);
         }
 
+        //retorna a key [primeira ou última***REMOVED***
         $toRemoveKey = key($toRemove);
-
-        reset($toRemove);
-
+        //var_dump($toRemoveKey);die();
         $refKeyToRemove = $toRemove[$toRemoveKey***REMOVED***;
+        var_dump($refKeyToRemove);
+        unset($names[$refKeyToRemove***REMOVED***); //deleta a chave esperada.
 
         unset($toRemove[$toRemoveKey***REMOVED***);
 
-        //$toR($toRemove);
+        reset($toRemove);
 
-        unset($names[$refKeyToRemove***REMOVED***);
+        //$names = array_values($names);
 
-        $names = array_values($names);
-        /*
-        var_dump($names);
-        var_dump($toRemove);
-        var_dump($toKeep);
-        die();
-        */
-
-
-        return $this->iterateRemoveNames($names, $toRemove, $toKeep, $move);
+        return $this->iterateRemoveNames($names, $toRemove, $move);
     }
 
     public function tokenizeParams($paramsStack)
