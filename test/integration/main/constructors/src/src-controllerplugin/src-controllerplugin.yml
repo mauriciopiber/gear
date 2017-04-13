@@ -1,0 +1,6 @@
+modules: PbrSrcValueObject
+
+src:
+  91:
+    type: ControllerPlugin
+    name: BasicControllerPlugin

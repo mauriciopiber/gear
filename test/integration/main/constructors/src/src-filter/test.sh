@@ -2,10 +2,10 @@
 
 set -e
 
-bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
+bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="SrcFilter"
+module="PbrSrcFilter"
 type="cli"
 migration=""
 gearfile="gear-filter.yml"

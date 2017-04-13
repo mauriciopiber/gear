@@ -1,9 +1,9 @@
 #!/bin/bash
 
-bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
+bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="ControllerWeb"
+module="PbrControllerWeb"
 type="web"
 migration=""
 gearfile="web.yml"
