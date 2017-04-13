@@ -1,0 +1,6 @@
+modules: PbrSrcViewHelper
+
+src:
+  91:
+    type: ViewHelper
+    name: BasicViewHelper

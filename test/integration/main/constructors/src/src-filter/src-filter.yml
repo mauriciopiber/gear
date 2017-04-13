@@ -15,7 +15,7 @@ src:
   04:
     name: BasicFactoryNamespace
     type: Filter
-    service: Factories
+    service: factories
     namespace: My\GoodFilter\Working
   99:
     name: FilterInterface

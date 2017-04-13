@@ -5,7 +5,17 @@ src:
   0: 
     type: Interface
     name: CreateInterface
-  
+  1: 
+    type: Interface
+    name: CreateInterfaceWithNamespace
+    namespace: InterfacesNamespace  
+#  0: 
+#    type: Interface
+#    name: CreateInterfaceWithDependency
+#  1: 
+#    type: Interface
+#    name: CreateInterfaceWithNamespaceAndDep
+#    namespace: InterfacesNamespace  
   
 #  91:
     #type: Interface
