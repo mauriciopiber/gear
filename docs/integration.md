@@ -84,6 +84,10 @@ Testes minor relacionado à Src.
         * [ ***REMOVED*** Create interface with extends custom interface.
         * [ ***REMOVED*** Create interface with extends custom interface with namespace
     * [ ***REMOVED*** **[5.2***REMOVED***** src-repository [Module PbrSrcRepository***REMOVED***
+        * [X***REMOVED*** Implements
+            * [X***REMOVED*** Create Repository Implements Interface
+            * [X***REMOVED*** Create Repository with custom namespace Implements Interface            
+    
     * [ ***REMOVED*** **[5.3***REMOVED***** src-service                  
     * [ ***REMOVED*** src-form
     * [ ***REMOVED*** src-filter

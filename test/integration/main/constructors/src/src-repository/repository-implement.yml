@@ -7,5 +7,6 @@ src:
     implements: Interfaces\CreateInterface
   2:
     type: Repository
+    namespace: RepositoryImplements
     name: RepositoryNamespaceImpCreateInterface
     implements: Interfaces\CreateInterface

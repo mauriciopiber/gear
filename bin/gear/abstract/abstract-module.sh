@@ -96,7 +96,55 @@ function Gear_Module_Clear
 
 function Gear_Module_Integrate
 {
+	    # Params
+    if [ $# -ne 6 ***REMOVED***; then
+        echo "usage: module type scriptDir construct shouldTestLocal shouldTestCI"
+        exit 1
+    fi
+   
+    basePath=$(Gear_Util_GetBasePath)
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+    
+    Gear_Module_Run_DeleteModule "$module"
+        
+    echo "$module $moduleUrl $type $scriptDir $construct"
 	echo "Running Integrate"
+	
+	#create module
+	cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
+    --type=$type \
+    --force \
+    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
+    
+    #composer update
+    cd $modulePath && sudo composer update
+    
+    if [ "$type" == "web" ***REMOVED***; then
+        cd $modulePath && sudo vendor/bin/install-nodejs
+        cd $modulePath && sudo vendor/bin/virtualhost  $(pwd) $moduleUrl.gear.dev DEVELOPMENT
+        cd $modulePath && sudo vendor/bin/install-db-module $moduleUrl.mysql.sql $module
+        cd $modulePath && sudo vendor/bin/phinx migrate
+        cd $modulePath && sudo vendor/bin/unload-module BjyAuthorize
+    fi
+    
+    Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+
+    if [ "$type" == "web" ***REMOVED***; then
+    	cd $modulePath && php public/index.php gear project fixture
+        cd $modulePath && php public/index.php gear project setUpAcl --memcached
+        cd $modulePath && sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+        sudo vendor/bin/gulp
+    fi
+
+    sudo composer dump-autoload
+    
+    Gear_Module_Run_Ant "$module" "$type"
 }
 
 
@@ -233,7 +281,7 @@ function Gear_Module_Run_Ant
     fi 
     
     if [ "$type" == "cli" ***REMOVED***; then
-        cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit
+        cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit-coverage-ci
         return
     fi
    
