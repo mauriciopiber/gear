@@ -1,38 +1,44 @@
+# Gear Test [6.1***REMOVED*** #
 modules: MyModule
 
 src:
-  91:
+  0: 
     type: Interface
-    name: BasicInterface
-    namespace: Interfaces
-  92:
-    type: Interface
-    name: LongNamespaceInterface
-    namespace: Basic\Feature\Issue\Task    
-  93:
-    type: Interface
-    name: BasicNamespaceInterface
-    namespace: Basic
-  94:
-    type: Interface
-    name: BasicExtendsInterface
-    extends: Interfaces\BasicInterface
-    namespace: Interfaces            
-  96:
-    type: Interface
-    name: BasicDependencyInterface
-    dependency: Interfaces\BasicInterface
-    namespace: Interfaces    
-  97:
-    type: Interface
-    name: BasicDependenciesInterface
-    dependency: Interfaces\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
-    namespace: Interfaces
-  98:
-    type: Interface
-    name: BasicDependenciesTwoInterface
-    extends: Interfaces\BasicInterface
-    dependency: Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
-    namespace: Interfaces
+    name: CreateInterface
+  
+  
+#  91:
+    #type: Interface
+    #name: BasicInterface
+    #namespace: Interfaces
+  #92:
+  #  type: Interface
+  #  name: LongNamespaceInterface
+  #  namespace: Basic\Feature\Issue\Task    
+  #93:
+  #  type: Interface
+  #  name: BasicNamespaceInterface
+  #  namespace: Basic
+  #94:
+  ##  type: Interface
+   # name: BasicExtendsInterface
+   # extends: Interfaces\BasicInterface
+   # namespace: Interfaces            
+  #96:
+  #  type: Interface
+  #  name: BasicDependencyInterface
+  #  dependency: Interfaces\BasicInterface
+  #  namespace: Interfaces    
+  #97:
+  #  type: Interface
+  #  name: BasicDependenciesInterface
+  #  dependency: Interfaces\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+  #  namespace: Interfaces
+  #98:
+  #  type: Interface
+  #  name: BasicDependenciesTwoInterface
+  #  extends: Interfaces\BasicInterface
+  ##  dependency: Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
+  #  namespace: Interfaces
           
                     

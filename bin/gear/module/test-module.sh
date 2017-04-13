@@ -81,6 +81,14 @@ if [ "$cmd" == "reload-test" ***REMOVED***; then
 	exit 0	
 fi
 
+if [ "$cmd" == "clear-test" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "clear" "$module" "$type" "0" "0"
+	/bin/bash "$bin/gear/module/gear-module" "construct" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}" "0" "0"	
+	/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"
+	exit 0	
+fi
+
 
 echo "Command $cmd is not defined"
 exit 1

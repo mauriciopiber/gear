@@ -128,6 +128,7 @@ class BasicModuleStructure implements
             'ViewHelperTest' => $this->getTestViewHelperFolder(),
             'SearchForm' => $this->getSearchFolder(),
             'SearchFormTest' => $this->getTestSearchFolder(),
+            'Interface' => $this->getInterfaceFolder()
         ***REMOVED***;
 
         if (!isset($resources[$resource***REMOVED***)) {
@@ -135,6 +136,11 @@ class BasicModuleStructure implements
         }
 
         return $resources[$resource***REMOVED***;
+    }
+
+    public function getInterfaceFolder()
+    {
+        return $this->getSrcModuleFolder().'/Interfaces';
     }
 
 
