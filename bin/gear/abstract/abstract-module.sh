@@ -135,13 +135,6 @@ function Gear_Module_Integrate
     
     Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
 
-    if [ "$type" == "web" ***REMOVED***; then
-    	cd $modulePath && sudo php public/index.php gear project fixture
-        cd $modulePath && sudo php public/index.php gear project setUpAcl --memcached
-        cd $modulePath && sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
-        sudo vendor/bin/gulp
-    fi
-
     sudo composer dump-autoload
     
     Gear_Module_Run_Ant "$module" "$type"
