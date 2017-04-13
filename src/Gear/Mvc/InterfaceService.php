@@ -10,6 +10,7 @@ use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use Gear\Creator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
+use GearBase\Util\Dir\DirServiceTrait;
 
 class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {
@@ -18,6 +19,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
     use ModuleAwareTrait;
     use ServiceLocatorAwareTrait;
     use CodeTrait;
+    use DirServiceTrait;
 
     //namespace
     //extends
@@ -28,7 +30,18 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $this->name = $this->src->getName();
         $this->srcType = $this->src->getType();
 
+
+        // prevent use reserved language word
+        if ($this->src->getNamespace() == null) {
+            $this->src->setNamespace('Interfaces');
+        }
+
         $location = $this->getCode()->getLocation($this->src);
+
+        //create folder because it's not a default on Interfaces.
+        if (!is_dir($location)) {
+            $this->getDirService()->mkDir($location);
+        }
 
 
         $options = [
@@ -45,6 +58,8 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         $options['extends'***REMOVED*** = $this->getCode()->getExtends($this->src);
         $options['use'***REMOVED*** = $this->getCode()->getInterfaceUse($this->src);
         $options['classDocs'***REMOVED*** = $this->getCode()->getClassDocs($this->src, 'Interface');
+
+
 
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/interface/src/interface.phtml');
