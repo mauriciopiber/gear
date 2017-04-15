@@ -7,12 +7,23 @@ suite=(
 #"constructors/mvc/mvc-varchar"
 #"constructors/src/src-db"
 #"constructors/src/src-db-ideal"
+#"constructors/mvc/mvc-usertype-all"
+#"constructors/mvc/mvc-usertype-low-strict"
+#"constructors/mvc/mvc-usertype-strict"
+#"constructors/mvc/mvc-usertypes"
 
-"constructors/mvc/mvc-usertype-all"
-"constructors/mvc/mvc-usertype-low-strict"
-"constructors/mvc/mvc-usertype-strict"
+"constructors/src"
+"constructors/src-mvc"
+"constructors/controller/controller-mvc"
+"constructors/controller/controller-console"
+"constructors/controller/controller-web"
+"constructors/mvc/mvc-columns"
 "constructors/mvc/mvc-usertypes"
+"constructors/mvc/mvc-uploadimage"
+"constructors/mvc/mvc-constraints"
+"constructors/mvc/mvc-real"
 )
+
 
 
 
