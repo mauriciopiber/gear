@@ -278,7 +278,7 @@ function Gear_Module_Run_Ant
         return
     fi
    
-    cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit karma protractor
+    cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit-coverage karma protractor
     return
 }
 
