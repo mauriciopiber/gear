@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class SimpleDatesTable extends AbstractMigration
+class UserTypeAll extends AbstractMigration
 {
     /**
      * Change Method.
