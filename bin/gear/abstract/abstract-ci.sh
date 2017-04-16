@@ -19,6 +19,30 @@ function Gear_CI_SetUp
     sudo php public/index.php gear jenkins suite create $type
 }
 
+function Gear_CI_CopyJenkinsFile
+{
+	nameUrl=${1}
+	location=${2}
+    suite=${3} # 0 for module, 1 for project
+    type=${4} # web or cli for module, "" for project	
+	
+	ciMock="$headersDir/../ci-mock"
+	
+	if [ "$suite" == 1 ***REMOVED*** && [ "$type" == "" ***REMOVED***; then
+		
+		jenkins="$(cat $ciMock/jenkins)"
+        newFile=$(echo "$jenkins" | sed -e "s/#PROJECT/$nameUrl/g")
+	    echo "$newFile" > $location/Jenkinsfile
+        return		
+    fi
+   
+    jenkins="$(cat $ciMock/jenkins_$type)"
+    newFile=$(echo "$jenkins" | sed -e "s/#MODULE/$nameUrl/g")
+	echo "$newFile" > $location/Jenkinsfile
+	#exit 1
+    return		
+}
+
 
 function Gear_CI_TearDown
 {

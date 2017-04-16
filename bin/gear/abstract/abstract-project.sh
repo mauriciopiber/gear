@@ -53,6 +53,7 @@ function Gear_Project_Create
 	shouldTestLocal=${4}
     shouldTestCI=${5}
     shouldIntegrate=${6}
+    projectUrl=$(Gear_Util_ToUrl "$project")
 
     projectPath=$(Gear_Project_Util_GetProjectPath "${project}")
     
@@ -81,6 +82,7 @@ function Gear_Project_Create
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
     	echo "configureCi"
+    	Gear_CI_CopyJenkinsFile "$projectUrl" "$projectPath" "1" ""
     	Gear_CI_SetUp "$project" "$projectPath" "project-web"
     fi
    
