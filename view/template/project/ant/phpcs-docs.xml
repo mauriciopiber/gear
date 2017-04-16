@@ -1,6 +1,0 @@
-<target name="phpcs-docs" description="Code Sniffer">
-    <exec executable="${basedir}/vendor/bin/phpcs">
-        <arg value="--standard=phpcs-docs.xml"/>
-        <arg path="${basedir}/src"/>
-    </exec>
-</target>

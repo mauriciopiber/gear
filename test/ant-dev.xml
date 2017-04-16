@@ -2,7 +2,7 @@
 <project name="gear-dev" default="" basedir=".">
     <target name="phpcs" description="Code Sniffer" depends="set-vendor">
         <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=PSR2"/>
+            <arg value="--standard=test/phpcs.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
@@ -39,12 +39,6 @@
             <arg value="--coverage-html"/>
             <arg value="-g"/>
             <arg value="${group}"/>
-        </exec>
-    </target>
-    <target name="phpcs-docs" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
-            <arg value="--standard=test/phpcs-docs.xml"/>
-            <arg path="${basedir}/src"/>
         </exec>
     </target>
     <target name="unit-group-namespace" depends="set-vendor, build-helper">

@@ -91,11 +91,11 @@ class TestService extends AbstractMvc
     public function copyDocSniff()
     {
         return $this->getFileCreator()->createFile(
-            'template/module/test/docs-phpcs.xml.phtml',
+            'template/module/test/phpcs.xml.phtml',
             array(
                 'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
             ),
-            'phpcs-docs.xml',
+            'phpcs.xml',
             $this->getModule()->getTestFolder()
         );
     }

@@ -34,7 +34,7 @@ function clean()
     rm $modulepath/public/js/spec/end2end.conf.js
     rm $modulepath/public/js/spec/karma.conf.js
     rm $modulepath/test/phpmd.xml
-    rm $modulepath/test/phpcs-docs.xml
+    rm $modulepath/test/phpcs.xml
     rm $modulepath/test/phpunit-benchmark.xml
     rm $modulepath/test/phpunit-coverage-benchmark.xml
     rm $modulepath/schema/module.json

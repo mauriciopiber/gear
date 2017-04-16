@@ -152,7 +152,7 @@ class ProjectServiceTest extends AbstractTestCase
             ['getPhpDoxConfig', 'phpdox.xml'***REMOVED***,
             ['getPhinxConfig', 'phinx.yml'***REMOVED***,
             ['copyPHPMD', 'phpmd.xml'***REMOVED***,
-            ['getPhpcsDocs', 'phpcs-docs.xml'***REMOVED***,
+            ['getPhpcsDocs', 'phpcs.xml'***REMOVED***,
         ***REMOVED***;
     }
 

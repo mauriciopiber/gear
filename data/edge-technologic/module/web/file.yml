@@ -17,7 +17,7 @@ files:
     12: public/js/spec/end2end.conf.js
     13: public/js/spec/karma.conf.js
     14: test/phpmd.xml
-    15: test/phpcs-docs.xml
+    15: test/phpcs.xml
     16: test/phpunit-benchmark.xml
     17: test/phpunit-coverage-benchmark.xml
     18: Jenkinsfile  

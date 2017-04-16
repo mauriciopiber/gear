@@ -18,7 +18,7 @@ files:
   15: phpdox.xml
   16: phinx.yml
   17: phpmd.xml
-  18: phpcs-docs.xml
+  18: phpcs.xml
   19: Jenkinsfile
   30: .gitignore
   31: docs/CHANGELOG.md

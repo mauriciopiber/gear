@@ -2,7 +2,7 @@
     <exec executable="${vendor}/bin/phpcs" output="/dev/null">
         <arg value="--report=checkstyle"/>
         <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
-        <arg value="--standard=PSR2"/>
+        <arg value="--standard=test/phpcs.xml"/>
         <arg path="${basedir}/src"/>
     </exec>
 </target>
