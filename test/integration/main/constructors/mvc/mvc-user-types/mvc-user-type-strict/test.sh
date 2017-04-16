@@ -5,8 +5,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrUserTypeStrict"
 type="web"
-migration="20160123222068_simple_dates_table.php"
-gearfile="db.yml"
-build=${2}
+migration="20160123222070_user_type_strict.php"
+gearfile="strict.yml"
 
 source "$bin/gear/module/test-module.sh"
