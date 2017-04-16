@@ -10,7 +10,7 @@ files:
     7: codeception.yml
     8: test/unit.suite.yml
     9: test/phpmd.xml
-    10: test/phpcs-docs.xml
+    10: test/phpcs.xml
     11: test/phpunit-benchmark.xml
     12: test/phpunit-coverage-benchmark.xml
     13: Jenkinsfile

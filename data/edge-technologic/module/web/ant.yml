@@ -44,7 +44,6 @@ files:
     phpdox: ''
   ant-dev:
     phpcs: 'set-vendor'
-    phpcs-docs: 'set-vendor'    
     phpmd: 'set-vendor'
     phpcpd: 'set-vendor'
     unit: 'set-vendor, build-helper'
@@ -67,7 +66,6 @@ files:
     phpcs-namespace: 'set-vendor'
     phpmd-namespace: 'set-vendor'
     phpcpd-namespace: 'set-vendor'
-    phpcs-docs-namespace: 'set-vendor'
     unit-namespace: 'set-vendor, build-helper'
     unit-group-namespace: 'set-vendor, build-helper'
     unit-coverage-namespace: 'set-vendor, build-helper'

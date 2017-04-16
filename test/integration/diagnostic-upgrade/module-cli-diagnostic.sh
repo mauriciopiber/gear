@@ -29,7 +29,7 @@ function clean()
     rm $modulepath/codeception.yml
     rm $modulepath/test/unit.suite.yml
     rm $modulepath/test/phpmd.xml
-    rm $modulepath/test/phpcs-docs.xml
+    rm $modulepath/test/phpcs.xml
     rm $modulepath/test/phpunit-benchmark.xml
     rm $modulepath/test/phpunit-coverage-benchmark.xml
     rm $modulepath/schema/module.json

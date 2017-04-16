@@ -1,6 +1,6 @@
 <target name="phpcs-namespace" description="Code Sniffer" depends="set-vendor">
     <exec executable="${vendor}/bin/phpcs">
-        <arg value="--standard=PSR2"/>
+        <arg value="--standard=test/phpcs.xml"/>
         <arg path="${basedir}/src/${namespace}"/>
     </exec>
 </target>

@@ -1,6 +1,6 @@
 <target name="phpcs" description="Code Sniffer">
     <exec executable="${basedir}/vendor/bin/phpcs"  >
-        <arg value="--standard=PSR2" />
+        <arg value="--standard=test/phpcs.xml" />
         <arg path="${basedir}/module" />
         <arg value="--ignore=public" />
     </exec>

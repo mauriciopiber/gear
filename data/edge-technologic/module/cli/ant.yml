@@ -46,12 +46,10 @@ files:
     unit-group: 'set-vendor, build-helper'
     unit-group-namespace: 'set-vendor, build-helper'    
     unit-coverage-group: 'set-vendor, build-helper'
-    phpcs-docs: 'set-vendor'
   ant-namespace:
     phpcs-namespace: 'set-vendor'
     phpmd-namespace: 'set-vendor'
     phpcpd-namespace: 'set-vendor'
-    phpcs-docs-namespace: 'set-vendor'    
     unit-namespace: 'set-vendor, build-helper'
     unit-coverage-namespace: 'set-vendor, build-helper'
   ant-benchmark:
