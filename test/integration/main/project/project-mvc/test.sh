@@ -3,7 +3,7 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-project="ProjectMvc"
+project="PbrProjectMvc"
 
 modules="MyProjectModuleCli;cli;module-cli.yml|"\
 "MyProjectModuleWeb;web;module-web.yml|"\
