@@ -47,6 +47,7 @@ function Gear_Module_Create
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
+    	Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
         Gear_CI_SetUp "$module" "$modulePath" "module-$type"
     fi
    
