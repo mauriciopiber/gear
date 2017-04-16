@@ -11,5 +11,4 @@ construct[0***REMOVED***="mvc-user-type-all/all.yml;mvc-user-type-all/2016012322
 construct[1***REMOVED***="mvc-user-type-low-strict/low-strict.yml;mvc-user-type-low-strict/20160123222069_user_type_low_strict.php"
 construct[2***REMOVED***="mvc-user-type-strict//strict.yml;mvc-user-type-strict/20160123222070_user_type_strict.php"
 
-
 source "$bin/gear/module/test-module.sh"
