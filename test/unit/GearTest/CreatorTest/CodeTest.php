@@ -3,7 +3,10 @@ namespace GearTest\CreatorTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use GearJson\Src\Src;
+use GearJson\Controller\Controller;
 use Gear\Creator\Code;
+use Gear\Creator\SrcDependency;
+use Gear\Creator\ControllerDependency;
 use GearBase\Util\String\StringService;
 
 /**
@@ -23,10 +26,67 @@ class CodeTest extends TestCase
 
         $this->code->setModule($this->module->reveal());
 
-        $this->code->setStringService(new StringService());
+
+        $this->string = new StringService();
+        $this->code->setStringService($this->string);
+
+
+        $this->srcDependency = new SrcDependency();
+        $this->srcDependency->setStringService($this->string);
+        $this->srcDependency->setModule($this->module->reveal());
+
+        $this->controllerDependency = new ControllerDependency();
+        $this->controllerDependency->setStringService($this->string);
+        $this->controllerDependency->setModule($this->module->reveal());
+
+        $this->code->setSrcDependency($this->srcDependency);
+        $this->code->setControllerDependency($this->controllerDependency);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../';
         $this->template .= 'test/template/module/code';
+    }
+
+    /**
+     * @dataProvider testCodeData
+     */
+    public function testGetUse($data, $template)
+    {
+        $use = $this->code->getUse($data);
+        $this->assertEquals(file_get_contents(__DIR__.'/_asserts/use/'.$template.'.phtml'), $use);
+    }
+
+
+    public function testCodeData()
+    {
+        return [
+            [new Controller(['name' => 'MyController'***REMOVED***), 'my-controller'***REMOVED***,
+            [new Src(['name' => 'MyService', 'type' => 'Service'***REMOVED***), 'my-service'***REMOVED***,
+            [
+                new Src(['name' => 'MyService', 'type' => 'Service'***REMOVED***),
+                'my-service'
+            ***REMOVED***,
+            [
+                new Src(['name' => 'MyService', 'type' => 'Service', 'dependency' => 'Service\MyDependencyService'***REMOVED***),
+                'my-service-dependency'
+            ***REMOVED***,
+            [
+                new Src(['name' => 'MyService', 'type' => 'Service', 'dependency' => 'Service\MyDependencyService', 'service' => 'factories'***REMOVED***),
+                'my-service-factory-dependency'
+            ***REMOVED***,
+            [
+                new Src(
+                    [
+                        'name' => 'MyService',
+                        'type' => 'Service',
+                        'dependency' => 'Service\MyDependencyService,Service\MyDependencyServiceTwo,Service\MyDependencyServiceThree',
+                        'service' => 'factories',
+                        'extends' => 'Extends\MyExtendsService',
+                        'implements' => 'Implementable\ImplementsOne,Implementable\ImplementsTwo'
+                    ***REMOVED***
+                ),
+                'my-service-complete'
+            ***REMOVED***
+        ***REMOVED***;
     }
 
     public function testConstructorEmpty()
@@ -198,9 +258,9 @@ EOS;
 
         $expected = [
             ['One', 'Repository'***REMOVED***,
-            ['Two', 'Repository'***REMOVED***,
-            ['Three', 'Repository'***REMOVED***,
-            ['Four', 'Repository'***REMOVED***,
+            ['Two', 'Repository', 'Long'***REMOVED***,
+            ['Three', 'Repository', 'Long'***REMOVED***,
+            ['Four', 'Repository', 'Long'***REMOVED***,
         ***REMOVED***;
 
         $this->assertEquals($expected, $data);
@@ -209,7 +269,7 @@ EOS;
     /**
      * @group x1
      * @group x1.2
-     */
+
     public function testCutVarMiddle()
     {
         $data = [
@@ -230,6 +290,7 @@ EOS;
 
         $this->assertEquals($expected, $data);
     }
+     */
 
     /**
      * @group token
@@ -417,7 +478,7 @@ EOS;
 
 
         $this->assertEquals(
-            ['oneRepository', 'twoRepository', 'threeRepository', 'fourRepository'***REMOVED***,
+            ['oneRepository', 'twoRepositoryLong', 'threeRepositoryLong', 'fourRepositoryLong'***REMOVED***,
             $token
         );
     }
@@ -517,7 +578,7 @@ EOS;
     /**
      * @group Creator
      */
-    public function testGetUse()
+    public function testGetUseConstructor()
     {
         $src = new Src(
             [
@@ -537,9 +598,11 @@ use GearBase\Repository\QueryBuilder;
 
 EOS;
 
+        /*
         $this->srcDependency = new \Gear\Creator\SrcDependency();
         $this->srcDependency->setModule($this->module->reveal());
         $this->code->setSrcDependency($this->srcDependency);
+        */
 
         $this->assertEquals($template, $this->code->getUseConstructor($src));
     }

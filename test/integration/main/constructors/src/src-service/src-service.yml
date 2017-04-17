@@ -23,7 +23,7 @@ src:
     namespace: Service\One\Two\Three\Four\Five\Six
     extends: Service\ServiceExtendsOne
     dependency: 
-      0: Service\ServiceDependencyManyOne
-      1: Service\ServiceDependencyManyTwo
-      2: Service\ServiceDependencyOneOne
-      3: Service\ServiceDependencyOneTwo                  
+      0: Service\ServiceManyDependencyOne
+      1: Service\ServiceManyDependencyTwo
+      2: Service\ServiceOneDependencyOne
+      3: Service\ServiceOneDependencyTwo                  

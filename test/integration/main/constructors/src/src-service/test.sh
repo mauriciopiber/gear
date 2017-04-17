@@ -16,6 +16,7 @@ construct[4***REMOVED***="src-service-abstract.yml;"
 construct[5***REMOVED***="src-service-namespace.yml;"
 construct[6***REMOVED***="src-service-extends.yml;"
 construct[7***REMOVED***="src-service-dependency.yml;"
+construct[8***REMOVED***="src-service-implements.yml;"
 
 
 echo ${construct[****REMOVED***};

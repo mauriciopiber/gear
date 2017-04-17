@@ -21,3 +21,53 @@ src:
     name: ServiceAbstractFive
     type: Service  
     abstract: true              
+  6:
+    name: ServiceAbstractNamespaceOne
+    type: Service
+    abstract: true
+    namespace: Service\One  
+  7:
+    name: ServiceAbstractNamespaceTwo
+    type: Service
+    abstract: true
+    namespace: Service\One\Two
+  8:
+    name: ServiceAbstractNamespaceThree
+    type: Service
+    abstract: true
+    namespace: Service\One\Two\Three
+  9:
+    name: ServiceAbstractNamespaceFour
+    type: Service
+    abstract: true
+    namespace: Service\One\Two\Three\Four
+  10:
+    name: ServiceAbstractNamespaceFive
+    type: Service
+    abstract: true
+    namespace: Service\One\Two\Three\Four\Five 
+  11:
+    name: ServiceAbstractExtendsOne
+    type: Service
+    abstract: true
+    extends: Service\ServiceAbstractOne
+  12:
+    name: ServiceAbstractExtendsTwo
+    type: Service
+    abstract: true
+    extends: Service\ServiceAbstractTwo        
+  13:
+    name: ServiceAbstractExtendsThree
+    type: Service
+    abstract: true    
+    extends: Service\ServiceAbstractThree    
+  14:
+    name: ServiceAbstractExtendsFour
+    type: Service
+    abstract: true    
+    extends: Service\ServiceAbstractFour    
+  15:
+    name: ServiceAbstractExtendsFive
+    type: Service  
+    abstract: true                  
+    extends: Service\ServiceAbstractFive    
