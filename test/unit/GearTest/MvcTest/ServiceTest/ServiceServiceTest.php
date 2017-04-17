@@ -7,6 +7,15 @@ use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
 use GearJson\Src\Src;
 use GearTest\ScopeTrait;
+use \Gear\Module;
+use Gear\Mvc\Service\ServiceService;
+use GearBase\Util\String\StringService;
+use Gear\Creator\SrcDependency;
+use Gear\Creator\Code;
+use Gear\Creator\File\Injector;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Util\Vector\ArrayService;
+use GearJson\Db\Db;
 
 /**
  * @group src-mvc
@@ -26,30 +35,30 @@ class ServiceServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/service';
+        $this->templates =  (new Module())->getLocation().'/../../test/template/module/mvc/service';
 
-        $this->service = new \Gear\Mvc\Service\ServiceService();
+        $this->service = new ServiceService();
 
         //module
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->service->setModule($this->module->reveal());
 
         //string
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new StringService();
         $this->service->setStringService($this->string);
 
         $this->fileCreator    = $this->createFileCreator();
         $this->service->setFileCreator($this->fileCreator);
 
         //src-dependency
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
+        $this->srcDependency = new SrcDependency();
         $this->srcDependency->setModule($this->module->reveal());
         $this->srcDependency->setStringService($this->string);
 
 
         $this->service->setSrcDependency($this->srcDependency);
         //code
-        $this->code = new \Gear\Creator\Code();
+        $this->code = new Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
         $this->code->setSrcDependency($this->srcDependency);
@@ -65,10 +74,10 @@ class ServiceServiceTest extends TestCase
         $this->service->setTraitService($this->trait->reveal());
 
         //array
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
         //injector
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new Injector($this->arrayService);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->service->setColumnService($this->column->reveal());
@@ -82,7 +91,7 @@ class ServiceServiceTest extends TestCase
         $this->serviceTest = $this->prophesize('Gear\Mvc\Service\ServiceTestService');
         $this->service->setServiceTestService($this->serviceTest->reveal());
 
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager = new ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());
         $this->serviceManager->setStringService($this->string);
         $this->service->setServiceManager($this->serviceManager);
@@ -146,7 +155,7 @@ class ServiceServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
+        $this->db = new Db(['table' => $table, 'user' => $user***REMOVED***);
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);

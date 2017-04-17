@@ -275,11 +275,11 @@ function Gear_Module_Run_Ant
     fi 
     
     if [ "$type" == "cli" ***REMOVED***; then
-        cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd unit-coverage-ci
+        cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd unit-coverage-ci
         return
     fi
    
-    cd $modulePath && ant prepare parallel-lint phpcs phpcs-docs phpmd phpcpd jshint unit-coverage karma protractor
+    cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd jshint unit-coverage-ci karma protractor
     return
 }
 

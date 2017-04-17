@@ -1,0 +1,25 @@
+modules: PbrSrcService
+
+src:
+  1:
+    name: ServiceFactoryOne
+    type: Service    
+    service: factories    
+  2:
+    name: ServiceFactoryTwo
+    type: Service    
+    service: factories    
+  3:
+    name: ServiceFactoryThree
+    type: Service    
+    service: factories    
+  4:
+    name: ServiceFactoryFour
+    type: Service    
+    service: factories    
+  5:
+    name: ServiceFactoryFive
+    type: Service    
+    service: factories    
+
+    

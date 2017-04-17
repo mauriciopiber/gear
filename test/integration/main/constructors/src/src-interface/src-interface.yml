@@ -9,46 +9,23 @@ src:
     type: Interface
     name: CreateInterfaceWithNamespace
     namespace: InterfacesNamespace  
-#  0: 
-#    type: Interface
-#    name: CreateInterfaceWithDependency
-#  1: 
-#    type: Interface
-#    name: CreateInterfaceWithNamespaceAndDep
-#    namespace: InterfacesNamespace  
-  
-#  91:
-    #type: Interface
-    #name: BasicInterface
-    #namespace: Interfaces
-  #92:
-  #  type: Interface
-  #  name: LongNamespaceInterface
-  #  namespace: Basic\Feature\Issue\Task    
-  #93:
-  #  type: Interface
-  #  name: BasicNamespaceInterface
-  #  namespace: Basic
-  #94:
-  ##  type: Interface
-   # name: BasicExtendsInterface
-   # extends: Interfaces\BasicInterface
-   # namespace: Interfaces            
-  #96:
-  #  type: Interface
-  #  name: BasicDependencyInterface
-  #  dependency: Interfaces\BasicInterface
-  #  namespace: Interfaces    
-  #97:
-  #  type: Interface
-  #  name: BasicDependenciesInterface
-  #  dependency: Interfaces\BasicInterface,Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
-  #  namespace: Interfaces
-  #98:
-  #  type: Interface
-  #  name: BasicDependenciesTwoInterface
-  #  extends: Interfaces\BasicInterface
-  ##  dependency: Basic\Feature\Issue\Task\LongNamespaceInterface,Basic\BasicNamespaceInterface
-  #  namespace: Interfaces
+  2:
+    name: InterfaceExtends
+    type: Interface
+    extends: Interfaces\CreateInterface
+  3:
+    name: InterfaceNamespaceExtends
+    type: Interface
+    namespace: InterfacesNamespace
+    extends: InterfacesNamespace\CreateInterfaceWithNamespace
+  4:
+    name: DependencyInterface
+    type: Interface
+    dependency: Repository\SrcRepository
+  5:
+    name: DependenciesInterface
+    type: Interface
+    dependency: Repository\SrcRepository,MyRepositoryNamespace\SrcRepositoryNamespace
           
-                    
+    
+    

@@ -1,0 +1,18 @@
+modules: PbrSrcService
+
+src:
+  1:
+    name: ServiceInvokableOne
+    type: Service
+  2:
+    name: ServiceInvokableTwo
+    type: Service
+  3:
+    name: ServiceInvokableThree
+    type: Service
+  4:
+    name: ServiceInvokableFour
+    type: Service
+  5:
+    name: ServiceInvokableFive
+    type: Service            

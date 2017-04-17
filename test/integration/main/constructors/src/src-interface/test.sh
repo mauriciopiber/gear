@@ -7,8 +7,8 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrSrcInterface"
 type="cli"
-migration=""
-gearfile="src-interface.yml"
-build=${2}
 
+construct=()
+construct[1***REMOVED***="src-setup.yml;"
+#construct[2***REMOVED***="src-interface.yml;"
 source "$bin/gear/module/test-module.sh"

@@ -1,0 +1,8 @@
+src: 
+  0:
+    name: MyImplementableServiceOne
+    type: Service
+    namespace: Implementables
+  1:
+    name: MyImplementableServiceTwo
+    type: Service

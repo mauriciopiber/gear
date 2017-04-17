@@ -7,12 +7,15 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrSrcService"
 type="cli"
-gearfile="gear-service.yml"
-build=${2}
 
 construct=()
-construct[1***REMOVED***="gear-invokables.yml;"
-construct[2***REMOVED***="gear-factories.yml;"
+construct[1***REMOVED***="src-service.yml;"
+construct[2***REMOVED***="src-service-invokables.yml;"
+construct[3***REMOVED***="src-service-factories.yml;"
+construct[4***REMOVED***="src-service-abstract.yml;"
+construct[5***REMOVED***="src-service-namespace.yml;"
+construct[6***REMOVED***="src-service-extends.yml;"
+construct[7***REMOVED***="src-service-dependency.yml;"
 
 
 echo ${construct[****REMOVED***};
