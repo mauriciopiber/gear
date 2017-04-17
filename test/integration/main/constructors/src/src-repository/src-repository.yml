@@ -2,94 +2,11 @@ modules: MyModule
 
 src:
   91:
-    type: Repository
-    name: BasicRepository
+    name: SrcRepository
+    type: Repository    
   92:
+    
+    name: SrcRepositoryNamespace
     type: Repository
-    name: LongNamespaceRepository
-    namespace: Basic\Feature\Issue\Task    
-  93:
-    type: Repository
-    name: BasicNamespaceRepository
-    namespace: Basic
-  94:
-    type: Repository
-    name: BasicExtendsRepository
-    extends: Repository\BasicRepository        
-  95:
-    type: Repository
-    name: BasicImplementsRepository
-    implements: \Zend\ServiceManager\ServiceLocatorAwareInterface
-    dependency: \Zend\ServiceManager\ServiceLocatorAware
-  96:
-    type: Repository
-    name: BasicDependencyRepository
-    dependency: Repository\BasicRepository
-  97:
-    type: Repository
-    name: BasicDependenciesRepository
-    dependency: Repository\BasicRepository,Basic\Feature\Issue\Task\LongNamespaceRepository,Basic\BasicNamespaceRepository
-  98:
-    type: Repository
-    name: BasicAbstractRepository
-    abstract: true
-  99:
-    type: Repository
-    name: BasicFactoryRepository
-    service: factories
-  100:
-    type: Repository
-    name: BasicDependencyFactoryRepository
-    service: factories
-    dependency: Repository\BasicRepository
-  101:
-    type: Repository
-    name: BasicDependenciesFactoryRepository
-    service: factories
-    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
-  102:
-    type: Repository
-    name: CompleteFactoryRepository
-    extends: Repository\BasicAbstractRepository
-    service: factories
-    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
-    namespace: Complete\Repository
-  103:
-    type: Repository
-    name: AbstractCompleteFactoryRepository
-    extends: Repository\BasicAbstractRepository
-    service: factories
-    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
-    namespace: Complete\Repository
-    abstract: true
-  104:
-    type: Repository
-    name: CompleteInvokablesRepository
-    extends: Repository\BasicAbstractRepository
-    service: invokables
-    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
-    namespace: Complete\Repository
-  104:
-    type: Repository
-    name: AbstractCompleteInvokablesRepository
-    extends: Repository\BasicAbstractRepository
-    dependency: Repository\BasicRepository,Repository\BasicDependencyRepository,Repository\BasicImplementsRepository
-    namespace: Complete\Repository
-    service: invokables
-    abstract: true
-  105:
-    type: Interface
-    name: BasicInterface
-    namespace: Interfaces
-  106:
-    type: Interface
-    name: BasicDependenciesInterface
-    extends: Interfaces\BasicInterface
-    dependency: Repository\BasicRepository
-    namespace: Interfaces
-  107:
-    type: Repository
-    name: BasicInterfaceUsage
-    implements: Interfaces\BasicDependenciesInterface
-    dependency: Repository\BasicRepository
-                   
+    namespace: MyRepositoryNamespace    
+ 

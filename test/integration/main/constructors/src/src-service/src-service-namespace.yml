@@ -1,0 +1,23 @@
+modules: PbrSrcService
+
+src:
+  1:
+    name: ServiceNamespaceOne
+    type: Service
+    namespace: Service\One
+  2:
+    name: ServiceNamespaceTwo
+    type: Service
+    namespace: Service\One\Two    
+  3:
+    name: ServiceNamespaceThree
+    type: Service
+    namespace: Service\One\Two\Three    
+  4:
+    name: ServiceNamespaceFour
+    type: Service
+    namespace: Service\One\Two\Three\Four    
+  5:
+    name: ServiceNamespaceFive
+    type: Service  
+    namespace: Service\One\Two\Three\Five                  

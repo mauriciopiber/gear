@@ -1,21 +1,29 @@
 modules: PbrSrcService
 
 src:
-  10:
-    name: BasicService
-    type: Service
   1:
-    name: BasicExtends
+    name: ServiceOne
     type: Service
-    extends: Service\BasicService
-  11:
-    name: BasicServiceTwo
-    type: Service    
-    service: factories    
   2:
-    name: BasicServiceFactories
+    name: ServiceTwo
     type: Service
-    extends: Service\BasicService
-    service: factories   
-    dependency: Service\BasicServiceTwo 
-    
+  3:
+    name: ServiceThree
+    type: Service
+  4:
+    name: ServiceFour
+    type: Service
+  5:
+    name: ServiceFive
+    type: Service            
+  6:
+    name: ServiceSix
+    type: Service
+    service: factories
+    namespace: Service\One\Two\Three\Four\Five\Six
+    extends: Service\ServiceExtendsOne
+    dependency: 
+      0: Service\ServiceDependencyManyOne
+      1: Service\ServiceDependencyManyTwo
+      2: Service\ServiceDependencyOneOne
+      3: Service\ServiceDependencyOneTwo                  

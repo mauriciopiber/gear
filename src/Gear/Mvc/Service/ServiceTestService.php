@@ -204,11 +204,11 @@ class ServiceTestService extends AbstractMvcTest
             return $this->introspectFromTable($this->src->getDb());
         }
 
-        if ($src->getService() == static::$factories && $src->getAbstract() === false) {
+        if ($src->getService() == static::$factories && $src->getAbstract() != true) {
             $this->getFactoryTestService()->createFactoryTest($src, $location);
         }
 
-        if ($src->getAbstract() === false) {
+        if ($src->getAbstract() != true) {
             $this->getTraitTestService()->createTraitTest($src, $location);
         }
 

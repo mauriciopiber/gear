@@ -1,0 +1,23 @@
+modules: PbrSrcService
+
+src:
+  1:
+    name: ServiceAbstractOne
+    type: Service
+    abstract: true
+  2:
+    name: ServiceAbstractTwo
+    type: Service
+    abstract: true    
+  3:
+    name: ServiceAbstractThree
+    type: Service
+    abstract: true    
+  4:
+    name: ServiceAbstractFour
+    type: Service
+    abstract: true    
+  5:
+    name: ServiceAbstractFive
+    type: Service  
+    abstract: true              
