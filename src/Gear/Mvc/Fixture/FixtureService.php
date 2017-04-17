@@ -85,6 +85,17 @@ class FixtureService extends AbstractMvc
         $this->file->setFileName($this->srcName.'.php');
         $this->file->setLocation($this->getModule()->getFixtureFolder());
 
+
+        $dependencies = $this->src->getDependency();
+        $dependencies = array_merge($dependencies, $this->include);
+        $this->src->setDependency($dependencies);
+
+
+        $implements = $this->src->getImplements();
+        $implements = array_merge($implements, $this->implements);
+        $this->src->setImplements($implements);
+
+
         $this->file->setOptions(
             array(
                 'tableLabel'  => $this->str('label', $this->db->getTable()),
@@ -97,9 +108,9 @@ class FixtureService extends AbstractMvc
                 'data'        => $arrayData,
                 'name'        => $this->srcName,
                 'module'      => $this->getModule()->getModuleName(),
-                'use'         => $this->getCode()->getUse($this->src, $this->include, $this->implements),
-                'attribute'   => $this->getCode()->getUseAttribute($this->src, $this->include),
-                'implements'  => $this->getCode()->getImplements($this->src, $this->implements),
+                'use'         => $this->getCode()->getUse($this->src),
+                'attribute'   => $this->getCode()->getUseAttribute($this->src),
+                'implements'  => $this->getCode()->getImplements($this->src),
                 'dependency'  => $dependency
             )
         );
