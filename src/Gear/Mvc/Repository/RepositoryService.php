@@ -161,7 +161,7 @@ class RepositoryService extends AbstractMvc
             'module'     => $this->getModule()->getModuleName(),
             'namespace'  => $this->getCode()->getNamespace($this->src),
             'extends'    => $this->getCode()->getExtends($this->src),
-            'uses'       => $this->getCode()->getUse($this->src, null),
+            'uses'       => $this->getCode()->getUse($this->src),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
             'classDocs'  => $this->getCode()->getClassDocs($this->src)
         ***REMOVED***;

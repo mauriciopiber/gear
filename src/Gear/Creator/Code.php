@@ -794,7 +794,7 @@ EOS;
         return $this->uses;
     }
 
-    public function getUse($data, array $include = null, array $implements = null)
+    public function getUse($data)
     {
         /* Load Dependency */
 
@@ -826,22 +826,6 @@ EOS;
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $item) {
-                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
-            }
-        }
-
-        if (!empty($include)) {
-            foreach ($include as $alias => $item) {
-                if (!is_int($alias)) {
-                    $this->uses .= 'use '.$item.' as '.$alias.';'.PHP_EOL;
-                    continue;
-                }
-                $this->uses .= 'use '.$item.';'.PHP_EOL;
-            }
-        }
-
-        if (!empty($implements)) {
-            foreach ($implements as $alias => $item) {
                 $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
             }
         }
