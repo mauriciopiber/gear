@@ -1,0 +1,30 @@
+module: PbrSrcService
+
+src:
+  0:
+    name: ImplementableInterface
+    type: Interface
+  1:
+    name: ImplementableNamespaceInterface
+    type: Interface
+    namespace: InterfacesNamespace
+        
+    
+  11:
+    name: ServiceImplements
+    type: Service
+    implements: Interfaces\ImplementableInterface
+  12:
+    name: ServiceImplementsNamespace
+    type: Service
+    implements: InterfacesNamespace\ImplementableNamespaceInterface
+  21:
+    name: ServiceImplementsMany
+    type: Service
+    implements: Interfaces\ImplementableInterface,InterfacesNamespace\ImplementableNamespaceInterface
+  12:
+    name: ServiceImplementsNamespaceMany
+    type: Service
+    namespace: InterfacesNamespace
+    implements: Interfaces\ImplementableInterface,InterfacesNamespace\ImplementableNamespaceInterface
+        

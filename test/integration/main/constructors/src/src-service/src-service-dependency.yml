@@ -2,7 +2,7 @@ modules: PbrSrcService
 
 src:
   1:
-    name: ServiceDependencyManyOne
+    name: ServiceManyDependencyOne
     type: Service
     service: factories
     dependency:
@@ -12,7 +12,7 @@ src:
       3: Service\ServiceExtendsOne
       4: Service\One\ServiceNamespaceOne
   2:
-    name: ServiceDependencyManyTwo
+    name: ServiceManyDependencyTwo
     type: Service
     service: factories    
     dependency:
@@ -20,16 +20,16 @@ src:
       1: Service\ServiceInvokableTwo
       2: Service\ServiceFactoryTwo
       3: Service\ServiceExtendsTwo
-      4: Service\Two\ServiceNamespaceTwo
+      4: Service\One\Two\ServiceNamespaceTwo
       
   11:
-    name: ServiceDependencyOneOne
+    name: ServiceOneDependencyOne
     type: Service
     service: factories    
     dependency:
       0: Service\ServiceOne
   12:
-    name: ServiceDependencyOneTwo
+    name: ServiceOneDependencyTwo
     type: Service
     service: factories    
     dependency:

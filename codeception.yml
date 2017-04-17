@@ -20,3 +20,6 @@ coverage:
             - 'src/*'
         exclude:
             - 'src/Gear/Module.php*'
+            - 'src/Gear/Mvc/*'
+            - 'src/Gear/Module/*'                        
+            - 'src/Gear/Project/*'            
