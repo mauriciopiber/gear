@@ -123,7 +123,7 @@ class FileUpgrade extends AbstractJsonService
             case 'phpmd.xml':
                 $found = $this->getProjectService()->copyPHPMD();
                 break;
-            case 'phpcs-docs.xml':
+            case 'phpcs.xml':
                 $found = $this->getProjectService()->getPhpcsDocs();
                 break;
             case 'Jenkinsfile':
@@ -214,7 +214,7 @@ class FileUpgrade extends AbstractJsonService
                 $found = $this->getModuleService()->getPhpunitCoverageBenchmarkConfig();
                 break;
 
-            case 'test/phpcs-docs.xml':
+            case 'test/phpcs.xml':
                 $found = $this->getModuleService()->getPhpcsDocsConfig();
                 break;
             case 'Jenkinsfile':
