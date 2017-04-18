@@ -51,7 +51,7 @@ class ServiceService extends AbstractMvc
         $fileName = $this->className.'.php';
         $location = $location;
         $options = [
-            'implements' => $this->getCode()->getImplements($this->src, [***REMOVED***),
+            'implements' => $this->getCode()->getImplements($this->src),
             'classDocs'  => $this->getCode()->getClassDocs($this->src),
             'module'     => $this->getModule()->getModuleName(),
             'namespace'  => $this->getCode()->getNamespace($this->src),

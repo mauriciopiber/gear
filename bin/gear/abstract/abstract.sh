@@ -62,7 +62,7 @@ function Gear_Util_CopyMigration
 	
 	if [ -e "$scriptDir/$migration" ***REMOVED***; then
 		
-	    sudo cp "$scriptDir/$migration" "$destination"
+	    sudo cp "$scriptDir/$migration" "$destination/data/migrations"
 	    return 0	
     fi
 

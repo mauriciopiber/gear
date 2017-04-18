@@ -90,11 +90,9 @@ class FixtureService extends AbstractMvc
         $dependencies = array_merge($dependencies, $this->include);
         $this->src->setDependency($dependencies);
 
-
         $implements = $this->src->getImplements();
         $implements = array_merge($implements, $this->implements);
         $this->src->setImplements($implements);
-
 
         $this->file->setOptions(
             array(
