@@ -35,7 +35,7 @@ src:
       column_html: 'html'     
   5:
     name: UploadImageOneFixture
-    db: UploadImage
+    db: UploadImageOne
     type: Fixture
   6:
     name: FullOneFixture

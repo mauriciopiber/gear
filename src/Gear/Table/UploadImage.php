@@ -31,13 +31,17 @@ class UploadImage extends AbstractJsonService implements \Gear\Column\Implements
     {
         $implements = [
             'Fixture' => [
-                'ImagemFixtureTrait' => 'GearImage\Fixture'
+                [
+                    'class' => '\GearImage\Fixture',
+                    'expand' => false
+                ***REMOVED***
             ***REMOVED***
         ***REMOVED***;
 
         return $implements[$codeName***REMOVED***;
     }
 
+    /**
     public function getFixtureUse()
     {
         return <<<EOS
@@ -54,6 +58,7 @@ EOS;
 
 EOS;
     }
+    */
 
     public function makeFixture($fixtures, $term = 'upload-image-table')
     {

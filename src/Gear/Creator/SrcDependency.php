@@ -79,6 +79,8 @@ class SrcDependency extends AbstractDependency
         }
 
         $dependencies = $this->src->getDependency();
+
+
         foreach ($dependencies as $dependency) {
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                 continue;
@@ -91,13 +93,13 @@ class SrcDependency extends AbstractDependency
 
             $srcName = $this->extractSrcNameFromDependency($dependency);
 
+            $expand = is_array($dependency) && isset($dependency['expand'***REMOVED***) && $dependency['expand'***REMOVED*** === false ? '' : 'Trait';
+
             if ($srcType[0***REMOVED*** == '\\') {
-                $namespace = sprintf('%s\%sTrait', ltrim($srcType, '\\'), $srcName);
+                $namespace = sprintf('%s\%s%s', ltrim($srcType, '\\'), $srcName, $expand);
             } else {
-                $namespace = sprintf('%s\%s\%sTrait', $this->getModule()->getModuleName(), $srcType, $srcName);
+                $namespace = sprintf('%s\%s\%s%s', $this->getModule()->getModuleName(), $srcType, $srcName, $expand);
             }
-
-
 
             $this->useNamespaceToString($namespace);
         }
@@ -126,18 +128,23 @@ class SrcDependency extends AbstractDependency
             }
 
             if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
-                $dependency = $dependency['class'***REMOVED***;
+                $dependencyClass = $dependency['class'***REMOVED***;
+            } else {
+                $dependencyClass = $dependency;
             }
 
-            if (in_array($dependency, $ignoreList)
-                || in_array($this->getModule()->getModuleName().'\\'.$dependency, $ignoreList)
+            if (in_array($dependencyClass, $ignoreList)
+                || in_array($this->getModule()->getModuleName().'\\'.$dependencyClass, $ignoreList)
             ) {
                 continue;
             }
 
             //var_dump($i, $dependency);
-            $srcName = $this->extractSrcNameFromDependency($dependency);
-            $namespace = sprintf('%sTrait', $srcName);
+            $srcName = $this->extractSrcNameFromDependency($dependencyClass);
+
+            $expand = is_array($dependency) && isset($dependency['expand'***REMOVED***) && $dependency['expand'***REMOVED*** === false ? '' : 'Trait';
+
+            $namespace = sprintf('%s%s', $srcName, $expand);
             $this->useAttributeToString($namespace);
 
             if ($count>1 && $i < $count-1) {

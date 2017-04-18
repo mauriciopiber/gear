@@ -69,6 +69,7 @@ class FixtureServiceTest extends AbstractTestCase
 
     /**
      * @group fix1
+     * @group fix2
      */
     public function testCreateFixtureWithUploadImageColumn()
     {
@@ -113,7 +114,7 @@ class FixtureServiceTest extends AbstractTestCase
 
         $file = $this->fixture->introspectFromTable($this->db);
 
-        $expected = $this->templates.'/fixture-with-upload-image.phtml';
+        $expected = $this->templates.'/fixture-with-column-upload-image.phtml';
 
         $this->assertEquals(
             file_get_contents($expected),
@@ -121,14 +122,106 @@ class FixtureServiceTest extends AbstractTestCase
         );
     }
 
-    public function testCreateFixtureWithUploadImageTable()
-    {
-
-    }
-
+    /**
+     * @group fix1
+     */
     public function testCreateFixtureWithUploadImageTableAndColumn()
     {
+        $tableName = 'MyTable';
+        $moduleName = 'MyModule';
+        $basePath = 'module';
 
+        $columnsData = [
+            [
+                'name' => 'column_varchar',
+                'type' => 'varchar',
+                'class' => 'Varchar\Varchar',
+                'nullable' => true
+            ***REMOVED***,
+            [
+                'name' => 'column_upload_image',
+                'type' => 'varchar',
+                'class' => 'Varchar\UploadImage',
+                'nullable' => true
+            ***REMOVED***
+        ***REMOVED***;
+
+        $columns = $this->getColumns($moduleName, $tableName, $columnsData);
+
+        $tableUrl = $this->string->str('url', $tableName);
+        $primaryKey = sprintf('id_%s', $tableUrl);
+
+        $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
+        $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->db = new Db(['table' => $tableName***REMOVED***);
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
+        $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(true);
+
+        $service = new Src(['name' => sprintf('%sFixture', $tableName), 'type' => 'Fixture'***REMOVED***);
+
+        $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
+
+        $file = $this->fixture->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/fixture-with-full-upload-image.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    /**
+     * @group fix1
+     */
+    public function testCreateFixtureWithUploadImageTable()
+    {
+        $tableName = 'MyTable';
+        $moduleName = 'MyModule';
+        $basePath = 'module';
+
+        $columnsData = [
+            [
+                'name' => 'column_varchar',
+                'type' => 'varchar',
+                'class' => 'Varchar\Varchar',
+                'nullable' => true
+            ***REMOVED***
+        ***REMOVED***;
+
+        $columns = $this->getColumns($moduleName, $tableName, $columnsData);
+
+        $tableUrl = $this->string->str('url', $tableName);
+        $primaryKey = sprintf('id_%s', $tableUrl);
+
+        $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
+        $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->db = new Db(['table' => $tableName***REMOVED***);
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
+        $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(true);
+
+        $service = new Src(['name' => sprintf('%sFixture', $tableName), 'type' => 'Fixture'***REMOVED***);
+
+        $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
+
+        $file = $this->fixture->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/fixture-with-table-upload-image.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
     }
 
     /**
