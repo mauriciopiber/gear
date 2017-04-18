@@ -319,8 +319,9 @@ class FixtureService extends AbstractMvc
     public function getUploadImageTable()
     {
         $uploadImage = new \Gear\Table\UploadImage();
-        $uploadImage->setServiceLocator($this->getServiceLocator());
+        //$uploadImage->setServiceLocator($this->getServiceLocator());
         $uploadImage->setModule($this->getModule());
+        $uploadImage->setStringService($this->getStringService());
 
         $this->load .= $uploadImage->getFixtureLoad($this->tableName);
         $this->preLoad .= $uploadImage->getFixturePreLoad();

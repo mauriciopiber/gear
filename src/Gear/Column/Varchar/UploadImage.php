@@ -478,32 +478,6 @@ EOS;
 EOS;
     }
 
-    /**
-     * Retorna as dependências que serão utilizadas pela classe de fixture em Gear\Mvc\Fixture\FixtureService
-     *
-     * @return string
-     */
-    public function getFixtureUse()
-    {
-        return <<<EOS
-use GearImage\Fixture as ImagemFixtureTrait;
-
-EOS;
-    }
-
-    /**
-     * Retorna os atributos das dependências utilizadas pela classe de fixture em Gear\Mvc\Fixture\FixtureService
-     *
-     * @return string
-     */
-    public function getFixtureAttribute()
-    {
-
-        return <<<EOS
-    use ImagemFixtureTrait;
-
-EOS;
-    }
 
     /**
      * @deprecated será alterada a funcionalidade de getOrderBy do Repository, possivelmente será modificado
@@ -647,7 +621,10 @@ EOS;
                 'GearImage\Service\ImagemServiceTrait'
             ***REMOVED***,
             'Fixture' => [
-                'ImagemFixtureTrait' => 'GearImage\Fixture'
+                [
+                    'class' => '\GearImage\Fixture',
+                    'expand' => false
+                ***REMOVED***
             ***REMOVED***
         ***REMOVED***;
 

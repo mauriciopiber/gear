@@ -1,0 +1,189 @@
+<?php
+namespace MyModule\Fixture;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use MyModule\Entity\MyTable;
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use GearImage\Fixture;
+
+/**
+ * Fixture for My Table Entity.
+ *
+ * PHP Version 5
+ *
+ * @category Fixture
+ * @package MyModule/Fixture
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableFixture extends AbstractFixture implements
+    FixtureInterface,
+    DependentFixtureInterface
+{
+    use Fixture;
+
+    /**
+     * Load Fixture
+     *
+     * @param ObjectManager $manager Object Manager
+     *
+     * @return void
+     */
+    public function load(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+        $imageEntity = '\MyModule\Entity\UploadImage';
+        foreach ($this->getFixture() as $i => $fixture) {
+            $reference = $i+1;
+            $myTable = new MyTable();
+            $myTable->setColumnVarchar($fixture['columnVarchar'***REMOVED***);
+            $userReferenced = $this->getReferenceToEntity($reference);
+            $myTable->setCreated(new \DateTime('now'));
+            $myTable->setCreatedBy($userReferenced);
+            $this->manager->persist($myTable);
+            $this->manager->flush();
+            $this->addReference("my-table-$reference", $myTable);
+            $this->createUploadImageTableFixture(
+                'my-table',
+                $myTable,
+                $imageEntity,
+                $userReferenced,
+                new \MyModule\Module()
+            );
+        }
+    }
+
+    /**
+     * Return Fixture Data Generated.
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
+     */
+    public function getFixture()
+    {
+        return [
+            [
+                'columnVarchar' => '01Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '02Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '03Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '04Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '05Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '06Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '07Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '08Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '09Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '10Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '11Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '12Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '13Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '14Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '15Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '16Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '17Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '18Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '19Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '20Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '21Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '22Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '23Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '24Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '25Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '26Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '27Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '28Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '29Column Varchar',
+            ***REMOVED***,
+            [
+                'columnVarchar' => '30Column Varchar',
+            ***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * Load the User Entity.
+     *
+     * To be used on created_by and updated_by column.
+     *
+     * @param Integer $referenced Número de Referência
+     *
+     * @return GearAdmin\Entity\User
+     */
+    public function getReferenceToEntity($referenced = 1)
+    {
+        $referencedName = sprintf('usuariogear%d', ($referenced <= 6) ? $referenced : (($referenced%6)+1));
+        $userId = $this->getReference($referencedName);
+        return $this->manager
+          ->getRepository('GearAdmin\Entity\User')
+          ->findOneBy(['idUser' => $userId->getIdUser()***REMOVED***);
+    }
+
+    /**
+     * Get The Table's Foreign Keys Dependencies.
+     *
+     * @return string[***REMOVED***
+     */
+    public function getDependencies()
+    {
+        return ['GearAdmin\Fixture\LoadUser'***REMOVED***;
+    }
+}
