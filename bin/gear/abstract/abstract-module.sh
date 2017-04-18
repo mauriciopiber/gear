@@ -89,7 +89,7 @@ function Gear_Module_Clear
     sudo rm -R src/$module
     sudo rm -R test/unit/$moduleTest
     
-    if [ -d "$modulePath/data/migrations" ***REMOVED***; then
+    if [ -d "$modulePath/data/migrations/*" ***REMOVED***; then
         sudo rm -R data/migrations/*	
     fi
 
