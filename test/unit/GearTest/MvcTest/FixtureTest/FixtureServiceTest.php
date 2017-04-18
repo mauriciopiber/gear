@@ -1,17 +1,18 @@
 <?php
 namespace GearTest\MvcTest\FixtureTest;
 
-use GearBaseTest\AbstractTestCase;
-use GearTest\SingleDbTableTrait;
 use org\bovigo\vfs\vfsStream;
+use GearBaseTest\AbstractTestCase;
 use GearBase\Util\String\StringService;
-use Gear\Creator\TemplateService;
 use GearBase\Util\File\FileService;
+use GearJson\Src\Src;
+use GearJson\Db\Db;
+use GearTest\SingleDbTableTrait;
+use GearTest\DatabaseColumnsMockerTrait;
+use Gear\Creator\TemplateService;
 use Gear\Creator\File;
 use Gear\Module;
-use GearJson\Db\Db;
 use Gear\Mvc\Fixture\FixtureService;
-use GearJson\Src\Src;
 use Gear\Creator\SrcDependency;
 use Gear\Creator\Code;
 
@@ -21,7 +22,7 @@ use Gear\Creator\Code;
 class FixtureServiceTest extends AbstractTestCase
 {
     use SingleDbTableTrait;
-
+    use DatabaseColumnsMockerTrait;
 
     public function setUp()
     {
@@ -52,6 +53,7 @@ class FixtureServiceTest extends AbstractTestCase
         $this->fixture->setSchemaService($this->schemaService->reveal());
 
         $this->srcDependency = new SrcDependency();
+        $this->srcDependency->setModule($this->module->reveal());
         $this->fixture->setSrcDependency($this->srcDependency);
 
         $this->code = new Code();
@@ -60,10 +62,73 @@ class FixtureServiceTest extends AbstractTestCase
         $this->fixture->setCode($this->code);
     }
 
-
     public function tables()
     {
         return [[$this->getSingleColumns(), 'single-db'***REMOVED******REMOVED***;
+    }
+
+    /**
+     * @group fix1
+     */
+    public function testCreateFixtureWithUploadImageColumn()
+    {
+        $tableName = 'MyTable';
+        $moduleName = 'MyModule';
+        $basePath = 'module';
+
+        $columnsData = [
+            [
+                'name' => 'column_varchar',
+                'type' => 'varchar',
+                'class' => 'Varchar\Varchar',
+                'nullable' => true
+            ***REMOVED***,
+            [
+                'name' => 'column_upload_image',
+                'type' => 'varchar',
+                'class' => 'Varchar\UploadImage',
+                'nullable' => true
+            ***REMOVED***
+        ***REMOVED***;
+
+        $columns = $this->getColumns($moduleName, $tableName, $columnsData);
+
+        $tableUrl = $this->string->str('url', $tableName);
+        $primaryKey = sprintf('id_%s', $tableUrl);
+
+        $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
+        $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $this->db = new Db(['table' => $tableName***REMOVED***);
+
+        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
+        $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
+        $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(false);
+
+        $service = new Src(['name' => sprintf('%sFixture', $tableName), 'type' => 'Fixture'***REMOVED***);
+
+        $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
+
+        $file = $this->fixture->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/fixture-with-upload-image.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testCreateFixtureWithUploadImageTable()
+    {
+
+    }
+
+    public function testCreateFixtureWithUploadImageTableAndColumn()
+    {
+
     }
 
     /**

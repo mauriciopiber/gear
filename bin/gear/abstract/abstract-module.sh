@@ -88,6 +88,18 @@ function Gear_Module_Clear
     sudo rm -R schema
     sudo rm -R src/$module
     sudo rm -R test/unit/$moduleTest
+    
+    if [ -d "$modulePath/data/migrations" ***REMOVED***; then
+        sudo rm -R data/migrations/*	
+    fi
+
+    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
+    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
+    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
+
+
+    echo "Deploy Develoment - Migrations/DB"
+    vendor/bin/database $database $username $password
             
     cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
     --type=$type \
