@@ -23,7 +23,7 @@ if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
     $implements = [***REMOVED***;
     $implements[***REMOVED*** = [
-        'name' => '%sImplementable%s%s',
+        'name' => '%sImpl%s%s',
         'type' => 'Interface'
     ***REMOVED***;
 
@@ -96,34 +96,34 @@ $dependencies = [***REMOVED***;
 if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
     $dependencies[***REMOVED*** = [
-        'name' => '%sDependency%s%s',
+        'name' => '%sDep%s%s',
         'type' => $type,
-        'dependency' => '%s\%sInvokables%s'
+        'dependency' => '%s\%sInvok%s'
     ***REMOVED***;
 
     $dependencies[***REMOVED*** = [
-        'name' => '%sDependencies%s%s',
+        'name' => '%sDeps%s%s',
         'type' => $type,
-        'dependency' => ['%s\%sInvokables%s', '%s\%sExtendsInvokables%s', '%s\%sImplementsInvokables%s'***REMOVED*** 
+        'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED*** 
     ***REMOVED***;
 
 
     $dependencies[***REMOVED*** = [
-        'name' => '%sDependencyFull%s%s',
+        'name' => '%sDepFull%s%s',
         'extends' => '%s\%sExtendable%s%s',
         'namespace' => '%s',
         'implements' => createMultiplesInterfaces($type, 1, $numberMap),
         'type' => $type,
-        'dependency' => '%s\%sInvokables%s'
+        'dependency' => '%s\%sInvok%s'
     ***REMOVED***;
 
     $dependencies[***REMOVED*** = [
-        'name' => '%sDependenciesFull%s%s',
+        'name' => '%sDepsFull%s%s',
         'extends' => '%s\%sExtendable%s%s',
         'namespace' => '%s',
         'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
         'type' => $type,
-        'dependency' => ['%s\%sInvokables%s', '%s\%sExtendsInvokables%s', '%s\%sImplementsInvokables%s'***REMOVED***
+        'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
     ***REMOVED***;
 
     $config = ['factories', 'abstract'***REMOVED***;
