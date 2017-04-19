@@ -107,7 +107,7 @@ function generateSource($invokable, $configName, $type, $numberMap, $repeat)
            }
         
         } else {
-            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
+            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $numberMap[$repeat***REMOVED***);
         }
     
     }
@@ -155,26 +155,26 @@ $invokables[***REMOVED*** = [
 ***REMOVED***;
 
 $invokables[***REMOVED*** = [
-    'name' => '%s%sNamespace%s',
+    'name' => '%sNamespace%s%s',
     'type' => $type,
     'namespace' => '%s'
 ***REMOVED***;
 
 $invokables[***REMOVED*** = [
-    'name' => '%s%sImplements%s',
+    'name' => '%sImplements%s%s',
     'implements' => 'Interfaces\%sImplementable',
     'type' => $type
 ***REMOVED***;
 
 $invokables[***REMOVED*** = [
-    'name' => '%s%sExtends%s',
+    'name' => '%sExtends%s%s',
     'extends' => '%s\%sExtendable',
     'type' => $type
 ***REMOVED***;
 
 
 $invokables[***REMOVED*** = [
-    'name' => '%s%sFull%s',
+    'name' => '%sFull%s%s',
     'extends' => '%s\%sExtendable',
     'namespace' => '%s',
     'implements' => 'Interfaces\%sImplementable',
@@ -190,17 +190,35 @@ $classes = generateGearfiles($invokables, $config, $type, $repeat, $numberMap);
 $dependencies = [***REMOVED***;
 
 $dependencies[***REMOVED*** = [
-    'name' => '%s%sDependency%s',
+    'name' => '%sDependency%s%s',
     'type' => $type,
     'dependency' => 'Service\%sInvokables%s'
 ***REMOVED***;
 
 $dependencies[***REMOVED*** = [
-    'name' => '%s%sDependencies%s',
+    'name' => '%sDependencies%s%s',
     'type' => $type,
-    'dependency' => ['Service\%sInvokables%s', 'Service\%sInvokablesExtends%s', 'Service\%sInvokablesImplements%s'***REMOVED*** 
+    'dependency' => ['Service\%sInvokables%s', 'Service\%sExtendsInvokables%s', 'Service\%sImplementsInvokables%s'***REMOVED*** 
 ***REMOVED***;
 
+
+$dependencies[***REMOVED*** = [
+    'name' => '%sDependencyFull%s%s',
+    'extends' => '%s\%sExtendable',
+    'namespace' => '%s',
+    'implements' => 'Interfaces\%sImplementable',
+    'type' => $type,
+    'dependency' => 'Service\%sInvokables%s'
+***REMOVED***;
+
+$dependencies[***REMOVED*** = [
+    'name' => '%sDependenciesFull%s%s',
+    'extends' => '%s\%sExtendable',
+    'namespace' => '%s',
+    'implements' => 'Interfaces\%sImplementable',
+    'type' => $type,
+    'dependency' => ['Service\%sInvokables%s', 'Service\%sExtendsInvokables%s', 'Service\%sImplementsInvokables%s'***REMOVED***
+***REMOVED***;
 
 $config = ['factories', 'abstract'***REMOVED***;
 
@@ -209,6 +227,6 @@ $deps = generateGearfiles($dependencies, $config, $type, $repeat, $numberMap);
 
 $yaml = Yaml::dump(['src' => array_merge($classes, $deps)***REMOVED***);
 
-file_put_contents($template.'/tmp'.date('His').'.yml', $yaml);
+file_put_contents($template.'/src-'.$string->str('url', $type).'.yml', $yaml);
 
 return;

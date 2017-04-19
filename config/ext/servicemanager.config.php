@@ -47,7 +47,8 @@
         'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfigFactory',
         'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoloadFactory',
         'Gear\Creator\File\Injector' => 'Gear\Creator\File\InjectorFactory',
-        'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory'
+        'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
+        'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false
