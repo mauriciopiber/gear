@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group db-factory
@@ -41,6 +42,8 @@ class FactoryServiceTest extends AbstractTestCase
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
         $code->setDirService(new \GearBase\Util\Dir\DirService());
+        $constructorParams = new ConstructorParams($this->string);
+        $code->setConstructorParams($constructorParams);
 
         $this->factory = new \Gear\Mvc\Factory\FactoryService();
         $this->factory->setStringService($this->string);

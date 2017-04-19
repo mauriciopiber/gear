@@ -7,6 +7,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
 use \GearJson\Src\Src;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group src-mvc
@@ -53,6 +54,10 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->code->setModule($this->module->reveal());
         $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService($this->dirService);
+
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
+
         $this->repository->setCode($this->code);
 
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');

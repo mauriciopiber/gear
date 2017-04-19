@@ -15,6 +15,7 @@ use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Creator\SrcDependency;
 use Gear\Creator\Code;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group db-docs
@@ -59,6 +60,8 @@ class FixtureServiceTest extends AbstractTestCase
         $this->code = new Code();
         $this->code->setSrcDependency($this->srcDependency);
         $this->code->setModule($this->module->reveal());
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
         $this->fixture->setCode($this->code);
     }
 
