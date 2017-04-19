@@ -70,12 +70,12 @@ function generateSource($invokable, $configName, $type, $numberMap, $repeat)
 {
     $string = new StringService();
     
-    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
+    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', substr($configName, 0, 5)), $numberMap[$repeat***REMOVED***);
 
     $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
         
     if (isset($invokable['extends'***REMOVED***)) {
-        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
+        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', substr($configName, 0, 5)), $numberMap[$repeat***REMOVED***);
     }
     
     if (isset($invokable['namespace'***REMOVED***)) {
@@ -131,7 +131,7 @@ function createNamespace($type, $number, $numberMap)
         if (!empty($textName)) {
             $textName .= '\\';
         }
-        $textName .= sprintf('%s%s', $type, $numberMap[$x***REMOVED***);
+        $textName .= sprintf('%s%s', substr($type, 0, 5), $numberMap[$x***REMOVED***);
     
     }
 
@@ -141,7 +141,7 @@ function createNamespace($type, $number, $numberMap)
 
 function createMultiplesInterfaces($type, $repeat, $numberMap)
 {
-    $interfaceString = 'Interfaces\%sImplementable%s';
+    $interfaceString = 'Interfaces\%sImpl%s';
     
     if ($repeat == 1) {
         return sprintf($interfaceString, $type, $numberMap[1***REMOVED***);
