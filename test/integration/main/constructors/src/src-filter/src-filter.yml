@@ -1,26 +1,41 @@
-modules: MyModule
-
 src:
-  01:
-    name: BasicFilter
-    type: Filter
-  02:
-    name: BasicNamespaceFilter
-    type: Filter
-    namespace: My\GoodFilter\Working
-  03:
-    name: BasicFactory
-    type: Filter
-    service: factories
-  04:
-    name: BasicFactoryNamespace
-    type: Filter
-    service: factories
-    namespace: My\GoodFilter\Working
-  99:
-    name: FilterInterface
-    type: Interface
-    namespace: Interfaces
-    dependency: 'Filter\BasicFilter'  
-    
-  
+    - { name: FilterExtendableInvokablesOne, type: Filter, service: invokables }
+    - { name: FilterExtendableInvokablesTwo, type: Filter, service: invokables }
+    - { name: FilterExtendableInvokablesThree, type: Filter, service: invokables }
+    - { name: FilterExtendableInvokablesFour, type: Filter, service: invokables }
+    - { name: FilterExtendableFactoriesOne, type: Filter, service: factories }
+    - { name: FilterExtendableFactoriesTwo, type: Filter, service: factories }
+    - { name: FilterExtendableFactoriesThree, type: Filter, service: factories }
+    - { name: FilterExtendableFactoriesFour, type: Filter, service: factories }
+    - { name: FilterInvokablesOne, type: Filter, service: invokables }
+    - { name: FilterInvokablesTwo, type: Filter, service: invokables }
+    - { name: FilterInvokablesThree, type: Filter, service: invokables }
+    - { name: FilterInvokablesFour, type: Filter, service: invokables }
+    - { name: FilterFactoriesOne, type: Filter, service: factories }
+    - { name: FilterFactoriesTwo, type: Filter, service: factories }
+    - { name: FilterFactoriesThree, type: Filter, service: factories }
+    - { name: FilterFactoriesFour, type: Filter, service: factories }
+    - { name: FilterNamespaceInvokablesOne, type: Filter, namespace: FilterOne, service: invokables }
+    - { name: FilterNamespaceInvokablesTwo, type: Filter, namespace: FilterOne\FilterTwo, service: invokables }
+    - { name: FilterNamespaceInvokablesThree, type: Filter, namespace: FilterOne\FilterTwo\FilterThree, service: invokables }
+    - { name: FilterNamespaceInvokablesFour, type: Filter, namespace: FilterOne\FilterTwo\FilterThree\FilterFour, service: invokables }
+    - { name: FilterNamespaceFactoriesOne, type: Filter, namespace: FilterOne, service: factories }
+    - { name: FilterNamespaceFactoriesTwo, type: Filter, namespace: FilterOne\FilterTwo, service: factories }
+    - { name: FilterNamespaceFactoriesThree, type: Filter, namespace: FilterOne\FilterTwo\FilterThree, service: factories }
+    - { name: FilterNamespaceFactoriesFour, type: Filter, namespace: FilterOne\FilterTwo\FilterThree\FilterFour, service: factories }
+    - { name: FilterExtendsInvokablesOne, type: Filter, extends: Filter\FilterExtendableInvokablesOne, service: invokables }
+    - { name: FilterExtendsInvokablesTwo, type: Filter, extends: Filter\FilterExtendableInvokablesTwo, service: invokables }
+    - { name: FilterExtendsInvokablesThree, type: Filter, extends: Filter\FilterExtendableInvokablesThree, service: invokables }
+    - { name: FilterExtendsInvokablesFour, type: Filter, extends: Filter\FilterExtendableInvokablesFour, service: invokables }
+    - { name: FilterExtendsFactoriesOne, type: Filter, extends: Filter\FilterExtendableFactoriesOne, service: factories }
+    - { name: FilterExtendsFactoriesTwo, type: Filter, extends: Filter\FilterExtendableFactoriesTwo, service: factories }
+    - { name: FilterExtendsFactoriesThree, type: Filter, extends: Filter\FilterExtendableFactoriesThree, service: factories }
+    - { name: FilterExtendsFactoriesFour, type: Filter, extends: Filter\FilterExtendableFactoriesFour, service: factories }
+    - { name: FilterFullInvokablesOne, type: Filter, extends: Filter\FilterExtendableInvokablesOne, namespace: FilterOne, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: invokables }
+    - { name: FilterFullInvokablesTwo, type: Filter, extends: Filter\FilterExtendableInvokablesTwo, namespace: FilterOne\FilterTwo, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: invokables }
+    - { name: FilterFullInvokablesThree, type: Filter, extends: Filter\FilterExtendableInvokablesThree, namespace: FilterOne\FilterTwo\FilterThree, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: invokables }
+    - { name: FilterFullInvokablesFour, type: Filter, extends: Filter\FilterExtendableInvokablesFour, namespace: FilterOne\FilterTwo\FilterThree\FilterFour, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: invokables }
+    - { name: FilterFullFactoriesOne, type: Filter, extends: Filter\FilterExtendableFactoriesOne, namespace: FilterOne, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: factories }
+    - { name: FilterFullFactoriesTwo, type: Filter, extends: Filter\FilterExtendableFactoriesTwo, namespace: FilterOne\FilterTwo, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: factories }
+    - { name: FilterFullFactoriesThree, type: Filter, extends: Filter\FilterExtendableFactoriesThree, namespace: FilterOne\FilterTwo\FilterThree, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: factories }
+    - { name: FilterFullFactoriesFour, type: Filter, extends: Filter\FilterExtendableFactoriesFour, namespace: FilterOne\FilterTwo\FilterThree\FilterFour, implements: [Interfaces\FilterImplementableOne, Interfaces\FilterImplementableTwo, Interfaces\FilterImplementableThree, Interfaces\FilterImplementableFour***REMOVED***, service: factories }

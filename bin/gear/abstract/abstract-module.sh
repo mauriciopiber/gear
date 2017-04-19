@@ -139,11 +139,23 @@ function Gear_Module_Integrate
     cd $modulePath && sudo composer update
     
     if [ "$type" == "web" ***REMOVED***; then
-        cd $modulePath && sudo vendor/bin/install-nodejs
-        cd $modulePath && sudo vendor/bin/virtualhost  $(pwd) $moduleUrl.gear.dev DEVELOPMENT
-        cd $modulePath && sudo vendor/bin/install-db-module $moduleUrl.mysql.sql $module
-        cd $modulePath && sudo vendor/bin/phinx migrate
-        cd $modulePath && sudo vendor/bin/unload-module BjyAuthorize
+        sudo vendor/bin/install-nodejs
+        sudo vendor/bin/virtualhost  $(pwd) $moduleUrl.gear.dev DEVELOPMENT
+        sudo vendor/bin/install-db-module $moduleUrl.mysql.sql $module
+        sudo vendor/bin/phinx migrate
+        sudo vendor/bin/unload-module BjyAuthorize
+    fi
+   
+    if [ "$type" == "cli" ***REMOVED***; then
+    	    
+        database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
+        username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
+        password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
+
+
+        echo "Deploy Develoment - Migrations/DB"
+        vendor/bin/database $database $username $password
+    	
     fi
     
     Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"

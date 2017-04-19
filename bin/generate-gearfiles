@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+
 chdir(dirname(__DIR__));
 
 // Decline static file requests back to the PHP built-in webserver
@@ -12,178 +13,23 @@ if (php_sapi_name() === 'cli-server') {
     unset($path);
 }
 
+
 // Setup autoloading
-require 'init_autoloader.php';
-
-use GearJson\Src\Src;
-use Symfony\Component\Yaml\Yaml;
-use Gear\Module;
-use GearBase\Util\String\StringService;
-
-$string = new StringService();
-
-
-$numberMap = [
-    "Zero",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Teen"
-***REMOVED***;
-
-
-$files = ['invokables', 'factories', 'abstract'***REMOVED***;
-
-
-if (empty($argv[1***REMOVED***)) {
-    return;
-}
-
-$type = $string->str('class', $argv[1***REMOVED***);
-$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
-
-
-function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
-{
-    $invokableFile = [***REMOVED***;
-
-    foreach ($invokables as $invokable) {
-
-        foreach ($config as $configName) {
-
-            for ($i = 1; $i <= $repeat; $i++) {
-  
-                $invokableFile[***REMOVED*** = generateSource($invokable, $configName, $type, $numberMap, $i);
-            }
-        }
-    }
-    
-    return $invokableFile;
-
-
-}
-
-function generateSource($invokable, $configName, $type, $numberMap, $repeat)
-{
-    $string = new StringService();
-    
-    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
-
-    $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
-        
-    if (isset($invokable['extends'***REMOVED***)) {
-        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
-    }
-    
-    if (isset($invokable['namespace'***REMOVED***)) {
-        $entry['namespace'***REMOVED*** = createNamespace($type, $repeat, $numberMap);
-    
-    }
-    
-    if (isset($invokable['implements'***REMOVED***)) {
-    
-        if (is_array($invokable['implements'***REMOVED***)) {
-        
-           $entry['implements'***REMOVED*** = [***REMOVED***;
-           
-           foreach ($invokable['implements'***REMOVED*** as $invokDep) {
-               $entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberMap[$repeat***REMOVED***);
-           }
-        
-        } else {
-            $entry['implements'***REMOVED*** = sprintf($invokable['implements'***REMOVED***, $type, $numberMap[$repeat***REMOVED***);
-        }
-    }        
-                    
-    if ($configName !== 'abstract' && $invokable['type'***REMOVED*** !== 'Interface') {
-        $entry['service'***REMOVED*** = $configName;
-    } elseif ($invokable['type'***REMOVED*** !== 'Interface') {
-        $entry['abstract'***REMOVED*** = true;
-    }
-    
-    
-    if (isset($invokable['dependency'***REMOVED***)) {
-        if (is_array($invokable['dependency'***REMOVED***)) {
-        
-           $entry['dependency'***REMOVED*** = [***REMOVED***;
-           
-           foreach ($invokable['dependency'***REMOVED*** as $invokDep) {
-               $entry['dependency'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberMap[$repeat***REMOVED***);
-           }
-        
-        } else {
-            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $numberMap[$repeat***REMOVED***);
-        }
-    }
-    
-    return $entry;
-}
-
-function createNamespace($type, $number, $numberMap)
-{
-    $textName = '';
-    
-    for ($x = 1; $x <= $number; $x++) {
-    
-        if (!empty($textName)) {
-            $textName .= '\\';
-        }
-        $textName .= sprintf('%s%s', $type, $numberMap[$x***REMOVED***);
-    
-    }
-
-
-    return $textName;
-}
-
-function createMultiplesInterfaces($type, $repeat, $numberMap)
-{
-    $interfaceString = 'Interfaces\%sImplementable%s';
-    
-    if ($repeat == 1) {
-        return sprintf($interfaceString, $type, $numberMap[1***REMOVED***);
-    }
-    
-    $interfaces = [***REMOVED***;
-
-    for ($z = 1; $z <= $repeat; $z++) {
-        $interfaces[***REMOVED*** = sprintf($interfaceString, $type, $numberMap[$z***REMOVED***);
-    }
-    
-    return $interfaces;
-}
-
-function createMultiplesDependencies($numbers, $repeat)
-{
-    for ($v = 1; $v <= $repeat; $v++) {
-    
-    }
-}
-
-
-$constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/src/');
-
-$template = realpath(sprintf($constructorIntegration.'/src-%s/', $string->str('url', $type)));
-
-
-
+require __DIR__.'/generate-functions';
 
 $data = [***REMOVED***;
 
-$implements = [***REMOVED***;
-$implements[***REMOVED*** = [
-    'name' => '%sImplementable%s%s',
-    'type' => 'Interface'
-***REMOVED***;
+if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
-$data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, $numberMap));
+    $implements = [***REMOVED***;
+    $implements[***REMOVED*** = [
+        'name' => '%sImplementable%s%s',
+        'type' => 'Interface'
+    ***REMOVED***;
 
+    $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, $numberMap));
+
+}
 $invokables = [***REMOVED***;
 
 $invokables[***REMOVED*** = [
@@ -202,17 +48,23 @@ $invokables[***REMOVED*** = [
     'namespace' => '%s'
 ***REMOVED***;
 
-$invokables[***REMOVED*** = [
-    'name' => '%sImplements%s%s',
-    'implements' => createMultiplesInterfaces($type, 1, $numberMap),
-    'type' => $type
-***REMOVED***;
+//implements
+if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
-$invokables[***REMOVED*** = [
-    'name' => '%sImplementsMany%s%s',
-    'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
-    'type' => $type
-***REMOVED***;
+    $invokables[***REMOVED*** = [
+        'name' => '%sImplements%s%s',
+        'implements' => createMultiplesInterfaces($type, 1, $numberMap),
+        'type' => $type
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sImplementsMany%s%s',
+        'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
+        'type' => $type
+    ***REMOVED***;
+}
+
+
 
 $invokables[***REMOVED*** = [
     'name' => '%sExtends%s%s',
@@ -229,7 +81,11 @@ $invokables[***REMOVED*** = [
     'type' => $type
 ***REMOVED***;
 
-$config = ['invokables', 'factories', 'abstract'***REMOVED***;
+$config = ['invokables', 'factories'***REMOVED***;
+
+if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+    $config[***REMOVED*** = 'abstract';
+}
 
 
 $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat, $numberMap));
@@ -237,45 +93,46 @@ $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repea
 $dependencies = [***REMOVED***;
 
 //to max dependency based on repeat number. interfaces too.
+if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
-$dependencies[***REMOVED*** = [
-    'name' => '%sDependency%s%s',
-    'type' => $type,
-    'dependency' => 'Service\%sInvokables%s'
-***REMOVED***;
+    $dependencies[***REMOVED*** = [
+        'name' => '%sDependency%s%s',
+        'type' => $type,
+        'dependency' => '%s\%sInvokables%s'
+    ***REMOVED***;
 
-$dependencies[***REMOVED*** = [
-    'name' => '%sDependencies%s%s',
-    'type' => $type,
-    'dependency' => ['Service\%sInvokables%s', 'Service\%sExtendsInvokables%s', 'Service\%sImplementsInvokables%s'***REMOVED*** 
-***REMOVED***;
-
-
-$dependencies[***REMOVED*** = [
-    'name' => '%sDependencyFull%s%s',
-    'extends' => '%s\%sExtendable%s%s',
-    'namespace' => '%s',
-    'implements' => createMultiplesInterfaces($type, 1, $numberMap),
-    'type' => $type,
-    'dependency' => 'Service\%sInvokables%s'
-***REMOVED***;
-
-$dependencies[***REMOVED*** = [
-    'name' => '%sDependenciesFull%s%s',
-    'extends' => '%s\%sExtendable%s%s',
-    'namespace' => '%s',
-    'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
-    'type' => $type,
-    'dependency' => ['Service\%sInvokables%s', 'Service\%sExtendsInvokables%s', 'Service\%sImplementsInvokables%s'***REMOVED***
-***REMOVED***;
-
-$config = ['factories', 'abstract'***REMOVED***;
+    $dependencies[***REMOVED*** = [
+        'name' => '%sDependencies%s%s',
+        'type' => $type,
+        'dependency' => ['%s\%sInvokables%s', '%s\%sExtendsInvokables%s', '%s\%sImplementsInvokables%s'***REMOVED*** 
+    ***REMOVED***;
 
 
-$data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat, $numberMap));
+    $dependencies[***REMOVED*** = [
+        'name' => '%sDependencyFull%s%s',
+        'extends' => '%s\%sExtendable%s%s',
+        'namespace' => '%s',
+        'implements' => createMultiplesInterfaces($type, 1, $numberMap),
+        'type' => $type,
+        'dependency' => '%s\%sInvokables%s'
+    ***REMOVED***;
 
-$yaml = Yaml::dump(['src' => $data***REMOVED***);
+    $dependencies[***REMOVED*** = [
+        'name' => '%sDependenciesFull%s%s',
+        'extends' => '%s\%sExtendable%s%s',
+        'namespace' => '%s',
+        'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
+        'type' => $type,
+        'dependency' => ['%s\%sInvokables%s', '%s\%sExtendsInvokables%s', '%s\%sImplementsInvokables%s'***REMOVED***
+    ***REMOVED***;
 
-file_put_contents($template.'/src-'.$string->str('url', $type).'.yml', $yaml);
+    $config = ['factories', 'abstract'***REMOVED***;
+
+
+    $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat, $numberMap));
+
+}
+
+output($data, $type);
 
 return;

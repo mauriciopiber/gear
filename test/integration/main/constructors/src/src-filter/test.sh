@@ -8,6 +8,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrSrcFilter"
 type="cli"
 migration=""
-gearfile="gear-filter.yml"
+gearfile="src-filter.yml"
 
 source "$bin/gear/module/test-module.sh"

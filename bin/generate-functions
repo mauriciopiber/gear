@@ -1,0 +1,179 @@
+<?php
+chdir(dirname(__DIR__));
+
+// Decline static file requests back to the PHP built-in webserver
+if (php_sapi_name() === 'cli-server') {
+    $path = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'***REMOVED***, PHP_URL_PATH));
+    if (__FILE__ !== $path && is_file($path)) {
+        return false;
+    }
+    unset($path);
+}
+
+require 'init_autoloader.php';
+
+use GearJson\Src\Src;
+use Symfony\Component\Yaml\Yaml;
+use Gear\Module;
+use GearBase\Util\String\StringService;
+
+$string = new StringService();
+
+
+$numberMap = [
+    "Zero",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Teen"
+***REMOVED***;
+
+
+$files = ['invokables', 'factories', 'abstract'***REMOVED***;
+
+
+if (empty($argv[1***REMOVED***)) {
+    return;
+}
+
+$type = $string->str('class', $argv[1***REMOVED***);
+$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
+
+
+function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
+{
+    $invokableFile = [***REMOVED***;
+
+    foreach ($invokables as $invokable) {
+
+        foreach ($config as $configName) {
+
+            for ($i = 1; $i <= $repeat; $i++) {
+  
+                $invokableFile[***REMOVED*** = generateSource($invokable, $configName, $type, $numberMap, $i);
+            }
+        }
+    }
+    
+    return $invokableFile;
+
+
+}
+
+function generateSource($invokable, $configName, $type, $numberMap, $repeat)
+{
+    $string = new StringService();
+    
+    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
+
+    $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
+        
+    if (isset($invokable['extends'***REMOVED***)) {
+        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', $configName), $numberMap[$repeat***REMOVED***);
+    }
+    
+    if (isset($invokable['namespace'***REMOVED***)) {
+        $entry['namespace'***REMOVED*** = createNamespace($type, $repeat, $numberMap);
+    
+    }
+    
+    if (isset($invokable['implements'***REMOVED***)) {
+    
+        if (is_array($invokable['implements'***REMOVED***)) {
+        
+           $entry['implements'***REMOVED*** = [***REMOVED***;
+           
+           foreach ($invokable['implements'***REMOVED*** as $invokDep) {
+               $entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberMap[$repeat***REMOVED***);
+           }
+        
+        } else {
+            $entry['implements'***REMOVED*** = sprintf($invokable['implements'***REMOVED***, $type, $numberMap[$repeat***REMOVED***);
+        }
+    }        
+                    
+    if ($configName !== 'abstract' && $invokable['type'***REMOVED*** !== 'Interface') {
+        $entry['service'***REMOVED*** = $configName;
+    } elseif ($invokable['type'***REMOVED*** !== 'Interface') {
+        $entry['abstract'***REMOVED*** = true;
+    }
+    
+    
+    if (isset($invokable['dependency'***REMOVED***)) {
+        if (is_array($invokable['dependency'***REMOVED***)) {
+        
+           $entry['dependency'***REMOVED*** = [***REMOVED***;
+           
+           foreach ($invokable['dependency'***REMOVED*** as $invokDep) {
+               $entry['dependency'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $type, $numberMap[$repeat***REMOVED***);
+           }
+        
+        } else {
+            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $type, $numberMap[$repeat***REMOVED***);
+        }
+    }
+    
+    return $entry;
+}
+
+function createNamespace($type, $number, $numberMap)
+{
+    $textName = '';
+    
+    for ($x = 1; $x <= $number; $x++) {
+    
+        if (!empty($textName)) {
+            $textName .= '\\';
+        }
+        $textName .= sprintf('%s%s', $type, $numberMap[$x***REMOVED***);
+    
+    }
+
+
+    return $textName;
+}
+
+function createMultiplesInterfaces($type, $repeat, $numberMap)
+{
+    $interfaceString = 'Interfaces\%sImplementable%s';
+    
+    if ($repeat == 1) {
+        return sprintf($interfaceString, $type, $numberMap[1***REMOVED***);
+    }
+    
+    $interfaces = [***REMOVED***;
+
+    for ($z = 1; $z <= $repeat; $z++) {
+        $interfaces[***REMOVED*** = sprintf($interfaceString, $type, $numberMap[$z***REMOVED***);
+    }
+    
+    return $interfaces;
+}
+
+function createMultiplesDependencies($numbers, $repeat)
+{
+    for ($v = 1; $v <= $repeat; $v++) {
+    
+    }
+}
+
+function output($data, $type)
+{
+    $string = new StringService();
+    
+    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/src/');
+    
+    $template = realpath(sprintf($constructorIntegration.'/src-%s/', $string->str('url', $type)));
+    
+    $yaml = Yaml::dump(['src' => $data***REMOVED***);
+
+    file_put_contents($template.'/src-'.$string->str('url', $type).'.yml', $yaml);
+
+    echo "Salvo com sucesso"."\n";
+}
