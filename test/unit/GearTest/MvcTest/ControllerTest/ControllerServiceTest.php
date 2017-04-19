@@ -19,6 +19,7 @@ use Gear\Util\Vector\ArrayService;
 use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
 use GearTest\ControllerScopeTrait;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group Fixing
@@ -95,6 +96,9 @@ class ControllerServiceTest extends TestCase
         $this->code->setModule($this->module->reveal());
         $this->code->setControllerDependency($this->controllerDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
 
         $this->controllerService->setCode($this->code);
 

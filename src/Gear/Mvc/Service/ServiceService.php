@@ -45,8 +45,6 @@ class ServiceService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-
-
         $template = 'template/module/mvc/service/src/src.phtml';
         $fileName = $this->className.'.php';
         $location = $location;
@@ -72,7 +70,7 @@ class ServiceService extends AbstractMvc
             $this->getTraitService()->createTrait($this->src, $location);
         }
 
-        if ($this->src->getService() == 'factories' && $this->src->getAbstract() !== false) {
+        if ($this->src->getService() == 'factories' && $this->src->getAbstract() !== true) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 

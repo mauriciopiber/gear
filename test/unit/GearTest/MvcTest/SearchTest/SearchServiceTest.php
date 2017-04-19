@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
 use GearTest\UtilTestTrait;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group db-namespace-factory
@@ -51,6 +52,8 @@ class SearchServiceTest extends AbstractTestCase
         $this->code->setStringService($this->string);
         $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
 
         //array
         $this->arrayService = new \Gear\Util\Vector\ArrayService();

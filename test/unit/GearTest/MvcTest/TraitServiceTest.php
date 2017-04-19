@@ -3,6 +3,7 @@ namespace GearTest\ServiceTest\MvcTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group Mvc
@@ -36,6 +37,8 @@ class TraitServiceTest extends AbstractTestCase
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
         $code->setDirService(new \GearBase\Util\Dir\DirService());
+        $constructorParams = new ConstructorParams($this->string);
+        $code->setConstructorParams($constructorParams);
 
         $srcDependency = new \Gear\Creator\SrcDependency();
         $srcDependency->setModule($this->module->reveal());

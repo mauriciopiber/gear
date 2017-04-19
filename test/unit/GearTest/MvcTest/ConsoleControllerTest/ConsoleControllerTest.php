@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 use GearJson\Controller\Controller;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group Fix2
@@ -60,6 +61,17 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
         $this->controller->setTraitService($this->traitService->reveal());
+
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setControllerDependency($this->controllerDependency);
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setArrayService($this->array);
+        $this->controller->setCode($this->code);
+
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
     }
 
 
@@ -75,14 +87,7 @@ class ConsoleControllerTest extends AbstractTestCase
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setControllerDependency($this->controllerDependency);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
-        $this->code->setArrayService($this->array);
 
-        $this->controller->setCode($this->code);
 
         $file = $this->controller->buildController($controller);
 
@@ -142,13 +147,6 @@ class ConsoleControllerTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
-
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setControllerDependency($this->controllerDependency);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
-        $this->code->setArrayService($this->array);
 
         $this->controller->setCode($this->code);
 
