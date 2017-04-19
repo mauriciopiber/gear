@@ -1,12 +1,121 @@
-modules: MyModule
-
 src:
-  91:
-    name: SrcRepository
-    type: Repository    
-  92:
-    
-    name: SrcRepositoryNamespace
-    type: Repository
-    namespace: MyRepositoryNamespace    
- 
+    - { name: RepositoryImplementableOne, type: Interface }
+    - { name: RepositoryImplementableTwo, type: Interface }
+    - { name: RepositoryImplementableThree, type: Interface }
+    - { name: RepositoryImplementableFour, type: Interface }
+    - { name: RepositoryExtendableInvokablesOne, type: Repository, service: invokables }
+    - { name: RepositoryExtendableInvokablesTwo, type: Repository, service: invokables }
+    - { name: RepositoryExtendableInvokablesThree, type: Repository, service: invokables }
+    - { name: RepositoryExtendableInvokablesFour, type: Repository, service: invokables }
+    - { name: RepositoryExtendableFactoriesOne, type: Repository, service: factories }
+    - { name: RepositoryExtendableFactoriesTwo, type: Repository, service: factories }
+    - { name: RepositoryExtendableFactoriesThree, type: Repository, service: factories }
+    - { name: RepositoryExtendableFactoriesFour, type: Repository, service: factories }
+    - { name: RepositoryExtendableAbstractOne, type: Repository, abstract: true }
+    - { name: RepositoryExtendableAbstractTwo, type: Repository, abstract: true }
+    - { name: RepositoryExtendableAbstractThree, type: Repository, abstract: true }
+    - { name: RepositoryExtendableAbstractFour, type: Repository, abstract: true }
+    - { name: RepositoryInvokablesOne, type: Repository, service: invokables }
+    - { name: RepositoryInvokablesTwo, type: Repository, service: invokables }
+    - { name: RepositoryInvokablesThree, type: Repository, service: invokables }
+    - { name: RepositoryInvokablesFour, type: Repository, service: invokables }
+    - { name: RepositoryFactoriesOne, type: Repository, service: factories }
+    - { name: RepositoryFactoriesTwo, type: Repository, service: factories }
+    - { name: RepositoryFactoriesThree, type: Repository, service: factories }
+    - { name: RepositoryFactoriesFour, type: Repository, service: factories }
+    - { name: RepositoryAbstractOne, type: Repository, abstract: true }
+    - { name: RepositoryAbstractTwo, type: Repository, abstract: true }
+    - { name: RepositoryAbstractThree, type: Repository, abstract: true }
+    - { name: RepositoryAbstractFour, type: Repository, abstract: true }
+    - { name: RepositoryNamespaceInvokablesOne, type: Repository, namespace: RepositoryOne, service: invokables }
+    - { name: RepositoryNamespaceInvokablesTwo, type: Repository, namespace: RepositoryOne\RepositoryTwo, service: invokables }
+    - { name: RepositoryNamespaceInvokablesThree, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, service: invokables }
+    - { name: RepositoryNamespaceInvokablesFour, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, service: invokables }
+    - { name: RepositoryNamespaceFactoriesOne, type: Repository, namespace: RepositoryOne, service: factories }
+    - { name: RepositoryNamespaceFactoriesTwo, type: Repository, namespace: RepositoryOne\RepositoryTwo, service: factories }
+    - { name: RepositoryNamespaceFactoriesThree, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, service: factories }
+    - { name: RepositoryNamespaceFactoriesFour, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, service: factories }
+    - { name: RepositoryNamespaceAbstractOne, type: Repository, namespace: RepositoryOne, abstract: true }
+    - { name: RepositoryNamespaceAbstractTwo, type: Repository, namespace: RepositoryOne\RepositoryTwo, abstract: true }
+    - { name: RepositoryNamespaceAbstractThree, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, abstract: true }
+    - { name: RepositoryNamespaceAbstractFour, type: Repository, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, abstract: true }
+    - { name: RepositoryImplementsInvokablesOne, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: invokables }
+    - { name: RepositoryImplementsInvokablesTwo, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: invokables }
+    - { name: RepositoryImplementsInvokablesThree, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: invokables }
+    - { name: RepositoryImplementsInvokablesFour, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: invokables }
+    - { name: RepositoryImplementsFactoriesOne, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: factories }
+    - { name: RepositoryImplementsFactoriesTwo, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: factories }
+    - { name: RepositoryImplementsFactoriesThree, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: factories }
+    - { name: RepositoryImplementsFactoriesFour, type: Repository, implements: Interfaces\RepositoryImplementableOne, service: factories }
+    - { name: RepositoryImplementsAbstractOne, type: Repository, implements: Interfaces\RepositoryImplementableOne, abstract: true }
+    - { name: RepositoryImplementsAbstractTwo, type: Repository, implements: Interfaces\RepositoryImplementableOne, abstract: true }
+    - { name: RepositoryImplementsAbstractThree, type: Repository, implements: Interfaces\RepositoryImplementableOne, abstract: true }
+    - { name: RepositoryImplementsAbstractFour, type: Repository, implements: Interfaces\RepositoryImplementableOne, abstract: true }
+    - { name: RepositoryImplementsManyInvokablesOne, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyInvokablesTwo, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyInvokablesThree, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyInvokablesFour, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyFactoriesOne, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyFactoriesTwo, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyFactoriesThree, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyFactoriesFour, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyAbstractOne, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsManyAbstractTwo, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsManyAbstractThree, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsManyAbstractFour, type: Repository, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryExtendsInvokablesOne, type: Repository, extends: Repository\RepositoryExtendableInvokablesOne, service: invokables }
+    - { name: RepositoryExtendsInvokablesTwo, type: Repository, extends: Repository\RepositoryExtendableInvokablesTwo, service: invokables }
+    - { name: RepositoryExtendsInvokablesThree, type: Repository, extends: Repository\RepositoryExtendableInvokablesThree, service: invokables }
+    - { name: RepositoryExtendsInvokablesFour, type: Repository, extends: Repository\RepositoryExtendableInvokablesFour, service: invokables }
+    - { name: RepositoryExtendsFactoriesOne, type: Repository, extends: Repository\RepositoryExtendableFactoriesOne, service: factories }
+    - { name: RepositoryExtendsFactoriesTwo, type: Repository, extends: Repository\RepositoryExtendableFactoriesTwo, service: factories }
+    - { name: RepositoryExtendsFactoriesThree, type: Repository, extends: Repository\RepositoryExtendableFactoriesThree, service: factories }
+    - { name: RepositoryExtendsFactoriesFour, type: Repository, extends: Repository\RepositoryExtendableFactoriesFour, service: factories }
+    - { name: RepositoryExtendsAbstractOne, type: Repository, extends: Repository\RepositoryExtendableAbstractOne, abstract: true }
+    - { name: RepositoryExtendsAbstractTwo, type: Repository, extends: Repository\RepositoryExtendableAbstractTwo, abstract: true }
+    - { name: RepositoryExtendsAbstractThree, type: Repository, extends: Repository\RepositoryExtendableAbstractThree, abstract: true }
+    - { name: RepositoryExtendsAbstractFour, type: Repository, extends: Repository\RepositoryExtendableAbstractFour, abstract: true }
+    - { name: RepositoryFullInvokablesOne, type: Repository, extends: Repository\RepositoryExtendableInvokablesOne, namespace: RepositoryOne, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryFullInvokablesTwo, type: Repository, extends: Repository\RepositoryExtendableInvokablesTwo, namespace: RepositoryOne\RepositoryTwo, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryFullInvokablesThree, type: Repository, extends: Repository\RepositoryExtendableInvokablesThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryFullInvokablesFour, type: Repository, extends: Repository\RepositoryExtendableInvokablesFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: invokables }
+    - { name: RepositoryFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtendableFactoriesOne, namespace: RepositoryOne, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtendableFactoriesTwo, namespace: RepositoryOne\RepositoryTwo, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryFullFactoriesThree, type: Repository, extends: Repository\RepositoryExtendableFactoriesThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryFullFactoriesFour, type: Repository, extends: Repository\RepositoryExtendableFactoriesFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories }
+    - { name: RepositoryFullAbstractOne, type: Repository, extends: Repository\RepositoryExtendableAbstractOne, namespace: RepositoryOne, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtendableAbstractTwo, namespace: RepositoryOne\RepositoryTwo, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryFullAbstractThree, type: Repository, extends: Repository\RepositoryExtendableAbstractThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryFullAbstractFour, type: Repository, extends: Repository\RepositoryExtendableAbstractFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true }
+    - { name: RepositoryDependencyFactoriesOne, type: Repository, service: factories, dependency: Repository\RepositoryInvokablesOne }
+    - { name: RepositoryDependencyFactoriesTwo, type: Repository, service: factories, dependency: Repository\RepositoryInvokablesTwo }
+    - { name: RepositoryDependencyFactoriesThree, type: Repository, service: factories, dependency: Repository\RepositoryInvokablesThree }
+    - { name: RepositoryDependencyFactoriesFour, type: Repository, service: factories, dependency: Repository\RepositoryInvokablesFour }
+    - { name: RepositoryDependencyAbstractOne, type: Repository, abstract: true, dependency: Repository\RepositoryInvokablesOne }
+    - { name: RepositoryDependencyAbstractTwo, type: Repository, abstract: true, dependency: Repository\RepositoryInvokablesTwo }
+    - { name: RepositoryDependencyAbstractThree, type: Repository, abstract: true, dependency: Repository\RepositoryInvokablesThree }
+    - { name: RepositoryDependencyAbstractFour, type: Repository, abstract: true, dependency: Repository\RepositoryInvokablesFour }
+    - { name: RepositoryDependenciesFactoriesOne, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesFactoriesTwo, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesFactoriesThree, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesThree, Repository\RepositoryExtendsInvokablesThree, Repository\RepositoryImplementsInvokablesThree***REMOVED*** }
+    - { name: RepositoryDependenciesFactoriesFour, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesFour, Repository\RepositoryExtendsInvokablesFour, Repository\RepositoryImplementsInvokablesFour***REMOVED*** }
+    - { name: RepositoryDependenciesAbstractOne, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesAbstractTwo, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesAbstractThree, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesThree, Repository\RepositoryExtendsInvokablesThree, Repository\RepositoryImplementsInvokablesThree***REMOVED*** }
+    - { name: RepositoryDependenciesAbstractFour, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesFour, Repository\RepositoryExtendsInvokablesFour, Repository\RepositoryImplementsInvokablesFour***REMOVED*** }
+    - { name: RepositoryDependencyFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtendableFactoriesOne, namespace: RepositoryOne, implements: Interfaces\RepositoryImplementableOne, service: factories, dependency: Repository\RepositoryInvokablesOne }
+    - { name: RepositoryDependencyFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtendableFactoriesTwo, namespace: RepositoryOne\RepositoryTwo, implements: Interfaces\RepositoryImplementableOne, service: factories, dependency: Repository\RepositoryInvokablesTwo }
+    - { name: RepositoryDependencyFullFactoriesThree, type: Repository, extends: Repository\RepositoryExtendableFactoriesThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: Interfaces\RepositoryImplementableOne, service: factories, dependency: Repository\RepositoryInvokablesThree }
+    - { name: RepositoryDependencyFullFactoriesFour, type: Repository, extends: Repository\RepositoryExtendableFactoriesFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: Interfaces\RepositoryImplementableOne, service: factories, dependency: Repository\RepositoryInvokablesFour }
+    - { name: RepositoryDependencyFullAbstractOne, type: Repository, extends: Repository\RepositoryExtendableAbstractOne, namespace: RepositoryOne, implements: Interfaces\RepositoryImplementableOne, abstract: true, dependency: Repository\RepositoryInvokablesOne }
+    - { name: RepositoryDependencyFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtendableAbstractTwo, namespace: RepositoryOne\RepositoryTwo, implements: Interfaces\RepositoryImplementableOne, abstract: true, dependency: Repository\RepositoryInvokablesTwo }
+    - { name: RepositoryDependencyFullAbstractThree, type: Repository, extends: Repository\RepositoryExtendableAbstractThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: Interfaces\RepositoryImplementableOne, abstract: true, dependency: Repository\RepositoryInvokablesThree }
+    - { name: RepositoryDependencyFullAbstractFour, type: Repository, extends: Repository\RepositoryExtendableAbstractFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: Interfaces\RepositoryImplementableOne, abstract: true, dependency: Repository\RepositoryInvokablesFour }
+    - { name: RepositoryDependenciesFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtendableFactoriesOne, namespace: RepositoryOne, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtendableFactoriesTwo, namespace: RepositoryOne\RepositoryTwo, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesFullFactoriesThree, type: Repository, extends: Repository\RepositoryExtendableFactoriesThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesThree, Repository\RepositoryExtendsInvokablesThree, Repository\RepositoryImplementsInvokablesThree***REMOVED*** }
+    - { name: RepositoryDependenciesFullFactoriesFour, type: Repository, extends: Repository\RepositoryExtendableFactoriesFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesFour, Repository\RepositoryExtendsInvokablesFour, Repository\RepositoryImplementsInvokablesFour***REMOVED*** }
+    - { name: RepositoryDependenciesFullAbstractOne, type: Repository, extends: Repository\RepositoryExtendableAbstractOne, namespace: RepositoryOne, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtendableAbstractTwo, namespace: RepositoryOne\RepositoryTwo, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesFullAbstractThree, type: Repository, extends: Repository\RepositoryExtendableAbstractThree, namespace: RepositoryOne\RepositoryTwo\RepositoryThree, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesThree, Repository\RepositoryExtendsInvokablesThree, Repository\RepositoryImplementsInvokablesThree***REMOVED*** }
+    - { name: RepositoryDependenciesFullAbstractFour, type: Repository, extends: Repository\RepositoryExtendableAbstractFour, namespace: RepositoryOne\RepositoryTwo\RepositoryThree\RepositoryFour, implements: [Interfaces\RepositoryImplementableOne, Interfaces\RepositoryImplementableTwo, Interfaces\RepositoryImplementableThree, Interfaces\RepositoryImplementableFour***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesFour, Repository\RepositoryExtendsInvokablesFour, Repository\RepositoryImplementsInvokablesFour***REMOVED*** }

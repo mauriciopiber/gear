@@ -1,26 +1,41 @@
-modules: MyModule
-
 src:
-  01:
-    name: BasicForm
-    type: Form
-  02:
-    name: BasicNamespaceForm
-    type: Form
-    namespace: My\GoodForm\Working
-  03:
-    name: BasicFactory
-    type: Form
-    service: factories
-  04:
-    name: BasicFactoryNamespace
-    type: Form
-    service: factories
-    namespace: My\GoodForm\Working
-  99:
-    name: FormInterface
-    type: Interface
-    namespace: Interfaces
-    dependency: 'Form\BasicForm'  
-    
-  
+    - { name: FormExtendableInvokablesOne, type: Form, service: invokables }
+    - { name: FormExtendableInvokablesTwo, type: Form, service: invokables }
+    - { name: FormExtendableInvokablesThree, type: Form, service: invokables }
+    - { name: FormExtendableInvokablesFour, type: Form, service: invokables }
+    - { name: FormExtendableFactoriesOne, type: Form, service: factories }
+    - { name: FormExtendableFactoriesTwo, type: Form, service: factories }
+    - { name: FormExtendableFactoriesThree, type: Form, service: factories }
+    - { name: FormExtendableFactoriesFour, type: Form, service: factories }
+    - { name: FormInvokablesOne, type: Form, service: invokables }
+    - { name: FormInvokablesTwo, type: Form, service: invokables }
+    - { name: FormInvokablesThree, type: Form, service: invokables }
+    - { name: FormInvokablesFour, type: Form, service: invokables }
+    - { name: FormFactoriesOne, type: Form, service: factories }
+    - { name: FormFactoriesTwo, type: Form, service: factories }
+    - { name: FormFactoriesThree, type: Form, service: factories }
+    - { name: FormFactoriesFour, type: Form, service: factories }
+    - { name: FormNamespaceInvokablesOne, type: Form, namespace: FormOne, service: invokables }
+    - { name: FormNamespaceInvokablesTwo, type: Form, namespace: FormOne\FormTwo, service: invokables }
+    - { name: FormNamespaceInvokablesThree, type: Form, namespace: FormOne\FormTwo\FormThree, service: invokables }
+    - { name: FormNamespaceInvokablesFour, type: Form, namespace: FormOne\FormTwo\FormThree\FormFour, service: invokables }
+    - { name: FormNamespaceFactoriesOne, type: Form, namespace: FormOne, service: factories }
+    - { name: FormNamespaceFactoriesTwo, type: Form, namespace: FormOne\FormTwo, service: factories }
+    - { name: FormNamespaceFactoriesThree, type: Form, namespace: FormOne\FormTwo\FormThree, service: factories }
+    - { name: FormNamespaceFactoriesFour, type: Form, namespace: FormOne\FormTwo\FormThree\FormFour, service: factories }
+    - { name: FormExtendsInvokablesOne, type: Form, extends: Form\FormExtendableInvokablesOne, service: invokables }
+    - { name: FormExtendsInvokablesTwo, type: Form, extends: Form\FormExtendableInvokablesTwo, service: invokables }
+    - { name: FormExtendsInvokablesThree, type: Form, extends: Form\FormExtendableInvokablesThree, service: invokables }
+    - { name: FormExtendsInvokablesFour, type: Form, extends: Form\FormExtendableInvokablesFour, service: invokables }
+    - { name: FormExtendsFactoriesOne, type: Form, extends: Form\FormExtendableFactoriesOne, service: factories }
+    - { name: FormExtendsFactoriesTwo, type: Form, extends: Form\FormExtendableFactoriesTwo, service: factories }
+    - { name: FormExtendsFactoriesThree, type: Form, extends: Form\FormExtendableFactoriesThree, service: factories }
+    - { name: FormExtendsFactoriesFour, type: Form, extends: Form\FormExtendableFactoriesFour, service: factories }
+    - { name: FormFullInvokablesOne, type: Form, extends: Form\FormExtendableInvokablesOne, namespace: FormOne, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: invokables }
+    - { name: FormFullInvokablesTwo, type: Form, extends: Form\FormExtendableInvokablesTwo, namespace: FormOne\FormTwo, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: invokables }
+    - { name: FormFullInvokablesThree, type: Form, extends: Form\FormExtendableInvokablesThree, namespace: FormOne\FormTwo\FormThree, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: invokables }
+    - { name: FormFullInvokablesFour, type: Form, extends: Form\FormExtendableInvokablesFour, namespace: FormOne\FormTwo\FormThree\FormFour, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: invokables }
+    - { name: FormFullFactoriesOne, type: Form, extends: Form\FormExtendableFactoriesOne, namespace: FormOne, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: factories }
+    - { name: FormFullFactoriesTwo, type: Form, extends: Form\FormExtendableFactoriesTwo, namespace: FormOne\FormTwo, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: factories }
+    - { name: FormFullFactoriesThree, type: Form, extends: Form\FormExtendableFactoriesThree, namespace: FormOne\FormTwo\FormThree, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: factories }
+    - { name: FormFullFactoriesFour, type: Form, extends: Form\FormExtendableFactoriesFour, namespace: FormOne\FormTwo\FormThree\FormFour, implements: [Interfaces\FormImplementableOne, Interfaces\FormImplementableTwo, Interfaces\FormImplementableThree, Interfaces\FormImplementableFour***REMOVED***, service: factories }

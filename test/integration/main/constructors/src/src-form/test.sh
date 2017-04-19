@@ -8,6 +8,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrSrcForm"
 type="cli"
 migration=""
-gearfile="gear-form.yml"
+gearfile="src-form.yml"
 
 source "$bin/gear/module/test-module.sh"

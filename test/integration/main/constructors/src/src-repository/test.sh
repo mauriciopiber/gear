@@ -10,8 +10,8 @@ type="cli"
 construct=()
 #construct[1***REMOVED***="repository.yml;"
 #construct[2***REMOVED***="repository-namespace.yml;"
-construct[0***REMOVED***="../src-interface/src-interface.yml;"
-construct[1***REMOVED***="repository-implement.yml;"
+#construct[0***REMOVED***="../src-interface/src-interface.yml;"
+#construct[1***REMOVED***="repository-implement.yml;"
 construct[2***REMOVED***="src-repository.yml;"
 
 source "$bin/gear/module/test-module.sh"
