@@ -1,33 +1,31 @@
 <?php
-namespace MyModule\FastestNamespace;
+namespace Gear\Creator\Component\Constructor;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use MyModule\FastestNamespace\MySrcWithSpecialDependency;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * PHP Version 5
  *
  * @category Factory
- * @package MyModule/FastestNamespace
+ * @package Gear/Creator/Component/Constructor
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class MySrcWithSpecialDependencyFactory implements FactoryInterface
+class ConstructorParamsFactory implements FactoryInterface
 {
     /**
-     * Create MySrcWithSpecialDependency
+     * Create ConstructorParams
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
-     * @return \MyModule\FastestNamespace\MySrcWithSpecialDependency
+     * @return \Gear\Creator\Component\Constructor\ConstructorParams
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new MySrcWithSpecialDependency(
-            $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('console'),
-            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+        $factory = new ConstructorParams(
+            $serviceLocator->get('GearBase\Util\String')
         );
         unset($serviceLocator);
         return $factory;

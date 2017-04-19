@@ -16,6 +16,7 @@ use Gear\Creator\File\Injector;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use GearJson\Db\Db;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group src-mvc
@@ -57,8 +58,11 @@ class ServiceServiceTest extends TestCase
 
 
         $this->service->setSrcDependency($this->srcDependency);
+
+        $constructorParams = new ConstructorParams($this->string);
         //code
         $this->code = new Code();
+        $this->code->setConstructorParams($constructorParams);
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
         $this->code->setSrcDependency($this->srcDependency);

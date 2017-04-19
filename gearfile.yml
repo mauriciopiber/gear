@@ -26,7 +26,7 @@ src:
         service: factories
         dependency:
           0: 
-            class: GearBase\Util\String\StringService
+            class: \GearBase\Util\String\StringService
             aliase: GearBase\Util\String
             
             

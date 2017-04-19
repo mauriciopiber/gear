@@ -9,8 +9,7 @@ module="PbrSrcService"
 type="cli"
 
 construct=()
-construct[1***REMOVED***="tmp041229.yml;"
-#construct[1***REMOVED***="src-service.yml;"
+construct[1***REMOVED***="src-service.yml;"
 #construct[2***REMOVED***="src-service-invokables.yml;"
 #construct[3***REMOVED***="src-service-factories.yml;"
 #construct[4***REMOVED***="src-service-abstract.yml;"
