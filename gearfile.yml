@@ -1,14 +1,32 @@
 module: Gear
 
 src:
-    yml: 
-        name: YamlService
+ #   constructor1: 
+ #       name: Constructor
+ #       type: Service
+ #       namespace: Creator\Component\Constructor
+ #       service: factories
+#        dependency:
+#          0: 
+#            class: GearBase\Util\String\StringService
+#            aliase: GearBase\Util\String
+#    constructor2: 
+#        name: ConstructorDocs
+#        type: Service
+#        namespace: Creator\Component\Constructor
+#        service: factories
+#        dependency:
+#          0: 
+#            class: GearBase\Util\String\StringService
+#            aliase: GearBase\Util\String
+    constructor3: 
+        name: ConstructorParams
         type: Service
-        namespace: Util\Yaml
-        service: invokables
-        extends: Service\AbstractJsonService                                     
-    migrations:
-        name: PhinxService
-        type: Service
-        namespace: Database\Phinx
+        namespace: Creator\Component\Constructor
         service: factories
+        dependency:
+          0: 
+            class: GearBase\Util\String\StringService
+            aliase: GearBase\Util\String
+            
+            

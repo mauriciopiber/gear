@@ -9,14 +9,15 @@ module="PbrSrcService"
 type="cli"
 
 construct=()
-construct[1***REMOVED***="src-service.yml;"
-construct[2***REMOVED***="src-service-invokables.yml;"
-construct[3***REMOVED***="src-service-factories.yml;"
-construct[4***REMOVED***="src-service-abstract.yml;"
-construct[5***REMOVED***="src-service-namespace.yml;"
-construct[6***REMOVED***="src-service-extends.yml;"
-construct[7***REMOVED***="src-service-dependency.yml;"
-construct[8***REMOVED***="src-service-implements.yml;"
+construct[1***REMOVED***="tmp041229.yml;"
+#construct[1***REMOVED***="src-service.yml;"
+#construct[2***REMOVED***="src-service-invokables.yml;"
+#construct[3***REMOVED***="src-service-factories.yml;"
+#construct[4***REMOVED***="src-service-abstract.yml;"
+#construct[5***REMOVED***="src-service-namespace.yml;"
+#construct[6***REMOVED***="src-service-extends.yml;"
+#construct[7***REMOVED***="src-service-dependency.yml;"
+#construct[8***REMOVED***="src-service-implements.yml;"
 
 
 echo ${construct[****REMOVED***};

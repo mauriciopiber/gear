@@ -424,6 +424,34 @@ EOS;
     /**
      * @group token
      * @group tokenx2
+     * @group tokenx5
+     */
+    public function testTokenizeSrcIssue01()
+    {
+        $data = [***REMOVED***;
+        $data[***REMOVED*** = explode(' ', 'Service Invokables One');
+        $data[***REMOVED*** = explode(' ', 'Service Invokables Extends One');
+        $data[***REMOVED*** = explode(' ', 'Service Invokables Implements One');
+
+
+        $token = $this->code->tokenizeParams($data);
+
+        $this->assertArrayHasDupes($token);
+        $this->assertEquals(
+            [***REMOVED***,
+            $token
+        );
+    }
+
+    function assertArrayHasDupes($array) {
+        //streamline per @Felix
+        $dupe = count($array) !== count(array_unique($array));
+        $this->assertFalse($dupe);
+    }
+
+    /**
+     * @group token
+     * @group tokenx2
      */
     public function testTokenizeControllerDb()
     {

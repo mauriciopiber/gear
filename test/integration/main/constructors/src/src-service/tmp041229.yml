@@ -1,0 +1,26 @@
+src:
+    - { name: ServiceExtendable, type: Service, service: invokables }
+    - { name: ServiceExtendable, type: Service, service: factories }
+    - { name: ServiceExtendable, type: Service, abstract: true }
+    - { name: ServiceImplementable, type: Interface }
+    - { name: ServiceImplementable, type: Interface }
+    - { name: ServiceImplementable, type: Interface }
+    - { name: ServiceInvokablesOne, type: Service, service: invokables }
+    - { name: ServiceFactoriesOne, type: Service, service: factories }
+    - { name: ServiceAbstractOne, type: Service, abstract: true }
+    - { name: ServiceInvokablesNamespaceOne, type: Service, namespace: ServiceNamespaceOne, service: invokables }
+    - { name: ServiceFactoriesNamespaceOne, type: Service, namespace: ServiceNamespaceOne, service: factories }
+    - { name: ServiceAbstractNamespaceOne, type: Service, namespace: ServiceNamespaceOne, abstract: true }
+    - { name: ServiceInvokablesImplementsOne, type: Service, implements: Interfaces\ServiceImplementable, service: invokables }
+    - { name: ServiceFactoriesImplementsOne, type: Service, implements: Interfaces\ServiceImplementable, service: factories }
+    - { name: ServiceAbstractImplementsOne, type: Service, implements: Interfaces\ServiceImplementable, abstract: true }
+    - { name: ServiceInvokablesExtendsOne, type: Service, extends: Service\ServiceExtendable, service: invokables }
+    - { name: ServiceFactoriesExtendsOne, type: Service, extends: Service\ServiceExtendable, service: factories }
+    - { name: ServiceAbstractExtendsOne, type: Service, extends: Service\ServiceExtendable, abstract: true }
+    - { name: ServiceInvokablesFullOne, type: Service, extends: Service\ServiceExtendable, namespace: ServiceNamespaceOne, implements: Interfaces\ServiceImplementable, service: invokables }
+    - { name: ServiceFactoriesFullOne, type: Service, extends: Service\ServiceExtendable, namespace: ServiceNamespaceOne, implements: Interfaces\ServiceImplementable, service: factories }
+    - { name: ServiceAbstractFullOne, type: Service, extends: Service\ServiceExtendable, namespace: ServiceNamespaceOne, implements: Interfaces\ServiceImplementable, abstract: true }
+    - { name: ServiceFactoriesDependencyOne, type: Service, service: factories, dependency: Service\ServiceInvokablesFactories }
+    - { name: ServiceAbstractDependencyOne, type: Service, abstract: true, dependency: Service\ServiceInvokablesAbstract }
+    - { name: ServiceFactoriesDependenciesOne, type: Service, service: factories, dependency: [Service\ServiceInvokablesOne, Service\ServiceInvokablesExtendsOne, Service\ServiceInvokablesImplementsOne***REMOVED*** }
+    - { name: ServiceAbstractDependenciesOne, type: Service, abstract: true, dependency: [Service\ServiceInvokablesOne, Service\ServiceInvokablesExtendsOne, Service\ServiceInvokablesImplementsOne***REMOVED*** }
