@@ -609,6 +609,35 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ValueObjectTestService",
+                "type": "Service",
+                "dependency": [
+                    {
+                        "class": "\\GearBase\\Util\\String\\StringService",
+                        "aliase": "GearBase\\Util\\String"
+                    },
+                    {
+                        "class": "Creator\\FileCreator",
+                        "aliase": "Gear\\FileCreator"
+                    },
+                    {
+                        "class": "Module\\ModuleAware",
+                        "aliase": "module"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\ValueObject",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": [
+                    "Module\\ModuleAwareInterface"
+                ***REMOVED***
             }
         ***REMOVED***,
         "controller": [

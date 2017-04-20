@@ -24,13 +24,13 @@ src:
         type: Service
         namespace: Mvc\ValueObject
         service: factories
-        implements: Module\ModuleAwareTrait
+        implements: Module\ModuleAwareInterface
         dependency:
           0: 
             class: \GearBase\Util\String\StringService
             aliase: GearBase\Util\String
           1:
-            class: Creator\File
+            class: Creator\FileCreator
             aliase: Gear\FileCreator
           2:
             class: Module\ModuleAware

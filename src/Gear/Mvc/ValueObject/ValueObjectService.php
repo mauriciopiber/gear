@@ -12,21 +12,15 @@
 namespace Gear\Mvc\ValueObject;
 
 use Gear\Service\AbstractJsonService;
+use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 
 class ValueObjectService extends AbstractJsonService
 {
+    use ValueObjectTestServiceTrait;
+
     public function create($src)
     {
-        $this->getFileCreator()->createFile(
-            'template/module/mvc/value-object/test-src.phtml',
-            array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
-                'module'  => $this->getModule()->getModuleName()
-            ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestValueObjectFolder()
-        );
+        $this->getValueObjectTestService()->createTest($src);
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/value-object/src.phtml',

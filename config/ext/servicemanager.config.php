@@ -48,7 +48,8 @@
         'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoloadFactory',
         'Gear\Creator\File\Injector' => 'Gear\Creator\File\InjectorFactory',
         'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
-        'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory'
+        'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory',
+        'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false
