@@ -120,6 +120,8 @@ class BasicModuleStructure implements
             'RepositoryTest' => $this->getTestRepositoryFolder(),
             'Controller' => $this->getControllerFolder(),
             'ControllerTest' => $this->getTestControllerFolder(),
+            'ControllerPlugin' => $this->getControllerPluginFolder(),
+            'ControllerPluginTest' => $this->getTestControllerPluginFolder(),
             'Form' => $this->getFormFolder(),
             'FormTest' => $this->getTestFormFolder(),
             'Filter' => $this->getFilterFolder(),

@@ -1,6 +1,11 @@
-modules: PbrSrcValueObject
-
 src:
-  91:
-    type: ControllerPlugin
-    name: BasicControllerPlugin
+    - { name: ControllerPluginExtendableInvokOne, type: ControllerPlugin, service: invokables }
+    - { name: ControllerPluginExtendableFactoOne, type: ControllerPlugin, service: factories }
+    - { name: ControllerPluginInvokOne, type: ControllerPlugin, service: invokables }
+    - { name: ControllerPluginFactoOne, type: ControllerPlugin, service: factories }
+    - { name: ControllerPluginNamespaceInvokOne, type: ControllerPlugin, namespace: ContrOne, service: invokables }
+    - { name: ControllerPluginNamespaceFactoOne, type: ControllerPlugin, namespace: ContrOne, service: factories }
+    - { name: ControllerPluginExtendsInvokOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtendableInvokOne, service: invokables }
+    - { name: ControllerPluginExtendsFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtendableFactoOne, service: factories }
+    - { name: ControllerPluginFullInvokOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtendableInvokOne, namespace: ContrOne, implements: Interfaces\ControllerPluginImplOne, service: invokables }
+    - { name: ControllerPluginFullFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtendableFactoOne, namespace: ContrOne, implements: Interfaces\ControllerPluginImplOne, service: factories }

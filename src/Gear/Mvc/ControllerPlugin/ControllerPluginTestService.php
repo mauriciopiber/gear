@@ -1,26 +1,30 @@
 <?php
 namespace Gear\Mvc\ControllerPlugin;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvcTest;
 use Gear\Constructor\Src\SrcConstructorInterface;
 use GearJson\Src\Src;
+use Gear\Creator\CodeTestTrait;
 
-class ControllerPluginTestService extends AbstractJsonService implements SrcConstructorInterface
+class ControllerPluginTestService extends AbstractMvcTest implements SrcConstructorInterface
 {
+    use CodeTestTrait;
+
     public function create(Src $src)
     {
-        $callable = $this->str('var', sprintf('%s%s', $this->getModule()->getModuleName(), $src->getName()));
+        $this->src = $src;
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/controller-plugin/test-src.phtml',
             array(
-                'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),
-                'serviceNameClass'   => $src->getName(),
-                'callable' => $callable,
+                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
+                'var' => $this->str('var', str_replace('Controller', '', $this->src->getName())),
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestControllerPluginFolder()
+            $this->src->getName().'Test.php',
+            $this->getCodeTest()->getLocation($this->src)
         );
     }
 }

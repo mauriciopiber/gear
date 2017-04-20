@@ -88,6 +88,8 @@ EOS;
             } else {
                 if ($controller->getType() === 'SearchForm') {
                     $type = 'Form/Search';
+                } elseif ($controller->getType() === 'ControllerPlugin') {
+                    $type = 'Controller/Plugin';
                 } else {
                     $type = $controller->getType();
                 }
@@ -260,7 +262,6 @@ EOS;
                     return 'AbstractConsoleController';
                 }
             }
-
             return null;
         }
 
@@ -353,6 +354,8 @@ EOS;
             if (empty($data->getNamespace())) {
                 if ($data->getType() == 'SearchForm') {
                     $type = 'Form\\Search';
+                } elseif ($data->getType() == 'ControllerPlugin') {
+                    $type = 'Controller\\Plugin';
                 } else {
                     $type = $data->getType();
                 }
@@ -688,7 +691,14 @@ EOS;
         $this->uses .= $this->dependency->getUseNamespace(false);
 
         if ($data->getExtends() !== null) {
-            $this->uses .= 'use '.$this->resolveNamespace($data->getExtends()).';'.PHP_EOL;
+
+            $extends = $data->getExtends();
+
+            if (strpos($extends, 'ControllerPlugin\\') !== false) {
+                $extends = str_replace('ControllerPlugin\\', 'Controller\\Plugin\\', $extends);
+            }
+
+            $this->uses .= 'use '.$this->resolveNamespace($extends).';'.PHP_EOL;
         }
 
         if ($data->getExtends() == null && $data instanceof Controller) {
