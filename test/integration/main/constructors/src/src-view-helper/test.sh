@@ -8,6 +8,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrSrcViewHelper"
 type="web"
 construct=()
-construct[1***REMOVED***="viewhelper.yml;"
+construct[1***REMOVED***="src-view-helper.yml;"
 
 source "$bin/gear/module/test-module.sh"

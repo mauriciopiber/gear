@@ -1,0 +1,6 @@
+src:
+    - { name: ValueObjectExtendableInvokOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectInvokOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectNamespaceInvokOne, type: ValueObject, namespace: ValueOne, service: invokables }
+    - { name: ValueObjectExtendsInvokOne, type: ValueObject, extends: ValueObject\ValueObjectExtendableInvokOne, service: invokables }
+    - { name: ValueObjectFullInvokOne, type: ValueObject, extends: ValueObject\ValueObjectExtendableInvokOne, namespace: ValueOne, implements: Interfaces\ValueObjectImplOne, service: invokables }

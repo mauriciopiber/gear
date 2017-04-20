@@ -81,7 +81,11 @@ $invokables[***REMOVED*** = [
     'type' => $type
 ***REMOVED***;
 
-$config = ['invokables', 'factories'***REMOVED***;
+$config = ['invokables'***REMOVED***;
+
+if (!in_array($type, ['ValueObject'***REMOVED***)) {
+    $config[***REMOVED*** = 'factories';
+}
 
 if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
     $config[***REMOVED*** = 'abstract';

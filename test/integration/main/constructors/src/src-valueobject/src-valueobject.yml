@@ -1,6 +1,0 @@
-modules: PbrSrcValueObject
-
-src:
-  91:
-    type: ValueObject
-    name: BasicValueObject
