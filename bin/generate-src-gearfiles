@@ -137,6 +137,6 @@ if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
 }
 
-output($data, $type);
+output($data, ['src' => $data***REMOVED***);
 
 return;

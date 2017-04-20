@@ -18,6 +18,8 @@ class FactoryTestService extends AbstractMvcTest
 
         $name = $src->getName();
 
+        //var_dump($src);
+
         $options = [
             'basename' => str_replace($src->getType(), '', $src->getName()),
             'basenameUrl' => $this->str('url', str_replace($src->getType(), '', $src->getName())),

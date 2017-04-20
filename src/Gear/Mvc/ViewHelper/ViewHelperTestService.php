@@ -20,15 +20,20 @@ class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInt
         $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/test-src.phtml',
             array(
-                'serviceNameUline' => $this->str('var', str_replace('Controller', '', $src->getName())),
-                'serviceNameClass'   => $src->getName(),
+                'var' => $this->str('var', str_replace('Controller', '', $src->getName())),
+                'class'   => $src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
-                'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             ),
             $src->getName().'Test.php',
             $location
         );
+
+
+        if ($this->src->getService() == 'factories') {
+            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        }
+
     }
 }

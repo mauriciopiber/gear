@@ -1,6 +1,11 @@
-modules: PbrSrcViewHelper
-
 src:
-  91:
-    type: ViewHelper
-    name: BasicViewHelper
+    - { name: ViewHelperExtendableInvokOne, type: ViewHelper, service: invokables }
+    - { name: ViewHelperExtendableFactoOne, type: ViewHelper, service: factories }
+    - { name: ViewHelperInvokOne, type: ViewHelper, service: invokables }
+    - { name: ViewHelperFactoOne, type: ViewHelper, service: factories }
+    - { name: ViewHelperNamespaceInvokOne, type: ViewHelper, namespace: ViewHOne, service: invokables }
+    - { name: ViewHelperNamespaceFactoOne, type: ViewHelper, namespace: ViewHOne, service: factories }
+    - { name: ViewHelperExtendsInvokOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtendableInvokOne, service: invokables }
+    - { name: ViewHelperExtendsFactoOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtendableFactoOne, service: factories }
+    - { name: ViewHelperFullInvokOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtendableInvokOne, namespace: ViewHOne, implements: Interfaces\ViewHelperImplOne, service: invokables }
+    - { name: ViewHelperFullFactoOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtendableFactoOne, namespace: ViewHOne, implements: Interfaces\ViewHelperImplOne, service: factories }

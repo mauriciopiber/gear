@@ -89,6 +89,10 @@ function Gear_Module_Clear
     sudo rm -R src/$module
     sudo rm -R test/unit/$moduleTest
     
+    if [ -d "$modulePath/public/js" ***REMOVED***; then
+        sudo rm -R public/js	
+    fi
+       
     if [ -d "$modulePath/data/migrations/*" ***REMOVED***; then
         sudo rm -R data/migrations/*	
     fi
@@ -100,6 +104,7 @@ function Gear_Module_Clear
 
     echo "Deploy Develoment - Migrations/DB"
     vendor/bin/database $database $username $password
+    vendor/bin/phinx migrate
             
     cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
     --type=$type \

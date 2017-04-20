@@ -19,7 +19,7 @@ class ControllerPluginService extends AbstractJsonService
 
 
         if (empty($this->src->getExtends())) {
-            $this->src->setExtends('\Zend\Mvc\Controller\Plugin\AbstractPlugin');
+            $this->src->setExtends('\Zend\View\Helper\AbstractHelper');
         }
 
         $this->getControllerPluginManager()->create($this->src);
