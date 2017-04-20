@@ -20,13 +20,19 @@ src:
 #            class: GearBase\Util\String\StringService
 #            aliase: GearBase\Util\String
     constructor3: 
-        name: ConstructorParams
+        name: ValueObjectTestService
         type: Service
-        namespace: Creator\Component\Constructor
+        namespace: Mvc\ValueObject
         service: factories
+        implements: Module\ModuleAwareTrait
         dependency:
           0: 
             class: \GearBase\Util\String\StringService
             aliase: GearBase\Util\String
-            
+          1:
+            class: Creator\File
+            aliase: Gear\FileCreator
+          2:
+            class: Module\ModuleAware
+            aliase: module
             
