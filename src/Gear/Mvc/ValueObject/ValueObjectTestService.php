@@ -7,6 +7,8 @@ use Gear\Creator\FileCreatorTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\Util\String\StringService;
 use Gear\Creator\File;
+use Gear\Creator\CodeTest;
+use Gear\Creator\CodeTestTrait;
 use GearJson\Src\Src;
 use Gear\Module\BasicModuleStructure;
 
@@ -27,6 +29,8 @@ class ValueObjectTestService implements ModuleAwareInterface
 
     use ModuleAwareTrait;
 
+    use CodeTestTrait;
+
     /**
      * Constructor
      *
@@ -39,11 +43,14 @@ class ValueObjectTestService implements ModuleAwareInterface
     public function __construct(
         StringService $stringService,
         File $fileCreator,
-        BasicModuleStructure $module
+        BasicModuleStructure $module,
+        CodeTest $codeTest
     ) {
+
         $this->stringService = $stringService;
         $this->fileCreator = $fileCreator;
         $this->module = $module;
+        $this->codeTest = $codeTest;
 
         return $this;
     }
@@ -51,15 +58,19 @@ class ValueObjectTestService implements ModuleAwareInterface
 
     public function createTest(Src $src)
     {
+        $this->src = $src;
+
         $this->getFileCreator()->createFile(
             'template/module/mvc/value-object/test-src.phtml',
             array(
-                'serviceNameUline' => $this->str('var', $src->getName()),
-                'serviceNameClass'   => $src->getName(),
+                'var' => $this->str('var', $this->src->getName()),
+                'class'   => $this->src->getName(),
+                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'module'  => $this->getModule()->getModuleName()
             ),
-            $src->getName().'Test.php',
-            $this->getModule()->getTestValueObjectFolder()
+            $this->src->getName().'Test.php',
+            $this->getCodeTest()->getLocation($this->src)
         );
     }
 }

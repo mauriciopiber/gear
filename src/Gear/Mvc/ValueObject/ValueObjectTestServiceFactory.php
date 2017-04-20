@@ -27,7 +27,8 @@ class ValueObjectTestServiceFactory implements FactoryInterface
         $factory = new ValueObjectTestService(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('Gear\FileCreator'),
-            $serviceLocator->get('moduleStructure')
+            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('Gear\Creator\CodeTest')
         );
         unset($serviceLocator);
         return $factory;

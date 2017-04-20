@@ -128,6 +128,8 @@ class BasicModuleStructure implements
             'ViewHelperTest' => $this->getTestViewHelperFolder(),
             'SearchForm' => $this->getSearchFolder(),
             'SearchFormTest' => $this->getTestSearchFolder(),
+            'ValueObject' => $this->getValueObjectFolder(),
+            'ValueObjectTest' => $this->getTestValueObjectFolder(),
             'Interface' => $this->getInterfaceFolder()
         ***REMOVED***;
 
