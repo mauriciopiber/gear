@@ -15,6 +15,11 @@ class ViewHelperService extends AbstractMvc
     {
         $this->src = $src;
 
+        if (empty($this->src->getExtends())) {
+            $this->src->setExtends('\Zend\Mvc\Controller\Plugin\AbstractPlugin');
+        }
+
+
         $location = $this->getCode()->getLocation($src);
 
         $this->getViewHelperManager()->create($src);
@@ -25,6 +30,7 @@ class ViewHelperService extends AbstractMvc
             'template/module/mvc/view-helper/src.phtml',
             //'template/module/mvc/controller/plugin/src.plugin.phtml',
             array(
+                'classDocs'   => $this->getCode()->getClassDocs($this->src),
                 'namespace'  => $this->getCode()->getNamespace($this->src),
                 'extends'    => $this->getCode()->getExtends($this->src),
                 'uses'       => $this->getCode()->getUse($this->src),

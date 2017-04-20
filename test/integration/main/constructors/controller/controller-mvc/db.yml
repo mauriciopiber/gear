@@ -59,22 +59,22 @@ controller:
     dependency: 'Service\SrcMvcService,Form\SrcMvcForm,Form\Search\SrcMvcSearchForm'
     actions:
       0:
-        name: Create
-        route: create
+        name: Criar
+        route: criar
         role: admin
       1: 
-        name: Edit
-        route: edit
+        name: Editar
+        route: editar
         role: admin
       2:
-        name: List
-        route: list
+        name: Listar
+        route: listar
         role: admin
       3: 
-        name: Delete
-        route: delete
+        name: Deletar
+        route: deletar
         role: admin
       4:
-        name: View
-        route: view
+        name: Visualizar
+        route: Visualizar
         role: admin

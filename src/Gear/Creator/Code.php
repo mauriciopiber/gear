@@ -90,6 +90,8 @@ EOS;
                     $type = 'Form/Search';
                 } elseif ($controller->getType() === 'ControllerPlugin') {
                     $type = 'Controller/Plugin';
+                } elseif ($controller->getType() === 'ViewHelper') {
+                    $type = 'View/Helper';
                 } else {
                     $type = $controller->getType();
                 }
@@ -356,6 +358,8 @@ EOS;
                     $type = 'Form\\Search';
                 } elseif ($data->getType() == 'ControllerPlugin') {
                     $type = 'Controller\\Plugin';
+                } elseif ($data->getType() == 'ViewHelper') {
+                    $type = 'View\\Helper';
                 } else {
                     $type = $data->getType();
                 }
@@ -403,6 +407,9 @@ EOS;
     }
 
 
+    /**
+     * @deprecated
+     */
     public function classNameToNamespace($data)
     {
         $namespace = '';
@@ -411,6 +418,8 @@ EOS;
             if (empty($data->getNamespace())) {
                 if ($data->getType() == 'SearchForm') {
                     $type = 'Form\\Search';
+                } elseif ($data->getType() == 'ViewHelper') {
+                    $type = 'View\\Helper';
                 } else {
                     $type = $data->getType();
                 }
@@ -696,6 +705,9 @@ EOS;
 
             if (strpos($extends, 'ControllerPlugin\\') !== false) {
                 $extends = str_replace('ControllerPlugin\\', 'Controller\\Plugin\\', $extends);
+            }
+            if (strpos($extends, 'ViewHelper\\') !== false) {
+                $extends = str_replace('ViewHelper\\', 'View\\Helper\\', $extends);
             }
 
             $this->uses .= 'use '.$this->resolveNamespace($extends).';'.PHP_EOL;

@@ -201,6 +201,11 @@ EOS;
             return 'Controller\Plugin';
         }
 
+        if ($data->getType() == 'ViewHelper') {
+            //var_dump($data);
+            return 'View\Helper';
+        }
+
         return str_replace('Test', '', $data->getType());
     }
 
@@ -225,6 +230,8 @@ EOS;
             if ($data instanceof Src) {
                 if ($data->getType() == 'SearchForm') {
                     $namespace = 'Form\Search';
+                } elseif ($data->getType() == 'ViewHelper') {
+                    $namespace = 'View\Helper';
                 } else {
                     $namespace = $data->getType();
                 }

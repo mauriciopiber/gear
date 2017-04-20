@@ -1,29 +1,26 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->class;?>;
 
-class <?php echo $this->serviceNameClass;?>Test extends AbstractTestCase
+/**
+ * @group Service
+ */
+class <?php echo $this->class;?>Test extends TestCase
 {
-    protected $<?php echo $this->serviceNameUline;?>;
-
-    public function get<?php echo $this->serviceNameClass;?>()
+    public function setUp()
     {
-        if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get('ViewHelperManager')->get(
-                '<?php echo $this->callable;?>'
-            );
-        }
-        return $this-><?php echo $this->serviceNameUline;?>;
+        parent::setUp();
+        $this-><?php echo $this->var;?> = new <?php echo $this->class;?>();
     }
 
-    /**
-     * @group <?php echo $this->module.PHP_EOL;?>
-     * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
-    */
-    public function testCallClassName()
+    public function testClassExists()
     {
-        $<?php echo $this->serviceNameUline;?> = $this->get<?php echo $this->serviceNameClass;?>();
-        $className = $<?php echo $this->serviceNameUline;?>->__invoke();
-        $this->assertEquals('<?php echo $this->serviceNameClass;?>', $className);
+        $this->assertInstanceOf('<?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->class;?>', $this-><?php echo $this->var;?>);
+    }
+
+    public function testInvoke()
+    {
+        $this->assertTrue($this-><?php echo $this->var;?>->__invoke());
     }
 }

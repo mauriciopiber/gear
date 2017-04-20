@@ -34,17 +34,12 @@ $numberMap = [
     "Teen"
 ***REMOVED***;
 
-
-$files = ['invokables', 'factories', 'abstract'***REMOVED***;
-
-
 if (empty($argv[1***REMOVED***)) {
     return;
 }
 
 $type = $string->str('class', $argv[1***REMOVED***);
 $repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
-
 
 function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
 {
@@ -156,12 +151,6 @@ function createMultiplesInterfaces($type, $repeat, $numberMap)
     return $interfaces;
 }
 
-function createMultiplesDependencies($numbers, $repeat)
-{
-    for ($v = 1; $v <= $repeat; $v++) {
-    
-    }
-}
 
 function output($data, $type)
 {
@@ -171,7 +160,7 @@ function output($data, $type)
     
     $template = realpath(sprintf($constructorIntegration.'/src-%s/', $string->str('url', $type)));
     
-    $yaml = Yaml::dump(['src' => $data***REMOVED***);
+    $yaml = Yaml::dump($data);
 
     file_put_contents($template.'/src-'.$string->str('url', $type).'.yml', $yaml);
 
