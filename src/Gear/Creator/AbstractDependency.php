@@ -24,7 +24,10 @@ abstract class AbstractDependency implements ServiceLocatorAwareInterface
         $srcType = $this->extractSrcType($dependency);
         if ($srcType == 'SearchForm') {
             return 'Form\\Search';
+        } elseif ($srcType == 'ControllerPlugin') {
+            return 'Controller\\Plugin';
         }
+
         return $srcType;
     }
 

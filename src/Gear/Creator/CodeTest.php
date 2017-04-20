@@ -197,6 +197,10 @@ EOS;
             return 'Form\Search';
         }
 
+        if ($data->getType() == 'ControllerPlugin') {
+            return 'Controller\Plugin';
+        }
+
         return str_replace('Test', '', $data->getType());
     }
 
