@@ -140,17 +140,18 @@ function getMigrationName($date, $name)
     return sprintf('%s_%s.php', $date, $name);
 }
 
-function updateTestFile($date, $name)
+function updateTestFile($location, $migrations)
 {
-    $migrationName = getMigrationName($date, $name);
+    echo "$location/test.sh"."\n";
+    var_dump($migrations);
 
-    $template = file_get_contents(__DIR__.'/test.sh');
+    //$template = file_get_contents(__DIR__.'/test.sh');
     
-    $text = sprintf('migration="%s"', $migrationName);
+    //$text = sprintf('migration="%s"', $migrationName);
     
-    $newFile = preg_replace('#migration="[0-9a-z_***REMOVED****\.php"#', $text, $template);
+    //$newFile = preg_replace('#migration="[0-9a-z_***REMOVED****\.php"#', $text, $template);
     
-    file_put_contents(__DIR__.'/test.sh', $newFile);
+    //file_put_contents(__DIR__.'/test.sh', $newFile);
 }
 
 
@@ -168,25 +169,32 @@ function generateMvc()
     ***REMOVED***;
     
     $configColumns = [
-        'usertype' => 'all', //add low-strict and strict
-        'constraints' => null //add not-null, unique, not-null/unique
+        'usertype' => ['all'***REMOVED***, //add low-strict and strict
+        'constraints' => [null***REMOVED*** //add not-null, unique, not-null/unique
     ***REMOVED***;
     
+    $migrations = [***REMOVED***;
     
     foreach ($expectedColumns as $superType => $types) {
         foreach ($types as $type) {
             echo "$superType/$type"."\n";
             
             generateMvcGearfile("$superType/$type", $type);
-            generateMvcMigration("$superType/$name", $type);
+            $migration = generateMvcMigration("$superType/$type", $type);
+            updateTestfile("$superType/$type", $migration);
+            $migrations[$type***REMOVED*** = $migration;
         }
-    
+
+        echo "$superType"."\n";
+        updateTestfile("$superType", $migrations);
     }
 }
 
 function generateMvcGearfile($location, $name)
 {
     echo $location."/".$name.".yml"."\n";
+    
+    outputMvc(['test' => true***REMOVED***, $location, $name);
     
 }
 
@@ -196,7 +204,11 @@ function generateMvcMigration($location, $name)
     
     $migrationName = getMigrationName($date, $name);
     //sleep(1.5);
-    echo "$location/".$migrationName."\n";
+    
+    $migration = "$location/".$migrationName;
+    echo $migration."\n";
+    
+    return $migration;
 
 }
 
