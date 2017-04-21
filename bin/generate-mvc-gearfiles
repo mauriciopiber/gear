@@ -233,6 +233,11 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
 
 function factoryColumns($columnType)
 {
+    //switch type
+    
+    //fix columns names
+    
+ 
     return [***REMOVED***;
 }
 
