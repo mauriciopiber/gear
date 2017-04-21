@@ -147,12 +147,12 @@ function updateMigration($date, $name)
     
     $newFile = preg_replace('#migration="[0-9a-z_***REMOVED****\.php"#', $text, $template);
     
-    file_put_contents(__DIR__.'/test.sh', $template);    
+    file_put_contents(__DIR__.'/test.sh', $newFile);
 }
 
 
 $name = 'test';
-$date = (new DateTime)->format('YmdHis');
+$date = (new DateTime('now'))->format('YmdHis');
     
 generateMigration($date, $name);
 updateMigration($date, $name);
