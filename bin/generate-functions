@@ -162,6 +162,29 @@ function controllerType()
 }
 
 
+function outputMvc($data, $location, $name)
+{
+    $string = new StringService();
+
+    
+    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/mvc');
+        
+    $template = sprintf($constructorIntegration.'/'.$location);
+    
+    $path =  sprintf('%s/%s.yml', $template, $string->str('url', $name));
+    
+    
+    if (!is_dir($template)) {
+        mkdir($template);
+    }
+
+    $yaml = Yaml::dump($data);
+
+    file_put_contents($path, $yaml);
+
+    echo "Salvo com sucesso"."\n";
+}
+
 function output($data, $type)
 {
     $string = new StringService();
