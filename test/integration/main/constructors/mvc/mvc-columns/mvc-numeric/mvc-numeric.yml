@@ -1,1 +1,2 @@
-test: true
+db:
+    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: {  } }

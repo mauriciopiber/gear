@@ -1,1 +1,2 @@
-test: true
+db:
+    - { table: MvcVarchar, user: all, namespace: MvcVarchar, service: factories, columns: {  } }

@@ -1,0 +1,2 @@
+db:
+    - { table: MvcComplete, user: all, namespace: MvcComplete, service: factories, columns: {  } }
