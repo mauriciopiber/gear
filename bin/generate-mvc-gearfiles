@@ -54,6 +54,7 @@ function listAvailableMvc()
 
     $availableSubtypes = [
         'column' => [
+            'all',
             'date',
             'varchar',
             'text',
@@ -153,6 +154,38 @@ function updateMigration($date, $name)
 
 $name = 'test';
 $date = (new DateTime('now'))->format('YmdHis');
+  
+  
+function generateMvc()
+{
+    $expectedColumns = [
+        'mvc-columns' => [
+            'mvc-all',
+            'mvc-varchar',
+            'mvc-dates',
+            'mvc-text',
+            'mvc-numeric'
+        ***REMOVED***,
+    ***REMOVED***;
     
-generateMigration($date, $name);
-updateMigration($date, $name);
+    $configColumns = [
+        'usertype' => 'all', //add low-strict and strict
+        'constraints' => null //add not-null, unique, not-null/unique
+    ***REMOVED***;
+    
+    
+    foreach ($expectedColumns as $type => $names) {
+        foreach ($names as $name) {
+            echo "$type/$name"."\n";
+        }
+    
+    }
+}
+
+
+
+
+generateMvc();
+    
+//generateMigration($date, $name);
+//updateMigration($date, $name);
