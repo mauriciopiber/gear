@@ -1,10 +1,10 @@
-
 <?php
 
 use Phinx\Migration\AbstractMigration;
 
 class Columns extends AbstractMigration
 {
+    const TABLES = [***REMOVED***;
 
     public function getColumnsNames()
     {

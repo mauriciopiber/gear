@@ -104,7 +104,6 @@ function listAvailableMvc()
             }
             
         }
-        
     }
 
     foreach ($data as $item) {
@@ -112,5 +111,28 @@ function listAvailableMvc()
     }
     echo "Total ".count($data)."\n";
 
+}
+
+
+function generateMigration()
+{
+    $arrayService = new Gear\Util\Vector\ArrayService();
+    
+    $template = file_get_contents(__DIR__.'/migration-template.php');
+    
+    $tables = '    const TABLES = '.$arrayService->varExport54(['test' => true***REMOVED***, '    ').';';
+    
+    
+    $template = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
+    
+    $date = 'asdf';
+    $name = 'asdfusahdf';
+    
+    file_put_contents(__DIR__.sprintf('/%s_%s.php', $date, $name), $template);
+    //var_dump($template); 
+
 
 }
+
+
+generateMigration();
