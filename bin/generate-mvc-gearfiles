@@ -15,7 +15,10 @@ if (php_sapi_name() === 'cli-server') {
 
 require __DIR__.'/generate-functions';
 
+function getBasicColumns($constraints)
+{
 
+}
 
 function getDateColumns($constraints)
 {
@@ -37,7 +40,7 @@ function getNumericColumns($constraints)
     
 }
 
-function getAllColumns($constraints)
+function getCompleteColumns($constraints)
 {
     return array_merge(
         getTextColumns($constraints),
@@ -142,8 +145,8 @@ function getMigrationName($date, $name)
 
 function updateTestFile($location, $migrations)
 {
-    echo "$location/test.sh"."\n";
-    var_dump($migrations);
+    //echo "$location/test.sh"."\n";
+    //var_dump($migrations);
 
     //$template = file_get_contents(__DIR__.'/test.sh');
     
@@ -158,9 +161,11 @@ function updateTestFile($location, $migrations)
   
 function generateMvc()
 {
+    $string = new GearBase\Util\String\StringService();
     $expectedColumns = [
         'mvc-columns' => [
-            'mvc-all',
+            'mvc-complete',
+            'mvc-basic',
             'mvc-varchar',
             'mvc-dates',
             'mvc-text',
@@ -177,25 +182,58 @@ function generateMvc()
     
     foreach ($expectedColumns as $superType => $types) {
         foreach ($types as $type) {
-            echo "$superType/$type"."\n";
+        
+            foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
+                foreach ($configColumns['constraints'***REMOVED*** as $constraint) { 
+                
+                    $location = "$superType/$type";
+                    
+                    $columnType = $string->str('class', str_replace('mvc-', '', $type));
+                    
+                    $tableName = sprintf(
+                        '%s%s%s%s',
+                        'Mvc',
+                        $columnType,
+                        ($usertype == 'all') ? '' : $usertype,
+                        (!empty($constraint)) ? $constraint : ''
+                    );
+                    
+                    generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $location);
+                    $migration = generateMvcMigration($location, $type);
+                    updateTestfile($location, $migration);
+                    $migrations[$type***REMOVED*** = $migration;                
+                }
+            }
             
-            generateMvcGearfile("$superType/$type", $type);
-            $migration = generateMvcMigration("$superType/$type", $type);
-            updateTestfile("$superType/$type", $migration);
-            $migrations[$type***REMOVED*** = $migration;
         }
 
-        echo "$superType"."\n";
+        //echo "$superType"."\n";
         updateTestfile("$superType", $migrations);
     }
 }
 
-function generateMvcGearfile($location, $name)
+function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $location)
 {
-    echo $location."/".$name.".yml"."\n";
     
-    outputMvc(['test' => true***REMOVED***, $location, $name);
+    //echo $location."/".$type.".yml"."\n";
     
+    echo "$tableName, $type, $columnType, $usertype, $constraint, $location"."\n";
+    
+    
+    $db = [
+        'table' => $tableName,
+        'user' => $usertype,
+        'namespace' => $tableName,
+        'service' => 'factories',
+        'columns' => factoryColumns($columnType)
+    ***REMOVED***;
+    
+    outputMvc(['db' => [$db***REMOVED******REMOVED***, $location, $type);
+}
+
+function factoryColumns($columnType)
+{
+    return [***REMOVED***;
 }
 
 function generateMvcMigration($location, $name)
