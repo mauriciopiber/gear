@@ -114,7 +114,7 @@ function listAvailableMvc()
 }
 
 
-function generateMigration()
+function generateMigration($date, $name)
 {
     $arrayService = new Gear\Util\Vector\ArrayService();
     
@@ -125,14 +125,34 @@ function generateMigration()
     
     $template = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
     
-    $date = 'asdf';
-    $name = 'asdfusahdf';
+
+    $migrationName = getMigrationName($date, $name);
     
-    file_put_contents(__DIR__.sprintf('/%s_%s.php', $date, $name), $template);
+    file_put_contents(__DIR__.'/'.$migrationName, $template);
     //var_dump($template); 
+}
 
+function getMigrationName($date, $name)
+{
+    return sprintf('%s_%s.php', $date, $name);
+}
 
+function updateMigration($date, $name)
+{
+    $migrationName = getMigrationName($date, $name);
+
+    $template = file_get_contents(__DIR__.'/test.sh');
+    
+    $text = sprintf('migration="%s"', $migrationName);
+    
+    $newFile = preg_replace('#migration="[0-9a-z_***REMOVED****\.php"#', $text, $template);
+    
+    file_put_contents(__DIR__.'/test.sh', $template);    
 }
 
 
-generateMigration();
+$name = 'test';
+$date = (new DateTime)->format('YmdHis');
+    
+generateMigration($date, $name);
+updateMigration($date, $name);
