@@ -135,6 +135,8 @@ function generateMigration($date, $name)
 
 function getMigrationName($date, $name)
 {
+    $string = new GearBase\Util\String\StringService();
+    $name = $string->str('uline', $name);
     return sprintf('%s_%s.php', $date, $name);
 }
 
@@ -152,9 +154,6 @@ function updateMigration($date, $name)
 }
 
 
-$name = 'test';
-$date = (new DateTime('now'))->format('YmdHis');
-  
   
 function generateMvc()
 {
@@ -177,11 +176,29 @@ function generateMvc()
     foreach ($expectedColumns as $type => $names) {
         foreach ($names as $name) {
             echo "$type/$name"."\n";
+            
+            generateMvcGearfile("$type/$name", $name);
+            generateMvcMigration("$type/$name", $name);
         }
     
     }
 }
 
+function generateMvcGearfile($location, $name)
+{
+    echo $location."/".$name.".yml"."\n";
+    
+}
+
+function generateMvcMigration($location, $name)
+{
+    $date = (new DateTime('now'))->format('YmdHis');
+    
+    $migrationName = getMigrationName($date, $name);
+    sleep(1.5);
+    echo "$location/".$migrationName."\n";
+
+}
 
 
 
