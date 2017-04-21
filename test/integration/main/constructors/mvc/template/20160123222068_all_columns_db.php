@@ -5,280 +5,216 @@ use Phinx\Migration\AbstractMigration;
 
 class AllColumnsDb extends AbstractMigration
 {
+    const TABLES = [
+        'int_foreign_key' => [
+            'nullable' => false,
+            'unique' => false,
+            'tables' => [***REMOVED***,
+            'columns' => [
+                'dep_name' => ['type' => 'string'***REMOVED***
+            ***REMOVED***,
+        ***REMOVED***,
+        'all_columns_db' => [
+            'nullable' => false,
+            'unique' => false,
+            'tables' => ['upload_image'***REMOVED***,
+            'columns' => [
+                'varchar_password_verify' => ['type' => 'string'***REMOVED***,
+                'varchar_upload_image' => ['type' => 'string'***REMOVED***,
+                'varchar_url' => ['type' => 'string'***REMOVED***,
+                'varchar_varchar' => ['type' => 'string'***REMOVED***,
+                'varchar_unique_id' => ['type' => 'string'***REMOVED***,
+                'varchar_telephone' => ['type' => 'string'***REMOVED***,
+                'varchar_email' => ['type' => 'string'***REMOVED***,
+                'boolean_int'  => ['type' => 'boolean'***REMOVED***,
+                'boolean_checkbox' => ['type' => 'boolean'***REMOVED***,
+                'int_int' => ['type' => 'integer'***REMOVED***,
+                'int_checkbox' => ['type' => 'integer'***REMOVED***,
+                'id_int_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+                'time_time' => ['type' => 'time'***REMOVED***,
+                'text_text' => ['type' => 'text'***REMOVED***,
+                'text_html' => ['type' => 'text'***REMOVED***,
+                'decimal_decimal' => ['type' => 'decimal'***REMOVED***,
+                'decimal_money_pt_br' => ['type' => 'decimal'***REMOVED***,
+                'datetime_datetime' => ['type' => 'datetime'***REMOVED***,
+                'datetime_datetime_pt_br' => ['type' => 'datetime'***REMOVED***,
+                'date_date' => ['type' => 'date'***REMOVED***,
+                'date_date_pt_br' => ['type' => 'date'***REMOVED***
+            ***REMOVED***,
+        ***REMOVED***,
+        'all_columns_db_nn' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'varchar_nn_password_verify' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_upload_image' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_url' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_varchar' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_unique_id' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_telephone' => ['type' => 'string'***REMOVED***,
+                'varchar_nn_email' => ['type' => 'string'***REMOVED***,
+                'boolean_nn_int'  => ['type' => 'boolean'***REMOVED***,
+                'boolean_nn_checkbox' => ['type' => 'boolean'***REMOVED***,
+                'int_nn_int' => ['type' => 'integer'***REMOVED***,
+                'int_nn_checkbox' => ['type' => 'integer'***REMOVED***,
+                'id_int_nn_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+                'time_nn_time' => ['type' => 'time'***REMOVED***,
+                'text_nn_text' => ['type' => 'text'***REMOVED***,
+                'text_nn_html' => ['type' => 'text'***REMOVED***,
+                'decimal_nn_decimal' => ['type' => 'decimal'***REMOVED***,
+                'decimal_nn_money_pt_br' => ['type' => 'decimal'***REMOVED***,
+                'datetime_nn_datetime' => ['type' => 'datetime'***REMOVED***,
+                'datetime_nn_datetime_pt_br' => ['type' => 'datetime'***REMOVED***,
+                'date_nn_date' => ['type' => 'date'***REMOVED***,
+                'date_nn_date_pt_br' => ['type' => 'date'***REMOVED***
+            ***REMOVED***,
+        ***REMOVED***,
+        'all_columns_db_un' => [
+            'nullable' => false,
+            'unique' => true,
+            'tables' => [***REMOVED***,
+            'columns' => [
+                'varchar_un_password_verify' => ['type' => 'string'***REMOVED***,
+                'varchar_un_upload_image' => ['type' => 'string'***REMOVED***,
+                'varchar_un_url' => ['type' => 'string'***REMOVED***,
+                'varchar_un_varchar' => ['type' => 'string'***REMOVED***,
+                'varchar_un_unique_id' => ['type' => 'string'***REMOVED***,
+                'varchar_un_telephone' => ['type' => 'string'***REMOVED***,
+                'varchar_un_email' => ['type' => 'string'***REMOVED***,
+                'boolean_un_int'  => ['type' => 'boolean'***REMOVED***,
+                'boolean_un_checkbox' => ['type' => 'boolean'***REMOVED***,
+                'int_un_int' => ['type' => 'integer'***REMOVED***,
+                'int_un_checkbox' => ['type' => 'integer'***REMOVED***,
+                'id_int_un_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+                'time_un_time' => ['type' => 'time'***REMOVED***,
+                'text_un_text' => ['type' => 'text'***REMOVED***,
+                'text_un_html' => ['type' => 'text'***REMOVED***,
+                'decimal_un_decimal' => ['type' => 'decimal'***REMOVED***,
+                'decimal_un_money_pt_br' => ['type' => 'decimal'***REMOVED***,
+                'datetime_un_datetime' => ['type' => 'datetime'***REMOVED***,
+                'datetime_un_datetime_pt_br' => ['type' => 'datetime'***REMOVED***,
+                'date_un_date' => ['type' => 'date'***REMOVED***,
+                'date_un_date_pt_br' => ['type' => 'date'***REMOVED***
+            ***REMOVED***,
+        ***REMOVED***,
+        'all_columns_db_un_nn' => [
+            'nullable' => true,
+            'unique' => true,
+            'tables' => [***REMOVED***,
+            'columns' => [
+                'varchar_un_nn_password_verify' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_upload_image' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_url' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_varchar' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_unique_id' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_telephone' => ['type' => 'string'***REMOVED***,
+                'varchar_un_nn_email' => ['type' => 'string'***REMOVED***,
+                'boolean_un_nn_int'  => ['type' => 'boolean'***REMOVED***,
+                'boolean_un_nn_checkbox' => ['type' => 'boolean'***REMOVED***,
+                'int_un_nn_int' => ['type' => 'integer'***REMOVED***,
+                'int_un_nn_checkbox' => ['type' => 'integer'***REMOVED***,
+                'id_int_un_nn_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+                'time_un_nn_time' => ['type' => 'time'***REMOVED***,
+                'text_un_nn_text' => ['type' => 'text'***REMOVED***,
+                'text_un_nn_html' => ['type' => 'text'***REMOVED***,
+                'decimal_un_nn_decimal' => ['type' => 'decimal'***REMOVED***,
+                'decimal_un_nn_money_pt_br' => ['type' => 'decimal'***REMOVED***,
+                'datetime_un_nn_datetime' => ['type' => 'datetime'***REMOVED***,
+                'datetime_un_nn_datetime_pt_br' => ['type' => 'datetime'***REMOVED***,
+                'date_un_nn_date' => ['type' => 'date'***REMOVED***,
+                'date_un_nn_date_pt_br' => ['type' => 'date'***REMOVED***
+            ***REMOVED***,
+        ***REMOVED***
+    ***REMOVED***;
 
-    public function getColumnsNames()
+    public function createUnique(&$table, $columnName, $type)
     {
-        return [
-            'string' => [
-                'varchar_password_verify',
-                'varchar_upload_image',
-                'varchar_url',
-                'varchar_varchar',
-                'varchar_unique_id',
-                'varchar_telephone',
-                'varchar_email'
-            ***REMOVED***,
-            'tinyint' => [
-                'tinyint_tinyint',
-                'tinyint_checkbox'
-            ***REMOVED***,
-            'int' => [
-                'int_int',
-                'int_checkbox',
-                'id_int_foreign_key'
-            ***REMOVED***,
-            'time' => [
-                'time_time'
-            ***REMOVED***,
-            'text' => [
-                'text_text',
-                'text_html'
-            ***REMOVED***,
-            'decimal' => [
-                'decimal_decimal',
-                'decimal_money_pt_br'
-            ***REMOVED***,
-            'datetime' => [
-                'datetime_datetime',
-                'datetime_datetime_pt_br'
-            ***REMOVED***,
-            'date' => [
-                'date_date',
-                'date_date_pt_br'
-            ***REMOVED***
-        ***REMOVED***;
+        $table->addIndex($columnName, ['unique' => true***REMOVED***);
     }
 
-    public function createAllColumnsDb()
+    public function createForeignKey(&$table, $columnName)
     {
-        $columns = $this->getColumnsNames();
+        $tableName = str_replace('id_', '', $columnName);
+        $table->addForeignKey($columnName, $tableName, $columnName, ['delete'=> 'CASCADE', 'update'=> 'CASCADE'***REMOVED***);
+    }
 
-        $table = $this->table('all_columns_db', ['id' => 'id_all_columns_db'***REMOVED***);
+    public function getColumnConfig($type, $nullable)
+    {
+        $config = [***REMOVED***;
 
-        foreach ($columns['string'***REMOVED*** as $columnName) {
 
-            if ($columnName == 'varchar_varchar') {
-                $limit = 45;
-            } else {
-                $limit = 255;
-            }
-
-            $table->addColumn($columnName, 'string', ['null' => true, 'limit' => $limit***REMOVED***);
+        switch ($type) {
+            case 'string':
+                $config = ['null' => $nullable, 'limit' => 150***REMOVED***;
+                break;
+            case 'text':
+                $config = ['null' => $nullable***REMOVED***;
+                break;
+            case 'decimal':
+                $config = ['null' => $nullable, 'precision' => 10, 'scale' => 2***REMOVED***;
+                break;
+            default:
+                $config = ['null' => $nullable***REMOVED***;
+                break;
         }
 
-        foreach ($columns['date'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'date', ['null' => true***REMOVED***);
-        }
+        return $config;
 
-        foreach ($columns['datetime'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'datetime', ['null' => true***REMOVED***);
-        }
+    }
 
-        foreach ($columns['time'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'time', ['null' => true***REMOVED***);
-        }
+    public function createColumn(&$table, $tableName, $columnName, $type, $nullable, $unique, $properties)
+    {
+         $table->addColumn($columnName, $type, $this->getColumnConfig($type, $nullable));
 
-        foreach ($columns['decimal'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'decimal', ['null' => true, 'precision' => 10, 'scale' => 2***REMOVED***);
-        }
+         if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
+             $this->createUnique($table, $columnName, $type);
+         }
 
-        foreach ($columns['int'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'integer', ['null' => true***REMOVED***);
-        }
+         return true;
 
-        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'boolean', ['null' => true***REMOVED***);
-        }
+    }
 
-        foreach ($columns['text'***REMOVED*** as $columnName) {
-            $table->addColumn($columnName, 'text', ['null' => true***REMOVED***);
-        }
+    public function createTable($tableName, $options)
+    {
+        $table = $this->table($tableName, ['id' => sprintf('id_%s', $tableName)***REMOVED***);
 
-        $table->addForeignKey('id_int_foreign_key', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
+        foreach ($options['columns'***REMOVED*** as $columnName => $column) {
+            $nullable = (isset($column['nullable'***REMOVED***)) ? $column['nullable'***REMOVED*** : $options['nullable'***REMOVED***;
+            $unique = (isset($column['unique'***REMOVED***)) ? $column['unique'***REMOVED*** : $options['unique'***REMOVED***;
+            $properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
+            $this->createColumn($table, $tableName, $columnName, $column['type'***REMOVED***, $nullable, $unique, $properties);
+        }
 
         $table->create();
+
+        if (isset($options['table'***REMOVED***)) {
+            $this->createTableDependencies($tableName, $options['table'***REMOVED***);
+        }
+
     }
 
-
-    public function createAllColumnsDbUniqueNotNull()
+    public function createTableDependencies($tableName, $tables)
     {
-
-        $nullable = ['null' => false***REMOVED***;
-
-        $columns = $this->getColumnsNames();
-
-        $table2 = $this->table('all_columns_db_unique_not_null', ['id' => 'id_all_columns_db_unique_not_null'***REMOVED***);
-
-        foreach ($columns['string'***REMOVED*** as $columnName) {
-
-            if ($columnName == 'varchar_varchar') {
-                $limit = 45;
-            } else {
-                $limit = 255;
-            }
-
-            $table2->addColumn($columnName.'_unique_not_null', 'string', array_merge($nullable, ['limit' => $limit***REMOVED***));
+        if (!isset($options['table'***REMOVED***) && empty($options['table'***REMOVED***) && !is_array($options['table'***REMOVED***)) {
+            return;
         }
 
-        foreach ($columns['date'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'date', $nullable);
+        foreach ($options['table'***REMOVED*** as $tableOption) {
+
+            $this->createTableDependency($tableName, $tableOption);
         }
-
-        foreach ($columns['datetime'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'datetime', $nullable);
-        }
-
-        foreach ($columns['time'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'time', $nullable);
-        }
-
-        foreach ($columns['decimal'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'decimal', array_merge($nullable, ['precision' => 10, 'scale' => 2***REMOVED***));
-        }
-
-        foreach ($columns['int'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'integer', $nullable);
-        }
-
-        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'boolean', $nullable);
-        }
-
-        foreach ($columns['text'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique_not_null', 'text', $nullable);
-        }
-
-        $table2->addForeignKey('id_int_foreign_key_unique_not_null', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-
-
-        $indexes = [***REMOVED***;
-
-        foreach ($columns as $index => $columnsType) {
-
-            if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
-                foreach ($columnsType as $columnTyped) {
-
-                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
-                        $table2->addIndex($columnTyped.'_unique_not_null', ['unique' => true***REMOVED***);
-                    }
-                }
-            }
-        }
-
-        $table2->create();
     }
 
-
-    public function createAllColumnsDbUnique()
+    public function createTableDependency($tableName, $tableOption)
     {
-        $columns = $this->getColumnsNames();
+        $tableOptionId = sprintf('id_%s', $tableOption);
+        $tableId = sprintf('id_%s', $tableName);
 
-        $table2 = $this->table('all_columns_db_unique', ['id' => 'id_all_columns_db_unique'***REMOVED***);
+        $referencedTable = $this->table($tableOption, ['id' => $tableOptionId***REMOVED***);
+        $referencedTable->addColumn($tableId, 'integer', ['null' => true***REMOVED***);
+        $referencedTable->addForeignKey($tableId, $tableName, $tableId, ['delete'=> 'CASCADE', 'update'=> 'CASCADE'***REMOVED***);
 
-        foreach ($columns['string'***REMOVED*** as $columnName) {
-            if ($columnName == 'varchar_varchar') {
-                $limit = 45;
-            } else {
-                $limit = 255;
-            }
-            $table2->addColumn($columnName.'_unique', 'string', ['null' => true, 'limit' => $limit***REMOVED***);
-        }
-
-        foreach ($columns['date'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'date', ['null' => true***REMOVED***);
-        }
-
-        foreach ($columns['datetime'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'datetime', ['null' => true***REMOVED***);
-        }
-
-        foreach ($columns['time'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'time', ['null' => true***REMOVED***);
-        }
-
-        foreach ($columns['decimal'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'decimal', ['null' => true, 'precision' => 10, 'scale' => 2***REMOVED***);
-        }
-
-        foreach ($columns['int'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'integer', ['null' => true***REMOVED***);
-        }
-
-        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'boolean', ['null' => true***REMOVED***);
-        }
-
-        foreach ($columns['text'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_unique', 'text', ['null' => true***REMOVED***);
-        }
-
-        $table2->addForeignKey('id_int_foreign_key_unique', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-
-
-        $indexes = [***REMOVED***;
-
-        foreach ($columns as $index => $columnsType) {
-
-            if (!in_array($index, ['text', 'tinyint'***REMOVED***)) {
-                foreach ($columnsType as $columnTyped) {
-
-                    if (!in_array($columnTyped, ['varchar_password_verify', 'int_checkbox', 'id_int_foreign_key', 'varchar_upload_image'***REMOVED***)) {
-                        $table2->addIndex($columnTyped.'_unique', ['unique' => true***REMOVED***);
-                    }
-                }
-            }
-        }
-
-        $table2->create();
-    }
-
-    public function createAllColumnsDbNotNull()
-    {
-        $columns = $this->getColumnsNames();
-
-        $table2 = $this->table('all_columns_db_not_null', ['id' => 'id_all_columns_db_not_null'***REMOVED***);
-
-        foreach ($columns['string'***REMOVED*** as $columnName) {
-            if ($columnName == 'varchar_varchar') {
-                $limit = 45;
-            } else {
-                $limit = 255;
-            }
-            $table2->addColumn($columnName.'_not_null', 'string', ['null' => false, 'limit' => $limit***REMOVED***);
-        }
-
-        foreach ($columns['date'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'date', ['null' => false***REMOVED***);
-        }
-
-        foreach ($columns['datetime'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'datetime', ['null' => false***REMOVED***);
-        }
-
-        foreach ($columns['time'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'time', ['null' => false***REMOVED***);
-        }
-
-        foreach ($columns['decimal'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2***REMOVED***);
-        }
-
-        foreach ($columns['int'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'integer', ['null' => false***REMOVED***);
-        }
-
-        foreach ($columns['tinyint'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'boolean', ['null' => false***REMOVED***);
-        }
-
-        foreach ($columns['text'***REMOVED*** as $columnName) {
-            $table2->addColumn($columnName.'_not_null', 'text', ['null' => false***REMOVED***);
-        }
-
-        $table2->addForeignKey('id_int_foreign_key_not_null', 'int_foreign_key', 'id_int_foreign_key', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-        //$table->addForeignKey('id_int_dep_four', 'int_dep_four', 'id_int_dep_four', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-
-        $table2->create();
+        $referencedTable->update();
     }
 
     /**
@@ -292,32 +228,8 @@ class AllColumnsDb extends AbstractMigration
      **/
     public function change()
     {
-        /**
-        $table = $this->table('int_dep_three', ['id' => 'id_int_dep_three'***REMOVED***);
-        $table->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
-        $table->create();
-        */
-
-        $tableForeign = $this->table('int_foreign_key', ['id' => 'id_int_foreign_key'***REMOVED***);
-        $tableForeign->addColumn('dep_name', 'string', ['null' => false***REMOVED***);
-        $tableForeign->create();
-
-        $this->createAllColumnsDb();
-        $this->createAllColumnsDbNotNull();
-        $this->createAllColumnsDbUnique();
-        $this->createAllColumnsDbUniqueNotNull();
-
-
-        $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
-        $imageupload->addColumn('id_all_columns_db', 'integer', ['null' => true***REMOVED***);
-        $imageupload->addForeignKey('id_all_columns_db', 'all_columns_db', 'id_all_columns_db', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-
-        //$imageupload->addColumn('id_all_columns_db_not_null', 'integer', ['null' => true***REMOVED***);
-        //$imageupload->addForeignKey('id_all_columns_db_not_null', 'all_columns_db_not_null', 'id_all_columns_db_not_null', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-       // $imageupload->addColumn('id_all_columns_db_mix', 'integer', ['null' => true***REMOVED***);
-       // $imageupload->addForeignKey('id_all_columns_db_mix', 'all_columns_db_mix', 'id_all_columns_db_mix', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'));
-        $imageupload->update();
-
-
+        foreach (self::TABLES as $tableName => $options) {
+            $this->createTable($tableName, $options);
+        }
     }
 }

@@ -169,6 +169,12 @@ class ColumnService implements ServiceLocatorAwareInterface
             case 'Int':
                 $word = 'Integer';
                 break;
+
+            case 'tinytext':
+            case 'tinyText':
+            case 'TinyText':
+                $word = 'Text';
+                break;
             default:
                 $word = $match;
         }
