@@ -16,3 +16,82 @@ if (php_sapi_name() === 'cli-server') {
 
 // Setup autoloading
 require __DIR__.'/generate-functions';
+
+
+function createPrepareController($type, $repeat, $numberMap)
+{
+    $implements = [***REMOVED***;
+    $implements[***REMOVED*** = [
+        'name' => '%sImpl%s%s',
+        'type' => 'Interface'
+    ***REMOVED***;
+
+    $interfaces = generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, $numberMap);
+
+
+    $invokables = [***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sExtendable%s%s',
+        'type' => $type
+    ***REMOVED***;
+
+    $extends = generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, $numberMap);
+
+
+    return array_merge($interfaces, $extends);
+}
+
+function createSuite($type, $repeat, $numberMap)
+{
+
+    $invokables[***REMOVED*** = [
+        'name' => '%s%s%s',
+        'type' => $type
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sNamespace%s%s',
+        'type' => $type,
+        'namespace' => '%s'
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sImplements%s%s',
+        'implements' => createMultiplesInterfaces($type, 1, $numberMap),
+        'type' => $type
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sImplementsMany%s%s',
+        'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
+        'type' => $type
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sExtends%s%s',
+        'extends' => '%s\%sExtendable%s%s',
+        'type' => $type
+    ***REMOVED***;
+
+    return generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, $numberMap);
+}
+
+function createDepSuite()
+{
+    return [***REMOVED***;
+}
+
+
+$src = array_merge(
+    [***REMOVED***,
+    createPrepareController($type, $repeat, $numberMap)
+);
+
+$controller = array_merge(
+    [***REMOVED***,
+    createSuite($type, $repeat, $numberMap),
+    createDepSuite()
+);
+
+output(['src' => $src, 'controller' => $controller***REMOVED***, $type);

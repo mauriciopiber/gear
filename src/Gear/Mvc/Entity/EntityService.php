@@ -101,7 +101,7 @@ class EntityService extends AbstractJsonService
                     null,
                     null,
                     'invokables',
-                    false,
+                    null,
                     'UploadImage'
                 );
 
