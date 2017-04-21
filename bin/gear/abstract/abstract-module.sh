@@ -112,6 +112,30 @@ function Gear_Module_Clear
     --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
 }
 
+function Gear_Module_Restore
+{
+    # Params
+    if [ $# -lt 2 ***REMOVED***; then
+        echo "usage: module type"
+        exit 1
+    fi
+   
+   	
+	# PARAMS
+    basePath=$(Gear_Util_GetBasePath)
+
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    
+	cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
+    --type=$type \
+    --force \
+    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
+	
+}
+
 function Gear_Module_Integrate
 {
 	    # Params

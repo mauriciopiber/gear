@@ -307,11 +307,6 @@ class AllColumnsDb extends AbstractMigration
         $this->createAllColumnsDbUnique();
         $this->createAllColumnsDbUniqueNotNull();
 
-        $this->createColumnType();
-
-        //criar tabelas por tipo de coluna
-
-        //criar tabelas por coluna em sí
 
         $imageupload = $this->table('upload_image', ['id' => 'id_upload_image'***REMOVED***);
         $imageupload->addColumn('id_all_columns_db', 'integer', ['null' => true***REMOVED***);
