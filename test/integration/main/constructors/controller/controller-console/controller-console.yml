@@ -1,0 +1,15 @@
+src:
+    - { name: ConsoleImplOne, type: Interface }
+    - { name: ConsoleExtendableInvokOne, type: Console, service: invokables }
+    - { name: ConsoleExtendableFactoOne, type: Console, service: factories }
+controller:
+    - { name: ConsoleInvokOne, type: Console, service: invokables }
+    - { name: ConsoleFactoOne, type: Console, service: factories }
+    - { name: ConsoleNamespaceInvokOne, type: Console, namespace: ConsoOne, service: invokables }
+    - { name: ConsoleNamespaceFactoOne, type: Console, namespace: ConsoOne, service: factories }
+    - { name: ConsoleImplementsInvokOne, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
+    - { name: ConsoleImplementsFactoOne, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
+    - { name: ConsoleImplementsManyInvokOne, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
+    - { name: ConsoleImplementsManyFactoOne, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
+    - { name: ConsoleExtendsInvokOne, type: Console, extends: Console\ConsoleExtendableInvokOne, service: invokables }
+    - { name: ConsoleExtendsFactoOne, type: Console, extends: Console\ConsoleExtendableFactoOne, service: factories }

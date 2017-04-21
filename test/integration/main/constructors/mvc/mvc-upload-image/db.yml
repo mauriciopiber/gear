@@ -1,0 +1,5 @@
+modules: MyModule
+
+db:
+  1: 
+    table: AllColumnsDb

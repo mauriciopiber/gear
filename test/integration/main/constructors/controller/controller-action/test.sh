@@ -3,9 +3,9 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrControllerConsole"
-type="cli"
+module="PbrControllerAction"
+type="web"
 migration=""
-gearfile="controller-console.yml"
+gearfile="controller-action.yml"
 
 source "$bin/gear/module/test-module.sh"

@@ -1,0 +1,15 @@
+src:
+    - { name: ActionImplOne, type: Interface }
+    - { name: ActionExtendableInvokOne, type: Action, service: invokables }
+    - { name: ActionExtendableFactoOne, type: Action, service: factories }
+controller:
+    - { name: ActionInvokOne, type: Action, service: invokables }
+    - { name: ActionFactoOne, type: Action, service: factories }
+    - { name: ActionNamespaceInvokOne, type: Action, namespace: ActioOne, service: invokables }
+    - { name: ActionNamespaceFactoOne, type: Action, namespace: ActioOne, service: factories }
+    - { name: ActionImplementsInvokOne, type: Action, implements: Interfaces\ActionImplOne, service: invokables }
+    - { name: ActionImplementsFactoOne, type: Action, implements: Interfaces\ActionImplOne, service: factories }
+    - { name: ActionImplementsManyInvokOne, type: Action, implements: Interfaces\ActionImplOne, service: invokables }
+    - { name: ActionImplementsManyFactoOne, type: Action, implements: Interfaces\ActionImplOne, service: factories }
+    - { name: ActionExtendsInvokOne, type: Action, extends: Action\ActionExtendableInvokOne, service: invokables }
+    - { name: ActionExtendsFactoOne, type: Action, extends: Action\ActionExtendableFactoOne, service: factories }

@@ -151,18 +151,38 @@ function createMultiplesInterfaces($type, $repeat, $numberMap)
     return $interfaces;
 }
 
+function srcType()
+{
+    return ['Interface', 'Repository', 'Service', 'Filter', 'Form', 'ViewHelper', 'ControllerPlugin', 'ValueObject'***REMOVED***;
+}
+
+function controllerType()
+{
+    return ['Action', 'Console'***REMOVED***;
+}
+
 
 function output($data, $type)
 {
     $string = new StringService();
+
+    if (in_array($type, srcType())) {    
+        $name = 'src';
+        $template = '/src/src-%';
+    } elseif (in_array($type, controllerType())) {
+        $name = 'controller';
+        $template = '/controller/controller-%s';    
+    } else {
+        throw new Exception('Missing '.$type);
+    }
     
-    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/src/');
-    
-    $template = realpath(sprintf($constructorIntegration.'/src-%s/', $string->str('url', $type)));
+    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors');
+        
+    $template = realpath(sprintf($constructorIntegration.$template, $string->str('url', $type)));
     
     $yaml = Yaml::dump($data);
 
-    file_put_contents($template.'/src-'.$string->str('url', $type).'.yml', $yaml);
+    file_put_contents(sprintf('%s/%s-%s.yml', $template, $name, $string->str('url', $type)), $yaml);
 
     echo "Salvo com sucesso"."\n";
 }
