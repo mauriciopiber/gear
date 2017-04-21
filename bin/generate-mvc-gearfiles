@@ -115,7 +115,7 @@ function listAvailableMvc()
 }
 
 
-function generateMigration($date, $name)
+function createMigration($date, $name)
 {
     $arrayService = new Gear\Util\Vector\ArrayService();
     
@@ -140,7 +140,7 @@ function getMigrationName($date, $name)
     return sprintf('%s_%s.php', $date, $name);
 }
 
-function updateMigration($date, $name)
+function updateTestFile($date, $name)
 {
     $migrationName = getMigrationName($date, $name);
 
@@ -173,12 +173,12 @@ function generateMvc()
     ***REMOVED***;
     
     
-    foreach ($expectedColumns as $type => $names) {
-        foreach ($names as $name) {
-            echo "$type/$name"."\n";
+    foreach ($expectedColumns as $superType => $types) {
+        foreach ($types as $type) {
+            echo "$superType/$type"."\n";
             
-            generateMvcGearfile("$type/$name", $name);
-            generateMvcMigration("$type/$name", $name);
+            generateMvcGearfile("$superType/$type", $type);
+            generateMvcMigration("$superType/$name", $type);
         }
     
     }
@@ -195,7 +195,7 @@ function generateMvcMigration($location, $name)
     $date = (new DateTime('now'))->format('YmdHis');
     
     $migrationName = getMigrationName($date, $name);
-    sleep(1.5);
+    //sleep(1.5);
     echo "$location/".$migrationName."\n";
 
 }
