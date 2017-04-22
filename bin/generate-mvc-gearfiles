@@ -176,9 +176,9 @@ function getMigrationName($date, $name)
     $string = new GearBase\Util\String\StringService();
     $name = $string->str('uline', $name);
     return sprintf(
-        //'%s.php', 
-        '%s_%s.php',        
-        $date, 
+        '%s.php', 
+        //'%s_%s.php',        
+        //$date, 
         $name
     );
 }
