@@ -5,7 +5,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrExample"
 type="web"
-migration="20160123222068_all_columns_db.php"
+migration="20170321222020_all_columns.php"
 gearfile="gear-1.yml"
 
 source "$bin/gear/module/test-module.sh"
