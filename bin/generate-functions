@@ -168,7 +168,9 @@ function outputMvc($data, $location, $name)
 
     $template = getMvcLocation($location);
     
-    $path =  sprintf('%s/%s.yml', $template, $string->str('url', $name));
+    $gearfile = sprintf('%s.yml', $string->str('url', $name));
+    
+    $path =  sprintf('%s/%s', $template, $gearfile);
     
     if (!is_dir($template)) {
         mkdir($template);
@@ -179,6 +181,8 @@ function outputMvc($data, $location, $name)
     file_put_contents($path, $yaml);
 
     echo "Salvo com sucesso"."\n";
+    
+    return $gearfile;
 }
 
 function getMvcLocation($location)

@@ -1,0 +1,71 @@
+<?php
+
+
+function getBasicColumns()
+{
+    return [
+        'time_basic' => ['type' => 'time'***REMOVED***,
+        'datetime_basic' => ['type' => 'datetime'***REMOVED***,            
+        'date_basic' => ['type' => 'date'***REMOVED***,
+        'varchar_basic' => ['type' => 'string'***REMOVED***,        
+        'text_basic' => ['type' => 'text'***REMOVED***,        
+        'decimal_basic' => ['type' => 'decimal'***REMOVED***,        
+        'boolean_basic'  => ['type' => 'boolean'***REMOVED***,
+        'int_basic' => ['type' => 'integer'***REMOVED***,
+    ***REMOVED***;
+}
+
+function getDateColumns()
+{
+    return [
+        'time_time' => ['type' => 'time'***REMOVED***,
+        'datetime_datetime' => ['type' => 'datetime'***REMOVED***,
+        'datetime_datetime_pt_br' => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
+        'date_date' => ['type' => 'date'***REMOVED***,
+        'date_date_pt_br' => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
+    ***REMOVED***;
+}
+
+function getVarcharColumns()
+{
+    return [
+        'varchar_password_verify' => ['type' => 'string', 'speciality' => 'password-verify'***REMOVED***,
+        'varchar_upload_image' => ['type' => 'string', 'speciality' => 'upload-image'***REMOVED***,
+        'varchar_url' => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
+        'varchar_varchar' => ['type' => 'string'***REMOVED***,
+        'varchar_unique_id' => ['type' => 'string', 'speciality' => 'unique-id'***REMOVED***,
+        'varchar_telephone' => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
+        'varchar_email' => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
+    ***REMOVED***;
+}
+
+function getTextColumns()
+{
+    return [
+        'text_text' => ['type' => 'text'***REMOVED***,
+        'text_html' => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
+    ***REMOVED***;
+}
+
+function getNumericColumns()
+{
+    return [
+        'decimal_decimal' => ['type' => 'decimal'***REMOVED***,
+        'decimal_money_pt_br' => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
+        'boolean_int'  => ['type' => 'boolean'***REMOVED***,
+        'boolean_checkbox' => ['type' => 'boolean', 'speciality' => 'checkbox'***REMOVED***,
+        'int_int' => ['type' => 'integer'***REMOVED***,
+        'int_checkbox' => ['type' => 'integer', 'speciality' => 'checkbox'***REMOVED***,
+        'id_int_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+    ***REMOVED***;    
+}
+
+function getCompleteColumns()
+{
+    return array_merge(
+        getTextColumns(),
+        getNumericColumns(),
+        getDateColumns(),
+        getVarcharColumns()
+    );
+}

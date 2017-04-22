@@ -2,16 +2,22 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MvcNumeric extends AbstractMigration
+class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
 {
     const TABLES = [
-        'mvc_numeric' => [
-            'nullable' => false,
-            'unique' => false,
+        'mvc_complete_strict_unique_nullable_upload_image' => [
+            'nullable' => true,
+            'unique' => true,
             'tables' => [
-
+                'upload_image'
             ***REMOVED***,
             'columns' => [
+                'text_text' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'text_html' => [
+                    'type' => 'text'
+                ***REMOVED***,
                 'decimal_decimal' => [
                     'type' => 'decimal'
                 ***REMOVED***,
@@ -35,6 +41,42 @@ class MvcNumeric extends AbstractMigration
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
+                ***REMOVED***,
+                'time_time' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'datetime_datetime' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'datetime_datetime_pt_br' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'date_date' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'date_date_pt_br' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'varchar_password_verify' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_upload_image' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_url' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_varchar' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_unique_id' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_telephone' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'varchar_email' => [
+                    'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***

@@ -2,11 +2,11 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MigrationName extends AbstractMigration
+class MvcVarchar extends AbstractMigration
 {
     const TABLES = [
         'mvc_varchar' => [
-            'nullable' => true,
+            'nullable' => false,
             'unique' => false,
             'tables' => [
 
