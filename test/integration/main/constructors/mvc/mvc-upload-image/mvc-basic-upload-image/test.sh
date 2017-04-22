@@ -3,7 +3,7 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrMvcBasic"
+module="PbrMvcBasicUploadImage"
 type="web"
 construct=()
 construct[1***REMOVED***="mvc-basic.yml;mvc_basic.php"

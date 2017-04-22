@@ -2,39 +2,39 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MvcNumeric extends AbstractMigration
+class MvcBasicStrict extends AbstractMigration
 {
     const TABLES = [
-        'mvc_numeric' => [
+        'mvc_basic_strict' => [
             'nullable' => false,
             'unique' => false,
             'tables' => [
 
             ***REMOVED***,
             'columns' => [
-                'decimal_decimal' => [
+                'time_basic' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'datetime_basic' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'date_basic' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'varchar_basic' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'text_basic' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'decimal_basic' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'decimal_money_pt_br' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'boolean_int' => [
+                'boolean_basic' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'boolean_checkbox' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'int_int' => [
+                'int_basic' => [
                     'type' => 'integer'
-                ***REMOVED***,
-                'int_checkbox' => [
-                    'type' => 'integer'
-                ***REMOVED***,
-                'id_int_foreign_key' => [
-                    'type' => 'integer',
-                    'properties' => [
-                        'foreignKey'
-                    ***REMOVED***
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***

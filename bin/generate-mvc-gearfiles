@@ -14,76 +14,10 @@ if (php_sapi_name() === 'cli-server') {
 }
 
 require __DIR__.'/generate-functions';
+require __DIR__.'/generate-columns';
 
-function getBasicColumns()
-{
-    return [
-        'time_basic' => ['type' => 'time'***REMOVED***,
-        'datetime_basic' => ['type' => 'datetime'***REMOVED***,            
-        'date_basic' => ['type' => 'date'***REMOVED***,
-        'varchar_basic' => ['type' => 'string'***REMOVED***,        
-        'text_basic' => ['type' => 'text'***REMOVED***,        
-        'decimal_basic' => ['type' => 'decimal'***REMOVED***,        
-        'boolean_basic'  => ['type' => 'boolean'***REMOVED***,
-        'int_basic' => ['type' => 'integer'***REMOVED***,
-    ***REMOVED***;
-}
 
-function getDateColumns()
-{
-    return [
-        'time_time' => ['type' => 'time'***REMOVED***,
-        'datetime_datetime' => ['type' => 'datetime'***REMOVED***,
-        'datetime_datetime_pt_br' => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
-        'date_date' => ['type' => 'date'***REMOVED***,
-        'date_date_pt_br' => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
-    ***REMOVED***;
-}
-
-function getVarcharColumns()
-{
-    return [
-        'varchar_password_verify' => ['type' => 'string', 'speciality' => 'password-verify'***REMOVED***,
-        'varchar_upload_image' => ['type' => 'string', 'speciality' => 'upload-image'***REMOVED***,
-        'varchar_url' => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
-        'varchar_varchar' => ['type' => 'string'***REMOVED***,
-        'varchar_unique_id' => ['type' => 'string', 'speciality' => 'unique-id'***REMOVED***,
-        'varchar_telephone' => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
-        'varchar_email' => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
-    ***REMOVED***;
-}
-
-function getTextColumns()
-{
-    return [
-        'text_text' => ['type' => 'text'***REMOVED***,
-        'text_html' => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
-    ***REMOVED***;
-}
-
-function getNumericColumns()
-{
-    return [
-        'decimal_decimal' => ['type' => 'decimal'***REMOVED***,
-        'decimal_money_pt_br' => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
-        'boolean_int'  => ['type' => 'boolean'***REMOVED***,
-        'boolean_checkbox' => ['type' => 'boolean', 'speciality' => 'checkbox'***REMOVED***,
-        'int_int' => ['type' => 'integer'***REMOVED***,
-        'int_checkbox' => ['type' => 'integer', 'speciality' => 'checkbox'***REMOVED***,
-        'id_int_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
-    ***REMOVED***;    
-}
-
-function getCompleteColumns()
-{
-    return array_merge(
-        getTextColumns(),
-        getNumericColumns(),
-        getDateColumns(),
-        getVarcharColumns()
-    );
-}
-
+/*
 function listAvailableMvc()
 {
     $availableTypes = ['column', 'usertype', 'constraints', 'table'***REMOVED***;
@@ -151,7 +85,7 @@ function listAvailableMvc()
 
 }
 
-/*
+
 function createMigration($date, $name)
 {
     $arrayService = new Gear\Util\Vector\ArrayService();
@@ -167,7 +101,7 @@ function createMigration($date, $name)
     $migrationName = getMigrationName($date, $name);
     
     file_put_contents(__DIR__.'/'.$migrationName, $template);
-    //var_dump($template); 
+    ////var_dump($template); 
 }
 */
 
@@ -182,24 +116,34 @@ function getMigrationName($date, $name)
         $name
     );
 }
+
+function getConstraintLabel($constraint)
+{
+    if  (!empty($constraint)) {
+                 
+        if (is_array($constraint)) {
+            $const = implode('-', $constraint);
+        } else {
+            $const = $constraint;
+        }
+    } else {
+        $const = '';
+    }
+    
+    return $const;
+}
   
-function generateMvc()
+function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
     $string = new GearBase\Util\String\StringService();
     $expectedColumns = [
-        'mvc-columns' => [
-            'mvc-complete',
-            'mvc-basic',
-            'mvc-varchar',
-            'mvc-dates',
-            'mvc-text',
-            'mvc-numeric'
-        ***REMOVED***,
+        $suiteName => $suiteColumns,
     ***REMOVED***;
     
     $configColumns = [
-        'usertype' => ['all'***REMOVED***, //add low-strict and strict
-        'constraints' => [null***REMOVED*** //add not-null, unique, not-null/unique
+        'usertype' => $suiteUserTypes, 
+        'constraints' => $suiteConstraints,
+        'tables' => $suiteTables
     ***REMOVED***;
     
     $migrations = [***REMOVED***;
@@ -210,38 +154,74 @@ function generateMvc()
             foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                 
-                    $location = "$superType/$type";
+                    foreach ($configColumns['tables'***REMOVED*** as $tables) {
                     
-                    $columnType = $string->str('class', str_replace('mvc-', '', $type));
                     
-                    $tableName = sprintf(
-                        '%s%s%s%s',
-                        'Mvc',
-                        $columnType,
-                        ($usertype == 'all') ? '' : $usertype,
-                        (!empty($constraint)) ? $constraint : ''
-                    );
+                        $locationKey = sprintf("%s/%s", $superType, $type);
                     
-                    generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $location);
-                    $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $location);
-                    updateTestfile($tableName, $columnType, $migration, $location);
-                    //$migrations[$type***REMOVED*** = $migration;                
+                        if ($usertype != 'all') {
+                            $locationKey .= '-'.$usertype;
+                        }
+                    
+                        $const = getConstraintLabel($constraint);
+                    
+                        if ($constraint != '') {
+                            $locationKey .= '-'.$const;
+                        }
+                    
+                        $columnType = $string->str('class', str_replace('mvc-', '', $type));
+                    
+                        $tableName = sprintf(
+                            '%s%s%s%s',
+                            'Mvc',
+                            $columnType,
+                            ($usertype == 'all') ? '' : $string->str('class', $usertype),
+                            $string->str('class', $const)
+                        );
+                    
+                        if ($tables !== null) { 
+                            $tableName .= $string->str('class', $tables);                                                               
+                            $locationKey .= '-'.$string->str('url', $tables);
+                        }
+                    
+                        $migrations[$type***REMOVED*** = generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, $locationKey);
+                    
+                        //$migrations[$type***REMOVED*** = array_merge([$locationKey***REMOVED***, $migration);
+                        
+                    }                
                 }
             }
             
         }
 
+var_dump($migrations);
         //echo "$superType"."\n";
         //updateTestfile("$superType", $migrations);
     }
 }
+
+function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, $locationKey)
+{
+    $config = [***REMOVED***;
+    //echo $tableName."\n";
+    //echo $locationKey."\n";
+    $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $locationKey);
+    $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $locationKey);
+    updateTestfile($tableName, $columnType, $migration, $locationKey);
+    
+    $config['key'***REMOVED*** = $locationKey;
+    $config['gearfile'***REMOVED*** = $gearfile;
+    $config['migration'***REMOVED*** = $migration;
+    return $config;
+}
+
 
 function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $location)
 {
     
     //echo $location."/".$type.".yml"."\n";
     
-    echo "$tableName, $type, $columnType, $usertype, $constraint, $location"."\n";
+    //echo "$tableName, $type, $columnType, $usertype, $constraint, $location"."\n";
     
     
     $db = [
@@ -252,15 +232,13 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
         'columns' => factoryGearfileColumns($columnType)
     ***REMOVED***;
     
-    outputMvc(['db' => [$db***REMOVED******REMOVED***, $location, $type);
+    return outputMvc(['db' => [$db***REMOVED******REMOVED***, $location, $type);
 }
 
 
 function updateTestFile($tableName, $columnType, $migration, $location)
 {
     $string = new GearBase\Util\String\StringService();
-    //echo "$location/test.sh"."\n";
-    //var_dump($migrations);
     
     $migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
 
@@ -271,49 +249,42 @@ function updateTestFile($tableName, $columnType, $migration, $location)
     $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $tableName).'$2', $newFile);
     
-    //var_dump($newFile);
-    
     $template = getMvcLocation($location);
     
     $path =  sprintf('%s/%s', $template, 'test.sh');
-    
-    //var_dump($path);
     
     file_put_contents($path, $newFile);
 }
 
 
-
-function generateMvcMigration($tableName, $type, $columnType, $constraint, $location)
+function generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $location)
 {
     $string = new GearBase\Util\String\StringService();
     $date = (new DateTime('now'))->format('YmdHis');
     
     $migrationName = getMigrationName($date, $type);
+    
+
     //sleep(1.5);
     
     $migration = "$location/".$migrationName;
-    echo $migration."\n";
-    
-    /*
-    foreach ($constraint as $const) {
-        if (is_array($const)) {
-        
-            foreach ($const as $cont) {
-            
-                 if ($cont == 'null') { 
-                     $nullable = true;
-                 }
-            }
-        
-        }
-    
-    }
-    */
-    
-    $nullable = true;
     $unique = false;
-    $tables = [***REMOVED***;
+    $nullable = false;
+
+    if (is_array($constraint)) {
+        foreach($constraint as $const) {
+        
+            if ($const == 'nullable') {
+                $nullable = true;
+            }
+            
+            if ($const == 'unique') {
+                $unique = true;
+            }
+        }
+    }
+   
+    $tables = (!empty($tables) ? [$tables***REMOVED*** : [***REMOVED***);
     $columns = factoryMigrationColumns($columnType);
     
     $migrationConfig = [
@@ -331,14 +302,15 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $loca
     
     $tables = '    const TABLES = '.$arrayService->varExport54($migrationConfig, '    ').';';
     $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-
+    $migrate = preg_replace('#MigrationName#', $tableName, $migrate);
+    
     $template = getMvcLocation($location);
     
     $path =  sprintf('%s/%s', $template, $migrationName);
 
     file_put_contents($path, $migrate);
     
-    return $migration;
+    return $migrationName;
 }
 
 
@@ -409,9 +381,65 @@ function extractMigrationsColumns($columns)
     }
     return $gearfileColumns;
 }
+ 
+//columns
+generateMvc(
+    'mvc-columns',
+    [
+        'mvc-complete',
+        'mvc-basic',
+        'mvc-varchar',
+        'mvc-dates',
+        'mvc-text',
+        'mvc-numeric'
+    ***REMOVED***,    
+    ['all'***REMOVED***,
+    [null***REMOVED***,
+    [null***REMOVED***
+);
 
+//usertype
+generateMvc(
+    'mvc-usertypes',
+    [
+        'mvc-basic',
+    ***REMOVED***,    
+    ['low-strict', 'strict'***REMOVED***,
+    [null***REMOVED***,
+    [null***REMOVED***
+);
 
-generateMvc();
-    
-//generateMigration($date, $name);
-//updateMigration($date, $name);
+//constraints
+generateMvc(
+    'mvc-constraints',
+    [
+        'mvc-basic',
+    ***REMOVED***,    
+    ['all'***REMOVED***,
+    [['nullable'***REMOVED***, ['unique'***REMOVED***, ['nullable', 'unique'***REMOVED******REMOVED***,
+    [null***REMOVED***
+);
+
+//constraints
+generateMvc(
+    'mvc-upload-image',
+    [
+        'mvc-basic',
+    ***REMOVED***,    
+    ['all'***REMOVED***,
+    [null***REMOVED***,
+    ['upload_image'***REMOVED***
+);     
+
+//complete
+//constraints
+generateMvc(
+    'mvc-complete',
+    [
+        'mvc-complete',
+    ***REMOVED***,    
+    ['strict'***REMOVED***,
+    [['unique', 'nullable'***REMOVED******REMOVED***,
+    ['upload_image'***REMOVED***
+);     
+

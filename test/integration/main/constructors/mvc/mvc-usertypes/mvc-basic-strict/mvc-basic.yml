@@ -1,0 +1,2 @@
+db:
+    - { table: MvcBasicStrict, user: strict, namespace: MvcBasicStrict, service: factories, columns: {  } }
