@@ -18,8 +18,14 @@ require __DIR__.'/generate-functions';
 function getBasicColumns()
 {
     return [
-            
-    
+        'time_basic' => ['type' => 'time'***REMOVED***,
+        'datetime_basic' => ['type' => 'datetime'***REMOVED***,            
+        'date_basic' => ['type' => 'date'***REMOVED***,
+        'varchar_basic' => ['type' => 'string'***REMOVED***,        
+        'text_basic' => ['type' => 'text'***REMOVED***,        
+        'decimal_basic' => ['type' => 'decimal'***REMOVED***,        
+        'boolean_basic'  => ['type' => 'boolean'***REMOVED***,
+        'int_basic' => ['type' => 'integer'***REMOVED***,
     ***REMOVED***;
 }
 
@@ -145,7 +151,7 @@ function listAvailableMvc()
 
 }
 
-
+/*
 function createMigration($date, $name)
 {
     $arrayService = new Gear\Util\Vector\ArrayService();
@@ -163,34 +169,19 @@ function createMigration($date, $name)
     file_put_contents(__DIR__.'/'.$migrationName, $template);
     //var_dump($template); 
 }
+*/
 
 function getMigrationName($date, $name)
 {
     $string = new GearBase\Util\String\StringService();
     $name = $string->str('uline', $name);
     return sprintf(
-        '%s.php', 
-        //'%s_%s.php',        
-        //$date, 
+        //'%s.php', 
+        '%s_%s.php',        
+        $date, 
         $name
     );
 }
-
-function updateTestFile($location, $migrations)
-{
-    //echo "$location/test.sh"."\n";
-    //var_dump($migrations);
-
-    //$template = file_get_contents(__DIR__.'/test.sh');
-    
-    //$text = sprintf('migration="%s"', $migrationName);
-    
-    //$newFile = preg_replace('#migration="[0-9a-z_***REMOVED****\.php"#', $text, $template);
-    
-    //file_put_contents(__DIR__.'/test.sh', $newFile);
-}
-
-
   
 function generateMvc()
 {
@@ -233,7 +224,7 @@ function generateMvc()
                     
                     generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $location);
                     $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $location);
-                    //updateTestfile($location, $migration);
+                    updateTestfile($tableName, $columnType, $migration, $location);
                     //$migrations[$type***REMOVED*** = $migration;                
                 }
             }
@@ -265,6 +256,34 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
 }
 
 
+function updateTestFile($tableName, $columnType, $migration, $location)
+{
+    $string = new GearBase\Util\String\StringService();
+    //echo "$location/test.sh"."\n";
+    //var_dump($migrations);
+    
+    $migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
+
+    $testFile = file_get_contents(__DIR__.'/test-template.sh');
+    
+    $text = sprintf('construct[1***REMOVED***="mvc-%s.yml;%s"', $string->str('url', $columnType), $migName);
+    
+    $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
+    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $tableName).'$2', $newFile);
+    
+    //var_dump($newFile);
+    
+    $template = getMvcLocation($location);
+    
+    $path =  sprintf('%s/%s', $template, 'test.sh');
+    
+    //var_dump($path);
+    
+    file_put_contents($path, $newFile);
+}
+
+
+
 function generateMvcMigration($tableName, $type, $columnType, $constraint, $location)
 {
     $string = new GearBase\Util\String\StringService();
@@ -282,7 +301,9 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $loca
         
             foreach ($const as $cont) {
             
-                 if ($cont == 
+                 if ($cont == 'null') { 
+                     $nullable = true;
+                 }
             }
         
         }
@@ -291,9 +312,9 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $loca
     */
     
     $nullable = true;
-    $unique = true;
+    $unique = false;
     $tables = [***REMOVED***;
-    $columns = [***REMOVED***;
+    $columns = factoryMigrationColumns($columnType);
     
     $migrationConfig = [
         $string->str('uline', $tableName) => [
@@ -310,17 +331,14 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $loca
     
     $tables = '    const TABLES = '.$arrayService->varExport54($migrationConfig, '    ').';';
     $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-    
-    
-    $constructorIntegration = realpath((new Gear\Module())->getLocation().'/../../test/integration/main/constructors/mvc');
-    $template = sprintf($constructorIntegration.'/'.$location);
+
+    $template = getMvcLocation($location);
     
     $path =  sprintf('%s/%s', $template, $migrationName);
 
     file_put_contents($path, $migrate);
     
     return $migration;
-
 }
 
 
@@ -362,10 +380,10 @@ function factoryGearfileColumns($columnType)
     return $columnsGearfile;
 }
 
-function factoryMigrationColumns($columnType, $constraints, $table)
+function factoryMigrationColumns($columnType)
 {
     $columns = factoryColumns($columnType);
-    $columnsGearfile = extractMigrationColumns($columns);
+    $columnsGearfile = extractMigrationsColumns($columns);
     return $columnsGearfile;
 }
 
@@ -382,7 +400,14 @@ function extractGearfileColumns($columns)
 
 function extractMigrationsColumns($columns)
 {
-    return [***REMOVED***;
+    $gearfileColumns = [***REMOVED***;
+    foreach ($columns as $columnName => $columnOptions) {
+        if (isset($columnOptions['speciality'***REMOVED***)) {
+            unset($columnOptions['speciality'***REMOVED***);
+        }
+        $gearfileColumns[$columnName***REMOVED*** = $columnOptions;
+    }
+    return $gearfileColumns;
 }
 
 

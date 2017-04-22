@@ -3,9 +3,9 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrMvcDates"
+module="PbrMvcText"
 type="web"
 construct=()
-construct[1***REMOVED***="mvc-dates.yml;20170422033631_mvc_dates.php"
+construct[1***REMOVED***="mvc-text.yml;20170422033631_mvc_text.php"
 
 source "$bin/gear/module/test-module.sh"

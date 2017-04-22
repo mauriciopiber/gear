@@ -166,13 +166,9 @@ function outputMvc($data, $location, $name)
 {
     $string = new StringService();
 
-    
-    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/mvc');
-        
-    $template = sprintf($constructorIntegration.'/'.$location);
+    $template = getMvcLocation($location);
     
     $path =  sprintf('%s/%s.yml', $template, $string->str('url', $name));
-    
     
     if (!is_dir($template)) {
         mkdir($template);
@@ -184,6 +180,13 @@ function outputMvc($data, $location, $name)
 
     echo "Salvo com sucesso"."\n";
 }
+
+function getMvcLocation($location)
+{
+    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/mvc');
+    return sprintf($constructorIntegration.'/'.$location);
+}
+
 
 function output($data, $type)
 {
