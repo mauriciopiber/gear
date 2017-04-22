@@ -69,3 +69,85 @@ function getCompleteColumns()
         getVarcharColumns()
     );
 }
+
+
+
+
+function factoryColumns($columnType) 
+{
+    $columns = [***REMOVED***;
+    switch  ($columnType) {
+        case 'Basic':
+            $columns = getBasicColumns();
+            break;
+        case 'Complete':
+            $columns = getCompleteColumns();
+            break;
+        case 'Varchar':
+            $columns = getVarcharColumns();
+            break;
+        case 'Dates':
+            $columns = getDateColumns();
+            break;
+        case 'Text':
+            $columns = getTextColumns();
+            break;                        
+        case 'Numeric':
+            $columns = getNumericColumns();
+            break;
+        default:
+            throw new Exception('Type not found: '.$columnType);
+            break;                        
+    }
+
+    return $columns;    
+}
+
+/**
+ * Gearfile
+ */
+function factoryGearfileColumns($columnType)
+{
+    $columns = factoryColumns($columnType);
+    $columnsGearfile = extractGearfileColumns($columns);
+    return $columnsGearfile;
+}
+
+/**
+ * Migration
+ */
+function factoryMigrationColumns($columnType)
+{
+    $columns = factoryColumns($columnType);
+    $columnsGearfile = extractMigrationsColumns($columns);
+    return $columnsGearfile;
+}
+
+/**
+ * Fix Gearfile
+ */ 
+function extractGearfileColumns($columns)
+{
+    $gearfileColumns = [***REMOVED***;
+    foreach ($columns as $columnName => $columnOptions) {
+        if (isset($columnOptions['speciality'***REMOVED***)) {
+            $gearfileColumns[$columnName***REMOVED*** = $columnOptions['speciality'***REMOVED***;
+        }
+    }
+    return $gearfileColumns;
+}
+
+/**
+ * Fix Migration
+ */
+function extractMigrationsColumns($columns)
+{
+    $gearfileColumns = [***REMOVED***;
+    foreach ($columns as $columnName => $columnOptions) {
+        if (isset($columnOptions['speciality'***REMOVED***)) {
+            unset($columnOptions['speciality'***REMOVED***);
+        }
+        $gearfileColumns[$columnName***REMOVED*** = $columnOptions;
+    }
+    return $gearfileColumns;
+}
