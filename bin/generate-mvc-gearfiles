@@ -193,21 +193,25 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
             }
             
         }
-
-var_dump($migrations);
-        //echo "$superType"."\n";
-        //updateTestfile("$superType", $migrations);
+        
+        updateSuperTestFile("$superType", $migrations);
     }
+    
+    
+}
+
+function updateSuperTestFile($superType, $migrations)
+{
+    var_dump($superType, $migrations);
+
 }
 
 function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, $locationKey)
 {
     $config = [***REMOVED***;
-    //echo $tableName."\n";
-    //echo $locationKey."\n";
     $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $locationKey);
     $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $locationKey);
-    updateTestfile($tableName, $columnType, $migration, $locationKey);
+    updateTestFile($tableName, $gearfile, $migration, $locationKey);
     
     $config['key'***REMOVED*** = $locationKey;
     $config['gearfile'***REMOVED*** = $gearfile;
@@ -232,19 +236,19 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
         'columns' => factoryGearfileColumns($columnType)
     ***REMOVED***;
     
-    return outputMvc(['db' => [$db***REMOVED******REMOVED***, $location, $type);
+    return outputMvc($tableName, ['db' => [$db***REMOVED******REMOVED***, $location);
 }
 
 
-function updateTestFile($tableName, $columnType, $migration, $location)
+function updateTestFile($tableName, $gearfile, $migration, $location)
 {
     $string = new GearBase\Util\String\StringService();
     
-    $migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
+    //$migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
 
     $testFile = file_get_contents(__DIR__.'/test-template.sh');
     
-    $text = sprintf('construct[1***REMOVED***="mvc-%s.yml;%s"', $string->str('url', $columnType), $migName);
+    $text = sprintf('construct[1***REMOVED***="%s;%s"', $gearfile, $migration);
     
     $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $tableName).'$2', $newFile);
@@ -262,7 +266,7 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
     $string = new GearBase\Util\String\StringService();
     $date = (new DateTime('now'))->format('YmdHis');
     
-    $migrationName = getMigrationName($date, $type);
+    $migrationName = getMigrationName($date, $tableName);
     
 
     //sleep(1.5);
