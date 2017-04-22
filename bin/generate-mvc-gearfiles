@@ -202,7 +202,42 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 
 function updateSuperTestFile($superType, $migrations)
 {
-    var_dump($superType, $migrations);
+    $string = new GearBase\Util\String\StringService();
+    
+    //$migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
+
+    $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
+    
+    $constructTemplate = 'construct+=("%s/%s:%s/%s")'.PHP_EOL;
+    
+    $construct = '';
+    
+    foreach ($migrations as $key => $config) {
+        $locationKey = $config['key'***REMOVED***;
+        
+        $folder = array_values(array_slice(explode('/', $locationKey), -1))[0***REMOVED***;
+        
+        $gearfile = $config['gearfile'***REMOVED***;
+        $migration = $config['migration'***REMOVED***;
+        
+        $construct .= sprintf($constructTemplate, $folder, $gearfile, $folder, $migration); 
+        
+        //echo "$locationKey $gearfile $migration"."\n";
+    }
+
+    
+    $newFile = str_replace('construct+=("")', $construct, $testFile);
+    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $superType).'$2', $newFile);
+    
+    $template = getMvcLocation($superType);
+    
+    $path =  sprintf('%s/%s', $template, 'test.sh');
+    
+    file_put_contents($path, $newFile);
+        
+    //echo $construct;
+    
+    //var_dump($superType, $migrations);
 
 }
 

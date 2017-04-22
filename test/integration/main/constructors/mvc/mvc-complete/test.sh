@@ -3,10 +3,10 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrMvcConstraints"
+module="PbrMvcComplete"
 type="web"
 construct=()
-construct+=("mvc-basic-nullable-unique/mvc-basic-nullable-unique.yml:mvc-basic-nullable-unique/mvc_basic_nullable_unique.php")
+construct+=("mvc-complete-strict-unique-nullable-upload-image/mvc-complete-strict-unique-nullable-upload-image.yml:mvc-complete-strict-unique-nullable-upload-image/mvc_complete_strict_unique_nullable_upload_image.php")
 
 
 source "$bin/gear/module/test-module.sh"
