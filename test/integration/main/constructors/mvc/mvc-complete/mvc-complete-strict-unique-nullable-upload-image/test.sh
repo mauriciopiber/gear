@@ -6,6 +6,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrMvcCompleteStrictUniqueNullableUploadImage"
 type="web"
 construct=()
-construct[1***REMOVED***="mvc-complete.yml;mvc_complete.php"
+construct[1***REMOVED***="mvc-complete-strict-unique-nullable-upload-image.yml;mvc_complete_strict_unique_nullable_upload_image.php"
 
 source "$bin/gear/module/test-module.sh"

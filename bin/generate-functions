@@ -162,13 +162,13 @@ function controllerType()
 }
 
 
-function outputMvc($data, $location, $name)
+function outputMvc($tableName, $data, $location)
 {
     $string = new StringService();
 
     $template = getMvcLocation($location);
     
-    $gearfile = sprintf('%s.yml', $string->str('url', $name));
+    $gearfile = sprintf('%s.yml', $string->str('url', $tableName));
     
     $path =  sprintf('%s/%s', $template, $gearfile);
     
