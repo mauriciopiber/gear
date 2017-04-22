@@ -5,7 +5,8 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrMvcUploadImage"
 type="web"
-migration="20160123222067_all_columns_db.php"
-gearfile="db.yml"
+construct=()
+construct+=("mvc-basic-upload-image/mvc-basic-upload-image.yml:mvc-basic-upload-image/mvc_basic_upload_image.php")
+
 
 source "$bin/gear/module/test-module.sh"
