@@ -1,11 +1,11 @@
 #!/bin/bash
 
-bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../../bin && pwd )"
+bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrMvcVarchar"
 type="web"
-migration="20160123222068_all_columns.php"
-gearfile="db.yml"
+construct=()
+construct[1***REMOVED***="mvc-varchar.yml;20170422033631_mvc_varchar.php"
 
 source "$bin/gear/module/test-module.sh"
