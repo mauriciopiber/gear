@@ -84,32 +84,41 @@ function Gear_Module_Clear
     fi    
         
     cd $modulePath 
-        
-    sudo rm -R schema
-    sudo rm -R src/$module
-    sudo rm -R test/unit/$moduleTest
+
+    if [ -d $modulePath/schema ***REMOVED***; then 
+    	sudo rm -R $modulePath/schema
+    fi            
+    
+    if [ -d $modulePath/src/$module ***REMOVED***; then 
+    	sudo rm -R $modulePath/src/$module
+    fi
+
+    if [ -d $modulePath/test/unit/$moduleTest ***REMOVED***; then 
+    	sudo rm -R $modulePath/test/unit/$moduleTest
+    fi   
     
     if [ -d "$modulePath/public/js" ***REMOVED***; then
         sudo rm -R public/js	
     fi
-       
-    if [ -d "$modulePath/data/migrations/*" ***REMOVED***; then
-        sudo rm -R data/migrations/*	
-    fi
+
+    files=($modulePath/data/migrations/*)
+    if [ ${#files[@***REMOVED***} -gt 0 ***REMOVED***; then 
+    	sudo rm -R $modulePath/data/migrations/* 
+    fi       
 
     database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
     username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
     password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
 
-
     echo "Deploy Develoment - Migrations/DB"
     vendor/bin/database $database $username $password
-    vendor/bin/phinx migrate
             
     cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
     --type=$type \
     --force \
     --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
+    
+    sudo script/load.sh    
 }
 
 function Gear_Module_Restore

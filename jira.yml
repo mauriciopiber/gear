@@ -20,3 +20,5 @@ issues:
   4:
     summary: "Adicionar abstract para o filtro do SRC"
     project: GS
+  5:
+    summary: "Criar classe abstrada para Migrations com as pré opções para usar para desenvolvimento direto"

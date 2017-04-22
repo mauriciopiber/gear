@@ -1,2 +1,2 @@
 db:
-    - { table: MvcText, user: all, namespace: MvcText, service: factories, columns: {  } }
+    - { table: MvcText, user: all, namespace: MvcText, service: factories, columns: { text_html: html } }

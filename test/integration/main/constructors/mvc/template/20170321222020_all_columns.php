@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class AllColumnsDb extends AbstractMigration
+class AllColumns extends AbstractMigration
 {
     const TABLES = [
         'int_foreign_key' => [
