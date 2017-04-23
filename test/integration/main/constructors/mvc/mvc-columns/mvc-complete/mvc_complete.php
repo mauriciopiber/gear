@@ -12,70 +12,70 @@ class MvcComplete extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'text_text' => [
+                'clm_text' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'text_html' => [
+                'clm_text_html' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'decimal_decimal' => [
+                'clm_decimal' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'decimal_money_pt_br' => [
+                'clm_decimal_money' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'boolean_int' => [
+                'clm_boolean' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'boolean_checkbox' => [
+                'clm_boolean_checkbox' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'int_int' => [
+                'clm_int' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'int_checkbox' => [
+                'clm_int_checkbox' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_int_foreign_key' => [
+                'id_clm_int_foreign_key' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
                 ***REMOVED***,
-                'time_time' => [
+                'clm_time' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'datetime_datetime' => [
+                'clm_datetime' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'datetime_datetime_pt_br' => [
+                'clm_datetime_pt' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'date_date' => [
+                'clm_date' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'date_date_pt_br' => [
+                'clm_date_pt' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'varchar_password_verify' => [
+                'clm_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_upload_image' => [
+                'clm_varchar_password_verify' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_url' => [
+                'clm_varchar_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_varchar' => [
+                'clm_varchar_url' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_unique_id' => [
+                'clm_varchar_unique_id' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_telephone' => [
+                'clm_varchar_telephone' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'varchar_email' => [
+                'clm_varchar_email' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
