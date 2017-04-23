@@ -12,25 +12,25 @@ class MvcVarchar extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_varchar' => [
+                'clm_varchar_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_password_verify' => [
+                'clm_varchar_password_verify_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_upload_image' => [
+                'clm_varchar_upload_image_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_url' => [
+                'clm_varchar_url_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_unique_id' => [
+                'clm_varchar_unique_id_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_telephone' => [
+                'clm_varchar_telephone_varchar' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_email' => [
+                'clm_varchar_email_varchar' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***

@@ -161,7 +161,10 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                 
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
                     
-                        $columnSuffix = '';
+                        
+                        $columnType = $string->str('class', str_replace('mvc-', '', $type));
+                        
+                        $columnSuffix = $string->str('url', $columnType);
                     
                         $locationKey = sprintf("%s/%s", $superType, $type);
                     
@@ -183,10 +186,6 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                             $columnSuffix .= '_'.$tables;
                         
                         }
-                    
-                        $columnType = $string->str('class', str_replace('mvc-', '', $type));
-                        
-                        
                     
                         $tableName = sprintf(
                             '%s%s%s%s',

@@ -12,28 +12,28 @@ class MvcBasicUnique extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_time_unique' => [
+                'clm_time_basic_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_unique' => [
+                'clm_datetime_basic_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_unique' => [
+                'clm_date_basic_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_unique' => [
+                'clm_varchar_basic_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_text_unique' => [
+                'clm_text_basic_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_unique' => [
+                'clm_decimal_basic_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_unique' => [
+                'clm_boolean_basic_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_unique' => [
+                'clm_int_basic_unique' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
