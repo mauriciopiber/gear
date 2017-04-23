@@ -180,7 +180,7 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                         }
                         
                         if ($tables !== null) {
-                            $columnSuffix .= $tables;
+                            $columnSuffix .= '_'.$tables;
                         
                         }
                     
