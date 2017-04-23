@@ -1,62 +1,62 @@
 <?php
-
+require 'generate-columns-names';
 
 function getBasicColumns()
 {
     return [
-        'time_basic' => ['type' => 'time'***REMOVED***,
-        'datetime_basic' => ['type' => 'datetime'***REMOVED***,            
-        'date_basic' => ['type' => 'date'***REMOVED***,
-        'varchar_basic' => ['type' => 'string'***REMOVED***,        
-        'text_basic' => ['type' => 'text'***REMOVED***,        
-        'decimal_basic' => ['type' => 'decimal'***REMOVED***,        
-        'boolean_basic'  => ['type' => 'boolean'***REMOVED***,
-        'int_basic' => ['type' => 'integer'***REMOVED***,
+        default_time     => ['type' => 'time'***REMOVED***,
+        default_datetime => ['type' => 'datetime'***REMOVED***,            
+        default_date     => ['type' => 'date'***REMOVED***,
+        default_varchar  => ['type' => 'string'***REMOVED***,        
+        default_text     => ['type' => 'text'***REMOVED***,        
+        default_decimal  => ['type' => 'decimal'***REMOVED***,        
+        default_boolean  => ['type' => 'boolean'***REMOVED***,
+        default_int      => ['type' => 'integer'***REMOVED***,
     ***REMOVED***;
 }
 
 function getDateColumns()
 {
     return [
-        'time_time' => ['type' => 'time'***REMOVED***,
-        'datetime_datetime' => ['type' => 'datetime'***REMOVED***,
-        'datetime_datetime_pt_br' => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
-        'date_date' => ['type' => 'date'***REMOVED***,
-        'date_date_pt_br' => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
+        default_time              => ['type' => 'time'***REMOVED***,
+        default_datetime          => ['type' => 'datetime'***REMOVED***,
+        default_datetime_ptbr     => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
+        default_date              => ['type' => 'date'***REMOVED***,
+        default_date_ptbr         => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
     ***REMOVED***;
 }
 
 function getVarcharColumns()
 {
     return [
-        'varchar_password_verify' => ['type' => 'string', 'speciality' => 'password-verify'***REMOVED***,
-        'varchar_upload_image' => ['type' => 'string', 'speciality' => 'upload-image'***REMOVED***,
-        'varchar_url' => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
-        'varchar_varchar' => ['type' => 'string'***REMOVED***,
-        'varchar_unique_id' => ['type' => 'string', 'speciality' => 'unique-id'***REMOVED***,
-        'varchar_telephone' => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
-        'varchar_email' => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
+        default_varchar                 => ['type' => 'string'***REMOVED***,
+        default_varchar_password_verify => ['type' => 'string', 'speciality' => 'password-verify'***REMOVED***,
+        default_varchar_upload_image    => ['type' => 'string', 'speciality' => 'upload-image'***REMOVED***,
+        default_varchar_url             => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
+        default_varchar_unique_id       => ['type' => 'string', 'speciality' => 'unique-id'***REMOVED***,
+        default_varchar_telephone       => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
+        default_varchar_email           => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
     ***REMOVED***;
 }
 
 function getTextColumns()
 {
     return [
-        'text_text' => ['type' => 'text'***REMOVED***,
-        'text_html' => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
+        default_text      => ['type' => 'text'***REMOVED***,
+        default_text_html => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
     ***REMOVED***;
 }
 
 function getNumericColumns()
 {
     return [
-        'decimal_decimal' => ['type' => 'decimal'***REMOVED***,
-        'decimal_money_pt_br' => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
-        'boolean_int'  => ['type' => 'boolean'***REMOVED***,
-        'boolean_checkbox' => ['type' => 'boolean', 'speciality' => 'checkbox'***REMOVED***,
-        'int_int' => ['type' => 'integer'***REMOVED***,
-        'int_checkbox' => ['type' => 'integer', 'speciality' => 'checkbox'***REMOVED***,
-        'id_int_foreign_key' => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+        default_decimal             => ['type' => 'decimal'***REMOVED***,
+        default_decimal_money_ptbr => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
+        default_boolean             => ['type' => 'boolean'***REMOVED***,
+        default_boolean_checkbox    => ['type' => 'boolean', 'speciality' => 'checkbox'***REMOVED***,
+        default_int                 => ['type' => 'integer'***REMOVED***,
+        default_int_checkbox        => ['type' => 'integer', 'speciality' => 'checkbox'***REMOVED***,
+        default_id_int_foreign_key  => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
     ***REMOVED***;    
 }
 
@@ -106,7 +106,7 @@ function factoryColumns($columnType)
 /**
  * Gearfile
  */
-function factoryGearfileColumns($columnType)
+function factoryGearfileColumns($columnType, $columnSuffix = '')
 {
     $columns = factoryColumns($columnType);
     $columnsGearfile = extractGearfileColumns($columns);
@@ -116,7 +116,7 @@ function factoryGearfileColumns($columnType)
 /**
  * Migration
  */
-function factoryMigrationColumns($columnType)
+function factoryMigrationColumns($columnType, $columnSuffix = '')
 {
     $columns = factoryColumns($columnType);
     $columnsGearfile = extractMigrationsColumns($columns);

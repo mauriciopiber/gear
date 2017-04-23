@@ -1,2 +1,2 @@
 db:
-    - { table: MvcVarchar, user: all, namespace: MvcVarchar, service: factories, columns: { varchar_password_verify: password-verify, varchar_upload_image: upload-image, varchar_url: url, varchar_unique_id: unique-id, varchar_telephone: telephone, varchar_email: email } }
+    - { table: MvcVarchar, user: all, namespace: MvcVarchar, service: factories, columns: { clm_varchar_password_verify: password-verify, clm_varchar_upload_image: upload-image, clm_varchar_url: url, clm_varchar_unique_id: unique-id, clm_varchar_telephone: telephone, clm_varchar_email: email } }
