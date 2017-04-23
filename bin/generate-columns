@@ -112,7 +112,7 @@ function addSuffixToColumns($columns, $columnSuffix)
     $fixed = [***REMOVED***;
 
     foreach ($columns as $name => $column) {
-        $newName = $name.$columnSuffix;
+        $newName = $name.'_'.$columnSuffix;
         $fixed[$newName***REMOVED*** = $column;
     }
     

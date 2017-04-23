@@ -12,70 +12,70 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'clm_text_strict_unique_nullable_upload_image' => [
+                'clm_text_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_text_html_strict_unique_nullable_upload_image' => [
+                'clm_text_html_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_strict_unique_nullable_upload_image' => [
+                'clm_decimal_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_decimal_money_strict_unique_nullable_upload_image' => [
+                'clm_decimal_money_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_strict_unique_nullable_upload_image' => [
+                'clm_boolean_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boolean_checkbox_strict_unique_nullable_upload_image' => [
+                'clm_boolean_checkbox_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_strict_unique_nullable_upload_image' => [
+                'clm_int_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_checkbox_strict_unique_nullable_upload_image' => [
+                'clm_int_checkbox_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_int_foreign_key_strict_unique_nullable_upload_image' => [
+                'id_clm_int_foreign_key_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
                 ***REMOVED***,
-                'clm_time_strict_unique_nullable_upload_image' => [
+                'clm_time_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_strict_unique_nullable_upload_image' => [
+                'clm_datetime_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_datetime_pt_strict_unique_nullable_upload_image' => [
+                'clm_datetime_pt_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_strict_unique_nullable_upload_image' => [
+                'clm_date_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_date_pt_strict_unique_nullable_upload_image' => [
+                'clm_date_pt_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_strict_unique_nullable_upload_image' => [
+                'clm_varchar_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_password_verify_strict_unique_nullable_upload_image' => [
+                'clm_varchar_password_verify_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_upload_image_strict_unique_nullable_upload_image' => [
+                'clm_varchar_upload_image_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_url_strict_unique_nullable_upload_image' => [
+                'clm_varchar_url_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_unique_id_strict_unique_nullable_upload_image' => [
+                'clm_varchar_unique_id_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_telephone_strict_unique_nullable_upload_image' => [
+                'clm_varchar_telephone_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_email_strict_unique_nullable_upload_image' => [
+                'clm_varchar_email_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
