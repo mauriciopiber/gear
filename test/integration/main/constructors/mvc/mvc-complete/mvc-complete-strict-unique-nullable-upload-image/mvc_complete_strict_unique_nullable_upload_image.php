@@ -12,70 +12,70 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'clm_text' => [
+                'clm_text_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_text_html' => [
+                'clm_text_html_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal' => [
+                'clm_decimal_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_decimal_money' => [
+                'clm_decimal_money_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean' => [
+                'clm_boolean_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boolean_checkbox' => [
+                'clm_boolean_checkbox_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int' => [
+                'clm_int_strict_unique_nullable_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_checkbox' => [
+                'clm_int_checkbox_strict_unique_nullable_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_int_foreign_key' => [
+                'id_clm_int_foreign_key_strict_unique_nullable_upload_image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
                 ***REMOVED***,
-                'clm_time' => [
+                'clm_time_strict_unique_nullable_upload_image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime' => [
+                'clm_datetime_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_datetime_pt' => [
+                'clm_datetime_pt_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date' => [
+                'clm_date_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_date_pt' => [
+                'clm_date_pt_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar' => [
+                'clm_varchar_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_password_verify' => [
+                'clm_varchar_password_verify_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_upload_image' => [
+                'clm_varchar_upload_image_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_url' => [
+                'clm_varchar_url_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_unique_id' => [
+                'clm_varchar_unique_id_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_telephone' => [
+                'clm_varchar_telephone_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_email' => [
+                'clm_varchar_email_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***

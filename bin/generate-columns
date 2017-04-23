@@ -103,12 +103,29 @@ function factoryColumns($columnType)
     return $columns;    
 }
 
+function addSuffixToColumns($columns, $columnSuffix)
+{
+    if (empty($columnSuffix)) {
+        return $columns;
+    }
+    
+    $fixed = [***REMOVED***;
+
+    foreach ($columns as $name => $column) {
+        $newName = $name.$columnSuffix;
+        $fixed[$newName***REMOVED*** = $column;
+    }
+    
+    return $fixed;
+}
+
 /**
  * Gearfile
  */
 function factoryGearfileColumns($columnType, $columnSuffix = '')
 {
     $columns = factoryColumns($columnType);
+    $columns = addSuffixToColumns($columns, $columnSuffix);
     $columnsGearfile = extractGearfileColumns($columns);
     return $columnsGearfile;
 }
@@ -119,6 +136,7 @@ function factoryGearfileColumns($columnType, $columnSuffix = '')
 function factoryMigrationColumns($columnType, $columnSuffix = '')
 {
     $columns = factoryColumns($columnType);
+    $columns = addSuffixToColumns($columns, $columnSuffix);    
     $columnsGearfile = extractMigrationsColumns($columns);
     return $columnsGearfile;
 }
