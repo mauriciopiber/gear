@@ -12,19 +12,19 @@ class MvcDates extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_time_dates' => [
+                'clm_time_dts' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_dates' => [
+                'clm_datetime_dts' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_datetime_pt_dates' => [
+                'clm_datetime_pt_dts' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_dates' => [
+                'clm_date_dts' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_date_pt_dates' => [
+                'clm_date_pt_dts' => [
                     'type' => 'date'
                 ***REMOVED***
             ***REMOVED***

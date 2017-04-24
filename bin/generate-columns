@@ -103,6 +103,33 @@ function factoryColumns($columnType)
     return $columns;    
 }
 
+function createColumnSuffix($columnSuffix)
+{
+
+    $label = [
+        'nullable' => 'nul',
+        'unique' => 'uni',
+        'upload_image' => 'upl',
+        'complete' => 'cmp',
+        'basic' => 'bsc',
+        'dates' => 'dts',
+        'numeric' => 'nmr',
+        'varchar' => 'vrc',
+        'text' => 'txt',
+        'low-strict' => 'lws',
+        'strict' => 'str'
+    ***REMOVED***;
+    
+    $text = [***REMOVED***;
+
+    foreach ($columnSuffix as $option) {
+        $text[***REMOVED*** = $label[$option***REMOVED***; 
+    }
+
+        
+    return implode('_', $text);
+}
+
 function addSuffixToColumns($columns, $columnSuffix)
 {
     if (empty($columnSuffix)) {
@@ -110,6 +137,8 @@ function addSuffixToColumns($columns, $columnSuffix)
     }
     
     $fixed = [***REMOVED***;
+    
+    $columnSuffix = createColumnSuffix($columnSuffix);
 
     foreach ($columns as $name => $column) {
         $newName = $name.'_'.$columnSuffix;

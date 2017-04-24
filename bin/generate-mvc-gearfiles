@@ -105,6 +105,8 @@ function createMigration($date, $name)
 }
 */
 
+
+
 function getMigrationName($date, $name)
 {
     $string = new GearBase\Util\String\StringService();
@@ -164,13 +166,14 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                         
                         $columnType = $string->str('class', str_replace('mvc-', '', $type));
                         
-                        $columnSuffix = $string->str('url', $columnType);
+                        $columnSuffix = [***REMOVED***;
+                        $columnSuffix[***REMOVED*** = $string->str('url', $columnType);
                     
                         $locationKey = sprintf("%s/%s", $superType, $type);
                     
                         if ($usertype != 'all') {
                             $locationKey .= '-'.$usertype;
-                            $columnSuffix .= '_'.$usertype;
+                            $columnSuffix[***REMOVED*** = $usertype;
                         }
                     
                         $const = getConstraintLabel($constraint);
@@ -179,11 +182,15 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                             $locationKey .= '-'.$const;
                             
                             $colmConst = explode('-', $const);
-                            $columnSuffix .= '_'.implode('_', $colmConst);
+                            
+                            foreach ($colmConst as $it) {
+                                $columnSuffix[***REMOVED*** = $it;
+                            }
+                            //$columnSuffix[***REMOVED*** = array_merge($columnSuffix, $colmConst);
                         }
                         
                         if ($tables !== null) {
-                            $columnSuffix .= '_'.$tables;
+                            $columnSuffix[***REMOVED*** = $tables;
                         
                         }
                     
@@ -266,7 +273,7 @@ function updateSuperTestFile($superType, $migrations)
 
 }
 
-function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, $columnSuffix, $locationKey)
+function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, array $columnSuffix, $locationKey)
 {
     $config = [***REMOVED***;
     $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $columnSuffix, $locationKey);

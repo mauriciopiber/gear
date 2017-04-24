@@ -1,2 +1,2 @@
 db:
-    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: { clm_decimal_money_numeric: money-pt-br, clm_boolean_checkbox_numeric: checkbox, clm_int_checkbox_numeric: checkbox } }
+    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: { clm_decimal_money_nmr: money-pt-br, clm_boolean_checkbox_nmr: checkbox, clm_int_checkbox_nmr: checkbox } }
