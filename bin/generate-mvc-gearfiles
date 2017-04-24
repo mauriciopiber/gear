@@ -297,8 +297,24 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
         'columns' => factoryGearfileColumns($columnType, $columnSuffix)
     ***REMOVED***;
     
-    return outputMvc($tableName, ['db' => [$db***REMOVED******REMOVED***, $location);
+
+    $dbs = [$db***REMOVED***;
+    
+    if (($foreignKeys = getForeignKeys($columnType)) !== null) {
+    
+        var_dump($foreignKeys);    
+        /*
+        foreach ($foreignKeys as $foreignKey) { 
+        
+            $dbs[***REMOVED*** = createForeignKeyGearfile($foreignKey);
+        }
+        */
+    }
+       
+    return outputMvc($tableName, ['db' => $dbs***REMOVED***, $location);
 }
+
+//function getForeignKey$
 
 
 function updateTestFile($tableName, $gearfile, $migration, $location)
@@ -319,6 +335,11 @@ function updateTestFile($tableName, $gearfile, $migration, $location)
     $path =  sprintf('%s/%s', $template, 'test.sh');
     
     file_put_contents($path, $newFile);
+}
+
+function getForeignKeys($columnType)
+{
+    return null;
 }
 
 
@@ -360,6 +381,18 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
             'columns' => $columns
         ***REMOVED***
     ***REMOVED***;
+
+    if (($foreignKeys = getForeignKeys($columnType)) !== null) {
+        
+        var_dump($foreignKeys);
+        //foreach ($foreignKeys as $foreignKey) { 
+        
+        //$migrationConfig[***REMOVED*** = createForeignKeyMigration($foreignKey);
+        //}
+    }    
+    /**
+
+    */
     
     $arrayService = new Gear\Util\Vector\ArrayService();
     
@@ -394,7 +427,7 @@ generateMvc(
     [null***REMOVED***
 );
 
-/*
+
 //usertype
 generateMvc(
     'mvc-usertypes',
@@ -439,5 +472,4 @@ generateMvc(
     [['unique', 'nullable'***REMOVED******REMOVED***,
     ['upload_image'***REMOVED***
 );     
-*/
 
