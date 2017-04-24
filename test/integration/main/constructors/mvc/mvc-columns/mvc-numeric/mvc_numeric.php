@@ -30,11 +30,25 @@ class MvcNumeric extends AbstractMigration
                 'clm_int_chc_nmr' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_ifk_nmr' => [
+                'id_clm_int_frk_nmr' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        0 => [
+            'clm_int_frk' => [
+                'nullable' => true,
+                'unique' => false,
+                'columns' => [
+                    'clm_int_frk_name' => [
+                        'type' => 'string'
+                    ***REMOVED***
+                ***REMOVED***,
+                'tables' => [
+
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***

@@ -135,11 +135,7 @@ function getConstraintLabel($constraint)
     return $const;
 }
 
-function createColumnAlises()
-{
-
-}
-  
+ 
 function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
     $string = new GearBase\Util\String\StringService();
@@ -302,19 +298,27 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
     
     if (($foreignKeys = getForeignKeys($columnType)) !== null) {
     
-        var_dump($foreignKeys);    
-        /*
         foreach ($foreignKeys as $foreignKey) { 
         
             $dbs[***REMOVED*** = createForeignKeyGearfile($foreignKey);
         }
-        */
     }
        
     return outputMvc($tableName, ['db' => $dbs***REMOVED***, $location);
 }
 
-//function getForeignKey$
+function createForeignKeyGearfile($tableId)
+{
+    $string = new GearBase\Util\String\StringService();
+    $table = $string->str('class', str_replace('id_', '', $tableId));
+    
+    return [
+        'table' => $table,
+        'namespace' => $table,
+        'service' => 'factories',
+        'user' => 'all'
+    ***REMOVED***;
+}
 
 
 function updateTestFile($tableName, $gearfile, $migration, $location)
@@ -339,9 +343,35 @@ function updateTestFile($tableName, $gearfile, $migration, $location)
 
 function getForeignKeys($columnType)
 {
-    return null;
+    $columns = factoryColumns($columnType);
+    
+    $foreignKeys = [***REMOVED***;
+    
+    foreach ($columns as $name => $config) {
+        if (isset($config['properties'***REMOVED***) && in_array('foreignKey', $config['properties'***REMOVED***)) {
+            $foreignKeys[***REMOVED*** = $name;
+        }
+    }
+    
+    return empty($foreignKeys) ? null : $foreignKeys;
 }
 
+function createForeignKeyMigration($tableId)
+{
+    $string = new GearBase\Util\String\StringService();
+    $table = $string->str('uline', str_replace('id_', '', $tableId));
+    
+    return [
+        $table => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                sprintf('%s_name', $string->str('uline', $table)) => ['type' => 'string'***REMOVED***
+            ***REMOVED***,
+            'tables' => [***REMOVED***
+        ***REMOVED***,
+    ***REMOVED***;
+}
 
 function generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $columnSuffix, $location)
 {
@@ -384,15 +414,12 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
 
     if (($foreignKeys = getForeignKeys($columnType)) !== null) {
         
-        var_dump($foreignKeys);
-        //foreach ($foreignKeys as $foreignKey) { 
+        foreach ($foreignKeys as $foreignKey) { 
         
-        //$migrationConfig[***REMOVED*** = createForeignKeyMigration($foreignKey);
-        //}
+            $migrationConfig[***REMOVED*** = createForeignKeyMigration($foreignKey);
+        }
     }    
-    /**
 
-    */
     
     $arrayService = new Gear\Util\Vector\ArrayService();
     
