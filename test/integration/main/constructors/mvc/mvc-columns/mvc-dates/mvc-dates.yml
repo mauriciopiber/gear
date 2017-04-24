@@ -1,2 +1,2 @@
 db:
-    - { table: MvcDates, user: all, namespace: MvcDates, service: factories, columns: { clm_datetime_pt_dts: datetime-pt-br, clm_date_pt_dts: date-pt-br } }
+    - { table: MvcDates, user: all, namespace: MvcDates, service: factories, columns: { clm_dtt_pt_dts: datetime-pt-br, clm_dte_pt_dts: date-pt-br } }

@@ -12,70 +12,70 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'clm_text_cmp_str_uni_nul_upl' => [
+                'clm_txt_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_text_html_cmp_str_uni_nul_upl' => [
+                'clm_txt_htm_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_cmp_str_uni_nul_upl' => [
+                'clm_dcm_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_decimal_money_cmp_str_uni_nul_upl' => [
+                'clm_dcm_mny_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_cmp_str_uni_nul_upl' => [
+                'clm_boo_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boolean_checkbox_cmp_str_uni_nul_upl' => [
+                'clm_boo_chc_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
                 'clm_int_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_checkbox_cmp_str_uni_nul_upl' => [
+                'clm_int_chc_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_int_foreign_key_cmp_str_uni_nul_upl' => [
+                'id_clm_ifk_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***
                 ***REMOVED***,
-                'clm_time_cmp_str_uni_nul_upl' => [
+                'clm_tme_cmp_str_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_cmp_str_uni_nul_upl' => [
+                'clm_dtt_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_datetime_pt_cmp_str_uni_nul_upl' => [
+                'clm_dtt_pt_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_cmp_str_uni_nul_upl' => [
+                'clm_dte_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_date_pt_cmp_str_uni_nul_upl' => [
+                'clm_dte_pt_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_cmp_str_uni_nul_upl' => [
+                'clm_vrc_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_password_verify_cmp_str_uni_nul_upl' => [
+                'clm_vrc_pav_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_upload_image_cmp_str_uni_nul_upl' => [
+                'clm_vrc_upi_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_url_cmp_str_uni_nul_upl' => [
+                'clm_vrc_url_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_unique_id_cmp_str_uni_nul_upl' => [
+                'clm_vrc_uni_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_telephone_cmp_str_uni_nul_upl' => [
+                'clm_vrc_tlp_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_varchar_email_cmp_str_uni_nul_upl' => [
+                'clm_vrc_eml_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***

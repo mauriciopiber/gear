@@ -1,41 +1,41 @@
 <?php
 // TIME
-const default_time = 'clm_time';
+const default_time = 'clm_tme';
 
 // DATETIME
-const default_datetime = 'clm_datetime';
+const default_datetime = 'clm_dtt';
 const default_datetime_ptbr = default_datetime.'_pt';
 
 // DATE
-const default_date = 'clm_date';
+const default_date = 'clm_dte';
 const default_date_ptbr = default_date.'_pt';
 
 // VARCHAR
-const default_varchar = 'clm_varchar';
+const default_varchar = 'clm_vrc';
 
-const default_varchar_email = default_varchar.'_email';
+const default_varchar_email = default_varchar.'_eml';
 
-const default_varchar_upload_image = default_varchar.'_upload_image';
+const default_varchar_upload_image = default_varchar.'_upi';
 
-const default_varchar_password_verify = default_varchar.'_password_verify';
+const default_varchar_password_verify = default_varchar.'_pav';
 const default_varchar_url = default_varchar.'_url';
-const default_varchar_telephone = default_varchar.'_telephone';
-const default_varchar_unique_id = default_varchar.'_unique_id';
+const default_varchar_telephone = default_varchar.'_tlp';
+const default_varchar_unique_id = default_varchar.'_uni';
 
 // TEXT
-const default_text = 'clm_text';
-const default_text_html = default_text.'_html';
+const default_text = 'clm_txt';
+const default_text_html = default_text.'_htm';
 
 // DECIMAL
-const default_decimal = 'clm_decimal';
-const default_decimal_money_ptbr = default_decimal.'_money';
+const default_decimal = 'clm_dcm';
+const default_decimal_money_ptbr = default_decimal.'_mny';
 
 // BOOLEAN
-const default_boolean = 'clm_boolean';
-const default_boolean_checkbox = default_boolean.'_checkbox';
+const default_boolean = 'clm_boo';
+const default_boolean_checkbox = default_boolean.'_chc';
 
 
 // INT
 const default_int = 'clm_int';
-const default_int_checkbox = default_int.'_checkbox';
-const default_id_int_foreign_key = 'id_clm_int_foreign_key';
+const default_int_checkbox = default_int.'_chc';
+const default_id_int_foreign_key = 'id_clm_ifk';
