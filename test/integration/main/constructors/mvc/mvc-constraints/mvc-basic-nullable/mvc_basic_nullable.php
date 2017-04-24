@@ -8,7 +8,7 @@ class MvcBasicNullable extends AbstractMigration
         'mvc_basic_nullable' => [
             'nullable' => true,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

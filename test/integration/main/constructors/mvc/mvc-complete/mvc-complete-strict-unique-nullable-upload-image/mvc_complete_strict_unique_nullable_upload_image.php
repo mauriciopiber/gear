@@ -8,7 +8,7 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
         'mvc_complete_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
-            'tables' => [
+            'table' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
@@ -88,7 +88,7 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***
         ***REMOVED***

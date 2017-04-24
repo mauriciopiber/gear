@@ -376,7 +376,7 @@ function createForeignKeyMigration($tableId)
             'columns' => [
                 sprintf('%s_name', $string->str('uline', $table)) => ['type' => 'string'***REMOVED***
             ***REMOVED***,
-            'tables' => [***REMOVED***
+            'table' => [***REMOVED***
         ***REMOVED***,
     ***REMOVED***;
 }
@@ -415,7 +415,7 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
         $string->str('uline', $tableName) => [
             'nullable' => $nullable,
             'unique' => $unique,
-            'tables' => $tables,
+            'table' => $tables,
             'columns' => $columns
         ***REMOVED***
     ***REMOVED***;

@@ -8,7 +8,7 @@ class MvcComplete extends AbstractMigration
         'mvc_complete' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [
@@ -88,7 +88,7 @@ class MvcComplete extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***
         ***REMOVED***

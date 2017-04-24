@@ -8,7 +8,7 @@ class MvcBasicUploadImage extends AbstractMigration
         'mvc_basic_upload_image' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
