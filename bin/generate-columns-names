@@ -38,4 +38,4 @@ const default_boolean_checkbox = default_boolean.'_chc';
 // INT
 const default_int = 'clm_int';
 const default_int_checkbox = default_int.'_chc';
-const default_id_int_foreign_key = 'id_clm_ifk';
+const default_id_int_foreign_key = 'id_'.default_int.'_frk';

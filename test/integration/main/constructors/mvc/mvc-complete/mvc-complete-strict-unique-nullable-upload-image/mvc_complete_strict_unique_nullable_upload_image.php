@@ -36,7 +36,7 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'clm_int_chc_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_ifk_cmp_str_uni_nul_upl' => [
+                'id_clm_int_frk_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
@@ -77,6 +77,20 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 ***REMOVED***,
                 'clm_vrc_eml_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        0 => [
+            'clm_int_frk' => [
+                'nullable' => true,
+                'unique' => false,
+                'columns' => [
+                    'clm_int_frk_name' => [
+                        'type' => 'string'
+                    ***REMOVED***
+                ***REMOVED***,
+                'tables' => [
+
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***
