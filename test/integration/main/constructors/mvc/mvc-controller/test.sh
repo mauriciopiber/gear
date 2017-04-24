@@ -5,7 +5,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrMvcController"
 type="web"
-migration="20160123222068_all_columns.php"
+migration="all_columns.php"
 gearfile="db.yml"
 
 source "$bin/gear/module/test-module.sh"
