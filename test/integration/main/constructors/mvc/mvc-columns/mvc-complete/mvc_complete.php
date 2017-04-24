@@ -162,7 +162,7 @@ class MvcComplete extends AbstractMigration
 
     public function createTableDependencies($tableName, $tables)
     {
-        if (!isset($options['table'***REMOVED***) && empty($options['table'***REMOVED***) && !is_array($options['table'***REMOVED***)) {
+        if (!isset($options['table'***REMOVED***) || empty($options['table'***REMOVED***) || !is_array($options['table'***REMOVED***)) {
             return;
         }
 
