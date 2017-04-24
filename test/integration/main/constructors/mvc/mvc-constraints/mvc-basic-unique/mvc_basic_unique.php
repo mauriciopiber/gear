@@ -8,7 +8,7 @@ class MvcBasicUnique extends AbstractMigration
         'mvc_basic_unique' => [
             'nullable' => false,
             'unique' => true,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

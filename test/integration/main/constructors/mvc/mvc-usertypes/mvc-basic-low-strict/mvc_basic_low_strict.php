@@ -8,7 +8,7 @@ class MvcBasicLowStrict extends AbstractMigration
         'mvc_basic_low_strict' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

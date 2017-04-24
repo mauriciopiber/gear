@@ -8,7 +8,7 @@ class MvcVarchar extends AbstractMigration
         'mvc_varchar' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

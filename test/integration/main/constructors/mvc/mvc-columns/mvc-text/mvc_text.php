@@ -8,7 +8,7 @@ class MvcText extends AbstractMigration
         'mvc_text' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

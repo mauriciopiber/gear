@@ -8,7 +8,7 @@ class MvcDates extends AbstractMigration
         'mvc_dates' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [

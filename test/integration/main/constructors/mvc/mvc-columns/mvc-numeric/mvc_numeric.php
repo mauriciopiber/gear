@@ -8,7 +8,7 @@ class MvcNumeric extends AbstractMigration
         'mvc_numeric' => [
             'nullable' => false,
             'unique' => false,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***,
             'columns' => [
@@ -46,7 +46,7 @@ class MvcNumeric extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,
-            'tables' => [
+            'table' => [
 
             ***REMOVED***
         ***REMOVED***
