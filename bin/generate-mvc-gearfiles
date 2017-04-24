@@ -394,6 +394,7 @@ generateMvc(
     [null***REMOVED***
 );
 
+/*
 //usertype
 generateMvc(
     'mvc-usertypes',
@@ -438,4 +439,5 @@ generateMvc(
     [['unique', 'nullable'***REMOVED******REMOVED***,
     ['upload_image'***REMOVED***
 );     
+*/
 
