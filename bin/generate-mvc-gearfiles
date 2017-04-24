@@ -416,7 +416,7 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
         
         foreach ($foreignKeys as $foreignKey) { 
         
-            $migrationConfig[***REMOVED*** = createForeignKeyMigration($foreignKey);
+            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
         }
     }    
 

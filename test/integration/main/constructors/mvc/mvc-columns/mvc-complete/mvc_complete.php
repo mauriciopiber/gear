@@ -80,18 +80,16 @@ class MvcComplete extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        0 => [
-            'clm_int_frk' => [
-                'nullable' => true,
-                'unique' => false,
-                'columns' => [
-                    'clm_int_frk_name' => [
-                        'type' => 'string'
-                    ***REMOVED***
-                ***REMOVED***,
-                'tables' => [
-
+        'clm_int_frk' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'clm_int_frk_name' => [
+                    'type' => 'string'
                 ***REMOVED***
+            ***REMOVED***,
+            'tables' => [
+
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***;
