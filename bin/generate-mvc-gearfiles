@@ -113,8 +113,6 @@ function getMigrationName($date, $name)
     $name = $string->str('uline', $name);
     return sprintf(
         '%s.php', 
-        //'%s_%s.php',        
-        //$date, 
         $name
     );
 }
@@ -272,7 +270,7 @@ function updateSuperTestFile($superType, $migrations)
 function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, array $columnSuffix, $locationKey)
 {
     $config = [***REMOVED***;
-    $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $columnSuffix, $locationKey);
+    $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $tables, $columnSuffix, $locationKey);
     $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $columnSuffix, $locationKey);
     updateTestFile($tableName, $gearfile, $migration, $locationKey);
     
@@ -283,7 +281,7 @@ function generateTest($tableName, $type, $columnType, $usertype, $constraint, $t
 }
 
 
-function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $columnSuffix, $location)
+function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $tables, $columnSuffix, $location)
 {
     $db = [
         'table' => $tableName,
@@ -294,17 +292,21 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
     ***REMOVED***;
     
 
-    $dbs = [$db***REMOVED***;
+    $src = [***REMOVED***;
     
     if (($foreignKeys = getForeignKeys($columnType)) !== null) {
     
         foreach ($foreignKeys as $foreignKey) { 
         
-            $dbs[***REMOVED*** = createForeignKeyGearfile($foreignKey);
+            $src = array_merge($src, createForeignKeyGearfile($foreignKey));
         }
     }
+    
+    if (!empty($tables)) {
+        $src = array_merge($src, createForeignKeyGearfile($tables));
+    }
        
-    return outputMvc($tableName, ['db' => $dbs***REMOVED***, $location);
+    return outputMvc($tableName, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $location);
 }
 
 function createForeignKeyGearfile($tableId)
@@ -313,10 +315,16 @@ function createForeignKeyGearfile($tableId)
     $table = $string->str('class', str_replace('id_', '', $tableId));
     
     return [
-        'table' => $table,
-        'namespace' => $table,
-        'service' => 'factories',
-        'user' => 'all'
+        [
+            'name' => $table,
+            'type' => 'Entity',
+            'db' => $table,
+        ***REMOVED***,
+        [
+            'name' => sprintf('%sFixture', $table),
+            'type' => 'Fixture',
+            'db' => $table,
+        ***REMOVED***,        
     ***REMOVED***;
 }
 
