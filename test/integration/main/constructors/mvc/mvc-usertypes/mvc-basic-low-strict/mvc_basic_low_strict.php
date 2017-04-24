@@ -12,25 +12,25 @@ class MvcBasicLowStrict extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_time_bsc_lws' => [
+                'clm_tme_bsc_lws' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_bsc_lws' => [
+                'clm_dtt_bsc_lws' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_bsc_lws' => [
+                'clm_dte_bsc_lws' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_bsc_lws' => [
+                'clm_vrc_bsc_lws' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_text_bsc_lws' => [
+                'clm_txt_bsc_lws' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_bsc_lws' => [
+                'clm_dcm_bsc_lws' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_bsc_lws' => [
+                'clm_boo_bsc_lws' => [
                     'type' => 'boolean'
                 ***REMOVED***,
                 'clm_int_bsc_lws' => [

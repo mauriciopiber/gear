@@ -12,25 +12,25 @@ class MvcBasicUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'clm_time_bsc_upl' => [
+                'clm_tme_bsc_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_bsc_upl' => [
+                'clm_dtt_bsc_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_bsc_upl' => [
+                'clm_dte_bsc_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_bsc_upl' => [
+                'clm_vrc_bsc_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_text_bsc_upl' => [
+                'clm_txt_bsc_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_bsc_upl' => [
+                'clm_dcm_bsc_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_bsc_upl' => [
+                'clm_boo_bsc_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
                 'clm_int_bsc_upl' => [
