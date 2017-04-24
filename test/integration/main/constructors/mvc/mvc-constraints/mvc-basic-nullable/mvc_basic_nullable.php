@@ -12,28 +12,28 @@ class MvcBasicNullable extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_time_basic_nullable' => [
+                'clm_time_bsc_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_basic_nullable' => [
+                'clm_datetime_bsc_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_basic_nullable' => [
+                'clm_date_bsc_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_basic_nullable' => [
+                'clm_varchar_bsc_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_text_basic_nullable' => [
+                'clm_text_bsc_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_basic_nullable' => [
+                'clm_decimal_bsc_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_basic_nullable' => [
+                'clm_boolean_bsc_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_basic_nullable' => [
+                'clm_int_bsc_nul' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

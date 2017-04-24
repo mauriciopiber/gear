@@ -12,25 +12,25 @@ class MvcNumeric extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_decimal_numeric' => [
+                'clm_decimal_nmr' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_decimal_money_numeric' => [
+                'clm_decimal_money_nmr' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_numeric' => [
+                'clm_boolean_nmr' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boolean_checkbox_numeric' => [
+                'clm_boolean_checkbox_nmr' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_numeric' => [
+                'clm_int_nmr' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_checkbox_numeric' => [
+                'clm_int_checkbox_nmr' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'id_clm_int_foreign_key_numeric' => [
+                'id_clm_int_foreign_key_nmr' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'

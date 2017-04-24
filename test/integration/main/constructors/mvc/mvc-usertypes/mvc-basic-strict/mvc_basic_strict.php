@@ -12,28 +12,28 @@ class MvcBasicStrict extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_time_basic_strict' => [
+                'clm_time_bsc_str' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_datetime_basic_strict' => [
+                'clm_datetime_bsc_str' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_date_basic_strict' => [
+                'clm_date_bsc_str' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_varchar_basic_strict' => [
+                'clm_varchar_bsc_str' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_text_basic_strict' => [
+                'clm_text_bsc_str' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_decimal_basic_strict' => [
+                'clm_decimal_bsc_str' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boolean_basic_strict' => [
+                'clm_boolean_bsc_str' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_basic_strict' => [
+                'clm_int_bsc_str' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
