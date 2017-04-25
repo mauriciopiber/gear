@@ -137,7 +137,6 @@ function getConstraintLabel($constraint)
  
 function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
-    $string = new GearBase\Util\String\StringService();
     $expectedColumns = [
         $suiteName => $suiteColumns,
     ***REMOVED***;
@@ -157,9 +156,21 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                 
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                    
-                        
-                        $columnType = $string->str('class', str_replace('mvc-', '', $type));
+                        $migrations[$type***REMOVED*** = generateMvcTest($superType, $type, $usertype, $constraint, $tables);
+                    }                
+                }
+            }
+            
+        }
+        
+        updateSuperTestFile("$superType", $migrations);
+    }
+}
+
+function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
+{
+    $string = new GearBase\Util\String\StringService();
+        $columnType = $string->str('class', str_replace('mvc-', '', $type));
                         
                         $columnSuffix = [***REMOVED***;
                         $columnSuffix[***REMOVED*** = $string->str('url', $columnType);
@@ -202,7 +213,7 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                             $locationKey .= '-'.$string->str('url', $tables);
                         }
                     
-                        $migrations[$type***REMOVED*** = generateTest(
+                        return  generateTest(
                             $tableName, 
                             $type, 
                             $columnType, 
@@ -212,19 +223,6 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                             $columnSuffix, 
                             $locationKey
                         );
-                    
-                        //$migrations[$type***REMOVED*** = array_merge([$locationKey***REMOVED***, $migration);
-                        
-                    }                
-                }
-            }
-            
-        }
-        
-        updateSuperTestFile("$superType", $migrations);
-    }
-    
-    
 }
 
 function updateSuperTestFile($superType, $migrations)
