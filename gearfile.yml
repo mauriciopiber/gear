@@ -28,3 +28,21 @@ src:
           0: 
             class: \GearBase\Util\String\StringService
             aliase: GearBase\Util\String            
+            
+    1: 
+        name: DatesColumnsInterface
+        type: Interface
+        namespace: Integration\Columns
+    2: 
+        name: NumericColumnsInterface
+        type: Interface
+        namespace: Integration\Columns
+    3: 
+        name: VarcharColumnsInterface
+        type: Interface
+        namespace: Integration\Columns
+    4: 
+        name: TextColumnsInterface
+        type: Interface
+        namespace: Integration\Columns
+        

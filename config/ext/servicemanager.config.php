@@ -12,7 +12,13 @@
         'Gear\Creator\FileCreator\App\Inject' => 'Gear\Creator\FileCreator\App\Inject',
         'Gear\Generator\Code\UseService' => 'Gear\Generator\Code\UseService',
         'Gear\Generator\Code\UseStack' => 'Gear\Generator\Code\UseStack',
-        'Gear\Util\Yaml\YamlService' => 'Gear\Util\Yaml\YamlService'
+        'Gear\Util\Yaml\YamlService' => 'Gear\Util\Yaml\YamlService',
+        'Gear\Integration\Columns\CompleteColumnsInterface' => 'Gear\Integration\Columns\CompleteColumnsInterface',
+        'Gear\Integration\Columns\BasicColumnsInterface' => 'Gear\Integration\Columns\BasicColumnsInterface',
+        'Gear\Integration\Columns\DatesColumnsInterface' => 'Gear\Integration\Columns\DatesColumnsInterface',
+        'Gear\Integration\Columns\NumericColumnsInterface' => 'Gear\Integration\Columns\NumericColumnsInterface',
+        'Gear\Integration\Columns\VarcharColumnsInterface' => 'Gear\Integration\Columns\VarcharColumnsInterface',
+        'Gear\Integration\Columns\TextColumnsInterface' => 'Gear\Integration\Columns\TextColumnsInterface'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
