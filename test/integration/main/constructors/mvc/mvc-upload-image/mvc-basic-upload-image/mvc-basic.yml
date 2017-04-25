@@ -1,2 +1,0 @@
-db:
-    - { table: MvcBasicUploadImage, user: all, namespace: MvcBasicUploadImage, service: factories, columns: {  } }

@@ -415,7 +415,7 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
         $string->str('uline', $tableName) => [
             'nullable' => $nullable,
             'unique' => $unique,
-            'table' => $tables,
+            'referenced_assoc' => $tables,
             'columns' => $columns
         ***REMOVED***
     ***REMOVED***;

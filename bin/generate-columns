@@ -30,10 +30,10 @@ function getVarcharColumns()
 {
     return [
         default_varchar                 => ['type' => 'string'***REMOVED***,
-        default_varchar_password_verify => ['type' => 'string', 'speciality' => 'password-verify'***REMOVED***,
-        default_varchar_upload_image    => ['type' => 'string', 'speciality' => 'upload-image'***REMOVED***,
+        default_varchar_password_verify => ['type' => 'string', 'speciality' => 'password-verify', 'unique' => false***REMOVED***,
+        default_varchar_upload_image    => ['type' => 'string', 'speciality' => 'upload-image', 'unique' => false***REMOVED***,
         default_varchar_url             => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
-        default_varchar_unique_id       => ['type' => 'string', 'speciality' => 'unique-id'***REMOVED***,
+        default_varchar_unique_id       => ['type' => 'string', 'speciality' => 'unique-id', 'unique' => false***REMOVED***,
         default_varchar_telephone       => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
         default_varchar_email           => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
     ***REMOVED***;
@@ -53,10 +53,10 @@ function getNumericColumns()
         default_decimal             => ['type' => 'decimal'***REMOVED***,
         default_decimal_money_ptbr => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
         default_boolean             => ['type' => 'boolean'***REMOVED***,
-        default_boolean_checkbox    => ['type' => 'boolean', 'speciality' => 'checkbox'***REMOVED***,
+        default_boolean_checkbox    => ['type' => 'boolean', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
         default_int                 => ['type' => 'integer'***REMOVED***,
-        default_int_checkbox        => ['type' => 'integer', 'speciality' => 'checkbox'***REMOVED***,
-        default_id_int_foreign_key  => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED******REMOVED***,
+        default_int_checkbox        => ['type' => 'integer', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
+        default_id_int_foreign_key  => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED***, 'unique' => false***REMOVED***,
     ***REMOVED***;    
 }
 

@@ -8,7 +8,7 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
         'mvc_complete_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
-            'table' => [
+            'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
@@ -28,19 +28,22 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                     'type' => 'boolean'
                 ***REMOVED***,
                 'clm_boo_chc_cmp_str_uni_nul_upl' => [
-                    'type' => 'boolean'
+                    'type' => 'boolean',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_int_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
                 'clm_int_chc_cmp_str_uni_nul_upl' => [
-                    'type' => 'integer'
+                    'type' => 'integer',
+                    'unique' => false
                 ***REMOVED***,
                 'id_clm_int_frk_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
-                    ***REMOVED***
+                    ***REMOVED***,
+                    'unique' => false
                 ***REMOVED***,
                 'clm_tme_cmp_str_uni_nul_upl' => [
                     'type' => 'time'
@@ -61,16 +64,19 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***,
                 'clm_vrc_pav_cmp_str_uni_nul_upl' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_upi_cmp_str_uni_nul_upl' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_url_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
                 'clm_vrc_uni_cmp_str_uni_nul_upl' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_tlp_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
@@ -154,19 +160,19 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
 
         $table->create();
 
-        if (isset($options['table'***REMOVED***)) {
-            $this->createTableDependencies($tableName, $options['table'***REMOVED***);
+        if (isset($options['referenced_assoc'***REMOVED***)) {
+            $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
 
     }
 
     public function createTableDependencies($tableName, $tables)
     {
-        if (!isset($options['table'***REMOVED***) || empty($options['table'***REMOVED***) || !is_array($options['table'***REMOVED***)) {
+        if (empty($tables) || !is_array($tables)) {
             return;
         }
 
-        foreach ($options['table'***REMOVED*** as $tableOption) {
+        foreach ($tables as $tableOption) {
 
             $this->createTableDependency($tableName, $tableOption);
         }

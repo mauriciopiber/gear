@@ -1,2 +1,0 @@
-db:
-    - { table: MvcCompleteStrictUniqueNullableUploadImage, user: strict, namespace: MvcCompleteStrictUniqueNullableUploadImage, service: factories, columns: { text_html: html, decimal_money_pt_br: money-pt-br, boolean_checkbox: checkbox, int_checkbox: checkbox, datetime_datetime_pt_br: datetime-pt-br, date_date_pt_br: date-pt-br, varchar_password_verify: password-verify, varchar_upload_image: upload-image, varchar_url: url, varchar_unique_id: unique-id, varchar_telephone: telephone, varchar_email: email } }
