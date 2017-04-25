@@ -1,0 +1,24 @@
+src:
+  0:
+    name: ResolveColumns
+    type: Service
+    namespace: Integration\Component\Columns
+    
+
+  1:
+    name: GearFile
+    type: Service
+    namespace: Integration\Component\GearFile
+    service: factories
+    
+  2:
+    name: MigrationFile
+    type: Service
+    namespace: Integration\Component\MigrationFile
+    service: factories
+    
+  3:
+    name: TestFile
+    type: Service
+    namespace: Integration\Component\TestFile
+    service: factories        

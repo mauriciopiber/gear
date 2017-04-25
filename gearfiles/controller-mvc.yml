@@ -1,0 +1,14 @@
+
+src:
+  0:
+    name: ControllerMvcGenerator
+    type: Service
+    namespace: Integration\Generator\Controller\MvcGenerator
+    service: factories
+    dependency:
+      0: 
+        class: \GearBase\Util\String\StringService
+        aliase: GearBase\Util\String            
+      1: 'Integration\Component\GearFile\GearFile'
+      2: 'Integration\Component\TestFile\TestFile'
+      3: 'Integration\Component\MigrationFile\MigrationFile' 
