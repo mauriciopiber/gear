@@ -8,7 +8,7 @@ class MvcVarchar extends AbstractMigration
         'mvc_varchar' => [
             'nullable' => false,
             'unique' => false,
-            'table' => [
+            'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
@@ -16,16 +16,19 @@ class MvcVarchar extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***,
                 'clm_vrc_pav_vrc' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_upi_vrc' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_url_vrc' => [
                     'type' => 'string'
                 ***REMOVED***,
                 'clm_vrc_uni_vrc' => [
-                    'type' => 'string'
+                    'type' => 'string',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_vrc_tlp_vrc' => [
                     'type' => 'string'
@@ -97,19 +100,19 @@ class MvcVarchar extends AbstractMigration
 
         $table->create();
 
-        if (isset($options['table'***REMOVED***)) {
-            $this->createTableDependencies($tableName, $options['table'***REMOVED***);
+        if (isset($options['referenced_assoc'***REMOVED***)) {
+            $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
 
     }
 
     public function createTableDependencies($tableName, $tables)
     {
-        if (!isset($options['table'***REMOVED***) || empty($options['table'***REMOVED***) || !is_array($options['table'***REMOVED***)) {
+        if (empty($tables) || !is_array($tables)) {
             return;
         }
 
-        foreach ($options['table'***REMOVED*** as $tableOption) {
+        foreach ($tables as $tableOption) {
 
             $this->createTableDependency($tableName, $tableOption);
         }

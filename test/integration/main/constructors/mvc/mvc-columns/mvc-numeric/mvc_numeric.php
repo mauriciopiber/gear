@@ -8,7 +8,7 @@ class MvcNumeric extends AbstractMigration
         'mvc_numeric' => [
             'nullable' => false,
             'unique' => false,
-            'table' => [
+            'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
@@ -22,19 +22,22 @@ class MvcNumeric extends AbstractMigration
                     'type' => 'boolean'
                 ***REMOVED***,
                 'clm_boo_chc_nmr' => [
-                    'type' => 'boolean'
+                    'type' => 'boolean',
+                    'unique' => false
                 ***REMOVED***,
                 'clm_int_nmr' => [
                     'type' => 'integer'
                 ***REMOVED***,
                 'clm_int_chc_nmr' => [
-                    'type' => 'integer'
+                    'type' => 'integer',
+                    'unique' => false
                 ***REMOVED***,
                 'id_clm_int_frk_nmr' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
-                    ***REMOVED***
+                    ***REMOVED***,
+                    'unique' => false
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
@@ -112,19 +115,19 @@ class MvcNumeric extends AbstractMigration
 
         $table->create();
 
-        if (isset($options['table'***REMOVED***)) {
-            $this->createTableDependencies($tableName, $options['table'***REMOVED***);
+        if (isset($options['referenced_assoc'***REMOVED***)) {
+            $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
 
     }
 
     public function createTableDependencies($tableName, $tables)
     {
-        if (!isset($options['table'***REMOVED***) || empty($options['table'***REMOVED***) || !is_array($options['table'***REMOVED***)) {
+        if (empty($tables) || !is_array($tables)) {
             return;
         }
 
-        foreach ($options['table'***REMOVED*** as $tableOption) {
+        foreach ($tables as $tableOption) {
 
             $this->createTableDependency($tableName, $tableOption);
         }

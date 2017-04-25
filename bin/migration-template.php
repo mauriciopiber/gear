@@ -66,19 +66,19 @@ class MigrationName extends AbstractMigration
 
         $table->create();
 
-        if (isset($options['table'***REMOVED***)) {
-            $this->createTableDependencies($tableName, $options['table'***REMOVED***);
+        if (isset($options['referenced_assoc'***REMOVED***)) {
+            $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
 
     }
 
     public function createTableDependencies($tableName, $tables)
     {
-        if (!isset($options['table'***REMOVED***) || empty($options['table'***REMOVED***) || !is_array($options['table'***REMOVED***)) {
+        if (empty($tables) || !is_array($tables)) {
             return;
         }
 
-        foreach ($options['table'***REMOVED*** as $tableOption) {
+        foreach ($tables as $tableOption) {
 
             $this->createTableDependency($tableName, $tableOption);
         }
