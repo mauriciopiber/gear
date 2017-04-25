@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+
+chdir(dirname(__DIR__));
+
+// Decline static file requests back to the PHP built-in webserver
+if (php_sapi_name() === 'cli-server') {
+    $path = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'***REMOVED***, PHP_URL_PATH));
+    if (__FILE__ !== $path && is_file($path)) {
+        return false;
+    }
+    unset($path);
+}
+
+require 'init_autoloader.php';
+
+/*
+$generator = Gear\Integration\Generator();
+
+$generator->generateSrc();
+$generator->generateSrcMvc();
+$generator->generateController();
+$generator->generateControllerMvc();
+$generator->generateMvc();
+*/
+
+/*
+# Gear\Integration\Generator\GeneratorInterface;
+
+# Gear\Integration\Generator\Generator
+# Gear\Integration\Generator\SrcGenerator\SrcGenerator;
+# Gear\Integration\Generator\SrcMvcGenerator\SrcMvcGenerator;
+# Gear\Integration\Generator\ControllerGenerator\ControllerGenerator;
+# Gear\Integration\Generator\ControllerMvcGenerator\ControllerMvcGenerator;
+# Gear\Integration\Generator\MvcGenerator\MvcGenerator;
+# Gear\Integration\Util\ColumnsGenerator
+# Gear\Integration\Util\ImplementsGenerator
+# Gear\Integration\Util\DependencyGenerator
+# Gear\Integration\Util\Output
+# Gear\Integration\Util\GearfileGenerator
+# Gear\Integration\Util\MigrationGenerator
+*/

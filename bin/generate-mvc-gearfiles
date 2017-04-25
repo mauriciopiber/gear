@@ -85,28 +85,7 @@ function listAvailableMvc()
     echo "Total ".count($data)."\n";
 
 }
-
-
-function createMigration($date, $name)
-{
-    $arrayService = new Gear\Util\Vector\ArrayService();
-    
-    $template = file_get_contents(__DIR__.'/migration-template.php');
-    
-    $tables = '    const TABLES = '.$arrayService->varExport54(['test' => true***REMOVED***, '    ').';';
-    
-    
-    $template = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-    
-
-    $migrationName = getMigrationName($date, $name);
-    
-    file_put_contents(__DIR__.'/'.$migrationName, $template);
-    ////var_dump($template); 
-}
 */
-
-
 
 function getMigrationName($date, $name)
 {
@@ -120,18 +99,15 @@ function getMigrationName($date, $name)
 
 function getConstraintLabel($constraint)
 {
-    if  (!empty($constraint)) {
-                 
-        if (is_array($constraint)) {
-            $const = implode('-', $constraint);
-        } else {
-            $const = $constraint;
-        }
-    } else {
-        $const = '';
+    if ($constraint === null) {
+        return [***REMOVED***;
     }
+                 
+    if (is_array($constraint)) {
+        return $constraint;
+    } 
     
-    return $const;
+    return [$constraint***REMOVED***;
 }
 
  
@@ -167,62 +143,70 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
     }
 }
 
-function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
+function createTableName($type, $usertype, $constraint, $tables, $stringType)
 {
     $string = new GearBase\Util\String\StringService();
-        $columnType = $string->str('class', str_replace('mvc-', '', $type));
-                        
-                        $columnSuffix = [***REMOVED***;
-                        $columnSuffix[***REMOVED*** = $string->str('url', $columnType);
+    
+    $variables = [***REMOVED***;
+    $variables[***REMOVED*** = $string->str('uline', str_replace('mvc-', '', $type));
+    
+    if ($usertype != 'all') {
+        $variables[***REMOVED*** = $usertype;
+    }
+    
+    $variables = array_merge($variables, getConstraintLabel($constraint));
+
+    if ($tables !== null) {
+        $variables[***REMOVED*** = $tables;
+    }    
+    
+    foreach ($variables as $i => $name) {
+        $variables[$i***REMOVED*** = $string->str($stringType, $name);
+    }
+    
+    return $variables;
+}
+
+function createTableUrl($type, $usertype, $constraint, $tables)
+{
+    return createTableName($type, $usertype, $constraint, $tables, 'url');
+}
+
+function createTableAliase($type, $usertype, $constraint, $tables)
+{
+    return createTableName($type, $usertype, $constraint, $tables, 'class');       
+}
+
+function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
+{
+    $locationKey = sprintf("%s/%s", $superType, $type);
+    
+    
+    $tableAliase = createTableAliase($type, $usertype, $constraint, $tables);
+    
+    $tableName = sprintf(
+        '%s%s',
+        'Mvc',
+        implode('', $tableAliase)
+    );
+    
+    $tableUrl = createTableUrl($type, $usertype, $constraint, $tables);    
+    $locationKey = sprintf(
+        '%s/mvc-%s',
+        $superType, 
+        implode('-', $tableUrl)
+    );
                     
-                        $locationKey = sprintf("%s/%s", $superType, $type);
-                    
-                        if ($usertype != 'all') {
-                            $locationKey .= '-'.$usertype;
-                            $columnSuffix[***REMOVED*** = $usertype;
-                        }
-                    
-                        $const = getConstraintLabel($constraint);
-                    
-                        if ($constraint != '') {
-                            $locationKey .= '-'.$const;
-                            
-                            $colmConst = explode('-', $const);
-                            
-                            foreach ($colmConst as $it) {
-                                $columnSuffix[***REMOVED*** = $it;
-                            }
-                            //$columnSuffix[***REMOVED*** = array_merge($columnSuffix, $colmConst);
-                        }
-                        
-                        if ($tables !== null) {
-                            $columnSuffix[***REMOVED*** = $tables;
-                        
-                        }
-                    
-                        $tableName = sprintf(
-                            '%s%s%s%s',
-                            'Mvc',
-                            $columnType,
-                            ($usertype == 'all') ? '' : $string->str('class', $usertype),
-                            $string->str('class', $const)
-                        );
-                    
-                        if ($tables !== null) { 
-                            $tableName .= $string->str('class', $tables);                                                               
-                            $locationKey .= '-'.$string->str('url', $tables);
-                        }
-                    
-                        return  generateTest(
-                            $tableName, 
-                            $type, 
-                            $columnType, 
-                            $usertype, 
-                            $constraint, 
-                            $tables, 
-                            $columnSuffix, 
-                            $locationKey
-                        );
+    return  generateTest(
+        $tableName, 
+        $type, 
+        $columnType, 
+        $usertype, 
+        $constraint, 
+        $tables, 
+        $columnSuffix, 
+        $locationKey
+    );
 }
 
 function updateSuperTestFile($superType, $migrations)

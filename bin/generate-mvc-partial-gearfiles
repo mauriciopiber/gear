@@ -36,7 +36,6 @@ function generateMvcSrc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstr
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
                         generateMvcSrcTest($superType, $type, $usertype, $constraint, $tables);
-                        //var_dump($superType, $type, $usertype, $constraint, $tables);
                     }
                 }
             }
@@ -46,12 +45,12 @@ function generateMvcSrc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstr
 
 function generateMvcControllerTest($superType, $type, $usertype, $constraint, $tables)
 {
-
+    var_dump($superType, $type, $usertype, $constraint, $tables);
 }
 
 function generateMvcSrcTest($superType, $type, $usertype, $constraint, $tables)
 {
-
+    var_dump($superType, $type, $usertype, $constraint, $tables);
 }
 
 function generateMvcController($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
@@ -74,7 +73,6 @@ function generateMvcController($suiteName, $suiteColumns, $suiteUserTypes, $suit
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
                         generateMvcControllerTest($superType, $type, $usertype, $constraint, $tables);                    
-                        var_dump($superType, $type, $usertype, $constraint, $tables);
                     }
                 }
             }
@@ -88,10 +86,6 @@ generateMvcSrc(
     'src-mvc-service',
     [
         'mvc-basic',
-        'mvc-varchar',
-        'mvc-dates',
-        'mvc-text',
-        'mvc-numeric'
     ***REMOVED***,    
     ['all'***REMOVED***,
     [null***REMOVED***,
@@ -103,12 +97,7 @@ generateMvcSrc(
 generateMvcController(
     'controller-mvc',
     [
-        'mvc-complete',
         'mvc-basic',
-        'mvc-varchar',
-        'mvc-dates',
-        'mvc-text',
-        'mvc-numeric'
     ***REMOVED***,    
     ['all'***REMOVED***,
     [null***REMOVED***,
