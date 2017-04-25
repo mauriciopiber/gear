@@ -13,6 +13,7 @@ if (php_sapi_name() === 'cli-server') {
     unset($path);
 }
 
+
 require __DIR__.'/generate-functions';
 require __DIR__.'/generate-columns';
 
