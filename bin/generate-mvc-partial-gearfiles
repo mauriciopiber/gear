@@ -17,7 +17,7 @@ require __DIR__.'/generate-functions';
 require __DIR__.'/generate-columns';
 
 
-function SrcMvcDependency()
+function MvcDependency()
 {
     return [
         'Entity' => null,
@@ -26,48 +26,70 @@ function SrcMvcDependency()
         'Service' => ['Entity', 'Repository'***REMOVED***,
         'Filter' => ['Entity'***REMOVED***,
         'Form' => ['Filter', 'Entity'***REMOVED***,
-        'SearchForm' => ['Entity'***REMOVED***
+        'SearchForm' => ['Entity'***REMOVED***,
+        'Controller' => ['Entity', 'Fixture', 'Repository', 'Service', 'Filter', 'Form', 'SearchForm'***REMOVED***
     ***REMOVED***;
 }
 
 function generateSrcMvc($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
+    
     $string = new GearBase\Util\String\StringService();
     $suiteSupertype = 'src-mvc';
     
     $suiteName = sprintf('%s/src-mvc-%s', $suiteSupertype, $string->str('url', $suiteType));
     
     echo "$suiteName"."\n";
-  
+    
     if ($suiteType === 'Entity') {
         createSrcMvcMigration($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
     }
     
-    
     createSrcMvcGearfile($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
     
     createSrcMvcTestfile($suiteName);
+}
+
+function createSrcMvcMigrationFile($tableName, $column, $userType, $constraint, $table)
+{
+    return [
     
-    /**
-    foreach ($suiteTypes as $suiteType) {
+    ***REMOVED***;
+
+}
+
+function createSrcMvcMigration($columns, $userTypes, $constraints, $tables)
+{
+    $resolveNames = createResolveNames();
     
+    $i = 0;
     
-    foreach ($expectedColumns as $superType => $types) {
-        foreach ($types as $type) {
-            foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
-                foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                    foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                        generateMvcSrcTest($superType, $suiteType, $type, $usertype, $constraint, $tables);
-                    }
+    $migrationsTables = [***REMOVED***;
+
+    
+    foreach ($columns as $column) {
+        foreach ($userTypes as $usertype) {
+            foreach ($constraints as $constraint) {
+                foreach ($tables as $table) {
+                    $tableName = sprintf(
+                        '%s%s',
+                        'SrcMvc',
+                        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $table))
+                    );
+                    $migrationsTables[$tableName***REMOVED*** = createSrcMvcMigrationFile($tableName, $userTypes, $column, $constraint, $table);
+                         
+                
                 }
             }
         }
     }
-    */
-}
+    
+    var_dump($migrationsTables);
+    
 
-function createSrcMvcMigration()
-{
+    //how many tables combinations this will have?
+    
+    //will use the same library as MVC.
 
 }
 
@@ -162,10 +184,6 @@ function generateSrcMvcSuite()
             [
                 'complete',
                 'basic',
-                'numeric',
-                'varchar',
-                'text',
-                'dates'
             ***REMOVED***,    
             ['all', 'low-strict', 'strict'***REMOVED***,
             [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***,
