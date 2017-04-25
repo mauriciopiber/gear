@@ -205,7 +205,7 @@ function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
         implode('-', createTableUrl($type, $usertype, $constraint, $tables))
     );
                     
-    return generateTest(
+    return  generateTest(
         $tableName, 
         $type, 
         getColumnsType($type), 

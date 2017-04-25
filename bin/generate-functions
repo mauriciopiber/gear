@@ -19,6 +19,12 @@ use GearBase\Util\String\StringService;
 
 $string = new StringService();
 
+function createResolveNames()
+{
+    $string = new StringService();
+    return new Gear\Integration\Util\ResolveNames\ResolveNames($string);
+}
+
 
 $numberMap = [
     "Zero",

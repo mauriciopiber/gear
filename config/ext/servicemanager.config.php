@@ -49,7 +49,8 @@
         'Gear\Creator\File\Injector' => 'Gear\Creator\File\InjectorFactory',
         'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
         'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory',
-        'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory'
+        'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',
+        'Gear\Integration\Util\ResolveNames\ResolveNames' => 'Gear\Integration\Util\ResolveNames\ResolveNamesFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

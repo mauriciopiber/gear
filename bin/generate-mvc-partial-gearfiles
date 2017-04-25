@@ -16,74 +16,114 @@ if (php_sapi_name() === 'cli-server') {
 require __DIR__.'/generate-functions';
 require __DIR__.'/generate-columns';
 
-function generateMvcSrc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+
+function SrcMvcDependency()
 {
-    $expectedColumns = [
-        $suiteName => $suiteColumns,
+    return [
+        'Entity' => null,
+        'Fixture' => ['Entity'***REMOVED***,
+        'Repository' => ['Entity'***REMOVED***,
+        'Service' => ['Entity', 'Repository'***REMOVED***,
+        'Filter' => ['Entity'***REMOVED***,
+        'Form' => ['Filter', 'Entity'***REMOVED***,
+        'SearchForm' => ['Entity'***REMOVED***
     ***REMOVED***;
+}
+
+function generateSrcMvc($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+{
+    $string = new GearBase\Util\String\StringService();
+    $suiteSupertype = 'src-mvc';
     
-    $configColumns = [
-        'usertype' => $suiteUserTypes, 
-        'constraints' => $suiteConstraints,
-        'tables' => $suiteTables
-    ***REMOVED***;
+    $suiteName = sprintf('%s/src-mvc-%s', $suiteSupertype, $string->str('url', $suiteType));
     
-    $migrations = [***REMOVED***;
+    echo "$suiteName"."\n";
+  
+    if ($suiteType === 'Entity') {
+        createSrcMvcMigration($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
+    }
+    
+    
+    createSrcMvcGearfile($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
+    
+    createSrcMvcTestfile($suiteName);
+    
+    /**
+    foreach ($suiteTypes as $suiteType) {
+    
     
     foreach ($expectedColumns as $superType => $types) {
         foreach ($types as $type) {
             foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                        generateMvcSrcTest($superType, $type, $usertype, $constraint, $tables);
+                        generateMvcSrcTest($superType, $suiteType, $type, $usertype, $constraint, $tables);
                     }
                 }
             }
         }
     }
+    */
 }
 
-function generateMvcControllerTest($superType, $type, $usertype, $constraint, $tables)
+function createSrcMvcMigration()
 {
+
+}
+
+function createSrcMvcGearfile()
+{
+
+}
+function createSrcMvcTestfile($suiteName)
+{
+    
+}
+
+function generateMvcControllerTest($superType, $suiteType, $type, $usertype, $constraint, $tables)
+{
+    $resolveNames = createResolveNames();
     $locationKey = sprintf("%s/%s", $superType, $type);
+       
     
     $tableName = sprintf(
         '%s%s',
-        'Mvc',
-        implode('', createTableAliase($type, $usertype, $constraint, $tables))
+        'ControllerMvc',
+        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
     );
     
     $locationKey = sprintf(
         '%s/mvc-%s',
         $superType, 
-        implode('-', createTableUrl($type, $usertype, $constraint, $tables))
+        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
     );
     
-    echo "1. $tableName 2. $locationKey";
+    echo "1. $tableName 3. $suiteType 2. $locationKey"."\n";
     
     //var_dump($superType, $type, $usertype, $constraint, $tables);
 }
 
-function generateMvcSrcTest($superType, $type, $usertype, $constraint, $tables)
+function generateSrcMvcTest($superType, $suiteType, $type, $usertype, $constraint, $tables)
 {
+    $resolveNames = createResolveNames();
     $locationKey = sprintf("%s/%s", $superType, $type);
     
     $tableName = sprintf(
         '%s%s',
-        'Mvc',
-        implode('', createTableAliase($type, $usertype, $constraint, $tables))
+        'SrcMvc',
+        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
     );
     
     $locationKey = sprintf(
         '%s/mvc-%s',
         $superType, 
-        implode('-', createTableUrl($type, $usertype, $constraint, $tables))
+        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
     );
     
-    echo "1. $tableName 2. $locationKey";
+    echo "1. $tableName 3. $suiteType 2. $locationKey"."\n";
 }
 
-function generateMvcController($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+function generateControllerMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
     $expectedColumns = [
         $suiteName => $suiteColumns,
@@ -111,18 +151,34 @@ function generateMvcController($suiteName, $suiteColumns, $suiteUserTypes, $suit
 }
 
 
+function generateSrcMvcSuite()
+{
+    $types = ['Service', 'Repository', 'Form', 'Filter', 'SearchForm', 'Entity', 'Fixture'***REMOVED***;
+    
+    foreach ($types as $type) {
+    
+        generateSrcMvc(
+            $type,
+            [
+                'complete',
+                'basic',
+                'numeric',
+                'varchar',
+                'text',
+                'dates'
+            ***REMOVED***,    
+            ['all', 'low-strict', 'strict'***REMOVED***,
+            [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***,
+            [null, 'upload_image'***REMOVED***        
+        );
+    }
+}
+
+
 //columns
-generateMvcSrc(
-    'src-mvc-service',
-    [
-        'mvc-basic',
-    ***REMOVED***,    
-    ['all'***REMOVED***,
-    [null***REMOVED***,
-    [null***REMOVED***
-);
+generateSrcMvcSuite();
 
-
+/**
 //columns
 generateMvcController(
     'controller-mvc',
@@ -131,8 +187,9 @@ generateMvcController(
     ***REMOVED***,    
     ['all'***REMOVED***,
     [null***REMOVED***,
-    [null***REMOVED***
+    [null, 'upload_image'***REMOVED***
 );
+*/
 
 //create srcs
 
