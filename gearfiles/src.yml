@@ -1,0 +1,35 @@
+
+src:
+  #0:
+    #name: SrcGenerator
+    #type: Service
+    #namespace: Integration\Suite\Src\SrcGenerator
+    #service: factories
+    #dependency:
+      #0: 
+      #  class: \GearBase\Util\String\StringService
+       # aliase: GearBase\Util\String            
+      #1: 'Integration\Component\GearFile\GearFile'
+      #2: 'Integration\Component\TestFile\TestFile'      #
+
+#  1:
+#    name: SrcSuite
+#    type: Service
+#    namespace: Integration\Suite\Src\SrcSuite
+#    service: factories
+#    dependency:
+#      2: 'Integration\Suite\Src\SrcGenerator\SrcGenerator'          
+      
+      
+  2: 
+    name: SrcMinorSuite
+    type: ValueObject
+    namespace: Integration\Suite\Src
+    extends: Integration\Suite\AbstractMinorsuite
+    
+  2: 
+    name: SrcMajorSuite
+    type: ValueObject
+    namespace: Integration\Suite\Src
+    extends: Integration\Suite\AbstractMajorsuite
+        

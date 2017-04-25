@@ -1,0 +1,13 @@
+src:
+  0:
+    name: Persist
+    type: Service
+    namespace: Integration\Util\Persist
+    
+
+  1:
+    name: Location
+    type: Service
+    namespace: Integration\Util\Location
+
+    
