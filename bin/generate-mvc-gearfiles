@@ -143,12 +143,16 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
     }
 }
 
-function createTableName($type, $usertype, $constraint, $tables, $stringType)
+function getColumnsType($type)
 {
     $string = new GearBase\Util\String\StringService();
-    
+    return $string->str('class', str_replace('mvc-', '', $type));
+}
+
+function createAliase($type, $usertype, $constraint, $tables)
+{
     $variables = [***REMOVED***;
-    $variables[***REMOVED*** = $string->str('uline', str_replace('mvc-', '', $type));
+    $variables[***REMOVED*** = getColumnsType($type);
     
     if ($usertype != 'all') {
         $variables[***REMOVED*** = $usertype;
@@ -159,6 +163,14 @@ function createTableName($type, $usertype, $constraint, $tables, $stringType)
     if ($tables !== null) {
         $variables[***REMOVED*** = $tables;
     }    
+    return $variables;
+}
+
+function createTableName($type, $usertype, $constraint, $tables, $stringType)
+{
+    $string = new GearBase\Util\String\StringService();
+    
+    $variables = createAliase($type, $usertype, $constraint, $tables);
     
     foreach ($variables as $i => $name) {
         $variables[$i***REMOVED*** = $string->str($stringType, $name);
@@ -200,11 +212,11 @@ function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
     return  generateTest(
         $tableName, 
         $type, 
-        $columnType, 
+        getColumnsType($type), 
         $usertype, 
         $constraint, 
         $tables, 
-        $columnSuffix, 
+        createTableUrl($type, $usertype, $constraint, $tables), 
         $locationKey
     );
 }

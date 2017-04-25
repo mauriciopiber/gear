@@ -109,7 +109,7 @@ function createColumnSuffix($columnSuffix)
     $label = [
         'nullable' => 'nul',
         'unique' => 'uni',
-        'upload_image' => 'upl',
+        'upload-image' => 'upl',
         'complete' => 'cmp',
         'basic' => 'bsc',
         'dates' => 'dts',
