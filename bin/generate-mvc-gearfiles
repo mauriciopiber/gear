@@ -193,23 +193,19 @@ function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
 {
     $locationKey = sprintf("%s/%s", $superType, $type);
     
-    
-    $tableAliase = createTableAliase($type, $usertype, $constraint, $tables);
-    
     $tableName = sprintf(
         '%s%s',
         'Mvc',
-        implode('', $tableAliase)
+        implode('', createTableAliase($type, $usertype, $constraint, $tables))
     );
     
-    $tableUrl = createTableUrl($type, $usertype, $constraint, $tables);    
     $locationKey = sprintf(
         '%s/mvc-%s',
         $superType, 
-        implode('-', $tableUrl)
+        implode('-', createTableUrl($type, $usertype, $constraint, $tables))
     );
                     
-    return  generateTest(
+    return generateTest(
         $tableName, 
         $type, 
         getColumnsType($type), 
