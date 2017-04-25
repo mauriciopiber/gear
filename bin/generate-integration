@@ -30,14 +30,43 @@ $generator->generateMvc();
 
 # Gear\Integration\Generator\Generator
 # Gear\Integration\Generator\SrcGenerator\SrcGenerator;
+-- dependency
+-- implements
+-- gearfile
 # Gear\Integration\Generator\SrcMvcGenerator\SrcMvcGenerator;
 # Gear\Integration\Generator\ControllerGenerator\ControllerGenerator;
+-- dependency
+-- implements
+-- gearfile
 # Gear\Integration\Generator\ControllerMvcGenerator\ControllerMvcGenerator;
 # Gear\Integration\Generator\MvcGenerator\MvcGenerator;
-# Gear\Integration\Util\ColumnsGenerator
-# Gear\Integration\Util\ImplementsGenerator
-# Gear\Integration\Util\DependencyGenerator
-# Gear\Integration\Util\Output
+
+# Gear\Integration\MvcTest
+    - columns
+    - super type
+    - constraints
+    - user type
+    - tables
+    - count
+#    + getNames
+# Gear\Integration\SrcTest
+    - type
+    - count
+# Gear\Integration\ControllerTest
+    - type
+    - count
+# Gear\Integration\SrcMvcTest
+    - extends MvcTest
+    - type
+# Gear\Integration\ControllerMvcTest
+    - extends MvcTest
+    - const type
+# Gear\Integration\Util\ResolveNames
+# Gear\Integration\Util\ResolveColumns
+# Gear\Integration\Util\ResolveImplements
+# Gear\Integration\Util\ResolveDependency
+# Gear\Integration\Output\Migration
+# Gear\Integration\Output\Gearfile
 # Gear\Integration\Util\GearfileGenerator
 # Gear\Integration\Util\MigrationGenerator
 */
