@@ -76,9 +76,8 @@ function createSrcMvcMigration($columns, $userTypes, $constraints, $tables)
                         'SrcMvc',
                         implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $table))
                     );
+                    
                     $migrationsTables[$tableName***REMOVED*** = createSrcMvcMigrationFile($tableName, $userTypes, $column, $constraint, $table);
-                         
-                
                 }
             }
         }
