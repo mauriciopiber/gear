@@ -65,6 +65,7 @@ $generator->generateMvc();
 # Gear\Integration\Util\ResolveColumns
 # Gear\Integration\Util\ResolveImplements
 # Gear\Integration\Util\ResolveDependency
+
 # Gear\Integration\Output\Migration
 # Gear\Integration\Output\Gearfile
 # Gear\Integration\Util\GearfileGenerator
