@@ -94,4 +94,8 @@ $controller = array_merge(
     createDepSuite()
 );
 
-createGearfileComponent('controller', 'controller-%s', 'cotroller-%s', $type, ['src' => $src, 'controller' => $controller***REMOVED***);
+$majorSuite = new Gear\Integration\Suite\Controller\ControllerMajorSuite();
+$minorSuite = new Gear\Integration\Suite\Controller\ControllerMinorSuite($majorSuite, $type, $repeat);
+
+
+createGearfileComponent($minorSuite, ['src' => $src, 'controller' => $controller***REMOVED***);

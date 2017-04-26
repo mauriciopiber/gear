@@ -38,7 +38,8 @@ function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraint
     
     $superType = [***REMOVED***;
     
-    $srcMajorSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite(
+    $srcMvcMajor = new Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite(
+        null,
         $suiteColumns,
         $suiteUserTypes,
         $suiteConstraints,
@@ -48,9 +49,9 @@ function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraint
     foreach ($types as $type) {
         
         
-        $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite($type);
+        $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite($srcMvcMajor, $type);
     
-        $superType[***REMOVED*** = generateSrcMvc($srcMajorSuite, $srcMvcMinor);
+        $superType[***REMOVED*** = generateSrcMvc($srcMvcMajor, $srcMvcMinor);
     }
 }
 
