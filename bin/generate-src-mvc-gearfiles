@@ -42,7 +42,7 @@ function generateSrcMvc($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstr
     echo "$suiteName"."\n";
     
     if ($suiteType === 'Entity') {
-        createSrcMvcMigration($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
+        createSrcMvcMigration($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
     }
     
     createSrcMvcGearfile($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
@@ -58,7 +58,7 @@ function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuit
 
 }
 
-function createSrcMvcMigration($columns, $userTypes, $constraints, $tables)
+function createSrcMvcMigration($type, $columns, $userTypes, $constraints, $tables)
 {
     $resolveNames = createResolveNames();
     
@@ -78,14 +78,15 @@ function createSrcMvcMigration($columns, $userTypes, $constraints, $tables)
                     );
                     
                     $srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
-                        $tableName, 
+                        'src-mvc', 
                         $usertype, 
                         $column, 
                         $constraint, 
-                        $table
+                        $table,
+                        $type
                     );
                     
-                    $migrationsTables[$srcMvcSuite->getTableName()***REMOVED*** = createSrcMvcMigrationFile($srcMvcSuite);
+                    //$migrationsTables[$srcMvcSuite->getTableName()***REMOVED*** = createSrcMvcMigrationFile($srcMvcSuite);
                 }
             }
         }
@@ -109,77 +110,6 @@ function createSrcMvcTestfile($suiteName)
     
 }
 
-function generateMvcControllerTest($superType, $suiteType, $type, $usertype, $constraint, $tables)
-{
-    $resolveNames = createResolveNames();
-    $locationKey = sprintf("%s/%s", $superType, $type);
-       
-    
-    $tableName = sprintf(
-        '%s%s',
-        'ControllerMvc',
-        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
-    );
-    
-    $locationKey = sprintf(
-        '%s/mvc-%s',
-        $superType, 
-        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
-    );
-    
-    echo "1. $tableName 3. $suiteType 2. $locationKey"."\n";
-    
-    //var_dump($superType, $type, $usertype, $constraint, $tables);
-}
-
-function generateSrcMvcTest($superType, $suiteType, $type, $usertype, $constraint, $tables)
-{
-    $resolveNames = createResolveNames();
-    $locationKey = sprintf("%s/%s", $superType, $type);
-    
-    $tableName = sprintf(
-        '%s%s',
-        'SrcMvc',
-        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
-    );
-    
-    $locationKey = sprintf(
-        '%s/mvc-%s',
-        $superType, 
-        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
-    );
-    
-    echo "1. $tableName 3. $suiteType 2. $locationKey"."\n";
-}
-
-function generateControllerMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
-{
-    $expectedColumns = [
-        $suiteName => $suiteColumns,
-    ***REMOVED***;
-    
-    $configColumns = [
-        'usertype' => $suiteUserTypes, 
-        'constraints' => $suiteConstraints,
-        'tables' => $suiteTables
-    ***REMOVED***;
-    
-    $migrations = [***REMOVED***;
-    
-    foreach ($expectedColumns as $superType => $types) {
-        foreach ($types as $type) {
-            foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
-                foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                    foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                        generateMvcControllerTest($superType, $type, $usertype, $constraint, $tables);                    
-                    }
-                }
-            }
-        }
-    }
-}
-
-
 function generateSrcMvcSuite()
 {
     $types = ['Service', 'Repository', 'Form', 'Filter', 'SearchForm', 'Entity', 'Fixture'***REMOVED***;
@@ -202,20 +132,3 @@ function generateSrcMvcSuite()
 
 //columns
 generateSrcMvcSuite();
-
-/**
-//columns
-generateMvcController(
-    'controller-mvc',
-    [
-        'mvc-basic',
-    ***REMOVED***,    
-    ['all'***REMOVED***,
-    [null***REMOVED***,
-    [null, 'upload_image'***REMOVED***
-);
-*/
-
-//create srcs
-
-//create controller
