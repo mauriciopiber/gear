@@ -63,13 +63,16 @@ class ResolveNames
         );
     }
 
-    public function createLocationKey($superType, $mvcMajor, MvcMinorSuite $suite)
+    public function createLocationKey($mvcMajor, MvcMinorSuite $suite)
     {
-        return sprintf(
-            '%s/%s-%s',
-            $mvcMajor,
-            implode('-', $resolveNames->createTableUrl($mvcMinorSuite))
+        $key = sprintf(
+            '%s/mvc-%s',
+            $this->stringService->str('url', $mvcMajor),
+            implode('-', $this->createTableUrl($suite))
         );
+
+        return $key;
+
     }
 
     private function createAliase(MvcMinorSuite $suite)
