@@ -378,7 +378,6 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
     $date = (new DateTime('now'))->format('YmdHis');
     
     $migrationName = getMigrationName($date, $tableName);
-    
 
     //sleep(1.5);
     
