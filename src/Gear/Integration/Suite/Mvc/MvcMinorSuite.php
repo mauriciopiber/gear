@@ -27,20 +27,39 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     public $tableAssoc;
 
-    //public $columns;
+    public $columnType;
+
+    public $majorType;
 
     /**
      * Constructor
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct($tableName, $userType, $constraints, $tables)
+    public function __construct($majorType, $columnType, $userType, $constraints, $tableAssoc)
     {
-        $this->tableName = $tableName;
+        $this->majorType = $majorType;
+        $this->columnType = $columnType;
         $this->userType = $userType;
         $this->constraints = $constraints;
-        $this->tableAssoc = $tables;
+        $this->tableAssoc = $tableAssoc;
         return $this;
+    }
+
+    public function setTableName($tableName)
+    {
+        $this->tableName = $tableName;
+        return $this;
+    }
+
+    public function getColumnType()
+    {
+        return $this->columnType;
+    }
+
+    public function getMajorType()
+    {
+        return $this->majorType;
     }
 
     /**
