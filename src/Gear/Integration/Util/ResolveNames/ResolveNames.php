@@ -3,7 +3,7 @@ namespace Gear\Integration\Util\ResolveNames;
 
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringService;
-use Gear\Integration\Suite\AbstractMinorSuite;
+use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -54,36 +54,44 @@ class ResolveNames
         return $this->stringService->str('class', str_replace('mvc-', '', $type));
     }
 
-    public function createTableName(AbstractMinorSuite $suite)
+    public function createTableName($superType, MvcMinorSuite $suite)
     {
-
+        return sprintf(
+            '%s%s',
+            'Mvc',
+            implode('', $this->createTableAliase($suite))
+        );
     }
 
-    public function createLocationKey(AbstractMinorSuite $suite)
+    public function createLocationKey($superType, $mvcMajor, MvcMinorSuite $suite)
     {
-
+        return sprintf(
+            '%s/%s-%s',
+            $mvcMajor,
+            implode('-', $resolveNames->createTableUrl($mvcMinorSuite))
+        );
     }
 
-    private function createAliase($type, $usertype, $constraint, $tables)
+    private function createAliase(MvcMinorSuite $suite)
     {
         $variables = [***REMOVED***;
-        $variables[***REMOVED*** = $this->getColumnsType($type);
+        $variables[***REMOVED*** = $this->getColumnsType($suite->getColumnType());
 
-        if ($usertype != 'all') {
-            $variables[***REMOVED*** = $usertype;
+        if ($suite->getUserType() != 'all') {
+            $variables[***REMOVED*** = $suite->getUserType();
         }
 
-        $variables = array_merge($variables, $this->getConstraintLabel($constraint));
+        $variables = array_merge($variables, $this->getConstraintLabel($suite->getConstraints()));
 
-        if ($tables !== null) {
-            $variables[***REMOVED*** = $tables;
+        if ($suite->getTableAssoc() !== null) {
+            $variables[***REMOVED*** = $suite->getTableAssoc();
         }
         return $variables;
     }
 
-    private function format($type, $usertype, $constraint, $tables, $stringType)
+    private function format(MvcMinorSuite $suite, $stringType)
     {
-        $variables = $this->createAliase($type, $usertype, $constraint, $tables);
+        $variables = $this->createAliase($suite);
 
         foreach ($variables as $i => $name) {
             $variables[$i***REMOVED*** = $this->stringService->str($stringType, $name);
@@ -92,13 +100,13 @@ class ResolveNames
         return $variables;
     }
 
-    public function createTableUrl($type, $usertype, $constraint, $tables)
+    public function createTableUrl(MvcMinorSuite $suite)
     {
-        return $this->format($type, $usertype, $constraint, $tables, 'url');
+        return $this->format($suite, 'url');
     }
 
-    public function createTableAliase($type, $usertype, $constraint, $tables)
+    public function createTableAliase(MvcMinorSuite $suite)
     {
-        return $this->format($type, $usertype, $constraint, $tables, 'class');
+        return $this->format($suite, 'class');
     }
 }
