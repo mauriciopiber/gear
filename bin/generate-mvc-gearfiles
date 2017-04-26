@@ -125,14 +125,24 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
     
     $migrations = [***REMOVED***;
     
-    foreach ($expectedColumns as $superType => $types) {
-        foreach ($types as $type) {
+    
+    
+    foreach ($expectedColumns as $superType => $columnType) {
+        foreach ($columnType as $column) {
         
-            foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
+            foreach ($configColumns['usertype'***REMOVED*** as $userType) {
                 foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
                 
                     foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                        $migrations[$type***REMOVED*** = generateMvcTest($superType, $type, $usertype, $constraint, $tables);
+                    
+                        $mvcSuite = new Gear\Integration\Suite\Mvc\MvcMinorSuite(
+                            $superType,
+                            $column, 
+                            $userType, 
+                            $constraint, 
+                            $tables
+                        );
+                        $migrations[$column***REMOVED*** = generateMvcTest($mvcSuite);
                     }                
                 }
             }
@@ -144,31 +154,38 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 }
 
 
-function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
+function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
+    $mvcMajor = $mvcMinorSuite->getMajorType();
+    $usertype = $mvcMinorSuite->getUserType();
+    $constraint = $mvcMinorSuite->getConstraints();
+    $tables = $mvcMinorSuite->getTableAssoc();
+    $column = $mvcMinorSuite->getColumnType();
+    
+    
     $resolveNames = createResolveNames();
-    $locationKey = sprintf("%s/%s", $superType, $type);
+    $locationKey = sprintf("%s/%s", $mvcMajor, $column);
     
     $tableName = sprintf(
         '%s%s',
         'Mvc',
-        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
+        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $tables))
     );
     
     $locationKey = sprintf(
         '%s/mvc-%s',
-        $superType, 
-        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
+        $mvcMajor, 
+        implode('-', $resolveNames->createTableUrl($column, $usertype, $constraint, $tables))
     );
                     
     return  generateTest(
         $tableName, 
-        $type, 
-        $resolveNames->getColumnsType($type), 
+        $column, 
+        $resolveNames->getColumnsType($column), 
         $usertype, 
         $constraint, 
         $tables, 
-        $resolveNames->createTableUrl($type, $usertype, $constraint, $tables), 
+        $resolveNames->createTableUrl($column, $usertype, $constraint, $tables), 
         $locationKey
     );
 }
@@ -331,7 +348,7 @@ function createForeignKeyMigration($tableId)
 function generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $columnSuffix, $location)
 {
     $string = new GearBase\Util\String\StringService();
-    $date = (new DateTime('now'))->format('YmdHis');
+    $date = null;
     
     $migrationName = getMigrationName($date, $tableName);
 
