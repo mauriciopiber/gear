@@ -14,14 +14,6 @@ use Gear\Integration\Suite\Mvc\MvcMinorSuite;
  */
 class SrcMvcMinorSuite extends MvcMinorSuite
 {
-    public $tableName;
-
-    public $userType;
-
-    public $constraints;
-
-    public $assoc_table;
-
     public $type;
 
     /**
@@ -29,9 +21,9 @@ class SrcMvcMinorSuite extends MvcMinorSuite
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct($tableName, $userType, $constraints, $tables, $type)
+    public function __construct($majorType, $columnType, $userType, $constraints, $tableAssoc, $type)
     {
-        parent::__construct($tableName, $userType, $constraints, $tables);
+        parent::__construct($majorType, $columnType, $userType, $constraints, $tableAssoc);
         $this->type = $type;
 
         return $this;

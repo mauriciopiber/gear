@@ -97,21 +97,8 @@ function getMigrationName($name)
     );
 }
 
-function getConstraintLabel($constraint)
-{
-    if ($constraint === null) {
-        return [***REMOVED***;
-    }
-                 
-    if (is_array($constraint)) {
-        return $constraint;
-    } 
-    
-    return [$constraint***REMOVED***;
-}
-
  
-function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
     $expectedColumns = [
         $suiteName => $suiteColumns,
@@ -142,7 +129,7 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
                             $constraint, 
                             $tables
                         );
-                        $migrations[$column***REMOVED*** = generateMvcTest($mvcSuite);
+                        $migrations[$column***REMOVED*** = generateMvc($mvcSuite);
                     }                
                 }
             }
@@ -154,7 +141,7 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 }
 
 
-function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $mvcMajor = $mvcMinorSuite->getMajorType();
     $usertype = $mvcMinorSuite->getUserType();
@@ -191,11 +178,11 @@ function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite
     $mvcMinorSuite->setLocationKey($locationKey);
     $mvcMinorSuite->setColumns($columns);
     
-    $gearfile = generateMvcGearfile($mvcMinorSuite);
-    $migration = generateMvcMigration($mvcMinorSuite);
+    $gearfile = runMvcSuiteGearfile($mvcMinorSuite);
+    $migration = runMvcSuiteMigration($mvcMinorSuite);
     
     $mvcMinorSuite->setGearFile($gearfile);
-    $mvcMinorSuite->setMigration($migration);
+    $mvcMinorSuite->setMigrationFile($migration);
     
     updateTestFile($mvcMinorSuite);
 
@@ -243,7 +230,7 @@ function updateSuperTestFile($superType, $migrations)
 
 
 
-function generateMvcGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     
     $db = [
@@ -324,7 +311,7 @@ function createForeignKeyMigration($tableId)
     ***REMOVED***;
 }
 
-function generateMvcMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+function runMvcSuiteMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $string = new GearBase\Util\String\StringService();
     $date = null;
@@ -385,7 +372,7 @@ function generateMvcMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinor
 }
  
 //columns
-generateMvc(
+runMvcSuite(
     'mvc-columns',
     [
         'mvc-complete',
@@ -402,7 +389,7 @@ generateMvc(
 
 
 //usertype
-generateMvc(
+runMvcSuite(
     'mvc-usertypes',
     [
         'mvc-basic',
@@ -413,7 +400,7 @@ generateMvc(
 );
 
 //constraints
-generateMvc(
+runMvcSuite(
     'mvc-constraints',
     [
         'mvc-basic',
@@ -424,7 +411,7 @@ generateMvc(
 );
 
 //constraints
-generateMvc(
+runMvcSuite(
     'mvc-upload-image',
     [
         'mvc-basic',
@@ -436,7 +423,7 @@ generateMvc(
 
 //complete
 //constraints
-generateMvc(
+runMvcSuite(
     'mvc-complete',
     [
         'mvc-complete',
