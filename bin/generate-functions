@@ -178,7 +178,7 @@ function createGearfileComponent($suite, $data)
     
     $location = new Gear\Integration\Util\Location\Location();
     
-    $basepath = $location->getSuiteLocation($majorSuite::SUITE);
+    $basepath = $location->getLocation($majorSuite::SUITE);
     $basepath .= '/';
     $basepath .= $suite->getSuitePath();
     
