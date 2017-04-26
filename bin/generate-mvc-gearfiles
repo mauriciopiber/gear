@@ -193,13 +193,13 @@ function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite
     
     $gearfile = generateMvcGearfile($mvcMinorSuite);
     $migration = generateMvcMigration($mvcMinorSuite);
-    //updateTestFile($mvcMinorSuite);
+    
+    $mvcMinorSuite->setGearFile($gearfile);
+    $mvcMinorSuite->setMigration($migration);
+    
+    updateTestFile($mvcMinorSuite);
 
-    $config = [***REMOVED***;    
-    $config['key'***REMOVED*** = $locationKey;
-    $config['gearfile'***REMOVED*** = $gearfile;
-    $config['migration'***REMOVED*** = $migration;
-    return $config;
+    return $mvcMinorSuite;
 }
 
 function updateSuperTestFile($superType, $migrations)
@@ -214,19 +214,17 @@ function updateSuperTestFile($superType, $migrations)
     
     $construct = '';
     
-    foreach ($migrations as $key => $config) {
-        $locationKey = $config['key'***REMOVED***;
+    foreach ($migrations as $suite) {
+        $locationKey = $suite->getLocationKey();
         
         $folder = array_values(array_slice(explode('/', $locationKey), -1))[0***REMOVED***;
         
-        $gearfile = $config['gearfile'***REMOVED***;
-        $migration = $config['migration'***REMOVED***;
+        $gearfile = $suite->getGearFile();
+        $migration = $suite->getMigrationFile();
         
         $construct .= sprintf($constructTemplate, $folder, $gearfile, $folder, $migration); 
         
-        //echo "$locationKey $gearfile $migration"."\n";
     }
-
     
     $newFile = str_replace('construct+=("")', $construct, $testFile);
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $superType).'$2', $newFile);
@@ -291,39 +289,22 @@ function createForeignKeyGearfile($tableId)
 }
 
 
-function updateTestFile($tableName, $gearfile, $migration, $location)
+function updateTestFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $string = new GearBase\Util\String\StringService();
     
-    //$migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
-
     $testFile = file_get_contents(__DIR__.'/test-template.sh');
     
-    $text = sprintf('construct[1***REMOVED***="%s;%s"', $gearfile, $migration);
+    $text = sprintf('construct[1***REMOVED***="%s;%s"', $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
     
     $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
-    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $tableName).'$2', $newFile);
+    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $mvcMinorSuite->getTableName()).'$2', $newFile);
     
-    $template = getMvcLocation($location);
+    $template = getMvcLocation($mvcMinorSuite->getLocationKey());
     
     $path =  sprintf('%s/%s', $template, 'test.sh');
     
     file_put_contents($path, $newFile);
-}
-
-function getForeignKeys($columnType)
-{
-    $columns = factoryColumns($columnType);
-    
-    $foreignKeys = [***REMOVED***;
-    
-    foreach ($columns as $name => $config) {
-        if (isset($config['properties'***REMOVED***) && in_array('foreignKey', $config['properties'***REMOVED***)) {
-            $foreignKeys[***REMOVED*** = $name;
-        }
-    }
-    
-    return empty($foreignKeys) ? null : $foreignKeys;
 }
 
 function createForeignKeyMigration($tableId)

@@ -38,6 +38,10 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     public $foreignKeys;
 
+    public $gearFile;
+
+    public $migrationFile;
+
 
     /**
      * Constructor
@@ -51,6 +55,28 @@ class MvcMinorSuite extends AbstractMinorSuite
         $this->userType = $userType;
         $this->constraints = $constraints;
         $this->tableAssoc = $tableAssoc;
+        return $this;
+    }
+
+    public function getGearFile()
+    {
+        return $this->gearFile;
+    }
+
+    public function getMigrationFile()
+    {
+        return $this->migrationFile;
+    }
+
+    public function setGearFile($gearFile)
+    {
+        $this->gearFile = $gearFile;
+        return $this;
+    }
+
+    public function setMigrationFile($migrationFile)
+    {
+        $this->migrationFile = $migrationFile;
         return $this;
     }
 
