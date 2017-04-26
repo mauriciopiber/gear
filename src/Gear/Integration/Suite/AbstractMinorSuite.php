@@ -6,6 +6,8 @@ abstract class AbstractMinorSuite extends AbstractSuite
 
     protected $majorSuite;
 
+    protected $locationKey;
+
     /**
      * Constructor
      *
@@ -20,5 +22,16 @@ abstract class AbstractMinorSuite extends AbstractSuite
     public function getMajorSuite()
     {
         return $this->majorSuite;
+    }
+
+    public function getLocationKey()
+    {
+        return $this->locationKey;
+    }
+
+    public function setLocationKey($locationKey)
+    {
+        $this->locationKey = $locationKey;
+        return $this;
     }
 }

@@ -125,17 +125,6 @@ class MvcMinorSuite extends AbstractMinorSuite
         return $this->columns;
     }
 
-    public function getLocationKey()
-    {
-        return $this->locationKey;
-    }
-
-    public function setLocationKey($locationKey)
-    {
-        $this->locationKey = $locationKey;
-        return $this;
-    }
-
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
