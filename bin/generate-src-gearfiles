@@ -22,129 +22,140 @@ require __DIR__.'/generate-functions';
 
 function runSrcSuite($type, $repeat)
 {
+var_dump($repeat);
+    $data = [***REMOVED***;
 
-$data = [***REMOVED***;
+    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
 
-if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+        $implements = [***REMOVED***;
+        $implements[***REMOVED*** = [
+            'name' => '%sImpl%s%s',
+            'type' => 'Interface'
+        ***REMOVED***;
 
-    $implements = [***REMOVED***;
-    $implements[***REMOVED*** = [
-        'name' => '%sImpl%s%s',
-        'type' => 'Interface'
-    ***REMOVED***;
+        $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, numberMap()));
 
-    $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, numberMap()));
-
-}
-$invokables = [***REMOVED***;
-
-$invokables[***REMOVED*** = [
-    'name' => '%sExtendable%s%s',
-    'type' => $type
-***REMOVED***;
-
-$invokables[***REMOVED*** = [
-    'name' => '%s%s%s',
-    'type' => $type
-***REMOVED***;
-
-$invokables[***REMOVED*** = [
-    'name' => '%sNamespace%s%s',
-    'type' => $type,
-    'namespace' => '%s'
-***REMOVED***;
-
-//implements
-if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+    }
+    $invokables = [***REMOVED***;
 
     $invokables[***REMOVED*** = [
-        'name' => '%sImplements%s%s',
-        'implements' => createMultiplesInterfaces($type, 1, numberMap()),
+        'name' => '%sExtendable%s%s',
         'type' => $type
     ***REMOVED***;
 
     $invokables[***REMOVED*** = [
-        'name' => '%sImplementsMany%s%s',
+        'name' => '%s%s%s',
+        'type' => $type
+    ***REMOVED***;
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sNamespace%s%s',
+        'type' => $type,
+        'namespace' => '%s'
+    ***REMOVED***;
+
+    //implements
+    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+
+        $invokables[***REMOVED*** = [
+            'name' => '%sImplements%s%s',
+            'implements' => createMultiplesInterfaces($type, 1, numberMap()),
+            'type' => $type
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => '%sImplementsMany%s%s',
+            'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
+            'type' => $type
+        ***REMOVED***;
+    }
+
+
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sExtends%s%s',
+        'extends' => '%s\%sExtendable%s%s',
+        'type' => $type
+    ***REMOVED***;
+
+
+    $invokables[***REMOVED*** = [
+        'name' => '%sFull%s%s',
+        'extends' => '%s\%sExtendable%s%s',
+        'namespace' => '%s',
         'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
         'type' => $type
     ***REMOVED***;
+
+    $config = ['invokables'***REMOVED***;
+
+    if (!in_array($type, ['ValueObject'***REMOVED***)) {
+        $config[***REMOVED*** = 'factories';
+    }
+
+    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+        $config[***REMOVED*** = 'abstract';
+    }
+
+
+    $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat, numberMap()));
+
+    $dependencies = [***REMOVED***;
+
+    //to max dependency based on repeat number. interfaces too.
+    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+
+        $dependencies[***REMOVED*** = [
+            'name' => '%sDep%s%s',
+            'type' => $type,
+            'dependency' => '%s\%sInvok%s'
+        ***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => '%sDeps%s%s',
+            'type' => $type,
+            'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED*** 
+        ***REMOVED***;
+
+
+        $dependencies[***REMOVED*** = [
+            'name' => '%sDepFull%s%s',
+            'extends' => '%s\%sExtendable%s%s',
+            'namespace' => '%s',
+            'implements' => createMultiplesInterfaces($type, 1, numberMap()),
+            'type' => $type,
+            'dependency' => '%s\%sInvok%s'
+        ***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => '%sDepsFull%s%s',
+            'extends' => '%s\%sExtendable%s%s',
+            'namespace' => '%s',
+            'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
+            'type' => $type,
+            'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
+        ***REMOVED***;
+
+        $config = ['factories', 'abstract'***REMOVED***;
+
+
+        $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat, numberMap()));
+
+    }
+    
+
+    output(['src' => $data***REMOVED***, $type);
 }
 
 
-
-$invokables[***REMOVED*** = [
-    'name' => '%sExtends%s%s',
-    'extends' => '%s\%sExtendable%s%s',
-    'type' => $type
-***REMOVED***;
-
-
-$invokables[***REMOVED*** = [
-    'name' => '%sFull%s%s',
-    'extends' => '%s\%sExtendable%s%s',
-    'namespace' => '%s',
-    'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
-    'type' => $type
-***REMOVED***;
-
-$config = ['invokables'***REMOVED***;
-
-if (!in_array($type, ['ValueObject'***REMOVED***)) {
-    $config[***REMOVED*** = 'factories';
+if (empty($argv[1***REMOVED***)) {
+    return;
 }
 
-if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-    $config[***REMOVED*** = 'abstract';
-}
+$string = new GearBase\Util\String\StringService();
 
-
-$data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat, numberMap()));
-
-$dependencies = [***REMOVED***;
-
-//to max dependency based on repeat number. interfaces too.
-if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-
-    $dependencies[***REMOVED*** = [
-        'name' => '%sDep%s%s',
-        'type' => $type,
-        'dependency' => '%s\%sInvok%s'
-    ***REMOVED***;
-
-    $dependencies[***REMOVED*** = [
-        'name' => '%sDeps%s%s',
-        'type' => $type,
-        'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED*** 
-    ***REMOVED***;
-
-
-    $dependencies[***REMOVED*** = [
-        'name' => '%sDepFull%s%s',
-        'extends' => '%s\%sExtendable%s%s',
-        'namespace' => '%s',
-        'implements' => createMultiplesInterfaces($type, 1, numberMap()),
-        'type' => $type,
-        'dependency' => '%s\%sInvok%s'
-    ***REMOVED***;
-
-    $dependencies[***REMOVED*** = [
-        'name' => '%sDepsFull%s%s',
-        'extends' => '%s\%sExtendable%s%s',
-        'namespace' => '%s',
-        'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
-        'type' => $type,
-        'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
-    ***REMOVED***;
-
-    $config = ['factories', 'abstract'***REMOVED***;
-
-
-    $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat, numberMap()));
-
-}
-
-output(['src' => $data***REMOVED***, $type);
-}
+$type = $string->str('class', $argv[1***REMOVED***);
+$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
 
 
 runSrcSuite($type, $repeat);

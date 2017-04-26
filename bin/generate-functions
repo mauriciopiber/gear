@@ -215,7 +215,7 @@ function output($data, $type)
 
     if (in_array($type, srcType())) {    
         $name = 'src';
-        $template = '/src/src-%';
+        $template = '/src/src-%s';
     } elseif (in_array($type, controllerType())) {
         $name = 'controller';
         $template = '/controller/controller-%s';    
@@ -223,11 +223,21 @@ function output($data, $type)
         throw new Exception('Missing '.$type);
     }
     
+    echo "Template and Type $name $template $type"."\n";
     $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors');
-        
-    $template = realpath(sprintf($constructorIntegration.$template, $string->str('url', $type)));
+    $constructorIntegration .= $template;
     
+    echo "Constructor $constructorIntegration"."\n";    
+    
+    $path = sprintf($constructorIntegration, $string->str('url', $type));
+    
+    echo "Path $constructorIntegration"."\n";
+    
+    $template = realpath($path);
+        
     $yaml = Yaml::dump($data);
+
+    $finalPath = sprintf('%s/%s-%s.yml', $template, $name, $string->str('url', $type));
 
     file_put_contents(sprintf('%s/%s-%s.yml', $template, $name, $string->str('url', $type)), $yaml);
 
