@@ -168,7 +168,6 @@ function updateSuperTestFile($superType, $migrations)
 {
     $string = new GearBase\Util\String\StringService();
     
-    //$migName = array_values(array_slice(explode('/', $migration), -1))[0***REMOVED***;
 
     $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
     
@@ -197,9 +196,6 @@ function updateSuperTestFile($superType, $migrations)
     
     file_put_contents($path, $newFile);
         
-    //echo $construct;
-    
-    //var_dump($superType, $migrations);
 
 }
 
@@ -207,9 +203,6 @@ function updateSuperTestFile($superType, $migrations)
 
 function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
-
-    
-    
     $db = [
         'table' => $mvcMinorSuite->getTableName(),
         'user' => $mvcMinorSuite->getUserType(),
@@ -229,23 +222,8 @@ function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorS
     if (!empty($mvcMinorSuite->getTableAssoc())) {
         $src = array_merge($src, createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()));
     }
-    
-    /**
-    
-        $location = new Gear\Integration\Util\Location\Location();
-        $persist = new Gear\Integration\Util\Persist\Persist($location);
-        
-        $code = createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
-        
-        
-        
-        
-    */
        
     return createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
-       
-       
-    //return outputMvc($mvcMinorSuite->getTableName(), ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $mvcMinorSuite->getLocationKey());
 }
 
 function createForeignKeyGearfile($tableId)
