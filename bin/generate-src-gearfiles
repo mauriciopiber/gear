@@ -22,6 +22,9 @@ require __DIR__.'/generate-functions';
 
 function runSrcSuite($type, $repeat)
 {
+    $srcMajor = new Gear\Integration\Suite\Src\SrcMajorSuite();
+    $srcMinor = new Gear\Integration\Suite\Src\SrcMinorSuite($srcMajor, $type, $repeat);
+    
     $data = [***REMOVED***;
 
     if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
@@ -143,7 +146,7 @@ function runSrcSuite($type, $repeat)
     }
     
 
-    createGearfileComponent('src', 'src-%s', $type, ['src' => $data***REMOVED***);
+    createGearfileComponent($srcMinor, ['src' => $data***REMOVED***);
 }
 
 

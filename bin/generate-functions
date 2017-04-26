@@ -170,27 +170,31 @@ function controllerType()
     return ['Action', 'Console'***REMOVED***;
 }
 
-function createGearfileComponent($suite, $minor, $name, $data)
+function createGearfileComponent($suite, $data)
 {
     $string = new StringService();
     
-    $name = $string->str('url', $name);
-
+    $majorSuite = $suite->getMajorSuite();
     
-    $basepath = getSuiteLocation($suite);
+    $basepath = getSuiteLocation($majorSuite::SUITE);
     $basepath .= '/';
-    $basepath .= sprintf($minor, $name);   
+    
+    $basepath .= $suite->getSuitePath();
+    
+    $suiteName = $suite->getSuiteName();
+    
+    $name = $string->str('url', $suiteName);
 
-    $gearfile = sprintf('%s.yml', sprintf($minor, $name));
+    $gearfile = sprintf('%s.yml', $name);
 
     $path =  sprintf('%s/%s', $basepath, $gearfile);
-    
+   
     $yaml = Yaml::dump($data);
 
     file_put_contents($path, $yaml);
 
     echo "Salvo com sucesso"."\n";
-    
+
     return $gearfile;
 }
 
@@ -226,40 +230,4 @@ function outputMvc($tableName, $data, $location)
     echo "Salvo com sucesso"."\n";
     
     return $gearfile;
-}
-
-
-function output($data, $type)
-{
-    $string = new StringService();
-
-    if (in_array($type, srcType())) {    
-        $name = 'src';
-        $template = '/src/src-%s';
-    } elseif (in_array($type, controllerType())) {
-        $name = 'controller';
-        $template = '/controller/controller-%s';    
-    } else {
-        throw new Exception('Missing '.$type);
-    }
-    
-    echo "Template and Type $name $template $type"."\n";
-    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors');
-    $constructorIntegration .= $template;
-    
-    echo "Constructor $constructorIntegration"."\n";    
-    
-    $path = sprintf($constructorIntegration, $string->str('url', $type));
-    
-    echo "Path $constructorIntegration"."\n";
-    
-    $template = realpath($path);
-        
-    $yaml = Yaml::dump($data);
-
-    $finalPath = sprintf('%s/%s-%s.yml', $template, $name, $string->str('url', $type));
-
-    file_put_contents(sprintf('%s/%s-%s.yml', $template, $name, $string->str('url', $type)), $yaml);
-
-    echo "Salvo com sucesso"."\n";
 }

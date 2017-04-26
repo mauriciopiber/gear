@@ -94,4 +94,4 @@ $controller = array_merge(
     createDepSuite()
 );
 
-createGearfileComponent('controller', 'controller-%s', $type, ['src' => $src, 'controller' => $controller***REMOVED***);
+createGearfileComponent('controller', 'controller-%s', 'cotroller-%s', $type, ['src' => $src, 'controller' => $controller***REMOVED***);
