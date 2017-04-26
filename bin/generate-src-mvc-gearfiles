@@ -38,54 +38,76 @@ function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraint
     
     $superType = [***REMOVED***;
     
+    $srcMajorSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite(
+        $suiteColumns,
+        $suiteUserTypes,
+        $suiteConstraints,
+        $suiteTables
+    );
+    
     foreach ($types as $type) {
         
         
         $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite($type);
     
-        $superType[***REMOVED*** = generateSrcMvc($srcMvcMinor);
+        $superType[***REMOVED*** = generateSrcMvc($srcMajorSuite, $srcMvcMinor);
     }
 }
 
 
-function generateSrcMvc(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor) 
-{
+function generateSrcMvc(
+    Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite $srcMvcMajor,
+    Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
+) {
+    //config first
+    //execute the creating later
     
 
-    createSrcMvcGearfile($srcMvcMinor);
+
+    createSrcMvcGearfile($srcMvcMajor, $srcMvcMinor);
     
     if ($srcMvcMinor->getType() == 'Entity') {
-        createSrcMvcMigrationFile($srcMvcMinor);
+        createSrcMvcMigrationFile($srcMvcMajor, $srcMvcMinor);
     }
     
-    createSrcMvcTestFile($srcMvcMinor);
+    createSrcMvcTestFile($srcMvcMajor, $srcMvcMinor);
 }
 
-function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
-{
+function createSrcMvcMigrationFile(
+    Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite $srcMvcMajor,
+    Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
+){
     $resolveNames = createResolveNames();
-    
-    $i = 0;
     
     $migrationsTables = [***REMOVED***;
     
-    foreach ($columns as $column) {
-        foreach ($userTypes as $usertype) {
-            foreach ($constraints as $constraint) {
-                foreach ($tables as $table) {
+    foreach ($srcMvcMajor->getColumns() as $column) {
+        foreach ($srcMvcMajor->getUserTypes() as $usertype) {
+            foreach ($srcMvcMajor->getConstraints() as $constraint) {
+                foreach ($srcMvcMajor->getTableAssocs() as $tables) {
                 
-                    
+                
                     $tableName = sprintf(
                         '%s%s',
                         'SrcMvc',
-                        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $table))
+                        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $tables))
                     );
                     
-                    $srcMvcMinor->setTableName($tableName);
+                    
+                    $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
+                        $srcMvcMinor->getType(),
+                        'src-mvc',
+                        $column, 
+                        $usertype, 
+                        $constraint, 
+                        $tables
+                    );
+                    $srcMvcMinor->setTableName($tableName);    
+                        
+                    
+                    /*
                     
                     
-                    
-                    /**
                     $srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
                         'src-mvc', 
                         $usertype, 
@@ -96,21 +118,26 @@ function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuit
                     );
                     */
                     
-                    //$migrationsTables[$srcMvcSuite->getTableName()***REMOVED*** = createSrcMvcMigrationFile($srcMvcSuite);
+                    $migrationsTables[$srcMvcMinor->getTableName()***REMOVED*** = [***REMOVED***;//createSrcMvcMigrationFile($srcMvcSuite);
                 }
             }
         }
     }
     
-    
+    var_dump($migrationsTables);
 }
 
-function createSrcMvcGearFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
-{
+function createSrcMvcGearFile(
+    Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite $srcMvcMajor,
+    Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
+) {
 
 }
-function createSrcMvcTestFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
-{
+
+function createSrcMvcTestFile(
+    Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite $srcMvcMajor,
+    Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
+) {
     
 }
 

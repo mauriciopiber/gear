@@ -178,7 +178,7 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $mvcMinorSuite->setColumns($columns);
     
     $gearfile = runMvcSuiteGearfile($mvcMinorSuite);
-    $migration = runMvcSuiteMigration($mvcMinorSuite);
+    $migration = createMvcMigrationFile($mvcMinorSuite);
     
     $mvcMinorSuite->setGearFile($gearfile);
     $mvcMinorSuite->setMigrationFile($migration);
@@ -310,14 +310,11 @@ function createForeignKeyMigration($tableId)
     ***REMOVED***;
 }
 
-function runMvcSuiteMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+function createMigrationTable(Gear\Integration\Suite\AbstractMinorSuite $mvcMinorSuite)
 {
     $string = new GearBase\Util\String\StringService();
     $date = null;
     
-    $migrationName = getMigrationName($mvcMinorSuite->getTableName());
-
-    $migration = $mvcMinorSuite->getLocationKey().'/'.$migrationName;
     $unique = false;
     $nullable = false;
 
@@ -337,7 +334,7 @@ function runMvcSuiteMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinor
     $tables = (!empty($mvcMinorSuite->getTableAssoc()) ? [$mvcMinorSuite->getTableAssoc()***REMOVED*** : [***REMOVED***);
     $columns = factoryMigrationColumns($mvcMinorSuite->getColumns());
     
-    $migrationConfig = [
+    return [
         $string->str('uline', $mvcMinorSuite->getTableName()) => [
             'nullable' => $nullable,
             'unique' => $unique,
@@ -345,13 +342,27 @@ function runMvcSuiteMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinor
             'columns' => $columns
         ***REMOVED***
     ***REMOVED***;
+}
+
+function createMvcMigrationFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+{
+    $migrationConfig = [***REMOVED***;
+    $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
     
     if (!empty($mvcMinorSuite->getForeignKeys())) { 
         foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
             $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
         }
-    }    
+    }
+    
+    return createMigrationComponent($mvcMinorSuite, $migrationConfig);    
+}
 
+function createMigrationComponent($mvcMinorSuite, $migrationConfig)
+{
+    $migrationName = getMigrationName($mvcMinorSuite->getTableName());
+
+    $migration = $mvcMinorSuite->getLocationKey().'/'.$migrationName;
     
     $arrayService = new Gear\Util\Vector\ArrayService();
     
@@ -368,6 +379,7 @@ function runMvcSuiteMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinor
     file_put_contents($path, $migrate);
     
     return $migrationName;
+    
 }
  
 //columns

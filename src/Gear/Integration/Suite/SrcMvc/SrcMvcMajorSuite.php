@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Integration\Suite\SrcMvc;
 
-use Gear\Integration\Suite\AbstractMajorSuite;
+use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**
  * PHP Version 5
@@ -12,15 +12,7 @@ use Gear\Integration\Suite\AbstractMajorSuite;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class SrcMvcMajorSuite extends AbstractMajorSuite
+class SrcMvcMajorSuite extends MvcMajorSuite
 {
-    /**
-     * Constructor
-     *
-     * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite
-     */
-    public function __construct()
-    {
-        return $this;
-    }
+
 }

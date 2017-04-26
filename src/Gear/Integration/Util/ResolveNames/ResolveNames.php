@@ -3,6 +3,7 @@ namespace Gear\Integration\Util\ResolveNames;
 
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringService;
+use Gear\Integration\Suite\AbstractMinorSuite;
 
 /**
  * PHP Version 5
@@ -53,6 +54,15 @@ class ResolveNames
         return $this->stringService->str('class', str_replace('mvc-', '', $type));
     }
 
+    public function createTableName(AbstractMinorSuite $suite)
+    {
+
+    }
+
+    public function createLocationKey(AbstractMinorSuite $suite)
+    {
+
+    }
 
     private function createAliase($type, $usertype, $constraint, $tables)
     {
@@ -71,7 +81,7 @@ class ResolveNames
         return $variables;
     }
 
-    private function createTableName($type, $usertype, $constraint, $tables, $stringType)
+    private function format($type, $usertype, $constraint, $tables, $stringType)
     {
         $variables = $this->createAliase($type, $usertype, $constraint, $tables);
 
@@ -84,11 +94,11 @@ class ResolveNames
 
     public function createTableUrl($type, $usertype, $constraint, $tables)
     {
-        return $this->createTableName($type, $usertype, $constraint, $tables, 'url');
+        return $this->format($type, $usertype, $constraint, $tables, 'url');
     }
 
     public function createTableAliase($type, $usertype, $constraint, $tables)
     {
-        return $this->createTableName($type, $usertype, $constraint, $tables, 'class');
+        return $this->format($type, $usertype, $constraint, $tables, 'class');
     }
 }
