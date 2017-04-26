@@ -48,7 +48,7 @@ class ResolveNames
     }
 
 
-    private function getColumnsType($type)
+    public function getColumnsType($type)
     {
         return $this->stringService->str('class', str_replace('mvc-', '', $type));
     }
