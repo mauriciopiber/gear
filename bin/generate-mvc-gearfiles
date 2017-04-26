@@ -144,27 +144,21 @@ function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $mvcMajor = $mvcMinorSuite->getMajorType();
+    
     $usertype = $mvcMinorSuite->getUserType();
     $constraint = $mvcMinorSuite->getConstraints();
     $tables = $mvcMinorSuite->getTableAssoc();
     $column = $mvcMinorSuite->getColumnType();
     
+    
     $resolveNames = createResolveNames();
-    $locationKey = sprintf("%s/%s", $mvcMajor, $column);
+    
+    $columnsSuffix = $resolveNames->createTableUrl($mvcMinorSuite);
+    
 
-    $tableName = sprintf(
-        '%s%s',
-        'Mvc',
-        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $tables))
-    );
+    $mvcMinorSuite->setTableName($resolveNames->createTableName('Mvc', $mvcMinorSuite));
+    $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey('mvc', $mvcMajor, $mvcMinorSuite));
     
-    $locationKey = sprintf(
-        '%s/mvc-%s',
-        $mvcMajor, 
-        implode('-', $resolveNames->createTableUrl($column, $usertype, $constraint, $tables))
-    );
-    
-    $columnsSuffix = $resolveNames->createTableUrl($column, $usertype, $constraint, $tables);
     
     $foreignKey = getForeignKeys($column);
     
@@ -172,8 +166,6 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     
     $columns = getColumns($column, $columnsSuffix);
     
-    
-    $mvcMinorSuite->setTableName($tableName);
     $mvcMinorSuite->setLocationKey($locationKey);
     $mvcMinorSuite->setColumns($columns);
     
