@@ -264,11 +264,9 @@ function generateMvcGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorS
         }
     }
     
-    if (!empty($tables)) {
-        $src = array_merge($src, createForeignKeyGearfile($tables));
+    if (!empty($mvcMinorSuite->getTableAssoc())) {
+        $src = array_merge($src, createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()));
     }
-    
-    var_dump($src);
        
     return outputMvc($mvcMinorSuite->getTableName(), ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $mvcMinorSuite->getLocationKey());
 }
