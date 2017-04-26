@@ -176,9 +176,10 @@ function createGearfileComponent($suite, $data)
     
     $majorSuite = $suite->getMajorSuite();
     
-    $basepath = getSuiteLocation($majorSuite::SUITE);
-    $basepath .= '/';
+    $location = new Gear\Integration\Util\Location\Location();
     
+    $basepath = $location->getSuiteLocation($majorSuite::SUITE);
+    $basepath .= '/';
     $basepath .= $suite->getSuitePath();
     
     $suiteName = $suite->getSuiteName();
@@ -195,39 +196,5 @@ function createGearfileComponent($suite, $data)
 
     echo "Salvo com sucesso"."\n";
 
-    return $gearfile;
-}
-
-function getSuiteLocation($type)
-{
-    return realpath((new Module())->getLocation().sprintf('/../../test/integration/main/constructors/%s', $type));
-}
-
-function getMvcLocation($location)
-{
-    return sprintf(getSuiteLocation('mvc').'/'.$location);
-}
-
-
-function outputMvc($tableName, $data, $location)
-{
-    $string = new StringService();
-
-    $template = getMvcLocation($location);
-    
-    $gearfile = sprintf('%s.yml', $string->str('url', $tableName));
-    
-    $path =  sprintf('%s/%s', $template, $gearfile);
-    
-    if (!is_dir($template)) {
-        mkdir($template);
-    }
-
-    $yaml = Yaml::dump($data);
-
-    file_put_contents($path, $yaml);
-
-    echo "Salvo com sucesso"."\n";
-    
     return $gearfile;
 }

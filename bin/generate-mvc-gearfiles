@@ -190,6 +190,10 @@ function updateSuperTestFile($superType, $migrations)
     $newFile = str_replace('construct+=("")', $construct, $testFile);
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $superType).'$2', $newFile);
     
+    $location = new Gear\Integration\Util\Location\Location();
+    
+    $template = sprintf($locagion->getSuiteLocation($userType::SUITE).'/'.$userType->getLocationKey());
+        
     $template = getMvcLocation($superType);
     
     $path =  sprintf('%s/%s', $template, 'test.sh');
@@ -257,6 +261,8 @@ function updateTestFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $mvcMinorSuite->getTableName()).'$2', $newFile);
     
+    $location = new Gear\Integration\Util\Location\Location();
+        
     $template = getMvcLocation($mvcMinorSuite->getLocationKey());
     
     $path =  sprintf('%s/%s', $template, 'test.sh');
@@ -343,6 +349,8 @@ function createMigrationComponent($mvcMinorSuite, $migrationConfig)
     $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
     $migrate = preg_replace('#MigrationName#', $mvcMinorSuite->getTableName(), $migrate);
     
+    $location = new Gear\Integration\Util\Location\Location();
+        
     $template = getMvcLocation($mvcMinorSuite->getLocationKey());
     
     $path =  sprintf('%s/%s', $template, $migrationName);

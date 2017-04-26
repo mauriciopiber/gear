@@ -881,6 +881,20 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "Location",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Util\\Location",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
