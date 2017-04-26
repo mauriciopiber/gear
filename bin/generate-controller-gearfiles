@@ -18,7 +18,7 @@ if (php_sapi_name() === 'cli-server') {
 require __DIR__.'/generate-functions';
 
 
-function createPrepareController($type, $repeat, $numberMap)
+function createPrepareController($type, $repeat)
 {
     $implements = [***REMOVED***;
     $implements[***REMOVED*** = [
@@ -26,7 +26,7 @@ function createPrepareController($type, $repeat, $numberMap)
         'type' => 'Interface'
     ***REMOVED***;
 
-    $interfaces = generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, $numberMap);
+    $interfaces = generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, numberMap());
 
 
     $invokables = [***REMOVED***;
@@ -36,13 +36,13 @@ function createPrepareController($type, $repeat, $numberMap)
         'type' => $type
     ***REMOVED***;
 
-    $extends = generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, $numberMap);
+    $extends = generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, numberMap());
 
 
     return array_merge($interfaces, $extends);
 }
 
-function createSuite($type, $repeat, $numberMap)
+function createSuite($type, $repeat)
 {
 
     $invokables[***REMOVED*** = [
@@ -58,13 +58,13 @@ function createSuite($type, $repeat, $numberMap)
 
     $invokables[***REMOVED*** = [
         'name' => '%sImplements%s%s',
-        'implements' => createMultiplesInterfaces($type, 1, $numberMap),
+        'implements' => createMultiplesInterfaces($type, 1, numberMap()),
         'type' => $type
     ***REMOVED***;
 
     $invokables[***REMOVED*** = [
         'name' => '%sImplementsMany%s%s',
-        'implements' => createMultiplesInterfaces($type, $repeat, $numberMap),
+        'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
         'type' => $type
     ***REMOVED***;
 
@@ -74,7 +74,7 @@ function createSuite($type, $repeat, $numberMap)
         'type' => $type
     ***REMOVED***;
 
-    return generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, $numberMap);
+    return generateGearfiles($invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat, numberMap());
 }
 
 function createDepSuite()
@@ -85,13 +85,13 @@ function createDepSuite()
 
 $src = array_merge(
     [***REMOVED***,
-    createPrepareController($type, $repeat, $numberMap)
+    createPrepareController($type, $repeat, numberMap())
 );
 
 $controller = array_merge(
     [***REMOVED***,
-    createSuite($type, $repeat, $numberMap),
+    createSuite($type, $repeat, numberMap()),
     createDepSuite()
 );
 
-output(['src' => $src, 'controller' => $controller***REMOVED***, $type);
+createGearfileComponent('controller', 'controller-%s', $type, ['src' => $src, 'controller' => $controller***REMOVED***);

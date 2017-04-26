@@ -22,7 +22,6 @@ require __DIR__.'/generate-functions';
 
 function runSrcSuite($type, $repeat)
 {
-var_dump($repeat);
     $data = [***REMOVED***;
 
     if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
@@ -144,8 +143,10 @@ var_dump($repeat);
     }
     
 
-    output(['src' => $data***REMOVED***, $type);
+    createGearfileComponent('src', 'src-%s', $type, ['src' => $data***REMOVED***);
 }
+
+
 
 
 if (empty($argv[1***REMOVED***)) {

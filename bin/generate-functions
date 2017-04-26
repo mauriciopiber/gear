@@ -170,9 +170,38 @@ function controllerType()
     return ['Action', 'Console'***REMOVED***;
 }
 
-function createGearfileComponent($suite, $data)
+function createGearfileComponent($suite, $minor, $name, $data)
 {
+    $string = new StringService();
     
+    $name = $string->str('url', $name);
+
+    
+    $basepath = getSuiteLocation($suite);
+    $basepath .= '/';
+    $basepath .= sprintf($minor, $name);   
+
+    $gearfile = sprintf('%s.yml', sprintf($minor, $name));
+
+    $path =  sprintf('%s/%s', $basepath, $gearfile);
+    
+    $yaml = Yaml::dump($data);
+
+    file_put_contents($path, $yaml);
+
+    echo "Salvo com sucesso"."\n";
+    
+    return $gearfile;
+}
+
+function getSuiteLocation($type)
+{
+    return realpath((new Module())->getLocation().sprintf('/../../test/integration/main/constructors/%s', $type));
+}
+
+function getMvcLocation($location)
+{
+    return sprintf(getSuiteLocation('mvc').'/'.$location);
 }
 
 
@@ -199,15 +228,6 @@ function outputMvc($tableName, $data, $location)
     return $gearfile;
 }
 
-function getSuiteLocation($type)
-{
-    return realpath((new Module())->getLocation().sprintf('/../../test/integration/main/constructors/%s', $type));
-}
-
-function getMvcLocation($location)
-{
-    return sprintf(getSuiteLocation('mvc').'/'.$location);
-}
 
 function output($data, $type)
 {
