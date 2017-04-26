@@ -14,6 +14,8 @@ use Gear\Integration\Suite\AbstractMajorSuite;
  */
 class MvcMajorSuite extends AbstractMajorSuite
 {
+    const SUITE = 'mvc';
+
     public $columns;
 
     public $userType;

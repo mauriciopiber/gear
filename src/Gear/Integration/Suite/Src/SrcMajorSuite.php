@@ -14,6 +14,8 @@ use Gear\Integration\Suite\AbstractMajorSuite;
  */
 class SrcMajorSuite extends AbstractMajorSuite
 {
+    const SUITE = 'src';
+
     protected $srcMinorSuite;
 
     /**

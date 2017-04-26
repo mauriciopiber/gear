@@ -26,7 +26,8 @@ function createResolveNames()
 }
 
 
-$numberMap = [
+function numberMap() {
+    return [
     "Zero",
     "One",
     "Two",
@@ -39,6 +40,8 @@ $numberMap = [
     "Nine",
     "Teen"
 ***REMOVED***;
+
+}
 
 if (empty($argv[1***REMOVED***)) {
     return;

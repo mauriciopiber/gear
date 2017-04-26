@@ -24,7 +24,11 @@
         'Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite',
         'Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite',
         'Gear\Integration\Suite\Mvc\MvcMinorSuite' => 'Gear\Integration\Suite\Mvc\MvcMinorSuite',
-        'Gear\Integration\Suite\Mvc\MvcMajorSuite' => 'Gear\Integration\Suite\Mvc\MvcMajorSuite'
+        'Gear\Integration\Suite\Mvc\MvcMajorSuite' => 'Gear\Integration\Suite\Mvc\MvcMajorSuite',
+        'Gear\Integration\Suite\Controller\ControllerMinorSuite' => 'Gear\Integration\Suite\Controller\ControllerMinorSuite',
+        'Gear\Integration\Suite\Controller\ControllerMajorSuite' => 'Gear\Integration\Suite\Controller\ControllerMajorSuite',
+        'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite',
+        'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
