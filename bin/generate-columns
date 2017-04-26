@@ -82,32 +82,17 @@ function addSuffixToColumns($columns, $columnSuffix)
     return $fixed;
 }
 
-/**
- * Gearfile
- */
-function factoryGearfileColumns($columnType, $columnSuffix = '')
+function getColumns($columnType, $columnSuffix)
 {
     $columns = factoryColumns($columnType);
     $columns = addSuffixToColumns($columns, $columnSuffix);
-    $columnsGearfile = extractGearfileColumns($columns);
-    return $columnsGearfile;
+    return $columns;
 }
 
 /**
- * Migration
+ * Gearfile
  */
-function factoryMigrationColumns($columnType, $columnSuffix = '')
-{
-    $columns = factoryColumns($columnType);
-    $columns = addSuffixToColumns($columns, $columnSuffix);    
-    $columnsGearfile = extractMigrationsColumns($columns);
-    return $columnsGearfile;
-}
-
-/**
- * Fix Gearfile - Gear\Integration\Component\Gearfile
- */ 
-function extractGearfileColumns($columns)
+function factoryGearfileColumns($columns)
 {
     $gearfileColumns = [***REMOVED***;
     foreach ($columns as $columnName => $columnOptions) {
@@ -119,9 +104,9 @@ function extractGearfileColumns($columns)
 }
 
 /**
- * Fix Migration
+ * Migration
  */
-function extractMigrationsColumns($columns)
+function factoryMigrationColumns($columns)
 {
     $gearfileColumns = [***REMOVED***;
     foreach ($columns as $columnName => $columnOptions) {

@@ -1,3 +1,0 @@
-db:
-    - { table: MvcVarchar, user: all, namespace: MvcVarchar, service: factories, columns: { clm_vrc_pav_vrc: password-verify, clm_vrc_upi_vrc: upload-image, clm_vrc_url_vrc: url, clm_vrc_uni_vrc: unique-id, clm_vrc_tlp_vrc: telephone, clm_vrc_eml_vrc: email } }
-src: {  }

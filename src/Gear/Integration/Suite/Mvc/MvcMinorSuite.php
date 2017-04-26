@@ -31,6 +31,14 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     public $majorType;
 
+    public $locationKey;
+
+    //the real one
+    public $columns;
+
+    public $foreignKeys;
+
+
     /**
      * Constructor
      *
@@ -39,10 +47,48 @@ class MvcMinorSuite extends AbstractMinorSuite
     public function __construct($majorType, $columnType, $userType, $constraints, $tableAssoc)
     {
         $this->majorType = $majorType;
-        $this->columnType = $columnType;
+        $this->setColumnType($columnType);
         $this->userType = $userType;
         $this->constraints = $constraints;
         $this->tableAssoc = $tableAssoc;
+        return $this;
+    }
+
+    public function setForeignKeys($foreignKeys)
+    {
+        $this->foreignKeys = $foreignKeys;
+        return $this;
+    }
+
+    public function getForeignKeys()
+    {
+        return $this->foreignKeys;
+    }
+
+    public function setColumns(array $columns)
+    {
+        $this->columns = $columns;
+        return $this;
+    }
+
+    public function setColumnType($columnType)
+    {
+        $this->columnType = ucfirst(str_replace('mvc-', '', $columnType));
+    }
+
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    public function getLocationKey()
+    {
+        return $this->locationKey;
+    }
+
+    public function setLocationKey($locationKey)
+    {
+        $this->locationKey = $locationKey;
         return $this;
     }
 
