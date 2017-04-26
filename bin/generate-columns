@@ -1,6 +1,19 @@
 <?php
-require 'generate-columns-names';
 
+function getForeignKeys($columnType)
+{
+    $columns = factoryColumns($columnType);
+    
+    $foreignKeys = [***REMOVED***;
+    
+    foreach ($columns as $name => $config) {
+        if (isset($config['properties'***REMOVED***) && in_array('foreignKey', $config['properties'***REMOVED***)) {
+            $foreignKeys[***REMOVED*** = $name;
+        }
+    }
+    
+    return empty($foreignKeys) ? null : $foreignKeys;
+}
 
 function factoryColumns($columnType) 
 {
