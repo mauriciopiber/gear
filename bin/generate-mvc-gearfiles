@@ -150,12 +150,9 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $columnsSuffix = $resolveNames->createTableUrl($mvcMinorSuite);
 
     $mvcMinorSuite->setTableName($resolveNames->createTableName('Mvc', $mvcMinorSuite));
-    
     $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
-    
     $mvcMinorSuite->setForeignKeys(getForeignKeys($mvcMinorSuite->getColumnType()));
     $mvcMinorSuite->setColumns(getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
-    
     $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
     $mvcMinorSuite->setMigrationFile(createMvcMigrationFile($mvcMinorSuite));
     
