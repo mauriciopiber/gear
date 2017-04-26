@@ -145,35 +145,19 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $mvcMajor = $mvcMinorSuite->getMajorType();
     
-    $usertype = $mvcMinorSuite->getUserType();
-    $constraint = $mvcMinorSuite->getConstraints();
-    $tables = $mvcMinorSuite->getTableAssoc();
-    $column = $mvcMinorSuite->getColumnType();
-    
-    
     $resolveNames = createResolveNames();
     
     $columnsSuffix = $resolveNames->createTableUrl($mvcMinorSuite);
-    
 
     $mvcMinorSuite->setTableName($resolveNames->createTableName('Mvc', $mvcMinorSuite));
-    $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey('mvc', $mvcMajor, $mvcMinorSuite));
     
+    $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
     
-    $foreignKey = getForeignKeys($column);
+    $mvcMinorSuite->setForeignKeys(getForeignKeys($mvcMinorSuite->getColumnType()));
+    $mvcMinorSuite->setColumns(getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
     
-    $mvcMinorSuite->setForeignKeys($foreignKey);
-    
-    $columns = getColumns($column, $columnsSuffix);
-    
-    $mvcMinorSuite->setLocationKey($locationKey);
-    $mvcMinorSuite->setColumns($columns);
-    
-    $gearfile = runMvcSuiteGearfile($mvcMinorSuite);
-    $migration = createMvcMigrationFile($mvcMinorSuite);
-    
-    $mvcMinorSuite->setGearFile($gearfile);
-    $mvcMinorSuite->setMigrationFile($migration);
+    $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
+    $mvcMinorSuite->setMigrationFile(createMvcMigrationFile($mvcMinorSuite));
     
     updateTestFile($mvcMinorSuite);
 
