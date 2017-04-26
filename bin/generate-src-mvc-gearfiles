@@ -77,6 +77,16 @@ function createSrcMvcMigrationFile(
     Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite $srcMvcMajor,
     Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
 ){
+
+    $migrationConfig = [***REMOVED***;
+    $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
+    
+    if (!empty($mvcMinorSuite->getForeignKeys())) { 
+        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
+            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
+        }
+    }
+    
     $resolveNames = createResolveNames();
     
     $migrationsTables = [***REMOVED***;
@@ -103,14 +113,24 @@ function createSrcMvcMigrationFile(
                     $srcMvcMinor->setForeignKeys(getForeignKeys($srcMvcMinor->getColumnType()));
                     $srcMvcMinor->setColumns(getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));    
                     
+     
+                     $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
+    
+                    if (!empty($mvcMinorSuite->getForeignKeys())) { 
+                        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
+                            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
+                        }
+                    }               
                     
-                    $migrationsTables[$srcMvcMinor->getTableName()***REMOVED*** = [***REMOVED***;//createSrcMvcMigrationFile($srcMvcSuite);
+                    
                 }
             }
         }
     }
-    
     var_dump($migrationsTables);
+   
+    
+    //return createMigrationComponent($mvcMinorSuite, $migrationConfig);
 }
 
 function createSrcMvcGearFile(
