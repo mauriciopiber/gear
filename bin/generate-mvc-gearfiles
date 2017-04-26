@@ -144,6 +144,8 @@ function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 
 function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
+    $columnUtil = new Gear\Integration\Util\Columns\Columns();
+    
     $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
     
     $resolveNames = createResolveNames();
@@ -152,8 +154,8 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 
     $mvcMinorSuite->setTableName($resolveNames->createTableName('Mvc', $mvcMinorSuite));
     $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
-    $mvcMinorSuite->setForeignKeys(getForeignKeys($mvcMinorSuite->getColumnType()));
-    $mvcMinorSuite->setColumns(getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
+    $mvcMinorSuite->setForeignKeys($columnUtil->getForeignKeys($mvcMinorSuite->getColumnType()));
+    $mvcMinorSuite->setColumns($columnUtil->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
     $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
     $mvcMinorSuite->setMigrationFile(createMvcMigrationFile($mvcMinorSuite));
     

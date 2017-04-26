@@ -29,7 +29,8 @@
         'Gear\Integration\Suite\Controller\ControllerMajorSuite' => 'Gear\Integration\Suite\Controller\ControllerMajorSuite',
         'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite',
         'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite',
-        'Gear\Integration\Util\Location\Location' => 'Gear\Integration\Util\Location\Location'
+        'Gear\Integration\Util\Location\Location' => 'Gear\Integration\Util\Location\Location',
+        'Gear\Integration\Util\Columns\Columns' => 'Gear\Integration\Util\Columns\Columns'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
@@ -67,7 +68,8 @@
         'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
         'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory',
         'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',
-        'Gear\Integration\Util\ResolveNames\ResolveNames' => 'Gear\Integration\Util\ResolveNames\ResolveNamesFactory'
+        'Gear\Integration\Util\ResolveNames\ResolveNames' => 'Gear\Integration\Util\ResolveNames\ResolveNamesFactory',
+        'Gear\Integration\Util\Persist\Persist' => 'Gear\Integration\Util\Persist\PersistFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false
