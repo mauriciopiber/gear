@@ -1,0 +1,21 @@
+src:
+  2: 
+    name: ControllerMinorSuite
+    type: ValueObject
+    namespace: Integration\Suite\Controller
+    extends: Integration\Suite\AbstractMinorSuite
+  3: 
+    name: ControllerMajorSuite
+    type: ValueObject
+    namespace: Integration\Suite\Controller
+    extends: Integration\Suite\AbstractMajorSuite
+  4: 
+    name: ControllerMvcMinorSuite
+    type: ValueObject
+    namespace: Integration\Suite\ControllerSrc
+    extends: Integration\Suite\Mvc\MvcMinorSuite
+  5: 
+    name: ControllerMvcMajorSuite
+    type: ValueObject
+    namespace: Integration\Suite\ControllerSrc
+    extends: Integration\Suite\Mvc\MvcMajorSuite    

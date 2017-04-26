@@ -14,5 +14,5 @@ use Gear\Integration\Suite\Mvc\MvcMajorSuite;
  */
 class SrcMvcMajorSuite extends MvcMajorSuite
 {
-
+    const SUITE = 'src-mvc';
 }

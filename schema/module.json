@@ -825,6 +825,62 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ControllerMinorSuite",
+                "type": "ValueObject",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Controller",
+                "extends": "Integration\\Suite\\AbstractMinorSuite",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerMajorSuite",
+                "type": "ValueObject",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Controller",
+                "extends": "Integration\\Suite\\AbstractMajorSuite",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerMvcMinorSuite",
+                "type": "ValueObject",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\ControllerSrc",
+                "extends": "Integration\\Suite\\Mvc\\MvcMinorSuite",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerMvcMajorSuite",
+                "type": "ValueObject",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\ControllerSrc",
+                "extends": "Integration\\Suite\\Mvc\\MvcMajorSuite",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
