@@ -204,6 +204,8 @@ function updateSuperTestFile($superType, $migrations)
 
 function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
+
+    
     
     $db = [
         'table' => $mvcMinorSuite->getTableName(),
@@ -224,6 +226,18 @@ function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorS
     if (!empty($mvcMinorSuite->getTableAssoc())) {
         $src = array_merge($src, createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()));
     }
+    
+    /**
+    
+        $location = new Gear\Integration\Util\Location\Location();
+        $persist = new Gear\Integration\Util\Persist\Persist($location);
+        
+        $code = createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
+        
+        
+        
+        
+    */
        
     return outputMvc($mvcMinorSuite->getTableName(), ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $mvcMinorSuite->getLocationKey());
 }

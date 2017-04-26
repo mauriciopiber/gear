@@ -167,6 +167,11 @@ function controllerType()
     return ['Action', 'Console'***REMOVED***;
 }
 
+function createGearfileComponent($suite, $data)
+{
+    
+}
+
 
 function outputMvc($tableName, $data, $location)
 {
@@ -191,12 +196,15 @@ function outputMvc($tableName, $data, $location)
     return $gearfile;
 }
 
-function getMvcLocation($location)
+function getSuiteLocation($type)
 {
-    $constructorIntegration = realpath((new Module())->getLocation().'/../../test/integration/main/constructors/mvc');
-    return sprintf($constructorIntegration.'/'.$location);
+    return realpath((new Module())->getLocation().sprintf('/../../test/integration/main/constructors/%s', $type));
 }
 
+function getMvcLocation($location)
+{
+    return sprintf(getSuiteLocation('mvc').'/'.$location);
+}
 
 function output($data, $type)
 {

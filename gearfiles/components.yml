@@ -1,22 +1,9 @@
-src:
+src-temp:
   0:
     name: ResolveColumns
     type: Service
-    namespace: Integration\Component\Columns
-    
-
+    namespace: Integration\Util\Columns
   1:
-    name: GearFile
-    type: Service
-    namespace: Integration\Component\GearFile
-    service: factories
-    dependency: 
-      0: 'Integration\Util\Persist\Persist'    
-      1: 
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String                        
-    
-  2:
     name: MigrationFile
     type: Service
     namespace: Integration\Component\MigrationFile
@@ -25,16 +12,51 @@ src:
       0: 'Integration\Util\Persist\Persist'    
       1: 
         class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String                        
-    
-  3:
-    name: TestFile
+        aliase: GearBase\Util\String
+  2:
+    name: GearFile
     type: Service
-    namespace: Integration\Component\TestFile
-    service: factories        
+    namespace: Integration\Component\GearFile
+    service: factories
     dependency: 
       0: 'Integration\Util\Persist\Persist'    
       1: 
         class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String                        
+        aliase: GearBase\Util\String                   
+
+src:
+  3:
+    name: Location
+    type: Service
+    namespace: Integration\Util\Location      
+  2:
+    name: Persist
+    type: Service
+    namespace: Integration\Util\Persist
+    service: factories
+    dependency: 
+      0: 'Integration\Util\Location\Location'                         
+
+
+#  1:
+#    name: GearFile
+#    type: Service
+#    namespace: Integration\Component\GearFile
+#    service: factories
+#    dependency: 
+#      0: 'Integration\Util\Persist\Persist'    
+##      1: 
+#        class: \GearBase\Util\String\StringService
+#        aliase: GearBase\Util\String                        
+        
+#  3:
+#    name: TestFile
+#    type: Service
+#    namespace: Integration\Component\TestFile
+#    service: factories        
+#    dependency: 
+#      0: 'Integration\Util\Persist\Persist'    
+#      1: 
+#        class: \GearBase\Util\String\StringService
+#        aliase: GearBase\Util\String                        
       
