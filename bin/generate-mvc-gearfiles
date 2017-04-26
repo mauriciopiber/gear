@@ -254,12 +254,8 @@ function updateTestFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $mvcMinorSuite->getTableName()).'$2', $newFile);
     
     $location = new Gear\Integration\Util\Location\Location();
-    $mvcMajorSuite = $mvcMinorSuite->getMajorSuite(); 
-    $template = $location->getLocation($mvcMajorSuite::SUITE).'/'.$mvcMinorSuite->getLocationKey();
-    
-    $path =  sprintf('%s/%s', $template, 'test.sh');
-    
-    file_put_contents($path, $newFile);
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+    $persist->save($mvcMinorSuite, 'test.sh', $newFile);
 }
 
 function createForeignKeyMigration($tableId)
@@ -342,16 +338,10 @@ function createMigrationComponent($mvcMinorSuite, $migrationConfig)
     $migrate = preg_replace('#MigrationName#', $mvcMinorSuite->getTableName(), $migrate);
     
     $location = new Gear\Integration\Util\Location\Location();
-    
-    $mvcMajorSuite = $mvcMinorSuite->getMajorSuite(); 
-    $template = $location->getLocation($mvcMajorSuite::SUITE).'/'.$mvcMinorSuite->getLocationKey();
-    
-    $path =  sprintf('%s/%s', $template, $migrationName);
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+    $persist->save($mvcMinorSuite, $migrationName, $migrate);
 
-    file_put_contents($path, $migrate);
-    
-    return $migrationName;
-    
+    return $migrationName;    
 }
  
 //columns

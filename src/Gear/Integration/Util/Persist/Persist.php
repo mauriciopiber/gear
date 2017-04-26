@@ -42,7 +42,15 @@ class Persist
 
     public function saveMinor(AbstractMinorSuite $suite, $name, $data)
     {
+        if (empty($suite->getLocationKey())) {
+            throw new \Exception('Location key not found');
+        }
+        $majorSuite = $suite->getMajorSuite();
+        $template = $this->location->getLocation($majorSuite::SUITE).'/'.$suite->getLocationKey();
 
+        $path =  sprintf('%s/%s', $template, $name);
+
+        return file_put_contents($path, $data);
     }
 
     public function save($suite, $name, $data)

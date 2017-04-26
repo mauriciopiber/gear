@@ -96,6 +96,6 @@ $controller = array_merge(
 
 $majorSuite = new Gear\Integration\Suite\Controller\ControllerMajorSuite();
 $minorSuite = new Gear\Integration\Suite\Controller\ControllerMinorSuite($majorSuite, $type, $repeat);
-
+$minorSuite->setLocationKey(sprintf('controller-%s', strtolower($minorSuite->getType())));
 
 createGearfileComponent($minorSuite, ['src' => $src, 'controller' => $controller***REMOVED***);

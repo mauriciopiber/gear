@@ -174,27 +174,18 @@ function createGearfileComponent($suite, $data)
 {
     $string = new StringService();
     
-    $majorSuite = $suite->getMajorSuite();
-    
-    $location = new Gear\Integration\Util\Location\Location();
-    
-    $basepath = $location->getLocation($majorSuite::SUITE);
-    $basepath .= '/';
-    $basepath .= $suite->getSuitePath();
-    
     $suiteName = $suite->getSuiteName();
     
     $name = $string->str('url', $suiteName);
 
     $gearfile = sprintf('%s.yml', $name);
-
-    $path =  sprintf('%s/%s', $basepath, $gearfile);
-   
+    
     $yaml = Yaml::dump($data);
+    
+    $location = new Gear\Integration\Util\Location\Location();
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+    $persist->save($suite, $gearfile, $yaml);
 
-    file_put_contents($path, $yaml);
-
-    echo "Salvo com sucesso"."\n";
-
+    echo "Criado com sucesso"."\n";
     return $gearfile;
 }

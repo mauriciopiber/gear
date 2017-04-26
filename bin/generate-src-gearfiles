@@ -145,6 +145,7 @@ function runSrcSuite($type, $repeat)
 
     }
     
+    $srcMinor->setLocationKey(sprintf('src-%s', strtolower($srcMinor->getType())));
 
     createGearfileComponent($srcMinor, ['src' => $data***REMOVED***);
 }
