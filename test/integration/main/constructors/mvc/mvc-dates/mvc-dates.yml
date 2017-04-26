@@ -1,3 +1,0 @@
-db:
-    - { table: MvcDates, user: all, namespace: MvcDates, service: factories, columns: { clm_dtt_pt_dts: datetime-pt-br, clm_dte_pt_dts: date-pt-br } }
-src: {  }

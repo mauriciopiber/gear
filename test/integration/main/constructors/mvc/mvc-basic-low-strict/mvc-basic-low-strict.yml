@@ -1,3 +1,0 @@
-db:
-    - { table: MvcBasicLowStrict, user: low-strict, namespace: MvcBasicLowStrict, service: factories, columns: {  } }
-src: {  }

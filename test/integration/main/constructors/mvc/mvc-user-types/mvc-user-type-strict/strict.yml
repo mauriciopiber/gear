@@ -1,8 +1,0 @@
-modules: MvcVarchar
-
-db:
-  2:
-    table: UserTypeStrict
-    namespace: UserTypeStrict
-    service: factories
-    user: strict

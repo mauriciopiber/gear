@@ -1,5 +1,3 @@
 db:
     - { table: MvcBasicUploadImage, user: all, namespace: MvcBasicUploadImage, service: factories, columns: {  } }
-src:
-    - { name: UploadImage, type: Entity, db: UploadImage }
-    - { name: UploadImageFixture, type: Fixture, db: UploadImage }
+src: {  }

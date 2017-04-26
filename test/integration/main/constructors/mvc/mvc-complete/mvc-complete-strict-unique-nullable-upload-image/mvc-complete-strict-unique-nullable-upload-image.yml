@@ -3,5 +3,3 @@ db:
 src:
     - { name: ClmIntFrk, type: Entity, db: ClmIntFrk }
     - { name: ClmIntFrkFixture, type: Fixture, db: ClmIntFrk }
-    - { name: UploadImage, type: Entity, db: UploadImage }
-    - { name: UploadImageFixture, type: Fixture, db: UploadImage }

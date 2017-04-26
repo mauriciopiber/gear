@@ -87,7 +87,7 @@ function listAvailableMvc()
 }
 */
 
-function getMigrationName($date, $name)
+function getMigrationName($name)
 {
     $string = new GearBase\Util\String\StringService();
     $name = $string->str('uline', $name);
@@ -162,9 +162,9 @@ function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite
     $tables = $mvcMinorSuite->getTableAssoc();
     $column = $mvcMinorSuite->getColumnType();
     
-    
     $resolveNames = createResolveNames();
     $locationKey = sprintf("%s/%s", $mvcMajor, $column);
+    
     
     $tableName = sprintf(
         '%s%s',
@@ -177,17 +177,29 @@ function generateMvcTest(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite
         $mvcMajor, 
         implode('-', $resolveNames->createTableUrl($column, $usertype, $constraint, $tables))
     );
-                    
-    return  generateTest(
-        $tableName, 
-        $column, 
-        $resolveNames->getColumnsType($column), 
-        $usertype, 
-        $constraint, 
-        $tables, 
-        $resolveNames->createTableUrl($column, $usertype, $constraint, $tables), 
-        $locationKey
-    );
+    
+    $columnsSuffix = $resolveNames->createTableUrl($column, $usertype, $constraint, $tables);
+    
+    $foreignKey = getForeignKeys($column);
+    
+    $mvcMinorSuite->setForeignKeys($foreignKey);
+    
+    $columns = getColumns($column, $columnsSuffix);
+    
+    
+    $mvcMinorSuite->setTableName($tableName);
+    $mvcMinorSuite->setLocationKey($locationKey);
+    $mvcMinorSuite->setColumns($columns);
+    
+    $gearfile = generateMvcGearfile($mvcMinorSuite);
+    $migration = generateMvcMigration($mvcMinorSuite);
+    //updateTestFile($mvcMinorSuite);
+
+    $config = [***REMOVED***;    
+    $config['key'***REMOVED*** = $locationKey;
+    $config['gearfile'***REMOVED*** = $gearfile;
+    $config['migration'***REMOVED*** = $migration;
+    return $config;
 }
 
 function updateSuperTestFile($superType, $migrations)
@@ -231,37 +243,23 @@ function updateSuperTestFile($superType, $migrations)
 
 }
 
-function generateTest($tableName, $type, $columnType, $usertype, $constraint, $tables, array $columnSuffix, $locationKey)
+
+
+function generateMvcGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
-    $config = [***REMOVED***;
-    $gearfile = generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $tables, $columnSuffix, $locationKey);
-    $migration = generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $columnSuffix, $locationKey);
-    updateTestFile($tableName, $gearfile, $migration, $locationKey);
     
-    $config['key'***REMOVED*** = $locationKey;
-    $config['gearfile'***REMOVED*** = $gearfile;
-    $config['migration'***REMOVED*** = $migration;
-    return $config;
-}
-
-
-function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constraint, $tables, $columnSuffix, $location)
-{
     $db = [
-        'table' => $tableName,
-        'user' => $usertype,
-        'namespace' => $tableName,
+        'table' => $mvcMinorSuite->getTableName(),
+        'user' => $mvcMinorSuite->getUserType(),
+        'namespace' => $mvcMinorSuite->getTableName(),
         'service' => 'factories',
-        'columns' => factoryGearfileColumns($columnType, $columnSuffix)
+        'columns' => factoryGearfileColumns($mvcMinorSuite->getColumns())
     ***REMOVED***;
     
-
     $src = [***REMOVED***;
     
-    if (($foreignKeys = getForeignKeys($columnType)) !== null) {
-    
-        foreach ($foreignKeys as $foreignKey) { 
-        
+    if (!empty($mvcMinorSuite->getForeignKeys())) { 
+        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) { 
             $src = array_merge($src, createForeignKeyGearfile($foreignKey));
         }
     }
@@ -269,8 +267,10 @@ function generateMvcGearfile($tableName, $type, $columnType, $usertype, $constra
     if (!empty($tables)) {
         $src = array_merge($src, createForeignKeyGearfile($tables));
     }
+    
+    var_dump($src);
        
-    return outputMvc($tableName, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $location);
+    return outputMvc($mvcMinorSuite->getTableName(), ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***, $mvcMinorSuite->getLocationKey());
 }
 
 function createForeignKeyGearfile($tableId)
@@ -345,21 +345,19 @@ function createForeignKeyMigration($tableId)
     ***REMOVED***;
 }
 
-function generateMvcMigration($tableName, $type, $columnType, $constraint, $tables, $columnSuffix, $location)
+function generateMvcMigration(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $string = new GearBase\Util\String\StringService();
     $date = null;
     
-    $migrationName = getMigrationName($date, $tableName);
+    $migrationName = getMigrationName($mvcMinorSuite->getTableName());
 
-    //sleep(1.5);
-    
-    $migration = "$location/".$migrationName;
+    $migration = $mvcMinorSuite->getLocationKey().'/'.$migrationName;
     $unique = false;
     $nullable = false;
 
-    if (is_array($constraint)) {
-        foreach($constraint as $const) {
+    if (is_array($mvcMinorSuite->getConstraints())) {
+        foreach($mvcMinorSuite->getConstraints() as $const) {
         
             if ($const == 'nullable') {
                 $nullable = true;
@@ -371,22 +369,20 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
         }
     }
    
-    $tables = (!empty($tables) ? [$tables***REMOVED*** : [***REMOVED***);
-    $columns = factoryMigrationColumns($columnType, $columnSuffix);
+    $tables = (!empty($mvcMinorSuite->getTableAssoc()) ? [$mvcMinorSuite->getTableAssoc()***REMOVED*** : [***REMOVED***);
+    $columns = factoryMigrationColumns($mvcMinorSuite->getColumns());
     
     $migrationConfig = [
-        $string->str('uline', $tableName) => [
+        $string->str('uline', $mvcMinorSuite->getTableName()) => [
             'nullable' => $nullable,
             'unique' => $unique,
             'referenced_assoc' => $tables,
             'columns' => $columns
         ***REMOVED***
     ***REMOVED***;
-
-    if (($foreignKeys = getForeignKeys($columnType)) !== null) {
-        
-        foreach ($foreignKeys as $foreignKey) { 
-        
+    
+    if (!empty($mvcMinorSuite->getForeignKeys())) { 
+        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
             $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
         }
     }    
@@ -398,9 +394,9 @@ function generateMvcMigration($tableName, $type, $columnType, $constraint, $tabl
     
     $tables = '    const TABLES = '.$arrayService->varExport54($migrationConfig, '    ').';';
     $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-    $migrate = preg_replace('#MigrationName#', $tableName, $migrate);
+    $migrate = preg_replace('#MigrationName#', $mvcMinorSuite->getTableName(), $migrate);
     
-    $template = getMvcLocation($location);
+    $template = getMvcLocation($mvcMinorSuite->getLocationKey());
     
     $path =  sprintf('%s/%s', $template, $migrationName);
 
