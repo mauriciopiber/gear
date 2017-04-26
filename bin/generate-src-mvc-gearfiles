@@ -31,52 +31,61 @@ function MvcDependency()
     ***REMOVED***;
 }
 
-function generateSrcMvc($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
     
     $string = new GearBase\Util\String\StringService();
-    $suiteSupertype = 'src-mvc';
     
-    $suiteName = sprintf('%s/src-mvc-%s', $suiteSupertype, $string->str('url', $suiteType));
+    $superType = [***REMOVED***;
     
-    echo "$suiteName"."\n";
+    foreach ($types as $type) {
+        
+        
+        $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite($type);
     
-    if ($suiteType === 'Entity') {
-        createSrcMvcMigration($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
+        $superType[***REMOVED*** = generateSrcMvc($srcMvcMinor);
+    }
+}
+
+
+function generateSrcMvc(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor) 
+{
+    
+
+    createSrcMvcGearfile($srcMvcMinor);
+    
+    if ($srcMvcMinor->getType() == 'Entity') {
+        createSrcMvcMigrationFile($srcMvcMinor);
     }
     
-    createSrcMvcGearfile($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
-    
-    createSrcMvcTestfile($suiteName);
+    createSrcMvcTestFile($srcMvcMinor);
 }
 
-function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcSuite)
-{
-    return [
-    
-    ***REMOVED***;
-
-}
-
-function createSrcMvcMigration($type, $columns, $userTypes, $constraints, $tables)
+function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
 {
     $resolveNames = createResolveNames();
     
     $i = 0;
     
     $migrationsTables = [***REMOVED***;
-
     
     foreach ($columns as $column) {
         foreach ($userTypes as $usertype) {
             foreach ($constraints as $constraint) {
                 foreach ($tables as $table) {
+                
+                    
                     $tableName = sprintf(
                         '%s%s',
                         'SrcMvc',
                         implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $table))
                     );
                     
+                    $srcMvcMinor->setTableName($tableName);
+                    
+                    
+                    
+                    /**
                     $srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
                         'src-mvc', 
                         $usertype, 
@@ -85,6 +94,7 @@ function createSrcMvcMigration($type, $columns, $userTypes, $constraints, $table
                         $table,
                         $type
                     );
+                    */
                     
                     //$migrationsTables[$srcMvcSuite->getTableName()***REMOVED*** = createSrcMvcMigrationFile($srcMvcSuite);
                 }
@@ -92,43 +102,29 @@ function createSrcMvcMigration($type, $columns, $userTypes, $constraints, $table
         }
     }
     
-    var_dump($migrationsTables);
     
-
-    //how many tables combinations this will have?
-    
-    //will use the same library as MVC.
-
 }
 
-function createSrcMvcGearfile()
+function createSrcMvcGearFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
 {
 
 }
-function createSrcMvcTestfile($suiteName)
+function createSrcMvcTestFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor)
 {
     
 }
 
-function generateSrcMvcSuite()
-{
-    $types = ['Service', 'Repository', 'Form', 'Filter', 'SearchForm', 'Entity', 'Fixture'***REMOVED***;
-    
-    foreach ($types as $type) {
-    
-        generateSrcMvc(
-            $type,
-            [
-                'complete',
-                'basic',
-            ***REMOVED***,    
-            ['all', 'low-strict', 'strict'***REMOVED***,
-            [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***,
-            [null, 'upload_image'***REMOVED***        
-        );
-    }
-}
+
+runSrcMvcSuite(
+    ['Service', 'Repository', 'Form', 'Filter', 'SearchForm', 'Entity', 'Fixture'***REMOVED***,
+    [
+        'complete',
+        'basic',
+    ***REMOVED***,    
+    ['all', 'low-strict', 'strict'***REMOVED***,
+    [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***,
+    [null, 'upload_image'***REMOVED***        
+);
 
 
-//columns
-generateSrcMvcSuite();
+

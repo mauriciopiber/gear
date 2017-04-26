@@ -14,6 +14,16 @@ use Gear\Integration\Suite\AbstractMajorSuite;
  */
 class MvcMajorSuite extends AbstractMajorSuite
 {
+    public $columns;
+
+    public $userType;
+
+    public $constraints;
+
+    public $tableAssoc;
+
+    public $minorSuites;
+
     /**
      * Constructor
      *
@@ -21,6 +31,11 @@ class MvcMajorSuite extends AbstractMajorSuite
      */
     public function __construct()
     {
+        $this->columns = $columns;
+        $this->userType = $userType;
+        $this->constraints = $constraints;
+        $this->tableAssoc = $tableAssoc;
+        $this->minorSuites = [***REMOVED***;
         return $this;
     }
 }
