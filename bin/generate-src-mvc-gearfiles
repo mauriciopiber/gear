@@ -86,37 +86,23 @@ function createSrcMvcMigrationFile(
             foreach ($srcMvcMajor->getConstraints() as $constraint) {
                 foreach ($srcMvcMajor->getTableAssocs() as $tables) {
                 
-                
-                    $tableName = sprintf(
-                        '%s%s',
-                        'SrcMvc',
-                        implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $tables))
-                    );
-                    
-                    
+                    $majorTitle = 'src-mvc';
                     $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
                         $srcMvcMinor->getType(),
-                        'src-mvc',
+                        $majorTitle,
                         $column, 
                         $usertype, 
                         $constraint, 
                         $tables
                     );
-                    $srcMvcMinor->setTableName($tableName);    
-                        
                     
-                    /*
+                    $columnsSuffix = $resolveNames->createTableUrl($srcMvcMinor);
+
+                    $srcMvcMinor->setTableName($resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+                    $srcMvcMinor->setLocationKey($resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
+                    $srcMvcMinor->setForeignKeys(getForeignKeys($srcMvcMinor->getColumnType()));
+                    $srcMvcMinor->setColumns(getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));    
                     
-                    
-                    $srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
-                        'src-mvc', 
-                        $usertype, 
-                        $column, 
-                        $constraint, 
-                        $table,
-                        $type
-                    );
-                    */
                     
                     $migrationsTables[$srcMvcMinor->getTableName()***REMOVED*** = [***REMOVED***;//createSrcMvcMigrationFile($srcMvcSuite);
                 }
