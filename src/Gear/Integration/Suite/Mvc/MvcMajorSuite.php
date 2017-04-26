@@ -29,13 +29,33 @@ class MvcMajorSuite extends AbstractMajorSuite
      *
      * @return \Gear\Integration\Suite\Mvc\MvcMajorSuite
      */
-    public function __construct()
+    public function __construct($columns, $userType, $constraints, $tableAssoc)
     {
         $this->columns = $columns;
-        $this->userType = $userType;
+        $this->userTypes = $userType;
         $this->constraints = $constraints;
-        $this->tableAssoc = $tableAssoc;
+        $this->tableAssocs = $tableAssoc;
         $this->minorSuites = [***REMOVED***;
         return $this;
+    }
+
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    public function getUserTypes()
+    {
+        return $this->userTypes;
+    }
+
+    public function getConstraints()
+    {
+        return $this->constraints;
+    }
+
+    public function getTableAssocs()
+    {
+        return $this->tableAssocs;
     }
 }
