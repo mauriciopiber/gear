@@ -895,6 +895,36 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "Persist",
+                "type": "Service",
+                "dependency": [
+                    "Integration\\Util\\Location\\Location"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Util\\Persist",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "Columns",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Util\\Columns",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

@@ -1,10 +1,10 @@
 <?php
-namespace Gear\Integration\Columns;
+namespace Gear\Integration\Util\Columns;
 
-use Gear\Integration\Columns\DatesColumnsInterface;
-use Gear\Integration\Columns\NumericColumnsInterface;
-use Gear\Integration\Columns\TextColumnsInterface;
-use Gear\Integration\Columns\VarcharColumnsInterface;
+use Gear\Integration\Util\Columns\DatesColumnsInterface;
+use Gear\Integration\Util\Columns\NumericColumnsInterface;
+use Gear\Integration\Util\Columns\TextColumnsInterface;
+use Gear\Integration\Util\Columns\VarcharColumnsInterface;
 
 /**
  * PHP Version 5

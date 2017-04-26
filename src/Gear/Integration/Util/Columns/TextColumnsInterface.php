@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Integration\Columns;
+namespace Gear\Integration\Util\Columns;
 
 /**
  * PHP Version 5
