@@ -143,76 +143,32 @@ function generateMvc($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
     }
 }
 
-function getColumnsType($type)
-{
-    $string = new GearBase\Util\String\StringService();
-    return $string->str('class', str_replace('mvc-', '', $type));
-}
-
-function createAliase($type, $usertype, $constraint, $tables)
-{
-    $variables = [***REMOVED***;
-    $variables[***REMOVED*** = getColumnsType($type);
-    
-    if ($usertype != 'all') {
-        $variables[***REMOVED*** = $usertype;
-    }
-    
-    $variables = array_merge($variables, getConstraintLabel($constraint));
-
-    if ($tables !== null) {
-        $variables[***REMOVED*** = $tables;
-    }    
-    return $variables;
-}
-
-function createTableName($type, $usertype, $constraint, $tables, $stringType)
-{
-    $string = new GearBase\Util\String\StringService();
-    
-    $variables = createAliase($type, $usertype, $constraint, $tables);
-    
-    foreach ($variables as $i => $name) {
-        $variables[$i***REMOVED*** = $string->str($stringType, $name);
-    }
-    
-    return $variables;
-}
-
-function createTableUrl($type, $usertype, $constraint, $tables)
-{
-    return createTableName($type, $usertype, $constraint, $tables, 'url');
-}
-
-function createTableAliase($type, $usertype, $constraint, $tables)
-{
-    return createTableName($type, $usertype, $constraint, $tables, 'class');       
-}
 
 function generateMvcTest($superType, $type, $usertype, $constraint, $tables)
 {
+    $resolveNames = createResolveNames();
     $locationKey = sprintf("%s/%s", $superType, $type);
     
     $tableName = sprintf(
         '%s%s',
         'Mvc',
-        implode('', createTableAliase($type, $usertype, $constraint, $tables))
+        implode('', $resolveNames->createTableAliase($type, $usertype, $constraint, $tables))
     );
     
     $locationKey = sprintf(
         '%s/mvc-%s',
         $superType, 
-        implode('-', createTableUrl($type, $usertype, $constraint, $tables))
+        implode('-', $resolveNames->createTableUrl($type, $usertype, $constraint, $tables))
     );
                     
     return  generateTest(
         $tableName, 
         $type, 
-        getColumnsType($type), 
+        $resolveNames->getColumnsType($type), 
         $usertype, 
         $constraint, 
         $tables, 
-        createTableUrl($type, $usertype, $constraint, $tables), 
+        $resolveNames->createTableUrl($type, $usertype, $constraint, $tables), 
         $locationKey
     );
 }
