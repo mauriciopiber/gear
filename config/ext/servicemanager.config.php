@@ -18,7 +18,13 @@
         'Gear\Integration\Columns\DatesColumnsInterface' => 'Gear\Integration\Columns\DatesColumnsInterface',
         'Gear\Integration\Columns\NumericColumnsInterface' => 'Gear\Integration\Columns\NumericColumnsInterface',
         'Gear\Integration\Columns\VarcharColumnsInterface' => 'Gear\Integration\Columns\VarcharColumnsInterface',
-        'Gear\Integration\Columns\TextColumnsInterface' => 'Gear\Integration\Columns\TextColumnsInterface'
+        'Gear\Integration\Columns\TextColumnsInterface' => 'Gear\Integration\Columns\TextColumnsInterface',
+        'Gear\Integration\Suite\Src\SrcMinorSuite' => 'Gear\Integration\Suite\Src\SrcMinorSuite',
+        'Gear\Integration\Suite\Src\SrcMajorSuite' => 'Gear\Integration\Suite\Src\SrcMajorSuite',
+        'Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite',
+        'Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite',
+        'Gear\Integration\Suite\Mvc\MvcMinorSuite' => 'Gear\Integration\Suite\Mvc\MvcMinorSuite',
+        'Gear\Integration\Suite\Mvc\MvcMajorSuite' => 'Gear\Integration\Suite\Mvc\MvcMajorSuite'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',

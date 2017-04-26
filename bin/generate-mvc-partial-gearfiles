@@ -50,7 +50,7 @@ function generateSrcMvc($suiteType, $suiteColumns, $suiteUserTypes, $suiteConstr
     createSrcMvcTestfile($suiteName);
 }
 
-function createSrcMvcMigrationFile($tableName, $column, $userType, $constraint, $table)
+function createSrcMvcMigrationFile(Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcSuite)
 {
     return [
     
@@ -77,7 +77,15 @@ function createSrcMvcMigration($columns, $userTypes, $constraints, $tables)
                         implode('', $resolveNames->createTableAliase($column, $usertype, $constraint, $table))
                     );
                     
-                    $migrationsTables[$tableName***REMOVED*** = createSrcMvcMigrationFile($tableName, $userTypes, $column, $constraint, $table);
+                    $srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
+                        $tableName, 
+                        $usertype, 
+                        $column, 
+                        $constraint, 
+                        $table
+                    );
+                    
+                    $migrationsTables[$srcMvcSuite->getTableName()***REMOVED*** = createSrcMvcMigrationFile($srcMvcSuite);
                 }
             }
         }

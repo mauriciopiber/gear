@@ -25,11 +25,11 @@ src:
     name: SrcMinorSuite
     type: ValueObject
     namespace: Integration\Suite\Src
-    extends: Integration\Suite\AbstractMinorsuite
+    extends: Integration\Suite\AbstractMinorSuite
     
-  2: 
+  3: 
     name: SrcMajorSuite
     type: ValueObject
     namespace: Integration\Suite\Src
-    extends: Integration\Suite\AbstractMajorsuite
+    extends: Integration\Suite\AbstractMajorSuite
         

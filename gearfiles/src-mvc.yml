@@ -1,14 +1,35 @@
 
 src:
-  0:
-    name: SrcMvcGenerator
-    type: Service
-    namespace: Integration\Generator\SrcMvcGenerator
-    service: factories
-    dependency:
-      0: 
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String            
-      1: 'Integration\Component\GearFile\GearFile'
-      2: 'Integration\Component\TestFile\TestFile'
-      3: 'Integration\Component\MigrationFile\MigrationFile' 
+  #0:
+    #name: SrcGenerator
+    #type: Service
+    #namespace: Integration\Suite\Src\SrcGenerator
+    #service: factories
+    #dependency:
+      #0: 
+      #  class: \GearBase\Util\String\StringService
+       # aliase: GearBase\Util\String            
+      #1: 'Integration\Component\GearFile\GearFile'
+      #2: 'Integration\Component\TestFile\TestFile'      #
+
+#  1:
+#    name: SrcSuite
+#    type: Service
+#    namespace: Integration\Suite\Src\SrcSuite
+#    service: factories
+#    dependency:
+#      2: 'Integration\Suite\Src\SrcGenerator\SrcGenerator'          
+      
+      
+  2: 
+    name: SrcMvcMinorSuite
+    type: ValueObject
+    namespace: Integration\Suite\SrcMvc
+    extends: Integration\Suite\AbstractMinorSuite
+    
+  3: 
+    name: SrcMvcMajorSuite
+    type: ValueObject
+    namespace: Integration\Suite\SrcMvc
+    extends: Integration\Suite\AbstractMajorSuite
+        

@@ -3,11 +3,16 @@ src:
     name: Persist
     type: Service
     namespace: Integration\Util\Persist
-    
-
+    service: factories
+    dependency: 
+      0: 'Integration\Util\Location\Location'
   1:
     name: Location
     type: Service
     namespace: Integration\Util\Location
+  2:
+    name: Columns
+    type: Service
+    namespace: Integration\Util\Columns
 
-    
+        
