@@ -26,11 +26,24 @@ class MvcMajorSuite extends AbstractMajorSuite
 
     public $minorSuites;
 
+    public $superType;
+
     /**
      * Constructor
      *
      * @return \Gear\Integration\Suite\Mvc\MvcMajorSuite
      */
+    public function __construct($superType, $columns = null, $userType = null, $constraints = null, $tableAssoc = null)
+    {
+        $this->superType = $superType;
+        $this->columns = $columns;
+        $this->userTypes = $userType;
+        $this->constraints = $constraints;
+        $this->tableAssocs = $tableAssoc;
+        $this->minorSuites = [***REMOVED***;
+        return $this;
+    }
+    /*
     public function __construct($columns, $userType, $constraints, $tableAssoc)
     {
         $this->columns = $columns;
@@ -39,6 +52,12 @@ class MvcMajorSuite extends AbstractMajorSuite
         $this->tableAssocs = $tableAssoc;
         $this->minorSuites = [***REMOVED***;
         return $this;
+    }
+    */
+
+    public function getSuperType()
+    {
+        return $this->superType;
     }
 
     public function getColumns()

@@ -2,7 +2,7 @@
 namespace Gear\Integration\Suite\Mvc;
 
 use Gear\Integration\Suite\AbstractMinorSuite;
-
+use GearBase\Util\String\StringService;
 /**
  * PHP Version 5
  *
@@ -42,20 +42,38 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     public $migrationFile;
 
+    const SUITE = '%s/%s';
 
     /**
      * Constructor
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct($majorType, $columnType, $userType, $constraints, $tableAssoc)
+    public function __construct(MvcMajorSuite $majorType, $columnType, $userType, $constraints, $tableAssoc)
     {
-        $this->majorType = $majorType;
+        parent::__construct($majorType);
         $this->setColumnType($columnType);
         $this->userType = $userType;
         $this->constraints = $constraints;
         $this->tableAssoc = $tableAssoc;
+        $this->stringService = new StringService();
         return $this;
+    }
+
+    public function getSuiteName($type = 'url')
+    {
+        return $this->stringService->str($type, $this->getTableName());
+    }
+
+    public function getSuitePath()
+    {
+        return sprintf(
+            self::SUITE,
+            strtolower($this->getMajorSuite()->getSuperType()),
+            $this->stringService->str('url', $this->getTableName())
+        );
+
+        //return sprintf('%s/%s', )
     }
 
     public function getGearFile()
@@ -127,11 +145,6 @@ class MvcMinorSuite extends AbstractMinorSuite
     public function getColumnType()
     {
         return $this->columnType;
-    }
-
-    public function getMajorType()
-    {
-        return $this->majorType;
     }
 
     /**
