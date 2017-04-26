@@ -151,8 +151,7 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     
     $resolveNames = createResolveNames();
     $locationKey = sprintf("%s/%s", $mvcMajor, $column);
-    
-    
+
     $tableName = sprintf(
         '%s%s',
         'Mvc',
