@@ -3,6 +3,8 @@ namespace Gear\Integration\Util\Persist;
 
 use Gear\Integration\Util\Location\LocationTrait;
 use Gear\Integration\Util\Location\Location;
+use Gear\Integration\Suite\AbstractMajorSuite;
+use Gear\Integration\Suite\AbstractMinorSuite;
 
 /**
  * PHP Version 5
@@ -29,5 +31,34 @@ class Persist
         $this->location = $location;
 
         return $this;
+    }
+
+    public function saveMajor(AbstractMajorSuite $suite, $name, $data)
+    {
+        $template = $this->location->getLocation($suite::SUITE).'/'.$suite->getSuperType();
+        $path =  sprintf('%s/%s', $template, $name);
+        return file_put_contents($path, $data);
+    }
+
+    public function saveMinor(AbstractMinorSuite $suite, $name, $data)
+    {
+
+    }
+
+    public function save($suite, $name, $data)
+    {
+
+        if ($suite instanceof AbstractMajorSuite) {
+
+            return $this->saveMajor($suite, $name, $data);
+
+        }
+
+        if ($suite instanceof AbstractMinorSuite) {
+            return $this->saveMinor($suite, $name, $data);
+        }
+
+        throw new \Exception('Type not found to save integration.');
+
     }
 }
