@@ -13,18 +13,3 @@ function factoryGearfileColumns($columns)
     }
     return $gearfileColumns;
 }
-
-/**
- * Migration
- */
-function factoryMigrationColumns($columns)
-{
-    $gearfileColumns = [***REMOVED***;
-    foreach ($columns as $columnName => $columnOptions) {
-        if (isset($columnOptions['speciality'***REMOVED***)) {
-            unset($columnOptions['speciality'***REMOVED***);
-        }
-        $gearfileColumns[$columnName***REMOVED*** = $columnOptions;
-    }
-    return $gearfileColumns;
-}
