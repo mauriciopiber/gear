@@ -12,33 +12,10 @@ if (php_sapi_name() === 'cli-server') {
 
 require 'init_autoloader.php';
 
-use GearJson\Src\Src;
-use Symfony\Component\Yaml\Yaml;
-use Gear\Module;
 use GearBase\Util\String\StringService;
-
-$string = new StringService();
 
 function createResolveNames()
 {
     $string = new StringService();
     return new Gear\Integration\Util\ResolveNames\ResolveNames($string);
-}
-
-
-if (empty($argv[1***REMOVED***)) {
-    return;
-}
-
-$type = $string->str('class', $argv[1***REMOVED***);
-$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
-
-function srcType()
-{
-    return ['Interface', 'Repository', 'Service', 'Filter', 'Form', 'ViewHelper', 'ControllerPlugin', 'ValueObject'***REMOVED***;
-}
-
-function controllerType()
-{
-    return ['Action', 'Console'***REMOVED***;
 }

@@ -1006,6 +1006,40 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "SrcGenerator",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Component\\GearFile\\GearFile",
+                    "2": "Integration\\Component\\TestFile\\TestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Src\\SrcGenerator",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "SrcSuite",
+                "type": "Service",
+                "dependency": {
+                    "2": "Integration\\Suite\\Src\\SrcGenerator\\SrcGenerator",
+                    "3": "Integration\\Component\\SuperTestFile\\SuperTestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Src\\SrcSuite",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
