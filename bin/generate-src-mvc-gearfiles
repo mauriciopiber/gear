@@ -79,14 +79,32 @@ function createSrcMvcMigrationFile(
     Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite $srcMvcMinor
 ){
 
-    $migrationConfig = [***REMOVED***;
-    $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
+    $string = new GearBase\Util\String\StringService();
+    $location = new Gear\Integration\Util\Location\Location();
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+
+    $arrayService = new Gear\Util\Vector\ArrayService();
+    
+    $migration = new Gear\Integration\Component\MigrationFile\MigrationFile(
+        $persist,
+        $string,
+        $arrayService    
+    );
+    
+    $columnUtil = new Gear\Integration\Util\Columns\Columns();
+    
+    $migrationsTables = [***REMOVED***;
+    /*
+    
+    $migrationsTables = array_merge($migrationsTables, $migration->createMigrationTable($mvcMinorSuite));
+    
     
     if (!empty($mvcMinorSuite->getForeignKeys())) { 
         foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
-            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
+            $migrationsTables = array_merge($migrationsTables, $migration->createForeignKeyMigration($foreignKey));
         }
     }
+    */
     
     $resolveNames = createResolveNames();
     
@@ -99,7 +117,7 @@ function createSrcMvcMigrationFile(
                 
                     $majorTitle = 'src-mvc';
                     $srcMvcMinor = new Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite(
-                        $srcMvcMinor->getType(),
+                        $srcMvcMinor->getMajorSuite(),
                         $majorTitle,
                         $column, 
                         $usertype, 
@@ -111,15 +129,15 @@ function createSrcMvcMigrationFile(
 
                     $srcMvcMinor->setTableName($resolveNames->createTableName('SrcMvc', $srcMvcMinor));
                     $srcMvcMinor->setLocationKey($resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
-                    $srcMvcMinor->setForeignKeys(getForeignKeys($srcMvcMinor->getColumnType()));
-                    $srcMvcMinor->setColumns(getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));    
+                    $srcMvcMinor->setForeignKeys($columnUtil->getForeignKeys($srcMvcMinor->getColumnType()));
+                    $srcMvcMinor->setColumns($columnUtil->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));    
                     
      
-                     $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
+                     $migrationsTables = array_merge($migrationsTables, $migration->createMigrationTable($srcMvcMinor));
     
-                    if (!empty($mvcMinorSuite->getForeignKeys())) { 
-                        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
-                            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
+                    if (!empty($srcMvcMinor->getForeignKeys())) { 
+                        foreach ($srcMvcMinor->getForeignKeys() as $foreignKey) {        
+                            $migrationsTables = array_merge($migrationsTables, $migration->createForeignKeyMigration($foreignKey));
                         }
                     }               
                     
@@ -129,9 +147,10 @@ function createSrcMvcMigrationFile(
         }
     }
     var_dump($migrationsTables);
+    var_dump(count($migrationsTables));
    
     
-    //return createMigrationComponent($mvcMinorSuite, $migrationConfig);
+    //return createMigrationComponent($mvcMinorSuite, $migrationsTables);
 }
 
 function createSrcMvcGearFile(

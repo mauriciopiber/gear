@@ -35,7 +35,7 @@ function runSrcSuite($type, $repeat)
             'type' => 'Interface'
         ***REMOVED***;
 
-        $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat, numberMap()));
+        $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat));
 
     }
     $invokables = [***REMOVED***;
@@ -61,13 +61,13 @@ function runSrcSuite($type, $repeat)
 
         $invokables[***REMOVED*** = [
             'name' => '%sImplements%s%s',
-            'implements' => createMultiplesInterfaces($type, 1, numberMap()),
+            'implements' => createMultiplesInterfaces($type, 1),
             'type' => $type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => '%sImplementsMany%s%s',
-            'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
+            'implements' => createMultiplesInterfaces($type, $repeat),
             'type' => $type
         ***REMOVED***;
     }
@@ -85,7 +85,7 @@ function runSrcSuite($type, $repeat)
         'name' => '%sFull%s%s',
         'extends' => '%s\%sExtendable%s%s',
         'namespace' => '%s',
-        'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
+        'implements' => createMultiplesInterfaces($type, $repeat),
         'type' => $type
     ***REMOVED***;
 
@@ -100,7 +100,7 @@ function runSrcSuite($type, $repeat)
     }
 
 
-    $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat, numberMap()));
+    $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat));
 
     $dependencies = [***REMOVED***;
 
@@ -124,7 +124,7 @@ function runSrcSuite($type, $repeat)
             'name' => '%sDepFull%s%s',
             'extends' => '%s\%sExtendable%s%s',
             'namespace' => '%s',
-            'implements' => createMultiplesInterfaces($type, 1, numberMap()),
+            'implements' => createMultiplesInterfaces($type, 1),
             'type' => $type,
             'dependency' => '%s\%sInvok%s'
         ***REMOVED***;
@@ -133,7 +133,7 @@ function runSrcSuite($type, $repeat)
             'name' => '%sDepsFull%s%s',
             'extends' => '%s\%sExtendable%s%s',
             'namespace' => '%s',
-            'implements' => createMultiplesInterfaces($type, $repeat, numberMap()),
+            'implements' => createMultiplesInterfaces($type, $repeat),
             'type' => $type,
             'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
         ***REMOVED***;
@@ -141,7 +141,7 @@ function runSrcSuite($type, $repeat)
         $config = ['factories', 'abstract'***REMOVED***;
 
 
-        $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat, numberMap()));
+        $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat));
 
     }
     
