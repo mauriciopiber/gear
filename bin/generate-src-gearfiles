@@ -17,159 +17,24 @@ if (php_sapi_name() === 'cli-server') {
 // Setup autoloading
 require __DIR__.'/generate-functions';
 
-function generateSrc($srcMinor)
-{
-    $type = $srcMinor->getType();
-    $repeat = $srcMinor->getRepeat();
-    $string = new GearBase\Util\String\StringService();
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
+$string = new GearBase\Util\String\StringService();
 
-    $gearfile = new Gear\Integration\Component\GearFile\GearFile(
-        $persist,
-        $string
-    );
+$columnUtil   = new Gear\Integration\Util\Columns\Columns();
+$location     = new Gear\Integration\Util\Location\Location();
+$persist      = new Gear\Integration\Util\Persist\Persist($location);
 
-    $srcOptions = [***REMOVED***;
-
-    $data = [***REMOVED***;
-
-    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-
-        $implements = [***REMOVED***;
-        $implements[***REMOVED*** = [
-            'name' => '%sImpl%s%s',
-            'type' => 'Interface'
-        ***REMOVED***;
+$gearfile = new Gear\Integration\Component\GearFile\GearFile(
+    $persist,
+    $string
+);
+    
+$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
         
-        $srcOptions[***REMOVED*** = [$implements, ['0' => ''***REMOVED***, $type, $repeat***REMOVED***;
+$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
 
-        //$data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat));
+$srcGenerator = new Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator($gearfile, $testFile);
 
-    }
-    $invokables = [***REMOVED***;
-
-    $invokables[***REMOVED*** = [
-        'name' => '%sExtendable%s%s',
-        'type' => $type
-    ***REMOVED***;
-
-    $invokables[***REMOVED*** = [
-        'name' => '%s%s%s',
-        'type' => $type
-    ***REMOVED***;
-
-    $invokables[***REMOVED*** = [
-        'name' => '%sNamespace%s%s',
-        'type' => $type,
-        'namespace' => '%s'
-    ***REMOVED***;
-
-    //implements
-    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-
-        $invokables[***REMOVED*** = [
-            'name' => '%sImplements%s%s',
-            'implements' => $gearfile->createMultiplesInterfaces($type, 1),
-            'type' => $type
-        ***REMOVED***;
-
-        $invokables[***REMOVED*** = [
-            'name' => '%sImplementsMany%s%s',
-            'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
-            'type' => $type
-        ***REMOVED***;
-    }
-
-
-
-    $invokables[***REMOVED*** = [
-        'name' => '%sExtends%s%s',
-        'extends' => '%s\%sExtendable%s%s',
-        'type' => $type
-    ***REMOVED***;
-
-
-    $invokables[***REMOVED*** = [
-        'name' => '%sFull%s%s',
-        'extends' => '%s\%sExtendable%s%s',
-        'namespace' => '%s',
-        'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
-        'type' => $type
-    ***REMOVED***;
-
-    $config = ['invokables'***REMOVED***;
-
-    if (!in_array($type, ['ValueObject'***REMOVED***)) {
-        $config[***REMOVED*** = 'factories';
-    }
-
-    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-        $config[***REMOVED*** = 'abstract';
-    }
-
-
-    //$data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat));
-    $srcOptions[***REMOVED*** = [$invokables, $config, $type, $repeat***REMOVED***;
-
-    $dependencies = [***REMOVED***;
-
-    //to max dependency based on repeat number. interfaces too.
-    if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-
-        $dependencies[***REMOVED*** = [
-            'name' => '%sDep%s%s',
-            'type' => $type,
-            'dependency' => '%s\%sInvok%s'
-        ***REMOVED***;
-
-        $dependencies[***REMOVED*** = [
-            'name' => '%sDeps%s%s',
-            'type' => $type,
-            'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED*** 
-        ***REMOVED***;
-
-
-        $dependencies[***REMOVED*** = [
-            'name' => '%sDepFull%s%s',
-            'extends' => '%s\%sExtendable%s%s',
-            'namespace' => '%s',
-            'implements' => $gearfile->createMultiplesInterfaces($type, 1),
-            'type' => $type,
-            'dependency' => '%s\%sInvok%s'
-        ***REMOVED***;
-
-        $dependencies[***REMOVED*** = [
-            'name' => '%sDepsFull%s%s',
-            'extends' => '%s\%sExtendable%s%s',
-            'namespace' => '%s',
-            'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
-            'type' => $type,
-            'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
-        ***REMOVED***;
-
-        $config = ['factories', 'abstract'***REMOVED***;
-
-        $srcOptions[***REMOVED*** = [$dependencies, $config, $type, $repeat***REMOVED***;
-        //$data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat));
-
-    }
-    
-    $srcMinor->setLocationKey(sprintf('src-%s', strtolower($srcMinor->getType())));
-    return $gearfile->createSrcGearfile($srcMinor, $srcOptions);
-}
-
-
-function runSrcSuite($type, $repeat)
-{
-    $srcMajor = new Gear\Integration\Suite\Src\SrcMajorSuite();
-    $srcMinor = new Gear\Integration\Suite\Src\SrcMinorSuite($srcMajor, $type, $repeat);
-    
-    
-    generateSrc($srcMinor);
-}
-
-
+$srcSuite = new Gear\Integration\Suite\Src\SrcSuite\SrcSuite($srcGenerator, $superTestFile);
 
 
 if (empty($argv[1***REMOVED***)) {
@@ -182,5 +47,5 @@ $type = $string->str('class', $argv[1***REMOVED***);
 $repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
 
 
-runSrcSuite($type, $repeat);
+$srcSuite->runSrcSuite($type, $repeat);
 return;

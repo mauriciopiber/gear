@@ -15,6 +15,35 @@ if (php_sapi_name() === 'cli-server') {
 
 require 'init_autoloader.php';
 
+use Gear\Integration\Util;
+use Gear\Integration\Component;
+
+$string = new GearBase\Util\String\StringService();
+$arrayService = new Gear\Util\Vector\ArrayService();
+
+$resolveNames = new Util\ResolveNames\ResolveNames($string);
+$columnUtil   = new Util\Columns\Columns();
+$location     = new Util\Location\Location();
+$persist      = new Util\Persist\Persist($location);
+
+    
+$migration = new Component\MigrationFile\MigrationFile(
+    $persist,
+    $string,
+    $arrayService    
+);
+
+$gearfile = new Component\GearFile\GearFile(
+    $persist,
+    $string
+);
+    
+$testFile = new Component\TestFile\TestFile($persist, $string);
+        
+$superTestFile = Component\SuperTestFile\SuperTestFile($persist, $string);
+
+            
+        
 /*
 $generator = Gear\Integration\Generator();
 
