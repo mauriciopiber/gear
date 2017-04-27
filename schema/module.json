@@ -925,6 +925,46 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "SuperTestFile",
+                "type": "Service",
+                "dependency": [
+                    "Integration\\Util\\Persist\\Persist",
+                    {
+                        "class": "\\GearBase\\Util\\String\\StringService",
+                        "aliase": "GearBase\\Util\\String"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Component\\SuperTestFile",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "TestFile",
+                "type": "Service",
+                "dependency": [
+                    "Integration\\Util\\Persist\\Persist",
+                    {
+                        "class": "\\GearBase\\Util\\String\\StringService",
+                        "aliase": "GearBase\\Util\\String"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Component\\TestFile",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
