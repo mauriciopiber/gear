@@ -15,104 +15,44 @@ if (php_sapi_name() === 'cli-server') {
 
 
 require __DIR__.'/generate-functions';
-require __DIR__.'/generate-columns';
 
+$string = new GearBase\Util\String\StringService();
+$column = new Gear\Integration\Util\Columns\Columns();
+$names = new Gear\Integration\Util\ResolveNames\ResolveNames($string);
+
+$location = new Gear\Integration\Util\Location\Location();
+$persist = new Gear\Integration\Util\Persist\Persist($location);
+
+$arrayService = new Gear\Util\Vector\ArrayService();
+    
+$migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
+    $persist,
+    $string,
+    $arrayService    
+);
+
+$gearfile = new Gear\Integration\Component\GearFile\GearFile(
+    $persist,
+    $string
+);
+        
+$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+
+$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
  
-function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
-{
-    $expectedColumns = [
-        $suiteName => $suiteColumns,
-    ***REMOVED***;
-    
-    $configColumns = [
-        'usertype' => $suiteUserTypes, 
-        'constraints' => $suiteConstraints,
-        'tables' => $suiteTables
-    ***REMOVED***;
-    
-    $string = new GearBase\Util\String\StringService();
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
-    
-    $migrations = [***REMOVED***;
-    
-    $mvcMajor = new Gear\Integration\Suite\Mvc\MvcMajorSuite($suiteName);
-    
-    foreach ($expectedColumns as $superType => $columnType) {
-        
-        foreach ($columnType as $column) {
-        
-            foreach ($configColumns['usertype'***REMOVED*** as $userType) {
-                foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                
-                    foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                    
-                        $mvcSuite = new Gear\Integration\Suite\Mvc\MvcMinorSuite(
-                            $mvcMajor,
-                            $column, 
-                            $userType, 
-                            $constraint, 
-                            $tables
-                        );
-                        $migrations[$column***REMOVED*** = generateMvc($mvcSuite);
-                    }                
-                }
-            }
-            
-        }
-    
-        $superTestFile->updateSuperTestFile($mvcMajor, $migrations); 
-   
-    }
-}
+$mvcGenerator = new Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator(
+    $gearfile, 
+    $testFile, 
+    $migrationFile, 
+    $names, 
+    $column
+);
+
+$mvcSuite = new Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite($mvcGenerator, $superTestFile);
 
 
-function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
-{
-    $columnUtil = new Gear\Integration\Util\Columns\Columns();
-    $string = new GearBase\Util\String\StringService();
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-
-    $arrayService = new Gear\Util\Vector\ArrayService();
-    
-    $migration = new Gear\Integration\Component\MigrationFile\MigrationFile(
-        $persist,
-        $string,
-        $arrayService    
-    );
-
-    $gearfile = new Gear\Integration\Component\GearFile\GearFile(
-        $persist,
-        $string
-    );
-        
-    $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
-    
-    $resolveNames = createResolveNames();
-    
-    $columnsSuffix = $resolveNames->createTableUrl($mvcMinorSuite);
-
-    $mvcMinorSuite->setTableName($resolveNames->createTableName('Mvc', $mvcMinorSuite));
-    $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
-    $mvcMinorSuite->setForeignKeys($columnUtil->getForeignKeys($mvcMinorSuite->getColumnType()));
-    $mvcMinorSuite->setColumns($columnUtil->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
-
-    $mvcMinorSuite->setGearFile($gearfile->createMvcGearfile($mvcMinorSuite));
-    $mvcMinorSuite->setMigrationFile($migration->createMvcMigration($mvcMinorSuite));
-        
-    $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
-    $testFile->updateTestFile($mvcMinorSuite);
-        
-
-    return $mvcMinorSuite;
-}
-
-
- 
 //columns
-runMvcSuite(
+$mvcSuite->runMvcSuite(
     'mvc-columns',
     [
         'mvc-complete',
@@ -129,7 +69,7 @@ runMvcSuite(
 
 
 //usertype
-runMvcSuite(
+$mvcSuite->runMvcSuite(
     'mvc-usertypes',
     [
         'mvc-basic',
@@ -140,7 +80,7 @@ runMvcSuite(
 );
 
 //constraints
-runMvcSuite(
+$mvcSuite->runMvcSuite(
     'mvc-constraints',
     [
         'mvc-basic',
@@ -151,7 +91,7 @@ runMvcSuite(
 );
 
 //constraints
-runMvcSuite(
+$mvcSuite->runMvcSuite(
     'mvc-upload-image',
     [
         'mvc-basic',
@@ -163,7 +103,7 @@ runMvcSuite(
 
 //complete
 //constraints
-runMvcSuite(
+$mvcSuite->runMvcSuite(
     'mvc-complete',
     [
         'mvc-complete',

@@ -1,40 +1,43 @@
 
 src:
   0:
-    name: ControllerGenerator
+    name: MvcGenerator
     type: Service
-    namespace: Integration\Suite\Controller\ControllerGenerator
+    namespace: Integration\Suite\Mvc\MvcGenerator
     service: factories
     dependency:
       1: 'Integration\Component\GearFile\GearFile'
-      2: 'Integration\Component\TestFile\TestFile'      
+      2: 'Integration\Component\TestFile\TestFile'
+      3: 'Integration\Component\MigrationFile\MigrationFile'   
+      4: 'Integration\Util\ResolveNames\ResolveNames'
+      5: 'Integration\Util\Columns\Columns'   
 #  1:
-#    name: ControllerGenerator
+#    name: MvcGenerator
 #    type: Service
-#    namespace: Integration\Suite\Controller\ControllerGenerator
+#    namespace: Integration\Suite\Mvc\MvcGenerator
 #    service: factories
 #    dependency:
 #      1: 'Integration\Component\GearFile\GearFile'
-#      2: 'Integration\Component\TestFile\TestFile'      
+#      2: 'Integration\Component\TestFile\TestFile'
 ##
 #
   1:
-    name: ControllerSuite
+    name: MvcSuite
     type: Service
-    namespace: Integration\Suite\Controller\ControllerSuite
+    namespace: Integration\Suite\Mvc\MvcSuite
     service: factories
     dependency:
-      2: 'Integration\Suite\Controller\ControllerGenerator\ControllerGenerator'
+      2: 'Integration\Suite\Mvc\MvcGenerator\MvcGenerator'
       3: 'Integration\Component\SuperTestFile\SuperTestFile'          
 #  2: 
-#    name: ControllerMinorSuite
+#    name: MvcMinorSuite
 #    type: ValueObject
-#    namespace: Integration\Suite\Controller
+#    namespace: Integration\Suite\Mvc
 #    extends: Integration\Suite\AbstractMinorSuite
     
 #  3: 
-#    name: ControllerMajorSuite
+#    name: MvcMajorSuite
 #    type: ValueObject
-#    namespace: Integration\Suite\Controller
+#    namespace: Integration\Suite\Mvc
 #    extends: Integration\Suite\AbstractMajorSuite
         

@@ -77,7 +77,9 @@
         'Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator' => 'Gear\Integration\Suite\Src\SrcGenerator\SrcGeneratorFactory',
         'Gear\Integration\Suite\Src\SrcSuite\SrcSuite' => 'Gear\Integration\Suite\Src\SrcSuite\SrcSuiteFactory',
         'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator' => 'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGeneratorFactory',
-        'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite' => 'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteFactory'
+        'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite' => 'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteFactory',
+        'Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator' => 'Gear\Integration\Suite\Mvc\MvcGenerator\MvcGeneratorFactory',
+        'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite' => 'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuiteFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false
