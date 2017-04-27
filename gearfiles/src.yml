@@ -1,9 +1,9 @@
 
 src:
   0:
-    name: SrcGenerator
+    name: ControllerGenerator
     type: Service
-    namespace: Integration\Suite\Src\SrcGenerator
+    namespace: Integration\Suite\Controller\ControllerGenerator
     service: factories
     dependency:
       1: 'Integration\Component\GearFile\GearFile'
@@ -19,22 +19,22 @@ src:
 ##
 #
   1:
-    name: SrcSuite
+    name: ControllerSuite
     type: Service
-    namespace: Integration\Suite\Src\SrcSuite
+    namespace: Integration\Suite\Controller\ControllerSuite
     service: factories
     dependency:
-      2: 'Integration\Suite\Src\SrcGenerator\SrcGenerator'
+      2: 'Integration\Suite\Controller\ControllerGenerator\ControllerGenerator'
       3: 'Integration\Component\SuperTestFile\SuperTestFile'          
 #  2: 
-#    name: SrcMinorSuite
+#    name: ControllerMinorSuite
 #    type: ValueObject
-#    namespace: Integration\Suite\Src
+#    namespace: Integration\Suite\Controller
 #    extends: Integration\Suite\AbstractMinorSuite
     
 #  3: 
-#    name: SrcMajorSuite
+#    name: ControllerMajorSuite
 #    type: ValueObject
-#    namespace: Integration\Suite\Src
+#    namespace: Integration\Suite\Controller
 #    extends: Integration\Suite\AbstractMajorSuite
         
