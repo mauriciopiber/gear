@@ -167,32 +167,12 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 function updateSuperTestFile($superType, $migrations)
 {
     $string = new GearBase\Util\String\StringService();
-    
-
-    $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
-    
-    $constructTemplate = 'construct+=("%s/%s:%s/%s")'.PHP_EOL;
-    
-    $construct = '';
-    
-    foreach ($migrations as $suite) {
-        $locationKey = $suite->getLocationKey();
-        
-        $folder = array_values(array_slice(explode('/', $locationKey), -1))[0***REMOVED***;
-        
-        $gearfile = $suite->getGearFile();
-        $migration = $suite->getMigrationFile();
-        
-        $construct .= sprintf($constructTemplate, $folder, $gearfile, $folder, $migration); 
-        
-    }
-    
-    $newFile = str_replace('construct+=("")', $construct, $testFile);
-    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $superType->getSuperType()).'$2', $newFile);
-    
     $location = new Gear\Integration\Util\Location\Location();
     $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $persist->save($superType, 'test.sh', $newFile);
+    
+    $superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
+    
+    return $superTestFile->updateSuperTestFile($superType, $migrations);    
 }
 
 
@@ -241,21 +221,14 @@ function createForeignKeyGearfile($tableId)
     ***REMOVED***;
 }
 
-
 function updateTestFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $string = new GearBase\Util\String\StringService();
-    
-    $testFile = file_get_contents(__DIR__.'/test-template.sh');
-    
-    $text = sprintf('construct[1***REMOVED***="%s;%s"', $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
-    
-    $newFile = preg_replace('#construct\[1\***REMOVED***=""#', $text, $testFile);
-    $newFile = preg_replace('#(module=")(")#', '$1Pbr'.$string->str('class', $mvcMinorSuite->getTableName()).'$2', $newFile);
-    
     $location = new Gear\Integration\Util\Location\Location();
     $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $persist->save($mvcMinorSuite, 'test.sh', $newFile);
+    
+    $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+    return $testFile->updateTestFile($mvcMinorSuite);
 }
 
 function createForeignKeyMigration($tableId)

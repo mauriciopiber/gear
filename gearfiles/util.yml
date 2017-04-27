@@ -1,18 +1,21 @@
 src:
-  0:
-    name: Persist
+  2:
+    name: SuperTestFile
     type: Service
-    namespace: Integration\Util\Persist
+    namespace: Integration\Component\SuperTestFile
     service: factories
     dependency: 
-      0: 'Integration\Util\Location\Location'
-  1:
-    name: Location
+      0: 'Integration\Util\Persist\Persist'    
+      1: 
+        class: \GearBase\Util\String\StringService
+        aliase: GearBase\Util\String  
+  3:
+    name: TestFile
     type: Service
-    service: invokables
-    namespace: Integration\Util\Location
-    
-  2:
-    name: Columns
-    type: Service
-    namespace: Integration\Util\Columns
+    namespace: Integration\Component\TestFile
+    service: factories
+    dependency: 
+      0: 'Integration\Util\Persist\Persist'    
+      1: 
+        class: \GearBase\Util\String\StringService
+        aliase: GearBase\Util\String          
