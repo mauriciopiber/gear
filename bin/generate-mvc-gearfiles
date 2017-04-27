@@ -17,16 +17,6 @@ if (php_sapi_name() === 'cli-server') {
 require __DIR__.'/generate-functions';
 require __DIR__.'/generate-columns';
 
-function getMigrationName($name)
-{
-    $string = new GearBase\Util\String\StringService();
-    $name = $string->str('uline', $name);
-    return sprintf(
-        '%s.php', 
-        $name
-    );
-}
-
  
 function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
 {
@@ -152,12 +142,6 @@ function createForeignKeyGearfile($tableId)
 }
 
 
-function updateSuperTestFile($superType, $migrations)
-{
-   
-}
-
-
 function createForeignKeyMigration($tableId)
 {
     $string = new GearBase\Util\String\StringService();
@@ -225,23 +209,18 @@ function createMvcMigrationFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMin
 
 function createMigrationComponent($mvcMinorSuite, $migrationConfig)
 {
-    $migrationName = getMigrationName($mvcMinorSuite->getTableName());
-
-    $migration = $mvcMinorSuite->getLocationKey().'/'.$migrationName;
-    
-    $arrayService = new Gear\Util\Vector\ArrayService();
-    
-    $template = file_get_contents(__DIR__.'/migration-template.php');
-    
-    $tables = '    const TABLES = '.$arrayService->varExport54($migrationConfig, '    ').';';
-    $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-    $migrate = preg_replace('#MigrationName#', $mvcMinorSuite->getTableName(), $migrate);
-    
     $location = new Gear\Integration\Util\Location\Location();
     $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $persist->save($mvcMinorSuite, $migrationName, $migrate);
-
-    return $migrationName;    
+    $string = new GearBase\Util\String\StringService();
+    $arrayService = new Gear\Util\Vector\ArrayService();
+    
+    $migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
+        $persist,
+        $string,
+        $arrayService    
+    );
+    
+    return $migrationFile->createMigration($mvcMinorSuite, $migrationConfig);
 }
  
 //columns

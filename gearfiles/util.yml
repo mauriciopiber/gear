@@ -1,21 +1,13 @@
 src:
   2:
-    name: SuperTestFile
+    name: MigrationFile
     type: Service
-    namespace: Integration\Component\SuperTestFile
+    namespace: Integration\Component\MigrationFile
     service: factories
     dependency: 
       0: 'Integration\Util\Persist\Persist'    
       1: 
         class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String  
-  3:
-    name: TestFile
-    type: Service
-    namespace: Integration\Component\TestFile
-    service: factories
-    dependency: 
-      0: 'Integration\Util\Persist\Persist'    
-      1: 
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String          
+        aliase: GearBase\Util\String
+      2: 'Util\Vector\ArrayService'
+        
