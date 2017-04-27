@@ -19,3 +19,13 @@ function createResolveNames()
     $string = new StringService();
     return new Gear\Integration\Util\ResolveNames\ResolveNames($string);
 }
+
+
+if (empty($argv[1***REMOVED***)) {
+    return;
+}
+
+$string = new GearBase\Util\String\StringService();
+
+$type = $string->str('class', $argv[1***REMOVED***);
+$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);

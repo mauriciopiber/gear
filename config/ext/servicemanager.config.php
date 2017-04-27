@@ -75,7 +75,9 @@
         'Gear\Integration\Component\MigrationFile\MigrationFile' => 'Gear\Integration\Component\MigrationFile\MigrationFileFactory',
         'Gear\Integration\Component\GearFile\GearFile' => 'Gear\Integration\Component\GearFile\GearFileFactory',
         'Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator' => 'Gear\Integration\Suite\Src\SrcGenerator\SrcGeneratorFactory',
-        'Gear\Integration\Suite\Src\SrcSuite\SrcSuite' => 'Gear\Integration\Suite\Src\SrcSuite\SrcSuiteFactory'
+        'Gear\Integration\Suite\Src\SrcSuite\SrcSuite' => 'Gear\Integration\Suite\Src\SrcSuite\SrcSuiteFactory',
+        'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator' => 'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGeneratorFactory',
+        'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite' => 'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

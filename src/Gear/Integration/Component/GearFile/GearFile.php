@@ -8,6 +8,7 @@ use GearBase\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
+use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
 
 /**
@@ -101,7 +102,7 @@ class GearFile
         ***REMOVED***;
     }
 
-    private function createGearfileComponent($suite, $data)
+    public function createGearfileComponent($suite, $data)
     {
         $suiteName = $suite->getSuiteName();
 
@@ -118,6 +119,24 @@ class GearFile
     }
 
 
+    public function createControllerGearfile(ControllerMinorSuite $suite, $srcOptions)
+    {
+        $src = [***REMOVED***;
+
+        foreach ($srcOptions['src'***REMOVED*** as $options) {
+            $src = array_merge($src, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
+        }
+
+        $controller = [***REMOVED***;
+
+        foreach ($srcOptions['controller'***REMOVED*** as $options) {
+            $controller = array_merge($controller, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
+        }
+
+        return $this->createGearfileComponent($suite, ['src' => $src, 'controller' => $controller***REMOVED***);
+    }
+
+
     public function createSrcGearfile(SrcMinorSuite $suite, $srcOptions)
     {
         $data = [***REMOVED***;
@@ -128,6 +147,8 @@ class GearFile
 
         return $this->createGearfileComponent($suite, ['src' => $data***REMOVED***);
     }
+
+
 
 
     private function generateGearfiles($invokables, $config, $type, $repeat)

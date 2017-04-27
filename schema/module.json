@@ -1040,6 +1040,40 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ControllerGenerator",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Component\\GearFile\\GearFile",
+                    "2": "Integration\\Component\\TestFile\\TestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Controller\\ControllerGenerator",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerSuite",
+                "type": "Service",
+                "dependency": {
+                    "2": "Integration\\Suite\\Controller\\ControllerGenerator\\ControllerGenerator",
+                    "3": "Integration\\Component\\SuperTestFile\\SuperTestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Controller\\ControllerSuite",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

@@ -18,8 +18,6 @@ if (php_sapi_name() === 'cli-server') {
 require __DIR__.'/generate-functions';
 
 $string = new GearBase\Util\String\StringService();
-
-$columnUtil   = new Gear\Integration\Util\Columns\Columns();
 $location     = new Gear\Integration\Util\Location\Location();
 $persist      = new Gear\Integration\Util\Persist\Persist($location);
 
@@ -35,17 +33,6 @@ $superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($per
 $srcGenerator = new Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator($gearfile, $testFile);
 
 $srcSuite = new Gear\Integration\Suite\Src\SrcSuite\SrcSuite($srcGenerator, $superTestFile);
-
-
-if (empty($argv[1***REMOVED***)) {
-    return;
-}
-
-$string = new GearBase\Util\String\StringService();
-
-$type = $string->str('class', $argv[1***REMOVED***);
-$repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
-
 
 $srcSuite->runSrcSuite($type, $repeat);
 return;
