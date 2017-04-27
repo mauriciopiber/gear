@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Integration\Suite\ControllerSrc;
+namespace Gear\Integration\Suite\ControllerMvc;
 
 use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
@@ -15,14 +15,4 @@ use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 class ControllerMvcMajorSuite extends MvcMajorSuite
 {
     const SUITE = 'controller-mvc';
-
-    /**
-     * Constructor
-     *
-     * @return \Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite
-     */
-    public function __construct()
-    {
-        return $this;
-    }
 }

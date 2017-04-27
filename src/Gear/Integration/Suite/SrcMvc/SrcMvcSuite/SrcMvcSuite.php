@@ -5,6 +5,8 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGeneratorTrait;
 use Gear\Integration\Component\SuperTestFile\SuperTestFileTrait;
 use Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator;
 use Gear\Integration\Component\SuperTestFile\SuperTestFile;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -38,8 +40,21 @@ class SrcMvcSuite
         return $this;
     }
 
-    public function runSrcMvcSuite()
+    public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
     {
+        $superType = [***REMOVED***;
 
+        $srcMvcMajor = new SrcMvcMajorSuite(
+            null,
+            $suiteColumns,
+            $suiteUserTypes,
+            $suiteConstraints,
+            $suiteTables
+        );
+
+        foreach ($types as $type) {
+            $srcMvcMinor = new SrcMvcMinorSuite($srcMvcMajor, $type);
+            $superType[***REMOVED*** = $this->srcMvcGenerator->generateSrcMvc($srcMvcMinor);
+        }
     }
 }

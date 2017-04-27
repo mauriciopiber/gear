@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Integration\Util\Columns;
 
+use Exception;
+
 /**
  * PHP Version 5
  *
