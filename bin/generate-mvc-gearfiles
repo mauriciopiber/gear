@@ -75,6 +75,13 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $location = new Gear\Integration\Util\Location\Location();
     $persist = new Gear\Integration\Util\Persist\Persist($location);
 
+    $arrayService = new Gear\Util\Vector\ArrayService();
+    
+    $migration = new Gear\Integration\Component\MigrationFile\MigrationFile(
+        $persist,
+        $string,
+        $arrayService    
+    );
     
     $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
     
@@ -88,7 +95,7 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $mvcMinorSuite->setColumns($columnUtil->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
 
     $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
-    $mvcMinorSuite->setMigrationFile(createMvcMigrationFile($mvcMinorSuite));
+    $mvcMinorSuite->setMigrationFile($migration->createMvcMigration($mvcMinorSuite));
         
     $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
     $testFile->updateTestFile($mvcMinorSuite);
@@ -142,86 +149,6 @@ function createForeignKeyGearfile($tableId)
 }
 
 
-function createForeignKeyMigration($tableId)
-{
-    $string = new GearBase\Util\String\StringService();
-    $table = $string->str('uline', str_replace('id_', '', $tableId));
-    
-    return [
-        $table => [
-            'nullable' => true,
-            'unique' => false,
-            'columns' => [
-                sprintf('%s_name', $string->str('uline', $table)) => ['type' => 'string'***REMOVED***
-            ***REMOVED***,
-            'table' => [***REMOVED***
-        ***REMOVED***,
-    ***REMOVED***;
-}
-
-function createMigrationTable(Gear\Integration\Suite\AbstractMinorSuite $mvcMinorSuite)
-{
-    $string = new GearBase\Util\String\StringService();
-    $date = null;
-    
-    $unique = false;
-    $nullable = false;
-
-    if (is_array($mvcMinorSuite->getConstraints())) {
-        foreach($mvcMinorSuite->getConstraints() as $const) {
-        
-            if ($const == 'nullable') {
-                $nullable = true;
-            }
-            
-            if ($const == 'unique') {
-                $unique = true;
-            }
-        }
-    }
-   
-    $tables = (!empty($mvcMinorSuite->getTableAssoc()) ? [$mvcMinorSuite->getTableAssoc()***REMOVED*** : [***REMOVED***);
-    $columns = factoryMigrationColumns($mvcMinorSuite->getColumns());
-    
-    return [
-        $string->str('uline', $mvcMinorSuite->getTableName()) => [
-            'nullable' => $nullable,
-            'unique' => $unique,
-            'referenced_assoc' => $tables,
-            'columns' => $columns
-        ***REMOVED***
-    ***REMOVED***;
-}
-
-function createMvcMigrationFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
-{
-    $migrationConfig = [***REMOVED***;
-    $migrationConfig = array_merge($migrationConfig, createMigrationTable($mvcMinorSuite));
-    
-    if (!empty($mvcMinorSuite->getForeignKeys())) { 
-        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {        
-            $migrationConfig = array_merge($migrationConfig, createForeignKeyMigration($foreignKey));
-        }
-    }
-    
-    return createMigrationComponent($mvcMinorSuite, $migrationConfig);    
-}
-
-function createMigrationComponent($mvcMinorSuite, $migrationConfig)
-{
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $string = new GearBase\Util\String\StringService();
-    $arrayService = new Gear\Util\Vector\ArrayService();
-    
-    $migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
-        $persist,
-        $string,
-        $arrayService    
-    );
-    
-    return $migrationFile->createMigration($mvcMinorSuite, $migrationConfig);
-}
  
 //columns
 runMvcSuite(
