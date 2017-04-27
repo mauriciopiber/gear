@@ -5,6 +5,8 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGen
 use Gear\Integration\Component\SuperTestFile\SuperTestFileTrait;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator;
 use Gear\Integration\Component\SuperTestFile\SuperTestFile;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -40,31 +42,15 @@ class ControllerMvcSuite
 
     public function runControllerMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
     {
-        $expectedColumns = [
-            $suiteName => $suiteColumns,
-        ***REMOVED***;
+        $controllerMvcMajor = new ControllerMvcMajorSuite(
+            null,
+            $suiteColumns,
+            $suiteUserTypes,
+            $suiteConstraints,
+            $suiteTables
+        );
 
-        $configColumns = [
-            'usertype' => $suiteUserTypes,
-            'constraints' => $suiteConstraints,
-            'tables' => $suiteTables
-        ***REMOVED***;
-
-        $migrations = [***REMOVED***;
-
-        foreach ($expectedColumns as $superType => $types) {
-            foreach ($types as $type) {
-                foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
-                    foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                        foreach ($configColumns['tables'***REMOVED*** as $tables) {
-
-                            //create ControllerMvcSuiteObject
-                            //run generateControllerMvc();
-                            var_dump($superType, $type, $usertype, $constraint, $tables);
-                        }
-                    }
-                }
-            }
-        }
+        $controllerMvcMinor = new ControllerMvcMinorSuite($controllerMvcMajor, null, null, null, null);
+        $this->controllerMvcGenerator->generateControllerMvc($controllerMvcMinor);
     }
 }

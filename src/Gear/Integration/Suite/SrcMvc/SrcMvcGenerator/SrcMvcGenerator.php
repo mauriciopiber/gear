@@ -11,6 +11,8 @@ use Gear\Integration\Component\TestFile\TestFile;
 use Gear\Integration\Component\MigrationFile\MigrationFile;
 use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -57,5 +59,89 @@ class SrcMvcGenerator
         $this->columns = $columns;
 
         return $this;
+    }
+
+
+    function MvcDependency()
+    {
+        return [
+            'Entity' => null,
+            'Fixture' => ['Entity'***REMOVED***,
+            'Repository' => ['Entity'***REMOVED***,
+            'Service' => ['Entity', 'Repository'***REMOVED***,
+            'Filter' => ['Entity'***REMOVED***,
+            'Form' => ['Filter', 'Entity'***REMOVED***,
+            'SearchForm' => ['Entity'***REMOVED***,
+            'Controller' => ['Entity', 'Fixture', 'Repository', 'Service', 'Filter', 'Form', 'SearchForm'***REMOVED***
+        ***REMOVED***;
+    }
+
+    public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor)
+    {
+        $tables = $this->prepareTables($srcMvcMinor);
+
+        $this->createSrcMvcGearfile($srcMvcMinor, $tables);
+
+        if ($srcMvcMinor->getType() == 'Entity') {
+            $this->createSrcMvcMigrationFile($srcMvcMinor, $tables);
+        }
+
+        $this->createSrcMvcTestFile($srcMvcMinor);
+    }
+
+    private function prepareTables(SrcMvcMinorSuite $srcMvcMinor)
+    {
+
+        $preparedTable = [***REMOVED***;
+
+        $srcMvcMajor = $srcMvcMinor->getMajorSuite();
+
+        foreach ($srcMvcMajor->getColumns() as $column) {
+            foreach ($srcMvcMajor->getUserTypes() as $usertype) {
+                foreach ($srcMvcMajor->getConstraints() as $constraint) {
+                    foreach ($srcMvcMajor->getTableAssocs() as $tables) {
+
+                        $majorTitle = 'src-mvc';
+                        $srcMvcMinor = new SrcMvcMinorSuite(
+                            $srcMvcMinor->getMajorSuite(),
+                            $majorTitle,
+                            $column,
+                            $usertype,
+                            $constraint,
+                            $tables
+                        );
+
+                        $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
+
+                        $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+                        $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
+                        $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
+                        $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
+
+
+                        $preparedTable[***REMOVED*** = $srcMvcMinor;
+
+                    }
+                }
+            }
+        }
+
+        return $preparedTable;
+    }
+
+    private function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinor, $tables)
+    {
+        echo 'create controller mvc gearfile'."\n";
+
+    }
+
+    private function createSrcMvcMigrationFile(SrcMvcMinorSuite $srcMvcMinor, $tables)
+    {
+        echo 'create controller mvc migration'."\n";
+    }
+
+    private function createSrcMvcTestFile(SrcMvcMinorSuite $srcMvcMinor)
+    {
+        echo 'create controller mvc file'."\n";
     }
 }

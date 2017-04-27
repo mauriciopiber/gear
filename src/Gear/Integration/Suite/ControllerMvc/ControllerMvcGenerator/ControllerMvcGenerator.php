@@ -9,6 +9,8 @@ use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Component\TestFile\TestFile;
 use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -50,5 +52,69 @@ class ControllerMvcGenerator
         $this->columns = $columns;
 
         return $this;
+    }
+
+
+    public function generateControllerMvc(ControllerMvcMinorSuite $controllerMvcMinor)
+    {
+        $tables = $this->prepareTables($controllerMvcMinor);
+
+        $this->createControllerMvcGearfile($controllerMvcMinor, $tables);
+
+        $this->createControllerMvcTestFile($controllerMvcMinor);
+    }
+
+    private function prepareTables(ControllerMvcMinorSuite $controllerMvcMinor)
+    {
+
+        $preparedTable = [***REMOVED***;
+
+        $controllerMvcMajor = $controllerMvcMinor->getMajorSuite();
+
+        foreach ($controllerMvcMajor->getColumns() as $column) {
+            foreach ($controllerMvcMajor->getUserTypes() as $usertype) {
+                foreach ($controllerMvcMajor->getConstraints() as $constraint) {
+                    foreach ($controllerMvcMajor->getTableAssocs() as $tables) {
+
+                        $majorTitle = 'controller-mvc';
+                        $controllerMvcMinor = new ControllerMvcMinorSuite(
+                            $controllerMvcMinor->getMajorSuite(),
+                            $majorTitle,
+                            $column,
+                            $usertype,
+                            $constraint,
+                            $tables
+                        );
+
+                        //$columnsSuffix = $this->resolveNames->createTableUrl($controllerMvcMinor);
+
+                        $controllerMvcMinor->setTableName($this->resolveNames->createTableName('ControllerMvc', $controllerMvcMinor));
+                        //$controllerMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $controllerMvcMinor));
+                        //$controllerMvcMinor->setForeignKeys($this->columns->getForeignKeys($controllerMvcMinor->getColumnType()));
+                        //$controllerMvcMinor->setColumns($this->columns->getColumns($controllerMvcMinor->getColumnType(), $columnsSuffix));
+
+                        $preparedTable[***REMOVED*** = $controllerMvcMinor;
+
+                    }
+                }
+            }
+        }
+
+        return $preparedTable;
+    }
+
+    private function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinor, $tables)
+    {
+        echo 'create controller mvc gearfile'."\n";
+    }
+
+    private function createControllerMvcMigrationFile(ControllerMvcMinorSuite $controllerMvcMinor, $tables)
+    {
+        echo 'create controller mvc migration'."\n";
+    }
+
+    private function createControllerMvcTestFile(ControllerMvcMinorSuite $controllerMvcMinor)
+    {
+        echo 'create controller mvc test'."\n";
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Integration\Suite\ControllerSrc;
+namespace Gear\Integration\Suite\ControllerMvc;
 
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 
@@ -14,13 +14,5 @@ use Gear\Integration\Suite\Mvc\MvcMinorSuite;
  */
 class ControllerMvcMinorSuite extends MvcMinorSuite
 {
-    /**
-     * Constructor
-     *
-     * @return \Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite
-     */
-    public function __construct()
-    {
-        return $this;
-    }
+
 }
