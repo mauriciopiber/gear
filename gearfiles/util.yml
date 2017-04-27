@@ -1,13 +1,11 @@
 src:
   2:
-    name: MigrationFile
+    name: GearFile
     type: Service
-    namespace: Integration\Component\MigrationFile
+    namespace: Integration\Component\GearFile
     service: factories
     dependency: 
       0: 'Integration\Util\Persist\Persist'    
       1: 
         class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String
-      2: 'Util\Vector\ArrayService'
-        
+        aliase: GearBase\Util\String        

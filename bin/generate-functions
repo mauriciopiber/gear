@@ -26,23 +26,6 @@ function createResolveNames()
 }
 
 
-function numberMap() {
-    return [
-    "Zero",
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Teen"
-***REMOVED***;
-
-}
-
 if (empty($argv[1***REMOVED***)) {
     return;
 }
@@ -50,7 +33,8 @@ if (empty($argv[1***REMOVED***)) {
 $type = $string->str('class', $argv[1***REMOVED***);
 $repeat = (!isset($argv[2***REMOVED***)) ? 1 : (($argv[2***REMOVED*** > 10 ) ? 10 : $argv[2***REMOVED***);
 
-function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
+
+function generateGearfiles($invokables, $config, $type, $repeat)
 {
     $invokableFile = [***REMOVED***;
 
@@ -60,7 +44,7 @@ function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
 
             for ($i = 1; $i <= $repeat; $i++) {
   
-                $invokableFile[***REMOVED*** = generateSource($invokable, $configName, $type, $numberMap, $i);
+                $invokableFile[***REMOVED*** = generateSource($invokable, $configName, $type, $i);
             }
         }
     }
@@ -70,20 +54,22 @@ function generateGearfiles($invokables, $config, $type, $repeat, $numberMap)
 
 }
 
-function generateSource($invokable, $configName, $type, $numberMap, $repeat)
+function generateSource($invokable, $configName, $type, $repeat)
 {
     $string = new StringService();
     
-    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', substr($configName, 0, 5)), $numberMap[$repeat***REMOVED***);
+    $numberString = Gear\Integration\Util\Numbers\NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED***;
+    
+    $name = sprintf($invokable['name'***REMOVED***, $type, $string->str('class', substr($configName, 0, 5)), $numberString);
 
     $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
         
     if (isset($invokable['extends'***REMOVED***)) {
-        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', substr($configName, 0, 5)), $numberMap[$repeat***REMOVED***);
+        $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $string->str('class', substr($configName, 0, 5)), $numberString);
     }
     
     if (isset($invokable['namespace'***REMOVED***)) {
-        $entry['namespace'***REMOVED*** = createNamespace($type, $repeat, $numberMap);
+        $entry['namespace'***REMOVED*** = createNamespace($type, $repeat);
     
     }
     
@@ -94,11 +80,11 @@ function generateSource($invokable, $configName, $type, $numberMap, $repeat)
            $entry['implements'***REMOVED*** = [***REMOVED***;
            
            foreach ($invokable['implements'***REMOVED*** as $invokDep) {
-               $entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberMap[$repeat***REMOVED***);
+               $entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberString);
            }
         
         } else {
-            $entry['implements'***REMOVED*** = sprintf($invokable['implements'***REMOVED***, $type, $numberMap[$repeat***REMOVED***);
+            $entry['implements'***REMOVED*** = sprintf($invokable['implements'***REMOVED***, $type, $numberString);
         }
     }        
                     
@@ -115,18 +101,18 @@ function generateSource($invokable, $configName, $type, $numberMap, $repeat)
            $entry['dependency'***REMOVED*** = [***REMOVED***;
            
            foreach ($invokable['dependency'***REMOVED*** as $invokDep) {
-               $entry['dependency'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $type, $numberMap[$repeat***REMOVED***);
+               $entry['dependency'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $type, $numberString);
            }
         
         } else {
-            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $type, $numberMap[$repeat***REMOVED***);
+            $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $type, $numberString);
         }
     }
     
     return $entry;
 }
 
-function createNamespace($type, $number, $numberMap)
+function createNamespace($type, $number)
 {
     $textName = '';
     
@@ -135,7 +121,7 @@ function createNamespace($type, $number, $numberMap)
         if (!empty($textName)) {
             $textName .= '\\';
         }
-        $textName .= sprintf('%s%s', substr($type, 0, 5), $numberMap[$x***REMOVED***);
+        $textName .= sprintf('%s%s', substr($type, 0, 5), Gear\Integration\Util\Numbers\NumberToStringInterface::NUMBER_MAP[$x***REMOVED***);
     
     }
 
@@ -143,22 +129,23 @@ function createNamespace($type, $number, $numberMap)
     return $textName;
 }
 
-function createMultiplesInterfaces($type, $repeat, $numberMap)
+function createMultiplesInterfaces($type, $repeat)
 {
     $interfaceString = 'Interfaces\%sImpl%s';
     
     if ($repeat == 1) {
-        return sprintf($interfaceString, $type, $numberMap[1***REMOVED***);
+        return sprintf($interfaceString, $type, Gear\Integration\Util\Numbers\NumberToStringInterface::NUMBER_MAP[1***REMOVED***);
     }
     
     $interfaces = [***REMOVED***;
 
     for ($z = 1; $z <= $repeat; $z++) {
-        $interfaces[***REMOVED*** = sprintf($interfaceString, $type, $numberMap[$z***REMOVED***);
+        $interfaces[***REMOVED*** = sprintf($interfaceString, $type, Gear\Integration\Util\Numbers\NumberToStringInterface::NUMBER_MAP[$z***REMOVED***);
     }
     
     return $interfaces;
 }
+
 
 function srcType()
 {
@@ -168,24 +155,4 @@ function srcType()
 function controllerType()
 {
     return ['Action', 'Console'***REMOVED***;
-}
-
-function createGearfileComponent($suite, $data)
-{
-    $string = new StringService();
-    
-    $suiteName = $suite->getSuiteName();
-    
-    $name = $string->str('url', $suiteName);
-
-    $gearfile = sprintf('%s.yml', $name);
-    
-    $yaml = Yaml::dump($data);
-    
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-    $persist->save($suite, $gearfile, $yaml);
-
-    echo "Criado com sucesso"."\n";
-    return $gearfile;
 }

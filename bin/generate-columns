@@ -1,15 +1,2 @@
 <?php
 
-/**
- * Gearfile
- */
-function factoryGearfileColumns($columns)
-{
-    $gearfileColumns = [***REMOVED***;
-    foreach ($columns as $columnName => $columnOptions) {
-        if (isset($columnOptions['speciality'***REMOVED***)) {
-            $gearfileColumns[$columnName***REMOVED*** = $columnOptions['speciality'***REMOVED***;
-        }
-    }
-    return $gearfileColumns;
-}

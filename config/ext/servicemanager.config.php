@@ -72,7 +72,8 @@
         'Gear\Integration\Util\Persist\Persist' => 'Gear\Integration\Util\Persist\PersistFactory',
         'Gear\Integration\Component\SuperTestFile\SuperTestFile' => 'Gear\Integration\Component\SuperTestFile\SuperTestFileFactory',
         'Gear\Integration\Component\TestFile\TestFile' => 'Gear\Integration\Component\TestFile\TestFileFactory',
-        'Gear\Integration\Component\MigrationFile\MigrationFile' => 'Gear\Integration\Component\MigrationFile\MigrationFileFactory'
+        'Gear\Integration\Component\MigrationFile\MigrationFile' => 'Gear\Integration\Component\MigrationFile\MigrationFileFactory',
+        'Gear\Integration\Component\GearFile\GearFile' => 'Gear\Integration\Component\GearFile\GearFileFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

@@ -82,7 +82,12 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
         $string,
         $arrayService    
     );
-    
+
+    $gearfile = new Gear\Integration\Component\GearFile\GearFile(
+        $persist,
+        $string
+    );
+        
     $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
     
     $resolveNames = createResolveNames();
@@ -94,7 +99,7 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $mvcMinorSuite->setForeignKeys($columnUtil->getForeignKeys($mvcMinorSuite->getColumnType()));
     $mvcMinorSuite->setColumns($columnUtil->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
 
-    $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
+    $mvcMinorSuite->setGearFile($gearfile->createMvcGearfile($mvcMinorSuite));
     $mvcMinorSuite->setMigrationFile($migration->createMvcMigration($mvcMinorSuite));
         
     $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
@@ -102,50 +107,6 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
         
 
     return $mvcMinorSuite;
-}
-
-function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
-{
-    $db = [
-        'table' => $mvcMinorSuite->getTableName(),
-        'user' => $mvcMinorSuite->getUserType(),
-        'namespace' => $mvcMinorSuite->getTableName(),
-        'service' => 'factories',
-        'columns' => factoryGearfileColumns($mvcMinorSuite->getColumns())
-    ***REMOVED***;
-    
-    $src = [***REMOVED***;
-    
-    if (!empty($mvcMinorSuite->getForeignKeys())) { 
-        foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) { 
-            $src = array_merge($src, createForeignKeyGearfile($foreignKey));
-        }
-    }
-    
-    if (!empty($mvcMinorSuite->getTableAssoc())) {
-        $src = array_merge($src, createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()));
-    }
-       
-    return createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
-}
-
-function createForeignKeyGearfile($tableId)
-{
-    $string = new GearBase\Util\String\StringService();
-    $table = $string->str('class', str_replace('id_', '', $tableId));
-    
-    return [
-        [
-            'name' => $table,
-            'type' => 'Entity',
-            'db' => $table,
-        ***REMOVED***,
-        [
-            'name' => sprintf('%sFixture', $table),
-            'type' => 'Fixture',
-            'db' => $table,
-        ***REMOVED***,        
-    ***REMOVED***;
 }
 
 
