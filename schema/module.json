@@ -1111,6 +1111,79 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "SrcMvcGenerator",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Component\\GearFile\\GearFile",
+                    "2": "Integration\\Component\\TestFile\\TestFile",
+                    "3": "Integration\\Component\\MigrationFile\\MigrationFile",
+                    "4": "Integration\\Util\\ResolveNames\\ResolveNames",
+                    "5": "Integration\\Util\\Columns\\Columns"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\SrcMvc\\SrcMvcGenerator",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "SrcMvcSuite",
+                "type": "Service",
+                "dependency": {
+                    "2": "Integration\\Suite\\SrcMvc\\SrcMvcGenerator\\SrcMvcGenerator",
+                    "3": "Integration\\Component\\SuperTestFile\\SuperTestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\SrcMvc\\SrcMvcSuite",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerMvcGenerator",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Component\\GearFile\\GearFile",
+                    "2": "Integration\\Component\\TestFile\\TestFile",
+                    "4": "Integration\\Util\\ResolveNames\\ResolveNames",
+                    "5": "Integration\\Util\\Columns\\Columns"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\ControllerMvc\\ControllerMvcGenerator",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerMvcSuite",
+                "type": "Service",
+                "dependency": {
+                    "2": "Integration\\Suite\\ControllerMvc\\ControllerMvcGenerator\\ControllerMvcGenerator",
+                    "3": "Integration\\Component\\SuperTestFile\\SuperTestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\ControllerMvc\\ControllerMvcSuite",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

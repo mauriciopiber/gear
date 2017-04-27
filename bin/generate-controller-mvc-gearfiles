@@ -14,43 +14,43 @@ if (php_sapi_name() === 'cli-server') {
 }
 
 require __DIR__.'/generate-functions';
-require __DIR__.'/generate-columns';
 
+$string = new GearBase\Util\String\StringService();
+$column = new Gear\Integration\Util\Columns\Columns();
+$names = new Gear\Integration\Util\ResolveNames\ResolveNames($string);
 
+$location = new Gear\Integration\Util\Location\Location();
+$persist = new Gear\Integration\Util\Persist\Persist($location);
 
-function runControllerMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
-{
-    $expectedColumns = [
-        $suiteName => $suiteColumns,
-    ***REMOVED***;
+$arrayService = new Gear\Util\Vector\ArrayService();
     
-    $configColumns = [
-        'usertype' => $suiteUserTypes, 
-        'constraints' => $suiteConstraints,
-        'tables' => $suiteTables
-    ***REMOVED***;
-    
-    $migrations = [***REMOVED***;
-    
-    foreach ($expectedColumns as $superType => $types) {
-        foreach ($types as $type) {
-            foreach ($configColumns['usertype'***REMOVED*** as $usertype) {
-                foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                    foreach ($configColumns['tables'***REMOVED*** as $tables) {
-                    
-                        //create ControllerMvcSuiteObject 
-                        //run generateControllerMvc();
-                        var_dump($superType, $type, $usertype, $constraint, $tables);                    
-                    }
-                }
-            }
-        }
-    }
-}
+$migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
+    $persist,
+    $string,
+    $arrayService    
+);
+
+$gearfile = new Gear\Integration\Component\GearFile\GearFile(
+    $persist,
+    $string
+);
+        
+$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+
+$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
+ 
+$controllerGenerator = new Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator(
+    $gearfile, 
+    $testFile, 
+    $names, 
+    $column
+);
+
+$controllerSuite = new Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite($controllerGenerator, $superTestFile);
 
 
 //columns
-runControllerMvcSuite(
+$controllerSuite->runControllerMvcSuite(
     'controller-mvc',
     [
         'mvc-basic',
