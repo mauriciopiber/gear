@@ -17,76 +17,6 @@ if (php_sapi_name() === 'cli-server') {
 require __DIR__.'/generate-functions';
 require __DIR__.'/generate-columns';
 
-
-/*
-function listAvailableMvc()
-{
-    $availableTypes = ['column', 'usertype', 'constraints', 'table'***REMOVED***;
-
-
-    $availableSubtypes = [
-        'column' => [
-            'all',
-            'date',
-            'varchar',
-            'text',
-            'numeric'
-        ***REMOVED***,
-        'constraints' => [
-            '',
-            'not-null',
-            'null',
-            'unique'
-        ***REMOVED***,
-        'table' => [
-            '',
-            'upload-image'
-        ***REMOVED***,
-        'usertype' => ['all', 'low-strict', 'strict'***REMOVED***,
-    ***REMOVED***;
-
-
-    $data = [***REMOVED***;
-
-    foreach ($availableSubtypes['column'***REMOVED*** as $columnName) {
-
-        foreach ($availableSubtypes['constraints'***REMOVED*** as $constraint) {
-        
-            foreach ($availableSubtypes['table'***REMOVED*** as $table) {
-            
-                foreach ($availableSubtypes['usertype'***REMOVED*** as $usertype) {
-            
-                    $string = $columnName;
-                    
-                    if (strlen($constraint)>0) {
-                        $string .= '-'.$constraint;
-                    }
-                    
-                    if (strlen($table)>0) {
-                        $string .= '-'.$table;
-                    }
-                    
-                    if (strlen($usertype)>0) {
-                        $string .= '-'.$usertype;
-                    }
-                        
-                    $data[***REMOVED*** = $string;
-                    
-                }
-                
-            }
-            
-        }
-    }
-
-    foreach ($data as $item) {
-        echo $item."\n";
-    }
-    echo "Total ".count($data)."\n";
-
-}
-*/
-
 function getMigrationName($name)
 {
     $string = new GearBase\Util\String\StringService();
@@ -109,6 +39,11 @@ function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
         'constraints' => $suiteConstraints,
         'tables' => $suiteTables
     ***REMOVED***;
+    
+    $string = new GearBase\Util\String\StringService();
+    $location = new Gear\Integration\Util\Location\Location();
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+    $superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
     
     $migrations = [***REMOVED***;
     
@@ -136,8 +71,9 @@ function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
             }
             
         }
-        
-        updateSuperTestFile($mvcMajor, $migrations);
+    
+        $superTestFile->updateSuperTestFile($mvcMajor, $migrations); 
+   
     }
 }
 
@@ -145,6 +81,10 @@ function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstrain
 function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
     $columnUtil = new Gear\Integration\Util\Columns\Columns();
+    $string = new GearBase\Util\String\StringService();
+    $location = new Gear\Integration\Util\Location\Location();
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+
     
     $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
     
@@ -156,26 +96,16 @@ function generateMvc(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
     $mvcMinorSuite->setLocationKey($resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
     $mvcMinorSuite->setForeignKeys($columnUtil->getForeignKeys($mvcMinorSuite->getColumnType()));
     $mvcMinorSuite->setColumns($columnUtil->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
+
     $mvcMinorSuite->setGearFile(runMvcSuiteGearfile($mvcMinorSuite));
     $mvcMinorSuite->setMigrationFile(createMvcMigrationFile($mvcMinorSuite));
-    
-    updateTestFile($mvcMinorSuite);
+        
+    $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+    $testFile->updateTestFile($mvcMinorSuite);
+        
 
     return $mvcMinorSuite;
 }
-
-function updateSuperTestFile($superType, $migrations)
-{
-    $string = new GearBase\Util\String\StringService();
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-    
-    $superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
-    
-    return $superTestFile->updateSuperTestFile($superType, $migrations);    
-}
-
-
 
 function runMvcSuiteGearfile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
 {
@@ -221,15 +151,12 @@ function createForeignKeyGearfile($tableId)
     ***REMOVED***;
 }
 
-function updateTestFile(Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+
+function updateSuperTestFile($superType, $migrations)
 {
-    $string = new GearBase\Util\String\StringService();
-    $location = new Gear\Integration\Util\Location\Location();
-    $persist = new Gear\Integration\Util\Persist\Persist($location);
-    
-    $testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
-    return $testFile->updateTestFile($mvcMinorSuite);
+   
 }
+
 
 function createForeignKeyMigration($tableId)
 {
