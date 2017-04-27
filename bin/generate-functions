@@ -14,13 +14,6 @@ require 'init_autoloader.php';
 
 use GearBase\Util\String\StringService;
 
-function createResolveNames()
-{
-    $string = new StringService();
-    return new Gear\Integration\Util\ResolveNames\ResolveNames($string);
-}
-
-
 if (empty($argv[1***REMOVED***)) {
     return;
 }

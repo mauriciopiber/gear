@@ -1,9 +1,9 @@
 
 src:
   0:
-    name: MvcGenerator
+    name: SrcMvcGenerator
     type: Service
-    namespace: Integration\Suite\Mvc\MvcGenerator
+    namespace: Integration\Suite\SrcMvc\SrcMvcGenerator
     service: factories
     dependency:
       1: 'Integration\Component\GearFile\GearFile'
@@ -11,33 +11,30 @@ src:
       3: 'Integration\Component\MigrationFile\MigrationFile'   
       4: 'Integration\Util\ResolveNames\ResolveNames'
       5: 'Integration\Util\Columns\Columns'   
-#  1:
-#    name: MvcGenerator
-#    type: Service
-#    namespace: Integration\Suite\Mvc\MvcGenerator
-#    service: factories
-#    dependency:
-#      1: 'Integration\Component\GearFile\GearFile'
-#      2: 'Integration\Component\TestFile\TestFile'
-##
-#
   1:
-    name: MvcSuite
+    name: SrcMvcSuite
     type: Service
-    namespace: Integration\Suite\Mvc\MvcSuite
+    namespace: Integration\Suite\SrcMvc\SrcMvcSuite
     service: factories
     dependency:
-      2: 'Integration\Suite\Mvc\MvcGenerator\MvcGenerator'
+      2: 'Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator'
       3: 'Integration\Component\SuperTestFile\SuperTestFile'          
-#  2: 
-#    name: MvcMinorSuite
-#    type: ValueObject
-#    namespace: Integration\Suite\Mvc
-#    extends: Integration\Suite\AbstractMinorSuite
-    
-#  3: 
-#    name: MvcMajorSuite
-#    type: ValueObject
-#    namespace: Integration\Suite\Mvc
-#    extends: Integration\Suite\AbstractMajorSuite
-        
+  2:
+    name: ControllerMvcGenerator
+    type: Service
+    namespace: Integration\Suite\ControllerMvc\ControllerMvcGenerator
+    service: factories
+    dependency:
+      1: 'Integration\Component\GearFile\GearFile'
+      2: 'Integration\Component\TestFile\TestFile'
+      4: 'Integration\Util\ResolveNames\ResolveNames'
+      5: 'Integration\Util\Columns\Columns'
+  3:
+    name: ControllerMvcSuite
+    type: Service
+    namespace: Integration\Suite\ControllerMvc\ControllerMvcSuite
+    service: factories
+    dependency:
+      2: 'Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator'
+      3: 'Integration\Component\SuperTestFile\SuperTestFile'          
+      

@@ -167,8 +167,42 @@ function createSrcMvcTestFile(
     
 }
 
+$string = new GearBase\Util\String\StringService();
+$column = new Gear\Integration\Util\Columns\Columns();
+$names = new Gear\Integration\Util\ResolveNames\ResolveNames($string);
 
-runSrcMvcSuite(
+$location = new Gear\Integration\Util\Location\Location();
+$persist = new Gear\Integration\Util\Persist\Persist($location);
+
+$arrayService = new Gear\Util\Vector\ArrayService();
+    
+$migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
+    $persist,
+    $string,
+    $arrayService    
+);
+
+$gearfile = new Gear\Integration\Component\GearFile\GearFile(
+    $persist,
+    $string
+);
+        
+$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+
+$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
+ 
+$srcMvcGenerator = new Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator(
+    $gearfile, 
+    $testFile, 
+    $migrationFile, 
+    $names, 
+    $column
+);
+
+$srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite($srcMvcGenerator, $superTestFile);
+
+
+$srcMvcSuite->runSrcMvcSuite(
     ['Service', 'Repository', 'Form', 'Filter', 'SearchForm', 'Entity', 'Fixture'***REMOVED***,
     [
         'complete',

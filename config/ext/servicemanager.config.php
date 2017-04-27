@@ -79,7 +79,11 @@
         'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator' => 'Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGeneratorFactory',
         'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite' => 'Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteFactory',
         'Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator' => 'Gear\Integration\Suite\Mvc\MvcGenerator\MvcGeneratorFactory',
-        'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite' => 'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuiteFactory'
+        'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite' => 'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuiteFactory',
+        'Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator' => 'Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGeneratorFactory',
+        'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuiteFactory',
+        'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorFactory',
+        'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false
