@@ -1074,6 +1074,43 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "MvcGenerator",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Component\\GearFile\\GearFile",
+                    "2": "Integration\\Component\\TestFile\\TestFile",
+                    "3": "Integration\\Component\\MigrationFile\\MigrationFile",
+                    "4": "Integration\\Util\\ResolveNames\\ResolveNames",
+                    "5": "Integration\\Util\\Columns\\Columns"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Mvc\\MvcGenerator",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MvcSuite",
+                "type": "Service",
+                "dependency": {
+                    "2": "Integration\\Suite\\Mvc\\MvcGenerator\\MvcGenerator",
+                    "3": "Integration\\Component\\SuperTestFile\\SuperTestFile"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Mvc\\MvcSuite",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
