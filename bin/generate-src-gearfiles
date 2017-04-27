@@ -17,14 +17,21 @@ if (php_sapi_name() === 'cli-server') {
 // Setup autoloading
 require __DIR__.'/generate-functions';
 
-
-
-
-function runSrcSuite($type, $repeat)
+function generateSrc($srcMinor)
 {
-    $srcMajor = new Gear\Integration\Suite\Src\SrcMajorSuite();
-    $srcMinor = new Gear\Integration\Suite\Src\SrcMinorSuite($srcMajor, $type, $repeat);
-    
+    $type = $srcMinor->getType();
+    $repeat = $srcMinor->getRepeat();
+    $string = new GearBase\Util\String\StringService();
+    $location = new Gear\Integration\Util\Location\Location();
+    $persist = new Gear\Integration\Util\Persist\Persist($location);
+
+    $gearfile = new Gear\Integration\Component\GearFile\GearFile(
+        $persist,
+        $string
+    );
+
+    $srcOptions = [***REMOVED***;
+
     $data = [***REMOVED***;
 
     if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
@@ -34,8 +41,10 @@ function runSrcSuite($type, $repeat)
             'name' => '%sImpl%s%s',
             'type' => 'Interface'
         ***REMOVED***;
+        
+        $srcOptions[***REMOVED*** = [$implements, ['0' => ''***REMOVED***, $type, $repeat***REMOVED***;
 
-        $data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat));
+        //$data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat));
 
     }
     $invokables = [***REMOVED***;
@@ -61,13 +70,13 @@ function runSrcSuite($type, $repeat)
 
         $invokables[***REMOVED*** = [
             'name' => '%sImplements%s%s',
-            'implements' => createMultiplesInterfaces($type, 1),
+            'implements' => $gearfile->createMultiplesInterfaces($type, 1),
             'type' => $type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => '%sImplementsMany%s%s',
-            'implements' => createMultiplesInterfaces($type, $repeat),
+            'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
             'type' => $type
         ***REMOVED***;
     }
@@ -85,7 +94,7 @@ function runSrcSuite($type, $repeat)
         'name' => '%sFull%s%s',
         'extends' => '%s\%sExtendable%s%s',
         'namespace' => '%s',
-        'implements' => createMultiplesInterfaces($type, $repeat),
+        'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
         'type' => $type
     ***REMOVED***;
 
@@ -100,7 +109,8 @@ function runSrcSuite($type, $repeat)
     }
 
 
-    $data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat));
+    //$data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat));
+    $srcOptions[***REMOVED*** = [$invokables, $config, $type, $repeat***REMOVED***;
 
     $dependencies = [***REMOVED***;
 
@@ -124,7 +134,7 @@ function runSrcSuite($type, $repeat)
             'name' => '%sDepFull%s%s',
             'extends' => '%s\%sExtendable%s%s',
             'namespace' => '%s',
-            'implements' => createMultiplesInterfaces($type, 1),
+            'implements' => $gearfile->createMultiplesInterfaces($type, 1),
             'type' => $type,
             'dependency' => '%s\%sInvok%s'
         ***REMOVED***;
@@ -133,21 +143,30 @@ function runSrcSuite($type, $repeat)
             'name' => '%sDepsFull%s%s',
             'extends' => '%s\%sExtendable%s%s',
             'namespace' => '%s',
-            'implements' => createMultiplesInterfaces($type, $repeat),
+            'implements' => $gearfile->createMultiplesInterfaces($type, $repeat),
             'type' => $type,
             'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
         ***REMOVED***;
 
         $config = ['factories', 'abstract'***REMOVED***;
 
-
-        $data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat));
+        $srcOptions[***REMOVED*** = [$dependencies, $config, $type, $repeat***REMOVED***;
+        //$data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat));
 
     }
     
     $srcMinor->setLocationKey(sprintf('src-%s', strtolower($srcMinor->getType())));
+    return $gearfile->createSrcGearfile($srcMinor, $srcOptions);
+}
 
-    createGearfileComponent($srcMinor, ['src' => $data***REMOVED***);
+
+function runSrcSuite($type, $repeat)
+{
+    $srcMajor = new Gear\Integration\Suite\Src\SrcMajorSuite();
+    $srcMinor = new Gear\Integration\Suite\Src\SrcMinorSuite($srcMajor, $type, $repeat);
+    
+    
+    generateSrc($srcMinor);
 }
 
 
