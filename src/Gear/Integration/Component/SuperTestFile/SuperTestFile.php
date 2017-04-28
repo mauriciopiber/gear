@@ -21,7 +21,9 @@ class SuperTestFile
 
     use StringServiceTrait;
 
-    const TEMPLATE_CONSTRUCTOR = 'construct+=("%s/%s:%s/%s")';
+    const TEMPLATE_CONSTRUCTOR = 'construct+=("%s/%s")';
+
+    const TEMPLATE_CONSTRUCTOR_ALL = 'construct+=("%s/%s:%s/%s")';
 
     const REPLACE_CONSTRUCTOR = 'construct+=("")';
 
@@ -49,15 +51,13 @@ class SuperTestFile
         return $this;
     }
 
-    function updateSuperTestFile($superType, $migrations)
+    public function updateSuperTestFile($superType, $migrations = null)
     {
         $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
 
-        $constructTemplate = self::TEMPLATE_CONSTRUCTOR.PHP_EOL;
-
         $construct = '';
 
-        foreach ($migrations as $suite) {
+        foreach ($superType->getMinorSuites() as $suite) {
             $locationKey = $suite->getLocationKey();
 
             $folder = array_values(array_slice(explode('/', $locationKey), -1))[0***REMOVED***;
@@ -65,8 +65,9 @@ class SuperTestFile
             $gearfile = $suite->getGearFile();
             $migration = $suite->getMigrationFile();
 
-            $construct .= sprintf($constructTemplate, $folder, $gearfile, $folder, $migration);
-
+            $construct = ($migration === null)
+                ? sprintf(self::TEMPLATE_CONSTRUCTOR, $folder, $gearfile).PHP_EOL
+                : sprintf(self::TEMPLATE_CONSTRUCTOR_ALL, $folder, $gearfile, $folder, $migration).PHP_EOL;
         }
 
         $newFile = str_replace(self::REPLACE_CONSTRUCTOR, $construct, $testFile);

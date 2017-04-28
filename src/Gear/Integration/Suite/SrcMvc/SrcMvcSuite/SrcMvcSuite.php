@@ -42,8 +42,6 @@ class SrcMvcSuite
 
     public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
     {
-        $superType = [***REMOVED***;
-
         $srcMvcMajor = new SrcMvcMajorSuite(
             null,
             $suiteColumns,
@@ -54,7 +52,9 @@ class SrcMvcSuite
 
         foreach ($types as $type) {
             $srcMvcMinor = new SrcMvcMinorSuite($srcMvcMajor, $type);
-            $superType[***REMOVED*** = $this->srcMvcGenerator->generateSrcMvc($srcMvcMinor);
+            $srcMvcMajor->addMinorSuite($this->srcMvcGenerator->generateSrcMvc($srcMvcMinor));
         }
+
+        $this->superTestFile->updateSuperTestFile($srcMvcMajor);
     }
 }

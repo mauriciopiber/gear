@@ -16,8 +16,6 @@ class SrcMajorSuite extends AbstractMajorSuite
 {
     const SUITE = 'src';
 
-    protected $srcMinorSuite;
-
     /**
      * Constructor
      *
@@ -25,17 +23,17 @@ class SrcMajorSuite extends AbstractMajorSuite
      */
     public function __construct()
     {
-        $this->srcMinorSuite = [***REMOVED***;
+        $this->srcMinorSuites = [***REMOVED***;
         return $this;
     }
 
-    public function addMinorSuite(SrcMinorSuite $srcMinorSuite)
+    public function getSuperType()
     {
-        $this->srcMinorSuite[***REMOVED*** = $srcMinorSuite;
+        return '';
     }
 
-    public function getMinorSuite()
+    public function addMinorSuite(SrcMinorSuite $minorSuite)
     {
-        return $this->srcMinorSuite;
+        $this->minorSuites[***REMOVED*** = $minorSuite;
     }
 }
