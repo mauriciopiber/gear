@@ -1,54 +1,54 @@
 src:
-    - { name: ConsoleImplOne, type: Interface }
-    - { name: ConsoleImplTwo, type: Interface }
-    - { name: ConsoleImplThree, type: Interface }
-    - { name: ConsoleImplFour, type: Interface }
-    - { name: ConsoleExtendableInvokOne, type: Console, service: invokables }
-    - { name: ConsoleExtendableInvokTwo, type: Console, service: invokables }
-    - { name: ConsoleExtendableInvokThree, type: Console, service: invokables }
-    - { name: ConsoleExtendableInvokFour, type: Console, service: invokables }
-    - { name: ConsoleExtendableFactoOne, type: Console, service: factories }
-    - { name: ConsoleExtendableFactoTwo, type: Console, service: factories }
-    - { name: ConsoleExtendableFactoThree, type: Console, service: factories }
-    - { name: ConsoleExtendableFactoFour, type: Console, service: factories }
+    - { name: consoleImplOne, type: Interface }
+    - { name: consoleImplTwo, type: Interface }
+    - { name: consoleImplThree, type: Interface }
+    - { name: consoleImplFour, type: Interface }
+    - { name: consoleExtendableInvokOne, type: console, service: invokables }
+    - { name: consoleExtendableInvokTwo, type: console, service: invokables }
+    - { name: consoleExtendableInvokThree, type: console, service: invokables }
+    - { name: consoleExtendableInvokFour, type: console, service: invokables }
+    - { name: consoleExtendableFactoOne, type: console, service: factories }
+    - { name: consoleExtendableFactoTwo, type: console, service: factories }
+    - { name: consoleExtendableFactoThree, type: console, service: factories }
+    - { name: consoleExtendableFactoFour, type: console, service: factories }
 controller:
-    - { name: ConsoleInvokOne, type: Console, service: invokables }
-    - { name: ConsoleInvokTwo, type: Console, service: invokables }
-    - { name: ConsoleInvokThree, type: Console, service: invokables }
-    - { name: ConsoleInvokFour, type: Console, service: invokables }
-    - { name: ConsoleFactoOne, type: Console, service: factories }
-    - { name: ConsoleFactoTwo, type: Console, service: factories }
-    - { name: ConsoleFactoThree, type: Console, service: factories }
-    - { name: ConsoleFactoFour, type: Console, service: factories }
-    - { name: ConsoleNamespaceInvokOne, type: Console, namespace: ConsoOne, service: invokables }
-    - { name: ConsoleNamespaceInvokTwo, type: Console, namespace: ConsoOne\ConsoTwo, service: invokables }
-    - { name: ConsoleNamespaceInvokThree, type: Console, namespace: ConsoOne\ConsoTwo\ConsoThree, service: invokables }
-    - { name: ConsoleNamespaceInvokFour, type: Console, namespace: ConsoOne\ConsoTwo\ConsoThree\ConsoFour, service: invokables }
-    - { name: ConsoleNamespaceFactoOne, type: Console, namespace: ConsoOne, service: factories }
-    - { name: ConsoleNamespaceFactoTwo, type: Console, namespace: ConsoOne\ConsoTwo, service: factories }
-    - { name: ConsoleNamespaceFactoThree, type: Console, namespace: ConsoOne\ConsoTwo\ConsoThree, service: factories }
-    - { name: ConsoleNamespaceFactoFour, type: Console, namespace: ConsoOne\ConsoTwo\ConsoThree\ConsoFour, service: factories }
-    - { name: ConsoleImplementsInvokOne, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
-    - { name: ConsoleImplementsInvokTwo, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
-    - { name: ConsoleImplementsInvokThree, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
-    - { name: ConsoleImplementsInvokFour, type: Console, implements: Interfaces\ConsoleImplOne, service: invokables }
-    - { name: ConsoleImplementsFactoOne, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
-    - { name: ConsoleImplementsFactoTwo, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
-    - { name: ConsoleImplementsFactoThree, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
-    - { name: ConsoleImplementsFactoFour, type: Console, implements: Interfaces\ConsoleImplOne, service: factories }
-    - { name: ConsoleImplementsManyInvokOne, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: invokables }
-    - { name: ConsoleImplementsManyInvokTwo, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: invokables }
-    - { name: ConsoleImplementsManyInvokThree, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: invokables }
-    - { name: ConsoleImplementsManyInvokFour, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: invokables }
-    - { name: ConsoleImplementsManyFactoOne, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: factories }
-    - { name: ConsoleImplementsManyFactoTwo, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: factories }
-    - { name: ConsoleImplementsManyFactoThree, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: factories }
-    - { name: ConsoleImplementsManyFactoFour, type: Console, implements: [Interfaces\ConsoleImplOne, Interfaces\ConsoleImplTwo, Interfaces\ConsoleImplThree, Interfaces\ConsoleImplFour***REMOVED***, service: factories }
-    - { name: ConsoleExtendsInvokOne, type: Console, extends: Console\ConsoleExtendableInvokOne, service: invokables }
-    - { name: ConsoleExtendsInvokTwo, type: Console, extends: Console\ConsoleExtendableInvokTwo, service: invokables }
-    - { name: ConsoleExtendsInvokThree, type: Console, extends: Console\ConsoleExtendableInvokThree, service: invokables }
-    - { name: ConsoleExtendsInvokFour, type: Console, extends: Console\ConsoleExtendableInvokFour, service: invokables }
-    - { name: ConsoleExtendsFactoOne, type: Console, extends: Console\ConsoleExtendableFactoOne, service: factories }
-    - { name: ConsoleExtendsFactoTwo, type: Console, extends: Console\ConsoleExtendableFactoTwo, service: factories }
-    - { name: ConsoleExtendsFactoThree, type: Console, extends: Console\ConsoleExtendableFactoThree, service: factories }
-    - { name: ConsoleExtendsFactoFour, type: Console, extends: Console\ConsoleExtendableFactoFour, service: factories }
+    - { name: consoleInvokOne, type: console, service: invokables }
+    - { name: consoleInvokTwo, type: console, service: invokables }
+    - { name: consoleInvokThree, type: console, service: invokables }
+    - { name: consoleInvokFour, type: console, service: invokables }
+    - { name: consoleFactoOne, type: console, service: factories }
+    - { name: consoleFactoTwo, type: console, service: factories }
+    - { name: consoleFactoThree, type: console, service: factories }
+    - { name: consoleFactoFour, type: console, service: factories }
+    - { name: consoleNamespaceInvokOne, type: console, namespace: consoOne, service: invokables }
+    - { name: consoleNamespaceInvokTwo, type: console, namespace: consoOne\consoTwo, service: invokables }
+    - { name: consoleNamespaceInvokThree, type: console, namespace: consoOne\consoTwo\consoThree, service: invokables }
+    - { name: consoleNamespaceInvokFour, type: console, namespace: consoOne\consoTwo\consoThree\consoFour, service: invokables }
+    - { name: consoleNamespaceFactoOne, type: console, namespace: consoOne, service: factories }
+    - { name: consoleNamespaceFactoTwo, type: console, namespace: consoOne\consoTwo, service: factories }
+    - { name: consoleNamespaceFactoThree, type: console, namespace: consoOne\consoTwo\consoThree, service: factories }
+    - { name: consoleNamespaceFactoFour, type: console, namespace: consoOne\consoTwo\consoThree\consoFour, service: factories }
+    - { name: consoleImplementsInvokOne, type: console, implements: Interfaces\consoleImplOne, service: invokables }
+    - { name: consoleImplementsInvokTwo, type: console, implements: Interfaces\consoleImplOne, service: invokables }
+    - { name: consoleImplementsInvokThree, type: console, implements: Interfaces\consoleImplOne, service: invokables }
+    - { name: consoleImplementsInvokFour, type: console, implements: Interfaces\consoleImplOne, service: invokables }
+    - { name: consoleImplementsFactoOne, type: console, implements: Interfaces\consoleImplOne, service: factories }
+    - { name: consoleImplementsFactoTwo, type: console, implements: Interfaces\consoleImplOne, service: factories }
+    - { name: consoleImplementsFactoThree, type: console, implements: Interfaces\consoleImplOne, service: factories }
+    - { name: consoleImplementsFactoFour, type: console, implements: Interfaces\consoleImplOne, service: factories }
+    - { name: consoleImplementsManyInvokOne, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: invokables }
+    - { name: consoleImplementsManyInvokTwo, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: invokables }
+    - { name: consoleImplementsManyInvokThree, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: invokables }
+    - { name: consoleImplementsManyInvokFour, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: invokables }
+    - { name: consoleImplementsManyFactoOne, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: factories }
+    - { name: consoleImplementsManyFactoTwo, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: factories }
+    - { name: consoleImplementsManyFactoThree, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: factories }
+    - { name: consoleImplementsManyFactoFour, type: console, implements: [Interfaces\consoleImplOne, Interfaces\consoleImplTwo, Interfaces\consoleImplThree, Interfaces\consoleImplFour***REMOVED***, service: factories }
+    - { name: consoleExtendsInvokOne, type: console, extends: console\consoleExtendableInvokOne, service: invokables }
+    - { name: consoleExtendsInvokTwo, type: console, extends: console\consoleExtendableInvokTwo, service: invokables }
+    - { name: consoleExtendsInvokThree, type: console, extends: console\consoleExtendableInvokThree, service: invokables }
+    - { name: consoleExtendsInvokFour, type: console, extends: console\consoleExtendableInvokFour, service: invokables }
+    - { name: consoleExtendsFactoOne, type: console, extends: console\consoleExtendableFactoOne, service: factories }
+    - { name: consoleExtendsFactoTwo, type: console, extends: console\consoleExtendableFactoTwo, service: factories }
+    - { name: consoleExtendsFactoThree, type: console, extends: console\consoleExtendableFactoThree, service: factories }
+    - { name: consoleExtendsFactoFour, type: console, extends: console\consoleExtendableFactoFour, service: factories }

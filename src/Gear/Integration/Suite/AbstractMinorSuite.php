@@ -19,6 +19,18 @@ abstract class AbstractMinorSuite extends AbstractSuite
         return $this;
     }
 
+
+    public function getGearFile()
+    {
+        return $this->gearFile;
+    }
+
+    public function setGearFile($gearFile)
+    {
+        $this->gearFile = $gearFile;
+        return $this;
+    }
+
     public function getMajorSuite()
     {
         return $this->majorSuite;
