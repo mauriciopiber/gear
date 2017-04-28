@@ -44,13 +44,12 @@ class SrcSuite
     public function runSrcSuite($types, $repeat)
     {
         $srcMajor = new SrcMajorSuite();
-        $suites = [***REMOVED***;
 
         foreach ($types as $type) {
-            $srcMinor = new SrcMinorSuite($srcMajor, $type, $repeat);
-
-            $suites[***REMOVED*** = $this->srcGenerator->generateMinorSuite($srcMinor);
+            $srcMajor->addMinorSuite($this->srcGenerator->generateMinorSuite(new SrcMinorSuite($srcMajor, $type, $repeat)));
         }
+
+        $this->superTestFile->updateSuperTestFile($srcMajor);
     }
 
 }

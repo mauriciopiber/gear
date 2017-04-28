@@ -8,6 +8,8 @@ abstract class AbstractMinorSuite extends AbstractSuite
 
     protected $locationKey;
 
+    protected $migrationFile;
+
     /**
      * Constructor
      *
@@ -28,6 +30,18 @@ abstract class AbstractMinorSuite extends AbstractSuite
     public function setGearFile($gearFile)
     {
         $this->gearFile = $gearFile;
+        return $this;
+    }
+
+
+    public function getMigrationFile()
+    {
+        return $this->migrationFile;
+    }
+
+    public function setMigrationFile($migrationFile)
+    {
+        $this->migrationFile = $migrationFile;
         return $this;
     }
 

@@ -52,8 +52,6 @@ class MvcSuite
             'tables' => $suiteTables
         ***REMOVED***;
 
-        $minorSuites = [***REMOVED***;
-
         $mvcMajor = new MvcMajorSuite($suiteName);
 
         foreach ($expectedColumns as $superType => $columnType) {
@@ -69,14 +67,14 @@ class MvcSuite
                                 $constraint,
                                 $tables
                             );
-                            $minorSuites[$column***REMOVED*** = $this->mvcGenerator->generateMvc($mvcSuite);
+                            $mvcMajor->addMinorSuite($this->mvcGenerator->generateMvc($mvcSuite));
                         }
                     }
                 }
 
             }
 
-            $this->superTestFile->updateSuperTestFile($mvcMajor, $minorSuites);
+            $this->superTestFile->updateSuperTestFile($mvcMajor);
         }
     }
 }

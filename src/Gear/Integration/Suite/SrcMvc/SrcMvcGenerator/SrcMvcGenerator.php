@@ -87,6 +87,8 @@ class SrcMvcGenerator
         }
 
         $this->createSrcMvcTestFile($srcMvcMinor);
+
+        return $srcMvcMinor;
     }
 
     private function prepareTables(SrcMvcMinorSuite $srcMvcMinor)

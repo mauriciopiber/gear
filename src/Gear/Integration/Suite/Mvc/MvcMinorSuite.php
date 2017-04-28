@@ -76,16 +76,6 @@ class MvcMinorSuite extends AbstractMinorSuite
         //return sprintf('%s/%s', )
     }
 
-    public function getMigrationFile()
-    {
-        return $this->migrationFile;
-    }
-
-    public function setMigrationFile($migrationFile)
-    {
-        $this->migrationFile = $migrationFile;
-        return $this;
-    }
 
     public function setForeignKeys($foreignKeys)
     {
