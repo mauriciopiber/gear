@@ -18,85 +18,71 @@ require 'init_autoloader.php';
 use Gear\Integration\Util;
 use Gear\Integration\Component;
 
+
 $string = new GearBase\Util\String\StringService();
+$column = new Gear\Integration\Util\Columns\Columns();
+$names = new Gear\Integration\Util\ResolveNames\ResolveNames($string);
+
+$location = new Gear\Integration\Util\Location\Location();
+$persist = new Gear\Integration\Util\Persist\Persist($location);
+
 $arrayService = new Gear\Util\Vector\ArrayService();
-
-$resolveNames = new Util\ResolveNames\ResolveNames($string);
-$columnUtil   = new Util\Columns\Columns();
-$location     = new Util\Location\Location();
-$persist      = new Util\Persist\Persist($location);
-
     
-$migration = new Component\MigrationFile\MigrationFile(
+$migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
     $persist,
     $string,
     $arrayService    
 );
 
-$gearfile = new Component\GearFile\GearFile(
+$gearfile = new Gear\Integration\Component\GearFile\GearFile(
     $persist,
     $string
 );
-    
-$testFile = new Component\TestFile\TestFile($persist, $string);
         
-$superTestFile = Component\SuperTestFile\SuperTestFile($persist, $string);
+$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
 
-            
-        
-/*
-$generator = Gear\Integration\Generator();
+$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
+ 
+$mvcGenerator = new Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator(
+    $gearfile, 
+    $testFile, 
+    $migrationFile, 
+    $names, 
+    $column
+);
 
-$generator->generateSrc();
-$generator->generateSrcMvc();
-$generator->generateController();
-$generator->generateControllerMvc();
-$generator->generateMvc();
-*/
+$srcGenerator = new Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator(
+    $gearfile, 
+    $testFile
+);
 
-/*
-# Gear\Integration\Generator\GeneratorInterface;
+$controllerGenerator = new Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator(
+    $gearfile, 
+    $testFile
+);
 
-# Gear\Integration\Generator\Generator
-# Gear\Integration\Generator\SrcGenerator\SrcGenerator;
--- dependency
--- implements
--- gearfile
-# Gear\Integration\Generator\SrcMvcGenerator\SrcMvcGenerator;
-# Gear\Integration\Generator\ControllerGenerator\ControllerGenerator;
--- dependency
--- implements
--- gearfile
-# Gear\Integration\Generator\ControllerMvcGenerator\ControllerMvcGenerator;
-# Gear\Integration\Generator\MvcGenerator\MvcGenerator;
+$srcMvcGenerator = new Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator(
+    $gearfile, 
+    $testFile, 
+    $migrationFile, 
+    $names, 
+    $column
+);
 
-# Gear\Integration\MvcTest
-    - columns
-    - super type
-    - constraints
-    - user type
-    - tables
-    - count
-#    + getNames
-# Gear\Integration\SrcTest
-    - type
-    - count
-# Gear\Integration\ControllerTest
-    - type
-    - count
-# Gear\Integration\SrcMvcTest
-    - extends MvcTest
-    - type
-# Gear\Integration\ControllerMvcTest
-    - extends MvcTest
-    - const type
-# Gear\Integration\Util\ResolveNames
-# Gear\Integration\Util\ResolveColumns
-# Gear\Integration\Util\ResolveImplements
-# Gear\Integration\Util\ResolveDependency
+$controllerMvcGenerator = new Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator(
+    $gearfile, 
+    $testFile,
+    $names, 
+    $column
+);
 
-# Gear\Integration\Output\Migration
-# Gear\Integration\Output\Gearfile
-# Gear\Integration\Util\GearfileGenerator
-# Gear\Integration\Util\MigrationGenerator
-*/
+$mvcSuite = new Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite($mvcGenerator, $superTestFile);
+$srcSuite = new Gear\Integration\Suite\Src\SrcSuite\SrcSuite($srcGenerator, $superTestFile);
+$controllerSuite = new Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite($controllerGenerator, $superTestFile);
+$srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite($srcMvcGenerator, $superTestFile);
+$controllerMvcSuite = new Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite($controllerMvcGenerator, $superTestFile);
+
+
+$integration = new Gear\Integration\Suite\Integration\Integration($srcSuite, $srcMvcSuite, $controllerSuite, $controllerMvcSuite, $mvcSuite);
+
+$integration->integrate(); 
