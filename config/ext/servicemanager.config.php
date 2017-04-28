@@ -83,7 +83,8 @@
         'Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator' => 'Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGeneratorFactory',
         'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuiteFactory',
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorFactory',
-        'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory'
+        'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory',
+        'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

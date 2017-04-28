@@ -1184,6 +1184,26 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "Integration",
+                "type": "Service",
+                "dependency": {
+                    "1": "Integration\\Suite\\Src\\SrcSuite\\SrcSuite",
+                    "2": "Integration\\Suite\\SrcMvc\\SrcMvcSuite\\SrcMvcSuite",
+                    "3": "Integration\\Suite\\Controller\\ControllerSuite\\ControllerSuite",
+                    "4": "Integration\\Suite\\ControllerMvc\\ControllerMvcSuite\\ControllerMvcSuite",
+                    "5": "Integration\\Suite\\Mvc\\MvcSuite\\MvcSuite"
+                },
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Integration\\Suite\\Integration",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
