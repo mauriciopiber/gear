@@ -30,7 +30,18 @@ class Integration
     use ControllerSuiteTrait;
 
     use ControllerMvcSuiteTrait;
+
     use MvcSuiteTrait;
+
+    const ALL_COLUMNS = ['basic', 'complete', 'dates', 'numeric', 'text', 'varchar'***REMOVED***;
+
+    const ALL_CONSTRAINTS = [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***;
+
+    const ALL_USERTYPES = ['all', 'low-strict', 'strict'***REMOVED***;
+
+    const ALL_ASSOC_TABLES = [null, 'upload_image'***REMOVED***;
+
+    const REPEAT = 4;
 
     /**
      * Constructor
@@ -71,13 +82,18 @@ class Integration
 
     public function runSrc()
     {
-        $types = ['repository', 'service', 'form', 'filter', 'view-helper', 'controller-plugin', 'value-object'***REMOVED***;
-
-        $repeat = 4;
-
-        foreach ($types as $type) {
-            $this->srcSuite->runSrcSuite($type, $repeat);
-        }
+        $this->srcSuite->runSrcSuite(
+            [
+                'repository',
+                'service',
+                'form',
+                'filter',
+                'view-helper',
+                'controller-plugin',
+                'value-object'
+            ***REMOVED***,
+            self::REPEAT
+        );
     }
 
     public function runMvc()
@@ -147,17 +163,37 @@ class Integration
 
     public function runController()
     {
-
+        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, self::REPEAT);
     }
 
     public function runControllerMvc()
     {
-
+        $this->controllerMvcSuite->runControllerMvcSuite(
+            self::ALL_COLUMNS,
+            self::ALL_USERTYPES,
+            self::ALL_CONSTRAINTS,
+            self::ALL_ASSOC_TABLES
+        );
     }
 
     public function runSrcMvc()
     {
 
+        $this->srcSuite->runSrcSuite(
+            [
+                'entity',
+                'fixture',
+                'repository',
+                'service',
+                'filter',
+                'form',
+                'search-form'
+            ***REMOVED***,
+            self::ALL_COLUMNS,
+            self::ALL_USERTYPES,
+            self::ALL_CONSTRAINTS,
+            self::ALL_ASSOC_TABLES
+        );
     }
 
 }
