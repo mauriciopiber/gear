@@ -1,6 +1,41 @@
 src:
-    - { name: ValueObjectExtendableInvokOne, type: ValueObject, service: invokables }
-    - { name: ValueObjectInvokOne, type: ValueObject, service: invokables }
-    - { name: ValueObjectNamespaceInvokOne, type: ValueObject, namespace: ValueOne, service: invokables }
-    - { name: ValueObjectExtendsInvokOne, type: ValueObject, extends: ValueObject\ValueObjectExtendableInvokOne, service: invokables }
-    - { name: ValueObjectFullInvokOne, type: ValueObject, extends: ValueObject\ValueObjectExtendableInvokOne, namespace: ValueOne, implements: Interfaces\ValueObjectImplOne, service: invokables }
+    - { name: value-objectExtendableInvokOne, type: value-object, service: invokables }
+    - { name: value-objectExtendableInvokTwo, type: value-object, service: invokables }
+    - { name: value-objectExtendableInvokThree, type: value-object, service: invokables }
+    - { name: value-objectExtendableInvokFour, type: value-object, service: invokables }
+    - { name: value-objectExtendableFactoOne, type: value-object, service: factories }
+    - { name: value-objectExtendableFactoTwo, type: value-object, service: factories }
+    - { name: value-objectExtendableFactoThree, type: value-object, service: factories }
+    - { name: value-objectExtendableFactoFour, type: value-object, service: factories }
+    - { name: value-objectInvokOne, type: value-object, service: invokables }
+    - { name: value-objectInvokTwo, type: value-object, service: invokables }
+    - { name: value-objectInvokThree, type: value-object, service: invokables }
+    - { name: value-objectInvokFour, type: value-object, service: invokables }
+    - { name: value-objectFactoOne, type: value-object, service: factories }
+    - { name: value-objectFactoTwo, type: value-object, service: factories }
+    - { name: value-objectFactoThree, type: value-object, service: factories }
+    - { name: value-objectFactoFour, type: value-object, service: factories }
+    - { name: value-objectNamespaceInvokOne, type: value-object, namespace: valueOne, service: invokables }
+    - { name: value-objectNamespaceInvokTwo, type: value-object, namespace: valueOne\valueTwo, service: invokables }
+    - { name: value-objectNamespaceInvokThree, type: value-object, namespace: valueOne\valueTwo\valueThree, service: invokables }
+    - { name: value-objectNamespaceInvokFour, type: value-object, namespace: valueOne\valueTwo\valueThree\valueFour, service: invokables }
+    - { name: value-objectNamespaceFactoOne, type: value-object, namespace: valueOne, service: factories }
+    - { name: value-objectNamespaceFactoTwo, type: value-object, namespace: valueOne\valueTwo, service: factories }
+    - { name: value-objectNamespaceFactoThree, type: value-object, namespace: valueOne\valueTwo\valueThree, service: factories }
+    - { name: value-objectNamespaceFactoFour, type: value-object, namespace: valueOne\valueTwo\valueThree\valueFour, service: factories }
+    - { name: value-objectExtendsInvokOne, type: value-object, extends: value-object\value-objectExtendableInvokOne, service: invokables }
+    - { name: value-objectExtendsInvokTwo, type: value-object, extends: value-object\value-objectExtendableInvokTwo, service: invokables }
+    - { name: value-objectExtendsInvokThree, type: value-object, extends: value-object\value-objectExtendableInvokThree, service: invokables }
+    - { name: value-objectExtendsInvokFour, type: value-object, extends: value-object\value-objectExtendableInvokFour, service: invokables }
+    - { name: value-objectExtendsFactoOne, type: value-object, extends: value-object\value-objectExtendableFactoOne, service: factories }
+    - { name: value-objectExtendsFactoTwo, type: value-object, extends: value-object\value-objectExtendableFactoTwo, service: factories }
+    - { name: value-objectExtendsFactoThree, type: value-object, extends: value-object\value-objectExtendableFactoThree, service: factories }
+    - { name: value-objectExtendsFactoFour, type: value-object, extends: value-object\value-objectExtendableFactoFour, service: factories }
+    - { name: value-objectFullInvokOne, type: value-object, extends: value-object\value-objectExtendableInvokOne, namespace: valueOne, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: invokables }
+    - { name: value-objectFullInvokTwo, type: value-object, extends: value-object\value-objectExtendableInvokTwo, namespace: valueOne\valueTwo, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: invokables }
+    - { name: value-objectFullInvokThree, type: value-object, extends: value-object\value-objectExtendableInvokThree, namespace: valueOne\valueTwo\valueThree, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: invokables }
+    - { name: value-objectFullInvokFour, type: value-object, extends: value-object\value-objectExtendableInvokFour, namespace: valueOne\valueTwo\valueThree\valueFour, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: invokables }
+    - { name: value-objectFullFactoOne, type: value-object, extends: value-object\value-objectExtendableFactoOne, namespace: valueOne, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: factories }
+    - { name: value-objectFullFactoTwo, type: value-object, extends: value-object\value-objectExtendableFactoTwo, namespace: valueOne\valueTwo, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: factories }
+    - { name: value-objectFullFactoThree, type: value-object, extends: value-object\value-objectExtendableFactoThree, namespace: valueOne\valueTwo\valueThree, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: factories }
+    - { name: value-objectFullFactoFour, type: value-object, extends: value-object\value-objectExtendableFactoFour, namespace: valueOne\valueTwo\valueThree\valueFour, implements: [Interfaces\value-objectImplOne, Interfaces\value-objectImplTwo, Interfaces\value-objectImplThree, Interfaces\value-objectImplFour***REMOVED***, service: factories }

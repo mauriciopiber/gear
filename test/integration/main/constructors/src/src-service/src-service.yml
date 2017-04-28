@@ -1,121 +1,41 @@
 src:
-    - { name: ServiceImplOne, type: Interface }
-    - { name: ServiceImplTwo, type: Interface }
-    - { name: ServiceImplThree, type: Interface }
-    - { name: ServiceImplFour, type: Interface }
-    - { name: ServiceExtendableInvokOne, type: Service, service: invokables }
-    - { name: ServiceExtendableInvokTwo, type: Service, service: invokables }
-    - { name: ServiceExtendableInvokThree, type: Service, service: invokables }
-    - { name: ServiceExtendableInvokFour, type: Service, service: invokables }
-    - { name: ServiceExtendableFactoOne, type: Service, service: factories }
-    - { name: ServiceExtendableFactoTwo, type: Service, service: factories }
-    - { name: ServiceExtendableFactoThree, type: Service, service: factories }
-    - { name: ServiceExtendableFactoFour, type: Service, service: factories }
-    - { name: ServiceExtendableAbstrOne, type: Service, abstract: true }
-    - { name: ServiceExtendableAbstrTwo, type: Service, abstract: true }
-    - { name: ServiceExtendableAbstrThree, type: Service, abstract: true }
-    - { name: ServiceExtendableAbstrFour, type: Service, abstract: true }
-    - { name: ServiceInvokOne, type: Service, service: invokables }
-    - { name: ServiceInvokTwo, type: Service, service: invokables }
-    - { name: ServiceInvokThree, type: Service, service: invokables }
-    - { name: ServiceInvokFour, type: Service, service: invokables }
-    - { name: ServiceFactoOne, type: Service, service: factories }
-    - { name: ServiceFactoTwo, type: Service, service: factories }
-    - { name: ServiceFactoThree, type: Service, service: factories }
-    - { name: ServiceFactoFour, type: Service, service: factories }
-    - { name: ServiceAbstrOne, type: Service, abstract: true }
-    - { name: ServiceAbstrTwo, type: Service, abstract: true }
-    - { name: ServiceAbstrThree, type: Service, abstract: true }
-    - { name: ServiceAbstrFour, type: Service, abstract: true }
-    - { name: ServiceNamespaceInvokOne, type: Service, namespace: ServiOne, service: invokables }
-    - { name: ServiceNamespaceInvokTwo, type: Service, namespace: ServiOne\ServiTwo, service: invokables }
-    - { name: ServiceNamespaceInvokThree, type: Service, namespace: ServiOne\ServiTwo\ServiThree, service: invokables }
-    - { name: ServiceNamespaceInvokFour, type: Service, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, service: invokables }
-    - { name: ServiceNamespaceFactoOne, type: Service, namespace: ServiOne, service: factories }
-    - { name: ServiceNamespaceFactoTwo, type: Service, namespace: ServiOne\ServiTwo, service: factories }
-    - { name: ServiceNamespaceFactoThree, type: Service, namespace: ServiOne\ServiTwo\ServiThree, service: factories }
-    - { name: ServiceNamespaceFactoFour, type: Service, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, service: factories }
-    - { name: ServiceNamespaceAbstrOne, type: Service, namespace: ServiOne, abstract: true }
-    - { name: ServiceNamespaceAbstrTwo, type: Service, namespace: ServiOne\ServiTwo, abstract: true }
-    - { name: ServiceNamespaceAbstrThree, type: Service, namespace: ServiOne\ServiTwo\ServiThree, abstract: true }
-    - { name: ServiceNamespaceAbstrFour, type: Service, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, abstract: true }
-    - { name: ServiceImplementsInvokOne, type: Service, implements: Interfaces\ServiceImplOne, service: invokables }
-    - { name: ServiceImplementsInvokTwo, type: Service, implements: Interfaces\ServiceImplOne, service: invokables }
-    - { name: ServiceImplementsInvokThree, type: Service, implements: Interfaces\ServiceImplOne, service: invokables }
-    - { name: ServiceImplementsInvokFour, type: Service, implements: Interfaces\ServiceImplOne, service: invokables }
-    - { name: ServiceImplementsFactoOne, type: Service, implements: Interfaces\ServiceImplOne, service: factories }
-    - { name: ServiceImplementsFactoTwo, type: Service, implements: Interfaces\ServiceImplOne, service: factories }
-    - { name: ServiceImplementsFactoThree, type: Service, implements: Interfaces\ServiceImplOne, service: factories }
-    - { name: ServiceImplementsFactoFour, type: Service, implements: Interfaces\ServiceImplOne, service: factories }
-    - { name: ServiceImplementsAbstrOne, type: Service, implements: Interfaces\ServiceImplOne, abstract: true }
-    - { name: ServiceImplementsAbstrTwo, type: Service, implements: Interfaces\ServiceImplOne, abstract: true }
-    - { name: ServiceImplementsAbstrThree, type: Service, implements: Interfaces\ServiceImplOne, abstract: true }
-    - { name: ServiceImplementsAbstrFour, type: Service, implements: Interfaces\ServiceImplOne, abstract: true }
-    - { name: ServiceImplementsManyInvokOne, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceImplementsManyInvokTwo, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceImplementsManyInvokThree, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceImplementsManyInvokFour, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceImplementsManyFactoOne, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceImplementsManyFactoTwo, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceImplementsManyFactoThree, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceImplementsManyFactoFour, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceImplementsManyAbstrOne, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceImplementsManyAbstrTwo, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceImplementsManyAbstrThree, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceImplementsManyAbstrFour, type: Service, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceExtendsInvokOne, type: Service, extends: Service\ServiceExtendableInvokOne, service: invokables }
-    - { name: ServiceExtendsInvokTwo, type: Service, extends: Service\ServiceExtendableInvokTwo, service: invokables }
-    - { name: ServiceExtendsInvokThree, type: Service, extends: Service\ServiceExtendableInvokThree, service: invokables }
-    - { name: ServiceExtendsInvokFour, type: Service, extends: Service\ServiceExtendableInvokFour, service: invokables }
-    - { name: ServiceExtendsFactoOne, type: Service, extends: Service\ServiceExtendableFactoOne, service: factories }
-    - { name: ServiceExtendsFactoTwo, type: Service, extends: Service\ServiceExtendableFactoTwo, service: factories }
-    - { name: ServiceExtendsFactoThree, type: Service, extends: Service\ServiceExtendableFactoThree, service: factories }
-    - { name: ServiceExtendsFactoFour, type: Service, extends: Service\ServiceExtendableFactoFour, service: factories }
-    - { name: ServiceExtendsAbstrOne, type: Service, extends: Service\ServiceExtendableAbstrOne, abstract: true }
-    - { name: ServiceExtendsAbstrTwo, type: Service, extends: Service\ServiceExtendableAbstrTwo, abstract: true }
-    - { name: ServiceExtendsAbstrThree, type: Service, extends: Service\ServiceExtendableAbstrThree, abstract: true }
-    - { name: ServiceExtendsAbstrFour, type: Service, extends: Service\ServiceExtendableAbstrFour, abstract: true }
-    - { name: ServiceFullInvokOne, type: Service, extends: Service\ServiceExtendableInvokOne, namespace: ServiOne, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceFullInvokTwo, type: Service, extends: Service\ServiceExtendableInvokTwo, namespace: ServiOne\ServiTwo, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceFullInvokThree, type: Service, extends: Service\ServiceExtendableInvokThree, namespace: ServiOne\ServiTwo\ServiThree, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceFullInvokFour, type: Service, extends: Service\ServiceExtendableInvokFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: invokables }
-    - { name: ServiceFullFactoOne, type: Service, extends: Service\ServiceExtendableFactoOne, namespace: ServiOne, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceFullFactoTwo, type: Service, extends: Service\ServiceExtendableFactoTwo, namespace: ServiOne\ServiTwo, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceFullFactoThree, type: Service, extends: Service\ServiceExtendableFactoThree, namespace: ServiOne\ServiTwo\ServiThree, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceFullFactoFour, type: Service, extends: Service\ServiceExtendableFactoFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories }
-    - { name: ServiceFullAbstrOne, type: Service, extends: Service\ServiceExtendableAbstrOne, namespace: ServiOne, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceFullAbstrTwo, type: Service, extends: Service\ServiceExtendableAbstrTwo, namespace: ServiOne\ServiTwo, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceFullAbstrThree, type: Service, extends: Service\ServiceExtendableAbstrThree, namespace: ServiOne\ServiTwo\ServiThree, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceFullAbstrFour, type: Service, extends: Service\ServiceExtendableAbstrFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true }
-    - { name: ServiceDepFactoOne, type: Service, service: factories, dependency: Service\ServiceInvokOne }
-    - { name: ServiceDepFactoTwo, type: Service, service: factories, dependency: Service\ServiceInvokTwo }
-    - { name: ServiceDepFactoThree, type: Service, service: factories, dependency: Service\ServiceInvokThree }
-    - { name: ServiceDepFactoFour, type: Service, service: factories, dependency: Service\ServiceInvokFour }
-    - { name: ServiceDepAbstrOne, type: Service, abstract: true, dependency: Service\ServiceInvokOne }
-    - { name: ServiceDepAbstrTwo, type: Service, abstract: true, dependency: Service\ServiceInvokTwo }
-    - { name: ServiceDepAbstrThree, type: Service, abstract: true, dependency: Service\ServiceInvokThree }
-    - { name: ServiceDepAbstrFour, type: Service, abstract: true, dependency: Service\ServiceInvokFour }
-    - { name: ServiceDepsFactoOne, type: Service, service: factories, dependency: [Service\ServiceInvokOne, Service\ServiceExtendsInvokOne, Service\ServiceImplementsInvokOne***REMOVED*** }
-    - { name: ServiceDepsFactoTwo, type: Service, service: factories, dependency: [Service\ServiceInvokTwo, Service\ServiceExtendsInvokTwo, Service\ServiceImplementsInvokTwo***REMOVED*** }
-    - { name: ServiceDepsFactoThree, type: Service, service: factories, dependency: [Service\ServiceInvokThree, Service\ServiceExtendsInvokThree, Service\ServiceImplementsInvokThree***REMOVED*** }
-    - { name: ServiceDepsFactoFour, type: Service, service: factories, dependency: [Service\ServiceInvokFour, Service\ServiceExtendsInvokFour, Service\ServiceImplementsInvokFour***REMOVED*** }
-    - { name: ServiceDepsAbstrOne, type: Service, abstract: true, dependency: [Service\ServiceInvokOne, Service\ServiceExtendsInvokOne, Service\ServiceImplementsInvokOne***REMOVED*** }
-    - { name: ServiceDepsAbstrTwo, type: Service, abstract: true, dependency: [Service\ServiceInvokTwo, Service\ServiceExtendsInvokTwo, Service\ServiceImplementsInvokTwo***REMOVED*** }
-    - { name: ServiceDepsAbstrThree, type: Service, abstract: true, dependency: [Service\ServiceInvokThree, Service\ServiceExtendsInvokThree, Service\ServiceImplementsInvokThree***REMOVED*** }
-    - { name: ServiceDepsAbstrFour, type: Service, abstract: true, dependency: [Service\ServiceInvokFour, Service\ServiceExtendsInvokFour, Service\ServiceImplementsInvokFour***REMOVED*** }
-    - { name: ServiceDepFullFactoOne, type: Service, extends: Service\ServiceExtendableFactoOne, namespace: ServiOne, implements: Interfaces\ServiceImplOne, service: factories, dependency: Service\ServiceInvokOne }
-    - { name: ServiceDepFullFactoTwo, type: Service, extends: Service\ServiceExtendableFactoTwo, namespace: ServiOne\ServiTwo, implements: Interfaces\ServiceImplOne, service: factories, dependency: Service\ServiceInvokTwo }
-    - { name: ServiceDepFullFactoThree, type: Service, extends: Service\ServiceExtendableFactoThree, namespace: ServiOne\ServiTwo\ServiThree, implements: Interfaces\ServiceImplOne, service: factories, dependency: Service\ServiceInvokThree }
-    - { name: ServiceDepFullFactoFour, type: Service, extends: Service\ServiceExtendableFactoFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: Interfaces\ServiceImplOne, service: factories, dependency: Service\ServiceInvokFour }
-    - { name: ServiceDepFullAbstrOne, type: Service, extends: Service\ServiceExtendableAbstrOne, namespace: ServiOne, implements: Interfaces\ServiceImplOne, abstract: true, dependency: Service\ServiceInvokOne }
-    - { name: ServiceDepFullAbstrTwo, type: Service, extends: Service\ServiceExtendableAbstrTwo, namespace: ServiOne\ServiTwo, implements: Interfaces\ServiceImplOne, abstract: true, dependency: Service\ServiceInvokTwo }
-    - { name: ServiceDepFullAbstrThree, type: Service, extends: Service\ServiceExtendableAbstrThree, namespace: ServiOne\ServiTwo\ServiThree, implements: Interfaces\ServiceImplOne, abstract: true, dependency: Service\ServiceInvokThree }
-    - { name: ServiceDepFullAbstrFour, type: Service, extends: Service\ServiceExtendableAbstrFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: Interfaces\ServiceImplOne, abstract: true, dependency: Service\ServiceInvokFour }
-    - { name: ServiceDepsFullFactoOne, type: Service, extends: Service\ServiceExtendableFactoOne, namespace: ServiOne, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories, dependency: [Service\ServiceInvokOne, Service\ServiceExtendsInvokOne, Service$\ServiceImplementsInvokOne***REMOVED*** }
-    - { name: ServiceDepsFullFactoTwo, type: Service, extends: Service\ServiceExtendableFactoTwo, namespace: ServiOne\ServiTwo, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories, dependency: [Service\ServiceInvokTwo, Service\ServiceExtendsInvokTwo, Service$\ServiceImplementsInvokTwo***REMOVED*** }
-    - { name: ServiceDepsFullFactoThree, type: Service, extends: Service\ServiceExtendableFactoThree, namespace: ServiOne\ServiTwo\ServiThree, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories, dependency: [Service\ServiceInvokThree, Service\ServiceExtendsInvokThree, Service$\ServiceImplementsInvokThree***REMOVED*** }
-    - { name: ServiceDepsFullFactoFour, type: Service, extends: Service\ServiceExtendableFactoFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, service: factories, dependency: [Service\ServiceInvokFour, Service\ServiceExtendsInvokFour, Service$\ServiceImplementsInvokFour***REMOVED*** }
-    - { name: ServiceDepsFullAbstrOne, type: Service, extends: Service\ServiceExtendableAbstrOne, namespace: ServiOne, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true, dependency: [Service\ServiceInvokOne, Service\ServiceExtendsInvokOne, Service$\ServiceImplementsInvokOne***REMOVED*** }
-    - { name: ServiceDepsFullAbstrTwo, type: Service, extends: Service\ServiceExtendableAbstrTwo, namespace: ServiOne\ServiTwo, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true, dependency: [Service\ServiceInvokTwo, Service\ServiceExtendsInvokTwo, Service$\ServiceImplementsInvokTwo***REMOVED*** }
-    - { name: ServiceDepsFullAbstrThree, type: Service, extends: Service\ServiceExtendableAbstrThree, namespace: ServiOne\ServiTwo\ServiThree, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true, dependency: [Service\ServiceInvokThree, Service\ServiceExtendsInvokThree, Service$\ServiceImplementsInvokThree***REMOVED*** }
-    - { name: ServiceDepsFullAbstrFour, type: Service, extends: Service\ServiceExtendableAbstrFour, namespace: ServiOne\ServiTwo\ServiThree\ServiFour, implements: [Interfaces\ServiceImplOne, Interfaces\ServiceImplTwo, Interfaces\ServiceImplThree, Interfaces\ServiceImplFour***REMOVED***, abstract: true, dependency: [Service\ServiceInvokFour, Service\ServiceExtendsInvokFour, Service$\ServiceImplementsInvokFour***REMOVED*** }
+    - { name: serviceExtendableInvokOne, type: service, service: invokables }
+    - { name: serviceExtendableInvokTwo, type: service, service: invokables }
+    - { name: serviceExtendableInvokThree, type: service, service: invokables }
+    - { name: serviceExtendableInvokFour, type: service, service: invokables }
+    - { name: serviceExtendableFactoOne, type: service, service: factories }
+    - { name: serviceExtendableFactoTwo, type: service, service: factories }
+    - { name: serviceExtendableFactoThree, type: service, service: factories }
+    - { name: serviceExtendableFactoFour, type: service, service: factories }
+    - { name: serviceInvokOne, type: service, service: invokables }
+    - { name: serviceInvokTwo, type: service, service: invokables }
+    - { name: serviceInvokThree, type: service, service: invokables }
+    - { name: serviceInvokFour, type: service, service: invokables }
+    - { name: serviceFactoOne, type: service, service: factories }
+    - { name: serviceFactoTwo, type: service, service: factories }
+    - { name: serviceFactoThree, type: service, service: factories }
+    - { name: serviceFactoFour, type: service, service: factories }
+    - { name: serviceNamespaceInvokOne, type: service, namespace: serviOne, service: invokables }
+    - { name: serviceNamespaceInvokTwo, type: service, namespace: serviOne\serviTwo, service: invokables }
+    - { name: serviceNamespaceInvokThree, type: service, namespace: serviOne\serviTwo\serviThree, service: invokables }
+    - { name: serviceNamespaceInvokFour, type: service, namespace: serviOne\serviTwo\serviThree\serviFour, service: invokables }
+    - { name: serviceNamespaceFactoOne, type: service, namespace: serviOne, service: factories }
+    - { name: serviceNamespaceFactoTwo, type: service, namespace: serviOne\serviTwo, service: factories }
+    - { name: serviceNamespaceFactoThree, type: service, namespace: serviOne\serviTwo\serviThree, service: factories }
+    - { name: serviceNamespaceFactoFour, type: service, namespace: serviOne\serviTwo\serviThree\serviFour, service: factories }
+    - { name: serviceExtendsInvokOne, type: service, extends: service\serviceExtendableInvokOne, service: invokables }
+    - { name: serviceExtendsInvokTwo, type: service, extends: service\serviceExtendableInvokTwo, service: invokables }
+    - { name: serviceExtendsInvokThree, type: service, extends: service\serviceExtendableInvokThree, service: invokables }
+    - { name: serviceExtendsInvokFour, type: service, extends: service\serviceExtendableInvokFour, service: invokables }
+    - { name: serviceExtendsFactoOne, type: service, extends: service\serviceExtendableFactoOne, service: factories }
+    - { name: serviceExtendsFactoTwo, type: service, extends: service\serviceExtendableFactoTwo, service: factories }
+    - { name: serviceExtendsFactoThree, type: service, extends: service\serviceExtendableFactoThree, service: factories }
+    - { name: serviceExtendsFactoFour, type: service, extends: service\serviceExtendableFactoFour, service: factories }
+    - { name: serviceFullInvokOne, type: service, extends: service\serviceExtendableInvokOne, namespace: serviOne, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: invokables }
+    - { name: serviceFullInvokTwo, type: service, extends: service\serviceExtendableInvokTwo, namespace: serviOne\serviTwo, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: invokables }
+    - { name: serviceFullInvokThree, type: service, extends: service\serviceExtendableInvokThree, namespace: serviOne\serviTwo\serviThree, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: invokables }
+    - { name: serviceFullInvokFour, type: service, extends: service\serviceExtendableInvokFour, namespace: serviOne\serviTwo\serviThree\serviFour, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: invokables }
+    - { name: serviceFullFactoOne, type: service, extends: service\serviceExtendableFactoOne, namespace: serviOne, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: factories }
+    - { name: serviceFullFactoTwo, type: service, extends: service\serviceExtendableFactoTwo, namespace: serviOne\serviTwo, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: factories }
+    - { name: serviceFullFactoThree, type: service, extends: service\serviceExtendableFactoThree, namespace: serviOne\serviTwo\serviThree, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: factories }
+    - { name: serviceFullFactoFour, type: service, extends: service\serviceExtendableFactoFour, namespace: serviOne\serviTwo\serviThree\serviFour, implements: [Interfaces\serviceImplOne, Interfaces\serviceImplTwo, Interfaces\serviceImplThree, Interfaces\serviceImplFour***REMOVED***, service: factories }
