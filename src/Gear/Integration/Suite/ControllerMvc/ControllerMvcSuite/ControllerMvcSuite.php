@@ -40,7 +40,7 @@ class ControllerMvcSuite
         return $this;
     }
 
-    public function runControllerMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+    public function runControllerMvcSuite($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
     {
         $controllerMvcMajor = new ControllerMvcMajorSuite(
             null,

@@ -97,6 +97,11 @@ class ResolveNames
         $variables = $this->createAliase($suite);
 
         foreach ($variables as $i => $name) {
+
+            if (is_array($name)) {
+                $name = implode('-', $name);
+            }
+
             $variables[$i***REMOVED*** = $this->stringService->str($stringType, $name);
         }
 

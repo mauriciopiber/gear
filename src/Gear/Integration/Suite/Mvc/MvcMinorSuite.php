@@ -76,20 +76,9 @@ class MvcMinorSuite extends AbstractMinorSuite
         //return sprintf('%s/%s', )
     }
 
-    public function getGearFile()
-    {
-        return $this->gearFile;
-    }
-
     public function getMigrationFile()
     {
         return $this->migrationFile;
-    }
-
-    public function setGearFile($gearFile)
-    {
-        $this->gearFile = $gearFile;
-        return $this;
     }
 
     public function setMigrationFile($migrationFile)

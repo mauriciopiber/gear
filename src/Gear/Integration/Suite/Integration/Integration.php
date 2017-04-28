@@ -179,7 +179,7 @@ class Integration
     public function runSrcMvc()
     {
 
-        $this->srcSuite->runSrcSuite(
+        $this->srcMvcSuite->runSrcMvcSuite(
             [
                 'entity',
                 'fixture',
