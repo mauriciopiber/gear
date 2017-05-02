@@ -3,11 +3,9 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrDates"
+module="PbrSrcMvcSearchForm"
 type="web"
-migration="20160123222068_simple_dates_table.php"
-gearfile="db.yml"
-build=${2}
-params=${3}
+construct=()
+construct[1***REMOVED***="src-mvc-search-form.yml;"
 
 source "$bin/gear/module/test-module.sh"

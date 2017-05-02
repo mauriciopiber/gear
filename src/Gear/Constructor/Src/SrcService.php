@@ -87,6 +87,33 @@ class SrcService extends AbstractJsonService
         return $this->factory();
     }
 
+    public function createEntities(array $srcs)
+    {
+        $this->srcs = [***REMOVED***;
+
+        foreach ($srcs as $src) {
+
+            $this->srcs[***REMOVED*** = $this->getSrcService()->create(
+                $this->getModule()->getModuleName(),
+                $src['name'***REMOVED***,
+                $src['type'***REMOVED***,
+                (isset($src['namespace'***REMOVED***) ? $src['namespace'***REMOVED*** : null),
+                (isset($src['extends'***REMOVED***) ? $src['extends'***REMOVED*** : null),
+                (isset($src['dependency'***REMOVED***) ? $src['dependency'***REMOVED*** : null),
+                (isset($src['service'***REMOVED***) ? $src['service'***REMOVED*** : null),
+                (isset($src['abstract'***REMOVED***) ? $src['abstract'***REMOVED*** : null),
+                (isset($src['db'***REMOVED***) ? $src['db'***REMOVED*** : null),
+                (isset($src['columns'***REMOVED***) ? $src['columns'***REMOVED*** : null),
+                (isset($src['template'***REMOVED***) ? $src['template'***REMOVED*** : null),
+                (isset($src['implements'***REMOVED***) ? $src['implements'***REMOVED*** : null),
+                (isset($src['user'***REMOVED***) ? $src['user'***REMOVED*** : null),
+                false
+            );
+        }
+        $entity = $this->getEntityService();
+        return $entity->createEntities($this->srcs);
+    }
+
     public function factory()
     {
         if ($this->src->getType() == null) {

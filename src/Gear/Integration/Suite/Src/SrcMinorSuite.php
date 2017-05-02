@@ -45,15 +45,17 @@ class SrcMinorSuite extends AbstractMinorSuite
         return $this->majorSuite;
     }
 
-    public function getType()
-    {
-        return $this->type;
-    }
 
     public function getRepeat()
     {
         return $this->repeat;
     }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
 
     public function setType($type)
     {

@@ -9,6 +9,8 @@ use Symfony\Component\Yaml\Yaml;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Integration\Suite\Controller\ControllerMinorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
 
 /**
@@ -26,6 +28,8 @@ class GearFile
 
     use StringServiceTrait;
 
+    protected $history = [***REMOVED***;
+
     /**
      * Constructor
      *
@@ -42,6 +46,57 @@ class GearFile
         $this->stringService = $stringService;
 
         return $this;
+    }
+
+    public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
+    {
+        echo 'Create Controller Mvc GearFile'."\n";
+
+    }
+
+    public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
+    {
+        $srcs = [***REMOVED***;
+        foreach ($tables as $minorSuite) {
+
+            $name = $minorSuite->getType() == 'entity'
+                ? $minorSuite->getTableName()
+                : sprintf('%s%s', $minorSuite->getTableName(), $this->stringService->str('class', $minorSuite->getType()));
+
+            $src = [
+                'db' => $minorSuite->getTableName(),
+                'type' => $this->stringService->str('class', $minorSuite->getType()),
+                'name' => $name,
+                'user' => $minorSuite->getUserType(),
+                'columns' => $this->factoryGearfileColumns($minorSuite->getColumns())
+            ***REMOVED***;
+
+            if (!in_array($minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
+                $src['service'***REMOVED*** = 'factories';
+                $src['namespace'***REMOVED*** = $minorSuite->getTableName();
+            }
+
+            $srcs[***REMOVED*** = $src;
+
+            if (!empty($minorSuite->getForeignKeys())) {
+                foreach ($minorSuite->getForeignKeys() as $foreignKey) {
+
+                    if (in_array($foreignKey, $this->history)) {
+                        continue;
+                    }
+                    $srcs = array_merge($srcs, $this->createForeignKeyGearfile($foreignKey));
+                    $this->history[***REMOVED*** = $foreignKey;
+                }
+            }
+
+            if (!empty($minorSuite->getTableAssoc()) && !in_array($minorSuite->getTableAssoc(), $this->history)) {
+               $srcs = array_merge($srcs, $this->createForeignKeyGearfile($minorSuite->getTableAssoc()));
+               $this->history[***REMOVED*** = $minorSuite->getTableAssoc();
+            }
+        }
+
+        return $this->createGearfileComponent($srcMvcMinorSuite, ['src' => $srcs***REMOVED***);
+
     }
 
     public function createMvcGearfile(MvcMinorSuite $mvcMinorSuite)

@@ -33,7 +33,7 @@ class Integration
 
     use MvcSuiteTrait;
 
-    const ALL_COLUMNS = ['basic', 'complete', 'dates', 'numeric', 'text', 'varchar'***REMOVED***;
+    const ALL_COLUMNS = ['basic', 'complete'***REMOVED***;
 
     const ALL_CONSTRAINTS = [null, ['unique'***REMOVED***, ['nullable'***REMOVED***, ['unique', 'nullable'***REMOVED******REMOVED***;
 

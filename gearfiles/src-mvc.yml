@@ -20,16 +20,16 @@ src:
 #    dependency:
 #      2: 'Integration\Suite\Src\SrcGenerator\SrcGenerator'          
       
-      
+  1:
+    name: EntityObject
+    type: ValueObject
+    namespace: Mvc\Entity
   2: 
-    name: SrcMvcMinorSuite
-    type: ValueObject
-    namespace: Integration\Suite\SrcMvc
-    extends: Integration\Suite\AbstractMinorSuite
-    
-  3: 
-    name: SrcMvcMajorSuite
-    type: ValueObject
-    namespace: Integration\Suite\SrcMvc
-    extends: Integration\Suite\AbstractMajorSuite
-        
+    name: EntityObjectFixer
+    type: Service
+    namespace: Mvc\Entity\EntityObjectFixer
+    service: factories
+    dependency:
+      0:
+        class: \GearBase\Util\String\StringService
+        aliase: GearBase\Util\String

@@ -100,10 +100,22 @@ class ConstructService extends AbstractJsonService
 
         $data = $this->getGearfileConfig();
 
-
         if (isset($data['src'***REMOVED***)) {
-            foreach ($data['src'***REMOVED*** as $src) {
+
+            $entity = [***REMOVED***;
+
+            foreach ($data['src'***REMOVED*** as $i => $src) {
+
+                if ($src['type'***REMOVED*** == 'Entity') {
+                    $entity[***REMOVED*** = $src;
+                    continue;
+                }
+
                 $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
+            }
+
+            if (count($entity) > 0) {
+                $this->getSrcConstructor()->createEntities($entity);
             }
         }
 
