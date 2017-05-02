@@ -16,8 +16,21 @@ class SrcMvcMajorSuite extends MvcMajorSuite
 {
     const SUITE = 'src-mvc';
 
+    protected $type;
+
     public function addMinorSuite($srcMvcMinorSuite)
     {
         $this->minorSuites[***REMOVED*** = $srcMvcMinorSuite;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 }

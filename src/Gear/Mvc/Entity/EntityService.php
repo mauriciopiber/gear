@@ -15,6 +15,7 @@ use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\TableObject;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Src\SrcServiceTrait;
+use Gear\Exception\InvalidArgumentException;
 
 class EntityService extends AbstractJsonService
 {
@@ -32,6 +33,25 @@ class EntityService extends AbstractJsonService
 
     protected $mockColumns;
 
+    public function createEntities(array $srcs)
+    {
+        $doctrineService = $this->getDoctrineService();
+
+        $scriptService = $this->getScriptService();
+        $scriptService->run($doctrineService->getOrmConvertMapping());
+        $scriptService->run($doctrineService->getOrmGenerateEntities());
+
+        $this->excludeMapping();
+        $this->excludeEntities();
+        $this->fixSnifferErrors();
+        $this->replaceUserEntity();
+        $this->fixDocsErrors();
+
+        foreach ($srcs as $src) {
+            $this->getEntityTestService()->create($src);
+        }
+    }
+
     public function create($src)
     {
         $this->src = $src;
@@ -48,7 +68,7 @@ class EntityService extends AbstractJsonService
         }
 
 
-        throw new \Gear\Exception\InvalidArgumentException('Src for Entity need a valid --db=');
+        throw new InvalidArgumentException('Src for Entity need a valid --db=');
     }
 
     public function introspectFromTable(\GearJson\Db\Db $dbTable)
@@ -634,16 +654,7 @@ EOL;
         $this->getDoctrineService()->createFromTable($table);
     }
 
-    /**
-     * @todo Verifica toda metatada e tenta inserir no src do json. Se já existe, exibe mensagem e retorna.
-     * Se não existe, salva src.
-     * Gera a nova entidade.
-     * Verifica se é necessário remover as entidades atuais.
-     */
-    public function createFromMetadata()
-    {
-        $this->getDoctrineService()->createFromMetadata();
-    }
+
 
     public function getTables()
     {

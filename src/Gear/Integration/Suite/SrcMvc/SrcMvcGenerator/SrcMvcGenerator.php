@@ -61,8 +61,7 @@ class SrcMvcGenerator
         return $this;
     }
 
-
-    function MvcDependency()
+    public function MvcDependency()
     {
         return [
             'Entity' => null,
@@ -80,15 +79,44 @@ class SrcMvcGenerator
     {
         $tables = $this->prepareTables($srcMvcMinor);
 
-        $this->createSrcMvcGearfile($srcMvcMinor, $tables);
+        $srcMvcMinor->setTableName(sprintf('src-mvc-%s', $srcMvcMinor->getType()));
+        $srcMvcMinor->setLocationKey(sprintf('src-mvc-%s', $srcMvcMinor->getType()));
 
-        if ($srcMvcMinor->getType() == 'Entity') {
-            $this->createSrcMvcMigrationFile($srcMvcMinor, $tables);
+        $gearfile = $this->gearFile->createSrcMvcGearfile($srcMvcMinor, $tables);
+        $srcMvcMinor->setGearfile($gearfile);
+
+        if ($srcMvcMinor->getType() == 'entity') {
+            $migration = $this->migrationFile->createSrcMvcMigrationFile($srcMvcMinor, $tables);
+            $srcMvcMinor->setMigrationFile($migration);
         }
 
-        $this->createSrcMvcTestFile($srcMvcMinor);
+        $this->testFile->updateTestFile($srcMvcMinor);
 
         return $srcMvcMinor;
+    }
+
+    private function prepareTable($middleMinor, $column, $usertype, $constraint, $tables)
+    {
+         $majorTitle = 'src-mvc';
+         $srcMvcMinor = new SrcMvcMinorSuite(
+             $middleMinor->getMajorSuite(),
+             $majorTitle,
+             $column,
+             $usertype,
+             $constraint,
+             $tables
+         );
+
+         $srcMvcMinor->setType($middleMinor->getType());
+
+         $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
+
+         $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+         $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
+         $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
+         $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
+
+         return $srcMvcMinor;
     }
 
     private function prepareTables(SrcMvcMinorSuite $srcMvcMinor)
@@ -102,48 +130,12 @@ class SrcMvcGenerator
             foreach ($srcMvcMajor->getUserTypes() as $usertype) {
                 foreach ($srcMvcMajor->getConstraints() as $constraint) {
                     foreach ($srcMvcMajor->getTableAssocs() as $tables) {
-
-                        $majorTitle = 'src-mvc';
-                        $srcMvcMinor = new SrcMvcMinorSuite(
-                            $srcMvcMinor->getMajorSuite(),
-                            $majorTitle,
-                            $column,
-                            $usertype,
-                            $constraint,
-                            $tables
-                        );
-
-                        $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
-
-                        $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
-                        $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
-                        $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
-                        $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
-
-
-                        $preparedTable[***REMOVED*** = $srcMvcMinor;
-
+                        $preparedTable[***REMOVED*** = $this->prepareTable($srcMvcMinor, $column, $usertype, $constraint, $tables);
                     }
                 }
             }
         }
 
         return $preparedTable;
-    }
-
-    private function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinor, $tables)
-    {
-        echo 'create controller mvc gearfile'."\n";
-
-    }
-
-    private function createSrcMvcMigrationFile(SrcMvcMinorSuite $srcMvcMinor, $tables)
-    {
-        echo 'create controller mvc migration'."\n";
-    }
-
-    private function createSrcMvcTestFile(SrcMvcMinorSuite $srcMvcMinor)
-    {
-        echo 'create controller mvc file'."\n";
     }
 }

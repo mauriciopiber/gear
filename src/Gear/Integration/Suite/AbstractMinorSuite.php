@@ -21,6 +21,10 @@ abstract class AbstractMinorSuite extends AbstractSuite
         return $this;
     }
 
+    public function getMajorSuite()
+    {
+        return $this->majorSuite;
+    }
 
     public function getGearFile()
     {
@@ -43,11 +47,6 @@ abstract class AbstractMinorSuite extends AbstractSuite
     {
         $this->migrationFile = $migrationFile;
         return $this;
-    }
-
-    public function getMajorSuite()
-    {
-        return $this->majorSuite;
     }
 
     public function getLocationKey()

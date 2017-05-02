@@ -9,6 +9,7 @@ use GearBase\Util\String\StringService;
 use Gear\Util\Vector\ArrayService;
 use Gear\Integration\Suite\AbstractMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -114,6 +115,23 @@ class MigrationFile
         ***REMOVED***;
     }
 
+    public function createSrcMvcMigrationFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
+    {
+        $migrationConfig = [***REMOVED***;
+
+        foreach ($tables as $minorSuite) {
+            $migrationConfig = array_merge($migrationConfig, $this->createMigrationTable($minorSuite));
+
+            if (!empty($minorSuite->getForeignKeys())) {
+                foreach ($minorSuite->getForeignKeys() as $foreignKey) {
+                    $migrationConfig = array_merge($migrationConfig, $this->createForeignKeyMigration($foreignKey));
+                }
+            }
+        }
+
+        return $this->createMigrationComponent($srcMvcMinorSuite, $migrationConfig);
+    }
+
     public function createMvcMigration(MvcMinorSuite $mvcMinorSuite)
     {
         $migrationConfig = [***REMOVED***;
@@ -147,7 +165,7 @@ class MigrationFile
 
         $tables = '    const TABLES = '.$this->arrayService->varExport54($migrationConfig, '    ').';';
         $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-        $migrate = preg_replace('#MigrationName#', $mvcMinorSuite->getTableName(), $migrate);
+        $migrate = preg_replace('#MigrationName#', $this->stringService->str('class', $mvcMinorSuite->getTableName()), $migrate);
 
         $this->persist->save($mvcMinorSuite, $migrationName, $migrate);
 

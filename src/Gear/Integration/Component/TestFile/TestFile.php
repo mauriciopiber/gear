@@ -5,6 +5,8 @@ use Gear\Integration\Util\Persist\PersistTrait;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
 use GearBase\Util\String\StringService;
+use Gear\Integration\Suite\AbstractMinorSuite;
+use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -26,6 +28,10 @@ class TestFile
     const CONSTRUCT_REPLACE = '#construct\[1\***REMOVED***=""#';
 
     const REPLACE_MODULE = '#(module=")(")#';
+
+    const DIR_REPLACE = '#DIR#';
+
+    const TYPE_REPLACE = '#TYPE#';
 
     const MODULE_NAME = '$1Pbr%s$2';
 
@@ -49,13 +55,21 @@ class TestFile
         return $this;
     }
 
-    function updateTestFile(\Gear\Integration\Suite\Mvc\MvcMinorSuite $mvcMinorSuite)
+    public function updateTestFile(AbstractMinorSuite $mvcMinorSuite)
     {
+        $utilPath = (get_class($mvcMinorSuite) == MvcMinorSuite::class)
+            ? './../../../../../../../bin'
+            : './../../../../../../bin';
+        //if (get_class($mvcMinorSuite) == '' instanceof )
         $testFile = file_get_contents(__DIR__.'/test-template.sh');
 
         $text = sprintf(self::CONSTRUCT_TEMPLATE, $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
 
         $newFile = preg_replace(self::CONSTRUCT_REPLACE, $text, $testFile);
+
+        $newFile = preg_replace(self::DIR_REPLACE, $utilPath, $newFile);
+
+        $newFile = preg_replace(self::TYPE_REPLACE, 'web', $newFile);
 
         $moduleName = sprintf(self::MODULE_NAME, $this->stringService->str('class', $mvcMinorSuite->getTableName()));
 
