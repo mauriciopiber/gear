@@ -1204,6 +1204,20 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "GlobService",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Util\\Glob",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

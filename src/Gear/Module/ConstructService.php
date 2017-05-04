@@ -111,7 +111,7 @@ class ConstructService extends AbstractJsonService
                     continue;
                 }
 
-                $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
+                //$constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
             }
 
             if (count($entity) > 0) {

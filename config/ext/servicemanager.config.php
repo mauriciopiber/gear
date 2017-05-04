@@ -30,7 +30,9 @@
         'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite',
         'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite' => 'Gear\Integration\Suite\ControllerSrc\ControllerMvcMajorSuite',
         'Gear\Integration\Util\Location\Location' => 'Gear\Integration\Util\Location\Location',
-        'Gear\Integration\Util\Columns\Columns' => 'Gear\Integration\Util\Columns\Columns'
+        'Gear\Integration\Util\Columns\Columns' => 'Gear\Integration\Util\Columns\Columns',
+        'Gear\Mvc\Util\Glob\GlobService' => 'Gear\Mvc\Util\Glob\GlobService',
+        'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
