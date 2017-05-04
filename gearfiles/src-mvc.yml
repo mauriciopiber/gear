@@ -20,10 +20,17 @@ src:
 #    dependency:
 #      2: 'Integration\Suite\Src\SrcGenerator\SrcGenerator'          
       
+  0:
+    name: GlobService
+    type: Service
+    namespace: Util\Glob
+    
+    
+    
   1:
     name: EntityObject
     type: ValueObject
-    namespace: Mvc\Entity
+    namespace: Mvc\EntityObjectFixer
   2: 
     name: EntityObjectFixer
     type: Service

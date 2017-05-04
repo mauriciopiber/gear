@@ -40,7 +40,6 @@ return [
 
 
         'Gear\Mvc\LanguageService'                               => 'Gear\Mvc\LanguageService',
-        'Gear\Mvc\Entity\EntityService'                          => 'Gear\Mvc\Entity\EntityService',
         'Gear\Mvc\Entity\EntityTestService'                      => 'Gear\Mvc\Entity\EntityTestService',
         'doctrineService'                                        => 'Gear\Mvc\Entity\DoctrineService',
         'Gear\Mvc\Form\FormService'                              => 'Gear\Mvc\Form\FormService',
@@ -66,5 +65,8 @@ return [
         'ViewService\SearchService'                              => 'Gear\Service\Mvc\ViewService\SearchService',
         'zendServiceLocatorService'                              => 'Gear\Service\Test\ZendServiceLocatorService',
         'Gear\Mvc\Search\SearchService'                          => 'Gear\Mvc\Search\SearchService',
+    ***REMOVED***,
+    'factories' => [
+        'Gear\Mvc\Entity\EntityService'                          => 'Gear\Mvc\Entity\EntityServiceFactory',
     ***REMOVED***
 ***REMOVED***;

@@ -84,7 +84,7 @@ function Gear_Module_Clear
     fi    
         
     cd $modulePath 
-
+    
     if [ -d $modulePath/schema ***REMOVED***; then 
     	sudo rm -R $modulePath/schema
     fi            
@@ -101,8 +101,7 @@ function Gear_Module_Clear
         sudo rm -R public/js	
     fi
 
-    files=($modulePath/data/migrations/*)
-    if [ ${#files[@***REMOVED***} -gt 0 ***REMOVED***; then 
+    if [ "$(ls -A $modulePath/data/migrations)" ***REMOVED***; then 
     	sudo rm -R $modulePath/data/migrations/* 
     fi       
 
@@ -112,13 +111,15 @@ function Gear_Module_Clear
 
     echo "Deploy Develoment - Migrations/DB"
     vendor/bin/database $database $username $password
+    vendor/bin/phinx migrate
             
     cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
     --type=$type \
     --force \
     --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
     
-    sudo script/load.sh    
+    #cd $modulePath
+    #sudo script/load.sh    
 }
 
 function Gear_Module_Restore
@@ -277,10 +278,10 @@ function Gear_Module_Construct
          # COPY GEARFILE
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
-        if [ "$migration" != "" ***REMOVED***; then
-            Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
-            Gear_Util_PrepareForDb "$modulePath"
-        fi
+        #if [ "$migration" != "" ***REMOVED***; then
+            #Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
+            #Gear_Util_PrepareForDb "$modulePath"
+        #fi
    
         Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
     done;

@@ -14,16 +14,37 @@ namespace Gear\Mvc\Entity;
 use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\TableObject;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Schema\SchemaService;
 use GearJson\Src\SrcServiceTrait;
+use GearJson\Src\SrcService;
 use Gear\Exception\InvalidArgumentException;
+use Gear\Script\ScriptServiceTrait;
+use Gear\Script\ScriptService;
+use Gear\Table\TableService\TableService;
+use Gear\Table\TableService\TableServiceTrait;
+use Gear\Mvc\Entity\EntityTestServiceTrait;
+use Gear\Mvc\Entity\EntityTestService;
+use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Module\BasicModuleStructure;
+use GearBase\Util\Dir\DirService;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearJson\Db\Db;
+use Gear\Util\Glob\GlobServiceTrait;
+use Gear\Util\Glob\GlobService;
 
 class EntityService extends AbstractJsonService
 {
+    use ModuleAwareTrait;
     use SrcServiceTrait;
     use SchemaServiceTrait;
-    use \Gear\Script\ScriptServiceTrait;
-    use \Gear\Mvc\Entity\EntityTestServiceTrait;
-    use \Gear\Mvc\Config\ServiceManagerTrait;
+    use ScriptServiceTrait;
+    use EntityTestServiceTrait;
+    use ServiceManagerTrait;
+    use DirServiceTrait;
+    use GlobServiceTrait;
 
     protected $doctrineService;
 
@@ -32,6 +53,30 @@ class EntityService extends AbstractJsonService
     protected $tableColumns;
 
     protected $mockColumns;
+
+    public function __construct(
+        BasicModuleStructure $module,
+        DoctrineService $doctrine,
+        ScriptService $script,
+        EntityTestService $entityTest,
+        TableService $table,
+        SrcService $srcService,
+        ServiceManager $serviceManager,
+        SchemaService $schema,
+        DirService $dirService,
+        GlobService $globService
+    ) {
+        $this->module = $module;
+        $this->doctrineService = $doctrine;
+        $this->scriptService = $script;
+        $this->entityTestService = $entityTest;
+        $this->tableService = $table;
+        $this->srcService = $srcService;
+        $this->serviceManager = $serviceManager;
+        $this->schemaService = $schema;
+        $this->dirService = $dirService;
+        $this->globService = $globService;
+    }
 
     public function createEntities(array $srcs)
     {
@@ -43,13 +88,21 @@ class EntityService extends AbstractJsonService
 
         $this->excludeMapping();
         $this->excludeEntities();
-        $this->fixSnifferErrors();
-        $this->replaceUserEntity();
-        $this->fixDocsErrors();
+
+        $this->fixEntities();
 
         foreach ($srcs as $src) {
             $this->getEntityTestService()->create($src);
         }
+
+        return true;
+    }
+
+    public function fixEntities()
+    {
+        $this->fixSnifferErrors();
+        $this->replaceUserEntity();
+        $this->fixDocsErrors();
     }
 
     public function create($src)
@@ -71,7 +124,8 @@ class EntityService extends AbstractJsonService
         throw new InvalidArgumentException('Src for Entity need a valid --db=');
     }
 
-    public function introspectFromTable(\GearJson\Db\Db $dbTable)
+
+    public function introspectFromTable(Db $dbTable)
     {
         $this->db           = $dbTable;
         $this->tableName    = $this->str('class', $this->db->getTable());
@@ -440,9 +494,6 @@ EOS;
         $entityFolder = $this->getModule()->getEntityFolder();
 
         foreach (glob($entityFolder.'/*') as $fileName) {
-            if (!is_file($fileName)) {
-                throw new \Exception(sprintf('Entity %s not created succesful, check errors', fileName));
-            }
 
             $this->file = file_get_contents($fileName);
 
@@ -637,33 +688,16 @@ EOL;
 
     public function getDoctrineService()
     {
+
         if (!isset($this->doctrineService)) {
             $this->doctrineService = $this->getServiceLocator()->get('doctrineService');
         }
         return $this->doctrineService;
     }
 
-    /**
-     * @todo Verifica se existe src no json. Se já existe, exibe mensagem e retorna.
-     * Se não existe, salva src.
-     * Gera a nova entidade.
-     * Verifica se é necessário remover as entidades atuais.
-     */
-    public function createFromTable($table)
-    {
-        $this->getDoctrineService()->createFromTable($table);
-    }
-
-
-
-    public function getTables()
-    {
-        $metadata = $this->getServiceLocator()->get('Gear\Factory\Metadata');
-        return $metadata->getTables();
-    }
-
     public function getNames()
     {
+
         $dbs = $this->getSchemaService()->__extractObject('db');
 
         $names = [***REMOVED***;
@@ -687,26 +721,40 @@ EOL;
         return $names;
     }
 
+    /**
+     * Exclude mapping created for others namespaces.
+     */
     public function excludeMapping()
     {
         $ymlFiles = $this->getModule()->getSrcFolder();
 
+        //echo $ymlFiles.'/*'."\n";die();
+        $list = $this->getGlobService()->list($ymlFiles.'/*');
 
-        foreach (glob($ymlFiles.'/*') as $v) {
+        foreach ($list as $v) {
             $entity = explode('/', $v);
             if (end($entity)!==$this->getModule()->getModuleName()) {
                  $this->getDirService()->rmDir($v);
             }
         }
+
+        return true;
     }
 
+    /**
+     * Exclude entities creaded from Database but that isn't part of Gear.
+     * @param array $names
+     */
     public function excludeEntities($names = array())
     {
         $names = array_merge($this->getNames(), $names);
 
         $entitys = $this->getModule()->getEntityFolder();
 
-        foreach (glob($entitys.'/*.php') as $entityFullPath) {
+
+        $list = $this->getGlobService()->list($entitys.'/*.php');
+
+        foreach ($list as $entityFullPath) {
             $entity = explode('/', $entityFullPath);
             $name = explode('.', end($entity));
 
@@ -721,56 +769,7 @@ EOL;
                 }
             }
         }
-    }
 
-    /**
-     * @deprecated Não existirá mais o comando setUpEntities. Será removido na versão 1.0.0
-     *
-     * @return boolean
-     */
-    public function setUpEntities()
-    {
-        $doctrineService = $this->getDoctrineService();
-
-        $scriptService = $this->getScriptService();
-
-        echo $scriptService->run($doctrineService->getOrmValidateSchema());
-        echo $scriptService->run($doctrineService->getOrmConvertMapping());
-        echo $scriptService->run($doctrineService->getOrmGenerateEntities());
-        echo $scriptService->run($doctrineService->getOrmValidateSchema());
-
-        //criar o mapping
-        //criar as entidades
-        //criar de todo banco
-        //limpar lixo
-        return true;
-    }
-
-    /**
-     * @deprecated Não existirá mais o comando setUpEntity, será removido na versão 1.0.0
-     *
-     * @param unknown $data
-     * @return boolean
-     */
-    public function setUpEntity($data)
-    {
-        if (is_string($data['tables'***REMOVED***)) {
-            $tables = explode(',', $data['tables'***REMOVED***);
-        } elseif (is_array($data['tables'***REMOVED***)) {
-            $tables = $data['tables'***REMOVED***;
-        }
-
-        $doctrineService = $this->getDoctrineService();
-
-        $scriptService = $this->getScriptService();
-        $scriptService->run($doctrineService->getOrmConvertMapping());
-
-
-        $scriptService->run($doctrineService->getOrmGenerateEntities());
-
-        $this->excludeMapping();
-
-        $this->excludeEntities($tables);
         return true;
     }
 }
