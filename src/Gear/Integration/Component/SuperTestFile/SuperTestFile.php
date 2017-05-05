@@ -5,6 +5,7 @@ use Gear\Integration\Util\Persist\PersistTrait;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
 use GearBase\Util\String\StringService;
+use Gear\Integration\Mvc\MvcMajorSuite;
 
 /**
  * PHP Version 5
@@ -33,6 +34,10 @@ class SuperTestFile
 
     const FILENAME = 'test.sh';
 
+    const DIR_REPLACE = '#DIR#';
+
+    const TYPE_REPLACE = '#TYPE#';
+
     /**
      * Constructor
      *
@@ -54,6 +59,12 @@ class SuperTestFile
     public function updateSuperTestFile($superType, $migrations = null)
     {
         $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
+
+        $utilPath = (get_class($superType) == MvcMajorSuite::class)
+            ? './../../../../../../bin'
+            : './../../../../../bin';
+
+        $testFile = preg_replace(self::DIR_REPLACE, $utilPath, $testFile);
 
         $construct = '';
 
