@@ -60,17 +60,17 @@ function Gear_Util_CopyMigration
 	migration=${2}
 	destination=${3}
 	
-	migrationName="$(date -d "1 seconds" +"%Y%m%d%H%M%S")"
+	migrationName="$(date -d "1 seconds" +"%Y%m%d%H%M%S")_$(echo "$migration" | rev | cut -d"/" -f1 | rev)"
 	
 	if [ -e "$scriptDir/$migration" ***REMOVED***; then
 		
-	    sudo cp "$scriptDir/$migration" "$destination/data/migrations/${migrationName}_$migration"
+	    sudo cp "$scriptDir/$migration" "$destination/data/migrations/${migrationName}"
 	    return 0	
     fi
 
     if [ -e "$scriptDir/migrations/$migration" ***REMOVED***; then
 		
-	    sudo cp "$scriptDir/migrations/$migration" "$destination/data/migrations/${migrationName}_$migration"
+	    sudo cp "$scriptDir/migrations/$migration" "$destination/data/migrations/${migrationName}"
 	    return 0	
     fi
 

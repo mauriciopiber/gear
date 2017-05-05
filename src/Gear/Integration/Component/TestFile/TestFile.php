@@ -62,9 +62,9 @@ class TestFile
             return '';
         }
 
-        $text = 'src-mvc-%s.php';
+        $text = 'src_mvc_%s.php';
 
-        return $this->createDefaultMinorPath($type).'/'.sprintf($text, $this->str('url', $type));
+        return $this->createDefaultMinorPath($type).'/'.sprintf($text, $this->str('uline', $type));
     }
 
     public function createDefaultGearfile($type)
