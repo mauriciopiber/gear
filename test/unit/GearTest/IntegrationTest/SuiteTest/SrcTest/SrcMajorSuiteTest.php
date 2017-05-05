@@ -15,8 +15,8 @@ class SrcMajorSuiteTest extends TestCase
         $this->srcMajorSuite = new SrcMajorSuite();
     }
 
-    public function testClassExists()
+    public function testDefaultValues()
     {
-        $this->assertInstanceOf('Gear\Integration\Suite\Src\SrcMajorSuite', $this->srcMajorSuite);
+        $this->assertEquals('src', $this->srcMajorSuite->getSuperType());
     }
 }

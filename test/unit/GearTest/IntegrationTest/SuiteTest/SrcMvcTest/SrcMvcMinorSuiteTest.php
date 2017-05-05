@@ -12,11 +12,15 @@ class SrcMvcMinorSuiteTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->srcMvcMinorSuite = new SrcMvcMinorSuite();
+
+        $this->majorSuite = $this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite');
     }
 
-    public function testClassExists()
+    public function testCreateMinorSuite()
     {
-        $this->assertInstanceOf('Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite', $this->srcMvcMinorSuite);
+        $this->srcMvcMinorSuite = new SrcMvcMinorSuite($this->majorSuite->reveal(), 'service');
+
+        $this->assertEquals($this->majorSuite->reveal(), $this->srcMvcMinorSuite->getMajorSuite());
+        $this->assertEquals('service', $this->srcMvcMinorSuite->getType());
     }
 }
