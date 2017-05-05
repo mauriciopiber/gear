@@ -61,22 +61,22 @@ class SrcMvcGenerator
         return $this;
     }
 
-    public function MvcDependency()
+    public function getMvcDependency()
     {
         return [
-            'Entity' => null,
-            'Fixture' => ['Entity'***REMOVED***,
-            'Repository' => ['Entity'***REMOVED***,
-            'Service' => ['Entity', 'Repository'***REMOVED***,
-            'Filter' => ['Entity'***REMOVED***,
-            'Form' => ['Filter', 'Entity'***REMOVED***,
-            'SearchForm' => ['Entity'***REMOVED***,
-            'Controller' => ['Entity', 'Fixture', 'Repository', 'Service', 'Filter', 'Form', 'SearchForm'***REMOVED***
+            'entity' => null,
+            'fixture' => ['Entity'***REMOVED***,
+            'repository' => ['Entity'***REMOVED***,
+            'service' => ['Entity', 'Repository'***REMOVED***,
+            'filter' => ['Entity'***REMOVED***,
+            'form' => ['Filter', 'Entity'***REMOVED***,
+            'search-form' => ['Entity'***REMOVED***,
+            'controller' => ['Entity', 'Fixture', 'Repository', 'Service', 'Filter', 'Form', 'SearchForm'***REMOVED***
         ***REMOVED***;
     }
 
     public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor)
-    {E
+    {
         $tables = $this->prepareTables($srcMvcMinor);
 
         $srcMvcMinor->setTableName(sprintf('src-mvc-%s', $srcMvcMinor->getType()));
@@ -90,7 +90,7 @@ class SrcMvcGenerator
             $srcMvcMinor->setMigrationFile($migration);
         }
 
-        $this->testFile->updateTestFile($srcMvcMinor);
+        $this->testFile->updateTestFile($srcMvcMinor, $this->getMvcDependency()[$srcMvcMinor->getType()***REMOVED***);
 
         return $srcMvcMinor;
     }
