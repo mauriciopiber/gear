@@ -2,7 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerSrcTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 
 /**
  * @group Service
@@ -17,6 +17,6 @@ class ControllerMvcMinorSuiteTest extends TestCase
 
     public function testClassExists()
     {
-        $this->assertInstanceOf('Gear\Integration\Suite\ControllerSrc\ControllerMvcMinorSuite', $this->controllerMvcMinorSuite);
+        $this->assertInstanceOf('Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite', $this->controllerMvcMinorSuite);
     }
 }
