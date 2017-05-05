@@ -54,6 +54,52 @@ class GearFile
 
     }
 
+    public function getSrcMvcDependency($tableName, $type)
+    {
+        if ($type == 'repository') {
+            return [
+                'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
+                '\GearBase\Repository\QueryBuilder'
+            ***REMOVED***;
+        }
+
+        if ($type == 'service') {
+
+
+            $repositoryDependency = sprintf(
+                '%s\Repository\%sRepository',
+                $tableName,
+                $tableName
+            );
+
+
+            return [
+                $repositoryDependency,
+                'memcached' => '\Zend\Cache\Storage\Adapter\Memcached',
+                [
+                    'class' => '\Zend\Authentication\AuthenticationService',
+                    'aliase' => 'zfcuser_auth_service',
+                    'ig_t' => true
+                ***REMOVED***,
+            ***REMOVED***;
+        }
+
+        throw new Exception('Missing Type');
+    }
+
+    public function getSrcMvcTemplate($type)
+    {
+        if ($type == 'search-form') {
+            return 'search-form';
+        }
+
+        if ($type == 'form') {
+            return 'form-filter';
+        }
+
+        throw new Exception('Missing Type');
+    }
+
     public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
     {
         $srcs = [***REMOVED***;
@@ -74,6 +120,14 @@ class GearFile
             if (!in_array($minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
                 $src['service'***REMOVED*** = 'factories';
                 $src['namespace'***REMOVED*** = $minorSuite->getTableName();
+            }
+
+            if (in_array($minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
+                $src['dependency'***REMOVED*** = $this->getSrcMvcDependency($minorSuite->getTableName(), $minorSuite->getType());
+            }
+
+            if (in_array($minorSuite->getType(), ['search-form', 'form'***REMOVED***)) {
+                $src['template'***REMOVED*** = $this->getSrcMvcTemplate($minorSuite->getType());
             }
 
             $srcs[***REMOVED*** = $src;
