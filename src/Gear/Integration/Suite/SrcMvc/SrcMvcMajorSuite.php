@@ -23,6 +23,11 @@ class SrcMvcMajorSuite extends MvcMajorSuite
         $this->minorSuites[***REMOVED*** = $srcMvcMinorSuite;
     }
 
+    public function getSuperType()
+    {
+        return self::SUITE;
+    }
+
     public function getType()
     {
         return $this->type;

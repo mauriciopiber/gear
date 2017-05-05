@@ -29,7 +29,7 @@ class SrcMajorSuite extends AbstractMajorSuite
 
     public function getSuperType()
     {
-        return '';
+        return self::SUITE;
     }
 
     public function addMinorSuite(SrcMinorSuite $minorSuite)

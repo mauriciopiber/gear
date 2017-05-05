@@ -4,6 +4,8 @@ testDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 suite=(
 "constructors/src"
+"constructors/src-mvc"
+"constructors/controller-mvc"
 "constructors/controller/controller-console"
 "constructors/controller/controller-web"
 "constructors/mvc/mvc-columns"
