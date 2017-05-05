@@ -55,11 +55,22 @@ class ControllerMvcGenerator
     }
 
 
+    public function getMvcDependency()
+    {
+        return [
+            'controller' => ['Entity', 'Fixture', 'Repository', 'Service', 'Filter', 'Form', 'SearchForm'***REMOVED***
+        ***REMOVED***;
+    }
+
     public function generateControllerMvc(ControllerMvcMinorSuite $controllerMvcMinor)
     {
+        $controllerMvcMinor->setLocationKey('controller-mvc');
+
         $tables = $this->prepareTables($controllerMvcMinor);
 
-        var_dump($tables);
+        $this->testFile->updateTestFile($controllerMvcMinor, $this->getMvcDependency()['controller'***REMOVED***);
+
+        //var_dump($tables);
 
         //$this->createControllerMvcGearfile($controllerMvcMinor, $tables);
 
