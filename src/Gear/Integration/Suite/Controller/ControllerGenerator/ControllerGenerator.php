@@ -54,6 +54,7 @@ class ControllerGenerator
 
         $gearfile = $this->gearFile->createControllerGearFile($suite, ['src' => $srcs, 'controller' => $controllers***REMOVED***);
 
+        $suite->setGearFile($gearfile);
         $this->testFile->updateTestFile($suite);
 
         echo sprintf('        - minor: %s', $type)."\n";
