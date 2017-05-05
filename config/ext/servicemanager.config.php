@@ -32,7 +32,8 @@
         'Gear\Integration\Util\Location\Location' => 'Gear\Integration\Util\Location\Location',
         'Gear\Integration\Util\Columns\Columns' => 'Gear\Integration\Util\Columns\Columns',
         'Gear\Mvc\Util\Glob\GlobService' => 'Gear\Mvc\Util\Glob\GlobService',
-        'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService'
+        'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService',
+        'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject'
     ***REMOVED***,
     'factories' => [
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
@@ -86,7 +87,8 @@
         'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite' => 'Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuiteFactory',
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorFactory',
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory',
-        'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory'
+        'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory',
+        'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

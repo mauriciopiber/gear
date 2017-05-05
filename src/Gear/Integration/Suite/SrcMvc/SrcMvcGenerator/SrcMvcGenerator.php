@@ -76,7 +76,7 @@ class SrcMvcGenerator
     }
 
     public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor)
-    {
+    {E
         $tables = $this->prepareTables($srcMvcMinor);
 
         $srcMvcMinor->setTableName(sprintf('src-mvc-%s', $srcMvcMinor->getType()));

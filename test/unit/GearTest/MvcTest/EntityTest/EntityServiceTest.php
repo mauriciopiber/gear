@@ -30,6 +30,9 @@ class EntityServiceTest extends TestCase
         $this->dirService = $this->prophesize('GearBase\Util\Dir\DirService');
         $this->globService = $this->prophesize('Gear\Util\Glob\GlobService');
 
+
+        $this->entityFixerObject = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');
+
         $this->moduleName = 'MyModule';
 
         $this->root = vfsStream::setUp('module');
@@ -47,7 +50,8 @@ class EntityServiceTest extends TestCase
             $this->serviceManager->reveal(),
             $this->schemaService->reveal(),
             $this->dirService->reveal(),
-            $this->globService->reveal()
+            $this->globService->reveal(),
+            $this->entityFixerObject->reveal()
         );
     }
 

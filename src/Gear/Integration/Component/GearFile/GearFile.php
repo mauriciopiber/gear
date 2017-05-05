@@ -84,13 +84,13 @@ class GearFile
                     if (in_array($foreignKey, $this->history)) {
                         continue;
                     }
-                    $srcs = array_merge($srcs, $this->createForeignKeyGearfile($foreignKey));
+                    $srcs = array_merge($srcs, $this->createForeignKeyGearfile($foreignKey, $minorSuite->getType()));
                     $this->history[***REMOVED*** = $foreignKey;
                 }
             }
 
             if (!empty($minorSuite->getTableAssoc()) && !in_array($minorSuite->getTableAssoc(), $this->history)) {
-               $srcs = array_merge($srcs, $this->createForeignKeyGearfile($minorSuite->getTableAssoc()));
+               $srcs = array_merge($srcs, $this->createForeignKeyGearfile($minorSuite->getTableAssoc(), $minorSuite->getType()));
                $this->history[***REMOVED*** = $minorSuite->getTableAssoc();
             }
         }
@@ -113,12 +113,12 @@ class GearFile
 
         if (!empty($mvcMinorSuite->getForeignKeys())) {
             foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {
-                $src = array_merge($src, $this->createForeignKeyGearfile($foreignKey));
+                $src = array_merge($src, $this->createForeignKeyGearfile($foreignKey, $mvcMinorSuite->getType()));
             }
         }
 
         if (!empty($mvcMinorSuite->getTableAssoc())) {
-            $src = array_merge($src, $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()));
+            $src = array_merge($src, $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()), $mvcMinorSuite->getType());
         }
 
         return $this->createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
@@ -139,22 +139,27 @@ class GearFile
         return $gearfileColumns;
     }
 
-    private function createForeignKeyGearfile($tableId)
+    private function createForeignKeyGearfile($tableId, $type)
     {
         $table = $this->stringService->str('class', str_replace('id_', '', $tableId));
 
-        return [
+        $data = [
             [
                 'name' => $table,
                 'type' => 'Entity',
                 'db' => $table,
             ***REMOVED***,
-            [
+        ***REMOVED***;
+
+        if ($type !== 'entity') {
+            $data[***REMOVED*** =  [
                 'name' => sprintf('%sFixture', $table),
                 'type' => 'Fixture',
                 'db' => $table,
-            ***REMOVED***,
-        ***REMOVED***;
+            ***REMOVED***;
+        }
+
+        return $data;
     }
 
     public function createGearfileComponent($suite, $data)

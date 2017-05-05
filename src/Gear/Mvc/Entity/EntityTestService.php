@@ -21,6 +21,7 @@ class EntityTestService extends AbstractMvc
 {
     protected $mockColumns;
 
+
     public function introspectFromTable(Db $db)
     {
         $this->db = $db;
@@ -41,24 +42,71 @@ class EntityTestService extends AbstractMvc
         //$this->table = new \Gear\Table\TableService\Table($metadata->getTable());
         $this->tableColumns = $this->getColumnService()->getColumns($this->db, true);
 
-        $assertNull = $this->getTestGettersNull();
-        $assertSet  = $this->getTestSetters();
+        $entityTestConfig = new EntityTestConfig(
+            $this->getModule()->getModuleName(),
+            $this->str('class', $this->tableName)
+        );
+
+        $this->createTestFieldsNullMethod($entityTestConfig);
+
+        $this->createTestFieldsMethod($entityTestConfig);
+
+        $this->createTestFieldsProviderMethod($entityTestConfig);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/entity-test/src.entity.phtml',
-            array(
-                'serviceNameUline' => $this->str('var-lenght', $this->tableName),
-                'serviceNameClass'   => $this->str('class', $this->tableName),
-                'module'  => $this->getModule()->getModuleName(),
-                'assertNull' => $assertNull,
-                'assertSet'  => $assertSet,
-                'params' => $this->getParams(),
-                'provider' => $this->getProvider(),
-                'mocks' => $this->getMocks()
-            ),
+            $entityTestConfig->export(),
             $this->str('class', $this->tableName).'Test.php',
             $this->getModule()->getTestEntityFolder()
         );
+    }
+
+    public function createTestFieldsProviderMethod(EntityTestConfig &$entityTestConfig)
+    {
+        $provider = $this->getProvider();
+        $mocks = $this->getMocks();
+        $entityTestConfig->setFieldsProviderMethod(
+            $mocks,
+            $provider
+        );
+    }
+
+    public function createTestFieldsMethod(EntityTestConfig &$entityTestConfig)
+    {
+        $entityTestConfig->setFieldsMethod(
+            $this->getParams(),
+            $this->getTestSetters()
+        );
+    }
+
+    public function createTestFieldsNullMethod(EntityTestConfig &$entityTestConfig)
+    {
+        $assertNull = [***REMOVED***;
+
+        $useMethods = [***REMOVED***;
+
+        //lista todas colunas
+        foreach ($this->tableColumns as $columnData) {
+            $column = $columnData->getColumn();
+            $method = sprintf('get%s', $this->str('class', $column->getName()));
+            //pega o método referente à coluna, cria o método.
+            $useMethods[***REMOVED*** = $method;
+            $assertNull[***REMOVED*** = sprintf('$this->assertNull($this->entity->%s());', $method);
+        }
+
+        $moreMethodsUse = $this->getExtraGetter($useMethods);
+
+        if (count($moreMethodsUse)>0) {
+            foreach ($moreMethodsUse as $method) {
+                $assertNull[***REMOVED*** = sprintf(
+                    '$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$this->entity->%s());',
+                    $method
+                );
+            }
+        }
+
+        $entityTestConfig->setFieldsNullMethod($assertNull);
+
     }
 
     public function getClassMethods()
@@ -74,7 +122,7 @@ class EntityTestService extends AbstractMvc
         if (!empty($methods)) {
             return $methods;
         }
-        return array();
+        return [***REMOVED***;
     }
 
     public function getExtraGetter($useMethods)
@@ -96,31 +144,14 @@ class EntityTestService extends AbstractMvc
         return array_filter($moreMethods, $filter);
     }
 
-    public function getTestGettersNull()
+    public function createColumnVar($column)
     {
-        $assertNull = [***REMOVED***;
+        return $this->createVar($column->getName());
+    }
 
-        $useMethods = [***REMOVED***;
-
-        foreach ($this->tableColumns as $columnData) {
-            $column = $columnData->getColumn();
-            $method = sprintf('get%s', $this->str('class', $column->getName()));
-
-            $useMethods[***REMOVED*** = $method;
-            $assertNull[***REMOVED*** = sprintf('$this->assertNull($this->entity->%s());', $method);
-        }
-
-        $moreMethodsUse = $this->getExtraGetter($useMethods);
-
-        if (count($moreMethodsUse)>0) {
-            foreach ($moreMethodsUse as $method) {
-                $assertNull[***REMOVED*** = sprintf(
-                    '$this->assertInstanceOf(\'Doctrine\Common\Collections\ArrayCollection\',$this->entity->%s());',
-                    $method
-                );
-            }
-        }
-        return $assertNull;
+    public function createVar($text)
+    {
+        return $this->str('var', $text);
     }
 
     /**
@@ -150,12 +181,12 @@ class EntityTestService extends AbstractMvc
                 $assertNull[***REMOVED*** = sprintf(
                     '$this->entity->set%s($%s);',
                     $this->str('class', $column->getName()),
-                    $this->str('var-lenght', $column->getName())
+                    $this->createColumnVar($column)
                 );
 
                 $assertNull[***REMOVED*** = sprintf(
                     '$this->assertEquals($%s, $this->entity->get%s());'.PHP_EOL,
-                    $this->str('var-lenght', $column->getName()),
+                    $this->createColumnVar($column),
                     $this->str('class', $column->getName())
                 );
 
@@ -164,11 +195,11 @@ class EntityTestService extends AbstractMvc
             $assertNull[***REMOVED*** = sprintf(
                 '$this->entity->set%s($%s);',
                 $this->str('class', $column->getName()),
-                $this->str('var-lenght', $column->getName())
+                $this->createColumnVar($column)
             );
             $assertNull[***REMOVED*** = sprintf(
                 '$this->assertEquals($%s, $this->entity->get%s());'.PHP_EOL,
-                $this->str('var-lenght', $column->getName()),
+                $this->createColumnVar($column),
                 $this->str('class', $column->getName())
             );
         }
@@ -234,9 +265,9 @@ class EntityTestService extends AbstractMvc
 
                 $referencedTable = $foreignKey->getReferencedTableName();
 
-                $columName = $this->str('class', $referencedTable). $this->str('class', $column->getName());
+                $columnName = $this->str('class', $referencedTable). $this->str('class', $column->getName());
 
-                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $columName));
+                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->createColumnVar($column));
 
                 $this->mockColumns[***REMOVED*** = $columnData;
 
@@ -251,7 +282,7 @@ class EntityTestService extends AbstractMvc
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $newMock) {
                 $classId    = str_replace('add', '', $newMock);
-                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->str('var-lenght', $classId));
+                $dataProvider[***REMOVED*** = sprintf('                $%s', $this->createVar($classId));
             }
         }
 
@@ -285,7 +316,7 @@ class EntityTestService extends AbstractMvc
 
                 $columnName = $this->str('class', $refTable).$this->str('class', $column->getName());
 
-                $mock .= sprintf('$%s = ', $this->str('var-lenght', $columnName));
+                $mock .= sprintf('$%s = ', $this->createColumnVar($column));
 
                 $mockModule = (in_array($refTable, array('user', 'User')))
                   ? 'GearAdmin'
@@ -308,7 +339,7 @@ class EntityTestService extends AbstractMvc
                 $classId    = str_replace('addId', '', $newMock);
 
                 $mock = '        ';
-                $mock .= sprintf('$%s = ', $this->str('var-lenght', $clearClass));
+                $mock .= sprintf('$%s = ', $this->createVar($clearClass));
                 $mock .= sprintf(
                     '$this->prophesize(\'%s\\Entity\\%s\')->reveal();',
                     $this->getModule()->getModuleName(),
@@ -338,12 +369,12 @@ class EntityTestService extends AbstractMvc
             if ($columnData instanceof ForeignKey) {
                 //$referencedTable = $foreignKey->getReferencedTableName();
 
-                $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
+                $params[***REMOVED*** = sprintf('        $%s', $this->createColumnVar($column));
 
                 continue;
             }
 
-            $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $column->getName()));
+            $params[***REMOVED*** = sprintf('        $%s', $this->createColumnVar($column));
         }
 
         $moreMethodsUse = $this->getExtraSetter();
