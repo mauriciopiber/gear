@@ -56,6 +56,55 @@ class TestFile
         return $this;
     }
 
+    public function createDefaultMigration($type)
+    {
+        if ($type !== 'Entity') {
+            return '';
+        }
+
+        $text = '../src-mvc-%s.php';
+
+        return $this->createDefaultMinorPath($type).'/'sprintf($text, $this->str('url', $type));
+    }
+
+    public function createDefaultGearfile()
+    {
+        return '';
+    }
+
+    public function createDefaultMinorPath($type)
+    {
+        $text = '../src-mvc-%s';
+        return sprintf($text, $this->str('url', $type));
+
+    }
+
+    public function createConstruct($mvcMinorSuite, $dependency)
+    {
+        $construct = sprintf(self::CONSTRUCT_TEMPLATE, $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
+
+        if ($dependency === null) {
+            return $construct;
+        }
+
+        $constructDep = [***REMOVED***;
+
+        foreach ($dependency as $dep) {
+
+            $constructDep[***REMOVED*** = sprintf(
+                self::CONSTRUCT_TEMPLATE,
+                $this->createDefaultGearfile($dep),
+                $this->createDefaultMigration($dep)
+            );
+        }
+
+        $implode = implode(PHP_EOL, $constructDep);
+
+        $construct = $implode.PHP_EOL.$construct;
+
+        return $construct;
+    }
+
 
     public function updateTestFile(AbstractMinorSuite $mvcMinorSuite, array $dependency = null)
     {
@@ -65,9 +114,9 @@ class TestFile
         //if (get_class($mvcMinorSuite) == '' instanceof )
         $testFile = file_get_contents(__DIR__.'/test-template.sh');
 
-        $text = sprintf(self::CONSTRUCT_TEMPLATE, $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
+        $construct = $this->createConstruct($mvcMinorSuite, $dependency);
 
-        $newFile = preg_replace(self::CONSTRUCT_REPLACE, $text, $testFile);
+        $newFile = preg_replace(self::CONSTRUCT_REPLACE, $construct, $testFile);
 
         $newFile = preg_replace(self::DIR_REPLACE, $utilPath, $newFile);
 
@@ -76,6 +125,9 @@ class TestFile
         $moduleName = sprintf(self::MODULE_NAME, $this->stringService->str('class', $mvcMinorSuite->getTableName()));
 
         $newFile = preg_replace(self::REPLACE_MODULE, $moduleName, $newFile);
+
+
+
 
         $this->persist->save($mvcMinorSuite, self::FILENAME, $newFile);
     }
