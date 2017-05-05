@@ -173,6 +173,7 @@ class SrcGenerator
         $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
         $srcMinor->setGearFile($gearfile);
 
+        $this->testFile->updateTestFile($srcMinor);
 
         echo sprintf('        - minor: %s', $srcMinor->getType())."\n";
 
