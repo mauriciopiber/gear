@@ -20,4 +20,9 @@ class ControllerMvcMinorSuite extends MvcMinorSuite
     {
         return self::SUITE;
     }
+
+    public function getType()
+    {
+        return self::SUITE;
+    }
 }
