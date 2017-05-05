@@ -24,7 +24,7 @@ class SuperTestFile
 
     const TEMPLATE_CONSTRUCTOR = 'construct+=("%s/%s")';
 
-    const TEMPLATE_CONSTRUCTOR_ALL = 'construct+=("%s/%s:%s/%s")';
+    const TEMPLATE_CONSTRUCTOR_ALL = 'construct+=("%s/%s;%s/%s")';
 
     const REPLACE_CONSTRUCTOR = 'construct+=("")';
 
