@@ -10,6 +10,8 @@ abstract class AbstractMinorSuite extends AbstractSuite
 
     protected $migrationFile;
 
+    protected $gearFile;
+
     /**
      * Constructor
      *

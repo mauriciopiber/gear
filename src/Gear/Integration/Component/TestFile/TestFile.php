@@ -8,6 +8,9 @@ use GearBase\Util\String\StringService;
 use Gear\Integration\Suite\AbstractMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
+use Gear\Integration\Suite\Controller\ControllerMinorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
+use Gear\Integration\Suite\Src\SrcMinorSuite;
 
 /**
  * PHP Version 5
@@ -122,15 +125,46 @@ class TestFile
 
         $newFile = preg_replace(self::DIR_REPLACE, $utilPath, $newFile);
 
-        $newFile = preg_replace(self::TYPE_REPLACE, 'web', $newFile);
+        $newFile = preg_replace(self::TYPE_REPLACE, $this->getModuleType($mvcMinorSuite), $newFile);
 
-        $moduleName = sprintf(self::MODULE_NAME, $this->stringService->str('class', $mvcMinorSuite->getTableName()));
+        $moduleName = $this->getModuleName($mvcMinorSuite);
 
         $newFile = preg_replace(self::REPLACE_MODULE, $moduleName, $newFile);
 
-
-
-
         $this->persist->save($mvcMinorSuite, self::FILENAME, $newFile);
+    }
+
+    public function getModuleType(AbstractMinorSuite $mvcMinorSuite)
+    {
+        if ($mvcMinorSuite instanceof MvcMinorSuite) {
+            return 'web';
+        }
+
+
+        if ($mvcMinorSuite instanceof SrcMinorSuite && $mvcMinorSuite->getType() == 'view-helper') {
+            return 'web';
+        }
+
+        if ($mvcMinorSuite instanceof SrcMinorSuite) {
+            return 'cli';
+        }
+
+        if ($mvcMinorSuite instanceof ControllerMinorSuite && $mvcMinorSuite->getType() == 'console') {
+            return 'cli';
+        }
+
+        return 'web';
+    }
+
+    public function getModuleName(AbstractMinorSuite $mvcMinorSuite)
+    {
+        if ($mvcMinorSuite instanceof MvcMinorSuite) {
+            return sprintf(self::MODULE_NAME, $this->stringService->str('class', $mvcMinorSuite->getTableName()));
+        }
+
+        $moduleName = $this->stringService->str('class', sprintf($mvcMinorSuite::SUITE, $mvcMinorSuite->getType()));
+
+        return sprintf(self::MODULE_NAME, $moduleName);
+
     }
 }
