@@ -59,7 +59,7 @@ class TestFile
         return $this;
     }
 
-    public function createDefaultMigration($type)
+    public function createDefaultMigration($minorSuite, $type)
     {
         if ($type !== 'Entity') {
             return '';
@@ -67,18 +67,23 @@ class TestFile
 
         $text = 'src_mvc_%s.php';
 
-        return $this->createDefaultMinorPath($type).'/'.sprintf($text, $this->str('uline', $type));
+        return $this->createDefaultMinorPath($minorSuite, $type).'/'.sprintf($text, $this->str('uline', $type));
     }
 
-    public function createDefaultGearfile($type)
+    public function createDefaultGearfile($minorSuite, $type)
     {
         $text = 'src-mvc-%s.yml';
 
-        return $this->createDefaultMinorPath($type).'/'.sprintf($text, $this->str('url', $type));
+        return $this->createDefaultMinorPath($minorSuite, $type).'/'.sprintf($text, $this->str('url', $type));
     }
 
-    public function createDefaultMinorPath($type)
+    public function createDefaultMinorPath($minorSuite, $type)
     {
+        if ($minorSuite instanceof ControllerMvcMinorSuite) {
+            $text = '../../src-mvc-%s';
+            return sprintf($text, $this->str('url', $type));
+        }
+
         $text = '../src-mvc-%s';
         return sprintf($text, $this->str('url', $type));
 
@@ -98,8 +103,8 @@ class TestFile
 
             $constructDep[***REMOVED*** = sprintf(
                 self::CONSTRUCT_TEMPLATE,
-                $this->createDefaultGearfile($dep),
-                $this->createDefaultMigration($dep)
+                $this->createDefaultGearfile($mvcMinorSuite, $dep),
+                $this->createDefaultMigration($mvcMinorSuite, $dep)
             );
         }
 

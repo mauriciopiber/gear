@@ -14,5 +14,10 @@ use Gear\Integration\Suite\Mvc\MvcMinorSuite;
  */
 class ControllerMvcMinorSuite extends MvcMinorSuite
 {
+    const SUITE = 'controller-mvc';
 
+    public function getSuiteName($type = null)
+    {
+        return self::SUITE;
+    }
 }
