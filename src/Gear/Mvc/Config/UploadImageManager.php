@@ -2,6 +2,7 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
+use GearJson\Db\Db;
 
 class UploadImageManager extends AbstractJsonService implements ModuleManagerInterface
 {
@@ -9,13 +10,13 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
     {
         $this->getFileCreator()->createFile(
             'template/module/config/empty-upload-image.phtml',
-            array(),
+            [***REMOVED***,
             'upload-image.config.php',
             $this->getModule()->getConfigExtFolder()
         );
     }
 
-    public function mergeUploadImageConfigAssociationFromDb(\GearJson\Db\Db $db)
+    public function mergeUploadImageConfigAssociationFromDb(Db $db)
     {
         $this->db = $db;
         $this->mergeUploadImageConfigAssociation();
@@ -30,7 +31,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
 
         $uploadImageConfig = include $this->getModule()->getConfigExtFolder().'/upload-image.config.php';
 
-        $sizeAggregate = array();
+        $sizeAggregate = [***REMOVED***;
         $size = '';
 
         if (!empty($uploadImageConfig)) {
@@ -38,12 +39,11 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
             $size .= $this->convertArrayBackToString($sizeAggregate, true);
         }
 
-
         $size .= $this->generateEmptyUploadImageLine($this->tableNameUrl);
         return $this->createUploadImageConfig($size);
     }
 
-    public function mergeUploadImageColumnFromDb(\GearJson\Db\Db $db)
+    public function mergeUploadImageColumnFromDb(Db $db)
     {
         $this->db = $db;
         $this->mergeUploadImageColumn();
@@ -143,12 +143,12 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
         $fileCreator = $this->getFileCreator();
 
         $fileCreator->setTemplate('template/module/config/upload-image.config.phtml');
-        $fileCreator->setOptions(array(
+        $fileCreator->setOptions([
             'entityName' => $this->getEntityName(),
             'uploadDir'  => $this->getUploadDir(),
             'refDir'     => $this->getRefDir(),
             'size'       => $size
-        ));
+        ***REMOVED***);
         $fileCreator->setFileName('upload-image.config.php');
         $fileCreator->setLocation($this->getModule()->getConfigExtFolder());
 
@@ -161,13 +161,13 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
     public function generateEmptyUploadImageLine($tableNameUrl)
     {
         $line = <<<EOS
-        '$tableNameUrl' => array(
-            'pre' => array(100, 100),
-            'lg' => array(800, 800),
-            'md' => array(600, 600),
-            'sm' => array(400, 400),
-            'xs' => array(200, 200),
-        ),
+        '$tableNameUrl' => [
+            'pre' => [100, 100***REMOVED***,
+            'lg' => [800, 800***REMOVED***,
+            'md' => [600, 600***REMOVED***,
+            'sm' => [400, 400***REMOVED***,
+            'xs' => [200, 200***REMOVED***,
+        ***REMOVED***,
 
 EOS;
         return $line;
@@ -176,11 +176,11 @@ EOS;
     public function generateUploadImageSpecialityLine($specialityName)
     {
         $line = <<<EOS
-        '$specialityName' => array(
-            'pre' => array(100, 100),
-            'sm' => array(400, 400),
-            'xs' => array(200, 200),
-        ),
+        '$specialityName' => [
+            'pre' => [100, 100***REMOVED***,
+            'sm' => [400, 400***REMOVED***,
+            'xs' => [200, 200***REMOVED***,
+        ***REMOVED***,
 
 EOS;
         return $line;
@@ -189,19 +189,19 @@ EOS;
     public function convertUploadImageArrayToString($name, $sizes)
     {
         $line = <<<EOS
-        '$name' => array(
+        '$name' => [
 
 EOS;
 
         foreach ($sizes as $i => $size) {
             $line .= <<<EOS
-            '$i' => array($size[0***REMOVED***, $size[1***REMOVED***),
+            '$i' => [$size[0***REMOVED***, $size[1***REMOVED******REMOVED***,
 
 EOS;
         }
 
         $line .= <<<EOS
-        ),
+        ***REMOVED***,
 
 EOS;
 

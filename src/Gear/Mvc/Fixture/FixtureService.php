@@ -22,6 +22,8 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
+use Gear\Database\AutoincrementServiceTrait;
+use Gear\Mvc\Config\ConfigServiceTrait;
 
 class FixtureService extends AbstractMvc
 {
@@ -33,11 +35,13 @@ class FixtureService extends AbstractMvc
 
     protected $event;
 
-    use \Gear\Database\AutoincrementServiceTrait;
+    use AutoincrementServiceTrait;
 
     use SchemaServiceTrait;
 
     use SchemaToolServiceTrait;
+
+    use ConfigServiceTrait;
 
     protected $speciality;
 
@@ -55,6 +59,8 @@ class FixtureService extends AbstractMvc
      */
     public function instrospect()
     {
+        $this->getConfigService()->introspectUploadImage($this->db);
+
         $this->load = '';
         $this->preLoad = '';
 
