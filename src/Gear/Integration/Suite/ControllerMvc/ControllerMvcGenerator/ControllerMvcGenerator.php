@@ -68,6 +68,9 @@ class ControllerMvcGenerator
 
         $tables = $this->prepareTables($controllerMvcMinor);
 
+        $gearfile = $this->gearFile->createControllerMvcGearfile($controllerMvcMinor, $tables);
+        $controllerMvcMinor->setGearfile($gearfile);
+
         $this->testFile->updateTestFile($controllerMvcMinor, $this->getMvcDependency()['controller'***REMOVED***);
 
         //var_dump($tables);

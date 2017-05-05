@@ -48,12 +48,6 @@ class GearFile
         return $this;
     }
 
-    public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
-    {
-        //echo 'Create Controller Mvc GearFile'."\n";
-
-    }
-
     public function getSrcMvcDependency($tableName, $type)
     {
         if ($type == 'repository') {
@@ -152,6 +146,14 @@ class GearFile
         return $this->createGearfileComponent($srcMvcMinorSuite, ['src' => $srcs***REMOVED***);
 
     }
+
+    public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
+    {
+        //echo 'Create Controller Mvc GearFile'."\n";
+
+        return $this->createGearfileComponent($controllerMvcMinorSuite, [***REMOVED***);
+    }
+
 
     public function createMvcGearfile(MvcMinorSuite $mvcMinorSuite)
     {
