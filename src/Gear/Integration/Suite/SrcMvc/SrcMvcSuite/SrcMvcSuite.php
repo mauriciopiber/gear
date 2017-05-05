@@ -42,6 +42,8 @@ class SrcMvcSuite
 
     public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
     {
+        echo '    - Create Src Mvc Suite'."\n";
+
         $srcMvcMajor = new SrcMvcMajorSuite(
             null,
             $suiteColumns,
@@ -56,5 +58,7 @@ class SrcMvcSuite
         }
 
         $this->superTestFile->updateSuperTestFile($srcMvcMajor);
+
+        echo '    - Finish.'."\n\n";
     }
 }

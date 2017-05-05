@@ -62,6 +62,8 @@ class ControllerMvcGenerator
         $this->createControllerMvcGearfile($controllerMvcMinor, $tables);
 
         $this->createControllerMvcTestFile($controllerMvcMinor);
+
+       echo sprintf('        - minor: controller-mvc')."\n";
     }
 
     private function prepareTables(ControllerMvcMinorSuite $controllerMvcMinor)
@@ -105,16 +107,11 @@ class ControllerMvcGenerator
 
     private function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinor, $tables)
     {
-        echo 'create controller mvc gearfile'."\n";
-    }
-
-    private function createControllerMvcMigrationFile(ControllerMvcMinorSuite $controllerMvcMinor, $tables)
-    {
-        echo 'create controller mvc migration'."\n";
+        //echo 'create controller mvc gearfile'."\n";
     }
 
     private function createControllerMvcTestFile(ControllerMvcMinorSuite $controllerMvcMinor)
     {
-        echo 'create controller mvc test'."\n";
+        //echo 'create controller mvc test'."\n";
     }
 }

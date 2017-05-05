@@ -172,6 +172,10 @@ class SrcGenerator
         $srcMinor->setLocationKey(sprintf('src-%s', strtolower($srcMinor->getType())));
         $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
         $srcMinor->setGearFile($gearfile);
+
+
+        echo sprintf('        - minor: %s', $srcMinor->getType())."\n";
+
         return $srcMinor;
     }
 

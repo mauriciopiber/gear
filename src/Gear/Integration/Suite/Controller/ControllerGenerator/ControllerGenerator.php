@@ -52,7 +52,11 @@ class ControllerGenerator
 
         $suite->setLocationKey(sprintf('controller-%s', strtolower($suite->getType())));
 
-        return $this->gearFile->createControllerGearFile($suite, ['src' => $srcs, 'controller' => $controllers***REMOVED***);
+        $gearfile = $this->gearFile->createControllerGearFile($suite, ['src' => $srcs, 'controller' => $controllers***REMOVED***);
+
+        echo sprintf('        - minor: %s', $type)."\n";
+
+        return $gearfile;
     }
 
     private function createPrepareController($type, $repeat)
