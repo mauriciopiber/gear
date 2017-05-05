@@ -92,6 +92,8 @@ class SrcMvcGenerator
 
         $this->testFile->updateTestFile($srcMvcMinor, $this->getMvcDependency()[$srcMvcMinor->getType()***REMOVED***);
 
+        echo sprintf('        - minor: %s', $srcMvcMinor->getType())."\n";
+
         return $srcMvcMinor;
     }
 

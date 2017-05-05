@@ -44,10 +44,16 @@ class ControllerSuite
     {
         $controllerMajor = new ControllerMajorSuite();
 
+        echo '    - Create Controller Suite'."\n";
+
         foreach ($types as $type) {
             $controllerMinor = new ControllerMinorSuite($controllerMajor, $type, $repeat);
             $this->controllerGenerator->generateMinorSuite($controllerMinor);
+
+
         }
+
+        echo '    - Finish'."\n\n";
 
     }
 }

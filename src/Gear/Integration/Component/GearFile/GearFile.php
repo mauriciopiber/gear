@@ -50,7 +50,7 @@ class GearFile
 
     public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
     {
-        echo 'Create Controller Mvc GearFile'."\n";
+        //echo 'Create Controller Mvc GearFile'."\n";
 
     }
 
@@ -228,7 +228,6 @@ class GearFile
 
         $this->persist->save($suite, $gearfile, $yaml);
 
-        echo "Criado com sucesso"."\n";
         return $gearfile;
     }
 
