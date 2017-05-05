@@ -113,7 +113,7 @@ class GearFile
 
             if (!in_array($minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
                 $src['service'***REMOVED*** = 'factories';
-                $src['namespace'***REMOVED*** = $minorSuite->getTableName();
+                $src['namespace'***REMOVED*** = ($minorSuite->getTableName().'\\'.$this->str('class', $minorSuite->getType()));
             }
 
             if (in_array($minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
