@@ -14,7 +14,7 @@ class GlobService
 {
     public function list($folder)
     {
-        return [***REMOVED***;
+        return glob($folder);
     }
 
 }

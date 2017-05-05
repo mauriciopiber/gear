@@ -7,6 +7,17 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
+use GearBase\Util\String\StringService;
+use Gear\Creator\TemplateService;
+use Gear\Module;
+use GearBase\Util\File\FileService;
+use Gear\Creator\File;
+use Gear\Column\Tinyint\Checkbox;
+use GearJson\Db\Db;
+use GearJson\Src\Src;
+use Gear\Mvc\Entity\EntityTestService;
+use Gear\Column\Integer\ForeignKey;
+use Gear\Column\Datetime\DatetimePtBr;
 
 /**
  * @group src-entity
@@ -26,15 +37,14 @@ class EntityTestServiceTest extends AbstractTestCase
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
+        $this->string = new StringService();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $template       = new TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
+        $fileService    = new FileService();
+        $this->fileCreator    = new File($fileService, $template);
 
-        $template       = new \Gear\Creator\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
-
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/entity-test';
+        $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/entity-test';
 
     }
 
@@ -72,21 +82,20 @@ class EntityTestServiceTest extends AbstractTestCase
      */
     public function testCreateDb($tableColumns, $expected, $tableName)
     {
-
-        $tableColumns[14***REMOVED*** = new \Gear\Column\Tinyint\Checkbox(
+        $tableColumns[14***REMOVED*** = new Checkbox(
             $this->prophesizeColumn('table', 'tinyint_checkbox_column', 'tinyint')
         );
 
         $table = $this->string->str('class', $tableName);
 
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $db = new Db(['table' => $table***REMOVED***);
 
         $this->module->getTestEntityFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(['name' => $table, 'type' => 'Entity'***REMOVED***);
+        $src = new Src(['name' => $table, 'type' => 'Entity'***REMOVED***);
 
-        $this->entity = new \Gear\Mvc\Entity\EntityTestService();
+        $this->entity = new EntityTestService();
         $this->entity->setStringService($this->string);
         $this->entity->setFileCreator($this->fileCreator);
         $this->entity->setModule($this->module->reveal());
@@ -97,21 +106,21 @@ class EntityTestServiceTest extends AbstractTestCase
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Integer\ForeignKey(
+        $tableColumns[***REMOVED*** = new ForeignKey(
             $this->createColumn('table', 'created_by', 'int'),
             $this->createForeign('table', 'created_by', 'FOREIGN KEY', 'id_user', 'user')
         );
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Datetime\DatetimePtBr(
+        $tableColumns[***REMOVED*** = new DatetimePtBr(
             $this->createColumn('table', 'created', 'datetime')
         );
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Integer\ForeignKey(
+        $tableColumns[***REMOVED*** = new ForeignKey(
             $this->createColumn('table', 'updated_by', 'int'),
             $this->createForeign('table', 'updated_by', 'FOREIGN KEY', 'id_user', 'user')
         );
 
-        $tableColumns[***REMOVED*** = new \Gear\Column\Datetime\DatetimePtBr(
+        $tableColumns[***REMOVED*** = new DatetimePtBr(
             $this->createColumn('table', 'updated', 'datetime')
         );
 

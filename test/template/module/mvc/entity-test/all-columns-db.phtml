@@ -16,7 +16,7 @@ class TableTest extends TestCase
         $this->entity = new \MyModule\Entity\Table;
     }
 
-    public function testGetterInitiateByNull()
+    public function testTableFieldsStartWithNull()
     {
         $this->assertNull($this->entity->getIdMyController());
         $this->assertNull($this->entity->getDateColumn());
@@ -48,9 +48,10 @@ class TableTest extends TestCase
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     * @dataProvider getProvider
+     *
+     * @dataProvider getTableFieldsProvider
      */
-    public function testSetterAndGet(
+    public function testTableFields(
         $dateColumn,
         $datePtBrColumn,
         $datetimeColumn,
@@ -64,7 +65,7 @@ class TableTest extends TestCase
         $htmlColumn,
         $textColumn,
         $tinyintColumn,
-        $tinyintCheckbox,
+        $tinyintCheckboxColumn,
         $emailColumn,
         $passwordVerifyColumn,
         $telephoneColumn,
@@ -116,8 +117,8 @@ class TableTest extends TestCase
         $this->entity->setTinyintColumn($tinyintColumn);
         $this->assertEquals($tinyintColumn, $this->entity->getTinyintColumn());
 
-        $this->entity->setTinyintCheckboxColumn($tinyintCheckbox);
-        $this->assertEquals($tinyintCheckbox, $this->entity->getTinyintCheckboxColumn());
+        $this->entity->setTinyintCheckboxColumn($tinyintCheckboxColumn);
+        $this->assertEquals($tinyintCheckboxColumn, $this->entity->getTinyintCheckboxColumn());
 
         $this->entity->setEmailColumn($emailColumn);
         $this->assertEquals($emailColumn, $this->entity->getEmailColumn());
@@ -154,13 +155,13 @@ class TableTest extends TestCase
 
     }
 
-    public function getProvider()
+    public function getTableFieldsProvider()
     {
-        $foreignKeyColumnId = $this->prophesize('MyModule\Entity\ForeignKeyColumn')->reveal();
+        $idForeignKeyColumn = $this->prophesize('MyModule\Entity\ForeignKeyColumn')->reveal();
 
-        $userCreatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
+        $createdBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
 
-        $userUpdatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
+        $updatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
 
         return array(
             array(
@@ -173,7 +174,7 @@ class TableTest extends TestCase
                 'Decimal Column',
                 'Money Pt Br Column',
                 'Checkbox Column',
-                $foreignKeyColumnId,
+                $idForeignKeyColumn,
                 'Int Column',
                 'Html Column',
                 'Text Column',
@@ -186,9 +187,9 @@ class TableTest extends TestCase
                 'Upload Image Column',
                 'Url Column',
                 'Varchar Column',
-                $userCreatedBy,
+                $createdBy,
                 'Created',
-                $userUpdatedBy,
+                $updatedBy,
                 'Updated'
             )
         );

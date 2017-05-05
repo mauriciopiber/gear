@@ -278,17 +278,64 @@ function Gear_Module_Construct
          # COPY GEARFILE
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
-        #if [ "$migration" != "" ***REMOVED***; then
-            #Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
-            #Gear_Util_PrepareForDb "$modulePath"
-        #fi
-   
+        if [ "$migration" != "" ***REMOVED***; then
+            Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
+            Gear_Util_PrepareForDb "$modulePath"
+        fi   
         Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
     done;
    
     if [ "$type" == "web" ***REMOVED***; then
         Gear_Module_Reload "$module"
     fi
+}
+
+
+function Gear_Module_Reconstruct
+{
+    if [ $# -ne 6 ***REMOVED***; then
+        echo "usage: module type scriptDir construct testLocal testCI"
+        exit 1
+    fi
+   
+    # PARAMS
+    basePath=$(Gear_Util_GetBasePath)
+
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+    
+    
+    sudo php public/index.php gear schema delete $module --basepath=$basePath
+    sudo php public/index.php gear schema create $module --basepath=$basePath    
+    sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
+    sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
+    
+    if [ "$construct" == "" ***REMOVED***; then
+    	echo "Missing Construct"
+    	exit 1
+    fi    
+    #echo "Array size: ${#construct[****REMOVED***}"
+
+    #echo "Array items:"
+    for item in ${construct[****REMOVED***}
+    do
+    	
+    	IFS=";"
+        params=($item)
+        
+        gearfile=${params[0***REMOVED***}
+        migration=${params[1***REMOVED***}
+        
+         # COPY GEARFILE
+        Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
+   
+        Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
+    done;
 }
 
 

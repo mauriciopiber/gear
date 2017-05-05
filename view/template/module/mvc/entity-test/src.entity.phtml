@@ -4,44 +4,45 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
- * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
+ * @group <?php echo $this->className.PHP_EOL;?>
  * @group Entity
  */
-class <?php echo $this->serviceNameClass;?>Test extends TestCase
+class <?php echo $this->className;?>Test extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        $this->entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->serviceNameClass;?>;
+        $this->entity = new \<?php echo $this->module;?>\Entity\<?php echo $this->className;?>;
     }
 
-    public function testGetterInitiateByNull()
+    public function test<?php echo $this->className;?>FieldsStartWithNull()
     {
-<?php foreach ($this->assertNull as $line) : ?>
+<?php foreach ($this->fieldsNullMethod as $line) : ?>
         <?php echo $line.PHP_EOL;?>
 <?php endforeach;?>
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     * @dataProvider getProvider
+     *
+     * @dataProvider get<?php echo $this->className;?>FieldsProvider
      */
-    public function testSetterAndGet(
-<?php echo implode(','.PHP_EOL, $this->params);echo PHP_EOL;?>
+    public function test<?php echo $this->className;?>Fields(
+<?php echo implode(','.PHP_EOL, $this->fieldsMethod['params'***REMOVED***);echo PHP_EOL;?>
     ) {
-<?php foreach ($this->assertSet as $line) : ?>
+<?php foreach ($this->fieldsMethod['asserts'***REMOVED*** as $line) : ?>
         <?php echo $line.PHP_EOL;?>
 <?php endforeach;?>
     }
 
-    public function getProvider()
+    public function get<?php echo $this->className;?>FieldsProvider()
     {
-<?php foreach ($this->mocks as $mock) : ?>
+<?php foreach ($this->fieldsProviderMethod['mocks'***REMOVED*** as $mock) : ?>
 <?php echo $mock.PHP_EOL;?>
 <?php endforeach;?>
         return array(
             array(
-<?php echo implode(','.PHP_EOL, $this->provider);echo PHP_EOL;?>
+<?php echo implode(','.PHP_EOL, $this->fieldsProviderMethod['exports'***REMOVED***);echo PHP_EOL;?>
             )
         );
     }
