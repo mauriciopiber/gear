@@ -172,7 +172,7 @@ class GearFile
         }
 
         if (!empty($mvcMinorSuite->getTableAssoc())) {
-            $src = array_merge($src, $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc()), $mvcMinorSuite->getType());
+            $src = array_merge($src, $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc(), $mvcMinorSuite->getType()));
         }
 
         return $this->createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
@@ -193,7 +193,7 @@ class GearFile
         return $gearfileColumns;
     }
 
-    private function createForeignKeyGearfile($tableId, $type)
+    private function createForeignKeyGearfile($tableId, $type = null)
     {
         $table = $this->stringService->str('class', str_replace('id_', '', $tableId));
 
