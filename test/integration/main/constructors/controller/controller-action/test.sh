@@ -5,7 +5,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrControllerAction"
 type="web"
-migration=""
-gearfile="controller-action.yml"
+construct=()
+construct+=(";")
 
 source "$bin/gear/module/test-module.sh"

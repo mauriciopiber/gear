@@ -5,7 +5,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrControllerConsole"
 type="cli"
-migration=""
-gearfile="controller-console.yml"
+construct=()
+construct+=(";")
 
 source "$bin/gear/module/test-module.sh"
