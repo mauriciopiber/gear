@@ -44,6 +44,13 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     const SUITE = '%s/%s';
 
+    const TYPE = 'mvc';
+
+    public function getType()
+    {
+        return self::TYPE;
+    }
+
     /**
      * Constructor
      *

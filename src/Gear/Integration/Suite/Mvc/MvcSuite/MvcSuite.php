@@ -52,6 +52,8 @@ class MvcSuite
             'tables' => $suiteTables
         ***REMOVED***;
 
+        echo '    - Create Mvc Suite'."\n";
+
         $mvcMajor = new MvcMajorSuite($suiteName);
 
         foreach ($expectedColumns as $superType => $columnType) {
@@ -76,5 +78,7 @@ class MvcSuite
 
             $this->superTestFile->updateSuperTestFile($mvcMajor);
         }
+
+        echo '    - Finish.'."\n\n";
     }
 }
