@@ -3,7 +3,7 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="Pbr"
+module="PbrSrc"
 type="web"
 construct=()
 construct+=("src-repository/src-repository.yml")

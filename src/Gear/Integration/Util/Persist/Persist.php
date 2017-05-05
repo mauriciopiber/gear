@@ -35,8 +35,13 @@ class Persist
 
     public function saveMajor(AbstractMajorSuite $suite, $name, $data)
     {
-        $template = $this->location->getLocation($suite::SUITE).'/'.$suite->getSuperType();
-        $path =  sprintf('%s/%s', $template, $name);
+        $location = $this->location->getLocation($suite::SUITE);
+
+        if ($suite::SUITE !== $suite->getSuperType()) {
+            $location .= '/'.$suite->getSuperType();
+        }
+
+        $path =  sprintf('%s/%s', $location, $name);
         return file_put_contents($path, $data);
     }
 

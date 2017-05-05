@@ -59,44 +59,54 @@ class ControllerMvcGenerator
     {
         $tables = $this->prepareTables($controllerMvcMinor);
 
-        $this->createControllerMvcGearfile($controllerMvcMinor, $tables);
+        var_dump($tables);
 
-        $this->createControllerMvcTestFile($controllerMvcMinor);
+        //$this->createControllerMvcGearfile($controllerMvcMinor, $tables);
 
-       echo sprintf('        - minor: controller-mvc')."\n";
+        //$this->createControllerMvcTestFile($controllerMvcMinor);
+
+        //echo sprintf('        - minor: controller-mvc')."\n";
     }
 
-    private function prepareTables(ControllerMvcMinorSuite $controllerMvcMinor)
+
+    private function prepareTable($middleMinor, $column, $usertype, $constraint, $tables)
+    {
+         $srcMvcMinor = new ControllerMvcMinorSuite(
+             $middleMinor->getMajorSuite(),
+             $column,
+             $usertype,
+             $constraint,
+             $tables
+         );
+
+         $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+         $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
+
+
+         $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($middleMinor->getMajorSuite()->getSuperType(), $srcMvcMinor));
+         $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
+         $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
+
+         //$srcMvcMinor->setType($middleMinor->getType());
+
+         /*
+
+         */
+         return $srcMvcMinor;
+    }
+
+    private function prepareTables(ControllerMvcMinorSuite $srcMvcMinor)
     {
 
         $preparedTable = [***REMOVED***;
 
-        $controllerMvcMajor = $controllerMvcMinor->getMajorSuite();
+        $srcMvcMajor = $srcMvcMinor->getMajorSuite();
 
-        foreach ($controllerMvcMajor->getColumns() as $column) {
-            foreach ($controllerMvcMajor->getUserTypes() as $usertype) {
-                foreach ($controllerMvcMajor->getConstraints() as $constraint) {
-                    foreach ($controllerMvcMajor->getTableAssocs() as $tables) {
-
-                        $majorTitle = 'controller-mvc';
-                        $controllerMvcMinor = new ControllerMvcMinorSuite(
-                            $controllerMvcMinor->getMajorSuite(),
-                            $majorTitle,
-                            $column,
-                            $usertype,
-                            $constraint,
-                            $tables
-                        );
-
-                        //$columnsSuffix = $this->resolveNames->createTableUrl($controllerMvcMinor);
-
-                        $controllerMvcMinor->setTableName($this->resolveNames->createTableName('ControllerMvc', $controllerMvcMinor));
-                        //$controllerMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $controllerMvcMinor));
-                        //$controllerMvcMinor->setForeignKeys($this->columns->getForeignKeys($controllerMvcMinor->getColumnType()));
-                        //$controllerMvcMinor->setColumns($this->columns->getColumns($controllerMvcMinor->getColumnType(), $columnsSuffix));
-
-                        $preparedTable[***REMOVED*** = $controllerMvcMinor;
-
+        foreach ($srcMvcMajor->getColumns() as $column) {
+            foreach ($srcMvcMajor->getUserTypes() as $usertype) {
+                foreach ($srcMvcMajor->getConstraints() as $constraint) {
+                    foreach ($srcMvcMajor->getTableAssocs() as $tables) {
+                        $preparedTable[***REMOVED*** = $this->prepareTable($srcMvcMinor, $column, $usertype, $constraint, $tables);
                     }
                 }
             }
