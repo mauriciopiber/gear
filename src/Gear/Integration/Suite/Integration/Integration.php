@@ -72,10 +72,10 @@ class Integration
 
     public function integrate()
     {
-        //$this->runSrc();
-        //$this->runController();
-        //$this->runSrcMvc();
-        //$this->runControllerMvc();
+        $this->runSrc();
+        $this->runController();
+        $this->runSrcMvc();
+        $this->runControllerMvc();
         $this->runMvc();
 
         echo 'Integrate'."\n";

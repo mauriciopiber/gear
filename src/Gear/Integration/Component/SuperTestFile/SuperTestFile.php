@@ -65,7 +65,7 @@ class SuperTestFile
             $gearfile = $suite->getGearFile();
             $migration = $suite->getMigrationFile();
 
-            $construct = ($migration === null)
+            $construct .= ($migration === null)
                 ? sprintf(self::TEMPLATE_CONSTRUCTOR, $folder, $gearfile).PHP_EOL
                 : sprintf(self::TEMPLATE_CONSTRUCTOR_ALL, $folder, $gearfile, $folder, $migration).PHP_EOL;
         }
