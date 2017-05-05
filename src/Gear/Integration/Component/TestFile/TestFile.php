@@ -7,6 +7,7 @@ use Gear\Integration\Util\Persist\Persist;
 use GearBase\Util\String\StringService;
 use Gear\Integration\Suite\AbstractMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 
 /**
  * PHP Version 5
@@ -23,9 +24,9 @@ class TestFile
 
     use StringServiceTrait;
 
-    const CONSTRUCT_TEMPLATE = 'construct[1***REMOVED***="%s;%s"';
+    const CONSTRUCT_TEMPLATE = 'construct+=("%s;%s")';
 
-    const CONSTRUCT_REPLACE = '#construct\[1\***REMOVED***=""#';
+    const CONSTRUCT_REPLACE = '#construct\+\=\(""\)#';
 
     const REPLACE_MODULE = '#(module=")(")#';
 
@@ -55,7 +56,8 @@ class TestFile
         return $this;
     }
 
-    public function updateTestFile(AbstractMinorSuite $mvcMinorSuite)
+
+    public function updateTestFile(AbstractMinorSuite $mvcMinorSuite, array $dependency = null)
     {
         $utilPath = (get_class($mvcMinorSuite) == MvcMinorSuite::class)
             ? './../../../../../../../bin'

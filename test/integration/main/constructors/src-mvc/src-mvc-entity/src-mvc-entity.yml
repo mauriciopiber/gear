@@ -2,7 +2,6 @@ src:
     - { db: MvcBasic, type: Entity, name: MvcBasic, user: all, columns: {  } }
     - { db: MvcBasicUploadImage, type: Entity, name: MvcBasicUploadImage, user: all, columns: {  } }
     - { name: UploadImage, type: Entity, db: UploadImage }
-    - { name: UploadImageFixture, type: Fixture, db: UploadImage }
     - { db: MvcBasicUnique, type: Entity, name: MvcBasicUnique, user: all, columns: {  } }
     - { db: MvcBasicUniqueUploadImage, type: Entity, name: MvcBasicUniqueUploadImage, user: all, columns: {  } }
     - { db: MvcBasicNullable, type: Entity, name: MvcBasicNullable, user: all, columns: {  } }
@@ -27,7 +26,6 @@ src:
     - { db: MvcBasicStrictUniqueNullableUploadImage, type: Entity, name: MvcBasicStrictUniqueNullableUploadImage, user: strict, columns: {  } }
     - { db: MvcComplete, type: Entity, name: MvcComplete, user: all, columns: { clm_txt_htm_cmp: html, clm_dcm_mny_cmp: money-pt-br, clm_boo_chc_cmp: checkbox, clm_int_chc_cmp: checkbox, clm_dtt_pt_cmp: datetime-pt-br, clm_dte_pt_cmp: date-pt-br, clm_vrc_pav_cmp: password-verify, clm_vrc_upi_cmp: upload-image, clm_vrc_url_cmp: url, clm_vrc_uni_cmp: unique-id, clm_vrc_tlp_cmp: telephone, clm_vrc_eml_cmp: email } }
     - { name: ClmIntFrk, type: Entity, db: ClmIntFrk }
-    - { name: ClmIntFrkFixture, type: Fixture, db: ClmIntFrk }
     - { db: MvcCompleteUploadImage, type: Entity, name: MvcCompleteUploadImage, user: all, columns: { clm_txt_htm_cmp_upl: html, clm_dcm_mny_cmp_upl: money-pt-br, clm_boo_chc_cmp_upl: checkbox, clm_int_chc_cmp_upl: checkbox, clm_dtt_pt_cmp_upl: datetime-pt-br, clm_dte_pt_cmp_upl: date-pt-br, clm_vrc_pav_cmp_upl: password-verify, clm_vrc_upi_cmp_upl: upload-image, clm_vrc_url_cmp_upl: url, clm_vrc_uni_cmp_upl: unique-id, clm_vrc_tlp_cmp_upl: telephone, clm_vrc_eml_cmp_upl: email } }
     - { db: MvcCompleteUnique, type: Entity, name: MvcCompleteUnique, user: all, columns: { clm_txt_htm_cmp_uni: html, clm_dcm_mny_cmp_uni: money-pt-br, clm_boo_chc_cmp_uni: checkbox, clm_int_chc_cmp_uni: checkbox, clm_dtt_pt_cmp_uni: datetime-pt-br, clm_dte_pt_cmp_uni: date-pt-br, clm_vrc_pav_cmp_uni: password-verify, clm_vrc_upi_cmp_uni: upload-image, clm_vrc_url_cmp_uni: url, clm_vrc_uni_cmp_uni: unique-id, clm_vrc_tlp_cmp_uni: telephone, clm_vrc_eml_cmp_uni: email } }
     - { db: MvcCompleteUniqueUploadImage, type: Entity, name: MvcCompleteUniqueUploadImage, user: all, columns: { clm_txt_htm_cmp_uni_upl: html, clm_dcm_mny_cmp_uni_upl: money-pt-br, clm_boo_chc_cmp_uni_upl: checkbox, clm_int_chc_cmp_uni_upl: checkbox, clm_dtt_pt_cmp_uni_upl: datetime-pt-br, clm_dte_pt_cmp_uni_upl: date-pt-br, clm_vrc_pav_cmp_uni_upl: password-verify, clm_vrc_upi_cmp_uni_upl: upload-image, clm_vrc_url_cmp_uni_upl: url, clm_vrc_uni_cmp_uni_upl: unique-id, clm_vrc_tlp_cmp_uni_upl: telephone, clm_vrc_eml_cmp_uni_upl: email } }
