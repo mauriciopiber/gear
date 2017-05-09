@@ -67,7 +67,7 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
         $this->getAssetManager()->mergeAssetManagerFromDb($this->db);
 
 
-        $this->instrospectUploadImage($this->db);
+        $this->introspectUploadImage($this->db);
         return true;
 
     }
@@ -147,12 +147,12 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     {
         $git = $this->getGit($git);
 
-        $options = array(
+        $options = [
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'controllers' => $controllers,
             'git' => $git
-        );
+        ***REMOVED***;
 
         if ($type == 'web') {
             $host = sprintf('%s.gear.dev', $this->str('url', $this->getModule()->getModuleName()));

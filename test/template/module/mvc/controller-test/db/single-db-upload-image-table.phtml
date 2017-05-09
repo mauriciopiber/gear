@@ -1,0 +1,509 @@
+<?php
+namespace MyModuleTest\CustomTest\CustomNamespaceTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Custom\CustomNamespace\UploadImageTableController;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
+
+/**
+ * @group MyModule
+ * @group UploadImageTable
+ * @group Controller
+ * @group UploadImageTableController
+ */
+class UploadImageTableControllerTest extends TestCase
+{
+    use AclAssertTrait;
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+        parent::setUp();
+
+        $this->uploadImageTableService = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageTableService');
+        $this->uploadImageTableForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageTableForm');
+        $this->uploadImageTableSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageTableSearchForm');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+
+        $this->controller = new UploadImageTableController(
+            $this->uploadImageTableService->reveal(),
+            $this->uploadImageTableForm->reveal(),
+            $this->uploadImageTableSearchForm->reveal(),
+            $this->imageService->reveal()
+        );
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'UploadImageTableController'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+    }
+
+    protected function tearDown()
+    {
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testEnterCreatePage()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Create');
+
+        $this->routeMatch->setParam('action', 'create');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreatePageRedirectToGet()
+    {
+        $this->url->fromRoute(UploadImageTableController::CREATE)->willReturn(UploadImageTableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreateShowValidation()
+    {
+        $this->url->fromRoute(UploadImageTableController::CREATE)->willReturn(UploadImageTableController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/upload-image-table/create', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+    /**
+     * @group controller.create
+     */
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(UploadImageTableController::CREATE)->willReturn(UploadImageTableController::CREATE);
+        $this->url->fromRoute("my-module/upload-image-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(UploadImageTableController::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/upload-image-table/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+        $this->entity->getIdUploadImageTable()->willReturn(31)->shouldBeCalled();
+
+        $this->uploadImageTableForm->setData($data)->shouldBeCalled();
+        $this->uploadImageTableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->uploadImageTableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->uploadImageTableService->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditDisplaySuccessful()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditRedirectWithInvalidIdToListing()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->uploadImageTableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testDisplayEditSuccessful()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Edit');
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidId()
+    {
+        $this->url->fromRoute(UploadImageTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(UploadImageTableController::EDIT);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation()
+    {
+        $this->url->fromRoute(UploadImageTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(UploadImageTableController::EDIT.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/upload-image-table/edit/31', true)->willReturn([***REMOVED***);
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testEditSuccessfull()
+    {
+        $this->url->fromRoute(UploadImageTableController::EDIT, ['id' => 31***REMOVED***)->willReturn(UploadImageTableController::EDIT);
+        $this->url->fromRoute("my-module/upload-image-table/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::EDIT.'/31/1');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke('my-module/upload-image-table/edit', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+        $this->entity->getIdUploadImageTable()->willReturn(31)->shouldBeCalled();
+
+        $this->uploadImageTableForm->setData($data)->shouldBeCalled();
+        $this->uploadImageTableForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->uploadImageTableForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->uploadImageTableService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.list
+     */
+    public function testWhenListDisplaySuccessful()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'List');
+
+        $this->uploadImageTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'list');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessfulWithValidId()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'View');
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+        //$this->entity->getIdUploadImageTable()->willReturn(31)->shouldBeCalled();
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity->reveal());
+        $this->uploadImageTableService->extract($this->entity->reveal())->willReturn([***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testViewSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->uploadImageTableService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessful()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'view');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Delete');
+
+        $this->uploadImageTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithSuccessful()
+    {
+        $this->uploadImageTableService->delete(6000)->willReturn(['success' => true***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testWhenDeleteDisplaySuccessful()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'delete');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithoutIdReturnToList()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithInvalidIdReturnToList()
+    {
+        $this->url->fromRoute(UploadImageTableController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(UploadImageTableController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->uploadImageTableService->selectById(6000)->willReturn(null)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageReturnPRGPlugin()
+    {
+        $this->url->fromRoute(UploadImageTableController::IMAGE, ['id' => 31***REMOVED***)->willReturn(UploadImageTableController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageProcessSuccess()
+    {
+        $this->url->fromRoute(UploadImageTableController::IMAGE, ['id' => 31***REMOVED***)->willReturn(UploadImageTableController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
+
+        $this->uploadImageTableService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->imageService->appendPlugin()->shouldBeCalled();
+        $this->imageService->updateImages('upload-image-table', 31)->willReturn(true)->shouldBeCalled();
+        $this->imageService->updatePosition([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->imageService->clearCache()->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/upload-image-table/upload-image/31', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+}

@@ -1,66 +1,66 @@
 <?php
-namespace MyModule\Controller;
+namespace MyModule\Custom\CustomNamespace;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
-use MyModule\Service\TableServiceTrait;
-use MyModule\Form\TableFormTrait;
-use MyModule\Form\Search\TableSearchFormTrait;
+use MyModule\Custom\CustomNamespace\UploadImageColumnServiceTrait;
+use MyModule\Custom\CustomNamespace\UploadImageColumnFormTrait;
+use MyModule\Custom\CustomNamespace\UploadImageColumnSearchFormTrait;
 use GearImage\Service\ImageServiceTrait;
-use MyModule\Service\TableService;
-use MyModule\Form\TableForm;
-use MyModule\Form\Search\TableSearchForm;
+use MyModule\Custom\CustomNamespace\UploadImageColumnService;
+use MyModule\Custom\CustomNamespace\UploadImageColumnForm;
+use MyModule\Custom\CustomNamespace\UploadImageColumnSearchForm;
 use GearImage\Service\ImageService;
 
 /**
- * Table Controller
+ * Upload Image Column Controller
  *
- * Actions for Table Table
+ * Actions for Upload Image Column Table
  *
  * PHP Version 5
  *
  * @category Controller
- * @package MyModule/Controller
+ * @package MyModule/Custom/CustomNamespace
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class TableController extends AbstractActionController
+class UploadImageColumnController extends AbstractActionController
 {
-    const CREATE = 'my-module/table/create';
-    const EDIT   = 'my-module/table/edit';
-    const LISTS  = 'my-module/table/list';
-    const IMAGE  = 'my-module/table/upload-image';
+    const CREATE = 'my-module/upload-image-column/create';
+    const EDIT   = 'my-module/upload-image-column/edit';
+    const LISTS  = 'my-module/upload-image-column/list';
+    const IMAGE  = 'my-module/upload-image-column/upload-image';
 
-    use TableServiceTrait;
+    use UploadImageColumnServiceTrait;
 
-    use TableFormTrait;
+    use UploadImageColumnFormTrait;
 
-    use TableSearchFormTrait;
+    use UploadImageColumnSearchFormTrait;
 
     use ImageServiceTrait;
 
     /**
      * Constructor
      *
-     * @param TableService    $tableService    Table Service
-     * @param TableForm       $tableForm       Table Form
-     * @param TableSearchForm $tableSearchForm Table Search Form
-     * @param ImageService    $imageService    Image Service
+     * @param UploadImageColumnService    $imageColumnService Upload Image Column Service
+     * @param UploadImageColumnForm       $imageColumnForm    Upload Image Column Form
+     * @param UploadImageColumnSearchForm $columnSearchForm   Upload Image Column Search Form
+     * @param ImageService                $imageService       Image Service
      *
-     * @return \MyModule\Controller\TableController
+     * @return \MyModule\Custom\CustomNamespace\UploadImageColumnController
      */
     public function __construct(
-        TableService $tableService,
-        TableForm $tableForm,
-        TableSearchForm $tableSearchForm,
+        UploadImageColumnService $imageColumnService,
+        UploadImageColumnForm $imageColumnForm,
+        UploadImageColumnSearchForm $columnSearchForm,
         ImageService $imageService
     ) {
-        $this->tableService = $tableService;
-        $this->tableForm = $tableForm;
-        $this->tableSearchForm = $tableSearchForm;
+        $this->uploadImageColumnService = $imageColumnService;
+        $this->uploadImageColumnForm = $imageColumnForm;
+        $this->uploadImageColumnSearchForm = $columnSearchForm;
         $this->imageService = $imageService;
 
         return $this;
@@ -76,8 +76,8 @@ class TableController extends AbstractActionController
         $this->error = false;
         $this->getImageService()->dropUploadImageSession();
 
-        $this->form    = $this->getTableForm();
-        $this->service = $this->getTableService();
+        $this->form    = $this->getUploadImageColumnForm();
+        $this->service = $this->getUploadImageColumnService();
         $this->url     = self::CREATE;
 
         $create = $this->getRequestPlugin()->fileCreate();
@@ -90,7 +90,7 @@ class TableController extends AbstractActionController
             $this->getImageService()->dropUploadImageSession();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                ['id' => $create->getIdTable(), 'success' => 1***REMOVED***
+                ['id' => $create->getIdUploadImageColumn(), 'success' => 1***REMOVED***
             );
         }
 
@@ -115,22 +115,22 @@ class TableController extends AbstractActionController
     {
         $this->error = false;
 
-        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $idUploadImageColumn = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$idTable) {
+        if (!$idUploadImageColumn) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->data = $this->getTableService()->selectById($idTable);
+        $this->data = $this->getUploadImageColumnService()->selectById($idUploadImageColumn);
 
         if (!$this->data) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $this->form      = $this->getTableForm();
-        $this->service   = $this->getTableService();
+        $this->form      = $this->getUploadImageColumnForm();
+        $this->service   = $this->getUploadImageColumnService();
         $this->url       = self::EDIT;
-        $this->requestId = $idTable;
+        $this->requestId = $idUploadImageColumn;
 
         $update = $this->getRequestPlugin()->fileUpdate();
         if ($update instanceof Response) {
@@ -141,11 +141,11 @@ class TableController extends AbstractActionController
             $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
-                ['id' => $update->getIdTable(), 'success' => 1***REMOVED***
+                ['id' => $update->getIdUploadImageColumn(), 'success' => 1***REMOVED***
             );
         }
 
-        $this->data = $this->getTableService()->selectById($idTable);
+        $this->data = $this->getUploadImageColumnService()->selectById($idUploadImageColumn);
         $this->data->setPasswordVerifyColumn('');
         $this->form->bind($this->data);
 
@@ -159,8 +159,8 @@ class TableController extends AbstractActionController
                 'error' => $this->error,
                 'success' => $sucesso,
                 'uploadImageColumn' => $uploadImageColumn,
-                'contexto' => 'table',
-                'idTable' => $idTable
+                'contexto' => 'upload-image-column',
+                'idUploadImageColumn' => $idUploadImageColumn
             ***REMOVED***
         );
     }
@@ -172,14 +172,13 @@ class TableController extends AbstractActionController
      */
     public function viewAction()
     {
-        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $idUploadImageColumn = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$idTable) {
+        if (!$idUploadImageColumn) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->getTableService()->selectById($idTable);
-        $images = $this->getImageService()->query('table', array(), $idTable);
+        $data = $this->getUploadImageColumnService()->selectById($idUploadImageColumn);
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -188,10 +187,9 @@ class TableController extends AbstractActionController
         return new ViewModel(
             array_merge(
                 [
-                    'id' => $data->getIdTable(),
-                    'images' => $images,
+                    'id' => $data->getIdUploadImageColumn(),
                 ***REMOVED***,
-                $this->getTableService()->extract($data)
+                $this->getUploadImageColumnService()->extract($data)
             )
         );
     }
@@ -209,56 +207,11 @@ class TableController extends AbstractActionController
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $table = $this->getTableService();
+        $uploadImageColumn = $this->getUploadImageColumnService();
 
-        $delete = $table->delete($identifier);
+        $delete = $uploadImageColumn->delete($identifier);
 
         return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
-    }
-
-    /**
-     * Upload Image Action
-     *
-     * @return \Zend\View\Model\ViewModel
-     */
-    public function uploadImageAction()
-    {
-        $this->getImageService()->appendPlugin();
-
-        $idTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
-
-        if (!$idTable) {
-            return $this->redirect()->toRoute(self::LISTS);
-        }
-
-        $data = $this->getTableService()->selectById($idTable);
-
-        if (!$data) {
-            return $this->redirect()->toRoute(self::LISTS);
-        }
-
-        $redirectUrl = $this->url()->fromRoute(self::IMAGE, array('id' => $idTable));
-        $prg = $this->prg($redirectUrl, true);
-
-        $success = 0;
-
-        if ($prg instanceof Response) {
-            return $prg;
-        } elseif ($prg !== false) {
-            $post = $prg;
-            $imageService = $this->getImageService();
-            $imageService->updateImages('table', $idTable);
-            $success = $imageService->updatePosition($post);
-            $this->getImageService()->clearCache();
-        }
-
-        return new ViewModel(
-            [
-                'idTable' => $idTable,
-                'contexto' => 'table',
-                'success' => $success
-            ***REMOVED***
-        );
     }
 
     /**
@@ -269,13 +222,13 @@ class TableController extends AbstractActionController
     public function listAction()
     {
         $data = $this->getRequestPlugin()->prepareJson(
-            $this->getTableService()->selectAll()
+            $this->getUploadImageColumnService()->selectAll()
         );
 
         return new ViewModel(
             [
-                'search'    => $this->getTableSearchForm(),
-                'tableService' => $this->getTableService(),
+                'search'    => $this->getUploadImageColumnSearchForm(),
+                'tableService' => $this->getUploadImageColumnService(),
                 'data'      => $data,
             ***REMOVED***
         );

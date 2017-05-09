@@ -110,10 +110,8 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group RefactoringUnitTest
-     * @group db-controller2
-     * @group db-x
-     * @group fixR
+     * @group mvc
+     * @group mvc-controller
      */
     public function testInstrospectTable(
         $columns,

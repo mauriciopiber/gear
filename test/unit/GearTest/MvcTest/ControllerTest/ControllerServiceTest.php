@@ -148,11 +148,8 @@ class ControllerServiceTest extends TestCase
 
     /**
      * @dataProvider tables
-     * @group unit-test
-     * @group RefactoringUnitTest
-     * @group db-docs
-     * @group db-controller1
-     * @group fixR
+     * @group mvc
+     * @group mvc-controller
      */
     public function testInstrospectTable(
         $columns,
