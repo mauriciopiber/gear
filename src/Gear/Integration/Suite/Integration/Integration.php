@@ -72,11 +72,11 @@ class Integration
 
     public function integrate()
     {
+        $this->mvcSuite->runSuite();
         $this->runSrc();
         $this->runController();
         $this->runSrcMvc();
         $this->runControllerMvc();
-        $this->runMvc();
 
         echo 'Integrate'."\n";
     }
@@ -94,71 +94,6 @@ class Integration
                 'value-object'
             ***REMOVED***,
             self::REPEAT
-        );
-    }
-
-    public function runMvc()
-    {
-        //columns
-        $this->mvcSuite->runMvcSuite(
-            'mvc-columns',
-            [
-                'mvc-complete',
-                'mvc-basic',
-                'mvc-varchar',
-                'mvc-dates',
-                'mvc-text',
-                'mvc-numeric'
-            ***REMOVED***,
-            ['all'***REMOVED***,
-            [null***REMOVED***,
-            [null***REMOVED***
-        );
-
-
-        //usertype
-        $this->mvcSuite->runMvcSuite(
-            'mvc-usertypes',
-            [
-                'mvc-basic',
-            ***REMOVED***,
-            ['low-strict', 'strict'***REMOVED***,
-            [null***REMOVED***,
-            [null***REMOVED***
-        );
-
-        //constraints
-        $this->mvcSuite->runMvcSuite(
-            'mvc-constraints',
-            [
-                'mvc-basic',
-            ***REMOVED***,
-            ['all'***REMOVED***,
-            [['nullable'***REMOVED***, ['unique'***REMOVED***, ['nullable', 'unique'***REMOVED******REMOVED***,
-            [null***REMOVED***
-        );
-
-        //constraints
-        $this->mvcSuite->runMvcSuite(
-            'mvc-upload-image',
-            [
-                'mvc-basic',
-            ***REMOVED***,
-            ['all'***REMOVED***,
-            [null***REMOVED***,
-            ['upload_image'***REMOVED***
-        );
-
-        //complete
-        //constraints
-        $this->mvcSuite->runMvcSuite(
-            'mvc-complete',
-            [
-                'mvc-complete',
-            ***REMOVED***,
-            ['strict'***REMOVED***,
-            [['unique', 'nullable'***REMOVED******REMOVED***,
-            ['upload_image'***REMOVED***
         );
     }
 

@@ -127,7 +127,6 @@ class ServiceService extends AbstractMvc
 
         $this->getColumnsSpecifications();
         $userOptions = $this->getUserSpecifications($this->db);
-
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
         ) {
             $this->tableUploadImage = true;
