@@ -207,6 +207,7 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
+            $hasImageTable = true;
             $table = new \Gear\Table\UploadImage();
             $table->setStringService($this->getStringService());
             $table->setModule($this->getModule());
@@ -282,7 +283,7 @@ class ControllerTestService extends AbstractMvcTest implements
         //$options['mockZfc'***REMOVED*** =
 
         $construct = [***REMOVED***;
-
+//var_dump($hasImageTable);die();
 
         if ($this->controller->getService() === 'factories') {
             if ($hasImageColumn || $hasImageTable) {
@@ -290,7 +291,6 @@ class ControllerTestService extends AbstractMvcTest implements
                 $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
                 $this->controller->setDependency($dependency);
             }
-
 
 
             $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);

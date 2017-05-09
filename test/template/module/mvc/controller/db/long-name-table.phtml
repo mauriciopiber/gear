@@ -5,14 +5,14 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
-use GearImage\Service\ImageServiceTrait;
-use GearImage\Service\ImageService;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleServiceTrait;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleFormTrait;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchFormTrait;
+use GearImage\Service\ImageServiceTrait;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleService;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleForm;
 use MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchForm;
+use GearImage\Service\ImageService;
 
 /**
  * My Very Long Table Name Example Controller
@@ -34,11 +34,13 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
     const LISTS  = 'my-module/my-very-long-table-name-example/list';
     const IMAGE  = 'my-module/my-very-long-table-name-example/upload-image';
 
-    use ImageServiceTrait;
     use MyVeryLongTableNameExampleServiceTrait;
 
     use MyVeryLongTableNameExampleFormTrait;
+
     use MyVeryLongTableNameExampleSearchFormTrait;
+
+    use ImageServiceTrait;
 
     /**
      * Constructor

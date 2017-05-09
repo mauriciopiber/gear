@@ -217,17 +217,9 @@ class ControllerService extends AbstractMvc implements
         }
 
         $dependency = $this->controller->getDependency();
-
         if ($this->hasImage || $this->hasTableImage) {
             $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
-
-            $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE_TRAIT.';'.PHP_EOL;
-
-            if ($this->controller->getService() == 'factories') {
-                $this->use .= 'use '.\Gear\Table\UploadImage::USE_ATTRIBUTE.';'.PHP_EOL;
-            }
-
-            $this->attribute .= '    use '.\Gear\Table\UploadImage::ATTRIBUTE.';'.PHP_EOL;
+            $this->controller->setDependency($dependency);
         }
 
         /**
@@ -254,7 +246,6 @@ class ControllerService extends AbstractMvc implements
             ***REMOVED***
         );
 
-        $this->controller->setDependency($dependency);
         $options['constructor'***REMOVED*** = ($this->controller->getService() == 'factories')
           ? $this->getCode()->getConstructor($this->controller)
           : '';
