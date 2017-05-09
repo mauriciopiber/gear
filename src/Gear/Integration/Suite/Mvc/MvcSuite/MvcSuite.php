@@ -81,4 +81,70 @@ class MvcSuite
 
         echo '    - Finish.'."\n\n";
     }
+
+
+    public function runSuite()
+    {
+        //columns
+        $this->runMvcSuite(
+            'mvc-columns',
+            [
+                'mvc-complete',
+                'mvc-basic',
+                'mvc-varchar',
+                'mvc-dates',
+                'mvc-text',
+                'mvc-numeric'
+            ***REMOVED***,
+            ['all'***REMOVED***,
+            [null***REMOVED***,
+            [null***REMOVED***
+        );
+
+
+        //usertype
+        $this->runMvcSuite(
+            'mvc-usertypes',
+            [
+                'mvc-basic',
+            ***REMOVED***,
+            ['low-strict', 'strict'***REMOVED***,
+            [null***REMOVED***,
+            [null***REMOVED***
+        );
+
+        //constraints
+        $this->runMvcSuite(
+            'mvc-constraints',
+            [
+                'mvc-basic',
+            ***REMOVED***,
+            ['all'***REMOVED***,
+            [['nullable'***REMOVED***, ['unique'***REMOVED***, ['nullable', 'unique'***REMOVED******REMOVED***,
+            [null***REMOVED***
+        );
+
+        //constraints
+        $this->runMvcSuite(
+            'mvc-upload-image',
+            [
+                'mvc-basic',
+            ***REMOVED***,
+            ['all'***REMOVED***,
+            [null***REMOVED***,
+            ['upload_image'***REMOVED***
+        );
+
+        //complete
+        //constraints
+        $this->runMvcSuite(
+            'mvc-complete',
+            [
+                'mvc-complete',
+            ***REMOVED***,
+            ['strict'***REMOVED***,
+            [['unique', 'nullable'***REMOVED******REMOVED***,
+            ['upload_image'***REMOVED***
+        );
+    }
 }

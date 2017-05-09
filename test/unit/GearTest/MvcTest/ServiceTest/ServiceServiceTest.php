@@ -130,14 +130,15 @@ class ServiceServiceTest extends TestCase
         );
     }
 
+    public function testIntrospectTableWithUploadImageTable()
+    {
+
+    }
+
     /**
      * @dataProvider tables
-     * @group RefactoringUnitTest
-     * @group fix-usertype
-     * @group db-docs1
-     * @group db-service1
-     * @group db-factory-namespace
-     * @group fixR
+     * @group mvc
+     * @group mvc-service
      */
     public function testInstrospectTable(
         $columns,
