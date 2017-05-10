@@ -25,20 +25,21 @@ trait ServiceDataTrait
                 true,
                 true,
                 true,
-                'table',
+                'AllColumnsDb',
                 'factories',
                 'Custom\CustomNamespace'
             ***REMOVED***,
             [
-                $this->getAllPossibleColumns(),
+                $this->getSingleColumns(),
                 'all-columns-db-upload-image',
                 false,
                 false,
                 true,
-                'table',
+                'DbUploadImage',
                 'factories',
                 'Custom\CustomNamespace'
             ***REMOVED***,
+
             // [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
             [
                 $this->getSingleColumns(),

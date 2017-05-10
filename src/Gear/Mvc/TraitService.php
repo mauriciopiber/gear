@@ -32,13 +32,12 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
             $name = $src->getName();
         }
 
-
-
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/trait/src.phtml');
         $trait->setFileName($name.'Trait.php');
         $trait->setLocation($location);
 
+        /**
         if ($testLocation !== null && is_dir($testLocation)) {
             if ($isSearchForm) {
                 $specialName = sprintf(
@@ -59,16 +58,16 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
             $traitTest->setTemplate('template/module/test/trait.phtml');
             $traitTest->setFileName($name.'TraitTest.php');
             $traitTest->setLocation($testLocation);
-            $traitTest->setOptions(array(
+            $traitTest->setOptions([
                 'className' => $name.'Trait',
                 'class' => $name,
 
                 'var' => $this->str('var-lenght', $name),
                 'expected' => $specialName,
                 'module' => $this->getModule()->getModuleName()
-            ));
+            ***REMOVED***);
             $traitTest->render();
-        }
+        }*/
 
         $callable = $this->getServiceManager()->getServiceCallable($src);
 
@@ -77,7 +76,8 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
 
         $trait->setOptions(
-            array(
+            [
+                'classDocs' => $this->getCode()->getClassDocs($src),
                 'module' => $this->getModule()->getModuleName(),
                 'namespace' => $this->getCode()->getNamespace($src),
                 'class' => $this->str('class', $name),
@@ -88,7 +88,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 'srcName' => $src->getName(),
                 'service' => $service,
                 'callable' => $callable
-            )
+            ***REMOVED***
         );
 
         return $trait->render();

@@ -95,8 +95,7 @@ class ModuleServiceTest extends TestCase
         $this->cache = $this->prophesize('Gear\Cache\CacheService');
 
         $this->request = $this->prophesize('Zend\Console\Request');
-        //$this->moduleService->setFileCreator($fileCreator);
-        //$this->moduleService->setStringService($stringService);
+
         $this->applicationConfig = $this->prophesize('Gear\Module\Config\ApplicationConfig');
 
         $this->autoload = $this->prophesize('Gear\Autoload\ComposerAutoload');
@@ -186,7 +185,6 @@ class ModuleServiceTest extends TestCase
 
         $this->createModuleRealFiles();
 
-        //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getScriptDevelopment('cli');
 
         $expected = $this->templates.'/deploy-development-cli.sh';
@@ -209,7 +207,6 @@ class ModuleServiceTest extends TestCase
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
         $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/gear-it.git')->shouldBeCalled();
 
-        //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getInstallStagingScript();
 
         $expected = $this->templates.'/install-staging.sh';
@@ -231,7 +228,6 @@ class ModuleServiceTest extends TestCase
         $this->createModuleRealFiles();
 
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
-        //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->getStagingScript();
 
         $expected = $this->templates.'/deploy-staging.sh';
@@ -250,7 +246,6 @@ class ModuleServiceTest extends TestCase
         $this->createModuleRealFiles();
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->createGitIgnore('web');
 
         $expected = $this->templates.'/../gitignore-web';
@@ -270,7 +265,6 @@ class ModuleServiceTest extends TestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        //$this->moduleService->setModule($this->module->reveal());
         $this->moduleService->createGitIgnore('cli');
 
         $expected = $this->templates.'/../gitignore-cli';
@@ -319,8 +313,6 @@ class ModuleServiceTest extends TestCase
         $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
-        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
         $this->controllerTest->moduleFactory()->shouldBeCalled();
@@ -339,7 +331,6 @@ class ModuleServiceTest extends TestCase
         $this->viewService->createErrorView()->shouldBeCalled();
         $this->viewService->createDeleteView()->shouldBeCalled();
         $this->viewService->create404View()->shouldBeCalled();
-        //$this->viewService->createLayoutView()->shouldBeCalled();
         $this->viewService->createLayoutSuccessView()->shouldBeCalled();
         $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
         $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
@@ -406,7 +397,6 @@ class ModuleServiceTest extends TestCase
         $this->fileCreator->render()->shouldBeCalled();
          */
 
-        //$this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
@@ -480,8 +470,6 @@ class ModuleServiceTest extends TestCase
         $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
-        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
         $this->controllerTest->moduleFactory()->shouldBeCalled();
@@ -501,7 +489,6 @@ class ModuleServiceTest extends TestCase
         $this->viewService->createErrorView()->shouldBeCalled();
         $this->viewService->createDeleteView()->shouldBeCalled();
         $this->viewService->create404View()->shouldBeCalled();
-        //$this->viewService->createLayoutView()->shouldBeCalled();
         $this->viewService->createLayoutSuccessView()->shouldBeCalled();
         $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
         $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
@@ -576,7 +563,6 @@ class ModuleServiceTest extends TestCase
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 
-        //$this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/module.git')->shouldBeCalled();
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),
@@ -636,19 +622,13 @@ class ModuleServiceTest extends TestCase
         $this->module->setDirService($this->dirService);
         $this->module->setStringService($this->stringService);
 
-
         $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
-
-
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
         $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
-
-        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();
         $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
@@ -658,8 +638,6 @@ class ModuleServiceTest extends TestCase
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type, null)->shouldBeCalled();
-
-        //$this->languageService->create()->shouldBeCalled();
 
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();
@@ -783,21 +761,14 @@ class ModuleServiceTest extends TestCase
         $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
         $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
 
-
-        $this->consoleControllerTest->generateAbstractClass()->shouldNotBeCalled();
-        $this->controllerTest->generateAbstractClass()->shouldNotBeCalled();
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();
         $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
         $this->consoleController->moduleFactory()->shouldBeCalled();
 
-
-
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
         $this->configService->module($type, null)->shouldBeCalled();
-
-        //$this->languageService->create()->shouldBeCalled();
 
         $this->docs->createConfig()->shouldBeCalled();
         $this->docs->createIndex()->shouldBeCalled();

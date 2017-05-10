@@ -2,6 +2,7 @@ namespace <?php echo $this->namespace;?>;
 
 use <?php echo $this->callable; ?>;
 
+<?php echo $this->classDocs;?>
 trait <?= $this->srcName;?>Trait
 {
     protected $<?= $this->var;?>;
@@ -13,10 +14,6 @@ trait <?= $this->srcName;?>Trait
      */
     public function get<?= $this->srcName;?>()
     {
-        if (!isset($this-><?= $this->var;?>)) {
-            $name = '<?= $this->service;?>';
-            $this-><?= $this->var;?> = $this->getServiceLocator()->get($name);
-        }
         return $this-><?= $this->var;?>;
     }
 

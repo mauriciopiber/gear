@@ -1,0 +1,151 @@
+<?php
+
+namespace MyModule\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UploadImage
+ *
+ * PHP Version 5
+ *
+ * @category Entity
+ * @package MyModule/Entity
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ *
+ * @ORM\Table(
+ *     name="upload_image",
+ *     indexes={
+ *         @ORM\Index(name="created_by", columns={"created_by"}),
+ *         @ORM\Index(name="updated_by", columns={"updated_by"}),
+ *         @ORM\Index(name="id_mvc_basic_upload_image", columns={"id_mvc_basic_upload_image"})
+ *     }
+ * )
+ * @SuppressWarnings(PHPMD)
+
+ * @ORM\Entity
+ */
+class UploadImage
+{
+    use \GearBase\Entity\LogTrait;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_upload_image", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idUploadImage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="upload_image", type="string", length=255, nullable=false)
+     */
+    private $uploadImage;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ordination", type="integer", nullable=false)
+     */
+    private $ordination;
+
+    /**
+     * @var \MyModule\Entity\MvcBasicUploadImage
+     *
+     * @ORM\ManyToOne(targetEntity="MyModule\Entity\MvcBasicUploadImage")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_mvc_basic_upload_image", referencedColumnName="id_mvc_basic_upload_image")
+     * })
+     */
+    private $idMvcBasicUploadImage;
+
+
+
+    /**
+     * Get idUploadImage
+     *
+     * @return integer
+     */
+    public function getIdUploadImage()
+    {
+        return $this->idUploadImage;
+    }
+
+    /**
+     * Set uploadImage
+     *
+     * @param string $uploadImage
+     *
+     * @return UploadImage
+     */
+    public function setUploadImage($uploadImage)
+    {
+        $this->uploadImage = $uploadImage;
+
+        return $this;
+    }
+
+    /**
+     * Get uploadImage
+     *
+     * @return string
+     */
+    public function getUploadImage()
+    {
+        return $this->uploadImage;
+    }
+
+    /**
+     * Set ordination
+     *
+     * @param integer $ordination
+     *
+     * @return UploadImage
+     */
+    public function setOrdination($ordination)
+    {
+        $this->ordination = $ordination;
+
+        return $this;
+    }
+
+    /**
+     * Get ordination
+     *
+     * @return integer
+     */
+    public function getOrdination()
+    {
+        return $this->ordination;
+    }
+
+    /**
+     * Set idMvcBasicUploadImage
+     *
+     * @param \MyModule\Entity\MvcBasicUploadImage $idMvcBasicUploadImage
+     *
+     * @return UploadImage
+     */
+    public function setIdMvcBasicUploadImage(\MyModule\Entity\MvcBasicUploadImage $idMvcBasicUploadImage = null)
+    {
+        $this->idMvcBasicUploadImage = $idMvcBasicUploadImage;
+
+        return $this;
+    }
+
+    /**
+     * Get idMvcBasicUploadImage
+     *
+     * @return \MyModule\Entity\MvcBasicUploadImage
+     */
+    public function getIdMvcBasicUploadImage()
+    {
+        return $this->idMvcBasicUploadImage;
+    }
+}
+

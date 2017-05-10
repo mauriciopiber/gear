@@ -1,8 +1,6 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceManager;
 use <?php echo $this->fullclass;?>Trait;
 
 /**
@@ -12,28 +10,32 @@ use <?php echo $this->fullclass;?>Trait;
  */
 class <?php echo $this->class;?>TraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
-
     use <?php echo $this->class;?>Trait;
 
     public function setUp()
     {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('<?php echo $this->fullclass;?>');
-        $serviceManager->setService('<?php echo $this->fullclass;?>', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
+        $this-><?php echo $this->var;?>SetUp = $this->prophesize('<?php echo $this->fullclass;?>');
     }
 
-    public function testGet()
+    public function testGetEmpty()
     {
-        $serviceLocator = $this->get<?php echo $this->class;?>();
-        $this->assertInstanceOf('<?php echo $this->fullclass;?>', $serviceLocator);
+        $<?php echo $this->var;?>SetUp = $this->get<?php echo $this->class;?>();
+        $this->assertNull($<?php echo $this->var;?>SetUp);
     }
 
     public function testSet()
     {
-        $mocking = $this->prophesize('<?php echo $this->fullclass;?>')->reveal();
-        $this->set<?php echo $this->class;?>($mocking);
-        $this->assertEquals($mocking, $this->get<?php echo $this->class;?>());
+        $this->set<?php echo $this->class;?>($this-><?php echo $this->var;?>SetUp->reveal());
+        $<?php echo $this->var;?>SetUp = $this->get<?php echo $this->class;?>();
+
+        $this->assertInstanceOf(
+            '<?php echo $this->fullclass;?>',
+            $<?php echo $this->var;?>SetUp
+        );
+
+        $this->assertEquals(
+            $this-><?php echo $this->var;?>SetUp->reveal(),
+            $<?php echo $this->var;?>SetUp
+        );
     }
 }
