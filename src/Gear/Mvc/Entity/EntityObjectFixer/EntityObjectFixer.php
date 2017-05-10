@@ -63,35 +63,48 @@ class EntityObjectFixer
         return $this;
     }
 
-    public function fixEntity($entity)
+    public function fixEntity(&$entity)
     {
-        $this->userEntity($entity);
+        $this->fixUserEntityNamespace($entity);
+        $this->fixRemoveUserColumns($entity);
+        $this->fixAddUserTrait($entity);
+
         $this->snifferErrors($entity);
-        //$this->clearDuplicateEmpty($entity);
         $this->docsErrors($entity);
+
+        $this->fixFirstEmptyLine($entity);
+        $this->fixDuplicateEmptyLines($entity);
+        $this->fixDuplicateEndLine($entity);
+        $this->fixUseNamespace($entity);
     }
 
-    /*
-    public function clearDuplicateEmpty(&$entity)
+    public function fixFirstEmptyLine(&$entity)
     {
-        $lines = explode(PHP_EOL, $entity->getContent());
 
-        $total = count($lines);
+        $content = $entity->getContent();
 
-        for ($i = 0; $i > $total-1; $i++) {
+        $content = str_replace('<?php'.PHP_EOL.PHP_EOL.'namespace ', '<?php'.PHP_EOL.'namespace ', $content);
+        $entity->setContent($content);
 
-            if ($lines[$i***REMOVED*** == PHP_EOL && isset($lines[$i+1***REMOVED***) && $lines[$i+1***REMOVED*** == PHP_EOL) {
-                unset($lines[$i***REMOVED***);
-            }
-        }
+    }
 
-        $file = array_values($lines);
-
-        $content = implode(PHP_EOL, $file);
-
+    public function fixDuplicateEmptyLines(&$entity)
+    {
+        $content = $entity->getContent();
+        $content = str_replace(PHP_EOL.PHP_EOL.PHP_EOL, PHP_EOL, $content);
         $entity->setContent($content);
     }
-    */
+
+    public function fixDuplicateEndLine(&$entity)
+    {
+        $content = $entity->getContent();
+        $content = rtrim($content, PHP_EOL);
+        $content .= PHP_EOL;
+        $entity->setContent($content);
+    }
+
+
+
 
     public function snifferErrors($entity)
     {
@@ -253,6 +266,166 @@ EOL;
     }
 
 
+    /*
+    public function pregReplace(&$subject, $target)
+    {
+        $entity->setContent(preg_replace($subject, $target, $entity->getContent()));
+    }
+    */
+
+    public function fixAddUserTrait(EntityObject &$entity)
+    {
+        $content = $entity->getContent();
+
+        if (strpos('use \GearBase\Entity\LogTrait;', $content) === false) {
+            $content = $this->addLogTraitUseAttribute($content);
+            $content = $this->addLogTraitUseNamespace($content);
+        }
+
+        $entity->setContent($content);
+
+    }
+
+
+    public function fixUseNamespace(&$entity)
+    {
+        $content = $entity->getContent();
+
+
+        preg_match_all("#\(\\\\([a-zA-Z\\\\***REMOVED****) \\$#", $content, $match);
+
+
+        if (!isset($match[1***REMOVED***) || empty($match[1***REMOVED***)) {
+            return;
+        }
+
+        foreach ($match[1***REMOVED*** as $namespaceToFix) {
+
+            $fullname = explode('\\', $namespaceToFix);
+            $name = end($fullname);
+            $content = str_replace('(\\'.$namespaceToFix, '('.$name, $content);
+            $content = $this->addUseNamespace($content, $namespaceToFix);
+        }
+
+        //die();
+
+        $entity->setContent($content);
+    }
+
+
+    public function addLogTraitUseAttribute($content)
+    {
+        preg_match('/class [a-zA-Z***REMOVED****\n{/', $content, $match, PREG_OFFSET_CAPTURE);
+
+        $strToInsert = PHP_EOL.'    use LogTrait;'.PHP_EOL;
+
+        return $this->insertTextIntoText($strToInsert, $content, $match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***));
+    }
+
+    public function addLogTraitUseNamespace($content)
+    {
+        $strToInsert = 'GearBase\Entity\LogTrait';
+
+        return $this->addUseNamespace($content, $strToInsert);
+    }
+
+    public function addUseNamespace($content, $useNamespace)
+    {
+        preg_match('/namespace [a-zA-Z\\\\;***REMOVED****\n\n/', $content, $match, PREG_OFFSET_CAPTURE);
+
+        $strToInsert = sprintf('use %s;', $useNamespace).PHP_EOL;
+
+        return $this->insertTextIntoText($strToInsert, $content, $match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***));
+    }
+
+
+    public function insertTextIntoText($textToInsert, $actualText, $position)
+    {
+        return substr($actualText, 0, $position)
+                . $textToInsert
+                . substr($actualText, $position);
+    }
+
+    public function fixUserEntityNamespace(EntityObject &$entity)
+    {
+        $content = $entity->getContent();
+
+        $userNamespace = sprintf('\%s\Entity\User', $this->getModuleName());
+        $fixNamespace = '\GearAdmin\Entity\User';
+
+        $userName = sprintf('%s\Entity\User', $this->getModuleName());
+        $fixName  = 'GearAdmin\Entity\User';
+
+        $content = str_replace($userNamespace, $fixNamespace, $content);
+        $content = str_replace($userName, $fixName, $content);
+
+        $entity->setContent($content);
+    }
+
+    /**
+     * @TODO Descobrir pq.
+     * @param EntityObject $entity
+     */
+    public function docsErrors(EntityObject &$entity)
+    {
+        $content = $entity->getContent();
+
+        $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
+
+        preg_match_all($pattern, $content, $matches);
+
+        foreach ($matches[0***REMOVED*** as $exact) {
+            $explode = explode(PHP_EOL, $exact);
+            $param = $explode[0***REMOVED***;
+
+            $all = explode(' ', $param);
+            $name = end($all);
+            $name = str_replace('$', '', $name);
+
+            $label = $this->str('label', $name);
+
+            $replacement = $param.' '.$label;
+
+
+            $content = str_replace($exact, $replacement."\n", $content);
+        }
+
+        $entity->setContent($content);
+
+    }
+
+
+    /**
+     * Função responsável por substituir entidade no disco.
+     * @param String $fileName
+     * @return boolean
+     */
+    public function persistEntity($entity)
+    {
+        return file_put_contents($entity->getFile(), $entity->getContent());
+    }
+
+
+    public function fixRemoveUserColumns(EntityObject &$entity)
+    {
+        $this->strReplace($entity, $this->getAttributeDate('created', false), '');
+        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'created'), '');
+        $this->strReplace($entity, $this->getGetterDate('created'), '');
+
+        $this->strReplace($entity, $this->getAttributeDate('updated', true), '');
+        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'updated'), '');
+        $this->strReplace($entity, $this->getGetterDate('updated'), '');
+
+        $this->strReplace($entity, $this->getAttributeForeignKey('createdBy'), '');
+        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'createdBy'), '');
+        $this->strReplace($entity, $this->getGetterForeignKey('createdBy'), '');
+
+        $this->strReplace($entity, $this->getAttributeForeignKey('updatedBy'), '');
+        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'updatedBy'), '');
+        $this->strReplace($entity, $this->getGetterForeignKey('updatedBy'), '');
+    }
+
+
     public function getAttributeDate($column, $nullable = true)
     {
         $columnUline = $this->str('uline', $column);
@@ -404,100 +577,5 @@ EOS;
     {
         $newText = str_replace($subject, $target, $entity->getContent());
         $entity->setContent($newText);
-    }
-
-    /*
-    public function pregReplace(&$subject, $target)
-    {
-        $entity->setContent(preg_replace($subject, $target, $entity->getContent()));
-    }
-    */
-
-    public function userEntity(EntityObject &$entity)
-    {
-
-        $content = $entity->getContent();
-
-        $userNamespace = sprintf('\%s\Entity\User', $this->getModuleName());
-        $fixNamespace = '\GearAdmin\Entity\User';
-
-        $userName = sprintf('%s\Entity\User', $this->getModuleName());
-        $fixName  = 'GearAdmin\Entity\User';
-
-
-        $content = str_replace($userNamespace, $fixNamespace, $content);
-        $content = str_replace($userName, $fixName, $content);
-
-        if (strpos('use \GearBase\Entity\LogTrait;', $content) === false) {
-
-            preg_match('/class [a-zA-Z***REMOVED****\n{/', $content, $match, PREG_OFFSET_CAPTURE);
-
-            $strToInsert = PHP_EOL.'    use \GearBase\Entity\LogTrait;'.PHP_EOL;
-
-            $content = substr($content, 0, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)))
-                . $strToInsert
-                . substr($content, ($match[0***REMOVED***[1***REMOVED***+strlen($match[0***REMOVED***[0***REMOVED***)));
-        }
-
-        $entity->setContent($content);
-
-        $this->strReplace($entity, $this->getAttributeDate('created', false), '');
-        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'created'), '');
-        $this->strReplace($entity, $this->getGetterDate('created'), '');
-
-        $this->strReplace($entity, $this->getAttributeDate('updated', true), '');
-        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'updated'), '');
-        $this->strReplace($entity, $this->getGetterDate('updated'), '');
-
-        $this->strReplace($entity, $this->getAttributeForeignKey('createdBy'), '');
-        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'createdBy'), '');
-        $this->strReplace($entity, $this->getGetterForeignKey('createdBy'), '');
-
-        $this->strReplace($entity, $this->getAttributeForeignKey('updatedBy'), '');
-        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'updatedBy'), '');
-        $this->strReplace($entity, $this->getGetterForeignKey('updatedBy'), '');
-    }
-
-    /**
-     * @TODO Descobrir pq.
-     * @param EntityObject $entity
-     */
-    public function docsErrors(EntityObject &$entity)
-    {
-        $content = $entity->getContent();
-
-        $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
-
-        preg_match_all($pattern, $content, $matches);
-
-        foreach ($matches[0***REMOVED*** as $exact) {
-            $explode = explode(PHP_EOL, $exact);
-            $param = $explode[0***REMOVED***;
-
-            $all = explode(' ', $param);
-            $name = end($all);
-            $name = str_replace('$', '', $name);
-
-            $label = $this->str('label', $name);
-
-            $replacement = $param.' '.$label;
-
-
-            $content = str_replace($exact, $replacement."\n", $content);
-        }
-
-        $entity->setContent($content);
-
-    }
-
-
-    /**
-     * Função responsável por substituir entidade no disco.
-     * @param String $fileName
-     * @return boolean
-     */
-    public function persistEntity($entity)
-    {
-        return file_put_contents($entity->getFile(), $entity->getContent());
     }
 }

@@ -1,7 +1,8 @@
 <?php
-
 namespace MyModule\Entity;
 
+use MyModule\Entity\MvcBasicUploadImage;
+use GearBase\Entity\LogTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +30,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UploadImage
 {
-    use \GearBase\Entity\LogTrait;
+    use LogTrait;
 
     /**
      * @var integer
@@ -63,8 +64,6 @@ class UploadImage
      * })
      */
     private $idMvcBasicUploadImage;
-
-
 
     /**
      * Get idUploadImage
@@ -131,7 +130,7 @@ class UploadImage
      *
      * @return UploadImage
      */
-    public function setIdMvcBasicUploadImage(\MyModule\Entity\MvcBasicUploadImage $idMvcBasicUploadImage = null)
+    public function setIdMvcBasicUploadImage(MvcBasicUploadImage $idMvcBasicUploadImage = null)
     {
         $this->idMvcBasicUploadImage = $idMvcBasicUploadImage;
 
@@ -148,4 +147,3 @@ class UploadImage
         return $this->idMvcBasicUploadImage;
     }
 }
-
