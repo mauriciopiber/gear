@@ -19,7 +19,6 @@ trait ServiceDataTrait
     {
         return [
             // [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
-            /*
             [
                 $this->getAllPossibleColumns(),
                 'all-columns-db-factory',
@@ -29,7 +28,7 @@ trait ServiceDataTrait
                 'table',
                 'factories',
                 'Custom\CustomNamespace'
-            ***REMOVED***,*/
+            ***REMOVED***,
             [
                 $this->getAllPossibleColumns(),
                 'all-columns-db-upload-image',
@@ -40,7 +39,6 @@ trait ServiceDataTrait
                 'factories',
                 'Custom\CustomNamespace'
             ***REMOVED***,
-            /*
             // [$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null***REMOVED***,
             [
                 $this->getSingleColumns(),
@@ -85,7 +83,6 @@ trait ServiceDataTrait
                 'Custom\CustomNamespace',
                 'low-strict'
             ***REMOVED***
-            */
         ***REMOVED***;
     }
 }

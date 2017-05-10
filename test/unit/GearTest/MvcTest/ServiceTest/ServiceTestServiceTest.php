@@ -50,11 +50,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
 
-        $this->srcDependency = new \Gear\Creator\SrcDependency;
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-
-        $this->codeTest->setSrcDependency($this->srcDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
@@ -64,7 +59,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setStringService($this->string);
         $this->service->setModule($this->module->reveal());
         $this->service->setCodeTest($this->codeTest);
-        $this->service->setSrcDependency($this->srcDependency);
 
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->service->setFactoryTestService($this->factoryTest->reveal());
@@ -229,10 +223,6 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTraitTestService($this->traitTest->reveal());
 
-        $srcDependency = new \Gear\Creator\SrcDependency();
-        $srcDependency->setModule($this->module->reveal());
-        $this->service->setSrcDependency($srcDependency);
-
         $file = $this->service->create($data);
 
         $expected = $this->templates.'/src/service-with-special-dependency.phtml';
@@ -272,10 +262,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->service->setServiceManager($serviceManager);
 
         $this->service->setTraitTestService($this->traitTest->reveal());
-
-        $srcDependency = new \Gear\Creator\SrcDependency();
-        $srcDependency->setModule($this->module->reveal());
-        $this->service->setSrcDependency($srcDependency);
 
         $file = $this->service->create($data);
 

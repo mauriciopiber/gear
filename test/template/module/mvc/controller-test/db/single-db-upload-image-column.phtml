@@ -18,41 +18,6 @@ class UploadImageColumnControllerTest extends TestCase
 {
     use AclAssertTrait;
 
-    public function setUp()
-    {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-        parent::setUp();
-
-        $this->uploadImageColumnService = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnService');
-        $this->uploadImageColumnForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnForm');
-        $this->uploadImageColumnSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnSearchForm');
-        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
-
-        $this->controller = new UploadImageColumnController(
-            $this->uploadImageColumnService->reveal(),
-            $this->uploadImageColumnForm->reveal(),
-            $this->uploadImageColumnSearchForm->reveal(),
-            $this->imageService->reveal()
-        );
-
-        $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'UploadImageColumnController'));
-        $this->event      = new MvcEvent();
-
-        $this->event->setRouteMatch($this->routeMatch);
-        $this->controller->setEvent($this->event);
-
-        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
-        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
-
-        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
-        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
-    }
-
     public function mockUploadImage()
     {
         $maker = new \GearBaseTest\UploadImageMock();
@@ -89,6 +54,41 @@ class UploadImageColumnControllerTest extends TestCase
         $this->getApplication()
         ->getServiceManager()
         ->get('ServiceManager')->setService('MyModule\Form\UploadImageColumnForm', $factory);
+    }
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+        parent::setUp();
+
+        $this->uploadImageColumnService = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnService');
+        $this->uploadImageColumnForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnForm');
+        $this->uploadImageColumnSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnSearchForm');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+
+        $this->controller = new UploadImageColumnController(
+            $this->uploadImageColumnService->reveal(),
+            $this->uploadImageColumnForm->reveal(),
+            $this->uploadImageColumnSearchForm->reveal(),
+            $this->imageService->reveal()
+        );
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'UploadImageColumnController'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
     protected function tearDown()

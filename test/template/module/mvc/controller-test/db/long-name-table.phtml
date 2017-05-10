@@ -28,11 +28,13 @@ class MyVeryLongTableNameExampleControllerTest extends TestCase
         $this->myVeryLongTableNameExampleService = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleService');
         $this->myVeryLongTableNameExampleForm = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleForm');
         $this->myVeryLongTableNameExampleSearchForm = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleSearchForm');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
 
         $this->controller = new MyVeryLongTableNameExampleController(
             $this->myVeryLongTableNameExampleService->reveal(),
             $this->myVeryLongTableNameExampleForm->reveal(),
-            $this->myVeryLongTableNameExampleSearchForm->reveal()
+            $this->myVeryLongTableNameExampleSearchForm->reveal(),
+            $this->imageService->reveal()
         );
 
         $this->request    = new Request();

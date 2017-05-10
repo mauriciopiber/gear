@@ -67,10 +67,6 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $this->repository->setSchemaService($this->schemaService->reveal());
-
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->repository->setSrcDependency($this->srcDependency);
     }
 
     /**

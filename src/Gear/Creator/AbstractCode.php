@@ -14,8 +14,8 @@ use Gear\Creator\FileNamespaceInterface;
 use Gear\Creator\FileLocationInterface;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Creator\AppDependencyTrait;
-use Gear\Creator\ControllerDependencyTrait;
-use Gear\Creator\SrcDependencyTrait;
+//use Gear\Creator\ControllerDependencyTrait;
+//use Gear\Creator\SrcDependencyTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use GearJson\App\App;
@@ -31,8 +31,8 @@ abstract class AbstractCode implements
 {
     use FileCreatorTrait;
     use AppDependencyTrait;
-    use ControllerDependencyTrait;
-    use SrcDependencyTrait;
+    //use ControllerDependencyTrait;
+    //use SrcDependencyTrait;
     use ArrayServiceTrait;
     use DirServiceTrait;
     use ServiceManagerTrait;
@@ -58,6 +58,39 @@ abstract class AbstractCode implements
     }
     */
 
+    public function extractSrcType($dependency)
+    {
+        $data = explode('\\', $dependency);
+        array_pop($data);
+        return implode('\\', $data);
+    }
+
+    public function extractSrcTypeFromDependency($dependency)
+    {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
+        $srcType = $this->extractSrcType($dependency);
+        if ($srcType == 'SearchForm') {
+            return 'Form\\Search';
+        } elseif ($srcType == 'ControllerPlugin') {
+            return 'Controller\\Plugin';
+        }
+
+        return $srcType;
+    }
+
+    public function extractSrcNameFromDependency($dependency)
+    {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
+        $data = explode('\\', $dependency);
+        return end($data);
+    }
+
     public function resolveName($item)
     {
         if (is_array($item) && isset($item['class'***REMOVED***)) {
@@ -82,6 +115,7 @@ abstract class AbstractCode implements
         return $namespace.implode('\\', $extendsItem);
     }
 
+    /*
     public function loadDependencyService($data)
     {
         if ($data instanceof Src) {
@@ -100,6 +134,8 @@ abstract class AbstractCode implements
             return;
         }
     }
+    */
+
     /**
      * Retorna as funções existentes em determinado arquivo.
      */

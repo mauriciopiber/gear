@@ -71,11 +71,6 @@ class SearchTestServiceTest extends AbstractTestCase
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
 
-        $this->srcDependency = new \Gear\Creator\SrcDependency;
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-
-        $this->codeTest->setSrcDependency($this->srcDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 

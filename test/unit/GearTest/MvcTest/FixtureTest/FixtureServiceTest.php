@@ -13,7 +13,6 @@ use Gear\Creator\TemplateService;
 use Gear\Creator\File;
 use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;
-use Gear\Creator\SrcDependency;
 use Gear\Creator\Code;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 
@@ -45,6 +44,8 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
 
+        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+
         $this->fixture = new FixtureService();
         $this->fixture->setFileCreator($this->fileCreator);
         $this->fixture->setStringService($this->string);
@@ -52,13 +53,9 @@ class FixtureServiceTest extends AbstractTestCase
         $this->fixture->setColumnService($this->column->reveal());
         $this->fixture->setTableService($this->table->reveal());
         $this->fixture->setSchemaService($this->schemaService->reveal());
-
-        $this->srcDependency = new SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->fixture->setSrcDependency($this->srcDependency);
+        $this->fixture->setConfigService($this->configService->reveal());
 
         $this->code = new Code();
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setModule($this->module->reveal());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);

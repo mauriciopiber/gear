@@ -1,4 +1,5 @@
 <?php
+/*
 namespace Gear\Creator;
 
 use Gear\Creator\SrcDependency;
@@ -21,3 +22,4 @@ trait SrcDependencyTrait
         return $this;
     }
 }
+*/

@@ -39,15 +39,10 @@ class FormTestServiceTest extends AbstractTestCase
         $this->form->setFileCreator($this->fileCreator);
         $this->form->setModule($this->module->reveal());
 
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-
         $this->codeTest = new \Gear\Creator\CodeTest();
 
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
-        $this->codeTest->setSrcDependency($this->srcDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
@@ -107,10 +102,6 @@ class FormTestServiceTest extends AbstractTestCase
         $this->form->setServiceManager($serviceManager);
 
         $this->form->setTraitTestService($this->traitTest->reveal());
-
-        $srcDependency = new \Gear\Creator\SrcDependency();
-        $srcDependency->setModule($this->module->reveal());
-        $this->form->setSrcDependency($srcDependency);
 
         $file = $this->form->createFromSrc($data);
 

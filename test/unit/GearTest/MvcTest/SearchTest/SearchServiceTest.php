@@ -40,17 +40,10 @@ class SearchServiceTest extends AbstractTestCase
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/search';
 
-        //src-dependency
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->srcDependency->setStringService($this->string);
-
-
         //code
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
@@ -67,8 +60,6 @@ class SearchServiceTest extends AbstractTestCase
         $this->search->setStringService($this->string);
         $this->search->setModule($this->module->reveal());
         $this->search->setCode($this->code);
-
-        $this->search->setSrcDependency($this->srcDependency);
 
         //search-test
         $this->searchTest = $this->prophesize('Gear\Mvc\Search\SearchTestService');

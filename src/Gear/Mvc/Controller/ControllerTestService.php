@@ -12,6 +12,7 @@ use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
@@ -149,7 +150,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $columnsImage = [***REMOVED***;
 
         foreach ($columns as $column) {
-            if ($column instanceof \Gear\Column\Varchar\UploadImage) {
+            if ($column instanceof UploadImage) {
                 $hasImageColumn = true;
                 $columnsImage[***REMOVED*** = $column;
             }
@@ -158,11 +159,11 @@ class ControllerTestService extends AbstractMvcTest implements
         if ($hasImageColumn) {
             $finalValue = $this->getFileColumns($columnsImage);
 
-            $localOptions = array(
+            $localOptions = [
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->controller->getNameOff(),
                 'columns' => $finalValue,
-            );
+            ***REMOVED***;
 
             $columnsOptions = [
                 'extraColumns' => $this->getFileCreator()->renderPartial(
@@ -196,7 +197,6 @@ class ControllerTestService extends AbstractMvcTest implements
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof UploadImage) {
                 if ($this->hasImage === false) {
-                    $this->setUp .= $columnData->getControllerSetUp();
                     $this->hasImage = true;
                 }
             }
@@ -208,7 +208,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             $hasImageTable = true;
-            $table = new \Gear\Table\UploadImage();
+            $table = new UploadImageTable();
             $table->setStringService($this->getStringService());
             $table->setModule($this->getModule());
 
@@ -248,8 +248,8 @@ class ControllerTestService extends AbstractMvcTest implements
           ? $this->render('edit-successful-file-prg', $actionOptions)
           : $this->render('edit-successful-prg', $actionOptions);
 
-        $updateArray = $this->getColumnsInput(self::KEY_UPDATE);
-        $updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
+        //$updateArray = $this->getColumnsInput(self::KEY_UPDATE);
+        //$updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
 
         $options = array_merge(
             $this->basicOptions(),
@@ -273,7 +273,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 'static' => $this->getColumnService()->renderColumnPart('staticTest'),
                 'nullable' => ($this->nullable) ? 200 : 303,
                 'functions' => $this->functions,
-                'updateArray'  => $updateArray,
+                //'updateArray'  => $updateArray,
             ***REMOVED***
         );
 
@@ -634,17 +634,5 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         return $nullable;
-    }
-
-    public function generateAbstractClass()
-    {
-        $this->getFileCreator()->createFile(
-            'template/module/mvc/controller/test-abstract.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-            ),
-            'AbstractControllerTestCase.php',
-            $this->getModule()->getTestControllerFolder()
-        );
     }
 }

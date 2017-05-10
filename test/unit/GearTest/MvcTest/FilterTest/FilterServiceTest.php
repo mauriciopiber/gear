@@ -34,16 +34,10 @@ class FilterServiceTest extends AbstractTestCase
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/filter';
 
-        //src-dependency
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->srcDependency->setStringService($this->string);
-
-        //code
+               //code
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
@@ -62,7 +56,6 @@ class FilterServiceTest extends AbstractTestCase
         $this->filter->setModule($this->module->reveal());
         $this->filter->setCode($this->code);
 
-        $this->filter->setSrcDependency($this->srcDependency);
 
         //filter-test
         $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');

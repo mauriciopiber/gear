@@ -5,7 +5,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use Gear\Creator\Code;
-use Gear\Creator\SrcDependency;
 use Gear\Creator\ControllerDependency;
 use GearBase\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
@@ -24,28 +23,14 @@ class CodeTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
 
-
         $this->code->setModule($this->module->reveal());
-
 
         $this->string = new StringService();
         $this->code->setStringService($this->string);
 
-
-        $this->srcDependency = new SrcDependency();
-        $this->srcDependency->setStringService($this->string);
-        $this->srcDependency->setModule($this->module->reveal());
-
-        $this->controllerDependency = new ControllerDependency();
-        $this->controllerDependency->setStringService($this->string);
-        $this->controllerDependency->setModule($this->module->reveal());
-
-
         $constructorParams = new ConstructorParams($this->string);
 
         $this->code->setConstructorParams($constructorParams);
-        $this->code->setSrcDependency($this->srcDependency);
-        $this->code->setControllerDependency($this->controllerDependency);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../';
         $this->template .= 'test/template/module/code';

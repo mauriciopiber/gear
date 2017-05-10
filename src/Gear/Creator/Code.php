@@ -683,11 +683,67 @@ EOS;
         return $this->uses;
     }
 
+
+    public function getDependencyUseNamespace($data, $eol = true)
+    {
+        $namespace = '';
+
+        if ($data->hasDependency() == null) {
+            return '';
+        }
+
+        $dependencies = $data->getDependency();
+
+
+        foreach ($dependencies as $dependency) {
+            if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
+                continue;
+            }
+
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+            $srcName = $this->extractSrcNameFromDependency($dependency);
+
+            $expand = is_array($dependency) && isset($dependency['expand'***REMOVED***) && $dependency['expand'***REMOVED*** === false ? '' : 'Trait';
+
+            $depNamespace = ($srcType[0***REMOVED*** == '\\')
+                ? sprintf('%s\%s%s', ltrim($srcType, '\\'), $srcName, $expand)
+                : sprintf('%s\%s\%s%s', $this->getModule()->getModuleName(), $srcType, $srcName, $expand);
+
+            $namespace .= <<<EOL
+use $depNamespace;
+
+EOL;
+
+            //$this->useNamespaceToString($namespace);
+        }
+
+        $eol = ($eol) ? PHP_EOL : '';
+
+        return (!empty($namespace)) ? $namespace.$eol : $eol;
+    }
+
+    public function extractSrcTypeFromDependency($dependency)
+    {
+        if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependency = $dependency['class'***REMOVED***;
+        }
+
+        $srcType = $this->extractSrcType($dependency);
+        if ($srcType == 'SearchForm') {
+            return 'Form\\Search';
+        } elseif ($srcType == 'ControllerPlugin') {
+            return 'Controller\\Plugin';
+        }
+
+        return $srcType;
+    }
+
     public function getUse($data)
     {
         /* Load Dependency */
 
-        $this->loadDependencyService($data);
+        //$this->loadDependencyService($data);
 
         $this->uses = '';
 
@@ -697,7 +753,7 @@ EOS;
             }
         }
 
-        $this->uses .= $this->dependency->getUseNamespace(false);
+        $this->uses .= $this->getDependencyUseNamespace($data, false);
 
         if ($data->getExtends() !== null) {
 
@@ -798,6 +854,58 @@ EOS;
         return $html;
     }
 
+    public function getDependencyUseAttribute($data, $eol = true, array $ignoreList = [***REMOVED***)
+    {
+        $attribute = '';
+
+        if ($data->hasDependency() == null) {
+            return '';
+        }
+
+        $dependencies = $data->getDependency();
+
+        $count = count($dependencies);
+
+        foreach ($dependencies as $i => $dependency) {
+            if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
+                continue;
+            }
+
+            if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+                $dependencyClass = $dependency['class'***REMOVED***;
+            } else {
+                $dependencyClass = $dependency;
+            }
+
+            if (in_array($dependencyClass, $ignoreList)
+                || in_array($this->getModule()->getModuleName().'\\'.$dependencyClass, $ignoreList)
+            ) {
+                continue;
+            }
+
+            //var_dump($i, $dependency);
+            $srcName = $this->extractSrcNameFromDependency($dependencyClass);
+
+            $expand = is_array($dependency) && isset($dependency['expand'***REMOVED***) && $dependency['expand'***REMOVED*** === false ? '' : 'Trait';
+
+            $namespace = sprintf('%s%s', $srcName, $expand);
+
+
+            $attribute .= <<<EOL
+    use $namespace;
+
+EOL;
+
+            if ($count>1 && $i < $count-1) {
+                $attribute .= PHP_EOL;
+            }
+        }
+        //die();
+
+        $eol = ($eol) ? PHP_EOL : '';
+
+        return (!empty($attribute)) ? $attribute.$eol : $eol;
+    }
 
     /**
      * Cria os Atributos das Classes de acordo com as Dependências
@@ -808,9 +916,9 @@ EOS;
     public function getUseAttribute($data, array $include = null, array $default = [***REMOVED***)
     {
         /* Load Dependency */
-        $this->loadDependencyService($data);
+        //$this->loadDependencyService($data);
 
-        $attributes = $this->dependency->getUseAttribute(false, $default);
+        $attributes = $this->getDependencyUseAttribute($data, false, $default);
 
         if (!empty($include)) {
             foreach ($include as $name => $item) {

@@ -40,12 +40,6 @@ class TraitServiceTest extends AbstractTestCase
         $constructorParams = new ConstructorParams($this->string);
         $code->setConstructorParams($constructorParams);
 
-        $srcDependency = new \Gear\Creator\SrcDependency();
-        $srcDependency->setModule($this->module->reveal());
-        $srcDependency->setStringService($this->string);
-
-        $code->setSrcDependency($srcDependency);
-
         $this->trait = new \Gear\Mvc\TraitService(
             /*
             $this->module->reveal(),

@@ -86,15 +86,10 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setFactoryService($this->factory->reveal());
         $this->controllerService->setArrayService($this->arrayService);
 
-        $this->controllerDependency = new ControllerDependency();
-        $this->controllerDependency->setModule($this->module->reveal());
-        $this->controllerService->setControllerDependency($this->controllerDependency);
-
 
         $this->code = new Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
-        $this->code->setControllerDependency($this->controllerDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
 
         $constructorParams = new ConstructorParams($this->string);

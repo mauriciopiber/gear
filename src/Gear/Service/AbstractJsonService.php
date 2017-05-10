@@ -17,18 +17,14 @@ use Gear\Table\Metadata\MetadataTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreatorTrait;
-use Gear\Creator\ControllerDependencyTrait;
 use Gear\Creator\AppDependencyTrait;
-use Gear\Creator\SrcDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
 use GearJson\Db\Db;
 
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
     use YamlServiceTrait;
-    use ControllerDependencyTrait;
     use AppDependencyTrait;
-    use SrcDependencyTrait;
     use ColumnServiceTrait;
     use TableTrait;
     use TableServiceTrait;

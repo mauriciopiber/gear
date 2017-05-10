@@ -40,16 +40,11 @@ class FormServiceTest extends AbstractTestCase
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/form';
 
-        //src-dependency
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->srcDependency->setStringService($this->string);
 
         //code
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
@@ -67,7 +62,6 @@ class FormServiceTest extends AbstractTestCase
         $this->form->setModule($this->module->reveal());
         $this->form->setCode($this->code);
 
-        $this->form->setSrcDependency($this->srcDependency);
 
         //form-test
         $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
@@ -192,9 +186,6 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setTraitService($this->trait->reveal());
 
-        $srcDependency = $this->prophesize('Gear\Creator\SrcDependency');
-        $this->form->setSrcDependency($srcDependency->reveal());
-        //$this->form->setFactoryService
 
         $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
 

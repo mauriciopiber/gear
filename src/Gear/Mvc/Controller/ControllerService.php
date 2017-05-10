@@ -119,7 +119,7 @@ class ControllerService extends AbstractMvc implements
 
         $location = $this->getCode()->getLocation($this->controller);
 
-        $this->dependency = $this->getControllerDependency()->setController($this->controller);
+        //$this->dependency = $this->getControllerDependency()->setController($this->controller);
         $this->tableName = ($this->str('class', $db->getTable()));
 
         $this->use       = '';
@@ -225,16 +225,10 @@ class ControllerService extends AbstractMvc implements
         /**
          * @TODO 3 - USE e ATTRIBUTE
          */
-        $use = $this->dependency->getUseNamespace(false);
-        $this->attribute .= $this->dependency->getUseAttribute(false);
+        $this->use .= $this->getCode()->getDependencyUseNamespace($this->controller, false);
+        $this->attribute .= $this->getCode()->getDependencyUseAttribute($this->controller, false);
 
-        $lines = array_unique(explode(PHP_EOL, $use));
-
-        $this->use .= implode(PHP_EOL, $lines);
         $this->use .= $this->getCode()->getUseConstructor($this->controller);
-
-        $lines = array_unique(explode(PHP_EOL, $this->attribute));
-        $this->attribute = implode(PHP_EOL, $lines).PHP_EOL;
 
         $this->getControllerTestService()->introspectFromTable($this->db);
 

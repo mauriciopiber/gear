@@ -1,4 +1,5 @@
 <?php
+/*
 namespace Gear\Creator;
 
 use Gear\Creator\AbstractDependency;
@@ -19,3 +20,4 @@ class AppDependency extends AbstractDependency
         return $this->app;
     }
 }
+*/

@@ -350,16 +350,39 @@ EOS;
         return $functions;
     }
 
+    public function getTests($data)
+    {
+        if ($data->hasDependency() == null) {
+            return '';
+        }
+
+
+        $dependencies = $data->getDependency();
+
+        $valid = [***REMOVED***;
+
+        foreach ($dependencies as $dependency) {
+            $srcName = $this->extractSrcNameFromDependency($dependency);
+            $srcType = $this->extractSrcTypeFromDependency($dependency);
+
+            $factoryName = $this->getModule()->getModuleName().'\\'.$srcType.'\\'.$srcName;
+
+
+            if (!in_array($factoryName, $valid)) {
+                $valid[***REMOVED*** = $factoryName;
+            }
+        }
+
+        return $valid;
+    }
+
     public function getDependencyToInject($data, $lines)
     {
         if (empty($data->getDependency())) {
             return false;
         }
 
-        /* Load Dependency */
-        $this->loadDependencyService($data);
-
-        $this->uses = $this->dependency->getTests();
+        $this->uses = $this->getTests($data);
 
         $candidateFunctions = $this->getCandidateTest($this->uses);
         $functions = $this->getFunctionsNameFromFile($lines);

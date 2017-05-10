@@ -123,7 +123,6 @@ class ServiceTestService extends AbstractMvcTest
         }
 
         //verificar se tem coluna de imagem.
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
