@@ -69,7 +69,7 @@ class SrcMvcGenerator
             'repository' => ['Entity'***REMOVED***,
             'service' => ['Entity', 'Repository'***REMOVED***,
             'filter' => ['Entity'***REMOVED***,
-            'form' => ['Filter', 'Entity'***REMOVED***,
+            'form' => ['Entity', 'Filter'***REMOVED***,
             'search-form' => ['Entity'***REMOVED***,
         ***REMOVED***;
     }
