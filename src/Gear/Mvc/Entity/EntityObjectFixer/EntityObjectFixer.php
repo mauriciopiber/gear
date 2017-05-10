@@ -68,7 +68,7 @@ class EntityObjectFixer
         $this->userEntity($entity);
         $this->snifferErrors($entity);
         //$this->clearDuplicateEmpty($entity);
-        //$this->docsErrors($entity);
+        $this->docsErrors($entity);
     }
 
     /*
@@ -464,7 +464,6 @@ EOS;
      */
     public function docsErrors(EntityObject &$entity)
     {
-        /*
         $content = $entity->getContent();
 
         $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
@@ -481,23 +480,14 @@ EOS;
 
             $label = $this->str('label', $name);
 
-            $replacement = $param.' '.$label."\n";
+            $replacement = $param.' '.$label;
 
 
-            echo "\n";
-            echo "\n";
-            echo '"'.$exact.'"'."\n";
-            echo '"'.$replacement.'"'."\n";
-
-            die();
-
-            $content = str_replace($exact, $replacement, $content);
+            $content = str_replace($exact, $replacement."\n", $content);
         }
 
-        die();
-
         $entity->setContent($content);
-        */
+
     }
 
 
