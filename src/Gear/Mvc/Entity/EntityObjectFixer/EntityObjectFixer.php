@@ -57,12 +57,41 @@ class EntityObjectFixer
         return $this->moduleName;
     }
 
+    public function setModuleName($moduleName)
+    {
+        $this->moduleName = $moduleName;
+        return $this;
+    }
+
     public function fixEntity($entity)
     {
-        $this->snifferErrors($entity);
-        $this->docsErrors($entity);
         $this->userEntity($entity);
+        $this->snifferErrors($entity);
+        //$this->clearDuplicateEmpty($entity);
+        //$this->docsErrors($entity);
     }
+
+    /*
+    public function clearDuplicateEmpty(&$entity)
+    {
+        $lines = explode(PHP_EOL, $entity->getContent());
+
+        $total = count($lines);
+
+        for ($i = 0; $i > $total-1; $i++) {
+
+            if ($lines[$i***REMOVED*** == PHP_EOL && isset($lines[$i+1***REMOVED***) && $lines[$i+1***REMOVED*** == PHP_EOL) {
+                unset($lines[$i***REMOVED***);
+            }
+        }
+
+        $file = array_values($lines);
+
+        $content = implode(PHP_EOL, $file);
+
+        $entity->setContent($content);
+    }
+    */
 
     public function snifferErrors($entity)
     {
@@ -229,8 +258,8 @@ EOL;
         $columnUline = $this->str('uline', $column);
         $columnVar = $this->str('var', $column);
 
-        $nullT = ' nullable=%s';
-        $nullV = ($nullable) ? 'true' : false;
+        $nullT = 'nullable=%s';
+        $nullV = ($nullable) ? 'true' : 'false';
         $nullT = sprintf($nullT, $nullV);
 
         $attribute = <<<EOS
@@ -238,58 +267,13 @@ EOL;
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="{$columnUline}", type="datetime"{$nullT})
+     * @ORM\Column(name="{$columnUline}", type="datetime", {$nullT})
      */
     private \${$columnVar};
 
 EOS;
         return $attribute;
 
-    }
-
-    public function getSetterDate($tableName, $column)
-    {
-        $setter    = <<<EOS
-
-    /**
-     * Set updated
-     *
-     * @param \DateTime \$updated
-     *
-     * @return {$tableName}
-     */
-    public function setUpdated(\$updated)
-    {
-        \$this->updated = \$updated;
-
-        return \$this;
-    }
-
-EOS;
-
-    }
-
-    public function getGetterDate($column)
-    {
-        $columnUline = $this->str('uline', $column);
-        $columnClass = $this->str('class', $column);
-        $columnVar = $this->str('var', $column);
-
-        $getter    = <<<EOS
-
-    /**
-     * Get {$columnUline}
-     *
-     * @return \DateTime
-     */
-    public function get{$columnClass}()
-    {
-        return \$this->{$columnVar};
-    }
-
-EOS;
-
-        return $getter;
     }
 
     public function getAttributeForeignKey($column)
@@ -315,11 +299,61 @@ EOS;
 
     }
 
+    public function getSetterDate($tableName, $column)
+    {
+        $columnUline = $this->str('uline', $column);
+        $columnClass = $this->str('class', $column);
+        $columnVar = $this->str('var', $column);
+
+        $setter    = <<<EOS
+
+    /**
+     * Set {$columnUline}
+     *
+     * @param \DateTime \${$columnVar}
+     *
+     * @return {$tableName}
+     */
+    public function set{$columnClass}(\${$columnVar})
+    {
+        \$this->{$columnVar} = \${$columnVar};
+
+        return \$this;
+    }
+
+EOS;
+
+        return $setter;
+    }
+
+    public function getGetterDate($column)
+    {
+        $columnUline = $this->str('uline', $column);
+        $columnClass = $this->str('class', $column);
+        $columnVar = $this->str('var', $column);
+
+        $getter    = <<<EOS
+
+    /**
+     * Get {$columnUline}
+     *
+     * @return \DateTime
+     */
+    public function get{$columnClass}()
+    {
+        return \$this->{$columnVar};
+    }
+
+EOS;
+
+        return $getter;
+    }
+
     public function getSetterForeignKey($tableName, $column)
     {
         $columnUline = $this->str('uline', $column);
         $columnVar = $this->str('var', $column);
-        $columnClass = $this->str('var', $column);
+        $columnClass = $this->str('class', $column);
 
         $setter    = <<<EOS
 
@@ -347,7 +381,7 @@ EOS;
     {
         $columnUline = $this->str('uline', $column);
         $columnVar = $this->str('var', $column);
-        $columnClass = $this->str('var', $column);
+        $columnClass = $this->str('class', $column);
 
         $getter    = <<<EOS
 
@@ -368,7 +402,8 @@ EOS;
 
     public function strReplace(&$entity, $subject, $target)
     {
-        $entity->setContent(str_replace($subject, $target, $entity->getContent()));
+        $newText = str_replace($subject, $target, $entity->getContent());
+        $entity->setContent($newText);
     }
 
     /*
@@ -393,23 +428,6 @@ EOS;
         $content = str_replace($userNamespace, $fixNamespace, $content);
         $content = str_replace($userName, $fixName, $content);
 
-        //created by
-        $this->strReplace($entity, $this->getAttributeForeignKey('createdBy'), '');
-        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'createdBy'), '');
-        $this->strReplace($entity, $this->getGetterForeignKey('createdBy'), '');
-
-        $this->strReplace($entity, $this->getAttributeForeignKey('updatedBy'), '');
-        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'updatedBy'), '');
-        $this->strReplace($entity, $this->getGetterForeignKey('updatedBy'), '');
-
-        $this->strReplace($entity, $this->getAttributeDate('created', false), '');
-        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'created'), '');
-        $this->strReplace($entity, $this->getGetterDate('created'), '');
-
-        $this->strReplace($entity, $this->getAttributeDate('updated'), '');
-        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'updated'), '');
-        $this->strReplace($entity, $this->getGetterDate('updated'), '');
-
         if (strpos('use \GearBase\Entity\LogTrait;', $content) === false) {
 
             preg_match('/class [a-zA-Z***REMOVED****\n{/', $content, $match, PREG_OFFSET_CAPTURE);
@@ -422,10 +440,31 @@ EOS;
         }
 
         $entity->setContent($content);
+
+        $this->strReplace($entity, $this->getAttributeDate('created', false), '');
+        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'created'), '');
+        $this->strReplace($entity, $this->getGetterDate('created'), '');
+
+        $this->strReplace($entity, $this->getAttributeDate('updated', true), '');
+        $this->strReplace($entity, $this->getSetterDate($entity->getTableName(), 'updated'), '');
+        $this->strReplace($entity, $this->getGetterDate('updated'), '');
+
+        $this->strReplace($entity, $this->getAttributeForeignKey('createdBy'), '');
+        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'createdBy'), '');
+        $this->strReplace($entity, $this->getGetterForeignKey('createdBy'), '');
+
+        $this->strReplace($entity, $this->getAttributeForeignKey('updatedBy'), '');
+        $this->strReplace($entity, $this->getSetterForeignKey($entity->getTableName(), 'updatedBy'), '');
+        $this->strReplace($entity, $this->getGetterForeignKey('updatedBy'), '');
     }
 
+    /**
+     * @TODO Descobrir pq.
+     * @param EntityObject $entity
+     */
     public function docsErrors(EntityObject &$entity)
     {
+        /*
         $content = $entity->getContent();
 
         $pattern = '/@param [\a-zA-Z***REMOVED**** \$[a-zA-Z0-9***REMOVED****\n/';
@@ -442,12 +481,23 @@ EOS;
 
             $label = $this->str('label', $name);
 
-            $replacement = $param.' '.$label.'\n';
+            $replacement = $param.' '.$label."\n";
+
+
+            echo "\n";
+            echo "\n";
+            echo '"'.$exact.'"'."\n";
+            echo '"'.$replacement.'"'."\n";
+
+            die();
 
             $content = str_replace($exact, $replacement, $content);
         }
 
+        die();
+
         $entity->setContent($content);
+        */
     }
 
 

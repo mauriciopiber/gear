@@ -1,0 +1,414 @@
+<?php
+
+namespace MyModule\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MvcBasicUploadImage
+ *
+ * @ORM\Table(name="mvc_basic_upload_image", indexes={@ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class MvcBasicUploadImage
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_mvc_basic_upload_image", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idMvcBasicUploadImage;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_tme_bsc_upl", type="time", nullable=false)
+     */
+    private $clmTmeBscUpl;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dtt_bsc_upl", type="datetime", nullable=false)
+     */
+    private $clmDttBscUpl;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dte_bsc_upl", type="date", nullable=false)
+     */
+    private $clmDteBscUpl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_bsc_upl", type="string", length=150, nullable=false)
+     */
+    private $clmVrcBscUpl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_txt_bsc_upl", type="text", length=65535, nullable=false)
+     */
+    private $clmTxtBscUpl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_dcm_bsc_upl", type="decimal", precision=10, scale=2, nullable=false)
+     */
+    private $clmDcmBscUpl;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="clm_boo_bsc_upl", type="boolean", nullable=false)
+     */
+    private $clmBooBscUpl;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clm_int_bsc_upl", type="integer", nullable=false)
+     */
+    private $clmIntBscUpl;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \MyModule\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MyModule\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+    /**
+     * @var \MyModule\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MyModule\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+
+
+    /**
+     * Get idMvcBasicUploadImage
+     *
+     * @return integer
+     */
+    public function getIdMvcBasicUploadImage()
+    {
+        return $this->idMvcBasicUploadImage;
+    }
+
+    /**
+     * Set clmTmeBscUpl
+     *
+     * @param \DateTime $clmTmeBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmTmeBscUpl($clmTmeBscUpl)
+    {
+        $this->clmTmeBscUpl = $clmTmeBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmTmeBscUpl
+     *
+     * @return \DateTime
+     */
+    public function getClmTmeBscUpl()
+    {
+        return $this->clmTmeBscUpl;
+    }
+
+    /**
+     * Set clmDttBscUpl
+     *
+     * @param \DateTime $clmDttBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmDttBscUpl($clmDttBscUpl)
+    {
+        $this->clmDttBscUpl = $clmDttBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDttBscUpl
+     *
+     * @return \DateTime
+     */
+    public function getClmDttBscUpl()
+    {
+        return $this->clmDttBscUpl;
+    }
+
+    /**
+     * Set clmDteBscUpl
+     *
+     * @param \DateTime $clmDteBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmDteBscUpl($clmDteBscUpl)
+    {
+        $this->clmDteBscUpl = $clmDteBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDteBscUpl
+     *
+     * @return \DateTime
+     */
+    public function getClmDteBscUpl()
+    {
+        return $this->clmDteBscUpl;
+    }
+
+    /**
+     * Set clmVrcBscUpl
+     *
+     * @param string $clmVrcBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmVrcBscUpl($clmVrcBscUpl)
+    {
+        $this->clmVrcBscUpl = $clmVrcBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcBscUpl
+     *
+     * @return string
+     */
+    public function getClmVrcBscUpl()
+    {
+        return $this->clmVrcBscUpl;
+    }
+
+    /**
+     * Set clmTxtBscUpl
+     *
+     * @param string $clmTxtBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmTxtBscUpl($clmTxtBscUpl)
+    {
+        $this->clmTxtBscUpl = $clmTxtBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmTxtBscUpl
+     *
+     * @return string
+     */
+    public function getClmTxtBscUpl()
+    {
+        return $this->clmTxtBscUpl;
+    }
+
+    /**
+     * Set clmDcmBscUpl
+     *
+     * @param string $clmDcmBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmDcmBscUpl($clmDcmBscUpl)
+    {
+        $this->clmDcmBscUpl = $clmDcmBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDcmBscUpl
+     *
+     * @return string
+     */
+    public function getClmDcmBscUpl()
+    {
+        return $this->clmDcmBscUpl;
+    }
+
+    /**
+     * Set clmBooBscUpl
+     *
+     * @param boolean $clmBooBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmBooBscUpl($clmBooBscUpl)
+    {
+        $this->clmBooBscUpl = $clmBooBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmBooBscUpl
+     *
+     * @return boolean
+     */
+    public function getClmBooBscUpl()
+    {
+        return $this->clmBooBscUpl;
+    }
+
+    /**
+     * Set clmIntBscUpl
+     *
+     * @param integer $clmIntBscUpl
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setClmIntBscUpl($clmIntBscUpl)
+    {
+        $this->clmIntBscUpl = $clmIntBscUpl;
+
+        return $this;
+    }
+
+    /**
+     * Get clmIntBscUpl
+     *
+     * @return integer
+     */
+    public function getClmIntBscUpl()
+    {
+        return $this->clmIntBscUpl;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \MyModule\Entity\User $createdBy
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setCreatedBy(\MyModule\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \MyModule\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param \MyModule\Entity\User $updatedBy
+     *
+     * @return MvcBasicUploadImage
+     */
+    public function setUpdatedBy(\MyModule\Entity\User $updatedBy = null)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return \MyModule\Entity\User
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+}
+

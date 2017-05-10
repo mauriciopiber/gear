@@ -2,16 +2,16 @@
 namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
-use MyModule\Custom\CustomNamespace\TableRepositoryTrait;
-use MyModule\Custom\CustomNamespace\TableRepository;
+use MyModule\Custom\CustomNamespace\AllColumnsDbRepositoryTrait;
+use GearImage\Service\ImageServiceTrait;
+use MyModule\Custom\CustomNamespace\AllColumnsDbRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Authentication\AuthenticationService;
-use GearBase\Service\PasswordVerifyTrait;
-use GearImage\Service\ImageServiceTrait;
 use GearImage\Service\ImageService;
+use GearBase\Service\PasswordVerifyTrait;
 
 /**
- * Interaction between TableController and Services
+ * Interaction between AllColumnsDbController and Services
  *
  * PHP Version 5
  *
@@ -21,13 +21,13 @@ use GearImage\Service\ImageService;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class TableService extends AbstractService
+class AllColumnsDbService extends AbstractService
 {
-    use TableRepositoryTrait;
-
-    use PasswordVerifyTrait;
+    use AllColumnsDbRepositoryTrait;
 
     use ImageServiceTrait;
+
+    use PasswordVerifyTrait;
 
     protected $sessionName;
 
@@ -36,20 +36,20 @@ class TableService extends AbstractService
     /**
      * Constructor
      *
-     * @param TableRepository       $tableRepository    Table Repository
-     * @param Memcached             $cache              Memcached
-     * @param AuthenticationService $zfcuserAuthService Authentication Service
-     * @param ImageService          $imageService       Image Service
+     * @param AllColumnsDbRepository $allColumnsDb       All Columns Db Repository
+     * @param Memcached              $cache              Memcached
+     * @param AuthenticationService  $zfcuserAuthService Authentication Service
+     * @param ImageService           $imageService       Image Service
      *
-     * @return \MyModule\Custom\CustomNamespace\TableService
+     * @return \MyModule\Custom\CustomNamespace\AllColumnsDbService
      */
     public function __construct(
-        TableRepository $tableRepository,
+        AllColumnsDbRepository $allColumnsDb,
         Memcached $cache,
         AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
-        $this->tableRepository = $tableRepository;
+        $this->allColumnsDbRepository = $allColumnsDb;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;
@@ -64,7 +64,7 @@ class TableService extends AbstractService
      */
     public function getTableHead()
     {
-        $map = $this->getTableRepository()->getMapReferences();
+        $map = $this->getAllColumnsDbRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
@@ -76,7 +76,7 @@ class TableService extends AbstractService
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
-            $this->sessionName = 'tableSession';
+            $this->sessionName = 'allColumnsDbSession';
         }
         return $this->sessionName;
     }
@@ -86,15 +86,15 @@ class TableService extends AbstractService
      *
      * @param array $data Criteria
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\AllColumnsDb
      */
     public function selectOneBy(array $data)
     {
-        return $this->getTableRepository()->selectOneBy($data);
+        return $this->getAllColumnsDbRepository()->selectOneBy($data);
     }
 
     /**
-     * Select All Rows from Table table.
+     * Select All Rows from All Columns Db table.
      *
      * Use cache to store data until change.
      *
@@ -105,23 +105,23 @@ class TableService extends AbstractService
     public function selectAll($select = array())
     {
         $this->cache      = $this->getCache();
-        $this->repository = $this->getTableRepository();
+        $this->repository = $this->getAllColumnsDbRepository();
 
         return parent::selectAll($select);
     }
 
     /**
-     * Create a new Table on database.
+     * Create a new All Columns Db on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
      *
      * @param array $data Valid $_POST
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\AllColumnsDb
      */
     public function create($data)
     {
-        $repository = $this->getTableRepository();
+        $repository = $this->getAllColumnsDbRepository();
 
         $this->createPassword('passwordVerifyColumn');
         $uploadImageColumn = $this->getImageService()->overwriteImage(
@@ -130,8 +130,8 @@ class TableService extends AbstractService
             'uploadImageColumn'
         );
 
-        $table = $repository->insert($data);
-        if ($table) {
+        $allColumnsDb = $repository->insert($data);
+        if ($allColumnsDb) {
             if (isset($data['uploadImageColumn'***REMOVED***)) {
                 $this->getImageService()->createUploadImage(
                     $uploadImageColumn,
@@ -141,22 +141,22 @@ class TableService extends AbstractService
             }
             $this->clearCache();
         }
-        return $table;
+        return $allColumnsDb;
     }
 
     /**
-     * Update a existing Table on database.
+     * Update a existing All Columns Db on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
      *
      * @param integer $idTable Id
      * @param array   $data    Valid $_POST
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\AllColumnsDb
      */
     public function update($idTable, $data = array())
     {
-        $repository = $this->getTableRepository();
+        $repository = $this->getAllColumnsDbRepository();
 
         $this->createPassword('passwordVerifyColumn');
         $uploadImageColumn = $this->getImageService()->overwriteImage(
@@ -165,8 +165,8 @@ class TableService extends AbstractService
             'uploadImageColumn'
         );
 
-        $table = $repository->update($idTable, $data);
-        if ($table) {
+        $allColumnsDb = $repository->update($idTable, $data);
+        if ($allColumnsDb) {
             if (isset($data['uploadImageColumn'***REMOVED***)) {
                 $this->getImageService()->updateUploadImage(
                     $uploadImageColumn,
@@ -176,11 +176,11 @@ class TableService extends AbstractService
             }
             $this->clearCache();
         }
-        return $table;
+        return $allColumnsDb;
     }
 
     /**
-     * Delete a existing Table by Id.
+     * Delete a existing All Columns Db by Id.
      *
      * @param integer $idTable Id
      *
@@ -194,41 +194,41 @@ class TableService extends AbstractService
             return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
         }
 
-        $repository = $this->getTableRepository();
-        $table = $repository->deleteSafe($entity);
+        $repository = $this->getAllColumnsDbRepository();
+        $allColumnsDb = $repository->deleteSafe($entity);
 
 
-        if ($table) {
-            $this->getImageService()->deleteImages($idTable, 'table');
+        if ($allColumnsDb) {
+            $this->getImageService()->deleteImages($idTable, 'allColumnsDb');
             $this->getImageService()->deleteUploadImage($idTable, 'table');
             $this->clearCache();
         }
-        return $table;
+        return $allColumnsDb;
     }
 
     /**
      * Convert Entity to Array.
      *
-     * @param \MyModule\Entity\Table $data Table Entity
+     * @param \MyModule\Entity\AllColumnsDb $data All Columns Db Entity
      *
      * @return array
      */
-    public function extract(\MyModule\Entity\Table $data)
+    public function extract(\MyModule\Entity\AllColumnsDb $data)
     {
-        $repository = $this->getTableRepository();
+        $repository = $this->getAllColumnsDbRepository();
         return $repository->extract($data);
     }
 
     /**
-     * Select one Table by Id.
+     * Select one All Columns Db by Id.
      *
      * @param array $idToSelect Id
      *
-     * @return null|MyModule\Entity\Table
+     * @return null|MyModule\Entity\AllColumnsDb
      */
     public function selectById($idToSelect)
     {
-        $repository = $this->getTableRepository();
+        $repository = $this->getAllColumnsDbRepository();
         return $repository->selectById($idToSelect);
     }
 }

@@ -3,26 +3,26 @@ namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Mvc\Router\Http\RouteMatch;
-use MyModule\Custom\CustomNamespace\TableService;
+use MyModule\Custom\CustomNamespace\DbUploadImageService;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @group MyModule
- * @group TableService
+ * @group DbUploadImageService
  * @group Service
  */
-class TableServiceTest extends TestCase
+class DbUploadImageServiceTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
         $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
         $this->zfcuserAuthService = $this->prophesize('Zend\Authentication\AuthenticationService');
         $this->imageService = $this->prophesize('GearImage\Service\ImageService');
 
-        $this->service = new TableService(
+        $this->service = new DbUploadImageService(
             $this->repository->reveal(),
             $this->cache->reveal(),
             $this->zfcuserAuthService->reveal(),
@@ -48,24 +48,24 @@ class TableServiceTest extends TestCase
 
     public function testSelectAllCacheWithCache()
     {
-        $this->service->setRouteMatch($this->getRouteMatch(1, 'idTable', 'DESC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idDbUploadImage', 'DESC'));
 
-        $this->assertEquals('idTable', $this->service->getOrderBy());
+        $this->assertEquals('idDbUploadImage', $this->service->getOrderBy());
         $this->assertEquals('DESC', $this->service->getOrder());
 
         $this->service->selectAll();
 
-        $this->service->setRouteMatch($this->getRouteMatch(1, 'idTable', 'ASC'));
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idDbUploadImage', 'ASC'));
 
-        $this->assertEquals('idTable', $this->service->getOrderBy());
+        $this->assertEquals('idDbUploadImage', $this->service->getOrderBy());
         $this->assertEquals('ASC', $this->service->getOrder());
 
         $this->service->setRouteMatch(
-            $this->getRouteMatch(1, 'idTable', 'DESC')
+            $this->getRouteMatch(1, 'idDbUploadImage', 'DESC')
         );
 
         $this->assertEquals(
-            'idTable',
+            'idDbUploadImage',
             $this->service->getOrderBy()
         );
         $this->assertEquals('DESC', $this->service->getOrder());
@@ -73,10 +73,10 @@ class TableServiceTest extends TestCase
 
     public function testTableHead()
     {
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
         $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->service->setTableRepository($this->repository->reveal());
+        $this->service->setDbUploadImageRepository($this->repository->reveal());
 
         $resultSet = $this->service->getTableHead();
         $this->assertTrue(is_array($resultSet));
@@ -84,36 +84,36 @@ class TableServiceTest extends TestCase
 
     public function testSelectById()
     {
-        $this->entity = $this->prophesize('MyModule\Entity\Table');
-        $this->entity->getIdTable()->willReturn(1);
+        $this->entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $this->entity->getIdDbUploadImage()->willReturn(1);
 
         $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
 
         $resultSet = $this->service->selectById(1);
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(1, $resultSet->getIdTable());
+        $this->assertInstanceOf('MyModule\Entity\DbUploadImage', $resultSet);
+        $this->assertEquals(1, $resultSet->getIdDbUploadImage());
     }
 
     public function testSelectOne()
     {
-        $this->entity = $this->prophesize('MyModule\Entity\Table');
-        $this->entity->getIdTable()->willReturn(30);
+        $this->entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $this->entity->getIdDbUploadImage()->willReturn(30);
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
-        $this->repository->selectOneBy(['idTable' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
+        $this->repository->selectOneBy(['idDbUploadImage' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
 
-        $this->service->setTableRepository($this->repository->reveal());
+        $this->service->setDbUploadImageRepository($this->repository->reveal());
 
         $resultSet = $this->service->selectOneBy(
             array(
-                'idTable' =>
+                'idDbUploadImage' =>
                     30
             )
         );
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
+        $this->assertInstanceOf('MyModule\Entity\DbUploadImage', $resultSet);
         $this->assertEquals(
             30,
-            $resultSet->getIdTable()
+            $resultSet->getIdDbUploadImage()
         );
     }
 
@@ -122,34 +122,22 @@ class TableServiceTest extends TestCase
      */
     public function testCreate()
     {
-        $entity = $this->prophesize('MyModule\Entity\Table');
-        $entity->getIdTable()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $entity->getIdDbUploadImage()->willReturn(31);
 
         $data = array(
-            'uploadImageColumn' => 'image123',
         );
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
         $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
 
-        $this->service->setTableRepository($this->repository->reveal());
+        $this->service->setDbUploadImageRepository($this->repository->reveal());
 
-        $this->imageService->overwriteImage(
-            ["uploadImageColumn" => "image123"***REMOVED***,
-            "table",
-            "uploadImageColumn"
-        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
-
-        $this->imageService->createUploadImage(
-            'tableuploadimagecolumn',
-            'table-uploadImageColumn',
-            'image123'
-        )->shouldBeCalled();
 
         $resultSet = $this->service->create($data);
 
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(31, $resultSet->getIdTable());
+        $this->assertInstanceOf('MyModule\Entity\DbUploadImage', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdDbUploadImage());
 
         return $resultSet;
     }
@@ -159,38 +147,26 @@ class TableServiceTest extends TestCase
      */
     public function testUpdate()
     {
-        $entity = $this->prophesize('MyModule\Entity\Table');
-        $entity->getIdTable()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $entity->getIdDbUploadImage()->willReturn(31);
 
         $data = array(
-            'uploadImageColumn' => 'image123',
         );
 
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
         $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
 
-        $this->service->setTableRepository($this->repository->reveal());
+        $this->service->setDbUploadImageRepository($this->repository->reveal());
 
         $this->service->setCache($this->cache->reveal());
 
-        $this->imageService->overwriteImage(
-            ["uploadImageColumn" => "image123"***REMOVED***,
-            "table",
-            "uploadImageColumn"
-        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
-
-        $this->imageService->updateUploadImage(
-            'tableuploadimagecolumn',
-            'table-uploadImageColumn',
-            'image123'
-        )->shouldBeCalled();
 
         $resultSet = $this->service
             ->update(31, $data);
 
 
-        $this->assertInstanceOf('MyModule\Entity\Table', $resultSet);
-        $this->assertEquals(31, $resultSet->getIdTable());
+        $this->assertInstanceOf('MyModule\Entity\DbUploadImage', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdDbUploadImage());
 
         return $resultSet;
     }
@@ -200,8 +176,8 @@ class TableServiceTest extends TestCase
      */
     public function testDelete()
     {
-        $entity = $this->prophesize('MyModule\Entity\Table');
-        $entity->getIdTable()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $entity->getIdDbUploadImage()->willReturn(31);
 
         $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
         $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
@@ -229,30 +205,30 @@ class TableServiceTest extends TestCase
      */
     public function testExtract()
     {
-        $entity = $this->prophesize('MyModule\Entity\Table');
-        $entity->getIdTable()->willReturn(31);
+        $entity = $this->prophesize('MyModule\Entity\DbUploadImage');
+        $entity->getIdDbUploadImage()->willReturn(31);
 
-        $data = ['idTableService' => 31***REMOVED***;
-        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\TableRepository');
+        $data = ['idDbUploadImageService' => 31***REMOVED***;
+        $this->repository = $this->prophesize('MyModule\Custom\CustomNamespace\DbUploadImageRepository');
         $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
 
-        $this->service->setTableRepository($this->repository->reveal());
+        $this->service->setDbUploadImageRepository($this->repository->reveal());
 
         $resultSet = $this->service->extract($entity->reveal());
         $this->assertEquals($data, $resultSet);
     }
 
-    public function getRouteMatch($page, $orderBy = 'idTable', $order = 'DESC')
+    public function getRouteMatch($page, $orderBy = 'idDbUploadImage', $order = 'DESC')
     {
         $routeMatch = new RouteMatch(array(
-            'controller' => 'MyModule\Controller\Table',
+            'controller' => 'MyModule\Controller\DbUploadImage',
             'action'     => 'list',
             'page' => $page,
             'orderBy' => $orderBy,
             'order' => $order
         ));
 
-        $routeMatch->setMatchedRouteName('my-module/table');
+        $routeMatch->setMatchedRouteName('my-module/db-upload-image');
         return $routeMatch;
     }
 }

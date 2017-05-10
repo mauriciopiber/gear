@@ -11,6 +11,7 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
 use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Db\Db;
+use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 
 class ServiceService extends AbstractMvc
 {
@@ -86,6 +87,15 @@ class ServiceService extends AbstractMvc
             $this->src->setDependency($dependency);
         }
 
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->getColumnService()->verifyColumnAssociation($this->db, UploadImageColumn::class)
+        ) {
+            $dep = $this->src->getDependency();
+            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
+            $this->src->setDependency($dep);
+        }
+
+
         $location = $this->getCode()->getLocation($this->src);
 
         $this->getTraitService()->createTrait($this->src, $location);
@@ -119,21 +129,15 @@ class ServiceService extends AbstractMvc
             //$this->repositoryFullname
         ***REMOVED***);
 
-        $this->tableUploadImage = false;
-
         $this->getColumnsSpecifications();
+
         $userOptions = $this->getUserSpecifications($this->db);
+
+
+        $this->tableUploadImage = false;
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
         ) {
             $this->tableUploadImage = true;
-        }
-
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
-        ) {
-            $dep = $this->src->getDependency();
-            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
-            $this->src->setDependency($dep);
         }
 
         $options = [
@@ -226,8 +230,10 @@ class ServiceService extends AbstractMvc
 
     public function getColumnsSpecifications()
     {
-        $onlyOnceUse = [***REMOVED***;
-        $onlyOnceAttribute = [***REMOVED***;
+        $onlyOnceUse = [UploadImageColumn::class***REMOVED***;
+        $onlyOnceAttribute = [UploadImageColumn::class***REMOVED***;
+
+        //var_dump($onlyOnceUse, $onlyOnceAttribute);die();
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof ServiceCreateBeforeInterface) {
@@ -253,6 +259,7 @@ class ServiceService extends AbstractMvc
 
             $className = get_class($columnData);
 
+
             if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
                 $onlyOnceUse[***REMOVED*** = $className;
                 $this->use .= $columnData->getServiceUse($this->src->getService());
@@ -262,6 +269,7 @@ class ServiceService extends AbstractMvc
                 $onlyOnceAttribute[***REMOVED*** = $className;
                 $this->attribute .= $columnData->getServiceAttribute();
             }
+
 
             if (method_exists($columnData, 'getServiceFunctions')) {
                 $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
