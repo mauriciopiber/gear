@@ -1,7 +1,7 @@
 <?php
-
 namespace MyModule\Entity;
 
+use GearBase\Entity\LogTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MvcBasicUploadImage
 {
-    use \GearBase\Entity\LogTrait;
+    use LogTrait;
 
     /**
      * @var integer
@@ -94,8 +94,6 @@ class MvcBasicUploadImage
      * @ORM\Column(name="clm_int_bsc_upl", type="integer", nullable=false)
      */
     private $clmIntBscUpl;
-
-
 
     /**
      * Get idMvcBasicUploadImage
@@ -299,4 +297,3 @@ class MvcBasicUploadImage
         return $this->clmIntBscUpl;
     }
 }
-
