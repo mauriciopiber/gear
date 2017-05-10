@@ -45,14 +45,10 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->dirService = new \GearBase\Util\Dir\DirService();
 
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->repository->setSrcDependency($this->srcDependency);
 
         $this->code = new \Gear\Creator\Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService($this->dirService);
 
         $constructorParams = new ConstructorParams($this->string);

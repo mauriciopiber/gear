@@ -10,7 +10,6 @@ use GearBase\Util\String\StringService;
 use Gear\Creator\File;
 use Gear\Creator\Code;
 use GearBase\Util\Dir\DirService;
-use Gear\Creator\SrcDependency;
 use Gear\Mvc\InterfaceService;
 
 /**
@@ -45,12 +44,6 @@ class InterfaceTestServiceTest extends AbstractTestCase
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
         $code->setDirService(new DirService());
-
-        $srcDependency = new SrcDependency();
-        $srcDependency->setModule($this->module->reveal());
-        $srcDependency->setStringService($this->string);
-
-        $code->setSrcDependency($srcDependency);
 
         $this->interface = new InterfaceService(
             /*

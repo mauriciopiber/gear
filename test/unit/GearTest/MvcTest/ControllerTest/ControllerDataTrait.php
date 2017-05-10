@@ -14,21 +14,8 @@ trait ControllerDataTrait
     public function tables()
     {
         return [
-            /*
             //[$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,
-            //[$this->getSingleColumns(), 'single-db', true, false, false, 'single_db_table', 'invokables', null, 'all'***REMOVED***,
-            [
-                $this->getSingleColumns(),
-                'single-db-namespace',
-                true,
-                false,
-                false,
-                'single_db_table',
-                'invokables',
-                'Custom\CustomNamespace',
-                'all'
-            ***REMOVED***,
             [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null, 'all'***REMOVED***,
             [
                 $this->getSingleColumns(),
@@ -73,7 +60,7 @@ trait ControllerDataTrait
                 'factories',
                 'Custom\CustomNamespace',
                 'all'
-            ***REMOVED***,*/
+            ***REMOVED***,
             [
                 $this->getSingleColumns(),
                 'single-db-upload-image-table',
@@ -85,7 +72,6 @@ trait ControllerDataTrait
                 'Custom\CustomNamespace',
                 'all'
             ***REMOVED***,
-            /*
             [
                 $this->getAllPossibleColumns(),
                 'single-db-upload-image-column',
@@ -96,8 +82,7 @@ trait ControllerDataTrait
                 'factories',
                 'Custom\CustomNamespace',
                 'all'
-            ***REMOVED****/
-
+            ***REMOVED***
             //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columsn-db-unique-not-null', false***REMOVED***,

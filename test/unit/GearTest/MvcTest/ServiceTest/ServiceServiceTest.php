@@ -10,7 +10,6 @@ use GearTest\ScopeTrait;
 use \Gear\Module;
 use Gear\Mvc\Service\ServiceService;
 use GearBase\Util\String\StringService;
-use Gear\Creator\SrcDependency;
 use Gear\Creator\Code;
 use Gear\Creator\File\Injector;
 use Gear\Mvc\Config\ServiceManager;
@@ -51,20 +50,10 @@ class ServiceServiceTest extends TestCase
         $this->fileCreator    = $this->createFileCreator();
         $this->service->setFileCreator($this->fileCreator);
 
-        //src-dependency
-        $this->srcDependency = new SrcDependency();
-        $this->srcDependency->setModule($this->module->reveal());
-        $this->srcDependency->setStringService($this->string);
-
-
-        $this->service->setSrcDependency($this->srcDependency);
-
-
         //code
         $this->code = new Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setSrcDependency($this->srcDependency);
         $this->code->setDirService(new \GearBase\Util\Dir\DirService());
 
         $constructorParams = new ConstructorParams($this->string);

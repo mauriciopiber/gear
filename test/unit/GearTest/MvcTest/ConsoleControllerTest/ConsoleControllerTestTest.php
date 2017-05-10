@@ -52,11 +52,6 @@ class ConsoleControllerTestTest extends AbstractTestCase
         $this->controller->setArrayService($this->array);
 
 
-        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
-        $this->controllerDependency->setModule($this->module->reveal());
-        $this->controllerDependency->setStringService($this->string);
-
-
         $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->controller->setFactoryTestService($this->factoryService->reveal());
 
@@ -79,7 +74,6 @@ class ConsoleControllerTestTest extends AbstractTestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setControllerDependency($this->controllerDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 
@@ -151,7 +145,6 @@ class ConsoleControllerTestTest extends AbstractTestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setControllerDependency($this->controllerDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 

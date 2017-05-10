@@ -49,14 +49,9 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->controllerTest->setInjector($this->injector);
         $this->controllerTest->setFileCreator($this->createFileCreator());
 
-        $this->controllerDependency = new \Gear\Creator\ControllerDependency();
-        $this->controllerDependency->setStringService($this->string);
-        $this->controllerDependency->setModule($this->module->reveal());
-
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setControllerDependency($this->controllerDependency);
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->controllerTest->setCodeTest($this->codeTest);

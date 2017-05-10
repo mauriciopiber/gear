@@ -31,8 +31,6 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
 
         $this->className = $this->src->getName();
 
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
-
         $options = [
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),

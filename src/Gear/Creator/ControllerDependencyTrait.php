@@ -1,4 +1,5 @@
 <?php
+/**
 namespace Gear\Creator;
 
 use Gear\Creator\ControllerDependency;
@@ -21,3 +22,4 @@ trait ControllerDependencyTrait
         return $this;
     }
 }
+*/

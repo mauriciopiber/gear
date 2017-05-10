@@ -41,8 +41,6 @@ class ServiceService extends AbstractMvc
 
     public function createSrc()
     {
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
-
         $location = $this->getCode()->getLocation($this->src);
 
         $template = 'template/module/mvc/service/src/src.phtml';
@@ -87,8 +85,6 @@ class ServiceService extends AbstractMvc
             $dependency['memcached'***REMOVED*** = '\Zend\Cache\Storage\Adapter\Memcached';
             $this->src->setDependency($dependency);
         }
-
-        $this->dependency = $this->getSrcDependency()->setSrc($this->src);
 
         $location = $this->getCode()->getLocation($this->src);
 
@@ -199,7 +195,6 @@ class ServiceService extends AbstractMvc
         $this->src          = $this->getSchemaService()->getSrcByDb($this->db, 'Service');
         $this->className    = $this->src->getName();
         $this->name         = $this->str('class', str_replace($this->src->getType(), '', $this->className));
-        $this->dependency   = $this->getSrcDependency()->setSrc($this->src);
 
         return $this->createDb();
     }

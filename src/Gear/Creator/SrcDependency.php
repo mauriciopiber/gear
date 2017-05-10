@@ -1,15 +1,10 @@
 <?php
+/*
 namespace Gear\Creator;
 
 use Gear\Creator\AbstractDependency;
 use GearJson\Src\Src;
 
-/**
- * @deprecated Essa classe possui muita dívida técnica, é melhor desativá-la após testar completamente.
- *
- * @author piber
- *
- */
 class SrcDependency extends AbstractDependency
 {
     protected $module;
@@ -158,3 +153,4 @@ class SrcDependency extends AbstractDependency
         return (!empty($this->attribute)) ? $this->attribute.$eol : $eol;
     }
 }
+*/
