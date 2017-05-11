@@ -82,12 +82,31 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
      */
     public function getFixtureEntitySetters()
     {
-        return sprintf(
+        $message = sprintf(
             '            $%s->set%s($fixture[\'%s\'***REMOVED***);',
             $this->str('var-lenght', $this->getColumn()->getTableName()),
             $this->str('class', $this->getColumn()->getName()),
             $this->str('var', $this->getColumn()->getName())
         );
+
+        if (strlen($message) < 120) {
+            return $message;
+        }
+
+        $template = <<<EOS
+            $%s->set%s(
+                \$fixture['%s'***REMOVED***
+            );
+EOS;
+
+        $message = sprintf(
+            $template,
+            $this->str('var-lenght', $this->getColumn()->getTableName()),
+            $this->str('class', $this->getColumn()->getName()),
+            $this->str('var', $this->getColumn()->getName())
+        );
+
+        return $message;
     }
 
 

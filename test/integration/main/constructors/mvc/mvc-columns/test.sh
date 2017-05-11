@@ -6,12 +6,12 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrMvcColumns"
 type="web"
 construct=()
-construct+=("mvc-complete/mvc-complete.yml;mvc-complete/mvc_complete.php")
-construct+=("mvc-basic/mvc-basic.yml;mvc-basic/mvc_basic.php")
-construct+=("mvc-varchar/mvc-varchar.yml;mvc-varchar/mvc_varchar.php")
-construct+=("mvc-dates/mvc-dates.yml;mvc-dates/mvc_dates.php")
-construct+=("mvc-text/mvc-text.yml;mvc-text/mvc_text.php")
-construct+=("mvc-numeric/mvc-numeric.yml;mvc-numeric/mvc_numeric.php")
+construct+=("mvc-complete/mvc-cmp.yml;mvc-complete/mvc_cmp.php")
+construct+=("mvc-basic/mvc-bsc.yml;mvc-basic/mvc_bsc.php")
+construct+=("mvc-varchar/mvc-vrc.yml;mvc-varchar/mvc_vrc.php")
+construct+=("mvc-dates/mvc-dts.yml;mvc-dates/mvc_dts.php")
+construct+=("mvc-text/mvc-txt.yml;mvc-text/mvc_txt.php")
+construct+=("mvc-numeric/mvc-nmr.yml;mvc-numeric/mvc_nmr.php")
 
 
 source "$bin/gear/module/test-module.sh"
