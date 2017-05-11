@@ -183,8 +183,6 @@ class ControllerService extends AbstractMvc implements
         );
 
         $optionsView = [***REMOVED***;
-        //$optionsView['imageQuery = '';
-        //$this->imageView = '';
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             $uploadImage = new \Gear\Table\UploadImage();
