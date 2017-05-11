@@ -2,6 +2,7 @@
 namespace Gear\Integration\Util\Columns;
 
 use Exception;
+use Gear\Integration\Util\Names\NamesReplaceInterface;
 
 /**
  * PHP Version 5
@@ -66,20 +67,7 @@ class Columns
 
     private function createColumnSuffix($columnSuffix)
     {
-
-        $label = [
-            'nullable' => 'nul',
-            'unique' => 'uni',
-            'upload-image' => 'upl',
-            'complete' => 'cmp',
-            'basic' => 'bsc',
-            'dates' => 'dts',
-            'numeric' => 'nmr',
-            'varchar' => 'vrc',
-            'text' => 'txt',
-            'low-strict' => 'lws',
-            'strict' => 'str'
-        ***REMOVED***;
+        $label = NamesReplaceInterface::NAMES;
 
         $text = [***REMOVED***;
 

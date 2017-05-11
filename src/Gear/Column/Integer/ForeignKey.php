@@ -182,8 +182,13 @@ EOS;
      */
     public function getFixtureData($iterator)
     {
+        $template = <<<EOS
+                '%s' =>
+                    \$this->getReference('%s-%d'),
+EOS;
+
         return sprintf(
-            '                \'%s\' => $this->getReference(\'%s-%d\'),',
+            $template,
             $this->str('var', $this->column->getName()),
             $this->str('url', $this->constraint->getReferencedTableName()),
             $iterator
