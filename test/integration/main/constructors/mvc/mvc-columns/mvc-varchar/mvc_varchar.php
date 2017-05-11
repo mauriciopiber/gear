@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcVarchar extends AbstractMigration
 {
     const TABLES = [
-        'mvc_varchar' => [
+        'mvc_vrc' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [

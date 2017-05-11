@@ -39,6 +39,11 @@ class Code extends AbstractCode implements
         'translator' => 'translate'
     ***REMOVED***;
 
+    public function getUseFactory($data)
+    {
+        return '';
+    }
+
 
     public function getFileDocs($src, $type = null)
     {
@@ -132,7 +137,7 @@ EOS;
     /**
      * @TODO FIX
      */
-    public function getFactoryServiceLocator($src)
+    public function getServiceLocatorFactory($src)
     {
         if (empty($src->getDependency())) {
             return '';
@@ -684,16 +689,15 @@ EOS;
     }
 
 
-    public function getDependencyUseNamespace($data, $eol = true)
+    public function getDependencyUseNamespace($data)
     {
-        $namespace = '';
-
         if ($data->hasDependency() == null) {
-            return '';
+            return [***REMOVED***;
         }
 
         $dependencies = $data->getDependency();
 
+        $deps = [***REMOVED***;
 
         foreach ($dependencies as $dependency) {
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
@@ -710,17 +714,10 @@ EOS;
                 ? sprintf('%s\%s%s', ltrim($srcType, '\\'), $srcName, $expand)
                 : sprintf('%s\%s\%s%s', $this->getModule()->getModuleName(), $srcType, $srcName, $expand);
 
-            $namespace .= <<<EOL
-use $depNamespace;
-
-EOL;
-
-            //$this->useNamespaceToString($namespace);
+            $deps[***REMOVED*** = $depNamespace;
         }
 
-        $eol = ($eol) ? PHP_EOL : '';
-
-        return (!empty($namespace)) ? $namespace.$eol : $eol;
+        return $deps;
     }
 
     public function extractSrcTypeFromDependency($dependency)
@@ -745,15 +742,15 @@ EOL;
 
         //$this->loadDependencyService($data);
 
-        $this->uses = '';
+        $this->uses = [***REMOVED***;
 
         if (!empty($data->getImplements())) {
             foreach ($data->getImplements() as $alias => $item) {
-                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+                $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
         }
 
-        $this->uses .= $this->getDependencyUseNamespace($data, false);
+        $this->uses = array_merge($this->uses, $this->getDependencyUseNamespace($data));
 
         if ($data->getExtends() !== null) {
 
@@ -766,29 +763,32 @@ EOL;
                 $extends = str_replace('ViewHelper\\', 'View\\Helper\\', $extends);
             }
 
-            $this->uses .= 'use '.$this->resolveNamespace($extends).';'.PHP_EOL;
+            $this->uses[***REMOVED*** = $this->resolveNamespace($extends);
         }
 
         if ($data->getExtends() == null && $data instanceof Controller) {
             if ($this->str('class', $data->getType()) == 'Action') {
-                $this->uses .= 'use Zend\Mvc\Controller\AbstractActionController;'.PHP_EOL;
+                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractActionController';
             }
 
             if ($this->str('class', $data->getType()) == 'Console') {
-                $this->uses .= 'use Zend\Mvc\Controller\AbstractConsoleController;'.PHP_EOL;
+                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractConsoleController;';
             }
         }
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $item) {
-                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+                $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
         }
 
-        if (!empty($this->uses)) {
-            //$this->uses .= PHP_EOL;
+        $html = '';
+
+        foreach ($this->uses as $use) {
+            $html .= sprintf('use %s;', $use).PHP_EOL;
         }
-        return $this->uses;
+
+        return $html;
     }
 
     public function extractNamesFromNamespaceArray(array $extract)

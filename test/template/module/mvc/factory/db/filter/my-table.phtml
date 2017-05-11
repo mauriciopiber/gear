@@ -4,6 +4,7 @@ namespace MyModule\Filter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Filter\MyTableFilter;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * PHP Version 5
@@ -20,12 +21,13 @@ class MyTableFilterFactory implements FactoryInterface
      * Create MyTableFilter
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
-     * @return \MyModule\Filter\MyTableFilter
+     *
+     * @return MyTableFilter
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MyTableFilter(
-            $serviceLocator->get('Zend\Db\Adapter\Adapter'),
+            $serviceLocator->get(Adapter::class),
             $serviceLocator->get('translate')
         );
         unset($serviceLocator);

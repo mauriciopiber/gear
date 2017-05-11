@@ -44,7 +44,7 @@ class FactoryTestService extends AbstractMvcTest
         $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);
 
         $trait = $this->getFileCreator();
-        $trait->setTemplate(sprintf('template/module/mvc/factory/%s.phtml', $template));
+        $trait->setTemplate(sprintf('template/module/mvc/factory-test/%s.phtml', $template));
         $trait->setFileName($src->getName().'FactoryTest.php');
         $trait->setLocation($location);
         $trait->setOptions($options);

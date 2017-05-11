@@ -4,6 +4,7 @@ namespace MyModule\Repository;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Repository\MyTableRepository;
+use GearBase\Repository\QueryBuilder;
 
 /**
  * PHP Version 5
@@ -20,13 +21,14 @@ class MyTableRepositoryFactory implements FactoryInterface
      * Create MyTableRepository
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
-     * @return \MyModule\Repository\MyTableRepository
+     *
+     * @return MyTableRepository
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MyTableRepository(
             $serviceLocator->get('doctrine.entitymanager.orm_default'),
-            $serviceLocator->get('GearBase\Repository\QueryBuilder')
+            $serviceLocator->get(QueryBuilder::class)
         );
         unset($serviceLocator);
         return $factory;

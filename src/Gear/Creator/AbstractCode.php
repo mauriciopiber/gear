@@ -30,15 +30,11 @@ abstract class AbstractCode implements
     DirServiceAwareInterface
 {
     use FileCreatorTrait;
-    use AppDependencyTrait;
-    //use ControllerDependencyTrait;
-    //use SrcDependencyTrait;
     use ArrayServiceTrait;
     use DirServiceTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleAwareTrait;
-    use ServiceLocatorAwareTrait;
 
     /**
     public function resolveAliase($item)
@@ -114,27 +110,6 @@ abstract class AbstractCode implements
         $extendsItem = explode('\\', $item);
         return $namespace.implode('\\', $extendsItem);
     }
-
-    /*
-    public function loadDependencyService($data)
-    {
-        if ($data instanceof Src) {
-            $this->dependency = $this->getSrcDependency()->setSrc($data);
-            return;
-        }
-
-
-        if ($data instanceof Controller) {
-            $this->dependency = $this->getControllerDependency()->setController($data);
-            return;
-        }
-
-        if ($data instanceof App) {
-            $this->dependency = $this->getAppDependency()->setApp($data);
-            return;
-        }
-    }
-    */
 
     /**
      * Retorna as funções existentes em determinado arquivo.

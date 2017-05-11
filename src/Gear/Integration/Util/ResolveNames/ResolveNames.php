@@ -70,26 +70,44 @@ class ResolveNames
 
     public function createTableName($superType, MvcMinorSuite $suite)
     {
+        $tableKey = $this->format($suite, 'class', false);
+
         $tableName = sprintf(
             '%s%s',
             'Mvc',
-            implode('', $this->createTableAliase($suite))
+            implode('', $tableKey)
         );
 
-        var_dump($tableName);
         return $tableName;
     }
 
     public function createLocationKey($mvcMajor, MvcMinorSuite $suite)
     {
+        $tableUrl = $this->format($suite, 'url', false);
+
         $key = sprintf(
             '%s/mvc-%s',
             $this->stringService->str('url', $mvcMajor),
-            implode('-', $this->createTableUrl($suite))
+            implode('-', $tableUrl)
         );
 
         return $key;
 
+    }
+
+    public function createTableAlias($mvcMajor, MvcMinorSuite $suite)
+    {
+        $tableUrl = $this->format($suite, 'class', true);
+
+        $key = sprintf(
+            '%s%s',
+            $this->stringService->str('class', $mvcMajor),
+            implode('', $tableUrl)
+        );
+
+        var_dump($key);
+
+        return $key;
     }
 
     /**
@@ -131,19 +149,17 @@ class ResolveNames
             $text[***REMOVED*** = $label[$this->stringService->str('url', $option)***REMOVED***;
         }
 
-        var_dump($text);
+        //var_dump($text);
         return $text;
     }
 
-    private function format(MvcMinorSuite $suite, $stringType, $minify = false)
+    public function format(MvcMinorSuite $suite, $stringType, $minify = false)
     {
         $variables = $this->createAliase($suite);
 
-        /*
         if ($minify) {
             $variables = $this->cutNames($variables);
         }
-        */
 
         foreach ($variables as $i => $name) {
 
@@ -155,15 +171,5 @@ class ResolveNames
         }
 
         return $variables;
-    }
-
-    public function createTableUrl(MvcMinorSuite $suite)
-    {
-        return $this->format($suite, 'url', false);
-    }
-
-    public function createTableAliase(MvcMinorSuite $suite)
-    {
-        return $this->format($suite, 'class', true);
     }
 }

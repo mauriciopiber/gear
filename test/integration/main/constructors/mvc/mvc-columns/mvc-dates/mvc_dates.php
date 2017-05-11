@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcDates extends AbstractMigration
 {
     const TABLES = [
-        'mvc_dates' => [
+        'mvc_dts' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
