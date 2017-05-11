@@ -1,7 +1,7 @@
 <?php echo sprintf('<?php $this->headTitle()->prepend(\'Editar %s\');?>', $this->label).PHP_EOL;?>
 <div ng-controller="<?php echo $this->class;?>EditController as edit">
     <div class="row">
-    	<div class="col-lg-6">
+        <div class="col-lg-6">
             <h3 class="page-header">
 <?php echo <<<EOS
                 <?php echo \$this->translate('Edit');?>&nbsp;<?php echo \$this->translate('{$this->label}');?> - <?php echo \$this->id{$this->class};?>
@@ -9,12 +9,12 @@ EOS;
 ?>
 
             </h3>
-    	</div>
+        </div>
 <?php if ($this->imageContainer) :?>
         <div class="row">
-        	<div class="col-lg-4 col-lg-offset-2">
-        	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>"><?php echo '<?php echo $this->translate(\'Editar Imagens\');?>';?></a>
-        	</div>
+            <div class="col-lg-4 col-lg-offset-2">
+                <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->routeImage, '$this->id'.$this->class).PHP_EOL;?>"><?php echo '<?php echo $this->translate(\'Editar Imagens\');?>';?></a>
+            </div>
         </div>
 <?php endif;?>
     </div>
@@ -35,7 +35,7 @@ echo <<<EOS
                 \$form->prepare();
                 echo \$this->form()->openTag(\$form);
                 echo \$this->formHidden(\$form->get('id{$this->class}')->setAttribute('class','form-control'));
-    	    ?>
+            ?>
 
 EOS;
 ?>
@@ -48,8 +48,8 @@ EOS;
                             <a class="btn btn-default reset"
                                id="btn-back"
                                 href="<?php echo \$this->url('{$this->routeBack}');?>">
-                	            <?php echo \$this->translate('Back');?>
-                	        </a>
+                                <?php echo \$this->translate('Back');?>
+                            </a>
                             <a id="btn-view" class="btn btn-info"
                                 href="<?php echo \$this->url('{$this->routeView}', array('id' => \$this->id{$this->class}));?>">
                                 <?php echo \$this->translate('View');?>

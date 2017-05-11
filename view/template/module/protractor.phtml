@@ -6,7 +6,7 @@ exports.config = {
       'browserName': 'chrome'
   },
   rootElement: '[ng-app***REMOVED***',
-  baseUrl:	'http://<?php echo $this->moduleUrl;?>.gear.dev',
+  baseUrl:    'http://<?php echo $this->moduleUrl;?>.gear.dev',
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   specs: [
@@ -26,11 +26,11 @@ exports.config = {
     'no-source': true
   },
   onPrepare: function() {
-	  'use strict';
+      'use strict';
 
       require('protractor-http-mock').config = {
-	        rootDirectory: __dirname, // default value: process.cwd()
-	        protractorConfig: 'end2end.conf.js' // default value: 'protractor.conf'
-	  };
+            rootDirectory: __dirname, // default value: process.cwd()
+            protractorConfig: 'end2end.conf.js' // default value: 'protractor.conf'
+      };
   },
 };

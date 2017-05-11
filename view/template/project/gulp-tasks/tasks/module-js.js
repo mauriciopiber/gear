@@ -38,14 +38,14 @@ gulp.task('module:end2end', function(done) {
         return;
     }
 
-	gulp.src(['./module/'+argv.module+'/public/js/spec/**/*Spec.js'***REMOVED***)
-	    .pipe(protractor({
-	           configFile: './module/'+argv.module+'/public/js/spec/end2end.conf.js'
-	    }))
-	    .on('error', function(e) { throw e })
-	    .on('end', function () {
-	        done();
-	    });
+    gulp.src(['./module/'+argv.module+'/public/js/spec/**/*Spec.js'***REMOVED***)
+        .pipe(protractor({
+               configFile: './module/'+argv.module+'/public/js/spec/end2end.conf.js'
+        }))
+        .on('error', function(e) { throw e })
+        .on('end', function () {
+            done();
+        });
 
 });
 
@@ -55,7 +55,7 @@ gulp.task('module:jshint', function(done) {
         gutil.log('É obrigatório definir --module');
         return;
     }
-	   // corpo da tarefa
+       // corpo da tarefa
 
     return gulp.src('./module/'+argv.module+'/public/js/app/**/*.js')
     .pipe(jshint())

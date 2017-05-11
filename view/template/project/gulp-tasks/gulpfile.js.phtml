@@ -78,29 +78,29 @@ gulp.task('watch:file:php', function(callback) {
     testName = argv.file.split('/');
     for (i = 0; i < testName.length; i++) {
 
-    	if (testName[i***REMOVED***.substr(testName[i***REMOVED***.length-4, 4) == '.php') {
+        if (testName[i***REMOVED***.substr(testName[i***REMOVED***.length-4, 4) == '.php') {
 
-    		phpfile = testName[i***REMOVED***.split('.');
+            phpfile = testName[i***REMOVED***.split('.');
 
-    		testFileName += phpfile[0***REMOVED***+'Test.php';
+            testFileName += phpfile[0***REMOVED***+'Test.php';
 
-    		break;
+            break;
 
-    	}
+        }
 
-    	testFileName += testName[i***REMOVED***+'Test/';
+        testFileName += testName[i***REMOVED***+'Test/';
     }
 
     var filetest = testFileName;
 
     gulp.watch([file, testFileName***REMOVED***, function(event) {
-    	runSequence(
-    	    'file:phplint',
-    		'file:phpcs',
-    		'file:phpmd',
-    		'file:phpcpd',
-    		'file:phpunit',
-    		callback
+        runSequence(
+            'file:phplint',
+            'file:phpcs',
+            'file:phpmd',
+            'file:phpcpd',
+            'file:phpunit',
+            callback
         );
     });
 });

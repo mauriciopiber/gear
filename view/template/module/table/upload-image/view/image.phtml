@@ -1,10 +1,10 @@
 <div class="row">
-	<div class="col-lg-8">
-	      <h3 id="pageTitle"><?php echo '<?php echo $this->translate(\'Images\');?>';?> - <?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?> - <?php echo '<?php echo $this->id'.$this->class.';?>';?></h3>
-	</div>
-	<div class="col-lg-4">
-	    <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>"><?php echo sprintf('<?php echo $this->translate(\'Edit\').\' \'.$this->translate(\'%s\');?>', $this->str('label', $this->class));?></a>
-	</div>
+    <div class="col-lg-8">
+          <h3 id="pageTitle"><?php echo '<?php echo $this->translate(\'Images\');?>';?> - <?php echo sprintf('<?php echo $this->translate(\'%s\');?>', $this->label);?> - <?php echo '<?php echo $this->id'.$this->class.';?>';?></h3>
+    </div>
+    <div class="col-lg-4">
+        <a class="btn btn-primary" href="<?php echo sprintf('<?php echo $this->url(\'%s\', array(\'id\' => %s));?>', $this->route, '$this->id'.$this->class);?>"><?php echo sprintf('<?php echo $this->translate(\'Edit\').\' \'.$this->translate(\'%s\');?>', $this->str('label', $this->class));?></a>
+    </div>
 </div>
 <hr>
 <?php echo sprintf('<?php echo $this->render(\'gear-image/imagem/form-upload\', array(\'contexto\' => $this->contexto,\'id\' => %s));?>', '$this->id'.$this->class).PHP_EOL; ?>

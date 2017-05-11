@@ -1,20 +1,20 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	var controller;
+    var controller;
 
-	describe('<?php echo $this->moduleLabel;?> Test Index Controller', function () {
-		beforeEach(angular.mock.module('GearApp'));
+    describe('<?php echo $this->moduleLabel;?> Test Index Controller', function () {
+        beforeEach(angular.mock.module('GearApp'));
 
-		beforeEach(inject(function($controller){
-			controller = $controller('<?php echo $this->module; ?>IndexController');
-	    }));
+        beforeEach(inject(function($controller){
+            controller = $controller('<?php echo $this->module; ?>IndexController');
+        }));
 
-		describe('Test properties', function(){
-			it('has version', function() {
-				expect(controller.version).toBe('<?php echo $this->version;?>');
-			});
-		})
+        describe('Test properties', function(){
+            it('has version', function() {
+                expect(controller.version).toBe('<?php echo $this->version;?>');
+            });
+        })
 
-	});
+    });
 }());

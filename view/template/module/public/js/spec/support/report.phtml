@@ -39,16 +39,16 @@ var createHtmlReport = function(reportFile) {
 var JsonFormatter = Cucumber.Listener.JsonFormatter();
 JsonFormatter.log = function(string) {
 
-	fs.open(reportFile, 'w+', function (err, fd) {
-	    if (err) {
-	        fs.mkdirsSync(reportsDir);
-	        fd = fs.openSync(reportFile, 'w+');
-	    }
+    fs.open(reportFile, 'w+', function (err, fd) {
+        if (err) {
+            fs.mkdirsSync(reportsDir);
+            fd = fs.openSync(reportFile, 'w+');
+        }
 
-	    fs.writeSync(fd, string);
-	    createHtmlReport(reportFile);
-	    console.log('json file location: ' + reportFile);
-	});
+        fs.writeSync(fd, string);
+        createHtmlReport(reportFile);
+        console.log('json file location: ' + reportFile);
+    });
 };
 
 this.registerListener(JsonFormatter);

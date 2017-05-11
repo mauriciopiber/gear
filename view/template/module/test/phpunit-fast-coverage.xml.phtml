@@ -17,16 +17,16 @@
     </testsuites>
         <filter>
         <whitelist>
-       	 	<directory suffix=".php">./../../src</directory>
-       	 	<exclude>
-       	 	    <directory suffix=".php">./../../src/<?php echo $this->moduleName;?>/Fixture</directory>
-       	 	    <directory suffix=".php">./../../config</directory>
-       	 	    <directory suffix=".php">./../../build</directory>
-       	 	    <directory suffix=".php">./../../init</directory>
-       	 	    <directory suffix=".php">./../../language</directory>
-       	 	    <directory suffix=".php">./../../test</directory>
-       	 	    <directory suffix=".php">./../../view</directory>
-       	 	    <directory suffix=".php">./../../public</directory>
+                <directory suffix=".php">./../../src</directory>
+                <exclude>
+                    <directory suffix=".php">./../../src/<?php echo $this->moduleName;?>/Fixture</directory>
+                    <directory suffix=".php">./../../config</directory>
+                    <directory suffix=".php">./../../build</directory>
+                    <directory suffix=".php">./../../init</directory>
+                    <directory suffix=".php">./../../language</directory>
+                    <directory suffix=".php">./../../test</directory>
+                    <directory suffix=".php">./../../view</directory>
+                    <directory suffix=".php">./../../public</directory>
                 <file>./../../Module.php</file>
                 <file>./../../src/<?php echo $this->moduleName;?>/Module.php</file>
                 <file>./../../autoload_classmap.php</file>
@@ -35,5 +35,5 @@
     </filter>
     <logging>
         <log type="coverage-html" target="./../../build/coverage/coverage"/>
-	</logging>
+    </logging>
 </phpunit>

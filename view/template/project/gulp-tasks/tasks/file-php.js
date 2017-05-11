@@ -15,13 +15,13 @@ var phplint = require('phplint').lint
 
 gulp.task('file:phplint', function(cb) {
 
-	return phplint(['./module/'+argv.module+'/src/'+argv.module+'/'+argv.file***REMOVED***, function (err, stdout, stderr) {
-	  if (err) {
-		  cb(err);
-		  process.exit(1);
-	  }
-	  cb();
-	});
+    return phplint(['./module/'+argv.module+'/src/'+argv.module+'/'+argv.file***REMOVED***, function (err, stdout, stderr) {
+      if (err) {
+          cb(err);
+          process.exit(1);
+      }
+      cb();
+    });
 });
 
 gulp.task('file:phpcs', function(done) {
@@ -69,17 +69,17 @@ gulp.task('file:phpunit', function() {
 
     for (i = 0; i < testName.length; i++) {
 
-    	if (testName[i***REMOVED***.substr(testName[i***REMOVED***.length-4, 4) == '.php') {
+        if (testName[i***REMOVED***.substr(testName[i***REMOVED***.length-4, 4) == '.php') {
 
-    		phpfile = testName[i***REMOVED***.split('.');
+            phpfile = testName[i***REMOVED***.split('.');
 
-    		testFileName += phpfile[0***REMOVED***+'Test.php';
+            testFileName += phpfile[0***REMOVED***+'Test.php';
 
-    		break;
+            break;
 
-    	}
+        }
 
-    	testFileName += testName[i***REMOVED***+'Test/';
+        testFileName += testName[i***REMOVED***+'Test/';
     }
 
     options.testClass = testFileName;
