@@ -3,9 +3,9 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrMvcBscUni"
+module="PbrMvcBasicUnique"
 type="web"
 construct=()
-construct+=("mvc-bsc-uni.yml;mvc_bsc_uni.php")
+construct+=("mvc-basic-unique.yml;mvc_basic_unique.php")
 
 source "$bin/gear/module/test-module.sh"

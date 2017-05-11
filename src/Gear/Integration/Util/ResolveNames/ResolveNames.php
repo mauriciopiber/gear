@@ -139,9 +139,11 @@ class ResolveNames
     {
         $variables = $this->createAliase($suite);
 
+        /*
         if ($minify) {
             $variables = $this->cutNames($variables);
         }
+        */
 
         foreach ($variables as $i => $name) {
 

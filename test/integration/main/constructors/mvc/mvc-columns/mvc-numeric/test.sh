@@ -3,9 +3,9 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="PbrMvcNmr"
+module="PbrMvcNumeric"
 type="web"
 construct=()
-construct+=("mvc-nmr.yml;mvc_nmr.php")
+construct+=("mvc-numeric.yml;mvc_numeric.php")
 
 source "$bin/gear/module/test-module.sh"
