@@ -158,7 +158,7 @@ class GearFile
     public function createMvcGearfile(MvcMinorSuite $mvcMinorSuite)
     {
         $db = [
-            'table' => $mvcMinorSuite->getTableName(),
+            'table' => $mvcMinorSuite->getTableAlias(),
             'user' => $mvcMinorSuite->getUserType(),
             'namespace' => $mvcMinorSuite->getTableName(),
             'service' => 'factories',

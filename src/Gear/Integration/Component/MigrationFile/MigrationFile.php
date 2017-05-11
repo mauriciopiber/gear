@@ -106,7 +106,7 @@ class MigrationFile
         $columns = $this->factoryMigrationColumns($mvcMinorSuite->getColumns());
 
         return [
-            $this->stringService->str('uline', $mvcMinorSuite->getTableName()) => [
+            $this->stringService->str('uline', $mvcMinorSuite->getTableAlias()) => [
                 'nullable' => $nullable,
                 'unique' => $unique,
                 'referenced_assoc' => $tables,

@@ -43,17 +43,7 @@ class MvcMajorSuite extends AbstractMajorSuite
         $this->minorSuites = [***REMOVED***;
         return $this;
     }
-    /*
-    public function __construct($columns, $userType, $constraints, $tableAssoc)
-    {
-        $this->columns = $columns;
-        $this->userTypes = $userType;
-        $this->constraints = $constraints;
-        $this->tableAssocs = $tableAssoc;
-        $this->minorSuites = [***REMOVED***;
-        return $this;
-    }
-    */
+
     public function addMinorSuite($minorSuite)
     {
         $this->minorSuites[***REMOVED*** = $minorSuite;

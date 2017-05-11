@@ -14,42 +14,69 @@ use GearBase\Util\String\StringService;
  */
 class MvcMinorSuite extends AbstractMinorSuite
 {
-    /**
-     * Constructor
-     *
-     * @return \Gear\Integration\Suite\Mvc\MvcMinorSuite
-     */
-    public $tableName;
-
-    public $userType;
-
-    public $constraints;
-
-    public $tableAssoc;
-
-    public $columnType;
-
-    public $majorType;
-
-    public $locationKey;
-
-    //the real one
-    public $columns;
-
-    public $foreignKeys;
-
-    public $gearFile;
-
-    public $migrationFile;
-
     const SUITE = '%s/%s';
 
     const TYPE = 'mvc';
 
-    public function getType()
-    {
-        return self::TYPE;
-    }
+    /**
+     * @var MvcMajorSuite
+     */
+    public $majorType;
+
+    /**
+     * @var string User Type of Minor Mvc
+     */
+    public $userType;
+
+    /**
+     * @var string Constraints of Minor Mvc
+     */
+    public $constraints;
+
+    /**
+     * @var string Table Assoc of Minor Mvc
+     */
+    public $tableAssoc;
+
+    /**
+     * @var string Column Type of Minor Mvc
+     */
+    public $columnType;
+
+    /**
+     * @var string Table Name
+     */
+    public $tableName;
+
+    /**
+     * @var string Table Alias
+     */
+    public $tableAlias;
+
+    /**
+     * @var string Location Key of Minor Suite
+     */
+    public $locationKey;
+
+    /**
+     * @var array
+     */
+    public $columns;
+
+    /**
+     * @var string
+     */
+    public $foreignKeys;
+
+    /**
+     * @var string
+     */
+    public $gearFile;
+
+    /**
+     * @var string
+     */
+    public $migrationFile;
 
     /**
      * Constructor
@@ -65,6 +92,11 @@ class MvcMinorSuite extends AbstractMinorSuite
         $this->tableAssoc = $tableAssoc;
         $this->stringService = new StringService();
         return $this;
+    }
+
+    public function getType()
+    {
+        return self::TYPE;
     }
 
     public function getSuiteName($type = 'url')
@@ -83,6 +115,16 @@ class MvcMinorSuite extends AbstractMinorSuite
         //return sprintf('%s/%s', )
     }
 
+    public function setTableAlias($tableAlias)
+    {
+        $this->tableAlias = $tableAlias;
+        return $this;
+    }
+
+    public function getTableAlias()
+    {
+        return $this->tableAlias;
+    }
 
     public function setForeignKeys($foreignKeys)
     {
