@@ -1,11 +1,11 @@
 <?php $this->headTitle()->prepend('Editar My');?>
 <div ng-controller="MyEditController as edit">
     <div class="row">
-    	<div class="col-lg-6">
+        <div class="col-lg-6">
             <h3 class="page-header">
                 <?php echo $this->translate('Edit');?>&nbsp;<?php echo $this->translate('My');?> - <?php echo $this->idMy;?>
             </h3>
-    	</div>
+        </div>
     </div>
     <?php if($this->success) : echo $this->render('layout/success'); endif; ?>
     <?php if($this->error) : echo $this->render('layout/error'); endif; ?>
@@ -17,7 +17,7 @@
                 $form->prepare();
                 echo $this->form()->openTag($form);
                 echo $this->formHidden($form->get('idMy')->setAttribute('class','form-control'));
-    	    ?>
+            ?>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -32,8 +32,8 @@
                             <a class="btn btn-default reset"
                                id="btn-back"
                                 href="<?php echo $this->url('my-module/my/list');?>">
-                	            <?php echo $this->translate('Back');?>
-                	        </a>
+                                <?php echo $this->translate('Back');?>
+                            </a>
                             <a id="btn-view" class="btn btn-info"
                                 href="<?php echo $this->url('my-module/my/view', array('id' => $this->idMy));?>">
                                 <?php echo $this->translate('View');?>

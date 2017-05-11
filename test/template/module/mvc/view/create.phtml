@@ -1,9 +1,9 @@
 <?php $this->headTitle()->prepend('Criar My');?>
 <div ng-controller="MyCreateController as create">
     <div class="row">
-    	<div class="col-lg-12">
+        <div class="col-lg-12">
             <h3 class="page-header"><?php echo $this->translate('Create');?>&nbsp;<?php echo $this->translate('My');?></h3>
-    	</div>
+        </div>
     </div>
     <?php if($this->error) : echo $this->render('layout/error'); endif; ?>
     <div class="row">

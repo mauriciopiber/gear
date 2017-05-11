@@ -4,6 +4,10 @@ namespace MyModule\Form;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
+use MyModule\Form\MyTableForm;
+use MyModule\Filter\MyTableFilter;
+use MyModule\Entity\MyTable;
+use Zend\Http\Request;
 
 /**
  * PHP Version 5
@@ -22,17 +26,18 @@ class MyTableFormFactory extends AbstractFactory
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return \MyModule\Form\MyTableForm     */
+     * @return MyTableForm
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $form = new \MyModule\Form\MyTableForm(
+        $form = new MyTableForm(
             $serviceLocator->get('doctrine.entitymanager.orm_default')
         );
 
         $idMyTable = null;
         $request = $serviceLocator->get('Request');
         $translate = $serviceLocator->get('Translator');
-        if ($request instanceof \Zend\Http\Request
+        if ($request instanceof Request
             && preg_match('/'.$translate->translate('edit').'/', $request->getUri()->getPath())
         ) {
             if (preg_match('/[0-9***REMOVED****$/', $request->getUri()->getPath(), $match)) {
@@ -40,11 +45,11 @@ class MyTableFormFactory extends AbstractFactory
             }
         }
 
-        $filter = $serviceLocator->get('MyModule\Filter\MyTableFilter');
+        $filter = $serviceLocator->get(MyTableFilter::class);
         $form->setInputFilter($filter->getInputFilter($idMyTable));
 
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $hydrator = new DateHydrator($entityManager, 'MyModule\Entity\MyTable');
+        $hydrator = new DateHydrator($entityManager, MyTable::class);
 
         $form->setHydrator($hydrator);
 

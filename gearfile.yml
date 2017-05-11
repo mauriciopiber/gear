@@ -19,10 +19,7 @@ src:
 #          0: 
 #            class: GearBase\Util\String\StringService
 #            aliase: GearBase\Util\String
- 
-    srcminor: 
-        abstract: true
-        name: SrcMinorSuite
-        type: ValueObject
-        namespace: Integration\Generator\SrcGenerator
-    
+  srcminor:
+    name: TemplateService
+    type: Factory
+    namespace: Creator\Template

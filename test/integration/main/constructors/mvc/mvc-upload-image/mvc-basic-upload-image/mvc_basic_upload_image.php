@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcBasicUploadImage extends AbstractMigration
 {
     const TABLES = [
-        'mvc_basic_upload_image' => [
+        'mvc_bsc_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [

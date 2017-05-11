@@ -3,6 +3,7 @@ namespace MyModule\Custom\CustomNamespace;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Factory\AbstractFactory;
+use MyModule\Custom\CustomNamespace\MyTableSearchForm;
 
 /**
  * PHP Version 5
@@ -21,11 +22,11 @@ class MyTableSearchFormFactory extends AbstractFactory
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return \MyModule\Custom\CustomNamespace\MyTableSearchForm
+     * @return MyTableSearchForm
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $form = new \MyModule\Custom\CustomNamespace\MyTableSearchForm(
+        $form = new MyTableSearchForm(
             $serviceLocator->get('doctrine.entitymanager.orm_default')
         );
         return $form;

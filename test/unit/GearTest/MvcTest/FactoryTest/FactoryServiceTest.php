@@ -117,6 +117,8 @@ class FactoryServiceTest extends AbstractTestCase
     /**
      * @dataProvider getData
      * @group db-factory-namespace
+     * @group mvc
+     * @group mvc-factory
      */
     public function testCreateDb($data, $template)
     {

@@ -160,7 +160,7 @@ class GearFile
         $db = [
             'table' => $mvcMinorSuite->getTableAlias(),
             'user' => $mvcMinorSuite->getUserType(),
-            'namespace' => $mvcMinorSuite->getTableName(),
+            'namespace' => $mvcMinorSuite->getTableAlias(),
             'service' => 'factories',
             'columns' => $this->factoryGearfileColumns($mvcMinorSuite->getColumns())
         ***REMOVED***;

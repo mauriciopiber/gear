@@ -50,13 +50,13 @@ class ServiceService extends AbstractMvc
         $options = [
             'implements' => $this->getCode()->getImplements($this->src),
             'classDocs'  => $this->getCode()->getClassDocs($this->src),
-            'module'     => $this->getModule()->getModuleName(),
-            'namespace'  => $this->getCode()->getNamespace($this->src),
-            'abstract'   => $this->src->getAbstract(),
-            'class'      => $this->className,
             'extends'    => $this->getCode()->getExtends($this->src),
             'uses'       => $this->getCode()->getUse($this->src),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
+            'namespace'  => $this->getCode()->getNamespace($this->src),
+            'module'     => $this->getModule()->getModuleName(),
+            'abstract'   => $this->src->getAbstract(),
+            'class'      => $this->className,
         ***REMOVED***;
 
         $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')

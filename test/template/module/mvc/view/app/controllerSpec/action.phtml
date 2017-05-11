@@ -1,20 +1,20 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	var controller;
+    var controller;
 
-	describe('My Module My Controller My Action Spec', function () {
-		beforeEach(angular.mock.module('GearApp'));
+    describe('My Module My Controller My Action Spec', function () {
+        beforeEach(angular.mock.module('GearApp'));
 
-		beforeEach(inject(function($controller){
-			controller = $controller('MyControllerMyActionAction');
-	    }));
+        beforeEach(inject(function($controller){
+            controller = $controller('MyControllerMyActionAction');
+        }));
 
-		describe('Test properties', function(){
-			it('has version', function() {
-				expect(controller.version).toBe('0.0.99');
-			});
-		})
+        describe('Test properties', function(){
+            it('has version', function() {
+                expect(controller.version).toBe('0.0.99');
+            });
+        })
 
-	});
+    });
 }());

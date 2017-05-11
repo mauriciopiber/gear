@@ -4,6 +4,8 @@ namespace MyModule\Custom\CustomNamespace;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Custom\CustomNamespace\MyTableService;
+use MyModule\Custom\CustomNamespace\MyTableRepository;
+use GearImage\Service\ImageService;
 
 /**
  * PHP Version 5
@@ -20,7 +22,8 @@ class MyTableServiceFactory implements FactoryInterface
      * Create MyTableService
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
-     * @return \MyModule\Custom\CustomNamespace\MyTableService
+     *
+     * @return MyTableService
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -28,8 +31,8 @@ class MyTableServiceFactory implements FactoryInterface
             (extension_loaded('memcached'))
             ? $serviceLocator->get('memcached')
             : $serviceLocator->get('filesystem'),
-            $serviceLocator->get('MyModule\Custom\CustomNamespace\MyTableRepository'),
-            $serviceLocator->get('GearImage\Service\ImageService')
+            $serviceLocator->get(MyTableRepository::class),
+            $serviceLocator->get(ImageService::class)
         );
         unset($serviceLocator);
         return $factory;

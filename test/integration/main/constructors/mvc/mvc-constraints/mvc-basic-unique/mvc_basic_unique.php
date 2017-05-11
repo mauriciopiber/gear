@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcBasicUnique extends AbstractMigration
 {
     const TABLES = [
-        'mvc_basic_unique' => [
+        'mvc_bsc_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [

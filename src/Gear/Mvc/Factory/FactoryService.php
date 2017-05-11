@@ -26,58 +26,16 @@ class FactoryService extends AbstractMvc
 
     use SchemaServiceTrait;
 
-    public function hasAbstract()
+    public function create($src)
     {
-        if (is_file($this->getLocation().'/AbstractFactory.php')) {
-            return true;
-        } else {
-            return false;
-        }
+        var_dump($src);
     }
 
-
-    public function introspectFromTable($table)
-    {
-        //$this->getAbstract();
-
-        $this->table = $table;
-        $this->tableObject = $table->getTableObject();
-
-        $this->createFormFactory();
-        $this->createSearchFormFactory();
-
-
-        return true;
-    }
-
-
-    public function getAbstract()
-    {
-        if (!$this->hasAbstract()) {
-            $this->getFileCreator()->createFile(
-                'template/module/mvc/factory/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName()
-                ),
-                'AbstractFactory.php',
-                $this->getModule()->getFactoryFolder()
-            );
-
-            $this->getFileCreator()->createFile(
-                'template/module/test/unit/factory/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName()
-                ),
-                'AbstractFactoryTest.php',
-                $this->getModule()->getTestFactoryFolder()
-            );
-        }
-    }
 
     public function getOptionsTemplateSrc(Src $src)
     {
         $namespace = $this->getCode()->getNamespace($src);
-        $use = $this->getCode()->classNameToNamespace($src);
+        $use = $this->getCode()->getUseFactory($controller);
 
         $options = [
             'className'                => $this->str('class', $src->getName()),
@@ -87,7 +45,7 @@ class FactoryService extends AbstractMvc
         ***REMOVED***;
 
         if (!empty($src->getDependency())) {
-            $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($src);
+            $options['dependency'***REMOVED*** = $this->getCode()->getServiceLocatorFactory($src);
         }
 
         return $options;
@@ -95,7 +53,6 @@ class FactoryService extends AbstractMvc
 
     public function getOptionsTemplateFormFilter(Src $src)
     {
-
         if ($src->getType() !== 'Form') {
             throw new WrongType('Must be "Form" Type, tried to use '.$src->getType());
         }
@@ -106,7 +63,7 @@ class FactoryService extends AbstractMvc
 
         $var = $this->str('var-lenght', 'Id'.$src->getDb()->getTable());
 
-        return array(
+        return [
             'package'     => $this->getCode()->getClassDocsPackage($src),
             'namespace'   => $this->getCode()->getNamespace($src),
             'class'       => $src->getName(),
@@ -118,7 +75,7 @@ class FactoryService extends AbstractMvc
                 'template/module/mvc/factory/form-filter-set-id.phtml',
                 ['var' => $var***REMOVED***
             ),
-        );
+        ***REMOVED***;
     }
 
     public function getOptionsTemplateSearchForm(Src $src)
@@ -129,7 +86,7 @@ class FactoryService extends AbstractMvc
 
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
-        return array(
+        return [
             'package'     => $this->getCode()->getClassDocsPackage($src),
             'namespace'   => $this->getCode()->getNamespace($src),
             'class'       => $src->getName(),
@@ -139,7 +96,7 @@ class FactoryService extends AbstractMvc
                 'template/module/mvc/factory/form-filter-set-id.phtml',
                 ['var' => $var***REMOVED***
             ),
-        );
+        ***REMOVED***;
     }
 
 
@@ -171,7 +128,8 @@ class FactoryService extends AbstractMvc
         $template = 'template/module/mvc/factory/controller.phtml';
 
         $namespace = $this->getCode()->getNamespace($controller);
-        $use = $this->getCode()->classNameToNamespace($controller);
+
+        $use = $this->getCode()->getUseFactory($controller);
 
         $options = [
             'className'                => $this->str('class', $controller->getName()),
@@ -181,7 +139,7 @@ class FactoryService extends AbstractMvc
         ***REMOVED***;
 
         if (!empty($controller->getDependency())) {
-            $options['dependency'***REMOVED*** = $this->getCode()->getFactoryServiceLocator($controller);
+            $options['dependency'***REMOVED*** = $this->getCode()->getServiceLocatorFactory($controller);
         }
 
 
@@ -229,87 +187,5 @@ class FactoryService extends AbstractMvc
         $filename = $src->getName().'Factory.php';
 
         return $file->createFile($template, $options, $filename, $location);
-    }
-
-    /**
-     * Cria Factory para classes Form.
-     *
-     * @return string
-     */
-    public function createFormFactory()
-    {
-        $src = $this->getSchemaService()->getSrcByDb($this->table, 'Factory');
-
-        $this->src = $src;
-
-
-        $this->className = str_replace('Factory', '', $src->getName());
-
-        $this->getTraitService()->createTrait(
-            $src,
-            $this->getModule()->getFactoryFolder(),
-            $src->getName()
-        );
-
-        $fileCreator = $this->getFileCreator();
-
-        $fileCreator->setTemplate('template/module/mvc/factory/full.factory.phtml');
-        $fileCreator->setOptions(
-            array(
-                'class'   => $src->getName(),
-                'className' => $this->className,
-                'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
-                'module'  => $this->getModule()->getModuleName()
-            )
-        );
-
-
-        $fileCreator->setFileName($src->getName().'.php');
-        $fileCreator->setLocation($this->getModule()->getFactoryFolder());
-
-        if ($this->hasUniqueConstraint()) {
-            $fileCreator->addChildView(array(
-                'template' => 'template/module/mvc/factory/full.factory.set.id.phtml',
-                'config' => array(
-                    'var' => $this->str('var-lenght', 'id'.$this->str('class', $this->src->getName())),
-                    'class'   => $this->className,
-                    'module'  => $this->getModule()->getModuleName()
-                ),
-                'placeholder' => 'setId'
-            ));
-        }
-
-
-        return $fileCreator->render();
-    }
-
-    /**
-     * Cria Factory para Classes SearchForm
-     *
-     * @return string
-     */
-    public function createSearchFormFactory()
-    {
-        $srcFormFactory = $this->getSchemaService()->getSrcByDb($this->table, 'SearchFactory');
-
-
-        $this->getTraitService()->createTrait(
-            $srcFormFactory,
-            $this->getModule()->getFactoryFolder(),
-            $srcFormFactory->getName(),
-            $this->getModule()->getTestFactoryFolder(),
-            true,
-            str_replace('SearchFactory', 'SearchForm', $srcFormFactory->getName())
-        );
-
-        return $this->getFileCreator()->createFile(
-            'template/module/mvc/factory/full.search.phtml',
-            array(
-                'class'   => $srcFormFactory->getName(),
-                'module'  => $this->getModule()->getModuleName()
-            ),
-            $srcFormFactory->getName().'.php',
-            $this->getModule()->getFactoryFolder()
-        );
     }
 }
