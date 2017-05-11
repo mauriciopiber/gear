@@ -36,11 +36,11 @@ EOS;
         \$data = parent::selectAll(\$select);
 
         if (count(\$data) === 0) {
-        	return \$data;
+            return \$data;
         }
 
         foreach (\$data as \$i => \$item) {
-        	\$data[\$i***REMOVED***['user'***REMOVED*** = \$item['createdBy'***REMOVED***['idUser'***REMOVED***;
+            \$data[\$i***REMOVED***['user'***REMOVED*** = \$item['createdBy'***REMOVED***['idUser'***REMOVED***;
         }
 
         return \$data;

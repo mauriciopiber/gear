@@ -79,16 +79,16 @@ gulp.task('module:phpunit', function() {
 
 gulp.task('module:phplint', function(cb) {
 
-	if (argv.module == undefined || !argv.module) {
+    if (argv.module == undefined || !argv.module) {
         gutil.log('É obrigatório definir --module');
         return;
     }
 
-	phplint(['./module/'+argv.module+'/**/*.php'***REMOVED***, function (err, stdout, stderr) {
-	  if (err) {
-		  cb(err);
-		  process.exit(1);
-	  }
-	  cb();
-	});
+    phplint(['./module/'+argv.module+'/**/*.php'***REMOVED***, function (err, stdout, stderr) {
+      if (err) {
+          cb(err);
+          process.exit(1);
+      }
+      cb();
+    });
 });

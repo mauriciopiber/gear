@@ -1,5 +1,5 @@
 <target name="protractor"  depends="db-load, cache-load">
     <exec executable="${basedir}/node_modules/.bin/protractor" >
-	    <arg value="end2end.conf.js" />
+        <arg value="end2end.conf.js" />
     </exec>
 </target>

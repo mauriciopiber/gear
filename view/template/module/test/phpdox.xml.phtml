@@ -1,12 +1,12 @@
 <phpdox xmlns="http://xml.phpdox.net/config">
-	<project name="<?php echo $this->module;?>" source="./src" workdir="build/phpdox">
-		<collector publiconly="false">
-			<include mask="*.php" />
-		</collector>
-		<generator output="build">
-			<build engine="html" enabled="true" output="api">
-				<file extension="html" />
-			</build>
-		</generator>
-	</project>
+    <project name="<?php echo $this->module;?>" source="./src" workdir="build/phpdox">
+        <collector publiconly="false">
+            <include mask="*.php" />
+        </collector>
+        <generator output="build">
+            <build engine="html" enabled="true" output="api">
+                <file extension="html" />
+            </build>
+        </generator>
+    </project>
 </phpdox>
