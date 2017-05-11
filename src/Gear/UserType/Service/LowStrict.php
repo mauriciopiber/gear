@@ -9,6 +9,14 @@ class LowStrict implements UserTypeServiceInterface
     {
 
         return <<<EOS
+
+    /**
+     * Select by ID with Auth Validation.
+     *
+     * @param ID \$idToSelect Id To Select
+     *
+     * @return {$repository}
+     */
     public function selectById(\$idToSelect)
     {
         \$repository = \$this->get{$repository}();
@@ -52,6 +60,13 @@ EOS;
     {
         return <<<EOS
 
+    /**
+     * Select by ID without Auth Validation.
+     *
+     * @param ID \$idToSelect Id To Select
+     *
+     * @return {$repository}
+     */
     public function selectViewById(\$idToSelect)
     {
         \$entity = \$this->get{$repository}()->selectById(\$idToSelect);
