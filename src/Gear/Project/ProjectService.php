@@ -21,7 +21,7 @@ use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Edge\DirEdge;
 use Gear\Project\Docs\Docs;
@@ -69,7 +69,7 @@ class ProjectService extends AbstractJsonService
         GearConfig $gearConfig,
         DirService $dirService,
         FileService $fileService,
-        File $file,
+        FileCreator $file,
         DirEdge $dirEdge,
         Docs $docs,
         ConsolePrompt $consolePrompt,

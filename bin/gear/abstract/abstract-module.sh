@@ -370,6 +370,51 @@ function Gear_Module_Reload
     
 }
 
+
+
+function Gear_Module_Diagnostic
+{
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    
+    if [ "$useOwnConstructor" == "0" ***REMOVED***; then
+        cd $modulePath    
+    else
+        cd $(Gear_Util_GetGearPath)
+    fi
+   
+    basePath=$(Gear_Util_GetBasePath)
+   
+    #cd $modulePath
+    #echo "$module $type"
+    sudo php public/index.php gear module diagnostic $module $basePath --type=$type    
+}
+
+
+
+function Gear_Module_Upgrade
+{
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    
+    if [ "$useOwnConstructor" == "0" ***REMOVED***; then
+        cd $modulePath    
+    else
+        cd $(Gear_Util_GetGearPath)
+    fi
+   
+    basePath=$(Gear_Util_GetBasePath)
+   
+    #cd $modulePath
+    #echo "$module $type"
+    sudo php public/index.php gear module upgrade $module $basePath --type=$type
+}
+
+
 function Gear_Module_Run_Ant
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")

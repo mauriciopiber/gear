@@ -34,7 +34,7 @@ class FixtureServiceTest extends AbstractTestCase
         $template       = new TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
         $fileService    = new FileService();
-        $this->fileCreator    = new File($fileService, $template);
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->templates = (new Module)->getLocation().'/../../test/template/module/mvc/fixture/db';
 

@@ -58,8 +58,18 @@ if [ "$cmd" == "clear" ***REMOVED***; then
 	exit 0	
 fi
 
+if [ "$cmd" == "diagnostic" ***REMOVED***; then
+	/bin/bash "$bin/gear/module/gear-module" "diagnostic" "$module" "$type"
+	exit 0	
+fi
 
-if [ "$cmd" == "constr" ***REMOVED***; then
+if [ "$cmd" == "upgrade" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "upgrade" "$module" "$type"
+	exit 0	
+fi
+
+if [ "$cmd" == "construct" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "construct" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}" "0" "0"
 	exit 0	

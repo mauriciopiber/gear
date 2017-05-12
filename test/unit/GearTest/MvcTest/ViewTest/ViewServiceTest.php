@@ -74,7 +74,7 @@ class ViewServiceTest extends AbstractTestCase
         $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
 
         $fileService        = new FileService();
-        $this->fileCreator  = new File($fileService, $template);
+        $this->fileCreator  = new FileCreator($fileService, $template);
 
         $this->dir = new DirService();
 
