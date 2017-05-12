@@ -5,8 +5,9 @@ use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\App\App;
+use Gear\Creator\Codes\AbstractCodeBase;
 
-class CodeTest extends AbstractCode
+class CodeTest extends AbstractCodeBase
 {
 
     public function extractServiceManagerFromDependency($dependency, $i)

@@ -25,17 +25,27 @@ src:
 #    namespace: Creator\Template
 
   0:
-    name: ClassCode
+    name: AbstractCode
     type: Service
-    namespace: Creator\Code\ClassCode
-    extends: Creator\Code\AbstractCode
+    namespace: Creator\Codes\Code
+    extends: Creator\Codes\AbstractCodeBase
   1:
     name: FactoryCode
     type: Service
-    namespace: Creator\Code\FactoryCode
-    extends: Creator\Code\AbstractCode    
+    namespace: Creator\Codes\Code\FactoryCode
+    extends: Creator\Codes\Code\AbstractCode
   2:
-    name: InterfaceCode
+    name: AbstractCodeTest
     type: Service
-    namespace: Creator\Code\InterfaceCode
-    extends: Creator\Code\AbstractCode
+    namespace: Creator\Codes\CodeTest
+    extends: Creator\Codes\AbstractCodeBase
+  3:
+    name: FactoryCodeTest
+    type: Service
+    namespace: Creator\Codes\CodeTest\FactoryCode
+    extends: Creator\Codes\CodeTest\AbstractCodeTest            
+#  2:
+#    name: InterfaceCode
+#    type: Service
+#    namespace: Creator\Code\InterfaceCode
+#    extends: Creator\Code\AbstractCode

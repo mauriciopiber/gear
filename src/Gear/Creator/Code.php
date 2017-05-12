@@ -9,8 +9,9 @@ use Gear\Creator\FileExtendsInterface;
 use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
+use Gear\Creator\Codes\AbstractCodeBase;
 
-class Code extends AbstractCode implements
+class Code extends AbstractCodeBase implements
     FileExtendsInterface,
     FileUseAttributeInterface,
     FileUseInterface
