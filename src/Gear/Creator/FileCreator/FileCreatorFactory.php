@@ -15,6 +15,6 @@ class FileCreatorFactory implements FactoryInterface
         $file = $serviceManager->get('fileService');
         $template = $serviceManager->get(TemplateService::class);
 
-        return new File($file, $template);
+        return new FileCreator($file, $template);
     }
 }

@@ -4,6 +4,7 @@ namespace Gear\Project;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Project\ProjectService;
+use Gear\Creator\FileCreator\FileCreator;
 
 class ProjectServiceFactory implements FactoryInterface
 {
@@ -13,7 +14,7 @@ class ProjectServiceFactory implements FactoryInterface
             $serviceLocator->get('GearBase\GearConfig'),
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('GearBase\Util\File'),
-            $serviceLocator->get('Gear\FileCreator'),
+            $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('Gear\Edge\DirEdge'),
             $serviceLocator->get('Gear\Project\Docs\Docs'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
@@ -23,7 +24,7 @@ class ProjectServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Project\Composer\ComposerService')
             //$serviceLocator->get('config'),
             //$serviceLocator->get('GearBase\Util\String'),
-            //$serviceLocator->get('Gear\FileCreator')
+            //$serviceLocator->get(FileCreator::class)
         );
         unset($serviceLocator);
         return $projectService;

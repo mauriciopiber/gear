@@ -2,6 +2,7 @@ namespace <?php echo $this->namespace;?>;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Factory\AbstractFactory;
+use <?php echo $this->namespace;?>\<?php echo $this->class;?>;
 
 /**
  * PHP Version 5
@@ -20,11 +21,11 @@ class <?php echo $this->class;?>Factory extends AbstractFactory
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return \<?php echo $this->form.PHP_EOL;?>
+     * @return <?php echo $this->class.PHP_EOL;?>
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $form = new \<?php echo $this->form;?>(
+        $form = new <?php echo $this->class;?>(
             $serviceLocator->get('doctrine.entitymanager.orm_default')
         );
         return $form;

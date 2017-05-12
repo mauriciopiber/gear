@@ -7,7 +7,6 @@ use GearBase\Factory\AbstractFactory;
 use MyModule\Form\MyTableForm;
 use MyModule\Filter\MyTableFilter;
 use MyModule\Entity\MyTable;
-use Zend\Http\Request;
 
 /**
  * PHP Version 5
@@ -37,7 +36,7 @@ class MyTableFormFactory extends AbstractFactory
         $idMyTable = null;
         $request = $serviceLocator->get('Request');
         $translate = $serviceLocator->get('Translator');
-        if ($request instanceof Request
+        if ($request instanceof \Zend\Http\Request
             && preg_match('/'.$translate->translate('edit').'/', $request->getUri()->getPath())
         ) {
             if (preg_match('/[0-9***REMOVED****$/', $request->getUri()->getPath(), $match)) {

@@ -3,6 +3,9 @@ namespace <?php echo $this->namespace;?>;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
+use <?php echo $this->namespace;?>\<?php echo $this->class;?>;
+use <?php echo $this->filter;?>;
+use <?php echo $this->entity;?>;
 
 /**
  * PHP Version 5
@@ -21,22 +24,22 @@ class <?php echo $this->class;?>Factory extends AbstractFactory
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return \<?php echo $this->form;?>
+     * @return <?php echo $this->class.PHP_EOL;?>
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $form = new \<?php echo $this->form;?>(
+        $form = new <?php echo $this->class;?>(
             $serviceLocator->get('doctrine.entitymanager.orm_default')
         );
 
         $<?php echo $this->var;?> = null;
 <?php echo $this->setId;?>
 
-        $filter = $serviceLocator->get('<?php echo $this->filter;?>');
+        $filter = $serviceLocator->get(<?php echo $this->filterName;?>::class);
         $form->setInputFilter($filter->getInputFilter($<?php echo $this->var;?>));
 
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $hydrator = new DateHydrator($entityManager, '<?php echo $this->entity;?>');
+        $hydrator = new DateHydrator($entityManager, <?php echo $this->entityName;?>::class);
 
         $form->setHydrator($hydrator);
 

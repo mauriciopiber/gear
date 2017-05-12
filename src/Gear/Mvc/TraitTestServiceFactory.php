@@ -4,6 +4,7 @@ namespace Gear\Mvc;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\TraitTestService;
+use Gear\Creator\FileCreator\FileCreator;
 
 class TraitTestServiceFactory implements FactoryInterface
 {
@@ -11,7 +12,7 @@ class TraitTestServiceFactory implements FactoryInterface
     {
         $factory = new TraitTestService(
             $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get('Gear\FileCreator'),
+            $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('Gear\Creator\CodeTest')
         );

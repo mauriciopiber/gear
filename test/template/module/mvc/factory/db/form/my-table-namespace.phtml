@@ -4,10 +4,9 @@ namespace MyModule\Custom\CustomNamespace;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
-use MyModule\Entity\MyTable;
-use MyModule\Custom\CustomNamespace\MyTableFilter;
 use MyModule\Custom\CustomNamespace\MyTableForm;
-use Zend\Http\Request;
+use MyModule\Custom\CustomNamespace\MyTableFilter;
+use MyModule\Entity\MyTable;
 
 /**
  * PHP Version 5
@@ -37,7 +36,7 @@ class MyTableFormFactory extends AbstractFactory
         $idMyTable = null;
         $request = $serviceLocator->get('Request');
         $translate = $serviceLocator->get('Translator');
-        if ($request instanceof Request
+        if ($request instanceof \Zend\Http\Request
             && preg_match('/'.$translate->translate('edit').'/', $request->getUri()->getPath())
         ) {
             if (preg_match('/[0-9***REMOVED****$/', $request->getUri()->getPath(), $match)) {

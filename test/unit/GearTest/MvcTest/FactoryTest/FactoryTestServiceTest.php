@@ -152,7 +152,7 @@ class FactoryTestServiceTest extends AbstractTestCase
     public function testDependency()
     {
         $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->factoryTest->getModule());
-        $this->assertInstanceOf('Gear\Creator\File', $this->factoryTest->getFileCreator());
+        $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->factoryTest->getFileCreator());
         $this->assertInstanceOf('Gear\Creator\CodeTest', $this->factoryTest->getCodeTest());
     }
 }

@@ -49,7 +49,6 @@ trait FactoryDataTrait
             ['type' => 'SearchForm', 'template' => 'search-form'***REMOVED***
         ***REMOVED***;
 
-        /**
         foreach ($types as $type) {
 
             $lowerType = strtolower($type['type'***REMOVED***);
@@ -87,7 +86,7 @@ trait FactoryDataTrait
             ***REMOVED***;
 
         }
-        */
+
 
         $factoryData[***REMOVED*** = [
             new \GearJson\Controller\Controller([

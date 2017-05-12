@@ -9,9 +9,9 @@ use Gear\Creator\FileExtendsInterface;
 use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
-use Gear\Creator\Codes\AbstractCodeBase;
+use Gear\Creator\Codes\Code\AbstractCode;
 
-class Code extends AbstractCodeBase implements
+class Code extends AbstractCode implements
     FileExtendsInterface,
     FileUseAttributeInterface,
     FileUseInterface
@@ -28,8 +28,6 @@ class Code extends AbstractCodeBase implements
 
     const CONSTRUCTOR_BODY = '        $this->%s = $%s;';
 
-    const FACTORY_SERVICE_LOCATOR = '$serviceLocator->get(\'%s\')';
-
     static protected $defaultLocation;
 
     static protected $defaultNamespace;
@@ -40,146 +38,6 @@ class Code extends AbstractCodeBase implements
         'translator' => 'translate'
     ***REMOVED***;
 
-    public function getUseFactory($data)
-    {
-        return '';
-    }
-
-
-    public function getFileDocs($src, $type = null)
-    {
-
-        if ($type === null) {
-            $type = $src->getType();
-        }
-
-        if ($src->getNamespace() === null) {
-            $namespace = $this->getModule()->getModuleName().'\\';
-
-            if ($src instanceof Controller) {
-                $namespace .= 'Controller';
-            } else {
-                $namespace .= $src->getType();
-            }
-        } else {
-            $namespace = $this->resolveNamespace($src->getNamespace());
-        }
-
-        $namespace = str_replace('\\', '/', $namespace);
-
-
-        $template = <<<EOS
-/**
- * PHP Version 5
- *
- * @category {$type}
- * @package {$namespace}
- * @author Mauricio Piber <mauriciopiber@gmail.com>
- * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
- * @link http://pibernetwork.com
- */
-
-EOS;
-
-        return $template;
-    }
-
-    public function getClassDocsPackage($controller)
-    {
-        $this->docs = '';
-
-        if (empty($controller->getNamespace())) {
-            if ($controller instanceof Controller) {
-                $type = 'Controller';
-            } else {
-                if ($controller->getType() === 'SearchForm') {
-                    $type = 'Form/Search';
-                } elseif ($controller->getType() === 'ControllerPlugin') {
-                    $type = 'Controller/Plugin';
-                } elseif ($controller->getType() === 'ViewHelper') {
-                    $type = 'View/Helper';
-                } else {
-                    $type = $controller->getType();
-                }
-            }
-
-            $this->docs = sprintf('%s/%s', $this->getModule()->getModuleName(), $type);
-        } else {
-            //$module = $this->getModule()->getModuleName();
-
-            $namespace = $this->resolveNamespace($controller->getNamespace());
-
-            $this->docs = str_replace('\\', '/', $namespace);
-        }
-
-
-        return $this->docs;
-    }
-
-    public function getClassDocs($src, $type = null)
-    {
-        return $this->getFileDocs($src, $type);
-    }
-
-    public function getCustomTemplate($indent, $templateName)
-    {
-        $templates = [***REMOVED***;
-
-        $templates['memcached'***REMOVED*** = <<<EOS
-{$indent}(extension_loaded('memcached'))
-{$indent}? \$serviceLocator->get('memcached')
-{$indent}: \$serviceLocator->get('filesystem')
-EOS;
-
-
-        return $templates[$templateName***REMOVED***;
-    }
-
-    /**
-     * @TODO FIX
-     */
-    public function getServiceLocatorFactory($src)
-    {
-        if (empty($src->getDependency())) {
-            return '';
-        }
-
-        $ndnt = str_repeat(' ', 4*3);
-
-        $text = '';
-
-        $allDeps = count($src->getDependency());
-        $iterator = 0;
-
-        foreach ($src->getDependency() as $i => $dependency) {
-            if (!is_int($i) && in_array($i, ['memcached'***REMOVED***)) {
-                $text .= $this->getCustomTemplate($ndnt, $i);
-            } else {
-                $text .= $ndnt;
-
-                if (is_string($i) && strlen($i) > 0) {
-                    $fullname = $i;
-                } elseif (is_array($dependency) && isset($dependency['aliase'***REMOVED***)) {
-                    $fullname = $dependency['aliase'***REMOVED***;
-                } elseif (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
-                    $fullname = $this->resolveNamespace($dependency['class'***REMOVED***);
-                } else {
-                    $fullname = $this->resolveNamespace($dependency);
-                }
-
-                $text .= sprintf(self::FACTORY_SERVICE_LOCATOR, $fullname);
-            }
-
-
-            if ($iterator < $allDeps-1) {
-                $iterator += 1;
-                $text .= ',';
-            }
-            $text .= PHP_EOL;
-        }
-
-        return $text;
-    }
 
     public function getInterfaceUse($data)
     {
@@ -276,80 +134,6 @@ EOS;
         $extendsItem = explode('\\', $data->getExtends());
         return end($extendsItem);
     }
-
-    public function getNamespace($data)
-    {
-        $class = new ClassObject($data, $this->getModule()->getModuleName());
-
-        return $class->getNamespace();
-    }
-
-    public function getLocationPath($data)
-    {
-        if ($data instanceof Src || $data instanceof Controller) {
-            //$namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-            $psr = explode('\\', $data->getNamespace());
-
-
-            $dirNamespace = implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir($dirNamespace, $this->getModule()->getSrcModuleFolder());
-
-            $location = $this->getModule()->getSrcModuleFolder().'/'.$dirNamespace;
-
-            $this->getDirService()->mkDir($location);
-
-            return $location;
-        }
-
-        if ($data instanceof App) {
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $this->str('var', $item);
-            }
-
-            $dirNamespace = implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir($dirNamespace, $this->getModule()->getPublicJsAppFolder());
-
-            $location = $this->getModule()->getPublicJsAppFolder().'/'.$dirNamespace;
-
-            echo $location."\n";
-            $this->getDirService()->mkDir($location);
-            return $location;
-        }
-    }
-
-    public function getLocation($data)
-    {
-        /* Load Dependency */
-        //$this->loadDependencyService($data);
-
-        if (!empty($data->getNamespace())) {
-            $location = $this->getLocationPath($data);
-
-
-
-            return $location;
-        }
-
-        $type = $this->str('class', $data->getType());
-
-        if ($data instanceof Controller) {
-            return $this->getModule()->map('Controller');
-        }
-
-
-
-
-        if ($data instanceof App) {
-            $type = 'App'.$type;
-        }
-
-        return $this->getModule()->map($type);
-    }
-
 
     /**
      * Retorna o nome completo que consiste no Namespace + Nome.
@@ -739,10 +523,6 @@ EOS;
 
     public function getUse($data)
     {
-        /* Load Dependency */
-
-        //$this->loadDependencyService($data);
-
         $this->uses = [***REMOVED***;
 
         if (!empty($data->getImplements())) {
@@ -783,13 +563,7 @@ EOS;
             }
         }
 
-        $html = '';
-
-        foreach ($this->uses as $use) {
-            $html .= sprintf('use %s;', $use).PHP_EOL;
-        }
-
-        return $html;
+        return $this->printUse($this->uses);
     }
 
     public function extractNamesFromNamespaceArray(array $extract)

@@ -4,6 +4,7 @@ namespace Gear\Database\Phinx;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Database\Phinx\PhinxService;
+use Gear\Creator\FileCreator\FileCreator;
 
 /**
  * PHP Version 5
@@ -26,7 +27,7 @@ class PhinxServiceFactory implements FactoryInterface
     {
         $factory = new PhinxService(
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('Gear\FileCreator')
+            $serviceLocator->get(FileCreator::class)
         );
         unset($serviceLocator);
         return $factory;
