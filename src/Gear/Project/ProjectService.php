@@ -22,7 +22,7 @@ use GearBase\Config\GearConfigTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;
 use Gear\Creator\File;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Edge\DirEdge;
 use Gear\Project\Docs\Docs;
 use Gear\Util\Prompt\ConsolePrompt;

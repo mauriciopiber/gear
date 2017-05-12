@@ -18,10 +18,10 @@ class InjectorFactoryTest extends AbstractTestCase
             ->willReturn($this->prophesize('Gear\Util\Vector\ArrayService'))
             ->shouldBeCalled();
 
-        $factory = new \Gear\Creator\File\InjectorFactory();
+        $factory = new \Gear\Creator\Injector\InjectorFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('Gear\Creator\File\Injector', $instance);
+        $this->assertInstanceOf('Gear\Creator\Injector\Injector', $instance);
     }
 }

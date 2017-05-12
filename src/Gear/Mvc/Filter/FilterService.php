@@ -100,11 +100,11 @@ class FilterService extends AbstractMvc
           ***REMOVED***)
           : '';
 
-        $this->file->addChildView(array(
+        $this->file->addChildView([
             'template' => 'template/module/mvc/filter/collection/element.phtml',
-            'config' => array('elements' => $inputValues),
+            'config' => ['elements' => $inputValues***REMOVED***,
             'placeholder' => 'filterElements'
-        ));
+        ***REMOVED***);
 
 
         $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');

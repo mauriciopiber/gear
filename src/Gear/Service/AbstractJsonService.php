@@ -16,7 +16,7 @@ use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\ColumnServiceTrait;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
 use GearJson\Db\Db;
@@ -24,7 +24,6 @@ use GearJson\Db\Db;
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
     use YamlServiceTrait;
-    use AppDependencyTrait;
     use ColumnServiceTrait;
     use TableTrait;
     use TableServiceTrait;

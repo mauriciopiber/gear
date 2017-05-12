@@ -8,7 +8,7 @@ use Gear\Creator\FileCreator\AppTest\VarsTrait;
 //use GearJson\Src\Src;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
-use Gear\Creator\File\InjectorTrait;
+use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;

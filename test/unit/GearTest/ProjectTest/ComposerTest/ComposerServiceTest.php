@@ -22,11 +22,11 @@ class ComposerServiceTest extends AbstractTestCase
         $this->scriptService = $this->prophesize('Gear\Script\ScriptService');
 
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
         $this->composerEdge = $this->prophesize('Gear\Edge\ComposerEdge');

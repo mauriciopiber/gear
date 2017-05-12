@@ -10,8 +10,8 @@ use GearBase\Util\String\StringService;
 use GearBase\Util\File\FileService;
 use GearBase\Util\Dir\DirService;
 use Gear\Module;
-use Gear\Creator\TemplateService;
-use Gear\Creator\File;
+use Gear\Creator\Template\TemplateService    ;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\View\AngularService;
 
 /**

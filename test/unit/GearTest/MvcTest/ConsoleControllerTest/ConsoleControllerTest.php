@@ -29,11 +29,11 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->string = new \GearBase\Util\String\StringService();
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/console';
 
@@ -44,7 +44,7 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->array = new \Gear\Util\Vector\ArrayService();
 
-        $this->injector = new \Gear\Creator\File\Injector($this->array);
+        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
         $this->controller->setInjector($this->injector);
         $this->controller->setArrayService($this->array);

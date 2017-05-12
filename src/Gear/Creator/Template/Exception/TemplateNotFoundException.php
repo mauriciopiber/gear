@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Gear\Creator\Exception;
+namespace Gear\Creator\Template\Exception;
 
 use Gear\Exception\RuntimeException;
 

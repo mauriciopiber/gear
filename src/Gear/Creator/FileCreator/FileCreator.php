@@ -1,12 +1,16 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Creator\FileCreator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Model\ViewModel;
-use Gear\Creator\TemplateServiceTrait;
+use Gear\Creator\Template\TemplateServiceTrait;
 use GearBase\Util\File\FileServiceTrait;
+use Gear\Creator\FileCreator\Exception\ViewNotFound;
+use Gear\Exception\FileCreator\FileNameNotFoundException;
+use Gear\Exception\FileCreator\LocationNotFoundException;
+use Exception;
 
-class File
+class FileCreator
 {
     use TemplateServiceTrait;
 
@@ -40,7 +44,7 @@ class File
     public function render()
     {
         if (! $this->view) {
-            throw new \Gear\Creator\FileCreator\Exception\ViewNotFound();
+            throw new ViewNotFound();
         }
 
         if (! $this->options) {
@@ -48,11 +52,11 @@ class File
         }
 
         if (! $this->fileName) {
-            throw new \Gear\Exception\FileCreator\FileNameNotFoundException();
+            throw new FileNameNotFoundException();
         }
 
         if (! $this->location) {
-            throw new \Gear\Exception\FileCreator\LocationNotFoundException();
+            throw new LocationNotFoundException();
         }
 
         $view = $this->renderViewModel($this->getRenderView());
@@ -127,8 +131,6 @@ class File
         return $viewModel;
     }
 
-
-
     public function createFileFromText($content, $name, $location)
     {
         return $this->getFileService()->factory($location, $name, $content);
@@ -136,22 +138,13 @@ class File
 
     public function createFileFromCopy($templateName, $name, $location)
     {
-
         $renderer = $this->getTemplateService()->getRenderer();
-
-
 
         $from = $renderer->resolver($templateName);
 
         if (!$from) {
-            throw new \Exception(sprintf('Template Not Found: %s', $templateName));
+            throw new Exception(sprintf('Template Not Found: %s', $templateName));
         }
-
-
-
-        /*   $config = $this->getServiceLocator()->get('config');
-
-        $from = $config['view_manager'***REMOVED***['template_map'***REMOVED***[$templateName***REMOVED***; */
 
         $tolocation = $location.'/'.$name;
 

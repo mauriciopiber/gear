@@ -47,7 +47,7 @@ class FilterServiceTest extends AbstractTestCase
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         //injector
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
         $this->filter = new \Gear\Mvc\Filter\FilterService();
 

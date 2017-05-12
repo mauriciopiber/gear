@@ -58,8 +58,8 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     {
         return $this->get<?php echo $this->repository;?>()->selectOneBy($data);
     }
-
 <?php echo $this->selectviewbyid;?>
+
     /**
      * Select All Rows from <?php echo $this->tableLabel;?> table.
      *
@@ -167,6 +167,6 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
         return $repository->extract($data);
     }
 
-<?php echo $this->functions;?>
 <?php echo $this->selectbyid;?>
+<?php echo $this->functions;?>
 }

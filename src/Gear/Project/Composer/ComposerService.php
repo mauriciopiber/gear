@@ -2,7 +2,7 @@
 namespace Gear\Project\Composer;
 
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Edge\ComposerEdgeTrait;
 use Gear\Project\Project;

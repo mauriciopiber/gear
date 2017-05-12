@@ -1,9 +1,10 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Creator\FileCreator;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\Template\TemplateService;
 
 class FileCreatorFactory implements FactoryInterface
 {
@@ -12,7 +13,7 @@ class FileCreatorFactory implements FactoryInterface
         $serviceManager = $controllerManager->get('ServiceManager');
 
         $file = $serviceManager->get('fileService');
-        $template = $serviceManager->get('Gear\Creator\Template');
+        $template = $serviceManager->get(TemplateService::class);
 
         return new File($file, $template);
     }

@@ -11,13 +11,6 @@ use Gear\Module\Docs\DocsTrait;
 class DocsTraitTest extends AbstractTestCase
 {
     use DocsTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDocs()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
     public function testSet()
     {
         $mocking = $this->prophesize('Gear\Module\Docs\Docs')->reveal();

@@ -36,10 +36,10 @@ class RepositoryTestServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
         $this->repository->setStringService($this->string);
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
         $this->repository->setFileCreator($this->fileCreator);
 
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();

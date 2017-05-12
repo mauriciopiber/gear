@@ -31,12 +31,12 @@ class FactoryServiceTest extends AbstractTestCase
 
         $this->template = $this->baseDir.'/../../test/template/module/mvc/factory';
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
         $fileService    = new \GearBase\Util\File\FileService();
         $this->string  = new \GearBase\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $code = new \Gear\Creator\Code();
         $code->setModule($this->module->reveal());

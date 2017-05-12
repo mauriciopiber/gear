@@ -32,10 +32,10 @@ class SearchServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
 
         //file-render
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/search';
@@ -52,7 +52,7 @@ class SearchServiceTest extends AbstractTestCase
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         //injector
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
         $this->search = new \Gear\Mvc\Search\SearchService();
 

@@ -17,6 +17,7 @@ use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
 use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
+use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
@@ -30,6 +31,8 @@ class SrcService extends AbstractJsonService
     protected $src;
 
     use ServiceManagerTrait;
+
+    use FactoryServiceTrait;
 
     use FormServiceTrait;
 

@@ -8,6 +8,11 @@ use GearJson\Controller\Controller;
 
 class FactoryTestService extends AbstractMvcTest
 {
+    public function createTest($src)
+    {
+        //$this->createFactoryTest($src);
+    }
+
     public function createFactoryTest($src, $location)
     {
         if ($src instanceof Controller) {

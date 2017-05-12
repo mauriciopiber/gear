@@ -1,18 +1,19 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Creator\Template;
 
 use Zend\View\Model\ViewModel;
-use Gear\Service\AbstractService;
 
-class TemplateService extends AbstractService
+class TemplateService
 {
     protected $renderer;
 
+    public function __construct($renderer = null)
+    {
+        $this->renderer = $renderer;
+    }
+
     public function getRenderer()
     {
-        if (!isset($this->renderer)) {
-            $this->renderer = $this->getServiceLocator()->get('viewmanager')->getRenderer();
-        }
         return $this->renderer;
     }
 
@@ -27,8 +28,6 @@ class TemplateService extends AbstractService
         $view->setTemplate($templateName);
 
         $phpRenderer = $this->getRenderer();
-
-
 
         return $phpRenderer->render($view);
     }

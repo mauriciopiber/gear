@@ -2,7 +2,7 @@
 namespace GearTest\CreatorTest\FileTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Creator\File\InjectorTrait;
+use Gear\Creator\Injector\InjectorTrait;
 
 /**
  * @group Service

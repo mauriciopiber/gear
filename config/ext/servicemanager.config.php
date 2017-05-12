@@ -33,9 +33,11 @@
         'Gear\Integration\Util\Columns\Columns' => 'Gear\Integration\Util\Columns\Columns',
         'Gear\Mvc\Util\Glob\GlobService' => 'Gear\Mvc\Util\Glob\GlobService',
         'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService',
-        'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject'
+        'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject',
+
     ***REMOVED***,
     'factories' => [
+        \Gear\Creator\Template\TemplateService::class => \Gear\Creator\Template\TemplateServiceFactory::class,
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
@@ -67,7 +69,7 @@
         'Gear\Mvc\Spec\UnitTest\UnitTest' => 'Gear\Mvc\Spec\UnitTest\UnitTestFactory',
         'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfigFactory',
         'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoloadFactory',
-        'Gear\Creator\File\Injector' => 'Gear\Creator\File\InjectorFactory',
+        'Gear\Creator\Injector\Injector' => 'Gear\Creator\Injector\InjectorFactory',
         'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
         'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory',
         'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',

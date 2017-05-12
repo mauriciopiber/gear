@@ -1,7 +1,8 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Creator\Template;
 
-use Gear\Creator\TemplateService;
+use Gear\Creator\Template\TemplateService;
+use Gear\Creator\Template\Exception\TemplateNotFoundException;
 
 trait TemplateServiceTrait
 {
@@ -10,7 +11,7 @@ trait TemplateServiceTrait
     public function getTemplateService()
     {
         if (!isset($this->templateService)) {
-            $this->templateService = $this->getServiceLocator()->get('Gear\Creator\Template');
+            $this->templateService = $this->getServiceLocator()->get(TemplateService::class);
         }
         return $this->templateService;
     }
@@ -24,7 +25,7 @@ trait TemplateServiceTrait
     public function getTemplate($template)
     {
         if (!isset($this->templates[$template***REMOVED***)) {
-            throw new \Gear\Creator\Exception\TemplateNotFoundException();
+            throw new TemplateNotFoundException();
         }
 
         return $this->templates[$template***REMOVED***;

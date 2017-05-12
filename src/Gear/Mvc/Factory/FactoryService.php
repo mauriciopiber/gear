@@ -17,6 +17,7 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use Gear\Mvc\Factory\Exception\WrongType;
+use Gear\Mvc\Factory\FactoryTestServiceTrait;
 
 class FactoryService extends AbstractMvc
 {
@@ -26,16 +27,19 @@ class FactoryService extends AbstractMvc
 
     use SchemaServiceTrait;
 
+    use FactoryTestServiceTrait;
+
     public function create($src)
     {
-        var_dump($src);
+        $this->createFactory($src);
+        $this->getFactoryTestService()->createTest($src);
     }
 
 
     public function getOptionsTemplateSrc(Src $src)
     {
         $namespace = $this->getCode()->getNamespace($src);
-        $use = $this->getCode()->getUseFactory($controller);
+        $use = $this->getCode()->getUseFactory($src);
 
         $options = [
             'className'                => $this->str('class', $src->getName()),
@@ -100,14 +104,14 @@ class FactoryService extends AbstractMvc
     }
 
 
-    public function createFactory($data, $location)
+    public function createFactory($data)
     {
         if ($data instanceof Controller) {
-            return $this->createFactoryController($data, $location);
+            return $this->createFactoryController($data);
         }
 
         if ($data instanceof Src) {
-            return $this->createFactorySrc($data, $location);
+            return $this->createFactorySrc($data);
         }
     }
 
@@ -119,7 +123,7 @@ class FactoryService extends AbstractMvc
      *
      * @return string
      */
-    public function createFactoryController(Controller $controller, $location = null)
+    public function createFactoryController(Controller $controller)
     {
         $file = $this->getFileCreator();
 
@@ -159,7 +163,7 @@ class FactoryService extends AbstractMvc
      *
      * @return string
      */
-    public function createFactorySrc(Src $src, $location = null)
+    public function createFactorySrc(Src $src)
     {
         $file = $this->getFileCreator();
 

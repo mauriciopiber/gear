@@ -11,7 +11,7 @@ use \Gear\Module;
 use Gear\Mvc\Service\ServiceService;
 use GearBase\Util\String\StringService;
 use Gear\Creator\Code;
-use Gear\Creator\File\Injector;
+use Gear\Creator\Injector\Injector;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use GearJson\Db\Db;
