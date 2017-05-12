@@ -4,6 +4,8 @@ namespace MyModule\Service;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Service\MyService;
+use MyModule\Repository\DependencyOne;
+use MyModule\Service\DependencyTwo;
 
 /**
  * PHP Version 5
@@ -20,13 +22,14 @@ class MyServiceFactory implements FactoryInterface
      * Create MyService
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     *
      * @return MyService
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MyService(
-            $serviceLocator->get('MyModule\Repository\DependencyOne'),
-            $serviceLocator->get('MyModule\Service\DependencyTwo')
+            $serviceLocator->get(DependencyOne::class),
+            $serviceLocator->get(DependencyTwo::class)
         );
         unset($serviceLocator);
         return $factory;

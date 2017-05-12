@@ -4,6 +4,7 @@ namespace MyModule\FastestNamespace;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\FastestNamespace\MySrcWithSpecialDependency;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * PHP Version 5
@@ -20,14 +21,15 @@ class MySrcWithSpecialDependencyFactory implements FactoryInterface
      * Create MySrcWithSpecialDependency
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
-     * @return \MyModule\FastestNamespace\MySrcWithSpecialDependency
+     *
+     * @return MySrcWithSpecialDependency
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MySrcWithSpecialDependency(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('console'),
-            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+            $serviceLocator->get(Adapter::class)
         );
         unset($serviceLocator);
         return $factory;

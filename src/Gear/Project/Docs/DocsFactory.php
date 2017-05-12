@@ -4,6 +4,7 @@ namespace Gear\Project\Docs;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Project\Docs\Docs;
+use Gear\Creator\FileCreator\FileCreator;
 
 class DocsFactory implements FactoryInterface
 {
@@ -12,7 +13,7 @@ class DocsFactory implements FactoryInterface
         $factory = new Docs(
             $serviceLocator->get('config'),
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('Gear\FileCreator')
+            $serviceLocator->get(FileCreator::class)
         );
         unset($serviceLocator);
         return $factory;

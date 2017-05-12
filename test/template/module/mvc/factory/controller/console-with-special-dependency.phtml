@@ -4,6 +4,7 @@ namespace MyModule\ConsolistsNamespace;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\ConsolistsNamespace\SpecialDependencyConsole;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * PHP Version 5
@@ -20,6 +21,7 @@ class SpecialDependencyConsoleFactory implements FactoryInterface
      * Create SpecialDependencyConsole
      *
      * @param ServiceLocatorInterface $controllerManager Controller Manager
+     *
      * @return SpecialDependencyConsole
      */
     public function createService(ServiceLocatorInterface $controllerManager)
@@ -29,7 +31,7 @@ class SpecialDependencyConsoleFactory implements FactoryInterface
         $factory = new SpecialDependencyConsole(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('console'),
-            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+            $serviceLocator->get(Adapter::class)
         );
         unset($serviceLocator);
         return $factory;

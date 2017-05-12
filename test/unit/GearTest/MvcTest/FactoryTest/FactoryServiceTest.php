@@ -38,18 +38,18 @@ class FactoryServiceTest extends AbstractTestCase
         $this->string  = new \GearBase\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
-        $code = new \Gear\Creator\Code();
+        $code = new \Gear\Creator\Codes\Code\FactoryCode\FactoryCode();
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
         $code->setDirService(new \GearBase\Util\Dir\DirService());
-        $constructorParams = new ConstructorParams($this->string);
-        $code->setConstructorParams($constructorParams);
+        //$constructorParams = new ConstructorParams($this->string);
+        //$code->setConstructorParams($constructorParams);
 
         $this->factory = new \Gear\Mvc\Factory\FactoryService();
         $this->factory->setStringService($this->string);
         $this->factory->setFileCreator($fileCreator);
         $this->factory->setModule($this->module->reveal());
-        $this->factory->setCode($code);
+        $this->factory->setFactoryCode($code);
 
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());

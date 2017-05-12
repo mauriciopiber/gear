@@ -3,13 +3,14 @@ namespace Gear\Module;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Gear\Creator\FileCreator\FileCreator;
 
 class ModuleServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new \Gear\Module\ModuleService(
-            $serviceLocator->get('Gear\FileCreator'),
+            $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('moduleStructure'),
             $serviceLocator->get('Gear\Module\Docs\Docs'),

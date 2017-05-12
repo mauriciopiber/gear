@@ -5,9 +5,9 @@ use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\App\App;
-use Gear\Creator\Codes\AbstractCodeBase;
+use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
 
-class CodeTest extends AbstractCodeBase
+class CodeTest extends AbstractCodeTest
 {
 
     public function extractServiceManagerFromDependency($dependency, $i)
@@ -242,93 +242,6 @@ EOS;
         }
 
         return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
-    }
-
-    public function getNamespace($data)
-    {
-        if (!empty($data->getNamespace())) {
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $implode = implode('\\', $psr);
-
-            $namespaceFile = $implode;
-
-            return $namespaceFile;
-        }
-
-        if ($data instanceof Src) {
-            if ($data->getType() == 'SearchForm') {
-                return 'FormTest\SearchTest';
-            }
-            return $data->getType().'Test';
-        } else {
-            return 'ControllerTest';
-        }
-    }
-
-    public function getLocationPath($data)
-    {
-        if ($data instanceof Src || $data instanceof Controller) {
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item.'Test';
-            }
-
-            $location = $this->getModule()->getTestUnitModuleFolder().'/'.implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getTestUnitModuleFolder());
-            $this->getDirService()->mkDir($location);
-
-            return $location;
-        }
-
-
-        if ($data instanceof App) {
-            $psr = explode('\\', $data->getNamespace());
-
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $this->str('var', $item).'Spec';
-            }
-
-            $location = $this->getModule()->getPublicJsSpecUnitFolder().'/'.implode('/', $psr);
-
-            $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getPublicJsSpecUnitFolder());
-            $this->getDirService()->mkDir($location);
-
-            echo $location."\n";
-
-            return $location;
-        }
-    }
-
-
-    public function getLocation($data)
-    {
-        if (!empty($data->getNamespace())) {
-            $location = $this->getLocationPath($data);
-            return $location;
-        }
-
-        if ($data instanceof Controller) {
-            $type = 'Controller';
-        } else {
-            $type = $this->str('class', $data->getType());
-        }
-
-        if ($data instanceof App) {
-            $type = 'App'.$type.'Spec';
-        } else {
-            $type .= 'Test';
-        }
-
-        //var_dump($type);
-        //var_dump($this->getModule()->map($type));
-        return $this->getModule()->map($type);
     }
 
     /**

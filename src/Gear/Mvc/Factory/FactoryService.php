@@ -18,10 +18,13 @@ use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use Gear\Mvc\Factory\Exception\WrongType;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
+use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
 
 class FactoryService extends AbstractMvc
 {
     static protected $defaultFolder = null;
+
+    use FactoryCodeTrait;
 
     use ServiceManagerTrait;
 
@@ -38,18 +41,18 @@ class FactoryService extends AbstractMvc
 
     public function getOptionsTemplateSrc(Src $src)
     {
-        $namespace = $this->getCode()->getNamespace($src);
-        $use = $this->getCode()->getUseFactory($src);
+        $namespace = $this->getFactoryCode()->getNamespace($src);
+        $use = $this->getFactoryCode()->getUse($src);
 
         $options = [
             'className'                => $this->str('class', $src->getName()),
             'namespace'                => $namespace,
             'use'                      => $use,
-            'classDocs'                => $this->getCode()->getClassDocs($src, 'Factory')
+            'classDocs'                => $this->getFactoryCode()->getClassDocs($src, 'Factory')
         ***REMOVED***;
 
         if (!empty($src->getDependency())) {
-            $options['dependency'***REMOVED*** = $this->getCode()->getServiceLocatorFactory($src);
+            $options['dependency'***REMOVED*** = $this->getFactoryCode()->getServiceLocatorFactory($src);
         }
 
         return $options;
@@ -61,19 +64,28 @@ class FactoryService extends AbstractMvc
             throw new WrongType('Must be "Form" Type, tried to use '.$src->getType());
         }
 
-        $filter = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
-        $form =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
-        $entity =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Entity');
+        $filterSrc = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
+        $filter = $this->getServiceManager()->getServiceName($filterSrc);
+        $filterName = $this->getFactoryCode()->resolveName($filter);
+
+        $formSrc =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Form');
+        $form = $this->getServiceManager()->getServiceName($formSrc);
+
+        $entitySrc =  $this->getSchemaService()->getSrcByDb($src->getDb(), 'Entity');
+        $entity = $this->getServiceManager()->getServiceName($entitySrc);
+        $entityName = $this->getFactoryCode()->resolveName($entity);
 
         $var = $this->str('var-lenght', 'Id'.$src->getDb()->getTable());
 
         return [
-            'package'     => $this->getCode()->getClassDocsPackage($src),
-            'namespace'   => $this->getCode()->getNamespace($src),
+            'package'     => $this->getFactoryCode()->getClassDocsPackage($src),
+            'namespace'   => $this->getFactoryCode()->getNamespace($src),
             'class'       => $src->getName(),
-            'form'        => $this->getServiceManager()->getServiceName($form),
-            'filter'      => $this->getServiceManager()->getServiceName($filter),
-            'entity'      => $this->getServiceManager()->getServiceName($entity),
+            'filterName'  => $filterName,
+            'entityName'  => $entityName,
+            'form'        => $form,
+            'filter'      => $filter,
+            'entity'      => $entity,
             'var'         => $var,
             'setId'       => $this->getFileCreator()->renderPartial(
                 'template/module/mvc/factory/form-filter-set-id.phtml',
@@ -91,8 +103,8 @@ class FactoryService extends AbstractMvc
         $var = $this->str('var-lenght', 'Id'.$src->getName());
 
         return [
-            'package'     => $this->getCode()->getClassDocsPackage($src),
-            'namespace'   => $this->getCode()->getNamespace($src),
+            'package'     => $this->getFactoryCode()->getClassDocsPackage($src),
+            'namespace'   => $this->getFactoryCode()->getNamespace($src),
             'class'       => $src->getName(),
             'form'        => $this->getServiceManager()->getServiceName($src),
             'var'         => $var,
@@ -127,23 +139,23 @@ class FactoryService extends AbstractMvc
     {
         $file = $this->getFileCreator();
 
-        $location = $this->getCode()->getLocation($controller);
+        $location = $this->getFactoryCode()->getLocation($controller);
 
         $template = 'template/module/mvc/factory/controller.phtml';
 
-        $namespace = $this->getCode()->getNamespace($controller);
+        $namespace = $this->getFactoryCode()->getNamespace($controller);
 
-        $use = $this->getCode()->getUseFactory($controller);
+        $use = $this->getFactoryCode()->getUse($controller);
 
         $options = [
             'className'                => $this->str('class', $controller->getName()),
             'namespace'                => $namespace,
             'use'                      => $use,
-            'classDocs'                => $this->getCode()->getClassDocs($controller, 'Factory')
+            'classDocs'                => $this->getFactoryCode()->getClassDocs($controller, 'Factory')
         ***REMOVED***;
 
         if (!empty($controller->getDependency())) {
-            $options['dependency'***REMOVED*** = $this->getCode()->getServiceLocatorFactory($controller);
+            $options['dependency'***REMOVED*** = $this->getFactoryCode()->getServiceLocatorFactory($controller);
         }
 
 
@@ -167,7 +179,7 @@ class FactoryService extends AbstractMvc
     {
         $file = $this->getFileCreator();
 
-        $location = $this->getCode()->getLocation($src);
+        $location = $this->getFactoryCode()->getLocation($src);
 
         $template = sprintf(
             'template/module/mvc/factory/%s.phtml',

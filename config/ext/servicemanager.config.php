@@ -34,10 +34,13 @@
         'Gear\Mvc\Util\Glob\GlobService' => 'Gear\Mvc\Util\Glob\GlobService',
         'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService',
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject',
-
+        'Gear\Creator\Codes\Code\AbstractCode' => 'Gear\Creator\Codes\Code\AbstractCode',
+        'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
+        'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
+        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest'
     ***REMOVED***,
     'factories' => [
-        \Gear\Creator\Template\TemplateService::class => \Gear\Creator\Template\TemplateServiceFactory::class,
+        'Gear\Creator\Template\TemplateService' => 'Gear\Creator\Template\TemplateServiceFactory',
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',

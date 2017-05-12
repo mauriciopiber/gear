@@ -1265,6 +1265,62 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "AbstractCode",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Creator\\Codes\\Code",
+                "extends": "Creator\\Codes\\AbstractCodeBase",
+                "abstract": true,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "FactoryCode",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Creator\\Codes\\Code\\FactoryCode",
+                "extends": "Creator\\Codes\\Code\\AbstractCode",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "AbstractCodeTest",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Creator\\Codes\\CodeTest",
+                "extends": "Creator\\Codes\\AbstractCodeBase",
+                "abstract": true,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "FactoryCodeTest",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Creator\\Codes\\CodeTest\\FactoryCode",
+                "extends": "Creator\\Codes\\CodeTest\\AbstractCodeTest",
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

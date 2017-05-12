@@ -2,7 +2,8 @@ namespace <?php echo $this->namespace;?>;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-<?php echo $this->use; ?>
+use <?php echo $this->namespace;?>\<?php echo $this->className;?>;
+<?php echo $this->use;?>
 
 <?php echo $this->classDocs;?>
 class <?php echo $this->className;?>Factory implements FactoryInterface
