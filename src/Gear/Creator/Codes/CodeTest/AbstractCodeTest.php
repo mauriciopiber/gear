@@ -19,6 +19,67 @@ use GearJson\Db\Db;
 abstract class AbstractCodeTest extends AbstractCodeBase
 {
 
+    public function getTestNamespace($data)
+    {
+        if (!empty($data->getNamespace())) {
+            $namespace = $data->getNamespace();
+            return $namespace;
+        }
+
+        if ($data instanceof Controller) {
+            return 'Controller';
+        }
+
+        if ($data->getType() == 'SearchForm') {
+            return 'Form\Search';
+        }
+
+        if ($data->getType() == 'ControllerPlugin') {
+            return 'Controller\Plugin';
+        }
+
+        if ($data->getType() == 'ViewHelper') {
+            //var_dump($data);
+            return 'View\Helper';
+        }
+
+        return str_replace('Test', '', $data->getType());
+    }
+
+    /**
+     * Retorna o nome completo da classe que será utilizada.
+     * no formato [Module***REMOVED***\[Namespace***REMOVED***\[Name***REMOVED***
+     * Essa função deve ser transferida para abstractCode, serve para retornar todo caminho para uma classe.
+     */
+    public function getFullClassName($data)
+    {
+        if (!empty($data->getNamespace())) {
+            $psr = explode('\\', $data->getNamespace());
+
+            foreach ($psr as $i => $item) {
+                $psr[$i***REMOVED*** = $item;
+            }
+
+            $implode = implode('\\', $psr);
+
+            $namespace = $implode;
+        } else {
+            if ($data instanceof Src) {
+                if ($data->getType() == 'SearchForm') {
+                    $namespace = 'Form\Search';
+                } elseif ($data->getType() == 'ViewHelper') {
+                    $namespace = 'View\Helper';
+                } else {
+                    $namespace = $data->getType();
+                }
+            } else {
+                $namespace = 'Controller';
+            }
+        }
+
+        return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
+    }
+
     public function getLocationPath($data)
     {
         if ($data instanceof Src || $data instanceof Controller) {

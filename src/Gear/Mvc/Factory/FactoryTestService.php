@@ -5,9 +5,12 @@ use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 use GearJson\Controller\Controller;
+use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestTrait;
 
 class FactoryTestService extends AbstractMvcTest
 {
+    use FactoryCodeTestTrait;
+
     public function createTest($src)
     {
         //$this->createFactoryTest($src);
@@ -26,13 +29,14 @@ class FactoryTestService extends AbstractMvcTest
         //var_dump($src);
 
         $options = [
+            //'use'       => $this->getFactoryCodeTest()->getUse($src),
             'basename' => str_replace($src->getType(), '', $src->getName()),
             'basenameUrl' => $this->str('url', str_replace($src->getType(), '', $src->getName())),
             'module'    => $this->getModule()->getModuleName(),
             'moduleUrl'    => $this->str('url', $this->getModule()->getModuleName()),
-            'namespace' => $this->getCodeTest()->getNamespace($src),
-            'testNamespace' => $this->getCodeTest()->getTestNamespace($src),
-            'fullclass' => $this->getCodeTest()->getFullClassName($src),
+            'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
+            'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),
+            'fullclass' => $this->getFactoryCodeTest()->getFullClassName($src),
             'class' => $this->str('class', $name),
             'group' => $src->getType()
         ***REMOVED***;
@@ -46,7 +50,7 @@ class FactoryTestService extends AbstractMvcTest
             $options['form'***REMOVED*** = $this->getServiceManager()->getServiceName($form);
         }
 
-        $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);
+        $options['dependency'***REMOVED*** = $this->getFactoryCodeTest()->getServiceManagerDependencies($src);
 
         $trait = $this->getFileCreator();
         $trait->setTemplate(sprintf('template/module/mvc/factory-test/%s.phtml', $template));
@@ -63,15 +67,16 @@ class FactoryTestService extends AbstractMvcTest
 
 
         $options = [
+            //'use'       => $this->getFactoryCodeTest()->getUse($src),
             'module'    => $this->getModule()->getModuleName(),
-            'namespace' => $this->getCodeTest()->getNamespace($src),
-            'fullclass' => $this->getCodeTest()->getFullClassName($src),
-            'testNamespace' => $this->getCodeTest()->getTestNamespace($src),
+            'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
+            'fullclass' => $this->getFactoryCodeTest()->getFullClassName($src),
+            'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),
             'class' => $this->str('class', $name),
             'group' => 'Controller'
         ***REMOVED***;
 
-        $options['dependency'***REMOVED*** = $this->getCodeTest()->getServiceManagerDependencies($src);
+        $options['dependency'***REMOVED*** = $this->getFactoryCodeTest()->getServiceManagerDependencies($src);
 
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/factory-test/controller/controller-test.phtml');

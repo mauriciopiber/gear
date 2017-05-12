@@ -37,6 +37,19 @@ abstract class AbstractCodeBase implements
     use StringServiceTrait;
     use ModuleAwareTrait;
 
+    const USE = 'use %s;';
+
+    public function printUse($uses)
+    {
+        $html = '';
+
+        foreach ($uses as $use) {
+            $html .= sprintf(self::USE, $use).PHP_EOL;
+        }
+
+        return $html;
+    }
+
     /**
     public function resolveAliase($item)
     {

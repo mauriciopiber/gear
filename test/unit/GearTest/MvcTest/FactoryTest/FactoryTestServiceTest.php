@@ -36,7 +36,7 @@ class FactoryTestServiceTest extends AbstractTestCase
         $stringService  = new \GearBase\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
-        $codeTest = new \Gear\Creator\CodeTest();
+        $codeTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
         $codeTest->setModule($this->module->reveal());
         $codeTest->setDirService(new \GearBase\Util\Dir\DirService());
 
@@ -44,7 +44,7 @@ class FactoryTestServiceTest extends AbstractTestCase
         $this->factoryTest->setStringService($stringService);
         $this->factoryTest->setFileCreator($fileCreator);
         $this->factoryTest->setModule($this->module->reveal());
-        $this->factoryTest->setCodeTest($codeTest);
+        $this->factoryTest->setFactoryCodeTest($codeTest);
 
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());
@@ -147,12 +147,5 @@ class FactoryTestServiceTest extends AbstractTestCase
             file_get_contents($this->template.'/db/'.$template.'.phtml'),
             file_get_contents($file)
         );
-    }
-
-    public function testDependency()
-    {
-        $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->factoryTest->getModule());
-        $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->factoryTest->getFileCreator());
-        $this->assertInstanceOf('Gear\Creator\CodeTest', $this->factoryTest->getCodeTest());
     }
 }

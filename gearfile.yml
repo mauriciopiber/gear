@@ -25,27 +25,9 @@ src:
 #    namespace: Creator\Template
 
   0:
-    name: AbstractCode
+    name: TestService
     type: Service
-    namespace: Creator\Codes\Code
-    extends: Creator\Codes\AbstractCodeBase
-    abstract: true
-  1:
-    name: FactoryCode
-    type: Service
-    namespace: Creator\Codes\Code\FactoryCode
-    extends: Creator\Codes\Code\AbstractCode
-  2:
-    name: AbstractCodeTest
-    type: Service
-    namespace: Creator\Codes\CodeTest
-    extends: Creator\Codes\AbstractCodeBase
-    abstract: true
-  3:
-    name: FactoryCodeTest
-    type: Service
-    namespace: Creator\Codes\CodeTest\FactoryCode
-    extends: Creator\Codes\CodeTest\AbstractCodeTest            
+           
 #  2:
 #    name: InterfaceCode
 #    type: Service

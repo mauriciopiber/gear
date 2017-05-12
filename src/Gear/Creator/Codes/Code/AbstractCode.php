@@ -20,19 +20,6 @@ use GearJson\Db\Db;
  */
 abstract class AbstractCode extends AbstractCodeBase
 {
-    const USE = 'use %s;';
-
-    public function printUse($uses)
-    {
-        $html = '';
-
-        foreach ($uses as $use) {
-            $html .= sprintf(self::USE, $use).PHP_EOL;
-        }
-
-        return $html;
-    }
-
     public function getFileDocs($src, $type = null)
     {
 
