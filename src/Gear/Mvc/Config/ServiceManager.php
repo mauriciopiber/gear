@@ -5,7 +5,7 @@ use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Src\Src;
 
-class ServiceManager extends AbstractJsonService implements ServiceManagerInterface
+class ServiceManager extends AbstractJsonService
 {
     use SchemaServiceTrait;
 
@@ -28,22 +28,6 @@ class ServiceManager extends AbstractJsonService implements ServiceManagerInterf
             $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
             $this->file
         );
-    }
-
-    public function mergeFromSrc(Src $src)
-    {
-        $this->src = $src;
-        $this->triggerMergeServiceManager();
-    }
-
-    public function get(Src $src)
-    {
-        throw new \Exception('Implementar');
-    }
-
-    public function delete(Src $src)
-    {
-        throw new \Exception('Implementar');
     }
 
     /**

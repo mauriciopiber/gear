@@ -23,6 +23,9 @@ trait FactoryCodeTestTrait
      */
     public function getFactoryCodeTest()
     {
+        if (!isset($this->factoryCodeTest)) {
+            $this->factoryCodeTest = $this->getServiceLocator()->get(FactoryCodeTest::class);
+        }
         return $this->factoryCodeTest;
     }
 

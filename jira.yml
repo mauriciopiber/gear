@@ -6,7 +6,6 @@ versions:
 issues:
   1:
     summary: "Adicionar uma regra de validação pra não poder adicionar invokables com dependência."
-    description: "Migrar código ConsoleValidation de GearDeploy para GearBase"
     type: Story
     project: GB
     estimate: 1h
@@ -22,3 +21,6 @@ issues:
     project: GS
   5:
     summary: "Criar classe abstrada para Migrations com as pré opções para usar para desenvolvimento direto"
+
+    
+# Remover $this->getServiceManager()->getService(Name|Callable)
