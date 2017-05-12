@@ -23,6 +23,9 @@ trait FactoryCodeTrait
      */
     public function getFactoryCode()
     {
+        if (!isset($this->factoryCode)) {
+            $this->factoryCode = $this->getServiceLocator()->get('Gear\Creator\Codes\Code\FactoryCode\FactoryCode');
+        }
         return $this->factoryCode;
     }
 
