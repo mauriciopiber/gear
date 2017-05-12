@@ -10,9 +10,9 @@ use GearBase\Util\String\StringService;
 use GearBase\Util\File\FileService;
 use Gear\Module;
 use Gear\Mvc\Controller\ControllerService;
-use Gear\Creator\File;
-use Gear\Creator\TemplateService;
-use Gear\Creator\File\Injector;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\Template\TemplateService;
+use Gear\Creator\Injector\Injector;
 use Gear\Creator\ControllerDependency;
 use Gear\Creator\Code;
 use Gear\Util\Vector\ArrayService;
@@ -67,7 +67,7 @@ class ControllerServiceTest extends TestCase
 
         $template->setRenderer($view);
         $fileService    = new FileService();
-        $this->fileCreator    = new File($fileService, $template);
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->template =  (new Module())->getLocation().'/../../test/template/module/mvc/controller';
 

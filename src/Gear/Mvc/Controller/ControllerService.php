@@ -117,7 +117,7 @@ class ControllerService extends AbstractMvc implements
 
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
 
-        $location = $this->getCode()->getLocation($this->controller);
+
 
         //$this->dependency = $this->getControllerDependency()->setController($this->controller);
         $this->tableName = ($this->str('class', $db->getTable()));
@@ -214,8 +214,8 @@ class ControllerService extends AbstractMvc implements
             );
         }
 
-        $dependency = $this->controller->getDependency();
         if ($this->hasImage || $this->hasTableImage) {
+            $dependency = $this->controller->getDependency();
             $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
             $this->controller->setDependency($dependency);
         }
@@ -223,12 +223,9 @@ class ControllerService extends AbstractMvc implements
         /**
          * @TODO 3 - USE e ATTRIBUTE
          */
-        $this->use .= $this->getCode()->getDependencyUseNamespace($this->controller, false);
-        $this->attribute .= $this->getCode()->getDependencyUseAttribute($this->controller, false);
+        $this->attribute .= $this->getCode()->getUseAttribute($this->controller);
 
-        $this->use .= $this->getCode()->getUseConstructor($this->controller);
-
-        $this->getControllerTestService()->introspectFromTable($this->db);
+        $this->use .= $this->getCode()->getUse($this->controller);
 
         $options['classDocs'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/controller/db/class-phpdocs.phtml',
@@ -241,6 +238,8 @@ class ControllerService extends AbstractMvc implements
         $options['constructor'***REMOVED*** = ($this->controller->getService() == 'factories')
           ? $this->getCode()->getConstructor($this->controller)
           : '';
+
+        $location = $this->getCode()->getLocation($this->controller);
 
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
@@ -264,6 +263,8 @@ class ControllerService extends AbstractMvc implements
         if ($this->controller->getService() == 'factories') {
             $this->getFactoryService()->createFactory($this->controller, $location);
         }
+
+        $this->getControllerTestService()->introspectFromTable($this->db);
 
         return $this->file->render();
     }

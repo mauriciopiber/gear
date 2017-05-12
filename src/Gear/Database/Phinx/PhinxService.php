@@ -6,7 +6,7 @@ use Gear\Project\ProjectLocationTrait;
 use GearBase\Util\String\StringService;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Creator\File;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
 /**
  * PHP Version 5

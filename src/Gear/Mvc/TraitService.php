@@ -9,7 +9,7 @@ use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\CodeTrait;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
 class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
 {

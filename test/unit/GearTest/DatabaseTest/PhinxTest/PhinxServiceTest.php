@@ -5,9 +5,9 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Database\Phinx\PhinxService;
 use GearBase\Util\String\StringService;
 use org\bovigo\vfs\vfsStream;
-use Gear\Creator\TemplateService;
+use Gear\Creator\Template\TemplateService;
 use GearBase\Util\File\FileService;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use DateTime;
 use Zend\View\Renderer\PhpRenderer;
@@ -23,38 +23,37 @@ class PhinxServiceTest extends TestCase
     {
         parent::setUp();
 
-        
+
         //$this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         //$this->module->getPublicJsSpecEndFolder()
         //->willReturn(vfsStream::url('module/public/js/spec/e2e'))
         //->shouldBeCalled();
-        
+
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $templatePath = (new Module)->getLocation().'/../../view';
-        
+
         $resolver = new AggregateResolver();
-        
+
         $map = new TemplatePathStack(array(
             'script_paths' => array(
                 'template' => $templatePath,
             )
         ));
-        
+
         $resolver->attach($map);
-        
+
         $view = new PhpRenderer();
-        
+
         $view->setResolver($resolver);
-        
-        $template       = new TemplateService();
-        $template->setRenderer($view);
-        
+
+        $template       = new TemplateService($view);
+
         $fileService    = new FileService();
         $this->fileCreator    = new File($fileService, $template);
-        
+
         $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/spec';
-        
+
         $this->string = new StringService();
         //$this->file = new FileService();
 
@@ -62,16 +61,16 @@ class PhinxServiceTest extends TestCase
             $this->string,
             $this->fileCreator
         );
-        
+
         $this->root = vfsStream::setup('base');
-        
+
         $this->service->setProject(vfsStream::url('base'));
-        
+
         vfsStream::newDirectory('data')->at($this->root);
         vfsStream::newDirectory('data/migrations')->at($this->root);
     }
-    
-    
+
+
     public function migrationData()
     {
         return [
@@ -94,7 +93,7 @@ class PhinxServiceTest extends TestCase
             //['2017-01-01 02:15:54', 'MyssX Igration'***REMOVED***
         ***REMOVED***;
     }
-    
+
     /**
      * @dataProvider generateNameData
      */
@@ -111,7 +110,7 @@ class PhinxServiceTest extends TestCase
     {
         $this->assertEquals($class, $this->service->createClassName($input));
     }
-    
+
     /**
      * @dataProvider migrationData
      * @group fucku
@@ -119,17 +118,17 @@ class PhinxServiceTest extends TestCase
     public function testCreateMigration($module, $date, $name, $expected)
     {
         $this->service->setNow(new DateTime($date));
-        
+
         $location = $this->service->createMigration($name);
-        
+
         $this->assertFileExists($location);
-        
-        
+
+
         $expectedFile = file_get_contents(__DIR__.'/_files/'.$expected.'.phtml');
         $result = file_get_contents($location);
-        
+
         $this->assertEquals($expectedFile, $result);
-        
+
     }
 
 }

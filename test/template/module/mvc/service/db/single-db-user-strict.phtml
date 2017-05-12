@@ -184,6 +184,13 @@ class SingleDbTableService extends AbstractService
         return $repository->extract($data);
     }
 
+    /**
+     * Select by ID with Auth Validation.
+     *
+     * @param ID $idToSelect Id To Select
+     *
+     * @return SingleDbTableRepository
+     */
     public function selectById($idToSelect)
     {
         $repository = $this->getSingleDbTableRepository();

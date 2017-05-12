@@ -8,7 +8,7 @@ use Gear\Module\ModuleAwareInterface;
 use GearJson\Src\Src;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 

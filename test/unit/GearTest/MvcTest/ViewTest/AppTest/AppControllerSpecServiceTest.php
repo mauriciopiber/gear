@@ -22,11 +22,11 @@ class AppControllerSpecServiceTest extends AbstractTestCase
     {
         vfsStream::setup('module');
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

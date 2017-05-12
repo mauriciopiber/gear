@@ -19,7 +19,7 @@ use Gear\Creator\AppDependencyTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use GearJson\App\App;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
 abstract class AbstractCode implements
     FileNamespaceInterface,
@@ -32,6 +32,7 @@ abstract class AbstractCode implements
     use FileCreatorTrait;
     use ArrayServiceTrait;
     use DirServiceTrait;
+    use ServiceLocatorAwareTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleAwareTrait;

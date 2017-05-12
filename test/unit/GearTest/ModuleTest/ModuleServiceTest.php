@@ -28,12 +28,12 @@ class ModuleServiceTest extends TestCase
 
         $this->templates = $this->baseDir.'/../../test/template/module/script';
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
         $fileService    = new \GearBase\Util\File\FileService();
         $this->stringService  = new \GearBase\Util\String\StringService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->dirService = new \GearBase\Util\Dir\DirService();
         $this->stringService = new \GearBase\Util\String\StringService();

@@ -45,7 +45,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
         $this->controllerTest->setInjector($this->injector);
         $this->controllerTest->setFileCreator($this->createFileCreator());
 

@@ -6,9 +6,9 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
-use Gear\Creator\TemplateService;
+use Gear\Creator\Template\TemplateService;
 use GearBase\Util\File\FileService;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 
 
@@ -65,7 +65,7 @@ trait UtilTestTrait
             $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
 
             $fileService    = new FileService();
-            $this->fileCreator = new File($fileService, $template);
+            $this->fileCreator = new FileCreator($fileService, $template);
         }
 
         return $this->fileCreator;

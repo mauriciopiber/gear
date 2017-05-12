@@ -37,10 +37,10 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
         $this->repository->setStringService($this->string);
 
-        $template       = new \Gear\Creator\TemplateService();
+        $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
         $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\File($fileService, $template);
+        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
         $this->repository->setFileCreator($this->fileCreator);
 
         $this->dirService = new \GearBase\Util\Dir\DirService();
@@ -64,7 +64,7 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
-        $this->injector = new \Gear\Creator\File\Injector($this->arrayService);
+        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
         $this->repository->setInjector($this->injector);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');

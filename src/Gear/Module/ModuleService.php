@@ -77,7 +77,7 @@ use Gear\Mvc\Spec\UnitTest\UnitTest;
 use Gear\Mvc\Spec\UnitTest\UnitTestTrait;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Page\PageTrait;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;

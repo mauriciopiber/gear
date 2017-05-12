@@ -9,7 +9,6 @@ class Strict implements UserTypeServiceInterface
     {
 
         return <<<EOS
-
     /**
      * Select by ID with Auth Validation.
      *

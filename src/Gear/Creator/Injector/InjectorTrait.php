@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\File;
+namespace Gear\Creator\Injector;
 
-use Gear\Creator\File\InjectorFactory;
+use Gear\Creator\Injector\InjectorFactory;
 
 trait InjectorTrait
 {
@@ -10,7 +10,7 @@ trait InjectorTrait
     public function getInjector()
     {
         if (!isset($this->injector)) {
-            $name = 'Gear\Creator\File\Injector';
+            $name = 'Gear\Creator\Injector\Injector';
             $this->injector = $this->getServiceLocator()->get($name);
         }
         return $this->injector;

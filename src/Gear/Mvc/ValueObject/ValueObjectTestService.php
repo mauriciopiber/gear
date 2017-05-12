@@ -3,7 +3,7 @@ namespace Gear\Mvc\ValueObject;
 
 use Gear\Module\ModuleAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\Util\String\StringService;
 use Gear\Creator\File;

@@ -22,7 +22,7 @@ use Gear\Column\Varchar\Varchar;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Varchar\PasswordVerify;
 use Gear\Column\Varchar\UploadImage;
-use Gear\Creator\FileCreatorTrait;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Column\Exception\UnfoundReference;
 use Zend\Db\Metadata\Object\ConstraintObject;
 

@@ -12,7 +12,7 @@ use GearBase\Util\String\StringServiceTrait;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Util\Vector\ArrayServiceAwareInterface;
 use Gear\Module\ModuleAwareInterface;
-use Gear\Creator\TemplateServiceTrait;
+use Gear\Creator\Template\TemplateServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\RequestTrait;
 use Gear\Table\TableService\TableServiceTrait;

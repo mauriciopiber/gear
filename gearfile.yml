@@ -19,7 +19,23 @@ src:
 #          0: 
 #            class: GearBase\Util\String\StringService
 #            aliase: GearBase\Util\String
-  srcminor:
-    name: TemplateService
-    type: Factory
-    namespace: Creator\Template
+#  srcminor:
+#    name: TemplateService
+#    type: Factory
+#    namespace: Creator\Template
+
+  0:
+    name: ClassCode
+    type: Service
+    namespace: Creator\Code\ClassCode
+    extends: Creator\Code\AbstractCode
+  1:
+    name: FactoryCode
+    type: Service
+    namespace: Creator\Code\FactoryCode
+    extends: Creator\Code\AbstractCode    
+  2:
+    name: InterfaceCode
+    type: Service
+    namespace: Creator\Code\InterfaceCode
+    extends: Creator\Code\AbstractCode

@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Creator\File;
+namespace Gear\Creator\Injector;
 
 use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;

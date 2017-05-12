@@ -9,7 +9,7 @@ use Gear\Mvc\Factory\FactoryServiceTrait;
 use GearJson\Controller\Controller;
 use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
 use Gear\Creator\FileCreator\App\InjectTrait;
-use Gear\Creator\File\InjectorTrait;
+use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
 
 abstract class AbstractMvc extends AbstractJsonService

@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Creator\File;
+namespace Gear\Creator\Injector;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Creator\File\Injector;
+use Gear\Creator\Injector\Injector;
 
 class InjectorFactory implements FactoryInterface
 {

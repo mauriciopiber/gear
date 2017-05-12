@@ -1,13 +1,13 @@
 <?php
 namespace MyModule\Custom\CustomNamespace;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\View\Model\JsonModel;
 use MyModule\Custom\CustomNamespace\SingleDbTableServiceTrait;
 use MyModule\Custom\CustomNamespace\SingleDbTableFormTrait;
 use MyModule\Custom\CustomNamespace\SingleDbTableSearchFormTrait;
+use Zend\Mvc\Controller\AbstractActionController;
 use MyModule\Custom\CustomNamespace\SingleDbTableService;
 use MyModule\Custom\CustomNamespace\SingleDbTableForm;
 use MyModule\Custom\CustomNamespace\SingleDbTableSearchForm;
@@ -148,6 +148,11 @@ class SingleDbTableController extends AbstractActionController
         );
     }
 
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
     public function viewAction()
     {
         $idSingleDbTable = $this->getEvent()->getRouteMatch()->getParam('id', null);

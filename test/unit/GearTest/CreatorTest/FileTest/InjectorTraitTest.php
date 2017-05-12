@@ -2,7 +2,7 @@
 namespace GearTest\CreatorTest\FileTest;
 
 use GearBaseTest\AbstractTestCase;
-use Gear\Creator\File\InjectorTrait;
+use Gear\Creator\Injector\InjectorTrait;
 
 /**
  * @group Gear
@@ -15,12 +15,12 @@ class InjectorTraitTest extends AbstractTestCase
     public function testServiceLocator()
     {
         $serviceLocator = $this->getInjector();
-        $this->assertInstanceOf('Gear\Creator\File\Injector', $serviceLocator);
+        $this->assertInstanceOf('Gear\Creator\Injector\Injector', $serviceLocator);
     }
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Creator\File\Injector')->reveal();
+        $mocking = $this->prophesize('Gear\Creator\Injector\Injector')->reveal();
         $this->setInjector($mocking);
         $this->assertEquals($mocking, $this->getInjector());
     }
