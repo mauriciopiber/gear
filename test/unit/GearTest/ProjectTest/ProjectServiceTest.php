@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Project\Config\Globally;
 use Gear\Project\Config\Local;
-use Gear\Creator\Template\TemplateService    ;
+use Gear\Creator\Template\TemplateService;
 use GearBase\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\String\StringService;
@@ -28,7 +28,7 @@ class ProjectServiceTest extends AbstractTestCase
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
         $this->fileService    = new FileService();
-        $this->fileCreator    = new File($this->fileService, $template);
+        $this->fileCreator    = new FileCreator($this->fileService, $template);
 
         $this->string = new StringService();
 

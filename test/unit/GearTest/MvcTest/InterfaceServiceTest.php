@@ -38,7 +38,7 @@ class InterfaceTestServiceTest extends AbstractTestCase
 
         $fileService    = new FileService();
         $this->string  = new StringService();
-        $fileCreator    = new File($fileService, $template);
+        $fileCreator    = new FileCreator($fileService, $template);
 
         $code = new Code();
         $code->setModule($this->module->reveal());

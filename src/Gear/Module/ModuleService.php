@@ -53,7 +53,7 @@ use Gear\Module\Node\KarmaTrait;
 use Gear\Module\Node\PackageTrait;
 use Gear\Module\Node\ProtractorTrait;
 use Gear\Module\Docs\DocsTrait;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\String\StringService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Module\Docs\Docs;
@@ -149,7 +149,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     const MODULE = 2;
 
     public function __construct(
-        File $fileCreator,
+        FileCreator $fileCreator,
         StringService $stringService,
         BasicModuleStructure $module,
         Docs $docs,

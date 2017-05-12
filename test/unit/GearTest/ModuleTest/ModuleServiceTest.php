@@ -366,7 +366,7 @@ class ModuleServiceTest extends TestCase
             file_get_contents(__DIR__.'/_files/module-files-web.yml')
         );
 
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         foreach ($files['files'***REMOVED*** as $file) {
 
@@ -389,7 +389,7 @@ class ModuleServiceTest extends TestCase
         }
 
         /**
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
         $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
         $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
         $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
@@ -526,7 +526,7 @@ class ModuleServiceTest extends TestCase
             );
 
         */
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         /**
         foreach ($files['files'***REMOVED*** as $file) {
@@ -550,7 +550,7 @@ class ModuleServiceTest extends TestCase
         }
 
         /**
-         $this->fileCreator = $this->prophesize('Gear\Creator\File');
+         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
          $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
          $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
          $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
@@ -657,7 +657,7 @@ class ModuleServiceTest extends TestCase
         );
         */
 
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         /**
         foreach ($files['files'***REMOVED*** as $file) {
@@ -682,7 +682,7 @@ class ModuleServiceTest extends TestCase
         */
 
         /**
-         $this->fileCreator = $this->prophesize('Gear\Creator\File');
+         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
          $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
          $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
          $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
@@ -785,7 +785,7 @@ class ModuleServiceTest extends TestCase
             file_get_contents($files)
         );
 
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         foreach ($files['files'***REMOVED*** as $file) {
 
@@ -808,7 +808,7 @@ class ModuleServiceTest extends TestCase
         }
 
         /**
-         $this->fileCreator = $this->prophesize('Gear\Creator\File');
+         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
          $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
          $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
          $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
@@ -863,7 +863,7 @@ class ModuleServiceTest extends TestCase
 
     public function createModuleService()
     {
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         $this->moduleService = new \Gear\Module\ModuleService(
             $this->fileCreator->reveal(),
@@ -927,7 +927,7 @@ class ModuleServiceTest extends TestCase
      */
     public function testDeleteModuleNotExist()
     {
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module/fake'))->shouldBeCalled();
 
@@ -983,7 +983,7 @@ class ModuleServiceTest extends TestCase
      */
     public function testDeleteModuleFromProject()
     {
-        $this->fileCreator = $this->prophesize('Gear\Creator\File');
+        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
