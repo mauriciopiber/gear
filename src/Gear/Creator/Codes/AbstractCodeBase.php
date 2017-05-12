@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Creator\Codes;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -21,7 +21,7 @@ use GearJson\Controller\Controller;
 use GearJson\App\App;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 
-abstract class AbstractCode implements
+abstract class AbstractCodeBase implements
     FileNamespaceInterface,
     FileLocationInterface,
     ModuleAwareInterface,
