@@ -2,7 +2,10 @@
 namespace MyModuleTest\FormTest\SearchTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Form\Search\MyTableSearchFormFactory;
+use MyModule\Form\Search\MyTableSearchForm;
+use Doctrine\ORM\EntityManager;
 
 /**
  * @group MyModule
@@ -11,17 +14,17 @@ use MyModule\Form\Search\MyTableSearchFormFactory;
  */
 class MyTableSearchFormFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testMyTableSearchFormFactory()
     {
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
-        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
+        $this->entityManager = $this->prophesize(EntityManager::class);
         $this->serviceLocator->get('doctrine.entitymanager.orm_default')->willReturn($this->entityManager);
 
         $factory = new MyTableSearchFormFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('MyModule\Form\Search\MyTableSearchForm', $instance);
+        $this->assertInstanceOf(MyTableSearchForm::class, $instance);
     }
 }

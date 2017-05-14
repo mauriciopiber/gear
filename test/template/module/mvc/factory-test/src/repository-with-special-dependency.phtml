@@ -2,7 +2,12 @@
 namespace MyModuleTest\FastestNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\FastestNamespace\MySrcWithSpecialDependencyFactory;
+use MyModule\FastestNamespace\MySrcWithSpecialDependency;
+use GearBase\Util\String\StringService;
+use Zend\Console\Adapter\Posix;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group MyModule
@@ -11,26 +16,26 @@ use MyModule\FastestNamespace\MySrcWithSpecialDependencyFactory;
  */
 class MySrcWithSpecialDependencyFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testMySrcWithSpecialDependencyFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
         $this->serviceLocator->get('GearBase\Util\String')
-            ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $this->serviceLocator->get('console')
-            ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
+            ->willReturn($this->prophesize(Posix::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
-            ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
+        $this->serviceLocator->get(Adapter::class)
+            ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MySrcWithSpecialDependencyFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('MyModule\FastestNamespace\MySrcWithSpecialDependency', $instance);
+        $this->assertInstanceOf(MySrcWithSpecialDependency::class, $instance);
     }
 }

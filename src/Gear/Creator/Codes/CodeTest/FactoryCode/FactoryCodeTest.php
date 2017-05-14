@@ -16,7 +16,7 @@ class FactoryCodeTest extends AbstractCodeTest
 {
     const TEMPLATE_ALIASE = <<<EOS
         \$this->serviceLocator->get('%s')
-            ->willReturn(\$this->prophesize('%s')->reveal())
+            ->willReturn(\$this->prophesize(%s::class)->reveal())
             ->shouldBeCalled();
 EOS;
 
@@ -38,10 +38,10 @@ EOS;
         }
 
         if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
-            return $this->resolveNamespace($dependency['class'***REMOVED***);
+            return $this->resolveName($dependency['class'***REMOVED***);
         }
 
-        return $this->resolveNamespace($dependency);
+        return $this->resolveName($dependency);
     }
 
     public function getServiceManagerDependencies($src)
@@ -57,10 +57,15 @@ EOS;
         foreach ($src->getDependency() as $i => $dependency) {
             $alldep -= 1;
 
-            $fullname = $this->resolveNamespace($dependency);
+            $fullname = $this->resolveName($dependency);
             $variable = $this->extractServiceManagerFromDependency($dependency, $i);
 
-            $msg .= sprintf(self::TEMPLATE_ALIASE, $variable, $fullname);
+            $template = (isset($dependency['aliase'***REMOVED***) || is_string($i))
+                ? self::TEMPLATE_ALIASE
+                : self::TEMPLATE_CLASS;
+
+
+            $msg .= sprintf($template, $variable, $fullname);
             $msg .= PHP_EOL;
             if (is_integer($i) && isset($src->getDependency()[$i+1***REMOVED***) || $alldep > 0) {
                 $msg .= PHP_EOL;
@@ -76,11 +81,6 @@ EOS;
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $aliase => $item) {
-
-                if (isset($item['aliase'***REMOVED***) || is_string($aliase)) {
-                    continue;
-                }
-
                 $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
         }

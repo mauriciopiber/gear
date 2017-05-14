@@ -2,7 +2,13 @@
 namespace MyModuleTest\ConsolistsNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Controller\ControllerManager;
+use Zend\ServiceManager\ServiceManager;
 use MyModule\ConsolistsNamespace\SpecialDependencyConsoleFactory;
+use MyModule\ConsolistsNamespace\SpecialDependencyConsole;
+use GearBase\Util\String\StringService;
+use Zend\Console\Adapter\Posix;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group MyModule
@@ -11,22 +17,22 @@ use MyModule\ConsolistsNamespace\SpecialDependencyConsoleFactory;
  */
 class SpecialDependencyConsoleFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testSpecialDependencyConsoleFactory()
     {
-        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
+        $this->serviceLocator = $this->prophesize(ServiceManager::class);
 
         $this->serviceLocator->get('GearBase\Util\String')
-            ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $this->serviceLocator->get('console')
-            ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
+            ->willReturn($this->prophesize(Posix::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
-            ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
+        $this->serviceLocator->get(Adapter::class)
+            ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
@@ -35,6 +41,6 @@ class SpecialDependencyConsoleFactoryTest extends TestCase
 
         $instance = $factory->createService($this->controllerManager->reveal());
 
-        $this->assertInstanceOf('MyModule\ConsolistsNamespace\SpecialDependencyConsole', $instance);
+        $this->assertInstanceOf(SpecialDependencyConsole::class, $instance);
     }
 }

@@ -1,7 +1,9 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>Factory;
+use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>;
 <?php echo $this->use;?>
 
 /**
@@ -11,15 +13,15 @@ use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $th
  */
 class <?php echo $this->class;?>FactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function test<?php echo $this->class;?>Factory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 <?php echo $this->dependency;?>
 
         $factory = new <?php echo $this->class;?>Factory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('<?php echo $this->fullclass;?>', $instance);
+        $this->assertInstanceOf(<?php echo $this->class;?>::class, $instance);
     }
 }

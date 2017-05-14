@@ -1,31 +1,39 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->basename;?>FormFactory;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>Factory;
+use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>;
+use <?php echo $this->filter;?>;
+use Zend\Db\Adapter\Adapter;
+use Zend\Mvc\I18n\Translator;
+use Doctrine\ORM\EntityManager;
+use Zend\Http\Request;
+use Zend\Uri\Uri;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
- * @group <?php echo $this->basename;?>Form
+ * @group <?php echo $this->class.PHP_EOL;?>
  * @group Form
  */
-class <?php echo $this->basename;?>FormFactoryTest extends TestCase
+class <?php echo $this->class;?>FactoryTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->filter = $this->prophesize('<?php echo $this->filter;?>');
-        $this->request = $this->prophesize('Zend\Http\Request');
-        $this->translator = $this->prophesize('Zend\Mvc\I18n\Translator');
-        $this->uri = $this->prophesize('Zend\Uri\Uri');
-        $this->adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->entityManager = $this->prophesize(EntityManager::class);
+        $this->filter = $this->prophesize(<?php echo $this->filterFile;?>::class);
+        $this->request = $this->prophesize(Request::class);
+        $this->translator = $this->prophesize(Translator::class);
+        $this->uri = $this->prophesize(Uri::class);
+        $this->adapter = $this->prophesize(Adapter::class);
     }
 
-    public function testCreateFactory()
+    public function test<?php echo $this->class;?>Factory()
     {
-        $this->uri->getPath()->willReturn('<?php echo $this->moduleUrl;?>/<?php echo $this->basenameUrl;?>/edit/30');
+        $this->uri->getPath()->willReturn('<?php echo $this->moduleUrl;?>/<?php echo $this->classUrl;?>/edit/30');
         $this->request->getUri()->willReturn($this->uri->reveal());
 
         $this->filter->setAdapter($this->adapter->reveal())->shouldNotBeCalled();
@@ -35,18 +43,18 @@ class <?php echo $this->basename;?>FormFactoryTest extends TestCase
           ->willReturn($this->entityManager->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('<?php echo $this->filter;?>')
+        $this->serviceLocator->get(<?php echo $this->filterFile;?>::class)
           ->willReturn($this->filter->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')->willReturn($this->adapter->reveal());
+        $this->serviceLocator->get(Adapter::class)->willReturn($this->adapter->reveal());
         $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
         $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
-        $factory = new <?php echo $this->basename;?>FormFactory();
+        $factory = new <?php echo $this->class;?>Factory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('<?php echo $this->form;?>', $instance);
+        $this->assertInstanceOf(<?php echo $this->class;?>::class, $instance);
     }
 }

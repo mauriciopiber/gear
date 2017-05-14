@@ -87,7 +87,6 @@ trait FactoryDataTrait
 
         }
 
-
         $factoryData[***REMOVED*** = [
             new \GearJson\Controller\Controller([
                 'name' => 'MyTableController',

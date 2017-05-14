@@ -2,7 +2,15 @@
 namespace MyModuleTest\FormTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Form\MyTableFormFactory;
+use MyModule\Form\MyTableForm;
+use MyModule\Filter\MyTableFilter;
+use Zend\Db\Adapter\Adapter;
+use Zend\Mvc\I18n\Translator;
+use Doctrine\ORM\EntityManager;
+use Zend\Http\Request;
+use Zend\Uri\Uri;
 
 /**
  * @group MyModule
@@ -15,16 +23,16 @@ class MyTableFormFactoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
-        $this->filter = $this->prophesize('MyModule\Filter\MyTableFilter');
-        $this->request = $this->prophesize('Zend\Http\Request');
-        $this->translator = $this->prophesize('Zend\Mvc\I18n\Translator');
-        $this->uri = $this->prophesize('Zend\Uri\Uri');
-        $this->adapter = $this->prophesize('Zend\Db\Adapter\Adapter');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->entityManager = $this->prophesize(EntityManager::class);
+        $this->filter = $this->prophesize(MyTableFilter::class);
+        $this->request = $this->prophesize(Request::class);
+        $this->translator = $this->prophesize(Translator::class);
+        $this->uri = $this->prophesize(Uri::class);
+        $this->adapter = $this->prophesize(Adapter::class);
     }
 
-    public function testCreateFactory()
+    public function testMyTableFormFactory()
     {
         $this->uri->getPath()->willReturn('my-module/my-table/edit/30');
         $this->request->getUri()->willReturn($this->uri->reveal());
@@ -36,11 +44,11 @@ class MyTableFormFactoryTest extends TestCase
           ->willReturn($this->entityManager->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('MyModule\Filter\MyTableFilter')
+        $this->serviceLocator->get(MyTableFilter::class)
           ->willReturn($this->filter->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')->willReturn($this->adapter->reveal());
+        $this->serviceLocator->get(Adapter::class)->willReturn($this->adapter->reveal());
         $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
         $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
@@ -48,6 +56,6 @@ class MyTableFormFactoryTest extends TestCase
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('MyModule\Form\MyTableForm', $instance);
+        $this->assertInstanceOf(MyTableForm::class, $instance);
     }
 }

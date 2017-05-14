@@ -2,7 +2,11 @@
 namespace MyModuleTest\FilterTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Filter\MyTableFilterFactory;
+use MyModule\Filter\MyTableFilter;
+use Zend\Db\Adapter\Adapter;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * @group MyModule
@@ -11,22 +15,22 @@ use MyModule\Filter\MyTableFilterFactory;
  */
 class MyTableFilterFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testMyTableFilterFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')
-            ->willReturn($this->prophesize('Zend\Db\Adapter\Adapter')->reveal())
+        $this->serviceLocator->get(Adapter::class)
+            ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
         $this->serviceLocator->get('translate')
-            ->willReturn($this->prophesize('Zend\Mvc\I18n\Translator')->reveal())
+            ->willReturn($this->prophesize(Translator::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MyTableFilterFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('MyModule\Filter\MyTableFilter', $instance);
+        $this->assertInstanceOf(MyTableFilter::class, $instance);
     }
 }
