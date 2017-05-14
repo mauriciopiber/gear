@@ -2,7 +2,12 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\Custom\CustomNamespace\MyTableServiceFactory;
+use MyModule\Custom\CustomNamespace\MyTableService;
+use Zend\Cache\Storage\Adapter\Memcached;
+use MyModule\Custom\CustomNamespace\MyTableRepository;
+use GearImage\Service\ImageService;
 
 /**
  * @group MyModule
@@ -11,26 +16,26 @@ use MyModule\Custom\CustomNamespace\MyTableServiceFactory;
  */
 class MyTableServiceFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testMyTableServiceFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
         $this->serviceLocator->get('memcached')
-            ->willReturn($this->prophesize('Zend\Cache\Storage\Adapter\Memcached')->reveal())
+            ->willReturn($this->prophesize(Memcached::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('MyModule\Custom\CustomNamespace\MyTableRepository')
-            ->willReturn($this->prophesize('MyModule\Custom\CustomNamespace\MyTableRepository')->reveal())
+        $this->serviceLocator->get(MyTableRepository::class)
+            ->willReturn($this->prophesize(MyTableRepository::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearImage\Service\ImageService')
-            ->willReturn($this->prophesize('GearImage\Service\ImageService')->reveal())
+        $this->serviceLocator->get(ImageService::class)
+            ->willReturn($this->prophesize(ImageService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MyTableServiceFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('MyModule\Custom\CustomNamespace\MyTableService', $instance);
+        $this->assertInstanceOf(MyTableService::class, $instance);
     }
 }

@@ -29,9 +29,8 @@ class FactoryTestService extends AbstractMvcTest
         //var_dump($src);
 
         $options = [
-            //'use'       => $this->getFactoryCodeTest()->getUse($src),
-            'basename' => str_replace($src->getType(), '', $src->getName()),
-            'basenameUrl' => $this->str('url', str_replace($src->getType(), '', $src->getName())),
+            'use'       => $this->getFactoryCodeTest()->getUse($src),
+            'classUrl' => $this->str('url', str_replace($src->getType(), '', $src->getName())),
             'module'    => $this->getModule()->getModuleName(),
             'moduleUrl'    => $this->str('url', $this->getModule()->getModuleName()),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
@@ -47,6 +46,7 @@ class FactoryTestService extends AbstractMvcTest
             $filter = $this->getSchemaService()->getSrcByDb($src->getDb(), 'Filter');
 
             $options['filter'***REMOVED*** = $this->getServiceManager()->getServiceName($filter);
+            $options['filterFile'***REMOVED*** = $this->getFactoryCodeTest()->resolveName($options['filter'***REMOVED***);
             $options['form'***REMOVED*** = $this->getServiceManager()->getServiceName($form);
         }
 
@@ -67,7 +67,7 @@ class FactoryTestService extends AbstractMvcTest
 
 
         $options = [
-            //'use'       => $this->getFactoryCodeTest()->getUse($src),
+            'use'       => $this->getFactoryCodeTest()->getUse($src),
             'module'    => $this->getModule()->getModuleName(),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
             'fullclass' => $this->getFactoryCodeTest()->getFullClassName($src),

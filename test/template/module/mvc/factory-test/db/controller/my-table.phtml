@@ -2,7 +2,13 @@
 namespace MyModuleTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Controller\ControllerManager;
+use Zend\ServiceManager\ServiceManager;
 use MyModule\Controller\MyTableControllerFactory;
+use MyModule\Controller\MyTableController;
+use MyModule\Service\MyTableService;
+use MyModule\Form\MyTableForm;
+use MyModule\Form\Search\MyTableSearchForm;
 
 /**
  * @group MyModule
@@ -11,22 +17,22 @@ use MyModule\Controller\MyTableControllerFactory;
  */
 class MyTableControllerFactoryTest extends TestCase
 {
-    public function testCreateFactory()
+    public function testMyTableControllerFactory()
     {
-        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
+        $this->serviceLocator = $this->prophesize(ServiceManager::class);
 
-        $this->serviceLocator->get('MyModule\Service\MyTableService')
-            ->willReturn($this->prophesize('MyModule\Service\MyTableService')->reveal())
+        $this->serviceLocator->get(MyTableService::class)
+            ->willReturn($this->prophesize(MyTableService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('MyModule\Form\MyTableForm')
-            ->willReturn($this->prophesize('MyModule\Form\MyTableForm')->reveal())
+        $this->serviceLocator->get(MyTableForm::class)
+            ->willReturn($this->prophesize(MyTableForm::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('MyModule\Form\Search\MyTableSearchForm')
-            ->willReturn($this->prophesize('MyModule\Form\Search\MyTableSearchForm')->reveal())
+        $this->serviceLocator->get(MyTableSearchForm::class)
+            ->willReturn($this->prophesize(MyTableSearchForm::class)->reveal())
             ->shouldBeCalled();
 
         $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
@@ -35,6 +41,6 @@ class MyTableControllerFactoryTest extends TestCase
 
         $instance = $factory->createService($this->controllerManager->reveal());
 
-        $this->assertInstanceOf('MyModule\Controller\MyTableController', $instance);
+        $this->assertInstanceOf(MyTableController::class, $instance);
     }
 }
