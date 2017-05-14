@@ -116,6 +116,7 @@ class EntityServiceTest extends TestCase
             ***REMOVED***)
         ***REMOVED***;
 
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcFolder()->willReturn(vfsStream::url('module/src'))->shouldBeCalled();
         $this->module->getEntityFolder()->willReturn(vfsStream::url('module/src/MyModule/Entity'))->shouldBeCalled();
 

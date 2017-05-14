@@ -134,6 +134,14 @@ class EntityObjectFixer
                 continue;
             }
 
+            $pattern = '/@return \\\\[a-zA-Z\\\\***REMOVED****\\\\([a-zA-z***REMOVED****)$/';
+            if (preg_match($pattern, $line, $match)) {
+                $newCode = preg_replace($pattern, '@return $1', $line);
+                $originalContent = str_replace($line, $newCode, $originalContent);
+                continue;
+            }
+
+
             if (strlen($line) > 120) {
                 //se for declaração de Join Column
                 $pattern = '/    public function [a-zA-Z***REMOVED****/';
@@ -389,6 +397,10 @@ EOL;
 
             $content = str_replace($exact, $replacement."\n", $content);
         }
+
+        $pattern = '#@param \\\\[a-zA-Z\\\\***REMOVED****\\\\([a-zA-Z***REMOVED****) #';
+
+        $content = preg_replace($pattern, '@param $1 ', $content);
 
         $entity->setContent($content);
 

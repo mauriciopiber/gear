@@ -2,6 +2,7 @@
 namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
+use MyModule\Entity\DbUploadImage;
 use MyModule\Custom\CustomNamespace\DbUploadImageRepositoryTrait;
 use GearImage\Service\ImageServiceTrait;
 use MyModule\Custom\CustomNamespace\DbUploadImageRepository;
@@ -38,7 +39,7 @@ class DbUploadImageService extends AbstractService
      * @param AuthenticationService   $zfcuserAuthService Authentication Service
      * @param ImageService            $imageService       Image Service
      *
-     * @return \MyModule\Custom\CustomNamespace\DbUploadImageService
+     * @return DbUploadImageService
      */
     public function __construct(
         DbUploadImageRepository $dbUploadImage,
@@ -179,11 +180,11 @@ class DbUploadImageService extends AbstractService
     /**
      * Convert Entity to Array.
      *
-     * @param \MyModule\Entity\DbUploadImage $data Db Upload Image Entity
+     * @param DbUploadImage $data Db Upload Image Entity
      *
      * @return array
      */
-    public function extract(\MyModule\Entity\DbUploadImage $data)
+    public function extract(DbUploadImage $data)
     {
         $repository = $this->getDbUploadImageRepository();
         return $repository->extract($data);

@@ -303,7 +303,7 @@ EOS;
         $classObject = new ClassObject($data, $this->getModule()->getModuleName());
 
         $params = $this->getDocsParams($classObject->getDependency());
-        $namespace = $classObject->getAbsoluteFullName();
+        $namespace = $classObject->getName();
 
         $docs = <<<EOS
     /**

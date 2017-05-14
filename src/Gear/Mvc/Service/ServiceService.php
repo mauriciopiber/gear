@@ -121,6 +121,8 @@ class ServiceService extends AbstractMvc
             $this->str('class', $this->db->getTable())
         );
 
+        $this->entityFile = $this->str('class', $this->db->getTable());
+
 
         $this->use .= $this->getCode()->getUseConstructor($this->src, ['\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
 
@@ -135,12 +137,12 @@ class ServiceService extends AbstractMvc
 
 
         $this->tableUploadImage = false;
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-        ) {
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')) {
             $this->tableUploadImage = true;
         }
 
         $options = [
+            'entityFile' => $this->entityFile,
             'namespace' => $this->getCode()->getNamespace($this->src),
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'entity' => $this->entityName,

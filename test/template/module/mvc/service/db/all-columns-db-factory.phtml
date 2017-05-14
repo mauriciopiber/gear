@@ -2,6 +2,7 @@
 namespace MyModule\Custom\CustomNamespace;
 
 use GearBase\Service\AbstractService;
+use MyModule\Entity\AllColumnsDb;
 use MyModule\Custom\CustomNamespace\AllColumnsDbRepositoryTrait;
 use GearImage\Service\ImageServiceTrait;
 use MyModule\Custom\CustomNamespace\AllColumnsDbRepository;
@@ -41,7 +42,7 @@ class AllColumnsDbService extends AbstractService
      * @param AuthenticationService  $zfcuserAuthService Authentication Service
      * @param ImageService           $imageService       Image Service
      *
-     * @return \MyModule\Custom\CustomNamespace\AllColumnsDbService
+     * @return AllColumnsDbService
      */
     public function __construct(
         AllColumnsDbRepository $allColumnsDb,
@@ -209,11 +210,11 @@ class AllColumnsDbService extends AbstractService
     /**
      * Convert Entity to Array.
      *
-     * @param \MyModule\Entity\AllColumnsDb $data All Columns Db Entity
+     * @param AllColumnsDb $data All Columns Db Entity
      *
      * @return array
      */
-    public function extract(\MyModule\Entity\AllColumnsDb $data)
+    public function extract(AllColumnsDb $data)
     {
         $repository = $this->getAllColumnsDbRepository();
         return $repository->extract($data);
