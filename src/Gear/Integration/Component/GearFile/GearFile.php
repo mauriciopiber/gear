@@ -154,7 +154,7 @@ class GearFile
 
             $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
 
-            $controller = [
+            $controllerItem = [
                 'db' => $minorSuite->getTableAlias(),
                 'type' => 'Action',
                 'name' => $name,
@@ -162,7 +162,11 @@ class GearFile
                 'columns' => $this->factoryGearfileColumns($minorSuite->getColumns()),
                 'service' => 'factories',
                 'namespace' => ($minorSuite->getTableName().'\\Controller'),
-                'dependency' => [***REMOVED***,
+                'dependency' => [
+                    ($minorSuite->getTableName().'\\Service\\'.$minorSuite->getTableName().'Service'),
+                    ($minorSuite->getTableName().'\\Form\\'.$minorSuite->getTableName().'Form'),
+                    ($minorSuite->getTableName().'\\SearchForm\\'.$minorSuite->getTableName().'SearchForm'),
+                ***REMOVED***,
                 'actions' => [
                     [
                         'name' => 'create',
@@ -186,6 +190,13 @@ class GearFile
                     ***REMOVED***,
                 ***REMOVED***
             ***REMOVED***;
+
+            if ($minorSuite->getTableAssoc() == 'upload_image') {
+                $controllerItem['dependency'***REMOVED***[***REMOVED*** = '\GearImage\Service\ImageService';
+                $controllerItem['actions'***REMOVED***[***REMOVED*** = ['name' => 'upload-image', 'role' => 'admin'***REMOVED***;
+            }
+
+            $controller[***REMOVED*** = $controllerItem;
         }
 
         return $this->createGearfileComponent($controllerMvcMinorSuite, ['controller' => $controller***REMOVED***);
