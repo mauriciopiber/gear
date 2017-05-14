@@ -93,19 +93,14 @@ class ControllerMvcGenerator
              $tables
          );
 
-         $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
-         $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
+         $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);
 
+         $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+         $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));
 
          $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($middleMinor->getMajorSuite()->getSuperType(), $srcMvcMinor));
          $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
          $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
-
-         //$srcMvcMinor->setType($middleMinor->getType());
-
-         /*
-
-         */
          return $srcMvcMinor;
     }
 

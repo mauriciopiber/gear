@@ -104,7 +104,7 @@ class GearFile
                 : sprintf('%s%s', $minorSuite->getTableName(), $this->stringService->str('class', $minorSuite->getType()));
 
             $src = [
-                'db' => $minorSuite->getTableName(),
+                'db' => $minorSuite->getTableAlias(),
                 'type' => $this->stringService->str('class', $minorSuite->getType()),
                 'name' => $name,
                 'user' => $minorSuite->getUserType(),
@@ -149,9 +149,47 @@ class GearFile
 
     public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
     {
-        //echo 'Create Controller Mvc GearFile'."\n";
+        $controller = [***REMOVED***;
+        foreach ($tables as $minorSuite) {
 
-        return $this->createGearfileComponent($controllerMvcMinorSuite, [***REMOVED***);
+            $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
+
+            $controller = [
+                'db' => $minorSuite->getTableAlias(),
+                'type' => 'Action',
+                'name' => $name,
+                'user' => $minorSuite->getUserType(),
+                'columns' => $this->factoryGearfileColumns($minorSuite->getColumns()),
+                'service' => 'factories',
+                'namespace' => ($minorSuite->getTableName().'\\Controller'),
+                'dependency' => [***REMOVED***,
+                'actions' => [
+                    [
+                        'name' => 'create',
+                        'role' => 'admin'
+                    ***REMOVED***,
+                    [
+                        'name' => 'edit',
+                        'role' => 'admin'
+                    ***REMOVED***,
+                    [
+                        'name' => 'list',
+                        'role' => 'admin'
+                    ***REMOVED***,
+                    [
+                        'name' => 'view',
+                        'role' => 'admin'
+                    ***REMOVED***,
+                    [
+                        'name' => 'delete',
+                        'role' => 'admin'
+                    ***REMOVED***,
+                ***REMOVED***
+            ***REMOVED***;
+        }
+
+        return $this->createGearfileComponent($controllerMvcMinorSuite, ['controller' => $controller***REMOVED***);
+
     }
 
 

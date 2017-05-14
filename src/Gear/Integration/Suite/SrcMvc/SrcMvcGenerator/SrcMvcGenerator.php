@@ -110,10 +110,12 @@ class SrcMvcGenerator
 
          $srcMvcMinor->setType($middleMinor->getType());
 
-         $columnsSuffix = $this->resolveNames->createTableUrl($srcMvcMinor);
+         $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);
 
          $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+         $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));
          $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
+
          $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
          $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
 
