@@ -2,6 +2,7 @@
 namespace MyModule\Service;
 
 use GearBase\Service\AbstractService;
+use MyModule\Entity\SingleDbTable;
 use MyModule\Repository\SingleDbTableRepositoryTrait;
 use MyModule\Repository\SingleDbTableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
@@ -33,7 +34,7 @@ class SingleDbTableService extends AbstractService
      * @param Memcached               $cache              Memcached
      * @param AuthenticationService   $zfcuserAuthService Authentication Service
      *
-     * @return \MyModule\Service\SingleDbTableService
+     * @return SingleDbTableService
      */
     public function __construct(
         SingleDbTableRepository $singleDbTable,
@@ -171,11 +172,11 @@ class SingleDbTableService extends AbstractService
     /**
      * Convert Entity to Array.
      *
-     * @param \MyModule\Entity\SingleDbTable $data Single Db Table Entity
+     * @param SingleDbTable $data Single Db Table Entity
      *
      * @return array
      */
-    public function extract(\MyModule\Entity\SingleDbTable $data)
+    public function extract(SingleDbTable $data)
     {
         $repository = $this->getSingleDbTableRepository();
         return $repository->extract($data);

@@ -131,7 +131,7 @@ class UniqueId extends Varchar implements
         $elementName = $this->str('class', $this->column->getName());
 
         $var = $this->str('var', $elementName);
-        $varlength = $this->str('var-length', $elementName);
+        $varlength = $this->str('var-lenght', $elementName);
 
         $element = <<<EOS
         \${$varlength} = isset(\$data['{$var}'***REMOVED***)

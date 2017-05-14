@@ -18,12 +18,6 @@ class FactoryCodeTestTraitTest extends TestCase
         $this->factoryCodeTestSetUp = $this->prophesize('Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest');
     }
 
-    public function testGetEmpty()
-    {
-        $factoryCodeTestSetUp = $this->getFactoryCodeTest();
-        $this->assertNull($factoryCodeTestSetUp);
-    }
-
     public function testSet()
     {
         $this->setFactoryCodeTest($this->factoryCodeTestSetUp->reveal());

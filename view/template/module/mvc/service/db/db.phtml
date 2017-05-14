@@ -1,6 +1,7 @@
 namespace <?php echo $this->namespace;?>;
 
 use GearBase\Service\AbstractService;
+use <?php echo $this->entity;?>;
 <?php echo $this->use;?>
 
 /**
@@ -157,11 +158,11 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
     /**
      * Convert Entity to Array.
      *
-     * @param \<?php echo $this->entity;?> $data <?php echo $this->tableLabel;?> Entity
+     * @param <?php echo $this->entityFile;?> $data <?php echo $this->tableLabel;?> Entity
      *
      * @return array
      */
-    public function extract(\<?php echo $this->entity?> $data)
+    public function extract(<?php echo $this->entityFile;?> $data)
     {
         $repository = $this->get<?php echo $this->repository;?>();
         return $repository->extract($data);

@@ -96,7 +96,7 @@ class CodeTest extends TestCase
     /**
      * Constructor
      *
-     * @return \MyModule\Service\Test
+     * @return Test
      */
     public function __construct()
     {
@@ -140,7 +140,7 @@ EOS;
      * @param ExternalLong    \$externalLong    External Long
      * @param TestingService  \$testingService  Testing Service
      *
-     * @return \MyModule\Service\Test
+     * @return Test
      */
     public function __construct(
         RepositoryOne \$repositoryOne,
@@ -195,7 +195,7 @@ EOS;
      * @param RepositoryDependencyLongThree \$dependencyLongThree Repository Dependency Long Three
      * @param RepositoryDependencyLongFour  \$dependencyLongFour  Repository Dependency Long Four
      *
-     * @return \MyModule\Service\Test
+     * @return Test
      */
     public function __construct(
         RepositoryDependencyLongOne \$dependencyLongOne,
