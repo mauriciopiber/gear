@@ -553,7 +553,7 @@ EOS;
             }
 
             if ($this->str('class', $data->getType()) == 'Console') {
-                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractConsoleController;';
+                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractConsoleController';
             }
         }
 

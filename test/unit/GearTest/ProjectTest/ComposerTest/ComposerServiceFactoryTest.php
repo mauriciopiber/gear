@@ -14,8 +14,8 @@ class ComposerServiceFactoryTest extends AbstractTestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $this->serviceLocator
-          ->get('Gear\FileCreator')
-          ->willReturn($this->prophesize('Gear\File\Creator')->reveal())
+          ->get('Gear\Creator\FileCreator\FileCreator')
+          ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator
