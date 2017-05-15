@@ -5,7 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
 
 /**
- * @group Service
+ * @group MajorSuite
  */
 class SrcMvcMajorSuiteTest extends TestCase
 {
@@ -17,12 +17,14 @@ class SrcMvcMajorSuiteTest extends TestCase
 
     public function testClassExists()
     {
-        $this->srcMvcMajorSuite = new SrcMvcMajorSuite(null, ['basic'***REMOVED***, ['all'***REMOVED***, ['nullable'***REMOVED***, [null***REMOVED***);
+        $this->srcMvcMajorSuite = new SrcMvcMajorSuite(['basic'***REMOVED***, ['all'***REMOVED***, ['nullable'***REMOVED***, [null***REMOVED***);
 
-        $this->assertEquals(null, $this->srcMvcMajorSuite->getSuperType());
-        $this->assertEquals(['basic'***REMOVED***, $this->srcMvcMajorSuite->getColumns());
-        $this->assertEquals(['all'***REMOVED***, $this->srcMvcMajorSuite->getUserTypes());
-        $this->assertEquals(['nullable'***REMOVED***, $this->srcMvcMajorSuite->getConstraints());
-        $this->assertEquals([null***REMOVED***, $this->srcMvcMajorSuite->getTableAssocs());
+        $this->assertEquals('src-mvc', $this->srcMvcMajorSuite->getSuperType());
+        $this->assertEquals('src-mvc', $this->srcMvcMajorSuite->getSuite());
+        $this->assertEquals('src-mvc', $this->srcMvcMajorSuite->getLocationKey());
+        //$this->assertEquals(['basic'***REMOVED***, $this->srcMvcMajorSuite->getColumns());
+        //$this->assertEquals(['all'***REMOVED***, $this->srcMvcMajorSuite->getUserTypes());
+        //$this->assertEquals(['nullable'***REMOVED***, $this->srcMvcMajorSuite->getConstraints());
+        //$this->assertEquals([null***REMOVED***, $this->srcMvcMajorSuite->getTableAssocs());
     }
 }

@@ -6,7 +6,7 @@ use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**
- * @group Service
+ * @group MinorSuite
  */
 class MvcMinorSuiteTest extends TestCase
 {

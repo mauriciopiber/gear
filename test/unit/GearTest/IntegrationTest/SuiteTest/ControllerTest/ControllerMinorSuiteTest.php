@@ -5,7 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 
 /**
- * @group Service
+ * @group MinorSuite
  */
 class ControllerMinorSuiteTest extends TestCase
 {

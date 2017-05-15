@@ -25,4 +25,14 @@ class ControllerMajorSuite extends AbstractMajorSuite
     {
         return $this;
     }
+
+    public function getSuite()
+    {
+        return self::SUITE;
+    }
+
+    public function getSuperType()
+    {
+        return self::SUITE;
+    }
 }

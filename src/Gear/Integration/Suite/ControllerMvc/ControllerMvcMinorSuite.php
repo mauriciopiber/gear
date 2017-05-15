@@ -16,6 +16,17 @@ class ControllerMvcMinorSuite extends MvcMinorSuite
 {
     const SUITE = 'controller-mvc';
 
+    /**
+     * Constructor
+     *
+     * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
+     */
+    public function __construct($majorSuite, $columnType = null, $userType = null, $constraints = null, $tableAssoc = null)
+    {
+        parent::__construct($majorSuite, $columnType, $userType, $constraints, $tableAssoc);
+        return $this;
+    }
+
     public function getSuiteName($type = null)
     {
         return self::SUITE;

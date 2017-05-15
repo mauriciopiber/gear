@@ -3,20 +3,18 @@ namespace GearTest\IntegrationTest\SuiteTest\ControllerTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\Controller\ControllerMajorSuite;
+use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 
 /**
- * @group Service
+ * @group MajorSuite
  */
 class ControllerMajorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function testControllerMajorSuite()
     {
-        parent::setUp();
         $this->controllerMajorSuite = new ControllerMajorSuite();
-    }
-
-    public function testClassExists()
-    {
-        $this->assertInstanceOf('Gear\Integration\Suite\Controller\ControllerMajorSuite', $this->controllerMajorSuite);
+        $this->assertEquals('controller', $this->controllerMajorSuite->getSuite());
+        $this->assertEquals('controller', $this->controllerMajorSuite->getSuperType());
+        $this->assertEquals('controller', $this->controllerMajorSuite->getLocationKey());
     }
 }

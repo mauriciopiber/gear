@@ -72,14 +72,6 @@ class ControllerMvcGenerator
         $controllerMvcMinor->setGearfile($gearfile);
 
         $this->testFile->updateTestFile($controllerMvcMinor, $this->getMvcDependency()['controller'***REMOVED***);
-
-        //var_dump($tables);
-
-        //$this->createControllerMvcGearfile($controllerMvcMinor, $tables);
-
-        //$this->createControllerMvcTestFile($controllerMvcMinor);
-
-        //echo sprintf('        - minor: controller-mvc')."\n";
     }
 
 
@@ -122,15 +114,5 @@ class ControllerMvcGenerator
         }
 
         return $preparedTable;
-    }
-
-    private function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinor, $tables)
-    {
-        //echo 'create controller mvc gearfile'."\n";
-    }
-
-    private function createControllerMvcTestFile(ControllerMvcMinorSuite $controllerMvcMinor)
-    {
-        //echo 'create controller mvc test'."\n";
     }
 }
