@@ -13,13 +13,13 @@ class PhinxServiceFactoryTest extends TestCase
     public function testCreateFactory()
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
-        
+
         $this->serviceLocator->get('GearBase\Util\String')
           ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
           ->shouldBeCalled();
-        
-        $this->serviceLocator->get('Gear\FileCreator')
-          ->willReturn($this->prophesize('Gear\Creator\File')->reveal())
+
+        $this->serviceLocator->get('Gear\Creator\FileCreator\FileCreator')
+          ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
           ->shouldBeCalled();
 
         $factory = new \Gear\Database\Phinx\PhinxServiceFactory();

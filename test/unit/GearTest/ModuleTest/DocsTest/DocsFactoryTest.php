@@ -21,8 +21,8 @@ class DocsFactoryTest extends AbstractTestCase
           ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\FileCreator')
-          ->willReturn($this->prophesize('Gear\Creator\File')->reveal())
+        $this->serviceLocator->get('Gear\Creator\FileCreator\FileCreator')
+          ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
           ->shouldBeCalled();
 
         $factory = new \Gear\Module\Docs\DocsFactory();
