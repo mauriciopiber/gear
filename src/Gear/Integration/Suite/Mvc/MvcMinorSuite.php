@@ -104,17 +104,6 @@ class MvcMinorSuite extends AbstractMinorSuite
         return $this->stringService->str($type, $this->getTableName());
     }
 
-    public function getSuitePath()
-    {
-        return sprintf(
-            self::SUITE,
-            strtolower($this->getMajorSuite()->getSuperType()),
-            $this->stringService->str('url', $this->getTableName())
-        );
-
-        //return sprintf('%s/%s', )
-    }
-
     public function setTableAlias($tableAlias)
     {
         $this->tableAlias = $tableAlias;

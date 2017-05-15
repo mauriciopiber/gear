@@ -40,11 +40,6 @@ class ControllerMinorSuite extends AbstractMinorSuite
         return sprintf(self::SUITE, strtolower($this->getType()));
     }
 
-    public function getSuitePath()
-    {
-        return sprintf(self::SUITE, strtolower($this->getType()));
-    }
-
     public function getMajorSuite()
     {
         return $this->majorSuite;

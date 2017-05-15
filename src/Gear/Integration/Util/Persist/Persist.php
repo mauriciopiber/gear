@@ -35,13 +35,14 @@ class Persist
 
     public function saveMajor(AbstractMajorSuite $suite, $name, $data)
     {
-        $location = $this->location->getLocation($suite::SUITE);
+        $location = $this->location->getLocation().'/'.$suite::SUITE;
 
         if ($suite::SUITE !== $suite->getSuperType()) {
             $location .= '/'.$suite->getSuperType();
         }
 
         $path =  sprintf('%s/%s', $location, $name);
+
         return file_put_contents($path, $data);
     }
 
@@ -51,9 +52,9 @@ class Persist
             throw new \Exception('Location key not found');
         }
         $majorSuite = $suite->getMajorSuite();
-        $template = $this->location->getLocation($majorSuite::SUITE).'/'.$suite->getLocationKey();
+        $location = $this->location->getLocation().'/'.$majorSuite::SUITE.'/'.$suite->getLocationKey();
 
-        $path =  sprintf('%s/%s', $template, $name);
+        $path =  sprintf('%s/%s', $location, $name);
 
         return file_put_contents($path, $data);
     }
