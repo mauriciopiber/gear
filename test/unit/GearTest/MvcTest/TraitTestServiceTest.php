@@ -5,8 +5,7 @@ use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 
 /**
- * @group Mvc
- * @group Trait
+ * @group mvc-trait
  */
 class TraitTestServiceTest extends AbstractTestCase
 {

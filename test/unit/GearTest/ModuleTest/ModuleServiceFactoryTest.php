@@ -20,7 +20,7 @@ class ModuleServiceFactoryTest extends AbstractTestCase
 
 
         $expected = [
-            'Gear\Creator\FileCreator\FileCreator' => ''Gear\Creator\FileCreator\FileCreator'',
+            'Gear\Creator\FileCreator\FileCreator' => 'Gear\Creator\FileCreator\FileCreator',
             'GearBase\Util\String' => 'GearBase\Util\String\StringService',
             'moduleStructure' => 'Gear\Module\BasicModuleStructure',
             'Gear\Module\Docs\Docs' => 'Gear\Module\Docs\Docs',

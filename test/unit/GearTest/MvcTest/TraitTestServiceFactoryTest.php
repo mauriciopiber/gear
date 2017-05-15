@@ -4,9 +4,7 @@ namespace GearTest\ModuleTest\DiagnosticTest;
 use GearBaseTest\AbstractTestCase;
 
 /**
- * @group Module
- * @group Mvc
- * @group Trait
+ * @group mvc-trait
  */
 class TraitTestServiceFactoryTest extends AbstractTestCase
 {
