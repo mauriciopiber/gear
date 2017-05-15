@@ -9,14 +9,10 @@ use Gear\Integration\Suite\Mvc\MvcMajorSuite;
  */
 class MvcMajorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function testMvcMajorSuite()
     {
-        parent::setUp();
-        $this->mvcMajorSuite = new MvcMajorSuite();
-    }
-
-    public function testClassExists()
-    {
-        $this->assertInstanceOf('Gear\Integration\Suite\Mvc\MvcMajorSuite', $this->mvcMajorSuite);
+        $this->mvcMajorSuite = new MvcMajorSuite('mvc-complete');
+        $this->assertEquals('mvc', $this->mvcMajorSuite->getSuite());
+        $this->assertEquals('mvc-complete', $this->mvcMajorSuite->getSuperType());
     }
 }

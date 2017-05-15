@@ -104,9 +104,6 @@ class ResolveNames
             $this->stringService->str('class', $mvcMajor),
             implode('', $tableUrl)
         );
-
-        var_dump($key);
-
         return $key;
     }
 

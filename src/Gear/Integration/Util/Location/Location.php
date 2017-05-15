@@ -14,8 +14,8 @@ use Gear\Module;
  */
 class Location
 {
-    function getLocation($type)
+    public function getLocation()
     {
-        return realpath((new Module())->getLocation().sprintf('/../../test/integration/main/constructors/%s', $type));
+        return realpath((new Module())->getLocation().'/../../test/integration/main/constructors');
     }
 }

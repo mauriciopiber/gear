@@ -44,14 +44,19 @@ class MvcMajorSuite extends AbstractMajorSuite
         return $this;
     }
 
-    public function addMinorSuite($minorSuite)
+    public function getSuite()
     {
-        $this->minorSuites[***REMOVED*** = $minorSuite;
+        return self::SUITE;
     }
 
     public function getSuperType()
     {
         return $this->superType;
+    }
+
+    public function addMinorSuite($minorSuite)
+    {
+        $this->minorSuites[***REMOVED*** = $minorSuite;
     }
 
     public function getColumns()
