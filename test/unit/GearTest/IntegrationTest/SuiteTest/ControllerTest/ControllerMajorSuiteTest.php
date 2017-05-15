@@ -7,6 +7,7 @@ use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 
 /**
  * @group MajorSuite
+ * @group Suite
  */
 class ControllerMajorSuiteTest extends TestCase
 {

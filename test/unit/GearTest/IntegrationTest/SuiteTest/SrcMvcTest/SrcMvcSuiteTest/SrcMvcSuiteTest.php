@@ -6,6 +6,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite;
 
 /**
  * @group Service
+ *
  */
 class SrcMvcSuiteTest extends TestCase
 {

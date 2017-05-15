@@ -6,6 +6,7 @@ use Gear\Integration\Suite\Src\SrcMajorSuite;
 
 /**
  * @group MajorSuite
+ * @group Suite
  */
 class SrcMajorSuiteTest extends TestCase
 {

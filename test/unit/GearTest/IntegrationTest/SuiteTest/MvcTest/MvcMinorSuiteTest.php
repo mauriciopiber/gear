@@ -7,6 +7,7 @@ use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**
  * @group MinorSuite
+ * @group Suite
  */
 class MvcMinorSuiteTest extends TestCase
 {
@@ -17,10 +18,12 @@ class MvcMinorSuiteTest extends TestCase
 
     public function testMvcMinorSuite()
     {
+        $this->major = new MvcMajorSuite('mvc-complete');
 
-        $this->mvcMinorSuite = new MvcMinorSuite(new MvcMajorSuite('mvc-complete'), null, null, null, null);
-        $this->mvcMinorSuite->setTableName('mvc-complete-unique-not-null');
+        $this->mvcMinorSuite = new MvcMinorSuite($this->major, null, null, null, null);
+        $this->assertEquals($this->major, $this->mvcMinorSuite->getMajorSuite());
+        //$this->mvcMinorSuite->setTableName('mvc-complete-unique-not-null');
 
-        $this->assertEquals('mvc-complete-unique-not-null', $this->mvcMinorSuite->getSuiteName());
+        //$this->assertEquals('mvc-complete-unique-not-null', $this->mvcMinorSuite->getSuiteName());
     }
 }
