@@ -5,18 +5,17 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 
 /**
- * @group Service
+ * @group MinorSuite
  */
 class ControllerMvcMinorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function testControllerMvcMajorSuite()
     {
-        parent::setUp();
-        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite();
-    }
+        $this->controllerMvcMajorSuite = new ControllerMvcMajorSuite();
 
-    public function testClassExists()
-    {
-        $this->assertInstanceOf('Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite', $this->controllerMvcMinorSuite);
+        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite($this->controllerMvcMajorSuite);
+
+        $this->assertEquals($this->controllerMvcMajorSuite, $this->controllerMvcMinorSuite->getMajorSuite());
+
     }
 }

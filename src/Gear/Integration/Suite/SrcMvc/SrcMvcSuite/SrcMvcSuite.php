@@ -45,7 +45,6 @@ class SrcMvcSuite
         echo '    - Create Src Mvc Suite'."\n";
 
         $srcMvcMajor = new SrcMvcMajorSuite(
-            null,
             $suiteColumns,
             $suiteUserTypes,
             $suiteConstraints,

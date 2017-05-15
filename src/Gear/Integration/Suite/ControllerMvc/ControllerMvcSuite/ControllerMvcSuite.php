@@ -45,7 +45,6 @@ class ControllerMvcSuite
         echo '    - Create Controller Mvc Suite'."\n";
 
         $controllerMvcMajor = new ControllerMvcMajorSuite(
-            null,
             $suiteColumns,
             $suiteUserTypes,
             $suiteConstraints,

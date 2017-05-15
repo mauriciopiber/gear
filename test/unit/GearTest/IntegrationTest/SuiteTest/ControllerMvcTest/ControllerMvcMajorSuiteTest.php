@@ -5,18 +5,22 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
 
 /**
- * @group Service
+ * @group MajorSuite
  */
 class ControllerMvcMajorSuiteTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
-        $this->controllerMvcMajorSuite = new ControllerMvcMajorSuite();
+
     }
 
-    public function testClassExists()
+    public function testControllerMvcMajorSuite()
     {
-        $this->assertInstanceOf('Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite', $this->controllerMvcMajorSuite);
+        $this->controllerMvcMajorSuite = new ControllerMvcMajorSuite(['basic'***REMOVED***, ['all'***REMOVED***, ['nullable'***REMOVED***, [null***REMOVED***);
+        $this->assertEquals('controller-mvc', $this->controllerMvcMajorSuite->getSuite());
+        $this->assertEquals('controller-mvc', $this->controllerMvcMajorSuite->getSuperType());
+        $this->assertEquals('controller-mvc', $this->controllerMvcMajorSuite->getLocationKey());
+
     }
 }

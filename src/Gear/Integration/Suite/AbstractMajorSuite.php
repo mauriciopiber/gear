@@ -9,4 +9,18 @@ abstract class AbstractMajorSuite extends AbstractSuite
     {
         return $this->minorSuites;
     }
+
+    public function getLocationKey()
+    {
+        if (!isset($this->locationKey)) {
+            $this->locationKey = $this->getSuite();
+
+            if ($this->getSuite() !== $this->getSuperType()) {
+                $this->locationKey .= '/'.$this->getSuperType();
+            }
+        }
+        return $this->locationKey;
+    }
+
+    abstract public function getSuite();
 }

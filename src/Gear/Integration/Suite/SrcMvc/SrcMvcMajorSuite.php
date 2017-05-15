@@ -2,6 +2,7 @@
 namespace Gear\Integration\Suite\SrcMvc;
 
 use Gear\Integration\Suite\Mvc\MvcMajorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
 
 /**
  * PHP Version 5
@@ -16,11 +17,29 @@ class SrcMvcMajorSuite extends MvcMajorSuite
 {
     const SUITE = 'src-mvc';
 
-    protected $type;
+    /**
+     * Constructor
+     *
+     * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite
+     */
+    public function __construct($columns = null, $userType = null, $constraints = null, $tableAssoc = null)
+    {
+        $this->columns = $columns;
+        $this->userTypes = $userType;
+        $this->constraints = $constraints;
+        $this->tableAssocs = $tableAssoc;
+        $this->minorSuites = [***REMOVED***;
+        return $this;
+    }
 
     public function addMinorSuite($srcMvcMinorSuite)
     {
         $this->minorSuites[***REMOVED*** = $srcMvcMinorSuite;
+    }
+
+    public function getSuite()
+    {
+        return self::SUITE;
     }
 
     public function getSuperType()
@@ -28,6 +47,8 @@ class SrcMvcMajorSuite extends MvcMajorSuite
         return self::SUITE;
     }
 
+
+    /*
     public function getType()
     {
         return $this->type;
@@ -38,4 +59,5 @@ class SrcMvcMajorSuite extends MvcMajorSuite
         $this->type = $type;
         return $this;
     }
+    */
 }

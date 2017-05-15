@@ -5,7 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**
- * @group Service
+ * @group MajorSuite
  */
 class MvcMajorSuiteTest extends TestCase
 {
@@ -14,5 +14,6 @@ class MvcMajorSuiteTest extends TestCase
         $this->mvcMajorSuite = new MvcMajorSuite('mvc-complete');
         $this->assertEquals('mvc', $this->mvcMajorSuite->getSuite());
         $this->assertEquals('mvc-complete', $this->mvcMajorSuite->getSuperType());
+        $this->assertEquals('mvc/mvc-complete', $this->mvcMajorSuite->getLocationKey());
     }
 }

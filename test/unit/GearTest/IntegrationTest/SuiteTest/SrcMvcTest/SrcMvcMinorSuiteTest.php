@@ -5,7 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 
 /**
- * @group Service
+ * @group MinorSuite
  */
 class SrcMvcMinorSuiteTest extends TestCase
 {
