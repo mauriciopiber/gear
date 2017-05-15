@@ -6,6 +6,7 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
 
 /**
  * @group MajorSuite
+ * @group Suite
  */
 class ControllerMvcMajorSuiteTest extends TestCase
 {
