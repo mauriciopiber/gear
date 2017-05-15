@@ -6,8 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
- * @group Mvc
- * @group Trait
+ * @group mvc-trait
  */
 class TraitServiceTest extends AbstractTestCase
 {
