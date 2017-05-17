@@ -13,12 +13,6 @@ class ModuleServiceTraitTest extends AbstractTestCase
 {
     use ModuleServiceTrait;
 
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getModuleService();
-        $this->assertInstanceOf('Gear\Module\ModuleService', $serviceLocator);
-    }
-
     public function testSet()
     {
         $mocking = $this->prophesize('Gear\Module\ModuleService')->reveal();
