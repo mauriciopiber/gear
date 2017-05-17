@@ -104,7 +104,7 @@ class FixtureService extends AbstractMvc
             array(
                 'tableLabel'  => $this->str('label', $this->db->getTable()),
                 'package'     => $this->getCode()->getClassDocsPackage($this->src),
-                'var'         => $this->str('var-lenght', str_replace('Fixture', '', $this->srcName)),
+                'var'         => $this->str('var-length', str_replace('Fixture', '', $this->srcName)),
                 'load'        => $this->load,
                 'preLoad'     => $this->preLoad,
                 'getFixture'  => $this->getFixture,

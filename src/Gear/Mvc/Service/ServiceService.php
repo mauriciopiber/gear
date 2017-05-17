@@ -149,7 +149,7 @@ class ServiceService extends AbstractMvc
             'table' =>  $this->str('class', $this->name),
             'tableLabel' => $this->str('label', $this->name),
             'tableUploadImage' => $this->tableUploadImage,
-            'var' => $this->str('var-lenght', $this->name),
+            'var' => $this->str('var-length', $this->name),
             'functions'     => $this->functions,
             'update'        => $this->update,
             'create'        => $this->create,

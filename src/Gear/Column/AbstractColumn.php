@@ -84,7 +84,7 @@ abstract class AbstractColumn extends AbstractJsonService implements UniqueInter
     {
         $message = sprintf(
             '            $%s->set%s($fixture[\'%s\'***REMOVED***);',
-            $this->str('var-lenght', $this->getColumn()->getTableName()),
+            $this->str('var-length', $this->getColumn()->getTableName()),
             $this->str('class', $this->getColumn()->getName()),
             $this->str('var', $this->getColumn()->getName())
         );
@@ -101,7 +101,7 @@ EOS;
 
         $message = sprintf(
             $template,
-            $this->str('var-lenght', $this->getColumn()->getTableName()),
+            $this->str('var-length', $this->getColumn()->getTableName()),
             $this->str('class', $this->getColumn()->getName()),
             $this->str('var', $this->getColumn()->getName())
         );
@@ -646,7 +646,7 @@ EOS;
 
         $elementLabel = $this->str('label', $this->column->getName());
 
-        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
+        $elementClass = $this->str('var-length', 'id'.$this->str('class', $this->column->getTableName()));
 
         $tableName  = $this->column->getTableName();
         $tableLabel = $this->str('label', $this->column->getTableName());

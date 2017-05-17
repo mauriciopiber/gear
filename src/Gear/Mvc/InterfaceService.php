@@ -48,7 +48,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
             'module' => $this->getModule()->getModuleName(),
             'class' => $this->str('class', $this->name),
             'var'   => $this->str('var', $this->name),
-            'lenght' => $this->str('var-lenght', $this->name),
+            'lenght' => $this->str('var-length', $this->name),
             'srcType' => $this->srcType,
             'srcName' => $this->name
         ***REMOVED***;
@@ -88,7 +88,7 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
                 'module' => $this->getModule()->getModuleName(),
                 'class' => $this->str('class', $this->name),
                 'var'   => $this->str('var', $this->name),
-                'lenght' => $this->str('var-lenght', $this->name),
+                'lenght' => $this->str('var-length', $this->name),
                 'srcType' => $this->srcType,
                 'srcName' => $this->name,
                 'srcLabel' => $this->str('label', $this->name)

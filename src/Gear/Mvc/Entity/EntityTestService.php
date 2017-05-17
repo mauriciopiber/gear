@@ -213,12 +213,12 @@ class EntityTestService extends AbstractMvc
                 $assertNull[***REMOVED*** = sprintf(
                     '$this->entity->add%s($%s);',
                     $this->str('class', $classId),
-                    $this->str('var-lenght', $classId)
+                    $this->str('var-length', $classId)
                 );
                 $assertNull[***REMOVED*** = sprintf(
                     '$this->entity->remove%s($%s);',
                     $this->str('class', $classId),
-                    $this->str('var-lenght', $classId)
+                    $this->str('var-length', $classId)
                 );
             }
         }
@@ -382,7 +382,7 @@ class EntityTestService extends AbstractMvc
         if (count($moreMethodsUse)>0) {
             foreach ($moreMethodsUse as $newMock) {
                 $classId    = str_replace('add', '', $newMock);
-                $params[***REMOVED*** = sprintf('        $%s', $this->str('var-lenght', $classId));
+                $params[***REMOVED*** = sprintf('        $%s', $this->str('var-length', $classId));
             }
         }
 

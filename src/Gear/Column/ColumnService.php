@@ -336,7 +336,7 @@ class ColumnService implements ServiceLocatorAwareInterface
                 $code .= $this->getFileCreator()->renderPartial(
                     'template/module/column/abstract/test/static-attribute.phtml',
                     [
-                        'attribute' => $this->str('var-lenght', $columnData->getColumn()->getName()),
+                        'attribute' => $this->str('var-length', $columnData->getColumn()->getName()),
                         'value' => $columnData->getUploadDir()
                     ***REMOVED***
                 );

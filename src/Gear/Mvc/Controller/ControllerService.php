@@ -276,14 +276,14 @@ class ControllerService extends AbstractMvc implements
             'requestPluginCreate' => $this->requestPluginCreate,
             'requestPluginUpdate' => $this->requestPluginUpdate,
             'prg'  => $this->postRedirectGet,
-            'idVar' => $this->str('var-lenght', 'id'.$this->str('class', $this->controller->getNameOff())),
+            'idVar' => $this->str('var-length', 'id'.$this->str('class', $this->controller->getNameOff())),
             'data' => $this->controller->getNameOff(),
             'dataUrl' => $this->str('url', $this->controller->getNameOff()),
             'tableUrl' => $this->str('url', $this->controller->getNameOff()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'module' => $this->getModule()->getModuleName(),
             'var' => $this->str('var', $this->controller->getNameOff()),
-            'varLength' =>  $this->str('var-lenght', $this->controller->getNameOff())
+            'varLength' =>  $this->str('var-length', $this->controller->getNameOff())
         );
     }
 

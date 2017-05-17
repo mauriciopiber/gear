@@ -94,7 +94,7 @@ class AppControllerService extends AbstractMvc
         $location = $this->getCode()->getLocation($app);
 
         $class = $this->str('class', $app->getName());
-        $var = $this->str('var-lenght', $class);
+        $var = $this->str('var-length', $class);
 
         $filename = $class.'.js';
 

@@ -82,7 +82,7 @@ class RepositoryService extends AbstractMvc
             'namespace' => $this->getCode()->getNamespace($this->src),
             'specialityFields' => $this->specialites,
             'baseClass' => $this->str('class', $this->db->getTable()),
-            'tableIdVar' => $this->str('var-lenght', 'id_'.$this->db->getTable()),
+            'tableIdVar' => $this->str('var-length', 'id_'.$this->db->getTable()),
             'tableId' => $this->str('var', 'id_'.$this->db->getTable()),
             'class'   => $this->className,
             'module'  => $this->getModule()->getModuleName(),

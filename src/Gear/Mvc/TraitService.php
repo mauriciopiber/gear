@@ -62,7 +62,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 'className' => $name.'Trait',
                 'class' => $name,
 
-                'var' => $this->str('var-lenght', $name),
+                'var' => $this->str('var-length', $name),
                 'expected' => $specialName,
                 'module' => $this->getModule()->getModuleName()
             ***REMOVED***);
@@ -83,7 +83,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
                 'class' => $this->str('class', $name),
                 'label' => $this->str('label', $name),
                 'var'   => $this->str('var', $name),
-                'lenght' => $this->str('var-lenght', $name),
+                'lenght' => $this->str('var-length', $name),
                 'srcType' => $src->getType(),
                 'srcName' => $src->getName(),
                 'service' => $service,

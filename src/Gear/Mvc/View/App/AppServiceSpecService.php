@@ -16,7 +16,7 @@ class AppServiceSpecService extends AbstractMvcTest
 
         $varClass = $this->str('var', $class);
 
-        $var = $this->str('var-lenght', 'Test'.$class);
+        $var = $this->str('var-length', 'Test'.$class);
 
         $filename = $class.'Spec.js';
 
