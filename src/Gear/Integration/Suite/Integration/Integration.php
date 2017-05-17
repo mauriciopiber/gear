@@ -43,8 +43,6 @@ class Integration
 
     const ALL_ASSOC_TABLES = [null, 'upload_image'***REMOVED***;
 
-    const REPEAT = 4;
-
     const TYPES = [
         self::CONTROLLER,
         self::CONTROLLER_MVC,
@@ -147,13 +145,13 @@ class Integration
                 'controller-plugin',
                 'value-object'
             ***REMOVED***,
-            self::REPEAT
+            $this->count
         );
     }
 
     public function runController()
     {
-        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, self::REPEAT);
+        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count);
     }
 
     public function runControllerMvc()
