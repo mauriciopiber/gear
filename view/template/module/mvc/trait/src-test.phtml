@@ -2,6 +2,7 @@ namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use <?php echo $this->fullclass;?>Trait;
+use <?php echo $this->fullclass;?>;
 
 /**
  * @group <?php echo $this->module.PHP_EOL; ?>
@@ -14,28 +15,28 @@ class <?php echo $this->class;?>TraitTest extends TestCase
 
     public function setUp()
     {
-        $this-><?php echo $this->var;?>SetUp = $this->prophesize('<?php echo $this->fullclass;?>');
+        $this-><?php echo $this->var;?>Mock = $this->prophesize(<?php echo $this->class;?>::class);
     }
 
     public function testGetEmpty()
     {
-        $<?php echo $this->var;?>SetUp = $this->get<?php echo $this->class;?>();
-        $this->assertNull($<?php echo $this->var;?>SetUp);
+        $<?php echo $this->length;?> = $this->get<?php echo $this->class;?>();
+        $this->assertNull($<?php echo $this->length;?>);
     }
 
     public function testSet()
     {
-        $this->set<?php echo $this->class;?>($this-><?php echo $this->var;?>SetUp->reveal());
-        $<?php echo $this->var;?>SetUp = $this->get<?php echo $this->class;?>();
+        $this->set<?php echo $this->class;?>($this-><?php echo $this->var;?>Mock->reveal());
+        $<?php echo $this->length;?> = $this->get<?php echo $this->class;?>();
 
         $this->assertInstanceOf(
-            '<?php echo $this->fullclass;?>',
-            $<?php echo $this->var;?>SetUp
+            <?php echo $this->class;?>::class,
+            $<?php echo $this->length.PHP_EOL;?>
         );
 
         $this->assertEquals(
-            $this-><?php echo $this->var;?>SetUp->reveal(),
-            $<?php echo $this->var;?>SetUp
+            $this-><?php echo $this->length;?>Mock->reveal(),
+            $<?php echo $this->length.PHP_EOL;?>
         );
     }
 }

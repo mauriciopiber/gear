@@ -62,7 +62,7 @@ class TraitTestServiceTest extends AbstractTestCase
     public function testDependency()
     {
         $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->traitTest->getModule());
-        $this->assertInstanceOf('Gear\Creator\File', $this->traitTest->getFileCreator());
+        $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->traitTest->getFileCreator());
         $this->assertInstanceOf('Gear\Creator\CodeTest', $this->traitTest->getCodeTest());
     }
 

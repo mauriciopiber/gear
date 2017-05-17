@@ -6,7 +6,7 @@ use GearBase\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\Util\String\StringService;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\CodeTest;
 use Gear\Creator\CodeTestTrait;
 use GearJson\Src\Src;
@@ -42,7 +42,7 @@ class ValueObjectTestService implements ModuleAwareInterface
      */
     public function __construct(
         StringService $stringService,
-        File $fileCreator,
+        FileCreator $fileCreator,
         BasicModuleStructure $module,
         CodeTest $codeTest
     ) {
