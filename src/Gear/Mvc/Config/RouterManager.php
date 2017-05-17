@@ -4,7 +4,7 @@ namespace Gear\Mvc\Config;
 use Gear\Mvc\AbstractMvc;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 
 class RouterManager extends AbstractMvc implements ModuleManagerInterface, ActionManagerInterface
 {
