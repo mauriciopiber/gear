@@ -10,16 +10,6 @@ class TraitTestServiceTraitTest extends AbstractTestCase
 {
     use \Gear\Mvc\TraitTestServiceTrait;
 
-    /**
-     * @group Gear
-     * @group ComposerUpgrade
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getTraitTestService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
     public function testSet()
     {
         $mockComposerUpgrade = $this->prophesize(

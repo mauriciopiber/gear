@@ -3,6 +3,7 @@ namespace GearItTest\ServiceTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use GearIt\Service\MyServiceTrait;
+use GearIt\Service\MyService;
 
 /**
  * @group GearIt
@@ -15,7 +16,7 @@ class MyServiceTraitTest extends TestCase
 
     public function setUp()
     {
-        $this->myService = $this->prophesize('GearIt\Service\MyService');
+        $this->myServiceMock = $this->prophesize(MyService::class);
     }
 
     public function testGetEmpty()
@@ -26,16 +27,16 @@ class MyServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $this->setMyService($this->myService->reveal());
+        $this->setMyService($this->myServiceMock->reveal());
         $myService = $this->getMyService();
 
         $this->assertInstanceOf(
-            'GearIt\Service\MyService',
+            MyService::class,
             $myService
         );
 
         $this->assertEquals(
-            $this->myService->reveal(),
+            $this->myServiceMock->reveal(),
             $myService
         );
     }

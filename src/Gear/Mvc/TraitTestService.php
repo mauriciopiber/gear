@@ -32,7 +32,8 @@ class TraitTestService extends AbstractMvcTest
                 'namespace' => $this->getCodeTest()->getNamespace($src),
                 'fullclass' => $this->getCodeTest()->getFullClassName($src),
                 'class' => $this->str('class', $name),
-                'var' => lcfirst($this->str('var-length', $name)),
+                'var' => $this->str('var', $name),
+                'length' => $this->str('var-length', $name),
                 'group' => $src->getType()
             )
         );
