@@ -164,6 +164,11 @@ class TestFile
     public function getModuleName(AbstractMinorSuite $mvcMinorSuite)
     {
         if ($mvcMinorSuite instanceof MvcMinorSuite) {
+
+            if ($mvcMinorSuite->getTableName() == null) {
+                return sprintf(self::MODULE_NAME, '');
+            }
+
             return sprintf(self::MODULE_NAME, $this->stringService->str('class', $mvcMinorSuite->getTableName()));
         }
 

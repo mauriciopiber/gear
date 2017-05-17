@@ -11,6 +11,8 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite;
 use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
 use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
+use Gear\Integration\Suite\Integration\Exception\InvalidTypeException;
+use Gear\Integration\Suite\Integration\Exception\InvalidMaxCountException;
 
 /**
  * PHP Version 5
@@ -43,6 +45,32 @@ class Integration
 
     const REPEAT = 4;
 
+    const TYPES = [
+        self::CONTROLLER,
+        self::CONTROLLER_MVC,
+        self::SRC,
+        self::SRC_MVC,
+        self::MVC
+    ***REMOVED***;
+
+    const CONTROLLER_MVC = 'controller-mvc';
+
+    const CONTROLLER = 'controller';
+
+    const SRC = 'src';
+
+    const SRC_MVC = 'src-mvc';
+
+    const MVC = 'mvc';
+
+    const MAX_COUNT = 10;
+
+    protected $type;
+
+    protected $count;
+
+    protected $longname = false;
+
     /**
      * Constructor
      *
@@ -70,13 +98,39 @@ class Integration
         return $this;
     }
 
-    public function integrate()
+    public function integrate($type, $count, $longname = false)
     {
-        $this->mvcSuite->runSuite();
-        $this->runSrcMvc();
-        $this->runControllerMvc();
-        $this->runSrc();
-        $this->runController();
+        $this->type = $type;
+        $this->count = $count;
+        $this->longname = $longname;
+
+        if ($this->type !== null && !in_array($this->type, self::TYPES)) {
+            throw new InvalidTypeException($this->type);
+        }
+
+        if ($this->count <= 0 || $this->count > self::MAX_COUNT) {
+            throw new InvalidMaxCountException($this->count);
+        }
+
+        if ($this->type === null || $this->type == self::MVC) {
+            $this->mvcSuite->runSuite();
+        }
+
+        if ($this->type === null || $this->type == self::SRC_MVC) {
+            $this->runSrcMvc();
+        }
+
+        if ($this->type === null || $this->type == self::CONTROLLER_MVC) {
+            $this->runControllerMvc();
+        }
+
+        if ($this->type === null || $this->type == self::SRC) {
+            $this->runSrc();
+        }
+
+        if ($this->type === null || $this->type == self::CONTROLLER) {
+            $this->runController();
+        }
 
         echo 'Integrate'."\n";
     }

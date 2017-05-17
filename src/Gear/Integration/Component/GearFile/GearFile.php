@@ -340,12 +340,17 @@ class GearFile
 
         $numberString = NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED***;
 
-        $name = sprintf($invokable['name'***REMOVED***, $type, $this->stringService->str('class', substr($configName, 0, 5)), $numberString);
+        $configFixName = (!empty($configName))
+            ? $this->stringService->str('class', substr($configName, 0, 5))
+            : '';
+
+
+        $name = sprintf($invokable['name'***REMOVED***, $type, $configFixName, $numberString);
 
         $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
 
         if (isset($invokable['extends'***REMOVED***)) {
-            $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $this->stringService->str('class', substr($configName, 0, 5)), $numberString);
+            $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $configFixName, $numberString);
         }
 
         if (isset($invokable['namespace'***REMOVED***)) {

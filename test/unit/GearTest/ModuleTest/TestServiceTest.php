@@ -17,7 +17,7 @@ class TestServiceTest extends AbstractTestCase
         parent::setUp();
 
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+        $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();
@@ -77,7 +77,8 @@ class TestServiceTest extends AbstractTestCase
         $test->setStringService($this->string);
         $test->setFileCreator($this->fileCreator);
         $test->setAntUpgrade($this->upgrade);
-        //$test->setAntEdge($this->edge->reveal());
+        //$test->setAntEdge($this->edge->reveal());***REMOVED***
+        $this->gearConfig->getCurrentName()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $test->copyBuildXmlFile();
 

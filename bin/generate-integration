@@ -15,35 +15,54 @@ if (php_sapi_name() === 'cli-server') {
 
 require 'init_autoloader.php';
 
+use GearBase\Util\String\StringService;
 use Gear\Integration\Util;
 use Gear\Integration\Component;
+use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
+use Gear\Integration\Util\Location\Location;
+use Gear\Integration\Util\Persist\Persist;
+use Gear\Integration\Component\MigrationFile\MigrationFile;
+use Gear\Integration\Component\GearFile\GearFile;
+use Gear\Integration\Component\TestFile\TestFile;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
+use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
+use Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator;
+use Gear\Integration\Suite\Src\SrcSuite\SrcSuite;
+use Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator;
+use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite;
+use Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator;
+use Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator;
+use Gear\Integration\Suite\Integration\Integration;
+use Gear\Util\Vector\ArrayService;
 
+$string   = new StringService();
+$column   = new Columns();
+$names    = new ResolveNames($string);
+$location = new Location();
+$persist  = new Persist($location);
 
-$string = new GearBase\Util\String\StringService();
-$column = new Gear\Integration\Util\Columns\Columns();
-$names = new Gear\Integration\Util\ResolveNames\ResolveNames($string);
-
-$location = new Gear\Integration\Util\Location\Location();
-$persist = new Gear\Integration\Util\Persist\Persist($location);
-
-$arrayService = new Gear\Util\Vector\ArrayService();
+$arrayService = new ArrayService();
     
-$migrationFile = new Gear\Integration\Component\MigrationFile\MigrationFile(
+$migrationFile = new MigrationFile(
     $persist,
     $string,
     $arrayService    
 );
 
-$gearfile = new Gear\Integration\Component\GearFile\GearFile(
+$gearfile = new GearFile(
     $persist,
     $string
 );
         
-$testFile = new Gear\Integration\Component\TestFile\TestFile($persist, $string);
+$testFile = new TestFile($persist, $string);
 
-$superTestFile = new Gear\Integration\Component\SuperTestFile\SuperTestFile($persist, $string);
+$superTestFile = new SuperTestFile($persist, $string);
  
-$mvcGenerator = new Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator(
+$mvcGenerator = new MvcGenerator(
     $gearfile, 
     $testFile, 
     $migrationFile, 
@@ -51,17 +70,17 @@ $mvcGenerator = new Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator(
     $column
 );
 
-$srcGenerator = new Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator(
+$srcGenerator = new SrcGenerator(
     $gearfile, 
     $testFile
 );
 
-$controllerGenerator = new Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator(
+$controllerGenerator = new ControllerGenerator(
     $gearfile, 
     $testFile
 );
 
-$srcMvcGenerator = new Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator(
+$srcMvcGenerator = new SrcMvcGenerator(
     $gearfile, 
     $testFile, 
     $migrationFile, 
@@ -69,20 +88,58 @@ $srcMvcGenerator = new Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGener
     $column
 );
 
-$controllerMvcGenerator = new Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator(
+$controllerMvcGenerator = new ControllerMvcGenerator(
     $gearfile, 
     $testFile,
     $names, 
     $column
 );
 
-$mvcSuite = new Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite($mvcGenerator, $superTestFile);
-$srcSuite = new Gear\Integration\Suite\Src\SrcSuite\SrcSuite($srcGenerator, $superTestFile);
-$controllerSuite = new Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite($controllerGenerator, $superTestFile);
-$srcMvcSuite = new Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite($srcMvcGenerator, $superTestFile);
-$controllerMvcSuite = new Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite($controllerMvcGenerator, $superTestFile);
+$mvcSuite = new MvcSuite($mvcGenerator, $superTestFile);
+$srcSuite = new SrcSuite($srcGenerator, $superTestFile);
+$controllerSuite = new ControllerSuite($controllerGenerator, $superTestFile);
+$srcMvcSuite = new SrcMvcSuite($srcMvcGenerator, $superTestFile);
+$controllerMvcSuite = new ControllerMvcSuite($controllerMvcGenerator, $superTestFile);
+
+$integration = new Integration($srcSuite, $srcMvcSuite, $controllerSuite, $controllerMvcSuite, $mvcSuite);
 
 
-$integration = new Gear\Integration\Suite\Integration\Integration($srcSuite, $srcMvcSuite, $controllerSuite, $controllerMvcSuite, $mvcSuite);
+function getParam($type, $argv)
+{
+    $preset = [
+        'longname' => false,
+        'count' => 4,
+        'type' => null
+    ***REMOVED***;
+    
+    $params = $argv;
+    unset($params[0***REMOVED***);
+    $params = array_values($params);
+    
+    foreach ($params as $param) {
+        $paramSet = explode('=', $param);
+        
+        $paramName = str_replace('--', '', $paramSet[0***REMOVED***);
+        
+        if (!in_array($paramName, array_keys($preset))) {
+            throw new \Exception('Parameter not valid');
+        }
+        
+        if ($paramName != $type) {
+            continue;
+        }
+                
+        if (count($paramSet) == 1 && $paramName == 'longname') {    
+            return true;
+        }
+        
+        if ($paramName == 'count') {
+            return intval($paramSet[1***REMOVED***);
+        }
+        return $paramSet[1***REMOVED***;
+    }
+    
+    return $preset[$type***REMOVED***;
+}
 
-$integration->integrate(); 
+$integration->integrate(getParam('type', $argv), getParam('count', $argv), getParam('longname', $argv)); 
