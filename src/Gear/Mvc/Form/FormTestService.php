@@ -78,7 +78,7 @@ class FormTestService extends AbstractMvcTest
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-                'var' => $this->str('var-lenght', $this->src->getName()),
+                'var' => $this->str('var-length', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
             ),

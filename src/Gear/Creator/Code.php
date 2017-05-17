@@ -89,7 +89,7 @@ EOS;
 
         foreach ($data->getDependency() as $i => $dependency) {
             $class = $this->str('class', $this->resolveName($dependency));
-            $var = $this->str('var-lenght', $class);
+            $var = $this->str('var-length', $class);
             $label = $this->str('label', $class);
             $namespace = $this->resolveNamespace($dependency);
 

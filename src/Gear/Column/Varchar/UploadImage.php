@@ -313,7 +313,7 @@ EOS;
     {
 
         $class = $this->str('class', $this->column->getName());
-        $var = $this->str('var-lenght', $this->column->getName());
+        $var = $this->str('var-length', $this->column->getName());
 
 
         return <<<EOS
@@ -330,7 +330,7 @@ EOS;
     public function getControllerDeclareVar()
     {
         return <<<EOS
-        \${$this->str('var-lenght', $this->column->getName())} = '';
+        \${$this->str('var-length', $this->column->getName())} = '';
 
 EOS;
     }
@@ -343,7 +343,7 @@ EOS;
      */
     public function getControllerCreateView()
     {
-        $varLength = $this->str('var-lenght', $this->column->getName());
+        $varLength = $this->str('var-length', $this->column->getName());
         $var = $this->str('var', $this->column->getName());
 
         return <<<EOS
@@ -359,7 +359,7 @@ EOS;
      */
     public function getControllerCreateAfter()
     {
-        $varLength = $this->str('var-lenght', $this->column->getName());
+        $varLength = $this->str('var-length', $this->column->getName());
         $var = $this->str('var', $this->column->getName());
 
         return <<<EOS
@@ -433,7 +433,7 @@ EOS;
     {
 
         $var = $this->str('var', $this->column->getName());
-        $lenght = $this->str('var-lenght', $this->column->getName());
+        $lenght = $this->str('var-length', $this->column->getName());
         $table = $this->str('url', $this->column->getTableName());
 
         return <<<EOS
@@ -696,7 +696,7 @@ EOS;
     {
         $var = $this->str('var', $this->column->getName());
         $contexto = $this->str('url', $this->column->getTableName());
-        $lenght = $this->str('var-lenght', $this->column->getName());
+        $lenght = $this->str('var-length', $this->column->getName());
 
         return <<<EOS
             if (isset(\$data['$var'***REMOVED***)) {
@@ -720,7 +720,7 @@ EOS;
      */
     public function getServiceUpdateAfter()
     {
-        $lenght = $this->str('var-lenght', $this->column->getName());
+        $lenght = $this->str('var-length', $this->column->getName());
 
         $var = $this->str('var', $this->column->getName());
         $contexto = $this->str('url', $this->column->getTableName());
@@ -958,7 +958,7 @@ EOS;
         //$path = $this->sizeName();
         $elementName = $this->getFileName($testName);
 
-        $fullpath = 'static::$'.$this->str('var-lenght', $this->column->getName()).'.\'/%s'.$elementName.'\'';
+        $fullpath = 'static::$'.$this->str('var-length', $this->column->getName()).'.\'/%s'.$elementName.'\'';
 
         return $fullpath;
     }
@@ -1054,7 +1054,7 @@ EOF;
     public function getInsertFileExistsTest()
     {
 
-        $varLenght = $this->str('var-lenght', $this->column->getName());
+        $varLenght = $this->str('var-length', $this->column->getName());
 
         $insert = <<<EOS
 
@@ -1074,7 +1074,7 @@ EOS;
      */
     public function getUpdateFileExistsTest()
     {
-        $varLenght = $this->str('var-lenght', $this->column->getName());
+        $varLenght = $this->str('var-length', $this->column->getName());
 
         $update = <<<EOS
         \$baseDirUpload = \GearBase\Module::getProjectFolder().static::\${$varLenght};

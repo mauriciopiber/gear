@@ -16,7 +16,7 @@ class SearchTestService extends AbstractMvcTest
         $template = 'template/module/mvc/search/test-db.phtml';
 
         $options = array(
-            'var' => $this->str('var-lenght', $this->src->getName()),
+            'var' => $this->str('var-length', $this->src->getName()),
             'class'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
             'namespace' => $this->getCodeTest()->getNamespace($this->src),

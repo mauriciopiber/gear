@@ -77,7 +77,7 @@ class FilterService extends AbstractMvc
         $options = [
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'tableLabel' => $this->str('label', $this->db->getTable()),
-            'var'     => $this->str('var-lenght', 'id'.$this->src->getName()),
+            'var'     => $this->str('var-length', 'id'.$this->src->getName()),
             'class'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
             'namespace' => $this->getCode()->getNamespace($this->src)
@@ -119,7 +119,7 @@ class FilterService extends AbstractMvc
                 'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
-                    'var'     => $this->str('var-lenght', 'id'.$this->tableName),
+                    'var'     => $this->str('var-length', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
             ***REMOVED***);
@@ -128,7 +128,7 @@ class FilterService extends AbstractMvc
                 'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
                 'config' => array(
                     'class' => $this->str('class', $this->src->getName()),
-                    'var'     => $this->str('var-lenght', 'id'.$this->tableName),
+                    'var'     => $this->str('var-length', 'id'.$this->tableName),
                 ),
                 'placeholder' => 'header'
             ***REMOVED***);

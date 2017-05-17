@@ -70,7 +70,7 @@ class DatePtBr extends Date
      */
     public function getFormElement()
     {
-        $var         = $this->str('var-lenght', $this->column->getName());
+        $var         = $this->str('var-length', $this->column->getName());
         $elementName = $this->str('var', $this->column->getName());
         $label       = $this->str('label', $this->column->getName());
 

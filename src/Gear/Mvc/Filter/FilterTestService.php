@@ -35,7 +35,7 @@ class FilterTestService extends AbstractMvcTest
                 'callable' => $this->getServiceManager()->getServiceName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-                'var' => $this->str('var-lenght', $this->src->getName()),
+                'var' => $this->str('var-length', $this->src->getName()),
                 'className'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName(),
             ),
@@ -207,7 +207,7 @@ class FilterTestService extends AbstractMvcTest
 
         $this->tableName = $this->db->getTable();
         $this->class     = $this->str('class', $this->src->getName());
-        $this->var       = $this->str('var-lenght', $this->src->getName());
+        $this->var       = $this->str('var-length', $this->src->getName());
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
@@ -232,7 +232,7 @@ class FilterTestService extends AbstractMvcTest
         $module = $this->getModule()->getModuleName();
 
         $options =  [
-            'var' => $this->str('var-lenght', $this->src->getName()),
+            'var' => $this->str('var-length', $this->src->getName()),
             'className'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
             'functions' => $this->functions,

@@ -36,7 +36,7 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'className'  => $src->getName(),
-            'var'        => $this->str('var-lenght', $this->src->getName()),
+            'var'        => $this->str('var-length', $this->src->getName()),
             'module'     => $this->getModule()->getModuleName()
         ***REMOVED***;
 
@@ -95,7 +95,7 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
             'className'     => $this->src->getName(),
             'static'        => $this->getColumnService()->renderColumnPart('staticTest'),
-            'varLenght'     => $this->str('var-lenght', $this->tableName),
+            'varLenght'     => $this->str('var-length', $this->tableName),
             'class'         => $this->tableName,
             'module'        => $this->getModule()->getModuleName(),
             'hydrator'      => ['update' => ''***REMOVED***,

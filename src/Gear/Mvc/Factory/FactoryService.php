@@ -75,7 +75,7 @@ class FactoryService extends AbstractMvc
         $entity = $this->getServiceManager()->getServiceName($entitySrc);
         $entityName = $this->getFactoryCode()->resolveName($entity);
 
-        $var = $this->str('var-lenght', 'Id'.$src->getDb()->getTable());
+        $var = $this->str('var-length', 'Id'.$src->getDb()->getTable());
 
         return [
             'package'     => $this->getFactoryCode()->getClassDocsPackage($src),
@@ -100,7 +100,7 @@ class FactoryService extends AbstractMvc
             throw new WrongType('Must be "SearchForm" Type, tried to use '.$src->getType());
         }
 
-        $var = $this->str('var-lenght', 'Id'.$src->getName());
+        $var = $this->str('var-length', 'Id'.$src->getName());
 
         return [
             'package'     => $this->getFactoryCode()->getClassDocsPackage($src),

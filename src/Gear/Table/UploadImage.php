@@ -188,7 +188,7 @@ EOS;
     {
 
         $module = $this->getModule()->getModuleName();
-        $var = $this->str('var-lenght', $table);
+        $var = $this->str('var-length', $table);
         $url = $this->str('url', $table);
 
         return <<<EOS
@@ -224,7 +224,7 @@ EOS;
         $tableUrl = $this->str('url', $tableName);
         $tableName = $this->str('class', $tableName);
 
-        $tableId = $this->str('var-lenght', 'id'.$tableName);
+        $tableId = $this->str('var-length', 'id'.$tableName);
 
         return <<<EOS
         \$images = \$this->getImageService()->query('$tableUrl', array(), \${$tableId});

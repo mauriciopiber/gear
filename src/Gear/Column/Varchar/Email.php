@@ -31,7 +31,7 @@ class Email extends Varchar implements UniqueInterface
         $columnName = $this->str('var', $elementName);
         $elementLabel = $this->str('label', $this->column->getName());
 
-        $elementClass = $this->str('var-lenght', 'id'.$this->str('class', $this->column->getTableName()));
+        $elementClass = $this->str('var-length', 'id'.$this->str('class', $this->column->getTableName()));
 
         $tableName  = $this->column->getTableName();
         $tableLabelUnique = $this->str('label', $this->column->getTableName());

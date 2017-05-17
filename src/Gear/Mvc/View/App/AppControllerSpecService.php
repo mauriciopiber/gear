@@ -92,7 +92,7 @@ class AppControllerSpecService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($app);
 
         $class = $this->str('class', $app->getName());
-        $testVar = $this->str('var-lenght', 'Test'.$class);
+        $testVar = $this->str('var-length', 'Test'.$class);
 
         $filename = $class.'Spec.js';
 

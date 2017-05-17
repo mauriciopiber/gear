@@ -130,7 +130,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             $injectFunctions .= $this->getFileCreator()->renderPartial(
                 'template/module/mvc/console-controller/test-'.$type.'-dependency.phtml',
                 [
-                    'controllerVar' => $this->str('var-lenght', $this->controller->getName()),
+                    'controllerVar' => $this->str('var-length', $this->controller->getName()),
                     'functionName' => $this->str('var', $functionName),
                     'namespace' => $namespace,
                     'name' => $name
@@ -149,7 +149,7 @@ class ConsoleControllerTest extends AbstractMvcTest
 
     public function actionToController($insertMethods)
     {
-        $controllerVar = $this->str('var-lenght', $this->controller->getName());
+        $controllerVar = $this->str('var-length', $this->controller->getName());
 
         foreach ($insertMethods as $method) {
             $actionName = $this->str('class', $method->getName());
@@ -217,7 +217,7 @@ class ConsoleControllerTest extends AbstractMvcTest
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getNameOff()),
             'controllerCallname' => $this->str('class', $controller->getNameOff()),
-            'controllerVar' => $this->str('var-lenght', $controller->getName())
+            'controllerVar' => $this->str('var-length', $controller->getName())
         ***REMOVED***;
 
 

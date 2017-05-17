@@ -43,7 +43,7 @@ class ControllerTestService extends AbstractMvcTest implements
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getNameOff()),
             'controllerCallname' => $this->str('class', $controller->getNameOff()),
-            'controllerVar' => $this->str('var-lenght', $controller->getName())
+            'controllerVar' => $this->str('var-length', $controller->getName())
         ***REMOVED***;
 
         if ($controller->getService() === 'factories') {
@@ -456,7 +456,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
     public function actionToController($insertMethods)
     {
-        $controllerVar = $this->str('var-lenght', $this->controller->getName());
+        $controllerVar = $this->str('var-length', $this->controller->getName());
 
         foreach ($insertMethods as $method) {
             $actionName = $this->str('class', $method->getName());
@@ -540,7 +540,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 $injectFunctions .= $this->getFileCreator()->renderPartial(
                     'template/module/mvc/controller/test-'.$type.'-dependency.phtml',
                     [
-                        'controllerVar' => $this->str('var-lenght', $this->controller->getName()),
+                        'controllerVar' => $this->str('var-length', $this->controller->getName()),
                         'functionName' => $this->str('var', $functionName),
                         'namespace' => $namespace,
                         'name' => $name
