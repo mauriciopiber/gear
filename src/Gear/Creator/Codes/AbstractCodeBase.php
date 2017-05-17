@@ -152,7 +152,9 @@ abstract class AbstractCodeBase implements
                 $actionName = str_replace('()', '', $actionName);
                 $actionName = str_replace('(', '', $actionName);
                 $actionName = trim($actionName);
-                $actionName = $this->str('class', $actionName);
+                if (!empty($actionName)) {
+                    $actionName = $this->str('class', $actionName);
+                }
                 $actions[***REMOVED***  = $actionName;
             }
         }
