@@ -12,12 +12,6 @@ class FileUpgradeTraitTest extends AbstractTestCase
 {
     use FileUpgradeTrait;
 
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getFileUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
     public function testSet()
     {
         $mocking = $this->prophesize('Gear\Upgrade\FileUpgrade')->reveal();
