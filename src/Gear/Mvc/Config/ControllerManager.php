@@ -3,7 +3,7 @@ namespace Gear\Mvc\Config;
 
 use Gear\Service\AbstractJsonService;
 use GearJson\Controller\Controller;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 
 class ControllerManager extends AbstractJsonService implements ModuleManagerInterface, ControllerManagerInterface
 {

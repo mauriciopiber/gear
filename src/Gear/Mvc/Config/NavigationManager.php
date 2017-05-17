@@ -4,7 +4,7 @@ namespace Gear\Mvc\Config;
 use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Action\Action;
-use Gear\Creator\File;
+use Gear\Creator\FileCreator\FileCreator;
 use GearJson\Db\Db;
 
 class NavigationManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
