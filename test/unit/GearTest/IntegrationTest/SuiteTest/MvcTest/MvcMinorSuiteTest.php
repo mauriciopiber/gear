@@ -22,6 +22,7 @@ class MvcMinorSuiteTest extends TestCase
 
         $this->mvcMinorSuite = new MvcMinorSuite($this->major, null, null, null, null);
         $this->assertEquals($this->major, $this->mvcMinorSuite->getMajorSuite());
+        $this->assertEquals('mvc/mvc-complete/mvc-complete', $this->mvcMinorSuite->getLocationKey());
         //$this->mvcMinorSuite->setTableName('mvc-complete-unique-not-null');
 
         //$this->assertEquals('mvc-complete-unique-not-null', $this->mvcMinorSuite->getSuiteName());

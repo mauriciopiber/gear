@@ -14,13 +14,16 @@ class ControllerMinorSuiteTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->majorSuite = new ControllerMajorSuite();
-        $this->controllerMinorSuite = new ControllerMinorSuite($this->majorSuite, 'Action', 1);
+        $this->majorSuite = $this->prophesize(ControllerMajorSuite::class);
+        $this->controllerMinorSuite = new ControllerMinorSuite($this->majorSuite->reveal(), 'Action', 1);
     }
 
     public function testControllerMinorSuite()
     {
-        $this->assertEquals($this->majorSuite, $this->controllerMinorSuite->getMajorSuite());
+        $this->majorSuite->getSuite()->willReturn('controller')->shouldBeCalled();
+        $this->assertEquals($this->majorSuite->reveal(), $this->controllerMinorSuite->getMajorSuite());
+        $this->assertEquals('Action', $this->controllerMinorSuite->getType());
+        $this->assertEquals('controller/controller-action', $this->controllerMinorSuite->getLocationKey());
 
         //$this->assertInstanceOf('Gear\Integration\Suite\Controller\ControllerMinorSuite', $this->controllerMinorSuite);
     }

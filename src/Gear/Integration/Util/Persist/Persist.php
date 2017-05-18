@@ -48,7 +48,7 @@ class Persist
             throw new \Exception('Location key not found');
         }
         $majorSuite = $suite->getMajorSuite();
-        $location = $this->location->getLocation().'/'.$majorSuite::SUITE.'/'.$suite->getLocationKey();
+        $location = sprintf('%s/%s', $this->location->getLocation(), $suite->getLocationKey());
 
         $path =  sprintf('%s/%s', $location, $name);
 

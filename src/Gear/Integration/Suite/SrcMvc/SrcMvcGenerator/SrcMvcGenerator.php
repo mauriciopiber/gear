@@ -79,16 +79,18 @@ class SrcMvcGenerator
         $tables = $this->prepareTables($srcMvcMinor);
 
         $srcMvcMinor->setTableName(sprintf('src-mvc-%s', $srcMvcMinor->getType()));
-        $srcMvcMinor->setLocationKey(sprintf('src-mvc-%s', $srcMvcMinor->getType()));
 
+        //gearfile
         $gearfile = $this->gearFile->createSrcMvcGearfile($srcMvcMinor, $tables);
         $srcMvcMinor->setGearfile($gearfile);
 
+        //migration
         if ($srcMvcMinor->getType() == 'entity') {
             $migration = $this->migrationFile->createSrcMvcMigrationFile($srcMvcMinor, $tables);
             $srcMvcMinor->setMigrationFile($migration);
         }
 
+        //test file
         $this->testFile->updateTestFile($srcMvcMinor, $this->getMvcDependency()[$srcMvcMinor->getType()***REMOVED***);
 
         echo sprintf('        - minor: %s', $srcMvcMinor->getType())."\n";

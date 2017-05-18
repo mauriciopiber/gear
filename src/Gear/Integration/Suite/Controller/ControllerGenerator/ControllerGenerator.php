@@ -50,10 +50,11 @@ class ControllerGenerator
         $controllers = [***REMOVED***;
         $controllers[***REMOVED*** = $this->createSuite($type, $repeat);
 
-        $suite->setLocationKey(sprintf('controller-%s', strtolower($suite->getType())));
 
+        //gearfile
         $gearfile = $this->gearFile->createControllerGearFile($suite, ['src' => $srcs, 'controller' => $controllers***REMOVED***);
 
+        //testfile
         $suite->setGearFile($gearfile);
         $this->testFile->updateTestFile($suite);
 

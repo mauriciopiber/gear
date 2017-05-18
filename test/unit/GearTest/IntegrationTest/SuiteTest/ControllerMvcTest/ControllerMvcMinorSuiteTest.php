@@ -15,13 +15,15 @@ class ControllerMvcMinorSuiteTest extends TestCase
     {
         parent::setUp();
 
-        $this->controllerMvcMajorSuite = new ControllerMvcMajorSuite();
-        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite($this->controllerMvcMajorSuite);
+        $this->controllerMvcMajorSuite = $this->prophesize(ControllerMvcMajorSuite::class);
+        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite($this->controllerMvcMajorSuite->reveal());
 
     }
 
     public function testControllerMvcMajorSuite()
     {
-        $this->assertEquals($this->controllerMvcMajorSuite, $this->controllerMvcMinorSuite->getMajorSuite());
+        $this->controllerMvcMajorSuite->getSuite()->willReturn('controller-mvc')->shouldBeCalled();
+        $this->assertEquals($this->controllerMvcMajorSuite->reveal(), $this->controllerMvcMinorSuite->getMajorSuite());
+        $this->assertEquals('controller-mvc/controller-mvc', $this->controllerMvcMinorSuite->getLocationKey());
     }
 }
