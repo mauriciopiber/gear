@@ -18,6 +18,7 @@ use Gear\Integration\Component\TestFile\TestFile;
 class SrcGenerator
 {
     use GearFileTrait;
+
     use TestFileTrait;
 
     /**
@@ -169,8 +170,8 @@ class SrcGenerator
 
         }
 
-        $srcMinor->setLocationKey(sprintf('src-%s', strtolower($srcMinor->getType())));
         $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
+
         $srcMinor->setGearFile($gearfile);
 
         $this->testFile->updateTestFile($srcMinor);

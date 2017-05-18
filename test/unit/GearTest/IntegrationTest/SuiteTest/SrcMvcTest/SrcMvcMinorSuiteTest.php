@@ -14,15 +14,16 @@ class SrcMvcMinorSuiteTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->majorSuite = new SrcMvcMajorSuite();
-        $this->srcMvcMinorSuite = new SrcMvcMinorSuite($this->majorSuite, 'service');
+        $this->majorSuite = $this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite');
+        $this->srcMvcMinorSuite = new SrcMvcMinorSuite($this->majorSuite->reveal(), 'service');
     }
 
     public function testCreateMinorSuite()
     {
-        $this->assertEquals($this->majorSuite, $this->srcMvcMinorSuite->getMajorSuite());
-
-        //$this->assertEquals($this->majorSuite->reveal(), $this->srcMvcMinorSuite->getMajorSuite());
+        $this->majorSuite->getSuite()->willReturn('src-mvc')->shouldBeCalled();
+        $this->assertEquals($this->majorSuite->reveal(), $this->srcMvcMinorSuite->getMajorSuite());
+        $this->assertEquals('service', $this->srcMvcMinorSuite->getType());
+        $this->assertEquals('src-mvc/src-mvc-service', $this->srcMvcMinorSuite->getLocationKey());
         //$this->assertEquals('service', $this->srcMvcMinorSuite->getType());
     }
 }

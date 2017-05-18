@@ -27,6 +27,15 @@ class ControllerMvcMinorSuite extends MvcMinorSuite
         return $this;
     }
 
+
+    public function getLocationKey()
+    {
+        if (!isset($this->locationKey) || empty($this->locationKey)) {
+            $this->locationKey = $this->getMajorSuite()->getSuite().'/'.sprintf(self::SUITE);
+        }
+        return $this->locationKey;
+    }
+
     public function getSuiteName($type = null)
     {
         return self::SUITE;

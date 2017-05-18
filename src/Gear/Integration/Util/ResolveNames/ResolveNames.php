@@ -86,7 +86,7 @@ class ResolveNames
         $tableUrl = $this->format($suite, 'url', false);
 
         $key = sprintf(
-            '%s/mvc-%s',
+            'mvc/%s/mvc-%s',
             $this->stringService->str('url', $mvcMajor),
             implode('-', $tableUrl)
         );

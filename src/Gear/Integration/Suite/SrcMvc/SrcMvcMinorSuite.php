@@ -14,6 +14,8 @@ use Gear\Integration\Suite\Mvc\MvcMinorSuite;
  */
 class SrcMvcMinorSuite extends MvcMinorSuite
 {
+    const SUITE = 'src-mvc-%s';
+
     public $type;
 
     /**
@@ -28,6 +30,15 @@ class SrcMvcMinorSuite extends MvcMinorSuite
 
         return $this;
     }
+
+    public function getLocationKey()
+    {
+        if (!isset($this->locationKey) || empty($this->locationKey)) {
+            $this->locationKey = $this->getMajorSuite()->getSuite().'/'.sprintf(self::SUITE, strtolower($this->getType()));
+        }
+        return $this->locationKey;
+    }
+
     /*
     public function __construct($majorSuite, $type, $majorType = null, $columnType = null, $userType = null, $constraints = null, $tableAssoc = null)
     {

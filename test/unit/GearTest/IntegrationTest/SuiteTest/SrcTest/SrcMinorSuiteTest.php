@@ -20,9 +20,10 @@ class SrcMinorSuiteTest extends TestCase
 
     public function testCreateMinorSuite()
     {
-        $this->assertEquals($this->majorSuite->reveal(), $this->srcMinorSuite->getMajorSuite());
-        //$this->assertEquals('service', $this->srcMinorSuite->getType());
-        //$this->assertEquals('1', $this->srcMinorSuite->getRepeat());
-    }
+        $this->majorSuite->getSuite()->willReturn('src');
 
+        $this->assertEquals($this->majorSuite->reveal(), $this->srcMinorSuite->getMajorSuite());
+        $this->assertEquals('service', $this->srcMinorSuite->getType());
+        $this->assertEquals('src/src-service', $this->srcMinorSuite->getLocationKey());
+    }
 }
