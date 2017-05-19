@@ -12,6 +12,8 @@ abstract class AbstractMinorSuite extends AbstractSuite
 
     protected $gearFile;
 
+    protected $longName = false;
+
     /**
      * Constructor
      *
@@ -21,6 +23,11 @@ abstract class AbstractMinorSuite extends AbstractSuite
     {
         $this->majorSuite = $majorSuite;
         return $this;
+    }
+
+    public function isUsingLongName()
+    {
+        return $this->longName;
     }
 
     public function getMajorSuite()

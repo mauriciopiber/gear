@@ -145,13 +145,14 @@ class Integration
                 'controller-plugin',
                 'value-object'
             ***REMOVED***,
-            $this->count
+            $this->count,
+            $this->longname
         );
     }
 
     public function runController()
     {
-        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count);
+        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count, $this->longname);
     }
 
     public function runControllerMvc()
@@ -160,7 +161,8 @@ class Integration
             self::ALL_COLUMNS,
             self::ALL_USERTYPES,
             self::ALL_CONSTRAINTS,
-            self::ALL_ASSOC_TABLES
+            self::ALL_ASSOC_TABLES,
+            $this->longname
         );
     }
 
@@ -180,7 +182,8 @@ class Integration
             self::ALL_COLUMNS,
             self::ALL_USERTYPES,
             self::ALL_CONSTRAINTS,
-            self::ALL_ASSOC_TABLES
+            self::ALL_ASSOC_TABLES,
+            $this->longname
         );
     }
 

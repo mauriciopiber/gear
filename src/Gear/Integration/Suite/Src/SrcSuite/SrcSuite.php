@@ -41,7 +41,7 @@ class SrcSuite
     }
 
 
-    public function runSrcSuite($types, $repeat)
+    public function runSrcSuite($types, $repeat, $longName)
     {
         $srcMajor = new SrcMajorSuite();
 
@@ -49,7 +49,7 @@ class SrcSuite
 
         foreach ($types as $type) {
 
-            $minorSuite = $this->srcGenerator->generateMinorSuite(new SrcMinorSuite($srcMajor, $type, $repeat));
+            $minorSuite = $this->srcGenerator->generateMinorSuite(new SrcMinorSuite($srcMajor, $type, $repeat, $longName));
 
             $srcMajor->addMinorSuite($minorSuite);
         }

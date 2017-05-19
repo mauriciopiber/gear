@@ -1,0 +1,22 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->class;?>;
+
+/**
+ * @group Service
+ */
+class <?php echo $this->class;?>Test extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+        $this->service = $this->getMockForAbstractClass(<?php echo $this->class;?>::class, [***REMOVED***, '', false);
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(<?php echo $this->class;?>::class, $this->service);
+    }
+<?php echo $this->functions;?>
+}

@@ -23,10 +23,18 @@ class SrcMvcMinorSuite extends MvcMinorSuite
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct($majorSuite, $type, $columnType = null, $userType = null, $constraints = null, $tableAssoc = null)
-    {
+    public function __construct(
+        $majorSuite,
+        $type,
+        $columnType  = null,
+        $userType    = null,
+        $constraints = null,
+        $tableAssoc  = null,
+        $useLongName = false
+    ) {
         parent::__construct($majorSuite, $columnType, $userType, $constraints, $tableAssoc);
         $this->type = $type;
+        $this->longName = $useLongName;
 
         return $this;
     }

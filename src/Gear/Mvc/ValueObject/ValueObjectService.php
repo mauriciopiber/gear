@@ -34,6 +34,7 @@ class ValueObjectService extends AbstractJsonService
                 'namespace'   => $this->getCode()->getNamespace($this->src),
                 'extends'     => $this->getCode()->getExtends($this->src),
                 'class'       => $this->src->getName(),
+                'abstract'    => $this->src->getAbstract(),
                 'module'      => $this->getModule()->getModuleName()
             ***REMOVED***,
             $this->src->getName().'.php',

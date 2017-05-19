@@ -21,6 +21,16 @@ class SrcGenerator
 
     use TestFileTrait;
 
+    const VALUE_OBJECT = 'value-object';
+
+    const REPOSITORY = 'repository';
+
+    const SERVICE = 'service';
+
+    const INTERFACE = 'interface';
+
+    protected $minorSuite;
+
     /**
      * Constructor
      *
@@ -39,111 +49,152 @@ class SrcGenerator
         return $this;
     }
 
+    private function generateBaseInterface()
+    {
+        $implements = [***REMOVED***;
+        $implements[***REMOVED*** = [
+            'name' => $this->type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::INTERFACE
+        ***REMOVED***;
+
+
+        return [$implements, ['0' => ''***REMOVED***, $this->type, $this->repeat***REMOVED***;
+
+    }
+
+    private function generateBaseClass()
+    {
+        $invokables = [***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
+        ***REMOVED***;
+
+        return [$invokables, $this->getConfig(), $this->type, $this->repeat***REMOVED***;
+    }
+
+    public function getConfig()
+    {
+        $config = ['invokables'***REMOVED***;
+
+        if (!in_array($this->type, [self::VALUE_OBJECT***REMOVED***)) {
+            $config[***REMOVED*** = 'factories';
+        }
+
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY, self::VALUE_OBJECT***REMOVED***)) {
+            $config[***REMOVED*** = 'abstract';
+        }
+
+        return $config;
+    }
+
     public function generateMinorSuite($srcMinor)
     {
+        $this->minorSuite = $srcMinor;
+
+        $this->type = $srcMinor->getType();
+        $this->repeat = $srcMinor->getRepeat();
+
         $type = $srcMinor->getType();
         $repeat = $srcMinor->getRepeat();
+        $keyStyle = ($srcMinor->isUsingLongName()) ? 'long' : 'short';
+
+        $this->keyStyle = ($srcMinor->isUsingLongName()) ? 'long' : 'short';
+
 
 
         $srcOptions = [***REMOVED***;
 
-        $data = [***REMOVED***;
-
-        if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-
-            $implements = [***REMOVED***;
-            $implements[***REMOVED*** = [
-                'name' => '%sImpl%s%s',
-                'type' => 'Interface'
-            ***REMOVED***;
-
-            $srcOptions[***REMOVED*** = [$implements, ['0' => ''***REMOVED***, $type, $repeat***REMOVED***;
-
-            //$data = array_merge($data, generateGearfiles($implements, ['0' => ''***REMOVED***, $type, $repeat));
-
+        if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+            $srcOptions[***REMOVED*** = $this->generateBaseInterface();
         }
+
+        //$srcOptions[***REMOVED*** = $this->generateBaseClass();
+
         $invokables = [***REMOVED***;
+        /*
 
         $invokables[***REMOVED*** = [
-            'name' => '%sExtendable%s%s',
-            'type' => $type
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%s%s%s',
-            'type' => $type
-        ***REMOVED***;
-
-        $invokables[***REMOVED*** = [
-            'name' => '%sNamespace%s%s',
-            'type' => $type,
+            'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
             'namespace' => '%s'
         ***REMOVED***;
 
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
+        ***REMOVED***;
+
         //implements
-        if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+
+*/
+        if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
 
             $invokables[***REMOVED*** = [
-                'name' => '%sImplements%s%s',
-                'implements' => $this->gearFile->createMultiplesInterfaces($type, 1),
-                'type' => $type
+                'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+                'type' => $this->type
             ***REMOVED***;
 
             $invokables[***REMOVED*** = [
-                'name' => '%sImplementsMany%s%s',
-                'implements' => $this->gearFile->createMultiplesInterfaces($type, $repeat),
-                'type' => $type
+                'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
+                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+                'type' => $this->type
             ***REMOVED***;
         }
 
 
 
+        /*
         $invokables[***REMOVED*** = [
-            'name' => '%sExtends%s%s',
-            'extends' => '%s\%sExtendable%s%s',
-            'type' => $type
-        ***REMOVED***;
-
-
-        $invokables[***REMOVED*** = [
-            'name' => '%sFull%s%s',
-            'extends' => '%s\%sExtendable%s%s',
+            'name' => GearFile::KEYS['full'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesInterfaces($type, $repeat),
-            'type' => $type
+            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->keyStyle),
+            'type' => $this->type
         ***REMOVED***;
+        */
 
-        $config = ['invokables'***REMOVED***;
+        //$data = array_merge($data, generateGearfiles($invokables, $config, $this->type, $repeat));
+        $srcOptions[***REMOVED*** = [$invokables, $this->getConfig(), $this->type, $this->repeat***REMOVED***;
 
-        if (!in_array($type, ['ValueObject'***REMOVED***)) {
-            $config[***REMOVED*** = 'factories';
-        }
-
-        if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
-            $config[***REMOVED*** = 'abstract';
-        }
-
-
-        //$data = array_merge($data, generateGearfiles($invokables, $config, $type, $repeat));
-        $srcOptions[***REMOVED*** = [$invokables, $config, $type, $repeat***REMOVED***;
-
+        /*
         $dependencies = [***REMOVED***;
 
         //to max dependency based on repeat number. interfaces too.
-        if (in_array($type, ['Service', 'Repository'***REMOVED***)) {
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
 
+
+            /*
             $dependencies[***REMOVED*** = [
-                'name' => '%sDep%s%s',
-                'type' => $type,
-                'dependency' => '%s\%sInvok%s'
+                'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
+                'type' => $this->type,
+                'dependency' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***
             ***REMOVED***;
 
+            $dependencies[***REMOVED*** = [
+                'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
+                'type' => $this->type,
+                'dependency' => [
+                    GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+                    GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+                    GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+                ***REMOVED***
+            ***REMOVED***;*/
+
+            /*
             $dependencies[***REMOVED*** = [
                 'name' => '%sDeps%s%s',
                 'type' => $type,
                 'dependency' => ['%s\%sInvok%s', '%s\%sExtendsInvok%s', '%s\%sImplementsInvok%s'***REMOVED***
             ***REMOVED***;
-
 
             $dependencies[***REMOVED*** = [
                 'name' => '%sDepFull%s%s',
@@ -166,9 +217,11 @@ class SrcGenerator
             $config = ['factories', 'abstract'***REMOVED***;
 
             $srcOptions[***REMOVED*** = [$dependencies, $config, $type, $repeat***REMOVED***;
+            */
             //$data = array_merge($data, generateGearfiles($dependencies, $config, $type, $repeat));
 
-        }
+
+        //}
 
         $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
 

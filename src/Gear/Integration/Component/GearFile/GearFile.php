@@ -30,6 +30,62 @@ class GearFile
 
     protected $history = [***REMOVED***;
 
+    protected $count;
+
+    protected $longname = false;
+
+    protected $suite;
+
+    const KEYS_BASE = [
+        'implements' => [
+            'short' => '%sInt%s',
+            'long'  => '%sInterface%s'
+        ***REMOVED***,
+        'extends' => [
+            'short' => '%sExtesi%s%s',
+            'long'  => '%sExtesible%s%s'
+        ***REMOVED***
+    ***REMOVED***;
+
+    const KEYS = [
+        'implements' => [
+            'short' => '%sImpl%s%s',
+            'long'  => '%sImplements%s%s'
+        ***REMOVED***,
+        'implements-many' => [
+            'short' => '%sImplMany%s%s',
+            'long'  => '%sImplementsMany%s%s'
+        ***REMOVED***,
+        'extends' => [
+            'short' => '%sExt%s%s',
+            'long'  => '%sExtends%s%s'
+        ***REMOVED***,
+        'namespace' => [
+            'short' => '%sNames%s%s',
+            'long'  => '%sNamespace%s%s'
+        ***REMOVED***,
+        'dependency' => [
+            'short' => '%sDep%s%s',
+            'long'  => '%sDependency%s%s',
+        ***REMOVED***,
+        'dependency-many' => [
+            'short' => '%sDepMany%s%s',
+            'long'  => '%sDependencyMany%s%s',
+        ***REMOVED***,
+        'dependency-full' => [
+            'short' => '%sDepFull%s%s',
+            'long'  => '%sDependencyFull%s%s',
+        ***REMOVED***,
+        'default' => [
+            'short' => '%s%s%s',
+            'long'  => '%s%s%s'
+        ***REMOVED***,
+        'full' => [
+            'short' => '%sFull%s%s',
+            'long'  => '%sFull%s%s'
+        ***REMOVED***
+    ***REMOVED***;
+
     /**
      * Constructor
      *
@@ -267,9 +323,9 @@ class GearFile
         return $data;
     }
 
-    public function createGearfileComponent($suite, $data)
+    public function createGearfileComponent($data)
     {
-        $suiteName = $suite->getSuiteName();
+        $suiteName = $this->suite->getSuiteName();
 
         $name = $this->stringService->str('url', $suiteName);
 
@@ -277,7 +333,7 @@ class GearFile
 
         $yaml = Yaml::dump($data);
 
-        $this->persist->save($suite, $gearfile, $yaml);
+        $this->persist->save($this->suite, $gearfile, $yaml);
 
         return $gearfile;
     }
@@ -303,29 +359,30 @@ class GearFile
 
     public function createSrcGearfile(SrcMinorSuite $suite, $srcOptions)
     {
+        $this->suite = $suite;
+
         $data = [***REMOVED***;
 
         foreach ($srcOptions as $options) {
             $data = array_merge($data, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
         }
 
-        return $this->createGearfileComponent($suite, ['src' => $data***REMOVED***);
+        return $this->createGearfileComponent(['src' => $data***REMOVED***);
     }
 
 
 
 
-    private function generateGearfiles($invokables, $config, $type, $repeat)
+    private function generateGearfiles($entities, $config, $type, $repeat)
     {
         $invokableFile = [***REMOVED***;
 
-        foreach ($invokables as $invokable) {
+        foreach ($entities as $entity) {
 
             foreach ($config as $configName) {
 
                 for ($i = 1; $i <= $repeat; $i++) {
-
-                    $invokableFile[***REMOVED*** = $this->generateSource($invokable, $configName, $type, $i);
+                    $invokableFile[***REMOVED*** = $this->generateSource($entity, $configName, $type, $i, $repeat);
                 }
             }
         }
@@ -335,70 +392,130 @@ class GearFile
 
     }
 
-    private function generateSource($invokable, $configName, $type, $repeat)
+    /**
+     * Return the Service Config Name of Class.
+     *
+     * Could be Invokables, Factories or Abstract.
+     *
+     * Can cut if isUsingLongName is false.
+     */
+    public function getEntryConfigName($suite, $configName)
     {
+        $config = ($suite->isUsingLongName() ? $configName : substr($configName, 0, 5));
 
-        $numberString = NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED***;
-
-        $configFixName = (!empty($configName))
-            ? $this->stringService->str('class', substr($configName, 0, 5))
+        return (!empty($configName))
+            ? $this->stringService->str('class', $configName)
             : '';
-
-
-        $name = sprintf($invokable['name'***REMOVED***, $type, $configFixName, $numberString);
-
-        $entry = ['name' => $name, 'type' => $invokable['type'***REMOVED******REMOVED***;
-
-        if (isset($invokable['extends'***REMOVED***)) {
-            $entry['extends'***REMOVED*** = sprintf($invokable['extends'***REMOVED***, $type, $type, $configFixName, $numberString);
-        }
-
-        if (isset($invokable['namespace'***REMOVED***)) {
-            $entry['namespace'***REMOVED*** = $this->createNamespace($type, $repeat);
-
-        }
-
-        if (isset($invokable['implements'***REMOVED***)) {
-
-            if (is_array($invokable['implements'***REMOVED***)) {
-
-               $entry['implements'***REMOVED*** = [***REMOVED***;
-
-               foreach ($invokable['implements'***REMOVED*** as $invokDep) {
-                   $entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberString);
-               }
-
-            } else {
-                $entry['implements'***REMOVED*** = sprintf($invokable['implements'***REMOVED***, $type, $numberString);
-            }
-        }
-
-        if ($configName !== 'abstract' && $invokable['type'***REMOVED*** !== 'Interface') {
-            $entry['service'***REMOVED*** = $configName;
-        } elseif ($invokable['type'***REMOVED*** !== 'Interface') {
-            $entry['abstract'***REMOVED*** = true;
-        }
-
-
-        if (isset($invokable['dependency'***REMOVED***)) {
-            if (is_array($invokable['dependency'***REMOVED***)) {
-
-               $entry['dependency'***REMOVED*** = [***REMOVED***;
-
-               foreach ($invokable['dependency'***REMOVED*** as $invokDep) {
-                   $entry['dependency'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $type, $numberString);
-               }
-
-            } else {
-                $entry['dependency'***REMOVED*** = sprintf($invokable['dependency'***REMOVED***, $type, $type, $numberString);
-            }
-        }
-
-        return $entry;
     }
 
-    public function createNamespace($type, $number)
+    /**
+     * Return the Name that will be used into $entry
+     *
+     * Will be the conjunction of config
+     *
+     * Can cut if isUsingLongName is false.
+     */
+    public function getEntryName($name, $type, $typeName, $serviceConfig, $numberConfig)
     {
+
+        $nameRc = ($type == 'Interface')
+            ? sprintf($name, '', $numberConfig)
+            : sprintf($name, $typeName, $serviceConfig, $numberConfig);
+
+
+            var_dump($nameRc);
+        $fullname = $this->str('class', $nameRc);
+
+        return $fullname;
+    }
+
+    public function getTypeName($suite, $type)
+    {
+        return ($suite->isUsingLongName()) ? $type : substr($type, 0, 5);
+    }
+
+
+    public function getEntryConfigNumber($max, $repeat)
+    {
+        return ($max > 1) ? NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED*** : '';
+    }
+
+
+    private function generateSource($entity, $configName, $type, $repeat, $max)
+    {
+        $this->entry = [***REMOVED***;
+
+        $numberConfig = $this->getEntryConfigNumber($max, $repeat);
+
+        $serviceConfig = $this->getEntryConfigName($this->suite, $configName);
+
+        $type = $this->str('class', $entity['type'***REMOVED***);
+        $typeName = $this->getTypeName($this->suite, $type);
+
+        $name = $this->getEntryName($entity['name'***REMOVED***, $type, $typeName, $serviceConfig, $numberConfig);
+
+
+        $this->entry['name'***REMOVED*** = $name;
+        $this->entry['type'***REMOVED*** = $type;
+
+        if (isset($entity['extends'***REMOVED***)) {
+            $this->entry['extends'***REMOVED*** = sprintf('%s\\'.$entity['extends'***REMOVED***, $type, $type, $serviceConfig, $numberConfig);
+        }
+
+        if (isset($entity['namespace'***REMOVED***)) {
+            $this->entry['namespace'***REMOVED*** = $this->createNamespace($type, $repeat, $typeName, $this->suite->isUsingLongName(), $max);
+
+        }
+
+        if (isset($entity['implements'***REMOVED***)) {
+
+            $this->entry['implements'***REMOVED*** = [***REMOVED***;
+
+            foreach ($entity['implements'***REMOVED*** as $invokDep) {
+                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberConfig);
+            }
+        }
+
+        if ($configName !== 'abstract' && $entity['type'***REMOVED*** !== 'interface') {
+            $this->entry['service'***REMOVED*** = $configName;
+        } elseif ($entity['type'***REMOVED*** !== 'interface') {
+            $this->entry['abstract'***REMOVED*** = true;
+        }
+
+
+        if (isset($entity['dependency'***REMOVED***)) {
+
+            $typeName = ($this->suite->isUsingLongName()) ? 'Invokables' : substr('Invokables', 0, 5);
+
+            if (is_array($entity['dependency'***REMOVED***)) {
+
+               $this->entry['dependency'***REMOVED*** = [***REMOVED***;
+
+               foreach ($entity['dependency'***REMOVED*** as $invokDep) {
+                   $this->entry['dependency'***REMOVED***[***REMOVED*** = sprintf('%s\\'.$invokDep, $type, $type, $typeName, $numberConfig);
+               }
+
+            } else {
+
+                $this->entry['dependency'***REMOVED*** = sprintf('%s\\'.$entity['dependency'***REMOVED***, $type, $type, $typeName, $numberConfig);
+            }
+        }
+
+        return $this->entry;
+    }
+
+    public function createNamespace($type, $number, $typeId, $longName, $max)
+    {
+        $typeId = $this->str('class', $typeId);
+
+
+        $template = ($longName) ? '%s%sNamespace' : '%s%sNames';
+
+
+        if ($max == 1) {
+            return sprintf($template, $typeId, '');
+        }
+
         $textName = '';
 
         for ($x = 1; $x <= $number; $x++) {
@@ -406,7 +523,7 @@ class GearFile
             if (!empty($textName)) {
                 $textName .= '\\';
             }
-            $textName .= sprintf('%s%s', substr($type, 0, 5), NumberToStringInterface::NUMBER_MAP[$x***REMOVED***);
+            $textName .= sprintf($template, $typeId, NumberToStringInterface::NUMBER_MAP[$x***REMOVED***);
 
         }
 
@@ -414,18 +531,19 @@ class GearFile
         return $textName;
     }
 
-    public function createMultiplesInterfaces($type, $repeat)
+    public function createMultiplesInterfaces($type, $repeat, $max, $keyStyle)
     {
-        $interfaceString = 'Interfaces\%sImpl%s';
-
-        if ($repeat == 1) {
-            return sprintf($interfaceString, $type, NumberToStringInterface::NUMBER_MAP[1***REMOVED***);
-        }
+        $type = $this->str('class', $type);
 
         $interfaces = [***REMOVED***;
 
+        if ($max == 1) {
+            $interfaces[***REMOVED*** = 'Interfaces\\'.sprintf(self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***, $type, '');
+            return $interfaces;
+        }
+
         for ($z = 1; $z <= $repeat; $z++) {
-            $interfaces[***REMOVED*** = sprintf($interfaceString, $type, NumberToStringInterface::NUMBER_MAP[$z***REMOVED***);
+            $interfaces[***REMOVED*** = 'Interfaces\\'.sprintf(self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***, $type, NumberToStringInterface::NUMBER_MAP[$z***REMOVED***);
         }
 
         return $interfaces;

@@ -40,7 +40,7 @@ class SrcMvcSuite
         return $this;
     }
 
-    public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+    public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables, $longname = false)
     {
         echo '    - Create Src Mvc Suite'."\n";
 
@@ -53,7 +53,7 @@ class SrcMvcSuite
 
         foreach ($types as $type) {
             $srcMvcMinor = new SrcMvcMinorSuite($srcMvcMajor, $type);
-            $srcMvcMajor->addMinorSuite($this->srcMvcGenerator->generateSrcMvc($srcMvcMinor));
+            $srcMvcMajor->addMinorSuite($this->srcMvcGenerator->generateSrcMvc($srcMvcMinor, $longname));
         }
 
         $this->superTestFile->updateSuperTestFile($srcMvcMajor);

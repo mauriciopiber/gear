@@ -31,6 +31,8 @@ class ValueObjectTestService implements ModuleAwareInterface
 
     use CodeTestTrait;
 
+    const TEMPLATE = 'template/module/mvc/value-object-test/test-src.phtml';
+
     /**
      * Constructor
      *
@@ -60,15 +62,18 @@ class ValueObjectTestService implements ModuleAwareInterface
     {
         $this->src = $src;
 
+
+        $template = ($this->src->getAbstract()) ? 'abstract' : 'src';
+
         $this->getFileCreator()->createFile(
-            'template/module/mvc/value-object/test-src.phtml',
-            array(
+            sprintf('template/module/mvc/value-object-test/test-%s.phtml', $template),
+            [
                 'var' => $this->str('var', $this->src->getName()),
                 'class'   => $this->src->getName(),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'module'  => $this->getModule()->getModuleName()
-            ),
+            ***REMOVED***,
             $this->src->getName().'Test.php',
             $this->getCodeTest()->getLocation($this->src)
         );

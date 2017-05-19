@@ -15,7 +15,7 @@ class SrcMinorSuiteTest extends TestCase
         parent::setUp();
 
         $this->majorSuite = $this->prophesize('Gear\Integration\Suite\Src\SrcMajorSuite');
-        $this->srcMinorSuite = new SrcMinorSuite($this->majorSuite->reveal(), 'service', '1');
+        $this->srcMinorSuite = new SrcMinorSuite($this->majorSuite->reveal(), 'service', '1', true);
     }
 
     public function testCreateMinorSuite()
@@ -25,5 +25,6 @@ class SrcMinorSuiteTest extends TestCase
         $this->assertEquals($this->majorSuite->reveal(), $this->srcMinorSuite->getMajorSuite());
         $this->assertEquals('service', $this->srcMinorSuite->getType());
         $this->assertEquals('src/src-service', $this->srcMinorSuite->getLocationKey());
+        $this->assertTrue($this->srcMinorSuite->isUsingLongName());
     }
 }
