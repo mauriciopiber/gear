@@ -76,6 +76,10 @@ class GearFile
             'short' => '%sDepFull%s%s',
             'long'  => '%sDependencyFull%s%s',
         ***REMOVED***,
+        'dependency-many-full' => [
+            'short' => '%sDepManyFul%s%s',
+            'long'  => '%sDependenciesManyFull%s%s',
+        ***REMOVED***,
         'default' => [
             'short' => '%s%s%s',
             'long'  => '%s%s%s'
@@ -423,7 +427,6 @@ class GearFile
             : sprintf($name, $typeName, $serviceConfig, $numberConfig);
 
 
-            var_dump($nameRc);
         $fullname = $this->str('class', $nameRc);
 
         return $fullname;

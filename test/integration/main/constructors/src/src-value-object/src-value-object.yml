@@ -1,1 +1,21 @@
-src: {  }
+src:
+    - { name: ValueObjectExtesibleInvokablesOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectExtesibleInvokablesTwo, type: ValueObject, service: invokables }
+    - { name: ValueObjectExtesibleAbstractOne, type: ValueObject, abstract: true }
+    - { name: ValueObjectExtesibleAbstractTwo, type: ValueObject, abstract: true }
+    - { name: ValueObjectInvokablesOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectInvokablesTwo, type: ValueObject, service: invokables }
+    - { name: ValueObjectAbstractOne, type: ValueObject, abstract: true }
+    - { name: ValueObjectAbstractTwo, type: ValueObject, abstract: true }
+    - { name: ValueObjectNamespaceInvokablesOne, type: ValueObject, namespace: ValueObjectOneNamespace, service: invokables }
+    - { name: ValueObjectNamespaceInvokablesTwo, type: ValueObject, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, service: invokables }
+    - { name: ValueObjectNamespaceAbstractOne, type: ValueObject, namespace: ValueObjectOneNamespace, abstract: true }
+    - { name: ValueObjectNamespaceAbstractTwo, type: ValueObject, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, abstract: true }
+    - { name: ValueObjectExtendsInvokablesOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesOne, service: invokables }
+    - { name: ValueObjectExtendsInvokablesTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesTwo, service: invokables }
+    - { name: ValueObjectExtendsAbstractOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractOne, abstract: true }
+    - { name: ValueObjectExtendsAbstractTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractTwo, abstract: true }
+    - { name: ValueObjectFullInvokablesOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesOne, namespace: ValueObjectOneNamespace, service: invokables }
+    - { name: ValueObjectFullInvokablesTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesTwo, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, service: invokables }
+    - { name: ValueObjectFullAbstractOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractOne, namespace: ValueObjectOneNamespace, abstract: true }
+    - { name: ValueObjectFullAbstractTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractTwo, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, abstract: true }
