@@ -40,17 +40,15 @@ class ControllerSuite
         return $this;
     }
 
-    public function runControllerSuite($types, $repeat)
+    public function runControllerSuite($types, $repeat, $longname)
     {
         $controllerMajor = new ControllerMajorSuite();
 
         echo '    - Create Controller Suite'."\n";
 
         foreach ($types as $type) {
-            $controllerMinor = new ControllerMinorSuite($controllerMajor, $type, $repeat);
+            $controllerMinor = new ControllerMinorSuite($controllerMajor, $type, $repeat, $longname);
             $this->controllerGenerator->generateMinorSuite($controllerMinor);
-
-
         }
 
         echo '    - Finish'."\n\n";

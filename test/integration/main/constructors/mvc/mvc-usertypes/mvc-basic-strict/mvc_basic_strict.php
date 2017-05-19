@@ -40,7 +40,7 @@ class MvcBasicStrict extends AbstractMigration
         ***REMOVED***
     ***REMOVED***;
 
-    public function createUnique(&$table, $columnName, $type)
+    public function createUnique(&$table, $columnName)
     {
         $table->addIndex($columnName, ['unique' => true***REMOVED***);
     }
@@ -80,7 +80,7 @@ class MvcBasicStrict extends AbstractMigration
          $table->addColumn($columnName, $type, $this->getColumnConfig($type, $nullable));
 
          if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
-             $this->createUnique($table, $columnName, $type);
+             $this->createUnique($table, $columnName);
          }
 
          return true;

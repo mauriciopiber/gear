@@ -21,6 +21,17 @@ class ControllerGenerator
     use GearFileTrait;
     use TestFileTrait;
 
+    const INTERFACE = 'interface';
+
+    const REPOSITORY = 'repository';
+
+    const SERVICE = 'service';
+
+    const FORM = 'form';
+
+    const FILTER = 'filter';
+
+
     /**
      * Constructor
      *
@@ -41,14 +52,19 @@ class ControllerGenerator
 
     public function generateMinorSuite(ControllerMinorSuite $suite)
     {
-        $type = $suite->getType();
-        $repeat = $suite->getRepeat();
+        $this->type = $suite->getType();
+        $this->repeat = $suite->getRepeat();
+
+        $this->keyStyle = ($suite->isUsingLongName()) ? 'long' : 'short';
 
         $srcs = [***REMOVED***;
-        $srcs = $this->createPrepareController($type, $repeat);
+        $srcs[***REMOVED*** = $this->createPrepareInterface();
+        $srcs[***REMOVED*** = $this->createPrepareDependency();
+
 
         $controllers = [***REMOVED***;
-        $controllers[***REMOVED*** = $this->createSuite($type, $repeat);
+        $controllers[***REMOVED*** = $this->createPrepareExtends();
+        $controllers[***REMOVED*** = $this->createControllers();
 
 
         //gearfile
@@ -58,72 +74,141 @@ class ControllerGenerator
         $suite->setGearFile($gearfile);
         $this->testFile->updateTestFile($suite);
 
-        echo sprintf('        - minor: %s', $type)."\n";
+        echo sprintf('        - minor: %s', $this->type)."\n";
 
         return $gearfile;
     }
 
-    private function createPrepareController($type, $repeat)
+    private function createPrepareExtends()
     {
-        $implements = [***REMOVED***;
-        $implements[***REMOVED*** = [
-            'name' => '%sImpl%s%s',
-            'type' => 'Interface'
-        ***REMOVED***;
-
-        $interfaces = [$implements, ['0' => ''***REMOVED***, $type, $repeat***REMOVED***;
-
-
         $invokables = [***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%sExtendable%s%s',
-            'type' => $type
+            'name' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
         ***REMOVED***;
 
-        $extends = [$invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat***REMOVED***;
-
-
-        return [$interfaces, $extends***REMOVED***;
+        return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
     }
 
-    private function createSuite($type, $repeat)
+    private function createControllers()
     {
+        $invokables = [***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%s%s%s',
-            'type' => $type
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%sNamespace%s%s',
-            'type' => $type,
+            'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
             'namespace' => '%s'
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%sImplements%s%s',
-            'implements' => $this->gearFile->createMultiplesInterfaces($type, 1),
-            'type' => $type
+            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%sImplementsMany%s%s',
-            'implements' => $this->gearFile->createMultiplesInterfaces($type, $repeat),
-            'type' => $type
+            'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+            'type' => $this->type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => '%sExtends%s%s',
-            'extends' => '%s\%sExtendable%s%s',
-            'type' => $type
+            'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
+            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'type' => $this->type
         ***REMOVED***;
 
-        return [$invokables, ['invokables', 'factories'***REMOVED***, $type, $repeat***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::REPOSITORY***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FILTER***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FORM***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'namespace' => '%s',
+            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+            'type' => $this->type,
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***
+        ***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'namespace' => '%s',
+            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'type' => $this->type,
+            'dependency' => [
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::REPOSITORY***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FILTER***REMOVED***,
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FORM***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***;
+
+        return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
     }
 
-    function createDepSuite()
+    private function createPrepareDependency()
     {
-        return [***REMOVED***;
+
+        $invokables = [***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::REPOSITORY
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::SERVICE
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::FORM
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::FILTER
+        ***REMOVED***;
+
+        return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
+
+
+    }
+
+    private function createPrepareInterface()
+    {
+        $implements = [***REMOVED***;
+        $implements[***REMOVED*** = [
+            'name' => $this->type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => self::INTERFACE
+        ***REMOVED***;
+
+
+        $interfaces = [$implements, ['0' => ''***REMOVED***, $this->type, $this->repeat***REMOVED***;
+
+        return $interfaces;
     }
 }
