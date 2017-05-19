@@ -29,6 +29,8 @@ class SrcGenerator
 
     const INTERFACE = 'interface';
 
+    const CONTROLLER_PLUGIN = 'controller-plugin';
+
     protected $minorSuite;
 
     /**
@@ -171,7 +173,7 @@ class SrcGenerator
         $dependencies = [***REMOVED***;
 
         //to max dependency based on repeat number. interfaces too.
-        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY, self::CONTROLLER_PLUGIN***REMOVED***)) {
 
 
 
@@ -192,20 +194,24 @@ class SrcGenerator
                 ***REMOVED***
             ***REMOVED***;
 
-            $dependencies[***REMOVED*** = [
+            $depFull = [
                 'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
                 'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
                 'namespace' => '%s',
-                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
                 'type' => $this->type,
                 'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
             ***REMOVED***;
 
-            $dependencies[***REMOVED*** = [
+            if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle);
+            }
+
+            $dependencies[***REMOVED*** = $depFull;
+
+            $depsFull = [
                 'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
                 'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
                 'namespace' => '%s',
-                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
                 'type' => $this->type,
                 'dependency' => [
                     [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
@@ -215,7 +221,18 @@ class SrcGenerator
                 ***REMOVED***
             ***REMOVED***;
 
-            $config = ['factories', 'abstract'***REMOVED***;
+            if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle);
+
+            }
+
+            $dependencies[***REMOVED*** = $depsFull;
+
+            $config = ['factories'***REMOVED***;
+
+            if ($this->type != self::CONTROLLER_PLUGIN) {
+                $config[***REMOVED*** = 'abstract';
+            }
             $srcOptions[***REMOVED*** = [$dependencies, $config, $type, $repeat***REMOVED***;
         }
 
