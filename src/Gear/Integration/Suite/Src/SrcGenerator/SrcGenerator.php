@@ -178,16 +178,16 @@ class SrcGenerator
             $dependencies[***REMOVED*** = [
                 'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
                 'type' => $this->type,
-                'dependency' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***
+                'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
             ***REMOVED***;
 
             $dependencies[***REMOVED*** = [
                 'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
                 'type' => $this->type,
                 'dependency' => [
-                    GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
-                    GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-                    GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+                    [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                    [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                    [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
                     //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
                 ***REMOVED***
             ***REMOVED***;
@@ -198,7 +198,7 @@ class SrcGenerator
                 'namespace' => '%s',
                 'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
                 'type' => $this->type,
-                'dependency' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***
+                'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
             ***REMOVED***;
 
             $dependencies[***REMOVED*** = [
@@ -208,9 +208,9 @@ class SrcGenerator
                 'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
                 'type' => $this->type,
                 'dependency' => [
-                    GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
-                    GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-                    GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+                    [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                    [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                    [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***
                     //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
                 ***REMOVED***
             ***REMOVED***;

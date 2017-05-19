@@ -156,6 +156,8 @@ class GearFile
 
     public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
     {
+        $this->suite = $srcMvcMinorSuite;
+
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
 
@@ -203,12 +205,13 @@ class GearFile
             }
         }
 
-        return $this->createGearfileComponent($srcMvcMinorSuite, ['src' => $srcs***REMOVED***);
+        return $this->createGearfileComponent(['src' => $srcs***REMOVED***);
 
     }
 
     public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
     {
+        $this->suite = $controllerMvcMinorSuite;
         $controller = [***REMOVED***;
         foreach ($tables as $minorSuite) {
 
@@ -259,13 +262,15 @@ class GearFile
             $controller[***REMOVED*** = $controllerItem;
         }
 
-        return $this->createGearfileComponent($controllerMvcMinorSuite, ['controller' => $controller***REMOVED***);
+        return $this->createGearfileComponent(['controller' => $controller***REMOVED***);
 
     }
 
 
     public function createMvcGearfile(MvcMinorSuite $mvcMinorSuite)
     {
+        $this->suite = $mvcMinorSuite;
+
         $db = [
             'table' => $mvcMinorSuite->getTableAlias(),
             'user' => $mvcMinorSuite->getUserType(),
@@ -286,7 +291,7 @@ class GearFile
             $src = array_merge($src, $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc(), $mvcMinorSuite->getType()));
         }
 
-        return $this->createGearfileComponent($mvcMinorSuite, ['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
+        return $this->createGearfileComponent(['db' => [$db***REMOVED***, 'src' => $src***REMOVED***);
     }
 
 
@@ -345,6 +350,8 @@ class GearFile
 
     public function createControllerGearfile(ControllerMinorSuite $suite, $srcOptions)
     {
+        $this->suite = $suite;
+
         $src = [***REMOVED***;
 
         foreach ($srcOptions['src'***REMOVED*** as $options) {
@@ -357,7 +364,7 @@ class GearFile
             $controller = array_merge($controller, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
         }
 
-        return $this->createGearfileComponent($suite, ['src' => $src, 'controller' => $controller***REMOVED***);
+        return $this->createGearfileComponent(['src' => $src, 'controller' => $controller***REMOVED***);
     }
 
 
@@ -462,7 +469,19 @@ class GearFile
         $this->entry['type'***REMOVED*** = $type;
 
         if (isset($entity['extends'***REMOVED***)) {
-            $this->entry['extends'***REMOVED*** = sprintf('%s\\'.$entity['extends'***REMOVED***, $type, $type, $serviceConfig, $numberConfig);
+
+            $namespace = null;
+
+            switch ($type) {
+                case 'Action':
+                case 'Console':
+                    $namespace = 'Controller';
+                    break;
+                default:
+                    $namespace = $type;
+            }
+
+            $this->entry['extends'***REMOVED*** = sprintf('%s\\'.$entity['extends'***REMOVED***, $namespace, $type, $serviceConfig, $numberConfig);
         }
 
         if (isset($entity['namespace'***REMOVED***)) {
@@ -490,17 +509,16 @@ class GearFile
 
             $typeName = ($this->suite->isUsingLongName()) ? 'Invokables' : substr('Invokables', 0, 5);
 
-            if (is_array($entity['dependency'***REMOVED***)) {
 
-               $this->entry['dependency'***REMOVED*** = [***REMOVED***;
 
-               foreach ($entity['dependency'***REMOVED*** as $invokDep) {
-                   $this->entry['dependency'***REMOVED***[***REMOVED*** = sprintf('%s\\'.$invokDep, $type, $type, $typeName, $numberConfig);
-               }
+            $this->entry['dependency'***REMOVED*** = [***REMOVED***;
 
-            } else {
+            foreach ($entity['dependency'***REMOVED*** as $invokDep) {
 
-                $this->entry['dependency'***REMOVED*** = sprintf('%s\\'.$entity['dependency'***REMOVED***, $type, $type, $typeName, $numberConfig);
+                $typeDep = $this->str('class', $invokDep[1***REMOVED***);
+
+                $this->entry['dependency'***REMOVED***[***REMOVED*** = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDep, $typeDep, $typeName, $numberConfig);
+
             }
         }
 

@@ -1,54 +1,52 @@
 src:
-    - { name: actionImplOne, type: Interface }
-    - { name: actionImplTwo, type: Interface }
-    - { name: actionImplThree, type: Interface }
-    - { name: actionImplFour, type: Interface }
-    - { name: actionExtendableInvokOne, type: action, service: invokables }
-    - { name: actionExtendableInvokTwo, type: action, service: invokables }
-    - { name: actionExtendableInvokThree, type: action, service: invokables }
-    - { name: actionExtendableInvokFour, type: action, service: invokables }
-    - { name: actionExtendableFactoOne, type: action, service: factories }
-    - { name: actionExtendableFactoTwo, type: action, service: factories }
-    - { name: actionExtendableFactoThree, type: action, service: factories }
-    - { name: actionExtendableFactoFour, type: action, service: factories }
+    - { name: ActionInterfaceOne, type: Interface }
+    - { name: ActionInterfaceTwo, type: Interface }
+    - { name: RepositoryInvokablesOne, type: Repository, service: invokables }
+    - { name: RepositoryInvokablesTwo, type: Repository, service: invokables }
+    - { name: RepositoryFactoriesOne, type: Repository, service: factories }
+    - { name: RepositoryFactoriesTwo, type: Repository, service: factories }
+    - { name: ServiceInvokablesOne, type: Service, service: invokables }
+    - { name: ServiceInvokablesTwo, type: Service, service: invokables }
+    - { name: ServiceFactoriesOne, type: Service, service: factories }
+    - { name: ServiceFactoriesTwo, type: Service, service: factories }
+    - { name: FormInvokablesOne, type: Form, service: invokables }
+    - { name: FormInvokablesTwo, type: Form, service: invokables }
+    - { name: FormFactoriesOne, type: Form, service: factories }
+    - { name: FormFactoriesTwo, type: Form, service: factories }
+    - { name: FilterInvokablesOne, type: Filter, service: invokables }
+    - { name: FilterInvokablesTwo, type: Filter, service: invokables }
+    - { name: FilterFactoriesOne, type: Filter, service: factories }
+    - { name: FilterFactoriesTwo, type: Filter, service: factories }
 controller:
-    - { name: actionInvokOne, type: action, service: invokables }
-    - { name: actionInvokTwo, type: action, service: invokables }
-    - { name: actionInvokThree, type: action, service: invokables }
-    - { name: actionInvokFour, type: action, service: invokables }
-    - { name: actionFactoOne, type: action, service: factories }
-    - { name: actionFactoTwo, type: action, service: factories }
-    - { name: actionFactoThree, type: action, service: factories }
-    - { name: actionFactoFour, type: action, service: factories }
-    - { name: actionNamespaceInvokOne, type: action, namespace: actioOne, service: invokables }
-    - { name: actionNamespaceInvokTwo, type: action, namespace: actioOne\actioTwo, service: invokables }
-    - { name: actionNamespaceInvokThree, type: action, namespace: actioOne\actioTwo\actioThree, service: invokables }
-    - { name: actionNamespaceInvokFour, type: action, namespace: actioOne\actioTwo\actioThree\actioFour, service: invokables }
-    - { name: actionNamespaceFactoOne, type: action, namespace: actioOne, service: factories }
-    - { name: actionNamespaceFactoTwo, type: action, namespace: actioOne\actioTwo, service: factories }
-    - { name: actionNamespaceFactoThree, type: action, namespace: actioOne\actioTwo\actioThree, service: factories }
-    - { name: actionNamespaceFactoFour, type: action, namespace: actioOne\actioTwo\actioThree\actioFour, service: factories }
-    - { name: actionImplementsInvokOne, type: action, implements: Interfaces\actionImplOne, service: invokables }
-    - { name: actionImplementsInvokTwo, type: action, implements: Interfaces\actionImplOne, service: invokables }
-    - { name: actionImplementsInvokThree, type: action, implements: Interfaces\actionImplOne, service: invokables }
-    - { name: actionImplementsInvokFour, type: action, implements: Interfaces\actionImplOne, service: invokables }
-    - { name: actionImplementsFactoOne, type: action, implements: Interfaces\actionImplOne, service: factories }
-    - { name: actionImplementsFactoTwo, type: action, implements: Interfaces\actionImplOne, service: factories }
-    - { name: actionImplementsFactoThree, type: action, implements: Interfaces\actionImplOne, service: factories }
-    - { name: actionImplementsFactoFour, type: action, implements: Interfaces\actionImplOne, service: factories }
-    - { name: actionImplementsManyInvokOne, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: invokables }
-    - { name: actionImplementsManyInvokTwo, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: invokables }
-    - { name: actionImplementsManyInvokThree, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: invokables }
-    - { name: actionImplementsManyInvokFour, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: invokables }
-    - { name: actionImplementsManyFactoOne, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: factories }
-    - { name: actionImplementsManyFactoTwo, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: factories }
-    - { name: actionImplementsManyFactoThree, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: factories }
-    - { name: actionImplementsManyFactoFour, type: action, implements: [Interfaces\actionImplOne, Interfaces\actionImplTwo, Interfaces\actionImplThree, Interfaces\actionImplFour***REMOVED***, service: factories }
-    - { name: actionExtendsInvokOne, type: action, extends: action\actionExtendableInvokOne, service: invokables }
-    - { name: actionExtendsInvokTwo, type: action, extends: action\actionExtendableInvokTwo, service: invokables }
-    - { name: actionExtendsInvokThree, type: action, extends: action\actionExtendableInvokThree, service: invokables }
-    - { name: actionExtendsInvokFour, type: action, extends: action\actionExtendableInvokFour, service: invokables }
-    - { name: actionExtendsFactoOne, type: action, extends: action\actionExtendableFactoOne, service: factories }
-    - { name: actionExtendsFactoTwo, type: action, extends: action\actionExtendableFactoTwo, service: factories }
-    - { name: actionExtendsFactoThree, type: action, extends: action\actionExtendableFactoThree, service: factories }
-    - { name: actionExtendsFactoFour, type: action, extends: action\actionExtendableFactoFour, service: factories }
+    - { name: ActionExtesibleInvokablesOne, type: Action, service: invokables }
+    - { name: ActionExtesibleInvokablesTwo, type: Action, service: invokables }
+    - { name: ActionExtesibleFactoriesOne, type: Action, service: factories }
+    - { name: ActionExtesibleFactoriesTwo, type: Action, service: factories }
+    - { name: ActionInvokablesOne, type: Action, service: invokables }
+    - { name: ActionInvokablesTwo, type: Action, service: invokables }
+    - { name: ActionFactoriesOne, type: Action, service: factories }
+    - { name: ActionFactoriesTwo, type: Action, service: factories }
+    - { name: ActionNamespaceInvokablesOne, type: Action, namespace: ActionOneNamespace, service: invokables }
+    - { name: ActionNamespaceInvokablesTwo, type: Action, namespace: ActionOneNamespace\ActionTwoNamespace, service: invokables }
+    - { name: ActionNamespaceFactoriesOne, type: Action, namespace: ActionOneNamespace, service: factories }
+    - { name: ActionNamespaceFactoriesTwo, type: Action, namespace: ActionOneNamespace\ActionTwoNamespace, service: factories }
+    - { name: ActionExtendsInvokablesOne, type: Action, extends: Controller\ActionExtesibleInvokablesOne, service: invokables }
+    - { name: ActionExtendsInvokablesTwo, type: Action, extends: Controller\ActionExtesibleInvokablesTwo, service: invokables }
+    - { name: ActionExtendsFactoriesOne, type: Action, extends: Controller\ActionExtesibleFactoriesOne, service: factories }
+    - { name: ActionExtendsFactoriesTwo, type: Action, extends: Controller\ActionExtesibleFactoriesTwo, service: factories }
+    - { name: ActionImplementsInvokablesOne, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables }
+    - { name: ActionImplementsInvokablesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables }
+    - { name: ActionImplementsFactoriesOne, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories }
+    - { name: ActionImplementsFactoriesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories }
+    - { name: ActionImplementsManyInvokablesOne, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables }
+    - { name: ActionImplementsManyInvokablesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables }
+    - { name: ActionImplementsManyFactoriesOne, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories }
+    - { name: ActionImplementsManyFactoriesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories }
+    - { name: ActionDependencyInvokablesOne, type: Action, service: invokables, dependency: [Service\ServiceInvokablesOne***REMOVED*** }
+    - { name: ActionDependencyInvokablesTwo, type: Action, service: invokables, dependency: [Service\ServiceInvokablesTwo***REMOVED*** }
+    - { name: ActionDependencyFactoriesOne, type: Action, service: factories, dependency: [Service\ServiceInvokablesOne***REMOVED*** }
+    - { name: ActionDependencyFactoriesTwo, type: Action, service: factories, dependency: [Service\ServiceInvokablesTwo***REMOVED*** }
+    - { name: ActionDependencyManyInvokablesOne, type: Action, service: invokables, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED*** }
+    - { name: ActionDependencyManyInvokablesTwo, type: Action, service: invokables, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED*** }
+    - { name: ActionDependencyManyFactoriesOne, type: Action, service: factories, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED*** }
+    - { name: ActionDependencyManyFactoriesTwo, type: Action, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED*** }
