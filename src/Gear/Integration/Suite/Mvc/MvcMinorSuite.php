@@ -83,7 +83,7 @@ class MvcMinorSuite extends AbstractMinorSuite
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct(MvcMajorSuite $majorType, $columnType, $userType, $constraints, $tableAssoc)
+    public function __construct(MvcMajorSuite $majorType, $columnType, $userType, $constraints, $tableAssoc, $longName = false)
     {
         parent::__construct($majorType);
         $this->setColumnType($columnType);
@@ -91,6 +91,7 @@ class MvcMinorSuite extends AbstractMinorSuite
         $this->constraints = $constraints;
         $this->tableAssoc = $tableAssoc;
         $this->stringService = new StringService();
+        $this->longName = $longName;
         return $this;
     }
 

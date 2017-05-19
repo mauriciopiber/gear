@@ -56,7 +56,7 @@ class SuperTestFile
         return $this;
     }
 
-    public function updateSuperTestFile($superType, $migrations = null)
+    public function updateSuperTestFile($superType)
     {
         $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
 

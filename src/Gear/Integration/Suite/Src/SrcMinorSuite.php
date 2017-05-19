@@ -27,11 +27,12 @@ class SrcMinorSuite extends AbstractMinorSuite
      *
      * @return \Gear\Integration\Suite\Src\SrcMinorSuite
      */
-    public function __construct(SrcMajorSuite $majorSuite, $type, $repeat)
+    public function __construct(SrcMajorSuite $majorSuite, $type, $repeat, $longName = false)
     {
         parent::__construct($majorSuite);
         $this->type = $type;
         $this->repeat = $repeat;
+        $this->longName = $longName;
         return $this;
     }
 

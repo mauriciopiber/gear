@@ -74,7 +74,7 @@ class SrcMvcGenerator
         ***REMOVED***;
     }
 
-    public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor)
+    public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor, $longname)
     {
         $tables = $this->prepareTables($srcMvcMinor);
 

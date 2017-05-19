@@ -216,8 +216,8 @@ class ServiceServiceTest extends TestCase
 
 
     /**
-     * @group src-mvc
-     * @group src-mvc-service
+     * @group src
+     * @group src-service
      * @dataProvider src
      */
     public function testCreateSrc($data, $template)

@@ -20,9 +20,10 @@ class MvcMinorSuiteTest extends TestCase
     {
         $this->major = new MvcMajorSuite('mvc-complete');
 
-        $this->mvcMinorSuite = new MvcMinorSuite($this->major, null, null, null, null);
+        $this->mvcMinorSuite = new MvcMinorSuite($this->major, null, null, null, null, true);
         $this->assertEquals($this->major, $this->mvcMinorSuite->getMajorSuite());
-        $this->assertEquals('mvc/mvc-complete/mvc-complete', $this->mvcMinorSuite->getLocationKey());
+        $this->assertEquals(null, $this->mvcMinorSuite->getLocationKey());
+        $this->assertTrue($this->mvcMinorSuite->isUsingLongName());
         //$this->mvcMinorSuite->setTableName('mvc-complete-unique-not-null');
 
         //$this->assertEquals('mvc-complete-unique-not-null', $this->mvcMinorSuite->getSuiteName());

@@ -27,11 +27,12 @@ class ControllerMinorSuite extends AbstractMinorSuite
      *
      * @return \Gear\Integration\Suite\Src\SrcMinorSuite
      */
-    public function __construct(ControllerMajorSuite $majorSuite, $type, $repeat)
+    public function __construct(ControllerMajorSuite $majorSuite, $type, $repeat, $longName)
     {
         parent::__construct($majorSuite);
         $this->type = $type;
         $this->repeat = $repeat;
+        $this->longName = $longName;
         return $this;
     }
 

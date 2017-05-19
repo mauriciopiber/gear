@@ -56,7 +56,7 @@ class MvcSuite
 
         $mvcMajor = new MvcMajorSuite($suiteName);
 
-        foreach ($expectedColumns as $superType => $columnType) {
+        foreach ($expectedColumns as $columnType) {
             foreach ($columnType as $column) {
                 foreach ($configColumns['usertype'***REMOVED*** as $userType) {
                     foreach ($configColumns['constraints'***REMOVED*** as $constraint) {

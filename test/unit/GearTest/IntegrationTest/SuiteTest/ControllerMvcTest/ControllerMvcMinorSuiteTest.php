@@ -16,7 +16,7 @@ class ControllerMvcMinorSuiteTest extends TestCase
         parent::setUp();
 
         $this->controllerMvcMajorSuite = $this->prophesize(ControllerMvcMajorSuite::class);
-        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite($this->controllerMvcMajorSuite->reveal());
+        $this->controllerMvcMinorSuite = new ControllerMvcMinorSuite($this->controllerMvcMajorSuite->reveal(), null, null, null, null, true);
 
     }
 
@@ -25,5 +25,6 @@ class ControllerMvcMinorSuiteTest extends TestCase
         $this->controllerMvcMajorSuite->getSuite()->willReturn('controller-mvc')->shouldBeCalled();
         $this->assertEquals($this->controllerMvcMajorSuite->reveal(), $this->controllerMvcMinorSuite->getMajorSuite());
         $this->assertEquals('controller-mvc/controller-mvc', $this->controllerMvcMinorSuite->getLocationKey());
+        $this->assertTrue($this->controllerMvcMinorSuite->isUsingLongName());
     }
 }
