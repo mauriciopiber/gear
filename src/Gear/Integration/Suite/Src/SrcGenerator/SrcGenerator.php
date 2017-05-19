@@ -67,7 +67,7 @@ class SrcGenerator
         $invokables = [***REMOVED***;
 
         $invokables[***REMOVED*** = [
-            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type
         ***REMOVED***;
 
@@ -110,7 +110,7 @@ class SrcGenerator
             $srcOptions[***REMOVED*** = $this->generateBaseInterface();
         }
 
-        //$srcOptions[***REMOVED*** = $this->generateBaseClass();
+        $srcOptions[***REMOVED*** = $this->generateBaseClass();
 
         $invokables = [***REMOVED***;
         /*
