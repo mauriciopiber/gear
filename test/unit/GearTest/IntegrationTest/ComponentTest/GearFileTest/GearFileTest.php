@@ -21,18 +21,21 @@ class GearFileTest extends TestCase
             $this->persist->reveal(),
             $this->stringService
         );
+
+        $this->suite = $this->prophesize('Gear\Integration\Suite\MinorSuiteInterface');
+        $this->suite->isUsingLongName()->willReturn(true);
     }
 
     public function testCreateSingleInterface()
     {
-        $data = $this->service->createMultiplesInterfaces('service', 1, 1, 'long');
+        $data = $this->service->createMultiplesImplements($this->suite->reveal(), 'service', 1, 1, 'long');
 
         $this->assertEquals(['Interfaces\ServiceInterface'***REMOVED***, $data);
     }
 
     public function testCreateMultipleInterfaceUsingService()
     {
-        $data = $this->service->createMultiplesInterfaces('service', 5, 5, 'long');
+        $data = $this->service->createMultiplesImplements($this->suite->reveal(), 'service', 5, 5, 'long');
 
         $this->assertEquals([
             'Interfaces\ServiceInterfaceOne',
@@ -46,14 +49,14 @@ class GearFileTest extends TestCase
 
     public function testCreateMultipleInterfaceUsingRepository()
     {
-        $data = $this->service->createMultiplesInterfaces('repository', 5, 5, 'short');
+        $data = $this->service->createMultiplesImplements($this->suite->reveal(), 'repository', 5, 5, 'short');
 
         $this->assertEquals([
-            'Interfaces\RepositoryIntOne',
-            'Interfaces\RepositoryIntTwo',
-            'Interfaces\RepositoryIntThree',
-            'Interfaces\RepositoryIntFour',
-            'Interfaces\RepositoryIntFive',
+            'Interfaces\RepositoryInterOne',
+            'Interfaces\RepositoryInterTwo',
+            'Interfaces\RepositoryInterThree',
+            'Interfaces\RepositoryInterFour',
+            'Interfaces\RepositoryInterFive',
         ***REMOVED***, $data);
     }
 }
