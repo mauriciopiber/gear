@@ -1,9 +1,10 @@
 <?php
 namespace Gear\Integration\Suite;
 
-abstract class AbstractMinorSuite extends AbstractSuite
-{
+use Gear\Integration\Suite\MinorSuiteInterface;
 
+abstract class AbstractMinorSuite extends AbstractSuite implements MinorSuiteInterface
+{
     protected $majorSuite;
 
     protected $locationKey;
