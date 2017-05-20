@@ -20,6 +20,12 @@ class ConstructorParams
 
     const LIMIT_PARAM_SIZE = 20;
 
+    public function setParams(array $params)
+    {
+        $this->params = $params;
+    }
+
+
     /**
      * Constructor
      *
@@ -35,131 +41,144 @@ class ConstructorParams
     }
 
 
-    public function cutVars(&$paramsStack)
+    public function createParams($params)
     {
-        $historyStep = [***REMOVED***;
-        $addNames = [***REMOVED***;
-        $issueStep = [***REMOVED***;
+        $data = [***REMOVED***;
+        foreach ($params as $classDependency)
+        {
+            $var = $classDependency;
 
-        //$index is the PARAM index.
-        //$i is the POSITION index.
-        foreach ($paramsStack as $index => $names) {
+            preg_match_all('/((?:^|[A-Z***REMOVED***)[a-z***REMOVED***+)/', $var, $matches);
 
-            if (!isset($issueStep[$index***REMOVED***)) {
-                $issueStep[$index***REMOVED*** = [***REMOVED***;
+            $data[***REMOVED*** = $matches[0***REMOVED***;
+        }
+
+        $this->params = [***REMOVED***;
+
+        foreach ($data as $index => $param) {
+
+            $count = $this->sumParamValue($param);
+
+            if ($count <= 20) {
+                $this->params[$index***REMOVED*** = $this->addParam($param);
+                unset($data[$index***REMOVED***);
+                continue;
             }
+        }
 
-            foreach ($names as $i => $name) {
+        if (empty($data)) {
+            return $this->params;
+        }
 
-                if (!isset($historyStep[$i***REMOVED***)) {
-                    $historyStep[$i***REMOVED*** = [***REMOVED***;
 
-                    if ($index == 0) {
-                        $historyStep[$i***REMOVED***[***REMOVED*** = $name;
+        return $this->determineParams($data);
+    }
+
+    /**
+     * Return the KEYS that will be removed to cut param, on a DESC order.
+     */
+    public function revertIntersect($intersect)
+    {
+        $keys = array_keys($intersect);
+        $rValues = array_reverse($keys);
+
+        return $rValues;
+
+    }
+
+    /**
+     * Return the KEYS that will be removed to cut param, on a ASC order.
+     */
+    public function forwardIntersect($intersect)
+    {
+
+        return array_keys($intersect);
+
+    }
+
+    public function determineParams($data)
+    {
+        $intersect = $this->intersectParamsValues($data);
+
+
+        foreach ($data as $index => $value) {
+
+            foreach ($this->forwardIntersect($intersect) as $removeKey) {
+                unset($value[$removeKey***REMOVED***);
+
+                $count = $this->sumParamValue($value);
+
+                if ($count <= 20) {
+                    $candidate = $this->addParam($value);
+                    if (!in_array($candidate, $this->params)) {
+                        $this->params[$index***REMOVED*** = $candidate;
+                        unset($data[$index***REMOVED***);
+                        break;
                     }
                 }
+            }
 
-                if (in_array($name, $historyStep[$i***REMOVED***)) {
-                    $issueStep[$index***REMOVED***[***REMOVED*** = $i;
-                } else {
-                    $historyStep[$i***REMOVED***[***REMOVED*** = $name;
+        }
+
+        if (empty($data)) {
+            return $this->params;
+        }
+
+
+        foreach ($data as $index => $value) {
+
+            foreach ($this->revertIntersect($intersect) as $removeKey) {
+                unset($value[$removeKey***REMOVED***);
+
+                $count = $this->sumParamValue($value);
+
+                if ($count <= 20) {
+                    $candidate = $this->addParam($value);
+                    if (!in_array($candidate, $this->params)) {
+                        $this->params[$index***REMOVED*** = $candidate;
+                        unset($data[$index***REMOVED***);
+                        break;
+                    }
                 }
             }
+
         }
 
-
-        $all = 0;
-
-        foreach ($issueStep as $step) {
-            $all += count($step);
+        if (empty($data)) {
+            return $this->params;;
         }
 
-        if ($all <= 0) {
-            return;
-        }
+        throw new \Exception('Params errors');
+    }
 
-        $greaterIndex = null;
-        $max = 0;
 
-        foreach ($historyStep as $index => $history) {
-            if (count($history) > $max) {
-                $greaterIndex = $index;
-                $max = count($history);
+    public function addParam($param)
+    {
+        return $this->str('var', implode('', $param));
+    }
+
+    public function sumParamValue($data)
+    {
+        $test = array_map (function($value) {
+            return strlen($value);
+        }, $data);
+
+        return array_sum($test);
+    }
+
+    public function intersectParamsValues($data)
+    {
+        $intersect = [***REMOVED***;
+
+        foreach ($data as $index => $params) {
+
+            if (empty($intersect)) {
+                $intersect = $params;
+                continue;
             }
+
+            $intersect = array_intersect($intersect, $params);
         }
-
-        $move = null;
-
-        if ($greaterIndex === 0) {
-            $move = true;
-        } else {
-            $final = ($greaterIndex)/count($historyStep);
-            $move = ($final <= 0.5) ? true : false;
-        }
-
-        //executa os iterates.
-        $tempParams = $paramsStack;
-
-        foreach ($tempParams as $index => $names) {
-
-            $tempParams[$index***REMOVED*** = array_values($this->iterateRemoveNames($names, $issueStep[$index***REMOVED***, $move));
-        }
-
-        $paramsStack = $tempParams;
+        return $intersect;
     }
-
-
-    public function iterateRemoveNames(array $names, array $toRemove, $move = true)
-    {
-        $size = implode('', $names);
-
-        //se o tamanho de todo names for menor que o limite, pode retornar.
-        if (strlen($size) <= self::LIMIT_PARAM_SIZE) {
-            return $names;
-        }
-
-        //se for forward, deve ir para a primeira duplicidade e remover.
-        //se for backward, deve ir para a última duplicidade e remover.
-
-        //fix
-        if ($move === true) {
-            end($toRemove);
-        } else {
-            reset($toRemove);
-        }
-
-        if (empty($toRemove)) {
-            $this->removeName($names, 0);
-            $names = array_values($names);
-        } else {
-            $toRemoveKey = key($toRemove);
-            $this->removeName($names, $toRemoveKey);
-            unset($toRemove[$toRemoveKey***REMOVED***);
-            $toRemove = array_values($toRemove);
-        }
-        return $this->iterateRemoveNames($names, $toRemove, $move);
-    }
-
-    public function removeName(&$names, $toRemoveKey)
-    {
-        unset($names[$toRemoveKey***REMOVED***); //deleta a chave esperada.
-    }
-
-    public function tokenizeParams($paramsStack)
-    {
-        $history = [***REMOVED***;
-        $names = [***REMOVED***;
-
-        $this->cutVars($paramsStack);
-
-        foreach ($paramsStack as $index => $nameArray) {
-            $names[***REMOVED*** = $this->str('var', implode('', $nameArray));
-        }
-
-        if (count($names) !== count(array_unique($names))) {
-            throw new ParamsConflitException(var_export($names, true));
-        }
-        return $names;
-    }
-
 }

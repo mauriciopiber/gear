@@ -37,20 +37,20 @@ class AllColumnsDbService extends AbstractService
     /**
      * Constructor
      *
-     * @param AllColumnsDbRepository $allColumnsDb       All Columns Db Repository
-     * @param Memcached              $cache              Memcached
-     * @param AuthenticationService  $zfcuserAuthService Authentication Service
-     * @param ImageService           $imageService       Image Service
+     * @param AllColumnsDbRepository $columnsDbRepository All Columns Db Repository
+     * @param Memcached              $cache               Memcached
+     * @param AuthenticationService  $zfcuserAuthService  Authentication Service
+     * @param ImageService           $imageService        Image Service
      *
      * @return AllColumnsDbService
      */
     public function __construct(
-        AllColumnsDbRepository $allColumnsDb,
+        AllColumnsDbRepository $columnsDbRepository,
         Memcached $cache,
         AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
-        $this->allColumnsDbRepository = $allColumnsDb;
+        $this->allColumnsDbRepository = $columnsDbRepository;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;

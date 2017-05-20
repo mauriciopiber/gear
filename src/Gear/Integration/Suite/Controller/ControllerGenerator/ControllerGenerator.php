@@ -114,13 +114,13 @@ class ControllerGenerator
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->type, 1, $this->repeat, $this->keyStyle),
             'type' => $this->type
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->type, $this->repeat, $this->repeat, $this->keyStyle),
             'type' => $this->type
         ***REMOVED***;
 
@@ -146,7 +146,7 @@ class ControllerGenerator
             'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->type, 1, $this->repeat, $this->keyStyle),
             'type' => $this->type,
             'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***
         ***REMOVED***;
@@ -155,7 +155,7 @@ class ControllerGenerator
             'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->type, $this->repeat, $this->repeat, $this->keyStyle),
             'type' => $this->type,
             'dependency' => [
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::REPOSITORY***REMOVED***,

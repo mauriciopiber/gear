@@ -30,18 +30,18 @@ class SingleDbTableService extends AbstractService
     /**
      * Constructor
      *
-     * @param SingleDbTableRepository $singleDbTable      Single Db Table Repository
+     * @param SingleDbTableRepository $dbTableRepository  Single Db Table Repository
      * @param Memcached               $cache              Memcached
      * @param AuthenticationService   $zfcuserAuthService Authentication Service
      *
      * @return SingleDbTableService
      */
     public function __construct(
-        SingleDbTableRepository $singleDbTable,
+        SingleDbTableRepository $dbTableRepository,
         Memcached $cache,
         AuthenticationService $zfcuserAuthService
     ) {
-        $this->singleDbTableRepository = $singleDbTable;
+        $this->singleDbTableRepository = $dbTableRepository;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
 
