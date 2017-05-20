@@ -374,16 +374,11 @@ EOS;
 
         $this->paramsStack = [***REMOVED***;
 
-        foreach ($constructorData as $classDependency)
-        {
-            $var = $classDependency['var'***REMOVED***;
-
-            preg_match_all('/((?:^|[A-Z***REMOVED***)[a-z***REMOVED***+)/', $var, $matches);
-
-            $this->paramsStack[***REMOVED*** = $matches[0***REMOVED***;
+        foreach ($constructorData as $classDependency) {
+            $this->paramsStack[***REMOVED*** = $classDependency['var'***REMOVED***;
         }
 
-        $this->params = $this->getConstructorParams()->tokenizeParams($this->paramsStack);
+        $this->params = $this->getConstructorParams()->createParams($this->paramsStack);
 
 
         $html = $this->getConstructorDocs($data);

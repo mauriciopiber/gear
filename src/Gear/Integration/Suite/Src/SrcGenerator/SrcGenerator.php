@@ -53,9 +53,11 @@ class SrcGenerator
 
     private function generateBaseInterface()
     {
+        $type = $this->minorSuite->isUsingLongName() ? $this->type : substr($this->type, 0, 5);
+
         $implements = [***REMOVED***;
         $implements[***REMOVED*** = [
-            'name' => $this->type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => $type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => self::INTERFACE
         ***REMOVED***;
 
@@ -137,13 +139,13 @@ class SrcGenerator
 
             $invokables[***REMOVED*** = [
                 'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle),
+                'implements' => $this->gearFile->createMultiplesImplements($srcMinor, $this->type, 1, $this->repeat, $this->keyStyle),
                 'type' => $this->type
             ***REMOVED***;
 
             $invokables[***REMOVED*** = [
                 'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+                'implements' => $this->gearFile->createMultiplesImplements($srcMinor, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
                 'type' => $this->type
             ***REMOVED***;
         }
@@ -156,7 +158,8 @@ class SrcGenerator
         ***REMOVED***;
 
         if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-            $full['implements'***REMOVED*** = $this->gearFile->createMultiplesInterfaces(
+            $full['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
+                $srcMinor,
                 $this->type,
                 $this->repeat,
                 $this->repeat,
@@ -203,7 +206,7 @@ class SrcGenerator
             ***REMOVED***;
 
             if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesInterfaces($this->type, 1, $this->repeat, $this->keyStyle);
+                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements($srcMinor, $this->type, 1, $this->repeat, $this->keyStyle);
             }
 
             $dependencies[***REMOVED*** = $depFull;
@@ -222,7 +225,7 @@ class SrcGenerator
             ***REMOVED***;
 
             if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesInterfaces($this->type, $this->repeat, $this->repeat, $this->keyStyle);
+                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements($srcMinor, $this->type, $this->repeat, $this->repeat, $this->keyStyle);
 
             }
 

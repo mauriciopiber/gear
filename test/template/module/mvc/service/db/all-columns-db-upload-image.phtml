@@ -34,7 +34,7 @@ class DbUploadImageService extends AbstractService
     /**
      * Constructor
      *
-     * @param DbUploadImageRepository $dbUploadImage      Db Upload Image Repository
+     * @param DbUploadImageRepository $imageRepository    Db Upload Image Repository
      * @param Memcached               $cache              Memcached
      * @param AuthenticationService   $zfcuserAuthService Authentication Service
      * @param ImageService            $imageService       Image Service
@@ -42,12 +42,12 @@ class DbUploadImageService extends AbstractService
      * @return DbUploadImageService
      */
     public function __construct(
-        DbUploadImageRepository $dbUploadImage,
+        DbUploadImageRepository $imageRepository,
         Memcached $cache,
         AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
-        $this->dbUploadImageRepository = $dbUploadImage;
+        $this->dbUploadImageRepository = $imageRepository;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;

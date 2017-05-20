@@ -38,26 +38,26 @@ class GearFile
 
     const KEYS_BASE = [
         'implements' => [
-            'short' => '%sInt%s',
+            'short' => '%sInter%s',
             'long'  => '%sInterface%s'
         ***REMOVED***,
         'extends' => [
-            'short' => '%sExtesi%s%s',
+            'short' => '%sExtes%s%s',
             'long'  => '%sExtesible%s%s'
         ***REMOVED***
     ***REMOVED***;
 
     const KEYS = [
         'implements' => [
-            'short' => '%sImpl%s%s',
+            'short' => '%sImple%s%s',
             'long'  => '%sImplements%s%s'
         ***REMOVED***,
         'implements-many' => [
-            'short' => '%sImplMany%s%s',
+            'short' => '%sImpleMany%s%s',
             'long'  => '%sImplementsMany%s%s'
         ***REMOVED***,
         'extends' => [
-            'short' => '%sExt%s%s',
+            'short' => '%sExted%s%s',
             'long'  => '%sExtends%s%s'
         ***REMOVED***,
         'namespace' => [
@@ -65,19 +65,19 @@ class GearFile
             'long'  => '%sNamespace%s%s'
         ***REMOVED***,
         'dependency' => [
-            'short' => '%sDep%s%s',
+            'short' => '%sDepen%s%s',
             'long'  => '%sDependency%s%s',
         ***REMOVED***,
         'dependency-many' => [
-            'short' => '%sDepMany%s%s',
+            'short' => '%sDepenMany%s%s',
             'long'  => '%sDependencyMany%s%s',
         ***REMOVED***,
         'dependency-full' => [
-            'short' => '%sDepFull%s%s',
+            'short' => '%sDepenFull%s%s',
             'long'  => '%sDependencyFull%s%s',
         ***REMOVED***,
         'dependency-many-full' => [
-            'short' => '%sDepManyFul%s%s',
+            'short' => '%sDepenManyFul%s%s',
             'long'  => '%sDependenciesManyFull%s%s',
         ***REMOVED***,
         'default' => [
@@ -332,22 +332,6 @@ class GearFile
         return $data;
     }
 
-    public function createGearfileComponent($data)
-    {
-        $suiteName = $this->suite->getSuiteName();
-
-        $name = $this->stringService->str('url', $suiteName);
-
-        $gearfile = sprintf('%s.yml', $name);
-
-        $yaml = Yaml::dump($data);
-
-        $this->persist->save($this->suite, $gearfile, $yaml);
-
-        return $gearfile;
-    }
-
-
     public function createControllerGearfile(ControllerMinorSuite $suite, $srcOptions)
     {
         $this->suite = $suite;
@@ -414,8 +398,8 @@ class GearFile
     {
         $config = ($suite->isUsingLongName() ? $configName : substr($configName, 0, 5));
 
-        return (!empty($configName))
-            ? $this->stringService->str('class', $configName)
+        return (!empty($config))
+            ? $this->stringService->str('class', $config)
             : '';
     }
 
@@ -426,8 +410,9 @@ class GearFile
      *
      * Can cut if isUsingLongName is false.
      */
-    public function getEntryName($name, $type, $typeName, $serviceConfig, $numberConfig)
+    public function getEntryName($suite, $name, $type, $typeName, $serviceConfig, $numberConfig)
     {
+        $typeName = ($suite->isUsingLongName()) ? $typeName : substr($typeName, 0, 5);
 
         $nameRc = ($type == 'Interface')
             ? sprintf($name, '', $numberConfig)
@@ -444,10 +429,15 @@ class GearFile
         return ($suite->isUsingLongName()) ? $type : substr($type, 0, 5);
     }
 
-
-    public function getEntryConfigNumber($max, $repeat)
+    public function getEntryConfigNumber($suite, $max, $repeat)
     {
-        return ($max > 1) ? NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED*** : '';
+        if ($max == 1) {
+            return '';
+        }
+
+        $config = NumberToStringInterface::NUMBER_MAP[$repeat***REMOVED***;
+
+        return ($suite->isUsingLongName()) ? $config : substr($config, 0, 5);
     }
 
 
@@ -455,14 +445,14 @@ class GearFile
     {
         $this->entry = [***REMOVED***;
 
-        $numberConfig = $this->getEntryConfigNumber($max, $repeat);
+        $numberConfig = $this->getEntryConfigNumber($this->suite, $max, $repeat);
 
         $serviceConfig = $this->getEntryConfigName($this->suite, $configName);
 
         $type = $this->str('class', $entity['type'***REMOVED***);
         $typeName = $this->getTypeName($this->suite, $type);
 
-        $name = $this->getEntryName($entity['name'***REMOVED***, $type, $typeName, $serviceConfig, $numberConfig);
+        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***, $type, $typeName, $serviceConfig, $numberConfig);
 
 
         $this->entry['name'***REMOVED*** = $name;
@@ -481,7 +471,7 @@ class GearFile
                     $namespace = $type;
             }
 
-            $this->entry['extends'***REMOVED*** = sprintf('%s\\'.$entity['extends'***REMOVED***, $namespace, $type, $serviceConfig, $numberConfig);
+            $this->entry['extends'***REMOVED*** = sprintf('%s\\'.$entity['extends'***REMOVED***, $namespace, $typeName, $serviceConfig, $numberConfig);
         }
 
         if (isset($entity['namespace'***REMOVED***)) {
@@ -515,9 +505,17 @@ class GearFile
 
             foreach ($entity['dependency'***REMOVED*** as $invokDep) {
 
-                $typeDep = $this->str('class', $invokDep[1***REMOVED***);
+                $typeDep = ($this->suite->isUsingLongName())
+                    ? $this->str('class', $invokDep[1***REMOVED***)
+                    : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));
 
-                $this->entry['dependency'***REMOVED***[***REMOVED*** = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDep, $typeDep, $typeName, $numberConfig);
+                $typeDepType = $this->str('class', $invokDep[1***REMOVED***);
+
+
+                $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $numberConfig);
+                var_dump($dep);
+
+                $this->entry['dependency'***REMOVED***[***REMOVED*** = $dep;
 
             }
         }
@@ -552,9 +550,10 @@ class GearFile
         return $textName;
     }
 
-    public function createMultiplesInterfaces($type, $repeat, $max, $keyStyle)
+    public function createMultiplesImplements($suite, $type, $repeat, $max, $keyStyle)
     {
         $type = $this->str('class', $type);
+        $type = ($suite->isUsingLongName()) ? $type : substr($type, 0, 5);
 
         $interfaces = [***REMOVED***;
 
@@ -571,16 +570,19 @@ class GearFile
     }
 
 
-    /**
-    public function createSrcMvcGearfile(SrcMvcMinorSuite $suite)
+    public function createGearfileComponent($data)
     {
+        $suiteName = $this->suite->getSuiteName();
 
+        $name = $this->stringService->str('url', $suiteName);
 
+        $gearfile = sprintf('%s.yml', $name);
+
+        $yaml = Yaml::dump($data);
+
+        $this->persist->save($this->suite, $gearfile, $yaml);
+
+        return $gearfile;
     }
 
-    public function createMvcGearfile(MvcMinorSuite $suite)
-    {
-
-    }
-    */
 }
