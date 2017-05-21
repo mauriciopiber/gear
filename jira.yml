@@ -1,26 +1,43 @@
-versions:
-  0:
-    version: gear-base-0.2.46
-    description: "ConsoleValidation e ConsoleValidationStatus"
-    project: GB
+#versions:
+#  0:
+#    version: gear-base-0.2.46
+#    description: "ConsoleValidation e ConsoleValidationStatus"
+#    project: GB
+#issues:
+#  1:
+#    summary: "Adicionar uma regra de validação pra não poder adicionar invokables com dependência."
+#    type: Story
+#    project: GB
+#    estimate: 1h
+#    sprint: 27
+##    dueDate: 24/03/2017
+#    sprint: gear-base-0.2.46
+#  2:
+#    summary: "Validação para dependency e extends sem namespace correto"
+#  3:
+#    summary: "Validação para não adicionar mesma classe como dependência/extends/implements ao mesmo tempo"
+#  4:
+#    summary: "Adicionar abstract para o filtro do SRC"
+#   project: GS
+#  5:
+#    summary: "Criar classe abstrada para Migrations com as pré opções para usar para desenvolvimento direto"
+# Remover $this->getServiceManager()->getService(Name|Callable)
+
+
 issues:
   1:
-    summary: "Adicionar uma regra de validação pra não poder adicionar invokables com dependência."
+    summary: "Finalizar toda cadeia Suite de MVC"
+    description: "Finalizar cadeia MVC completa, mvc, src-mvc, controller-mvc"
     type: Story
-    project: GB
-    estimate: 1h
-    sprint: 27
-    dueDate: 24/03/2017
-    sprint: gear-base-0.2.46
-  2:
-    summary: "Validação para dependency e extends sem namespace correto"
-  3:
-    summary: "Validação para não adicionar mesma classe como dependência/extends/implements ao mesmo tempo"
-  4:
-    summary: "Adicionar abstract para o filtro do SRC"
-    project: GS
-  5:
-    summary: "Criar classe abstrada para Migrations com as pré opções para usar para desenvolvimento direto"
+    project: GP
+    estimate: 8h
+    sprint: 36
+  2: 
+    summary: "Corrigir teste Controller Action, menu"
+    description: "Quando clica no menu e o menu expande, e o menu é o último ítem da tela, não está navegando até o botão, navegar"
+    type: Bug
+    project: GP
+    estimate: 8h
+    sprint: 36
 
-    
-# Remover $this->getServiceManager()->getService(Name|Callable)
+
