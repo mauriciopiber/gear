@@ -52,6 +52,8 @@ class ControllerGenerator
 
     public function generateMinorSuite(ControllerMinorSuite $suite)
     {
+        $this->suite = $suite;
+
         $this->type = $suite->getType();
         $this->repeat = $suite->getRepeat();
 
@@ -97,38 +99,44 @@ class ControllerGenerator
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type
+            'type' => $this->type,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
-            'namespace' => '%s'
+            'namespace' => '%s',
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type
+            'type' => $this->type,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesImplements($this->type, 1, $this->repeat, $this->keyStyle),
-            'type' => $this->type
+            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, 1, $this->repeat, $this->keyStyle),
+            'type' => $this->type,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesImplements($this->type, $this->repeat, $this->repeat, $this->keyStyle),
-            'type' => $this->type
+            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'type' => $this->type,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
-            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
@@ -139,30 +147,33 @@ class ControllerGenerator
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED***,
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FILTER***REMOVED***,
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FORM***REMOVED***,
-            ***REMOVED***
+            ***REMOVED***,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $dependencies[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesImplements($this->type, 1, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, 1, $this->repeat, $this->keyStyle),
             'type' => $this->type,
-            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         $dependencies[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesImplements($this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
             'type' => $this->type,
             'dependency' => [
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::REPOSITORY***REMOVED***,
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED***,
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FILTER***REMOVED***,
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::FORM***REMOVED***,
-            ***REMOVED***
+            ***REMOVED***,
+            'actions' => [***REMOVED***
         ***REMOVED***;
 
         return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
@@ -200,9 +211,11 @@ class ControllerGenerator
 
     private function createPrepareInterface()
     {
+        $type = $this->suite->isUsingLongName() ? $this->type : substr($this->type, 0, 5);
+
         $implements = [***REMOVED***;
         $implements[***REMOVED*** = [
-            'name' => $this->type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => $type.GearFile::KEYS_BASE['implements'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => self::INTERFACE
         ***REMOVED***;
 
