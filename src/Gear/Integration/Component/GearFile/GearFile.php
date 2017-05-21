@@ -513,15 +513,41 @@ class GearFile
 
 
                 $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $numberConfig);
-                var_dump($dep);
+                //var_dump($dep);
 
                 $this->entry['dependency'***REMOVED***[***REMOVED*** = $dep;
 
             }
         }
 
+        if (isset($entity['actions'***REMOVED***)) {
+            $this->entry['actions'***REMOVED*** = $this->createAction($repeat, $serviceConfig);
+        }
+
         return $this->entry;
     }
+
+    public function createAction($repeat, $serviceConfig)
+    {
+        $actions = [***REMOVED***;
+
+        if ($repeat == 1) {
+            $actions[***REMOVED*** = ['name' => sprintf('%s', 'Index'), 'role' => 'guest'***REMOVED***;
+            return $actions;
+        }
+
+
+        for ($i = 1; $i <= $repeat; $i++) {
+
+            $numberConfig = $this->getEntryConfigNumber($this->suite, $repeat, $i);
+
+            $actions[***REMOVED*** = ['name' => sprintf('%s', $numberConfig), 'role' => 'guest'***REMOVED***;
+        }
+
+
+        return $actions;
+    }
+
 
     public function createNamespace($type, $number, $typeId, $longName, $max)
     {
