@@ -52,8 +52,8 @@ class SrcMvcSuite
         );
 
         foreach ($types as $type) {
-            $srcMvcMinor = new SrcMvcMinorSuite($srcMvcMajor, $type);
-            $srcMvcMajor->addMinorSuite($this->srcMvcGenerator->generateSrcMvc($srcMvcMinor, $longname));
+            $srcMvcMinor = new SrcMvcMinorSuite($srcMvcMajor, $type, null, null, null, null, $longname);
+            $srcMvcMajor->addMinorSuite($this->srcMvcGenerator->generateSrcMvc($srcMvcMinor));
         }
 
         $this->superTestFile->updateSuperTestFile($srcMvcMajor);

@@ -153,10 +153,11 @@ class ResolveNames
     public function format(MvcMinorSuite $suite, $stringType, $minify = false)
     {
         $variables = $this->createAliase($suite);
-
-        if ($minify) {
+//var_dump()
+        if ($minify && $suite->isUsingLongName() === false) {
             $variables = $this->cutNames($variables);
         }
+
 
         foreach ($variables as $i => $name) {
 

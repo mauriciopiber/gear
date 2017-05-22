@@ -111,7 +111,7 @@ class Integration
         }
 
         if ($this->type === null || $this->type == self::MVC) {
-            $this->mvcSuite->runSuite();
+            $this->mvcSuite->runSuite($this->longname);
         }
 
         if ($this->type === null || $this->type == self::SRC_MVC) {

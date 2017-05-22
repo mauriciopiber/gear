@@ -40,7 +40,7 @@ class ControllerMvcSuite
         return $this;
     }
 
-    public function runControllerMvcSuite($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+    public function runControllerMvcSuite($suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables, $longname)
     {
         echo '    - Create Controller Mvc Suite'."\n";
 
@@ -51,7 +51,7 @@ class ControllerMvcSuite
             $suiteTables
         );
 
-        $controllerMvcMinor = new ControllerMvcMinorSuite($controllerMvcMajor, null, null, null, null);
+        $controllerMvcMinor = new ControllerMvcMinorSuite($controllerMvcMajor, null, null, null, null, $longname);
         $this->controllerMvcGenerator->generateControllerMvc($controllerMvcMinor);
 
         echo '    - Finish.'."\n\n";

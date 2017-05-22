@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class SrcMvcEntity extends AbstractMigration
 {
     const TABLES = [
-        'src_mvc_bsc' => [
+        'src_mvc_basic' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -38,7 +38,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_upl' => [
+        'src_mvc_basic_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -71,7 +71,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_uni' => [
+        'src_mvc_basic_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -104,7 +104,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_uni_upl' => [
+        'src_mvc_basic_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -137,7 +137,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_nul' => [
+        'src_mvc_basic_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -170,7 +170,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_nul_upl' => [
+        'src_mvc_basic_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -203,7 +203,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_uni_nul' => [
+        'src_mvc_basic_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -236,7 +236,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_uni_nul_upl' => [
+        'src_mvc_basic_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -269,7 +269,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws' => [
+        'src_mvc_basic_low_strict' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -302,7 +302,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_upl' => [
+        'src_mvc_basic_low_strict_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -335,7 +335,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_uni' => [
+        'src_mvc_basic_low_strict_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -368,7 +368,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_uni_upl' => [
+        'src_mvc_basic_low_strict_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -401,7 +401,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_nul' => [
+        'src_mvc_basic_low_strict_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -434,7 +434,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_nul_upl' => [
+        'src_mvc_basic_low_strict_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -467,7 +467,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_uni_nul' => [
+        'src_mvc_basic_low_strict_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -500,7 +500,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_lws_uni_nul_upl' => [
+        'src_mvc_basic_low_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -533,7 +533,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str' => [
+        'src_mvc_basic_strict' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -566,7 +566,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_upl' => [
+        'src_mvc_basic_strict_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -599,7 +599,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_uni' => [
+        'src_mvc_basic_strict_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -632,7 +632,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_uni_upl' => [
+        'src_mvc_basic_strict_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -665,7 +665,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_nul' => [
+        'src_mvc_basic_strict_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -698,7 +698,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_nul_upl' => [
+        'src_mvc_basic_strict_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -731,7 +731,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_uni_nul' => [
+        'src_mvc_basic_strict_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -764,7 +764,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_bsc_str_uni_nul_upl' => [
+        'src_mvc_basic_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -797,7 +797,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp' => [
+        'src_mvc_complete' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -890,7 +890,7 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_upl' => [
+        'src_mvc_complete_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -971,7 +971,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_uni' => [
+        'src_mvc_complete_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -1052,7 +1052,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_uni_upl' => [
+        'src_mvc_complete_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -1133,7 +1133,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_nul' => [
+        'src_mvc_complete_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -1214,7 +1214,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_nul_upl' => [
+        'src_mvc_complete_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -1295,7 +1295,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_uni_nul' => [
+        'src_mvc_complete_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -1376,7 +1376,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_uni_nul_upl' => [
+        'src_mvc_complete_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -1457,7 +1457,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws' => [
+        'src_mvc_complete_low_strict' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -1538,7 +1538,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_upl' => [
+        'src_mvc_complete_low_strict_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -1619,7 +1619,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_uni' => [
+        'src_mvc_complete_low_strict_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -1700,7 +1700,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_uni_upl' => [
+        'src_mvc_complete_low_strict_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -1781,7 +1781,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_nul' => [
+        'src_mvc_complete_low_strict_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -1862,7 +1862,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_nul_upl' => [
+        'src_mvc_complete_low_strict_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -1943,7 +1943,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_uni_nul' => [
+        'src_mvc_complete_low_strict_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -2024,7 +2024,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_lws_uni_nul_upl' => [
+        'src_mvc_complete_low_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -2105,7 +2105,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str' => [
+        'src_mvc_complete_strict' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -2186,7 +2186,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_upl' => [
+        'src_mvc_complete_strict_upload_image' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
@@ -2267,7 +2267,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_uni' => [
+        'src_mvc_complete_strict_unique' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -2348,7 +2348,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_uni_upl' => [
+        'src_mvc_complete_strict_unique_upload_image' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
@@ -2429,7 +2429,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_nul' => [
+        'src_mvc_complete_strict_nullable' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -2510,7 +2510,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_nul_upl' => [
+        'src_mvc_complete_strict_nullable_upload_image' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
@@ -2591,7 +2591,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_uni_nul' => [
+        'src_mvc_complete_strict_unique_nullable' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
@@ -2672,7 +2672,7 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_cmp_str_uni_nul_upl' => [
+        'src_mvc_complete_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [

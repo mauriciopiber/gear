@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcNumeric extends AbstractMigration
 {
     const TABLES = [
-        'mvc_nmr' => [
+        'mvc_numeric' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [

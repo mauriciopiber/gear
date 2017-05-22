@@ -5,7 +5,7 @@ use Phinx\Migration\AbstractMigration;
 class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
 {
     const TABLES = [
-        'mvc_cmp_str_uni_nul_upl' => [
+        'mvc_complete_strict_unique_nullable_upload_image' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [

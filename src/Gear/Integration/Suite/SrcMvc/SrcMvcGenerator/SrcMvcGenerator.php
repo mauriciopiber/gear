@@ -74,7 +74,7 @@ class SrcMvcGenerator
         ***REMOVED***;
     }
 
-    public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor, $longname)
+    public function generateSrcMvc(SrcMvcMinorSuite $srcMvcMinor)
     {
         $tables = $this->prepareTables($srcMvcMinor);
 
@@ -107,8 +107,13 @@ class SrcMvcGenerator
              $column,
              $usertype,
              $constraint,
-             $tables
+             $tables,
+             $middleMinor->isUsingLongName()
          );
+
+         //var_dump($middleMinor->isUsingLongName());
+         //var_dump($srcMvcMinor->isUsingLongName());
+         //die();
 
          $srcMvcMinor->setType($middleMinor->getType());
 
