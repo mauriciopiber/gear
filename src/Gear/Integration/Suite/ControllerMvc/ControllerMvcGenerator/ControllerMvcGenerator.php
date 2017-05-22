@@ -80,7 +80,8 @@ class ControllerMvcGenerator
              $column,
              $usertype,
              $constraint,
-             $tables
+             $tables,
+             $middleMinor->isUsingLongName()
          );
 
          $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);

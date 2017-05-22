@@ -80,7 +80,7 @@ class TestFile
     public function createDefaultMinorPath($minorSuite, $type)
     {
         if ($minorSuite instanceof ControllerMvcMinorSuite) {
-            $text = '../../src-mvc-%s';
+            $text = '../../src-mvc/src-mvc-%s';
             return sprintf($text, $this->str('url', $type));
         }
 

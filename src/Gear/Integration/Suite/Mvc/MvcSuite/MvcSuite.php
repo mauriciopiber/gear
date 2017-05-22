@@ -40,7 +40,7 @@ class MvcSuite
         return $this;
     }
 
-    public function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables)
+    public function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables, $longname = false)
     {
         $expectedColumns = [
             $suiteName => $suiteColumns,
@@ -67,7 +67,8 @@ class MvcSuite
                                 $column,
                                 $userType,
                                 $constraint,
-                                $tables
+                                $tables,
+                                $longname
                             );
                             $mvcMajor->addMinorSuite($this->mvcGenerator->generateMvc($mvcSuite));
                         }
@@ -83,7 +84,7 @@ class MvcSuite
     }
 
 
-    public function runSuite()
+    public function runSuite($longname = false)
     {
         //columns
         $this->runMvcSuite(
@@ -98,7 +99,8 @@ class MvcSuite
             ***REMOVED***,
             ['all'***REMOVED***,
             [null***REMOVED***,
-            [null***REMOVED***
+            [null***REMOVED***,
+            $longname
         );
 
 
@@ -110,7 +112,8 @@ class MvcSuite
             ***REMOVED***,
             ['low-strict', 'strict'***REMOVED***,
             [null***REMOVED***,
-            [null***REMOVED***
+            [null***REMOVED***,
+            $longname
         );
 
         //constraints
@@ -121,7 +124,8 @@ class MvcSuite
             ***REMOVED***,
             ['all'***REMOVED***,
             [['nullable'***REMOVED***, ['unique'***REMOVED***, ['nullable', 'unique'***REMOVED******REMOVED***,
-            [null***REMOVED***
+            [null***REMOVED***,
+            $longname
         );
 
         //constraints
@@ -132,7 +136,8 @@ class MvcSuite
             ***REMOVED***,
             ['all'***REMOVED***,
             [null***REMOVED***,
-            ['upload_image'***REMOVED***
+            ['upload_image'***REMOVED***,
+            $longname
         );
 
         //complete
@@ -144,7 +149,8 @@ class MvcSuite
             ***REMOVED***,
             ['strict'***REMOVED***,
             [['unique', 'nullable'***REMOVED******REMOVED***,
-            ['upload_image'***REMOVED***
+            ['upload_image'***REMOVED***,
+            $longname
         );
     }
 }
