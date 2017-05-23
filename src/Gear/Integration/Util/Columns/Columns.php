@@ -15,6 +15,7 @@ use Gear\Integration\Util\Names\NamesReplaceInterface;
  */
 class Columns
 {
+
     public function getForeignKeys($columnType)
     {
         $columns = $this->factoryColumns($columnType);
@@ -97,8 +98,36 @@ class Columns
         return $fixed;
     }
 
+    public function reduceMap($key)
+    {
+        if (!isset(NamesReplaceInterface::NAMES[$key***REMOVED***)) {
+            throw new \Exception(sprintf('Missing reduce map:%s', $key));
+        }
+        return NamesReplaceInterface::NAMES[$key***REMOVED***;
+    }
+
+    public function reduceColumn($column)
+    {
+        $columnsPiece = explode('_', $column);
+
+        $reduced = [***REMOVED***;
+
+        foreach ($columnsPiece as $piece) {
+            $reduced[***REMOVED*** = $this->reduceMap($piece);
+        }
+
+
+        return implode('_', $reduced);
+    }
+
     public function reduce($columns)
     {
+        $reduce = [***REMOVED***;
+        foreach ($columns as $index => $column) {
+            $indexReduced = $this->reduceColumn($index);
+            $reduce[$indexReduced***REMOVED*** = $column;
+        }
+
         return $columns;
     }
 

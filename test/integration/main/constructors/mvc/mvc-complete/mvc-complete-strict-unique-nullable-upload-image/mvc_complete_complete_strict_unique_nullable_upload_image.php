@@ -12,85 +12,85 @@ class MvcCompleteCompleteStrictUniqueNullableUploadImage extends AbstractMigrati
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'clm_txt_cmp_str_uni_nul_upl' => [
+                'column_text_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_txt_htm_cmp_str_uni_nul_upl' => [
+                'column_text_html_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_dcm_cmp_str_uni_nul_upl' => [
+                'column_decimal_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_dcm_mny_cmp_str_uni_nul_upl' => [
+                'column_decimal_money_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boo_cmp_str_uni_nul_upl' => [
+                'column_boolean_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boo_chc_cmp_str_uni_nul_upl' => [
+                'column_boolean_checkbox_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'clm_int_cmp_str_uni_nul_upl' => [
+                'column_int_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_chc_cmp_str_uni_nul_upl' => [
+                'column_int_checkbox_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_clm_int_frk_cmp_str_uni_nul_upl' => [
+                'id_column_int_foreign_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'clm_tme_cmp_str_uni_nul_upl' => [
+                'column_time_cmp_str_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_dtt_cmp_str_uni_nul_upl' => [
+                'column_datetime_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dtt_pt_cmp_str_uni_nul_upl' => [
+                'column_datetime_ptbr_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dte_cmp_str_uni_nul_upl' => [
+                'column_date_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_dte_pt_cmp_str_uni_nul_upl' => [
+                'column_date_ptbr_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_vrc_cmp_str_uni_nul_upl' => [
+                'column_varchar_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_pav_cmp_str_uni_nul_upl' => [
+                'column_varchar_password_verify_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_upi_cmp_str_uni_nul_upl' => [
+                'column_varchar_upload_image_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_url_cmp_str_uni_nul_upl' => [
+                'column_varchar_url_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_uni_cmp_str_uni_nul_upl' => [
+                'column_varchar_unique_id_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_tlp_cmp_str_uni_nul_upl' => [
+                'column_varchar_telephone_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_eml_cmp_str_uni_nul_upl' => [
+                'column_varchar_email_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'clm_int_frk' => [
+        'column_int_foreign' => [
             'nullable' => true,
             'unique' => false,
             'columns' => [
-                'clm_int_frk_name' => [
+                'column_int_foreign_name' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,

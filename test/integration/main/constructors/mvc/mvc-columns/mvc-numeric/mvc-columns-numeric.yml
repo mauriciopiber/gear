@@ -1,5 +1,5 @@
 db:
-    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: { clm_dcm_mny_nmr: money-pt-br, clm_boo_chc_nmr: checkbox, clm_int_chc_nmr: checkbox } }
+    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: { column_decimal_money_nmr: money-pt-br, column_boolean_checkbox_nmr: checkbox, column_int_checkbox_nmr: checkbox } }
 src:
-    - { name: ClmIntFrk, type: Entity, db: ClmIntFrk }
-    - { name: ClmIntFrkFixture, type: Fixture, db: ClmIntFrk }
+    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
+    - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }

@@ -13,19 +13,19 @@ namespace Gear\Integration\Util\Columns;
 interface VarcharColumnsInterface
 {
 
-    const DEFAULT_VARCHAR                 = 'clm_vrc';
+    const DEFAULT_VARCHAR                 = 'column_varchar';
 
-    const DEFAULT_VARCHAR_EMAIL           = self::DEFAULT_VARCHAR.'_eml';
+    const DEFAULT_VARCHAR_EMAIL           = self::DEFAULT_VARCHAR.'_email';
 
-    const DEFAULT_VARCHAR_UPLOAD_IMAGE    = self::DEFAULT_VARCHAR.'_upi';
+    const DEFAULT_VARCHAR_UPLOAD_IMAGE    = self::DEFAULT_VARCHAR.'_upload_image';
 
-    const DEFAULT_VARCHAR_PASSWORD_VERIFY = self::DEFAULT_VARCHAR.'_pav';
+    const DEFAULT_VARCHAR_PASSWORD_VERIFY = self::DEFAULT_VARCHAR.'_password_verify';
 
     const DEFAULT_VARCHAR_URL             = self::DEFAULT_VARCHAR.'_url';
 
-    const DEFAULT_VARCHAR_TELEPHONE       = self::DEFAULT_VARCHAR.'_tlp';
+    const DEFAULT_VARCHAR_TELEPHONE       = self::DEFAULT_VARCHAR.'_telephone';
 
-    const DEFAULT_VARCHAR_UNIQUE_ID       = self::DEFAULT_VARCHAR.'_uni';
+    const DEFAULT_VARCHAR_UNIQUE_ID       = self::DEFAULT_VARCHAR.'_unique_id';
 
     const COLUMNS = [
         self::DEFAULT_VARCHAR                 => [

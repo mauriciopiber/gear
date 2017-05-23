@@ -12,10 +12,10 @@ class MvcColumnsText extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_txt_txt' => [
+                'column_text_txt' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_txt_htm_txt' => [
+                'column_text_html_txt' => [
                     'type' => 'text'
                 ***REMOVED***
             ***REMOVED***
