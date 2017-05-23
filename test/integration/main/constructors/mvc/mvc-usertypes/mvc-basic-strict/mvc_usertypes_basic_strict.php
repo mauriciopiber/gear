@@ -12,28 +12,28 @@ class MvcUsertypesBasicStrict extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str' => [
+                'column_time_basic_strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str' => [
+                'column_datetime_basic_strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str' => [
+                'column_date_basic_strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str' => [
+                'column_varchar_basic_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str' => [
+                'column_text_basic_strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str' => [
+                'column_decimal_basic_strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str' => [
+                'column_boolean_basic_strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str' => [
+                'column_int_basic_strict' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

@@ -66,21 +66,20 @@ class Columns
         return $columns;
     }
 
-    private function createColumnSuffix($columnSuffix)
+    private function createColumnSuffix($suite, $columnSuffix)
     {
         $label = NamesReplaceInterface::NAMES;
 
         $text = [***REMOVED***;
 
         foreach ($columnSuffix as $option) {
-            $text[***REMOVED*** = $label[$option***REMOVED***;
+            $text[***REMOVED*** = ($suite->isUsingLongName()) ? $option : $label[$option***REMOVED***;
         }
-
 
         return implode('_', $text);
     }
 
-    private function addSuffixToColumns($columns, $columnSuffix)
+    private function addSuffixToColumns($suite, $columns, $columnSuffix)
     {
         if (empty($columnSuffix)) {
             return $columns;
@@ -88,7 +87,7 @@ class Columns
 
         $fixed = [***REMOVED***;
 
-        $columnSuffix = $this->createColumnSuffix($columnSuffix);
+        $columnSuffix = $this->createColumnSuffix($suite, $columnSuffix);
 
         foreach ($columns as $name => $column) {
             $newName = $name.'_'.$columnSuffix;
@@ -136,7 +135,7 @@ class Columns
         $columnType = $suite->getColumnType();
 
         $columns = $this->factoryColumns($columnType);
-        $columns = $this->addSuffixToColumns($columns, $columnSuffix);
+        $columns = $this->addSuffixToColumns($suite, $columns, $columnSuffix);
 
         if ($suite->isUsingLongName() === false) {
             $columns = $this->reduce($columns);

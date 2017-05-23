@@ -12,28 +12,28 @@ class MvcConstraintsBasicNullableUnique extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_nul_uni' => [
+                'column_time_basic_nullable_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_nul_uni' => [
+                'column_datetime_basic_nullable_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_nul_uni' => [
+                'column_date_basic_nullable_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_nul_uni' => [
+                'column_varchar_basic_nullable_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_nul_uni' => [
+                'column_text_basic_nullable_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_nul_uni' => [
+                'column_decimal_basic_nullable_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_nul_uni' => [
+                'column_boolean_basic_nullable_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_nul_uni' => [
+                'column_int_basic_nullable_unique' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

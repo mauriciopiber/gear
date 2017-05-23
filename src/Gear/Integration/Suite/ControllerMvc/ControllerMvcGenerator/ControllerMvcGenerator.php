@@ -84,7 +84,7 @@ class ControllerMvcGenerator
              $middleMinor->isUsingLongName()
          );
 
-         $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);
+         $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url');
 
          $srcMvcMinor->setTableName($this->resolveNames->createTableName($srcMvcMinor));
          $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));

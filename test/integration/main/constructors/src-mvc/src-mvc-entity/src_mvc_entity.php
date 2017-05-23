@@ -12,28 +12,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc' => [
+                'column_time_basic' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc' => [
+                'column_datetime_basic' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc' => [
+                'column_date_basic' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc' => [
+                'column_varchar_basic' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc' => [
+                'column_text_basic' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc' => [
+                'column_decimal_basic' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc' => [
+                'column_boolean_basic' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc' => [
+                'column_int_basic' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -45,28 +45,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_upl' => [
+                'column_time_basic_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_upl' => [
+                'column_datetime_basic_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_upl' => [
+                'column_date_basic_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_upl' => [
+                'column_varchar_basic_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_upl' => [
+                'column_text_basic_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_upl' => [
+                'column_decimal_basic_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_upl' => [
+                'column_boolean_basic_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_upl' => [
+                'column_int_basic_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -78,28 +78,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_uni' => [
+                'column_time_basic_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_uni' => [
+                'column_datetime_basic_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_uni' => [
+                'column_date_basic_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_uni' => [
+                'column_varchar_basic_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_uni' => [
+                'column_text_basic_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_uni' => [
+                'column_decimal_basic_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_uni' => [
+                'column_boolean_basic_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_uni' => [
+                'column_int_basic_unique' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -111,28 +111,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_uni_upl' => [
+                'column_time_basic_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_uni_upl' => [
+                'column_datetime_basic_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_uni_upl' => [
+                'column_date_basic_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_uni_upl' => [
+                'column_varchar_basic_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_uni_upl' => [
+                'column_text_basic_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_uni_upl' => [
+                'column_decimal_basic_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_uni_upl' => [
+                'column_boolean_basic_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_uni_upl' => [
+                'column_int_basic_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -144,28 +144,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_nul' => [
+                'column_time_basic_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_nul' => [
+                'column_datetime_basic_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_nul' => [
+                'column_date_basic_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_nul' => [
+                'column_varchar_basic_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_nul' => [
+                'column_text_basic_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_nul' => [
+                'column_decimal_basic_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_nul' => [
+                'column_boolean_basic_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_nul' => [
+                'column_int_basic_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -177,28 +177,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_nul_upl' => [
+                'column_time_basic_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_nul_upl' => [
+                'column_datetime_basic_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_nul_upl' => [
+                'column_date_basic_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_nul_upl' => [
+                'column_varchar_basic_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_nul_upl' => [
+                'column_text_basic_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_nul_upl' => [
+                'column_decimal_basic_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_nul_upl' => [
+                'column_boolean_basic_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_nul_upl' => [
+                'column_int_basic_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -210,28 +210,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_uni_nul' => [
+                'column_time_basic_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_uni_nul' => [
+                'column_datetime_basic_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_uni_nul' => [
+                'column_date_basic_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_uni_nul' => [
+                'column_varchar_basic_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_uni_nul' => [
+                'column_text_basic_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_uni_nul' => [
+                'column_decimal_basic_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_uni_nul' => [
+                'column_boolean_basic_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_uni_nul' => [
+                'column_int_basic_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -243,28 +243,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_uni_nul_upl' => [
+                'column_time_basic_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_uni_nul_upl' => [
+                'column_datetime_basic_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_uni_nul_upl' => [
+                'column_date_basic_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_uni_nul_upl' => [
+                'column_varchar_basic_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_uni_nul_upl' => [
+                'column_text_basic_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_uni_nul_upl' => [
+                'column_decimal_basic_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_uni_nul_upl' => [
+                'column_boolean_basic_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_uni_nul_upl' => [
+                'column_int_basic_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -276,28 +276,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws' => [
+                'column_time_basic_low-strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws' => [
+                'column_datetime_basic_low-strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws' => [
+                'column_date_basic_low-strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws' => [
+                'column_varchar_basic_low-strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws' => [
+                'column_text_basic_low-strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws' => [
+                'column_decimal_basic_low-strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws' => [
+                'column_boolean_basic_low-strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws' => [
+                'column_int_basic_low-strict' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -309,28 +309,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_upl' => [
+                'column_time_basic_low-strict_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_upl' => [
+                'column_datetime_basic_low-strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_upl' => [
+                'column_date_basic_low-strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_upl' => [
+                'column_varchar_basic_low-strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_upl' => [
+                'column_text_basic_low-strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_upl' => [
+                'column_decimal_basic_low-strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_upl' => [
+                'column_boolean_basic_low-strict_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_upl' => [
+                'column_int_basic_low-strict_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -342,28 +342,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_uni' => [
+                'column_time_basic_low-strict_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_uni' => [
+                'column_datetime_basic_low-strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_uni' => [
+                'column_date_basic_low-strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_uni' => [
+                'column_varchar_basic_low-strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_uni' => [
+                'column_text_basic_low-strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_uni' => [
+                'column_decimal_basic_low-strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_uni' => [
+                'column_boolean_basic_low-strict_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_uni' => [
+                'column_int_basic_low-strict_unique' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -375,28 +375,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_uni_upl' => [
+                'column_time_basic_low-strict_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_uni_upl' => [
+                'column_datetime_basic_low-strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_uni_upl' => [
+                'column_date_basic_low-strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_uni_upl' => [
+                'column_varchar_basic_low-strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_uni_upl' => [
+                'column_text_basic_low-strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_uni_upl' => [
+                'column_decimal_basic_low-strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_uni_upl' => [
+                'column_boolean_basic_low-strict_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_uni_upl' => [
+                'column_int_basic_low-strict_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -408,28 +408,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_nul' => [
+                'column_time_basic_low-strict_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_nul' => [
+                'column_datetime_basic_low-strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_nul' => [
+                'column_date_basic_low-strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_nul' => [
+                'column_varchar_basic_low-strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_nul' => [
+                'column_text_basic_low-strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_nul' => [
+                'column_decimal_basic_low-strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_nul' => [
+                'column_boolean_basic_low-strict_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_nul' => [
+                'column_int_basic_low-strict_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -441,28 +441,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_nul_upl' => [
+                'column_time_basic_low-strict_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_nul_upl' => [
+                'column_datetime_basic_low-strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_nul_upl' => [
+                'column_date_basic_low-strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_nul_upl' => [
+                'column_varchar_basic_low-strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_nul_upl' => [
+                'column_text_basic_low-strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_nul_upl' => [
+                'column_decimal_basic_low-strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_nul_upl' => [
+                'column_boolean_basic_low-strict_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_nul_upl' => [
+                'column_int_basic_low-strict_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -474,28 +474,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_uni_nul' => [
+                'column_time_basic_low-strict_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_uni_nul' => [
+                'column_datetime_basic_low-strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_uni_nul' => [
+                'column_date_basic_low-strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_uni_nul' => [
+                'column_varchar_basic_low-strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_uni_nul' => [
+                'column_text_basic_low-strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_uni_nul' => [
+                'column_decimal_basic_low-strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_uni_nul' => [
+                'column_boolean_basic_low-strict_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_uni_nul' => [
+                'column_int_basic_low-strict_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -507,28 +507,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_lws_uni_nul_upl' => [
+                'column_time_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_lws_uni_nul_upl' => [
+                'column_datetime_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_lws_uni_nul_upl' => [
+                'column_date_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_lws_uni_nul_upl' => [
+                'column_varchar_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_lws_uni_nul_upl' => [
+                'column_text_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_lws_uni_nul_upl' => [
+                'column_decimal_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_lws_uni_nul_upl' => [
+                'column_boolean_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_lws_uni_nul_upl' => [
+                'column_int_basic_low-strict_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -540,28 +540,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str' => [
+                'column_time_basic_strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str' => [
+                'column_datetime_basic_strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str' => [
+                'column_date_basic_strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str' => [
+                'column_varchar_basic_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str' => [
+                'column_text_basic_strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str' => [
+                'column_decimal_basic_strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str' => [
+                'column_boolean_basic_strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str' => [
+                'column_int_basic_strict' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -573,28 +573,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_upl' => [
+                'column_time_basic_strict_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_upl' => [
+                'column_datetime_basic_strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_upl' => [
+                'column_date_basic_strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_upl' => [
+                'column_varchar_basic_strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_upl' => [
+                'column_text_basic_strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_upl' => [
+                'column_decimal_basic_strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_upl' => [
+                'column_boolean_basic_strict_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_upl' => [
+                'column_int_basic_strict_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -606,28 +606,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_uni' => [
+                'column_time_basic_strict_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_uni' => [
+                'column_datetime_basic_strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_uni' => [
+                'column_date_basic_strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_uni' => [
+                'column_varchar_basic_strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_uni' => [
+                'column_text_basic_strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_uni' => [
+                'column_decimal_basic_strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_uni' => [
+                'column_boolean_basic_strict_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_uni' => [
+                'column_int_basic_strict_unique' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -639,28 +639,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_uni_upl' => [
+                'column_time_basic_strict_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_uni_upl' => [
+                'column_datetime_basic_strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_uni_upl' => [
+                'column_date_basic_strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_uni_upl' => [
+                'column_varchar_basic_strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_uni_upl' => [
+                'column_text_basic_strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_uni_upl' => [
+                'column_decimal_basic_strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_uni_upl' => [
+                'column_boolean_basic_strict_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_uni_upl' => [
+                'column_int_basic_strict_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -672,28 +672,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_nul' => [
+                'column_time_basic_strict_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_nul' => [
+                'column_datetime_basic_strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_nul' => [
+                'column_date_basic_strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_nul' => [
+                'column_varchar_basic_strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_nul' => [
+                'column_text_basic_strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_nul' => [
+                'column_decimal_basic_strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_nul' => [
+                'column_boolean_basic_strict_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_nul' => [
+                'column_int_basic_strict_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -705,28 +705,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_nul_upl' => [
+                'column_time_basic_strict_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_nul_upl' => [
+                'column_datetime_basic_strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_nul_upl' => [
+                'column_date_basic_strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_nul_upl' => [
+                'column_varchar_basic_strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_nul_upl' => [
+                'column_text_basic_strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_nul_upl' => [
+                'column_decimal_basic_strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_nul_upl' => [
+                'column_boolean_basic_strict_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_nul_upl' => [
+                'column_int_basic_strict_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -738,28 +738,28 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_uni_nul' => [
+                'column_time_basic_strict_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_uni_nul' => [
+                'column_datetime_basic_strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_uni_nul' => [
+                'column_date_basic_strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_uni_nul' => [
+                'column_varchar_basic_strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_uni_nul' => [
+                'column_text_basic_strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_uni_nul' => [
+                'column_decimal_basic_strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_uni_nul' => [
+                'column_boolean_basic_strict_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_uni_nul' => [
+                'column_int_basic_strict_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -771,28 +771,28 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_bsc_str_uni_nul_upl' => [
+                'column_time_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_bsc_str_uni_nul_upl' => [
+                'column_datetime_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_bsc_str_uni_nul_upl' => [
+                'column_date_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_bsc_str_uni_nul_upl' => [
+                'column_varchar_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_bsc_str_uni_nul_upl' => [
+                'column_text_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_bsc_str_uni_nul_upl' => [
+                'column_decimal_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_bsc_str_uni_nul_upl' => [
+                'column_boolean_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_bsc_str_uni_nul_upl' => [
+                'column_int_basic_strict_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
@@ -804,76 +804,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp' => [
+                'column_text_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp' => [
+                'column_text_html_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp' => [
+                'column_decimal_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp' => [
+                'column_decimal_money_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp' => [
+                'column_boolean_complete' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp' => [
+                'column_boolean_checkbox_complete' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp' => [
+                'column_int_complete' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp' => [
+                'column_int_checkbox_complete' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp' => [
+                'id_column_int_foreign_complete' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp' => [
+                'column_time_complete' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp' => [
+                'column_datetime_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp' => [
+                'column_datetime_ptbr_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp' => [
+                'column_date_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp' => [
+                'column_date_ptbr_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp' => [
+                'column_varchar_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp' => [
+                'column_varchar_password_verify_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp' => [
+                'column_varchar_upload_image_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp' => [
+                'column_varchar_url_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp' => [
+                'column_varchar_unique_id_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp' => [
+                'column_varchar_telephone_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp' => [
+                'column_varchar_email_complete' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -897,76 +897,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_upl' => [
+                'column_text_complete_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_upl' => [
+                'column_text_html_complete_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_upl' => [
+                'column_decimal_complete_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_upl' => [
+                'column_decimal_money_complete_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_upl' => [
+                'column_boolean_complete_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_upl' => [
+                'column_boolean_checkbox_complete_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_upl' => [
+                'column_int_complete_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_upl' => [
+                'column_int_checkbox_complete_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_upl' => [
+                'id_column_int_foreign_complete_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_upl' => [
+                'column_time_complete_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_upl' => [
+                'column_datetime_complete_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_upl' => [
+                'column_datetime_ptbr_complete_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_upl' => [
+                'column_date_complete_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_upl' => [
+                'column_date_ptbr_complete_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_upl' => [
+                'column_varchar_complete_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_upl' => [
+                'column_varchar_password_verify_complete_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_upl' => [
+                'column_varchar_upload_image_complete_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_upl' => [
+                'column_varchar_url_complete_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_upl' => [
+                'column_varchar_unique_id_complete_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_upl' => [
+                'column_varchar_telephone_complete_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_upl' => [
+                'column_varchar_email_complete_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -978,76 +978,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_uni' => [
+                'column_text_complete_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_uni' => [
+                'column_text_html_complete_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_uni' => [
+                'column_decimal_complete_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_uni' => [
+                'column_decimal_money_complete_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_uni' => [
+                'column_boolean_complete_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_uni' => [
+                'column_boolean_checkbox_complete_unique' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_uni' => [
+                'column_int_complete_unique' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_uni' => [
+                'column_int_checkbox_complete_unique' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_uni' => [
+                'id_column_int_foreign_complete_unique' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_uni' => [
+                'column_time_complete_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_uni' => [
+                'column_datetime_complete_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_uni' => [
+                'column_datetime_ptbr_complete_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_uni' => [
+                'column_date_complete_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_uni' => [
+                'column_date_ptbr_complete_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_uni' => [
+                'column_varchar_complete_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_uni' => [
+                'column_varchar_password_verify_complete_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_uni' => [
+                'column_varchar_upload_image_complete_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_uni' => [
+                'column_varchar_url_complete_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_uni' => [
+                'column_varchar_unique_id_complete_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_uni' => [
+                'column_varchar_telephone_complete_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_uni' => [
+                'column_varchar_email_complete_unique' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1059,76 +1059,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_uni_upl' => [
+                'column_text_complete_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_uni_upl' => [
+                'column_text_html_complete_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_uni_upl' => [
+                'column_decimal_complete_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_uni_upl' => [
+                'column_decimal_money_complete_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_uni_upl' => [
+                'column_boolean_complete_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_uni_upl' => [
+                'column_boolean_checkbox_complete_unique_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_uni_upl' => [
+                'column_int_complete_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_uni_upl' => [
+                'column_int_checkbox_complete_unique_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_uni_upl' => [
+                'id_column_int_foreign_complete_unique_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_uni_upl' => [
+                'column_time_complete_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_uni_upl' => [
+                'column_datetime_complete_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_uni_upl' => [
+                'column_datetime_ptbr_complete_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_uni_upl' => [
+                'column_date_complete_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_uni_upl' => [
+                'column_date_ptbr_complete_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_uni_upl' => [
+                'column_varchar_complete_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_uni_upl' => [
+                'column_varchar_password_verify_complete_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_uni_upl' => [
+                'column_varchar_upload_image_complete_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_uni_upl' => [
+                'column_varchar_url_complete_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_uni_upl' => [
+                'column_varchar_unique_id_complete_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_uni_upl' => [
+                'column_varchar_telephone_complete_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_uni_upl' => [
+                'column_varchar_email_complete_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1140,76 +1140,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_nul' => [
+                'column_text_complete_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_nul' => [
+                'column_text_html_complete_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_nul' => [
+                'column_decimal_complete_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_nul' => [
+                'column_decimal_money_complete_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_nul' => [
+                'column_boolean_complete_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_nul' => [
+                'column_boolean_checkbox_complete_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_nul' => [
+                'column_int_complete_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_nul' => [
+                'column_int_checkbox_complete_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_nul' => [
+                'id_column_int_foreign_complete_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_nul' => [
+                'column_time_complete_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_nul' => [
+                'column_datetime_complete_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_nul' => [
+                'column_datetime_ptbr_complete_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_nul' => [
+                'column_date_complete_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_nul' => [
+                'column_date_ptbr_complete_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_nul' => [
+                'column_varchar_complete_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_nul' => [
+                'column_varchar_password_verify_complete_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_nul' => [
+                'column_varchar_upload_image_complete_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_nul' => [
+                'column_varchar_url_complete_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_nul' => [
+                'column_varchar_unique_id_complete_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_nul' => [
+                'column_varchar_telephone_complete_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_nul' => [
+                'column_varchar_email_complete_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1221,76 +1221,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_nul_upl' => [
+                'column_text_complete_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_nul_upl' => [
+                'column_text_html_complete_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_nul_upl' => [
+                'column_decimal_complete_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_nul_upl' => [
+                'column_decimal_money_complete_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_nul_upl' => [
+                'column_boolean_complete_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_nul_upl' => [
+                'column_boolean_checkbox_complete_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_nul_upl' => [
+                'column_int_complete_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_nul_upl' => [
+                'column_int_checkbox_complete_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_nul_upl' => [
+                'id_column_int_foreign_complete_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_nul_upl' => [
+                'column_time_complete_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_nul_upl' => [
+                'column_datetime_complete_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_nul_upl' => [
+                'column_datetime_ptbr_complete_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_nul_upl' => [
+                'column_date_complete_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_nul_upl' => [
+                'column_date_ptbr_complete_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_nul_upl' => [
+                'column_varchar_complete_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_nul_upl' => [
+                'column_varchar_password_verify_complete_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_nul_upl' => [
+                'column_varchar_upload_image_complete_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_nul_upl' => [
+                'column_varchar_url_complete_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_nul_upl' => [
+                'column_varchar_unique_id_complete_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_nul_upl' => [
+                'column_varchar_telephone_complete_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_nul_upl' => [
+                'column_varchar_email_complete_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1302,76 +1302,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_uni_nul' => [
+                'column_text_complete_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_uni_nul' => [
+                'column_text_html_complete_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_uni_nul' => [
+                'column_decimal_complete_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_uni_nul' => [
+                'column_decimal_money_complete_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_uni_nul' => [
+                'column_boolean_complete_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_uni_nul' => [
+                'column_boolean_checkbox_complete_unique_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_uni_nul' => [
+                'column_int_complete_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_uni_nul' => [
+                'column_int_checkbox_complete_unique_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_uni_nul' => [
+                'id_column_int_foreign_complete_unique_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_uni_nul' => [
+                'column_time_complete_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_uni_nul' => [
+                'column_datetime_complete_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_uni_nul' => [
+                'column_datetime_ptbr_complete_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_uni_nul' => [
+                'column_date_complete_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_uni_nul' => [
+                'column_date_ptbr_complete_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_uni_nul' => [
+                'column_varchar_complete_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_uni_nul' => [
+                'column_varchar_password_verify_complete_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_uni_nul' => [
+                'column_varchar_upload_image_complete_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_uni_nul' => [
+                'column_varchar_url_complete_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_uni_nul' => [
+                'column_varchar_unique_id_complete_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_uni_nul' => [
+                'column_varchar_telephone_complete_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_uni_nul' => [
+                'column_varchar_email_complete_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1383,76 +1383,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_uni_nul_upl' => [
+                'column_text_complete_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_uni_nul_upl' => [
+                'column_text_html_complete_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_uni_nul_upl' => [
+                'column_decimal_complete_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_uni_nul_upl' => [
+                'column_decimal_money_complete_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_uni_nul_upl' => [
+                'column_boolean_complete_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_uni_nul_upl' => [
+                'column_boolean_checkbox_complete_unique_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_uni_nul_upl' => [
+                'column_int_complete_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_uni_nul_upl' => [
+                'column_int_checkbox_complete_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_uni_nul_upl' => [
+                'id_column_int_foreign_complete_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_uni_nul_upl' => [
+                'column_time_complete_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_uni_nul_upl' => [
+                'column_datetime_complete_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_uni_nul_upl' => [
+                'column_datetime_ptbr_complete_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_uni_nul_upl' => [
+                'column_date_complete_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_uni_nul_upl' => [
+                'column_date_ptbr_complete_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_uni_nul_upl' => [
+                'column_varchar_complete_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_uni_nul_upl' => [
+                'column_varchar_password_verify_complete_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_uni_nul_upl' => [
+                'column_varchar_upload_image_complete_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_uni_nul_upl' => [
+                'column_varchar_url_complete_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_uni_nul_upl' => [
+                'column_varchar_unique_id_complete_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_uni_nul_upl' => [
+                'column_varchar_telephone_complete_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_uni_nul_upl' => [
+                'column_varchar_email_complete_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1464,76 +1464,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws' => [
+                'column_text_complete_low-strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws' => [
+                'column_text_html_complete_low-strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws' => [
+                'column_decimal_complete_low-strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws' => [
+                'column_decimal_money_complete_low-strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws' => [
+                'column_boolean_complete_low-strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws' => [
+                'column_boolean_checkbox_complete_low-strict' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws' => [
+                'column_int_complete_low-strict' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws' => [
+                'column_int_checkbox_complete_low-strict' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws' => [
+                'id_column_int_foreign_complete_low-strict' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws' => [
+                'column_time_complete_low-strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws' => [
+                'column_datetime_complete_low-strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws' => [
+                'column_datetime_ptbr_complete_low-strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws' => [
+                'column_date_complete_low-strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws' => [
+                'column_date_ptbr_complete_low-strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws' => [
+                'column_varchar_complete_low-strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws' => [
+                'column_varchar_password_verify_complete_low-strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws' => [
+                'column_varchar_upload_image_complete_low-strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws' => [
+                'column_varchar_url_complete_low-strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws' => [
+                'column_varchar_unique_id_complete_low-strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws' => [
+                'column_varchar_telephone_complete_low-strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws' => [
+                'column_varchar_email_complete_low-strict' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1545,76 +1545,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_upl' => [
+                'column_text_complete_low-strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_upl' => [
+                'column_text_html_complete_low-strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_upl' => [
+                'column_decimal_complete_low-strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_upl' => [
+                'column_decimal_money_complete_low-strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_upl' => [
+                'column_boolean_complete_low-strict_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_upl' => [
+                'column_boolean_checkbox_complete_low-strict_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_upl' => [
+                'column_int_complete_low-strict_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_upl' => [
+                'column_int_checkbox_complete_low-strict_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_upl' => [
+                'id_column_int_foreign_complete_low-strict_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_upl' => [
+                'column_time_complete_low-strict_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_upl' => [
+                'column_datetime_complete_low-strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_upl' => [
+                'column_datetime_ptbr_complete_low-strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_upl' => [
+                'column_date_complete_low-strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_upl' => [
+                'column_date_ptbr_complete_low-strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_upl' => [
+                'column_varchar_complete_low-strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_upl' => [
+                'column_varchar_password_verify_complete_low-strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_upl' => [
+                'column_varchar_upload_image_complete_low-strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_upl' => [
+                'column_varchar_url_complete_low-strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_upl' => [
+                'column_varchar_unique_id_complete_low-strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_upl' => [
+                'column_varchar_telephone_complete_low-strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_upl' => [
+                'column_varchar_email_complete_low-strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1626,76 +1626,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_uni' => [
+                'column_text_complete_low-strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_uni' => [
+                'column_text_html_complete_low-strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_uni' => [
+                'column_decimal_complete_low-strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_uni' => [
+                'column_decimal_money_complete_low-strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_uni' => [
+                'column_boolean_complete_low-strict_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_uni' => [
+                'column_boolean_checkbox_complete_low-strict_unique' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_uni' => [
+                'column_int_complete_low-strict_unique' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_uni' => [
+                'column_int_checkbox_complete_low-strict_unique' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_uni' => [
+                'id_column_int_foreign_complete_low-strict_unique' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_uni' => [
+                'column_time_complete_low-strict_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_uni' => [
+                'column_datetime_complete_low-strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_uni' => [
+                'column_datetime_ptbr_complete_low-strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_uni' => [
+                'column_date_complete_low-strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_uni' => [
+                'column_date_ptbr_complete_low-strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_uni' => [
+                'column_varchar_complete_low-strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_uni' => [
+                'column_varchar_password_verify_complete_low-strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_uni' => [
+                'column_varchar_upload_image_complete_low-strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_uni' => [
+                'column_varchar_url_complete_low-strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_uni' => [
+                'column_varchar_unique_id_complete_low-strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_uni' => [
+                'column_varchar_telephone_complete_low-strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_uni' => [
+                'column_varchar_email_complete_low-strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1707,76 +1707,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_uni_upl' => [
+                'column_text_complete_low-strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_uni_upl' => [
+                'column_text_html_complete_low-strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_uni_upl' => [
+                'column_decimal_complete_low-strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_uni_upl' => [
+                'column_decimal_money_complete_low-strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_uni_upl' => [
+                'column_boolean_complete_low-strict_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_uni_upl' => [
+                'column_boolean_checkbox_complete_low-strict_unique_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_uni_upl' => [
+                'column_int_complete_low-strict_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_uni_upl' => [
+                'column_int_checkbox_complete_low-strict_unique_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_uni_upl' => [
+                'id_column_int_foreign_complete_low-strict_unique_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_uni_upl' => [
+                'column_time_complete_low-strict_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_uni_upl' => [
+                'column_datetime_complete_low-strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_uni_upl' => [
+                'column_datetime_ptbr_complete_low-strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_uni_upl' => [
+                'column_date_complete_low-strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_uni_upl' => [
+                'column_date_ptbr_complete_low-strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_uni_upl' => [
+                'column_varchar_complete_low-strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_uni_upl' => [
+                'column_varchar_password_verify_complete_low-strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_uni_upl' => [
+                'column_varchar_upload_image_complete_low-strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_uni_upl' => [
+                'column_varchar_url_complete_low-strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_uni_upl' => [
+                'column_varchar_unique_id_complete_low-strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_uni_upl' => [
+                'column_varchar_telephone_complete_low-strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_uni_upl' => [
+                'column_varchar_email_complete_low-strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1788,76 +1788,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_nul' => [
+                'column_text_complete_low-strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_nul' => [
+                'column_text_html_complete_low-strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_nul' => [
+                'column_decimal_complete_low-strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_nul' => [
+                'column_decimal_money_complete_low-strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_nul' => [
+                'column_boolean_complete_low-strict_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_nul' => [
+                'column_boolean_checkbox_complete_low-strict_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_nul' => [
+                'column_int_complete_low-strict_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_nul' => [
+                'column_int_checkbox_complete_low-strict_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_nul' => [
+                'id_column_int_foreign_complete_low-strict_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_nul' => [
+                'column_time_complete_low-strict_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_nul' => [
+                'column_datetime_complete_low-strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_nul' => [
+                'column_datetime_ptbr_complete_low-strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_nul' => [
+                'column_date_complete_low-strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_nul' => [
+                'column_date_ptbr_complete_low-strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_nul' => [
+                'column_varchar_complete_low-strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_nul' => [
+                'column_varchar_password_verify_complete_low-strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_nul' => [
+                'column_varchar_upload_image_complete_low-strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_nul' => [
+                'column_varchar_url_complete_low-strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_nul' => [
+                'column_varchar_unique_id_complete_low-strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_nul' => [
+                'column_varchar_telephone_complete_low-strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_nul' => [
+                'column_varchar_email_complete_low-strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1869,76 +1869,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_nul_upl' => [
+                'column_text_complete_low-strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_nul_upl' => [
+                'column_text_html_complete_low-strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_nul_upl' => [
+                'column_decimal_complete_low-strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_nul_upl' => [
+                'column_decimal_money_complete_low-strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_nul_upl' => [
+                'column_boolean_complete_low-strict_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_nul_upl' => [
+                'column_boolean_checkbox_complete_low-strict_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_nul_upl' => [
+                'column_int_complete_low-strict_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_nul_upl' => [
+                'column_int_checkbox_complete_low-strict_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_nul_upl' => [
+                'id_column_int_foreign_complete_low-strict_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_nul_upl' => [
+                'column_time_complete_low-strict_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_nul_upl' => [
+                'column_datetime_complete_low-strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_nul_upl' => [
+                'column_datetime_ptbr_complete_low-strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_nul_upl' => [
+                'column_date_complete_low-strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_nul_upl' => [
+                'column_date_ptbr_complete_low-strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_nul_upl' => [
+                'column_varchar_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_nul_upl' => [
+                'column_varchar_password_verify_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_nul_upl' => [
+                'column_varchar_upload_image_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_nul_upl' => [
+                'column_varchar_url_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_nul_upl' => [
+                'column_varchar_unique_id_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_nul_upl' => [
+                'column_varchar_telephone_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_nul_upl' => [
+                'column_varchar_email_complete_low-strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -1950,76 +1950,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_uni_nul' => [
+                'column_text_complete_low-strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_uni_nul' => [
+                'column_text_html_complete_low-strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_uni_nul' => [
+                'column_decimal_complete_low-strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_uni_nul' => [
+                'column_decimal_money_complete_low-strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_uni_nul' => [
+                'column_boolean_complete_low-strict_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_uni_nul' => [
+                'column_boolean_checkbox_complete_low-strict_unique_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_uni_nul' => [
+                'column_int_complete_low-strict_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_uni_nul' => [
+                'column_int_checkbox_complete_low-strict_unique_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_uni_nul' => [
+                'id_column_int_foreign_complete_low-strict_unique_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_uni_nul' => [
+                'column_time_complete_low-strict_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_uni_nul' => [
+                'column_datetime_complete_low-strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_uni_nul' => [
+                'column_datetime_ptbr_complete_low-strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_uni_nul' => [
+                'column_date_complete_low-strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_uni_nul' => [
+                'column_date_ptbr_complete_low-strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_uni_nul' => [
+                'column_varchar_complete_low-strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_uni_nul' => [
+                'column_varchar_password_verify_complete_low-strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_uni_nul' => [
+                'column_varchar_upload_image_complete_low-strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_uni_nul' => [
+                'column_varchar_url_complete_low-strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_uni_nul' => [
+                'column_varchar_unique_id_complete_low-strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_uni_nul' => [
+                'column_varchar_telephone_complete_low-strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_uni_nul' => [
+                'column_varchar_email_complete_low-strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2031,76 +2031,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_lws_uni_nul_upl' => [
+                'column_text_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_lws_uni_nul_upl' => [
+                'column_text_html_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_lws_uni_nul_upl' => [
+                'column_decimal_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_lws_uni_nul_upl' => [
+                'column_decimal_money_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_lws_uni_nul_upl' => [
+                'column_boolean_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_lws_uni_nul_upl' => [
+                'column_boolean_checkbox_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_lws_uni_nul_upl' => [
+                'column_int_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_lws_uni_nul_upl' => [
+                'column_int_checkbox_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_lws_uni_nul_upl' => [
+                'id_column_int_foreign_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_lws_uni_nul_upl' => [
+                'column_time_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_lws_uni_nul_upl' => [
+                'column_datetime_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_lws_uni_nul_upl' => [
+                'column_datetime_ptbr_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_lws_uni_nul_upl' => [
+                'column_date_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_lws_uni_nul_upl' => [
+                'column_date_ptbr_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_lws_uni_nul_upl' => [
+                'column_varchar_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_lws_uni_nul_upl' => [
+                'column_varchar_password_verify_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_lws_uni_nul_upl' => [
+                'column_varchar_upload_image_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_lws_uni_nul_upl' => [
+                'column_varchar_url_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_lws_uni_nul_upl' => [
+                'column_varchar_unique_id_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_lws_uni_nul_upl' => [
+                'column_varchar_telephone_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_lws_uni_nul_upl' => [
+                'column_varchar_email_complete_low-strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2112,76 +2112,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str' => [
+                'column_text_complete_strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str' => [
+                'column_text_html_complete_strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str' => [
+                'column_decimal_complete_strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str' => [
+                'column_decimal_money_complete_strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str' => [
+                'column_boolean_complete_strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str' => [
+                'column_boolean_checkbox_complete_strict' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str' => [
+                'column_int_complete_strict' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str' => [
+                'column_int_checkbox_complete_strict' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str' => [
+                'id_column_int_foreign_complete_strict' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str' => [
+                'column_time_complete_strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str' => [
+                'column_datetime_complete_strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str' => [
+                'column_datetime_ptbr_complete_strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str' => [
+                'column_date_complete_strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str' => [
+                'column_date_ptbr_complete_strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str' => [
+                'column_varchar_complete_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str' => [
+                'column_varchar_password_verify_complete_strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str' => [
+                'column_varchar_upload_image_complete_strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str' => [
+                'column_varchar_url_complete_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str' => [
+                'column_varchar_unique_id_complete_strict' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str' => [
+                'column_varchar_telephone_complete_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str' => [
+                'column_varchar_email_complete_strict' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2193,76 +2193,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_upl' => [
+                'column_text_complete_strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_upl' => [
+                'column_text_html_complete_strict_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_upl' => [
+                'column_decimal_complete_strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_upl' => [
+                'column_decimal_money_complete_strict_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_upl' => [
+                'column_boolean_complete_strict_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_upl' => [
+                'column_boolean_checkbox_complete_strict_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_upl' => [
+                'column_int_complete_strict_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_upl' => [
+                'column_int_checkbox_complete_strict_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_upl' => [
+                'id_column_int_foreign_complete_strict_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_upl' => [
+                'column_time_complete_strict_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_upl' => [
+                'column_datetime_complete_strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_upl' => [
+                'column_datetime_ptbr_complete_strict_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_upl' => [
+                'column_date_complete_strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_upl' => [
+                'column_date_ptbr_complete_strict_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_upl' => [
+                'column_varchar_complete_strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_upl' => [
+                'column_varchar_password_verify_complete_strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_upl' => [
+                'column_varchar_upload_image_complete_strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_upl' => [
+                'column_varchar_url_complete_strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_upl' => [
+                'column_varchar_unique_id_complete_strict_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_upl' => [
+                'column_varchar_telephone_complete_strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_upl' => [
+                'column_varchar_email_complete_strict_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2274,76 +2274,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_uni' => [
+                'column_text_complete_strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_uni' => [
+                'column_text_html_complete_strict_unique' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_uni' => [
+                'column_decimal_complete_strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_uni' => [
+                'column_decimal_money_complete_strict_unique' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_uni' => [
+                'column_boolean_complete_strict_unique' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_uni' => [
+                'column_boolean_checkbox_complete_strict_unique' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_uni' => [
+                'column_int_complete_strict_unique' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_uni' => [
+                'column_int_checkbox_complete_strict_unique' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_uni' => [
+                'id_column_int_foreign_complete_strict_unique' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_uni' => [
+                'column_time_complete_strict_unique' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_uni' => [
+                'column_datetime_complete_strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_uni' => [
+                'column_datetime_ptbr_complete_strict_unique' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_uni' => [
+                'column_date_complete_strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_uni' => [
+                'column_date_ptbr_complete_strict_unique' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_uni' => [
+                'column_varchar_complete_strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_uni' => [
+                'column_varchar_password_verify_complete_strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_uni' => [
+                'column_varchar_upload_image_complete_strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_uni' => [
+                'column_varchar_url_complete_strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_uni' => [
+                'column_varchar_unique_id_complete_strict_unique' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_uni' => [
+                'column_varchar_telephone_complete_strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_uni' => [
+                'column_varchar_email_complete_strict_unique' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2355,76 +2355,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_uni_upl' => [
+                'column_text_complete_strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_uni_upl' => [
+                'column_text_html_complete_strict_unique_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_uni_upl' => [
+                'column_decimal_complete_strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_uni_upl' => [
+                'column_decimal_money_complete_strict_unique_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_uni_upl' => [
+                'column_boolean_complete_strict_unique_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_uni_upl' => [
+                'column_boolean_checkbox_complete_strict_unique_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_uni_upl' => [
+                'column_int_complete_strict_unique_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_uni_upl' => [
+                'column_int_checkbox_complete_strict_unique_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_uni_upl' => [
+                'id_column_int_foreign_complete_strict_unique_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_uni_upl' => [
+                'column_time_complete_strict_unique_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_uni_upl' => [
+                'column_datetime_complete_strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_uni_upl' => [
+                'column_datetime_ptbr_complete_strict_unique_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_uni_upl' => [
+                'column_date_complete_strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_uni_upl' => [
+                'column_date_ptbr_complete_strict_unique_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_uni_upl' => [
+                'column_varchar_complete_strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_uni_upl' => [
+                'column_varchar_password_verify_complete_strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_uni_upl' => [
+                'column_varchar_upload_image_complete_strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_uni_upl' => [
+                'column_varchar_url_complete_strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_uni_upl' => [
+                'column_varchar_unique_id_complete_strict_unique_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_uni_upl' => [
+                'column_varchar_telephone_complete_strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_uni_upl' => [
+                'column_varchar_email_complete_strict_unique_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2436,76 +2436,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_nul' => [
+                'column_text_complete_strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_nul' => [
+                'column_text_html_complete_strict_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_nul' => [
+                'column_decimal_complete_strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_nul' => [
+                'column_decimal_money_complete_strict_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_nul' => [
+                'column_boolean_complete_strict_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_nul' => [
+                'column_boolean_checkbox_complete_strict_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_nul' => [
+                'column_int_complete_strict_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_nul' => [
+                'column_int_checkbox_complete_strict_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_nul' => [
+                'id_column_int_foreign_complete_strict_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_nul' => [
+                'column_time_complete_strict_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_nul' => [
+                'column_datetime_complete_strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_nul' => [
+                'column_datetime_ptbr_complete_strict_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_nul' => [
+                'column_date_complete_strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_nul' => [
+                'column_date_ptbr_complete_strict_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_nul' => [
+                'column_varchar_complete_strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_nul' => [
+                'column_varchar_password_verify_complete_strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_nul' => [
+                'column_varchar_upload_image_complete_strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_nul' => [
+                'column_varchar_url_complete_strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_nul' => [
+                'column_varchar_unique_id_complete_strict_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_nul' => [
+                'column_varchar_telephone_complete_strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_nul' => [
+                'column_varchar_email_complete_strict_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2517,76 +2517,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_nul_upl' => [
+                'column_text_complete_strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_nul_upl' => [
+                'column_text_html_complete_strict_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_nul_upl' => [
+                'column_decimal_complete_strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_nul_upl' => [
+                'column_decimal_money_complete_strict_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_nul_upl' => [
+                'column_boolean_complete_strict_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_nul_upl' => [
+                'column_boolean_checkbox_complete_strict_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_nul_upl' => [
+                'column_int_complete_strict_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_nul_upl' => [
+                'column_int_checkbox_complete_strict_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_nul_upl' => [
+                'id_column_int_foreign_complete_strict_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_nul_upl' => [
+                'column_time_complete_strict_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_nul_upl' => [
+                'column_datetime_complete_strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_nul_upl' => [
+                'column_datetime_ptbr_complete_strict_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_nul_upl' => [
+                'column_date_complete_strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_nul_upl' => [
+                'column_date_ptbr_complete_strict_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_nul_upl' => [
+                'column_varchar_complete_strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_nul_upl' => [
+                'column_varchar_password_verify_complete_strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_nul_upl' => [
+                'column_varchar_upload_image_complete_strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_nul_upl' => [
+                'column_varchar_url_complete_strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_nul_upl' => [
+                'column_varchar_unique_id_complete_strict_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_nul_upl' => [
+                'column_varchar_telephone_complete_strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_nul_upl' => [
+                'column_varchar_email_complete_strict_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2598,76 +2598,76 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_uni_nul' => [
+                'column_text_complete_strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_uni_nul' => [
+                'column_text_html_complete_strict_unique_nullable' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_uni_nul' => [
+                'column_decimal_complete_strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_uni_nul' => [
+                'column_decimal_money_complete_strict_unique_nullable' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_uni_nul' => [
+                'column_boolean_complete_strict_unique_nullable' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_uni_nul' => [
+                'column_boolean_checkbox_complete_strict_unique_nullable' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_uni_nul' => [
+                'column_int_complete_strict_unique_nullable' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_uni_nul' => [
+                'column_int_checkbox_complete_strict_unique_nullable' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_uni_nul' => [
+                'id_column_int_foreign_complete_strict_unique_nullable' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_uni_nul' => [
+                'column_time_complete_strict_unique_nullable' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_uni_nul' => [
+                'column_datetime_complete_strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_uni_nul' => [
+                'column_datetime_ptbr_complete_strict_unique_nullable' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_uni_nul' => [
+                'column_date_complete_strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_uni_nul' => [
+                'column_date_ptbr_complete_strict_unique_nullable' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_uni_nul' => [
+                'column_varchar_complete_strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_uni_nul' => [
+                'column_varchar_password_verify_complete_strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_uni_nul' => [
+                'column_varchar_upload_image_complete_strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_uni_nul' => [
+                'column_varchar_url_complete_strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_uni_nul' => [
+                'column_varchar_unique_id_complete_strict_unique_nullable' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_uni_nul' => [
+                'column_varchar_telephone_complete_strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_uni_nul' => [
+                'column_varchar_email_complete_strict_unique_nullable' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -2679,76 +2679,76 @@ class SrcMvcEntity extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp_str_uni_nul_upl' => [
+                'column_text_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp_str_uni_nul_upl' => [
+                'column_text_html_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp_str_uni_nul_upl' => [
+                'column_decimal_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp_str_uni_nul_upl' => [
+                'column_decimal_money_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp_str_uni_nul_upl' => [
+                'column_boolean_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp_str_uni_nul_upl' => [
+                'column_boolean_checkbox_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp_str_uni_nul_upl' => [
+                'column_int_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp_str_uni_nul_upl' => [
+                'column_int_checkbox_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp_str_uni_nul_upl' => [
+                'id_column_int_foreign_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp_str_uni_nul_upl' => [
+                'column_time_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp_str_uni_nul_upl' => [
+                'column_datetime_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp_str_uni_nul_upl' => [
+                'column_datetime_ptbr_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp_str_uni_nul_upl' => [
+                'column_date_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp_str_uni_nul_upl' => [
+                'column_date_ptbr_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp_str_uni_nul_upl' => [
+                'column_varchar_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp_str_uni_nul_upl' => [
+                'column_varchar_password_verify_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp_str_uni_nul_upl' => [
+                'column_varchar_upload_image_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp_str_uni_nul_upl' => [
+                'column_varchar_url_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp_str_uni_nul_upl' => [
+                'column_varchar_unique_id_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp_str_uni_nul_upl' => [
+                'column_varchar_telephone_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp_str_uni_nul_upl' => [
+                'column_varchar_email_complete_strict_unique_nullable_upload-image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
