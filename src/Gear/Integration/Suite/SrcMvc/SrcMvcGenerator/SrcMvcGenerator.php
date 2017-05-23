@@ -116,6 +116,7 @@ class SrcMvcGenerator
 
          $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url');
 
+
          $srcMvcMinor->setTableName($this->resolveNames->createTableName($srcMvcMinor));
          $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));
          $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));

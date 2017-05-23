@@ -1,0 +1,7 @@
+#!/bin/bash
+
+bin/generate-integration --type=src-mvc --count=2
+cat test/integration/main/constructors/src-mvc/src-mvc-entity/src_mvc_entity.php | head -25
+
+bin/generate-integration --type=src-mvc --longname --count=2
+cat test/integration/main/constructors/src-mvc/src-mvc-entity/src_mvc_entity.php | head -25
