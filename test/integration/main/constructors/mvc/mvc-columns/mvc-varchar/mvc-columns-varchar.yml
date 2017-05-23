@@ -1,0 +1,3 @@
+db:
+    - { table: MvcVarchar, user: all, namespace: MvcVarchar, service: factories, columns: { column_varchar_password_verify_vrc: password-verify, column_varchar_upload_image_vrc: upload-image, column_varchar_url_vrc: url, column_varchar_unique_id_vrc: unique-id, column_varchar_telephone_vrc: telephone, column_varchar_email_vrc: email } }
+src: {  }

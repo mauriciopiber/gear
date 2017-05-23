@@ -1,0 +1,3 @@
+db:
+    - { table: MvcBasicNullable, user: all, namespace: MvcBasicNullable, service: factories, columns: {  } }
+src: {  }
