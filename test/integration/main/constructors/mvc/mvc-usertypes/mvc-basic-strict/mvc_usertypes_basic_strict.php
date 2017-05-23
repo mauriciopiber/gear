@@ -74,7 +74,7 @@ class MvcUsertypesBasicStrict extends AbstractMigration
         return $config;
     }
 
-    public function createColumn(&$table, $tableName, $columnName, $type, $nullable, $unique, $properties)
+    public function createColumn(&$table, $columnName, $type, $nullable, $unique)
     {
          $table->addColumn($columnName, $type, $this->getColumnConfig($type, $nullable));
 
@@ -92,8 +92,8 @@ class MvcUsertypesBasicStrict extends AbstractMigration
         foreach ($options['columns'***REMOVED*** as $columnName => $column) {
             $nullable = (isset($column['nullable'***REMOVED***)) ? $column['nullable'***REMOVED*** : $options['nullable'***REMOVED***;
             $unique = (isset($column['unique'***REMOVED***)) ? $column['unique'***REMOVED*** : $options['unique'***REMOVED***;
-            $properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
-            $this->createColumn($table, $tableName, $columnName, $column['type'***REMOVED***, $nullable, $unique, $properties);
+            //$properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
+            $this->createColumn($table, $columnName, $column['type'***REMOVED***, $nullable, $unique);
         }
 
         $table->create();

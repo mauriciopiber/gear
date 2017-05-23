@@ -53,7 +53,7 @@ class SrcGenerator
 
     private function generateBaseInterface()
     {
-        $type = $this->minorSuite->isUsingLongName() ? $this->type : substr($this->type, 0, 5);
+        $type = $this->suite->isUsingLongName() ? $this->type : substr($this->type, 0, 5);
 
         $implements = [***REMOVED***;
         $implements[***REMOVED*** = [
@@ -92,15 +92,121 @@ class SrcGenerator
         return $config;
     }
 
+    public function createImplements()
+    {
+        $invokables = [***REMOVED***;
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                1,
+                $this->repeat,
+                $this->keyStyle
+            ),
+            'type' => $this->type
+        ***REMOVED***;
+
+        $invokables[***REMOVED*** = [
+            'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                $this->repeat,
+                $this->repeat,
+                $this->keyStyle
+            ),
+            'type' => $this->type
+        ***REMOVED***;
+
+        return $invokables;
+    }
+
+    public function createDependencies()
+    {
+        $dependencies = [***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
+        ***REMOVED***;
+
+        $dependencies[***REMOVED*** = [
+            'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                    //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***;
+
+        $depFull = [
+            'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'namespace' => '%s',
+            'type' => $this->type,
+            'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
+        ***REMOVED***;
+
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+            $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                1,
+                $this->repeat,
+                $this->keyStyle
+            );
+        }
+
+        $dependencies[***REMOVED*** = $depFull;
+
+        $depsFull = [
+            'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'namespace' => '%s',
+            'type' => $this->type,
+            'dependency' => [
+                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***
+                //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***;
+
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+            $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                $this->repeat,
+                $this->repeat,
+                $this->keyStyle
+            );
+        }
+
+        $dependencies[***REMOVED*** = $depsFull;
+
+        $config = ['factories'***REMOVED***;
+
+        if ($this->type != self::CONTROLLER_PLUGIN) {
+            $config[***REMOVED*** = 'abstract';
+        }
+
+        return [$dependencies, $config, $this->type, $this->repeat***REMOVED***;
+    }
+
+
     public function generateMinorSuite($srcMinor)
     {
-        $this->minorSuite = $srcMinor;
+        $this->suite = $srcMinor;
 
-        $this->type = $srcMinor->getType();
-        $this->repeat = $srcMinor->getRepeat();
+        $this->type = $this->suite->getType();
+        $this->repeat = $this->suite->getRepeat();
 
 
-        $this->keyStyle = ($srcMinor->isUsingLongName()) ? 'long' : 'short';
+        $this->keyStyle = ($this->suite->isUsingLongName()) ? 'long' : 'short';
 
         $srcOptions = [***REMOVED***;
 
@@ -132,29 +238,7 @@ class SrcGenerator
         //implements
 
         if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-            $invokables[***REMOVED*** = [
-                'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesImplements(
-                    $srcMinor,
-                    $this->type,
-                    1,
-                    $this->repeat,
-                    $this->keyStyle
-                ),
-                'type' => $this->type
-            ***REMOVED***;
-
-            $invokables[***REMOVED*** = [
-                'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesImplements(
-                    $srcMinor,
-                    $this->type,
-                    $this->repeat,
-                    $this->repeat,
-                    $this->keyStyle
-                ),
-                'type' => $this->type
-            ***REMOVED***;
+            $invokables = array_merge($invokables, $this->createImplements());
         }
 
         $full = [
@@ -166,7 +250,7 @@ class SrcGenerator
 
         if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
             $full['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
-                $srcMinor,
+                $this->suite,
                 $this->type,
                 $this->repeat,
                 $this->repeat,
@@ -178,88 +262,22 @@ class SrcGenerator
 
         $srcOptions[***REMOVED*** = [$invokables, $this->getConfig(), $this->type, $this->repeat***REMOVED***;
 
-        $dependencies = [***REMOVED***;
-
         //to max dependency based on repeat number. interfaces too.
         if (in_array($this->type, [self::SERVICE, self::REPOSITORY, self::CONTROLLER_PLUGIN***REMOVED***)) {
-            $dependencies[***REMOVED*** = [
-                'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
-                'type' => $this->type,
-                'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
-            ***REMOVED***;
-
-            $dependencies[***REMOVED*** = [
-                'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
-                'type' => $this->type,
-                'dependency' => [
-                    [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                    [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                    [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                    //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
-                ***REMOVED***
-            ***REMOVED***;
-
-            $depFull = [
-                'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
-                'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-                'namespace' => '%s',
-                'type' => $this->type,
-                'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
-            ***REMOVED***;
-
-            if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
-                    $srcMinor,
-                    $this->type,
-                    1,
-                    $this->repeat,
-                    $this->keyStyle
-                );
-            }
-
-            $dependencies[***REMOVED*** = $depFull;
-
-            $depsFull = [
-                'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
-                'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-                'namespace' => '%s',
-                'type' => $this->type,
-                'dependency' => [
-                    [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                    [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                    [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***
-                    //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
-                ***REMOVED***
-            ***REMOVED***;
-
-            if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
-                    $srcMinor,
-                    $this->type,
-                    $this->repeat,
-                    $this->repeat,
-                    $this->keyStyle
-                );
-            }
-
-            $dependencies[***REMOVED*** = $depsFull;
-
-            $config = ['factories'***REMOVED***;
-
-            if ($this->type != self::CONTROLLER_PLUGIN) {
-                $config[***REMOVED*** = 'abstract';
-            }
-            $srcOptions[***REMOVED*** = [$dependencies, $config, $this->type, $this->repeat***REMOVED***;
+            $srcOptions[***REMOVED*** = $this->createDependencies();
         }
 
-        $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
 
-        $srcMinor->setGearFile($gearfile);
 
-        $this->testFile->updateTestFile($srcMinor);
 
-        echo sprintf('        - minor: %s', $srcMinor->getType())."\n";
+        $gearfile =  $this->gearFile->createSrcGearfile($this->suite, $srcOptions);
 
-        return $srcMinor;
+        $this->suite->setGearFile($gearfile);
+
+        $this->testFile->updateTestFile($this->suite);
+
+        echo sprintf('        - minor: %s', $this->suite->getType())."\n";
+
+        return $this->suite;
     }
 }
