@@ -15,9 +15,13 @@ trait UtilNameTrait
 
         $tableKey = $this->format('class', true);
 
+        $suiteName = ($this->getMajorSuite()->getSuite() == 'controller-mvc')
+            ? 'SrcMvc'
+            : $this->getMajorSuite()->getSuite();
+
         $this->tableAlias = sprintf(
             '%s%s',
-            $this->stringService->str('class', $this->getMajorSuite()->getSuite()),
+            $this->stringService->str('class', $suiteName),
             implode('', $tableKey)
         );
 
@@ -32,9 +36,13 @@ trait UtilNameTrait
 
         $tableKey = $this->format('class', false);
 
+        $suiteName = ($this->getMajorSuite()->getSuite() == 'controller-mvc')
+            ? 'SrcMvc'
+            : $this->getMajorSuite()->getSuite();
+
         $this->tableName = sprintf(
             '%s%s',
-            $this->stringService->str('class', $this->getMajorSuite()->getSuite()),
+            $this->stringService->str('class', $suiteName),
             implode('', $tableKey)
         );
 
