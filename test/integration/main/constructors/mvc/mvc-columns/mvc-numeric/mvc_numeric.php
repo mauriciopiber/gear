@@ -2,40 +2,55 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MvcColumnsBasic extends AbstractMigration
+class MvcNumeric extends AbstractMigration
 {
     const TABLES = [
-        'mvc_basic' => [
+        'mvc_numeric' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic' => [
+                'column_decimal_numeric' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic' => [
+                'column_decimal_money_numeric' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'column_boolean_numeric' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic' => [
+                'column_boolean_checkbox_numeric' => [
+                    'type' => 'boolean',
+                    'unique' => false
+                ***REMOVED***,
+                'column_int_numeric' => [
                     'type' => 'integer'
+                ***REMOVED***,
+                'column_int_checkbox_numeric' => [
+                    'type' => 'integer',
+                    'unique' => false
+                ***REMOVED***,
+                'id_column_int_foreign_numeric' => [
+                    'type' => 'integer',
+                    'properties' => [
+                        'foreignKey'
+                    ***REMOVED***,
+                    'unique' => false
                 ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'column_int_foreign' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'column_int_foreign_name' => [
+                    'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***,
+            'table' => [
+
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***;

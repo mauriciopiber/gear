@@ -60,26 +60,14 @@ class MvcGenerator
         return $this;
     }
 
-    public function configMvc(MvcMinorSuite $mvcMinorSuite)
+    public function generateMvc(MvcMinorSuite $mvcMinorSuite)
     {
         $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
 
         $columnsSuffix = $this->resolveNames->format($mvcMinorSuite, 'url');
 
-        $mvcMinorSuite->setTableName($this->resolveNames->createTableName($mvcMinorSuite));
-        $mvcMinorSuite->setTableAlias($this->resolveNames->createTableAlias('Mvc', $mvcMinorSuite));
-        $mvcMinorSuite->setLocationKey($this->resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
-
         $mvcMinorSuite->setForeignKeys($this->columns->getForeignKeys($mvcMinorSuite->getColumnType()));
         $mvcMinorSuite->setColumns($this->columns->getColumns($mvcMinorSuite, $columnsSuffix));
-
-        return $mvcMinorSuite;
-    }
-
-    public function generateMvc(MvcMinorSuite $mvcMinorSuite)
-    {
-
-
 
         $mvcMinorSuite->setGearFile($this->gearFile->createMvcGearfile($mvcMinorSuite));
 
