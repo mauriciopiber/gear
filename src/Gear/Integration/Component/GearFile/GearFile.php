@@ -211,9 +211,9 @@ class GearFile
         return $this->createGearfileComponent(['src' => $srcs***REMOVED***);
     }
 
-    public function createControllerMvcGearFile(ControllerMvcMinorSuite $suite, $tables)
+    public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
     {
-        $this->suite = $suite;
+        $this->suite = $controllerMvcMinorSuite;
         $controller = [***REMOVED***;
         foreach ($tables as $minorSuite) {
             $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
@@ -483,6 +483,7 @@ class GearFile
 
         if (isset($entity['namespace'***REMOVED***)) {
             $this->entry['namespace'***REMOVED*** = $this->createNamespace(
+                $type,
                 $repeat,
                 $typeName,
                 $this->suite->isUsingLongName(),
@@ -534,7 +535,7 @@ class GearFile
         return $this->entry;
     }
 
-    public function createAction($repeat)
+    public function createAction($repeat, $serviceConfig)
     {
         $actions = [***REMOVED***;
 
@@ -555,7 +556,7 @@ class GearFile
     }
 
 
-    public function createNamespace($number, $typeId, $longName, $max)
+    public function createNamespace($type, $number, $typeId, $longName, $max)
     {
         $typeId = $this->str('class', $typeId);
 
