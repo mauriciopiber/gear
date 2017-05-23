@@ -270,7 +270,7 @@ class SrcGenerator
 
 
 
-        $gearfile =  $this->gearFile->createSrcGearfile($this->suite, $srcOptions);
+        $gearfile =  $this->gearFile->createSrcGearfile($this->suite, ['src' => $srcOptions***REMOVED***);
 
         $this->suite->setGearFile($gearfile);
 

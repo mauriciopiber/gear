@@ -335,24 +335,24 @@ class GearFile
         return $data;
     }
 
+    public function runGenerate($suite, $options)
+    {
+        $gen = [***REMOVED***;
+
+        foreach ($options[$suite***REMOVED*** as $options) {
+            $gen = array_merge($gen, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[3***REMOVED***));
+        }
+
+        return $gen;
+    }
+
     public function createControllerGearfile(ControllerMinorSuite $suite, $srcOptions)
     {
         $this->suite = $suite;
 
-        $src = [***REMOVED***;
+        $src = $this->runGenerate('src', $srcOptions);
 
-        foreach ($srcOptions['src'***REMOVED*** as $options) {
-            $src = array_merge($src, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
-        }
-
-        $controller = [***REMOVED***;
-
-        foreach ($srcOptions['controller'***REMOVED*** as $options) {
-            $controller = array_merge(
-                $controller,
-                $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***)
-            );
-        }
+        $controller = $this->runGenerate('controller', $srcOptions);
 
         return $this->createGearfileComponent(['src' => $src, 'controller' => $controller***REMOVED***);
     }
@@ -362,11 +362,7 @@ class GearFile
     {
         $this->suite = $suite;
 
-        $data = [***REMOVED***;
-
-        foreach ($srcOptions as $options) {
-            $data = array_merge($data, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[2***REMOVED***, $options[3***REMOVED***));
-        }
+        $data = $this->runGenerate('src', $srcOptions);
 
         return $this->createGearfileComponent(['src' => $data***REMOVED***);
     }
@@ -374,14 +370,14 @@ class GearFile
 
 
 
-    private function generateGearfiles($entities, $config, $type, $repeat)
+    private function generateGearfiles($entities, $config, $repeat)
     {
         $invokableFile = [***REMOVED***;
 
         foreach ($entities as $entity) {
             foreach ($config as $configName) {
                 for ($i = 1; $i <= $repeat; $i++) {
-                    $invokableFile[***REMOVED*** = $this->generateSource($entity, $configName, $type, $i, $repeat);
+                    $invokableFile[***REMOVED*** = $this->generateSource($entity, $configName, $i, $repeat);
                 }
             }
         }
@@ -412,11 +408,11 @@ class GearFile
      *
      * Can cut if isUsingLongName is false.
      */
-    public function getEntryName($suite, $name)
+    public function getEntryName($name)
     {
         $nameRc = ($this->type == 'Interface')
-            ? sprintf($name, '', $this->number)
-            : sprintf($name, $this->typeName, $this->service, $this->number);
+            ? sprintf($name, '', $this->numberLabel)
+            : sprintf($name, $this->typeLabel, $this->serviceLabel, $this->numberLabel);
 
 
         $fullname = $this->str('class', $nameRc);
@@ -456,26 +452,33 @@ class GearFile
         return sprintf(
             '%s\\'.$entity['extends'***REMOVED***,
             $namespace,
-            $this->typeName,
-            $this->service,
-            $this->number
+            $this->typeLabel,
+            $this->serviceLabel,
+            $this->numberLabel
         );
     }
 
-    private function generateSource($entity, $configName, $type, $repeat, $max)
+
+    public function configOptions()
     {
+
+    }
+
+    private function generateSource($entity, $configName, $repeat, $max)
+    {
+        $this->entity = $entity;
         $this->entry = [***REMOVED***;
 
         $this->max = $max;
 
-        $this->number = $this->getEntryConfigNumber($this->suite, $this->max, $repeat);
+        $this->numberLabel = $this->getEntryConfigNumber($this->suite, $this->max, $repeat);
 
-        $this->service = $this->getEntryConfigName($this->suite, $configName);
+        $this->serviceLabel = $this->getEntryConfigName($this->suite, $configName);
 
         $this->type = $this->str('class', $entity['type'***REMOVED***);
-        $this->typeName = $this->getTypeName($this->suite);
+        $this->typeLabel = $this->getTypeName($this->suite);
 
-        $this->name = $this->getEntryName($this->suite, $entity['name'***REMOVED***);
+        $this->name = $this->getEntryName($entity['name'***REMOVED***);
 
         $this->entry['name'***REMOVED*** = $this->name;
         $this->entry['type'***REMOVED*** = $this->type;
@@ -495,7 +498,7 @@ class GearFile
             $this->entry['implements'***REMOVED*** = [***REMOVED***;
 
             foreach ($entity['implements'***REMOVED*** as $invokDep) {
-                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $this->number);
+                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $this->numberLabel);
             }
         }
 
@@ -507,23 +510,7 @@ class GearFile
 
 
         if (isset($entity['dependency'***REMOVED***)) {
-            $typeName = ($this->suite->isUsingLongName()) ? 'Invokables' : substr('Invokables', 0, 5);
-
-            $this->entry['dependency'***REMOVED*** = [***REMOVED***;
-
-            foreach ($entity['dependency'***REMOVED*** as $invokDep) {
-                $typeDep = ($this->suite->isUsingLongName())
-                    ? $this->str('class', $invokDep[1***REMOVED***)
-                    : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));
-
-                $typeDepType = $this->str('class', $invokDep[1***REMOVED***);
-
-
-                $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $this->number);
-                //var_dump($dep);
-
-                $this->entry['dependency'***REMOVED***[***REMOVED*** = $dep;
-            }
+            $this->entry['dependency'***REMOVED*** = $this->createDependencies($entity);
         }
 
         if (isset($entity['actions'***REMOVED***)) {
@@ -531,6 +518,29 @@ class GearFile
         }
 
         return $this->entry;
+    }
+
+    public function createDependencies($entity)
+    {
+        $typeName = ($this->suite->isUsingLongName()) ? 'Invokables' : substr('Invokables', 0, 5);
+
+        $dependencies = [***REMOVED***;
+
+        foreach ($entity['dependency'***REMOVED*** as $invokDep) {
+            $typeDep = ($this->suite->isUsingLongName())
+                ? $this->str('class', $invokDep[1***REMOVED***)
+                : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));
+
+            $typeDepType = $this->str('class', $invokDep[1***REMOVED***);
+
+
+            $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $this->numberLabel);
+                //var_dump($dep);
+
+            $dependencies[***REMOVED*** = $dep;
+        }
+
+        return $dependencies;
     }
 
     public function createAction($repeat)
@@ -556,7 +566,7 @@ class GearFile
 
     public function createNamespace($number, $longName)
     {
-        $typeId = $this->str('class', $this->typeName);
+        $typeId = $this->str('class', $this->typeLabel);
 
 
         $template = ($longName) ? '%s%sNamespace' : '%s%sNames';
