@@ -96,12 +96,8 @@ class Integration
         return $this;
     }
 
-    public function integrate($type, $count, $longname = false)
+    public function validate()
     {
-        $this->type = $type;
-        $this->count = $count;
-        $this->longname = $longname;
-
         if ($this->type !== null && !in_array($this->type, self::TYPES)) {
             throw new InvalidTypeException($this->type);
         }
@@ -109,7 +105,25 @@ class Integration
         if ($this->count <= 0 || $this->count > self::MAX_COUNT) {
             throw new InvalidMaxCountException($this->count);
         }
+    }
 
+    public function integrate($type, $count, $longname = false)
+    {
+        $this->type = $type;
+        $this->count = $count;
+        $this->longname = $longname;
+
+        $this->validate();
+
+        $this->runMvc();
+        $this->runSrc();
+        $this->runController();
+
+        echo 'Integrate'."\n";
+    }
+
+    public function runMvc()
+    {
         if ($this->type === null || $this->type == self::MVC) {
             $this->mvcSuite->runSuite($this->longname);
         }
@@ -121,39 +135,34 @@ class Integration
         if ($this->type === null || $this->type == self::CONTROLLER_MVC) {
             $this->runControllerMvc();
         }
-
-        if ($this->type === null || $this->type == self::SRC) {
-            $this->runSrc();
-        }
-
-        if ($this->type === null || $this->type == self::CONTROLLER) {
-            $this->runController();
-        }
-
-        echo 'Integrate'."\n";
     }
 
     public function runSrc()
     {
-        $this->srcSuite->runSrcSuite(
-            [
-                'repository',
-                'service',
-                'form',
-                'filter',
-                'view-helper',
-                'controller-plugin',
-                'value-object'
-            ***REMOVED***,
-            $this->count,
-            $this->longname
-        );
+        if ($this->type === null || $this->type == self::SRC) {
+            $this->srcSuite->runSrcSuite(
+                [
+                    'repository',
+                    'service',
+                    'form',
+                    'filter',
+                    'view-helper',
+                    'controller-plugin',
+                    'value-object'
+                ***REMOVED***,
+                $this->count,
+                $this->longname
+            );
+        }
     }
 
     public function runController()
     {
-        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count, $this->longname);
+        if ($this->type === null || $this->type == self::CONTROLLER) {
+            $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count, $this->longname);
+        }
     }
+
 
     public function runControllerMvc()
     {

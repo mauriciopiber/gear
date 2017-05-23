@@ -143,7 +143,14 @@ class ControllerGenerator
             'actions' => [***REMOVED***
         ***REMOVED***;
 
+        $invokables = array_merge($invokables, $this->createDependencies());
 
+        return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
+    }
+
+    public function createDependencies()
+    {
+        $invokables = [***REMOVED***;
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
@@ -163,7 +170,7 @@ class ControllerGenerator
             'actions' => [***REMOVED***
         ***REMOVED***;
 
-        $dependencies[***REMOVED*** = [
+        $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
@@ -179,7 +186,7 @@ class ControllerGenerator
             'actions' => [***REMOVED***
         ***REMOVED***;
 
-        $dependencies[***REMOVED*** = [
+        $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
@@ -199,8 +206,7 @@ class ControllerGenerator
             ***REMOVED***,
             'actions' => [***REMOVED***
         ***REMOVED***;
-
-        return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
+        return $invokables;
     }
 
     private function createPrepareDependency()
