@@ -7,6 +7,6 @@ module="PbrSrcMvcRepository"
 type="web"
 construct=()
 construct+=("../src-mvc-entity/src-mvc-entity.yml;../src-mvc-entity/src_mvc_entity.php")
-construct+=("src-mvc.yml;")
+construct+=("src-mvc-repository.yml;")
 
 source "$bin/gear/module/test-module.sh"
