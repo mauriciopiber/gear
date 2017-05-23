@@ -96,7 +96,7 @@ class ResolveNames
 
     public function createTableAlias($mvcMajor, MvcMinorSuite $suite)
     {
-        $tableUrl = $this->format($suite, 'class');
+        $tableUrl = $this->format($suite, 'class', false);
 
         $key = sprintf(
             '%s%s',

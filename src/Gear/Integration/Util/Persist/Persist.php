@@ -52,8 +52,6 @@ class Persist
 
         $path =  sprintf('%s/%s', $location, $name);
 
-        var_dump($path);die();
-
         return file_put_contents($path, $data);
     }
 
