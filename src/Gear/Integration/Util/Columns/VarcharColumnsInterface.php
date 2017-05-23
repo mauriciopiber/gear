@@ -13,21 +13,50 @@ namespace Gear\Integration\Util\Columns;
 interface VarcharColumnsInterface
 {
 
-    const default_varchar = 'clm_vrc';
-    const default_varchar_email = self::default_varchar.'_eml';
-    const default_varchar_upload_image = self::default_varchar.'_upi';
-    const default_varchar_password_verify = self::default_varchar.'_pav';
-    const default_varchar_url = self::default_varchar.'_url';
-    const default_varchar_telephone = self::default_varchar.'_tlp';
-    const default_varchar_unique_id = self::default_varchar.'_uni';
+    const DEFAULT_VARCHAR                 = 'clm_vrc';
+
+    const DEFAULT_VARCHAR_EMAIL           = self::DEFAULT_VARCHAR.'_eml';
+
+    const DEFAULT_VARCHAR_UPLOAD_IMAGE    = self::DEFAULT_VARCHAR.'_upi';
+
+    const DEFAULT_VARCHAR_PASSWORD_VERIFY = self::DEFAULT_VARCHAR.'_pav';
+
+    const DEFAULT_VARCHAR_URL             = self::DEFAULT_VARCHAR.'_url';
+
+    const DEFAULT_VARCHAR_TELEPHONE       = self::DEFAULT_VARCHAR.'_tlp';
+
+    const DEFAULT_VARCHAR_UNIQUE_ID       = self::DEFAULT_VARCHAR.'_uni';
 
     const COLUMNS = [
-        self::default_varchar                 => ['type' => 'string'***REMOVED***,
-        self::default_varchar_password_verify => ['type' => 'string', 'speciality' => 'password-verify', 'unique' => false***REMOVED***,
-        self::default_varchar_upload_image    => ['type' => 'string', 'speciality' => 'upload-image', 'unique' => false***REMOVED***,
-        self::default_varchar_url             => ['type' => 'string', 'speciality' => 'url'***REMOVED***,
-        self::default_varchar_unique_id       => ['type' => 'string', 'speciality' => 'unique-id', 'unique' => false***REMOVED***,
-        self::default_varchar_telephone       => ['type' => 'string', 'speciality' => 'telephone'***REMOVED***,
-        self::default_varchar_email           => ['type' => 'string', 'speciality' => 'email'***REMOVED***,
+        self::DEFAULT_VARCHAR                 => [
+            'type' => 'string'
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_PASSWORD_VERIFY => [
+            'type' => 'string',
+            'speciality' => 'password-verify',
+            'unique' => false
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_UPLOAD_IMAGE    => [
+            'type' => 'string',
+            'speciality' => 'upload-image',
+            'unique' => false
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_URL             => [
+            'type' => 'string',
+            'speciality' => 'url'
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_UNIQUE_ID       => [
+            'type' => 'string',
+            'speciality' => 'unique-id',
+            'unique' => false
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_TELEPHONE       => [
+            'type' => 'string',
+            'speciality' => 'telephone'
+        ***REMOVED***,
+        self::DEFAULT_VARCHAR_EMAIL           => [
+            'type' => 'string',
+            'speciality' => 'email'
+        ***REMOVED***,
     ***REMOVED***;
 }

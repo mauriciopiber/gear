@@ -66,12 +66,12 @@ class MvcGenerator
 
         $columnsSuffix = $this->resolveNames->format($mvcMinorSuite, 'url', false);
 
-        $mvcMinorSuite->setTableName($this->resolveNames->createTableName('Mvc', $mvcMinorSuite));
+        $mvcMinorSuite->setTableName($this->resolveNames->createTableName($mvcMinorSuite));
         $mvcMinorSuite->setTableAlias($this->resolveNames->createTableAlias('Mvc', $mvcMinorSuite));
         $mvcMinorSuite->setLocationKey($this->resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
 
         $mvcMinorSuite->setForeignKeys($this->columns->getForeignKeys($mvcMinorSuite->getColumnType()));
-        $mvcMinorSuite->setColumns($this->columns->getColumns($mvcMinorSuite->getColumnType(), $columnsSuffix));
+        $mvcMinorSuite->setColumns($this->columns->getColumns($mvcMinorSuite, $columnsSuffix));
 
         $mvcMinorSuite->setGearFile($this->gearFile->createMvcGearfile($mvcMinorSuite));
         $mvcMinorSuite->setMigrationFile($this->migrationFile->createMvcMigration($mvcMinorSuite));
@@ -80,5 +80,4 @@ class MvcGenerator
 
         return $mvcMinorSuite;
     }
-
 }

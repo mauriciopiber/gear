@@ -14,27 +14,28 @@ interface NumericColumnsInterface
 {
 
     // DECIMAL
-    const default_decimal = 'clm_dcm';
-    const default_decimal_money_ptbr = self::default_decimal.'_mny';
+    const DEFAULT_DECIMAL = 'clm_dcm';
+
+    const DEFAULT_DECIMAL_MONEY_PTBR = self::DEFAULT_DECIMAL.'_mny';
 
     // BOOLEAN
-    const default_boolean = 'clm_boo';
-    const default_boolean_checkbox = self::default_boolean.'_chc';
+    const DEFAULT_BOOLEAN = 'clm_boo';
+    const DEFAULT_BOOLEAN_CHECKBOX = self::DEFAULT_BOOLEAN.'_chc';
 
 
     // INT
-    const default_int = 'clm_int';
-    const default_int_checkbox = self::default_int.'_chc';
-    const default_id_int_foreign_key = 'id_'.self::default_int.'_frk';
+    const DEFAULT_INT = 'clm_int';
+    const DEFAULT_INT_CHECKBOX = self::DEFAULT_INT.'_chc';
+    const DEFAULT_ID_INT_FOREIGN_KEY = 'id_'.self::DEFAULT_INT.'_frk';
 
 
     const COLUMNS = [
-        self::default_decimal             => ['type' => 'decimal'***REMOVED***,
-        self::default_decimal_money_ptbr => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
-        self::default_boolean             => ['type' => 'boolean'***REMOVED***,
-        self::default_boolean_checkbox    => ['type' => 'boolean', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
-        self::default_int                 => ['type' => 'integer'***REMOVED***,
-        self::default_int_checkbox        => ['type' => 'integer', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
-        self::default_id_int_foreign_key  => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED***, 'unique' => false***REMOVED***,
+        self::DEFAULT_DECIMAL             => ['type' => 'decimal'***REMOVED***,
+        self::DEFAULT_DECIMAL_MONEY_PTBR  => ['type' => 'decimal', 'speciality' => 'money-pt-br'***REMOVED***,
+        self::DEFAULT_BOOLEAN             => ['type' => 'boolean'***REMOVED***,
+        self::DEFAULT_BOOLEAN_CHECKBOX    => ['type' => 'boolean', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
+        self::DEFAULT_INT                 => ['type' => 'integer'***REMOVED***,
+        self::DEFAULT_INT_CHECKBOX        => ['type' => 'integer', 'speciality' => 'checkbox', 'unique' => false***REMOVED***,
+        self::DEFAULT_ID_INT_FOREIGN_KEY  => ['type' => 'integer', 'properties' => ['foreignKey'***REMOVED***, 'unique' => false***REMOVED***,
     ***REMOVED***;
 }

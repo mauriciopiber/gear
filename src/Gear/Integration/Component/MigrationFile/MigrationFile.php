@@ -85,13 +85,11 @@ class MigrationFile
 
     public function createMigrationTable(AbstractMinorSuite $mvcMinorSuite)
     {
-        $date = null;
         $unique = false;
         $nullable = false;
 
         if (is_array($mvcMinorSuite->getConstraints())) {
-            foreach($mvcMinorSuite->getConstraints() as $const) {
-
+            foreach ($mvcMinorSuite->getConstraints() as $const) {
                 if ($const == 'nullable') {
                     $nullable = true;
                 }
@@ -164,8 +162,14 @@ class MigrationFile
         $template = file_get_contents(__DIR__.'/migration-template.php');
 
         $tables = '    const TABLES = '.$this->arrayService->varExport54($migrationConfig, '    ').';';
+
         $migrate = preg_replace('#    const TABLES = \[\***REMOVED***;#', $tables, $template);
-        $migrate = preg_replace('#MigrationName#', $this->stringService->str('class', $mvcMinorSuite->getTableName()), $migrate);
+
+        $migrate = preg_replace(
+            '#MigrationName#',
+            $this->stringService->str('class', $mvcMinorSuite->getTableName()),
+            $migrate
+        );
 
         $this->persist->save($mvcMinorSuite, $migrationName, $migrate);
 

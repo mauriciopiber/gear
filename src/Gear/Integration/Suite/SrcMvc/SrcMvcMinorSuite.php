@@ -26,10 +26,10 @@ class SrcMvcMinorSuite extends MvcMinorSuite
     public function __construct(
         $majorSuite,
         $type,
-        $columnType  = null,
-        $userType    = null,
+        $columnType = null,
+        $userType = null,
         $constraints = null,
-        $tableAssoc  = null,
+        $tableAssoc = null,
         $useLongName = false
     ) {
         parent::__construct($majorSuite, $columnType, $userType, $constraints, $tableAssoc);
@@ -42,19 +42,14 @@ class SrcMvcMinorSuite extends MvcMinorSuite
     public function getLocationKey()
     {
         if (!isset($this->locationKey) || empty($this->locationKey)) {
-            $this->locationKey = $this->getMajorSuite()->getSuite().'/'.sprintf(self::SUITE, strtolower($this->getType()));
+            $this->locationKey = sprintf(
+                '%s/%s',
+                $this->getMajorSuite()->getSuite(),
+                sprintf(self::SUITE, strtolower($this->getType()))
+            );
         }
         return $this->locationKey;
     }
-
-    /*
-    public function __construct($majorSuite, $type, $majorType = null, $columnType = null, $userType = null, $constraints = null, $tableAssoc = null)
-    {
-        parent::__construct($majorType, $columnType, $userType, $constraints, $tableAssoc);
-        $this->type = $type;
-
-        return $this;
-    }*/
 
     public function getType()
     {
@@ -66,5 +61,4 @@ class SrcMvcMinorSuite extends MvcMinorSuite
         $this->type = $type;
         return $this;
     }
-
 }

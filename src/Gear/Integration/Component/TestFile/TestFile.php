@@ -86,12 +86,15 @@ class TestFile
 
         $text = '../src-mvc-%s';
         return sprintf($text, $this->str('url', $type));
-
     }
 
     public function createConstruct($mvcMinorSuite, $dependency)
     {
-        $construct = sprintf(self::CONSTRUCT_TEMPLATE, $mvcMinorSuite->getGearFile(), $mvcMinorSuite->getMigrationFile());
+        $construct = sprintf(
+            self::CONSTRUCT_TEMPLATE,
+            $mvcMinorSuite->getGearFile(),
+            $mvcMinorSuite->getMigrationFile()
+        );
 
         if ($dependency === null) {
             return $construct;
@@ -100,7 +103,6 @@ class TestFile
         $constructDep = [***REMOVED***;
 
         foreach ($dependency as $dep) {
-
             $constructDep[***REMOVED*** = sprintf(
                 self::CONSTRUCT_TEMPLATE,
                 $this->createDefaultGearfile($mvcMinorSuite, $dep),
@@ -164,7 +166,6 @@ class TestFile
     public function getModuleName(AbstractMinorSuite $mvcMinorSuite)
     {
         if ($mvcMinorSuite instanceof MvcMinorSuite) {
-
             if ($mvcMinorSuite->getTableName() == null) {
                 return sprintf(self::MODULE_NAME, '');
             }
@@ -175,6 +176,5 @@ class TestFile
         $moduleName = $this->stringService->str('class', sprintf($mvcMinorSuite::SUITE, $mvcMinorSuite->getType()));
 
         return sprintf(self::MODULE_NAME, $moduleName);
-
     }
 }

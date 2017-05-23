@@ -32,6 +32,7 @@ class SrcMvcGenerator
     use MigrationFileTrait;
 
     use ResolveNamesTrait;
+
     use ColumnsTrait;
 
     /**
@@ -119,31 +120,27 @@ class SrcMvcGenerator
 
          $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);
 
-         $srcMvcMinor->setTableName($this->resolveNames->createTableName('SrcMvc', $srcMvcMinor));
+         $srcMvcMinor->setTableName($this->resolveNames->createTableName($srcMvcMinor));
          $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));
          $srcMvcMinor->setLocationKey($this->resolveNames->createLocationKey($majorTitle, $srcMvcMinor));
 
          $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
-         $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor->getColumnType(), $columnsSuffix));
+         $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor, $columnsSuffix));
 
          return $srcMvcMinor;
     }
 
     private function prepareTables(SrcMvcMinorSuite $srcMvcMinor)
     {
-
         $preparedTable = [***REMOVED***;
 
         $srcMvcMajor = $srcMvcMinor->getMajorSuite();
 
-        foreach ($srcMvcMajor->getColumns() as $column) {
-            foreach ($srcMvcMajor->getUserTypes() as $usertype) {
-                foreach ($srcMvcMajor->getConstraints() as $constraint) {
-                    foreach ($srcMvcMajor->getTableAssocs() as $tables) {
-                        $preparedTable[***REMOVED*** = $this->prepareTable($srcMvcMinor, $column, $usertype, $constraint, $tables);
-                    }
-                }
-            }
+        $tables = $srcMvcMajor->getTables();
+
+        foreach ($tables as $tableInfo) {
+            list($column, $userType, $constraint, $tableAssoc) = $tableInfo;
+            $preparedTable[***REMOVED*** = $this->prepareTable($srcMvcMinor, $column, $userType, $constraint, $tableAssoc);
         }
 
         return $preparedTable;

@@ -13,21 +13,21 @@ namespace Gear\Integration\Util\Columns;
 interface DatesColumnsInterface
 {
     // TIME
-    const default_time           = 'clm_tme';
+    const DEFAULT_TIME           = 'clm_tme';
 
     //DATETIME
-    const default_datetime      = 'clm_dtt';
-    const default_datetime_ptbr = self::default_datetime.'_pt';
+    const DEFAULT_DATETIME      = 'clm_dtt';
+    const DEFAULT_DATETIME_PTBR = self::DEFAULT_DATETIME.'_pt';
 
      // DATE
-    const default_date          = 'clm_dte';
-    const default_date_ptbr     = self::default_date.'_pt';
+    const DEFAULT_DATE          = 'clm_dte';
+    const DEFAULT_DATE_PTBR     = self::DEFAULT_DATE.'_pt';
 
     const COLUMNS = [
-        self::default_time              => ['type' => 'time'***REMOVED***,
-        self::default_datetime          => ['type' => 'datetime'***REMOVED***,
-        self::default_datetime_ptbr     => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
-        self::default_date              => ['type' => 'date'***REMOVED***,
-        self::default_date_ptbr         => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
+        self::DEFAULT_TIME          => ['type' => 'time'***REMOVED***,
+        self::DEFAULT_DATETIME      => ['type' => 'datetime'***REMOVED***,
+        self::DEFAULT_DATETIME_PTBR => ['type' => 'datetime', 'speciality' => 'datetime-pt-br'***REMOVED***,
+        self::DEFAULT_DATE          => ['type' => 'date'***REMOVED***,
+        self::DEFAULT_DATE_PTBR     => ['type' => 'date', 'speciality' => 'date-pt-br'***REMOVED***
     ***REMOVED***;
 }

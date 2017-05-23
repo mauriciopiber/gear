@@ -47,7 +47,7 @@ class Persist
         if (empty($suite->getLocationKey())) {
             throw new \Exception('Location key not found');
         }
-        $majorSuite = $suite->getMajorSuite();
+
         $location = sprintf('%s/%s', $this->location->getLocation(), $suite->getLocationKey());
 
         $path =  sprintf('%s/%s', $location, $name);
@@ -59,9 +59,7 @@ class Persist
     {
 
         if ($suite instanceof AbstractMajorSuite) {
-
             return $this->saveMajor($suite, $name, $data);
-
         }
 
         if ($suite instanceof AbstractMinorSuite) {
@@ -69,6 +67,5 @@ class Persist
         }
 
         throw new \Exception('Type not found to save integration.');
-
     }
 }

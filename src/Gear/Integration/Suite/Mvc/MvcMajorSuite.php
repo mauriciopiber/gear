@@ -44,6 +44,28 @@ class MvcMajorSuite extends AbstractMajorSuite
         return $this;
     }
 
+    public function getTables()
+    {
+        $tables = [***REMOVED***;
+
+        foreach ($this->getColumns() as $column) {
+            foreach ($this->getUserTypes() as $columnType) {
+                foreach ($this->getConstraints() as $constraint) {
+                    foreach ($this->getTableAssocs() as $tableAssoc) {
+                        $tables[***REMOVED*** = [
+                            $column,
+                            $columnType,
+                            $constraint,
+                            $tableAssoc
+                        ***REMOVED***;
+                    }
+                }
+            }
+        }
+
+        return $tables;
+    }
+
     public function getSuite()
     {
         return self::SUITE;

@@ -2787,19 +2787,17 @@ class SrcMvcEntity extends AbstractMigration
         }
 
         return $config;
-
     }
 
     public function createColumn(&$table, $tableName, $columnName, $type, $nullable, $unique, $properties)
     {
          $table->addColumn($columnName, $type, $this->getColumnConfig($type, $nullable));
 
-         if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
-             $this->createUnique($table, $columnName);
-         }
+        if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
+            $this->createUnique($table, $columnName);
+        }
 
          return true;
-
     }
 
     public function createTable($tableName, $options)
@@ -2818,7 +2816,6 @@ class SrcMvcEntity extends AbstractMigration
         if (isset($options['referenced_assoc'***REMOVED***)) {
             $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
-
     }
 
     public function createTableDependencies($tableName, $tables)
@@ -2828,7 +2825,6 @@ class SrcMvcEntity extends AbstractMigration
         }
 
         foreach ($tables as $tableOption) {
-
             $this->createTableDependency($tableName, $tableOption);
         }
     }

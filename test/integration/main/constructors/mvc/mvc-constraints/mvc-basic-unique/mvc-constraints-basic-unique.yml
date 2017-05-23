@@ -1,0 +1,3 @@
+db:
+    - { table: MvcBasicUnique, user: all, namespace: MvcBasicUnique, service: factories, columns: {  } }
+src: {  }

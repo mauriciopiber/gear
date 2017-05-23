@@ -38,19 +38,17 @@ class MigrationName extends AbstractMigration
         }
 
         return $config;
-
     }
 
-    public function createColumn(&$table, $tableName, $columnName, $type, $nullable, $unique, $properties)
+    public function createColumn(&$table, $columnName, $type, $nullable, $unique)
     {
          $table->addColumn($columnName, $type, $this->getColumnConfig($type, $nullable));
 
-         if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
-             $this->createUnique($table, $columnName);
-         }
+        if ($unique && !in_array($type, ['text', 'boolean'***REMOVED***)) {
+            $this->createUnique($table, $columnName);
+        }
 
          return true;
-
     }
 
     public function createTable($tableName, $options)
@@ -60,8 +58,8 @@ class MigrationName extends AbstractMigration
         foreach ($options['columns'***REMOVED*** as $columnName => $column) {
             $nullable = (isset($column['nullable'***REMOVED***)) ? $column['nullable'***REMOVED*** : $options['nullable'***REMOVED***;
             $unique = (isset($column['unique'***REMOVED***)) ? $column['unique'***REMOVED*** : $options['unique'***REMOVED***;
-            $properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
-            $this->createColumn($table, $tableName, $columnName, $column['type'***REMOVED***, $nullable, $unique, $properties);
+            //$properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
+            $this->createColumn($table, $columnName, $column['type'***REMOVED***, $nullable, $unique);
         }
 
         $table->create();
@@ -69,7 +67,6 @@ class MigrationName extends AbstractMigration
         if (isset($options['referenced_assoc'***REMOVED***)) {
             $this->createTableDependencies($tableName, $options['referenced_assoc'***REMOVED***);
         }
-
     }
 
     public function createTableDependencies($tableName, $tables)
@@ -79,7 +76,6 @@ class MigrationName extends AbstractMigration
         }
 
         foreach ($tables as $tableOption) {
-
             $this->createTableDependency($tableName, $tableOption);
         }
     }

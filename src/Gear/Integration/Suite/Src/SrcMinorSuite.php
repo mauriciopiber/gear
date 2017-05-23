@@ -36,14 +36,6 @@ class SrcMinorSuite extends AbstractMinorSuite
         return $this;
     }
 
-    public function getLocationKey()
-    {
-        if (!isset($this->locationKey) || empty($this->locationKey)) {
-            $this->locationKey = $this->getMajorSuite()->getSuite().'/'.sprintf(self::SUITE, strtolower($this->getType()));
-        }
-        return $this->locationKey;
-    }
-
     public function getSuiteName()
     {
         return sprintf(self::SUITE, strtolower($this->getType()));
@@ -52,6 +44,19 @@ class SrcMinorSuite extends AbstractMinorSuite
     public function getMajorSuite()
     {
         return $this->majorSuite;
+    }
+
+
+    public function getLocationKey()
+    {
+        if (!isset($this->locationKey) || empty($this->locationKey)) {
+            $this->locationKey = sprintf(
+                '%s/%s',
+                $this->getMajorSuite()->getSuite(),
+                sprintf(self::SUITE, strtolower($this->getType()))
+            );
+        }
+        return $this->locationKey;
     }
 
 
