@@ -580,6 +580,9 @@ class GearFile
         return $textName;
     }
 
+    /**
+     * To be used externally on Src and Controller.
+     */
     public function createMultiplesImplements($suite, $type, $repeat, $max, $keyStyle)
     {
         $type = $this->str('class', $type);
@@ -588,13 +591,13 @@ class GearFile
         $interfaces = [***REMOVED***;
 
         if ($max == 1) {
-            $interfaces[***REMOVED*** = 'Interfaces\\'.sprintf(self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***, $type, '');
+            $interfaces[***REMOVED*** = sprintf('Interfaces\\'.self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***, $type, '');
             return $interfaces;
         }
 
         for ($z = 1; $z <= $repeat; $z++) {
-            $interfaces[***REMOVED*** = 'Interfaces\\'.sprintf(
-                self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***,
+            $interfaces[***REMOVED*** = sprintf(
+                'Interfaces\\'.self::KEYS_BASE['implements'***REMOVED***[$keyStyle***REMOVED***,
                 $type,
                 NumberToStringInterface::NUMBER_MAP[$z***REMOVED***
             );
