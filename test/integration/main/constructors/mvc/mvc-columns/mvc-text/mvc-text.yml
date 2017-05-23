@@ -1,3 +1,0 @@
-db:
-    - { table: MvcText, user: all, namespace: MvcText, service: factories, columns: { clm_txt_htm_txt: html } }
-src: {  }

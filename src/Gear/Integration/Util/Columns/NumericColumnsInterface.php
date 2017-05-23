@@ -14,19 +14,19 @@ interface NumericColumnsInterface
 {
 
     // DECIMAL
-    const DEFAULT_DECIMAL = 'clm_dcm';
+    const DEFAULT_DECIMAL = 'column_decimal';
 
-    const DEFAULT_DECIMAL_MONEY_PTBR = self::DEFAULT_DECIMAL.'_mny';
+    const DEFAULT_DECIMAL_MONEY_PTBR = self::DEFAULT_DECIMAL.'_money';
 
     // BOOLEAN
-    const DEFAULT_BOOLEAN = 'clm_boo';
-    const DEFAULT_BOOLEAN_CHECKBOX = self::DEFAULT_BOOLEAN.'_chc';
+    const DEFAULT_BOOLEAN = 'column_boolean';
+    const DEFAULT_BOOLEAN_CHECKBOX = self::DEFAULT_BOOLEAN.'_checkbox';
 
 
     // INT
-    const DEFAULT_INT = 'clm_int';
-    const DEFAULT_INT_CHECKBOX = self::DEFAULT_INT.'_chc';
-    const DEFAULT_ID_INT_FOREIGN_KEY = 'id_'.self::DEFAULT_INT.'_frk';
+    const DEFAULT_INT = 'column_int';
+    const DEFAULT_INT_CHECKBOX = self::DEFAULT_INT.'_checkbox';
+    const DEFAULT_ID_INT_FOREIGN_KEY = 'id_'.self::DEFAULT_INT.'_foreign';
 
 
     const COLUMNS = [

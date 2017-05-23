@@ -12,27 +12,27 @@ class MvcColumnsNumeric extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_dcm_nmr' => [
+                'column_decimal_nmr' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_dcm_mny_nmr' => [
+                'column_decimal_money_nmr' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boo_nmr' => [
+                'column_boolean_nmr' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boo_chc_nmr' => [
+                'column_boolean_checkbox_nmr' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'clm_int_nmr' => [
+                'column_int_nmr' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_chc_nmr' => [
+                'column_int_checkbox_nmr' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_clm_int_frk_nmr' => [
+                'id_column_int_foreign_nmr' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
@@ -41,11 +41,11 @@ class MvcColumnsNumeric extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'clm_int_frk' => [
+        'column_int_foreign' => [
             'nullable' => true,
             'unique' => false,
             'columns' => [
-                'clm_int_frk_name' => [
+                'column_int_foreign_name' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,

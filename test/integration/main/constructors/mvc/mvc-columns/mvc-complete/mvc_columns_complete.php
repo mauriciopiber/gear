@@ -12,85 +12,85 @@ class MvcColumnsComplete extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'clm_txt_cmp' => [
+                'column_text_cmp' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_txt_htm_cmp' => [
+                'column_text_html_cmp' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_dcm_cmp' => [
+                'column_decimal_cmp' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_dcm_mny_cmp' => [
+                'column_decimal_money_cmp' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boo_cmp' => [
+                'column_boolean_cmp' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boo_chc_cmp' => [
+                'column_boolean_checkbox_cmp' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'clm_int_cmp' => [
+                'column_int_cmp' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_chc_cmp' => [
+                'column_int_checkbox_cmp' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_clm_int_frk_cmp' => [
+                'id_column_int_foreign_cmp' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'clm_tme_cmp' => [
+                'column_time_cmp' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_dtt_cmp' => [
+                'column_datetime_cmp' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dtt_pt_cmp' => [
+                'column_datetime_ptbr_cmp' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dte_cmp' => [
+                'column_date_cmp' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_dte_pt_cmp' => [
+                'column_date_ptbr_cmp' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_vrc_cmp' => [
+                'column_varchar_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_pav_cmp' => [
+                'column_varchar_password_verify_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_upi_cmp' => [
+                'column_varchar_upload_image_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_url_cmp' => [
+                'column_varchar_url_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_uni_cmp' => [
+                'column_varchar_unique_id_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_tlp_cmp' => [
+                'column_varchar_telephone_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_eml_cmp' => [
+                'column_varchar_email_cmp' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'clm_int_frk' => [
+        'column_int_foreign' => [
             'nullable' => true,
             'unique' => false,
             'columns' => [
-                'clm_int_frk_name' => [
+                'column_int_foreign_name' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***,

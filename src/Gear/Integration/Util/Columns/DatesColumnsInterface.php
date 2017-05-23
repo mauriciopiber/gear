@@ -13,15 +13,15 @@ namespace Gear\Integration\Util\Columns;
 interface DatesColumnsInterface
 {
     // TIME
-    const DEFAULT_TIME           = 'clm_tme';
+    const DEFAULT_TIME           = 'column_time';
 
     //DATETIME
-    const DEFAULT_DATETIME      = 'clm_dtt';
-    const DEFAULT_DATETIME_PTBR = self::DEFAULT_DATETIME.'_pt';
+    const DEFAULT_DATETIME      = 'column_datetime';
+    const DEFAULT_DATETIME_PTBR = self::DEFAULT_DATETIME.'_ptbr';
 
      // DATE
-    const DEFAULT_DATE          = 'clm_dte';
-    const DEFAULT_DATE_PTBR     = self::DEFAULT_DATE.'_pt';
+    const DEFAULT_DATE          = 'column_date';
+    const DEFAULT_DATE_PTBR     = self::DEFAULT_DATE.'_ptbr';
 
     const COLUMNS = [
         self::DEFAULT_TIME          => ['type' => 'time'***REMOVED***,
