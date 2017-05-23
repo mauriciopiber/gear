@@ -1,2 +1,0 @@
-db:
-    - { table: MvcBasicNullableUnique, user: all, namespace: MvcBasicNullableUnique, service: factories, columns: {  } }
