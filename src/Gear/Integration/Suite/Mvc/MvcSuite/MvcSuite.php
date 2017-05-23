@@ -74,6 +74,19 @@ class MvcSuite
         echo '    - Finish.'."\n\n";
     }
 
+    public function runMinSuite($longname = false)
+    {
+        $this->runMvcSuite(
+            'mvc-columns',
+            [
+                'mvc-basic',
+            ***REMOVED***,
+            ['all'***REMOVED***,
+            [null***REMOVED***,
+            [null***REMOVED***,
+            $longname
+        );
+    }
 
     public function runSuite($longname = false)
     {
