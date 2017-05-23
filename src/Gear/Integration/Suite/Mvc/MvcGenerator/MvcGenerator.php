@@ -64,7 +64,7 @@ class MvcGenerator
     {
         $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
 
-        $columnsSuffix = $this->resolveNames->format($mvcMinorSuite, 'url', false);
+        $columnsSuffix = $this->resolveNames->format($mvcMinorSuite, 'url');
 
         $mvcMinorSuite->setTableName($this->resolveNames->createTableName($mvcMinorSuite));
         $mvcMinorSuite->setTableAlias($this->resolveNames->createTableAlias('Mvc', $mvcMinorSuite));

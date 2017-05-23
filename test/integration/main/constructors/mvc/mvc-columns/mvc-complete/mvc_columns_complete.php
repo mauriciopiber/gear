@@ -12,76 +12,76 @@ class MvcColumnsComplete extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_text_cmp' => [
+                'column_text_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_cmp' => [
+                'column_text_html_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_cmp' => [
+                'column_decimal_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_cmp' => [
+                'column_decimal_money_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_cmp' => [
+                'column_boolean_complete' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_cmp' => [
+                'column_boolean_checkbox_complete' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_cmp' => [
+                'column_int_complete' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_cmp' => [
+                'column_int_checkbox_complete' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_cmp' => [
+                'id_column_int_foreign_complete' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_cmp' => [
+                'column_time_complete' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_cmp' => [
+                'column_datetime_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_cmp' => [
+                'column_datetime_ptbr_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_cmp' => [
+                'column_date_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_cmp' => [
+                'column_date_ptbr_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_cmp' => [
+                'column_varchar_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_cmp' => [
+                'column_varchar_password_verify_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_cmp' => [
+                'column_varchar_upload_image_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_cmp' => [
+                'column_varchar_url_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_cmp' => [
+                'column_varchar_unique_id_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_cmp' => [
+                'column_varchar_telephone_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_cmp' => [
+                'column_varchar_email_complete' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***

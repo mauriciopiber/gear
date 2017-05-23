@@ -12,27 +12,27 @@ class MvcColumnsNumeric extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_decimal_nmr' => [
+                'column_decimal_numeric' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_nmr' => [
+                'column_decimal_money_numeric' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_nmr' => [
+                'column_boolean_numeric' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_nmr' => [
+                'column_boolean_checkbox_numeric' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_nmr' => [
+                'column_int_numeric' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_nmr' => [
+                'column_int_checkbox_numeric' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_nmr' => [
+                'id_column_int_foreign_numeric' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
