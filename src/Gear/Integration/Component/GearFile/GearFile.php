@@ -412,11 +412,11 @@ class GearFile
      *
      * Can cut if isUsingLongName is false.
      */
-    public function getEntryName($suite, $name, $type, $typeName, $serviceConfig, $numberConfig)
+    public function getEntryName($suite, $name, $typeName, $serviceConfig, $numberConfig)
     {
         $typeName = ($suite->isUsingLongName()) ? $typeName : substr($typeName, 0, 5);
 
-        $nameRc = ($type == 'Interface')
+        $nameRc = ($this->type == 'Interface')
             ? sprintf($name, '', $numberConfig)
             : sprintf($name, $typeName, $serviceConfig, $numberConfig);
 
@@ -426,9 +426,9 @@ class GearFile
         return $fullname;
     }
 
-    public function getTypeName($suite, $type)
+    public function getTypeName($suite)
     {
-        return ($suite->isUsingLongName()) ? $type : substr($type, 0, 5);
+        return ($suite->isUsingLongName()) ? $this->type : substr($this->type, 0, 5);
     }
 
     public function getEntryConfigNumber($suite, $max, $repeat)
@@ -451,25 +451,25 @@ class GearFile
 
         $serviceConfig = $this->getEntryConfigName($this->suite, $configName);
 
-        $type = $this->str('class', $entity['type'***REMOVED***);
-        $typeName = $this->getTypeName($this->suite, $type);
+        $this->type = $this->str('class', $entity['type'***REMOVED***);
+        $typeName = $this->getTypeName($this->suite);
 
-        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***, $type, $typeName, $serviceConfig, $numberConfig);
+        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***, $typeName, $serviceConfig, $numberConfig);
 
 
         $this->entry['name'***REMOVED*** = $name;
-        $this->entry['type'***REMOVED*** = $type;
+        $this->entry['type'***REMOVED*** = $this->type;
 
         if (isset($entity['extends'***REMOVED***)) {
             $namespace = null;
 
-            switch ($type) {
+            switch ($this->type) {
                 case 'Action':
                 case 'Console':
                     $namespace = 'Controller';
                     break;
                 default:
-                    $namespace = $type;
+                    $namespace = $this->type;
             }
 
             $this->entry['extends'***REMOVED*** = sprintf(
@@ -483,7 +483,6 @@ class GearFile
 
         if (isset($entity['namespace'***REMOVED***)) {
             $this->entry['namespace'***REMOVED*** = $this->createNamespace(
-                $type,
                 $repeat,
                 $typeName,
                 $this->suite->isUsingLongName(),
@@ -495,7 +494,7 @@ class GearFile
             $this->entry['implements'***REMOVED*** = [***REMOVED***;
 
             foreach ($entity['implements'***REMOVED*** as $invokDep) {
-                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $type, $numberConfig);
+                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $numberConfig);
             }
         }
 
@@ -556,7 +555,7 @@ class GearFile
     }
 
 
-    public function createNamespace($type, $number, $typeId, $longName, $max)
+    public function createNamespace($number, $typeId, $longName, $max)
     {
         $typeId = $this->str('class', $typeId);
 
