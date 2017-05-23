@@ -5,35 +5,35 @@ use Phinx\Migration\AbstractMigration;
 class MvcColumnsBasic extends AbstractMigration
 {
     const TABLES = [
-        'mvc_bsc' => [
+        'mvc_basic' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'clm_tim_bsc' => [
+                'column_time_basic' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_dtt_bsc' => [
+                'column_datetime_basic' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dat_bsc' => [
+                'column_date_basic' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_vrc_bsc' => [
+                'column_varchar_basic' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_txt_bsc' => [
+                'column_text_basic' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_dec_bsc' => [
+                'column_decimal_basic' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boo_bsc' => [
+                'column_boolean_basic' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_int_bsc' => [
+                'column_int_basic' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

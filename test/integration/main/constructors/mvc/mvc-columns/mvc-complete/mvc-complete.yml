@@ -1,0 +1,5 @@
+db:
+    - { table: MvcComplete, user: all, namespace: MvcComplete, service: factories, columns: { column_text_html_complete: html, column_decimal_money_complete: money-pt-br, column_boolean_checkbox_complete: checkbox, column_int_checkbox_complete: checkbox, column_datetime_ptbr_complete: datetime-pt-br, column_date_ptbr_complete: date-pt-br, column_varchar_password_verify_complete: password-verify, column_varchar_upload_image_complete: upload-image, column_varchar_url_complete: url, column_varchar_unique_id_complete: unique-id, column_varchar_telephone_complete: telephone, column_varchar_email_complete: email } }
+src:
+    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
+    - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }

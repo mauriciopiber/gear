@@ -108,6 +108,7 @@ function getParam($type, $argv)
 {
     $preset = [
         'longname' => false,
+        'min' => false,
         'count' => 4,
         'type' => null
     ***REMOVED***;
@@ -129,7 +130,7 @@ function getParam($type, $argv)
             continue;
         }
                 
-        if (count($paramSet) == 1 && $paramName == 'longname') {    
+        if (count($paramSet) == 1 && in_array($paramName, ['longname', 'min'***REMOVED***)) {    
             return true;
         }
         
@@ -142,4 +143,4 @@ function getParam($type, $argv)
     return $preset[$type***REMOVED***;
 }
 
-$integration->integrate(getParam('type', $argv), getParam('count', $argv), getParam('longname', $argv)); 
+$integration->integrate(getParam('type', $argv), getParam('count', $argv), getParam('longname', $argv), getParam('min', $argv)); 

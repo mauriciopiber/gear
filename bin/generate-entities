@@ -1,4 +1,0 @@
-#!/bin/bash
-
-vendor/bin/doctrine-module orm:convert-mapping --namespace="${1}\\Entity\\" --force  --from-database annotation src/
-vendor/bin/doctrine-module orm:generate-entities src/ --generate-annotations=true

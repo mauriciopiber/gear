@@ -1,0 +1,3 @@
+db:
+    - { table: MvcText, user: all, namespace: MvcText, service: factories, columns: { column_text_html_text: html } }
+src: {  }

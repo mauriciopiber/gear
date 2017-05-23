@@ -107,19 +107,76 @@ class Integration
         }
     }
 
-    public function integrate($type, $count, $longname = false)
+    public function integrate($type, $count, $longname = false, $min = false)
     {
         $this->type = $type;
         $this->count = $count;
         $this->longname = $longname;
+        $this->min = $min;
 
         $this->validate();
+
+        if ($this->min) {
+            echo 'Integrate Min'."\n";
+            $this->runMin();
+            echo 'Integrate Min Complete'."\n";
+            return;
+        }
+
+        echo 'Integrate'."\n";
 
         $this->runMvc();
         $this->runSrc();
         $this->runController();
 
-        echo 'Integrate'."\n";
+        echo 'Integrate complete'."\n";
+    }
+
+    public function runMin()
+    {
+        $this->srcMvcSuite->runSrcMvcSuite(
+            [
+                'entity',
+                //'fixture',
+                //'repository',
+                //'service',
+                //'filter',
+                //'form',
+                //'search-form'
+            ***REMOVED***,
+            ['basic'***REMOVED***,
+            ['all'***REMOVED***,
+            [null***REMOVED***,
+            [null***REMOVED***,
+            true
+        );
+        die();
+        $this->mvcSuite->runMinSuite($this->longname);
+
+        $this->srcSuite->runSrcSuite(
+            [
+                'repository',
+                'service',
+                'form',
+                'filter',
+                'view-helper',
+                'controller-plugin',
+                'value-object'
+            ***REMOVED***,
+            1,
+            true
+        );
+
+        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, 1, true);
+
+
+        $this->controllerMvcSuite->runControllerMvcSuite(
+            ['basic'***REMOVED***,
+            ['all'***REMOVED***,
+            [null***REMOVED***,
+            [null***REMOVED***,
+            true
+        );
     }
 
     public function runMvc()

@@ -5,83 +5,83 @@ use Phinx\Migration\AbstractMigration;
 class MvcColumnsComplete extends AbstractMigration
 {
     const TABLES = [
-        'mvc_cmp' => [
+        'mvc_complete' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'clm_txt_cmp' => [
+                'column_text_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_txt_html_cmp' => [
+                'column_text_html_complete' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'clm_dec_cmp' => [
+                'column_decimal_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_dec_mny_cmp' => [
+                'column_decimal_money_complete' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'clm_boo_cmp' => [
+                'column_boolean_complete' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'clm_boo_chb_cmp' => [
+                'column_boolean_checkbox_complete' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'clm_int_cmp' => [
+                'column_int_complete' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'clm_int_chb_cmp' => [
+                'column_int_checkbox_complete' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_clm_int_frk_cmp' => [
+                'id_column_int_foreign_complete' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'clm_tim_cmp' => [
+                'column_time_complete' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'clm_dtt_cmp' => [
+                'column_datetime_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dtt_pt_cmp' => [
+                'column_datetime_ptbr_complete' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'clm_dat_cmp' => [
+                'column_date_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_dat_pt_cmp' => [
+                'column_date_ptbr_complete' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'clm_vrc_cmp' => [
+                'column_varchar_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_pas_ver_cmp' => [
+                'column_varchar_password_verify_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_upl_img_cmp' => [
+                'column_varchar_upload_image_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_url_cmp' => [
+                'column_varchar_url_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_uni_id_cmp' => [
+                'column_varchar_unique_id_complete' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'clm_vrc_tel_cmp' => [
+                'column_varchar_telephone_complete' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'clm_vrc_eml_cmp' => [
+                'column_varchar_email_complete' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***

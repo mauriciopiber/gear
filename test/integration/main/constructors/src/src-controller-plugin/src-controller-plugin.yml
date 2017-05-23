@@ -1,29 +1,15 @@
 src:
-    - { name: ControllerPluginExtesibleInvokablesOne, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginExtesibleInvokablesTwo, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginExtesibleFactoriesOne, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginExtesibleFactoriesTwo, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginInvokablesOne, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginInvokablesTwo, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginFactoriesOne, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginFactoriesTwo, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginNamespaceInvokablesOne, type: ControllerPlugin, namespace: ControllerPluginOneNamespace, service: invokables }
-    - { name: ControllerPluginNamespaceInvokablesTwo, type: ControllerPlugin, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: invokables }
-    - { name: ControllerPluginNamespaceFactoriesOne, type: ControllerPlugin, namespace: ControllerPluginOneNamespace, service: factories }
-    - { name: ControllerPluginNamespaceFactoriesTwo, type: ControllerPlugin, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories }
-    - { name: ControllerPluginExtendsInvokablesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesOne, service: invokables }
-    - { name: ControllerPluginExtendsInvokablesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesTwo, service: invokables }
-    - { name: ControllerPluginExtendsFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, service: factories }
-    - { name: ControllerPluginExtendsFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, service: factories }
-    - { name: ControllerPluginFullInvokablesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesOne, namespace: ControllerPluginOneNamespace, service: invokables }
-    - { name: ControllerPluginFullInvokablesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: invokables }
-    - { name: ControllerPluginFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories }
-    - { name: ControllerPluginFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories }
-    - { name: ControllerPluginDependencyFactoriesOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyFactoriesTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependencyManyFactoriesOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne, ControllerPlugin\ControllerPluginExtendsInvokablesOne, ControllerPlugin\ControllerPluginImplementsInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyManyFactoriesTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo, ControllerPlugin\ControllerPluginExtendsInvokablesTwo, ControllerPlugin\ControllerPluginImplementsInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependencyFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependenciesManyFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne, ControllerPlugin\ControllerPluginExtendsInvokablesOne, ControllerPlugin\ControllerPluginImplementsInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependenciesManyFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo, ControllerPlugin\ControllerPluginExtendsInvokablesTwo, ControllerPlugin\ControllerPluginImplementsInvokablesTwo***REMOVED*** }
+    - { name: ControllerPluginExtesibleInvokables, type: ControllerPlugin, service: invokables }
+    - { name: ControllerPluginExtesibleFactories, type: ControllerPlugin, service: factories }
+    - { name: ControllerPluginInvokables, type: ControllerPlugin, service: invokables }
+    - { name: ControllerPluginFactories, type: ControllerPlugin, service: factories }
+    - { name: ControllerPluginNamespaceInvokables, type: ControllerPlugin, namespace: ControllerPluginNamespace, service: invokables }
+    - { name: ControllerPluginNamespaceFactories, type: ControllerPlugin, namespace: ControllerPluginNamespace, service: factories }
+    - { name: ControllerPluginExtendsInvokables, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokables, service: invokables }
+    - { name: ControllerPluginExtendsFactories, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactories, service: factories }
+    - { name: ControllerPluginFullInvokables, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokables, namespace: ControllerPluginNamespace, service: invokables }
+    - { name: ControllerPluginFullFactories, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactories, namespace: ControllerPluginNamespace, service: factories }
+    - { name: ControllerPluginDependencyFactories, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokables***REMOVED*** }
+    - { name: ControllerPluginDependencyManyFactories, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokables, ControllerPlugin\ControllerPluginExtendsInvokables, ControllerPlugin\ControllerPluginImplementsInvokables***REMOVED*** }
+    - { name: ControllerPluginDependencyFullFactories, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactories, namespace: ControllerPluginNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokables***REMOVED*** }
+    - { name: ControllerPluginDependenciesManyFullFactories, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactories, namespace: ControllerPluginNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokables, ControllerPlugin\ControllerPluginExtendsInvokables, ControllerPlugin\ControllerPluginImplementsInvokables***REMOVED*** }
