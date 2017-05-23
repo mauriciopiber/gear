@@ -440,51 +440,54 @@ class GearFile
         return ($suite->isUsingLongName()) ? $config : substr($config, 0, 5);
     }
 
+    public function createExtends($entity)
+    {
+        $namespace = null;
+
+        switch ($this->type) {
+            case 'Action':
+            case 'Console':
+                $namespace = 'Controller';
+                break;
+            default:
+                $namespace = $this->type;
+        }
+
+        return sprintf(
+            '%s\\'.$entity['extends'***REMOVED***,
+            $namespace,
+            $this->typeName,
+            $this->service,
+            $this->number
+        );
+    }
 
     private function generateSource($entity, $configName, $type, $repeat, $max)
     {
         $this->entry = [***REMOVED***;
 
+        $this->max = $max;
 
-        $this->number = $this->getEntryConfigNumber($this->suite, $max, $repeat);
+        $this->number = $this->getEntryConfigNumber($this->suite, $this->max, $repeat);
 
         $this->service = $this->getEntryConfigName($this->suite, $configName);
 
         $this->type = $this->str('class', $entity['type'***REMOVED***);
         $this->typeName = $this->getTypeName($this->suite);
 
-        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***);
+        $this->name = $this->getEntryName($this->suite, $entity['name'***REMOVED***);
 
-
-        $this->entry['name'***REMOVED*** = $name;
+        $this->entry['name'***REMOVED*** = $this->name;
         $this->entry['type'***REMOVED*** = $this->type;
 
         if (isset($entity['extends'***REMOVED***)) {
-            $namespace = null;
-
-            switch ($this->type) {
-                case 'Action':
-                case 'Console':
-                    $namespace = 'Controller';
-                    break;
-                default:
-                    $namespace = $this->type;
-            }
-
-            $this->entry['extends'***REMOVED*** = sprintf(
-                '%s\\'.$entity['extends'***REMOVED***,
-                $namespace,
-                $this->typeName,
-                $this->service,
-                $this->number
-            );
+            $this->entry['extends'***REMOVED*** = $this->createExtends($entity);
         }
 
         if (isset($entity['namespace'***REMOVED***)) {
             $this->entry['namespace'***REMOVED*** = $this->createNamespace(
                 $repeat,
-                $this->suite->isUsingLongName(),
-                $max
+                $this->suite->isUsingLongName()
             );
         }
 
@@ -524,13 +527,13 @@ class GearFile
         }
 
         if (isset($entity['actions'***REMOVED***)) {
-            $this->entry['actions'***REMOVED*** = $this->createAction($repeat, $this->service);
+            $this->entry['actions'***REMOVED*** = $this->createAction($repeat);
         }
 
         return $this->entry;
     }
 
-    public function createAction($repeat, $serviceConfig)
+    public function createAction($repeat)
     {
         $actions = [***REMOVED***;
 
@@ -551,7 +554,7 @@ class GearFile
     }
 
 
-    public function createNamespace($number, $longName, $max)
+    public function createNamespace($number, $longName)
     {
         $typeId = $this->str('class', $this->typeName);
 
@@ -559,7 +562,7 @@ class GearFile
         $template = ($longName) ? '%s%sNamespace' : '%s%sNames';
 
 
-        if ($max == 1) {
+        if ($this->max == 1) {
             return sprintf($template, $typeId, '');
         }
 
