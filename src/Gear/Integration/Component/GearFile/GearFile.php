@@ -211,9 +211,9 @@ class GearFile
         return $this->createGearfileComponent(['src' => $srcs***REMOVED***);
     }
 
-    public function createControllerMvcGearFile(ControllerMvcMinorSuite $controllerMvcMinorSuite, $tables)
+    public function createControllerMvcGearFile(ControllerMvcMinorSuite $suite, $tables)
     {
-        $this->suite = $controllerMvcMinorSuite;
+        $this->suite = $suite;
         $controller = [***REMOVED***;
         foreach ($tables as $minorSuite) {
             $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
@@ -392,9 +392,9 @@ class GearFile
      *
      * Can cut if isUsingLongName is false.
      */
-    public function getEntryConfigName($suite, $configName)
+    public function getEntryConfigName()
     {
-        $config = ($suite->isUsingLongName() ? $configName : substr($configName, 0, 5));
+        $config = ($this->suite->isUsingLongName() ? $this->service : substr($this->service, 0, 5));
 
         return (!empty($config))
             ? $this->stringService->str('class', $config)
@@ -464,6 +464,17 @@ class GearFile
 
     }
 
+    public function createImplements()
+    {
+        $implements = [***REMOVED***;
+
+        foreach ($this->entity['implements'***REMOVED*** as $invokDep) {
+            $implements[***REMOVED*** = sprintf($invokDep, $this->type, $this->numberLabel);
+        }
+
+        return $implements;
+    }
+
     private function generateSource($entity, $configName, $repeat, $max)
     {
         $this->entity = $entity;
@@ -471,9 +482,12 @@ class GearFile
 
         $this->max = $max;
 
-        $this->numberLabel = $this->getEntryConfigNumber($this->suite, $this->max, $repeat);
+        $this->repeat = $repeat;
+        $this->service = $configName;
 
-        $this->serviceLabel = $this->getEntryConfigName($this->suite, $configName);
+        $this->numberLabel = $this->getEntryConfigNumber($this->suite, $this->max, $this->repeat);
+
+        $this->serviceLabel = $this->getEntryConfigName();
 
         $this->type = $this->str('class', $entity['type'***REMOVED***);
         $this->typeLabel = $this->getTypeName($this->suite);
@@ -495,11 +509,7 @@ class GearFile
         }
 
         if (isset($entity['implements'***REMOVED***)) {
-            $this->entry['implements'***REMOVED*** = [***REMOVED***;
-
-            foreach ($entity['implements'***REMOVED*** as $invokDep) {
-                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $this->numberLabel);
-            }
+            $this->entry['implements'***REMOVED*** = $this->createImplements();
         }
 
         if ($configName !== 'abstract' && $entity['type'***REMOVED*** !== 'interface') {
