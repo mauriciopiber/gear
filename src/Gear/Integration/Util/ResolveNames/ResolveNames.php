@@ -70,7 +70,7 @@ class ResolveNames
 
     public function createTableName(MvcMinorSuite $suite)
     {
-        $tableKey = $this->format($suite, 'class', false);
+        $tableKey = $this->format($suite, 'class');
 
         $tableName = sprintf(
             '%s%s',
@@ -96,7 +96,7 @@ class ResolveNames
 
     public function createTableAlias($mvcMajor, MvcMinorSuite $suite)
     {
-        $tableUrl = $this->format($suite, 'class', true);
+        $tableUrl = $this->format($suite, 'class');
 
         $key = sprintf(
             '%s%s',
@@ -135,7 +135,7 @@ class ResolveNames
         return $variables;
     }
 
-    public function cutNames(array $variables)
+    private function cutNames(array $variables)
     {
         $label = NamesReplaceInterface::NAMES;
 
@@ -149,13 +149,21 @@ class ResolveNames
         return $text;
     }
 
-    public function format(MvcMinorSuite $suite, $stringType)
+    private function cutVars($variables, $suite, $minify)
+    {
+        if ($minify === false || $suite->isUsingLongName() === true) {
+            return $variables;
+        }
+
+        return $this->cutNames($variables);
+
+    }
+
+    public function format(MvcMinorSuite $suite, $stringType, $minify = null)
     {
         $variables = $this->createAliase($suite);
 
-        if ($suite->isUsingLongName() === false) {
-            $variables = $this->cutNames($variables);
-        }
+        $variables = $this->cutVars($variables, $suite, $minify);
 
 
         foreach ($variables as $i => $name) {
