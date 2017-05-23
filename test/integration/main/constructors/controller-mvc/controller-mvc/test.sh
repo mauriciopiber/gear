@@ -3,7 +3,7 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="Pbr"
+module="PbrControllerMvc"
 type="web"
 construct=()
 construct+=("../../src-mvc/src-mvc-entity/src-mvc-entity.yml;../../src-mvc/src-mvc-entity/src_mvc_entity.php")
