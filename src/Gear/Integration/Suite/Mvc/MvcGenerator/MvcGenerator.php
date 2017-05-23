@@ -66,6 +66,7 @@ class MvcGenerator
 
         $columnsSuffix = $this->resolveNames->format($mvcMinorSuite, 'url');
 
+
         $mvcMinorSuite->setTableName($this->resolveNames->createTableName($mvcMinorSuite));
         $mvcMinorSuite->setTableAlias($this->resolveNames->createTableAlias('Mvc', $mvcMinorSuite));
         $mvcMinorSuite->setLocationKey($this->resolveNames->createLocationKey($mvcMajor, $mvcMinorSuite));
@@ -74,6 +75,7 @@ class MvcGenerator
         $mvcMinorSuite->setColumns($this->columns->getColumns($mvcMinorSuite, $columnsSuffix));
 
         $mvcMinorSuite->setGearFile($this->gearFile->createMvcGearfile($mvcMinorSuite));
+
         $mvcMinorSuite->setMigrationFile($this->migrationFile->createMvcMigration($mvcMinorSuite));
 
         $this->testFile->updateTestFile($mvcMinorSuite);
