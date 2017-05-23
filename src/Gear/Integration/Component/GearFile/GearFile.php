@@ -412,13 +412,11 @@ class GearFile
      *
      * Can cut if isUsingLongName is false.
      */
-    public function getEntryName($suite, $name, $typeName, $serviceConfig, $numberConfig)
+    public function getEntryName($suite, $name)
     {
-        $typeName = ($suite->isUsingLongName()) ? $typeName : substr($typeName, 0, 5);
-
         $nameRc = ($this->type == 'Interface')
-            ? sprintf($name, '', $numberConfig)
-            : sprintf($name, $typeName, $serviceConfig, $numberConfig);
+            ? sprintf($name, '', $this->number)
+            : sprintf($name, $this->typeName, $this->service, $this->number);
 
 
         $fullname = $this->str('class', $nameRc);
@@ -447,14 +445,15 @@ class GearFile
     {
         $this->entry = [***REMOVED***;
 
-        $numberConfig = $this->getEntryConfigNumber($this->suite, $max, $repeat);
 
-        $serviceConfig = $this->getEntryConfigName($this->suite, $configName);
+        $this->number = $this->getEntryConfigNumber($this->suite, $max, $repeat);
+
+        $this->service = $this->getEntryConfigName($this->suite, $configName);
 
         $this->type = $this->str('class', $entity['type'***REMOVED***);
-        $typeName = $this->getTypeName($this->suite);
+        $this->typeName = $this->getTypeName($this->suite);
 
-        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***, $typeName, $serviceConfig, $numberConfig);
+        $name = $this->getEntryName($this->suite, $entity['name'***REMOVED***);
 
 
         $this->entry['name'***REMOVED*** = $name;
@@ -475,16 +474,15 @@ class GearFile
             $this->entry['extends'***REMOVED*** = sprintf(
                 '%s\\'.$entity['extends'***REMOVED***,
                 $namespace,
-                $typeName,
-                $serviceConfig,
-                $numberConfig
+                $this->typeName,
+                $this->service,
+                $this->number
             );
         }
 
         if (isset($entity['namespace'***REMOVED***)) {
             $this->entry['namespace'***REMOVED*** = $this->createNamespace(
                 $repeat,
-                $typeName,
                 $this->suite->isUsingLongName(),
                 $max
             );
@@ -494,7 +492,7 @@ class GearFile
             $this->entry['implements'***REMOVED*** = [***REMOVED***;
 
             foreach ($entity['implements'***REMOVED*** as $invokDep) {
-                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $numberConfig);
+                $this->entry['implements'***REMOVED***[***REMOVED*** = sprintf($invokDep, $this->type, $this->number);
             }
         }
 
@@ -508,8 +506,6 @@ class GearFile
         if (isset($entity['dependency'***REMOVED***)) {
             $typeName = ($this->suite->isUsingLongName()) ? 'Invokables' : substr('Invokables', 0, 5);
 
-
-
             $this->entry['dependency'***REMOVED*** = [***REMOVED***;
 
             foreach ($entity['dependency'***REMOVED*** as $invokDep) {
@@ -520,7 +516,7 @@ class GearFile
                 $typeDepType = $this->str('class', $invokDep[1***REMOVED***);
 
 
-                $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $numberConfig);
+                $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $this->number);
                 //var_dump($dep);
 
                 $this->entry['dependency'***REMOVED***[***REMOVED*** = $dep;
@@ -528,7 +524,7 @@ class GearFile
         }
 
         if (isset($entity['actions'***REMOVED***)) {
-            $this->entry['actions'***REMOVED*** = $this->createAction($repeat, $serviceConfig);
+            $this->entry['actions'***REMOVED*** = $this->createAction($repeat, $this->service);
         }
 
         return $this->entry;
@@ -555,9 +551,9 @@ class GearFile
     }
 
 
-    public function createNamespace($number, $typeId, $longName, $max)
+    public function createNamespace($number, $longName, $max)
     {
-        $typeId = $this->str('class', $typeId);
+        $typeId = $this->str('class', $this->typeName);
 
 
         $template = ($longName) ? '%s%sNamespace' : '%s%sNames';
