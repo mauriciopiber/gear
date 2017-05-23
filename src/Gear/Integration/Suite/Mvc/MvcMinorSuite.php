@@ -3,6 +3,7 @@ namespace Gear\Integration\Suite\Mvc;
 
 use Gear\Integration\Suite\AbstractMinorSuite;
 use GearBase\Util\String\StringService;
+
 /**
  * PHP Version 5
  *
@@ -83,8 +84,14 @@ class MvcMinorSuite extends AbstractMinorSuite
      *
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite
      */
-    public function __construct(MvcMajorSuite $majorType, $columnType, $userType, $constraints, $tableAssoc, $longName = false)
-    {
+    public function __construct(
+        MvcMajorSuite $majorType,
+        $columnType,
+        $userType,
+        $constraints,
+        $tableAssoc,
+        $longName = false
+    ) {
         parent::__construct($majorType);
         $this->setColumnType($columnType);
         $this->userType = $userType;
@@ -176,5 +183,4 @@ class MvcMinorSuite extends AbstractMinorSuite
     {
         return $this->tableAssoc;
     }
-
 }

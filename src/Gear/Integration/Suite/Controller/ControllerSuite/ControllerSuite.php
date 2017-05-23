@@ -52,6 +52,5 @@ class ControllerSuite
         }
 
         echo '    - Finish'."\n\n";
-
     }
 }

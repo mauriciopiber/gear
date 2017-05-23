@@ -39,7 +39,11 @@ class ControllerMinorSuite extends AbstractMinorSuite
     public function getLocationKey()
     {
         if (!isset($this->locationKey) || empty($this->locationKey)) {
-            $this->locationKey = $this->getMajorSuite()->getSuite().'/'.sprintf(self::SUITE, strtolower($this->getType()));
+            $this->locationKey = sprintf(
+                '%s/%s',
+                $this->getMajorSuite()->getSuite(),
+                sprintf(self::SUITE, strtolower($this->getType()))
+            );
         }
         return $this->locationKey;
     }

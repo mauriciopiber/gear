@@ -68,13 +68,13 @@ class ResolveNames
         return $this->stringService->str('class', str_replace('mvc-', '', $type));
     }
 
-    public function createTableName($superType, MvcMinorSuite $suite)
+    public function createTableName(MvcMinorSuite $suite)
     {
         $tableKey = $this->format($suite, 'class', false);
 
         $tableName = sprintf(
             '%s%s',
-            'Mvc',
+            $this->str('class', $suite->getMajorSuite()->getSuperType()),
             implode('', $tableKey)
         );
 
@@ -92,7 +92,6 @@ class ResolveNames
         );
 
         return $key;
-
     }
 
     public function createTableAlias($mvcMajor, MvcMinorSuite $suite)
@@ -160,7 +159,6 @@ class ResolveNames
 
 
         foreach ($variables as $i => $name) {
-
             if (is_array($name)) {
                 $name = implode('-', $name);
             }

@@ -48,8 +48,9 @@ class SrcSuite
         echo '    - Create Src Suite'."\n";
 
         foreach ($types as $type) {
-
-            $minorSuite = $this->srcGenerator->generateMinorSuite(new SrcMinorSuite($srcMajor, $type, $repeat, $longName));
+            $minorSuite = $this->srcGenerator->generateMinorSuite(
+                new SrcMinorSuite($srcMajor, $type, $repeat, $longName)
+            );
 
             $srcMajor->addMinorSuite($minorSuite);
         }
@@ -59,5 +60,4 @@ class SrcSuite
 
         echo '    - Finish.'."\n\n";
     }
-
 }

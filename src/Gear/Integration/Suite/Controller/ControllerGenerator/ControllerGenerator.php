@@ -119,14 +119,26 @@ class ControllerGenerator
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, 1, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                1,
+                $this->repeat,
+                $this->keyStyle
+            ),
             'type' => $this->type,
             'actions' => [***REMOVED***
         ***REMOVED***;
 
         $invokables[***REMOVED*** = [
             'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                $this->repeat,
+                $this->repeat,
+                $this->keyStyle
+            ),
             'type' => $this->type,
             'actions' => [***REMOVED***
         ***REMOVED***;
@@ -155,7 +167,13 @@ class ControllerGenerator
             'name' => GearFile::KEYS['dependency-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, 1, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                1,
+                $this->repeat,
+                $this->keyStyle
+            ),
             'type' => $this->type,
             'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::SERVICE***REMOVED******REMOVED***,
             'actions' => [***REMOVED***
@@ -165,7 +183,13 @@ class ControllerGenerator
             'name' => GearFile::KEYS['dependency-many-full'***REMOVED***[$this->keyStyle***REMOVED***,
             'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
             'namespace' => '%s',
-            'implements' => $this->gearFile->createMultiplesImplements($this->suite, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
+            'implements' => $this->gearFile->createMultiplesImplements(
+                $this->suite,
+                $this->type,
+                $this->repeat,
+                $this->repeat,
+                $this->keyStyle
+            ),
             'type' => $this->type,
             'dependency' => [
                 [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, self::REPOSITORY***REMOVED***,
@@ -205,8 +229,6 @@ class ControllerGenerator
         ***REMOVED***;
 
         return [$invokables, ['invokables', 'factories'***REMOVED***, $this->type, $this->repeat***REMOVED***;
-
-
     }
 
     private function createPrepareInterface()

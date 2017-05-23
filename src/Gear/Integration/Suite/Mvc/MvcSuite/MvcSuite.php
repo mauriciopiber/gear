@@ -40,45 +40,36 @@ class MvcSuite
         return $this;
     }
 
-    public function runMvcSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables, $longname = false)
-    {
-        $expectedColumns = [
-            $suiteName => $suiteColumns,
-        ***REMOVED***;
+    public function runMvcSuite(
+        $suiteName,
+        $suiteColumns,
+        $suiteUserTypes,
+        $suiteConstraints,
+        $suiteTables,
+        $longname = false
+    ) {
+         echo '    - Create Mvc Suite'."\n";
 
-        $configColumns = [
-            'usertype' => $suiteUserTypes,
-            'constraints' => $suiteConstraints,
-            'tables' => $suiteTables
-        ***REMOVED***;
+        $mvcMajor = new MvcMajorSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
 
-        echo '    - Create Mvc Suite'."\n";
+        $tables = $mvcMajor->getTables();
 
-        $mvcMajor = new MvcMajorSuite($suiteName);
+        foreach ($tables as $tableInfo) {
+            list($column, $userType, $constraint, $tableAssoc) = $tableInfo;
 
-        foreach ($expectedColumns as $columnType) {
-            foreach ($columnType as $column) {
-                foreach ($configColumns['usertype'***REMOVED*** as $userType) {
-                    foreach ($configColumns['constraints'***REMOVED*** as $constraint) {
-                        foreach ($configColumns['tables'***REMOVED*** as $tables) {
+            $mvcSuite = new MvcMinorSuite(
+                $mvcMajor,
+                $column,
+                $userType,
+                $constraint,
+                $tableAssoc,
+                $longname
+            );
 
-                            $mvcSuite = new MvcMinorSuite(
-                                $mvcMajor,
-                                $column,
-                                $userType,
-                                $constraint,
-                                $tables,
-                                $longname
-                            );
-                            $mvcMajor->addMinorSuite($this->mvcGenerator->generateMvc($mvcSuite));
-                        }
-                    }
-                }
-
-            }
-
-            $this->superTestFile->updateSuperTestFile($mvcMajor);
+            $mvcMajor->addMinorSuite($this->mvcGenerator->generateMvc($mvcSuite));
         }
+
+        $this->superTestFile->updateSuperTestFile($mvcMajor);
 
         echo '    - Finish.'."\n\n";
     }

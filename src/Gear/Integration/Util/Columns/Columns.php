@@ -33,7 +33,7 @@ class Columns
     private function factoryColumns($columnType)
     {
         $columns = [***REMOVED***;
-        switch  ($columnType) {
+        switch ($columnType) {
             case 'Basic':
                 $columns = BasicColumnsInterface::COLUMNS;
                 break;
@@ -97,10 +97,21 @@ class Columns
         return $fixed;
     }
 
-    public function getColumns($columnType, $columnSuffix)
+    public function reduce($columns)
     {
+        return $columns;
+    }
+
+    public function getColumns($suite, $columnSuffix)
+    {
+        $columnType = $suite->getColumnType();
+
         $columns = $this->factoryColumns($columnType);
         $columns = $this->addSuffixToColumns($columns, $columnSuffix);
+
+        if ($suite->isUsingLongName() === false) {
+            $columns = $this->reduce($columns);
+        }
         return $columns;
     }
 }

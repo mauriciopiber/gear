@@ -18,13 +18,13 @@ use Gear\Integration\Util\Columns\VarcharColumnsInterface;
 interface BasicColumnsInterface
 {
     const COLUMNS = [
-        DatesColumnsInterface::default_time        => ['type' => 'time'***REMOVED***,
-        DatesColumnsInterface::default_datetime    => ['type' => 'datetime'***REMOVED***,
-        DatesColumnsInterface::default_date        => ['type' => 'date'***REMOVED***,
-        VarcharColumnsInterface::default_varchar   => ['type' => 'string'***REMOVED***,
-        TextColumnsInterface::default_text        => ['type' => 'text'***REMOVED***,
-        NumericColumnsInterface::default_decimal  => ['type' => 'decimal'***REMOVED***,
-        NumericColumnsInterface::default_boolean  => ['type' => 'boolean'***REMOVED***,
-        NumericColumnsInterface::default_int      => ['type' => 'integer'***REMOVED***,
+        DatesColumnsInterface::DEFAULT_TIME      => ['type' => 'time'***REMOVED***,
+        DatesColumnsInterface::DEFAULT_DATETIME  => ['type' => 'datetime'***REMOVED***,
+        DatesColumnsInterface::DEFAULT_DATE      => ['type' => 'date'***REMOVED***,
+        VarcharColumnsInterface::DEFAULT_VARCHAR => ['type' => 'string'***REMOVED***,
+        TextColumnsInterface::DEFAULT_TEXT       => ['type' => 'text'***REMOVED***,
+        NumericColumnsInterface::DEFAULT_DECIMAL => ['type' => 'decimal'***REMOVED***,
+        NumericColumnsInterface::DEFAULT_BOOLEAN => ['type' => 'boolean'***REMOVED***,
+        NumericColumnsInterface::DEFAULT_INT     => ['type' => 'integer'***REMOVED***,
     ***REMOVED***;
 }

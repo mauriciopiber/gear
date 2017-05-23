@@ -40,8 +40,14 @@ class SrcMvcSuite
         return $this;
     }
 
-    public function runSrcMvcSuite($types, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables, $longname = false)
-    {
+    public function runSrcMvcSuite(
+        $types,
+        $suiteColumns,
+        $suiteUserTypes,
+        $suiteConstraints,
+        $suiteTables,
+        $longname = false
+    ) {
         echo '    - Create Src Mvc Suite'."\n";
 
         $srcMvcMajor = new SrcMvcMajorSuite(

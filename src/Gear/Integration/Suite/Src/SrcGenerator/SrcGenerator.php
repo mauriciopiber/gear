@@ -63,7 +63,6 @@ class SrcGenerator
 
 
         return [$implements, ['0' => ''***REMOVED***, $this->type, $this->repeat***REMOVED***;
-
     }
 
     private function generateBaseClass()
@@ -100,15 +99,12 @@ class SrcGenerator
         $this->type = $srcMinor->getType();
         $this->repeat = $srcMinor->getRepeat();
 
-        $type = $srcMinor->getType();
-        $repeat = $srcMinor->getRepeat();
-        $keyStyle = ($srcMinor->isUsingLongName()) ? 'long' : 'short';
 
         $this->keyStyle = ($srcMinor->isUsingLongName()) ? 'long' : 'short';
 
         $srcOptions = [***REMOVED***;
 
-        if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
             $srcOptions[***REMOVED*** = $this->generateBaseInterface();
         }
 
@@ -135,17 +131,28 @@ class SrcGenerator
 
         //implements
 
-        if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
             $invokables[***REMOVED*** = [
                 'name' => GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesImplements($srcMinor, $this->type, 1, $this->repeat, $this->keyStyle),
+                'implements' => $this->gearFile->createMultiplesImplements(
+                    $srcMinor,
+                    $this->type,
+                    1,
+                    $this->repeat,
+                    $this->keyStyle
+                ),
                 'type' => $this->type
             ***REMOVED***;
 
             $invokables[***REMOVED*** = [
                 'name' => GearFile::KEYS['implements-many'***REMOVED***[$this->keyStyle***REMOVED***,
-                'implements' => $this->gearFile->createMultiplesImplements($srcMinor, $this->type, $this->repeat, $this->repeat, $this->keyStyle),
+                'implements' => $this->gearFile->createMultiplesImplements(
+                    $srcMinor,
+                    $this->type,
+                    $this->repeat,
+                    $this->repeat,
+                    $this->keyStyle
+                ),
                 'type' => $this->type
             ***REMOVED***;
         }
@@ -157,7 +164,7 @@ class SrcGenerator
             'type' => $this->type
         ***REMOVED***;
 
-        if (in_array($type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
+        if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
             $full['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
                 $srcMinor,
                 $this->type,
@@ -169,17 +176,12 @@ class SrcGenerator
 
         $invokables[***REMOVED*** = $full;
 
-        //$data = array_merge($data, generateGearfiles($invokables, $config, $this->type, $repeat));
         $srcOptions[***REMOVED*** = [$invokables, $this->getConfig(), $this->type, $this->repeat***REMOVED***;
-
 
         $dependencies = [***REMOVED***;
 
         //to max dependency based on repeat number. interfaces too.
         if (in_array($this->type, [self::SERVICE, self::REPOSITORY, self::CONTROLLER_PLUGIN***REMOVED***)) {
-
-
-
             $dependencies[***REMOVED*** = [
                 'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
                 'type' => $this->type,
@@ -206,7 +208,13 @@ class SrcGenerator
             ***REMOVED***;
 
             if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements($srcMinor, $this->type, 1, $this->repeat, $this->keyStyle);
+                $depFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
+                    $srcMinor,
+                    $this->type,
+                    1,
+                    $this->repeat,
+                    $this->keyStyle
+                );
             }
 
             $dependencies[***REMOVED*** = $depFull;
@@ -225,8 +233,13 @@ class SrcGenerator
             ***REMOVED***;
 
             if (in_array($this->type, [self::SERVICE, self::REPOSITORY***REMOVED***)) {
-                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements($srcMinor, $this->type, $this->repeat, $this->repeat, $this->keyStyle);
-
+                $depsFull['implements'***REMOVED*** = $this->gearFile->createMultiplesImplements(
+                    $srcMinor,
+                    $this->type,
+                    $this->repeat,
+                    $this->repeat,
+                    $this->keyStyle
+                );
             }
 
             $dependencies[***REMOVED*** = $depsFull;
@@ -236,7 +249,7 @@ class SrcGenerator
             if ($this->type != self::CONTROLLER_PLUGIN) {
                 $config[***REMOVED*** = 'abstract';
             }
-            $srcOptions[***REMOVED*** = [$dependencies, $config, $type, $repeat***REMOVED***;
+            $srcOptions[***REMOVED*** = [$dependencies, $config, $this->type, $this->repeat***REMOVED***;
         }
 
         $gearfile =  $this->gearFile->createSrcGearfile($srcMinor, $srcOptions);
@@ -249,5 +262,4 @@ class SrcGenerator
 
         return $srcMinor;
     }
-
 }

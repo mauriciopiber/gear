@@ -12,12 +12,13 @@ namespace Gear\Integration\Util\Columns;
  */
 interface TextColumnsInterface
 {
-    const default_text = 'clm_txt';
-    const default_text_html = self::default_text.'_htm';
+    const DEFAULT_TEXT      = 'clm_txt';
+
+    const DEFAULT_TEXT_HTML = self::DEFAULT_TEXT.'_htm';
 
     const COLUMNS = [
-        self::default_text      => ['type' => 'text'***REMOVED***,
-        self::default_text_html => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
+        self::DEFAULT_TEXT      => ['type' => 'text'***REMOVED***,
+        self::DEFAULT_TEXT_HTML => ['type' => 'text', 'speciality' => 'html'***REMOVED***,
 
     ***REMOVED***;
 }
