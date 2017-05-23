@@ -112,10 +112,6 @@ class SrcMvcGenerator
              $middleMinor->isUsingLongName()
          );
 
-         //var_dump($middleMinor->isUsingLongName());
-         //var_dump($srcMvcMinor->isUsingLongName());
-         //die();
-
          $srcMvcMinor->setType($middleMinor->getType());
 
          $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url', false);

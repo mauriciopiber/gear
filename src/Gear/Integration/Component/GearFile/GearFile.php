@@ -152,12 +152,31 @@ class GearFile
         throw new Exception('Missing Type');
     }
 
+    public function srcMvcOptions($src)
+    {
+        if (!in_array($this->minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
+            $src['service'***REMOVED*** = 'factories';
+            $src['namespace'***REMOVED*** = ($this->minorSuite->getTableName().'\\'.$this->str('class', $this->minorSuite->getType()));
+        }
+
+        if (in_array($this->minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
+            $src['dependency'***REMOVED*** = $this->getSrcMvcDependency($this->minorSuite->getTableName(), $this->minorSuite->getType());
+        }
+
+        if (in_array($this->minorSuite->getType(), ['search-form', 'form'***REMOVED***)) {
+            $src['template'***REMOVED*** = $this->getSrcMvcTemplate($this->minorSuite->getType());
+        }
+        return $src;
+    }
+
     public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
     {
         $this->suite = $srcMvcMinorSuite;
 
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
+
+            $this->minorSuite = $minorSuite;
             $name = $minorSuite->getType() == 'entity'
                 ? $minorSuite->getTableName()
                 : sprintf(
@@ -174,18 +193,7 @@ class GearFile
                 'columns' => $this->factoryGearfileColumns($minorSuite->getColumns())
             ***REMOVED***;
 
-            if (!in_array($minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
-                $src['service'***REMOVED*** = 'factories';
-                $src['namespace'***REMOVED*** = ($minorSuite->getTableName().'\\'.$this->str('class', $minorSuite->getType()));
-            }
-
-            if (in_array($minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
-                $src['dependency'***REMOVED*** = $this->getSrcMvcDependency($minorSuite->getTableName(), $minorSuite->getType());
-            }
-
-            if (in_array($minorSuite->getType(), ['search-form', 'form'***REMOVED***)) {
-                $src['template'***REMOVED*** = $this->getSrcMvcTemplate($minorSuite->getType());
-            }
+            $src = $this->srcMvcOptions($src);
 
             $srcs[***REMOVED*** = $src;
 
