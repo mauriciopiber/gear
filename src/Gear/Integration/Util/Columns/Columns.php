@@ -127,7 +127,7 @@ class Columns
             $reduce[$indexReduced***REMOVED*** = $column;
         }
 
-        return $columns;
+        return $reduce;
     }
 
     public function getColumns($suite, $columnSuffix)
@@ -140,6 +140,9 @@ class Columns
         if ($suite->isUsingLongName() === false) {
             $columns = $this->reduce($columns);
         }
+//var_dump($suite->isUsingLongName());
+  //      var_dump($columns);
+    //    die();
         return $columns;
     }
 }

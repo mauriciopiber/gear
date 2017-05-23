@@ -8,7 +8,7 @@ interface NamesReplaceInterface
         'column'       => 'clm',
         'time'         => 'tim',
         'date'         => 'dat',
-        'datetime'     => 'datetime',
+        'datetime'     => 'dtt',
         'ptbr'         => 'pt',
         'decimal'      => 'dec',
         'money'        => 'mny',
