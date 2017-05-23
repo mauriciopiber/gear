@@ -6,6 +6,6 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrMvcUsertypesBasicLowStrict"
 type="web"
 construct=()
-construct+=("mvc-basic-low-strict.yml;mvc_usertypes_basic_low_strict.php")
+construct+=("mvc.yml;mvc_usertypes_basic_low_strict.php")
 
 source "$bin/gear/module/test-module.sh"

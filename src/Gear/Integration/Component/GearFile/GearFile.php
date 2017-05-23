@@ -6,6 +6,7 @@ use GearBase\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
 use GearBase\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
+use Gear\Integration\Suite\AbstractMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Integration\Suite\Controller\ControllerMinorSuite;
@@ -108,6 +109,12 @@ class GearFile
         return $this;
     }
 
+    public function setSuite(AbstractMinorSuite $suite)
+    {
+        $this->suite = $suite;
+        return $this;
+    }
+
     public function getSrcMvcDependency($tableName, $type)
     {
         if ($type == 'repository') {
@@ -182,12 +189,12 @@ class GearFile
                 : sprintf(
                     '%s%s',
                     $minorSuite->getTableName(),
-                    $this->stringService->str('class', $minorSuite->getType())
+                    $this->str('class', $minorSuite->getType())
                 );
 
             $src = [
                 'db' => $minorSuite->getTableAlias(),
-                'type' => $this->stringService->str('class', $minorSuite->getType()),
+                'type' => $this->str('class', $minorSuite->getType()),
                 'name' => $name,
                 'user' => $minorSuite->getUserType(),
                 'columns' => $this->factoryGearfileColumns($minorSuite->getColumns())
@@ -322,7 +329,7 @@ class GearFile
 
     private function createForeignKeyGearfile($tableId, $type = null)
     {
-        $table = $this->stringService->str('class', str_replace('id_', '', $tableId));
+        $table = $this->str('class', str_replace('id_', '', $tableId));
 
         $data = [
             [
@@ -405,7 +412,7 @@ class GearFile
         $config = ($this->suite->isUsingLongName() ? $this->service : substr($this->service, 0, 5));
 
         return (!empty($config))
-            ? $this->stringService->str('class', $config)
+            ? $this->str('class', $config)
             : '';
     }
 
@@ -581,7 +588,6 @@ class GearFile
         return $actions;
     }
 
-
     public function createNamespace($number, $longName)
     {
         $typeId = $this->str('class', $this->typeLabel);
@@ -638,7 +644,7 @@ class GearFile
     {
         $suiteName = $this->suite->getSuiteName();
 
-        $name = $this->stringService->str('url', $suiteName);
+        $name = $this->str('url', $suiteName);
 
         $gearfile = sprintf('%s.yml', $name);
 

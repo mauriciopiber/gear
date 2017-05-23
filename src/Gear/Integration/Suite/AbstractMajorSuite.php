@@ -5,6 +5,8 @@ abstract class AbstractMajorSuite extends AbstractSuite
 {
     protected $minorSuites;
 
+    protected $locationKey;
+
     public function getMinorSuites()
     {
         return $this->minorSuites;

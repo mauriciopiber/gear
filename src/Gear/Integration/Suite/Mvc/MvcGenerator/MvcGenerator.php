@@ -60,7 +60,7 @@ class MvcGenerator
         return $this;
     }
 
-    public function generateMvc(MvcMinorSuite $mvcMinorSuite)
+    public function configMvc(MvcMinorSuite $mvcMinorSuite)
     {
         $mvcMajor = $mvcMinorSuite->getMajorSuite()->getSuperType();
 
@@ -72,6 +72,14 @@ class MvcGenerator
 
         $mvcMinorSuite->setForeignKeys($this->columns->getForeignKeys($mvcMinorSuite->getColumnType()));
         $mvcMinorSuite->setColumns($this->columns->getColumns($mvcMinorSuite, $columnsSuffix));
+
+        return $mvcMinorSuite;
+    }
+
+    public function generateMvc(MvcMinorSuite $mvcMinorSuite)
+    {
+
+
 
         $mvcMinorSuite->setGearFile($this->gearFile->createMvcGearfile($mvcMinorSuite));
 
