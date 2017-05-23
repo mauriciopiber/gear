@@ -1,3 +1,0 @@
-db:
-    - { table: MvcBsc, user: all, namespace: MvcBsc, service: factories, columns: {  } }
-src: {  }

@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Integration\Suite\Mvc;
 
-use Gear\Integration\Suite\AbstractMinorSuite;
+use Gear\Integration\Suite\Mvc\AbstractMvcMinorSuite;
 use GearBase\Util\String\StringService;
 
 /**
@@ -13,7 +13,7 @@ use GearBase\Util\String\StringService;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class MvcMinorSuite extends AbstractMinorSuite
+class MvcMinorSuite extends AbstractMvcMinorSuite
 {
     const SUITE = '%s/%s';
 
@@ -118,11 +118,6 @@ class MvcMinorSuite extends AbstractMinorSuite
         return $this;
     }
 
-    public function getTableAlias()
-    {
-        return $this->tableAlias;
-    }
-
     public function setForeignKeys($foreignKeys)
     {
         $this->foreignKeys = $foreignKeys;
@@ -159,14 +154,6 @@ class MvcMinorSuite extends AbstractMinorSuite
     public function getColumnType()
     {
         return $this->columnType;
-    }
-
-    /**
-     * @return string TableName
-     */
-    public function getTableName()
-    {
-        return $this->tableName;
     }
 
     public function getUserType()
