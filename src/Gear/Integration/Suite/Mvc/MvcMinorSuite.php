@@ -109,7 +109,7 @@ class MvcMinorSuite extends AbstractMinorSuite
 
     public function getSuiteName($type = 'url')
     {
-        return $this->stringService->str($type, $this->getTableName());
+        return $this->stringService->str($type, $this->getTableAlias());
     }
 
     public function setTableAlias($tableAlias)
