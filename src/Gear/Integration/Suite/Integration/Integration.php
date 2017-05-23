@@ -137,12 +137,12 @@ class Integration
         $this->srcMvcSuite->runSrcMvcSuite(
             [
                 'entity',
-                //'fixture',
-                //'repository',
-                //'service',
-                //'filter',
-                //'form',
-                //'search-form'
+                'fixture',
+                'repository',
+                'service',
+                'filter',
+                'form',
+                'search-form'
             ***REMOVED***,
             ['basic'***REMOVED***,
             ['all'***REMOVED***,
@@ -150,7 +150,7 @@ class Integration
             [null***REMOVED***,
             true
         );
-        die();
+
         $this->mvcSuite->runMinSuite($this->longname);
 
         $this->srcSuite->runSrcSuite(
