@@ -87,9 +87,6 @@ class ControllerMvcGenerator
 
          $columnsSuffix = $this->resolveNames->format($srcMvcMinor, 'url');
 
-         $srcMvcMinor->setTableName($this->resolveNames->createTableName($srcMvcMinor));
-         $srcMvcMinor->setTableAlias($this->resolveNames->createTableAlias('SrcMvc', $srcMvcMinor));
-
          $srcMvcMinor->setForeignKeys($this->columns->getForeignKeys($srcMvcMinor->getColumnType()));
          $srcMvcMinor->setColumns($this->columns->getColumns($srcMvcMinor, $columnsSuffix));
          return $srcMvcMinor;
