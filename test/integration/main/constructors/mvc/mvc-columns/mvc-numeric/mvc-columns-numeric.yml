@@ -1,5 +1,0 @@
-db:
-    - { table: MvcNumeric, user: all, namespace: MvcNumeric, service: factories, columns: { column_decimal_money_numeric: money-pt-br, column_boolean_checkbox_numeric: checkbox, column_int_checkbox_numeric: checkbox } }
-src:
-    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
-    - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }

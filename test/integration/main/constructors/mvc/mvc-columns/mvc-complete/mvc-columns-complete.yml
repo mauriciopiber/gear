@@ -1,5 +1,0 @@
-db:
-    - { table: MvcCmp, user: all, namespace: MvcCmp, service: factories, columns: { clm_txt_html_cmp: html, clm_dec_mny_cmp: money-pt-br, clm_boo_chb_cmp: checkbox, clm_int_chb_cmp: checkbox, clm_dtt_pt_cmp: datetime-pt-br, clm_dat_pt_cmp: date-pt-br, clm_vrc_pas_ver_cmp: password-verify, clm_vrc_upl_img_cmp: upload-image, clm_vrc_url_cmp: url, clm_vrc_uni_id_cmp: unique-id, clm_vrc_tel_cmp: telephone, clm_vrc_eml_cmp: email } }
-src:
-    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
-    - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }
