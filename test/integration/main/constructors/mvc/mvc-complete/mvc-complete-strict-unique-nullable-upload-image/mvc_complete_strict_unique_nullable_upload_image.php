@@ -12,76 +12,76 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_unique_nullable_upload-image' => [
+                'column_text_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_unique_nullable_upload-image' => [
+                'column_text_html_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_unique_nullable_upload-image' => [
+                'column_decimal_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_unique_nullable_upload-image' => [
+                'column_decimal_money_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_unique_nullable_upload-image' => [
+                'column_boolean_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_unique_nullable_upload-image' => [
+                'column_boolean_checkbox_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_unique_nullable_upload-image' => [
+                'column_int_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_unique_nullable_upload-image' => [
+                'column_int_checkbox_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_unique_nullable_upload-image' => [
+                'id_column_int_foreign_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_unique_nullable_upload-image' => [
+                'column_time_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_unique_nullable_upload-image' => [
+                'column_datetime_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_unique_nullable_upload-image' => [
+                'column_datetime_ptbr_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_unique_nullable_upload-image' => [
+                'column_date_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_unique_nullable_upload-image' => [
+                'column_date_ptbr_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_password_verify_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_upload_image_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_url_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_unique_id_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_telephone_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_unique_nullable_upload-image' => [
+                'column_varchar_email_complete_strict_unique_nullable_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
