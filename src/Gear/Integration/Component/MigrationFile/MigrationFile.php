@@ -103,6 +103,7 @@ class MigrationFile
         $tables = (!empty($mvcMinorSuite->getTableAssoc()) ? [$mvcMinorSuite->getTableAssoc()***REMOVED*** : [***REMOVED***);
         $columns = $this->factoryMigrationColumns($mvcMinorSuite->getColumns());
 
+
         return [
             $this->stringService->str('uline', $mvcMinorSuite->getTableAlias()) => [
                 'nullable' => $nullable,

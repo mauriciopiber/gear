@@ -112,12 +112,6 @@ class MvcMinorSuite extends AbstractMvcMinorSuite
         return $this->stringService->str($type, $this->getTableName());
     }
 
-    public function setTableAlias($tableAlias)
-    {
-        $this->tableAlias = $tableAlias;
-        return $this;
-    }
-
     public function setForeignKeys($foreignKeys)
     {
         $this->foreignKeys = $foreignKeys;
