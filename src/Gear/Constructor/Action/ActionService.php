@@ -108,7 +108,7 @@ class ActionService extends AbstractJsonService
             $this->getAppControllerSpecService()->build($this->action);
             $this->getFeature()->build($this->action);
             if ($this->action->getController()->getDb() !== null) {
-                $this->getStep()->createTableStep($db->getController->getDb());
+                $this->getStep()->createTableStep($this->action->getController()->getDb());
             }
 
             //$this->getPage()->build($this->action);
