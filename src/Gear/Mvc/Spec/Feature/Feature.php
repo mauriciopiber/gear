@@ -23,43 +23,46 @@ class Feature extends AbstractMvcTest
         foreach ($controller->getAction() as $action) {
             $action->setController($controller);
             $action->setDb($table);
-
-            switch ($action->getName()) {
-                case 'List':
-                    $this->buildListAction($action);
-
-                    break;
-                case 'Create':
-                    $this->buildCreateAction($action);
-
-                    break;
-                case 'Edit':
-                    $this->buildEditAction($action);
-                    break;
-
-                case 'UploadImage':
-                    $this->buildUploadImageAction($action);
-                    break;
-
-                case 'View':
-                    $this->buildViewAction($action);
-                    break;
-                case 'Delete':
-                    $this->buildDeleteAction($action);
-
-                    break;
-                default:
-                    throw new Exception('Action not found exception');
-                    break;
-            }
+            $this->factoryMvc($action);
         }
 
         return true;
     }
 
+    public function factoryMvc(Action $action)
+    {
+        switch ($action->getName()) {
+            case 'List':
+                $this->buildListAction($action);
+
+                break;
+            case 'Create':
+                $this->buildCreateAction($action);
+                break;
+            case 'Edit':
+                $this->buildEditAction($action);
+                break;
+
+            case 'UploadImage':
+                $this->buildUploadImageAction($action);
+                break;
+
+            case 'View':
+                $this->buildViewAction($action);
+                break;
+            case 'Delete':
+                $this->buildDeleteAction($action);
+
+                break;
+            default:
+                throw new Exception('Action not found exception');
+                break;
+        }
+    }
+
     public function buildUploadImageAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -121,9 +124,9 @@ class Feature extends AbstractMvcTest
         return [
             'module' => $this->getModule()->getModuleName(),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
-            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'tableLabel' => $this->str('label', $action->getController()->getDb()->getTable()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
+            'tableUrl' => $this->str('url', $action->getController()->getDb()->getTable()),
         ***REMOVED***;
     }
 
@@ -134,7 +137,7 @@ class Feature extends AbstractMvcTest
      */
     public function buildCreateAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
@@ -184,7 +187,7 @@ class Feature extends AbstractMvcTest
 
     public function buildEditAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
@@ -255,7 +258,7 @@ class Feature extends AbstractMvcTest
      */
     public function buildListAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -285,7 +288,7 @@ class Feature extends AbstractMvcTest
      */
     public function buildDeleteAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -298,10 +301,10 @@ class Feature extends AbstractMvcTest
 
         $options = [
             'module' => $this->getModule()->getModuleName(),
-            'table' => $this->str('label', $action->getDb()->getTable()),
+            'table' => $this->str('label', $action->getController()->getDb()->getTable()),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
+            'tableUrl' => $this->str('url', $action->getController()->getDb()->getTable()),
         ***REMOVED***;
 
         $fileCreator = $this->getFileCreator();
@@ -323,7 +326,7 @@ class Feature extends AbstractMvcTest
      */
     public function buildViewAction(Action $action)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -337,9 +340,9 @@ class Feature extends AbstractMvcTest
         $options = [
             'module' => $this->getModule()->getModuleName(),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
-            'tableLabel' => $this->str('label', $action->getDb()->getTable()),
+            'tableLabel' => $this->str('label', $action->getController()->getDb()->getTable()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'tableUrl' => $this->str('url', $action->getDb()->getTable()),
+            'tableUrl' => $this->str('url', $action->getController()->getDb()->getTable()),
         ***REMOVED***;
 
         $options['assert'***REMOVED*** = $this->buildViewActionCreateAssert();
@@ -701,6 +704,11 @@ class Feature extends AbstractMvcTest
 
     public function build(Action $action)
     {
+        if ($action->getController()->getDb() !== null) {
+            $this->factoryMvc($action);
+            return;
+        }
+
         $version = $this->getGearVersion();
 
         $controllerName = $action->getController()->getNameOff();

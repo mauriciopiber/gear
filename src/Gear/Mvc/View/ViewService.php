@@ -20,7 +20,6 @@ class ViewService extends AbstractJsonService
 
     public function build(Action $action)
     {
-
         if ($action->getController()->getDb() !== null) {
             $this->factoryMvc($action);
             return;
