@@ -25,11 +25,14 @@ use Gear\Mvc\View\App\AppControllerServiceTrait;
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
+use Gear\Mvc\Spec\Step\StepTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 class ActionService extends AbstractJsonService
 {
     use PageTrait;
+
+    use StepTrait;
 
     use FeatureTrait;
 
@@ -104,6 +107,10 @@ class ActionService extends AbstractJsonService
             $this->getAppControllerService()->build($this->action);
             $this->getAppControllerSpecService()->build($this->action);
             $this->getFeature()->build($this->action);
+            if ($this->action->getController()->getDb() !== null) {
+                $this->getStep()->createTableStep($db->getController->getDb());
+            }
+
             //$this->getPage()->build($this->action);
             return true;
         }
