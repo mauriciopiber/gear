@@ -7,10 +7,14 @@ trait UtilNameTrait
 {
     protected $tableName;
 
+    protected $tableAlias;
+
+    protected $locationKey;
+
     public function getTableAlias()
     {
-        if (isset($this->tableName) && !empty($this->tableName)) {
-            return $this->tableName;
+        if (isset($this->tableAlias) && !empty($this->tableAlias)) {
+            return $this->tableAlias;
         }
 
         $tableKey = $this->format('class', true);
@@ -51,15 +55,18 @@ trait UtilNameTrait
 
     public function getLocationKey()
     {
+        if (isset($this->locationKey) && !empty($this->locationKey)) {
+            return $this->locationKey;
+        }
         $tableUrl = $this->format('url', false);
 
-        $key = sprintf(
+        $this->locationKey = sprintf(
             'mvc/%s/mvc-%s',
             $this->stringService->str('url', $this->getMajorSuite()->getSuperType()),
             implode('-', $tableUrl)
         );
 
-        return $key;
+        return $this->locationKey;
     }
 
     private function format($stringType, $minify)
