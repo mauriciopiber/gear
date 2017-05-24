@@ -21,8 +21,8 @@ class Feature extends AbstractMvcTest
         $this->dbLocation = $this->createDirectoryFromIntrospect($controller);
 
         foreach ($controller->getAction() as $action) {
+            $controller->setDb($this->db);
             $action->setController($controller);
-            $action->setDb($table);
             $this->factoryMvc($action);
         }
 
