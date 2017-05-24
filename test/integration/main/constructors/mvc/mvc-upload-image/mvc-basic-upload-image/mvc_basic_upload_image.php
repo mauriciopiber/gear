@@ -12,28 +12,28 @@ class MvcBasicUploadImage extends AbstractMigration
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_upload-image' => [
+                'column_time_basic_upload_image' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_upload-image' => [
+                'column_datetime_basic_upload_image' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_upload-image' => [
+                'column_date_basic_upload_image' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_upload-image' => [
+                'column_varchar_basic_upload_image' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_upload-image' => [
+                'column_text_basic_upload_image' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_upload-image' => [
+                'column_decimal_basic_upload_image' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_upload-image' => [
+                'column_boolean_basic_upload_image' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_upload-image' => [
+                'column_int_basic_upload_image' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

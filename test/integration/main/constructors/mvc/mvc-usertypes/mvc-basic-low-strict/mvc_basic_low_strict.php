@@ -12,28 +12,28 @@ class MvcBasicLowStrict extends AbstractMigration
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low-strict' => [
+                'column_time_basic_low_strict' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low-strict' => [
+                'column_datetime_basic_low_strict' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low-strict' => [
+                'column_date_basic_low_strict' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low-strict' => [
+                'column_varchar_basic_low_strict' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low-strict' => [
+                'column_text_basic_low_strict' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low-strict' => [
+                'column_decimal_basic_low_strict' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low-strict' => [
+                'column_boolean_basic_low_strict' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low-strict' => [
+                'column_int_basic_low_strict' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***

@@ -3,6 +3,7 @@ namespace Gear\Integration\Util\Columns;
 
 use Exception;
 use Gear\Integration\Util\Names\NamesReplaceInterface;
+use GearBase\Util\String\StringService;
 
 /**
  * PHP Version 5
@@ -15,6 +16,10 @@ use Gear\Integration\Util\Names\NamesReplaceInterface;
  */
 class Columns
 {
+    public function __construct()
+    {
+        $this->stringService = new StringService();
+    }
 
     public function getForeignKeys($columnType)
     {
@@ -73,7 +78,7 @@ class Columns
         $text = [***REMOVED***;
 
         foreach ($columnSuffix as $option) {
-            $text[***REMOVED*** = ($suite->isUsingLongName()) ? $option : $label[$option***REMOVED***;
+            $text[***REMOVED*** = $this->stringService->str('uline', ($suite->isUsingLongName()) ? $option : $label[$option***REMOVED***);
         }
 
         return implode('_', $text);
@@ -143,6 +148,7 @@ class Columns
 //var_dump($suite->isUsingLongName());
   //      var_dump($columns);
     //    die();
+
         return $columns;
     }
 }
