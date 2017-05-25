@@ -11,6 +11,13 @@ use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
+use GearBase\Util\String\StringService;
+use Gear\Creator\Template\TemplateService;
+use GearBase\Util\File\FileService;
+use Gear\Module;
+use Gear\Creator\FileCreator\FileCreator;
+use GearBase\Util\Dir\DirService;
+use Gear\Mvc\Spec\Feature\Feature;
 
 /**
  * @group Spec
@@ -25,14 +32,11 @@ class FeatureTest extends AbstractTestCase
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec/e2e')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec/e2e/index')->at(vfsStreamWrapper::getRoot());
 
-        $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
+        vfsStream::setup('module');
+        $this->createDir('public/js/spec/e2e/index');
+
+        $this->assertFileExists(vfsStream::url('module/public/js/spec/e2e/index'));
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getPublicJsSpecEndFolder()
@@ -41,42 +45,51 @@ class FeatureTest extends AbstractTestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+        $template       = new TemplateService();
+        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/spec';
+        $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/spec';
 
-        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->dir = new DirService();
 
-        $this->feature = new \Gear\Mvc\Spec\Feature\Feature();
+        $this->feature = new Feature();
         $this->feature->setStringService($this->string);
         $this->feature->setFileCreator($this->fileCreator);
         $this->feature->setDirService($this->dir);
-    }
-
-
-    public function testIntrospectFromTable()
-    {
-
-        $this->feature->setDirService($this->dir);
-        $this->feature->setGearVersion('0.0.99');
         $this->feature->setModule($this->module->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->feature->setTableService($this->table->reveal());
+    }
+
+    public function createDir($dir)
+    {
+        $pieces = explode('/', $dir);
+        $fullpath = '';
+
+        foreach ($pieces as $i => $piece) {
+            $fullpath .= (($i > 0) ? '/' : '').$piece;
+            vfsStream::newDirectory($fullpath)->at(vfsStreamWrapper::getRoot());
+        }
+    }
+
+    public function testIntrospectFromTable()
+    {
+        $this->feature->setGearVersion('0.0.99');
+
         $this->table->isNullable('myTable')->willReturn(true)->shouldBeCalled();
         $this->table->hasUniqueConstraint('myTable')->willReturn(true)->shouldBeCalled();
-        $this->feature->setTableService($this->table->reveal());
 
-        $table = new \GearJson\Db\Db([
+        $table = new Db([
             'table' => 'myTable'
         ***REMOVED***);
 
-        $controller = new \GearJson\Controller\Controller([
+        $controller = new Controller([
             'name' => 'MyTableController',
             'object' => '%s\Controller\MyTableController',
             'actions' => [
@@ -104,7 +117,7 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setSchemaService($this->schema->reveal());
 
         /**
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'MyAction',
             'controller' => 'MyController'
         ***REMOVED***);*/
@@ -132,9 +145,9 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setGearVersion('0.0.99');
         $this->feature->setModule($this->module->reveal());
 
-        $controller = new \GearJson\Controller\Controller(['name' => 'MyController'***REMOVED***);
+        $controller = new Controller(['name' => 'MyController'***REMOVED***);
 
-        $action = new \GearJson\Action\Action([
+        $action = new Action([
             'name' => 'MyAction',
             'controller' => $controller
         ***REMOVED***);
@@ -178,11 +191,17 @@ class FeatureTest extends AbstractTestCase
 
     public function getGearSchemaAction()
     {
-        $db = new Db(['table' => 'MyController'***REMOVED***);
+        $controller = new Controller(
+            [
+                'name' => 'MyController',
+                'object' => '%s\Controller\MyController',
+                'db' => 'MyController'
+            ***REMOVED***
+        );
+
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => $controller,
         ***REMOVED***);
 
         return [
@@ -195,7 +214,7 @@ class FeatureTest extends AbstractTestCase
      */
     public function testBuildCreateNotNullAction($action)
     {
-        $db = $action->getDb();
+        $db = $action->getController()->getDb();
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsNotNull())->shouldBeCalled();
@@ -226,8 +245,7 @@ class FeatureTest extends AbstractTestCase
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
@@ -253,13 +271,17 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @group lets
+     */
     public function testBuildCreateUniqueAction()
     {
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(
+                ['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***
+            ),
         ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
@@ -289,8 +311,7 @@ class FeatureTest extends AbstractTestCase
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
@@ -321,8 +342,7 @@ class FeatureTest extends AbstractTestCase
 
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         return [
@@ -340,12 +360,11 @@ class FeatureTest extends AbstractTestCase
      */
     public function testBuildEditAction($action, $columns, $template, $nullable, $unique)
     {
-        $this->db = $action->getDb();
+        $this->db = $action->getController()->getDb();
 
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $this->db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -376,8 +395,7 @@ class FeatureTest extends AbstractTestCase
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -405,8 +423,7 @@ class FeatureTest extends AbstractTestCase
 
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => $db
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -430,8 +447,7 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
-            'db' => new Db(['table' => 'MyController'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
@@ -453,8 +469,7 @@ class FeatureTest extends AbstractTestCase
     {
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyTableController'***REMOVED***),
-            'db' => new Db(['table' => 'MyTable'***REMOVED***)
+            'controller' => new Controller(['name' => 'MyTableController', 'db' => 'MyTable'***REMOVED***),
         ***REMOVED***);
 
         $this->feature->setModule($this->module->reveal());
