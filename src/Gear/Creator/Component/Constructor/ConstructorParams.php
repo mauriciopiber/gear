@@ -44,8 +44,7 @@ class ConstructorParams
     public function createParams($params)
     {
         $data = [***REMOVED***;
-        foreach ($params as $classDependency)
-        {
+        foreach ($params as $classDependency) {
             $var = $classDependency;
 
             preg_match_all('/((?:^|[A-Z***REMOVED***)[a-z***REMOVED***+)/', $var, $matches);
@@ -56,7 +55,6 @@ class ConstructorParams
         $this->params = [***REMOVED***;
 
         foreach ($data as $index => $param) {
-
             $count = $this->sumParamValue($param);
 
             if ($count <= 20) {
@@ -83,7 +81,6 @@ class ConstructorParams
         $rValues = array_reverse($keys);
 
         return $rValues;
-
     }
 
     /**
@@ -93,7 +90,6 @@ class ConstructorParams
     {
 
         return array_keys($intersect);
-
     }
 
     public function determineParams($data)
@@ -102,7 +98,6 @@ class ConstructorParams
 
 
         foreach ($data as $index => $value) {
-
             foreach ($this->forwardIntersect($intersect) as $removeKey) {
                 unset($value[$removeKey***REMOVED***);
 
@@ -117,7 +112,6 @@ class ConstructorParams
                     }
                 }
             }
-
         }
 
         if (empty($data)) {
@@ -126,7 +120,6 @@ class ConstructorParams
 
 
         foreach ($data as $index => $value) {
-
             foreach ($this->revertIntersect($intersect) as $removeKey) {
                 unset($value[$removeKey***REMOVED***);
 
@@ -141,11 +134,11 @@ class ConstructorParams
                     }
                 }
             }
-
         }
 
         if (empty($data)) {
-            return $this->params;;
+            return $this->params;
+            ;
         }
 
         throw new \Exception('Params errors');
@@ -159,7 +152,7 @@ class ConstructorParams
 
     public function sumParamValue($data)
     {
-        $test = array_map (function($value) {
+        $test = array_map(function ($value) {
             return strlen($value);
         }, $data);
 
@@ -171,7 +164,6 @@ class ConstructorParams
         $intersect = [***REMOVED***;
 
         foreach ($data as $index => $params) {
-
             if (empty($intersect)) {
                 $intersect = $params;
                 continue;

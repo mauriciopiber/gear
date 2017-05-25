@@ -85,7 +85,6 @@ class EntityObjectFixer
 
         $content = str_replace('<?php'.PHP_EOL.PHP_EOL.'namespace ', '<?php'.PHP_EOL.'namespace ', $content);
         $entity->setContent($content);
-
     }
 
     public function fixDuplicateEmptyLines(&$entity)
@@ -159,11 +158,9 @@ class EntityObjectFixer
                      $originalContent = str_replace($line, $newCode, $originalContent);
                 }
             }
-
         }
 
         $entity->setContent($originalContent);
-
     }
 
 
@@ -291,7 +288,6 @@ EOL;
         }
 
         $entity->setContent($content);
-
     }
 
 
@@ -308,7 +304,6 @@ EOL;
         }
 
         foreach ($match[1***REMOVED*** as $namespaceToFix) {
-
             $fullname = explode('\\', $namespaceToFix);
             $name = end($fullname);
             $content = str_replace('(\\'.$namespaceToFix, '('.$name, $content);
@@ -403,7 +398,6 @@ EOL;
         $content = preg_replace($pattern, '@param $1 ', $content);
 
         $entity->setContent($content);
-
     }
 
 
@@ -458,7 +452,6 @@ EOL;
 
 EOS;
         return $attribute;
-
     }
 
     public function getAttributeForeignKey($column)
@@ -480,8 +473,6 @@ EOS;
 
 EOS;
         return $attribute;
-
-
     }
 
     public function getSetterDate($tableName, $column)
@@ -559,7 +550,6 @@ EOS;
 EOS;
 
         return $setter;
-
     }
 
     public function getGetterForeignKey($column)

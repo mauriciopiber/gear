@@ -58,8 +58,7 @@ class ClassDependencyObject
     
     public function addAliase($dependency, $index)
     {
-        if (
-            is_array($dependency)
+        if (is_array($dependency)
             && isset($dependency['aliase'***REMOVED***)
             && !preg_match('#\\\\#', $dependency['aliase'***REMOVED***)
         ) {
@@ -91,7 +90,7 @@ class ClassDependencyObject
     
     public function getFullName()
     {
-        return sprintf(self::FULL_NAME, $this->namespace, $this->name);   
+        return sprintf(self::FULL_NAME, $this->namespace, $this->name);
     }
     
     public function getName()
@@ -101,6 +100,6 @@ class ClassDependencyObject
         
     public function getNamespace()
     {
-        return $this->namespace;   
+        return $this->namespace;
     }
 }

@@ -106,7 +106,6 @@ class EntityTestService extends AbstractMvc
         }
 
         $entityTestConfig->setFieldsNullMethod($assertNull);
-
     }
 
     public function getClassMethods()
