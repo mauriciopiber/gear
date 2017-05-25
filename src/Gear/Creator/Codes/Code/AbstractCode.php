@@ -8,7 +8,6 @@ use GearJson\Controller\Controller;
 use GearJson\App\App;
 use GearJson\Db\Db;
 
-
 /**
  * PHP Version 5
  *

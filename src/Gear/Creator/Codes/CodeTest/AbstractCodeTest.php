@@ -167,5 +167,4 @@ abstract class AbstractCodeTest extends AbstractCodeBase
         //var_dump($this->getModule()->map($type));
         return $this->getModule()->map($type);
     }
-
 }

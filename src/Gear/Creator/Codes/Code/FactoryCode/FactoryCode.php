@@ -34,7 +34,6 @@ class FactoryCode extends AbstractCode
         $iterator = 0;
 
         foreach ($data->getDependency() as $alias => $dependency) {
-
             $text .= $this->getDependencyCallable($indent, $alias, $dependency);
 
             if ($iterator < $allDeps-1) {
@@ -86,7 +85,6 @@ EOS;
 
         if (!empty($data->getDependency()) && $data->getService() === 'factories') {
             foreach ($data->getDependency() as $aliase => $item) {
-
                 if (isset($item['aliase'***REMOVED***) || is_string($aliase)) {
                     continue;
                 }

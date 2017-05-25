@@ -69,7 +69,6 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
 
         $this->introspectUploadImage($this->db);
         return true;
-
     }
 
     public function introspectUploadImage(Db $db)

@@ -156,7 +156,6 @@ class ResolveNames
         }
 
         return $this->cutNames($variables);
-
     }
 
     public function format(MvcMinorSuite $suite, $stringType, $minify = null)

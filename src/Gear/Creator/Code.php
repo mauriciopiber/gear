@@ -258,7 +258,6 @@ EOS;
          */
 
         foreach ($dependencies as $index => $classDependency) {
-
             $name = $this->str('class', $classDependency->getName());
             $var = $this->params[$index***REMOVED***;
             $var = $this->str('var', $var);
@@ -283,7 +282,6 @@ EOS;
         $html = '     *'.PHP_EOL;
 
         foreach ($prepare as $item) {
-
             $html .= sprintf(
                 self::TEMPLATE_DOCS_PARAMS,
                 $item['name'***REMOVED***.str_repeat(' ', ($lengthParam-strlen($item['name'***REMOVED***))),
@@ -295,10 +293,9 @@ EOS;
         $html .= '     *';
 
         return $html;
-
     }
 
-     public function getConstructorDocs($data)
+    public function getConstructorDocs($data)
     {
         $classObject = new ClassObject($data, $this->getModule()->getModuleName());
 
@@ -323,7 +320,6 @@ EOS;
             return $this->varTemplate[$templateName***REMOVED***;
         }
         return $templateName;
-
     }
 
     public function constructEmptyConstructor($html)
@@ -357,7 +353,6 @@ EOS;
         $constructorData = [***REMOVED***;
 
         foreach ($dependency as $i => $dependencyInstance) {
-
             $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getModuleName(), $i);
             $item = $dependencyObject->getName();
             $name = $this->str('class', $item);
@@ -395,7 +390,6 @@ EOS;
         $attr = '';
 
         foreach ($constructorData as $index => $dependency) {
-
             $item = $dependency['name'***REMOVED***;
             $depVar = $this->params[$index***REMOVED***;
 
@@ -529,7 +523,6 @@ EOS;
         $this->uses = array_merge($this->uses, $this->getDependencyUseNamespace($data));
 
         if ($data->getExtends() !== null) {
-
             $extends = $data->getExtends();
 
             if (strpos($extends, 'ControllerPlugin\\') !== false) {

@@ -182,7 +182,6 @@ class GearFile
 
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
-
             $this->minorSuite = $minorSuite;
             $name = $minorSuite->getType() == 'entity'
                 ? $minorSuite->getTableName()
@@ -476,7 +475,6 @@ class GearFile
 
     public function configOptions()
     {
-
     }
 
     public function createImplements()

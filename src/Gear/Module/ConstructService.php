@@ -101,11 +101,9 @@ class ConstructService extends AbstractJsonService
         $data = $this->getGearfileConfig();
 
         if (isset($data['src'***REMOVED***)) {
-
             $entity = [***REMOVED***;
 
             foreach ($data['src'***REMOVED*** as $i => $src) {
-
                 if ($src['type'***REMOVED*** == 'Entity') {
                     $entity[***REMOVED*** = $src;
                     continue;

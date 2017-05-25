@@ -95,7 +95,6 @@ class SrcService extends AbstractJsonService
         $this->srcs = [***REMOVED***;
 
         foreach ($srcs as $src) {
-
             $this->srcs[***REMOVED*** = $this->getSrcService()->create(
                 $this->getModule()->getModuleName(),
                 $src['name'***REMOVED***,

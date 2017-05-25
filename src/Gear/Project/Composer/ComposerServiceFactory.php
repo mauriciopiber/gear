@@ -5,6 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Project\Composer\ComposerService;
 use Gear\Creator\FileCreator\FileCreator;
+
 class ComposerServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
