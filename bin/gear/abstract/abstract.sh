@@ -14,6 +14,11 @@ function Gear_Util_GetBasePath
     echo "$basepath"	
 }
 
+function Gear_Migrate
+{
+    vendor/bin/phinx migrate	
+}
+
 
 function Gear_Util_GetGearPath 
 {
