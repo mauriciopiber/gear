@@ -1,0 +1,23 @@
+#!/bin/bash 
+
+function Gear_Module_Util_GetModuleName
+{
+    if [ "${1}" == "" ***REMOVED***; then
+        echo "Module"
+        return    
+    fi    
+    
+    echo "${1}"
+}
+
+function Gear_Module_Util_GetModuleUrl
+{
+    echo $(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "${1}")    
+}
+
+function Gear_Module_Util_GetModulePath
+{
+    file="$(Gear_Util_GetBasePath)/${1}"
+    echo $file
+}
+

@@ -6,9 +6,12 @@ source "$headersDir/abstract.sh"
 source "$headersDir/abstract-docs.sh"
 source "$headersDir/abstract-ci.sh"
 source "$headersDir/abstract-version.sh"
+source "$headersDir/module/util"
+source "$headersDir/module/database"
+source "$headersDir/module/module"
 
 # 3. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
-function Gear_Module_Create
+function Gear_Module_Execute_Create
 {
     # Params
     if [ $# -ne 7 ***REMOVED***; then
@@ -39,11 +42,12 @@ function Gear_Module_Create
     Gear_Module_Run_DeleteModule "$module"
     
     Gear_Module_Run_CreateModule "$module" "$type"
+    Gear_Module_Run_InstallModule "$module"
     
-    Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
-        Gear_Module_Run_Ant "$module" "$type"
+        Gear_Module_Execute_Ant "$module" "$type"
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
@@ -62,15 +66,14 @@ function Gear_Module_Create
     exit 0
 }
 
-function Gear_Module_Clear
+function Gear_Module_Execute_Clear
 {
     # Params
     if [ $# -lt 3 ***REMOVED***; then
         echo "usage: module shouldTestLocal shouldTestCI"
         exit 1
     fi
-   
-    # PARAMS
+    
     basePath=$(Gear_Util_GetBasePath)
 
     module=$(Gear_Module_Util_GetModuleName "${1}")
@@ -84,45 +87,18 @@ function Gear_Module_Clear
     fi    
         
     cd $modulePath 
-    
-    if [ -d $modulePath/schema ***REMOVED***; then 
-    	sudo rm -R $modulePath/schema
-    fi            
-    
-    if [ -d $modulePath/src/$module ***REMOVED***; then 
-    	sudo rm -R $modulePath/src/$module
-    fi
 
-    if [ -d $modulePath/test/unit/$moduleTest ***REMOVED***; then 
-    	sudo rm -R $modulePath/test/unit/$moduleTest
-    fi   
-    
-    if [ -d "$modulePath/public/js" ***REMOVED***; then
-        sudo rm -R public/js	
-    fi
-
-    if [ "$(ls -A $modulePath/data/migrations)" ***REMOVED***; then 
-    	sudo rm -R $modulePath/data/migrations/* 
-    fi       
-
-    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
-    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
-    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
-
-    echo "Deploy Develoment - Migrations/DB"
-    vendor/bin/database $database $username $password
-    vendor/bin/phinx migrate
-            
-    cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
-    --type=$type \
-    --force \
-    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
-    
-    #cd $modulePath
-    #sudo script/load.sh    
+    # delete sensitive files
+    Gear_Module_Delete_Constructor_Files "$modulePath"
+    # renew database
+    Gear_Module_Database_Up
+    # run migrate
+    Gear_Migrate
+    # creates module again to assert all main files exist.
+    Gear_Module_Run_CreateModule "$module" "$type"
 }
 
-function Gear_Module_Restore
+function Gear_Module_Execute_Restore
 {
     # Params
     if [ $# -lt 2 ***REMOVED***; then
@@ -130,23 +106,13 @@ function Gear_Module_Restore
         exit 1
     fi
    
-   	
-	# PARAMS
-    basePath=$(Gear_Util_GetBasePath)
-
     module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     type=${2}
-    
-	cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
-    --type=$type \
-    --force \
-    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
-	
+   
+    Gear_Module_Run_CreateModule "$module" "$type"
 }
 
-function Gear_Module_Integrate
+function Gear_Module_Execute_Integrate
 {
 	    # Params
     if [ $# -ne 6 ***REMOVED***; then
@@ -165,14 +131,9 @@ function Gear_Module_Integrate
     
     Gear_Module_Run_DeleteModule "$module"
         
-    echo "$module $moduleUrl $type $scriptDir $construct"
 	echo "Running Integrate"
 	
-	#create module
-	cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
-    --type=$type \
-    --force \
-    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
+    Gear_Module_Run_CreateModule "$module" "$type"
     
     #composer update
     cd $modulePath && sudo composer update
@@ -186,26 +147,18 @@ function Gear_Module_Integrate
     fi
    
     if [ "$type" == "cli" ***REMOVED***; then
-    	    
-        database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
-        username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
-        password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
-
-
-        echo "Deploy Develoment - Migrations/DB"
-        vendor/bin/database $database $username $password
-    	
+        Gear_Module_Database_Up
     fi
     
-    Gear_Module_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
 
     sudo composer dump-autoload
     
-    Gear_Module_Run_Ant "$module" "$type"
+    Gear_Module_Execute_Ant "$module" "$type"
 }
 
 
-function Gear_Module_Reset
+function Gear_Module_Execute_Reset
 {
     # Params
     if [ $# -lt 3 ***REMOVED***; then
@@ -227,21 +180,11 @@ function Gear_Module_Reset
         
     cd $modulePath 
     vendor/bin/unload-module BjyAuthorize # @TODO REMOVE IT
-    sudo php public/index.php gear schema delete $module --basepath=$basePath
-    sudo php public/index.php gear schema create $module --basepath=$basePath    
-    sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
-    sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
-    
-    database=$(php -r '$global = require_once("config/autoload/global.php"); echo $global["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["dbname"***REMOVED***;')
-    username=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["user"***REMOVED***;')
-    password=$(php -r '$local = require_once("config/autoload/local.php"); echo $local["doctrine"***REMOVED***["connection"***REMOVED***["orm_default"***REMOVED***["params"***REMOVED***["password"***REMOVED***;')
-
-
-    echo "Deploy Develoment - Migrations/DB"
-    vendor/bin/database $database $username $password
+    Gear_Module_Schema_Reset "$module"
+    Gear_Module_Database_Up
 }
 
-function Gear_Module_Construct
+function Gear_Module_Execute_Construct
 {
     if [ $# -ne 6 ***REMOVED***; then
         echo "usage: module type scriptDir construct testLocal testCI"
@@ -274,7 +217,7 @@ function Gear_Module_Construct
         
         gearfile=${params[0***REMOVED***}
         migration=${params[1***REMOVED***}
-        
+         
          # COPY GEARFILE
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
 
@@ -291,7 +234,7 @@ function Gear_Module_Construct
 }
 
 
-function Gear_Module_Reconstruct
+function Gear_Module_Execute_Reconstruct
 {
     if [ $# -ne 6 ***REMOVED***; then
         echo "usage: module type scriptDir construct testLocal testCI"
@@ -309,19 +252,13 @@ function Gear_Module_Reconstruct
     scriptDir=${3}
     construct=${4}
     
-    
-    sudo php public/index.php gear schema delete $module --basepath=$basePath
-    sudo php public/index.php gear schema create $module --basepath=$basePath    
-    sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
-    sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
-    
     if [ "$construct" == "" ***REMOVED***; then
     	echo "Missing Construct"
     	exit 1
-    fi    
-    #echo "Array size: ${#construct[****REMOVED***}"
+    fi
+   
+    Gear_Module_Schema_Reset "$module"    
 
-    #echo "Array items:"
     for item in ${construct[****REMOVED***}
     do
     	
@@ -331,48 +268,19 @@ function Gear_Module_Reconstruct
         gearfile=${params[0***REMOVED***}
         migration=${params[1***REMOVED***}
         
-         # COPY GEARFILE
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
+        
+        if [ "$migration" != "" ***REMOVED***; then
+            Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
+            Gear_Util_PrepareForDb "$modulePath"
+        fi           
    
         Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
     done;
 }
 
 
-function Gear_Module_Run_Construct
-{
-    modulePath=${1}
-    module=${2}
-    basePath=${3}
-    type=${4}
-    gearfile=${5}
-    ignore=${6}
-    
-    if [ "$useOwnConstructor" == "0" ***REMOVED***; then
-        cd $modulePath    
-    else
-        cd $(Gear_Util_GetGearPath)
-    fi
-     
-    sudo php public/index.php gear module construct $module $basePath --file=$modulePath/$gearfile
-}
-
-
-function Gear_Module_Reload
-{
-    module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-    cd $modulePath
-    
-    sudo script/load.sh
-    sudo php public/index.php gear database module dump $module    
-    
-}
-
-
-
-function Gear_Module_Diagnostic
+function Gear_Module_Execute_Diagnostic
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
@@ -394,7 +302,7 @@ function Gear_Module_Diagnostic
 
 
 
-function Gear_Module_Upgrade
+function Gear_Module_Execute_Upgrade
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
@@ -414,8 +322,8 @@ function Gear_Module_Upgrade
     sudo php public/index.php gear module upgrade $module $basePath --type=$type
 }
 
-
-function Gear_Module_Run_Ant
+# Ok
+function Gear_Module_Execute_Ant
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
@@ -436,58 +344,4 @@ function Gear_Module_Run_Ant
    
     cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd jshint unit-coverage-ci karma protractor
     return
-}
-
-
-function Gear_Module_Run_CreateModule
-{
-    # PARAMS
-    basePath=$(Gear_Util_GetBasePath)
-
-    module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-    type=${2}
-
-    cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
-    --type=$type \
-    --force \
-    --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
-    
-    cd $modulePath && sudo script/deploy-development.sh
-}
-
-
-function Gear_Module_Run_DeleteModule
-{
-    module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-
-    if [ -d "$modulePath" ***REMOVED***; then
-        sudo rm -R $modulePath
-    fi
-}
-
-function Gear_Module_Util_GetModuleName
-{
-    if [ "${1}" == "" ***REMOVED***; then
-        
-        echo "Module"
-        return    
-        
-    fi    
-    
-    echo "${1}"
-}
-
-function Gear_Module_Util_GetModuleUrl
-{
-    echo $(sed -e 's/\([A-Z***REMOVED***\)/-\L\1/g' -e 's/^-//'  <<< "${1}")    
-}
-
-function Gear_Module_Util_GetModulePath
-{
-    file="$(Gear_Util_GetBasePath)/${1}"
-    echo $file
 }
