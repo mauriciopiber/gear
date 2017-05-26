@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\Resolver\TemplateMapResolver;
 use Gear\Creator\Template\TemplateService;
 use GearBase\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
@@ -39,30 +40,51 @@ trait UtilTestTrait
     /**
      * Cria Zend\View\Renderer\PhpRenderer
      */
-    public function mockPhpRenderer($templatePath)
+    public function mockPhpRenderer($templateMap = null)
     {
+        $templatePath = (new Module)->getLocation().'/../../view';
+
         $view = new PhpRenderer();
 
         $resolver = new AggregateResolver();
 
-        $map = new TemplatePathStack([
-            'script_paths' => [
-                'template' => $templatePath,
-            ***REMOVED***
-        ***REMOVED***);
+        //if ($templateMap == null) {
 
+            $map = new TemplatePathStack([
+                'script_paths' => [
+                    'template' => $templatePath,
+                ***REMOVED***
+            ***REMOVED***);
+
+            $resolver->attach($map);
+            $view->setResolver($resolver);
+
+            return $view;
+        //}
+
+            /*
+        $templates = [***REMOVED***;
+
+        foreach ($templateMap as $i => $temp) {
+            $templates[$temp***REMOVED*** = $templatePath.'/'.$temp;
+        }
+
+        $map = new TemplateMapResolver($templates);
         $resolver->attach($map);
-
         $view->setResolver($resolver);
 
         return $view;
+
+
+*/
+
     }
 
-    public function createFileCreator()
+    public function createFileCreator($templateMap = null)
     {
         if ($this->fileCreator === null) {
             $template       = new TemplateService();
-            $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
+            $template->setRenderer($this->mockPhpRenderer($templateMap));
 
             $fileService    = new FileService();
             $this->fileCreator = new FileCreator($fileService, $template);
