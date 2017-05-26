@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\FeatureTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Action\Action;
@@ -18,13 +18,18 @@ use Gear\Module;
 use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\Dir\DirService;
 use Gear\Mvc\Spec\Feature\Feature;
+use Gear\Column\ColumnService;
+use Gear\Table\TableService\TableService;
+use GearJson\Schema\SchemaService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Spec
  */
-class FeatureTest extends AbstractTestCase
+class FeatureTest extends TestCase
 {
     use AllColumnsDbTableTrait;
+    use UtilTestTrait;
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
@@ -33,8 +38,7 @@ class FeatureTest extends AbstractTestCase
     {
         parent::setUp();
 
-        vfsStream::setup('module');
-        $this->createDir('public/js/spec/e2e/index');
+        $this->createVirtualDir('module/public/js/spec/e2e/index');
 
         $this->assertFileExists(vfsStream::url('module/public/js/spec/e2e/index'));
 
@@ -47,11 +51,7 @@ class FeatureTest extends AbstractTestCase
 
         $this->string = new StringService();
 
-        $template       = new TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../../view'));
-
-        $fileService    = new FileService();
-        $this->fileCreator    = new FileCreator($fileService, $template);
+        $this->fileCreator = $this->createFileCreator(Feature::TEMPLATE);
 
         $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/spec';
 
@@ -63,25 +63,19 @@ class FeatureTest extends AbstractTestCase
         $this->feature->setDirService($this->dir);
         $this->feature->setModule($this->module->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->feature->setTableService($this->table->reveal());
-    }
 
-    public function createDir($dir)
-    {
-        $pieces = explode('/', $dir);
-        $fullpath = '';
+        $this->column = $this->prophesize(ColumnService::class);
+        $this->feature->setColumnService($this->column->reveal());
 
-        foreach ($pieces as $i => $piece) {
-            $fullpath .= (($i > 0) ? '/' : '').$piece;
-            vfsStream::newDirectory($fullpath)->at(vfsStreamWrapper::getRoot());
-        }
+        $this->schema = $this->prophesize(SchemaService::class);
+        $this->feature->setSchemaService($this->schema->reveal());
     }
 
     public function testIntrospectFromTable()
     {
         $this->feature->setGearVersion('0.0.99');
-
         $this->table->isNullable('myTable')->willReturn(true)->shouldBeCalled();
         $this->table->hasUniqueConstraint('myTable')->willReturn(true)->shouldBeCalled();
 
@@ -111,22 +105,8 @@ class FeatureTest extends AbstractTestCase
             ***REMOVED***
         ***REMOVED***);
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->schema->getControllerByDb($table)->willReturn($controller)->shouldBeCalled();
-
-        $this->feature->setSchemaService($this->schema->reveal());
-
-        /**
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => 'MyController'
-        ***REMOVED***);*/
-
-        $this->columns = $this->prophesize('Gear\Column\ColumnService');
-        $this->columns->getColumns($table)->willReturn([***REMOVED***)->shouldBeCalled();
-
-        $this->feature->setColumnService($this->columns->reveal());
-
+        $this->column->getColumns($table)->willReturn([***REMOVED***)->shouldBeCalled();
 
         $file = $this->feature->introspectFromTable($table);
 
@@ -140,10 +120,7 @@ class FeatureTest extends AbstractTestCase
      */
     public function testCreateAction()
     {
-
-        $this->feature->setDirService($this->dir);
         $this->feature->setGearVersion('0.0.99');
-        $this->feature->setModule($this->module->reveal());
 
         $controller = new Controller(['name' => 'MyController'***REMOVED***);
 
@@ -164,7 +141,6 @@ class FeatureTest extends AbstractTestCase
 
     public function testCreateIndexFeature()
     {
-        $this->feature->setModule($this->module->reveal());
         $file = $this->feature->createIndexFeature();
 
         $expected = $this->template.'/module.feature.phtml';
@@ -178,7 +154,6 @@ class FeatureTest extends AbstractTestCase
 
     public function testCreateIndexFeatureProject()
     {
-        $this->feature->setModule($this->module->reveal());
         $file = $this->feature->createIndexFeature('MyProject');
 
         $expected = $this->template.'/module.feature.project.phtml';
@@ -216,16 +191,10 @@ class FeatureTest extends AbstractTestCase
     {
         $db = $action->getController()->getDb();
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsNotNull())->shouldBeCalled();
-        $this->feature->setColumnService($this->column->reveal());
-        $this->feature->setModule($this->module->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(false)->shouldBeCalled();
-
-        $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);
 
@@ -237,29 +206,51 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
+    public function testBuildEditUserTypeStrict()
+    {
+        $this->assertTrue(false);
+    }
+
+    public function testBuildEditUserTypeLowStrict()
+    {
+        $this->assertTrue(false);
+    }
+
+    public function testBuildViewUserTypeLowStrict()
+    {
+        $this->assertTrue(false);
+    }
+
+    public function mockMyAction($usertype = 'all')
+    {
+        $action = new Action([
+            'name' => 'MyAction',
+            'controller' => new Controller(
+                [
+                    'name' => 'MyController',
+                    'object' => '%s\Controller\MyController',
+                    'db' => 'MyController',
+                    'user' => $usertype
+                ***REMOVED***
+            ),
+        ***REMOVED***);
+
+        return $action;
+    }
+
     /**
      * @group n1w
      */
     public function testBuildCreateUniqueNotNullAction()
     {
-        $db = new Db(['table' => 'MyController'***REMOVED***);
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
-        ***REMOVED***);
+        $action = $this->mockMyAction();
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsUniqueNotNull())->shouldBeCalled();
+        $this->column->getColumns(
+            $action->getController()->getDb())
+        ->willReturn($this->getAllPossibleColumnsUniqueNotNull())->shouldBeCalled();
 
-        $this->feature->setColumnService($this->column->reveal());
-
-        $this->feature->setModule($this->module->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(true)->shouldBeCalled();
-
-        $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildCreateAction($action);
 
@@ -367,17 +358,10 @@ class FeatureTest extends AbstractTestCase
             'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
         ***REMOVED***);
 
-        $this->feature->setModule($this->module->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->feature->setColumnService($this->column->reveal());
-
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->isNullable('MyController')->willReturn($nullable)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn($unique)->shouldBeCalled();
-        $this->feature->setTableService($this->table->reveal());
 
         $file = $this->feature->buildEditAction($action);
 
@@ -390,21 +374,47 @@ class FeatureTest extends AbstractTestCase
 
     }
 
-    public function testBuildListAction()
+
+    public function testBuildListUserTypeStrict()
     {
-        $db = new Db(['table' => 'MyController'***REMOVED***);
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
-        ***REMOVED***);
+        $action = $this->mockMyAction('strict');
+        $db = $action->getController()->getDb();
 
-        $this->feature->setModule($this->module->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
 
+        $file = $this->feature->buildListAction($action);
 
-        $this->feature->setColumnService($this->column->reveal());
+        $expected = $this->template.'/list.strict.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+
+    public function testBuildListUserTypeLowStrict()
+    {
+        $action = $this->mockMyAction('low-strict');
+        $db = $action->getController()->getDb();
+
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+
+        $file = $this->feature->buildListAction($action);
+
+        $expected = $this->template.'/list.lowstrict.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+    }
+
+    public function testBuildListAction()
+    {
+        $action = $this->mockMyAction();
+        $db = $action->getController()->getDb();
+        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
 
         $file = $this->feature->buildListAction($action);
 
@@ -417,21 +427,15 @@ class FeatureTest extends AbstractTestCase
 
     }
 
+    /**
+     * @group mx
+     */
     public function testBuildViewAction()
     {
-        $db = new Db(['table' => 'MyController'***REMOVED***);
+        $action = $this->mockMyAction();
+        $db = $action->getController()->getDb();
 
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
-        ***REMOVED***);
-
-        $this->feature->setModule($this->module->reveal());
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
-
-        $this->feature->setColumnService($this->column->reveal());
 
         $file = $this->feature->buildViewAction($action);
 
@@ -443,14 +447,44 @@ class FeatureTest extends AbstractTestCase
         );
     }
 
+    /**
+     * @group feature-delete
+     */
+    public function testBuildDeleteLowStrictAction()
+    {
+        $action = $this->mockMyAction('low-strict');
+        $file = $this->feature->buildDeleteAction($action);
+
+        $expected = $this->template.'/delete.lowstrict.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+            );
+    }
+
+    /**
+     * @group feature-delete
+     */
+    public function testBuildDeleteStrictAction()
+    {
+        $action = $this->mockMyAction('strict');
+        $file = $this->feature->buildDeleteAction($action);
+
+        $expected = $this->template.'/delete.strict.feature.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+            );
+    }
+
+    /**
+     * @group feature-delete
+     */
     public function testBuildDeleteAction()
     {
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
-        ***REMOVED***);
-
-        $this->feature->setModule($this->module->reveal());
+        $action = $this->mockMyAction();
 
         $file = $this->feature->buildDeleteAction($action);
 
@@ -471,8 +505,6 @@ class FeatureTest extends AbstractTestCase
             'name' => 'MyAction',
             'controller' => new Controller(['name' => 'MyTableController', 'db' => 'MyTable'***REMOVED***),
         ***REMOVED***);
-
-        $this->feature->setModule($this->module->reveal());
 
         $file = $this->feature->buildUploadImageAction($action);
 

@@ -92,7 +92,7 @@ return [
     ***REMOVED***,
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=project_mvc;host=localhost',
+        'dsn' => 'mysql:dbname=gear;host=localhost',
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ***REMOVED***
@@ -106,7 +106,7 @@ return [
                 'params' => [
                     'host' => 'localhost',
                     'port' => '3306',
-                    'dbname' => 'project_mvc',
+                    'dbname' => 'gear',
                     'charset' => 'utf8'
                 ***REMOVED***
             ***REMOVED***

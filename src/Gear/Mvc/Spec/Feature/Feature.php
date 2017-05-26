@@ -11,6 +11,10 @@ class Feature extends AbstractMvcTest
 {
     protected $dbLocation;
 
+    const TEMPLATE = [
+        'view' => 'template/module/mvc/spec/feature/view.feature.phtml'
+    ***REMOVED***;
+
     public function introspectFromTable(Db $table)
     {
         $this->db = $table;
@@ -349,7 +353,7 @@ class Feature extends AbstractMvcTest
 
         $fileCreator = $this->getFileCreator();
 
-        $fileCreator->setView('template/module/mvc/spec/feature/view.feature.phtml');
+        $fileCreator->setView(self::TEMPLATE['view'***REMOVED***);
         $fileCreator->setOptions($options);
         $fileCreator->setFileName($nameFile);
         $fileCreator->setLocation($location);

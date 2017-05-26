@@ -278,6 +278,10 @@ function Gear_Module_Execute_Reconstruct
    
         Gear_Module_Run_Construct "$modulePath" "$module" "$basePath" "$type" "$(basename $gearfile)"
     done;
+   
+    if [ "$type" == "web" ***REMOVED***; then
+        Gear_Module_Reload "$module"
+    fi
 }
 
 
