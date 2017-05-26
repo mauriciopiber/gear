@@ -20,10 +20,15 @@ function Gear_Module_Delete_Constructor_Files
         sudo rm -R $modulePath/public/js	
     fi
 
+    Gear_Module_Delete_Migrations "$modulePath"
+}
+
+function Gear_Module_Delete_Migrations
+{
+    modulePath=${1}
     if [ "$(ls -A $modulePath/data/migrations)" ***REMOVED***; then 
     	sudo rm -R $modulePath/data/migrations/* 
-    fi       
-
+    fi           
 }
 
 function Gear_Module_Schema_Reset

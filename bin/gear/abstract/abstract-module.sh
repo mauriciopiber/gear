@@ -271,6 +271,7 @@ function Gear_Module_Execute_Reconstruct
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
         
         if [ "$migration" != "" ***REMOVED***; then
+        	Gear_Module_Delete_Migrations "$modulePath"
             Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
             Gear_Util_PrepareForDb "$modulePath"
         fi           
