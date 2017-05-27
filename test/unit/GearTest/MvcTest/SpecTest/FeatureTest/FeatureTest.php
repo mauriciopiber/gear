@@ -450,22 +450,6 @@ class FeatureTest extends TestCase
     /**
      * @group feature-delete
      */
-    public function testBuildDeleteLowStrictAction()
-    {
-        $action = $this->mockMyAction('low-strict');
-        $file = $this->feature->buildDeleteAction($action);
-
-        $expected = $this->template.'/delete.lowstrict.feature.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-            );
-    }
-
-    /**
-     * @group feature-delete
-     */
     public function testBuildDeleteStrictAction()
     {
         $action = $this->mockMyAction('strict');
@@ -476,7 +460,7 @@ class FeatureTest extends TestCase
         $this->assertEquals(
             file_get_contents($expected),
             file_get_contents($file)
-            );
+        );
     }
 
     /**

@@ -6,6 +6,13 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Db\Db;
 use GearTest\AllColumnsDbTableTrait;
+use GearTest\UtilTestTrait;
+use Gear\Module;
+use Gear\Module\BasicModuleStructure;
+use Gear\Mvc\Spec\Step\Step;
+use GearBase\Util\String\StringService;
+use GearBase\Util\Dir\DirService;
+use Gear\Column\ColumnService;
 
 /**
  * @group Spec
@@ -15,34 +22,29 @@ class StepTest extends AbstractTestCase
 {
     use AllColumnsDbTableTrait;
 
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();
-        vfsStream::setup('module');
-        vfsStream::newDirectory('public')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec/e2e')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('public/js/spec/e2e/index')->at(vfsStreamWrapper::getRoot());
-
+        $this->createVirtualDir('module/public/js/spec/e2e/index');
         $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();
 
+        $this->string = new StringService();
+        $this->fileCreator = $this->createFileCreator();
 
+        $this->template = (new Module())->getLocation().'/../../test/template/module/mvc/step';
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->step = new Step();
+        $this->step->setModule($this->module->reveal());
+        $this->step->setStringService($this->string);
+        $this->step->setFileCreator($this->fileCreator);
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
-
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-
-        $this->template = (new \Gear\Module())->getLocation().'/../../test/template/module/mvc/step';
     }
 
     /**
@@ -52,12 +54,7 @@ class StepTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $feature = new \Gear\Mvc\Spec\Step\Step();
-        $feature->setModule($this->module->reveal());
-        $feature->setStringService($this->string);
-        $feature->setFileCreator($this->fileCreator);
-
-        $file = $feature->createIndexStep();
+        $file = $this->step->createIndexStep();
 
         $expected = $this->template.'/module.step.phtml';
 
@@ -71,19 +68,14 @@ class StepTest extends AbstractTestCase
     {
         $db = new Db(['table' => 'MyController'***REMOVED***);
 
-        $this->feature = new \Gear\Mvc\Spec\Step\Step();
-        $this->feature->setModule($this->module->reveal());
-        $this->feature->setStringService($this->string);
-        $this->feature->setFileCreator($this->fileCreator);
 
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column = $this->prophesize(ColumnService::class);
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
 
-        $this->feature->setDirService(new \GearBase\Util\Dir\DirService());
-        $this->feature->setColumnService($this->column->reveal());
+        $this->step->setDirService(new DirService());
+        $this->step->setColumnService($this->column->reveal());
 
-        $file = $this->feature->createTableStep($db);
+        $file = $this->step->createTableStep($db);
 
         $expected = $this->template.'/table.stepDefinitions.phtml';
 
