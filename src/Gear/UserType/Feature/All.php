@@ -9,7 +9,7 @@ class All implements UserTypeFeatureInterface
 
     const TOTAL_PAGE = 10;
 
-    const FILTER_ITERATOR = 20;
+    const FILTER_ITERATOR = 21;
 
     public function getFilterIterator()
     {
