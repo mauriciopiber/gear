@@ -12,12 +12,13 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
     Então eu vejo o título "Listar <?php echo $this->tableLabel;?> - Admin PiberNetwork"
     E eu vejo o título central "<?php echo $this->tableLabel;?>"
     E eu vejo o breadscrumb "<?php echo $this->moduleLabel;?> / <?php echo $this->tableLabel;?> / Listar"
-    E eu vejo "10" ítens cadastrados
-    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    E eu vejo "<?php echo $this->totalPage;?>" ítens cadastrados
+    E eu vejo que está "Mostrando <?php echo $this->paginator;?>" na paginação
 <?php echo $this->assert;?>
     E eu vejo o botão de Criar
     E eu vejo o botão de Exibir Filtro
 
+<?php if ($this->usePaginator === true) :?>
   @pagination
   Cenário: Paginar os resultados da listagem
     Dado que eu estou logado na página principal
@@ -28,12 +29,13 @@ Funcionalidade: Listar <?php echo $this->tableLabel;?> cadastrados.
     Então eu vejo o ítem ID "20" na linha "1"
     E eu vejo o ítem ID "11" na linha "10"
 
+<?php endif; ?>
   @filter
   Cenário: Filtrar os resultados da listagem
     Dado que eu estou logado na página principal
     E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
-    E eu vejo "10" ítens cadastrados
-    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    E eu vejo "<?php echo $this->totalPage;?>" ítens cadastrados
+    E eu vejo que está "Mostrando <?php echo $this->paginator;?>" na paginação
     Quando eu clico em Exibir Filtro
     E eu digito "<?php echo $this->firstValue;?>" no filtro "Palavra Chave"
     Então eu vejo "1" ítens cadastrados

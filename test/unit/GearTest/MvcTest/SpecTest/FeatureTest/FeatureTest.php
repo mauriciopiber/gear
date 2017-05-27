@@ -206,20 +206,6 @@ class FeatureTest extends TestCase
         );
     }
 
-    public function testBuildEditUserTypeStrict()
-    {
-        $this->assertTrue(false);
-    }
-
-    public function testBuildEditUserTypeLowStrict()
-    {
-        $this->assertTrue(false);
-    }
-
-    public function testBuildViewUserTypeLowStrict()
-    {
-        $this->assertTrue(false);
-    }
 
     public function mockMyAction($usertype = 'all')
     {
@@ -374,7 +360,9 @@ class FeatureTest extends TestCase
 
     }
 
-
+    /**
+     * @group feature-list
+     */
     public function testBuildListUserTypeStrict()
     {
         $action = $this->mockMyAction('strict');
@@ -392,24 +380,9 @@ class FeatureTest extends TestCase
         );
     }
 
-
-    public function testBuildListUserTypeLowStrict()
-    {
-        $action = $this->mockMyAction('low-strict');
-        $db = $action->getController()->getDb();
-
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
-
-        $file = $this->feature->buildListAction($action);
-
-        $expected = $this->template.'/list.lowstrict.feature.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
-        );
-    }
-
+    /**
+     * @group feature-list
+     */
     public function testBuildListAction()
     {
         $action = $this->mockMyAction();

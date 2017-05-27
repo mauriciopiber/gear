@@ -12,8 +12,8 @@ Funcionalidade: Listar My Controller cadastrados.
     Então eu vejo o título "Listar My Controller - Admin PiberNetwork"
     E eu vejo o título central "My Controller"
     E eu vejo o breadscrumb "My Module / My Controller / Listar"
-    E eu vejo "10" ítens cadastrados
-    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    E eu vejo "5" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 5 de 5" na paginação
     E eu vejo o campo "My Controller" com o valor "30" na linha "1"
     E eu vejo o campo "Date Column" com o valor "2007-06-30" na linha "1"
     E eu vejo o campo "Date Pt Br Column" com o valor "30/06/2007" na linha "1"
@@ -32,24 +32,14 @@ Funcionalidade: Listar My Controller cadastrados.
     E eu vejo o botão de Criar
     E eu vejo o botão de Exibir Filtro
 
-  @pagination
-  Cenário: Paginar os resultados da listagem
-    Dado que eu estou logado na página principal
-    E eu clico no menu "My Module - My Controller - Listar"
-    E eu vejo o ítem ID "30" na linha "1"
-    E eu vejo o ítem ID "21" na linha "10"
-    Quando eu clico na paginação "2"
-    Então eu vejo o ítem ID "20" na linha "1"
-    E eu vejo o ítem ID "11" na linha "10"
-
   @filter
   Cenário: Filtrar os resultados da listagem
     Dado que eu estou logado na página principal
     E eu clico no menu "My Module - My Controller - Listar"
-    E eu vejo "10" ítens cadastrados
-    E eu vejo que está "Mostrando 1 - 10 de 30" na paginação
+    E eu vejo "5" ítens cadastrados
+    E eu vejo que está "Mostrando 1 - 5 de 5" na paginação
     Quando eu clico em Exibir Filtro
-    E eu digito "20Varchar Column" no filtro "Palavra Chave"
+    E eu digito "12Varchar Column" no filtro "Palavra Chave"
     Então eu vejo "1" ítens cadastrados
     E eu vejo que está "Mostrando 1 - 1 de 1" na paginação
 
