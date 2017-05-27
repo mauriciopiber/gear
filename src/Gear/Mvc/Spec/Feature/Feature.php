@@ -6,6 +6,7 @@ use GearJson\Action\Action;
 use GearJson\Db\Db;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Integer\PrimaryKey;
+use Gear\UserType\Feature\Strict;
 
 class Feature extends AbstractMvcTest
 {
@@ -264,10 +265,20 @@ class Feature extends AbstractMvcTest
     {
         $this->db = $action->getController()->getDb();
 
+        $this->userType = $this->getUserType($this->db);
+
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
         $options = $this->getSpecOptions($action);
+
+        $options['paginator'***REMOVED*** = $this->userType->getPaginator();
+        $options['totalPage'***REMOVED*** = $this->userType->getTotalPage();
+
+        $options['usePaginator'***REMOVED*** = $this->userType instanceof Strict
+            ? false
+            : true;
+
 
         $options['assert'***REMOVED*** = $this->buildListActionCreateAssert();
         $options['firstValue'***REMOVED*** = $this->buildListFirstValue();
@@ -413,7 +424,7 @@ class Feature extends AbstractMvcTest
      */
     public function buildListFirstValue()
     {
-        $iterator = 20;
+        $iterator = $this->userType->getFilterIterator();
 
         $columns = $this->getColumnService()->getColumns($this->db);
 
