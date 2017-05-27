@@ -283,6 +283,15 @@ class Feature extends AbstractMvcTest
         return $fileCreator->render();
     }
 
+
+    public function getUserType(Db $db)
+    {
+        $userType = $this->str('class', $db->getUser());
+        $userClass = sprintf('\Gear\UserType\Feature\%s', $userType);
+        $user = new $userClass();
+        return $user;
+    }
+
     /**
      * Cria o arquivo delete.feature para testes de Integração do Mvc
      *
@@ -294,6 +303,8 @@ class Feature extends AbstractMvcTest
     {
         $this->db = $action->getController()->getDb();
 
+        $this->userType = $this->getUserType($this->db);
+
         $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
 
@@ -304,6 +315,7 @@ class Feature extends AbstractMvcTest
         }
 
         $options = [
+            'expectedCountOnList' => $this->userType->getExpectedCountOnList(),
             'module' => $this->getModule()->getModuleName(),
             'table' => $this->str('label', $action->getController()->getDb()->getTable()),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
