@@ -327,6 +327,18 @@ function Gear_Module_Execute_Upgrade
     sudo php public/index.php gear module upgrade $module $basePath --type=$type
 }
 
+
+function Gear_Module_Execute_Custom
+{
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    cd $modulePath
+    $(${2})
+}
+
+
 # Ok
 function Gear_Module_Execute_Ant
 {
