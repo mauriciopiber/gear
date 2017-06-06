@@ -6,7 +6,7 @@
      */
     public function uploadImageAction()
     {
-        $this->getImageService()->appendPlugin();
+        $this->appendUploadImagePlugin();
 
         $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 

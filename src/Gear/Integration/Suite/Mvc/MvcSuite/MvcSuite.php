@@ -154,7 +154,7 @@ class MvcSuite
             ['strict'***REMOVED***,
             [['unique', 'nullable'***REMOVED******REMOVED***,
             ['upload_image'***REMOVED***,
-            false
+            $longname
         );
     }
 }

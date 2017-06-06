@@ -227,7 +227,7 @@ EOS;
         $tableId = $this->str('var-length', 'id'.$tableName);
 
         return <<<EOS
-        \$images = \$this->getImageService()->query('$tableUrl', array(), \${$tableId});
+        \$images = \$this->getImageService()->findByContextId(\${$tableId}, '$tableUrl');
 
 EOS;
     }
@@ -240,8 +240,8 @@ EOS;
         <div class="form-group">
             <h4><?php echo \$this->translate('Images of');?> $tableLabel</h4>
             <?php foreach (\$this->images as \$image) :?>
-                <a class="fancybox" rel="group" href="<?php echo sprintf(\$image->getUploadImage(), 'lg');?>">
-                    <img src="<?php echo sprintf(\$image->getUploadImage(), 'pre');?>" alt="" />
+                <a class="fancybox" rel="group" href="/<?php echo sprintf(\$image->getUploadImage(), 'lg');?>">
+                    <img src="/<?php echo sprintf(\$image->getUploadImage(), 'pre');?>" alt="" />
                 </a>
             <?php endforeach;?>
         </div>

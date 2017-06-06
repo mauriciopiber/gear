@@ -17,11 +17,18 @@ if [ "$cmd" == "custom" ***REMOVED***; then
 	exit 0
 fi
 
-if [ "$cmd" == "restore" ***REMOVED***; then
+if [ "$cmd" == "restore-module" ***REMOVED***; then
 	
-	/bin/bash "$bin/gear/module/gear-module" "restore" "$module" "$type"
+	/bin/bash "$bin/gear/module/gear-module" "restore-module" "$module" "$type"
 	exit 0
 fi
+
+if [ "$cmd" == "restore-data" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "restore-data" "$module" "$type"
+	exit 0
+fi
+
 
 if [ "$cmd" == "create" ***REMOVED***; then
 	

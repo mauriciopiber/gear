@@ -1,0 +1,6 @@
+db:
+    - { table: MvcUploadImageTable, user: all, namespace: MvcUploadImageTable, service: factories }
+    - { table: MvcUploadImageColumn, user: all, namespace: MvcUploadImageColumn, service: factories, columns: { image_one: upload-image, image_two: upload-image} }
+    - { table: MvcUploadImageAll, user: all, namespace: MvcUploadImageAll, service: factories, columns: { image_three: upload-image, image_four: upload-image} }
+src:
+    - { name: UploadImage, type: Entity, db: UploadImage }
