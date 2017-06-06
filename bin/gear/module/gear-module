@@ -8,6 +8,7 @@ worker="module"
 
 source "$functions/init.sh"
 
+
 if [ "$cmd" == "diagnostic" ***REMOVED***; then
 
     # Params
@@ -47,7 +48,7 @@ if [ "$cmd" == "upgrade" ***REMOVED***; then
 	exit 0
 fi
 
-if [ "$cmd" == "restore" ***REMOVED***; then
+if [ "$cmd" == "restore-module" ***REMOVED***; then
 
     # Params
     if [ $# -lt 2 ***REMOVED***; then
@@ -55,10 +56,24 @@ if [ "$cmd" == "restore" ***REMOVED***; then
         exit 1
     fi
     
-    Gear_Module_Execute_Restore "${2}" "${3}"
+    Gear_Module_Execute_Restore_Module "${2}" "${3}"
 	
 	exit 0
 fi
+
+
+if [ "$cmd" == "restore-data" ***REMOVED***; then
+    # Params
+    if [ $# -lt 2 ***REMOVED***; then
+        echo "usage $0: command module type"
+        exit 1
+    fi
+    
+    Gear_Module_Execute_Restore_Data "${2}" "${3}"
+	
+	exit 0
+fi
+
 
 if [ "$cmd" == "create" ***REMOVED***; then
 

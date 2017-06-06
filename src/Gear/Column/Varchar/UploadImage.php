@@ -444,8 +444,7 @@ EOS;
     {
         $module = $this->getModule()->getModuleName();
         return <<<EOS
-        \$module = new \\$module\Module();
-        \$moduleDir = \$module->getLocation();
+        \$moduleDir = new \\$module\Module();
 
 EOS;
     }
@@ -551,12 +550,10 @@ EOS;
         //{$location}
         $var = $this->str('var', $this->column->getName());
         return <<<EOS
-                '$var' =>
-                \$this->createUploadImageFixture(
-                    '$contexto',
-                    '$var',
-                    '$iterator',
-                    \$moduleDir
+                '$var' => \$this->createUploadImageColumnFixture(
+                    \$moduleDir,
+                    '$contexto-$var',
+                    '$iterator'
                 ),
 
 EOS;
@@ -770,7 +767,7 @@ EOS;
         </div>
         <div class="form-group">
             <?php if (\$this->$elementName) : ?>
-                <img src="<?php echo \$this->$elementName;?>"/>
+                <img src="/<?php echo \$this->$elementName;?>"/>
             <?php endif;?>
         </div>
 
@@ -826,7 +823,7 @@ EOS;
             <td><?php echo \$this->translate('$label');?></td>
             <td>
                 <?php if (\$this->$elementName !== null) : ?>
-                    <img src="<?php echo str_replace('/public', '', sprintf(\$this->$elementName, 'pre'));?>">
+                    <img src="/<?php echo sprintf(\$this->$elementName, 'pre');?>">
                 <?php endif; ?>
             </td>
         </tr>

@@ -98,7 +98,9 @@ function Gear_Module_Execute_Clear
     Gear_Module_Run_CreateModule "$module" "$type"
 }
 
-function Gear_Module_Execute_Restore
+
+
+function Gear_Module_Execute_Restore_Data
 {
     # Params
     if [ $# -lt 2 ***REMOVED***; then
@@ -108,7 +110,43 @@ function Gear_Module_Execute_Restore
    
     module=$(Gear_Module_Util_GetModuleName "${1}")
     type=${2}
-   
+    
+    basePath=$(Gear_Util_GetBasePath)
+
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    cd $modulePath
+    
+    if [ -f "data/$moduleUrl.mysql.sql" ***REMOVED*** ; then
+        sudo rm data/$moduleUrl.mysql.sql
+    fi
+    Gear_Module_Database_Up
+    sudo vendor/bin/unload-module BjyAuthorize
+    sudo vendor/bin/phinx migrate
+    #Gear_Module_Deploy_Up $module
+    #sudo php public/index.php gear database module dump $module
+}
+
+function Gear_Module_Execute_Restore_Module
+{
+    # Params
+    if [ $# -lt 2 ***REMOVED***; then
+        echo "usage: module type"
+        exit 1
+    fi
+
+    basePath=$(Gear_Util_GetBasePath)
+
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+           
+    type=${2}
+
+    sudo rm -R $modulePath/schema    
+    
     Gear_Module_Run_CreateModule "$module" "$type"
 }
 
@@ -257,7 +295,10 @@ function Gear_Module_Execute_Reconstruct
     	exit 1
     fi
    
+    cd $modulePath
+    
     Gear_Module_Schema_Reset "$module"    
+    Gear_Module_Database_Up
 
     for item in ${construct[****REMOVED***}
     do
@@ -340,6 +381,7 @@ function Gear_Module_Execute_Custom
 
 
 # Ok
+
 function Gear_Module_Execute_Ant
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")

@@ -124,7 +124,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
      */
     public function getUploadDir()
     {
-        $uploadDir = '/../../public/upload/';
+        $uploadDir = 'public/upload';
         return $uploadDir;
     }
 
@@ -134,7 +134,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
      */
     public function getRefDir()
     {
-        $refDir    = '/upload';
+        $refDir    = 'upload';
         return $refDir;
     }
 

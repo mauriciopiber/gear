@@ -44,6 +44,20 @@ function Gear_Module_Schema_Reset
 }
 
 
+
+function Gear_Module_Deploy_Up
+{
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    cd $modulePath
+    
+    sudo vendor/bin/phinx migrate
+    sudo script/load.sh
+}
+
+
+
 function Gear_Module_Reload
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
