@@ -204,9 +204,6 @@ EOS;
     /**
      * Formata a saida para ser utizada em Gear\Mvc\Fixture\FixtureService
      *
-     * {@inheritDoc}
-     * @see \Gear\Column\AbstractColumn::getFixture()
-     *
      * @param int $iterator Número base.
      *
      * @return string

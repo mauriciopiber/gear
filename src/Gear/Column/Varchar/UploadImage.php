@@ -77,6 +77,12 @@ class UploadImage extends Varchar implements
     {
     }
 
+    /**
+     * @deprecated
+     *
+     * {@inheritDoc}
+     * @see \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface::getServiceSetUp()
+     */
     public function getServiceSetUp()
     {
         $table = $this->str('class', $this->column->getTableName());
@@ -89,6 +95,12 @@ class UploadImage extends Varchar implements
 EOS;
     }
 
+    /**
+     * @deprecated
+     *
+     * {@inheritDoc}
+     * @see \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface::getServiceFixtureData()
+     */
     public function getServiceFixtureData()
     {
         $columnName = $this->str('var', $this->column->getName());
@@ -100,6 +112,8 @@ EOS;
     }
 
     /**
+     * @deprecated
+     *
      * Cria a configuração do Form para Upload de Image nos Controllers.
      */
     public function getControllerSetUp()
@@ -113,6 +127,7 @@ EOS;
 
 
     /**
+     * @TODO FIX 1
      * Gera o Mock necessário para testar o método create do service adicionado na v1.0.0.
      */
     public function getServiceCreateMock()
@@ -141,6 +156,7 @@ EOS;
     }
 
     /**
+     * @TODO FIX 2
      * Gera o Mock necessário para testar o método update do service adicionado na v1.0.0.
      */
     public function getServiceUpdateMock()
@@ -169,6 +185,8 @@ EOS;
     }
 
     /**
+     * Usado em Mvc/Filter
+     *
      * Cria código pra preparar o filtro para passar com sucesso.
      * Nesse caso, é necessário desativar a verificação padrão do Zend para Upload de Arquivos.
      */
@@ -182,6 +200,8 @@ EOS;
     }
 
     /**
+     * Used on Mvc/Spec/Step
+     *
      * @param int $iterator Número base
      *
      * @return string
@@ -209,6 +229,8 @@ EOS;
     }
 
     /**
+     * Used on Mvc\Spec\Feature
+     *
      * Cria caminho da ímagem para ser utilizada exclusivamente
      * na verificação de upload realizado com sucesso no e2e.
      *
@@ -225,6 +247,8 @@ EOS;
     }
 
     /**
+     * Used on Mvc\Spec\Feature
+     *
      * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
      * @param int $default Número Base
@@ -244,6 +268,8 @@ EOS;
     }
 
     /**
+     * Used on Mvc\Spec\Feature
+     *
      * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
      * @param int $default Número Base
@@ -272,6 +298,8 @@ EOS;
     }
 
     /**
+     * Used on Mvc\Spec\Feature
+     *
      * Cria código para verificação da exibição da coluna em spec feature Gear\Mvc\Spec\Feature\Feature.
      *
      * @param int $default Número Base
@@ -291,20 +319,8 @@ EOS;
         return $view;
     }
 
-
     /**
-     * @deprecated Não está sendo utilizado em lugar nenhum, perderá validade se certificar que não é usado.
-     *
-     * @param array $settings Configuração
-     *
-     * @return void
-     */
-    public function setSettings($settings)
-    {
-        $this->settings = $settings;
-    }
-
-    /**
+     * @TODO FIX 3
      * Cria comandos que são inseridos antes de mostrar a view, utilizados em Gear\Mvc\Controller\ControllerService
      *
      * @return string
@@ -323,6 +339,8 @@ EOS;
     }
 
     /**
+     * @TODO FIX 4
+     *
      * Cria comandos de declaração das variáveis que serão utilizados em Gear\Mvc\Controller\ControllerService
      *
      * @return string
@@ -336,6 +354,8 @@ EOS;
     }
 
     /**
+     * @TODO FIX 5
+     *
      * Cria comandos de declaração das variáveis que serão enviadas para a view utilizados em
      * Gear\Mvc\Controller\ControllerService
      *
@@ -353,6 +373,7 @@ EOS;
     }
 
     /**
+     * @TODO FIX 6
      * Cria comando que será executado em caso de falha na validação em Gear\Mvc\Controller\ControllerService
      *
      * @return string
@@ -368,30 +389,6 @@ EOS;
 
 EOS;
     }
-
-    /**
-     * @deprecated Antiga função utilizada para os testes do Codeception
-     *
-     * Cria o código para ser utilizado em Gear\Service\AbstractJsonService
-     *
-     * @param int $numberReference Número base.
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\AbstractColumn::getFixture()
-     *
-     * @return string
-     */
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value =  $this->str('var', $this->column->getName());
-
-        return <<<EOS
-                '$name' => \$this->{$value},
-
-EOS;
-    }
-
 
     /**
      * Cria o código para ser inserido no service em Gear\Mvc\Service\ServiceService
@@ -419,23 +416,6 @@ EOS;
     }
 
     /**
-     * @deprecated será alterada a funcionalidade de selectOneBy do Repository, possivelmente será modificado
-     *
-     * @param int $number Número base
-     *
-     * @return string
-     */
-    public function selectOneBy($number)
-    {
-        $table = $this->str('url', $this->column->getTableName());
-        $var = $this->str('var', $this->column->getName());
-        $iterator = sprintf('%02d', $number);
-        return <<<EOS
-/upload/$table-$var/%s{$iterator}{$var}.gif
-EOS;
-    }
-
-    /**
      * Cria código preparado para fixture em Gear\Mvc\Fixture\FixtureService
      *
      * @return string
@@ -446,24 +426,6 @@ EOS;
         return <<<EOS
         \$moduleDir = new \\$module\Module();
 
-EOS;
-    }
-
-
-    /**
-     * @deprecated será alterada a funcionalidade de getOrderBy do Repository, possivelmente será modificado
-     *
-     * @param int $iterator Número base
-     *
-     * @return string
-     */
-    public function getOrderBy($iterator)
-    {
-        $table = $this->str('url', $this->column->getTableName());
-        $var = $this->str('var', $this->column->getName());
-        $iterator = sprintf('%02d', $iterator);
-        return <<<EOS
-/upload/$table-$var/%s{$iterator}{$var}.gif
 EOS;
     }
 
@@ -560,6 +522,7 @@ EOS;
     }
 
     /**
+     * @TODO FIX
      * Utilizado para deletar as imagens no service em Gear\Mvc\Service\ServiceService
      *
      * @return string
@@ -654,6 +617,8 @@ EOS;
     }
 
     /**
+     * @TODO FIX
+     *
      * Cria o que manda a imagem para o GearImage processar em Gear\Mvc\Service\ServiceService
      *
      * {@inheritDoc}
@@ -680,6 +645,7 @@ EOS;
     }
 
     /**
+     * @TODO FIX
      * Gear o código que manda a imagem para GearImage em Gear\Mvc\Service\ServiceService
      *
      * {@inheritDoc}
@@ -897,24 +863,6 @@ EOS;
     }
 
     /**
-     * @deprecated Não foram encontrados registros do método ser utilizado
-     *
-     * @param string $testName Nome do arquivo
-     *
-     * @return string
-     */
-    public function getFullPath($testName)
-    {
-        $settings = $this->getSettings();
-        $path = $this->sizeName();
-        $elementName = $this->getFileName($testName);
-
-        $fullpath = '/public'.$settings['refDir'***REMOVED***.'/'.$path.'/%s'.$elementName;
-
-        return $fullpath;
-    }
-
-    /**
      * Utilizado para definir a variável estática que guarda a imagem nos testes unitários
      *
      * @param string $testName Nome do arquivo
@@ -933,6 +881,8 @@ EOS;
     }
 
     /**
+     * @deprecated
+     *
      * Utilizado para criar o insert em Gear\Column\ColumnService
      * para ser utilizado em Repository, Service e Controller.
      *
@@ -954,6 +904,8 @@ EOF;
     }
 
     /**
+     * @deprecated
+     *
      * Utilizado para criar o assert em Gear\Column\ColumnService
      * para ser utilizado em Repository, Service e Controller.
      *

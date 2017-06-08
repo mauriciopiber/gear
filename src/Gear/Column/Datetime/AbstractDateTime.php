@@ -172,27 +172,4 @@ abstract class AbstractDateTime extends AbstractColumn
     {
         return self::TIME_GLOBAL_FORMAT;
     }
-
-
-    /*
-     *  Descobrir a função
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\AbstractColumn::getFixture()
-     *
-     * @param int $numberReference Número base.
-     *
-     * @return string
-
-    public function getFixture($numberReference)
-    {
-        $name = $this->str('uline', $this->column->getName());
-        $value = $this->getFixtureDefault($numberReference);
-
-        return <<<EOS
-                '$name' => '$value',
-
-EOS;
-    }
-    */
 }
