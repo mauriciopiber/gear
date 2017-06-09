@@ -147,7 +147,10 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
         if ($<?php echo $this->var;?>) {
 <?php if ($this->tableUploadImage) :?>
-            $this->getImageService()->deleteImages($idTable, '<?php echo $this->var;?>');
+            $this->getImageService()->deleteImagesTableContext(
+                $idTable,
+                '<?php echo $this->context;?>'
+            );
 <?php endif;?>
 <?php echo (isset($this->delete[0***REMOVED***) ? $this->delete[0***REMOVED*** : PHP_EOL);?>
             $this->clearCache();

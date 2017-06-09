@@ -31,7 +31,7 @@
             $post = $prg;
             $imageService = $this->getImageService();
             $imageService->updateImages('<?= $this->dataUrl;?>', $<?php echo $this->idVar;?>);
-            $success = $imageService->updatePosition($post);
+            $success = $imageService->updateImageInfo($post);
             $this->getImageService()->clearCache();
         }
 

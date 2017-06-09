@@ -146,6 +146,7 @@ class ServiceService extends AbstractMvc
             'namespace' => $this->getCode()->getNamespace($this->src),
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'entity' => $this->entityName,
+            'context' => $this->str('url', $this->tableName),
             'table' =>  $this->str('class', $this->name),
             'tableLabel' => $this->str('label', $this->name),
             'tableUploadImage' => $this->tableUploadImage,

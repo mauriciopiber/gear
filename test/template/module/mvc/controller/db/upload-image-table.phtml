@@ -143,13 +143,13 @@ class MyTableTableController extends AbstractActionController
         $this->form->bind($this->data);
 
 
-        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+        $success = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
             [
                 'form' => $this->form,
                 'error' => $this->error,
-                'success' => $sucesso,
+                'success' => $success,
                 'idMyTableTable' => $idMyTableTable
             ***REMOVED***
         );
@@ -238,7 +238,7 @@ class MyTableTableController extends AbstractActionController
             $post = $prg;
             $imageService = $this->getImageService();
             $imageService->updateImages('my-table-table', $idMyTableTable);
-            $success = $imageService->updatePosition($post);
+            $success = $imageService->updateImageInfo($post);
             $this->getImageService()->clearCache();
         }
 

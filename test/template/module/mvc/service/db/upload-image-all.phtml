@@ -194,7 +194,10 @@ class MyTableAllService extends AbstractService
 
 
         if ($myTableAll) {
-            $this->getImageService()->deleteImages($idTable, 'myTableAll');
+            $this->getImageService()->deleteImagesTableContext(
+                $idTable,
+                'my-table-all'
+            );
             $this->getImageService()->deleteImagesTableColumn(
                 $entity,
                 self::IMAGES,
