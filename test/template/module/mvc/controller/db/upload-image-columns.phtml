@@ -74,7 +74,7 @@ class MyTableColumnController extends AbstractActionController
     public function createAction()
     {
         $this->error = false;
-        $this->getImageService()->dropUploadImageSession();
+        $this->getImageService()->clearCache();
 
         $this->form    = $this->getMyTableColumnForm();
         $this->service = $this->getMyTableColumnService();
@@ -87,7 +87,7 @@ class MyTableColumnController extends AbstractActionController
         }
 
         if ($create) {
-            $this->getImageService()->dropUploadImageSession();
+            $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 ['id' => $create->getIdMyTableColumn(), 'success' => 1***REMOVED***

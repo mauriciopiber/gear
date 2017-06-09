@@ -74,7 +74,7 @@ class UploadImageColumnController extends AbstractActionController
     public function createAction()
     {
         $this->error = false;
-        $this->getImageService()->dropUploadImageSession();
+        $this->getImageService()->clearCache();
 
         $this->form    = $this->getUploadImageColumnForm();
         $this->service = $this->getUploadImageColumnService();
@@ -87,20 +87,22 @@ class UploadImageColumnController extends AbstractActionController
         }
 
         if ($create) {
-            $this->getImageService()->dropUploadImageSession();
+            $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 ['id' => $create->getIdUploadImageColumn(), 'success' => 1***REMOVED***
             );
         }
 
-        $this->getImageService()->verifyErrors($this->form, 'uploadImageColumn');
-        $uploadImageColumn = $this->getImageService()->getTempUpload('uploadImageColumn');
+        $images = $this->getImageService()->getTempImagePaths(
+            $this->form,
+            TableService::IMAGES
+        );
 
         return new ViewModel(
             [
                 'error' => $this->error,
-                'uploadImageColumn' => $uploadImageColumn,
+                'images' => $images,
                 'form' => $this->form,
             ***REMOVED***
         );
@@ -149,7 +151,7 @@ class UploadImageColumnController extends AbstractActionController
         $this->data->setPasswordVerifyColumn('');
         $this->form->bind($this->data);
 
-        $uploadImageColumn = $this->getImageService()->getUploadImagePath($this->data, 'getUploadImageColumn');
+        $images = $this->getImageService()->getImagePaths($this->data, TableService::IMAGES);
 
         $success = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
@@ -158,7 +160,7 @@ class UploadImageColumnController extends AbstractActionController
                 'form' => $this->form,
                 'error' => $this->error,
                 'success' => $success,
-                'uploadImageColumn' => $uploadImageColumn,
+                'images' => $images,
                 'contexto' => 'upload-image-column',
                 'idUploadImageColumn' => $idUploadImageColumn
             ***REMOVED***

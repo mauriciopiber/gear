@@ -169,7 +169,7 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         }
 
         $data = $this->getMyVeryLongTableNameExampleService()->selectById($idMyVeryLongTable);
-        $images = $this->getImageService()->query('my-very-long-table-name-example', array(), $idMyVeryLongTable);
+        $images = $this->getImageService()->findByContextId($idMyVeryLongTable, 'my-very-long-table-name-example');
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -213,7 +213,7 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
      */
     public function uploadImageAction()
     {
-        $this->getImageService()->appendPlugin();
+        $this->appendUploadImagePlugin();
 
         $idMyVeryLongTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
@@ -238,7 +238,7 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
             $post = $prg;
             $imageService = $this->getImageService();
             $imageService->updateImages('my-very-long-table-name-example', $idMyVeryLongTable);
-            $success = $imageService->updatePosition($post);
+            $success = $imageService->updateImageInfo($post);
             $this->getImageService()->clearCache();
         }
 

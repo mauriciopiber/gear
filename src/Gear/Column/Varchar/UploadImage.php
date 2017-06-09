@@ -320,7 +320,6 @@ EOS;
     }
 
     /**
-     * @TODO FIX 3
      * Cria comandos que são inseridos antes de mostrar a view, utilizados em Gear\Mvc\Controller\ControllerService
      *
      * @return string
@@ -328,12 +327,10 @@ EOS;
     public function getControllerEditBeforeView()
     {
 
-        $class = $this->str('class', $this->column->getName());
-        $var = $this->str('var-length', $this->column->getName());
-
+        $class = $this->str('class', $this->column->getTableName());
 
         return <<<EOS
-        \${$var} = \$this->getImageService()->getUploadImagePath(\$this->data, 'get{$class}');
+        \$images = \$this->getImageService()->getImagePaths(\$this->data, {$class}Service::IMAGES);
 
 EOS;
     }
@@ -354,7 +351,6 @@ EOS;
     }
 
     /**
-     * @TODO FIX 5
      *
      * Cria comandos de declaração das variáveis que serão enviadas para a view utilizados em
      * Gear\Mvc\Controller\ControllerService
@@ -367,25 +363,25 @@ EOS;
         $var = $this->str('var', $this->column->getName());
 
         return <<<EOS
-                '{$var}' => \${$varLength},
+                'images' => \$images,
 
 EOS;
     }
 
     /**
-     * @TODO FIX 6
      * Cria comando que será executado em caso de falha na validação em Gear\Mvc\Controller\ControllerService
      *
      * @return string
      */
     public function getControllerCreateAfter()
     {
-        $varLength = $this->str('var-length', $this->column->getName());
-        $var = $this->str('var', $this->column->getName());
+        $className = $this->str('class', $this->column->getTableName());
 
         return <<<EOS
-        \$this->getImageService()->verifyErrors(\$this->form, '{$var}');
-        \${$varLength} = \$this->getImageService()->getTempUpload('{$var}');
+        \$images = \$this->getImageService()->getTempImagePaths(
+            \$this->form,
+            {$className}Service::IMAGES
+        );
 
 EOS;
     }
@@ -522,7 +518,6 @@ EOS;
     }
 
     /**
-     * @TODO FIX
      * Utilizado para deletar as imagens no service em Gear\Mvc\Service\ServiceService
      *
      * @return string

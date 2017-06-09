@@ -169,7 +169,7 @@ class UploadImageTableController extends AbstractActionController
         }
 
         $data = $this->getUploadImageTableService()->selectById($idUploadImageTable);
-        $images = $this->getImageService()->query('upload-image-table', array(), $idUploadImageTable);
+        $images = $this->getImageService()->findByContextId($idUploadImageTable, 'upload-image-table');
 
         if (!$data) {
             return $this->redirect()->toRoute(self::LISTS);
@@ -213,7 +213,7 @@ class UploadImageTableController extends AbstractActionController
      */
     public function uploadImageAction()
     {
-        $this->getImageService()->appendPlugin();
+        $this->appendUploadImagePlugin();
 
         $idUploadImageTable = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
@@ -238,7 +238,7 @@ class UploadImageTableController extends AbstractActionController
             $post = $prg;
             $imageService = $this->getImageService();
             $imageService->updateImages('upload-image-table', $idUploadImageTable);
-            $success = $imageService->updatePosition($post);
+            $success = $imageService->updateImageInfo($post);
             $this->getImageService()->clearCache();
         }
 
