@@ -290,7 +290,9 @@ class ControllerService extends AbstractMvc implements
     public function getColumnsSpecifications()
     {
         $onlyOneDropCache = [***REMOVED***;
-
+        $onlyOneViewArgs = [***REMOVED***;
+        $onlyOneControllerEdit = [***REMOVED***;
+        $onlyOneControllerCreate = [***REMOVED***;
 
 
         $this->create[0***REMOVED*** = '';
@@ -302,6 +304,10 @@ class ControllerService extends AbstractMvc implements
         $this->columnDuplicated = [***REMOVED***;
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+
+
+            $className = get_class($columnData);
+
             if (method_exists($columnData, 'getControllerUse')) {
                 $this->use .= $columnData->getControllerUse();
             }
@@ -314,21 +320,27 @@ class ControllerService extends AbstractMvc implements
                 $this->hasImage = true;
             }
 
-            if ($columnData instanceof ControllerCreateAfterInterface) {
+            if ($columnData instanceof ControllerCreateAfterInterface && !in_array($className, $onlyOneControllerCreate)) {
                 $this->create[0***REMOVED*** .= $columnData->getControllerCreateAfter();
+
+                $onlyOneControllerCreate[***REMOVED*** = $className;
             }
 
-            if ($columnData instanceof ControllerCreateViewInterface) {
+            if ($columnData instanceof ControllerCreateViewInterface && !in_array($className, $onlyOneViewArgs)) {
                 $this->create[2***REMOVED*** .= $columnData->getControllerCreateView();
                 $this->update[2***REMOVED*** .= $columnData->getControllerCreateView();
+
+                $onlyOneViewArgs[***REMOVED*** = $className;
             }
 
             if (method_exists($columnData, 'getControllerDeclareVar')) {
                 $this->update[0***REMOVED*** .= $columnData->getControllerDeclareVar();
             }
 
-            if (method_exists($columnData, 'getControllerEditBeforeView')) {
+            if (method_exists($columnData, 'getControllerEditBeforeView') && !in_array($className, $onlyOneControllerEdit)) {
                 $this->update[1***REMOVED*** .= $columnData->getControllerEditBeforeView();
+
+                $onlyOneControllerEdit[***REMOVED*** = $className;
             }
         }
     }

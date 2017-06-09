@@ -8,7 +8,7 @@
     {
         $this->error = false;
 <?php if ($this->hasImage) { ?>
-        $this->getImageService()->dropUploadImageSession();
+        $this->getImageService()->clearCache();
 <?php };?>
 
         $this->form    = $this->get<?= $this->data?>Form();
@@ -25,7 +25,7 @@
 
         if ($create) {
 <?php if ($this->hasImage) { ?>
-            $this->getImageService()->dropUploadImageSession();
+            $this->getImageService()->clearCache();
 <?php } ?>
             return $this->redirect()->toRoute(
                 self::EDIT,
