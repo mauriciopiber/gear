@@ -14,14 +14,14 @@ trait SingleDbTableTrait
         return $column->reveal();
     }
 
-    public function getSingleColumns()
+    public function getSingleColumns($tableName = 'single_db_table')
     {
         $this->string = new \GearBase\Util\String\StringService();
 
         $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('single_db_column');
-        $varcharColumn->getTableName()->willReturn('single_db_table');
+        $varcharColumn->getTableName()->willReturn($tableName);
         $varcharColumn->isNullable()->willReturn(true);
         $varcharColumn->getCharacterMaximumLength()->willReturn(60);
 

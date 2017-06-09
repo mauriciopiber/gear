@@ -1,29 +1,29 @@
 <?php
-namespace MyModule\Custom\CustomNamespace;
+namespace MyModule\MyTableAll;
 
 use GearBase\Service\AbstractService;
-use MyModule\Entity\DbUploadImage;
-use MyModule\Custom\CustomNamespace\DbUploadImageRepositoryTrait;
+use MyModule\Entity\MyTableAll;
+use MyModule\MyTableAll\MyTableAllRepositoryTrait;
 use GearImage\Service\ImageServiceTrait;
-use MyModule\Custom\CustomNamespace\DbUploadImageRepository;
+use MyModule\MyTableAll\MyTableAllRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Authentication\AuthenticationService;
 use GearImage\Service\ImageService;
 
 /**
- * Interaction between DbUploadImageController and Services
+ * Interaction between MyTableAllController and Services
  *
  * PHP Version 5
  *
  * @category Service
- * @package MyModule/Custom/CustomNamespace
+ * @package MyModule/MyTableAll
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class DbUploadImageService extends AbstractService
+class MyTableAllService extends AbstractService
 {
-    use DbUploadImageRepositoryTrait;
+    use MyTableAllRepositoryTrait;
 
     use ImageServiceTrait;
 
@@ -31,23 +31,28 @@ class DbUploadImageService extends AbstractService
 
     protected $authService;
 
+    const IMAGES = [
+        'myImageOne',
+        'myImageTwo'
+    ***REMOVED***;
+
     /**
      * Constructor
      *
-     * @param DbUploadImageRepository $imageRepository    Db Upload Image Repository
-     * @param Memcached               $cache              Memcached
-     * @param AuthenticationService   $zfcuserAuthService Authentication Service
-     * @param ImageService            $imageService       Image Service
+     * @param MyTableAllRepository  $myTableAllRepository My Table All Repository
+     * @param Memcached             $cache                Memcached
+     * @param AuthenticationService $zfcuserAuthService   Authentication Service
+     * @param ImageService          $imageService         Image Service
      *
-     * @return DbUploadImageService
+     * @return MyTableAllService
      */
     public function __construct(
-        DbUploadImageRepository $imageRepository,
+        MyTableAllRepository $myTableAllRepository,
         Memcached $cache,
         AuthenticationService $zfcuserAuthService,
         ImageService $imageService
     ) {
-        $this->dbUploadImageRepository = $imageRepository;
+        $this->myTableAllRepository = $myTableAllRepository;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
         $this->imageService = $imageService;
@@ -62,7 +67,7 @@ class DbUploadImageService extends AbstractService
      */
     public function getTableHead()
     {
-        $map = $this->getDbUploadImageRepository()->getMapReferences();
+        $map = $this->getMyTableAllRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
@@ -74,7 +79,7 @@ class DbUploadImageService extends AbstractService
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
-            $this->sessionName = 'dbUploadImageSession';
+            $this->sessionName = 'myTableAllSession';
         }
         return $this->sessionName;
     }
@@ -84,15 +89,15 @@ class DbUploadImageService extends AbstractService
      *
      * @param array $data Criteria
      *
-     * @return null|MyModule\Entity\DbUploadImage
+     * @return null|MyModule\Entity\MyTableAll
      */
     public function selectOneBy(array $data)
     {
-        return $this->getDbUploadImageRepository()->selectOneBy($data);
+        return $this->getMyTableAllRepository()->selectOneBy($data);
     }
 
     /**
-     * Select All Rows from Db Upload Image table.
+     * Select All Rows from My Table All table.
      *
      * Use cache to store data until change.
      *
@@ -103,56 +108,74 @@ class DbUploadImageService extends AbstractService
     public function selectAll($select = [***REMOVED***)
     {
         $this->cache      = $this->getCache();
-        $this->repository = $this->getDbUploadImageRepository();
+        $this->repository = $this->getMyTableAllRepository();
 
         return parent::selectAll($select);
     }
 
     /**
-     * Create a new Db Upload Image on database.
+     * Create a new My Table All on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
      *
      * @param array $data Valid $_POST
      *
-     * @return null|MyModule\Entity\DbUploadImage
+     * @return null|MyModule\Entity\MyTableAll
      */
     public function create($data)
     {
-        $repository = $this->getDbUploadImageRepository();
+        $repository = $this->getMyTableAllRepository();
 
+        $images = $this->getImageService()->replaceDataForm(
+            $data,
+            'my-table-all',
+            self::IMAGES
+        );
 
-        $dbUploadImage = $repository->insert($data);
-        if ($dbUploadImage) {
+        $myTableAll = $repository->insert($data);
+        if ($myTableAll) {
+            $this->getImageService()->saveImageColumns(
+                $images,
+                'my-table-all'
+            );
             $this->clearCache();
         }
-        return $dbUploadImage;
+        return $myTableAll;
     }
 
     /**
-     * Update a existing Db Upload Image on database.
+     * Update a existing My Table All on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
      *
      * @param integer $idTable Id
      * @param array   $data    Valid $_POST
      *
-     * @return null|MyModule\Entity\DbUploadImage
+     * @return null|MyModule\Entity\MyTableAll
      */
     public function update($idTable, $data = [***REMOVED***)
     {
-        $repository = $this->getDbUploadImageRepository();
+        $repository = $this->getMyTableAllRepository();
 
+        $images = $this->getImageService()->replaceDataForm(
+            $data,
+            'my-table-all',
+            self::IMAGES
+        );
 
-        $dbUploadImage = $repository->update($idTable, $data);
-        if ($dbUploadImage) {
+        $myTableAll = $repository->update($idTable, $data);
+        if ($myTableAll) {
+            $this->getImageService()->saveImageColumns(
+                $images,
+                'my-table-all'
+            );
             $this->clearCache();
         }
-        return $dbUploadImage;
+        return $myTableAll;
     }
 
     /**
-     * Delete a existing Db Upload Image by Id.
+     * Delete a existing My Table All by Id.
      *
      * @param integer $idTable Id
      *
@@ -166,40 +189,45 @@ class DbUploadImageService extends AbstractService
             return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
         }
 
-        $repository = $this->getDbUploadImageRepository();
-        $dbUploadImage = $repository->deleteSafe($entity);
+        $repository = $this->getMyTableAllRepository();
+        $myTableAll = $repository->deleteSafe($entity);
 
 
-        if ($dbUploadImage) {
-            $this->getImageService()->deleteImages($idTable, 'dbUploadImage');
+        if ($myTableAll) {
+            $this->getImageService()->deleteImages($idTable, 'myTableAll');
+            $this->getImageService()->deleteImagesTableColumn(
+                $entity,
+                self::IMAGES,
+                'my-table-all'
+            );
             $this->clearCache();
         }
-        return $dbUploadImage;
+        return $myTableAll;
     }
 
     /**
      * Convert Entity to Array.
      *
-     * @param DbUploadImage $data Db Upload Image Entity
+     * @param MyTableAll $data My Table All Entity
      *
      * @return array
      */
-    public function extract(DbUploadImage $data)
+    public function extract(MyTableAll $data)
     {
-        $repository = $this->getDbUploadImageRepository();
+        $repository = $this->getMyTableAllRepository();
         return $repository->extract($data);
     }
 
     /**
-     * Select one Db Upload Image by Id.
+     * Select one My Table All by Id.
      *
      * @param array $idToSelect Id
      *
-     * @return null|MyModule\Entity\DbUploadImage
+     * @return null|MyModule\Entity\MyTableAll
      */
     public function selectById($idToSelect)
     {
-        $repository = $this->getDbUploadImageRepository();
+        $repository = $this->getMyTableAllRepository();
         return $repository->selectById($idToSelect);
     }
 }

@@ -13,8 +13,23 @@ trait ControllerDataTrait
 
     public function tables()
     {
+        /*
+         * $columns, //colunas do ColumnService
+         * $template, //template pra resolver o teste
+         * $nullable, //se é nullable.
+         * $hasColumnImage, //se tem coluna de imagem
+         * $hasTableImage, //se tem tabela de imagem
+         * $tableName, //nome da tabela
+         * $service, //qual service é utilizado
+         * $namespace, //namespace
+         * $userType //usuario
+         */
         return [
+            [$this->getUploadImageColumns(), 'upload-image-columns', false, true, false, 'my_table_column', 'factories', 'MyTableColumn', 'all'***REMOVED***,
+            [$this->getSingleColumns(), 'upload-image-table', false, false, true, 'my_table_table', 'factories', 'MyTableTable', 'all'***REMOVED***,
+            [$this->getUploadImageColumns(), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***
             //[$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
+            /*
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,
             [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null, 'all'***REMOVED***,
             [
@@ -86,6 +101,7 @@ trait ControllerDataTrait
             //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
             //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
             //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columsn-db-unique-not-null', false***REMOVED***,
+             */
         ***REMOVED***;
     }
 }

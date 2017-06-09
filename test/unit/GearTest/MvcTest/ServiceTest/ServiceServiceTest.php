@@ -119,9 +119,28 @@ class ServiceServiceTest extends TestCase
         );
     }
 
+    /**
+     * @group up
+     */
     public function testIntrospectTableWithUploadImageTable()
     {
+        $this->assertTrue(false);
+    }
 
+    /**
+     * @group up
+     */
+    public function testIntrospectTableWithUploadImageColumn()
+    {
+        $this->assertTrue(false);
+    }
+
+    /**
+     * @group up
+     */
+    public function testInstrospectTableWithUploadImageAll()
+    {
+        $this->assertTrue(false);
     }
 
     /**
@@ -200,8 +219,8 @@ class ServiceServiceTest extends TestCase
         $expected = $this->templates.'/db/'.$template.'.phtml';
 
         $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
+            trim(file_get_contents($expected)),
+            trim(file_get_contents($file))
         );
 
         $this->assertStringEndsWith($location.'/'.$serviceT->getName().'.php', $file);

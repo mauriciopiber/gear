@@ -1,0 +1,240 @@
+<?php
+namespace MyModule\MyTableColumn;
+
+use Zend\View\Model\ViewModel;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\View\Model\JsonModel;
+use MyModule\MyTableColumn\MyTableColumnServiceTrait;
+use MyModule\MyTableColumn\MyTableColumnFormTrait;
+use MyModule\MyTableColumn\MyTableColumnSearchFormTrait;
+use GearImage\Service\ImageServiceTrait;
+use Zend\Mvc\Controller\AbstractActionController;
+use MyModule\MyTableColumn\MyTableColumnService;
+use MyModule\MyTableColumn\MyTableColumnForm;
+use MyModule\MyTableColumn\MyTableColumnSearchForm;
+use GearImage\Service\ImageService;
+
+/**
+ * My Table Column Controller
+ *
+ * Actions for My Table Column Table
+ *
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/MyTableColumn
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class MyTableColumnController extends AbstractActionController
+{
+    const CREATE = 'my-module/my-table-column/create';
+    const EDIT   = 'my-module/my-table-column/edit';
+    const LISTS  = 'my-module/my-table-column/list';
+    const IMAGE  = 'my-module/my-table-column/upload-image';
+
+    use MyTableColumnServiceTrait;
+
+    use MyTableColumnFormTrait;
+
+    use MyTableColumnSearchFormTrait;
+
+    use ImageServiceTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyTableColumnService    $myTableColumnService My Table Column Service
+     * @param MyTableColumnForm       $myTableColumnForm    My Table Column Form
+     * @param MyTableColumnSearchForm $columnSearchForm     My Table Column Search Form
+     * @param ImageService            $imageService         Image Service
+     *
+     * @return MyTableColumnController
+     */
+    public function __construct(
+        MyTableColumnService $myTableColumnService,
+        MyTableColumnForm $myTableColumnForm,
+        MyTableColumnSearchForm $columnSearchForm,
+        ImageService $imageService
+    ) {
+        $this->myTableColumnService = $myTableColumnService;
+        $this->myTableColumnForm = $myTableColumnForm;
+        $this->myTableColumnSearchForm = $columnSearchForm;
+        $this->imageService = $imageService;
+
+        return $this;
+    }
+
+    /**
+     * Create Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function createAction()
+    {
+        $this->error = false;
+        $this->getImageService()->dropUploadImageSession();
+
+        $this->form    = $this->getMyTableColumnForm();
+        $this->service = $this->getMyTableColumnService();
+        $this->url     = self::CREATE;
+
+        $create = $this->getRequestPlugin()->fileCreate();
+
+        if ($create instanceof Response) {
+            return $create;
+        }
+
+        if ($create) {
+            $this->getImageService()->dropUploadImageSession();
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                ['id' => $create->getIdMyTableColumn(), 'success' => 1***REMOVED***
+            );
+        }
+
+        $this->getImageService()->verifyErrors($this->form, 'myImageOne');
+        $myImageOne = $this->getImageService()->getTempUpload('myImageOne');
+        $this->getImageService()->verifyErrors($this->form, 'myImageTwo');
+        $myImageTwo = $this->getImageService()->getTempUpload('myImageTwo');
+
+        return new ViewModel(
+            [
+                'error' => $this->error,
+                'myImageOne' => $myImageOne,
+                'myImageTwo' => $myImageTwo,
+                'form' => $this->form,
+            ***REMOVED***
+        );
+    }
+
+    /**
+     * Edit Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function editAction()
+    {
+        $this->error = false;
+
+        $idMyTableColumn = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMyTableColumn) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->data = $this->getMyTableColumnService()->selectById($idMyTableColumn);
+
+        if (!$this->data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $this->form      = $this->getMyTableColumnForm();
+        $this->service   = $this->getMyTableColumnService();
+        $this->url       = self::EDIT;
+        $this->requestId = $idMyTableColumn;
+
+        $update = $this->getRequestPlugin()->fileUpdate();
+        if ($update instanceof Response) {
+            return $update;
+        }
+
+        if ($update) {
+            $this->getImageService()->clearCache();
+            return $this->redirect()->toRoute(
+                self::EDIT,
+                ['id' => $update->getIdMyTableColumn(), 'success' => 1***REMOVED***
+            );
+        }
+
+        $this->data = $this->getMyTableColumnService()->selectById($idMyTableColumn);
+        $this->form->bind($this->data);
+
+        $myImageOne = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageOne');
+        $myImageTwo = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageTwo');
+
+        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+
+        return new ViewModel(
+            [
+                'form' => $this->form,
+                'error' => $this->error,
+                'success' => $sucesso,
+                'myImageOne' => $myImageOne,
+                'myImageTwo' => $myImageTwo,
+                'contexto' => 'my-table-column',
+                'idMyTableColumn' => $idMyTableColumn
+            ***REMOVED***
+        );
+    }
+
+    /**
+     * View Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function viewAction()
+    {
+        $idMyTableColumn = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$idMyTableColumn) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $data = $this->getMyTableColumnService()->selectById($idMyTableColumn);
+
+        if (!$data) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        return new ViewModel(
+            array_merge(
+                [
+                    'id' => $data->getIdMyTableColumn(),
+                ***REMOVED***,
+                $this->getMyTableColumnService()->extract($data)
+            )
+        );
+    }
+
+    /**
+     * Delete Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function deleteAction()
+    {
+        $identifier = $this->getEvent()->getRouteMatch()->getParam('id', null);
+
+        if (!$identifier) {
+            return $this->redirect()->toRoute(self::LISTS);
+        }
+
+        $myTableColumn = $this->getMyTableColumnService();
+
+        $delete = $myTableColumn->delete($identifier);
+
+        return new JsonModel(array_merge($delete, ['id' => $identifier***REMOVED***));
+    }
+
+    /**
+     * List Action
+     *
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function listAction()
+    {
+        $data = $this->getRequestPlugin()->prepareJson(
+            $this->getMyTableColumnService()->selectAll()
+        );
+
+        return new ViewModel(
+            [
+                'search'    => $this->getMyTableColumnSearchForm(),
+                'tableService' => $this->getMyTableColumnService(),
+                'data'      => $data,
+            ***REMOVED***
+        );
+    }
+}

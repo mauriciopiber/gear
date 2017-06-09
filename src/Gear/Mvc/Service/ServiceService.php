@@ -163,7 +163,8 @@ class ServiceService extends AbstractMvc
             'use'           => $this->use,
             'attribute'     => $this->attribute,
             'module'        => $this->getModule()->getModuleName(),
-            'repository'    => $this->repository
+            'repository'    => $this->repository,
+            'imagesArray'   => $this->formatArrayImages($this->imagesArray)
         ***REMOVED***;
 
         $options = array_merge($options, $userOptions);
@@ -183,6 +184,36 @@ class ServiceService extends AbstractMvc
         $this->file->setView('template/module/mvc/service/db/db.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
         return $this->file->render();
+    }
+
+    public function formatArrayImages($images)
+    {
+        if (empty($images)) {
+            return '';
+        }
+
+        $columns = '';
+
+        foreach ($images as $i => $column) {
+
+            $columns .= <<<EOS
+        '{$this->str('var', $column)}'
+EOS;
+
+            if (isset($images[$i+1***REMOVED***)) {
+                $columns .= ','.PHP_EOL;
+            }
+        }
+
+        $template = <<<EOS
+    const IMAGES = [
+$columns
+    ***REMOVED***;
+
+
+EOS;
+
+        return $template;
     }
 
     /**
@@ -230,36 +261,55 @@ class ServiceService extends AbstractMvc
         return $options;
     }
 
+    /**
+     * @TODO COLOCAR PRA FUNCIONAR NOS DUPLICADOS QUANDO PRECISA, COLOCAR DUAS VARIAVEIS E TAL;
+     */
     public function getColumnsSpecifications()
     {
         $onlyOnceUse = [UploadImageColumn::class***REMOVED***;
         $onlyOnceAttribute = [UploadImageColumn::class***REMOVED***;
+        $onlyOnceBeforeCreate = [***REMOVED***;
+        $onlyOnceAfterCreate = [***REMOVED***;
+        $onlyOnceBeforeUpdate = [***REMOVED***;
+        $onlyOnceAfterUpdate = [***REMOVED***;
+        $onlyOnceDelete = [***REMOVED***;
+
+        $this->imagesArray = [***REMOVED***;
 
         //var_dump($onlyOnceUse, $onlyOnceAttribute);die();
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof ServiceCreateBeforeInterface) {
+
+            if ($columnData instanceof UploadImageColumn) {
+                $this->imagesArray[***REMOVED*** = $columnData->getColumn()->getName();
+            }
+
+            $className = get_class($columnData);
+
+            if ($columnData instanceof ServiceCreateBeforeInterface && !in_array($className, $onlyOnceBeforeCreate)) {
+                $onlyOnceBeforeCreate[***REMOVED*** = $className;
                 $this->create[0***REMOVED*** .= $columnData->getServiceCreateBefore();
             }
 
-            if ($columnData instanceof ServiceCreateAfterInterface) {
+            if ($columnData instanceof ServiceCreateAfterInterface && !in_array($className, $onlyOnceAfterCreate)) {
+                $onlyOnceAfterCreate[***REMOVED*** = $className;
                 $this->create[1***REMOVED*** .= $columnData->getServiceCreateAfter();
             }
 
-            if ($columnData instanceof ServiceUpdateBeforeInterface) {
+            if ($columnData instanceof ServiceUpdateBeforeInterface && !in_array($className, $onlyOnceBeforeUpdate)) {
+                $onlyOnceBeforeUpdate[***REMOVED*** = $className;
                 $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBefore();
             }
 
-            if ($columnData instanceof ServiceUpdateAfterInterface) {
+            if ($columnData instanceof ServiceUpdateAfterInterface && !in_array($className, $onlyOnceAfterUpdate)) {
+                $onlyOnceAfterUpdate[***REMOVED*** = $className;
                 $this->update[1***REMOVED*** .= $columnData->getServiceUpdateAfter();
             }
 
-            if ($columnData instanceof ServiceDeleteInterface) {
+            if ($columnData instanceof ServiceDeleteInterface && !in_array($className, $onlyOnceDelete)) {
+                $onlyOnceDelete[***REMOVED*** = $className;
                 $this->delete[0***REMOVED*** .= $columnData->getServiceDelete();
             }
-
-
-            $className = get_class($columnData);
 
 
             if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
