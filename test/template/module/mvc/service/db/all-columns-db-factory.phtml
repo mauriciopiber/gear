@@ -131,7 +131,7 @@ class AllColumnsDbService extends AbstractService
         $this->createPassword('passwordVerifyColumn');
         $images = $this->getImageService()->replaceDataForm(
             $data,
-            'table',
+            'all-columns-db',
             self::IMAGES
         );
 
@@ -139,7 +139,7 @@ class AllColumnsDbService extends AbstractService
         if ($allColumnsDb) {
             $this->getImageService()->saveImageColumns(
                 $images,
-                'table'
+                'all-columns-db'
             );
             $this->clearCache();
         }
@@ -163,7 +163,7 @@ class AllColumnsDbService extends AbstractService
         $this->createPassword('passwordVerifyColumn');
         $images = $this->getImageService()->replaceDataForm(
             $data,
-            'table',
+            'all-columns-db',
             self::IMAGES
         );
 
@@ -171,7 +171,7 @@ class AllColumnsDbService extends AbstractService
         if ($allColumnsDb) {
             $this->getImageService()->saveImageColumns(
                 $images,
-                'table'
+                'all-columns-db'
             );
             $this->clearCache();
         }
@@ -198,11 +198,14 @@ class AllColumnsDbService extends AbstractService
 
 
         if ($allColumnsDb) {
-            $this->getImageService()->deleteImages($idTable, 'allColumnsDb');
+            $this->getImageService()->deleteImagesTableContext(
+                $idTable,
+                'all-columns-db'
+            );
             $this->getImageService()->deleteImagesTableColumn(
                 $entity,
                 self::IMAGES,
-                'table'
+                'all-columns-db'
             );
             $this->clearCache();
         }

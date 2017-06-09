@@ -25,9 +25,9 @@ trait ControllerDataTrait
          * $userType //usuario
          */
         return [
-            [$this->getUploadImageColumns(), 'upload-image-columns', false, true, false, 'my_table_column', 'factories', 'MyTableColumn', 'all'***REMOVED***,
-            [$this->getSingleColumns(), 'upload-image-table', false, false, true, 'my_table_table', 'factories', 'MyTableTable', 'all'***REMOVED***,
-            [$this->getUploadImageColumns(), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***
+            [$this->getUploadImageColumns('my_table_column'), 'upload-image-columns', false, true, false, 'my_table_column', 'factories', 'MyTableColumn', 'all'***REMOVED***,
+            [$this->getSingleColumns('my-table-table'), 'upload-image-table', false, false, true, 'my_table_table', 'factories', 'MyTableTable', 'all'***REMOVED***,
+            [$this->getUploadImageColumns('my-table-all'), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***
             //[$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
             /*
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,

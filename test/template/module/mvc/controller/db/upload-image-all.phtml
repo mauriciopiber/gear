@@ -74,7 +74,7 @@ class MyTableAllController extends AbstractActionController
     public function createAction()
     {
         $this->error = false;
-        $this->getImageService()->dropUploadImageSession();
+        $this->getImageService()->clearCache();
 
         $this->form    = $this->getMyTableAllForm();
         $this->service = $this->getMyTableAllService();
@@ -87,24 +87,23 @@ class MyTableAllController extends AbstractActionController
         }
 
         if ($create) {
-            $this->getImageService()->dropUploadImageSession();
+            $this->getImageService()->clearCache();
             return $this->redirect()->toRoute(
                 self::EDIT,
                 ['id' => $create->getIdMyTableAll(), 'success' => 1***REMOVED***
             );
         }
 
-        $this->getImageService()->verifyErrors($this->form, 'myImageOne');
-        $myImageOne = $this->getImageService()->getTempUpload('myImageOne');
-        $this->getImageService()->verifyErrors($this->form, 'myImageTwo');
-        $myImageTwo = $this->getImageService()->getTempUpload('myImageTwo');
+        $images = $this->getImageService()->getTempImagePaths(
+            $this->form,
+            MyTableAllService::IMAGES
+        );
 
         return new ViewModel(
             [
-                'error' => $this->error,
-                'myImageOne' => $myImageOne,
-                'myImageTwo' => $myImageTwo,
                 'form' => $this->form,
+                'images' => $images,
+                'error' => $this->error,
             ***REMOVED***
         );
     }
@@ -151,18 +150,16 @@ class MyTableAllController extends AbstractActionController
         $this->data = $this->getMyTableAllService()->selectById($idMyTableAll);
         $this->form->bind($this->data);
 
-        $myImageOne = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageOne');
-        $myImageTwo = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageTwo');
+        $images = $this->getImageService()->getImagePaths($this->data, MyTableAllService::IMAGES);
 
-        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+        $success = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
             [
                 'form' => $this->form,
                 'error' => $this->error,
-                'success' => $sucesso,
-                'myImageOne' => $myImageOne,
-                'myImageTwo' => $myImageTwo,
+                'success' => $success,
+                'images' => $images,
                 'contexto' => 'my-table-all',
                 'idMyTableAll' => $idMyTableAll
             ***REMOVED***
@@ -252,7 +249,7 @@ class MyTableAllController extends AbstractActionController
             $post = $prg;
             $imageService = $this->getImageService();
             $imageService->updateImages('my-table-all', $idMyTableAll);
-            $success = $imageService->updatePosition($post);
+            $success = $imageService->updateImageInfo($post);
             $this->getImageService()->clearCache();
         }
 

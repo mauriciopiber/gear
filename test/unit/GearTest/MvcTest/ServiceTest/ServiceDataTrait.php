@@ -34,7 +34,7 @@ trait ServiceDataTrait
             [$this->getUploadImageColumns('my_table_all'), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***,
             // [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
             [
-                $this->getAllPossibleColumns(),
+                $this->getAllPossibleColumns('all_columns_db'),
                 'all-columns-db-factory',
                 true,
                 true,

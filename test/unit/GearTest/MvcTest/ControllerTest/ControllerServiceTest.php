@@ -111,30 +111,6 @@ class ControllerServiceTest extends TestCase
         $this->controllerService->setSchemaService($this->schema->reveal());
     }
 
-    /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageTable()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageColumn()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testInstrospectTableWithUploadImageAll()
-    {
-        $this->assertTrue(false);
-    }
-
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

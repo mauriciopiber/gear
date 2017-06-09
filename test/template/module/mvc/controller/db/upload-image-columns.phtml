@@ -94,16 +94,15 @@ class MyTableColumnController extends AbstractActionController
             );
         }
 
-        $this->getImageService()->verifyErrors($this->form, 'myImageOne');
-        $myImageOne = $this->getImageService()->getTempUpload('myImageOne');
-        $this->getImageService()->verifyErrors($this->form, 'myImageTwo');
-        $myImageTwo = $this->getImageService()->getTempUpload('myImageTwo');
+        $images = $this->getImageService()->getTempImagePaths(
+            $this->form,
+            MyTableColumnsService::IMAGES
+        );
 
         return new ViewModel(
             [
                 'error' => $this->error,
-                'myImageOne' => $myImageOne,
-                'myImageTwo' => $myImageTwo,
+                'images' => $images,
                 'form' => $this->form,
             ***REMOVED***
         );
@@ -151,18 +150,16 @@ class MyTableColumnController extends AbstractActionController
         $this->data = $this->getMyTableColumnService()->selectById($idMyTableColumn);
         $this->form->bind($this->data);
 
-        $myImageOne = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageOne');
-        $myImageTwo = $this->getImageService()->getUploadImagePath($this->data, 'getMyImageTwo');
+        $images = $this->getImageService()->getImagePaths($this->data, MyTableColumnsService::IMAGES);
 
-        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+        $success = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
             [
                 'form' => $this->form,
                 'error' => $this->error,
-                'success' => $sucesso,
-                'myImageOne' => $myImageOne,
-                'myImageTwo' => $myImageTwo,
+                'success' => $success,
+                'images' => $images,
                 'contexto' => 'my-table-column',
                 'idMyTableColumn' => $idMyTableColumn
             ***REMOVED***

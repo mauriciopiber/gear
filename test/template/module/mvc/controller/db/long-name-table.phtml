@@ -143,13 +143,13 @@ class MyVeryLongTableNameExampleController extends AbstractActionController
         $this->form->bind($this->data);
 
 
-        $sucesso = $this->getEvent()->getRouteMatch()->getParam('success', null);
+        $success = $this->getEvent()->getRouteMatch()->getParam('success', null);
 
         return new ViewModel(
             [
                 'form' => $this->form,
                 'error' => $this->error,
-                'success' => $sucesso,
+                'success' => $success,
                 'idMyVeryLongTableNameExample' => $idMyVeryLongTable
             ***REMOVED***
         );
