@@ -22,7 +22,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
 
     protected $authService;
 
-<?php echo $this->authadapter;?>
+<?php echo ($this->imagesArray !== null) ? $this->imagesArray : '';;?>
 <?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
     /**
      * Get the values used to generate Html Table on List Action.
@@ -70,7 +70,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
      *
      * @return array
      */
-    public function selectAll($select = array())
+    public function selectAll($select = [***REMOVED***)
     {
         $this->cache      = $this->getCache();
         $this->repository = $this->get<?php echo $this->repository;?>();
@@ -112,7 +112,7 @@ class <?php echo $this->class;?> extends <?php echo $this->extends.PHP_EOL;?>
      *
      * @return null|<?php echo $this->entity.PHP_EOL;?>
      */
-    public function update($idTable, $data = array())
+    public function update($idTable, $data = [***REMOVED***)
     {
         $repository = $this->get<?php echo $this->repository;?>();
 

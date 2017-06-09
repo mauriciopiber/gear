@@ -406,10 +406,10 @@ EOS;
         $table = $this->str('url', $this->column->getTableName());
 
         return <<<EOS
-        \$$lenght = \$this->getImageService()->overwriteImage(
+        \$images = \$this->getImageService()->replaceDataForm(
             \$data,
-            '$table',
-            '$var'
+            '{$table}',
+            self::IMAGES
         );
 
 EOS;
@@ -531,7 +531,11 @@ EOS;
     {
         $contexto = $this->str('url', $this->column->getTableName());
         return <<<EOS
-            \$this->getImageService()->deleteUploadImage(\$idTable, '$contexto');
+            \$this->getImageService()->deleteImagesTableColumn(
+                \$entity,
+                self::IMAGES,
+                '$contexto'
+            );
 
 EOS;
     }
@@ -617,8 +621,6 @@ EOS;
     }
 
     /**
-     * @TODO FIX
-     *
      * Cria o que manda a imagem para o GearImage processar em Gear\Mvc\Service\ServiceService
      *
      * {@inheritDoc}
@@ -633,19 +635,15 @@ EOS;
         $lenght = $this->str('var-length', $this->column->getName());
 
         return <<<EOS
-            if (isset(\$data['$var'***REMOVED***)) {
-                \$this->getImageService()->createUploadImage(
-                    \$$lenght,
-                    '$contexto-$var',
-                    \$data['$var'***REMOVED***
-                );
-            }
+            \$this->getImageService()->saveImageColumns(
+                \$images,
+                '{$contexto}'
+            );
 
 EOS;
     }
 
     /**
-     * @TODO FIX
      * Gear o código que manda a imagem para GearImage em Gear\Mvc\Service\ServiceService
      *
      * {@inheritDoc}
@@ -655,21 +653,7 @@ EOS;
      */
     public function getServiceUpdateAfter()
     {
-        $lenght = $this->str('var-length', $this->column->getName());
-
-        $var = $this->str('var', $this->column->getName());
-        $contexto = $this->str('url', $this->column->getTableName());
-
-        return <<<EOS
-            if (isset(\$data['$var'***REMOVED***)) {
-                \$this->getImageService()->updateUploadImage(
-                    \$$lenght,
-                    '$contexto-$var',
-                    \$data['$var'***REMOVED***
-                );
-            }
-
-EOS;
+        return $this->getServiceCreateAfter();
     }
 
     /**

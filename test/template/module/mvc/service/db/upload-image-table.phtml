@@ -1,27 +1,31 @@
 <?php
-namespace MyModule\Custom\CustomNamespace;
+namespace MyModule\MyTableTable;
 
 use GearBase\Service\AbstractService;
-use MyModule\Entity\SingleDbTable;
-use MyModule\Custom\CustomNamespace\SingleDbTableRepositoryTrait;
-use MyModule\Custom\CustomNamespace\SingleDbTableRepository;
+use MyModule\Entity\MyTableTable;
+use MyModule\MyTableTable\MyTableTableRepositoryTrait;
+use GearImage\Service\ImageServiceTrait;
+use MyModule\MyTableTable\MyTableTableRepository;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Authentication\AuthenticationService;
+use GearImage\Service\ImageService;
 
 /**
- * Interaction between SingleDbTableController and Services
+ * Interaction between MyTableTableController and Services
  *
  * PHP Version 5
  *
  * @category Service
- * @package MyModule/Custom/CustomNamespace
+ * @package MyModule/MyTableTable
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class SingleDbTableService extends AbstractService
+class MyTableTableService extends AbstractService
 {
-    use SingleDbTableRepositoryTrait;
+    use MyTableTableRepositoryTrait;
+
+    use ImageServiceTrait;
 
     protected $sessionName;
 
@@ -30,20 +34,23 @@ class SingleDbTableService extends AbstractService
     /**
      * Constructor
      *
-     * @param SingleDbTableRepository $dbTableRepository  Single Db Table Repository
-     * @param Memcached               $cache              Memcached
-     * @param AuthenticationService   $zfcuserAuthService Authentication Service
+     * @param MyTableTableRepository $tableTableRepository My Table Table Repository
+     * @param Memcached              $cache                Memcached
+     * @param AuthenticationService  $zfcuserAuthService   Authentication Service
+     * @param ImageService           $imageService         Image Service
      *
-     * @return SingleDbTableService
+     * @return MyTableTableService
      */
     public function __construct(
-        SingleDbTableRepository $dbTableRepository,
+        MyTableTableRepository $tableTableRepository,
         Memcached $cache,
-        AuthenticationService $zfcuserAuthService
+        AuthenticationService $zfcuserAuthService,
+        ImageService $imageService
     ) {
-        $this->singleDbTableRepository = $dbTableRepository;
+        $this->myTableTableRepository = $tableTableRepository;
         $this->cache = $cache;
         $this->zfcuserAuthService = $zfcuserAuthService;
+        $this->imageService = $imageService;
 
         return $this;
     }
@@ -55,7 +62,7 @@ class SingleDbTableService extends AbstractService
      */
     public function getTableHead()
     {
-        $map = $this->getSingleDbTableRepository()->getMapReferences();
+        $map = $this->getMyTableTableRepository()->getMapReferences();
         return $this->getTableHeadFromMap($map);
     }
 
@@ -67,7 +74,7 @@ class SingleDbTableService extends AbstractService
     public function getSessionName()
     {
         if (!isset($this->sessionName)) {
-            $this->sessionName = 'singleDbTableSession';
+            $this->sessionName = 'myTableTableSession';
         }
         return $this->sessionName;
     }
@@ -77,15 +84,15 @@ class SingleDbTableService extends AbstractService
      *
      * @param array $data Criteria
      *
-     * @return null|MyModule\Entity\SingleDbTable
+     * @return null|MyModule\Entity\MyTableTable
      */
     public function selectOneBy(array $data)
     {
-        return $this->getSingleDbTableRepository()->selectOneBy($data);
+        return $this->getMyTableTableRepository()->selectOneBy($data);
     }
 
     /**
-     * Select All Rows from Single Db Table table.
+     * Select All Rows from My Table Table table.
      *
      * Use cache to store data until change.
      *
@@ -96,56 +103,56 @@ class SingleDbTableService extends AbstractService
     public function selectAll($select = [***REMOVED***)
     {
         $this->cache      = $this->getCache();
-        $this->repository = $this->getSingleDbTableRepository();
+        $this->repository = $this->getMyTableTableRepository();
 
         return parent::selectAll($select);
     }
 
     /**
-     * Create a new Single Db Table on database.
+     * Create a new My Table Table on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful created.
      *
      * @param array $data Valid $_POST
      *
-     * @return null|MyModule\Entity\SingleDbTable
+     * @return null|MyModule\Entity\MyTableTable
      */
     public function create($data)
     {
-        $repository = $this->getSingleDbTableRepository();
+        $repository = $this->getMyTableTableRepository();
 
 
-        $singleDbTable = $repository->insert($data);
-        if ($singleDbTable) {
+        $myTableTable = $repository->insert($data);
+        if ($myTableTable) {
             $this->clearCache();
         }
-        return $singleDbTable;
+        return $myTableTable;
     }
 
     /**
-     * Update a existing Single Db Table on database.
+     * Update a existing My Table Table on database.
      *
      * Apply additional logic and then send forward to Repository. Clear Service Cache if successful updated.
      *
      * @param integer $idTable Id
      * @param array   $data    Valid $_POST
      *
-     * @return null|MyModule\Entity\SingleDbTable
+     * @return null|MyModule\Entity\MyTableTable
      */
     public function update($idTable, $data = [***REMOVED***)
     {
-        $repository = $this->getSingleDbTableRepository();
+        $repository = $this->getMyTableTableRepository();
 
 
-        $singleDbTable = $repository->update($idTable, $data);
-        if ($singleDbTable) {
+        $myTableTable = $repository->update($idTable, $data);
+        if ($myTableTable) {
             $this->clearCache();
         }
-        return $singleDbTable;
+        return $myTableTable;
     }
 
     /**
-     * Delete a existing Single Db Table by Id.
+     * Delete a existing My Table Table by Id.
      *
      * @param integer $idTable Id
      *
@@ -159,39 +166,40 @@ class SingleDbTableService extends AbstractService
             return ['success' => false, 'error' => 'EntityNotFound'***REMOVED***;
         }
 
-        $repository = $this->getSingleDbTableRepository();
-        $singleDbTable = $repository->deleteSafe($entity);
+        $repository = $this->getMyTableTableRepository();
+        $myTableTable = $repository->deleteSafe($entity);
 
 
-        if ($singleDbTable) {
+        if ($myTableTable) {
+            $this->getImageService()->deleteImages($idTable, 'myTableTable');
             $this->clearCache();
         }
-        return $singleDbTable;
+        return $myTableTable;
     }
 
     /**
      * Convert Entity to Array.
      *
-     * @param SingleDbTable $data Single Db Table Entity
+     * @param MyTableTable $data My Table Table Entity
      *
      * @return array
      */
-    public function extract(SingleDbTable $data)
+    public function extract(MyTableTable $data)
     {
-        $repository = $this->getSingleDbTableRepository();
+        $repository = $this->getMyTableTableRepository();
         return $repository->extract($data);
     }
 
     /**
-     * Select one Single Db Table by Id.
+     * Select one My Table Table by Id.
      *
      * @param array $idToSelect Id
      *
-     * @return null|MyModule\Entity\SingleDbTable
+     * @return null|MyModule\Entity\MyTableTable
      */
     public function selectById($idToSelect)
     {
-        $repository = $this->getSingleDbTableRepository();
+        $repository = $this->getMyTableTableRepository();
         return $repository->selectById($idToSelect);
     }
 }

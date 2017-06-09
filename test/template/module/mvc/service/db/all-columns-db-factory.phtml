@@ -34,6 +34,10 @@ class AllColumnsDbService extends AbstractService
 
     protected $authService;
 
+    const IMAGES = [
+        'uploadImageColumn'
+    ***REMOVED***;
+
     /**
      * Constructor
      *
@@ -103,7 +107,7 @@ class AllColumnsDbService extends AbstractService
      *
      * @return array
      */
-    public function selectAll($select = array())
+    public function selectAll($select = [***REMOVED***)
     {
         $this->cache      = $this->getCache();
         $this->repository = $this->getAllColumnsDbRepository();
@@ -125,21 +129,18 @@ class AllColumnsDbService extends AbstractService
         $repository = $this->getAllColumnsDbRepository();
 
         $this->createPassword('passwordVerifyColumn');
-        $uploadImageColumn = $this->getImageService()->overwriteImage(
+        $images = $this->getImageService()->replaceDataForm(
             $data,
             'table',
-            'uploadImageColumn'
+            self::IMAGES
         );
 
         $allColumnsDb = $repository->insert($data);
         if ($allColumnsDb) {
-            if (isset($data['uploadImageColumn'***REMOVED***)) {
-                $this->getImageService()->createUploadImage(
-                    $uploadImageColumn,
-                    'table-uploadImageColumn',
-                    $data['uploadImageColumn'***REMOVED***
-                );
-            }
+            $this->getImageService()->saveImageColumns(
+                $images,
+                'table'
+            );
             $this->clearCache();
         }
         return $allColumnsDb;
@@ -155,26 +156,23 @@ class AllColumnsDbService extends AbstractService
      *
      * @return null|MyModule\Entity\AllColumnsDb
      */
-    public function update($idTable, $data = array())
+    public function update($idTable, $data = [***REMOVED***)
     {
         $repository = $this->getAllColumnsDbRepository();
 
         $this->createPassword('passwordVerifyColumn');
-        $uploadImageColumn = $this->getImageService()->overwriteImage(
+        $images = $this->getImageService()->replaceDataForm(
             $data,
             'table',
-            'uploadImageColumn'
+            self::IMAGES
         );
 
         $allColumnsDb = $repository->update($idTable, $data);
         if ($allColumnsDb) {
-            if (isset($data['uploadImageColumn'***REMOVED***)) {
-                $this->getImageService()->updateUploadImage(
-                    $uploadImageColumn,
-                    'table-uploadImageColumn',
-                    $data['uploadImageColumn'***REMOVED***
-                );
-            }
+            $this->getImageService()->saveImageColumns(
+                $images,
+                'table'
+            );
             $this->clearCache();
         }
         return $allColumnsDb;
@@ -201,7 +199,11 @@ class AllColumnsDbService extends AbstractService
 
         if ($allColumnsDb) {
             $this->getImageService()->deleteImages($idTable, 'allColumnsDb');
-            $this->getImageService()->deleteUploadImage($idTable, 'table');
+            $this->getImageService()->deleteImagesTableColumn(
+                $entity,
+                self::IMAGES,
+                'table'
+            );
             $this->clearCache();
         }
         return $allColumnsDb;

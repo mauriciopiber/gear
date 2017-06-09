@@ -1,6 +1,8 @@
 <?php
 namespace GearTest;
 
+use Gear\Column\Varchar\UploadImage;
+
 trait AllColumnsDbTableTrait
 {
     public function prophesizeColumn($tableName, $columnName, $columnType)
@@ -25,6 +27,28 @@ trait AllColumnsDbTableTrait
         }
 
         return $foreignKey->reveal();
+    }
+
+    public function getUploadImageColumns($tableName)
+    {
+        $columns = [***REMOVED***;
+
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('MyModule');
+
+        $this->string = new \GearBase\Util\String\StringService();
+
+        foreach (['my_image_one', 'my_image_two'***REMOVED*** as $columnName) {
+            $uploadImage = new UploadImage(
+                $this->prophesizeColumn($tableName, $columnName, 'varchar')
+            );
+            $uploadImage->setModule($module->reveal());
+            $uploadImage->setStringService($this->string);
+            $columns[***REMOVED*** = $uploadImage;
+        }
+
+
+        return $columns;
     }
 
     public function getAllPossibleColumns()
