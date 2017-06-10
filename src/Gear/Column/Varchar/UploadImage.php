@@ -134,22 +134,22 @@ EOS;
     {
         $table = $this->str('var', $this->column->getTableName());
         $tableUrl = $this->str('url', $this->column->getTableName());
+        $tableClass = $this->str('class', $this->column->getTableName());
         $columnUrl = $this->str('url', $this->column->getName());
         $columnVar = $this->str('var', $this->column->getName());
 
         $overwrite = strtolower($table.$columnVar);
 
         return <<<EOS
-        \$this->imageService->overwriteImage(
-            ["$columnVar" => "image123"***REMOVED***,
-            "{$tableUrl}",
-            "{$columnVar}"
-        )->willReturn('{$overwrite}')->shouldBeCalled();
+        \$this->imageService->replaceDataForm(
+            \$data,
+            '{$tableUrl}',
+            {$tableClass}Service::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
 
-        \$this->imageService->createUploadImage(
-            '{$overwrite}',
-            '{$tableUrl}-{$columnVar}',
-            'image123'
+        \$this->imageService->saveImageColumns(
+            [***REMOVED***,
+            '{$tableUrl}'
         )->shouldBeCalled();
 
 EOS;
@@ -161,6 +161,8 @@ EOS;
      */
     public function getServiceUpdateMock()
     {
+        return $this->getServiceCreateMock();
+        /*
         $table = $this->str('var', $this->column->getTableName());
         $tableUrl = $this->str('url', $this->column->getTableName());
         $columnUrl = $this->str('url', $this->column->getName());
@@ -180,6 +182,7 @@ EOS;
             '{$tableUrl}-{$columnVar}',
             'image123'
         )->shouldBeCalled();
+        */
 
 EOS;
     }
@@ -711,8 +714,8 @@ EOS;
             <?php echo \$this->formElementErrors(\$form->get('$elementName')); ?>
         </div>
         <div class="form-group">
-            <?php if (\$this->$elementName) : ?>
-                <img src="/<?php echo \$this->$elementName;?>"/>
+            <?php if (isset(\$this->images['$elementName'***REMOVED***))  : ?>
+                <img src="/<?php echo \$this->images['$elementName'***REMOVED***;?>"/>
             <?php endif;?>
         </div>
 

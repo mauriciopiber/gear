@@ -114,8 +114,8 @@ class ServiceServiceTest extends TestCase
         $expected = $this->templates.'/src/service-with-special-dependency.phtml';
 
         $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents($file)
+            trim(file_get_contents($expected)),
+            trim(file_get_contents($file))
         );
     }
 
