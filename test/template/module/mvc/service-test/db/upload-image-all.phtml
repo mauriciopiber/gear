@@ -1,1 +1,263 @@
 <?php
+namespace MyModuleTest\MyTableAllTest;
+
+use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Mvc\Router\Http\RouteMatch;
+use MyModule\MyTableAll\MyTableAllService;
+
+/**
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @group MyModule
+ * @group MyTableAllService
+ * @group Service
+ */
+class MyTableAllServiceTest extends TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->cache = $this->prophesize('Zend\Cache\Storage\Adapter\Memcached');
+        $this->zfcuserAuthService = $this->prophesize('Zend\Authentication\AuthenticationService');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+
+        $this->service = new MyTableAllService(
+            $this->repository->reveal(),
+            $this->cache->reveal(),
+            $this->zfcuserAuthService->reveal(),
+            $this->imageService->reveal()
+        );
+    }
+
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function testSetSelectAllCache()
+    {
+        $this->service->setSessionName('testing');
+
+        $data = ['data' => true***REMOVED***;
+
+        $this->cache->hasItem('testingResult')->willReturn(null);
+        $this->cache->addItem('testingResult', $data)->willReturn(null);
+        $this->cache->getItem('testingResult')->willReturn($data);
+
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
+        $selected = $this->service->setSelectAllCache($data);
+        $this->assertEquals($data, $selected);
+    }
+
+    public function testSelectAllCacheWithCache()
+    {
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idMyTableAll', 'DESC'));
+
+        $this->assertEquals('idMyTableAll', $this->service->getOrderBy());
+        $this->assertEquals('DESC', $this->service->getOrder());
+
+        $this->service->selectAll();
+
+        $this->service->setRouteMatch($this->getRouteMatch(1, 'idMyTableAll', 'ASC'));
+
+        $this->assertEquals('idMyTableAll', $this->service->getOrderBy());
+        $this->assertEquals('ASC', $this->service->getOrder());
+
+        $this->service->setRouteMatch(
+            $this->getRouteMatch(1, 'idMyTableAll', 'DESC')
+        );
+
+        $this->assertEquals(
+            'idMyTableAll',
+            $this->service->getOrderBy()
+        );
+        $this->assertEquals('DESC', $this->service->getOrder());
+    }
+
+    public function testTableHead()
+    {
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->repository->getMapReferences()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->service->setMyTableAllRepository($this->repository->reveal());
+
+        $resultSet = $this->service->getTableHead();
+        $this->assertTrue(is_array($resultSet));
+    }
+
+    public function testSelectById()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $this->entity->getIdMyTableAll()->willReturn(1);
+
+        $this->repository->selectById(1)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $resultSet = $this->service->selectById(1);
+        $this->assertInstanceOf('MyModule\Entity\MyTableAll', $resultSet);
+        $this->assertEquals(1, $resultSet->getIdMyTableAll());
+    }
+
+    public function testSelectOne()
+    {
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $this->entity->getIdMyTableAll()->willReturn(30);
+
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->repository->selectOneBy(['idMyTableAll' => 30***REMOVED***)->willReturn($this->entity->reveal())->shouldBeCalled();
+
+        $this->service->setMyTableAllRepository($this->repository->reveal());
+
+        $resultSet = $this->service->selectOneBy(
+            array(
+                'idMyTableAll' =>
+                    30
+            )
+        );
+        $this->assertInstanceOf('MyModule\Entity\MyTableAll', $resultSet);
+        $this->assertEquals(
+            30,
+            $resultSet->getIdMyTableAll()
+        );
+    }
+
+    /**
+     * @group service.create
+     */
+    public function testCreate()
+    {
+        $entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $entity->getIdMyTableAll()->willReturn(31);
+
+        $data = array(
+            'myImageOne' => 'image123',
+            'myImageTwo' => 'image123',
+        );
+
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->repository->insert($data)->willReturn($entity)->shouldBeCalled();
+
+        $this->service->setMyTableAllRepository($this->repository->reveal());
+
+        $this->imageService->replaceDataForm(
+            $data,
+            'my-table-all',
+            MyTableAllService::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->imageService->saveImageColumns(
+            [***REMOVED***,
+            'my-table-all'
+        )->shouldBeCalled();
+
+        $resultSet = $this->service->create($data);
+
+        $this->assertInstanceOf('MyModule\Entity\MyTableAll', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdMyTableAll());
+
+        return $resultSet;
+    }
+
+    /**
+     * @group service.update
+     */
+    public function testUpdate()
+    {
+        $entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $entity->getIdMyTableAll()->willReturn(31);
+
+        $data = array(
+            'myImageOne' => 'image123',
+            'myImageTwo' => 'image123',
+        );
+
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->repository->update(31, $data)->willReturn($entity)->shouldBeCalled();
+
+        $this->service->setMyTableAllRepository($this->repository->reveal());
+
+        $this->service->setCache($this->cache->reveal());
+
+        $this->imageService->replaceDataForm(
+            $data,
+            'my-table-all',
+            MyTableAllService::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->imageService->saveImageColumns(
+            [***REMOVED***,
+            'my-table-all'
+        )->shouldBeCalled();
+
+        $resultSet = $this->service->update(31, $data);
+
+
+        $this->assertInstanceOf('MyModule\Entity\MyTableAll', $resultSet);
+        $this->assertEquals(31, $resultSet->getIdMyTableAll());
+
+        return $resultSet;
+    }
+
+    /**
+     * @group service.delete
+     */
+    public function testDelete()
+    {
+        $entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $entity->getIdMyTableAll()->willReturn(31);
+
+        $this->repository->selectById(31)->willReturn($entity->reveal())->shouldBeCalled();
+        $this->repository->deleteSafe($entity->reveal())->willReturn(true)->shouldBeCalled();
+
+        $this->service->setCache($this->cache->reveal());
+
+        $resultSet = $this->service->delete(31);
+        $this->assertTrue($resultSet);
+    }
+
+    /**
+     * @group service.delete
+     */
+    public function testDeleteWithoutExistingData()
+    {
+        $this->repository->selectById(31)->willReturn(false)->shouldBeCalled();
+
+        $resultSet = $this->service->delete(31);
+        $this->assertFalse($resultSet['success'***REMOVED***);
+        $this->assertEquals('EntityNotFound', $resultSet['error'***REMOVED***);
+    }
+
+    /**
+     * @group service.extract
+     */
+    public function testExtract()
+    {
+        $entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $entity->getIdMyTableAll()->willReturn(31);
+
+        $data = ['idMyTableAllService' => 31***REMOVED***;
+        $this->repository = $this->prophesize('MyModule\MyTableAll\MyTableAllRepository');
+        $this->repository->extract($entity)->willReturn($data)->shouldBeCalled();
+
+        $this->service->setMyTableAllRepository($this->repository->reveal());
+
+        $resultSet = $this->service->extract($entity->reveal());
+        $this->assertEquals($data, $resultSet);
+    }
+
+    public function getRouteMatch($page, $orderBy = 'idMyTableAll', $order = 'DESC')
+    {
+        $routeMatch = new RouteMatch(array(
+            'controller' => 'MyModule\Controller\MyTableAll',
+            'action'     => 'list',
+            'page' => $page,
+            'orderBy' => $orderBy,
+            'order' => $order
+        ));
+
+        $routeMatch->setMatchedRouteName('my-module/my-table-all');
+        return $routeMatch;
+    }
+}
