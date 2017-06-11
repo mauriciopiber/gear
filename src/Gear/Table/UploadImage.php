@@ -154,9 +154,8 @@ EOS;
 
         \$this->{$tableVar}Service->selectById(31)->willReturn(\$this->entity)->shouldBeCalled();
 
-        \$this->imageService->appendPlugin()->shouldBeCalled();
         \$this->imageService->updateImages('{$tableUrl}', 31)->willReturn(true)->shouldBeCalled();
-        \$this->imageService->updatePosition([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        \$this->imageService->updateImageInfo([***REMOVED***)->willReturn(true)->shouldBeCalled();
         \$this->imageService->clearCache()->shouldBeCalled();
 
         \$prg = \$this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');

@@ -140,16 +140,15 @@ class AllColumnsDbServiceTest extends TestCase
 
         $this->service->setAllColumnsDbRepository($this->repository->reveal());
 
-        $this->imageService->overwriteImage(
-            ["uploadImageColumn" => "image123"***REMOVED***,
-            "table",
-            "uploadImageColumn"
-        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
+        $this->imageService->replaceDataForm(
+            $data,
+            'all-columns-db',
+            AllColumnsDbService::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->imageService->createUploadImage(
-            'tableuploadimagecolumn',
-            'table-uploadImageColumn',
-            'image123'
+        $this->imageService->saveImageColumns(
+            [***REMOVED***,
+            'all-columns-db'
         )->shouldBeCalled();
 
         $resultSet = $this->service->create($data);
@@ -179,20 +178,18 @@ class AllColumnsDbServiceTest extends TestCase
 
         $this->service->setCache($this->cache->reveal());
 
-        $this->imageService->overwriteImage(
-            ["uploadImageColumn" => "image123"***REMOVED***,
-            "table",
-            "uploadImageColumn"
-        )->willReturn('tableuploadimagecolumn')->shouldBeCalled();
+        $this->imageService->replaceDataForm(
+            $data,
+            'all-columns-db',
+            AllColumnsDbService::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->imageService->updateUploadImage(
-            'tableuploadimagecolumn',
-            'table-uploadImageColumn',
-            'image123'
+        $this->imageService->saveImageColumns(
+            [***REMOVED***,
+            'all-columns-db'
         )->shouldBeCalled();
 
-        $resultSet = $this->service
-            ->update(31, $data);
+        $resultSet = $this->service->update(31, $data);
 
 
         $this->assertInstanceOf('MyModule\Entity\AllColumnsDb', $resultSet);

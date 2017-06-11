@@ -9,14 +9,36 @@ use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
 
 class CodeTest extends AbstractCodeTest
 {
-    public function getConstructor($src)
+    const EMPTY = '';
+
+    const CLEAR = ' ';
+
+    public function getPluginManager($pluginManager)
     {
-        if ($src instanceof Controller) {
-            $names = 'controller';
-        } else {
-            $names = $this->str('var', $src->getType());
+        if (empty($pluginManager)) {
+            return self::EMPTY;
         }
 
+        $template = self::EMPTY.PHP_EOL.PHP_EOL;
+
+        foreach ($pluginManager as $call => $pluginClass) {
+
+            $var = $this->str('var-length', $call);
+
+            $template .= <<<EOS
+        \$this->{$var} = \$this->prophesize('{$pluginClass}');
+        \$this->controller->getPluginManager()->setService('{$call}', \$this->{$var}->reveal());
+EOS;
+
+        }
+
+        return $template;
+    }
+
+
+    public function getConstructor($src, array $pluginManager = [***REMOVED***)
+    {
+        $names = ($src instanceof Controller) ?  'controller' :  $this->str('var', $src->getType()) ;
 
         $template = '';
 

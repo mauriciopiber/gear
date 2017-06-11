@@ -146,8 +146,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $this->service->setCache($this->cache->reveal());
 
 <?php echo ($this->updateMock !== null) ? $this->updateMock.PHP_EOL : '';?>
-        $resultSet = $this->service
-            ->update(31, $data);
+        $resultSet = $this->service->update(31, $data);
 
 
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
