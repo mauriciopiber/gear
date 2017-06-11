@@ -291,10 +291,17 @@ class ControllerTestService extends AbstractMvcTest implements
                 $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
                 $this->controller->setDependency($dependency);
             }
+            $pluginManager = [***REMOVED***;
+            if ($hasImageTable) {
+                $pluginManager['appendUploadImagePlugin'***REMOVED*** = 'GearImage\Controller\Plugin\ImageControllerPlugin';
+            }
 
+            if (count($pluginManager) > 0) {
+                $construct['pluginManager'***REMOVED*** = $this->getCodeTest()->getPluginManager($pluginManager);
+            }
 
             $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
-            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller);
+            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller, $pluginManager);
         }
 
         if ($this->db->getUser() == 'low-strict') {

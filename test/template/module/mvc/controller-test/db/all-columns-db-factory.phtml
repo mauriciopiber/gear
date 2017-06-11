@@ -88,6 +88,9 @@ class TableControllerTest extends TestCase
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
 
+        $this->appendUploadImage = $this->prophesize('GearImage\Controller\Plugin\ImageControllerPlugin');
+        $this->controller->getPluginManager()->setService('appendUploadImagePlugin', $this->appendUploadImage->reveal());
+
         $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
     }
 
@@ -535,9 +538,8 @@ class TableControllerTest extends TestCase
 
         $this->tableService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
 
-        $this->imageService->appendPlugin()->shouldBeCalled();
         $this->imageService->updateImages('table', 31)->willReturn(true)->shouldBeCalled();
-        $this->imageService->updatePosition([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->imageService->updateImageInfo([***REMOVED***)->willReturn(true)->shouldBeCalled();
         $this->imageService->clearCache()->shouldBeCalled();
 
         $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');

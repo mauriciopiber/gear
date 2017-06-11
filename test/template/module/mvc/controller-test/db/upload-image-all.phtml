@@ -1,1 +1,561 @@
 <?php
+namespace MyModuleTest\MyTableAllTest;
+
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\MyTableAll\MyTableAllController;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
+
+/**
+ * @group MyModule
+ * @group MyTableAll
+ * @group Controller
+ * @group MyTableAllController
+ */
+class MyTableAllControllerTest extends TestCase
+{
+    use AclAssertTrait;
+
+    public function mockUploadImage()
+    {
+        $maker = new \GearBaseTest\UploadImageMock();
+        return $maker->mockUploadFile(\MyModule\Module::getLocation());
+    }
+
+    public function mockTestUploadImageFactory($columns)
+    {
+        $this->getApplication()
+        ->getServiceManager()
+        ->setAllowOverride(true);
+
+        $mockFilter = $this->getMockSingleClass('MyModule\Filter\MyTableAllFilter', array('isValid'));
+        $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
+
+
+        $factory = $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->get('MyModule\Form\MyTableAllForm');
+
+        $factory->setUseInputFilterDefaults(false);
+
+        $filter = $factory->getInputFilter();
+
+        foreach ($columns as $column) {
+            $mockFileInput = $this->getMockSingleClass('Zend\InputFilter\FileInput', array('isValid', 'getName'));
+            $mockFileInput->expects($this->any())->method('isValid')->willReturn(true);
+            $mockFileInput->expects($this->any())->method('getName')->willReturn($column);
+            $filter->getInputFilter()->remove($column)->add($mockFileInput);
+        }
+
+        $factory->setInputFilter($filter);
+
+        $this->getApplication()
+        ->getServiceManager()
+        ->get('ServiceManager')->setService('MyModule\Form\MyTableAllForm', $factory);
+    }
+
+    public function setUp()
+    {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+        parent::setUp();
+
+        $this->myTableAllService = $this->prophesize('MyModule\MyTableAll\MyTableAllService');
+        $this->myTableAllForm = $this->prophesize('MyModule\MyTableAll\MyTableAllForm');
+        $this->myTableAllSearchForm = $this->prophesize('MyModule\MyTableAll\MyTableAllSearchForm');
+        $this->imageService = $this->prophesize('GearImage\Service\ImageService');
+
+        $this->controller = new MyTableAllController(
+            $this->myTableAllService->reveal(),
+            $this->myTableAllForm->reveal(),
+            $this->myTableAllSearchForm->reveal(),
+            $this->imageService->reveal()
+        );
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'MyTableAllController'));
+        $this->event      = new MvcEvent();
+
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $requestPlugin = new \GearBase\Controller\Plugin\RequestPlugin();
+        $this->controller->getPluginManager()->setService('getRequestPlugin', $requestPlugin);
+
+        $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
+        $this->controller->getPluginManager()->setService('url', $this->url->reveal());
+
+        $this->appendUploadImage = $this->prophesize('GearImage\Controller\Plugin\ImageControllerPlugin');
+        $this->controller->getPluginManager()->setService('appendUploadImagePlugin', $this->appendUploadImage->reveal());
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+    }
+
+    protected function tearDown()
+    {
+        $refl = new \ReflectionObject($this);
+        foreach ($refl->getProperties() as $prop) {
+            if (!$prop->isStatic() && 0 !== strpos($prop->getDeclaringClass()->getName(), 'PHPUnit_')) {
+                $prop->setAccessible(true);
+                $prop->setValue($this, null);
+            }
+        }
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testEnterCreatePage()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'MyTableAllController', 'Create');
+
+        $this->routeMatch->setParam('action', 'create');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreatePageRedirectToGet()
+    {
+        $this->url->fromRoute(MyTableAllController::CREATE)->willReturn(MyTableAllController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
+        $this->response->getStatusCode()->willReturn(303);
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/create', true)->willReturn($this->response->reveal());
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+        $this->assertEquals(303, $result->getStatusCode());
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testSendPostToCreateShowValidation()
+    {
+        $this->url->fromRoute(MyTableAllController::CREATE)->willReturn(MyTableAllController::CREATE);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/create', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.create
+     */
+    public function testCreateSuccessful()
+    {
+        $this->url->fromRoute(MyTableAllController::CREATE)->willReturn(MyTableAllController::CREATE);
+        $this->url->fromRoute("my-module/my-table-all/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)
+          ->willReturn(MyTableAllController::EDIT.'/31/1');
+
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/create', true)->willReturn($data);
+
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $this->entity->getIdMyTableAll()->willReturn(31)->shouldBeCalled();
+
+        $this->myTableAllForm->setData($data)->shouldBeCalled();
+        $this->myTableAllForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->myTableAllForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->myTableAllService->create($data)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'create');
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditDisplaySuccessful()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'edit');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenEditRedirectWithInvalidIdToListing()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->myTableAllService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 6000);
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testDisplayEditSuccessful()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'MyTableAllController', 'Edit');
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidId()
+    {
+        $this->url->fromRoute(MyTableAllController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyTableAllController::EDIT);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity);
+
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
+        $this->response->getStatusCode()->willReturn(303);
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/edit', true)->willReturn($this->response->reveal());
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+
+        $this->assertEquals(303, $result->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testWhenListRedirectSuccessfulPRGWithValidIdReturnValidation()
+    {
+        $this->url->fromRoute(MyTableAllController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyTableAllController::EDIT.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/edit/31', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.edit
+     */
+    public function testEditSuccessfull()
+    {
+        $this->url->fromRoute(MyTableAllController::EDIT, ['id' => 31***REMOVED***)->willReturn(MyTableAllController::EDIT);
+        $this->url->fromRoute("my-module/my-table-all/edit", ["id" => 31, "success" => 1***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::EDIT.'/31/1');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $data = array(
+        );
+
+        $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
+        $this->prg->setController($this->controller)->shouldBeCalled();
+        $this->prg->__invoke($this->myTableAllForm, 'my-module/my-table-all/edit', true)->willReturn([***REMOVED***);
+        $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        $this->entity->getIdMyTableAll()->willReturn(31)->shouldBeCalled();
+
+        $this->myTableAllForm->setData($data)->shouldBeCalled();
+        $this->myTableAllForm->isValid()->willReturn(true)->shouldBeCalled();
+        $this->myTableAllForm->getData()->willReturn($data)->shouldBeCalled();
+        $this->myTableAllService->update(31, $data)->willReturn($this->entity)->shouldBeCalled();
+        $this->myTableAllService->selectById(31)->willReturn($this->entity);
+
+        $this->routeMatch->setParam('action', 'edit');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.list
+     */
+    public function testWhenListDisplaySuccessful()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'MyTableAllController', 'List');
+
+        $this->myTableAllService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'list');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessfulWithValidId()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'MyTableAllController', 'View');
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+        //$this->entity->getIdMyTableAll()->willReturn(31)->shouldBeCalled();
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity->reveal());
+        $this->myTableAllService->extract($this->entity->reveal())->willReturn([***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 31);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testViewSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->myTableAllService->selectById(6000)->willReturn(null);
+
+        $this->routeMatch->setParam('action', 'view');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.view
+     */
+    public function testWhenViewDisplaySuccessful()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'view');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
+    {
+        $this->assertAcl($this->schema, 'MyModule', 'MyTableAllController', 'Delete');
+
+        $this->myTableAllService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testDeleteSucessfullAndRedirectToListWithSuccessful()
+    {
+        $this->myTableAllService->delete(6000)->willReturn(['success' => true***REMOVED***);
+
+        $this->routeMatch->setParam('action', 'delete');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
+    }
+
+    /**
+     * @group controller.delete
+     */
+    public function testWhenDeleteDisplaySuccessful()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'delete');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithoutIdReturnToList()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testAccessUploadImageWithInvalidIdReturnToList()
+    {
+        $this->url->fromRoute(MyTableAllController::LISTS, [***REMOVED***, [***REMOVED***, false)->willReturn(MyTableAllController::LISTS);
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->myTableAllService->selectById(6000)->willReturn(null)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 6000);
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageReturnPRGPlugin()
+    {
+        $this->url->fromRoute(MyTableAllController::IMAGE, ['id' => 31***REMOVED***)->willReturn(MyTableAllController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(303, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
+
+    /**
+     * @group controller.upload-image
+     */
+    public function testPostUploadImageProcessSuccess()
+    {
+        $this->url->fromRoute(MyTableAllController::IMAGE, ['id' => 31***REMOVED***)->willReturn(MyTableAllController::IMAGE.'/31');
+        $this->url->setController($this->controller)->shouldBeCalled();
+
+        $this->entity = $this->prophesize('MyModule\Entity\MyTableAll');
+
+        $this->myTableAllService->selectById(31)->willReturn($this->entity)->shouldBeCalled();
+
+        $this->imageService->updateImages('my-table-all', 31)->willReturn(true)->shouldBeCalled();
+        $this->imageService->updateImageInfo([***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->imageService->clearCache()->shouldBeCalled();
+
+        $prg = $this->prophesize('Zend\Mvc\Controller\Plugin\PostRedirectGet');
+        $prg->setController($this->controller)->shouldBeCalled();
+        $prg->__invoke('my-module/my-table-all/upload-image/31', true)->willReturn([***REMOVED***);
+
+        $this->controller->getPluginManager()->setService('postredirectget', $prg->reveal());
+
+        $this->routeMatch->setParam('action', 'upload-image');
+        $this->routeMatch->setParam('id', 31);
+
+        $this->request->setMethod('POST');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
+}

@@ -28,7 +28,6 @@ trait ControllerDataTrait
             [$this->getUploadImageColumns('my_table_columns'), 'upload-image-columns', false, true, false, 'my_table_column', 'factories', 'MyTableColumn', 'all'***REMOVED***,
             [$this->getSingleColumns('my-table-table'), 'upload-image-table', false, false, true, 'my_table_table', 'factories', 'MyTableTable', 'all'***REMOVED***,
             [$this->getUploadImageColumns('my-table-all'), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***,
-            //[$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null, 'all'***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', true, true, true, 'table', 'factories', null, 'all'***REMOVED***,
             [$this->getSingleColumns(), 'single-db-factory', true, false, false, 'single_db_table', 'factories', null, 'all'***REMOVED***,
             [
@@ -97,9 +96,6 @@ trait ControllerDataTrait
                 'Custom\CustomNamespace',
                 'all'
             ***REMOVED***
-            //[$this->getAllPossibleColumnsNotNull(), 'all-columsn-db-not-null', false***REMOVED***,
-            //[$this->getAllPossibleColumnsUnique(), 'all-columsn-db-unique', true***REMOVED***,
-            //[$this->getAllPossibleColumnsUniqueNotNull(), 'all-columsn-db-unique-not-null', false***REMOVED***,
         ***REMOVED***;
     }
 }

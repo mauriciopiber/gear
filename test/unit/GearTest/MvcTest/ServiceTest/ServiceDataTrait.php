@@ -32,7 +32,6 @@ trait ServiceDataTrait
             [$this->getUploadImageColumns('my_table_columns'), 'upload-image-columns', false, true, false, 'my_table_column', 'factories', 'MyTableColumn', 'all'***REMOVED***,
             [$this->getSingleColumns('my_table_table'), 'upload-image-table', false, false, true, 'my_table_table', 'factories', 'MyTableTable', 'all'***REMOVED***,
             [$this->getUploadImageColumns('my_table_all'), 'upload-image-all', false, true, true, 'my_table_all', 'factories', 'MyTableAll', 'all'***REMOVED***,
-            /*
             // [$this->getAllPossibleColumns(), 'all-columns-db', true, true, true, 'table', 'invokables', null***REMOVED***,
             [
                 $this->getAllPossibleColumns('all_columns_db'),
@@ -98,7 +97,7 @@ trait ServiceDataTrait
                 'factories',
                 'Custom\CustomNamespace',
                 'low-strict'
-            ***REMOVED****/
+            ***REMOVED***
         ***REMOVED***;
     }
 }

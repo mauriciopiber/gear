@@ -143,13 +143,13 @@ class MyTableColumnServiceTest extends TestCase
 
         $this->imageService->replaceDataForm(
             $data,
-            'my-table-column',
-            MyTableColumnService::IMAGES
+            'my-table-columns',
+            MyTableColumnsService::IMAGES
         )->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->imageService->saveImageColumns(
             [***REMOVED***,
-            'my-table-column'
+            'my-table-columns'
         )->shouldBeCalled();
 
         $resultSet = $this->service->create($data);
@@ -180,21 +180,18 @@ class MyTableColumnServiceTest extends TestCase
 
         $this->service->setCache($this->cache->reveal());
 
-
         $this->imageService->replaceDataForm(
             $data,
-            'my-table-column',
-            MyTableColumnService::IMAGES
+            'my-table-columns',
+            MyTableColumnsService::IMAGES
         )->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->imageService->saveImageColumns(
             [***REMOVED***,
-            'my-table-column'
+            'my-table-columns'
         )->shouldBeCalled();
 
-
-        $resultSet = $this->service
-            ->update(31, $data);
+        $resultSet = $this->service->update(31, $data);
 
 
         $this->assertInstanceOf('MyModule\Entity\MyTableColumn', $resultSet);

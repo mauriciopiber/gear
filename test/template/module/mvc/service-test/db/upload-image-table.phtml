@@ -161,8 +161,7 @@ class MyTableTableServiceTest extends TestCase
         $this->service->setCache($this->cache->reveal());
 
 
-        $resultSet = $this->service
-            ->update(31, $data);
+        $resultSet = $this->service->update(31, $data);
 
 
         $this->assertInstanceOf('MyModule\Entity\MyTableTable', $resultSet);
