@@ -18,6 +18,7 @@ basepath = (basepath == null && fs.existsSync(tryProject)) ? tryProject : basepa
 
 var database = require(basepath + '/public/js/spec/e2e/support/database/database.js');
 var memcached = require(basepath + '/public/js/spec/e2e/support/memcached/memcached.js');
+var admin = require(basepath + '/public/js/spec/e2e/support/helper/admin.js');
 
 module.exports = function () {
 
@@ -41,5 +42,17 @@ module.exports = function () {
         }).then(function() {
             callback();
         });
+    });
+
+    this.Given(/^que eu estou na página de editar de <?php echo $this->module;?> - <?php echo $this->table;?> "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/editar', 30, callback);
+    });
+
+    this.Given(/^que eu estou na página de visualizar imagens de <?php echo $this->module;?> - <?php echo $this->table;?> "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/visualizar', 30, callback);
+    });
+
+    this.Given(/^que eu estou na página de editar imagens de <?php echo $this->module;?> - <?php echo $this->table;?> "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('<?php echo $this->moduleUrl;?>/<?php echo $this->tableUrl;?>/upload-image', 30, callback);
     });
 };

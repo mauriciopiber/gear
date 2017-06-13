@@ -153,6 +153,11 @@ class ViewService extends AbstractJsonService
         );
     }
 
+    /**
+     * @deprecated
+     *
+     * @return unknown
+     */
     public function createTemplateForm()
     {
         return $this->getFileCreator()->createFileFromTemplate(

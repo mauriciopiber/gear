@@ -19,14 +19,20 @@ src:
 #          0: 
 #            class: GearBase\Util\String\StringService
 #            aliase: GearBase\Util\String
-#  srcminor:
-#    name: TemplateService
-#    type: Factory
-#    namespace: Creator\Template
+  uploadimagetable:
+    name: UploadImage
+    type: Factory
+    namespace: Table
+    service: factories
+    dependency:
+      0:
+        class: \GearBase\Util\String\StringService
+        aliase: GearBase\Util\String
+      
 
-  0:
-    name: TestService
-    type: Service
+#  0:
+#    name: TestService
+#    type: Service
            
 #  2:
 #    name: InterfaceCode

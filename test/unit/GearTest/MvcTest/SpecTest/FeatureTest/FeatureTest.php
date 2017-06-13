@@ -455,6 +455,7 @@ class FeatureTest extends TestCase
 
     /**
      * @group Spec1
+     * @group uploadImage
      */
     public function testBuildUploadImageAction()
     {

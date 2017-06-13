@@ -6,10 +6,37 @@ Funcionalidade: Visualizar imagens cadastradas em um My Table.
 
   Como Administrador, quero visualizar as imagens de um My Table.
 
-    Cenário: Acesso a página de Visualizar Imagens em My Table.
+    Cenário: Como administrador, quero Navegar até a página Editar Imagens de My Table.
       Dado que eu estou logado na página principal
       E eu clico no menu "My Module - My Table - Listar"
       E eu vejo o ítem ID "30" na linha "1"
       Quando eu clico no botão Editar no ítem ID "30"
       E eu clico no botão "Editar Imagens"
-      Então eu vejo "3" imagens cadastradas.
+      Então eu vejo o título "Editar Imagens - My Table - Admin PiberNetwork"
+      E eu vejo o título central "Editar Imagens - My Table - 30"
+      E eu vejo o breadscrumb "My Module / My Table / Editar Imagens"
+      Então eu vejo o total de "3" imagens.
+
+   Cenário: Como administrador, quero cadastrar uma nova imagem em My Table.
+      Dado que eu estou na página de editar imagens de My Module - My Table "30"
+      Quando eu adiciono uma nova imagem
+      E eu clico em upload
+      E adiciono informações adicionais
+      E salvo as imagens
+      Então eu vejo que a imagem foi adicionada corretamente.
+      E eu vejo o total de "4" imagens.
+
+   Cenário: Como administrador, quero deletar imagens cadastradas em My Table.
+      Dado que eu estou na página de editar imagens de My Module - My Table "30"
+      Então eu vejo o total de "4" imagens.
+      E há imagens cadastradas
+      Quando eu deleto uma imagem
+      E salvo as imagens
+      Então eu vejo o total de "3" imagens.
+
+   Cenário: Como administrador, quero alterar as informações associadas às imagens cadastradas em My Table.
+      Dado que eu estou na página de editar imagens de My Module - My Table "30"
+      E há imagens cadastradas
+      Quando eu modifico os dados das imagens
+      E salvo as imagens
+      Então eu vejo as imagens salvar com os dados modificados

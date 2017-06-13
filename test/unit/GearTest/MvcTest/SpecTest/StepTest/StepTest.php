@@ -68,6 +68,7 @@ class StepTest extends AbstractTestCase
     {
         $db = new Db(['table' => 'MyController'***REMOVED***);
 
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->column = $this->prophesize(ColumnService::class);
         $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();

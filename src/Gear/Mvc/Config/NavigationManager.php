@@ -122,7 +122,7 @@ class NavigationManager extends AbstractJsonService implements ModuleManagerInte
 
         if ($this->action->getController()->getDb() !== null
           && $this->action->getController()->getDb() instanceof Db
-            && in_array($this->action->getName(), ['Edit', 'Delete', 'View'***REMOVED***)
+            && in_array($this->action->getName(), ['Edit', 'Delete', 'View', 'UploadImage'***REMOVED***)
         ) {
             $page['show_in_menu'***REMOVED*** = false;
         }
