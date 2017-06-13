@@ -8,10 +8,12 @@ use GearJson\Action\Action;
 use GearJson\Db\Db;
 use Gear\Constructor\Helper;
 use GearJson\Schema\SchemaServiceTrait;
+use Gear\Table\UploadImageTrait;
 
 class ViewService extends AbstractJsonService
 {
     use SchemaServiceTrait;
+    use UploadImageTrait;
     use AngularServiceTrait;
 
     protected $timeTest;
@@ -391,9 +393,7 @@ class ViewService extends AbstractJsonService
 
         $this->images = '';
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
-            $uploadImage = new \Gear\Table\UploadImage();
-            $uploadImage->setServiceLocator($this->getServiceLocator());
-            $this->images = $uploadImage->getViewView($this->tableName);
+            $this->images = $this->getUploadImage()->getViewView($this->tableName);
         }
 
         $file->setTemplate('template/module/view/view/view.phtml');

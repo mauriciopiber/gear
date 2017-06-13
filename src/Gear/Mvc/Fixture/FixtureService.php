@@ -24,6 +24,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 use Gear\Database\AutoincrementServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
+use Gear\Table\UploadImageTrait;
 
 class FixtureService extends AbstractMvc
 {
@@ -34,6 +35,8 @@ class FixtureService extends AbstractMvc
     protected $loadedFixtures;
 
     protected $event;
+
+    use UploadImageTrait;
 
     use AutoincrementServiceTrait;
 
@@ -324,16 +327,12 @@ class FixtureService extends AbstractMvc
      */
     public function getUploadImageTable()
     {
-        $uploadImage = new \Gear\Table\UploadImage();
-        //$uploadImage->setServiceLocator($this->getServiceLocator());
-        $uploadImage->setModule($this->getModule());
-        $uploadImage->setStringService($this->getStringService());
+        $this->load .= $this->getUploadImage()->getFixtureLoad($this->tableName);
+        $this->preLoad .= $this->getUploadImage()->getFixturePreLoad();
 
-        $this->load .= $uploadImage->getFixtureLoad($this->tableName);
-        $this->preLoad .= $uploadImage->getFixturePreLoad();
-
+        $uploadImage = $this->getUploadImage();
         if ($uploadImage instanceof \Gear\Column\ImplementsInterface) {
-            $implements = $uploadImage->getImplements('Fixture');
+            $implements = $this->getUploadImage()->getImplements('Fixture');
 
             foreach ($implements as $name => $item) {
                 if (array_key_exists($name, $this->include)) {

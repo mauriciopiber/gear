@@ -1,7 +1,11 @@
 <?php
 namespace Gear\Table;
 
-use Gear\Service\AbstractJsonService;
+use GearBase\Util\String\StringService;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Column\ImplementsInterface;
+use Gear\Module\BasicModuleStructure;
+use Gear\Module\ModuleAwareTrait;
 
 /**
  *
@@ -19,13 +23,23 @@ use Gear\Service\AbstractJsonService;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UploadImage extends AbstractJsonService implements \Gear\Column\ImplementsInterface
+class UploadImage implements ImplementsInterface
 {
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     const USE_ATTRIBUTE_TRAIT = 'GearImage\Service\ImageServiceTrait';
 
     const USE_ATTRIBUTE = 'GearImage\Service\ImageService';
 
     const ATTRIBUTE = 'ImageServiceTrait';
+
+    public function __construct(StringService $stringService, BasicModuleStructure $module)
+    {
+        $this->stringService = $stringService;
+        $this->module = $module;
+    }
 
     public function getImplements($codeName)
     {
