@@ -49,6 +49,9 @@ class Step extends AbstractMvcTest
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/mvc/spec/step/table.step.phtml');
         $file->setOptions([
+            'module' => $this->str('label', $this->getModule()->getModuleName()),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'table' => $this->str('label', $this->db->getTable()),
             'tableUline' => $this->str('uline', $this->db->getTable()),
             'tableUrl' => $this->str('url', $this->db->getTable()),
             'tableId' => $setUpId,

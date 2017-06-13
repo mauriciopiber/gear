@@ -46,7 +46,8 @@ class LanguageService extends AbstractJsonService
             'image' => 'imagem',
             'Image' => 'Imagem',
             'Images' => 'Imagens',
-            'UploadImage' => 'Upload Imagem',
+            'Upload Image' => 'Editar Imagens',
+            'Edit Images' => 'Editar Imagens',
             'New' => 'Novo',
             'Images of' => 'Imagens de',
             'The input was not found in the haystack' => 'Selecione ao menos uma das opções'

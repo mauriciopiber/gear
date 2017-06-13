@@ -18,6 +18,7 @@ basepath = (basepath == null && fs.existsSync(tryProject)) ? tryProject : basepa
 
 var database = require(basepath + '/public/js/spec/e2e/support/database/database.js');
 var memcached = require(basepath + '/public/js/spec/e2e/support/memcached/memcached.js');
+var admin = require(basepath + '/public/js/spec/e2e/support/helper/admin.js');
 
 module.exports = function () {
 
@@ -62,5 +63,17 @@ module.exports = function () {
         }).then(function() {
             callback();
         });
+    });
+
+    this.Given(/^que eu estou na página de editar de My Module - My Controller "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('my-module/my-controller/editar', 30, callback);
+    });
+
+    this.Given(/^que eu estou na página de visualizar imagens de My Module - My Controller "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('my-module/my-controller/visualizar', 30, callback);
+    });
+
+    this.Given(/^que eu estou na página de editar imagens de My Module - My Controller "([^"***REMOVED****)"$/, function (arg1, callback) {
+        admin.iAmOn('my-module/my-controller/upload-image', 30, callback);
     });
 };
