@@ -22,7 +22,7 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
 
     public function createTrait(
         $src,
-        $location,
+        $location = null,
         $name = null,
         $testLocation = null,
         $isSearchForm = false,
@@ -31,6 +31,8 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         if ($name === null) {
             $name = $src->getName();
         }
+
+        $location = $this->getCode()->getLocation($src);
 
         $trait = $this->getFileCreator();
         $trait->setTemplate('template/module/mvc/trait/src.phtml');

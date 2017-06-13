@@ -12,13 +12,15 @@ use GearJson\Db\Db;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
-use Gear\Table\UploadImage as UploadImageTable;
+use Gear\Table\UploadImageTrait;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
 {
+    use UploadImageTrait;
+
     use ControllerManagerTrait;
 
     const KEY_INSERT = 48;
@@ -208,11 +210,8 @@ class ControllerTestService extends AbstractMvcTest implements
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
             $hasImageTable = true;
-            $table = new UploadImageTable();
-            $table->setStringService($this->getStringService());
-            $table->setModule($this->getModule());
 
-            $this->functions .= $table->getControllerUnitTest($this->tableName);
+            $this->functions .= $this->getUploadImage()->getControllerUnitTest($this->tableName);
         }
 
         $actionOptions = [

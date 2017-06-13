@@ -14,12 +14,15 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlockGenerator;
+use Gear\Table\UploadImageTrait;
 
 class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
 {
+    use UploadImageTrait;
+
     use ControllerTestServiceTrait;
 
     use SchemaServiceTrait;
@@ -185,11 +188,9 @@ class ControllerService extends AbstractMvc implements
         $optionsView = [***REMOVED***;
 
         if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-            $uploadImage = new \Gear\Table\UploadImage();
-            $uploadImage->setStringService($this->getStringService());
             //$uploadImage->setServiceLocator($this->getServiceLocator());
-            $optionsView['imageQuery'***REMOVED*** = $uploadImage->getControllerViewQuery($this->tableName);
-            $optionsView['imageView'***REMOVED*** = $uploadImage->getControllerViewView($this->tableName);
+            $optionsView['imageQuery'***REMOVED*** = $this->getUploadImage()->getControllerViewQuery($this->tableName);
+            $optionsView['imageView'***REMOVED*** = $this->getUploadImage()->getControllerViewView($this->tableName);
         }
 
 

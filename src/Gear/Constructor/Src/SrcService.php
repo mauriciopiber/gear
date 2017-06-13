@@ -10,6 +10,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\SrcServiceTrait as JsonSrc;
 use Gear\Mvc\Form\FormServiceTrait;
+use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Mvc\Filter\FilterServiceTrait;
 use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
@@ -31,6 +32,8 @@ class SrcService extends AbstractJsonService
     protected $src;
 
     use ServiceManagerTrait;
+
+    use TraitServiceTrait;
 
     use FactoryServiceTrait;
 
@@ -156,7 +159,10 @@ class SrcService extends AbstractJsonService
                     $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
-
+                case 'Trait':
+                    $factory = $this->getTraitService();
+                    $status = $factory->createTrait($this->src);
+                    break;
                 case 'Factory':
                     $factory = $this->getFactoryService();
                     $status = $factory->create($this->src);

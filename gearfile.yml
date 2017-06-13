@@ -19,16 +19,24 @@ src:
 #          0: 
 #            class: GearBase\Util\String\StringService
 #            aliase: GearBase\Util\String
-  uploadimagetable:
+#  uploadimagetable:
+#    name: UploadImage
+#    type: Factory
+#    namespace: Table
+#    service: factories
+#    dependency:
+#      0:
+#        class: \GearBase\Util\String\StringService
+#        aliase: GearBase\Util\String
+  uploadimagetabletrait:
     name: UploadImage
-    type: Factory
+    type: Trait
     namespace: Table
     service: factories
     dependency:
       0:
         class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String
-      
+        aliase: GearBase\Util\String      
 
 #  0:
 #    name: TestService
