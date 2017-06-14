@@ -156,35 +156,11 @@ EOS;
     }
 
     /**
-     * @TODO FIX 2
      * Gera o Mock necessário para testar o método update do service adicionado na v1.0.0.
      */
     public function getServiceUpdateMock()
     {
         return $this->getServiceCreateMock();
-        /*
-        $table = $this->str('var', $this->column->getTableName());
-        $tableUrl = $this->str('url', $this->column->getTableName());
-        $columnUrl = $this->str('url', $this->column->getName());
-        $columnVar = $this->str('var', $this->column->getName());
-
-        $overwrite = strtolower($table.$columnVar);
-
-        return <<<EOS
-        \$this->imageService->overwriteImage(
-            ["$columnVar" => "image123"***REMOVED***,
-            "{$tableUrl}",
-            "{$columnVar}"
-        )->willReturn('{$overwrite}')->shouldBeCalled();
-
-        \$this->imageService->updateUploadImage(
-            '{$overwrite}',
-            '{$tableUrl}-{$columnVar}',
-            'image123'
-        )->shouldBeCalled();
-        */
-
-EOS;
     }
 
     /**
@@ -213,7 +189,7 @@ EOS;
     {
         $table = $this->str('url', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
-        return sprintf('/upload/%s-%s/pre%02d%s.gif', $table, $column, $iterator, $column);
+        return sprintf('/upload/%s-%s/pre-%02d%s.gif', $table, $column, $iterator, $column);
     }
 
     /**
@@ -228,7 +204,7 @@ EOS;
     {
         $table = $this->str('url', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
-        return sprintf('/upload/%s-%s/pre%02d%s.gif', $table, $column, $iterator, $column);
+        return sprintf('/upload/%s-%s/pre-%02d%s.gif', $table, $column, $iterator, $column);
     }
 
     /**
@@ -246,7 +222,7 @@ EOS;
         unset($iterator);
         $table = $this->str('url', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
-        return sprintf('/upload/%s-%s/prefake-image.png', $table, $column);
+        return sprintf('/upload/%s-%s/pre-fake-image.png', $table, $column);
     }
 
     /**
