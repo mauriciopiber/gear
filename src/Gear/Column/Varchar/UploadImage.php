@@ -189,7 +189,7 @@ EOS;
     {
         $table = $this->str('url', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
-        return sprintf('/upload/%s-%s/pre-%02d%s.gif', $table, $column, $iterator, $column);
+        return sprintf('/upload/%s-%s/pre-%02d-%s.gif', $table, $column, $iterator, $column);
     }
 
     /**
@@ -204,7 +204,7 @@ EOS;
     {
         $table = $this->str('url', $this->column->getTableName());
         $column = $this->str('var', $this->column->getName());
-        return sprintf('/upload/%s-%s/pre-%02d%s.gif', $table, $column, $iterator, $column);
+        return sprintf('/upload/%s-%s/pre-%02d-%s.gif', $table, $column, $iterator, $column);
     }
 
     /**
