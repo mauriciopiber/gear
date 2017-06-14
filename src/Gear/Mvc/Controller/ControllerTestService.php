@@ -266,7 +266,6 @@ class ControllerTestService extends AbstractMvcTest implements
             ***REMOVED***,
             [
                 'mockPRG' => $this->getMockPRG(),
-                'static' => $this->getColumnService()->renderColumnPart('staticTest'),
                 'nullable' => ($this->nullable) ? 200 : 303,
                 'functions' => $this->functions,
                 //'updateArray'  => $updateArray,

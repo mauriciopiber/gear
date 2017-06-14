@@ -148,7 +148,6 @@ class ServiceTestService extends AbstractMvcTest
             'updateValues' => $this->updateValues,
             'updateMock' => $this->updateMock,
             'createMock' => $this->createMock,
-            'static' => $this->getColumnService()->renderColumnPart('staticTest'),
             'firstString' => $this->getFirstString(),
             'uline' => substr($this->str('var', $this->src->getName()), 0, 18),
             'serviceNameVar' => substr($this->str('var', $this->src->getName()), 0, 18),

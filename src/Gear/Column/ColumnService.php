@@ -323,32 +323,6 @@ class ColumnService implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Adiciona os atributos estáticos para o teste de imagens
-     *
-     * @return code
-     */
-    private function staticTest()
-    {
-        $code = '';
-
-        foreach ($this->columns as $columnData) {
-            if ($this->isClass($columnData, 'Gear\Column\Varchar\UploadImage')) {
-                $code .= $this->getFileCreator()->renderPartial(
-                    'template/module/column/abstract/test/static-attribute.phtml',
-                    [
-                        'attribute' => $this->str('var-length', $columnData->getColumn()->getName()),
-                        'value' => $columnData->getUploadDir()
-                    ***REMOVED***
-                );
-            }
-        }
-
-        $code = $this->formatCode($code);
-
-        return $code;
-    }
-
-    /**
      * Formata o código para adicionar identação
      *
      * @param string $code   Código que será identado
@@ -373,58 +347,5 @@ class ColumnService implements ServiceLocatorAwareInterface
         $code = implode(PHP_EOL, $lines);
 
         return $code;
-    }
-
-    /**
-     * Verifica as opções de testes unitários para serem utilizadas em Controller, Service e Repository
-     *
-     * @param string $key Nome da Chave.
-     *
-     * @throws UndevelopedColumnPart
-     *
-     * @return boolean
-     */
-    private function enableColumnParts($key)
-    {
-        $enableParts = [
-            'staticTest',
-        ***REMOVED***;
-
-        if (!in_array($key, $enableParts)) {
-            throw new UndevelopedColumnPart($key);
-        }
-
-        return true;
-    }
-
-    /**
-     * Renderiza os testes para determinado ítem
-     *
-     * @param string $renderId   Nome do Ítem a ser renderizado
-     * @param string $repository Repositório
-     * @param string $delete     Deletar
-     *
-     * @throws UnfoundColumnRender
-     *
-     * @return void|string
-     */
-    public function renderColumnPart($renderId, $repository = false, $delete = false)
-    {
-
-        if ($this->enableColumnParts($renderId) !== true) {
-            return;
-        }
-
-        switch ($renderId) {
-            case 'staticTest':
-                $html = $this->staticTest();
-
-                break;
-            default:
-                throw new UnfoundColumnRender($renderId);
-                break;
-        }
-
-        return $html;
     }
 }
