@@ -247,9 +247,6 @@ class ControllerTestService extends AbstractMvcTest implements
           ? $this->render('edit-successful-file-prg', $actionOptions)
           : $this->render('edit-successful-prg', $actionOptions);
 
-        //$updateArray = $this->getColumnsInput(self::KEY_UPDATE);
-        //$updateAssert = $this->getColumnsAssert(self::KEY_UPDATE);
-
         $options = array_merge(
             $this->basicOptions(),
             //$this->verifyHasNullable($mvc),
@@ -334,50 +331,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
 
         return $this->file->render();
-    }
-
-    public function getColumnsInput($iterator, $repository = false)
-    {
-        $code = '';
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof PrimaryKey || $columnData instanceof UniqueId) {
-                continue;
-            }
-
-            if (get_class($columnData) == 'Gear\Column\Varchar\UploadImage' && $repository) {
-                $code .= $columnData->getInsertDataRepositoryTest();
-                continue;
-            }
-            //$this->createReference($columnData);
-
-            $code .= $columnData->getInputData($iterator);
-        }
-
-        return $code;
-    }
-
-    public function getColumnsAssert($iterator, $repository = false)
-    {
-        $code = '';
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof PrimaryKey
-                || $columnData instanceof UniqueId
-                || $columnData instanceof PasswordVerify) {
-                continue;
-            }
-
-            if (get_class($columnData) == 'Gear\Column\Varchar\UploadImage' && $repository) {
-                $code .= $columnData->getInsertAssertRepositoryTest();
-                continue;
-            }
-            //$this->createReference($columnData);
-
-            $code .= $columnData->getAssertData($iterator);
-        }
-
-        return $code;
     }
 
     public function moduleFactory()
@@ -603,42 +556,9 @@ class ControllerTestService extends AbstractMvcTest implements
 
     public function getMockPRG()
     {
-        if (in_array('upload-image', $this->db->getColumns())) {
-            return '        $this->mockPluginFilePostRedirectGet($newData);'.PHP_EOL;
-        } else {
-            return '        $this->mockPluginPostRedirectGet($newData);'.PHP_EOL;
-        }
-    }
+        return (in_array('upload-image', $this->db->getColumns()))
+            ?  '        $this->mockPluginFilePostRedirectGet($newData);'
+            :  '        $this->mockPluginPostRedirectGet($newData);'.PHP_EOL;
 
-
-
-    public function verifyHasNullable(Db $db)
-    {
-        $nullable = [***REMOVED***;
-
-        if (!$this->getTableService()->isNullable($db->getTable())) {
-            $isFilePost = $this->getColumnService()->verifyColumnAssociation(
-                $db,
-                'Gear\Column\Varchar\UploadImage'
-            );
-
-            if ($isFilePost) {
-                $postRedirectGet = '        $this->mockPluginFilePostRedirectGet([***REMOVED***);'.PHP_EOL;
-            } else {
-                $postRedirectGet = '        $this->mockPluginPostRedirectGet([***REMOVED***);'.PHP_EOL;
-            }
-
-            $nullable['createReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/test-has-not-nullable-create.phtml',
-                array_merge($this->basicOptions(), ['postRedirectGet' => $postRedirectGet***REMOVED***)
-            );
-
-            $nullable['editReturnValidation'***REMOVED*** = $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/test-has-not-nullable-edit.phtml',
-                array_merge($this->basicOptions(), ['postRedirectGet' => $postRedirectGet***REMOVED***)
-            );
-        }
-
-        return $nullable;
     }
 }
