@@ -6,15 +6,15 @@ Funcionalidade: Visualizar imagens cadastradas em um <?php echo $this->tableLabe
 
   Como Administrador, quero visualizar as imagens de um <?php echo $this->tableLabel;?>.
 
-    Cenário: Como administrador, quero Navegar até a página Editar Imagens de My Table.
+    Cenário: Como administrador, quero Navegar até a página Editar Imagens de <?php echo $this->tableLabel;?>.
       Dado que eu estou logado na página principal
       E eu clico no menu "<?php echo $this->moduleLabel;?> - <?php echo $this->tableLabel;?> - Listar"
       E eu vejo o ítem ID "30" na linha "1"
       Quando eu clico no botão Editar no ítem ID "30"
       E eu clico no botão "Editar Imagens"
-      Então eu vejo o título "Editar Imagens - My Table - Admin PiberNetwork"
-      E eu vejo o título central "Editar Imagens - My Table - 30"
-      E eu vejo o breadscrumb "My Module / My Table / Editar Imagens"
+      Então eu vejo o título "Editar Imagens - <?php echo $this->tableLabel;?> - Admin PiberNetwork"
+      E eu vejo o título central "Editar Imagens - <?php echo $this->tableLabel;?> - 30"
+      E eu vejo o breadscrumb "My Module / <?php echo $this->tableLabel;?> / Editar Imagens"
       Então eu vejo o total de "3" imagens.
 
    Cenário: Como administrador, quero cadastrar uma nova imagem em <?php echo $this->tableLabel;?>.
