@@ -86,6 +86,7 @@ class SrcService extends AbstractJsonService
         }
 
         if ($this->src->getDb() !== null) {
+
             $tableObject = $this->getTableService()->getTableObject($this->src->getDb()->getTable());
             $this->src->getDb()->setTableObject($tableObject);
         }
