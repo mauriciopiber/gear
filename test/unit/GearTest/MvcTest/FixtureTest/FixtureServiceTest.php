@@ -60,6 +60,14 @@ class FixtureServiceTest extends AbstractTestCase
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
         $this->fixture->setCode($this->code);
+
+
+        $uploadImage = new \Gear\Table\UploadImage(
+            $this->string,
+            $this->module->reveal()
+        );
+
+        $this->fixture->setUploadImage($uploadImage);
     }
 
     public function tables()

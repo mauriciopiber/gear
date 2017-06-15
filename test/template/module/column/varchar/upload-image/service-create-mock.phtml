@@ -1,11 +1,10 @@
-        $this->imageService->overwriteImage(
-            ["myColumn" => "image123"***REMOVED***,
-            "my-table",
-            "myColumn"
-        )->willReturn('mytablemycolumn')->shouldBeCalled();
+        $this->imageService->replaceDataForm(
+            $data,
+            'my-table',
+            MyTableService::IMAGES
+        )->willReturn([***REMOVED***)->shouldBeCalled();
 
-        $this->imageService->createUploadImage(
-            'mytablemycolumn',
-            'my-table-myColumn',
-            'image123'
+        $this->imageService->saveImageColumns(
+            [***REMOVED***,
+            'my-table'
         )->shouldBeCalled();

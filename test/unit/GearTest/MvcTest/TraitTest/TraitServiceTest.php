@@ -79,7 +79,7 @@ class TraitServiceTest extends AbstractTestCase
     public function testCreateSrcTrait($src, $template)
     {
 
-        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+        $this->module->map('Repository')->willReturn(vfsStream::url('module'));
 
         $file = $this->trait->createTrait($src, vfsStream::url('module'));
 

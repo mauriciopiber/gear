@@ -120,30 +120,6 @@ class ServiceServiceTest extends TestCase
     }
 
     /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageTable()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageColumn()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testInstrospectTableWithUploadImageAll()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
      * @dataProvider tables
      * @group mvc
      * @group mvc-service
