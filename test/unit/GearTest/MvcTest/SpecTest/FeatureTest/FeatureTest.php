@@ -401,7 +401,7 @@ class FeatureTest extends TestCase
     }
 
     /**
-     * @group mx
+     * @group mx1
      */
     public function testBuildViewAction()
     {
