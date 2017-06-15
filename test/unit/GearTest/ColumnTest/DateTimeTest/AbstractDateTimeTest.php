@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ColumnTest;
+namespace GearTest\ColumnTest\DateTimeTest;
 
 use GearBaseTest\AbstractTestCase;
 
@@ -15,7 +15,7 @@ class AbstractDateTimeTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->abstractDatetime = $this->getMockForAbstractClass('Gear\Column\DateTime\AbstractDateTime', [***REMOVED***, '', false);
+        $this->abstractDatetime = $this->getMockForAbstractClass('Gear\Column\Datetime\AbstractDateTime', [***REMOVED***, '', false);
     }
 
     public function iteratorYearProvider()

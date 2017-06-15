@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Column\DateTime;
+namespace Gear\Column\Datetime;
 
 use Gear\Column\AbstractColumn;
 

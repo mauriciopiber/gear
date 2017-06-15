@@ -78,31 +78,6 @@ class ControllerTestServiceTest extends AbstractTestCase
 
     }
 
-
-    /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageTable()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testIntrospectTableWithUploadImageColumn()
-    {
-        $this->assertTrue(false);
-    }
-
-    /**
-     * @group up
-     */
-    public function testInstrospectTableWithUploadImageAll()
-    {
-        $this->assertTrue(false);
-    }
-
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
