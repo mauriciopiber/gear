@@ -27,13 +27,25 @@ class UploadImageTest extends AbstractTestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
     }
 
+
+    public function valuesDb()
+    {
+        return [
+            [30, 'upload/my-table-myColumn/30-%s-my-table-myColumn.gif'***REMOVED***,
+            [01, 'upload/my-table-myColumn/01-%s-my-table-myColumn.gif'***REMOVED***,
+            [90, 'upload/my-table-myColumn/90-%s-my-table-myColumn.gif'***REMOVED***,
+            [2123, 'upload/my-table-myColumn/2123-%s-my-table-myColumn.gif'***REMOVED***,
+        ***REMOVED***;
+    }
+
+
     public function values()
     {
         return [
-            [30, '/upload/my-table-myColumn/pre30myColumn.gif'***REMOVED***,
-            [01, '/upload/my-table-myColumn/pre01myColumn.gif'***REMOVED***,
-            [90, '/upload/my-table-myColumn/pre90myColumn.gif'***REMOVED***,
-            [2123, '/upload/my-table-myColumn/pre2123myColumn.gif'***REMOVED***,
+            [30, '/upload/my-table-myColumn/30-pre-my-table-myColumn.gif'***REMOVED***,
+            [01, '/upload/my-table-myColumn/01-pre-my-table-myColumn.gif'***REMOVED***,
+            [90, '/upload/my-table-myColumn/90-pre-my-table-myColumn.gif'***REMOVED***,
+            [2123, '/upload/my-table-myColumn/2123-pre-my-table-myColumn.gif'***REMOVED***,
         ***REMOVED***;
     }
 
@@ -67,7 +79,7 @@ class UploadImageTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider values
+     * @dataProvider valuesDb
      */
     public function testGetValueDb($iterator, $expected)
     {
