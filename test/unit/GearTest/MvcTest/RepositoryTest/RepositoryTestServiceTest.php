@@ -170,7 +170,6 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
-        $this->column->renderColumnPart('staticTest')->willReturn('');
 
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
