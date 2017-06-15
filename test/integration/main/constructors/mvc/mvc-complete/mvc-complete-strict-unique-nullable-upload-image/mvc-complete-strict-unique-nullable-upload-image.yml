@@ -4,4 +4,3 @@ src:
     - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
     - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }
     - { name: UploadImage, type: Entity, db: UploadImage }
-    - { name: UploadImageFixture, type: Fixture, db: UploadImage }
