@@ -127,7 +127,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-        $this->column->renderColumnPart('staticTest')->willReturn('');
 
         $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);

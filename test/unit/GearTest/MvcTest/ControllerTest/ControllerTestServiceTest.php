@@ -69,6 +69,13 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
+        $uploadImage = new \Gear\Table\UploadImage(
+            $this->string,
+            $this->module->reveal()
+        );
+
+        $this->controllerTest->setUploadImage($uploadImage);
+
     }
 
 
@@ -188,7 +195,6 @@ class ControllerTestServiceTest extends AbstractTestCase
         }
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->renderColumnPart('staticTest')->willReturn('');
 
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
 

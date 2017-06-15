@@ -109,6 +109,13 @@ class ControllerServiceTest extends TestCase
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->controllerService->setSchemaService($this->schema->reveal());
+
+        $uploadImage = new \Gear\Table\UploadImage(
+            $this->string,
+            $this->module->reveal()
+        );
+
+        $this->controllerService->setUploadImage($uploadImage);
     }
 
     public function testCreateModuleController()
