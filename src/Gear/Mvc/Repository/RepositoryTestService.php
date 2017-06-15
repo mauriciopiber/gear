@@ -78,13 +78,9 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         $this->db           = $table;
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $this->repository = true;
-        $this->usePrimaryKey = true;
-
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
 
         $location = $this->getCodeTest()->getLocation($this->src);
-
 
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryTestService()->createFactoryTest($this->src, $location);
