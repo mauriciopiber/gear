@@ -28,19 +28,21 @@ src:
 #      0:
 #        class: \GearBase\Util\String\StringService
 #        aliase: GearBase\Util\String
-  uploadimagetabletrait:
-    name: UploadImage
-    type: Trait
-    namespace: Table
-    service: factories
-    dependency:
-      0:
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String      
+#  uploadimagetabletrait:
+#    name: UploadImage
+#    type: Trait
+#    namespace: Table
+#    service: factories
+##    dependency:
+#     0:
+#       class: \GearBase\Util\String\StringService
+#       aliase: GearBase\Util\String      
 
-#  0:
-#    name: TestService
-#    type: Service
+  0:
+    name: ColumnManager
+    type: ValueObject
+    namespace: Column
+    
            
 #  2:
 #    name: InterfaceCode
