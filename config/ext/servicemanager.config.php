@@ -37,7 +37,8 @@
         'Gear\Creator\Codes\Code\AbstractCode' => 'Gear\Creator\Codes\Code\AbstractCode',
         'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
-        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest'
+        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
+        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
     ***REMOVED***,
     'factories' => [
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
@@ -94,8 +95,7 @@
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorFactory',
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory',
         'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory',
-        'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory',
-        'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory'
+        'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Generator\Code\UseStack' => false

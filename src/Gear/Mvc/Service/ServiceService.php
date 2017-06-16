@@ -274,6 +274,37 @@ EOS;
         $onlyOnceAfterUpdate = [***REMOVED***;
         $onlyOnceDelete = [***REMOVED***;
 
+        /*
+         );
+
+         $this->created[0***REMOVED*** = $columnManager->generateCode('getServiceCreateBefore', $onlyOne);
+         $this->created[1***REMOVED*** = $columnManager->generateCode('getServiceCreateAfter', $onlyOne);
+         $this->update[0***REMOVED*** = $columnManager->generateCode('getServiceUpdateBefore', $onlyOne);
+         $this->update[1***REMOVED*** = $columnManager->generateCode('getServiceUpdateAfter', $onlyOne);
+         $this->delete[0***REMOVED*** = $columnManager->generateCode('getServiceDelete', $onlyOne);
+         */
+
+        $columnManager = $this->db->getColumnManager();
+
+        $onlyOne = [UploadImageColumn::class***REMOVED***;
+
+        $optionsColumn = $columnManager->generateSchema(
+            [
+                'created' => [
+                    0 => ['getServiceCreateBefore', $onlyOne***REMOVED***,
+                    1 => ['getServiceCreateAfter', $onlyOne***REMOVED***,
+                ***REMOVED***,
+                'update' => [
+                    0 => ['getServiceUpdateBefore', $onlyOne***REMOVED***,
+                    1 => ['getServiceUpdateAfter', $onlyOne***REMOVED***
+                ***REMOVED***,
+                'delete' => [
+                    0 => ['getServiceDelete', $onlyOne***REMOVED***
+                ***REMOVED***,
+                'functions' => ['getServiceFunctions'***REMOVED***,
+            ***REMOVED***
+        );
+
         $this->imagesArray = [***REMOVED***;
 
         //var_dump($onlyOnceUse, $onlyOnceAttribute);die();
