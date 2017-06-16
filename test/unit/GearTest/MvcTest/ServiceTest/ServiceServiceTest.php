@@ -16,6 +16,7 @@ use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use GearJson\Db\Db;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group src-mvc
@@ -149,6 +150,10 @@ class ServiceServiceTest extends TestCase
         }
 
         $this->db = new Db(['table' => $table, 'user' => $user***REMOVED***);
+
+        $columnManager = new ColumnManager($columns);
+        $this->db->setColumnManager($columnManager);
+
 
         $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
