@@ -116,6 +116,19 @@ class ColumnService implements ServiceLocatorAwareInterface
         return false;
     }
 
+    public function excludeList()
+    {
+        return [
+            'created',
+            'updated',
+            'created_at',
+            'updated_at',
+            'created_by',
+            'updated_by',
+            'id_lixeira'
+        ***REMOVED***;
+    }
+
 
     /**
      * Extrai todos Gear\Column de um GearJson\Db\Db.
@@ -138,6 +151,7 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         $this->tableName    = $this->str('class', $db->getTable());
         $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
+        $this->dbColumns    = $db->getColumns();
 
         //var_dump($this->tableName);
         //var_dump(count($this->tableColumns));
@@ -148,7 +162,7 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         foreach ($this->tableColumns as $column) {
-            if ($all === false && in_array($column->getName(), Db::excludeList())) {
+            if ($all === false && in_array($column->getName(), $this->excludeList())) {
                 if (!in_array($column->getName(), $include)) {
                     continue;
                 }
@@ -196,10 +210,10 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         $dataType = $this->mapDataType($this->str('class', $column->getDataType()));
 
+        $specialityName = (array_key_exists($column->getName(), $this->dbColumns))
+            ? $this->dbColumns[$column->getName()***REMOVED***
+            : null;
 
-
-
-        $specialityName = $db->getColumnSpeciality($column->getName());
         $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($db->getTable(), $column);
 
         //primary key
@@ -320,32 +334,5 @@ class ColumnService implements ServiceLocatorAwareInterface
             get_class($columnData),
             $class
         );
-    }
-
-    /**
-     * Formata o código para adicionar identação
-     *
-     * @param string $code   Código que será identado
-     * @param number $indent Identação
-     *
-     * @return string
-     */
-    private function formatCode($code, $indent = 0)
-    {
-        $indentSize = 4;
-
-        $lines = explode(PHP_EOL, $code);
-
-        $indentCode = str_repeat(' ', $indent*$indentSize);
-
-        $dataFormat = [***REMOVED***;
-
-        foreach ($lines as $item) {
-            $dataFormat[***REMOVED*** = $indentCode.$item;
-        }
-
-        $code = implode(PHP_EOL, $lines);
-
-        return $code;
     }
 }

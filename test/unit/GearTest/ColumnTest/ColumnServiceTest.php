@@ -63,7 +63,7 @@ class ColumnServiceTest extends TestCase
 
         $db = $this->prophesize('GearJson\Db\Db');
         $db->getTable()->willReturn($this->tableName)->shouldBeCalled();
-        $db->getColumnSpeciality('id_my_table')->willReturn(null)->shouldBeCalled();
+        $db->getColumns()->willReturn(['id_my_table' => null***REMOVED***)->shouldBeCalled();
 
 
         $pkey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');

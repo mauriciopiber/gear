@@ -17,7 +17,7 @@ extensions:
 coverage:
     whitelist:
         include:
-            - 'src/Gear/Integration/*'
+            - 'src/Gear/Column/*'
 #        exclude:
 #            - 'src/Gear/Module.php*'
 #            - 'src/Gear/Mvc/*'
