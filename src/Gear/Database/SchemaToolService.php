@@ -352,21 +352,6 @@ class SchemaToolService extends DbAbstractService
         return $tableScreen;
     }
 
-    /**
-     * @param GearJson\Db\Db $db
-     * @return string
-     */
-    public function getPrimaryKeyName($db)
-    {
-        try {
-            $primaryKeyName = $db->getPrimaryKeyColumnName();
-        } catch (\Exception $e) {
-            $primaryKeyName = '';
-        }
-
-        return $primaryKeyName;
-    }
-
 
     /**
      * Retorna exclusivamente o nome da Coluna em uma String. Chaves compostas vem divididas com ",".

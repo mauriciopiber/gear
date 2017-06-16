@@ -66,26 +66,6 @@ class Table
         return null;
     }
 
-    /*
-    public function getForeignKeyReferencedTable($columnToCheck)
-    {
-        $table = $this->table;
-
-        $contraints = $table->getConstraints();
-
-        foreach ($contraints as $contraint) {
-            if ($contraint->getType() == 'FOREIGN KEY') {
-                $columns = $contraint->getColumns();
-                $column = array_pop($columns);
-                if ($columnToCheck->getName() == $column) {
-                    return $contraint->getReferencedTableName();
-                }
-            }
-        }
-
-        return null;
-    }
-    */
 
     public function isPrimaryKey($column)
     {
