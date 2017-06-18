@@ -23,6 +23,20 @@ class ServiceService extends AbstractMvc
 
     static protected $defaultFolder = null;
 
+    const COLUMN_SCHEMA = [
+        'create' => [
+            0 => ['getServiceCreateBefore' => [UploadImageColumn::class***REMOVED******REMOVED***,
+            1 => ['getServiceCreateAfter' => [UploadImageColumn::class***REMOVED******REMOVED***,
+        ***REMOVED***,
+        'update' => [
+            0 => ['getServiceUpdateBefore' => [UploadImageColumn::class***REMOVED******REMOVED***,
+            1 => ['getServiceUpdateAfter' => [UploadImageColumn::class***REMOVED******REMOVED***
+        ***REMOVED***,
+        'delete' => [
+            0 => ['getServiceDelete' => [UploadImageColumn::class***REMOVED******REMOVED***
+        ***REMOVED***,
+    ***REMOVED***;
+
     public $name;
 
     public function create($src)
@@ -63,37 +77,39 @@ class ServiceService extends AbstractMvc
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
-
         $this->getServiceTestService()->create($this->src);
-        if ($this->src->getAbstract() !== true) {
+
+        if ($this->src->isAbstract() === false) {
             $this->getTraitService()->createTrait($this->src, $location);
         }
 
-        if ($this->src->getService() == 'factories' && $this->src->getAbstract() !== true) {
+        if ($this->src->isFactory() && $this->src->isAbstract() === false) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
         $this->srcFile = $this->getFileCreator();
-        return $this->srcFile->createFile($template, $options, $fileName, $location);
+
+        return $this->srcFile->createFile(
+            $template,
+            $options,
+            $fileName,
+            $location
+        );
     }
 
 
     public function createDb()
     {
-        if ($this->src->getService() == 'factories' && !array_key_exists('memcached', $this->src->getDependency())) {
-            $dependency = $this->src->getDependency();
-            $dependency['memcached'***REMOVED*** = '\Zend\Cache\Storage\Adapter\Memcached';
-            $this->src->setDependency($dependency);
-        }
+        $columnManager = $this->db->getColumnManager();
 
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->getColumnService()->verifyColumnAssociation($this->db, UploadImageColumn::class)
+        $this->src->addDependency(['memcached' => '\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
+
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $columnManager->isAssociatedWith(UploadImageColumn::class)
         ) {
-            $dep = $this->src->getDependency();
-            $dep[***REMOVED*** = '\GearImage\Service\ImageService';
-            $this->src->setDependency($dep);
+            $this->src->addDependency('\GearImage\Service\ImageService');
         }
-
 
         $location = $this->getCode()->getLocation($this->src);
 
@@ -101,14 +117,9 @@ class ServiceService extends AbstractMvc
 
         $this->file = $this->getFileCreator();
 
-        $this->specialities = $this->db->getColumns();
         $this->use        = '';
         $this->attribute  = '';
-        $this->create     = ['',''***REMOVED***;
-        $this->update     = ['',''***REMOVED***;
-        $this->delete     = [''***REMOVED***;
         $this->selectAll  = '';
-        $this->functions  = '';
         $this->repository = str_replace($this->src->getType(), '', $this->src->getName()).'Repository';
 
         $this->repositoryFullname = $this->getServiceManager()
@@ -122,7 +133,6 @@ class ServiceService extends AbstractMvc
 
         $this->entityFile = $this->str('class', $this->db->getTable());
 
-
         $this->use .= $this->getCode()->getUseConstructor($this->src, ['\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
 
         $this->attribute = $this->getCode()->getUseAttribute($this->src, null, [
@@ -134,55 +144,48 @@ class ServiceService extends AbstractMvc
 
         $userOptions = $this->getUserSpecifications($this->db);
 
-
         $this->tableUploadImage = false;
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')) {
             $this->tableUploadImage = true;
         }
 
+        $optionsColumn = $columnManager->generateSchema(self::COLUMN_SCHEMA);
+
         $options = [
-            'entityFile' => $this->entityFile,
-            'namespace' => $this->getCode()->getNamespace($this->src),
-            'package' => $this->getCode()->getClassDocsPackage($this->src),
-            'entity' => $this->entityName,
-            'context' => $this->str('url', $this->tableName),
-            'table' =>  $this->str('class', $this->name),
-            'tableLabel' => $this->str('label', $this->name),
+            'entityFile'       => $this->entityFile,
+            'namespace'        => $this->getCode()->getNamespace($this->src),
+            'package'          => $this->getCode()->getClassDocsPackage($this->src),
+            'entity'           => $this->entityName,
+            'context'          => $this->str('url', $this->tableName),
+            'table'            => $this->str('class', $this->name),
+            'tableLabel'       => $this->str('label', $this->name),
             'tableUploadImage' => $this->tableUploadImage,
-            'var' => $this->str('var-length', $this->name),
-            'functions'     => $this->functions,
-            'update'        => $this->update,
-            'create'        => $this->create,
-            'delete'        => $this->delete,
-            'nameVar'       => $this->str('var', $this->name),
-            'imagemService' => $this->useImageService,
-            'baseName'      => $this->name,
-            //'entity'        => $this->name,
-            'class'         => $this->className,
-            'extends'       => 'AbstractService',
-            'use'           => $this->use,
-            'attribute'     => $this->attribute,
-            'module'        => $this->getModule()->getModuleName(),
-            'repository'    => $this->repository,
-            'imagesArray'   => $this->formatArrayImages($this->imagesArray)
+            'var'              => $this->str('var-length', $this->name),
+            'nameVar'          => $this->str('var', $this->name),
+            'imagemService'    => $this->useImageService,
+            'baseName'         => $this->name,
+            'class'            => $this->className,
+            'extends'          => 'AbstractService',
+            'use'              => $this->use,
+            'attribute'        => $this->attribute,
+            'module'           => $this->getModule()->getModuleName(),
+            'repository'       => $this->repository,
+            'imagesArray'      => $this->formatArrayImages($columnManager->getColumnNames(UploadImageColumn::class))
         ***REMOVED***;
 
+        $options = array_merge($options, $optionsColumn);
         $options = array_merge($options, $userOptions);
 
+        $options['constructor'***REMOVED*** = $this->getCode()->getConstructor($this->src);
 
-        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
-          ? $this->getCode()->getConstructor($this->src)
-          : '';
-
-        if ($this->src->getService() == 'factories') {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
+        $this->getFactoryService()->createFactory($this->src, $location);
 
         $this->file->setOptions($options);
         $this->file->setFileName($this->className.'.php');
         $this->file->setLocation($location);
         $this->file->setView('template/module/mvc/service/db/db.phtml');
         $this->getServiceTestService()->introspectFromTable($this->db);
+
         return $this->file->render();
     }
 
@@ -268,80 +271,10 @@ EOS;
     {
         $onlyOnceUse = [UploadImageColumn::class***REMOVED***;
         $onlyOnceAttribute = [UploadImageColumn::class***REMOVED***;
-        $onlyOnceBeforeCreate = [***REMOVED***;
-        $onlyOnceAfterCreate = [***REMOVED***;
-        $onlyOnceBeforeUpdate = [***REMOVED***;
-        $onlyOnceAfterUpdate = [***REMOVED***;
-        $onlyOnceDelete = [***REMOVED***;
-
-        /*
-         );
-
-         $this->created[0***REMOVED*** = $columnManager->generateCode('getServiceCreateBefore', $onlyOne);
-         $this->created[1***REMOVED*** = $columnManager->generateCode('getServiceCreateAfter', $onlyOne);
-         $this->update[0***REMOVED*** = $columnManager->generateCode('getServiceUpdateBefore', $onlyOne);
-         $this->update[1***REMOVED*** = $columnManager->generateCode('getServiceUpdateAfter', $onlyOne);
-         $this->delete[0***REMOVED*** = $columnManager->generateCode('getServiceDelete', $onlyOne);
-         */
-
-        $columnManager = $this->db->getColumnManager();
-
-        $onlyOne = [UploadImageColumn::class***REMOVED***;
-
-        $optionsColumn = $columnManager->generateSchema(
-            [
-                'created' => [
-                    0 => ['getServiceCreateBefore', $onlyOne***REMOVED***,
-                    1 => ['getServiceCreateAfter', $onlyOne***REMOVED***,
-                ***REMOVED***,
-                'update' => [
-                    0 => ['getServiceUpdateBefore', $onlyOne***REMOVED***,
-                    1 => ['getServiceUpdateAfter', $onlyOne***REMOVED***
-                ***REMOVED***,
-                'delete' => [
-                    0 => ['getServiceDelete', $onlyOne***REMOVED***
-                ***REMOVED***,
-                'functions' => ['getServiceFunctions'***REMOVED***,
-            ***REMOVED***
-        );
-
-        $this->imagesArray = [***REMOVED***;
-
-        //var_dump($onlyOnceUse, $onlyOnceAttribute);die();
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
 
-            if ($columnData instanceof UploadImageColumn) {
-                $this->imagesArray[***REMOVED*** = $columnData->getColumn()->getName();
-            }
-
             $className = get_class($columnData);
-
-            if ($columnData instanceof ServiceCreateBeforeInterface && !in_array($className, $onlyOnceBeforeCreate)) {
-                $onlyOnceBeforeCreate[***REMOVED*** = $className;
-                $this->create[0***REMOVED*** .= $columnData->getServiceCreateBefore();
-            }
-
-            if ($columnData instanceof ServiceCreateAfterInterface && !in_array($className, $onlyOnceAfterCreate)) {
-                $onlyOnceAfterCreate[***REMOVED*** = $className;
-                $this->create[1***REMOVED*** .= $columnData->getServiceCreateAfter();
-            }
-
-            if ($columnData instanceof ServiceUpdateBeforeInterface && !in_array($className, $onlyOnceBeforeUpdate)) {
-                $onlyOnceBeforeUpdate[***REMOVED*** = $className;
-                $this->update[0***REMOVED*** .= $columnData->getServiceUpdateBefore();
-            }
-
-            if ($columnData instanceof ServiceUpdateAfterInterface && !in_array($className, $onlyOnceAfterUpdate)) {
-                $onlyOnceAfterUpdate[***REMOVED*** = $className;
-                $this->update[1***REMOVED*** .= $columnData->getServiceUpdateAfter();
-            }
-
-            if ($columnData instanceof ServiceDeleteInterface && !in_array($className, $onlyOnceDelete)) {
-                $onlyOnceDelete[***REMOVED*** = $className;
-                $this->delete[0***REMOVED*** .= $columnData->getServiceDelete();
-            }
-
 
             if (method_exists($columnData, 'getServiceUse') && !in_array($className, $onlyOnceUse)) {
                 $onlyOnceUse[***REMOVED*** = $className;
@@ -351,11 +284,6 @@ EOS;
             if (method_exists($columnData, 'getServiceAttribute') && !in_array($className, $onlyOnceAttribute)) {
                 $onlyOnceAttribute[***REMOVED*** = $className;
                 $this->attribute .= $columnData->getServiceAttribute();
-            }
-
-
-            if (method_exists($columnData, 'getServiceFunctions')) {
-                $this->functions .= $columnData->getServiceFunctions().PHP_EOL;
             }
         }
     }

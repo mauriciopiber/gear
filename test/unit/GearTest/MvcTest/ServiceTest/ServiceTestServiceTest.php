@@ -12,6 +12,7 @@ use GearTest\SingleDbTableTrait;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
 use GearJson\Src\Src;
+use Gear\Column\ColumnManager;
 
 /**
  * @group fix-table
@@ -124,7 +125,10 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $columnManager = new ColumnManager($columns);
+        $this->db->setColumnManager($columnManager);
+
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 

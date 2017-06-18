@@ -6,11 +6,12 @@
  */
 namespace Gear\Constructor\Src;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use GearJson\Src\SrcServiceTrait as JsonSrc;
 use Gear\Mvc\Form\FormServiceTrait;
 use Gear\Mvc\TraitServiceTrait;
+use Gear\Mvc\TraitTestServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Mvc\Filter\FilterServiceTrait;
 use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
@@ -19,13 +20,26 @@ use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
+use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Table\TableService\TableService;
+use Gear\Table\TableService\TableServiceTrait;
+use Gear\Column\ColumnServiceTrait;
 
-class SrcService extends AbstractJsonService
+class SrcService implements ModuleAwareInterface
 {
+    const TYPE_NOT_FOUND = 'Type not allowed';
+
+    use TableServiceTrait;
+
+    use ColumnServiceTrait;
+
+    use ModuleAwareTrait;
 
     use JsonSrc;
 
@@ -36,6 +50,10 @@ class SrcService extends AbstractJsonService
     use TraitServiceTrait;
 
     use FactoryServiceTrait;
+
+    use TraitTestServiceTrait;
+
+    use FactoryTestServiceTrait;
 
     use FormServiceTrait;
 
@@ -123,7 +141,7 @@ class SrcService extends AbstractJsonService
     public function factory()
     {
         if ($this->src->getType() == null) {
-            return 'Type not allowed'."\n";
+            return self::TYPE_NOT_FOUND;
         }
 
         try {
@@ -163,10 +181,16 @@ class SrcService extends AbstractJsonService
                 case 'Trait':
                     $factory = $this->getTraitService();
                     $status = $factory->createTrait($this->src);
+
+                    $factory = $this->getTraitTestService();
+                    $status = $factory->createTraitTest($this->src);
                     break;
                 case 'Factory':
                     $factory = $this->getFactoryService();
-                    $status = $factory->create($this->src);
+                    $status = $factory->createFactory($this->src);
+
+                    $factory = $this->getFactoryTestService();
+                    $status = $factory->createFactoryTest($this->src);
                     break;
 
                 case 'ValueObject':
@@ -182,24 +206,15 @@ class SrcService extends AbstractJsonService
                     $status = $interface->create($this->src);
                     break;
                 default:
-                    throw new \Gear\Constructor\Src\Exception\SrcTypeNotFoundException();
+                    throw new SrcTypeNotFoundException();
                     break;
             }
         } catch (\Exception $exception) {
             throw $exception;
         }
-        $this->getServiceManager()->create($this->src);
+        if (false === in_array($this->src->getType(), ['Trait', 'Factory'***REMOVED***)) {
+            $this->getServiceManager()->create($this->src);
+        }
         return $status;
-    }
-
-    public function getSrc()
-    {
-        return $this->src;
-    }
-
-    public function setSrc($src)
-    {
-        $this->src = $src;
-        return $this;
     }
 }

@@ -16,11 +16,13 @@ class FactoryTestService extends AbstractMvcTest
         //$this->createFactoryTest($src);
     }
 
-    public function createFactoryTest($src, $location)
+    public function createFactoryTest($src, $location = null)
     {
         if ($src instanceof Controller) {
             return $this->createControllerFactoryTest($src, $location);
         }
+
+        $location = $this->getCodeTest()->getLocation($src);
 
         $template = (!empty($src->getTemplate())) ? $src->getTemplate().'-test' : 'src-test';
 
@@ -61,8 +63,10 @@ class FactoryTestService extends AbstractMvcTest
         return $trait->render();
     }
 
-    public function createControllerFactoryTest(Controller $src, $location)
+    public function createControllerFactoryTest(Controller $src, $location = null)
     {
+        $location = $this->getCodeTest()->getLocation($src);
+
         $name = $src->getName();
 
 
