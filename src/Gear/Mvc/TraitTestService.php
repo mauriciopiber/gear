@@ -14,8 +14,9 @@ class TraitTestService extends AbstractMvcTest
         $this->codeTest = $codeTest;
     }
 
-    public function createTraitTest(Src $src, $location)
+    public function createTraitTest(Src $src, $location = null)
     {
+        $location = $this->getCodeTest()->getLocation($src);
 
         //$callable = $this->getServiceManager()->getServiceCallable($src);
 

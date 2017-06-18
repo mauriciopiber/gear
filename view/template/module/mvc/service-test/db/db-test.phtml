@@ -109,7 +109,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
         $data = array(
-<?php echo $this->createValues;?>
+<?php echo $this->create[1***REMOVED***;?>
         );
 
         $this->repository = $this->prophesize('<?php echo $this->repository;?>');
@@ -117,7 +117,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 
         $this->service->set<?php echo $this->class;?>Repository($this->repository->reveal());
 
-<?php echo ($this->createMock !== null) ? $this->createMock.PHP_EOL : '';?>
+<?php echo ($this->create[0***REMOVED*** !== null) ? $this->create[0***REMOVED***.PHP_EOL : '';?>
         $resultSet = $this->service->create($data);
 
         $this->assertInstanceOf('<?php echo $this->module;?>\Entity\<?php echo $this->class;?>', $resultSet);
@@ -135,7 +135,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $entity->getId<?php echo $this->class;?>()->willReturn(31);
 
         $data = array(
-<?php echo $this->updateValues;?>
+<?php echo $this->update[1***REMOVED***;?>
         );
 
         $this->repository = $this->prophesize('<?php echo $this->repository;?>');
@@ -145,7 +145,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
 
         $this->service->setCache($this->cache->reveal());
 
-<?php echo ($this->updateMock !== null) ? $this->updateMock.PHP_EOL : '';?>
+<?php echo ($this->update[0***REMOVED*** !== null) ? $this->update[0***REMOVED***.PHP_EOL : '';?>
         $resultSet = $this->service->update(31, $data);
 
 

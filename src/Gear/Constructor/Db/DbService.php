@@ -69,7 +69,7 @@ class DbService extends AbstractJsonService
         }
 
         if (!isset($params['service'***REMOVED***) || empty($params['service'***REMOVED***)) {
-            $params['service'***REMOVED*** = 'invokables';
+            $params['service'***REMOVED*** = 'factories';
         }
 
         $table = $params['table'***REMOVED***;
@@ -87,7 +87,7 @@ class DbService extends AbstractJsonService
             return $db;
         }
 
-        if ($this->getTableService()->verifyTableAssociation($table)) {
+        if ($this->getTableService()->verifyTableAssociation($table, 'upload_image')) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'UploadImage');
         }
 
