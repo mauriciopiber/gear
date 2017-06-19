@@ -77,6 +77,52 @@ class SrcService implements ModuleAwareInterface
 
     use InterfaceServiceTrait;
 
+    public function __construct(
+        TableService $tableService,
+        ColumnService $columnService,
+        BasicModuleStructure $module,
+        SrcSchema $srcSchema,
+        ServiceManager $serviceManager,
+        TraitService $traitService,
+        TraitTestService $traitTestService,
+        FactoryService $factoryService,
+        FactoryTestService $factoryTestService,
+        FormService $formService,
+        EntityService $entityService,
+        SearchSearch $searchService,
+        ValueObjectService $valueObjectService,
+        ViewHelperService $viewHelperService,
+        ControllerPluginService $controllerPluginService,
+        RepositoryService $repositoryService,
+        ServiceService $serviceService,
+        FixtureService $fixtureService,
+        InterfaceService $interfaceService
+    ) {
+        $this->tableService = $tableService;
+        $this->columnService = $columnService;
+        $this->module = $module;
+        $this->srcService = $srcSchema;
+        $this->serviceManager = $serviceManager;
+        $this->traitService = $traitService;
+        $this->traitTestService = $traitTestService;
+        $this->factoryService = $factoryService;
+        $this->factoryTestService = $factoryTestService;
+        $this->formService = $formService;
+        $this->entityService = $entityService;
+        $this->searchService = $searchService;
+        $this->valueObjectService = $valueObjectService;
+        $this->viewHelperService = $viewHelperService;
+        $this->controllerPluginService = $controllerPluginService;
+        $this->repositoryService = $repositoryService;
+        $this->serviceService = $serviceService;
+        $this->fixtureService = $fixtureService;
+        $this->interfaceService = $interfaceService;
+
+
+    }
+
+
+
     public function create(array $data)
     {
 

@@ -39,9 +39,9 @@ src:
 #       aliase: GearBase\Util\String      
 
   0:
-    name: SrcService
+    name: DbService
     type: Factory
-    namespace: Constructor/Src
+    namespace: Constructor/Db
     #dependency: 
      
     
