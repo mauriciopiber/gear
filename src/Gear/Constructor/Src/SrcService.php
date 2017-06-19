@@ -30,6 +30,22 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Column\ColumnServiceTrait;
+use Gear\Column\ColumnService;
+use Gear\Mvc\Form\FormService;
+use Gear\Mvc\TraitService;
+use Gear\Mvc\TraitTestService;
+use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Filter\FilterService;
+use Gear\Mvc\ValueObject\ValueObjectService;
+use Gear\Mvc\ViewHelper\ViewHelperService;
+use Gear\Mvc\ControllerPlugin\ControllerPluginService;
+use Gear\Mvc\Repository\RepositoryService;
+use Gear\Mvc\Service\ServiceService;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Mvc\Search\SearchService;
+use Gear\Mvc\Fixture\FixtureService;
+use Gear\Mvc\InterfaceService;
 
 class SrcService implements ModuleAwareInterface
 {
@@ -88,6 +104,7 @@ class SrcService implements ModuleAwareInterface
         FactoryService $factoryService,
         FactoryTestService $factoryTestService,
         FormService $formService,
+        FilterService $filterService,
         EntityService $entityService,
         SearchSearch $searchService,
         ValueObjectService $valueObjectService,
