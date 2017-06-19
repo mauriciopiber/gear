@@ -3,21 +3,31 @@ namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
-use GearJson\Db\DbServiceTrait as DbSchema;
-use GearJson\Src\SrcServiceTrait as SrcSchema;
-use GearJson\App\AppServiceTrait as AppSchema;
-use GearJson\Controller\ControllerServiceTrait as ControllerSchema;
-use GearJson\Action\ActionServiceTrait as ActionSchema;
+use GearJson\Db\DbServiceTrait as DbSchemaTrait;
+use GearJson\Src\SrcServiceTrait as SrcSchemaTrait;
+use GearJson\App\AppServiceTrait as AppSchemaTrait;
+use GearJson\Controller\ControllerServiceTrait as ControllerSchemaTrait;
+use GearJson\Action\ActionServiceTrait as ActionSchemaTrait;
+use GearJson\Db\DbService as DbSchema;
+use GearJson\Src\SrcService as SrcSchema;
+use GearJson\App\AppService as AppSchema;
+use GearJson\Controller\ControllerService as ControllerSchema;
+use GearJson\Action\ActionService as ActionSchema;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
 use GearJson\App\App;
-use Gear\Constructor\Db\DbServiceTrait as DbService;
-use Gear\Constructor\App\AppServiceTrait as AppService;
-use Gear\Constructor\Src\SrcServiceTrait as SrcService;
-use Gear\Constructor\Controller\ControllerServiceTrait as ControllerService;
-use Gear\Constructor\Action\ActionServiceTrait as ActionService;
+use Gear\Constructor\Db\DbServiceTrait;
+use Gear\Constructor\App\AppServiceTrait;
+use Gear\Constructor\Src\SrcServiceTrait;
+use Gear\Constructor\Controller\ControllerServiceTrait;
+use Gear\Constructor\Action\ActionServiceTrait;
+use Gear\Constructor\Db\DbService;
+use Gear\Constructor\App\AppService;
+use Gear\Constructor\Src\SrcService;
+use Gear\Constructor\Controller\ControllerService;
+use Gear\Constructor\Action\ActionService;
 use Gear\Module\Exception\GearfileNotFoundException;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
@@ -36,25 +46,25 @@ use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
  */
 class ConstructService extends AbstractJsonService
 {
-    use DbService;
+    use DbServiceTrait;
 
-    use AppService;
+    use AppServiceTrait;
 
-    use SrcService;
+    use SrcServiceTrait;
 
-    use ControllerService;
+    use ControllerServiceTrait;
 
-    use ActionService;
+    use ActionServiceTrait;
 
-    use DbSchema;
+    use DbSchemaTrait;
 
-    use SrcSchema;
+    use SrcSchemaTrait;
 
-    use AppSchema;
+    use AppSchemaTrait;
 
-    use ControllerSchema;
+    use ControllerSchemaTrait;
 
-    use ActionSchema;
+    use ActionSchemaTrait;
 
     const CONTROLLER_SKIP = 'Controller "%s" já existe.';
 
@@ -88,6 +98,32 @@ class ConstructService extends AbstractJsonService
 
     /** @var $configlocation Localizaçao para encontrar o arquivo de configuração */
     protected $configLocation;
+
+    public function __construct(
+        DbSchema $dbSchema,
+        SrcSchema $srcSchema,
+        AppSchema $appSchema,
+        ControllerSchema $controllerSchema,
+        ActionSchema $actionSchema,
+        DbService $dbService,
+        SrcService $srcService,
+        AppService $appService,
+        ControllerService $controllerService,
+        ActionService $actionService
+    ) {
+
+        $this->actionConstructor = $actionService;
+        $this->dbConstructor = $dbService;
+        $this->srcConstructor = $srcService;
+        $this->controllerConstructor = $controllerService;
+        $this->appConstructor = $appService;
+
+        $this->actionService = $actionSchema;
+        $this->dbService = $dbSchema;
+        $this->srcService = $srcSchema;
+        $this->controllerService = $controllerSchema;
+        $this->appService = $appSchema;
+    }
 
     /**
      * Cria componentes de acordo com o arquivo de configuração yml.

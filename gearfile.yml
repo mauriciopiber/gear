@@ -39,9 +39,11 @@ src:
 #       aliase: GearBase\Util\String      
 
   0:
-    name: ColumnManager
-    type: ValueObject
-    namespace: Column
+    name: SrcService
+    type: Factory
+    namespace: Constructor/Src
+    #dependency: 
+     
     
            
 #  2:
