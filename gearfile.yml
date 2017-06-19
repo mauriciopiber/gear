@@ -42,7 +42,45 @@ src:
     name: DbService
     type: Factory
     namespace: Constructor\Db
-    #dependency: 
+    dependency: 
+      0:
+        class: Column\ColumnService
+      1:
+        class: Table\TableService
+      2:
+        class: \GearJson\Action\ActionService
+      3:
+        class: \GearJson\Db\DbService
+      4:
+        class: Mvc\Spec\Feature\Feature
+      5:
+        class: Mvc\Spec\Step\Step
+      6:
+        class: Mvc\Entity\EntityService
+      7:
+        class: Mvc\Search\SearchService
+      8:
+        class: Mvc\Fixture\FixtureService
+      9:
+        class: Mvc\Filter\FilterService
+      10:
+        class: Mvc\Form\FormService
+      11:
+        class: Mvc\Controller\ControllerService
+      12:
+        class: Mvc\Controller\ControllerTestService
+      13:
+        class: Mvc\Config\ConfigService
+      14:
+        class: Mvc\LanguageService
+      15:
+        class: Mvc\ViewViewService
+      16:
+        class: Mvc\Repository\RepositoryService
+      17:
+        class: Mvc\Service\ServiceService
+      18:
+        class: Module\BasicModuleStructure
      
     
            
