@@ -56,25 +56,35 @@ class ConstructService extends AbstractJsonService
 
     use ActionSchema;
 
-    static protected $controllerSkip = 'Controller "%s" já existe.';
+    const CONTROLLER_SKIP = 'Controller "%s" já existe.';
 
-    static protected $controllerCreate = 'Controller "%s" criado.';
+    const CONTROLLER_VALIDATE = 'Controller "%s" apresentou erros na formatação:';
 
-    static protected $actionSkip = 'Action "%s" do Controller "%s" já existe.';
+    const CONTROLLER_CREATED = 'Controller "%s" criado.';
 
-    static protected $actionCreate = 'Action "%s" do Controller "%s" criado.';
+    const ACTION_SKIP = 'Action "%s" do Controller "%s" já existe.';
 
-    static protected $srcSkip = 'Src nome "%s" do tipo "%s" já existe.';
+    const ACTION_VALIDATE = 'Action "%s" do Controller "%s" apresentou erros na formatação';
 
-    static protected $srcCreate = 'Src nome "%s" do tipo "%s" criado.';
+    const ACTION_CREATED = 'Action "%s" do Controller "%s" criado.';
 
-    static protected $dbSkip = 'Db tabela "%s" já existe.';
+    const SRC_SKIP = 'Src nome "%s" do tipo "%s" já existe.';
 
-    static protected $dbCreate = 'Db tabela "%s" criado.';
+    const SRC_VALIDATE = 'Src %s retornou erros durante validação';
 
-    static protected $appSkip = 'App nome "%s" do tipo "%s" já existe.';
+    const SRC_CREATED = 'Src nome "%s" do tipo "%s" criado.';
 
-    static protected $appCreate = 'App nome "%s" do tipo "%s" criado.';
+    const DB_SKIP = 'Db tabela "%s" já existe.';
+
+    const DB_VALIDATE = '';
+
+    const DB_CREATED = 'Db tabela "%s" criado.';
+
+    const APP_SKIP = 'App nome "%s" do tipo "%s" já existe.';
+
+    const APP_VALIDATE = '';
+
+    const APP_CREATED = 'App nome "%s" do tipo "%s" criado.';
 
     /** @var $configlocation Localizaçao para encontrar o arquivo de configuração */
     protected $configLocation;
@@ -160,12 +170,12 @@ class ConstructService extends AbstractJsonService
 
     public function constructSrc($module, array $src)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
+        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***, 'invalid-msg' => [***REMOVED******REMOVED***;
 
         $srcItem = new Src($src);
 
         if ($this->getSrcService()->srcExist($module, $srcItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcSkip, $srcItem->getName(), $srcItem->getType());
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType());
 
             return $constructList;
         }
@@ -173,14 +183,14 @@ class ConstructService extends AbstractJsonService
         $created = $this->getSrcConstructor()->create($src);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcSkip, $srcItem->getName(), $srcItem->getType());
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_VALIDATE, $srcItem->getName(), $srcItem->getType());
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
             }
             return $constructList;
         }
 
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$srcCreate, $srcItem->getName(), $srcItem->getType());
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType());
         return $constructList;
     }
 
@@ -191,7 +201,7 @@ class ConstructService extends AbstractJsonService
         $appItem = new App($app);
 
         if ($this->getAppService()->appExist($module, $appItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appSkip, $appItem->getName(), $appItem->getType());
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::APP_SKIP, $appItem->getName(), $appItem->getType());
 
             return $constructList;
         }
@@ -199,7 +209,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getAppConstructor()->create($app);
 
         if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$appCreate, $appItem->getName(), $appItem->getType());
+            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::APP_CREATED, $appItem->getName(), $appItem->getType());
         }
 
         return $constructList;
@@ -212,7 +222,7 @@ class ConstructService extends AbstractJsonService
         $dbItem = new Db($db);
 
         if ($this->getDbService()->dbExist($module, $dbItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbSkip, $dbItem->getTable());
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_SKIP, $dbItem->getTable());
 
             return $constructList;
         }
@@ -220,7 +230,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getDbConstructor()->create($db);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_VALIDATE, $dbItem->getTable());
 
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
@@ -229,7 +239,7 @@ class ConstructService extends AbstractJsonService
             return $constructList;
         }
 
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$dbCreate, $dbItem->getTable());
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_CREATED, $dbItem->getTable());
         return $constructList;
     }
 
@@ -240,7 +250,7 @@ class ConstructService extends AbstractJsonService
         $controllerItem = new Controller($controller);
 
         if ($this->getControllerService()->controllerExist($module, $controllerItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerSkip, $controllerItem->getName());
+            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_SKIP, $controllerItem->getName());
 
             return $constructList;
         }
@@ -248,7 +258,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getControllerConstructor()->createController($controller);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerSkip, $controllerItem->getName());
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_VALIDATE, $controllerItem->getName());
 
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
@@ -257,8 +267,7 @@ class ConstructService extends AbstractJsonService
             return $constructList;
         }
 
-
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(static::$controllerCreate, $controllerItem->getName());
+        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_CREATED, $controllerItem->getName());
 
         return $constructList;
     }
@@ -273,7 +282,7 @@ class ConstructService extends AbstractJsonService
 
         if ($this->getActionService()->actionExist($module, $actionItem)) {
             $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(
-                static::$actionSkip,
+                self::ACTION_SKIP,
                 $actionItem->getName(),
                 $controller//->getName()
             );
@@ -285,7 +294,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getActionConstructor()->createControllerAction($action);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(static::$actionSkip, $actionItem->getName(), $controller);
+            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $controller);
 
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
@@ -295,7 +304,7 @@ class ConstructService extends AbstractJsonService
         }
 
         $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
-            static::$actionCreate,
+            self::ACTION_CREATED,
             $actionItem->getName(),
             $controller//->getName()
         );
@@ -327,7 +336,6 @@ class ConstructService extends AbstractJsonService
             $this->configLocation = $configLocation;
             return $this;
         }
-
 
         if ($configLocation) {
             $basePath = $this->getBaseDir();
@@ -366,11 +374,6 @@ class ConstructService extends AbstractJsonService
     {
         if (empty($this->getConfigLocation())) {
             $this->setConfigLocation($this->getDefaultLocation());
-        }
-
-
-        if (!is_file($this->getConfigLocation())) {
-            throw new \Gear\Module\Exception\GearfileNotFoundException($this->getConfigLocation());
         }
 
         $yaml = new Parser();

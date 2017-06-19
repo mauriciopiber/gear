@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Gear\Service\AbstractJsonService;
 use GearJson\Db\DbServiceTrait as JsonDb;
 use GearJson\Action\ActionServiceTrait as JsonAction;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
@@ -19,27 +18,53 @@ use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+//use Gear\Table\TableService\TableService;
+use Gear\Table\TableService\TableServiceTrait;
+use Gear\Column\ColumnServiceTrait;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Module\ModuleAwareInterface;
 
-class DbService extends AbstractJsonService
+class DbService implements ModuleAwareInterface
 {
     protected $metadata;
 
+    use ColumnServiceTrait;
+
+    use TableServiceTrait;
+
     use JsonAction;
+
     use JsonDb;
+
     use FeatureTrait;
+
     use StepTrait;
+
     use EntityServiceTrait;
+
     use SearchServiceTrait;
+
     use FixtureServiceTrait;
+
     use FilterServiceTrait;
+
     use FormServiceTrait;
+
     use ControllerServiceTrait;
+
     use ControllerTestServiceTrait;
+
     use ConfigServiceTrait;
+
     use LanguageServiceTrait;
+
     use ViewServiceTrait;
+
     use RepositoryServiceTrait;
+
     use ServiceServiceTrait;
+
+    use ModuleAwareTrait;
 
     /**
      * @param array $data
@@ -107,11 +132,6 @@ class DbService extends AbstractJsonService
         $this->getFeature()               ->introspectFromTable($db);
         $this->getStep()                  ->createTableStep($db);
 
-        return true;
-    }
-
-    public function delete()
-    {
         return true;
     }
 }

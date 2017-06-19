@@ -16,6 +16,7 @@ use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Module\BasicModuleStructure;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
  * @group fix-table
@@ -103,6 +104,51 @@ class DbServiceTest extends TestCase
         ***REMOVED***);
     }
 
+    /**
+     * @group x3
+     */
+    public function testCreateDbWithDefaultValues()
+    {
+        $table = 'MyTable';
+        $module = 'MyModule';
+
+        $this->db = $this->prophesize('GearJson\Db\Db');
+        $this->db->getTable()->willReturn($table)->shouldBeCalled();
+
+        $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
+
+        $this->dbService->create($module, $table, [***REMOVED***, 'all', 'admin', 'factories', null, false)
+        ->willReturn($this->db->reveal())
+        ->shouldBeCalled();
+
+        $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+
+        $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
+
+        $this->tableService->getTableObject($table)->willReturn($this->tableObject->reveal())->shouldBeCalled();
+        $this->tableService->verifyTableAssociation($table, 'upload_image')->willReturn(true)->shouldBeCalled();
+
+        $this->serviceService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->repositoryService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->formService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->filterService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->searchFormService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
+        $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->entityService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->fixtureService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->languageService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->viewService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->configService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+
+        $service = $this->service->create([
+            'table' => $table
+        ***REMOVED***);
+
+
+        $this->assertTrue($service);
+    }
 
     /**
      * @group x2
@@ -140,6 +186,13 @@ class DbServiceTest extends TestCase
         $this->filterService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->searchFormService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
+        $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->entityService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->fixtureService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->languageService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->viewService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->configService->introspectFromTable($this->db->reveal())->shouldBeCalled();
 
         $service = $this->service->create([
             'table' => $table,
@@ -151,6 +204,39 @@ class DbServiceTest extends TestCase
 
 
         $this->assertTrue($service);
+    }
+
+    /**
+     * @group a1
+     */
+    public function testCreateDbReturnConsoleValidation()
+    {
+        $table = 'MyTable';
+        $columns = [***REMOVED***;
+        $user = 'all';
+        $role = 'guest';
+        $service = 'factories';
+        $namespace = 'MyTable';
+        $module = 'MyModule';
+
+        $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
+
+        $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
+
+        $this->dbService->create($module, $table, $columns, $user, $role, $service, $namespace, false)
+            ->willReturn($this->consoleValidation->reveal())
+            ->shouldBeCalled();
+
+        $service = $this->service->create([
+            'table' => $table,
+            'columns' => $columns,
+            'user' => $user,
+            'role' => $role,
+            'namespace' => $namespace
+        ***REMOVED***);
+
+
+        $this->assertEquals($this->consoleValidation->reveal(), $service);
     }
 
     /*
