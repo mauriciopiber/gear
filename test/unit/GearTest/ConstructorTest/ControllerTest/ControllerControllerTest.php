@@ -11,7 +11,7 @@ use Zend\Stdlib\Parameters;
 /**
  * @group Constructor
  */
-class ProjectControllerTest extends AbstractConsoleControllerTestCase
+class ControllerControllerTest extends AbstractConsoleControllerTestCase
 {
     public function setUp()
     {

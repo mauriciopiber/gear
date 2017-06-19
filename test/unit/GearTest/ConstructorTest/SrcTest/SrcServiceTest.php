@@ -56,10 +56,8 @@ class SrcServiceTest extends TestCase
         $this->service->setTraitService($this->trait->reveal());
         $this->service->setTraitTestService($this->traitTest->reveal());
 
-
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->service->setTableService($this->tableService->reveal());
-
 
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
         $this->service->setColumnService($this->columnService->reveal());

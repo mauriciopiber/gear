@@ -55,6 +55,8 @@ class ControllerService extends AbstractJsonService
         //$this->getPageTestService()       ->introspectFromTable($this->db);
         //$this->getAcceptanceTestService() ->introspectFromTable($this->db);
         //$this->getFunctionalTestService() ->introspectFromTable($this->db);
+
+        return true;
     }
 
     public function createController($data = array())
@@ -81,6 +83,10 @@ class ControllerService extends AbstractJsonService
             return $this->controller;
         }
 
+        if (!in_array($this->controller->getType(), ['Action', 'Console'***REMOVED***)) {
+            return false;
+        }
+
         //se tem DB declarado, cria utilizando as regras de db
         if ($this->controller->getDb() !== null) {
             return $this->createDb();
@@ -93,20 +99,9 @@ class ControllerService extends AbstractJsonService
             return true;
         }
 
-        if ($this->str('class', $this->controller->getType()) == 'Console') {
-            $this->getConsoleController()->buildController($this->controller);
-            $this->getConsoleControllerTest()->buildController($this->controller);
-            $this->getControllerManager()->create($this->controller);
-            return true;
-        }
-
-        /**
-         * @TODO
-         */
-        if ($this->controller->getType() == 'Restful') {
-            return null;
-        }
-
-        return false;
+        $this->getConsoleController()->buildController($this->controller);
+        $this->getConsoleControllerTest()->buildController($this->controller);
+        $this->getControllerManager()->create($this->controller);
+        return true;
     }
 }
