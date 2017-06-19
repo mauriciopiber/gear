@@ -4,6 +4,7 @@ namespace Gear\Mvc\Entity;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Entity\DoctrineService;
 
 class EntityServiceFactory implements FactoryInterface
 {
@@ -11,7 +12,7 @@ class EntityServiceFactory implements FactoryInterface
     {
         return new EntityService(
             $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get('doctrineService'),
+            $serviceLocator->get(DoctrineService::class),
             $serviceLocator->get('scriptService'),
             $serviceLocator->get('Gear\Mvc\Entity\EntityTestService'),
             $serviceLocator->get('Gear\Table\TableService'),

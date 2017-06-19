@@ -10,7 +10,7 @@ trait DoctrineServiceTrait
     public function getDoctrineService()
     {
         if (!isset($this->doctrineService)) {
-            $this->doctrineService = $this->getServiceLocator()->get('doctrineService');
+            $this->doctrineService = $this->getServiceLocator()->get(DoctrineService::class);
         }
         return $this->doctrineService;
     }
