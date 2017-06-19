@@ -41,7 +41,7 @@ src:
   0:
     name: DbService
     type: Factory
-    namespace: Constructor/Db
+    namespace: Constructor\Db
     #dependency: 
      
     
