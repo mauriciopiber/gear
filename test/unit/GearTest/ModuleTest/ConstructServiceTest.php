@@ -53,21 +53,21 @@ class ConstructServiceTest extends AbstractTestCase
         $this->actionService = $this->prophesize(ActionService::class);
         $this->appService = $this->prophesize(AppService::class);
 
-        $this->construct = new ConstructService();
+        $this->construct = new ConstructService(
+            $this->dbSchema->reveal(),
+            $this->srcSchema->reveal(),
+            $this->appSchema->reveal(),
+            $this->controllerSchema->reveal(),
+            $this->actionSchema->reveal(),
+            $this->dbService->reveal(),
+            $this->srcService->reveal(),
+            $this->appService->reveal(),
+            $this->controllerService->reveal(),
+            $this->actionService->reveal()
+        );
         $this->construct->setBaseDir($this->basepath);
         //schema
-        $this->construct->setDbService($this->dbSchema->reveal());
-        $this->construct->setSrcService($this->srcSchema->reveal());
-        $this->construct->setControllerService($this->controllerSchema->reveal());
-        $this->construct->setActionService($this->actionSchema->reveal());
-        $this->construct->setAppService($this->appSchema->reveal());
 
-        //constructor
-        $this->construct->setDbConstructor($this->dbService->reveal());
-        $this->construct->setSrcConstructor($this->srcService->reveal());
-        $this->construct->setAppConstructor($this->appService->reveal());
-        $this->construct->setControllerConstructor($this->controllerService->reveal());
-        $this->construct->setActionConstructor($this->actionService->reveal());
     }
 
     public function testGetSchemaServices()

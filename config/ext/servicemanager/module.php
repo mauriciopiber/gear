@@ -3,6 +3,7 @@ return [
     'factories' => [
         'moduleStructure'             => 'Gear\Module\BasicModuleStructureFactory',
         'Gear\Module\Diagnostic'      => 'Gear\Module\Diagnostic\DiagnosticServiceFactory',
+        'Gear\Module\Construct'       => 'Gear\Module\ConstructServiceFactory',
     ***REMOVED***,
     'invokables' =>
     [
