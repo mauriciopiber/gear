@@ -1,5 +1,8 @@
 <?php
 return [
+    'factories' => [
+        'Gear\Module\Constructor\Src'        => 'Gear\Constructor\Src\SrcServiceFactory',
+    ***REMOVED***,
     'invokables' => [
         'Gear\Module\Constructor\Controller' => 'Gear\Constructor\Controller\ControllerService',
         'Gear\Module\Constructor\Action'     => 'Gear\Constructor\Action\ActionService',
