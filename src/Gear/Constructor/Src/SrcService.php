@@ -7,8 +7,10 @@
 namespace Gear\Constructor\Src;
 
 use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Mvc\Config\ServiceManager;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use GearJson\Src\SrcServiceTrait as JsonSrc;
+use GearJson\Src\SrcService as SrcSchema;
 use Gear\Mvc\Form\FormServiceTrait;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
@@ -26,6 +28,7 @@ use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\BasicModuleStructure;
 use Gear\Module\ModuleAwareInterface;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
@@ -106,7 +109,7 @@ class SrcService implements ModuleAwareInterface
         FormService $formService,
         FilterService $filterService,
         EntityService $entityService,
-        SearchSearch $searchService,
+        SearchService $searchService,
         ValueObjectService $valueObjectService,
         ViewHelperService $viewHelperService,
         ControllerPluginService $controllerPluginService,
