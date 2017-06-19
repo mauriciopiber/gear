@@ -8,7 +8,7 @@ trait InterfaceServiceTrait
     public function getInterfaceService()
     {
         if (!isset($this->interfaceService)) {
-            $this->interfaceService = $this->getServiceLocator()->get('Gear\Mvc\Interface');
+            $this->interfaceService = $this->getServiceLocator()->get('Gear\Mvc\InterfaceService');
         }
         return $this->interfaceService;
     }
