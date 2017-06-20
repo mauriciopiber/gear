@@ -6,8 +6,6 @@
  */
 namespace Gear\Constructor\Action;
 
-use Gear\Service\AbstractJsonService;
-
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\Db\Db;
@@ -27,9 +25,19 @@ use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Module\ModuleAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
 
-class ActionService extends AbstractJsonService
+/**
+ * @group m1
+ */
+class ActionService implements ModuleAwareInterface
 {
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     use PageTrait;
 
     use StepTrait;

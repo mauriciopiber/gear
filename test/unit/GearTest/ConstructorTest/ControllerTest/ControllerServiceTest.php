@@ -1,18 +1,15 @@
 <?php
 namespace GearTest\ServiceTest\ConstructorTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Constructor\Controller\ControllerService;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
- * @group module
- * @group ConstructorController
- * @group Constructor
- * @group fix11
+ * @group m1
  */
-class ControllerServiceTest extends AbstractTestCase
+class ControllerServiceTest extends TestCase
 {
     public function setUp()
     {

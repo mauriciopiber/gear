@@ -127,6 +127,7 @@ class SrcService implements ModuleAwareInterface
         $this->traitTestService = $traitTestService;
         $this->factoryService = $factoryService;
         $this->factoryTestService = $factoryTestService;
+        $this->filterService = $filterService;
         $this->formService = $formService;
         $this->entityService = $entityService;
         $this->searchService = $searchService;

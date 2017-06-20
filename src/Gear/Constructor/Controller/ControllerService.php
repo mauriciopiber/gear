@@ -6,7 +6,6 @@
  */
 namespace Gear\Constructor\Controller;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
@@ -18,9 +17,18 @@ use GearJson\Controller\Controller;
 use GearJson\Controller\ControllerServiceTrait as JsonController;
 use Gear\Mvc\LanguageServiceTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Module\ModuleAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Table\TableService\TableServiceTrait;
+use Gear\Table\TableService\TableService;
 
-class ControllerService extends AbstractJsonService
+class ControllerService  implements ModuleAwareInterface
 {
+    use TableServiceTrait;
+    use StringServiceTrait;
+    use ModuleAwareTrait;
+
     static public $defaultService = 'factories';
 
     static public $defaultType = 'Action';
