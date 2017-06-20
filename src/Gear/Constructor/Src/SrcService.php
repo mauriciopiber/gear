@@ -254,10 +254,11 @@ class SrcService implements ModuleAwareInterface
                     break;
                 case 'Factory':
                     $factory = $this->getFactoryService();
-                    $status = $factory->createFactory($this->src);
+                    $factory->createFactory($this->src);
+                    $factory->createConstructorSnippet($this->src);
 
-                    $factory = $this->getFactoryTestService();
-                    $status = $factory->createFactoryTest($this->src);
+                    $status = $this->getFactoryTestService()->createFactoryTest($this->src);
+                    $this->getFactoryTestService()->createConstructorSnippet($this->src);
                     break;
 
                 case 'ValueObject':
