@@ -1535,6 +1535,36 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ActionService",
+                "type": "Factory",
+                "dependency": [
+                    "Mvc\\Spec\\Feature\\Feature",
+                    "GearJson\\Action\\ActionService",
+                    "Gear\\Mvc\\Config\\ConfigService",
+                    "Gear\\Mvc\\Config\\RouterManager",
+                    "Gear\\Mvc\\Config\\ConsoleRouterManager",
+                    "Gear\\Mvc\\Config\\NavigationManager",
+                    "Gear\\Mvc\\View\\ViewService",
+                    "Gear\\Mvc\\Controller\\ControllerService",
+                    "Gear\\Mvc\\ConsoleController\\ConsoleController",
+                    "Gear\\Mvc\\View\\App\\AppControllerService",
+                    "Gear\\Mvc\\Spec\\Feature\\Feature",
+                    "Gear\\Mvc\\Spec\\Page\\Page",
+                    "Gear\\Mvc\\Spec\\Step\\Step",
+                    "Gear\\Module\\BasicModuleStructure",
+                    "GearBase\\Util\\String\\StringService"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Action",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

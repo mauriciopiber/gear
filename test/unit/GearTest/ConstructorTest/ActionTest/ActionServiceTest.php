@@ -58,7 +58,6 @@ class ActionServiceTest extends TestCase
         //config
         $this->routerManager = $this->prophesize(RouterManager::class);
         $this->navigationManager = $this->prophesize(NavigationManager::class);
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
         $this->consoleRouterManager = $this->prophesize(ConsoleRouterManager::class);
 
         //schema
@@ -67,7 +66,26 @@ class ActionServiceTest extends TestCase
 
         $this->stringService = new StringService();
 
-        $this->actionService = new ActionService();
+        $this->actionService = new ActionService(
+            $this->schemaAction->reveal(),
+            $this->routerManager->reveal(),
+            $this->consoleRouterManager->reveal(),
+            $this->navigationManager->reveal(),
+            $this->viewService->reveal(),
+            $this->mvcController->reveal(),
+            $this->mvcControllerTest->reveal(),
+            $this->mvcConsoleController->reveal(),
+            $this->mvcConsoleControllerTest->reveal(),
+            $this->appController->reveal(),
+            $this->appControllerSpec->reveal(),
+            $this->feature->reveal(),
+            $this->page->reveal(),
+            $this->step->reveal(),
+            $this->module->reveal(),
+            $this->stringService
+        );
+
+        /*
         $this->actionService->setModule($this->module->reveal());
         $this->actionService->setActionService($this->schemaAction->reveal());
         $this->actionService->setStringService($this->stringService);
@@ -84,6 +102,7 @@ class ActionServiceTest extends TestCase
         $this->actionService->setConsoleControllerTest($this->mvcConsoleControllerTest->reveal());
         $this->actionService->setConsoleRouterManager($this->consoleRouterManager->reveal());
         $this->actionService->setStep($this->step->reveal());
+        */
     }
 
     /**

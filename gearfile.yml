@@ -38,61 +38,30 @@ src:
 #       class: \GearBase\Util\String\StringService
 #       aliase: GearBase\Util\String      
   10:
-    name: ActionService
+    name: ControllerService
     type: Factory
-    namespace: Constructor\Action
+    namespace: Constructor\Controller
     service: factories
     dependency:
-      0:
-        class: Mvc\Spec\Feature\Feature 
-  0:
-    name: DbService
-    type: Factory
-    namespace: Constructor\Db
-    service: factories
-    dependency: 
-      0:
-        class: Column\ColumnService
-      1:
-        class: Table\TableService
-      2:
-        class: \GearJson\Action\ActionService
-      3:
-        class: \GearJson\Db\DbService
-      4:
-        class: Mvc\Spec\Feature\Feature
-      5:
-        class: Mvc\Spec\Step\Step
-      6:
-        class: Mvc\Entity\EntityService
-      7:
-        class: Mvc\Search\SearchService
-      8:
-        class: Mvc\Fixture\FixtureService
-      9:
-        class: Mvc\Filter\FilterService
-      10:
-        class: Mvc\Form\FormService
-      11:
-        class: Mvc\Controller\ControllerService
-      12:
-        class: Mvc\Controller\ControllerTestService
-      13:
-        class: Mvc\Config\ConfigService
-      14:
-        class: Mvc\LanguageService
-      15:
-        class: Mvc\ViewViewService
-      16:
-        class: Mvc\Repository\RepositoryService
-      17:
-        class: Mvc\Service\ServiceService
-      18:
-        class: Module\BasicModuleStructure
-     
-db:
-  0:
-    table: MyTable    
+      - Mvc\Spec\Feature\Feature
+      - GearJson\Action\ActionService
+      - Gear\Mvc\Config\ConfigService
+      - Gear\Mvc\Config\RouterManager
+      - Gear\Mvc\Config\ConsoleRouterManager
+      - Gear\Mvc\Config\NavigationManager
+      - Gear\Mvc\View\ViewService
+      #- Gear\Mvc\Controller\ControllerTestService
+      - Gear\Mvc\Controller\ControllerService
+      - Gear\Mvc\ConsoleController\ConsoleController
+      #- Gear\Mvc\ConsoleController\ConsoleControllerTest
+      - Gear\Mvc\View\App\AppControllerService
+      #- Gear\Mvc\View\App\AppControllerSpecService
+      - Gear\Mvc\Spec\Feature\Feature
+      - Gear\Mvc\Spec\Page\Page
+      - Gear\Mvc\Spec\Step\Step
+      - Gear\Module\BasicModuleStructure
+      - GearBase\Util\String\StringService
+ 
            
 #  2:
 #    name: InterfaceCode

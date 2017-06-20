@@ -6,7 +6,7 @@ return [
         /* config */
         Mvc\Config\ConfigService::class                           => Mvc\Config\ConfigService::class,
         /* config manager */
-        Mvc\Config\ConsoleRouter::class                           => Mvc\Config\ConsoleRouterManager::class,
+        Mvc\Config\ConsoleRouterManager::class                    => Mvc\Config\ConsoleRouterManager::class,
         Mvc\Config\RouterManager::class                           => Mvc\Config\RouterManager::class,
         Mvc\Config\ServiceManager::class                          => Mvc\Config\ServiceManager::class,
         Mvc\Config\NavigationManager::class                       => Mvc\Config\NavigationManager::class,
@@ -32,8 +32,8 @@ return [
         Mvc\View\ViewService::class                               => Mvc\View\ViewService::class,
         Mvc\ViewHelper\ViewHelperService::class                   => Mvc\ViewHelper\ViewHelperService::class,
         Mvc\ViewHelper\ViewHelperServiceTest::class               => Mvc\ViewHelper\ViewHelperTestService::class,
-
-
+        Mvc\View\App\AppControllerService::class                  => Mvc\View\App\AppControllerService::class,
+        Mvc\View\App\AppControllerServiceTest::class              => Mvc\View\App\AppControllerServiceTest::class,
         Mvc\LanguageService::class                                => Mvc\LanguageService::class,
         Mvc\Entity\EntityTestService::class                       => Mvc\Entity\EntityTestService::class,
         Mvc\Entity\DoctrineService::class                         => Mvc\Entity\DoctrineService::class,

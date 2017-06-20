@@ -141,7 +141,7 @@ class ConstructorParams
             ;
         }
 
-        throw new \Exception('Params errors');
+        throw new \Exception('Params errors'.var_export($data, true));
     }
 
 
