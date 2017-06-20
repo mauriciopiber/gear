@@ -1354,6 +1354,187 @@
                 "service": "invokables",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "DbService",
+                "type": "Factory",
+                "dependency": [
+                    {
+                        "class": "Column\\ColumnService"
+                    },
+                    {
+                        "class": "Table\\TableService"
+                    },
+                    {
+                        "class": "\\GearJson\\Action\\ActionService"
+                    },
+                    {
+                        "class": "\\GearJson\\Db\\DbService"
+                    },
+                    {
+                        "class": "Mvc\\Spec\\Feature\\Feature"
+                    },
+                    {
+                        "class": "Mvc\\Spec\\Step\\Step"
+                    },
+                    {
+                        "class": "Mvc\\Entity\\EntityService"
+                    },
+                    {
+                        "class": "Mvc\\Search\\SearchService"
+                    },
+                    {
+                        "class": "Mvc\\Fixture\\FixtureService"
+                    },
+                    {
+                        "class": "Mvc\\Filter\\FilterService"
+                    },
+                    {
+                        "class": "Mvc\\Form\\FormService"
+                    },
+                    {
+                        "class": "Mvc\\Controller\\ControllerService"
+                    },
+                    {
+                        "class": "Mvc\\Controller\\ControllerTestService"
+                    },
+                    {
+                        "class": "Mvc\\Config\\ConfigService"
+                    },
+                    {
+                        "class": "Mvc\\LanguageService"
+                    },
+                    {
+                        "class": "Mvc\\ViewViewService"
+                    },
+                    {
+                        "class": "Mvc\\Repository\\RepositoryService"
+                    },
+                    {
+                        "class": "Mvc\\Service\\ServiceService"
+                    },
+                    {
+                        "class": "Module\\BasicModuleStructure"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Db",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTable",
+                "type": "Entity",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableRepository",
+                "type": "Repository",
+                "dependency": {
+                    "doctrine.entitymanager.orm_default": "\\Doctrine\\ORM\\EntityManager",
+                    "0": "\\GearBase\\Repository\\QueryBuilder"
+                },
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableService",
+                "type": "Service",
+                "dependency": {
+                    "0": "Repository\\MyTableRepository",
+                    "memcached": "\\Zend\\Cache\\Storage\\Adapter\\Memcached",
+                    "1": {
+                        "class": "\\Zend\\Authentication\\AuthenticationService",
+                        "aliase": "zfcuser_auth_service",
+                        "ig_t": true
+                    }
+                },
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableForm",
+                "type": "Form",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": "form-filter",
+                "implements": null
+            },
+            {
+                "name": "MyTableFilter",
+                "type": "Filter",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableSearchForm",
+                "type": "SearchForm",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": "search-form",
+                "implements": null
+            },
+            {
+                "name": "MyTableFixture",
+                "type": "Fixture",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
@@ -1814,10 +1995,65 @@
                 "extends": null,
                 "db": null,
                 "columns": null
+            },
+            {
+                "name": "MyTableController",
+                "namespace": null,
+                "type": "Action",
+                "service": "factories",
+                "dependency": [
+                    "Form\\MyTableForm",
+                    "Form\\Search\\MyTableSearchForm",
+                    "Service\\MyTableService"
+                ***REMOVED***,
+                "implements": null,
+                "actions": [
+                    {
+                        "name": "Create",
+                        "role": "admin",
+                        "route": "create",
+                        "template": null
+                    },
+                    {
+                        "name": "Edit",
+                        "role": "admin",
+                        "route": "edit",
+                        "template": null
+                    },
+                    {
+                        "name": "List",
+                        "role": "admin",
+                        "route": "list",
+                        "template": null
+                    },
+                    {
+                        "name": "Delete",
+                        "role": "admin",
+                        "route": "delete",
+                        "template": null
+                    },
+                    {
+                        "name": "View",
+                        "role": "admin",
+                        "route": "view",
+                        "template": null
+                    }
+                ***REMOVED***,
+                "extends": null,
+                "db": null,
+                "columns": null,
+                "user": null
             }
         ***REMOVED***,
         "db": [
-
+            {
+                "table": "MyTable",
+                "columns": null,
+                "role": "admin",
+                "user": "all",
+                "service": "factories",
+                "namespace": null
+            }
         ***REMOVED***
     }
 }

@@ -1,8 +1,10 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use GearJson\Db\DbServiceTrait as JsonDb;
-use GearJson\Action\ActionServiceTrait as JsonAction;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+//use Gear\Table\TableService\TableService;
+use GearJson\Db\DbServiceTrait as DbSchemaTrait;
+use GearJson\Action\ActionServiceTrait as ActionSchemaTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
@@ -17,12 +19,29 @@ use Gear\Mvc\LanguageServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-//use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
+use Gear\Mvc\Spec\Feature\Feature;
+use Gear\Mvc\Spec\Step\Step;
+use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Search\SearchService;
+use Gear\Mvc\Fixture\FixtureService;
+use Gear\Mvc\Filter\FilterService;
+use Gear\Mvc\Form\FormService;
+use Gear\Mvc\Controller\ControllerService;
+use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Mvc\LanguageService;
+use Gear\Mvc\View\ViewService;
+use Gear\Mvc\Repository\RepositoryService;
+use Gear\Mvc\Service\ServiceService;
+use Gear\Table\TableService\TableService;
+use Gear\Column\ColumnService;
+use GearJson\Db\DbService as DbSchema;
+use GearJson\Action\ActionService as ActionSchema;
+use Gear\Module\BasicModuleStructure;
 
 class DbService implements ModuleAwareInterface
 {
@@ -32,9 +51,9 @@ class DbService implements ModuleAwareInterface
 
     use TableServiceTrait;
 
-    use JsonAction;
+    use ActionSchemaTrait;
 
-    use JsonDb;
+    use DbSchemaTrait;
 
     use FeatureTrait;
 
@@ -65,6 +84,48 @@ class DbService implements ModuleAwareInterface
     use ServiceServiceTrait;
 
     use ModuleAwareTrait;
+
+    public function __construct(
+        ColumnService $columnService,
+        TableService $tableService,
+        ActionSchema $actionSchema,
+        DbSchema $dbSchema,
+        Feature $feature,
+        Step $step,
+        EntityService $entityService,
+        SearchService $searchService,
+        FixtureService $fixtureService,
+        FilterService $filterService,
+        FormService $formService,
+        ControllerService $controllerService,
+        ControllerTestService $controllerTestService,
+        ConfigService $configService,
+        LanguageService $languageService,
+        ViewService $viewService,
+        RepositoryService $repositoryService,
+        ServiceService $serviceService,
+        BasicModuleStructure $module
+    ) {
+        $this->columnService = $columnService;
+        $this->tableService = $tableService;
+        $this->actionService = $actionSchema;
+        $this->dbService = $dbSchema;
+        $this->feature = $feature;
+        $this->step = $step;
+        $this->entityService = $entityService;
+        $this->searchService = $searchService;
+        $this->fixtureService = $fixtureService;
+        $this->filterService = $filterService;
+        $this->formService = $formService;
+        $this->controllerService = $controllerService;
+        $this->controllerTestService = $controllerTestService;
+        $this->configService = $configService;
+        $this->languageService = $languageService;
+        $this->viewService = $viewService;
+        $this->repositoryService = $repositoryService;
+        $this->serviceService = $serviceService;
+        $this->module = $module;
+    }
 
     /**
      * @param array $data
