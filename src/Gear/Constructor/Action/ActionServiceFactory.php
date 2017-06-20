@@ -4,7 +4,23 @@ namespace Gear\Constructor\Action;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Constructor\Action\ActionService;
+use GearJson\Action\ActionService as ActionSchema;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Mvc\Config\RouterManager;
+use Gear\Mvc\Config\ConsoleRouterManager;
+use Gear\Mvc\Config\NavigationManager;
+use Gear\Mvc\View\ViewService;
+use Gear\Mvc\Controller\ControllerService;
+use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\View\App\AppControllerService;
+use Gear\Mvc\View\App\AppControllerServiceTest;
 use Gear\Mvc\Spec\Feature\Feature;
+use Gear\Mvc\Spec\Page\Page;
+use Gear\Mvc\Spec\Step\Step;
+use Gear\Module\BasicModuleStructure;
+use GearBase\Util\String\StringService;
 
 /**
  * PHP Version 5
@@ -27,9 +43,26 @@ class ActionServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ActionService(
-            $serviceLocator->get(Feature::class)
+            $serviceLocator->get('GearJson\Action'),
+            $serviceLocator->get(ConfigService::class),
+            $serviceLocator->get(RouterManager::class),
+            $serviceLocator->get(ConsoleRouterManager::class),
+            $serviceLocator->get(NavigationManager::class),
+            $serviceLocator->get(ViewService::class),
+            $serviceLocator->get(ControllerService::class),
+            $serviceLocator->get(ControllerTestService::class),
+            $serviceLocator->get(ConsoleController::class),
+            $serviceLocator->get(ConsoleControllerTest::class),
+            $serviceLocator->get(AppControllerService::class),
+            $serviceLocator->get(AppControllerServiceTest::class),
+            $serviceLocator->get(Feature::class),
+            $serviceLocator->get(Page::class),
+            $serviceLocator->get(Step::class),
+            $serviceLocator->get(BasicModuleStructure::class),
+            $serviceLocator->get(StringService::class)
         );
         unset($serviceLocator);
         return $factory;
     }
 }
+

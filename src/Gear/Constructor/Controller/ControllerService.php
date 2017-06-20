@@ -25,16 +25,15 @@ use Gear\Table\TableService\TableService;
 
 class ControllerService  implements ModuleAwareInterface
 {
-    use TableServiceTrait;
-    use StringServiceTrait;
-    use ModuleAwareTrait;
-
     static public $defaultService = 'factories';
 
     static public $defaultType = 'Action';
 
     static public $defaultNamespace = '%s\Controller\\';
 
+    use TableServiceTrait;
+    use StringServiceTrait;
+    use ModuleAwareTrait;
     use ConsoleControllerTrait;
     use ConsoleControllerTestTrait;
     use JsonController;
