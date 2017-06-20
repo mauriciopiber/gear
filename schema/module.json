@@ -1565,6 +1565,32 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ControllerService",
+                "type": "Factory",
+                "dependency": [
+                    "\\GearBase\\Util\\String\\StringService",
+                    "\\GearJson\\Controller\\ControllerService",
+                    "Table\\TableService",
+                    "Module\\BasicModuleStructure",
+                    "Mvc\\Controller\\ControllerService",
+                    "Mvc\\ConsoleController\\ConsoleController",
+                    "Mvc\\ConsoleController\\ConsoleControllerTest",
+                    "Mvc\\Config\\ConfigService",
+                    "Mvc\\View\\ViewService",
+                    "Mvc\\LanguageService",
+                    "Mvc\\Config\\ControllerManager"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Controller",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

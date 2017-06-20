@@ -1,10 +1,7 @@
 <?php return [
     'invokables' => [
         'Gear\Util\Vector\ArrayService' => 'Gear\Util\Vector\ArrayService',
-        'Gear\Mvc\View\App\AppServiceSpecService' => 'Gear\Mvc\View\App\AppServiceSpecService',
-        'Gear\Mvc\View\App\AppControllerSpecService' => 'Gear\Mvc\View\App\AppControllerSpecService',
-        'Gear\Mvc\View\App\AppServiceService' => 'Gear\Mvc\View\App\AppServiceService',
-        'Gear\Mvc\View\App\AppControllerService' => 'Gear\Mvc\View\App\AppControllerService',
+
         'Gear\Constructor\App\AppService' => 'Gear\Constructor\App\AppService',
         'Gear\Creator\FileCreator\AppTest\Vars' => 'Gear\Creator\FileCreator\AppTest\Vars',
         'Gear\Creator\FileCreator\AppTest\BeforeEach' => 'Gear\Creator\FileCreator\AppTest\BeforeEach',

@@ -468,7 +468,7 @@ class SrcServiceTest extends TestCase
     }
 
     /**
-     * @group x2
+     * @group mm1
      */
     public function testCreateFactory()
     {
@@ -483,7 +483,12 @@ class SrcServiceTest extends TestCase
         $this->mockSchemaSrcCreate('MyModule', 'MyService', $type);
 
         $this->factory->createFactory($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->factory->createConstructorSnippet($this->src->reveal())->willReturn(true)->shouldBeCalled();
+
+
+
         $this->factoryTest->createFactoryTest($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->factoryTest->createConstructorSnippet($this->src->reveal())->willReturn(true)->shouldBeCalled();
 
         $data = [
             'name' => 'MyService',

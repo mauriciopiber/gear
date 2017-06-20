@@ -33,27 +33,29 @@ class ControllerServiceTest extends TestCase
 
         $this->stringService = new \GearBase\Util\String\StringService();
 
-        $this->controllerService = new ControllerService();
-        $this->controllerService->setModule($this->module->reveal());
-        $this->controllerService->setConsoleController($this->mvcConsoleController->reveal());
-        $this->controllerService->setConsoleControllerTest($this->mvcConsoleControllerTest->reveal());
-        $this->controllerService->setControllerManager($this->controllerManager->reveal());
-        $this->controllerService->setControllerService($this->schemaController->reveal());
-        $this->controllerService->setStringService($this->stringService);
-        $this->controllerService->setMvcController($this->mvcController->reveal());
-        $this->controllerService->setControllerTestService($this->mvcControllerTest->reveal());
-
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->controllerService->setTableService($this->tableService->reveal());
 
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
-        $this->controllerService->setLanguageService($this->languageService->reveal());
 
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
-        $this->controllerService->setViewService($this->viewService->reveal());
 
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
-        $this->controllerService->setConfigService($this->configService->reveal());
+
+        $this->controllerService = new ControllerService(
+            $this->stringService,
+            $this->schemaController->reveal(),
+            $this->tableService->reveal(),
+            $this->module->reveal(),
+            $this->mvcController->reveal(),
+            $this->mvcControllerTest->reveal(),
+            $this->mvcConsoleController->reveal(),
+            $this->mvcConsoleControllerTest->reveal(),
+            //$this->controllerManager->reveal(),
+            $this->configService->reveal(),
+            $this->viewService->reveal(),
+            $this->languageService->reveal(),
+            $this->controllerManager->reveal()
+        );
 
     }
 
