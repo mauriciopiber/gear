@@ -37,11 +37,12 @@ src:
 #     0:
 #       class: \GearBase\Util\String\StringService
 #       aliase: GearBase\Util\String      
-
+  
   0:
     name: DbService
     type: Factory
     namespace: Constructor\Db
+    service: factories
     dependency: 
       0:
         class: Column\ColumnService
@@ -82,7 +83,9 @@ src:
       18:
         class: Module\BasicModuleStructure
      
-    
+db:
+  0:
+    table: MyTable    
            
 #  2:
 #    name: InterfaceCode
