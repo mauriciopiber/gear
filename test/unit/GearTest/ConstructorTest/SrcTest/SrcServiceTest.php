@@ -2,7 +2,6 @@
 namespace GearTest\ConstructorTest\SrcTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Gear\Constructor\Src\SrcServiceTrait;
 use Gear\Constructor\Src\SrcService;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
@@ -23,84 +22,57 @@ use Gear\Mvc\Entity\EntityService;
  */
 class SrcServiceTest extends TestCase
 {
-    use SrcServiceTrait;
 
     public function setUp()
     {
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $this->service = new \Gear\Constructor\Src\SrcService();
         //$this->service->setSrcService($schema);
-        $this->service->setModule($this->module->reveal());
         //$this->service->setRepositoryService($repository);
         //$this->service->setServiceManager($config);
         $this->schema = $this->prophesize('GearJson\Src\SrcService');
-        $this->service->setSrcService($this->schema->reveal());
-
-
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
-        $this->service->setServiceService($this->serviceService->reveal());
-
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
-        $this->service->setServiceManager($this->serviceManager->reveal());
-
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-
-        $this->service->setFactoryService($this->factory->reveal());
-        $this->service->setFactoryTestService($this->factoryTest->reveal());
-
         $this->trait = $this->prophesize('Gear\Mvc\TraitService');
         $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->service->setTraitService($this->trait->reveal());
-        $this->service->setTraitTestService($this->traitTest->reveal());
-
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->service->setTableService($this->tableService->reveal());
-
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
-        $this->service->setColumnService($this->columnService->reveal());
-
         $this->repositoryService = $this->prophesize(RepositoryService::class);
-        $this->service->setRepositoryService($this->repositoryService->reveal());
-
         $this->formService = $this->prophesize(FormService::class);
-        $this->service->setFormService($this->formService->reveal());
-
         $this->filterService = $this->prophesize(FilterService::class);
-        $this->service->setFilterService($this->filterService->reveal());
-
         $this->searchFormService = $this->prophesize(SearchService::class);
-        $this->service->setSearchService($this->searchFormService->reveal());
-
         $this->controllerPluginService = $this->prophesize(ControllerPluginService::class);
-        $this->service->setControllerPluginService($this->controllerPluginService->reveal());
-
         $this->viewHelperService = $this->prophesize(ViewHelperService::class);
-        $this->service->setViewHelperService($this->viewHelperService->reveal());
-
         $this->entityService = $this->prophesize(EntityService::class);
-        $this->service->setEntityService($this->entityService->reveal());
-
         $this->fixtureService = $this->prophesize(FixtureService::class);
-        $this->service->setFixtureService($this->fixtureService->reveal());
-
         $this->interfaceService = $this->prophesize(InterfaceService::class);
-        $this->service->setInterfaceService($this->interfaceService->reveal());
-
         $this->valueObjectService = $this->prophesize(ValueObjectService::class);
-        $this->service->setValueObjectService($this->valueObjectService->reveal());
-
-        /*
 
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $this->service->setModule($this->module->reveal());
+        $this->service = new SrcService(
+            $this->tableService->reveal(),
+            $this->columnService->reveal(),
+            $this->module->reveal(),
+            $this->schema->reveal(),
+            $this->serviceManager->reveal(),
+            $this->trait->reveal(),
+            $this->traitTest->reveal(),
+            $this->factory->reveal(),
+            $this->factoryTest->reveal(),
+            $this->formService->reveal(),
+            $this->filterService->reveal(),
+            $this->entityService->reveal(),
+            $this->searchFormService->reveal(),
+            $this->valueObjectService->reveal(),
+            $this->viewHelperService->reveal(),
+            $this->controllerPluginService->reveal(),
+            $this->repositoryService->reveal(),
+            $this->serviceService->reveal(),
+            $this->fixtureService->reveal(),
+            $this->interfaceService->reveal()
+        );
 
-        $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
-        $this->service->setServiceManager($this->serviceManager);
-        */
     }
 
     public function mockSchemaSrcCreate($module, $name, $type)

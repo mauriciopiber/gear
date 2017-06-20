@@ -20,6 +20,7 @@ use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Table\TableService\TableServiceTrait;
+use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnServiceTrait;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
@@ -37,7 +38,7 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
-use Gear\Table\TableService\TableService;
+
 use Gear\Column\ColumnService;
 use GearJson\Db\DbService as DbSchema;
 use GearJson\Action\ActionService as ActionSchema;
@@ -98,7 +99,7 @@ class DbService implements ModuleAwareInterface
         FilterService $filterService,
         FormService $formService,
         ControllerService $controllerService,
-        ControllerTestService $controllerTestService,
+        //ControllerTestService $controllerTestService,
         ConfigService $configService,
         LanguageService $languageService,
         ViewService $viewService,
@@ -117,8 +118,8 @@ class DbService implements ModuleAwareInterface
         $this->fixtureService = $fixtureService;
         $this->filterService = $filterService;
         $this->formService = $formService;
-        $this->controllerService = $controllerService;
-        $this->controllerTestService = $controllerTestService;
+        $this->mvcService = $controllerService;
+        //$this->controllerTestService = $controllerTestService;
         $this->configService = $configService;
         $this->languageService = $languageService;
         $this->viewService = $viewService;

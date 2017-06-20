@@ -32,64 +32,48 @@ class DbServiceTest extends TestCase
 
     public function setUp()
     {
-        $this->service = new DbService();
 
         $this->dbService = $this->prophesize('GearJson\Db\DbService');
-        $this->service->setDbService($this->dbService->reveal());
-
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
-        $this->service->setConfigService($this->configService->reveal());
-
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->service->setTableService($this->tableService->reveal());
-
-
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
-        $this->service->setColumnService($this->columnService->reveal());
-
         $this->repositoryService = $this->prophesize(RepositoryService::class);
-        $this->service->setRepositoryService($this->repositoryService->reveal());
-
         $this->formService = $this->prophesize(FormService::class);
-        $this->service->setFormService($this->formService->reveal());
-
         $this->filterService = $this->prophesize(FilterService::class);
-        $this->service->setFilterService($this->filterService->reveal());
-
         $this->searchFormService = $this->prophesize(SearchService::class);
-        $this->service->setSearchService($this->searchFormService->reveal());
-
         $this->actionService = $this->prophesize(ActionService::class);
-        $this->service->setActionService($this->actionService->reveal());
-
         $this->entityService = $this->prophesize(EntityService::class);
-        $this->service->setEntityService($this->entityService->reveal());
-
         $this->fixtureService = $this->prophesize(FixtureService::class);
-        $this->service->setFixtureService($this->fixtureService->reveal());
-
         $this->feature = $this->prophesize(Feature::class);
-
-        $this->service->setFeature($this->feature->reveal());
         $this->step = $this->prophesize(Step::class);
-
-        $this->service->setStep($this->step->reveal());
-
         $this->module = $this->prophesize(BasicModuleStructure::class);
-        $this->service->setModule($this->module->reveal());
-
-
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
-        $this->service->setServiceService($this->serviceService->reveal());
-
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
-        $this->service->setLanguageService($this->languageService->reveal());
-
         $this->controllerService = $this->prophesize('Gear\Mvc\Controller\ControllerService');
-        $this->service->setMvcController($this->controllerService->reveal());
-
+        //$this->controllerTestService = $this->prophesize('Gear\Mvc\Controller\ControllerService');
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
-        $this->service->setViewService($this->viewService->reveal());
+
+        $this->service = new DbService(
+            $this->columnService->reveal(),
+            $this->tableService->reveal(),
+            $this->actionService->reveal(),
+            $this->dbService->reveal(),
+            $this->feature->reveal(),
+            $this->step->reveal(),
+            $this->entityService->reveal(),
+            $this->searchFormService->reveal(),
+            $this->fixtureService->reveal(),
+            $this->filterService->reveal(),
+            $this->formService->reveal(),
+            $this->controllerService->reveal(),
+            //$this->controllerTestService->reveal(),
+            $this->configService->reveal(),
+            $this->languageService->reveal(),
+            $this->viewService->reveal(),
+            $this->repositoryService->reveal(),
+            $this->serviceService->reveal(),
+            $this->module->reveal()
+        );
 
     }
 

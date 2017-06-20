@@ -27,9 +27,7 @@ use GearJson\Schema\SchemaService;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
- * @group module
- * @group Constructor
- * @group ConstructorAction
+ * @group m1
  */
 class ActionServiceTest extends TestCase
 {
