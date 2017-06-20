@@ -38,6 +38,13 @@ class FactoryService extends AbstractMvc
         $this->getFactoryTestService()->createTest($src);
     }
 
+    public function createConstructorSnippet($src)
+    {
+        $constructor = $this->getCode()->getConstructor();
+        echo $constructor;
+    }
+
+
 
     public function getOptionsTemplateSrc(Src $src)
     {

@@ -37,7 +37,11 @@ src:
 #     0:
 #       class: \GearBase\Util\String\StringService
 #       aliase: GearBase\Util\String      
-  
+  10:
+    name: ActionService
+    type: Factory
+    namespace: Constructor\Action
+    service: factories 
   0:
     name: DbService
     type: Factory
