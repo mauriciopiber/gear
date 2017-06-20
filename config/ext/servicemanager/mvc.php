@@ -33,7 +33,7 @@ return [
         Mvc\ViewHelper\ViewHelperService::class                   => Mvc\ViewHelper\ViewHelperService::class,
         Mvc\ViewHelper\ViewHelperServiceTest::class               => Mvc\ViewHelper\ViewHelperTestService::class,
         Mvc\View\App\AppControllerService::class                  => Mvc\View\App\AppControllerService::class,
-        Mvc\View\App\AppControllerServiceTest::class              => Mvc\View\App\AppControllerServiceTest::class,
+        Mvc\View\App\AppControllerSpecService::class              => Mvc\View\App\AppControllerSpecService::class,
         Mvc\LanguageService::class                                => Mvc\LanguageService::class,
         Mvc\Entity\EntityTestService::class                       => Mvc\Entity\EntityTestService::class,
         Mvc\Entity\DoctrineService::class                         => Mvc\Entity\DoctrineService::class,

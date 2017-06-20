@@ -15,7 +15,7 @@ use Gear\Mvc\Controller\ControllerTestService;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\View\App\AppControllerService;
-use Gear\Mvc\View\App\AppControllerServiceTest;
+use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
@@ -44,7 +44,7 @@ class ActionServiceFactory implements FactoryInterface
     {
         $factory = new ActionService(
             $serviceLocator->get('GearJson\Action'),
-            $serviceLocator->get(ConfigService::class),
+            //$serviceLocator->get(ConfigService::class),
             $serviceLocator->get(RouterManager::class),
             $serviceLocator->get(ConsoleRouterManager::class),
             $serviceLocator->get(NavigationManager::class),
@@ -54,12 +54,12 @@ class ActionServiceFactory implements FactoryInterface
             $serviceLocator->get(ConsoleController::class),
             $serviceLocator->get(ConsoleControllerTest::class),
             $serviceLocator->get(AppControllerService::class),
-            $serviceLocator->get(AppControllerServiceTest::class),
+            $serviceLocator->get(AppControllerSpecService::class),
             $serviceLocator->get(Feature::class),
             $serviceLocator->get(Page::class),
             $serviceLocator->get(Step::class),
             $serviceLocator->get(BasicModuleStructure::class),
-            $serviceLocator->get(StringService::class)
+            $serviceLocator->get('GearBase\Util\String')
         );
         unset($serviceLocator);
         return $factory;
