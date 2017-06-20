@@ -41,7 +41,10 @@ src:
     name: ActionService
     type: Factory
     namespace: Constructor\Action
-    service: factories 
+    service: factories
+    dependency:
+      0:
+        class: Mvc\Spec\Feature\Feature 
   0:
     name: DbService
     type: Factory

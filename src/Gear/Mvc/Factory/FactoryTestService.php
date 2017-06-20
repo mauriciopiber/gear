@@ -18,9 +18,11 @@ class FactoryTestService extends AbstractMvcTest
 
     public function createConstructorSnippet($src)
     {
-        $constructor = $this->getCodeTest()->getConstructor();
-        echo $constructor;
+        $dependency = $this->getCodeTest()->getConstructorDependency($src);
+        echo $dependency.PHP_EOL;
 
+        $constructor = $this->getCodeTest()->getConstructor($src);
+        echo $constructor.PHP_EOL;
     }
 
     public function createFactoryTest($src, $location = null)
