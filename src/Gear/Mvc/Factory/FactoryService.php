@@ -40,8 +40,11 @@ class FactoryService extends AbstractMvc
 
     public function createConstructorSnippet($src)
     {
-        $constructor = $this->getCode()->getConstructor();
-        echo $constructor;
+        $use = $this->getCode()->checkUseForConstructor($src);
+        echo $use.PHP_EOL;
+
+        $constructor = $this->getCode()->getConstructor($src);
+        echo $constructor.PHP_EOL;
     }
 
 

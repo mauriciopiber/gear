@@ -1,8 +1,5 @@
 <?php
 /**
- *
- * @author piber
- * 0.1.0 - Essa classe será responsável por adicionar cruds ao módulos zf2 do gear.
  */
 namespace Gear\Constructor\Action;
 
@@ -14,7 +11,7 @@ use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\RouterManagerTrait;
 use Gear\Mvc\Config\ConsoleRouterManagerTrait;
 use Gear\Mvc\Config\NavigationManagerTrait;
-use Gear\Mvc\View\ViewServiceTrait as MvcView;
+use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
@@ -70,7 +67,7 @@ class ActionService implements ModuleAwareInterface
     use MvcControllerService;
 
     /* mvc view */
-    use MvcView;
+    use ViewServiceTrait;
 
     public function createControllerAction($data)
     {

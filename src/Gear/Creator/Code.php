@@ -554,6 +554,19 @@ EOS;
         return $this->printUse($this->uses);
     }
 
+    public function checkUseForConstructor($data)
+    {
+        $this->uses = [***REMOVED***;
+
+        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+            foreach ($data->getDependency() as $item) {
+                $this->uses[***REMOVED*** = $this->resolveNamespace($item);
+            }
+        }
+
+        return $this->printUse($this->uses);
+    }
+
     public function extractNamesFromNamespaceArray(array $extract)
     {
         foreach ($extract as $name => $item) {
