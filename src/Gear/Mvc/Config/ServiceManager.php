@@ -61,7 +61,7 @@ class ServiceManager extends AbstractJsonService
     {
         $name = $src->getName();
 
-        if ($src->getService() == 'factories') {
+        if ($src->isFactory()) {
             $name .= 'Factory';
         }
 

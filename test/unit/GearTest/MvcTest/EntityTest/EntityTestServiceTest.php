@@ -8,7 +8,7 @@ use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
 use GearBase\Util\String\StringService;
-use Gear\Creator\Template\TemplateService    ;
+use Gear\Creator\Template\TemplateService;
 use Gear\Module;
 use GearBase\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
@@ -18,6 +18,7 @@ use GearJson\Src\Src;
 use Gear\Mvc\Entity\EntityTestService;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Datetime\DatetimePtBr;
+use Gear\Column\ColumnManager;
 
 /**
  * @group src-entity
@@ -131,10 +132,16 @@ class EntityTestServiceTest extends AbstractTestCase
             )->willReturn($tableColumns[$key***REMOVED***->getConstraint());
         }
 
+        foreach ($tableColumns as $table) {
+            $table->setStringService($this->string);
+            $table->setModule($this->module->reveal());
+        }
 
-        $this->column->getColumns($db, true)->willReturn($tableColumns);
+        $columnManager = new ColumnManager($tableColumns);
+        $db->setColumnManager($columnManager);
+        //$this->column->getColumns($db, true)->willReturn($tableColumns);
 
-        $this->entity->setColumnService($this->column->reveal());
+        //$this->entity->setColumnService($this->column->reveal());
 
 
         $file = $this->entity->introspectFromTable($db);

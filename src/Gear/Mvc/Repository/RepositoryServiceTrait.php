@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Repository;
 
+use Gear\Mvc\Repository\RepositoryService;
+
 trait RepositoryServiceTrait
 {
     protected $repositoryService;
@@ -8,7 +10,7 @@ trait RepositoryServiceTrait
     public function getRepositoryService()
     {
         if (!isset($this->repositoryService)) {
-            $this->repositoryService = $this->getServiceLocator()->get('Gear\Mvc\Repository\RepositoryService');
+            $this->repositoryService = $this->getServiceLocator()->get(RepositoryService::class);
         }
         return $this->repositoryService;
     }

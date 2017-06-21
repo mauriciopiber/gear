@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Spec\UnitTest;
 
-use Gear\Mvc\Spec\UnitTest\UnitTestFactory;
+use Gear\Mvc\Spec\UnitTest\UnitTest;
 
 trait UnitTestTrait
 {
@@ -11,7 +11,7 @@ trait UnitTestTrait
     {
         if (!isset($this->unitTest)) {
             $name = 'Gear\Mvc\Spec\UnitTest\UnitTest';
-            $this->unitTest = $this->getServiceLocator()->get($name);
+            $this->unitTest = $this->getServiceLocator()->get(UnitTest::class);
         }
         return $this->unitTest;
     }

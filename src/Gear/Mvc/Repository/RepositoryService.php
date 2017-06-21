@@ -70,7 +70,7 @@ class RepositoryService extends AbstractMvc
 
         $this->getRepositoryTestService()->introspectFromTable($this->db);
 
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
 
         if ($this->src->getService() == static::$factories) {
             $this->getFactoryService()->createFactory($this->src, $location);
@@ -148,7 +148,7 @@ class RepositoryService extends AbstractMvc
         $this->getRepositoryTestService()->createFromSrc($this->src);
 
         if ($this->src->getAbstract() == false) {
-            $this->getTraitService()->createTrait($this->src, $location);
+            $this->getTraitService()->createTrait($this->src);
         }
 
         if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {

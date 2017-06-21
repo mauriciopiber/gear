@@ -34,6 +34,7 @@ class ControllerServiceTest extends TestCase
         $this->stringService = new \GearBase\Util\String\StringService();
 
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
 
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
 
@@ -45,6 +46,7 @@ class ControllerServiceTest extends TestCase
             $this->stringService,
             $this->schemaController->reveal(),
             $this->tableService->reveal(),
+            $this->columnService->reveal(),
             $this->module->reveal(),
             $this->mvcController->reveal(),
             $this->mvcControllerTest->reveal(),

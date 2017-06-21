@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
+use Gear\Mvc\Config\UploadImageManagers;
+
 trait UploadImageManagerTrait
 {
     protected $uploadImage;
@@ -8,7 +10,7 @@ trait UploadImageManagerTrait
     public function getUploadImageManager()
     {
         if (!isset($this->uploadImage)) {
-            $this->uploadImage = $this->getServiceLocator()->get('Gear\Mvc\Config\UploadImage');
+            $this->uploadImage = $this->getServiceLocator()->get(UploadImageManager::class);
         }
         return $this->uploadImage;
     }

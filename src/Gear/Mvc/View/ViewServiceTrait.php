@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\View;
 
+use Gear\Mvc\View\ViewService;
+
 trait ViewServiceTrait
 {
     protected $viewService;
@@ -8,7 +10,7 @@ trait ViewServiceTrait
     public function getViewService()
     {
         if (! isset($this->viewService)) {
-            $this->viewService = $this->getServiceLocator()->get('Gear\Mvc\View\ViewService');
+            $this->viewService = $this->getServiceLocator()->get(ViewService::class);
         }
         return $this->viewService;
     }

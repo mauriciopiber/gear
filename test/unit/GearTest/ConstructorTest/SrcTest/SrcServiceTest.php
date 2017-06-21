@@ -421,12 +421,16 @@ class SrcServiceTest extends TestCase
         $type = 'Service';
 
         $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+        $this->columnManager = $this->prophesize('Gear\Column\ColumnManager');
 
         $this->db = $this->prophesize('GearJson\Db\Db');
+
+        $this->columnService->getColumnManager($this->db)->willReturn($this->columnManager->reveal())->shouldBeCalled();
+        $this->tableService->getTableObject('My')->willReturn($this->tableObject->reveal())->shouldBeCalled();
+
         $this->db->getTable()->willReturn('My')->shouldBeCalled();
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
-
-        $this->tableService->getTableObject('My')->willReturn($this->tableObject->reveal())->shouldBeCalled();
+        $this->db->setColumnManager($this->columnManager->reveal())->shouldBeCalled();
 
         $this->src = $this->prophesize('GearJson\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();

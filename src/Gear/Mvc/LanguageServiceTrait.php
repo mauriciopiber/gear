@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc;
 
+use Gear\Mvc\LanguageService;
+
 trait LanguageServiceTrait
 {
     protected $languageService;
@@ -8,7 +10,7 @@ trait LanguageServiceTrait
     public function getLanguageService()
     {
         if (!isset($this->languageService)) {
-            $this->languageService = $this->getServiceLocator()->get('Gear\Mvc\LanguageService');
+            $this->languageService = $this->getServiceLocator()->get(LanguageService::class);
         }
         return $this->languageService;
     }

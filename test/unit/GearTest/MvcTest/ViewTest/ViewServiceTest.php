@@ -22,42 +22,6 @@ use Gear\Column\Varchar\Varchar;
 class ViewServiceTest extends AbstractTestCase
 {
 
-    public function setUpBasicColumn($fuck = null, $userType = 'all')
-    {
-        $this->string = new StringService();
-
-        $primaryKeyConst = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
-        $primaryKeyConst->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
-        $primaryKeyConst->getColumns()->willReturn(['id_my'***REMOVED***)->shouldBeCalled();
-
-        $primaryKey = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $primaryKey->getDataType()->willReturn('int')->shouldBeCalled();
-        $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
-        $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
-
-        $primaryKey = new PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
-        $primaryKey->setStringService($this->string);
-
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
-        $column->getDataType()->willReturn('varchar')->shouldBeCalled();
-        $column->getName()->willReturn('dep_name')->shouldBeCalled();
-        $column->getTableName()->willReturn('my')->shouldBeCalled();
-
-        $foreignKey = new Varchar($column->reveal());
-        $foreignKey->setStringService($this->string);
-
-        $db = new Db(['table' => 'My', 'user' => $userType***REMOVED***);
-
-        $this->columns = $this->prophesize('Gear\Column\ColumnService');
-        $this->columns->getColumns($db)->willReturn([$primaryKey, $foreignKey***REMOVED***)->shouldBeCalled();
-
-        return [
-            [
-                $this->columns->reveal()
-            ***REMOVED***
-        ***REMOVED***;
-    }
-
     public function setUp()
     {
         parent::setUp();
@@ -86,9 +50,42 @@ class ViewServiceTest extends AbstractTestCase
         $this->view->setLocationDir(vfsStream::url('module'));
     }
 
-    public function createAction($actionName, $userType = 'all')
+    public function setUpBasicColumn($fuck = null, $userType = 'all')
     {
-        return new Action([
+        $this->string = new StringService();
+
+        $primaryKeyConst = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $primaryKeyConst->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
+        $primaryKeyConst->getColumns()->willReturn(['id_my'***REMOVED***)->shouldBeCalled();
+
+        $primaryKey = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $primaryKey->getDataType()->willReturn('int')->shouldBeCalled();
+        $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
+        $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
+
+        $primaryKey = new PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
+        $primaryKey->setStringService($this->string);
+
+        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $column->getName()->willReturn('dep_name')->shouldBeCalled();
+        $column->getTableName()->willReturn('my')->shouldBeCalled();
+
+        $foreignKey = new Varchar($column->reveal());
+        $foreignKey->setStringService($this->string);
+
+        //$db = new Db(['table' => 'My', 'user' => $userType***REMOVED***);
+
+        $columnManager = new \Gear\Column\ColumnManager([$primaryKey, $foreignKey***REMOVED***);
+        //$this->columns = $this->prophesize('Gear\Column\ColumnService');
+        //$this->columns->getColumns($db)->willReturn()->shouldBeCalled();
+
+        return [[$columnManager***REMOVED******REMOVED***;
+    }
+
+    public function createAction($actionName, $userType = 'all', $columns)
+    {
+        $action =  new Action([
             'name' => $actionName,
             'controller' => new Controller(
                 [
@@ -99,6 +96,9 @@ class ViewServiceTest extends AbstractTestCase
                 ***REMOVED***
             ),
         ***REMOVED***);
+
+        $action->getController()->getDb()->setColumnManager($columns);
+        return $action;
     }
 
     /**
@@ -109,9 +109,9 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->view->setColumnService($columns);
+        //$this->view->setColumnService($columns);
 
-        $action = $this->createAction('Create');
+        $action = $this->createAction('Create', 'all', $columns);
 
         $file = $this->view->createActionAdd($action);
 
@@ -130,11 +130,8 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $this->view->setColumnService($columns);
-
-        $action = $this->createAction('Edit');
+        $action = $this->createAction('Edit', 'all', $columns);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
@@ -158,11 +155,7 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new Db(['table' => 'My'***REMOVED***);
-
-        $this->view->setColumnService($columns);
-
-        $action = $this->createAction('SearchForm');
+        $action = $this->createAction('SearchForm', 'all', $columns);
 
         $file = $this->view->createSearch($action);
 
@@ -181,11 +174,8 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $db = new Db(['table' => 'My'***REMOVED***);
 
-        $this->view->setColumnService($columns);
-
-        $action = $this->createAction('View');
+        $action = $this->createAction('View', 'all', $columns);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
@@ -225,11 +215,7 @@ class ViewServiceTest extends AbstractTestCase
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        //$db = new Db(['table' => 'My'***REMOVED***);
-
-        $this->view->setColumnService($columns);
-
-        $action = $this->createAction('List', $userType);
+        $action = $this->createAction('List', $userType, $columns);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();

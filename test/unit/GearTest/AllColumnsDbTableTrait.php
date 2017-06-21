@@ -100,6 +100,7 @@ trait AllColumnsDbTableTrait
         $schema->getReferencedTableValidColumnName('foreign_key_column')
         ->willReturn('foreign_key_column');
 
+
         $foreignKey->setTableService($schema->reveal());
 
         $columns[***REMOVED*** = $foreignKey;

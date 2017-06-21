@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Spec\Page;
 
-use Gear\Mvc\Spec\Page\PageFactory;
+use Gear\Mvc\Spec\Page\Page;
 
 trait PageTrait
 {
@@ -10,8 +10,7 @@ trait PageTrait
     public function getPage()
     {
         if (!isset($this->page)) {
-            $name = 'Gear\Mvc\Spec\Page\Page';
-            $this->page = $this->getServiceLocator()->get($name);
+            $this->page = $this->getServiceLocator()->get(Page::class);
         }
         return $this->page;
     }

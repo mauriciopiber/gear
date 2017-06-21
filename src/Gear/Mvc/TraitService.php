@@ -39,43 +39,9 @@ class TraitService implements ServiceLocatorAwareInterface, ModuleAwareInterface
         $trait->setFileName($name.'Trait.php');
         $trait->setLocation($location);
 
-        /**
-        if ($testLocation !== null && is_dir($testLocation)) {
-            if ($isSearchForm) {
-                $specialName = sprintf(
-                    '%s\Form\Search\%s',
-                    $this->getModule()->getModuleName(),
-                    $specialName
-                );
-            } else {
-                $specialName = sprintf(
-                    '%s\%s\%s',
-                    $this->getModule()->getModuleName(),
-                    $src->getType(),
-                    $src->getName()
-                );
-            }
-
-            $traitTest = $this->getFileCreator();
-            $traitTest->setTemplate('template/module/test/trait.phtml');
-            $traitTest->setFileName($name.'TraitTest.php');
-            $traitTest->setLocation($testLocation);
-            $traitTest->setOptions([
-                'className' => $name.'Trait',
-                'class' => $name,
-
-                'var' => $this->str('var-length', $name),
-                'expected' => $specialName,
-                'module' => $this->getModule()->getModuleName()
-            ***REMOVED***);
-            $traitTest->render();
-        }*/
-
         $callable = $this->getServiceManager()->getServiceCallable($src);
 
-
         $service = $this->getServiceManager()->getServiceName($src);
-
 
         $trait->setOptions(
             [

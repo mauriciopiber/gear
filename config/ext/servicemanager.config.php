@@ -35,7 +35,9 @@
         'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
         'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
-        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
+        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager',
+        //'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
+        'Gear\Column\ColumnService' => 'Gear\Column\ColumnService',
     ***REMOVED***,
     'factories' => [
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
@@ -44,7 +46,7 @@
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
         'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\Ant\AntServiceFactory',
-        'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
+
         'Gear\Diagnostic\NpmService' => 'Gear\Diagnostic\NpmServiceFactory',
         'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\File\FileServiceFactory',
         'Gear\Diagnostic\ComposerService' => 'Gear\Diagnostic\ComposerServiceFactory',

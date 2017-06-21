@@ -49,8 +49,9 @@ use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\InterfaceService;
+use Gear\Constructor\AbstractConstructor;
 
-class SrcService implements ModuleAwareInterface
+class SrcService extends AbstractConstructor
 {
     const TYPE_NOT_FOUND = 'Type not allowed';
 
@@ -118,9 +119,7 @@ class SrcService implements ModuleAwareInterface
         FixtureService $fixtureService,
         InterfaceService $interfaceService
     ) {
-        $this->tableService = $tableService;
-        $this->columnService = $columnService;
-        $this->module = $module;
+        parent::__construct($module, null, $tableService, $columnService);
         $this->srcService = $srcSchema;
         $this->serviceManager = $serviceManager;
         $this->traitService = $traitService;
@@ -138,15 +137,10 @@ class SrcService implements ModuleAwareInterface
         $this->serviceService = $serviceService;
         $this->fixtureService = $fixtureService;
         $this->interfaceService = $interfaceService;
-
-
     }
-
-
 
     public function create(array $data)
     {
-
         $module = $this->getModule()->getModuleName();
 
         $this->src = $this->getSrcService()->create(
@@ -171,9 +165,7 @@ class SrcService implements ModuleAwareInterface
         }
 
         if ($this->src->getDb() !== null) {
-
-            $tableObject = $this->getTableService()->getTableObject($this->src->getDb()->getTable());
-            $this->src->getDb()->setTableObject($tableObject);
+            $this->setDbOptions($this->src);
         }
 
         return $this->factory();
@@ -184,7 +176,7 @@ class SrcService implements ModuleAwareInterface
         $this->srcs = [***REMOVED***;
 
         foreach ($srcs as $src) {
-            $this->srcs[***REMOVED*** = $this->getSrcService()->create(
+            $srcItem = $this->getSrcService()->create(
                 $this->getModule()->getModuleName(),
                 $src['name'***REMOVED***,
                 $src['type'***REMOVED***,
@@ -200,6 +192,10 @@ class SrcService implements ModuleAwareInterface
                 (isset($src['user'***REMOVED***) ? $src['user'***REMOVED*** : null),
                 false
             );
+
+            $this->setDbOptions($srcItem);
+
+            $this->srcs[***REMOVED*** = $srcItem;
         }
         $entity = $this->getEntityService();
         return $entity->createEntities($this->srcs);

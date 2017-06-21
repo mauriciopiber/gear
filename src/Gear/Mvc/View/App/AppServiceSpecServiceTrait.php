@@ -10,8 +10,7 @@ trait AppServiceSpecServiceTrait
     public function getAppServiceSpecService()
     {
         if (!isset($this->appServiceSpecService)) {
-            $name = 'Gear\Mvc\View\App\AppServiceSpecService';
-            $this->appServiceSpecService = $this->getServiceLocator()->get($name);
+            $this->appServiceSpecService = $this->getServiceLocator()->get(AppServiceSpecService::class);
         }
         return $this->appServiceSpecService;
     }

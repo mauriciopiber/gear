@@ -25,6 +25,7 @@ use Gear\Column\Varchar\UploadImage;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Column\Exception\UnfoundReference;
 use Zend\Db\Metadata\Object\ConstraintObject;
+use Gear\Column\ColumnManager;
 
 /**
  *
@@ -129,6 +130,10 @@ class ColumnService implements ServiceLocatorAwareInterface
         ***REMOVED***;
     }
 
+    public function getColumnManager(Db $db)
+    {
+        return new ColumnManager($this->getColumns($db));
+    }
 
     /**
      * Extrai todos Gear\Column de um GearJson\Db\Db.

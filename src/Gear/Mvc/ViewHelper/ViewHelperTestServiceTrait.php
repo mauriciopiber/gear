@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\ViewHelper;
 
+use Gear\Mvc\ViewHelper\ViewHelperServiceTest;
+
 trait ViewHelperTestServiceTrait
 {
     protected $viewHelperTestService;
@@ -8,7 +10,7 @@ trait ViewHelperTestServiceTrait
     public function getViewHelperTestService()
     {
         if (!isset($this->viewHelperTestService)) {
-            $this->viewHelperTestService = $this->getServiceLocator()->get('Gear\Mvc\ViewHelper\ViewHelperTest');
+            $this->viewHelperTestService = $this->getServiceLocator()->get(ViewHelperServiceTest::class);
         }
         return $this->viewHelperTestService;
     }

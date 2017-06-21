@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
+use Gear\Mvc\Config\ServiceManager;
+
 trait ServiceManagerTrait
 {
     protected $serviceManager;
@@ -8,7 +10,7 @@ trait ServiceManagerTrait
     public function getServiceManager()
     {
         if (!isset($this->serviceManager)) {
-            $this->serviceManager = $this->getServiceLocator()->get('Gear\Mvc\Config\ServiceManager');
+            $this->serviceManager = $this->getServiceLocator()->get(ServiceManager::class);
         }
         return $this->serviceManager;
     }

@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Service;
 
+use Gear\Mvc\Service\ServiceTestService;
+
 trait ServiceTestServiceTrait
 {
     protected $serviceTestService;
@@ -8,7 +10,7 @@ trait ServiceTestServiceTrait
     public function getServiceTestService()
     {
         if (!isset($this->serviceTestService)) {
-            $this->serviceTestService = $this->getServiceLocator()->get('Gear\Mvc\Service\ServiceTestService');
+            $this->serviceTestService = $this->getServiceLocator()->get(ServiceTestService::class);
         }
         return $this->serviceTestService;
     }

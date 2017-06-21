@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
+use Gear\Mvc\Config\ConsoleRouterManager;
+
 trait ConsoleRouterManagerTrait
 {
     protected $consoleRouter;
@@ -8,7 +10,7 @@ trait ConsoleRouterManagerTrait
     public function getConsoleRouterManager()
     {
         if (!isset($this->consoleRouter)) {
-            $this->consoleRouter = $this->getServiceLocator()->get('Gear\Mvc\Config\ConsoleRouter');
+            $this->consoleRouter = $this->getServiceLocator()->get(Gear\Mvc\Config\ConsoleRouterManager::class);
         }
         return $this->consoleRouter;
     }

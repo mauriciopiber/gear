@@ -66,7 +66,7 @@ class FormService extends AbstractMvc
         $inputValues = $this->getFormInputValues($this->db);
 
         $this->getFactoryService()->createFactory($this->src, $location);
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/full.form.phtml',
@@ -104,7 +104,7 @@ class FormService extends AbstractMvc
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
         $this->getInterfaceService()->createInterface($this->src, $location);
 
         $this->getFormTestService()->createFromSrc($this->src);
