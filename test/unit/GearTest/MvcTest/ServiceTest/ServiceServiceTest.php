@@ -77,9 +77,6 @@ class ServiceServiceTest extends TestCase
         //injector
         $this->injector = new Injector($this->arrayService);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->service->setColumnService($this->column->reveal());
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->service->setTableService($this->table->reveal());
 
@@ -154,11 +151,6 @@ class ServiceServiceTest extends TestCase
         $columnManager = new ColumnManager($columns);
         $this->db->setColumnManager($columnManager);
 
-
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
-
         $this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
@@ -188,11 +180,11 @@ class ServiceServiceTest extends TestCase
         $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
-        if ($service == 'factories') {
-            $this->factory->createFactory($serviceT, $location)->shouldBeCalled();
-        }
 
-        $this->trait->createTrait($serviceT, $location)->shouldBeCalled();
+        $this->factory->createFactory($serviceT)->shouldBeCalled();
+
+
+        $this->trait->createTrait($serviceT)->shouldBeCalled();
         $this->serviceTest->introspectFromTable($this->db)->shouldBeCalled();
 
         $file = $this->service->introspectFromTable($this->db);

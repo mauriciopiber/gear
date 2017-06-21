@@ -54,6 +54,7 @@ class RepositoryService extends AbstractMvc
     public function createDb()
     {
         $this->table   = $this->db->getTableObject();
+        $this->columnManager = $this->db->getColumnManager();
         $this->specialites = $this->db->getColumns();
 
         $this->template = 'template/module/mvc/repository/db/repository.phtml';
@@ -71,10 +72,7 @@ class RepositoryService extends AbstractMvc
         $this->getRepositoryTestService()->introspectFromTable($this->db);
 
         $this->getTraitService()->createTrait($this->src);
-
-        if ($this->src->getService() == static::$factories) {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
+        $this->getFactoryService()->createFactory($this->src);
 
         $options = [
             'use' => ($this->src->getService() == 'factories') ? $this->getCode()->getUseConstructor($this->src) : '',
@@ -95,21 +93,9 @@ class RepositoryService extends AbstractMvc
             'tableLabel' => $this->str('label', $this->db->getTable()),
         ***REMOVED***;
 
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-            if ($column instanceof RepositoryInsertBeforeInterface) {
-                $options['insertBefore'***REMOVED*** .= $column->getRepositoryInsertBefore();
-            }
-
-            if ($column instanceof RepositoryUpdateBeforeInterface) {
-                $options['updateBefore'***REMOVED*** .= $column->getRepositoryUpdateBefore();
-            }
-        }
-
-        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
-          ? $this->getCode()->getConstructor($this->src)
-          : '';
-
+        $options['insertBefore'***REMOVED*** = $this->columnManager->generateCode('getRepositoryInsertBefore', [***REMOVED***);
+        $options['updateBefore'***REMOVED*** = $this->columnManager->generateCode('getRepositoryUpdateBefore', [***REMOVED***);
+        $options['constructor'***REMOVED*** = $this->getCode()->getConstructor($this->src);
 
         $template = $this->getFileCreator()->createFile(
             $this->template,
@@ -152,7 +138,7 @@ class RepositoryService extends AbstractMvc
         }
 
         if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {
-            $this->getFactoryService()->createFactory($this->src, $location);
+            $this->getFactoryService()->createFactory($this->src);
         }
 
         $options = [
@@ -195,7 +181,6 @@ class RepositoryService extends AbstractMvc
         }
     }
 
-
     public function getAbstractFromSrc()
     {
         $this->getRepositoryTestService()->createFromSrc($this->src);
@@ -210,8 +195,6 @@ class RepositoryService extends AbstractMvc
             $this->getModule()->getRepositoryFolder()
         );
     }
-
-
 
     public function calculateAliasesStack()
     {

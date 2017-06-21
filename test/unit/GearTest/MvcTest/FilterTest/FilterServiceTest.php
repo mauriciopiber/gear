@@ -8,6 +8,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\FilterTest\FilterDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-filter
@@ -161,7 +162,8 @@ class FilterServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
         //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage)->shouldBeCalled();
 
         $this->table->hasUniqueConstraint($table)->willReturn(false)->shouldBeCalled();
@@ -182,10 +184,7 @@ class FilterServiceTest extends AbstractTestCase
 
         $this->filterTest->introspectFromTable($this->db)->shouldBeCalled();
 
-
-        if ($service == 'factories') {
-            $this->factory->createFactory($filter, $location)->shouldBeCalled();
-        }
+        $this->factory->createFactory($filter)->shouldBeCalled();
 
         $file = $this->filter->introspectFromTable($this->db);
 

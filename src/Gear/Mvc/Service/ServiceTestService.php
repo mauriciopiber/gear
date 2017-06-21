@@ -73,7 +73,7 @@ class ServiceTestService extends AbstractMvcTest
     public function introspectFromTable(Db $table)
     {
         $this->db           = $table;
-        $columnManager = $this->db->getColumnManager();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
@@ -96,7 +96,7 @@ class ServiceTestService extends AbstractMvcTest
         /**
          * @TODO certeza que isso tá errado kkkkkkkk
          */
-        if ($this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\\Column\\Varchar\\UploadImage')) {
+        if ($this->columnManager->isAssociatedWith('Gear\\Column\\Varchar\\UploadImage')) {
             $fileCreator->addChildView([
                 'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
@@ -104,7 +104,7 @@ class ServiceTestService extends AbstractMvcTest
             ***REMOVED***);
         }
 
-        $optionsColumn = $columnManager->generateSchema(self::COLUMN_SCHEMA);
+        $optionsColumn = $this->columnManager->generateSchema(self::COLUMN_SCHEMA);
 
         $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
 
@@ -132,7 +132,7 @@ class ServiceTestService extends AbstractMvcTest
         ***REMOVED***;
 
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->getColumnService()->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')
+            || $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage')
         ) {
             $this->src->addDependency('\GearImage\Service\ImageService');
         }
@@ -152,9 +152,9 @@ class ServiceTestService extends AbstractMvcTest
         $fileCreator->setLocation($location);
         $fileCreator->setFileName($this->src->getName().'Test.php');
 
-        $this->getTraitTestService()->createTraitTest($this->src, $location);
+        $this->getTraitTestService()->createTraitTest($this->src);
 
-        $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+        $this->getFactoryTestService()->createFactoryTest($this->src);
 
         return $fileCreator->render();
     }
@@ -172,11 +172,11 @@ class ServiceTestService extends AbstractMvcTest
         }
 
         if ($this->src->isFactory() && $this->src->isAbstract() === false) {
-            $this->getFactoryTestService()->createFactoryTest($src, $location);
+            $this->getFactoryTestService()->createFactoryTest($src);
         }
 
         if ($this->src->isAbstract() === false) {
-            $this->getTraitTestService()->createTraitTest($src, $location);
+            $this->getTraitTestService()->createTraitTest($src);
         }
 
         $options = [

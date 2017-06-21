@@ -43,11 +43,11 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($this->src, $location);
+            $this->getTraitTestService()->createTraitTest($this->src);
         }
 
         if ($this->src->getService() === 'factories' && $this->src->getAbstract() == false) {
-            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+            $this->getFactoryTestService()->createFactoryTest($this->src);
         }
 
         if ($this->src->getService() === 'factories') {
@@ -76,15 +76,14 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
     public function introspectFromTable(Db $table)
     {
         $this->db           = $table;
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->getService() == static::$factories) {
-            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
-        }
+        $this->getFactoryTestService()->createFactoryTest($this->src);
 
         $options = [
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
@@ -98,20 +97,14 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
             'data'          => ['create' => '', 'update' => ''***REMOVED***
         ***REMOVED***;
 
-        foreach ($this->getColumnService()->getColumns($table) as $column) {
-            if ($column instanceof RepositoryInsertTestInterface) {
-                $options['persist'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertPersist();
-                $options['data'***REMOVED***['create'***REMOVED*** .= $column->getRepositoryTestInsertData();
-            }
+        $options['persist'***REMOVED***['create'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestInsertPersist', [***REMOVED***);
+        $options['data'***REMOVED***['create'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestInsertData', [***REMOVED***);
 
-            if ($column instanceof RepositoryUpdateTestInterface) {
-                $options['persist'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdatePersist();
-                $options['data'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdateData();
-                $options['hydrator'***REMOVED***['update'***REMOVED*** .= $column->getRepositoryTestUpdateHydrator();
-            }
-        }
+        $options['persist'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdatePersist', [***REMOVED***);
+        $options['data'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdateData', [***REMOVED***);
+        $options['hydrator'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdateHydrator', [***REMOVED***);
 
-        $this->getTraitTestService()->createTraitTest($this->src, $location);
+        $this->getTraitTestService()->createTraitTest($this->src);
 
         $options['idTable'***REMOVED*** = $this->str(
             'class',

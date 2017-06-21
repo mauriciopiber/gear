@@ -8,6 +8,7 @@ use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
 use \GearJson\Src\Src;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group src-mvc
@@ -67,8 +68,8 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
         $this->repository->setInjector($this->injector);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->repository->setColumnService($this->column->reveal());
+        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->repository->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->repository->setTableService($this->table->reveal());
@@ -90,10 +91,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
-        $this->factory->createFactory(
-            $data,
-            vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-        )->shouldBeCalled();
+        $this->factory->createFactory($data)->shouldBeCalled();
 
         $file = $this->repository->create($data);
 
@@ -129,15 +127,7 @@ class RepositoryServiceTest extends AbstractTestCase
         }
 
         if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-
-            if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
-                   $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
-            } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
-            }
+            $this->factory->createFactory($data)->shouldBeCalled();
         }
 
         $file = $this->repository->create($data);
@@ -179,9 +169,10 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $columns[***REMOVED*** = $createdBy;
 
-        $this->column->getColumns($this->db, false, ['created_by'***REMOVED***)->willReturn($columns)->shouldBeCalled();
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
+        //$this->column->getColumns($this->db, false, ['created_by'***REMOVED***)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(true);
 
         $this->table->getReferencedTableValidColumnName('Table')->willReturn('idMyController');
         $this->table->getReferencedTableValidColumnName('user')->willReturn('email');
@@ -215,18 +206,13 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->mapping = new \Gear\Mvc\Repository\MappingService();
         $this->mapping->setStringService($this->string);
-        $this->mapping->setColumnService($this->column->reveal());
+        //$this->mapping->setColumnService($this->column->reveal());
         $this->mapping->setTableService($this->table->reveal());
         $this->repository->setMappingService($this->mapping);
 
-
         $this->repositoryTest->introspectFromTable($this->db)->shouldBeCalled();
-        $this->trait->createTrait($repository, $location)->shouldBeCalled();
-
-        if ($service === 'factories') {
-            $this->factory->createFactory($repository, $location)->shouldBeCalled();
-        }
-
+        $this->trait->createTrait($repository)->shouldBeCalled();
+        $this->factory->createFactory($repository)->shouldBeCalled();
 
         $file = $this->repository->introspectFromTable($this->db);
 
