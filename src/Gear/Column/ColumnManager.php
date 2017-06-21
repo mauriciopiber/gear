@@ -101,6 +101,19 @@ class ColumnManager implements ColumnManagerInterface
 
     }
 
+    public function filter(array $types)
+    {
+        $imagesArray = [***REMOVED***;
+
+        foreach ($this->getColumns() as $columnData) {
+            if (in_array(get_class($columnData), $types)) {
+                $imagesArray[***REMOVED*** = $columnData;
+            }
+        }
+
+        return $imagesArray;
+    }
+
     public function getColumnNames($class)
     {
         $imagesArray = [***REMOVED***;

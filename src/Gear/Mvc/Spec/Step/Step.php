@@ -35,16 +35,19 @@ class Step extends AbstractMvcTest
     public function createTableStep(Db $db)
     {
         $this->db = $db;
+        $this->columnManager = $this->db->getColumnManager();
 
         $setUpId = 75;
 
         $fileName = sprintf('%s.stepDefinitions.js', $this->str('var', $db->getTable()));
 
-        $columns = '';
+        $columns = $this->columnManager->generateCode('getTableStepFixture', [***REMOVED***, [***REMOVED***, $setUpId);
 
+        /*
         foreach ($this->getColumnService()->getColumns($this->db) as $column) {
             $columns .= $column->getTableStepFixture($setUpId).PHP_EOL;
         }
+        */
 
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/mvc/spec/step/table.step.phtml');

@@ -13,6 +13,7 @@ use Gear\Mvc\Spec\Step\Step;
 use GearBase\Util\String\StringService;
 use GearBase\Util\Dir\DirService;
 use Gear\Column\ColumnService;
+use Gear\Column\ColumnManager;
 
 /**
  * @group Spec
@@ -70,11 +71,12 @@ class StepTest extends AbstractTestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->column = $this->prophesize(ColumnService::class);
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+        $db->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
+        //$this->column = $this->prophesize(ColumnService::class);
+        //$this->column->getColumns($db)->willReturn()->shouldBeCalled();
 
         $this->step->setDirService(new DirService());
-        $this->step->setColumnService($this->column->reveal());
+        //$this->step->setColumnService($this->column->reveal());
 
         $file = $this->step->createTableStep($db);
 

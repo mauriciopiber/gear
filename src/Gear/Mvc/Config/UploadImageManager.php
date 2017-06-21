@@ -66,11 +66,7 @@ class UploadImageManager extends AbstractJsonService implements ModuleManagerInt
             $size .= $this->convertArrayBackToString($sizeAggregate, false);
         }
 
-
-        $uploadImageColumns = $this->getColumnService()->getSpecifiedColumns(
-            $this->db,
-            'Gear\Column\Varchar\UploadImage'
-        );
+        $uploadImageColumns = $this->db->getColumnManager()->filter(['Gear\Column\Varchar\UploadImage'***REMOVED***);
 
         if (!empty($uploadImageColumns) > 0) {
             foreach ($uploadImageColumns as $column) {
