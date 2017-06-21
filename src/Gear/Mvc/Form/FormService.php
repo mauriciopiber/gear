@@ -40,6 +40,7 @@ class FormService extends AbstractMvc
     {
         $inputs = [***REMOVED***;
 
+        /**
         $data = $this->getColumnService()->getColumns($this->db);
 
         foreach ($data as $columnData) {
@@ -49,23 +50,26 @@ class FormService extends AbstractMvc
 
             $inputs[***REMOVED*** = $columnData->getFormElement();
         }
+        */
 
-        return $inputs;
+        return $this->columnManager->extractCode('getFormElement', [***REMOVED***, [\Gear\Column\Varchar\UniqueId::class***REMOVED***);
     }
 
     public function introspectFromTable($db)
     {
         $this->db = $db;
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->getFormTestService()->introspectFromTable($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
+
         $location = $this->getCode()->getLocation($this->src);
 
         $inputValues = $this->getFormInputValues($this->db);
 
-        $this->getFactoryService()->createFactory($this->src, $location);
+        $this->getFactoryService()->createFactory($this->src);
         $this->getTraitService()->createTrait($this->src);
 
         return $this->getFileCreator()->createFile(

@@ -23,15 +23,6 @@ class FilterService extends AbstractMvc
 
     use FilterTestServiceTrait;
 
-    public function hasAbstract()
-    {
-        if (is_file($this->getModule()->getFilterFolder().'/AbstractFilter.php')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function getFilterValues()
     {
         $data = $this->getColumnService()->getColumns($this->db);
@@ -45,7 +36,7 @@ class FilterService extends AbstractMvc
             }
 
             if ($columnData instanceof \Gear\Column\AbstractColumn) {
-                $filters[***REMOVED*** = array('element' => $columnData->getFilterFormElement());
+                $filters[***REMOVED*** = ['element' => $columnData->getFilterFormElement()***REMOVED***;
             }
         }
         return $filters;
@@ -65,12 +56,10 @@ class FilterService extends AbstractMvc
     public function createDb()
     {
         $this->tableName   = $this->db->getTable();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableObject = $this->db->getTableObject();
 
         $location = $this->getCode()->getLocation($this->src);
-
-        $inputValues = $this->getFilterValues();
-
 
         $this->file = $this->getFileCreator();
 
@@ -89,22 +78,27 @@ class FilterService extends AbstractMvc
             'translator' => '\Zend\Mvc\I18n\Translator'
         ***REMOVED***);
 
-        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
-          ? $this->getCode()->getConstructor($this->src)
-          : '';
+        $options['constructor'***REMOVED*** =  $this->getCode()->getConstructor($this->src);
 
-        $options['use'***REMOVED*** = ($this->src->getService() == 'factories')
-          ? $this->getCode()->getUseConstructor($this->src, [
+        $options['use'***REMOVED*** = $this->getCode()->getUseConstructor($this->src, [
               '\Zend\Db\Adapter\Adapter',
               '\Zend\Mvc\I18n\Translator'
-          ***REMOVED***)
-          : '';
+          ***REMOVED***);
+
+        $options['filterElements'***REMOVED*** = $this->columnManager->generateCode('getFilterFormElement', [***REMOVED***, [
+            \Gear\Column\Integer\PrimaryKey::class,
+            \Gear\Column\Varchar\UniqueId::class
+        ***REMOVED***);
+
+        /*
+        $inputValues = $this->getFilterValues();
 
         $this->file->addChildView([
             'template' => 'template/module/mvc/filter/collection/element.phtml',
             'config' => ['elements' => $inputValues***REMOVED***,
             'placeholder' => 'filterElements'
         ***REMOVED***);
+        */
 
 
         $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');
@@ -141,29 +135,6 @@ class FilterService extends AbstractMvc
         return $this->file->render();
     }
 
-    public function getAbstract()
-    {
-        if (!$this->hasAbstract()) {
-            $this->getFileCreator()->createFile(
-                'template/module/mvc/filter/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName()
-                ),
-                'AbstractFilter.php',
-                $this->getModule()->getFilterFolder()
-            );
-
-            $this->getFileCreator()->createFile(
-                'template/module/test/unit/filter/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName()
-                ),
-                'AbstractFilterTest.php',
-                $this->getModule()->getTestFilterFolder()
-            );
-        }
-    }
-
     public function create($src)
     {
         $this->src = $src;
@@ -186,7 +157,7 @@ class FilterService extends AbstractMvc
 
         $this->getFilterTestService()->create($this->src);
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->isFactory()) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 
@@ -200,7 +171,7 @@ class FilterService extends AbstractMvc
             'module'  => $this->getModule()->getModuleName()
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($this->src->isFactory())
           ? $this->getCode()->getConstructor($this->src)
           : '';
 

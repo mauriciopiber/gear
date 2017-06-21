@@ -8,6 +8,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\FormTest\FormDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-form
@@ -153,12 +154,15 @@ class FormServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
+        $columnManager = new ColumnManager($columns);
+        $this->db->setColumnManager($columnManager);
 
-        $this->form->setColumnService($this->column->reveal());
+
+        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->table->hasUniqueConstraint($table)->willReturn(false);
@@ -191,8 +195,8 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setFormTestService($this->formTest->reveal());
 
-        $this->trait->createTrait($form, vfsStream::url($location))->shouldBeCalled();
-        $this->factory->createFactory($form, vfsStream::url($location))->shouldBeCalled();
+        $this->trait->createTrait($form)->shouldBeCalled();
+        $this->factory->createFactory($form)->shouldBeCalled();
 
         $file = $this->form->introspectFromTable($this->db);
 

@@ -77,8 +77,8 @@ class FilterServiceTest extends AbstractTestCase
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
         $this->filter->setSchemaService($this->schemaService->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->filter->setColumnService($this->column->reveal());
+        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->filter->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->filter->setTableService($this->table->reveal());
