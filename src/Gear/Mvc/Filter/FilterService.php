@@ -117,32 +117,29 @@ class FilterService extends AbstractMvc
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
             $this->file->addChildView([
                 'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
-                'config' => array(
+                'config' => [
                     'class' => $this->str('class', $this->src->getName()),
                     'var'     => $this->str('var-length', 'id'.$this->tableName),
-                ),
+                ***REMOVED***,
                 'placeholder' => 'header'
             ***REMOVED***);
         } else {
             $this->file->addChildView([
                 'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
-                'config' => array(
+                'config' => [
                     'class' => $this->str('class', $this->src->getName()),
                     'var'     => $this->str('var-length', 'id'.$this->tableName),
-                ),
+                ***REMOVED***,
                 'placeholder' => 'header'
             ***REMOVED***);
         }
 
         $this->getFilterTestService()->introspectFromTable($this->db);
 
-        if ($this->src->getService() == 'factories') {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
+        $this->getFactoryService()->createFactory($this->src);
 
         return $this->file->render();
     }
-
 
     public function getAbstract()
     {

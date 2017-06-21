@@ -248,7 +248,7 @@ class FilterTestService extends AbstractMvcTest
         );
 
         if ($this->src->getService() == 'factories') {
-            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+            $this->getFactoryTestService()->createFactoryTest($this->src);
         }
 
         //criar teste com fixture correta, passando válido.

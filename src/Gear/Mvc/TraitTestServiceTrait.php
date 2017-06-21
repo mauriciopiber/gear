@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc;
 
-use Gear\Mvc\TraitServiceTest;
+use Gear\Mvc\TraitTestService;
 
 trait TraitTestServiceTrait
 {
@@ -10,7 +10,7 @@ trait TraitTestServiceTrait
     public function getTraitTestService()
     {
         if (!isset($this->traitTestService)) {
-            $this->traitTestService = $this->getServiceLocator()->get(TraitServiceTest::class);
+            $this->traitTestService = $this->getServiceLocator()->get(TraitTestService::class);
         }
         return $this->traitTestService;
     }

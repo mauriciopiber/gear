@@ -7,6 +7,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
 use GearJson\Src\Src;
+use Gear\Column\ColumnManager;
 
 /**
  * @group src-mvc
@@ -59,8 +60,8 @@ class RepositoryTestServiceTest extends AbstractTestCase
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
         $this->repository->setFactoryTestService($this->factoryTest->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->repository->setColumnService($this->column->reveal());
+        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->repository->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->repository->setTableService($this->table->reveal());
@@ -167,9 +168,10 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
+        $this->db->setColumnManager(new ColumnManager($columns));
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn(false);
 
         $this->table->verifyTableAssociation($this->db->getTable())->willReturn(false);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);

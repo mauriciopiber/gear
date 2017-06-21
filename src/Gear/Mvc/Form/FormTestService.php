@@ -30,10 +30,10 @@ class FormTestService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getService() === 'factories') {
-            $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+            $this->getFactoryTestService()->createFactoryTest($this->src);
         }
 
-        $this->getTraitTestService()->createTraitTest($this->src, $location);
+        $this->getTraitTestService()->createTraitTest($this->src);
 
         $inputs = '';
         $data = $this->getColumnService()->getColumns($this->db);
@@ -65,10 +65,10 @@ class FormTestService extends AbstractMvcTest
         $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($this->src, $location);
+            $this->getTraitTestService()->createTraitTest($this->src);
 
             if ($this->src->getService() == 'factories') {
-                $this->getFactoryTestService()->createFactoryTest($this->src, $location);
+                $this->getFactoryTestService()->createFactoryTest($this->src);
             }
         }
 

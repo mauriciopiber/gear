@@ -77,9 +77,6 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->service->setSchemaService($this->schema->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->service->setColumnService($this->column->reveal());
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->service->setTableService($this->table->reveal());
     }
@@ -130,7 +127,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
+        //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
         $this->table->getReferencedTableValidColumnName($this->db->getTable())->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
@@ -176,14 +173,8 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTraitTestService($this->traitTest->reveal());
 
-
-        $this->traitTest->createTraitTest($serviceT, vfsStream::url($location))->shouldBeCalled();
-
-        if ($service == 'factories') {
-            $this->factoryTest->createFactoryTest($serviceT, vfsStream::url($location))->shouldBeCalled();
-        }
-
-        //$this->service->setFactoryService
+        $this->traitTest->createTraitTest($serviceT)->shouldBeCalled();
+        $this->factoryTest->createFactoryTest($serviceT)->shouldBeCalled();
 
         $file = $this->service->introspectFromTable($this->db);
 

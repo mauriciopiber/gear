@@ -113,8 +113,6 @@ class ServiceService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getTraitService()->createTrait($this->src);
-
         $this->file = $this->getFileCreator();
 
         $this->use        = '';
@@ -178,7 +176,8 @@ class ServiceService extends AbstractMvc
 
         $options['constructor'***REMOVED*** = $this->getCode()->getConstructor($this->src);
 
-        $this->getFactoryService()->createFactory($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
+        $this->getFactoryService()->createFactory($this->src);
 
         $this->file->setOptions($options);
         $this->file->setFileName($this->className.'.php');
@@ -272,7 +271,10 @@ EOS;
         $onlyOnceUse = [UploadImageColumn::class***REMOVED***;
         $onlyOnceAttribute = [UploadImageColumn::class***REMOVED***;
 
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+
+        $columns = $this->db->getColumnManager()->getColumns();
+
+        foreach ($columns as $columnData) {
 
             $className = get_class($columnData);
 

@@ -226,7 +226,8 @@ class MappingService extends AbstractJsonService
 
         $this->db = $db;
 
-        $columns = $this->getColumnService()->getColumns($this->db, false, ['created_by'***REMOVED***);
+        $columns = $this->db->getColumnManager()->getColumns();
+        //$this->getColumnService()->getColumns($this->db, false, ['created_by'***REMOVED***);
 
         if (!empty($columns)) {
             foreach ($columns as $column) {
@@ -240,14 +241,14 @@ class MappingService extends AbstractJsonService
                 $this->label = $this->str('label', $column->getColumn()->getName());
                 $this->name  = $this->str('var', $column->getColumn()->getName());
 
-                $this->columnsStack[***REMOVED*** = array(
+                $this->columnsStack[***REMOVED*** = [
                     'name' => $this->name,
                     'label' => $this->label,
                     'ref' => $this->ref,
                     'type' => $this->type,
                     'aliase' => $this->aliase,
                     'table' => $this->tableName
-                );
+                ***REMOVED***;
 
                 unset($this->label, $this->ref, $this->type, $this->aliase, $this->tableName, $this->name);
             }
