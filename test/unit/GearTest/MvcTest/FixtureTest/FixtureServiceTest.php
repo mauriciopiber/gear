@@ -9,7 +9,7 @@ use GearJson\Src\Src;
 use GearJson\Db\Db;
 use GearTest\SingleDbTableTrait;
 use GearTest\DatabaseColumnsMockerTrait;
-use Gear\Creator\Template\TemplateService    ;
+use Gear\Creator\Template\TemplateService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;

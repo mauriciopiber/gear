@@ -7,6 +7,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
+use Gear\Column\ColumnManager;
 
 /**
  * @group Controller
@@ -55,9 +56,6 @@ class ControllerTestServiceTest extends AbstractTestCase
         $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
 
         $this->controllerTest->setCodeTest($this->codeTest);
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->controllerTest->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->controllerTest->setTableService($this->table->reveal());
@@ -169,7 +167,7 @@ class ControllerTestServiceTest extends AbstractTestCase
             $this->module->map('ControllerTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
 
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
 
