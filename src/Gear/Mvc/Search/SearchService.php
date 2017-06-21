@@ -66,7 +66,7 @@ class SearchService extends AbstractMvc
         $location = $this->getCode()->getLocation($this->src);
 
         $this->getFactoryService()->createFactory($this->src, $location);
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/search/full.search.phtml',

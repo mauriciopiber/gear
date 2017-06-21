@@ -13,16 +13,16 @@ class LanguageService extends AbstractJsonService
     public static function getAvaiable()
     {
 
-        return array('pt_BR', 'en_US', 'de_DE', 'es_ES');
+        return ['pt_BR', 'en_US', 'de_DE', 'es_ES'***REMOVED***;
     }
 
     //public function get
 
     public function getWords()
     {
-        return array(
+        return [
             'hello' => ''
-        );
+        ***REMOVED***;
     }
 
     public function mergeLanguageUp()
@@ -31,7 +31,7 @@ class LanguageService extends AbstractJsonService
 
     public static function localePt()
     {
-        return array(
+        return [
             'create' => 'criar',
             'view' => 'visualizar',
             'edit'   => 'editar',
@@ -51,45 +51,45 @@ class LanguageService extends AbstractJsonService
             'New' => 'Novo',
             'Images of' => 'Imagens de',
             'The input was not found in the haystack' => 'Selecione ao menos uma das opções'
-        );
+        ***REMOVED***;
     }
 
     public function getDefaultRouterLanguage($locale)
     {
-        $words = array();
+        $words = [***REMOVED***;
 
         switch ($locale) {
             case 'pt_BR':
                 $words = self::localePt();
                 break;
             case 'de_DE':
-                $words = array(
+                $words = [
                     'create' => 'schaffen',
                     'edit'   => 'bearbeiten',
                     'list'   => 'Liste',
                     'delete' => 'löschen',
                     'index' => 'inicio'
-                );
+                ***REMOVED***;
                 break;
 
             case 'es_ES':
-                $words = array(
+                $words = [
                     'create' => 'crear',
                     'edit'   => 'editar',
                     'list'   => 'borrar',
                     'delete' => 'lista',
                     'index' => 'inicio'
-                );
+                ***REMOVED***;
                 break;
 
             case 'en_US':
-                $words = array(
+                $words = [
                     'create' => 'create',
                     'edit'   => 'edit',
                     'list'   => 'list',
                     'delete' => 'delete',
                     'index' => 'index'
-                );
+                ***REMOVED***;
                 break;
 
 

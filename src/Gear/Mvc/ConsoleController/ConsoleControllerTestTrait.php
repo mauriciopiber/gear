@@ -17,7 +17,7 @@ trait ConsoleControllerTestTrait
     {
         if (!isset($this->consoleControllerTest)) {
             $this->consoleControllerTest = $this->getServiceLocator()->get(
-                'Gear\Mvc\ConsoleController\ConsoleControllerTest'
+                ConsoleControllerTest::class
             );
         }
         return $this->consoleControllerTest;

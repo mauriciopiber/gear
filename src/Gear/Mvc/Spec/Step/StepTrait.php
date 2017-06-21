@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Spec\Step;
 
-use Gear\Mvc\Spec\Step\StepFactory;
+use Gear\Mvc\Spec\Step\Step;
 
 trait StepTrait
 {
@@ -10,8 +10,7 @@ trait StepTrait
     public function getStep()
     {
         if (!isset($this->step)) {
-            $name = 'Gear\Mvc\Spec\Step\Step';
-            $this->step = $this->getServiceLocator()->get($name);
+            $this->step = $this->getServiceLocator()->get(Step::class);
         }
         return $this->step;
     }

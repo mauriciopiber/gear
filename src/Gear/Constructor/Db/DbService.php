@@ -38,13 +38,13 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
-
 use Gear\Column\ColumnService;
 use GearJson\Db\DbService as DbSchema;
 use GearJson\Action\ActionService as ActionSchema;
 use Gear\Module\BasicModuleStructure;
+use Gear\Constructor\AbstractConstructor;
 
-class DbService implements ModuleAwareInterface
+class DbService extends AbstractConstructor
 {
     protected $metadata;
 
@@ -107,8 +107,7 @@ class DbService implements ModuleAwareInterface
         ServiceService $serviceService,
         BasicModuleStructure $module
     ) {
-        $this->columnService = $columnService;
-        $this->tableService = $tableService;
+        parent::__construct($module, null, $tableService, $columnService);
         $this->actionService = $actionSchema;
         $this->dbService = $dbSchema;
         $this->feature = $feature;
@@ -125,7 +124,6 @@ class DbService implements ModuleAwareInterface
         $this->viewService = $viewService;
         $this->repositoryService = $repositoryService;
         $this->serviceService = $serviceService;
-        $this->module = $module;
     }
 
     /**
@@ -179,6 +177,7 @@ class DbService implements ModuleAwareInterface
         }
 
         $db->setTableObject($this->getTableService()->getTableObject($db->getTable()));
+        $db->setColumnManager($this->getColumnService()->getColumnManager($db));
 
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);

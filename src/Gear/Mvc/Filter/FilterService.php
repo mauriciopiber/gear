@@ -184,7 +184,7 @@ class FilterService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
         $this->getInterfaceService()->createInterface($this->src, $location);
 
         $this->getFilterTestService()->create($this->src);

@@ -260,6 +260,43 @@ EOS;
         return $this->format($ndnt, $text);
     }
 
+    public function getEntityAssertNull()
+    {
+        $column = $this->getColumn();
+        $method = sprintf('get%s', $this->str('class', $column->getName()));
+        return sprintf('$this->assertNull($this->entity->%s());', $method);
+    }
+
+    public function getEntityParam()
+    {
+        return sprintf('        $%s', $this->str('var', $this->getColumn()->getName()));
+    }
+
+    public function getEntitySetter()
+    {
+        $column = $this->getColumn();
+
+        $template = <<<EOS
+        \$this->entity->set%s($%s);
+        \$this->assertEquals($%s, \$this->entity->get%s());
+
+EOS;
+
+        $setter = sprintf(
+            $template,
+            $this->str('class', $column->getName()),
+            $this->str('var', $column->getName()),
+            $this->str('var', $column->getName()),
+            $this->str('class', $column->getName())
+        );
+        return $setter;
+    }
+
+    public function getEntityDataProvider()
+    {
+        return '                \''.$this->str('label', $this->getColumn()->getName()).'\'';
+    }
+
     /**
      * indenta N espaços.
      *

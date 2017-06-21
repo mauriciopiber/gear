@@ -84,8 +84,51 @@ class ColumnManager implements ColumnManagerInterface
         return $imagesArray;
     }
 
+    public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***)
+    {
+        $verifyOne = [***REMOVED***;
 
-    public function generateCode(string $method, $onlyOne)
+        if (is_array($onlyOne) && count($onlyOne) > 0) {
+            foreach ($onlyOne as $columnClass) {
+                $verifyOne[$columnClass***REMOVED*** = false;
+            }
+        }
+
+        $data = [***REMOVED***;
+
+        foreach ($this->getColumns() as $columnData) {
+
+            $className = get_class($columnData);
+
+            if (in_array($className, $exclude)) {
+                continue;
+            }
+
+            if (false === method_exists($columnData, $method)) {
+                continue;
+            }
+
+            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === true) {
+                continue;
+            }
+
+            $data[***REMOVED*** = $columnData->{$method}();
+
+            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
+                $verifyOne[$className***REMOVED*** = true;
+                continue;
+            }
+
+            if (!isset($verifyOne[$className***REMOVED***) && $onlyOne === true) {
+                $verifyOne[$className***REMOVED*** = true;
+                continue;
+            }
+        }
+
+        return $data;
+    }
+
+    public function generateCode(string $method, $onlyOne, $exclude = [***REMOVED***)
     {
         $verifyOne = [***REMOVED***;
 
@@ -100,6 +143,10 @@ class ColumnManager implements ColumnManagerInterface
         foreach ($this->getColumns() as $columnData) {
 
             $className = get_class($columnData);
+
+            if (in_array($className, $exclude)) {
+                continue;
+            }
 
             if (false === method_exists($columnData, $method)) {
                 continue;

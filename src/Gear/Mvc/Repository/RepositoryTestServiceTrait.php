@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Repository;
 
+use Gear\Mvc\Repository\RepositoryTestService;
+
 trait RepositoryTestServiceTrait
 {
     protected $repositoryTestService;
@@ -9,7 +11,7 @@ trait RepositoryTestServiceTrait
     {
         if (!isset($this->repositoryTestService)) {
             $this->repositoryTestService = $this->getServiceLocator()->get(
-                'Gear\Mvc\Repository\RepositoryTestService'
+                RepositoryTestService::class
             );
         }
         return $this->repositoryTestService;

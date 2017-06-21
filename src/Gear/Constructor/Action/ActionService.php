@@ -42,12 +42,12 @@ use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Module\BasicModuleStructure;
 use GearBase\Util\String\StringService;
-
+use Gear\Constructor\AbstractConstructor;
 
 /**
  * @group m1
  */
-class ActionService implements ModuleAwareInterface
+class ActionService extends AbstractConstructor
 {
     use StringServiceTrait;
 
@@ -126,6 +126,8 @@ class ActionService implements ModuleAwareInterface
         BasicModuleStructure $basicModuleStructure,
         StringService $stringService
     ) {
+        parent::__construct($basicModuleStructure, $stringService, null, null);
+
         $this->actionService = $actionService;
         //$this->configService = $configService;
         $this->router = $routerManager;
@@ -141,8 +143,6 @@ class ActionService implements ModuleAwareInterface
         $this->feature = $feature;
         $this->page = $page;
         $this->step = $step;
-        $this->module = $basicModuleStructure;
-        $this->stringService = $stringService;
 
         return $this;
     }
@@ -176,6 +176,8 @@ class ActionService implements ModuleAwareInterface
                 'columns' => (isset($data['columns'***REMOVED***)) ? $data['columns'***REMOVED*** : null
             ***REMOVED***);
             $this->controller->setDb($db);
+
+            $this->setDbOptions($this->controller);
         //$this->controller->setDb
         }
 

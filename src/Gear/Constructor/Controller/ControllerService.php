@@ -6,6 +6,12 @@
  */
 namespace Gear\Constructor\Controller;
 
+use GearJson\Controller\Controller;
+use GearJson\Controller\ControllerService as ControllerSchema;
+use GearJson\Controller\ControllerServiceTrait as ControllerSchemaTrait;
+use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
@@ -13,18 +19,7 @@ use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
 use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
-use GearJson\Controller\Controller;
-use GearJson\Controller\ControllerServiceTrait as ControllerSchemaTrait;
 use Gear\Mvc\LanguageServiceTrait;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
-use GearBase\Util\String\StringServiceTrait;
-use Gear\Table\TableService\TableServiceTrait;
-use GearBase\Util\String\StringService;
-use GearJson\Controller\ControllerService as ControllerSchema;
-use Gear\Table\TableService\TableService;
-use Gear\Module\BasicModuleStructure;
 use Gear\Mvc\Controller\ControllerService as ControllerMvc;
 use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
 use Gear\Mvc\ConsoleController\ConsoleController;
@@ -33,8 +28,12 @@ use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\LanguageService;
 use Gear\Mvc\Config\ControllerManager;
+use Gear\Table\TableService\TableService;
+use Gear\Column\ColumnService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Constructor\AbstractConstructor;
 
-class ControllerService  implements ModuleAwareInterface
+class ControllerService  extends AbstractConstructor
 {
     static public $defaultService = 'factories';
 
@@ -43,9 +42,6 @@ class ControllerService  implements ModuleAwareInterface
     static public $defaultNamespace = '%s\Controller\\';
 
     use ControllerSchemaTrait;
-    use TableServiceTrait;
-    use StringServiceTrait;
-    use ModuleAwareTrait;
     use ConsoleControllerTrait;
     use ConsoleControllerTestTrait;
     use ConfigServiceTrait;
@@ -77,6 +73,7 @@ class ControllerService  implements ModuleAwareInterface
         StringService $stringService,
         ControllerSchema $controllerSchema,
         TableService $tableService,
+        ColumnService $columnService,
         BasicModuleStructure $basicModuleStructure,
         ControllerMvc $controllerService,
         ControllerMvcTest $controllerTestService,
@@ -87,18 +84,24 @@ class ControllerService  implements ModuleAwareInterface
         LanguageService $languageService,
         ControllerManager $controllerManager
     ) {
-        $this->stringService = $stringService;
+        parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
+
+        //schema
         $this->controllerService = $controllerSchema;
-        $this->tableService = $tableService;
-        $this->module = $basicModuleStructure;
+        //controller action
         $this->mvcService = $controllerService;
         $this->controllerTestService = $controllerTestService;
+        //controller console
         $this->consoleController = $consoleController;
         $this->consoleControllerTest = $controllerTest;
+        //config
         $this->configService = $configService;
-        $this->viewService = $viewService;
-        $this->languageService = $languageService;
         $this->controllerConfig = $controllerManager;
+        //view
+        $this->viewService = $viewService;
+        //language
+        $this->languageService = $languageService;
+
 
         return $this;
     }
@@ -109,8 +112,7 @@ class ControllerService  implements ModuleAwareInterface
      */
     public function createDb()
     {
-        $tableObject = $this->getTableService()->getTableObject($this->controller->getDb()->getTable());
-        $this->controller->getDb()->setTableObject($tableObject);
+        $this->setDbOptions($this->controller);
 
         $this->db = $this->controller->getDb();
 

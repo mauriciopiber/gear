@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
+use Gear\Mvc\Config\ViewHelperManager;
+
 trait ViewHelperManagerTrait
 {
     protected $viewHelper;
@@ -8,7 +10,7 @@ trait ViewHelperManagerTrait
     public function getViewHelperManager()
     {
         if (!isset($this->viewHelper)) {
-            $this->viewHelper = $this->getServiceLocator()->get('Gear\Mvc\Config\ViewHelperManager');
+            $this->viewHelper = $this->getServiceLocator()->get(ViewHelperManager::class);
         }
         return $this->viewHelper;
     }

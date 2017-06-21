@@ -13,6 +13,7 @@ use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\LanguageService;
 use Gear\Mvc\Config\ControllerManager;
+use Gear\Column\ColumnService;
 
 /**
  * PHP Version 5
@@ -38,6 +39,7 @@ class ControllerServiceFactory implements FactoryInterface
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('GearJson\Controller'),
             $serviceLocator->get(TableService::class),
+            $serviceLocator->get(ColumnService::class),
             $serviceLocator->get(BasicModuleStructure::class),
             $serviceLocator->get(ControllerMvc::class),
             $serviceLocator->get(ControllerMvcTest::class),

@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Controller;
 
+use Gear\Mvc\Controller\Controller;
+
 trait ControllerServiceTrait
 {
     protected $mvcService;
@@ -8,7 +10,7 @@ trait ControllerServiceTrait
     public function getMvcController()
     {
         if (!isset($this->mvcService)) {
-            $this->mvcService = $this->getServiceLocator()->get('Gear\Mvc\Controller\Controller');
+            $this->mvcService = $this->getServiceLocator()->get(ControllerService::class);
         }
         return $this->mvcService;
     }

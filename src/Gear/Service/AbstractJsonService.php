@@ -24,7 +24,7 @@ use GearJson\Db\Db;
 abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
 {
     use YamlServiceTrait;
-    use ColumnServiceTrait;
+    //use ColumnServiceTrait;
     use TableTrait;
     use TableServiceTrait;
     use EventManagerAwareTrait;

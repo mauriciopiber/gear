@@ -80,7 +80,7 @@ class ServiceService extends AbstractMvc
         $this->getServiceTestService()->create($this->src);
 
         if ($this->src->isAbstract() === false) {
-            $this->getTraitService()->createTrait($this->src, $location);
+            $this->getTraitService()->createTrait($this->src);
         }
 
         if ($this->src->isFactory() && $this->src->isAbstract() === false) {
@@ -113,7 +113,7 @@ class ServiceService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getTraitService()->createTrait($this->src, $location);
+        $this->getTraitService()->createTrait($this->src);
 
         $this->file = $this->getFileCreator();
 

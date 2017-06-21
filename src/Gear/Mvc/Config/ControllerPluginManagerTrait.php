@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\Config;
 
+use Gear\Mvc\Config\ControllerPluginManager;
+
 trait ControllerPluginManagerTrait
 {
     protected $controllerPlugin;
@@ -8,7 +10,7 @@ trait ControllerPluginManagerTrait
     public function getControllerPluginManager()
     {
         if (!isset($this->controllerPlugin)) {
-            $this->controllerPlugin = $this->getServiceLocator()->get('Gear\Mvc\Config\ControllerPluginManager');
+            $this->controllerPlugin = $this->getServiceLocator()->get(ControllerPluginManager::class);
         }
         return $this->controllerPlugin;
     }

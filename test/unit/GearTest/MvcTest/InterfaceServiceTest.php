@@ -13,8 +13,7 @@ use GearBase\Util\Dir\DirService;
 use Gear\Mvc\InterfaceService;
 
 /**
- * @group Mvc
- * @group Interface
+ * @group up1
  */
 class InterfaceTestServiceTest extends AbstractTestCase
 {

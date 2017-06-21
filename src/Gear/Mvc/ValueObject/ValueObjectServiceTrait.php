@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Mvc\ValueObject;
 
+use Gear\Mvc\ValueObject\ValueObjectService;
+
 trait ValueObjectServiceTrait
 {
     protected $valueObjectService;
@@ -8,7 +10,7 @@ trait ValueObjectServiceTrait
     public function getValueObjectService()
     {
         if (!isset($this->valueObjectService)) {
-            $this->valueObjectService = $this->getServiceLocator()->get('valueObjectService');
+            $this->valueObjectService = $this->getServiceLocator()->get(ValueObjectService::class);
         }
         return $this->valueObjectService;
     }

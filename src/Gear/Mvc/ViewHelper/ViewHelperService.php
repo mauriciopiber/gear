@@ -29,7 +29,7 @@ class ViewHelperService extends AbstractMvc
         $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/src.phtml',
             //'template/module/mvc/controller/plugin/src.plugin.phtml',
-            array(
+            [
                 'classDocs'   => $this->getCode()->getClassDocs($this->src),
                 'namespace'  => $this->getCode()->getNamespace($this->src),
                 'extends'    => $this->getCode()->getExtends($this->src),
@@ -37,7 +37,7 @@ class ViewHelperService extends AbstractMvc
                 'attributes' => $this->getCode()->getUseAttribute($this->src),
                 'class'   => $src->getName(),
                 'module'  => $this->getModule()->getModuleName()
-            ),
+            ***REMOVED***,
             $src->getName().'.php',
             $location
         );

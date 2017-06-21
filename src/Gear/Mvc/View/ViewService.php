@@ -16,9 +16,7 @@ class ViewService extends AbstractJsonService
     use UploadImageTrait;
     use AngularServiceTrait;
 
-    protected $timeTest;
     protected $locationDir;
-    protected $specialityService;
 
     public function build(Action $action)
     {
@@ -129,6 +127,8 @@ class ViewService extends AbstractJsonService
 
     public function getViewValues($action)
     {
+        /*
+
         $names = [***REMOVED***;
 
         $this->tableName = $this->str('class', $action->getController()->getNameOff());
@@ -144,52 +144,13 @@ class ViewService extends AbstractJsonService
             $names[***REMOVED*** = $columnData->getViewData();
         }
         return $names;
-    }
+        */
 
-    public function createTemplateUpload()
-    {
-        return $this->getFileCreator()->createFileFromCopy(
-            'template/module/view/imagem/template-upload',
-            'template-upload.phtml',
-            $this->getLocationDir()
-        );
+        return $this->columnManager->extractCode('getViewData', [***REMOVED***, [
+            \Gear\Column\Varchar\UniqueId::class,
+            \Gear\Column\Varchar\PasswordVerify::class
+        ***REMOVED***);
     }
-
-    /**
-     * @deprecated
-     *
-     * @return unknown
-     */
-    public function createTemplateForm()
-    {
-        return $this->getFileCreator()->createFileFromTemplate(
-            'template/module/view/imagem/template-form.phtml',
-            array(
-                'module' => $this->str('url', $this->getModule()->getModuleName())
-            ),
-            'template-form.phtml',
-            $this->getLocationDir()
-        );
-    }
-
-    public function createTemplateControl()
-    {
-        return $this->getFileCreator()->createFileFromCopy(
-            'template/module/view/imagem/template-control',
-            'template-control.phtml',
-            $this->getLocationDir()
-        );
-    }
-
-    public function createTemplateDownload()
-    {
-        return $this->getFileCreator()->createFileFromCopy(
-            'template/module/view/imagem/template-download',
-            'template-download.phtml',
-            $this->getLocationDir()
-        );
-    }
-
 
     public function getActionRoute($action, $controller)
     {
@@ -226,31 +187,28 @@ class ViewService extends AbstractJsonService
         $each = 6;
         $line = 0;
 
-        $dbColumns = $this->getColumnService()->getColumns($this->db);
+        $code = $this->columnManager->extractCode('getViewFormElement', [***REMOVED***, [
+            \Gear\Column\Varchar\UniqueId::class,
+            \Gear\Column\Integer\PrimaryKey::class
+        ***REMOVED***);
 
-        $formElements = [***REMOVED***;
-        foreach ($dbColumns as $i => $columnData) {
-            if ($columnData instanceof \Gear\Column\Varchar\UniqueId
-                || $columnData instanceof \Gear\Column\Integer\PrimaryKey
-                || !$columnData instanceof \Gear\Column\AbstractColumn
-            ) {
-                continue;
-            }
+        $formElements = '';
 
+        foreach ($code as $i => $lineData) {
 
             if ($line == 0) {
-                $formElements[***REMOVED*** = '                <div class="row">'.PHP_EOL;
+                $formElements .= '                <div class="row">'.PHP_EOL;
             }
 
-            $formElements[***REMOVED*** = "                    <div class=\"col-lg-$each\">".PHP_EOL;
-            $formElements[***REMOVED*** = $columnData->getViewFormElement();
-            $formElements[***REMOVED*** = "                    </div>".PHP_EOL;
+            $formElements .= "                    <div class=\"col-lg-$each\">".PHP_EOL;
+            $formElements .= $lineData;
+            $formElements .= "                    </div>".PHP_EOL;
 
             $line += $each;
 
-            if ($line == 12 || !isset($dbColumns[$i+1***REMOVED***)) {
+            if ($line == 12 || !isset($code[$i+1***REMOVED***)) {
                 $line = 0;
-                $formElements[***REMOVED*** = "                </div>".PHP_EOL;
+                $formElements .= "                </div>".PHP_EOL;
             }
         }
 
@@ -260,6 +218,7 @@ class ViewService extends AbstractJsonService
     public function createActionAdd($action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName = $this->db->getTable();
 
         $module = $this->getModule()->getModuleName();
@@ -272,11 +231,8 @@ class ViewService extends AbstractJsonService
 
         $fileCreator = $this->getFileCreator();
 
-        $formElements = '';
+        $formElements = $this->createFormElements();
 
-        foreach ($this->createFormElements() as $item) {
-            $formElements .= $item;
-        }
 
         $fileCreator->setView('template/module/view/create/create.phtml');
         $fileCreator->setOptions([
@@ -300,6 +256,7 @@ class ViewService extends AbstractJsonService
     public function createActionEdit($action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName = $this->db->getTable();
 
         if ($this->getTableService()->verifyTableAssociation(
@@ -321,12 +278,7 @@ class ViewService extends AbstractJsonService
 
         $fileCreator = $this->getFileCreator();
 
-        $formElements = '';
-
-        foreach ($this->createFormElements() as $item) {
-            $formElements .= $item;
-        }
-
+        $formElements = $this->createFormElements();
 
         $fileCreator->setTemplate('template/module/view/edit/edit.phtml');
         $fileCreator->setOptions(array(
@@ -359,6 +311,7 @@ class ViewService extends AbstractJsonService
     {
         $this->action = $action;
         $this->db = $this->action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName = $this->db->getTable();
 
         $viewValues = $this->getViewValues($action);
@@ -377,18 +330,17 @@ class ViewService extends AbstractJsonService
         $file = $this->getFileCreator();
 
         $file->addChildView(
-            array(
+            [
                 'template' => sprintf('template/module/view/view/view.%s.phtml', $dbType),
                 'placeholder' => 'actions',
-                'config' =>
-                array(
+                'config' => [
                     'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
                     'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
                     'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
                     'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
                     'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
-                )
-            )
+                ***REMOVED***
+            ***REMOVED***
         );
 
         $this->images = '';
@@ -400,12 +352,12 @@ class ViewService extends AbstractJsonService
         $file->setLocation($this->getLocationDir());
         $file->setFileName('view.phtml');
         $file->setOptions(
-            array(
+            [
                 'images' => $this->images,
                 'label' => $this->str('label', $action->getController()->getNameOff()),
                 'class' => $this->str('class', $action->getController()->getNameOff()),
                 'values' => $viewValues,
-            )
+            ***REMOVED***
         );
 
         return $file->render();
@@ -416,20 +368,25 @@ class ViewService extends AbstractJsonService
     {
         $this->action = $action;
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName = $this->db->getTable();
 
         return $this->getFileCreator()->createFile(
             'template/module/view/search.table.phtml',
-            array(
+            [
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'tableUrl' => $this->str('url', $this->action->getController()->getNameOff()),
-                'elements' => $this->getSearchElements()
-            ),
+                //'elements' => $this->getSearchElements()
+            ***REMOVED***,
             'search-form.phtml',
             $this->getLocationDir()
         );
     }
 
+    /**
+     * @TODO VOLTAR A USAR
+     * @return array
+     */
     public function getSearchElements()
     {
         $dbColumns = $this->getColumnService()->getColumns($this->db);
@@ -450,6 +407,7 @@ class ViewService extends AbstractJsonService
     {
         $this->action = $action;
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->user = $this->getUserType($this->db);
 
         $this->tableName = $this->db->getTable();
@@ -587,33 +545,19 @@ EOS;
 
     public function getListRowElements()
     {
-        $dbColumns = $this->getColumnService()->getColumns($this->db);
-
-        $this->rowElements = '';
-
-        /**
-        *   'Gear\Column\Varchar\PasswordVerify',
-            'Gear\Column\Varchar\UniqueId',
-            'Gear\Column\Varchar\UploadImage',
-            'Gear\Column\Text\Text',
-            'Gear\Column\Text\Html',
-            'Gear\Column\Int\Checkbox',
-            'Gear\Column\Tinyint\Checkbox',
-         */
-        foreach ($dbColumns as $columnData) {
-            if ($columnData instanceof \Gear\Column\Text\Text
-                || $columnData instanceof \Gear\Column\Text\Html
-                || $columnData instanceof \Gear\Column\Varchar\UploadImage
-                || $columnData instanceof \Gear\Column\Varchar\PasswordVerify
-                || $columnData instanceof \Gear\Column\Varchar\UniqueId
-                || $columnData instanceof \Gear\Column\Integer\Checkbox
-                || $columnData instanceof \Gear\Column\Tinyint\Checkbox
-
-            ) {
-                continue;
-            }
-            $this->rowElements .= $columnData->getViewListRowElement();
-        }
+        $this->rowElements = $this->columnManager->generateCode(
+            'getViewListRowElement',
+            [***REMOVED***,
+            [
+                \Gear\Column\Text\Text::class,
+                \Gear\Column\Text\Html::class,
+                \Gear\Column\Varchar\UploadImage::class,
+                \Gear\Column\Varchar\PasswordVerify::class,
+                \Gear\Column\Varchar\UniqueId::class,
+                \Gear\Column\Integer\Checkbox::class,
+                \Gear\Column\Tinyint\Checkbox::class,
+            ***REMOVED***
+        );
         return $this->rowElements;
     }
 
@@ -625,6 +569,7 @@ EOS;
 
         $this->action = $action;
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
         $this->user = $this->getUserType($this->db);
         $this->columns = $this->getColumnService()->getColumns($action->getController()->getDb());
 
@@ -683,29 +628,6 @@ EOS;
         $this->setLocationDir($controllerDir);
 
         return true;
-    }
-
-
-    public function angularLayout()
-    {
-
-        $moduleCss = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
-        $moduleJs = sprintf('%s.js', $this->str('url', $this->getModule()->getModuleName()));
-
-        $moduleTitle = $this->str('label', $this->getModule()->getModuleName());
-        $moduleName = $this->getModule()->getModuleName();
-
-        return $this->getFileCreator()->createFile(
-            'template/module/view/layout/layout-angular.phtml',
-            array(
-                'moduleCss' => $moduleCss,
-                'moduleJs' => $moduleJs,
-                'moduleTitle' => $moduleTitle,
-                'moduleName' => $moduleName
-            ),
-            'layout.phtml',
-            $this->getModule()->getViewLayoutFolder()
-        );
     }
 
     /**
@@ -781,31 +703,6 @@ EOS;
     }
 
     /**
-     * Cria ação principal quando opção --angularjs está ativa no módulo
-     * @create view/[moduleUrl***REMOVED***/index/index.phtml
-     */
-    public function createIndexAngularView()
-    {
-
-        $this->getFileCreator()->createFile(
-            'template/module/module-index.phtml',
-            array(
-                'label' => $this->str('label', $this->getModule()->getModuleName()),
-                'module' => $this->str('module', $this->getModule()->getModuleName()),
-
-            ),
-            'index.phtml',
-            sprintf(
-                '%s/view/%s/index',
-                $this->getModule()->getMainFolder(),
-                $this->str('url', $this->getModule()->getModuleName())
-            )
-        );
-
-        $this->getAngularService()->createIndexController();
-    }
-
-    /**
      * @create view/[moduleUrl***REMOVED***/index/index.phtml
      */
     public function createIndexView()
@@ -825,18 +722,6 @@ EOS;
         );
     }
 
-
-    public function getTimeTest()
-    {
-        return $this->timeTest;
-    }
-
-    public function setTimeTest(\DateTime $timeTest)
-    {
-        $this->timeTest = $timeTest;
-        return $this;
-    }
-
     public function getLocationDir()
     {
         return $this->locationDir;
@@ -846,13 +731,5 @@ EOS;
     {
         $this->locationDir = $locationDir;
         return $this;
-    }
-
-    public function getSpecialityService()
-    {
-        if (!isset($this->specialityService)) {
-            $this->specialityService = $this->getServiceLocator()->get('specialityService');
-        }
-        return $this->specialityService;
     }
 }

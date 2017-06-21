@@ -71,9 +71,11 @@ class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInter
         return $trait->render();
     }
 
-    public function createInterface(Src $src, $location)
+    public function createInterface(Src $src)
     {
         $this->src = $src;
+
+        $location = $this->getCode()->getLocation($this->src);
 
         $this->name = $this->src->getName();
         $this->srcType = $this->src->getType();

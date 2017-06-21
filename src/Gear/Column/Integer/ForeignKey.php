@@ -56,6 +56,22 @@ class ForeignKey extends Integer implements SearchFormInterface
         $this->constraint = $constraint;
     }
 
+    public function getEntityDataProvider()
+    {
+        /*
+        $foreignKey = $this->getTableService()->getConstraintForeignKeyFromColumn(
+            $this->getColumn()->getTableName(),
+            $this->getColumn()
+        );
+        */
+
+        //$referencedTable = $this->constraint->getReferencedTableName();
+
+        //$columnName = $this->str('class', $referencedTable). $this->str('class', $this->getColumn()->getName());
+
+        return sprintf('                $%s', $this->str('var', $this->getColumn()->getName()));
+    }
+
 
     /**
      * Cria código para verificação da exibição da coluna em spec feature.
@@ -123,6 +139,34 @@ EOS;
         return $view;
     }
 
+    public function getEntityMock()
+    {
+
+        $refTable = $this->constraint->getReferencedTableName();
+
+        $mock = '        ';
+
+        $columnName = $this->str('class', $refTable).$this->str('class', $this->getColumn()->getName());
+
+        $mock .= sprintf('$%s = ', $this->str('var', $this->getColumn()->getName()));
+
+        $mockModule = (in_array($refTable, ['user', 'User'***REMOVED***))
+            ? 'GearAdmin'
+            : $this->getModule()->getModuleName();
+
+
+        $template = <<<EOS
+        \$%s = \$this->prophesize('%s\Entity\%s')->reveal();
+
+EOS;
+
+        return sprintf(
+            $template,
+            $this->str('var', $this->getColumn()->getName()),
+            $mockModule,
+            $this->str('class', $refTable)
+        );
+    }
 
     /**
      * Gera o valor válido associado ao $iterator

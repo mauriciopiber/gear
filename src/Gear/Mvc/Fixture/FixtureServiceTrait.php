@@ -10,7 +10,7 @@ trait FixtureServiceTrait
     public function getFixtureService()
     {
         if (!isset($this->fixtureService)) {
-            $this->fixtureService = $this->getServiceLocator()->get('Gear\Mvc\Fixture\FixtureService');
+            $this->fixtureService = $this->getServiceLocator()->get(FixtureService::class);
         }
         return $this->fixtureService;
     }

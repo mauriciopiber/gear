@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Spec\Feature;
 
-use Gear\Mvc\Spec\Feature\FeatureFactory;
+use Gear\Mvc\Spec\Feature\Feature;
 
 trait FeatureTrait
 {
@@ -10,8 +10,7 @@ trait FeatureTrait
     public function getFeature()
     {
         if (!isset($this->feature)) {
-            $name = 'Gear\Mvc\Spec\Feature\Feature';
-            $this->feature = $this->getServiceLocator()->get($name);
+            $this->feature = $this->getServiceLocator()->get(Feature::class);
         }
         return $this->feature;
     }

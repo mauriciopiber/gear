@@ -10,7 +10,7 @@ trait FormServiceTrait
     public function getFormService()
     {
         if (!isset($this->formService)) {
-            $this->formService = $this->getServiceLocator()->get('Gear\Mvc\Form\FormService');
+            $this->formService = $this->getServiceLocator()->get(FormService::class);
         }
         return $this->formService;
     }
