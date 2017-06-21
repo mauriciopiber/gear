@@ -57,6 +57,27 @@ class FilterTestService extends AbstractMvcTest
 
         //show validation message
 
+        $names = $this->columnManager->getColumnNamesNotNullable();
+        $filterMessage = '';
+
+        foreach ($names as $column) {
+            $filterMessage .= $this->getFileCreator()->renderPartial(
+                'template/module/mvc/filter/db/test-required-column.phtml',
+                ['var' => $this->str('var', $column)***REMOVED***
+            );
+        }
+
+        $this->functions .= $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter/db/test-required.phtml',
+            [
+                'messages' => $filterMessage,
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->class,
+                'var' => $this->var,
+            ***REMOVED***
+        );
+
+        /*
         $filterMessage = '';
 
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
@@ -91,14 +112,21 @@ class FilterTestService extends AbstractMvcTest
                 'var' => $this->var,
             ***REMOVED***
         );
+        */
+        return true;
 
         //test pass with fixture
     }
 
     public function getTestRequired()
     {
-        $this->required = false;
+        $this->allNullable = $this->columnManager->isAllNullable();
 
+        if ($this->allNullable === false) {
+            $this->getTestRequiredColumns();
+        }
+
+        /*
         foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
             if ($columnData instanceof PrimaryKey) {
                 continue;
@@ -111,6 +139,7 @@ class FilterTestService extends AbstractMvcTest
             }
             continue;
         }
+        */
 
 
        /*  if ($required === false) {
@@ -159,10 +188,33 @@ class FilterTestService extends AbstractMvcTest
      */
     public function getTestValidReturnTrue()
     {
-        $fixture = '';
-        $columns = '';
+        $exclude = [
+            \Gear\Column\Integer\PrimaryKey::class,
+            \Gear\Column\Varchar\UniqueId::class
+        ***REMOVED***;
 
+        $fixture = $this->columnManager->generateCode('getFilterData', [***REMOVED***);
+        $columns = $this->columnManager->generateCode('getFilterValidPost', [***REMOVED***);
+
+
+        $this->functions .= $this->columnManager->generateCode('getFilterFunction', true, $exclude);
+
+
+        $this->functions .= $this->getFileCreator()->renderPartial(
+            'template/module/mvc/filter/db/test-valid-post.phtml',
+            [
+                'module' => $this->getModule()->getModuleName(),
+                'class' => $this->class,
+                'var' => $this->var,
+                'fixture' => $fixture,
+                'columns' => $columns
+            ***REMOVED***
+        );
+
+        /*
         $onlyOneFunction = [***REMOVED***;
+
+
 
         $columnsDb = $this->getColumnService()->getColumns($this->db);
 
@@ -200,12 +252,13 @@ class FilterTestService extends AbstractMvcTest
                 'columns' => $columns
             ***REMOVED***
         );
+        */
     }
 
     public function createDb()
     {
-
         $this->tableName = $this->db->getTable();
+        $this->columnManager = $this->db->getColumnManager();
         $this->class     = $this->str('class', $this->src->getName());
         $this->var       = $this->str('var-length', $this->src->getName());
 
@@ -213,19 +266,13 @@ class FilterTestService extends AbstractMvcTest
 
         $this->functions = '';
 
-        //validate-max
-        //validate-min
-        //validate-unique
-        //validate-format
-
-        //validate-null
         $this->getTestRequired();
         //sucesso
         $this->getTestValidReturnTrue();
 
 
         $this->src->setDependency([
-            '\Zend\Db\Adapter\Adapter',
+            '\Zend\Db\Adapter\Adapter',required
             'translator' => '\Zend\Mvc\I18n\Translator'
         ***REMOVED***);
 

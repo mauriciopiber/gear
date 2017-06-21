@@ -34,12 +34,8 @@ trait FilterDataTrait
     public function tables()
     {
         return [
-            [$this->getAllPossibleColumns(), 'all-columns-db', false, false, true, false, 'table', 'invokables', null***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db-factory', false, false, true, false, 'table', 'factories', null***REMOVED***,
-            [$this->getAllPossibleColumns(), 'all-columns-db-namespace', false, false, true, false, 'table', 'invokables', 'Custom\CustomNamespace'***REMOVED***,
             [$this->getAllPossibleColumns(), 'all-columns-db-factory-namespace', false, false, true, false, 'table', 'factories', 'Custom\CustomNamespace'***REMOVED***,
-            [$this->getAllPossibleColumnsNotNull(), 'all-columns-db-not-null', false, false, false, false, 'table_not_null', 'invokables', null***REMOVED***,
-            [$this->getAllPossibleColumnsUniqueNotNull(), 'all-columns-db-unique-not-null', false, false, false, true, 'table_unique_not_null', 'invokables', null***REMOVED***,
         ***REMOVED***;
     }
 }

@@ -15,6 +15,7 @@ use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Creator\Code;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-docs
@@ -38,8 +39,6 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->templates = (new Module)->getLocation().'/../../test/template/module/mvc/fixture/db';
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
 
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
@@ -50,7 +49,6 @@ class FixtureServiceTest extends AbstractTestCase
         $this->fixture->setFileCreator($this->fileCreator);
         $this->fixture->setStringService($this->string);
         $this->fixture->setModule($this->module->reveal());
-        $this->fixture->setColumnService($this->column->reveal());
         $this->fixture->setTableService($this->table->reveal());
         $this->fixture->setSchemaService($this->schemaService->reveal());
         $this->fixture->setConfigService($this->configService->reveal());
@@ -110,7 +108,8 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->db = new Db(['table' => $tableName***REMOVED***);
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
         $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
@@ -164,7 +163,8 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->db = new Db(['table' => $tableName***REMOVED***);
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
         $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
@@ -211,8 +211,9 @@ class FixtureServiceTest extends AbstractTestCase
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $this->db = new Db(['table' => $tableName***REMOVED***);
+        $this->db->setColumnManager(new ColumnManager($columns));
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn([$primaryKey***REMOVED***);
         $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);
@@ -243,8 +244,7 @@ class FixtureServiceTest extends AbstractTestCase
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $this->db = new Db(['table' => 'SingleDbTable'***REMOVED***);
-
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
 
         $this->table->getPrimaryKeyColumns('SingleDbTable')->willReturn(['id_single_db_table'***REMOVED***);
         $this->table->getForeignKeys($this->db)->willReturn([***REMOVED***);

@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FormTest\FormDataTrait;
 use GearTest\UtilTestTrait;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-form
@@ -57,8 +58,8 @@ class FormTestServiceTest extends AbstractTestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->form->setTableService($this->table->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->form->setColumnService($this->column->reveal());
+        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->form->setColumnService($this->column->reveal());
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
         $this->form->setSchemaService($this->schema->reveal());
@@ -118,7 +119,7 @@ class FormTestServiceTest extends AbstractTestCase
      * @group n99
      * @group db-form2
      */
-    public function testCreateDb($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
+    public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
         $table = $this->string->str('class', $tableName);
 
@@ -157,10 +158,11 @@ class FormTestServiceTest extends AbstractTestCase
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
 
-        $this->column->getColumns($db)->willReturn($columns);
+        $columnManager = new ColumnManager($columns);
+        $db->setColumnManager($columnManager);
 
-        $this->traitTest->createTraitTest($src, vfsStream::url($location))->shouldBeCalled();
-        $this->factoryTest->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
+        $this->traitTest->createTraitTest($src)->shouldBeCalled();
+        $this->factoryTest->createFactoryTest($src)->shouldBeCalled();
 
         $file = $this->form->introspectFromTable($db);
 

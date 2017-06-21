@@ -11,6 +11,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FilterTest\FilterDataTrait;
 use GearTest\UtilTestTrait;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-filter
@@ -65,7 +66,7 @@ class FilterTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group db-filter2
      */
-    public function testCreateDb(
+    public function testInstrospectTable(
         $columns,
         $template,
         $unique,
@@ -116,16 +117,10 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $this->filter->setSchemaService($this->schema->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($columns);
+        $columnManager = new ColumnManager($columns);
+        $db->setColumnManager($columnManager);
 
-        $this->filter->setColumnService($this->column->reveal());
-
-        if ($service === 'factories') {
-            $this->factory->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
-        }
-
-
+        $this->factory->createFactoryTest($src)->shouldBeCalled();
 
         $file = $this->filter->introspectFromTable($db);
 

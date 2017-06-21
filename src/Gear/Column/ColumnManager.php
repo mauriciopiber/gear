@@ -2,6 +2,9 @@
 namespace Gear\Column;
 
 use GearJson\Column\ColumnManagerInterface;
+use Gear\Column\Integer\PrimaryKey;
+use Gear\Column\Varchar\UniqueId;
+use Gear\Column\Varchar\UploadImage;
 
 /**
  * PHP Version 5
@@ -68,6 +71,36 @@ class ColumnManager implements ColumnManagerInterface
         return $associated;
     }
 
+    public function getColumnNamesNotNullable()
+    {
+        $names = [***REMOVED***;
+
+        foreach ($this->getColumns() as $columnData) {
+
+            if ($columnData->getColumn()->isNullable() == false) {
+                continue;
+            }
+
+            if ($columnData instanceof UniqueId) {
+                continue;
+            }
+
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($columnData instanceof UploadImage) {
+                continue;
+            }
+
+            $names[***REMOVED*** = $columnData->getColumn()->getName();
+        }
+
+        return $names;
+
+
+    }
+
     public function getColumnNames($class)
     {
         $imagesArray = [***REMOVED***;
@@ -82,6 +115,23 @@ class ColumnManager implements ColumnManagerInterface
         }
 
         return $imagesArray;
+    }
+
+    public function isAllNullable()
+    {
+        $isAllNullable = true;
+
+        foreach ($this->getColumns() as $columnData) {
+            if ($columnData instanceof PrimaryKey) {
+                continue;
+            }
+
+            if ($columnData->getColumn()->isNullable() == false) {
+                $isAllNullable = false;
+            }
+        }
+
+        return $isAllNullable;
     }
 
     public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***)
