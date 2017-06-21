@@ -196,47 +196,6 @@ EOS;
         return $namespace;
     }
 
-
-    /**
-     * @deprecated
-     */
-    public function classNameToNamespace($data)
-    {
-        $namespace = '';
-
-        if ($data instanceof Src) {
-            if (empty($data->getNamespace())) {
-                if ($data->getType() == 'SearchForm') {
-                    $type = 'Form\\Search';
-                } elseif ($data->getType() == 'ViewHelper') {
-                    $type = 'View\\Helper';
-                } else {
-                    $type = $data->getType();
-                }
-
-                return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
-            }
-
-            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-            $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
-        }
-
-        if ($data instanceof Controller) {
-            if (empty($data->getNamespace())) {
-                $type = 'Controller';
-                return 'use '.$this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName().';'.PHP_EOL;
-            }
-
-            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
-
-            $namespace .= $data->getNamespace().'\\'.$data->getName().';'.PHP_EOL;
-        }
-
-
-        return 'use '.$namespace;
-    }
-
     /**
      * Create Docs Params for All Classes.
      *

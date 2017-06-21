@@ -8,24 +8,59 @@ namespace Gear\Service;
 
 use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
-use Zend\Db\Metadata\Metadata;
-use Gear\Service\AbstractService;
-use Gear\Table\TableService\Table;
-use Gear\Table\TableService\TableTrait;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Column\Int\PrimaryKey;
-use Gear\Column\ColumnServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
 use GearJson\Db\Db;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use GearBase\Util\File\FileServiceTrait;
+use GearBase\Util\File\FileServiceAwareInterface;
+use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirServiceAwareInterface;
+use GearBase\Util\String\StringServiceAwareInterface;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\Vector\ArrayServiceTrait;
+use Gear\Util\Vector\ArrayServiceAwareInterface;
+use Gear\Module\ModuleAwareInterface;
+use Gear\Creator\Template\TemplateServiceTrait;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\RequestTrait;
 
-abstract class AbstractJsonService extends AbstractService implements EventManagerAwareInterface
+abstract class AbstractJsonService implements
+    ServiceLocatorAwareInterface,
+    FileServiceAwareInterface,
+    StringServiceAwareInterface,
+    DirServiceAwareInterface,
+    ArrayServiceAwareInterface,
+    ModuleAwareInterface,
+    EventManagerAwareInterface
 {
+    use RequestTrait;
+
+    use ModuleAwareTrait;
+
+    use ServiceLocatorAwareTrait;
+
+    use ArrayServiceTrait;
+
+    use StringServiceTrait;
+
+    use DirServiceTrait;
+
+    use FileServiceTrait;
+
+    use TemplateServiceTrait;
+
+    protected $adapter;
+
+    protected $options;
+
     use YamlServiceTrait;
     //use ColumnServiceTrait;
-    use TableTrait;
     use TableServiceTrait;
     use EventManagerAwareTrait;
     use FileCreatorTrait;
@@ -64,6 +99,25 @@ abstract class AbstractJsonService extends AbstractService implements EventManag
     protected $columnStack;
 
     protected $columnDuplicated;
+
+
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
+
+    public function setAdapter($adapter)
+    {
+        $this->adapter = $adapter;
+
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
 
     public function setBaseDir($dir)
     {
