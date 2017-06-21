@@ -22,6 +22,7 @@ use Gear\Column\ColumnService;
 use Gear\Table\TableService\TableService;
 use GearJson\Schema\SchemaService;
 use GearTest\UtilTestTrait;
+use Gear\Column\ColumnManager;
 
 /**
  * @group Spec
@@ -66,8 +67,8 @@ class FeatureTest extends TestCase
         $this->table = $this->prophesize(TableService::class);
         $this->feature->setTableService($this->table->reveal());
 
-        $this->column = $this->prophesize(ColumnService::class);
-        $this->feature->setColumnService($this->column->reveal());
+        //$this->column = $this->prophesize(ColumnService::class);
+        //$this->feature->setColumnService($this->column->reveal());
 
         $this->schema = $this->prophesize(SchemaService::class);
         $this->feature->setSchemaService($this->schema->reveal());
@@ -106,7 +107,9 @@ class FeatureTest extends TestCase
         ***REMOVED***);
 
         $this->schema->getControllerByDb($table)->willReturn($controller)->shouldBeCalled();
-        $this->column->getColumns($table)->willReturn([***REMOVED***)->shouldBeCalled();
+
+        $table->setColumnManager(new ColumnManager([***REMOVED***));
+        //$this->column->getColumns($table)->willReturn([***REMOVED***)->shouldBeCalled();
 
         $file = $this->feature->introspectFromTable($table);
 
@@ -257,14 +260,12 @@ class FeatureTest extends TestCase
         $action = new Action([
             'name' => 'MyAction',
             'controller' => new Controller(
-                ['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***
+                ['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***
             ),
         ***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsUnique())->shouldBeCalled();
-
-        $this->feature->setColumnService($this->column->reveal());
+        $action->getController()->setDb($db);
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumnsUnique()));
 
         $this->feature->setModule($this->module->reveal());
 
@@ -288,13 +289,11 @@ class FeatureTest extends TestCase
         $db = new Db(['table' => 'MyController'***REMOVED***);
         $action = new Action([
             'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
+            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController'***REMOVED***),
         ***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
-
-        $this->feature->setColumnService($this->column->reveal());
+        $action->getController()->setDb($db);
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumnsUnique()));
 
         $this->feature->setModule($this->module->reveal());
 

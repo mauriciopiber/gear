@@ -47,25 +47,28 @@ class SearchService extends AbstractMvc
 
         //$this->getAbstract();
         $this->db = $dbObject;
+        $this->columnManager = $this->db->getColumnManager();
 
         $this->tableName = $dbObject->getTable();
 
-        $dbColumns = $this->getColumnService()->getColumns($this->db);
+        //$dbColumns = $this->getColumnService()->getColumns($this->db);
 
         $formElements = [***REMOVED***;
 
+        /*
         foreach ($dbColumns as $columnData) {
             if ($columnData instanceof SearchFormInterface) {
                 //$formElements[***REMOVED*** = $columnData->getSearchFormElement();
             }
         }
+        */
 
         $this->getSearchTestService()->introspectFromTable($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getFactoryService()->createFactory($this->src, $location);
+        $this->getFactoryService()->createFactory($this->src);
         $this->getTraitService()->createTrait($this->src);
 
         return $this->getFileCreator()->createFile(

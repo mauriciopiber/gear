@@ -1,10 +1,11 @@
 <?php
-namespace GearTest\MvcTest\FormTest;
+namespace GearTest\MvcTest\SearchTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
 use GearTest\UtilTestTrait;
+use Gear\Column\ColumnManager;
 
 /**
  * @group src-form
@@ -63,9 +64,6 @@ class SearchTestServiceTest extends AbstractTestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->form->setTableService($this->table->reveal());
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->form->setColumnService($this->column->reveal());
-
         $this->codeTest = new \Gear\Creator\CodeTest();
 
         $this->codeTest->setModule($this->module->reveal());
@@ -122,10 +120,10 @@ class SearchTestServiceTest extends AbstractTestCase
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
 
-        $this->column->getColumns($db, true)->willReturn($columns);
+        $db->setColumnManager(new ColumnManager($columns));
 
-        $this->trait->createTraitTest($src, vfsStream::url($location))->shouldBeCalled();
-        $this->factory->createFactoryTest($src, vfsStream::url($location))->shouldBeCalled();
+        $this->trait->createTraitTest($src)->shouldBeCalled();
+        $this->factory->createFactoryTest($src)->shouldBeCalled();
 
         $file = $this->form->introspectFromTable($db);
 

@@ -68,6 +68,7 @@ class Feature extends AbstractMvcTest
     public function buildUploadImageAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        //$this->columnManager = $this->db->getColumnManager();
 
         $controllerName = $action->getController()->getName();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -143,6 +144,7 @@ class Feature extends AbstractMvcTest
     public function buildCreateAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
@@ -193,6 +195,7 @@ class Feature extends AbstractMvcTest
     public function buildEditAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
 
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
         $options = $this->getSpecOptions($action);
@@ -264,6 +267,7 @@ class Feature extends AbstractMvcTest
     public function buildListAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
 
         $this->userType = $this->getUserType($this->db);
 
@@ -313,6 +317,7 @@ class Feature extends AbstractMvcTest
     public function buildDeleteAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
 
         $this->userType = $this->getUserType($this->db);
 
@@ -354,6 +359,7 @@ class Feature extends AbstractMvcTest
     public function buildViewAction(Action $action)
     {
         $this->db = $action->getController()->getDb();
+        $this->columnManager = $this->db->getColumnManager();
 
         $controllerName = $action->getController()->getNameOff();
         $nameFile = sprintf('%s.feature', $this->str('url', $action->getName()));
@@ -589,6 +595,12 @@ class Feature extends AbstractMvcTest
      */
     public function buildCreateActionSendKeys()
     {
+        $exclude = [
+            \Gear\Column\Integer\PrimaryKey::class,
+            \Gear\Column\Varchar\UniqueId::class
+        ***REMOVED***;
+        return $this->columnManager->generateCode('getIntegrationActionSendKeys', [***REMOVED***, $exclude, 55);
+        /*
         $fileText = '';
 
         $columns = $this->getColumnService()->getColumns($this->db);
@@ -602,6 +614,7 @@ class Feature extends AbstractMvcTest
         }
 
         return $fileText;
+        */
     }
 
 
@@ -672,17 +685,32 @@ class Feature extends AbstractMvcTest
 
     public function buildCreateActionExpectValues($iterator = 55, $true = false)
     {
+        $exclude = [
+            \Gear\Column\Integer\PrimaryKey::class,
+            \Gear\Column\Varchar\UniqueId::class
+        ***REMOVED***;
+
+        return $this->columnManager->generateCode('getIntegrationActionExpectValue', [***REMOVED***, $exclude, [
+            'iterator' => $iterator,
+            'line' => 1,
+            'real' => $true
+        ***REMOVED***);
+
+        /*
         $fileText = '';
 
         $columns = $this->getColumnService()->getColumns($this->db);
 
         foreach ($columns as $column) {
             if (!($column instanceof PrimaryKey || $column instanceof UniqueId)) {
-                $fileText .= $column->getIntegrationActionExpectValue($iterator, 1, $true);
+                $fileText .= $column->getIntegrationActionExpectValue();
             }
         }
+        */
 
-        return $fileText;
+        //$iterator, 1, $true
+
+        //return $fileText;
     }
 
 

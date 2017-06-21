@@ -49,8 +49,11 @@ EOS;
      *
      * @return boolean
      */
-    public function getIntegrationActionExpectValue($default = 30, $line = 1)
+    public function getIntegrationActionExpectValue($data)
     {
+        $default = isset($data['default'***REMOVED***) ? $data['default'***REMOVED*** : 30;
+        $line = isset($data['line'***REMOVED***) ? $data['line'***REMOVED*** : 1;
+
         $attribute = $this->str('label', $this->column->getName());
 
         $value = $this->getValueExpectValue($default);

@@ -55,7 +55,6 @@ class RepositoryService extends AbstractMvc
     {
         $this->table   = $this->db->getTableObject();
         $this->columnManager = $this->db->getColumnManager();
-        $this->specialites = $this->db->getColumns();
 
         $this->template = 'template/module/mvc/repository/db/repository.phtml';
         $this->calculateAliasesStack();
@@ -78,7 +77,6 @@ class RepositoryService extends AbstractMvc
             'use' => ($this->src->getService() == 'factories') ? $this->getCode()->getUseConstructor($this->src) : '',
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'namespace' => $this->getCode()->getNamespace($this->src),
-            'specialityFields' => $this->specialites,
             'baseClass' => $this->str('class', $this->db->getTable()),
             'tableIdVar' => $this->str('var-length', 'id_'.$this->db->getTable()),
             'tableId' => $this->str('var', 'id_'.$this->db->getTable()),

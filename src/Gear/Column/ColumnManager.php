@@ -134,7 +134,7 @@ class ColumnManager implements ColumnManagerInterface
         return $isAllNullable;
     }
 
-    public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***)
+    public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
     {
         $verifyOne = [***REMOVED***;
 
@@ -162,7 +162,9 @@ class ColumnManager implements ColumnManagerInterface
                 continue;
             }
 
-            $data[***REMOVED*** = $columnData->{$method}();
+            $data[***REMOVED*** = ($identify === null)
+            ? $columnData->{$method}()
+            : $columnData->{$method}($identify);
 
             if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
                 $verifyOne[$className***REMOVED*** = true;
@@ -178,7 +180,7 @@ class ColumnManager implements ColumnManagerInterface
         return $data;
     }
 
-    public function generateCode(string $method, $onlyOne, $exclude = [***REMOVED***)
+    public function generateCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
     {
         $verifyOne = [***REMOVED***;
 
@@ -206,7 +208,9 @@ class ColumnManager implements ColumnManagerInterface
                 continue;
             }
 
-            $template .= $columnData->{$method}();
+            $template .= ($identify === null)
+                ? $columnData->{$method}()
+                : $columnData->{$method}($identify);
 
             if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
                 $verifyOne[$className***REMOVED*** = true;
