@@ -20,6 +20,7 @@ use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
 use GearTest\ControllerScopeTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group Fixing
@@ -96,10 +97,6 @@ class ControllerServiceTest extends TestCase
         $this->code->setConstructorParams($constructorParams);
 
         $this->controllerService->setCode($this->code);
-
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->controllerService->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->controllerService->setTableService($this->table->reveal());
@@ -206,7 +203,9 @@ class ControllerServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+
+        //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')
             ->willReturn($hasTableImage)
@@ -214,10 +213,7 @@ class ControllerServiceTest extends TestCase
 
         $this->schema->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
 
-
-        if ($service == 'factories') {
-            $this->factory->createFactory($controller, vfsStream::url($location))->shouldBeCalled();
-        }
+        $this->factory->createFactory($controller)->shouldBeCalled();
 
         $this->testing->introspectFromTable($this->db)->shouldBeCalled();
 

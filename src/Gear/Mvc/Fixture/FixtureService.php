@@ -25,6 +25,7 @@ use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 use Gear\Database\AutoincrementServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Table\UploadImageTrait;
+use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 
 class FixtureService extends AbstractMvc
 {
@@ -62,6 +63,7 @@ class FixtureService extends AbstractMvc
      */
     public function instrospect()
     {
+        $this->columnManager = $this->db->getColumnManager();
         $this->getConfigService()->introspectUploadImage($this->db);
 
         $this->load = '';
@@ -79,6 +81,13 @@ class FixtureService extends AbstractMvc
         $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\FixtureInterface';
         $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\DependentFixtureInterface';
 
+        if (
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            || $this->columnManager->isAssociatedWith(UploadImageColumn::class)
+        ) {
+            $this->src->addDependency('\GearImage\Fixture');
+        }
+
         $this->getColumnsSpecifications();
 
         $this->getTableSpecifications();
@@ -94,14 +103,7 @@ class FixtureService extends AbstractMvc
         $this->file->setFileName($this->srcName.'.php');
         $this->file->setLocation($this->getModule()->getFixtureFolder());
 
-
-        $dependencies = $this->src->getDependency();
-        $dependencies = array_merge($dependencies, $this->include);
-        $this->src->setDependency($dependencies);
-
-        $implements = $this->src->getImplements();
-        $implements = array_merge($implements, $this->implements);
-        $this->src->setImplements($implements);
+        $this->src->addImplements($this->implements);
 
         $this->file->setOptions(
             array(
@@ -210,7 +212,7 @@ class FixtureService extends AbstractMvc
         $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
 
         $fields = [***REMOVED***;
-        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
+        foreach ($this->columnManager->getColumns() as $column) {
             $field = $column->getColumn();
 
             if ($column instanceof ForeignKey) {
@@ -259,7 +261,9 @@ class FixtureService extends AbstractMvc
     {
         $entityArrayAsText = '';
 
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+        $columns = $this->columnManager->getColumns();
+
+        foreach ($columns as $columnData) {
             if ($columnData instanceof PrimaryKey) {
                 continue;
             }
@@ -295,29 +299,7 @@ class FixtureService extends AbstractMvc
 
     public function getColumnsSpecifications()
     {
-        $columnOnlyOnceTop = [***REMOVED***;
-
-        $this->getFixture = '';
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            $columnClass = get_class($columnData);
-
-            if ($columnData instanceof GetFixtureTopInterface && !in_array($columnClass, $columnOnlyOnceTop)) {
-                $columnOnlyOnceTop[***REMOVED*** = $columnClass;
-                $this->getFixture .= $columnData->getFixtureTop();
-            }
-
-            if ($columnData instanceof \Gear\Column\ImplementsInterface) {
-                $implements = $columnData->getImplements('Fixture');
-
-                foreach ($implements as $name => $item) {
-                    if (array_key_exists($name, $this->include)) {
-                        continue;
-                    }
-                    $this->include[$name***REMOVED*** = $item;
-                }
-            }
-        }
+        $this->getFixture = $this->columnManager->generateCode('getFixtureTop', true);
     }
 
     /**
@@ -329,18 +311,6 @@ class FixtureService extends AbstractMvc
     {
         $this->load .= $this->getUploadImage()->getFixtureLoad($this->tableName);
         $this->preLoad .= $this->getUploadImage()->getFixturePreLoad();
-
-        $uploadImage = $this->getUploadImage();
-        if ($uploadImage instanceof \Gear\Column\ImplementsInterface) {
-            $implements = $this->getUploadImage()->getImplements('Fixture');
-
-            foreach ($implements as $name => $item) {
-                if (array_key_exists($name, $this->include)) {
-                    continue;
-                }
-                $this->include[$name***REMOVED*** = $item;
-            }
-        }
 
         return true;
     }

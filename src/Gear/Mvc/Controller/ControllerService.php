@@ -117,9 +117,9 @@ class ControllerService extends AbstractMvc implements
     {
         $this->db = $db;
         $this->table = $db;
+        $this->columnManager = $this->db->getColumnManager();
 
         $this->controller = $this->getSchemaService()->getControllerByDb($db);
-
 
 
         //$this->dependency = $this->getControllerDependency()->setController($this->controller);
@@ -130,10 +130,11 @@ class ControllerService extends AbstractMvc implements
         $this->create = [***REMOVED***;
         $this->update = [***REMOVED***;
         $this->functions = '';
-        $this->hasImage = false;
-        $this->hasTableImage = false;
+        $this->hasImage = $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage');
 
-        $this->file = $this->getFileCreator();
+        $this->hasTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
+
+
 
         $this->getColumnsSpecifications();
 
@@ -187,14 +188,17 @@ class ControllerService extends AbstractMvc implements
 
         $optionsView = [***REMOVED***;
 
-        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-            //$uploadImage->setServiceLocator($this->getServiceLocator());
+        if ($this->hasTableImage) {
             $optionsView['imageQuery'***REMOVED*** = $this->getUploadImage()->getControllerViewQuery($this->tableName);
             $optionsView['imageView'***REMOVED*** = $this->getUploadImage()->getControllerViewView($this->tableName);
+
+            $options['uploadImageAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/mvc/controller/db/upload-image.phtml',
+                $this->getCommonActionData()
+            );
         }
 
-
-        $viewTemplate = (($this->table->getUser() == 'low-strict') ? 'view-low-strict' : 'view');
+        $viewTemplate = (($this->db->getUser() == 'low-strict') ? 'view-low-strict' : 'view');
         $options['viewAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/controller/db/'.$viewTemplate.'.phtml',
             array_merge(
@@ -203,27 +207,12 @@ class ControllerService extends AbstractMvc implements
             )
         );
 
-        /**
-         * @TODO 2 - Verificação de tabela, associação.
-         */
-        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-            $this->hasTableImage = true;
-
-            $options['uploadImageAction'***REMOVED*** = $this->getFileCreator()->renderPartial(
-                'template/module/mvc/controller/db/upload-image.phtml',
-                $this->getCommonActionData()
-            );
-        }
-
         if ($this->hasImage || $this->hasTableImage) {
             $dependency = $this->controller->getDependency();
             $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
             $this->controller->setDependency($dependency);
         }
 
-        /**
-         * @TODO 3 - USE e ATTRIBUTE
-         */
         $this->attribute .= $this->getCode()->getUseAttribute($this->controller);
 
         $this->use .= $this->getCode()->getUse($this->controller);
@@ -240,11 +229,13 @@ class ControllerService extends AbstractMvc implements
           ? $this->getCode()->getConstructor($this->controller)
           : '';
 
-        $location = $this->getCode()->getLocation($this->controller);
+        $this->getFactoryService()->createFactory($this->controller);
+        $this->getControllerTestService()->introspectFromTable($this->db);
 
+        $this->file = $this->getFileCreator();
         $this->file->setView($this->getTemplate('db'));
         $this->file->setFileName(sprintf('%s.php', $this->controller->getName()));
-        $this->file->setLocation($location);
+        $this->file->setLocation($this->getCode()->getLocation($this->controller));
         $this->file->setOptions(array_merge(
             $options,
             [
@@ -260,12 +251,6 @@ class ControllerService extends AbstractMvc implements
                 'imagemService' => $this->useImageService, /** @TODO 4 - Usar apenas Use e Attribute */
             ***REMOVED***
         ));
-
-        if ($this->controller->getService() == 'factories') {
-            $this->getFactoryService()->createFactory($this->controller, $location);
-        }
-
-        $this->getControllerTestService()->introspectFromTable($this->db);
 
         return $this->file->render();
     }
@@ -296,15 +281,16 @@ class ControllerService extends AbstractMvc implements
         $onlyOneControllerCreate = [***REMOVED***;
 
 
-        $this->create[0***REMOVED*** = '';
+        $this->create[0***REMOVED*** = $this->columnManager->generateCode('getControllerCreateAfter', true);
         $this->create[1***REMOVED*** = '';
-        $this->create[2***REMOVED*** = '';
-        $this->update[0***REMOVED*** = '';
-        $this->update[1***REMOVED*** = '';
-        $this->update[2***REMOVED*** = '';
-        $this->columnDuplicated = [***REMOVED***;
+        $this->create[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
+        $this->update[0***REMOVED*** = $this->columnManager->generateCode('getControllerDeclareVar', [***REMOVED***);
+        $this->update[1***REMOVED*** = $this->columnManager->generateCode('getControllerEditBeforeView', true);
+        $this->update[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
 
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
+        $columns = $this->columnManager->getColumns();
+
+        foreach ($columns as $columnData) {
 
 
             $className = get_class($columnData);
@@ -316,11 +302,7 @@ class ControllerService extends AbstractMvc implements
                 $this->attribute .= $columnData->getControllerAttribute();
             }
 
-
-            if ($columnData instanceof \Gear\Column\Varchar\UploadImage) {
-                $this->hasImage = true;
-            }
-
+            /**
             if ($columnData instanceof ControllerCreateAfterInterface && !in_array($className, $onlyOneControllerCreate)) {
                 $this->create[0***REMOVED*** .= $columnData->getControllerCreateAfter();
 
@@ -343,6 +325,7 @@ class ControllerService extends AbstractMvc implements
 
                 $onlyOneControllerEdit[***REMOVED*** = $className;
             }
+            */
         }
     }
 
@@ -401,28 +384,12 @@ EOS;
 
     public function setPreValidateFromColumns()
     {
-        $serviceCode = '';
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof ControllerInterface) {
-                $serviceCode .= $columnData->getControllerPreValidate();
-            }
-        }
-
-        return $serviceCode;
+        return $this->columnManager->generateCode('getControllerPreValidate', [***REMOVED***);
     }
 
     public function setPreShowFromColumns()
     {
-        $serviceCode = '';
-
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof ControllerInterface) {
-                $serviceCode .= $columnData->getControllerPreShow();
-            }
-        }
-
-        return $serviceCode;
+        return $this->columnManager->generateCode('getControllerPreShow', [***REMOVED***);
     }
 
 
