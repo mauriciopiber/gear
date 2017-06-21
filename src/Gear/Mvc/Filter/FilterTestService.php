@@ -272,7 +272,7 @@ class FilterTestService extends AbstractMvcTest
 
 
         $this->src->setDependency([
-            '\Zend\Db\Adapter\Adapter',required
+            '\Zend\Db\Adapter\Adapter',
             'translator' => '\Zend\Mvc\I18n\Translator'
         ***REMOVED***);
 

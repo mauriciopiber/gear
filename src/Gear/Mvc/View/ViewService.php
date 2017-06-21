@@ -572,7 +572,6 @@ EOS;
         $this->db = $action->getController()->getDb();
         $this->columnManager = $this->db->getColumnManager();
         $this->user = $this->getUserType($this->db);
-        $this->columns = $this->getColumnService()->getColumns($action->getController()->getDb());
 
         $this->createSearch($action);
         $this->createListView($action);

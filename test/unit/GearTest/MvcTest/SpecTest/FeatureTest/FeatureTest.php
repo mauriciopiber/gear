@@ -192,9 +192,9 @@ class FeatureTest extends TestCase
      */
     public function testBuildCreateNotNullAction($action)
     {
-        $db = $action->getController()->getDb();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumnsNotNull()));
 
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumnsNotNull())->shouldBeCalled();
+        //$this->column->getColumns($db)->willReturn()->shouldBeCalled();
 
         $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(false)->shouldBeCalled();
@@ -233,10 +233,7 @@ class FeatureTest extends TestCase
     public function testBuildCreateUniqueNotNullAction()
     {
         $action = $this->mockMyAction();
-
-        $this->column->getColumns(
-            $action->getController()->getDb())
-        ->willReturn($this->getAllPossibleColumnsUniqueNotNull())->shouldBeCalled();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumnsUniqueNotNull()));
 
         $this->table->isNullable('MyController')->willReturn(false)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(true)->shouldBeCalled();
@@ -293,7 +290,7 @@ class FeatureTest extends TestCase
         ***REMOVED***);
 
         $action->getController()->setDb($db);
-        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumnsUnique()));
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
 
         $this->feature->setModule($this->module->reveal());
 
@@ -336,14 +333,7 @@ class FeatureTest extends TestCase
      */
     public function testBuildEditAction($action, $columns, $template, $nullable, $unique)
     {
-        $this->db = $action->getController()->getDb();
-
-        $action = new Action([
-            'name' => 'MyAction',
-            'controller' => new Controller(['name' => 'MyController', 'object' => '%s\Controller\MyController', 'db' => 'MyController'***REMOVED***),
-        ***REMOVED***);
-
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($columns));
 
         $this->table->isNullable('MyController')->willReturn($nullable)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn($unique)->shouldBeCalled();
@@ -365,9 +355,7 @@ class FeatureTest extends TestCase
     public function testBuildListUserTypeStrict()
     {
         $action = $this->mockMyAction('strict');
-        $db = $action->getController()->getDb();
-
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
 
         $file = $this->feature->buildListAction($action);
 
@@ -385,8 +373,7 @@ class FeatureTest extends TestCase
     public function testBuildListAction()
     {
         $action = $this->mockMyAction();
-        $db = $action->getController()->getDb();
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
 
         $file = $this->feature->buildListAction($action);
 
@@ -405,9 +392,7 @@ class FeatureTest extends TestCase
     public function testBuildViewAction()
     {
         $action = $this->mockMyAction();
-        $db = $action->getController()->getDb();
-
-        $this->column->getColumns($db)->willReturn($this->getAllPossibleColumns())->shouldBeCalled();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
 
         $file = $this->feature->buildViewAction($action);
 
@@ -425,6 +410,8 @@ class FeatureTest extends TestCase
     public function testBuildDeleteStrictAction()
     {
         $action = $this->mockMyAction('strict');
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
+
         $file = $this->feature->buildDeleteAction($action);
 
         $expected = $this->template.'/delete.strict.feature.phtml';
@@ -441,6 +428,7 @@ class FeatureTest extends TestCase
     public function testBuildDeleteAction()
     {
         $action = $this->mockMyAction();
+        $action->getController()->getDb()->setColumnManager(new ColumnManager($this->getAllPossibleColumns()));
 
         $file = $this->feature->buildDeleteAction($action);
 

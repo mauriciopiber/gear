@@ -432,7 +432,7 @@ class Feature extends AbstractMvcTest
     {
         $iterator = $this->userType->getFilterIterator();
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (get_class($column) == 'Gear\Column\Varchar\Varchar') {
@@ -447,7 +447,7 @@ class Feature extends AbstractMvcTest
     public function buildSendKeysValidateUnique($iterator = 30)
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateUniqueRule($column)) {
                 $fileText .= $column->getIntegrationActionSendKeys($iterator);
@@ -460,7 +460,7 @@ class Feature extends AbstractMvcTest
     public function buildExpectValidateUnique()
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateUniqueRule($column)) {
                 $fileText .= $column->getIntegrationExpectValidateUnique();
@@ -476,7 +476,7 @@ class Feature extends AbstractMvcTest
     public function buildSendKeysValidateMax()
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
                 $fileText .= $column->getIntegrationSendKeysValidateMax();
@@ -492,7 +492,7 @@ class Feature extends AbstractMvcTest
     public function buildExpectValidateMax()
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
                 $fileText .= $column->getIntegrationExpectValidateMax();
@@ -507,7 +507,7 @@ class Feature extends AbstractMvcTest
     public function buildSendKeysValidateMin()
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
                 $fileText .= $column->getIntegrationSendKeysValidateMin();
@@ -524,7 +524,7 @@ class Feature extends AbstractMvcTest
     public function buildExpectValidateMin()
     {
         $fileText = '';
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
         foreach ($columns as $column) {
             if ($this->validateMaxLengthRule($column)) {
                 $fileText .= $column->getIntegrationExpectValidateMin();
@@ -595,17 +595,17 @@ class Feature extends AbstractMvcTest
      *
      * @return string
      */
-    public function buildCreateActionSendKeys()
+    public function buildCreateActionSendKeys($number = 55)
     {
         $exclude = [
             \Gear\Column\Integer\PrimaryKey::class,
             \Gear\Column\Varchar\UniqueId::class
         ***REMOVED***;
-        return $this->columnManager->generateCode('getIntegrationActionSendKeys', [***REMOVED***, $exclude, 55);
+        return $this->columnManager->generateCode('getIntegrationActionSendKeys', [***REMOVED***, $exclude, $number);
         /*
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Integer\PrimaryKey
@@ -651,7 +651,7 @@ class Feature extends AbstractMvcTest
     {
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if ($this->validateInvalidRule($column)) {
@@ -673,7 +673,7 @@ class Feature extends AbstractMvcTest
     {
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if ($this->validateInvalidRule($column)) {
@@ -693,7 +693,7 @@ class Feature extends AbstractMvcTest
         ***REMOVED***;
 
         return $this->columnManager->generateCode('getIntegrationActionExpectValue', [***REMOVED***, $exclude, [
-            'iterator' => $iterator,
+            'default' => $iterator,
             'line' => 1,
             'real' => $true
         ***REMOVED***);
@@ -701,7 +701,7 @@ class Feature extends AbstractMvcTest
         /*
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (!($column instanceof PrimaryKey || $column instanceof UniqueId)) {
@@ -720,7 +720,7 @@ class Feature extends AbstractMvcTest
     {
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Varchar\UniqueId
@@ -743,7 +743,7 @@ class Feature extends AbstractMvcTest
     {
         $fileText = '';
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Integer\PrimaryKey

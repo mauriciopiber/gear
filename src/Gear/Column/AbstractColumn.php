@@ -123,7 +123,7 @@ EOS;
         $columnName = $this->str('uline', $this->column->getName());
         $columnValue = $this->getValueDatabase($iterator);
 
-        return sprintf(static::$tableStepFixture, $columnName, $columnValue);
+        return sprintf(static::$tableStepFixture, $columnName, $columnValue).PHP_EOL;
     }
 
     /**
