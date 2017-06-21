@@ -23,6 +23,7 @@ class FilterService extends AbstractMvc
 
     use FilterTestServiceTrait;
 
+    /*
     public function getFilterValues()
     {
         $data = $this->getColumnService()->getColumns($this->db);
@@ -41,6 +42,7 @@ class FilterService extends AbstractMvc
         }
         return $filters;
     }
+    */
 
     public function introspectFromTable($table)
     {

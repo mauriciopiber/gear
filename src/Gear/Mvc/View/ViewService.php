@@ -386,7 +386,7 @@ class ViewService extends AbstractJsonService
     /**
      * @TODO VOLTAR A USAR
      * @return array
-     */
+
     public function getSearchElements()
     {
         $dbColumns = $this->getColumnService()->getColumns($this->db);
@@ -402,6 +402,7 @@ class ViewService extends AbstractJsonService
 
         return $formElements;
     }
+    */
 
     public function createListView($action)
     {

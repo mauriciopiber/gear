@@ -7,6 +7,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Column\ColumnManager;
 
 /**
  * @group db-namespace-factory
@@ -77,10 +78,6 @@ class SearchServiceTest extends AbstractTestCase
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
         $this->search->setInterfaceService($this->interface->reveal());
 
-
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
-        $this->search->setColumnService($this->column->reveal());
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->search->setTableService($this->table->reveal());
 
@@ -122,11 +119,6 @@ class SearchServiceTest extends AbstractTestCase
 
         $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
 
-
-        $this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
-
-        $this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
-
         $this->table->hasUniqueConstraint($table)->willReturn(false);
         //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
@@ -145,8 +137,10 @@ class SearchServiceTest extends AbstractTestCase
 
         $this->searchTest->introspectFromTable($this->db)->shouldBeCalled();
 
-        $this->trait->createTrait($search, vfsStream::url($location))->shouldBeCalled();
-        $this->factory->createFactory($search, vfsStream::url($location))->shouldBeCalled();
+        $this->db->setColumnManager(new ColumnManager($columns));
+
+        $this->trait->createTrait($search)->shouldBeCalled();
+        $this->factory->createFactory($search)->shouldBeCalled();
 
         $file = $this->search->introspectFromTable($this->db);
 

@@ -257,8 +257,12 @@ EOS;
      *
      * @return string
      */
-    public function getIntegrationActionExpectValue($default = 30, $line = 1, $real = false)
+    public function getIntegrationActionExpectValue($data)
     {
+        $default = isset($data['default'***REMOVED***) ? $data['default'***REMOVED*** : 30;
+        $line = isset($data['line'***REMOVED***) ? $data['line'***REMOVED*** : 1;
+        $real = isset($data['real'***REMOVED***) ? $data['real'***REMOVED*** : false;
+
         if ($real) {
             $getValue = $this->getValue($default);
         } else {

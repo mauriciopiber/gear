@@ -194,10 +194,7 @@ class ControllerTestServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($this->search->reveal())->shouldBeCalled();
 
-
-        if ($service == 'factories') {
-            $this->factoryTest->createControllerFactoryTest($controller, vfsStream::url($location))->shouldBeCalled();
-        }
+        $this->factoryTest->createControllerFactoryTest($controller)->shouldBeCalled();
 
         $file = $this->controllerTest->introspectFromTable($this->db);
 

@@ -47,8 +47,6 @@ class FixtureService extends AbstractMvc
 
     use ConfigServiceTrait;
 
-    protected $speciality;
-
     protected $tableName;
 
     protected $srcName;

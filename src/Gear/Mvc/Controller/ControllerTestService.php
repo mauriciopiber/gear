@@ -136,6 +136,7 @@ class ControllerTestService extends AbstractMvcTest implements
     public function introspectFromTable(Db $mvc)
     {
         $this->db           = $mvc;
+        $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
         $this->controller = $this->getSchemaService()->getControllerByDb($mvc);
@@ -144,21 +145,21 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $columnsOptions = [***REMOVED***;
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        $columns = $this->columnManager->getColumns();
 
-        $hasImageColumn = false;
-        $hasImageTable = false;
+        $this->hasImageColumn = $this->columnManager->isAssociatedWith(UploadImage::class);
+        $this->hasImageTable = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
 
         $columnsImage = [***REMOVED***;
 
-        foreach ($columns as $column) {
-            if ($column instanceof UploadImage) {
-                $hasImageColumn = true;
-                $columnsImage[***REMOVED*** = $column;
-            }
-        }
+        if ($this->hasImageColumn) {
 
-        if ($hasImageColumn) {
+            foreach ($columns as $column) {
+                if ($column instanceof UploadImage) {
+                    $columnsImage[***REMOVED*** = $column;
+                }
+            }
+
             $finalValue = $this->getFileColumns($columnsImage);
 
             $localOptions = [
@@ -189,28 +190,11 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $this->functions = '';
         $this->functionUpload = false;
-        $this->nullable = true;
+        $this->nullable = $this->columnManager->isAllNullable();
         $this->setUp = '';
+        $this->hasImage = ($this->hasImageColumn || $this->hasImageTable);
 
-        $this->hasImage = false;
-        /**
-         * @TODO fix 4
-         */
-        foreach ($this->getColumnService()->getColumns($this->db) as $columnData) {
-            if ($columnData instanceof UploadImage) {
-                if ($this->hasImage === false) {
-                    $this->hasImage = true;
-                }
-            }
-
-            if ($columnData->getColumn()->isNullable() == false) {
-                $this->nullable = false;
-            }
-        }
-
-        if ($this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
-            $hasImageTable = true;
-
+        if ($this->hasImageTable) {
             $this->functions .= $this->getUploadImage()->getControllerUnitTest($this->tableName);
         }
 
@@ -223,27 +207,27 @@ class ControllerTestService extends AbstractMvcTest implements
             'actionUrl' => 'create'
         ***REMOVED***;
 
-        $columnsOptions['createPrg'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['createPrg'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('create-file-post-redirect-get', $actionOptions)
           : $this->render('create-post-redirect-get', $actionOptions);
 
-        $columnsOptions['createValidate'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['createValidate'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('create-validate-file-prg', $actionOptions)
           : $this->render('create-validate-prg', $actionOptions);
 
-        $columnsOptions['createSuccessful'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['createSuccessful'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('create-successful-file-prg', $actionOptions)
           : $this->render('create-successful-prg', $actionOptions);
 
-        $columnsOptions['editPrg'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['editPrg'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('edit-file-post-redirect-get', $actionOptions)
           : $this->render('edit-post-redirect-get', $actionOptions);
 
-        $columnsOptions['editValidate'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['editValidate'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('edit-validate-file-prg', $actionOptions)
           : $this->render('edit-validate-prg', $actionOptions);
 
-        $columnsOptions['editSuccessful'***REMOVED*** = ($hasImageColumn)
+        $columnsOptions['editSuccessful'***REMOVED*** = ($this->hasImageColumn)
           ? $this->render('edit-successful-file-prg', $actionOptions)
           : $this->render('edit-successful-prg', $actionOptions);
 
@@ -280,29 +264,27 @@ class ControllerTestService extends AbstractMvcTest implements
         $construct = [***REMOVED***;
 //var_dump($hasImageTable);die();
 
-        if ($this->controller->getService() === 'factories') {
-            if ($hasImageColumn || $hasImageTable) {
-                $dependency = $this->controller->getDependency();
-                $dependency[***REMOVED*** = '\GearImage\Service\ImageService';
-                $this->controller->setDependency($dependency);
-            }
-            $pluginManager = [***REMOVED***;
-            if ($hasImageTable) {
-                $pluginManager['appendUploadImagePlugin'***REMOVED*** = 'GearImage\Controller\Plugin\ImageControllerPlugin';
-            }
+        if ($this->hasImage) {
+            $this->controller->addDependency('\GearImage\Service\ImageService');
 
-            if (count($pluginManager) > 0) {
-                $construct['pluginManager'***REMOVED*** = $this->getCodeTest()->getPluginManager($pluginManager);
-            }
-
-            $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
-            $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller, $pluginManager);
         }
+
+        $pluginManager = [***REMOVED***;
+
+        if ($this->hasImageTable) {
+            $pluginManager['appendUploadImagePlugin'***REMOVED*** = 'GearImage\Controller\Plugin\ImageControllerPlugin';
+        }
+
+        if (count($pluginManager) > 0) {
+           $construct['pluginManager'***REMOVED*** = $this->getCodeTest()->getPluginManager($pluginManager);
+        }
+
+        $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
+        $construct['constructor'***REMOVED*** = $this->getCodeTest()->getConstructor($this->controller, $pluginManager);
 
         if ($this->db->getUser() == 'low-strict') {
             $construct['mockusertype'***REMOVED*** = $user->getMockZfcAuthenticate();
         }
-
 
         $options['service'***REMOVED*** = $this->getServiceManager()
           ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Service'));
@@ -324,9 +306,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);
 
-        if ($this->controller->getService() == 'factories') {
-            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
-        }
+        $this->getFactoryTestService()->createControllerFactoryTest($this->controller);
 
 
         return $this->file->render();
