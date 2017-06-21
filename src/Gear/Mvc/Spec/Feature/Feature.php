@@ -556,7 +556,9 @@ class Feature extends AbstractMvcTest
         $fileText = $this->buildCreateActionValidateNotNullResponse($isNullable);
 
 
-        $columns = $this->getColumnService()->getColumns($this->db);
+        //$fileText .= $this->columnManager->generateCode('getIntegrationActionIsNullable', [***REMOVED***);
+
+        $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $column) {
             if (!($column instanceof \Gear\Column\Integer\PrimaryKey
