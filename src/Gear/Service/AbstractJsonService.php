@@ -10,11 +10,9 @@ use Zend\EventManager\EventManagerAwareTrait;
 use Zend\EventManager\EventManagerAwareInterface;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\Metadata\MetadataTrait;
-use Gear\Column\Int\PrimaryKey;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
-use GearJson\Db\Db;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use GearBase\Util\File\FileServiceTrait;
@@ -55,16 +53,19 @@ abstract class AbstractJsonService implements
 
     use TemplateServiceTrait;
 
+    use YamlServiceTrait;
+
+    use TableServiceTrait;
+
+    use EventManagerAwareTrait;
+
+    use FileCreatorTrait;
+
+    use MetadataTrait;
+
     protected $adapter;
 
     protected $options;
-
-    use YamlServiceTrait;
-    //use ColumnServiceTrait;
-    use TableServiceTrait;
-    use EventManagerAwareTrait;
-    use FileCreatorTrait;
-    use MetadataTrait;
 
     protected $module;
 
