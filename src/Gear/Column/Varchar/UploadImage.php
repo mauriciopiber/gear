@@ -545,45 +545,7 @@ EOS;
         return $implements[$codeName***REMOVED***;
     }
 
-    /**
-     * Retorna o servico que será usado nas classes
-     *
-     * @return string
-     */
-    public function getServiceUse($service = 'invokables')
-    {
-        $use = ['GearImage\Service\ImageServiceTrait'***REMOVED***;
 
-
-
-        if ($service === 'factories') {
-            $use[***REMOVED*** = 'GearImage\Service\ImageService';
-        }
-
-        $template = 'use %s;'.PHP_EOL;
-
-        $text = '';
-
-        foreach ($use as $name) {
-            $text .= sprintf($template, $name);
-        }
-
-        return $text;
-    }
-
-   /**
-     * Retorna o servico que será usado nas classes
-     *
-     * @return string
-     */
-    public function getServiceAttribute()
-    {
-        return <<<EOS
-    use ImageServiceTrait;
-
-
-EOS;
-    }
 
     /**
      * Replica a chamada de ServiceInsertBody

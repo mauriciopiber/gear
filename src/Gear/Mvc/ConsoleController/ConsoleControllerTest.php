@@ -221,7 +221,7 @@ class ConsoleControllerTest extends AbstractMvcTest
         ***REMOVED***;
 
 
-        if ($controller->getService() === 'factories') {
+        if ($controller->isFactory()) {
             $templateView ='factory';
 
             $options['dependency'***REMOVED*** = str_replace(
@@ -255,7 +255,7 @@ class ConsoleControllerTest extends AbstractMvcTest
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($controller->getService() == 'factories') {
+        if ($controller->isFactory()) {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
 

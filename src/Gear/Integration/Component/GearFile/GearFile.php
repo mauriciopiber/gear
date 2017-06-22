@@ -13,6 +13,7 @@ use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
+use Gear\Table\UploadImage as UploadImageTable;
 
 /**
  * PHP Version 5
@@ -269,7 +270,7 @@ class GearFile
                 ***REMOVED***
             ***REMOVED***;
 
-            if ($minorSuite->getTableAssoc() == 'upload_image') {
+            if ($minorSuite->getTableAssoc() == UploadImageTable::NAME) {
                 $controllerItem['dependency'***REMOVED***[***REMOVED*** = '\GearImage\Service\ImageService';
                 $controllerItem['actions'***REMOVED***[***REMOVED*** = ['name' => 'upload-image', 'role' => 'admin'***REMOVED***;
             }

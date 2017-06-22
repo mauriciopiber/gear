@@ -32,25 +32,34 @@ use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractConstructor;
+use GearJson\Service\FactoriesInterface;
+use GearJson\Controller\Type\ActionInterface;
 
 class ControllerService  extends AbstractConstructor
 {
-    static public $defaultService = 'factories';
+    static public $defaultService = FactoriesInterface::NAME;
 
-    static public $defaultType = 'Action';
+    static public $defaultType = ActionInterface::NAME;
 
     static public $defaultNamespace = '%s\Controller\\';
 
     use ControllerSchemaTrait;
-    use ConsoleControllerTrait;
-    use ConsoleControllerTestTrait;
-    use ConfigServiceTrait;
-    use ControllerMvcTestTrait;
-    use ControllerMvcTrait;
-    use ViewMvc;
-    use LanguageServiceTrait;
-    use ControllerManagerTrait;
 
+    use ConsoleControllerTrait;
+
+    use ConsoleControllerTestTrait;
+
+    use ConfigServiceTrait;
+
+    use ControllerMvcTestTrait;
+
+    use ControllerMvcTrait;
+
+    use ViewMvc;
+
+    use LanguageServiceTrait;
+
+    use ControllerManagerTrait;
 
     /**
      * Constructor

@@ -26,6 +26,7 @@ use Gear\Database\AutoincrementServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class FixtureService extends AbstractMvc
 {
@@ -80,7 +81,7 @@ class FixtureService extends AbstractMvc
         $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\DependentFixtureInterface';
 
         if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
             || $this->columnManager->isAssociatedWith(UploadImageColumn::class)
         ) {
             $this->src->addDependency('\GearImage\Fixture');
@@ -315,7 +316,7 @@ class FixtureService extends AbstractMvc
 
     public function getTableSpecifications()
     {
-        if (!$this->getTableService()->verifyTableAssociation($this->tableName, 'upload_image')) {
+        if (!$this->getTableService()->verifyTableAssociation($this->tableName, UploadImageTable::NAME)) {
             return false;
         }
         $this->getUploadImageTable();

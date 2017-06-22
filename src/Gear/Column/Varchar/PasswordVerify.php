@@ -187,33 +187,6 @@ EOS;
     }
 
     /**
-     * Retorna as classes de instancia das dependências do service em Gear\Mvc\Service\ServiceService
-     *
-     * @return string
-     */
-    public function getServiceUse()
-    {
-        return <<<EOS
-use GearBase\Service\PasswordVerifyTrait;
-
-EOS;
-    }
-
-    /**
-     * Retorna os atributos de instancia das dependências do service em Gear\Mvc\Service\ServiceService
-     *
-     * @return string
-     */
-    public function getServiceAttribute()
-    {
-        return <<<EOS
-    use PasswordVerifyTrait;
-
-
-EOS;
-    }
-
-    /**
      * Código que é executado antes da validação do Controller
      *
      * {@inheritDoc}

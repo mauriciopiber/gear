@@ -104,7 +104,7 @@ class FormService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->isFactory()) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
 

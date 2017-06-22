@@ -43,7 +43,7 @@ class ViewHelperService extends AbstractMvc
         );
 
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->isFactory()) {
             $this->getFactoryService()->createFactory($this->src, $location);
         }
     }

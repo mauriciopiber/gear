@@ -31,7 +31,7 @@ class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInt
         );
 
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->isFactory()) {
             $this->getFactoryTestService()->createFactoryTest($this->src);
         }
     }

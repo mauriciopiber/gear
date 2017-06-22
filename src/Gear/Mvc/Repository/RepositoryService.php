@@ -74,7 +74,7 @@ class RepositoryService extends AbstractMvc
         $this->getFactoryService()->createFactory($this->src);
 
         $options = [
-            'use' => ($this->src->getService() == 'factories') ? $this->getCode()->getUseConstructor($this->src) : '',
+            'use' => ($this->src->isFactory()) ? $this->getCode()->getUseConstructor($this->src) : '',
             'package' => $this->getCode()->getClassDocsPackage($this->src),
             'namespace' => $this->getCode()->getNamespace($this->src),
             'baseClass' => $this->str('class', $this->db->getTable()),
@@ -135,7 +135,7 @@ class RepositoryService extends AbstractMvc
             $this->getTraitService()->createTrait($this->src);
         }
 
-        if ($this->src->getService() == 'factories' && $this->src->getAbstract() == false) {
+        if ($this->src->isFactory() && $this->src->getAbstract() == false) {
             $this->getFactoryService()->createFactory($this->src);
         }
 
@@ -150,7 +150,7 @@ class RepositoryService extends AbstractMvc
             'classDocs'  => $this->getCode()->getClassDocs($this->src)
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($this->src->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($this->src->isFactory())
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
