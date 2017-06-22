@@ -75,14 +75,11 @@ class AngularServiceTest extends AbstractTestCase
 
     public function getListDbUserType()
     {
-        $columns = $this->prophesize('Gear\Column\ColumnService');
-        $columns->getColumns()->willReturn([***REMOVED***);
-
         $dbs = [***REMOVED***;
 
         foreach (['low-strict', 'all', 'strict'***REMOVED*** as $userType) {
             $dbs[***REMOVED*** = [
-                new Db(['table' => 'My', 'user' => $userType***REMOVED***), $columns->reveal(), sprintf('list-%s', $userType), $userType
+                new Db(['table' => 'My', 'user' => $userType***REMOVED***), sprintf('list-%s', $userType), $userType
             ***REMOVED***;
         }
 
@@ -94,12 +91,12 @@ class AngularServiceTest extends AbstractTestCase
      * @group fixR
      * @dataProvider getListDbUserType
      */
-    public function testListAction($db, $columns, $template, $userType)
+    public function testListAction($db, $template, $userType)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getPublicJsControllerFolder()->willReturn(vfsStream::url('module/public'))->shouldBeCalled();
 
-        $this->angular->setColumnService($columns);
+        //$this->angular->setColumnService($columns);
 
         $action = $this->createAction('List', $userType);
 

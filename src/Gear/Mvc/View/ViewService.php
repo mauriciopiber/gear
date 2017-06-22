@@ -9,6 +9,7 @@ use GearJson\Db\Db;
 use Gear\Constructor\Helper;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Table\UploadImageTrait;
+use Gear\Mvc\View\ViewColumnInterface;
 
 class ViewService extends AbstractJsonService
 {
@@ -146,7 +147,7 @@ class ViewService extends AbstractJsonService
         return $names;
         */
 
-        return $this->columnManager->extractCode('getViewData', [***REMOVED***, [
+        return $this->columnManager->extractCode(ViewColumnInterface::VIEW, [***REMOVED***, [
             \Gear\Column\Varchar\UniqueId::class,
             \Gear\Column\Varchar\PasswordVerify::class
         ***REMOVED***);
@@ -187,7 +188,7 @@ class ViewService extends AbstractJsonService
         $each = 6;
         $line = 0;
 
-        $code = $this->columnManager->extractCode('getViewFormElement', [***REMOVED***, [
+        $code = $this->columnManager->extractCode(ViewColumnInterface::FORM_ELEMENT, [***REMOVED***, [
             \Gear\Column\Varchar\UniqueId::class,
             \Gear\Column\Integer\PrimaryKey::class
         ***REMOVED***);
@@ -547,7 +548,7 @@ EOS;
     public function getListRowElements()
     {
         $this->rowElements = $this->columnManager->generateCode(
-            'getViewListRowElement',
+            ViewColumnInterface::LIST_ROW,
             [***REMOVED***,
             [
                 \Gear\Column\Text\Text::class,
