@@ -102,10 +102,7 @@ class ServiceServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
-        $this->factory->createFactory(
-            $data,
-            vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-        )->shouldBeCalled();
+        $this->factory->createFactory($data)->shouldBeCalled();
 
         $file = $this->service->create($data);
 
@@ -224,17 +221,8 @@ class ServiceServiceTest extends TestCase
             $this->module->map('Service')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-
-
-            if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
-                   $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
-            } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
-            }
+        if ($data->isFactory() && $data->getAbstract() == false) {
+            $this->factory->createFactory($data)->shouldBeCalled();
         }
 
         $file = $this->service->create($data);

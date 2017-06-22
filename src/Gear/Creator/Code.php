@@ -18,6 +18,10 @@ class Code extends AbstractCode implements
 {
     use ConstructorParamsTrait;
 
+    const ARRAY_SEPARATOR = ',';
+
+    const EMPTY = '';
+
     const TEMPLATE_DOCS_PARAMS = '     * @param %s $%s %s';
 
     const INDENT_CONSTRUCTOR_PARAM = '        ';
@@ -394,7 +398,7 @@ EOS;
         return $html;
     }
 
-    public function getUseConstructor($data, array $ignore = [***REMOVED***)
+    public function getUseConstructor($data, array $ignoreTrait = [***REMOVED***, array $ignoreClass = [***REMOVED***)
     {
         $this->uses = '';
 
@@ -405,14 +409,16 @@ EOS;
 
             //o argumento ignore dessa função é relativo às dependências herdadas da classe pai
             //que não precisam de Traits.
-            if (!in_array($item, $ignore) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
+            if (!in_array($item, $ignoreTrait) && !($data instanceof Controller) && $data->getType() !== 'Repository') {
                 $this->uses .= 'use '.$this->resolveNamespace($item).'Trait;'.PHP_EOL;
             }
         }
 
-        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+        if ($data->hasDependency() && $data->isFactory()) {
             foreach ($data->getDependency() as $alias => $item) {
-                $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+                if (!in_array($item, $ignoreClass)) {
+                    $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
+                }
             }
         }
 

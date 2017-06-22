@@ -2,10 +2,10 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvcTest;
-use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
-use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
+use Gear\Mvc\Service\ServiceTestColumnInterface;
+use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 
 class ServiceTestService extends AbstractMvcTest
 {
@@ -17,21 +17,17 @@ class ServiceTestService extends AbstractMvcTest
 
     const COLUMN_SCHEMA = [
         'setUp' => [
-            0 => ['getServiceSetUp' => true***REMOVED***
+            0 => [ServiceTestColumnInterface::SET_UP => true***REMOVED***
         ***REMOVED***,
         'create' => [
-            0 => ['getServiceCreateMock' => true***REMOVED***,
-            1 => ['getServiceFixtureData' => [***REMOVED******REMOVED***
+            0 => [ServiceTestColumnInterface::CREATE_MOCK => true***REMOVED***,
+            1 => [ServiceTestColumnInterface::CREATE_DATA=> [***REMOVED******REMOVED***
         ***REMOVED***,
         'update' => [
-            0 => ['getServiceUpdateMock' => true***REMOVED***,
-            1 => ['getServiceFixtureData' => [***REMOVED******REMOVED***
+            0 => [ServiceTestColumnInterface::UPDATE_MOCK => true***REMOVED***,
+            1 => [ServiceTestColumnInterface::CREATE_DATA => [***REMOVED******REMOVED***
         ***REMOVED***
     ***REMOVED***;
-
-    static protected $defaultNamespace = 'ServiceTest';
-
-    static protected $defaultLocation = null;
 
     public function getFirstString()
     {
@@ -78,8 +74,6 @@ class ServiceTestService extends AbstractMvcTest
 
         $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 
-        $this->usePrimaryKey = true;
-
         $fileCreator = $this->getFileCreator();
 
         $options = [***REMOVED***;
@@ -96,7 +90,7 @@ class ServiceTestService extends AbstractMvcTest
         /**
          * @TODO certeza que isso tá errado kkkkkkkk
          */
-        if ($this->columnManager->isAssociatedWith('Gear\\Column\\Varchar\\UploadImage')) {
+        if ($this->columnManager->isAssociatedWith(UploadImageColumn::class)) {
             $fileCreator->addChildView([
                 'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',
                 'placeholder' => 'extraColumns',
@@ -131,9 +125,10 @@ class ServiceTestService extends AbstractMvcTest
             'setUp'      => $optionsColumn['setUp'***REMOVED***[0***REMOVED***,
         ***REMOVED***;
 
-        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
-            || $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage')
-        ) {
+        $isTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
+        $isTableColumn = $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage');
+
+        if ($isTableImage || $isTableColumn) {
             $this->src->addDependency('\GearImage\Service\ImageService');
         }
 
@@ -161,8 +156,6 @@ class ServiceTestService extends AbstractMvcTest
 
     public function create(Src $src)
     {
-        static::$defaultLocation = $this->getModule()->getTestServiceFolder();
-
         $this->src = $src;
 
         $location = $this->getCodeTest()->getLocation($this->src);
