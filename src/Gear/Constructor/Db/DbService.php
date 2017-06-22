@@ -43,6 +43,8 @@ use GearJson\Db\DbService as DbSchema;
 use GearJson\Action\ActionService as ActionSchema;
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractConstructor;
+use Gear\Table\UploadImage as UploadImageTable;
+use GearJson\Service\FactoriesInterface;
 
 class DbService extends AbstractConstructor
 {
@@ -154,7 +156,7 @@ class DbService extends AbstractConstructor
         }
 
         if (!isset($params['service'***REMOVED***) || empty($params['service'***REMOVED***)) {
-            $params['service'***REMOVED*** = 'factories';
+            $params['service'***REMOVED*** = FactoriesInterface::NAME;
         }
 
         $table = $params['table'***REMOVED***;
@@ -172,7 +174,7 @@ class DbService extends AbstractConstructor
             return $db;
         }
 
-        if ($this->getTableService()->verifyTableAssociation($table, 'upload_image')) {
+        if ($this->getTableService()->verifyTableAssociation($table, UploadImageTable::NAME)) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'UploadImage');
         }
 

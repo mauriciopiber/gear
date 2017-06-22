@@ -13,6 +13,7 @@ use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Table\UploadImageTrait;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class ControllerTestService extends AbstractMvcTest implements
     ModuleConstructorInterface,
@@ -48,7 +49,7 @@ class ControllerTestService extends AbstractMvcTest implements
             'controllerVar' => $this->str('var-length', $controller->getName())
         ***REMOVED***;
 
-        if ($controller->getService() === 'factories') {
+        if ($controller->isFactory()) {
             $templateView ='factory';
 
             $options['dependency'***REMOVED*** = str_replace(
@@ -79,7 +80,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($controller->getService() == 'factories') {
+        if ($controller->isFactory()) {
             $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
         }
 
@@ -148,7 +149,7 @@ class ControllerTestService extends AbstractMvcTest implements
         $columns = $this->columnManager->getColumns();
 
         $this->hasImageColumn = $this->columnManager->isAssociatedWith(UploadImage::class);
-        $this->hasImageTable = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
+        $this->hasImageTable = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
 
         $columnsImage = [***REMOVED***;
 

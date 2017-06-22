@@ -510,7 +510,7 @@ EOS;
             }
         }
 
-        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+        if ($data->hasDependency() && $data->isFactory()) {
             foreach ($data->getDependency() as $item) {
                 $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
@@ -523,7 +523,7 @@ EOS;
     {
         $this->uses = [***REMOVED***;
 
-        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+        if ($data->hasDependency() && $data->isFactory()) {
             foreach ($data->getDependency() as $item) {
                 $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }

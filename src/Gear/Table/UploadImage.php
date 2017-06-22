@@ -29,6 +29,8 @@ class UploadImage implements ImplementsInterface
 
     use ModuleAwareTrait;
 
+    const NAME = 'upload_image';
+
     const USE_ATTRIBUTE_TRAIT = 'GearImage\Service\ImageServiceTrait';
 
     const USE_ATTRIBUTE = 'GearImage\Service\ImageService';

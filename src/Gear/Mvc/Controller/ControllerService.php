@@ -12,9 +12,8 @@ use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
 use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
-use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\DocBlockGenerator;
 use Gear\Table\UploadImageTrait;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class ControllerService extends AbstractMvc implements
     ModuleConstructorInterface,
@@ -90,7 +89,7 @@ class ControllerService extends AbstractMvc implements
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($controller->isFactory())
           ? $this->getCode()->getConstructor($controller)
           : '';
 
@@ -98,7 +97,7 @@ class ControllerService extends AbstractMvc implements
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->getService() == 'factories') {
+        if ($controller->isFactory()) {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 
@@ -132,7 +131,7 @@ class ControllerService extends AbstractMvc implements
         $this->functions = '';
         $this->hasImage = $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage');
 
-        $this->hasTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
+        $this->hasTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
 
 
 
@@ -225,7 +224,7 @@ class ControllerService extends AbstractMvc implements
             ***REMOVED***
         );
 
-        $options['constructor'***REMOVED*** = ($this->controller->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($this->controller->isFactory())
           ? $this->getCode()->getConstructor($this->controller)
           : '';
 

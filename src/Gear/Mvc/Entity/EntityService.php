@@ -37,6 +37,7 @@ use Gear\Util\Glob\GlobService;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Gear\Mvc\Entity\DoctrineServiceTrait;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class EntityService extends AbstractJsonService
 {
@@ -148,11 +149,11 @@ class EntityService extends AbstractJsonService
 
         if ($this->getTableService()->verifyTableAssociation(
             $this->str('class', $this->db->getTable()),
-            'upload_image'
+            UploadImageTable::NAME
         )
             && !is_file($this->getModule()->getEntityFolder().'/UploadImage.php')
         ) {
-            $uploadImage = $this->getTableService()->getTableObject('upload_image');
+            $uploadImage = $this->getTableService()->getTableObject(UploadImageTable::NAME);
 
             $src = $this->getSrcService()->create(
                 $this->getModule()->getModuleName(),

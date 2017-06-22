@@ -23,7 +23,7 @@ class FilterTestService extends AbstractMvcTest
         if ($this->src->getAbstract() !== true) {
             $this->getTraitTestService()->createTraitTest($src, $location);
 
-            if ($this->src->getService() == 'factories') {
+            if ($this->src->isFactory()) {
                 $this->getFactoryTestService()->createFactoryTest($src, $location);
             }
         }
@@ -294,7 +294,7 @@ class FilterTestService extends AbstractMvcTest
             ***REMOVED***
         );
 
-        if ($this->src->getService() == 'factories') {
+        if ($this->src->isFactory()) {
             $this->getFactoryTestService()->createFactoryTest($this->src);
         }
 

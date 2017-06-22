@@ -83,7 +83,7 @@ EOS;
     {
         $this->uses = [***REMOVED***;
 
-        if (!empty($data->getDependency()) && $data->getService() === 'factories') {
+        if (($data->hasDependency()) && $data->isFactory()) {
             foreach ($data->getDependency() as $aliase => $item) {
                 if (isset($item['aliase'***REMOVED***) || is_string($aliase)) {
                     continue;

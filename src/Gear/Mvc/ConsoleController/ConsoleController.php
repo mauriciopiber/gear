@@ -52,7 +52,7 @@ class ConsoleController extends AbstractMvc
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($controller->getService() == 'factories')
+        $options['constructor'***REMOVED*** = ($controller->isFactory())
           ? $this->getCode()->getConstructor($controller)
           : '';
 
@@ -68,7 +68,7 @@ class ConsoleController extends AbstractMvc
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->getService() == 'factories') {
+        if ($controller->isFactory()) {
             $this->getFactoryService()->createFactory($controller, $this->location);
         }
 

@@ -7,6 +7,7 @@ use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Db\Db;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
+use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Service\ServiceColumnInterface;
 use Gear\Mvc\Service\ServiceCodeInterface;
 use Gear\Creator\Code;
@@ -123,7 +124,7 @@ class ServiceService extends AbstractMvc
         $this->src->addDependency(['memcached' => '\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
 
         if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image')
+            $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
             || $this->columnManager->isAssociatedWith(UploadImageColumn::class)
         ) {
             $this->src->addDependency('\GearImage\Service\ImageService');
@@ -150,7 +151,7 @@ class ServiceService extends AbstractMvc
 
         $this->tableUploadImage = $this->getTableService()->verifyTableAssociation(
             $this->db->getTable(),
-            'upload_image'
+            UploadImageTable::NAME
         );
 
         $optionsColumn = $this->columnManager->generateSchema(self::COLUMN_SCHEMA);

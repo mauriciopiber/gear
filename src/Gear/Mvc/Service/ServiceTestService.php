@@ -6,6 +6,7 @@ use GearJson\Db\Db;
 use GearJson\Src\Src;
 use Gear\Mvc\Service\ServiceTestColumnInterface;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
+use Gear\Table\UploadImage as UploadImageTable;
 
 class ServiceTestService extends AbstractMvcTest
 {
@@ -109,8 +110,8 @@ class ServiceTestService extends AbstractMvcTest
             'entity'           => $this->getServiceManager()->getServiceName($this->entity),
             'firstString'      => $this->getFirstString(),
             'serviceNameClass' => $this->src->getName(),
-            'class'            => $this->str('class', str_replace('Service', '', $this->src->getName())),
-            'classUrl'         => $this->str('url', str_replace('Service', '', $this->src->getName())),
+            'class'            => $this->str('class', $this->src->getNameOff()),
+            'classUrl'         => $this->str('url', $this->src->getNameOff()),
             'module'           => $this->getModule()->getModuleName(),
             'moduleUrl'        => $this->str('url', $this->getModule()->getModuleName()),
         ***REMOVED***);
@@ -125,8 +126,8 @@ class ServiceTestService extends AbstractMvcTest
             'setUp'      => $optionsColumn['setUp'***REMOVED***[0***REMOVED***,
         ***REMOVED***;
 
-        $isTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), 'upload_image');
-        $isTableColumn = $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage');
+        $isTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
+        $isTableColumn = $this->columnManager->isAssociatedWith(UploadImageColumn::class);
 
         if ($isTableImage || $isTableColumn) {
             $this->src->addDependency('\GearImage\Service\ImageService');
