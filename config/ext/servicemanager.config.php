@@ -36,10 +36,11 @@
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
         'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
         'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager',
-        //'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
-        'Gear\Column\ColumnService' => 'Gear\Column\ColumnService',
+
+        //'Gear\Column\ColumnService' => 'Gear\Column\ColumnService',
     ***REMOVED***,
     'factories' => [
+        'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
         'Gear\Creator\Template\TemplateService' => 'Gear\Creator\Template\TemplateServiceFactory',
         'Gear\Diagnostic\Dir' => 'Gear\Diagnostic\Dir\DirServiceFactory',

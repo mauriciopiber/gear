@@ -1,32 +1,21 @@
 <?php
 namespace Gear\Column;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use \Gear\Exception\PrimaryKeyNotFoundException;
-use GearJson\Db\Db;
+use Gear\Exception\PrimaryKeyNotFoundException;
+use Gear\Column\ColumnManager;
+use Gear\Column\Int\ForeignKey;
+use Gear\Column\Int\PrimaryKey;
+use Gear\Column\Integer\Integer;
+use Gear\Column\UniqueInterface;
+use Gear\Module\ModuleAwareTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Table\TableService\TableServiceTrait;
-use Gear\Column\UniqueInterface;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Column\Exception\UndevelopedColumn;
-use Gear\Column\Exception\UndevelopedColumnPart;
-use Gear\Column\Exception\UnfoundColumnRender;
-use Gear\Column\Int\PrimaryKey;
-use Gear\Column\Int\ForeignKey;
-use Gear\Column\AbstractDateTime;
-use Gear\Column\Decimal\Decimal;
-use Gear\Column\Integer\Integer;
-use Gear\Column\TinyInt\TinyInt;
-use Gear\Column\Varchar\Varchar;
-use Gear\Column\Varchar\UniqueId;
-use Gear\Column\Varchar\PasswordVerify;
-use Gear\Column\Varchar\UploadImage;
-use Gear\Creator\FileCreator\FileCreatorTrait;
-use Gear\Column\Exception\UnfoundReference;
+use GearJson\Db\Db;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
-use Gear\Column\ColumnManager;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  *
@@ -41,20 +30,26 @@ use Gear\Column\ColumnManager;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ColumnService implements ServiceLocatorAwareInterface
+class ColumnService
 {
-    use FileCreatorTrait;
     use ModuleAwareTrait;
     use StringServiceTrait;
-    use MetadataTrait;
     use TableServiceTrait;
-    use ServiceLocatorAwareTrait;
+
+    public function __construct($module, $tableService, $stringService)
+    {
+        $this->module = $module;
+        $this->stringService = $stringService;
+        $this->tableService = $tableService;
+    }
 
     const NAMESPACE = 'Gear\\Column';
 
-    const FOREIGN_KEY = '';
+    const BASE = '%s\\%s\\%s';
 
-    const PRIMARY_KEY = '';
+    const FOREIGN_KEY = 'ForeignKey';
+
+    const PRIMARY_KEY = 'PrimaryKey';
 
     protected $columns = [***REMOVED***;
 
@@ -88,21 +83,18 @@ class ColumnService implements ServiceLocatorAwareInterface
      */
     public function getColumns(Db $db = null, $all = false, array $include = [***REMOVED***)
     {
-        if (empty($this->columns) && $db == null) {
+        if ($db == null) {
             throw new \Exception('Missing config');
         }
 
-        unset($this->columns);
-
-        $metadata = $this->getMetadata();
-
-        $this->tableName    = $this->str('class', $db->getTable());
-        $this->tableColumns = $metadata->getColumns($this->str('uline', $this->tableName));
-        $this->dbColumns    = $db->getColumns();
+        $this->db =         $db;
+        $this->tableName    = $this->str('class', $this->db->getTable());
+        $this->tableColumns = $this->getTableService()->getColumns($this->db->getTable());
+        $this->dbColumns    = $this->db->getColumns();
 
         //var_dump($this->tableName);
         //var_dump(count($this->tableColumns));
-        $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($db->getTable());
+        $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($this->db->getTable());
 
         if (!$this->tablePrimaryKey) {
             throw new PrimaryKeyNotFoundException();
@@ -115,7 +107,7 @@ class ColumnService implements ServiceLocatorAwareInterface
                 }
             }
 
-            $instance = $this->factory($column, $db);
+            $instance = $this->factory($column, $this->db);
 
             $this->columns[***REMOVED***  = $instance;
         }
@@ -143,6 +135,12 @@ class ColumnService implements ServiceLocatorAwareInterface
         return $this->str('class', $word);
     }
 
+    public function isPrimaryKey(ColumnObject $column)
+    {
+        return in_array($column->getName(), $this->tablePrimaryKey->getColumns());
+
+    }
+
     /**
      * Transforma uma metadata de coluna simples em Gear\Column.
      *
@@ -151,60 +149,80 @@ class ColumnService implements ServiceLocatorAwareInterface
      *
      * @return \Gear\Column\UniqueInterface|unknown
      */
-    private function factory($column, $db)
+    private function factory($column)
     {
+
         $dataType = $this->mapDataType($this->str('class', $column->getDataType()));
 
-        $specialityName = (array_key_exists($column->getName(), $this->dbColumns))
-            ? $this->dbColumns[$column->getName()***REMOVED***
-            : null;
-
-        $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($db->getTable(), $column);
-
         //primary key
-        if (in_array($column->getName(), $this->tablePrimaryKey->getColumns())) {
-            $class = self::NAMESPACE.'\\'.$dataType.'\\PrimaryKey';
-            $instance = new $class($column, $this->tablePrimaryKey);
+        if ($this->isPrimaryKey($column)) {
+            $className = sprintf(self::BASE, self::NAMESPACE, $dataType, self::PRIMARY_KEY);
+
+            $instance = new $className($column, $this->tablePrimaryKey);
+
+            return $this->addDependency($instance, $column);
             //foreign key
-        } elseif ($columnConstraint != null) {
-            $class = self::NAMESPACE.'\\'.$dataType.'\\ForeignKey';
+        }
+
+        $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn($this->db->getTable(), $column);
+
+        if ($columnConstraint != null) {
+            $class = sprintf(self::BASE, self::NAMESPACE, $dataType, self::FOREIGN_KEY);
 
             $referencedTable = $this->getTableService()->getReferencedTableValidColumnName(
                 $columnConstraint->getReferencedTableName()
             );
 
             $instance = new $class($column, $columnConstraint, $referencedTable);
-            //$instance->setModuleName($this->getModule()->getModuleName());
-            //$instance->setTableService($this->getTableService());
 
-
+            return $this->addDependency($instance, $column);
             //standard
-        } elseif ($specialityName == null) {
-            $class = self::NAMESPACE.'\\'.$dataType.'\\'.$dataType;
-
-            if (class_exists($class) === false) {
-                throw new UndevelopedColumn($class);
-            }
-
-            $instance = new $class($column);
-
-            //speciality
-        } else {
-            $className = $this->str('class', str_replace(' ', '', $specialityName));
-            $class = self::NAMESPACE.'\\'.$dataType.'\\'.$className;
-            if (class_exists($class) === false) {
-                throw new UndevelopedColumn($class);
-            }
-            $instance = new $class($column);
         }
 
+        $specialityName = (array_key_exists($column->getName(), $this->dbColumns))
+            ? $this->dbColumns[$column->getName()***REMOVED***
+            : null;
+
+        if ($specialityName !== null) {
+
+            $className = $this->str('class', str_replace(' ', '', $specialityName));
+
+            $class = sprintf(self::BASE, self::NAMESPACE, $dataType, $className);
+
+            if (class_exists($class) === false) {
+                throw new UndevelopedColumn($class);
+            }
+
+            $instance = new $class($column);
+
+            return $this->addDependency($instance, $column);
+        }
+
+        $class = sprintf(self::BASE, self::NAMESPACE, $dataType, $dataType);
+
+
+        if (class_exists($class) === false) {
+            throw new UndevelopedColumn($class);
+        }
+
+        $instance = new $class($column);
+
+            //speciality
+        return $this->addDependency($instance, $column);
+
         //$instance->setServiceLocator($this->getServiceLocator());
+
+    }
+
+    public function addDependency($instance, $column)
+    {
         $instance->setModule($this->getModule());
         $instance->setStringService($this->getStringService());
 
 
         if ($instance instanceof UniqueInterface) {
-            $uniqueConstraint = $this->getTableService()->getUniqueConstraintFromColumn($db->getTable(), $column);
+            $uniqueConstraint = $this->getTableService()
+                ->getUniqueConstraintFromColumn($this->db->getTable(), $column);
 
             if ($uniqueConstraint instanceof ConstraintObject) {
                 $instance->setUniqueConstraint($uniqueConstraint);

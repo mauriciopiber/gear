@@ -128,25 +128,6 @@ class ViewService extends AbstractJsonService
 
     public function getViewValues($action)
     {
-        /*
-
-        $names = [***REMOVED***;
-
-        $this->tableName = $this->str('class', $action->getController()->getNameOff());
-        $data = $this->getColumnService()->getColumns($this->db);
-
-        foreach ($data as $columnData) {
-            if ($columnData instanceof \Gear\Column\Varchar\UniqueId ||
-                $columnData instanceof \Gear\Column\Varchar\PasswordVerify
-            ) {
-                continue;
-            }
-
-            $names[***REMOVED*** = $columnData->getViewData();
-        }
-        return $names;
-        */
-
         return $this->columnManager->extractCode(ViewColumnInterface::VIEW, [***REMOVED***, [
             \Gear\Column\Varchar\UniqueId::class,
             \Gear\Column\Varchar\PasswordVerify::class

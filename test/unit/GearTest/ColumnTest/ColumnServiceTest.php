@@ -25,12 +25,12 @@ class ColumnServiceTest extends TestCase
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->string = new StringService();
 
-        $this->column = new ColumnService();
-        $this->column->setStringService($this->string);
-        $this->column->setTableService($this->tableService->reveal());
-        $this->column->setMetadata($this->metadata->reveal());
-        $this->column->setServiceLocator($this->serviceLocator);
-        $this->column->setModule($this->module->reveal());
+        $this->column = new ColumnService(
+            $this->module->reveal(),
+            $this->tableService->reveal(),
+            $this->string
+        );
+
     }
 
     public function testFactoryColumnsException()
@@ -80,13 +80,13 @@ class ColumnServiceTest extends TestCase
 
         $columns[***REMOVED*** = $column01->reveal();
 
-        $this->metadata->getColumns($this->tableName)->willReturn($columns)->shouldBeCalled();
+        $this->tableService->getColumns($this->tableName)->willReturn($columns)->shouldBeCalled();
 
         $this->tableService->getPrimaryKey($this->tableName)->willReturn($pkey->reveal())->shouldBeCalled();
 
-        $this->tableService->getConstraintForeignKeyFromColumn($this->tableName, $column01)
-          ->willReturn(null)
-          ->shouldBeCalled();
+        //$this->tableService->getConstraintForeignKeyFromColumn($this->tableName, $column01)
+        //  ->willReturn(null)
+        //  ->shouldBeCalled();
 
         $this->tableService->getUniqueConstraintFromColumn($this->tableName, $column01)
           ->willReturn(null)

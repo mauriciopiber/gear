@@ -29,9 +29,10 @@ class ColumnServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new ColumnService(
+        return new ColumnService(
+            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('Gear\Table\TableService'),
+            $serviceLocator->get('GearBase\Util\String')
         );
-        unset($serviceLocator);
-        return $factory;
     }
 }
