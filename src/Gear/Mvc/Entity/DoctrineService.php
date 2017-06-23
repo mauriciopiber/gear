@@ -56,16 +56,4 @@ class DoctrineService extends ScriptService
         $cmd .= sprintf(' %s --generate-annotations=true', $entityDir);
         return $cmd;
     }
-
-    /**
-     * @deprecated As funções de Criar Entity pelo módulo serão removidas na versão 1.0.0
-     *
-     * @return string
-     */
-    public function getOrmValidateSchema()
-    {
-        $cmd = '';
-        $cmd .= '../../vendor/bin/doctrine-module orm:validate-schema';
-        return $cmd;
-    }
 }

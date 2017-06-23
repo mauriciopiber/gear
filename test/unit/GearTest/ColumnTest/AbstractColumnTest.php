@@ -102,7 +102,7 @@ class AbstractColumnTest extends AbstractTestCase
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
         $this->abstractColumn->setColumn($this->column->reveal());
 
-        $text = $this->abstractColumn->getIntegrationActionExpectValue(54);
+        $text = $this->abstractColumn->getIntegrationActionExpectValue(['default' => 54***REMOVED***);
 
         $this->assertEquals('E eu vejo o valor "54My Column" no campo "My Column"', trim($text));
     }

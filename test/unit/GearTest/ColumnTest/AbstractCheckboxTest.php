@@ -38,14 +38,14 @@ class AbstractCheckboxTest extends AbstractTestCase
 
     public function testIntegrationActionExpectedValuesNo()
     {
-        $text = $this->abstractCheckbox->getIntegrationActionExpectValue(54);
+        $text = $this->abstractCheckbox->getIntegrationActionExpectValue(['default' => 54***REMOVED***);
 
         $this->assertEquals('E eu vejo desmarcada a caixa de escolha "My Column"', trim($text));
     }
 
     public function testIntegrationActionExpectedValuesYes()
     {
-        $text = $this->abstractCheckbox->getIntegrationActionExpectValue(55);
+        $text = $this->abstractCheckbox->getIntegrationActionExpectValue(['default' => 55***REMOVED***);
 
         $this->assertEquals('E eu vejo marcada a caixa de escolha "My Column"', trim($text));
     }

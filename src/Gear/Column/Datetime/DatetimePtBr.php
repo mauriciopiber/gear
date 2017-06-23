@@ -2,7 +2,6 @@
 namespace Gear\Column\Datetime;
 
 use Gear\Column\Datetime\Datetime;
-use Gear\Column\Mvc\SearchFormInterface;
 
 /**
  *
@@ -17,7 +16,7 @@ use Gear\Column\Mvc\SearchFormInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class DatetimePtBr extends Datetime implements SearchFormInterface
+class DatetimePtBr extends Datetime
 {
     /**
      * @param ColumnObject $column Coluna

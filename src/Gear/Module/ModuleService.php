@@ -887,26 +887,6 @@ class ModuleService implements ModuleProjectConnectorInterface
     }
 
     /**
-     * Cria css para módulo
-     *
-     * @deprecated
-     */
-    public function moduleCss()
-    {
-        $cssName = sprintf('%s.css', $this->str('point', $this->getModule()->getModuleName()));
-
-        return $this->getFileCreator()->createFile(
-            'template/module/public/css/empty-css.phtml',
-            [***REMOVED***,
-            $cssName,
-            $this->getModule()->getPublicCssFolder()
-        );
-    }
-
-
-
-
-    /**
      * Cria aliase para usar o modulo tanto como PSR-0 como parte do projeto, localizado em Module.php
      *
      * @return string

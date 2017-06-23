@@ -2,23 +2,6 @@
 namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar\Varchar;
-use Gear\Column\ImplementsInterface;
-use Gear\Column\Mvc\ServiceAwareInterface;
-use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
-use Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface;
-use Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceCreateMock;
-use Gear\Mvc\Service\ColumnInterface\ServiceUpdateMock;
-use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceCreateAfterInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceUpdateAfterInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface;
-use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
-use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
-use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 
 /**
  * Cria um upload file de imagens.
@@ -33,24 +16,7 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UploadImage extends Varchar implements
-    GetFixtureTopInterface,
-    //ServiceAwareInterface,
-    ImplementsInterface,
-    FilterValidPostInterface,
-    FilterFunctionInterface,
-    ServiceCreateMock,
-    ServiceUpdateMock,
-    ServiceCreateBeforeInterface,
-    ServiceUpdateBeforeInterface,
-    ServiceCreateAfterInterface,
-    ServiceUpdateAfterInterface,
-    ServiceDeleteInterface,
-    ControllerSetUpInterface,
-    ControllerCreateAfterInterface,
-    ControllerCreateViewInterface,
-    ServiceSetUpInterface,
-    ServiceFixtureDataInterface
+class UploadImage extends Varchar
 {
     protected $settings;
 
@@ -78,7 +44,6 @@ class UploadImage extends Varchar implements
     }
 
     /**
-     * @deprecated
      *
      * {@inheritDoc}
      * @see \Gear\Mvc\Service\ColumnInterface\ServiceSetUpInterface::getServiceSetUp()
@@ -96,7 +61,6 @@ EOS;
     }
 
     /**
-     * @deprecated
      *
      * {@inheritDoc}
      * @see \Gear\Mvc\Service\ColumnInterface\ServiceFixtureDataInterface::getServiceFixtureData()
@@ -112,7 +76,6 @@ EOS;
     }
 
     /**
-     * @deprecated
      *
      * Cria a configuração do Form para Upload de Image nos Controllers.
      */
@@ -517,35 +480,6 @@ EOS;
 
 EOS;
     }
-
-    /**
-     * Retorna a classe que deve ser implementada em cada recurso em Gear\Mvc\Fixture\FixtureService
-     *
-     * {@inheritDoc}
-     * @see \Gear\Column\ImplementsInterface::getImplements()
-     *
-     * @param string $codeName Nome do Src.
-     *
-     * @return string
-     */
-    public function getImplements($codeName)
-    {
-        $implements = [
-            'Service' => [
-                'GearImage\Service\ImagemServiceTrait'
-            ***REMOVED***,
-            'Fixture' => [
-                [
-                    'class' => '\GearImage\Fixture',
-                    'expand' => false
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
-
-        return $implements[$codeName***REMOVED***;
-    }
-
-
 
     /**
      * Replica a chamada de ServiceInsertBody

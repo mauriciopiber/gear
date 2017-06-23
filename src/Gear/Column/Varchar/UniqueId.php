@@ -2,13 +2,7 @@
 namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar\Varchar;
-//use Gear\Column\Mvc\ServiceAwareInterface;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
 
-//use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
  *
@@ -23,12 +17,9 @@ use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UniqueId extends Varchar implements
-    RepositoryInsertBeforeInterface,
-    RepositoryUpdateBeforeInterface,
-    RepositoryInsertTestInterface,
-    RepositoryUpdateTestInterface
+class UniqueId extends Varchar
 {
+
     protected $uniqueId;
 
 

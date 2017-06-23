@@ -3,6 +3,7 @@ namespace Gear\Column;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use \Gear\Exception\PrimaryKeyNotFoundException;
 use GearJson\Db\Db;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Table\TableService\TableServiceTrait;
@@ -49,73 +50,14 @@ class ColumnService implements ServiceLocatorAwareInterface
     use TableServiceTrait;
     use ServiceLocatorAwareTrait;
 
+    const NAMESPACE = 'Gear\\Column';
+
+    const FOREIGN_KEY = '';
+
+    const PRIMARY_KEY = '';
+
     protected $columns = [***REMOVED***;
 
-    protected $cache;
-
-    /**
-     * Pega o cache para utilizar
-     *
-     * @return void
-     */
-    public function getCache()
-    {
-        if (!isset($this->cache)) {
-            $this->cache = $this->getServiceLocator()->get('memcached');
-        }
-        return $this->cache;
-    }
-
-    /**
-     * Adiciona a referência de uma coluna ao cache.
-     *
-     * @param string $columnName  Nome da Coluna
-     * @param string $valueAssert Valor
-     *
-     * @return boolean
-     */
-    public function addValue($columnName, $valueAssert)
-    {
-        if ($this->getCache()->hasItem($columnName)) {
-            return $this->getCache()->replaceItem($columnName, $valueAssert);
-        }
-
-        $this->getCache()->addItem($columnName, $valueAssert);
-
-        return true;
-    }
-
-    /**
-     * Remove a referência a uma coluna no cache.
-     *
-     * @param string $columnName Nome da Coluna
-     *
-     * @return boolean
-     */
-    public function removeValue($columnName)
-    {
-        if ($this->getCache()->hasItem($columnName)) {
-            $this->getCache()->removeItem($columnName);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Pega o valor de uma determinada Coluna
-     *
-     * @param string $columnName Nome da Coluna
-     *
-     * @return boolean
-     */
-    public function getValue($columnName)
-    {
-        if ($this->getCache()->hasItem($columnName)) {
-            return $this->getCache()->getItem($columnName);
-        }
-
-        return false;
-    }
 
     public function excludeList()
     {
@@ -163,7 +105,7 @@ class ColumnService implements ServiceLocatorAwareInterface
         $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($db->getTable());
 
         if (!$this->tablePrimaryKey) {
-            throw new \Gear\Exception\PrimaryKeyNotFoundException();
+            throw new PrimaryKeyNotFoundException();
         }
 
         foreach ($this->tableColumns as $column) {
@@ -211,8 +153,6 @@ class ColumnService implements ServiceLocatorAwareInterface
      */
     private function factory($column, $db)
     {
-        $defaultNamespace = 'Gear\\Column';
-
         $dataType = $this->mapDataType($this->str('class', $column->getDataType()));
 
         $specialityName = (array_key_exists($column->getName(), $this->dbColumns))
@@ -223,17 +163,24 @@ class ColumnService implements ServiceLocatorAwareInterface
 
         //primary key
         if (in_array($column->getName(), $this->tablePrimaryKey->getColumns())) {
-            $class = $defaultNamespace.'\\'.$dataType.'\\PrimaryKey';
+            $class = self::NAMESPACE.'\\'.$dataType.'\\PrimaryKey';
             $instance = new $class($column, $this->tablePrimaryKey);
             //foreign key
         } elseif ($columnConstraint != null) {
-            $class = $defaultNamespace.'\\'.$dataType.'\\ForeignKey';
-            $instance = new $class($column, $columnConstraint);
-            $instance->setModuleName($this->getModule()->getModuleName());
+            $class = self::NAMESPACE.'\\'.$dataType.'\\ForeignKey';
+
+            $referencedTable = $this->getTableService()->getReferencedTableValidColumnName(
+                $columnConstraint->getReferencedTableName()
+            );
+
+            $instance = new $class($column, $columnConstraint, $referencedTable);
+            //$instance->setModuleName($this->getModule()->getModuleName());
+            //$instance->setTableService($this->getTableService());
+
 
             //standard
         } elseif ($specialityName == null) {
-            $class = $defaultNamespace.'\\'.$dataType.'\\'.$dataType;
+            $class = self::NAMESPACE.'\\'.$dataType.'\\'.$dataType;
 
             if (class_exists($class) === false) {
                 throw new UndevelopedColumn($class);
@@ -244,15 +191,16 @@ class ColumnService implements ServiceLocatorAwareInterface
             //speciality
         } else {
             $className = $this->str('class', str_replace(' ', '', $specialityName));
-            $class = $defaultNamespace.'\\'.$dataType.'\\'.$className;
+            $class = self::NAMESPACE.'\\'.$dataType.'\\'.$className;
             if (class_exists($class) === false) {
                 throw new UndevelopedColumn($class);
             }
             $instance = new $class($column);
         }
 
-        $instance->setServiceLocator($this->getServiceLocator());
+        //$instance->setServiceLocator($this->getServiceLocator());
         $instance->setModule($this->getModule());
+        $instance->setStringService($this->getStringService());
 
 
         if ($instance instanceof UniqueInterface) {
@@ -264,80 +212,5 @@ class ColumnService implements ServiceLocatorAwareInterface
         }
 
         return $instance;
-    }
-
-    /**
-     * Verifica se determinado tipo de Coluna está relacionado ao DB.
-     *
-     * @param GearJson\Db\Db $db         Mvc
-     * @param string         $columnName Nome da Coluna
-     * @return boolean
-     */
-    public function verifyColumnAssociation($db, $columnName)
-    {
-        $has = false;
-
-        foreach ($this->getColumns($db) as $column) {
-            if ($columnName === get_class($column)) {
-                $has = true;
-            }
-        }
-
-        return $has;
-    }
-
-    /**
-     * Pega as colunas de determinado tipo
-     *
-     * @param GearJson\Db\Db $db         Mvc
-     * @param string         $columnName Nome da Coluna
-     * @return unknown[***REMOVED***
-     */
-    public function getSpecifiedColumns($db, $columnName)
-    {
-        $columns = $this->getColumns($db);
-
-
-        $specified = [***REMOVED***;
-
-        foreach ($columns as $column) {
-            if ($this->isClass($column, $columnName)) {
-                $specified[***REMOVED*** = $column;
-            }
-        }
-
-        return $specified;
-    }
-
-    /**
-     * Verifica se determinado objeto é de determinada classe
-     *
-     * @param AbstractColumn $columnData Coluna
-     * @param string         $class      Nome da Classe
-     *
-     * @return boolean
-     */
-    private function isClass($columnData, $class)
-    {
-        return in_array(
-            get_class($columnData),
-            array($class)
-        );
-    }
-
-    /**
-     * Verifica se coluna pertence a um conjunto de classes
-     *
-     * @param AbstractColumn $columnData Objeto da Coluna
-     * @param array          $class      Array com o nome das classes
-     *
-     * @return boolean
-     */
-    public function filter($columnData, array $class)
-    {
-        return in_array(
-            get_class($columnData),
-            $class
-        );
     }
 }

@@ -2,7 +2,6 @@
 namespace Gear\Column\Decimal;
 
 use Gear\Column\AbstractColumn;
-use Gear\Column\Mvc\SearchFormInterface;
 
 /**
  *
@@ -17,7 +16,7 @@ use Gear\Column\Mvc\SearchFormInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class Decimal extends AbstractColumn implements SearchFormInterface
+class Decimal extends AbstractColumn
 {
     protected $reference;
 
