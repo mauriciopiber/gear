@@ -56,6 +56,11 @@ class ForeignKey extends Integer
         $this->referencedColumn = $referencedColumn;
     }
 
+    public function getReferencedColumn()
+    {
+        return $this->referencedColumn;
+    }
+
     public function getEntityDataProvider()
     {
         return sprintf('                $%s', $this->str('var', $this->getColumn()->getName()));
@@ -198,13 +203,9 @@ EOS;
      */
     public function getValue($iterator)
     {
-        $columName = $this->getTableService()->getReferencedTableValidColumnName(
-            $this->constraint->getReferencedTableName()
-        );
-
         $iterator = $this->getValidForeignKeyId($iterator);
 
-        $text = sprintf('%d'.$this->str('label', $columName), $iterator);
+        $text = sprintf('%d'.$this->str('label', $this->referencedColumn), $iterator);
 
         return $text;
     }
@@ -278,6 +279,7 @@ EOS;
      */
     public function getViewData()
     {
+        /*
         $schema = $this->getMetadata();
         $referencedTable = $this->constraint->getReferencedTableName();
 
@@ -293,9 +295,20 @@ EOS;
             $get = $this->str('class', $this->column->getName());
         }
 
+
+
         return $this->getViewColumnLayout(
             $this->str('label', $this->column->getName()),
             sprintf('$this->%s->get%s()', $this->str('var', $this->column->getName()), $get)
+        );
+        */
+
+        $method = $this->str('class', $this->referencedColumn);
+        //}
+
+        return $this->getViewColumnLayout(
+            $this->str('label', $this->column->getName()),
+            sprintf('$this->%s->get%s()', $this->str('var', $this->column->getName()), $method)
         );
     }
 
@@ -360,11 +373,7 @@ EOS;
         $module = $this->getModuleName();
         $entity = $this->str('class', $this->getReferencedTableName());
 
-        $column = $this->getTableService()->getReferencedTableValidColumnName(
-            $this->constraint->getReferencedTableName()
-        );
-
-        $property = $this->str('var', $column);
+        $property = $this->str('var', $this->referencedColumn);
 
 
         $element = <<<EOS
@@ -407,11 +416,7 @@ EOS;
 
         $entity = $this->str('class', $this->getReferencedTableName());
 
-        $column = $this->getTableService()->getReferencedTableValidColumnName(
-            $this->constraint->getReferencedTableName()
-        );
-
-        $entityFunction = $this->str('var', $column);
+        $entityFunction = $this->str('var', $this->referencedColumn);
 
         $element = <<<EOS
 
@@ -493,11 +498,7 @@ EOS;
 
         $tableVar = $this->str('var', $this->column->getTableName());
 
-        $column = $this->getTableService()->getReferencedTableValidColumnName(
-            $this->constraint->getReferencedTableName()
-        );
-
-        $enti = $this->str('var', $column);
+        $enti = $this->str('var', $this->referencedColumn);
 
         $php = "<span ng-bind=\"{$tableVar}.{$elem} != '' ? {$tableVar}.{$elem}.{$enti} : ''\"></span>";
 

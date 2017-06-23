@@ -1,15 +1,16 @@
 <?php
 namespace GearTest\ColumnTest\IntTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Column\Integer\ForeignKey;
+use GearBase\Util\String\StringService;
 
 /**
  * @group AbstractColumn
  * @group Column\Int
  * @group Column\Integer\ForeignKey
  */
-class ForeignKeyTest extends AbstractTestCase
+class ForeignKeyTest extends TestCase
 {
     public function setUp()
     {
@@ -45,19 +46,13 @@ class ForeignKeyTest extends AbstractTestCase
     }
 
     /**
+     * @group x1
      * @dataProvider valuesView
      */
     public function testGetValueView($iterator, $expected)
     {
-        $this->constraint->getReferencedTableName()->willReturn('my_table')->shouldBeCalled();
-
-        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
-        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
-
-
-        $tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $tableService->getReferencedTableValidColumnName('my_table')->willReturn('my_dep')->shouldBeCalled();
-        $this->foreignKey->setTableService($tableService->reveal());
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal(), 'my_dep');
+        $this->foreignKey->setStringService(new StringService());
 
         $value = $this->foreignKey->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -68,8 +63,8 @@ class ForeignKeyTest extends AbstractTestCase
      */
     public function testGetValueDb($iterator, $expected)
     {
-        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
-        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal(), null);
+        $this->foreignKey->setStringService(new StringService());
 
         $value = $this->foreignKey->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
@@ -80,8 +75,8 @@ class ForeignKeyTest extends AbstractTestCase
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
         $this->column->isNullable()->willReturn(true)->shouldBeCalled();
 
-        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal());
-        $this->foreignKey->setStringService(new \GearBase\Util\String\StringService());
+        $this->foreignKey = new ForeignKey($this->column->reveal(), $this->constraint->reveal(), null);
+        $this->foreignKey->setStringService(new StringService());
 
 
         $text = $this->foreignKey->getIntegrationActionIsNullable();

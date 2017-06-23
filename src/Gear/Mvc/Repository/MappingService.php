@@ -143,8 +143,8 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
-            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
-            $tableReference = $tableReference->getReferencedTableName();
+            //$tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
+            $tableReference = $columnData->getConstraint()->getReferencedTableName();
 
             $this->aliase = strtolower($this->extractAliaseFromTableName($tableReference));
 
@@ -165,8 +165,7 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
-            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
-            $tableReference = $tableReference->getReferencedTableName();
+            $tableReference = $columnData->getConstraint()->getReferencedTableName();
 
             if ($column->getName() == 'created_by' && $tableReference == 'user') {
                 $this->tableName = $this->convertBooleanToString(false);
@@ -204,7 +203,7 @@ class MappingService extends AbstractJsonService
             $tableReference = $tableReference->getReferencedTableName();
 
             $refColumn = $this->getTableService()->getReferencedTableValidColumnName($tableReference);
-            $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $refColumn));
+            $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $columnData->getReferencedColumn()));
 
             return $this;
         }
