@@ -2,7 +2,6 @@
 namespace Gear\Column\Date;
 
 use Gear\Column\Datetime\AbstractDateTime;
-use Gear\Column\Mvc\SearchFormInterface;
 
 /**
  *
@@ -17,7 +16,7 @@ use Gear\Column\Mvc\SearchFormInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class Date extends AbstractDateTime implements SearchFormInterface
+class Date extends AbstractDateTime
 {
     /**
      * @param ColumnObject $column Coluna
@@ -84,12 +83,13 @@ class Date extends AbstractDateTime implements SearchFormInterface
 
         $time = sprintf('%04d-%02d-%02d', $ano, $mes, $dia);
 
+        $template = '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d\', \'%s\'),'.PHP_EOL;
 
         return sprintf(
-            '                \'%s\' => \DateTime::createFromFormat(\'Y-m-d\', \'%s\'),',
+            $template,
             $this->str('var', $this->column->getName()),
             $time
-        ).PHP_EOL;
+        );
     }
 
     /**

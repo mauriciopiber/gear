@@ -4,7 +4,6 @@ namespace Gear\Column\Integer;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Integer\Integer;
-use Gear\Column\Mvc\SearchFormInterface;
 
 /**
  * Classe que cria as colunas associadas a outras colunas em N-1
@@ -18,7 +17,7 @@ use Gear\Column\Mvc\SearchFormInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ForeignKey extends Integer implements SearchFormInterface
+class ForeignKey extends Integer
 {
     protected $constraint;
 
@@ -36,7 +35,7 @@ class ForeignKey extends Integer implements SearchFormInterface
      * @throws \Gear\Exception\InvalidDataTypeColumnException
      * @throws \Gear\Exception\InvalidForeignKeyException
      */
-    public function __construct(ColumnObject $column, ConstraintObject $constraint)
+    public function __construct(ColumnObject $column, ConstraintObject $constraint, $referencedColumn)
     {
         if ($column->getDataType() !== 'int') {
             throw new \Gear\Exception\InvalidDataTypeColumnException();
@@ -54,21 +53,11 @@ class ForeignKey extends Integer implements SearchFormInterface
         parent::__construct($column);
 
         $this->constraint = $constraint;
+        $this->referencedColumn = $referencedColumn;
     }
 
     public function getEntityDataProvider()
     {
-        /*
-        $foreignKey = $this->getTableService()->getConstraintForeignKeyFromColumn(
-            $this->getColumn()->getTableName(),
-            $this->getColumn()
-        );
-        */
-
-        //$referencedTable = $this->constraint->getReferencedTableName();
-
-        //$columnName = $this->str('class', $referencedTable). $this->str('class', $this->getColumn()->getName());
-
         return sprintf('                $%s', $this->str('var', $this->getColumn()->getName()));
     }
 

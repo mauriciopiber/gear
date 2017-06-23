@@ -1,10 +1,11 @@
 <?php
 namespace Gear\Column;
 
-use Gear\Service\AbstractJsonService;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Gear\Column\UniqueInterface;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\Util\String\StringServiceTrait;
 
 /**
  *
@@ -22,8 +23,12 @@ use Gear\Column\UniqueInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-abstract class AbstractColumn extends AbstractJsonService implements UniqueInterface
+abstract class AbstractColumn implements UniqueInterface
 {
+    use ModuleAwareTrait;
+
+    use StringServiceTrait;
+
     protected $column;
 
     protected $serviceLocator;

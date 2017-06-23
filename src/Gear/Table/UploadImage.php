@@ -3,7 +3,6 @@ namespace Gear\Table;
 
 use GearBase\Util\String\StringService;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Column\ImplementsInterface;
 use Gear\Module\BasicModuleStructure;
 use Gear\Module\ModuleAwareTrait;
 
@@ -23,7 +22,7 @@ use Gear\Module\ModuleAwareTrait;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class UploadImage implements ImplementsInterface
+class UploadImage
 {
     use StringServiceTrait;
 

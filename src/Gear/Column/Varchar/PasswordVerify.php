@@ -2,12 +2,6 @@
 namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar\Varchar;
-use Gear\Column\Mvc\ControllerInterface;
-use Gear\Column\Mvc\ServiceAwareInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceCreateBeforeInterface;
-use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
-
-//use Gear\Mvc\Service\ColumnInterface\ServiceDeleteInterface;
 
 /**
  *
@@ -22,13 +16,9 @@ use Gear\Mvc\Service\ColumnInterface\ServiceUpdateBeforeInterface;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class PasswordVerify extends Varchar implements
-//    ServiceAwareInterface,
-    ControllerInterface,
-    ServiceCreateBeforeInterface,
-    ServiceUpdateBeforeInterface
-    //ServiceDeleteInterface
+class PasswordVerify extends Varchar
 {
+
     const PASSWORD = '$2y$14$fsnuvWLBU4JH1ygNyGQAn.r2FvXNKD/RwcDj0Zcpmoj5CW6.RfLHG';
 
     /**
