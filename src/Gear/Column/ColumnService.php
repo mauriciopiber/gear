@@ -87,6 +87,9 @@ class ColumnService
             throw new \Exception('Missing config');
         }
 
+        unset($this->columns);
+        $this->columns = [***REMOVED***;
+
         $this->db =         $db;
         $this->tableName    = $this->str('class', $this->db->getTable());
         $this->tableColumns = $this->getTableService()->getColumns($this->db->getTable());

@@ -98,6 +98,7 @@
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory'
     ***REMOVED***,
     'shared' => [
+        'Gear\Column\ColumnService' => false,
         'Gear\Generator\Code\UseStack' => false
     ***REMOVED***
 ***REMOVED***;

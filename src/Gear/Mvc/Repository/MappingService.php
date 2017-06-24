@@ -199,10 +199,7 @@ class MappingService extends AbstractJsonService
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
-            $tableReference = $this->getTableService()->getConstraintForeignKeyFromColumn($this->tableTwoName, $column);
-            $tableReference = $tableReference->getReferencedTableName();
 
-            $refColumn = $this->getTableService()->getReferencedTableValidColumnName($tableReference);
             $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $columnData->getReferencedColumn()));
 
             return $this;
