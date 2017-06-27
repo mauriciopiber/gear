@@ -120,6 +120,7 @@ class Date extends AbstractDateTime
         $elementName = $this->str('var', $this->column->getName());
         $label       = $this->str('label', $this->column->getName());
 
+
         $element = <<<EOS
         \${$var} = new Element\Date('{$elementName}');
         \${$var}->setAttributes(array(

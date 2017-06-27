@@ -90,16 +90,9 @@ trait AllColumnsDbUniqueTableTrait
 
         $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnUnique('table', 'id_foreign_key_column_unique', 'int'),
-            $this->prophesizeForeignKeyUnique('table', 'id_foreign_key_column_unique', 'FOREIGN KEY', 'foreign_key_column_unique')
+            $this->prophesizeForeignKeyUnique('table', 'id_foreign_key_column_unique', 'FOREIGN KEY', 'foreign_key_column_unique'),
+            'foreign_key_column_unique'
         );
-
-
-
-        $schema = $this->prophesize('Gear\Table\TableService\TableService');
-        $schema->getReferencedTableValidColumnName('foreign_key_column_unique')
-        ->willReturn('foreign_key_column_unique');
-
-        $foreignKey->setTableService($schema->reveal());
 
         $columns[9***REMOVED*** = $foreignKey;
         $columns[9***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'id_foreign_key_column_unique'));

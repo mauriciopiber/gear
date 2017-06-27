@@ -56,6 +56,15 @@ class ForeignKey extends Integer
         $this->referencedColumn = $referencedColumn;
     }
 
+    public function getFixtureEntitySetters()
+    {
+        if ($this->constraint->getReferencedTableName() == $this->column->getTableName()) {
+            return '';
+        }
+
+        return parent::getFixtureEntitySetters();
+    }
+
     public function getReferencedColumn()
     {
         return $this->referencedColumn;
@@ -219,6 +228,19 @@ EOS;
      */
     public function getFixtureData($iterator)
     {
+        if ($this->column->getTableName() === $this->constraint->getReferencedTableName()) {
+            return '';
+        }
+
+        $columns = $this->constraint->getReferencedColumns();
+
+        if ($this->column->getTableName() != $this->constraint->getReferencedTableName()
+            && $this->constraint->getReferencedTableName() == 'user'
+            && in_array('id_user', $columns)
+        ) {
+            return $columnData->getFixtureUser($iterator);
+        }
+
         $template = <<<EOS
                 '%s' =>
                     \$this->getReference('%s-%d'),

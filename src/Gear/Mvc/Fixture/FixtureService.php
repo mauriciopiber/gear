@@ -27,6 +27,7 @@ use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
+use Gear\Mvc\Fixture\FixtureColumnInterface;
 
 class FixtureService extends AbstractMvc
 {
@@ -208,28 +209,8 @@ class FixtureService extends AbstractMvc
      */
     public function getFieldData()
     {
-        $this->primaryKey   = $this->getTableService()->getPrimaryKeyColumns($this->db->getTable());
+        $fields = $this->columnManager->generateCode(FixtureColumnInterface::FIELD_SETTER, [***REMOVED***, [PrimaryKey::class***REMOVED***);
 
-        $fields = [***REMOVED***;
-        foreach ($this->columnManager->getColumns() as $column) {
-            $field = $column->getColumn();
-
-            if ($column instanceof ForeignKey) {
-                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn(
-                    $this->tableName,
-                    $field
-                );
-                if ($columnConstraint && $field->getTableName() === $columnConstraint->getReferencedTableName()) {
-                    continue;
-                }
-            }
-
-
-            if (in_array($field->getName(), $this->primaryKey)) {
-                continue;
-            }
-            $fields[***REMOVED*** = $column->getFixtureEntitySetters();
-        }
         return $fields;
     }
 
@@ -258,8 +239,16 @@ class FixtureService extends AbstractMvc
      */
     public function getEntityFixture($iterator)
     {
-        $entityArrayAsText = '';
+        $entityArrayAsText = $this->columnManager->generateCode(
+            FixtureColumnInterface::ENTITY_DATA,
+            [***REMOVED***,
+            [PrimaryKey::class***REMOVED***,
+            $iterator
+        );
 
+        return $entityArrayAsText;
+
+        /*
         $columns = $this->columnManager->getColumns();
 
         foreach ($columns as $columnData) {
@@ -292,6 +281,7 @@ class FixtureService extends AbstractMvc
         }
 
         return $entityArrayAsText;
+        */
     }
 
 

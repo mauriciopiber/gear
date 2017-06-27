@@ -146,8 +146,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         $columnsOptions = [***REMOVED***;
 
-        $columns = $this->columnManager->getColumns();
-
         $this->hasImageColumn = $this->columnManager->isAssociatedWith(UploadImage::class);
         $this->hasImageTable = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
 
@@ -155,11 +153,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
         if ($this->hasImageColumn) {
 
-            foreach ($columns as $column) {
-                if ($column instanceof UploadImage) {
-                    $columnsImage[***REMOVED*** = $column;
-                }
-            }
+            $columnsImage = $this->columnManager->filter([UploadImage::class***REMOVED***);
 
             $finalValue = $this->getFileColumns($columnsImage);
 
@@ -536,7 +530,7 @@ class ControllerTestService extends AbstractMvcTest implements
 
     public function getMockPRG()
     {
-        return (in_array('upload-image', $this->db->getColumns()))
+        return ($this->hasImageColumn)
             ?  '        $this->mockPluginFilePostRedirectGet($newData);'
             :  '        $this->mockPluginPostRedirectGet($newData);'.PHP_EOL;
 

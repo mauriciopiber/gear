@@ -94,15 +94,8 @@ trait AllColumnsDbTableTrait
         $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumn($tableName, 'id_foreign_key_column', 'int'),
             $this->prophesizeForeignKey($tableName, 'id_foreign_key_column', 'FOREIGN KEY', 'foreign_key_column'),
-            'MyColumn'
+            'foreign_key_column'
         );
-
-        $schema = $this->prophesize('Gear\Table\TableService\TableService');
-        $schema->getReferencedTableValidColumnName('foreign_key_column')
-        ->willReturn('foreign_key_column');
-
-
-        $foreignKey->setTableService($schema->reveal());
 
         $columns[***REMOVED*** = $foreignKey;
 
