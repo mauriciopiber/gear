@@ -43,12 +43,6 @@ class Step extends AbstractMvcTest
 
         $columns = $this->columnManager->generateCode('getTableStepFixture', [***REMOVED***, [***REMOVED***, $setUpId);
 
-        /*
-        foreach ($this->getColumnService()->getColumns($this->db) as $column) {
-            $columns .= $column->getTableStepFixture($setUpId).PHP_EOL;
-        }
-        */
-
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/mvc/spec/step/table.step.phtml');
         $file->setOptions([

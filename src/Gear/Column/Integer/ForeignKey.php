@@ -238,7 +238,7 @@ EOS;
             && $this->constraint->getReferencedTableName() == 'user'
             && in_array('id_user', $columns)
         ) {
-            return $columnData->getFixtureUser($iterator);
+            return $this->getFixtureUser($iterator);
         }
 
         $template = <<<EOS
