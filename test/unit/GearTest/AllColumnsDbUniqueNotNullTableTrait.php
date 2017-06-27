@@ -91,16 +91,9 @@ trait AllColumnsDbUniqueNotNullTableTrait
 
         $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnUniqueNotNull('table', 'id_foreign_key_column_unique_not_null', 'int'),
-            $this->prophesizeForeignKeyUniqueNotNull('table', 'id_foreign_key_column_unique_not_null', 'FOREIGN KEY', 'foreign_key_column_unique_not_null')
+            $this->prophesizeForeignKeyUniqueNotNull('table', 'id_foreign_key_column_unique_not_null', 'FOREIGN KEY', 'foreign_key_column_unique_not_null'),
+            'foreign_key_column_unique_not_null'
         );
-
-
-
-        $schema = $this->prophesize('Gear\Table\TableService\TableService');
-        $schema->getReferencedTableValidColumnName('foreign_key_column_unique_not_null')
-        ->willReturn('foreign_key_column_unique_not_null');
-
-        $foreignKey->setTableService($schema->reveal());
 
         $columns[9***REMOVED*** = $foreignKey;
         $columns[9***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'id_foreign_key_column_unique_not_null'));

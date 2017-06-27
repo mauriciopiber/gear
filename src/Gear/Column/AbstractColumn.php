@@ -95,7 +95,7 @@ abstract class AbstractColumn implements UniqueInterface
         );
 
         if (strlen($message) < 120) {
-            return $message;
+            return $message.PHP_EOL;
         }
 
         $template = <<<EOS
@@ -111,7 +111,7 @@ EOS;
             $this->str('var', $this->getColumn()->getName())
         );
 
-        return $message;
+        return $message.PHP_EOL;
     }
 
 

@@ -70,14 +70,9 @@ trait AllColumnsDbNotNullTableTrait
 
         $foreignKey = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumnNull('table', 'id_foreign_key_column_not_null', 'int'),
-            $this->prophesizeForeignKeyNull('table', 'id_foreign_key_column_not_null', 'FOREIGN KEY', 'foreign_key_column_not_null')
+            $this->prophesizeForeignKeyNull('table', 'id_foreign_key_column_not_null', 'FOREIGN KEY', 'foreign_key_column_not_null'),
+            'foreign_key_column_not_null'
         );
-
-        $schema = $this->prophesize('Gear\Table\TableService\TableService');
-        $schema->getReferencedTableValidColumnName('foreign_key_column_not_null')
-        ->willReturn('foreign_key_column_not_null');
-
-        $foreignKey->setTableService($schema->reveal());
 
         $columns[***REMOVED*** = $foreignKey;
 

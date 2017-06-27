@@ -133,9 +133,12 @@ class ControllerService extends AbstractMvc implements
 
         $this->hasTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
 
-
-
-        $this->getColumnsSpecifications();
+        $this->create[0***REMOVED*** = $this->columnManager->generateCode('getControllerCreateAfter', true);
+        $this->create[1***REMOVED*** = '';
+        $this->create[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
+        $this->update[0***REMOVED*** = $this->columnManager->generateCode('getControllerDeclareVar', [***REMOVED***);
+        $this->update[1***REMOVED*** = $this->columnManager->generateCode('getControllerEditBeforeView', true);
+        $this->update[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
 
         $this->setPrg($this->hasImage);
 
@@ -270,22 +273,6 @@ class ControllerService extends AbstractMvc implements
             'var' => $this->str('var', $this->controller->getNameOff()),
             'varLength' =>  $this->str('var-length', $this->controller->getNameOff())
         );
-    }
-
-    public function getColumnsSpecifications()
-    {
-        $onlyOneDropCache = [***REMOVED***;
-        $onlyOneViewArgs = [***REMOVED***;
-        $onlyOneControllerEdit = [***REMOVED***;
-        $onlyOneControllerCreate = [***REMOVED***;
-
-
-        $this->create[0***REMOVED*** = $this->columnManager->generateCode('getControllerCreateAfter', true);
-        $this->create[1***REMOVED*** = '';
-        $this->create[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
-        $this->update[0***REMOVED*** = $this->columnManager->generateCode('getControllerDeclareVar', [***REMOVED***);
-        $this->update[1***REMOVED*** = $this->columnManager->generateCode('getControllerEditBeforeView', true);
-        $this->update[2***REMOVED*** = $this->columnManager->generateCode('getControllerCreateView', true);
     }
 
     public function setPrg($hasImage)
