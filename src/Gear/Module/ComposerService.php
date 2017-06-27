@@ -72,6 +72,7 @@ class ComposerService extends AbstractMvc
         return $composerData;
     }
 
+    /*
     public function getModuleComposerJson($moduleName)
     {
         $module = \GearBase\Module::getProjectFolder().'/module/'.$moduleName;
@@ -83,4 +84,5 @@ class ComposerService extends AbstractMvc
             throw new \Exception(sprintf('Composer.json not found for %s', $this->getModule()->getModuleName()));
         }
     }
+    */
 }
