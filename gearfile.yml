@@ -39,11 +39,17 @@ src:
 #       aliase: GearBase\Util\String      
 
   10:
-    name: Controller\Service
+    name: ComposerService
     type: Factory
-    namespace: Constructor\Controller
+    namespace: Mvc\Module
     service: factories
-           
+    dependency:
+      0: 
+        class: 'Gear\Module\BasicModuleStructure'
+      1:
+        class: 'Gear\Edge\ComposerEdge'
+      2:
+        class: 'Gear\Creator\FileCreator' 
 #  2:
 #    name: InterfaceCode
 #    type: Service
