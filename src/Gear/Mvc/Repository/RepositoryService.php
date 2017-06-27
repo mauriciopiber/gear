@@ -114,11 +114,6 @@ class RepositoryService extends AbstractMvc
         if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
             $this->db = $this->src->getDb();
 
-            if (is_string($this->db->getColumns())) {
-                $this->db->setColumns(\Zend\Json\Json::decode($this->db->getColumns()));
-            }
-
-            //$this->getEventManager()->trigger('createInstance', $this, array('instance' => $this->db));
             return $this->createDb();
         }
         return $this->createSrc();

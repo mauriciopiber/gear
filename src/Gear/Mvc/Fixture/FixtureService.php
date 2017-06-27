@@ -88,7 +88,8 @@ class FixtureService extends AbstractMvc
             $this->src->addDependency('\GearImage\Fixture');
         }
 
-        $this->getColumnsSpecifications();
+        $this->getFixture = $this->columnManager->generateCode('getFixtureTop', true);
+
 
         $this->getTableSpecifications();
 
@@ -247,48 +248,6 @@ class FixtureService extends AbstractMvc
         );
 
         return $entityArrayAsText;
-
-        /*
-        $columns = $this->columnManager->getColumns();
-
-        foreach ($columns as $columnData) {
-            if ($columnData instanceof PrimaryKey) {
-                continue;
-            }
-
-            if ($columnData instanceof ForeignKey) {
-                $columnConstraint = $this->getTableService()->getConstraintForeignKeyFromColumn(
-                    $this->tableName,
-                    $columnData->getColumn()
-                );
-
-                $columns = $columnConstraint->getReferencedColumns();
-
-                if ($columnData->getColumn()->getTableName() != $columnConstraint->getReferencedTableName()
-                    && $columnConstraint->getReferencedTableName() == 'user'
-                    && in_array('id_user', $columns)
-                ) {
-                    $entityArrayAsText .= $columnData->getFixtureUser($iterator);
-                    continue;
-                }
-
-                if ($columnData->getColumn()->getTableName() === $columnConstraint->getReferencedTableName()) {
-                    continue;
-                }
-            }
-
-            $entityArrayAsText .= $columnData->getFixtureData($iterator);
-        }
-
-        return $entityArrayAsText;
-        */
-    }
-
-
-
-    public function getColumnsSpecifications()
-    {
-        $this->getFixture = $this->columnManager->generateCode('getFixtureTop', true);
     }
 
     /**
@@ -323,17 +282,6 @@ class FixtureService extends AbstractMvc
         $this->src = $src;
         $this->srcName = $src->getName();
         return $this->instrospect();
-    }
-
-    public function getColumnDuplicated()
-    {
-        return $this->columnDuplicated;
-    }
-
-    public function setColumnDuplicated($columnDuplicated)
-    {
-        $this->columnDuplicated = $columnDuplicated;
-        return $this;
     }
 
     public function getLoadedFixtures()

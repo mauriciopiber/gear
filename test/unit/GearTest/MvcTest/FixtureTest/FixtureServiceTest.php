@@ -16,6 +16,10 @@ use Gear\Mvc\Fixture\FixtureService;
 use Gear\Creator\Code;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
+use Gear\Column\Integer\ForeignKey;
+use Gear\Column\Integer\PrimaryKey;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Zend\Db\Metadata\Object\ConstraintObject;
 
 /**
  * @group db-docs
@@ -127,6 +131,94 @@ class FixtureServiceTest extends AbstractTestCase
             file_get_contents($expected),
             file_get_contents($file)
         );
+    }
+
+    /**
+     * @group fks
+     */
+    public function testFixtureWithForeignKey()
+    {
+        $this->table = 'my_table';
+        $this->primaryKey = 'id_my_table';
+
+        $columnPrimaryKey = $this->prophesize(ColumnObject::class);
+        $columnPrimaryKey->getDataType()->willReturn('int')->shouldBeCalled();
+        $columnPrimaryKey->getName()->willReturn($this->primaryKey)->shouldBeCalled();
+        $columnPrimaryKey->getTableName()->willReturn($this->table)->shouldBeCalled();
+
+        $primaryConstraint = $this->prophesize(ConstraintObject::class);
+        $primaryConstraint->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
+        $primaryConstraint->getColumns()->willReturn([$this->primaryKey***REMOVED***)->shouldBeCalled();
+        $primaryKey = new PrimaryKey($columnPrimaryKey->reveal(), $primaryConstraint->reveal());
+        $primaryKey->setStringService($this->string);
+
+        /*
+        $columnCreated = $this->prophesize(ColumnObject::class);
+        $created = new Datetime($columnCreated->reveal());
+
+        $columnUpdated = $this->prophesize(ColumnObject::class);
+        $updated = new Datetime($columnCreated->reveal());
+
+
+        $columnCreatedBy = $this->prophesize(ColumnObject::class);
+        $createdBy = new ForeignKey($columnCreatedBy->reveal());
+
+        $columnUpdatedBy = $this->prophesize(ColumnObject::class);
+        $updatedBy = new ForeignKey($columnUpdatedBy->reveal());
+        */
+
+        $columnForeignKey = $this->prophesize(ColumnObject::class);
+        $columnForeignKey->getDataType()->willReturn('int')->shouldBeCalled();
+        $columnForeignKey->getName()->willReturn('id_my_another_table')->shouldBeCalled();
+        $columnForeignKey->getTableName()->willReturn($this->table)->shouldBeCalled();
+
+        $foreignConstraint = $this->prophesize(ConstraintObject::class);
+        $foreignConstraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
+        $foreignConstraint->getColumns()->willReturn(['id_my_another_table'***REMOVED***)->shouldBeCalled();
+        $foreignConstraint->getReferencedTableName()->willReturn('my_another_table')->shouldBeCalled();
+        $foreignConstraint->getReferencedColumns()->willReturn(['id_my_another_table'***REMOVED***)->shouldBeCalled();
+        $foreignKey = new ForeignKey($columnForeignKey->reveal(), $foreignConstraint->reveal(), 'my_another_table_varchar');
+        $foreignKey->setStringService($this->string);
+
+        /*
+        $primaryKey = $this->prophesize('Gear\Column\Integer\PrimaryKey');
+        $created = $this->prophesize('Gear\Column\DateTime\DateTime');
+        $updated = $this->prophesize('Gear\Column\DateTime\DateTime');
+        $createdBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
+        $updatedBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
+        $foreignKey = $this->prophesize('Gear\Column\Integer\ForeignKey');
+
+        */
+        //$foreignKey->getTableName()->willReturn('MyAnotherTable');
+
+        //$columns = [$primaryKey, $foreignKey, $created, $updated, $createdBy, $updatedBy***REMOVED***;
+        $columns = [$primaryKey, $foreignKey***REMOVED***;
+
+        $this->db = new Db(['table' => 'MyTable'***REMOVED***);
+
+        $this->db->setColumnManager(new ColumnManager($columns));
+
+        $this->src = new Src(['name' => 'MyTableFixture', 'type' => 'Fixture'***REMOVED***);
+        $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($this->src)->shouldBeCalled();
+
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
+        $file = $this->fixture->introspectFromTable($this->db);
+
+        $expected = $this->templates.'/fixture-with-foreign-key.phtml';
+
+        $this->assertEquals(
+            file_get_contents($expected),
+            file_get_contents($file)
+        );
+        //primary key
+
+        //created
+        //updated
+        //created_by
+        //updated_by
+
     }
 
     /**
