@@ -16,6 +16,8 @@ use Gear\Mvc\ControllerPlugin\ControllerPluginService;
 use Gear\Mvc\ViewHelper\ViewHelperService;
 use Gear\Mvc\InterfaceService;
 use Gear\Mvc\Entity\EntityService;
+use Zend\Db\Metadata\Object\TableObject;
+use Gear\Column\ColumnManager;
 
 /**
  * @group module
@@ -129,7 +131,13 @@ class SrcServiceTest extends TestCase
             ***REMOVED***
         ***REMOVED***;
 
+        $tableObjectOne = $this->prophesize(TableObject::class);
+
+        $dbOne = $this->prophesize('GearJson\Db\Db');
+        $dbOne->getTable()->willReturn('MyEntityOne')->shouldBeCalled();
+
         $srcOne = $this->prophesize('GearJson\Src\Src');
+        $srcOne->getDb()->willReturn($dbOne->reveal())->shouldBeCalled();
         $this->schema->create(
             'MyModule',
             [
@@ -139,7 +147,22 @@ class SrcServiceTest extends TestCase
             false
         )->willReturn($srcOne->reveal())->shouldBeCalled();
 
+        $this->tableService->getTableObject('MyEntityOne')->willReturn($tableObjectOne->reveal())->shouldBeCalled();
+
+        $dbOne->setTableObject($tableObjectOne->reveal())->shouldBeCalled();
+
+        $columnManagerOne = $this->prophesize(ColumnManager::class);
+        $this->columnService->getColumnManager($dbOne->reveal())->willReturn($columnManagerOne->reveal());
+        $dbOne->setColumnManager($columnManagerOne)->shouldBeCalled();
+
+        $tableObjectTwo = $this->prophesize(TableObject::class);
+
+        $dbTwo = $this->prophesize('GearJson\Db\Db');
+        $dbTwo->getTable()->willReturn('MyEntityTwo')->shouldBeCalled();
+
+
         $srcTwo = $this->prophesize('GearJson\Src\Src');
+        $srcTwo->getDb()->willReturn($dbTwo->reveal())->shouldBeCalled();
         $this->schema->create(
             'MyModule',
             [
@@ -148,6 +171,14 @@ class SrcServiceTest extends TestCase
             ***REMOVED***,
             false
         )->willReturn($srcTwo->reveal())->shouldBeCalled();
+
+        $this->tableService->getTableObject('MyEntityTwo')->willReturn($tableObjectTwo->reveal())->shouldBeCalled();
+
+        $dbTwo->setTableObject($tableObjectTwo->reveal())->shouldBeCalled();
+
+        $columnManagerTwo = $this->prophesize(ColumnManager::class);
+        $this->columnService->getColumnManager($dbTwo->reveal())->willReturn($columnManagerTwo->reveal());
+        $dbTwo->setColumnManager($columnManagerTwo)->shouldBeCalled();
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
