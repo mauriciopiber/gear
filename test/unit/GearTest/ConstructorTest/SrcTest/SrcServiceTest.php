@@ -79,18 +79,10 @@ class SrcServiceTest extends TestCase
     {
         $this->schema->create(
             $module,
-            $name,
-            $type,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => $name,
+                'type' => $type,
+            ***REMOVED***,
             false
         )->willReturn($this->src->reveal())->shouldBeCalled();
     }
@@ -99,18 +91,10 @@ class SrcServiceTest extends TestCase
     {
         $this->schema->create(
             $module,
-            $name,
-            $type,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => $name,
+                'type' => $type,
+            ***REMOVED***,
             false
         )->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
     }
@@ -148,36 +132,20 @@ class SrcServiceTest extends TestCase
         $srcOne = $this->prophesize('GearJson\Src\Src');
         $this->schema->create(
             'MyModule',
-            'MyEntityOne',
-            'Entity',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => 'MyEntityOne',
+                'type' => 'Entity',
+            ***REMOVED***,
             false
         )->willReturn($srcOne->reveal())->shouldBeCalled();
 
         $srcTwo = $this->prophesize('GearJson\Src\Src');
         $this->schema->create(
             'MyModule',
-            'MyEntityTwo',
-            'Entity',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => 'MyEntityTwo',
+                'type' => 'Entity',
+            ***REMOVED***,
             false
         )->willReturn($srcTwo->reveal())->shouldBeCalled();
 

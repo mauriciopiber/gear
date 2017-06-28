@@ -148,6 +148,7 @@ class ConstructService extends AbstractJsonService
 
         if (isset($data['src'***REMOVED***)) {
             $entity = [***REMOVED***;
+            $addon = [***REMOVED***;
 
             foreach ($data['src'***REMOVED*** as $i => $src) {
                 if ($src['type'***REMOVED*** == 'Entity') {
@@ -155,11 +156,22 @@ class ConstructService extends AbstractJsonService
                     continue;
                 }
 
+                if (in_array($src['type'***REMOVED***, ['Factory', 'Trait'***REMOVED***)) {
+                    $addon[***REMOVED*** = $src;
+                    continue;
+                }
+
                 $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
             }
 
+
+
             if (count($entity) > 0) {
                 $this->getSrcConstructor()->createEntities($entity);
+            }
+
+            if (count($addon) > 0) {
+                $this->getSrcConstructor()->createAdditional($addon);
             }
         }
 

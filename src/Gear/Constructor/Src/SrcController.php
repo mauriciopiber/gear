@@ -19,7 +19,7 @@ class SrcController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-create'));
 
-         $data = array(
+         $data = [
             'name'       => $this->getRequest()->getParam('name'),
             'type'       => $this->getRequest()->getParam('type'),
             'dependency' => $this->getRequest()->getParam('dependency'),
@@ -28,8 +28,12 @@ class SrcController extends AbstractConsoleController
             'abstract'   => $this->getRequest()->getParam('abstract'),
             'extends'    => $this->getRequest()->getParam('extends'),
             'namespace'  => $this->getRequest()->getParam('namespace'),
+            'template'   => $this->getRequest()->getParam('template'),
+            'implements' => $this->getRequest()->getParam('implements'),
+            'user'       => $this->getRequest()->getParam('user'),
             'service'    => $this->getRequest()->getParam('service', 'invokables')
-         );
+         ***REMOVED***;
+
 
 
          $this->getSrcService()->create($data);

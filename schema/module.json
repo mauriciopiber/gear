@@ -1591,6 +1591,30 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ComposerService",
+                "type": "Factory",
+                "dependency": [
+                    {
+                        "class": "Gear\\Module\\BasicModuleStructure"
+                    },
+                    {
+                        "class": "Gear\\Edge\\ComposerEdge"
+                    },
+                    {
+                        "class": "Gear\\Creator\\FileCreator"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Module",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

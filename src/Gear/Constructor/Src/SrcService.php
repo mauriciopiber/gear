@@ -50,6 +50,7 @@ use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\InterfaceService;
 use Gear\Constructor\AbstractConstructor;
+use GearJson\Src\SrcTypesInterface;
 
 class SrcService extends AbstractConstructor
 {
@@ -145,18 +146,7 @@ class SrcService extends AbstractConstructor
 
         $this->src = $this->getSrcService()->create(
             $module,
-            $data['name'***REMOVED***,
-            $data['type'***REMOVED***,
-            (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null),
-            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null),
-            (isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null),
-            (isset($data['service'***REMOVED***) ? $data['service'***REMOVED*** : null),
-            (isset($data['abstract'***REMOVED***) ? $data['abstract'***REMOVED*** : null),
-            (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
-            (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
-            (isset($data['template'***REMOVED***) ? $data['template'***REMOVED*** : null),
-            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null),
-            (isset($data['user'***REMOVED***) ? $data['user'***REMOVED*** : null),
+            $data,
             false
         );
 
@@ -171,6 +161,11 @@ class SrcService extends AbstractConstructor
         return $this->factory();
     }
 
+    public function createAdditional(array $src)
+    {
+
+    }
+
     public function createEntities(array $srcs)
     {
         $this->srcs = [***REMOVED***;
@@ -178,18 +173,7 @@ class SrcService extends AbstractConstructor
         foreach ($srcs as $src) {
             $srcItem = $this->getSrcService()->create(
                 $this->getModule()->getModuleName(),
-                $src['name'***REMOVED***,
-                $src['type'***REMOVED***,
-                (isset($src['namespace'***REMOVED***) ? $src['namespace'***REMOVED*** : null),
-                (isset($src['extends'***REMOVED***) ? $src['extends'***REMOVED*** : null),
-                (isset($src['dependency'***REMOVED***) ? $src['dependency'***REMOVED*** : null),
-                (isset($src['service'***REMOVED***) ? $src['service'***REMOVED*** : null),
-                (isset($src['abstract'***REMOVED***) ? $src['abstract'***REMOVED*** : null),
-                (isset($src['db'***REMOVED***) ? $src['db'***REMOVED*** : null),
-                (isset($src['columns'***REMOVED***) ? $src['columns'***REMOVED*** : null),
-                (isset($src['template'***REMOVED***) ? $src['template'***REMOVED*** : null),
-                (isset($src['implements'***REMOVED***) ? $src['implements'***REMOVED*** : null),
-                (isset($src['user'***REMOVED***) ? $src['user'***REMOVED*** : null),
+                $src,
                 false
             );
 
@@ -209,46 +193,46 @@ class SrcService extends AbstractConstructor
 
         try {
             switch ($this->src->getType()) {
-                case 'ControllerPlugin':
+                case SrcTypesInterface::CONTROLLER_PLUGIN:
                     $service = $this->getControllerPluginService();
                     $status = $service->create($this->src);
                     break;
-                case 'ViewHelper':
+                case SrcTypesInterface::VIEW_HELPER:
                     $service = $this->getViewHelperService();
                     $status = $service->create($this->src);
                     break;
-                case 'Service':
+                case SrcTypesInterface::SERVICE:
                     $service = $this->getServiceService();
                     $status = $service->create($this->src);
                     break;
-                case 'Entity':
+                case SrcTypesInterface::ENTITY:
                     $entity = $this->getEntityService();
                     $status = $entity->create($this->src);
                     break;
-                case 'Repository':
+                case SrcTypesInterface::REPOSITORY:
                     $repository = $this->getRepositoryService();
                     $status = $repository->create($this->src);
                     break;
-                case 'Form':
+                case SrcTypesInterface::FORM:
                     $form = $this->getFormService();
                     $status = $form->create($this->src);
                     break;
-                case 'SearchForm':
+                case SrcTypesInterface::SEARCH_FORM:
                     $search = $this->getSearchService();
                     $status = $search->create($this->src);
                     break;
-                case 'Filter':
+                case SrcTypesInterface::FILTER:
                     $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
-                case 'Trait':
+                case SrcTypesInterface::TRAIT:
                     $factory = $this->getTraitService();
                     $status = $factory->createTrait($this->src);
 
                     $factory = $this->getTraitTestService();
                     $status = $factory->createTraitTest($this->src);
                     break;
-                case 'Factory':
+                case SrcTypesInterface::FACTORY:
                     $factory = $this->getFactoryService();
                     $factory->createFactory($this->src);
                     $factory->createConstructorSnippet($this->src);
@@ -257,15 +241,15 @@ class SrcService extends AbstractConstructor
                     $this->getFactoryTestService()->createConstructorSnippet($this->src);
                     break;
 
-                case 'ValueObject':
+                case SrcTypesInterface::VALUE_OBJECT:
                     $valueObject = $this->getValueObjectService();
                     $status = $valueObject->create($this->src);
                     break;
-                case 'Fixture':
+                case SrcTypesInterface::FIXTURE:
                     $fixture = $this->getFixtureService();
                     $status = $fixture->create($this->src);
                     break;
-                case 'Interface':
+                case SrcTypesInterface::INTERFACE:
                     $interface = $this->getInterfaceService();
                     $status = $interface->create($this->src);
                     break;
@@ -276,9 +260,10 @@ class SrcService extends AbstractConstructor
         } catch (\Exception $exception) {
             throw $exception;
         }
-        if (false === in_array($this->src->getType(), ['Trait', 'Factory'***REMOVED***)) {
+        if (false === in_array($this->src->getType(), [SrcTypesInterface::TRAIT, SrcTypesInterface::FACTORY***REMOVED***)) {
             $this->getServiceManager()->create($this->src);
         }
         return $status;
     }
+
 }
