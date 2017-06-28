@@ -1,6 +1,10 @@
 <?php
 namespace Gear\Module;
 
+use Gear\Gear\Module\BasicModuleStructure;
+use Gear\Gear\Edge\ComposerEdge;
+use Gear\Gear\Edge\ComposerEdgeTrait;
+use Gear\Gear\Creator\FileCreator;
 use Gear\Mvc\AbstractMvc;
 
 /**
@@ -9,7 +13,29 @@ use Gear\Mvc\AbstractMvc;
  */
 class ComposerService extends AbstractMvc
 {
-    use \Gear\Edge\ComposerEdgeTrait;
+    use ComposerEdgeTrait;
+
+    /**
+     * Constructor
+     *
+     * @param BasicModuleStructure $basicModuleStructure Basic Module Structure
+     * @param ComposerEdge         $composerEdge         Composer Edge
+     * @param FileCreator          $fileCreator          File Creator
+     *
+     * @return ComposerService
+     */
+    public function __construct(
+        BasicModuleStructure $basicModuleStructure,
+        ComposerEdge $composerEdge,
+        FileCreator $fileCreator
+    ) {
+        $this->module = $basicModuleStructure;
+        $this->composerEdge = $composerEdge;
+        $this->fileCreator = $fileCreator;
+
+        return $this;
+    }
+
 
     public function createComposerAsProject($type = 'web')
     {

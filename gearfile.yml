@@ -50,6 +50,9 @@ src:
         class: 'Gear\Edge\ComposerEdge'
       2:
         class: 'Gear\Creator\FileCreator' 
+      3:
+        class: 'Gear\Util\Vector\StringService'
+        aliase: 'Gear\Util\String'
 #  2:
 #    name: InterfaceCode
 #    type: Service
