@@ -135,46 +135,15 @@ class DbService extends AbstractConstructor
      */
     public function create($params)
     {
-        if (!isset($params['table'***REMOVED***)) {
-            throw new \Exception('Missing table');
-        }
-
-        if (!isset($params['columns'***REMOVED***) || empty($params['columns'***REMOVED***)) {
-            $params['columns'***REMOVED*** = [***REMOVED***;
-        }
-
-        if (!isset($params['user'***REMOVED***) || empty($params['user'***REMOVED***)) {
-            $params['user'***REMOVED*** = 'all';
-        }
-
-        if (!isset($params['role'***REMOVED***) || empty($params['role'***REMOVED***)) {
-            $params['role'***REMOVED*** = 'admin';
-        }
-
-        if (!isset($params['namespace'***REMOVED***) || empty($params['namespace'***REMOVED***)) {
-            $params['namespace'***REMOVED*** = null;
-        }
-
-        if (!isset($params['service'***REMOVED***) || empty($params['service'***REMOVED***)) {
-            $params['service'***REMOVED*** = FactoriesInterface::NAME;
-        }
-
-        $table = $params['table'***REMOVED***;
-        $columns = $params['columns'***REMOVED***;
-        $user = $params['user'***REMOVED***;
-        $role = $params['role'***REMOVED***;
-        $namespace = $params['namespace'***REMOVED***;
-        $service = $params['service'***REMOVED***;
-
         $module = $this->getModule()->getModuleName();
 
-        $db = $this->getDbService()->create($module, $table, $columns, $user, $role, $service, $namespace, false);
+        $db = $this->getDbService()->create($module, $params, false);
 
         if ($db instanceof ConsoleValidationStatus) {
             return $db;
         }
 
-        if ($this->getTableService()->verifyTableAssociation($table, UploadImageTable::NAME)) {
+        if ($this->getTableService()->verifyTableAssociation($db->getTable(), UploadImageTable::NAME)) {
             $this->getActionService()->create($module, $db->getTable().'Controller', 'UploadImage');
         }
 

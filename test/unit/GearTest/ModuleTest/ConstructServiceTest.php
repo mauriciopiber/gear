@@ -86,81 +86,79 @@ class ConstructServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group q1
+     * @group integration
+     *
+     * Checklist
+     *
+     * 1. Src [ok,validate,duplicated***REMOVED***
+     * 1. Src Entity [ok,validate,duplicated***REMOVED***
+     * 1. Src Additional [ok,validate,duplicated***REMOVED***
+     * 1. Controller  [ok,validate,duplicated***REMOVED***
+     * 1. Action  [ok,validate,duplicated***REMOVED***
+     * 1. Db [ok,validate,duplicated***REMOVED***
+     * 1. App [ok,validate,duplicated***REMOVED***
      */
-    public function testIntegrateAll()
+    public function testIntegration()
     {
+        //src create
+        $data = ['name' => 'MyService', 'type' => 'Service'***REMOVED***;
+
+        $src = new Src($data);
+        $this->srcSchema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
+        $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
+        $this->srcService->construct($src)->willReturn(true)->shouldBeCalled();
+
+
+        //src exist
+        $data = ['name' => 'AlreadyExist', 'type' => 'Service'***REMOVED***;
+
+        $src = new Src($data);
+
+        $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
+        $this->srcSchema->srcExist('Gearing', $src)->willReturn(true)->shouldBeCalled();
+
+
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
-module: MyModule
+module: Gearing
 src:
   0:
     name: MyService
     type: Service
   1:
-    name: MyRepository
-    type: Repository
-  2:
-    name: MyEntity
-    type: Entity
-  3:
-    name: MyOldService
-    type: Factory
-  4:
-    name: MyOldService
-    type: Trait
-db:
-  0:
-    table: MyTable
-controller:
-  0:
-    name: MyController
-    actions:
-      0:
-        name: FirstAction
-      1:
-        name: SecondAction
-  1:
-    name: MyControllerSrcMvc
-    db: MySrcMvc
-    actions:
-      0:
-        name: FirstSrcMvcAction
-      1:
-        name: SecondSrcMvcAction
-
-
-
+    name: AlreadyExist
+    type: Service
 EOS
-        ));
+            ));
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
+        $this->assertNotEmpty($constructed->getCreated());
+
         $this->assertEquals(
-
             [
-                sprintf(ConstructService::SRC_CREATED, 'MyService', 'Service'),
-                sprintf(ConstructService::SRC_CREATED, 'MyRepository', 'Repository'),
-                /* @TODO sprintf(ConstructService::SRC_CREATED, 'MyEntity', 'Entity'), */
-                sprintf(ConstructService::SRC_CREATED, 'MyOldService', 'Factory'),
-                sprintf(ConstructService::SRC_CREATED, 'MyOldService', 'Trait'),
-                sprintf(ConstructService::DB_CREATED, 'MyTable'),
-                sprintf(ConstructService::CONTROLLER_CREATED, 'MyController'),
-                sprintf(ConstructService::ACTION_CREATED, 'FirstAction', 'MyController'),
-                sprintf(ConstructService::ACTION_CREATED, 'SecondAction', 'MyController'),
-                sprintf(ConstructService::CONTROLLER_CREATED, 'MyControllerSrcMvc'),
-                sprintf(ConstructService::ACTION_CREATED, 'FirstSrcMvcAction', 'MyControllerSrcMvc'),
-                sprintf(ConstructService::ACTION_CREATED, 'SecondSrcMvcAction', 'MyControllerSrcMvc'),
-
+                sprintf(ConstructService::SRC_CREATED, 'MyService', 'Service')
             ***REMOVED***,
-            $constructed['created-msg'***REMOVED***
+            $constructed->getCreated()
         );
 
+        $this->assertEquals(
+            [
+                sprintf(ConstructService::SRC_SKIP, 'AlreadyExist', 'Service')
+            ***REMOVED***,
+            $constructed->getSkipped()
+        );
+
+        $this->assertEquals(
+            [
+            ***REMOVED***,
+            $constructed->getValidated()
+        );
     }
 
     /**
-     * @group z1
+     * @group mm1
      */
     public function testSrcCreate()
     {
@@ -168,9 +166,10 @@ EOS
 
         $src = new Src($data);
 
-        $this->srcSchema->srcExist('Gearing', $src)->willReturn(false);
+        $this->srcSchema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
+        $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
 
-        $this->srcService->create($data)->willReturn(true)->shouldBeCalled();
+        $this->srcService->construct($src)->willReturn(true)->shouldBeCalled();
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -186,24 +185,26 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
+        $this->assertNotEmpty($constructed->getCreated());
+
         $this->assertEquals(
-            $constructed['created-msg'***REMOVED***[0***REMOVED***,
+            $constructed->getCreated()[0***REMOVED***,
             sprintf(ConstructService::SRC_CREATED, 'Gearing', 'Service')
         );
     }
 
     /**
-     * @group z1
+     * @group mm1
      */
     public function testSrcDuplicade()
     {
-        $srcschema = $this->prophesize('GearJson\Src\SrcService');
+        $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        $src = new \GearJson\Src\Src(['name' => 'Gearing', 'type' => 'Service'***REMOVED***);
+        $src = new Src($data);
 
-        $srcschema->srcExist('Gearing', $src)->willReturn(true);
+        $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
 
-        $this->construct->setSrcService($srcschema->reveal());
+        $this->srcSchema->srcExist('Gearing', $src)->willReturn(true)->shouldBeCalled();
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -218,16 +219,96 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
+        $this->assertNotEmpty($constructed->getSkipped());
 
         $this->assertEquals(
-            $constructed['skipped-msg'***REMOVED***[0***REMOVED***,
+            $constructed->getSkipped()[0***REMOVED***,
             sprintf(ConstructService::SRC_SKIP, 'Gearing', 'Service')
         );
 
     }
 
+
+
     /**
-     * @group z1
+     * @group mm1
+     * @group mm3
+     */
+    public function testSrcWithTrait()
+    {
+        $data = ['name' => 'Gearing', 'type' => 'Trait'***REMOVED***;
+
+        $src = new Src($data);
+
+        //$this->srcSchema->srcExist('Gearing', $src)->willReturn(false);
+
+        $this->srcService->createAdditional([$data***REMOVED***)->willReturn([
+            'created' => [$src***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
+
+module: Gearing
+src:
+  0:
+    name: Gearing
+    type: Trait
+
+EOS
+            ));
+
+        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
+
+
+        $this->assertNotEmpty($constructed->getCreated());
+
+        $this->assertEquals(
+            $constructed->getCreated()[0***REMOVED***,
+            sprintf(ConstructService::SRC_CREATED, 'Gearing', 'Trait')
+        );
+    }
+
+    /**
+     * @group mm1
+     * @group mm3
+     */
+    public function testSrcWithFactory()
+    {
+        $data = ['name' => 'Gearing', 'type' => 'Factory'***REMOVED***;
+
+        $src = new Src($data);
+
+        //$this->srcSchema->srcExist('Gearing', $src)->willReturn(false);
+
+        $this->srcService->createAdditional([$data***REMOVED***)->willReturn([
+            'created' => [$src***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
+
+        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
+
+module: Gearing
+src:
+  0:
+    name: Gearing
+    type: Factory
+
+EOS
+            ));
+
+        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
+
+
+        $this->assertNotEmpty($constructed->getCreated());
+
+        $this->assertEquals(
+            $constructed->getCreated()[0***REMOVED***,
+            sprintf(ConstructService::SRC_CREATED, 'Gearing', 'Factory')
+        );
+    }
+
+    /**
+     * @group mm1
+     * @group mm3
      */
     public function testSrcWithEntity()
     {
@@ -235,9 +316,11 @@ EOS
 
         $src = new Src($data);
 
-        $this->srcSchema->srcExist('Gearing', $src)->willReturn(false);
+        //$this->srcSchema->srcExist('Gearing', $src)->willReturn(false);
 
-        $this->srcService->createEntities([$data***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->srcService->createEntities([$data***REMOVED***)->willReturn([
+            'created' => [$src***REMOVED***
+        ***REMOVED***)->shouldBeCalled();
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -253,144 +336,37 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertEquals([
-            'module' => 'Gearing',
-            'skipped-msg' => [***REMOVED***,
-            'created-msg' => [***REMOVED***,
-            'invalid-msg' => [***REMOVED***
-
-        ***REMOVED***, $constructed);
-    }
-
-    /**
-     * @group z1
-     * @group z13
-     */
-    public function testSrcAll()
-    {
-        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
-
-module: Gearing
-src:
-  0:
-    name: EntityOne
-    type: Entity
-  1:
-    name: ServiceOne
-    type: Service
-  2:
-    name: ServiceOne
-    type: Service
-    extends: MyClass
-  4:
-    name: Servic\\eOne
-    type: Service
-
-
-EOS
-        ));
-
-        $srcOne = new Src([
-            'name' => 'EntityOne',
-            'type' => 'Entity'
-        ***REMOVED***);
-
-        $srcTwo = new Src([
-            'name' => 'ServiceOne',
-            'type' => 'Service'
-        ***REMOVED***);
-
-        $srcThree = new Src([
-            'name' => 'ServiceOne',
-            'type' => 'Service',
-            'extends' => 'MyClass'
-        ***REMOVED***);
-
-        $srcFour = new Src([
-            'name' => 'Servic\\eOne',
-            'type' => 'Service'
-        ***REMOVED***);
-
-        $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
-        $this->consoleValidation->getErrors()->willReturn([
-            'Src Gearing está com dados errados'
-        ***REMOVED***)->shouldBeCalled();
-
-        //$this->srcSchema->srcExist(self::MODULE_NAME, $srcOne)->willReturn(false)->shouldBeCalled();
-        $this->srcSchema->srcExist(self::MODULE_NAME, $srcTwo)->willReturn(false)->shouldBeCalled();
-        $this->srcSchema->srcExist(self::MODULE_NAME, $srcThree)->willReturn(true)->shouldBeCalled();
-        $this->srcSchema->srcExist(self::MODULE_NAME, $srcFour)->willReturn(false)->shouldBeCalled();
-
-        $this->srcService->create([
-            'name' => 'EntityOne',
-            'type' => 'Entity'
-        ***REMOVED***)->willReturn(true);
-        $this->srcService->create([
-            'name' => 'ServiceOne',
-            'type' => 'Service'
-        ***REMOVED***)->willReturn(true);
-        $this->srcService->create([
-            'name' => 'ServiceOne',
-            'type' => 'Service',
-            'extends' => 'MyClass'
-        ***REMOVED***)->shouldNotBeCalled();
-        $this->srcService->create([
-            'name' => 'Servic\\eOne',
-            'type' => 'Service'
-        ***REMOVED***)->willReturn($this->consoleValidation->reveal());
-
-
-        $this->srcService->createEntities([
-            [
-                'name' => 'EntityOne',
-                'type' => 'Entity'
-            ***REMOVED***
-        ***REMOVED***)->shouldBeCalled();
-
-        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
-
+        $this->assertNotEmpty($constructed->getCreated());
 
         $this->assertEquals(
-            [
-                'module' => 'Gearing',
-                'skipped-msg' => [
-                    sprintf(ConstructService::SRC_SKIP, 'ServiceOne', 'Service')
-                ***REMOVED***,
-                'created-msg' => [
-                    sprintf(ConstructService::SRC_CREATED, 'ServiceOne', 'Service')
-                ***REMOVED***,
-                'invalid-msg' => [
-                    sprintf(ConstructService::SRC_VALIDATE, 'Servic\\eOne', 'Service'),
-                    'Src Gearing está com dados errados'
-                ***REMOVED***
-            ***REMOVED***,
-            $constructed
+            $constructed->getCreated()[0***REMOVED***,
+            sprintf(ConstructService::SRC_CREATED, 'Gearing', 'Entity')
         );
-
     }
 
     /**
      * @group z1
-     * @group z11
+     * @group mm1
+     * @group mm2
      */
     public function testSrcValidate()
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        $srcschema = $this->prophesize('GearJson\Src\SrcService');
+        //$srcschema = $this->prophesize('GearJson\Src\SrcService');
 
-        $src = new \GearJson\Src\Src($data);
+        //$src = new \GearJson\Src\Src($data);
 
-        $srcschema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
+        //$srcschema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
 
         $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
         $this->consoleValidation->getErrors()->willReturn([
             'Src Gearing está com dados errados'
         ***REMOVED***)->shouldBeCalled();
 
-        $this->srcService->create($data)->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
+        $this->srcSchema->factory('Gearing', $data, false)->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
 
-        $this->construct->setSrcService($srcschema->reveal());
+        //$this->construct->setSrcService($srcschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -405,14 +381,15 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
+        $this->assertNotEmpty($constructed->getValidated());
 
         $this->assertEquals(
-            $constructed['invalid-msg'***REMOVED***[0***REMOVED***,
+            $constructed->getValidated()[0***REMOVED***,
             sprintf(ConstructService::SRC_VALIDATE, 'Gearing', 'Service')
         );
 
         $this->assertEquals(
-            $constructed['invalid-msg'***REMOVED***[1***REMOVED***,
+            $constructed->getValidated()[1***REMOVED***,
             'Src Gearing está com dados errados'
         );
     }
@@ -444,7 +421,7 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'App nome "Gearing" do tipo "Service" já existe.');
+        $this->assertEquals($constructed->getSkipped()[0***REMOVED***, 'App nome "Gearing" do tipo "Service" já existe.');
     }
 
 
@@ -481,7 +458,7 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'App nome "Gearing" do tipo "Service" criado.');
+        $this->assertEquals($constructed->getCreated()[0***REMOVED***, 'App nome "Gearing" do tipo "Service" criado.');
     }
 
 
@@ -518,7 +495,7 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Controller "Gearing" criado.');
+        $this->assertEquals($constructed->getCreated()[0***REMOVED***, 'Controller "Gearing" criado.');
     }
 
     /**
@@ -549,8 +526,8 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
-        $this->assertCount(1, $constructed['skipped-msg'***REMOVED***);
-        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Controller "Gearing" já existe.');
+        $this->assertCount(1, $constructed->getSkipped());
+        $this->assertEquals($constructed->getSkipped()[0***REMOVED***, 'Controller "Gearing" já existe.');
     }
 
     /**
@@ -588,7 +565,7 @@ EOS
 
 
         $this->assertEquals(
-            $constructed['invalid-msg'***REMOVED***[0***REMOVED***,
+            $constructed->getValidated()[0***REMOVED***,
             sprintf(ConstructService::CONTROLLER_VALIDATE, 'Gearing')
         );
     }
@@ -648,8 +625,8 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
-        $this->assertCount(2, $constructed['created-msg'***REMOVED***);
-        $this->assertEquals($constructed['created-msg'***REMOVED***[1***REMOVED***, 'Action "GearIt" do Controller "Gearing" criado.');
+        $this->assertCount(2, $constructed->getCreated());
+        $this->assertEquals($constructed->getCreated()[1***REMOVED***, 'Action "GearIt" do Controller "Gearing" criado.');
     }
 
     /**
@@ -704,8 +681,8 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
-        $this->assertCount(1, $constructed['skipped-msg'***REMOVED***);
-        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Action "GearIt" do Controller "Gearing" já existe.');
+        $this->assertCount(1, $constructed->getSkipped());
+        $this->assertEquals($constructed->getSkipped()[0***REMOVED***, 'Action "GearIt" do Controller "Gearing" já existe.');
     }
 
     /**
@@ -763,15 +740,15 @@ EOS
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
-        $this->assertCount(2, $constructed['invalid-msg'***REMOVED***);
+        $this->assertCount(2, $constructed->getValidated());
         $this->assertEquals(
             sprintf(ConstructService::ACTION_VALIDATE, 'GearIt', 'Gearing'),
-            $constructed['invalid-msg'***REMOVED***[0***REMOVED***
+            $constructed->getValidated()[0***REMOVED***
         );
 
         $this->assertEquals(
             'Controller Gearing está com dados errados',
-            $constructed['invalid-msg'***REMOVED***[1***REMOVED***
+            $constructed->getValidated()[1***REMOVED***
         );
     }
 
@@ -808,7 +785,7 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertEquals($constructed['created-msg'***REMOVED***[0***REMOVED***, 'Db tabela "Gearit" criado.');
+        $this->assertEquals($constructed->getCreated()[0***REMOVED***, 'Db tabela "Gearit" criado.');
     }
 
     /**
@@ -838,8 +815,8 @@ EOS
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
 
-        $this->assertCount(1, $constructed['skipped-msg'***REMOVED***);
-        $this->assertEquals($constructed['skipped-msg'***REMOVED***[0***REMOVED***, 'Db tabela "Gearit" já existe.');
+        $this->assertCount(1, $constructed->getSkipped());
+        $this->assertEquals($constructed->getSkipped()[0***REMOVED***, 'Db tabela "Gearit" já existe.');
 
     }
 
@@ -877,49 +854,13 @@ EOS
 
         $this->assertEquals(
             sprintf(ConstructService::DB_VALIDATE, 'Gearit'),
-            $constructed['invalid-msg'***REMOVED***[0***REMOVED***
+            $constructed->getValidated()[0***REMOVED***
         );
 
         $this->assertEquals(
             'Controller Gearing está com dados errados',
-            $constructed['invalid-msg'***REMOVED***[1***REMOVED***
+            $constructed->getValidated()[1***REMOVED***
         );
-    }
-
-    public function testConstructAll()
-    {
-
-        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
-
-module: Gear
-src: [***REMOVED***
-db: [***REMOVED***
-controller: [***REMOVED***
-app: [***REMOVED***
-
-EOS
-        ));
-
-        $module = 'ConstructIt';
-        $basepath = '/var/www/test';
-        $config = null;
-
-        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
-
-        $this->assertArrayHasKey('module', $constructed);
-
-    }
-
-
-
-    public function testEmptyConstruct()
-    {
-
-        $this->construct->setConfigLocation($this->mockGearfileIO());
-
-        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
-
-        $this->assertArrayHasKey('module', $constructed);
     }
 
     public function testSetConfigLocation()

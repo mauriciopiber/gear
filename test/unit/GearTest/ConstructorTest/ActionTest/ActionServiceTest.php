@@ -25,6 +25,8 @@ use GearJson\Action\Action;
 use GearJson\Db\Db;
 use GearJson\Schema\SchemaService;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Zend\Db\Metadata\Object\TableObject;
+use Gear\Column\ColumnManager;
 
 /**
  * @group m1
@@ -66,6 +68,9 @@ class ActionServiceTest extends TestCase
 
         $this->stringService = new StringService();
 
+        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
+
         $this->actionService = new ActionService(
             $this->schemaAction->reveal(),
             $this->routerManager->reveal(),
@@ -82,39 +87,29 @@ class ActionServiceTest extends TestCase
             $this->page->reveal(),
             $this->step->reveal(),
             $this->module->reveal(),
-            $this->stringService
+            $this->stringService,
+            $this->tableService->reveal(),
+            $this->columnService->reveal()
         );
-
-        /*
-        $this->actionService->setModule($this->module->reveal());
-        $this->actionService->setActionService($this->schemaAction->reveal());
-        $this->actionService->setStringService($this->stringService);
-        $this->actionService->setMvcController($this->mvcController->reveal());
-        $this->actionService->setControllerTestService($this->mvcControllerTest->reveal());
-        $this->actionService->setViewService($this->viewService->reveal());
-        $this->actionService->setRouterManager($this->routerManager->reveal());
-        $this->actionService->setNavigationManager($this->navigationManager->reveal());
-        $this->actionService->setAppControllerService($this->appController->reveal());
-        $this->actionService->setAppControllerSpecService($this->appControllerSpec->reveal());
-        $this->actionService->setFeature($this->feature->reveal());
-        $this->actionService->setPage($this->page->reveal());
-        $this->actionService->setConsoleController($this->mvcConsoleController->reveal());
-        $this->actionService->setConsoleControllerTest($this->mvcConsoleControllerTest->reveal());
-        $this->actionService->setConsoleRouterManager($this->consoleRouterManager->reveal());
-        $this->actionService->setStep($this->step->reveal());
-        */
     }
 
     /**
-     * @group b1
+     * @group pxp1
      */
     public function testCreateActionControllerReturnConsoleValidation()
     {
         $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 
-        $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, null, null)
-            ->willReturn($this->consoleValidation->reveal())
-            ->shouldBeCalled();
+        $this->schemaAction->create(
+            'Gearing',
+            [
+                'controller' => 'MyController',
+                'name' => 'MyAction'
+            ***REMOVED***,
+            false
+        )
+        ->willReturn($this->consoleValidation->reveal())
+        ->shouldBeCalled();
 
         $arrayAction = [
             'name' => 'MyAction',
@@ -125,65 +120,77 @@ class ActionServiceTest extends TestCase
     }
 
     /**
-     * @group b2
+     * @group pxp5
      */
     public function testCreateActionControllerWithDb()
     {
         $arrayController = [
             'name' => 'MyController',
-            'type' => 'Action'
+            'type' => 'Action',
+            'db' => 'MyTable'
         ***REMOVED***;
 
         $arrayAction = [
             'name' => 'MyAction',
             'controller' => 'MyController',
-            'db' => 'MyTable'
+
         ***REMOVED***;
 
-        $this->controller = new Controller($arrayController);
+        $controller = new Controller($arrayController);
 
-        $this->action = new Action($arrayAction);
+        $action = new Action($arrayAction);
+        $controller->setType('Action');
+        $action->setController($controller);
 
 
-        $this->db = new Db(['table' => 'MyTable'***REMOVED***);
+        $this->schemaAction->create(
+            'Gearing',
+            [
+                'controller' => 'MyController',
+                'name' => 'MyAction'
+            ***REMOVED***,
+            false
+        )
+        ->willReturn($action)
+        ->shouldBeCalled();
 
+        //$this->db = new Db(['table' => 'MyTable'***REMOVED***);
 
-        $this->controller->setDb($this->db);
+        //$controller->setDb($this->db);
 
-        //$this->controller->getDb()->willReturn($this->db->reveal());
-        $this->action->setController(new Controller([
-            'name' => 'MyController',
-            'type' => 'Action'
-        ***REMOVED***));
+        $this->viewService->build($action)->willReturn(true)->shouldBeCalled();
+        $this->routerManager->create($action)->willReturn(true)->shouldBeCalled();
+        $this->navigationManager->create($action)->willReturn(true)->shouldBeCalled();
 
-        $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, 'MyTable', null)
-            ->willReturn($this->action)
-            ->shouldBeCalled();
+        $this->mvcController->buildAction($controller)->willReturn(true)->shouldBeCalled();
+        $this->mvcControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
 
-        $this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
-        $this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
+        $this->appController->build($action)->willReturn(true)->shouldBeCalled();
+        $this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
+        $this->feature->build($action)->willReturn(true)->shouldBeCalled();
 
-        $this->viewService->build($this->action)->willReturn(true)->shouldBeCalled();
-        $this->routerManager->create($this->action)->willReturn(true)->shouldBeCalled();
-        $this->navigationManager->create($this->action)->willReturn(true)->shouldBeCalled();
-
-        $this->mvcController->buildAction($this->controller)->willReturn(true)->shouldBeCalled();
-        $this->mvcControllerTest->buildAction($this->controller)->willReturn(true)->shouldBeCalled();
-
-        $this->appController->build($this->action)->willReturn(true)->shouldBeCalled();
-        $this->appControllerSpec->build($this->action)->willReturn(true)->shouldBeCalled();
-        $this->feature->build($this->action)->willReturn(true)->shouldBeCalled();
-
-        $this->step->createTableStep($this->db)->willReturn(true)->shouldBeCalled();
+        $this->step->createTableStep($action->getController()->getDb())->willReturn(true)->shouldBeCalled();
         //$this->page->build($action)->willReturn(true)->shouldBeCalled();
+
+        $tableObject = $this->prophesize(TableObject::class);
+
+        $this->tableService->getTableObject('MyTable')->willReturn($tableObject->reveal())->shouldBeCalled();
+
+        //$dbTwo->setTableObject($tableObjectTwo->reveal())->shouldBeCalled();
+
+        $columnManager = $this->prophesize(ColumnManager::class);
+        $this->columnService->getColumnManager($action->getController()->getDb())->willReturn($columnManager->reveal());
+        //$dbTwo->setColumnManager($columnManagerTwo)->shouldBeCalled();
+
+        $action->getController()->getDb()->setTableObject($tableObject->reveal());
+        $action->getController()->getDb()->setColumnManager($columnManager->reveal());
 
         $this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }
 
 
     /**
-     * @group Constructor
-     * @group ConstructorAction
+     * @group pxp4
      */
     public function testCreateActionController()
     {
@@ -201,13 +208,21 @@ class ActionServiceTest extends TestCase
         $controller = new Controller($arrayController);
 
         $action = new Action($arrayAction);
+        $controller->setType('Action');
+        $action->setController($controller);
 
-        $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, null, null)
-            ->willReturn($action)
-            ->shouldBeCalled();
-
-        $this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
-        $this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
+        $this->schemaAction->create(
+            'Gearing',
+            [
+                'controller' => 'MyController',
+                'name' => 'MyAction'
+            ***REMOVED***,
+            false
+        )
+        ->willReturn($action)
+        ->shouldBeCalled();
+        //$this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
+        //$this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
 
         $this->viewService->build($action)->willReturn(true)->shouldBeCalled();
         $this->routerManager->create($action)->willReturn(true)->shouldBeCalled();
@@ -225,11 +240,12 @@ class ActionServiceTest extends TestCase
     }
 
     /**
-     * @group Constructor
-     * @group ConstructorAction
+     * @group pxp2
+     * @group pxp3
      */
     public function testCreateConsoleController()
     {
+
         $arrayController = [
             'name' => 'MyController',
             'type' => 'Console',
@@ -244,23 +260,24 @@ class ActionServiceTest extends TestCase
         $controller = new Controller($arrayController);
 
         $action = new Action($arrayAction);
+        $controller->setType('Console');
+        $action->setController($controller);
 
-        $this->schemaAction->create('Gearing', 'MyController', 'MyAction', null, null, null, null, null)
+        $this->schemaAction->create(
+            'Gearing',
+            [
+                'controller' => 'MyController',
+                'name' => 'MyAction'
+            ***REMOVED***,
+            false
+        )
         ->willReturn($action)
         ->shouldBeCalled();
-
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
-        $this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
-
-        $this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
-
 
         $this->mvcConsoleController->buildAction($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcConsoleControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
 
-
         $this->consoleRouterManager->create($action)->willReturn(true)->shouldBeCalled();
-
 
         $this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }

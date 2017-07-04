@@ -140,16 +140,7 @@ class ControllerService  extends AbstractConstructor
 
         $this->controller = $this->getControllerService()->create(
             $module,
-            $data['name'***REMOVED***,
-            (isset($data['service'***REMOVED***) ? $data['service'***REMOVED*** : static::$defaultService),
-            (isset($data['type'***REMOVED***) ? $data['type'***REMOVED*** : static::$defaultType),
-            (isset($data['namespace'***REMOVED***) ? $data['namespace'***REMOVED*** : null),
-            (isset($data['extends'***REMOVED***) ? $data['extends'***REMOVED*** : null),
-            (isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null),
-            (isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null),
-            (isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null),
-            (isset($data['implements'***REMOVED***) ? $data['implements'***REMOVED*** : null),
-            (isset($data['user'***REMOVED***) ? $data['user'***REMOVED*** : null),
+            $data,
             false
         );
 

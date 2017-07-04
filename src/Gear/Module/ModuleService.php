@@ -354,7 +354,6 @@ class ModuleService implements ModuleProjectConnectorInterface
             //$this->getTestService()->createTests($this->type);
         }
 
-
         //$this->buildpath();
 
         $this->registerJson();
@@ -981,8 +980,21 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         $type = ($this->type == 'web') ? 'Action' : 'Console';
 
-        $this->getControllerService()->create($module, 'IndexController', 'factories', $type);
-        $this->getActionService()->create($module, 'IndexController', 'Index');
+        $this->getControllerService()->create(
+            $module,
+            [
+                'name' => 'IndexController',
+                'services' => 'factories',
+                'type' => $type
+            ***REMOVED***
+        );
+        $this->getActionService()->create(
+            $module,
+            [
+                'controller' => 'IndexController',
+                'name' => 'Index'
+            ***REMOVED***
+        );
 
         $json = $this->getSchemaLoaderService()->loadSchema();
         return $json;
