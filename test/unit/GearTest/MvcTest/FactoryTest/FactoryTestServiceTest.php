@@ -36,15 +36,16 @@ class FactoryTestServiceTest extends AbstractTestCase
         $stringService  = new \GearBase\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
-        $codeTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
-        $codeTest->setModule($this->module->reveal());
-        $codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $codeFactoryTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
+        $codeFactoryTest->setModule($this->module->reveal());
+        $codeFactoryTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $codeFactoryTest->setStringService($stringService);
 
         $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService();
         $this->factoryTest->setStringService($stringService);
         $this->factoryTest->setFileCreator($fileCreator);
         $this->factoryTest->setModule($this->module->reveal());
-        $this->factoryTest->setFactoryCodeTest($codeTest);
+        $this->factoryTest->setFactoryCodeTest($codeFactoryTest);
 
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());
@@ -61,11 +62,11 @@ class FactoryTestServiceTest extends AbstractTestCase
     {
         $location = vfsStream::url('module');
 
-        $this->module->getSrcModuleFolder()->willReturn($location);
+        $this->module->getTestUnitModuleFolder()->willReturn($location)->shouldBeCalled();
 
         $data = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
 
-        $file = $this->factoryTest->createFactoryTest($data, $location);
+        $file = $this->factoryTest->createFactoryTest($data);
 
         $this->assertEquals(file_get_contents($this->template.'/controller/console-with-special-dependency.phtml'), file_get_contents($file));
     }
@@ -77,11 +78,11 @@ class FactoryTestServiceTest extends AbstractTestCase
     {
         $location = vfsStream::url('module');
 
-        $this->module->getSrcModuleFolder()->willReturn($location);
+        $this->module->getTestUnitModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
 
-        $file = $this->factoryTest->createFactoryTest($data, $location);
+        $file = $this->factoryTest->createFactoryTest($data);
 
         $this->assertEquals(file_get_contents($this->template.'/src/service-with-special-dependency.phtml'), file_get_contents($file));
     }
@@ -93,11 +94,11 @@ class FactoryTestServiceTest extends AbstractTestCase
     {
         $location = vfsStream::url('module');
 
-        $this->module->getSrcModuleFolder()->willReturn($location);
+        $this->module->getTestUnitModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
 
-        $file = $this->factoryTest->createFactoryTest($data, $location);
+        $file = $this->factoryTest->createFactoryTest($data);
 
         $this->assertEquals(file_get_contents($this->template.'/src/repository-with-special-dependency.phtml'), file_get_contents($file));
     }
@@ -142,7 +143,7 @@ class FactoryTestServiceTest extends AbstractTestCase
             */
         }
 
-        $file = $this->factoryTest->createFactoryTest($data, vfsStream::url('module'));
+        $file = $this->factoryTest->createFactoryTest($data);
 
         $this->assertEquals(
             file_get_contents($this->template.'/db/'.$template.'.phtml'),
