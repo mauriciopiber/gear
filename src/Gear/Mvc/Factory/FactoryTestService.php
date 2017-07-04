@@ -18,10 +18,10 @@ class FactoryTestService extends AbstractMvcTest
 
     public function createConstructorSnippet($src)
     {
-        $dependency = $this->getCodeTest()->getConstructorDependency($src);
+        $dependency = $this->getFactoryCodeTest()->getConstructorDependency($src);
         echo $dependency.PHP_EOL;
 
-        $constructor = $this->getCodeTest()->getConstructor($src);
+        $constructor = $this->getFactoryCodeTest()->getConstructor($src);
         echo $constructor.PHP_EOL;
     }
 
@@ -31,7 +31,7 @@ class FactoryTestService extends AbstractMvcTest
             return $this->createControllerFactoryTest($src, $location);
         }
 
-        $location = $this->getCodeTest()->getLocation($src);
+        $location = $this->getFactoryCodeTest()->getLocation($src);
 
         $template = (!empty($src->getTemplate())) ? $src->getTemplate().'-test' : 'src-test';
 
@@ -74,7 +74,7 @@ class FactoryTestService extends AbstractMvcTest
 
     public function createControllerFactoryTest(Controller $src, $location = null)
     {
-        $location = $this->getCodeTest()->getLocation($src);
+        $location = $this->getFactoryCodeTest()->getLocation($src);
 
         $name = $src->getName();
 
