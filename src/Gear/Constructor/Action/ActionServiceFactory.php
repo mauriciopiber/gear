@@ -4,8 +4,6 @@ namespace Gear\Constructor\Action;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Constructor\Action\ActionService;
-use GearJson\Action\ActionService as ActionSchema;
-use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
 use Gear\Mvc\Config\NavigationManager;
@@ -20,7 +18,8 @@ use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Module\BasicModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Column\ColumnService;
+use Gear\Table\TableService;
 
 /**
  * PHP Version 5
@@ -59,7 +58,9 @@ class ActionServiceFactory implements FactoryInterface
             $serviceLocator->get(Page::class),
             $serviceLocator->get(Step::class),
             $serviceLocator->get(BasicModuleStructure::class),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get(ColumnService::class),
+            $serviceLocator->get(TableService::class)
         );
         unset($serviceLocator);
         return $factory;

@@ -34,28 +34,26 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getRequest()->getParam('module', false);
 
-        $basepath = $this->getRequest()->getParam('basepath');
-
         $file = $this->getRequest()->getParam('file');
 
-        $data = $this->getConstructService()->construct($module, $basepath, $file);
+        $data = $this->getConstructService()->construct($module, $file);
 
         $this->console = $this->getServiceLocator()->get('console');
 
-        if (count($data['created-msg'***REMOVED***)) {
-            foreach ($data['created-msg'***REMOVED*** as $msg) {
+        if ($data->hasCreated()) {
+            foreach ($data->getCreated() as $msg) {
                 $this->console->writeLine($msg, 0, 3);
             }
         }
 
-        if (count($data['skipped-msg'***REMOVED***)) {
-            foreach ($data['skipped-msg'***REMOVED*** as $msg) {
+        if ($data->hasSkipped()) {
+            foreach ($data->getSkipped() as $msg) {
                 $this->console->writeLine($msg, 0, 4);
             }
         }
 
-        if (count($data['invalid-msg'***REMOVED***)) {
-            foreach ($data['invalid-msg'***REMOVED*** as $msg) {
+        if ($data->hasValidated()) {
+            foreach ($data->getValidated() as $msg) {
                 $this->console->writeLine($msg, 0, 2);
             }
         }
@@ -64,7 +62,7 @@ class ModuleController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
         $model = new ConsoleModel();
 
-        if (count($data['invalid-msg'***REMOVED***) > 0) {
+        if ($data->hasSkipped() || $data->hasValidated()) {
             $model->setErrorLevel(1);
         }
 

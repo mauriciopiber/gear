@@ -41,18 +41,17 @@ src:
   10:
     name: ComposerService
     type: Factory
-    namespace: Mvc\Module
+    namespace: Module
     service: factories
     dependency:
       0: 
-        class: 'Gear\Module\BasicModuleStructure'
+        class: 'Module\BasicModuleStructure'
       1:
-        class: 'Gear\Edge\ComposerEdge'
+        class: 'Edge\ComposerEdge'
       2:
-        class: 'Gear\Creator\FileCreator' 
+        class: 'Creator\FileCreator\FileCreator' 
       3:
-        class: 'Gear\Util\Vector\StringService'
-        aliase: 'Gear\Util\String'
+        class: 'Util\Vector\ArrayService'
 #  2:
 #    name: InterfaceCode
 #    type: Service

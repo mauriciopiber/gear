@@ -116,7 +116,7 @@ class SrcServiceTest extends TestCase
     }
 
     /**
-     * @group x9
+     * @group mmm3
      */
     public function testCreateEntities()
     {
@@ -187,7 +187,16 @@ class SrcServiceTest extends TestCase
             $srcTwo->reveal()
         ***REMOVED***)->willReturn(true)->shouldBeCalled();
 
-        $this->assertTrue($this->service->createEntities($data));
+        $this->assertEquals(
+            [
+                'created' => [
+                    $srcOne->reveal(),
+                    $srcTwo->reveal()
+                ***REMOVED***,
+                'validated' => [***REMOVED***
+            ***REMOVED***,
+            $this->service->createEntities($data)
+        );
     }
 
     /**
@@ -325,7 +334,7 @@ class SrcServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->fixtureService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
-        $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
+        //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
     }
@@ -386,7 +395,7 @@ class SrcServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->valueObjectService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
-        $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
+        //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
     }
@@ -406,7 +415,7 @@ class SrcServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->interfaceService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
-        $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
+        //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
     }
@@ -471,7 +480,8 @@ class SrcServiceTest extends TestCase
     }
 
     /**
-     * @group mm1
+     * @group mmm1
+     * @group mmm2
      */
     public function testCreateFactory()
     {
@@ -479,11 +489,20 @@ class SrcServiceTest extends TestCase
 
         $this->src = $this->prophesize('GearJson\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
-        $this->src->getDb()->willReturn(null)->shouldBeCalled();
+        //$this->src->getDb()->willReturn(null)->shouldBeCalled();
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->mockSchemaSrcCreate('MyModule', 'MyService', $type);
+        $this->schema->factory(
+            'MyModule',
+            [
+                'name' => 'MyService',
+                'type' => 'Factory',
+            ***REMOVED***,
+            false
+        )->willReturn($this->src->reveal())->shouldBeCalled();
+
+        //$this->mockSchemaSrcCreate('MyModule', 'MyService', $type);
 
         $this->factory->createFactory($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->factory->createConstructorSnippet($this->src->reveal())->willReturn(true)->shouldBeCalled();
@@ -498,13 +517,16 @@ class SrcServiceTest extends TestCase
             'type' => 'Factory'
         ***REMOVED***;
 
-        $create = $this->service->create($data);
-        $this->assertTrue($create);
+        $create = $this->service->createAdditional([$data***REMOVED***);
+        $this->assertEquals(
+            [$this->src->reveal()***REMOVED***,
+            $create['created'***REMOVED***
+        );
 
     }
 
     /**
-     * @group x2
+     * @group mmm1
      */
     public function testCreateTrait()
     {
@@ -512,11 +534,18 @@ class SrcServiceTest extends TestCase
 
         $this->src = $this->prophesize('GearJson\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
-        $this->src->getDb()->willReturn(null)->shouldBeCalled();
+        //$this->src->getDb()->willReturn(null)->shouldBeCalled();
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->mockSchemaSrcCreate('MyModule', 'MyService', $type);
+        $this->schema->factory(
+            'MyModule',
+            [
+                'name' => 'MyService',
+                'type' => 'Trait',
+            ***REMOVED***,
+            false
+        )->willReturn($this->src->reveal())->shouldBeCalled();
 
         $this->trait->createTrait($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->traitTest->createTraitTest($this->src->reveal())->willReturn(true)->shouldBeCalled();
@@ -527,10 +556,11 @@ class SrcServiceTest extends TestCase
             'type' => 'Trait'
         ***REMOVED***;
 
-
-
-        $create = $this->service->create($data);
-        $this->assertTrue($create);
+        $create = $this->service->createAdditional([$data***REMOVED***);
+        $this->assertEquals(
+            [$this->src->reveal()***REMOVED***,
+            $create['created'***REMOVED***
+        );
     }
 
     /**

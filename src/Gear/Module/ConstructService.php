@@ -30,6 +30,7 @@ use Gear\Constructor\Controller\ControllerService;
 use Gear\Constructor\Action\ActionService;
 use Gear\Module\Exception\GearfileNotFoundException;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Module\ConstructStatusObject;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.
@@ -46,6 +47,8 @@ use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
  */
 class ConstructService extends AbstractJsonService
 {
+    private $constructStatus;
+
     use DbServiceTrait;
 
     use AppServiceTrait;
@@ -134,11 +137,9 @@ class ConstructService extends AbstractJsonService
      *
      * @return boolean
      */
-    public function construct($module, $basepath, $fileConfig = null)
+    public function construct($module, $fileConfig = null)
     {
-        unset($basepath);
-
-        $constructList = ['module' => $module, 'skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***, 'invalid-msg' => [***REMOVED******REMOVED***;
+        $this->constructStatus = new ConstructStatusObject();
 
         if (!empty($fileConfig) && empty($this->configLocation)) {
             $this->setConfigLocation($fileConfig);
@@ -161,32 +162,30 @@ class ConstructService extends AbstractJsonService
                     continue;
                 }
 
-                $constructList = array_merge_recursive($constructList, $this->constructSrc($module, $src));
+                $this->constructSrc($module, $src);
             }
 
-
-
             if (count($entity) > 0) {
-                $this->getSrcConstructor()->createEntities($entity);
+                $this->constructSrcEntity($entity);
+                //$this->getSrcConstructor()->createEntities($entity);
             }
 
             if (count($addon) > 0) {
-                $this->getSrcConstructor()->createAdditional($addon);
+                $this->constructSrcAdditional($addon);
+                //$this->getSrcConstructor()->createAdditional($addon);
             }
         }
 
         if (isset($data['db'***REMOVED***)) {
             foreach ($data['db'***REMOVED*** as $db) {
-                $constructList = array_merge_recursive($constructList, $this->constructDb($module, $db));
+                $this->constructDb($module, $db);
             }
         }
 
         if (isset($data['controller'***REMOVED***)) {
             foreach ($data['controller'***REMOVED*** as $controller) {
-                $constructList = array_merge_recursive(
-                    $constructList,
-                    $this->constructController($module, $controller)
-                );
+
+                $this->constructController($module, $controller);
 
                 if (isset($controller['actions'***REMOVED***)) {
                     foreach ($controller['actions'***REMOVED*** as $action) {
@@ -198,10 +197,9 @@ class ConstructService extends AbstractJsonService
                             $action['columns'***REMOVED*** = $controller['columns'***REMOVED***;
                         }
 
-                        $constructList = array_merge_recursive(
-                            $constructList,
-                            $this->constructAction($module, $controller['name'***REMOVED***, $action)
-                        );
+
+                        $this->constructAction($module, $controller['name'***REMOVED***, $action);
+
                     }
                 }
             }
@@ -209,155 +207,188 @@ class ConstructService extends AbstractJsonService
 
         if (isset($data['app'***REMOVED***)) {
             foreach ($data['app'***REMOVED*** as $app) {
-                $constructList = array_merge_recursive($constructList, $this->constructApp($module, $app));
+                $this->constructApp($module, $app);
             }
         }
 
-        return $constructList;
+        //return $constructList;
+
+        return $this->constructStatus;
     }
+
+    public function constructSrcEntity($entity)
+    {
+        $data = $this->getSrcConstructor()->createEntities($entity);
+
+        $this->processConstructor($data);
+    }
+
+    public function processConstructor($data)
+    {
+        if (isset($data['created'***REMOVED***)) {
+            foreach ($data['created'***REMOVED*** as $src) {
+                $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $src->getName(), $src->getType()));
+            }
+        }
+
+        if (isset($data['skipped'***REMOVED***)) {
+            foreach ($data['skipped'***REMOVED*** as $src) {
+                $this->constructStatus->addSkipped(sprintf(self::SRC_SKIPPED, $src->getName(), $src->getType()));
+            }
+        }
+
+        if (isset($data['validated'***REMOVED***)) {
+            foreach ($data['validated'***REMOVED*** as $src) {
+                $this->constructStatus->addValidated(
+                    sprintf(
+                        self::SRC_VALIDATE,
+                        (isset($src['name'***REMOVED***) ? $src['name'***REMOVED*** : ''),
+                        (isset($src['type'***REMOVED***) ? $src['type'***REMOVED*** : '')
+                    )
+                );
+                $this->constructStatus->addValidated($srcItem->getErrors());
+            }
+        }
+    }
+
+    public function constructSrcAdditional($addon)
+    {
+        $data = $this->getSrcConstructor()->createAdditional($addon);
+
+        $this->processConstructor($data);
+    }
+
 
     public function constructSrc($module, array $src)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***, 'invalid-msg' => [***REMOVED******REMOVED***;
+        $srcItem = $this->getSrcService()->factory($module, $src, false);
 
-        $srcItem = new Src($src);
+        if ($srcItem instanceof ConsoleValidationStatus) {
+            $this->constructStatus->addValidated(
+                sprintf(
+                    self::SRC_VALIDATE,
+                    (isset($src['name'***REMOVED***) ? $src['name'***REMOVED*** : ''),
+                    (isset($src['type'***REMOVED***) ? $src['type'***REMOVED*** : '')
+                )
+            );
+            $this->constructStatus->addValidated($srcItem->getErrors());
+            return;
+        }
 
         if ($this->getSrcService()->srcExist($module, $srcItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType());
-
-            return $constructList;
+            $this->constructStatus->addSkipped(sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType()));
+            return;
         }
 
-        $created = $this->getSrcConstructor()->create($src);
-
-        if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_VALIDATE, $srcItem->getName(), $srcItem->getType());
-            foreach ($created->getErrors() as $errors) {
-                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
-            }
-            return $constructList;
-        }
-
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType());
-        return $constructList;
+        $created = $this->getSrcConstructor()->construct($srcItem);
+        $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType()));
     }
 
     public function constructApp($module, array $app)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $appItem = new App($app);
 
         if ($this->getAppService()->appExist($module, $appItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::APP_SKIP, $appItem->getName(), $appItem->getType());
+            $this->constructStatus->addSkipped(sprintf(self::APP_SKIP, $appItem->getName(), $appItem->getType()));
 
-            return $constructList;
+            return;
         }
 
         $created = $this->getAppConstructor()->create($app);
 
         if ($created) {
-            $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::APP_CREATED, $appItem->getName(), $appItem->getType());
+            $this->constructStatus->addCreated(sprintf(self::APP_CREATED, $appItem->getName(), $appItem->getType()));
         }
 
-        return $constructList;
+        return null;
     }
 
     public function constructDb($module, array $db)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $dbItem = new Db($db);
 
         if ($this->getDbService()->dbExist($module, $dbItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_SKIP, $dbItem->getTable());
+            $this->constructStatus->addSkipped(sprintf(self::DB_SKIP, $dbItem->getTable()));
 
-            return $constructList;
+            return;
         }
 
         $created = $this->getDbConstructor()->create($db);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_VALIDATE, $dbItem->getTable());
-
-            foreach ($created->getErrors() as $errors) {
-                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
-            }
-
-            return $constructList;
+            $this->constructStatus->addValidated(sprintf(self::DB_VALIDATE, $dbItem->getTable()));
+            $this->constructStatus->addValidated($created->getErrors());
+            return;
         }
 
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::DB_CREATED, $dbItem->getTable());
-        return $constructList;
+        $this->constructStatus->addCreated(sprintf(self::DB_CREATED, $dbItem->getTable()));
+
+        return;
     }
 
     public function constructController($module, array $controller)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
 
         $controllerItem = new Controller($controller);
 
         if ($this->getControllerService()->controllerExist($module, $controllerItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_SKIP, $controllerItem->getName());
+            $this->constructStatus->addSkipped(sprintf(self::CONTROLLER_SKIP, $controllerItem->getName()));
 
-            return $constructList;
+            return;
         }
 
         $created = $this->getControllerConstructor()->createController($controller);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_VALIDATE, $controllerItem->getName());
+            $this->constructStatus->addValidated(sprintf(self::CONTROLLER_VALIDATE, $controllerItem->getName()));
+            $this->constructStatus->addValidated($created->getErrors());
 
+            /**
             foreach ($created->getErrors() as $errors) {
                 $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
             }
 
             return $constructList;
+            */
+            return;
         }
 
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(self::CONTROLLER_CREATED, $controllerItem->getName());
+        $this->constructStatus->addCreated(sprintf(self::CONTROLLER_CREATED, $controllerItem->getName()));
 
-        return $constructList;
+        return;
     }
 
     public function constructAction($module, $controller, array $action)
     {
-        $constructList = ['skipped-msg' => [***REMOVED***, 'created-msg' => [***REMOVED***,' invalid-msg' => [***REMOVED******REMOVED***;
-
         $actionItem = new Action($action);
 
-
-
         if ($this->getActionService()->actionExist($module, $actionItem)) {
-            $constructList['skipped-msg'***REMOVED***[***REMOVED*** = sprintf(
+            $this->constructStatus->addSkipped(sprintf(
                 self::ACTION_SKIP,
                 $actionItem->getName(),
                 $controller//->getName()
-            );
+            ));
 
-            return $constructList;
+            return;
         }
-
 
         $created = $this->getActionConstructor()->createControllerAction($action);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $constructList['invalid-msg'***REMOVED***[***REMOVED*** = sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $controller);
-
-            foreach ($created->getErrors() as $errors) {
-                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
-            }
-
-            return $constructList;
+            $this->constructStatus->addValidated(sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $controller));
+            $this->constructStatus->addValidated($created->getErrors());
+            return;
         }
 
-        $constructList['created-msg'***REMOVED***[***REMOVED*** = sprintf(
+        $this->constructStatus->addCreated(sprintf(
             self::ACTION_CREATED,
             $actionItem->getName(),
             $controller//->getName()
-        );
+        ));
 
-        return $constructList;
+        return;
     }
 
     /**

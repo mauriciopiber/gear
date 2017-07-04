@@ -1,18 +1,19 @@
 <?php
-namespace Gear\Mvc\Module;
+namespace Gear\Module;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Mvc\Module\ComposerService;
-use Gear\Gear\Module\BasicModuleStructure;
-use Gear\Gear\Edge\ComposerEdge;
-use Gear\Gear\Creator\FileCreator;
+use Gear\Module\ComposerService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Edge\ComposerEdge;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Util\Vector\ArrayService;
 
 /**
  * PHP Version 5
  *
  * @category Factory
- * @package Gear/Mvc/Module
+ * @package Gear/Module
  * @author Mauricio Piber <mauriciopiber@gmail.com>
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
@@ -31,7 +32,8 @@ class ComposerServiceFactory implements FactoryInterface
         $factory = new ComposerService(
             $serviceLocator->get(BasicModuleStructure::class),
             $serviceLocator->get(ComposerEdge::class),
-            $serviceLocator->get(FileCreator::class)
+            $serviceLocator->get(FileCreator::class),
+            $serviceLocator->get(ArrayService::class)
         );
         unset($serviceLocator);
         return $factory;

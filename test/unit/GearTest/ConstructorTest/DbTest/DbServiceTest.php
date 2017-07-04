@@ -78,18 +78,7 @@ class DbServiceTest extends TestCase
     }
 
     /**
-     * @group x1
-     */
-    public function testMissingTableName()
-    {
-        $this->expectException(Exception::class);
-        $this->service->create([
-            'table' => null
-        ***REMOVED***);
-    }
-
-    /**
-     * @group x3
+     * @group mmm4
      */
     public function testCreateDbWithDefaultValues()
     {
@@ -101,8 +90,20 @@ class DbServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
 
-        $this->dbService->create($module, $table, [***REMOVED***, 'all', 'admin', 'factories', null, false)
-        ->willReturn($this->db->reveal())
+        $this->dbService->create(
+            $module,
+            [
+                'table' => $table,
+                /*
+                'columns' => [***REMOVED***,
+                'user' => 'all',
+                'role' => 'admin',
+                'service' => 'factories',
+                'namespace' => null
+                */
+            ***REMOVED***,
+            false
+        )->willReturn($this->db->reveal())
         ->shouldBeCalled();
 
         $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
@@ -147,7 +148,6 @@ class DbServiceTest extends TestCase
         $columns = [***REMOVED***;
         $user = 'all';
         $role = 'guest';
-        $service = 'factories';
         $namespace = 'MyTable';
         $module = 'MyModule';
 
@@ -156,9 +156,18 @@ class DbServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
 
-        $this->dbService->create($module, $table, $columns, $user, $role, $service, $namespace, false)
-            ->willReturn($this->db->reveal())
-            ->shouldBeCalled();
+        $this->dbService->create(
+            $module,
+            [
+                'table' => $table,
+                'columns' => $columns,
+                'user' => $user,
+                'role' => $role,
+                'namespace' => $namespace,
+            ***REMOVED***,
+            false
+        )->willReturn($this->db->reveal())
+        ->shouldBeCalled();
 
         $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
 
@@ -217,9 +226,18 @@ class DbServiceTest extends TestCase
 
         $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 
-        $this->dbService->create($module, $table, $columns, $user, $role, $service, $namespace, false)
-            ->willReturn($this->consoleValidation->reveal())
-            ->shouldBeCalled();
+        $this->dbService->create(
+            $module,
+            [
+                'table' => $table,
+                'columns' => $columns,
+                'user' => $user,
+                'role' => $role,
+                'namespace' => $namespace,
+            ***REMOVED***,
+            false
+            )->willReturn($this->consoleValidation->reveal())
+        ->shouldBeCalled();
 
         $service = $this->service->create([
             'table' => $table,

@@ -43,6 +43,8 @@ use Gear\Mvc\Spec\Step\Step;
 use Gear\Module\BasicModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Constructor\AbstractConstructor;
+use Gear\Table\TableService\TableService;
+use Gear\Column\ColumnService;
 
 /**
  * @group m1
@@ -124,9 +126,11 @@ class ActionService extends AbstractConstructor
         Page $page,
         Step $step,
         BasicModuleStructure $basicModuleStructure,
-        StringService $stringService
+        StringService $stringService,
+        TableService $tableService,
+        ColumnService $columnService
     ) {
-        parent::__construct($basicModuleStructure, $stringService, null, null);
+        parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
         $this->actionService = $actionService;
         //$this->configService = $configService;
@@ -154,37 +158,21 @@ class ActionService extends AbstractConstructor
 
         $this->action = $this->getActionService()->create(
             $module,
-            $data['controller'***REMOVED***,
-            $data['name'***REMOVED***,
-            isset($data['route'***REMOVED***) ? $data['route'***REMOVED*** : null,
-            isset($data['role'***REMOVED***) ? $data['role'***REMOVED*** : null,
-            isset($data['dependency'***REMOVED***) ? $data['dependency'***REMOVED*** : null,
-            isset($data['db'***REMOVED***) ? $data['db'***REMOVED*** : null,
-            isset($data['columns'***REMOVED***) ? $data['columns'***REMOVED*** : null
+            $data,
+            false
         );
 
         if ($this->action instanceof ConsoleValidationStatus) {
             return $this->action;
         }
 
-        $this->controller = $this->getActionService()->getSchemaService()->getController($module, $data['controller'***REMOVED***);
-        $this->controller = new Controller($this->controller);
+        $this->controller = $this->action->getController();
 
-        if (isset($data['db'***REMOVED***)) {
-            $db = new Db([
-                'table' => $data['db'***REMOVED***,
-                'columns' => (isset($data['columns'***REMOVED***)) ? $data['columns'***REMOVED*** : null
-            ***REMOVED***);
-            $this->controller->setDb($db);
-
+        if (null !== $this->controller->getDb()) {
             $this->setDbOptions($this->controller);
-        //$this->controller->setDb
         }
 
-        $this->action->setController($this->controller);
-
-
-        if ($this->str('class', $this->controller->getType()) == 'Action') {
+        if ($this->controller->isType('Action')) {
             $this->getMvcController()->buildAction($this->controller);
             $this->getControllerTestService()->buildAction($this->controller);
             $this->getNavigationManager()->create($this->action);
@@ -200,6 +188,7 @@ class ActionService extends AbstractConstructor
             //$this->getPage()->build($this->action);
             return true;
         }
+
 
 
         $this->getConsoleController()->buildAction($this->controller);

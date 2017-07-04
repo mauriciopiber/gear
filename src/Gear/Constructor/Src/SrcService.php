@@ -51,6 +51,7 @@ use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\InterfaceService;
 use Gear\Constructor\AbstractConstructor;
 use GearJson\Src\SrcTypesInterface;
+use GearJson\Src\Src;
 
 class SrcService extends AbstractConstructor
 {
@@ -140,6 +141,12 @@ class SrcService extends AbstractConstructor
         $this->interfaceService = $interfaceService;
     }
 
+    public function construct(Src $src)
+    {
+        $this->src = $src;
+        return $This->factory();
+    }
+
     public function create(array $data)
     {
         $module = $this->getModule()->getModuleName();
@@ -161,14 +168,56 @@ class SrcService extends AbstractConstructor
         return $this->factory();
     }
 
-    public function createAdditional(array $src)
+    public function createFactory(Src $srcObject)
     {
+        $this->getFactoryService()->createFactory($srcObject);
+        $this->getFactoryService()->createConstructorSnippet($srcObject);
+        $this->getFactoryTestService()->createFactoryTest($srcObject);
+        $this->getFactoryTestService()->createConstructorSnippet($srcObject);
+    }
 
+    public function createTrait(Src $srcObject)
+    {
+        $this->getTraitService()->createTrait($srcObject);
+        $this->getTraitTestService()->createTraitTest($srcObject);
+    }
+
+    public function createAdditional(array $srcs)
+    {
+        $validations = ['created' => [***REMOVED***, 'validated' => [***REMOVED******REMOVED***;
+
+        foreach ($srcs as $src) {
+            $srcObject = $this->getSrcService()->factory(
+                $this->getModule()->getModuleName(),
+                $src,
+                false
+            );
+
+            if ($srcObject instanceof ConsoleValidationStatus) {
+                $validations['validated'***REMOVED***[***REMOVED*** = $srcObject;
+                continue;
+            }
+
+            switch ($srcObject->getType()) {
+                case SrcTypesInterface::TRAIT:
+                    $this->createTrait($srcObject);
+                    break;
+                case SrcTypesInterface::FACTORY:
+                    $this->createFactory($srcObject);
+                    break;
+            }
+
+
+            $validations['created'***REMOVED***[***REMOVED*** = $srcObject;
+
+        }
+
+        return $validations;
     }
 
     public function createEntities(array $srcs)
     {
-        $this->srcs = [***REMOVED***;
+        $validations = ['created' => [***REMOVED***, 'validated' => [***REMOVED******REMOVED***;
 
         foreach ($srcs as $src) {
             $srcItem = $this->getSrcService()->create(
@@ -177,12 +226,22 @@ class SrcService extends AbstractConstructor
                 false
             );
 
+            if ($srcItem instanceof ConsoleValidationStatus) {
+                $validations['validated'***REMOVED***[***REMOVED*** = $srcItem;
+                continue;
+            }
+
             $this->setDbOptions($srcItem);
+
 
             $this->srcs[***REMOVED*** = $srcItem;
         }
         $entity = $this->getEntityService();
-        return $entity->createEntities($this->srcs);
+        $entity->createEntities($this->srcs);
+
+        $validations['created'***REMOVED*** = $this->srcs;
+
+        return $validations;
     }
 
     public function factory()
@@ -225,22 +284,6 @@ class SrcService extends AbstractConstructor
                     $filter = $this->getFilterService();
                     $status = $filter->create($this->src);
                     break;
-                case SrcTypesInterface::TRAIT:
-                    $factory = $this->getTraitService();
-                    $status = $factory->createTrait($this->src);
-
-                    $factory = $this->getTraitTestService();
-                    $status = $factory->createTraitTest($this->src);
-                    break;
-                case SrcTypesInterface::FACTORY:
-                    $factory = $this->getFactoryService();
-                    $factory->createFactory($this->src);
-                    $factory->createConstructorSnippet($this->src);
-
-                    $status = $this->getFactoryTestService()->createFactoryTest($this->src);
-                    $this->getFactoryTestService()->createConstructorSnippet($this->src);
-                    break;
-
                 case SrcTypesInterface::VALUE_OBJECT:
                     $valueObject = $this->getValueObjectService();
                     $status = $valueObject->create($this->src);
@@ -260,7 +303,7 @@ class SrcService extends AbstractConstructor
         } catch (\Exception $exception) {
             throw $exception;
         }
-        if (false === in_array($this->src->getType(), [SrcTypesInterface::TRAIT, SrcTypesInterface::FACTORY***REMOVED***)) {
+        if (false === in_array($this->src->getType(), [SrcTypesInterface::FIXTURE, SrcTypesInterface::INTERFACE, SrcTypesInterface::VALUE_OBJECT***REMOVED***)) {
             $this->getServiceManager()->create($this->src);
         }
         return $status;

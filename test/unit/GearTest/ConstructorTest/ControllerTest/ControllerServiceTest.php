@@ -5,6 +5,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Constructor\Controller\ControllerService;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Column\ColumnManager;
 
 /**
  * @group m1
@@ -62,7 +63,7 @@ class ControllerServiceTest extends TestCase
     }
 
     /**
-     * @group p1
+     * @group px1p
      */
     public function testCreateActionDbController()
     {
@@ -74,23 +75,24 @@ class ControllerServiceTest extends TestCase
         $this->controller->getType()->willReturn('Action')->shouldBeCalled();
 
         $this->schemaController->create(
-            "Gearing",
-            "MyController",
-            "factories",
-            "Action",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            'Gearing',
+            [
+                'name' => 'MyController',
+                //'service' => 'factories',
+                'type' => 'Action',
+            ***REMOVED***,
             false
         )->willReturn($this->controller->reveal())->shouldBeCalled();
 
         $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
         $this->tableService->getTableObject('My')->willReturn($this->tableObject->reveal())->shouldBeCalled();
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
+
+        $columnManager = $this->prophesize(ColumnManager::class);
+        $this->columnService->getColumnManager($this->db->reveal())->willReturn($columnManager->reveal())->shouldBeCalled();
+
+        $this->db->setColumnManager($columnManager->reveal())->shouldBeCalled();
+
 
         $this->configService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->mvcController->introspectFromTable($this->db->reveal())->shouldBeCalled();
@@ -108,7 +110,7 @@ class ControllerServiceTest extends TestCase
     }
 
     /**
-     * @group x1
+     * @group px2p
      */
     public function testCreateControllerReturnNullWithoutAType()
     {
@@ -117,22 +119,18 @@ class ControllerServiceTest extends TestCase
         //$this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 
         $this->schemaController->create(
-            "Gearing",
-            "MyController",
-            "factories",
-            "Actxion",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            'Gearing',
+            [
+                'name' => 'MyController',
+                'service' => 'factories',
+                'type' => 'Actxion',
+            ***REMOVED***,
             false
         )->willReturn($this->controller->reveal())->shouldBeCalled();
 
         $array = [
             'name' => 'MyController',
+            'service' => 'factories',
             'type' => 'Actxion',
         ***REMOVED***;
 
@@ -140,7 +138,7 @@ class ControllerServiceTest extends TestCase
     }
 
     /**
-     * @group x1
+     * @group px3p
      */
     public function testCreateControllerReturnValidation()
     {
@@ -148,21 +146,17 @@ class ControllerServiceTest extends TestCase
 
         $this->schemaController->create(
             "Gearing",
-            "MyController",
-            "factories",
-            "Action",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => 'MyController',
+                'service' => 'factories',
+                'type' => 'Action',
+            ***REMOVED***,
             false
         )->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
 
         $array = [
             'name' => 'MyController',
+            'service' => 'factories',
             'type' => 'Action',
         ***REMOVED***;
 
@@ -172,15 +166,15 @@ class ControllerServiceTest extends TestCase
     /**
      * @group Constructor
      * @group ConstructorController
+     * @group px4p
      */
     public function testCreateConsoleController()
     {
         $array = [
             'name' => 'MyController',
             'type' => 'Console',
-            'object' => '%s\Controller\MyController'
+            'service' => 'factories'
         ***REMOVED***;
-
 
         $controller = new Controller($array);
 
@@ -189,29 +183,28 @@ class ControllerServiceTest extends TestCase
         $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
-            "Gearing",
-            "MyController",
-            "factories",
-            "Console",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            'Gearing',
+            [
+                'name' => 'MyController',
+                'service' => 'factories',
+                'type' => 'Console',
+            ***REMOVED***,
             false
        )->willReturn($controller)->shouldBeCalled();
 
        $this->assertTrue($this->controllerService->createController($array));
     }
 
+    /**
+     * @group px5p
+     */
     public function testCreateController()
     {
         $array = [
             'name' => 'MyController',
             'type' => 'Action',
-            'object' => '%s\Controller\MyController'
+            'service' => 'factories'
+            //'object' => '%s\Controller\MyController'
         ***REMOVED***;
 
 
@@ -223,54 +216,14 @@ class ControllerServiceTest extends TestCase
 
         $this->schemaController->create(
             "Gearing",
-            "MyController",
-            "factories",
-            "Action",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            [
+                'name' => 'MyController',
+                'service' => 'factories',
+                'type' => 'Action',
+            ***REMOVED***,
             false
        )->willReturn($controller)->shouldBeCalled();
 
         $this->assertTrue($this->controllerService->createController($array));
     }
-
-    /*
-    public function testCreateControllerRest()
-    {
-        $array = [
-            'name' => 'MyController',
-            'type' => 'Restful',
-            'object' => '%s\Controller\MyController'
-        ***REMOVED***;
-
-        $controller = new Controller($array);
-
-        $this->schemaController->create(
-            "Gearing",
-            "MyController",
-            "factories",
-            "Restful",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            false
-       )->willReturn($controller)->shouldBeCalled();
-
-        $this->controllerService = new ControllerService();
-        $this->controllerService->setModule($this->module->reveal());
-        $this->controllerService->setControllerService($this->schemaController->reveal());
-        $this->controllerService->setStringService($this->stringService);
-
-        $this->assertNull($this->controllerService->createController($array));
-    }
-    */
 }

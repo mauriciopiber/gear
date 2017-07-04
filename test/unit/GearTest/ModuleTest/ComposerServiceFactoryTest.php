@@ -1,13 +1,14 @@
 <?php
-namespace GearTest\MvcTest\ModuleTest;
+namespace GearTest\ModuleTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Mvc\Module\ComposerServiceFactory;
-use Gear\Mvc\Module\ComposerService;
-use Gear\Gear\Module\BasicModuleStructure;
-use Gear\Gear\Edge\ComposerEdge;
-use Gear\Gear\Creator\FileCreator;
+use Gear\Module\ComposerServiceFactory;
+use Gear\Module\ComposerService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Edge\ComposerEdge;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Util\Vector\ArrayService;
 
 /**
  * @group Gear
@@ -30,6 +31,10 @@ class ComposerServiceFactoryTest extends TestCase
 
         $this->serviceLocator->get(FileCreator::class)
             ->willReturn($this->prophesize(FileCreator::class)->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get(ArrayService::class)
+            ->willReturn($this->prophesize(ArrayService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ComposerServiceFactory();
