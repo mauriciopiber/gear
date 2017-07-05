@@ -144,7 +144,7 @@ class SrcService extends AbstractConstructor
     public function construct(Src $src)
     {
         $this->src = $src;
-        return $This->factory();
+        return $this->factory();
     }
 
     public function create(array $data)
