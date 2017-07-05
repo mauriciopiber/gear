@@ -5,875 +5,875 @@ use Phinx\Migration\AbstractMigration;
 class SrcMvcEntity extends AbstractMigration
 {
     const TABLES = [
-        'src_mvc_basic' => [
+        'src_mvc_bsc' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic' => [
+                'clm_tim_bsc' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic' => [
+                'clm_dtt_bsc' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic' => [
+                'clm_dat_bsc' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic' => [
+                'clm_vrc_bsc' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic' => [
+                'clm_txt_bsc' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic' => [
+                'clm_dec_bsc' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic' => [
+                'clm_boo_bsc' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic' => [
+                'clm_int_bsc' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_upload_image' => [
-            'nullable' => false,
-            'unique' => false,
-            'referenced_assoc' => [
-                'upload_image'
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_upload_image' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_upload_image' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_upload_image' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_upload_image' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_upload_image' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_upload_image' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_upload_image' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_upload_image' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_unique' => [
-            'nullable' => false,
-            'unique' => true,
-            'referenced_assoc' => [
-
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_unique' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_unique' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_unique' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_unique' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_unique' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_unique' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_unique' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_unique' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_unique_upload_image' => [
-            'nullable' => false,
-            'unique' => true,
-            'referenced_assoc' => [
-                'upload_image'
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_unique_upload_image' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_unique_upload_image' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_unique_upload_image' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_unique_upload_image' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_unique_upload_image' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_unique_upload_image' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_unique_upload_image' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_unique_upload_image' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_nullable' => [
-            'nullable' => true,
-            'unique' => false,
-            'referenced_assoc' => [
-
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_nullable' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_nullable' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_nullable' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_nullable' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_nullable' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_nullable' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_nullable' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_nullable' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_nullable_upload_image' => [
-            'nullable' => true,
-            'unique' => false,
-            'referenced_assoc' => [
-                'upload_image'
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_nullable_upload_image' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_nullable_upload_image' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_nullable_upload_image' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_nullable_upload_image' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_nullable_upload_image' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_nullable_upload_image' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_nullable_upload_image' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_nullable_upload_image' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_unique_nullable' => [
-            'nullable' => true,
-            'unique' => true,
-            'referenced_assoc' => [
-
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_unique_nullable' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_unique_nullable' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_unique_nullable' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_unique_nullable' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_unique_nullable' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_unique_nullable' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_unique_nullable' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_unique_nullable' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_unique_nullable_upload_image' => [
-            'nullable' => true,
-            'unique' => true,
-            'referenced_assoc' => [
-                'upload_image'
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_unique_nullable_upload_image' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_unique_nullable_upload_image' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_unique_nullable_upload_image' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_unique_nullable_upload_image' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_unique_nullable_upload_image' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_unique_nullable_upload_image' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_unique_nullable_upload_image' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_unique_nullable_upload_image' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_low_strict' => [
-            'nullable' => false,
-            'unique' => false,
-            'referenced_assoc' => [
-
-            ***REMOVED***,
-            'columns' => [
-                'column_time_basic_low_strict' => [
-                    'type' => 'time'
-                ***REMOVED***,
-                'column_datetime_basic_low_strict' => [
-                    'type' => 'datetime'
-                ***REMOVED***,
-                'column_date_basic_low_strict' => [
-                    'type' => 'date'
-                ***REMOVED***,
-                'column_varchar_basic_low_strict' => [
-                    'type' => 'string'
-                ***REMOVED***,
-                'column_text_basic_low_strict' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_basic_low_strict' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_basic_low_strict' => [
-                    'type' => 'boolean'
-                ***REMOVED***,
-                'column_int_basic_low_strict' => [
-                    'type' => 'integer'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'src_mvc_basic_low_strict_upload_image' => [
+        'src_mvc_bsc_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_upload_image' => [
+                'clm_tim_bsc_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_upload_image' => [
+                'clm_dtt_bsc_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_upload_image' => [
+                'clm_dat_bsc_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_upload_image' => [
+                'clm_vrc_bsc_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_upload_image' => [
+                'clm_txt_bsc_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_upload_image' => [
+                'clm_dec_bsc_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_upload_image' => [
+                'clm_boo_bsc_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_upload_image' => [
+                'clm_int_bsc_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_unique' => [
+        'src_mvc_bsc_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_unique' => [
+                'clm_tim_bsc_uni' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_unique' => [
+                'clm_dtt_bsc_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_unique' => [
+                'clm_dat_bsc_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_unique' => [
+                'clm_vrc_bsc_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_unique' => [
+                'clm_txt_bsc_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_unique' => [
+                'clm_dec_bsc_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_unique' => [
+                'clm_boo_bsc_uni' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_unique' => [
+                'clm_int_bsc_uni' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_unique_upload_image' => [
+        'src_mvc_bsc_uni_upl' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_unique_upload_image' => [
+                'clm_tim_bsc_uni_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_unique_upload_image' => [
+                'clm_dtt_bsc_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_unique_upload_image' => [
+                'clm_dat_bsc_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_unique_upload_image' => [
+                'clm_vrc_bsc_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_unique_upload_image' => [
+                'clm_txt_bsc_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_unique_upload_image' => [
+                'clm_dec_bsc_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_unique_upload_image' => [
+                'clm_boo_bsc_uni_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_unique_upload_image' => [
+                'clm_int_bsc_uni_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_nullable' => [
+        'src_mvc_bsc_nul' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_nullable' => [
+                'clm_tim_bsc_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_nullable' => [
+                'clm_dtt_bsc_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_nullable' => [
+                'clm_dat_bsc_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_nullable' => [
+                'clm_vrc_bsc_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_nullable' => [
+                'clm_txt_bsc_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_nullable' => [
+                'clm_dec_bsc_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_nullable' => [
+                'clm_boo_bsc_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_nullable' => [
+                'clm_int_bsc_nul' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_nullable_upload_image' => [
+        'src_mvc_bsc_nul_upl' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_nullable_upload_image' => [
+                'clm_tim_bsc_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_nullable_upload_image' => [
+                'clm_dtt_bsc_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_nullable_upload_image' => [
+                'clm_dat_bsc_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_nullable_upload_image' => [
+                'clm_vrc_bsc_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_nullable_upload_image' => [
+                'clm_txt_bsc_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_nullable_upload_image' => [
+                'clm_dec_bsc_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_nullable_upload_image' => [
+                'clm_boo_bsc_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_nullable_upload_image' => [
+                'clm_int_bsc_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_unique_nullable' => [
+        'src_mvc_bsc_uni_nul' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_unique_nullable' => [
+                'clm_tim_bsc_uni_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_unique_nullable' => [
+                'clm_dtt_bsc_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_unique_nullable' => [
+                'clm_dat_bsc_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_unique_nullable' => [
+                'clm_vrc_bsc_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_unique_nullable' => [
+                'clm_txt_bsc_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_unique_nullable' => [
+                'clm_dec_bsc_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_unique_nullable' => [
+                'clm_boo_bsc_uni_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_unique_nullable' => [
+                'clm_int_bsc_uni_nul' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_low_strict_unique_nullable_upload_image' => [
+        'src_mvc_bsc_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_tim_bsc_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_dtt_bsc_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_dat_bsc_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_bsc_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_txt_bsc_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_dec_bsc_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_boo_bsc_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_low_strict_unique_nullable_upload_image' => [
+                'clm_int_bsc_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict' => [
+        'src_mvc_bsc_lws' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict' => [
+                'clm_tim_bsc_lws' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict' => [
+                'clm_dtt_bsc_lws' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict' => [
+                'clm_dat_bsc_lws' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict' => [
+                'clm_vrc_bsc_lws' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict' => [
+                'clm_txt_bsc_lws' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict' => [
+                'clm_dec_bsc_lws' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict' => [
+                'clm_boo_bsc_lws' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict' => [
+                'clm_int_bsc_lws' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_upload_image' => [
+        'src_mvc_bsc_lws_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_upload_image' => [
+                'clm_tim_bsc_lws_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_upload_image' => [
+                'clm_dtt_bsc_lws_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_upload_image' => [
+                'clm_dat_bsc_lws_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_upload_image' => [
+                'clm_vrc_bsc_lws_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_upload_image' => [
+                'clm_txt_bsc_lws_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_upload_image' => [
+                'clm_dec_bsc_lws_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_upload_image' => [
+                'clm_boo_bsc_lws_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_upload_image' => [
+                'clm_int_bsc_lws_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_unique' => [
+        'src_mvc_bsc_lws_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_unique' => [
+                'clm_tim_bsc_lws_uni' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_unique' => [
+                'clm_dtt_bsc_lws_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_unique' => [
+                'clm_dat_bsc_lws_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_unique' => [
+                'clm_vrc_bsc_lws_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_unique' => [
+                'clm_txt_bsc_lws_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_unique' => [
+                'clm_dec_bsc_lws_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_unique' => [
+                'clm_boo_bsc_lws_uni' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_unique' => [
+                'clm_int_bsc_lws_uni' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_unique_upload_image' => [
+        'src_mvc_bsc_lws_uni_upl' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_unique_upload_image' => [
+                'clm_tim_bsc_lws_uni_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_unique_upload_image' => [
+                'clm_dtt_bsc_lws_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_unique_upload_image' => [
+                'clm_dat_bsc_lws_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_unique_upload_image' => [
+                'clm_vrc_bsc_lws_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_unique_upload_image' => [
+                'clm_txt_bsc_lws_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_unique_upload_image' => [
+                'clm_dec_bsc_lws_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_unique_upload_image' => [
+                'clm_boo_bsc_lws_uni_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_unique_upload_image' => [
+                'clm_int_bsc_lws_uni_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_nullable' => [
+        'src_mvc_bsc_lws_nul' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_nullable' => [
+                'clm_tim_bsc_lws_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_nullable' => [
+                'clm_dtt_bsc_lws_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_nullable' => [
+                'clm_dat_bsc_lws_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_nullable' => [
+                'clm_vrc_bsc_lws_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_nullable' => [
+                'clm_txt_bsc_lws_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_nullable' => [
+                'clm_dec_bsc_lws_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_nullable' => [
+                'clm_boo_bsc_lws_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_nullable' => [
+                'clm_int_bsc_lws_nul' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_nullable_upload_image' => [
+        'src_mvc_bsc_lws_nul_upl' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_nullable_upload_image' => [
+                'clm_tim_bsc_lws_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_nullable_upload_image' => [
+                'clm_dtt_bsc_lws_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_nullable_upload_image' => [
+                'clm_dat_bsc_lws_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_nullable_upload_image' => [
+                'clm_vrc_bsc_lws_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_nullable_upload_image' => [
+                'clm_txt_bsc_lws_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_nullable_upload_image' => [
+                'clm_dec_bsc_lws_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_nullable_upload_image' => [
+                'clm_boo_bsc_lws_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_nullable_upload_image' => [
+                'clm_int_bsc_lws_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_unique_nullable' => [
+        'src_mvc_bsc_lws_uni_nul' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_unique_nullable' => [
+                'clm_tim_bsc_lws_uni_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_unique_nullable' => [
+                'clm_dtt_bsc_lws_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_unique_nullable' => [
+                'clm_dat_bsc_lws_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_unique_nullable' => [
+                'clm_vrc_bsc_lws_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_unique_nullable' => [
+                'clm_txt_bsc_lws_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_unique_nullable' => [
+                'clm_dec_bsc_lws_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_unique_nullable' => [
+                'clm_boo_bsc_lws_uni_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_unique_nullable' => [
+                'clm_int_bsc_lws_uni_nul' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_basic_strict_unique_nullable_upload_image' => [
+        'src_mvc_bsc_lws_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_time_basic_strict_unique_nullable_upload_image' => [
+                'clm_tim_bsc_lws_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_basic_strict_unique_nullable_upload_image' => [
+                'clm_dtt_bsc_lws_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_basic_strict_unique_nullable_upload_image' => [
+                'clm_dat_bsc_lws_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_basic_strict_unique_nullable_upload_image' => [
+                'clm_vrc_bsc_lws_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_text_basic_strict_unique_nullable_upload_image' => [
+                'clm_txt_bsc_lws_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_basic_strict_unique_nullable_upload_image' => [
+                'clm_dec_bsc_lws_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_basic_strict_unique_nullable_upload_image' => [
+                'clm_boo_bsc_lws_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_int_basic_strict_unique_nullable_upload_image' => [
+                'clm_int_bsc_lws_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete' => [
+        'src_mvc_bsc_str' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete' => [
+                'clm_tim_bsc_str' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete' => [
-                    'type' => 'text'
-                ***REMOVED***,
-                'column_decimal_complete' => [
+                'clm_dec_bsc_str' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete' => [
-                    'type' => 'decimal'
-                ***REMOVED***,
-                'column_boolean_complete' => [
+                'clm_boo_bsc_str' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete' => [
+                'clm_int_bsc_str' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_upl' => [
+            'nullable' => false,
+            'unique' => false,
+            'referenced_assoc' => [
+                'upload_image'
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_upl' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_upl' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_upl' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_upl' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_upl' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_upl' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_upl' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_upl' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_uni' => [
+            'nullable' => false,
+            'unique' => true,
+            'referenced_assoc' => [
+
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_uni' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_uni' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_uni' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_uni' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_uni' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_uni' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_uni' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_uni' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_uni_upl' => [
+            'nullable' => false,
+            'unique' => true,
+            'referenced_assoc' => [
+                'upload_image'
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_uni_upl' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_uni_upl' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_uni_upl' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_uni_upl' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_uni_upl' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_uni_upl' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_uni_upl' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_uni_upl' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_nul' => [
+            'nullable' => true,
+            'unique' => false,
+            'referenced_assoc' => [
+
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_nul' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_nul' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_nul' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_nul' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_nul' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_nul' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_nul' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_nul' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_nul_upl' => [
+            'nullable' => true,
+            'unique' => false,
+            'referenced_assoc' => [
+                'upload_image'
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_nul_upl' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_nul_upl' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_nul_upl' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_nul_upl' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_nul_upl' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_nul_upl' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_nul_upl' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_nul_upl' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_uni_nul' => [
+            'nullable' => true,
+            'unique' => true,
+            'referenced_assoc' => [
+
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_uni_nul' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_uni_nul' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_uni_nul' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_uni_nul' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_uni_nul' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_uni_nul' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_uni_nul' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_uni_nul' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_bsc_str_uni_nul_upl' => [
+            'nullable' => true,
+            'unique' => true,
+            'referenced_assoc' => [
+                'upload_image'
+            ***REMOVED***,
+            'columns' => [
+                'clm_tim_bsc_str_uni_nul_upl' => [
+                    'type' => 'time'
+                ***REMOVED***,
+                'clm_dtt_bsc_str_uni_nul_upl' => [
+                    'type' => 'datetime'
+                ***REMOVED***,
+                'clm_dat_bsc_str_uni_nul_upl' => [
+                    'type' => 'date'
+                ***REMOVED***,
+                'clm_vrc_bsc_str_uni_nul_upl' => [
+                    'type' => 'string'
+                ***REMOVED***,
+                'clm_txt_bsc_str_uni_nul_upl' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_bsc_str_uni_nul_upl' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_bsc_str_uni_nul_upl' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_int_bsc_str_uni_nul_upl' => [
+                    'type' => 'integer'
+                ***REMOVED***
+            ***REMOVED***
+        ***REMOVED***,
+        'src_mvc_cmp' => [
+            'nullable' => false,
+            'unique' => false,
+            'referenced_assoc' => [
+
+            ***REMOVED***,
+            'columns' => [
+                'clm_txt_cmp' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_txt_htl_cmp' => [
+                    'type' => 'text'
+                ***REMOVED***,
+                'clm_dec_cmp' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_dec_mny_cmp' => [
+                    'type' => 'decimal'
+                ***REMOVED***,
+                'clm_boo_cmp' => [
+                    'type' => 'boolean'
+                ***REMOVED***,
+                'clm_boo_chb_cmp' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete' => [
+                'clm_int_cmp' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete' => [
+                'clm_int_chb_cmp' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete' => [
+                'id_clm_int_frk_cmp' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete' => [
+                'clm_tim_cmp' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete' => [
+                'clm_dtt_cmp' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete' => [
+                'clm_dtt_pt_cmp' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete' => [
+                'clm_dat_cmp' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete' => [
+                'clm_dat_pt_cmp' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete' => [
+                'clm_vrc_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete' => [
+                'clm_vrc_pas_ver_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete' => [
+                'clm_vrc_upl_img_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete' => [
+                'clm_vrc_url_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete' => [
+                'clm_vrc_uni_id_cmp' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete' => [
+                'clm_vrc_tel_cmp' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete' => [
+                'clm_vrc_eml_cmp' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
@@ -890,1865 +890,1865 @@ class SrcMvcEntity extends AbstractMigration
 
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_upload_image' => [
+        'src_mvc_cmp_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_upload_image' => [
+                'clm_txt_cmp_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_upload_image' => [
+                'clm_txt_htl_cmp_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_upload_image' => [
+                'clm_dec_cmp_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_upload_image' => [
+                'clm_dec_mny_cmp_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_upload_image' => [
+                'clm_boo_cmp_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_upload_image' => [
+                'clm_boo_chb_cmp_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_upload_image' => [
+                'clm_int_cmp_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_upload_image' => [
+                'clm_int_chb_cmp_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_upload_image' => [
+                'id_clm_int_frk_cmp_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_upload_image' => [
+                'clm_tim_cmp_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_upload_image' => [
+                'clm_dtt_cmp_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_upload_image' => [
+                'clm_dtt_pt_cmp_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_upload_image' => [
+                'clm_dat_cmp_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_upload_image' => [
+                'clm_dat_pt_cmp_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_upload_image' => [
+                'clm_vrc_cmp_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_upload_image' => [
+                'clm_vrc_pas_ver_cmp_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_upload_image' => [
+                'clm_vrc_upl_img_cmp_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_upload_image' => [
+                'clm_vrc_url_cmp_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_upload_image' => [
+                'clm_vrc_uni_id_cmp_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_upload_image' => [
+                'clm_vrc_tel_cmp_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_upload_image' => [
+                'clm_vrc_eml_cmp_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_unique' => [
+        'src_mvc_cmp_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_unique' => [
+                'clm_txt_cmp_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_unique' => [
+                'clm_txt_htl_cmp_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_unique' => [
+                'clm_dec_cmp_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_unique' => [
+                'clm_dec_mny_cmp_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_unique' => [
+                'clm_boo_cmp_uni' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_unique' => [
+                'clm_boo_chb_cmp_uni' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_unique' => [
+                'clm_int_cmp_uni' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_unique' => [
+                'clm_int_chb_cmp_uni' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_unique' => [
+                'id_clm_int_frk_cmp_uni' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_unique' => [
+                'clm_tim_cmp_uni' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_unique' => [
+                'clm_dtt_cmp_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_unique' => [
+                'clm_dtt_pt_cmp_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_unique' => [
+                'clm_dat_cmp_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_unique' => [
+                'clm_dat_pt_cmp_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_unique' => [
+                'clm_vrc_cmp_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_unique' => [
+                'clm_vrc_pas_ver_cmp_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_unique' => [
+                'clm_vrc_upl_img_cmp_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_unique' => [
+                'clm_vrc_url_cmp_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_unique' => [
+                'clm_vrc_uni_id_cmp_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_unique' => [
+                'clm_vrc_tel_cmp_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_unique' => [
+                'clm_vrc_eml_cmp_uni' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_unique_upload_image' => [
+        'src_mvc_cmp_uni_upl' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_unique_upload_image' => [
+                'clm_txt_cmp_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_unique_upload_image' => [
+                'clm_txt_htl_cmp_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_unique_upload_image' => [
+                'clm_dec_cmp_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_unique_upload_image' => [
+                'clm_dec_mny_cmp_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_unique_upload_image' => [
+                'clm_boo_cmp_uni_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_unique_upload_image' => [
+                'clm_boo_chb_cmp_uni_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_unique_upload_image' => [
+                'clm_int_cmp_uni_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_unique_upload_image' => [
+                'clm_int_chb_cmp_uni_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_unique_upload_image' => [
+                'id_clm_int_frk_cmp_uni_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_unique_upload_image' => [
+                'clm_tim_cmp_uni_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_unique_upload_image' => [
+                'clm_dtt_cmp_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_unique_upload_image' => [
+                'clm_dtt_pt_cmp_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_unique_upload_image' => [
+                'clm_dat_cmp_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_unique_upload_image' => [
+                'clm_dat_pt_cmp_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_unique_upload_image' => [
+                'clm_vrc_cmp_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_unique_upload_image' => [
+                'clm_vrc_pas_ver_cmp_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_unique_upload_image' => [
+                'clm_vrc_upl_img_cmp_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_unique_upload_image' => [
+                'clm_vrc_url_cmp_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_unique_upload_image' => [
+                'clm_vrc_uni_id_cmp_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_unique_upload_image' => [
+                'clm_vrc_tel_cmp_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_unique_upload_image' => [
+                'clm_vrc_eml_cmp_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_nullable' => [
+        'src_mvc_cmp_nul' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_nullable' => [
+                'clm_txt_cmp_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_nullable' => [
+                'clm_txt_htl_cmp_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_nullable' => [
+                'clm_dec_cmp_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_nullable' => [
+                'clm_dec_mny_cmp_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_nullable' => [
+                'clm_boo_cmp_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_nullable' => [
+                'clm_boo_chb_cmp_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_nullable' => [
+                'clm_int_cmp_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_nullable' => [
+                'clm_int_chb_cmp_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_nullable' => [
+                'id_clm_int_frk_cmp_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_nullable' => [
+                'clm_tim_cmp_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_nullable' => [
+                'clm_dtt_cmp_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_nullable' => [
+                'clm_dtt_pt_cmp_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_nullable' => [
+                'clm_dat_cmp_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_nullable' => [
+                'clm_dat_pt_cmp_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_nullable' => [
+                'clm_vrc_cmp_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_nullable' => [
+                'clm_vrc_pas_ver_cmp_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_nullable' => [
+                'clm_vrc_upl_img_cmp_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_nullable' => [
+                'clm_vrc_url_cmp_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_nullable' => [
+                'clm_vrc_uni_id_cmp_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_nullable' => [
+                'clm_vrc_tel_cmp_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_nullable' => [
+                'clm_vrc_eml_cmp_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_nullable_upload_image' => [
+        'src_mvc_cmp_nul_upl' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_nullable_upload_image' => [
+                'clm_txt_cmp_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_nullable_upload_image' => [
+                'clm_txt_htl_cmp_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_nullable_upload_image' => [
+                'clm_dec_cmp_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_nullable_upload_image' => [
+                'clm_dec_mny_cmp_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_nullable_upload_image' => [
+                'clm_boo_cmp_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_nullable_upload_image' => [
+                'clm_boo_chb_cmp_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_nullable_upload_image' => [
+                'clm_int_cmp_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_nullable_upload_image' => [
+                'clm_int_chb_cmp_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_nullable_upload_image' => [
+                'clm_tim_cmp_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_nullable_upload_image' => [
+                'clm_dtt_cmp_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_nullable_upload_image' => [
+                'clm_dat_cmp_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_nullable_upload_image' => [
+                'clm_dat_pt_cmp_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_nullable_upload_image' => [
+                'clm_vrc_cmp_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_nullable_upload_image' => [
+                'clm_vrc_url_cmp_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_unique_nullable' => [
+        'src_mvc_cmp_uni_nul' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_unique_nullable' => [
+                'clm_txt_cmp_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_unique_nullable' => [
+                'clm_txt_htl_cmp_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_unique_nullable' => [
+                'clm_dec_cmp_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_unique_nullable' => [
+                'clm_dec_mny_cmp_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_unique_nullable' => [
+                'clm_boo_cmp_uni_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_unique_nullable' => [
+                'clm_boo_chb_cmp_uni_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_unique_nullable' => [
+                'clm_int_cmp_uni_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_unique_nullable' => [
+                'clm_int_chb_cmp_uni_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_unique_nullable' => [
+                'id_clm_int_frk_cmp_uni_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_unique_nullable' => [
+                'clm_tim_cmp_uni_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_unique_nullable' => [
+                'clm_dtt_cmp_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_unique_nullable' => [
+                'clm_dtt_pt_cmp_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_unique_nullable' => [
+                'clm_dat_cmp_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_unique_nullable' => [
+                'clm_dat_pt_cmp_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_unique_nullable' => [
+                'clm_vrc_cmp_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_unique_nullable' => [
+                'clm_vrc_pas_ver_cmp_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_unique_nullable' => [
+                'clm_vrc_upl_img_cmp_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_unique_nullable' => [
+                'clm_vrc_url_cmp_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_unique_nullable' => [
+                'clm_vrc_uni_id_cmp_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_unique_nullable' => [
+                'clm_vrc_tel_cmp_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_unique_nullable' => [
+                'clm_vrc_eml_cmp_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_unique_nullable_upload_image' => [
+        'src_mvc_cmp_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_unique_nullable_upload_image' => [
+                'clm_txt_cmp_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_unique_nullable_upload_image' => [
+                'clm_txt_htl_cmp_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_unique_nullable_upload_image' => [
+                'clm_dec_cmp_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_unique_nullable_upload_image' => [
+                'clm_dec_mny_cmp_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_unique_nullable_upload_image' => [
+                'clm_boo_cmp_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_unique_nullable_upload_image' => [
+                'clm_boo_chb_cmp_uni_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_unique_nullable_upload_image' => [
+                'clm_int_cmp_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_unique_nullable_upload_image' => [
+                'clm_int_chb_cmp_uni_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_unique_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_unique_nullable_upload_image' => [
+                'clm_tim_cmp_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_unique_nullable_upload_image' => [
+                'clm_dtt_cmp_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_unique_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_unique_nullable_upload_image' => [
+                'clm_dat_cmp_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_unique_nullable_upload_image' => [
+                'clm_dat_pt_cmp_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_unique_nullable_upload_image' => [
+                'clm_vrc_cmp_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_unique_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_unique_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_unique_nullable_upload_image' => [
+                'clm_vrc_url_cmp_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_unique_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_unique_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_unique_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict' => [
+        'src_mvc_cmp_lws' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict' => [
+                'clm_txt_cmp_lws' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict' => [
+                'clm_txt_htl_cmp_lws' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict' => [
+                'clm_dec_cmp_lws' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict' => [
+                'clm_dec_mny_cmp_lws' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict' => [
+                'clm_boo_cmp_lws' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict' => [
+                'clm_boo_chb_cmp_lws' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict' => [
+                'clm_int_cmp_lws' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict' => [
+                'clm_int_chb_cmp_lws' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict' => [
+                'id_clm_int_frk_cmp_lws' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict' => [
+                'clm_tim_cmp_lws' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict' => [
+                'clm_dtt_cmp_lws' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict' => [
+                'clm_dtt_pt_cmp_lws' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict' => [
+                'clm_dat_cmp_lws' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict' => [
+                'clm_dat_pt_cmp_lws' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict' => [
+                'clm_vrc_cmp_lws' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict' => [
+                'clm_vrc_pas_ver_cmp_lws' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict' => [
+                'clm_vrc_upl_img_cmp_lws' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict' => [
+                'clm_vrc_url_cmp_lws' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict' => [
+                'clm_vrc_uni_id_cmp_lws' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict' => [
+                'clm_vrc_tel_cmp_lws' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict' => [
+                'clm_vrc_eml_cmp_lws' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_upload_image' => [
+        'src_mvc_cmp_lws_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_upload_image' => [
+                'clm_txt_cmp_lws_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_upload_image' => [
+                'clm_txt_htl_cmp_lws_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_upload_image' => [
+                'clm_dec_cmp_lws_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_upload_image' => [
+                'clm_dec_mny_cmp_lws_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_upload_image' => [
+                'clm_boo_cmp_lws_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_upload_image' => [
+                'clm_boo_chb_cmp_lws_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_upload_image' => [
+                'clm_int_cmp_lws_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_upload_image' => [
+                'clm_int_chb_cmp_lws_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_upload_image' => [
+                'id_clm_int_frk_cmp_lws_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_upload_image' => [
+                'clm_tim_cmp_lws_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_upload_image' => [
+                'clm_dtt_cmp_lws_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_upload_image' => [
+                'clm_dtt_pt_cmp_lws_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_upload_image' => [
+                'clm_dat_cmp_lws_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_upload_image' => [
+                'clm_dat_pt_cmp_lws_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_upload_image' => [
+                'clm_vrc_cmp_lws_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_upload_image' => [
+                'clm_vrc_pas_ver_cmp_lws_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_upload_image' => [
+                'clm_vrc_upl_img_cmp_lws_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_upload_image' => [
+                'clm_vrc_url_cmp_lws_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_upload_image' => [
+                'clm_vrc_uni_id_cmp_lws_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_upload_image' => [
+                'clm_vrc_tel_cmp_lws_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_upload_image' => [
+                'clm_vrc_eml_cmp_lws_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_unique' => [
+        'src_mvc_cmp_lws_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_unique' => [
+                'clm_txt_cmp_lws_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_unique' => [
+                'clm_txt_htl_cmp_lws_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_unique' => [
+                'clm_dec_cmp_lws_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_unique' => [
+                'clm_dec_mny_cmp_lws_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_unique' => [
+                'clm_boo_cmp_lws_uni' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_unique' => [
+                'clm_boo_chb_cmp_lws_uni' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_unique' => [
+                'clm_int_cmp_lws_uni' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_unique' => [
+                'clm_int_chb_cmp_lws_uni' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_unique' => [
+                'id_clm_int_frk_cmp_lws_uni' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_unique' => [
+                'clm_tim_cmp_lws_uni' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_unique' => [
+                'clm_dtt_cmp_lws_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_unique' => [
+                'clm_dtt_pt_cmp_lws_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_unique' => [
+                'clm_dat_cmp_lws_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_unique' => [
+                'clm_dat_pt_cmp_lws_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_unique' => [
+                'clm_vrc_cmp_lws_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_unique' => [
+                'clm_vrc_pas_ver_cmp_lws_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_unique' => [
+                'clm_vrc_upl_img_cmp_lws_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_unique' => [
+                'clm_vrc_url_cmp_lws_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_unique' => [
+                'clm_vrc_uni_id_cmp_lws_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_unique' => [
+                'clm_vrc_tel_cmp_lws_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_unique' => [
+                'clm_vrc_eml_cmp_lws_uni' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_unique_upload_image' => [
+        'src_mvc_cmp_lws_uni_upl' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_unique_upload_image' => [
+                'clm_txt_cmp_lws_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_unique_upload_image' => [
+                'clm_txt_htl_cmp_lws_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_unique_upload_image' => [
+                'clm_dec_cmp_lws_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_unique_upload_image' => [
+                'clm_dec_mny_cmp_lws_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_unique_upload_image' => [
+                'clm_boo_cmp_lws_uni_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_unique_upload_image' => [
+                'clm_boo_chb_cmp_lws_uni_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_unique_upload_image' => [
+                'clm_int_cmp_lws_uni_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_unique_upload_image' => [
+                'clm_int_chb_cmp_lws_uni_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_unique_upload_image' => [
+                'id_clm_int_frk_cmp_lws_uni_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_unique_upload_image' => [
+                'clm_tim_cmp_lws_uni_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_unique_upload_image' => [
+                'clm_dtt_cmp_lws_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_unique_upload_image' => [
+                'clm_dtt_pt_cmp_lws_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_unique_upload_image' => [
+                'clm_dat_cmp_lws_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_unique_upload_image' => [
+                'clm_dat_pt_cmp_lws_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_cmp_lws_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_pas_ver_cmp_lws_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_upl_img_cmp_lws_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_url_cmp_lws_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_uni_id_cmp_lws_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_tel_cmp_lws_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_unique_upload_image' => [
+                'clm_vrc_eml_cmp_lws_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_nullable' => [
+        'src_mvc_cmp_lws_nul' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_nullable' => [
+                'clm_txt_cmp_lws_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_nullable' => [
+                'clm_txt_htl_cmp_lws_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_nullable' => [
+                'clm_dec_cmp_lws_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_nullable' => [
+                'clm_dec_mny_cmp_lws_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_nullable' => [
+                'clm_boo_cmp_lws_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_nullable' => [
+                'clm_boo_chb_cmp_lws_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_nullable' => [
+                'clm_int_cmp_lws_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_nullable' => [
+                'clm_int_chb_cmp_lws_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_nullable' => [
+                'id_clm_int_frk_cmp_lws_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_nullable' => [
+                'clm_tim_cmp_lws_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_nullable' => [
+                'clm_dtt_cmp_lws_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_nullable' => [
+                'clm_dtt_pt_cmp_lws_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_nullable' => [
+                'clm_dat_cmp_lws_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_nullable' => [
+                'clm_dat_pt_cmp_lws_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_nullable' => [
+                'clm_vrc_cmp_lws_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_nullable' => [
+                'clm_vrc_pas_ver_cmp_lws_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_nullable' => [
+                'clm_vrc_upl_img_cmp_lws_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_nullable' => [
+                'clm_vrc_url_cmp_lws_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_nullable' => [
+                'clm_vrc_uni_id_cmp_lws_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_nullable' => [
+                'clm_vrc_tel_cmp_lws_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_nullable' => [
+                'clm_vrc_eml_cmp_lws_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_nullable_upload_image' => [
+        'src_mvc_cmp_lws_nul_upl' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_nullable_upload_image' => [
+                'clm_txt_cmp_lws_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_nullable_upload_image' => [
+                'clm_txt_htl_cmp_lws_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_nullable_upload_image' => [
+                'clm_dec_cmp_lws_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_nullable_upload_image' => [
+                'clm_dec_mny_cmp_lws_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_nullable_upload_image' => [
+                'clm_boo_cmp_lws_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_nullable_upload_image' => [
+                'clm_boo_chb_cmp_lws_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_nullable_upload_image' => [
+                'clm_int_cmp_lws_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_nullable_upload_image' => [
+                'clm_int_chb_cmp_lws_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_lws_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_nullable_upload_image' => [
+                'clm_tim_cmp_lws_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_nullable_upload_image' => [
+                'clm_dtt_cmp_lws_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_lws_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_nullable_upload_image' => [
+                'clm_dat_cmp_lws_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_nullable_upload_image' => [
+                'clm_dat_pt_cmp_lws_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_cmp_lws_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_lws_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_lws_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_url_cmp_lws_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_lws_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_lws_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_lws_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_unique_nullable' => [
+        'src_mvc_cmp_lws_uni_nul' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_unique_nullable' => [
+                'clm_txt_cmp_lws_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_unique_nullable' => [
+                'clm_txt_htl_cmp_lws_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_unique_nullable' => [
+                'clm_dec_cmp_lws_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_unique_nullable' => [
+                'clm_dec_mny_cmp_lws_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_unique_nullable' => [
+                'clm_boo_cmp_lws_uni_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_unique_nullable' => [
+                'clm_boo_chb_cmp_lws_uni_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_unique_nullable' => [
+                'clm_int_cmp_lws_uni_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_unique_nullable' => [
+                'clm_int_chb_cmp_lws_uni_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_unique_nullable' => [
+                'id_clm_int_frk_cmp_lws_uni_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_unique_nullable' => [
+                'clm_tim_cmp_lws_uni_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_unique_nullable' => [
+                'clm_dtt_cmp_lws_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_unique_nullable' => [
+                'clm_dtt_pt_cmp_lws_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_unique_nullable' => [
+                'clm_dat_cmp_lws_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_unique_nullable' => [
+                'clm_dat_pt_cmp_lws_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_unique_nullable' => [
+                'clm_vrc_cmp_lws_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_unique_nullable' => [
+                'clm_vrc_pas_ver_cmp_lws_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_unique_nullable' => [
+                'clm_vrc_upl_img_cmp_lws_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_unique_nullable' => [
+                'clm_vrc_url_cmp_lws_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_unique_nullable' => [
+                'clm_vrc_uni_id_cmp_lws_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_unique_nullable' => [
+                'clm_vrc_tel_cmp_lws_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_unique_nullable' => [
+                'clm_vrc_eml_cmp_lws_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_low_strict_unique_nullable_upload_image' => [
+        'src_mvc_cmp_lws_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_txt_cmp_lws_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_txt_htl_cmp_lws_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dec_cmp_lws_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dec_mny_cmp_lws_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_boo_cmp_lws_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_boo_chb_cmp_lws_uni_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_int_cmp_lws_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_int_chb_cmp_lws_uni_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_low_strict_unique_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_lws_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_tim_cmp_lws_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dtt_cmp_lws_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_lws_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dat_cmp_lws_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_dat_pt_cmp_lws_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_cmp_lws_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_lws_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_lws_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_url_cmp_lws_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_lws_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_lws_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_low_strict_unique_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_lws_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict' => [
+        'src_mvc_cmp_str' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict' => [
+                'clm_txt_cmp_str' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict' => [
+                'clm_txt_htl_cmp_str' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict' => [
+                'clm_dec_cmp_str' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict' => [
+                'clm_dec_mny_cmp_str' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict' => [
+                'clm_boo_cmp_str' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict' => [
+                'clm_boo_chb_cmp_str' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict' => [
+                'clm_int_cmp_str' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict' => [
+                'clm_int_chb_cmp_str' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict' => [
+                'id_clm_int_frk_cmp_str' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict' => [
+                'clm_tim_cmp_str' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict' => [
+                'clm_dtt_cmp_str' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict' => [
+                'clm_dtt_pt_cmp_str' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict' => [
+                'clm_dat_cmp_str' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict' => [
+                'clm_dat_pt_cmp_str' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict' => [
+                'clm_vrc_cmp_str' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict' => [
+                'clm_vrc_pas_ver_cmp_str' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict' => [
+                'clm_vrc_upl_img_cmp_str' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict' => [
+                'clm_vrc_url_cmp_str' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict' => [
+                'clm_vrc_uni_id_cmp_str' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict' => [
+                'clm_vrc_tel_cmp_str' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict' => [
+                'clm_vrc_eml_cmp_str' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_upload_image' => [
+        'src_mvc_cmp_str_upl' => [
             'nullable' => false,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_upload_image' => [
+                'clm_txt_cmp_str_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_upload_image' => [
+                'clm_txt_htl_cmp_str_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_upload_image' => [
+                'clm_dec_cmp_str_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_upload_image' => [
+                'clm_dec_mny_cmp_str_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_upload_image' => [
+                'clm_boo_cmp_str_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_upload_image' => [
+                'clm_boo_chb_cmp_str_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_upload_image' => [
+                'clm_int_cmp_str_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_upload_image' => [
+                'clm_int_chb_cmp_str_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_upload_image' => [
+                'id_clm_int_frk_cmp_str_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_upload_image' => [
+                'clm_tim_cmp_str_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_upload_image' => [
+                'clm_dtt_cmp_str_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_upload_image' => [
+                'clm_dtt_pt_cmp_str_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_upload_image' => [
+                'clm_dat_cmp_str_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_upload_image' => [
+                'clm_dat_pt_cmp_str_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_upload_image' => [
+                'clm_vrc_cmp_str_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_upload_image' => [
+                'clm_vrc_pas_ver_cmp_str_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_upload_image' => [
+                'clm_vrc_upl_img_cmp_str_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_upload_image' => [
+                'clm_vrc_url_cmp_str_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_upload_image' => [
+                'clm_vrc_uni_id_cmp_str_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_upload_image' => [
+                'clm_vrc_tel_cmp_str_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_upload_image' => [
+                'clm_vrc_eml_cmp_str_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_unique' => [
+        'src_mvc_cmp_str_uni' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_unique' => [
+                'clm_txt_cmp_str_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_unique' => [
+                'clm_txt_htl_cmp_str_uni' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_unique' => [
+                'clm_dec_cmp_str_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_unique' => [
+                'clm_dec_mny_cmp_str_uni' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_unique' => [
+                'clm_boo_cmp_str_uni' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_unique' => [
+                'clm_boo_chb_cmp_str_uni' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_unique' => [
+                'clm_int_cmp_str_uni' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_unique' => [
+                'clm_int_chb_cmp_str_uni' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_unique' => [
+                'id_clm_int_frk_cmp_str_uni' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_unique' => [
+                'clm_tim_cmp_str_uni' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_unique' => [
+                'clm_dtt_cmp_str_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_unique' => [
+                'clm_dtt_pt_cmp_str_uni' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_unique' => [
+                'clm_dat_cmp_str_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_unique' => [
+                'clm_dat_pt_cmp_str_uni' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_unique' => [
+                'clm_vrc_cmp_str_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_unique' => [
+                'clm_vrc_pas_ver_cmp_str_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_unique' => [
+                'clm_vrc_upl_img_cmp_str_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_unique' => [
+                'clm_vrc_url_cmp_str_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_unique' => [
+                'clm_vrc_uni_id_cmp_str_uni' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_unique' => [
+                'clm_vrc_tel_cmp_str_uni' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_unique' => [
+                'clm_vrc_eml_cmp_str_uni' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_unique_upload_image' => [
+        'src_mvc_cmp_str_uni_upl' => [
             'nullable' => false,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_unique_upload_image' => [
+                'clm_txt_cmp_str_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_unique_upload_image' => [
+                'clm_txt_htl_cmp_str_uni_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_unique_upload_image' => [
+                'clm_dec_cmp_str_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_unique_upload_image' => [
+                'clm_dec_mny_cmp_str_uni_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_unique_upload_image' => [
+                'clm_boo_cmp_str_uni_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_unique_upload_image' => [
+                'clm_boo_chb_cmp_str_uni_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_unique_upload_image' => [
+                'clm_int_cmp_str_uni_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_unique_upload_image' => [
+                'clm_int_chb_cmp_str_uni_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_unique_upload_image' => [
+                'id_clm_int_frk_cmp_str_uni_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_unique_upload_image' => [
+                'clm_tim_cmp_str_uni_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_unique_upload_image' => [
+                'clm_dtt_cmp_str_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_unique_upload_image' => [
+                'clm_dtt_pt_cmp_str_uni_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_unique_upload_image' => [
+                'clm_dat_cmp_str_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_unique_upload_image' => [
+                'clm_dat_pt_cmp_str_uni_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_unique_upload_image' => [
+                'clm_vrc_cmp_str_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_unique_upload_image' => [
+                'clm_vrc_pas_ver_cmp_str_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_unique_upload_image' => [
+                'clm_vrc_upl_img_cmp_str_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_unique_upload_image' => [
+                'clm_vrc_url_cmp_str_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_unique_upload_image' => [
+                'clm_vrc_uni_id_cmp_str_uni_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_unique_upload_image' => [
+                'clm_vrc_tel_cmp_str_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_unique_upload_image' => [
+                'clm_vrc_eml_cmp_str_uni_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_nullable' => [
+        'src_mvc_cmp_str_nul' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_nullable' => [
+                'clm_txt_cmp_str_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_nullable' => [
+                'clm_txt_htl_cmp_str_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_nullable' => [
+                'clm_dec_cmp_str_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_nullable' => [
+                'clm_dec_mny_cmp_str_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_nullable' => [
+                'clm_boo_cmp_str_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_nullable' => [
+                'clm_boo_chb_cmp_str_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_nullable' => [
+                'clm_int_cmp_str_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_nullable' => [
+                'clm_int_chb_cmp_str_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_nullable' => [
+                'id_clm_int_frk_cmp_str_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_nullable' => [
+                'clm_tim_cmp_str_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_nullable' => [
+                'clm_dtt_cmp_str_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_nullable' => [
+                'clm_dtt_pt_cmp_str_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_nullable' => [
+                'clm_dat_cmp_str_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_nullable' => [
+                'clm_dat_pt_cmp_str_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_nullable' => [
+                'clm_vrc_cmp_str_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_nullable' => [
+                'clm_vrc_pas_ver_cmp_str_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_nullable' => [
+                'clm_vrc_upl_img_cmp_str_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_nullable' => [
+                'clm_vrc_url_cmp_str_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_nullable' => [
+                'clm_vrc_uni_id_cmp_str_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_nullable' => [
+                'clm_vrc_tel_cmp_str_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_nullable' => [
+                'clm_vrc_eml_cmp_str_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_nullable_upload_image' => [
+        'src_mvc_cmp_str_nul_upl' => [
             'nullable' => true,
             'unique' => false,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_nullable_upload_image' => [
+                'clm_txt_cmp_str_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_nullable_upload_image' => [
+                'clm_txt_htl_cmp_str_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_nullable_upload_image' => [
+                'clm_dec_cmp_str_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_nullable_upload_image' => [
+                'clm_dec_mny_cmp_str_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_nullable_upload_image' => [
+                'clm_boo_cmp_str_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_nullable_upload_image' => [
+                'clm_boo_chb_cmp_str_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_nullable_upload_image' => [
+                'clm_int_cmp_str_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_nullable_upload_image' => [
+                'clm_int_chb_cmp_str_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_str_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_nullable_upload_image' => [
+                'clm_tim_cmp_str_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_nullable_upload_image' => [
+                'clm_dtt_cmp_str_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_str_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_nullable_upload_image' => [
+                'clm_dat_cmp_str_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_nullable_upload_image' => [
+                'clm_dat_pt_cmp_str_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_nullable_upload_image' => [
+                'clm_vrc_cmp_str_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_str_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_str_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_nullable_upload_image' => [
+                'clm_vrc_url_cmp_str_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_str_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_str_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_str_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_unique_nullable' => [
+        'src_mvc_cmp_str_uni_nul' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
 
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_unique_nullable' => [
+                'clm_txt_cmp_str_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_unique_nullable' => [
+                'clm_txt_htl_cmp_str_uni_nul' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_unique_nullable' => [
+                'clm_dec_cmp_str_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_unique_nullable' => [
+                'clm_dec_mny_cmp_str_uni_nul' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_unique_nullable' => [
+                'clm_boo_cmp_str_uni_nul' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_unique_nullable' => [
+                'clm_boo_chb_cmp_str_uni_nul' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_unique_nullable' => [
+                'clm_int_cmp_str_uni_nul' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_unique_nullable' => [
+                'clm_int_chb_cmp_str_uni_nul' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_unique_nullable' => [
+                'id_clm_int_frk_cmp_str_uni_nul' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_unique_nullable' => [
+                'clm_tim_cmp_str_uni_nul' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_unique_nullable' => [
+                'clm_dtt_cmp_str_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_unique_nullable' => [
+                'clm_dtt_pt_cmp_str_uni_nul' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_unique_nullable' => [
+                'clm_dat_cmp_str_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_unique_nullable' => [
+                'clm_dat_pt_cmp_str_uni_nul' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_unique_nullable' => [
+                'clm_vrc_cmp_str_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_unique_nullable' => [
+                'clm_vrc_pas_ver_cmp_str_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_unique_nullable' => [
+                'clm_vrc_upl_img_cmp_str_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_unique_nullable' => [
+                'clm_vrc_url_cmp_str_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_unique_nullable' => [
+                'clm_vrc_uni_id_cmp_str_uni_nul' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_unique_nullable' => [
+                'clm_vrc_tel_cmp_str_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_unique_nullable' => [
+                'clm_vrc_eml_cmp_str_uni_nul' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
-        'src_mvc_complete_strict_unique_nullable_upload_image' => [
+        'src_mvc_cmp_str_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
             'referenced_assoc' => [
                 'upload_image'
             ***REMOVED***,
             'columns' => [
-                'column_text_complete_strict_unique_nullable_upload_image' => [
+                'clm_txt_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_text_html_complete_strict_unique_nullable_upload_image' => [
+                'clm_txt_htl_cmp_str_uni_nul_upl' => [
                     'type' => 'text'
                 ***REMOVED***,
-                'column_decimal_complete_strict_unique_nullable_upload_image' => [
+                'clm_dec_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_decimal_money_complete_strict_unique_nullable_upload_image' => [
+                'clm_dec_mny_cmp_str_uni_nul_upl' => [
                     'type' => 'decimal'
                 ***REMOVED***,
-                'column_boolean_complete_strict_unique_nullable_upload_image' => [
+                'clm_boo_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean'
                 ***REMOVED***,
-                'column_boolean_checkbox_complete_strict_unique_nullable_upload_image' => [
+                'clm_boo_chb_cmp_str_uni_nul_upl' => [
                     'type' => 'boolean',
                     'unique' => false
                 ***REMOVED***,
-                'column_int_complete_strict_unique_nullable_upload_image' => [
+                'clm_int_cmp_str_uni_nul_upl' => [
                     'type' => 'integer'
                 ***REMOVED***,
-                'column_int_checkbox_complete_strict_unique_nullable_upload_image' => [
+                'clm_int_chb_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'unique' => false
                 ***REMOVED***,
-                'id_column_int_foreign_complete_strict_unique_nullable_upload_image' => [
+                'id_clm_int_frk_cmp_str_uni_nul_upl' => [
                     'type' => 'integer',
                     'properties' => [
                         'foreignKey'
                     ***REMOVED***,
                     'unique' => false
                 ***REMOVED***,
-                'column_time_complete_strict_unique_nullable_upload_image' => [
+                'clm_tim_cmp_str_uni_nul_upl' => [
                     'type' => 'time'
                 ***REMOVED***,
-                'column_datetime_complete_strict_unique_nullable_upload_image' => [
+                'clm_dtt_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_datetime_ptbr_complete_strict_unique_nullable_upload_image' => [
+                'clm_dtt_pt_cmp_str_uni_nul_upl' => [
                     'type' => 'datetime'
                 ***REMOVED***,
-                'column_date_complete_strict_unique_nullable_upload_image' => [
+                'clm_dat_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_date_ptbr_complete_strict_unique_nullable_upload_image' => [
+                'clm_dat_pt_cmp_str_uni_nul_upl' => [
                     'type' => 'date'
                 ***REMOVED***,
-                'column_varchar_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_password_verify_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_pas_ver_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_upload_image_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_upl_img_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_url_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_url_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_unique_id_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_uni_id_cmp_str_uni_nul_upl' => [
                     'type' => 'string',
                     'unique' => false
                 ***REMOVED***,
-                'column_varchar_telephone_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_tel_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***,
-                'column_varchar_email_complete_strict_unique_nullable_upload_image' => [
+                'clm_vrc_eml_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
