@@ -143,6 +143,12 @@ class FactoryTestServiceTest extends AbstractTestCase
             */
         }
 
+        if ($data->getNamespace() === null) {
+            $this->module->map(sprintf('%sTest', $data->getType()))->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        } else {
+            $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
+        }
+
         $file = $this->factoryTest->createFactoryTest($data);
 
         $this->assertEquals(

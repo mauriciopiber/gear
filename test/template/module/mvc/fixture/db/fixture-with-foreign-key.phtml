@@ -1,0 +1,241 @@
+<?php
+namespace MyModule\Fixture;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use MyModule\Entity\MyTable;
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
+/**
+ * Fixture for My Table Entity.
+ *
+ * PHP Version 5
+ *
+ * @category Fixture
+ * @package MyModule/Fixture
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
+ */
+class MyTableFixture extends AbstractFixture implements
+    FixtureInterface,
+    DependentFixtureInterface
+{
+
+    /**
+     * Load Fixture
+     *
+     * @param ObjectManager $manager Object Manager
+     *
+     * @return void
+     */
+    public function load(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+        foreach ($this->getFixture() as $i => $fixture) {
+            $reference = $i+1;
+            $myTable = new MyTable();
+            $myTable->setIdMyTable($fixture['idMyTable'***REMOVED***);
+            $myTable->setIdMyAnotherTable($fixture['idMyAnotherTable'***REMOVED***);
+            $userReferenced = $this->getReferenceToEntity($reference);
+            $myTable->setCreated(new \DateTime('now'));
+            $myTable->setCreatedBy($userReferenced);
+            $this->manager->persist($myTable);
+            $this->manager->flush();
+            $this->addReference("my-table-$reference", $myTable);
+        }
+    }
+
+    /**
+     * Return Fixture Data Generated.
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     *
+     * @return array
+     */
+    public function getFixture()
+    {
+        return [
+            [
+                'idMyTable' => '1',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-1'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '2',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-2'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '3',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-3'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '4',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-4'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '5',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-5'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '6',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-6'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '7',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-7'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '8',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-8'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '9',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-9'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '10',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-10'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '11',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-11'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '12',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-12'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '13',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-13'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '14',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-14'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '15',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-15'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '16',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-16'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '17',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-17'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '18',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-18'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '19',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-19'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '20',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-20'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '21',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-21'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '22',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-22'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '23',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-23'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '24',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-24'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '25',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-25'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '26',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-26'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '27',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-27'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '28',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-28'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '29',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-29'),
+            ***REMOVED***,
+            [
+                'idMyTable' => '30',
+                'idMyAnotherTable' =>
+                    $this->getReference('my-another-table-30'),
+            ***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * Load the User Entity.
+     *
+     * To be used on created_by and updated_by column.
+     *
+     * @param Integer $referenced Número de Referência
+     *
+     * @return GearAdmin\Entity\User
+     */
+    public function getReferenceToEntity($referenced = 1)
+    {
+        $referencedName = sprintf('usuariogear%d', ($referenced <= 6) ? $referenced : (($referenced%6)+1));
+        $userId = $this->getReference($referencedName);
+        return $this->manager
+          ->getRepository('GearAdmin\Entity\User')
+          ->findOneBy(['idUser' => $userId->getIdUser()***REMOVED***);
+    }
+
+    /**
+     * Get The Table's Foreign Keys Dependencies.
+     *
+     * @return string[***REMOVED***
+     */
+    public function getDependencies()
+    {
+        return ['GearAdmin\Fixture\LoadUser'***REMOVED***;
+    }
+}

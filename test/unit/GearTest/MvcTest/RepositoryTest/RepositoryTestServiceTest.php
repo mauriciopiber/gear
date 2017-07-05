@@ -179,11 +179,9 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
-        $this->traitTest->createTraitTest($repository, vfsStream::url($location))->shouldBeCalled();
+        $this->traitTest->createTraitTest($repository)->shouldBeCalled();
 
-        if ($service == 'factories') {
-            $this->factoryTest->createFactoryTest($repository, vfsStream::url($location))->shouldBeCalled();
-        }
+        $this->factoryTest->createFactoryTest($repository)->shouldBeCalled();
 
         $file = $this->repository->introspectFromTable($this->db);
 
