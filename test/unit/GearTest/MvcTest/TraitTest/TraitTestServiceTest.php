@@ -15,8 +15,8 @@ class TraitTestServiceTest extends AbstractTestCase
 
         $this->root = vfsStream::setup('module');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getModuleName()->willReturn('GearIt');
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module->getModuleName()->willReturn('GearIt');
 
         $this->baseDir = (new \Gear\Module)->getLocation();
 
@@ -32,10 +32,11 @@ class TraitTestServiceTest extends AbstractTestCase
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $codeTest = new \Gear\Creator\CodeTest();
-        $codeTest->setModule($module->reveal());
+        $codeTest->setModule($this->module->reveal());
+        $codeTest->setStringService($stringService);
 
         $this->traitTest = new \Gear\Mvc\TraitTestService(
-            $module->reveal(),
+            $this->module->reveal(),
             $fileCreator,
             $stringService,
             $codeTest
@@ -47,12 +48,14 @@ class TraitTestServiceTest extends AbstractTestCase
      */
     public function testCreateTraitTest()
     {
+        $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
+
         $src = new \GearJson\Src\Src([
             'name' => 'MyService',
             'type' => 'Service'
         ***REMOVED***);
 
-        $link = $this->traitTest->createTraitTest($src, vfsStream::url('module'));
+        $link = $this->traitTest->createTraitTest($src);
 
         $this->assertEquals('vfs://module/MyServiceTraitTest.php', $link);
 

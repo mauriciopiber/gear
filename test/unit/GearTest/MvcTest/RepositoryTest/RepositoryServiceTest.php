@@ -158,14 +158,15 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $createdBy = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumn('table', 'created_by', 'int'),
-            $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user')
+            $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user'),
+            'email'
         );
 
-        $schema = $this->prophesize('Gear\Table\TableService\TableService');
-        $schema->getReferencedTableValidColumnName('user')
-        ->willReturn('email');
+        //$schema = $this->prophesize('Gear\Table\TableService\TableService');
+        //$schema->getReferencedTableValidColumnName('user')
+        //->willReturn('email');
 
-        $createdBy->setTableService($schema->reveal());
+        //$createdBy->setTableService($schema->reveal());
 
         $columns[***REMOVED*** = $createdBy;
 

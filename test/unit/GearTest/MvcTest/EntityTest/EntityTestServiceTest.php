@@ -109,7 +109,8 @@ class EntityTestServiceTest extends AbstractTestCase
 
         $tableColumns[***REMOVED*** = new ForeignKey(
             $this->createColumn('table', 'created_by', 'int'),
-            $this->createForeign('table', 'created_by', 'FOREIGN KEY', 'id_user', 'user')
+            $this->createForeign('table', 'created_by', 'FOREIGN KEY', 'id_user', 'user'),
+            'email'
         );
 
         $tableColumns[***REMOVED*** = new DatetimePtBr(
@@ -118,7 +119,8 @@ class EntityTestServiceTest extends AbstractTestCase
 
         $tableColumns[***REMOVED*** = new ForeignKey(
             $this->createColumn('table', 'updated_by', 'int'),
-            $this->createForeign('table', 'updated_by', 'FOREIGN KEY', 'id_user', 'user')
+            $this->createForeign('table', 'updated_by', 'FOREIGN KEY', 'id_user', 'user'),
+            'email'
         );
 
         $tableColumns[***REMOVED*** = new DatetimePtBr(
