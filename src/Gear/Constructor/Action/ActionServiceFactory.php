@@ -59,8 +59,8 @@ class ActionServiceFactory implements FactoryInterface
             $serviceLocator->get(Step::class),
             $serviceLocator->get(BasicModuleStructure::class),
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get(ColumnService::class),
-            $serviceLocator->get(TableService::class)
+            $serviceLocator->get(TableService::class),
+            $serviceLocator->get(ColumnService::class)
         );
         unset($serviceLocator);
         return $factory;
