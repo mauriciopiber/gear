@@ -185,10 +185,10 @@ class GearFile
         foreach ($tables as $minorSuite) {
             $this->minorSuite = $minorSuite;
             $name = $minorSuite->getType() == 'entity'
-                ? $minorSuite->getTableName()
+                ? $minorSuite->getTableAlias()
                 : sprintf(
                     '%s%s',
-                    $minorSuite->getTableName(),
+                    $minorSuite->getTableAlias(),
                     $this->str('class', $minorSuite->getType())
                 );
 
