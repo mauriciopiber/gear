@@ -993,7 +993,8 @@ class ModuleService implements ModuleProjectConnectorInterface
             [
                 'controller' => 'IndexController',
                 'name' => 'Index'
-            ***REMOVED***
+            ***REMOVED***,
+            false
         );
 
         $json = $this->getSchemaLoaderService()->loadSchema();
