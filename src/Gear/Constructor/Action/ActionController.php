@@ -19,7 +19,7 @@ class ActionController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'controller-action-create'));
 
-        $data = array(
+        $data = [
             'controller' => $this->getRequest()->getParam('parent'),
             'name'       => $this->getRequest()->getParam('name'),
             'route'      => $this->getRequest()->getParam('route'),
@@ -27,7 +27,7 @@ class ActionController extends AbstractConsoleController
             'dependency' => $this->getRequest()->getParam('dependency'),
             'db'         => $this->getRequest()->getParam('db'),
             'columns'    => $this->getRequest()->getParam('columns'),
-        );
+        ***REMOVED***;
 
         $action = $this->getActionConstructor();
         $action->createControllerAction($data);
