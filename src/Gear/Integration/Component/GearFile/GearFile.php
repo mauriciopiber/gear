@@ -301,7 +301,6 @@ class GearFile
                 $src = array_merge($src, $this->createForeignKeyGearfile($foreignKey, $mvcMinorSuite->getType()));
             }
         }
-
         if (!empty($mvcMinorSuite->getTableAssoc())) {
             $src = array_merge(
                 $src,
@@ -329,6 +328,7 @@ class GearFile
 
     private function createForeignKeyGearfile($tableId, $type = null)
     {
+        var_dump($tableId);
         $table = $this->str('class', str_replace('id_', '', $tableId));
 
         $data = [
@@ -339,7 +339,7 @@ class GearFile
             ***REMOVED***,
         ***REMOVED***;
 
-        if ($type !== 'entity') {
+        if ($type !== 'entity' && $tableId !== 'upload_image') {
             $data[***REMOVED*** =  [
                 'name' => sprintf('%sFixture', $table),
                 'type' => 'Fixture',

@@ -144,6 +144,9 @@ class SrcService extends AbstractConstructor
     public function construct(Src $src)
     {
         $this->src = $src;
+        if ($this->src->getDb() !== null) {
+            $this->setDbOptions($this->src);
+        }
         return $this->factory();
     }
 

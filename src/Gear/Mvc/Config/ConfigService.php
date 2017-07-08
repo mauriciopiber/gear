@@ -5,6 +5,7 @@ use Gear\Service\AbstractJsonService;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Module\ModuleConstructorInterface;
 use GearJson\Db\Db;
+use Exception;
 
 class ConfigService extends AbstractJsonService implements ModuleConstructorInterface
 {
@@ -74,6 +75,18 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
     public function introspectUploadImage(Db $db)
     {
         $this->db = $db;
+        $this->columnManager = $this->db->getColumnManager();
+
+
+        if (empty($this->columnManager)) {
+            throw new Exception(
+                sprintf(
+                    'Missing Column Manager on %s %s',
+                    __FUNCTION__,
+                    $this->db->getTable()
+                )
+            );
+        }
 
         //verifica associação com tabelas.
         if ($this->getTableService()->verifyTableAssociation($this->db->getTable())) {
@@ -86,8 +99,11 @@ class ConfigService extends AbstractJsonService implements ModuleConstructorInte
             $this->getModule()->writable($uploadFolder);
         }
 
+
+
+
         //verifica associação com colunas
-        if ($this->db->getColumnManager()->isAssociatedWith('Gear\Column\Varchar\UploadImage')) {
+        if ($this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage')) {
             $this->getUploadImageManager()->mergeUploadImageColumnFromDb($this->db);
         }
     }

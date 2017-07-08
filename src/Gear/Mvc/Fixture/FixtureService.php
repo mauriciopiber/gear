@@ -13,8 +13,8 @@ namespace Gear\Mvc\Fixture;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Database\SchemaToolServiceTrait;
-use Gear\Column\Int\PrimaryKey;
-use Gear\Column\Int\ForeignKey;
+use Gear\Column\Integer\PrimaryKey;
+use Gear\Column\Integer\ForeignKey;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Zend\EventManager\EventManagerInterface;
