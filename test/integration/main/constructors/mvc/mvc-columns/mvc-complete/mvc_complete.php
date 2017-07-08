@@ -5,6 +5,18 @@ use Phinx\Migration\AbstractMigration;
 class MvcComplete extends AbstractMigration
 {
     const TABLES = [
+        'column_int_foreign' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'column_int_foreign_name' => [
+                    'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***,
+            'table' => [
+
+            ***REMOVED***
+        ***REMOVED***,
         'mvc_complete' => [
             'nullable' => false,
             'unique' => false,
@@ -84,18 +96,6 @@ class MvcComplete extends AbstractMigration
                 'column_varchar_email_complete' => [
                     'type' => 'string'
                 ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'column_int_foreign' => [
-            'nullable' => true,
-            'unique' => false,
-            'columns' => [
-                'column_int_foreign_name' => [
-                    'type' => 'string'
-                ***REMOVED***
-            ***REMOVED***,
-            'table' => [
-
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***;
