@@ -5,6 +5,18 @@ use Phinx\Migration\AbstractMigration;
 class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
 {
     const TABLES = [
+        'column_int_foreign' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'column_int_foreign_name' => [
+                    'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***,
+            'table' => [
+
+            ***REMOVED***
+        ***REMOVED***,
         'mvc_cmp_str_uni_nul_upl' => [
             'nullable' => true,
             'unique' => true,
@@ -84,18 +96,6 @@ class MvcCompleteStrictUniqueNullableUploadImage extends AbstractMigration
                 'clm_vrc_eml_cmp_str_uni_nul_upl' => [
                     'type' => 'string'
                 ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'column_int_foreign' => [
-            'nullable' => true,
-            'unique' => false,
-            'columns' => [
-                'column_int_foreign_name' => [
-                    'type' => 'string'
-                ***REMOVED***
-            ***REMOVED***,
-            'table' => [
-
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***;
