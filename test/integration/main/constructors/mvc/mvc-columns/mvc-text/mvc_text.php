@@ -67,6 +67,16 @@ class MvcText extends AbstractMigration
          return true;
     }
 
+    public function createColumnForeignKey(&$table, $columnName)
+    {
+        $table->addForeignKey(
+            $columnName,
+            'column_int_foreign',
+            'id_column_int_foreign',
+            ['delete'=> 'CASCADE', 'update'=> 'CASCADE'***REMOVED***
+        );
+    }
+
     public function createTable($tableName, $options)
     {
         $table = $this->table($tableName, ['id' => sprintf('id_%s', $tableName)***REMOVED***);
@@ -76,6 +86,10 @@ class MvcText extends AbstractMigration
             $unique = (isset($column['unique'***REMOVED***)) ? $column['unique'***REMOVED*** : $options['unique'***REMOVED***;
             //$properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
             $this->createColumn($table, $columnName, $column['type'***REMOVED***, $nullable, $unique);
+
+            if (isset($column['properties'***REMOVED***) && in_array('foreignKey', $column['properties'***REMOVED***)) {
+                $this->createColumnForeignKey($table, $columnName);
+            }
         }
 
         $table->create();

@@ -48,7 +48,7 @@ class MvcSuite
         $suiteTables,
         $longname = false
     ) {
-         echo '    - Create Mvc Suite'."\n";
+         echo sprintf('    - Create Mvc Suite %s'."\n", $suiteName);
 
         $mvcMajor = new MvcMajorSuite($suiteName, $suiteColumns, $suiteUserTypes, $suiteConstraints, $suiteTables);
 

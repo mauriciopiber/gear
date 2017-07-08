@@ -178,6 +178,9 @@ class ServiceService extends AbstractMvc
 
         $options['constructor'***REMOVED*** = $this->getCode()->getConstructor($this->src);
 
+        $this->getTraitService()->createTrait($this->src);
+        $this->getFactoryService()->createFactory($this->src);
+
         if($this->columnManager->isAssociatedWith('Gear\Column\Varchar\PasswordVerify')) {
             $this->src->addDependency('\GearBase\Service\PasswordVerify');
         }
@@ -195,9 +198,6 @@ class ServiceService extends AbstractMvc
 
         $options = array_merge($options, $optionsColumn);
         $options = array_merge($options, $userOptions);
-
-        $this->getTraitService()->createTrait($this->src);
-        $this->getFactoryService()->createFactory($this->src);
 
         $this->file->setOptions($options);
         $this->file->setFileName(sprintf('%s.php', $this->className));

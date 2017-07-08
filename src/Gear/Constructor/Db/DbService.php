@@ -144,11 +144,19 @@ class DbService extends AbstractConstructor
         }
 
         if ($this->getTableService()->verifyTableAssociation($db->getTable(), UploadImageTable::NAME)) {
-            $this->getActionService()->create($module, $db->getTable().'Controller', 'UploadImage');
+            $this->getActionService()->create(
+                $module,
+                [
+                    'controller' => $db->getTable().'Controller',
+                    'name' => 'UploadImage'
+                ***REMOVED***,
+                true
+            );
         }
 
         $db->setTableObject($this->getTableService()->getTableObject($db->getTable()));
         $db->setColumnManager($this->getColumnService()->getColumnManager($db));
+
 
         $this->getConfigService()         ->introspectFromTable($db);
         $this->getEntityService()         ->introspectFromTable($db);
