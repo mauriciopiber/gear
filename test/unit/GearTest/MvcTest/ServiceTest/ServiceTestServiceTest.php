@@ -176,7 +176,7 @@ class ServiceTestServiceTest extends AbstractTestCase
         $this->traitTest->createTraitTest($serviceT)->shouldBeCalled();
         $this->factoryTest->createFactoryTest($serviceT)->shouldBeCalled();
 
-        $file = $this->service->introspectFromTable($this->db);
+        $file = $this->service->createServiceTest($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 
@@ -217,7 +217,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTraitTestService($this->traitTest->reveal());
 
-        $file = $this->service->create($data);
+        $file = $this->service->createServiceTest($data);
 
         $expected = $this->templates.'/src/service-with-special-dependency.phtml';
 
@@ -258,7 +258,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
         $this->service->setTraitTestService($this->traitTest->reveal());
 
-        $file = $this->service->create($data);
+        $file = $this->service->createServiceTest($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 

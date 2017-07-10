@@ -7,6 +7,7 @@ use GearJson\Src\Src;
 use Gear\Mvc\Service\ServiceTestColumnInterface;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
+use GearJson\Src\SrcTypesInterface;
 
 class ServiceTestService extends AbstractMvcTest
 {
@@ -67,13 +68,15 @@ class ServiceTestService extends AbstractMvcTest
         return $options;
     }
 
-    public function introspectFromTable(Db $table)
+    public function createServiceTest($data)
     {
-        $this->db           = $table;
+        return parent::createTest($data, SrcTypesInterface::SERVICE);
+    }
+
+    public function createDbTest()
+    {
         $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
-
-        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Service');
 
         $fileCreator = $this->getFileCreator();
 
@@ -85,7 +88,7 @@ class ServiceTestService extends AbstractMvcTest
 
         //get dependencies.
         //get repository.
-        $this->repository = $this->getSchemaService()->getSrcByDb($table, 'Repository');
+        $this->repository = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
         $repositoryName = $this->getServiceManager()->getServiceName($this->repository);
 
         /**
@@ -101,7 +104,7 @@ class ServiceTestService extends AbstractMvcTest
 
         $optionsColumn = $this->columnManager->generateSchema(self::COLUMN_SCHEMA);
 
-        $this->entity = $this->getSchemaService()->getSrcByDb($table, 'Entity');
+        $this->entity = $this->getSchemaService()->getSrcByDb($this->db, 'Entity');
 
         $options = array_merge($options, [
             'namespaceFile'    => $this->getCodeTest()->getNamespace($this->src),
@@ -155,22 +158,16 @@ class ServiceTestService extends AbstractMvcTest
         return $fileCreator->render();
     }
 
-    public function create(Src $src)
+    public function createSrcTest()
     {
-        $this->src = $src;
-
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->getDb() !== null) {
-            return $this->introspectFromTable($this->src->getDb());
-        }
-
         if ($this->src->isFactory() && $this->src->isAbstract() === false) {
-            $this->getFactoryTestService()->createFactoryTest($src);
+            $this->getFactoryTestService()->createFactoryTest($this->src);
         }
 
         if ($this->src->isAbstract() === false) {
-            $this->getTraitTestService()->createTraitTest($src);
+            $this->getTraitTestService()->createTraitTest($this->src);
         }
 
         $options = [

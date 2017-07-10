@@ -11,6 +11,8 @@ use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
 use Gear\Creator\FileCreator\App\InjectTrait;
 use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
+use GearJson\Src\Src as SrcObject;
+use GearJson\Db\Db as DbObject;
 
 abstract class AbstractMvc extends AbstractJsonService
 {
@@ -23,7 +25,23 @@ abstract class AbstractMvc extends AbstractJsonService
     use TraitServiceTrait;
     use FactoryServiceTrait;
 
-    static protected $factories = 'factories';
+    public function create($data, $type)
+    {
+        if ($data instanceof DbObject) {
+            $this->db = $data;
+            $this->src = $this->getSchemaService()->getSrcByDb($this->db, $type);
+            return $this->createDb();
+        }
+
+        if ($data instanceof SrcObject && $data->getDb() instanceof DbObject) {
+            $this->src = $data;
+            $this->db = $this->src->getDb();
+            return $this->createDb();
+        }
+
+        $this->src = $data;
+        return $this->createSrc();
+    }
 
     public function getActionsToInject($controller, $fileActions)
     {

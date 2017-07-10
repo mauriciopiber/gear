@@ -11,8 +11,8 @@ use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Service\ServiceColumnInterface;
 use Gear\Mvc\Service\ServiceCodeInterface;
 use Gear\Creator\Code;
-use GearJson\Src\Type\ServiceInterface;
 use GearJson\Src\Type\RepositoryInterface;
+use GearJson\Src\SrcTypesInterface;
 
 class ServiceService extends AbstractMvc
 {
@@ -21,6 +21,8 @@ class ServiceService extends AbstractMvc
     use ServiceTestServiceTrait;
 
     use ServiceManagerTrait;
+
+    public const TYPE = SrcTypesInterface::SERVICE;
 
     const COLUMN_SCHEMA = [
         'create' => [
@@ -43,39 +45,10 @@ class ServiceService extends AbstractMvc
 
     public $name;
 
-    public function create($src)
+    public function createService($data)
     {
-        $this->src = $src;
-        $this->className = $this->src->getName();
-
-        if ($this->src->getDb() !== null) {
-            $this->db        = $this->src->getDb();
-            $this->tableName = $this->db->getTable();
-            $this->name      = $this->str('class', $this->src->getNameOff());
-            return $this->createDb();
-        }
-
-        return $this->createSrc();
-    }
-
-    /**
-     * need:
-     * db
-     * tableName
-     * src
-     * className
-     * name
-     * dependency
-     */
-    public function introspectFromTable($dbObject)
-    {
-        $this->db           = $dbObject;
-        $this->tableName    = $this->db->getTable();
-        $this->src          = $this->getSchemaService()->getSrcByDb($this->db, ServiceInterface::NAME);
-        $this->className    = $this->src->getName();
-        $this->name      = $this->str('class', $this->src->getNameOff());
-
-        return $this->createDb();
+        return parent::create($data, SrcTypesInterface::SERVICE);
+        //throw new UnableToCreateServiceException($data);
     }
 
     public function createSrc()
@@ -89,14 +62,14 @@ class ServiceService extends AbstractMvc
             'namespace'  => $this->getCode()->getNamespace($this->src),
             'module'     => $this->getModule()->getModuleName(),
             'abstract'   => $this->src->getAbstract(),
-            'class'      => $this->className,
+            'class'      => $this->src->getName(),
         ***REMOVED***;
 
         $options['constructor'***REMOVED*** = ($this->src->isFactory())
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
-        $this->getServiceTestService()->create($this->src);
+        $this->getServiceTestService()->createServiceTest($this->src);
 
         if ($this->src->isAbstract() === false) {
             $this->getTraitService()->createTrait($this->src);
@@ -111,7 +84,7 @@ class ServiceService extends AbstractMvc
         return $this->srcFile->createFile(
             self::TEMPLATE_SCHEMA['src'***REMOVED***,
             $options,
-            sprintf('%s.php', $this->className),
+            sprintf('%s.php', $this->src->getName()),
             $this->getCode()->getLocation($this->src)
         );
     }
@@ -161,15 +134,14 @@ class ServiceService extends AbstractMvc
             'entity'           => $this->entityName, //fullName
             'namespace'        => $this->getCode()->getNamespace($this->src),
             'package'          => $this->getCode()->getClassDocsPackage($this->src),
-            'context'          => $this->str('url', $this->tableName),
-            'table'            => $this->str('class', $this->name),
-            'tableLabel'       => $this->str('label', $this->name),
-            'var'              => $this->str('var-length', $this->name),
-            'nameVar'          => $this->str('var', $this->name),
+            'context'          => $this->str('url', $this->db->getTable()),
+            'table'            => $this->str('class', $this->str('class', $this->src->getNameOff())),
+            'tableLabel'       => $this->str('label', $this->str('class', $this->src->getNameOff())),
+            'var'              => $this->str('var-length', $this->str('class', $this->src->getNameOff())),
+            'nameVar'          => $this->str('var', $this->str('class', $this->src->getNameOff())),
             'tableUploadImage' => $this->tableUploadImage,
-            'imagemService'    => $this->useImageService,
-            'baseName'         => $this->name,
-            'class'            => $this->className,
+            'baseName'         => $this->str('class', $this->src->getNameOff()),
+            'class'            => $this->src->getName(),
             'extends'          => 'AbstractService',
             'module'           => $this->getModule()->getModuleName(),
             'repository'       => $this->repository,
@@ -200,10 +172,10 @@ class ServiceService extends AbstractMvc
         $options = array_merge($options, $userOptions);
 
         $this->file->setOptions($options);
-        $this->file->setFileName(sprintf('%s.php', $this->className));
+        $this->file->setFileName(sprintf('%s.php', $this->src->getName()));
         $this->file->setLocation($location);
         $this->file->setView(self::TEMPLATE_SCHEMA['db'***REMOVED***);
-        $this->getServiceTestService()->introspectFromTable($this->db);
+        $this->getServiceTestService()->createServiceTest($this->db);
 
         return $this->file->render();
     }

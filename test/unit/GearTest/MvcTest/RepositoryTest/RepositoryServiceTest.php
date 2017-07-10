@@ -93,7 +93,7 @@ class RepositoryServiceTest extends AbstractTestCase
 
         $this->factory->createFactory($data)->shouldBeCalled();
 
-        $file = $this->repository->create($data);
+        $file = $this->repository->createRepository($data);
 
         $expected = $this->templates.'/src/repository-with-special-dependency.phtml';
 
@@ -130,7 +130,9 @@ class RepositoryServiceTest extends AbstractTestCase
             $this->factory->createFactory($data)->shouldBeCalled();
         }
 
-        $file = $this->repository->create($data);
+        $this->repositoryTest->createRepositoryTest($data)->shouldBeCalled();
+
+        $file = $this->repository->createRepository($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 
@@ -211,11 +213,11 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->mapping->setTableService($this->table->reveal());
         $this->repository->setMappingService($this->mapping);
 
-        $this->repositoryTest->introspectFromTable($this->db)->shouldBeCalled();
+        $this->repositoryTest->createRepositoryTest($this->db)->shouldBeCalled();
         $this->trait->createTrait($repository)->shouldBeCalled();
         $this->factory->createFactory($repository)->shouldBeCalled();
 
-        $file = $this->repository->introspectFromTable($this->db);
+        $file = $this->repository->createRepository($this->db);
 
         $expected = $this->templates.'/db/all-columns-db'.$template.'.phtml';
 

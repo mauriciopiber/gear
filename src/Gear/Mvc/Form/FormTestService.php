@@ -4,16 +4,19 @@ namespace Gear\Mvc\Form;
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src;
+use GearJson\Src\SrcTypesInterface;
 
 class FormTestService extends AbstractMvcTest
 {
-    //use ServiceManagerTrait;
-
-    public function introspectFromTable($table)
+    public function createFormTest($data)
     {
-        $this->db = $table;
+        return parent::createTest($data, SrcTypesInterface::FORM);
+    }
+
+
+    public function createDbTest()
+    {
         $this->columnManager = $this->db->getColumnManager();
-        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Form');
 
         $template = 'template/module/mvc/form/test-db.phtml';
 
@@ -42,14 +45,8 @@ class FormTestService extends AbstractMvcTest
         return $file->createFile($template, $options, $filename, $location);
     }
 
-    public function createFromSrc(Src $src)
+    public function createSrcTest()
     {
-        $this->src = $src;
-
-        if ($this->src->getDb() !== null) {
-            return $this->introspectFromTable($this->src->getDb());
-        }
-
         $this->className = $this->src->getName();
 
         $location = $this->getCodeTest()->getLocation($this->src);

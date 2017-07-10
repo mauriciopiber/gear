@@ -104,7 +104,7 @@ class FormTestServiceTest extends AbstractTestCase
 
         $this->form->setTraitTestService($this->traitTest->reveal());
 
-        $file = $this->form->createFromSrc($data);
+        $file = $this->form->createFormTest($data);
 
         $expected = $this->template.'/src/'.$template.'.phtml';
 
@@ -164,7 +164,7 @@ class FormTestServiceTest extends AbstractTestCase
         $this->traitTest->createTraitTest($src)->shouldBeCalled();
         $this->factoryTest->createFactoryTest($src)->shouldBeCalled();
 
-        $file = $this->form->introspectFromTable($db);
+        $file = $this->form->createFormTest($db);
 
         $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
 
