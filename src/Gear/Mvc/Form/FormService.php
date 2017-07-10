@@ -14,6 +14,7 @@ namespace Gear\Mvc\Form;
 use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Form\FormTestServiceTrait;
+use GearJson\Src\SrcTypesInterface;
 
 class FormService extends AbstractMvc
 {
@@ -26,15 +27,6 @@ class FormService extends AbstractMvc
     use FormTestServiceTrait;
 
     use SchemaServiceTrait;
-
-    public function hasAbstract()
-    {
-        if (is_file($this->getModule()->getFormFolder().'/AbstractForm.php')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function getFormInputValues()
     {
@@ -55,13 +47,17 @@ class FormService extends AbstractMvc
         return $this->columnManager->extractCode('getFormElement', [***REMOVED***, [\Gear\Column\Varchar\UniqueId::class***REMOVED***);
     }
 
-    public function introspectFromTable($db)
+    public function createForm($data)
     {
-        $this->db = $db;
+        return parent::create($data, SrcTypesInterface::FORM);
+    }
+
+    public function createDb()
+    {
         $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $this->getFormTestService()->introspectFromTable($this->db);
+        $this->getFormTestService()->createFormTest($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
 
@@ -88,13 +84,8 @@ class FormService extends AbstractMvc
         );
     }
 
-    public function create($src)
+    public function createSrc()
     {
-        if ($src->getDb() instanceof \GearJson\Db\Db) {
-            return $this->introspectFromTable($src->getDb());
-        }
-
-        $this->src = $src;
 
         if (empty($this->src->getExtends())) {
             $this->src->setExtends(static::$extends);
@@ -111,7 +102,7 @@ class FormService extends AbstractMvc
         $this->getTraitService()->createTrait($this->src);
         $this->getInterfaceService()->createInterface($this->src, $location);
 
-        $this->getFormTestService()->createFromSrc($this->src);
+        $this->getFormTestService()->createFormTest($this->src);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/src.phtml',

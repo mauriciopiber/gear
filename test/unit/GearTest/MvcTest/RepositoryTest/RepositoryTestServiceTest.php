@@ -81,7 +81,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
 
-        $file = $this->repository->createFromSrc($data);
+        $file = $this->repository->createRepositoryTest($data);
 
         $expected = $this->templates.'/src/repository-with-special-dependency.phtml';
 
@@ -112,7 +112,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
             $this->module->map('RepositoryTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        $file = $this->repository->createFromSrc($data);
+        $file = $this->repository->createRepositoryTest($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 
@@ -183,7 +183,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
         $this->factoryTest->createFactoryTest($repository)->shouldBeCalled();
 
-        $file = $this->repository->introspectFromTable($this->db);
+        $file = $this->repository->createRepositoryTest($this->db);
 
         $expected = $this->templates.'/db/all-columns-db'.$template.'.phtml';
 

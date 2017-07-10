@@ -104,7 +104,7 @@ class ServiceServiceTest extends TestCase
 
         $this->factory->createFactory($data)->shouldBeCalled();
 
-        $file = $this->service->create($data);
+        $file = $this->service->createService($data);
 
         $expected = $this->templates.'/src/service-with-special-dependency.phtml';
 
@@ -182,9 +182,9 @@ class ServiceServiceTest extends TestCase
 
 
         $this->trait->createTrait($serviceT)->shouldBeCalled();
-        $this->serviceTest->introspectFromTable($this->db)->shouldBeCalled();
+        $this->serviceTest->createServiceTest($this->db)->shouldBeCalled();
 
-        $file = $this->service->introspectFromTable($this->db);
+        $file = $this->service->createService($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 
@@ -225,7 +225,10 @@ class ServiceServiceTest extends TestCase
             $this->factory->createFactory($data)->shouldBeCalled();
         }
 
-        $file = $this->service->create($data);
+
+        $this->serviceTest->createServiceTest($data)->shouldBeCalled();
+
+        $file = $this->service->createService($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 

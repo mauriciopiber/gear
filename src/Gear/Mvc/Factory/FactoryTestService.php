@@ -11,10 +11,6 @@ class FactoryTestService extends AbstractMvcTest
 {
     use FactoryCodeTestTrait;
 
-    public function createTest($src)
-    {
-        //$this->createFactoryTest($src);
-    }
 
     public function createConstructorSnippet($src)
     {

@@ -119,7 +119,9 @@ class FormServiceTest extends AbstractTestCase
             }
         }
 
-        $file = $this->form->create($data);
+        $this->formTest->createFormTest($data)->shouldBeCalled();
+
+        $file = $this->form->createForm($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 
@@ -188,17 +190,14 @@ class FormServiceTest extends AbstractTestCase
 
         $this->form->setSchemaService($schemaService->reveal());
 
-        $this->form->setTraitService($this->trait->reveal());
 
-
-        $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
-
-        $this->form->setFormTestService($this->formTest->reveal());
 
         $this->trait->createTrait($form)->shouldBeCalled();
         $this->factory->createFactory($form)->shouldBeCalled();
 
-        $file = $this->form->introspectFromTable($this->db);
+        $this->formTest->createFormTest($this->db)->shouldBeCalled();
+
+        $file = $this->form->createForm($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 

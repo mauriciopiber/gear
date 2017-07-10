@@ -53,6 +53,9 @@ trait AllColumnsDbTableTrait
 
     public function getAllPossibleColumns($tableName = 'table')
     {
+        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module->getModuleName()->willReturn('MyModule');
+
         $this->string = new \GearBase\Util\String\StringService();
 
         $columns = [***REMOVED***;
@@ -97,6 +100,8 @@ trait AllColumnsDbTableTrait
             'foreign_key_column'
         );
 
+        $foreignKey->setModule($module->reveal());
+
         $columns[***REMOVED*** = $foreignKey;
 
         $columns[***REMOVED*** = new \Gear\Column\Integer\Integer(
@@ -138,9 +143,6 @@ trait AllColumnsDbTableTrait
         $uploadImage = new \Gear\Column\Varchar\UploadImage(
             $this->prophesizeColumn($tableName, 'upload_image_column', 'varchar')
         );
-
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getModuleName()->willReturn('MyModule');
 
         $uploadImage->setModule($module->reveal());
 

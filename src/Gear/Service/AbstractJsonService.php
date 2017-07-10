@@ -63,45 +63,6 @@ abstract class AbstractJsonService implements
 
     use MetadataTrait;
 
-    protected $adapter;
-
-    protected $options;
-
-    protected $module;
-
-    protected $useImageService;
-
-    protected $className;
-
-    protected $name;
-
-    protected $tableName;
-
-    protected $tableColumns;
-
-    protected $tableData;
-
-    //aqui pra cima é antigo
-    protected $file;
-
-    protected $src;
-
-    protected $db;
-
-    protected $controller;
-
-    protected $action;
-
-    protected $validColumns;
-    protected $usePrimaryKey;
-    protected $baseArray;
-    protected $primaryKey;
-
-    protected $columnStack;
-
-    protected $columnDuplicated;
-
-
     public function getAdapter()
     {
         return $this->adapter;

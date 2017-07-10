@@ -15,6 +15,7 @@ use GearJson\Src\Src;
 use GearJson\Db\Db;
 use Gear\Mvc\AbstractMvc;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Src\SrcTypesInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
 
@@ -41,7 +42,12 @@ class RepositoryService extends AbstractMvc
 
     protected $customAbstract = false;
 
+    public function createRepository($data)
+    {
+        return parent::create($data, SrcTypesInterface::REPOSITORY);
+    }
 
+/*
     public function introspectFromTable(Db $db)
     {
         $this->db = $db;
@@ -50,6 +56,7 @@ class RepositoryService extends AbstractMvc
 
         return $this->createDb();
     }
+    */
 
     public function createDb()
     {
@@ -68,7 +75,7 @@ class RepositoryService extends AbstractMvc
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getRepositoryTestService()->introspectFromTable($this->db);
+        $this->getRepositoryTestService()->createRepositoryTest($this->db);
 
         $this->getTraitService()->createTrait($this->src);
         $this->getFactoryService()->createFactory($this->src);
@@ -106,6 +113,7 @@ class RepositoryService extends AbstractMvc
         return $template;
     }
 
+    /*
     public function create(Src $src)
     {
         $this->src = $src;
@@ -118,13 +126,14 @@ class RepositoryService extends AbstractMvc
         }
         return $this->createSrc();
     }
+    */
 
     public function createSrc()
     {
         $location = $this->getCode()->getLocation($this->src);
 
         //$this->getAbstract();
-        $this->getRepositoryTestService()->createFromSrc($this->src);
+        $this->getRepositoryTestService()->createRepositoryTest($this->src);
 
         if ($this->src->getAbstract() == false) {
             $this->getTraitService()->createTrait($this->src);
@@ -135,7 +144,7 @@ class RepositoryService extends AbstractMvc
         }
 
         $options = [
-            'class'      => $this->className,
+            'class'      => $this->src->getName(),
             'implements' => $this->getCode()->getImplements($this->src),
             'module'     => $this->getModule()->getModuleName(),
             'namespace'  => $this->getCode()->getNamespace($this->src),

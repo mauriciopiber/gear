@@ -4,38 +4,28 @@ namespace Gear\Mvc\Repository;
 use Gear\Mvc\AbstractMvcTest;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
-use Gear\Mvc\Config\ServiceManagerTrait;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertTestInterface;
-use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateTestInterface;
-use Gear\Mvc\Repository\ColumnInterface\ShitInterface;
+use GearJson\Src\SrcTypesInterface;
 
-class RepositoryTestService extends AbstractMvcTest implements ShitInterface
+class RepositoryTestService extends AbstractMvcTest
 {
-    //use ServiceManagerTrait;
-
-    protected $tableName;
-    protected $tableColumns;
-    protected $table;
-
     const KEY_INSERT = 88;
 
     const KEY_UPDATE = 98;
 
-    public function createFromSrc(Src $src)
+    public function createRepositoryTest($data)
     {
-        $this->src = $src;
+        return parent::createTest($data, SrcTypesInterface::REPOSITORY);
+    }
 
-        if ($this->src->getDb() !== null) {
-            return $this->introspectFromTable($this->src->getDb());
-        }
-
+    public function createSrcTest()
+    {
         $this->className = $this->src->getName();
 
         $options = [
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-            'className'  => $src->getName(),
+            'className'  => $this->src->getName(),
             'var'        => $this->str('var-length', $this->src->getName()),
             'module'     => $this->getModule()->getModuleName()
         ***REMOVED***;
@@ -73,9 +63,8 @@ class RepositoryTestService extends AbstractMvcTest implements ShitInterface
         );
     }
 
-    public function introspectFromTable(Db $table)
+    public function createDbTest()
     {
-        $this->db           = $table;
         $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 

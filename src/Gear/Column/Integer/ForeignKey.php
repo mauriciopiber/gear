@@ -392,7 +392,7 @@ EOS;
         $elementName = $this->str('var', $this->column->getName());
         $label       = $this->str('label', $this->column->getName());
 
-        $module = $this->getModuleName();
+        $module = $this->getModule()->getModuleName();
         $entity = $this->str('class', $this->getReferencedTableName());
 
         $property = $this->str('var', $this->referencedColumn);

@@ -32,9 +32,9 @@ class FactoryService extends AbstractMvc
 
     use FactoryTestServiceTrait;
 
-    public function create($src)
+    public function createFactory($src)
     {
-        $this->createFactory($src);
+        $this->createFactoryFactory($src);
         $this->getFactoryTestService()->createTest($src);
     }
 
@@ -126,7 +126,7 @@ class FactoryService extends AbstractMvc
     }
 
 
-    public function createFactory($data)
+    public function createFactoryFactory($data)
     {
         if ($data instanceof Controller) {
             return $this->createFactoryController($data);

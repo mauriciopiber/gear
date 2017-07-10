@@ -33,9 +33,6 @@ class ControllerService extends AbstractMvc implements
         'src'            => 'template/module/mvc/controller/controller.phtml'
     ***REMOVED***;
 
-    protected $useImageService = false;
-
-
     public function module()
     {
         return $this->getFileCreator()->createFile(
@@ -250,7 +247,6 @@ class ControllerService extends AbstractMvc implements
                 'actions' => $this->controller->getAction(),
                 'use' => $this->use,
                 'attribute' => $this->attribute,
-                'imagemService' => $this->useImageService, /** @TODO 4 - Usar apenas Use e Attribute */
             ***REMOVED***
         ));
 
