@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\View;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Config\AssetManagerTrait;
 use GearJson\Db\Db;
 
-class AngularService extends AbstractJsonService
+class AngularService extends AbstractMvc
 {
     use AssetManagerTrait;
 

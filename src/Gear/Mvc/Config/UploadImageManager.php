@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Db\Db;
 
-class UploadImageManager extends AbstractJsonService implements ModuleManagerInterface
+class UploadImageManager extends AbstractConfigManager implements ModuleManagerInterface
 {
     public function module(array $controllers)
     {

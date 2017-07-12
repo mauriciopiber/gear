@@ -135,14 +135,14 @@ class SearchServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($search);
 
-        $this->searchTest->introspectFromTable($this->db)->shouldBeCalled();
+        $this->searchTest->createSearchFormTest($this->db)->shouldBeCalled();
 
         $this->db->setColumnManager(new ColumnManager($columns));
 
         $this->trait->createTrait($search)->shouldBeCalled();
         $this->factory->createFactory($search)->shouldBeCalled();
 
-        $file = $this->search->introspectFromTable($this->db);
+        $file = $this->search->createSearchForm($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 

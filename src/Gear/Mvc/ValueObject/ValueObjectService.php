@@ -11,18 +11,27 @@
  */
 namespace Gear\Mvc\ValueObject;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 use Gear\Creator\CodeTrait;
+use GearJson\Src\SrcTypesInterface;
 
-class ValueObjectService extends AbstractJsonService
+class ValueObjectService extends AbstractMvc
 {
     use CodeTrait;
     use ValueObjectTestServiceTrait;
 
-    public function create($src)
+    public function createValueObject($data)
     {
-        $this->src = $src;
+        if ($data instanceof Db || ($data instanceof Src && $data->getDb() !== null)) {
+            throw new Exception('View Helper should be run without Db');
+        }
+
+        return parent::create($data, SrcTypesInterface::VALUE_OBJECT);
+    }
+
+    public function createSrc()
+    {
         $this->getValueObjectTestService()->createTest($this->src);
 
         $this->getFileCreator()->createFile(

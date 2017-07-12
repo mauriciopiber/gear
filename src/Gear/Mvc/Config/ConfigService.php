@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Schema\SchemaServiceTrait;
 use Gear\Module\ModuleConstructorInterface;
 use GearJson\Db\Db;
 use Exception;
 
-class ConfigService extends AbstractJsonService implements ModuleConstructorInterface
+class ConfigService extends AbstractConfigManager implements ModuleConstructorInterface
 {
     use SchemaServiceTrait;
     use \Gear\Mvc\Config\AssetManagerTrait;

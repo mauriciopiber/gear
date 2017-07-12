@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Action\Action;
 use Gear\Creator\FileCreator\FileCreator;
 use GearJson\Db\Db;
 
-class NavigationManager extends AbstractJsonService implements ModuleManagerInterface, ActionManagerInterface
+class NavigationManager extends AbstractConfigManager implements ModuleManagerInterface
 {
     use SchemaServiceTrait;
 

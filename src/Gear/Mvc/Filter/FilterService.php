@@ -14,6 +14,7 @@ namespace Gear\Mvc\Filter;
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Filter\FilterTestServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
+use GearJson\Src\SrcTypesInterface;
 
 class FilterService extends AbstractMvc
 {
@@ -44,15 +45,9 @@ class FilterService extends AbstractMvc
     }
     */
 
-    public function introspectFromTable($table)
+    public function createFilter($data)
     {
-        //$this->getAbstract();
-
-        $this->db = $table;
-
-        $this->src = $this->getSchemaService()->getSrcByDb($table, 'Filter');
-
-        return $this->createDb();
+        return parent::create($data, SrcTypesInterface::FILTER);
     }
 
     public function createDb()
@@ -130,16 +125,15 @@ class FilterService extends AbstractMvc
             ***REMOVED***);
         }
 
-        $this->getFilterTestService()->introspectFromTable($this->db);
+        $this->getFilterTestService()->createFilterTest($this->db);
 
         $this->getFactoryService()->createFactory($this->src);
 
         return $this->file->render();
     }
 
-    public function create($src)
+    public function createSrc()
     {
-        $this->src = $src;
         $this->className = $this->src->getName();
 
         if ($this->src->getDb() !== null) {
@@ -157,7 +151,7 @@ class FilterService extends AbstractMvc
         $this->getTraitService()->createTrait($this->src);
         $this->getInterfaceService()->createInterface($this->src, $location);
 
-        $this->getFilterTestService()->create($this->src);
+        $this->getFilterTestService()->createFilterTest($this->src);
 
         if ($this->src->isFactory()) {
             $this->getFactoryService()->createFactory($this->src, $location);

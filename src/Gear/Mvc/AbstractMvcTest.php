@@ -14,6 +14,7 @@ use GearJson\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\Src as SrcObject;
 use GearJson\Db\Db as DbObject;
+use Gear\Exception\InvalidArgumentException;
 
 abstract class AbstractMvcTest extends AbstractJsonService
 {
@@ -26,6 +27,24 @@ abstract class AbstractMvcTest extends AbstractJsonService
     use CodeTestTrait;
     use BeforeEachTrait;
     use VarsTrait;
+
+    public function forceDbTest($data, $type)
+    {
+        if (($data instanceof DbObject) === false && ($data instanceof SrcObject && $data->getDb() != null) === false) {
+            throw new InvalidArgumentException(sprintf('%s need a valid db', $type));
+        }
+
+        return $this->createTest($data, $type);
+    }
+
+    public function forceSrcTest($data, $type)
+    {
+        if (($data instanceof DbObject) || ($data instanceof SrcObject && $data->getDb() != null)) {
+            throw new InvalidArgumentException(sprintf('%s need to be free from db', $type));
+        }
+
+        return $this->createTest($data, $type);
+    }
 
     public function createTest($data, $type)
     {

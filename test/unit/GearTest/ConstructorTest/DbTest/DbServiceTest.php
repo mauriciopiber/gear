@@ -78,7 +78,7 @@ class DbServiceTest extends TestCase
     }
 
     /**
-     * @group mmm4
+     * @group a1
      */
     public function testCreateDbWithDefaultValues()
     {
@@ -117,16 +117,16 @@ class DbServiceTest extends TestCase
         $this->tableService->getTableObject($table)->willReturn($this->tableObject->reveal())->shouldBeCalled();
         $this->tableService->verifyTableAssociation($table, 'upload_image')->willReturn(true)->shouldBeCalled();
 
-        $this->serviceService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->repositoryService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->formService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->filterService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->searchFormService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->serviceService->createService($this->db->reveal())->shouldBeCalled();
+        $this->repositoryService->createRepository($this->db->reveal())->shouldBeCalled();
+        $this->formService->createForm($this->db->reveal())->shouldBeCalled();
+        $this->filterService->createFilter($this->db->reveal())->shouldBeCalled();
+        $this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
         $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
         $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->entityService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->fixtureService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->entityService->createEntity($this->db->reveal())->shouldBeCalled();
+        $this->fixtureService->createFixture($this->db->reveal())->shouldBeCalled();
         $this->languageService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->viewService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->configService->introspectFromTable($this->db->reveal())->shouldBeCalled();
@@ -183,16 +183,16 @@ class DbServiceTest extends TestCase
         $this->tableService->verifyTableAssociation($table, 'upload_image')->willReturn(true)->shouldBeCalled();
 
 
-        $this->serviceService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->repositoryService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->formService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->filterService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->searchFormService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->serviceService->createService($this->db->reveal())->shouldBeCalled();
+        $this->repositoryService->createRepository($this->db->reveal())->shouldBeCalled();
+        $this->formService->createForm($this->db->reveal())->shouldBeCalled();
+        $this->filterService->createFilter($this->db->reveal())->shouldBeCalled();
+        $this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
         $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
         $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->entityService->introspectFromTable($this->db->reveal())->shouldBeCalled();
-        $this->fixtureService->introspectFromTable($this->db->reveal())->shouldBeCalled();
+        $this->entityService->createEntity($this->db->reveal())->shouldBeCalled();
+        $this->fixtureService->createFixture($this->db->reveal())->shouldBeCalled();
         $this->languageService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->viewService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->configService->introspectFromTable($this->db->reveal())->shouldBeCalled();

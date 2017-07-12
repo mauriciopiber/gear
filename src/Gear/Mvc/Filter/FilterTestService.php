@@ -4,27 +4,26 @@ namespace Gear\Mvc\Filter;
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
-use Gear\Mvc\Config\ServiceManagerTrait;
+use GearJson\Src\SrcTypesInterface;
 
 class FilterTestService extends AbstractMvcTest
 {
     //use ServiceManagerTrait;
 
-    public function create($src)
+    public function createFilterTest($data)
     {
-        $this->src = $src;
-        if ($this->src->getDb() !== null) {
-            $this->db = $this->src->getDb();
-            return $this->createDb();
-        }
+        return parent::createTest($data, SrcTypesInterface::FILTER);
+    }
 
-        $location = $this->getCodeTest()->getLocation($src);
+    public function createSrcTest()
+    {
+        $location = $this->getCodeTest()->getLocation($this->src);
 
         if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($src, $location);
+            $this->getTraitTestService()->createTraitTest($this->src, $location);
 
             if ($this->src->isFactory()) {
-                $this->getFactoryTestService()->createFactoryTest($src, $location);
+                $this->getFactoryTestService()->createFactoryTest($this->src, $location);
             }
         }
 
@@ -44,12 +43,6 @@ class FilterTestService extends AbstractMvcTest
         );
     }
 
-    public function introspectFromTable($db)
-    {
-        $this->db = $db;
-        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Filter');
-        return $this->createDb();
-    }
 
     public function getTestRequiredColumns()
     {
@@ -210,52 +203,9 @@ class FilterTestService extends AbstractMvcTest
                 'columns' => $columns
             ***REMOVED***
         );
-
-        /*
-        $onlyOneFunction = [***REMOVED***;
-
-
-
-        $columnsDb = $this->getColumnService()->getColumns($this->db);
-
-        if (count($columnsDb)>0) {
-            foreach ($columnsDb as $column) {
-                if ($column instanceof Gear\Column\Integer\PrimaryKey
-                    || $column instanceof Gear\Column\Varchar\UniqueId
-                ) {
-                    continue;
-                }
-
-                if ($column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterValidPostInterface) {
-                    $columns .= $column->getFilterValidPost();
-                }
-
-                if ($column instanceof \Gear\Mvc\Filter\ColumnInterface\FilterFunctionInterface
-                    && !in_array(get_class($column), $onlyOneFunction)
-                ) {
-                    $this->functions .= $column->getFilterFunction();
-                    $onlyOneFunction[***REMOVED*** = get_class($column);
-                }
-
-
-                $fixture .= $column->getFilterData(99);
-            }
-        }
-
-        $this->functions .= $this->getFileCreator()->renderPartial(
-            'template/module/mvc/filter/db/test-valid-post.phtml',
-            [
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->class,
-                'var' => $this->var,
-                'fixture' => $fixture,
-                'columns' => $columns
-            ***REMOVED***
-        );
-        */
     }
 
-    public function createDb()
+    public function createDbTest()
     {
         $this->tableName = $this->db->getTable();
         $this->columnManager = $this->db->getColumnManager();

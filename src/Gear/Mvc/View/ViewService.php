@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\View;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Column\Mvc\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
 use GearJson\Action\Action;
@@ -11,7 +11,7 @@ use GearJson\Schema\SchemaServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Mvc\View\ViewColumnInterface;
 
-class ViewService extends AbstractJsonService
+class ViewService extends AbstractMvc
 {
     use SchemaServiceTrait;
     use UploadImageTrait;

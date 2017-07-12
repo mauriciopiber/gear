@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Action\Action;
 
-class ConsoleRouterManager extends AbstractMvc implements ModuleManagerInterface, ActionManagerInterface
+class ConsoleRouterManager extends AbstractConfigManager implements ModuleManagerInterface
 {
     public function module(array $controllers)
     {

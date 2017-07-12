@@ -11,6 +11,7 @@ use Gear\Creator\CodeTest;
 use Gear\Creator\CodeTestTrait;
 use GearJson\Src\Src;
 use Gear\Module\BasicModuleStructure;
+use GearJson\Src\SrcTypesInterface;
 
 /**
  * PHP Version 5
@@ -57,12 +58,18 @@ class ValueObjectTestService implements ModuleAwareInterface
         return $this;
     }
 
-
-    public function createTest(Src $src)
+    public function createValueObjectTest($data)
     {
-        $this->src = $src;
+        if ($data instanceof Db || ($data instanceof Src && $data->getDb() !== null)) {
+            throw new Exception('View Helper should be run without Db');
+        }
+
+        return parent::createTest($data, SrcTypesInterface::VALUE_OBJECT);
+    }
 
 
+    public function createSrcTest()
+    {
         $template = ($this->src->getAbstract()) ? 'abstract' : 'src';
 
         $this->getFileCreator()->createFile(

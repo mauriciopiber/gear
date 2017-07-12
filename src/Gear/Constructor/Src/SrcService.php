@@ -257,47 +257,47 @@ class SrcService extends AbstractConstructor
             switch ($this->src->getType()) {
                 case SrcTypesInterface::CONTROLLER_PLUGIN:
                     $service = $this->getControllerPluginService();
-                    $status = $service->create($this->src);
+                    $status = $service->createControllerPlugin($this->src);
                     break;
                 case SrcTypesInterface::VIEW_HELPER:
                     $service = $this->getViewHelperService();
-                    $status = $service->create($this->src);
+                    $status = $service->createViewHelper($this->src);
                     break;
                 case SrcTypesInterface::SERVICE:
                     $service = $this->getServiceService();
-                    $status = $service->create($this->src);
+                    $status = $service->createService($this->src);
                     break;
                 case SrcTypesInterface::ENTITY:
                     $entity = $this->getEntityService();
-                    $status = $entity->create($this->src);
+                    $status = $entity->createEntity($this->src);
                     break;
                 case SrcTypesInterface::REPOSITORY:
                     $repository = $this->getRepositoryService();
-                    $status = $repository->create($this->src);
+                    $status = $repository->createRepository($this->src);
                     break;
                 case SrcTypesInterface::FORM:
                     $form = $this->getFormService();
-                    $status = $form->create($this->src);
+                    $status = $form->createForm($this->src);
                     break;
                 case SrcTypesInterface::SEARCH_FORM:
                     $search = $this->getSearchService();
-                    $status = $search->create($this->src);
+                    $status = $search->createSearchForm($this->src);
                     break;
                 case SrcTypesInterface::FILTER:
                     $filter = $this->getFilterService();
-                    $status = $filter->create($this->src);
+                    $status = $filter->createFilter($this->src);
                     break;
                 case SrcTypesInterface::VALUE_OBJECT:
                     $valueObject = $this->getValueObjectService();
-                    $status = $valueObject->create($this->src);
+                    $status = $valueObject->createValueObject($this->src);
                     break;
                 case SrcTypesInterface::FIXTURE:
                     $fixture = $this->getFixtureService();
-                    $status = $fixture->create($this->src);
+                    $status = $fixture->createFixture($this->src);
                     break;
                 case SrcTypesInterface::INTERFACE:
                     $interface = $this->getInterfaceService();
-                    $status = $interface->create($this->src);
+                    $status = $interface->createInterface($this->src);
                     break;
                 default:
                     throw new SrcTypeNotFoundException();

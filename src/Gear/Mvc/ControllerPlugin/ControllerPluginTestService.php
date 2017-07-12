@@ -5,16 +5,24 @@ use Gear\Mvc\AbstractMvcTest;
 use Gear\Constructor\Src\SrcConstructorInterface;
 use GearJson\Src\Src;
 use Gear\Creator\CodeTestTrait;
+use GearJson\Src\SrcTypesInterface;
 
 class ControllerPluginTestService extends AbstractMvcTest implements SrcConstructorInterface
 {
     use CodeTestTrait;
 
-    public function create(Src $src)
+    public function createControllerPluginTest($data)
     {
-        $this->src = $src;
+        if ($data instanceof Db || ($data instanceof Src && $data->getDb() !== null)) {
+            throw new Exception('View Helper should be run without Db');
+        }
 
-        $this->getFileCreator()->createFile(
+        return parent::createTest($data, SrcTypesInterface::CONTROLLER_PLUGIN);
+    }
+
+    public function createSrcTest()
+    {
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/controller-plugin/test-src.phtml',
             array(
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),

@@ -14,20 +14,21 @@ namespace Gear\Mvc\Fixture;
 use Gear\Mvc\AbstractMvc;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Integer\PrimaryKey;
-use Gear\Column\Integer\ForeignKey;
+use GearJson\Src\SrcTypesInterface;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
+use GearJson\Src\Src;
 use Zend\EventManager\EventManagerInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Gear\Mvc\Fixture\ColumnInterface\GetFixtureTopInterface;
 use Gear\Database\AutoincrementServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Fixture\FixtureColumnInterface;
+use Gear\Exception\InvalidArgumentException;
 
 class FixtureService extends AbstractMvc
 {
@@ -55,13 +56,21 @@ class FixtureService extends AbstractMvc
 
     protected $tableData;
 
+    /**
+     *
+     * @param \GearJson\Src\Src $src
+     */
+    public function createFixture($data)
+    {
+        return parent::forceDb($data, SrcTypesInterface::FIXTURE);
+    }
 
     /**
      * Create Fixture from database introspection.
      *
      * @return string
      */
-    public function instrospect()
+    public function createDb()
     {
         $this->columnManager = $this->db->getColumnManager();
         $this->getConfigService()->introspectUploadImage($this->db);
@@ -101,7 +110,7 @@ class FixtureService extends AbstractMvc
 
         $this->file = $this->getFileCreator();
         $this->file->setTemplate('template/module/mvc/fixture/default.phtml');
-        $this->file->setFileName($this->srcName.'.php');
+        $this->file->setFileName($this->src->getName().'.php');
         $this->file->setLocation($this->getModule()->getFixtureFolder());
 
         $this->src->addImplements($this->implements);
@@ -110,13 +119,13 @@ class FixtureService extends AbstractMvc
             array(
                 'tableLabel'  => $this->str('label', $this->db->getTable()),
                 'package'     => $this->getCode()->getClassDocsPackage($this->src),
-                'var'         => $this->str('var-length', str_replace('Fixture', '', $this->srcName)),
+                'var'         => $this->str('var-length', $this->src->getNameOff()),
                 'load'        => $this->load,
                 'preLoad'     => $this->preLoad,
                 'getFixture'  => $this->getFixture,
                 'fields'      => $fieldsData,
                 'data'        => $arrayData,
-                'name'        => $this->srcName,
+                'name'        => $this->src->getName(),
                 'module'      => $this->getModule()->getModuleName(),
                 'use'         => $this->getCode()->getUse($this->src),
                 'attribute'   => $this->getCode()->getUseAttribute($this->src),
@@ -186,24 +195,6 @@ class FixtureService extends AbstractMvc
         );
     }
 
-    /**
-     * Cria a Fixture para um GearJson\Db
-     *
-     * Utilizado por Gear\Constructor\Db creator
-     *
-     * @param unknown $db
-     */
-    public function introspectFromTable($db)
-    {
-        $this->db           = $db;
-        $this->tableName    = $this->str('class', $this->db->getTable());
-
-        $this->db = $db;
-        $src = $this->getSchemaService()->getSrcByDb($db, 'Fixture');
-        $this->src = $src;
-        $this->srcName = $src->getName();
-        return $this->instrospect();
-    }
 
     /**
      * Create the setters field for all columns of table.
@@ -257,7 +248,7 @@ class FixtureService extends AbstractMvc
      */
     public function getUploadImageTable()
     {
-        $this->load .= $this->getUploadImage()->getFixtureLoad($this->tableName);
+        $this->load .= $this->getUploadImage()->getFixtureLoad($this->db->getTable());
         $this->preLoad .= $this->getUploadImage()->getFixturePreLoad();
 
         return true;
@@ -265,23 +256,10 @@ class FixtureService extends AbstractMvc
 
     public function getTableSpecifications()
     {
-        if (!$this->getTableService()->verifyTableAssociation($this->tableName, UploadImageTable::NAME)) {
+        if (!$this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)) {
             return false;
         }
         $this->getUploadImageTable();
-    }
-
-    /**
-     *
-     * @param \GearJson\Src\Src $src
-     */
-    public function create($src)
-    {
-        $this->db           = $src->getDb();
-        $this->tableName    = $this->str('class', $this->db->getTable());
-        $this->src = $src;
-        $this->srcName = $src->getName();
-        return $this->instrospect();
     }
 
     public function getLoadedFixtures()
@@ -297,10 +275,10 @@ class FixtureService extends AbstractMvc
 
     public function setEventManager(EventManagerInterface $events)
     {
-        $events->setIdentifiers(array(
+        $events->setIdentifiers([
             __CLASS__,
             get_called_class()
-        ));
+        ***REMOVED***);
         $this->event = $events;
         return $this;
     }

@@ -78,8 +78,7 @@ class FixtureServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group fix1
-     * @group fix2
+     * @group a1
      */
     public function testCreateFixtureWithUploadImageColumn()
     {
@@ -120,10 +119,11 @@ class FixtureServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(false);
 
         $service = new Src(['name' => sprintf('%sFixture', $tableName), 'type' => 'Fixture'***REMOVED***);
+        $service->setDb($this->db);
 
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
 
-        $file = $this->fixture->introspectFromTable($this->db);
+        $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/fixture-with-column-upload-image.phtml';
 
@@ -134,7 +134,7 @@ class FixtureServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group fks
+     * @group a2
      */
     public function testFixtureWithForeignKey()
     {
@@ -199,12 +199,13 @@ class FixtureServiceTest extends AbstractTestCase
         $this->db->setColumnManager(new ColumnManager($columns));
 
         $this->src = new Src(['name' => 'MyTableFixture', 'type' => 'Fixture'***REMOVED***);
+        $this->src->setDb($this->db);
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($this->src)->shouldBeCalled();
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $file = $this->fixture->introspectFromTable($this->db);
+        $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/fixture-with-foreign-key.phtml';
 
@@ -222,7 +223,7 @@ class FixtureServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group fix1
+     * @group a2
      */
     public function testCreateFixtureWithUploadImageTableAndColumn()
     {
@@ -263,10 +264,10 @@ class FixtureServiceTest extends AbstractTestCase
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn(true);
 
         $service = new Src(['name' => sprintf('%sFixture', $tableName), 'type' => 'Fixture'***REMOVED***);
-
+        $service->setDb($this->db);
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
 
-        $file = $this->fixture->introspectFromTable($this->db);
+        $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/fixture-with-full-upload-image.phtml';
 
@@ -315,7 +316,7 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
 
-        $file = $this->fixture->introspectFromTable($this->db);
+        $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/fixture-with-table-upload-image.phtml';
 
@@ -346,7 +347,7 @@ class FixtureServiceTest extends AbstractTestCase
 
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
 
-        $file = $this->fixture->introspectFromTable($this->db);
+        $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/'.$template.'.phtml';
 

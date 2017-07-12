@@ -143,10 +143,14 @@ class EntityTestServiceTest extends AbstractTestCase
         $db->setColumnManager($columnManager);
         //$this->column->getColumns($db, true)->willReturn($tableColumns);
 
-        //$this->entity->setColumnService($this->column->reveal());
 
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
 
-        $file = $this->entity->introspectFromTable($db);
+        $this->schema->getSrcByDb($db, 'Entity')->willReturn($src)->shouldBeCalled();
+
+        $this->entity->setSchemaService($this->schema->reveal());
+
+        $file = $this->entity->createEntityTest($db);
 
         $this->assertEquals(file_get_contents($this->template.'/'.$expected.'.phtml'), file_get_contents($file));
 
