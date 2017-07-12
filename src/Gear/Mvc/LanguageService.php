@@ -6,9 +6,9 @@
  */
 namespace Gear\Mvc;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 
-class LanguageService extends AbstractJsonService
+class LanguageService extends AbstractMvc
 {
     public static function getAvaiable()
     {
@@ -148,7 +148,7 @@ class LanguageService extends AbstractJsonService
 
 
 
-    public function create()
+    public function module()
     {
         foreach (LanguageService::getAvaiable() as $language) {
             $dataArray = preg_replace(

@@ -1,23 +1,30 @@
 <?php
 namespace Gear\Mvc\ControllerPlugin;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait;
 use Gear\Mvc\Config\ControllerPluginManagerTrait;
 use GearJson\Src\Src;
 use Gear\Creator\CodeTrait;
+use GearJson\Src\SrcTypesInterface;
 
-class ControllerPluginService extends AbstractJsonService
+class ControllerPluginService extends AbstractMvc
 {
     use ControllerPluginManagerTrait;
     use ControllerPluginTestServiceTrait;
     use CodeTrait;
 
-    public function create(Src $src)
+    public function createControllerPlugin($data)
     {
-        $this->src = $src;
+        if ($data instanceof Db || ($data instanceof Src && $data->getDb() !== null)) {
+            throw new Exception('View Helper should be run without Db');
+        }
 
+        return parent::create($data, SrcTypesInterface::VALUE_OBJECT);
+    }
 
+    public function createSrc()
+    {
         if (empty($this->src->getExtends())) {
             $this->src->setExtends('\Zend\View\Helper\AbstractHelper');
         }

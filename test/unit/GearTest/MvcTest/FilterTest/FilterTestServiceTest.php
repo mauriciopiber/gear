@@ -122,7 +122,7 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $this->factory->createFactoryTest($src)->shouldBeCalled();
 
-        $file = $this->filter->introspectFromTable($db);
+        $file = $this->filter->createFilterTest($db);
 
         $this->assertEquals(file_get_contents($this->template.'/db/'.$template.'.phtml'), file_get_contents($file));
 
@@ -162,7 +162,7 @@ class FilterTestServiceTest extends AbstractTestCase
 
         $this->filter->setTraitTestService($this->traitTestService->reveal());
 
-        $file = $this->filter->create($data);
+        $file = $this->filter->createFilterTest($data);
 
         $expected = $this->template.'/src/'.$template.'.phtml';
 

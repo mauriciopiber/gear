@@ -11,28 +11,21 @@
  */
 namespace Gear\Mvc\Entity;
 
-use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\AbstractMvcTest;
 use GearJson\Db\Db;
 use GearJson\Src\Src;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Integer\PrimaryKey;
+use GearJson\Src\SrcTypesInterface;
 
-class EntityTestService extends AbstractMvc
+class EntityTestService extends AbstractMvcTest
 {
-    public function introspectFromTable(Db $db)
+    public function createEntityTest($data)
     {
-        $this->db = $db;
-        return $this->createDb();
+        return parent::forceDbTest($data, SrcTypesInterface::ENTITY);
     }
 
-    public function create(Src $src)
-    {
-        $this->src = $src;
-        $this->db = $src->getDb();
-        return $this->createDb();
-    }
-
-    public function createDb()
+    public function createDbTest()
     {
         $this->tableName = $this->str('uline', $this->db->getTable());
         $this->columnManager = $this->db->getColumnManager();
@@ -65,7 +58,7 @@ class EntityTestService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/mvc/entity-test/src.entity.phtml',
             $options,
-            $this->str('class', $this->tableName).'Test.php',
+            $this->str('class', $this->src->getName()).'Test.php',
             $this->getModule()->getTestEntityFolder()
         );
     }

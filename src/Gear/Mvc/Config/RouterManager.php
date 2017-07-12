@@ -1,12 +1,11 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
-use Gear\Creator\FileCreator\FileCreator;
 
-class RouterManager extends AbstractMvc implements ModuleManagerInterface, ActionManagerInterface
+class RouterManager extends AbstractConfigManager implements ModuleManagerInterface
 {
     use \Gear\Mvc\LanguageServiceTrait;
 
@@ -95,7 +94,7 @@ class RouterManager extends AbstractMvc implements ModuleManagerInterface, Actio
         } else {
             $table = $this->str('class', $action->getController()->getNameOff());
         }
-        
+
         $namespace = ($action->getController()->getNamespace() !== null)
             ? $action->getController()->getNamespace()
             : 'Controller';

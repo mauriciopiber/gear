@@ -11,7 +11,7 @@
  */
 namespace Gear\Mvc\Entity;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 use Zend\Db\Metadata\Object\TableObject;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\SchemaService;
@@ -38,8 +38,9 @@ use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Gear\Mvc\Entity\DoctrineServiceTrait;
 use Gear\Table\UploadImage as UploadImageTable;
+use GearJson\Src\SrcTypesInterface;
 
-class EntityService extends AbstractJsonService
+class EntityService extends AbstractMvc
 {
     use ModuleAwareTrait;
     use SrcServiceTrait;
@@ -98,7 +99,7 @@ class EntityService extends AbstractJsonService
         $this->fixEntities();
 
         foreach ($srcs as $src) {
-            $this->getEntityTestService()->create($src);
+            $this->getEntityTestService()->createEntityTest($src);
         }
 
         return true;
@@ -113,7 +114,13 @@ class EntityService extends AbstractJsonService
         $this->getEntityObjectFixer()->fixEntities($this->getModule()->getModuleName(), $files);
     }
 
-    public function create($src)
+    public function createEntity($data)
+    {
+        return parent::forceDb($data, SrcTypesInterface::ENTITY);
+    }
+
+    /*
+    public function createEntity($src)
     {
         $this->src = $src;
 
@@ -124,16 +131,42 @@ class EntityService extends AbstractJsonService
             $this->fixEntities();
             return true;
         }
+    }
+    */
 
+    public function createEntityObject($src)
+    {
+        $this->getEntityTestService()->createEntityTest($this->db);
 
-        throw new InvalidArgumentException('Src for Entity need a valid --db=');
+        if (
+            $this->getTableService()->verifyTableAssociation(
+                $this->str('class', $this->db->getTable()),
+                UploadImageTable::NAME
+            )
+            && !is_file($this->getModule()->getEntityFolder().'/UploadImage.php')
+        ) {
+            //$uploadImage = $this->getTableService()->getTableObject(UploadImageTable::NAME);
+
+            $src = $this->getSrcService()->create(
+                $this->getModule()->getModuleName(),
+                [
+                    'name' => 'UploadImage',
+                    'type' => 'Entity',
+                    'db' => 'UploadImage',
+                    'service' => 'invokables'
+                ***REMOVED***
+            );
+
+            //$src->getDb()->setTable('UploadImage');
+            //$src->getDb()->setTableObject($uploadImage);
+            $this->createEntities([$src***REMOVED***);
+            //$this->getServiceManager()->create($src);
+        }
     }
 
 
-    public function introspectFromTable(Db $dbTable)
+    public function createDb()
     {
-        $this->db           = $dbTable;
-
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();
@@ -145,33 +178,7 @@ class EntityService extends AbstractJsonService
 
         $this->fixEntities();
 
-        $this->getEntityTestService()->introspectFromTable($this->db);
-
-        if ($this->getTableService()->verifyTableAssociation(
-            $this->str('class', $this->db->getTable()),
-            UploadImageTable::NAME
-        )
-            && !is_file($this->getModule()->getEntityFolder().'/UploadImage.php')
-        ) {
-            $uploadImage = $this->getTableService()->getTableObject(UploadImageTable::NAME);
-
-            $src = $this->getSrcService()->create(
-                $this->getModule()->getModuleName(),
-                'UploadImage',
-                'Entity',
-                null,
-                null,
-                null,
-                'invokables',
-                null,
-                'UploadImage'
-            );
-
-            $src->getDb()->setTable('UploadImage');
-            $src->getDb()->setTableObject($uploadImage);
-            $this->createEntities([$src***REMOVED***);
-            $this->getServiceManager()->create($src);
-        }
+        $this->createEntityObject($this->src);
 
         return true;
     }

@@ -35,7 +35,7 @@ class FactoryService extends AbstractMvc
     public function createFactory($src)
     {
         $this->createFactoryFactory($src);
-        $this->getFactoryTestService()->createTest($src);
+        $this->getFactoryTestService()->createFactoryTest($src);
     }
 
     public function createConstructorSnippet($src)

@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 
-class AssetManager extends AbstractJsonService implements ModuleManagerInterface
+class AssetManager extends AbstractConfigManager implements ModuleManagerInterface
 {
 
     public function module(array $controllers)

@@ -1,11 +1,10 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Src\Src;
-use Gear\Creator\FileCreator\FileCreator;
 
-class ControllerPluginManager extends AbstractJsonService implements ModuleManagerInterface, ServiceManagerInterface
+class ControllerPluginManager extends AbstractConfigManager implements ModuleManagerInterface, ServiceManagerInterface
 {
     public function module(array $controllers)
     {

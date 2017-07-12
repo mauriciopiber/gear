@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Column\Mvc\SearchFormInterface;
+use GearJson\Src\SrcTypesInterface;
 use GearJson\Schema\SchemaServiceTrait;
 
 class SearchService extends AbstractMvc
@@ -10,48 +10,20 @@ class SearchService extends AbstractMvc
     use SchemaServiceTrait;
     use \Gear\Mvc\Search\SearchTestServiceTrait;
 
-    public function hasAbstract()
+    public function createSearchForm($data)
     {
-        if (is_file($this->getLocation().'/AbstractSearchForm.php')) {
-            return true;
-        } else {
-            return false;
+        if (($data instanceof Db) === false && ($data instanceof Src && $src->getDb() === null)) {
+            throw new InvalidArgumentException('Src for Entity need a valid --db=');
         }
+
+        return parent::create($data, SrcTypesInterface::SEARCH_FORM);
     }
 
-
-    public function getAbstract()
+    public function createDb()
     {
-        if (!$this->hasAbstract()) {
-            $this->getFileCreator()->createFile(
-                'template/module/mvc/form/search/abstract.phtml',
-                array(
-                    'module' => $this->getModule()->getModuleName
-                ),
-                'AbstractSearchForm.php',
-                $this->getModule()->getSearchFolder()
-            );
-        }
-    }
-
-
-    public function create($src)
-    {
-        if ($src->getDb() instanceof \GearJson\Db\Db) {
-            return $this->introspectFromTable($src->getDb());
-        }
-    }
-
-    public function introspectFromTable($dbObject)
-    {
-
-        //$this->getAbstract();
-        $this->db = $dbObject;
         $this->columnManager = $this->db->getColumnManager();
 
-        $this->tableName = $dbObject->getTable();
-
-        //$dbColumns = $this->getColumnService()->getColumns($this->db);
+        $this->tableName = $this->db->getTable();
 
         $formElements = [***REMOVED***;
 
@@ -63,7 +35,7 @@ class SearchService extends AbstractMvc
         }
         */
 
-        $this->getSearchTestService()->introspectFromTable($this->db);
+        $this->getSearchTestService()->createSearchFormTest($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
         $location = $this->getCode()->getLocation($this->src);

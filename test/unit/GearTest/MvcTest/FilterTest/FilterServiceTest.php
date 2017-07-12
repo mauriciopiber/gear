@@ -117,7 +117,7 @@ class FilterServiceTest extends AbstractTestCase
             }
         }
 
-        $file = $this->filter->create($data);
+        $file = $this->filter->createFilter($data);
 
         $expected = $this->templates.'/src/'.$template.'.phtml';
 
@@ -182,11 +182,11 @@ class FilterServiceTest extends AbstractTestCase
         $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter)->shouldBeCalled();
 
 
-        $this->filterTest->introspectFromTable($this->db)->shouldBeCalled();
+        $this->filterTest->createFilterTest($this->db)->shouldBeCalled();
 
         $this->factory->createFactory($filter)->shouldBeCalled();
 
-        $file = $this->filter->introspectFromTable($this->db);
+        $file = $this->filter->createFilter($this->db);
 
         $expected = $this->templates.'/db/'.$template.'.phtml';
 

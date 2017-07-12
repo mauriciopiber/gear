@@ -125,7 +125,7 @@ class SearchTestServiceTest extends AbstractTestCase
         $this->trait->createTraitTest($src)->shouldBeCalled();
         $this->factory->createFactoryTest($src)->shouldBeCalled();
 
-        $file = $this->form->introspectFromTable($db);
+        $file = $this->form->createSearchFormTest($db);
 
         $this->assertEquals(file_get_contents($this->template.'/'.$template.'.phtml'), file_get_contents($file));
 

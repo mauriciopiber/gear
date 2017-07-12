@@ -5,28 +5,41 @@ use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ViewHelper\ViewHelperTestServiceTrait;
 use Gear\Mvc\Config\ViewHelperManagerTrait;
 use GearJson\Src\Src;
+use GearJson\Src\SrcTypesInterface;
+use GearJson\Db\Db;
 
 class ViewHelperService extends AbstractMvc
 {
     use ViewHelperManagerTrait;
     use ViewHelperTestServiceTrait;
 
-    public function create(Src $src)
+    public function createViewHelper($data)
     {
-        $this->src = $src;
+        if ($data instanceof Db || ($data instanceof Src && $data->getDb() !== null)) {
+            throw new Exception('View Helper should be run without Db');
+        }
 
+        parent::create($data, SrcTypesInterface::VIEW_HELPER);
+    }
+
+    public function createSrc()
+    {
         if (empty($this->src->getExtends())) {
             $this->src->setExtends('\Zend\Mvc\Controller\Plugin\AbstractPlugin');
         }
 
 
-        $location = $this->getCode()->getLocation($src);
+        $location = $this->getCode()->getLocation($this->src);
 
-        $this->getViewHelperManager()->create($src);
+        $this->getViewHelperManager()->create($this->src);
 
-        $this->getViewHelperTestService()->create($src);
+        $this->getViewHelperTestService()->createViewHelperTest($this->src);
 
-        $this->getFileCreator()->createFile(
+        if ($this->src->isFactory()) {
+            $this->getFactoryService()->createFactory($this->src, $location);
+        }
+
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/view-helper/src.phtml',
             //'template/module/mvc/controller/plugin/src.plugin.phtml',
             [
@@ -35,16 +48,11 @@ class ViewHelperService extends AbstractMvc
                 'extends'    => $this->getCode()->getExtends($this->src),
                 'uses'       => $this->getCode()->getUse($this->src),
                 'attributes' => $this->getCode()->getUseAttribute($this->src),
-                'class'   => $src->getName(),
+                'class'   => $this->src->getName(),
                 'module'  => $this->getModule()->getModuleName()
             ***REMOVED***,
-            $src->getName().'.php',
+            $this->src->getName().'.php',
             $location
         );
-
-
-        if ($this->src->isFactory()) {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
     }
 }

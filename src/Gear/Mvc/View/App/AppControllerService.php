@@ -87,13 +87,18 @@ class AppControllerService extends AbstractMvc
         return $fileCreator->render();
     }
 
-    public function create(App $app)
+    public function createAppController($data)
+    {
+        return parent::create($data);
+    }
+
+    public function createApp()
     {
         $template = 'template/module/app/controller/controller.phtml';
 
-        $location = $this->getCode()->getLocation($app);
+        $location = $this->getCode()->getLocation($this->app);
 
-        $class = $this->str('class', $app->getName());
+        $class = $this->str('class', $this->app->getName());
         $var = $this->str('var-length', $class);
 
         $filename = $class.'.js';
@@ -104,12 +109,12 @@ class AppControllerService extends AbstractMvc
         ***REMOVED***;
 
 
-        $options['constructorArgs'***REMOVED*** = $this->getConstructorArgs()->render($app, $options);
-        $options['inject'***REMOVED*** = $this->getInject()->render($app, $options);
+        $options['constructorArgs'***REMOVED*** = $this->getConstructorArgs()->render($this->app, $options);
+        $options['inject'***REMOVED*** = $this->getInject()->render($this->app, $options);
 
 
-        $this->getAppControllerSpecService()->create($app);
+        $this->getAppControllerSpecService()->create($this->app);
         $file = $this->getFileCreator();
-        $file->createFile($template, $options, $filename, $location);
+        return $file->createFile($template, $options, $filename, $location);
     }
 }

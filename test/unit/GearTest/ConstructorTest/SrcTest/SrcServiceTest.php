@@ -213,7 +213,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->serviceService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->serviceService->createService($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -233,7 +233,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->repositoryService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->repositoryService->createRepository($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -253,7 +253,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->formService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->formService->createForm($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -273,7 +273,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->searchFormService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->searchFormService->createSearchForm($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -293,7 +293,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->filterService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->filterService->createFilter($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -313,7 +313,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->entityService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->entityService->createEntity($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -333,7 +333,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->fixtureService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->fixtureService->createFixture($this->src->reveal())->willReturn(true)->shouldBeCalled();
         //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -353,7 +353,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->viewHelperService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->viewHelperService->createViewHelper($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -373,7 +373,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->controllerPluginService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->controllerPluginService->createControllerPlugin($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -394,7 +394,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->valueObjectService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->valueObjectService->createValueObject($this->src->reveal())->willReturn(true)->shouldBeCalled();
         //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -414,7 +414,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->interfaceService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->interfaceService->createInterface($this->src->reveal())->willReturn(true)->shouldBeCalled();
         //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);
@@ -446,7 +446,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->serviceService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->serviceService->createService($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->mockSchemaSrcCreate('MyModule', 'MyService', $type);

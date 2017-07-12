@@ -412,7 +412,7 @@ class ModuleService implements ModuleProjectConnectorInterface
                 }
 
                 $languageService = $this->getLanguageService();
-                $languageService->create();
+                $languageService->module();
 
                 break;
 

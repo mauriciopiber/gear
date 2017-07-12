@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Mvc\Repository;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\AbstractMvc;
 
-class MappingService extends AbstractJsonService
+class MappingService extends AbstractMvc
 {
     protected $aliaseStack;
 

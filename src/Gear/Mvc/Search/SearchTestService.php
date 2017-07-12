@@ -2,20 +2,26 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvcTest;
+use GearJson\Src\SrcTypesInterface;
 
 class SearchTestService extends AbstractMvcTest
 {
-    public function introspectFromTable($table)
+    public function createSearchFormTest($data)
     {
-        $this->db = $table;
+        if (($data instanceof Db) === false && ($data instanceof Src && $src->getDb() === null)) {
+            throw new InvalidArgumentException('Src for Entity need a valid --db=');
+        }
 
-        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'SearchForm');
+        return parent::createTest($data, SrcTypesInterface::SEARCH_FORM);
+    }
 
+    public function createDbTest()
+    {
         $file = $this->getFileCreator();
 
         $template = 'template/module/mvc/search/test-db.phtml';
 
-        $options = array(
+        $options = [
             'var' => $this->str('var-length', $this->src->getName()),
             'class'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName(),
@@ -23,7 +29,7 @@ class SearchTestService extends AbstractMvcTest
             'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'callable' => $this->getServiceManager()->getServiceName($this->src),
             'service' => $this->getServiceManager()->getServiceName($this->src)
-        );
+        ***REMOVED***;
 
         $filename = $this->src->getName().'Test.php';
 

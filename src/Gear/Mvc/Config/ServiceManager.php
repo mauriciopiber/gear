@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Mvc\Config\AbstractConfigManager;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Src\Src;
 
-class ServiceManager extends AbstractJsonService
+class ServiceManager extends AbstractConfigManager
 {
     use SchemaServiceTrait;
 

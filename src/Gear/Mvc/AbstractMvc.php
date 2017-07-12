@@ -11,8 +11,10 @@ use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
 use Gear\Creator\FileCreator\App\InjectTrait;
 use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
-use GearJson\Src\Src as SrcObject;
 use GearJson\Db\Db as DbObject;
+use GearJson\App\App as AppObject;
+use GearJson\Src\Src as SrcObject;
+use Gear\Exception\InvalidArgumentException;
 
 abstract class AbstractMvc extends AbstractJsonService
 {
@@ -24,6 +26,24 @@ abstract class AbstractMvc extends AbstractJsonService
     use InterfaceServiceTrait;
     use TraitServiceTrait;
     use FactoryServiceTrait;
+
+    public function forceDb($data, $type)
+    {
+        if (($data instanceof DbObject) === false && ($data instanceof SrcObject && $data->getDb() != null) === false) {
+            throw new InvalidArgumentException(sprintf('%s need a valid db', $type));
+        }
+
+        return $this->create($data, $type);
+    }
+
+    public function forceSrc($data, $type)
+    {
+        if (($data instanceof DbObject) || ($data instanceof SrcObject && $data->getDb() != null)) {
+            throw new InvalidArgumentException(sprintf('%s need to be free from db', $type));
+        }
+
+        return $this->create($data, $type);
+    }
 
     public function create($data, $type)
     {
@@ -37,6 +57,11 @@ abstract class AbstractMvc extends AbstractJsonService
             $this->src = $data;
             $this->db = $this->src->getDb();
             return $this->createDb();
+        }
+
+        if ($data instanceof AppObject) {
+            $this->app = $data;
+            return $this->createApp();
         }
 
         $this->src = $data;

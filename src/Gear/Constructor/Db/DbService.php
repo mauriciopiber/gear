@@ -157,15 +157,14 @@ class DbService extends AbstractConstructor
         $db->setTableObject($this->getTableService()->getTableObject($db->getTable()));
         $db->setColumnManager($this->getColumnService()->getColumnManager($db));
 
-
         $this->getConfigService()         ->introspectFromTable($db);
-        $this->getEntityService()         ->introspectFromTable($db);
-        $this->getRepositoryService()     ->introspectFromTable($db);
-        $this->getServiceService()        ->introspectFromTable($db);
-        $this->getFilterService()         ->introspectFromTable($db);
-        $this->getFormService()           ->introspectFromTable($db);
-        $this->getSearchService()         ->introspectFromTable($db);
-        $this->getFixtureService()        ->introspectFromTable($db);
+        $this->getEntityService()         ->createEntity($db);
+        $this->getRepositoryService()     ->createRepository($db);
+        $this->getServiceService()        ->createService($db);
+        $this->getFilterService()         ->createFilter($db);
+        $this->getFormService()           ->createForm($db);
+        $this->getSearchService()         ->createSearchForm($db);
+        $this->getFixtureService()        ->createFixture($db);
         $this->getLanguageService()       ->introspectFromTable($db);
         $this->getMvcController()         ->introspectFromTable($db);
         $this->getViewService()           ->introspectFromTable($db);
