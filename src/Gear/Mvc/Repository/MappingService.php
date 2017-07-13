@@ -222,7 +222,7 @@ class MappingService extends AbstractMvc
 
         $this->db = $db;
 
-        $columns = $this->db->getColumnManager()->getColumns();
+        $columns = $this->db->getColumnManager()->getAllColumns();
         //$this->getColumnService()->getColumns($this->db, false, ['created_by'***REMOVED***);
 
         if (!empty($columns)) {
