@@ -51,7 +51,6 @@ class ColumnManager implements ColumnManagerInterface
 
                     $output[$positionName***REMOVED***[$subIndex***REMOVED*** .= $this->generateCode($methodName, $onlyOne);
                 }
-
             }
         }
         //1 - posição
@@ -148,6 +147,21 @@ class ColumnManager implements ColumnManagerInterface
         }
 
         return $isAllNullable;
+    }
+
+    public function extractCodeAll()
+    {
+
+    }
+
+    public function generateCodeAll()
+    {
+
+    }
+
+    public function getAllColumns()
+    {
+
     }
 
     public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
