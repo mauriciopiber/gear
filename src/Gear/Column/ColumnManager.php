@@ -19,6 +19,8 @@ class ColumnManager implements ColumnManagerInterface
 {
     private $columns;
 
+    private $excludedColumns;
+
     const EMPTY = '';
 
     /**
@@ -26,9 +28,10 @@ class ColumnManager implements ColumnManagerInterface
      *
      * @return ColumnManager
      */
-    public function __construct(array $columns)
+    public function __construct(array $columns, array $excludedColumns = [***REMOVED***)
     {
         $this->setColumns($columns);
+        $this->setExcludedColumns($excludedColumns);
         return $this;
     }
 
@@ -237,6 +240,17 @@ class ColumnManager implements ColumnManagerInterface
         }
 
         return $template;
+    }
+
+    public function setExcludedColumns(array $excludedColumns)
+    {
+        $this->excludedColumns = $excludedColumns;
+        return $this;
+    }
+
+    public function getExcludedColumns()
+    {
+        return $this->excludedColumns;
     }
 
     public function setColumns(array $columns)
