@@ -69,7 +69,41 @@ class ColumnService
 
     public function getColumnManager(Db $db)
     {
-        return new ColumnManager($this->getColumns($db));
+        return new ColumnManager($this->getColumns($db), $this->getExcludedColumns($db));
+    }
+
+    public function getExcludedColumns(Db $db)
+    {
+        if ($db == null) {
+            throw new \Exception('Missing config');
+        }
+
+        unset($this->columns);
+        $this->columns = [***REMOVED***;
+
+        $this->db =         $db;
+        $this->tableName    = $this->str('class', $this->db->getTable());
+        $this->tableColumns = $this->getTableService()->getColumns($this->db->getTable());
+        $this->dbColumns    = $this->db->getColumns();
+
+        //var_dump($this->tableName);
+        //var_dump(count($this->tableColumns));
+        $this->tablePrimaryKey = $this->getTableService()->getPrimaryKey($this->db->getTable());
+
+        if (!$this->tablePrimaryKey) {
+            throw new PrimaryKeyNotFoundException();
+        }
+
+        foreach ($this->tableColumns as $column) {
+            if (in_array($column->getName(), $this->excludeList()) === false) {
+                    continue;
+            }
+
+            $instance = $this->factory($column, $this->db);
+            $this->columns[***REMOVED***  = $instance;
+        }
+
+        return $this->columns;
     }
 
     /**

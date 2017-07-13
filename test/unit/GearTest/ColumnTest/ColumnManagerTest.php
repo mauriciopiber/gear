@@ -4,9 +4,13 @@ namespace GearTest\ColumnTest;
 use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Column\ColumnManager;
 use Zend\Db\Metadata\Object\ColumnObject;
+use Zend\Db\Metadata\Object\ConstraintObject;
 use Gear\Column\Varchar\PasswordVerify;
 use Gear\Column\Varchar\UploadImage;
 use Gear\Column\Varchar\Varchar;
+use Gear\Column\Integer\ForeignKey;
+use Gear\Column\Integer\PrimaryKey;
+use Gear\Column\Datetime\Datetime;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Service\ServiceTestService;
 use Gear\Module\BasicModuleStructure;
@@ -21,7 +25,198 @@ class ColumnManagerTest extends TestCase
     {
         parent::setUp();
         $this->columnManager = new ColumnManager([***REMOVED***);
+    }
 
+    public function getAllColumns()
+    {
+        $this->string = new StringService();
+
+        $tableName = 'my_table';
+
+        $columns = [***REMOVED***;
+
+        //primary key
+        $pkColumn = $this->prophesize(ColumnObject::class);
+        $pkColumn->getDataType()->willReturn('int')->shouldBeCalled();
+        $pkColumn->getName()->willReturn('id_my_table');
+        $pkColumn->getTableName()->willReturn($tableName);
+
+        $pkConstraint = $this->prophesize(ConstraintObject::class);
+        $pkConstraint->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
+        $pkConstraint->getColumns()->willReturn(['id_my_table'***REMOVED***)->shouldBeCalled();
+
+        $pKey = new PrimaryKey($pkColumn->reveal(), $pkConstraint->reveal());
+        $pKey->setStringService($this->string);
+
+        //varchar
+        $columns[***REMOVED*** = $pKey;
+
+        $vchColumn = $this->prophesize(ColumnObject::class);
+        $vchColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
+        $vchColumn->getName()->willReturn('name');
+        $vchColumn->getTableName()->willReturn($tableName);
+
+        $vchElement = new Varchar($vchColumn->reveal());
+        $vchElement->setStringService($this->string);
+
+
+        $columns[***REMOVED*** = $vchElement;
+
+
+
+        //created by
+
+        $columnsExcluded = [***REMOVED***;
+
+        $cbyColumn = $this->prophesize(ColumnObject::class);
+        $cbyColumn->getDataType()->willReturn('int')->shouldBeCalled();
+        $cbyColumn->getName()->willReturn('created_by');
+        $cbyColumn->getTableName()->willReturn($tableName);
+
+        $cbyConstraint = $this->prophesize(ConstraintObject::class);
+        $cbyConstraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
+        $cbyConstraint->getColumns()->willReturn(['created_by'***REMOVED***)->shouldBeCalled();
+        $cbyConstraint->getReferencedTableName()->willReturn('user');
+        $cbyConstraint->getReferencedColumns()->willReturn(['id_user'***REMOVED***);
+
+        $cbyKey = new ForeignKey($cbyColumn->reveal(), $cbyConstraint->reveal(), 'email');
+        $cbyKey->setStringService($this->string);
+
+        $columnsExcluded[***REMOVED*** = $cbyKey;
+
+        //created
+
+        $creColumn = $this->prophesize(ColumnObject::class);
+        $creColumn->getDataType()->willReturn('datetime')->shouldBeCalled();
+        $creColumn->getName()->willReturn('created');
+        $creColumn->getTableName()->willReturn($tableName);
+
+        $creKey = new Datetime($creColumn->reveal());
+        $creKey->setStringService($this->string);
+
+        $columnsExcluded[***REMOVED*** = $creKey;
+
+        //updated by
+        $ubyColumn = $this->prophesize(ColumnObject::class);
+        $ubyColumn->getDataType()->willReturn('int')->shouldBeCalled();
+        $ubyColumn->getName()->willReturn('updated_by');
+        $ubyColumn->getTableName()->willReturn($tableName);
+
+        $ubyConstraint = $this->prophesize(ConstraintObject::class);
+        $ubyConstraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
+        $ubyConstraint->getColumns()->willReturn(['updated_by'***REMOVED***)->shouldBeCalled();
+        $ubyConstraint->getReferencedTableName()->willReturn('user');
+        $ubyConstraint->getReferencedColumns()->willReturn(['id_user'***REMOVED***);
+
+        $ubyKey = new ForeignKey($ubyColumn->reveal(), $ubyConstraint->reveal(), 'email');
+        $ubyKey->setStringService($this->string);
+
+        $columnsExcluded[***REMOVED*** = $ubyKey;
+
+        $updColumn = $this->prophesize(ColumnObject::class);
+
+        $updColumn->getDataType()->willReturn('datetime')->shouldBeCalled();
+        $updColumn->getName()->willReturn('created');
+        $updColumn->getTableName()->willReturn($tableName);
+
+        $updKey = new Datetime($updColumn->reveal());
+        $updKey->setStringService($this->string);
+
+        $columnsExcluded[***REMOVED*** = $updKey;
+
+
+        return [[$columns, $columnsExcluded***REMOVED******REMOVED***;
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     * @group aa
+     */
+    public function testGetColumns($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+        $this->assertCount(2, $columnManager->getColumns());
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     * @group aa
+     */
+    public function testGetAllColumns($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+        $this->assertCount(6, $columnManager->getAllColumns());
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     * @group aa
+     */
+    public function testGenerateCode($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+
+        $template = <<<EOS
+                'idMyTable' => '30',
+                'name' => '30Name',
+
+EOS;
+
+        $this->assertEquals($template, $columnManager->generateCode('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
+
+        //$this->assertNull($data);
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     * @group aa
+     */
+    public function testGenerateCodeAll($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+
+        $template = <<<EOS
+                'idMyTable' => '30',
+                'name' => '30Name',
+
+EOS;
+
+        $this->assertEquals($template, $columnManager->generateCodeAll('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     *
+     * @group aa
+     */
+    public function testExtractCode($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+
+        $template = [***REMOVED***;
+        $template[***REMOVED*** = "                'idMyTable' => '30',\n";
+        $template[***REMOVED*** = "                'name' => '30Name',\n";
+
+
+        $this->assertEquals($template, $columnManager->extractCode('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
+
+    }
+
+    /**
+     * @dataProvider getAllColumns
+     * @group aa
+     */
+    public function testExtractAll($columns, $columnsExcluded)
+    {
+        $columnManager = new ColumnManager($columns, $columnsExcluded);
+
+        $template = <<<EOS
+                'idMyTable' => '30',
+                'name' => '30Name',
+
+EOS;
+
+        $this->assertEquals($template, $columnManager->extractCodeAll('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
     }
 
     public function testClassExists()
