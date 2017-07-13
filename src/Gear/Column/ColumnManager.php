@@ -149,22 +149,12 @@ class ColumnManager implements ColumnManagerInterface
         return $isAllNullable;
     }
 
-    public function extractCodeAll()
-    {
-
-    }
-
-    public function generateCodeAll()
-    {
-
-    }
-
     public function getAllColumns()
     {
-
+        return array_merge($this->getColumns(), $this->getExcludedColumns());
     }
 
-    public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
+    public function prepareOnlyOne($onlyOne)
     {
         $verifyOne = [***REMOVED***;
 
@@ -174,34 +164,85 @@ class ColumnManager implements ColumnManagerInterface
             }
         }
 
+        return $verifyOne;
+    }
+
+    public function generateCodeAll(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
+    {
+        $verifyOne = $this->prepareOnlyOne($onlyOne);
+
+        $template = self::EMPTY;
+
+        foreach ($this->getAllColumns() as $columnData) {
+
+            if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
+                continue;
+            }
+
+            $className = get_class($columnData);
+
+            $template .= ($identify === null)
+            ? $columnData->{$method}()
+            : $columnData->{$method}($identify);
+
+            if ($this->verifyOnlyOne($className, $onlyOne, $verifyOne)) {
+                $verifyOne[$className***REMOVED*** = true;
+                continue;
+            }
+        }
+
+        return $template;
+    }
+
+
+    public function extractCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
+    {
+        $verifyOne = $this->prepareOnlyOne($onlyOne);
+
         $data = [***REMOVED***;
 
         foreach ($this->getColumns() as $columnData) {
 
+            if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
+                continue;
+            }
+
             $className = get_class($columnData);
-
-            if (in_array($className, $exclude)) {
-                continue;
-            }
-
-            if (false === method_exists($columnData, $method)) {
-                continue;
-            }
-
-            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === true) {
-                continue;
-            }
 
             $data[***REMOVED*** = ($identify === null)
             ? $columnData->{$method}()
             : $columnData->{$method}($identify);
 
-            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
+            if ($this->verifyOnlyOne($className, $onlyOne, $verifyOne)) {
                 $verifyOne[$className***REMOVED*** = true;
                 continue;
             }
+        }
 
-            if (!isset($verifyOne[$className***REMOVED***) && $onlyOne === true) {
+        return $data;
+    }
+
+
+
+    public function extractCodeAll(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
+    {
+        $verifyOne = $this->prepareOnlyOne($onlyOne);
+
+        $data = [***REMOVED***;
+
+        foreach ($this->getAllColumns() as $columnData) {
+
+            if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
+                continue;
+            }
+
+            $className = get_class($columnData);
+
+            $data[***REMOVED*** = ($identify === null)
+            ? $columnData->{$method}()
+            : $columnData->{$method}($identify);
+
+            if ($this->verifyOnlyOne($className, $onlyOne, $verifyOne)) {
                 $verifyOne[$className***REMOVED*** = true;
                 continue;
             }
@@ -212,48 +253,63 @@ class ColumnManager implements ColumnManagerInterface
 
     public function generateCode(string $method, $onlyOne, $exclude = [***REMOVED***, $identify = null)
     {
-        $verifyOne = [***REMOVED***;
-
-        if (is_array($onlyOne) && count($onlyOne) > 0) {
-            foreach ($onlyOne as $columnClass) {
-                $verifyOne[$columnClass***REMOVED*** = false;
-            }
-        }
+        $verifyOne = $this->prepareOnlyOne($onlyOne);
 
         $template = self::EMPTY;
 
         foreach ($this->getColumns() as $columnData) {
 
+            if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
+                continue;
+            }
+
             $className = get_class($columnData);
-
-            if (in_array($className, $exclude)) {
-                continue;
-            }
-
-            if (false === method_exists($columnData, $method)) {
-                continue;
-            }
-
-            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === true) {
-                continue;
-            }
 
             $template .= ($identify === null)
                 ? $columnData->{$method}()
                 : $columnData->{$method}($identify);
 
-            if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
-                $verifyOne[$className***REMOVED*** = true;
-                continue;
-            }
-
-            if (!isset($verifyOne[$className***REMOVED***) && $onlyOne === true) {
+            if ($this->verifyOnlyOne($className, $onlyOne, $verifyOne)) {
                 $verifyOne[$className***REMOVED*** = true;
                 continue;
             }
         }
 
         return $template;
+    }
+
+
+    public function verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne)
+    {
+        $className = get_class($columnData);
+
+        if (in_array($className, $exclude)) {
+            return false;
+        }
+
+        if (false === method_exists($columnData, $method)) {
+            return false;
+        }
+
+        if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === true) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public function verifyOnlyOne($className, $onlyOne, $verifyOne)
+    {
+        if (isset($verifyOne[$className***REMOVED***) && $verifyOne[$className***REMOVED*** === false) {
+            return true;
+        }
+
+        if (!isset($verifyOne[$className***REMOVED***) && $onlyOne === true) {
+            return true;
+        }
+
+        return false;
     }
 
     public function setExcludedColumns(array $excludedColumns)

@@ -178,6 +178,10 @@ EOS;
         $template = <<<EOS
                 'idMyTable' => '30',
                 'name' => '30Name',
+                'createdBy' => \$this->getReference('usuariogear6'),
+                'created' => \DateTime::createFromFormat('Y-m-d H:i:s', '2007-06-30 06:00:30'),
+                'updatedBy' => \$this->getReference('usuariogear6'),
+                'created' => \DateTime::createFromFormat('Y-m-d H:i:s', '2007-06-30 06:00:30'),
 
 EOS;
 
@@ -197,7 +201,6 @@ EOS;
         $template[***REMOVED*** = "                'idMyTable' => '30',\n";
         $template[***REMOVED*** = "                'name' => '30Name',\n";
 
-
         $this->assertEquals($template, $columnManager->extractCode('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
 
     }
@@ -210,11 +213,13 @@ EOS;
     {
         $columnManager = new ColumnManager($columns, $columnsExcluded);
 
-        $template = <<<EOS
-                'idMyTable' => '30',
-                'name' => '30Name',
-
-EOS;
+        $template = [***REMOVED***;
+        $template[***REMOVED*** = "                'idMyTable' => '30',\n";
+        $template[***REMOVED*** = "                'name' => '30Name',\n";
+        $template[***REMOVED*** = "                'createdBy' => \$this->getReference('usuariogear6'),\n";
+        $template[***REMOVED*** = "                'created' => \DateTime::createFromFormat('Y-m-d H:i:s', '2007-06-30 06:00:30'),\n";
+        $template[***REMOVED*** = "                'updatedBy' => \$this->getReference('usuariogear6'),\n";
+        $template[***REMOVED*** = "                'created' => \DateTime::createFromFormat('Y-m-d H:i:s', '2007-06-30 06:00:30'),\n";
 
         $this->assertEquals($template, $columnManager->extractCodeAll('getFixtureData', [***REMOVED***, [***REMOVED***, 30));
     }
