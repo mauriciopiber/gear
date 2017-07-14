@@ -98,7 +98,6 @@ class RepositoryTestServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group src-mvc
      * @group src-mvc-repository-test
      * @dataProvider src
      */
@@ -124,10 +123,7 @@ class RepositoryTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group RefactoringUnitTest
-     * @group RepositoryMvc
-     * @group db-repository2
-     * @group db-factory-namespace
+     * @group inter
      */
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
     {

@@ -10,7 +10,7 @@ trait ConsoleRouterManagerTrait
     public function getConsoleRouterManager()
     {
         if (!isset($this->consoleRouter)) {
-            $this->consoleRouter = $this->getServiceLocator()->get(Gear\Mvc\Config\ConsoleRouterManager::class);
+            $this->consoleRouter = $this->getServiceLocator()->get(ConsoleRouterManager::class);
         }
         return $this->consoleRouter;
     }

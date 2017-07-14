@@ -280,7 +280,8 @@ class ConstructService extends AbstractJsonService
             return;
         }
 
-        $created = $this->getSrcConstructor()->construct($srcItem);
+        $created = $this->getSrcConstructor()->create($srcItem->export());
+
         $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType()));
     }
 

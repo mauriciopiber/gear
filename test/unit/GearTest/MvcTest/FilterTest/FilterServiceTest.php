@@ -129,8 +129,7 @@ class FilterServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group db-docs
-     * @group db-filter1
+     * @group inter2
      */
     public function testInstrospectTable(
         $columns,
