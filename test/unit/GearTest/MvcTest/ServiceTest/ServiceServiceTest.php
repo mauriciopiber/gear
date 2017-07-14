@@ -116,8 +116,7 @@ class ServiceServiceTest extends TestCase
 
     /**
      * @dataProvider tables
-     * @group mvc
-     * @group mvc-service
+     * @group inter
      */
     public function testInstrospectTable(
         $columns,

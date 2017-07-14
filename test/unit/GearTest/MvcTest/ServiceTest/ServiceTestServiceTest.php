@@ -83,7 +83,7 @@ class ServiceTestServiceTest extends AbstractTestCase
 
     /**
      * @dataProvider tables
-     * @group mvc
+     * @group inter
      * @group mvc-service
      */
     public function testInstrospectTable(

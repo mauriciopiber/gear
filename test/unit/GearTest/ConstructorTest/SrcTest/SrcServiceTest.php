@@ -414,7 +414,7 @@ class SrcServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->interfaceService->createInterface($this->src->reveal())->willReturn(true)->shouldBeCalled();
+        $this->interfaceService->create($this->src->reveal())->willReturn(true)->shouldBeCalled();
         //$this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);

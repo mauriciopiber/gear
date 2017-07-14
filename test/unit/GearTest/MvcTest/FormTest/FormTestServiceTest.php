@@ -118,6 +118,7 @@ class FormTestServiceTest extends AbstractTestCase
      * @dataProvider tables
      * @group n99
      * @group db-form2
+     * @group inter2
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {

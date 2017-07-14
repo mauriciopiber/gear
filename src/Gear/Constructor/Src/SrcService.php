@@ -171,7 +171,12 @@ class SrcService extends AbstractConstructor
         return $this->factory();
     }
 
-    public function createFactory(Src $srcObject)
+    /**
+     * Create a single Factory and show snippet
+     *
+     * @param Src $srcObject
+     */
+    private function createFactory(Src $srcObject)
     {
         $this->getFactoryService()->createFactory($srcObject);
         $this->getFactoryService()->createConstructorSnippet($srcObject);
@@ -179,12 +184,24 @@ class SrcService extends AbstractConstructor
         $this->getFactoryTestService()->createConstructorSnippet($srcObject);
     }
 
-    public function createTrait(Src $srcObject)
+    /**
+     * Create a single Trait
+     *
+     * @param Src $srcObject
+     */
+    private function createTrait(Src $srcObject)
     {
         $this->getTraitService()->createTrait($srcObject);
         $this->getTraitTestService()->createTraitTest($srcObject);
     }
 
+    /**
+     * Prepare and create Traits and Factories.
+     *
+     * @param array $srcs
+     *
+     * @return array[***REMOVED***|\GearBase\Util\ConsoleValidation\ConsoleValidationStatus
+     */
     public function createAdditional(array $srcs)
     {
         $validations = ['created' => [***REMOVED***, 'validated' => [***REMOVED******REMOVED***;
@@ -247,7 +264,7 @@ class SrcService extends AbstractConstructor
         return $validations;
     }
 
-    public function factory()
+    private function factory()
     {
         if ($this->src->getType() == null) {
             return self::TYPE_NOT_FOUND;
@@ -297,7 +314,7 @@ class SrcService extends AbstractConstructor
                     break;
                 case SrcTypesInterface::INTERFACE:
                     $interface = $this->getInterfaceService();
-                    $status = $interface->createInterface($this->src);
+                    $status = $interface->create($this->src);
                     break;
                 default:
                     throw new SrcTypeNotFoundException();
