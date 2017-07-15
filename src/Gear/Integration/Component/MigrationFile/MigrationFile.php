@@ -119,13 +119,14 @@ class MigrationFile
         $migrationConfig = [***REMOVED***;
 
         foreach ($tables as $minorSuite) {
-            $migrationConfig = array_merge($migrationConfig, $this->createMigrationTable($minorSuite));
 
             if (!empty($minorSuite->getForeignKeys())) {
                 foreach ($minorSuite->getForeignKeys() as $foreignKey) {
                     $migrationConfig = array_merge($migrationConfig, $this->createForeignKeyMigration($foreignKey));
                 }
             }
+
+            $migrationConfig = array_merge($migrationConfig, $this->createMigrationTable($minorSuite));
         }
 
         return $this->createMigrationComponent($srcMvcMinorSuite, $migrationConfig);

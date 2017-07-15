@@ -797,6 +797,18 @@ class SrcMvcEntity extends AbstractMigration
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***,
+        'column_int_foreign' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'column_int_foreign_name' => [
+                    'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***,
+            'table' => [
+
+            ***REMOVED***
+        ***REMOVED***,
         'src_mvc_cmp' => [
             'nullable' => false,
             'unique' => false,
@@ -876,18 +888,6 @@ class SrcMvcEntity extends AbstractMigration
                 'clm_vrc_eml_cmp' => [
                     'type' => 'string'
                 ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'column_int_foreign' => [
-            'nullable' => true,
-            'unique' => false,
-            'columns' => [
-                'column_int_foreign_name' => [
-                    'type' => 'string'
-                ***REMOVED***
-            ***REMOVED***,
-            'table' => [
-
             ***REMOVED***
         ***REMOVED***,
         'src_mvc_cmp_upl' => [
