@@ -116,7 +116,7 @@ class GearFile
         return $this;
     }
 
-    public function getSrcMvcDependency($tableName, $type)
+    public function getSrcMvcDependency($tableName, $tableAlias, $type)
     {
         if ($type == 'repository') {
             return [
@@ -129,7 +129,7 @@ class GearFile
             $repositoryDependency = sprintf(
                 '%s\Repository\%sRepository',
                 $tableName,
-                $tableName
+                $tableAlias
             );
 
 
@@ -168,7 +168,11 @@ class GearFile
         }
 
         if (in_array($this->minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
-            $src['dependency'***REMOVED*** = $this->getSrcMvcDependency($this->minorSuite->getTableName(), $this->minorSuite->getType());
+            $src['dependency'***REMOVED*** = $this->getSrcMvcDependency(
+                $this->minorSuite->getTableName(),
+                $this->minorSuite->getTableAlias(),
+                $this->minorSuite->getType()
+            );
         }
 
         if (in_array($this->minorSuite->getType(), ['search-form', 'form'***REMOVED***)) {
