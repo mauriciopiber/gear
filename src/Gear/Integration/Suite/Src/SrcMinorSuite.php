@@ -2,6 +2,7 @@
 namespace Gear\Integration\Suite\Src;
 
 use Gear\Integration\Suite\AbstractMinorSuite;
+use GearBase\Util\String\StringService;
 
 /**
  * PHP Version 5
@@ -33,12 +34,13 @@ class SrcMinorSuite extends AbstractMinorSuite
         $this->type = $type;
         $this->repeat = $repeat;
         $this->longName = $longName;
+        $this->stringService = new StringService();
         return $this;
     }
 
     public function getSuiteName()
     {
-        return sprintf(self::SUITE, strtolower($this->getType()));
+        return sprintf(self::SUITE, $this->stringService->str('url', $this->getType()));
     }
 
     public function getMajorSuite()
@@ -46,19 +48,17 @@ class SrcMinorSuite extends AbstractMinorSuite
         return $this->majorSuite;
     }
 
-
     public function getLocationKey()
     {
         if (!isset($this->locationKey) || empty($this->locationKey)) {
             $this->locationKey = sprintf(
                 '%s/%s',
                 $this->getMajorSuite()->getSuite(),
-                sprintf(self::SUITE, strtolower($this->getType()))
+                sprintf(self::SUITE, $this->stringService->str('url', $this->getType()))
             );
         }
         return $this->locationKey;
     }
-
 
     public function getRepeat()
     {

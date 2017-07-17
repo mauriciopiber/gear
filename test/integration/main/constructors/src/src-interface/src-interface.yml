@@ -1,31 +1,11 @@
-# Gear Test [6.1***REMOVED*** #
-modules: MyModule
-
 src:
-  0: 
-    type: Interface
-    name: CreateInterface
-  1: 
-    type: Interface
-    name: CreateInterfaceWithNamespace
-    namespace: InterfacesNamespace  
-  2:
-    name: InterfaceExtends
-    type: Interface
-    extends: Interfaces\CreateInterface
-  3:
-    name: InterfaceNamespaceExtends
-    type: Interface
-    namespace: InterfacesNamespace
-    extends: InterfacesNamespace\CreateInterfaceWithNamespace
-  4:
-    name: DependencyInterface
-    type: Interface
-    dependency: Repository\SrcRepository
-  5:
-    name: DependenciesInterface
-    type: Interface
-    dependency: Repository\SrcRepository,MyRepositoryNamespace\SrcRepositoryNamespace
-          
-    
-    
+    - { name: '', type: Interface }
+    - { name: '', type: Interface }
+    - { name: '', type: Interface, namespace: InterfaceOneNamespace }
+    - { name: '', type: Interface, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: '', type: Interface, extends: Interface\InterfaceExtesibleOne }
+    - { name: '', type: Interface, extends: Interface\InterfaceExtesibleTwo }
+    - { name: '', type: Interface }
+    - { name: '', type: Interface }
+    - { name: '', type: Interface }
+    - { name: '', type: Interface }
