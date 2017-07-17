@@ -1,11 +1,11 @@
 src:
-    - { name: '', type: Interface }
-    - { name: '', type: Interface }
-    - { name: '', type: Interface, namespace: InterfaceOneNamespace }
-    - { name: '', type: Interface, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
-    - { name: '', type: Interface, extends: Interface\InterfaceExtesibleOne }
-    - { name: '', type: Interface, extends: Interface\InterfaceExtesibleTwo }
-    - { name: '', type: Interface }
-    - { name: '', type: Interface }
-    - { name: '', type: Interface }
-    - { name: '', type: Interface }
+    - { name: InterfaceOne, type: Interface }
+    - { name: InterfaceTwo, type: Interface }
+    - { name: InterfaceNamespaceOne, type: Interface, namespace: InterfaceOneNamespace }
+    - { name: InterfaceNamespaceTwo, type: Interface, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: InterfaceExtendsOne, type: Interface, extends: Interfaces\InterfaceOne }
+    - { name: InterfaceExtendsTwo, type: Interface, extends: Interfaces\InterfaceTwo }
+    - { name: InterfaceDependencyOne, type: Interface, dependency: [Interface\InterfaceInterfaceInvokables***REMOVED*** }
+    - { name: InterfaceDependencyTwo, type: Interface, dependency: [Interface\InterfaceInterfaceInvokables***REMOVED*** }
+    - { name: InterfaceDependencyManyOne, type: Interface, dependency: [Interface\InterfaceInterfaceInvokables, Interface\InterfaceInterfaceExtendsInvokables***REMOVED*** }
+    - { name: InterfaceDependencyManyTwo, type: Interface, dependency: [Interface\InterfaceInterfaceInvokables, Interface\InterfaceInterfaceExtendsInvokables***REMOVED*** }

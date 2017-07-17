@@ -50,6 +50,33 @@ class GearFile
         ***REMOVED***
     ***REMOVED***;
 
+    const KEYS_INTERFACE = [
+        'default' => [
+            'short' => '%sInter%s',
+            'long'  => '%sInterface%s'
+        ***REMOVED***,
+        'namespace' => [
+            'short' => '%sInterNames%s',
+            'long'  => '%sInterfaceNamespace%s'
+        ***REMOVED***,
+        'extends' => [
+            'short' => '%sInterExtends%s',
+            'long'  => '%sInterfaceExtends%s'
+        ***REMOVED***,
+        'dependency' => [
+            'short' => '%sInterDepen%s',
+            'long'  => '%sInterfaceDependency%s',
+        ***REMOVED***,
+        'dependency-many' => [
+            'short' => '%sInterDepenMany%s',
+            'long'  => '%sInterfaceDependencyMany%s',
+        ***REMOVED***,
+        'full' => [
+            'short' => '%sInterFull%s%s',
+            'long'  => '%sInterfaceFull%s%s',
+        ***REMOVED***,
+    ***REMOVED***;
+
     const KEYS = [
         'implements' => [
             'short' => '%sImple%s%s',
@@ -430,7 +457,7 @@ class GearFile
      */
     public function getEntryName($name)
     {
-        $nameRc = ($this->str('class', $this->type) == 'Interface')
+        $nameRc = ($this->str('class', $this->type) == SrcTypesInterface::INTERFACE)
             ? sprintf($name, '', $this->numberLabel)
             : sprintf($name, $this->typeLabel, $this->serviceLabel, $this->numberLabel);
 
@@ -461,6 +488,9 @@ class GearFile
         $namespace = null;
 
         switch ($this->type) {
+            case 'Interface':
+                $namespace = 'Interfaces';
+                break;
             case 'Action':
             case 'Console':
                 $namespace = 'Controller';
@@ -556,6 +586,7 @@ class GearFile
         $dependencies = [***REMOVED***;
 
         foreach ($entity['dependency'***REMOVED*** as $invokDep) {
+
             $typeDep = ($this->suite->isUsingLongName())
                 ? $this->str('class', $invokDep[1***REMOVED***)
                 : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));
