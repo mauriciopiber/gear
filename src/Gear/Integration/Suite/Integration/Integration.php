@@ -200,7 +200,7 @@ class Integration
         if ($this->type === null || $this->type == self::SRC) {
             $this->srcSuite->runSrcSuite(
                 [
-                    //'interface',
+                    SrcTypesInterface::INTERFACE,
                     SrcTypesInterface::REPOSITORY,
                     SrcTypesInterface::SERVICE,
                     SrcTypesInterface::FORM,

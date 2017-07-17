@@ -200,10 +200,50 @@ class SrcGenerator
 
         //simple
         $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type
         ***REMOVED***;
 
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS_INTERFACE['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'namespace' => '%s'
+        ***REMOVED***;
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS_INTERFACE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'extends' => '%s%s%s'
+        ***REMOVED***;
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS_INTERFACE['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [[GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
+        ***REMOVED***;
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS_INTERFACE['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type,
+            'dependency' => [
+                [GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                [GearFile::KEYS_INTERFACE['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            ***REMOVED***
+        ***REMOVED***;
+
+        /*
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => $this->type
+        ***REMOVED***;
+
+        var_dump($src);
+        */
+
+        /*
         //namespace
         $src[***REMOVED*** = [
             'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
@@ -237,7 +277,7 @@ class SrcGenerator
                 //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
             ***REMOVED***
             */
-        ***REMOVED***;
+        //***REMOVED***;
 
         //full options
 
