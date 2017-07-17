@@ -13,6 +13,8 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
 use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
 use Gear\Integration\Suite\Integration\Exception\InvalidTypeException;
 use Gear\Integration\Suite\Integration\Exception\InvalidMaxCountException;
+use GearJson\Src\SrcTypesInterface;
+use GearJson\Controller\ControllerTypesInterface;
 
 /**
  * PHP Version 5
@@ -136,13 +138,13 @@ class Integration
     {
         $this->srcMvcSuite->runSrcMvcSuite(
             [
-                'entity',
-                'fixture',
-                'repository',
-                'service',
-                'filter',
-                'form',
-                'search-form'
+                SrcTypesInterface::ENTITY,
+                SrcTypesInterface::FIXTURE,
+                SrcTypesInterface::REPOSITORY,
+                SrcTypesInterface::SERVICE,
+                SrcTypesInterface::FILTER,
+                SrcTypesInterface::FORM,
+                SrcTypesInterface::SEARCH_FORM
             ***REMOVED***,
             ['basic'***REMOVED***,
             ['all'***REMOVED***,
@@ -155,20 +157,19 @@ class Integration
 
         $this->srcSuite->runSrcSuite(
             [
-                'repository',
-                'service',
-                'form',
-                'filter',
-                'view-helper',
-                'controller-plugin',
-                'value-object'
+                SrcTypesInterface::REPOSITORY,
+                SrcTypesInterface::SERVICE,
+                SrcTypesInterface::FORM,
+                SrcTypesInterface::FILTER,
+                SrcTypesInterface::VIEW_HELPER,
+                SrcTypesInterface::CONTROLLER_PLUGIN,
+                SrcTypesInterface::VALUE_OBJECT
             ***REMOVED***,
             1,
             true
         );
 
-        $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, 1, true);
-
+        $this->controllerSuite->runControllerSuite([ControllerTypesInterface::ACTION, ControllerTypesInterface::CONSOLE***REMOVED***, 1, true);
 
         $this->controllerMvcSuite->runControllerMvcSuite(
             ['basic'***REMOVED***,
@@ -199,13 +200,14 @@ class Integration
         if ($this->type === null || $this->type == self::SRC) {
             $this->srcSuite->runSrcSuite(
                 [
-                    'repository',
-                    'service',
-                    'form',
-                    'filter',
-                    'view-helper',
-                    'controller-plugin',
-                    'value-object'
+                    //'interface',
+                    SrcTypesInterface::REPOSITORY,
+                    SrcTypesInterface::SERVICE,
+                    SrcTypesInterface::FORM,
+                    SrcTypesInterface::FILTER,
+                    SrcTypesInterface::VIEW_HELPER,
+                    SrcTypesInterface::CONTROLLER_PLUGIN,
+                    SrcTypesInterface::VALUE_OBJECT
                 ***REMOVED***,
                 $this->count,
                 $this->longname

@@ -4,7 +4,7 @@ bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../..
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
 module="PbrSrcViewHelper"
-type="web"
+type="cli"
 construct=()
 construct+=("src-view-helper.yml;")
 

@@ -14,6 +14,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
 use Gear\Table\UploadImage as UploadImageTable;
+use GearJson\Src\SrcTypesInterface;
 
 /**
  * PHP Version 5
@@ -429,7 +430,7 @@ class GearFile
      */
     public function getEntryName($name)
     {
-        $nameRc = ($this->type == 'Interface')
+        $nameRc = ($this->str('class', $this->type) == 'Interface')
             ? sprintf($name, '', $this->numberLabel)
             : sprintf($name, $this->typeLabel, $this->serviceLabel, $this->numberLabel);
 
@@ -530,9 +531,9 @@ class GearFile
             $this->entry['implements'***REMOVED*** = $this->createImplements();
         }
 
-        if ($configName !== 'abstract' && $entity['type'***REMOVED*** !== 'interface') {
+        if ($configName !== 'abstract' && $entity['type'***REMOVED*** !== SrcTypesInterface::INTERFACE) {
             $this->entry['service'***REMOVED*** = $configName;
-        } elseif ($entity['type'***REMOVED*** !== 'interface') {
+        } elseif ($entity['type'***REMOVED*** !== SrcTypesInterface::INTERFACE) {
             $this->entry['abstract'***REMOVED*** = true;
         }
 
