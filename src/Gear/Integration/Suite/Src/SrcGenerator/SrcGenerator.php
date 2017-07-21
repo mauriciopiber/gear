@@ -252,7 +252,7 @@ class SrcGenerator
         $src = [***REMOVED***;
 
         $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_INTERFACE_DEPS['default'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => 'Repository',
             'implements' => [
                 'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
@@ -260,7 +260,7 @@ class SrcGenerator
         ***REMOVED***;
 
         $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_INTERFACE_DEPS['default'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => 'Service',
             'implements' => [
                 'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
@@ -295,7 +295,7 @@ class SrcGenerator
         $controller = [***REMOVED***;
 
         $controller[***REMOVED*** = [
-            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_INTERFACE_DEPS['default'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => 'Console',
             'implements' => [
                 'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***

@@ -11,16 +11,16 @@ src:
     - { name: InterfaceDependencyManyTwo, type: Interface }
     - { name: InterfaceFullOne, type: Interface, extends: Interfaces\InterfaceOne, namespace: InterfaceOneNamespace }
     - { name: InterfaceFullTwo, type: Interface, extends: Interfaces\InterfaceTwo, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
-    - { name: RepositoryInvokablesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
-    - { name: RepositoryInvokablesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
-    - { name: RepositoryFactoriesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
-    - { name: RepositoryFactoriesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
-    - { name: ServiceInvokablesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
-    - { name: ServiceInvokablesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
-    - { name: ServiceFactoriesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
-    - { name: ServiceFactoriesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
+    - { name: RepositoryBaseInvokablesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: RepositoryBaseInvokablesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryBaseFactoriesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: RepositoryBaseFactoriesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
+    - { name: ServiceBaseInvokablesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: ServiceBaseInvokablesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: ServiceBaseFactoriesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: ServiceBaseFactoriesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
 controller:
-    - { name: ConsoleInvokablesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleInvokablesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleFactoriesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleFactoriesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseInvokablesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseInvokablesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseFactoriesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseFactoriesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }

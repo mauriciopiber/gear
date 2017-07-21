@@ -50,6 +50,13 @@ class GearFile
         ***REMOVED***
     ***REMOVED***;
 
+    const KEYS_INTERFACE_DEPS = [
+        'default' => [
+            'short' => '%sBase%s%s',
+            'long'  => '%sBase%s%s'
+        ***REMOVED***,
+    ***REMOVED***;
+
     const KEYS_INTERFACE = [
         'default' => [
             'short' => '%sInter%s',
