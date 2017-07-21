@@ -1,50 +1,26 @@
 src:
-    - { name: InterOne, type: Interface }
-    - { name: InterTwo, type: Interface }
-    - { name: InterThree, type: Interface }
-    - { name: InterFour, type: Interface }
-    - { name: InterNamesOne, type: Interface, namespace: InterOneNames }
-    - { name: InterNamesTwo, type: Interface, namespace: InterOneNames\InterTwoNames }
-    - { name: InterNamesThree, type: Interface, namespace: InterOneNames\InterTwoNames\InterThreeNames }
-    - { name: InterNamesFour, type: Interface, namespace: InterOneNames\InterTwoNames\InterThreeNames\InterFourNames }
-    - { name: InterExtendsOne, type: Interface, extends: Interfaces\InterOne }
-    - { name: InterExtendsTwo, type: Interface, extends: Interfaces\InterTwo }
-    - { name: InterExtendsThree, type: Interface, extends: Interfaces\InterThree }
-    - { name: InterExtendsFour, type: Interface, extends: Interfaces\InterFour }
-    - { name: InterDepenOne, type: Interface }
-    - { name: InterDepenTwo, type: Interface }
-    - { name: InterDepenThree, type: Interface }
-    - { name: InterDepenFour, type: Interface }
-    - { name: InterDepenManyOne, type: Interface }
-    - { name: InterDepenManyTwo, type: Interface }
-    - { name: InterDepenManyThree, type: Interface }
-    - { name: InterDepenManyFour, type: Interface }
-    - { name: InterFullOne, type: Interface, extends: Interfaces\InterOne, namespace: InterOneNames }
-    - { name: InterFullTwo, type: Interface, extends: Interfaces\InterTwo, namespace: InterOneNames\InterTwoNames }
-    - { name: InterFullThree, type: Interface, extends: Interfaces\InterThree, namespace: InterOneNames\InterTwoNames\InterThreeNames }
-    - { name: InterFullFour, type: Interface, extends: Interfaces\InterFour, namespace: InterOneNames\InterTwoNames\InterThreeNames\InterFourNames }
-    - { name: ReposInvokOne, type: Repository, implements: [Interfaces\InterOne***REMOVED***, service: invokables }
-    - { name: ReposInvokTwo, type: Repository, implements: [Interfaces\InterTwo***REMOVED***, service: invokables }
-    - { name: ReposInvokThree, type: Repository, implements: [Interfaces\InterThree***REMOVED***, service: invokables }
-    - { name: ReposInvokFour, type: Repository, implements: [Interfaces\InterFour***REMOVED***, service: invokables }
-    - { name: ReposFactoOne, type: Repository, implements: [Interfaces\InterOne***REMOVED***, service: factories }
-    - { name: ReposFactoTwo, type: Repository, implements: [Interfaces\InterTwo***REMOVED***, service: factories }
-    - { name: ReposFactoThree, type: Repository, implements: [Interfaces\InterThree***REMOVED***, service: factories }
-    - { name: ReposFactoFour, type: Repository, implements: [Interfaces\InterFour***REMOVED***, service: factories }
-    - { name: ServiInvokOne, type: Service, implements: [Interfaces\InterOne***REMOVED***, service: invokables }
-    - { name: ServiInvokTwo, type: Service, implements: [Interfaces\InterTwo***REMOVED***, service: invokables }
-    - { name: ServiInvokThree, type: Service, implements: [Interfaces\InterThree***REMOVED***, service: invokables }
-    - { name: ServiInvokFour, type: Service, implements: [Interfaces\InterFour***REMOVED***, service: invokables }
-    - { name: ServiFactoOne, type: Service, implements: [Interfaces\InterOne***REMOVED***, service: factories }
-    - { name: ServiFactoTwo, type: Service, implements: [Interfaces\InterTwo***REMOVED***, service: factories }
-    - { name: ServiFactoThree, type: Service, implements: [Interfaces\InterThree***REMOVED***, service: factories }
-    - { name: ServiFactoFour, type: Service, implements: [Interfaces\InterFour***REMOVED***, service: factories }
+    - { name: InterfaceOne, type: Interface }
+    - { name: InterfaceTwo, type: Interface }
+    - { name: InterfaceNamespaceOne, type: Interface, namespace: InterfaceOneNamespace }
+    - { name: InterfaceNamespaceTwo, type: Interface, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: InterfaceExtendsOne, type: Interface, extends: Interfaces\InterfaceOne }
+    - { name: InterfaceExtendsTwo, type: Interface, extends: Interfaces\InterfaceTwo }
+    - { name: InterfaceDependencyOne, type: Interface }
+    - { name: InterfaceDependencyTwo, type: Interface }
+    - { name: InterfaceDependencyManyOne, type: Interface }
+    - { name: InterfaceDependencyManyTwo, type: Interface }
+    - { name: InterfaceFullOne, type: Interface, extends: Interfaces\InterfaceOne, namespace: InterfaceOneNamespace }
+    - { name: InterfaceFullTwo, type: Interface, extends: Interfaces\InterfaceTwo, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: RepositoryInvokablesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: RepositoryInvokablesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryFactoriesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: RepositoryFactoriesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
+    - { name: ServiceInvokablesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: ServiceInvokablesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: ServiceFactoriesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: ServiceFactoriesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
 controller:
-    - { name: ConsoInvokOne, type: Console, implements: [Interfaces\InterOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoInvokTwo, type: Console, implements: [Interfaces\InterTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoInvokThree, type: Console, implements: [Interfaces\InterThree***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }, { name: Three, role: guest }***REMOVED*** }
-    - { name: ConsoInvokFour, type: Console, implements: [Interfaces\InterFour***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }, { name: Three, role: guest }, { name: Four, role: guest }***REMOVED*** }
-    - { name: ConsoFactoOne, type: Console, implements: [Interfaces\InterOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoFactoTwo, type: Console, implements: [Interfaces\InterTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoFactoThree, type: Console, implements: [Interfaces\InterThree***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }, { name: Three, role: guest }***REMOVED*** }
-    - { name: ConsoFactoFour, type: Console, implements: [Interfaces\InterFour***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }, { name: Three, role: guest }, { name: Four, role: guest }***REMOVED*** }
+    - { name: ConsoleInvokablesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleInvokablesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    - { name: ConsoleFactoriesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleFactoriesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }

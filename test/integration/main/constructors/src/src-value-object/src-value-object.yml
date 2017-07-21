@@ -1,41 +1,21 @@
 src:
-    - { name: ValueExtesInvokOne, type: ValueObject, service: invokables }
-    - { name: ValueExtesInvokTwo, type: ValueObject, service: invokables }
-    - { name: ValueExtesInvokThree, type: ValueObject, service: invokables }
-    - { name: ValueExtesInvokFour, type: ValueObject, service: invokables }
-    - { name: ValueExtesAbstrOne, type: ValueObject, abstract: true }
-    - { name: ValueExtesAbstrTwo, type: ValueObject, abstract: true }
-    - { name: ValueExtesAbstrThree, type: ValueObject, abstract: true }
-    - { name: ValueExtesAbstrFour, type: ValueObject, abstract: true }
-    - { name: ValueInvokOne, type: ValueObject, service: invokables }
-    - { name: ValueInvokTwo, type: ValueObject, service: invokables }
-    - { name: ValueInvokThree, type: ValueObject, service: invokables }
-    - { name: ValueInvokFour, type: ValueObject, service: invokables }
-    - { name: ValueAbstrOne, type: ValueObject, abstract: true }
-    - { name: ValueAbstrTwo, type: ValueObject, abstract: true }
-    - { name: ValueAbstrThree, type: ValueObject, abstract: true }
-    - { name: ValueAbstrFour, type: ValueObject, abstract: true }
-    - { name: ValueNamesInvokOne, type: ValueObject, namespace: ValueOneNames, service: invokables }
-    - { name: ValueNamesInvokTwo, type: ValueObject, namespace: ValueOneNames\ValueTwoNames, service: invokables }
-    - { name: ValueNamesInvokThree, type: ValueObject, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames, service: invokables }
-    - { name: ValueNamesInvokFour, type: ValueObject, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames\ValueFourNames, service: invokables }
-    - { name: ValueNamesAbstrOne, type: ValueObject, namespace: ValueOneNames, abstract: true }
-    - { name: ValueNamesAbstrTwo, type: ValueObject, namespace: ValueOneNames\ValueTwoNames, abstract: true }
-    - { name: ValueNamesAbstrThree, type: ValueObject, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames, abstract: true }
-    - { name: ValueNamesAbstrFour, type: ValueObject, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames\ValueFourNames, abstract: true }
-    - { name: ValueExtedInvokOne, type: ValueObject, extends: ValueObject\ValueExtesInvokOne, service: invokables }
-    - { name: ValueExtedInvokTwo, type: ValueObject, extends: ValueObject\ValueExtesInvokTwo, service: invokables }
-    - { name: ValueExtedInvokThree, type: ValueObject, extends: ValueObject\ValueExtesInvokThree, service: invokables }
-    - { name: ValueExtedInvokFour, type: ValueObject, extends: ValueObject\ValueExtesInvokFour, service: invokables }
-    - { name: ValueExtedAbstrOne, type: ValueObject, extends: ValueObject\ValueExtesAbstrOne, abstract: true }
-    - { name: ValueExtedAbstrTwo, type: ValueObject, extends: ValueObject\ValueExtesAbstrTwo, abstract: true }
-    - { name: ValueExtedAbstrThree, type: ValueObject, extends: ValueObject\ValueExtesAbstrThree, abstract: true }
-    - { name: ValueExtedAbstrFour, type: ValueObject, extends: ValueObject\ValueExtesAbstrFour, abstract: true }
-    - { name: ValueFullInvokOne, type: ValueObject, extends: ValueObject\ValueExtesInvokOne, namespace: ValueOneNames, service: invokables }
-    - { name: ValueFullInvokTwo, type: ValueObject, extends: ValueObject\ValueExtesInvokTwo, namespace: ValueOneNames\ValueTwoNames, service: invokables }
-    - { name: ValueFullInvokThree, type: ValueObject, extends: ValueObject\ValueExtesInvokThree, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames, service: invokables }
-    - { name: ValueFullInvokFour, type: ValueObject, extends: ValueObject\ValueExtesInvokFour, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames\ValueFourNames, service: invokables }
-    - { name: ValueFullAbstrOne, type: ValueObject, extends: ValueObject\ValueExtesAbstrOne, namespace: ValueOneNames, abstract: true }
-    - { name: ValueFullAbstrTwo, type: ValueObject, extends: ValueObject\ValueExtesAbstrTwo, namespace: ValueOneNames\ValueTwoNames, abstract: true }
-    - { name: ValueFullAbstrThree, type: ValueObject, extends: ValueObject\ValueExtesAbstrThree, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames, abstract: true }
-    - { name: ValueFullAbstrFour, type: ValueObject, extends: ValueObject\ValueExtesAbstrFour, namespace: ValueOneNames\ValueTwoNames\ValueThreeNames\ValueFourNames, abstract: true }
+    - { name: ValueObjectExtesibleInvokablesOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectExtesibleInvokablesTwo, type: ValueObject, service: invokables }
+    - { name: ValueObjectExtesibleAbstractOne, type: ValueObject, abstract: true }
+    - { name: ValueObjectExtesibleAbstractTwo, type: ValueObject, abstract: true }
+    - { name: ValueObjectInvokablesOne, type: ValueObject, service: invokables }
+    - { name: ValueObjectInvokablesTwo, type: ValueObject, service: invokables }
+    - { name: ValueObjectAbstractOne, type: ValueObject, abstract: true }
+    - { name: ValueObjectAbstractTwo, type: ValueObject, abstract: true }
+    - { name: ValueObjectNamespaceInvokablesOne, type: ValueObject, namespace: ValueObjectOneNamespace, service: invokables }
+    - { name: ValueObjectNamespaceInvokablesTwo, type: ValueObject, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, service: invokables }
+    - { name: ValueObjectNamespaceAbstractOne, type: ValueObject, namespace: ValueObjectOneNamespace, abstract: true }
+    - { name: ValueObjectNamespaceAbstractTwo, type: ValueObject, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, abstract: true }
+    - { name: ValueObjectExtendsInvokablesOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesOne, service: invokables }
+    - { name: ValueObjectExtendsInvokablesTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesTwo, service: invokables }
+    - { name: ValueObjectExtendsAbstractOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractOne, abstract: true }
+    - { name: ValueObjectExtendsAbstractTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractTwo, abstract: true }
+    - { name: ValueObjectFullInvokablesOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesOne, namespace: ValueObjectOneNamespace, service: invokables }
+    - { name: ValueObjectFullInvokablesTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleInvokablesTwo, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, service: invokables }
+    - { name: ValueObjectFullAbstractOne, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractOne, namespace: ValueObjectOneNamespace, abstract: true }
+    - { name: ValueObjectFullAbstractTwo, type: ValueObject, extends: ValueObject\ValueObjectExtesibleAbstractTwo, namespace: ValueObjectOneNamespace\ValueObjectTwoNamespace, abstract: true }

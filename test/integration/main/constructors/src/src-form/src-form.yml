@@ -1,41 +1,21 @@
 src:
-    - { name: FormExtesInvokOne, type: Form, service: invokables }
-    - { name: FormExtesInvokTwo, type: Form, service: invokables }
-    - { name: FormExtesInvokThree, type: Form, service: invokables }
-    - { name: FormExtesInvokFour, type: Form, service: invokables }
-    - { name: FormExtesFactoOne, type: Form, service: factories }
-    - { name: FormExtesFactoTwo, type: Form, service: factories }
-    - { name: FormExtesFactoThree, type: Form, service: factories }
-    - { name: FormExtesFactoFour, type: Form, service: factories }
-    - { name: FormInvokOne, type: Form, service: invokables }
-    - { name: FormInvokTwo, type: Form, service: invokables }
-    - { name: FormInvokThree, type: Form, service: invokables }
-    - { name: FormInvokFour, type: Form, service: invokables }
-    - { name: FormFactoOne, type: Form, service: factories }
-    - { name: FormFactoTwo, type: Form, service: factories }
-    - { name: FormFactoThree, type: Form, service: factories }
-    - { name: FormFactoFour, type: Form, service: factories }
-    - { name: FormNamesInvokOne, type: Form, namespace: FormOneNames, service: invokables }
-    - { name: FormNamesInvokTwo, type: Form, namespace: FormOneNames\FormTwoNames, service: invokables }
-    - { name: FormNamesInvokThree, type: Form, namespace: FormOneNames\FormTwoNames\FormThreeNames, service: invokables }
-    - { name: FormNamesInvokFour, type: Form, namespace: FormOneNames\FormTwoNames\FormThreeNames\FormFourNames, service: invokables }
-    - { name: FormNamesFactoOne, type: Form, namespace: FormOneNames, service: factories }
-    - { name: FormNamesFactoTwo, type: Form, namespace: FormOneNames\FormTwoNames, service: factories }
-    - { name: FormNamesFactoThree, type: Form, namespace: FormOneNames\FormTwoNames\FormThreeNames, service: factories }
-    - { name: FormNamesFactoFour, type: Form, namespace: FormOneNames\FormTwoNames\FormThreeNames\FormFourNames, service: factories }
-    - { name: FormExtedInvokOne, type: Form, extends: Form\FormExtesInvokOne, service: invokables }
-    - { name: FormExtedInvokTwo, type: Form, extends: Form\FormExtesInvokTwo, service: invokables }
-    - { name: FormExtedInvokThree, type: Form, extends: Form\FormExtesInvokThree, service: invokables }
-    - { name: FormExtedInvokFour, type: Form, extends: Form\FormExtesInvokFour, service: invokables }
-    - { name: FormExtedFactoOne, type: Form, extends: Form\FormExtesFactoOne, service: factories }
-    - { name: FormExtedFactoTwo, type: Form, extends: Form\FormExtesFactoTwo, service: factories }
-    - { name: FormExtedFactoThree, type: Form, extends: Form\FormExtesFactoThree, service: factories }
-    - { name: FormExtedFactoFour, type: Form, extends: Form\FormExtesFactoFour, service: factories }
-    - { name: FormFullInvokOne, type: Form, extends: Form\FormExtesInvokOne, namespace: FormOneNames, service: invokables }
-    - { name: FormFullInvokTwo, type: Form, extends: Form\FormExtesInvokTwo, namespace: FormOneNames\FormTwoNames, service: invokables }
-    - { name: FormFullInvokThree, type: Form, extends: Form\FormExtesInvokThree, namespace: FormOneNames\FormTwoNames\FormThreeNames, service: invokables }
-    - { name: FormFullInvokFour, type: Form, extends: Form\FormExtesInvokFour, namespace: FormOneNames\FormTwoNames\FormThreeNames\FormFourNames, service: invokables }
-    - { name: FormFullFactoOne, type: Form, extends: Form\FormExtesFactoOne, namespace: FormOneNames, service: factories }
-    - { name: FormFullFactoTwo, type: Form, extends: Form\FormExtesFactoTwo, namespace: FormOneNames\FormTwoNames, service: factories }
-    - { name: FormFullFactoThree, type: Form, extends: Form\FormExtesFactoThree, namespace: FormOneNames\FormTwoNames\FormThreeNames, service: factories }
-    - { name: FormFullFactoFour, type: Form, extends: Form\FormExtesFactoFour, namespace: FormOneNames\FormTwoNames\FormThreeNames\FormFourNames, service: factories }
+    - { name: FormExtesibleInvokablesOne, type: Form, service: invokables }
+    - { name: FormExtesibleInvokablesTwo, type: Form, service: invokables }
+    - { name: FormExtesibleFactoriesOne, type: Form, service: factories }
+    - { name: FormExtesibleFactoriesTwo, type: Form, service: factories }
+    - { name: FormInvokablesOne, type: Form, service: invokables }
+    - { name: FormInvokablesTwo, type: Form, service: invokables }
+    - { name: FormFactoriesOne, type: Form, service: factories }
+    - { name: FormFactoriesTwo, type: Form, service: factories }
+    - { name: FormNamespaceInvokablesOne, type: Form, namespace: FormOneNamespace, service: invokables }
+    - { name: FormNamespaceInvokablesTwo, type: Form, namespace: FormOneNamespace\FormTwoNamespace, service: invokables }
+    - { name: FormNamespaceFactoriesOne, type: Form, namespace: FormOneNamespace, service: factories }
+    - { name: FormNamespaceFactoriesTwo, type: Form, namespace: FormOneNamespace\FormTwoNamespace, service: factories }
+    - { name: FormExtendsInvokablesOne, type: Form, extends: Form\FormExtesibleInvokablesOne, service: invokables }
+    - { name: FormExtendsInvokablesTwo, type: Form, extends: Form\FormExtesibleInvokablesTwo, service: invokables }
+    - { name: FormExtendsFactoriesOne, type: Form, extends: Form\FormExtesibleFactoriesOne, service: factories }
+    - { name: FormExtendsFactoriesTwo, type: Form, extends: Form\FormExtesibleFactoriesTwo, service: factories }
+    - { name: FormFullInvokablesOne, type: Form, extends: Form\FormExtesibleInvokablesOne, namespace: FormOneNamespace, service: invokables }
+    - { name: FormFullInvokablesTwo, type: Form, extends: Form\FormExtesibleInvokablesTwo, namespace: FormOneNamespace\FormTwoNamespace, service: invokables }
+    - { name: FormFullFactoriesOne, type: Form, extends: Form\FormExtesibleFactoriesOne, namespace: FormOneNamespace, service: factories }
+    - { name: FormFullFactoriesTwo, type: Form, extends: Form\FormExtesibleFactoriesTwo, namespace: FormOneNamespace\FormTwoNamespace, service: factories }
