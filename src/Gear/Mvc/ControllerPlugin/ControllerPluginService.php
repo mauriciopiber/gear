@@ -31,7 +31,7 @@ class ControllerPluginService extends AbstractMvc
 
         $this->getControllerPluginManager()->create($this->src);
 
-        $this->getControllerPluginTestService()->create($this->src);
+        $this->getControllerPluginTestService()->createControllerPluginTest($this->src);
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/controller-plugin/src.phtml',
