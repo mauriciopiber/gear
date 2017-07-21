@@ -220,71 +220,94 @@ class SrcGenerator
         $src[***REMOVED*** = [
             'name' => GearFile::KEYS_INTERFACE['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
-            'dependency' => [[GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
+            //'dependency' => [[GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
         ***REMOVED***;
 
         $src[***REMOVED*** = [
             'name' => GearFile::KEYS_INTERFACE['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
-            'dependency' => [
-                [GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                [GearFile::KEYS_INTERFACE['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+            //'dependency' => [
+                //[GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                //[GearFile::KEYS_INTERFACE['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
                 //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
-            ***REMOVED***
+            //***REMOVED***
         ***REMOVED***;
 
-        /*
         $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type
-        ***REMOVED***;
-
-        var_dump($src);
-        */
-
-        /*
-        //namespace
-        $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            'name' => GearFile::KEYS_INTERFACE['full'***REMOVED***[$this->keyStyle***REMOVED***,
             'type' => $this->type,
+            //'dependency' => [
+                //[GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                //[GearFile::KEYS_INTERFACE['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
+                //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
+            //***REMOVED***,
+            'extends' => '%s%s%s',
             'namespace' => '%s'
         ***REMOVED***;
 
-        //extends
-        $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-            'extends' => GearFile::KEYS_BASE['extends'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type
-        ***REMOVED***;
-
-        //single dependency
-        $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['dependency'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type,
-            //'dependency' => [[GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED******REMOVED***
-        ***REMOVED***;
-
-        //all dependency
-        $src[***REMOVED*** = [
-            'name' => GearFile::KEYS['dependency-many'***REMOVED***[$this->keyStyle***REMOVED***,
-            'type' => $this->type,
-            /*
-            'dependency' => [
-                [GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                [GearFile::KEYS['extends'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                [GearFile::KEYS['implements'***REMOVED***[$this->keyStyle***REMOVED***, $this->type***REMOVED***,
-                //GearFile::KEYS['namespace'***REMOVED***[$this->keyStyle***REMOVED***,
-            ***REMOVED***
-            */
-        //***REMOVED***;
-
-        //full options
-
-        //
         $srcOptions[***REMOVED*** = [$src, ['0' => ''***REMOVED***, $this->type, $this->repeat***REMOVED***;
 
-        return $this->generate($srcOptions);
+        unset($src);
+
+        $src = [***REMOVED***;
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => 'Repository',
+            'implements' => [
+                'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $src[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => 'Service',
+            'implements' => [
+                'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
+            ***REMOVED***
+        ***REMOVED***;
+
+        $srcOptions[***REMOVED*** = [$src, ['invokables', 'factories'***REMOVED***, 'Repository', $this->repeat***REMOVED***;
+
+        unset($src);
+
+
+        $controllerOptions = [***REMOVED***;
+
+        /*
+
+        $controller = [***REMOVED***;
+
+        $controller[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => 'Action',
+            'implements' => [
+                'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
+            ***REMOVED***,
+            'actions' => [***REMOVED***
+        ***REMOVED***;
+
+        $controllerOptions[***REMOVED*** = [$controller, ['invokables', 'factories'***REMOVED***, 'Action', $this->repeat***REMOVED***;
+
+        unset($controller);
+        */
+
+        $controller = [***REMOVED***;
+
+        $controller[***REMOVED*** = [
+            'name' => GearFile::KEYS['default'***REMOVED***[$this->keyStyle***REMOVED***,
+            'type' => 'Console',
+            'implements' => [
+                'Interfaces\\'.GearFile::KEYS_INTERFACE['default'***REMOVED***[$this->keyStyle***REMOVED***
+            ***REMOVED***,
+            'actions' => [***REMOVED***
+        ***REMOVED***;
+
+        $controllerOptions[***REMOVED*** = [$controller, ['invokables', 'factories'***REMOVED***, 'Console', $this->repeat***REMOVED***;
+
+        unset($controller);
+
+        return $this->generate($srcOptions, $controllerOptions);
     }
 
 
@@ -367,9 +390,15 @@ class SrcGenerator
         return $this->generate($srcOptions);
     }
 
-    public function generate($srcOptions)
+    public function generate($srcOptions, $controllerOptions = [***REMOVED***)
     {
-        $gearfile =  $this->gearFile->createSrcGearfile($this->suite, ['src' => $srcOptions***REMOVED***);
+        $components = ['src' => $srcOptions***REMOVED***;
+
+        if (!empty($controllerOptions)) {
+            $components['controller'***REMOVED*** = $controllerOptions;
+        }
+
+        $gearfile =  $this->gearFile->createSrcGearfile($this->suite, $components);
 
         $this->suite->setGearFile($gearfile);
 

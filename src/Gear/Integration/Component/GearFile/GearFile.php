@@ -72,8 +72,8 @@ class GearFile
             'long'  => '%sInterfaceDependencyMany%s',
         ***REMOVED***,
         'full' => [
-            'short' => '%sInterFull%s%s',
-            'long'  => '%sInterfaceFull%s%s',
+            'short' => '%sInterFull%s',
+            'long'  => '%sInterfaceFull%s',
         ***REMOVED***,
     ***REMOVED***;
 
@@ -393,7 +393,7 @@ class GearFile
         return $gen;
     }
 
-    public function createControllerGearfile(ControllerMinorSuite $suite, $srcOptions)
+    public function createControllerGearFile(ControllerMinorSuite $suite, $srcOptions)
     {
         $this->suite = $suite;
 
@@ -405,13 +405,22 @@ class GearFile
     }
 
 
-    public function createSrcGearfile(SrcMinorSuite $suite, $srcOptions)
+    public function createSrcGearfile(SrcMinorSuite $suite, $options)
     {
         $this->suite = $suite;
 
-        $data = $this->runGenerate('src', $srcOptions);
+        $src = $this->runGenerate('src', $options);
+        if (isset($options['controller'***REMOVED***)) {
+            $controller = $this->runGenerate('controller', $options);
+        }
 
-        return $this->createGearfileComponent(['src' => $data***REMOVED***);
+        $data = ['src' => $src***REMOVED***;
+
+        if (isset($options['controller'***REMOVED***)) {
+            $data['controller'***REMOVED*** = $controller;
+        }
+
+        return $this->createGearfileComponent($data);
     }
 
 
@@ -518,7 +527,11 @@ class GearFile
         $implements = [***REMOVED***;
 
         foreach ($this->entity['implements'***REMOVED*** as $invokDep) {
-            $implements[***REMOVED*** = sprintf($invokDep, $this->type, $this->numberLabel);
+
+            $implements[***REMOVED*** = (strpos($invokDep, 'Interfaces') !== false)
+                ? sprintf($invokDep, '', $this->numberLabel)
+                : sprintf($invokDep, $this->type, $this->numberLabel);
+
         }
 
         return $implements;
@@ -591,10 +604,16 @@ class GearFile
                 ? $this->str('class', $invokDep[1***REMOVED***)
                 : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));
 
-            $typeDepType = $this->str('class', $invokDep[1***REMOVED***);
+            $namespace = $this->str('class', $invokDep[1***REMOVED***);
+
+            if ($this->type === SrcTypesInterface::INTERFACE) {
+                $namespace = 'Interfaces';
+            }
 
 
-            $dep = sprintf('%s\\'.$invokDep[0***REMOVED***, $typeDepType, $typeDep, $typeName, $this->numberLabel);
+            $dep = ($this->type === SrcTypesInterface::INTERFACE)
+                ? sprintf('%s\\'.$invokDep[0***REMOVED***, $namespace, '', $this->numberLabel)
+                : sprintf('%s\\'.$invokDep[0***REMOVED***, $namespace, $typeDep, $typeName, $this->numberLabel);
                 //var_dump($dep);
 
             $dependencies[***REMOVED*** = $dep;

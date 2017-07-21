@@ -230,27 +230,6 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->dirService = $dirService;
     }
 
-    /**
-     * Cria Módulos dentro de Projetos Gear.
-     *
-     * Cria a estrutura básica do módulo, sem arquivos independentes.
-     *
-     * @param string $type Tipo Web|Cli
-     *
-     * @return boolean
-     */
-    public function create($module, $type = 'web')
-    {
-        $this->type = $type;
-                //module structure
-        $moduleStructure = $this->getModule();
-        $moduleStructure->prepare($module, $type)->write();
-
-        $this->moduleComponents();
-
-        return $this->addModuleToProject();
-    }
-
     public function addModuleToProject()
     {
         $this->getApplicationConfig()->addModuleToProject();
@@ -321,6 +300,27 @@ class ModuleService implements ModuleProjectConnectorInterface
         $module = $moduleStructure->prepare($module, $type)->write();
 
         return $this->moduleComponents(self::MODULE_AS_PROJECT);
+    }
+
+    /**
+     * Cria Módulos dentro de Projetos Gear.
+     *
+     * Cria a estrutura básica do módulo, sem arquivos independentes.
+     *
+     * @param string $type Tipo Web|Cli
+     *
+     * @return boolean
+     */
+    public function create($module, $type = 'web')
+    {
+        $this->type = $type;
+        //module structure
+        $moduleStructure = $this->getModule();
+        $moduleStructure->prepare($module, $type)->write();
+
+        $this->moduleComponents();
+
+        return $this->addModuleToProject();
     }
 
     /**
