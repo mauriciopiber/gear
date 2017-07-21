@@ -57,7 +57,7 @@ return [
         Mvc\Search\SearchService::class                           => Mvc\Search\SearchService::class,
     ***REMOVED***,
     'factories' => [
-        Mvc\ValueObject\ValueObjectTestService::class             => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',
+        Mvc\ValueObject\ValueObjectTestService::class             => Mvc\ValueObject\ValueObjectTestServiceFactory::class,
         Mvc\TraitTestService::class                               => Mvc\TraitTestServiceFactory::class,
         Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
     ***REMOVED***
