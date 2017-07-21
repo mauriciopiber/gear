@@ -45,7 +45,6 @@ return [
         Mvc\Factory\FactoryService::class                         => Mvc\Factory\FactoryService::class,
         Mvc\Factory\FactoryTestService::class                     => Mvc\Factory\FactoryTestService::class,
         Mvc\ValueObject\ValueObjectService::class                 => Mvc\ValueObject\ValueObjectService::class,
-        Mvc\ValueObject\ValueObjectTestService::class             => Mvc\ValueObject\ValueObjectTestService::class,
         Mvc\ControllerPlugin\ControllerPluginService::class       => Mvc\ControllerPlugin\ControllerPluginService::class,
         Mvc\ControllerPlugin\ControllerPluginTestService::class   => Mvc\ControllerPlugin\ControllerPluginTestService::class,
         Mvc\Service\ServiceService::class                         => Mvc\Service\ServiceService::class,
@@ -58,6 +57,7 @@ return [
         Mvc\Search\SearchService::class                           => Mvc\Search\SearchService::class,
     ***REMOVED***,
     'factories' => [
+        //Mvc\ValueObject\ValueObjectTestService::class             => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',
         Mvc\TraitTestService::class                               => Mvc\TraitTestServiceFactory::class,
         Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
     ***REMOVED***
