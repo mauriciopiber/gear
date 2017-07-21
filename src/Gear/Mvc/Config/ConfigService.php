@@ -130,7 +130,7 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
                 $this->getNavigationManager()->module($controller);
                 $this->getViewHelperManager()->module($controller);
                 $this->getUploadImageManager()->module($controller);
-                break;
+
             case 'cli':
                 $this->getConsoleRouterManager()->module($controller);
                 break;
