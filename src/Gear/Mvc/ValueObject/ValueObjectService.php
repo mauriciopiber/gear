@@ -32,7 +32,7 @@ class ValueObjectService extends AbstractMvc
 
     public function createSrc()
     {
-        $this->getValueObjectTestService()->createTest($this->src);
+        $this->getValueObjectTestService()->createValueObjectTest($this->src);
 
         $this->getFileCreator()->createFile(
             'template/module/mvc/value-object/src.phtml',
