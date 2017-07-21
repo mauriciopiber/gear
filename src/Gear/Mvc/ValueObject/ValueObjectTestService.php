@@ -12,6 +12,7 @@ use Gear\Creator\CodeTestTrait;
 use GearJson\Src\Src;
 use Gear\Module\BasicModuleStructure;
 use GearJson\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcTest;
 
 /**
  * PHP Version 5
@@ -22,7 +23,7 @@ use GearJson\Src\SrcTypesInterface;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ValueObjectTestService implements ModuleAwareInterface
+class ValueObjectTestService extends AbstractMvcTest implements ModuleAwareInterface
 {
     use StringServiceTrait;
 
