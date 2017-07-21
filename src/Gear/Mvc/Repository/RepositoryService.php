@@ -47,17 +47,6 @@ class RepositoryService extends AbstractMvc
         return parent::create($data, SrcTypesInterface::REPOSITORY);
     }
 
-/*
-    public function introspectFromTable(Db $db)
-    {
-        $this->db = $db;
-        $this->className = $this->db->getTable();
-        $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
-
-        return $this->createDb();
-    }
-    */
-
     public function createDb()
     {
         $this->table   = $this->db->getTableObject();
@@ -113,21 +102,6 @@ class RepositoryService extends AbstractMvc
         return $template;
     }
 
-    /*
-    public function create(Src $src)
-    {
-        $this->src = $src;
-        $this->className = $this->src->getName();
-
-        if (null != $this->src->getDb() && $this->src->getDb() instanceof \GearJson\Db\Db) {
-            $this->db = $this->src->getDb();
-
-            return $this->createDb();
-        }
-        return $this->createSrc();
-    }
-    */
-
     public function createSrc()
     {
         $location = $this->getCode()->getLocation($this->src);
@@ -161,12 +135,14 @@ class RepositoryService extends AbstractMvc
         $template = ($this->src->getAbstract() == true) ? 'abstract.phtml' : 'repository.phtml';
 
 
-        return $this->getFileCreator()->createFile(
+        $file = $this->getFileCreator()->createFile(
             'template/module/mvc/repository/src/'.$template,
             $options,
-            $this->className.'.php',
+            $this->src->getName().'.php',
             $location
         );
+
+        return $file;
     }
 
     public function setUp()
@@ -181,21 +157,6 @@ class RepositoryService extends AbstractMvc
             $this->className = $this->src->getName();
             $this->fileName = $this->src->getName().'.php';
         }
-    }
-
-    public function getAbstractFromSrc()
-    {
-        $this->getRepositoryTestService()->createFromSrc($this->src);
-
-        return $this->getFileCreator()->createFile(
-            'template/module/mvc/repository/src/abstract.phtml',
-            array(
-                'module' => $this->getModule()->getModuleName(),
-                'class' => $this->str('class', $this->src->getName())
-            ),
-            $this->className.'.php',
-            $this->getModule()->getRepositoryFolder()
-        );
     }
 
     public function calculateAliasesStack()

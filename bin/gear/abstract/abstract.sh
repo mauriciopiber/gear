@@ -44,13 +44,15 @@ function Gear_Util_CopyGearfile
 	destination=${3}
 	
 	if [ -e "$scriptDir/$gearfile" ***REMOVED***; then
-		
+		#echo "ok"
+		#exit 1
 	    sudo cp "$scriptDir/$gearfile" "$destination"
 	    return 0	
     fi
 
     if [ -e "$scriptDir/gearfiles/$gearfile" ***REMOVED***; then
-		
+		#echo "ok"
+		#exit 1
 	    sudo cp "$scriptDir/gearfiles/$gearfile" "$destination"
 	    return 0	
     fi

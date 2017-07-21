@@ -1,29 +1,57 @@
 src:
-    - { name: ControllerPluginExtesibleInvokablesOne, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginExtesibleInvokablesTwo, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginExtesibleFactoriesOne, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginExtesibleFactoriesTwo, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginInvokablesOne, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginInvokablesTwo, type: ControllerPlugin, service: invokables }
-    - { name: ControllerPluginFactoriesOne, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginFactoriesTwo, type: ControllerPlugin, service: factories }
-    - { name: ControllerPluginNamespaceInvokablesOne, type: ControllerPlugin, namespace: ControllerPluginOneNamespace, service: invokables }
-    - { name: ControllerPluginNamespaceInvokablesTwo, type: ControllerPlugin, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: invokables }
-    - { name: ControllerPluginNamespaceFactoriesOne, type: ControllerPlugin, namespace: ControllerPluginOneNamespace, service: factories }
-    - { name: ControllerPluginNamespaceFactoriesTwo, type: ControllerPlugin, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories }
-    - { name: ControllerPluginExtendsInvokablesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesOne, service: invokables }
-    - { name: ControllerPluginExtendsInvokablesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesTwo, service: invokables }
-    - { name: ControllerPluginExtendsFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, service: factories }
-    - { name: ControllerPluginExtendsFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, service: factories }
-    - { name: ControllerPluginFullInvokablesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesOne, namespace: ControllerPluginOneNamespace, service: invokables }
-    - { name: ControllerPluginFullInvokablesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleInvokablesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: invokables }
-    - { name: ControllerPluginFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories }
-    - { name: ControllerPluginFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories }
-    - { name: ControllerPluginDependencyFactoriesOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyFactoriesTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependencyManyFactoriesOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne, ControllerPlugin\ControllerPluginExtendsInvokablesOne, ControllerPlugin\ControllerPluginImplementsInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyManyFactoriesTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo, ControllerPlugin\ControllerPluginExtendsInvokablesTwo, ControllerPlugin\ControllerPluginImplementsInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependencyFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependencyFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo***REMOVED*** }
-    - { name: ControllerPluginDependenciesManyFullFactoriesOne, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesOne, namespace: ControllerPluginOneNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesOne, ControllerPlugin\ControllerPluginExtendsInvokablesOne, ControllerPlugin\ControllerPluginImplementsInvokablesOne***REMOVED*** }
-    - { name: ControllerPluginDependenciesManyFullFactoriesTwo, type: ControllerPlugin, extends: ControllerPlugin\ControllerPluginExtesibleFactoriesTwo, namespace: ControllerPluginOneNamespace\ControllerPluginTwoNamespace, service: factories, dependency: [ControllerPlugin\ControllerPluginInvokablesTwo, ControllerPlugin\ControllerPluginExtendsInvokablesTwo, ControllerPlugin\ControllerPluginImplementsInvokablesTwo***REMOVED*** }
+    - { name: ContrExtesInvokOne, type: ControllerPlugin, service: invokables }
+    - { name: ContrExtesInvokTwo, type: ControllerPlugin, service: invokables }
+    - { name: ContrExtesInvokThree, type: ControllerPlugin, service: invokables }
+    - { name: ContrExtesInvokFour, type: ControllerPlugin, service: invokables }
+    - { name: ContrExtesFactoOne, type: ControllerPlugin, service: factories }
+    - { name: ContrExtesFactoTwo, type: ControllerPlugin, service: factories }
+    - { name: ContrExtesFactoThree, type: ControllerPlugin, service: factories }
+    - { name: ContrExtesFactoFour, type: ControllerPlugin, service: factories }
+    - { name: ContrInvokOne, type: ControllerPlugin, service: invokables }
+    - { name: ContrInvokTwo, type: ControllerPlugin, service: invokables }
+    - { name: ContrInvokThree, type: ControllerPlugin, service: invokables }
+    - { name: ContrInvokFour, type: ControllerPlugin, service: invokables }
+    - { name: ContrFactoOne, type: ControllerPlugin, service: factories }
+    - { name: ContrFactoTwo, type: ControllerPlugin, service: factories }
+    - { name: ContrFactoThree, type: ControllerPlugin, service: factories }
+    - { name: ContrFactoFour, type: ControllerPlugin, service: factories }
+    - { name: ContrNamesInvokOne, type: ControllerPlugin, namespace: ContrOneNames, service: invokables }
+    - { name: ContrNamesInvokTwo, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames, service: invokables }
+    - { name: ContrNamesInvokThree, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: invokables }
+    - { name: ContrNamesInvokFour, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: invokables }
+    - { name: ContrNamesFactoOne, type: ControllerPlugin, namespace: ContrOneNames, service: factories }
+    - { name: ContrNamesFactoTwo, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames, service: factories }
+    - { name: ContrNamesFactoThree, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: factories }
+    - { name: ContrNamesFactoFour, type: ControllerPlugin, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: factories }
+    - { name: ContrExtedInvokOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokOne, service: invokables }
+    - { name: ContrExtedInvokTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokTwo, service: invokables }
+    - { name: ContrExtedInvokThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokThree, service: invokables }
+    - { name: ContrExtedInvokFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokFour, service: invokables }
+    - { name: ContrExtedFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoOne, service: factories }
+    - { name: ContrExtedFactoTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoTwo, service: factories }
+    - { name: ContrExtedFactoThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoThree, service: factories }
+    - { name: ContrExtedFactoFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoFour, service: factories }
+    - { name: ContrFullInvokOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokOne, namespace: ContrOneNames, service: invokables }
+    - { name: ContrFullInvokTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokTwo, namespace: ContrOneNames\ContrTwoNames, service: invokables }
+    - { name: ContrFullInvokThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokThree, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: invokables }
+    - { name: ContrFullInvokFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesInvokFour, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: invokables }
+    - { name: ContrFullFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoOne, namespace: ContrOneNames, service: factories }
+    - { name: ContrFullFactoTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoTwo, namespace: ContrOneNames\ContrTwoNames, service: factories }
+    - { name: ContrFullFactoThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoThree, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: factories }
+    - { name: ContrFullFactoFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoFour, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: factories }
+    - { name: ContrDepenFactoOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokOne***REMOVED*** }
+    - { name: ContrDepenFactoTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokTwo***REMOVED*** }
+    - { name: ContrDepenFactoThree, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokThree***REMOVED*** }
+    - { name: ContrDepenFactoFour, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokFour***REMOVED*** }
+    - { name: ContrDepenManyFactoOne, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokOne, ControllerPlugin\ContrExtedInvokOne, ControllerPlugin\ContrImpleInvokOne***REMOVED*** }
+    - { name: ContrDepenManyFactoTwo, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokTwo, ControllerPlugin\ContrExtedInvokTwo, ControllerPlugin\ContrImpleInvokTwo***REMOVED*** }
+    - { name: ContrDepenManyFactoThree, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokThree, ControllerPlugin\ContrExtedInvokThree, ControllerPlugin\ContrImpleInvokThree***REMOVED*** }
+    - { name: ContrDepenManyFactoFour, type: ControllerPlugin, service: factories, dependency: [ControllerPlugin\ContrInvokFour, ControllerPlugin\ContrExtedInvokFour, ControllerPlugin\ContrImpleInvokFour***REMOVED*** }
+    - { name: ContrDepenFullFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoOne, namespace: ContrOneNames, service: factories, dependency: [ControllerPlugin\ContrInvokOne***REMOVED*** }
+    - { name: ContrDepenFullFactoTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoTwo, namespace: ContrOneNames\ContrTwoNames, service: factories, dependency: [ControllerPlugin\ContrInvokTwo***REMOVED*** }
+    - { name: ContrDepenFullFactoThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoThree, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: factories, dependency: [ControllerPlugin\ContrInvokThree***REMOVED*** }
+    - { name: ContrDepenFullFactoFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoFour, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: factories, dependency: [ControllerPlugin\ContrInvokFour***REMOVED*** }
+    - { name: ContrDepenManyFulFactoOne, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoOne, namespace: ContrOneNames, service: factories, dependency: [ControllerPlugin\ContrInvokOne, ControllerPlugin\ContrExtedInvokOne, ControllerPlugin\ContrImpleInvokOne***REMOVED*** }
+    - { name: ContrDepenManyFulFactoTwo, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoTwo, namespace: ContrOneNames\ContrTwoNames, service: factories, dependency: [ControllerPlugin\ContrInvokTwo, ControllerPlugin\ContrExtedInvokTwo, ControllerPlugin\ContrImpleInvokTwo***REMOVED*** }
+    - { name: ContrDepenManyFulFactoThree, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoThree, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames, service: factories, dependency: [ControllerPlugin\ContrInvokThree, ControllerPlugin\ContrExtedInvokThree, ControllerPlugin\ContrImpleInvokThree***REMOVED*** }
+    - { name: ContrDepenManyFulFactoFour, type: ControllerPlugin, extends: ControllerPlugin\ContrExtesFactoFour, namespace: ContrOneNames\ContrTwoNames\ContrThreeNames\ContrFourNames, service: factories, dependency: [ControllerPlugin\ContrInvokFour, ControllerPlugin\ContrExtedInvokFour, ControllerPlugin\ContrImpleInvokFour***REMOVED*** }
