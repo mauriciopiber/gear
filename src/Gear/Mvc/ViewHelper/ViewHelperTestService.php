@@ -2,12 +2,11 @@
 namespace Gear\Mvc\ViewHelper;
 
 use Gear\Mvc\AbstractMvcTest;
-use Gear\Constructor\Src\SrcConstructorInterface;
 use GearJson\Src\Src;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use GearJson\Src\SrcTypesInterface;
 
-class ViewHelperTestService extends AbstractMvcTest implements SrcConstructorInterface
+class ViewHelperTestService extends AbstractMvcTest
 {
     use ServiceManagerTrait;
 
