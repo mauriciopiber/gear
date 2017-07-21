@@ -1,121 +1,61 @@
 src:
-    - { name: ReposInterOne, type: Interface }
-    - { name: ReposInterTwo, type: Interface }
-    - { name: ReposInterThree, type: Interface }
-    - { name: ReposInterFour, type: Interface }
-    - { name: ReposExtesInvokOne, type: Repository, service: invokables }
-    - { name: ReposExtesInvokTwo, type: Repository, service: invokables }
-    - { name: ReposExtesInvokThree, type: Repository, service: invokables }
-    - { name: ReposExtesInvokFour, type: Repository, service: invokables }
-    - { name: ReposExtesFactoOne, type: Repository, service: factories }
-    - { name: ReposExtesFactoTwo, type: Repository, service: factories }
-    - { name: ReposExtesFactoThree, type: Repository, service: factories }
-    - { name: ReposExtesFactoFour, type: Repository, service: factories }
-    - { name: ReposExtesAbstrOne, type: Repository, abstract: true }
-    - { name: ReposExtesAbstrTwo, type: Repository, abstract: true }
-    - { name: ReposExtesAbstrThree, type: Repository, abstract: true }
-    - { name: ReposExtesAbstrFour, type: Repository, abstract: true }
-    - { name: ReposInvokOne, type: Repository, service: invokables }
-    - { name: ReposInvokTwo, type: Repository, service: invokables }
-    - { name: ReposInvokThree, type: Repository, service: invokables }
-    - { name: ReposInvokFour, type: Repository, service: invokables }
-    - { name: ReposFactoOne, type: Repository, service: factories }
-    - { name: ReposFactoTwo, type: Repository, service: factories }
-    - { name: ReposFactoThree, type: Repository, service: factories }
-    - { name: ReposFactoFour, type: Repository, service: factories }
-    - { name: ReposAbstrOne, type: Repository, abstract: true }
-    - { name: ReposAbstrTwo, type: Repository, abstract: true }
-    - { name: ReposAbstrThree, type: Repository, abstract: true }
-    - { name: ReposAbstrFour, type: Repository, abstract: true }
-    - { name: ReposNamesInvokOne, type: Repository, namespace: ReposOneNames, service: invokables }
-    - { name: ReposNamesInvokTwo, type: Repository, namespace: ReposOneNames\ReposTwoNames, service: invokables }
-    - { name: ReposNamesInvokThree, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, service: invokables }
-    - { name: ReposNamesInvokFour, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, service: invokables }
-    - { name: ReposNamesFactoOne, type: Repository, namespace: ReposOneNames, service: factories }
-    - { name: ReposNamesFactoTwo, type: Repository, namespace: ReposOneNames\ReposTwoNames, service: factories }
-    - { name: ReposNamesFactoThree, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, service: factories }
-    - { name: ReposNamesFactoFour, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, service: factories }
-    - { name: ReposNamesAbstrOne, type: Repository, namespace: ReposOneNames, abstract: true }
-    - { name: ReposNamesAbstrTwo, type: Repository, namespace: ReposOneNames\ReposTwoNames, abstract: true }
-    - { name: ReposNamesAbstrThree, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, abstract: true }
-    - { name: ReposNamesAbstrFour, type: Repository, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, abstract: true }
-    - { name: ReposExtedInvokOne, type: Repository, extends: Repository\ReposExtesInvokOne, service: invokables }
-    - { name: ReposExtedInvokTwo, type: Repository, extends: Repository\ReposExtesInvokTwo, service: invokables }
-    - { name: ReposExtedInvokThree, type: Repository, extends: Repository\ReposExtesInvokThree, service: invokables }
-    - { name: ReposExtedInvokFour, type: Repository, extends: Repository\ReposExtesInvokFour, service: invokables }
-    - { name: ReposExtedFactoOne, type: Repository, extends: Repository\ReposExtesFactoOne, service: factories }
-    - { name: ReposExtedFactoTwo, type: Repository, extends: Repository\ReposExtesFactoTwo, service: factories }
-    - { name: ReposExtedFactoThree, type: Repository, extends: Repository\ReposExtesFactoThree, service: factories }
-    - { name: ReposExtedFactoFour, type: Repository, extends: Repository\ReposExtesFactoFour, service: factories }
-    - { name: ReposExtedAbstrOne, type: Repository, extends: Repository\ReposExtesAbstrOne, abstract: true }
-    - { name: ReposExtedAbstrTwo, type: Repository, extends: Repository\ReposExtesAbstrTwo, abstract: true }
-    - { name: ReposExtedAbstrThree, type: Repository, extends: Repository\ReposExtesAbstrThree, abstract: true }
-    - { name: ReposExtedAbstrFour, type: Repository, extends: Repository\ReposExtesAbstrFour, abstract: true }
-    - { name: ReposImpleInvokOne, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: invokables }
-    - { name: ReposImpleInvokTwo, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: invokables }
-    - { name: ReposImpleInvokThree, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: invokables }
-    - { name: ReposImpleInvokFour, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: invokables }
-    - { name: ReposImpleFactoOne, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories }
-    - { name: ReposImpleFactoTwo, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories }
-    - { name: ReposImpleFactoThree, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories }
-    - { name: ReposImpleFactoFour, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories }
-    - { name: ReposImpleAbstrOne, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true }
-    - { name: ReposImpleAbstrTwo, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true }
-    - { name: ReposImpleAbstrThree, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true }
-    - { name: ReposImpleAbstrFour, type: Repository, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true }
-    - { name: ReposImpleManyInvokOne, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposImpleManyInvokTwo, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposImpleManyInvokThree, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposImpleManyInvokFour, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposImpleManyFactoOne, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposImpleManyFactoTwo, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposImpleManyFactoThree, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposImpleManyFactoFour, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposImpleManyAbstrOne, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposImpleManyAbstrTwo, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposImpleManyAbstrThree, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposImpleManyAbstrFour, type: Repository, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposFullInvokOne, type: Repository, extends: Repository\ReposExtesInvokOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposFullInvokTwo, type: Repository, extends: Repository\ReposExtesInvokTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposFullInvokThree, type: Repository, extends: Repository\ReposExtesInvokThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposFullInvokFour, type: Repository, extends: Repository\ReposExtesInvokFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: invokables }
-    - { name: ReposFullFactoOne, type: Repository, extends: Repository\ReposExtesFactoOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposFullFactoTwo, type: Repository, extends: Repository\ReposExtesFactoTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposFullFactoThree, type: Repository, extends: Repository\ReposExtesFactoThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposFullFactoFour, type: Repository, extends: Repository\ReposExtesFactoFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories }
-    - { name: ReposFullAbstrOne, type: Repository, extends: Repository\ReposExtesAbstrOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposFullAbstrTwo, type: Repository, extends: Repository\ReposExtesAbstrTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposFullAbstrThree, type: Repository, extends: Repository\ReposExtesAbstrThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposFullAbstrFour, type: Repository, extends: Repository\ReposExtesAbstrFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true }
-    - { name: ReposDepenFactoOne, type: Repository, service: factories, dependency: [Repository\ReposInvokOne***REMOVED*** }
-    - { name: ReposDepenFactoTwo, type: Repository, service: factories, dependency: [Repository\ReposInvokTwo***REMOVED*** }
-    - { name: ReposDepenFactoThree, type: Repository, service: factories, dependency: [Repository\ReposInvokThree***REMOVED*** }
-    - { name: ReposDepenFactoFour, type: Repository, service: factories, dependency: [Repository\ReposInvokFour***REMOVED*** }
-    - { name: ReposDepenAbstrOne, type: Repository, abstract: true, dependency: [Repository\ReposInvokOne***REMOVED*** }
-    - { name: ReposDepenAbstrTwo, type: Repository, abstract: true, dependency: [Repository\ReposInvokTwo***REMOVED*** }
-    - { name: ReposDepenAbstrThree, type: Repository, abstract: true, dependency: [Repository\ReposInvokThree***REMOVED*** }
-    - { name: ReposDepenAbstrFour, type: Repository, abstract: true, dependency: [Repository\ReposInvokFour***REMOVED*** }
-    - { name: ReposDepenManyFactoOne, type: Repository, service: factories, dependency: [Repository\ReposInvokOne, Repository\ReposExtedInvokOne, Repository\ReposImpleInvokOne***REMOVED*** }
-    - { name: ReposDepenManyFactoTwo, type: Repository, service: factories, dependency: [Repository\ReposInvokTwo, Repository\ReposExtedInvokTwo, Repository\ReposImpleInvokTwo***REMOVED*** }
-    - { name: ReposDepenManyFactoThree, type: Repository, service: factories, dependency: [Repository\ReposInvokThree, Repository\ReposExtedInvokThree, Repository\ReposImpleInvokThree***REMOVED*** }
-    - { name: ReposDepenManyFactoFour, type: Repository, service: factories, dependency: [Repository\ReposInvokFour, Repository\ReposExtedInvokFour, Repository\ReposImpleInvokFour***REMOVED*** }
-    - { name: ReposDepenManyAbstrOne, type: Repository, abstract: true, dependency: [Repository\ReposInvokOne, Repository\ReposExtedInvokOne, Repository\ReposImpleInvokOne***REMOVED*** }
-    - { name: ReposDepenManyAbstrTwo, type: Repository, abstract: true, dependency: [Repository\ReposInvokTwo, Repository\ReposExtedInvokTwo, Repository\ReposImpleInvokTwo***REMOVED*** }
-    - { name: ReposDepenManyAbstrThree, type: Repository, abstract: true, dependency: [Repository\ReposInvokThree, Repository\ReposExtedInvokThree, Repository\ReposImpleInvokThree***REMOVED*** }
-    - { name: ReposDepenManyAbstrFour, type: Repository, abstract: true, dependency: [Repository\ReposInvokFour, Repository\ReposExtedInvokFour, Repository\ReposImpleInvokFour***REMOVED*** }
-    - { name: ReposDepenFullFactoOne, type: Repository, extends: Repository\ReposExtesFactoOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories, dependency: [Repository\ReposInvokOne***REMOVED*** }
-    - { name: ReposDepenFullFactoTwo, type: Repository, extends: Repository\ReposExtesFactoTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories, dependency: [Repository\ReposInvokTwo***REMOVED*** }
-    - { name: ReposDepenFullFactoThree, type: Repository, extends: Repository\ReposExtesFactoThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories, dependency: [Repository\ReposInvokThree***REMOVED*** }
-    - { name: ReposDepenFullFactoFour, type: Repository, extends: Repository\ReposExtesFactoFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne***REMOVED***, service: factories, dependency: [Repository\ReposInvokFour***REMOVED*** }
-    - { name: ReposDepenFullAbstrOne, type: Repository, extends: Repository\ReposExtesAbstrOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true, dependency: [Repository\ReposInvokOne***REMOVED*** }
-    - { name: ReposDepenFullAbstrTwo, type: Repository, extends: Repository\ReposExtesAbstrTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true, dependency: [Repository\ReposInvokTwo***REMOVED*** }
-    - { name: ReposDepenFullAbstrThree, type: Repository, extends: Repository\ReposExtesAbstrThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true, dependency: [Repository\ReposInvokThree***REMOVED*** }
-    - { name: ReposDepenFullAbstrFour, type: Repository, extends: Repository\ReposExtesAbstrFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne***REMOVED***, abstract: true, dependency: [Repository\ReposInvokFour***REMOVED*** }
-    - { name: ReposDepenManyFulFactoOne, type: Repository, extends: Repository\ReposExtesFactoOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories, dependency: [Repository\ReposInvokOne, Repository\ReposExtedInvokOne, Repository\ReposImpleInvokOne***REMOVED*** }
-    - { name: ReposDepenManyFulFactoTwo, type: Repository, extends: Repository\ReposExtesFactoTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories, dependency: [Repository\ReposInvokTwo, Repository\ReposExtedInvokTwo, Repository\ReposImpleInvokTwo***REMOVED*** }
-    - { name: ReposDepenManyFulFactoThree, type: Repository, extends: Repository\ReposExtesFactoThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories, dependency: [Repository\ReposInvokThree, Repository\ReposExtedInvokThree, Repository\ReposImpleInvokThree***REMOVED*** }
-    - { name: ReposDepenManyFulFactoFour, type: Repository, extends: Repository\ReposExtesFactoFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, service: factories, dependency: [Repository\ReposInvokFour, Repository\ReposExtedInvokFour, Repository\ReposImpleInvokFour***REMOVED*** }
-    - { name: ReposDepenManyFulAbstrOne, type: Repository, extends: Repository\ReposExtesAbstrOne, namespace: ReposOneNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true, dependency: [Repository\ReposInvokOne, Repository\ReposExtedInvokOne, Repository\ReposImpleInvokOne***REMOVED*** }
-    - { name: ReposDepenManyFulAbstrTwo, type: Repository, extends: Repository\ReposExtesAbstrTwo, namespace: ReposOneNames\ReposTwoNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true, dependency: [Repository\ReposInvokTwo, Repository\ReposExtedInvokTwo, Repository\ReposImpleInvokTwo***REMOVED*** }
-    - { name: ReposDepenManyFulAbstrThree, type: Repository, extends: Repository\ReposExtesAbstrThree, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true, dependency: [Repository\ReposInvokThree, Repository\ReposExtedInvokThree, Repository\ReposImpleInvokThree***REMOVED*** }
-    - { name: ReposDepenManyFulAbstrFour, type: Repository, extends: Repository\ReposExtesAbstrFour, namespace: ReposOneNames\ReposTwoNames\ReposThreeNames\ReposFourNames, implements: [Interfaces\ReposInterOne, Interfaces\ReposInterTwo, Interfaces\ReposInterThree, Interfaces\ReposInterFour***REMOVED***, abstract: true, dependency: [Repository\ReposInvokFour, Repository\ReposExtedInvokFour, Repository\ReposImpleInvokFour***REMOVED*** }
+    - { name: RepositoryInterfaceOne, type: Interface }
+    - { name: RepositoryInterfaceTwo, type: Interface }
+    - { name: RepositoryExtesibleInvokablesOne, type: Repository, service: invokables }
+    - { name: RepositoryExtesibleInvokablesTwo, type: Repository, service: invokables }
+    - { name: RepositoryExtesibleFactoriesOne, type: Repository, service: factories }
+    - { name: RepositoryExtesibleFactoriesTwo, type: Repository, service: factories }
+    - { name: RepositoryExtesibleAbstractOne, type: Repository, abstract: true }
+    - { name: RepositoryExtesibleAbstractTwo, type: Repository, abstract: true }
+    - { name: RepositoryInvokablesOne, type: Repository, service: invokables }
+    - { name: RepositoryInvokablesTwo, type: Repository, service: invokables }
+    - { name: RepositoryFactoriesOne, type: Repository, service: factories }
+    - { name: RepositoryFactoriesTwo, type: Repository, service: factories }
+    - { name: RepositoryAbstractOne, type: Repository, abstract: true }
+    - { name: RepositoryAbstractTwo, type: Repository, abstract: true }
+    - { name: RepositoryNamespaceInvokablesOne, type: Repository, namespace: RepositoryOneNamespace, service: invokables }
+    - { name: RepositoryNamespaceInvokablesTwo, type: Repository, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, service: invokables }
+    - { name: RepositoryNamespaceFactoriesOne, type: Repository, namespace: RepositoryOneNamespace, service: factories }
+    - { name: RepositoryNamespaceFactoriesTwo, type: Repository, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, service: factories }
+    - { name: RepositoryNamespaceAbstractOne, type: Repository, namespace: RepositoryOneNamespace, abstract: true }
+    - { name: RepositoryNamespaceAbstractTwo, type: Repository, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, abstract: true }
+    - { name: RepositoryExtendsInvokablesOne, type: Repository, extends: Repository\RepositoryExtesibleInvokablesOne, service: invokables }
+    - { name: RepositoryExtendsInvokablesTwo, type: Repository, extends: Repository\RepositoryExtesibleInvokablesTwo, service: invokables }
+    - { name: RepositoryExtendsFactoriesOne, type: Repository, extends: Repository\RepositoryExtesibleFactoriesOne, service: factories }
+    - { name: RepositoryExtendsFactoriesTwo, type: Repository, extends: Repository\RepositoryExtesibleFactoriesTwo, service: factories }
+    - { name: RepositoryExtendsAbstractOne, type: Repository, extends: Repository\RepositoryExtesibleAbstractOne, abstract: true }
+    - { name: RepositoryExtendsAbstractTwo, type: Repository, extends: Repository\RepositoryExtesibleAbstractTwo, abstract: true }
+    - { name: RepositoryImplementsInvokablesOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsInvokablesTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsFactoriesOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: factories }
+    - { name: RepositoryImplementsFactoriesTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: factories }
+    - { name: RepositoryImplementsAbstractOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsAbstractTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsManyInvokablesOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyInvokablesTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryImplementsManyFactoriesOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyFactoriesTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories }
+    - { name: RepositoryImplementsManyAbstractOne, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true }
+    - { name: RepositoryImplementsManyAbstractTwo, type: Repository, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true }
+    - { name: RepositoryFullInvokablesOne, type: Repository, extends: Repository\RepositoryExtesibleInvokablesOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryFullInvokablesTwo, type: Repository, extends: Repository\RepositoryExtesibleInvokablesTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtesibleFactoriesOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories }
+    - { name: RepositoryFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtesibleFactoriesTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories }
+    - { name: RepositoryFullAbstractOne, type: Repository, extends: Repository\RepositoryExtesibleAbstractOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true }
+    - { name: RepositoryFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtesibleAbstractTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true }
+    - { name: RepositoryDependencyFactoriesOne, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyFactoriesTwo, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependencyAbstractOne, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyAbstractTwo, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependencyManyFactoriesOne, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyManyFactoriesTwo, type: Repository, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependencyManyAbstractOne, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyManyAbstractTwo, type: Repository, abstract: true, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependencyFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtesibleFactoriesOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtesibleFactoriesTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependencyFullAbstractOne, type: Repository, extends: Repository\RepositoryExtesibleAbstractOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependencyFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtesibleAbstractTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesManyFullFactoriesOne, type: Repository, extends: Repository\RepositoryExtesibleFactoriesOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesManyFullFactoriesTwo, type: Repository, extends: Repository\RepositoryExtesibleFactoriesTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }
+    - { name: RepositoryDependenciesManyFullAbstractOne, type: Repository, extends: Repository\RepositoryExtesibleAbstractOne, namespace: RepositoryOneNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesOne, Repository\RepositoryExtendsInvokablesOne, Repository\RepositoryImplementsInvokablesOne***REMOVED*** }
+    - { name: RepositoryDependenciesManyFullAbstractTwo, type: Repository, extends: Repository\RepositoryExtesibleAbstractTwo, namespace: RepositoryOneNamespace\RepositoryTwoNamespace, implements: [Interfaces\RepositoryInterfaceOne, Interfaces\RepositoryInterfaceTwo***REMOVED***, abstract: true, dependency: [Repository\RepositoryInvokablesTwo, Repository\RepositoryExtendsInvokablesTwo, Repository\RepositoryImplementsInvokablesTwo***REMOVED*** }

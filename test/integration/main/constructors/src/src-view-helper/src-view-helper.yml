@@ -1,41 +1,21 @@
 src:
-    - { name: ViewHExtesInvokOne, type: ViewHelper, service: invokables }
-    - { name: ViewHExtesInvokTwo, type: ViewHelper, service: invokables }
-    - { name: ViewHExtesInvokThree, type: ViewHelper, service: invokables }
-    - { name: ViewHExtesInvokFour, type: ViewHelper, service: invokables }
-    - { name: ViewHExtesFactoOne, type: ViewHelper, service: factories }
-    - { name: ViewHExtesFactoTwo, type: ViewHelper, service: factories }
-    - { name: ViewHExtesFactoThree, type: ViewHelper, service: factories }
-    - { name: ViewHExtesFactoFour, type: ViewHelper, service: factories }
-    - { name: ViewHInvokOne, type: ViewHelper, service: invokables }
-    - { name: ViewHInvokTwo, type: ViewHelper, service: invokables }
-    - { name: ViewHInvokThree, type: ViewHelper, service: invokables }
-    - { name: ViewHInvokFour, type: ViewHelper, service: invokables }
-    - { name: ViewHFactoOne, type: ViewHelper, service: factories }
-    - { name: ViewHFactoTwo, type: ViewHelper, service: factories }
-    - { name: ViewHFactoThree, type: ViewHelper, service: factories }
-    - { name: ViewHFactoFour, type: ViewHelper, service: factories }
-    - { name: ViewHNamesInvokOne, type: ViewHelper, namespace: ViewHOneNames, service: invokables }
-    - { name: ViewHNamesInvokTwo, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames, service: invokables }
-    - { name: ViewHNamesInvokThree, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames, service: invokables }
-    - { name: ViewHNamesInvokFour, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames\ViewHFourNames, service: invokables }
-    - { name: ViewHNamesFactoOne, type: ViewHelper, namespace: ViewHOneNames, service: factories }
-    - { name: ViewHNamesFactoTwo, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames, service: factories }
-    - { name: ViewHNamesFactoThree, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames, service: factories }
-    - { name: ViewHNamesFactoFour, type: ViewHelper, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames\ViewHFourNames, service: factories }
-    - { name: ViewHExtedInvokOne, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokOne, service: invokables }
-    - { name: ViewHExtedInvokTwo, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokTwo, service: invokables }
-    - { name: ViewHExtedInvokThree, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokThree, service: invokables }
-    - { name: ViewHExtedInvokFour, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokFour, service: invokables }
-    - { name: ViewHExtedFactoOne, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoOne, service: factories }
-    - { name: ViewHExtedFactoTwo, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoTwo, service: factories }
-    - { name: ViewHExtedFactoThree, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoThree, service: factories }
-    - { name: ViewHExtedFactoFour, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoFour, service: factories }
-    - { name: ViewHFullInvokOne, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokOne, namespace: ViewHOneNames, service: invokables }
-    - { name: ViewHFullInvokTwo, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokTwo, namespace: ViewHOneNames\ViewHTwoNames, service: invokables }
-    - { name: ViewHFullInvokThree, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokThree, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames, service: invokables }
-    - { name: ViewHFullInvokFour, type: ViewHelper, extends: ViewHelper\ViewHExtesInvokFour, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames\ViewHFourNames, service: invokables }
-    - { name: ViewHFullFactoOne, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoOne, namespace: ViewHOneNames, service: factories }
-    - { name: ViewHFullFactoTwo, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoTwo, namespace: ViewHOneNames\ViewHTwoNames, service: factories }
-    - { name: ViewHFullFactoThree, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoThree, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames, service: factories }
-    - { name: ViewHFullFactoFour, type: ViewHelper, extends: ViewHelper\ViewHExtesFactoFour, namespace: ViewHOneNames\ViewHTwoNames\ViewHThreeNames\ViewHFourNames, service: factories }
+    - { name: ViewHelperExtesibleInvokablesOne, type: ViewHelper, service: invokables }
+    - { name: ViewHelperExtesibleInvokablesTwo, type: ViewHelper, service: invokables }
+    - { name: ViewHelperExtesibleFactoriesOne, type: ViewHelper, service: factories }
+    - { name: ViewHelperExtesibleFactoriesTwo, type: ViewHelper, service: factories }
+    - { name: ViewHelperInvokablesOne, type: ViewHelper, service: invokables }
+    - { name: ViewHelperInvokablesTwo, type: ViewHelper, service: invokables }
+    - { name: ViewHelperFactoriesOne, type: ViewHelper, service: factories }
+    - { name: ViewHelperFactoriesTwo, type: ViewHelper, service: factories }
+    - { name: ViewHelperNamespaceInvokablesOne, type: ViewHelper, namespace: ViewHelperOneNamespace, service: invokables }
+    - { name: ViewHelperNamespaceInvokablesTwo, type: ViewHelper, namespace: ViewHelperOneNamespace\ViewHelperTwoNamespace, service: invokables }
+    - { name: ViewHelperNamespaceFactoriesOne, type: ViewHelper, namespace: ViewHelperOneNamespace, service: factories }
+    - { name: ViewHelperNamespaceFactoriesTwo, type: ViewHelper, namespace: ViewHelperOneNamespace\ViewHelperTwoNamespace, service: factories }
+    - { name: ViewHelperExtendsInvokablesOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleInvokablesOne, service: invokables }
+    - { name: ViewHelperExtendsInvokablesTwo, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleInvokablesTwo, service: invokables }
+    - { name: ViewHelperExtendsFactoriesOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleFactoriesOne, service: factories }
+    - { name: ViewHelperExtendsFactoriesTwo, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleFactoriesTwo, service: factories }
+    - { name: ViewHelperFullInvokablesOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleInvokablesOne, namespace: ViewHelperOneNamespace, service: invokables }
+    - { name: ViewHelperFullInvokablesTwo, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleInvokablesTwo, namespace: ViewHelperOneNamespace\ViewHelperTwoNamespace, service: invokables }
+    - { name: ViewHelperFullFactoriesOne, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleFactoriesOne, namespace: ViewHelperOneNamespace, service: factories }
+    - { name: ViewHelperFullFactoriesTwo, type: ViewHelper, extends: ViewHelper\ViewHelperExtesibleFactoriesTwo, namespace: ViewHelperOneNamespace\ViewHelperTwoNamespace, service: factories }
