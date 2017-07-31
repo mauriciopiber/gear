@@ -15,6 +15,7 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
 use Gear\Table\UploadImage as UploadImageTable;
 use GearJson\Src\SrcTypesInterface;
+use Exception;
 
 /**
  * PHP Version 5
@@ -153,14 +154,14 @@ class GearFile
 
     public function getSrcMvcDependency($tableName, $tableAlias, $type)
     {
-        if ($type == 'repository') {
+        if ($type == SrcTypesInterface::REPOSITORY) {
             return [
                 'doctrine.entitymanager.orm_default' => '\Doctrine\ORM\EntityManager',
                 '\GearBase\Repository\QueryBuilder'
             ***REMOVED***;
         }
 
-        if ($type == 'service') {
+        if ($type == SrcTypesInterface::SERVICE) {
             $repositoryDependency = sprintf(
                 '%s\Repository\%sRepository',
                 $tableName,
@@ -184,11 +185,11 @@ class GearFile
 
     public function getSrcMvcTemplate($type)
     {
-        if ($type == 'search-form') {
+        if ($type == SrcTypesInterface::SEARCH_FORM) {
             return 'search-form';
         }
 
-        if ($type == 'form') {
+        if ($type == SrcTypesInterface::FORM) {
             return 'form-filter';
         }
 
@@ -197,12 +198,12 @@ class GearFile
 
     public function srcMvcOptions($src)
     {
-        if (!in_array($this->minorSuite->getType(), ['fixture', 'entity'***REMOVED***)) {
+        if (!in_array($this->minorSuite->getType(), [SrcTypesInterface::FIXTURE, SrcTypesInterface::ENTITY***REMOVED***)) {
             $src['service'***REMOVED*** = 'factories';
             $src['namespace'***REMOVED*** = ($this->minorSuite->getTableName().'\\'.$this->str('class', $this->minorSuite->getType()));
         }
 
-        if (in_array($this->minorSuite->getType(), ['repository', 'service'***REMOVED***)) {
+        if (in_array($this->minorSuite->getType(), [SrcTypesInterface::REPOSITORY, SrcTypesInterface::SERVICE***REMOVED***)) {
             $src['dependency'***REMOVED*** = $this->getSrcMvcDependency(
                 $this->minorSuite->getTableName(),
                 $this->minorSuite->getTableAlias(),
@@ -210,7 +211,7 @@ class GearFile
             );
         }
 
-        if (in_array($this->minorSuite->getType(), ['search-form', 'form'***REMOVED***)) {
+        if (in_array($this->minorSuite->getType(), [SrcTypesInterface::SEARCH_FORM, SrcTypesInterface::FORM***REMOVED***)) {
             $src['template'***REMOVED*** = $this->getSrcMvcTemplate($this->minorSuite->getType());
         }
         return $src;
@@ -219,11 +220,12 @@ class GearFile
     public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
     {
         $this->suite = $srcMvcMinorSuite;
+        //$this->history = [***REMOVED***;
 
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
             $this->minorSuite = $minorSuite;
-            $name = $minorSuite->getType() == 'entity'
+            $name = $minorSuite->getType() == SrcTypesInterface::ENTITY
                 ? $minorSuite->getTableAlias()
                 : sprintf(
                     '%s%s',
@@ -248,7 +250,7 @@ class GearFile
                     if (in_array($foreignKey, $this->history)) {
                         continue;
                     }
-                    $srcs = array_merge($srcs, $this->createForeignKeyGearfile($foreignKey, $minorSuite->getType()));
+                    $srcs = array_merge($srcs, $this->createForeignKeyGearfile($foreignKey, $minorSuite));
                     $this->history[***REMOVED*** = $foreignKey;
                 }
             }
@@ -256,7 +258,7 @@ class GearFile
             if (!empty($minorSuite->getTableAssoc()) && !in_array($minorSuite->getTableAssoc(), $this->history)) {
                 $srcs = array_merge(
                     $srcs,
-                    $this->createForeignKeyGearfile($minorSuite->getTableAssoc(), $minorSuite->getType())
+                    $this->createForeignKeyGearfile($minorSuite->getTableAssoc(), $minorSuite)
                 );
                 $this->history[***REMOVED*** = $minorSuite->getTableAssoc();
             }
@@ -337,13 +339,13 @@ class GearFile
 
         if (!empty($mvcMinorSuite->getForeignKeys())) {
             foreach ($mvcMinorSuite->getForeignKeys() as $foreignKey) {
-                $src = array_merge($src, $this->createForeignKeyGearfile($foreignKey, $mvcMinorSuite->getType()));
+                $src = array_merge($src, $this->createForeignKeyGearfile($foreignKey, $mvcMinorSuite));
             }
         }
         if (!empty($mvcMinorSuite->getTableAssoc())) {
             $src = array_merge(
                 $src,
-                $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc(), $mvcMinorSuite->getType())
+                $this->createForeignKeyGearfile($mvcMinorSuite->getTableAssoc(), $mvcMinorSuite)
             );
         }
 
@@ -357,6 +359,11 @@ class GearFile
     private function factoryGearfileColumns($columns)
     {
         $gearfileColumns = [***REMOVED***;
+
+        if (empty($columns)) {
+            return $gearfileColumns;
+        }
+
         foreach ($columns as $columnName => $columnOptions) {
             if (isset($columnOptions['speciality'***REMOVED***)) {
                 $gearfileColumns[$columnName***REMOVED*** = $columnOptions['speciality'***REMOVED***;
@@ -365,11 +372,37 @@ class GearFile
         return $gearfileColumns;
     }
 
-    private function createForeignKeyGearfile($tableId, $type = null)
+    private function createForeignKeyGearfile($tableId, $minorSuite)
     {
-        var_dump($tableId);
         $table = $this->str('class', str_replace('id_', '', $tableId));
 
+        if ($minorSuite instanceof SrcMvcMinorSuite) {
+
+            if ($minorSuite->getType() === SrcTypesInterface::ENTITY) {
+                $data = [
+                    [
+                        'name' => $table,
+                        'type' => 'Entity',
+                        'db' => $table,
+                    ***REMOVED***,
+                ***REMOVED***;
+                return $data;
+            }
+
+            if ($minorSuite->getType() === SrcTypesInterface::FIXTURE) {
+                $data =  [
+                    [
+                        'name' => sprintf('%sFixture', $table),
+                        'type' => 'Fixture',
+                        'db' => $table,
+                    ***REMOVED***
+                ***REMOVED***;
+                return $data;
+            }
+
+        }
+
+        //var_dump($tableId);
         $data = [
             [
                 'name' => $table,
@@ -378,7 +411,9 @@ class GearFile
             ***REMOVED***,
         ***REMOVED***;
 
-        if ($type !== 'entity' && $tableId !== 'upload_image') {
+        //var_dump($type !== SrcTypesInterface::ENTITY && $tableId !== 'upload_image');
+
+        if ($minorSuite->getType() !== SrcTypesInterface::ENTITY && $tableId !== 'upload_image') {
             $data[***REMOVED*** =  [
                 'name' => sprintf('%sFixture', $table),
                 'type' => 'Fixture',
@@ -392,6 +427,10 @@ class GearFile
     public function runGenerate($suite, $options)
     {
         $gen = [***REMOVED***;
+
+        if (empty($options[$suite***REMOVED***)) {
+            return $gen;
+        }
 
         foreach ($options[$suite***REMOVED*** as $options) {
             $gen = array_merge($gen, $this->generateGearfiles($options[0***REMOVED***, $options[1***REMOVED***, $options[3***REMOVED***));
@@ -700,6 +739,15 @@ class GearFile
         return $interfaces;
     }
 
+    /**
+     * Return the Code Template Generated
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     public function createGearfileComponent($data)
     {
@@ -709,9 +757,11 @@ class GearFile
 
         $gearfile = sprintf('%s.yml', $name);
 
-        $yaml = Yaml::dump($data);
+        $this->code = Yaml::dump($data, 4);
 
-        $this->persist->save($this->suite, $gearfile, $yaml);
+        //echo $this->code; die();
+
+        $this->persist->save($this->suite, $gearfile, $this->code);
 
         return $gearfile;
     }

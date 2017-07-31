@@ -5,14 +5,15 @@ use Gear\Integration\Component\GearFile\GearFileTrait;
 use Gear\Integration\Component\TestFile\TestFileTrait;
 use Gear\Integration\Component\MigrationFile\MigrationFileTrait;
 use Gear\Integration\Util\ResolveNames\ResolveNamesTrait;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Util\Columns\ColumnsTrait;
 use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Component\TestFile\TestFile;
 use Gear\Integration\Component\MigrationFile\MigrationFile;
-use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Util\Columns\Columns;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
+use GearJson\Src\SrcTypesInterface;
 
 /**
  * PHP Version 5
@@ -65,13 +66,13 @@ class SrcMvcGenerator
     public function getMvcDependency()
     {
         return [
-            'entity' => null,
-            'fixture' => ['Entity'***REMOVED***,
-            'repository' => ['Entity'***REMOVED***,
-            'service' => ['Entity', 'Repository'***REMOVED***,
-            'filter' => ['Entity'***REMOVED***,
-            'form' => ['Entity', 'Filter'***REMOVED***,
-            'search-form' => ['Entity'***REMOVED***,
+            SrcTypesInterface::ENTITY => null,
+            SrcTypesInterface::FIXTURE => [SrcTypesInterface::ENTITY***REMOVED***,
+            SrcTypesInterface::REPOSITORY => [SrcTypesInterface::ENTITY***REMOVED***,
+            SrcTypesInterface::SERVICE => [SrcTypesInterface::ENTITY, SrcTypesInterface::REPOSITORY***REMOVED***,
+            SrcTypesInterface::FILTER => [SrcTypesInterface::ENTITY***REMOVED***,
+            SrcTypesInterface::FORM => [SrcTypesInterface::ENTITY, SrcTypesInterface::FILTER***REMOVED***,
+            SrcTypesInterface::SEARCH_FORM => [SrcTypesInterface::ENTITY***REMOVED***,
         ***REMOVED***;
     }
 
@@ -86,7 +87,7 @@ class SrcMvcGenerator
         $srcMvcMinor->setGearfile($gearfile);
 
         //migration
-        if ($srcMvcMinor->getType() == 'entity') {
+        if ($srcMvcMinor->getType() == SrcTypesInterface::ENTITY) {
             $migration = $this->migrationFile->createSrcMvcMigrationFile($srcMvcMinor, $tables);
             $srcMvcMinor->setMigrationFile($migration);
         }
