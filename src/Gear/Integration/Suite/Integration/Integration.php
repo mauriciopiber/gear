@@ -239,13 +239,13 @@ class Integration
 
         $this->srcMvcSuite->runSrcMvcSuite(
             [
-                'entity',
-                'fixture',
-                'repository',
-                'service',
-                'filter',
-                'form',
-                'search-form'
+                SrcTypesInterface::ENTITY,
+                SrcTypesInterface::FIXTURE,
+                SrcTypesInterface::REPOSITORY,
+                SrcTypesInterface::SERVICE,
+                SrcTypesInterface::FILTER,
+                SrcTypesInterface::FORM,
+                SrcTypesInterface::SEARCH_FORM
             ***REMOVED***,
             self::ALL_COLUMNS,
             self::ALL_USERTYPES,

@@ -2,6 +2,7 @@
 namespace Gear\Integration\Suite\SrcMvc;
 
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
+use GearBase\Util\String\StringService;
 
 /**
  * PHP Version 5
@@ -35,6 +36,7 @@ class SrcMvcMinorSuite extends MvcMinorSuite
         parent::__construct($majorSuite, $columnType, $userType, $constraints, $tableAssoc);
         $this->type = $type;
         $this->longName = $useLongName;
+        $this->stringService = new StringService();
 
         return $this;
     }
@@ -45,7 +47,7 @@ class SrcMvcMinorSuite extends MvcMinorSuite
             $this->locationKey = sprintf(
                 '%s/%s',
                 $this->getMajorSuite()->getSuite(),
-                sprintf(self::SUITE, strtolower($this->getType()))
+                sprintf(self::SUITE, $this->stringService->str('url', $this->getType()))
             );
         }
         return $this->locationKey;

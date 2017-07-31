@@ -1,51 +1,585 @@
 src:
-    - { db: SrcMvcBsc, type: Entity, name: SrcMvcBsc, user: all, columns: {  } }
-    - { db: SrcMvcBscUpl, type: Entity, name: SrcMvcBscUpl, user: all, columns: {  } }
-    - { name: UploadImage, type: Entity, db: UploadImage }
-    - { db: SrcMvcBscUni, type: Entity, name: SrcMvcBscUni, user: all, columns: {  } }
-    - { db: SrcMvcBscUniUpl, type: Entity, name: SrcMvcBscUniUpl, user: all, columns: {  } }
-    - { db: SrcMvcBscNul, type: Entity, name: SrcMvcBscNul, user: all, columns: {  } }
-    - { db: SrcMvcBscNulUpl, type: Entity, name: SrcMvcBscNulUpl, user: all, columns: {  } }
-    - { db: SrcMvcBscUniNul, type: Entity, name: SrcMvcBscUniNul, user: all, columns: {  } }
-    - { db: SrcMvcBscUniNulUpl, type: Entity, name: SrcMvcBscUniNulUpl, user: all, columns: {  } }
-    - { db: SrcMvcBscLws, type: Entity, name: SrcMvcBscLws, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsUpl, type: Entity, name: SrcMvcBscLwsUpl, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsUni, type: Entity, name: SrcMvcBscLwsUni, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsUniUpl, type: Entity, name: SrcMvcBscLwsUniUpl, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsNul, type: Entity, name: SrcMvcBscLwsNul, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsNulUpl, type: Entity, name: SrcMvcBscLwsNulUpl, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsUniNul, type: Entity, name: SrcMvcBscLwsUniNul, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscLwsUniNulUpl, type: Entity, name: SrcMvcBscLwsUniNulUpl, user: low-strict, columns: {  } }
-    - { db: SrcMvcBscStr, type: Entity, name: SrcMvcBscStr, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrUpl, type: Entity, name: SrcMvcBscStrUpl, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrUni, type: Entity, name: SrcMvcBscStrUni, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrUniUpl, type: Entity, name: SrcMvcBscStrUniUpl, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrNul, type: Entity, name: SrcMvcBscStrNul, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrNulUpl, type: Entity, name: SrcMvcBscStrNulUpl, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrUniNul, type: Entity, name: SrcMvcBscStrUniNul, user: strict, columns: {  } }
-    - { db: SrcMvcBscStrUniNulUpl, type: Entity, name: SrcMvcBscStrUniNulUpl, user: strict, columns: {  } }
-    - { db: SrcMvcCmp, type: Entity, name: SrcMvcCmp, user: all, columns: { clm_txt_htl_cmp: html, clm_dec_mny_cmp: money-pt-br, clm_boo_chb_cmp: checkbox, clm_int_chb_cmp: checkbox, clm_dtt_pt_cmp: datetime-pt-br, clm_dat_pt_cmp: date-pt-br, clm_vrc_pas_ver_cmp: password-verify, clm_vrc_upl_img_cmp: upload-image, clm_vrc_url_cmp: url, clm_vrc_uni_id_cmp: unique-id, clm_vrc_tel_cmp: telephone, clm_vrc_eml_cmp: email } }
-    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
-    - { db: SrcMvcCmpUpl, type: Entity, name: SrcMvcCmpUpl, user: all, columns: { clm_txt_htl_cmp_upl: html, clm_dec_mny_cmp_upl: money-pt-br, clm_boo_chb_cmp_upl: checkbox, clm_int_chb_cmp_upl: checkbox, clm_dtt_pt_cmp_upl: datetime-pt-br, clm_dat_pt_cmp_upl: date-pt-br, clm_vrc_pas_ver_cmp_upl: password-verify, clm_vrc_upl_img_cmp_upl: upload-image, clm_vrc_url_cmp_upl: url, clm_vrc_uni_id_cmp_upl: unique-id, clm_vrc_tel_cmp_upl: telephone, clm_vrc_eml_cmp_upl: email } }
-    - { db: SrcMvcCmpUni, type: Entity, name: SrcMvcCmpUni, user: all, columns: { clm_txt_htl_cmp_uni: html, clm_dec_mny_cmp_uni: money-pt-br, clm_boo_chb_cmp_uni: checkbox, clm_int_chb_cmp_uni: checkbox, clm_dtt_pt_cmp_uni: datetime-pt-br, clm_dat_pt_cmp_uni: date-pt-br, clm_vrc_pas_ver_cmp_uni: password-verify, clm_vrc_upl_img_cmp_uni: upload-image, clm_vrc_url_cmp_uni: url, clm_vrc_uni_id_cmp_uni: unique-id, clm_vrc_tel_cmp_uni: telephone, clm_vrc_eml_cmp_uni: email } }
-    - { db: SrcMvcCmpUniUpl, type: Entity, name: SrcMvcCmpUniUpl, user: all, columns: { clm_txt_htl_cmp_uni_upl: html, clm_dec_mny_cmp_uni_upl: money-pt-br, clm_boo_chb_cmp_uni_upl: checkbox, clm_int_chb_cmp_uni_upl: checkbox, clm_dtt_pt_cmp_uni_upl: datetime-pt-br, clm_dat_pt_cmp_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_upl: password-verify, clm_vrc_upl_img_cmp_uni_upl: upload-image, clm_vrc_url_cmp_uni_upl: url, clm_vrc_uni_id_cmp_uni_upl: unique-id, clm_vrc_tel_cmp_uni_upl: telephone, clm_vrc_eml_cmp_uni_upl: email } }
-    - { db: SrcMvcCmpNul, type: Entity, name: SrcMvcCmpNul, user: all, columns: { clm_txt_htl_cmp_nul: html, clm_dec_mny_cmp_nul: money-pt-br, clm_boo_chb_cmp_nul: checkbox, clm_int_chb_cmp_nul: checkbox, clm_dtt_pt_cmp_nul: datetime-pt-br, clm_dat_pt_cmp_nul: date-pt-br, clm_vrc_pas_ver_cmp_nul: password-verify, clm_vrc_upl_img_cmp_nul: upload-image, clm_vrc_url_cmp_nul: url, clm_vrc_uni_id_cmp_nul: unique-id, clm_vrc_tel_cmp_nul: telephone, clm_vrc_eml_cmp_nul: email } }
-    - { db: SrcMvcCmpNulUpl, type: Entity, name: SrcMvcCmpNulUpl, user: all, columns: { clm_txt_htl_cmp_nul_upl: html, clm_dec_mny_cmp_nul_upl: money-pt-br, clm_boo_chb_cmp_nul_upl: checkbox, clm_int_chb_cmp_nul_upl: checkbox, clm_dtt_pt_cmp_nul_upl: datetime-pt-br, clm_dat_pt_cmp_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_nul_upl: password-verify, clm_vrc_upl_img_cmp_nul_upl: upload-image, clm_vrc_url_cmp_nul_upl: url, clm_vrc_uni_id_cmp_nul_upl: unique-id, clm_vrc_tel_cmp_nul_upl: telephone, clm_vrc_eml_cmp_nul_upl: email } }
-    - { db: SrcMvcCmpUniNul, type: Entity, name: SrcMvcCmpUniNul, user: all, columns: { clm_txt_htl_cmp_uni_nul: html, clm_dec_mny_cmp_uni_nul: money-pt-br, clm_boo_chb_cmp_uni_nul: checkbox, clm_int_chb_cmp_uni_nul: checkbox, clm_dtt_pt_cmp_uni_nul: datetime-pt-br, clm_dat_pt_cmp_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul: password-verify, clm_vrc_upl_img_cmp_uni_nul: upload-image, clm_vrc_url_cmp_uni_nul: url, clm_vrc_uni_id_cmp_uni_nul: unique-id, clm_vrc_tel_cmp_uni_nul: telephone, clm_vrc_eml_cmp_uni_nul: email } }
-    - { db: SrcMvcCmpUniNulUpl, type: Entity, name: SrcMvcCmpUniNulUpl, user: all, columns: { clm_txt_htl_cmp_uni_nul_upl: html, clm_dec_mny_cmp_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_uni_nul_upl: checkbox, clm_int_chb_cmp_uni_nul_upl: checkbox, clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_uni_nul_upl: upload-image, clm_vrc_url_cmp_uni_nul_upl: url, clm_vrc_uni_id_cmp_uni_nul_upl: unique-id, clm_vrc_tel_cmp_uni_nul_upl: telephone, clm_vrc_eml_cmp_uni_nul_upl: email } }
-    - { db: SrcMvcCmpLws, type: Entity, name: SrcMvcCmpLws, user: low-strict, columns: { clm_txt_htl_cmp_lws: html, clm_dec_mny_cmp_lws: money-pt-br, clm_boo_chb_cmp_lws: checkbox, clm_int_chb_cmp_lws: checkbox, clm_dtt_pt_cmp_lws: datetime-pt-br, clm_dat_pt_cmp_lws: date-pt-br, clm_vrc_pas_ver_cmp_lws: password-verify, clm_vrc_upl_img_cmp_lws: upload-image, clm_vrc_url_cmp_lws: url, clm_vrc_uni_id_cmp_lws: unique-id, clm_vrc_tel_cmp_lws: telephone, clm_vrc_eml_cmp_lws: email } }
-    - { db: SrcMvcCmpLwsUpl, type: Entity, name: SrcMvcCmpLwsUpl, user: low-strict, columns: { clm_txt_htl_cmp_lws_upl: html, clm_dec_mny_cmp_lws_upl: money-pt-br, clm_boo_chb_cmp_lws_upl: checkbox, clm_int_chb_cmp_lws_upl: checkbox, clm_dtt_pt_cmp_lws_upl: datetime-pt-br, clm_dat_pt_cmp_lws_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_upl: password-verify, clm_vrc_upl_img_cmp_lws_upl: upload-image, clm_vrc_url_cmp_lws_upl: url, clm_vrc_uni_id_cmp_lws_upl: unique-id, clm_vrc_tel_cmp_lws_upl: telephone, clm_vrc_eml_cmp_lws_upl: email } }
-    - { db: SrcMvcCmpLwsUni, type: Entity, name: SrcMvcCmpLwsUni, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni: html, clm_dec_mny_cmp_lws_uni: money-pt-br, clm_boo_chb_cmp_lws_uni: checkbox, clm_int_chb_cmp_lws_uni: checkbox, clm_dtt_pt_cmp_lws_uni: datetime-pt-br, clm_dat_pt_cmp_lws_uni: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni: password-verify, clm_vrc_upl_img_cmp_lws_uni: upload-image, clm_vrc_url_cmp_lws_uni: url, clm_vrc_uni_id_cmp_lws_uni: unique-id, clm_vrc_tel_cmp_lws_uni: telephone, clm_vrc_eml_cmp_lws_uni: email } }
-    - { db: SrcMvcCmpLwsUniUpl, type: Entity, name: SrcMvcCmpLwsUniUpl, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_upl: html, clm_dec_mny_cmp_lws_uni_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_upl: checkbox, clm_int_chb_cmp_lws_uni_upl: checkbox, clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_upl: upload-image, clm_vrc_url_cmp_lws_uni_upl: url, clm_vrc_uni_id_cmp_lws_uni_upl: unique-id, clm_vrc_tel_cmp_lws_uni_upl: telephone, clm_vrc_eml_cmp_lws_uni_upl: email } }
-    - { db: SrcMvcCmpLwsNul, type: Entity, name: SrcMvcCmpLwsNul, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul: html, clm_dec_mny_cmp_lws_nul: money-pt-br, clm_boo_chb_cmp_lws_nul: checkbox, clm_int_chb_cmp_lws_nul: checkbox, clm_dtt_pt_cmp_lws_nul: datetime-pt-br, clm_dat_pt_cmp_lws_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul: password-verify, clm_vrc_upl_img_cmp_lws_nul: upload-image, clm_vrc_url_cmp_lws_nul: url, clm_vrc_uni_id_cmp_lws_nul: unique-id, clm_vrc_tel_cmp_lws_nul: telephone, clm_vrc_eml_cmp_lws_nul: email } }
-    - { db: SrcMvcCmpLwsNulUpl, type: Entity, name: SrcMvcCmpLwsNulUpl, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul_upl: html, clm_dec_mny_cmp_lws_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_nul_upl: checkbox, clm_int_chb_cmp_lws_nul_upl: checkbox, clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_nul_upl: upload-image, clm_vrc_url_cmp_lws_nul_upl: url, clm_vrc_uni_id_cmp_lws_nul_upl: unique-id, clm_vrc_tel_cmp_lws_nul_upl: telephone, clm_vrc_eml_cmp_lws_nul_upl: email } }
-    - { db: SrcMvcCmpLwsUniNul, type: Entity, name: SrcMvcCmpLwsUniNul, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul: html, clm_dec_mny_cmp_lws_uni_nul: money-pt-br, clm_boo_chb_cmp_lws_uni_nul: checkbox, clm_int_chb_cmp_lws_uni_nul: checkbox, clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul: upload-image, clm_vrc_url_cmp_lws_uni_nul: url, clm_vrc_uni_id_cmp_lws_uni_nul: unique-id, clm_vrc_tel_cmp_lws_uni_nul: telephone, clm_vrc_eml_cmp_lws_uni_nul: email } }
-    - { db: SrcMvcCmpLwsUniNulUpl, type: Entity, name: SrcMvcCmpLwsUniNulUpl, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul_upl: html, clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_nul_upl: checkbox, clm_int_chb_cmp_lws_uni_nul_upl: checkbox, clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image, clm_vrc_url_cmp_lws_uni_nul_upl: url, clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id, clm_vrc_tel_cmp_lws_uni_nul_upl: telephone, clm_vrc_eml_cmp_lws_uni_nul_upl: email } }
-    - { db: SrcMvcCmpStr, type: Entity, name: SrcMvcCmpStr, user: strict, columns: { clm_txt_htl_cmp_str: html, clm_dec_mny_cmp_str: money-pt-br, clm_boo_chb_cmp_str: checkbox, clm_int_chb_cmp_str: checkbox, clm_dtt_pt_cmp_str: datetime-pt-br, clm_dat_pt_cmp_str: date-pt-br, clm_vrc_pas_ver_cmp_str: password-verify, clm_vrc_upl_img_cmp_str: upload-image, clm_vrc_url_cmp_str: url, clm_vrc_uni_id_cmp_str: unique-id, clm_vrc_tel_cmp_str: telephone, clm_vrc_eml_cmp_str: email } }
-    - { db: SrcMvcCmpStrUpl, type: Entity, name: SrcMvcCmpStrUpl, user: strict, columns: { clm_txt_htl_cmp_str_upl: html, clm_dec_mny_cmp_str_upl: money-pt-br, clm_boo_chb_cmp_str_upl: checkbox, clm_int_chb_cmp_str_upl: checkbox, clm_dtt_pt_cmp_str_upl: datetime-pt-br, clm_dat_pt_cmp_str_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_upl: password-verify, clm_vrc_upl_img_cmp_str_upl: upload-image, clm_vrc_url_cmp_str_upl: url, clm_vrc_uni_id_cmp_str_upl: unique-id, clm_vrc_tel_cmp_str_upl: telephone, clm_vrc_eml_cmp_str_upl: email } }
-    - { db: SrcMvcCmpStrUni, type: Entity, name: SrcMvcCmpStrUni, user: strict, columns: { clm_txt_htl_cmp_str_uni: html, clm_dec_mny_cmp_str_uni: money-pt-br, clm_boo_chb_cmp_str_uni: checkbox, clm_int_chb_cmp_str_uni: checkbox, clm_dtt_pt_cmp_str_uni: datetime-pt-br, clm_dat_pt_cmp_str_uni: date-pt-br, clm_vrc_pas_ver_cmp_str_uni: password-verify, clm_vrc_upl_img_cmp_str_uni: upload-image, clm_vrc_url_cmp_str_uni: url, clm_vrc_uni_id_cmp_str_uni: unique-id, clm_vrc_tel_cmp_str_uni: telephone, clm_vrc_eml_cmp_str_uni: email } }
-    - { db: SrcMvcCmpStrUniUpl, type: Entity, name: SrcMvcCmpStrUniUpl, user: strict, columns: { clm_txt_htl_cmp_str_uni_upl: html, clm_dec_mny_cmp_str_uni_upl: money-pt-br, clm_boo_chb_cmp_str_uni_upl: checkbox, clm_int_chb_cmp_str_uni_upl: checkbox, clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_upl: upload-image, clm_vrc_url_cmp_str_uni_upl: url, clm_vrc_uni_id_cmp_str_uni_upl: unique-id, clm_vrc_tel_cmp_str_uni_upl: telephone, clm_vrc_eml_cmp_str_uni_upl: email } }
-    - { db: SrcMvcCmpStrNul, type: Entity, name: SrcMvcCmpStrNul, user: strict, columns: { clm_txt_htl_cmp_str_nul: html, clm_dec_mny_cmp_str_nul: money-pt-br, clm_boo_chb_cmp_str_nul: checkbox, clm_int_chb_cmp_str_nul: checkbox, clm_dtt_pt_cmp_str_nul: datetime-pt-br, clm_dat_pt_cmp_str_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_nul: password-verify, clm_vrc_upl_img_cmp_str_nul: upload-image, clm_vrc_url_cmp_str_nul: url, clm_vrc_uni_id_cmp_str_nul: unique-id, clm_vrc_tel_cmp_str_nul: telephone, clm_vrc_eml_cmp_str_nul: email } }
-    - { db: SrcMvcCmpStrNulUpl, type: Entity, name: SrcMvcCmpStrNulUpl, user: strict, columns: { clm_txt_htl_cmp_str_nul_upl: html, clm_dec_mny_cmp_str_nul_upl: money-pt-br, clm_boo_chb_cmp_str_nul_upl: checkbox, clm_int_chb_cmp_str_nul_upl: checkbox, clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_nul_upl: upload-image, clm_vrc_url_cmp_str_nul_upl: url, clm_vrc_uni_id_cmp_str_nul_upl: unique-id, clm_vrc_tel_cmp_str_nul_upl: telephone, clm_vrc_eml_cmp_str_nul_upl: email } }
-    - { db: SrcMvcCmpStrUniNul, type: Entity, name: SrcMvcCmpStrUniNul, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul: html, clm_dec_mny_cmp_str_uni_nul: money-pt-br, clm_boo_chb_cmp_str_uni_nul: checkbox, clm_int_chb_cmp_str_uni_nul: checkbox, clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul: password-verify, clm_vrc_upl_img_cmp_str_uni_nul: upload-image, clm_vrc_url_cmp_str_uni_nul: url, clm_vrc_uni_id_cmp_str_uni_nul: unique-id, clm_vrc_tel_cmp_str_uni_nul: telephone, clm_vrc_eml_cmp_str_uni_nul: email } }
-    - { db: SrcMvcCmpStrUniNulUpl, type: Entity, name: SrcMvcCmpStrUniNulUpl, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul_upl: html, clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_str_uni_nul_upl: checkbox, clm_int_chb_cmp_str_uni_nul_upl: checkbox, clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image, clm_vrc_url_cmp_str_uni_nul_upl: url, clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id, clm_vrc_tel_cmp_str_uni_nul_upl: telephone, clm_vrc_eml_cmp_str_uni_nul_upl: email } }
+    -
+        db: SrcMvcBsc
+        type: Entity
+        name: SrcMvcBsc
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscUpl
+        type: Entity
+        name: SrcMvcBscUpl
+        user: all
+        columns: {  }
+    -
+        name: UploadImage
+        type: Entity
+        db: UploadImage
+    -
+        db: SrcMvcBscUni
+        type: Entity
+        name: SrcMvcBscUni
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscUniUpl
+        type: Entity
+        name: SrcMvcBscUniUpl
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscNul
+        type: Entity
+        name: SrcMvcBscNul
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscNulUpl
+        type: Entity
+        name: SrcMvcBscNulUpl
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscUniNul
+        type: Entity
+        name: SrcMvcBscUniNul
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscUniNulUpl
+        type: Entity
+        name: SrcMvcBscUniNulUpl
+        user: all
+        columns: {  }
+    -
+        db: SrcMvcBscLws
+        type: Entity
+        name: SrcMvcBscLws
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsUpl
+        type: Entity
+        name: SrcMvcBscLwsUpl
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsUni
+        type: Entity
+        name: SrcMvcBscLwsUni
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsUniUpl
+        type: Entity
+        name: SrcMvcBscLwsUniUpl
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsNul
+        type: Entity
+        name: SrcMvcBscLwsNul
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsNulUpl
+        type: Entity
+        name: SrcMvcBscLwsNulUpl
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsUniNul
+        type: Entity
+        name: SrcMvcBscLwsUniNul
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscLwsUniNulUpl
+        type: Entity
+        name: SrcMvcBscLwsUniNulUpl
+        user: low-strict
+        columns: {  }
+    -
+        db: SrcMvcBscStr
+        type: Entity
+        name: SrcMvcBscStr
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrUpl
+        type: Entity
+        name: SrcMvcBscStrUpl
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrUni
+        type: Entity
+        name: SrcMvcBscStrUni
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrUniUpl
+        type: Entity
+        name: SrcMvcBscStrUniUpl
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrNul
+        type: Entity
+        name: SrcMvcBscStrNul
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrNulUpl
+        type: Entity
+        name: SrcMvcBscStrNulUpl
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrUniNul
+        type: Entity
+        name: SrcMvcBscStrUniNul
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcBscStrUniNulUpl
+        type: Entity
+        name: SrcMvcBscStrUniNulUpl
+        user: strict
+        columns: {  }
+    -
+        db: SrcMvcCmp
+        type: Entity
+        name: SrcMvcCmp
+        user: all
+        columns:
+            clm_txt_htl_cmp: html
+            clm_dec_mny_cmp: money-pt-br
+            clm_boo_chb_cmp: checkbox
+            clm_int_chb_cmp: checkbox
+            clm_dtt_pt_cmp: datetime-pt-br
+            clm_dat_pt_cmp: date-pt-br
+            clm_vrc_pas_ver_cmp: password-verify
+            clm_vrc_upl_img_cmp: upload-image
+            clm_vrc_url_cmp: url
+            clm_vrc_uni_id_cmp: unique-id
+            clm_vrc_tel_cmp: telephone
+            clm_vrc_eml_cmp: email
+    -
+        name: ColumnIntForeign
+        type: Entity
+        db: ColumnIntForeign
+    -
+        db: SrcMvcCmpUpl
+        type: Entity
+        name: SrcMvcCmpUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_upl: html
+            clm_dec_mny_cmp_upl: money-pt-br
+            clm_boo_chb_cmp_upl: checkbox
+            clm_int_chb_cmp_upl: checkbox
+            clm_dtt_pt_cmp_upl: datetime-pt-br
+            clm_dat_pt_cmp_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_upl: password-verify
+            clm_vrc_upl_img_cmp_upl: upload-image
+            clm_vrc_url_cmp_upl: url
+            clm_vrc_uni_id_cmp_upl: unique-id
+            clm_vrc_tel_cmp_upl: telephone
+            clm_vrc_eml_cmp_upl: email
+    -
+        db: SrcMvcCmpUni
+        type: Entity
+        name: SrcMvcCmpUni
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni: html
+            clm_dec_mny_cmp_uni: money-pt-br
+            clm_boo_chb_cmp_uni: checkbox
+            clm_int_chb_cmp_uni: checkbox
+            clm_dtt_pt_cmp_uni: datetime-pt-br
+            clm_dat_pt_cmp_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_uni: password-verify
+            clm_vrc_upl_img_cmp_uni: upload-image
+            clm_vrc_url_cmp_uni: url
+            clm_vrc_uni_id_cmp_uni: unique-id
+            clm_vrc_tel_cmp_uni: telephone
+            clm_vrc_eml_cmp_uni: email
+    -
+        db: SrcMvcCmpUniUpl
+        type: Entity
+        name: SrcMvcCmpUniUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_upl: html
+            clm_dec_mny_cmp_uni_upl: money-pt-br
+            clm_boo_chb_cmp_uni_upl: checkbox
+            clm_int_chb_cmp_uni_upl: checkbox
+            clm_dtt_pt_cmp_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_upl: upload-image
+            clm_vrc_url_cmp_uni_upl: url
+            clm_vrc_uni_id_cmp_uni_upl: unique-id
+            clm_vrc_tel_cmp_uni_upl: telephone
+            clm_vrc_eml_cmp_uni_upl: email
+    -
+        db: SrcMvcCmpNul
+        type: Entity
+        name: SrcMvcCmpNul
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul: html
+            clm_dec_mny_cmp_nul: money-pt-br
+            clm_boo_chb_cmp_nul: checkbox
+            clm_int_chb_cmp_nul: checkbox
+            clm_dtt_pt_cmp_nul: datetime-pt-br
+            clm_dat_pt_cmp_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_nul: password-verify
+            clm_vrc_upl_img_cmp_nul: upload-image
+            clm_vrc_url_cmp_nul: url
+            clm_vrc_uni_id_cmp_nul: unique-id
+            clm_vrc_tel_cmp_nul: telephone
+            clm_vrc_eml_cmp_nul: email
+    -
+        db: SrcMvcCmpNulUpl
+        type: Entity
+        name: SrcMvcCmpNulUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul_upl: html
+            clm_dec_mny_cmp_nul_upl: money-pt-br
+            clm_boo_chb_cmp_nul_upl: checkbox
+            clm_int_chb_cmp_nul_upl: checkbox
+            clm_dtt_pt_cmp_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_nul_upl: upload-image
+            clm_vrc_url_cmp_nul_upl: url
+            clm_vrc_uni_id_cmp_nul_upl: unique-id
+            clm_vrc_tel_cmp_nul_upl: telephone
+            clm_vrc_eml_cmp_nul_upl: email
+    -
+        db: SrcMvcCmpUniNul
+        type: Entity
+        name: SrcMvcCmpUniNul
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul: html
+            clm_dec_mny_cmp_uni_nul: money-pt-br
+            clm_boo_chb_cmp_uni_nul: checkbox
+            clm_int_chb_cmp_uni_nul: checkbox
+            clm_dtt_pt_cmp_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_uni_nul: upload-image
+            clm_vrc_url_cmp_uni_nul: url
+            clm_vrc_uni_id_cmp_uni_nul: unique-id
+            clm_vrc_tel_cmp_uni_nul: telephone
+            clm_vrc_eml_cmp_uni_nul: email
+    -
+        db: SrcMvcCmpUniNulUpl
+        type: Entity
+        name: SrcMvcCmpUniNulUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul_upl: html
+            clm_dec_mny_cmp_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_uni_nul_upl: checkbox
+            clm_int_chb_cmp_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_uni_nul_upl: email
+    -
+        db: SrcMvcCmpLws
+        type: Entity
+        name: SrcMvcCmpLws
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws: html
+            clm_dec_mny_cmp_lws: money-pt-br
+            clm_boo_chb_cmp_lws: checkbox
+            clm_int_chb_cmp_lws: checkbox
+            clm_dtt_pt_cmp_lws: datetime-pt-br
+            clm_dat_pt_cmp_lws: date-pt-br
+            clm_vrc_pas_ver_cmp_lws: password-verify
+            clm_vrc_upl_img_cmp_lws: upload-image
+            clm_vrc_url_cmp_lws: url
+            clm_vrc_uni_id_cmp_lws: unique-id
+            clm_vrc_tel_cmp_lws: telephone
+            clm_vrc_eml_cmp_lws: email
+    -
+        db: SrcMvcCmpLwsUpl
+        type: Entity
+        name: SrcMvcCmpLwsUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_upl: html
+            clm_dec_mny_cmp_lws_upl: money-pt-br
+            clm_boo_chb_cmp_lws_upl: checkbox
+            clm_int_chb_cmp_lws_upl: checkbox
+            clm_dtt_pt_cmp_lws_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_upl: upload-image
+            clm_vrc_url_cmp_lws_upl: url
+            clm_vrc_uni_id_cmp_lws_upl: unique-id
+            clm_vrc_tel_cmp_lws_upl: telephone
+            clm_vrc_eml_cmp_lws_upl: email
+    -
+        db: SrcMvcCmpLwsUni
+        type: Entity
+        name: SrcMvcCmpLwsUni
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni: html
+            clm_dec_mny_cmp_lws_uni: money-pt-br
+            clm_boo_chb_cmp_lws_uni: checkbox
+            clm_int_chb_cmp_lws_uni: checkbox
+            clm_dtt_pt_cmp_lws_uni: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni: password-verify
+            clm_vrc_upl_img_cmp_lws_uni: upload-image
+            clm_vrc_url_cmp_lws_uni: url
+            clm_vrc_uni_id_cmp_lws_uni: unique-id
+            clm_vrc_tel_cmp_lws_uni: telephone
+            clm_vrc_eml_cmp_lws_uni: email
+    -
+        db: SrcMvcCmpLwsUniUpl
+        type: Entity
+        name: SrcMvcCmpLwsUniUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_upl: html
+            clm_dec_mny_cmp_lws_uni_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_upl: checkbox
+            clm_int_chb_cmp_lws_uni_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_upl: email
+    -
+        db: SrcMvcCmpLwsNul
+        type: Entity
+        name: SrcMvcCmpLwsNul
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul: html
+            clm_dec_mny_cmp_lws_nul: money-pt-br
+            clm_boo_chb_cmp_lws_nul: checkbox
+            clm_int_chb_cmp_lws_nul: checkbox
+            clm_dtt_pt_cmp_lws_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_nul: upload-image
+            clm_vrc_url_cmp_lws_nul: url
+            clm_vrc_uni_id_cmp_lws_nul: unique-id
+            clm_vrc_tel_cmp_lws_nul: telephone
+            clm_vrc_eml_cmp_lws_nul: email
+    -
+        db: SrcMvcCmpLwsNulUpl
+        type: Entity
+        name: SrcMvcCmpLwsNulUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul_upl: html
+            clm_dec_mny_cmp_lws_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_nul_upl: checkbox
+            clm_int_chb_cmp_lws_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_nul_upl: email
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Entity
+        name: SrcMvcCmpLwsUniNul
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+    -
+        db: SrcMvcCmpLwsUniNulUpl
+        type: Entity
+        name: SrcMvcCmpLwsUniNulUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul_upl: html
+            clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_int_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_nul_upl: email
+    -
+        db: SrcMvcCmpStr
+        type: Entity
+        name: SrcMvcCmpStr
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str: html
+            clm_dec_mny_cmp_str: money-pt-br
+            clm_boo_chb_cmp_str: checkbox
+            clm_int_chb_cmp_str: checkbox
+            clm_dtt_pt_cmp_str: datetime-pt-br
+            clm_dat_pt_cmp_str: date-pt-br
+            clm_vrc_pas_ver_cmp_str: password-verify
+            clm_vrc_upl_img_cmp_str: upload-image
+            clm_vrc_url_cmp_str: url
+            clm_vrc_uni_id_cmp_str: unique-id
+            clm_vrc_tel_cmp_str: telephone
+            clm_vrc_eml_cmp_str: email
+    -
+        db: SrcMvcCmpStrUpl
+        type: Entity
+        name: SrcMvcCmpStrUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_upl: html
+            clm_dec_mny_cmp_str_upl: money-pt-br
+            clm_boo_chb_cmp_str_upl: checkbox
+            clm_int_chb_cmp_str_upl: checkbox
+            clm_dtt_pt_cmp_str_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_upl: password-verify
+            clm_vrc_upl_img_cmp_str_upl: upload-image
+            clm_vrc_url_cmp_str_upl: url
+            clm_vrc_uni_id_cmp_str_upl: unique-id
+            clm_vrc_tel_cmp_str_upl: telephone
+            clm_vrc_eml_cmp_str_upl: email
+    -
+        db: SrcMvcCmpStrUni
+        type: Entity
+        name: SrcMvcCmpStrUni
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni: html
+            clm_dec_mny_cmp_str_uni: money-pt-br
+            clm_boo_chb_cmp_str_uni: checkbox
+            clm_int_chb_cmp_str_uni: checkbox
+            clm_dtt_pt_cmp_str_uni: datetime-pt-br
+            clm_dat_pt_cmp_str_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni: password-verify
+            clm_vrc_upl_img_cmp_str_uni: upload-image
+            clm_vrc_url_cmp_str_uni: url
+            clm_vrc_uni_id_cmp_str_uni: unique-id
+            clm_vrc_tel_cmp_str_uni: telephone
+            clm_vrc_eml_cmp_str_uni: email
+    -
+        db: SrcMvcCmpStrUniUpl
+        type: Entity
+        name: SrcMvcCmpStrUniUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_upl: html
+            clm_dec_mny_cmp_str_uni_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_upl: checkbox
+            clm_int_chb_cmp_str_uni_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_upl: upload-image
+            clm_vrc_url_cmp_str_uni_upl: url
+            clm_vrc_uni_id_cmp_str_uni_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_upl: telephone
+            clm_vrc_eml_cmp_str_uni_upl: email
+    -
+        db: SrcMvcCmpStrNul
+        type: Entity
+        name: SrcMvcCmpStrNul
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul: html
+            clm_dec_mny_cmp_str_nul: money-pt-br
+            clm_boo_chb_cmp_str_nul: checkbox
+            clm_int_chb_cmp_str_nul: checkbox
+            clm_dtt_pt_cmp_str_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul: password-verify
+            clm_vrc_upl_img_cmp_str_nul: upload-image
+            clm_vrc_url_cmp_str_nul: url
+            clm_vrc_uni_id_cmp_str_nul: unique-id
+            clm_vrc_tel_cmp_str_nul: telephone
+            clm_vrc_eml_cmp_str_nul: email
+    -
+        db: SrcMvcCmpStrNulUpl
+        type: Entity
+        name: SrcMvcCmpStrNulUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul_upl: html
+            clm_dec_mny_cmp_str_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_nul_upl: checkbox
+            clm_int_chb_cmp_str_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_nul_upl: upload-image
+            clm_vrc_url_cmp_str_nul_upl: url
+            clm_vrc_uni_id_cmp_str_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_nul_upl: telephone
+            clm_vrc_eml_cmp_str_nul_upl: email
+    -
+        db: SrcMvcCmpStrUniNul
+        type: Entity
+        name: SrcMvcCmpStrUniNul
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul: html
+            clm_dec_mny_cmp_str_uni_nul: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul: checkbox
+            clm_int_chb_cmp_str_uni_nul: checkbox
+            clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul: upload-image
+            clm_vrc_url_cmp_str_uni_nul: url
+            clm_vrc_uni_id_cmp_str_uni_nul: unique-id
+            clm_vrc_tel_cmp_str_uni_nul: telephone
+            clm_vrc_eml_cmp_str_uni_nul: email
+    -
+        db: SrcMvcCmpStrUniNulUpl
+        type: Entity
+        name: SrcMvcCmpStrUniNulUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul_upl: html
+            clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul_upl: checkbox
+            clm_int_chb_cmp_str_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_str_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_str_uni_nul_upl: email

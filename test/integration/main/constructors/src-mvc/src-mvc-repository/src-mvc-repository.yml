@@ -1,49 +1,817 @@
 src:
-    - { db: SrcMvcBsc, type: Repository, name: SrcMvcBscRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasic\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscUpl, type: Repository, name: SrcMvcBscUplRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscUni, type: Repository, name: SrcMvcBscUniRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscUniUpl, type: Repository, name: SrcMvcBscUniUplRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscNul, type: Repository, name: SrcMvcBscNulRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscNulUpl, type: Repository, name: SrcMvcBscNulUplRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscUniNul, type: Repository, name: SrcMvcBscUniNulRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscUniNulUpl, type: Repository, name: SrcMvcBscUniNulUplRepository, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLws, type: Repository, name: SrcMvcBscLwsRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrict\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsUpl, type: Repository, name: SrcMvcBscLwsUplRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsUni, type: Repository, name: SrcMvcBscLwsUniRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsUniUpl, type: Repository, name: SrcMvcBscLwsUniUplRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsNul, type: Repository, name: SrcMvcBscLwsNulRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsNulUpl, type: Repository, name: SrcMvcBscLwsNulUplRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsUniNul, type: Repository, name: SrcMvcBscLwsUniNulRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscLwsUniNulUpl, type: Repository, name: SrcMvcBscLwsUniNulUplRepository, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStr, type: Repository, name: SrcMvcBscStrRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrict\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrUpl, type: Repository, name: SrcMvcBscStrUplRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrUni, type: Repository, name: SrcMvcBscStrUniRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrUniUpl, type: Repository, name: SrcMvcBscStrUniUplRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrNul, type: Repository, name: SrcMvcBscStrNulRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrNulUpl, type: Repository, name: SrcMvcBscStrNulUplRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrUniNul, type: Repository, name: SrcMvcBscStrUniNulRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcBscStrUniNulUpl, type: Repository, name: SrcMvcBscStrUniNulUplRepository, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmp, type: Repository, name: SrcMvcCmpRepository, user: all, columns: { clm_txt_htl_cmp: html, clm_dec_mny_cmp: money-pt-br, clm_boo_chb_cmp: checkbox, clm_int_chb_cmp: checkbox, clm_dtt_pt_cmp: datetime-pt-br, clm_dat_pt_cmp: date-pt-br, clm_vrc_pas_ver_cmp: password-verify, clm_vrc_upl_img_cmp: upload-image, clm_vrc_url_cmp: url, clm_vrc_uni_id_cmp: unique-id, clm_vrc_tel_cmp: telephone, clm_vrc_eml_cmp: email }, service: factories, namespace: SrcMvcComplete\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpUpl, type: Repository, name: SrcMvcCmpUplRepository, user: all, columns: { clm_txt_htl_cmp_upl: html, clm_dec_mny_cmp_upl: money-pt-br, clm_boo_chb_cmp_upl: checkbox, clm_int_chb_cmp_upl: checkbox, clm_dtt_pt_cmp_upl: datetime-pt-br, clm_dat_pt_cmp_upl: date-pt-br, clm_vrc_pas_ver_cmp_upl: password-verify, clm_vrc_upl_img_cmp_upl: upload-image, clm_vrc_url_cmp_upl: url, clm_vrc_uni_id_cmp_upl: unique-id, clm_vrc_tel_cmp_upl: telephone, clm_vrc_eml_cmp_upl: email }, service: factories, namespace: SrcMvcCompleteUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpUni, type: Repository, name: SrcMvcCmpUniRepository, user: all, columns: { clm_txt_htl_cmp_uni: html, clm_dec_mny_cmp_uni: money-pt-br, clm_boo_chb_cmp_uni: checkbox, clm_int_chb_cmp_uni: checkbox, clm_dtt_pt_cmp_uni: datetime-pt-br, clm_dat_pt_cmp_uni: date-pt-br, clm_vrc_pas_ver_cmp_uni: password-verify, clm_vrc_upl_img_cmp_uni: upload-image, clm_vrc_url_cmp_uni: url, clm_vrc_uni_id_cmp_uni: unique-id, clm_vrc_tel_cmp_uni: telephone, clm_vrc_eml_cmp_uni: email }, service: factories, namespace: SrcMvcCompleteUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpUniUpl, type: Repository, name: SrcMvcCmpUniUplRepository, user: all, columns: { clm_txt_htl_cmp_uni_upl: html, clm_dec_mny_cmp_uni_upl: money-pt-br, clm_boo_chb_cmp_uni_upl: checkbox, clm_int_chb_cmp_uni_upl: checkbox, clm_dtt_pt_cmp_uni_upl: datetime-pt-br, clm_dat_pt_cmp_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_upl: password-verify, clm_vrc_upl_img_cmp_uni_upl: upload-image, clm_vrc_url_cmp_uni_upl: url, clm_vrc_uni_id_cmp_uni_upl: unique-id, clm_vrc_tel_cmp_uni_upl: telephone, clm_vrc_eml_cmp_uni_upl: email }, service: factories, namespace: SrcMvcCompleteUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpNul, type: Repository, name: SrcMvcCmpNulRepository, user: all, columns: { clm_txt_htl_cmp_nul: html, clm_dec_mny_cmp_nul: money-pt-br, clm_boo_chb_cmp_nul: checkbox, clm_int_chb_cmp_nul: checkbox, clm_dtt_pt_cmp_nul: datetime-pt-br, clm_dat_pt_cmp_nul: date-pt-br, clm_vrc_pas_ver_cmp_nul: password-verify, clm_vrc_upl_img_cmp_nul: upload-image, clm_vrc_url_cmp_nul: url, clm_vrc_uni_id_cmp_nul: unique-id, clm_vrc_tel_cmp_nul: telephone, clm_vrc_eml_cmp_nul: email }, service: factories, namespace: SrcMvcCompleteNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpNulUpl, type: Repository, name: SrcMvcCmpNulUplRepository, user: all, columns: { clm_txt_htl_cmp_nul_upl: html, clm_dec_mny_cmp_nul_upl: money-pt-br, clm_boo_chb_cmp_nul_upl: checkbox, clm_int_chb_cmp_nul_upl: checkbox, clm_dtt_pt_cmp_nul_upl: datetime-pt-br, clm_dat_pt_cmp_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_nul_upl: password-verify, clm_vrc_upl_img_cmp_nul_upl: upload-image, clm_vrc_url_cmp_nul_upl: url, clm_vrc_uni_id_cmp_nul_upl: unique-id, clm_vrc_tel_cmp_nul_upl: telephone, clm_vrc_eml_cmp_nul_upl: email }, service: factories, namespace: SrcMvcCompleteNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpUniNul, type: Repository, name: SrcMvcCmpUniNulRepository, user: all, columns: { clm_txt_htl_cmp_uni_nul: html, clm_dec_mny_cmp_uni_nul: money-pt-br, clm_boo_chb_cmp_uni_nul: checkbox, clm_int_chb_cmp_uni_nul: checkbox, clm_dtt_pt_cmp_uni_nul: datetime-pt-br, clm_dat_pt_cmp_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul: password-verify, clm_vrc_upl_img_cmp_uni_nul: upload-image, clm_vrc_url_cmp_uni_nul: url, clm_vrc_uni_id_cmp_uni_nul: unique-id, clm_vrc_tel_cmp_uni_nul: telephone, clm_vrc_eml_cmp_uni_nul: email }, service: factories, namespace: SrcMvcCompleteUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpUniNulUpl, type: Repository, name: SrcMvcCmpUniNulUplRepository, user: all, columns: { clm_txt_htl_cmp_uni_nul_upl: html, clm_dec_mny_cmp_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_uni_nul_upl: checkbox, clm_int_chb_cmp_uni_nul_upl: checkbox, clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_uni_nul_upl: upload-image, clm_vrc_url_cmp_uni_nul_upl: url, clm_vrc_uni_id_cmp_uni_nul_upl: unique-id, clm_vrc_tel_cmp_uni_nul_upl: telephone, clm_vrc_eml_cmp_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLws, type: Repository, name: SrcMvcCmpLwsRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws: html, clm_dec_mny_cmp_lws: money-pt-br, clm_boo_chb_cmp_lws: checkbox, clm_int_chb_cmp_lws: checkbox, clm_dtt_pt_cmp_lws: datetime-pt-br, clm_dat_pt_cmp_lws: date-pt-br, clm_vrc_pas_ver_cmp_lws: password-verify, clm_vrc_upl_img_cmp_lws: upload-image, clm_vrc_url_cmp_lws: url, clm_vrc_uni_id_cmp_lws: unique-id, clm_vrc_tel_cmp_lws: telephone, clm_vrc_eml_cmp_lws: email }, service: factories, namespace: SrcMvcCompleteLowStrict\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsUpl, type: Repository, name: SrcMvcCmpLwsUplRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_upl: html, clm_dec_mny_cmp_lws_upl: money-pt-br, clm_boo_chb_cmp_lws_upl: checkbox, clm_int_chb_cmp_lws_upl: checkbox, clm_dtt_pt_cmp_lws_upl: datetime-pt-br, clm_dat_pt_cmp_lws_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_upl: password-verify, clm_vrc_upl_img_cmp_lws_upl: upload-image, clm_vrc_url_cmp_lws_upl: url, clm_vrc_uni_id_cmp_lws_upl: unique-id, clm_vrc_tel_cmp_lws_upl: telephone, clm_vrc_eml_cmp_lws_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsUni, type: Repository, name: SrcMvcCmpLwsUniRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni: html, clm_dec_mny_cmp_lws_uni: money-pt-br, clm_boo_chb_cmp_lws_uni: checkbox, clm_int_chb_cmp_lws_uni: checkbox, clm_dtt_pt_cmp_lws_uni: datetime-pt-br, clm_dat_pt_cmp_lws_uni: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni: password-verify, clm_vrc_upl_img_cmp_lws_uni: upload-image, clm_vrc_url_cmp_lws_uni: url, clm_vrc_uni_id_cmp_lws_uni: unique-id, clm_vrc_tel_cmp_lws_uni: telephone, clm_vrc_eml_cmp_lws_uni: email }, service: factories, namespace: SrcMvcCompleteLowStrictUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsUniUpl, type: Repository, name: SrcMvcCmpLwsUniUplRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_upl: html, clm_dec_mny_cmp_lws_uni_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_upl: checkbox, clm_int_chb_cmp_lws_uni_upl: checkbox, clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_upl: upload-image, clm_vrc_url_cmp_lws_uni_upl: url, clm_vrc_uni_id_cmp_lws_uni_upl: unique-id, clm_vrc_tel_cmp_lws_uni_upl: telephone, clm_vrc_eml_cmp_lws_uni_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsNul, type: Repository, name: SrcMvcCmpLwsNulRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul: html, clm_dec_mny_cmp_lws_nul: money-pt-br, clm_boo_chb_cmp_lws_nul: checkbox, clm_int_chb_cmp_lws_nul: checkbox, clm_dtt_pt_cmp_lws_nul: datetime-pt-br, clm_dat_pt_cmp_lws_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul: password-verify, clm_vrc_upl_img_cmp_lws_nul: upload-image, clm_vrc_url_cmp_lws_nul: url, clm_vrc_uni_id_cmp_lws_nul: unique-id, clm_vrc_tel_cmp_lws_nul: telephone, clm_vrc_eml_cmp_lws_nul: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsNulUpl, type: Repository, name: SrcMvcCmpLwsNulUplRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul_upl: html, clm_dec_mny_cmp_lws_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_nul_upl: checkbox, clm_int_chb_cmp_lws_nul_upl: checkbox, clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_nul_upl: upload-image, clm_vrc_url_cmp_lws_nul_upl: url, clm_vrc_uni_id_cmp_lws_nul_upl: unique-id, clm_vrc_tel_cmp_lws_nul_upl: telephone, clm_vrc_eml_cmp_lws_nul_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsUniNul, type: Repository, name: SrcMvcCmpLwsUniNulRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul: html, clm_dec_mny_cmp_lws_uni_nul: money-pt-br, clm_boo_chb_cmp_lws_uni_nul: checkbox, clm_int_chb_cmp_lws_uni_nul: checkbox, clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul: upload-image, clm_vrc_url_cmp_lws_uni_nul: url, clm_vrc_uni_id_cmp_lws_uni_nul: unique-id, clm_vrc_tel_cmp_lws_uni_nul: telephone, clm_vrc_eml_cmp_lws_uni_nul: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpLwsUniNulUpl, type: Repository, name: SrcMvcCmpLwsUniNulUplRepository, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul_upl: html, clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_nul_upl: checkbox, clm_int_chb_cmp_lws_uni_nul_upl: checkbox, clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image, clm_vrc_url_cmp_lws_uni_nul_upl: url, clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id, clm_vrc_tel_cmp_lws_uni_nul_upl: telephone, clm_vrc_eml_cmp_lws_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStr, type: Repository, name: SrcMvcCmpStrRepository, user: strict, columns: { clm_txt_htl_cmp_str: html, clm_dec_mny_cmp_str: money-pt-br, clm_boo_chb_cmp_str: checkbox, clm_int_chb_cmp_str: checkbox, clm_dtt_pt_cmp_str: datetime-pt-br, clm_dat_pt_cmp_str: date-pt-br, clm_vrc_pas_ver_cmp_str: password-verify, clm_vrc_upl_img_cmp_str: upload-image, clm_vrc_url_cmp_str: url, clm_vrc_uni_id_cmp_str: unique-id, clm_vrc_tel_cmp_str: telephone, clm_vrc_eml_cmp_str: email }, service: factories, namespace: SrcMvcCompleteStrict\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrUpl, type: Repository, name: SrcMvcCmpStrUplRepository, user: strict, columns: { clm_txt_htl_cmp_str_upl: html, clm_dec_mny_cmp_str_upl: money-pt-br, clm_boo_chb_cmp_str_upl: checkbox, clm_int_chb_cmp_str_upl: checkbox, clm_dtt_pt_cmp_str_upl: datetime-pt-br, clm_dat_pt_cmp_str_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_upl: password-verify, clm_vrc_upl_img_cmp_str_upl: upload-image, clm_vrc_url_cmp_str_upl: url, clm_vrc_uni_id_cmp_str_upl: unique-id, clm_vrc_tel_cmp_str_upl: telephone, clm_vrc_eml_cmp_str_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrUni, type: Repository, name: SrcMvcCmpStrUniRepository, user: strict, columns: { clm_txt_htl_cmp_str_uni: html, clm_dec_mny_cmp_str_uni: money-pt-br, clm_boo_chb_cmp_str_uni: checkbox, clm_int_chb_cmp_str_uni: checkbox, clm_dtt_pt_cmp_str_uni: datetime-pt-br, clm_dat_pt_cmp_str_uni: date-pt-br, clm_vrc_pas_ver_cmp_str_uni: password-verify, clm_vrc_upl_img_cmp_str_uni: upload-image, clm_vrc_url_cmp_str_uni: url, clm_vrc_uni_id_cmp_str_uni: unique-id, clm_vrc_tel_cmp_str_uni: telephone, clm_vrc_eml_cmp_str_uni: email }, service: factories, namespace: SrcMvcCompleteStrictUnique\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrUniUpl, type: Repository, name: SrcMvcCmpStrUniUplRepository, user: strict, columns: { clm_txt_htl_cmp_str_uni_upl: html, clm_dec_mny_cmp_str_uni_upl: money-pt-br, clm_boo_chb_cmp_str_uni_upl: checkbox, clm_int_chb_cmp_str_uni_upl: checkbox, clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_upl: upload-image, clm_vrc_url_cmp_str_uni_upl: url, clm_vrc_uni_id_cmp_str_uni_upl: unique-id, clm_vrc_tel_cmp_str_uni_upl: telephone, clm_vrc_eml_cmp_str_uni_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrNul, type: Repository, name: SrcMvcCmpStrNulRepository, user: strict, columns: { clm_txt_htl_cmp_str_nul: html, clm_dec_mny_cmp_str_nul: money-pt-br, clm_boo_chb_cmp_str_nul: checkbox, clm_int_chb_cmp_str_nul: checkbox, clm_dtt_pt_cmp_str_nul: datetime-pt-br, clm_dat_pt_cmp_str_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_nul: password-verify, clm_vrc_upl_img_cmp_str_nul: upload-image, clm_vrc_url_cmp_str_nul: url, clm_vrc_uni_id_cmp_str_nul: unique-id, clm_vrc_tel_cmp_str_nul: telephone, clm_vrc_eml_cmp_str_nul: email }, service: factories, namespace: SrcMvcCompleteStrictNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrNulUpl, type: Repository, name: SrcMvcCmpStrNulUplRepository, user: strict, columns: { clm_txt_htl_cmp_str_nul_upl: html, clm_dec_mny_cmp_str_nul_upl: money-pt-br, clm_boo_chb_cmp_str_nul_upl: checkbox, clm_int_chb_cmp_str_nul_upl: checkbox, clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_nul_upl: upload-image, clm_vrc_url_cmp_str_nul_upl: url, clm_vrc_uni_id_cmp_str_nul_upl: unique-id, clm_vrc_tel_cmp_str_nul_upl: telephone, clm_vrc_eml_cmp_str_nul_upl: email }, service: factories, namespace: SrcMvcCompleteStrictNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrUniNul, type: Repository, name: SrcMvcCmpStrUniNulRepository, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul: html, clm_dec_mny_cmp_str_uni_nul: money-pt-br, clm_boo_chb_cmp_str_uni_nul: checkbox, clm_int_chb_cmp_str_uni_nul: checkbox, clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul: password-verify, clm_vrc_upl_img_cmp_str_uni_nul: upload-image, clm_vrc_url_cmp_str_uni_nul: url, clm_vrc_uni_id_cmp_str_uni_nul: unique-id, clm_vrc_tel_cmp_str_uni_nul: telephone, clm_vrc_eml_cmp_str_uni_nul: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullable\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
-    - { db: SrcMvcCmpStrUniNulUpl, type: Repository, name: SrcMvcCmpStrUniNulUplRepository, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul_upl: html, clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_str_uni_nul_upl: checkbox, clm_int_chb_cmp_str_uni_nul_upl: checkbox, clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image, clm_vrc_url_cmp_str_uni_nul_upl: url, clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id, clm_vrc_tel_cmp_str_uni_nul_upl: telephone, clm_vrc_eml_cmp_str_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Repository, dependency: { doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager, 0: \GearBase\Repository\QueryBuilder } }
+    -
+        db: SrcMvcBsc
+        type: Repository
+        name: SrcMvcBscRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasic\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscUpl
+        type: Repository
+        name: SrcMvcBscUplRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscUni
+        type: Repository
+        name: SrcMvcBscUniRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscUniUpl
+        type: Repository
+        name: SrcMvcBscUniUplRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscNul
+        type: Repository
+        name: SrcMvcBscNulRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscNulUpl
+        type: Repository
+        name: SrcMvcBscNulUplRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscUniNul
+        type: Repository
+        name: SrcMvcBscUniNulRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscUniNulUpl
+        type: Repository
+        name: SrcMvcBscUniNulUplRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLws
+        type: Repository
+        name: SrcMvcBscLwsRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrict\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsUpl
+        type: Repository
+        name: SrcMvcBscLwsUplRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsUni
+        type: Repository
+        name: SrcMvcBscLwsUniRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsUniUpl
+        type: Repository
+        name: SrcMvcBscLwsUniUplRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsNul
+        type: Repository
+        name: SrcMvcBscLwsNulRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsNulUpl
+        type: Repository
+        name: SrcMvcBscLwsNulUplRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsUniNul
+        type: Repository
+        name: SrcMvcBscLwsUniNulRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscLwsUniNulUpl
+        type: Repository
+        name: SrcMvcBscLwsUniNulUplRepository
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStr
+        type: Repository
+        name: SrcMvcBscStrRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrict\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrUpl
+        type: Repository
+        name: SrcMvcBscStrUplRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrUni
+        type: Repository
+        name: SrcMvcBscStrUniRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrUniUpl
+        type: Repository
+        name: SrcMvcBscStrUniUplRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrNul
+        type: Repository
+        name: SrcMvcBscStrNulRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrNulUpl
+        type: Repository
+        name: SrcMvcBscStrNulUplRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrUniNul
+        type: Repository
+        name: SrcMvcBscStrUniNulRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcBscStrUniNulUpl
+        type: Repository
+        name: SrcMvcBscStrUniNulUplRepository
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmp
+        type: Repository
+        name: SrcMvcCmpRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp: html
+            clm_dec_mny_cmp: money-pt-br
+            clm_boo_chb_cmp: checkbox
+            clm_int_chb_cmp: checkbox
+            clm_dtt_pt_cmp: datetime-pt-br
+            clm_dat_pt_cmp: date-pt-br
+            clm_vrc_pas_ver_cmp: password-verify
+            clm_vrc_upl_img_cmp: upload-image
+            clm_vrc_url_cmp: url
+            clm_vrc_uni_id_cmp: unique-id
+            clm_vrc_tel_cmp: telephone
+            clm_vrc_eml_cmp: email
+        service: factories
+        namespace: SrcMvcComplete\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpUpl
+        type: Repository
+        name: SrcMvcCmpUplRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_upl: html
+            clm_dec_mny_cmp_upl: money-pt-br
+            clm_boo_chb_cmp_upl: checkbox
+            clm_int_chb_cmp_upl: checkbox
+            clm_dtt_pt_cmp_upl: datetime-pt-br
+            clm_dat_pt_cmp_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_upl: password-verify
+            clm_vrc_upl_img_cmp_upl: upload-image
+            clm_vrc_url_cmp_upl: url
+            clm_vrc_uni_id_cmp_upl: unique-id
+            clm_vrc_tel_cmp_upl: telephone
+            clm_vrc_eml_cmp_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpUni
+        type: Repository
+        name: SrcMvcCmpUniRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni: html
+            clm_dec_mny_cmp_uni: money-pt-br
+            clm_boo_chb_cmp_uni: checkbox
+            clm_int_chb_cmp_uni: checkbox
+            clm_dtt_pt_cmp_uni: datetime-pt-br
+            clm_dat_pt_cmp_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_uni: password-verify
+            clm_vrc_upl_img_cmp_uni: upload-image
+            clm_vrc_url_cmp_uni: url
+            clm_vrc_uni_id_cmp_uni: unique-id
+            clm_vrc_tel_cmp_uni: telephone
+            clm_vrc_eml_cmp_uni: email
+        service: factories
+        namespace: SrcMvcCompleteUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpUniUpl
+        type: Repository
+        name: SrcMvcCmpUniUplRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_upl: html
+            clm_dec_mny_cmp_uni_upl: money-pt-br
+            clm_boo_chb_cmp_uni_upl: checkbox
+            clm_int_chb_cmp_uni_upl: checkbox
+            clm_dtt_pt_cmp_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_upl: upload-image
+            clm_vrc_url_cmp_uni_upl: url
+            clm_vrc_uni_id_cmp_uni_upl: unique-id
+            clm_vrc_tel_cmp_uni_upl: telephone
+            clm_vrc_eml_cmp_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpNul
+        type: Repository
+        name: SrcMvcCmpNulRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul: html
+            clm_dec_mny_cmp_nul: money-pt-br
+            clm_boo_chb_cmp_nul: checkbox
+            clm_int_chb_cmp_nul: checkbox
+            clm_dtt_pt_cmp_nul: datetime-pt-br
+            clm_dat_pt_cmp_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_nul: password-verify
+            clm_vrc_upl_img_cmp_nul: upload-image
+            clm_vrc_url_cmp_nul: url
+            clm_vrc_uni_id_cmp_nul: unique-id
+            clm_vrc_tel_cmp_nul: telephone
+            clm_vrc_eml_cmp_nul: email
+        service: factories
+        namespace: SrcMvcCompleteNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpNulUpl
+        type: Repository
+        name: SrcMvcCmpNulUplRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul_upl: html
+            clm_dec_mny_cmp_nul_upl: money-pt-br
+            clm_boo_chb_cmp_nul_upl: checkbox
+            clm_int_chb_cmp_nul_upl: checkbox
+            clm_dtt_pt_cmp_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_nul_upl: upload-image
+            clm_vrc_url_cmp_nul_upl: url
+            clm_vrc_uni_id_cmp_nul_upl: unique-id
+            clm_vrc_tel_cmp_nul_upl: telephone
+            clm_vrc_eml_cmp_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpUniNul
+        type: Repository
+        name: SrcMvcCmpUniNulRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul: html
+            clm_dec_mny_cmp_uni_nul: money-pt-br
+            clm_boo_chb_cmp_uni_nul: checkbox
+            clm_int_chb_cmp_uni_nul: checkbox
+            clm_dtt_pt_cmp_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_uni_nul: upload-image
+            clm_vrc_url_cmp_uni_nul: url
+            clm_vrc_uni_id_cmp_uni_nul: unique-id
+            clm_vrc_tel_cmp_uni_nul: telephone
+            clm_vrc_eml_cmp_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpUniNulUpl
+        type: Repository
+        name: SrcMvcCmpUniNulUplRepository
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul_upl: html
+            clm_dec_mny_cmp_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_uni_nul_upl: checkbox
+            clm_int_chb_cmp_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLws
+        type: Repository
+        name: SrcMvcCmpLwsRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws: html
+            clm_dec_mny_cmp_lws: money-pt-br
+            clm_boo_chb_cmp_lws: checkbox
+            clm_int_chb_cmp_lws: checkbox
+            clm_dtt_pt_cmp_lws: datetime-pt-br
+            clm_dat_pt_cmp_lws: date-pt-br
+            clm_vrc_pas_ver_cmp_lws: password-verify
+            clm_vrc_upl_img_cmp_lws: upload-image
+            clm_vrc_url_cmp_lws: url
+            clm_vrc_uni_id_cmp_lws: unique-id
+            clm_vrc_tel_cmp_lws: telephone
+            clm_vrc_eml_cmp_lws: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrict\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsUpl
+        type: Repository
+        name: SrcMvcCmpLwsUplRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_upl: html
+            clm_dec_mny_cmp_lws_upl: money-pt-br
+            clm_boo_chb_cmp_lws_upl: checkbox
+            clm_int_chb_cmp_lws_upl: checkbox
+            clm_dtt_pt_cmp_lws_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_upl: upload-image
+            clm_vrc_url_cmp_lws_upl: url
+            clm_vrc_uni_id_cmp_lws_upl: unique-id
+            clm_vrc_tel_cmp_lws_upl: telephone
+            clm_vrc_eml_cmp_lws_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsUni
+        type: Repository
+        name: SrcMvcCmpLwsUniRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni: html
+            clm_dec_mny_cmp_lws_uni: money-pt-br
+            clm_boo_chb_cmp_lws_uni: checkbox
+            clm_int_chb_cmp_lws_uni: checkbox
+            clm_dtt_pt_cmp_lws_uni: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni: password-verify
+            clm_vrc_upl_img_cmp_lws_uni: upload-image
+            clm_vrc_url_cmp_lws_uni: url
+            clm_vrc_uni_id_cmp_lws_uni: unique-id
+            clm_vrc_tel_cmp_lws_uni: telephone
+            clm_vrc_eml_cmp_lws_uni: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsUniUpl
+        type: Repository
+        name: SrcMvcCmpLwsUniUplRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_upl: html
+            clm_dec_mny_cmp_lws_uni_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_upl: checkbox
+            clm_int_chb_cmp_lws_uni_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsNul
+        type: Repository
+        name: SrcMvcCmpLwsNulRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul: html
+            clm_dec_mny_cmp_lws_nul: money-pt-br
+            clm_boo_chb_cmp_lws_nul: checkbox
+            clm_int_chb_cmp_lws_nul: checkbox
+            clm_dtt_pt_cmp_lws_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_nul: upload-image
+            clm_vrc_url_cmp_lws_nul: url
+            clm_vrc_uni_id_cmp_lws_nul: unique-id
+            clm_vrc_tel_cmp_lws_nul: telephone
+            clm_vrc_eml_cmp_lws_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsNulUpl
+        type: Repository
+        name: SrcMvcCmpLwsNulUplRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul_upl: html
+            clm_dec_mny_cmp_lws_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_nul_upl: checkbox
+            clm_int_chb_cmp_lws_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Repository
+        name: SrcMvcCmpLwsUniNulRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpLwsUniNulUpl
+        type: Repository
+        name: SrcMvcCmpLwsUniNulUplRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul_upl: html
+            clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_int_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStr
+        type: Repository
+        name: SrcMvcCmpStrRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str: html
+            clm_dec_mny_cmp_str: money-pt-br
+            clm_boo_chb_cmp_str: checkbox
+            clm_int_chb_cmp_str: checkbox
+            clm_dtt_pt_cmp_str: datetime-pt-br
+            clm_dat_pt_cmp_str: date-pt-br
+            clm_vrc_pas_ver_cmp_str: password-verify
+            clm_vrc_upl_img_cmp_str: upload-image
+            clm_vrc_url_cmp_str: url
+            clm_vrc_uni_id_cmp_str: unique-id
+            clm_vrc_tel_cmp_str: telephone
+            clm_vrc_eml_cmp_str: email
+        service: factories
+        namespace: SrcMvcCompleteStrict\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrUpl
+        type: Repository
+        name: SrcMvcCmpStrUplRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_upl: html
+            clm_dec_mny_cmp_str_upl: money-pt-br
+            clm_boo_chb_cmp_str_upl: checkbox
+            clm_int_chb_cmp_str_upl: checkbox
+            clm_dtt_pt_cmp_str_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_upl: password-verify
+            clm_vrc_upl_img_cmp_str_upl: upload-image
+            clm_vrc_url_cmp_str_upl: url
+            clm_vrc_uni_id_cmp_str_upl: unique-id
+            clm_vrc_tel_cmp_str_upl: telephone
+            clm_vrc_eml_cmp_str_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrUni
+        type: Repository
+        name: SrcMvcCmpStrUniRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni: html
+            clm_dec_mny_cmp_str_uni: money-pt-br
+            clm_boo_chb_cmp_str_uni: checkbox
+            clm_int_chb_cmp_str_uni: checkbox
+            clm_dtt_pt_cmp_str_uni: datetime-pt-br
+            clm_dat_pt_cmp_str_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni: password-verify
+            clm_vrc_upl_img_cmp_str_uni: upload-image
+            clm_vrc_url_cmp_str_uni: url
+            clm_vrc_uni_id_cmp_str_uni: unique-id
+            clm_vrc_tel_cmp_str_uni: telephone
+            clm_vrc_eml_cmp_str_uni: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUnique\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrUniUpl
+        type: Repository
+        name: SrcMvcCmpStrUniUplRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_upl: html
+            clm_dec_mny_cmp_str_uni_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_upl: checkbox
+            clm_int_chb_cmp_str_uni_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_upl: upload-image
+            clm_vrc_url_cmp_str_uni_upl: url
+            clm_vrc_uni_id_cmp_str_uni_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_upl: telephone
+            clm_vrc_eml_cmp_str_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrNul
+        type: Repository
+        name: SrcMvcCmpStrNulRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul: html
+            clm_dec_mny_cmp_str_nul: money-pt-br
+            clm_boo_chb_cmp_str_nul: checkbox
+            clm_int_chb_cmp_str_nul: checkbox
+            clm_dtt_pt_cmp_str_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul: password-verify
+            clm_vrc_upl_img_cmp_str_nul: upload-image
+            clm_vrc_url_cmp_str_nul: url
+            clm_vrc_uni_id_cmp_str_nul: unique-id
+            clm_vrc_tel_cmp_str_nul: telephone
+            clm_vrc_eml_cmp_str_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrNulUpl
+        type: Repository
+        name: SrcMvcCmpStrNulUplRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul_upl: html
+            clm_dec_mny_cmp_str_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_nul_upl: checkbox
+            clm_int_chb_cmp_str_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_nul_upl: upload-image
+            clm_vrc_url_cmp_str_nul_upl: url
+            clm_vrc_uni_id_cmp_str_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_nul_upl: telephone
+            clm_vrc_eml_cmp_str_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrUniNul
+        type: Repository
+        name: SrcMvcCmpStrUniNulRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul: html
+            clm_dec_mny_cmp_str_uni_nul: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul: checkbox
+            clm_int_chb_cmp_str_uni_nul: checkbox
+            clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul: upload-image
+            clm_vrc_url_cmp_str_uni_nul: url
+            clm_vrc_uni_id_cmp_str_uni_nul: unique-id
+            clm_vrc_tel_cmp_str_uni_nul: telephone
+            clm_vrc_eml_cmp_str_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -
+        db: SrcMvcCmpStrUniNulUpl
+        type: Repository
+        name: SrcMvcCmpStrUniNulUplRepository
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul_upl: html
+            clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul_upl: checkbox
+            clm_int_chb_cmp_str_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_str_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_str_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder

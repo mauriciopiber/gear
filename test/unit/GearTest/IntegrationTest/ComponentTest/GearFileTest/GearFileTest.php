@@ -5,12 +5,25 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Integration\Component\GearFile\GearFile;
 use GearBase\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
+use Gear\Integration\Suite\Src\SrcMinorSuite;
+use Gear\Integration\Suite\Mvc\MvcMinorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
+use Gear\Integration\Suite\Controller\ControllerMinorSuite;
+use GearJson\Src\SrcTypesInterface;
+use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Util\Columns\ColumnsTrait;
+use Gear\Integration\Util\ResolveNames\ResolveNamesTrait;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
 
 /**
  * @group Service
  */
 class GearFileTest extends TestCase
 {
+    use ColumnsTrait;
+
     public function setUp()
     {
         parent::setUp();
@@ -25,7 +38,370 @@ class GearFileTest extends TestCase
 
         $this->suite = $this->prophesize('Gear\Integration\Suite\MinorSuiteInterface');
         $this->suite->isUsingLongName()->willReturn(true);
+
+        $this->columns = new Columns();
+        $this->resolveNames = new ResolveNames($this->stringService);
     }
+
+    /**
+     * @group x1
+     */
+    public function testCreateGearfileSrc()
+    {
+
+        $template = <<<EOS
+src: {  }
+
+EOS;
+        $expected = 'src-repository.yml';
+
+        $minor = $this->prophesize(SrcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-repository')->shouldBeCalled();
+
+        $this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->assertEquals($expected, $this->service->createSrcGearfile($minor->reveal(), [***REMOVED***));
+    }
+
+    /**
+     * @group fixThisShit
+     * @group x9
+     */
+    public function testCreateGearFileMvc()
+    {
+
+        $template = <<<EOS
+db:
+    -
+        table: MvcTest
+        user:
+            - all
+        namespace: MvcTest
+        service: factories
+        columns: {  }
+src: {  }
+
+EOS;
+        $expected = 'mvc-test.yml';
+
+
+
+        $minor = $this->prophesize(MvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('mvc-test')->shouldBeCalled();
+        $minor->getTableAlias()->willReturn('MvcTest')->shouldBeCalled();
+        $minor->getUserType()->willReturn(['all'***REMOVED***)->shouldBeCalled();
+        $minor->getColumns()->willReturn([
+            'mycolumn'
+        ***REMOVED***)->shouldBeCalled();
+
+        $minor->getForeignKeys()->willReturn(null)->shouldBeCalled();
+        $minor->getTableAssoc()->willReturn(null)->shouldBeCalled();
+
+
+        $this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->assertEquals($expected, $this->service->createMvcGearfile($minor->reveal()));
+    }
+
+    /**
+     * @group x11
+     */
+    public function testCreateGearFileSrcMvcEntityWithConstraint()
+    {
+        $template = <<<EOS
+src:
+    -
+        db: SrcMvcComplete
+        type: Entity
+        name: SrcMvcComplete
+        user: all
+        columns:
+            column_text_html_complete: html
+            column_decimal_money_complete: money-pt-br
+            column_boolean_checkbox_complete: checkbox
+            column_int_checkbox_complete: checkbox
+            column_datetime_ptbr_complete: datetime-pt-br
+            column_date_ptbr_complete: date-pt-br
+            column_varchar_password_verify_complete: password-verify
+            column_varchar_upload_image_complete: upload-image
+            column_varchar_url_complete: url
+            column_varchar_unique_id_complete: unique-id
+            column_varchar_telephone_complete: telephone
+            column_varchar_email_complete: email
+    -
+        name: ColumnIntForeign
+        type: Entity
+        db: ColumnIntForeign
+
+EOS;
+        $expected = 'src-mvc-entity.yml';
+
+
+
+        $minor = $this->prophesize(SrcMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-mvc-entity')->shouldBeCalled();
+
+        $major = $this->prophesize(SrcMvcMajorSuite::class);
+        $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
+
+        $tables = [***REMOVED***;
+        $minorSuiteOne = new SrcMvcMinorSuite(
+            $major->reveal(), SrcTypesInterface::ENTITY, 'complete', 'all', null, null, true
+        );
+
+        $columnsSuffix = $this->resolveNames->format($minorSuiteOne, 'url');
+
+        $minorSuiteOne->setForeignKeys($this->columns->getForeignKeys($minorSuiteOne->getColumnType()));
+        $minorSuiteOne->setColumns($this->columns->getColumns($minorSuiteOne, $columnsSuffix));
+
+        $tables[***REMOVED*** = $minorSuiteOne;
+        //$this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->service->createSrcMvcGearfile($minor->reveal(), $tables);
+        $this->assertEquals($template, $this->service->getCode());
+    }
+
+    /**
+     * @group x11
+     */
+    public function testCreateGearFileSrcMvcEntityWithoutConstraint()
+    {
+        $template = <<<EOS
+src:
+    -
+        db: SrcMvcBasic
+        type: Entity
+        name: SrcMvcBasic
+        user: all
+        columns: {  }
+
+EOS;
+        $expected = 'src-mvc-entity.yml';
+
+
+
+        $minor = $this->prophesize(SrcMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-mvc-entity')->shouldBeCalled();
+
+        $major = $this->prophesize(SrcMvcMajorSuite::class);
+        $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
+
+        $tables = [***REMOVED***;
+        $tables[0***REMOVED*** = new SrcMvcMinorSuite(
+            $major->reveal(), SrcTypesInterface::ENTITY, 'basic', 'all', null, null, true
+        );
+
+        //$this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->service->createSrcMvcGearfile($minor->reveal(), $tables);
+        $this->assertEquals($template, $this->service->getCode());
+    }
+
+    /**
+     * @group 30
+     */
+    public function testCreateGearFileSrcMvcFixtureWithConstraint()
+    {
+        $template = <<<EOS
+src:
+    -
+        db: SrcMvcComplete
+        type: Fixture
+        name: SrcMvcCompleteFixture
+        user: all
+        columns:
+            column_text_html_complete: html
+            column_decimal_money_complete: money-pt-br
+            column_boolean_checkbox_complete: checkbox
+            column_int_checkbox_complete: checkbox
+            column_datetime_ptbr_complete: datetime-pt-br
+            column_date_ptbr_complete: date-pt-br
+            column_varchar_password_verify_complete: password-verify
+            column_varchar_upload_image_complete: upload-image
+            column_varchar_url_complete: url
+            column_varchar_unique_id_complete: unique-id
+            column_varchar_telephone_complete: telephone
+            column_varchar_email_complete: email
+    -
+        name: ColumnIntForeignFixture
+        type: Fixture
+        db: ColumnIntForeign
+
+EOS;
+        $expected = 'src-mvc-entity.yml';
+
+
+
+        $minor = $this->prophesize(SrcMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-mvc-fixture')->shouldBeCalled();
+
+        $major = $this->prophesize(SrcMvcMajorSuite::class);
+        $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
+
+        $tables = [***REMOVED***;
+        $minorSuiteOne = new SrcMvcMinorSuite(
+            $major->reveal(), SrcTypesInterface::FIXTURE, 'complete', 'all', null, null, true
+            );
+
+        $columnsSuffix = $this->resolveNames->format($minorSuiteOne, 'url');
+
+        $minorSuiteOne->setForeignKeys($this->columns->getForeignKeys($minorSuiteOne->getColumnType()));
+        $minorSuiteOne->setColumns($this->columns->getColumns($minorSuiteOne, $columnsSuffix));
+
+        $tables[***REMOVED*** = $minorSuiteOne;
+        //$this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->service->createSrcMvcGearfile($minor->reveal(), $tables);
+        $this->assertEquals($template, $this->service->getCode());
+    }
+
+    /**
+     * @group 30
+     */
+    public function testCreateGearFileSrcMvcFixtureWithoutConstraint()
+    {
+        $template = <<<EOS
+src:
+    -
+        db: SrcMvcBasic
+        type: Fixture
+        name: SrcMvcBasicFixture
+        user: all
+        columns: {  }
+
+EOS;
+        $expected = 'src-mvc-fixture.yml';
+
+
+
+        $minor = $this->prophesize(SrcMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-mvc-fixture')->shouldBeCalled();
+
+        $major = $this->prophesize(SrcMvcMajorSuite::class);
+        $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
+
+        $tables = [***REMOVED***;
+        $tables[0***REMOVED*** = new SrcMvcMinorSuite(
+            $major->reveal(), SrcTypesInterface::FIXTURE, 'basic', 'all', null, null, true
+        );
+        $this->service->createSrcMvcGearfile($minor->reveal(), $tables);
+        $this->assertEquals($template, $this->service->getCode());
+    }
+
+    public function testCreateGearFileMvcWithConstraint()
+    {
+
+    }
+
+
+    /**
+     * @group x21
+     */
+    public function testCreateGearFileSrcMvc()
+    {
+        $template = <<<EOS
+src:
+    -
+        db: SrcMvcRepositoryBasic
+        type: Repository
+        name: SrcMvcRepositoryBasicRepository
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcRepositoryBasic\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+
+EOS;
+        $expected = 'src-mvc-repository.yml';
+
+
+
+        $minor = $this->prophesize(SrcMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('src-mvc-repository')->shouldBeCalled();
+
+        $major = $this->prophesize(SrcMvcMajorSuite::class);
+        $major->getSuite()->willReturn('src-mvc-repository')->shouldBeCalled();
+
+        $tables = [***REMOVED***;
+        $tables[0***REMOVED*** = new SrcMvcMinorSuite(
+            $major->reveal(), SrcTypesInterface::REPOSITORY, 'basic', 'all', null, null, true
+        );
+
+        //$this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->service->createSrcMvcGearfile($minor->reveal(), $tables);
+
+        $this->assertEquals($template, $this->service->getCode());
+    }
+
+    /**
+     * @group x5
+     */
+    public function testCreateGearfileController()
+    {
+
+        $template = <<<EOS
+src: {  }
+controller: {  }
+
+EOS;
+        $expected = 'controller-action.yml';
+
+
+
+        $minor = $this->prophesize(ControllerMinorSuite::class);
+        //$minor->getType()->willReturn(SrcTypesInterface::REPOSITORY)->shouldBeCalled();
+        $minor->getSuiteName()->willReturn('controller-action')->shouldBeCalled();
+        /*
+         $minor->getSuiteName()->willReturn('mvc-test')->shouldBeCalled();
+         $minor->getTableAlias()->willReturn('MvcTest')->shouldBeCalled();
+         $minor->getUserType()->willReturn(['all'***REMOVED***)->shouldBeCalled();
+         $minor->getColumns()->willReturn([
+         'mycolumn'
+         ***REMOVED***)->shouldBeCalled();
+
+         $minor->getForeignKeys()->willReturn(null)->shouldBeCalled();
+         $minor->getTableAssoc()->willReturn(null)->shouldBeCalled();
+         */
+
+
+        $this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->assertEquals($expected, $this->service->createControllerGearfile($minor->reveal(), [***REMOVED***));
+    }
+
+    /**
+     * @group x3
+     */
+    public function testCreateGearfileControllerMvc()
+    {
+        $template = <<<EOS
+controller: {  }
+
+EOS;
+        $expected = 'controller-mvc.yml';
+
+
+
+        $minor = $this->prophesize(ControllerMvcMinorSuite::class);
+        $minor->getSuiteName()->willReturn('controller-mvc')->shouldBeCalled();
+        //$minor->getTableAlias()->willReturn('MvcTest')->shouldBeCalled();
+        //$minor->getUserType()->willReturn(['all'***REMOVED***)->shouldBeCalled();
+        //$minor->getColumns()->willReturn([
+        //    'mycolumn'
+        //***REMOVED***)->shouldBeCalled();
+
+        //$minor->getForeignKeys()->willReturn(null)->shouldBeCalled();
+        //$minor->getTableAssoc()->willReturn(null)->shouldBeCalled();
+
+
+        $this->persist->save($minor->reveal(), $expected, $template)->shouldBeCalled();
+
+        $this->assertEquals($expected, $this->service->createControllerMvcGearfile($minor->reveal(), [***REMOVED***));
+    }
+
 
     public function testCreateSingleInterface()
     {

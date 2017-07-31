@@ -23,6 +23,8 @@ trait UtilNameTrait
             ? 'SrcMvc'
             : $this->getMajorSuite()->getSuite();
 
+
+
         $this->tableAlias = sprintf(
             '%s%s',
             $this->stringService->str('class', $suiteName),

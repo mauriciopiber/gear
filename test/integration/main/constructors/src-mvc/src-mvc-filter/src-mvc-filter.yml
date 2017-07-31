@@ -1,49 +1,673 @@
 src:
-    - { db: SrcMvcBsc, type: Filter, name: SrcMvcBscFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasic\Filter }
-    - { db: SrcMvcBscUpl, type: Filter, name: SrcMvcBscUplFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUploadImage\Filter }
-    - { db: SrcMvcBscUni, type: Filter, name: SrcMvcBscUniFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUnique\Filter }
-    - { db: SrcMvcBscUniUpl, type: Filter, name: SrcMvcBscUniUplFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueUploadImage\Filter }
-    - { db: SrcMvcBscNul, type: Filter, name: SrcMvcBscNulFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullable\Filter }
-    - { db: SrcMvcBscNulUpl, type: Filter, name: SrcMvcBscNulUplFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullableUploadImage\Filter }
-    - { db: SrcMvcBscUniNul, type: Filter, name: SrcMvcBscUniNulFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullable\Filter }
-    - { db: SrcMvcBscUniNulUpl, type: Filter, name: SrcMvcBscUniNulUplFilter, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullableUploadImage\Filter }
-    - { db: SrcMvcBscLws, type: Filter, name: SrcMvcBscLwsFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrict\Filter }
-    - { db: SrcMvcBscLwsUpl, type: Filter, name: SrcMvcBscLwsUplFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUploadImage\Filter }
-    - { db: SrcMvcBscLwsUni, type: Filter, name: SrcMvcBscLwsUniFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUnique\Filter }
-    - { db: SrcMvcBscLwsUniUpl, type: Filter, name: SrcMvcBscLwsUniUplFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueUploadImage\Filter }
-    - { db: SrcMvcBscLwsNul, type: Filter, name: SrcMvcBscLwsNulFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullable\Filter }
-    - { db: SrcMvcBscLwsNulUpl, type: Filter, name: SrcMvcBscLwsNulUplFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullableUploadImage\Filter }
-    - { db: SrcMvcBscLwsUniNul, type: Filter, name: SrcMvcBscLwsUniNulFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullable\Filter }
-    - { db: SrcMvcBscLwsUniNulUpl, type: Filter, name: SrcMvcBscLwsUniNulUplFilter, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Filter }
-    - { db: SrcMvcBscStr, type: Filter, name: SrcMvcBscStrFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrict\Filter }
-    - { db: SrcMvcBscStrUpl, type: Filter, name: SrcMvcBscStrUplFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUploadImage\Filter }
-    - { db: SrcMvcBscStrUni, type: Filter, name: SrcMvcBscStrUniFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUnique\Filter }
-    - { db: SrcMvcBscStrUniUpl, type: Filter, name: SrcMvcBscStrUniUplFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueUploadImage\Filter }
-    - { db: SrcMvcBscStrNul, type: Filter, name: SrcMvcBscStrNulFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullable\Filter }
-    - { db: SrcMvcBscStrNulUpl, type: Filter, name: SrcMvcBscStrNulUplFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullableUploadImage\Filter }
-    - { db: SrcMvcBscStrUniNul, type: Filter, name: SrcMvcBscStrUniNulFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullable\Filter }
-    - { db: SrcMvcBscStrUniNulUpl, type: Filter, name: SrcMvcBscStrUniNulUplFilter, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Filter }
-    - { db: SrcMvcCmp, type: Filter, name: SrcMvcCmpFilter, user: all, columns: { clm_txt_htl_cmp: html, clm_dec_mny_cmp: money-pt-br, clm_boo_chb_cmp: checkbox, clm_int_chb_cmp: checkbox, clm_dtt_pt_cmp: datetime-pt-br, clm_dat_pt_cmp: date-pt-br, clm_vrc_pas_ver_cmp: password-verify, clm_vrc_upl_img_cmp: upload-image, clm_vrc_url_cmp: url, clm_vrc_uni_id_cmp: unique-id, clm_vrc_tel_cmp: telephone, clm_vrc_eml_cmp: email }, service: factories, namespace: SrcMvcComplete\Filter }
-    - { db: SrcMvcCmpUpl, type: Filter, name: SrcMvcCmpUplFilter, user: all, columns: { clm_txt_htl_cmp_upl: html, clm_dec_mny_cmp_upl: money-pt-br, clm_boo_chb_cmp_upl: checkbox, clm_int_chb_cmp_upl: checkbox, clm_dtt_pt_cmp_upl: datetime-pt-br, clm_dat_pt_cmp_upl: date-pt-br, clm_vrc_pas_ver_cmp_upl: password-verify, clm_vrc_upl_img_cmp_upl: upload-image, clm_vrc_url_cmp_upl: url, clm_vrc_uni_id_cmp_upl: unique-id, clm_vrc_tel_cmp_upl: telephone, clm_vrc_eml_cmp_upl: email }, service: factories, namespace: SrcMvcCompleteUploadImage\Filter }
-    - { db: SrcMvcCmpUni, type: Filter, name: SrcMvcCmpUniFilter, user: all, columns: { clm_txt_htl_cmp_uni: html, clm_dec_mny_cmp_uni: money-pt-br, clm_boo_chb_cmp_uni: checkbox, clm_int_chb_cmp_uni: checkbox, clm_dtt_pt_cmp_uni: datetime-pt-br, clm_dat_pt_cmp_uni: date-pt-br, clm_vrc_pas_ver_cmp_uni: password-verify, clm_vrc_upl_img_cmp_uni: upload-image, clm_vrc_url_cmp_uni: url, clm_vrc_uni_id_cmp_uni: unique-id, clm_vrc_tel_cmp_uni: telephone, clm_vrc_eml_cmp_uni: email }, service: factories, namespace: SrcMvcCompleteUnique\Filter }
-    - { db: SrcMvcCmpUniUpl, type: Filter, name: SrcMvcCmpUniUplFilter, user: all, columns: { clm_txt_htl_cmp_uni_upl: html, clm_dec_mny_cmp_uni_upl: money-pt-br, clm_boo_chb_cmp_uni_upl: checkbox, clm_int_chb_cmp_uni_upl: checkbox, clm_dtt_pt_cmp_uni_upl: datetime-pt-br, clm_dat_pt_cmp_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_upl: password-verify, clm_vrc_upl_img_cmp_uni_upl: upload-image, clm_vrc_url_cmp_uni_upl: url, clm_vrc_uni_id_cmp_uni_upl: unique-id, clm_vrc_tel_cmp_uni_upl: telephone, clm_vrc_eml_cmp_uni_upl: email }, service: factories, namespace: SrcMvcCompleteUniqueUploadImage\Filter }
-    - { db: SrcMvcCmpNul, type: Filter, name: SrcMvcCmpNulFilter, user: all, columns: { clm_txt_htl_cmp_nul: html, clm_dec_mny_cmp_nul: money-pt-br, clm_boo_chb_cmp_nul: checkbox, clm_int_chb_cmp_nul: checkbox, clm_dtt_pt_cmp_nul: datetime-pt-br, clm_dat_pt_cmp_nul: date-pt-br, clm_vrc_pas_ver_cmp_nul: password-verify, clm_vrc_upl_img_cmp_nul: upload-image, clm_vrc_url_cmp_nul: url, clm_vrc_uni_id_cmp_nul: unique-id, clm_vrc_tel_cmp_nul: telephone, clm_vrc_eml_cmp_nul: email }, service: factories, namespace: SrcMvcCompleteNullable\Filter }
-    - { db: SrcMvcCmpNulUpl, type: Filter, name: SrcMvcCmpNulUplFilter, user: all, columns: { clm_txt_htl_cmp_nul_upl: html, clm_dec_mny_cmp_nul_upl: money-pt-br, clm_boo_chb_cmp_nul_upl: checkbox, clm_int_chb_cmp_nul_upl: checkbox, clm_dtt_pt_cmp_nul_upl: datetime-pt-br, clm_dat_pt_cmp_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_nul_upl: password-verify, clm_vrc_upl_img_cmp_nul_upl: upload-image, clm_vrc_url_cmp_nul_upl: url, clm_vrc_uni_id_cmp_nul_upl: unique-id, clm_vrc_tel_cmp_nul_upl: telephone, clm_vrc_eml_cmp_nul_upl: email }, service: factories, namespace: SrcMvcCompleteNullableUploadImage\Filter }
-    - { db: SrcMvcCmpUniNul, type: Filter, name: SrcMvcCmpUniNulFilter, user: all, columns: { clm_txt_htl_cmp_uni_nul: html, clm_dec_mny_cmp_uni_nul: money-pt-br, clm_boo_chb_cmp_uni_nul: checkbox, clm_int_chb_cmp_uni_nul: checkbox, clm_dtt_pt_cmp_uni_nul: datetime-pt-br, clm_dat_pt_cmp_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul: password-verify, clm_vrc_upl_img_cmp_uni_nul: upload-image, clm_vrc_url_cmp_uni_nul: url, clm_vrc_uni_id_cmp_uni_nul: unique-id, clm_vrc_tel_cmp_uni_nul: telephone, clm_vrc_eml_cmp_uni_nul: email }, service: factories, namespace: SrcMvcCompleteUniqueNullable\Filter }
-    - { db: SrcMvcCmpUniNulUpl, type: Filter, name: SrcMvcCmpUniNulUplFilter, user: all, columns: { clm_txt_htl_cmp_uni_nul_upl: html, clm_dec_mny_cmp_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_uni_nul_upl: checkbox, clm_int_chb_cmp_uni_nul_upl: checkbox, clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_uni_nul_upl: upload-image, clm_vrc_url_cmp_uni_nul_upl: url, clm_vrc_uni_id_cmp_uni_nul_upl: unique-id, clm_vrc_tel_cmp_uni_nul_upl: telephone, clm_vrc_eml_cmp_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteUniqueNullableUploadImage\Filter }
-    - { db: SrcMvcCmpLws, type: Filter, name: SrcMvcCmpLwsFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws: html, clm_dec_mny_cmp_lws: money-pt-br, clm_boo_chb_cmp_lws: checkbox, clm_int_chb_cmp_lws: checkbox, clm_dtt_pt_cmp_lws: datetime-pt-br, clm_dat_pt_cmp_lws: date-pt-br, clm_vrc_pas_ver_cmp_lws: password-verify, clm_vrc_upl_img_cmp_lws: upload-image, clm_vrc_url_cmp_lws: url, clm_vrc_uni_id_cmp_lws: unique-id, clm_vrc_tel_cmp_lws: telephone, clm_vrc_eml_cmp_lws: email }, service: factories, namespace: SrcMvcCompleteLowStrict\Filter }
-    - { db: SrcMvcCmpLwsUpl, type: Filter, name: SrcMvcCmpLwsUplFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_upl: html, clm_dec_mny_cmp_lws_upl: money-pt-br, clm_boo_chb_cmp_lws_upl: checkbox, clm_int_chb_cmp_lws_upl: checkbox, clm_dtt_pt_cmp_lws_upl: datetime-pt-br, clm_dat_pt_cmp_lws_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_upl: password-verify, clm_vrc_upl_img_cmp_lws_upl: upload-image, clm_vrc_url_cmp_lws_upl: url, clm_vrc_uni_id_cmp_lws_upl: unique-id, clm_vrc_tel_cmp_lws_upl: telephone, clm_vrc_eml_cmp_lws_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUploadImage\Filter }
-    - { db: SrcMvcCmpLwsUni, type: Filter, name: SrcMvcCmpLwsUniFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni: html, clm_dec_mny_cmp_lws_uni: money-pt-br, clm_boo_chb_cmp_lws_uni: checkbox, clm_int_chb_cmp_lws_uni: checkbox, clm_dtt_pt_cmp_lws_uni: datetime-pt-br, clm_dat_pt_cmp_lws_uni: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni: password-verify, clm_vrc_upl_img_cmp_lws_uni: upload-image, clm_vrc_url_cmp_lws_uni: url, clm_vrc_uni_id_cmp_lws_uni: unique-id, clm_vrc_tel_cmp_lws_uni: telephone, clm_vrc_eml_cmp_lws_uni: email }, service: factories, namespace: SrcMvcCompleteLowStrictUnique\Filter }
-    - { db: SrcMvcCmpLwsUniUpl, type: Filter, name: SrcMvcCmpLwsUniUplFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_upl: html, clm_dec_mny_cmp_lws_uni_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_upl: checkbox, clm_int_chb_cmp_lws_uni_upl: checkbox, clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_upl: upload-image, clm_vrc_url_cmp_lws_uni_upl: url, clm_vrc_uni_id_cmp_lws_uni_upl: unique-id, clm_vrc_tel_cmp_lws_uni_upl: telephone, clm_vrc_eml_cmp_lws_uni_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Filter }
-    - { db: SrcMvcCmpLwsNul, type: Filter, name: SrcMvcCmpLwsNulFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul: html, clm_dec_mny_cmp_lws_nul: money-pt-br, clm_boo_chb_cmp_lws_nul: checkbox, clm_int_chb_cmp_lws_nul: checkbox, clm_dtt_pt_cmp_lws_nul: datetime-pt-br, clm_dat_pt_cmp_lws_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul: password-verify, clm_vrc_upl_img_cmp_lws_nul: upload-image, clm_vrc_url_cmp_lws_nul: url, clm_vrc_uni_id_cmp_lws_nul: unique-id, clm_vrc_tel_cmp_lws_nul: telephone, clm_vrc_eml_cmp_lws_nul: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullable\Filter }
-    - { db: SrcMvcCmpLwsNulUpl, type: Filter, name: SrcMvcCmpLwsNulUplFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_nul_upl: html, clm_dec_mny_cmp_lws_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_nul_upl: checkbox, clm_int_chb_cmp_lws_nul_upl: checkbox, clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_nul_upl: upload-image, clm_vrc_url_cmp_lws_nul_upl: url, clm_vrc_uni_id_cmp_lws_nul_upl: unique-id, clm_vrc_tel_cmp_lws_nul_upl: telephone, clm_vrc_eml_cmp_lws_nul_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullableUploadImage\Filter }
-    - { db: SrcMvcCmpLwsUniNul, type: Filter, name: SrcMvcCmpLwsUniNulFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul: html, clm_dec_mny_cmp_lws_uni_nul: money-pt-br, clm_boo_chb_cmp_lws_uni_nul: checkbox, clm_int_chb_cmp_lws_uni_nul: checkbox, clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul: upload-image, clm_vrc_url_cmp_lws_uni_nul: url, clm_vrc_uni_id_cmp_lws_uni_nul: unique-id, clm_vrc_tel_cmp_lws_uni_nul: telephone, clm_vrc_eml_cmp_lws_uni_nul: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullable\Filter }
-    - { db: SrcMvcCmpLwsUniNulUpl, type: Filter, name: SrcMvcCmpLwsUniNulUplFilter, user: low-strict, columns: { clm_txt_htl_cmp_lws_uni_nul_upl: html, clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_lws_uni_nul_upl: checkbox, clm_int_chb_cmp_lws_uni_nul_upl: checkbox, clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image, clm_vrc_url_cmp_lws_uni_nul_upl: url, clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id, clm_vrc_tel_cmp_lws_uni_nul_upl: telephone, clm_vrc_eml_cmp_lws_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Filter }
-    - { db: SrcMvcCmpStr, type: Filter, name: SrcMvcCmpStrFilter, user: strict, columns: { clm_txt_htl_cmp_str: html, clm_dec_mny_cmp_str: money-pt-br, clm_boo_chb_cmp_str: checkbox, clm_int_chb_cmp_str: checkbox, clm_dtt_pt_cmp_str: datetime-pt-br, clm_dat_pt_cmp_str: date-pt-br, clm_vrc_pas_ver_cmp_str: password-verify, clm_vrc_upl_img_cmp_str: upload-image, clm_vrc_url_cmp_str: url, clm_vrc_uni_id_cmp_str: unique-id, clm_vrc_tel_cmp_str: telephone, clm_vrc_eml_cmp_str: email }, service: factories, namespace: SrcMvcCompleteStrict\Filter }
-    - { db: SrcMvcCmpStrUpl, type: Filter, name: SrcMvcCmpStrUplFilter, user: strict, columns: { clm_txt_htl_cmp_str_upl: html, clm_dec_mny_cmp_str_upl: money-pt-br, clm_boo_chb_cmp_str_upl: checkbox, clm_int_chb_cmp_str_upl: checkbox, clm_dtt_pt_cmp_str_upl: datetime-pt-br, clm_dat_pt_cmp_str_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_upl: password-verify, clm_vrc_upl_img_cmp_str_upl: upload-image, clm_vrc_url_cmp_str_upl: url, clm_vrc_uni_id_cmp_str_upl: unique-id, clm_vrc_tel_cmp_str_upl: telephone, clm_vrc_eml_cmp_str_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUploadImage\Filter }
-    - { db: SrcMvcCmpStrUni, type: Filter, name: SrcMvcCmpStrUniFilter, user: strict, columns: { clm_txt_htl_cmp_str_uni: html, clm_dec_mny_cmp_str_uni: money-pt-br, clm_boo_chb_cmp_str_uni: checkbox, clm_int_chb_cmp_str_uni: checkbox, clm_dtt_pt_cmp_str_uni: datetime-pt-br, clm_dat_pt_cmp_str_uni: date-pt-br, clm_vrc_pas_ver_cmp_str_uni: password-verify, clm_vrc_upl_img_cmp_str_uni: upload-image, clm_vrc_url_cmp_str_uni: url, clm_vrc_uni_id_cmp_str_uni: unique-id, clm_vrc_tel_cmp_str_uni: telephone, clm_vrc_eml_cmp_str_uni: email }, service: factories, namespace: SrcMvcCompleteStrictUnique\Filter }
-    - { db: SrcMvcCmpStrUniUpl, type: Filter, name: SrcMvcCmpStrUniUplFilter, user: strict, columns: { clm_txt_htl_cmp_str_uni_upl: html, clm_dec_mny_cmp_str_uni_upl: money-pt-br, clm_boo_chb_cmp_str_uni_upl: checkbox, clm_int_chb_cmp_str_uni_upl: checkbox, clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_upl: upload-image, clm_vrc_url_cmp_str_uni_upl: url, clm_vrc_uni_id_cmp_str_uni_upl: unique-id, clm_vrc_tel_cmp_str_uni_upl: telephone, clm_vrc_eml_cmp_str_uni_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueUploadImage\Filter }
-    - { db: SrcMvcCmpStrNul, type: Filter, name: SrcMvcCmpStrNulFilter, user: strict, columns: { clm_txt_htl_cmp_str_nul: html, clm_dec_mny_cmp_str_nul: money-pt-br, clm_boo_chb_cmp_str_nul: checkbox, clm_int_chb_cmp_str_nul: checkbox, clm_dtt_pt_cmp_str_nul: datetime-pt-br, clm_dat_pt_cmp_str_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_nul: password-verify, clm_vrc_upl_img_cmp_str_nul: upload-image, clm_vrc_url_cmp_str_nul: url, clm_vrc_uni_id_cmp_str_nul: unique-id, clm_vrc_tel_cmp_str_nul: telephone, clm_vrc_eml_cmp_str_nul: email }, service: factories, namespace: SrcMvcCompleteStrictNullable\Filter }
-    - { db: SrcMvcCmpStrNulUpl, type: Filter, name: SrcMvcCmpStrNulUplFilter, user: strict, columns: { clm_txt_htl_cmp_str_nul_upl: html, clm_dec_mny_cmp_str_nul_upl: money-pt-br, clm_boo_chb_cmp_str_nul_upl: checkbox, clm_int_chb_cmp_str_nul_upl: checkbox, clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_nul_upl: upload-image, clm_vrc_url_cmp_str_nul_upl: url, clm_vrc_uni_id_cmp_str_nul_upl: unique-id, clm_vrc_tel_cmp_str_nul_upl: telephone, clm_vrc_eml_cmp_str_nul_upl: email }, service: factories, namespace: SrcMvcCompleteStrictNullableUploadImage\Filter }
-    - { db: SrcMvcCmpStrUniNul, type: Filter, name: SrcMvcCmpStrUniNulFilter, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul: html, clm_dec_mny_cmp_str_uni_nul: money-pt-br, clm_boo_chb_cmp_str_uni_nul: checkbox, clm_int_chb_cmp_str_uni_nul: checkbox, clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul: password-verify, clm_vrc_upl_img_cmp_str_uni_nul: upload-image, clm_vrc_url_cmp_str_uni_nul: url, clm_vrc_uni_id_cmp_str_uni_nul: unique-id, clm_vrc_tel_cmp_str_uni_nul: telephone, clm_vrc_eml_cmp_str_uni_nul: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullable\Filter }
-    - { db: SrcMvcCmpStrUniNulUpl, type: Filter, name: SrcMvcCmpStrUniNulUplFilter, user: strict, columns: { clm_txt_htl_cmp_str_uni_nul_upl: html, clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_str_uni_nul_upl: checkbox, clm_int_chb_cmp_str_uni_nul_upl: checkbox, clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image, clm_vrc_url_cmp_str_uni_nul_upl: url, clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id, clm_vrc_tel_cmp_str_uni_nul_upl: telephone, clm_vrc_eml_cmp_str_uni_nul_upl: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Filter }
+    -
+        db: SrcMvcBsc
+        type: Filter
+        name: SrcMvcBscFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasic\Filter
+    -
+        db: SrcMvcBscUpl
+        type: Filter
+        name: SrcMvcBscUplFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUploadImage\Filter
+    -
+        db: SrcMvcBscUni
+        type: Filter
+        name: SrcMvcBscUniFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUnique\Filter
+    -
+        db: SrcMvcBscUniUpl
+        type: Filter
+        name: SrcMvcBscUniUplFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueUploadImage\Filter
+    -
+        db: SrcMvcBscNul
+        type: Filter
+        name: SrcMvcBscNulFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullable\Filter
+    -
+        db: SrcMvcBscNulUpl
+        type: Filter
+        name: SrcMvcBscNulUplFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullableUploadImage\Filter
+    -
+        db: SrcMvcBscUniNul
+        type: Filter
+        name: SrcMvcBscUniNulFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullable\Filter
+    -
+        db: SrcMvcBscUniNulUpl
+        type: Filter
+        name: SrcMvcBscUniNulUplFilter
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullableUploadImage\Filter
+    -
+        db: SrcMvcBscLws
+        type: Filter
+        name: SrcMvcBscLwsFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrict\Filter
+    -
+        db: SrcMvcBscLwsUpl
+        type: Filter
+        name: SrcMvcBscLwsUplFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUploadImage\Filter
+    -
+        db: SrcMvcBscLwsUni
+        type: Filter
+        name: SrcMvcBscLwsUniFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUnique\Filter
+    -
+        db: SrcMvcBscLwsUniUpl
+        type: Filter
+        name: SrcMvcBscLwsUniUplFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueUploadImage\Filter
+    -
+        db: SrcMvcBscLwsNul
+        type: Filter
+        name: SrcMvcBscLwsNulFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullable\Filter
+    -
+        db: SrcMvcBscLwsNulUpl
+        type: Filter
+        name: SrcMvcBscLwsNulUplFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullableUploadImage\Filter
+    -
+        db: SrcMvcBscLwsUniNul
+        type: Filter
+        name: SrcMvcBscLwsUniNulFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullable\Filter
+    -
+        db: SrcMvcBscLwsUniNulUpl
+        type: Filter
+        name: SrcMvcBscLwsUniNulUplFilter
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Filter
+    -
+        db: SrcMvcBscStr
+        type: Filter
+        name: SrcMvcBscStrFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrict\Filter
+    -
+        db: SrcMvcBscStrUpl
+        type: Filter
+        name: SrcMvcBscStrUplFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUploadImage\Filter
+    -
+        db: SrcMvcBscStrUni
+        type: Filter
+        name: SrcMvcBscStrUniFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUnique\Filter
+    -
+        db: SrcMvcBscStrUniUpl
+        type: Filter
+        name: SrcMvcBscStrUniUplFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueUploadImage\Filter
+    -
+        db: SrcMvcBscStrNul
+        type: Filter
+        name: SrcMvcBscStrNulFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullable\Filter
+    -
+        db: SrcMvcBscStrNulUpl
+        type: Filter
+        name: SrcMvcBscStrNulUplFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullableUploadImage\Filter
+    -
+        db: SrcMvcBscStrUniNul
+        type: Filter
+        name: SrcMvcBscStrUniNulFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullable\Filter
+    -
+        db: SrcMvcBscStrUniNulUpl
+        type: Filter
+        name: SrcMvcBscStrUniNulUplFilter
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Filter
+    -
+        db: SrcMvcCmp
+        type: Filter
+        name: SrcMvcCmpFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp: html
+            clm_dec_mny_cmp: money-pt-br
+            clm_boo_chb_cmp: checkbox
+            clm_int_chb_cmp: checkbox
+            clm_dtt_pt_cmp: datetime-pt-br
+            clm_dat_pt_cmp: date-pt-br
+            clm_vrc_pas_ver_cmp: password-verify
+            clm_vrc_upl_img_cmp: upload-image
+            clm_vrc_url_cmp: url
+            clm_vrc_uni_id_cmp: unique-id
+            clm_vrc_tel_cmp: telephone
+            clm_vrc_eml_cmp: email
+        service: factories
+        namespace: SrcMvcComplete\Filter
+    -
+        db: SrcMvcCmpUpl
+        type: Filter
+        name: SrcMvcCmpUplFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_upl: html
+            clm_dec_mny_cmp_upl: money-pt-br
+            clm_boo_chb_cmp_upl: checkbox
+            clm_int_chb_cmp_upl: checkbox
+            clm_dtt_pt_cmp_upl: datetime-pt-br
+            clm_dat_pt_cmp_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_upl: password-verify
+            clm_vrc_upl_img_cmp_upl: upload-image
+            clm_vrc_url_cmp_upl: url
+            clm_vrc_uni_id_cmp_upl: unique-id
+            clm_vrc_tel_cmp_upl: telephone
+            clm_vrc_eml_cmp_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUploadImage\Filter
+    -
+        db: SrcMvcCmpUni
+        type: Filter
+        name: SrcMvcCmpUniFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni: html
+            clm_dec_mny_cmp_uni: money-pt-br
+            clm_boo_chb_cmp_uni: checkbox
+            clm_int_chb_cmp_uni: checkbox
+            clm_dtt_pt_cmp_uni: datetime-pt-br
+            clm_dat_pt_cmp_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_uni: password-verify
+            clm_vrc_upl_img_cmp_uni: upload-image
+            clm_vrc_url_cmp_uni: url
+            clm_vrc_uni_id_cmp_uni: unique-id
+            clm_vrc_tel_cmp_uni: telephone
+            clm_vrc_eml_cmp_uni: email
+        service: factories
+        namespace: SrcMvcCompleteUnique\Filter
+    -
+        db: SrcMvcCmpUniUpl
+        type: Filter
+        name: SrcMvcCmpUniUplFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_upl: html
+            clm_dec_mny_cmp_uni_upl: money-pt-br
+            clm_boo_chb_cmp_uni_upl: checkbox
+            clm_int_chb_cmp_uni_upl: checkbox
+            clm_dtt_pt_cmp_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_upl: upload-image
+            clm_vrc_url_cmp_uni_upl: url
+            clm_vrc_uni_id_cmp_uni_upl: unique-id
+            clm_vrc_tel_cmp_uni_upl: telephone
+            clm_vrc_eml_cmp_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueUploadImage\Filter
+    -
+        db: SrcMvcCmpNul
+        type: Filter
+        name: SrcMvcCmpNulFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul: html
+            clm_dec_mny_cmp_nul: money-pt-br
+            clm_boo_chb_cmp_nul: checkbox
+            clm_int_chb_cmp_nul: checkbox
+            clm_dtt_pt_cmp_nul: datetime-pt-br
+            clm_dat_pt_cmp_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_nul: password-verify
+            clm_vrc_upl_img_cmp_nul: upload-image
+            clm_vrc_url_cmp_nul: url
+            clm_vrc_uni_id_cmp_nul: unique-id
+            clm_vrc_tel_cmp_nul: telephone
+            clm_vrc_eml_cmp_nul: email
+        service: factories
+        namespace: SrcMvcCompleteNullable\Filter
+    -
+        db: SrcMvcCmpNulUpl
+        type: Filter
+        name: SrcMvcCmpNulUplFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul_upl: html
+            clm_dec_mny_cmp_nul_upl: money-pt-br
+            clm_boo_chb_cmp_nul_upl: checkbox
+            clm_int_chb_cmp_nul_upl: checkbox
+            clm_dtt_pt_cmp_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_nul_upl: upload-image
+            clm_vrc_url_cmp_nul_upl: url
+            clm_vrc_uni_id_cmp_nul_upl: unique-id
+            clm_vrc_tel_cmp_nul_upl: telephone
+            clm_vrc_eml_cmp_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteNullableUploadImage\Filter
+    -
+        db: SrcMvcCmpUniNul
+        type: Filter
+        name: SrcMvcCmpUniNulFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul: html
+            clm_dec_mny_cmp_uni_nul: money-pt-br
+            clm_boo_chb_cmp_uni_nul: checkbox
+            clm_int_chb_cmp_uni_nul: checkbox
+            clm_dtt_pt_cmp_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_uni_nul: upload-image
+            clm_vrc_url_cmp_uni_nul: url
+            clm_vrc_uni_id_cmp_uni_nul: unique-id
+            clm_vrc_tel_cmp_uni_nul: telephone
+            clm_vrc_eml_cmp_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullable\Filter
+    -
+        db: SrcMvcCmpUniNulUpl
+        type: Filter
+        name: SrcMvcCmpUniNulUplFilter
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul_upl: html
+            clm_dec_mny_cmp_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_uni_nul_upl: checkbox
+            clm_int_chb_cmp_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullableUploadImage\Filter
+    -
+        db: SrcMvcCmpLws
+        type: Filter
+        name: SrcMvcCmpLwsFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws: html
+            clm_dec_mny_cmp_lws: money-pt-br
+            clm_boo_chb_cmp_lws: checkbox
+            clm_int_chb_cmp_lws: checkbox
+            clm_dtt_pt_cmp_lws: datetime-pt-br
+            clm_dat_pt_cmp_lws: date-pt-br
+            clm_vrc_pas_ver_cmp_lws: password-verify
+            clm_vrc_upl_img_cmp_lws: upload-image
+            clm_vrc_url_cmp_lws: url
+            clm_vrc_uni_id_cmp_lws: unique-id
+            clm_vrc_tel_cmp_lws: telephone
+            clm_vrc_eml_cmp_lws: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrict\Filter
+    -
+        db: SrcMvcCmpLwsUpl
+        type: Filter
+        name: SrcMvcCmpLwsUplFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_upl: html
+            clm_dec_mny_cmp_lws_upl: money-pt-br
+            clm_boo_chb_cmp_lws_upl: checkbox
+            clm_int_chb_cmp_lws_upl: checkbox
+            clm_dtt_pt_cmp_lws_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_upl: upload-image
+            clm_vrc_url_cmp_lws_upl: url
+            clm_vrc_uni_id_cmp_lws_upl: unique-id
+            clm_vrc_tel_cmp_lws_upl: telephone
+            clm_vrc_eml_cmp_lws_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUploadImage\Filter
+    -
+        db: SrcMvcCmpLwsUni
+        type: Filter
+        name: SrcMvcCmpLwsUniFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni: html
+            clm_dec_mny_cmp_lws_uni: money-pt-br
+            clm_boo_chb_cmp_lws_uni: checkbox
+            clm_int_chb_cmp_lws_uni: checkbox
+            clm_dtt_pt_cmp_lws_uni: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni: password-verify
+            clm_vrc_upl_img_cmp_lws_uni: upload-image
+            clm_vrc_url_cmp_lws_uni: url
+            clm_vrc_uni_id_cmp_lws_uni: unique-id
+            clm_vrc_tel_cmp_lws_uni: telephone
+            clm_vrc_eml_cmp_lws_uni: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUnique\Filter
+    -
+        db: SrcMvcCmpLwsUniUpl
+        type: Filter
+        name: SrcMvcCmpLwsUniUplFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_upl: html
+            clm_dec_mny_cmp_lws_uni_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_upl: checkbox
+            clm_int_chb_cmp_lws_uni_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Filter
+    -
+        db: SrcMvcCmpLwsNul
+        type: Filter
+        name: SrcMvcCmpLwsNulFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul: html
+            clm_dec_mny_cmp_lws_nul: money-pt-br
+            clm_boo_chb_cmp_lws_nul: checkbox
+            clm_int_chb_cmp_lws_nul: checkbox
+            clm_dtt_pt_cmp_lws_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_nul: upload-image
+            clm_vrc_url_cmp_lws_nul: url
+            clm_vrc_uni_id_cmp_lws_nul: unique-id
+            clm_vrc_tel_cmp_lws_nul: telephone
+            clm_vrc_eml_cmp_lws_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullable\Filter
+    -
+        db: SrcMvcCmpLwsNulUpl
+        type: Filter
+        name: SrcMvcCmpLwsNulUplFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul_upl: html
+            clm_dec_mny_cmp_lws_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_nul_upl: checkbox
+            clm_int_chb_cmp_lws_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullableUploadImage\Filter
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Filter
+        name: SrcMvcCmpLwsUniNulFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Filter
+    -
+        db: SrcMvcCmpLwsUniNulUpl
+        type: Filter
+        name: SrcMvcCmpLwsUniNulUplFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul_upl: html
+            clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_int_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Filter
+    -
+        db: SrcMvcCmpStr
+        type: Filter
+        name: SrcMvcCmpStrFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str: html
+            clm_dec_mny_cmp_str: money-pt-br
+            clm_boo_chb_cmp_str: checkbox
+            clm_int_chb_cmp_str: checkbox
+            clm_dtt_pt_cmp_str: datetime-pt-br
+            clm_dat_pt_cmp_str: date-pt-br
+            clm_vrc_pas_ver_cmp_str: password-verify
+            clm_vrc_upl_img_cmp_str: upload-image
+            clm_vrc_url_cmp_str: url
+            clm_vrc_uni_id_cmp_str: unique-id
+            clm_vrc_tel_cmp_str: telephone
+            clm_vrc_eml_cmp_str: email
+        service: factories
+        namespace: SrcMvcCompleteStrict\Filter
+    -
+        db: SrcMvcCmpStrUpl
+        type: Filter
+        name: SrcMvcCmpStrUplFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_upl: html
+            clm_dec_mny_cmp_str_upl: money-pt-br
+            clm_boo_chb_cmp_str_upl: checkbox
+            clm_int_chb_cmp_str_upl: checkbox
+            clm_dtt_pt_cmp_str_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_upl: password-verify
+            clm_vrc_upl_img_cmp_str_upl: upload-image
+            clm_vrc_url_cmp_str_upl: url
+            clm_vrc_uni_id_cmp_str_upl: unique-id
+            clm_vrc_tel_cmp_str_upl: telephone
+            clm_vrc_eml_cmp_str_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUploadImage\Filter
+    -
+        db: SrcMvcCmpStrUni
+        type: Filter
+        name: SrcMvcCmpStrUniFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni: html
+            clm_dec_mny_cmp_str_uni: money-pt-br
+            clm_boo_chb_cmp_str_uni: checkbox
+            clm_int_chb_cmp_str_uni: checkbox
+            clm_dtt_pt_cmp_str_uni: datetime-pt-br
+            clm_dat_pt_cmp_str_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni: password-verify
+            clm_vrc_upl_img_cmp_str_uni: upload-image
+            clm_vrc_url_cmp_str_uni: url
+            clm_vrc_uni_id_cmp_str_uni: unique-id
+            clm_vrc_tel_cmp_str_uni: telephone
+            clm_vrc_eml_cmp_str_uni: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUnique\Filter
+    -
+        db: SrcMvcCmpStrUniUpl
+        type: Filter
+        name: SrcMvcCmpStrUniUplFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_upl: html
+            clm_dec_mny_cmp_str_uni_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_upl: checkbox
+            clm_int_chb_cmp_str_uni_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_upl: upload-image
+            clm_vrc_url_cmp_str_uni_upl: url
+            clm_vrc_uni_id_cmp_str_uni_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_upl: telephone
+            clm_vrc_eml_cmp_str_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueUploadImage\Filter
+    -
+        db: SrcMvcCmpStrNul
+        type: Filter
+        name: SrcMvcCmpStrNulFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul: html
+            clm_dec_mny_cmp_str_nul: money-pt-br
+            clm_boo_chb_cmp_str_nul: checkbox
+            clm_int_chb_cmp_str_nul: checkbox
+            clm_dtt_pt_cmp_str_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul: password-verify
+            clm_vrc_upl_img_cmp_str_nul: upload-image
+            clm_vrc_url_cmp_str_nul: url
+            clm_vrc_uni_id_cmp_str_nul: unique-id
+            clm_vrc_tel_cmp_str_nul: telephone
+            clm_vrc_eml_cmp_str_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullable\Filter
+    -
+        db: SrcMvcCmpStrNulUpl
+        type: Filter
+        name: SrcMvcCmpStrNulUplFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul_upl: html
+            clm_dec_mny_cmp_str_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_nul_upl: checkbox
+            clm_int_chb_cmp_str_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_nul_upl: upload-image
+            clm_vrc_url_cmp_str_nul_upl: url
+            clm_vrc_uni_id_cmp_str_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_nul_upl: telephone
+            clm_vrc_eml_cmp_str_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullableUploadImage\Filter
+    -
+        db: SrcMvcCmpStrUniNul
+        type: Filter
+        name: SrcMvcCmpStrUniNulFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul: html
+            clm_dec_mny_cmp_str_uni_nul: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul: checkbox
+            clm_int_chb_cmp_str_uni_nul: checkbox
+            clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul: upload-image
+            clm_vrc_url_cmp_str_uni_nul: url
+            clm_vrc_uni_id_cmp_str_uni_nul: unique-id
+            clm_vrc_tel_cmp_str_uni_nul: telephone
+            clm_vrc_eml_cmp_str_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullable\Filter
+    -
+        db: SrcMvcCmpStrUniNulUpl
+        type: Filter
+        name: SrcMvcCmpStrUniNulUplFilter
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul_upl: html
+            clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul_upl: checkbox
+            clm_int_chb_cmp_str_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_str_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_str_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Filter
