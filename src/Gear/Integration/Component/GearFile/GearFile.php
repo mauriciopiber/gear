@@ -220,10 +220,12 @@ class GearFile
     public function createSrcMvcGearFile(SrcMvcMinorSuite $srcMvcMinorSuite, $tables)
     {
         $this->suite = $srcMvcMinorSuite;
-        //$this->history = [***REMOVED***;
+
+        $this->history = [***REMOVED***;
 
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
+
             $this->minorSuite = $minorSuite;
             $name = $minorSuite->getType() == SrcTypesInterface::ENTITY
                 ? $minorSuite->getTableAlias()
@@ -245,7 +247,7 @@ class GearFile
 
             $srcs[***REMOVED*** = $src;
 
-            if (!empty($minorSuite->getForeignKeys())) {
+            if (!empty($minorSuite->getForeignKeys()) && in_array($srcMvcMinorSuite->getType(), [SrcTypesInterface::ENTITY, SrcTypesInterface::FIXTURE***REMOVED***)) {
                 foreach ($minorSuite->getForeignKeys() as $foreignKey) {
                     if (in_array($foreignKey, $this->history)) {
                         continue;
@@ -255,7 +257,11 @@ class GearFile
                 }
             }
 
-            if (!empty($minorSuite->getTableAssoc()) && !in_array($minorSuite->getTableAssoc(), $this->history)) {
+            if (
+                !empty($minorSuite->getTableAssoc())
+                && !in_array($minorSuite->getTableAssoc(), $this->history)
+                && in_array($srcMvcMinorSuite->getType(), [SrcTypesInterface::ENTITY, SrcTypesInterface::FIXTURE***REMOVED***)
+            ) {
                 $srcs = array_merge(
                     $srcs,
                     $this->createForeignKeyGearfile($minorSuite->getTableAssoc(), $minorSuite)
@@ -389,7 +395,7 @@ class GearFile
                 return $data;
             }
 
-            if ($minorSuite->getType() === SrcTypesInterface::FIXTURE) {
+            if ($minorSuite->getType() === SrcTypesInterface::FIXTURE && $table !== 'UploadImage') {
                 $data =  [
                     [
                         'name' => sprintf('%sFixture', $table),
@@ -400,6 +406,7 @@ class GearFile
                 return $data;
             }
 
+            return [***REMOVED***;
         }
 
         //var_dump($tableId);

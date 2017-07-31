@@ -162,6 +162,10 @@ src:
             clm_vrc_tel_cmp: telephone
             clm_vrc_eml_cmp: email
     -
+        name: ColumnIntForeignFixture
+        type: Fixture
+        db: ColumnIntForeign
+    -
         db: SrcMvcCmpUpl
         type: Fixture
         name: SrcMvcCmpUplFixture
