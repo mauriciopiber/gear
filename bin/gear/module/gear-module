@@ -9,6 +9,21 @@ worker="module"
 source "$functions/init.sh"
 
 
+
+if [ "$cmd" == "ci" ***REMOVED***; then
+
+    # Params
+    if [ $# -lt 2 ***REMOVED***; then
+        echo "usage $0: command module type"
+        exit 1
+    fi
+    
+    Gear_Module_SetUpJenkins "${2}" "${3}"
+	
+	exit 0
+fi
+
+
 if [ "$cmd" == "diagnostic" ***REMOVED***; then
 
     # Params

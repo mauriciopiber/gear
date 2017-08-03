@@ -36,9 +36,18 @@ function Gear_CI_CopyJenkinsFile
         return		
     fi
    
+    if [ "$nameUrl" == "pbr-controller-mvc" ***REMOVED***; then
+   	
+   	    jenkins="$(cat $ciMock/jenkins_controller_mvc)"
+        newFile=$(echo "$jenkins" | sed -e "s/#MODULE/$nameUrl/g")
+        echo "$newFile" > $location/Jenkinsfile
+        return
+   	
+   	fi
+   
     jenkins="$(cat $ciMock/jenkins_$type)"
     newFile=$(echo "$jenkins" | sed -e "s/#MODULE/$nameUrl/g")
-	echo "$newFile" > $location/Jenkinsfile
+    echo "$newFile" > $location/Jenkinsfile
 	#exit 1
     return		
 }

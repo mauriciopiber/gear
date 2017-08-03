@@ -18,6 +18,7 @@ declare -a availableCmds=(
     "diagnostic" 
     "upgrade" 
     "custom"
+    "ci"
 )
 
 cmd=${1}

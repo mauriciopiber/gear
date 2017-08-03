@@ -1,0 +1,56 @@
+#!groovy
+@Library('gear-jenkins-library') _
+
+pipeline {
+    agent any
+    stages {
+        stage('Prepare') {
+            steps {
+                notifyBuild()
+                checkout scm
+                sh 'script/deploy-testing.sh'
+                sh '/usr/bin/ant prepare'
+                sh '/usr/bin/ant parallel-lint'
+            }
+        }
+        stage('Quality') {
+            steps {
+                sh '/usr/bin/ant phpcs-ci phpmd-ci phpcpd-ci jshint-ci'
+            }
+        }
+        stage('Unit PHP') {
+            post {
+                failure {
+                    postAction()
+                }
+            }
+            steps {
+                sh '/usr/bin/ant unit-group-ci -Dgroup=Controller'
+            }
+        }
+        stage('Unit JS') {
+            post {
+                failure {
+                    postKarma()
+                    postAction()
+                }
+            }
+            steps {
+                sh '/usr/bin/ant karma'
+            }
+        }
+        stage('Report') {
+            steps {
+                postKarma()
+                postAction()
+            }
+        }
+    }
+    post {
+        always {
+            notifyBuild(currentBuild.result)
+            sh 'sudo chmod -R 777 data'
+            deleteDir() /* clean up our workspace */
+        }
+    }
+}
