@@ -1,0 +1,9 @@
+<target name="unit-group-ci" description="Run unit tests with PHPUnit" depends="set-vendor, build-helper">
+    <exec executable="${vendor}/bin/codecept" failonerror="true">
+        <arg value="run"/>
+        <arg value="unit"/>
+        <arg value="-g"/>
+        <arg value="${group}"/>        
+        <arg value="--xml"/>
+    </exec>
+</target>

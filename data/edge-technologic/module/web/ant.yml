@@ -34,6 +34,7 @@ files:
     phpmd-ci: 'set-vendor'
     phpcpd-ci: 'set-vendor'
     unit-ci: 'set-vendor, build-helper'
+    unit-group-ci: 'set-vendor, build-helper'
     jshint-ci: ''
     karma: ''
     protractor: 'db-load, cache-load'

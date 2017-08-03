@@ -66,6 +66,24 @@ function Gear_Module_Execute_Create
     exit 0
 }
 
+function Gear_Module_SetUpJenkins
+{
+    # Params
+    if [ $# -ne 2 ***REMOVED***; then
+        echo "usage: module type"
+        exit 1
+    fi
+   	
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    
+    
+    Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
+
+}
+
 function Gear_Module_Execute_Clear
 {
     # Params

@@ -11,6 +11,12 @@ if [ "${construct[****REMOVED***}" == "" ***REMOVED***; then
 	
 fi 
 
+if [ "$cmd" == "ci" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "ci" "$module" "$type"
+	exit 0
+fi
+
 if [ "$cmd" == "custom" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "custom" "$module" "$build"
