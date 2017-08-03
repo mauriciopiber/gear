@@ -295,23 +295,23 @@ class GearFile
                 ***REMOVED***,
                 'actions' => [
                     [
-                        'name' => 'create',
+                        'name' => 'Create',
                         'role' => 'admin'
                     ***REMOVED***,
                     [
-                        'name' => 'edit',
+                        'name' => 'Edit',
                         'role' => 'admin'
                     ***REMOVED***,
                     [
-                        'name' => 'list',
+                        'name' => 'List',
                         'role' => 'admin'
                     ***REMOVED***,
                     [
-                        'name' => 'view',
+                        'name' => 'View',
                         'role' => 'admin'
                     ***REMOVED***,
                     [
-                        'name' => 'delete',
+                        'name' => 'Delete',
                         'role' => 'admin'
                     ***REMOVED***,
                 ***REMOVED***
@@ -319,7 +319,7 @@ class GearFile
 
             if ($minorSuite->getTableAssoc() == UploadImageTable::NAME) {
                 $controllerItem['dependency'***REMOVED***[***REMOVED*** = '\GearImage\Service\ImageService';
-                $controllerItem['actions'***REMOVED***[***REMOVED*** = ['name' => 'upload-image', 'role' => 'admin'***REMOVED***;
+                $controllerItem['actions'***REMOVED***[***REMOVED*** = ['name' => 'UploadImage', 'role' => 'admin'***REMOVED***;
             }
 
             $controller[***REMOVED*** = $controllerItem;

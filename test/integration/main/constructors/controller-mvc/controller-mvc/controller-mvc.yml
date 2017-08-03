@@ -12,11 +12,11 @@ controller:
             - SrcMvcBasic\Form\SrcMvcBasicForm
             - SrcMvcBasic\SearchForm\SrcMvcBasicSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscUpl
         type: Action
@@ -31,12 +31,12 @@ controller:
             - SrcMvcBasicUploadImage\SearchForm\SrcMvcBasicUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscUni
         type: Action
@@ -50,11 +50,11 @@ controller:
             - SrcMvcBasicUnique\Form\SrcMvcBasicUniqueForm
             - SrcMvcBasicUnique\SearchForm\SrcMvcBasicUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscUniUpl
         type: Action
@@ -69,12 +69,12 @@ controller:
             - SrcMvcBasicUniqueUploadImage\SearchForm\SrcMvcBasicUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscNul
         type: Action
@@ -88,11 +88,11 @@ controller:
             - SrcMvcBasicNullable\Form\SrcMvcBasicNullableForm
             - SrcMvcBasicNullable\SearchForm\SrcMvcBasicNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscNulUpl
         type: Action
@@ -107,12 +107,12 @@ controller:
             - SrcMvcBasicNullableUploadImage\SearchForm\SrcMvcBasicNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscUniNul
         type: Action
@@ -126,11 +126,11 @@ controller:
             - SrcMvcBasicUniqueNullable\Form\SrcMvcBasicUniqueNullableForm
             - SrcMvcBasicUniqueNullable\SearchForm\SrcMvcBasicUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscUniNulUpl
         type: Action
@@ -145,12 +145,12 @@ controller:
             - SrcMvcBasicUniqueNullableUploadImage\SearchForm\SrcMvcBasicUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscLws
         type: Action
@@ -164,11 +164,11 @@ controller:
             - SrcMvcBasicLowStrict\Form\SrcMvcBasicLowStrictForm
             - SrcMvcBasicLowStrict\SearchForm\SrcMvcBasicLowStrictSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscLwsUpl
         type: Action
@@ -183,12 +183,12 @@ controller:
             - SrcMvcBasicLowStrictUploadImage\SearchForm\SrcMvcBasicLowStrictUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscLwsUni
         type: Action
@@ -202,11 +202,11 @@ controller:
             - SrcMvcBasicLowStrictUnique\Form\SrcMvcBasicLowStrictUniqueForm
             - SrcMvcBasicLowStrictUnique\SearchForm\SrcMvcBasicLowStrictUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscLwsUniUpl
         type: Action
@@ -221,12 +221,12 @@ controller:
             - SrcMvcBasicLowStrictUniqueUploadImage\SearchForm\SrcMvcBasicLowStrictUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscLwsNul
         type: Action
@@ -240,11 +240,11 @@ controller:
             - SrcMvcBasicLowStrictNullable\Form\SrcMvcBasicLowStrictNullableForm
             - SrcMvcBasicLowStrictNullable\SearchForm\SrcMvcBasicLowStrictNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscLwsNulUpl
         type: Action
@@ -259,12 +259,12 @@ controller:
             - SrcMvcBasicLowStrictNullableUploadImage\SearchForm\SrcMvcBasicLowStrictNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscLwsUniNul
         type: Action
@@ -278,11 +278,11 @@ controller:
             - SrcMvcBasicLowStrictUniqueNullable\Form\SrcMvcBasicLowStrictUniqueNullableForm
             - SrcMvcBasicLowStrictUniqueNullable\SearchForm\SrcMvcBasicLowStrictUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscLwsUniNulUpl
         type: Action
@@ -297,12 +297,12 @@ controller:
             - SrcMvcBasicLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcBasicLowStrictUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscStr
         type: Action
@@ -316,11 +316,11 @@ controller:
             - SrcMvcBasicStrict\Form\SrcMvcBasicStrictForm
             - SrcMvcBasicStrict\SearchForm\SrcMvcBasicStrictSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscStrUpl
         type: Action
@@ -335,12 +335,12 @@ controller:
             - SrcMvcBasicStrictUploadImage\SearchForm\SrcMvcBasicStrictUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscStrUni
         type: Action
@@ -354,11 +354,11 @@ controller:
             - SrcMvcBasicStrictUnique\Form\SrcMvcBasicStrictUniqueForm
             - SrcMvcBasicStrictUnique\SearchForm\SrcMvcBasicStrictUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscStrUniUpl
         type: Action
@@ -373,12 +373,12 @@ controller:
             - SrcMvcBasicStrictUniqueUploadImage\SearchForm\SrcMvcBasicStrictUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscStrNul
         type: Action
@@ -392,11 +392,11 @@ controller:
             - SrcMvcBasicStrictNullable\Form\SrcMvcBasicStrictNullableForm
             - SrcMvcBasicStrictNullable\SearchForm\SrcMvcBasicStrictNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscStrNulUpl
         type: Action
@@ -411,12 +411,12 @@ controller:
             - SrcMvcBasicStrictNullableUploadImage\SearchForm\SrcMvcBasicStrictNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcBscStrUniNul
         type: Action
@@ -430,11 +430,11 @@ controller:
             - SrcMvcBasicStrictUniqueNullable\Form\SrcMvcBasicStrictUniqueNullableForm
             - SrcMvcBasicStrictUniqueNullable\SearchForm\SrcMvcBasicStrictUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcBscStrUniNulUpl
         type: Action
@@ -449,12 +449,12 @@ controller:
             - SrcMvcBasicStrictUniqueNullableUploadImage\SearchForm\SrcMvcBasicStrictUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmp
         type: Action
@@ -480,11 +480,11 @@ controller:
             - SrcMvcComplete\Form\SrcMvcCompleteForm
             - SrcMvcComplete\SearchForm\SrcMvcCompleteSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpUpl
         type: Action
@@ -511,12 +511,12 @@ controller:
             - SrcMvcCompleteUploadImage\SearchForm\SrcMvcCompleteUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpUni
         type: Action
@@ -542,11 +542,11 @@ controller:
             - SrcMvcCompleteUnique\Form\SrcMvcCompleteUniqueForm
             - SrcMvcCompleteUnique\SearchForm\SrcMvcCompleteUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpUniUpl
         type: Action
@@ -573,12 +573,12 @@ controller:
             - SrcMvcCompleteUniqueUploadImage\SearchForm\SrcMvcCompleteUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpNul
         type: Action
@@ -604,11 +604,11 @@ controller:
             - SrcMvcCompleteNullable\Form\SrcMvcCompleteNullableForm
             - SrcMvcCompleteNullable\SearchForm\SrcMvcCompleteNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpNulUpl
         type: Action
@@ -635,12 +635,12 @@ controller:
             - SrcMvcCompleteNullableUploadImage\SearchForm\SrcMvcCompleteNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpUniNul
         type: Action
@@ -666,11 +666,11 @@ controller:
             - SrcMvcCompleteUniqueNullable\Form\SrcMvcCompleteUniqueNullableForm
             - SrcMvcCompleteUniqueNullable\SearchForm\SrcMvcCompleteUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpUniNulUpl
         type: Action
@@ -697,12 +697,12 @@ controller:
             - SrcMvcCompleteUniqueNullableUploadImage\SearchForm\SrcMvcCompleteUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpLws
         type: Action
@@ -728,11 +728,11 @@ controller:
             - SrcMvcCompleteLowStrict\Form\SrcMvcCompleteLowStrictForm
             - SrcMvcCompleteLowStrict\SearchForm\SrcMvcCompleteLowStrictSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpLwsUpl
         type: Action
@@ -759,12 +759,12 @@ controller:
             - SrcMvcCompleteLowStrictUploadImage\SearchForm\SrcMvcCompleteLowStrictUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpLwsUni
         type: Action
@@ -790,11 +790,11 @@ controller:
             - SrcMvcCompleteLowStrictUnique\Form\SrcMvcCompleteLowStrictUniqueForm
             - SrcMvcCompleteLowStrictUnique\SearchForm\SrcMvcCompleteLowStrictUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpLwsUniUpl
         type: Action
@@ -821,12 +821,12 @@ controller:
             - SrcMvcCompleteLowStrictUniqueUploadImage\SearchForm\SrcMvcCompleteLowStrictUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpLwsNul
         type: Action
@@ -852,11 +852,11 @@ controller:
             - SrcMvcCompleteLowStrictNullable\Form\SrcMvcCompleteLowStrictNullableForm
             - SrcMvcCompleteLowStrictNullable\SearchForm\SrcMvcCompleteLowStrictNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpLwsNulUpl
         type: Action
@@ -883,12 +883,12 @@ controller:
             - SrcMvcCompleteLowStrictNullableUploadImage\SearchForm\SrcMvcCompleteLowStrictNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpLwsUniNul
         type: Action
@@ -914,11 +914,11 @@ controller:
             - SrcMvcCompleteLowStrictUniqueNullable\Form\SrcMvcCompleteLowStrictUniqueNullableForm
             - SrcMvcCompleteLowStrictUniqueNullable\SearchForm\SrcMvcCompleteLowStrictUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpLwsUniNulUpl
         type: Action
@@ -945,12 +945,12 @@ controller:
             - SrcMvcCompleteLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcCompleteLowStrictUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpStr
         type: Action
@@ -976,11 +976,11 @@ controller:
             - SrcMvcCompleteStrict\Form\SrcMvcCompleteStrictForm
             - SrcMvcCompleteStrict\SearchForm\SrcMvcCompleteStrictSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpStrUpl
         type: Action
@@ -1007,12 +1007,12 @@ controller:
             - SrcMvcCompleteStrictUploadImage\SearchForm\SrcMvcCompleteStrictUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpStrUni
         type: Action
@@ -1038,11 +1038,11 @@ controller:
             - SrcMvcCompleteStrictUnique\Form\SrcMvcCompleteStrictUniqueForm
             - SrcMvcCompleteStrictUnique\SearchForm\SrcMvcCompleteStrictUniqueSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpStrUniUpl
         type: Action
@@ -1069,12 +1069,12 @@ controller:
             - SrcMvcCompleteStrictUniqueUploadImage\SearchForm\SrcMvcCompleteStrictUniqueUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpStrNul
         type: Action
@@ -1100,11 +1100,11 @@ controller:
             - SrcMvcCompleteStrictNullable\Form\SrcMvcCompleteStrictNullableForm
             - SrcMvcCompleteStrictNullable\SearchForm\SrcMvcCompleteStrictNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpStrNulUpl
         type: Action
@@ -1131,12 +1131,12 @@ controller:
             - SrcMvcCompleteStrictNullableUploadImage\SearchForm\SrcMvcCompleteStrictNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
     -
         db: SrcMvcCmpStrUniNul
         type: Action
@@ -1162,11 +1162,11 @@ controller:
             - SrcMvcCompleteStrictUniqueNullable\Form\SrcMvcCompleteStrictUniqueNullableForm
             - SrcMvcCompleteStrictUniqueNullable\SearchForm\SrcMvcCompleteStrictUniqueNullableSearchForm
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
     -
         db: SrcMvcCmpStrUniNulUpl
         type: Action
@@ -1193,9 +1193,9 @@ controller:
             - SrcMvcCompleteStrictUniqueNullableUploadImage\SearchForm\SrcMvcCompleteStrictUniqueNullableUploadImageSearchForm
             - \GearImage\Service\ImageService
         actions:
-            - { name: create, role: admin }
-            - { name: edit, role: admin }
-            - { name: list, role: admin }
-            - { name: view, role: admin }
-            - { name: delete, role: admin }
-            - { name: upload-image, role: admin }
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+            - { name: UploadImage, role: admin }
