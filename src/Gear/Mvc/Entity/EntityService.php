@@ -87,6 +87,8 @@ class EntityService extends AbstractMvc
 
     public function createEntities(array $srcs)
     {
+        echo "oie"."\n";
+
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();

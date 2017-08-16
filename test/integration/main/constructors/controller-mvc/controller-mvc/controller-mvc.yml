@@ -8,9 +8,9 @@ controller:
         service: factories
         namespace: SrcMvcBasic\Controller
         dependency:
-            - SrcMvcBasic\Service\SrcMvcBasicService
-            - SrcMvcBasic\Form\SrcMvcBasicForm
-            - SrcMvcBasic\SearchForm\SrcMvcBasicSearchForm
+            - SrcMvcBasic\Service\SrcMvcBscService
+            - SrcMvcBasic\Form\SrcMvcBscForm
+            - SrcMvcBasic\SearchForm\SrcMvcBscSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -26,9 +26,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicUploadImage\Controller
         dependency:
-            - SrcMvcBasicUploadImage\Service\SrcMvcBasicUploadImageService
-            - SrcMvcBasicUploadImage\Form\SrcMvcBasicUploadImageForm
-            - SrcMvcBasicUploadImage\SearchForm\SrcMvcBasicUploadImageSearchForm
+            - SrcMvcBasicUploadImage\Service\SrcMvcBscUplService
+            - SrcMvcBasicUploadImage\Form\SrcMvcBscUplForm
+            - SrcMvcBasicUploadImage\SearchForm\SrcMvcBscUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -46,9 +46,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicUnique\Controller
         dependency:
-            - SrcMvcBasicUnique\Service\SrcMvcBasicUniqueService
-            - SrcMvcBasicUnique\Form\SrcMvcBasicUniqueForm
-            - SrcMvcBasicUnique\SearchForm\SrcMvcBasicUniqueSearchForm
+            - SrcMvcBasicUnique\Service\SrcMvcBscUniService
+            - SrcMvcBasicUnique\Form\SrcMvcBscUniForm
+            - SrcMvcBasicUnique\SearchForm\SrcMvcBscUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -64,9 +64,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicUniqueUploadImage\Controller
         dependency:
-            - SrcMvcBasicUniqueUploadImage\Service\SrcMvcBasicUniqueUploadImageService
-            - SrcMvcBasicUniqueUploadImage\Form\SrcMvcBasicUniqueUploadImageForm
-            - SrcMvcBasicUniqueUploadImage\SearchForm\SrcMvcBasicUniqueUploadImageSearchForm
+            - SrcMvcBasicUniqueUploadImage\Service\SrcMvcBscUniUplService
+            - SrcMvcBasicUniqueUploadImage\Form\SrcMvcBscUniUplForm
+            - SrcMvcBasicUniqueUploadImage\SearchForm\SrcMvcBscUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -84,9 +84,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicNullable\Controller
         dependency:
-            - SrcMvcBasicNullable\Service\SrcMvcBasicNullableService
-            - SrcMvcBasicNullable\Form\SrcMvcBasicNullableForm
-            - SrcMvcBasicNullable\SearchForm\SrcMvcBasicNullableSearchForm
+            - SrcMvcBasicNullable\Service\SrcMvcBscNulService
+            - SrcMvcBasicNullable\Form\SrcMvcBscNulForm
+            - SrcMvcBasicNullable\SearchForm\SrcMvcBscNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -102,9 +102,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicNullableUploadImage\Service\SrcMvcBasicNullableUploadImageService
-            - SrcMvcBasicNullableUploadImage\Form\SrcMvcBasicNullableUploadImageForm
-            - SrcMvcBasicNullableUploadImage\SearchForm\SrcMvcBasicNullableUploadImageSearchForm
+            - SrcMvcBasicNullableUploadImage\Service\SrcMvcBscNulUplService
+            - SrcMvcBasicNullableUploadImage\Form\SrcMvcBscNulUplForm
+            - SrcMvcBasicNullableUploadImage\SearchForm\SrcMvcBscNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -122,9 +122,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicUniqueNullable\Controller
         dependency:
-            - SrcMvcBasicUniqueNullable\Service\SrcMvcBasicUniqueNullableService
-            - SrcMvcBasicUniqueNullable\Form\SrcMvcBasicUniqueNullableForm
-            - SrcMvcBasicUniqueNullable\SearchForm\SrcMvcBasicUniqueNullableSearchForm
+            - SrcMvcBasicUniqueNullable\Service\SrcMvcBscUniNulService
+            - SrcMvcBasicUniqueNullable\Form\SrcMvcBscUniNulForm
+            - SrcMvcBasicUniqueNullable\SearchForm\SrcMvcBscUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -140,9 +140,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicUniqueNullableUploadImage\Service\SrcMvcBasicUniqueNullableUploadImageService
-            - SrcMvcBasicUniqueNullableUploadImage\Form\SrcMvcBasicUniqueNullableUploadImageForm
-            - SrcMvcBasicUniqueNullableUploadImage\SearchForm\SrcMvcBasicUniqueNullableUploadImageSearchForm
+            - SrcMvcBasicUniqueNullableUploadImage\Service\SrcMvcBscUniNulUplService
+            - SrcMvcBasicUniqueNullableUploadImage\Form\SrcMvcBscUniNulUplForm
+            - SrcMvcBasicUniqueNullableUploadImage\SearchForm\SrcMvcBscUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -160,9 +160,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrict\Controller
         dependency:
-            - SrcMvcBasicLowStrict\Service\SrcMvcBasicLowStrictService
-            - SrcMvcBasicLowStrict\Form\SrcMvcBasicLowStrictForm
-            - SrcMvcBasicLowStrict\SearchForm\SrcMvcBasicLowStrictSearchForm
+            - SrcMvcBasicLowStrict\Service\SrcMvcBscLwsService
+            - SrcMvcBasicLowStrict\Form\SrcMvcBscLwsForm
+            - SrcMvcBasicLowStrict\SearchForm\SrcMvcBscLwsSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -178,9 +178,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictUploadImage\Controller
         dependency:
-            - SrcMvcBasicLowStrictUploadImage\Service\SrcMvcBasicLowStrictUploadImageService
-            - SrcMvcBasicLowStrictUploadImage\Form\SrcMvcBasicLowStrictUploadImageForm
-            - SrcMvcBasicLowStrictUploadImage\SearchForm\SrcMvcBasicLowStrictUploadImageSearchForm
+            - SrcMvcBasicLowStrictUploadImage\Service\SrcMvcBscLwsUplService
+            - SrcMvcBasicLowStrictUploadImage\Form\SrcMvcBscLwsUplForm
+            - SrcMvcBasicLowStrictUploadImage\SearchForm\SrcMvcBscLwsUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -198,9 +198,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictUnique\Controller
         dependency:
-            - SrcMvcBasicLowStrictUnique\Service\SrcMvcBasicLowStrictUniqueService
-            - SrcMvcBasicLowStrictUnique\Form\SrcMvcBasicLowStrictUniqueForm
-            - SrcMvcBasicLowStrictUnique\SearchForm\SrcMvcBasicLowStrictUniqueSearchForm
+            - SrcMvcBasicLowStrictUnique\Service\SrcMvcBscLwsUniService
+            - SrcMvcBasicLowStrictUnique\Form\SrcMvcBscLwsUniForm
+            - SrcMvcBasicLowStrictUnique\SearchForm\SrcMvcBscLwsUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -216,9 +216,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictUniqueUploadImage\Controller
         dependency:
-            - SrcMvcBasicLowStrictUniqueUploadImage\Service\SrcMvcBasicLowStrictUniqueUploadImageService
-            - SrcMvcBasicLowStrictUniqueUploadImage\Form\SrcMvcBasicLowStrictUniqueUploadImageForm
-            - SrcMvcBasicLowStrictUniqueUploadImage\SearchForm\SrcMvcBasicLowStrictUniqueUploadImageSearchForm
+            - SrcMvcBasicLowStrictUniqueUploadImage\Service\SrcMvcBscLwsUniUplService
+            - SrcMvcBasicLowStrictUniqueUploadImage\Form\SrcMvcBscLwsUniUplForm
+            - SrcMvcBasicLowStrictUniqueUploadImage\SearchForm\SrcMvcBscLwsUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -236,9 +236,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictNullable\Controller
         dependency:
-            - SrcMvcBasicLowStrictNullable\Service\SrcMvcBasicLowStrictNullableService
-            - SrcMvcBasicLowStrictNullable\Form\SrcMvcBasicLowStrictNullableForm
-            - SrcMvcBasicLowStrictNullable\SearchForm\SrcMvcBasicLowStrictNullableSearchForm
+            - SrcMvcBasicLowStrictNullable\Service\SrcMvcBscLwsNulService
+            - SrcMvcBasicLowStrictNullable\Form\SrcMvcBscLwsNulForm
+            - SrcMvcBasicLowStrictNullable\SearchForm\SrcMvcBscLwsNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -254,9 +254,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicLowStrictNullableUploadImage\Service\SrcMvcBasicLowStrictNullableUploadImageService
-            - SrcMvcBasicLowStrictNullableUploadImage\Form\SrcMvcBasicLowStrictNullableUploadImageForm
-            - SrcMvcBasicLowStrictNullableUploadImage\SearchForm\SrcMvcBasicLowStrictNullableUploadImageSearchForm
+            - SrcMvcBasicLowStrictNullableUploadImage\Service\SrcMvcBscLwsNulUplService
+            - SrcMvcBasicLowStrictNullableUploadImage\Form\SrcMvcBscLwsNulUplForm
+            - SrcMvcBasicLowStrictNullableUploadImage\SearchForm\SrcMvcBscLwsNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -274,9 +274,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictUniqueNullable\Controller
         dependency:
-            - SrcMvcBasicLowStrictUniqueNullable\Service\SrcMvcBasicLowStrictUniqueNullableService
-            - SrcMvcBasicLowStrictUniqueNullable\Form\SrcMvcBasicLowStrictUniqueNullableForm
-            - SrcMvcBasicLowStrictUniqueNullable\SearchForm\SrcMvcBasicLowStrictUniqueNullableSearchForm
+            - SrcMvcBasicLowStrictUniqueNullable\Service\SrcMvcBscLwsUniNulService
+            - SrcMvcBasicLowStrictUniqueNullable\Form\SrcMvcBscLwsUniNulForm
+            - SrcMvcBasicLowStrictUniqueNullable\SearchForm\SrcMvcBscLwsUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -292,9 +292,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicLowStrictUniqueNullableUploadImage\Service\SrcMvcBasicLowStrictUniqueNullableUploadImageService
-            - SrcMvcBasicLowStrictUniqueNullableUploadImage\Form\SrcMvcBasicLowStrictUniqueNullableUploadImageForm
-            - SrcMvcBasicLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcBasicLowStrictUniqueNullableUploadImageSearchForm
+            - SrcMvcBasicLowStrictUniqueNullableUploadImage\Service\SrcMvcBscLwsUniNulUplService
+            - SrcMvcBasicLowStrictUniqueNullableUploadImage\Form\SrcMvcBscLwsUniNulUplForm
+            - SrcMvcBasicLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcBscLwsUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -312,9 +312,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrict\Controller
         dependency:
-            - SrcMvcBasicStrict\Service\SrcMvcBasicStrictService
-            - SrcMvcBasicStrict\Form\SrcMvcBasicStrictForm
-            - SrcMvcBasicStrict\SearchForm\SrcMvcBasicStrictSearchForm
+            - SrcMvcBasicStrict\Service\SrcMvcBscStrService
+            - SrcMvcBasicStrict\Form\SrcMvcBscStrForm
+            - SrcMvcBasicStrict\SearchForm\SrcMvcBscStrSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -330,9 +330,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictUploadImage\Controller
         dependency:
-            - SrcMvcBasicStrictUploadImage\Service\SrcMvcBasicStrictUploadImageService
-            - SrcMvcBasicStrictUploadImage\Form\SrcMvcBasicStrictUploadImageForm
-            - SrcMvcBasicStrictUploadImage\SearchForm\SrcMvcBasicStrictUploadImageSearchForm
+            - SrcMvcBasicStrictUploadImage\Service\SrcMvcBscStrUplService
+            - SrcMvcBasicStrictUploadImage\Form\SrcMvcBscStrUplForm
+            - SrcMvcBasicStrictUploadImage\SearchForm\SrcMvcBscStrUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -350,9 +350,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictUnique\Controller
         dependency:
-            - SrcMvcBasicStrictUnique\Service\SrcMvcBasicStrictUniqueService
-            - SrcMvcBasicStrictUnique\Form\SrcMvcBasicStrictUniqueForm
-            - SrcMvcBasicStrictUnique\SearchForm\SrcMvcBasicStrictUniqueSearchForm
+            - SrcMvcBasicStrictUnique\Service\SrcMvcBscStrUniService
+            - SrcMvcBasicStrictUnique\Form\SrcMvcBscStrUniForm
+            - SrcMvcBasicStrictUnique\SearchForm\SrcMvcBscStrUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -368,9 +368,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictUniqueUploadImage\Controller
         dependency:
-            - SrcMvcBasicStrictUniqueUploadImage\Service\SrcMvcBasicStrictUniqueUploadImageService
-            - SrcMvcBasicStrictUniqueUploadImage\Form\SrcMvcBasicStrictUniqueUploadImageForm
-            - SrcMvcBasicStrictUniqueUploadImage\SearchForm\SrcMvcBasicStrictUniqueUploadImageSearchForm
+            - SrcMvcBasicStrictUniqueUploadImage\Service\SrcMvcBscStrUniUplService
+            - SrcMvcBasicStrictUniqueUploadImage\Form\SrcMvcBscStrUniUplForm
+            - SrcMvcBasicStrictUniqueUploadImage\SearchForm\SrcMvcBscStrUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -388,9 +388,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictNullable\Controller
         dependency:
-            - SrcMvcBasicStrictNullable\Service\SrcMvcBasicStrictNullableService
-            - SrcMvcBasicStrictNullable\Form\SrcMvcBasicStrictNullableForm
-            - SrcMvcBasicStrictNullable\SearchForm\SrcMvcBasicStrictNullableSearchForm
+            - SrcMvcBasicStrictNullable\Service\SrcMvcBscStrNulService
+            - SrcMvcBasicStrictNullable\Form\SrcMvcBscStrNulForm
+            - SrcMvcBasicStrictNullable\SearchForm\SrcMvcBscStrNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -406,9 +406,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicStrictNullableUploadImage\Service\SrcMvcBasicStrictNullableUploadImageService
-            - SrcMvcBasicStrictNullableUploadImage\Form\SrcMvcBasicStrictNullableUploadImageForm
-            - SrcMvcBasicStrictNullableUploadImage\SearchForm\SrcMvcBasicStrictNullableUploadImageSearchForm
+            - SrcMvcBasicStrictNullableUploadImage\Service\SrcMvcBscStrNulUplService
+            - SrcMvcBasicStrictNullableUploadImage\Form\SrcMvcBscStrNulUplForm
+            - SrcMvcBasicStrictNullableUploadImage\SearchForm\SrcMvcBscStrNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -426,9 +426,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictUniqueNullable\Controller
         dependency:
-            - SrcMvcBasicStrictUniqueNullable\Service\SrcMvcBasicStrictUniqueNullableService
-            - SrcMvcBasicStrictUniqueNullable\Form\SrcMvcBasicStrictUniqueNullableForm
-            - SrcMvcBasicStrictUniqueNullable\SearchForm\SrcMvcBasicStrictUniqueNullableSearchForm
+            - SrcMvcBasicStrictUniqueNullable\Service\SrcMvcBscStrUniNulService
+            - SrcMvcBasicStrictUniqueNullable\Form\SrcMvcBscStrUniNulForm
+            - SrcMvcBasicStrictUniqueNullable\SearchForm\SrcMvcBscStrUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -444,9 +444,9 @@ controller:
         service: factories
         namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcBasicStrictUniqueNullableUploadImage\Service\SrcMvcBasicStrictUniqueNullableUploadImageService
-            - SrcMvcBasicStrictUniqueNullableUploadImage\Form\SrcMvcBasicStrictUniqueNullableUploadImageForm
-            - SrcMvcBasicStrictUniqueNullableUploadImage\SearchForm\SrcMvcBasicStrictUniqueNullableUploadImageSearchForm
+            - SrcMvcBasicStrictUniqueNullableUploadImage\Service\SrcMvcBscStrUniNulUplService
+            - SrcMvcBasicStrictUniqueNullableUploadImage\Form\SrcMvcBscStrUniNulUplForm
+            - SrcMvcBasicStrictUniqueNullableUploadImage\SearchForm\SrcMvcBscStrUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -476,9 +476,9 @@ controller:
         service: factories
         namespace: SrcMvcComplete\Controller
         dependency:
-            - SrcMvcComplete\Service\SrcMvcCompleteService
-            - SrcMvcComplete\Form\SrcMvcCompleteForm
-            - SrcMvcComplete\SearchForm\SrcMvcCompleteSearchForm
+            - SrcMvcComplete\Service\SrcMvcCmpService
+            - SrcMvcComplete\Form\SrcMvcCmpForm
+            - SrcMvcComplete\SearchForm\SrcMvcCmpSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -506,9 +506,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteUploadImage\Controller
         dependency:
-            - SrcMvcCompleteUploadImage\Service\SrcMvcCompleteUploadImageService
-            - SrcMvcCompleteUploadImage\Form\SrcMvcCompleteUploadImageForm
-            - SrcMvcCompleteUploadImage\SearchForm\SrcMvcCompleteUploadImageSearchForm
+            - SrcMvcCompleteUploadImage\Service\SrcMvcCmpUplService
+            - SrcMvcCompleteUploadImage\Form\SrcMvcCmpUplForm
+            - SrcMvcCompleteUploadImage\SearchForm\SrcMvcCmpUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -538,9 +538,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteUnique\Controller
         dependency:
-            - SrcMvcCompleteUnique\Service\SrcMvcCompleteUniqueService
-            - SrcMvcCompleteUnique\Form\SrcMvcCompleteUniqueForm
-            - SrcMvcCompleteUnique\SearchForm\SrcMvcCompleteUniqueSearchForm
+            - SrcMvcCompleteUnique\Service\SrcMvcCmpUniService
+            - SrcMvcCompleteUnique\Form\SrcMvcCmpUniForm
+            - SrcMvcCompleteUnique\SearchForm\SrcMvcCmpUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -568,9 +568,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteUniqueUploadImage\Controller
         dependency:
-            - SrcMvcCompleteUniqueUploadImage\Service\SrcMvcCompleteUniqueUploadImageService
-            - SrcMvcCompleteUniqueUploadImage\Form\SrcMvcCompleteUniqueUploadImageForm
-            - SrcMvcCompleteUniqueUploadImage\SearchForm\SrcMvcCompleteUniqueUploadImageSearchForm
+            - SrcMvcCompleteUniqueUploadImage\Service\SrcMvcCmpUniUplService
+            - SrcMvcCompleteUniqueUploadImage\Form\SrcMvcCmpUniUplForm
+            - SrcMvcCompleteUniqueUploadImage\SearchForm\SrcMvcCmpUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -600,9 +600,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteNullable\Controller
         dependency:
-            - SrcMvcCompleteNullable\Service\SrcMvcCompleteNullableService
-            - SrcMvcCompleteNullable\Form\SrcMvcCompleteNullableForm
-            - SrcMvcCompleteNullable\SearchForm\SrcMvcCompleteNullableSearchForm
+            - SrcMvcCompleteNullable\Service\SrcMvcCmpNulService
+            - SrcMvcCompleteNullable\Form\SrcMvcCmpNulForm
+            - SrcMvcCompleteNullable\SearchForm\SrcMvcCmpNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -630,9 +630,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteNullableUploadImage\Service\SrcMvcCompleteNullableUploadImageService
-            - SrcMvcCompleteNullableUploadImage\Form\SrcMvcCompleteNullableUploadImageForm
-            - SrcMvcCompleteNullableUploadImage\SearchForm\SrcMvcCompleteNullableUploadImageSearchForm
+            - SrcMvcCompleteNullableUploadImage\Service\SrcMvcCmpNulUplService
+            - SrcMvcCompleteNullableUploadImage\Form\SrcMvcCmpNulUplForm
+            - SrcMvcCompleteNullableUploadImage\SearchForm\SrcMvcCmpNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -662,9 +662,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteUniqueNullable\Controller
         dependency:
-            - SrcMvcCompleteUniqueNullable\Service\SrcMvcCompleteUniqueNullableService
-            - SrcMvcCompleteUniqueNullable\Form\SrcMvcCompleteUniqueNullableForm
-            - SrcMvcCompleteUniqueNullable\SearchForm\SrcMvcCompleteUniqueNullableSearchForm
+            - SrcMvcCompleteUniqueNullable\Service\SrcMvcCmpUniNulService
+            - SrcMvcCompleteUniqueNullable\Form\SrcMvcCmpUniNulForm
+            - SrcMvcCompleteUniqueNullable\SearchForm\SrcMvcCmpUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -692,9 +692,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteUniqueNullableUploadImage\Service\SrcMvcCompleteUniqueNullableUploadImageService
-            - SrcMvcCompleteUniqueNullableUploadImage\Form\SrcMvcCompleteUniqueNullableUploadImageForm
-            - SrcMvcCompleteUniqueNullableUploadImage\SearchForm\SrcMvcCompleteUniqueNullableUploadImageSearchForm
+            - SrcMvcCompleteUniqueNullableUploadImage\Service\SrcMvcCmpUniNulUplService
+            - SrcMvcCompleteUniqueNullableUploadImage\Form\SrcMvcCmpUniNulUplForm
+            - SrcMvcCompleteUniqueNullableUploadImage\SearchForm\SrcMvcCmpUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -724,9 +724,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrict\Controller
         dependency:
-            - SrcMvcCompleteLowStrict\Service\SrcMvcCompleteLowStrictService
-            - SrcMvcCompleteLowStrict\Form\SrcMvcCompleteLowStrictForm
-            - SrcMvcCompleteLowStrict\SearchForm\SrcMvcCompleteLowStrictSearchForm
+            - SrcMvcCompleteLowStrict\Service\SrcMvcCmpLwsService
+            - SrcMvcCompleteLowStrict\Form\SrcMvcCmpLwsForm
+            - SrcMvcCompleteLowStrict\SearchForm\SrcMvcCmpLwsSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -754,9 +754,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictUploadImage\Controller
         dependency:
-            - SrcMvcCompleteLowStrictUploadImage\Service\SrcMvcCompleteLowStrictUploadImageService
-            - SrcMvcCompleteLowStrictUploadImage\Form\SrcMvcCompleteLowStrictUploadImageForm
-            - SrcMvcCompleteLowStrictUploadImage\SearchForm\SrcMvcCompleteLowStrictUploadImageSearchForm
+            - SrcMvcCompleteLowStrictUploadImage\Service\SrcMvcCmpLwsUplService
+            - SrcMvcCompleteLowStrictUploadImage\Form\SrcMvcCmpLwsUplForm
+            - SrcMvcCompleteLowStrictUploadImage\SearchForm\SrcMvcCmpLwsUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -786,9 +786,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictUnique\Controller
         dependency:
-            - SrcMvcCompleteLowStrictUnique\Service\SrcMvcCompleteLowStrictUniqueService
-            - SrcMvcCompleteLowStrictUnique\Form\SrcMvcCompleteLowStrictUniqueForm
-            - SrcMvcCompleteLowStrictUnique\SearchForm\SrcMvcCompleteLowStrictUniqueSearchForm
+            - SrcMvcCompleteLowStrictUnique\Service\SrcMvcCmpLwsUniService
+            - SrcMvcCompleteLowStrictUnique\Form\SrcMvcCmpLwsUniForm
+            - SrcMvcCompleteLowStrictUnique\SearchForm\SrcMvcCmpLwsUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -816,9 +816,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Controller
         dependency:
-            - SrcMvcCompleteLowStrictUniqueUploadImage\Service\SrcMvcCompleteLowStrictUniqueUploadImageService
-            - SrcMvcCompleteLowStrictUniqueUploadImage\Form\SrcMvcCompleteLowStrictUniqueUploadImageForm
-            - SrcMvcCompleteLowStrictUniqueUploadImage\SearchForm\SrcMvcCompleteLowStrictUniqueUploadImageSearchForm
+            - SrcMvcCompleteLowStrictUniqueUploadImage\Service\SrcMvcCmpLwsUniUplService
+            - SrcMvcCompleteLowStrictUniqueUploadImage\Form\SrcMvcCmpLwsUniUplForm
+            - SrcMvcCompleteLowStrictUniqueUploadImage\SearchForm\SrcMvcCmpLwsUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -848,9 +848,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictNullable\Controller
         dependency:
-            - SrcMvcCompleteLowStrictNullable\Service\SrcMvcCompleteLowStrictNullableService
-            - SrcMvcCompleteLowStrictNullable\Form\SrcMvcCompleteLowStrictNullableForm
-            - SrcMvcCompleteLowStrictNullable\SearchForm\SrcMvcCompleteLowStrictNullableSearchForm
+            - SrcMvcCompleteLowStrictNullable\Service\SrcMvcCmpLwsNulService
+            - SrcMvcCompleteLowStrictNullable\Form\SrcMvcCmpLwsNulForm
+            - SrcMvcCompleteLowStrictNullable\SearchForm\SrcMvcCmpLwsNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -878,9 +878,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteLowStrictNullableUploadImage\Service\SrcMvcCompleteLowStrictNullableUploadImageService
-            - SrcMvcCompleteLowStrictNullableUploadImage\Form\SrcMvcCompleteLowStrictNullableUploadImageForm
-            - SrcMvcCompleteLowStrictNullableUploadImage\SearchForm\SrcMvcCompleteLowStrictNullableUploadImageSearchForm
+            - SrcMvcCompleteLowStrictNullableUploadImage\Service\SrcMvcCmpLwsNulUplService
+            - SrcMvcCompleteLowStrictNullableUploadImage\Form\SrcMvcCmpLwsNulUplForm
+            - SrcMvcCompleteLowStrictNullableUploadImage\SearchForm\SrcMvcCmpLwsNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -910,9 +910,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictUniqueNullable\Controller
         dependency:
-            - SrcMvcCompleteLowStrictUniqueNullable\Service\SrcMvcCompleteLowStrictUniqueNullableService
-            - SrcMvcCompleteLowStrictUniqueNullable\Form\SrcMvcCompleteLowStrictUniqueNullableForm
-            - SrcMvcCompleteLowStrictUniqueNullable\SearchForm\SrcMvcCompleteLowStrictUniqueNullableSearchForm
+            - SrcMvcCompleteLowStrictUniqueNullable\Service\SrcMvcCmpLwsUniNulService
+            - SrcMvcCompleteLowStrictUniqueNullable\Form\SrcMvcCmpLwsUniNulForm
+            - SrcMvcCompleteLowStrictUniqueNullable\SearchForm\SrcMvcCmpLwsUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -940,9 +940,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\Service\SrcMvcCompleteLowStrictUniqueNullableUploadImageService
-            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\Form\SrcMvcCompleteLowStrictUniqueNullableUploadImageForm
-            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcCompleteLowStrictUniqueNullableUploadImageSearchForm
+            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\Service\SrcMvcCmpLwsUniNulUplService
+            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\Form\SrcMvcCmpLwsUniNulUplForm
+            - SrcMvcCompleteLowStrictUniqueNullableUploadImage\SearchForm\SrcMvcCmpLwsUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -972,9 +972,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrict\Controller
         dependency:
-            - SrcMvcCompleteStrict\Service\SrcMvcCompleteStrictService
-            - SrcMvcCompleteStrict\Form\SrcMvcCompleteStrictForm
-            - SrcMvcCompleteStrict\SearchForm\SrcMvcCompleteStrictSearchForm
+            - SrcMvcCompleteStrict\Service\SrcMvcCmpStrService
+            - SrcMvcCompleteStrict\Form\SrcMvcCmpStrForm
+            - SrcMvcCompleteStrict\SearchForm\SrcMvcCmpStrSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -1002,9 +1002,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictUploadImage\Controller
         dependency:
-            - SrcMvcCompleteStrictUploadImage\Service\SrcMvcCompleteStrictUploadImageService
-            - SrcMvcCompleteStrictUploadImage\Form\SrcMvcCompleteStrictUploadImageForm
-            - SrcMvcCompleteStrictUploadImage\SearchForm\SrcMvcCompleteStrictUploadImageSearchForm
+            - SrcMvcCompleteStrictUploadImage\Service\SrcMvcCmpStrUplService
+            - SrcMvcCompleteStrictUploadImage\Form\SrcMvcCmpStrUplForm
+            - SrcMvcCompleteStrictUploadImage\SearchForm\SrcMvcCmpStrUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -1034,9 +1034,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictUnique\Controller
         dependency:
-            - SrcMvcCompleteStrictUnique\Service\SrcMvcCompleteStrictUniqueService
-            - SrcMvcCompleteStrictUnique\Form\SrcMvcCompleteStrictUniqueForm
-            - SrcMvcCompleteStrictUnique\SearchForm\SrcMvcCompleteStrictUniqueSearchForm
+            - SrcMvcCompleteStrictUnique\Service\SrcMvcCmpStrUniService
+            - SrcMvcCompleteStrictUnique\Form\SrcMvcCmpStrUniForm
+            - SrcMvcCompleteStrictUnique\SearchForm\SrcMvcCmpStrUniSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -1064,9 +1064,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictUniqueUploadImage\Controller
         dependency:
-            - SrcMvcCompleteStrictUniqueUploadImage\Service\SrcMvcCompleteStrictUniqueUploadImageService
-            - SrcMvcCompleteStrictUniqueUploadImage\Form\SrcMvcCompleteStrictUniqueUploadImageForm
-            - SrcMvcCompleteStrictUniqueUploadImage\SearchForm\SrcMvcCompleteStrictUniqueUploadImageSearchForm
+            - SrcMvcCompleteStrictUniqueUploadImage\Service\SrcMvcCmpStrUniUplService
+            - SrcMvcCompleteStrictUniqueUploadImage\Form\SrcMvcCmpStrUniUplForm
+            - SrcMvcCompleteStrictUniqueUploadImage\SearchForm\SrcMvcCmpStrUniUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -1096,9 +1096,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictNullable\Controller
         dependency:
-            - SrcMvcCompleteStrictNullable\Service\SrcMvcCompleteStrictNullableService
-            - SrcMvcCompleteStrictNullable\Form\SrcMvcCompleteStrictNullableForm
-            - SrcMvcCompleteStrictNullable\SearchForm\SrcMvcCompleteStrictNullableSearchForm
+            - SrcMvcCompleteStrictNullable\Service\SrcMvcCmpStrNulService
+            - SrcMvcCompleteStrictNullable\Form\SrcMvcCmpStrNulForm
+            - SrcMvcCompleteStrictNullable\SearchForm\SrcMvcCmpStrNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -1126,9 +1126,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteStrictNullableUploadImage\Service\SrcMvcCompleteStrictNullableUploadImageService
-            - SrcMvcCompleteStrictNullableUploadImage\Form\SrcMvcCompleteStrictNullableUploadImageForm
-            - SrcMvcCompleteStrictNullableUploadImage\SearchForm\SrcMvcCompleteStrictNullableUploadImageSearchForm
+            - SrcMvcCompleteStrictNullableUploadImage\Service\SrcMvcCmpStrNulUplService
+            - SrcMvcCompleteStrictNullableUploadImage\Form\SrcMvcCmpStrNulUplForm
+            - SrcMvcCompleteStrictNullableUploadImage\SearchForm\SrcMvcCmpStrNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }
@@ -1158,9 +1158,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictUniqueNullable\Controller
         dependency:
-            - SrcMvcCompleteStrictUniqueNullable\Service\SrcMvcCompleteStrictUniqueNullableService
-            - SrcMvcCompleteStrictUniqueNullable\Form\SrcMvcCompleteStrictUniqueNullableForm
-            - SrcMvcCompleteStrictUniqueNullable\SearchForm\SrcMvcCompleteStrictUniqueNullableSearchForm
+            - SrcMvcCompleteStrictUniqueNullable\Service\SrcMvcCmpStrUniNulService
+            - SrcMvcCompleteStrictUniqueNullable\Form\SrcMvcCmpStrUniNulForm
+            - SrcMvcCompleteStrictUniqueNullable\SearchForm\SrcMvcCmpStrUniNulSearchForm
         actions:
             - { name: Create, role: admin }
             - { name: Edit, role: admin }
@@ -1188,9 +1188,9 @@ controller:
         service: factories
         namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Controller
         dependency:
-            - SrcMvcCompleteStrictUniqueNullableUploadImage\Service\SrcMvcCompleteStrictUniqueNullableUploadImageService
-            - SrcMvcCompleteStrictUniqueNullableUploadImage\Form\SrcMvcCompleteStrictUniqueNullableUploadImageForm
-            - SrcMvcCompleteStrictUniqueNullableUploadImage\SearchForm\SrcMvcCompleteStrictUniqueNullableUploadImageSearchForm
+            - SrcMvcCompleteStrictUniqueNullableUploadImage\Service\SrcMvcCmpStrUniNulUplService
+            - SrcMvcCompleteStrictUniqueNullableUploadImage\Form\SrcMvcCmpStrUniNulUplForm
+            - SrcMvcCompleteStrictUniqueNullableUploadImage\SearchForm\SrcMvcCmpStrUniNulUplSearchForm
             - \GearImage\Service\ImageService
         actions:
             - { name: Create, role: admin }

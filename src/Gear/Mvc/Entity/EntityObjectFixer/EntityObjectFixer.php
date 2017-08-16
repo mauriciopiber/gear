@@ -282,7 +282,7 @@ EOL;
     {
         $content = $entity->getContent();
 
-        if (strpos('use \GearBase\Entity\LogTrait;', $content) === false) {
+        if (strpos($content, 'use GearBase\Entity\LogTrait;') === false) {
             $content = $this->addLogTraitUseAttribute($content);
             $content = $this->addLogTraitUseNamespace($content);
         }
@@ -487,7 +487,6 @@ EOS;
      * Set {$columnUline}
      *
      * @param \DateTime \${$columnVar}
-     *
      * @return {$tableName}
      */
     public function set{$columnClass}(\${$columnVar})
@@ -537,7 +536,6 @@ EOS;
      * Set {$columnVar}
      *
      * @param \GearAdmin\Entity\User \${$columnVar}
-     *
      * @return {$tableName}
      */
     public function set{$columnClass}(\GearAdmin\Entity\User \${$columnVar} = null)

@@ -27,9 +27,21 @@ class EntityObjectFixerTest extends TestCase
     public function getEntitysFixData()
     {
         return [
-            ['upload-image'***REMOVED***,
-            ['mvc-basic-upload-image'***REMOVED***
+            //['upload-image'***REMOVED***,
+            //['mvc-basic-upload-image'***REMOVED***,
+            ['entity-complex-1'***REMOVED***
         ***REMOVED***;
+    }
+
+    /**
+     * @group x1
+     * @dataProvider getEntitysFixData
+     */
+    public function testFixTableRepeat($tableName)
+    {
+        $entity = new EntityObject(__DIR__.'/_files/_expects/'.$tableName.'.phtml');
+        $this->service->fixEntity($entity);
+        $this->assertEquals(file_get_contents(__DIR__.'/_files/_expects/'.$tableName.'.phtml'), $entity->getContent());
     }
 
     /**
@@ -42,10 +54,5 @@ class EntityObjectFixerTest extends TestCase
         $this->service->fixEntity($entity);
         $this->assertEquals(file_get_contents(__DIR__.'/_files/_expects/'.$tableName.'.phtml'), $entity->getContent());
 
-    }
-
-    public function testClassExists()
-    {
-        $this->assertInstanceOf('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer', $this->service);
     }
 }
