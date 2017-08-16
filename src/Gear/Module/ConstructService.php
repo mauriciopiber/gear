@@ -31,6 +31,7 @@ use Gear\Constructor\Action\ActionService;
 use Gear\Module\Exception\GearfileNotFoundException;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\ConstructStatusObject;
+use GearJson\Src\SrcTypesInterface;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.
@@ -150,24 +151,31 @@ class ConstructService extends AbstractJsonService
         if (isset($data['src'***REMOVED***)) {
             $entity = [***REMOVED***;
             $addon = [***REMOVED***;
+            $default = [***REMOVED***;
 
             foreach ($data['src'***REMOVED*** as $i => $src) {
-                if ($src['type'***REMOVED*** == 'Entity') {
+                if ($src['type'***REMOVED*** == SrcTypesInterface::ENTITY) {
                     $entity[***REMOVED*** = $src;
                     continue;
                 }
 
-                if (in_array($src['type'***REMOVED***, ['Factory', 'Trait'***REMOVED***)) {
+                if (in_array($src['type'***REMOVED***, [SrcTypesInterface::FACTORY, SrcTypesInterface::TRAIT***REMOVED***)) {
                     $addon[***REMOVED*** = $src;
                     continue;
                 }
 
-                $this->constructSrc($module, $src);
+                $default[***REMOVED*** = $src;
             }
 
             if (count($entity) > 0) {
                 $this->constructSrcEntity($entity);
                 //$this->getSrcConstructor()->createEntities($entity);
+            }
+
+            if (count($default) > 0) {
+                foreach ($default as $each) {
+                    $this->constructSrc($module, $each);
+                }
             }
 
             if (count($addon) > 0) {

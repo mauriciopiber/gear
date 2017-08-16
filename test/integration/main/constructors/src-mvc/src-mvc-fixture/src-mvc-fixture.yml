@@ -1,152 +1,152 @@
 src:
     -
-        db: SrcMvcBsc
-        type: Fixture
         name: SrcMvcBscFixture
+        type: Fixture
+        db: SrcMvcBsc
         user: all
         columns: {  }
     -
-        db: SrcMvcBscUpl
-        type: Fixture
         name: SrcMvcBscUplFixture
+        type: Fixture
+        db: SrcMvcBscUpl
         user: all
         columns: {  }
     -
-        db: SrcMvcBscUni
-        type: Fixture
         name: SrcMvcBscUniFixture
+        type: Fixture
+        db: SrcMvcBscUni
         user: all
         columns: {  }
     -
-        db: SrcMvcBscUniUpl
-        type: Fixture
         name: SrcMvcBscUniUplFixture
+        type: Fixture
+        db: SrcMvcBscUniUpl
         user: all
         columns: {  }
     -
-        db: SrcMvcBscNul
-        type: Fixture
         name: SrcMvcBscNulFixture
+        type: Fixture
+        db: SrcMvcBscNul
         user: all
         columns: {  }
     -
-        db: SrcMvcBscNulUpl
-        type: Fixture
         name: SrcMvcBscNulUplFixture
+        type: Fixture
+        db: SrcMvcBscNulUpl
         user: all
         columns: {  }
     -
-        db: SrcMvcBscUniNul
-        type: Fixture
         name: SrcMvcBscUniNulFixture
+        type: Fixture
+        db: SrcMvcBscUniNul
         user: all
         columns: {  }
     -
-        db: SrcMvcBscUniNulUpl
-        type: Fixture
         name: SrcMvcBscUniNulUplFixture
+        type: Fixture
+        db: SrcMvcBscUniNulUpl
         user: all
         columns: {  }
     -
-        db: SrcMvcBscLws
-        type: Fixture
         name: SrcMvcBscLwsFixture
+        type: Fixture
+        db: SrcMvcBscLws
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsUpl
-        type: Fixture
         name: SrcMvcBscLwsUplFixture
+        type: Fixture
+        db: SrcMvcBscLwsUpl
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsUni
-        type: Fixture
         name: SrcMvcBscLwsUniFixture
+        type: Fixture
+        db: SrcMvcBscLwsUni
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsUniUpl
-        type: Fixture
         name: SrcMvcBscLwsUniUplFixture
+        type: Fixture
+        db: SrcMvcBscLwsUniUpl
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsNul
-        type: Fixture
         name: SrcMvcBscLwsNulFixture
+        type: Fixture
+        db: SrcMvcBscLwsNul
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsNulUpl
-        type: Fixture
         name: SrcMvcBscLwsNulUplFixture
+        type: Fixture
+        db: SrcMvcBscLwsNulUpl
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsUniNul
-        type: Fixture
         name: SrcMvcBscLwsUniNulFixture
+        type: Fixture
+        db: SrcMvcBscLwsUniNul
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscLwsUniNulUpl
-        type: Fixture
         name: SrcMvcBscLwsUniNulUplFixture
+        type: Fixture
+        db: SrcMvcBscLwsUniNulUpl
         user: low-strict
         columns: {  }
     -
-        db: SrcMvcBscStr
-        type: Fixture
         name: SrcMvcBscStrFixture
+        type: Fixture
+        db: SrcMvcBscStr
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrUpl
-        type: Fixture
         name: SrcMvcBscStrUplFixture
+        type: Fixture
+        db: SrcMvcBscStrUpl
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrUni
-        type: Fixture
         name: SrcMvcBscStrUniFixture
+        type: Fixture
+        db: SrcMvcBscStrUni
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrUniUpl
-        type: Fixture
         name: SrcMvcBscStrUniUplFixture
+        type: Fixture
+        db: SrcMvcBscStrUniUpl
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrNul
-        type: Fixture
         name: SrcMvcBscStrNulFixture
+        type: Fixture
+        db: SrcMvcBscStrNul
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrNulUpl
-        type: Fixture
         name: SrcMvcBscStrNulUplFixture
+        type: Fixture
+        db: SrcMvcBscStrNulUpl
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrUniNul
-        type: Fixture
         name: SrcMvcBscStrUniNulFixture
+        type: Fixture
+        db: SrcMvcBscStrUniNul
         user: strict
         columns: {  }
     -
-        db: SrcMvcBscStrUniNulUpl
-        type: Fixture
         name: SrcMvcBscStrUniNulUplFixture
+        type: Fixture
+        db: SrcMvcBscStrUniNulUpl
         user: strict
         columns: {  }
     -
-        db: SrcMvcCmp
-        type: Fixture
         name: SrcMvcCmpFixture
+        type: Fixture
+        db: SrcMvcCmp
         user: all
         columns:
             clm_txt_htl_cmp: html
@@ -166,9 +166,9 @@ src:
         type: Fixture
         db: ColumnIntForeign
     -
-        db: SrcMvcCmpUpl
-        type: Fixture
         name: SrcMvcCmpUplFixture
+        type: Fixture
+        db: SrcMvcCmpUpl
         user: all
         columns:
             clm_txt_htl_cmp_upl: html
@@ -184,9 +184,9 @@ src:
             clm_vrc_tel_cmp_upl: telephone
             clm_vrc_eml_cmp_upl: email
     -
-        db: SrcMvcCmpUni
-        type: Fixture
         name: SrcMvcCmpUniFixture
+        type: Fixture
+        db: SrcMvcCmpUni
         user: all
         columns:
             clm_txt_htl_cmp_uni: html
@@ -202,9 +202,9 @@ src:
             clm_vrc_tel_cmp_uni: telephone
             clm_vrc_eml_cmp_uni: email
     -
-        db: SrcMvcCmpUniUpl
-        type: Fixture
         name: SrcMvcCmpUniUplFixture
+        type: Fixture
+        db: SrcMvcCmpUniUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_upl: html
@@ -220,9 +220,9 @@ src:
             clm_vrc_tel_cmp_uni_upl: telephone
             clm_vrc_eml_cmp_uni_upl: email
     -
-        db: SrcMvcCmpNul
-        type: Fixture
         name: SrcMvcCmpNulFixture
+        type: Fixture
+        db: SrcMvcCmpNul
         user: all
         columns:
             clm_txt_htl_cmp_nul: html
@@ -238,9 +238,9 @@ src:
             clm_vrc_tel_cmp_nul: telephone
             clm_vrc_eml_cmp_nul: email
     -
-        db: SrcMvcCmpNulUpl
-        type: Fixture
         name: SrcMvcCmpNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_nul_upl: html
@@ -256,9 +256,9 @@ src:
             clm_vrc_tel_cmp_nul_upl: telephone
             clm_vrc_eml_cmp_nul_upl: email
     -
-        db: SrcMvcCmpUniNul
-        type: Fixture
         name: SrcMvcCmpUniNulFixture
+        type: Fixture
+        db: SrcMvcCmpUniNul
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul: html
@@ -274,9 +274,9 @@ src:
             clm_vrc_tel_cmp_uni_nul: telephone
             clm_vrc_eml_cmp_uni_nul: email
     -
-        db: SrcMvcCmpUniNulUpl
-        type: Fixture
         name: SrcMvcCmpUniNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpUniNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul_upl: html
@@ -292,9 +292,9 @@ src:
             clm_vrc_tel_cmp_uni_nul_upl: telephone
             clm_vrc_eml_cmp_uni_nul_upl: email
     -
-        db: SrcMvcCmpLws
-        type: Fixture
         name: SrcMvcCmpLwsFixture
+        type: Fixture
+        db: SrcMvcCmpLws
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws: html
@@ -310,9 +310,9 @@ src:
             clm_vrc_tel_cmp_lws: telephone
             clm_vrc_eml_cmp_lws: email
     -
-        db: SrcMvcCmpLwsUpl
-        type: Fixture
         name: SrcMvcCmpLwsUplFixture
+        type: Fixture
+        db: SrcMvcCmpLwsUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_upl: html
@@ -328,9 +328,9 @@ src:
             clm_vrc_tel_cmp_lws_upl: telephone
             clm_vrc_eml_cmp_lws_upl: email
     -
-        db: SrcMvcCmpLwsUni
-        type: Fixture
         name: SrcMvcCmpLwsUniFixture
+        type: Fixture
+        db: SrcMvcCmpLwsUni
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni: html
@@ -346,9 +346,9 @@ src:
             clm_vrc_tel_cmp_lws_uni: telephone
             clm_vrc_eml_cmp_lws_uni: email
     -
-        db: SrcMvcCmpLwsUniUpl
-        type: Fixture
         name: SrcMvcCmpLwsUniUplFixture
+        type: Fixture
+        db: SrcMvcCmpLwsUniUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_upl: html
@@ -364,9 +364,9 @@ src:
             clm_vrc_tel_cmp_lws_uni_upl: telephone
             clm_vrc_eml_cmp_lws_uni_upl: email
     -
-        db: SrcMvcCmpLwsNul
-        type: Fixture
         name: SrcMvcCmpLwsNulFixture
+        type: Fixture
+        db: SrcMvcCmpLwsNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul: html
@@ -382,9 +382,9 @@ src:
             clm_vrc_tel_cmp_lws_nul: telephone
             clm_vrc_eml_cmp_lws_nul: email
     -
-        db: SrcMvcCmpLwsNulUpl
-        type: Fixture
         name: SrcMvcCmpLwsNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpLwsNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul_upl: html
@@ -400,9 +400,9 @@ src:
             clm_vrc_tel_cmp_lws_nul_upl: telephone
             clm_vrc_eml_cmp_lws_nul_upl: email
     -
-        db: SrcMvcCmpLwsUniNul
-        type: Fixture
         name: SrcMvcCmpLwsUniNulFixture
+        type: Fixture
+        db: SrcMvcCmpLwsUniNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul: html
@@ -418,9 +418,9 @@ src:
             clm_vrc_tel_cmp_lws_uni_nul: telephone
             clm_vrc_eml_cmp_lws_uni_nul: email
     -
-        db: SrcMvcCmpLwsUniNulUpl
-        type: Fixture
         name: SrcMvcCmpLwsUniNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpLwsUniNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul_upl: html
@@ -436,9 +436,9 @@ src:
             clm_vrc_tel_cmp_lws_uni_nul_upl: telephone
             clm_vrc_eml_cmp_lws_uni_nul_upl: email
     -
-        db: SrcMvcCmpStr
-        type: Fixture
         name: SrcMvcCmpStrFixture
+        type: Fixture
+        db: SrcMvcCmpStr
         user: strict
         columns:
             clm_txt_htl_cmp_str: html
@@ -454,9 +454,9 @@ src:
             clm_vrc_tel_cmp_str: telephone
             clm_vrc_eml_cmp_str: email
     -
-        db: SrcMvcCmpStrUpl
-        type: Fixture
         name: SrcMvcCmpStrUplFixture
+        type: Fixture
+        db: SrcMvcCmpStrUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_upl: html
@@ -472,9 +472,9 @@ src:
             clm_vrc_tel_cmp_str_upl: telephone
             clm_vrc_eml_cmp_str_upl: email
     -
-        db: SrcMvcCmpStrUni
-        type: Fixture
         name: SrcMvcCmpStrUniFixture
+        type: Fixture
+        db: SrcMvcCmpStrUni
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni: html
@@ -490,9 +490,9 @@ src:
             clm_vrc_tel_cmp_str_uni: telephone
             clm_vrc_eml_cmp_str_uni: email
     -
-        db: SrcMvcCmpStrUniUpl
-        type: Fixture
         name: SrcMvcCmpStrUniUplFixture
+        type: Fixture
+        db: SrcMvcCmpStrUniUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_upl: html
@@ -508,9 +508,9 @@ src:
             clm_vrc_tel_cmp_str_uni_upl: telephone
             clm_vrc_eml_cmp_str_uni_upl: email
     -
-        db: SrcMvcCmpStrNul
-        type: Fixture
         name: SrcMvcCmpStrNulFixture
+        type: Fixture
+        db: SrcMvcCmpStrNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul: html
@@ -526,9 +526,9 @@ src:
             clm_vrc_tel_cmp_str_nul: telephone
             clm_vrc_eml_cmp_str_nul: email
     -
-        db: SrcMvcCmpStrNulUpl
-        type: Fixture
         name: SrcMvcCmpStrNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpStrNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul_upl: html
@@ -544,9 +544,9 @@ src:
             clm_vrc_tel_cmp_str_nul_upl: telephone
             clm_vrc_eml_cmp_str_nul_upl: email
     -
-        db: SrcMvcCmpStrUniNul
-        type: Fixture
         name: SrcMvcCmpStrUniNulFixture
+        type: Fixture
+        db: SrcMvcCmpStrUniNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul: html
@@ -562,9 +562,9 @@ src:
             clm_vrc_tel_cmp_str_uni_nul: telephone
             clm_vrc_eml_cmp_str_uni_nul: email
     -
-        db: SrcMvcCmpStrUniNulUpl
-        type: Fixture
         name: SrcMvcCmpStrUniNulUplFixture
+        type: Fixture
+        db: SrcMvcCmpStrUniNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul_upl: html

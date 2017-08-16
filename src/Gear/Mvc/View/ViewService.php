@@ -242,7 +242,7 @@ class ViewService extends AbstractMvc
         $this->tableName = $this->db->getTable();
 
         if ($this->getTableService()->verifyTableAssociation(
-            $this->str('class', $action->getController()->getNameOff())
+            $this->db->getTable()
         )) {
             $imageContainer = true;
         } else {
@@ -263,7 +263,7 @@ class ViewService extends AbstractMvc
         $formElements = $this->createFormElements();
 
         $fileCreator->setTemplate('template/module/view/edit/edit.phtml');
-        $fileCreator->setOptions(array(
+        $fileCreator->setOptions([
             'imageContainer' => $imageContainer,
             'formElements' => $formElements,
             //'elements' => $viewFormService->getFormElements($action),
@@ -277,7 +277,7 @@ class ViewService extends AbstractMvc
             'routeBack' => $routeList,
             'routeNew' => $routeCreate,
             'routeView' => $routeView
-        ));
+        ***REMOVED***);
         $fileCreator->setFileName('edit.phtml');
         $fileCreator->setLocation($this->getLocationDir());
 

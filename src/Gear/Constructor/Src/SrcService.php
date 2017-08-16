@@ -252,10 +252,9 @@ class SrcService extends AbstractConstructor
             }
 
             $this->setDbOptions($srcItem);
-
-
             $this->srcs[***REMOVED*** = $srcItem;
         }
+
         $entity = $this->getEntityService();
         $entity->createEntities($this->srcs);
 

@@ -1,0 +1,791 @@
+<?php
+
+namespace MyModule\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SrcMvcCmpLwsUniNul
+ *
+ * @ORM\Table(name="src_mvc_cmp_lws_uni_nul", uniqueConstraints={@ORM\UniqueConstraint(name="clm_dec_cmp_lws_uni_nul", columns={"clm_dec_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_dec_mny_cmp_lws_uni_nul", columns={"clm_dec_mny_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_int_cmp_lws_uni_nul", columns={"clm_int_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_tim_cmp_lws_uni_nul", columns={"clm_tim_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_dtt_cmp_lws_uni_nul", columns={"clm_dtt_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_dtt_pt_cmp_lws_uni_nul", columns={"clm_dtt_pt_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_dat_cmp_lws_uni_nul", columns={"clm_dat_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_dat_pt_cmp_lws_uni_nul", columns={"clm_dat_pt_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_vrc_cmp_lws_uni_nul", columns={"clm_vrc_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_vrc_url_cmp_lws_uni_nul", columns={"clm_vrc_url_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_vrc_tel_cmp_lws_uni_nul", columns={"clm_vrc_tel_cmp_lws_uni_nul"}), @ORM\UniqueConstraint(name="clm_vrc_eml_cmp_lws_uni_nul", columns={"clm_vrc_eml_cmp_lws_uni_nul"})}, indexes={@ORM\Index(name="created_by", columns={"created_by"}), @ORM\Index(name="updated_by", columns={"updated_by"})})
+ * @ORM\Entity
+ */
+class SrcMvcCmpLwsUniNul
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_src_mvc_cmp_lws_uni_nul", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idSrcMvcCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_txt_cmp_lws_uni_nul", type="text", length=65535, nullable=true)
+     */
+    private $clmTxtCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_txt_htl_cmp_lws_uni_nul", type="text", length=65535, nullable=true)
+     */
+    private $clmTxtHtlCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_dec_cmp_lws_uni_nul", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $clmDecCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_dec_mny_cmp_lws_uni_nul", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $clmDecMnyCmpLwsUniNul;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="clm_boo_cmp_lws_uni_nul", type="boolean", nullable=true)
+     */
+    private $clmBooCmpLwsUniNul;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="clm_boo_chb_cmp_lws_uni_nul", type="boolean", nullable=true)
+     */
+    private $clmBooChbCmpLwsUniNul;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clm_int_cmp_lws_uni_nul", type="integer", nullable=true)
+     */
+    private $clmIntCmpLwsUniNul;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="clm_int_chb_cmp_lws_uni_nul", type="integer", nullable=true)
+     */
+    private $clmIntChbCmpLwsUniNul;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_clm_int_frk_cmp_lws_uni_nul", type="integer", nullable=true)
+     */
+    private $idClmIntFrkCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_tim_cmp_lws_uni_nul", type="time", nullable=true)
+     */
+    private $clmTimCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dtt_cmp_lws_uni_nul", type="datetime", nullable=true)
+     */
+    private $clmDttCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dtt_pt_cmp_lws_uni_nul", type="datetime", nullable=true)
+     */
+    private $clmDttPtCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dat_cmp_lws_uni_nul", type="date", nullable=true)
+     */
+    private $clmDatCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="clm_dat_pt_cmp_lws_uni_nul", type="date", nullable=true)
+     */
+    private $clmDatPtCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_pas_ver_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcPasVerCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_upl_img_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcUplImgCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_url_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcUrlCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_uni_id_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcUniIdCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_tel_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcTelCmpLwsUniNul;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="clm_vrc_eml_cmp_lws_uni_nul", type="string", length=150, nullable=true)
+     */
+    private $clmVrcEmlCmpLwsUniNul;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var \MyModule\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MyModule\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="updated_by", referencedColumnName="id_user")
+     * })
+     */
+    private $updatedBy;
+
+    /**
+     * @var \MyModule\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="MyModule\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="created_by", referencedColumnName="id_user")
+     * })
+     */
+    private $createdBy;
+
+
+
+    /**
+     * Get idSrcMvcCmpLwsUniNul
+     *
+     * @return integer
+     */
+    public function getIdSrcMvcCmpLwsUniNul()
+    {
+        return $this->idSrcMvcCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmTxtCmpLwsUniNul
+     *
+     * @param string $clmTxtCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmTxtCmpLwsUniNul($clmTxtCmpLwsUniNul)
+    {
+        $this->clmTxtCmpLwsUniNul = $clmTxtCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmTxtCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmTxtCmpLwsUniNul()
+    {
+        return $this->clmTxtCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmTxtHtlCmpLwsUniNul
+     *
+     * @param string $clmTxtHtlCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmTxtHtlCmpLwsUniNul($clmTxtHtlCmpLwsUniNul)
+    {
+        $this->clmTxtHtlCmpLwsUniNul = $clmTxtHtlCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmTxtHtlCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmTxtHtlCmpLwsUniNul()
+    {
+        return $this->clmTxtHtlCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDecCmpLwsUniNul
+     *
+     * @param string $clmDecCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDecCmpLwsUniNul($clmDecCmpLwsUniNul)
+    {
+        $this->clmDecCmpLwsUniNul = $clmDecCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDecCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmDecCmpLwsUniNul()
+    {
+        return $this->clmDecCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDecMnyCmpLwsUniNul
+     *
+     * @param string $clmDecMnyCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDecMnyCmpLwsUniNul($clmDecMnyCmpLwsUniNul)
+    {
+        $this->clmDecMnyCmpLwsUniNul = $clmDecMnyCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDecMnyCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmDecMnyCmpLwsUniNul()
+    {
+        return $this->clmDecMnyCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmBooCmpLwsUniNul
+     *
+     * @param boolean $clmBooCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmBooCmpLwsUniNul($clmBooCmpLwsUniNul)
+    {
+        $this->clmBooCmpLwsUniNul = $clmBooCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmBooCmpLwsUniNul
+     *
+     * @return boolean
+     */
+    public function getClmBooCmpLwsUniNul()
+    {
+        return $this->clmBooCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmBooChbCmpLwsUniNul
+     *
+     * @param boolean $clmBooChbCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmBooChbCmpLwsUniNul($clmBooChbCmpLwsUniNul)
+    {
+        $this->clmBooChbCmpLwsUniNul = $clmBooChbCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmBooChbCmpLwsUniNul
+     *
+     * @return boolean
+     */
+    public function getClmBooChbCmpLwsUniNul()
+    {
+        return $this->clmBooChbCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmIntCmpLwsUniNul
+     *
+     * @param integer $clmIntCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmIntCmpLwsUniNul($clmIntCmpLwsUniNul)
+    {
+        $this->clmIntCmpLwsUniNul = $clmIntCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmIntCmpLwsUniNul
+     *
+     * @return integer
+     */
+    public function getClmIntCmpLwsUniNul()
+    {
+        return $this->clmIntCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmIntChbCmpLwsUniNul
+     *
+     * @param integer $clmIntChbCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmIntChbCmpLwsUniNul($clmIntChbCmpLwsUniNul)
+    {
+        $this->clmIntChbCmpLwsUniNul = $clmIntChbCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmIntChbCmpLwsUniNul
+     *
+     * @return integer
+     */
+    public function getClmIntChbCmpLwsUniNul()
+    {
+        return $this->clmIntChbCmpLwsUniNul;
+    }
+
+    /**
+     * Set idClmIntFrkCmpLwsUniNul
+     *
+     * @param integer $idClmIntFrkCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setIdClmIntFrkCmpLwsUniNul($idClmIntFrkCmpLwsUniNul)
+    {
+        $this->idClmIntFrkCmpLwsUniNul = $idClmIntFrkCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get idClmIntFrkCmpLwsUniNul
+     *
+     * @return integer
+     */
+    public function getIdClmIntFrkCmpLwsUniNul()
+    {
+        return $this->idClmIntFrkCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmTimCmpLwsUniNul
+     *
+     * @param \DateTime $clmTimCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmTimCmpLwsUniNul($clmTimCmpLwsUniNul)
+    {
+        $this->clmTimCmpLwsUniNul = $clmTimCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmTimCmpLwsUniNul
+     *
+     * @return \DateTime
+     */
+    public function getClmTimCmpLwsUniNul()
+    {
+        return $this->clmTimCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDttCmpLwsUniNul
+     *
+     * @param \DateTime $clmDttCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDttCmpLwsUniNul($clmDttCmpLwsUniNul)
+    {
+        $this->clmDttCmpLwsUniNul = $clmDttCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDttCmpLwsUniNul
+     *
+     * @return \DateTime
+     */
+    public function getClmDttCmpLwsUniNul()
+    {
+        return $this->clmDttCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDttPtCmpLwsUniNul
+     *
+     * @param \DateTime $clmDttPtCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDttPtCmpLwsUniNul($clmDttPtCmpLwsUniNul)
+    {
+        $this->clmDttPtCmpLwsUniNul = $clmDttPtCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDttPtCmpLwsUniNul
+     *
+     * @return \DateTime
+     */
+    public function getClmDttPtCmpLwsUniNul()
+    {
+        return $this->clmDttPtCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDatCmpLwsUniNul
+     *
+     * @param \DateTime $clmDatCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDatCmpLwsUniNul($clmDatCmpLwsUniNul)
+    {
+        $this->clmDatCmpLwsUniNul = $clmDatCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDatCmpLwsUniNul
+     *
+     * @return \DateTime
+     */
+    public function getClmDatCmpLwsUniNul()
+    {
+        return $this->clmDatCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmDatPtCmpLwsUniNul
+     *
+     * @param \DateTime $clmDatPtCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmDatPtCmpLwsUniNul($clmDatPtCmpLwsUniNul)
+    {
+        $this->clmDatPtCmpLwsUniNul = $clmDatPtCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmDatPtCmpLwsUniNul
+     *
+     * @return \DateTime
+     */
+    public function getClmDatPtCmpLwsUniNul()
+    {
+        return $this->clmDatPtCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcCmpLwsUniNul
+     *
+     * @param string $clmVrcCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcCmpLwsUniNul($clmVrcCmpLwsUniNul)
+    {
+        $this->clmVrcCmpLwsUniNul = $clmVrcCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcCmpLwsUniNul()
+    {
+        return $this->clmVrcCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcPasVerCmpLwsUniNul
+     *
+     * @param string $clmVrcPasVerCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcPasVerCmpLwsUniNul($clmVrcPasVerCmpLwsUniNul)
+    {
+        $this->clmVrcPasVerCmpLwsUniNul = $clmVrcPasVerCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcPasVerCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcPasVerCmpLwsUniNul()
+    {
+        return $this->clmVrcPasVerCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcUplImgCmpLwsUniNul
+     *
+     * @param string $clmVrcUplImgCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcUplImgCmpLwsUniNul($clmVrcUplImgCmpLwsUniNul)
+    {
+        $this->clmVrcUplImgCmpLwsUniNul = $clmVrcUplImgCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcUplImgCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcUplImgCmpLwsUniNul()
+    {
+        return $this->clmVrcUplImgCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcUrlCmpLwsUniNul
+     *
+     * @param string $clmVrcUrlCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcUrlCmpLwsUniNul($clmVrcUrlCmpLwsUniNul)
+    {
+        $this->clmVrcUrlCmpLwsUniNul = $clmVrcUrlCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcUrlCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcUrlCmpLwsUniNul()
+    {
+        return $this->clmVrcUrlCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcUniIdCmpLwsUniNul
+     *
+     * @param string $clmVrcUniIdCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcUniIdCmpLwsUniNul($clmVrcUniIdCmpLwsUniNul)
+    {
+        $this->clmVrcUniIdCmpLwsUniNul = $clmVrcUniIdCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcUniIdCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcUniIdCmpLwsUniNul()
+    {
+        return $this->clmVrcUniIdCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcTelCmpLwsUniNul
+     *
+     * @param string $clmVrcTelCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcTelCmpLwsUniNul($clmVrcTelCmpLwsUniNul)
+    {
+        $this->clmVrcTelCmpLwsUniNul = $clmVrcTelCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcTelCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcTelCmpLwsUniNul()
+    {
+        return $this->clmVrcTelCmpLwsUniNul;
+    }
+
+    /**
+     * Set clmVrcEmlCmpLwsUniNul
+     *
+     * @param string $clmVrcEmlCmpLwsUniNul
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setClmVrcEmlCmpLwsUniNul($clmVrcEmlCmpLwsUniNul)
+    {
+        $this->clmVrcEmlCmpLwsUniNul = $clmVrcEmlCmpLwsUniNul;
+
+        return $this;
+    }
+
+    /**
+     * Get clmVrcEmlCmpLwsUniNul
+     *
+     * @return string
+     */
+    public function getClmVrcEmlCmpLwsUniNul()
+    {
+        return $this->clmVrcEmlCmpLwsUniNul;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param \MyModule\Entity\User $updatedBy
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setUpdatedBy(\MyModule\Entity\User $updatedBy = null)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return \MyModule\Entity\User
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \MyModule\Entity\User $createdBy
+     * @return SrcMvcCmpLwsUniNul
+     */
+    public function setCreatedBy(\MyModule\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \MyModule\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+}

@@ -1,8 +1,8 @@
 src:
     -
-        db: SrcMvcBsc
-        type: Repository
         name: SrcMvcBscRepository
+        type: Repository
+        db: SrcMvcBsc
         user: all
         columns: {  }
         service: factories
@@ -11,9 +11,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscUpl
-        type: Repository
         name: SrcMvcBscUplRepository
+        type: Repository
+        db: SrcMvcBscUpl
         user: all
         columns: {  }
         service: factories
@@ -22,9 +22,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscUni
-        type: Repository
         name: SrcMvcBscUniRepository
+        type: Repository
+        db: SrcMvcBscUni
         user: all
         columns: {  }
         service: factories
@@ -33,9 +33,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscUniUpl
-        type: Repository
         name: SrcMvcBscUniUplRepository
+        type: Repository
+        db: SrcMvcBscUniUpl
         user: all
         columns: {  }
         service: factories
@@ -44,9 +44,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscNul
-        type: Repository
         name: SrcMvcBscNulRepository
+        type: Repository
+        db: SrcMvcBscNul
         user: all
         columns: {  }
         service: factories
@@ -55,9 +55,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscNulUpl
-        type: Repository
         name: SrcMvcBscNulUplRepository
+        type: Repository
+        db: SrcMvcBscNulUpl
         user: all
         columns: {  }
         service: factories
@@ -66,9 +66,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscUniNul
-        type: Repository
         name: SrcMvcBscUniNulRepository
+        type: Repository
+        db: SrcMvcBscUniNul
         user: all
         columns: {  }
         service: factories
@@ -77,9 +77,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscUniNulUpl
-        type: Repository
         name: SrcMvcBscUniNulUplRepository
+        type: Repository
+        db: SrcMvcBscUniNulUpl
         user: all
         columns: {  }
         service: factories
@@ -88,9 +88,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLws
-        type: Repository
         name: SrcMvcBscLwsRepository
+        type: Repository
+        db: SrcMvcBscLws
         user: low-strict
         columns: {  }
         service: factories
@@ -99,9 +99,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsUpl
-        type: Repository
         name: SrcMvcBscLwsUplRepository
+        type: Repository
+        db: SrcMvcBscLwsUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -110,9 +110,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsUni
-        type: Repository
         name: SrcMvcBscLwsUniRepository
+        type: Repository
+        db: SrcMvcBscLwsUni
         user: low-strict
         columns: {  }
         service: factories
@@ -121,9 +121,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsUniUpl
-        type: Repository
         name: SrcMvcBscLwsUniUplRepository
+        type: Repository
+        db: SrcMvcBscLwsUniUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -132,9 +132,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsNul
-        type: Repository
         name: SrcMvcBscLwsNulRepository
+        type: Repository
+        db: SrcMvcBscLwsNul
         user: low-strict
         columns: {  }
         service: factories
@@ -143,9 +143,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsNulUpl
-        type: Repository
         name: SrcMvcBscLwsNulUplRepository
+        type: Repository
+        db: SrcMvcBscLwsNulUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -154,9 +154,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsUniNul
-        type: Repository
         name: SrcMvcBscLwsUniNulRepository
+        type: Repository
+        db: SrcMvcBscLwsUniNul
         user: low-strict
         columns: {  }
         service: factories
@@ -165,9 +165,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscLwsUniNulUpl
-        type: Repository
         name: SrcMvcBscLwsUniNulUplRepository
+        type: Repository
+        db: SrcMvcBscLwsUniNulUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -176,9 +176,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStr
-        type: Repository
         name: SrcMvcBscStrRepository
+        type: Repository
+        db: SrcMvcBscStr
         user: strict
         columns: {  }
         service: factories
@@ -187,9 +187,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrUpl
-        type: Repository
         name: SrcMvcBscStrUplRepository
+        type: Repository
+        db: SrcMvcBscStrUpl
         user: strict
         columns: {  }
         service: factories
@@ -198,9 +198,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrUni
-        type: Repository
         name: SrcMvcBscStrUniRepository
+        type: Repository
+        db: SrcMvcBscStrUni
         user: strict
         columns: {  }
         service: factories
@@ -209,9 +209,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrUniUpl
-        type: Repository
         name: SrcMvcBscStrUniUplRepository
+        type: Repository
+        db: SrcMvcBscStrUniUpl
         user: strict
         columns: {  }
         service: factories
@@ -220,9 +220,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrNul
-        type: Repository
         name: SrcMvcBscStrNulRepository
+        type: Repository
+        db: SrcMvcBscStrNul
         user: strict
         columns: {  }
         service: factories
@@ -231,9 +231,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrNulUpl
-        type: Repository
         name: SrcMvcBscStrNulUplRepository
+        type: Repository
+        db: SrcMvcBscStrNulUpl
         user: strict
         columns: {  }
         service: factories
@@ -242,9 +242,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrUniNul
-        type: Repository
         name: SrcMvcBscStrUniNulRepository
+        type: Repository
+        db: SrcMvcBscStrUniNul
         user: strict
         columns: {  }
         service: factories
@@ -253,9 +253,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcBscStrUniNulUpl
-        type: Repository
         name: SrcMvcBscStrUniNulUplRepository
+        type: Repository
+        db: SrcMvcBscStrUniNulUpl
         user: strict
         columns: {  }
         service: factories
@@ -264,9 +264,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmp
-        type: Repository
         name: SrcMvcCmpRepository
+        type: Repository
+        db: SrcMvcCmp
         user: all
         columns:
             clm_txt_htl_cmp: html
@@ -287,9 +287,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpUpl
-        type: Repository
         name: SrcMvcCmpUplRepository
+        type: Repository
+        db: SrcMvcCmpUpl
         user: all
         columns:
             clm_txt_htl_cmp_upl: html
@@ -310,9 +310,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpUni
-        type: Repository
         name: SrcMvcCmpUniRepository
+        type: Repository
+        db: SrcMvcCmpUni
         user: all
         columns:
             clm_txt_htl_cmp_uni: html
@@ -333,9 +333,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpUniUpl
-        type: Repository
         name: SrcMvcCmpUniUplRepository
+        type: Repository
+        db: SrcMvcCmpUniUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_upl: html
@@ -356,9 +356,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpNul
-        type: Repository
         name: SrcMvcCmpNulRepository
+        type: Repository
+        db: SrcMvcCmpNul
         user: all
         columns:
             clm_txt_htl_cmp_nul: html
@@ -379,9 +379,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpNulUpl
-        type: Repository
         name: SrcMvcCmpNulUplRepository
+        type: Repository
+        db: SrcMvcCmpNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_nul_upl: html
@@ -402,9 +402,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpUniNul
-        type: Repository
         name: SrcMvcCmpUniNulRepository
+        type: Repository
+        db: SrcMvcCmpUniNul
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul: html
@@ -425,9 +425,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpUniNulUpl
-        type: Repository
         name: SrcMvcCmpUniNulUplRepository
+        type: Repository
+        db: SrcMvcCmpUniNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul_upl: html
@@ -448,9 +448,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLws
-        type: Repository
         name: SrcMvcCmpLwsRepository
+        type: Repository
+        db: SrcMvcCmpLws
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws: html
@@ -471,9 +471,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsUpl
-        type: Repository
         name: SrcMvcCmpLwsUplRepository
+        type: Repository
+        db: SrcMvcCmpLwsUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_upl: html
@@ -494,9 +494,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsUni
-        type: Repository
         name: SrcMvcCmpLwsUniRepository
+        type: Repository
+        db: SrcMvcCmpLwsUni
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni: html
@@ -517,9 +517,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsUniUpl
-        type: Repository
         name: SrcMvcCmpLwsUniUplRepository
+        type: Repository
+        db: SrcMvcCmpLwsUniUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_upl: html
@@ -540,9 +540,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsNul
-        type: Repository
         name: SrcMvcCmpLwsNulRepository
+        type: Repository
+        db: SrcMvcCmpLwsNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul: html
@@ -563,9 +563,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsNulUpl
-        type: Repository
         name: SrcMvcCmpLwsNulUplRepository
+        type: Repository
+        db: SrcMvcCmpLwsNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul_upl: html
@@ -586,9 +586,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsUniNul
-        type: Repository
         name: SrcMvcCmpLwsUniNulRepository
+        type: Repository
+        db: SrcMvcCmpLwsUniNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul: html
@@ -609,9 +609,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpLwsUniNulUpl
-        type: Repository
         name: SrcMvcCmpLwsUniNulUplRepository
+        type: Repository
+        db: SrcMvcCmpLwsUniNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul_upl: html
@@ -632,9 +632,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStr
-        type: Repository
         name: SrcMvcCmpStrRepository
+        type: Repository
+        db: SrcMvcCmpStr
         user: strict
         columns:
             clm_txt_htl_cmp_str: html
@@ -655,9 +655,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrUpl
-        type: Repository
         name: SrcMvcCmpStrUplRepository
+        type: Repository
+        db: SrcMvcCmpStrUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_upl: html
@@ -678,9 +678,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrUni
-        type: Repository
         name: SrcMvcCmpStrUniRepository
+        type: Repository
+        db: SrcMvcCmpStrUni
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni: html
@@ -701,9 +701,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrUniUpl
-        type: Repository
         name: SrcMvcCmpStrUniUplRepository
+        type: Repository
+        db: SrcMvcCmpStrUniUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_upl: html
@@ -724,9 +724,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrNul
-        type: Repository
         name: SrcMvcCmpStrNulRepository
+        type: Repository
+        db: SrcMvcCmpStrNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul: html
@@ -747,9 +747,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrNulUpl
-        type: Repository
         name: SrcMvcCmpStrNulUplRepository
+        type: Repository
+        db: SrcMvcCmpStrNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul_upl: html
@@ -770,9 +770,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrUniNul
-        type: Repository
         name: SrcMvcCmpStrUniNulRepository
+        type: Repository
+        db: SrcMvcCmpStrUniNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul: html
@@ -793,9 +793,9 @@ src:
             doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
             0: \GearBase\Repository\QueryBuilder
     -
-        db: SrcMvcCmpStrUniNulUpl
-        type: Repository
         name: SrcMvcCmpStrUniNulUplRepository
+        type: Repository
+        db: SrcMvcCmpStrUniNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul_upl: html

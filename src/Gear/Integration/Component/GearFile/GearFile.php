@@ -236,9 +236,9 @@ class GearFile
                 );
 
             $src = [
-                'db' => $minorSuite->getTableAlias(),
-                'type' => $this->str('class', $minorSuite->getType()),
                 'name' => $name,
+                'type' => $this->str('class', $minorSuite->getType()),
+                'db' => $minorSuite->getTableAlias(),
                 'user' => $minorSuite->getUserType(),
                 'columns' => $this->factoryGearfileColumns($minorSuite->getColumns())
             ***REMOVED***;
@@ -280,6 +280,8 @@ class GearFile
         foreach ($tables as $minorSuite) {
             $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
 
+            $tableName = $minorSuite->getTableAlias();
+
             $controllerItem = [
                 'db' => $minorSuite->getTableAlias(),
                 'type' => 'Action',
@@ -289,9 +291,9 @@ class GearFile
                 'service' => 'factories',
                 'namespace' => ($minorSuite->getTableName().'\\Controller'),
                 'dependency' => [
-                    ($minorSuite->getTableName().'\\Service\\'.$minorSuite->getTableName().'Service'),
-                    ($minorSuite->getTableName().'\\Form\\'.$minorSuite->getTableName().'Form'),
-                    ($minorSuite->getTableName().'\\SearchForm\\'.$minorSuite->getTableName().'SearchForm'),
+                    ($minorSuite->getTableName().'\\Service\\'.$tableName.'Service'),
+                    ($minorSuite->getTableName().'\\Form\\'.$tableName.'Form'),
+                    ($minorSuite->getTableName().'\\SearchForm\\'.$tableName.'SearchForm'),
                 ***REMOVED***,
                 'actions' => [
                     [

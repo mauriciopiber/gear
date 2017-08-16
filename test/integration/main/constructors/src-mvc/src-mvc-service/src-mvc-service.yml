@@ -1,8 +1,8 @@
 src:
     -
-        db: SrcMvcBsc
-        type: Service
         name: SrcMvcBscService
+        type: Service
+        db: SrcMvcBsc
         user: all
         columns: {  }
         service: factories
@@ -12,9 +12,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscUpl
-        type: Service
         name: SrcMvcBscUplService
+        type: Service
+        db: SrcMvcBscUpl
         user: all
         columns: {  }
         service: factories
@@ -24,9 +24,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscUni
-        type: Service
         name: SrcMvcBscUniService
+        type: Service
+        db: SrcMvcBscUni
         user: all
         columns: {  }
         service: factories
@@ -36,9 +36,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscUniUpl
-        type: Service
         name: SrcMvcBscUniUplService
+        type: Service
+        db: SrcMvcBscUniUpl
         user: all
         columns: {  }
         service: factories
@@ -48,9 +48,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscNul
-        type: Service
         name: SrcMvcBscNulService
+        type: Service
+        db: SrcMvcBscNul
         user: all
         columns: {  }
         service: factories
@@ -60,9 +60,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscNulUpl
-        type: Service
         name: SrcMvcBscNulUplService
+        type: Service
+        db: SrcMvcBscNulUpl
         user: all
         columns: {  }
         service: factories
@@ -72,9 +72,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscUniNul
-        type: Service
         name: SrcMvcBscUniNulService
+        type: Service
+        db: SrcMvcBscUniNul
         user: all
         columns: {  }
         service: factories
@@ -84,9 +84,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscUniNulUpl
-        type: Service
         name: SrcMvcBscUniNulUplService
+        type: Service
+        db: SrcMvcBscUniNulUpl
         user: all
         columns: {  }
         service: factories
@@ -96,9 +96,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLws
-        type: Service
         name: SrcMvcBscLwsService
+        type: Service
+        db: SrcMvcBscLws
         user: low-strict
         columns: {  }
         service: factories
@@ -108,9 +108,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsUpl
-        type: Service
         name: SrcMvcBscLwsUplService
+        type: Service
+        db: SrcMvcBscLwsUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -120,9 +120,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsUni
-        type: Service
         name: SrcMvcBscLwsUniService
+        type: Service
+        db: SrcMvcBscLwsUni
         user: low-strict
         columns: {  }
         service: factories
@@ -132,9 +132,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsUniUpl
-        type: Service
         name: SrcMvcBscLwsUniUplService
+        type: Service
+        db: SrcMvcBscLwsUniUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -144,9 +144,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsNul
-        type: Service
         name: SrcMvcBscLwsNulService
+        type: Service
+        db: SrcMvcBscLwsNul
         user: low-strict
         columns: {  }
         service: factories
@@ -156,9 +156,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsNulUpl
-        type: Service
         name: SrcMvcBscLwsNulUplService
+        type: Service
+        db: SrcMvcBscLwsNulUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -168,9 +168,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsUniNul
-        type: Service
         name: SrcMvcBscLwsUniNulService
+        type: Service
+        db: SrcMvcBscLwsUniNul
         user: low-strict
         columns: {  }
         service: factories
@@ -180,9 +180,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscLwsUniNulUpl
-        type: Service
         name: SrcMvcBscLwsUniNulUplService
+        type: Service
+        db: SrcMvcBscLwsUniNulUpl
         user: low-strict
         columns: {  }
         service: factories
@@ -192,9 +192,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStr
-        type: Service
         name: SrcMvcBscStrService
+        type: Service
+        db: SrcMvcBscStr
         user: strict
         columns: {  }
         service: factories
@@ -204,9 +204,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrUpl
-        type: Service
         name: SrcMvcBscStrUplService
+        type: Service
+        db: SrcMvcBscStrUpl
         user: strict
         columns: {  }
         service: factories
@@ -216,9 +216,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrUni
-        type: Service
         name: SrcMvcBscStrUniService
+        type: Service
+        db: SrcMvcBscStrUni
         user: strict
         columns: {  }
         service: factories
@@ -228,9 +228,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrUniUpl
-        type: Service
         name: SrcMvcBscStrUniUplService
+        type: Service
+        db: SrcMvcBscStrUniUpl
         user: strict
         columns: {  }
         service: factories
@@ -240,9 +240,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrNul
-        type: Service
         name: SrcMvcBscStrNulService
+        type: Service
+        db: SrcMvcBscStrNul
         user: strict
         columns: {  }
         service: factories
@@ -252,9 +252,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrNulUpl
-        type: Service
         name: SrcMvcBscStrNulUplService
+        type: Service
+        db: SrcMvcBscStrNulUpl
         user: strict
         columns: {  }
         service: factories
@@ -264,9 +264,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrUniNul
-        type: Service
         name: SrcMvcBscStrUniNulService
+        type: Service
+        db: SrcMvcBscStrUniNul
         user: strict
         columns: {  }
         service: factories
@@ -276,9 +276,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcBscStrUniNulUpl
-        type: Service
         name: SrcMvcBscStrUniNulUplService
+        type: Service
+        db: SrcMvcBscStrUniNulUpl
         user: strict
         columns: {  }
         service: factories
@@ -288,9 +288,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmp
-        type: Service
         name: SrcMvcCmpService
+        type: Service
+        db: SrcMvcCmp
         user: all
         columns:
             clm_txt_htl_cmp: html
@@ -312,9 +312,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpUpl
-        type: Service
         name: SrcMvcCmpUplService
+        type: Service
+        db: SrcMvcCmpUpl
         user: all
         columns:
             clm_txt_htl_cmp_upl: html
@@ -336,9 +336,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpUni
-        type: Service
         name: SrcMvcCmpUniService
+        type: Service
+        db: SrcMvcCmpUni
         user: all
         columns:
             clm_txt_htl_cmp_uni: html
@@ -360,9 +360,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpUniUpl
-        type: Service
         name: SrcMvcCmpUniUplService
+        type: Service
+        db: SrcMvcCmpUniUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_upl: html
@@ -384,9 +384,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpNul
-        type: Service
         name: SrcMvcCmpNulService
+        type: Service
+        db: SrcMvcCmpNul
         user: all
         columns:
             clm_txt_htl_cmp_nul: html
@@ -408,9 +408,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpNulUpl
-        type: Service
         name: SrcMvcCmpNulUplService
+        type: Service
+        db: SrcMvcCmpNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_nul_upl: html
@@ -432,9 +432,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpUniNul
-        type: Service
         name: SrcMvcCmpUniNulService
+        type: Service
+        db: SrcMvcCmpUniNul
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul: html
@@ -456,9 +456,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpUniNulUpl
-        type: Service
         name: SrcMvcCmpUniNulUplService
+        type: Service
+        db: SrcMvcCmpUniNulUpl
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul_upl: html
@@ -480,9 +480,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLws
-        type: Service
         name: SrcMvcCmpLwsService
+        type: Service
+        db: SrcMvcCmpLws
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws: html
@@ -504,9 +504,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsUpl
-        type: Service
         name: SrcMvcCmpLwsUplService
+        type: Service
+        db: SrcMvcCmpLwsUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_upl: html
@@ -528,9 +528,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsUni
-        type: Service
         name: SrcMvcCmpLwsUniService
+        type: Service
+        db: SrcMvcCmpLwsUni
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni: html
@@ -552,9 +552,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsUniUpl
-        type: Service
         name: SrcMvcCmpLwsUniUplService
+        type: Service
+        db: SrcMvcCmpLwsUniUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_upl: html
@@ -576,9 +576,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsNul
-        type: Service
         name: SrcMvcCmpLwsNulService
+        type: Service
+        db: SrcMvcCmpLwsNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul: html
@@ -600,9 +600,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsNulUpl
-        type: Service
         name: SrcMvcCmpLwsNulUplService
+        type: Service
+        db: SrcMvcCmpLwsNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul_upl: html
@@ -624,9 +624,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsUniNul
-        type: Service
         name: SrcMvcCmpLwsUniNulService
+        type: Service
+        db: SrcMvcCmpLwsUniNul
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul: html
@@ -648,9 +648,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpLwsUniNulUpl
-        type: Service
         name: SrcMvcCmpLwsUniNulUplService
+        type: Service
+        db: SrcMvcCmpLwsUniNulUpl
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul_upl: html
@@ -672,9 +672,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStr
-        type: Service
         name: SrcMvcCmpStrService
+        type: Service
+        db: SrcMvcCmpStr
         user: strict
         columns:
             clm_txt_htl_cmp_str: html
@@ -696,9 +696,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrUpl
-        type: Service
         name: SrcMvcCmpStrUplService
+        type: Service
+        db: SrcMvcCmpStrUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_upl: html
@@ -720,9 +720,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrUni
-        type: Service
         name: SrcMvcCmpStrUniService
+        type: Service
+        db: SrcMvcCmpStrUni
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni: html
@@ -744,9 +744,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrUniUpl
-        type: Service
         name: SrcMvcCmpStrUniUplService
+        type: Service
+        db: SrcMvcCmpStrUniUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_upl: html
@@ -768,9 +768,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrNul
-        type: Service
         name: SrcMvcCmpStrNulService
+        type: Service
+        db: SrcMvcCmpStrNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul: html
@@ -792,9 +792,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrNulUpl
-        type: Service
         name: SrcMvcCmpStrNulUplService
+        type: Service
+        db: SrcMvcCmpStrNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul_upl: html
@@ -816,9 +816,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrUniNul
-        type: Service
         name: SrcMvcCmpStrUniNulService
+        type: Service
+        db: SrcMvcCmpStrUniNul
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul: html
@@ -840,9 +840,9 @@ src:
             memcached: \Zend\Cache\Storage\Adapter\Memcached
             1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
     -
-        db: SrcMvcCmpStrUniNulUpl
-        type: Service
         name: SrcMvcCmpStrUniNulUplService
+        type: Service
+        db: SrcMvcCmpStrUniNulUpl
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul_upl: html
