@@ -102,9 +102,6 @@ class EntityObjectFixer
         $entity->setContent($content);
     }
 
-
-
-
     public function snifferErrors($entity)
     {
 

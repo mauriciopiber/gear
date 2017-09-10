@@ -57,8 +57,6 @@ class EntityService extends AbstractMvc
 
     protected $tableName;
 
-
-
     public function __construct(
         BasicModuleStructure $module,
         DoctrineService $doctrine,

@@ -462,18 +462,18 @@ EOS
     {
 
 
-        $global = new \Gear\Project\Config\Globally(array(
+        $global = new \Gear\Project\Config\Globally([
             'dbms' => 'mysql',
             'dbname' => $this->projectConfig->getDatabase(),
             'dbhost' => 'localhost'
-        ));
+        ***REMOVED***);
 
-        $local = new \Gear\Project\Config\Local(array(
+        $local = new \Gear\Project\Config\Local([
             'username' => $this->projectConfig->getUsername(),
             'password' => $this->projectConfig->getPassword(),
             'host'     => $this->projectConfig->getHost(),
             'environment' => 'development'
-        ));
+        ***REMOVED***);
 
 
         $this->setUpConfig();
