@@ -1,14 +1,13 @@
 <?php
 namespace Gear\Project\Config;
 
-use Zend\Stdlib\Hydrator\ClassMethods;
-use GearJson\AbstractHydrator;
+use Exception;
 
 /**
  *
  * @author piber
  */
-class Globally extends AbstractHydrator
+class Globally
 {
 
     protected $dbms;
@@ -17,10 +16,18 @@ class Globally extends AbstractHydrator
 
     protected $dbhost;
 
-    public function getInputFilter()
+    public function __construct(array $data)
     {
         $inputFilter = new \Gear\Project\Config\GloballyFilter();
-        return $inputFilter;
+        $inputFilter->setData($data);
+
+        if ($inputFilter->isValid() === false) {
+            throw new Exception(self::MISSING_PARAMS, $data);
+        }
+
+        $this->dbms = $data['dbms'***REMOVED***;
+        $this->dbname = $data['dbname'***REMOVED***;
+        $this->dbhost = $data['dbhost'***REMOVED***;
     }
 
     public function getDbms()

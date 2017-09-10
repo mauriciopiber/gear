@@ -1,15 +1,14 @@
 <?php
 namespace Gear\Project\Config;
 
-use Zend\Stdlib\Hydrator\ClassMethods;
-use GearJson\AbstractHydrator;
+use Exception;
 
 /**
  *
  * @author piber
  *
  */
-class Local extends AbstractHydrator
+class Local
 {
 
     protected $username;
@@ -24,10 +23,19 @@ class Local extends AbstractHydrator
 
     protected $hasDb = true;
 
-    public function getInputFilter()
+    public function __construct(array $data)
     {
         $inputFilter = new \Gear\Project\Config\LocalFilter();
-        return $inputFilter;
+        $inputFilter->setData($data);
+
+        if ($inputFilter->isValid() === false) {
+            throw new Exception(self::MISSING_PARAMS, $data);
+        }
+
+        $this->username = $data['username'***REMOVED***;
+        $this->password = $data['password'***REMOVED***;
+        $this->host = $data['host'***REMOVED***;
+        $this->environment = $data['environment'***REMOVED***;
     }
 
     public function getUsername()
