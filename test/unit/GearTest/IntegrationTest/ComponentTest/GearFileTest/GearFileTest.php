@@ -105,16 +105,16 @@ EOS;
     }
 
     /**
-     * @group x11
+     * @group pp2
      */
     public function testCreateGearFileSrcMvcEntityWithConstraint()
     {
         $template = <<<EOS
 src:
     -
-        db: SrcMvcComplete
-        type: Entity
         name: SrcMvcComplete
+        type: Entity
+        db: SrcMvcComplete
         user: all
         columns:
             column_text_html_complete: html
@@ -141,6 +141,7 @@ EOS;
 
         $minor = $this->prophesize(SrcMvcMinorSuite::class);
         $minor->getSuiteName()->willReturn('src-mvc-entity')->shouldBeCalled();
+        $minor->getType()->willReturn('Entity')->shouldBeCalled();
 
         $major = $this->prophesize(SrcMvcMajorSuite::class);
         $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
@@ -170,9 +171,9 @@ EOS;
         $template = <<<EOS
 src:
     -
-        db: SrcMvcBasic
-        type: Entity
         name: SrcMvcBasic
+        type: Entity
+        db: SrcMvcBasic
         user: all
         columns: {  }
 
@@ -183,6 +184,7 @@ EOS;
 
         $minor = $this->prophesize(SrcMvcMinorSuite::class);
         $minor->getSuiteName()->willReturn('src-mvc-entity')->shouldBeCalled();
+        //$minor->getType()->willReturn('Entity')->shouldBeCalled();
 
         $major = $this->prophesize(SrcMvcMajorSuite::class);
         $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
@@ -206,9 +208,9 @@ EOS;
         $template = <<<EOS
 src:
     -
-        db: SrcMvcComplete
-        type: Fixture
         name: SrcMvcCompleteFixture
+        type: Fixture
+        db: SrcMvcComplete
         user: all
         columns:
             column_text_html_complete: html
@@ -235,6 +237,7 @@ EOS;
 
         $minor = $this->prophesize(SrcMvcMinorSuite::class);
         $minor->getSuiteName()->willReturn('src-mvc-fixture')->shouldBeCalled();
+        $minor->getType()->willReturn('Fixture')->shouldBeCalled();
 
         $major = $this->prophesize(SrcMvcMajorSuite::class);
         $major->getSuite()->willReturn('src-mvc')->shouldBeCalled();
@@ -264,9 +267,9 @@ EOS;
         $template = <<<EOS
 src:
     -
-        db: SrcMvcCmp
-        type: Fixture
         name: SrcMvcCmpFixture
+        type: Fixture
+        db: SrcMvcCmp
         user: all
         columns:
             clm_txt_htl_cmp: html
@@ -317,16 +320,16 @@ EOS;
     }
 
     /**
-     * @group x1x1
+     * @group ppp
      */
     public function testCreateGearFileSrcMvcFixtureWithoutConstraint()
     {
         $template = <<<EOS
 src:
     -
-        db: SrcMvcBasic
-        type: Fixture
         name: SrcMvcBasicFixture
+        type: Fixture
+        db: SrcMvcBasic
         user: all
         columns: {  }
 
@@ -363,9 +366,9 @@ EOS;
         $template = <<<EOS
 src:
     -
-        db: SrcMvcRepositoryBasic
-        type: Repository
         name: SrcMvcRepositoryBasicRepository
+        type: Repository
+        db: SrcMvcRepositoryBasic
         user: all
         columns: {  }
         service: factories
