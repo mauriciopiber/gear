@@ -33,7 +33,8 @@ class ComposerServiceFactory implements FactoryInterface
             $serviceLocator->get(BasicModuleStructure::class),
             $serviceLocator->get(ComposerEdge::class),
             $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get(ArrayService::class)
+            $serviceLocator->get(ArrayService::class),
+            $serviceLocator->get('GearBase\Util\String')
         );
         unset($serviceLocator);
         return $factory;

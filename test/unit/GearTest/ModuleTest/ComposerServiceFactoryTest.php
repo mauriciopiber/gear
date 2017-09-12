@@ -9,6 +9,7 @@ use Gear\Module\BasicModuleStructure;
 use Gear\Edge\ComposerEdge;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
+use GearBase\Util\String\StringService;
 
 /**
  * @group Gear
@@ -35,6 +36,10 @@ class ComposerServiceFactoryTest extends TestCase
 
         $this->serviceLocator->get(ArrayService::class)
             ->willReturn($this->prophesize(ArrayService::class)->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get('GearBase\Util\String')
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ComposerServiceFactory();
