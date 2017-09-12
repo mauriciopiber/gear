@@ -215,8 +215,11 @@ class EntityService extends AbstractMvc
     {
         $ymlFiles = $this->getModule()->getSrcFolder();
 
-        //echo $ymlFiles.'/*'."\n";die();
         $list = $this->getGlobService()->list($ymlFiles.'/*');
+
+        if (empty($list)) {
+            return true;
+        }
 
         foreach ($list as $v) {
             $entity = explode('/', $v);
