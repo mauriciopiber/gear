@@ -175,7 +175,6 @@ class ColumnService
     public function isPrimaryKey(ColumnObject $column)
     {
         return in_array($column->getName(), $this->tablePrimaryKey->getColumns());
-
     }
 
     /**
@@ -221,7 +220,6 @@ class ColumnService
             : null;
 
         if ($specialityName !== null) {
-
             $className = $this->str('class', str_replace(' ', '', $specialityName));
 
             $class = sprintf(self::BASE, self::NAMESPACE, $dataType, $className);
@@ -248,7 +246,6 @@ class ColumnService
         return $this->addDependency($instance, $column);
 
         //$instance->setServiceLocator($this->getServiceLocator());
-
     }
 
     public function addDependency($instance, $column)

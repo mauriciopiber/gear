@@ -199,7 +199,6 @@ class MappingService extends AbstractMvc
         $column = $columnData->getColumn();
 
         if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
-
             $this->ref = sprintf('%s.%s', $this->aliase, $this->str('var', $columnData->getReferencedColumn()));
 
             return $this;

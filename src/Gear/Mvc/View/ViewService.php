@@ -177,7 +177,6 @@ class ViewService extends AbstractMvc
         $formElements = '';
 
         foreach ($code as $i => $lineData) {
-
             if ($line == 0) {
                 $formElements .= '                <div class="row">'.PHP_EOL;
             }

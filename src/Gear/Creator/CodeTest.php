@@ -22,14 +22,12 @@ class CodeTest extends AbstractCodeTest
         $template = self::EMPTY.PHP_EOL.PHP_EOL;
 
         foreach ($pluginManager as $call => $pluginClass) {
-
             $var = $this->str('var-length', $call);
 
             $template .= <<<EOS
         \$this->{$var} = \$this->prophesize('{$pluginClass}');
         \$this->controller->getPluginManager()->setService('{$call}', \$this->{$var}->reveal());
 EOS;
-
         }
 
         return $template;

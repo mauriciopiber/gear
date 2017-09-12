@@ -3,7 +3,6 @@ namespace Gear\Column\Varchar;
 
 use Gear\Column\Varchar\Varchar;
 
-
 /**
  *
  * Classe que cria colunas para criar valores aleatórios

@@ -6,7 +6,7 @@ interface ServiceCodeInterface
     const IMAGE = <<<EOS
         '%s'
 EOS
-;
+    ;
 
     const IMAGES = <<<EOS
     const IMAGES = [
@@ -15,5 +15,4 @@ EOS
 
 
 EOS;
-
 }

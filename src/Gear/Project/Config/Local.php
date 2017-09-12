@@ -10,6 +10,7 @@ use Exception;
  */
 class Local
 {
+    const MISSING_PARAMS = 'There are missing params.';
 
     protected $username;
 
@@ -25,17 +26,17 @@ class Local
 
     public function __construct(array $data)
     {
-        $inputFilter = new \Gear\Project\Config\LocalFilter();
+        $inputFilter = (new \Gear\Project\Config\LocalFilter())->getInputFilter();
         $inputFilter->setData($data);
-
+        //var_dump($inputFilter->isValid());die();
         if ($inputFilter->isValid() === false) {
-            throw new Exception(self::MISSING_PARAMS, $data);
+            throw new Exception(self::MISSING_PARAMS.var_export($data));
         }
 
         $this->username = $data['username'***REMOVED***;
         $this->password = $data['password'***REMOVED***;
-        $this->host = $data['host'***REMOVED***;
-        $this->environment = $data['environment'***REMOVED***;
+        $this->host = (isset($data['host'***REMOVED***)) ? $data['host'***REMOVED*** : null;
+        $this->environment = isset($data['environment'***REMOVED***) ? $data['environment'***REMOVED*** : null;
     }
 
     public function getUsername()

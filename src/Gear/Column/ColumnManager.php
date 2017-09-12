@@ -40,15 +40,12 @@ class ColumnManager implements ColumnManagerInterface
         $output = [***REMOVED***;
 
         foreach ($schema as $positionName => $subpositions) {
-
             $output[$positionName***REMOVED*** = [***REMOVED***;
 
             foreach ($subpositions as $subIndex => $options) {
-
                 $output[$positionName***REMOVED***[$subIndex***REMOVED*** = self::EMPTY;
 
                 foreach ($options as $methodName => $onlyOne) {
-
                     $output[$positionName***REMOVED***[$subIndex***REMOVED*** .= $this->generateCode($methodName, $onlyOne);
                 }
             }
@@ -63,7 +60,6 @@ class ColumnManager implements ColumnManagerInterface
         $associated = false;
 
         foreach ($this->getColumns() as $column) {
-
             if (get_class($column) === $class) {
                 $associated = true;
                 break;
@@ -78,7 +74,6 @@ class ColumnManager implements ColumnManagerInterface
         $names = [***REMOVED***;
 
         foreach ($this->getColumns() as $columnData) {
-
             if ($columnData->getColumn()->isNullable() == false) {
                 continue;
             }
@@ -99,8 +94,6 @@ class ColumnManager implements ColumnManagerInterface
         }
 
         return $names;
-
-
     }
 
     public function filter(array $types)
@@ -121,7 +114,6 @@ class ColumnManager implements ColumnManagerInterface
         $imagesArray = [***REMOVED***;
 
         foreach ($this->getColumns() as $columnData) {
-
             $className = get_class($columnData);
 
             if ($columnData instanceof $class) {
@@ -174,7 +166,6 @@ class ColumnManager implements ColumnManagerInterface
         $template = self::EMPTY;
 
         foreach ($this->getAllColumns() as $columnData) {
-
             if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
                 continue;
             }
@@ -202,7 +193,6 @@ class ColumnManager implements ColumnManagerInterface
         $data = [***REMOVED***;
 
         foreach ($this->getColumns() as $columnData) {
-
             if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
                 continue;
             }
@@ -231,7 +221,6 @@ class ColumnManager implements ColumnManagerInterface
         $data = [***REMOVED***;
 
         foreach ($this->getAllColumns() as $columnData) {
-
             if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
                 continue;
             }
@@ -258,7 +247,6 @@ class ColumnManager implements ColumnManagerInterface
         $template = self::EMPTY;
 
         foreach ($this->getColumns() as $columnData) {
-
             if ($this->verifyContinueOrSkip($columnData, $method, $exclude, $verifyOne) === false) {
                 continue;
             }
@@ -296,7 +284,6 @@ class ColumnManager implements ColumnManagerInterface
         }
 
         return true;
-
     }
 
     public function verifyOnlyOne($className, $onlyOne, $verifyOne)
@@ -333,5 +320,4 @@ class ColumnManager implements ColumnManagerInterface
     {
         return $this->columns;
     }
-
 }

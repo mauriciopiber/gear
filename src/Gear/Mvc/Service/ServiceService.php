@@ -96,8 +96,7 @@ class ServiceService extends AbstractMvc
 
         $this->src->addDependency(['memcached' => '\Zend\Cache\Storage\Adapter\Memcached'***REMOVED***);
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
             || $this->columnManager->isAssociatedWith(UploadImageColumn::class)
         ) {
             $this->src->addDependency('\GearImage\Service\ImageService');
@@ -153,7 +152,7 @@ class ServiceService extends AbstractMvc
         $this->getTraitService()->createTrait($this->src);
         $this->getFactoryService()->createFactory($this->src);
 
-        if($this->columnManager->isAssociatedWith('Gear\Column\Varchar\PasswordVerify')) {
+        if ($this->columnManager->isAssociatedWith('Gear\Column\Varchar\PasswordVerify')) {
             $this->src->addDependency('\GearBase\Service\PasswordVerify');
         }
 
@@ -198,7 +197,6 @@ class ServiceService extends AbstractMvc
         $columns = Code::EMPTY;
 
         foreach ($images as $i => $column) {
-
             $columns .= sprintf(ServiceCodeInterface::IMAGE, $this->str('var', $column));
 
             if (isset($images[$i+1***REMOVED***)) {

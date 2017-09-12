@@ -2,6 +2,7 @@
 namespace Gear\Project\Config;
 
 use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Input;
 
 class LocalFilter extends InputFilter
 {
@@ -15,6 +16,7 @@ class LocalFilter extends InputFilter
         $dbname->getValidatorChain()
         ->addValidator(new \Zend\Validator\NotEmpty());
 
+        /*
         $dblocal = new Input('host');
         $dblocal->getValidatorChain()
         ->addValidator(new \Zend\Validator\NotEmpty());
@@ -22,12 +24,13 @@ class LocalFilter extends InputFilter
         $environment = new Input('environment');
         $environment->getValidatorChain()
         ->addValidator(new \Zend\Validator\NotEmpty());
+        */
 
 
         $this->add($dbms);
         $this->add($dbname);
-        $this->add($dblocal);
-        $this->add($environment);
+        //$this->add($dblocal);
+        //$this->add($environment);
 
         return $this;
     }

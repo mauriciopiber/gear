@@ -28,7 +28,6 @@ class UploadImageFactory implements FactoryInterface
         $factory = new UploadImage(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('moduleStructure')
-
         );
         unset($serviceLocator);
         return $factory;

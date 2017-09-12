@@ -152,7 +152,6 @@ class ControllerTestService extends AbstractMvcTest implements
         $columnsImage = [***REMOVED***;
 
         if ($this->hasImageColumn) {
-
             $columnsImage = $this->columnManager->filter([UploadImage::class***REMOVED***);
 
             $finalValue = $this->getFileColumns($columnsImage);
@@ -261,7 +260,6 @@ class ControllerTestService extends AbstractMvcTest implements
 
         if ($this->hasImage) {
             $this->controller->addDependency('\GearImage\Service\ImageService');
-
         }
 
         $pluginManager = [***REMOVED***;
@@ -271,7 +269,7 @@ class ControllerTestService extends AbstractMvcTest implements
         }
 
         if (count($pluginManager) > 0) {
-           $construct['pluginManager'***REMOVED*** = $this->getCodeTest()->getPluginManager($pluginManager);
+            $construct['pluginManager'***REMOVED*** = $this->getCodeTest()->getPluginManager($pluginManager);
         }
 
         $construct['dependency'***REMOVED*** = $this->getCodeTest()->getConstructorDependency($this->controller);
@@ -533,6 +531,5 @@ class ControllerTestService extends AbstractMvcTest implements
         return ($this->hasImageColumn)
             ?  '        $this->mockPluginFilePostRedirectGet($newData);'
             :  '        $this->mockPluginPostRedirectGet($newData);'.PHP_EOL;
-
     }
 }
