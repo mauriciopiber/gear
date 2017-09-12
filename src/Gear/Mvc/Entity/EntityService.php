@@ -85,8 +85,6 @@ class EntityService extends AbstractMvc
 
     public function createEntities(array $srcs)
     {
-        echo "oie"."\n";
-
         $doctrineService = $this->getDoctrineService();
 
         $scriptService = $this->getScriptService();
@@ -243,6 +241,10 @@ class EntityService extends AbstractMvc
 
 
         $list = $this->getGlobService()->list($entitys.'/*.php');
+
+        if (empty($list)) {
+            return true;
+        }
 
         foreach ($list as $entityFullPath) {
             $entity = explode('/', $entityFullPath);
