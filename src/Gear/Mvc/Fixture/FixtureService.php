@@ -90,8 +90,7 @@ class FixtureService extends AbstractMvc
         $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\FixtureInterface';
         $this->implements[***REMOVED*** = '\Doctrine\Common\DataFixtures\DependentFixtureInterface';
 
-        if (
-            $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
+        if ($this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME)
             || $this->columnManager->isAssociatedWith(UploadImageColumn::class)
         ) {
             $this->src->addDependency('\GearImage\Fixture');

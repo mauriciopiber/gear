@@ -225,7 +225,6 @@ class GearFile
 
         $srcs = [***REMOVED***;
         foreach ($tables as $minorSuite) {
-
             $this->minorSuite = $minorSuite;
             $name = $minorSuite->getType() == SrcTypesInterface::ENTITY
                 ? $minorSuite->getTableAlias()
@@ -257,8 +256,7 @@ class GearFile
                 }
             }
 
-            if (
-                !empty($minorSuite->getTableAssoc())
+            if (!empty($minorSuite->getTableAssoc())
                 && !in_array($minorSuite->getTableAssoc(), $this->history)
                 && in_array($srcMvcMinorSuite->getType(), [SrcTypesInterface::ENTITY, SrcTypesInterface::FIXTURE***REMOVED***)
             ) {
@@ -385,7 +383,6 @@ class GearFile
         $table = $this->str('class', str_replace('id_', '', $tableId));
 
         if ($minorSuite instanceof SrcMvcMinorSuite) {
-
             if ($minorSuite->getType() === SrcTypesInterface::ENTITY) {
                 $data = [
                     [
@@ -582,11 +579,9 @@ class GearFile
         $implements = [***REMOVED***;
 
         foreach ($this->entity['implements'***REMOVED*** as $invokDep) {
-
             $implements[***REMOVED*** = (strpos($invokDep, 'Interfaces') !== false)
                 ? sprintf($invokDep, '', $this->numberLabel)
                 : sprintf($invokDep, $this->type, $this->numberLabel);
-
         }
 
         return $implements;
@@ -654,7 +649,6 @@ class GearFile
         $dependencies = [***REMOVED***;
 
         foreach ($entity['dependency'***REMOVED*** as $invokDep) {
-
             $typeDep = ($this->suite->isUsingLongName())
                 ? $this->str('class', $invokDep[1***REMOVED***)
                 : $this->str('class', substr($invokDep[1***REMOVED***, 0, 5));

@@ -229,7 +229,6 @@ class SrcService extends AbstractConstructor
 
 
             $validations['created'***REMOVED***[***REMOVED*** = $srcObject;
-
         }
 
         return $validations;
@@ -327,5 +326,4 @@ class SrcService extends AbstractConstructor
         }
         return $status;
     }
-
 }

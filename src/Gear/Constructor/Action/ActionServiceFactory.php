@@ -66,4 +66,3 @@ class ActionServiceFactory implements FactoryInterface
         return $factory;
     }
 }
-

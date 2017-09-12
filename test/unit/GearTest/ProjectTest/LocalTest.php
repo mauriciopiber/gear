@@ -11,6 +11,11 @@ class LocalTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $data = new Local([***REMOVED***);
+        $data = new Local([
+            'username' => '',
+            'password' => '',
+            'host' => '',
+            'environment' => ''
+        ***REMOVED***);
     }
 }

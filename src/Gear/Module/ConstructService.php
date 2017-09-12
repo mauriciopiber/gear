@@ -192,7 +192,6 @@ class ConstructService extends AbstractJsonService
 
         if (isset($data['controller'***REMOVED***)) {
             foreach ($data['controller'***REMOVED*** as $controller) {
-
                 $this->constructController($module, $controller);
 
                 if (isset($controller['actions'***REMOVED***)) {
@@ -207,7 +206,6 @@ class ConstructService extends AbstractJsonService
 
 
                         $this->constructAction($module, $controller['name'***REMOVED***, $action);
-
                     }
                 }
             }

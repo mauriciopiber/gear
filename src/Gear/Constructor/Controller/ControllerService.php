@@ -35,7 +35,7 @@ use Gear\Constructor\AbstractConstructor;
 use GearJson\Service\FactoriesInterface;
 use GearJson\Controller\Type\ActionInterface;
 
-class ControllerService  extends AbstractConstructor
+class ControllerService extends AbstractConstructor
 {
     static public $defaultService = FactoriesInterface::NAME;
 

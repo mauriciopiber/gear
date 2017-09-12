@@ -138,11 +138,10 @@ class EntityService extends AbstractMvc
     {
         $this->getEntityTestService()->createEntityTest($this->db);
 
-        if (
-            $this->getTableService()->verifyTableAssociation(
-                $this->str('class', $this->db->getTable()),
-                UploadImageTable::NAME
-            )
+        if ($this->getTableService()->verifyTableAssociation(
+            $this->str('class', $this->db->getTable()),
+            UploadImageTable::NAME
+        )
             && !is_file($this->getModule()->getEntityFolder().'/UploadImage.php')
         ) {
             //$uploadImage = $this->getTableService()->getTableObject(UploadImageTable::NAME);

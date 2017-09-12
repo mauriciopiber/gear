@@ -134,7 +134,7 @@ class FixtureServiceTest extends AbstractTestCase
     }
 
     /**
-     * @group a2
+     * @group f.x1
      */
     public function testFixtureWithForeignKey()
     {
@@ -144,7 +144,7 @@ class FixtureServiceTest extends AbstractTestCase
         $columnPrimaryKey = $this->prophesize(ColumnObject::class);
         $columnPrimaryKey->getDataType()->willReturn('int')->shouldBeCalled();
         $columnPrimaryKey->getName()->willReturn($this->primaryKey)->shouldBeCalled();
-        $columnPrimaryKey->getTableName()->willReturn($this->table)->shouldBeCalled();
+        $columnPrimaryKey->getTableName()->willReturn($this->table);
 
         $primaryConstraint = $this->prophesize(ConstraintObject::class);
         $primaryConstraint->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
@@ -170,7 +170,7 @@ class FixtureServiceTest extends AbstractTestCase
         $columnForeignKey = $this->prophesize(ColumnObject::class);
         $columnForeignKey->getDataType()->willReturn('int')->shouldBeCalled();
         $columnForeignKey->getName()->willReturn('id_my_another_table')->shouldBeCalled();
-        $columnForeignKey->getTableName()->willReturn($this->table)->shouldBeCalled();
+        $columnForeignKey->getTableName()->willReturn($this->table);//->shouldBeCalled();
 
         $foreignConstraint = $this->prophesize(ConstraintObject::class);
         $foreignConstraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();

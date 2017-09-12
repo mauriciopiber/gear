@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\RepositoryTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
@@ -14,7 +14,7 @@ use Gear\Column\ColumnManager;
  * @group src-mvc
  * @group db-repository
  */
-class RepositoryServiceTest extends AbstractTestCase
+class RepositoryServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ScopeTrait;
@@ -39,7 +39,7 @@ class RepositoryServiceTest extends AbstractTestCase
         $this->repository->setStringService($this->string);
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
+        $template->setRenderer($this->mockPhpRenderer());
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
         $this->repository->setFileCreator($this->fileCreator);

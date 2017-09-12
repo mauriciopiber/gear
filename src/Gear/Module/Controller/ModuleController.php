@@ -30,7 +30,7 @@ class ModuleController extends AbstractConsoleController
 
     public function constructAction()
     {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-construct'));
+        $this->getEventManager()->trigger('gear.pre', $this, ['message' => 'module-construct'***REMOVED***);
 
         $module = $this->getRequest()->getParam('module', false);
 

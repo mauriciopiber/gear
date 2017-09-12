@@ -7,6 +7,7 @@ use Zend\Mvc\Router\Console\RouteMatch;
 use Zend\Mvc\MvcEvent;
 use Gear\Module\Controller\ModuleController;
 use Zend\Stdlib\Parameters;
+use Gear\Module\ConstructStatusObject;
 
 /**
  * @group Module
@@ -37,11 +38,16 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(404, $response->getStatusCode());
     }
 
+    /**
+     * @group x.m1
+     */
     public function testConstructAction()
     {
         $construct = $this->prophesize('Gear\Module\ConstructService');
 
-        $construct->construct(false, null, null)->willReturn(true);
+        $status = new ConstructStatusObject();
+
+        $construct->construct(false, null, null)->willReturn($status)->shouldBeCalled();
 
         $this->controller->setConstructService($construct->reveal());
 
@@ -51,11 +57,16 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
+    /**
+     * @group x.m1
+     */
     public function testConstructParamsAction()
     {
         $construct = $this->prophesize('Gear\Module\ConstructService');
 
-        $construct->construct('Gears', '/var/www/my-folder', 'gear-1.0.0.yml')->willReturn(true);
+        $status = new ConstructStatusObject();
+
+        $construct->construct('Gears', 'gear-1.0.0.yml')->willReturn($status);
 
         $this->controller->setConstructService($construct->reveal());
 
@@ -171,8 +182,8 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->controller->setModuleService($diagnostic->reveal());
 
         $this->request->setParams(new Parameters([
-            'type' => $type, 
-            'module' => 'Gearing', 
+            'type' => $type,
+            'module' => 'Gearing',
             'basepath' => '/var/www/teste',
             'staging' => 'stag.com.br',
         ***REMOVED***));
