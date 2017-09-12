@@ -40,7 +40,7 @@ trait UtilTestTrait
     /**
      * Cria Zend\View\Renderer\PhpRenderer
      */
-    public function mockPhpRenderer($templateMap = null)
+    public function mockPhpRenderer()
     {
         $templatePath = (new Module)->getLocation().'/../../view';
 

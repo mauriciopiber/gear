@@ -1,35 +1,51 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Module\ComposerService;
+use Gear\Creator\Template\TemplateService;
+use GearBase\Util\File\FileService;
+use Gear\Creator\FileCreator\FileCreator;
+use GearBase\Util\String\StringService;
+use Gear\Util\Vector\ArrayService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Module
  * @group ModuleConstruct
  * @group Create
  */
-class ComposerServiceTest extends AbstractTestCase
+class ComposerServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();
 
         //FileCreator
-        $this->composer = new \Gear\Module\ComposerService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+
+        $template       = new TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $fileCreator    = new FileCreator($fileService, $template);
 
-        $stringService  = new \GearBase\Util\String\StringService();
-        $arrayService   = new \Gear\Util\Vector\ArrayService();
+        $stringService  = new StringService();
+        $arrayService   = new ArrayService();
 
-        $this->composer->setArrayService($arrayService);
-        $this->composer->setFileCreator($fileCreator);
-        $this->composer->setStringService($stringService);
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->edge = $this->prophesize('Gear\Edge\ComposerEdge');
+
+        $this->composer = new ComposerService(
+            $this->module->reveal(),
+            $this->edge->reveal(),
+            $fileCreator,
+            $arrayService,
+            $stringService
+        );
     }
 
 
@@ -39,13 +55,10 @@ class ComposerServiceTest extends AbstractTestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getModuleName()->willReturn('Gearing');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('Gearing');
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-
-        $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
-        $yaml->getComposerModule('web')->willReturn(
+        $this->edge->getComposerModule('web')->willReturn(
             [
                 'require' => [
                     'mpiber/package-1' => '1.0.0',
@@ -59,10 +72,6 @@ class ComposerServiceTest extends AbstractTestCase
 
             ***REMOVED***
         );
-
-        $this->composer->setComposerEdge($yaml->reveal());
-
-        $this->composer->setModule($module->reveal());
 
         $created = $this->composer->createComposerAsProject();
 

@@ -106,7 +106,7 @@ class ConstructServiceTest extends AbstractTestCase
         $src = new Src($data);
         $this->srcSchema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
         $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
-        $this->srcService->construct($src)->willReturn(true)->shouldBeCalled();
+        $this->srcService->create($src->export())->willReturn(true)->shouldBeCalled();
 
 
         //src exist
@@ -169,7 +169,7 @@ EOS
         $this->srcSchema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
         $this->srcSchema->factory('Gearing', $data, false)->willReturn($src)->shouldBeCalled();
 
-        $this->srcService->construct($src)->willReturn(true)->shouldBeCalled();
+        $this->srcService->create($src->export())->willReturn(true)->shouldBeCalled();
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 

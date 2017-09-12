@@ -7,6 +7,7 @@ use Gear\Edge\ComposerEdgeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
 use Gear\Mvc\AbstractMvc;
+use GearBase\Util\String\StringService;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -30,12 +31,14 @@ class ComposerService extends AbstractMvc
         BasicModuleStructure $basicModuleStructure,
         ComposerEdge $composerEdge,
         FileCreator $fileCreator,
-        ArrayService $arrayService
+        ArrayService $arrayService,
+        StringService $stringService
     ) {
         $this->module = $basicModuleStructure;
         $this->composerEdge = $composerEdge;
         $this->fileCreator = $fileCreator;
         $this->arrayService = $arrayService;
+        $this->stringService = $stringService;
 
         return $this;
     }

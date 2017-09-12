@@ -288,9 +288,7 @@ class ModuleServiceTest extends TestCase
     */
 
     /**
-     * @group mod1
-     * @group mod4
-     * @group x1
+     * @group p1p2
      */
     public function testCreateModuleAsProjectWeb()
     {
@@ -310,8 +308,8 @@ class ModuleServiceTest extends TestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Action'***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
 
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
@@ -322,7 +320,7 @@ class ModuleServiceTest extends TestCase
 
         $this->configService->module($type, null)->shouldBeCalled();
 
-        $this->languageService->create()->shouldBeCalled();
+        $this->languageService->module()->shouldBeCalled();
 
         $this->appController->createIndexController()->shouldBeCalled();
         $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
@@ -449,6 +447,7 @@ class ModuleServiceTest extends TestCase
     /**
      * @group create2
      * @group x1
+     * @group x11
      */
     public function testCreateModuleWeb()
     {
@@ -467,8 +466,8 @@ class ModuleServiceTest extends TestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Action')->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Action'***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
 
         $this->controllerTest->module()->shouldBeCalled();
         $this->controller->module()->shouldBeCalled();
@@ -480,7 +479,7 @@ class ModuleServiceTest extends TestCase
 
         $this->configService->module($type, null)->shouldBeCalled();
 
-        $this->languageService->create()->shouldBeCalled();
+        $this->languageService->module()->shouldBeCalled();
 
         $this->appController->createIndexController()->shouldBeCalled();
         $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
@@ -610,6 +609,7 @@ class ModuleServiceTest extends TestCase
 
     /**
      * @group create1
+     * @group ppx1
      */
     public function testCreateModuleCli()
     {
@@ -626,8 +626,8 @@ class ModuleServiceTest extends TestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Console'***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();
@@ -739,6 +739,7 @@ class ModuleServiceTest extends TestCase
     /**
      * @group mod1
      * @group vamov
+     * @group ppx1
      */
     public function testCreateModuleAsProjectCli()
     {
@@ -758,8 +759,8 @@ class ModuleServiceTest extends TestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, 'IndexController', 'factories', 'Console')->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, 'IndexController', 'Index')->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, ["name" => "IndexController", "services" => "factories", "type" => "Console"***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaAction->create($moduleName, ["controller" => "IndexController", "name" => "Index"***REMOVED***, false)->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->module()->shouldBeCalled();
         $this->consoleController->module()->shouldBeCalled();
