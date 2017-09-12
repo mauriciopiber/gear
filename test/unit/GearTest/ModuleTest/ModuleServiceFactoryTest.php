@@ -20,6 +20,8 @@ class ModuleServiceFactoryTest extends AbstractTestCase
 
 
         $expected = [
+            'Gear\Mvc\Controller\ControllerService' => 'Gear\Mvc\Controller\ControllerService',
+            'Gear\Mvc\Controller\ControllerTestService' => 'Gear\Mvc\Controller\ControllerTestService',
             'Gear\Creator\FileCreator\FileCreator' => 'Gear\Creator\FileCreator\FileCreator',
             'GearBase\Util\String' => 'GearBase\Util\String\StringService',
             'moduleStructure' => 'Gear\Module\BasicModuleStructure',
@@ -38,8 +40,8 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'GearJson\Action'          => 'GearJson\Action\ActionService',
             'GearJson\Controller'      => 'GearJson\Controller\ControllerService',
             'Gear\Mvc\Config\ConfigService' => 'Gear\Mvc\Config\ConfigService',
-            'Gear\Mvc\Controller\Controller' => 'Gear\Mvc\Controller\ControllerService',
-            'Gear\Mvc\Controller\ControllerTest' => 'Gear\Mvc\Controller\ControllerTestService',
+            //'Gear\Mvc\Controller\Controller' => 'Gear\Mvc\Controller\ControllerService',
+            //'Gear\Mvc\Controller\ControllerTest' => 'Gear\Mvc\Controller\ControllerTestService',
             'Gear\Mvc\ConsoleController\ConsoleControllerTest' => 'Gear\Mvc\ConsoleController\ConsoleControllerTest',
             'Gear\Mvc\ConsoleController\ConsoleController' => 'Gear\Mvc\ConsoleController\ConsoleController',
             'Gear\Mvc\View\App\AppControllerService' => 'Gear\Mvc\View\App\AppControllerService',

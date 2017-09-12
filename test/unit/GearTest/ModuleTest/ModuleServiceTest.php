@@ -759,7 +759,15 @@ class ModuleServiceTest extends TestCase
 
         $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
         $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, ["name" => "IndexController", "services" => "factories", "type" => "Console"***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create(
+            $moduleName,
+            [
+                "name" => "IndexController",
+                "services" => "factories",
+                "type" => "Console"
+            ***REMOVED***
+        )->willReturn(true)->shouldBeCalled();
+
         $this->schemaAction->create($moduleName, ["controller" => "IndexController", "name" => "Index"***REMOVED***, false)->willReturn(true)->shouldBeCalled();
 
         $this->consoleControllerTest->module()->shouldBeCalled();
