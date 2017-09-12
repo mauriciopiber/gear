@@ -51,6 +51,10 @@ class FactoryServiceTest extends AbstractTestCase
         $this->factory->setModule($this->module->reveal());
         $this->factory->setFactoryCode($codefactory);
 
+
+        $this->factoryTest = $this->prophesize(\Gear\Mvc\Factory\FactoryTestService::class);
+        $this->factory->setFactoryTestService($this->factoryTest->reveal());
+
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
         $this->serviceManager->setModule($this->module->reveal());
         $this->factory->setServiceManager($this->serviceManager);
@@ -61,6 +65,7 @@ class FactoryServiceTest extends AbstractTestCase
 
     /**
      * @group fix-dependency3
+     * @group pppp1
      */
     public function testCreateConsoleWithSpecialDependency()
     {
