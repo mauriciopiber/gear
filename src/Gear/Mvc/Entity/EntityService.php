@@ -109,6 +109,10 @@ class EntityService extends AbstractMvc
 
         $files = $this->getGlobService()->list($entityFolder.'/*');
 
+        if (empty($files)) {
+            return true;
+        }
+
         $this->getEntityObjectFixer()->fixEntities($this->getModule()->getModuleName(), $files);
     }
 
