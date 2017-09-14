@@ -1,6 +1,32 @@
 db:
-    - { table: MvcCmpStrUniNulUpl, user: strict, namespace: MvcCmpStrUniNulUpl, service: factories, columns: { clm_txt_htl_cmp_str_uni_nul_upl: html, clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br, clm_boo_chb_cmp_str_uni_nul_upl: checkbox, clm_int_chb_cmp_str_uni_nul_upl: checkbox, clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br, clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br, clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify, clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image, clm_vrc_url_cmp_str_uni_nul_upl: url, clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id, clm_vrc_tel_cmp_str_uni_nul_upl: telephone, clm_vrc_eml_cmp_str_uni_nul_upl: email } }
+    -
+        table: MvcCmpStrUniNulUpl
+        user: strict
+        namespace: MvcCmpStrUniNulUpl
+        service: factories
+        columns:
+            clm_txt_htl_cmp_str_uni_nul_upl: html
+            clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul_upl: checkbox
+            clm_int_chb_cmp_str_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_str_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_str_uni_nul_upl: email
 src:
-    - { name: ColumnIntForeign, type: Entity, db: ColumnIntForeign }
-    - { name: ColumnIntForeignFixture, type: Fixture, db: ColumnIntForeign }
-    - { name: UploadImage, type: Entity, db: UploadImage }
+    -
+        name: ColumnIntForeign
+        type: Entity
+        db: ColumnIntForeign
+    -
+        name: ColumnIntForeignFixture
+        type: Fixture
+        db: ColumnIntForeign
+    -
+        name: UploadImage
+        type: Entity
+        db: UploadImage

@@ -1,3 +1,8 @@
 db:
-    - { table: MvcBasic, user: all, namespace: MvcBasic, service: factories, columns: {  } }
+    -
+        table: MvcBasic
+        user: all
+        namespace: MvcBasic
+        service: factories
+        columns: {  }
 src: {  }
