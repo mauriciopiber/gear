@@ -27,8 +27,8 @@ class EntityObjectFixerTest extends TestCase
     public function getEntitysFixData()
     {
         return [
-            //['upload-image'***REMOVED***,
-            //['mvc-basic-upload-image'***REMOVED***,
+            ['upload-image'***REMOVED***,
+            ['mvc-basic-upload-image'***REMOVED***,
             ['entity-complex-1'***REMOVED***
         ***REMOVED***;
     }

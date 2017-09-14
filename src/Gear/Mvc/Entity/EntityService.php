@@ -103,6 +103,11 @@ class EntityService extends AbstractMvc
         return true;
     }
 
+    /**
+     * @critic
+     *
+     * @return boolean
+     */
     public function fixEntities()
     {
         $entityFolder = $this->getModule()->getEntityFolder();
