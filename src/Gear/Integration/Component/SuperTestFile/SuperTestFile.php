@@ -5,7 +5,7 @@ use Gear\Integration\Util\Persist\PersistTrait;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
 use GearBase\Util\String\StringService;
-use Gear\Integration\Mvc\MvcMajorSuite;
+use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**
  * PHP Version 5
@@ -60,6 +60,7 @@ class SuperTestFile
     {
         $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
 
+        var_dump(get_class($superType), MvcMajorSuite::class);
         $utilPath = (get_class($superType) == MvcMajorSuite::class)
             ? './../../../../../../bin'
             : './../../../../../bin';
