@@ -1,7 +1,8 @@
 require:
   mauriciopiber/gear-base: ~0.2 || ~1.0
-  doctrine/doctrine-module: 0.8.*
-  doctrine/doctrine-orm-module: 0.8.*
+  doctrine/doctrine-module: ~0.8.0
+  doctrine/doctrine-orm-module: ~0.8.0
+  doctrine/orm: ~2.5.0
   robmorgan/phinx: '*'
   php: '>=5.5'
   zendframework/zendframework: ^2.5.0

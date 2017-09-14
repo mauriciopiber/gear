@@ -484,6 +484,7 @@ EOS;
      * Set {$columnUline}
      *
      * @param \DateTime \${$columnVar}
+     *
      * @return {$tableName}
      */
     public function set{$columnClass}(\${$columnVar})
@@ -533,6 +534,7 @@ EOS;
      * Set {$columnVar}
      *
      * @param \GearAdmin\Entity\User \${$columnVar}
+     *
      * @return {$tableName}
      */
     public function set{$columnClass}(\GearAdmin\Entity\User \${$columnVar} = null)
