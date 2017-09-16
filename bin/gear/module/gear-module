@@ -157,6 +157,20 @@ if [ "$cmd" == "reset" ***REMOVED***; then
    
 fi
 
+if [ "$cmd" == "build-suite" ***REMOVED***; then
+	
+    # Params
+    if [ $# -lt 5 ***REMOVED***; then
+        echo "usage $0: command module type scriptsDir construct"
+        exit 1
+    fi
+    
+    Gear_Module_Execute_Build_Suite "${2}" "${3}" "${4}" "${5}"
+	   
+    exit 0
+fi
+
+
 if [ "$cmd" == "test" ***REMOVED***; then
 	
 	# Params

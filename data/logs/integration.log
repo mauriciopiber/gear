@@ -1,0 +1,93 @@
+16/09/17 11:51:01 -> mvc/mvc-columns -> 0
+16/09/17 11:51:01 -> mvc/mvc-complete -> 0
+16/09/17 11:51:01 -> mvc/mvc-usertypes -> 0
+16/09/17 11:51:01 -> mvc/mvc-constraints -> 0
+ -> Started a new suite
+16/09/17 11:54:03 -> mvc/mvc-columns -> 0
+16/09/17 11:54:03 -> mvc/mvc-complete -> 0
+16/09/17 11:54:03 -> mvc/mvc-usertypes -> 0
+16/09/17 11:54:03 -> mvc/mvc-constraints -> 0
+16/09/17 11:54:03 -> Ended the suite
+16/09/17 11:54:38 -> Started a new suite
+16/09/17 11:54:38 -> mvc/mvc-columns -> 0
+16/09/17 11:54:39 -> mvc/mvc-complete -> 1
+16/09/17 11:54:39 -> mvc/mvc-usertypes -> 0
+16/09/17 11:54:39 -> mvc/mvc-constraints -> 0
+16/09/17 11:54:39 -> Ended the suite
+16/09/17 11:54:55 -> Started a new suite
+16/09/17 11:54:55 -> mvc/mvc-columns -> 0
+16/09/17 11:54:55 -> mvc/mvc-complete -> 0
+16/09/17 11:54:55 -> mvc/mvc-usertypes -> 0
+16/09/17 11:54:56 -> mvc/mvc-constraints -> 1
+16/09/17 11:54:56 -> Ended the suite
+
+16/09/17 11:54:58 -> Started a new suite
+16/09/17 11:54:58 -> mvc/mvc-columns -> 0
+16/09/17 11:54:58 -> mvc/mvc-complete -> 0
+16/09/17 11:54:58 -> mvc/mvc-usertypes -> 0
+16/09/17 11:54:58 -> mvc/mvc-constraints -> 0
+16/09/17 11:54:58 -> Ended the suite
+
+16/09/17 11:55:03 -> Started a new suite
+16/09/17 11:55:03 -> mvc/mvc-columns -> 0
+16/09/17 11:55:03 -> mvc/mvc-complete -> 0
+16/09/17 11:55:03 -> mvc/mvc-usertypes -> 0
+16/09/17 11:55:04 -> mvc/mvc-constraints -> 1
+16/09/17 11:55:04 -> Ended the suite
+
+16/09/17 11:55:43 -> Started a new suite
+16/09/17 11:55:46 -> mvc/mvc-columns -> 3
+16/09/17 11:55:55 -> mvc/mvc-complete -> 9
+16/09/17 11:56:02 -> mvc/mvc-usertypes -> 7
+16/09/17 11:56:05 -> mvc/mvc-constraints -> 3
+16/09/17 11:56:05 -> Ended the suite
+
+16/09/17 11:56:39 -> Started a new suite
+16/09/17 11:56:39 -> mvc/mvc-columns -> 0
+16/09/17 11:56:39 -> mvc/mvc-complete -> 0
+16/09/17 11:56:39 -> mvc/mvc-usertypes -> 0
+16/09/17 11:56:39 -> mvc/mvc-constraints -> 0
+16/09/17 11:56:39 -> Ended the suite
+
+16/09/17 11:59:39 -> Started a new suite
+16/09/17 11:59:39 -> mvc/mvc-columns -> 0
+16/09/17 11:59:39 -> mvc/mvc-complete -> 0
+16/09/17 11:59:39 -> mvc/mvc-usertypes -> 0
+16/09/17 11:59:39 -> mvc/mvc-constraints -> 0
+16/09/17 11:59:39 -> Ended the suite
+
+16/09/17 12:00:48 -> Started a new suite
+16/09/17 12:00:48 -> mvc/mvc-columns -> 0
+16/09/17 12:00:49 -> mvc/mvc-complete -> 1
+16/09/17 12:00:49 -> mvc/mvc-usertypes -> 0
+16/09/17 12:00:49 -> mvc/mvc-constraints -> 0
+16/09/17 12:00:49 -> Ended the suite
+
+16/09/17 12:01:23 -> Started a new suite
+16/09/17 12:01:23 -> mvc/mvc-columns -> 0
+16/09/17 12:01:23 -> mvc/mvc-complete -> 0
+16/09/17 12:01:23 -> mvc/mvc-usertypes -> 0
+16/09/17 12:01:23 -> mvc/mvc-constraints -> 0
+16/09/17 12:01:23 -> Ended the suite
+
+16/09/17 12:01:42 -> Started a new suite
+16/09/17 12:01:42 -> mvc/mvc-columns -> 0
+16/09/17 12:01:42 -> mvc/mvc-complete -> 0
+16/09/17 12:01:42 -> mvc/mvc-usertypes -> 0
+16/09/17 12:01:42 -> mvc/mvc-constraints -> 0
+16/09/17 12:01:43 -> Ended the suite
+
+16/09/17 12:04:37 -> Started a new suite
+16/09/17 12:04:37 -> mvc/mvc-columns -> 0
+16/09/17 12:04:37 -> mvc/mvc-complete -> 0
+16/09/17 12:04:37 -> mvc/mvc-usertypes -> 0
+16/09/17 12:04:37 -> mvc/mvc-constraints -> 0
+16/09/17 12:04:37 -> Ended the suite
+
+16/09/17 12:04:48 -> Started a new suite
+16/09/17 12:04:48 -> mvc/mvc-columns -> 0
+16/09/17 12:04:48 -> mvc/mvc-complete -> 0
+16/09/17 12:04:48 -> mvc/mvc-usertypes -> 0
+16/09/17 12:04:48 -> mvc/mvc-constraints -> 0
+16/09/17 12:04:48 -> Ended the suite
+

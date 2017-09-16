@@ -19,6 +19,7 @@ declare -a availableCmds=(
     "upgrade" 
     "custom"
     "ci"
+    "build-suite"
 )
 
 cmd=${1}

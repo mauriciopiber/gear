@@ -387,6 +387,16 @@ function Gear_Module_Execute_Upgrade
 }
 
 
+function Gear_Module_Execute_Build_Suite
+{
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    	
+	echo "Suite $module"
+    	
+}
+
 function Gear_Module_Execute_Custom
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
