@@ -100,6 +100,11 @@ if [ "$cmd" == "reload" ***REMOVED***; then
 	exit 0	
 fi
 
+if [ "$cmd" == "build-suite" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "build-suite" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}"
+	exit 0	
+fi
 
 if [ "$cmd" == "test" ***REMOVED***; then
 	
