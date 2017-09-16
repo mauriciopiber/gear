@@ -1,3 +1,45 @@
 #!/bin/bash
+#set -ex
 
-echo "Suite"
+#echo "Suite"
+
+modules=(
+    "mvc/mvc-columns"
+    "mvc/mvc-complete"
+    "mvc/mvc-usertypes"
+    "mvc/mvc-constraints"
+)
+
+function RUN_TEST() 
+{
+    suite=${1}
+    test/integration/main/constructors/$suite/test.sh custom "pwd"
+}
+
+function RUN_SUITE() 
+{
+
+    suite=${1}
+    RUN_TEST $suite
+}
+
+
+for item in ${modules[****REMOVED***}
+do
+
+
+    beginLoop=$(date +%s) 
+
+    RUN_SUITE $item
+
+    endLoop=$(date +%s)
+    
+    timeUsed=$(expr $endLoop - $beginLoop)
+    
+    
+    echo "$item"
+    echo "$timeUsed"
+        
+done
+
+echo "Suite run"
