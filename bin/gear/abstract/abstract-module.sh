@@ -10,6 +10,133 @@ source "$headersDir/module/util"
 source "$headersDir/module/database"
 source "$headersDir/module/module"
 
+function Gear_Module_Clear_Repository
+{
+	for dir in ${1}/*; do
+        
+        if [[ -d $dir ***REMOVED******REMOVED***; then
+        	rm -R "$dir"
+        elif [[ -f $dir ***REMOVED******REMOVED***; then
+            rm "$dir"
+        else
+            rm -rf "$dir"
+        fi
+    done
+}
+
+function Gear_Module_Repository_Clone
+{
+    # Params
+    if [ $# -ne 4 ***REMOVED***; then
+        echo "usage: module type scriptDir construct"
+        exit 1
+    fi
+   
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+    
+    Gear_Module_Run_DeleteModule "$module"
+    
+    Gear_Git_Clone "$moduleUrl" "$modulePath"
+    
+    Gear_Module_Clear_Repository "$modulePath"
+    
+    Gear_Module_Run_CreateModule "$module" "$type"
+    Gear_Module_Run_InstallModule "$module"
+    
+    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+    
+    Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
+    
+    Gear_CI_Jenkins_Check  "$module" "$modulePath" "$type"
+    
+    Gear_Jenkins_Indexing "$module" "$modulePath"
+    
+    Gear_Git_Commit "$module" "$modulePath"
+}
+
+function Gear_Module_Repository_Start
+{
+    # Params
+    if [ $# -ne 4 ***REMOVED***; then
+        echo "usage: module type scriptDir construct"
+        exit 1
+    fi
+       
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+    
+    Gear_Module_Run_DeleteModule "$module"
+    
+    Gear_Module_Run_CreateModule "$module" "$type"
+    Gear_Module_Run_InstallModule "$module"
+    
+    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+    
+    Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
+    
+    Gear_Git_Setup "$module" "$modulePath"
+
+    Gear_Git_Commit "$module" "$modulePath"
+        
+    Gear_CI_Jenkins_Check  "$module" "$modulePath" "$type"
+    
+    Gear_Jenkins_Indexing "$module" "$modulePath"
+}
+
+
+function Gear_Module_Execute_Build_Suite
+{
+    # Params
+    if [ $# -ne 4 ***REMOVED***; then
+        echo "usage: module type scriptDir construct"
+        exit 1
+    fi
+   
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+        
+    echo "Suite $module"
+    
+    # JENKINS
+    
+    #statusJenkins=$(Gear_CI_Jenkins_Check "$module" "$modulePath" "$type")
+    
+    #if [ $statusJenkins -gt 0 ***REMOVED***; then 
+    #    echo "Exiting due to Errors while providing Jenkins"
+    #    exit 1
+    #fi
+   
+    # Aqui deve ter um job no jenkins dedicado ao projeto.
+   
+    repositoryStatus=$(Gear_CI_Repository_Check "$module" "$modulePath")
+    
+    if [ $repositoryStatus -gt 1 ***REMOVED***; then 
+        echo "Exiting due to Errors while providing Repository"
+        exit 1
+    fi
+   
+       if [ "$repositoryStatus" == 0 ***REMOVED***; then
+        Gear_Module_Repository_Clone "$module" "$type" "$scriptDir" "$construct"
+    else
+        Gear_Module_Repository_Start "$module" "$type" "$scriptDir" "$construct"
+    fi
+}
+
 # 3. CRIA MÓDULO POR CLI DIRETO. FUNÇÃO SERÁ EXPORTADA PARA /bin PARA SER USADA COMO /vendor/bin
 function Gear_Module_Execute_Create
 {
@@ -51,7 +178,7 @@ function Gear_Module_Execute_Create
     fi 
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
-    	Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
+        Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
         Gear_CI_SetUp "$module" "$modulePath" "module-$type"
     fi
    
@@ -66,6 +193,52 @@ function Gear_Module_Execute_Create
     exit 0
 }
 
+function Gear_Module_Execute_Integrate
+{
+        # Params
+    if [ $# -ne 6 ***REMOVED***; then
+        echo "usage: module type scriptDir construct shouldTestLocal shouldTestCI"
+        exit 1
+    fi
+   
+    basePath=$(Gear_Util_GetBasePath)
+    module=$(Gear_Module_Util_GetModuleName "${1}")
+    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
+    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
+    
+    type=${2}
+    scriptDir=${3}
+    construct=${4}
+    
+    Gear_Module_Run_DeleteModule "$module"
+        
+    echo "Running Integrate"
+    
+    Gear_Module_Run_CreateModule "$module" "$type"
+    
+    #composer update
+    cd $modulePath && sudo composer update
+    
+    if [ "$type" == "web" ***REMOVED***; then
+        sudo vendor/bin/install-nodejs
+        sudo vendor/bin/virtualhost  $(pwd) $moduleUrl.gear.dev DEVELOPMENT
+        sudo vendor/bin/install-db-module $moduleUrl.mysql.sql $module
+        sudo vendor/bin/phinx migrate
+        sudo vendor/bin/unload-module BjyAuthorize
+    fi
+   
+    if [ "$type" == "cli" ***REMOVED***; then
+        Gear_Module_Database_Up
+    fi
+    
+    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+
+    sudo composer dump-autoload
+    
+    Gear_Module_Execute_Ant "$module" "$type"
+}
+
+
 function Gear_Module_SetUpJenkins
 {
     # Params
@@ -73,7 +246,7 @@ function Gear_Module_SetUpJenkins
         echo "usage: module type"
         exit 1
     fi
-   	
+       
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
@@ -100,8 +273,8 @@ function Gear_Module_Execute_Clear
     type=${2}
     
     if ! [[ -d $modulePath ***REMOVED******REMOVED***; then 
-    	
-    	return
+        
+        return
     fi    
         
     cd $modulePath 
@@ -168,51 +341,6 @@ function Gear_Module_Execute_Restore_Module
     Gear_Module_Run_CreateModule "$module" "$type"
 }
 
-function Gear_Module_Execute_Integrate
-{
-	    # Params
-    if [ $# -ne 6 ***REMOVED***; then
-        echo "usage: module type scriptDir construct shouldTestLocal shouldTestCI"
-        exit 1
-    fi
-   
-    basePath=$(Gear_Util_GetBasePath)
-    module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-    
-    type=${2}
-    scriptDir=${3}
-    construct=${4}
-    
-    Gear_Module_Run_DeleteModule "$module"
-        
-	echo "Running Integrate"
-	
-    Gear_Module_Run_CreateModule "$module" "$type"
-    
-    #composer update
-    cd $modulePath && sudo composer update
-    
-    if [ "$type" == "web" ***REMOVED***; then
-        sudo vendor/bin/install-nodejs
-        sudo vendor/bin/virtualhost  $(pwd) $moduleUrl.gear.dev DEVELOPMENT
-        sudo vendor/bin/install-db-module $moduleUrl.mysql.sql $module
-        sudo vendor/bin/phinx migrate
-        sudo vendor/bin/unload-module BjyAuthorize
-    fi
-   
-    if [ "$type" == "cli" ***REMOVED***; then
-        Gear_Module_Database_Up
-    fi
-    
-    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
-
-    sudo composer dump-autoload
-    
-    Gear_Module_Execute_Ant "$module" "$type"
-}
-
 
 function Gear_Module_Execute_Reset
 {
@@ -230,8 +358,8 @@ function Gear_Module_Execute_Reset
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
         
     if ! [[ -d $modulePath ***REMOVED******REMOVED***; then 
-    	
-    	return
+        
+        return
     fi    
         
     cd $modulePath 
@@ -259,16 +387,16 @@ function Gear_Module_Execute_Construct
     construct=${4}
 
     if [ "$construct" == "" ***REMOVED***; then
-    	echo "Missing Construct"
-    	exit 1
+        echo "Missing Construct"
+        exit 1
     fi    
     #echo "Array size: ${#construct[****REMOVED***}"
 
     #echo "Array items:"
     for item in ${construct[****REMOVED***}
     do
-    	
-    	IFS=";"
+        
+        IFS=";"
         params=($item)
         
         gearfile=${params[0***REMOVED***}
@@ -309,8 +437,8 @@ function Gear_Module_Execute_Reconstruct
     construct=${4}
     
     if [ "$construct" == "" ***REMOVED***; then
-    	echo "Missing Construct"
-    	exit 1
+        echo "Missing Construct"
+        exit 1
     fi
    
     cd $modulePath
@@ -320,8 +448,8 @@ function Gear_Module_Execute_Reconstruct
 
     for item in ${construct[****REMOVED***}
     do
-    	
-    	IFS=";"
+        
+        IFS=";"
         params=($item)
         
         gearfile=${params[0***REMOVED***}
@@ -330,7 +458,7 @@ function Gear_Module_Execute_Reconstruct
         Gear_Util_CopyGearfile "$scriptDir" "$gearfile" "$modulePath"
         
         if [ "$migration" != "" ***REMOVED***; then
-        	Gear_Module_Delete_Migrations "$modulePath"
+            Gear_Module_Delete_Migrations "$modulePath"
             Gear_Util_CopyMigration "$scriptDir" "$migration" "$modulePath"
             Gear_Util_PrepareForDb "$modulePath"
         fi           
@@ -386,17 +514,6 @@ function Gear_Module_Execute_Upgrade
     sudo php public/index.php gear module upgrade $module $basePath --type=$type
 }
 
-
-function Gear_Module_Execute_Build_Suite
-{
-    module=$(Gear_Module_Util_GetModuleName "${1}")
-    moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
-    modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-    	
-	echo "Suite $module"
-    	
-}
-
 function Gear_Module_Execute_Custom
 {
     module=$(Gear_Module_Util_GetModuleName "${1}")
@@ -420,8 +537,8 @@ function Gear_Module_Execute_Ant
     build=${3}
     
     if [ "$build" != "" ***REMOVED***; then
-    	cd $modulePath && ant $build
-    	return
+        cd $modulePath && ant $build
+        return
     fi 
     
     if [ "$type" == "cli" ***REMOVED***; then

@@ -1,3 +1,11 @@
-module: Gear
+module: GearBase
 
 src:
+  0:
+    name: ConsoleModelResponse
+    type: ValueObject
+    namespace: Util\ConsoleModelResponse
+  1:
+    name: ConsoleModelResponseInterface
+    type: Interface
+    namespace: Util\ConsoleModelResponse
