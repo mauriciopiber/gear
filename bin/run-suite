@@ -5,10 +5,10 @@
 
 # CONFIG
 modules=(
-    "mvc/mvc-columns"
+#    "mvc/mvc-columns"
     "mvc/mvc-complete"
-    "mvc/mvc-usertypes"
-    "mvc/mvc-constraints"
+#    "mvc/mvc-usertypes"
+#    "mvc/mvc-constraints"
 )
 
 integrationFile="data/logs/integration.log"
@@ -70,6 +70,8 @@ function RUN_SUITE()
     LOG_END_SUITE
 }
 
+echo "Suite run started"
+
 RUN_SUITE
 
-echo "Suite run"
+echo "Suite run ended"
