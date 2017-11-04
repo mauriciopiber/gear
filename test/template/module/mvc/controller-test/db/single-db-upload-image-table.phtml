@@ -72,7 +72,13 @@ class UploadImageTableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Create');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageTableController',
+            'Custom\CustomNamespace',
+            'Create'
+        );
 
         $this->routeMatch->setParam('action', 'create');
 
@@ -194,7 +200,13 @@ class UploadImageTableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Edit');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageTableController',
+            'Custom\CustomNamespace',
+            'Edit'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
 
@@ -305,7 +317,13 @@ class UploadImageTableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'List');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageTableController',
+            'Custom\CustomNamespace',
+            'List'
+        );
 
         $this->uploadImageTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
@@ -321,7 +339,13 @@ class UploadImageTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'View');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageTableController',
+            'Custom\CustomNamespace',
+            'View'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageTable');
         //$this->entity->getIdUploadImageTable()->willReturn(31)->shouldBeCalled();
@@ -377,7 +401,13 @@ class UploadImageTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageTableController', 'Delete');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageTableController',
+            'Custom\CustomNamespace',
+            'Delete'
+        );
 
         $this->uploadImageTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
