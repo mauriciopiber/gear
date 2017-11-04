@@ -197,6 +197,7 @@ class ConstructService extends AbstractJsonService
                 if (isset($controller['actions'***REMOVED***)) {
                     foreach ($controller['actions'***REMOVED*** as $action) {
                         $action['controller'***REMOVED*** = $controller['name'***REMOVED***;
+
                         if (isset($controller['db'***REMOVED***)) {
                             $action['db'***REMOVED*** = $controller['db'***REMOVED***;
                         }
@@ -204,8 +205,11 @@ class ConstructService extends AbstractJsonService
                             $action['columns'***REMOVED*** = $controller['columns'***REMOVED***;
                         }
 
+                        if (isset($controller['namespace'***REMOVED***)) {
+                            $action['controllerNamespace'***REMOVED*** = $controller['namespace'***REMOVED***;
+                        }
 
-                        $this->constructAction($module, $controller['name'***REMOVED***, $action);
+                        $this->constructAction($module, $action);
                     }
                 }
             }
@@ -338,6 +342,7 @@ class ConstructService extends AbstractJsonService
     public function constructController($module, array $controller)
     {
 
+        unset($controller['actions'***REMOVED***);
         $controllerItem = new Controller($controller);
 
         if ($this->getControllerService()->controllerExist($module, $controllerItem)) {
@@ -367,7 +372,7 @@ class ConstructService extends AbstractJsonService
         return;
     }
 
-    public function constructAction($module, $controller, array $action)
+    public function constructAction($module, array $action)
     {
         $actionItem = new Action($action);
 
@@ -375,7 +380,7 @@ class ConstructService extends AbstractJsonService
             $this->constructStatus->addSkipped(sprintf(
                 self::ACTION_SKIP,
                 $actionItem->getName(),
-                $controller//->getName()
+                $actionItem->getController()->getName()//->getName()
             ));
 
             return;
@@ -384,7 +389,7 @@ class ConstructService extends AbstractJsonService
         $created = $this->getActionConstructor()->createControllerAction($action);
 
         if ($created instanceof ConsoleValidationStatus) {
-            $this->constructStatus->addValidated(sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $controller));
+            $this->constructStatus->addValidated(sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $actionItem->getController()->getName()));
             $this->constructStatus->addValidated($created->getErrors());
             return;
         }
@@ -392,7 +397,7 @@ class ConstructService extends AbstractJsonService
         $this->constructStatus->addCreated(sprintf(
             self::ACTION_CREATED,
             $actionItem->getName(),
-            $controller//->getName()
+            $actionItem->getController()->getName()//->getName()
         ));
 
         return;

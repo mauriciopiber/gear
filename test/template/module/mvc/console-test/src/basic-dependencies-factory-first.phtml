@@ -59,7 +59,13 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
 
     public function testFirstActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesFactoryFirstConsole', 'FirstAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicDependenciesFactoryFirstConsole',
+            'Controller',
+            'FirstAction'
+        );
 
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);

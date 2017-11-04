@@ -1,0 +1,3 @@
+        \$this->assertAcl\(\$this->schema, '([a-zA-Z***REMOVED****)', '([a-zA-Z***REMOVED****)', '([a-zA-Z***REMOVED****)'\);
+        
+        \$this->assertAcl\(\n            \$this->schema,\n            '$1',\n            '$2',\n            'Controller',\n            '$3'\n        \);

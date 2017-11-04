@@ -200,7 +200,12 @@ trait ControllerScopeTrait
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
                     'type' => $srcType,
-                    'namespace' => 'Another\Long\Namespaces'
+                    'namespace' => 'Another\Long\Namespaces',
+                    'actions' => [
+                        [
+                            'name' => 'FirstAction',
+                        ***REMOVED***
+                    ***REMOVED***,
                 ***REMOVED***),
                 'basic-namespace'
             ***REMOVED***,

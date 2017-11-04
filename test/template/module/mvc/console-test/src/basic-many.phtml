@@ -50,7 +50,13 @@ class BasicManyConsoleTest extends TestCase
 
     public function testFirstActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicManyConsole', 'FirstAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicManyConsole',
+            'Controller',
+            'FirstAction'
+        );
 
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);
@@ -61,7 +67,13 @@ class BasicManyConsoleTest extends TestCase
 
     public function testSecondActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicManyConsole', 'SecondAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicManyConsole',
+            'Controller',
+            'SecondAction'
+        );
 
         $this->routeMatch->setParam('action', 'second-action');
         $result = $this->controller->dispatch($this->request);
@@ -72,7 +84,13 @@ class BasicManyConsoleTest extends TestCase
 
     public function testThirdActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicManyConsole', 'ThirdAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicManyConsole',
+            'Controller',
+            'ThirdAction'
+        );
 
         $this->routeMatch->setParam('action', 'third-action');
         $result = $this->controller->dispatch($this->request);
@@ -83,7 +101,13 @@ class BasicManyConsoleTest extends TestCase
 
     public function testFourActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicManyConsole', 'FourAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicManyConsole',
+            'Controller',
+            'FourAction'
+        );
 
         $this->routeMatch->setParam('action', 'four-action');
         $result = $this->controller->dispatch($this->request);
@@ -94,7 +118,13 @@ class BasicManyConsoleTest extends TestCase
 
     public function testFiveActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicManyConsole', 'FiveAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicManyConsole',
+            'Controller',
+            'FiveAction'
+        );
 
         $this->routeMatch->setParam('action', 'five-action');
         $result = $this->controller->dispatch($this->request);

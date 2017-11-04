@@ -190,6 +190,7 @@ class ConsoleControllerTest extends AbstractMvcTest
                     'module' => $this->getModule()->getModuleName(),
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
+                    'namespace' => $this->controller->getNamespace(),
                     'routeMatch' => $routeMatch
                 ***REMOVED***
             );
