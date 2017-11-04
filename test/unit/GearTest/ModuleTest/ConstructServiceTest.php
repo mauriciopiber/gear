@@ -16,6 +16,8 @@ use Gear\Constructor\Action\ActionService;
 use Gear\Constructor\App\AppService;
 use GearJson\Src\Src;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use GearJson\Controller\Controller as ControllerObject;
+use GearJson\Action\Action as ActionObject;
 
 /**
  * @group Module
@@ -571,50 +573,70 @@ EOS
     }
 
     /**
-     * @group z4
+     * @group aaaa1
      */
-    public function testActionCreate()
+    public function testActionCreateInAnExistingController()
     {
-        $data = [
-            'name' => 'Gearing',
-            'object' => '%s\Controller\Gearing',
-            'service' => 'invokables',
-            'actions' => [
-                ['name' => 'GearIt'***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
-
-        $controller = new \GearJson\Controller\Controller($data);
-
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
-        $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
-
-        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
-        $controllerservice->createController($data)->willReturn(true);
-
-        $this->construct->setControllerConstructor($controllerservice->reveal());
-        $this->construct->setControllerService($controllerschema->reveal());
-
-
-        //action
-        $actionschema = $this->prophesize('GearJson\Action\ActionService');
-
-        $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
-        $actionschema->actionExist('Gearing', $action)->willReturn(false);
-        $this->construct->setActionService($actionschema->reveal());
-
-        $actionservice = $this->prophesize('Gear\Constructor\Action\ActionService');
-        $actionservice->createControllerAction(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***)->willReturn(true);
-
-        $this->construct->setActionConstructor($actionservice->reveal());
-
+        //set expected config to be build
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
 module: Gearing
 controller:
   0:
     name: Gearing
-    object: '%s\Controller\Gearing'
+    service: invokables
+    actions:
+      0:
+        name: GearIt
+
+EOS
+            ));
+
+        //instanciate controller
+        $data = [
+            'name' => 'Gearing',
+            'service' => 'invokables',
+        ***REMOVED***;
+
+        $controller = new ControllerObject($data);
+
+        //check into schema if controller already exist, will return false.
+        $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(true)->shouldBeCalled();
+
+
+        //instanciate action
+        $action = new ActionObject(
+            [
+                'name' => 'GearIt',
+                'controller' => $controller
+            ***REMOVED***
+        );
+
+        //check into schema if action already exist, will return false.
+        $this->actionSchema->actionExist('Gearing', $action)->willReturn(false);
+
+        //create the action
+        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => $controller***REMOVED***)->willReturn(true);
+
+        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
+
+        $this->assertCount(1, $constructed->getCreated());
+        $this->assertEquals($constructed->getCreated()[0***REMOVED***, 'Action "GearIt" do Controller "Gearing" criado.');
+    }
+
+    /**
+     * @group aaaa1
+     * @group aaaa2
+     */
+    public function testActionCreateInAnNotExistingController()
+    {
+        //set expected config to be build
+        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
+
+module: Gearing
+controller:
+  0:
+    name: Gearing
     service: invokables
     actions:
       0:
@@ -622,6 +644,44 @@ controller:
 
 EOS
         ));
+
+
+
+        //instanciate controller
+        $data = [
+            'name' => 'Gearing',
+            'service' => 'invokables',
+        ***REMOVED***;
+
+        $controller = new ControllerObject($data);
+
+        //check into schema if controller already exist, will return false.
+        $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false)->shouldBeCalled();
+
+        //creates the controller, return true now but will be fixed
+        /**
+         * @TODO FIX
+         */
+        $this->controllerService->createController($data)->willReturn(true)->shouldBeCalled();
+
+
+        $dataMirror = $data;
+        unset($dataMirror['actions'***REMOVED***);
+        $controllerMirror = new ControllerObject($data);
+
+        //instanciate action
+        $action = new ActionObject(
+            [
+                'name' => 'GearIt',
+                'controller' => $controllerMirror
+            ***REMOVED***
+        );
+
+        //check into schema if action already exist, will return false.
+        $this->actionSchema->actionExist('Gearing', $action)->willReturn(false)->shouldBeCalled();
+
+        //create the action
+        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => $controller***REMOVED***)->willReturn(true)->shouldBeCalled();;
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 

@@ -40,7 +40,13 @@ class IndexControllerTest extends TestCase
 
     public function testIndexAction()
     {
-        $this->assertAcl($this->schema, '<?php echo $this->module;?>', 'IndexController', 'Index');
+        $this->assertAcl(
+            $this->schema,
+            '<?php echo $this->module;?>',
+            'IndexController',
+            'Controller',
+            'Index'
+        );
 
         $this->routeMatch->setParam('action', 'index');
         $result = $this->controller->dispatch($this->request);
