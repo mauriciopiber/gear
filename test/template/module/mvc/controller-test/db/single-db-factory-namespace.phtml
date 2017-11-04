@@ -67,7 +67,13 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Create');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'SingleDbTableController',
+            'Custom\CustomNamespace',
+            'Create'
+        );
 
         $this->routeMatch->setParam('action', 'create');
 
@@ -189,7 +195,13 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Edit');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'SingleDbTableController',
+            'Custom\CustomNamespace',
+            'Edit'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
 
@@ -300,7 +312,13 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'List');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'SingleDbTableController',
+            'Custom\CustomNamespace',
+            'List'
+        );
 
         $this->singleDbTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
@@ -316,7 +334,13 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'View');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'SingleDbTableController',
+            'Custom\CustomNamespace',
+            'View'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\SingleDbTable');
         //$this->entity->getIdSingleDbTable()->willReturn(31)->shouldBeCalled();
@@ -372,7 +396,13 @@ class SingleDbTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'SingleDbTableController', 'Delete');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'SingleDbTableController',
+            'Custom\CustomNamespace',
+            'Delete'
+        );
 
         $this->singleDbTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 

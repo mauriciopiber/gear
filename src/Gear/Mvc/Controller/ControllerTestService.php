@@ -237,6 +237,7 @@ class ControllerTestService extends AbstractMvcTest implements
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),
+                'controllerNamespace' => $this->controller->getNamespace(),
                 'tableName'  => $this->str('class', $this->controller->getNameOff()),
                 'tableVar'  => $this->str('var', $this->controller->getNameOff()),
                 'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
@@ -421,6 +422,7 @@ class ControllerTestService extends AbstractMvcTest implements
                     'module' => $this->getModule()->getModuleName(),
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
+                    'controllerNamespace' => ($this->controller->getNamespace() !== null ? $this->controller->getNamespace() : 'Controller'),
                     'routeMatch' => $routeMatch
                 ***REMOVED***
             );
