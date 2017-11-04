@@ -574,6 +574,8 @@ EOS
 
     /**
      * @group aaaa1
+     * @group ac1
+     * @group ac2
      */
     public function testActionCreateInAnExistingController()
     {
@@ -616,7 +618,7 @@ EOS
         $this->actionSchema->actionExist('Gearing', $action)->willReturn(false);
 
         //create the action
-        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => $controller***REMOVED***)->willReturn(true);
+        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***)->willReturn(true);
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
@@ -627,6 +629,8 @@ EOS
     /**
      * @group aaaa1
      * @group aaaa2
+     * @group ac1
+     * @group ac2
      */
     public function testActionCreateInAnNotExistingController()
     {
@@ -681,7 +685,7 @@ EOS
         $this->actionSchema->actionExist('Gearing', $action)->willReturn(false)->shouldBeCalled();
 
         //create the action
-        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => $controller***REMOVED***)->willReturn(true)->shouldBeCalled();;
+        $this->actionService->createControllerAction(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***)->willReturn(true)->shouldBeCalled();;
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
@@ -691,6 +695,8 @@ EOS
 
     /**
      * @group z4
+     * @group ac1
+     * @group ac2
      */
     public function testActionDuplicade()
     {
@@ -699,12 +705,11 @@ EOS
             'name' => 'Gearing',
             'object' => '%s\Controller\Gearing',
             'service' => 'invokables',
-            'actions' => [
-                ['name' => 'GearIt'***REMOVED***
-            ***REMOVED***
         ***REMOVED***;
 
         $controller = new \GearJson\Controller\Controller($data);
+
+
 
         $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
@@ -715,6 +720,12 @@ EOS
         $this->construct->setControllerConstructor($controllerservice->reveal());
         $this->construct->setControllerService($controllerschema->reveal());
 
+
+        $data = array_merge($data, [
+            'actions' => [
+                ['name' => 'GearIt'***REMOVED***
+            ***REMOVED***
+        ***REMOVED***);
 
         //action
         $actionschema = $this->prophesize('GearJson\Action\ActionService');
@@ -748,6 +759,8 @@ EOS
     /**
      * @group z4
      * @group z41
+     * @group ac1
+     * @group ac2
      */
     public function testActionValidate()
     {
@@ -755,9 +768,6 @@ EOS
             'name' => 'Gearing',
             'object' => '%s\Controller\Gearing',
             'service' => 'invokables',
-            'actions' => [
-                ['name' => 'GearIt'***REMOVED***
-            ***REMOVED***
         ***REMOVED***;
 
         $controller = new \GearJson\Controller\Controller($data);
@@ -767,6 +777,12 @@ EOS
         $this->controllerService->createController($data)->willReturn(true)->shouldBeCalled();
 
 
+
+        $data = array_merge($data, [
+            'actions' => [
+                ['name' => 'GearIt'***REMOVED***
+            ***REMOVED***
+        ***REMOVED***);
         //action
 
         $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
