@@ -170,6 +170,7 @@ class ControllerServiceTest extends TestCase
             'dependency' => [
                 sprintf('%s\%sService', ($namespace !== null) ? $namespace : 'Service', $table),
                 sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
+                sprintf('%s\%sForm', ($namespace !== null) ? $namespace : 'Form', $table),
                 sprintf('%s\%sSearchForm',  ($namespace !== null) ? $namespace : 'Form\Search', $table)
             ***REMOVED***,
             'user' => $userType,
