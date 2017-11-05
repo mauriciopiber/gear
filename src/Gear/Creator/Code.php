@@ -305,15 +305,13 @@ EOS;
      */
     public function getConstructor($data)
     {
-        //$dependency = $data->getDependency();
-
-        $dependency = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
-
-        if (count($dependency)==0) {
+        if (count($data->getDependency())==0) {
             $html = $this->getConstructorDocs($data);
             $html .= '    public function __construct(';
             return $this->constructEmptyConstructor($html);
         }
+
+        $dependency = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
         $constructorData = [***REMOVED***;
 
