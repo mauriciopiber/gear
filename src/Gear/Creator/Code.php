@@ -305,7 +305,9 @@ EOS;
      */
     public function getConstructor($data)
     {
-        $dependency = $data->getDependency();
+        //$dependency = $data->getDependency();
+
+        $dependency = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
         if (count($dependency)==0) {
             $html = $this->getConstructorDocs($data);
@@ -402,7 +404,9 @@ EOS;
     {
         $this->uses = '';
 
-        foreach ($data->getDependency() as $alias => $item) {
+        $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+
+        foreach ($values as $alias => $item) {
             if (is_array($item) && isset($item['ig_t'***REMOVED***) && $item['ig_t'***REMOVED*** === true) {
                 continue;
             }
@@ -414,8 +418,9 @@ EOS;
             }
         }
 
-        if ($data->hasDependency() && $data->isFactory()) {
-            foreach ($data->getDependency() as $alias => $item) {
+        if (!empty($values) && $data->isFactory()) {
+
+            foreach ($values as $alias => $item) {
                 if (!in_array($item, $ignoreClass)) {
                     $this->uses .= 'use '.$this->resolveNamespace($item).';'.PHP_EOL;
                 }
@@ -434,9 +439,9 @@ EOS;
             return [***REMOVED***;
         }
 
-        $dependencies = $data->getDependency();
-
         $deps = [***REMOVED***;
+
+        $dependencies = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
         foreach ($dependencies as $dependency) {
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
@@ -511,7 +516,10 @@ EOS;
         }
 
         if ($data->hasDependency() && $data->isFactory()) {
-            foreach ($data->getDependency() as $item) {
+
+            $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+
+            foreach ($values as $item) {
                 $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
         }
@@ -603,20 +611,26 @@ EOS;
             return '';
         }
 
-        $dependencies = $data->getDependency();
+        //$dependencies = $data->getDependency();
+
+        $dependencies = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
         $count = count($dependencies);
+        $now = 0;
 
         foreach ($dependencies as $i => $dependency) {
+
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                 continue;
             }
 
-            if (is_array($dependency) && isset($dependency['class'***REMOVED***)) {
+            $dependencyClass = (is_array($dependency) && isset($dependency['class'***REMOVED***)) ? $dependency['class'***REMOVED*** : $dependency;
+            /*
                 $dependencyClass = $dependency['class'***REMOVED***;
             } else {
                 $dependencyClass = $dependency;
             }
+            */
 
             if (in_array($dependencyClass, $ignoreList)
                 || in_array($this->getModule()->getModuleName().'\\'.$dependencyClass, $ignoreList)
@@ -637,11 +651,12 @@ EOS;
 
 EOL;
 
-            if ($count>1 && $i < $count-1) {
+            if ($count>1 && $now < $count-1) {
                 $attribute .= PHP_EOL;
             }
+
+            $now += 1;
         }
-        //die();
 
         $eol = ($eol) ? PHP_EOL : '';
 

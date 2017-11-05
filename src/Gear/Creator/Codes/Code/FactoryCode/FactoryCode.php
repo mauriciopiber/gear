@@ -30,10 +30,14 @@ class FactoryCode extends AbstractCode
 
         $text = '';
 
-        $allDeps = count($data->getDependency());
+
         $iterator = 0;
 
-        foreach ($data->getDependency() as $alias => $dependency) {
+        $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+
+        $allDeps = count($values);
+
+        foreach ($values as $alias => $dependency) {
             $text .= $this->getDependencyCallable($indent, $alias, $dependency);
 
             if ($iterator < $allDeps-1) {
@@ -84,7 +88,10 @@ EOS;
         $this->uses = [***REMOVED***;
 
         if (($data->hasDependency()) && $data->isFactory()) {
-            foreach ($data->getDependency() as $aliase => $item) {
+
+            $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+
+            foreach ($values as $aliase => $item) {
                 if (isset($item['aliase'***REMOVED***) || is_string($aliase)) {
                     continue;
                 }
