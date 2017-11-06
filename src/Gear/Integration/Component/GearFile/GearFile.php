@@ -276,7 +276,7 @@ class GearFile
         $this->suite = $suite;
         $controller = [***REMOVED***;
         foreach ($tables as $minorSuite) {
-            $name = sprintf('%s%s', $minorSuite->getTableName(), 'Controller');
+            $name = sprintf('%s%s', $minorSuite->getTableAlias(), 'Controller');
 
             $tableName = $minorSuite->getTableAlias();
 

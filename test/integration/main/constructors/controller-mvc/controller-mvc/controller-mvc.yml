@@ -2,7 +2,7 @@ controller:
     -
         db: SrcMvcBsc
         type: Action
-        name: SrcMvcBasicController
+        name: SrcMvcBscController
         user: all
         columns: {  }
         service: factories
@@ -20,7 +20,7 @@ controller:
     -
         db: SrcMvcBscUpl
         type: Action
-        name: SrcMvcBasicUploadImageController
+        name: SrcMvcBscUplController
         user: all
         columns: {  }
         service: factories
@@ -40,7 +40,7 @@ controller:
     -
         db: SrcMvcBscUni
         type: Action
-        name: SrcMvcBasicUniqueController
+        name: SrcMvcBscUniController
         user: all
         columns: {  }
         service: factories
@@ -58,7 +58,7 @@ controller:
     -
         db: SrcMvcBscUniUpl
         type: Action
-        name: SrcMvcBasicUniqueUploadImageController
+        name: SrcMvcBscUniUplController
         user: all
         columns: {  }
         service: factories
@@ -78,7 +78,7 @@ controller:
     -
         db: SrcMvcBscNul
         type: Action
-        name: SrcMvcBasicNullableController
+        name: SrcMvcBscNulController
         user: all
         columns: {  }
         service: factories
@@ -96,7 +96,7 @@ controller:
     -
         db: SrcMvcBscNulUpl
         type: Action
-        name: SrcMvcBasicNullableUploadImageController
+        name: SrcMvcBscNulUplController
         user: all
         columns: {  }
         service: factories
@@ -116,7 +116,7 @@ controller:
     -
         db: SrcMvcBscUniNul
         type: Action
-        name: SrcMvcBasicUniqueNullableController
+        name: SrcMvcBscUniNulController
         user: all
         columns: {  }
         service: factories
@@ -134,7 +134,7 @@ controller:
     -
         db: SrcMvcBscUniNulUpl
         type: Action
-        name: SrcMvcBasicUniqueNullableUploadImageController
+        name: SrcMvcBscUniNulUplController
         user: all
         columns: {  }
         service: factories
@@ -154,7 +154,7 @@ controller:
     -
         db: SrcMvcBscLws
         type: Action
-        name: SrcMvcBasicLowStrictController
+        name: SrcMvcBscLwsController
         user: low-strict
         columns: {  }
         service: factories
@@ -172,7 +172,7 @@ controller:
     -
         db: SrcMvcBscLwsUpl
         type: Action
-        name: SrcMvcBasicLowStrictUploadImageController
+        name: SrcMvcBscLwsUplController
         user: low-strict
         columns: {  }
         service: factories
@@ -192,7 +192,7 @@ controller:
     -
         db: SrcMvcBscLwsUni
         type: Action
-        name: SrcMvcBasicLowStrictUniqueController
+        name: SrcMvcBscLwsUniController
         user: low-strict
         columns: {  }
         service: factories
@@ -210,7 +210,7 @@ controller:
     -
         db: SrcMvcBscLwsUniUpl
         type: Action
-        name: SrcMvcBasicLowStrictUniqueUploadImageController
+        name: SrcMvcBscLwsUniUplController
         user: low-strict
         columns: {  }
         service: factories
@@ -230,7 +230,7 @@ controller:
     -
         db: SrcMvcBscLwsNul
         type: Action
-        name: SrcMvcBasicLowStrictNullableController
+        name: SrcMvcBscLwsNulController
         user: low-strict
         columns: {  }
         service: factories
@@ -248,7 +248,7 @@ controller:
     -
         db: SrcMvcBscLwsNulUpl
         type: Action
-        name: SrcMvcBasicLowStrictNullableUploadImageController
+        name: SrcMvcBscLwsNulUplController
         user: low-strict
         columns: {  }
         service: factories
@@ -268,7 +268,7 @@ controller:
     -
         db: SrcMvcBscLwsUniNul
         type: Action
-        name: SrcMvcBasicLowStrictUniqueNullableController
+        name: SrcMvcBscLwsUniNulController
         user: low-strict
         columns: {  }
         service: factories
@@ -286,7 +286,7 @@ controller:
     -
         db: SrcMvcBscLwsUniNulUpl
         type: Action
-        name: SrcMvcBasicLowStrictUniqueNullableUploadImageController
+        name: SrcMvcBscLwsUniNulUplController
         user: low-strict
         columns: {  }
         service: factories
@@ -306,7 +306,7 @@ controller:
     -
         db: SrcMvcBscStr
         type: Action
-        name: SrcMvcBasicStrictController
+        name: SrcMvcBscStrController
         user: strict
         columns: {  }
         service: factories
@@ -324,7 +324,7 @@ controller:
     -
         db: SrcMvcBscStrUpl
         type: Action
-        name: SrcMvcBasicStrictUploadImageController
+        name: SrcMvcBscStrUplController
         user: strict
         columns: {  }
         service: factories
@@ -344,7 +344,7 @@ controller:
     -
         db: SrcMvcBscStrUni
         type: Action
-        name: SrcMvcBasicStrictUniqueController
+        name: SrcMvcBscStrUniController
         user: strict
         columns: {  }
         service: factories
@@ -362,7 +362,7 @@ controller:
     -
         db: SrcMvcBscStrUniUpl
         type: Action
-        name: SrcMvcBasicStrictUniqueUploadImageController
+        name: SrcMvcBscStrUniUplController
         user: strict
         columns: {  }
         service: factories
@@ -382,7 +382,7 @@ controller:
     -
         db: SrcMvcBscStrNul
         type: Action
-        name: SrcMvcBasicStrictNullableController
+        name: SrcMvcBscStrNulController
         user: strict
         columns: {  }
         service: factories
@@ -400,7 +400,7 @@ controller:
     -
         db: SrcMvcBscStrNulUpl
         type: Action
-        name: SrcMvcBasicStrictNullableUploadImageController
+        name: SrcMvcBscStrNulUplController
         user: strict
         columns: {  }
         service: factories
@@ -420,7 +420,7 @@ controller:
     -
         db: SrcMvcBscStrUniNul
         type: Action
-        name: SrcMvcBasicStrictUniqueNullableController
+        name: SrcMvcBscStrUniNulController
         user: strict
         columns: {  }
         service: factories
@@ -438,7 +438,7 @@ controller:
     -
         db: SrcMvcBscStrUniNulUpl
         type: Action
-        name: SrcMvcBasicStrictUniqueNullableUploadImageController
+        name: SrcMvcBscStrUniNulUplController
         user: strict
         columns: {  }
         service: factories
@@ -458,7 +458,7 @@ controller:
     -
         db: SrcMvcCmp
         type: Action
-        name: SrcMvcCompleteController
+        name: SrcMvcCmpController
         user: all
         columns:
             clm_txt_htl_cmp: html
@@ -488,7 +488,7 @@ controller:
     -
         db: SrcMvcCmpUpl
         type: Action
-        name: SrcMvcCompleteUploadImageController
+        name: SrcMvcCmpUplController
         user: all
         columns:
             clm_txt_htl_cmp_upl: html
@@ -520,7 +520,7 @@ controller:
     -
         db: SrcMvcCmpUni
         type: Action
-        name: SrcMvcCompleteUniqueController
+        name: SrcMvcCmpUniController
         user: all
         columns:
             clm_txt_htl_cmp_uni: html
@@ -550,7 +550,7 @@ controller:
     -
         db: SrcMvcCmpUniUpl
         type: Action
-        name: SrcMvcCompleteUniqueUploadImageController
+        name: SrcMvcCmpUniUplController
         user: all
         columns:
             clm_txt_htl_cmp_uni_upl: html
@@ -582,7 +582,7 @@ controller:
     -
         db: SrcMvcCmpNul
         type: Action
-        name: SrcMvcCompleteNullableController
+        name: SrcMvcCmpNulController
         user: all
         columns:
             clm_txt_htl_cmp_nul: html
@@ -612,7 +612,7 @@ controller:
     -
         db: SrcMvcCmpNulUpl
         type: Action
-        name: SrcMvcCompleteNullableUploadImageController
+        name: SrcMvcCmpNulUplController
         user: all
         columns:
             clm_txt_htl_cmp_nul_upl: html
@@ -644,7 +644,7 @@ controller:
     -
         db: SrcMvcCmpUniNul
         type: Action
-        name: SrcMvcCompleteUniqueNullableController
+        name: SrcMvcCmpUniNulController
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul: html
@@ -674,7 +674,7 @@ controller:
     -
         db: SrcMvcCmpUniNulUpl
         type: Action
-        name: SrcMvcCompleteUniqueNullableUploadImageController
+        name: SrcMvcCmpUniNulUplController
         user: all
         columns:
             clm_txt_htl_cmp_uni_nul_upl: html
@@ -706,7 +706,7 @@ controller:
     -
         db: SrcMvcCmpLws
         type: Action
-        name: SrcMvcCompleteLowStrictController
+        name: SrcMvcCmpLwsController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws: html
@@ -736,7 +736,7 @@ controller:
     -
         db: SrcMvcCmpLwsUpl
         type: Action
-        name: SrcMvcCompleteLowStrictUploadImageController
+        name: SrcMvcCmpLwsUplController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_upl: html
@@ -768,7 +768,7 @@ controller:
     -
         db: SrcMvcCmpLwsUni
         type: Action
-        name: SrcMvcCompleteLowStrictUniqueController
+        name: SrcMvcCmpLwsUniController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni: html
@@ -798,7 +798,7 @@ controller:
     -
         db: SrcMvcCmpLwsUniUpl
         type: Action
-        name: SrcMvcCompleteLowStrictUniqueUploadImageController
+        name: SrcMvcCmpLwsUniUplController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_upl: html
@@ -830,7 +830,7 @@ controller:
     -
         db: SrcMvcCmpLwsNul
         type: Action
-        name: SrcMvcCompleteLowStrictNullableController
+        name: SrcMvcCmpLwsNulController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul: html
@@ -860,7 +860,7 @@ controller:
     -
         db: SrcMvcCmpLwsNulUpl
         type: Action
-        name: SrcMvcCompleteLowStrictNullableUploadImageController
+        name: SrcMvcCmpLwsNulUplController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_nul_upl: html
@@ -892,7 +892,7 @@ controller:
     -
         db: SrcMvcCmpLwsUniNul
         type: Action
-        name: SrcMvcCompleteLowStrictUniqueNullableController
+        name: SrcMvcCmpLwsUniNulController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul: html
@@ -922,7 +922,7 @@ controller:
     -
         db: SrcMvcCmpLwsUniNulUpl
         type: Action
-        name: SrcMvcCompleteLowStrictUniqueNullableUploadImageController
+        name: SrcMvcCmpLwsUniNulUplController
         user: low-strict
         columns:
             clm_txt_htl_cmp_lws_uni_nul_upl: html
@@ -954,7 +954,7 @@ controller:
     -
         db: SrcMvcCmpStr
         type: Action
-        name: SrcMvcCompleteStrictController
+        name: SrcMvcCmpStrController
         user: strict
         columns:
             clm_txt_htl_cmp_str: html
@@ -984,7 +984,7 @@ controller:
     -
         db: SrcMvcCmpStrUpl
         type: Action
-        name: SrcMvcCompleteStrictUploadImageController
+        name: SrcMvcCmpStrUplController
         user: strict
         columns:
             clm_txt_htl_cmp_str_upl: html
@@ -1016,7 +1016,7 @@ controller:
     -
         db: SrcMvcCmpStrUni
         type: Action
-        name: SrcMvcCompleteStrictUniqueController
+        name: SrcMvcCmpStrUniController
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni: html
@@ -1046,7 +1046,7 @@ controller:
     -
         db: SrcMvcCmpStrUniUpl
         type: Action
-        name: SrcMvcCompleteStrictUniqueUploadImageController
+        name: SrcMvcCmpStrUniUplController
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_upl: html
@@ -1078,7 +1078,7 @@ controller:
     -
         db: SrcMvcCmpStrNul
         type: Action
-        name: SrcMvcCompleteStrictNullableController
+        name: SrcMvcCmpStrNulController
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul: html
@@ -1108,7 +1108,7 @@ controller:
     -
         db: SrcMvcCmpStrNulUpl
         type: Action
-        name: SrcMvcCompleteStrictNullableUploadImageController
+        name: SrcMvcCmpStrNulUplController
         user: strict
         columns:
             clm_txt_htl_cmp_str_nul_upl: html
@@ -1140,7 +1140,7 @@ controller:
     -
         db: SrcMvcCmpStrUniNul
         type: Action
-        name: SrcMvcCompleteStrictUniqueNullableController
+        name: SrcMvcCmpStrUniNulController
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul: html
@@ -1170,7 +1170,7 @@ controller:
     -
         db: SrcMvcCmpStrUniNulUpl
         type: Action
-        name: SrcMvcCompleteStrictUniqueNullableUploadImageController
+        name: SrcMvcCmpStrUniNulUplController
         user: strict
         columns:
             clm_txt_htl_cmp_str_uni_nul_upl: html

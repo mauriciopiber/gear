@@ -8,7 +8,7 @@ issues:
     project: GP
     estimate: 2h
     sprint: 37
-    version: 'gear-0.2.131'
+    version: 'gear-deploy-0.2.131'
 
   2:
     summary: "Corrigir build em pbr-controller-mvc"
