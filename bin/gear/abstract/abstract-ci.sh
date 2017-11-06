@@ -12,8 +12,8 @@ function Gear_CI_Jenkins_Check
 
     cd $basePath
     
-    fake-composer gear-jenkins/ci
-    fake-composer gear-jenkins/src
+    #fake-composer gear-jenkins/ci
+    #fake-composer gear-jenkins/src
 	
 	sudo php public/index.php gear jenkins suite create "module-$type"
 	status=$?
@@ -32,7 +32,7 @@ function Gear_Git_Setup
 
     cd $basePath
     
-    fake-composer gear-deploy/src
+    #fake-composer gear-deploy/src
     
     
     echo "repository create"
@@ -73,9 +73,9 @@ function Gear_CI_SetUp
 
     cd $basePath
     
-    fake-composer gear-jenkins/ci
-    fake-composer gear-jenkins/src
-    fake-composer gear-deploy/src
+    #fake-composer gear-jenkins/ci
+    #fake-composer gear-jenkins/src
+    #fake-composer gear-deploy/src
     
     
     echo "repository create"
