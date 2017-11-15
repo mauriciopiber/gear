@@ -1,0 +1,29 @@
+mysql --local-infile -uroot -pgear discipline_feed 
+
+
+LOAD DATA LOCAL INFILE '/var/www/gear-package/discipline-feed/food.csv' 
+INTO TABLE food CHARACTER 
+SET UTF8 FIELDS TERMINATED BY ';' 
+ENCLOSED BY '' 
+LINES TERMINATED BY '\n' (id_food, name, portion, id_portion_type, kcal, carb, protein, fat_t, created_by, created); 
+SHOW WARNINGS;
+
+
+
+
+
+sudo vendor/bin/unload-module BjyAuthorize \
+&& sudo php public/index.php gear database autoincrement \
+&& sudo php public/index.php gear project setUpAcl --memcached --user --role \
+&& sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+
+
+sudo vendor/bin/undo \
+&& vendor/bin/unload-module BjyAuthorize \
+&& sudo mkdir /var/www/gear-package/discipline-feed/test/unit/DisciplineFeedTest/EntityTest \
+&& mysql -uroot -pgear -e 'drop database discipline_feed' \
+&& mysql -uroot -pgear -e 'create database discipline_feed' \
+&& vendor/bin/phinx migrate \
+&& sudo php public/index.php gear module construct DisciplineFeed  \
+&& sudo script/load.sh
+&& sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM

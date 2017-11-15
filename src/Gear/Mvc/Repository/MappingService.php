@@ -164,10 +164,26 @@ class MappingService extends AbstractMvc
     {
         $column = $columnData->getColumn();
 
+        if (
+            in_array(
+                $column->getName(),
+                ['created', 'updated'***REMOVED***
+            )
+        ) {
+            $this->tableName = $this->convertBooleanToString(false);
+            return $this;
+        }
+
         if ($columnData instanceof \Gear\Column\Integer\ForeignKey) {
             $tableReference = $columnData->getConstraint()->getReferencedTableName();
 
-            if ($column->getName() == 'created_by' && $tableReference == 'user') {
+            if (
+                in_array(
+                    $column->getName(),
+                    ['created_by', 'updated_by', 'updatedBy', 'createdBy'***REMOVED***
+                )
+                && $tableReference == 'user'
+            ) {
                 $this->tableName = $this->convertBooleanToString(false);
                 return $this;
             }
