@@ -27,3 +27,12 @@ sudo vendor/bin/undo \
 && sudo php public/index.php gear module construct DisciplineFeed  \
 && sudo script/load.sh
 && sudo php public/index.php gear module load BjyAuthorize --after=ZfcUserDoctrineORM
+
+
+mysqldump \
+--extended-insert=FALSE \
+--no-create-info \
+--skip-triggers \
+--compact \
+-uroot -pgear discipline_feed \
+food market market_order market_order_food market_schedule market_schedule_food meal meal_daily meal_daily_food meal_food portion_type > data/my.sql
