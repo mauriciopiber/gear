@@ -2,7 +2,6 @@
 return [
     'router' => [
         'routes' => [
-
             /** 3.3 */
             'gear-module-constructor-controller' => [
                 'options' => [
@@ -23,8 +22,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-
-
             /** 3.5 */
             'gear-module-constructor-test' => [
                 'options' => [

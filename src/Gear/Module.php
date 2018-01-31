@@ -214,6 +214,7 @@ class Module implements
             'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
+            'gear module-as-project create <module> <basepath> [--type=***REMOVED*** [--force***REMOVED*** [--staging=***REMOVED***' => '',
 
             'Module/Constructor',
             'gear module controller create' => 'Criar Controller',
