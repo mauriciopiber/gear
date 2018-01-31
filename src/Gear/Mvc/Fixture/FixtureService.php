@@ -173,6 +173,10 @@ class FixtureService extends AbstractMvc
         foreach ($foreign as $i => $item) {
             $fixtureName = $this->str('class', $item->getReferencedTableName()).'Fixture';
 
+
+            if ($fixtureName === 'UserFixture') {
+                continue;
+            }
             $name = $namespace.'\\'.$fixtureName;
 
             $fixture .= self::INDENT_12.$this->quote($name);

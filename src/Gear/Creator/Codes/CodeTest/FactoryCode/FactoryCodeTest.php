@@ -52,9 +52,11 @@ EOS;
 
         $msg = PHP_EOL;
 
-        $alldep = count($src->getDependency());
+        $values = array_map("unserialize", array_unique(array_map("serialize", $src->getDependency())));
 
-        foreach ($src->getDependency() as $i => $dependency) {
+        $alldep = count($values);
+
+        foreach ($values as $i => $dependency) {
             $alldep -= 1;
 
             $fullname = $this->resolveName($dependency);
@@ -80,7 +82,10 @@ EOS;
         $this->uses = [***REMOVED***;
 
         if (($data->hasDependency()) && $data->isFactory()) {
-            foreach ($data->getDependency() as $aliase => $item) {
+
+            $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+
+            foreach ($values as $aliase => $item) {
                 $this->uses[***REMOVED*** = $this->resolveNamespace($item);
             }
         }

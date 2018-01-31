@@ -11,7 +11,7 @@ return [
         'Gear\Database\DbConnector'    => 'Gear\Database\Connector\DbConnector\DbConnectorFactory',
         'Gear\Database\PhinxConnector' => 'Gear\Database\Connector\PhinxConnector\PhinxConnectorFactory'
     ***REMOVED***,
-    'aliase' => [
+    'aliases' => [
         'autoincrementService' => \Gear\Database\AutoincrementService::class
     ***REMOVED***
 

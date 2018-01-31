@@ -110,6 +110,7 @@ trait FactoryDataTrait
                 'dependency' => [
                     'Custom\CustomNamespace\MyTableService',
                     'Custom\CustomNamespace\MyTableForm',
+                    'Custom\CustomNamespace\MyTableForm',
                     'Custom\CustomNamespace\MyTableSearchForm'
                 ***REMOVED***
             ***REMOVED***),
