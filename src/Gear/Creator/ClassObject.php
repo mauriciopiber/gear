@@ -47,7 +47,8 @@ class ClassObject
         }
 
         if (!empty($data->getDependency())) {
-            $this->addDependency($data->getDependency());
+            $dependency = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
+            $this->addDependency($dependency);
         }
         return $this;
     }
