@@ -105,8 +105,9 @@ class BasicModuleStructure implements
         return $this;
     }
 
-
-
+    /**
+     * Aliase => Folder
+     */
     public function map($resource)
     {
         $resources = [
@@ -629,7 +630,7 @@ EOS;
 
     public function getSrcModuleFolder()
     {
-        return $this->getSrcFolder().'/'.$this->getModuleName();
+        return $this->getSrcFolder();
     }
 
     public function setBasePath($basePath)

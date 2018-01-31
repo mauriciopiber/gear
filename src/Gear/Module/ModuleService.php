@@ -287,6 +287,8 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->type = $type;
         $this->staging = $staging;
 
+        //var_dump($module, $location, $type, $staging);die();
+
         $moduleStructure = $this->getModule();
         //module structure
 
