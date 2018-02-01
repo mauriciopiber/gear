@@ -17,6 +17,8 @@ use Zend\View\Renderer\PhpRenderer;
  */
 class Module
 {
+    const LOCATION = __DIR__;
+
     /**
      * Init module settings
      *
@@ -42,8 +44,8 @@ class Module
     {
         $translator = $mvcEvent->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale('pt_BR');
-        $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/pt_BR.php', 'default', 'pt_BR');
-        $translator->addTranslationFile('PhpArray', __DIR__.'/../../language/route/pt_BR.php', 'default', 'pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/pt_BR.php', 'default', 'pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/route/pt_BR.php', 'default', 'pt_BR');
         AbstractValidator::setDefaultTranslator($translator);
 
         $app = $mvcEvent->getTarget();
@@ -90,7 +92,7 @@ class Module
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/../../src/' . __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__ . '/../src/' . __NAMESPACE__,
                 ),
             ),
         );
@@ -103,7 +105,7 @@ class Module
      */
     public function getConfig()
     {
-        return include __DIR__ . '/../../config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 
     /**
@@ -120,7 +122,7 @@ class Module
                 'Zend\Log\Logger' => function () {
                     $logger = new \Zend\Log\Logger;
                     $writer = new \Zend\Log\Writer\Stream(
-                        __DIR__.'/../../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
+                        __DIR__.'/../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
                     );
                     $logger->addWriter($writer);
                     return $logger;

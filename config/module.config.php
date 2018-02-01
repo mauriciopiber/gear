@@ -81,6 +81,7 @@ return [
     ***REMOVED***,
     'view_manager' => [
         'template_path_stack' => [
+            'composer' => __DIR__.'/../src/Gear/Module/Composer/view',
             'gear' => __DIR__ . '/../view',
             'template' => __DIR__ . '/../view',
         ***REMOVED***,
