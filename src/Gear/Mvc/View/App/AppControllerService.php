@@ -69,7 +69,7 @@ class AppControllerService extends AbstractMvc
         $version = $config['gear'***REMOVED***['modules'***REMOVED***['gear'***REMOVED***['version'***REMOVED***;
 
 
-        $module = $this->getModule()->getModuleName();
+        $module = $this->str('class', $this->getModule()->getModuleName());
 
         $fileCreator = $this->getFileCreator();
 
