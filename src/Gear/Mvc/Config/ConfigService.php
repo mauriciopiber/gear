@@ -114,10 +114,11 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
      */
     public function module($type = 'web', $staging = null)
     {
-        $controller = array(
-            sprintf('%s\Controller\Index', $this->getModule()->getModuleName()) =>
-            sprintf('%s\Controller\IndexControllerFactory', $this->getModule()->getModuleName())
-        );
+        //var_dump($this->getModule()->getNamespace());die();
+        $controller = [
+            sprintf('%s\Controller\Index', $this->getModule()->getNamespace()) =>
+            sprintf('%s\Controller\IndexControllerFactory', $this->getModule()->getNamespace())
+        ***REMOVED***;
 
         $this->getModuleConfig($type, $controller, null, $staging);
 

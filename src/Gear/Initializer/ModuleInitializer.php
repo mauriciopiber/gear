@@ -16,6 +16,7 @@ class ModuleInitializer implements InitializerInterface
                 //old module
                 $moduleName = $request->getParam('module');
                 $type = $request->getParam('type', null);
+                $namespace = $request->getParam('namespace', null);
 
                 if (empty($moduleName)) {
                     return;
@@ -24,7 +25,8 @@ class ModuleInitializer implements InitializerInterface
                 $structure = new \Gear\Module\BasicModuleStructure();
                 $structure->setModuleName($moduleName);
                 $structure->setType($type);
-                $structure->setServiceLocator($serviceLocator);
+                $structure->setNamespace($namespace);
+                //$structure->setServiceLocator($serviceLocator);
 
                 $location = $request->getParam('basepath');
 

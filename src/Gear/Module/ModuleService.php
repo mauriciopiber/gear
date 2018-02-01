@@ -282,8 +282,15 @@ class ModuleService implements ModuleProjectConnectorInterface
      *
      * @return boolean
      */
-    public function moduleAsProject($module, $location, $type = 'web', $staging = null)
+    public function moduleAsProject(
+        $module,
+        $location,
+        $type = 'web',
+        $staging = null,
+        $namespace = null)
     {
+
+        $this->namespace = $namespace;
         $this->type = $type;
         $this->staging = $staging;
 
@@ -334,7 +341,7 @@ class ModuleService implements ModuleProjectConnectorInterface
      */
     public function moduleComponents($collection = 2)
     {
-        $configService         = $this->getConfigService();
+        $configService = $this->getConfigService();
         $configService->module($this->type, $this->staging);
 
         if ($collection == 1) {
@@ -408,7 +415,7 @@ class ModuleService implements ModuleProjectConnectorInterface
                 $this->getPage()->createIndexPage();
                 $this->getStep()->createIndexStep();
 
-                if ($collection==1 && !empty($this->staging)) {
+                if ($collection == 1 && !empty($this->staging)) {
                     $this->getStagingScript();
                     $this->getInstallStagingScript();
                 }
@@ -445,7 +452,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->getChangelogDocs();
 
         $this->createModuleFile();
-        $this->createModuleFileAlias();
+        //$this->createModuleFileAlias();
 
 
         $this->createJenkinsFile($this->type);
@@ -548,7 +555,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     {
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
-        $file->setOptions(['module' => $this->str('class', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setOptions(['module' => $this->str('namespace', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
         return $file->render();
@@ -891,7 +898,7 @@ class ModuleService implements ModuleProjectConnectorInterface
      * Cria aliase para usar o modulo tanto como PSR-0 como parte do projeto, localizado em Module.php
      *
      * @return string
-     */
+
     public function createModuleFileAlias()
     {
         $moduleFile = file_put_contents(
@@ -901,6 +908,7 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         return $moduleFile;
     }
+    */
 
     /**
      * Cria arquivo src/$module/Module.php, arquivo principal com bootstrap do módulo

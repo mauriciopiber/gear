@@ -5,7 +5,6 @@ use Gear\Mvc\Config\ConfigService;
 
 trait ConfigServiceTrait
 {
-
     protected $configService;
 
     public function getConfigService()

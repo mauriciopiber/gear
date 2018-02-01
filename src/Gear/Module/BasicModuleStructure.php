@@ -11,11 +11,7 @@ use Gear\Module\ModuleAwareInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\Exception\ResourceNotFound;
 
-class BasicModuleStructure implements
-    ServiceLocatorAwareInterface,
-    StringServiceAwareInterface,
-    DirServiceAwareInterface,
-    ModuleAwareInterface
+class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServiceAwareInterface, DirServiceAwareInterface, ModuleAwareInterface
 {
 
     use ServiceLocatorAwareTrait;
@@ -26,6 +22,7 @@ class BasicModuleStructure implements
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules.
      * With the mainFolder you should get all modules folders inside it automatically.
+     *
      * @var string mainFolder
      */
     protected $mainFolder;
@@ -36,7 +33,36 @@ class BasicModuleStructure implements
 
     protected $type;
 
+    protected $namespace;
+
+    protected $staging;
+
     public $basePath;
+
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
+        return $this;
+    }
+
+    public function getNamespace()
+    {
+        if (empty($this->namespace)) {
+            return $this->moduleName;
+        }
+        return $this->namespace;
+    }
+
+    public function setStaging($staging)
+    {
+        $this->staging = $staging;
+        return $this;
+    }
+
+    public function getStaging()
+    {
+        return $this->staging;
+    }
 
     public function setType($type)
     {
@@ -56,12 +82,12 @@ class BasicModuleStructure implements
 
     public function getRequestName()
     {
-        if (!isset($this->requestName)) {
+        if (! isset($this->requestName)) {
             $this->requestName = $this->getServiceLocator()
-              ->get('application')
-              ->getMvcEvent()
-              ->getRequest()
-              ->getParam('module');
+                ->get('application')
+                ->getMvcEvent()
+                ->getRequest()
+                ->getParam('module');
         }
 
         return $this->requestName;
@@ -77,7 +103,6 @@ class BasicModuleStructure implements
     {
         return $this->getStringService()->str($label, $value);
     }
-
 
     public function prepare($moduleName = null, $type = 'web')
     {
@@ -95,8 +120,8 @@ class BasicModuleStructure implements
         if ($this->getMainFolder() == null) {
             $folder = $this->getBasePath();
 
-            if (is_dir($folder.'/module')) {
-                $this->setMainFolder($folder.'/module/'.$moduleName);
+            if (is_dir($folder . '/module')) {
+                $this->setMainFolder($folder . '/module/' . $moduleName);
             } else {
                 $this->setMainFolder($folder);
             }
@@ -136,7 +161,7 @@ class BasicModuleStructure implements
             'Interface' => $this->getInterfaceFolder()
         ***REMOVED***;
 
-        if (!isset($resources[$resource***REMOVED***)) {
+        if (! isset($resources[$resource***REMOVED***)) {
             throw new ResourceNotFound($resource);
         }
 
@@ -145,57 +170,52 @@ class BasicModuleStructure implements
 
     public function getInterfaceFolder()
     {
-        return $this->getSrcModuleFolder().'/Interfaces';
+        return $this->getSrcModuleFolder() . '/Interfaces';
     }
-
 
     public function write()
     {
-        //main
+        // main
         $this->getDirService()->mkDir($this->getMainFolder());
 
-
-        //$this->getDirService()->mkDir($this->getJenkinsFolder());
-
+        // $this->getDirService()->mkDir($this->getJenkinsFolder());
 
         $this->getDirService()->mkDir($this->getDocsFolder());
-        //script
+        // script
         $this->getDirService()->mkDir($this->getScriptFolder());
 
-        //config
+        // config
         $this->getDirService()->mkDir($this->getConfigFolder());
         $this->getDirService()->mkDir($this->getConfigAutoloadFolder());
         $this->getDirService()->mkDir($this->getConfigExtFolder());
 
-
-        //build
+        // build
         $this->getDirService()->mkDir($this->getBuildFolder());
         $this->writable($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
 
-        //schema
+        // schema
         $this->getDirService()->mkDir($this->getSchemaFolder());
 
-
-        //data
+        // data
         $this->getDirService()->mkDir($this->getDataFolder());
         $this->getDirService()->mkDir($this->getSessionFolder());
         $this->writable($this->getSessionFolder());
         $this->createGitIgnore($this->getSessionFolder());
-        //data/migrations
+        // data/migrations
         $this->getDirService()->mkDir($this->getDataMigrationFolder());
 
-        //var_dump($this->getMainFolder());die();
+        // var_dump($this->getMainFolder());die();
 
         $this->writable($this->getDataMigrationFolder());
-        //data/logs
+        // data/logs
         $this->getDirService()->mkDir($this->getDataLogsFolder());
         $this->writable($this->getDataLogsFolder());
         $this->createGitIgnore($this->getDataLogsFolder());
-        //data/_files
+        // data/_files
         $this->getDirService()->mkDir($this->getDataFilesFolder());
-        //data/DoctrineModule
-        //$this->getDirService()->mkDir($this->getDataCacheFolder());
+        // data/DoctrineModule
+        // $this->getDirService()->mkDir($this->getDataCacheFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
         $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
@@ -207,8 +227,6 @@ class BasicModuleStructure implements
         $this->writable($this->getDataDoctrineProxyCacheFolder());
         $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
         $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
-
-
 
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
@@ -222,7 +240,6 @@ class BasicModuleStructure implements
         $this->getDirService()->mkDir($this->getRepositoryFolder());
         $this->getDirService()->mkDir($this->getServiceFolder());
 
-
         $this->getDirService()->mkDir($this->getValueObjectFolder());
         $this->getDirService()->mkDir($this->getControllerPluginFolder());
         $this->getDirService()->mkDir($this->getFixtureFolder());
@@ -235,9 +252,9 @@ class BasicModuleStructure implements
             $this->getDirService()->mkDir($this->getViewLayoutFolder());
             $this->getDirService()->mkDir($this->getViewIndexControllerFolder());
         }
-        //view
+        // view
 
-        //public
+        // public
         $this->getDirService()->mkDir($this->getPublicFolder());
 
         if ($this->getType() === 'web') {
@@ -247,8 +264,8 @@ class BasicModuleStructure implements
             $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
             $this->getDirService()->mkDir($this->getPublicJsSpecUnitFolder());
             $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder());
-            $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder().'/index');
-            $this->getDirService()->mkDir($this->getPublicJsSpecEndSupportFolder().'/index');
+            $this->getDirService()->mkDir($this->getPublicJsSpecEndFolder() . '/index');
+            $this->getDirService()->mkDir($this->getPublicJsSpecEndSupportFolder() . '/index');
             $this->getDirService()->mkDir($this->getPublicJsSpecIntegrationFolder());
             $this->getDirService()->mkDir($this->getPublicJsSpecMockFolder());
             $this->getDirService()->mkDir($this->getPublicCssFolder());
@@ -262,12 +279,11 @@ class BasicModuleStructure implements
             $this->writable($this->getPublicTempFolder());
             $this->createGitIgnore($this->getPublicTempFolder());
         }
-        //$this->createGitIgnore($this->getPublicJsControllerFolder());
-        //test
+        // $this->createGitIgnore($this->getPublicJsControllerFolder());
+        // test
         $this->getDirService()->mkDir($this->getTestFolder());
         $this->getDirService()->mkDir($this->getTestUnitFolder());
         $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
-
 
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
@@ -291,7 +307,6 @@ class BasicModuleStructure implements
             $this->getDirService()->mkDir($this->getTestViewFolder());
             $this->getDirService()->mkDir($this->getTestViewHelperFolder());
 
-
             $this->getDirService()->mkDir($this->getLanguageFolder());
             $this->getDirService()->mkDir($this->getLanguageRouteFolder());
         }
@@ -312,7 +327,7 @@ class BasicModuleStructure implements
 
     public function getFactoryFolder()
     {
-        return $this->getSrcModuleFolder().'/Factory';
+        return $this->getSrcModuleFolder() . '/Factory';
     }
 
     public function ignoreAll($location)
@@ -322,10 +337,8 @@ class BasicModuleStructure implements
 !.gitignore
 
 EOS;
-        file_put_contents($location.'/.gitignore', $template);
+        file_put_contents($location . '/.gitignore', $template);
     }
-
-
 
     public function createGitIgnore($location)
     {
@@ -338,47 +351,47 @@ EOS;
 !.gitignore
 
 EOS;
-        file_put_contents($location.'/.gitignore', $template);
+        file_put_contents($location . '/.gitignore', $template);
     }
 
     public function getDataDoctrineModuleFolder()
     {
-        return $this->getDataFolder().'/DoctrineModule';
+        return $this->getDataFolder() . '/DoctrineModule';
     }
 
     public function getDataDoctrineModuleCacheFolder()
     {
-        return $this->getDataDoctrineModuleFolder().'/cache';
+        return $this->getDataDoctrineModuleFolder() . '/cache';
     }
 
     public function getDataDoctrineORMModuleCacheFolder()
     {
-        return $this->getDataFolder().'/DoctrineORMModule';
+        return $this->getDataFolder() . '/DoctrineORMModule';
     }
 
     public function getDataDoctrineProxyCacheFolder()
     {
-        return $this->getDataDoctrineORMModuleCacheFolder().'/Proxy';
+        return $this->getDataDoctrineORMModuleCacheFolder() . '/Proxy';
     }
 
     public function getDataCacheFolder()
     {
-        return $this->getDataFolder().'/cache';
+        return $this->getDataFolder() . '/cache';
     }
 
     public function getDataCacheConfigFolder()
     {
-        return $this->getDataCacheFolder().'/configcache';
+        return $this->getDataCacheFolder() . '/configcache';
     }
 
     public function getNodejsFolder()
     {
-        return $this->getMainFolder().'/node_modules';
+        return $this->getMainFolder() . '/node_modules';
     }
 
     public function getDocsFolder()
     {
-        return $this->getMainFolder().'/docs';
+        return $this->getMainFolder() . '/docs';
     }
 
     public function writable($dir)
@@ -386,246 +399,239 @@ EOS;
         chmod($dir, 0777);
     }
 
-
     public function getDataMigrationFolder()
     {
-        return $this->getDataFolder().'/migrations';
+        return $this->getDataFolder() . '/migrations';
     }
 
     public function getJenkinsFolder()
     {
-        return $this->getMainFolder().'/jenkins';
+        return $this->getMainFolder() . '/jenkins';
     }
 
     public function getPublicFolder()
     {
-        return $this->getMainFolder().'/public';
+        return $this->getMainFolder() . '/public';
     }
 
     public function getPublicInfoFolder()
     {
-        return $this->getPublicFolder().'/info';
+        return $this->getPublicFolder() . '/info';
     }
 
     public function getPublicUploadFolder()
     {
-        return $this->getPublicFolder().'/upload';
+        return $this->getPublicFolder() . '/upload';
     }
 
     public function getPublicJsFolder()
     {
-        return $this->getPublicFolder().'/js';
+        return $this->getPublicFolder() . '/js';
     }
 
     public function getPublicCssFolder()
     {
-        return $this->getPublicFolder().'/css';
+        return $this->getPublicFolder() . '/css';
     }
 
     public function getPublicJsAppFolder()
     {
-        return $this->getPublicJsFolder().'/app';
+        return $this->getPublicJsFolder() . '/app';
     }
 
     public function getPublicJsSpecFolder()
     {
-        return $this->getPublicJsFolder().'/spec';
+        return $this->getPublicJsFolder() . '/spec';
     }
 
     public function getPublicJsSpecUnitFolder()
     {
-        return $this->getPublicJsSpecFolder().'/unit';
+        return $this->getPublicJsSpecFolder() . '/unit';
     }
 
     public function getPublicJsSpecEndFolder()
     {
-        return $this->getPublicJsSpecFolder().'/e2e';
+        return $this->getPublicJsSpecFolder() . '/e2e';
     }
 
     public function getPublicJsSpecEndSupportFolder()
     {
-        return $this->getPublicJsSpecEndFolder().'/support';
+        return $this->getPublicJsSpecEndFolder() . '/support';
     }
 
     public function getPublicJsSpecMockFolder()
     {
-        return $this->getPublicJsSpecFolder().'/mock';
+        return $this->getPublicJsSpecFolder() . '/mock';
     }
 
     public function getPublicJsSpecIntegrationFolder()
     {
-        return $this->getPublicJsSpecFolder().'/integration';
+        return $this->getPublicJsSpecFolder() . '/integration';
     }
 
     public function getPublicJsControllerSpecFolder()
     {
-        return $this->getPublicJsSpecUnitFolder().'/controllerSpec';
+        return $this->getPublicJsSpecUnitFolder() . '/controllerSpec';
     }
 
     public function getPublicJsServiceSpecFolder()
     {
-        return $this->getPublicJsSpecUnitFolder().'/serviceSpec';
+        return $this->getPublicJsSpecUnitFolder() . '/serviceSpec';
     }
 
     public function getPublicJsControllerFolder()
     {
-        return $this->getPublicJsAppFolder().'/controller';
+        return $this->getPublicJsAppFolder() . '/controller';
     }
 
     public function getPublicJsServiceFolder()
     {
-        return $this->getPublicJsAppFolder().'/service';
+        return $this->getPublicJsAppFolder() . '/service';
     }
 
     public function getModuleViewFolder()
     {
-        return $this->getSrcModuleFolder().'/View';
+        return $this->getSrcModuleFolder() . '/View';
     }
 
     public function getViewHelperFolder()
     {
-        return $this->getModuleViewFolder().'/Helper';
+        return $this->getModuleViewFolder() . '/Helper';
     }
-
-
 
     public function getValueObjectFolder()
     {
-        return $this->getSrcModuleFolder().'/ValueObject';
+        return $this->getSrcModuleFolder() . '/ValueObject';
     }
 
     public function getTestControllerFolder()
     {
-        return $this->getTestUnitModuleFolder().'/ControllerTest';
+        return $this->getTestUnitModuleFolder() . '/ControllerTest';
     }
 
     public function getTestViewFolder()
     {
-        return $this->getTestUnitModuleFolder().'/ViewTest';
+        return $this->getTestUnitModuleFolder() . '/ViewTest';
     }
 
     public function getTestViewHelperFolder()
     {
-        return $this->getTestViewFolder().'/HelperTest';
+        return $this->getTestViewFolder() . '/HelperTest';
     }
 
     public function getPublicTempFolder()
     {
-        return $this->getPublicFolder().'/_temp';
+        return $this->getPublicFolder() . '/_temp';
     }
 
     public function getTestFactoryFolder()
     {
-        return $this->getTestUnitModuleFolder().'/FactoryTest';
+        return $this->getTestUnitModuleFolder() . '/FactoryTest';
     }
 
     public function getTestValueObjectFolder()
     {
-        return $this->getTestUnitModuleFolder().'/ValueObjectTest';
+        return $this->getTestUnitModuleFolder() . '/ValueObjectTest';
     }
 
     public function getControllerPluginFolder()
     {
-        return $this->getControllerFolder().'/Plugin';
+        return $this->getControllerFolder() . '/Plugin';
     }
 
     public function getTestControllerPluginFolder()
     {
-        return $this->getTestControllerFolder().'/PluginTest';
+        return $this->getTestControllerFolder() . '/PluginTest';
     }
-
-
 
     public function getTestEntityFolder()
     {
-        return $this->getTestUnitModuleFolder().'/EntityTest';
+        return $this->getTestUnitModuleFolder() . '/EntityTest';
     }
 
     public function getTestRepositoryFolder()
     {
-        return $this->getTestUnitModuleFolder().'/RepositoryTest';
+        return $this->getTestUnitModuleFolder() . '/RepositoryTest';
     }
 
     public function getTestFormFolder()
     {
-        return $this->getTestUnitModuleFolder().'/FormTest';
+        return $this->getTestUnitModuleFolder() . '/FormTest';
     }
 
     public function getTestFilterFolder()
     {
-        return $this->getTestUnitModuleFolder().'/FilterTest';
+        return $this->getTestUnitModuleFolder() . '/FilterTest';
     }
 
     public function getTestServiceFolder()
     {
-        return $this->getTestUnitModuleFolder().'/ServiceTest';
+        return $this->getTestUnitModuleFolder() . '/ServiceTest';
     }
 
     public function getControllerFolder()
     {
-        return $this->getSrcModuleFolder().'/Controller';
+        return $this->getSrcModuleFolder() . '/Controller';
     }
 
     public function getServiceFolder()
     {
-        return $this->getSrcModuleFolder().'/Service';
+        return $this->getSrcModuleFolder() . '/Service';
     }
 
     public function getSearchFolder()
     {
-        return $this->getFormFolder().'/Search';
+        return $this->getFormFolder() . '/Search';
     }
 
     public function getEntityFolder()
     {
-        return $this->getSrcModuleFolder().'/Entity';
+        return $this->getSrcModuleFolder() . '/Entity';
     }
 
     public function getFormFolder()
     {
-        return $this->getSrcModuleFolder().'/Form';
+        return $this->getSrcModuleFolder() . '/Form';
     }
 
     public function getTestSearchFolder()
     {
-        return $this->getTestFormFolder().'/SearchTest';
+        return $this->getTestFormFolder() . '/SearchTest';
     }
-
 
     public function getFixtureFolder()
     {
-        return $this->getSrcModuleFolder().'/Fixture';
+        return $this->getSrcModuleFolder() . '/Fixture';
     }
 
     public function getRepositoryFolder()
     {
-        return $this->getSrcModuleFolder().'/Repository';
+        return $this->getSrcModuleFolder() . '/Repository';
     }
 
     public function getViewErrorFolder()
     {
-        return $this->getViewFolder().'/error';
+        return $this->getViewFolder() . '/error';
     }
 
     public function getViewLayoutFolder()
     {
-        return $this->getViewFolder().'/layout';
+        return $this->getViewFolder() . '/layout';
     }
 
     public function getViewModuleFolder()
     {
-        return $this->getViewFolder().'/'.$this->str('url', $this->getModuleName());
+        return $this->getViewFolder() . '/' . $this->str('url', $this->getModuleName());
     }
 
     public function getViewIndexControllerFolder()
     {
-        return $this->getViewModuleFolder().'/index';
+        return $this->getViewModuleFolder() . '/index';
     }
-
 
     public function getFilterFolder()
     {
-        return $this->getSrcModuleFolder().'/Filter';
+        return $this->getSrcModuleFolder() . '/Filter';
     }
 
     public function getSrcModuleFolder()
@@ -641,7 +647,7 @@ EOS;
 
     public function getBasePath()
     {
-        if (!isset($this->basePath)) {
+        if (! isset($this->basePath)) {
             $this->basePath = \GearBase\Module::getProjectFolder();
         }
         return $this->basePath;
@@ -673,134 +679,131 @@ EOS;
 
     public function getBuildFolder()
     {
-        return $this->getMainFolder().'/build';
+        return $this->getMainFolder() . '/build';
     }
 
     public function getConfigFolder()
     {
-        return $this->getMainFolder().'/config';
+        return $this->getMainFolder() . '/config';
     }
 
     public function getScriptFolder()
     {
-        return $this->getMainFolder().'/script';
+        return $this->getMainFolder() . '/script';
     }
 
     public function getConfigAutoloadFolder()
     {
-        return $this->getConfigFolder().'/autoload';
+        return $this->getConfigFolder() . '/autoload';
     }
 
     public function getConfigExtFolder()
     {
-        return $this->getConfigFolder().'/ext';
+        return $this->getConfigFolder() . '/ext';
     }
 
     public function getConfigAclFolder()
     {
-        return $this->getConfigFolder().'/acl';
+        return $this->getConfigFolder() . '/acl';
     }
-
 
     public function getSchema()
     {
-        return $this->getMainFolder().'/schema';
+        return $this->getMainFolder() . '/schema';
     }
-
-
 
     public function getSrcFolder()
     {
-        return $this->getMainFolder().'/src';
+        return $this->getMainFolder() . '/src';
     }
 
     public function getViewFolder()
     {
-        return $this->getMainFolder().'/view';
+        return $this->getMainFolder() . '/view';
     }
 
     public function getTestFolder()
     {
-        return $this->getMainFolder().'/test';
+        return $this->getMainFolder() . '/test';
     }
 
     public function getTestDataFolder()
     {
-        return $this->getTestFolder().'/_data';
+        return $this->getTestFolder() . '/_data';
     }
 
     public function getTestSupportFolder()
     {
-        return $this->getTestFolder().'/_support';
+        return $this->getTestFolder() . '/_support';
     }
 
     public function getTestAcceptanceFolder()
     {
-        return $this->getTestFolder().'/acceptance';
+        return $this->getTestFolder() . '/acceptance';
     }
 
     public function getTestFunctionalFolder()
     {
-        return $this->getTestFolder().'/functional';
+        return $this->getTestFolder() . '/functional';
     }
 
     public function getTestAcceptanceStepsFolder()
     {
-        return $this->getTestAcceptanceFolder().'/_steps';
+        return $this->getTestAcceptanceFolder() . '/_steps';
     }
 
     public function getTestFunctionalStepsFolder()
     {
-        return $this->getTestFunctionalFolder().'/_steps';
+        return $this->getTestFunctionalFolder() . '/_steps';
     }
 
     public function getTestPagesFolder()
     {
-        return $this->getTestFolder().'/Pages';
+        return $this->getTestFolder() . '/Pages';
     }
 
     public function getTestUnitFolder()
     {
-        return $this->getTestFolder().'/unit';
+        return $this->getTestFolder() . '/unit';
     }
 
     public function getTestUnitModuleFolder()
     {
-        return $this->getTestUnitFolder().'/'.$this->getModuleName().'Test';
+        return $this->getTestUnitFolder();
     }
 
     public function getSchemaFolder()
     {
-        return $this->getMainFolder().'/schema';
+        return $this->getMainFolder() . '/schema';
     }
 
     public function getDataFolder()
     {
-        return $this->getMainFolder().'/data';
+        return $this->getMainFolder() . '/data';
     }
 
     public function getSessionFolder()
     {
-        return $this->getDataFolder().'/session';
+        return $this->getDataFolder() . '/session';
     }
 
     public function getDataLogsFolder()
     {
-        return $this->getDataFolder().'/logs';
+        return $this->getDataFolder() . '/logs';
     }
 
     public function getDataFilesFolder()
     {
-        return $this->getDataFolder().'/_files';
+        return $this->getDataFolder() . '/_files';
     }
 
     public function getLanguageFolder()
     {
-        return $this->getMainFolder().'/language';
+        return $this->getMainFolder() . '/language';
     }
 
     public function getLanguageRouteFolder()
     {
-        return $this->getLanguageFolder().'/route';
+        return $this->getLanguageFolder() . '/route';
     }
 }

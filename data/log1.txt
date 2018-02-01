@@ -1,0 +1,387 @@
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/ControllerTest/ControllerTestServiceTest.php on line 18
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/FilterTest/FilterServiceTest.php on line 16
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/FilterTest/FilterTestServiceTest.php on line 19
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/FormTest/FormServiceTest.php on line 16
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/FormTest/FormTestServiceTest.php on line 14
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/RepositoryTest/RepositoryTestServiceTest.php on line 16
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/SearchTest/SearchServiceTest.php on line 16
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/SearchTest/SearchTestServiceTest.php on line 15
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/ServiceTest/ServiceTestServiceTest.php on line 25
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHP Warning:  Declaration of GearTest\UtilTestTrait::mockPhpRenderer() should be compatible with GearBaseTest\AbstractTestCase::mockPhpRenderer($templatePath) in /var/www/gear-package/gear/test/unit/GearTest/MvcTest/SpecTest/StepTest/StepTest.php on line 22
+PHP Stack trace:
+PHP   1. {main}() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:0
+PHP   2. PHPUnit_TextUI_Command::main() /var/www/gear-package/gear/vendor/phpunit/phpunit/phpunit:52
+PHP   3. PHPUnit_TextUI_Command->run() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:116
+PHP   4. PHPUnit_Runner_BaseTestRunner->getTest() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/TextUI/Command.php:138
+PHP   5. PHPUnit_Framework_TestSuite->addTestFiles() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Runner/BaseTestRunner.php:57
+PHP   6. PHPUnit_Framework_TestSuite->addTestFile() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:382
+PHP   7. PHPUnit_Util_Fileloader::checkAndLoad() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Framework/TestSuite.php:310
+PHP   8. PHPUnit_Util_Fileloader::load() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:36
+PHP   9. include_once() /var/www/gear-package/gear/vendor/phpunit/phpunit/src/Util/Fileloader.php:52
+PHPUnit 5.7.23 by Sebastian Bergmann and contributors.
+
+.............................................................   61 / 1366 (  4%)
+.............................................................  122 / 1366 (  8%)
+.............................................................  183 / 1366 ( 13%)
+.............................................................  244 / 1366 ( 17%)
+....WW.......................................................  305 / 1366 ( 22%)
+........................................W..........Carregado database de vfs://module/data/my-load.mysql.sql
+..........  366 / 1366 ( 26%)
+.............................................................  427 / 1366 ( 31%)
+............................................F................  488 / 1366 ( 35%)
+.............................................................  549 / 1366 ( 40%)
+...................................W.........................  610 / 1366 ( 44%)
+.F..................................................EE.......  671 / 1366 ( 49%)
+................E..E..........................WEE............  732 / 1366 ( 53%)
+.............................................................  793 / 1366 ( 58%)
+.............................................................  854 / 1366 ( 62%)
+.............................................................  915 / 1366 ( 66%)
+.............................................................  976 / 1366 ( 71%)
+............................................................. 1037 / 1366 ( 75%)
+.............vfs://module/MyServiceTraitTest.php
+.......................1......................... 1098 / 1366 ( 80%)
+...........array (
+  'username' => '',
+  'password' => '',
+  'host' => '',
+  'environment' => '',
+)..........................1........................ 1159 / 1366 ( 84%)
+............................................................. 1220 / 1366 ( 89%)
+............................................................. 1281 / 1366 ( 93%)
+............................................................. 1342 / 1366 ( 98%)
+.........W..............                                      1366 / 1366 (100%)
+
+Time: 16.75 minutes, Memory: 450.00MB
+
+There were 6 errors:
+
+1) GearTest\ModuleTest\ControllerTest\ModuleControllerTest::testCreateModuleAsProject with data set #0 ('web')
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - moduleAsProject("Gearing", "/var/www/teste", "web", "stag.com.br", null)
+on Double\Gear\Module\ModuleService\P2297 was not expected, expected calls were:
+  - moduleAsProject(exact("Gearing"), exact("/var/www/teste"), exact("web"), exact("stag.com.br"))
+
+/var/www/gear-package/gear/src/Gear/Module/Controller/ModuleController.php:126
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractActionController.php:82
+/var/www/gear-package/gear/vendor/zendframework/zend-eventmanager/src/EventManager.php:490
+/var/www/gear-package/gear/vendor/zendframework/zend-eventmanager/src/EventManager.php:214
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractController.php:118
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractConsoleController.php:55
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ControllerTest/ModuleControllerTest.php:192
+
+2) GearTest\ModuleTest\ControllerTest\ModuleControllerTest::testCreateModuleAsProject with data set #1 ('cli')
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - moduleAsProject("Gearing", "/var/www/teste", "cli", "stag.com.br", null)
+on Double\Gear\Module\ModuleService\P2298 was not expected, expected calls were:
+  - moduleAsProject(exact("Gearing"), exact("/var/www/teste"), exact("cli"), exact("stag.com.br"))
+
+/var/www/gear-package/gear/src/Gear/Module/Controller/ModuleController.php:126
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractActionController.php:82
+/var/www/gear-package/gear/vendor/zendframework/zend-eventmanager/src/EventManager.php:490
+/var/www/gear-package/gear/vendor/zendframework/zend-eventmanager/src/EventManager.php:214
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractController.php:118
+/var/www/gear-package/gear/vendor/zendframework/zend-mvc/src/Controller/AbstractConsoleController.php:55
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ControllerTest/ModuleControllerTest.php:192
+
+3) GearTest\ModuleTest\ModuleServiceTest::testCreateModuleAsProjectWeb
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - setLocation("vfs://module/my-module/test/unit")
+on Double\Gear\Creator\FileCreator\FileCreator\P2586 was not expected, expected calls were:
+  - setTemplate(exact("template/module/config/application.config.web.pht"...))
+  - setTemplate(exact("template/module/config/autoload/global.phtml"))
+  - setTemplate(exact("template/module/config/autoload/local.phtml"))
+  - setTemplate(exact("template/module/public/index.phtml"))
+  - setTemplate(exact("template/module/public/htaccess.phtml"))
+  - setTemplate(exact("template/module/init_autoloader.phtml"))
+  - setTemplate(exact("template/module/script/deploy-development-web.pht"...))
+  - setTemplate(exact("template/module/script/deploy-testing-web.phtml"))
+  - setTemplate(exact("template/module/script/load-web.phtml"))
+  - setTemplate(exact("template/module/phinx.phtml"))
+  - setTemplate(exact("template/module/test/module-test.phtml"))
+  - setTemplate(exact("template/module/module.phtml"))
+  - setTemplate(exact("template/module/jenkinsfile-web.phtml"))
+  - setTemplate(exact("template/module/gitignore-web.phtml"))
+  - setOptions(exact(["module" => "MyModule"***REMOVED***))
+  - setOptions(exact(["module" => "my_module"***REMOVED***))
+  - setOptions(exact(["module" => "my-module"***REMOVED***))
+  - setOptions(exact([***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module"***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module", "layout" => "gear-admin-interno"***REMOVED***))
+  - setOptions(exact(["moduleUrl" => "my-module"***REMOVED***))
+  - setLocation(exact("vfs://module/my-module/config"))
+  - setLocation(exact("vfs://module/my-module/config/autoload"))
+  - setLocation(exact("vfs://module/my-module/public"))
+  - setLocation(exact("vfs://module/my-module"))
+  - setLocation(exact("vfs://module/my-module/script"))
+  - setLocation(exact("vfs://module/my-module/test/unit/MyModuleTest"))
+  - setLocation(exact("vfs://module/my-module/src/MyModule"))
+  - setFileName(exact("application.config.php"))
+  - setFileName(exact("global.php"))
+  - setFileName(exact("local.php"))
+  - setFileName(exact("index.php"))
+  - setFileName(exact(".htaccess"))
+  - setFileName(exact("init_autoloader.php"))
+  - setFileName(exact("deploy-development.sh"))
+  - setFileName(exact("deploy-testing.sh"))
+  - setFileName(exact("load.sh"))
+  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("ModuleTest.php"))
+  - setFileName(exact("Module.php"))
+  - setFileName(exact("Jenkinsfile"))
+  - setFileName(exact(".gitignore"))
+  - render()
+
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:964
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:933
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:454
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:311
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ModuleServiceTest.php:442
+
+4) GearTest\ModuleTest\ModuleServiceTest::testCreateModuleAsProjectCli
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - setLocation("vfs://module/my-module/test/unit")
+on Double\Gear\Creator\FileCreator\FileCreator\P2676 was not expected, expected calls were:
+  - setTemplate(exact("template/module/config/application.config.cli.pht"...))
+  - setTemplate(exact("template/module/config/autoload/global.phtml"))
+  - setTemplate(exact("template/module/config/autoload/local.phtml"))
+  - setTemplate(exact("template/module/public/index.phtml"))
+  - setTemplate(exact("template/module/public/htaccess.phtml"))
+  - setTemplate(exact("template/module/init_autoloader.phtml"))
+  - setTemplate(exact("template/module/script/deploy-development-cli.pht"...))
+  - setTemplate(exact("template/module/script/deploy-testing-cli.phtml"))
+  - setTemplate(exact("template/module/script/load-cli.phtml"))
+  - setTemplate(exact("template/module/phinx.phtml"))
+  - setTemplate(exact("template/module/test/module-test.phtml"))
+  - setTemplate(exact("template/module/module.phtml"))
+  - setTemplate(exact("template/module/jenkinsfile-cli.phtml"))
+  - setTemplate(exact("template/module/gitignore-cli.phtml"))
+  - setOptions(exact(["module" => "MyModule"***REMOVED***))
+  - setOptions(exact(["module" => "my_module"***REMOVED***))
+  - setOptions(exact(["module" => "my-module"***REMOVED***))
+  - setOptions(exact([***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module"***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module", "layout" => "gear-admin-interno"***REMOVED***))
+  - setOptions(exact(["moduleUrl" => "my-module"***REMOVED***))
+  - setLocation(exact("vfs://module/my-module/config"))
+  - setLocation(exact("vfs://module/my-module/config/autoload"))
+  - setLocation(exact("vfs://module/my-module/public"))
+  - setLocation(exact("vfs://module/my-module"))
+  - setLocation(exact("vfs://module/my-module/script"))
+  - setLocation(exact("vfs://module/my-module/test/unit/MyModuleTest"))
+  - setLocation(exact("vfs://module/my-module/src/MyModule"))
+  - setFileName(exact("application.config.php"))
+  - setFileName(exact("global.php"))
+  - setFileName(exact("local.php"))
+  - setFileName(exact("index.php"))
+  - setFileName(exact(".htaccess"))
+  - setFileName(exact("init_autoloader.php"))
+  - setFileName(exact("deploy-development.sh"))
+  - setFileName(exact("deploy-testing.sh"))
+  - setFileName(exact("load.sh"))
+  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("ModuleTest.php"))
+  - setFileName(exact("Module.php"))
+  - setFileName(exact("Jenkinsfile"))
+  - setFileName(exact(".gitignore"))
+  - render()
+
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:964
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:933
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:454
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:311
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ModuleServiceTest.php:867
+
+5) GearTest\MvcTest\ConfigTest\ConfigServiceTest::testConfigWeb
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - getNamespace()
+on Double\Gear\Module\BasicModuleStructure\P2868 was not expected, expected calls were:
+  - getConfigFolder()
+  - getConfigExtFolder()
+  - getModuleName()
+
+/var/www/gear-package/gear/src/Gear/Mvc/Config/ConfigService.php:119
+/var/www/gear-package/gear/test/unit/GearTest/MvcTest/ConfigTest/ConfigServiceTest.php:91
+
+6) GearTest\MvcTest\ConfigTest\ConfigServiceTest::testConfigCli
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - getNamespace()
+on Double\Gear\Module\BasicModuleStructure\P2878 was not expected, expected calls were:
+  - getConfigFolder()
+  - getConfigExtFolder()
+  - getModuleName()
+
+/var/www/gear-package/gear/src/Gear/Mvc/Config/ConfigService.php:119
+/var/www/gear-package/gear/test/unit/GearTest/MvcTest/ConfigTest/ConfigServiceTest.php:121
+
+--
+
+There were 6 warnings:
+
+1) Warning
+No tests found in class "GearTest\ControllerTest\AbstractConsoleControllerTestCase".
+
+2) Warning
+No tests found in class "GearTest\ConstructorTest\AppTest\AppController".
+
+3) Warning
+No tests found in class "GearTest\CreatorTest\FileTest\InjectorTest".
+
+4) Warning
+No tests found in class "GearTest\IntegrationTest\SuiteTest\SrcTest\SrcGeneratorTest\SrcGeneratorTest".
+
+5) Warning
+No tests found in class "GearTest\MvcTest\AbstractMvcTest".
+
+6) Warning
+
+--
+
+There were 2 failures:
+
+1) GearTest\IntegrationTest\ComponentTest\GearFileTest\GearFileTest::testCreateGearfileControllerMvcShortName
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+ 'controller:
+     -
+         db: SrcMvcBsc
+         type: Action
+-        name: SrcMvcBasicController
++        name: SrcMvcBscController
+         user: all
+         columns: {  }
+         service: factories
+         namespace: SrcMvcBasic\Controller
+         dependency:
+             - SrcMvcBasic\Service\SrcMvcBscService
+             - SrcMvcBasic\Form\SrcMvcBscForm
+             - SrcMvcBasic\SearchForm\SrcMvcBscSearchForm
+         actions:
+             - { name: Create, role: admin }
+             - { name: Edit, role: admin }
+             - { name: List, role: admin }
+             - { name: View, role: admin }
+             - { name: Delete, role: admin }
+ '
+
+/var/www/gear-package/gear/test/unit/GearTest/IntegrationTest/ComponentTest/GearFileTest/GearFileTest.php:492
+
+2) GearTest\ModuleTest\ComposerServiceTest::testCreateComposer
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+     "autoload" : {
+-        "psr-0" : {
+-            "Gearing" : "src",
+-            "GearingTest" : "test/unit"
++        "psr-4" : {
++            "Gearing\\" : "src",
++            "GearingTest\\" : "test/unit"
+         }
+     },
+     "repositories" : [
+         {
+             "type" : "composer",
+             "url" : "https://mirror.pibernetwork.com"
+         },
+         { "packagist" : false }
+     ***REMOVED***
+ }'
+
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ComposerServiceTest.php:111
+
+ERRORS!
+Tests: 1366, Assertions: 4281, Errors: 6, Failures: 2, Warnings: 6.
+vagrant@gear:/var/www/gear-package/gear$ 
