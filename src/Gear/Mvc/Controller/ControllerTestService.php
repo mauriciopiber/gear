@@ -324,7 +324,7 @@ class ControllerTestService extends AbstractMvcTest implements
      */
     public function module()
     {
-        $this->getFileCreator()->createFile(
+        return $this->getFileCreator()->createFile(
             'template/module/mvc/controller-test/module/module-controller.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
@@ -333,8 +333,6 @@ class ControllerTestService extends AbstractMvcTest implements
             'IndexControllerTest.php',
             $this->getModule()->getTestControllerFolder()
         );
-
-        return $file;
     }
 
     public function getDbFunctionsMap()
