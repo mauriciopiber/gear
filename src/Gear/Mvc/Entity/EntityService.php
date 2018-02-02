@@ -215,12 +215,35 @@ class EntityService extends AbstractMvc
         return $names;
     }
 
+    protected $loadedModules;
+
+    public function getLoadedModules()
+    {
+        return $this->loadedModules;
+    }
+
+    public function setLoadedModules($loadedModules)
+    {
+        $this->loadedModules = $loadedModules;
+        return $this;
+    }
+
+
+
     /**
      * Exclude mapping created for others namespaces.
      */
     public function excludeMapping()
     {
         $ymlFiles = $this->getModule()->getSrcFolder();
+
+        $modules = $this->getLoadedModules();
+
+        foreach($modules as $module) {
+            var_dump(get_class($module));
+        }
+
+        die();
 
         $list = $this->getGlobService()->list($ymlFiles.'/*');
 

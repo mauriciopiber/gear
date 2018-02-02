@@ -170,7 +170,7 @@ function Gear_Module_Execute_Create
     
     Gear_Module_Run_CreateModule "$module" "$type"
     Gear_Module_Run_InstallModule "$module"
-    
+
     Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
