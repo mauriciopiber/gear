@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest\ControllerTest;
 
-use GearTest\ControllerTest\AbstractConsoleControllerTestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
 use Zend\Mvc\Router\Console\RouteMatch;
 use Zend\Mvc\MvcEvent;
@@ -14,7 +14,7 @@ use Zend\Stdlib\Parameters;
  * @group ProjectController
  * @group Controller
  */
-class ProjectControllerTest extends AbstractConsoleControllerTestCase
+class ProjectControllerTest extends TestCase
 {
     public function setUp()
     {
@@ -26,7 +26,6 @@ class ProjectControllerTest extends AbstractConsoleControllerTestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-        $this->controller->setServiceLocator($this->bootstrap->getServiceLocator());
     }
 
     public function getTypes()

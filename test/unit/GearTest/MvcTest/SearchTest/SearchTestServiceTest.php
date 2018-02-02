@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\SearchTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
 use GearTest\UtilTestTrait;
@@ -12,7 +12,7 @@ use Gear\Column\ColumnManager;
  * @group Search
  * @group db-search
  */
-class SearchTestServiceTest extends AbstractTestCase
+class SearchTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use SearchDataTrait;

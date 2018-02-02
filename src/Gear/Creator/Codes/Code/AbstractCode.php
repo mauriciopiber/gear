@@ -152,7 +152,6 @@ EOS;
 
             $location = $this->getModule()->getPublicJsAppFolder().'/'.$dirNamespace;
 
-            echo $location."\n";
             $this->getDirService()->mkDir($location);
             return $location;
         }

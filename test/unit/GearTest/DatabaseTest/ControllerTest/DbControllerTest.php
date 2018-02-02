@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest\ControllerTest;
 
-use GearTest\ControllerTest\AbstractConsoleControllerTestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
 use Zend\Mvc\Router\Console\RouteMatch;
 use Zend\Mvc\MvcEvent;
@@ -13,7 +13,7 @@ use Zend\Stdlib\Parameters;
  * @group DbController
  * @group Controller
  */
-class DbControllerTest extends AbstractConsoleControllerTestCase
+class DbControllerTest extends TestCase
 {
     public function setUp()
     {
@@ -25,7 +25,6 @@ class DbControllerTest extends AbstractConsoleControllerTestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-        $this->controller->setServiceLocator($this->bootstrap->getServiceLocator());
     }
 
     public function testNotFound()
@@ -56,20 +55,20 @@ class DbControllerTest extends AbstractConsoleControllerTestCase
     public function testCreateMigration()
     {
         $phinx = $this->prophesize('Gear\Database\Phinx\PhinxService');
-    
+
         $phinx->createMigration(null, null)->willReturn(true);
-    
+
         $this->controller->setPhinxService($phinx->reveal());
-    
+
         $this->request->setParams(new Parameters([***REMOVED***));
-    
+
         $this->routeMatch->setParam('action', 'create-migration');
         $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
     }
-    
-    
+
+
     public function testProjectLoad()
     {
         $backup = $this->prophesize('Gear\Database\BackupService');

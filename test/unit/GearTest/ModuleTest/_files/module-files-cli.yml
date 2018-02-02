@@ -59,7 +59,7 @@ files:
     template: 'template/module/test/module-test.phtml'
     options:
       module: 'MyModule'
-    location: 'test/unit/MyModuleTest'
+    location: 'test/unit'
     filename: 'ModuleTest.php'
   12:
     template: 'template/module/module.phtml'
@@ -67,7 +67,7 @@ files:
       module: 'MyModule'
       moduleUrl: 'my-module'
       layout: 'gear-admin-interno'
-    location: 'src/MyModule'
+    location: 'src'
     filename: 'Module.php'                 
    
   13:

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\FilterTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ScopeTrait;
@@ -13,7 +13,7 @@ use Gear\Column\ColumnManager;
 /**
  * @group db-filter
  */
-class FilterServiceTest extends AbstractTestCase
+class FilterServiceTest extends TestCase
 {
     use UtilTestTrait;
     use FilterDataTrait;

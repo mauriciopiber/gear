@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\ControllerTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
@@ -15,7 +15,7 @@ use Gear\Column\ColumnManager;
  * @group Fix3
  * @group db-controller
  */
-class ControllerTestServiceTest extends AbstractTestCase
+class ControllerTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ControllerDataTrait;

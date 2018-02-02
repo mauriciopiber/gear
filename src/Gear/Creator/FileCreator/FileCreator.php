@@ -119,7 +119,6 @@ class FileCreator
         $viewModel = new ViewModel($this->getOptions());
         $viewModel->setTemplate($this->getView());
 
-
         if ($this->getChildView() !== null && $this->getChildView()->count() > 0) {
             foreach ($this->getChildView() as $child) {
                 $childViewModel = new ViewModel($child['config'***REMOVED***);

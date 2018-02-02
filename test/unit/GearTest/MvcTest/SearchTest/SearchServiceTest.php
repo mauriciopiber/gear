@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\SearchTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\SearchTest\SearchDataTrait;
@@ -13,7 +13,7 @@ use Gear\Column\ColumnManager;
  * @group db-namespace-factory
  * @group db-search
  */
-class SearchServiceTest extends AbstractTestCase
+class SearchServiceTest extends TestCase
 {
     use UtilTestTrait;
     use SearchDataTrait;
@@ -33,7 +33,7 @@ class SearchServiceTest extends AbstractTestCase
         $this->string = new \GearBase\Util\String\StringService();
 
         //file-render
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+        $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../../view'));
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);

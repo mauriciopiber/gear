@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\ServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
@@ -22,7 +22,7 @@ use Gear\Column\ColumnManager;
  * @group module-mvc-service-service-test
  * @group db-service
  */
-class ServiceTestServiceTest extends AbstractTestCase
+class ServiceTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ServiceDataTrait;

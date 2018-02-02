@@ -13,7 +13,7 @@ class ConsoleController extends AbstractMvc
             'template/module/mvc/console-controller/module.phtml',
             array(
                 'module' => $this->getModule()->getModuleName(),
-                'namespace' => $this->str('namespace', $this->getModule()->getModuleName())
+                'namespace' => $this->getModuleNamespace()
             ),
             'IndexController.php',
             $this->getModule()->getControllerFolder()

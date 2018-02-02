@@ -446,7 +446,7 @@ controller:
     -
         db: SrcMvcBsc
         type: Action
-        name: SrcMvcBasicController
+        name: SrcMvcBscController
         user: all
         columns: {  }
         service: factories

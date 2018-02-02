@@ -5,6 +5,7 @@ $consoleRoutes   = require 'ext/console.route.php';
 $consoleMessages = require 'ext/console.message.php';
 $serviceManager  = require 'ext/servicemanager.php';
 $speciality      = require 'speciality.types.php';
+$view = require 'view.config.php';
 
 return [
     'caches' => [
@@ -79,18 +80,7 @@ return [
             'Gear\Controller\Db'                 => 'Gear\Database\Controller\DbControllerFactory'
         ***REMOVED***,
     ***REMOVED***,
-    'view_manager' => [
-        'template_path_stack' => [
-            'composer' => __DIR__.'/../src/Gear/Module/Composer/view',
-            'gear' => __DIR__ . '/../view',
-            'template' => __DIR__ . '/../view',
-        ***REMOVED***,
-
-        'factories' => [
-            'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
-            'str' => 'Gear\Factory\StrHelperFactory'
-        ***REMOVED***
-    ***REMOVED***,
+    'view_manager' => $view,
     'db' => [
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=gear;host=localhost',
