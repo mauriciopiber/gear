@@ -40,6 +40,10 @@ class DoctrineService extends ScriptService
         $cmd = $this->getDoctrineModule().' ';
         $cmd .= sprintf('orm:convert-mapping --namespace="%s\\\Entity\\\" ', $this->getModule()->getModuleName());
         $cmd .= sprintf('--force  --from-database annotation %s', $entityDir);
+
+        echo "\n";
+        echo $cmd;
+        echo "\n";
         return $cmd;
     }
 
@@ -54,6 +58,10 @@ class DoctrineService extends ScriptService
         $cmd = $this->getDoctrineModule().' ';
         $cmd .= 'orm:generate-entities';
         $cmd .= sprintf(' %s --generate-annotations=true', $entityDir);
+
+        echo "\n";
+        echo $cmd;
+        echo "\n";
         return $cmd;
     }
 }

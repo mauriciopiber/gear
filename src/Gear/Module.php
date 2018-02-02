@@ -80,21 +80,10 @@ class Module implements
         $service->setLoadedFixtures($merge);
     }
 
-    public function setUpAcl($event)
+    public function loadModules($event)
     {
-        $loadedModules = $this->getModuleManager()->getLoadedModules();
-        $merge = [***REMOVED***;
-
-        foreach ($loadedModules as $moduleName => $module) {
-            if (method_exists($module, 'getConfig')) {
-                $config = $module->getConfig();
-                if (isset($config['acl'***REMOVED***[$moduleName***REMOVED***) && $config['acl'***REMOVED***[$moduleName***REMOVED*** === true) {
-                    $merge[$moduleName***REMOVED*** = $module;
-                }
-            }
-        }
         $service = $event->getTarget();
-        $service->setLoadedModules($merge);
+        $service->setLoadedModules($this->getModuleManager()->getLoadedModules());
     }
 
     public function setUpGearAdmin()
@@ -148,7 +137,7 @@ class Module implements
         $this->setModuleManager($moduleManager);
         $eventManager = $moduleManager->getEventManager();
         $shareManager = $eventManager->getSharedManager();
-        $shareManager->attach('Gear\Service\AclService', 'loadModules', [$this, 'setUpAcl'***REMOVED***);
+        $shareManager->attach('Gear\Mvc\Entity\EntityService', 'loadModules', [$this, 'loadModules'***REMOVED***);
         $shareManager->attach('Gear\Mvc\Fixture\FixtureService', 'loadFixtures', [$this, 'loadFixtures'***REMOVED***);
     }
 
