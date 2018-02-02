@@ -440,12 +440,6 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         $this->createGitIgnore($this->type);
 
-        /* @var $configService \Gear\Service\Mvc\ConfigService */
-
-
-
-
-
         $this->getReadme();
         $this->getConfigDocs();
         $this->getIndexDocs();

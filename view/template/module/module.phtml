@@ -20,20 +20,6 @@ class Module
     const LOCATION = __DIR__;
 
     /**
-     * Init module settings
-     *
-     * @param ModuleManager $moduleManager Module Manager
-     *
-     * @return void
-     */
-    public function init(ModuleManager $moduleManager)
-    {
-        $moduleManager->getEventManager()->getSharedManager()->attach(__NAMESPACE__, 'dispatch', function ($event) {
-            $event->getTarget()->layout('layout/<?php echo $this->layout;?>');
-        });
-    }
-
-    /**
      * Config executed on Bootstrap
      *
      * @param MvcEvent $mvcEvent Mvc Event
@@ -62,6 +48,26 @@ class Module
                   ->setCurrencyPattern('R$ #');
             }
         });
+        $app->getEventManager()->attach('dispatch', [$this, 'setLayout'***REMOVED***);
+    }
+
+    /**
+     * @param  MvcEvent $e The MvcEvent instance
+     * @return void
+     */
+    public function setLayout(MvcEvent $e)
+    {
+        $matches    = $e->getRouteMatch();
+        $controller = $matches->getParam('controller');
+        if (false === strpos($controller, __NAMESPACE__)) {
+            // not a controller from this module
+            return;
+        }
+
+        // Set the layout template
+        $viewModel = $e->getViewModel();
+        //var_dump(get_class_methods($viewModel));die();
+        $viewModel->setTemplate('layout/gear-admin-interno');
     }
 
     /**
