@@ -27,6 +27,26 @@ abstract class AbstractMvc extends AbstractJsonService
     use TraitServiceTrait;
     use FactoryServiceTrait;
 
+
+    public function getModuleNamespace()
+    {
+        if (!strpos($this->getModule()->getModuleName(), '\\') !== false) {
+            return $this->str('class', $this->getModule()->getModuleName());
+        }
+
+        $module = $this->getModule()->getModuleName();
+
+        $pieces = explode('\\', $module);
+        $fixStack = [***REMOVED***;
+
+        foreach ($pieces as $index => $piece) {
+            $fixStack[***REMOVED*** = $this->str('class', $piece);
+        }
+
+        return implode('\\', $fixStack);
+    }
+
+
     public function forceDb($data, $type)
     {
         if (($data instanceof DbObject) === false && ($data instanceof SrcObject && $data->getDb() != null) === false) {

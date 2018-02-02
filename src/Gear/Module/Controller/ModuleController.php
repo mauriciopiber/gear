@@ -18,6 +18,8 @@ use Gear\Autoload\ComposerAutoloadTrait;
  */
 class ModuleController extends AbstractConsoleController
 {
+    protected $console;
+
     use ComposerAutoloadTrait;
     use ApplicationConfigTrait;
     use CacheServiceTrait;
@@ -27,6 +29,19 @@ class ModuleController extends AbstractConsoleController
     use DiagnosticServiceTrait;
     use ConstructServiceTrait;
     use ModuleUpgradeTrait;
+
+    public function setConsoleAdapter($console)
+    {
+        $this->console = $console;
+    }
+
+    public function getConsoleAdapter()
+    {
+        if (!isset($this->console)) {
+            $this->console = $this->getServiceLocator()->get('console');
+        }
+        return $this->console;
+    }
 
     public function constructAction()
     {
@@ -38,7 +53,7 @@ class ModuleController extends AbstractConsoleController
 
         $data = $this->getConstructService()->construct($module, $file);
 
-        $this->console = $this->getServiceLocator()->get('console');
+        $this->console = $this->getConsole();
 
         if ($data->hasCreated()) {
             foreach ($data->getCreated() as $msg) {
@@ -120,10 +135,9 @@ class ModuleController extends AbstractConsoleController
         $moduleName      = $this->getRequest()->getParam('module');
         $basepath        = $this->getRequest()->getParam('basepath');
         $staging         = $this->getRequest()->getParam('staging', null);
-        $namespace       = $this->getRequest()->getParam('namespace', null);
 
         $module = $this->getModuleService();
-        $module->moduleAsProject($moduleName, $basepath, $type, $staging, $namespace);
+        $module->moduleAsProject($moduleName, $basepath, $type, $staging);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\FormTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
@@ -13,7 +13,7 @@ use Gear\Column\ColumnManager;
 /**
  * @group db-form
  */
-class FormServiceTest extends AbstractTestCase
+class FormServiceTest extends TestCase
 {
     use UtilTestTrait;
     use FormDataTrait;

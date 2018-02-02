@@ -230,6 +230,26 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->dirService = $dirService;
     }
 
+
+    public function getModuleNamespace()
+    {
+        if (!strpos($this->getModule()->getModuleName(), '\\') !== false) {
+            return $this->str('class', $this->getModule()->getModuleName());
+        }
+
+        $module = $this->getModule()->getModuleName();
+
+        $pieces = explode('\\', $module);
+        $fixStack = [***REMOVED***;
+
+        foreach ($pieces as $index => $piece) {
+            $fixStack[***REMOVED*** = $this->str('class', $piece);
+        }
+
+        return implode('\\', $fixStack);
+    }
+
+
     public function addModuleToProject()
     {
         $this->getApplicationConfig()->addModuleToProject();
@@ -286,18 +306,14 @@ class ModuleService implements ModuleProjectConnectorInterface
         $module,
         $location,
         $type = 'web',
-        $staging = null,
-        $namespace = null)
-    {
+        $staging = null
+    ) {
 
-        $this->namespace = $namespace;
         $this->type = $type;
         $this->staging = $staging;
 
-        //var_dump($module, $location, $type, $staging);die();
 
         $moduleStructure = $this->getModule();
-        //module structure
 
         if (!empty($location)) {
             $str = $this->getStringService();
@@ -549,7 +565,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     {
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
-        $file->setOptions(['module' => $this->str('namespace', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setOptions(['module' => $this->getModuleNamespace()***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
         return $file->render();

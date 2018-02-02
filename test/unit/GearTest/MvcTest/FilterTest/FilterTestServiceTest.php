@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\FilterTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -16,7 +16,7 @@ use Gear\Column\ColumnManager;
 /**
  * @group db-filter
  */
-class FilterTestServiceTest extends AbstractTestCase
+class FilterTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use FilterDataTrait;

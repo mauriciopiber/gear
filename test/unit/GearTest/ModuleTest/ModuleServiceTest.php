@@ -113,6 +113,30 @@ class ModuleServiceTest extends TestCase
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
     }
 
+    public function getNamespaces() {
+
+        return [
+            ['MyNamespace', 'MyNamespace'***REMOVED***,
+            ['MyBigNamespace', 'MyBigNamespace'***REMOVED***,
+            ['MyBig\Namespace', 'MyBig\Namespace'***REMOVED***,
+            ['MyBig', 'MyBig'***REMOVED***,
+            ['My\Big', 'My\Big'***REMOVED***,
+
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider getNamespaces
+     * @group namespaces
+     */
+    public function testModuleNamespace($data, $expected)
+    {
+        $this->module->getModuleName()->willReturn($data)->shouldBeCalled();
+        $this->createModuleRealFiles();
+        $this->assertEquals($expected, $this->moduleService->getModuleNamespace());
+
+    }
+
     /**
      * Cria Zend\View\Renderer\PhpRenderer
      */
@@ -288,7 +312,7 @@ class ModuleServiceTest extends TestCase
     */
 
     /**
-     * @group p1p2
+     * @group cmap
      */
     public function testCreateModuleAsProjectWeb()
     {
@@ -740,6 +764,7 @@ class ModuleServiceTest extends TestCase
      * @group mod1
      * @group vamov
      * @group ppx1
+     * @group cmap
      */
     public function testCreateModuleAsProjectCli()
     {

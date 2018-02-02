@@ -51,8 +51,7 @@ class ComposerService extends AbstractMvc
         return $this->getFileCreator()->createFile(
             'template/module/composer-as-project.json.phtml',
             array(
-                //'namespace' => $this->str('namespace', $this->getModule()->getModuleName()),
-                'module' => str_replace('\\', '\\\\', $this->str('namespace', $this->getModule()->getModuleName())),
+                'module' => $this->getModuleNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'require' => $this->getArrayService()->toJson($edge['require'***REMOVED***, 2),
                 'requireDev' => $this->getArrayService()->toJson($edge['require-dev'***REMOVED***, 2)

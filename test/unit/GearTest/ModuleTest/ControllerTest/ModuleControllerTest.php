@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\ControllerTest;
 
-use GearTest\ControllerTest\AbstractConsoleControllerTestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
 use Zend\Mvc\Router\Console\RouteMatch;
 use Zend\Mvc\MvcEvent;
@@ -15,7 +15,7 @@ use Gear\Module\ConstructStatusObject;
  * @group ModuleController
  * @group Controller
  */
-class ModuleControllerTest extends AbstractConsoleControllerTestCase
+class ModuleControllerTest extends TestCase
 {
     public function setUp()
     {
@@ -27,7 +27,10 @@ class ModuleControllerTest extends AbstractConsoleControllerTestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-        $this->controller->setServiceLocator($this->bootstrap->getServiceLocator());
+
+        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+
+        $this->controller->setConsoleAdapter($console->reveal());
     }
 
     public function testNotFound()

@@ -110,8 +110,6 @@ abstract class AbstractCodeTest extends AbstractCodeBase
             $this->getDirService()->mkDeepDir(implode('/', $psr), $this->getModule()->getPublicJsSpecUnitFolder());
             $this->getDirService()->mkDir($location);
 
-            echo $location."\n";
-
             return $location;
         }
     }

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\StepTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Db\Db;
@@ -19,7 +19,7 @@ use Gear\Column\ColumnManager;
  * @group Spec
  * @group Service
  */
-class StepTest extends AbstractTestCase
+class StepTest extends TestCase
 {
     use AllColumnsDbTableTrait;
 

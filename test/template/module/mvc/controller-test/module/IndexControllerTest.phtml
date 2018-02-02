@@ -36,7 +36,7 @@ class IndexControllerTest extends TestCase
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = \MyModule\Module::LOCATION.'/../schema/module.json';
     }
 
     public function testIndexAction()

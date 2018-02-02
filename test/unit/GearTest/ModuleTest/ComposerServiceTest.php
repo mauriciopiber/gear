@@ -91,9 +91,9 @@ class ComposerServiceTest extends TestCase
         "mpiber/unit-2": "*2.0.0"
     },
     "autoload" : {
-        "psr-0" : {
-            "Gearing" : "src",
-            "GearingTest" : "test/unit"
+        "psr-4" : {
+            "Gearing\\\\" : "src",
+            "Gearing\\\\Test\\\\" : "test/unit"
         }
     },
     "repositories" : [

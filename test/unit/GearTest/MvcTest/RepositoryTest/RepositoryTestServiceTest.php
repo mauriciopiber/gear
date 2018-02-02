@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\RepositoryTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
@@ -13,7 +13,7 @@ use Gear\Column\ColumnManager;
  * @group src-mvc
  * @group db-repository
  */
-class RepositoryTestServiceTest extends AbstractTestCase
+class RepositoryTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ScopeTrait;
