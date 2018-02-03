@@ -87,7 +87,7 @@ class TableControllerTest extends TestCase
         $this->controller->setTableService($this->tableService->reveal());
         $this->controller->setTableSearchForm($this->tableSearchForm->reveal());
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()

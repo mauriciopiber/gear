@@ -28,7 +28,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         parent::setUp();
 <?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
 
-        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()
