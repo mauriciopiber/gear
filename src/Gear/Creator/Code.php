@@ -305,7 +305,8 @@ EOS;
      */
     public function getConstructor($data)
     {
-        if (count($data->getDependency())==0) {
+        $dependency = $data->getDependency();
+        if (!is_array($dependency) || count($dependency)==0) {
             $html = $this->getConstructorDocs($data);
             $html .= '    public function __construct(';
             return $this->constructEmptyConstructor($html);

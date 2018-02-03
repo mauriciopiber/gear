@@ -57,7 +57,7 @@ class DoctrineService extends ScriptService
         $entityDir = $this->getModule()->getSrcFolder().'/';
         $cmd = $this->getDoctrineModule().' ';
         $cmd .= 'orm:generate-entities';
-        $cmd .= sprintf(' %s --generate-annotations=true', $entityDir);
+        $cmd .= sprintf(' %s --generate-annotations=true --generate-methods=true', $entityDir);
 
         echo "\n";
         echo $cmd;

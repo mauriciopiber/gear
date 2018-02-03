@@ -153,9 +153,9 @@ class FixtureService extends AbstractMvc
 
         $userName = 'GearAdmin\\Fixture\\LoadUser';
 
-        $count = count($foreign);
+        $count = is_array($foreign) ? count($foreign) : 0;
 
-        if ($count == 0) {
+        if ($count === 0) {
             $fixture = $this->quote($userName);
         } else {
             $fixture = PHP_EOL.self::INDENT_12.$this->quote($userName).self::DEPENDENCY_SEPARATOR.PHP_EOL;

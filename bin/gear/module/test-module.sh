@@ -131,7 +131,7 @@ fi
 if [ "$cmd" == "reconstruct" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "reconstruct" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}" "0" "0"
-    /bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"	
+    #/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"	
 	exit 0	
 fi
 
