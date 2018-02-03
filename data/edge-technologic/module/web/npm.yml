@@ -44,4 +44,5 @@ devDependencies:
   q: "latest"
   require-dir: "~0.3"
   run-sequence: "~1.0"
+  fs-extra: "^5.0.0"
   yargs: "~3.0"
