@@ -42,8 +42,10 @@ use GearJson\Src\SrcTypesInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
+use GearBase\Util\String\StringService;
+use GearBase\Util\String\StringServiceTrait;
 
-class EntityService extends AbstractMvc implements EventManagerAwareInterface
+class EntityService extends AbstractMvc
 {
     use ModuleAwareTrait;
     use SrcServiceTrait;
@@ -55,6 +57,7 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
     use GlobServiceTrait;
     use EntityObjectFixerTrait;
     use DoctrineServiceTrait;
+    use StringServiceTrait;
 
     protected $doctrineService;
 
@@ -76,8 +79,10 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
         SchemaService $schema,
         DirService $dirService,
         GlobService $globService,
-        EntityObjectFixer $entityObjectFixer
+        EntityObjectFixer $entityObjectFixer,
+        StringService $stringService
     ) {
+        $this->stringService = $stringService;
         $this->module = $module;
         $this->doctrineService = $doctrine;
         $this->scriptService = $script;
@@ -90,25 +95,6 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
         $this->globService = $globService;
         $this->entityObjectFixer = $entityObjectFixer;
     }
-
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers(array(
-            __CLASS__,
-            get_called_class()
-        ));
-        $this->event = $events;
-        return $this;
-    }
-
-    public function getEventManager()
-    {
-        if (null === $this->event) {
-            $this->setEventManager(new EventManager());
-        }
-        return $this->event;
-    }
-
 
     public function createEntities(array $srcs)
     {
@@ -207,7 +193,13 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
      */
     public function excludeNamespaces()
     {
-        $config = require $this->getModule()->getMainFolder().'/config/application.config.php';
+        $file = $this->getModule()->getMainFolder().'/config/application.config.php';
+
+        if (!is_file($file)) {
+            throw new \Exception(sprintf('Missing File Exception %s', $file));
+        }
+
+        $config = require $file;
 
         if (empty($config['modules'***REMOVED***)) {
             throw new \Exception('Missing loaded modules');
@@ -248,10 +240,12 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
         $cmd = sprintf(
             $template,
             $this->getModule()->getSrcFolder(),
-            $this->getModule()->getModuleName(),
+            $this->getResolveModule(),
             $this->getModule()->getEntityFolder()
         );
-        exec($cmd);
+
+
+        $this->getScriptService()->run($cmd);
     }
 
 
@@ -298,83 +292,4 @@ class EntityService extends AbstractMvc implements EventManagerAwareInterface
 
         return $names;
     }
-
-    protected $loadedModules;
-
-    public function getLoadedModules()
-    {
-        return $this->loadedModules;
-    }
-
-    public function setLoadedModules($loadedModules)
-    {
-        $this->loadedModules = $loadedModules;
-        return $this;
-    }
-
-
-
-    /**
-     * Exclude mapping created for others namespaces.
-
-    public function excludeMapping()
-    {
-        $ymlFiles = $this->getModule()->getSrcFolder();
-
-        $this->getEventManager()->trigger('loadModules', $this);
-        $modules = $this->getLoadedModules();
-
-        if (empty($modules)) {
-            throw new \Exception('Missing loaded modules');
-        }
-
-        foreach($modules as $module) {
-            $moduleName = explode('\\', get_class($module))[0***REMOVED***;
-
-            if (is_dir($ymlFiles.'/'.$moduleName)) {
-                $this->getDirService()->rmDir($v);
-            }
-        }
-
-        return true;
-    }
-*/
-    /**
-     * Exclude entities creaded from Database but that isn't part of Gear.
-     * @param array $names
-
-    public function excludeEntities($names = array())
-    {
-        $names = array_merge($this->getNames(), $names);
-
-        $entity = $this->getModule()->getEntityFolder();
-
-        var_dump($entity);die();
-
-        /*
-        $list = $this->getGlobService()->list($entitys.'/*.php');
-
-        if (empty($list)) {
-            return true;
-        }
-
-        foreach ($list as $entityFullPath) {
-            $entity = explode('/', $entityFullPath);
-            $name = explode('.', end($entity));
-
-            if (!in_array($name[0***REMOVED***, $names)) {
-                unlink($entityFullPath);
-                if (is_file($entityFullPath.'~')) {
-                    unlink($entityFullPath.'~');
-                }
-            } else {
-                if (is_file($entityFullPath.'~')) {
-                    unlink($entityFullPath.'~');
-                }
-            }
-        }
-
-        return true;
-    }
-    */
 }

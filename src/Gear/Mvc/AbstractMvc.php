@@ -27,7 +27,33 @@ abstract class AbstractMvc extends AbstractJsonService
     use TraitServiceTrait;
     use FactoryServiceTrait;
 
+    /**
+     * Resolve all Modules Namespaces to PSR-4 folders
+     */
+    public function getResolveModule()
+    {
+        if (!strpos($this->getModule()->getModuleName(), '\\') !== false) {
 
+            return $this->str('class', $this->getModule()->getModuleName());
+        }
+
+        $module = $this->getModule()->getModuleName();
+
+        $pieces = explode('\\', $module);
+        $fixStack = [***REMOVED***;
+
+        foreach ($pieces as $index => $piece) {
+            if (empty($piece)) {
+                continue;
+            }
+            $fixStack[***REMOVED*** = $this->str('class', $piece);
+        }
+        return implode('/', $fixStack);
+    }
+
+    /**
+     * Fix all Modules Namespaces to PSR-4
+     */
     public function getModuleNamespace()
     {
         if (!strpos($this->getModule()->getModuleName(), '\\') !== false) {
@@ -40,10 +66,13 @@ abstract class AbstractMvc extends AbstractJsonService
         $fixStack = [***REMOVED***;
 
         foreach ($pieces as $index => $piece) {
+            if (empty($piece)) {
+                continue;
+            }
             $fixStack[***REMOVED*** = $this->str('class', $piece);
         }
 
-        return implode('\\', $fixStack);
+        return implode('\\\\', $fixStack);
     }
 
 
