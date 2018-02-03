@@ -21,7 +21,8 @@ class EntityServiceFactory implements FactoryInterface
             $serviceLocator->get('GearJson\Schema'),
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('Gear\Util\Glob\GlobService'),
-            $serviceLocator->get('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer')
+            $serviceLocator->get('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer'),
+            $serviceLocator->get('GearBase\Util\String')
         );
     }
 }

@@ -29,6 +29,7 @@ class EntityServiceTest extends TestCase
         $this->schemaLoaderService = $this->prophesize('GearJson\Schema\Loader\SchemaLoaderService');
         $this->dirService = $this->prophesize('GearBase\Util\Dir\DirService');
         $this->globService = $this->prophesize('Gear\Util\Glob\GlobService');
+        $this->stringService = new \GearBase\Util\String\StringService();
 
 
         $this->entityFixerObject = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');
@@ -37,6 +38,7 @@ class EntityServiceTest extends TestCase
 
         $this->root = vfsStream::setUp('module');
         vfsStream::newDirectory('src')->at($this->root);
+        vfsStream::newDirectory('config')->at($this->root);
         vfsStream::newDirectory('src/'.$this->moduleName)->at($this->root);
         vfsStream::newDirectory('src/'.$this->moduleName.'/Entity')->at($this->root);
 
@@ -51,60 +53,44 @@ class EntityServiceTest extends TestCase
             $this->schemaService->reveal(),
             $this->dirService->reveal(),
             $this->globService->reveal(),
-            $this->entityFixerObject->reveal()
+            $this->entityFixerObject->reveal(),
+            $this->stringService
         );
     }
-
-    /**
-     * @group me
-     */
-    public function testNoMappingToExcludeOnExcludeMapping()
-    {
-        //$this->assertFileExists(vfsStream::url('module/src/MyModule/Entity'));
-
-        $this->module->getSrcFolder()->willReturn(vfsStream::url('module/src'))->shouldBeCalled();
-
-        $this->globService->list(vfsStream::url('module/src').'/*')->willReturn([***REMOVED***);
-        //$this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
-
-        $this->assertTrue($this->service->excludeMapping());
-    }
-
 
     /**
      * @group me1
      */
     public function testGetNames()
     {
-        //$this->schemaService->__extractObject('src')->willReturn([***REMOVED***)->shouldBeCalled();
-        //$this->schemaService->__extractObject('db')->willReturn([***REMOVED***)->shouldBeCalled();
-        //$this->schemaService->__extract('db')->willReturn([***REMOVED***)->shouldBeCalled();
-        //$this->schemaService->__extract('src')->willReturn([***REMOVED***)->shouldBeCalled();
-
         $this->schemaService->getSchemaLoaderService()->willReturn($this->schemaLoaderService->reveal())->shouldBeCalled();
 
         $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
         $this->assertEquals([***REMOVED***, $this->service->getNames());
     }
 
-
-    /**
-     * @group me
+        /**
+     * @group f2x
      */
-    public function testExcludeEntities()
+    public function testCreateEntitiesPSR4()
     {
-        $this->module->getEntityFolder()->willReturn(vfsStream::url('module/src/MyModule/Entity'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('Gear\Module')->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $this->schemaService->getSchemaLoaderService()->willReturn($this->schemaLoaderService->reveal())->shouldBeCalled();
-        $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
-        $this->globService->list(vfsStream::url('module/src/MyModule/Entity').'/*.php')->willReturn([***REMOVED***);
+        file_put_contents(vfsStream::url('module/config/application.config.php'), <<<EOS
+<?php
+return [
+    'modules' => [
+        'MyModule'
+    ***REMOVED***
+***REMOVED***;
 
-        $this->assertTrue($this->service->excludeEntities());
-    }
+EOS
+            );
 
-    public function testCreateEntities()
-    {
+        $this->scriptService->run('mv vfs://module/src/Gear/Module/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
+
         $srcs = [
             new Src([
                 'name' => 'EntityOne',
@@ -118,7 +104,7 @@ class EntityServiceTest extends TestCase
 
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcFolder()->willReturn(vfsStream::url('module/src'))->shouldBeCalled();
-        $this->module->getEntityFolder()->willReturn(vfsStream::url('module/src/MyModule/Entity'))->shouldBeCalled();
+        $this->module->getEntityFolder()->willReturn(vfsStream::url('module/src/Entity'))->shouldBeCalled();
 
         $this->schemaService->getSchemaLoaderService()->willReturn($this->schemaLoaderService->reveal())->shouldBeCalled();
         $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
@@ -130,6 +116,62 @@ class EntityServiceTest extends TestCase
 
         $this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
         $this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
+
+        $this->service->setModule($this->module->reveal());
+
+        $this->assertTrue($this->service->createEntities($srcs));
+        //$this->assertTrue(false);
+    }
+
+    /**
+     * @group f2x
+     */
+    public function testCreateEntities()
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+
+
+        file_put_contents(vfsStream::url('module/config/application.config.php'), <<<EOS
+<?php
+return [
+    'modules' => [
+        'MyModule'
+    ***REMOVED***
+***REMOVED***;
+
+EOS
+            );
+
+        $this->scriptService->run('mv vfs://module/src/MyModule/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
+
+        $srcs = [
+            new Src([
+                'name' => 'EntityOne',
+                'type' => 'Entity'
+            ***REMOVED***),
+            new Src([
+                'name' => 'EntityTwo',
+                'type' => 'Entity'
+            ***REMOVED***)
+        ***REMOVED***;
+
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getSrcFolder()->willReturn(vfsStream::url('module/src'))->shouldBeCalled();
+        $this->module->getEntityFolder()->willReturn(vfsStream::url('module/src/Entity'))->shouldBeCalled();
+
+        $this->schemaService->getSchemaLoaderService()->willReturn($this->schemaLoaderService->reveal())->shouldBeCalled();
+        $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
+
+
+        $this->doctrineService->getOrmConvertMapping()->willReturn('orm-convert-mapping')->shouldBeCalled();
+        $this->doctrineService->getOrmGenerateEntities()->willReturn('orm-generate-entities')->shouldBeCalled();
+
+
+        $this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
+        $this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
+
+        $this->service->setModule($this->module->reveal());
 
         $this->assertTrue($this->service->createEntities($srcs));
         //$this->assertTrue(false);

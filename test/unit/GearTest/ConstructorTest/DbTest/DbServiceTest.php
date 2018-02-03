@@ -87,6 +87,7 @@ class DbServiceTest extends TestCase
 
         $this->db = $this->prophesize('GearJson\Db\Db');
         $this->db->getTable()->willReturn($table)->shouldBeCalled();
+        $this->db->getNamespace()->willReturn($table);
 
         $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
 
@@ -153,6 +154,7 @@ class DbServiceTest extends TestCase
 
         $this->db = $this->prophesize('GearJson\Db\Db');
         $this->db->getTable()->willReturn($table)->shouldBeCalled();
+        $this->db->getNamespace()->willReturn($namespace);
 
         $this->module->getModuleName()->willReturn($module)->shouldBeCalled();
 
