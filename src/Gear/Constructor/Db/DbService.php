@@ -147,6 +147,7 @@ class DbService extends AbstractConstructor
             $this->getActionService()->create(
                 $module,
                 [
+                    'controllerNamespace' => ($db->getNamespace() !== null) ? $db->getNamespace().'\Controller' : 'Controller',
                     'controller' => $db->getTable().'Controller',
                     'name' => 'UploadImage'
                 ***REMOVED***,

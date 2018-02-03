@@ -94,7 +94,7 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
 
             $uploadFolder = $this->getModule()->getPublicUploadFolder().'/'.$this->str('url', $this->db->getTable());
             if (!is_dir($uploadFolder)) {
-                $this->getModule()->getDirService()->mkDir($uploadFolder);
+                $this->getDirService()->mkDir($uploadFolder);
             }
             $this->getModule()->writable($uploadFolder);
         }

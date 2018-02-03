@@ -39,8 +39,11 @@ use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Gear\Mvc\Entity\DoctrineServiceTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 use GearJson\Src\SrcTypesInterface;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManager;
 
-class EntityService extends AbstractMvc
+class EntityService extends AbstractMvc implements EventManagerAwareInterface
 {
     use ModuleAwareTrait;
     use SrcServiceTrait;
@@ -56,6 +59,11 @@ class EntityService extends AbstractMvc
     protected $doctrineService;
 
     protected $tableName;
+
+      /**
+     * @var EventManagerInterface
+     */
+    protected $event = null;
 
     public function __construct(
         BasicModuleStructure $module,
@@ -83,18 +91,29 @@ class EntityService extends AbstractMvc
         $this->entityObjectFixer = $entityObjectFixer;
     }
 
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $events->setIdentifiers(array(
+            __CLASS__,
+            get_called_class()
+        ));
+        $this->event = $events;
+        return $this;
+    }
+
+    public function getEventManager()
+    {
+        if (null === $this->event) {
+            $this->setEventManager(new EventManager());
+        }
+        return $this->event;
+    }
+
+
     public function createEntities(array $srcs)
     {
-        $doctrineService = $this->getDoctrineService();
-
-        $scriptService = $this->getScriptService();
-        $scriptService->run($doctrineService->getOrmConvertMapping());
-        $scriptService->run($doctrineService->getOrmGenerateEntities());
-
-        $this->excludeMapping();
-        $this->excludeEntities();
-
-        $this->fixEntities();
+        $this->runDoctrine();
+        $this->runReduce();
 
         foreach ($srcs as $src) {
             $this->getEntityTestService()->createEntityTest($src);
@@ -153,6 +172,8 @@ class EntityService extends AbstractMvc
         ) {
             //$uploadImage = $this->getTableService()->getTableObject(UploadImageTable::NAME);
 
+            /*
+           @TODO descomentar
             $src = $this->getSrcService()->create(
                 $this->getModule()->getModuleName(),
                 [
@@ -166,23 +187,86 @@ class EntityService extends AbstractMvc
             //$src->getDb()->setTable('UploadImage');
             //$src->getDb()->setTableObject($uploadImage);
             $this->createEntities([$src***REMOVED***);
+            */
             //$this->getServiceManager()->create($src);
         }
     }
 
+    public function runDoctrine()
+    {
+        $doctrineService = $this->getDoctrineService();
+        $scriptService = $this->getScriptService();
+        $scriptService->run($doctrineService->getOrmConvertMapping());
+        $this->moveEntity();
+        $scriptService->run($doctrineService->getOrmGenerateEntities());
+        $this->moveEntity();
+    }
+
+    /**
+     * Limpa os namespaces restantes
+     */
+    public function excludeNamespaces()
+    {
+        $config = require $this->getModule()->getMainFolder().'/config/application.config.php';
+
+        if (empty($config['modules'***REMOVED***)) {
+            throw new \Exception('Missing loaded modules');
+        }
+
+        foreach($config['modules'***REMOVED*** as $moduleName) {
+            if (
+                is_dir($this->getModule()->getSrcFolder().'/'.$moduleName)
+                && $moduleName !== $this->getModule()->getModuleName()
+            ) {
+                $this->getDirService()->rmDir($this->getModule()->getSrcFolder().'/'.$moduleName);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Limpa os mapping restantes
+     */
+    public function excludeMapping()
+    {
+        $names = $this->getNames();
+
+        $entity = $this->getModule()->getSrcFolder();
+
+        $fakeFolder = sprintf('%s/%s', $entity, $this->getModule()->getModuleName());
+
+        $this->getDirService()->rmDir($fakeFolder);
+    }
+
+    /**
+     * Move a entidade de PSR-0 para PSR-4
+     */
+    public function moveEntity()
+    {
+        $template = 'mv %s/%s/Entity/* %s/';
+        $cmd = sprintf(
+            $template,
+            $this->getModule()->getSrcFolder(),
+            $this->getModule()->getModuleName(),
+            $this->getModule()->getEntityFolder()
+        );
+        exec($cmd);
+    }
+
+
+    public function runReduce()
+    {
+        $this->excludeNamespaces();
+        $this->excludeMapping();
+        //$this->moveEntity();
+        $this->fixEntities();
+    }
 
     public function createDb()
     {
-        $doctrineService = $this->getDoctrineService();
-
-        $scriptService = $this->getScriptService();
-        $scriptService->run($doctrineService->getOrmConvertMapping());
-        $scriptService->run($doctrineService->getOrmGenerateEntities());
-
-        $this->excludeMapping();
-        $this->excludeEntities();
-
-        $this->fixEntities();
+        $this->runDoctrine();
+        $this->runReduce();
 
         $this->createEntityObject($this->src);
 
@@ -232,46 +316,42 @@ class EntityService extends AbstractMvc
 
     /**
      * Exclude mapping created for others namespaces.
-     */
+
     public function excludeMapping()
     {
         $ymlFiles = $this->getModule()->getSrcFolder();
 
+        $this->getEventManager()->trigger('loadModules', $this);
         $modules = $this->getLoadedModules();
 
+        if (empty($modules)) {
+            throw new \Exception('Missing loaded modules');
+        }
+
         foreach($modules as $module) {
-            var_dump(get_class($module));
-        }
+            $moduleName = explode('\\', get_class($module))[0***REMOVED***;
 
-        die();
-
-        $list = $this->getGlobService()->list($ymlFiles.'/*');
-
-        if (empty($list)) {
-            return true;
-        }
-
-        foreach ($list as $v) {
-            $entity = explode('/', $v);
-            if (end($entity)!==$this->getModule()->getModuleName()) {
-                 $this->getDirService()->rmDir($v);
+            if (is_dir($ymlFiles.'/'.$moduleName)) {
+                $this->getDirService()->rmDir($v);
             }
         }
 
         return true;
     }
-
+*/
     /**
      * Exclude entities creaded from Database but that isn't part of Gear.
      * @param array $names
-     */
+
     public function excludeEntities($names = array())
     {
         $names = array_merge($this->getNames(), $names);
 
-        $entitys = $this->getModule()->getEntityFolder();
+        $entity = $this->getModule()->getEntityFolder();
 
+        var_dump($entity);die();
 
+        /*
         $list = $this->getGlobService()->list($entitys.'/*.php');
 
         if (empty($list)) {
@@ -296,4 +376,5 @@ class EntityService extends AbstractMvc
 
         return true;
     }
+    */
 }

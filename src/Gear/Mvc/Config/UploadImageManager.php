@@ -81,7 +81,7 @@ class UploadImageManager extends AbstractConfigManager implements ModuleManagerI
                 $dir = $this->getModule()->getPublicUploadFolder().'/'.$sizeName;
 
                 if (!is_dir($dir)) {
-                    $this->getModule()->getDirService()->mkDir($dir);
+                    $this->getDirService()->mkDir($dir);
                 }
                 $this->getModule()->writable($dir);
             }

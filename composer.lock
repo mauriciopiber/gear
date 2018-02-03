@@ -1570,16 +1570,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.26",
+            "version": "5.7.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd"
+                "reference": "b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd-zip-3086ff.tar",
-                "reference": "7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd",
+                "url": "https://mirror.pibernetwork.com/dist/phpunit-phpunit-b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c-zip-802b3e.tar",
+                "reference": "b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c",
                 "shasum": ""
             },
             "require": {
@@ -1603,7 +1603,7 @@
                 "sebastian/global-state": "^1.1",
                 "sebastian/object-enumerator": "~2.0",
                 "sebastian/resource-operations": "~1.0",
-                "sebastian/version": "~1.0.3|~2.0",
+                "sebastian/version": "^1.0.6|^2.0.1",
                 "symfony/yaml": "~2.1|~3.0|~4.0"
             },
             "conflict": {
@@ -1648,7 +1648,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2017-12-17T06:14:38+00:00"
+            "time": "2018-02-01T05:50:59+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4848,30 +4848,30 @@
         },
         {
             "name": "zendframework/zend-permissions-rbac",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-permissions-rbac.git",
-                "reference": "4213a4889ae7d7607c7974124965d12d1c395115"
+                "reference": "c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-permissions-rbac-4213a4889ae7d7607c7974124965d12d1c395115-zip-4fb84c.tar",
-                "reference": "4213a4889ae7d7607c7974124965d12d1c395115",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-permissions-rbac-c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78-zip-de59de.tar",
+                "reference": "c10ad55e50f402bf14eb2eb9bc424dd9a44dfc78",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.23"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^5.7.15|| ^6.2.1",
+                "zendframework/zend-coding-standard": "~1.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev",
-                    "dev-develop": "2.6-dev"
+                    "dev-master": "2.6-dev",
+                    "dev-develop": "2.7-dev"
                 }
             },
             "autoload": {
@@ -4889,7 +4889,7 @@
                 "rbac",
                 "zf2"
             ***REMOVED***,
-            "time": "2015-06-03T14:05:54+00:00"
+            "time": "2018-02-01T09:55:50+00:00"
         },
         {
             "name": "zendframework/zend-progressbar",
@@ -5486,16 +5486,16 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.10.1",
+            "version": "2.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8"
+                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-010084ddbd33299bf51ea6f0e07f8f4e8bd832a8-zip-eccd7b.tar",
-                "reference": "010084ddbd33299bf51ea6f0e07f8f4e8bd832a8",
+                "url": "https://mirror.pibernetwork.com/dist/zendframework-zend-validator-38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9-zip-4b1418.tar",
+                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9",
                 "shasum": ""
             },
             "require": {
@@ -5530,8 +5530,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.10-dev",
-                    "dev-develop": "2.11-dev"
+                    "dev-master": "2.10.x-dev",
+                    "dev-develop": "2.11.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Validator",
@@ -5553,7 +5553,7 @@
                 "validator",
                 "zf2"
             ***REMOVED***,
-            "time": "2017-08-22T14:19:23+00:00"
+            "time": "2018-02-01T17:05:33+00:00"
         },
         {
             "name": "zendframework/zend-version",
@@ -5921,7 +5921,7 @@
             ***REMOVED***,
             "description": "PHPUnit Listener for measure time and memory usage",
             "homepage": "https://github.com/atrapalo/phpunit-memory-and-time-usage-listener",
-            "time": "2015-04-19T16:29:45+00:00"
+            "time": "2015-04-19 16:29:45"
         },
         {
             "name": "behat/behat",
@@ -6597,7 +6597,7 @@
                 "performance",
                 "profiling"
             ***REMOVED***,
-            "time": "2015-08-31T22:07:48+00:00"
+            "time": "2015-08-31 22:07:48"
         },
         {
             "name": "mauriciopiber/gear-base",
@@ -6647,16 +6647,16 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.77",
+            "version": "0.2.78",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "a60eae3f4b8b2a1ecfc169af46181cceb3fb166e"
+                "reference": "303a37e468e4e42501719be57515b95822c20e85"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.77-e938b6.tar",
-                "reference": "a60eae3f4b8b2a1ecfc169af46181cceb3fb166e",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.78-4e5608.tar",
+                "reference": "303a37e468e4e42501719be57515b95822c20e85",
                 "shasum": null
             },
             "require": {
@@ -6706,7 +6706,7 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2017-05-17T04:36:08+00:00"
+            "time": "2018-02-03T05:38:03+00:00"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
@@ -6754,16 +6754,16 @@
         },
         {
             "name": "mauriciopiber/gear-json",
-            "version": "0.2.68",
+            "version": "0.2.69",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-json.git",
-                "reference": "b772c0ab85051c0b07e094198e7c2bfa0397ab14"
+                "reference": "ee8944e2c1d6e266f473a040c118bc9ded4eb75a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.68-3ff97b.tar",
-                "reference": "b772c0ab85051c0b07e094198e7c2bfa0397ab14",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-json-0.2.69-69ea63.tar",
+                "reference": "ee8944e2c1d6e266f473a040c118bc9ded4eb75a",
                 "shasum": null
             },
             "require": {
@@ -6797,7 +6797,7 @@
                     "GearJson": "src"
                 }
             },
-            "time": "2017-11-03T16:18:10+00:00"
+            "time": "2018-02-03T01:17:18+00:00"
         },
         {
             "name": "mauriciopiber/gear-version",
