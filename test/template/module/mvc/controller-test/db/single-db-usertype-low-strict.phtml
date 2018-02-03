@@ -67,7 +67,7 @@ class SingleDbTableControllerTest extends TestCase
         $this->controller->getPluginManager()
             ->setService('zfcUserAuthentication', $this->auth);
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()

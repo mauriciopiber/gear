@@ -47,7 +47,7 @@ class SingleDbTableControllerTest extends TestCase
         $this->controller->setSingleDbTableService($this->singleDbTableService->reveal());
         $this->controller->setSingleDbTableSearchForm($this->singleDbTableSearchForm->reveal());
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()
