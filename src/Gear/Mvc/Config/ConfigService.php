@@ -130,19 +130,41 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
                 $this->getNavigationManager()->module($controller);
                 $this->getViewHelperManager()->module($controller);
                 $this->getUploadImageManager()->module($controller);
-
+                $this->getDbConfig();
+                $this->getDoctrineConfig();
+                $this->getControllerManager()->module($controller);
+                $this->getControllerPluginManager()->module($controller);
+                $this->getCacheConfig();
+                $this->getTranslatorConfig();
+                $this->getServiceManager()->module();
             case 'cli':
                 $this->getConsoleRouterManager()->module($controller);
+                $this->getDbConfig();
+                $this->getDoctrineConfig();
+                $this->getControllerManager()->module($controller);
+                $this->getControllerPluginManager()->module($controller);
+                $this->getCacheConfig();
+                $this->getTranslatorConfig();
+                $this->getServiceManager()->module();
+                break;
+
+            case 'api':
+                $this->getViewConfig();
+                $this->getRouterManager()->module($controller);
+                $this->getDbConfig();
+                $this->getDoctrineConfig();
+                $this->getControllerManager()->module($controller);
+                $this->getControllerPluginManager()->module($controller);
+                $this->getCacheConfig();
+                $this->getServiceManager()->module();
+                break;
+
+            case 'src':
+                $this->getServiceManager()->module();
                 break;
         }
 
-        $this->getDbConfig();
-        $this->getDoctrineConfig();
-        $this->getControllerManager()->module($controller);
-        $this->getControllerPluginManager()->module($controller);
-        $this->getCacheConfig();
-        $this->getTranslatorConfig();
-        $this->getServiceManager()->module();
+
 
 
         return true;
@@ -178,7 +200,7 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
         }
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/config/module.config.%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/config/module-config/module.config.%s.phtml', $type));
         $file->setOptions($options);
         $file->setFileName('module.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());

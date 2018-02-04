@@ -545,6 +545,11 @@ function Gear_Module_Execute_Ant
         cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd unit-coverage-ci
         return
     fi
+    
+    if [ "$type" == "src" ***REMOVED***; then
+        cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd unit
+        return
+    fi
    
     cd $modulePath && ant prepare parallel-lint phpcs phpmd phpcpd jshint unit-coverage-ci karma protractor
     return

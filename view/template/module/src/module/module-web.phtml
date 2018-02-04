@@ -1,0 +1,149 @@
+namespace <?php echo $this->module?>;
+
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
+use Zend\View\ViewEvent;
+use Zend\View\Renderer\PhpRenderer;
+
+/**
+ * PHP Version 5
+ *
+ * @category Module
+ * @package <?php echo $this->module.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class Module
+{
+    const LOCATION = __DIR__;
+
+    /**
+     * Config executed on Bootstrap
+     *
+     * @param MvcEvent $mvcEvent Mvc Event
+     *
+     * @return void
+     */
+    public function onBootstrap(MvcEvent $mvcEvent)
+    {
+        $translator = $mvcEvent->getApplication()->getServiceManager()->get('translator');
+        $translator->setLocale('pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/pt_BR.php', 'default', 'pt_BR');
+        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/route/pt_BR.php', 'default', 'pt_BR');
+        AbstractValidator::setDefaultTranslator($translator);
+
+        $app = $mvcEvent->getTarget();
+        $app->getEventManager()->attach('route', array($this, 'onPreRoute'), 100);
+
+
+        $events = $mvcEvent->getApplication()->getEventManager();
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, function ($event) {
+            $renderer = $event->getRenderer();
+            if ($renderer instanceof PhpRenderer) {
+                $renderer->plugin("currencyformat")->setCurrencyCode("BRL")
+                  ->setLocale('pt_BR')
+                  ->setCurrencyPattern('R$ #');
+            }
+        });
+        $app->getEventManager()->attach('dispatch', [$this, 'setLayout'***REMOVED***);
+    }
+
+    /**
+     * @param  MvcEvent $e The MvcEvent instance
+     * @return void
+     */
+    public function setLayout(MvcEvent $e)
+    {
+        $matches    = $e->getRouteMatch();
+        $controller = $matches->getParam('controller');
+        if (false === strpos($controller, __NAMESPACE__)) {
+            // not a controller from this module
+            return;
+        }
+
+        // Set the layout template
+        $viewModel = $e->getViewModel();
+        //var_dump(get_class_methods($viewModel));die();
+        $viewModel->setTemplate('layout/gear-admin-interno');
+    }
+
+    /**
+     * Event before Route
+     *
+     * @param MvcEvent $event Mvc Event
+     *
+     * @return void
+     */
+    public function onPreRoute(MvcEvent $event)
+    {
+        $app     = $event->getTarget();
+        $request = $app->getRequest();
+
+        if (!$request instanceof \Zend\Console\Request) {
+            $serviceManager = $app->getServiceManager();
+            $serviceManager->get('router')->setTranslator($serviceManager->get('translator'));
+        }
+    }
+
+    /**
+     * Return default autoloader config
+     *
+     * @return array
+     */
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/../src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
+
+    /**
+     * Return module configurations
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+
+    /**
+     * Create Log Errors for exceptions.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return array
+     */
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Zend\Log\Logger' => function () {
+                    $logger = new \Zend\Log\Logger;
+                    $writer = new \Zend\Log\Writer\Stream(
+                        __DIR__.'/../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
+                    );
+                    $logger->addWriter($writer);
+                    return $logger;
+                },
+            ),
+        );
+    }
+
+    /**
+     * Return Class Location on filesystem.
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return __DIR__;
+    }
+}

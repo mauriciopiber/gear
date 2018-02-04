@@ -7,7 +7,7 @@ interface ModuleTypesInterface {
 
     const API = 'api';
 
-    const CONSOLE = 'console';
+    const CLI = 'cli';
 
-    const MOBILE = 'mobile';
+    const SRC = 'src';
 }
