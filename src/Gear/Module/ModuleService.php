@@ -310,6 +310,17 @@ class ModuleService implements ModuleProjectConnectorInterface
     ) {
 
         $this->type = $type;
+
+        if (!in_array($this->type, [
+            ModuleTypesInterface::CLI,
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::SRC,
+            ModuleTypesInterface::API,
+        ***REMOVED***)) {
+            throw new \Exception(sprintf('%s not a valid type'));
+        }
+
+
         $this->staging = $staging;
 
 
@@ -473,7 +484,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function createGitIgnore($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/gitignore-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/git-ignore/gitignore-%s.phtml', $type));
         $file->setOptions([***REMOVED***);
         $file->setFileName('.gitignore');
         $file->setLocation($this->getModule()->getMainFolder());
@@ -547,7 +558,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function createJenkinsFile($type = 'web')
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/jenkinsfile-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $type));
         $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
         $file->setLocation($this->getModule()->getMainFolder());
@@ -564,7 +575,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function createApplicationConfig($type = 'web')
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/config/application.config.%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/config/application-config/application.config.%s.phtml', $type));
         $file->setOptions(['module' => $this->getModuleNamespace()***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
@@ -652,7 +663,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function getScriptDevelopment($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/deploy-development-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/script/deploy-development/deploy-development-%s.phtml', $type));
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -722,7 +733,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function getScriptTesting($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/deploy-testing-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/script/deploy-testing/deploy-testing-%s.phtml', $type));
         $file->setOptions([
             'module' => $this->str('class', $this->getModule()->getModuleName()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
@@ -757,7 +768,11 @@ class ModuleService implements ModuleProjectConnectorInterface
     {
         $this->getScriptDevelopment($this->type);
         $this->getScriptTesting($this->type);
-        $this->getScriptLoad($this->type);
+
+        if (in_array($this->type, [ModuleTypesInterface::WEB, ModuleTypesInterface::API***REMOVED***)) {
+            $this->getScriptLoad($this->type);
+        }
+
     }
 
     /**

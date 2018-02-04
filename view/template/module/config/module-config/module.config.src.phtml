@@ -1,0 +1,18 @@
+namespace <?php echo $this->module;?>;
+
+$servicemanager     = require 'ext/servicemanager.config.php';
+$gear = [
+    'modules' => [
+        '<?php echo $this->moduleUrl;?>' => [
+            'version' => '0.1.0',
+            'acl' => false,
+            'name' => __NAMESPACE__,
+            'git' => 'git@bitbucket.org:mauriciopiber/<?php echo $this->moduleUrl;?>.git'
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***;
+
+return [
+    'gear'               => $gear,
+    'service_manager'    => $servicemanager,
+***REMOVED***;

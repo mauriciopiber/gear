@@ -1,7 +1,0 @@
-return array(
-    'invokables' => array(
-<?php if (count($this->controllers) > 0) : foreach ($this->controllers as $i => $v) : ?>
-        <?php echo sprintf('\'%s\' => \'%s\'', $i, $v).PHP_EOL;?>
-<?php endforeach; endif;?>
-    )
-);

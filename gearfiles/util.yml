@@ -1,11 +1,8 @@
-src:
-  2:
-    name: GearFile
-    type: Service
-    namespace: Integration\Component\GearFile
-    service: factories
-    dependency: 
-      0: 'Integration\Util\Persist\Persist'    
-      1: 
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String        
+module: Gear
+
+src:                     
+    1: 
+        name: ConsolePrompt
+        namespace: Util\Prompt
+        type: Service
+        service: factories
