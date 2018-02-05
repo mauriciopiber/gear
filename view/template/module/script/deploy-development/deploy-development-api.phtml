@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Deploy Develoment - Composer"
+
+ls -l vendor/autoload.php &> /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    composer update
+fi;
+
+echo "Deploy Develoment - VirtualHost"
+
+ls -l /etc/apache2/sites-enabled/<?php echo $this->moduleUrl;?>.gear.dev.conf > /dev/null
+
+if [ "$?" != "0" ***REMOVED***; then
+    vendor/bin/virtualhost  $(pwd) <?php echo $this->moduleUrl;?>.gear.dev DEVELOPMENT
+fi
+
+
+echo "Deploy Development - Database"
+sudo vendor/bin/install-db-module <?php echo $this->moduleUrl;?>.mysql.sql <?php echo $this->module.PHP_EOL;?>
+
