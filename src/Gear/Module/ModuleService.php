@@ -920,45 +920,18 @@ class ModuleService implements ModuleProjectConnectorInterface
     }
 
     /**
-     * Cria aliase para usar o modulo tanto como PSR-0 como parte do projeto, localizado em Module.php
-     *
-     * @return string
-
-    public function createModuleFileAlias()
-    {
-        $moduleFile = file_put_contents(
-            $this->getModule()->getMainFolder().'/Module.php',
-            '<?php require_once __DIR__.\'/src/'.$this->getModule()->getModuleName().'/Module.php\';'.PHP_EOL
-        );
-
-        return $moduleFile;
-    }
-    */
-
-    /**
      * Cria arquivo src/$module/Module.php, arquivo principal com bootstrap do módulo
      *
      * @return string
      */
     public function createModuleFile()
     {
-        /*
-        $request = $this->getServiceLocator()->get('request');
-
-        $layoutName = $request->getParam('layoutName', null);
-
-        if ($layoutName == 'auto') {
-            $layoutName = $this->str('url', $this->getModule()->getModuleName());
-        } elseif ($layoutName == null) {
-            $layoutName = 'gear-admin-interno';
-        }
-        */
         $layoutName = 'gear-admin-interno';
 
         $this->createModuleFileTest();
 
         $file = $this->getFileCreator();
-        $file->setTemplate('template/module/module.phtml');
+        $file->setTemplate(sprintf('template/module/src/module/module-%s.phtml', $this->type));
         $file->setOptions([
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
