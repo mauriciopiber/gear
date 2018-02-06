@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "4f65f42c6f3e83cb6bd31282b31a6165",
+    "content-hash": "1d8c9d88cb4f82a251da84465edf6800",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -6891,24 +6891,24 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.1.1",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
+                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/nikic-php-parser-4dd659edadffdc2143e4753df655d866dbfeedf0-zip-d00c8b.tar",
-                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "url": "https://mirror.pibernetwork.com/dist/nikic-php-parser-e57b3a09784f846411aa7ed664eedb73e3399078-zip-269d93.tar",
+                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": ">=5.4"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.0|~5.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -6916,7 +6916,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -6938,7 +6938,7 @@
                 "parser",
                 "php"
             ***REMOVED***,
-            "time": "2016-09-16T12:04:44+00:00"
+            "time": "2018-01-25T21:31:33+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -7839,6 +7839,48 @@
             "time": "2018-01-18T14:19:00+00:00"
         },
         {
+            "name": "theseer/directoryscanner",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theseer/DirectoryScanner.git",
+                "reference": "549aa9fdbc47d50365db42d9ade35fdef65f854c"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/theseer-directoryscanner-549aa9fdbc47d50365db42d9ade35fdef65f854c-zip-4be666.tar",
+                "reference": "549aa9fdbc47d50365db42d9ade35fdef65f854c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Arne Blankerts",
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
+                }
+            ***REMOVED***,
+            "description": "A recursive directory scanner and filter",
+            "time": "2015-03-24T21:28:20+00:00"
+        },
+        {
             "name": "theseer/fdomdocument",
             "version": "1.6.6",
             "source": {
@@ -7877,6 +7919,102 @@
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
             "time": "2017-06-30T11:53:12+00:00"
+        },
+        {
+            "name": "theseer/fxsl",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theseer/fXSL.git",
+                "reference": "a9246376c713156e55c080782d4104bb07d4b899"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/theseer-fxsl-a9246376c713156e55c080782d4104bb07d4b899-zip-261097.tar",
+                "reference": "a9246376c713156e55c080782d4104bb07d4b899",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "ext-xsl": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Arne Blankerts",
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
+                }
+            ***REMOVED***,
+            "description": "An XSL wrapper / extension to the PHP 5.x XSLTProcessor with Exception and extended Callback support",
+            "time": "2014-11-27T20:08:52+00:00"
+        },
+        {
+            "name": "theseer/phpdox",
+            "version": "0.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/theseer/phpdox.git",
+                "reference": "48c3b0fc8b6713a6fbb9b207288a96a8dd0e8f2a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.pibernetwork.com/dist/theseer-phpdox-48c3b0fc8b6713a6fbb9b207288a96a8dd0e8f2a-zip-1e80fe.tar",
+                "reference": "48c3b0fc8b6713a6fbb9b207288a96a8dd0e8f2a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-fileinfo": "*",
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "ext-tokenizer": "*",
+                "ext-xsl": "*",
+                "nikic/php-parser": "^3.1",
+                "php": ">=5.5",
+                "phpunit/php-timer": "^1.0",
+                "theseer/directoryscanner": "^1.3.0",
+                "theseer/fdomdocument": "^1.6",
+                "theseer/fxsl": "^1.1"
+            },
+            "bin": [
+                "phpdox"
+            ***REMOVED***,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ***REMOVED***
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ***REMOVED***,
+            "authors": [
+                {
+                    "name": "Arne Blankerts",
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
+                }
+            ***REMOVED***,
+            "description": "A fast Documentation generator for PHP Code using standard technology (SRC, DOCBLOCK, XML and XSLT) with event based processing",
+            "time": "2018-01-10T00:10:11+00:00"
         },
         {
             "name": "twig/twig",
