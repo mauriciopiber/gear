@@ -1,6 +1,6 @@
 files:
   0:
-    template: 'template/module/config/application.config.web.phtml'
+    template: 'template/module/config/application-config/application.config.web.phtml'
     options:
       module: 'MyModule'
     location: 'config'
@@ -29,14 +29,14 @@ files:
     template: 'template/module/init_autoloader.phtml'
     filename: 'init_autoloader.php'           
   6:
-    template: 'template/module/script/deploy-development-web.phtml'
+    template: 'template/module/script/deploy-development/deploy-development-web.phtml'
     options:
       module: 'MyModule'
       moduleUrl: 'my-module'
     location: 'script'
     filename: 'deploy-development.sh'    
   7:
-    template: 'template/module/script/deploy-testing-web.phtml'
+    template: 'template/module/script/deploy-testing/deploy-testing-web.phtml'
     options:
       module: 'my_module'
     location: 'script'
@@ -79,7 +79,7 @@ files:
     location: 'test/unit'
     filename: 'ModuleTest.php'
   12:
-    template: 'template/module/module.phtml'
+    template: 'template/module/src/module/module-web.phtml'
     options:
       module: 'MyModule'
       moduleUrl: 'my-module'
@@ -88,11 +88,11 @@ files:
     filename: 'Module.php'         
     
   13:
-    template: 'template/module/jenkinsfile-web.phtml'
+    template: 'template/module/jenkinsfile/jenkinsfile-web.phtml'
     options:
       moduleUrl: 'my-module'
     filename: 'Jenkinsfile'      
     
   14:
-    template: 'template/module/gitignore-web.phtml'
+    template: 'template/module/git-ignore/gitignore-web.phtml'
     filename: '.gitignore'                       
