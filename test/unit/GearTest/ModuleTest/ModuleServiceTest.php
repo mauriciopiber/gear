@@ -75,7 +75,6 @@ class ModuleServiceTest extends TestCase
         $this->stringService  = new StringService();
         $this->dirService = new DirService();
 
-
         $this->composer = $this->prophesize(ComposerService::class);
         $this->testService = $this->prophesize(TestService::class);
 
@@ -169,7 +168,7 @@ class ModuleServiceTest extends TestCase
     public function testModuleNamespace($data, $expected)
     {
         $this->module->getModuleName()->willReturn($data)->shouldBeCalled();
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
         $this->assertEquals($expected, $this->moduleService->getModuleNamespace());
 
     }
@@ -196,47 +195,6 @@ class ModuleServiceTest extends TestCase
         return $view;
     }
 
-    public function createModuleRealFiles()
-    {
-        $this->moduleService = new \Gear\Module\ModuleService(
-            $this->fileCreator,
-            $this->stringService,
-            $this->module->reveal(),
-            $this->docs->reveal(),
-            $this->composer->reveal(),
-            $this->codeception->reveal(),
-            $this->testService->reveal(),
-            $this->karma->reveal(),
-            $this->protractor->reveal(),
-            $this->package->reveal(),
-            $this->gulpfile->reveal(),
-            $this->languageService->reveal(),
-            $this->schema->reveal(),
-            $this->schemaLoader->reveal(),
-            $this->schemaController->reveal(),
-            $this->schemaAction->reveal(),
-            $this->configService->reveal(),
-            $this->controller->reveal(),
-            $this->controllerTest->reveal(),
-            $this->consoleController->reveal(),
-            $this->consoleControllerTest->reveal(),
-            $this->view->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
-            $this->feature->reveal(),
-            $this->step->reveal(),
-            $this->page->reveal(),
-            $this->unitTest->reveal(),
-            $this->request->reveal(),
-            $this->cache->reveal(),
-            $this->applicationConfig->reveal(),
-            $this->autoload->reveal(),
-            $this->config,
-            $this->dir,
-            $this->gearConfig->reveal()
-        );
-    }
-
     /**
      * @group module1
      */
@@ -244,7 +202,7 @@ class ModuleServiceTest extends TestCase
     {
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
 
         $this->moduleService->getScriptDevelopment('cli');
 
@@ -263,7 +221,7 @@ class ModuleServiceTest extends TestCase
     {
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
 
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
         $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/gear-it.git')->shouldBeCalled();
@@ -286,7 +244,7 @@ class ModuleServiceTest extends TestCase
     {
         $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
 
         $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
         $this->moduleService->getStagingScript();
@@ -304,7 +262,7 @@ class ModuleServiceTest extends TestCase
      */
     public function testGitIgnoreWeb()
     {
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
         $this->moduleService->createGitIgnore('web');
@@ -322,7 +280,7 @@ class ModuleServiceTest extends TestCase
      */
     public function testGitIgnoreCli()
     {
-        $this->createModuleRealFiles();
+        $this->moduleService = $this->mockModuleRealCreator();
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -336,17 +294,63 @@ class ModuleServiceTest extends TestCase
         );
     }
 
+    public function prepareSchema($moduleName)
+    {
+        $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
+        $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
+        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Action'***REMOVED***)->willReturn(true)->shouldBeCalled();
+        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
+    }
 
+    public function prepareController()
+    {
+        $this->controllerTest->module()->shouldBeCalled();
+        $this->controller->module()->shouldBeCalled();
+        $this->controllerTest->moduleFactory()->shouldBeCalled();
+        $this->controller->moduleFactory()->shouldBeCalled();
+    }
 
-    /**
-     * @group mod2
-
-    public function testCreateModule($type = 'web')
+    public function prepareConsoleController()
     {
 
-        $this->moduleService->create();
     }
-    */
+
+    public function prepareBaseModule($type)
+    {
+        $this->configService->module($type, null)->shouldBeCalled();
+
+        $this->languageService->module()->shouldBeCalled();
+
+        $this->appController->createIndexController()->shouldBeCalled();
+        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
+
+        $this->viewService->createIndexView()->shouldBeCalled();
+        $this->viewService->createErrorView()->shouldBeCalled();
+        $this->viewService->createDeleteView()->shouldBeCalled();
+        $this->viewService->create404View()->shouldBeCalled();
+        $this->viewService->createLayoutSuccessView()->shouldBeCalled();
+        $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
+        $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
+        $this->viewService->createBreadcrumbView()->shouldBeCalled();
+
+        $this->karma->create()->shouldBeCalled();
+
+
+        $this->protractor->create()->shouldBeCalled();
+        $this->protractor->report()->shouldBeCalled();
+
+        $this->package->create()->shouldBeCalled();
+
+
+        $this->gulpfile->createFile()->shouldBeCalled();
+        $this->gulpfile->createFileConfig()->shouldBeCalled();
+
+
+        $this->docs->createConfig()->shouldBeCalled();
+        $this->docs->createIndex()->shouldBeCalled();
+        $this->docs->createReadme()->shouldBeCalled();
+        $this->docs->createChangelog()->shouldBeCalled();
+    }
 
     /**
      * @group cmap
@@ -366,54 +370,9 @@ class ModuleServiceTest extends TestCase
         $this->composer->createComposerAsProject($type)->willReturn(true)->shouldBeCalled();
         $this->testService->createTestsModuleAsProject($type)->willReturn(true)->shouldBeCalled();
 
-
-        $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
-        $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Action'***REMOVED***)->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
-
-        $this->controllerTest->module()->shouldBeCalled();
-        $this->controller->module()->shouldBeCalled();
-        $this->controllerTest->moduleFactory()->shouldBeCalled();
-        $this->controller->moduleFactory()->shouldBeCalled();
-
-        $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
-
-        $this->configService->module($type, null)->shouldBeCalled();
-
-        $this->languageService->module()->shouldBeCalled();
-
-        $this->appController->createIndexController()->shouldBeCalled();
-        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
-
-        $this->viewService->createIndexView()->shouldBeCalled();
-        $this->viewService->createErrorView()->shouldBeCalled();
-        $this->viewService->createDeleteView()->shouldBeCalled();
-        $this->viewService->create404View()->shouldBeCalled();
-        $this->viewService->createLayoutSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
-        $this->viewService->createBreadcrumbView()->shouldBeCalled();
-
-
-
-        $this->karma->create()->shouldBeCalled();
-
-
-        $this->protractor->create()->shouldBeCalled();
-        $this->protractor->report()->shouldBeCalled();
-
-        $this->package->create()->shouldBeCalled();
-
-
-        $this->gulpfile->createFile()->shouldBeCalled();
-        $this->gulpfile->createFileConfig()->shouldBeCalled();
-
-
-        $this->docs->createConfig()->shouldBeCalled();
-        $this->docs->createIndex()->shouldBeCalled();
-        $this->docs->createReadme()->shouldBeCalled();
-        $this->docs->createChangelog()->shouldBeCalled();
+        $this->prepareSchema($moduleName);
+        $this->prepareController();
+        $this->prepareBaseModule($type);
 
         $files = __DIR__.'/_files/module-files-web.yml';
 
@@ -425,8 +384,22 @@ class ModuleServiceTest extends TestCase
             file_get_contents(__DIR__.'/_files/module-files-web.yml')
         );
 
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
+        $this->moduleService = $this->mockModuleFakeCreator();
 
+        $this->mockFilesInCreator($files);
+
+        $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
+        $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
+        $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
+
+
+        $created = $this->moduleService->moduleAsProject($moduleName, $location);
+
+        $this->assertTrue($created);
+    }
+
+    public function mockFilesInCreator($files)
+    {
         foreach ($files['files'***REMOVED*** as $file) {
 
             $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
@@ -446,63 +419,6 @@ class ModuleServiceTest extends TestCase
             $this->fileCreator->render()->shouldBeCalled();
 
         }
-
-        /**
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-        $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
-        $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
-        $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
-        $this->fileCreator->setFileName('application.config.php')->shouldBeCalled();
-        $this->fileCreator->render()->shouldBeCalled();
-         */
-
-
-        $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
-        $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
-        $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService = new \Gear\Module\ModuleService(
-            $this->fileCreator->reveal(),
-            $this->stringService,
-            $this->module,
-            $this->docs->reveal(),
-            $this->composer->reveal(),
-            $this->codeception->reveal(),
-            $this->testService->reveal(),
-            $this->karma->reveal(),
-            $this->protractor->reveal(),
-            $this->package->reveal(),
-            $this->gulpfile->reveal(),
-            $this->languageService->reveal(),
-            $this->schema->reveal(),
-            $this->schemaLoader->reveal(),
-            $this->schemaController->reveal(),
-            $this->schemaAction->reveal(),
-            $this->configService->reveal(),
-            $this->controller->reveal(),
-            $this->controllerTest->reveal(),
-            $this->consoleController->reveal(),
-            $this->consoleControllerTest->reveal(),
-            $this->viewService->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
-            $this->feature->reveal(),
-            $this->step->reveal(),
-            $this->page->reveal(),
-            $this->unitTest->reveal(),
-            $this->request->reveal(),
-            $this->cache->reveal(),
-            $this->applicationConfig->reveal(),
-            $this->autoload->reveal(),
-            $this->config,
-            $this->dir,
-            $this->gearConfig->reveal()
-        );
-
-
-        $created = $this->moduleService->moduleAsProject($moduleName, $location);
-
-        $this->assertTrue($created);
     }
 
     /**
@@ -525,143 +441,23 @@ class ModuleServiceTest extends TestCase
 
         $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
 
-        $this->schema->create($moduleName)->willReturn(true)->shouldBeCalled();
-        $this->schemaLoader->loadSchema()->willReturn(true)->shouldBeCalled();
-        $this->schemaController->create($moduleName, ['name' => 'IndexController', 'services' => 'factories', 'type' => 'Action'***REMOVED***)->willReturn(true)->shouldBeCalled();
-        $this->schemaAction->create($moduleName, ['controller' => 'IndexController', 'name' => 'Index'***REMOVED***, false)->willReturn(true)->shouldBeCalled();
-
-        $this->controllerTest->module()->shouldBeCalled();
-        $this->controller->module()->shouldBeCalled();
-        $this->controllerTest->moduleFactory()->shouldBeCalled();
-        $this->controller->moduleFactory()->shouldBeCalled();
+        $this->prepareSchema($moduleName);
+        $this->prepareController();
 
         $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
         $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
 
-        $this->configService->module($type, null)->shouldBeCalled();
 
-        $this->languageService->module()->shouldBeCalled();
+        $this->prepareBaseModule($type);
 
-        $this->appController->createIndexController()->shouldBeCalled();
-        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
-
-        $this->viewService->createIndexView()->shouldBeCalled();
-        $this->viewService->createErrorView()->shouldBeCalled();
-        $this->viewService->createDeleteView()->shouldBeCalled();
-        $this->viewService->create404View()->shouldBeCalled();
-        $this->viewService->createLayoutSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteSuccessView()->shouldBeCalled();
-        $this->viewService->createLayoutDeleteFailView()->shouldBeCalled();
-        $this->viewService->createBreadcrumbView()->shouldBeCalled();
-
-
-
-        $this->karma->create()->shouldBeCalled();
-
-
-        $this->protractor->create()->shouldBeCalled();
-        $this->protractor->report()->shouldBeCalled();
-
-        $this->package->create()->shouldBeCalled();
-
-
-        $this->gulpfile->createFile()->shouldBeCalled();
-        $this->gulpfile->createFileConfig()->shouldBeCalled();
-
-
-        $this->docs->createConfig()->shouldBeCalled();
-        $this->docs->createIndex()->shouldBeCalled();
-        $this->docs->createReadme()->shouldBeCalled();
-        $this->docs->createChangelog()->shouldBeCalled();
-
-        /**
-        $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml';
-
-        $this->assertFileExists($files);
-
-        $parser = new Parser();
-
-        $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files-web.yml')
-            );
-
-        */
         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-
-        /**
-        foreach ($files['files'***REMOVED*** as $file) {
-
-            $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
-            if (isset($file['options'***REMOVED***)) {
-                $this->fileCreator->setOptions($file['options'***REMOVED***)->shouldBeCalled();
-            } else {
-                $this->fileCreator->setOptions([***REMOVED***)->shouldBeCalled();
-            }
-
-            if (isset($file['location'***REMOVED***)) {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module/%s', $file['location'***REMOVED***)))->shouldBeCalled();
-            } else {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module')))->shouldBeCalled();
-            }
-
-            $this->fileCreator->setFileName($file['filename'***REMOVED***)->shouldBeCalled();
-            $this->fileCreator->render()->shouldBeCalled();
-
-        }
-
-        /**
-         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-         $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
-         $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
-         $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
-         $this->fileCreator->setFileName('application.config.php')->shouldBeCalled();
-         $this->fileCreator->render()->shouldBeCalled();
-         */
 
 
         $this->feature->createIndexFeature('Gear Project')->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
         $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
 
-
-        $this->moduleService = new \Gear\Module\ModuleService(
-            $this->fileCreator->reveal(),
-            $this->stringService,
-            $this->module,
-            $this->docs->reveal(),
-            $this->composer->reveal(),
-            $this->codeception->reveal(),
-            $this->testService->reveal(),
-            $this->karma->reveal(),
-            $this->protractor->reveal(),
-            $this->package->reveal(),
-            $this->gulpfile->reveal(),
-            $this->languageService->reveal(),
-            $this->schema->reveal(),
-            $this->schemaLoader->reveal(),
-            $this->schemaController->reveal(),
-            $this->schemaAction->reveal(),
-            $this->configService->reveal(),
-            $this->controller->reveal(),
-            $this->controllerTest->reveal(),
-            $this->consoleController->reveal(),
-            $this->consoleControllerTest->reveal(),
-            $this->viewService->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
-            $this->feature->reveal(),
-            $this->step->reveal(),
-            $this->page->reveal(),
-            $this->unitTest->reveal(),
-            $this->request->reveal(),
-            $this->cache->reveal(),
-            $this->applicationConfig->reveal(),
-            $this->autoload->reveal(),
-            $this->config,
-            $this->dir,
-            $this->gearConfig->reveal()
-        );
-
+        $this->moduleService = $this->mockModuleFakeCreator();
 
         $created = $this->moduleService->create($moduleName, $type);
 
@@ -705,92 +501,11 @@ class ModuleServiceTest extends TestCase
         $this->docs->createReadme()->shouldBeCalled();
         $this->docs->createChangelog()->shouldBeCalled();
 
-
-        /**
-        $files = (new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml';
-
-        $this->assertFileExists($files);
-
-        $parser = new Parser();
-
-        $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../../test/integration/module-files-cli.yml')
-        );
-        */
-
         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-
-        /**
-        foreach ($files['files'***REMOVED*** as $file) {
-
-            $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
-            if (isset($file['options'***REMOVED***)) {
-                $this->fileCreator->setOptions($file['options'***REMOVED***)->shouldBeCalled();
-            } else {
-                $this->fileCreator->setOptions([***REMOVED***)->shouldBeCalled();
-            }
-
-            if (isset($file['location'***REMOVED***)) {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module/%s', $file['location'***REMOVED***)))->shouldBeCalled();
-            } else {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module')))->shouldBeCalled();
-            }
-
-            $this->fileCreator->setFileName($file['filename'***REMOVED***)->shouldBeCalled();
-            $this->fileCreator->render()->shouldBeCalled();
-
-        }
-        */
-
-        /**
-         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-         $this->fileCreator->setTemplate('template/module/config/application.config.phtml')->shouldBeCalled();
-         $this->fileCreator->setOptions(['module' => 'MyModule'***REMOVED***)->shouldBeCalled();
-         $this->fileCreator->setLocation(vfsStream::url('module/my-module/config'))->shouldBeCalled();
-         $this->fileCreator->setFileName('application.config.php')->shouldBeCalled();
-         $this->fileCreator->render()->shouldBeCalled();
-         */
 
         $this->module->setBasePath(vfsStream::url('module'));
 
-        $this->moduleService = new \Gear\Module\ModuleService(
-            $this->fileCreator->reveal(),
-            $this->stringService,
-            $this->module,
-            $this->docs->reveal(),
-            $this->composer->reveal(),
-            $this->codeception->reveal(),
-            $this->testService->reveal(),
-            $this->karma->reveal(),
-            $this->protractor->reveal(),
-            $this->package->reveal(),
-            $this->gulpfile->reveal(),
-            $this->languageService->reveal(),
-            $this->schema->reveal(),
-            $this->schemaLoader->reveal(),
-            $this->schemaController->reveal(),
-            $this->schemaAction->reveal(),
-            $this->configService->reveal(),
-            $this->controller->reveal(),
-            $this->controllerTest->reveal(),
-            $this->consoleController->reveal(),
-            $this->consoleControllerTest->reveal(),
-            $this->viewService->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
-            $this->feature->reveal(),
-            $this->step->reveal(),
-            $this->page->reveal(),
-            $this->unitTest->reveal(),
-            $this->request->reveal(),
-            $this->cache->reveal(),
-            $this->applicationConfig->reveal(),
-            $this->autoload->reveal(),
-            $this->config,
-            $this->dir,
-            $this->gearConfig->reveal()
-        );
-
+        $this->moduleService = $this->mockModuleFakeCreator();
 
         $created = $this->moduleService->create($moduleName, $type);
 
@@ -858,27 +573,7 @@ class ModuleServiceTest extends TestCase
 
         $this->moduleService = $this->mockModuleFakeCreator();
 
-        //$this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-
-        foreach ($files['files'***REMOVED*** as $file) {
-
-            $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
-            if (isset($file['options'***REMOVED***)) {
-                $this->fileCreator->setOptions($file['options'***REMOVED***)->shouldBeCalled();
-            } else {
-                $this->fileCreator->setOptions([***REMOVED***)->shouldBeCalled();
-            }
-
-            if (isset($file['location'***REMOVED***)) {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module/%s', $file['location'***REMOVED***)))->shouldBeCalled();
-            } else {
-                $this->fileCreator->setLocation(vfsStream::url(sprintf('module/my-module')))->shouldBeCalled();
-            }
-
-            $this->fileCreator->setFileName($file['filename'***REMOVED***)->shouldBeCalled();
-            $this->fileCreator->render()->shouldBeCalled();
-
-        }
+        $this->mockFilesInCreator($files);
 
         $created = $this->moduleService->moduleAsProject($moduleName, $location, $type);
 
