@@ -346,6 +346,8 @@ class ModuleService implements ModuleProjectConnectorInterface
      * @param string $type Tipo Web|Cli
      *
      * @return boolean
+     *
+     * @deprecated Should be used only module as project
      */
     public function create($module, $type = 'web')
     {
