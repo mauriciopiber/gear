@@ -7,6 +7,42 @@ use Symfony\Component\Yaml\Parser;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
+use Gear\Module\BasicModuleStructure;
+use Gear\Module\ComposerService;
+use Gear\Module\TestService;
+use GearJson\Schema\SchemaService;
+use GearJson\Schema\Loader\SchemaLoaderService;
+use GearJson\Controller\ControllerService as ControllerSchema;
+use GearJson\Action\ActionService;
+use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\ControllerService;
+use Gear\Module\CodeceptionService;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Mvc\LanguageService;
+use Gear\Mvc\View\App\AppControllerService;
+use Gear\Mvc\View\App\AppControllerSpecService;
+use Gear\Mvc\View\ViewService;
+use Gear\Module\Node\Gulpfile;
+use Gear\Module\Node\Package;
+use Gear\Module\Node\Karma;
+use Gear\Module\Node\Protractor;
+use Gear\Module\Docs\Docs;
+use Gear\Mvc\Spec\Feature\Feature;
+use Gear\Mvc\Spec\UnitTest\UnitTest;
+use Gear\Mvc\Spec\Page\Page;
+use Gear\Mvc\Spec\Step\Step;
+use Gear\Cache\CacheService;
+use Zend\Console\Request;
+use Gear\Module\Config\ApplicationConfig;
+use Gear\Autoload\ComposerAutoload;
+use Gear\Module;
+use Gear\Creator\Template\TemplateService;
+use GearBase\Util\File\FileService;
+use Gear\Creator\FileCreator\FileCreator;
+use GearBase\Util\Dir\DirService;
+use GearBase\Util\String\StringService;
 
 /**
  * @group Module
@@ -19,86 +55,86 @@ class ModuleServiceTest extends TestCase
         parent::setUp();
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+       $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->module->getModuleName()->willReturn('GearIt');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../../view');
 
         $this->templates = $this->baseDir.'/../../test/template/module/script';
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+        $template       = new TemplateService    ();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->stringService  = new \GearBase\Util\String\StringService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->stringService  = new StringService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
-        $this->dirService = new \GearBase\Util\Dir\DirService();
-        $this->stringService = new \GearBase\Util\String\StringService();
+        $this->dirService = new DirService();
+        $this->stringService = new StringService();
 
 
-        $this->composer = $this->prophesize('Gear\Module\ComposerService');
-        $this->testService = $this->prophesize('Gear\Module\TestService');
+        $this->composer = $this->prophesize(ComposerService::class);
+        $this->testService = $this->prophesize(TestService::class);
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
 
-        $this->schemaLoader = $this->prophesize('GearJson\Schema\Loader\SchemaLoaderService');
+        $this->schemaLoader = $this->prophesize(SchemaLoaderService::class);
 
-        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerService');
+        $this->schemaController = $this->prophesize(ControllerSchema::class);
 
-        $this->schemaAction = $this->prophesize('GearJson\Action\ActionService');
+        $this->schemaAction = $this->prophesize(ActionService::class);
 
-        $this->consoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
+        $this->consoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
 
-        $this->consoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
+        $this->consoleController = $this->prophesize(ConsoleController::class);
 
-        $this->controllerTest = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+        $this->controllerTest = $this->prophesize(ControllerTestService::class);
 
-        $this->controller = $this->prophesize('Gear\Mvc\Controller\ControllerService');
+        $this->controller = $this->prophesize(ControllerService::class);
 
-        $this->codeception = $this->prophesize('Gear\Module\CodeceptionService');
+        $this->codeception = $this->prophesize(CodeceptionService::class);
 
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+        $this->configService = $this->prophesize(ConfigService::class);
 
-        $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
+        $this->languageService = $this->prophesize(LanguageService::class);
 
-        $this->appController = $this->prophesize('Gear\Mvc\View\App\AppControllerService');
+        $this->appController = $this->prophesize(AppControllerService::class);
 
-        $this->appControllerSpec = $this->prophesize('Gear\Mvc\View\App\AppControllerSpecService');
+        $this->appControllerSpec = $this->prophesize(AppControllerSpecService::class);
 
-        $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
+        $this->viewService = $this->prophesize(ViewService::class);
 
-        $this->gulpfile = $this->prophesize('Gear\Module\Node\Gulpfile');
+        $this->gulpfile = $this->prophesize(Gulpfile::class);
 
-        $this->package = $this->prophesize('Gear\Module\Node\Package');
+        $this->package = $this->prophesize(Package::class);
 
-        $this->karma = $this->prophesize('Gear\Module\Node\Karma');
+        $this->karma = $this->prophesize(Karma::class);
 
-        $this->protractor = $this->prophesize('Gear\Module\Node\Protractor');
+        $this->protractor = $this->prophesize(Protractor::class);
 
-        $this->docs = $this->prophesize('Gear\Module\Docs\Docs');
+        $this->docs = $this->prophesize(Docs::class);
 
-        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->dir = new DirService();
 
-        $this->feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
+        $this->feature = $this->prophesize(Feature::class);
 
-        $this->unitTest = $this->prophesize('Gear\Mvc\Spec\UnitTest\UnitTest');
+        $this->unitTest = $this->prophesize(UnitTest::class);
 
-        $this->page = $this->prophesize('Gear\Mvc\Spec\Page\Page');
+        $this->page = $this->prophesize(Page::class);
 
-        $this->step = $this->prophesize('Gear\Mvc\Spec\Step\Step');
+        $this->step = $this->prophesize(Step::class);
 
-        $this->view = $this->prophesize('Gear\Mvc\View\ViewService');
+        $this->view = $this->prophesize(ViewService::class);
 
-        $this->cache = $this->prophesize('Gear\Cache\CacheService');
+        $this->cache = $this->prophesize(CacheService::class);
 
-        $this->request = $this->prophesize('Zend\Console\Request');
+        $this->request = $this->prophesize(Request::class);
 
-        $this->applicationConfig = $this->prophesize('Gear\Module\Config\ApplicationConfig');
+        $this->applicationConfig = $this->prophesize(ApplicationConfig::class);
 
-        $this->autoload = $this->prophesize('Gear\Autoload\ComposerAutoload');
+        $this->autoload = $this->prophesize(ComposerAutoload::class);
 
         $this->config = [
             'gear' => [
