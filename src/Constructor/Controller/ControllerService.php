@@ -26,11 +26,11 @@ use Gear\Mvc\Controller\Web\{
     WebControllerTestService,
     WebControllerTestServiceTrait
 };
-use Gear\Mvc\ConsoleController\{
-    ConsoleController,
-    ConsoleControllerTest,
-    ConsoleControllerTrait,
-    ConsoleControllerTestTrait
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerServiceTrait,
+    ConsoleControllerTestService,
+    ConsoleControllerTestServiceTrait
 };
 use Gear\Mvc\Controller\Api\{
     ApiControllerService,
@@ -59,9 +59,9 @@ class ControllerService extends AbstractConstructor
 
     use ControllerSchemaTrait;
 
-    use ConsoleControllerTrait;
+    use ConsoleControllerServiceTrait;
 
-    use ConsoleControllerTestTrait;
+    use ConsoleControllerTestServiceTrait;
 
     use ConfigServiceTrait;
 
@@ -104,8 +104,8 @@ class ControllerService extends AbstractConstructor
         BasicModuleStructure $basicModuleStructure,
         WebControllerService $controllerService,
         WebControllerTestService $controllerTestService,
-        ConsoleController $consoleController,
-        ConsoleControllerTest $controllerTest,
+        ConsoleControllerService $consoleController,
+        ConsoleControllerTestService $controllerTest,
         ApiControllerService $apiController,
         ApiControllerTestService $apiControllerTest,
         ConfigService $configService,

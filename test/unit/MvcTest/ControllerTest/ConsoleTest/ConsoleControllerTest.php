@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\ConsoleControllerTest;
+namespace GearTest\MvcTest\ControllerTest\ConsoleTest;
 
 use GearBaseTest\AbstractTestCase;
 use org\bovigo\vfs\vfsStream;
@@ -37,7 +37,7 @@ class ConsoleControllerTest extends AbstractTestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console';
 
-        $this->controller = new \Gear\Mvc\ConsoleController\ConsoleController();
+        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerService();
         $this->controller->setFileCreator($this->fileCreator);
         $this->controller->setStringService($this->string);
         $this->controller->setModule($this->module->reveal());
@@ -72,7 +72,7 @@ class ConsoleControllerTest extends AbstractTestCase
      */
     public function testCreateConsoleControllerWithSpecialDependency()
     {
-        $controller = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
+        $controller = new Controller(require __DIR__.'/../../_gearfiles/console-with-special-dependency.php');
 
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

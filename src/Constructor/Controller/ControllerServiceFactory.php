@@ -7,7 +7,10 @@ use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Table\TableService;
 use Gear\Module\BasicModuleStructure;
-use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerTestService,
+};
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
 use Gear\Mvc\Config\ConfigService;
@@ -44,8 +47,8 @@ class ControllerServiceFactory implements FactoryInterface
             $serviceLocator->get(BasicModuleStructure::class),
             $serviceLocator->get(WebControllerService::class),
             $serviceLocator->get(WebControllerTestService::class),
-            $serviceLocator->get(ConsoleController::class),
-            $serviceLocator->get(ConsoleControllerTest::class),
+            $serviceLocator->get(ConsoleControllerService::class),
+            $serviceLocator->get(ConsoleControllerTestService::class),
             $serviceLocator->get(ApiControllerService::class),
             $serviceLocator->get(ApiControllerTestService::class),
             $serviceLocator->get(ConfigService::class),

@@ -1,10 +1,10 @@
 <?php
-namespace Gear\Mvc\ConsoleController;
+namespace Gear\Mvc\Controller\Console;
 
 use GearJson\Controller\Controller as ControllerValueObject;
 use Gear\Mvc\Controller\AbstractControllerService;
 
-class ConsoleController extends AbstractControllerService
+class ConsoleControllerService extends AbstractControllerService
 {
 
     public function module()

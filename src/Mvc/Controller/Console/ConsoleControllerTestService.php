@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Mvc\ConsoleController;
+namespace Gear\Mvc\Controller\Console;
 
 use GearJson\Controller\Controller as ControllerValueObject;
 use Gear\Mvc\AbstractMvcTest;
@@ -7,7 +7,7 @@ use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Mvc\Controller\AbstractControllerTestService;
 
-class ConsoleControllerTest extends AbstractControllerTestService
+class ConsoleControllerTestService extends AbstractControllerTestService
 {
     use ControllerManagerTrait;
 

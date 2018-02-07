@@ -1,13 +1,13 @@
 <?php
-namespace Gear\Mvc\ConsoleController;
+namespace Gear\Mvc\Controller\Console;
 
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\Console\ConsoleControllerTestService;
 
-trait ConsoleControllerTestTrait
+trait ConsoleControllerTestServiceTrait
 {
     protected $consoleControllerTest;
 
-    public function setConsoleControllerTest(ConsoleControllerTest $consoleTest)
+    public function setConsoleControllerTest(ConsoleControllerTestService $consoleTest)
     {
         $this->consoleControllerTest = $consoleTest;
         return $this;
@@ -17,7 +17,7 @@ trait ConsoleControllerTestTrait
     {
         if (!isset($this->consoleControllerTest)) {
             $this->consoleControllerTest = $this->getServiceLocator()->get(
-                ConsoleControllerTest::class
+                ConsoleControllerTestService::class
             );
         }
         return $this->consoleControllerTest;

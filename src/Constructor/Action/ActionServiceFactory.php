@@ -10,8 +10,10 @@ use Gear\Mvc\Config\NavigationManager;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
-use Gear\Mvc\ConsoleController\ConsoleController;
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerTestService,
+};
 use Gear\Mvc\View\App\AppControllerService;
 use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\Feature;
@@ -50,8 +52,8 @@ class ActionServiceFactory implements FactoryInterface
             $serviceLocator->get(ViewService::class),
             $serviceLocator->get(WebControllerService::class),
             $serviceLocator->get(WebControllerTestService::class),
-            $serviceLocator->get(ConsoleController::class),
-            $serviceLocator->get(ConsoleControllerTest::class),
+            $serviceLocator->get(ConsoleControllerService::class),
+            $serviceLocator->get(ConsoleControllerTestService::class),
             $serviceLocator->get(AppControllerService::class),
             $serviceLocator->get(AppControllerSpecService::class),
             $serviceLocator->get(Feature::class),
