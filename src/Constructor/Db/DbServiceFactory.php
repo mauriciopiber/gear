@@ -56,7 +56,7 @@ class DbServiceFactory implements FactoryInterface
             $serviceLocator->get(FixtureService::class),
             $serviceLocator->get(FilterService::class),
             $serviceLocator->get(FormService::class),
-            $serviceLocator->get(ControllerService::class),
+            $serviceLocator->get(WebControllerService::class),
             //$serviceLocator->get(ControllerTestService::class),
             $serviceLocator->get(ConfigService::class),
             $serviceLocator->get(LanguageService::class),
