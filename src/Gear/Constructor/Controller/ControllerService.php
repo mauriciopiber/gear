@@ -6,24 +6,38 @@
  */
 namespace Gear\Constructor\Controller;
 
-use GearJson\Controller\Controller;
-use GearJson\Controller\ControllerService as ControllerSchema;
-use GearJson\Controller\ControllerServiceTrait as ControllerSchemaTrait;
+use GearJson\Controller\{
+    Controller,
+    ControllerService as ControllerSchema,
+    ControllerServiceTrait as ControllerSchemaTrait
+};
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use GearBase\Util\String\{
+    StringServiceTrait,
+    StringService
+};
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
-use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
-use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
-use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
-use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\LanguageServiceTrait;
-use Gear\Mvc\Controller\ControllerService as ControllerMvc;
-use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
-use Gear\Mvc\ConsoleController\ConsoleController;
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\{
+    ControllerServiceTrait as ControllerMvcTrait,
+    ControllerTestServiceTrait as ControllerMvcTestTrait,
+    ControllerService as ControllerMvc,
+    ControllerTestService as ControllerMvcTest
+};
+use Gear\Mvc\ConsoleController\{
+    ConsoleController,
+    ConsoleControllerTest,
+    ConsoleControllerTrait,
+    ConsoleControllerTestTrait
+};
+use Gear\Mvc\Controller\Api\{
+    ApiController,
+    ApiControllerTest,
+    ApiControllerTrait,
+    ApiControllerTestTrait
+};
 use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\LanguageService;
@@ -54,6 +68,10 @@ class ControllerService extends AbstractConstructor
     use ControllerMvcTestTrait;
 
     use ControllerMvcTrait;
+
+    use ApiControllerTrait;
+
+    use ApiControllerTestTrait;
 
     use ViewMvc;
 
@@ -158,16 +176,16 @@ class ControllerService extends AbstractConstructor
             return $this->createDb();
         }
 
+        $this->getControllerManager()->create($this->controller);
+
         if ($this->controller->getType() == 'Action') {
             $this->getMvcController()->buildController($this->controller);
             $this->getControllerTestService()->buildController($this->controller);
-            $this->getControllerManager()->create($this->controller);
             return true;
         }
 
         $this->getConsoleController()->buildController($this->controller);
         $this->getConsoleControllerTest()->buildController($this->controller);
-        $this->getControllerManager()->create($this->controller);
         return true;
     }
 }

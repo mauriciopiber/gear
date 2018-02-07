@@ -315,9 +315,11 @@ class ModuleService implements ModuleProjectConnectorInterface
             ModuleTypesInterface::CLI,
             ModuleTypesInterface::WEB,
             ModuleTypesInterface::SRC,
+            ModuleTypesInterface::SRC_ZF2,
+            ModuleTypesInterface::SRC_ZF3,
             ModuleTypesInterface::API,
         ***REMOVED***)) {
-            throw new \Exception(sprintf('%s not a valid type'));
+            throw new \Exception(sprintf('%s not a valid type', $type));
         }
 
 

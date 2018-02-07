@@ -5,13 +5,13 @@ use GearJson\Controller\Controller as ControllerValueObject;
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait;
+use Gear\Mvc\Controller\AbstractControllerTestService;
 
-class ConsoleControllerTest extends AbstractMvcTest
+class ConsoleControllerTest extends AbstractControllerTestService
 {
     use ControllerManagerTrait;
 
     use FactoryServiceTrait;
-
 
     public function module()
     {
@@ -68,10 +68,6 @@ class ConsoleControllerTest extends AbstractMvcTest
 
 
         return $insertMethods;
-    }
-
-    public function prepareMergeAction()
-    {
     }
 
     public function buildAction(ControllerValueObject $controller)
@@ -212,33 +208,11 @@ class ConsoleControllerTest extends AbstractMvcTest
             'callable' => $this->getControllerManager()->getServiceName($controller),
             'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-            'module' => $this->getModule()->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'actions' => $controller->getActions(),
-            'controllerName' => $controller->getName(),
-            'controllerUrl' => $this->str('url', $controller->getNameOff()),
-            'controllerCallname' => $this->str('class', $controller->getNameOff()),
-            'controllerVar' => $this->str('var-length', $controller->getName())
         ***REMOVED***;
 
+        $options = $this->mergeConfig($options);
 
-        if ($controller->isFactory()) {
-            $templateView ='factory';
-
-            $options['dependency'***REMOVED*** = str_replace(
-                '$this->action',
-                '$this->controller',
-                $this->getCodeTest()->getConstructorDependency($controller)
-            );
-
-            $options['constructor'***REMOVED*** = str_replace(
-                '$this->action',
-                '$this->controller',
-                $this->getCodeTest()->getConstructor($controller)
-            );
-        } else {
-            $templateView = 'invokable';
-        }
+        $templateView = ($this->controller->isFactory()) ? 'factory' : 'invokable';
 
         $this->template = 'template/module/mvc/console-test/src/'.$templateView.'.phtml';
 
@@ -246,9 +220,7 @@ class ConsoleControllerTest extends AbstractMvcTest
         $this->file->setLocation($this->location);
         $this->file->setTemplate($this->template);
 
-        $this->controller = $controller;
-
-        $this->fileName = sprintf('%sTest.php', $controller->getName());
+        $this->fileName = sprintf('%sTest.php', $this->controller->getName());
 
         $this->controllerFile = $this->getModule()->getTestControllerFolder().'/'.$this->fileName;
 
@@ -256,8 +228,8 @@ class ConsoleControllerTest extends AbstractMvcTest
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($controller->isFactory()) {
-            $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
+        if ($this->controller->isFactory()) {
+            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
         }
 
         return $this->file->render();

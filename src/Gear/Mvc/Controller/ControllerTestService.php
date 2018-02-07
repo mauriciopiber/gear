@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\Controller\AbstractControllerTestService;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
@@ -15,7 +15,7 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 
-class ControllerTestService extends AbstractMvcTest implements
+class ControllerTestService extends AbstractControllerTestService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
@@ -42,26 +42,26 @@ class ControllerTestService extends AbstractMvcTest implements
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
             'module' => $this->module->getModuleName(),
             'moduleUrl' => $this->str('url', $this->module->getModuleName()),
-            'actions' => $controller->getActions(),
-            'controllerName' => $controller->getName(),
-            'controllerUrl' => $this->str('url', $controller->getNameOff()),
-            'controllerCallname' => $this->str('class', $controller->getNameOff()),
-            'controllerVar' => $this->str('var-length', $controller->getName())
+            'actions' => $this->controller->getActions(),
+            'controllerName' => $this->controller->getName(),
+            'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
+            'controllerCallname' => $this->str('class', $this->controller->getNameOff()),
+            'controllerVar' => $this->str('var-length', $this->controller->getName())
         ***REMOVED***;
 
-        if ($controller->isFactory()) {
+        if ($this->controller->isFactory()) {
             $templateView ='factory';
 
             $options['dependency'***REMOVED*** = str_replace(
                 '$this->action',
                 '$this->controller',
-                $this->getCodeTest()->getConstructorDependency($controller)
+                $this->getCodeTest()->getConstructorDependency($this->controller)
             );
 
             $options['constructor'***REMOVED*** = str_replace(
                 '$this->action',
                 '$this->controller',
-                $this->getCodeTest()->getConstructor($controller)
+                $this->getCodeTest()->getConstructor($this->controller)
             );
         } else {
             $templateView = 'invokable';

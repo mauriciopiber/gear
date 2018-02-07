@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Controller;
 
-use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\Controller\AbstractControllerService;
 use Gear\Column\Mvc\ControllerInterface;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
@@ -10,12 +10,10 @@ use Gear\Mvc\Controller\ControllerTestServiceTrait;
 use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
-use Gear\Mvc\Controller\ColumnInterface\ControllerCreateAfterInterface;
-use Gear\Mvc\Controller\ColumnInterface\ControllerCreateViewInterface;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 
-class ControllerService extends AbstractMvc implements
+class ControllerService extends AbstractControllerService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
@@ -128,7 +126,10 @@ class ControllerService extends AbstractMvc implements
         $this->functions = '';
         $this->hasImage = $this->columnManager->isAssociatedWith('Gear\Column\Varchar\UploadImage');
 
-        $this->hasTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
+        $this->hasTableImage = $this->getTableService()->verifyTableAssociation(
+            $this->db->getTable(),
+            UploadImageTable::NAME
+        );
 
         $this->create[0***REMOVED*** = $this->columnManager->generateCode('getControllerCreateAfter', true);
         $this->create[1***REMOVED*** = '';
@@ -348,29 +349,9 @@ EOS;
         $this->controller = $controller;
         $this->controllerFile = $this->location.'/'.sprintf('%s.php', $controller->getName());
 
-        $this->functions       = '';
+        $this->functions = '';
 
-
-        //busca as funciones que já existem.
-        $this->fileActions     = $this->getCode()->getFunctionsNameFromFile($this->controllerFile);
-
-        //pega as funções que serão adicionadas
-        $this->actionsToInject = $this->getActionsToInject($this->controller, $this->fileActions);
-
-        //transforma as novas actions em funções
-        $this->functions = $this->actionToController($this->actionsToInject);
-        $this->fileCode = explode(PHP_EOL, file_get_contents($this->controllerFile));
-
-
-        $lines = $this->getInjector()->inject($this->fileCode, $this->functions);
-        $lines = $this->createUse($this->controller, $lines);
-        $lines = $this->createUseAttributes($this->controller, $lines);
-
-
-        $newFile = implode(PHP_EOL, $lines);
-
-        file_put_contents($this->controllerFile, $newFile);
-
+        $this->mergeActions();
 
         return $this->controllerFile;
     }
