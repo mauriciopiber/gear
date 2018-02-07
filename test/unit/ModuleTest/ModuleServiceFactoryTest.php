@@ -39,8 +39,6 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'GearJson\Action'          => 'GearJson\Action\ActionService',
             'GearJson\Controller'      => 'GearJson\Controller\ControllerService',
             'Gear\Mvc\Config\ConfigService' => 'Gear\Mvc\Config\ConfigService',
-            //'Gear\Mvc\Controller\Controller' => 'Gear\Mvc\Controller\ControllerService',
-            //'Gear\Mvc\Controller\ControllerTest' => 'Gear\Mvc\Controller\ControllerTestService',
             'Gear\Mvc\Controller\Console\ConsoleControllerTestService' => 'Gear\Mvc\Controller\Console\ConsoleControllerTestService',
             'Gear\Mvc\Controller\Console\ConsoleControllerService' => 'Gear\Mvc\Controller\Console\ConsoleControllerService',
             'Gear\Mvc\View\App\AppControllerService' => 'Gear\Mvc\View\App\AppControllerService',
