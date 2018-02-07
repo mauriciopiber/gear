@@ -14,8 +14,10 @@ use GearJson\Schema\SchemaService;
 use GearJson\Schema\Loader\SchemaLoaderService;
 use GearJson\Controller\ControllerService as ControllerSchema;
 use GearJson\Action\ActionService;
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
-use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerTestService,
+};
 use Gear\Mvc\Controller\ControllerTestService;
 use Gear\Mvc\Controller\ControllerService;
 use Gear\Module\CodeceptionService;
@@ -92,9 +94,9 @@ class ModuleServiceTest extends TestCase
 
         $this->schemaAction = $this->prophesize(ActionService::class);
 
-        $this->consoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
+        $this->consoleControllerTest = $this->prophesize(ConsoleControllerTestService::class);
 
-        $this->consoleController = $this->prophesize(ConsoleController::class);
+        $this->consoleController = $this->prophesize(ConsoleControllerService::class);
 
         $this->controllerTest = $this->prophesize(WebControllerTestService::class);
 

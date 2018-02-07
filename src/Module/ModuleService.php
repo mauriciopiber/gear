@@ -36,9 +36,12 @@ use Gear\Mvc\Controller\Web\{
     WebControllerTestService,
     WebControllerTestServiceTrait
 };
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
-use Gear\Mvc\ConsoleController\ConsoleController;
-use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerServiceTrait,
+    ConsoleControllerTestService,
+    ConsoleControllerTestServiceTrait
+};
 use Gear\Mvc\Config\ConfigService;
 use GearBase\RequestTrait;
 use GearVersion\Service\VersionServiceTrait;
@@ -107,7 +110,6 @@ use GearBase\Config\GearConfigTrait;
 class ModuleService implements ModuleProjectConnectorInterface
 {
     use RequestTrait;
-    use ConsoleControllerTrait;
     use ModuleAwareTrait;
     use FileCreatorTrait;
     use StringServiceTrait;
@@ -136,7 +138,8 @@ class ModuleService implements ModuleProjectConnectorInterface
     use SchemaLoaderServiceTrait;
     use ControllerServiceTrait;
     use ActionServiceTrait;
-    use ConsoleControllerTestTrait;
+    use ConsoleControllerServiceTrait;
+    use ConsoleControllerTestServiceTrait;
     use ApplicationConfigTrait;
     use ComposerAutoloadTrait;
     use DirServiceTrait;
@@ -170,8 +173,8 @@ class ModuleService implements ModuleProjectConnectorInterface
         ConfigService $configService,
         WebControllerService $controller,
         WebControllerTestService $controllerTest,
-        ConsoleController $consoleController,
-        ConsoleControllerTest $consoleTest,
+        ConsoleControllerService $consoleController,
+        ConsoleControllerTestService $consoleTest,
         ViewService $viewService,
         AppControllerService $appController,
         AppControllerSpecService $appControllerSpec,
