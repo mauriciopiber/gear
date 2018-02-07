@@ -1,13 +1,13 @@
 <?php
-namespace Gear\Mvc\ConsoleController;
+namespace Gear\Mvc\Controller\Console;
 
-use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\Controller\Console\ConsoleControllerService;
 
-trait ConsoleControllerTrait
+trait ConsoleControllerServiceTrait
 {
     protected $consoleController;
 
-    public function setConsoleController(ConsoleController $consoleController)
+    public function setConsoleController(ConsoleControllerService $consoleController)
     {
         $this->consoleController = $consoleController;
         return $this;
@@ -17,7 +17,7 @@ trait ConsoleControllerTrait
     {
         if (!isset($this->consoleController)) {
             $this->consoleController = $this->getServiceLocator()->get(
-                ConsoleController::class
+                ConsoleControllerService::class
             );
         }
         return $this->consoleController;

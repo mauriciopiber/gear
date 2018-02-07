@@ -6,8 +6,11 @@ use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\Action\ActionService;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
-use Gear\Mvc\ConsoleController\ConsoleController;
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerTestService,
+
+};
 use Gear\Mvc\Config\ControllerManager;
 use GearJson\Action\ActionService as JsonActionService;
 use GearBase\Util\String\StringService;
@@ -46,8 +49,8 @@ class ActionServiceTest extends TestCase
         //mvc controller
         $this->mvcController = $this->prophesize(WebControllerService::class);
         $this->mvcControllerTest = $this->prophesize(WebControllerTestService::class);
-        $this->mvcConsoleController = $this->prophesize(ConsoleController::class);
-        $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
+        $this->mvcConsoleController = $this->prophesize(ConsoleControllerService::class);
+        $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTestService::class);
 
         //adicional
         $this->page = $this->prophesize(Page::class);

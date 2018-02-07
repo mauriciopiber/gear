@@ -9,8 +9,10 @@ use Gear\Column\ColumnManager;
 use Gear\Module\BasicModuleStructure;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
-use Gear\Mvc\ConsoleController\ConsoleController;
-use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\Console\{
+    ConsoleControllerService,
+    ConsoleControllerTestService
+};
 use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
 use Gear\Mvc\Config\ControllerManager;
 use GearJson\Controller\ControllerService as SchemaController;
@@ -38,8 +40,8 @@ class ControllerServiceTest extends TestCase
         $this->mvcController = $this->prophesize(WebControllerService::class);
         $this->mvcControllerTest = $this->prophesize(WebControllerTestService::class);
 
-        $this->mvcConsoleController = $this->prophesize(ConsoleController::class);
-        $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
+        $this->mvcConsoleController = $this->prophesize(ConsoleControllerService::class);
+        $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTestService::class);
 
         $this->apiControllerService = $this->prophesize(ApiControllerService::class);
         $this->apiControllerTestService = $this->prophesize(ApiControllerTestService::class);
