@@ -1,24 +1,22 @@
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
+        $basicModuleStructure = new \Gear\Module\BasicModuleStructure();
 
-        $this->mvcController = $this->prophesize('Gear\Mvc\Controller\ControllerService');
-        $this->mvcControllerTest = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+        $basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
+        $basicModuleStructure->setModuleName('GearTest');
 
-        $this->mvcConsoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
-        $this->mvcConsoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
+        $dir = new \GearBase\Util\Dir\DirService;
+        $basicModuleStructure->setDirService($dir);
 
-        $this->controllerManager = $this->prophesize('Gear\Mvc\Config\ControllerManager');
+        $str = new \GearBase\Util\String\StringService();
+        $basicModuleStructure->setStringService($str);
+
+        $basicModuleStructure->prepare();
+
+        $this->assertEquals('vfs://moduleDir/config', $basicModuleStructure->getConfigFolder());
+        $this->assertEquals('vfs://moduleDir/public', $basicModuleStructure->getPublicFolder());
+        $this->assertEquals('vfs://moduleDir/src', $basicModuleStructure->getSrcFolder());
 
 
-        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerService');
+        $basicModuleStructure->write();
 
-        $this->stringService = new \GearBase\Util\String\StringService();
-
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
-
-        $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
-
-        $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
-
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+        $this->assertTrue(is_dir($basicModuleStructure->getPublicFolder()));
+        $this->assertFalse(is_dir('vfs://moduleDir/configure'));

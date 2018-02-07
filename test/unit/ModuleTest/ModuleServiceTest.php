@@ -82,6 +82,7 @@ class ModuleServiceTest extends TestCase
 
         $this->stringService  = new StringService();
         $this->dirService = new DirService();
+        $this->fileService = new FileService();
 
         $this->composer = $this->prophesize(ComposerService::class);
         $this->testService = $this->prophesize(TestService::class);
@@ -371,8 +372,16 @@ class ModuleServiceTest extends TestCase
         $this->docs->createChangelog()->shouldBeCalled();
     }
 
-    public function mockFilesInCreator($files)
+    public function mockFilesInCreator($moduleSrc, $fileLocation)
     {
+        $parser = new Parser();
+
+        $files = $parser->parse(file_get_contents($fileLocation));
+
+        if (!isset($files) || !isset($files['files'***REMOVED***) || count($files['files'***REMOVED***) <= 0) {
+            throw new \Exception('Missing Files');
+        }
+
         foreach ($files['files'***REMOVED*** as $file) {
             $this->fileCreator->setTemplate($file['template'***REMOVED***)->shouldBeCalled();
             if (isset($file['options'***REMOVED***)) {
@@ -383,11 +392,11 @@ class ModuleServiceTest extends TestCase
 
             if (isset($file['location'***REMOVED***)) {
                 $this->fileCreator->setLocation(
-                    vfsStream::url(sprintf('module/my-module/%s', $file['location'***REMOVED***))
+                    vfsStream::url(sprintf('%s/%s', $moduleSrc, $file['location'***REMOVED***))
                 )->shouldBeCalled();
             } else {
                 $this->fileCreator->setLocation(
-                    vfsStream::url(sprintf('module/my-module'))
+                    vfsStream::url(sprintf($moduleSrc))
                 )->shouldBeCalled();
             }
 
@@ -397,9 +406,7 @@ class ModuleServiceTest extends TestCase
     }
 
     /**
-     * @group create2
-     * @group x1
-     * @group x11
+     * @group x111
      */
     public function testCreateModuleWeb()
     {
@@ -407,10 +414,12 @@ class ModuleServiceTest extends TestCase
         $moduleName = 'MyModule';
         //$location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure();
+        $this->module = new \Gear\Module\BasicModuleStructure(
+            $this->stringService,
+            $this->dirService,
+            $this->fileService
+        );
         $this->module->setRequestName($moduleName);
-        $this->module->setDirService($this->dirService);
-        $this->module->setStringService($this->stringService);
         $this->module->setBasePath(vfsStream::url('module'));
 
 
@@ -448,10 +457,12 @@ class ModuleServiceTest extends TestCase
         $type = 'cli';
         $moduleName = 'MyModule';
 
-        $this->module = new \Gear\Module\BasicModuleStructure();
+        $this->module = new \Gear\Module\BasicModuleStructure(
+            $this->stringService,
+            $this->dirService,
+            $this->fileService
+        );
         $this->module->setRequestName($moduleName);
-        $this->module->setDirService($this->dirService);
-        $this->module->setStringService($this->stringService);
 
         $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
 
@@ -488,28 +499,35 @@ class ModuleServiceTest extends TestCase
         return [
             ['web'***REMOVED***,
             ['cli'***REMOVED***,
-            ['api'***REMOVED***,
-            ['src'***REMOVED***,
-            ['src-zf2'***REMOVED***,
-            ['src-zf3'***REMOVED***,
+            //['api'***REMOVED***,
+            //['src'***REMOVED***,
+            //['src-zf2'***REMOVED***,
+            //['src-zf3'***REMOVED***,
         ***REMOVED***;
     }
 
     /**
      * @dataProvider moduleAsProject
-     * @group x1
+     * @group xxx
      */
     public function testCreateModuleAsProject($type)
     {
         $moduleName = sprintf('%sModule', ucfirst($type));
         $location = vfsStream::url('module');
 
-        $this->module = new BasicModuleStructure();
+        $this->module = new \Gear\Module\BasicModuleStructure(
+            $this->stringService,
+            $this->dirService,
+            $this->fileService
+        );
         $this->module->setRequestName($moduleName);
-        $this->module->setDirService($this->dirService);
-        $this->module->setStringService($this->stringService);
+
+        $files = sprintf(__DIR__.'/_files/module-%s.yml', $type);
+        $this->assertFileExists($files);
 
         $this->moduleService = $this->mockModuleFakeCreator();
+
+        $this->mockFilesInCreator(sprintf('module/%s-module', $type), $files);
 
         $created = $this->moduleService->moduleAsProject($moduleName, $location, $type);
         $this->assertTrue($created);
@@ -525,10 +543,12 @@ class ModuleServiceTest extends TestCase
         $moduleName = 'MyModule';
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure();
+        $this->module = new \Gear\Module\BasicModuleStructure(
+            $this->stringService,
+            $this->dirService,
+            $this->fileService
+        );
         $this->module->setRequestName($moduleName);
-        $this->module->setDirService($this->dirService);
-        $this->module->setStringService($this->stringService);
 
 
         $this->composer->createComposerAsProject($type)->willReturn(true)->shouldBeCalled();
@@ -542,15 +562,9 @@ class ModuleServiceTest extends TestCase
 
         $this->assertFileExists($files);
 
-        $parser = new Parser();
-
-        $files = $parser->parse(
-            file_get_contents(__DIR__.'/_files/module-files-web.yml')
-        );
-
         $this->moduleService = $this->mockModuleFakeCreator();
 
-        $this->mockFilesInCreator($files);
+        $this->mockFilesInCreator('module/my-module', $files);
 
         $this->feature->createIndexFeature()->willReturn(true)->shouldBeCalled();
         $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
@@ -574,10 +588,12 @@ class ModuleServiceTest extends TestCase
         $moduleName = 'MyModule';
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure();
+        $this->module = new \Gear\Module\BasicModuleStructure(
+            $this->stringService,
+            $this->dirService,
+            $this->fileService
+        );
         $this->module->setRequestName($moduleName);
-        $this->module->setDirService($this->dirService);
-        $this->module->setStringService($this->stringService);
 
 
         $this->composer->createComposerAsProject($type)->willReturn(true)->shouldBeCalled();
@@ -600,15 +616,9 @@ class ModuleServiceTest extends TestCase
 
         $this->assertFileExists($files);
 
-        $parser = new Parser();
-
-        $files = $parser->parse(
-            file_get_contents($files)
-        );
-
         $this->moduleService = $this->mockModuleFakeCreator();
 
-        $this->mockFilesInCreator($files);
+        $this->mockFilesInCreator('module/my-module', $files);
 
         $created = $this->moduleService->moduleAsProject($moduleName, $location, $type);
 

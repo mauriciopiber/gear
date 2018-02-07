@@ -3,19 +3,24 @@ namespace Gear\Module;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Gear\Module\BasicModuleStructure;
 
 class BasicModuleStructureFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $structure = new BasicModuleStructure(
+            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('GearBase\Util\Dir'),
+            $serviceLocator->get('GearBase\Util\File')
+        );
+
         $request = $serviceLocator->get('request');
 
         $moduleName = $request->getParam('module');
         $namespace = $request->getParam('namespace', null);
         $staging = $request->getParam('staging', null);
         $type = $request->getParam('type', null);
-
-        $structure = new \Gear\Module\BasicModuleStructure();
 
         if (empty($moduleName)) {
             $structure->setModuleName(null);
@@ -26,8 +31,7 @@ class BasicModuleStructureFactory implements FactoryInterface
         $structure->setNamespace($namespace);
         $structure->setStaging($staging);
         $structure->setModuleName($moduleName);
-        //$structure->setServiceLocator($serviceLocator);
-
+        $structure->setType($type);
 
         $location = $request->getParam('basepath');
 
