@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "1d8c9d88cb4f82a251da84465edf6800",
+    "content-hash": "6ec7525eadf75ccb41bd68598c9316f4",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -5921,7 +5921,7 @@
             ***REMOVED***,
             "description": "PHPUnit Listener for measure time and memory usage",
             "homepage": "https://github.com/atrapalo/phpunit-memory-and-time-usage-listener",
-            "time": "2015-04-19 16:29:45"
+            "time": "2015-04-19T16:29:45+00:00"
         },
         {
             "name": "behat/behat",
@@ -6597,7 +6597,7 @@
                 "performance",
                 "profiling"
             ***REMOVED***,
-            "time": "2015-08-31 22:07:48"
+            "time": "2015-08-31T22:07:48+00:00"
         },
         {
             "name": "mauriciopiber/gear-base",
