@@ -349,7 +349,7 @@ EOS
      */
     public function executeClone()
     {
-        $install = realpath((new \Gear\Module())->getLocation().'/../../bin/'.static::$clone);
+        $install = realpath((new \Gear\Module())->getLocation().'/../bin/'.static::$clone);
 
         if (!is_file($install)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -390,7 +390,7 @@ EOS
 
 
 
-        $script = realpath(__DIR__.'/../../../bin');
+        $script = realpath(__DIR__.'/../../bin');
         $remove = realpath($script.'/remove');
 
         if (!is_file($remove)) {
@@ -442,7 +442,7 @@ EOS
 
     public function executeGear()
     {
-        $script  = realpath(__DIR__.'/../../../bin');
+        $script  = realpath(__DIR__.'/../../bin');
 
         $install = realpath($script.'/installer-utils/run-gear.sh');
 
@@ -554,7 +554,7 @@ EOS
         $env = ($this->projectConfig->getEnvironment()!== null) ?
           $this->projectConfig->getEnvironment() : 'development';
 
-        $script  = realpath(__DIR__.'/../../../bin/virtualhost');
+        $script  = realpath(__DIR__.'/../../bin/virtualhost');
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
         }
@@ -577,7 +577,7 @@ EOS
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../bin/nfs');
+        $script  = realpath(__DIR__.'/../../bin/nfs');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();
@@ -597,7 +597,7 @@ EOS
             return false;
         }
 
-        $script  = realpath(__DIR__.'/../../../bin/git');
+        $script  = realpath(__DIR__.'/../../bin/git');
 
         if (!is_file($script)) {
             throw new \Gear\Exception\FileNotFoundException();

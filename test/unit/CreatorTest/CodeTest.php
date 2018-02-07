@@ -32,7 +32,7 @@ class CodeTest extends TestCase
 
         $this->code->setConstructorParams($constructorParams);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../../';
+        $this->template = (new \Gear\Module())->getLocation().'/../';
         $this->template .= 'test/template/module/code';
     }
 

@@ -20,9 +20,9 @@ abstract class AbstractCodeTest extends AbstractCodeBase
 {
     public function getFileNamespace($data)
     {
-        if (!empty($data->getNamespace())) {
+        $module = $this->getModule()->getModuleName();
 
-            $module = $this->getModule()->getModuleName();
+        if (!empty($data->getNamespace())) {
             $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $module.'\\' : '';
             $namespace .= $data->getNamespace();
 
@@ -40,16 +40,16 @@ abstract class AbstractCodeTest extends AbstractCodeBase
 
             $namespaceFile = $implode;
 
-            return $namespaceFile;
+            return $namespaceFile.';'.PHP_EOL;
         }
 
         if ($data instanceof Src) {
             if ($data->getType() == 'SearchForm') {
                 return 'FormTest\SearchTest';
             }
-            return $data->getType().'Test';
+            return $module.'Test\\'.$data->getType().'Test;'.PHP_EOL;
         } else {
-            return 'ControllerTest';
+            return $module.'Test\\'.'ControllerTest'.PHP_EOL;
         }
     }
 
