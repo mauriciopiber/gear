@@ -1,0 +1,14 @@
+
+src:
+  0:
+    name: ApiControllerService
+    type: Service
+    namespace: Mvc\Controller\Api
+    service: factories
+    extends: Mvc\Controller\AbstractControllerService
+  1:
+    name: ApiControllerTestService
+    type: Service
+    namespace: Mvc\Controller\Api
+    service: factories
+    extends: Mvc\Controller\AbstractControllerTestService
