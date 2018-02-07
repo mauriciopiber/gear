@@ -1,11 +1,11 @@
 <?php
-namespace GearTest\MvcTest\ControllerTest;
+namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
-use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
+use GearTest\MvcTest\ControllerTest\WebTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Column\ColumnManager;
 
@@ -15,7 +15,7 @@ use Gear\Column\ColumnManager;
  * @group Fix3
  * @group db-controller
  */
-class ControllerTestServiceTest extends TestCase
+class WebControllerTestServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ControllerDataTrait;
@@ -32,7 +32,7 @@ class ControllerTestServiceTest extends TestCase
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/controller-test';
 
 
-        $this->controllerTest = new \Gear\Mvc\Controller\ControllerTestService();
+        $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService();
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->controllerTest->setModule($this->module->reveal());

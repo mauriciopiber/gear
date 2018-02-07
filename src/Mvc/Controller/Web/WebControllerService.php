@@ -1,26 +1,26 @@
 <?php
-namespace Gear\Mvc\Controller;
+namespace Gear\Mvc\Controller\Web;
 
 use Gear\Mvc\Controller\AbstractControllerService;
 use Gear\Column\Mvc\ControllerInterface;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;
-use Gear\Mvc\Controller\ControllerTestServiceTrait;
+use Gear\Mvc\Controller\Web\WebControllerTestServiceTrait;
 use GearJson\Controller\Controller as ControllerJson;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Db\Db;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 
-class ControllerService extends AbstractControllerService implements
+class WebControllerService extends AbstractControllerService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface
 {
     use UploadImageTrait;
 
-    use ControllerTestServiceTrait;
+    use WebControllerTestServiceTrait;
 
     use SchemaServiceTrait;
 

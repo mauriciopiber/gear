@@ -20,11 +20,11 @@ use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait as ControllerManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait as ViewMvc;
 use Gear\Mvc\LanguageServiceTrait;
-use Gear\Mvc\Controller\{
-    ControllerServiceTrait as ControllerMvcTrait,
-    ControllerTestServiceTrait as ControllerMvcTestTrait,
-    ControllerService as ControllerMvc,
-    ControllerTestService as ControllerMvcTest
+use Gear\Mvc\Controller\Web\{
+    WebControllerService,
+    WebControllerServiceTrait,
+    WebControllerTestService,
+    WebControllerTestServiceTrait
 };
 use Gear\Mvc\ConsoleController\{
     ConsoleController,
@@ -65,9 +65,9 @@ class ControllerService extends AbstractConstructor
 
     use ConfigServiceTrait;
 
-    use ControllerMvcTestTrait;
+    use WebControllerTestServiceTrait;
 
-    use ControllerMvcTrait;
+    use WebControllerServiceTrait;
 
     use ApiControllerServiceTrait;
 
@@ -102,8 +102,8 @@ class ControllerService extends AbstractConstructor
         TableService $tableService,
         ColumnService $columnService,
         BasicModuleStructure $basicModuleStructure,
-        ControllerMvc $controllerService,
-        ControllerMvcTest $controllerTestService,
+        WebControllerService $controllerService,
+        WebControllerTestService $controllerTestService,
         ConsoleController $consoleController,
         ConsoleControllerTest $controllerTest,
         ApiControllerService $apiController,

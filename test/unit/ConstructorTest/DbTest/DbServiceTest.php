@@ -49,8 +49,8 @@ class DbServiceTest extends TestCase
         $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
-        $this->controllerService = $this->prophesize('Gear\Mvc\Controller\ControllerService');
-        //$this->controllerTestService = $this->prophesize('Gear\Mvc\Controller\ControllerService');
+        $this->controllerService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');
+        //$this->controllerTestService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
 
         $this->service = new DbService(

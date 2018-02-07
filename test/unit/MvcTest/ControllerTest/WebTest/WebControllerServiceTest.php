@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\ControllerTest;
+namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use org\bovigo\vfs\vfsStream;
@@ -9,14 +9,14 @@ use Zend\View\Resolver\TemplatePathStack;
 use GearBase\Util\String\StringService;
 use GearBase\Util\File\FileService;
 use Gear\Module;
-use Gear\Mvc\Controller\ControllerService;
+use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Template\TemplateService;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\ControllerDependency;
 use Gear\Creator\Code;
 use Gear\Util\Vector\ArrayService;
-use GearTest\MvcTest\ControllerTest\ControllerDataTrait;
+use GearTest\MvcTest\ControllerTest\WebTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
 use GearTest\ControllerScopeTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
@@ -28,7 +28,7 @@ use Gear\Column\ColumnManager;
  * @group Controller
  * @group db-controller
  */
-class ControllerServiceTest extends TestCase
+class WebControllerServiceTest extends TestCase
 {
     use UtilTestTrait;
     use ControllerDataTrait;
@@ -78,7 +78,7 @@ class ControllerServiceTest extends TestCase
 
         $this->injector = new Injector($this->arrayService);
 
-        $this->controllerService = new ControllerService();
+        $this->controllerService = new WebControllerService();
         $this->controllerService->setFileCreator($this->fileCreator);
         $this->controllerService->setStringService($this->string);
         $this->controllerService->setModule($this->module->reveal());
@@ -101,7 +101,7 @@ class ControllerServiceTest extends TestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->controllerService->setTableService($this->table->reveal());
 
-        $this->testing = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+        $this->testing = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerTestService');
         $this->controllerService->setControllerTestService($this->testing->reveal());
 
         $this->schema = $this->prophesize('GearJson\Schema\SchemaService');

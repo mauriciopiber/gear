@@ -12,8 +12,8 @@ use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\Filter\FilterServiceTrait;
 use Gear\Mvc\Form\FormServiceTrait;
-use Gear\Mvc\Controller\ControllerServiceTrait;
-use Gear\Mvc\Controller\ControllerTestServiceTrait;
+use Gear\Mvc\Controller\Web\WebControllerServiceTrait;
+use Gear\Mvc\Controller\Web\WebControllerTestServiceTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\LanguageServiceTrait;
 use Gear\Mvc\View\ViewServiceTrait;
@@ -31,8 +31,8 @@ use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\Filter\FilterService;
 use Gear\Mvc\Form\FormService;
-use Gear\Mvc\Controller\ControllerService;
-use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
@@ -72,9 +72,9 @@ class DbService extends AbstractConstructor
 
     use FormServiceTrait;
 
-    use ControllerServiceTrait;
+    use WebControllerServiceTrait;
 
-    use ControllerTestServiceTrait;
+    use WebControllerTestServiceTrait;
 
     use ConfigServiceTrait;
 
@@ -100,7 +100,7 @@ class DbService extends AbstractConstructor
         FixtureService $fixtureService,
         FilterService $filterService,
         FormService $formService,
-        ControllerService $controllerService,
+        WebControllerService $controllerService,
         //ControllerTestService $controllerTestService,
         ConfigService $configService,
         LanguageService $languageService,

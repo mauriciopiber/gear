@@ -28,12 +28,14 @@ use Gear\Mvc\View\App\AppControllerServiceTrait;
 use Gear\Mvc\View\App\AppControllerService;
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\View\App\AppControllerSpecService;
-use Gear\Mvc\Controller\ControllerServiceTrait as ControllerMvcTrait;
-use Gear\Mvc\Controller\ControllerTestServiceTrait as ControllerMvcTestTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
-use Gear\Mvc\Controller\ControllerService as ControllerMvc;
-use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
+use Gear\Mvc\Controller\Web\{
+    WebControllerService,
+    WebControllerServiceTrait,
+    WebControllerTestService,
+    WebControllerTestServiceTrait
+};
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
@@ -127,8 +129,8 @@ class ModuleService implements ModuleProjectConnectorInterface
     use VersionServiceTrait;
     use ConfigServiceTrait;
     use CodeceptionServiceTrait;
-    use ControllerMvcTrait;
-    use ControllerMvcTestTrait;
+    use WebControllerServiceTrait;
+    use WebControllerTestServiceTrait;
     use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
@@ -166,8 +168,8 @@ class ModuleService implements ModuleProjectConnectorInterface
         SchemaController $schemaController,
         SchemaAction $schemaAction,
         ConfigService $configService,
-        ControllerMvc $controller,
-        ControllerMvcTest $controllerTest,
+        WebControllerService $controller,
+        WebControllerTestService $controllerTest,
         ConsoleController $consoleController,
         ConsoleControllerTest $consoleTest,
         ViewService $viewService,

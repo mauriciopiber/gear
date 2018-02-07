@@ -44,6 +44,12 @@ use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\Dir\DirService;
 use GearBase\Util\String\StringService;
 use Gear\Module\ModuleService;
+use Gear\Mvc\Controller\Web\{
+    WebControllerService,
+    WebControllerServiceTrait,
+    WebControllerTestService,
+    WebControllerTestServiceTrait
+};
 
 /**
  * @group Module
@@ -90,9 +96,9 @@ class ModuleServiceTest extends TestCase
 
         $this->consoleController = $this->prophesize(ConsoleController::class);
 
-        $this->controllerTest = $this->prophesize(ControllerTestService::class);
+        $this->controllerTest = $this->prophesize(WebControllerTestService::class);
 
-        $this->controller = $this->prophesize(ControllerService::class);
+        $this->controller = $this->prophesize(WebControllerService::class);
 
         $this->codeception = $this->prophesize(CodeceptionService::class);
 

@@ -1,16 +1,16 @@
 <?php
-namespace Gear\Mvc\Controller;
+namespace Gear\Mvc\Controller\Web;
 
-use Gear\Mvc\Controller\Controller;
+use Gear\Mvc\Controller\Web\WebControllerService;
 
-trait ControllerServiceTrait
+trait WebControllerServiceTrait
 {
     protected $mvcService;
 
     public function getMvcController()
     {
         if (!isset($this->mvcService)) {
-            $this->mvcService = $this->getServiceLocator()->get(ControllerService::class);
+            $this->mvcService = $this->getServiceLocator()->get(WebControllerService::class);
         }
         return $this->mvcService;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\MvcTest\ControllerTest;
+namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use GearTest\SingleDbTableTrait;
 use GearTest\AllColumnsDbTableTrait;

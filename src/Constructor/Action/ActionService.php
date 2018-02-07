@@ -12,8 +12,8 @@ use Gear\Mvc\Config\RouterManagerTrait;
 use Gear\Mvc\Config\ConsoleRouterManagerTrait;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait;
-use Gear\Mvc\Controller\ControllerTestServiceTrait;
-use Gear\Mvc\Controller\ControllerServiceTrait as MvcControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestServiceTrait;
+use Gear\Mvc\Controller\Web\WebControllerServiceTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTestTrait;
 use Gear\Mvc\View\App\AppControllerServiceTrait;
@@ -34,8 +34,8 @@ use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
 use Gear\Mvc\Config\NavigationManager;
 use Gear\Mvc\View\ViewService;
-use Gear\Mvc\Controller\ControllerService;
-use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\Spec\Page\Page;
@@ -83,8 +83,8 @@ class ActionService extends AbstractConstructor
     use ConsoleControllerTrait;
 
     /* mvc controller */
-    use ControllerTestServiceTrait;
-    use MvcControllerService;
+    use WebControllerTestServiceTrait;
+    use WebControllerServiceTrait;
 
     /* mvc view */
     use ViewServiceTrait;
@@ -116,8 +116,8 @@ class ActionService extends AbstractConstructor
         ConsoleRouterManager $consoleRouterManager,
         NavigationManager $navigationManager,
         ViewService $viewService,
-        ControllerService $controllerService,
-        ControllerTestService $controllerServiceTest,
+        WebControllerService $controllerService,
+        WebControllerTestService $controllerServiceTest,
         ConsoleController $consoleController,
         ConsoleControllerTest $consoleControllerTest,
         AppControllerService $appControllerService,
