@@ -4,8 +4,8 @@ namespace GearTest\ServiceTest\ConstructorTest;
 use PHPUnit_Framework_TestCase as TestCase;
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\Action\ActionService;
-use Gear\Mvc\Controller\ControllerService;
-use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\Config\ControllerManager;
@@ -44,8 +44,8 @@ class ActionServiceTest extends TestCase
 
 
         //mvc controller
-        $this->mvcController = $this->prophesize(ControllerService::class);
-        $this->mvcControllerTest = $this->prophesize(ControllerTestService::class);
+        $this->mvcController = $this->prophesize(WebControllerService::class);
+        $this->mvcControllerTest = $this->prophesize(WebControllerTestService::class);
         $this->mvcConsoleController = $this->prophesize(ConsoleController::class);
         $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
 

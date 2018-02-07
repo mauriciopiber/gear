@@ -18,10 +18,9 @@ class ModuleServiceFactoryTest extends AbstractTestCase
 
         $factory = new \Gear\Module\ModuleServiceFactory();
 
-
         $expected = [
-            'Gear\Mvc\Controller\ControllerService' => 'Gear\Mvc\Controller\ControllerService',
-            'Gear\Mvc\Controller\ControllerTestService' => 'Gear\Mvc\Controller\ControllerTestService',
+            'Gear\Mvc\Controller\Web\WebControllerService'     => 'Gear\Mvc\Controller\Web\WebControllerService',
+            'Gear\Mvc\Controller\Web\WebControllerTestService' => 'Gear\Mvc\Controller\Web\WebControllerTestService',
             'Gear\Creator\FileCreator\FileCreator' => 'Gear\Creator\FileCreator\FileCreator',
             'GearBase\Util\String' => 'GearBase\Util\String\StringService',
             'moduleStructure' => 'Gear\Module\BasicModuleStructure',

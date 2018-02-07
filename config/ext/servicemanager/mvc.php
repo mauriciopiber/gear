@@ -15,9 +15,8 @@ return [
         Mvc\Config\ControllerPluginManager::class                 => Mvc\Config\ControllerPluginManager::class,
         Mvc\Config\UploadImageManager::class                      => Mvc\Config\UploadImageManager::class,
         Mvc\Config\AssetManager::class                            => Mvc\Config\AssetManager::class,
-
-        Mvc\Controller\ControllerService::class                   => Mvc\Controller\ControllerService::class,
-        Mvc\Controller\ControllerTestService::class               => Mvc\Controller\ControllerTestService::class,
+        Mvc\Controller\Web\WebControllerService::class            => Mvc\Controller\Web\WebControllerService::class,
+        Mvc\Controller\Web\WebControllerTestService::class        => Mvc\Controller\Web\WebControllerTestService::class,
         Mvc\ControllerPlugin\ControllerPluginService::class       => Mvc\ControllerPlugin\ControllerPluginService::class,
         Mvc\ControllerPlugin\ControllerPluginTest::class          => Mvc\ControllerPlugin\ControllerPluginTestService::class,
         Mvc\ConsoleController\ConsoleController::class            => Mvc\ConsoleController\ConsoleController::class,

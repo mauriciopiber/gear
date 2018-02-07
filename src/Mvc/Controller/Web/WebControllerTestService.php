@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Mvc\Controller;
+namespace Gear\Mvc\Controller\Web;
 
 use Gear\Mvc\Controller\AbstractControllerTestService;
 use Gear\Column\Int\PrimaryKey;
@@ -15,7 +15,7 @@ use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 
-class ControllerTestService extends AbstractControllerTestService implements
+class WebControllerTestService extends AbstractControllerTestService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
     ControllerConstructorInterface

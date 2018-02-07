@@ -1,16 +1,16 @@
 <?php
-namespace Gear\Mvc\Controller;
+namespace Gear\Mvc\Controller\Web;
 
-use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 
-trait ControllerTestServiceTrait
+trait WebControllerTestServiceTrait
 {
     protected $controllerTestService;
 
     public function getControllerTestService()
     {
         if (!isset($this->controllerTestService)) {
-            $this->controllerTestService = $this->getServiceLocator()->get(ControllerTestService::class);
+            $this->controllerTestService = $this->getServiceLocator()->get(WebControllerTestService::class);
         }
         return $this->controllerTestService;
     }

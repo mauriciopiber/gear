@@ -3,8 +3,8 @@ namespace Gear\Constructor\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Mvc\Controller\ControllerService as ControllerMvc;
-use Gear\Mvc\Controller\ControllerTestService as ControllerMvcTest;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Table\TableService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Mvc\ConsoleController\ConsoleController;
@@ -42,8 +42,8 @@ class ControllerServiceFactory implements FactoryInterface
             $serviceLocator->get(TableService::class),
             $serviceLocator->get(ColumnService::class),
             $serviceLocator->get(BasicModuleStructure::class),
-            $serviceLocator->get(ControllerMvc::class),
-            $serviceLocator->get(ControllerMvcTest::class),
+            $serviceLocator->get(WebControllerService::class),
+            $serviceLocator->get(WebControllerTestService::class),
             $serviceLocator->get(ConsoleController::class),
             $serviceLocator->get(ConsoleControllerTest::class),
             $serviceLocator->get(ApiController::class),

@@ -7,8 +7,8 @@ use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
 use Gear\Module\BasicModuleStructure;
-use Gear\Mvc\Controller\ControllerService as MvcController;
-use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\ConsoleController\ConsoleController;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
@@ -35,8 +35,8 @@ class ControllerServiceTest extends TestCase
         $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
-        $this->mvcController = $this->prophesize(MvcController::class);
-        $this->mvcControllerTest = $this->prophesize(ControllerTestService::class);
+        $this->mvcController = $this->prophesize(WebControllerService::class);
+        $this->mvcControllerTest = $this->prophesize(WebControllerTestService::class);
 
         $this->mvcConsoleController = $this->prophesize(ConsoleController::class);
         $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
