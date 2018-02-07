@@ -399,9 +399,13 @@ class ModuleService implements ModuleProjectConnectorInterface
             //$this->getTestService()->createTests($this->type);
         }
 
-        //$this->buildpath();
-
-        $this->registerJson();
+        if (in_array($this->type, [
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::CLI,
+            ModuleTypesInterface::API,
+        ***REMOVED***)) {
+            $this->registerJson();
+        }
 
         $codeceptionService = $this->getCodeceptionService();
         $codeceptionService->createFullSuite();
@@ -994,6 +998,20 @@ class ModuleService implements ModuleProjectConnectorInterface
         $module = $this->getModule()->getModuleName();
 
         $this->getSchemaService()->create($module);
+
+        switch ($this->type) {
+            case 'web':
+                $type = 'Action';
+                break;
+            case 'cli':
+                $type = 'Console';
+                break;
+            case 'api':
+                $type = 'Api';
+                break;
+            default:
+                throw new \Exception('Missing mapping between module and controller');
+        }
 
         $type = ($this->type == 'web') ? 'Action' : 'Console';
 
