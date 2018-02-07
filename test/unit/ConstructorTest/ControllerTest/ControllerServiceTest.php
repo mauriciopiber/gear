@@ -6,6 +6,20 @@ use Gear\Constructor\Controller\ControllerService;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
+use Gear\Module\BasicModuleStructure;
+use Gear\Mvc\Controller\ControllerService as MvcController;
+use Gear\Mvc\Controller\ControllerTestService;
+use Gear\Mvc\ConsoleController\ConsoleController;
+use Gear\Mvc\ConsoleController\ConsoleControllerTest;
+use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
+use Gear\Mvc\Config\ControllerManager;
+use GearJson\Controller\ControllerService as SchemaController;
+use Gear\Table\TableService\TableService;
+use Gear\Column\ColumnService;
+use Gear\Mvc\LanguageService;
+use Gear\Mvc\View\ViewService;
+use Gear\Mvc\Config\ConfigService;
+use GearBase\Util\String\StringService;
 
 /**
  * @group m1
@@ -18,30 +32,34 @@ class ControllerServiceTest extends TestCase
 
         $this->moduleName = 'Gearing';
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
-        $this->mvcController = $this->prophesize('Gear\Mvc\Controller\ControllerService');
-        $this->mvcControllerTest = $this->prophesize('Gear\Mvc\Controller\ControllerTestService');
+        $this->mvcController = $this->prophesize(MvcController::class);
+        $this->mvcControllerTest = $this->prophesize(ControllerTestService::class);
 
-        $this->mvcConsoleController = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleController');
-        $this->mvcConsoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
+        $this->mvcConsoleController = $this->prophesize(ConsoleController::class);
+        $this->mvcConsoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
 
-        $this->controllerManager = $this->prophesize('Gear\Mvc\Config\ControllerManager');
+        $this->apiControllerService = $this->prophesize(ApiControllerService::class);
+        $this->apiControllerTestService = $this->prophesize(ApiControllerTestService::class);
+
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
 
-        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerService');
+        $this->schemaController = $this->prophesize(SchemaController::class);
 
-        $this->stringService = new \GearBase\Util\String\StringService();
+        $this->stringService = new StringService();
 
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
+        $this->tableService = $this->prophesize(TableService::class);
+        $this->columnService = $this->prophesize(ColumnService::class);
 
-        $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
+        $this->languageService = $this->prophesize(LanguageService::class);
 
-        $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
+        $this->viewService = $this->prophesize(ViewService::class);
 
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+        $this->configService = $this->prophesize(ConfigService::class);
+
 
         $this->controllerService = new ControllerService(
             $this->stringService,
@@ -53,6 +71,8 @@ class ControllerServiceTest extends TestCase
             $this->mvcControllerTest->reveal(),
             $this->mvcConsoleController->reveal(),
             $this->mvcConsoleControllerTest->reveal(),
+            $this->apiControllerService->reveal(),
+            $this->apiControllerTestService->reveal(),
             //$this->controllerManager->reveal(),
             $this->configService->reveal(),
             $this->viewService->reveal(),

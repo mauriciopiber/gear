@@ -28,9 +28,8 @@ class Local
     {
         $inputFilter = (new \Gear\Project\Config\LocalFilter())->getInputFilter();
         $inputFilter->setData($data);
-        //var_dump($inputFilter->isValid());die();
         if ($inputFilter->isValid() === false) {
-            throw new Exception(self::MISSING_PARAMS.var_export($data));
+            throw new Exception(self::MISSING_PARAMS.var_export($data, true));
         }
 
         $this->username = $data['username'***REMOVED***;

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Project\Config\Globally;
@@ -12,13 +12,16 @@ use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\String\StringService;
 use Gear\Project\Docs\Docs;
 use Gear\Project\ProjectService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Project
  * @group ProjectService
  */
-class ProjectServiceTest extends AbstractTestCase
+class ProjectServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();
@@ -88,27 +91,7 @@ class ProjectServiceTest extends AbstractTestCase
             $this->npmUpgrade->reveal(),
             $this->config,
             $this->composerService->reveal()
-            /*
-             use GearConfigTrait;
-
-             use DocsTrait;
-
-             use DirEdgeTrait;
-
-             use AntUpgradeTrait;
-
-             use NpmUpgradeTrait;
-
-             use ComposerServiceTrait;
-
-             use VersionServiceTrait;
-
-             use ScriptServiceTrait;
-             */
-
         );
-
-        //$this->project->setProject($this->projectDir);
     }
 
     /**
@@ -420,6 +403,7 @@ EOS
     /**
      * @dataProvider projects
      * @group pro1
+     * @group foda-se
      */
     public function testCreateProject($name, $host, $git, $database, $user, $pass, $nfs)
     {
@@ -439,7 +423,6 @@ EOS
         $this->assertFileExists(vfsStream::url('project/GearProject/config/autoload'));
         $this->assertFileExists(vfsStream::url('project/GearProject/public'));
 
-
         $request = $this->prophesize('Zend\Console\Request');
         $request->getParam('type', 'web')->willReturn('web');
         $request->getParam('staging', null)->willReturn('staging.com.br');
@@ -455,8 +438,6 @@ EOS
 
 
 
-
-
         $project = new \Gear\Project\Project(array(
             'project'  => $name,
             'host'     => $host,
@@ -468,7 +449,6 @@ EOS
             'type'     => 'web',
             'folder'   => vfsStream::url('project')
         ));
-
 
         $global = new Globally(array(
             'dbms' => 'mysql',
@@ -483,28 +463,22 @@ EOS
             'environment' => 'development'
         ));
 
+
+
         $this->composerService->createComposer($project)->willReturn(true)->shouldBeCalled();
-        //$this->composerService->runComposerUpdate($project)->willReturn(true)->shouldBeCalled();
 
 
         $this->script = $this->prophesize('Gear\Script\ScriptService');
 
         $this->script->setLocation('vfs://project')->willReturn(true)->shouldBeCalled();
         $this->script->setLocation('vfs://project/GearProject')->willReturn(true)->shouldBeCalled();
-        //$this->script->setLocation(null)->willReturn(true)->shouldBeCalled();
 
         $basePath = \GearBase\Module::getProjectFolder();
 
         $cmd = $basePath.'/bin/installer-utils/clone-skeleton vfs://project vfs://project/GearProject GearProject';
         $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
 
-        /*
-        $cmd = $basePath.'/bin/nfs vfs://project/GearProject';
-        $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
 
-        $cmd = $basePath.'/bin/git vfs://project/GearProject git@bitbucket.org:mauriciopiber/gear-project.git';
-        $this->script->run($cmd)->willReturn(true)->shouldBeCalled();
-        */
 
         $this->fileService->chmod(0777, 'vfs://project/GearProject/phpmd.xml')->willReturn(true)->shouldBeCalled();
         $this->fileService->chmod(0777, 'vfs://project/GearProject/phpdox.xml')->willReturn(true)->shouldBeCalled();
@@ -545,26 +519,9 @@ EOS
         $this->project->setFileService($this->fileService->reveal());
         $this->project->setDocs($this->docs->reveal());
 
-
-
         $result = $this->project->create('web');
         $this->assertTrue($result);
 
-        /**
-        $expected = $this->templates.'/global.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.php'))
-        );
-
-        $expected = $this->templates.'/global.development.phtml';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents(vfsStream::url('project/GearProject/config/autoload/global.development.php'))
-        );
-        **/
     }
 
     public function testCreateIndexFile()
@@ -658,9 +615,5 @@ EOS
         $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineModule/cache/.gitignore'));
         $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineORMModule/Proxy'));
         $this->assertFileExists(vfsStream::url('project/GearProject/data/DoctrineORMModule/Proxy/.gitignore'));
-        $this->assertFileExists(vfsStream::url('project/GearProject/public/upload'));
-
-
     }
-
 }

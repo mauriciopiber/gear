@@ -1044,7 +1044,6 @@ EOS;
 
         file_put_contents($gearfile, $gearfileConfig);
 
-        //var_dump($gearfile);
 
         return vfsStream::url(self::GEARFILE_URL);
     }

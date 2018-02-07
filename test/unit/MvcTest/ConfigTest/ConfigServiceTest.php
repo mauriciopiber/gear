@@ -18,12 +18,9 @@ class ConfigServiceTest extends AbstractTestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        //vfsStream::newDirectory('module')->at(vfsStreamWrapper::getRoot());
-        //vfsStream::newDirectory('module', 777)->at(vfsStreamWrapper::getRoot());
         vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
         vfsStream::newDirectory('config/ext')->at(vfsStreamWrapper::getRoot());
 
-        //var_dump(vfsStream::url('module/config'));die();
         $this->assertFileExists('vfs://module/config');
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');

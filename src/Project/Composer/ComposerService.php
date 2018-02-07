@@ -59,7 +59,7 @@ class ComposerService
 
         $scriptService = $this->getScriptService();
         $scriptService->setLocation($project->getProjectLocation());
-        echo $scriptService->run($cmd);
+        $scriptService->run($cmd);
         return true;
     }
 }
