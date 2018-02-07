@@ -1615,6 +1615,34 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ApiControllerService",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Controller\\Api",
+                "extends": "Mvc\\Controller\\AbstractControllerService",
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ApiControllerTestService",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Controller\\Api",
+                "extends": "Mvc\\Controller\\AbstractControllerTestService",
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [

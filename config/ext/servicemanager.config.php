@@ -1,7 +1,6 @@
 <?php return [
     'invokables' => [
         'Gear\Util\Vector\ArrayService' => 'Gear\Util\Vector\ArrayService',
-
         'Gear\Constructor\App\AppService' => 'Gear\Constructor\App\AppService',
         'Gear\Creator\FileCreator\AppTest\Vars' => 'Gear\Creator\FileCreator\AppTest\Vars',
         'Gear\Creator\FileCreator\AppTest\BeforeEach' => 'Gear\Creator\FileCreator\AppTest\BeforeEach',
@@ -35,9 +34,7 @@
         'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
         'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
-        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager',
-
-        //'Gear\Column\ColumnService' => 'Gear\Column\ColumnService',
+        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
     ***REMOVED***,
     'factories' => [
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
@@ -47,7 +44,6 @@
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
         'Gear\Diagnostic\Ant' => 'Gear\Diagnostic\Ant\AntServiceFactory',
-
         'Gear\Diagnostic\NpmService' => 'Gear\Diagnostic\NpmServiceFactory',
         'Gear\Diagnostic\FileService' => 'Gear\Diagnostic\File\FileServiceFactory',
         'Gear\Diagnostic\ComposerService' => 'Gear\Diagnostic\ComposerServiceFactory',
@@ -77,7 +73,6 @@
         'Gear\Creator\Injector\Injector' => 'Gear\Creator\Injector\InjectorFactory',
         'Gear\Database\Phinx\PhinxService' => 'Gear\Database\Phinx\PhinxServiceFactory',
         'Gear\Creator\Component\Constructor\ConstructorParams' => 'Gear\Creator\Component\Constructor\ConstructorParamsFactory',
-        //'Gear\Mvc\ValueObject\ValueObjectTestService' => 'Gear\Mvc\ValueObject\ValueObjectTestServiceFactory',
         'Gear\Integration\Util\ResolveNames\ResolveNames' => 'Gear\Integration\Util\ResolveNames\ResolveNamesFactory',
         'Gear\Integration\Util\Persist\Persist' => 'Gear\Integration\Util\Persist\PersistFactory',
         'Gear\Integration\Component\SuperTestFile\SuperTestFile' => 'Gear\Integration\Component\SuperTestFile\SuperTestFileFactory',
@@ -95,7 +90,9 @@
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorFactory',
         'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite' => 'Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory',
         'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory',
-        'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory'
+        'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory',
+        'Gear\Mvc\Controller\Api\ApiControllerService' => 'Gear\Mvc\Controller\Api\ApiControllerServiceFactory',
+        'Gear\Mvc\Controller\Api\ApiControllerTestService' => 'Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Column\ColumnService' => false,
