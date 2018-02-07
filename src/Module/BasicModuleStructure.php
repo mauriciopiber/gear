@@ -1,20 +1,18 @@
 <?php
 namespace Gear\Module;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use GearBase\Util\File\FileServiceTrait;
 use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirServiceAwareInterface;
-use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\ModuleAwareInterface;
+use GearBase\Util\File\FileService;
+use GearBase\Util\Dir\DirService;
+use GearBase\Util\String\StringService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\Exception\ResourceNotFound;
 
-class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServiceAwareInterface, DirServiceAwareInterface, ModuleAwareInterface
+class BasicModuleStructure
 {
-
-    use ServiceLocatorAwareTrait;
+    use FileServiceTrait;
     use StringServiceTrait;
     use DirServiceTrait;
     use ModuleAwareTrait;
@@ -38,6 +36,17 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
     protected $staging;
 
     public $basePath;
+
+
+    public function __construct(
+        StringService $stringService,
+        DirService $dirService,
+        FileService $fileService
+    ) {
+        $this->stringService = $stringService;
+        $this->dirService = $dirService;
+        $this->fileService = $fileService;
+    }
 
     public function setNamespace($namespace)
     {
@@ -75,11 +84,6 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         return $this->type;
     }
 
-    public function __construct($moduleName = null)
-    {
-        $this->setModuleName($moduleName);
-    }
-
     public function getRequestName()
     {
         if (! isset($this->requestName)) {
@@ -106,7 +110,9 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
 
     public function prepare($moduleName = null, $type = 'web')
     {
-        $this->setType($type);
+        if ($this->getType() === null) {
+            $this->setType($type);
+        }
 
         if (empty($moduleName)) {
             $moduleName = $this->getModuleName();
@@ -178,10 +184,9 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         // main
         $this->getDirService()->mkDir($this->getMainFolder());
 
-        // $this->getDirService()->mkDir($this->getJenkinsFolder());
-
         $this->getDirService()->mkDir($this->getDocsFolder());
         // script
+
         $this->getDirService()->mkDir($this->getScriptFolder());
 
         // config
@@ -194,58 +199,101 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         $this->writable($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
 
-        // schema
-        $this->getDirService()->mkDir($this->getSchemaFolder());
-
-        // data
-        $this->getDirService()->mkDir($this->getDataFolder());
-        $this->getDirService()->mkDir($this->getSessionFolder());
-        $this->writable($this->getSessionFolder());
-        $this->createGitIgnore($this->getSessionFolder());
-        // data/migrations
-        $this->getDirService()->mkDir($this->getDataMigrationFolder());
-
-        // var_dump($this->getMainFolder());die();
-
-        $this->writable($this->getDataMigrationFolder());
-        // data/logs
-        $this->getDirService()->mkDir($this->getDataLogsFolder());
-        $this->writable($this->getDataLogsFolder());
-        $this->createGitIgnore($this->getDataLogsFolder());
-        // data/_files
-        $this->getDirService()->mkDir($this->getDataFilesFolder());
-        // data/DoctrineModule
-        // $this->getDirService()->mkDir($this->getDataCacheFolder());
-        $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
-        $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
-        $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
-        $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
-
-        $this->writable($this->getDataMigrationFolder());
-        $this->writable($this->getDataLogsFolder());
-        $this->writable($this->getDataDoctrineModuleCacheFolder());
-        $this->writable($this->getDataDoctrineProxyCacheFolder());
-        $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
-        $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
-
         $this->getDirService()->mkDir($this->getSrcFolder());
         $this->getDirService()->mkDir($this->getSrcModuleFolder());
-        $this->getDirService()->mkDir($this->getControllerFolder());
-        $this->getDirService()->mkDir($this->getSearchFolder());
-        $this->getDirService()->mkDir($this->getEntityFolder());
-        $this->createGitIgnore($this->getEntityFolder());
-        $this->getDirService()->mkDir($this->getFactoryFolder());
-        $this->getDirService()->mkDir($this->getFormFolder());
-        $this->getDirService()->mkDir($this->getFilterFolder());
-        $this->getDirService()->mkDir($this->getRepositoryFolder());
-        $this->getDirService()->mkDir($this->getServiceFolder());
 
-        $this->getDirService()->mkDir($this->getValueObjectFolder());
-        $this->getDirService()->mkDir($this->getControllerPluginFolder());
-        $this->getDirService()->mkDir($this->getFixtureFolder());
-        $this->createGitIgnore($this->getFixtureFolder());
+        $this->getDirService()->mkDir($this->getTestFolder());
+        $this->getDirService()->mkDir($this->getTestUnitFolder());
+        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
 
-        if ($this->getType() === 'web') {
+        $this->getDirService()->mkDir($this->getDataFolder());
+        // schema
+        if (in_array($this->getType(), [
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::CLI,
+            ModuleTypesInterface::API
+        ***REMOVED***)) {
+            $this->getDirService()->mkDir($this->getSchemaFolder());
+
+            $this->getDirService()->mkDir($this->getSessionFolder());
+            $this->writable($this->getSessionFolder());
+            $this->createGitIgnore($this->getSessionFolder());
+
+            // data/logs
+            $this->getDirService()->mkDir($this->getDataLogsFolder());
+            $this->writable($this->getDataLogsFolder());
+            $this->createGitIgnore($this->getDataLogsFolder());
+
+            // data/DoctrineModule
+            // $this->getDirService()->mkDir($this->getDataCacheFolder());
+            $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
+            $this->writable($this->getDataDoctrineModuleCacheFolder());
+
+            $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
+            $this->writable($this->getDataDoctrineProxyCacheFolder());
+
+
+            $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
+            $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
+
+
+
+            $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
+            $this->ignoreAll($this->getDataDoctrineModuleCacheFolder());
+
+            $this->getDirService()->mkDir($this->getControllerFolder());
+            $this->getDirService()->mkDir($this->getEntityFolder());
+            $this->createGitIgnore($this->getEntityFolder());
+            //$this->getDirService()->mkDir($this->getFactoryFolder());
+            $this->getDirService()->mkDir($this->getFormFolder());
+            $this->getDirService()->mkDir($this->getFilterFolder());
+            $this->getDirService()->mkDir($this->getRepositoryFolder());
+            $this->getDirService()->mkDir($this->getServiceFolder());
+
+            $this->getDirService()->mkDir($this->getValueObjectFolder());
+            $this->getDirService()->mkDir($this->getControllerPluginFolder());
+            $this->getDirService()->mkDir($this->getFixtureFolder());
+            $this->createGitIgnore($this->getFixtureFolder());
+
+            $this->getDirService()->mkDir($this->getTestControllerFolder());
+            $this->getDirService()->mkDir($this->getTestServiceFolder());
+            $this->getDirService()->mkDir($this->getTestEntityFolder());
+            $this->getDirService()->mkDir($this->getTestRepositoryFolder());
+            $this->getDirService()->mkDir($this->getTestFormFolder());
+
+            if ($this->getType() === ModuleTypesInterface::WEB) {
+                $this->getDirService()->mkDir($this->getTestSearchFolder());
+            }
+
+            $this->getDirService()->mkDir($this->getTestFilterFolder());
+            //$this->getDirService()->mkDir($this->getTestFactoryFolder());
+            $this->getDirService()->mkDir($this->getTestValueObjectFolder());
+            $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
+            $this->writable($this->getTestSupportFolder());
+
+            $this->getDirService()->mkDir($this->getDataCacheFolder());
+            $this->getDirService()->mkDir($this->getDataCacheConfigFolder());
+            $this->writable($this->getDataCacheConfigFolder());
+            $this->createGitIgnore($this->getDataCacheConfigFolder());
+        }
+
+
+        if (in_array($this->getType(), [
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::API
+        ***REMOVED***)) {
+            $this->getDirService()->mkDir($this->getDataMigrationFolder());
+            $this->writable($this->getDataMigrationFolder());
+            $this->getDirService()->mkDir($this->getDataFilesFolder());
+        }
+
+
+        if ($this->getType() === ModuleTypesInterface::WEB) {
+            $this->getDirService()->mkDir($this->getSearchFolder());
+        }
+
+
+        if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getViewFolder());
             $this->getDirService()->mkDir($this->getViewModuleFolder());
             $this->getDirService()->mkDir($this->getViewErrorFolder());
@@ -257,7 +305,7 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         // public
         $this->getDirService()->mkDir($this->getPublicFolder());
 
-        if ($this->getType() === 'web') {
+        if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getPublicUploadFolder());
             $this->getDirService()->mkDir($this->getPublicJsFolder());
             $this->getDirService()->mkDir($this->getPublicJsAppFolder());
@@ -281,42 +329,24 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         }
         // $this->createGitIgnore($this->getPublicJsControllerFolder());
         // test
-        $this->getDirService()->mkDir($this->getTestFolder());
-        $this->getDirService()->mkDir($this->getTestUnitFolder());
-        $this->getDirService()->mkDir($this->getTestUnitModuleFolder());
 
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
 
-        $this->getDirService()->mkDir($this->getTestControllerFolder());
-        $this->getDirService()->mkDir($this->getTestServiceFolder());
-        $this->getDirService()->mkDir($this->getTestEntityFolder());
-        $this->getDirService()->mkDir($this->getTestRepositoryFolder());
-        $this->getDirService()->mkDir($this->getTestFormFolder());
-        $this->getDirService()->mkDir($this->getTestSearchFolder());
-
-        $this->getDirService()->mkDir($this->getTestFilterFolder());
-        $this->getDirService()->mkDir($this->getTestFactoryFolder());
-        $this->getDirService()->mkDir($this->getTestValueObjectFolder());
-        $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
-        $this->writable($this->getTestSupportFolder());
-
-        if ($this->getType() === 'web') {
+        if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getModuleViewFolder());
             $this->getDirService()->mkDir($this->getViewHelperFolder());
             $this->getDirService()->mkDir($this->getTestViewFolder());
             $this->getDirService()->mkDir($this->getTestViewHelperFolder());
+        }
 
+
+        if (in_array($this->getType(), [ModuleTypesInterface::WEB, ModuleTypesInterface::API***REMOVED***)) {
             $this->getDirService()->mkDir($this->getLanguageFolder());
             $this->getDirService()->mkDir($this->getLanguageRouteFolder());
         }
 
-        $this->getDirService()->mkDir($this->getDataCacheFolder());
-        $this->getDirService()->mkDir($this->getDataCacheConfigFolder());
-        $this->writable($this->getDataCacheConfigFolder());
-        $this->createGitIgnore($this->getDataCacheConfigFolder());
-
-        if ($this->getType() == 'web') {
+        if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getNodejsFolder());
             $this->writable($this->getNodejsFolder());
             $this->createGitIgnore($this->getNodejsFolder());
@@ -325,10 +355,12 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
         return $this;
     }
 
+    /**
     public function getFactoryFolder()
     {
         return $this->getSrcModuleFolder() . '/Factory';
     }
+    */
 
     public function ignoreAll($location)
     {
@@ -337,7 +369,7 @@ class BasicModuleStructure implements ServiceLocatorAwareInterface, StringServic
 !.gitignore
 
 EOS;
-        file_put_contents($location . '/.gitignore', $template);
+        $this->getFileService()->factory($location, '.gitignore', $template);
     }
 
     public function createGitIgnore($location)
@@ -351,7 +383,8 @@ EOS;
 !.gitignore
 
 EOS;
-        file_put_contents($location . '/.gitignore', $template);
+
+        $this->getFileService()->factory($location, '.gitignore', $template);
     }
 
     public function getDataDoctrineModuleFolder()
@@ -524,10 +557,12 @@ EOS;
         return $this->getPublicFolder() . '/_temp';
     }
 
+    /**
     public function getTestFactoryFolder()
     {
         return $this->getTestUnitModuleFolder() . '/FactoryTest';
     }
+    */
 
     public function getTestValueObjectFolder()
     {
