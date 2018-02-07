@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ConstructorTest\DbTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Mvc\Router\RouteMatch;
 
 /*
@@ -14,26 +14,8 @@ use Zend\Mvc\Router\RouteMatch;
  * @group module-constructor-db
  * @group module-constructor-db-controller
  */
-class DbControllerTest extends AbstractConsoleControllerTestCase
+class DbControllerTest extends TestCase
 {
-    public function setUp()
-    {
-        $this->bootstrap = new \GearBaseTest\ZendServiceLocator();
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
-        parent::setUp();
-    }
-
-    public function testControllerManager()
-    {
-        $this->assertInstanceOf(
-            'Gear\Constructor\Db\DbController',
-            $this->getApplication()->getServiceManager()->get('ControllerManager')->get('Gear\Module\Constructor\Db')
-        );
-    }
-
     public function testTrait()
     {
         $dbService =  $this->getMockBuilder('Gear\Constructor\Db\DbService')

@@ -49,7 +49,7 @@ class ComposerService
 
     public function runComposerUpdate(Project $project)
     {
-        $install = realpath((new \Gear\Module())->getLocation().'/../../bin/'.static::$composerUpdate);
+        $install = realpath((new \Gear\Module())->getLocation().'/../bin/'.static::$composerUpdate);
 
         if (!is_file($install)) {
             throw new \Gear\Exception\FileNotFoundException();

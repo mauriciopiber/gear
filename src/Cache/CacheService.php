@@ -53,7 +53,7 @@ class CacheService implements ServiceLocatorAwareInterface
 
     public function renewMemcached()
     {
-        $script = realpath(__DIR__.'/../../../bin/memcached');
+        $script = realpath(__DIR__.'/../../bin/memcached');
         $scriptRunner = $this->getServiceLocator()->get('scriptService');
         $scriptRunner->setLocation(\GearBase\Module::getProjectFolder());
         echo $scriptRunner->run($script);

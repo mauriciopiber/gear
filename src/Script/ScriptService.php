@@ -39,6 +39,10 @@ class ScriptService extends AbstractJsonService
 
     public function run($cmd)
     {
+        if (empty($cmd)) {
+            throw new \Exception('You should never declare a empty command');
+        }
+
         $this->setCurrent(getcwd());
 
         chdir($this->getLocation());
