@@ -346,10 +346,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         $file = $this->upgradeRepository($file);
 
-
-
-//        var_dump($file);die();
-
         return $file;
     }
 }

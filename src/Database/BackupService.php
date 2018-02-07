@@ -216,7 +216,7 @@ class BackupService implements ModuleAwareInterface, StringServiceAwareInterface
         $this->getScriptService()->runScriptAt($command);
 
         if (is_file($this->file)) {
-            echo sprintf('Carregado database de %s', $this->file)."\n";
+            $this->console->writeLine(sprintf('Carregado database de %s', $this->file));
         } else {
             throw new \Exception('Dump não foi criado com sucesso');
         }

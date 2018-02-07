@@ -60,7 +60,7 @@ class SuperTestFile
     {
         $testFile = file_get_contents(__DIR__.'/test-super-template.sh');
 
-        var_dump(get_class($superType), MvcMajorSuite::class);
+        //var_dump(get_class($superType), MvcMajorSuite::class);
         $utilPath = (get_class($superType) == MvcMajorSuite::class)
             ? './../../../../../../bin'
             : './../../../../../bin';

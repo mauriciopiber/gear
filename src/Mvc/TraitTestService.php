@@ -40,7 +40,6 @@ class TraitTestService extends AbstractMvcTest
         );
 
         $render = $trait->render();
-        echo $render."\n";
         return $render;
     }
 }

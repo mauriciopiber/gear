@@ -33,10 +33,10 @@ use Gear\Mvc\ConsoleController\{
     ConsoleControllerTestTrait
 };
 use Gear\Mvc\Controller\Api\{
-    ApiController,
-    ApiControllerTest,
-    ApiControllerTrait,
-    ApiControllerTestTrait
+    ApiControllerService,
+    ApiControllerServiceTrait,
+    ApiControllerTestService,
+    ApiControllerTestServiceTrait
 };
 use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\View\ViewService;
@@ -69,9 +69,9 @@ class ControllerService extends AbstractConstructor
 
     use ControllerMvcTrait;
 
-    //use ApiControllerTrait;
+    use ApiControllerServiceTrait;
 
-    //use ApiControllerTestTrait;
+    use ApiControllerTestServiceTrait;
 
     use ViewMvc;
 
@@ -106,6 +106,8 @@ class ControllerService extends AbstractConstructor
         ControllerMvcTest $controllerTestService,
         ConsoleController $consoleController,
         ConsoleControllerTest $controllerTest,
+        ApiControllerService $apiController,
+        ApiControllerTestService $apiControllerTest,
         ConfigService $configService,
         ViewService $viewService,
         LanguageService $languageService,
@@ -121,6 +123,9 @@ class ControllerService extends AbstractConstructor
         //controller console
         $this->consoleController = $consoleController;
         $this->consoleControllerTest = $controllerTest;
+
+        $this->apiController = $apiController;
+        $this->apiControllerTest = $apiControllerTest;
         //config
         $this->configService = $configService;
         $this->controllerConfig = $controllerManager;

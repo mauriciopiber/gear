@@ -141,6 +141,8 @@ class ProjectService extends AbstractJsonService
             'folder'   => $basepath
         ));
 
+
+
         $this->setProject($this->projectConfig->getProjectLocation());
 
         $this->getScriptService()->setLocation($this->projectConfig->getProjectLocation());
@@ -148,7 +150,9 @@ class ProjectService extends AbstractJsonService
 
         $this->executeClone();
 
+
         $this->createDir($this->projectConfig->getProjectLocation());
+
 
         //cria($dbname, $username, $password, $host, $environment)
         $this->setUpConfig(
@@ -172,6 +176,7 @@ class ProjectService extends AbstractJsonService
 
         //cria
         $this->getComposerService()->createComposer($this->projectConfig);
+
 
         //script
         //$this->getComposerService()->runComposerUpdate($this->projectConfig);
@@ -363,9 +368,12 @@ EOS
             $this->projectConfig->getProject()
         );
 
+
         $scriptService = $this->getScriptService();
         $scriptService->setLocation($this->projectConfig->getFolder());
-        echo $scriptService->run($cmd);
+        $scriptService->run($cmd);
+
+        return;
     }
 
 

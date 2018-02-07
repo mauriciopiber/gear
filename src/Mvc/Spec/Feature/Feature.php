@@ -551,10 +551,7 @@ class Feature extends AbstractMvcTest
 
         $isNullable = $this->getTableService()->isNullable($this->db->getTable());
 
-        //var_dump($isNullable);die();
-
         $fileText = $this->buildCreateActionValidateNotNullResponse($isNullable);
-
 
         //$fileText .= $this->columnManager->generateCode('getIntegrationActionIsNullable', [***REMOVED***);
 
