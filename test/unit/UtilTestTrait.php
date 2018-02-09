@@ -48,43 +48,23 @@ trait UtilTestTrait
 
         $resolver = new AggregateResolver();
 
-        //if ($templateMap == null) {
+        $map = new TemplatePathStack([
+            'script_paths' => [
+                'template' => $templatePath,
+            ***REMOVED***
+        ***REMOVED***);
 
-            $map = new TemplatePathStack([
-                'script_paths' => [
-                    'template' => $templatePath,
-                ***REMOVED***
-            ***REMOVED***);
-
-            $resolver->attach($map);
-            $view->setResolver($resolver);
-
-            return $view;
-        //}
-
-            /*
-        $templates = [***REMOVED***;
-
-        foreach ($templateMap as $i => $temp) {
-            $templates[$temp***REMOVED*** = $templatePath.'/'.$temp;
-        }
-
-        $map = new TemplateMapResolver($templates);
         $resolver->attach($map);
         $view->setResolver($resolver);
 
         return $view;
-
-
-*/
-
     }
 
     public function createFileCreator($templateMap = null)
     {
         if ($this->fileCreator === null) {
             $template       = new TemplateService();
-            $template->setRenderer($this->mockPhpRenderer($templateMap));
+            $template->setRenderer($this->mockPhpRenderer());
 
             $fileService    = new FileService();
             $this->fileCreator = new FileCreator($fileService, $template);

@@ -8,6 +8,10 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\FileEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
+use Gear\Module\Tests\{
+    ModuleTestsService,
+    ModuleTestsServiceTrait,
+};
 
 class FileUpgrade extends AbstractJsonService
 {
@@ -23,16 +27,25 @@ class FileUpgrade extends AbstractJsonService
 
     use ModuleServiceTrait;
 
+    use ModuleTestsServiceTrait;
+
     static public $created = 'Arquivo - Arquivo %s do %s criado';
 
     static public $confirm = 'Arquivo - Deseja criar arquivo %s?';
 
     protected $type;
 
-    public function __construct($console, $consolePrompt, $moduleService, $projectService, $module = null)
-    {
+    public function __construct(
+        $console,
+        $consolePrompt,
+        $moduleService,
+        $moduleTestsService,
+        $projectService,
+        $module = null
+    ) {
         $this->console = $console;
         $this->moduleService = $moduleService;
+        $this->moduleTestsService = $moduleTestsService;
         $this->projectService = $projectService;
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
@@ -185,6 +198,7 @@ class FileUpgrade extends AbstractJsonService
             case 'test/unit.suite.yml':
                 $found = $this->getModuleService()->getUnitSuiteConfig();
                 break;
+
             case 'script/deploy-testing.sh':
                 $found = $this->getModuleService()->getScriptTesting($type);
                 break;
@@ -207,13 +221,20 @@ class FileUpgrade extends AbstractJsonService
                 $found = $this->getModuleService()->getPhpmdConfig();
                 break;
             case 'test/phpunit-benchmark.xml':
-                $found = $this->getModuleService()->getPhpunitBenchmarkConfig();
+                $found = $this->getModuleTestsService()->createPhpunitBenchmarkConfigFile();
                 break;
-
-            case 'test/phpunit-coverage-benchmark.xml':
-                $found = $this->getModuleService()->getPhpunitCoverageBenchmarkConfig();
+            case 'test/phpunit.xml':
+                $found = $this->getModuleTestsService()->createPhpunitConfigFile();
                 break;
-
+            case 'test/phpunit-coverage.xml':
+                $found = $this->getModuleTestsService()->createPhpunitCoverageConfigFile();
+                break;
+            case 'test/phpunit-ci.xml':
+                $found = $this->getModuleTestsService()->createPhpunitCiConfigFile();
+                break;
+            case 'test/phpunit-coverage-ci.xml':
+                $found = $this->getModuleTestsService()->createPhpunitCoverageCiConfigFile();
+                break;
             case 'test/phpcs.xml':
                 $found = $this->getModuleService()->getPhpcsDocsConfig();
                 break;

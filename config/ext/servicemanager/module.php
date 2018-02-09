@@ -10,7 +10,7 @@ return [
     [
         'Gear\Module\Codeception'     => 'Gear\Module\CodeceptionService',
         'scriptService'               => 'Gear\Script\ScriptService',
-        'Gear\Module\Test'            => 'Gear\Module\TestService',
+        'Gear\Module\Tests'            => 'Gear\Module\Tests\ModuleTestsService',
 
         'Gear\Module\Node\Package'    => 'Gear\Module\Node\Package',
         'Gear\Module\Node\Gulpfile'   => 'Gear\Module\Node\Gulpfile',

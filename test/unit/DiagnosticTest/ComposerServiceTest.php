@@ -60,7 +60,7 @@ EOS;
                 ***REMOVED***
 
             ***REMOVED***
-            );
+        );
 
         $composer->setComposerEdge($yaml->reveal());
 
@@ -229,8 +229,8 @@ EOS
         $this->assertCount(5, $result);
 
 
-        $this->assertEquals(sprintf(ComposerService::$requireVersion, 'mpiber/package-2', '0.1.0'), $result[3***REMOVED***);
-        $this->assertEquals(sprintf(ComposerService::$requireDevVersion, 'mpiber/unit-2', '3.0.0'), $result[4***REMOVED***);
+        $this->assertEquals(sprintf(ComposerService::$requireVersion, 'mpiber/package-2', '1.0.0', '0.1.0'), $result[3***REMOVED***);
+        $this->assertEquals(sprintf(ComposerService::$requireDevVersion, 'mpiber/unit-2', '^1.0.0', '3.0.0'), $result[4***REMOVED***);
 
     }
     //public function test

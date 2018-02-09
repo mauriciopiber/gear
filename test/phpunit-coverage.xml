@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="./unit/_bootstrap.php"
+    bootstrap="./../vendor/autoload.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -18,13 +18,16 @@
     </testsuites>
     <filter>
         <whitelist>
-       	 	<directory suffix=".php">./../src/Gear/Module</directory>
-       	 	<exclude>
-       	 		<file>./../src/Gear/Module.php</file>
+                <directory suffix=".php">./../src/Module</directory>
+                <exclude>
+                    <file>./../src/Module.php</file>
             </exclude>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="./../build/coverage"/>
-	</logging>    
+     <log type="coverage-html" target="../build/coverage"/>
+     <log type="coverage-clover" target="../build/logs/clover.xml"/>
+     <log type="coverage-crap4j" target="../build/logs/crap4j.xml"/>
+     <log type="junit" target="../build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
 </phpunit>

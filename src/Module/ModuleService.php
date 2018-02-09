@@ -49,7 +49,10 @@ use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
 use GearJson\Controller\ControllerServiceTrait;
 use GearJson\Action\ActionServiceTrait;
-use Gear\Module\TestServiceTrait;
+use Gear\Module\Tests\{
+    ModuleTestsServiceTrait,
+    ModuleTestsService
+};
 use Gear\Module\CodeceptionServiceTrait;
 use Gear\Mvc\LanguageServiceTrait;
 use Gear\Module\ComposerServiceTrait;
@@ -63,7 +66,7 @@ use GearBase\Util\String\StringService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Module\Docs\Docs;
 use Gear\Module\CodeceptionService;
-use Gear\Module\TestService;
+
 use Gear\Module\ComposerService;
 use Gear\Module\Node\Gulpfile;
 use Gear\Module\Node\Karma;
@@ -122,7 +125,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     use KarmaTrait;
     use PackageTrait;
     use ProtractorTrait;
-    use TestServiceTrait;
+    use ModuleTestsServiceTrait;
     use ComposerServiceTrait;
     use ViewServiceTrait;
     use AppControllerServiceTrait;
@@ -160,7 +163,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         Docs $docs,
         ComposerService $composer,
         CodeceptionService $codeception,
-        TestService $test,
+        ModuleTestsService $test,
         Karma $karma,
         Protractor $protractor,
         Package $package,
@@ -197,7 +200,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->docs = $docs;
         $this->composerService = $composer;
         $this->codeception = $codeception;
-        $this->testService = $test;
+        $this->moduleTestsService = $test;
 
         $this->karma = $karma;
         $this->protractor = $protractor;
@@ -389,14 +392,14 @@ class ModuleService implements ModuleProjectConnectorInterface
             $this->createInitAutoloader();
             $this->createDeploy();
             $this->getPhinxConfig();
-            $this->getTestService()->createTestsModuleAsProject($this->type);
+            $this->getModuleTestsService()->createTestsModuleAsProject($this->type);
             //criar script de deploy para módulo
         }
 
         if ($collection == 2) {
             $this->getComposerService()->createComposer();
             //vaar_dump($this->type);die();
-            //$this->getTestService()->createTests($this->type);
+            //$this->getModuleTestsService()->createTests($this->type);
         }
 
         if (in_array($this->type, [
@@ -509,7 +512,7 @@ class ModuleService implements ModuleProjectConnectorInterface
      */
     public function getPhpmdConfig()
     {
-        return $this->getTestService()->copyphpmd();
+        return $this->getModuleTestsService()->copyphpmd();
     }
 
     /**
@@ -517,23 +520,7 @@ class ModuleService implements ModuleProjectConnectorInterface
      */
     public function getPhpcsDocsConfig()
     {
-        return $this->getTestService()->copyDocSniff();
-    }
-
-    /**
-     * Cria o arquivo test/phpunit-benchmark.xml
-     */
-    public function getPhpunitBenchmarkConfig()
-    {
-        return $this->getTestService()->copyphpunitbenchmark();
-    }
-
-    /**
-     * Cria o arquivo test/phpunit-coverage-benchmark.xml
-     */
-    public function getPhpunitCoverageBenchmarkConfig()
-    {
-        return $this->getTestService()->copyphpunitcoveragebenchmark();
+        return $this->getModuleTestsService()->copyDocSniff();
     }
 
     /**
@@ -549,7 +536,7 @@ class ModuleService implements ModuleProjectConnectorInterface
      */
     public function getPhpdoxConfig()
     {
-        return $this->getTestService()->copyphpdox();
+        return $this->getModuleTestsService()->copyphpdox();
     }
 
     /**

@@ -9,13 +9,13 @@
             <arg path="${basedir}"/>
         </exec>
     </target>
-    <target name="unit-coverage-ci" depends="set-vendor, build-helper" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--xml"/>
-            <arg value="--coverage-xml"/>
-            <arg value="--coverage-html"/>
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="/usr/bin/php">
+            <arg value="-d"/>
+            <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
+            <arg value="${vendor}/bin/phpunit"/>
+            <arg value="-c"/>
+            <arg value="test/phpunit-coverage.xml"/>
         </exec>
     </target>
     <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">

@@ -27,7 +27,7 @@ class ModuleServiceFactoryTest extends AbstractTestCase
             'Gear\Module\Docs\Docs' => 'Gear\Module\Docs\Docs',
             'Gear\Module\Composer' => 'Gear\Module\ComposerService',
             'Gear\Module\Codeception' => 'Gear\Module\CodeceptionService',
-            'Gear\Module\Test' => 'Gear\Module\TestService',
+            'Gear\Module\Tests' => 'Gear\Module\Tests\ModuleTestsService',
             'Gear\Module\Node\Karma' => 'Gear\Module\Node\Karma',
             'Gear\Module\Node\Protractor' => 'Gear\Module\Node\Protractor',
             'Gear\Module\Node\Package' => 'Gear\Module\Node\Package',

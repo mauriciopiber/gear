@@ -13,6 +13,7 @@ class FileUpgradeFactory implements FactoryInterface
             $serviceLocator->get('console'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Module'),
+            $serviceLocator->get('Gear\Module\Tests'),
             $serviceLocator->get('projectService'),
             $serviceLocator->get('moduleStructure')
         );

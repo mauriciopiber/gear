@@ -536,6 +536,14 @@ function Gear_Module_Execute_Ant
     type=${2}
     build=${3}
     
+    cd $modulePath && ant phpunit phpunit-ci phpunit-coverage phpunit-coverage-ci
+    cd $modulePath && ant dev
+    cd $modulePath && ant ci
+    cd $modulePath && ant measure
+    
+    exit 1
+    
+    
     if [ "$build" != "" ***REMOVED***; then
         cd $modulePath && ant $build
         return

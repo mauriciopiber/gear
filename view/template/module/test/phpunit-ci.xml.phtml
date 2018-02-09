@@ -1,18 +1,13 @@
 <phpunit
     bootstrap="./../vendor/autoload.php"
     colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    verbose="true"
     backupGlobals="false"
-    processIsolation="false"
     backupStaticAttributes="false"
-    syntaxCheck="true"
+    syntaxCheck="false"
 >
     <testsuites>
         <testsuite name="sites">
-            <directory suffix="Test.php">./unit/</directory>
+            <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -24,6 +19,6 @@
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="./../build/coverage"/>
+        <log type="coverage-clover" target="./../build/logs/clover.xml" />
     </logging>
 </phpunit>
