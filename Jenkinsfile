@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                sh '/usr/bin/ant unit-ci'
+                sh '/usr/bin/ant phpunit-ci'
             }
         }
         stage('Report') {
@@ -46,19 +46,6 @@ pipeline {
             }
             steps {
                 publishVersion(currentBuild, params.increment)
-            }
-        }
-        stage('Measure') {
-            when {
-                expression {
-                    return params.publish
-                }
-            }
-            steps {
-                build job: 'release-gear', parameters: [
-                    [$class: 'StringParameterValue', name: 'jobName', value: "${env.JOB_NAME}"***REMOVED***,
-                    [$class: 'StringParameterValue', name: 'upWorkspace', value: "${env.WORKSPACE}"***REMOVED***
-                ***REMOVED***
             }
         }
     }

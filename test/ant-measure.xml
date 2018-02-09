@@ -9,15 +9,6 @@
             <arg path="${basedir}"/>
         </exec>
     </target>
-    <target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="/usr/bin/php">
-            <arg value="-d"/>
-            <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
-            <arg value="${vendor}/bin/phpunit"/>
-            <arg value="-c"/>
-            <arg value="test/phpunit-coverage.xml"/>
-        </exec>
-    </target>
     <target name="pdepend" description="Calculate software metrics using PHP_Depend" depends="set-vendor">
         <exec executable="${vendor}/bin/pdepend">
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
