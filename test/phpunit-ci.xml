@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./../vendor/autoload.php" colors="true" backupGlobals="false" backupStaticAttributes="false" syntaxCheck="false">
+<phpunit
+    bootstrap="./../vendor/autoload.php"
+    colors="true"
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    syntaxCheck="false"
+>
     <testsuites>
         <testsuite name="sites">
             <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./../src</directory>
+            <exclude>
+                <file>./../src/Module.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="junit" target="./../build/report.xml" logIncompleteSkipped="false" />
+    </logging>
 </phpunit>
