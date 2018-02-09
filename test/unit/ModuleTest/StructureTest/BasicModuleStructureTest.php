@@ -32,6 +32,9 @@ class BasicModuleStructureTest extends TestCase
         return vfsStream::url($path);
     }
 
+    /**
+     * @group wri
+     */
     public function testCreateWebStructure()
     {
         $this->basicModuleStructure->setMainFolder(vfsStream::url('module'));
@@ -131,10 +134,36 @@ class BasicModuleStructureTest extends TestCase
                 ->shouldNotBeCalled();
         }
 
+        $writable = [
+            'module/build',
+            'module/data/session',
+            'module/data/logs',
+            'module/data/migrations',
+            'module/public/upload',
+            'module/public/_temp',
+            'module/node_modules',
+            'module/data/cache/configcache',
+            'module/data/DoctrineORMModule/Proxy',
+            'module/data/DoctrineModule/cache',
+            'module/test/_support',
+        ***REMOVED***;
+
+        foreach ($writable as $path) {
+
+            $this->assertContains($path, $paths);
+            $this->dirService->writable($this->wrapVfs($path))
+                ->shouldBeCalled();
+        }
+
         $this->basicModuleStructure->prepare();
         $this->basicModuleStructure->write();
+
+        $this->assertEquals('WebStructure', $this->basicModuleStructure->getModuleName());
     }
 
+    /**
+     * @group wri
+     */
     public function testCreateCliStructure()
     {
         $this->basicModuleStructure->setMainFolder(vfsStream::url('module'));
@@ -200,6 +229,23 @@ class BasicModuleStructureTest extends TestCase
         foreach ($excludePaths as $path) {
             $this->dirService->mkDir($this->wrapVfs($path))
                 ->shouldNotBeCalled();
+        }
+
+         $writable = [
+            'module/build',
+            'module/data/session',
+            'module/data/logs',
+            'module/data/cache/configcache',
+            'module/data/DoctrineORMModule/Proxy',
+            'module/data/DoctrineModule/cache',
+            'module/test/_support',
+        ***REMOVED***;
+
+        foreach ($writable as $path) {
+
+            $this->assertContains($path, $paths);
+            $this->dirService->writable($this->wrapVfs($path))
+                ->shouldBeCalled();
         }
 
         $this->basicModuleStructure->prepare();
@@ -281,6 +327,24 @@ class BasicModuleStructureTest extends TestCase
                 ->shouldNotBeCalled();
         }
 
+        $writable = [
+            'module/build',
+            'module/data/session',
+            'module/data/migrations',
+            'module/data/logs',
+            'module/data/cache/configcache',
+            'module/data/DoctrineORMModule/Proxy',
+            'module/data/DoctrineModule/cache',
+            'module/test/_support',
+        ***REMOVED***;
+
+        foreach ($writable as $path) {
+
+            $this->assertContains($path, $paths);
+            $this->dirService->writable($this->wrapVfs($path))
+                ->shouldBeCalled();
+        }
+
         $this->basicModuleStructure->prepare();
         $this->basicModuleStructure->write();
     }
@@ -326,6 +390,19 @@ class BasicModuleStructureTest extends TestCase
             $this->dirService->mkDir($this->wrapVfs($path))
                 ->shouldBeCalled();
         }
+
+        $writable = [
+            'module/build',
+            'module/test/_support',
+        ***REMOVED***;
+
+        foreach ($writable as $path) {
+
+            $this->assertContains($path, $paths);
+            $this->dirService->writable($this->wrapVfs($path))
+                ->shouldBeCalled();
+        }
+
         $this->basicModuleStructure->prepare();
         $this->basicModuleStructure->write();
     }

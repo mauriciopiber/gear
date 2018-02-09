@@ -4,15 +4,12 @@ import:
   0: 'ant-basic'
   1: 'ant-dev'
   2: 'ant-ci'
-  3: 'ant-namespace'
-  4: 'ant-measure'      
-  5: 'ant-benchmark'
+  4: 'ant-measure'
   
 target:
-  namespace: 'set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace'
-  dev: 'parallel-lint, phpcs, phpmd, phpcpd, unit'
-  ci: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci'
-  measure: 'prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox'
+  dev: 'parallel-lint, phpcs, phpmd, phpcpd, phpunit'
+  ci: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci'
+  measure: 'prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox'
 files:  
   ant-basic:
     clean: ''
@@ -31,10 +28,10 @@ files:
     phpcs-ci: 'set-vendor'
     phpmd-ci: 'set-vendor'
     phpcpd-ci: 'set-vendor'
-    unit-ci: 'set-vendor, build-helper'
+    phpunit-ci: 'set-vendor'
+    phpunit-coverage-ci: 'set-vendor'
   ant-measure:
     parallel-lint: 'set-vendor'
-    unit-coverage-ci: 'set-vendor, build-helper'
     pdepend: 'set-vendor'
     phploc-ci: 'set-vendor'
     phpdox: ''
@@ -42,18 +39,5 @@ files:
     phpcs: 'set-vendor'
     phpmd: 'set-vendor'
     phpcpd: 'set-vendor'
-    unit: 'set-vendor, build-helper'
-    unit-group: 'set-vendor, build-helper'
-    unit-group-namespace: 'set-vendor, build-helper'    
-    unit-coverage-group: 'set-vendor, build-helper'
-  ant-namespace:
-    phpcs-namespace: 'set-vendor'
-    phpmd-namespace: 'set-vendor'
-    phpcpd-namespace: 'set-vendor'
-    unit-namespace: 'set-vendor, build-helper'
-    unit-coverage-namespace: 'set-vendor, build-helper'
-  ant-benchmark:
-    phpunit-benchmark: 'set-vendor'
-    phpunit-benchmark-group: 'set-vendor'
-    phpunit-coverage-benchmark: 'set-vendor'
-    phpunit-coverage-benchmark-group: 'set-vendor' 
+    phpunit: 'set-vendor'
+    phpunit-coverage: 'set-vendor'

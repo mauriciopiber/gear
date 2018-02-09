@@ -1,1 +1,1 @@
-<target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, unit"/>
+<target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, phpunit"/>

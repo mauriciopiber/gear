@@ -29,11 +29,11 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
 
     static public $requireNotFound = 'Composer - Package require "%s" com versão "%s"';
 
-    static public $requireVersion = 'Composer - Package require "%s" mudar para versão "%s"';
+    static public $requireVersion = 'Composer - Package require "%s" mudar da versão %s para versão "%s"';
 
     static public $requireDevNotFound = 'Composer - Package require-dev "%s" com versão "%s"';
 
-    static public $requireDevVersion = 'Composer - Package require-dev "%s" mudar para versão "%s"';
+    static public $requireDevVersion = 'Composer - Package require-dev "%s" mudar da versão %s para versão "%s"';
 
     public function __construct($module = null)
     {
@@ -78,36 +78,64 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         return $errors;
     }
 
-    public function verify($edge, $composer, $require, $requireDev)
+    public function verify($edge, $composer, $noFoundTemplate, $wrongVersionTemplate)
     {
         $errors = [***REMOVED***;
 
         foreach ($edge as $package => $version) {
             if (!array_key_exists($package, $composer)) {
-                $errors[***REMOVED*** = sprintf($require, $package, $version);
+                $errors[***REMOVED*** = sprintf($noFoundTemplate, $package, $version);
                 continue;
             }
 
             if ($composer[$package***REMOVED*** !== $version) {
-                $errors[***REMOVED*** = sprintf($requireDev, $package, $version);
+                $errors[***REMOVED*** = sprintf($wrongVersionTemplate, $package, $composer[$package***REMOVED***, $version);
             }
         }
 
         return $errors;
     }
 
+    public function diagnosticName($file)
+    {
+        if (!array_key_exists('name', $file)) {
+            $this->errors[***REMOVED*** = static::$missingName;
+            return false;
+        }
+
+        return true;
+    }
+
+    public function diagnosticRepositoryExist($file)
+    {
+        if (!array_key_exists('repositories', $file)) {
+            $this->errors[***REMOVED*** = static::$missingPackFalse;
+            $this->errors[***REMOVED*** = static::$missingSatis;
+            return false;
+        }
+
+        return true;
+    }
+
+    public function diagnosticAutoload($file)
+    {
+        if (!array_key_exists('autoload', $file)) {
+            $this->errors[***REMOVED*** = static::$missingAutoload;
+            return false;
+        }
+
+        return true;
+    }
+
     public function diagnostic($composer, $moduleComposer, $function = null)
     {
         $this->errors = [***REMOVED***;
 
-        if (!array_key_exists('name', $moduleComposer)) {
-            $this->errors[***REMOVED*** = static::$missingName;
-        }
+        $this->diagnosticName($moduleComposer);
 
-        if (!array_key_exists('repositories', $moduleComposer)) {
-            $this->errors[***REMOVED*** = static::$missingPackFalse;
-            $this->errors[***REMOVED*** = static::$missingSatis;
-        } else {
+        $hasRepository = $this->diagnosticRepositoryExist($moduleComposer);
+
+        if ($hasRepository) {
             $packagist = false;
             $satis = false;
 
@@ -120,8 +148,8 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
                     && $repository['type'***REMOVED*** === 'composer'
                     && array_key_exists('url', $repository)
                     && $repository['url'***REMOVED*** === static::$satis
-                    ) {
-                        $satis = true;
+                ) {
+                    $satis = true;
                 }
             }
 
@@ -135,12 +163,8 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         }
 
         if ($function == 'diagnosticModule') {
-            if (!array_key_exists('autoload', $moduleComposer)) {
-                $this->errors[***REMOVED*** = static::$missingAutoload;
-            }
+            $this->diagnosticAutoload($moduleComposer);
         }
-
-
 
         $require = $this->verify(
             $composer['require'***REMOVED***,

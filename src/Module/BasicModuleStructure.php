@@ -196,7 +196,7 @@ class BasicModuleStructure
 
         // build
         $this->getDirService()->mkDir($this->getBuildFolder());
-        $this->writable($this->getBuildFolder());
+        $this->getDirService()->writable($this->getBuildFolder());
         $this->createGitIgnore($this->getBuildFolder());
 
         $this->getDirService()->mkDir($this->getSrcFolder());
@@ -216,26 +216,27 @@ class BasicModuleStructure
             $this->getDirService()->mkDir($this->getSchemaFolder());
 
             $this->getDirService()->mkDir($this->getSessionFolder());
-            $this->writable($this->getSessionFolder());
+            $this->getDirService()->writable($this->getSessionFolder());
             $this->createGitIgnore($this->getSessionFolder());
 
             // data/logs
             $this->getDirService()->mkDir($this->getDataLogsFolder());
-            $this->writable($this->getDataLogsFolder());
+            $this->getDirService()->writable($this->getDataLogsFolder());
             $this->createGitIgnore($this->getDataLogsFolder());
 
             // data/DoctrineModule
             // $this->getDirService()->mkDir($this->getDataCacheFolder());
             $this->getDirService()->mkDir($this->getDataDoctrineModuleFolder());
-            $this->writable($this->getDataDoctrineModuleCacheFolder());
+
 
             $this->getDirService()->mkDir($this->getDataDoctrineModuleCacheFolder());
-            $this->writable($this->getDataDoctrineProxyCacheFolder());
+            $this->getDirService()->writable($this->getDataDoctrineModuleCacheFolder());
 
 
             $this->getDirService()->mkDir($this->getDataDoctrineORMModuleCacheFolder());
-            $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
 
+            $this->getDirService()->mkDir($this->getDataDoctrineProxyCacheFolder());
+            $this->getDirService()->writable($this->getDataDoctrineProxyCacheFolder());
 
 
             $this->ignoreAll($this->getDataDoctrineProxyCacheFolder());
@@ -269,11 +270,11 @@ class BasicModuleStructure
             //$this->getDirService()->mkDir($this->getTestFactoryFolder());
             $this->getDirService()->mkDir($this->getTestValueObjectFolder());
             $this->getDirService()->mkDir($this->getTestControllerPluginFolder());
-            $this->writable($this->getTestSupportFolder());
+
 
             $this->getDirService()->mkDir($this->getDataCacheFolder());
             $this->getDirService()->mkDir($this->getDataCacheConfigFolder());
-            $this->writable($this->getDataCacheConfigFolder());
+            $this->getDirService()->writable($this->getDataCacheConfigFolder());
             $this->createGitIgnore($this->getDataCacheConfigFolder());
         }
 
@@ -283,7 +284,7 @@ class BasicModuleStructure
             ModuleTypesInterface::API
         ***REMOVED***)) {
             $this->getDirService()->mkDir($this->getDataMigrationFolder());
-            $this->writable($this->getDataMigrationFolder());
+            $this->getDirService()->writable($this->getDataMigrationFolder());
             $this->getDirService()->mkDir($this->getDataFilesFolder());
         }
 
@@ -306,7 +307,10 @@ class BasicModuleStructure
         $this->getDirService()->mkDir($this->getPublicFolder());
 
         if ($this->getType() === ModuleTypesInterface::WEB) {
+
             $this->getDirService()->mkDir($this->getPublicUploadFolder());
+            $this->getDirService()->writable($this->getPublicUploadFolder());
+
             $this->getDirService()->mkDir($this->getPublicJsFolder());
             $this->getDirService()->mkDir($this->getPublicJsAppFolder());
             $this->getDirService()->mkDir($this->getPublicJsSpecFolder());
@@ -321,10 +325,11 @@ class BasicModuleStructure
             $this->getDirService()->mkDir($this->getPublicJsServiceFolder());
             $this->getDirService()->mkDir($this->getPublicJsControllerSpecFolder());
             $this->getDirService()->mkDir($this->getPublicJsServiceSpecFolder());
-            $this->writable($this->getPublicUploadFolder());
+
 
             $this->getDirService()->mkDir($this->getPublicTempFolder());
-            $this->writable($this->getPublicTempFolder());
+            $this->getDirService()->writable($this->getPublicTempFolder());
+
             $this->createGitIgnore($this->getPublicTempFolder());
         }
         // $this->createGitIgnore($this->getPublicJsControllerFolder());
@@ -332,6 +337,7 @@ class BasicModuleStructure
 
         $this->getDirService()->mkDir($this->getTestDataFolder());
         $this->getDirService()->mkDir($this->getTestSupportFolder());
+        $this->getDirService()->writable($this->getTestSupportFolder());
 
         if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getModuleViewFolder());
@@ -348,7 +354,7 @@ class BasicModuleStructure
 
         if ($this->getType() === ModuleTypesInterface::WEB) {
             $this->getDirService()->mkDir($this->getNodejsFolder());
-            $this->writable($this->getNodejsFolder());
+            $this->getDirService()->writable($this->getNodejsFolder());
             $this->createGitIgnore($this->getNodejsFolder());
         }
 

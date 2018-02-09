@@ -4,7 +4,7 @@
         <exec executable="${vendor}/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
-            <arg value="--standard=PSR2"/>
+            <arg value="--standard=test/phpcs.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
@@ -24,11 +24,13 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="unit-ci" description="Run unit tests with PHPUnit" depends="set-vendor, build-helper">
-        <exec executable="${vendor}/bin/codecept" failonerror="true">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--xml"/>
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="/usr/bin/php">
+            <arg value="-d"/>
+            <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
+            <arg value="${vendor}/bin/phpunit"/>
+            <arg value="-c"/>
+            <arg value="test/phpunit-coverage.xml"/>
         </exec>
     </target>
 </project>

@@ -16,7 +16,7 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Module\Docs\Docs'),
             $serviceLocator->get('Gear\Module\Composer'),
             $serviceLocator->get('Gear\Module\Codeception'),
-            $serviceLocator->get('Gear\Module\Test'),
+            $serviceLocator->get('Gear\Module\Tests'),
             $serviceLocator->get('Gear\Module\Node\Karma'),
             $serviceLocator->get('Gear\Module\Node\Protractor'),
             $serviceLocator->get('Gear\Module\Node\Package'),

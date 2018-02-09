@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Module;
+namespace Gear\Module\Tests;
 
 use Gear\Mvc\AbstractMvc;
 //use Gear\Edge\AntEdge\AntEdgeTrait;
@@ -11,7 +11,7 @@ use Gear\Upgrade\AntUpgradeTrait;
  *         Classe responsável por gerar a estrutura inicial do módulo, e suas subpastas.
  *         Bem como a classe Module.php e suas dependências
  */
-class TestService extends AbstractMvc
+class ModuleTestsService extends AbstractMvc
 {
     use AntUpgradeTrait;
 
@@ -19,15 +19,14 @@ class TestService extends AbstractMvc
     public function createTestsModuleAsProject($type = 'web')
     {
         $this->copyBuildXmlFile($type);
+        $this->copyDocSniff();
         $this->copyphpdox();
         $this->copyphpmd();
-        $this->copyphpunit();
-        $this->copyphpunitcoverage();
-        //$this->copyphpunitfast();
-        $this->copyDocSniff();
-        $this->copyphpunitbenchmark();
-        $this->copyphpunitcoveragebenchmark();
-       // $this->createAbstractFile();
+        $this->createPhpunitBenchmarkConfigFile();
+        $this->createPhpunitConfigFile();
+        $this->createPhpunitCiConfigFile();
+        $this->createPhpunitCoverageConfigFile();
+        $this->createPhpunitCoverageCiConfigFile();
         return true;
     }
 
@@ -64,30 +63,6 @@ class TestService extends AbstractMvc
         );
     }
 
-    public function copyphpunitfast()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/test/phpunit-fast-coverage.xml.phtml',
-            array(
-                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
-            ),
-            'phpunit-fast-coverage.xml',
-            $this->getModule()->getTestFolder()
-        );
-    }
-
-    public function copyphpunitcoverage()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/test/phpunit-coverage.xml.phtml',
-            array(
-                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
-            ),
-            'phpunit-coverage.xml',
-            $this->getModule()->getTestFolder()
-        );
-    }
-
     public function copyDocSniff()
     {
         return $this->getFileCreator()->createFile(
@@ -100,20 +75,7 @@ class TestService extends AbstractMvc
         );
     }
 
-    public function copyphpunitcoveragebenchmark()
-    {
-        return $this->getFileCreator()->createFile(
-            'template/module/test/phpunit-coverage-benchmark.xml.phtml',
-            array(
-                'module' => $this->str('class', $this->getModule()->getModuleName()),
-            ),
-            'phpunit-coverage-benchmark.xml',
-            $this->getModule()->getTestFolder()
-        );
-    }
-
-
-    public function copyphpunitbenchmark()
+    public function createPhpunitBenchmarkConfigFile()
     {
         return $this->getFileCreator()->createFile(
             'template/module/test/phpunit-benchmark.xml.phtml',
@@ -125,9 +87,7 @@ class TestService extends AbstractMvc
         );
     }
 
-
-
-    public function copyphpunit()
+    public function createPhpunitConfigFile()
     {
         return $this->getFileCreator()->createFile(
             'template/module/test/phpunit.xml.phtml',
@@ -139,6 +99,41 @@ class TestService extends AbstractMvc
         );
     }
 
+    public function createPhpunitCoverageConfigFile()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/phpunit-coverage.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+            ),
+            'phpunit-coverage.xml',
+            $this->getModule()->getTestFolder()
+        );
+    }
+
+    public function createPhpunitCiConfigFile()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/phpunit-ci.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+            ),
+            'phpunit-ci.xml',
+            $this->getModule()->getTestFolder()
+        );
+    }
+
+        public function createPhpunitCoverageCiConfigFile()
+    {
+        return $this->getFileCreator()->createFile(
+            'template/module/test/phpunit-coverage-ci.xml.phtml',
+            array(
+                'moduleName' => $this->str('class', $this->getModule()->getModuleName()),
+            ),
+            'phpunit-coverage-ci.xml',
+            $this->getModule()->getTestFolder()
+        );
+    }
 
     public function createBuildFile()
     {

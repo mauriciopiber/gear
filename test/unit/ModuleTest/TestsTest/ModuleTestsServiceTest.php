@@ -1,36 +1,42 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
+use Zend\Console\Adapter\Posix;
+use GearBase\Config\GearConfig;
+use GearBase\Util\String\StringService;
+use Gear\Module;
+use Gear\Module\Tests\ModuleTestsService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Upgrade\AntUpgrade;
+use Gear\Edge\AntEdge\AntEdge;
+use Gear\Util\Prompt\ConsolePrompt;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Module
  * @group ModuleConstruct
  * @group Construct
  */
-class TestServiceTest extends AbstractTestCase
+class ModuleTestsServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();
 
+        $this->fileCreator    = $this->createFileCreator();
 
-        $template       = new \Gear\Creator\Template\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
+        $this->string = new StringService();
 
-        $this->string = new \GearBase\Util\String\StringService();
-
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module';
+        $this->template = (new Module())->getLocation().'/../test/template/module';
 
         $this->root = vfsStream::setup('module');
         vfsStream::newDirectory('test')->at($this->root);
@@ -38,22 +44,22 @@ class TestServiceTest extends AbstractTestCase
         $parser = new Parser();
 
         $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/ant.yml')
+            file_get_contents((new Module())->getLocation().'/../data/edge-technologic/module/web/ant.yml')
         );
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
 
         $this->config = [***REMOVED***;
 
-        $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $this->edge = $this->prophesize(AntEdge::class);
         $this->edge->getAntModule('web')->willReturn($files)->shouldBeCalled();
 
-        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
 
 
-        $this->upgrade = new \Gear\Upgrade\AntUpgrade(
+        $this->upgrade = new AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
@@ -71,12 +77,12 @@ class TestServiceTest extends AbstractTestCase
      */
     public function testCreateModuleBuild()
     {
-
-        $test = new \Gear\Module\TestService();
+        $test = new ModuleTestsService();
         $test->setModule($this->module->reveal());
         $test->setStringService($this->string);
         $test->setFileCreator($this->fileCreator);
         $test->setAntUpgrade($this->upgrade);
+
         //$test->setAntEdge($this->edge->reveal());***REMOVED***
         $this->gearConfig->getCurrentName()->willReturn('MyModule')->shouldBeCalled();
 

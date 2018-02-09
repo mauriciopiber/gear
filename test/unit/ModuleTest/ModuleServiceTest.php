@@ -9,7 +9,7 @@ use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
 use Gear\Module\BasicModuleStructure;
 use Gear\Module\ComposerService;
-use Gear\Module\TestService;
+use Gear\Module\Tests\ModuleTestsService;
 use GearJson\Schema\SchemaService;
 use GearJson\Schema\Loader\SchemaLoaderService;
 use GearJson\Controller\ControllerService as ControllerSchema;
@@ -85,7 +85,7 @@ class ModuleServiceTest extends TestCase
         $this->fileService = new FileService();
 
         $this->composer = $this->prophesize(ComposerService::class);
-        $this->testService = $this->prophesize(TestService::class);
+        $this->testService = $this->prophesize(ModuleTestsService::class);
 
         $this->schema = $this->prophesize(SchemaService::class);
 

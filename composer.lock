@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "6ec7525eadf75ccb41bd68598c9316f4",
+    "content-hash": "3d923c8249f1ac36c52c9abac8bec342",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -6801,30 +6801,30 @@
         },
         {
             "name": "mauriciopiber/gear-version",
-            "version": "0.2.15",
+            "version": "0.2.16",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
-                "reference": "1d329ed6208ace5d128a76934cb4e020dd2e624f"
+                "reference": "2df2acd08f86c3f47b2b186b8ee0a1784a86cb4d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.15-efdaed.tar",
-                "reference": "1d329ed6208ace5d128a76934cb4e020dd2e624f",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-version-0.2.16-2b5cc1.tar",
+                "reference": "2df2acd08f86c3f47b2b186b8ee0a1784a86cb4d",
                 "shasum": null
             },
             "require": {
-                "php": "^5.6 || ^7.0",
-                "zendframework/zendframework": "^2.5.1"
+                "php": "^7.0.0",
+                "zendframework/zendframework": "^2.5.0"
             },
             "require-dev": {
-                "codeception/codeception": "~2.2",
+                "codeception/codeception": "^2",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "~0.2 || ~1.0",
-                "mauriciopiber/gear-base": "^0.2.0",
-                "mauriciopiber/gear-deploy": "~0.2 || ~1.0",
-                "mauriciopiber/gear-jenkins": "~0.2 || ~1.0",
-                "mauriciopiber/gear-json": "~0.2 || ~1.0",
+                "mauriciopiber/gear": "^0",
+                "mauriciopiber/gear-base": "^0",
+                "mauriciopiber/gear-deploy": "^0",
+                "mauriciopiber/gear-jenkins": "^0",
+                "mauriciopiber/gear-json": "^0",
                 "mikey179/vfsstream": "^1.6.2",
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
@@ -6841,7 +6841,7 @@
                     "GearVersion": "src"
                 }
             },
-            "time": "2017-09-27T18:49:47+00:00"
+            "time": "2018-02-08T20:43:38+00:00"
         },
         {
             "name": "mikey179/vfsStream",
@@ -7284,61 +7284,6 @@
             "description": "Copy/Paste Detector (CPD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpcpd",
             "time": "2016-04-17T19:32:49+00:00"
-        },
-        {
-            "name": "sebastian/phpdcd",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpdcd.git",
-                "reference": "10246f167713d0bd0b74540ca81e4caf30b72157"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/sebastian-phpdcd-10246f167713d0bd0b74540ca81e4caf30b72157-zip-09728a.tar",
-                "reference": "10246f167713d0bd0b74540ca81e4caf30b72157",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "phpunit/php-timer": ">=1.0.4",
-                "phpunit/php-token-stream": ">=1.1.3",
-                "sebastian/finder-facade": ">=1.1.0",
-                "sebastian/version": ">=1.0.3",
-                "symfony/console": ">=2.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~3.7"
-            },
-            "bin": [
-                "phpdcd"
-            ***REMOVED***,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ***REMOVED***
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ***REMOVED***,
-            "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
-                }
-            ***REMOVED***,
-            "description": "Dead Code Detector (DCD) for PHP code.",
-            "homepage": "https://github.com/sebastianbergmann/phpdcd",
-            "abandoned": true,
-            "time": "2014-04-27T06:42:32+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -8015,120 +7960,6 @@
             ***REMOVED***,
             "description": "A fast Documentation generator for PHP Code using standard technology (SRC, DOCBLOCK, XML and XSLT) with event based processing",
             "time": "2018-01-10T00:10:11+00:00"
-        },
-        {
-            "name": "twig/twig",
-            "version": "v1.35.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "daa657073e55b0a78cce8fdd22682fddecc6385f"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/twig-twig-daa657073e55b0a78cce8fdd22682fddecc6385f-zip-80b58c.tar",
-                "reference": "daa657073e55b0a78cce8fdd22682fddecc6385f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.35-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Twig_": "lib/"
-                },
-                "psr-4": {
-                    "Twig\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ***REMOVED***,
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
-                    "role": "Contributors"
-                }
-            ***REMOVED***,
-            "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
-            "keywords": [
-                "templating"
-            ***REMOVED***,
-            "time": "2017-09-27T18:06:46+00:00"
-        },
-        {
-            "name": "zf-commons/zfc-twig",
-            "version": "1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ZF-Commons/ZfcTwig.git",
-                "reference": "0235932354b9c25b1a492e8921d3b2bfedcdba42"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/zf-commons-zfc-twig-0235932354b9c25b1a492e8921d3b2bfedcdba42-zip-9a33c3.tar",
-                "reference": "0235932354b9c25b1a492e8921d3b2bfedcdba42",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "twig/twig": "~1.13"
-            },
-            "require-dev": {
-                "zendframework/zend-view": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ZfcTwig\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Kyle Spraggs",
-                    "email": "theman@spiffyjr.me",
-                    "homepage": "http://www.spiffyjr.me/"
-                },
-                {
-                    "name": "Cosmin Harangus",
-                    "email": "cosmin@zendexperts.com",
-                    "homepage": "http://www.zendexperts.com/"
-                }
-            ***REMOVED***,
-            "description": "Zend Framework 2 Module that provides a Twig rendering strategy and extensions to render actions or trigger events from your templates",
-            "homepage": "http://www.github.com/ZF-Commons/ZfcTwig/",
-            "keywords": [
-                "module",
-                "twig",
-                "zf2"
-            ***REMOVED***,
-            "time": "2014-04-29T17:40:31+00:00"
         }
     ***REMOVED***,
     "aliases": [***REMOVED***,

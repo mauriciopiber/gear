@@ -22,6 +22,7 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService = $this->prophesize('Gear\Module\ModuleService');
         $this->projectService = $this->prophesize('Gear\Project\ProjectService');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
 
@@ -29,6 +30,7 @@ class FileUpgradeTest extends AbstractTestCase
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->moduleService->reveal(),
+            $this->moduleTests->reveal(),
             $this->projectService->reveal(),
             $this->module->reveal()
         );
@@ -52,6 +54,7 @@ class FileUpgradeTest extends AbstractTestCase
      */
     public function testDependency()
     {
+        $this->assertEquals($this->fileUpgrade->getModuleTestsService(), $this->moduleTests->reveal());
         $this->assertEquals($this->fileUpgrade->getModuleService(), $this->moduleService->reveal());
         $this->assertEquals($this->fileUpgrade->getProjectService(), $this->projectService->reveal());
         $this->assertEquals($this->fileUpgrade->getConsole(), $this->console->reveal());
@@ -82,7 +85,7 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-        
+
         $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
@@ -92,9 +95,9 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptTesting('web')->willReturn(true)->shouldBeCalled();
-        
+
         $this->moduleService->getStagingScript()->willReturn(true)->shouldBeCalled();
-        
+
         $this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptLoad('web')->willReturn(true)->shouldBeCalled();
@@ -109,9 +112,11 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getPhpunitCoverageBenchmarkConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getPhpunitBenchmarkConfig()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
         $yaml = new YamlService();
         $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
@@ -147,7 +152,7 @@ class FileUpgradeTest extends AbstractTestCase
         $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-        
+
         $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
@@ -168,10 +173,11 @@ class FileUpgradeTest extends AbstractTestCase
 
         $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getPhpunitCoverageBenchmarkConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getPhpunitBenchmarkConfig()->willReturn(true)->shouldBeCalled();
-
+        $this->moduleTests->createPhpunitConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
         $target = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
 
@@ -215,7 +221,7 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-        
+
         $this->projectService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
@@ -227,9 +233,9 @@ class FileUpgradeTest extends AbstractTestCase
         $this->projectService->getScriptStaging()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getScriptProduction()->willReturn(true)->shouldBeCalled();
-        
+
         $this->projectService->getScriptInstallProduction()->willReturn(true)->shouldBeCalled();
-        
+
         $this->projectService->getScriptInstallStaging()->willReturn(true)->shouldBeCalled();
 
         $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();

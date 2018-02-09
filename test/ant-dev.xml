@@ -18,36 +18,9 @@
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="unit" description="Run unit tests with PHPUnit" depends="set-vendor, build-helper">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-        </exec>
-    </target>
-    <target name="unit-group" depends="set-vendor, build-helper">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="-g"/>
-            <arg value="${group}"/>
-        </exec>
-    </target>
-    <target name="unit-coverage-group" depends="set-vendor, build-helper" description="Run unit tests with Codeception For Continuous Integration">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="--coverage-html"/>
-            <arg value="-g"/>
-            <arg value="${group}"/>
-        </exec>
-    </target>
-    <target name="unit-group-namespace" depends="set-vendor, build-helper">
-        <exec executable="${vendor}/bin/codecept">
-            <arg value="run"/>
-            <arg value="unit"/>
-            <arg value="test/unit/${testNamespace}"/>
-            <arg value="-g"/>
-            <arg value="${group}"/>
+    <target name="phpunit" description="Run unit tests with PHPUnit" depends="set-vendor">
+        <exec executable="${vendor}/bin/phpunit">
+            <arg value="--configuration=${basedir}/test/phpunit.xml"/>
         </exec>
     </target>
 </project>
