@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "ebdcc0d64a13741515f6fcb027c433ee",
+    "content-hash": "eea72a4311d77ae8096bbd718d2f969e",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -6609,40 +6609,41 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.53",
+            "version": "0.2.54",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "338f1a7244d4633c24e9ebca18de37cc7e339c47"
+                "reference": "a810f8c5eb270dfbb722db3ac0c45e138628a7a7"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.53-b52355.tar",
-                "reference": "338f1a7244d4633c24e9ebca18de37cc7e339c47",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.54-1f88ec.tar",
+                "reference": "a810f8c5eb270dfbb722db3ac0c45e138628a7a7",
                 "shasum": null
             },
             "require": {
                 "doctrine/doctrine-module": "~0.8.0",
                 "doctrine/doctrine-orm-module": "~0.8.0",
-                "php": "^5.6 || ^7.0",
-                "zendframework/zend-mvc": "~2.6.0",
-                "zendframework/zendframework": "^2.5.1"
+                "php": "^7.0",
+                "zendframework/zend-mvc": "^2.6",
+                "zendframework/zendframework": "^2.5"
             },
             "require-dev": {
                 "codeception/codeception": "~2.2",
                 "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear": "~0.2 || ~1.0",
-                "mauriciopiber/gear-deploy": "~0.2 || ~1.0",
-                "mauriciopiber/gear-jenkins": "~0.2 || ~1.0",
-                "mauriciopiber/gear-json": "~0.2 || ~1.0",
-                "mauriciopiber/gear-version": "~0.2 || ~1.0",
+                "mauriciopiber/gear": "^0.2 || ^1.0",
+                "mauriciopiber/gear-deploy": "^0.2 || ^1.0",
+                "mauriciopiber/gear-jenkins": "^0.2 || ^1.0",
+                "mauriciopiber/gear-json": "^0.2 || ^1.0",
+                "mauriciopiber/gear-version": "^0.2 || ^1.0",
                 "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.0.3",
-                "phploc/phploc": "^2.1.5",
-                "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "~5.0",
-                "sebastian/phpcpd": "^2.0.2",
-                "squizlabs/php_codesniffer": "^2.0.0"
+                "pdepend/pdepend": "^2.4",
+                "phploc/phploc": "^4.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.0",
+                "sebastian/phpcpd": "^2.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "theseer/phpdox": "^0.11.0"
             },
             "type": "library",
             "autoload": {
@@ -6651,7 +6652,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2018-02-12T02:31:31+00:00"
+            "time": "2018-02-12T18:09:33+00:00"
         },
         {
             "name": "mauriciopiber/gear-deploy",

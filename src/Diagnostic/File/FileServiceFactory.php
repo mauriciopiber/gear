@@ -12,6 +12,7 @@ class FileServiceFactory implements FactoryInterface
     {
         $factory = new FileService(
             $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('GearBase\GearConfig'),
             $serviceLocator->get(FileEdge::class)
         );
         unset($serviceLocator);

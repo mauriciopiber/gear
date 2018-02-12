@@ -12,6 +12,7 @@ class DirServiceFactory implements FactoryInterface
     {
         return new DirService(
             $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('GearBase\GearConfig'),
             $serviceLocator->get(DirEdge::class)
         );
     }

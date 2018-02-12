@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Npm\NpmService;
 use Gear\Edge\Npm\NpmEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Diagnostic
@@ -20,19 +21,16 @@ class NpmServiceTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/package.json');
 
+        $this->npmEdge = $this->prophesize(NpmEdge::class);
+        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
+
+        $this->npmService = new NpmService(
+            $this->module->reveal(),
+            $this->gearConfig->reveal(),
+            $this->npmEdge->reveal()
+        );
     }
-
-
-    /**
-     * @group ProjectDiagnostic
-     */
-    public function testProjectTrait()
-    {
-        $npm = new NpmService();
-        $npm->setProject('testing');
-        $this->assertEquals('testing', $npm->getProject());
-    }
-
 
     public function testDiagnosticWebModule()
     {
@@ -57,14 +55,9 @@ class NpmServiceTest extends TestCase
 EOS;
         file_put_contents($this->file, $fileConfig);
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new NpmService($module->reveal());
-
-
-        $yaml = $this->prophesize(NpmEdge::class);
-        $yaml->getNpmModule('web')->willReturn(
+        $this->npmEdge->getNpmModule('web')->willReturn(
             [
                 'devDependencies' => [
                     'bower' => '~1.6',
@@ -78,9 +71,7 @@ EOS;
             ***REMOVED***
         );
 
-        $composer->setNpmEdge($yaml->reveal());
-
-        $this->assertEquals([***REMOVED***, $composer->diagnosticModule('web'));
+        $this->assertEquals([***REMOVED***, $this->npmService->diagnosticModule('web'));
     }
 
     public function testPackageNotFound()
@@ -105,13 +96,9 @@ EOS;
 EOS
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new NpmService($module->reveal());
-
-        $yaml = $this->prophesize(NpmEdge::class);
-        $yaml->getNpmModule('web')->willReturn(
+        $this->npmEdge->getNpmModule('web')->willReturn(
             [
                 'devDependencies' => [
                     'package-1' => '1.0.0',
@@ -121,9 +108,7 @@ EOS
             ***REMOVED***
         );
 
-        $composer->setNpmEdge($yaml->reveal());
-
-        $result = $composer->diagnosticModule('web');
+        $result = $this->npmService->diagnosticModule('web');
 
         $this->assertCount(3, $result);
         $this->assertEquals(sprintf(NpmService::$requireDevNotFound, 'package-1', '1.0.0'), $result[0***REMOVED***);
@@ -155,13 +140,9 @@ EOS
 EOS
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $composer = new NpmService($module->reveal());
-
-        $yaml = $this->prophesize(NpmEdge::class);
-        $yaml->getNpmModule('web')->willReturn(
+        $this->npmEdge->getNpmModule('web')->willReturn(
             [
                 'devDependencies' => [
                     'bower' => '3.1.0',
@@ -172,9 +153,7 @@ EOS
             ***REMOVED***
         );
 
-        $composer->setNpmEdge($yaml->reveal());
-
-        $result = $composer->diagnosticModule('web');
+        $result = $this->npmService->diagnosticModule('web');
 
         $this->assertCount(2, $result);
         $this->assertEquals(sprintf(NpmService::$requireDevVersion, 'bower', '~1.6', '3.1.0'), $result[0***REMOVED***);

@@ -18,6 +18,10 @@ class FileServiceFactoryTest extends TestCase
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
+        $this->serviceLocator->get('GearBase\GearConfig')
+        ->willReturn($this->prophesize('GearBase\Config\GearConfig')->reveal())
+        ->shouldBeCalled();
+
         $fileEdge = $this->prophesize(FileEdge::class);
         $this->serviceLocator->get(FileEdge::class)->willReturn($fileEdge->reveal())->shouldBeCalled();
 

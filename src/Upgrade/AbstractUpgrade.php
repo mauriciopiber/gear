@@ -23,7 +23,6 @@ use Gear\Upgrade\Npm\{
     NpmUpgradeTrait
 };
 
-
 abstract class AbstractUpgrade
 {
     const NO_FOUND = 'Não encontrado %s';

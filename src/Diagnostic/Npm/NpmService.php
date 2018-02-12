@@ -3,8 +3,12 @@ namespace Gear\Diagnostic\Npm;
 
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
+use Gear\Edge\Npm\NpmEdge;
+use GearBase\Config\GearConfig;
+use GearBase\Config\GearConfigTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\BasicModuleStructure;
 
 class NpmService implements ModuleDiagnosticInterface
 {
@@ -14,6 +18,8 @@ class NpmService implements ModuleDiagnosticInterface
 
     use ModuleAwareTrait;
 
+    use GearConfigTrait;
+
     static public $missingFile = 'Nodejs - Está faltando o arquivo package.json';
 
     static public $requireDevNotFound = 'Nodejs - DevDependency "%s" com versão "%s"';
@@ -22,8 +28,14 @@ class NpmService implements ModuleDiagnosticInterface
 
     static public $requireRun = 'Nodejs - Você deve rodar o comando npm install para utilizar os testes';
 
-    public function __construct($module = null)
-    {
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $config,
+        NpmEdge $npmEdge
+
+    ) {
+        $this->npmEdge = $npmEdge;
+        $this->gearConfig = $config;
         $this->module = $module;
     }
 

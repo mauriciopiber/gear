@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Composer\ComposerService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Diagnostic
@@ -22,10 +23,12 @@ class ComposerServiceTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
         $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->composerEdge = $this->prophesize(ComposerEdge::class);
 
         $this->composer = new ComposerService(
             $this->module->reveal(),
+            $this->gearConfig->reveal(),
             $this->composerEdge->reveal()
         );
     }

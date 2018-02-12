@@ -15,7 +15,9 @@ use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
 use Exception;
 use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\BasicModuleStructure;
 
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
@@ -48,8 +50,12 @@ class AntService implements ModuleDiagnosticInterface
 
     use ModuleAwareTrait;
 
-    public function __construct($stringService, GearConfig $gearConfig, $module = null, AntEdge $antEdge)
-    {
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        AntEdge $antEdge,
+        StringService $stringService
+    ) {
         $this->antEdge = $antEdge;
         $this->errors = [***REMOVED***;
         $this->stringService = $stringService;

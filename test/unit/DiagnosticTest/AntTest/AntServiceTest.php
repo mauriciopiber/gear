@@ -33,10 +33,10 @@ class AntServiceTest extends TestCase
         $this->antEdge = $this->prophesize(AntEdge::class);
 
         $this->ant = new AntService(
-            $this->stringService,
-            $this->gearConfig->reveal(),
             $this->module->reveal(),
-            $this->antEdge->reveal()
+            $this->gearConfig->reveal(),
+            $this->antEdge->reveal(),
+            $this->stringService
         );
     }
 
