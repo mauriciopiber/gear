@@ -68,6 +68,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
     ) {
         $this->setStringService($stringService);
         $this->module = $module;
+        $this->gearConfig = $gearConfig;
         $this->composerEdge = $composerEdge;
         $this->consolePrompt = $consolePrompt;
     }

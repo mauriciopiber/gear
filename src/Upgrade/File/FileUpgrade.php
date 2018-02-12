@@ -10,7 +10,7 @@ use Gear\Edge\File\FileEdge;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Tests\{
     ModuleTestsService,
-    ModuleTestsServiceTrait,
+    ModuleTestsServiceTrait
 };
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
