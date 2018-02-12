@@ -4,11 +4,11 @@ namespace Gear\Module\Upgrade;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\Upgrade\ModuleUpgrade;
-use Gear\Upgrade\AntUpgrade;
-use Gear\Upgrade\ComposerUpgrade;
-use Gear\Upgrade\FileUpgrade;
-use Gear\Upgrade\DirUpgrade;
-use Gear\Upgrade\NpmUpgrade;
+use Gear\Upgrade\Ant\AntUpgrade;
+use Gear\Upgrade\Composer\ComposerUpgrade;
+use Gear\Upgrade\File\FileUpgrade;
+use Gear\Upgrade\Dir\DirUpgrade;
+use Gear\Upgrade\Npm\NpmUpgrade;
 
 class ModuleUpgradeFactory implements FactoryInterface
 {

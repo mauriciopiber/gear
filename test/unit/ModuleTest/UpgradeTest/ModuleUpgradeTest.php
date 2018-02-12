@@ -27,15 +27,15 @@ class ModuleUpgradeTest extends TestCase
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
 
-        $this->composer = $this->prophesize('Gear\Upgrade\ComposerUpgrade');
+        $this->composer = $this->prophesize('Gear\Upgrade\Composer\ComposerUpgrade');
 
-        $this->npm = $this->prophesize('Gear\Upgrade\NpmUpgrade');
+        $this->npm = $this->prophesize('Gear\Upgrade\Npm\NpmUpgrade');
 
-        $this->ant = $this->prophesize('Gear\Upgrade\AntUpgrade');
+        $this->ant = $this->prophesize('Gear\Upgrade\Ant\AntUpgrade');
 
-        $this->file = $this->prophesize('Gear\Upgrade\FileUpgrade');
+        $this->file = $this->prophesize('Gear\Upgrade\File\FileUpgrade');
 
-        $this->dir = $this->prophesize('Gear\Upgrade\DirUpgrade');
+        $this->dir = $this->prophesize('Gear\Upgrade\Dir\DirUpgrade');
 
         $this->upgrade = new ModuleUpgrade(
             $this->console->reveal(),

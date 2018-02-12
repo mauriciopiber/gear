@@ -2,23 +2,23 @@
 namespace Gear\Upgrade;
 
 use Zend\Console\Adapter\Posix;
-use Gear\Upgrade\{
+use Gear\Upgrade\Ant\{
     AntUpgrade,
     AntUpgradeTrait
 };
-use Gear\Upgrade\{
+use Gear\Upgrade\Composer\{
     ComposerUpgrade,
     ComposerUpgradeTrait
 };
-use Gear\Upgrade\{
+use Gear\Upgrade\File\{
     FileUpgrade,
     FileUpgradeTrait
 };
-use Gear\Upgrade\{
+use Gear\Upgrade\Dir\{
     DirUpgrade,
     DirUpgradeTrait
 };
-use Gear\Upgrade\{
+use Gear\Upgrade\Npm\{
     NpmUpgrade,
     NpmUpgradeTrait
 };
