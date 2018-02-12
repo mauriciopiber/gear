@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Edge\File\FileEdge;
 
 /**
  * @group Gear
@@ -15,8 +16,10 @@ class FileServiceFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+
+        $fileEdge = $this->prophesize(FileEdge::class);
+        $this->serviceLocator->get(FileEdge::class)->willReturn($fileEdge->reveal())->shouldBeCalled();
 
         $factory = new \Gear\Diagnostic\File\FileServiceFactory();
 

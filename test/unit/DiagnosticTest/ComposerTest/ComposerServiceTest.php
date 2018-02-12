@@ -22,9 +22,12 @@ class ComposerServiceTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
         $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->composerEdge = $this->prophesize(ComposerEdge::class);
 
-        $this->composer = new ComposerService();
-        $this->composer->setModule($this->module->reveal());
+        $this->composer = new ComposerService(
+            $this->module->reveal(),
+            $this->composerEdge->reveal()
+        );
     }
 
 
@@ -49,8 +52,7 @@ EOS;
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module')->shouldBeCalled();
 
-        $yaml = $this->prophesize(ComposerEdge::class);
-        $yaml->getComposerModule('web')->willReturn(
+        $this->composerEdge->getComposerModule('web')->willReturn(
             [
                 'require' => [
                     'mpiber/package-1' => '1.0.0',
@@ -65,7 +67,7 @@ EOS;
             ***REMOVED***
         );
 
-        $this->composer->setComposerEdge($yaml->reveal());
+        $this->composer->setComposerEdge($this->composerEdge->reveal());
 
         $this->assertEquals([
             ComposerService::$missingName,

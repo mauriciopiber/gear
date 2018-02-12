@@ -30,11 +30,13 @@ class AntServiceTest extends TestCase
         $this->stringService = new StringService();
 
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->antEdge = $this->prophesize(AntEdge::class);
 
         $this->ant = new AntService(
             $this->stringService,
             $this->gearConfig->reveal(),
-            $this->module->reveal()
+            $this->module->reveal(),
+            $this->antEdge->reveal()
         );
     }
 
@@ -43,14 +45,11 @@ class AntServiceTest extends TestCase
      */
     public function testThrowMissingDefaultModule()
     {
-        $edge = $this->prophesize(AntEdge::class);
-        $edge->getAntModule('web')->willReturn([
+        $this->antEdge->getAntModule('web')->willReturn([
             'target' => ['piber' => null***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
         $this->setExpectedException('Gear\Edge\Ant\Exception\MissingDefault');
-
-        $this->ant->setAntEdge($edge->reveal());
 
         $this->ant->diagnosticModule('web');
     }
