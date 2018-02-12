@@ -212,29 +212,7 @@ class AntUpgrade
         }, $doc->saveXML());
     }
 
-    /**
-     * Create a target from template for Project
-     *
-     * @param string $target Target Name
-     * @param string $type   Module Type
-     *
-     * @return SimpleXMLElement
-     */
-    public function projectFactory($target, $type = 'web')
-    {
-        $template = $this->getProjectTemplate();
-
-        return $this->factory($target, $template, $type);
-    }
-
-
-    public function getProjectTemplate()
-    {
-        return (new \Gear\Module())->getLocation().'/../view/template/project/ant';
-    }
-
-
-    /**
+     /**
      * Create a Xml Object from a Template
      *
      * @param string $target   Target Name
@@ -426,12 +404,11 @@ class AntUpgrade
      *
      * @param array  $edge     Edge Technologic File
      * @param string $file     File to Upgrade to Edge
-     * @param string $function Function calling the upgrade as __FUNCION__
      * @param string $type     Module/Project Type
      *
      * @return SimpleXmlElement|\Gear\Upgrade\SimpleXMLElement
      */
-    public function upgrade($dir, $type = 'web', $edge, $function)
+    public function upgrade($dir, $type = 'web', $edge)
     {
         $name = $this->getGearConfig()->getCurrentName();
         $name = $this->str('url', $name);
@@ -462,7 +439,7 @@ class AntUpgrade
 
 
         foreach ($edge['target'***REMOVED*** as $target => $dependency) {
-            $this->main = $this->upgradeTarget($this->main, $target, $dependency, $function, $type, 'build.xml');
+            $this->main = $this->upgradeTarget($this->main, $target, $dependency, $type, 'build.xml');
         }
 
 
@@ -479,7 +456,6 @@ class AntUpgrade
                         $this->import[$name***REMOVED***,
                         $target,
                         $dependency,
-                        $function,
                         $type,
                         $identify
                     );
@@ -499,7 +475,7 @@ class AntUpgrade
         return $this->main;
     }
 
-    public function upgradeTarget(SimpleXmlElement $build, $target, $dependency, $function, $type, $identify = 'build.xml')
+    public function upgradeTarget(SimpleXmlElement $build, $target, $dependency, $type, $identify = 'build.xml')
     {
          $hasTarget = $this->buildHasTarget($build, $target);
 
@@ -520,15 +496,7 @@ class AntUpgrade
             return $build;
         }
 
-        switch ($function) {
-            case 'upgradeModule':
-                $build = $this->appendChild($build, $this->moduleFactory($target, $type));
-                break;
-            case 'upgradeProject':
-                $build = $this->appendChild($build, $this->projectFactory($target, $type));
-                break;
-        }
-
+        $build = $this->appendChild($build, $this->moduleFactory($target, $type));
 
         $this->upgrades[***REMOVED*** = sprintf(static::$added, $target, $identify);
 
@@ -604,6 +572,7 @@ class AntUpgrade
 
 
         foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
+            $targets = null;
             if (strpos($expectedFile, 'ant-') === false) {
                 continue;
             }
@@ -614,10 +583,7 @@ class AntUpgrade
                 if ($confirm === false) {
                     continue;
                 }
-
-
                 $this->createBasicFile($dir, 'test/'.$expectedFile.'.xml');
-                //$this->upgrades[***REMOVED*** = sprintf(static::$fileCreated, $expectedFile.'.xml');
             }
         }
 
@@ -643,7 +609,7 @@ class AntUpgrade
 
         $dir = $this->getModule()->getMainFolder();
 
-        $this->upgrade($dir, $type, $edge, __FUNCTION__);
+        $this->upgrade($dir, $type, $edge);
 
         return $this->upgrades;
     }
