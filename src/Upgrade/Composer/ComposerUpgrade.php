@@ -3,10 +3,15 @@ namespace Gear\Upgrade\Composer;
 
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;
+use Gear\Edge\Composer\ComposerEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Upgrade\ModuleUpgradeInterface;
+use GearBase\Config\GearConfigTrait;
+use GearBase\Config\GearConfig;
+use Gear\Module\BasicModuleStructure;
 
 class ComposerUpgrade implements ModuleUpgradeInterface
 {
@@ -54,12 +59,16 @@ class ComposerUpgrade implements ModuleUpgradeInterface
 
     public $config = [***REMOVED***;
 
-    public function __construct($consolePrompt, $edge, array $config, $module = null, $stringService)
-    {
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        ComposerEdge $composerEdge,
+        $consolePrompt,
+        StringService $stringService
+    ) {
         $this->setStringService($stringService);
         $this->module = $module;
-        $this->composerEdge = $edge;
-        $this->config = $config;
+        $this->composerEdge = $composerEdge;
         $this->consolePrompt = $consolePrompt;
     }
 

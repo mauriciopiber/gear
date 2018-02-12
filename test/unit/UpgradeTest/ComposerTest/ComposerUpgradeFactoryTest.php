@@ -31,7 +31,9 @@ class ComposerUpgradeFactoryTest extends TestCase
         ->willReturn($this->prophesize('GearBase\Util\String\StringService'))
         ->shouldBeCalled();
 
-        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
+            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        )->shouldBeCalled();
 
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');

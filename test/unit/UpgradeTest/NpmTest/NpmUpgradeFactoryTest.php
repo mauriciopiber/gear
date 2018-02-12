@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Edge\Npm\NpmEdge;
 
 /**
  * @group Gear
@@ -14,11 +15,6 @@ class NpmUpgradeFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
 
-
-        $this->serviceLocator->get('console')
-          ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
-          ->shouldBeCalled();
-
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
           ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
@@ -27,9 +23,18 @@ class NpmUpgradeFactoryTest extends TestCase
           ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('config')
-          ->willReturn([***REMOVED***)
-          ->shouldBeCalled();
+        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
+            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        )->shouldBeCalled();
+
+        $this->serviceLocator->get('GearBase\Util\String')->willReturn(
+            $this->prophesize('GearBase\Util\String\StringService')->reveal()
+        )->shouldBeCalled();
+
+        $this->serviceLocator->get(NpmEdge::class)
+        ->willReturn($this->prophesize(NpmEdge::class)->reveal())
+        ->shouldBeCalled();
+
 
         $factory = new \Gear\Upgrade\Npm\NpmUpgradeFactory();
 

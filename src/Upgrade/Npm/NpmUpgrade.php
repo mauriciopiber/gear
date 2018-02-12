@@ -4,9 +4,14 @@ namespace Gear\Upgrade\Npm;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
+use Gear\Edge\Npm\NpmEdge;
+use Gear\Module\BasicModuleStructure;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Util\Prompt\ConsolePrompt;
+use GearBase\Config\GearConfig;
 
 class NpmUpgrade
 {
@@ -37,13 +42,18 @@ class NpmUpgrade
 
     public $config;
 
-    public function __construct($console, $consolePrompt, $config, $module = null)
-    {
-        $this->console = $console;
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        NpmEdge $npmEdge,
+        ConsolePrompt $consolePrompt,
+        StringService $stringService
+    ) {
         $this->module = $module;
-        $this->config = $config;
+        $this->gearConfig = $gearConfig;
+        $this->npmEdge = $npmEdge;
+        $this->stringService = $stringService;
         $this->consolePrompt = $consolePrompt;
-        //$this->stringService = $string;
     }
 
 

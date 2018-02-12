@@ -15,11 +15,6 @@ class AntUpgradeFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
-
-
         $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
@@ -35,10 +30,7 @@ class AntUpgradeFactoryTest extends TestCase
         ->shouldBeCalled();
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
-
-        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
             $this->prophesize('GearBase\Config\GearConfig')->reveal()

@@ -11,13 +11,12 @@ class FileUpgradeFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new FileUpgrade(
-            $serviceLocator->get('console'),
+            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get(FileEdge::class),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Module'),
-            $serviceLocator->get('Gear\Module\Tests'),
-            $serviceLocator->get('projectService'),
-            $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get(FileEdge::class)
+            $serviceLocator->get('Gear\Module\Tests')
         );
         unset($serviceLocator);
         return $factory;

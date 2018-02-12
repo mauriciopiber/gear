@@ -11,12 +11,11 @@ class DirUpgradeFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new DirUpgrade(
-            $serviceLocator->get('console'),
-            $serviceLocator->get('GearBase\Util\Dir'),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('config'),
             $serviceLocator->get('moduleStructure'),
-            $serviceLocator->get(DirEdge::class)
+            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get(DirEdge::class),
+            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
+            $serviceLocator->get('GearBase\Util\Dir')
         );
         unset($serviceLocator);
         return $factory;

@@ -1,11 +1,12 @@
 <?php
 namespace Gear\Upgrade\File;
 
-use Gear\Project\ProjectServiceTrait;
 use Gear\Module\ModuleServiceTrait;
+use Gear\Module\ModuleService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\File\FileEdgeTrait;
+use Gear\Edge\File\FileEdge;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Tests\{
     ModuleTestsService,
@@ -13,6 +14,10 @@ use Gear\Module\Tests\{
 };
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\BasicModuleStructure;
+use Gear\Util\Prompt\ConsolePrompt;
+use GearBase\Config\GearConfig;
+use GearBase\Config\GearConfigTrait;
 
 class FileUpgrade
 {
@@ -26,9 +31,7 @@ class FileUpgrade
 
     use ConsolePromptTrait;
 
-    use ConsoleAwareTrait;
-
-    use ProjectServiceTrait;
+    use GearConfigTrait;
 
     use ModuleServiceTrait;
 
@@ -41,21 +44,19 @@ class FileUpgrade
     protected $type;
 
     public function __construct(
-        $console,
-        $consolePrompt,
-        $moduleService,
-        $moduleTestsService,
-        $projectService,
-        $module = null,
-        $fileEdge
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        FileEdge $fileEdge,
+        ConsolePrompt $consolePrompt,
+        ModuleService $moduleService,
+        ModuleTestsService $moduleTestsService
     ) {
         $this->fileEdge = $fileEdge;
-        $this->console = $console;
         $this->moduleService = $moduleService;
         $this->moduleTestsService = $moduleTestsService;
-        $this->projectService = $projectService;
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
+        $this->gearConfig = $gearConfig;
     }
     //use DirEdgeTrait;
 

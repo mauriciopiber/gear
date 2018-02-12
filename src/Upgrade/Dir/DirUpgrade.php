@@ -3,15 +3,21 @@ namespace Gear\Upgrade\Dir;
 
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Module\ModuleAwareTrait;
+use Gear\Module\BasicModuleStructure;
 use Gear\Edge\Dir\DirEdgeTrait;
-use Gear\Util\Console\ConsoleAwareTrait;
-use Zend\Console\Adapter\Posix;
+use Gear\Edge\Dir\DirEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Util\Dir\DirServiceTrait;
+use GearBase\Util\Dir\DirService;
+use GearBase\Config\GearConfig;
+use GearBase\Config\GearConfigTrait;
 
 class DirUpgrade
 {
+    use GearConfigTrait;
+
     use DirServiceTrait;
 
     use StringServiceTrait;
@@ -21,8 +27,6 @@ class DirUpgrade
     use ProjectLocationTrait;
 
     use ConsolePromptTrait;
-
-    use ConsoleAwareTrait;
 
     use DirEdgeTrait;
 
@@ -44,13 +48,17 @@ class DirUpgrade
 
     public $config;
 
-    public function __construct(Posix $console, $dirService, $consolePrompt, $config, $module = null, $dirEdge)
-    {
-        $this->console = $console;
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        DirEdge $dirEdge,
+        ConsolePrompt $consolePrompt,
+        DirService $dirService
+    ) {
         $this->dirService = $dirService;
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
-        $this->config = $config;
+        $this->gearConfig = $gearConfig;
         $this->dirEdge = $dirEdge;
     }
 

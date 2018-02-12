@@ -6,6 +6,7 @@ use Gear\Upgrade\Npm\NpmUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Npm\NpmUpgrade;
 use Gear\Edge\Npm\NpmEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Service
@@ -19,17 +20,19 @@ class NpmUpgradeTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-        $this->config = [
-            'gear' => [
-                'project' => [
-                    'name' => 'MyProject'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
-        $this->string = $this->prophesize('GearBase\Util\String\StringService');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
+        $this->string = new \GearBase\Util\String\StringService();
+        $this->npmEdge = $this->prophesize(NpmEdge::class);
+
+        $this->npmUpgrade = new NpmUpgrade(
+            $this->module->reveal(),
+            $this->gearConfig->reveal(),
+            $this->npmEdge->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string
+        );
     }
 
     /**
@@ -37,32 +40,17 @@ class NpmUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $ant = new NpmUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()//,
-        );
-        $ant->setProject('testing');
-        $this->assertEquals('testing', $ant->getProject());
+
+        $this->npmUpgrade->setProject('testing');
+        $this->assertEquals('testing', $this->npmUpgrade->getProject());
     }
     /**
      * @group fix2
      */
     public function testDependency()
     {
-        $npmUpgrade = new NpmUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()//,
-            //$this->string->reveal()
-        );
-
-        //$this->assertEquals($npmUpgrade->getStringService(), $this->string->reveal());
-        $this->assertEquals($npmUpgrade->getConsole(), $this->console->reveal());
-        $this->assertEquals($npmUpgrade->getModule(), $this->module->reveal());
-        $this->assertEquals($npmUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
+        $this->assertEquals($this->npmUpgrade->getModule(), $this->module->reveal());
+        $this->assertEquals($this->npmUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
     }
 
     public function types()
@@ -109,14 +97,7 @@ class NpmUpgradeTest extends TestCase
         $this->consolePrompt->show(sprintf(NpmUpgrade::$shouldAdd, 'protractor', '^3.0.0'))->shouldBeCalled();
         $this->consolePrompt->show(sprintf(NpmUpgrade::$shouldVersion, 'q', 'latest', '7.0'))->shouldBeCalled();
 
-        $npmUpgrade = new NpmUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-        $upgraded = $npmUpgrade->upgrade($edge, $file);
+        $upgraded = $this->npmUpgrade->upgrade($edge, $file);
 
         $expected = [
             'name' => 'pibernetwork-gear-admin',
@@ -161,8 +142,7 @@ EOS;
 
         file_put_contents($this->file, $fileConfig);
 
-        $yaml = $this->prophesize(NpmEdge::class);
-        $yaml->getNpmModule($type)->willReturn(
+        $this->npmEdge->getNpmModule($type)->willReturn(
             [
                 'devDependencies' => [
                     'bower' => '~1.7',
@@ -184,16 +164,7 @@ EOS;
         $this->consolePrompt->show(sprintf(NpmUpgrade::$shouldAdd, 'protractor', '^3.0.0'))->shouldBeCalled();
         $this->consolePrompt->show(sprintf(NpmUpgrade::$shouldVersion, 'q', 'latest', '7.0'))->shouldBeCalled();
 
-        $npmUpgrade = new NpmUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-        $npmUpgrade->setNpmEdge($yaml->reveal());
-
-        $upgraded = $npmUpgrade->upgradeModule($type);
+        $upgraded = $this->npmUpgrade->upgradeModule($type);
 
         $this->assertEquals([
             sprintf(NpmUpgrade::$version, 'bower', '~1.6', '~1.7'),
@@ -233,8 +204,7 @@ EOS;
 
         $this->file = vfsStream::url('module/package.json');
 
-        $yaml = $this->prophesize(NpmEdge::class);
-        $yaml->getNpmModule($type)->willReturn(
+        $this->npmEdge->getNpmModule($type)->willReturn(
             [
                 'devDependencies' => [
                     'bower' => '~1.7',
@@ -262,19 +232,7 @@ EOS;
 
 
 
-        $npmUpgrade = new NpmUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-        $this->string->str('url', 'MyModule')->willReturn('my-module');
-        $npmUpgrade->setStringService($this->string->reveal());
-
-        $npmUpgrade->setNpmEdge($yaml->reveal());
-
-        $upgraded = $npmUpgrade->upgradeModule($type);
+        $upgraded = $this->npmUpgrade->upgradeModule($type);
 
         $this->assertEquals([
             sprintf(NpmUpgrade::$fileCreated),
