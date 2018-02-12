@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\EntityTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -19,13 +19,15 @@ use Gear\Mvc\Entity\EntityTestService;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Datetime\DatetimePtBr;
 use Gear\Column\ColumnManager;
+use GearTest\UtilTestTrait;
 
 /**
  * @group src-entity
  * @group Entity
  */
-class EntityTestServiceTest extends AbstractTestCase
+class EntityTestServiceTest extends TestCase
 {
+    use UtilTestTrait;
     use AllColumnsDbTableTrait;
     use AllColumnsDbNotNullTableTrait;
     use AllColumnsDbUniqueTableTrait;

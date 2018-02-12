@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DatabaseTest\PhinxTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Database\Phinx\PhinxService;
 use GearBase\Util\String\StringService;
 use org\bovigo\vfs\vfsStream;

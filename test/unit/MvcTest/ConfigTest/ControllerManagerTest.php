@@ -1,9 +1,10 @@
 <?php
 namespace GearTest\MvcTest\ConfigTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\UtilTestTrait;
 
 /**
  * @group module
@@ -11,8 +12,9 @@ use org\bovigo\vfs\vfsStreamWrapper;
  * @group module-mvc-config
  * @group module-mvc-config-controller
  */
-class ControllerManagerTest extends AbstractTestCase
+class ControllerManagerTest extends TestCase
 {
+    use UtilTestTrait;
 
     public function setUp()
     {

@@ -116,20 +116,21 @@ class FixtureService extends AbstractMvc
 
         $this->file->setOptions(
             array(
-                'tableLabel'  => $this->str('label', $this->db->getTable()),
-                'package'     => $this->getCode()->getClassDocsPackage($this->src),
-                'var'         => $this->str('var-length', $this->src->getNameOff()),
-                'load'        => $this->load,
-                'preLoad'     => $this->preLoad,
-                'getFixture'  => $this->getFixture,
-                'fields'      => $fieldsData,
-                'data'        => $arrayData,
-                'name'        => $this->src->getName(),
-                'module'      => $this->getModule()->getModuleName(),
-                'use'         => $this->getCode()->getUse($this->src),
-                'attribute'   => $this->getCode()->getUseAttribute($this->src),
-                'implements'  => $this->getCode()->getImplements($this->src),
-                'dependency'  => $dependency
+                'tableLabel' => $this->str('label', $this->db->getTable()),
+                'package'    => $this->getCode()->getClassDocsPackage($this->src),
+                'var'        => $this->str('var-length', $this->src->getNameOff()),
+                'load'       => $this->load,
+                'preLoad'    => $this->preLoad,
+                'getFixture' => $this->getFixture,
+                'fields'     => $fieldsData,
+                'data'       => $arrayData,
+                'name'       => $this->src->getName(),
+                'module'     => $this->getModule()->getModuleName(),
+                'use'        => $this->getCode()->getUse($this->src),
+                'attribute'  => $this->getCode()->getUseAttribute($this->src),
+                'implements' => $this->getCode()->getImplements($this->src),
+                'dependency' => $dependency,
+                'reference'  => $this->str('url', str_replace('Fixture', '', $this->src->getName()))
             )
         );
         return $this->file->render();

@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\EdgeTest\AntEdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Edge\AntEdge\AntEdgeTrait;
 
 /**
  * @group Edge
  * @group AntEdge
  */
-class AntEdgeTest extends AbstractTestCase
+class AntEdgeTest extends TestCase
 {
     use AntEdgeTrait;
 
@@ -82,33 +82,13 @@ class AntEdgeTest extends AbstractTestCase
     /**
      * @group Gear
      * @group AntEdge
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getAntEdge()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group AntEdge
-    */
-    public function testGet()
-    {
-        $antEdge = $this->getAntEdge();
-        $this->assertInstanceOf('Gear\Edge\AntEdge\AntEdge', $antEdge);
-    }
-
-    /**
-     * @group Gear
-     * @group AntEdge
     */
     public function testSet()
     {
-        $mockAntEdge = $this->getMockSingleClass(
+        $mockAntEdge = $this->prophesize(
             'Gear\Edge\AntEdge\AntEdge'
         );
-        $this->setAntEdge($mockAntEdge);
-        $this->assertEquals($mockAntEdge, $this->getAntEdge());
+        $this->setAntEdge($mockAntEdge->reveal());
+        $this->assertEquals($mockAntEdge->reveal(), $this->getAntEdge());
     }
 }

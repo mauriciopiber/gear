@@ -1,7 +1,7 @@
 <?php
 namespace GearTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use GearTest\DatabaseColumnsMockerTrait;
 
 class DatabaseColumnMockerTraitTest extends TestCase

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Module\ModuleServiceTrait;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Module\ModuleServiceTrait;
  * @group Module
  * @group ModuleService
  */
-class ModuleServiceTraitTest extends AbstractTestCase
+class ModuleServiceTraitTest extends TestCase
 {
     use ModuleServiceTrait;
 

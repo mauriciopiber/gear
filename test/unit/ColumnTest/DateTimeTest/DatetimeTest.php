@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\DatetimeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Datetime\Datetime;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Datetime\Datetime;
  * @group DateColumn
  * @group f1
  */
-class DateTimeTest extends AbstractTestCase
+class DateTimeTest extends TestCase
 {
     public function setUp()
     {

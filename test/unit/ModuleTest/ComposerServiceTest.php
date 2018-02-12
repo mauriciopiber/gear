@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ComposerService;
 use Gear\Creator\Template\TemplateService;

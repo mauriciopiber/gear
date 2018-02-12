@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\UtilTest\ResolveNamesTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;

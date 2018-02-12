@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\AutoloadTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Autoload\ComposerAutoload;
 use org\bovigo\vfs\vfsStream;
 use Zend\Json\Json;

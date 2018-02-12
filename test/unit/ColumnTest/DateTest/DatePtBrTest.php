@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ColumnTest\DateTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Date\DatePtBr;
 
 /**
  * @group AbstractColumn
  * @group DateColumn
  */
-class DatePtBrTest extends AbstractTestCase
+class DatePtBrTest extends TestCase
 {
     public function setUp()
     {

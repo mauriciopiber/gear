@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ConstructService;
 use GearJson\Db\DbService as SchemaDbService;
@@ -24,7 +24,7 @@ use GearJson\Action\Action as ActionObject;
  * @group ModuleConstruct
  * @group Construct
  */
-class ConstructServiceTest extends AbstractTestCase
+class ConstructServiceTest extends TestCase
 {
     const ROOT_URL = 'basepath';
 

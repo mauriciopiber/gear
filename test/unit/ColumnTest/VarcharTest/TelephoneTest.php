@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\VarcharTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Varchar\Telephone;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Varchar\Telephone;
  * @group Column\Varchar
  * @group Column\Varchar\Telephone
  */
-class TelephoneTest extends AbstractTestCase
+class TelephoneTest extends TestCase
 {
     public function setUp()
     {

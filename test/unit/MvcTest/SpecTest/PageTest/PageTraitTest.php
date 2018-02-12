@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\PageTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Spec\Page\PageTrait;
 
 /**
  * @group Gear
  * @group Page
  */
-class PageTraitTest extends AbstractTestCase
+class PageTraitTest extends TestCase
 {
     use PageTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getPage()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

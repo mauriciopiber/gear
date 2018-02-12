@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\Upgrade\ModuleUpgrade;
 use Gear\Upgrade\AbstractUpgrade;
@@ -10,7 +10,7 @@ use Gear\Upgrade\AbstractUpgrade;
  * @group Service
  * @group Upgrade
  */
-class ModuleUpgradeTest extends AbstractTestCase
+class ModuleUpgradeTest extends TestCase
 {
     public function getModuleType()
     {

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\ComponentTest\MigrationFileTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Component\MigrationFile\MigrationFileFactory;
 
 /**

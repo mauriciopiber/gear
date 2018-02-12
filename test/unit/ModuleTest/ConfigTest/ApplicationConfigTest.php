@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\ConfigTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 //use org\bovigo\vfs\vfsStreamWrapper;
 
@@ -9,7 +9,7 @@ use org\bovigo\vfs\vfsStream;
  * @group Module
  * @group ApplicationConfig
  */
-class ApplicationConfigTest extends AbstractTestCase
+class ApplicationConfigTest extends TestCase
 {
     public function setUp()
     {

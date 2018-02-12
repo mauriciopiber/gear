@@ -1,17 +1,20 @@
 <?php
 namespace GearTest\MvcTest\FactoryTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-factory
  */
-class FactoryTestServiceTest extends AbstractTestCase
+class FactoryTestServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     use FactoryDataTrait;
 
     public function setUp()

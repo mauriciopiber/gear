@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ConstructorTest\SrcTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Src\SrcService;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;

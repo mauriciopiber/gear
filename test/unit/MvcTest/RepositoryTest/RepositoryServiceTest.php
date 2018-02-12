@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\RepositoryTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;

@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\EdgeTest\ComposerEdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Edge\ComposerEdgeTrait;
 
 /**
  * @group Edge
  */
-class ComposerEdgeTest extends AbstractTestCase
+class ComposerEdgeTest extends TestCase
 {
     use ComposerEdgeTrait;
 
@@ -75,33 +75,13 @@ class ComposerEdgeTest extends AbstractTestCase
     /**
      * @group Gear
      * @group ComposerEdge
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getComposerEdge()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group ComposerEdge
-    */
-    public function testGet()
-    {
-        $composerEdge = $this->getComposerEdge();
-        $this->assertInstanceOf('Gear\Edge\ComposerEdge', $composerEdge);
-    }
-
-    /**
-     * @group Gear
-     * @group ComposerEdge
     */
     public function testSet()
     {
-        $mockComposerEdge = $this->getMockSingleClass(
+        $mockComposerEdge = $this->prophesize(
             'Gear\Edge\ComposerEdge'
         );
-        $this->setComposerEdge($mockComposerEdge);
-        $this->assertEquals($mockComposerEdge, $this->getComposerEdge());
+        $this->setComposerEdge($mockComposerEdge->reveal());
+        $this->assertEquals($mockComposerEdge->reveal(), $this->getComposerEdge());
     }
 }

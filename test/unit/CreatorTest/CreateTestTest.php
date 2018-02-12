@@ -1,12 +1,12 @@
 <?php
 namespace GearTest\CreatorTest\FileCreatorTest\AppTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Creator
  */
-class CreateTestTest extends AbstractTestCase
+class CreateTestTest extends TestCase
 {
 
     public function setUp()

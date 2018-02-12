@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\CheckboxTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Integer\Checkbox;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Integer\Checkbox;
  * @group Column\Int
  * @group Column\Integer\Checkbox
  */
-class CheckboxTest extends AbstractTestCase
+class CheckboxTest extends TestCase
 {
     public function setUp()
     {

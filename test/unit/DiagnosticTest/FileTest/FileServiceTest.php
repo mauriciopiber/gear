@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\FileTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\File\FileService;
 
@@ -11,7 +11,7 @@ use Gear\Diagnostic\File\FileService;
  * @group FileDiagnostic
  * @group EdgeFile
  */
-class FileServiceTest extends AbstractTestCase
+class FileServiceTest extends TestCase
 {
     public function setUp()
     {

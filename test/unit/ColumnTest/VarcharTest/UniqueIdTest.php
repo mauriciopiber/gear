@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\VarcharTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Varchar\UniqueId;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Varchar\UniqueId;
  * @group Column\Varchar
  * @group Column\Varchar\UniqueId
  */
-class UniqueIdTest extends AbstractTestCase
+class UniqueIdTest extends TestCase
 {
     public function setUp()
     {

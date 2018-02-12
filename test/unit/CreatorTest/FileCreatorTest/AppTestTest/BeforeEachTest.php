@@ -1,35 +1,15 @@
 <?php
 namespace GearTest\CreatorTest\FileCreatorTest\AppTestTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
 
 /**
  * @group Service
  */
-class BeforeEachTest extends AbstractTestCase
+class BeforeEachTest extends TestCase
 {
     use BeforeEachTrait;
-
-    /**
-     * @group Gear
-     * @group BeforeEach
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getBeforeEach()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group BeforeEach
-    */
-    public function testGet()
-    {
-        $beforeEach = $this->getBeforeEach();
-        $this->assertInstanceOf('Gear\Creator\FileCreator\AppTest\BeforeEach', $beforeEach);
-    }
 
     /**
      * @group Gear
@@ -37,10 +17,10 @@ class BeforeEachTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockBeforeEach = $this->getMockSingleClass(
+        $mockBeforeEach = $this->prophesize(
             'Gear\Creator\FileCreator\AppTest\BeforeEach'
         );
-        $this->setBeforeEach($mockBeforeEach);
-        $this->assertEquals($mockBeforeEach, $this->getBeforeEach());
+        $this->setBeforeEach($mockBeforeEach->reveal());
+        $this->assertEquals($mockBeforeEach->reveal(), $this->getBeforeEach());
     }
 }

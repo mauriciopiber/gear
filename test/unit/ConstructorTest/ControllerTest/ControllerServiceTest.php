@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ServiceTest\ConstructorTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Controller\ControllerService;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;

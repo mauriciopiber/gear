@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Upgrade\DirUpgrade;
@@ -10,7 +10,7 @@ use Gear\Upgrade\DirUpgrade;
  * @group Upgrade
  * @group DirUpgrade
  */
-class DirUpgradeTest extends AbstractTestCase
+class DirUpgradeTest extends TestCase
 {
     public function setUp()
     {

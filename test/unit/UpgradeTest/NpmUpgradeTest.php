@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\NpmUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\NpmUpgrade;
@@ -10,7 +10,7 @@ use Gear\Upgrade\NpmUpgrade;
  * @group Service
  * @group NpmUpgrade
  */
-class NpmUpgradeTest extends AbstractTestCase
+class NpmUpgradeTest extends TestCase
 {
     public function setUp()
     {

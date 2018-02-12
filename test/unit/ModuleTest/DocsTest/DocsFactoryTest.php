@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ModuleTest\DocsTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group Docs
  */
-class DocsFactoryTest extends AbstractTestCase
+class DocsFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

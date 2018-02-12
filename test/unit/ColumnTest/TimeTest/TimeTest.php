@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ColumnTest\TimeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Time\Time;
 
 /**
  * @group AbstractColumn
  */
-class TimeTest extends AbstractTestCase
+class TimeTest extends TestCase
 {
     public function setUp()
     {

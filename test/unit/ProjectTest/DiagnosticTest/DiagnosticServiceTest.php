@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Project\Diagnostic\DiagnosticService;
 
@@ -11,7 +11,7 @@ use Gear\Project\Diagnostic\DiagnosticService;
  * @group Dig
  * @group ProjectConstruct
  */
-class DiagnosticServiceTest extends AbstractTestCase
+class DiagnosticServiceTest extends TestCase
 {
     public function getProjectType()
     {

@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\ModuleTest\ConfigTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Module\Config\ApplicationConfigTrait;
 
 /**
  * @group Gear
  * @group ApplicationConfig
  */
-class ApplicationConfigTraitTest extends AbstractTestCase
+class ApplicationConfigTraitTest extends TestCase
 {
     use ApplicationConfigTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getApplicationConfig();
-        $this->assertInstanceOf('Gear\Module\Config\ApplicationConfig', $serviceLocator);
-    }
 
     public function testSet()
     {

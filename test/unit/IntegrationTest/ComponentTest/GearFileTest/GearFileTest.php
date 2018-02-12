@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Component\GearFile\GearFile;
 use GearBase\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;

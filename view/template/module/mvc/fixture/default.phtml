@@ -44,7 +44,7 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
             $<?php echo $this->var;?>->setCreatedBy($userReferenced);
             $this->manager->persist($<?php echo $this->var;?>);
             $this->manager->flush();
-            $this->addReference("<?php echo $this->str('url', str_replace('Fixture', '', $this->name)); ?>-$reference", $<?php echo $this->var;?>);
+            $this->addReference("<?php echo $this->reference?>-$reference", $<?php echo $this->var;?>);
 <?php echo $this->load;?>
         }
     }

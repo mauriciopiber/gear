@@ -1,25 +1,15 @@
 <?php
 namespace GearTest\ModuleTest\NodeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Node
  * @group Protractor
  */
-class ProtractorTraitTest extends AbstractTestCase
+class ProtractorTraitTest extends TestCase
 {
     use \Gear\Module\Node\ProtractorTrait;
-
-    /**
-     * @group Gear
-     * @group ComposerUpgrade
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getProtractor()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ServiceTest\MvcTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module;
 use Gear\Creator\Template\TemplateService    ;
@@ -11,12 +11,15 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Code;
 use GearBase\Util\Dir\DirService;
 use Gear\Mvc\InterfaceService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group up1
  */
-class InterfaceTestServiceTest extends AbstractTestCase
+class InterfaceTestServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();

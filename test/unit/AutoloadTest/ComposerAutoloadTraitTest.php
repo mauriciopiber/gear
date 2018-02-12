@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\AutoloadTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Autoload\ComposerAutoloadTrait;
 
 /**
  * @group Gear
  * @group ComposerAutoload
  */
-class ComposerAutoloadTraitTest extends AbstractTestCase
+class ComposerAutoloadTraitTest extends TestCase
 {
     use ComposerAutoloadTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getComposerAutoload();
-        $this->assertInstanceOf('Gear\Autoload\ComposerAutoload', $serviceLocator);
-    }
 
     public function testSet()
     {

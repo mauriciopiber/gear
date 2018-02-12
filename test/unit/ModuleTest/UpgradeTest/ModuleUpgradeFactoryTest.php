@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ModuleTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group ModuleUpgrade
  * @group Upgrade
  */
-class ModuleUpgradeFactoryTest extends AbstractTestCase
+class ModuleUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

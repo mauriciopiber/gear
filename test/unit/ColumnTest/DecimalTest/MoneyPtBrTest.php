@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ColumnTest\DecimalTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Decimal\MoneyPtBr;
 
 /**
  * @group AbstractColumn
  */
-class MoneyPtBrTest extends AbstractTestCase
+class MoneyPtBrTest extends TestCase
 {
     public function setUp()
     {

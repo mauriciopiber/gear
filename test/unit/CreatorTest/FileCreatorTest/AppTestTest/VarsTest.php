@@ -1,35 +1,16 @@
 <?php
 namespace GearTest\CreatorTest\FileCreatorTest\AppTestTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\FileCreator\AppTest\VarsTrait;
 
 /**
  * @group Service
  */
-class VarsTest extends AbstractTestCase
+class VarsTest extends TestCase
 {
     use VarsTrait;
 
-    /**
-     * @group Gear
-     * @group Vars
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getVars()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group Vars
-    */
-    public function testGet()
-    {
-        $vars = $this->getVars();
-        $this->assertInstanceOf('Gear\Creator\FileCreator\AppTest\Vars', $vars);
-    }
 
     /**
      * @group Gear
@@ -37,10 +18,10 @@ class VarsTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockVars = $this->getMockSingleClass(
+        $mockVars = $this->prophesize(
             'Gear\Creator\FileCreator\AppTest\Vars'
         );
-        $this->setVars($mockVars);
-        $this->assertEquals($mockVars, $this->getVars());
+        $this->setVars($mockVars->reveal());
+        $this->assertEquals($mockVars->reveal(), $this->getVars());
     }
 }

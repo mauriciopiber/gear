@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Module\Upgrade\ModuleUpgradeTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Module\Upgrade\ModuleUpgradeTrait;
  * @group ModuleUpgrade
  * @group Upgrade
  */
-class ModuleUpgradeTraitTest extends AbstractTestCase
+class ModuleUpgradeTraitTest extends TestCase
 {
     use ModuleUpgradeTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getModuleUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

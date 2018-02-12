@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\CreatorTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use GearJson\Src\Src;
 use GearJson\Controller\Controller;
 use Gear\Creator\Code;

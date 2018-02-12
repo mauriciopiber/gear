@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ProjectTest\DocsTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Project\Docs\DocsTrait;
 
 /**
  * @group Gear
  * @group Docs
  */
-class DocsTraitTest extends AbstractTestCase
+class DocsTraitTest extends TestCase
 {
     use DocsTrait;
 

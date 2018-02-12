@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ServiceTest\ConstructorTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\Action\ActionService;
 use Gear\Mvc\Controller\Web\WebControllerService;

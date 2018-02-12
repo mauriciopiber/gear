@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\EntityTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Entity\EntityService;
 use org\bovigo\vfs\vfsStream;
 use GearJson\Src\Src;
@@ -12,6 +12,7 @@ use GearJson\Src\Src;
  */
 class EntityServiceTest extends TestCase
 {
+
     public function setUp()
     {
         parent::setUp();

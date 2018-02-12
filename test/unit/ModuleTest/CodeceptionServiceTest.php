@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Module\CodeceptionService;
 use org\bovigo\vfs\vfsStream;
 

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\NpmService;
 
@@ -9,7 +9,7 @@ use Gear\Diagnostic\NpmService;
  * @group Diagnostic
  * @group NpmDiagnostic
  */
-class NpmServiceTest extends AbstractTestCase
+class NpmServiceTest extends TestCase
 {
 
     public function setUp()

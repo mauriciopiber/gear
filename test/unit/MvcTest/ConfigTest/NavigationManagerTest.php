@@ -1,12 +1,13 @@
 <?php
 namespace GearTest\MvcTest\ConfigTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Mvc
@@ -14,9 +15,11 @@ use GearJson\Action\Action;
  * @group Config
  * @group Navigation
  */
-class NavigationManagerTest extends AbstractTestCase
+class NavigationManagerTest extends TestCase
 {
     use NavigationManagerTrait;
+
+    use UtilTestTrait;
 
     public function setUp()
     {

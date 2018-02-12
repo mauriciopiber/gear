@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ColumnTest\DateTimeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group AbstractColumn
  * @group AbstractCheckbox
  * @group ValidDate
  */
-class AbstractDateTimeTest extends AbstractTestCase
+class AbstractDateTimeTest extends TestCase
 {
 
     public function setUp()

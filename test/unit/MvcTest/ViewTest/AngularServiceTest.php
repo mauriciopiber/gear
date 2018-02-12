@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\ViewTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
@@ -10,15 +10,18 @@ use GearBase\Util\String\StringService;
 use GearBase\Util\File\FileService;
 use GearBase\Util\Dir\DirService;
 use Gear\Module;
-use Gear\Creator\Template\TemplateService    ;
+use Gear\Creator\Template\TemplateService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\View\AngularService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group View
  */
-class AngularServiceTest extends AbstractTestCase
+class AngularServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();

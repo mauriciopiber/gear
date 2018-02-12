@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\ComposerUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\ComposerUpgrade;
@@ -11,7 +11,7 @@ use Gear\Upgrade\ComposerUpgrade;
  * @group ComposerUpgrade
  * @group Service
  */
-class ComposerUpgradeTest extends AbstractTestCase
+class ComposerUpgradeTest extends TestCase
 {
     use ComposerUpgradeTrait;
 

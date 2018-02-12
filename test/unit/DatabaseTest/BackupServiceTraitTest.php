@@ -1,21 +1,15 @@
 <?php
 namespace GearTest\DatabaseTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Database\BackupServiceTrait;
 
 /**
  * @group Database
  */
-class BackupServiceTraitTest extends AbstractTestCase
+class BackupServiceTraitTest extends TestCase
 {
     use BackupServiceTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getBackupService();
-        $this->assertInstanceOf('Gear\Database\BackupService', $serviceLocator);
-    }
 
     public function testSet()
     {

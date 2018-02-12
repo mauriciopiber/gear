@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\CreatorTest\FileTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\Injector\InjectorTrait;
 
 /**
  * @group Gear
  * @group Injector
  */
-class InjectorTraitTest extends AbstractTestCase
+class InjectorTraitTest extends TestCase
 {
     use InjectorTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getInjector();
-        $this->assertInstanceOf('Gear\Creator\Injector\Injector', $serviceLocator);
-    }
 
     public function testSet()
     {

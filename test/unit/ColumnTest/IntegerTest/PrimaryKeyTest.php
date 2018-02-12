@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\IntTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Integer\PrimaryKey;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Integer\PrimaryKey;
  * @group Column\Int
  * @group Column\Integer\PrimaryKey
  */
-class PrimaryKeyTest extends AbstractTestCase
+class PrimaryKeyTest extends TestCase
 {
     public function setUp()
     {

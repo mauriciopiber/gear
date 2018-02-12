@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\StepTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Spec\Step\StepTrait;
 
 /**
  * @group Gear
  * @group Step
  */
-class StepTraitTest extends AbstractTestCase
+class StepTraitTest extends TestCase
 {
     use StepTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getStep()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

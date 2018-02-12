@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\SuiteTest\ControllerTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Suite\Controller\ControllerMajorSuite;
 use Gear\Integration\Suite\Controller\ControllerMinorSuite;
 

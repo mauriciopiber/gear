@@ -1,16 +1,19 @@
 <?php
 namespace GearTest\ModuleTest\DocsTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Service
  * @group Docs
  */
-class DocsTest extends AbstractTestCase
+class DocsTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();

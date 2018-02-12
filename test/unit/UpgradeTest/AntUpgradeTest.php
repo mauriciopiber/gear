@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\AntUpgrade;
 use GearBase\Util\String\StringService;

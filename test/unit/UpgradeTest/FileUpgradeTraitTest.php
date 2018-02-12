@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\FileUpgradeTrait;
 
 /**
  * @group Gear
  * @group FileUpgrade
  */
-class FileUpgradeTraitTest extends AbstractTestCase
+class FileUpgradeTraitTest extends TestCase
 {
     use FileUpgradeTrait;
 

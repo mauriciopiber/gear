@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ModuleTest\ConfigTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group ApplicationConfig
  */
-class ApplicationConfigFactoryTest extends AbstractTestCase
+class ApplicationConfigFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
