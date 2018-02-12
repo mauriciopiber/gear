@@ -1,22 +1,16 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\DirUpgradeTrait;
 
 /**
  * @group Gear
  * @group DirUpgrade
  */
-class DirUpgradeTraitTest extends AbstractTestCase
+class DirUpgradeTraitTest extends TestCase
 {
     use DirUpgradeTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDirUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\AntTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Ant\AntService;
 use GearBase\Util\String\StringService;
@@ -11,7 +11,7 @@ use GearBase\Util\String\StringService;
  * @group AntService
  * @group AntDiagnostic
  */
-class AntServiceTest extends AbstractTestCase
+class AntServiceTest extends TestCase
 {
 
     public function setUp()

@@ -1,16 +1,19 @@
 <?php
 namespace GearTest\ProjectTest\ComposerTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Project\Composer\ComposerServiceTrait;
 use org\bovigo\vfs\vfsStream;
+use GearTest\UtilTestTrait;
 
 /**
  * @group ComposerService
  * @group Service
  */
-class ComposerServiceTest extends AbstractTestCase
+class ComposerServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     use ComposerServiceTrait;
 
     public function setUp()
@@ -22,7 +25,7 @@ class ComposerServiceTest extends AbstractTestCase
         $this->scriptService = $this->prophesize('Gear\Script\ScriptService');
 
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+        $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();

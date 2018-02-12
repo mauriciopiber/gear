@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\UtilTest\PromptTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Util\Prompt\ConsolePromptTrait;
 
 /**
  * @group Gear
  * @group ConsolePrompt
  */
-class ConsolePromptTraitTest extends AbstractTestCase
+class ConsolePromptTraitTest extends TestCase
 {
     use ConsolePromptTrait;
 

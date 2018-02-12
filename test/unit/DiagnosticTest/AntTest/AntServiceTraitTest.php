@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\AntTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Diagnostic\Ant\AntServiceTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Diagnostic\Ant\AntServiceTrait;
  * @group Diagnostic
  * @group AntService
  */
-class AntServiceTraitTest extends AbstractTestCase
+class AntServiceTraitTest extends TestCase
 {
     use AntServiceTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getAntService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

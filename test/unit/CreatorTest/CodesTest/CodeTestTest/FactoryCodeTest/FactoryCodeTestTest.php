@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\CreatorTest\CodesTest\CodeTestTest\FactoryCodeTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
 
 /**

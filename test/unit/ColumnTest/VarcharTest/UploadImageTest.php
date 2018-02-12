@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\VarcharTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Varchar\UploadImage;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Varchar\UploadImage;
  * @group Column\Varchar
  * @group Column\Varchar\UploadImage
  */
-class UploadImageTest extends AbstractTestCase
+class UploadImageTest extends TestCase
 {
     public function setUp()
     {

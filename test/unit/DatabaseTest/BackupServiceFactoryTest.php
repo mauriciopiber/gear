@@ -1,12 +1,12 @@
 <?php
 namespace GearTest\ProjectTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Database
  */
-class BackupServiceFactoryTest extends AbstractTestCase
+class BackupServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

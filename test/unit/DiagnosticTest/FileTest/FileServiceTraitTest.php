@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\FileTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Diagnostic\File\FileServiceTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Diagnostic\File\FileServiceTrait;
  * @group Diagnostic
  * @group FileService
  */
-class FileServiceTraitTest extends AbstractTestCase
+class FileServiceTraitTest extends TestCase
 {
     use FileServiceTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getFileDiagnosticService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

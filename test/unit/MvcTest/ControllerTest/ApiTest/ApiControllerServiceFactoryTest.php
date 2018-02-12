@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\ControllerTest\ApiTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Controller\Api\ApiControllerServiceFactory;
 use Gear\Mvc\Controller\Api\ApiControllerService;

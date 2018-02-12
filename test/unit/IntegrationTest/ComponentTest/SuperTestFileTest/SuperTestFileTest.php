@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\ComponentTest\SuperTestFileTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 
 /**

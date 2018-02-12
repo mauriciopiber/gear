@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
@@ -10,7 +10,7 @@ use Gear\Util\Yaml\YamlService;
  * @group FileUpgrade
  * @group EdgeFile
  */
-class FileUpgradeTest extends AbstractTestCase
+class FileUpgradeTest extends TestCase
 {
     public function setUp()
     {

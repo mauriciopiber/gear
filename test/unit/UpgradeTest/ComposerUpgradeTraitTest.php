@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\ComposerUpgradeTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Upgrade\ComposerUpgradeTrait;
  * @group Gear
  * @group ComposerUpgrade
  */
-class ComposerUpgradeTraitTest extends AbstractTestCase
+class ComposerUpgradeTraitTest extends TestCase
 {
     use ComposerUpgradeTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getComposerUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

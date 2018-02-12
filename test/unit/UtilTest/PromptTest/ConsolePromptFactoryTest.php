@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\UtilTest\PromptTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group ConsolePrompt
  */
-class ConsolePromptFactoryTest extends AbstractTestCase
+class ConsolePromptFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

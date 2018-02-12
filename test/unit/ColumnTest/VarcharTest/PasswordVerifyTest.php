@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\VarcharTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Varchar\PasswordVerify;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Varchar\PasswordVerify;
  * @group Column\Varchar
  * @group Column\Varchar\PasswordVerify
  */
-class PasswordVerifyTest extends AbstractTestCase
+class PasswordVerifyTest extends TestCase
 {
     public function setUp()
     {

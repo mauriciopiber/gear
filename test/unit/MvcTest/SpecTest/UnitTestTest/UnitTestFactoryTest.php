@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\UnitTestTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group UnitTest
  */
-class UnitTestFactoryTest extends AbstractTestCase
+class UnitTestFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

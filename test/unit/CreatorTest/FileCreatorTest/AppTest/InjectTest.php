@@ -1,35 +1,15 @@
 <?php
 namespace GearTest\CreatorTest\FileCreatorTest\AppTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\FileCreator\App\InjectTrait;
 
 /**
  * @group Service
  */
-class InjectTest extends AbstractTestCase
+class InjectTest extends TestCase
 {
     use InjectTrait;
-
-    /**
-     * @group Gear
-     * @group Inject
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getInject()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group Inject
-    */
-    public function testGet()
-    {
-        $inject = $this->getInject();
-        $this->assertInstanceOf('Gear\Creator\FileCreator\App\Inject', $inject);
-    }
 
     /**
      * @group Gear
@@ -37,10 +17,10 @@ class InjectTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockInject = $this->getMockSingleClass(
+        $mockInject = $this->prophesize(
             'Gear\Creator\FileCreator\App\Inject'
         );
-        $this->setInject($mockInject);
-        $this->assertEquals($mockInject, $this->getInject());
+        $this->setInject($mockInject->reveal());
+        $this->assertEquals($mockInject->reveal(), $this->getInject());
     }
 }

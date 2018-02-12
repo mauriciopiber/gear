@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\DirTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Diagnostic\Dir\DirServiceTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Diagnostic\Dir\DirServiceTrait;
  * @group Diagnostic
  * @group DirService
  */
-class DirServiceTraitTest extends AbstractTestCase
+class DirServiceTraitTest extends TestCase
 {
     use DirServiceTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDirDiagnosticService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

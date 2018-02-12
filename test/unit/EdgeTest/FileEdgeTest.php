@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\EdgeTest\FileEdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Edge\FileEdgeTrait;
 
 /**
  * @group Edge
  */
-class FileEdgeTest extends AbstractTestCase
+class FileEdgeTest extends TestCase
 {
     use FileEdgeTrait;
 
@@ -72,33 +72,13 @@ class FileEdgeTest extends AbstractTestCase
     /**
      * @group Gear
      * @group FileEdge
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getFileEdge()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group FileEdge
-    */
-    public function testGet()
-    {
-        $fileEdge = $this->getFileEdge();
-        $this->assertInstanceOf('Gear\Edge\FileEdge', $fileEdge);
-    }
-
-    /**
-     * @group Gear
-     * @group FileEdge
     */
     public function testSet()
     {
-        $mockFileEdge = $this->getMockSingleClass(
+        $mockFileEdge = $this->prophesize(
             'Gear\Edge\FileEdge'
         );
-        $this->setFileEdge($mockFileEdge);
-        $this->assertEquals($mockFileEdge, $this->getFileEdge());
+        $this->setFileEdge($mockFileEdge->reveal());
+        $this->assertEquals($mockFileEdge->reveal(), $this->getFileEdge());
     }
 }

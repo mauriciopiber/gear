@@ -1,12 +1,12 @@
 <?php
 namespace GearTest\EdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Edge
  */
-class AbstractEdgeTest extends AbstractTestCase
+class AbstractEdgeTest extends TestCase
 {
     public function testGetModuleWebLocation()
     {

@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\EdgeTest\NpmEdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Edge\NpmEdgeTrait;
 
 /**
  * @group Edge
  * @group Service
  */
-class NpmEdgeTest extends AbstractTestCase
+class NpmEdgeTest extends TestCase
 {
     use NpmEdgeTrait;
 
@@ -37,25 +37,6 @@ class NpmEdgeTest extends AbstractTestCase
         $this->assertArrayHasKey('devDependencies', $web);
     }
 
-    /**
-     * @group Gear
-     * @group NpmEdge
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getNpmEdge()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group NpmEdge
-    */
-    public function testGet()
-    {
-        $npmEdge = $this->getNpmEdge();
-        $this->assertInstanceOf('Gear\Edge\NpmEdge', $npmEdge);
-    }
 
     /**
      * @group Gear
@@ -63,10 +44,10 @@ class NpmEdgeTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockNpmEdge = $this->getMockSingleClass(
+        $mockNpmEdge = $this->prophesize(
             'Gear\Edge\NpmEdge'
         );
-        $this->setNpmEdge($mockNpmEdge);
-        $this->assertEquals($mockNpmEdge, $this->getNpmEdge());
+        $this->setNpmEdge($mockNpmEdge->reveal());
+        $this->assertEquals($mockNpmEdge->reveal(), $this->getNpmEdge());
     }
 }

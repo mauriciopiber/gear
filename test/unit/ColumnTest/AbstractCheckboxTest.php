@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ColumnTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group AbstractColumn
  * @group AbstractCheckbox
  */
-class AbstractCheckboxTest extends AbstractTestCase
+class AbstractCheckboxTest extends TestCase
 {
 
     public function setUp()

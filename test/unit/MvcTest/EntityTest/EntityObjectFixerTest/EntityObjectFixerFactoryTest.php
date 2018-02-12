@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\EntityTest\EntityObjectFixerTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory;
 
 /**

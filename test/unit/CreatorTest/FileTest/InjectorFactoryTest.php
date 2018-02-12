@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\CreatorTest\FileTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group Injector
  */
-class InjectorFactoryTest extends AbstractTestCase
+class InjectorFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

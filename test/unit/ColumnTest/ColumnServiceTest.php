@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\ColumnService;
 use GearBase\Util\String\StringService;
 use Zend\ServiceManager\ServiceManager;

@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ColumnTest\TinyintTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Tinyint\Checkbox;
 
 /**
  * @group AbstractColumn
  * @group Column\Tinyint
  */
-class CheckboxTest extends AbstractTestCase
+class CheckboxTest extends TestCase
 {
     public function setUp()
     {

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\FeatureTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearJson\Action\Action;

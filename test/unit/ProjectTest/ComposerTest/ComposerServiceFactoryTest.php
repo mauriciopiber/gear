@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\ProjectTest\ComposerTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group ComposerService
  */
-class ComposerServiceFactoryTest extends AbstractTestCase
+class ComposerServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

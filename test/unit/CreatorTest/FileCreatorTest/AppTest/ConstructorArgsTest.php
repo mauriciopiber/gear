@@ -1,35 +1,15 @@
 <?php
 namespace GearTest\CreatorTest\FileCreatorTest\AppTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
 
 /**
  * @group Service
  */
-class ConstructorArgsTest extends AbstractTestCase
+class ConstructorArgsTest extends TestCase
 {
     use ConstructorArgsTrait;
-
-    /**
-     * @group Gear
-     * @group ConstructorArgs
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getConstructorArgs()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group ConstructorArgs
-    */
-    public function testGet()
-    {
-        $constructorArgs = $this->getConstructorArgs();
-        $this->assertInstanceOf('Gear\Creator\FileCreator\App\ConstructorArgs', $constructorArgs);
-    }
 
     /**
      * @group Gear
@@ -37,10 +17,10 @@ class ConstructorArgsTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockConstructorArgs = $this->getMockSingleClass(
+        $mockConstructorArgs = $this->prophesize(
             'Gear\Creator\FileCreator\App\ConstructorArgs'
         );
-        $this->setConstructorArgs($mockConstructorArgs);
-        $this->assertEquals($mockConstructorArgs, $this->getConstructorArgs());
+        $this->setConstructorArgs($mockConstructorArgs->reveal());
+        $this->assertEquals($mockConstructorArgs->reveal(), $this->getConstructorArgs());
     }
 }

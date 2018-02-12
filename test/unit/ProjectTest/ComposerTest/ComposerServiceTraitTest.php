@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ProjectTest\ComposerTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Project\Composer\ComposerServiceTrait;
 
 /**
  * @group Gear
  * @group ComposerService
  */
-class ComposerServiceTraitTest extends AbstractTestCase
+class ComposerServiceTraitTest extends TestCase
 {
     use ComposerServiceTrait;
 

@@ -1,25 +1,15 @@
 <?php
 namespace GearTest\ModuleTest\NodeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Node
  * @group Karma
  */
-class KarmaTraitTest extends AbstractTestCase
+class KarmaTraitTest extends TestCase
 {
     use \Gear\Module\Node\KarmaTrait;
-
-    /**
-     * @group Gear
-     * @group ComposerUpgrade
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getKarma()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

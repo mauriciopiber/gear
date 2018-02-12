@@ -2,7 +2,7 @@
 namespace GearTest\MvcTest\FixtureTest;
 
 use org\bovigo\vfs\vfsStream;
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use GearBase\Util\String\StringService;
 use GearBase\Util\File\FileService;
 use GearJson\Src\Src;
@@ -20,12 +20,14 @@ use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Integer\PrimaryKey;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
+use GearTest\UtilTestTrait;
 
 /**
  * @group db-docs
  */
-class FixtureServiceTest extends AbstractTestCase
+class FixtureServiceTest extends TestCase
 {
+    use UtilTestTrait;
     use SingleDbTableTrait;
     use DatabaseColumnsMockerTrait;
 

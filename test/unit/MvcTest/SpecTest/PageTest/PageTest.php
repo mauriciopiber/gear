@@ -1,15 +1,17 @@
 <?php
 namespace GearTest\MvcTest\SpecTest\PageTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Spec
  */
-class PageTest extends AbstractTestCase
+class PageTest extends TestCase
 {
+    use UtilTestTrait;
 
     public function setUp()
     {

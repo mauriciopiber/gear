@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\AutoloadTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group ComposerAutoload
  */
-class ComposerAutoloadFactoryTest extends AbstractTestCase
+class ComposerAutoloadFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

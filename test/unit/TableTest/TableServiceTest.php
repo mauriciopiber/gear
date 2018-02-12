@@ -1,35 +1,15 @@
 <?php
 namespace GearTest\TableTest\TableServiceTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Table\TableService\TableServiceTrait;
 
 /**
  * @group Service
  */
-class TableServiceTest extends AbstractTestCase
+class TableServiceTest extends TestCase
 {
     use TableServiceTrait;
-
-    /**
-     * @group Gear
-     * @group TableService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getTableService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group TableService
-    */
-    public function testGet()
-    {
-        $tableService = $this->getTableService();
-        $this->assertInstanceOf('Gear\Table\TableService\TableService', $tableService);
-    }
 
     /**
      * @group Gear
@@ -37,10 +17,10 @@ class TableServiceTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockTableService = $this->getMockSingleClass(
+        $mockTableService = $this->prophesize(
             'Gear\Table\TableService\TableService'
         );
-        $this->setTableService($mockTableService);
-        $this->assertEquals($mockTableService, $this->getTableService());
+        $this->setTableService($mockTableService->reveal());
+        $this->assertEquals($mockTableService->reveal(), $this->getTableService());
     }
 }

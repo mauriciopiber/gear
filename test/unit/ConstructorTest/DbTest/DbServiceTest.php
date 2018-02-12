@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ConstructorTest\DbTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Db\DbServiceTrait;
 use Gear\Constructor\Db\DbService;
 use GearJson\Action\ActionService;

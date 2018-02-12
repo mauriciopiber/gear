@@ -1,36 +1,16 @@
 <?php
 namespace GearTest\ProjectTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Project\Diagnostic\DiagnosticServiceTrait;
 
 /**
  * @group Diagnostic
  * @group Service
  */
-class DiagnosticServiceTraitTest extends AbstractTestCase
+class DiagnosticServiceTraitTest extends TestCase
 {
     use DiagnosticServiceTrait;
-
-    /**
-     * @group Gear
-     * @group DiagnosticService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDiagnosticService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group DiagnosticService
-    */
-    public function testGet()
-    {
-        $diagnosticService = $this->getDiagnosticService();
-        $this->assertInstanceOf('Gear\Project\Diagnostic\DiagnosticService', $diagnosticService);
-    }
 
     /**
      * @group Gear
@@ -38,10 +18,10 @@ class DiagnosticServiceTraitTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockDiagnostic = $this->getMockSingleClass(
+        $mockDiagnostic = $this->prophesize(
             'Gear\Project\Diagnostic\DiagnosticService'
         );
-        $this->setDiagnosticService($mockDiagnostic);
-        $this->assertEquals($mockDiagnostic, $this->getDiagnosticService());
+        $this->setDiagnosticService($mockDiagnostic->reveal());
+        $this->assertEquals($mockDiagnostic->reveal(), $this->getDiagnosticService());
     }
 }

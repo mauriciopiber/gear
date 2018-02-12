@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ProjectTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\AbstractUpgrade;
 
 /**
  * @group Upgrade
  */
-class ProjectUpgradeTest extends AbstractTestCase
+class ProjectUpgradeTest extends TestCase
 {
     public function getProjectType()
     {

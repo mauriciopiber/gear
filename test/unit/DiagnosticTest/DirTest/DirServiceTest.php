@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest\DirTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Diagnostic\Dir\DirService;
@@ -11,7 +11,7 @@ use Gear\Diagnostic\Dir\DirService;
  * @group DirService
  * @group DirDiagnostic
  */
-class DirServiceTest extends AbstractTestCase
+class DirServiceTest extends TestCase
 {
     public function setUp()
     {

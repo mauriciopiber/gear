@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DatabaseTest\PhinxTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Database\Phinx\PhinxServiceTrait;

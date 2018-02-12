@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\ComposerService;
 
@@ -10,7 +10,7 @@ use Gear\Diagnostic\ComposerService;
  * @group ComposerService
  * @group ComposerDiagnostic
  */
-class ComposerServiceTest extends AbstractTestCase
+class ComposerServiceTest extends TestCase
 {
 
     public function setUp()

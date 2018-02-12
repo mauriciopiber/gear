@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\UtilTest\YamlTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Util\Yaml\YamlServiceTrait;
 use org\bovigo\vfs\vfsStream;
 
 /**
  * @group Util
  */
-class YamlServiceTest extends AbstractTestCase
+class YamlServiceTest extends TestCase
 {
     use YamlServiceTrait;
 
@@ -94,33 +94,13 @@ EOS;
     /**
      * @group Gear
      * @group YamlService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getYamlService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group YamlService
-    */
-    public function testGet()
-    {
-        $yamlService = $this->getYamlService();
-        $this->assertInstanceOf('Gear\Util\Yaml\YamlService', $yamlService);
-    }
-
-    /**
-     * @group Gear
-     * @group YamlService
     */
     public function testSet()
     {
-        $mockYamlService = $this->getMockSingleClass(
+        $mockYamlService = $this->prophesize(
             'Gear\Util\Yaml\YamlService'
         );
-        $this->setYamlService($mockYamlService);
-        $this->assertEquals($mockYamlService, $this->getYamlService());
+        $this->setYamlService($mockYamlService->reveal());
+        $this->assertEquals($mockYamlService->reveal(), $this->getYamlService());
     }
 }

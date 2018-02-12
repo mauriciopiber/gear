@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\EdgeTest\DirEdgeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Edge\DirEdgeTrait;
 
 /**
  * @group Edge
  */
-class DirEdgeTest extends AbstractTestCase
+class DirEdgeTest extends TestCase
 {
     use DirEdgeTrait;
 
@@ -75,33 +75,13 @@ class DirEdgeTest extends AbstractTestCase
     /**
      * @group Gear
      * @group DirEdge
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getDirEdge()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group DirEdge
-    */
-    public function testGet()
-    {
-        $dirEdge = $this->getDirEdge();
-        $this->assertInstanceOf('Gear\Edge\DirEdge', $dirEdge);
-    }
-
-    /**
-     * @group Gear
-     * @group DirEdge
     */
     public function testSet()
     {
-        $mockDirEdge = $this->getMockSingleClass(
+        $mockDirEdge = $this->prophesize(
             'Gear\Edge\DirEdge'
         );
-        $this->setDirEdge($mockDirEdge);
-        $this->assertEquals($mockDirEdge, $this->getDirEdge());
+        $this->setDirEdge($mockDirEdge->reveal());
+        $this->assertEquals($mockDirEdge->reveal(), $this->getDirEdge());
     }
 }

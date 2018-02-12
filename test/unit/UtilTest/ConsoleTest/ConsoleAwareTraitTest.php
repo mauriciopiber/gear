@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\UtilTest\ConsoleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Util\Console\ConsoleAwareTrait;
 
 /**
  * @group Util
  *
  */
-class ConsoleAwareTraitTest extends AbstractTestCase
+class ConsoleAwareTraitTest extends TestCase
 {
     use ConsoleAwareTrait;
 

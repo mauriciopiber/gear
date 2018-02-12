@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Project\Upgrade\ProjectUpgradeTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Project\Upgrade\ProjectUpgradeTrait;
  * @group ProjectUpgrade
  * @gruup Upgrade
  */
-class ProjectUpgradeTraitTest extends AbstractTestCase
+class ProjectUpgradeTraitTest extends TestCase
 {
     use ProjectUpgradeTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getProjectUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

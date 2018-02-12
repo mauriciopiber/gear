@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\AntUpgradeTrait;
 
 /**
@@ -9,15 +9,9 @@ use Gear\Upgrade\AntUpgradeTrait;
  * @group Gear
  * @group AntUpgrade
  */
-class AntUpgradeTraitTest extends AbstractTestCase
+class AntUpgradeTraitTest extends TestCase
 {
     use AntUpgradeTrait;
-
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getAntUpgrade()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
 
     public function testSet()
     {

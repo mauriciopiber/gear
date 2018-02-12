@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "3d923c8249f1ac36c52c9abac8bec342",
+    "content-hash": "c472220735a25d3e324eda4ffb61cf14",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1258,16 +1258,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.7.3",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf"
+                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf-zip-f68163.tar",
-                "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
+                "url": "https://mirror.pibernetwork.com/dist/phpspec-prophecy-9f901e29c93dae4aa77c0bb161df4276f9c9a1be-zip-663b52.tar",
+                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
                 "shasum": ""
             },
             "require": {
@@ -1279,7 +1279,7 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8.35 || ^5.7"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
             },
             "type": "library",
             "extra": {
@@ -1317,7 +1317,7 @@
                 "spy",
                 "stub"
             ***REMOVED***,
-            "time": "2017-11-24T13:59:53+00:00"
+            "time": "2018-02-11T18:49:29+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6601,16 +6601,16 @@
         },
         {
             "name": "mauriciopiber/gear-base",
-            "version": "0.2.52",
+            "version": "0.2.53",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-base.git",
-                "reference": "dde8b36ce0add97cd70ff0ff3ff75c052fd1ebe0"
+                "reference": "338f1a7244d4633c24e9ebca18de37cc7e339c47"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.52-f1735b.tar",
-                "reference": "dde8b36ce0add97cd70ff0ff3ff75c052fd1ebe0",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-base-0.2.53-b52355.tar",
+                "reference": "338f1a7244d4633c24e9ebca18de37cc7e339c47",
                 "shasum": null
             },
             "require": {
@@ -6643,7 +6643,7 @@
                     "GearBase": "src"
                 }
             },
-            "time": "2018-01-31T22:23:52+00:00"
+            "time": "2018-02-12T02:31:31+00:00"
         },
         {
             "name": "mauriciopiber/gear-deploy",

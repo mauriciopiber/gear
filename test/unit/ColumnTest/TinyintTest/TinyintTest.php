@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\ColumnTest\TinyintTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Tinyint\Tinyint;
 
 /**
  * @group AbstractColumn
  * @group Column\Tinyint
  */
-class TinyintTest extends AbstractTestCase
+class TinyintTest extends TestCase
 {
     public function setUp()
     {

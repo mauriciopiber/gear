@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\DiagnosticTest\AntTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group Diagnostic
  * @group AntService
  */
-class AntServiceFactoryTest extends AbstractTestCase
+class AntServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

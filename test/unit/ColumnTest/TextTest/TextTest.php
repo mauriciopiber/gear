@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ColumnTest\TextTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Column\Text\Text;
 
 /**
@@ -9,7 +9,7 @@ use Gear\Column\Text\Text;
  * @group Column\Text
  * @group Column\Text\Text
  */
-class TextTest extends AbstractTestCase
+class TextTest extends TestCase
 {
     public function setUp()
     {

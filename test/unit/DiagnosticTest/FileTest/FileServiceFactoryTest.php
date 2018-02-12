@@ -1,14 +1,14 @@
 <?php
 namespace GearTest\DiagnosticTest\FileTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
  * @group Diagnostic
  * @group FileService
  */
-class FileServiceFactoryTest extends AbstractTestCase
+class FileServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

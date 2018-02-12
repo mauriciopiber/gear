@@ -1,13 +1,13 @@
 <?php
 namespace GearTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\AbstractUpgradeTrait;
 
 /**
  * @group Upgrade
  */
-class AbstractUpgradeTest extends AbstractTestCase
+class AbstractUpgradeTest extends TestCase
 {
     public function setUp()
     {

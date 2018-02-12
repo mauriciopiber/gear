@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ModuleTest\UpgradeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group Gear
@@ -10,7 +10,7 @@ use GearBaseTest\AbstractTestCase;
  * @group Xhprof
  * @group Upgrade
  */
-class ModuleControllerFactoryTest extends AbstractTestCase
+class ModuleControllerFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {

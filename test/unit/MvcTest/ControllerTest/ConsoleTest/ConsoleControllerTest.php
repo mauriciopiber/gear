@@ -1,18 +1,21 @@
 <?php
 namespace GearTest\MvcTest\ControllerTest\ConsoleTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 use GearJson\Controller\Controller;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Fix2
  */
-class ConsoleControllerTest extends AbstractTestCase
+class ConsoleControllerTest extends TestCase
 {
+    use UtilTestTrait;
+
     use ControllerScopeTrait;
 
     public function setUp()

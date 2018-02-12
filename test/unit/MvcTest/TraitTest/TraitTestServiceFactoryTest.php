@@ -1,12 +1,12 @@
 <?php
 namespace GearTest\ModuleTest\DiagnosticTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group mvc-trait
  */
-class TraitTestServiceFactoryTest extends AbstractTestCase
+class TraitTestServiceFactoryTest extends TestCase
 {
     public function testCreateTraitTest()
     {

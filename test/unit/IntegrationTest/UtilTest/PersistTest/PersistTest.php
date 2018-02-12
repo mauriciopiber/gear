@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\IntegrationTest\UtilTest\PersistTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Integration\Util\Persist\Persist;
 
 /**

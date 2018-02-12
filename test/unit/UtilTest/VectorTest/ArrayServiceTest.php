@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\Util\Vector;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use Gear\Util\Vector\ArrayServiceTrait;
 
 /**
@@ -9,29 +9,9 @@ use Gear\Util\Vector\ArrayServiceTrait;
  * @group Service
  * @group Util
  */
-class ArrayServiceTest extends AbstractTestCase
+class ArrayServiceTest extends TestCase
 {
     use ArrayServiceTrait;
-
-    /**
-     * @group Gear
-     * @group ArrayService
-     */
-    public function testServiceLocator()
-    {
-        $serviceLocator = $this->getArrayService()->getServiceLocator();
-        $this->assertInstanceOf('Zend\ServiceManager\ServiceManager', $serviceLocator);
-    }
-
-    /**
-     * @group Gear
-     * @group ArrayService
-    */
-    public function testGet()
-    {
-        $arrayService = $this->getArrayService();
-        $this->assertInstanceOf('Gear\Util\Vector\ArrayService', $arrayService);
-    }
 
     /**
      * @group Gear
@@ -39,11 +19,11 @@ class ArrayServiceTest extends AbstractTestCase
     */
     public function testSet()
     {
-        $mockArrayService = $this->getMockSingleClass(
+        $mockArrayService = $this->prophesize(
             'Gear\Util\Vector\ArrayService'
         );
-        $this->setArrayService($mockArrayService);
-        $this->assertEquals($mockArrayService, $this->getArrayService());
+        $this->setArrayService($mockArrayService->reveal());
+        $this->assertEquals($mockArrayService->reveal(), $this->getArrayService());
     }
 
 

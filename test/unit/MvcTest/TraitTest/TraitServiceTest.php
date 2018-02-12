@@ -1,15 +1,18 @@
 <?php
 namespace GearTest\ServiceTest\MvcTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use GearTest\UtilTestTrait;
 
 /**
  * @group mvc-trait
  */
-class TraitServiceTest extends AbstractTestCase
+class TraitServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();

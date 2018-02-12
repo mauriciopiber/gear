@@ -1,17 +1,20 @@
 <?php
 namespace GearTest\ModuleTest\NodeTest;
 
-use GearBaseTest\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Module
  * @group ModuleConstruct
  * @group Construct
  */
-class PackageTest extends AbstractTestCase
+class PackageTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp()
     {
         parent::setUp();
