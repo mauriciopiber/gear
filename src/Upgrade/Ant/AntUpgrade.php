@@ -4,6 +4,7 @@ namespace Gear\Upgrade\Ant;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
+use Gear\Edge\Ant\AntEdge;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
@@ -11,6 +12,8 @@ use SimpleXmlElement;
 use Exception;
 use Gear\Module\ModuleAwareTrait;
 use GearBase\Util\String\StringServiceTrait;
+use GearBase\Util\String\StringService;
+use Gear\Module\BasicModuleStructure;
 
 /**
  * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
@@ -88,12 +91,15 @@ class AntUpgrade
      * @param array                              $config        Configuração
      * @param Gear\Module\BasicModuleStructure   $module        Estrutura do Módulo
      */
-    public function __construct($console, $consolePrompt, $string, $config, $module = null, GearConfig $gearConfig, $antEdge)
-    {
-        $this->console = $console;
+    public function __construct(
+        BasicModuleStructure $module,
+        GearConfig $gearConfig,
+        AntEdge $antEdge,
+        $consolePrompt,
+        StringService $string
+    ) {
         $this->module = $module;
         $this->stringService = $string;
-        $this->config = $config;
         $this->consolePrompt = $consolePrompt;
         $this->gearConfig = $gearConfig;
         $this->upgrades = [***REMOVED***;

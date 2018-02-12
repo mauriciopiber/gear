@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Upgrade\Dir\DirUpgrade;
 use Gear\Edge\Dir\DirEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Upgrade
@@ -24,15 +25,14 @@ class DirUpgradeTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->dirEdge = $this->prophesize(DirEdge::class);
-        $this->config = [***REMOVED***;
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->dirUpgrade = new \Gear\Upgrade\Dir\DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config,
             $this->module->reveal(),
-            $this->dirEdge->reveal()
+            $this->gearConfig->reveal(),
+            $this->dirEdge->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->dir
         );
     }
 
@@ -54,7 +54,6 @@ class DirUpgradeTest extends TestCase
     public function testDependency()
     {
 
-        $this->assertEquals($this->dirUpgrade->getConsole(), $this->console->reveal());
         $this->assertEquals($this->dirUpgrade->getDirService(), $this->dir);
         $this->assertEquals($this->dirUpgrade->getModule(), $this->module->reveal());
         $this->assertEquals($this->dirUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());

@@ -14,9 +14,6 @@ class DirUpgradeFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
         $dir = $this->prophesize('GearBase\Util\Dir\DirService');
         $this->serviceLocator->get('GearBase\Util\Dir')->willReturn($dir->reveal())->shouldBeCalled();
@@ -35,7 +32,10 @@ class DirUpgradeFactoryTest extends TestCase
             ->shouldBeCalled();
 
 
-        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
+            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        )->shouldBeCalled();
+
 
         $factory = new \Gear\Upgrade\Dir\DirUpgradeFactory();
 

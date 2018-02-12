@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
 use Gear\Edge\File\FileEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group FileUpgrade
@@ -26,19 +27,18 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->fileEdge = $this->prophesize(FileEdge::class);
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->fileUpgrade = new FileUpgrade(
-            $this->console->reveal(),
+            $this->module->reveal(),
+            $this->gearConfig->reveal(),
+            $this->fileEdge->reveal(),
             $this->consolePrompt->reveal(),
             $this->moduleService->reveal(),
-            $this->moduleTests->reveal(),
-            $this->projectService->reveal(),
-            $this->module->reveal(),
-            $this->fileEdge->reveal()
+            $this->moduleTests->reveal()
         );
 
         $this->yaml = new YamlService();
-
     }
 
 
@@ -58,8 +58,6 @@ class FileUpgradeTest extends TestCase
     {
         $this->assertEquals($this->fileUpgrade->getModuleTestsService(), $this->moduleTests->reveal());
         $this->assertEquals($this->fileUpgrade->getModuleService(), $this->moduleService->reveal());
-        $this->assertEquals($this->fileUpgrade->getProjectService(), $this->projectService->reveal());
-        $this->assertEquals($this->fileUpgrade->getConsole(), $this->console->reveal());
         $this->assertEquals($this->fileUpgrade->getModule(), $this->module->reveal());
         $this->assertEquals($this->fileUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
     }

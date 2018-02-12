@@ -37,14 +37,11 @@ class AntUpgradeTest extends TestCase
         $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
 
         $this->antUpgrade = new AntUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->string,
-            $this->config,
             $this->module->reveal(),
             $this->gearConfig->reveal(),
-            $this->edge->reveal()
-
+            $this->edge->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string
         );
     }
 
@@ -188,7 +185,6 @@ EOS;
      */
     public function testDependency()
     {
-        $this->assertEquals($this->antUpgrade->getConsole(), $this->console->reveal());
         $this->assertEquals($this->antUpgrade->getModule(), $this->module->reveal());
         $this->assertEquals($this->antUpgrade->getStringService(), $this->string);
         $this->assertEquals($this->antUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());

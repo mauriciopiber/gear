@@ -14,10 +14,9 @@ class FileUpgradeFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-
-        $this->serviceLocator->get('console')
-          ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
-          ->shouldBeCalled();
+        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
+            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        )->shouldBeCalled();
 
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
           ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
@@ -29,10 +28,6 @@ class FileUpgradeFactoryTest extends TestCase
 
         $this->serviceLocator->get('Gear\Module\Tests')
           ->willReturn($this->prophesize('Gear\Module\Tests\ModuleTestsService')->reveal())
-          ->shouldBeCalled();
-
-        $this->serviceLocator->get('projectService')
-          ->willReturn($this->prophesize('Gear\Project\ProjectService')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator->get('moduleStructure')

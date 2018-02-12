@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Gear\Upgrade\Composer\ComposerUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Composer\ComposerUpgrade;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Upgrade
@@ -27,14 +28,14 @@ class ComposerUpgradeTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module');
-        $this->config = [***REMOVED***;
+        $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->string = new \GearBase\Util\String\StringService();
 
         $this->composer = new ComposerUpgrade(
-            $this->consolePrompt->reveal(),
-            $this->composerEdge->reveal(),
-            $this->config,
             $this->module->reveal(),
+            $this->gearConfig->reveal(),
+            $this->composerEdge->reveal(),
+            $this->consolePrompt->reveal(),
             $this->string
         );
     }
