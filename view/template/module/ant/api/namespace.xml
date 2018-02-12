@@ -1,1 +1,1 @@
-<target name="namespace" depends="set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace"/>
+<target name="namespace" depends="phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace"/>

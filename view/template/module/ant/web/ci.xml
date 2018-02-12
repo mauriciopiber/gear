@@ -1,1 +1,1 @@
-<target name="ci" depends="prepare, set-vendor, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci"/>
+<target name="ci" depends="prepare, parallel-lint, jshint-ci, karma, protractor, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci"/>

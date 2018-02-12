@@ -1,8 +1,8 @@
-<target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+<target name="phpunit-coverage" description="Run unit tests with PHPUnit">
     <exec executable="/usr/bin/php">
         <arg value="-d"/> 
         <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
-        <arg value="${vendor}/bin/phpunit"/>
+        <arg value="vendor/bin/phpunit"/>
         <arg value="-c"/>
         <arg value="test/phpunit-coverage.xml"/>
     </exec>

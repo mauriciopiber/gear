@@ -1,0 +1,3 @@
+find . -name "*.php" -exec sed -i "s/use GearBaseTest\\\\AbstractTestCase;/use PHPUnit\\\\Framework\\\\TestCase;/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/extends[ ***REMOVED****AbstractTestCase/extends TestCase/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/use PHPUnit_Framework_TestCase as TestCase;/use PHPUnit\\\\Framework\\\\TestCase;/g" {} \;

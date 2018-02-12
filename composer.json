@@ -1,64 +1,68 @@
 {
-	"name" : "mauriciopiber/gear",
-	"require" : {
-            "doctrine/doctrine-orm-module" : "^0.8",
-	    "hounddog/doctrine-data-fixture-module" : "0.0.*",
-	    "cypresslab/gitelephant" : "~1.0",
-	    "robmorgan/phinx" : "*",
-	    "doctrine/doctrine-module" : "^0.8",
-	    "php" : ">=5.5",
-	    "zendframework/zend-mvc" : "^2.6",
-	    "zendframework/zendframework" : "^2.5"
-	},
-	"require-dev" : {
-	    "mauriciopiber/gear-base" : "^0.2.0",
-	    "mauriciopiber/gear-json" : "^0.2.0",
-	    "mauriciopiber/gear-deploy" : "~0.2 || ~1.0",
-	    "mauriciopiber/gear-jenkins" : "~0.2 || ~1.0",
-	    "mauriciopiber/gear-version" : "~0.2 || ~1.0",
-	    "sebastian/phpcpd" : "^2.0.2",
-	    "phpunit/phpunit" : "^5.0",
-	    "phploc/phploc" : "^2.1.5",
-	    "codeception/codeception" : "~2.2",
-	    "squizlabs/php_codesniffer" : "^2.0.0",
-	    "phpmd/phpmd" : "^2.3.2",
-	    "jakub-onderka/php-parallel-lint" : "^0.9",
-	    "pdepend/pdepend" : "^2.0.3",
-	    "behat/behat" : "^3.0",
-	    "mikey179/vfsStream" : "^1.6.2",
-	    "johnkary/phpunit-speedtrap" : "^1.0",
-	    "atrapalo/phpunit-memory-and-time-usage-listener" : "dev-master",
-	    "nikic/php-parser" : "^3.1",
-	    "lox/xhprof" : "dev-master",
-	    "theseer/phpdox" : "^0.11.0"
-	},
-	"autoload" : {
-		"psr-4" : {
-			"Gear\\" : "src",
-			"GearTest\\" : "test/unit"
-		}
-	},
-	"repositories" : [{
-			"type" : "composer",
-			"url" : "https://mirror.pibernetwork.com"
-		}
-	***REMOVED***,
-	"bin" : [
-		"bin/gear/module/gear-module",
-		"bin/gear/project/gear-project",
-		"bin/gear/project/gear-project-module",
-		"bin/install-nodejs",
-		"bin/install-db-module",
-		"bin/install-db-project",
-		"bin/drop-nodejs-cache",
-		"bin/memcached",
-		"bin/database",
-		"bin/nfs",
-		"bin/virtualhost",
-		"bin/git",
-		"bin/gulp",
-		"bin/merge-migrations",
-		"bin/unload-module",
-		"bin/undo"
-	***REMOVED***
+    "name": "mauriciopiber/gear",
+    "require": {
+        "doctrine/doctrine-orm-module": "^0.8",
+        "hounddog/doctrine-data-fixture-module": "0.0.*",
+        "cypresslab/gitelephant": "~1.0",
+        "robmorgan/phinx": "*",
+        "doctrine/doctrine-module": "^0.8",
+        "php": "^7.0",
+        "zendframework/zend-mvc": "^2.6",
+        "zendframework/zendframework": "^2.5"
+    },
+    "require-dev": {
+        "mauriciopiber/gear-base": "^0.2 || ^1.0",
+        "mauriciopiber/gear-json": "^0.2 || ^1.0",
+        "mauriciopiber/gear-deploy": "^0.2 || ^1.0",
+        "mauriciopiber/gear-jenkins": "^0.2 || ^1.0",
+        "mauriciopiber/gear-version": "^0.2 || ^1.0",
+        "sebastian/phpcpd": "^2.0",
+        "phpunit/phpunit": "^5.0",
+        "phploc/phploc": "^4.0",
+        "codeception/codeception": "~2.2",
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpmd/phpmd": "^2.6",
+        "jakub-onderka/php-parallel-lint": "^0.9",
+        "pdepend/pdepend": "^2.4",
+        "behat/behat": "^3.0",
+        "mikey179/vfsStream": "^1.6.2",
+        "johnkary/phpunit-speedtrap": "^1.0",
+        "atrapalo/phpunit-memory-and-time-usage-listener": "dev-master",
+        "nikic/php-parser": "^3.1",
+        "lox/xhprof": "dev-master",
+        "theseer/phpdox": "^0.11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gear\\": "src",
+            "GearTest\\": "test/unit"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://mirror.pibernetwork.com"
+        },
+        {
+            "packagist": false
+        }
+    ***REMOVED***,
+    "bin": [
+        "bin/gear/module/gear-module",
+        "bin/gear/project/gear-project",
+        "bin/gear/project/gear-project-module",
+        "bin/install-nodejs",
+        "bin/install-db-module",
+        "bin/install-db-project",
+        "bin/drop-nodejs-cache",
+        "bin/memcached",
+        "bin/database",
+        "bin/nfs",
+        "bin/virtualhost",
+        "bin/git",
+        "bin/gulp",
+        "bin/merge-migrations",
+        "bin/unload-module",
+        "bin/undo"
+    ***REMOVED***
 }

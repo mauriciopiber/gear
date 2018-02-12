@@ -1,1 +1,1 @@
-<target name="file-php" depends="set-vendor, phpcs-file, phpmd-file, phpcpd-file, unit-file"/>
+<target name="file-php" depends="phpcs-file, phpmd-file, phpcpd-file, unit-file"/>

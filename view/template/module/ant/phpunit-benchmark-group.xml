@@ -1,5 +1,5 @@
-<target name="phpunit-benchmark-group" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpunit">
+<target name="phpunit-benchmark-group" description="Run unit tests with PHPUnit">
+    <exec executable="vendor/bin/phpunit">
         <arg value="--configuration=${basedir}/test/phpunit-benchmark.xml"/>
         <arg value="--group"/>
         <arg value="${group}"/>
