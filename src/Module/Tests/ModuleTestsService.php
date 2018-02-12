@@ -3,7 +3,7 @@ namespace Gear\Module\Tests;
 
 use Gear\Mvc\AbstractMvc;
 //use Gear\Edge\AntEdge\AntEdgeTrait;
-use Gear\Upgrade\AntUpgradeTrait;
+use Gear\Upgrade\Ant\AntUpgradeTrait;
 
 /**
  *

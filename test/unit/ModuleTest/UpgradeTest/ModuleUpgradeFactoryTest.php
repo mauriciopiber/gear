@@ -2,11 +2,11 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Upgrade\AntUpgrade;
-use Gear\Upgrade\ComposerUpgrade;
-use Gear\Upgrade\FileUpgrade;
-use Gear\Upgrade\DirUpgrade;
-use Gear\Upgrade\NpmUpgrade;
+use Gear\Upgrade\Ant\AntUpgrade;
+use Gear\Upgrade\Composer\ComposerUpgrade;
+use Gear\Upgrade\File\FileUpgrade;
+use Gear\Upgrade\Dir\DirUpgrade;
+use Gear\Upgrade\Npm\NpmUpgrade;
 
 /**
  * @group Gear

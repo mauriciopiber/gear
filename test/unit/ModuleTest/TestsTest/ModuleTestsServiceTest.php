@@ -10,7 +10,7 @@ use GearBase\Util\String\StringService;
 use Gear\Module;
 use Gear\Module\Tests\ModuleTestsService;
 use Gear\Module\BasicModuleStructure;
-use Gear\Upgrade\AntUpgrade;
+use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Edge\Ant\AntEdge;
 use Gear\Util\Prompt\ConsolePrompt;
 use GearTest\UtilTestTrait;

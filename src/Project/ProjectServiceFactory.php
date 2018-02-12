@@ -18,8 +18,8 @@ class ProjectServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Edge\Dir\DirEdge'),
             $serviceLocator->get('Gear\Project\Docs\Docs'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('Gear\Upgrade\AntUpgrade'),
-            $serviceLocator->get('Gear\Upgrade\NpmUpgrade'),
+            $serviceLocator->get('Gear\Upgrade\Ant\AntUpgrade'),
+            $serviceLocator->get('Gear\Upgrade\Npm\NpmUpgrade'),
             $serviceLocator->get('config'),
             $serviceLocator->get('Gear\Project\Composer\ComposerService')
             //$serviceLocator->get('config'),

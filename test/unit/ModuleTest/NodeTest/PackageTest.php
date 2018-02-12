@@ -54,7 +54,7 @@ class PackageTest extends TestCase
 
 
 
-        $this->upgrade = new \Gear\Upgrade\NpmUpgrade(
+        $this->upgrade = new \Gear\Upgrade\Npm\NpmUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->config,

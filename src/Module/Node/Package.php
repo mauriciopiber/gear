@@ -2,7 +2,7 @@
 namespace Gear\Module\Node;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Upgrade\NpmUpgradeTrait;
+use Gear\Upgrade\Npm\NpmUpgradeTrait;
 
 class Package extends AbstractJsonService
 {
