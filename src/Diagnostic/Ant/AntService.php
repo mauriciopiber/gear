@@ -66,8 +66,11 @@ class AntService implements ModuleDiagnosticInterface
     /**
      * Rodar diagnóstico da build.xml para Módulo
      */
-    public function diagnosticModule($type = 'web')
+    public function diagnosticModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $edge = $this->getAntEdge()->getAntModule($type);
 
         $this->diagnosticEdge($edge);

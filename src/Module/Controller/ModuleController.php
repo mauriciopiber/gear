@@ -89,11 +89,7 @@ class ModuleController extends AbstractConsoleController
 
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-diagnostic'));
 
-        $type = $this->getRequest()->getParam('type', 'web');
-
-        if ($type == false) {
-            $type = 'web';
-        }
+        $type = $this->getRequest()->getParam('type', null);
 
         $just = $this->getRequest()->getParam('just', null);
 
@@ -147,7 +143,7 @@ class ModuleController extends AbstractConsoleController
 
     public function upgradeAction()
     {
-        $type = $this->getRequest()->getParam('type', 'web');
+        $type = $this->getRequest()->getParam('type', null);
         $force = $this->getRequest()->getParam('force', false);
         $just = $this->getRequest()->getParam('just', null);
 

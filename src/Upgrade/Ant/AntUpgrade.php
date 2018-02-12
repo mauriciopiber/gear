@@ -597,8 +597,11 @@ class AntUpgrade
      *
      * @return array Ugrade Messages
      */
-    public function upgradeModule($type = 'web')
+    public function upgradeModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $this->upgrades = [***REMOVED***;
 
         $edge = $this->getAntEdge()->getAntModule($type);

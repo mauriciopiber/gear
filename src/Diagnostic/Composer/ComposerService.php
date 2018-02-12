@@ -52,8 +52,11 @@ class ComposerService implements ModuleDiagnosticInterface
 
     }
 
-    public function diagnosticModule($type = 'cli')
+    public function diagnosticModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $composer = $this->getComposerEdge()->getComposerModule($type);
 
         $dir = $this->getModule()->getMainFolder();

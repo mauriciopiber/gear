@@ -146,8 +146,11 @@ EOS
     }
 
 
-    public function upgradeModule($type = 'web')
+    public function upgradeModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $this->upgrades = [***REMOVED***;
 
         $this->edge = $this->getDirEdge()->getDirModule($type);
