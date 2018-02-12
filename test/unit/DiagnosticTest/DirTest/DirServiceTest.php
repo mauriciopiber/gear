@@ -22,63 +22,51 @@ class DirServiceTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
-    }
+        $this->dirEdge = $this->prophesize(DirEdge::class);
 
-    public function xtestThrowMissingIgnores()
-    {
-        $file = new DirService($this->module->reveal(), $this->stringService->reveal());
-        $this->assertInstanceOf('Gear\Diagnostic\Dir\DirService', $file);
+        $this->dirService = new DirService(
+            $this->module->reveal(),
+            //$this->stringService->reveal(),
+            $this->dirEdge->reveal()
+        );
     }
 
     public function testThrowMissingIgnores()
     {
-        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'writable' => ['dir-one', 'dir-two'***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
         $this->setExpectedException('Gear\Edge\Dir\Exception\MissingIgnore');
 
-        $dir->setDirEdge($edge->reveal());
+        $this->dirService->setDirEdge($this->dirEdge->reveal());
 
-        $dir->diagnosticModule('web');
+        $this->dirService->diagnosticModule('web');
     }
 
     public function testThrowMissingWritable()
     {
-        $file = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'ignores' => ['dir-one', 'dir-two'***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
         $this->setExpectedException('Gear\Edge\Dir\Exception\MissingWritable');
 
-        $file->setDirEdge($edge->reveal());
-
-        $file->diagnosticModule('web');
+        $this->dirService->diagnosticModule('web');
     }
 
     public function testNotCreated()
     {
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'writable' => [
                 'not-writable',
             ***REMOVED***,
             'ignore' => [***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $dir->setDirEdge($edge->reveal());
-
-        $errors = $dir->diagnosticModule('web');
+        $errors = $this->dirService->diagnosticModule('web');
 
         $this->assertEquals([
             sprintf(DirService::$missingDir, 'not-writable'),
@@ -93,10 +81,7 @@ class DirServiceTest extends TestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'writable' => [
                 'not-writable'
             ***REMOVED***,
@@ -105,9 +90,7 @@ class DirServiceTest extends TestCase
             ***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $dir->setDirEdge($edge->reveal());
-
-        $errors = $dir->diagnosticModule('web');
+        $errors = $this->dirService->diagnosticModule('web');
 
         $this->assertEquals([***REMOVED***, $errors);
     }
@@ -118,10 +101,7 @@ class DirServiceTest extends TestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'writable' => [
 
             ***REMOVED***,
@@ -130,9 +110,7 @@ class DirServiceTest extends TestCase
             ***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $dir->setDirEdge($edge->reveal());
-
-        $errors = $dir->diagnosticModule('web');
+        $errors = $this->dirService->diagnosticModule('web');
 
         $this->assertEquals([
             sprintf(DirService::$missingIgnore, 'not-writable'),
@@ -148,19 +126,15 @@ class DirServiceTest extends TestCase
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
 
-        $dir = new DirService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(DirEdge::class);
-        $edge->getDirModule('web')->willReturn([
+        $this->dirEdge->getDirModule('web')->willReturn([
             'writable' => [
                 'not-writable',
             ***REMOVED***,
             'ignore' => [***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $dir->setDirEdge($edge->reveal());
 
-        $errors = $dir->diagnosticModule('web');
+        $errors = $this->dirService->diagnosticModule('web');
 
         $this->assertEquals([
             sprintf(DirService::$missingWrite, 'not-writable'),

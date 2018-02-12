@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\DirTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Edge\Dir\DirEdge;
 
 /**
  * @group Gear
@@ -15,8 +16,10 @@ class DirServiceFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+
+        $dirEdge = $this->prophesize(DirEdge::class);
+        $this->serviceLocator->get(DirEdge::class)->willReturn($dirEdge->reveal())->shouldBeCalled();
 
         $factory = new \Gear\Diagnostic\Dir\DirServiceFactory();
 

@@ -51,42 +51,4 @@ class FileService implements ModuleDiagnosticInterface
 
         return $this->diagnostic($baseDir, $edge);
     }
-
-    /*
-    public function diagnosticModuleCli()
-    {
-        $this->errors = [***REMOVED***;
-
-        $baseDir = $this->getModule()->getMainFolder();
-
-        $expectedFiles = [
-            //docs manual
-            $baseDir.'/README.md',
-            $baseDir.'/mkdocs.yml',
-            $baseDir.'/docs/index.md',
-            //docs php
-            $baseDir.'/phpdox.xml',
-            //migration
-            $baseDir.'/phinx.yml',
-            $baseDir.'/script/deploy-testing.sh',
-            $baseDir.'/script/deploy-development.sh',
-            //gulp
-            //unit php
-            $baseDir.'/codeception.yml',
-            //autoload
-            $baseDir.'/init_autoloader.php'
-        ***REMOVED***;
-
-
-        foreach ($expectedFiles as $file) {
-
-            if (!is_file($file)) {
-                $this->errors[***REMOVED*** = sprintf('Faltando arquivo %s', $file);
-            }
-        }
-
-
-        return $this->errors;
-    }
-    */
 }

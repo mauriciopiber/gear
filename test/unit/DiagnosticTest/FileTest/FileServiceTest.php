@@ -23,22 +23,25 @@ class FileServiceTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->fileEdge = $this->prophesize(FileEdge::class);
+
+        $this->fileService = new FileService(
+            $this->module->reveal(),
+            $this->fileEdge->reveal()
+        );
     }
 
     public function testThrowMissingFiles()
     {
-        $file = new FileService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(FileEdge::class);
-        $edge->getFileModule('web')->willReturn([
+        $this->fileEdge->getFileModule('web')->willReturn([
             'target' => ['piber' => null***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
         $this->setExpectedException('Gear\Edge\File\Exception\MissingFiles');
 
-        $file->setFileEdge($edge->reveal());
+        $this->fileService->setFileEdge($this->fileEdge->reveal());
 
-        $file->diagnosticModule('web');
+        $this->fileService->diagnosticModule('web');
     }
 
     public function testDiagnosticModule()
@@ -48,10 +51,7 @@ class FileServiceTest extends TestCase
         file_put_contents(vfsStream::url('module/need-one'), '...');
         file_put_contents(vfsStream::url('module/need-three.yml'), '...');
 
-        $file = new FileService($this->module->reveal(), $this->stringService->reveal());
-
-        $edge = $this->prophesize(FileEdge::class);
-        $edge->getFileModule('web')->willReturn([
+        $this->fileEdge->getFileModule('web')->willReturn([
             'files' => [
                 'need-one',
                 'need-two.xml',
@@ -61,9 +61,7 @@ class FileServiceTest extends TestCase
 
         ***REMOVED***)->shouldBeCalled();
 
-        $file->setFileEdge($edge->reveal());
-
-        $errors = $file->diagnosticModule('web');
+        $errors = $this->fileService->diagnosticModule('web');
 
         $this->assertEquals([
             sprintf(FileService::$missingFile, 'need-two.xml'),
