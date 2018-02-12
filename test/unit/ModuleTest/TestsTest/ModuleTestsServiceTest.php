@@ -57,16 +57,12 @@ class ModuleTestsServiceTest extends TestCase
 
         $this->gearConfig = $this->prophesize(GearConfig::class);
 
-
-
         $this->upgrade = new AntUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
-            $this->string,
-            $this->config,
             $this->module->reveal(),
             $this->gearConfig->reveal(),
-            $this->edge->reveal()
+            $this->edge->reveal(),
+            $this->consolePrompt->reveal(),
+            $this->string
         );
 
     }
