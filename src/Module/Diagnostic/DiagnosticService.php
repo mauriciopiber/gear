@@ -57,9 +57,9 @@ class DiagnosticService extends AbstractDiagnostic
         $this->console = $console;
         $this->module = $module;
         $this->antService = $antService;
-        $this->composerService = $composerService;
-        $this->fileService = $fileService;
-        $this->dirService = $dirService;
+        $this->composerDiagService = $composerService;
+        $this->fileDiagService = $fileService;
+        $this->dirDiagService = $dirService;
         $this->npmService = $npmService;
     }
 

@@ -5,7 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\ComposerService;
 use Gear\Module\BasicModuleStructure;
-use Gear\Edge\ComposerEdge;
+use Gear\Edge\Composer\ComposerEdge;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
 

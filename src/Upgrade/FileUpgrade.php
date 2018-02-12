@@ -6,7 +6,7 @@ use Gear\Project\ProjectServiceTrait;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
-use Gear\Edge\FileEdgeTrait;
+use Gear\Edge\File\FileEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Tests\{
     ModuleTestsService,
@@ -292,22 +292,5 @@ class FileUpgrade extends AbstractJsonService
         }
 
         return true;
-    }
-
-
-    public function upgradeProject($type = 'web')
-    {
-        $this->upgrades = [***REMOVED***;
-
-        //$mainFolder = $this->getModule()->getMainFolder();
-        $this->edge = $this->getFileEdge()->getFileProject($type);
-
-        if (isset($this->edge['files'***REMOVED***) && count($this->edge['files'***REMOVED***)) {
-            foreach ($this->edge['files'***REMOVED*** as $file) {
-                $this->upgradeProjectFile($type, $file);
-            }
-        }
-
-        return $this->upgrades;
     }
 }

@@ -2,6 +2,21 @@
 namespace GearTest\ModuleTest\DiagnosticTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\Ant\{
+    AntService
+};
+use Gear\Diagnostic\Composer\{
+    ComposerService
+};
+use Gear\Diagnostic\File\{
+    FileService
+};
+use Gear\Diagnostic\Dir\{
+    DirService
+};
+use Gear\Diagnostic\Npm\{
+    NpmService
+};
 
 /**
  * @group Module
@@ -20,6 +35,11 @@ class DiagnosticServiceFactoryTest extends TestCase
 
         $this->serviceLocator->get('console')->willReturn($console);
         $this->serviceLocator->get('moduleStructure')->willReturn($module);
+        $this->serviceLocator->get(AntService::class)->willReturn($this->prophesize(AntService::class)->reveal());
+        $this->serviceLocator->get(ComposerService::class)->willReturn($this->prophesize(ComposerService::class)->reveal());
+        $this->serviceLocator->get(FileService::class)->willReturn($this->prophesize(FileService::class)->reveal());
+        $this->serviceLocator->get(DirService::class)->willReturn($this->prophesize(DirService::class)->reveal());
+        $this->serviceLocator->get(NpmService::class)->willReturn($this->prophesize(NpmService::class)->reveal());
 
         $factory = new \Gear\Module\Diagnostic\DiagnosticServiceFactory();
 

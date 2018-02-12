@@ -11,7 +11,7 @@ use Gear\Module;
 use Gear\Module\Tests\ModuleTestsService;
 use Gear\Module\BasicModuleStructure;
 use Gear\Upgrade\AntUpgrade;
-use Gear\Edge\AntEdge\AntEdge;
+use Gear\Edge\Ant\AntEdge;
 use Gear\Util\Prompt\ConsolePrompt;
 use GearTest\UtilTestTrait;
 

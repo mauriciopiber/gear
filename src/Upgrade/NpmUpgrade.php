@@ -4,7 +4,7 @@ namespace Gear\Upgrade;
 use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
-use Gear\Edge\NpmEdgeTrait;
+use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 
 class NpmUpgrade extends AbstractJsonService
@@ -151,45 +151,5 @@ class NpmUpgrade extends AbstractJsonService
         ksort($file['devDependencies'***REMOVED***);
 
         return $file;
-    }
-
-    public function upgradeProject($type = 'web')
-    {
-        $this->upgrades = [***REMOVED***;
-
-        if (!in_array($type, ['web'***REMOVED***)) {
-            return $this->upgrades;
-        }
-
-        $edge = $this->getNpmEdge()->getNpmProject($type);
-
-        if (!isset($edge['devDependencies'***REMOVED***)) {
-            return $this->upgrades;
-        }
-
-        $dir = $this->getProject();
-
-        $packageFile = $dir.'/package.json';
-
-        if (!is_file($packageFile)) {
-            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
-
-            if ($confirm === false) {
-                return [***REMOVED***;
-            }
-
-            $this->createNewPackage($dir, $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***);
-            //cria arquivo.
-        }
-
-
-        $npmModule = \Zend\Json\Json::decode(file_get_contents($dir.'/package.json'), 1);
-
-        $newNpm = $this->upgrade($edge, $npmModule);
-
-        file_put_contents($dir.'/package.json', $this->prepare($newNpm));
-
-
-        return $this->upgrades;
     }
 }

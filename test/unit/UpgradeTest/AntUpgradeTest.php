@@ -43,7 +43,7 @@ class AntUpgradeTest extends TestCase
             $this->gearConfig->reveal()
         );
 
-        $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
         $this->antUpgrade->setAntEdge($this->edge->reveal());
     }
 
@@ -56,15 +56,6 @@ class AntUpgradeTest extends TestCase
         $this->assertFileExists($this->antUpgrade->getModuleTemplate());
     }
 
-    /**
-     * @group mt
-     */
-    public function testGetProjectTemplate()
-    {
-        $this->assertFileExists($this->antUpgrade->getProjectTemplate());
-    }
-
-
     public function getBuildTargets()
     {
 
@@ -72,13 +63,10 @@ class AntUpgradeTest extends TestCase
 
         $yaml = new YamlService();
 
-
         $type = [
             ['web', 'module'***REMOVED***,
             ['cli', 'module'***REMOVED***,
-            ['web', 'project'***REMOVED***
         ***REMOVED***;//, 'web'
-
 
         $check = [***REMOVED***;
 
@@ -112,7 +100,7 @@ class AntUpgradeTest extends TestCase
      */
     public function testFactoryTargetAll($buildName, $dependency, $type, $folder)
     {
-        $template = ($folder === 'module') ? $this->antUpgrade->getModuleTemplate() : $this->antUpgrade->getProjectTemplate();
+        $template = $this->antUpgrade->getModuleTemplate();
 
         $factory = $this->antUpgrade->factory($buildName, $template, $type);
         $this->assertEquals($buildName, (string) $factory->attributes()->name);
@@ -581,177 +569,6 @@ EOS;
 
         $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('module/test/ant-ci.xml')));
 
-    }
-
-    /**
-     * @group ProjectUpgrade1
-     * @param string $type
-     */
-    public function testUpgradeProject($type = 'web')
-    {
-
-        vfsStream::setup('project');
-        $this->file = vfsStream::url('project/build.xml');
-
-        $fileConfig = <<<EOS
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="gear" default="" basedir=".">
-</project>
-EOS;
-
-        file_put_contents($this->file, $fileConfig);
-
-
-        $this->edge->getAntProject($type)->willReturn([
-            'default' => 'clean',
-            'target' => [
-                'clean' => null,
-             ***REMOVED***
-        ***REMOVED***)->shouldBeCalled();
-
-            //$this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
-            //$this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, 'gear', 'my-project'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'clean'))->shouldBeCalled();
-
-
-        $this->gearConfig->getCurrentName()->willReturn('my-project')->shouldBeCalled();
-
-        $this->config = [
-            'gear' => [
-                'project' => [
-                    'name' => 'my-project',
-                    'version' => '1.0.0'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
-
-        $this->antUpgrade->setProject(vfsStream::url('project'));
-
-        $upgraded = $this->antUpgrade->upgradeProject();
-
-        $this->assertEquals(
-            [
-                sprintf(AntUpgrade::$default, 'clean'),
-                sprintf(AntUpgrade::$named, 'my-project', 'build.xml'),
-                sprintf(AntUpgrade::$added, 'clean', 'build.xml')
-
-            ***REMOVED***,
-            $upgraded
-         );
-
-            //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
-            //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
-
-        $expectedFile = $this->getCleanXml('my-project');
-
-        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/build.xml')));
-    }
-
-
-    /**
-     * @group ProjectUpgrade2
-     * @group fsc
-     * @group gn
-     * @param string $type
-     */
-    public function testUpgradeProjectFromScratch($type = 'web')
-    {
-
-        $this->root = vfsStream::setup('project');
-
-        vfsStream::newDirectory('test')->at($this->root);
-
-        $this->file = vfsStream::url('project/build.xml');
-
-        $this->edge->getAntProject($type)->willReturn([
-            'default' => 'clean',
-            'target' => [
-                'clean' => null,
-            ***REMOVED***,
-            'import' => [
-                'ant-ci'
-            ***REMOVED***,
-            'files' => [
-                'ant-ci' => [
-                    'unit' => 'build-helper'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***)->shouldBeCalled();
-
-        //$this->module->getModuleName()->willReturn('gearing')->shouldBeCalled();
-        //$this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldFile, 'build.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldImport, 'ant-ci', 'build.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldFile, 'test/ant-ci.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, '', 'my-project', 'build.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldName, '', 'my-project-ci', 'ant-ci.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldDefault, '', 'clean'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'clean', 'build.xml'))->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(AntUpgrade::$shouldAdd, 'unit', 'test/ant-ci.xml'))->shouldBeCalled();
-
-
-        $this->gearConfig->getCurrentName()->willReturn('my-project')->shouldBeCalled();
-
-        $this->antUpgrade->setProject(vfsStream::url('project'));
-
-
-
-        $upgraded = $this->antUpgrade->upgradeProject();
-
-        $this->assertEquals(
-            [
-                sprintf(AntUpgrade::$fileCreated, 'build.xml'),
-                sprintf(AntUpgrade::$fileCreated, 'test/ant-ci.xml'),
-                sprintf(AntUpgrade::$imports, 'ant-ci', 'build.xml'),
-                sprintf(AntUpgrade::$default, 'clean'),
-                sprintf(AntUpgrade::$named, 'my-project', 'build.xml'),
-                sprintf(AntUpgrade::$named, 'my-project-ci', 'test/ant-ci.xml'),
-                sprintf(AntUpgrade::$added, 'clean', 'build.xml'),
-                sprintf(AntUpgrade::$added, 'unit', 'test/ant-ci.xml')
-            ***REMOVED***,
-            $upgraded
-        );
-
-        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
-        //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
-
-        $expectedFile = <<<EOS
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="my-project" default="clean" basedir=".">
-    <import file="./test/ant-ci.xml"/>
-    <target name="clean" description="Cleanup build artifacts">
-        <delete dir="\${basedir}/build/api"/>
-        <delete dir="\${basedir}/build/coverage"/>
-        <delete dir="\${basedir}/build/logs"/>
-        <delete dir="\${basedir}/build/pdepend"/>
-        <delete dir="\${basedir}/build/phpdox"/>
-        <delete dir="\${basedir}/build/features"/>
-        <delete dir="\${basedir}/build/docs"/>
-    </target>
-</project>
-
-EOS;
-
-        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/build.xml')));
-
-
-        $expectedFile = <<<EOS
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="my-project-ci" default="" basedir=".">
-    <target name="unit" depends="build-helper">
-        <exec executable="\${basedir}/vendor/bin/codecept">
-            <arg value="run"/>
-            <arg value="--xml"/>
-        </exec>
-    </target>
-</project>
-
-EOS;
-        $this->assertEquals($expectedFile, file_get_contents(vfsStream::url('project/test/ant-ci.xml')));
     }
 
     /**

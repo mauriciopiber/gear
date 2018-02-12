@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
 use GearTest\UtilTestTrait;
+use Gear\Edge\Npm\NpmEdge;
 
 /**
  * @group Module
@@ -48,7 +49,7 @@ class PackageTest extends TestCase
 
         $this->config = [***REMOVED***;
 
-        $this->edge = $this->prophesize('Gear\Edge\NpmEdge');
+        $this->edge = $this->prophesize(NpmEdge::class);
         $this->edge->getNpmModule('web')->willReturn($files)->shouldBeCalled();
 
 

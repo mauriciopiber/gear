@@ -2,7 +2,7 @@
 namespace Gear\Upgrade;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Edge\DirEdgeTrait;
+use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePromptTrait;
@@ -144,27 +144,6 @@ EOS
         if (isset($this->edge['ignore'***REMOVED***) && count($this->edge['ignore'***REMOVED***)) {
             foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
                 $this->upgradeIgnore($this->getModule()->getMainFolder(), $ignore);
-            }
-        }
-
-        return $this->upgrades;
-    }
-
-    public function upgradeProject($type = 'web')
-    {
-        $this->upgrades = [***REMOVED***;
-
-        $this->edge = $this->getDirEdge()->getDirProject($type);
-
-        if (isset($this->edge['writable'***REMOVED***) && count($this->edge['writable'***REMOVED***)) {
-            foreach ($this->edge['writable'***REMOVED*** as $writable) {
-                $this->upgradeWritable($this->getProject(), $writable);
-            }
-        }
-
-        if (isset($this->edge['ignore'***REMOVED***) && count($this->edge['ignore'***REMOVED***)) {
-            foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
-                $this->upgradeIgnore($this->getProject(), $ignore);
             }
         }
 

@@ -19,22 +19,27 @@ class DiagnosticServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
 
-        $this->diagnostic = new DiagnosticService($this->console->reveal(), $this->module->reveal());
+        $this->composer = $this->prophesize('Gear\Diagnostic\Composer\ComposerService');
 
-        $this->composer = $this->prophesize('Gear\Diagnostic\ComposerService');
-        $this->diagnostic->setComposerDiagnosticService($this->composer->reveal());
-
-        $this->npm = $this->prophesize('Gear\Diagnostic\NpmService');
-        $this->diagnostic->setNpmService($this->npm->reveal());
+        $this->npm = $this->prophesize('Gear\Diagnostic\Npm\NpmService');
 
         $this->ant = $this->prophesize('Gear\Diagnostic\Ant\AntService');
-        $this->diagnostic->setAntService($this->ant->reveal());
 
         $this->file = $this->prophesize('Gear\Diagnostic\File\FileService');
-        $this->diagnostic->setFileDiagnosticService($this->file->reveal());
 
         $this->dir = $this->prophesize('Gear\Diagnostic\Dir\DirService');
-        $this->diagnostic->setDirDiagnosticService($this->dir->reveal());
+
+        $this->diagnostic = new DiagnosticService(
+            $this->console->reveal(),
+            $this->module->reveal(),
+            $this->ant->reveal(),
+            $this->composer->reveal(),
+            $this->file->reveal(),
+            $this->dir->reveal(),
+            $this->npm->reveal()
+        );
+
+
     }
 
     public function getModuleType()
