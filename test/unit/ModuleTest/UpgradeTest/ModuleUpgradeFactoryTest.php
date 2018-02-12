@@ -2,6 +2,11 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\AntUpgrade;
+use Gear\Upgrade\ComposerUpgrade;
+use Gear\Upgrade\FileUpgrade;
+use Gear\Upgrade\DirUpgrade;
+use Gear\Upgrade\NpmUpgrade;
 
 /**
  * @group Gear
@@ -18,8 +23,23 @@ class ModuleUpgradeFactoryTest extends TestCase
 
 
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
         $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
+
+        foreach ([
+            AntUpgrade::class,
+            ComposerUpgrade::class,
+            FileUpgrade::class,
+            DirUpgrade::class,
+            NpmUpgrade::class
+        ***REMOVED*** as $className) {
+            $this->serviceLocator->
+                get($className)
+                ->willReturn($this->prophesize($className)->reveal())
+                ->shouldBeCalled();
+        }
+
+
+
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 

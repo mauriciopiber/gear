@@ -26,25 +26,25 @@ class ModuleUpgradeTest extends TestCase
         $this->root = vfsStream::setup('module');
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-
-        $this->upgrade = new ModuleUpgrade($this->console->reveal());
-        //$this->upgrade->setBaseDir(vfsStream::url('module'));
 
         $this->composer = $this->prophesize('Gear\Upgrade\ComposerUpgrade');
-        $this->upgrade->setComposerUpgrade($this->composer->reveal());
 
         $this->npm = $this->prophesize('Gear\Upgrade\NpmUpgrade');
-        $this->upgrade->setNpmUpgrade($this->npm->reveal());
 
         $this->ant = $this->prophesize('Gear\Upgrade\AntUpgrade');
-        $this->upgrade->setAntUpgrade($this->ant->reveal());
 
         $this->file = $this->prophesize('Gear\Upgrade\FileUpgrade');
-        $this->upgrade->setFileUpgrade($this->file->reveal());
 
         $this->dir = $this->prophesize('Gear\Upgrade\DirUpgrade');
-        $this->upgrade->setDirUpgrade($this->dir->reveal());
+
+        $this->upgrade = new ModuleUpgrade(
+            $this->console->reveal(),
+            $this->ant->reveal(),
+            $this->composer->reveal(),
+            $this->file->reveal(),
+            $this->dir->reveal(),
+            $this->npm->reveal()
+       );
     }
 
     /**

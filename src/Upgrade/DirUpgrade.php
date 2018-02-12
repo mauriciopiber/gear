@@ -1,15 +1,23 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Project\ProjectLocationTrait;
+use GearBase\Util\Dir\DirServiceTrait;
 
-class DirUpgrade extends AbstractJsonService
+class DirUpgrade
 {
+    use DirServiceTrait;
+
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     use ProjectLocationTrait;
 
     use ConsolePromptTrait;
@@ -36,13 +44,14 @@ class DirUpgrade extends AbstractJsonService
 
     public $config;
 
-    public function __construct(Posix $console, $dirService, $consolePrompt, $config, $module = null)
+    public function __construct(Posix $console, $dirService, $consolePrompt, $config, $module = null, $dirEdge)
     {
         $this->console = $console;
         $this->dirService = $dirService;
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
         $this->config = $config;
+        $this->dirEdge = $dirEdge;
     }
 
     public function upgradeDir($baseDir, $writable)

@@ -3,12 +3,14 @@ namespace Gear\Diagnostic\Composer;
 
 use Gear\Project\ProjectLocationTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
+use Gear\Module\ModuleAwareTrait;
+use Zend\Json\Json;
 
 class ComposerService implements ModuleDiagnosticInterface
 {
     use \Gear\Edge\Composer\ComposerEdgeTrait;
 
-    use \Gear\Module\ModuleAwareTrait;
+    use ModuleAwareTrait;
 
     use ProjectLocationTrait;
 
@@ -50,7 +52,7 @@ class ComposerService implements ModuleDiagnosticInterface
             return [static::$missingFile***REMOVED***;
         }
 
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
+        $moduleComposer = Json::decode(file_get_contents($composerFile), 1);
 
         $errors = $this->diagnostic($composer, $moduleComposer, __FUNCTION__);
 

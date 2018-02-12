@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Edge\Dir\DirEdge;
 
 /**
  * @group Gear
@@ -18,19 +19,20 @@ class DirUpgradeFactoryTest extends TestCase
         $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
         $dir = $this->prophesize('GearBase\Util\Dir\DirService');
-
         $this->serviceLocator->get('GearBase\Util\Dir')->willReturn($dir->reveal())->shouldBeCalled();
+
+        $edge = $this->prophesize(DirEdge::class);
+        $this->serviceLocator->get(DirEdge::class)->willReturn($edge->reveal())->shouldBeCalled();
 
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
-
         $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
-                             ->willReturn($consolePrompt->reveal())
-                             ->shouldBeCalled();
+            ->willReturn($consolePrompt->reveal())
+            ->shouldBeCalled();
 
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();

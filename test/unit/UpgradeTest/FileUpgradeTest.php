@@ -25,7 +25,7 @@ class FileUpgradeTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-
+        $this->fileEdge = $this->prophesize(FileEdge::class);
 
         $this->fileUpgrade = new FileUpgrade(
             $this->console->reveal(),
@@ -33,7 +33,8 @@ class FileUpgradeTest extends TestCase
             $this->moduleService->reveal(),
             $this->moduleTests->reveal(),
             $this->projectService->reveal(),
-            $this->module->reveal()
+            $this->module->reveal(),
+            $this->fileEdge->reveal()
         );
 
         $this->yaml = new YamlService();
@@ -122,10 +123,8 @@ class FileUpgradeTest extends TestCase
         $yaml = new YamlService();
         $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
 
-        $this->fileEdge = $this->prophesize(FileEdge::class);
-        $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
 
-        $this->fileUpgrade->setFileEdge($this->fileEdge->reveal());
+        $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
 
         $upgrades = $this->fileUpgrade->upgradeModule('web', true);
 

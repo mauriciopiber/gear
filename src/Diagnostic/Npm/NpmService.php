@@ -1,16 +1,18 @@
 <?php
 namespace Gear\Diagnostic\Npm;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
+use Gear\Module\ModuleAwareTrait;
 
-class NpmService extends AbstractJsonService implements ModuleDiagnosticInterface
+class NpmService implements ModuleDiagnosticInterface
 {
     use ProjectLocationTrait;
 
     use NpmEdgeTrait;
+
+    use ModuleAwareTrait;
 
     static public $missingFile = 'Nodejs - Está faltando o arquivo package.json';
 

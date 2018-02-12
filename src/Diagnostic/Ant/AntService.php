@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Diagnostic\Ant;
 
-//use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;

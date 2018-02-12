@@ -22,10 +22,14 @@ class ComposerUpgradeFactoryTest extends TestCase
         ->willReturn($consolePrompt->reveal())
         ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Edge\ComposerEdge')
-        ->willReturn($this->prophesize('Gear\Edge\ComposerEdge'))
+        $this->serviceLocator->get('Gear\Edge\Composer\ComposerEdge')
+        ->willReturn($this->prophesize('Gear\Edge\Composer\ComposerEdge'))
         ->shouldBeCalled();
 
+
+        $this->serviceLocator->get('GearBase\Util\String')
+        ->willReturn($this->prophesize('GearBase\Util\String\StringService'))
+        ->shouldBeCalled();
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
 

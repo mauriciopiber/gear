@@ -1,14 +1,19 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
 
-class NpmUpgrade extends AbstractJsonService
+class NpmUpgrade
 {
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     use ProjectLocationTrait;
 
     use NpmEdgeTrait;

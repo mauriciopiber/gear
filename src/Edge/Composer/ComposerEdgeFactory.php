@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Edge;
+namespace Gear\Edge\Composer;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Edge\ComposerEdge;
+use Gear\Edge\Composer\ComposerEdge;
 
 class ComposerEdgeFactory implements FactoryInterface
 {
