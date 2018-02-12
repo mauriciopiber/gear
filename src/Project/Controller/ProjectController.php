@@ -13,14 +13,15 @@ use Gear\Project\Diagnostic\DiagnosticServiceTrait;
 
 class ProjectController extends AbstractConsoleController
 {
-    use ProjectServiceTrait;
-    use EntityServiceTrait;
-    use ComposerServiceTrait;
+    //use ProjectServiceTrait;
+    //use EntityServiceTrait;
+    //use ComposerServiceTrait;
     use FixtureServiceTrait;
     use CacheServiceTrait;
-    use ProjectUpgradeTrait;
-    use DiagnosticServiceTrait;
+    //use ProjectUpgradeTrait;
+    //use DiagnosticServiceTrait;
 
+    /*
     public function diagnosticsAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-diagnostics'));
@@ -97,6 +98,7 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
+*/
 
     public function renewCacheAction()
     {
@@ -122,16 +124,13 @@ class ProjectController extends AbstractConsoleController
     }
 
     /**
-     * Cria Projeto.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
+
     public function createAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-create'));
 
         $type = $this->getRequest()->getParam('type', 'web');
-        
+
         $staging = $this->getRequest()->getParam('staging', null);
         $production = $this->getRequest()->getParam('production', null);
 
@@ -141,13 +140,6 @@ class ProjectController extends AbstractConsoleController
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
-
-
-    /**
-     * Deleta Projeto.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
     public function deleteAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-delete'));
@@ -160,11 +152,6 @@ class ProjectController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    /**
-     * Configura arquivo config/autoload/global.php no contexto de projeto.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
     public function globalAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-global'));
@@ -181,11 +168,6 @@ class ProjectController extends AbstractConsoleController
     }
 
 
-    /**
-     * Configura o arquivo public/.htaccess no contexto de projeto.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
     public function environmentAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-environment'));
@@ -202,11 +184,6 @@ class ProjectController extends AbstractConsoleController
     }
 
 
-    /**
-     * Configura o arquivo config/autoload/local.php no contexto de projeto.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
     public function localAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-local'));
@@ -224,11 +201,6 @@ class ProjectController extends AbstractConsoleController
     }
 
 
-    /**
-     * Cria todos arquivos de configuração do projeto novamente.
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
     public function configAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'project-config'));
@@ -242,11 +214,11 @@ class ProjectController extends AbstractConsoleController
         $dbname      =  $request->getParam('dbname');
         //$dbms        = $request->getParam('dbms');
 
-        /* @var $project \Gear\Service\ProjectService */
         $project = $this->getProjectService();
         $project->setUpConfig($dbname, $username, $password, $host, $environment);
 
         $this->getEventManager()->trigger('gear.pos', $this);
         return new ConsoleModel();
     }
+    */
 }

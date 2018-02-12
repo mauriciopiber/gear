@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             steps {
-                sh '/usr/bin/ant unit-ci'
+                sh '/usr/bin/ant phpunit-ci'
             }
         }
         stage('Report') {

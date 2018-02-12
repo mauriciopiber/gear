@@ -4,6 +4,8 @@ namespace GearTest\DiagnosticTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\ComposerService;
+use Gear\Module\BasicModuleStructure;
+
 
 /**
  * @group Diagnostic
@@ -19,7 +21,10 @@ class ComposerServiceTest extends TestCase
 
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
+        $this->module = $this->prophesize(BasicModuleStructure::class);
 
+        $this->composer = new ComposerService();
+        $this->composer->setModule($this->module->reveal());
     }
 
 
@@ -34,8 +39,8 @@ class ComposerServiceTest extends TestCase
 
         $fileConfig = <<<EOS
 {
-	"require" : {
-	},
+    "require" : {
+    },
     "require-dev": {
     }
 }
@@ -43,8 +48,7 @@ class ComposerServiceTest extends TestCase
 EOS;
         file_put_contents($this->file, $fileConfig);
 
-        $composer = new ComposerService();
-        $composer->setProject(vfsStream::url('project'));
+        $this->composer->setProject(vfsStream::url('project'));
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerProject('web')->willReturn(
@@ -62,7 +66,7 @@ EOS;
             ***REMOVED***
         );
 
-        $composer->setComposerEdge($yaml->reveal());
+        $this->composer->setComposerEdge($yaml->reveal());
 
         $this->assertEquals([
             ComposerService::$missingName,
@@ -74,20 +78,20 @@ EOS;
             sprintf(ComposerService::$requireNotFound, 'mpiber/package-3', '3.0.0'),
             sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-1', '^1.0.0'),
             sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-2', '*2.0.0')
-        ***REMOVED***, $composer->diagnosticProject('web'));
+        ***REMOVED***, $this->composer->diagnosticProject('web'));
     }
 
 
     /**
-     * @group dia1
+     * @group abc
      */
     public function testDiagnosticWebModule()
     {
 
         $fileConfig = <<<EOS
 {
-	"require" : {
-	},
+    "require" : {
+    },
     "require-dev": {
     }
 }
@@ -95,10 +99,9 @@ EOS;
 EOS;
         file_put_contents($this->file, $fileConfig);
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
-
-        $composer = new ComposerService($module->reveal());
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule');
+        $this->module->str('url', 'MyModule')->willReturn('my-module')->shouldBeCalled();
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -116,7 +119,7 @@ EOS;
             ***REMOVED***
         );
 
-        $composer->setComposerEdge($yaml->reveal());
+        $this->composer->setComposerEdge($yaml->reveal());
 
         $this->assertEquals([
             ComposerService::$missingName,
@@ -128,7 +131,7 @@ EOS;
             sprintf(ComposerService::$requireNotFound, 'mpiber/package-3', '3.0.0'),
             sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-1', '^1.0.0'),
             sprintf(ComposerService::$requireDevNotFound, 'mpiber/unit-2', '*2.0.0')
-        ***REMOVED***, $composer->diagnosticModule('web'));
+        ***REMOVED***, $this->composer->diagnosticModule('web'));
     }
 
     /**
@@ -136,9 +139,8 @@ EOS;
      */
     public function testProjectTrait()
     {
-        $composer = new ComposerService();
-        $composer->setProject('testing');
-        $this->assertEquals('testing', $composer->getProject());
+        $this->composer->setProject('testing');
+        $this->assertEquals('testing', $this->composer->getProject());
     }
 
     public function testPackageNotFound()
@@ -146,10 +148,10 @@ EOS;
 
         file_put_contents($this->file, <<<EOS
 {
-	"name" : "mauriciopiber/gear",
-	"require" : {
-		"mpiber/package-2" : "1.0.0"
-	},
+    "name" : "mauriciopiber/gear",
+    "require" : {
+        "mpiber/package-2" : "1.0.0"
+    },
     "require-dev": {
         "mpiber/unit-2" : "^1.0.0"
     }
@@ -158,10 +160,9 @@ EOS;
 EOS
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
-
-        $composer = new ComposerService($module->reveal());
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule');
+        $this->module->str('url', 'MyModule')->willReturn('my-module')->shouldBeCalled();
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -176,9 +177,9 @@ EOS
             ***REMOVED***
         );
 
-        $composer->setComposerEdge($yaml->reveal());
+        $this->composer->setComposerEdge($yaml->reveal());
 
-        $result = $composer->diagnosticModule('web');
+        $result = $this->composer->diagnosticModule('web');
 
         $this->assertCount(5, $result);
 
@@ -192,10 +193,10 @@ EOS
 
         file_put_contents($this->file, <<<EOS
 {
-	"name" : "mauriciopiber/gear",
-	"require" : {
-		"mpiber/package-2" : "1.0.0"
-	},
+    "name" : "mauriciopiber/gear",
+    "require" : {
+        "mpiber/package-2" : "1.0.0"
+    },
     "require-dev": {
         "mpiber/unit-2" : "^1.0.0"
     }
@@ -204,10 +205,9 @@ EOS
 EOS
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $module->getMainFolder()->willReturn(vfsStream::url('module'));
-
-        $composer = new ComposerService($module->reveal());
+        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule');
+        $this->module->str('url', 'MyModule')->willReturn('my-module')->shouldBeCalled();
 
         $yaml = $this->prophesize('Gear\Edge\ComposerEdge');
         $yaml->getComposerModule('web')->willReturn(
@@ -222,9 +222,9 @@ EOS
             ***REMOVED***
         );
 
-        $composer->setComposerEdge($yaml->reveal());
+        $this->composer->setComposerEdge($yaml->reveal());
 
-        $result = $composer->diagnosticModule('web');
+        $result = $this->composer->diagnosticModule('web');
 
         $this->assertCount(5, $result);
 

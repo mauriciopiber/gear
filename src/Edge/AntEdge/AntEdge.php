@@ -11,11 +11,4 @@ class AntEdge extends AbstractEdge
 
         return $this->getYamlService()->load($file);
     }
-
-    public function getAntProject($type = 'web')
-    {
-        $file = $this->getProjectLocation($type).'/ant.yml';
-
-        return $this->getYamlService()->load($file);
-    }
 }

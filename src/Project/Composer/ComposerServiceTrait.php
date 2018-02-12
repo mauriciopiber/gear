@@ -3,6 +3,9 @@ namespace Gear\Project\Composer;
 
 use Gear\Project\Composer\ComposerServiceFactory;
 
+/**
+ * @deprecated
+ */
 trait ComposerServiceTrait
 {
     protected $composerService;

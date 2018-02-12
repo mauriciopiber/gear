@@ -11,11 +11,4 @@ class DirEdge extends AbstractEdge
 
         return $this->getYamlService()->load($file);
     }
-
-    public function getDirProject($type = 'web')
-    {
-        $file = $this->getProjectLocation($type).'/dir.yml';
-
-        return $this->getYamlService()->load($file);
-    }
 }

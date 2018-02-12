@@ -10,4 +10,4 @@ modules="MyProjectModuleCli;cli;cli.yml|MyProjectModuleWeb;web;web.yml"
 modulesClear="MyProjectModuleCli|MyProjectModuleWeb"
 
 source "$bin/gear/project/test-project.sh"
-	
+    
