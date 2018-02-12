@@ -23,8 +23,17 @@ class DirUpgradeTest extends TestCase
         $this->dir = new \GearBase\Util\Dir\DirService();
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-        $this->edge = $this->prophesize(DirEdge::class);
+        $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->config = [***REMOVED***;
+
+        $this->dirUpgrade = new \Gear\Upgrade\DirUpgrade(
+            $this->console->reveal(),
+            $this->dir,
+            $this->consolePrompt->reveal(),
+            $this->config,
+            $this->module->reveal(),
+            $this->dirEdge->reveal()
+        );
     }
 
     public function types()
@@ -37,52 +46,28 @@ class DirUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $ant = new DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config
-        );
-        $ant->setProject('testing');
-        $this->assertEquals('testing', $ant->getProject());
+        $this->dirUpgrade->setProject('testing');
+        $this->assertEquals('testing', $this->dirUpgrade->getProject());
     }
 
 
     public function testDependency()
     {
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $console->reveal(),
-            $dir->reveal(),
-            $consolePrompt->reveal(),
-            $this->config,
-            $module->reveal()
-        );
-
-        $this->assertEquals($dirUpgrade->getConsole(), $console->reveal());
-        $this->assertEquals($dirUpgrade->getDirService(), $dir->reveal());
-        $this->assertEquals($dirUpgrade->getModule(), $module->reveal());
-        $this->assertEquals($dirUpgrade->getConsolePrompt(), $consolePrompt->reveal());
+        $this->assertEquals($this->dirUpgrade->getConsole(), $this->console->reveal());
+        $this->assertEquals($this->dirUpgrade->getDirService(), $this->dir);
+        $this->assertEquals($this->dirUpgrade->getModule(), $this->module->reveal());
+        $this->assertEquals($this->dirUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
     }
 
+    /**
+     * @group dir-not-exist
+     */
     public function testUpgradeDirNotExist()
     {
         $dir = 'my-filder';
 
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-
-        $dirUpgrade->upgradeDir(vfsStream::url('module'), $dir);
+        $this->dirUpgrade->upgradeDir(vfsStream::url('module'), $dir);
 
         $this->assertFileExists(vfsStream::url('module/my-filder'));
         $this->assertTrue(is_writable(vfsStream::url('module/my-filder')));
@@ -109,16 +94,7 @@ class DirUpgradeTest extends TestCase
           ->willReturn(true)
           ->shouldBeCalled();
 
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-        $dirEdge = $this->prophesize(DirEdge::class);
-        $dirEdge->getDirModule($type)->willReturn(
+        $this->dirEdge->getDirModule($type)->willReturn(
             [
                 'writable' => [
                     'package-folder-1',
@@ -128,10 +104,7 @@ class DirUpgradeTest extends TestCase
             ***REMOVED***
         )->shouldBeCalled();
 
-        $dirUpgrade->setDirEdge($dirEdge->reveal());
-
-
-        $upgrades = $dirUpgrade->upgradeModule($type, $force = true);
+        $upgrades = $this->dirUpgrade->upgradeModule($type, $force = true);
 
         $this->assertEquals([
             sprintf(\Gear\Upgrade\DirUpgrade::$dirWrite, 'package-folder-1'),
@@ -194,23 +167,13 @@ class DirUpgradeTest extends TestCase
             ***REMOVED***
         ***REMOVED***;
 
-        $this->edge->getDirModule($type)->willReturn($this->edgeFile)->shouldBeCalled();
+        $this->dirEdge->getDirModule($type)->willReturn($this->edgeFile)->shouldBeCalled();
 
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-        $dirUpgrade->setDirEdge($this->edge->reveal());
-
         $this->assertEquals($type, $type);
 
-        $upgrades = $dirUpgrade->upgradeModule($type);
+        $upgrades = $this->dirUpgrade->upgradeModule($type);
 
         $this->assertEquals([
             sprintf(DirUpgrade::$dirWrite, 'directory-4'),

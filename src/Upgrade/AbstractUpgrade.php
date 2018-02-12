@@ -1,15 +1,30 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
 use Zend\Console\Adapter\Posix;
-use Gear\Upgrade\ComposerUpgradeTrait;
-use Gear\Upgrade\NpmUpgradeTrait;
-use Gear\Upgrade\DirUpgradeTrait;
-use Gear\Upgrade\FileUpgradeTrait;
-use Gear\Upgrade\AntUpgradeTrait;
+use Gear\Upgrade\{
+    AntUpgrade,
+    AntUpgradeTrait
+};
+use Gear\Upgrade\{
+    ComposerUpgrade,
+    ComposerUpgradeTrait
+};
+use Gear\Upgrade\{
+    FileUpgrade,
+    FileUpgradeTrait
+};
+use Gear\Upgrade\{
+    DirUpgrade,
+    DirUpgradeTrait
+};
+use Gear\Upgrade\{
+    NpmUpgrade,
+    NpmUpgradeTrait
+};
 
-abstract class AbstractUpgrade extends AbstractJsonService
+
+abstract class AbstractUpgrade
 {
     const NO_FOUND = 'Não encontrado %s';
 
@@ -38,9 +53,20 @@ abstract class AbstractUpgrade extends AbstractJsonService
         return $this->upgrades;
     }
 
-    public function __construct(Posix $console)
-    {
+    public function __construct(
+        Posix $console,
+        AntUpgrade $antUpgrade,
+        ComposerUpgrade $composerUpgrade,
+        FileUpgrade $fileUpgrade,
+        DirUpgrade $dirUpgrade,
+        NpmUpgrade $npmUpgrade
+    ) {
         $this->console = $console;
+        $this->antUpgrade = $antUpgrade;
+        $this->composerUpgrade = $composerUpgrade;
+        $this->fileUpgrade = $fileUpgrade;
+        $this->dirUpgrade = $dirUpgrade;
+        $this->npmUpgrade = $npmUpgrade;
     }
 
     public function getConsole()

@@ -34,17 +34,18 @@ class AntUpgradeTest extends TestCase
 
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
 
+        $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
+
         $this->antUpgrade = new AntUpgrade(
             $this->console->reveal(),
             $this->consolePrompt->reveal(),
             $this->string,
             $this->config,
             $this->module->reveal(),
-            $this->gearConfig->reveal()
-        );
+            $this->gearConfig->reveal(),
+            $this->edge->reveal()
 
-        $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
-        $this->antUpgrade->setAntEdge($this->edge->reveal());
+        );
     }
 
 

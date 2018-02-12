@@ -65,10 +65,10 @@ class ModuleTestsServiceTest extends TestCase
             $this->string,
             $this->config,
             $this->module->reveal(),
-            $this->gearConfig->reveal()
+            $this->gearConfig->reveal(),
+            $this->edge->reveal()
         );
 
-        $this->upgrade->setAntEdge($this->edge->reveal());
     }
 
     /**

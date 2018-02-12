@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectServiceTrait;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Util\Console\ConsoleAwareTrait;
@@ -12,9 +11,15 @@ use Gear\Module\Tests\{
     ModuleTestsService,
     ModuleTestsServiceTrait,
 };
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
 
-class FileUpgrade extends AbstractJsonService
+class FileUpgrade
 {
+    use ModuleAwareTrait;
+
+    use StringServiceTrait;
+
     use ProjectLocationTrait;
 
     use FileEdgeTrait;
@@ -41,8 +46,10 @@ class FileUpgrade extends AbstractJsonService
         $moduleService,
         $moduleTestsService,
         $projectService,
-        $module = null
+        $module = null,
+        $fileEdge
     ) {
+        $this->fileEdge = $fileEdge;
         $this->console = $console;
         $this->moduleService = $moduleService;
         $this->moduleTestsService = $moduleTestsService;

@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
@@ -10,6 +9,8 @@ use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
 use SimpleXmlElement;
 use Exception;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\Util\String\StringServiceTrait;
 
 /**
  * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
@@ -25,8 +26,12 @@ use Exception;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class AntUpgrade extends AbstractJsonService
+class AntUpgrade
 {
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
     use ProjectLocationTrait;
 
     use AntEdgeTrait;
@@ -83,7 +88,7 @@ class AntUpgrade extends AbstractJsonService
      * @param array                              $config        Configuração
      * @param Gear\Module\BasicModuleStructure   $module        Estrutura do Módulo
      */
-    public function __construct($console, $consolePrompt, $string, $config, $module = null, GearConfig $gearConfig)
+    public function __construct($console, $consolePrompt, $string, $config, $module = null, GearConfig $gearConfig, $antEdge)
     {
         $this->console = $console;
         $this->module = $module;
@@ -92,6 +97,7 @@ class AntUpgrade extends AbstractJsonService
         $this->consolePrompt = $consolePrompt;
         $this->gearConfig = $gearConfig;
         $this->upgrades = [***REMOVED***;
+        $this->antEdge = $antEdge;
     }
 
     /**

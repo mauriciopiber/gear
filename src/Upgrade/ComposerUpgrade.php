@@ -1,13 +1,18 @@
 <?php
 namespace Gear\Upgrade;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
 
-class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterface
+class ComposerUpgrade implements ModuleUpgradeInterface
 {
+    use ModuleAwareTrait;
+
+    use StringServiceTrait;
+
     use ProjectLocationTrait;
 
     use ComposerEdgeTrait;
@@ -48,8 +53,9 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
     public $config = [***REMOVED***;
 
-    public function __construct($consolePrompt, $edge, array $config, $module = null)
+    public function __construct($consolePrompt, $edge, array $config, $module = null, $stringService)
     {
+        $this->setStringService($stringService);
         $this->module = $module;
         $this->composerEdge = $edge;
         $this->config = $config;

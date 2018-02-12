@@ -22,12 +22,21 @@ class ComposerUpgradeTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
 
-        $this->edge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
+        $this->composerEdge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module');
         $this->config = [***REMOVED***;
+        $this->string = new \GearBase\Util\String\StringService();
+
+        $this->composer = new ComposerUpgrade(
+            $this->consolePrompt->reveal(),
+            $this->composerEdge->reveal(),
+            $this->config,
+            $this->module->reveal(),
+            $this->string
+        );
     }
 
     /**
@@ -35,13 +44,8 @@ class ComposerUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $ant = new ComposerUpgrade(
-            $this->consolePrompt->reveal(),
-            $this->edge->reveal(),
-            $this->config
-        );
-        $ant->setProject('testing');
-        $this->assertEquals('testing', $ant->getProject());
+        $this->composer->setProject('testing');
+        $this->assertEquals('testing', $this->composer->getProject());
     }
 
     public function getModuleType()
@@ -73,7 +77,7 @@ EOS;
         file_put_contents($this->file, $actualFile);
 
 
-        $this->edge->getComposerModule($type)->willReturn(
+        $this->composerEdge->getComposerModule($type)->willReturn(
             [
                 'require' => [
                     'mpiber/package-1' => '1.0.0',
@@ -103,18 +107,7 @@ EOS;
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $upgrade = new ComposerUpgrade(
-            $this->consolePrompt->reveal(),
-            $this->edge->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-
-
-        $upgrade->setStringService(new \GearBase\Util\String\StringService());
-
-        $upgradeComposer = $upgrade->upgradeModule($type);
+        $upgradeComposer = $this->composer->upgradeModule($type);
 
         $expectedFile = <<<EOS
 {
@@ -171,7 +164,7 @@ EOS;
     public function testUpgradeComposerModuleFromScratch($type)
     {
 
-        $this->edge->getComposerModule($type)->willReturn(
+        $this->composerEdge->getComposerModule($type)->willReturn(
             [
                 'require' => [
                     'mpiber/package-1' => '1.0.0',
@@ -204,17 +197,7 @@ EOS;
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $upgrade = new ComposerUpgrade(
-            $this->consolePrompt->reveal(),
-            $this->edge->reveal(),
-            $this->config,
-            $this->module->reveal()
-        );
-
-
-        $upgrade->setStringService(new \GearBase\Util\String\StringService());
-
-        $upgradeComposer = $upgrade->upgradeModule($type);
+        $upgradeComposer = $this->composer->upgradeModule($type);
 
         $expectedFile = <<<EOS
 {

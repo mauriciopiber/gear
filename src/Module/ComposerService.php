@@ -8,6 +8,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
 use Gear\Mvc\AbstractMvc;
 use GearBase\Util\String\StringService;
+use GearBase\Util\String\StringServiceTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -15,6 +16,8 @@ use GearBase\Util\String\StringService;
  */
 class ComposerService extends AbstractMvc
 {
+    use StringServiceTrait;
+
     use ComposerEdgeTrait;
 
     /**
