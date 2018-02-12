@@ -1,17 +1,18 @@
 <?php
-namespace Gear\Diagnostic\Ant;
+namespace Gear\Diagnostic\Composer;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Gear\Diagnostic\Composer\ComposerService;
 
-class AntServiceFactory implements FactoryInterface
+class ComposerServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new \Gear\Diagnostic\Ant\AntService(
-            $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('GearBase\GearConfig'),
+        $factory = new ComposerService(
             $serviceLocator->get('moduleStructure')
         );
+        unset($serviceLocator);
+        return $factory;
     }
 }
