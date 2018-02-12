@@ -4,8 +4,7 @@ namespace Gear\Project\Config;
 use Exception;
 
 /**
- *
- * @author piber
+ * @deprecated
  */
 class Globally
 {

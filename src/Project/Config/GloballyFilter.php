@@ -3,6 +3,9 @@ namespace Gear\Project\Config;
 
 use Zend\InputFilter\InputFilter;
 
+/**
+ * @deprecated
+ */
 class GloballyFilter extends InputFilter
 {
     public function getInputFilter()

@@ -8,6 +8,9 @@ use Gear\Edge\ComposerEdgeTrait;
 use Gear\Project\Project;
 use Gear\Util\Vector\ArrayServiceTrait;
 
+/**
+ * @deprecated
+ */
 class ComposerService
 {
     use ComposerEdgeTrait;

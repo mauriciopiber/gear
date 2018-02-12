@@ -7,6 +7,7 @@ return [
             /**
              * Project
              */
+            /*
             'gear-create' => array(
                 'options' => array(
                     'route' => 'gear project create <project> [--host=***REMOVED*** [--git=***REMOVED***  [--nfs***REMOVED***'
@@ -45,7 +46,7 @@ return [
                     )
                 )
             ),
-
+*/
             'gear-project-fixture' => array(
                 'options' => array(
                     'route' => 'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED*** ' . implode(' ', $globalOptions),
@@ -55,6 +56,7 @@ return [
                     )
                 )
             ),
+            /*
             'gear-config' => array(
                 'options' => array(
                     'route' => 'gear project config --host= --dbname=  --username= --password= --environment= --dbms=',
@@ -118,6 +120,7 @@ return [
                     )
                 )
             ),
+            */
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***;

@@ -12,4 +12,4 @@ modules="MyProjectModuleCli;cli;module-cli.yml|"\
 modulesClear="MyProjectModuleCli|MyProjectModuleWeb|MyProjectModuleMvc"
 
 source "$bin/gear/project/test-project.sh"
-	
+    

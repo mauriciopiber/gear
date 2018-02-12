@@ -12,8 +12,8 @@ Deletar schema de módulo MyModule
 [22;39m[42mScript ended by 2.171 at 26/07/2016 15:25:58[22;39m[0;49m
 PHPUnit 4.8.27 by Sebastian Bergmann and contributors.
 
-Runtime:	PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
-Configuration:	/var/www/gear-package/my-module/test/phpunit-benchmark.xml
+Runtime:    PHP 5.6.22-0+deb8u1 with Xdebug 2.2.5
+Configuration:    /var/www/gear-package/my-module/test/phpunit-benchmark.xml
 
 ......................
 

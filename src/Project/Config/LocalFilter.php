@@ -4,6 +4,9 @@ namespace Gear\Project\Config;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Input;
 
+/**
+ * @deprecated
+ */
 class LocalFilter extends InputFilter
 {
     public function getInputFilter()
