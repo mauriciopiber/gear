@@ -3,6 +3,7 @@ namespace Gear\Diagnostic\File;
 
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Edge\File\FileEdgeTrait;
+use Gear\Edge\File\FileEdge;
 use Gear\Module\ModuleAwareTrait;
 
 class FileService implements ModuleDiagnosticInterface
@@ -13,8 +14,9 @@ class FileService implements ModuleDiagnosticInterface
 
     static public $missingFile = 'Arquivos - Faltando arquivo %s';
 
-    public function __construct($module = null)
+    public function __construct($module = null, FileEdge $fileEdge)
     {
+        $this->fileEdge = $fileEdge;
         $this->module = $module;
     }
 

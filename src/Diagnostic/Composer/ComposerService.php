@@ -5,10 +5,12 @@ use Gear\Project\ProjectLocationTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Module\ModuleAwareTrait;
 use Zend\Json\Json;
+use Gear\Edge\Composer\ComposerEdgeTrait;
+use Gear\Edge\Composer\ComposerEdge;
 
 class ComposerService implements ModuleDiagnosticInterface
 {
-    use \Gear\Edge\Composer\ComposerEdgeTrait;
+    use ComposerEdgeTrait;
 
     use ModuleAwareTrait;
 
@@ -34,9 +36,10 @@ class ComposerService implements ModuleDiagnosticInterface
 
     static public $requireDevVersion = 'Composer - Package require-dev "%s" mudar da versão %s para versão "%s"';
 
-    public function __construct($module = null)
+    public function __construct($module = null, ComposerEdge $composerEdge)
     {
         $this->module = $module;
+        $this->composerEdge = $composerEdge;
 
     }
 

@@ -3,6 +3,7 @@ namespace Gear\Diagnostic\Ant;
 
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
+use Gear\Edge\Ant\AntEdge;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Diagnostic\ProjectDiagnosticInterface;
 use SimpleXmlElement;
@@ -47,8 +48,9 @@ class AntService implements ModuleDiagnosticInterface
 
     use ModuleAwareTrait;
 
-    public function __construct($stringService, GearConfig $gearConfig, $module = null)
+    public function __construct($stringService, GearConfig $gearConfig, $module = null, AntEdge $antEdge)
     {
+        $this->antEdge = $antEdge;
         $this->errors = [***REMOVED***;
         $this->stringService = $stringService;
         $this->module = $module;
