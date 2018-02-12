@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\File\FileService;
 use Gear\Edge\File\FileEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Diagnostic
@@ -24,9 +25,11 @@ class FileServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
         $this->fileEdge = $this->prophesize(FileEdge::class);
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->fileService = new FileService(
             $this->module->reveal(),
+            $this->gearConfig->reveal(),
             $this->fileEdge->reveal()
         );
     }

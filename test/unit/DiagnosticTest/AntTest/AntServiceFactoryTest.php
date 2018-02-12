@@ -28,7 +28,8 @@ class AntServiceFactoryTest extends TestCase
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
 
-        $this->serviceLocator->get('GearBase\GearConfig')->willReturn($this->prophesize('GearBase\Config\GearConfig')->reveal())
+        $this->serviceLocator->get('GearBase\GearConfig')
+        ->willReturn($this->prophesize('GearBase\Config\GearConfig')->reveal())
         ->shouldBeCalled();
 
         $factory = new \Gear\Diagnostic\Ant\AntServiceFactory();

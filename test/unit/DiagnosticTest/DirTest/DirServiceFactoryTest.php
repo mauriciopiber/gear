@@ -18,6 +18,10 @@ class DirServiceFactoryTest extends TestCase
         $module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
+        $this->serviceLocator->get('GearBase\GearConfig')
+        ->willReturn($this->prophesize('GearBase\Config\GearConfig')->reveal())
+        ->shouldBeCalled();
+
         $dirEdge = $this->prophesize(DirEdge::class);
         $this->serviceLocator->get(DirEdge::class)->willReturn($dirEdge->reveal())->shouldBeCalled();
 

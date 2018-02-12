@@ -12,6 +12,7 @@ class ComposerServiceFactory implements FactoryInterface
     {
         $factory = new ComposerService(
             $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get('GearBase\GearConfig'),
             $serviceLocator->get(ComposerEdge::class)
         );
         unset($serviceLocator);

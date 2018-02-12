@@ -13,7 +13,7 @@
     "require-dev": {
         "mauriciopiber/gear-base": "^0.2 || ^1.0",
         "mauriciopiber/gear-json": "^0.2 || ^1.0",
-        "mauriciopiber/gear-deploy": "^0.2 || ^1.0",
+        "mauriciopiber/gear-deploy": "^0.2.78 || ^1.0",
         "mauriciopiber/gear-jenkins": "^0.2 || ^1.0",
         "mauriciopiber/gear-version": "^0.2 || ^1.0",
         "sebastian/phpcpd": "^2.0",

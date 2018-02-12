@@ -5,6 +5,8 @@ use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
+use GearBase\Config\GearConfigTrait;
+use GearBase\Config\GearConfig;
 
 class DirService implements ModuleDiagnosticInterface
 {
@@ -18,8 +20,9 @@ class DirService implements ModuleDiagnosticInterface
 
     static public $missingWrite = 'Diretório - Deves dar permissão de escrita no diretório %s';
 
-    public function __construct($module = null, DirEdge $dirEdge)
+    public function __construct($module = null, GearConfig $config, DirEdge $dirEdge)
     {
+        $this->gearConfig = $config;
         $this->dirEdge = $dirEdge;
         $this->module = $module;
     }
