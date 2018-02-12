@@ -3,7 +3,7 @@ namespace Gear\Upgrade;
 
 use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
-use Gear\Edge\ComposerEdgeTrait;
+use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 
 class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterface
@@ -99,35 +99,6 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
         return $this->upgrades;
     }
-
-    public function upgradeProject($type = 'web')
-    {
-        $this->upgrades = [***REMOVED***;
-
-        $composer = $this->getComposerEdge()->getComposerProject($type);
-
-        $dir = $this->getProject();
-
-        $composerFile = $dir.'/composer.json';
-
-        if (!is_file($composerFile)) {
-            $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
-            if ($confirm === false) {
-                return [***REMOVED***;
-            }
-
-            $this->createNewComposer($dir);
-        }
-
-        $moduleComposer = \Zend\Json\Json::decode(file_get_contents($dir.'/composer.json'), 1);
-
-        $newComposer = $this->upgrade($composer, $moduleComposer, __FUNCTION__);
-
-        file_put_contents($dir.'/composer.json', $this->prepare($newComposer));
-
-        return $this->upgrades;
-    }
-
 
 
     public function upgradePackage()

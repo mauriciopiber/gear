@@ -2,8 +2,8 @@
 namespace Gear\Module;
 
 use Gear\Module\BasicModuleStructure;
-use Gear\Edge\ComposerEdge;
-use Gear\Edge\ComposerEdgeTrait;
+use Gear\Edge\Composer\ComposerEdge;
+use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
 use Gear\Mvc\AbstractMvc;

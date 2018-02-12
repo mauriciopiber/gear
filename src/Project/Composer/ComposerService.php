@@ -4,7 +4,7 @@ namespace Gear\Project\Composer;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Script\ScriptServiceTrait;
-use Gear\Edge\ComposerEdgeTrait;
+use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Project\Project;
 use Gear\Util\Vector\ArrayServiceTrait;
 

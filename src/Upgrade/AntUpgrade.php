@@ -4,7 +4,7 @@ namespace Gear\Upgrade;
 use Gear\Service\AbstractJsonService;
 use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
-use Gear\Edge\AntEdge\AntEdgeTrait;
+use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
@@ -630,30 +630,6 @@ class AntUpgrade extends AbstractJsonService
         }
 
         $dir = $this->getModule()->getMainFolder();
-
-        $this->upgrade($dir, $type, $edge, __FUNCTION__);
-
-        return $this->upgrades;
-    }
-
-    /**
-     * Upgrade a project ant build based on the Edge
-     *
-     * @param string $type Project Type
-     *
-     * @return array Upgrade Messages
-     */
-    public function upgradeProject($name = null, $type = 'web')
-    {
-        $this->upgrades = [***REMOVED***;
-
-        $edge = $this->getAntEdge()->getAntProject($type);
-
-        if (!isset($edge['target'***REMOVED***) && !isset($edge['default'***REMOVED***)) {
-            return $this->upgrades;
-        }
-
-        $dir = $this->getProject();
 
         $this->upgrade($dir, $type, $edge, __FUNCTION__);
 

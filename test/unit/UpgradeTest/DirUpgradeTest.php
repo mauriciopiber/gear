@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Upgrade\DirUpgrade;
+use Gear\Edge\Dir\DirEdge;
 
 /**
  * @group Upgrade
@@ -22,7 +23,7 @@ class DirUpgradeTest extends TestCase
         $this->dir = new \GearBase\Util\Dir\DirService();
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-        $this->edge = $this->prophesize('Gear\Edge\DirEdge');
+        $this->edge = $this->prophesize(DirEdge::class);
         $this->config = [***REMOVED***;
     }
 
@@ -116,7 +117,7 @@ class DirUpgradeTest extends TestCase
             $this->module->reveal()
         );
 
-        $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
+        $dirEdge = $this->prophesize(DirEdge::class);
         $dirEdge->getDirModule($type)->willReturn(
             [
                 'writable' => [
@@ -220,113 +221,5 @@ class DirUpgradeTest extends TestCase
             sprintf(DirUpgrade::$dirIgnore, 'directory-7'),
         ***REMOVED***, $upgrades);
 
-    }
-
-    /**
-     * @group Up1
-     * @param unknown $type
-     */
-    public function testUpgradeProject($type = 'web')
-    {
-        vfsStream::setup('project');
-
-        vfsStream::newDirectory('directory-1')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('directory-2')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('directory-3')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('dir-not-write-1', 000)->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('dir-not-write-2', 000)->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('directory-6')->at(vfsStreamWrapper::getRoot());
-        //vfsStream::newDirectory('directory-8')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('directory-8')->at(vfsStreamWrapper::getRoot());
-        vfsStream::newDirectory('directory-9')->at(vfsStreamWrapper::getRoot());
-
-        file_put_contents(vfsStream::url('project/directory-8/.gitignore'), '...');
-        file_put_contents(vfsStream::url('project/directory-9/.gitignore'), '...');
-
-
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirWrite, 'directory-4'))->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirWrite, 'directory-5'))->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldWrite, 'dir-not-write-1'))->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldWrite, 'dir-not-write-2'))->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldIgnore, 'directory-6'))->willReturn(true)->shouldBeCalled();
-        $this->consolePrompt->show(sprintf(DirUpgrade::$shouldDirIgnore, 'directory-7'))->willReturn(true)->shouldBeCalled();
-
-        $this->edgeFile = [
-            'writable' => [
-                'directory-1',
-                'directory-2',
-                'directory-3',
-                'directory-4',
-                'directory-5',
-                'dir-not-write-1',
-                'dir-not-write-2'
-            ***REMOVED***,
-            'ignore' => [
-                'directory-6',
-                'directory-7',
-                'directory-8',
-                'directory-9',
-            ***REMOVED***
-        ***REMOVED***;
-
-        $this->edge->getDirProject($type)->willReturn($this->edgeFile)->shouldBeCalled();
-
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade(
-            $this->console->reveal(),
-            $this->dir,
-            $this->consolePrompt->reveal(),
-            $this->config
-        );
-
-        $dirUpgrade->setProject(vfsStream::url('project'));
-
-        $dirUpgrade->setDirEdge($this->edge->reveal());
-
-        $this->assertEquals($type, $type);
-
-        $upgrades = $dirUpgrade->upgradeProject($type);
-
-        $this->assertEquals([
-            sprintf(DirUpgrade::$dirWrite, 'directory-4'),
-            sprintf(DirUpgrade::$dirWrite, 'directory-5'),
-            sprintf(DirUpgrade::$write, 'dir-not-write-1'),
-            sprintf(DirUpgrade::$write, 'dir-not-write-2'),
-            sprintf(DirUpgrade::$ignore, 'directory-6'),
-            sprintf(DirUpgrade::$dirIgnore, 'directory-7'),
-        ***REMOVED***, $upgrades);
-
-    }
-
-    /**
-     * @dataProvider types
-     */
-    public function XtestDirNeedUpgradeWritableProject($type)
-    {
-        vfsStream::setup('module');
-
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
-
-        $dirUpgrade = new \Gear\Upgrade\DirUpgrade($console->reveal(), $dir->reveal());
-
-        $dirEdge = $this->prophesize('Gear\Edge\DirEdge');
-        $dirEdge->getDirProject($type)->willReturn(
-            [
-                /*
-                 'writable' => [
-                     'package-folder-1',
-                     'package-folder-2',
-                     'package-folder-3',
-                 ***REMOVED***,
-        */
-            ***REMOVED***
-        );
-
-        $dirUpgrade->setDirEdge($dirEdge->reveal());
-
-
-        $upgrades = $dirUpgrade->upgradeProject($type, $force = true);
-
-        $this->assertEquals([***REMOVED***, $upgrades);
     }
 }

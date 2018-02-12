@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
+use Gear\Edge\File\FileEdge;
 
 /**
  * @group FileUpgrade
@@ -121,7 +122,7 @@ class FileUpgradeTest extends TestCase
         $yaml = new YamlService();
         $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
 
-        $this->fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
 
         $this->fileUpgrade->setFileEdge($this->fileEdge->reveal());
@@ -143,11 +144,11 @@ class FileUpgradeTest extends TestCase
      */
     public function testFactoryUpgradeModuleCli()
     {
-        $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptDevelopment('cli')->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
 
@@ -159,7 +160,7 @@ class FileUpgradeTest extends TestCase
 
         $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
+        //$this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptTesting('cli')->willReturn(true)->shouldBeCalled();
 
@@ -179,9 +180,12 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
         $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
-        $target = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
+        $file = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
+        $common = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
 
-        $this->fileEdge = $this->prophesize('Gear\Edge\FileEdge');
+        $target = array_merge_recursive($file, $common);
+
+        $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->fileEdge->getFileModule('cli')->willReturn($target)->shouldBeCalled();
 
         $this->fileUpgrade->setFileEdge($this->fileEdge->reveal());
@@ -197,78 +201,4 @@ class FileUpgradeTest extends TestCase
         $this->assertEquals($expected, $upgrades);
 
     }
-    /**
-     * @group xmxm1
-     */
-    public function testFactoryUpgradeProject($type = 'web')
-    {
-        $this->projectService->getCodeception()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptDevelopment($type)->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getProtractorReportConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getPhinxConfig(null, null, null, null)->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getConfigDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptTesting()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptLoad()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptStaging()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptProduction()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptInstallProduction()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getScriptInstallStaging()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getReadme()->willReturn(true)->shouldBeCalled();
-
-        //$this->projectService->getBuildpath()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->copyPHPMD()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->createJenkinsFile()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->createGitIgnore()->willReturn(true)->shouldBeCalled();
-
-        $this->projectService->getPhpcsDocs()->willReturn(true)->shouldBeCalled();
-
-        $target = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/project/web/file.yml');
-
-        $this->edge = $this->prophesize('Gear\Edge\FileEdge');
-        $this->edge->getFileProject('web')->willReturn($target)->shouldBeCalled();
-
-        vfsStream::setup('project');
-        $this->fileUpgrade->setProject(vfsStream::url('project'));
-
-        $this->fileUpgrade->setFileEdge($this->edge->reveal());
-
-        $upgrades = $this->fileUpgrade->upgradeProject('web', $force = true);
-
-        $expected = [***REMOVED***;
-
-        foreach ($target['files'***REMOVED*** as $file) {
-            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Project');
-        }
-
-        $this->assertEquals($expected, $upgrades);
-    }
-
 }
