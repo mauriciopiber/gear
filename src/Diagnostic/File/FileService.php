@@ -43,8 +43,11 @@ class FileService implements ModuleDiagnosticInterface
         }
     }
 
-    public function diagnosticModule($type = 'web')
+    public function diagnosticModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $this->errors = [***REMOVED***;
 
         $edge = $this->getFileEdge()->getFileModule($type);

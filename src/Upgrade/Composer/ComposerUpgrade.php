@@ -89,8 +89,11 @@ class ComposerUpgrade implements ModuleUpgradeInterface
         $this->upgrades[***REMOVED*** = static::$fileCreated;
     }
 
-    public function upgradeModule($type = 'web')
+    public function upgradeModule($type = null)
     {
+        if (empty($type)) {
+            $type = $this->gearConfig->getCurrentType();
+        }
         $this->upgrades = [***REMOVED***;
 
         $composer = $this->getComposerEdge()->getComposerModule($type);
