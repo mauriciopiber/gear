@@ -1,24 +1,26 @@
 <?php
 namespace Gear\Diagnostic\Ant;
 
-use Gear\Service\AbstractJsonService;
+//use Gear\Service\AbstractJsonService;
 use Gear\Project\ProjectLocationTrait;
-use Gear\Edge\AntEdge\AntEdgeTrait;
+use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Diagnostic\ProjectDiagnosticInterface;
 use SimpleXmlElement;
-use Gear\Edge\AntEdge\Exception\MissingTarget;
-use Gear\Edge\AntEdge\Exception\MissingDefault;
-use Gear\Edge\AntEdge\Exception\MissingImport;
-use Gear\Edge\AntEdge\Exception\MissingFiles;
+use Gear\Edge\Ant\Exception\MissingTarget;
+use Gear\Edge\Ant\Exception\MissingDefault;
+use Gear\Edge\Ant\Exception\MissingImport;
+use Gear\Edge\Ant\Exception\MissingFiles;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
 use Exception;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Module\ModuleAwareTrait;
 
 /**
  * Executar as verificações/diagnósticos para módulos e projetos no arquivo build.xml.
  */
-class AntService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class AntService implements ModuleDiagnosticInterface
 {
     public $errors;
 
@@ -42,23 +44,16 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
     use GearConfigTrait;
 
-    public function __construct($stringService, $module = null, GearConfig $gearConfig)
+    use StringServiceTrait;
+
+    use ModuleAwareTrait;
+
+    public function __construct($stringService, GearConfig $gearConfig, $module = null)
     {
         $this->errors = [***REMOVED***;
         $this->stringService = $stringService;
         $this->module = $module;
         $this->gearConfig = $gearConfig;
-    }
-
-    public function diagnosticProject($type = 'web')
-    {
-        $edge = $this->getAntEdge()->getAntProject($type);
-
-        $this->diagnosticEdge($edge);
-
-        $build = $this->getProject();
-
-        return $this->diagnostic($build, $edge, __FUNCTION__);
     }
 
     /**
@@ -179,7 +174,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
         return $builds;
     }
 
-    public function diagnostic($build, $edge, $function = null)
+    public function diagnostic($build, $edge)
     {
         if (!is_file($build.'/build.xml')) {
             $this->errors[***REMOVED*** = sprintf(self::MISSING_FILE, 'build.xml');
@@ -187,6 +182,7 @@ class AntService extends AbstractJsonService implements ModuleDiagnosticInterfac
 
         if (isset($edge['files'***REMOVED***) && !empty($edge['files'***REMOVED***)) {
             foreach ($edge['files'***REMOVED*** as $expectedFile => $targets) {
+                $targets = null;
                 if (strpos($expectedFile, 'ant-') === false) {
                     continue;
                 }

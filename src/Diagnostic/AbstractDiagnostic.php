@@ -1,9 +1,13 @@
 <?php
 namespace Gear\Diagnostic;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Diagnostic\Ant\AntServiceTrait;
+use Gear\Diagnostic\Dir\DirServiceTrait;
+use Gear\Diagnostic\File\FileServiceTrait;
+use Gear\Diagnostic\Npm\NpmServiceTrait;
+use Gear\Diagnostic\Composer\ComposerServiceTrait;
 
-abstract class AbstractDiagnostic extends AbstractJsonService
+abstract class AbstractDiagnostic
 {
     const NO_FOUND = 'Não encontrado %s';
 
@@ -12,15 +16,15 @@ abstract class AbstractDiagnostic extends AbstractJsonService
      */
     public $errors = [***REMOVED***;
 
-    use \Gear\Diagnostic\Ant\AntServiceTrait;
+    use AntServiceTrait;
 
-    use \Gear\Diagnostic\Dir\DirServiceTrait;
+    use DirServiceTrait;
 
-    use \Gear\Diagnostic\File\FileServiceTrait;
+    use FileServiceTrait;
 
-    use \Gear\Diagnostic\NpmServiceTrait;
+    use NpmServiceTrait;
 
-    use \Gear\Diagnostic\ComposerServiceTrait;
+    use ComposerServiceTrait;
 
 
     public function checkJust($just)

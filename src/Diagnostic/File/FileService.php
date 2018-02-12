@@ -1,15 +1,13 @@
 <?php
 namespace Gear\Diagnostic\File;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
-use Gear\Diagnostic\ProjectDiagnosticInterface;
-use Gear\Edge\FileEdgeTrait;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Edge\File\FileEdgeTrait;
+use Gear\Module\ModuleAwareTrait;
 
-class FileService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class FileService implements ModuleDiagnosticInterface
 {
-    use ProjectLocationTrait;
+    use ModuleAwareTrait;
 
     use FileEdgeTrait;
 
@@ -18,19 +16,6 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     public function __construct($module = null)
     {
         $this->module = $module;
-    }
-
-    public function diagnosticProject($type = 'web')
-    {
-        $this->errors = [***REMOVED***;
-
-        $edge = $this->getFileEdge()->getFileProject($type);
-
-        $this->diagnosticEdge($edge);
-
-        $baseDir = $this->getProject();
-
-        return $this->diagnostic($baseDir, $edge);
     }
 
     public function diagnostic($baseDir, $edge)
@@ -47,7 +32,7 @@ class FileService extends AbstractJsonService implements ModuleDiagnosticInterfa
     public function diagnosticEdge($edge)
     {
         if (!isset($edge['files'***REMOVED***) || empty($edge['files'***REMOVED***)) {
-            throw new \Gear\Edge\FileEdge\Exception\MissingFiles();
+            throw new \Gear\Edge\File\Exception\MissingFiles();
         }
     }
 

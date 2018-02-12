@@ -2,6 +2,26 @@
 namespace Gear\Module\Diagnostic;
 
 use Gear\Diagnostic\AbstractDiagnostic;
+use Gear\Diagnostic\Ant\{
+    AntService,
+    AntServiceTrait,
+};
+use Gear\Diagnostic\Composer\{
+    ComposerService,
+    ComposerServiceTrait,
+};
+use Gear\Diagnostic\File\{
+    FileService,
+    FileServiceTrait,
+};
+use Gear\Diagnostic\Dir\{
+    DirService,
+    DirServiceTrait,
+};
+use Gear\Diagnostic\Npm\{
+    NpmService,
+    NpmServiceTrait,
+};
 
 /**
  * Classe responsável por fazer o diagnóstico dos módulos para ter certeza que possui todos componentes
@@ -9,16 +29,38 @@ use Gear\Diagnostic\AbstractDiagnostic;
  */
 class DiagnosticService extends AbstractDiagnostic
 {
+    use AntServiceTrait;
+
+    use ComposerServiceTrait;
+
+    use FileServiceTrait;
+
+    use DirServiceTrait;
+
+    use NpmServiceTrait;
+
     /**
      * Construtor do diagnóstico
      *
      * @param Zend\Console $console
      * @param Gear\Module\BasicModuleStructure $module
      */
-    public function __construct($console, $module)
-    {
+    public function __construct(
+        $console,
+        $module,
+        AntService $antService,
+        ComposerService $composerService,
+        FileService $fileService,
+        DirService $dirService,
+        NpmService $npmService
+    ) {
         $this->console = $console;
         $this->module = $module;
+        $this->antService = $antService;
+        $this->composerService = $composerService;
+        $this->fileService = $fileService;
+        $this->dirService = $dirService;
+        $this->npmService = $npmService;
     }
 
     public function diagnostic($type = 'web', $just = null)

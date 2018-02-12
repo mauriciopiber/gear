@@ -1,16 +1,15 @@
 <?php
 namespace Gear\Diagnostic\Dir;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
-use Gear\Diagnostic\ProjectDiagnosticInterface;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Module\ModuleAwareTrait;
+use Gear\Edge\Dir\DirEdgeTrait;
 
-class DirService extends AbstractJsonService implements ModuleDiagnosticInterface, ProjectDiagnosticInterface
+class DirService implements ModuleDiagnosticInterface
 {
-    use \Gear\Edge\DirEdgeTrait;
+    use ModuleAwaretrait;
 
-    use ProjectLocationTrait;
+    use DirEdgeTrait;
 
     static public $missingIgnore = 'Diretório - Deve adicionar arquivo .gitignore para pasta %s';
 
@@ -82,18 +81,6 @@ class DirService extends AbstractJsonService implements ModuleDiagnosticInterfac
         }
 
         return $this->errors;
-    }
-
-    public function diagnosticProject($type = 'web')
-    {
-        $this->errors = [***REMOVED***;
-
-        $edge = $this->getDirEdge()->getDirProject($type);
-
-        $this->diagnosticEdge($edge);
-
-
-        return $this->diagnostic($this->getProject(), $edge);
     }
 
     public function isDirIgnorable($baseDir, $folder)

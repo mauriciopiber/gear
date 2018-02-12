@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Ant\AntService;
 use GearBase\Util\String\StringService;
+use Gear\Edge\Ant\AntEdge;
 
 /**
  * @group Diagnostic
@@ -22,25 +23,19 @@ class AntServiceTest extends TestCase
         //$this->rootProject = vfsStream::setup('project');
         $this->file = vfsStream::url('module/build.xml');
         vfsStream::newDirectory('test')->at($this->root);
+
         $this->assertFileExists(vfsStream::url('module/test'));
 
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
         $this->stringService = new StringService();
 
-
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
 
-        $this->ant = new AntService($this->stringService, $this->module->reveal(), $this->gearConfig->reveal());
-    }
-
-
-    /**
-     * @group ProjectDiagnostic
-     */
-    public function testProjectTrait()
-    {
-        $this->ant->setProject('testing');
-        $this->assertEquals('testing', $this->ant->getProject());
+        $this->ant = new AntService(
+            $this->stringService,
+            $this->gearConfig->reveal(),
+            $this->module->reveal()
+        );
     }
 
     /**
@@ -48,12 +43,12 @@ class AntServiceTest extends TestCase
      */
     public function testThrowMissingDefaultModule()
     {
-        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $edge = $this->prophesize(AntEdge::class);
         $edge->getAntModule('web')->willReturn([
             'target' => ['piber' => null***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingDefault');
+        $this->setExpectedException('Gear\Edge\Ant\Exception\MissingDefault');
 
         $this->ant->setAntEdge($edge->reveal());
 
@@ -65,50 +60,16 @@ class AntServiceTest extends TestCase
      */
     public function testThrowMissingTargetModule()
     {
-        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $edge = $this->prophesize(AntEdge::class);
         $edge->getAntModule('web')->willReturn([
             'default' => 'piber'
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingTarget');
+        $this->setExpectedException('Gear\Edge\Ant\Exception\MissingTarget');
 
         $this->ant->setAntEdge($edge->reveal());
 
         $this->ant->diagnosticModule('web');
-    }
-
-    /**
-     * @group diag1
-     */
-    public function testThrowMissingDefaultProject()
-    {
-        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
-        $edge->getAntProject('web')->willReturn([
-            'target' => ['piber' => null***REMOVED***
-        ***REMOVED***)->shouldBeCalled();
-
-        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingDefault');
-
-        $this->ant->setAntEdge($edge->reveal());
-
-        $this->ant->diagnosticProject('web');
-    }
-
-    /**
-     * @group diag1
-     */
-    public function testThrowMissingTargetProject()
-    {
-        $edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
-        $edge->getAntProject('web')->willReturn([
-            'default' => 'piber'
-        ***REMOVED***)->shouldBeCalled();
-
-        $this->setExpectedException('Gear\Edge\AntEdge\Exception\MissingTarget');
-
-        $this->ant->setAntEdge($edge->reveal());
-
-        $this->ant->diagnosticProject('web');
     }
 
     /**
@@ -161,7 +122,7 @@ EOS;
         file_put_contents(vfsStream::url('module/build.xml'), $build);
         file_put_contents(vfsStream::url('module/test/ant-namespace.xml'), $namespace);
 
-        $this->yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $this->yaml = $this->prophesize(AntEdge::class);
         $this->yaml->getAntModule('web')->willReturn([
             'import' => [
                 'ant-namespace'
@@ -181,10 +142,10 @@ EOS;
 
         $this->ant->setAntEdge($this->yaml->reveal());
 
-        $this->assertEquals([
-            sprintf(AntService::$missingTargetDepend, 'phpmd-ci', 'set-vendor', 'test/ant-namespace.xml'),
-        ***REMOVED***, $this->ant->diagnosticModule('web'));
-
+        $this->assertEquals(
+            [sprintf(AntService::$missingTargetDepend, 'phpmd-ci', 'set-vendor', 'test/ant-namespace.xml')***REMOVED***,
+            $this->ant->diagnosticModule('web')
+        );
     }
 
     /**
@@ -192,7 +153,7 @@ EOS;
      */
     public function testMissingAllFiles()
     {
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml = $this->prophesize(AntEdge::class);
         $yaml->getAntModule('web')->willReturn([
             'import' => [***REMOVED***,
             'target' => [
@@ -208,13 +169,15 @@ EOS;
 
         $this->ant->setAntEdge($yaml->reveal());
 
-        $this->assertEquals([
-            sprintf(AntService::MISSING_FILE, 'build.xml'),
-            sprintf(AntService::MISSING_FILE, 'test/ant-namespace.xml'),
-            sprintf(AntService::MISSING_FILE, 'test/ant-ci.xml'),
-            sprintf(AntService::MISSING_FILE, 'test/ant-dev.xml'),
-
-        ***REMOVED***, $this->ant->diagnosticModule('web'));
+        $this->assertEquals(
+            [
+                sprintf(AntService::MISSING_FILE, 'build.xml'),
+                sprintf(AntService::MISSING_FILE, 'test/ant-namespace.xml'),
+                sprintf(AntService::MISSING_FILE, 'test/ant-ci.xml'),
+                sprintf(AntService::MISSING_FILE, 'test/ant-dev.xml'),
+            ***REMOVED***,
+            $this->ant->diagnosticModule('web')
+        );
     }
 
     /**
@@ -264,7 +227,7 @@ EOS;
 
         $this->gearConfig->getCurrentName()->willReturn('Project')->shouldBeCalled();
 
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml = $this->prophesize(AntEdge::class);
         $yaml->getAntModule('web')->willReturn([
             'target' => [
                 'namespace' => 'unit-namespace'
@@ -296,7 +259,7 @@ EOS;
 
         $this->gearConfig->getCurrentName()->willReturn('Project')->shouldBeCalled();
 
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml = $this->prophesize(AntEdge::class);
         $yaml->getAntModule('web')->willReturn([
             'import' => [***REMOVED***,
             'target' => [
@@ -353,7 +316,7 @@ EOS;
 
 
 
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
+        $yaml = $this->prophesize(AntEdge::class);
         $yaml->getAntModule('web')->willReturn($this->getCompleteAntFile())->shouldBeCalled();
 
         $this->ant->setAntEdge($yaml->reveal());
@@ -408,39 +371,6 @@ EOS;
         ***REMOVED***;
     }
 
-    /**
-     * @group fff1
-     */
-    public function testMissingTargetsProject()
-    {
-        $this->root = vfsStream::setup('project');
-
-        $this->file = vfsStream::url('project/build.xml');
-
-        $fileConfig = $this->createConfig('gearing');
-
-
-        file_put_contents($this->file, $fileConfig);
-
-        vfsStream::newDirectory('test')->at($this->root);
-
-        $this->assertFileExists(vfsStream::url('project/test'));
-
-
-        file_put_contents(vfsStream::url('project/test/ant-ci.xml'), $this->createConfig('gearing-ci'));
-
-
-        $this->ant->setProject(vfsStream::url('project'));
-
-        $yaml = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
-        $yaml->getAntProject('web')->willReturn($this->getCompleteAntFile())->shouldBeCalled();
-
-        $this->ant->setAntEdge($yaml->reveal());
-
-        $this->gearConfig->getCurrentName()->willReturn('Gearing')->shouldBeCalled();
-
-        $this->assertEquals($this->getCompleteExpected(), $this->ant->diagnosticProject('web'));
-    }
 
     public function getNamesData()
     {
