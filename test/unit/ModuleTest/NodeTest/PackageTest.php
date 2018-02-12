@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
 use GearTest\UtilTestTrait;
 use Gear\Edge\Npm\NpmEdge;
+use GearBase\Config\GearConfig;
 
 /**
  * @group Module
@@ -52,13 +53,14 @@ class PackageTest extends TestCase
         $this->edge = $this->prophesize(NpmEdge::class);
         $this->edge->getNpmModule('web')->willReturn($files)->shouldBeCalled();
 
-
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->upgrade = new \Gear\Upgrade\Npm\NpmUpgrade(
-            $this->console->reveal(),
+            $this->module->reveal(),
+            $this->gearConfig->reveal(),
+            $this->edge->reveal(),
             $this->consolePrompt->reveal(),
-            $this->config,
-            $this->module->reveal()
+            $this->string
         );
 
         $this->upgrade->setNpmEdge($this->edge->reveal());
