@@ -1,5 +1,5 @@
-<target name="phpcpd-namespace" description="PHPCPD" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcpd">
+<target name="phpcpd-namespace" description="PHPCPD">
+    <exec executable="vendor/bin/phpcpd">
         <arg path="${basedir}/src/${namespace}"/>
     </exec>
 </target>

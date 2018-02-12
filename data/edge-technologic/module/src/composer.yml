@@ -17,3 +17,4 @@ require-dev:
   mauriciopiber/gear-deploy: "~0.2 || ~1.0"
   mauriciopiber/gear-jenkins: "~0.2 || ~1.0"
   mauriciopiber/gear-version: "~0.2 || ~1.0"
+  theseer/phpdox: "^0.11.0"

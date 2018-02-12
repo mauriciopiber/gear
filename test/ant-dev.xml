@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear-dev" default="" basedir=".">
-    <target name="phpcs" description="Code Sniffer" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs">
+    <target name="phpcs" description="Code Sniffer">
+        <exec executable="vendor/bin/phpcs">
             <arg value="--standard=test/phpcs.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="phpmd" description="MessDetector" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
+    <target name="phpmd" description="MessDetector">
+        <exec executable="vendor/bin/phpmd">
             <arg path="${basedir}/src"/>
             <arg value="text"/>
             <arg value="${basedir}/test/phpmd.xml"/>
         </exec>
     </target>
-    <target name="phpcpd" description="PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
+    <target name="phpcpd" description="PHPCPD">
+        <exec executable="vendor/bin/phpcpd">
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="phpunit" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="vendor/bin/phpunit">
             <arg value="--configuration=${basedir}/test/phpunit.xml"/>
         </exec>
     </target>
-    <target name="phpunit-coverage" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit">
         <exec executable="/usr/bin/php">
             <arg value="-d"/>
             <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
-            <arg value="${vendor}/bin/phpunit"/>
+            <arg value="vendor/bin/phpunit"/>
             <arg value="-c"/>
             <arg value="test/phpunit-coverage.xml"/>
         </exec>

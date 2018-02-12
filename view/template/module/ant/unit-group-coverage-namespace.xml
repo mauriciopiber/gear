@@ -1,5 +1,5 @@
-<target name="unit-group-coverage-namespace" depends="set-vendor, build-helper">
-    <exec executable="${vendor}/bin/codecept">
+<target name="unit-group-coverage-namespace" depends="build-helper">
+    <exec executable="vendor/bin/codecept">
         <arg value="run"/>
         <arg value="unit"/>
         <arg value="test/unit/${testNamespace}"/>                

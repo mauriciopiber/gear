@@ -5,6 +5,6 @@
     <import file="./test/ant-ci.xml"/>
     <import file="./test/ant-measure.xml"/>
     <target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, phpunit"/>
-    <target name="ci" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci"/>
-    <target name="measure" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
+    <target name="ci" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci"/>
+    <target name="measure" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
 </project>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="gear-ci" default="" basedir=".">
-    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcs" output="/dev/null">
+    <target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
+        <exec executable="vendor/bin/phpcs" output="/dev/null">
             <arg value="--report=checkstyle"/>
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
             <arg value="--standard=test/phpcs.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="phpmd-ci" description="PHPMD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpmd">
+    <target name="phpmd-ci" description="PHPMD">
+        <exec executable="vendor/bin/phpmd">
             <arg path="${basedir}/src"/>
             <arg value="xml"/>
             <arg value="${basedir}/test/phpmd.xml"/>
@@ -17,23 +17,23 @@
             <arg value="${basedir}/build/logs/pmd.xml"/>
         </exec>
     </target>
-    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpcpd">
+    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
+        <exec executable="vendor/bin/phpcpd">
             <arg value="--log-pmd"/>
             <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>
-    <target name="phpunit-ci" description="Run unit tests with PHPUnit" depends="set-vendor">
-        <exec executable="${vendor}/bin/phpunit">
+    <target name="phpunit-ci" description="Run unit tests with PHPUnit">
+        <exec executable="vendor/bin/phpunit">
             <arg value="--configuration=${basedir}/test/phpunit-ci.xml"/>
         </exec>
     </target>
-    <target name="phpunit-coverage-ci" description="Run unit tests with PHPUnit" depends="set-vendor">
+    <target name="phpunit-coverage-ci" description="Run unit tests with PHPUnit">
         <exec executable="/usr/bin/php">
             <arg value="-d"/>
             <arg value="zend_extension=/usr/lib/php/20170718/xdebug.so"/>
-            <arg value="${vendor}/bin/phpunit"/>
+            <arg value="vendor/bin/phpunit"/>
             <arg value="-c"/>
             <arg value="test/phpunit-coverage-ci.xml"/>
         </exec>

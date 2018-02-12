@@ -1,1 +1,1 @@
-<target name="test" depends="set-vendor, phpcs-test, phpcpd-test, phpmd-test"/>
+<target name="test" depends="phpcs-test, phpcpd-test, phpmd-test"/>

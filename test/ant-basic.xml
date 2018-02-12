@@ -18,33 +18,8 @@
         <mkdir dir="${basedir}/build/features"/>
         <mkdir dir="${basedir}/build/docs"/>
     </target>
-    <target name="set-vendor" depends="is-as-module, is-as-vendor, is-as-project"/>
-    <target name="is-as-module" depends="as-module" if="dir.exists">
-        <property name="vendor" value="${basedir}/../../vendor"/>
-    </target>
-    <target name="is-as-vendor" depends="as-vendor" if="dir.exists">
-        <property name="vendor" value="${basedir}/../../../vendor"/>
-    </target>
-    <target name="is-as-project" depends="as-project" if="dir.exists">
-        <property name="vendor" value="${basedir}/vendor"/>
-    </target>
-    <target name="as-module">
-        <condition property="dir.exists">
-            <available file="${basedir}/../../vendor" type="dir"/>
-        </condition>
-    </target>
-    <target name="as-vendor">
-        <condition property="dir.exists">
-            <available file="${basedir}/../../../vendor" type="dir"/>
-        </condition>
-    </target>
-    <target name="as-project">
-        <condition property="dir.exists">
-            <available file="${basedir}/vendor" type="dir"/>
-        </condition>
-    </target>
-    <target name="build-helper" depends="set-vendor">
-        <exec executable="${vendor}/bin/codecept">
+    <target name="build-helper">
+        <exec executable="vendor/bin/codecept">
             <arg value="build"/>
         </exec>
     </target>

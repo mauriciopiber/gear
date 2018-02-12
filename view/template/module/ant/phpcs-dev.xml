@@ -1,5 +1,5 @@
-<target name="phpcs-dev" description="Code Sniffer" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcs" failonerror="true">
+<target name="phpcs-dev" description="Code Sniffer">
+    <exec executable="vendor/bin/phpcs" failonerror="true">
         <arg value="--standard=test/phpcs.xml"/>
         <arg path="${basedir}/src"/>
     </exec>

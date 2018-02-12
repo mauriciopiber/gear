@@ -259,6 +259,19 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
 
 
         foreach ($edge['require'***REMOVED*** as $require => $version) {
+
+
+             if (
+                $require
+                === sprintf(
+                    'mauriciopiber/%s',
+                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                )
+            ) {
+                continue;
+            }
+
+
             if (!array_key_exists($require, $file['require'***REMOVED***)) {
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(
@@ -300,6 +313,18 @@ class ComposerUpgrade extends AbstractJsonService implements ModuleUpgradeInterf
         }
 
         foreach ($edge['require-dev'***REMOVED*** as $require => $version) {
+
+             if (
+                $require
+                === sprintf(
+                    'mauriciopiber/%s',
+                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                )
+            ) {
+                continue;
+            }
+
+
             if (!array_key_exists($require, $file['require-dev'***REMOVED***)) {
                 $confirm = $this->getConsolePrompt()->show(
                     sprintf(

@@ -38,6 +38,7 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
     public function __construct($module = null)
     {
         $this->module = $module;
+
     }
 
     public function diagnosticProject($type = 'web')
@@ -83,6 +84,17 @@ class ComposerService implements ServiceLocatorAwareInterface, ModuleDiagnosticI
         $errors = [***REMOVED***;
 
         foreach ($edge as $package => $version) {
+
+            if (
+                $package
+                === sprintf(
+                    'mauriciopiber/%s',
+                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                )
+            ) {
+                continue;
+            }
+
             if (!array_key_exists($package, $composer)) {
                 $errors[***REMOVED*** = sprintf($noFoundTemplate, $package, $version);
                 continue;

@@ -1,5 +1,5 @@
-<target name="phpcpd-ci" description="Find duplicate code using PHPCPD" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcpd">
+<target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
+    <exec executable="vendor/bin/phpcpd">
         <arg value="--log-pmd"/>
         <arg value="${basedir}/build/logs/pmd-cpd.xml"/>
         <arg path="${basedir}/src"/>

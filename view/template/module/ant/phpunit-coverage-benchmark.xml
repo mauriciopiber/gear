@@ -1,5 +1,5 @@
-<target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpunit">
+<target name="phpunit-coverage-benchmark" description="Run unit tests with PHPUnit">
+    <exec executable="vendor/bin/phpunit">
         <arg value="--configuration=${basedir}/test/phpunit-coverage-benchmark.xml"/>
     </exec>
 </target>
