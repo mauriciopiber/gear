@@ -8,8 +8,8 @@ import:
   
 target:
   dev: 'parallel-lint, phpcs, phpmd, phpcpd, phpunit'
-  ci: 'prepare,  parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci'
-  measure: 'prepare,  parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox'
+  ci: 'prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci'
+  measure: 'prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox'
 files:  
   ant-basic:
     clean: ''
