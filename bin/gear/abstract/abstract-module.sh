@@ -169,9 +169,9 @@ function Gear_Module_Execute_Create
     Gear_Module_Run_DeleteModule "$module"
     
     Gear_Module_Run_CreateModule "$module" "$type"
+    
     Gear_Module_Run_InstallModule "$module"
-
-
+    
     types=("cli" "web" "api" "src-zf2")
     if [[ " ${types[@***REMOVED***} " =~ " ${type} " ***REMOVED******REMOVED***; then
         Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"

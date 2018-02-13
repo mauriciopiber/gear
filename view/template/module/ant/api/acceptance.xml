@@ -1,1 +1,0 @@
-<target name="acceptance" depends="phpcs, phpmd, phpcpd, unit-group"/>
