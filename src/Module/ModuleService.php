@@ -406,6 +406,7 @@ class ModuleService implements ModuleProjectConnectorInterface
             ModuleTypesInterface::WEB,
             ModuleTypesInterface::CLI,
             ModuleTypesInterface::API,
+            ModuleTypesInterface::SRC_ZF2,
         ***REMOVED***)) {
             $this->registerJson();
         }
@@ -500,7 +501,18 @@ class ModuleService implements ModuleProjectConnectorInterface
     public function createGitIgnore($type)
     {
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/git-ignore/gitignore-%s.phtml', $type));
+
+        switch ($type) {
+            case 'web':
+                $template = 'web';
+                break;
+            default:
+                $template = 'common';
+
+        }
+
+
+        $file->setTemplate(sprintf('template/module/git-ignore/gitignore-%s.phtml', $template));
         $file->setOptions([***REMOVED***);
         $file->setFileName('.gitignore');
         $file->setLocation($this->getModule()->getMainFolder());
@@ -557,8 +569,19 @@ class ModuleService implements ModuleProjectConnectorInterface
      */
     public function createJenkinsFile($type = 'web')
     {
+        switch($type) {
+            case 'web':
+                $template = 'web';
+            case 'cli':
+            case 'api':
+            case 'src':
+            case 'src-zf2':
+            case 'src-zf3':
+                $template = 'cli';
+        }
+
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $template));
         $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
         $file->setLocation($this->getModule()->getMainFolder());
@@ -985,6 +1008,10 @@ class ModuleService implements ModuleProjectConnectorInterface
         $module = $this->getModule()->getModuleName();
 
         $this->getSchemaService()->create($module);
+
+        if (in_array($this->type, ['src-zf2'***REMOVED***)) {
+            return true;
+        }
 
         switch ($this->type) {
             case 'web':

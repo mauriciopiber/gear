@@ -6656,16 +6656,16 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.2.78",
+            "version": "0.2.79",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "303a37e468e4e42501719be57515b95822c20e85"
+                "reference": "69e237f751edbef7d5e81e25e5bc0ae739f44bf3"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.78-4e5608.tar",
-                "reference": "303a37e468e4e42501719be57515b95822c20e85",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-deploy-0.2.79-1c53d8.tar",
+                "reference": "69e237f751edbef7d5e81e25e5bc0ae739f44bf3",
                 "shasum": null
             },
             "require": {
@@ -6688,7 +6688,6 @@
                 "phpmd/phpmd": "^2.3.2",
                 "phpunit/phpunit": "^5.0.0",
                 "sebastian/phpcpd": "^2.0.2",
-                "sebastian/phpdcd": "^1.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
             },
             "bin": [
@@ -6715,20 +6714,20 @@
                     "GearDeployTest": "test/unit"
                 }
             },
-            "time": "2018-02-03T05:38:03+00:00"
+            "time": "2018-02-13T10:11:37+00:00"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.2.49",
+            "version": "0.2.50",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "42d266ba6cee77e551e5c02eb4707cbcb6df64a0"
+                "reference": "6cd37b881e5889937cf25a73c19565c82e4b3813"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.49-fc3bda.tar",
-                "reference": "42d266ba6cee77e551e5c02eb4707cbcb6df64a0",
+                "url": "https://mirror.pibernetwork.com/dist/mauriciopiber-gear-jenkins-0.2.50-2f13a7.tar",
+                "reference": "6cd37b881e5889937cf25a73c19565c82e4b3813",
                 "shasum": null
             },
             "require": {
@@ -6736,7 +6735,6 @@
                 "zendframework/zendframework": "^2.5.1"
             },
             "require-dev": {
-                "codeception/codeception": "^2.1.4",
                 "jakub-onderka/php-parallel-lint": "^0.9",
                 "mauriciopiber/gear": "^0.2.0",
                 "mauriciopiber/gear-base": "^0.2.0",
@@ -6747,19 +6745,19 @@
                 "pdepend/pdepend": "^2.0.3",
                 "phploc/phploc": "^2.1.5",
                 "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "^4.8.19",
+                "phpunit/phpunit": "^5.7",
                 "sebastian/phpcpd": "^2.0.2",
                 "sebastian/phpdcd": "^1.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "GearJenkins": "src",
-                    "GearJenkinsTest": "test/unit"
+                "psr-4": {
+                    "GearJenkins\\": "src",
+                    "GearJenkinsTest\\": "test/unit"
                 }
             },
-            "time": "2017-11-03T16:24:14+00:00"
+            "time": "2018-02-13T08:30:52+00:00"
         },
         {
             "name": "mauriciopiber/gear-json",

@@ -171,7 +171,13 @@ function Gear_Module_Execute_Create
     Gear_Module_Run_CreateModule "$module" "$type"
     Gear_Module_Run_InstallModule "$module"
 
-    Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+
+    types=("cli" "web" "api" "src-zf2")
+    if [[ " ${types[@***REMOVED***} " =~ " ${type} " ***REMOVED******REMOVED***; then
+        Gear_Module_Execute_Construct "$module" "$type" "$scriptDir" "$construct" "0" "0"
+    fi
+    
+    
     
     if [ "$shouldTestLocal" == "1" ***REMOVED***; then 
         Gear_Module_Execute_Ant "$module" "$type"
@@ -179,7 +185,7 @@ function Gear_Module_Execute_Create
     
     if [ "$shouldTestCI" == "1" ***REMOVED***; then
         Gear_CI_CopyJenkinsFile "$moduleUrl" "$modulePath" "0" "$type"
-        Gear_CI_SetUp "$module" "$modulePath" "module-$type"
+        Gear_CI_SetUp "$module" "$modulePath" "$type"
     fi
    
     if [ "$shouldIntegrate" == "1" ***REMOVED***; then

@@ -1,0 +1,36 @@
+default: ci
+
+import:
+  0: 'ant-basic'
+  1: 'ant-dev'
+  2: 'ant-ci'
+  4: 'ant-measure'
+  
+target:
+  dev: 'parallel-lint, phpcs, phpmd, phpcpd, phpunit'
+  ci: 'prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci'
+  measure: 'prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox'
+files:  
+  ant-basic:
+    clean: ''
+    prepare: 'clean'
+    build-helper: ''
+    db-load: ''
+    cache-load: ''  
+  ant-ci:
+    phpcs-ci: ''
+    phpmd-ci: ''
+    phpcpd-ci: ''
+    phpunit-ci: ''
+    phpunit-coverage-ci: ''
+  ant-measure:
+    parallel-lint: ''
+    pdepend: ''
+    phploc-ci: ''
+    phpdox: ''
+  ant-dev:
+    phpcs: ''
+    phpmd: ''
+    phpcpd: ''
+    phpunit: ''
+    phpunit-coverage: ''

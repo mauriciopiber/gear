@@ -1,9 +1,0 @@
-module: ModuleWeb
-
-src:
-  0:
-    name: FirstService
-    service: factories
-    type: Service
-    namespace: StarterPack
-    
