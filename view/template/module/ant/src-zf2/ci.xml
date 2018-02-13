@@ -1,0 +1,1 @@
+<target name="ci" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci"/>

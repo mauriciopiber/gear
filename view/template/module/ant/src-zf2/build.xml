@@ -1,0 +1,2 @@
+<target name="build" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
+    

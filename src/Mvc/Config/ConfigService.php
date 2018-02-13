@@ -160,6 +160,8 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
                 break;
 
             case 'src':
+            case 'src-zf2':
+            case 'src-zf3':
                 $this->getServiceManager()->module();
                 break;
         }

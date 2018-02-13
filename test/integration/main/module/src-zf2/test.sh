@@ -3,7 +3,7 @@
 bin="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && cd ./../../../../../bin && pwd )"
 scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 
-module="Pbr\Module\SrcZf2"
+module="PbrModuleZendLegacy"
 type="src-zf2"
 migration=""
 gearfile="src-zf2.yml"

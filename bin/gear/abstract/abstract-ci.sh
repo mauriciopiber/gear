@@ -66,11 +66,9 @@ function Gear_CI_SetUp
     type=${3}
     
     
-    #@TODO REMOVE IT
-    
-    
-    #END REMOVE
-
+    if [ "$type" == "src-zf2" ***REMOVED*** || [ "$type" == "src" ***REMOVED***; then
+        type="cli"
+    fi
     cd $basePath
     
     #fake-composer gear-jenkins/ci
@@ -83,11 +81,12 @@ function Gear_CI_SetUp
     echo "repository init"
     sudo php public/index.php gear git repository init
     echo "jenkins create"
-    sudo php public/index.php gear jenkins suite create $type
+    sudo php public/index.php gear jenkins suite create "module-$type"
 }
 
 function Gear_CI_CopyJenkinsFile
 {
+	return;
 	nameUrl=${1}
 	location=${2}
     suite=${3} # 0 for module, 1 for project
