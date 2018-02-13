@@ -7,13 +7,13 @@ require:
   zendframework/zendframework: ^2.5.0
   zendframework/zend-mvc: ~2.6.0
   zf-commons/zfc-user: 1.4.3
+  mauriciopiber/gear-json: ~0.2 || ~1.0
+  mauriciopiber/gear-acl: ~0.2 || ~1.0
+  mauriciopiber/gear-admin: ^0.2.69 || ~1.0
 require-dev:
   codeception/codeception: "~2.2"
   mrclay/minify: ~2.0
   mauriciopiber/gear: ~0.2 || ~1.0
-  mauriciopiber/gear-json: ~0.2 || ~1.0
-  mauriciopiber/gear-acl: ~0.2 || ~1.0
-  mauriciopiber/gear-admin: ^0.2.69 || ~1.0
   mauriciopiber/gear-image: ~0.2 || ~1.0
   mauriciopiber/gear-deploy: ~0.2 || ~1.0
   mauriciopiber/gear-jenkins: ~0.2 || ~1.0
