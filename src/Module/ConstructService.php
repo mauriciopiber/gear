@@ -18,16 +18,16 @@ use GearJson\Db\Db;
 use GearJson\Action\Action;
 use GearJson\Controller\Controller;
 use GearJson\App\App;
-use Gear\Constructor\Db\DbServiceTrait;
+use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\App\AppServiceTrait;
-use Gear\Constructor\Src\SrcServiceTrait;
-use Gear\Constructor\Controller\ControllerServiceTrait;
-use Gear\Constructor\Action\ActionServiceTrait;
-use Gear\Constructor\Db\DbService;
+use Gear\Constructor\Src\SrcConstructorTrait;
+use Gear\Constructor\Controller\ControllerConstructorTrait;
+use Gear\Constructor\Action\ActionConstructorTrait;
+use Gear\Constructor\Db\DbConstructor;
 use Gear\Constructor\App\AppService;
-use Gear\Constructor\Src\SrcService;
-use Gear\Constructor\Controller\ControllerService;
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Src\SrcConstructor;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Action\ActionConstructor;
 use Gear\Module\Exception\GearfileNotFoundException;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\ConstructStatusObject;
@@ -50,15 +50,15 @@ class ConstructService extends AbstractJsonService
 {
     private $constructStatus;
 
-    use DbServiceTrait;
+    use DbConstructorTrait;
 
     use AppServiceTrait;
 
-    use SrcServiceTrait;
+    use SrcConstructorTrait;
 
-    use ControllerServiceTrait;
+    use ControllerConstructorTrait;
 
-    use ActionServiceTrait;
+    use ActionConstructorTrait;
 
     use DbSchemaTrait;
 
@@ -109,11 +109,11 @@ class ConstructService extends AbstractJsonService
         AppSchema $appSchema,
         ControllerSchema $controllerSchema,
         ActionSchema $actionSchema,
-        DbService $dbService,
-        SrcService $srcService,
+        DbConstructor $dbService,
+        SrcConstructor $srcService,
         AppService $appService,
-        ControllerService $controllerService,
-        ActionService $actionService
+        ControllerConstructor $controllerService,
+        ActionConstructor $actionService
     ) {
 
         $this->actionConstructor = $actionService;

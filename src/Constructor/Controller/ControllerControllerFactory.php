@@ -3,6 +3,7 @@ namespace Gear\Constructor\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Gear\Constructor\Controller\ControllerController;
 
 class ControllerControllerFactory implements FactoryInterface
 {
@@ -10,7 +11,7 @@ class ControllerControllerFactory implements FactoryInterface
     {
 
         $controllerService = $controllerManager->getServiceLocator()->get('Gear\Module\Constructor\Controller');
-        $controllerController = new \Gear\Constructor\Controller\ControllerController($controllerService);
+        $controllerController = new ControllerController($controllerService);
         return $controllerController;
     }
 }

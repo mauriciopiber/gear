@@ -49,7 +49,7 @@ use Gear\Constructor\AbstractConstructor;
 use GearJson\Service\FactoriesInterface;
 use GearJson\Controller\Type\ActionInterface;
 
-class ControllerService extends AbstractConstructor
+class ControllerConstructor extends AbstractConstructor
 {
     static public $defaultService = FactoriesInterface::NAME;
 
@@ -83,10 +83,10 @@ class ControllerService extends AbstractConstructor
      * Constructor
      *
      * @param StringService         $stringService        String Service
-     * @param ControllerService     $controllerService    Controller Service
+     * @param ControllerConstructor     $controllerService    Controller Service
      * @param TableService          $tableService         Table Service
      * @param BasicModuleStructure  $basicModuleStructure Basic Module Structure
-     * @param ControllerService     $controllerService    Controller Service
+     * @param ControllerConstructor     $controllerService    Controller Service
      * @param ConsoleController     $consoleController    Console Controller
      * @param ConsoleControllerTest $controllerTest       Console Controller Test
      * @param ConfigService         $configService        Config Service
@@ -94,7 +94,7 @@ class ControllerService extends AbstractConstructor
      * @param LanguageService       $languageService      Language Service
      * @param ControllerManager     $controllerManager    Controller Manager
      *
-     * @return ControllerService
+     * @return ControllerConstructor
      */
     public function __construct(
         StringService $stringService,

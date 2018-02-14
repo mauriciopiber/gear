@@ -53,7 +53,7 @@ use Gear\Column\ColumnService;
 /**
  * @group m1
  */
-class ActionService extends AbstractConstructor
+class ActionConstructor extends AbstractConstructor
 {
     use StringServiceTrait;
 
@@ -97,7 +97,7 @@ class ActionService extends AbstractConstructor
      * Constructor
      *
      * @param Feature              $feature              Feature
-     * @param ActionService        $actionService        Action Service
+     * @param ActionConstructor    $actionService        Action Service
      * @param ConfigService        $configService        Config Service
      * @param RouterManager        $routerManager        Router Manager
      * @param ConsoleRouterManager $consoleRouterManager Console Router Manager
@@ -112,7 +112,7 @@ class ActionService extends AbstractConstructor
      * @param BasicModuleStructure $basicModuleStructure Basic Module Structure
      * @param StringService        $stringService        String Service
      *
-     * @return ActionService
+     * @return ActionConstructor
      */
     public function __construct(
         ActionSchema $actionService,

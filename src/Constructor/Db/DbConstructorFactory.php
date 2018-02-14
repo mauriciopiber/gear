@@ -3,7 +3,7 @@ namespace Gear\Constructor\Db;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Constructor\Db\DbService;
+use Gear\Constructor\Db\DbConstructor;
 use Gear\Column\ColumnService;
 use Gear\Table\TableService;
 use GearJson\Action\ActionSchema;
@@ -33,18 +33,18 @@ use Gear\Module\BasicModuleStructure;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class DbServiceFactory implements FactoryInterface
+class DbConstructorFactory implements FactoryInterface
 {
     /**
-     * Create DbService
+     * Create DbConstructor
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return DbService
+     * @return DbConstructor
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new DbService(
+        $factory = new DbConstructor(
             $serviceLocator->get(ColumnService::class),
             $serviceLocator->get(TableService::class),
             $serviceLocator->get('GearJson\Action'),

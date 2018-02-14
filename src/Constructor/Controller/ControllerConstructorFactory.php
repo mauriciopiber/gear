@@ -28,7 +28,7 @@ use Gear\Column\ColumnService;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ControllerServiceFactory implements FactoryInterface
+class ControllerConstructorFactory implements FactoryInterface
 {
     /**
      * Create ControllerService
@@ -39,7 +39,7 @@ class ControllerServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new ControllerService(
+        $factory = new ControllerFactory(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('GearJson\Controller'),
             $serviceLocator->get(TableService::class),

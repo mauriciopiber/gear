@@ -22,7 +22,7 @@ class EntityServiceTest extends TestCase
         $this->scriptService = $this->prophesize('Gear\Script\ScriptService');
         $this->entityTestService = $this->prophesize('Gear\Mvc\Entity\EntityTestService');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        //$this->srcService = $this->prophesize('Gear\Constructor\Src\SrcService');
+        //$this->srcService = $this->prophesize('Gear\Constructor\Src\SrcConstructor');
         $this->srcService = $this->prophesize('GearJson\Src\SrcSchema');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');

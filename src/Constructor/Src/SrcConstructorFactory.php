@@ -6,11 +6,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 #use Gear\Module\ConstructorServiceFactory;
 use Gear\Constructor\Src;
 
-class SrcServiceFactory implements FactoryInterface
+class SrcConstructorFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new SrcService(
+        return new SrcConstructor(
             $serviceLocator->get('Gear\Table\TableService'),
             $serviceLocator->get('Gear\Column\ColumnService'),
             $serviceLocator->get('moduleStructure'),

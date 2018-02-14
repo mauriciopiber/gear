@@ -3,14 +3,14 @@ namespace Gear\Constructor\Action;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Constructor\Action\ActionServiceTrait;
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Action\ActionConstructorTrait;
+use Gear\Constructor\Action\ActionConstructor;
 
 class ActionController extends AbstractConsoleController
 {
-    use ActionServiceTrait;
+    use ActionConstructorTrait;
 
-    public function __construct(ActionService $actionService)
+    public function __construct(ActionConstructor $actionService)
     {
         $this->actionService = $actionService;
     }

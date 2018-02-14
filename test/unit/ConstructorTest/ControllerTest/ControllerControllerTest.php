@@ -7,6 +7,7 @@ use Zend\Mvc\Router\Console\RouteMatch;
 use Zend\Mvc\MvcEvent;
 use Gear\Constructor\Controller\ControllerController;
 use Zend\Stdlib\Parameters;
+use Gear\Constructor\Controller\ControllerConstructor;
 
 /**
  * @group Constructor
@@ -17,7 +18,7 @@ class ControllerControllerTest extends TestCase
     {
         parent::setUp();
 
-        $controllerService = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerService = $this->prophesize(ControllerConstructor::class);
 
 
         $this->controller = new ControllerController($controllerService->reveal());
@@ -38,7 +39,7 @@ class ControllerControllerTest extends TestCase
 
     public function testCreateConsoleControllerWeb()
     {
-        $controllerService = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerService = $this->prophesize(ControllerConstructor::class);
         $controllerService->createController([
             'name' => 'name',
             'service' => 'service',

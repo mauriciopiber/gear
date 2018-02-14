@@ -1,14 +1,14 @@
 <?php
 namespace Gear\Constructor\Action;
 
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Action\ActionConstructor;
 
-trait ActionServiceTrait
+trait ActionConstructorTrait
 {
 
     protected $actionConstructor;
 
-    public function setActionConstructor(ActionService $actionConstructor)
+    public function setActionConstructor(ActionConstructor $actionConstructor)
     {
         $this->actionConstructor = $actionConstructor;
         return $this;

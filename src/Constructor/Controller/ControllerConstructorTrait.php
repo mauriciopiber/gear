@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Constructor\Controller;
 
-use Gear\Constructor\Controller\ControllerService;
+use Gear\Constructor\Controller\ControllerConstructor;
 
-trait ControllerServiceTrait
+trait ControllerConstructorTrait
 {
     protected $controllerConstructor;
 
-    public function setControllerConstructor(ControllerService $controller)
+    public function setControllerConstructor(ControllerConstructor $controller)
     {
         $this->controllerConstructor = $controller;
         return $this;
