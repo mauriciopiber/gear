@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Gear\Constructor\Db\DbService;
+use Gear\Constructor\Db\DbConstructor;
 
-trait DbServiceTrait
+trait DbConstructorTrait
 {
     protected $dbConstructor;
 
-    public function setDbConstructor(DbService $dbConstructor)
+    public function setDbConstructor(DbConstructor $dbConstructor)
     {
         $this->dbConstructor = $dbConstructor;
         return $this;

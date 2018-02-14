@@ -2,7 +2,7 @@
 namespace GearTest\ConstructorTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Constructor\Src\SrcService;
+use Gear\Constructor\Src\SrcConstructor;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use Gear\Mvc\Repository\RepositoryService;
@@ -22,13 +22,13 @@ use Gear\Column\ColumnManager;
 /**
  * @group module
  */
-class SrcServiceTest extends TestCase
+class SrcConstructorTest extends TestCase
 {
 
     public function setUp()
     {
         $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        //$this->service->setSrcService($schema);
+        //$this->service->setSrcConstructor($schema);
         //$this->service->setRepositoryService($repository);
         //$this->service->setServiceManager($config);
         $this->schema = $this->prophesize('GearJson\Src\SrcSchema');
@@ -52,7 +52,7 @@ class SrcServiceTest extends TestCase
         $this->valueObjectService = $this->prophesize(ValueObjectService::class);
 
 
-        $this->service = new SrcService(
+        $this->service = new SrcConstructor(
             $this->tableService->reveal(),
             $this->columnService->reveal(),
             $this->module->reveal(),
@@ -611,6 +611,6 @@ class SrcServiceTest extends TestCase
         ***REMOVED***;
 
         $create = $this->service->create($data);
-        $this->assertEquals(SrcService::TYPE_NOT_FOUND, $create);
+        $this->assertEquals(SrcConstructor::TYPE_NOT_FOUND, $create);
     }
 }

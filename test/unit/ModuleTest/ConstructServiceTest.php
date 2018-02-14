@@ -9,10 +9,10 @@ use GearJson\Src\SrcSchema;
 use GearJson\Controller\ControllerSchema;
 use GearJson\Action\ActionSchema;
 use GearJson\App\AppService as SchemaAppService;
-use Gear\Constructor\Db\DbService;
-use Gear\Constructor\Src\SrcService;
-use Gear\Constructor\Controller\ControllerService;
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Db\DbConstructor;
+use Gear\Constructor\Src\SrcConstructor;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Action\ActionConstructor;
 use Gear\Constructor\App\AppService;
 use GearJson\Src\Src;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
@@ -49,10 +49,10 @@ class ConstructServiceTest extends TestCase
         $this->appSchema = $this->prophesize(SchemaAppService::class);
 
 
-        $this->dbService = $this->prophesize(DbService::class);
-        $this->srcService = $this->prophesize(SrcService::class);
-        $this->controllerService = $this->prophesize(ControllerService::class);
-        $this->actionService = $this->prophesize(ActionService::class);
+        $this->dbService = $this->prophesize(DbConstructor::class);
+        $this->srcService = $this->prophesize(SrcConstructor::class);
+        $this->controllerService = $this->prophesize(ControllerConstructor::class);
+        $this->actionService = $this->prophesize(ActionConstructor::class);
         $this->appService = $this->prophesize(AppService::class);
 
         $this->construct = new ConstructService(
@@ -387,7 +387,7 @@ EOS
 
         $this->srcSchema->factory('Gearing', $data, false)->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
 
-        //$this->construct->setSrcService($srcschema->reveal());
+        //$this->construct->setSrcConstructor($srcschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -495,7 +495,7 @@ EOS
         $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
-        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
@@ -733,7 +733,7 @@ EOS
         $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
-        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
+        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
@@ -859,7 +859,7 @@ EOS
         $dbschema = $this->prophesize('GearJson\Db\DbSchema');
         $dbschema->dbExist('Gearing', $db)->willReturn(false);
 
-        $dbservice = $this->prophesize('Gear\Constructor\Db\DbService');
+        $dbservice = $this->prophesize('Gear\Constructor\Db\DbConstructor');
         $dbservice->create($data)->willReturn(true);
 
         $this->construct->setDbConstructor($dbservice->reveal());

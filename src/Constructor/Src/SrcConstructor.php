@@ -53,7 +53,7 @@ use Gear\Constructor\AbstractConstructor;
 use GearJson\Src\SrcTypesInterface;
 use GearJson\Src\Src;
 
-class SrcService extends AbstractConstructor
+class SrcConstructor extends AbstractConstructor
 {
     const TYPE_NOT_FOUND = 'Type not allowed';
 

@@ -46,7 +46,7 @@ use Gear\Constructor\AbstractConstructor;
 use Gear\Table\UploadImage as UploadImageTable;
 use GearJson\Service\FactoriesInterface;
 
-class DbService extends AbstractConstructor
+class DbConstructor extends AbstractConstructor
 {
     protected $metadata;
 

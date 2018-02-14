@@ -18,7 +18,7 @@ class DbControllerTest extends TestCase
 {
     public function testTrait()
     {
-        $dbService =  $this->getMockBuilder('Gear\Constructor\Db\DbService')
+        $dbService =  $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
         ->disableOriginalConstructor()
         ->setMethods(null)
         ->getMock();
@@ -36,7 +36,7 @@ class DbControllerTest extends TestCase
 
         $serviceManager = new \Zend\ServiceManager\ServiceManager();
 
-        $dbService = $this->getMockBuilder('Gear\Constructor\Db\DbService')
+        $dbService = $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
             ->disableOriginalConstructor()
             ->setMethods(['create'***REMOVED***)
             ->getMock();
@@ -66,7 +66,7 @@ class DbControllerTest extends TestCase
 
         $serviceManager = new \Zend\ServiceManager\ServiceManager();
 
-        $dbService =  $emMock = $this->getMockBuilder('Gear\Constructor\Db\DbService')
+        $dbService =  $emMock = $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
             ->disableOriginalConstructor()
             ->setMethods(['delete'***REMOVED***)
             ->getMock();

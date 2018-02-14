@@ -3,11 +3,11 @@ namespace Gear\Constructor\Db;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Constructor\Db\DbServiceTrait;
+use Gear\Constructor\Db\DbConstructorTrait;
 
 class DbController extends AbstractConsoleController
 {
-    use DbServiceTrait;
+    use DbConstructorTrait;
 
     public function createAction()
     {

@@ -2,7 +2,7 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Constructor\Controller\ControllerService;
+use Gear\Constructor\Controller\ControllerConstructor;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
@@ -63,7 +63,7 @@ class ControllerServiceTest extends TestCase
         $this->configService = $this->prophesize(ConfigService::class);
 
 
-        $this->controllerService = new ControllerService(
+        $this->controllerService = new ControllerConstructor(
             $this->stringService,
             $this->schemaController->reveal(),
             $this->tableService->reveal(),

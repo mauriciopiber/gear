@@ -3,13 +3,13 @@ namespace Gear\Constructor\Controller;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Constructor\Controller\ControllerServiceTrait;
+use Gear\Constructor\Controller\ControllerConstructorTrait;
 
 class ControllerController extends AbstractConsoleController
 {
-    use ControllerServiceTrait;
+    use ControllerConstructorTrait;
 
-    public function __construct(ControllerService $controllerService)
+    public function __construct(ControllerConstructor $controllerService)
     {
         $this->controllerConstructor = $controllerService;
     }

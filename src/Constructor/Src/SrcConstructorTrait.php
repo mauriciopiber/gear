@@ -1,13 +1,13 @@
 <?php
 namespace Gear\Constructor\Src;
 
-use Gear\Constructor\Src\SrcService;
+use Gear\Constructor\Src\SrcConstructor;
 
-trait SrcServiceTrait
+trait SrcConstructorTrait
 {
     protected $srcConstructor;
 
-    public function setSrcConstructor(SrcService $srcConstructor)
+    public function setSrcConstructor(SrcConstructor $srcConstructor)
     {
         $this->srcConstructor = $srcConstructor;
         return $this;

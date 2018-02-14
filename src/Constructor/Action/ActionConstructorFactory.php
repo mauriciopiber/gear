@@ -3,7 +3,7 @@ namespace Gear\Constructor\Action;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Action\ActionConstructor;
 use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
 use Gear\Mvc\Config\NavigationManager;
@@ -32,18 +32,18 @@ use Gear\Table\TableService;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ActionServiceFactory implements FactoryInterface
+class ActionConstructorFactory implements FactoryInterface
 {
     /**
-     * Create ActionService
+     * Create ActionConstructor
      *
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      *
-     * @return ActionService
+     * @return ActionConstructor
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $factory = new ActionService(
+        $factory = new ActionConstructor(
             $serviceLocator->get('GearJson\Action'),
             //$serviceLocator->get(ConfigService::class),
             $serviceLocator->get(RouterManager::class),

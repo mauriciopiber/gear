@@ -3,7 +3,7 @@ namespace GearTest\ServiceTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Module\BasicModuleStructure;
-use Gear\Constructor\Action\ActionService;
+use Gear\Constructor\Action\ActionConstructor;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\Controller\Console\{
@@ -34,7 +34,7 @@ use Gear\Column\ColumnManager;
 /**
  * @group m1
  */
-class ActionServiceTest extends TestCase
+class ActionConstructorTest extends TestCase
 {
     public function setUp()
     {
@@ -74,7 +74,7 @@ class ActionServiceTest extends TestCase
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
 
-        $this->actionService = new ActionService(
+        $this->actionService = new ActionConstructor(
             $this->schemaAction->reveal(),
             $this->routerManager->reveal(),
             $this->consoleRouterManager->reveal(),

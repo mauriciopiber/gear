@@ -3,14 +3,14 @@ namespace Gear\Constructor\Src;
 
 use Zend\Mvc\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Constructor\Src\SrcService;
-use Gear\Constructor\Src\SrcServiceTrait;
+use Gear\Constructor\Src\SrcConstructor;
+use Gear\Constructor\Src\SrcConstructorTrait;
 
 class SrcController extends AbstractConsoleController
 {
-    use SrcServiceTrait;
+    use SrcConstructorTrait;
 
-    public function __construct(SrcService $srcService)
+    public function __construct(SrcConstructor $srcService)
     {
         $this->srcService = $srcService;
     }

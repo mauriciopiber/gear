@@ -2,8 +2,8 @@
 namespace GearTest\ConstructorTest\DbTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Constructor\Db\DbServiceTrait;
-use Gear\Constructor\Db\DbService;
+use Gear\Constructor\Db\DbConstructorTrait;
+use Gear\Constructor\Db\DbConstructor;
 use GearJson\Action\ActionSchema;
 use Exception;
 use Gear\Mvc\Repository\RepositoryService;
@@ -26,9 +26,9 @@ use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
  * @group module-constructor-db
  * @group module-constructor-db-service
  */
-class DbServiceTest extends TestCase
+class DbConstructorTest extends TestCase
 {
-    use DbServiceTrait;
+    use DbConstructorTrait;
 
     public function setUp()
     {
@@ -53,7 +53,7 @@ class DbServiceTest extends TestCase
         //$this->controllerTestService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');
         $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
 
-        $this->service = new DbService(
+        $this->service = new DbConstructor(
             $this->columnService->reveal(),
             $this->tableService->reveal(),
             $this->actionService->reveal(),
