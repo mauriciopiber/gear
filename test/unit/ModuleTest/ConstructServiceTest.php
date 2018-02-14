@@ -87,6 +87,25 @@ class ConstructServiceTest extends TestCase
         $this->assertEquals($this->construct->getActionConstructor(), $this->actionService->reveal());
     }
 
+
+    public function testCreateIndexControllerWeb()
+    {
+
+
+    }
+
+    public function testCreateIndexControllerCli()
+    {
+
+
+    }
+
+    public function testCreateIndexControllerApi()
+    {
+
+
+    }
+
     /**
      * @group integration
      *

@@ -71,5 +71,5 @@ files:
       moduleUrl: 'cli-module'
     filename: 'Jenkinsfile'
   14:
-    template: 'template/module/git-ignore/gitignore-cli.phtml'
+    template: 'template/module/git-ignore/gitignore-common.phtml'
     filename: '.gitignore'                       

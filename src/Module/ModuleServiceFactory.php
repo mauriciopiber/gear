@@ -44,7 +44,9 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Autoload\ComposerAutoload'),
             $serviceLocator->get('config'),
             $serviceLocator->get('GearBase\Util\Dir'),
-            $serviceLocator->get('GearBase\GearConfig')
+            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Module\Construct')
+
         );
     }
 }

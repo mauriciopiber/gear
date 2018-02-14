@@ -130,49 +130,6 @@ class ModuleControllerTest extends TestCase
 
 
     /**
-     * @covers \Gear\Module\Controller\ModuleController::createAction
-     * @group Create
-     * @dataProvider getTypes
-     */
-    public function testDeleteModule($type)
-    {
-        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
-
-        $diagnostic->delete()->willReturn(true);
-
-        $this->controller->setModuleService($diagnostic->reveal());
-
-        $this->request->setParams(new Parameters(['module' => 'MyModule'***REMOVED***));
-
-        $this->routeMatch->setParam('action', 'delete');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-
-    /**
-     * @covers \Gear\Module\Controller\ModuleController::createAction
-     * @group Create
-     * @dataProvider getTypes
-     */
-    public function testCreateModule($type)
-    {
-        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
-
-        $diagnostic->create('MyModule', $type)->willReturn(true);
-
-        $this->controller->setModuleService($diagnostic->reveal());
-
-        $this->request->setParams(new Parameters(['module' => 'MyModule', 'type' => $type***REMOVED***));
-
-        $this->routeMatch->setParam('action', 'create');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    /**
      * @group Create
      * @dataProvider getTypes
      */

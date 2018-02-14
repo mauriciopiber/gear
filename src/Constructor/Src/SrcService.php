@@ -321,7 +321,14 @@ class SrcService extends AbstractConstructor
         } catch (\Exception $exception) {
             throw $exception;
         }
-        if (false === in_array($this->src->getType(), [SrcTypesInterface::FIXTURE, SrcTypesInterface::INTERFACE, SrcTypesInterface::VALUE_OBJECT***REMOVED***)) {
+
+        $notAService = [
+            SrcTypesInterface::FIXTURE,
+            SrcTypesInterface::INTERFACE,
+            SrcTypesInterface::VALUE_OBJECT
+        ***REMOVED***;
+
+        if (false === in_array($this->src->getType(), $notAService)) {
             $this->getServiceManager()->create($this->src);
         }
         return $status;

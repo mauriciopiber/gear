@@ -53,7 +53,8 @@ class ModuleServiceFactoryTest extends TestCase
             'Gear\Autoload\ComposerAutoload' => 'Gear\Autoload\ComposerAutoload',
             'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig',
             'GearBase\Util\Dir' => 'GearBase\Util\Dir\DirService',
-            'GearBase\GearConfig' => 'GearBase\Config\GearConfig'
+            'GearBase\GearConfig' => 'GearBase\Config\GearConfig',
+            'Gear\Module\Construct' => 'Gear\Module\ConstructService'
         ***REMOVED***;
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();

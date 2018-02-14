@@ -5,7 +5,6 @@ use Gear\Service\AbstractJsonService;
 use Gear\Module\BasicModuleStructure;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-use Gear\Module\ModuleProjectConnectorInterface;
 use GearBase\Project\ProjectLocationTrait;
 
 /**
@@ -14,7 +13,7 @@ use GearBase\Project\ProjectLocationTrait;
  * São necessários arquivos auxiliares, além do phpunit.
  *
  */
-class CodeceptionService extends AbstractJsonService implements ModuleProjectConnectorInterface
+class CodeceptionService extends AbstractJsonService
 {
     use ProjectLocationTrait;
 
