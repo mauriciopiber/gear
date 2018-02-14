@@ -100,24 +100,6 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    /**
-     * Função responsável por criar um novo módulo dentro do projeto especificado
-     * @throws \RuntimeException
-     */
-    public function createAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
-
-        $moduleName = $this->getRequest()->getParam('module', null);
-        $cli = $this->getRequest()->getParam('type', 'web');
-
-        $module = $this->getModuleService();
-        $module->create($moduleName, $cli);
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
 
     /**
      * Função responsável por criar um novo módulo dentro do projeto especificado
@@ -163,18 +145,6 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getFixtureService();
         $module->importModule();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    public function deleteAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-delete'));
-
-        $module = $this->getModuleService();
-        $module->delete();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

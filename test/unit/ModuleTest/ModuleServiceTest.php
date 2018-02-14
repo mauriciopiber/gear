@@ -52,6 +52,8 @@ use Gear\Mvc\Controller\Web\{
     WebControllerTestService,
     WebControllerTestServiceTrait
 };
+use Gear\Module\ConstructService;
+use Gear\Module\ConstructServiceTrait;
 
 /**
  * @group Module
@@ -144,6 +146,8 @@ class ModuleServiceTest extends TestCase
         $this->applicationConfig = $this->prophesize(ApplicationConfig::class);
 
         $this->autoload = $this->prophesize(ComposerAutoload::class);
+
+        $this->construct = $this->prophesize(ConstructService::class);
 
         $this->config = [
             'gear' => [
@@ -405,95 +409,6 @@ class ModuleServiceTest extends TestCase
         }
     }
 
-    /**
-     * @group x111
-     */
-    public function testCreateModuleWeb()
-    {
-        $type = 'web';
-        $moduleName = 'MyModule';
-        //$location = vfsStream::url('module');
-
-        $this->module = new \Gear\Module\BasicModuleStructure(
-            $this->stringService,
-            $this->dirService,
-            $this->fileService
-        );
-        $this->module->setRequestName($moduleName);
-        $this->module->setBasePath(vfsStream::url('module'));
-
-
-        $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
-
-        $this->prepareSchema($moduleName);
-        $this->prepareController();
-
-        $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
-        $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
-
-
-        $this->prepareBaseModule($type);
-
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-
-
-        $this->feature->createIndexFeature('Gear Project')->willReturn(true)->shouldBeCalled();
-        $this->page->createIndexPage()->willReturn(true)->shouldBeCalled();
-        $this->step->createIndexStep()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleFakeCreator();
-
-        $created = $this->moduleService->create($moduleName, $type);
-
-        $this->assertTrue($created);
-    }
-
-    /**
-     * @group create1
-     * @group ppx1
-     */
-    public function testCreateModuleCli()
-    {
-        $type = 'cli';
-        $moduleName = 'MyModule';
-
-        $this->module = new \Gear\Module\BasicModuleStructure(
-            $this->stringService,
-            $this->dirService,
-            $this->fileService
-        );
-        $this->module->setRequestName($moduleName);
-
-        $this->composer->createComposer()->willReturn(true)->shouldBeCalled();
-
-        $this->prepareSchema($moduleName, 'Console');
-
-        $this->consoleControllerTest->module()->shouldBeCalled();
-        $this->consoleController->module()->shouldBeCalled();
-        $this->consoleControllerTest->moduleFactory()->shouldBeCalled();
-        $this->consoleController->moduleFactory()->shouldBeCalled();
-
-        $this->codeception->addModuleToProject()->willReturn(true)->shouldBeCalled();
-        $this->codeception->createFullSuite()->willReturn(true)->shouldBeCalled();
-
-        $this->configService->module($type, null)->shouldBeCalled();
-
-        $this->docs->createConfig()->shouldBeCalled();
-        $this->docs->createIndex()->shouldBeCalled();
-        $this->docs->createReadme()->shouldBeCalled();
-        $this->docs->createChangelog()->shouldBeCalled();
-
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-
-        $this->module->setBasePath(vfsStream::url('module'));
-
-        $this->moduleService = $this->mockModuleFakeCreator();
-
-        $created = $this->moduleService->create($moduleName, $type);
-
-        $this->assertTrue($created);
-    }
-
     public function moduleAsProject()
     {
         return [
@@ -536,7 +451,7 @@ class ModuleServiceTest extends TestCase
 
     /**
      * @group cmap
-     */
+
     public function testCreateModuleAsProjectWeb()
     {
         $type = 'web';
@@ -576,12 +491,6 @@ class ModuleServiceTest extends TestCase
         $this->assertTrue($created);
     }
 
-    /**
-     * @group mod1
-     * @group vamov
-     * @group ppx1
-     * @group cmap
-     */
     public function testCreateModuleAsProjectCli()
     {
         $type = 'cli';
@@ -624,57 +533,8 @@ class ModuleServiceTest extends TestCase
 
         $this->assertTrue($created);
     }
+    */
 
-
-    /**
-     * @group abcd
-     * @group abcd1
-     */
-    public function testAddModuleToProject()
-    {
-        $this->moduleService = $this->mockModuleFakeCreator();
-
-        $this->applicationConfig->addModuleToProject()->shouldBeCalled();
-        $this->autoload->addModuleToProject()->shouldBeCalled();
-        $this->codeception->addModuleToProject()->shouldBeCalled();
-        $this->cache->renewFileCache()->shouldBeCalled();
-
-        $this->assertTrue($this->moduleService->addModuleToProject());
-    }
-
-
-    /**
-     * @group abcd
-     */
-    public function testDeleteModuleNotExist()
-    {
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module/fake'))->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleFakeCreator();
-
-        $this->applicationConfig->removeModuleFromProject()->shouldNotBeCalled();
-        $this->autoload->removeModuleFromProject()->shouldNotBeCalled();
-        $this->codeception->removeModuleFromProject()->shouldNotBeCalled();
-
-
-        $this->assertFalse($this->moduleService->removeModuleFromProject());
-    }
-
-    /**
-     * @group fix1
-     */
-    public function testDeleteModuleFromProject()
-    {
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleFakeCreator();
-
-        $this->applicationConfig->removeModuleFromProject()->shouldBeCalled();
-        $this->autoload->removeModuleFromProject()->shouldBeCalled();
-        $this->codeception->removeModuleFromProject()->shouldBeCalled();
-
-        $this->assertTrue($this->moduleService->removeModuleFromProject());
-    }
 
     public function mockModuleFakeCreator()
     {
@@ -735,7 +595,8 @@ class ModuleServiceTest extends TestCase
             $this->autoload->reveal(),
             $this->config,
             $this->dir,
-            $this->gearConfig->reveal()
+            $this->gearConfig->reveal(),
+            $this->construct->reveal()
         );
     }
 }

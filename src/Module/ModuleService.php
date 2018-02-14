@@ -91,9 +91,10 @@ use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;
 use Gear\Module\ModuleAwareTrait;
 use Gear\Mvc\View\ViewService;
-use Gear\Module\ModuleProjectConnectorInterface;
 use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
+use Gear\Module\ConstructService;
+use Gear\Module\ConstructServiceTrait;
 
 /**
  *
@@ -110,7 +111,7 @@ use GearBase\Config\GearConfigTrait;
  * @version    Release: 1.0.0
  * @link       https://bitbucket.org/mauriciopiber/gear
  */
-class ModuleService implements ModuleProjectConnectorInterface
+class ModuleService
 {
     use RequestTrait;
     use ModuleAwareTrait;
@@ -147,6 +148,7 @@ class ModuleService implements ModuleProjectConnectorInterface
     use ComposerAutoloadTrait;
     use DirServiceTrait;
     use GearConfigTrait;
+    use ConstructServiceTrait;
 
     protected $type;
 
@@ -191,7 +193,8 @@ class ModuleService implements ModuleProjectConnectorInterface
         ComposerAutoload $autoload,
         array $config,
         DirService $dirService,
-        GearConfig $gearConfig
+        GearConfig $gearConfig,
+        ConstructService $constructService
     ) {
         $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
@@ -236,6 +239,8 @@ class ModuleService implements ModuleProjectConnectorInterface
         $this->config = $config;
 
         $this->dirService = $dirService;
+
+        $this->constructService = $constructService;
     }
 
 
@@ -257,7 +262,7 @@ class ModuleService implements ModuleProjectConnectorInterface
         return implode('\\', $fixStack);
     }
 
-
+    /**
     public function addModuleToProject()
     {
         $this->getApplicationConfig()->addModuleToProject();
@@ -270,35 +275,7 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         return true;
     }
-
-
-    /**
-     * Deletar todo módulo, com todas configurações e reiniciar as configurações do projeto para esquecer o módulo
-     *
-     * @return string
-     */
-    public function removeModuleFromProject()
-    {
-        if (!is_dir($this->getModule()->getMainFolder())) {
-            return false;
-        }
-
-        $this->getDirService()->rmDir($this->getModule()->getMainFolder());
-
-        $this->getApplicationConfig()->removeModuleFromProject();
-
-        $this->getComposerAutoload()->removeModuleFromProject();
-
-        $this->getCodeceptionService()->removeModuleFromProject();
-
-        return true;
-        //return sprintf('Módulo %s deletado', $this->getModule()->getModuleName());
-    }
-
-    public function delete()
-    {
-        return $this->removeModuleFromProject();
-    }
+    */
 
 
     /**
@@ -348,27 +325,20 @@ class ModuleService implements ModuleProjectConnectorInterface
         return $this->moduleComponents(self::MODULE_AS_PROJECT);
     }
 
-    /**
-     * Cria Módulos dentro de Projetos Gear.
-     *
-     * Cria a estrutura básica do módulo, sem arquivos independentes.
-     *
-     * @param string $type Tipo Web|Cli
-     *
-     * @return boolean
-     *
-     * @deprecated Should be used only module as project
-     */
-    public function create($module, $type = 'web')
+    public function createAdditionalViewFiles()
     {
-        $this->type = $type;
-        //module structure
-        $moduleStructure = $this->getModule();
-        $moduleStructure->prepare($module, $type)->write();
+        if ($this->type !== 'web') {
+            return;
+        }
 
-        $this->moduleComponents();
-
-        return $this->addModuleToProject();
+        $this->getViewService()->createErrorView();
+        $this->getViewService()->createDeleteView();
+        $this->getViewService()->create404View();
+        //$viewService->createLayoutView();
+        $this->getViewService()->createLayoutSuccessView();
+        $this->getViewService()->createLayoutDeleteSuccessView();
+        $this->getViewService()->createLayoutDeleteFailView();
+        $this->getViewService()->createBreadcrumbView();
     }
 
     /**
@@ -383,24 +353,17 @@ class ModuleService implements ModuleProjectConnectorInterface
         $configService = $this->getConfigService();
         $configService->module($this->type, $this->staging);
 
-        if ($collection == 1) {
-            $this->getComposerService()->createComposerAsProject($this->type);
-            $this->createApplicationConfig($this->type);
-            $this->createConfigGlobal();
-            $this->createConfigLocal();
-            $this->createIndex();
-            $this->createInitAutoloader();
-            $this->createDeploy();
-            $this->getPhinxConfig();
-            $this->getModuleTestsService()->createTestsModuleAsProject($this->type);
+        $this->getComposerService()->createComposerAsProject($this->type);
+        $this->createApplicationConfig($this->type);
+        $this->createConfigGlobal();
+        $this->createConfigLocal();
+        $this->createIndex();
+        $this->createInitAutoloader();
+        $this->createDeploy();
+        $this->getPhinxConfig();
+        $this->getModuleTestsService()->createTestsModuleAsProject($this->type);
             //criar script de deploy para módulo
-        }
 
-        if ($collection == 2) {
-            $this->getComposerService()->createComposer();
-            //vaar_dump($this->type);die();
-            //$this->getModuleTestsService()->createTests($this->type);
-        }
 
         if (in_array($this->type, [
             ModuleTypesInterface::WEB,
@@ -435,15 +398,8 @@ class ModuleService implements ModuleProjectConnectorInterface
                 /* @var $viewService \Gear\Service\Mvc\ViewService */
                 $viewService = $this->getViewService();
                 $viewService->createIndexView();
-                $viewService->createErrorView();
-                $viewService->createDeleteView();
-                $viewService->create404View();
-                //$viewService->createLayoutView();
-                $viewService->createLayoutSuccessView();
-                $viewService->createLayoutDeleteSuccessView();
-                $viewService->createLayoutDeleteFailView();
-                $viewService->createBreadcrumbView();
                 //$viewService->copyBasicLayout();
+                $this->createAdditionalViewFiles();
 
                 $this->getAppControllerSpecService()->createTestIndexAction();
                 $this->getAppControllerService()->createIndexController();
@@ -572,12 +528,14 @@ class ModuleService implements ModuleProjectConnectorInterface
         switch($type) {
             case 'web':
                 $template = 'web';
+                break;
             case 'cli':
             case 'api':
             case 'src':
             case 'src-zf2':
             case 'src-zf3':
                 $template = 'cli';
+                break;
         }
 
         $file = $this->getFileCreator();
@@ -820,26 +778,6 @@ class ModuleService implements ModuleProjectConnectorInterface
 
         return $file->render();
     }
-
-    /*
-    public function buildpath()
-    {
-        $file = $this->getFileCreator();
-
-        $template = 'template/module/buildpath.phtml';
-        $filename = '.buildpath';
-        $location = $this->getModule()->getMainFolder();
-
-        file_put_contents($location.'/'.$filename, file_get_contents($template));
-
-        //$file->setTemplate($template);
-        //$file->setOptions([***REMOVED***);
-        //$file->setFileName($filename);
-        //$file->setLocation($location);
-
-        return true;
-    }
-    */
 
     /**
      * Cria arquivo codeception.yml principal referência para os testes unitários

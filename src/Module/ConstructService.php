@@ -233,7 +233,7 @@ class ConstructService extends AbstractJsonService
         $this->processConstructor($data);
     }
 
-    public function processConstructor($data)
+    public function processConstructor(array $data)
     {
         if (isset($data['created'***REMOVED***)) {
             foreach ($data['created'***REMOVED*** as $src) {

@@ -3,11 +3,10 @@ namespace Gear\Autoload;
 
 use Gear\Module\ModuleAwareTrait;
 use Gear\Module\BasicModuleStructure;
-use Gear\Module\ModuleProjectConnectorInterface;
 use Zend\Json\Json;
 use GearBase\Project\ProjectLocationTrait;
 
-class ComposerAutoload implements ModuleProjectConnectorInterface
+class ComposerAutoload
 {
     use ModuleAwareTrait;
 
