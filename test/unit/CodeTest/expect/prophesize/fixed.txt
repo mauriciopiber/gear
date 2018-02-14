@@ -2,9 +2,9 @@
 
         $this->schemaLoader = $this->prophesize(SchemaLoaderService::class);
 
-        $this->schemaController = $this->prophesize(ControllerService::class);
+        $this->schemaController = $this->prophesize(ControllerSchema::class);
 
-        $this->schemaAction = $this->prophesize(ActionService::class);
+        $this->schemaAction = $this->prophesize(ActionSchema::class);
 
         $this->consoleControllerTest = $this->prophesize(ConsoleControllerTest::class);
 

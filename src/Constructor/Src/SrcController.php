@@ -36,7 +36,7 @@ class SrcController extends AbstractConsoleController
 
 
 
-         $this->getSrcService()->create($data);
+         $this->getSrcSchema()->create($data);
 
          $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -47,7 +47,7 @@ class SrcController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-delete'));
 
-        $this->getSrcService()->delete();
+        $this->getSrcSchema()->delete();
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

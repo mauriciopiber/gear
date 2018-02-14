@@ -4,7 +4,7 @@ namespace GearTest\ConstructorTest\DbTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Db\DbServiceTrait;
 use Gear\Constructor\Db\DbService;
-use GearJson\Action\ActionService;
+use GearJson\Action\ActionSchema;
 use Exception;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
@@ -33,7 +33,7 @@ class DbServiceTest extends TestCase
     public function setUp()
     {
 
-        $this->dbService = $this->prophesize('GearJson\Db\DbService');
+        $this->dbService = $this->prophesize('GearJson\Db\DbSchema');
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
@@ -41,7 +41,7 @@ class DbServiceTest extends TestCase
         $this->formService = $this->prophesize(FormService::class);
         $this->filterService = $this->prophesize(FilterService::class);
         $this->searchFormService = $this->prophesize(SearchService::class);
-        $this->actionService = $this->prophesize(ActionService::class);
+        $this->actionService = $this->prophesize(ActionSchema::class);
         $this->entityService = $this->prophesize(EntityService::class);
         $this->fixtureService = $this->prophesize(FixtureService::class);
         $this->feature = $this->prophesize(Feature::class);

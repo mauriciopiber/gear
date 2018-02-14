@@ -1,0 +1,14 @@
+
+echo "Start Fix" \
+&& cd src \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Action\\\\ActionService/GearJson\\\\Action\\\\ActionSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Controller\\\\ControllerService/GearJson\\\\Controller\\\\ControllerSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Db\\\\DbService/GearJson\\\\Db\\\\DbSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Src\\\\SrcService/GearJson\\\\Src\\\\SrcSchema/g" {} \; \
+&& cd ../test \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Action\\\\ActionService/GearJson\\\\Action\\\\ActionSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Controller\\\\ControllerService/GearJson\\\\Controller\\\\ControllerSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Db\\\\DbService/GearJson\\\\Db\\\\DbSchema/g" {} \; \
+&& find . -name "*.php" -exec sed -i "s/GearJson\\\\Src\\\\SrcService/GearJson\\\\Src\\\\SrcSchema/g" {} \; \
+&& cd .. \
+&& echo "End Fix"

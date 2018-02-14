@@ -15,7 +15,7 @@ use Gear\Mvc\Controller\Console\{
 };
 use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
 use Gear\Mvc\Config\ControllerManager;
-use GearJson\Controller\ControllerService as SchemaController;
+use GearJson\Controller\ControllerSchema as SchemaController;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Mvc\LanguageService;

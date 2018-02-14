@@ -47,8 +47,8 @@ use GearBase\RequestTrait;
 use GearVersion\Service\VersionServiceTrait;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
-use GearJson\Controller\ControllerServiceTrait;
-use GearJson\Action\ActionServiceTrait;
+use GearJson\Controller\ControllerSchemaTrait;
+use GearJson\Action\ActionSchemaTrait;
 use Gear\Module\Tests\{
     ModuleTestsServiceTrait,
     ModuleTestsService
@@ -75,8 +75,8 @@ use Gear\Module\Node\Protractor;
 use Gear\Mvc\LanguageService;
 use GearJson\Schema\SchemaService as Schema;
 use GearJson\Schema\Loader\SchemaLoaderService as SchemaLoader;
-use GearJson\Controller\ControllerService as SchemaController;
-use GearJson\Action\ActionService as SchemaAction;
+use GearJson\Controller\ControllerSchema as SchemaController;
+use GearJson\Action\ActionSchema as SchemaAction;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\Step;
@@ -140,8 +140,8 @@ class ModuleService
     use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
-    use ControllerServiceTrait;
-    use ActionServiceTrait;
+    use ControllerSchemaTrait;
+    use ActionSchemaTrait;
     use ConsoleControllerServiceTrait;
     use ConsoleControllerTestServiceTrait;
     use ApplicationConfigTrait;
@@ -213,8 +213,8 @@ class ModuleService
 
         $this->schemaService = $schema;
         $this->schemaLoaderService = $schemaLoader;
-        $this->controllerService = $schemaController;
-        $this->actionService = $schemaAction;
+        $this->controllerSchema = $schemaController;
+        $this->actionSchema = $schemaAction;
 
         $this->configService = $configService;
         $this->mvcService = $controller;
@@ -967,7 +967,7 @@ class ModuleService
 
         $type = ($this->type == 'web') ? 'Action' : 'Console';
 
-        $this->getControllerService()->create(
+        $this->getControllerSchema()->create(
             $module,
             [
                 'name' => 'IndexController',
@@ -975,7 +975,7 @@ class ModuleService
                 'type' => $type
             ***REMOVED***
         );
-        $this->getActionService()->create(
+        $this->getActionSchema()->create(
             $module,
             [
                 'controller' => 'IndexController',

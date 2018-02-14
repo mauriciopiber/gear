@@ -12,7 +12,7 @@ use Gear\Mvc\Controller\Console\{
 
 };
 use Gear\Mvc\Config\ControllerManager;
-use GearJson\Action\ActionService as JsonActionService;
+use GearJson\Action\ActionSchema;
 use GearBase\Util\String\StringService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Config\RouterManager;
@@ -66,7 +66,7 @@ class ActionServiceTest extends TestCase
         $this->consoleRouterManager = $this->prophesize(ConsoleRouterManager::class);
 
         //schema
-        $this->schemaAction = $this->prophesize(JsonActionService::class);
+        $this->schemaAction = $this->prophesize(ActionSchema::class);
         $this->schemaService = $this->prophesize(SchemaService::class);
 
         $this->stringService = new StringService();

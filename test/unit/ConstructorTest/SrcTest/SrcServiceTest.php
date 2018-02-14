@@ -31,7 +31,7 @@ class SrcServiceTest extends TestCase
         //$this->service->setSrcService($schema);
         //$this->service->setRepositoryService($repository);
         //$this->service->setServiceManager($config);
-        $this->schema = $this->prophesize('GearJson\Src\SrcService');
+        $this->schema = $this->prophesize('GearJson\Src\SrcSchema');
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');

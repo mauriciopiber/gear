@@ -3,16 +3,16 @@ namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
-use GearJson\Db\DbServiceTrait as DbSchemaTrait;
-use GearJson\Src\SrcServiceTrait as SrcSchemaTrait;
+use GearJson\Db\DbSchemaTrait as DbSchemaTrait;
+use GearJson\Src\SrcSchemaTrait as SrcSchemaTrait;
 use GearJson\App\AppServiceTrait as AppSchemaTrait;
-use GearJson\Controller\ControllerServiceTrait as ControllerSchemaTrait;
-use GearJson\Action\ActionServiceTrait as ActionSchemaTrait;
-use GearJson\Db\DbService as DbSchema;
-use GearJson\Src\SrcService as SrcSchema;
+use GearJson\Controller\ControllerSchemaTrait as ControllerSchemaTrait;
+use GearJson\Action\ActionSchemaTrait as ActionSchemaTrait;
+use GearJson\Db\DbSchema as DbSchema;
+use GearJson\Src\SrcSchema as SrcSchema;
 use GearJson\App\AppService as AppSchema;
-use GearJson\Controller\ControllerService as ControllerSchema;
-use GearJson\Action\ActionService as ActionSchema;
+use GearJson\Controller\ControllerSchema as ControllerSchema;
+use GearJson\Action\ActionSchema as ActionSchema;
 use GearJson\Src\Src;
 use GearJson\Db\Db;
 use GearJson\Action\Action;
@@ -122,10 +122,10 @@ class ConstructService extends AbstractJsonService
         $this->controllerConstructor = $controllerService;
         $this->appConstructor = $appService;
 
-        $this->actionService = $actionSchema;
-        $this->dbService = $dbSchema;
-        $this->srcService = $srcSchema;
-        $this->controllerService = $controllerSchema;
+        $this->actionSchema = $actionSchema;
+        $this->dbSchema = $dbSchema;
+        $this->srcSchema = $srcSchema;
+        $this->controllerSchema = $controllerSchema;
         $this->appService = $appSchema;
     }
 
@@ -271,7 +271,7 @@ class ConstructService extends AbstractJsonService
 
     public function constructSrc($module, array $src)
     {
-        $srcItem = $this->getSrcService()->factory($module, $src, false);
+        $srcItem = $this->getSrcSchema()->factory($module, $src, false);
 
         if ($srcItem instanceof ConsoleValidationStatus) {
             $this->constructStatus->addValidated(
@@ -285,7 +285,7 @@ class ConstructService extends AbstractJsonService
             return;
         }
 
-        if ($this->getSrcService()->srcExist($module, $srcItem)) {
+        if ($this->getSrcSchema()->srcExist($module, $srcItem)) {
             $this->constructStatus->addSkipped(sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType()));
             return;
         }
@@ -320,7 +320,7 @@ class ConstructService extends AbstractJsonService
 
         $dbItem = new Db($db);
 
-        if ($this->getDbService()->dbExist($module, $dbItem)) {
+        if ($this->getDbSchema()->dbExist($module, $dbItem)) {
             $this->constructStatus->addSkipped(sprintf(self::DB_SKIP, $dbItem->getTable()));
 
             return;
@@ -345,7 +345,7 @@ class ConstructService extends AbstractJsonService
         unset($controller['actions'***REMOVED***);
         $controllerItem = new Controller($controller);
 
-        if ($this->getControllerService()->controllerExist($module, $controllerItem)) {
+        if ($this->getControllerSchema()->controllerExist($module, $controllerItem)) {
             $this->constructStatus->addSkipped(sprintf(self::CONTROLLER_SKIP, $controllerItem->getName()));
 
             return;
@@ -376,7 +376,7 @@ class ConstructService extends AbstractJsonService
     {
         $actionItem = new Action($action);
 
-        if ($this->getActionService()->actionExist($module, $actionItem)) {
+        if ($this->getActionSchema()->actionExist($module, $actionItem)) {
             $this->constructStatus->addSkipped(sprintf(
                 self::ACTION_SKIP,
                 $actionItem->getName(),
