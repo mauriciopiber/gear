@@ -23,7 +23,7 @@ class EntityServiceTest extends TestCase
         $this->entityTestService = $this->prophesize('Gear\Mvc\Entity\EntityTestService');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->srcService = $this->prophesize('Gear\Constructor\Src\SrcService');
-        $this->srcService = $this->prophesize('GearJson\Src\SrcService');
+        $this->srcService = $this->prophesize('GearJson\Src\SrcSchema');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
         $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
 
@@ -60,12 +60,11 @@ class EntityServiceTest extends TestCase
     }
 
     /**
-     * @group me1
+     * @group count1
      */
     public function testGetNames()
     {
         $this->schemaService->getSchemaLoaderService()->willReturn($this->schemaLoaderService->reveal())->shouldBeCalled();
-
         $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
         $this->assertEquals([***REMOVED***, $this->service->getNames());
     }

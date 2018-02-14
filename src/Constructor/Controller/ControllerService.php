@@ -8,8 +8,8 @@ namespace Gear\Constructor\Controller;
 
 use GearJson\Controller\{
     Controller,
-    ControllerService as ControllerSchema,
-    ControllerServiceTrait as ControllerSchemaTrait
+    ControllerSchema,
+    ControllerSchemaTrait
 };
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use GearBase\Util\String\{
@@ -116,7 +116,7 @@ class ControllerService extends AbstractConstructor
         parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
         //schema
-        $this->controllerService = $controllerSchema;
+        $this->controllerSchema = $controllerSchema;
         //controller action
         $this->mvcService = $controllerService;
         $this->controllerTestService = $controllerTestService;
@@ -161,7 +161,7 @@ class ControllerService extends AbstractConstructor
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->controller = $this->getControllerService()->create(
+        $this->controller = $this->getControllerSchema()->create(
             $module,
             $data,
             false

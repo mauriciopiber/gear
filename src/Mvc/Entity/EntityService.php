@@ -15,8 +15,8 @@ use Gear\Mvc\AbstractMvc;
 use Zend\Db\Metadata\Object\TableObject;
 use GearJson\Schema\SchemaServiceTrait;
 use GearJson\Schema\SchemaService;
-use GearJson\Src\SrcServiceTrait;
-use GearJson\Src\SrcService;
+use GearJson\Src\SrcSchemaTrait;
+use GearJson\Src\SrcSchema;
 use Gear\Exception\InvalidArgumentException;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Script\ScriptService;
@@ -48,7 +48,7 @@ use GearBase\Util\String\StringServiceTrait;
 class EntityService extends AbstractMvc
 {
     use ModuleAwareTrait;
-    use SrcServiceTrait;
+    use SrcSchemaTrait;
     use SchemaServiceTrait;
     use ScriptServiceTrait;
     use EntityTestServiceTrait;
@@ -74,7 +74,7 @@ class EntityService extends AbstractMvc
         ScriptService $script,
         EntityTestService $entityTest,
         TableService $table,
-        SrcService $srcService,
+        SrcSchema $srcService,
         ServiceManager $serviceManager,
         SchemaService $schema,
         DirService $dirService,
@@ -88,7 +88,7 @@ class EntityService extends AbstractMvc
         $this->scriptService = $script;
         $this->entityTestService = $entityTest;
         $this->tableService = $table;
-        $this->srcService = $srcService;
+        $this->srcSchema = $srcService;
         $this->serviceManager = $serviceManager;
         $this->schemaService = $schema;
         $this->dirService = $dirService;
@@ -160,7 +160,7 @@ class EntityService extends AbstractMvc
 
             /*
            @TODO descomentar
-            $src = $this->getSrcService()->create(
+            $src = $this->getSrcSchema()->create(
                 $this->getModule()->getModuleName(),
                 [
                     'name' => 'UploadImage',
@@ -274,7 +274,7 @@ class EntityService extends AbstractMvc
 
         $names = [***REMOVED***;
 
-        if (count($dbs) > 0) {
+        if (is_array($dbs) && count($dbs) > 0) {
             foreach ($dbs as $table) {
                 $names[***REMOVED*** = $table->getTable();
             }
@@ -282,13 +282,15 @@ class EntityService extends AbstractMvc
 
         $srcs = $this->getSchemaService()->__extractObject('src');
 
+        if (is_array($srcs) === false || count($srcs) <= 1) {
+            return $names;
+        }
+
         foreach ($srcs as $src) {
             if ($src->getType() == 'Entity') {
                 $names[***REMOVED*** = $src->getName();
             }
         }
-
-
 
         return $names;
     }

@@ -12,8 +12,8 @@ use Gear\Module\ComposerService;
 use Gear\Module\Tests\ModuleTestsService;
 use GearJson\Schema\SchemaService;
 use GearJson\Schema\Loader\SchemaLoaderService;
-use GearJson\Controller\ControllerService as ControllerSchema;
-use GearJson\Action\ActionService;
+use GearJson\Controller\ControllerSchema as ControllerSchema;
+use GearJson\Action\ActionSchema;
 use Gear\Mvc\Controller\Console\{
     ConsoleControllerService,
     ConsoleControllerTestService,
@@ -95,7 +95,7 @@ class ModuleServiceTest extends TestCase
 
         $this->schemaController = $this->prophesize(ControllerSchema::class);
 
-        $this->schemaAction = $this->prophesize(ActionService::class);
+        $this->schemaAction = $this->prophesize(ActionSchema::class);
 
         $this->consoleControllerTest = $this->prophesize(ConsoleControllerTestService::class);
 

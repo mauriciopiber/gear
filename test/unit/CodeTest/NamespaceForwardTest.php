@@ -23,8 +23,8 @@ class NamespaceForwardTest extends TestCase
         $this->assertEquals([
             'use GearJson\Schema\SchemaService;',
             'use GearJson\Schema\Loader\SchemaLoaderService;',
-            'use GearJson\Controller\ControllerService;',
-            'use GearJson\Action\ActionService;',
+            'use GearJson\Controller\ControllerSchema;',
+            'use GearJson\Action\ActionSchema;',
             'use Gear\Mvc\ConsoleController\ConsoleControllerTest;',
             'use Gear\Mvc\ConsoleController\ConsoleController;'
         ***REMOVED***, $result['use'***REMOVED***);

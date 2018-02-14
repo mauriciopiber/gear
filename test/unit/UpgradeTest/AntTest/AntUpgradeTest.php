@@ -62,8 +62,11 @@ class AntUpgradeTest extends TestCase
         $yaml = new YamlService();
 
         $type = [
-            ['web', 'module'***REMOVED***,
+
             ['cli', 'module'***REMOVED***,
+            ['src-zf2', 'module'***REMOVED***,
+            ['api', 'module'***REMOVED***,
+            ['web', 'module'***REMOVED***,
         ***REMOVED***;//, 'web'
 
         $check = [***REMOVED***;

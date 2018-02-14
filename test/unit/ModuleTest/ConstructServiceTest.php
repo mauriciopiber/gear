@@ -4,10 +4,10 @@ namespace GearTest\ModuleTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ConstructService;
-use GearJson\Db\DbService as SchemaDbService;
-use GearJson\Src\SrcService as SchemaSrcService;
-use GearJson\Controller\ControllerService as SchemaControllerService;
-use GearJson\Action\ActionService as SchemaActionService;
+use GearJson\Db\DbSchema;
+use GearJson\Src\SrcSchema;
+use GearJson\Controller\ControllerSchema;
+use GearJson\Action\ActionSchema;
 use GearJson\App\AppService as SchemaAppService;
 use Gear\Constructor\Db\DbService;
 use Gear\Constructor\Src\SrcService;
@@ -42,10 +42,10 @@ class ConstructServiceTest extends TestCase
         $this->basepath = vfsStream::url(self::ROOT_URL);
         $this->config = null;
 
-        $this->dbSchema = $this->prophesize(SchemaDbService::class);
-        $this->srcSchema = $this->prophesize(SchemaSrcService::class);
-        $this->controllerSchema = $this->prophesize(SchemaControllerService::class);
-        $this->actionSchema = $this->prophesize(SchemaActionService::class);
+        $this->dbSchema = $this->prophesize(DbSchema::class);
+        $this->srcSchema = $this->prophesize(SrcSchema::class);
+        $this->controllerSchema = $this->prophesize(ControllerSchema::class);
+        $this->actionSchema = $this->prophesize(ActionSchema::class);
         $this->appSchema = $this->prophesize(SchemaAppService::class);
 
 
@@ -74,11 +74,11 @@ class ConstructServiceTest extends TestCase
 
     public function testGetSchemaServices()
     {
-        $this->assertEquals($this->construct->getDbService(), $this->dbSchema->reveal());
-        $this->assertEquals($this->construct->getSrcService(), $this->srcSchema->reveal());
         $this->assertEquals($this->construct->getAppService(), $this->appSchema->reveal());
-        $this->assertEquals($this->construct->getActionService(), $this->actionSchema->reveal());
-        $this->assertEquals($this->construct->getControllerService(), $this->controllerSchema->reveal());
+        $this->assertEquals($this->construct->getDbSchema(), $this->dbSchema->reveal());
+        $this->assertEquals($this->construct->getSrcSchema(), $this->srcSchema->reveal());
+        $this->assertEquals($this->construct->getActionSchema(), $this->actionSchema->reveal());
+        $this->assertEquals($this->construct->getControllerSchema(), $this->controllerSchema->reveal());
 
         $this->assertEquals($this->construct->getDbConstructor(), $this->dbService->reveal());
         $this->assertEquals($this->construct->getSrcConstructor(), $this->srcService->reveal());
@@ -374,7 +374,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        //$srcschema = $this->prophesize('GearJson\Src\SrcService');
+        //$srcschema = $this->prophesize('GearJson\Src\SrcSchema');
 
         //$src = new \GearJson\Src\Src($data);
 
@@ -492,14 +492,14 @@ EOS
 
         $controller = new \GearJson\Controller\Controller($data);
 
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
         $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
-        $this->construct->setControllerService($controllerschema->reveal());
+        $this->construct->setControllerSchema($controllerschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -524,13 +524,13 @@ EOS
      */
     public function testControllerDuplicade()
     {
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
 
         $controller = new \GearJson\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
 
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(true);
 
-        $this->construct->setControllerService($controllerschema->reveal());
+        $this->construct->setControllerSchema($controllerschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -730,14 +730,14 @@ EOS
 
 
 
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerService');
+        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
         $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerService');
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
-        $this->construct->setControllerService($controllerschema->reveal());
+        $this->construct->setControllerSchema($controllerschema->reveal());
 
 
         $data = array_merge($data, [
@@ -747,11 +747,11 @@ EOS
         ***REMOVED***);
 
         //action
-        $actionschema = $this->prophesize('GearJson\Action\ActionService');
+        $actionschema = $this->prophesize('GearJson\Action\ActionSchema');
 
         $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $actionschema->actionExist('Gearing', $action)->willReturn(true);
-        $this->construct->setActionService($actionschema->reveal());
+        $this->construct->setActionSchema($actionschema->reveal());
 
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
@@ -856,14 +856,14 @@ EOS
 
         $db = new \GearJson\Db\Db($data);
 
-        $dbschema = $this->prophesize('GearJson\Db\DbService');
+        $dbschema = $this->prophesize('GearJson\Db\DbSchema');
         $dbschema->dbExist('Gearing', $db)->willReturn(false);
 
         $dbservice = $this->prophesize('Gear\Constructor\Db\DbService');
         $dbservice->create($data)->willReturn(true);
 
         $this->construct->setDbConstructor($dbservice->reveal());
-        $this->construct->setDbService($dbschema->reveal());
+        $this->construct->setDbSchema($dbschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 
@@ -888,13 +888,13 @@ EOS
      */
     public function testDbDuplicade()
     {
-        $dbschema = $this->prophesize('GearJson\Db\DbService');
+        $dbschema = $this->prophesize('GearJson\Db\DbSchema');
 
         $db = new \GearJson\Db\Db(['table' => 'Gearit', 'columns' => [***REMOVED******REMOVED***);
 
         $dbschema->dbExist('Gearing', $db)->willReturn(true);
 
-        $this->construct->setDbService($dbschema->reveal());
+        $this->construct->setDbSchema($dbschema->reveal());
 
         $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
 

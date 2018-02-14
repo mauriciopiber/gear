@@ -9,8 +9,8 @@ namespace Gear\Constructor\Src;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
-use GearJson\Src\SrcServiceTrait as JsonSrc;
-use GearJson\Src\SrcService as SrcSchema;
+use GearJson\Src\SrcSchemaTrait as JsonSrc;
+use GearJson\Src\SrcSchema as SrcSchema;
 use Gear\Mvc\Form\FormServiceTrait;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
@@ -122,7 +122,7 @@ class SrcService extends AbstractConstructor
         InterfaceService $interfaceService
     ) {
         parent::__construct($module, null, $tableService, $columnService);
-        $this->srcService = $srcSchema;
+        $this->srcSchema = $srcSchema;
         $this->serviceManager = $serviceManager;
         $this->traitService = $traitService;
         $this->traitTestService = $traitTestService;
@@ -154,7 +154,7 @@ class SrcService extends AbstractConstructor
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->src = $this->getSrcService()->create(
+        $this->src = $this->getSrcSchema()->create(
             $module,
             $data,
             false
@@ -207,7 +207,7 @@ class SrcService extends AbstractConstructor
         $validations = ['created' => [***REMOVED***, 'validated' => [***REMOVED******REMOVED***;
 
         foreach ($srcs as $src) {
-            $srcObject = $this->getSrcService()->factory(
+            $srcObject = $this->getSrcSchema()->factory(
                 $this->getModule()->getModuleName(),
                 $src,
                 false
@@ -239,7 +239,7 @@ class SrcService extends AbstractConstructor
         $validations = ['created' => [***REMOVED***, 'validated' => [***REMOVED******REMOVED***;
 
         foreach ($srcs as $src) {
-            $srcItem = $this->getSrcService()->create(
+            $srcItem = $this->getSrcSchema()->create(
                 $this->getModule()->getModuleName(),
                 $src,
                 false

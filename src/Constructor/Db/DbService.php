@@ -3,8 +3,8 @@ namespace Gear\Constructor\Db;
 
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 //use Gear\Table\TableService\TableService;
-use GearJson\Db\DbServiceTrait as DbSchemaTrait;
-use GearJson\Action\ActionServiceTrait as ActionSchemaTrait;
+use GearJson\Db\DbSchemaTrait as DbSchemaTrait;
+use GearJson\Action\ActionSchemaTrait as ActionSchemaTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
@@ -39,8 +39,8 @@ use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Column\ColumnService;
-use GearJson\Db\DbService as DbSchema;
-use GearJson\Action\ActionService as ActionSchema;
+use GearJson\Db\DbSchema as DbSchema;
+use GearJson\Action\ActionSchema as ActionSchema;
 use Gear\Module\BasicModuleStructure;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Table\UploadImage as UploadImageTable;
@@ -110,8 +110,8 @@ class DbService extends AbstractConstructor
         BasicModuleStructure $module
     ) {
         parent::__construct($module, null, $tableService, $columnService);
-        $this->actionService = $actionSchema;
-        $this->dbService = $dbSchema;
+        $this->actionSchema = $actionSchema;
+        $this->dbSchema = $dbSchema;
         $this->feature = $feature;
         $this->step = $step;
         $this->entityService = $entityService;
@@ -137,14 +137,14 @@ class DbService extends AbstractConstructor
     {
         $module = $this->getModule()->getModuleName();
 
-        $db = $this->getDbService()->create($module, $params, false);
+        $db = $this->getDbSchema()->create($module, $params, false);
 
         if ($db instanceof ConsoleValidationStatus) {
             return $db;
         }
 
         if ($this->getTableService()->verifyTableAssociation($db->getTable(), UploadImageTable::NAME)) {
-            $this->getActionService()->create(
+            $this->getActionSchema()->create(
                 $module,
                 [
                     'controllerNamespace' => ($db->getNamespace() !== null) ? $db->getNamespace().'\Controller' : 'Controller',

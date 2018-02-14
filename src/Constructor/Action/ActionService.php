@@ -6,7 +6,7 @@ namespace Gear\Constructor\Action;
 use GearJson\Controller\Controller;
 use GearJson\Action\Action;
 use GearJson\Db\Db;
-use GearJson\Action\ActionServiceTrait as ActionSchemaTrait;
+use GearJson\Action\ActionSchemaTrait as ActionSchemaTrait;
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Mvc\Config\RouterManagerTrait;
 use Gear\Mvc\Config\ConsoleRouterManagerTrait;
@@ -25,7 +25,7 @@ use Gear\Module\ModuleAwareTrait;
 use Gear\Module\ModuleAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Mvc\Spec\Feature\Feature;
-use GearJson\Action\ActionService as ActionSchema;
+use GearJson\Action\ActionSchema as ActionSchema;
 use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
@@ -136,7 +136,7 @@ class ActionService extends AbstractConstructor
     ) {
         parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
-        $this->actionService = $actionService;
+        $this->actionSchema = $actionService;
         //$this->configService = $configService;
         $this->router = $routerManager;
         $this->consoleRouter = $consoleRouterManager;
@@ -160,7 +160,7 @@ class ActionService extends AbstractConstructor
     {
         $module = $this->getModule()->getModuleName();
 
-        $this->action = $this->getActionService()->create(
+        $this->action = $this->getActionSchema()->create(
             $module,
             $data,
             false

@@ -1,1 +1,1 @@
-<target name="measure" depends="prepare, parallel-lint, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
+<target name="measure" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
