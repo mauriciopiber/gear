@@ -1,0 +1,13 @@
+sep="\\\\"
+
+
+cd /var/www/gear-package/gear/src
+
+
+
+find . -name "*.php" -exec sed -i \
+-e "s//g" \
+{} \; \
+
+
+cd /var/www/gear-package/gear/test/unit
