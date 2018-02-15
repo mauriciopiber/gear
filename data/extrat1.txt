@@ -1,43 +1,72 @@
-        parent::setUp();
-
-        $this->fileCreator    = $this->createFileCreator();
-
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
-        $this->module->getModuleName()->willReturn('MyModule');
-
-        $this->string = new \GearBase\Util\String\StringService();
-
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module';
-
-        $this->root = vfsStream::setup('module');
-        vfsStream::newDirectory('test')->at($this->root);
-
-        $parser = new Parser();
-
-        $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/ant.yml')
-        );
-
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-
-        $this->config = [***REMOVED***;
-
-        $this->edge = $this->prophesize('Gear\Edge\AntEdge\AntEdge');
-        $this->edge->getAntModule('web')->willReturn($files)->shouldBeCalled();
-
-        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+       $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
 
 
+        $this->arrayService = new ArrayService();
 
-        $this->upgrade = new \Gear\Upgrade\AntUpgrade(
-            $this->console->reveal(),
-            $this->consolePrompt->reveal(),
+        $this->string = new StringService();
+
+        $template       = new TemplateService();
+
+        $templatePath = (new Module)->getLocation().'/../view';
+
+        $resolver = new AggregateResolver();
+
+        $map = new TemplatePathStack(array(
+            'script_paths' => array(
+                'template' => $templatePath,
+            )
+        ));
+
+        $resolver->attach($map);
+
+        $view = new PhpRenderer();
+
+        $view->setResolver($resolver);
+
+        $template->setRenderer($view);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
+
+        $this->template =  (new Module())->getLocation().'/../test/template/module/mvc/controller';
+
+
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+
+
+        $this->injector = new Injector($this->arrayService);
+
+        $this->controllerService = new WebControllerService();
+        $this->controllerService->setFileCreator($this->fileCreator);
+        $this->controllerService->setStringService($this->string);
+        $this->controllerService->setModule($this->module->reveal());
+        $this->controllerService->setInjector($this->injector);
+
+        $this->controllerService->setFactoryService($this->factory->reveal());
+        $this->controllerService->setArrayService($this->arrayService);
+
+
+        $this->code = new Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
+
+        $this->controllerService->setCode($this->code);
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->controllerService->setTableService($this->table->reveal());
+
+        $this->testing = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerTestService');
+        $this->controllerService->setControllerTestService($this->testing->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->controllerService->setSchemaService($this->schema->reveal());
+
+        $uploadImage = new \Gear\Table\UploadImage(
             $this->string,
-            $this->config,
-            $this->module->reveal(),
-            $this->gearConfig->reveal()
+            $this->module->reveal()
         );
 
-        $this->upgrade->setAntEdge($this->edge->reveal());
+        $this->controllerService->setUploadImage($uploadImage);

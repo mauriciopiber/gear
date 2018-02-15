@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\File\FileEdge;
+use Gear\Module\Docs\Docs;
 
 /**
  * @group Gear
@@ -37,6 +38,11 @@ class FileUpgradeFactoryTest extends TestCase
         $this->serviceLocator->get(FileEdge::class)
           ->willReturn($this->prophesize(FileEdge::class)->reveal())
           ->shouldBeCalled();
+
+        $this->serviceLocator->get(Docs::class)
+          ->willReturn($this->prophesize(Docs::class)->reveal())
+          ->shouldBeCalled();
+
         $factory = new \Gear\Upgrade\File\FileUpgradeFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());

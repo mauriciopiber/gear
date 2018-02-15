@@ -21,6 +21,13 @@ use GearTest\UtilTestTrait;
 use GearTest\ControllerScopeTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
+use Gear\Module\BasicModuleStructure;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Table\TableService\TableService;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
+use GearJson\Schema\SchemaService;
+use GearBase\Util\Dir\DirService;
+use Gear\Table\UploadImage;
 
 /**
  * @group Fixing
@@ -41,40 +48,16 @@ class WebControllerServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
         $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->fileCreator = $this->createFileCreator();
+        $this->template =  (new Module())->getLocation().'/../test/template/module/mvc/controller';
 
 
+        $this->module = $this->prophesize(BasicModuleStructure::class);
         $this->arrayService = new ArrayService();
 
         $this->string = new StringService();
 
-        $template       = new TemplateService();
-
-        $templatePath = (new Module)->getLocation().'/../view';
-
-        $resolver = new AggregateResolver();
-
-        $map = new TemplatePathStack(array(
-            'script_paths' => array(
-                'template' => $templatePath,
-            )
-        ));
-
-        $resolver->attach($map);
-
-        $view = new PhpRenderer();
-
-        $view->setResolver($resolver);
-
-        $template->setRenderer($view);
-        $fileService    = new FileService();
-        $this->fileCreator    = new FileCreator($fileService, $template);
-
-        $this->template =  (new Module())->getLocation().'/../test/template/module/mvc/controller';
-
-
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-
+        $this->factory = $this->prophesize(FactoryService::class);
 
         $this->injector = new Injector($this->arrayService);
 
@@ -91,23 +74,23 @@ class WebControllerServiceTest extends TestCase
         $this->code = new Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new DirService());
 
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
 
         $this->controllerService->setCode($this->code);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->controllerService->setTableService($this->table->reveal());
 
-        $this->testing = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerTestService');
+        $this->testing = $this->prophesize(WebControllerTestService::class);
         $this->controllerService->setControllerTestService($this->testing->reveal());
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
         $this->controllerService->setSchemaService($this->schema->reveal());
 
-        $uploadImage = new \Gear\Table\UploadImage(
+        $uploadImage = new UploadImage(
             $this->string,
             $this->module->reveal()
         );

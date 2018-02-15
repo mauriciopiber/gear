@@ -2,6 +2,14 @@
 namespace Gear\Mvc\Controller\Api;
 
 use Gear\Mvc\Controller\AbstractControllerService;
+use Gear\Module\BasicModuleStructure;
+use Gear\Module\ModuleAwareTrait;
+use GearBase\Util\String\StringService;
+use GearBase\Util\String\StringServiceTrait;
+use Gear\Creator\Code;
+use Gear\Creator\CodeTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
 /**
  * PHP Version 5
@@ -24,8 +32,27 @@ class ApiControllerService extends AbstractControllerService
      *
      * @return ApiControllerService
      */
-    public function __construct()
-    {
+    public function __construct(
+        BasicModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $stringService,
+        Code $code
+    ) {
+        $this->module = $module;
+        $this->fileCreator = $fileCreator;
+        $this->stringService = $stringService;
+        $this->code = $code;
         return $this;
+    }
+
+    public function module()
+    {
+
+    }
+
+    public function moduleFactory()
+    {
+
+
     }
 }

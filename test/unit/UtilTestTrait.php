@@ -60,7 +60,7 @@ trait UtilTestTrait
         return $view;
     }
 
-    public function createFileCreator($templateMap = null)
+    public function createFileCreator()
     {
         if ($this->fileCreator === null) {
             $template       = new TemplateService();

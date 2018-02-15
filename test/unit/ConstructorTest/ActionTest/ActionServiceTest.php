@@ -43,7 +43,7 @@ class ActionConstructorTest extends TestCase
         $this->moduleName = 'Gearing';
 
         $this->module = $this->prophesize(BasicModuleStructure::class);
-        $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
+        $this->module->getModuleName()->willReturn($this->moduleName);
 
 
         //mvc controller
@@ -66,7 +66,7 @@ class ActionConstructorTest extends TestCase
         $this->consoleRouterManager = $this->prophesize(ConsoleRouterManager::class);
 
         //schema
-        $this->schemaAction = $this->prophesize(ActionSchema::class);
+        $this->actionSchema = $this->prophesize(ActionSchema::class);
         $this->schemaService = $this->prophesize(SchemaService::class);
 
         $this->stringService = new StringService();
@@ -75,7 +75,7 @@ class ActionConstructorTest extends TestCase
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
 
         $this->actionService = new ActionConstructor(
-            $this->schemaAction->reveal(),
+            $this->actionSchema->reveal(),
             $this->routerManager->reveal(),
             $this->consoleRouterManager->reveal(),
             $this->navigationManager->reveal(),
@@ -96,6 +96,27 @@ class ActionConstructorTest extends TestCase
         );
     }
 
+    public function testCreateModule()
+    {
+        $this->actionSchema->create(
+            $this->moduleName,
+            [
+                'controller' => 'IndexController',
+                'name' => 'Index'
+            ***REMOVED***,
+            false
+        )->shouldBeCalled();
+
+        $this->viewService->createIndexView()->shouldBeCalled();
+        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
+        $this->appController->createIndexController()->shouldBeCalled();
+        $this->feature->createIndexFeature()->shouldBeCalled();
+        $this->page->createIndexPage()->shouldBeCalled();
+        $this->step->createIndexStep()->shouldBeCalled();
+
+        $this->assertTrue($this->actionService->createModule());
+    }
+
     /**
      * @group pxp1
      */
@@ -103,7 +124,7 @@ class ActionConstructorTest extends TestCase
     {
         $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 
-        $this->schemaAction->create(
+        $this->actionSchema->create(
             'Gearing',
             [
                 'controller' => 'MyController',
@@ -146,7 +167,7 @@ class ActionConstructorTest extends TestCase
         $action->setController($controller);
 
 
-        $this->schemaAction->create(
+        $this->actionSchema->create(
             'Gearing',
             [
                 'controller' => 'MyController',
@@ -214,7 +235,7 @@ class ActionConstructorTest extends TestCase
         $controller->setType('Action');
         $action->setController($controller);
 
-        $this->schemaAction->create(
+        $this->actionSchema->create(
             'Gearing',
             [
                 'controller' => 'MyController',
@@ -225,7 +246,7 @@ class ActionConstructorTest extends TestCase
         ->willReturn($action)
         ->shouldBeCalled();
         //$this->schemaService->getController('Gearing', 'MyController')->willReturn($arrayController)->shouldBeCalled();
-        //$this->schemaAction->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
+        //$this->actionSchema->getSchemaService()->willReturn($this->schemaService->reveal())->shouldBeCalled();
 
         $this->viewService->build($action)->willReturn(true)->shouldBeCalled();
         $this->routerManager->create($action)->willReturn(true)->shouldBeCalled();
@@ -266,7 +287,7 @@ class ActionConstructorTest extends TestCase
         $controller->setType('Console');
         $action->setController($controller);
 
-        $this->schemaAction->create(
+        $this->actionSchema->create(
             'Gearing',
             [
                 'controller' => 'MyController',

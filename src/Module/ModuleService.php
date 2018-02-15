@@ -81,8 +81,6 @@ use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Step\StepTrait;
-use Gear\Mvc\Spec\UnitTest\UnitTest;
-use Gear\Mvc\Spec\UnitTest\UnitTestTrait;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
@@ -95,6 +93,10 @@ use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
 use Gear\Module\ConstructService;
 use Gear\Module\ConstructServiceTrait;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Controller\ControllerConstructorTrait;
+use Gear\Constructor\Action\ActionConstructor;
+use Gear\Constructor\Action\ActionConstructorTrait;
 
 /**
  *
@@ -119,7 +121,6 @@ class ModuleService
     use StringServiceTrait;
     use FeatureTrait;
     use StepTrait;
-    use UnitTestTrait;
     use PageTrait;
     use DocsTrait;
     use GulpfileTrait;
@@ -129,21 +130,15 @@ class ModuleService
     use ModuleTestsServiceTrait;
     use ComposerServiceTrait;
     use ViewServiceTrait;
-    use AppControllerServiceTrait;
-    use AppControllerSpecServiceTrait;
     use CacheServiceTrait;
     use VersionServiceTrait;
     use ConfigServiceTrait;
     use CodeceptionServiceTrait;
-    use WebControllerServiceTrait;
-    use WebControllerTestServiceTrait;
     use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
     use ControllerSchemaTrait;
     use ActionSchemaTrait;
-    use ConsoleControllerServiceTrait;
-    use ConsoleControllerTestServiceTrait;
     use ApplicationConfigTrait;
     use ComposerAutoloadTrait;
     use DirServiceTrait;
@@ -164,7 +159,6 @@ class ModuleService
         BasicModuleStructure $module,
         Docs $docs,
         ComposerService $composer,
-        CodeceptionService $codeception,
         ModuleTestsService $test,
         Karma $karma,
         Protractor $protractor,
@@ -173,20 +167,8 @@ class ModuleService
         LanguageService $language,
         Schema $schema,
         SchemaLoader $schemaLoader,
-        SchemaController $schemaController,
-        SchemaAction $schemaAction,
         ConfigService $configService,
-        WebControllerService $controller,
-        WebControllerTestService $controllerTest,
-        ConsoleControllerService $consoleController,
-        ConsoleControllerTestService $consoleTest,
         ViewService $viewService,
-        AppControllerService $appController,
-        AppControllerSpecService $appControllerSpec,
-        Feature $feature,
-        Step $step,
-        Page $page,
-        UnitTest $unitTest,
         $request,
         CacheService $cache,
         ApplicationConfig $applicationConfig,
@@ -194,7 +176,8 @@ class ModuleService
         array $config,
         DirService $dirService,
         GearConfig $gearConfig,
-        ConstructService $constructService
+        ControllerConstructor $controllerConstructor,
+        ActionConstructor $actionConstructor
     ) {
         $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
@@ -202,7 +185,6 @@ class ModuleService
         $this->module = $module;
         $this->docs = $docs;
         $this->composerService = $composer;
-        $this->codeception = $codeception;
         $this->moduleTestsService = $test;
 
         $this->karma = $karma;
@@ -213,23 +195,9 @@ class ModuleService
 
         $this->schemaService = $schema;
         $this->schemaLoaderService = $schemaLoader;
-        $this->controllerSchema = $schemaController;
-        $this->actionSchema = $schemaAction;
 
         $this->configService = $configService;
-        $this->mvcService = $controller;
-        $this->controllerTestService = $controllerTest;
-        $this->consoleControllerTest = $consoleTest;
-        $this->consoleController = $consoleController;
         $this->viewService = $viewService;
-
-        $this->appControllerService = $appController;
-        $this->appControllerSpecService = $appControllerSpec;
-
-        $this->feature = $feature;
-        $this->step = $step;
-        $this->page = $page;
-        $this->unitTest = $unitTest;
 
         $this->request = $request;
         $this->cacheService = $cache;
@@ -240,7 +208,8 @@ class ModuleService
 
         $this->dirService = $dirService;
 
-        $this->constructService = $constructService;
+        $this->controllerConstructor = $controllerConstructor;
+        $this->actionConstructor = $actionConstructor;
     }
 
 
@@ -327,7 +296,7 @@ class ModuleService
 
     public function createAdditionalViewFiles()
     {
-        if ($this->type !== 'web') {
+        if ($this->type !== ModuleTypesInterface::WEB) {
             return;
         }
 
@@ -354,17 +323,55 @@ class ModuleService
         $configService->module($this->type, $this->staging);
 
         $this->getComposerService()->createComposerAsProject($this->type);
+
         $this->createApplicationConfig($this->type);
+
         $this->createConfigGlobal();
+
         $this->createConfigLocal();
-        $this->createIndex();
+
+        $this->createPublicIndex();
+
         $this->createInitAutoloader();
+
         $this->createDeploy();
+
         $this->getPhinxConfig();
+
         $this->getModuleTestsService()->createTestsModuleAsProject($this->type);
-            //criar script de deploy para módulo
 
+        $this->createGitIgnore($this->type);
 
+        $this->createModuleFile();
+
+        $this->createDocs();
+
+        $this->createJenkinsFile($this->type);
+
+        if ($this->type === ModuleTypesInterface::WEB) {
+            $this->getKarmaConfig();
+            $this->getProtractorConfig();
+            $this->getProtractor()->report();
+            $this->getPackageConfig();
+            $this->getGulpFileConfig();
+            $this->getGulpFileJs();
+            $this->createAdditionalViewFiles();
+
+            if (!empty($this->staging)) {
+                $this->getStagingScript();
+                $this->getInstallStagingScript();
+            }
+
+            $languageService = $this->getLanguageService();
+            $languageService->module();
+        }
+
+        $this->createIndex();
+        return true;
+    }
+
+    public function createIndex()
+    {
         if (in_array($this->type, [
             ModuleTypesInterface::WEB,
             ModuleTypesInterface::CLI,
@@ -374,84 +381,20 @@ class ModuleService
             $this->registerJson();
         }
 
-        $codeceptionService = $this->getCodeceptionService();
-        $codeceptionService->createFullSuite();
-
-        switch ($this->type) {
-            case 'web':
-                $controllerTService = $this->getControllerTestService();
-                $controllerService     = $this->getMvcController();
-
-                $controllerTService->module();
-                $controllerTService->moduleFactory();
-                $controllerService->module();
-                $controllerService->moduleFactory();
-
-                $this->getKarmaConfig();
-                $this->getProtractorConfig();
-                $this->getProtractor()->report();
-                $this->getPackageConfig();
-                $this->getGulpFileConfig();
-                $this->getGulpFileJs();
-
-
-                /* @var $viewService \Gear\Service\Mvc\ViewService */
-                $viewService = $this->getViewService();
-                $viewService->createIndexView();
-                //$viewService->copyBasicLayout();
-                $this->createAdditionalViewFiles();
-
-                $this->getAppControllerSpecService()->createTestIndexAction();
-                $this->getAppControllerService()->createIndexController();
-
-                if ($collection == 2) {
-                    $this->getFeature()->createIndexFeature(
-                        $this->str('label', $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***)
-                    );
-                } else {
-                    $this->getFeature()->createIndexFeature();
-                }
-
-                $this->getPage()->createIndexPage();
-                $this->getStep()->createIndexStep();
-
-                if ($collection == 1 && !empty($this->staging)) {
-                    $this->getStagingScript();
-                    $this->getInstallStagingScript();
-                }
-
-                $languageService = $this->getLanguageService();
-                $languageService->module();
-
-                break;
-
-            case 'cli':
-                $consoleTest = $this->getConsoleControllerTest();
-                $consoleController = $this->getConsoleController();
-                $consoleTest->module();
-                $consoleTest->moduleFactory();
-                $consoleController->module();
-                $consoleController->moduleFactory();
-
-
-
-                break;
+        if (in_array($this->type, [
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::CLI,
+            ModuleTypesInterface::API
+        ***REMOVED***)) {
+            $this->controllerConstructor->createModule($this->type);
         }
 
-        $this->createGitIgnore($this->type);
-
-        $this->getReadme();
-        $this->getConfigDocs();
-        $this->getIndexDocs();
-        $this->getChangelogDocs();
-
-        $this->createModuleFile();
-        //$this->createModuleFileAlias();
-
-
-        $this->createJenkinsFile($this->type);
-
-        return true;
+        if (in_array($this->type, [
+            ModuleTypesInterface::WEB
+        ***REMOVED***)) {
+            $this->actionConstructor->createModule($this->type);
+            //$this->actionConstructor->createModule($this->type);
+        }
     }
 
     public function createGitIgnore($type)
@@ -599,7 +542,7 @@ class ModuleService
      *
      * @return string
      */
-    public function createIndex()
+    public function createPublicIndex()
     {
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/public/index.phtml');
@@ -800,37 +743,15 @@ class ModuleService
         return $this->getDocs()->createReadme();
     }
 
-    /**
-     * Cria arquivo mkdocs.yml para configuraçõa da documentação
-     *
-     * @return string
-     */
-    public function getConfigDocs()
+    public function createDocs()
     {
-        return $this->getDocs()->createConfig();
+        $this->getDocs()->createConfig();
+        $this->getDocs()->createChangelog();
+        $this->getDocs()->createIndex();
+        $this->getDocs()->createReadme();
     }
 
-    /**
-     * Cria arquivo docs/index.md para página inicial da configuração.
-     *
-     * @return string
-     */
-    public function getChangelogDocs()
-    {
-        return $this->getDocs()->createChangelog();
-    }
-
-    /**
-     * Cria arquivo docs/index.md para página inicial da configuração.
-     *
-     * @return string
-     */
-    public function getIndexDocs()
-    {
-        return $this->getDocs()->createIndex();
-    }
-
-    /**
+   /**
      * Cria arquivo package.json para pacotes nodejs
      *
      * @return string
@@ -944,46 +865,7 @@ class ModuleService
     public function registerJson()
     {
         $module = $this->getModule()->getModuleName();
-
         $this->getSchemaService()->create($module);
-
-        if (in_array($this->type, ['src-zf2'***REMOVED***)) {
-            return true;
-        }
-
-        switch ($this->type) {
-            case 'web':
-                $type = 'Action';
-                break;
-            case 'cli':
-                $type = 'Console';
-                break;
-            case 'api':
-                $type = 'Api';
-                break;
-            default:
-                throw new \Exception('Missing mapping between module and controller');
-        }
-
-        $type = ($this->type == 'web') ? 'Action' : 'Console';
-
-        $this->getControllerSchema()->create(
-            $module,
-            [
-                'name' => 'IndexController',
-                'services' => 'factories',
-                'type' => $type
-            ***REMOVED***
-        );
-        $this->getActionSchema()->create(
-            $module,
-            [
-                'controller' => 'IndexController',
-                'name' => 'Index'
-            ***REMOVED***,
-            false
-        );
-
         $json = $this->getSchemaLoaderService()->loadSchema();
         return $json;
     }

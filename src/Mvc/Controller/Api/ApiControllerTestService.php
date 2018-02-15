@@ -23,4 +23,15 @@ class ApiControllerTestService extends AbstractControllerTestService
     {
         return $this;
     }
+
+    public function module()
+    {
+
+    }
+
+    public function moduleFactory()
+    {
+
+
+    }
 }
