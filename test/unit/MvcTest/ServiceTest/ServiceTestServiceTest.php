@@ -36,7 +36,7 @@ class ServiceTestServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
         $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->string = new \GearBase\Util\String\StringService();
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));

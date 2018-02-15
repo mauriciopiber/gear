@@ -2,7 +2,7 @@
 namespace GearTest\ServiceTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
@@ -42,7 +42,7 @@ class ActionConstructorTest extends TestCase
 
         $this->moduleName = 'Gearing';
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn($this->moduleName);
 
 

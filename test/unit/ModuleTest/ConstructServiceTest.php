@@ -948,7 +948,7 @@ EOS;
 
     public function testDefaultLocation()
     {
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $module->getMainFolder()->willReturn('whatthafuck');
 

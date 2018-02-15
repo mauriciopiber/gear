@@ -21,8 +21,8 @@ use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Mvc\Spec\Feature\Feature;
 use GearJson\Action\ActionSchema as ActionSchema;
@@ -44,7 +44,7 @@ use Gear\Mvc\Controller\Web\WebControllerTestServiceTrait;
 use Gear\Mvc\ConsoleController\ConsoleControllerTest;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Table\TableService\TableService;
@@ -57,7 +57,7 @@ class ActionConstructor extends AbstractConstructor
 {
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use PageTrait;
 
@@ -109,7 +109,7 @@ class ActionConstructor extends AbstractConstructor
      * @param Feature              $feature              Feature
      * @param Page                 $page                 Page
      * @param Step                 $step                 Step
-     * @param BasicModuleStructure $basicModuleStructure Basic Module Structure
+     * @param ModuleStructure $basicModuleStructure Basic Module Structure
      * @param StringService        $stringService        String Service
      *
      * @return ActionConstructor
@@ -129,7 +129,7 @@ class ActionConstructor extends AbstractConstructor
         Feature $feature,
         Page $page,
         Step $step,
-        BasicModuleStructure $basicModuleStructure,
+        ModuleStructure $basicModuleStructure,
         StringService $stringService,
         TableService $tableService,
         ColumnService $columnService

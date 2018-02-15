@@ -1,16 +1,16 @@
 <?php
 namespace Gear\Mvc\ValueObject;
 
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\CodeTest;
 use Gear\Creator\CodeTestTrait;
 use GearJson\Src\Src;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearJson\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcTest;
 
@@ -23,13 +23,13 @@ use Gear\Mvc\AbstractMvcTest;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ValueObjectTestService extends AbstractMvcTest implements ModuleAwareInterface
+class ValueObjectTestService extends AbstractMvcTest implements ModuleStructureInterface
 {
     use StringServiceTrait;
 
     use FileCreatorTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use CodeTestTrait;
 
@@ -47,7 +47,7 @@ class ValueObjectTestService extends AbstractMvcTest implements ModuleAwareInter
     public function __construct(
         StringService $stringService,
         FileCreator $fileCreator,
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         CodeTest $codeTest
     ) {
 

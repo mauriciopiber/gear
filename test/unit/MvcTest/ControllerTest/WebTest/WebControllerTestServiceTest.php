@@ -34,7 +34,7 @@ class WebControllerTestServiceTest extends TestCase
 
         $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->controllerTest->setModule($this->module->reveal());
 
 

@@ -7,8 +7,8 @@ use Gear\Edge\Npm\NpmEdge;
 use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
 
 class NpmService implements ModuleDiagnosticInterface
 {
@@ -16,7 +16,7 @@ class NpmService implements ModuleDiagnosticInterface
 
     use NpmEdgeTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use GearConfigTrait;
 
@@ -29,7 +29,7 @@ class NpmService implements ModuleDiagnosticInterface
     static public $requireRun = 'Nodejs - Você deve rodar o comando npm install para utilizar os testes';
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $config,
         NpmEdge $npmEdge
 

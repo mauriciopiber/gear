@@ -26,7 +26,7 @@ class AntServiceTest extends TestCase
 
         $this->assertFileExists(vfsStream::url('module/test'));
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->stringService = new StringService();
 
         $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');

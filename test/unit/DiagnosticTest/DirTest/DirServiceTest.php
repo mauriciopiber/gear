@@ -21,7 +21,7 @@ class DirServiceTest extends TestCase
 
         $root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
         $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);

@@ -5,8 +5,8 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirServiceAwareInterface;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
@@ -24,7 +24,7 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 abstract class AbstractCodeBase implements
     FileNamespaceInterface,
     FileLocationInterface,
-    ModuleAwareInterface,
+    ModuleStructureInterface,
     ServiceLocatorAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface
@@ -35,7 +35,7 @@ abstract class AbstractCodeBase implements
     use ServiceLocatorAwareTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     const USE = 'use %s;';
 

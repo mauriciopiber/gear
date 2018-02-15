@@ -18,7 +18,7 @@ class TraitTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getModuleName()->willReturn('GearIt');
 
         $this->baseDir = (new \Gear\Module)->getLocation();
@@ -67,7 +67,7 @@ class TraitTestServiceTest extends TestCase
 
     public function testDependency()
     {
-        $this->assertInstanceOf('Gear\Module\BasicModuleStructure', $this->traitTest->getModule());
+        $this->assertInstanceOf('Gear\Module\Structure\ModuleStructure', $this->traitTest->getModule());
         $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->traitTest->getFileCreator());
         $this->assertInstanceOf('Gear\Creator\CodeTest', $this->traitTest->getCodeTest());
     }

@@ -16,7 +16,7 @@ class DiagnosticServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
 
         $this->composer = $this->prophesize('Gear\Diagnostic\Composer\ComposerService');

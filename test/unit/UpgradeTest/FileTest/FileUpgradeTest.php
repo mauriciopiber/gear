@@ -24,7 +24,7 @@ class FileUpgradeTest extends TestCase
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->moduleService = $this->prophesize('Gear\Module\ModuleService');
         $this->projectService = $this->prophesize('Gear\Project\ProjectService');
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->fileEdge = $this->prophesize(FileEdge::class);

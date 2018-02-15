@@ -26,7 +26,7 @@ class InterfaceTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
 
         $this->baseDir = (new Module)->getLocation();

@@ -15,7 +15,7 @@ class ApplicationConfigFactoryTest extends TestCase
 
         $this->serviceLocator
           ->get('moduleStructure')
-          ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure'))
+          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure'))
           ->shouldBeCalled();
 
         $this->serviceLocator

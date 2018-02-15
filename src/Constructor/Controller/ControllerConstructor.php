@@ -45,7 +45,7 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\Config\ControllerManager;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\AbstractConstructor;
 use GearJson\Service\FactoriesInterface;
 use GearJson\Controller\Type\ActionInterface;
@@ -86,7 +86,7 @@ class ControllerConstructor extends AbstractConstructor
      * @param StringService         $stringService        String Service
      * @param ControllerConstructor     $controllerService    Controller Service
      * @param TableService          $tableService         Table Service
-     * @param BasicModuleStructure  $basicModuleStructure Basic Module Structure
+     * @param ModuleStructure  $basicModuleStructure Basic Module Structure
      * @param ControllerConstructor     $controllerService    Controller Service
      * @param ConsoleController     $consoleController    Console Controller
      * @param ConsoleControllerTest $controllerTest       Console Controller Test
@@ -102,7 +102,7 @@ class ControllerConstructor extends AbstractConstructor
         ControllerSchema $controllerSchema,
         TableService $tableService,
         ColumnService $columnService,
-        BasicModuleStructure $basicModuleStructure,
+        ModuleStructure $basicModuleStructure,
         WebControllerService $controllerService,
         WebControllerTestService $controllerTestService,
         ConsoleControllerService $consoleController,

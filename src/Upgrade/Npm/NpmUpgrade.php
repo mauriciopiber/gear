@@ -5,11 +5,11 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Edge\Npm\NpmEdge;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Project\ProjectLocationTrait;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringService;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\Prompt\ConsolePrompt;
 use GearBase\Config\GearConfig;
 
@@ -17,7 +17,7 @@ class NpmUpgrade
 {
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
@@ -43,7 +43,7 @@ class NpmUpgrade
     public $config;
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $gearConfig,
         NpmEdge $npmEdge,
         ConsolePrompt $consolePrompt,

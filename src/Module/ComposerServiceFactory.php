@@ -4,7 +4,7 @@ namespace Gear\Module;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\ComposerService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
@@ -30,7 +30,7 @@ class ComposerServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ComposerService(
-            $serviceLocator->get(BasicModuleStructure::class),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(ComposerEdge::class),
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get(ArrayService::class),

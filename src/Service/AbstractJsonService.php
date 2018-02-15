@@ -23,9 +23,9 @@ use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Util\Vector\ArrayServiceAwareInterface;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Creator\Template\TemplateServiceTrait;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\RequestTrait;
 
 abstract class AbstractJsonService implements
@@ -34,12 +34,12 @@ abstract class AbstractJsonService implements
     StringServiceAwareInterface,
     DirServiceAwareInterface,
     ArrayServiceAwareInterface,
-    ModuleAwareInterface,
+    ModuleStructureInterface,
     EventManagerAwareInterface
 {
     use RequestTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ServiceLocatorAwareTrait;
 

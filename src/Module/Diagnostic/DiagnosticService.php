@@ -43,7 +43,7 @@ class DiagnosticService extends AbstractDiagnostic
      * Construtor do diagnóstico
      *
      * @param Zend\Console $console
-     * @param Gear\Module\BasicModuleStructure $module
+     * @param Gear\Module\Structure\ModuleStructure $module
      */
     public function __construct(
         $console,

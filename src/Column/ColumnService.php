@@ -7,7 +7,7 @@ use Gear\Column\Int\ForeignKey;
 use Gear\Column\Int\PrimaryKey;
 use Gear\Column\Integer\Integer;
 use Gear\Column\UniqueInterface;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Table\TableService\TableServiceTrait;
 use GearBase\Util\String\StringServiceTrait;
@@ -32,7 +32,7 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
  */
 class ColumnService
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
     use StringServiceTrait;
     use TableServiceTrait;
 

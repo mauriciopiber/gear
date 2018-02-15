@@ -3,8 +3,8 @@ namespace Gear\Table;
 
 use GearBase\Util\String\StringService;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\BasicModuleStructure;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 
 /**
  *
@@ -26,7 +26,7 @@ class UploadImage
 {
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     const NAME = 'upload_image';
 
@@ -36,7 +36,7 @@ class UploadImage
 
     const ATTRIBUTE = 'ImageServiceTrait';
 
-    public function __construct(StringService $stringService, BasicModuleStructure $module)
+    public function __construct(StringService $stringService, ModuleStructure $module)
     {
         $this->stringService = $stringService;
         $this->module = $module;

@@ -22,7 +22,7 @@ class FileServiceTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/build.xml');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);

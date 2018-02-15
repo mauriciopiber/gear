@@ -22,7 +22,7 @@ class NpmServiceTest extends TestCase
         $this->file = vfsStream::url('module/package.json');
 
         $this->npmEdge = $this->prophesize(NpmEdge::class);
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->npmService = new NpmService(

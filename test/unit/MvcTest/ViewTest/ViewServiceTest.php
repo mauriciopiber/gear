@@ -30,7 +30,7 @@ class ViewServiceTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/view';
 

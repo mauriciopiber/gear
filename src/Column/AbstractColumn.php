@@ -4,7 +4,7 @@ namespace Gear\Column;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Gear\Column\UniqueInterface;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Util\String\StringServiceTrait;
 
 /**
@@ -25,7 +25,7 @@ use GearBase\Util\String\StringServiceTrait;
  */
 abstract class AbstractColumn implements UniqueInterface
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use StringServiceTrait;
 

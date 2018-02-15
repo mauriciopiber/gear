@@ -27,7 +27,7 @@ class SrcConstructorTest extends TestCase
 
     public function setUp()
     {
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         //$this->service->setSrcConstructor($schema);
         //$this->service->setRepositoryService($repository);
         //$this->service->setServiceManager($config);

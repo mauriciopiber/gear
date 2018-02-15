@@ -25,7 +25,7 @@ class PageTest extends TestCase
 
         $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();

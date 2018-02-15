@@ -20,7 +20,7 @@ class CodeTest extends TestCase
         parent::setUp();
         $this->code = new Code();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
 
         $this->code->setModule($this->module->reveal());

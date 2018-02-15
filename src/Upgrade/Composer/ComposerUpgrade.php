@@ -7,15 +7,15 @@ use Gear\Edge\Composer\ComposerEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringService;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Upgrade\ModuleUpgradeInterface;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 
 class ComposerUpgrade implements ModuleUpgradeInterface
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use StringServiceTrait;
 
@@ -60,7 +60,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
     public $config = [***REMOVED***;
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $gearConfig,
         ComposerEdge $composerEdge,
         $consolePrompt,

@@ -38,7 +38,7 @@ class AngularServiceTest extends TestCase
         //vfsStream::newDirectory('public/js')->at($this->root);
         //vfsStream::newDirectory('public/js/spec')->at($this->root);
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/view/angular';
 

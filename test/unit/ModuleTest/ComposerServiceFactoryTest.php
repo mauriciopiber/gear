@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Module\ComposerServiceFactory;
 use Gear\Module\ComposerService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
@@ -22,8 +22,8 @@ class ComposerServiceFactoryTest extends TestCase
     {
         $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
-        $this->serviceLocator->get(BasicModuleStructure::class)
-            ->willReturn($this->prophesize(BasicModuleStructure::class)->reveal())
+        $this->serviceLocator->get(ModuleStructure::class)
+            ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
             ->shouldBeCalled();
 
         $this->serviceLocator->get(ComposerEdge::class)

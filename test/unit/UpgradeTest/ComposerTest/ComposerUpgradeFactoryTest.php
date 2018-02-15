@@ -36,7 +36,7 @@ class ComposerUpgradeFactoryTest extends TestCase
         )->shouldBeCalled();
 
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 

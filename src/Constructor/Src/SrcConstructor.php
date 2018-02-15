@@ -27,9 +27,9 @@ use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\BasicModuleStructure;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Column\ColumnServiceTrait;
@@ -61,7 +61,7 @@ class SrcConstructor extends AbstractConstructor
 
     use ColumnServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use JsonSrc;
 
@@ -102,7 +102,7 @@ class SrcConstructor extends AbstractConstructor
     public function __construct(
         TableService $tableService,
         ColumnService $columnService,
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         SrcSchema $srcSchema,
         ServiceManager $serviceManager,
         TraitService $traitService,

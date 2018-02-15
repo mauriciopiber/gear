@@ -21,7 +21,7 @@ class BackupServiceFactoryTest extends TestCase
 
         $this->serviceLocator
           ->get('moduleStructure')
-          ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
+          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 
           $this->serviceLocator

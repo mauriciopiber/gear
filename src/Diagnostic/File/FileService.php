@@ -4,13 +4,13 @@ namespace Gear\Diagnostic\File;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Edge\File\FileEdgeTrait;
 use Gear\Edge\File\FileEdge;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
 
 class FileService implements ModuleDiagnosticInterface
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use FileEdgeTrait;
 

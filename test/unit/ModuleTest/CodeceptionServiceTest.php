@@ -21,7 +21,7 @@ class CodeceptionServiceTest extends TestCase
         file_put_contents(vfsStream::url('project/codeception.yml'), $this->mockFile);
 
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->codeception = new CodeceptionService();
         $this->codeception->setModule($this->module->reveal());

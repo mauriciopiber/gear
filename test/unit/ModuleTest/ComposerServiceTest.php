@@ -33,7 +33,7 @@ class ComposerServiceTest extends TestCase
         $stringService  = new StringService();
         $arrayService   = new ArrayService();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->edge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
 
         $this->composer = new ComposerService(

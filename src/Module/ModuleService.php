@@ -63,7 +63,7 @@ use Gear\Module\Node\ProtractorTrait;
 use Gear\Module\Docs\DocsTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use GearBase\Util\String\StringService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Docs\Docs;
 use Gear\Module\CodeceptionService;
 
@@ -87,7 +87,7 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearBase\Util\Dir\DirService;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Mvc\View\ViewService;
 use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
@@ -116,7 +116,7 @@ use Gear\Constructor\Action\ActionConstructorTrait;
 class ModuleService
 {
     use RequestTrait;
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
     use FileCreatorTrait;
     use StringServiceTrait;
     use FeatureTrait;
@@ -156,7 +156,7 @@ class ModuleService
     public function __construct(
         FileCreator $fileCreator,
         StringService $stringService,
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         Docs $docs,
         ComposerService $composer,
         ModuleTestsService $test,

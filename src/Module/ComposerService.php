@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Module;
 
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Creator\FileCreator\FileCreator;
@@ -23,7 +23,7 @@ class ComposerService extends AbstractMvc
     /**
      * Constructor
      *
-     * @param BasicModuleStructure $basicModuleStructure Basic Module Structure
+     * @param ModuleStructure $basicModuleStructure Basic Module Structure
      * @param ComposerEdge         $composerEdge         Composer Edge
      * @param FileCreator          $fileCreator          File Creator
      * @param ArrayService         $arrayService         Array Service
@@ -31,7 +31,7 @@ class ComposerService extends AbstractMvc
      * @return ComposerService
      */
     public function __construct(
-        BasicModuleStructure $basicModuleStructure,
+        ModuleStructure $basicModuleStructure,
         ComposerEdge $composerEdge,
         FileCreator $fileCreator,
         ArrayService $arrayService,

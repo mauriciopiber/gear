@@ -2,23 +2,23 @@
 namespace Gear\Database;
 
 use GearBase\Script\ScriptService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Project\ProjectLocationTrait;
-use Gear\Module\ModuleAwareInterface;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\RequestTrait;
 use Zend\Console\Request;
 
-class BackupService implements ModuleAwareInterface, StringServiceAwareInterface
+class BackupService implements ModuleStructureInterface, StringServiceAwareInterface
 {
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
@@ -37,7 +37,7 @@ class BackupService implements ModuleAwareInterface, StringServiceAwareInterface
         StringService $string,
         ScriptService $service,
         Posix $console,
-        BasicModuleStructure $module = null,
+        ModuleStructure $module = null,
         Request $request
     ) {
         $this->config = $config;

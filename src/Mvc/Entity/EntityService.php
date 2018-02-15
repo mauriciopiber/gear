@@ -26,9 +26,9 @@ use Gear\Mvc\Entity\EntityTestServiceTrait;
 use Gear\Mvc\Entity\EntityTestService;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Config\ServiceManager;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\Dir\DirService;
 use GearBase\Util\Dir\DirServiceTrait;
 use GearJson\Db\Db;
@@ -47,7 +47,7 @@ use GearBase\Util\String\StringServiceTrait;
 
 class EntityService extends AbstractMvc
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
     use SrcSchemaTrait;
     use SchemaServiceTrait;
     use ScriptServiceTrait;
@@ -69,7 +69,7 @@ class EntityService extends AbstractMvc
     protected $event = null;
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         DoctrineService $doctrine,
         ScriptService $script,
         EntityTestService $entityTest,

@@ -5,12 +5,12 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearJson\Db\Db;
 
 class TableService implements ServiceLocatorAwareInterface
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
     use MetadataTrait;
     use StringServiceTrait;
     use ServiceLocatorAwareTrait;

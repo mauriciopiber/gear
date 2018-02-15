@@ -3,7 +3,7 @@ namespace GearTest\ModuleTest\StructureTest;
 
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\Dir\DirService;
 use GearBase\Util\File\FileService;
 use GearBase\Util\String\StringService;
@@ -12,7 +12,7 @@ use GearBase\Util\String\StringService;
  * @group Module
  * @group Module-Structure
  */
-class BasicModuleStructureTest extends TestCase
+class ModuleStructureTest extends TestCase
 {
 
     public function setUp()
@@ -24,7 +24,7 @@ class BasicModuleStructureTest extends TestCase
         $this->dirService = $this->prophesize(DirService::class);
         $this->fileService = $this->prophesize(FileService::class);
 
-        $this->basicModuleStructure = new BasicModuleStructure($this->stringService, $this->dirService->reveal(), $this->fileService->reveal());
+        $this->basicModuleStructure = new ModuleStructure($this->stringService, $this->dirService->reveal(), $this->fileService->reveal());
     }
 
     public function wrapVfs($path)

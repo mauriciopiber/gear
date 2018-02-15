@@ -2,7 +2,7 @@
 namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
 use GearBase\Project\ProjectLocationTrait;
