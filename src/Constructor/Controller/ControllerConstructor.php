@@ -6,6 +6,7 @@
  */
 namespace Gear\Constructor\Controller;
 
+use Gear\Module\ModuleTypesInterface;
 use GearJson\Controller\{
     Controller,
     ControllerSchema,
@@ -136,6 +137,71 @@ class ControllerConstructor extends AbstractConstructor
 
 
         return $this;
+    }
+
+    public function getModuleControllerType($type)
+    {
+        switch ($type) {
+            case 'web':
+                return 'Action';
+            case 'cli':
+                return 'Console';
+            case 'api':
+                return 'Rest';
+            default:
+                throw new \Exception('Missing mapping between module and controller');
+        }
+    }
+
+    public function createModule($type)
+    {
+        $this->getControllerSchema()->create(
+            $this->getModule()->getModuleName(),
+            [
+                'name' => 'IndexController',
+                'services' => 'factories',
+                'type' => $this->getModuleControllerType($type)
+            ***REMOVED***
+        );
+
+        switch ($type) {
+            case ModuleTypesInterface::WEB:
+                return $this->createModuleWeb();
+            case ModuleTypesInterface::CLI:
+                return $this->createModuleCli();
+            case ModuleTypesInterface::API:
+                return $this->createModuleApi();
+            default:
+                throw new \Exception(sprintf('Don\'t be able to create a controller to %s', $type));
+        }
+    }
+
+    public function createModuleWeb()
+    {
+        $this->mvcService->module();
+        $this->mvcService->moduleFactory();
+        $this->controllerTestService->module();
+        $this->controllerTestService->moduleFactory();
+        return true;
+
+    }
+
+    public function createModuleCli()
+    {
+        $this->consoleController->module();
+        $this->consoleController->moduleFactory();
+        $this->consoleControllerTest->module();
+        $this->consoleControllerTest->moduleFactory();
+        return true;
+    }
+
+    public function createModuleApi()
+    {
+        $this->apiController->module();
+        $this->apiController->moduleFactory();
+        $this->apiControllerTest->module();
+        $this->apiControllerTest->moduleFactory();
+        return true;
     }
 
 

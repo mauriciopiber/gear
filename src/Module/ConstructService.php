@@ -90,7 +90,7 @@ class ConstructService extends AbstractJsonService
 
     const DB_SKIP = 'Db tabela "%s" já existe.';
 
-    const DB_VALIDATE = '';
+    const DB_VALIDATE = 'Db %s encontrou erros na formatação';
 
     const DB_CREATED = 'Db tabela "%s" criado.';
 
@@ -129,6 +129,70 @@ class ConstructService extends AbstractJsonService
         $this->appService = $appSchema;
     }
 
+    public function isEmpty(array $data, $key)
+    {
+        return (
+            !isset($data[$key***REMOVED***)
+            || !is_array($data[$key***REMOVED***)
+            || count($data[$key***REMOVED***) <= 0
+        );
+    }
+
+    public function constructAllDb(array $data)
+    {
+        if ($this->isEmpty($data, 'db')) {
+            return;
+        }
+
+        foreach ($data['db'***REMOVED*** as $db) {
+            $this->constructDb($db);
+        }
+    }
+
+    public function constructAllApp(array $data)
+    {
+        if ($this->isEmpty($data, 'app')) {
+            return;
+        }
+
+        foreach ($data['app'***REMOVED*** as $app) {
+            $this->constructApp($app);
+        }
+    }
+
+    public function constructAllSrc(array $data)
+    {
+        if ($this->isEmpty($data, 'src')) {
+            return;
+        }
+
+        $entity = [***REMOVED***;
+        $addon = [***REMOVED***;
+
+        foreach ($data['src'***REMOVED*** as $src) {
+            if ($src['type'***REMOVED*** === SrcTypesInterface::ENTITY) {
+                $entity[***REMOVED*** = $src;
+                continue;
+            }
+
+            if (in_array($src['type'***REMOVED***, [SrcTypesInterface::FACTORY, SrcTypesInterface::TRAIT***REMOVED***)) {
+                $addon[***REMOVED*** = $src;
+                continue;
+            }
+
+            $this->constructSrc($src);
+        }
+
+        if (count($entity) > 0) {
+            $this->constructSrcEntity($entity);
+            //$this->getSrcConstructor()->createEntities($entity);
+        }
+
+        if (count($addon) > 0) {
+            $this->constructSrcAdditional($addon);
+        }
+    }
+
     /**
      * Cria componentes de acordo com o arquivo de configuração yml.
      *
@@ -140,6 +204,7 @@ class ConstructService extends AbstractJsonService
      */
     public function construct($module, $fileConfig = null)
     {
+        $this->moduleName = $module;
         $this->constructStatus = new ConstructStatusObject();
 
         if (!empty($fileConfig) && empty($this->configLocation)) {
@@ -148,47 +213,9 @@ class ConstructService extends AbstractJsonService
 
         $data = $this->getGearfileConfig();
 
-        if (isset($data['src'***REMOVED***)) {
-            $entity = [***REMOVED***;
-            $addon = [***REMOVED***;
-            $default = [***REMOVED***;
+        $this->constructAllSrc($data);
 
-            foreach ($data['src'***REMOVED*** as $i => $src) {
-                if ($src['type'***REMOVED*** == SrcTypesInterface::ENTITY) {
-                    $entity[***REMOVED*** = $src;
-                    continue;
-                }
-
-                if (in_array($src['type'***REMOVED***, [SrcTypesInterface::FACTORY, SrcTypesInterface::TRAIT***REMOVED***)) {
-                    $addon[***REMOVED*** = $src;
-                    continue;
-                }
-
-                $default[***REMOVED*** = $src;
-            }
-
-            if (count($entity) > 0) {
-                $this->constructSrcEntity($entity);
-                //$this->getSrcConstructor()->createEntities($entity);
-            }
-
-            if (count($default) > 0) {
-                foreach ($default as $each) {
-                    $this->constructSrc($module, $each);
-                }
-            }
-
-            if (count($addon) > 0) {
-                $this->constructSrcAdditional($addon);
-                //$this->getSrcConstructor()->createAdditional($addon);
-            }
-        }
-
-        if (isset($data['db'***REMOVED***)) {
-            foreach ($data['db'***REMOVED*** as $db) {
-                $this->constructDb($module, $db);
-            }
-        }
+        $this->constructAllDb($data);
 
         if (isset($data['controller'***REMOVED***)) {
             foreach ($data['controller'***REMOVED*** as $controller) {
@@ -215,11 +242,8 @@ class ConstructService extends AbstractJsonService
             }
         }
 
-        if (isset($data['app'***REMOVED***)) {
-            foreach ($data['app'***REMOVED*** as $app) {
-                $this->constructApp($module, $app);
-            }
-        }
+        $this->constructAllApp($data);
+
 
         //return $constructList;
 
@@ -256,7 +280,7 @@ class ConstructService extends AbstractJsonService
                         (isset($src['type'***REMOVED***) ? $src['type'***REMOVED*** : '')
                     )
                 );
-                $this->constructStatus->addValidated($srcItem->getErrors());
+                $this->constructStatus->addValidated($src->getErrors());
             }
         }
     }
@@ -269,9 +293,9 @@ class ConstructService extends AbstractJsonService
     }
 
 
-    public function constructSrc($module, array $src)
+    public function constructSrc(array $src)
     {
-        $srcItem = $this->getSrcSchema()->factory($module, $src, false);
+        $srcItem = $this->getSrcSchema()->factory($this->moduleName, $src, false);
 
         if ($srcItem instanceof ConsoleValidationStatus) {
             $this->constructStatus->addValidated(
@@ -285,22 +309,26 @@ class ConstructService extends AbstractJsonService
             return;
         }
 
-        if ($this->getSrcSchema()->srcExist($module, $srcItem)) {
+        if ($this->getSrcSchema()->srcExist($this->moduleName, $srcItem)) {
             $this->constructStatus->addSkipped(sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType()));
             return;
         }
 
         $created = $this->getSrcConstructor()->create($srcItem->export());
 
-        $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType()));
+        if ($created) {
+            $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType()));
+        }
+
+
     }
 
-    public function constructApp($module, array $app)
+    public function constructApp(array $app)
     {
 
         $appItem = new App($app);
 
-        if ($this->getAppService()->appExist($module, $appItem)) {
+        if ($this->getAppService()->appExist($this->moduleName, $appItem)) {
             $this->constructStatus->addSkipped(sprintf(self::APP_SKIP, $appItem->getName(), $appItem->getType()));
 
             return;
@@ -315,28 +343,46 @@ class ConstructService extends AbstractJsonService
         return null;
     }
 
-    public function constructDb($module, array $db)
+    public function constructDb(array $db)
     {
+        $canCreate = $this->dbSchema->canCreate($this->moduleName, $db);
 
-        $dbItem = new Db($db);
-
-        if ($this->getDbSchema()->dbExist($module, $dbItem)) {
-            $this->constructStatus->addSkipped(sprintf(self::DB_SKIP, $dbItem->getTable()));
-
+        if ($canCreate === false) {
+            $this->addSkipName($db, 'table', self::DB_SKIP);
             return;
         }
 
-        $created = $this->getDbConstructor()->create($db);
-
-        if ($created instanceof ConsoleValidationStatus) {
-            $this->constructStatus->addValidated(sprintf(self::DB_VALIDATE, $dbItem->getTable()));
-            $this->constructStatus->addValidated($created->getErrors());
+        if ($canCreate instanceof ConsoleValidationStatus) {
+            $this->addValidateName($db, 'table', self::DB_VALIDATE);
+            $this->constructStatus->addValidated($canCreate->getErrors());
             return;
         }
 
-        $this->constructStatus->addCreated(sprintf(self::DB_CREATED, $dbItem->getTable()));
+        $db = $this->getDbConstructor()->create($canCreate);
+        $this->constructStatus->addCreated(sprintf(self::DB_CREATED, $db->getTable()));
 
         return;
+    }
+
+
+    public function addSkipName($db, $key, $message)
+    {
+        if (!isset($db[$key***REMOVED***) && empty($db[$key***REMOVED***)) {
+            return;
+        }
+
+        $this->constructStatus->addSkipped(sprintf($message, $db[$key***REMOVED***));
+
+    }
+
+    public function addValidateName($db, $key, $message)
+    {
+        if (!isset($db[$key***REMOVED***) && empty($db[$key***REMOVED***)) {
+            return;
+        }
+
+        $this->constructStatus->addValidated(sprintf($message, $db[$key***REMOVED***));
+
     }
 
     public function constructController($module, array $controller)
@@ -356,14 +402,6 @@ class ConstructService extends AbstractJsonService
         if ($created instanceof ConsoleValidationStatus) {
             $this->constructStatus->addValidated(sprintf(self::CONTROLLER_VALIDATE, $controllerItem->getName()));
             $this->constructStatus->addValidated($created->getErrors());
-
-            /**
-            foreach ($created->getErrors() as $errors) {
-                $constructList['invalid-msg'***REMOVED***[***REMOVED*** = $errors;
-            }
-
-            return $constructList;
-            */
             return;
         }
 

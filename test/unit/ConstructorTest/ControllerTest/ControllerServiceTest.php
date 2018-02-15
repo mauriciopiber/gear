@@ -84,6 +84,60 @@ class ControllerServiceTest extends TestCase
 
     }
 
+    public function testCreateModuleApi()
+    {
+        $controllerSchema = [
+            'name' => 'IndexController',
+            'services' => 'factories',
+            'type' => 'Rest'
+        ***REMOVED***;
+
+        $this->schemaController->create($this->moduleName, $controllerSchema)->shouldBeCalled();
+
+        $this->apiControllerService->module()->shouldBeCalled();
+        $this->apiControllerService->moduleFactory()->shouldBeCalled();
+        $this->apiControllerTestService->module()->shouldBeCalled();
+        $this->apiControllerTestService->moduleFactory()->shouldBeCalled();
+
+        $this->assertTrue($this->controllerService->createModule('api'));
+    }
+
+    public function testCreateModuleCli()
+    {
+        $controllerSchema = [
+            'name' => 'IndexController',
+            'services' => 'factories',
+            'type' => 'Console'
+        ***REMOVED***;
+
+        $this->schemaController->create($this->moduleName, $controllerSchema)->shouldBeCalled();
+
+        $this->mvcConsoleController->module()->shouldBeCalled();
+        $this->mvcConsoleController->moduleFactory()->shouldBeCalled();
+        $this->mvcConsoleControllerTest->module()->shouldBeCalled();
+        $this->mvcConsoleControllerTest->moduleFactory()->shouldBeCalled();
+
+        $this->assertTrue($this->controllerService->createModule('cli'));
+    }
+
+    public function testCreateModuleWeb()
+    {
+        $controllerSchema = [
+            'name' => 'IndexController',
+            'services' => 'factories',
+            'type' => 'Action'
+        ***REMOVED***;
+
+        $this->schemaController->create($this->moduleName, $controllerSchema)->shouldBeCalled();
+
+        $this->mvcController->module()->shouldBeCalled();
+        $this->mvcController->moduleFactory()->shouldBeCalled();
+        $this->mvcControllerTest->module()->shouldBeCalled();
+        $this->mvcControllerTest->moduleFactory()->shouldBeCalled();
+
+        $this->assertTrue($this->controllerService->createModule('web'));
+    }
+
     /**
      * @group px1p
      */

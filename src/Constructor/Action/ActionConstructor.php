@@ -155,6 +155,25 @@ class ActionConstructor extends AbstractConstructor
         return $this;
     }
 
+    public function createModule()
+    {
+        $this->getActionSchema()->create(
+            $this->getModule()->getModuleName(),
+            [
+                'controller' => 'IndexController',
+                'name' => 'Index'
+            ***REMOVED***,
+            false
+        );
+
+        $this->viewService->createIndexView();
+        $this->appControllerSpecService->createTestIndexAction();
+        $this->appControllerService->createIndexController();
+        $this->feature->createIndexFeature();
+        $this->page->createIndexPage();
+        $this->step->createIndexStep();
+        return true;
+    }
 
     public function createControllerAction($data)
     {

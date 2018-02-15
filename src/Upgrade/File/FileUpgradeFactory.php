@@ -16,7 +16,8 @@ class FileUpgradeFactory implements FactoryInterface
             $serviceLocator->get(FileEdge::class),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Module'),
-            $serviceLocator->get('Gear\Module\Tests')
+            $serviceLocator->get('Gear\Module\Tests'),
+            $serviceLocator->get('Gear\Module\Docs\Docs')
         );
         unset($serviceLocator);
         return $factory;

@@ -1,8 +1,11 @@
 <?php
 namespace GearTest\ModuleTest;
 
+use Gear\Module\ModuleTypesInterface;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Action\ActionConstructor;
 use Symfony\Component\Yaml\Parser;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
@@ -93,27 +96,9 @@ class ModuleServiceTest extends TestCase
 
         $this->schemaLoader = $this->prophesize(SchemaLoaderService::class);
 
-        $this->schemaController = $this->prophesize(ControllerSchema::class);
-
-        $this->schemaAction = $this->prophesize(ActionSchema::class);
-
-        $this->consoleControllerTest = $this->prophesize(ConsoleControllerTestService::class);
-
-        $this->consoleController = $this->prophesize(ConsoleControllerService::class);
-
-        $this->controllerTest = $this->prophesize(WebControllerTestService::class);
-
-        $this->controller = $this->prophesize(WebControllerService::class);
-
-        $this->codeception = $this->prophesize(CodeceptionService::class);
-
         $this->configService = $this->prophesize(ConfigService::class);
 
         $this->languageService = $this->prophesize(LanguageService::class);
-
-        $this->appController = $this->prophesize(AppControllerService::class);
-
-        $this->appControllerSpec = $this->prophesize(AppControllerSpecService::class);
 
         $this->viewService = $this->prophesize(ViewService::class);
 
@@ -129,14 +114,6 @@ class ModuleServiceTest extends TestCase
 
         $this->dir = new DirService();
 
-        $this->feature = $this->prophesize(Feature::class);
-
-        $this->unitTest = $this->prophesize(UnitTest::class);
-
-        $this->page = $this->prophesize(Page::class);
-
-        $this->step = $this->prophesize(Step::class);
-
         $this->view = $this->prophesize(ViewService::class);
 
         $this->cache = $this->prophesize(CacheService::class);
@@ -148,6 +125,9 @@ class ModuleServiceTest extends TestCase
         $this->autoload = $this->prophesize(ComposerAutoload::class);
 
         $this->construct = $this->prophesize(ConstructService::class);
+
+        $this->actionConstructor = $this->prophesize(ActionConstructor::class);
+        $this->controllerConstructor = $this->prophesize(ControllerConstructor::class);
 
         $this->config = [
             'gear' => [
@@ -440,6 +420,19 @@ class ModuleServiceTest extends TestCase
         $files = sprintf(__DIR__.'/_files/module-%s.yml', $type);
         $this->assertFileExists($files);
 
+        $controllerConstructor = [
+            ModuleTypesInterface::WEB,
+            ModuleTypesInterface::CLI,
+            ModuleTypesInterface::API
+        ***REMOVED***;
+        if (in_array($type, $controllerConstructor)) {
+            $this->controllerConstructor->createModule($type)->shouldBeCalled();
+        }
+
+        if ($type === ModuleTypesInterface::WEB) {
+            $this->actionConstructor->createModule($type)->shouldBeCalled();
+        }
+
         $this->moduleService = $this->mockModuleFakeCreator();
 
         $this->mockFilesInCreator(sprintf('module/%s-module', $type), $files);
@@ -566,7 +559,6 @@ class ModuleServiceTest extends TestCase
             ($this->module instanceof \Prophecy\Prophecy\ObjectProphecy) ? $this->module->reveal() : $this->module,
             $this->docs->reveal(),
             $this->composer->reveal(),
-            $this->codeception->reveal(),
             $this->testService->reveal(),
             $this->karma->reveal(),
             $this->protractor->reveal(),
@@ -575,20 +567,8 @@ class ModuleServiceTest extends TestCase
             $this->languageService->reveal(),
             $this->schema->reveal(),
             $this->schemaLoader->reveal(),
-            $this->schemaController->reveal(),
-            $this->schemaAction->reveal(),
             $this->configService->reveal(),
-            $this->controller->reveal(),
-            $this->controllerTest->reveal(),
-            $this->consoleController->reveal(),
-            $this->consoleControllerTest->reveal(),
             $this->viewService->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
-            $this->feature->reveal(),
-            $this->step->reveal(),
-            $this->page->reveal(),
-            $this->unitTest->reveal(),
             $this->request->reveal(),
             $this->cache->reveal(),
             $this->applicationConfig->reveal(),
@@ -596,7 +576,8 @@ class ModuleServiceTest extends TestCase
             $this->config,
             $this->dir,
             $this->gearConfig->reveal(),
-            $this->construct->reveal()
+            $this->controllerConstructor->reveal(),
+            $this->actionConstructor->reveal()
         );
     }
 }

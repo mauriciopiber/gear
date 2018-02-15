@@ -7,6 +7,7 @@ use Gear\Upgrade\File\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
 use Gear\Edge\File\FileEdge;
 use GearBase\Config\GearConfig;
+use Gear\Module\Docs\Docs;
 
 /**
  * @group FileUpgrade
@@ -28,6 +29,7 @@ class FileUpgradeTest extends TestCase
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
+        $this->docs = $this->prophesize(Docs::class);
 
         $this->fileUpgrade = new FileUpgrade(
             $this->module->reveal(),
@@ -35,7 +37,8 @@ class FileUpgradeTest extends TestCase
             $this->fileEdge->reveal(),
             $this->consolePrompt->reveal(),
             $this->moduleService->reveal(),
-            $this->moduleTests->reveal()
+            $this->moduleTests->reveal(),
+            $this->docs->reveal()
         );
 
         $this->yaml = new YamlService();
@@ -82,11 +85,7 @@ class FileUpgradeTest extends TestCase
 
         $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
+        $this->mockDocs();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 
@@ -105,8 +104,6 @@ class FileUpgradeTest extends TestCase
         $this->moduleService->createGitIgnore('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->createJenkinsFile('web')->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
 
@@ -133,7 +130,18 @@ class FileUpgradeTest extends TestCase
         }
 
         $this->assertEquals($expected, $upgrades);
+    }
 
+    public function mockDocs()
+    {
+
+        $this->docs->createConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->docs->createChangelog()->willReturn(true)->shouldBeCalled();
+
+        $this->docs->createIndex()->willReturn(true)->shouldBeCalled();
+
+        $this->docs->createReadme()->willReturn(true)->shouldBeCalled();
     }
 
     /**
@@ -147,11 +155,7 @@ class FileUpgradeTest extends TestCase
 
         //$this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getConfigDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getIndexDocs()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getChangelogDocs()->willReturn(true)->shouldBeCalled();
+        $this->mockDocs();
 
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 
@@ -164,8 +168,6 @@ class FileUpgradeTest extends TestCase
         $this->moduleService->createGitIgnore('cli')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->createJenkinsFile('cli')->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getReadme()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
 

@@ -6,6 +6,7 @@ use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\Db\DbConstructor;
 use GearJson\Action\ActionSchema;
 use Exception;
+use GearJson\Db\Db;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Filter\FilterService;
@@ -137,7 +138,7 @@ class DbConstructorTest extends TestCase
         ***REMOVED***);
 
 
-        $this->assertTrue($service);
+        $this->assertInstanceOf(Db::class, $service);
     }
 
     /**
@@ -152,7 +153,7 @@ class DbConstructorTest extends TestCase
         $namespace = 'MyTable';
         $module = 'MyModule';
 
-        $this->db = $this->prophesize('GearJson\Db\Db');
+        $this->db = $this->prophesize(Db::class);
         $this->db->getTable()->willReturn($table)->shouldBeCalled();
         $this->db->getNamespace()->willReturn($namespace);
 
@@ -207,8 +208,7 @@ class DbConstructorTest extends TestCase
             'namespace' => $namespace
         ***REMOVED***);
 
-
-        $this->assertTrue($service);
+        $this->assertInstanceOf(Db::class, $service);
     }
 
     /**

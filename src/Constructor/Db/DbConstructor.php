@@ -172,6 +172,6 @@ class DbConstructor extends AbstractConstructor
         $this->getFeature()               ->introspectFromTable($db);
         $this->getStep()                  ->createTableStep($db);
 
-        return true;
+        return $db;
     }
 }
