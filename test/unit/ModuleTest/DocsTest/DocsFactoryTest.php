@@ -14,7 +14,7 @@ class DocsFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $this->serviceLocator->get('moduleStructure')
-          ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
+          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator->get('GearBase\Util\String')

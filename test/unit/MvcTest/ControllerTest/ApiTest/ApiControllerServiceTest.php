@@ -3,7 +3,7 @@ namespace GearTest\MvcTest\ControllerTest\ApiTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Controller\Api\ApiControllerService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Creator\Code;
 use Gear\Creator\FileCreator\FileCreator;
@@ -17,7 +17,7 @@ class ApiControllerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
         $this->code = $this->prophesize(Code::class);
         $this->fileCreator = $this->prophesize(FileCreator::class);

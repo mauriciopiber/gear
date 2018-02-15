@@ -12,7 +12,7 @@ class TraitTestServiceFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
         $stringService = $this->prophesize('GearBase\Util\String\StringService');

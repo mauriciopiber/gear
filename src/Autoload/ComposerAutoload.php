@@ -1,18 +1,18 @@
 <?php
 namespace Gear\Autoload;
 
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
 use Zend\Json\Json;
 use GearBase\Project\ProjectLocationTrait;
 
 class ComposerAutoload
 {
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
-    public function __construct(BasicModuleStructure $module)
+    public function __construct(ModuleStructure $module)
     {
         $this->module = $module;
 

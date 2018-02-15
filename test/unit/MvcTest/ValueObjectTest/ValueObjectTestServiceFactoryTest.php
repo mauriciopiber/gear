@@ -24,7 +24,7 @@ class ValueObjectTestServiceFactoryTest extends TestCase
             ->shouldBeCalled();
 
         $this->serviceLocator->get('moduleStructure')
-            ->willReturn($this->prophesize('Gear\Module\BasicModuleStructure')->reveal())
+            ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
             ->shouldBeCalled();
 
         $this->serviceLocator->get('Gear\Creator\CodeTest')

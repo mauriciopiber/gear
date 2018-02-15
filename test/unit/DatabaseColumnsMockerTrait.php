@@ -9,7 +9,7 @@ trait DatabaseColumnsMockerTrait
     {
         $this->string = new StringService();
 
-        $this->localModule = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->localModule = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->localModule->getModuleName()->willReturn($module);
 
         $return = [***REMOVED***;

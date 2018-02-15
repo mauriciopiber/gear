@@ -36,7 +36,7 @@ class FixtureServiceTest extends TestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->string = new StringService();
         $template       = new TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../view'));

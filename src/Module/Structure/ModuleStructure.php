@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Module;
+namespace Gear\Module\Structure;
 
 use GearBase\Util\File\FileServiceTrait;
 use GearBase\Util\Dir\DirServiceTrait;
@@ -7,15 +7,16 @@ use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\File\FileService;
 use GearBase\Util\Dir\DirService;
 use GearBase\Util\String\StringService;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Exception\ResourceNotFound;
+use Gear\Module\ModuleTypesInterface;
 
-class BasicModuleStructure
+class ModuleStructure
 {
     use FileServiceTrait;
     use StringServiceTrait;
     use DirServiceTrait;
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules.

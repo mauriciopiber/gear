@@ -41,7 +41,7 @@ class ServiceServiceTest extends TestCase
         $this->service = new ServiceService();
 
         //module
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->service->setModule($this->module->reveal());
 
         //string

@@ -146,7 +146,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
             $this->prophesizeColumnUniqueNotNull('table', 'upload_image_column_unique_not_null', 'varchar')
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
         $columns[19***REMOVED***->setModule($module->reveal());

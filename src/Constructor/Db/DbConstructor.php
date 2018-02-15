@@ -22,8 +22,8 @@ use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnServiceTrait;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Entity\EntityService;
@@ -41,7 +41,7 @@ use Gear\Mvc\Service\ServiceService;
 use Gear\Column\ColumnService;
 use GearJson\Db\DbSchema as DbSchema;
 use GearJson\Action\ActionSchema as ActionSchema;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Table\UploadImage as UploadImageTable;
 use GearJson\Service\FactoriesInterface;
@@ -86,7 +86,7 @@ class DbConstructor extends AbstractConstructor
 
     use ServiceServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     public function __construct(
         ColumnService $columnService,
@@ -107,7 +107,7 @@ class DbConstructor extends AbstractConstructor
         ViewService $viewService,
         RepositoryService $repositoryService,
         ServiceService $serviceService,
-        BasicModuleStructure $module
+        ModuleStructure $module
     ) {
         parent::__construct($module, null, $tableService, $columnService);
         $this->actionSchema = $actionSchema;

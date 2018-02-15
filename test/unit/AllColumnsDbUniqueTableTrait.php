@@ -145,7 +145,7 @@ trait AllColumnsDbUniqueTableTrait
             $this->prophesizeColumnUnique('table', 'upload_image_column_unique', 'varchar')
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $module->getModuleName()->willReturn('MyModule');
 

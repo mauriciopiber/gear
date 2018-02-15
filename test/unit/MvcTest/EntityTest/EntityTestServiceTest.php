@@ -38,7 +38,7 @@ class EntityTestServiceTest extends TestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->string = new StringService();
 

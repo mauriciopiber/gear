@@ -116,7 +116,7 @@ trait AllColumnsDbNotNullTableTrait
             $this->prophesizeColumnNull('table', 'upload_image_column_not_null', 'varchar')
         );
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
         $uploadImage->setModule($module->reveal());

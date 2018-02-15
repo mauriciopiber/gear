@@ -21,7 +21,7 @@ use GearTest\UtilTestTrait;
 use GearTest\ControllerScopeTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
@@ -52,7 +52,7 @@ class WebControllerServiceTest extends TestCase
         $this->template =  (new Module())->getLocation().'/../test/template/module/mvc/controller';
 
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->arrayService = new ArrayService();
 
         $this->string = new StringService();

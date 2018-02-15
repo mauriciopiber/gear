@@ -9,7 +9,7 @@ use GearBase\Config\GearConfig;
 use GearBase\Util\String\StringService;
 use Gear\Module;
 use Gear\Module\Tests\ModuleTestsService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Edge\Ant\AntEdge;
 use Gear\Util\Prompt\ConsolePrompt;
@@ -30,7 +30,7 @@ class ModuleTestsServiceTest extends TestCase
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 

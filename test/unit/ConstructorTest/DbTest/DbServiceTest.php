@@ -16,7 +16,7 @@ use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Feature\Feature;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
@@ -47,7 +47,7 @@ class DbConstructorTest extends TestCase
         $this->fixtureService = $this->prophesize(FixtureService::class);
         $this->feature = $this->prophesize(Feature::class);
         $this->step = $this->prophesize(Step::class);
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
         $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
         $this->controllerService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');

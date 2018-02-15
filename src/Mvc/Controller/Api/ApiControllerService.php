@@ -2,8 +2,8 @@
 namespace Gear\Mvc\Controller\Api;
 
 use Gear\Mvc\Controller\AbstractControllerService;
-use Gear\Module\BasicModuleStructure;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Util\String\StringService;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Creator\Code;
@@ -22,6 +22,11 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
  */
 class ApiControllerService extends AbstractControllerService
 {
+    use ModuleStructureTrait;
+    use StringServiceTrait;
+    use CodeTrait;
+    use FileCreatorTrait;
+
     public function actionToController($insertMethods)
     {
         return false;
@@ -33,7 +38,7 @@ class ApiControllerService extends AbstractControllerService
      * @return ApiControllerService
      */
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         FileCreator $fileCreator,
         StringService $stringService,
         Code $code

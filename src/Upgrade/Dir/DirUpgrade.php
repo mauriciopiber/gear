@@ -2,8 +2,8 @@
 namespace Gear\Upgrade\Dir;
 
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
@@ -22,7 +22,7 @@ class DirUpgrade
 
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
@@ -49,7 +49,7 @@ class DirUpgrade
     public $config;
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $gearConfig,
         DirEdge $dirEdge,
         ConsolePrompt $consolePrompt,

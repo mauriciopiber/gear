@@ -19,7 +19,7 @@ use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Column\ColumnService;
 use Gear\Table\TableService;
 
@@ -59,7 +59,7 @@ class ActionConstructorFactory implements FactoryInterface
             $serviceLocator->get(Feature::class),
             $serviceLocator->get(Page::class),
             $serviceLocator->get(Step::class),
-            $serviceLocator->get(BasicModuleStructure::class),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get(TableService::class),
             $serviceLocator->get(ColumnService::class)

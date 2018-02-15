@@ -6,7 +6,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Table\TableService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Console\{
     ConsoleControllerService,
     ConsoleControllerTestService,
@@ -44,7 +44,7 @@ class ControllerConstructorFactory implements FactoryInterface
             $serviceLocator->get('GearJson\Controller'),
             $serviceLocator->get(TableService::class),
             $serviceLocator->get(ColumnService::class),
-            $serviceLocator->get(BasicModuleStructure::class),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(WebControllerService::class),
             $serviceLocator->get(WebControllerTestService::class),
             $serviceLocator->get(ConsoleControllerService::class),

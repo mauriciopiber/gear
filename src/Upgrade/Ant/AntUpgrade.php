@@ -10,10 +10,10 @@ use GearBase\Config\GearConfigTrait;
 use GearBase\Config\GearConfig;
 use SimpleXmlElement;
 use Exception;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * Cria arquivos build.xml para a ferramenta Ant baseado em configuraçao edge yml.
@@ -33,7 +33,7 @@ class AntUpgrade
 {
     use StringServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
@@ -89,10 +89,10 @@ class AntUpgrade
      * @param Gear\Util\Prompt\ConsolePrompt     $consolePrompt Ferramenta pra manipular interações de usuário
      * @param GearBase\Util\String\StringService $string        Ferramenta para manipular String
      * @param array                              $config        Configuração
-     * @param Gear\Module\BasicModuleStructure   $module        Estrutura do Módulo
+     * @param Gear\Module\Structure\ModuleStructure   $module        Estrutura do Módulo
      */
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $gearConfig,
         AntEdge $antEdge,
         $consolePrompt,

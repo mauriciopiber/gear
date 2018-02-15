@@ -30,7 +30,7 @@ class FilterTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
 
         $this->string = new \GearBase\Util\String\StringService();

@@ -17,7 +17,7 @@ class EntityServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->doctrineService = $this->prophesize('Gear\Mvc\Entity\DoctrineService');
         $this->scriptService = $this->prophesize('Gear\Script\ScriptService');
         $this->entityTestService = $this->prophesize('Gear\Mvc\Entity\EntityTestService');

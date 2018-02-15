@@ -1,15 +1,15 @@
 <?php
-namespace Gear\Module;
+namespace Gear\Module\Structure;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 
-class BasicModuleStructureFactory implements FactoryInterface
+class ModuleStructureFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $structure = new BasicModuleStructure(
+        $structure = new ModuleStructure(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('GearBase\Util\File')

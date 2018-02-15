@@ -14,7 +14,7 @@ class ApplicationConfigTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->request = $this->prophesize('Zend\Console\Request');
     }
 
@@ -120,7 +120,7 @@ class ApplicationConfigTest extends TestCase
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('GearDeploy')->shouldBeCalled();
         $this->applicationConfig->setModule($module->reveal());
         $array = $this->applicationConfig->removeModuleFromProject();
@@ -173,7 +173,7 @@ class ApplicationConfigTest extends TestCase
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyNewModule')->shouldBeCalled();
 
         $this->applicationConfig->setModule($module->reveal());

@@ -19,7 +19,7 @@ class ColumnServiceTest extends TestCase
 
         $this->serviceLocator = new ServiceManager();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->metadata = $this->prophesize('Zend\Db\Metadata\Metadata');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');

@@ -6,7 +6,7 @@ use Gear\Constructor\Controller\ControllerConstructor;
 use GearJson\Controller\Controller;
 use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\Controller\Console\{
@@ -34,7 +34,7 @@ class ControllerServiceTest extends TestCase
 
         $this->moduleName = 'Gearing';
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
         $this->mvcController = $this->prophesize(WebControllerService::class);

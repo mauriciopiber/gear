@@ -7,22 +7,22 @@ use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Column\ColumnServiceTrait;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
+use Gear\Module\Structure\ModuleStructure;
 
-abstract class AbstractConstructor implements ModuleAwareInterface
+abstract class AbstractConstructor implements ModuleStructureInterface
 {
     use TableServiceTrait;
 
     use ColumnServiceTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use StringServiceTrait;
 
     public function __construct(
-        BasicModuleStructure $module = null,
+        ModuleStructure $module = null,
         StringService $stringService = null,
         TableService $tableService = null,
         ColumnService $columnService = null

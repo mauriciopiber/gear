@@ -13,8 +13,8 @@ use Gear\Module\Tests\{
     ModuleTestsServiceTrait
 };
 use GearBase\Util\String\StringServiceTrait;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Prompt\ConsolePrompt;
 use GearBase\Config\GearConfig;
 use GearBase\Config\GearConfigTrait;
@@ -25,7 +25,7 @@ class FileUpgrade
 {
     use DocsTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use StringServiceTrait;
 
@@ -48,7 +48,7 @@ class FileUpgrade
     protected $type;
 
     public function __construct(
-        BasicModuleStructure $module,
+        ModuleStructure $module,
         GearConfig $gearConfig,
         FileEdge $fileEdge,
         ConsolePrompt $consolePrompt,

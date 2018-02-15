@@ -1,13 +1,28 @@
 sep="\\\\"
 
+function replace()
+{
+    #Trait
+    find . -name "*.php" -exec sed -i "s/Gear\\\\Module\\\\ModuleAwareTrait/Gear\\\\Module\\\\Structure\\\\ModuleStructureTrait/g" {} \;
+    find . -name "*.php" -exec sed -i "s/ModuleAwareTrait/ModuleStructureTrait/g" {} \;
+    #Interface
+    find . -name "*.php" -exec sed -i "s/Gear\\\\Module\\\\ModuleAwareInterface/Gear\\\\Module\\\\Structure\\\\ModuleStructureInterface/g" {} \;
+    find . -name "*.php" -exec sed -i "s/ModuleAwareInterface/ModuleStructureInterface/g" {} \;
+    #Class
+    find . -name "*.php" -exec sed -i "s/Gear\\\\Module\\\\BasicModuleStructure/Gear\\\\Module\\\\Structure\\\\ModuleStructure/g" {} \;
+    find . -name "*.php" -exec sed -i "s/BasicModuleStructure/ModuleStructure/g" {} \;
+    
+    
+#     -e "s/Gear\\\\Module\\\\BasicModuleStructure/Gear\\\\Module\\\\Structure\\\\ModuleStructure/g" \
+#     -e "s/Gear\\\\Module\\\\BasicModuleStructureFactory/Gear\\\\Module\\\\Structure\\\\ModuleStructureFactory/g" \
+
+#     -e "s/BasicModuleStructure/ModuleStructure/g" \
+#     -e "s/ModuleAwareInterface/ModuleStructureInterface/g" \
+       
+}
+
 
 cd /var/www/gear-package/gear/src
-
-
-
-find . -name "*.php" -exec sed -i \
--e "s//g" \
-{} \; \
-
-
+replace
 cd /var/www/gear-package/gear/test/unit
+replace

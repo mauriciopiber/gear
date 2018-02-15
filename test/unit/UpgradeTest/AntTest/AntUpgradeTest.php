@@ -21,7 +21,7 @@ class AntUpgradeTest extends TestCase
         $this->root = vfsStream::setup('module');
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->string = new StringService();
         $this->config = [

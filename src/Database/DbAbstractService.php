@@ -11,8 +11,8 @@ use GearBase\Util\String\StringServiceAwareInterface;
 use GearBase\Util\String\StringServiceTrait;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Util\Vector\ArrayServiceAwareInterface;
-use Gear\Module\ModuleAwareInterface;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\RequestTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Database\Connector\DbConnector\DbConnectorTrait;
@@ -23,7 +23,7 @@ abstract class DbAbstractService implements
     StringServiceAwareInterface,
     DirServiceAwareInterface,
     ArrayServiceAwareInterface,
-    ModuleAwareInterface
+    ModuleStructureInterface
 {
     use DbConnectorTrait;
 
@@ -31,7 +31,7 @@ abstract class DbAbstractService implements
 
     use RequestTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ServiceLocatorAwareTrait;
 

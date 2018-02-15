@@ -32,7 +32,7 @@ class RepositoryServiceTest extends TestCase
 
         $this->repository = new \Gear\Mvc\Repository\RepositoryService();
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->repository->setModule($this->module->reveal());
 
         $this->string = new \GearBase\Util\String\StringService();

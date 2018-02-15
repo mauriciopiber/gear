@@ -41,7 +41,7 @@ class BackupServiceTest extends TestCase
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***;
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->string = new \GearBase\Util\String\StringService;
 

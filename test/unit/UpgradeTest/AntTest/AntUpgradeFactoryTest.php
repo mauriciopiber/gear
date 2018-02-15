@@ -29,7 +29,7 @@ class AntUpgradeFactoryTest extends TestCase
         ->willReturn($this->prophesize(AntEdge::class)->reveal())
         ->shouldBeCalled();
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
 
         $this->serviceLocator->get('GearBase\GearConfig')->willReturn(

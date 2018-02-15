@@ -13,7 +13,7 @@ use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Datetime\Datetime;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Service\ServiceTestService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 
 /**
@@ -261,7 +261,7 @@ EOS;
 
         }
 
-        $module = $this->prophesize(BasicModuleStructure::class);
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyModule');
 
         foreach (['upload_image_one', 'upload_image_two'***REMOVED*** as $columnName) {

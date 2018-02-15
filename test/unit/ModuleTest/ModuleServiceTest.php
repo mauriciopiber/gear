@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Parser;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\ComposerService;
 use Gear\Module\Tests\ModuleTestsService;
 use GearJson\Schema\SchemaService;
@@ -69,7 +69,7 @@ class ModuleServiceTest extends TestCase
         parent::setUp();
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('GearIt');
 
         $this->baseDir = (new Module)->getLocation();
@@ -410,7 +410,7 @@ class ModuleServiceTest extends TestCase
         $moduleName = sprintf('%sModule', ucfirst($type));
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure(
+        $this->module = new \Gear\Module\Structure\ModuleStructure(
             $this->stringService,
             $this->dirService,
             $this->fileService
@@ -451,7 +451,7 @@ class ModuleServiceTest extends TestCase
         $moduleName = 'MyModule';
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure(
+        $this->module = new \Gear\Module\Structure\ModuleStructure(
             $this->stringService,
             $this->dirService,
             $this->fileService
@@ -490,7 +490,7 @@ class ModuleServiceTest extends TestCase
         $moduleName = 'MyModule';
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\BasicModuleStructure(
+        $this->module = new \Gear\Module\Structure\ModuleStructure(
             $this->stringService,
             $this->dirService,
             $this->fileService

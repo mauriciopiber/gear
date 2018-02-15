@@ -14,7 +14,7 @@ class ComposerAutoloadTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->mockFile = file_get_contents(__DIR__.'/_files/composer.json');
 

@@ -3,19 +3,19 @@ namespace Gear\Module\Config;
 
 use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Config\Exception\MissingApplicationConfig;
-use Gear\Module\BasicModuleStructure;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 use GearBase\RequestTrait;
 
 class ApplicationConfig
 {
     use RequestTrait;
 
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
 
     use ProjectLocationTrait;
 
-    public function __construct(BasicModuleStructure $module, $request)
+    public function __construct(ModuleStructure $module, $request)
     {
         $this->module = $module;
         $this->request = $request;

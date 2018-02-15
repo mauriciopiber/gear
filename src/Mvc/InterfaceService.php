@@ -3,8 +3,8 @@ namespace Gear\Mvc;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Gear\Module\ModuleAwareTrait;
-use Gear\Module\ModuleAwareInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructureInterface;
 use GearJson\Src\Src;
 use GearBase\Util\String\StringServiceTrait;
 use GearBase\Util\String\StringServiceAwareInterface;
@@ -12,11 +12,11 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use GearBase\Util\Dir\DirServiceTrait;
 
-class InterfaceService implements ServiceLocatorAwareInterface, ModuleAwareInterface, StringServiceAwareInterface
+class InterfaceService implements ServiceLocatorAwareInterface, ModuleStructureInterface, StringServiceAwareInterface
 {
     use FileCreatorTrait;
     use StringServiceTrait;
-    use ModuleAwareTrait;
+    use ModuleStructureTrait;
     use ServiceLocatorAwareTrait;
     use CodeTrait;
     use DirServiceTrait;

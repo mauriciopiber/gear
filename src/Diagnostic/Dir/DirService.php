@@ -2,7 +2,7 @@
 namespace Gear\Diagnostic\Dir;
 
 use Gear\Diagnostic\ModuleDiagnosticInterface;
-use Gear\Module\ModuleAwareTrait;
+use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
 use GearBase\Config\GearConfigTrait;
@@ -10,7 +10,7 @@ use GearBase\Config\GearConfig;
 
 class DirService implements ModuleDiagnosticInterface
 {
-    use ModuleAwaretrait;
+    use ModuleStructureTrait;
 
     use DirEdgeTrait;
 

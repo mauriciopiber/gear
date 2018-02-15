@@ -28,7 +28,7 @@ class ConsoleControllerTest extends TestCase
 
         $this->assertFileExists('vfs://module/src/MyModule/Controller');
 
-        $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         $this->string = new \GearBase\Util\String\StringService();
 

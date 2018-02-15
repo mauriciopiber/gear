@@ -8,7 +8,7 @@ use GearJson\Db\Db;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\UtilTestTrait;
 use Gear\Module;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Spec\Step\Step;
 use GearBase\Util\String\StringService;
 use GearBase\Util\Dir\DirService;
@@ -31,7 +31,7 @@ class StepTest extends TestCase
         $this->createVirtualDir('module/public/js/spec/e2e/index');
         $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
 
-        $this->module = $this->prophesize(BasicModuleStructure::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();

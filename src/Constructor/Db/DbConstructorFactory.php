@@ -22,7 +22,7 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\ViewViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
-use Gear\Module\BasicModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * PHP Version 5
@@ -63,7 +63,7 @@ class DbConstructorFactory implements FactoryInterface
             $serviceLocator->get(ViewViewService::class),
             $serviceLocator->get(RepositoryService::class),
             $serviceLocator->get(ServiceService::class),
-            $serviceLocator->get(BasicModuleStructure::class)
+            $serviceLocator->get(ModuleStructure::class)
         );
         unset($serviceLocator);
         return $factory;

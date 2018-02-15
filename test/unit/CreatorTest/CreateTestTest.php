@@ -15,7 +15,7 @@ class CreateTestTest extends TestCase
 
         $this->codeTest = new \Gear\Creator\CodeTest();
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('GearIt');
 
         $this->codeTest->setModule($module->reveal());

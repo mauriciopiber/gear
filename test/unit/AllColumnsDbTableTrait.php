@@ -33,7 +33,7 @@ trait AllColumnsDbTableTrait
     {
         $columns = [***REMOVED***;
 
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
         $this->string = new \GearBase\Util\String\StringService();
@@ -53,7 +53,7 @@ trait AllColumnsDbTableTrait
 
     public function getAllPossibleColumns($tableName = 'table')
     {
-        $module = $this->prophesize('Gear\Module\BasicModuleStructure');
+        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
         $this->string = new \GearBase\Util\String\StringService();
