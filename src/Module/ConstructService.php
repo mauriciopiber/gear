@@ -204,6 +204,7 @@ class ConstructService extends AbstractJsonService
      */
     public function construct($module, $fileConfig = null)
     {
+
         $this->moduleName = $module;
         $this->constructStatus = new ConstructStatusObject();
 
@@ -216,7 +217,6 @@ class ConstructService extends AbstractJsonService
         $this->constructAllSrc($data);
 
         $this->constructAllDb($data);
-
         if (isset($data['controller'***REMOVED***)) {
             foreach ($data['controller'***REMOVED*** as $controller) {
                 $this->constructController($module, $controller);
