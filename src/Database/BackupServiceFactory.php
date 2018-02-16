@@ -3,6 +3,7 @@ namespace Gear\Database;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Gear\Module\Structure\ModuleStructure;
 
 class BackupServiceFactory implements FactoryInterface
 {
@@ -13,7 +14,7 @@ class BackupServiceFactory implements FactoryInterface
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get('GearBase\Script'),
             $serviceLocator->get('console'),
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('request')
         );
     }

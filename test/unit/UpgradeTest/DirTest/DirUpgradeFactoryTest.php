@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\Dir\DirEdge;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -23,7 +24,7 @@ class DirUpgradeFactoryTest extends TestCase
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+        $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
         $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
 

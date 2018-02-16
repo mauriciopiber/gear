@@ -5,5 +5,5 @@ use GearJson\Controller\Controller;
 
 interface ModuleManagerInterface
 {
-    public function module(array $controller);
+    //public function module(array $controller);
 }

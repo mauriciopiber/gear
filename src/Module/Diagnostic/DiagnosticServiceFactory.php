@@ -18,6 +18,7 @@ use Gear\Diagnostic\Dir\{
 use Gear\Diagnostic\Npm\{
     NpmService
 };
+use Gear\Module\Structure\ModuleStructure;
 
 class DiagnosticServiceFactory implements FactoryInterface
 {
@@ -27,7 +28,7 @@ class DiagnosticServiceFactory implements FactoryInterface
 
         return new \Gear\Module\Diagnostic\DiagnosticService(
             $serviceLocator->get('console'),
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(AntService::class),
             $serviceLocator->get(ComposerService::class),
             $serviceLocator->get(FileService::class),

@@ -5,6 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\ValueObject\ValueObjectTestService;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * PHP Version 5
@@ -28,7 +29,7 @@ class ValueObjectTestServiceFactory implements FactoryInterface
         $factory = new ValueObjectTestService(
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Creator\CodeTest')
         );
         unset($serviceLocator);

@@ -3,6 +3,7 @@ namespace GearTest\DiagnosticTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\Ant\AntEdge;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -25,7 +26,7 @@ class AntServiceFactoryTest extends TestCase
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+        $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
 
         $this->serviceLocator->get('GearBase\GearConfig')

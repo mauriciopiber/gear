@@ -3,6 +3,7 @@ namespace GearTest\MvcTest\ValueObjectTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceFactory;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -23,7 +24,7 @@ class ValueObjectTestServiceFactoryTest extends TestCase
             ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('moduleStructure')
+        $this->serviceLocator->get(ModuleStructure::class)
             ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
             ->shouldBeCalled();
 

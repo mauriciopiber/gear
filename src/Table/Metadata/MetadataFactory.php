@@ -4,6 +4,7 @@ namespace Gear\Table\Metadata;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Db\Metadata\Metadata;
+use Gear\Module\Structure\ModuleStructure;
 
 class MetadataFactory implements FactoryInterface
 {
@@ -11,7 +12,7 @@ class MetadataFactory implements FactoryInterface
     {
 
         //se tem parametro módule
-        $module = $serviceLocator->get('moduleStructure');
+        $module = $serviceLocator->get(ModuleStructure::class);
         $module->prepare();
 
 

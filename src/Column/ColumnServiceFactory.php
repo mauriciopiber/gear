@@ -4,6 +4,7 @@ namespace Gear\Column;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Column\ColumnService;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  *
@@ -30,7 +31,7 @@ class ColumnServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new ColumnService(
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Table\TableService'),
             $serviceLocator->get('GearBase\Util\String')
         );

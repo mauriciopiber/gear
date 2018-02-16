@@ -49,6 +49,7 @@ use GearBase\Util\String\StringService;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
+use Gear\Module\ModuleTypesInterface;
 
 /**
  * @group m1
@@ -155,24 +156,43 @@ class ActionConstructor extends AbstractConstructor
         return $this;
     }
 
-    public function createModule()
+    public function getModuleActionName($type)
     {
+        switch ($type) {
+            case ModuleTypesInterface::API:
+                return 'GetList';
+            default:
+                return 'Index';
+        }
+    }
+
+    public function createModule($type)
+    {
+        $actionName = $this->getModuleActionName($type);
+
         $this->getActionSchema()->create(
             $this->getModule()->getModuleName(),
             [
                 'controller' => 'IndexController',
-                'name' => 'Index'
+                'name' => $actionName
             ***REMOVED***,
             false
         );
 
-        $this->viewService->createIndexView();
-        $this->appControllerSpecService->createTestIndexAction();
-        $this->appControllerService->createIndexController();
-        $this->feature->createIndexFeature();
-        $this->page->createIndexPage();
-        $this->step->createIndexStep();
-        return true;
+        if (in_array($type, [
+            ModuleTypesInterface::WEB
+        ***REMOVED***)) {
+            $this->viewService->createIndexView();
+            $this->appControllerSpecService->createTestIndexAction();
+            $this->appControllerService->createIndexController();
+            $this->feature->createIndexFeature();
+            $this->page->createIndexPage();
+            $this->step->createIndexStep();
+            return true;
+            //$this->actionConstructor->createModule($this->type);
+        }
+
+
     }
 
     public function createControllerAction($data)

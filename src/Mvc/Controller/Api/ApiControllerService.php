@@ -52,12 +52,29 @@ class ApiControllerService extends AbstractControllerService
 
     public function module()
     {
+        $file = $this->getFileCreator();
+        $file->setOptions($this->getConfig());
+        $file->setTemplate('template/module/mvc/rest/module/controller.phtml');
+        $file->setFileName('IndexController.php');
+        $file->setLocation($this->module->getControllerFolder());
 
+        return $file->render();
     }
 
     public function moduleFactory()
     {
+        $file = $this->getFileCreator();
+        $file->setOptions($this->getConfig());
+        $file->setTemplate('template/module/mvc/rest/module/controller-factory.phtml');
+        $file->setFileName('IndexControllerFactory.php');
+        $file->setLocation($this->module->getControllerFolder());
 
+        return $file->render();
+    }
 
+    private function getConfig() {
+        return [
+            'module' => $this->str('class', $this->getModule()->getModuleName()),
+        ***REMOVED***;
     }
 }

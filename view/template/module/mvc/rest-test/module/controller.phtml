@@ -1,0 +1,53 @@
+namespace <?php echo $this->module;?>Test\ControllerTest;
+
+use PHPUnit\Framework\TestCase;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\View\Model\JsonModel;
+use GearBaseTest\Assertions\AclAssertTrait;
+use <?php echo $this->module;?>\Controller\IndexController;
+
+/**
+ * @group Controller
+ */
+class IndexControllerTest extends TestCase
+{
+    use AclAssertTrait;
+
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->controller = new IndexController();
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(['controller' => 'IndexController'***REMOVED***);
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $this->schema = \<?php echo $this->module;?>\Module::LOCATION.'/../schema/module.json';
+    }
+
+    public function testIndexAction()
+    {
+        $this->assertAcl(
+            $this->schema,
+            '<?php echo $this->module;?>',
+            'IndexController',
+            'Controller',
+            'GetList'
+        );
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf(JsonModel::class, $result);
+    }
+}

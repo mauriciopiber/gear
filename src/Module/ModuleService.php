@@ -387,13 +387,7 @@ class ModuleService
             ModuleTypesInterface::API
         ***REMOVED***)) {
             $this->controllerConstructor->createModule($this->type);
-        }
-
-        if (in_array($this->type, [
-            ModuleTypesInterface::WEB
-        ***REMOVED***)) {
             $this->actionConstructor->createModule($this->type);
-            //$this->actionConstructor->createModule($this->type);
         }
     }
 

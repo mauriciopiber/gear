@@ -4,6 +4,7 @@ namespace Gear\Table;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Table\UploadImage;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * PHP Version 5
@@ -27,7 +28,7 @@ class UploadImageFactory implements FactoryInterface
     {
         $factory = new UploadImage(
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('moduleStructure')
+            $serviceLocator->get(ModuleStructure::class)
         );
         unset($serviceLocator);
         return $factory;
