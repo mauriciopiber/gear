@@ -67,7 +67,7 @@ class ConfigServiceTest extends TestCase
         $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
         $this->assetManager->module($controllers)->willReturn(true)->shouldBeCalled();
-        $this->routerManager->module($controllers)->willReturn(true)->shouldBeCalled();
+        $this->routerManager->module('web', $controllers)->willReturn(true)->shouldBeCalled();
         $this->navigationManager->module($controllers)->willReturn(true)->shouldBeCalled();
         $this->viewHelperManager->module($controllers)->willReturn(true)->shouldBeCalled();
         $this->uploadImageManager->module($controllers)->willReturn(true)->shouldBeCalled();

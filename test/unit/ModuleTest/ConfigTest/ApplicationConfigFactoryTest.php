@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -14,7 +15,7 @@ class ApplicationConfigFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $this->serviceLocator
-          ->get('moduleStructure')
+          ->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure'))
           ->shouldBeCalled();
 

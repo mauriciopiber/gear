@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\DocsTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -13,7 +14,7 @@ class DocsFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $this->serviceLocator->get('moduleStructure')
+        $this->serviceLocator->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 

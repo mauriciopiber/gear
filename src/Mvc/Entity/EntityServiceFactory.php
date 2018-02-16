@@ -5,13 +5,14 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Entity\DoctrineService;
+use Gear\Module\Structure\ModuleStructure;
 
 class EntityServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         return new EntityService(
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(DoctrineService::class),
             $serviceLocator->get('scriptService'),
             $serviceLocator->get('Gear\Mvc\Entity\EntityTestService'),

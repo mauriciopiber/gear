@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\Ant\AntEdge;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Upgrade
@@ -30,7 +31,7 @@ class AntUpgradeFactoryTest extends TestCase
         ->shouldBeCalled();
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+        $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
         $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
             $this->prophesize('GearBase\Config\GearConfig')->reveal()

@@ -1,10 +1,15 @@
-namespace <?php echo $this->module?>;
+namespace <?php echo $this->module;?>;
 
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
 use Zend\Validator\AbstractValidator;
 use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
+use Zend\Http\Request as HttpRequest;
+use Zend\View\Model\JsonModel;
+use Zend\View\Model\ModelInterface;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream;
 
 /**
  * PHP Version 5
@@ -28,63 +33,100 @@ class Module
      */
     public function onBootstrap(MvcEvent $mvcEvent)
     {
-        $translator = $mvcEvent->getApplication()->getServiceManager()->get('translator');
-        $translator->setLocale('pt_BR');
-        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/pt_BR.php', 'default', 'pt_BR');
-        $translator->addTranslationFile('PhpArray', __DIR__.'/../language/route/pt_BR.php', 'default', 'pt_BR');
-        AbstractValidator::setDefaultTranslator($translator);
+        // attach the JSON view strategy
+        $app      = $mvcEvent->getTarget();
+        $locator  = $app->getServiceManager();
+        $view     = $locator->get('Zend\View\View');
+        $strategy = $locator->get('ViewJsonStrategy');
+        $view->getEventManager()->attach($strategy, 100);
 
-        $app = $mvcEvent->getTarget();
-        $app->getEventManager()->attach('route', array($this, 'onPreRoute'), 100);
-
-
-        $events = $mvcEvent->getApplication()->getEventManager();
-        $sharedEvents = $events->getSharedManager();
-        $sharedEvents->attach('Zend\View\View', ViewEvent::EVENT_RENDERER_POST, function ($event) {
-            $renderer = $event->getRenderer();
-            if ($renderer instanceof PhpRenderer) {
-                $renderer->plugin("currencyformat")->setCurrencyCode("BRL")
-                  ->setLocale('pt_BR')
-                  ->setCurrencyPattern('R$ #');
-            }
-        });
-        $app->getEventManager()->attach('dispatch', [$this, 'setLayout'***REMOVED***);
+        // attach a listener to check for errors
+        $events = $mvcEvent->getTarget()->getEventManager();
+        $events->attach(MvcEvent::EVENT_RENDER, array($this, 'onRenderError'));
     }
 
-    /**
-     * @param  MvcEvent $e The MvcEvent instance
-     * @return void
-     */
-    public function setLayout(MvcEvent $e)
+    public function shouldRender($event)
     {
-        $matches    = $e->getRouteMatch();
-        $controller = $matches->getParam('controller');
-        if (false === strpos($controller, __NAMESPACE__)) {
-            // not a controller from this module
-            return;
+        if (!$event->isError()) {
+            return false;
         }
 
-        // Set the layout template
-        $viewModel = $e->getViewModel();
-        //var_dump(get_class_methods($viewModel));die();
-        $viewModel->setTemplate('layout/gear-admin-interno');
+        // Check the accept headers for application/json
+        $request = $event->getRequest();
+        if (!$request instanceof HttpRequest) {
+            return false;
+        }
+
+        $headers = $request->getHeaders();
+        if (!$headers->has('Accept')) {
+            return false;
+        }
+
+        // if we have a JsonModel in the result, then do nothing
+        $currentModel = $event->getResult();
+        if ($currentModel instanceof JsonModel) {
+            return false;
+        }
+
+        return true;
     }
 
-    /**
-     * Event before Route
-     *
-     * @param MvcEvent $event Mvc Event
-     *
-     * @return void
-     */
-    public function onPreRoute(MvcEvent $event)
+    public function onRenderError($event)
     {
-        $app     = $event->getTarget();
-        $request = $app->getRequest();
+        if (false === $this->shouldRender($event)) {
+            return;
+        }
+        $currentModel = $event->getResult();
+        $response = $event->getResponse();
+        $model = new JsonModel([
+            "httpStatus" => $response->getStatusCode(),
+            "title" => $response->getReasonPhrase(),
+        ***REMOVED***);
 
-        if (!$request instanceof \Zend\Console\Request) {
-            $serviceManager = $app->getServiceManager();
-            $serviceManager->get('router')->setTranslator($serviceManager->get('translator'));
+        // Find out what the error is
+        $exception  = $currentModel->getVariable('exception');
+
+        if ($currentModel instanceof ModelInterface && $currentModel->reason) {
+            $model->detail = $this->exceptionHandler($currentModel);
+        }
+
+        if ($exception) {
+            if ($exception->getCode()) {
+                $event->getResponse()->setStatusCode($exception->getCode());
+            }
+            $model->detail = $exception->getMessage();
+
+            // find the previous exceptions
+            $messages = array();
+            while ($exception = $exception->getPrevious()) {
+                $messages[***REMOVED*** = "* " . $exception->getMessage();
+            };
+            if (count($messages)) {
+                $exceptionString = implode("n", $messages);
+                $model->messages = $exceptionString;
+            }
+        }
+
+        // set our new view model
+        $model->setTerminal(true);
+        $event->setResult($model);
+        $event->setViewModel($model);
+    }
+
+    public function exceptionHandler(ModelInterface $model)
+    {
+        switch ($model->reason) {
+            case 'error-controller-cannot-dispatch':
+                return 'The requested controller was unable to dispatch the request.';
+            case 'error-controller-not-found':
+                return 'The requested controller could not be mapped to an existing controller class.';
+            case 'error-controller-invalid':
+                return 'The requested controller was not dispatchable.';
+            case 'error-router-no-match':
+                return 'The requested URL could not be matched by routing.';
+            default:
+                return $model->message;
+                break;
         }
     }
 
@@ -95,13 +137,13 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/../src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ***REMOVED***,
+            ***REMOVED***,
+        ***REMOVED***;
     }
 
     /**
@@ -124,16 +166,16 @@ class Module
     public function getServiceConfig()
     {
         return array(
-            'factories' => array(
+            'factories' => [
                 'Zend\Log\Logger' => function () {
-                    $logger = new \Zend\Log\Logger;
-                    $writer = new \Zend\Log\Writer\Stream(
+                    $logger = new Logger;
+                    $writer = new Stream(
                         __DIR__.'/../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
                     );
                     $logger->addWriter($writer);
                     return $logger;
                 },
-            ),
+            ***REMOVED***,
         );
     }
 

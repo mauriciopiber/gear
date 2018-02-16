@@ -1,0 +1,32 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Zend\View\Model\JsonModel;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class IndexController extends AbstractRestfulController
+{
+    /**
+     * Index Action
+     *
+     * @return ViewModel
+     */
+    public function getList()
+    {
+        $consoleModel = new JsonModel([
+            'MyModule',
+            'Controller',
+            'Index'
+        ***REMOVED***);
+        return $consoleModel;
+    }
+}

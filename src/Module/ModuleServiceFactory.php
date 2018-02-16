@@ -5,6 +5,9 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\ModuleService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Action\ActionConstructor;
 
 class ModuleServiceFactory implements FactoryInterface
 {
@@ -13,7 +16,7 @@ class ModuleServiceFactory implements FactoryInterface
         return new ModuleService(
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Module\Docs\Docs'),
             $serviceLocator->get('Gear\Module\Composer'),
             $serviceLocator->get('Gear\Module\Tests'),
@@ -33,8 +36,8 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('config'),
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('GearBase\GearConfig'),
-            $serviceLocator->get('Gear\Module\Constructor\Controller'),
-            $serviceLocator->get('Gear\Module\Constructor\Action')
+            $serviceLocator->get(ControllerConstructor::class),
+            $serviceLocator->get(ActionConstructor::class)
         );
     }
 }

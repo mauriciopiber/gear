@@ -17,6 +17,7 @@ use Gear\Diagnostic\Dir\{
 use Gear\Diagnostic\Npm\{
     NpmService
 };
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Module
@@ -34,7 +35,7 @@ class DiagnosticServiceFactoryTest extends TestCase
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
 
         $this->serviceLocator->get('console')->willReturn($console);
-        $this->serviceLocator->get('moduleStructure')->willReturn($module);
+        $this->serviceLocator->get(ModuleStructure::class)->willReturn($module);
         $this->serviceLocator->get(AntService::class)->willReturn($this->prophesize(AntService::class)->reveal());
         $this->serviceLocator->get(ComposerService::class)->willReturn($this->prophesize(ComposerService::class)->reveal());
         $this->serviceLocator->get(FileService::class)->willReturn($this->prophesize(FileService::class)->reveal());

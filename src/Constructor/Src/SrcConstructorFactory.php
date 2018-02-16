@@ -5,6 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 #use Gear\Module\ConstructorServiceFactory;
 use Gear\Constructor\Src;
+use Gear\Module\Structure\ModuleStructure;
 
 class SrcConstructorFactory implements FactoryInterface
 {
@@ -13,7 +14,7 @@ class SrcConstructorFactory implements FactoryInterface
         return new SrcConstructor(
             $serviceLocator->get('Gear\Table\TableService'),
             $serviceLocator->get('Gear\Column\ColumnService'),
-            $serviceLocator->get('moduleStructure'),
+            $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('GearJson\Src'),
             $serviceLocator->get('Gear\Mvc\Config\ServiceManager'),
             $serviceLocator->get('Gear\Mvc\TraitService'),

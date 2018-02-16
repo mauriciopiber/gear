@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Upgrade
@@ -38,7 +39,7 @@ class ComposerUpgradeFactoryTest extends TestCase
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->serviceLocator->get('moduleStructure')->willReturn($module->reveal())->shouldBeCalled();
+        $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
 
 

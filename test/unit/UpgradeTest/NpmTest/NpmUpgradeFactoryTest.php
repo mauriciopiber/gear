@@ -3,6 +3,7 @@ namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\Npm\NpmEdge;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -19,7 +20,7 @@ class NpmUpgradeFactoryTest extends TestCase
           ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('moduleStructure')
+        $this->serviceLocator->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 

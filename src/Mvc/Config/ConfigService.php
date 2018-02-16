@@ -124,9 +124,9 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
 
         switch ($type) {
             case 'web':
-                $this->getViewConfig();
+                $this->getViewConfig($type);
                 $this->getAssetManager()->module($controller);
-                $this->getRouterManager()->module($controller);
+                $this->getRouterManager()->module($type, $controller);
                 $this->getNavigationManager()->module($controller);
                 $this->getViewHelperManager()->module($controller);
                 $this->getUploadImageManager()->module($controller);
@@ -149,8 +149,8 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
                 break;
 
             case 'api':
-                $this->getViewConfig();
-                $this->getRouterManager()->module($controller);
+                $this->getViewConfig($type);
+                $this->getRouterManager()->module($type, $controller);
                 $this->getDbConfig();
                 $this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
@@ -267,10 +267,10 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
      *
      * @return null
      */
-    public function getViewConfig()
+    public function getViewConfig($type = 'web')
     {
         $this->getFileCreator()->createFile(
-            'template/module/config/view.config.phtml',
+            sprintf('template/module/config/view.config.%s.phtml', $type),
             array(
                 'module' => $this->getModule()->getModuleName(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())

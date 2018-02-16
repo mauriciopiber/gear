@@ -2,6 +2,7 @@
 namespace GearTest\ProjectTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Database
@@ -20,7 +21,7 @@ class BackupServiceFactoryTest extends TestCase
           ->shouldBeCalled();
 
         $this->serviceLocator
-          ->get('moduleStructure')
+          ->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 

@@ -23,6 +23,8 @@ class Module implements
 
     protected $moduleManager;
 
+    const LOCATION = __DIR__;
+
     /**
      * Set Console Banner
      *
