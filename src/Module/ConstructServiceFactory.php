@@ -3,7 +3,7 @@ namespace Gear\Module;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-#use Gear\Module\ConstructorServiceFactory;
+
 use Gear\Module\ConstructService;
 
 class ConstructServiceFactory implements FactoryInterface
@@ -16,11 +16,11 @@ class ConstructServiceFactory implements FactoryInterface
             $serviceLocator->get('GearJson\App'),
             $serviceLocator->get('GearJson\Controller'),
             $serviceLocator->get('GearJson\Action'),
-            $serviceLocator->get('Gear\Module\Constructor\Db'),
-            $serviceLocator->get('Gear\Module\Constructor\Src'),
-            $serviceLocator->get('Gear\Module\Constructor\App'),
-            $serviceLocator->get('Gear\Module\Constructor\Controller'),
-            $serviceLocator->get('Gear\Module\Constructor\Action')
+            $serviceLocator->get('Gear\Constructor\Db\DbConstructor'),
+            $serviceLocator->get('Gear\Constructor\Src\SrcConstructor'),
+            $serviceLocator->get('Gear\Constructor\App\AppService'),
+            $serviceLocator->get('Gear\Constructor\Controller\ControllerConstructor'),
+            $serviceLocator->get('Gear\Constructor\Action\ActionConstructor')
         );
     }
 }

@@ -1,0 +1,5 @@
+controller:
+  - { name: ConsoleExtesibleInvokablesOne, type: Rest, service: invokables }
+  - { name: ConsoleExtesibleInvokablesTwo, type: Rest, service: invokables }
+  - { name: ConsoleExtesibleFactoriesOne, type: Rest, service: factories }
+  - { name: ConsoleExtesibleFactoriesTwo, type: Rest, service: factories }

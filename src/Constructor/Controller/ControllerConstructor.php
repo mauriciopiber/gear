@@ -237,7 +237,6 @@ class ControllerConstructor extends AbstractConstructor
         if ($this->controller instanceof ConsoleValidationStatus) {
             return $this->controller;
         }
-
         if (!in_array($this->controller->getType(), ['Action', 'Console'***REMOVED***)) {
             return false;
         }
