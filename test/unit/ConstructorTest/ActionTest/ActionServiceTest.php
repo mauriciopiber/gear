@@ -114,7 +114,7 @@ class ActionConstructorTest extends TestCase
         $this->page->createIndexPage()->shouldBeCalled();
         $this->step->createIndexStep()->shouldBeCalled();
 
-        $this->assertTrue($this->actionService->createModule());
+        $this->assertTrue($this->actionService->createModule('web'));
     }
 
     /**
