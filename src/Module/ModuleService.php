@@ -232,22 +232,6 @@ class ModuleService
     }
 
     /**
-    public function addModuleToProject()
-    {
-        $this->getApplicationConfig()->addModuleToProject();
-        //karma
-        //end2end
-        //gulpfile
-        $this->getCodeceptionService()->addModuleToProject();
-        $this->getComposerAutoload()->addModuleToProject();
-        $this->getCacheService()->renewFileCache();
-
-        return true;
-    }
-    */
-
-
-    /**
      * Cria módulos livres para ser utilizados as project.
      *
      * @param unknown $module Nome do Módulo

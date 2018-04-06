@@ -42,8 +42,8 @@ class ModuleServiceFactoryTest extends TestCase
             'Gear\Module\Config\ApplicationConfig' => 'Gear\Module\Config\ApplicationConfig',
             'GearBase\Util\Dir' => 'GearBase\Util\Dir\DirService',
             'GearBase\GearConfig' => 'GearBase\Config\GearConfig',
-            'Gear\Module\Constructor\Controller' => 'Gear\Constructor\Controller\ControllerConstructor',
-            'Gear\Module\Constructor\Action' => 'Gear\Constructor\Action\ActionConstructor'
+            'Gear\Constructor\Controller\ControllerConstructor' => 'Gear\Constructor\Controller\ControllerConstructor',
+            'Gear\Constructor\Action\ActionConstructor' => 'Gear\Constructor\Action\ActionConstructor'
         ***REMOVED***;
 
         $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
