@@ -10,6 +10,8 @@ use Gear\Creator\Code;
 use Gear\Creator\CodeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Factory\FactoryServiceTrait;
 
 /**
  * PHP Version 5
@@ -26,6 +28,7 @@ class ApiControllerService extends AbstractControllerService
     use StringServiceTrait;
     use CodeTrait;
     use FileCreatorTrait;
+    use FactoryServiceTrait;
 
     public function actionToController($insertMethods)
     {
@@ -41,8 +44,10 @@ class ApiControllerService extends AbstractControllerService
         ModuleStructure $module,
         FileCreator $fileCreator,
         StringService $stringService,
-        Code $code
+        Code $code,
+        FactoryService $factoryService
     ) {
+        $this->factoryService = $factoryService;
         $this->module = $module;
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -76,5 +81,55 @@ class ApiControllerService extends AbstractControllerService
         return [
             'module' => $this->str('class', $this->getModule()->getModuleName()),
         ***REMOVED***;
+    }
+
+
+    public function buildController($controller)
+    {
+        $this->controller = $controller;
+        $this->location = $this->getCode()->getLocation($controller);
+        $this->fileName = sprintf('%s.php', $controller->getName());
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+        $options = [
+            'classDocs' => $this->getCode()->getClassDocs($controller, 'Controller'),
+            'implements' => $this->getCode()->getImplements($controller),
+            'extends' => $this->getCode()->getExtends($controller),
+            'attribute' => $this->getCode()->getUseAttribute($controller),
+            'use' => $this->getCode()->getUse($controller),
+            'namespace' => $this->getCode()->getNamespace($controller),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
+            'actions' => $controller->getAction(),
+            'controllerName' => $controller->getName(),
+            'controllerUrl' => $this->str('url', $controller->getName()),
+        ***REMOVED***;
+
+        $options['constructor'***REMOVED*** = ($controller->isFactory())
+          ? $this->getCode()->getConstructor($controller)
+          : '';
+
+        $this->template = 'template/module/mvc/rest-controller/controller.phtml';
+
+        $this->file = $this->getFileCreator();
+        $this->file->setLocation($this->location);
+        $this->file->setTemplate($this->template);
+        $this->controller = $controller;
+        $this->controllerFile = $this->getModule()->getControllerFolder().'/'.sprintf('%s.php', $controller->getName());
+
+
+        $this->file->setFileName(sprintf('%s.php', $controller->getName()));
+        $this->file->setOptions($options);
+
+        if ($controller->isFactory()) {
+            $this->getFactoryService()->createFactory($controller, $this->location);
+        }
+
+        return $this->file->render();
+    }
+
+    public function buildAction()
+    {
+        return true;
     }
 }

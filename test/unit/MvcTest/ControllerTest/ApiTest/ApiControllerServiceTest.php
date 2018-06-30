@@ -10,28 +10,39 @@ use Gear\Creator\FileCreator\FileCreator;
 use GearTest\UtilTestTrait;
 use Gear\Module;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
+use GearTest\ApiControllerScopeTrait;
+use Gear\Mvc\Factory\FactoryService;
 
 /**
  * @group Service
  */
 class ApiControllerServiceTest extends TestCase
 {
+    use ApiControllerScopeTrait;
+
     use UtilTestTrait;
 
     public function setUp()
     {
         parent::setUp();
+        vfsStream::setup('module');
+        vfsStream::newDirectory('src')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('src/MyModule')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('src/MyModule/Controller')->at(vfsStreamWrapper::getRoot());
 
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
         $this->code = $this->prophesize(Code::class);
         $this->fileCreator = $this->createFileCreator();
+        $this->factoryService = $this->prophesize(FactoryService::class);
 
         $this->service = new ApiControllerService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
-            $this->code->reveal()
+            $this->code->reveal(),
+            $this->factoryService->reveal()
         );
 
         $this->template = Module::LOCATION.'/../test/template/module/mvc/rest';
@@ -75,5 +86,33 @@ class ApiControllerServiceTest extends TestCase
             file_get_contents($fileName),
             file_get_contents($file)
         );
+    }
+
+        public function controller()
+    {
+        return $this->getControllerScope('Console');
+    }
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-console
+     * @dataProvider controller
+     */
+    public function testConstructConsoleController($controller, $expected)
+    {
+        $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('Controller')->willReturn(vfsStream::url('module'));
+        $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+
+        $file = $this->service->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+            $this->service->buildAction($controller);
+        }
+
+        $expected = $this->template.'/src/'.$expected.'.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
 }
