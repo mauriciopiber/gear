@@ -271,6 +271,37 @@ class ControllerServiceTest extends TestCase
        $this->assertTrue($this->controllerService->createController($array));
     }
 
+        /**
+     * @group px5p
+     */
+    public function testCreateApiController()
+    {
+        $array = [
+            'name' => 'MyController',
+            'type' => 'Rest',
+            'service' => 'factories'
+            //'object' => '%s\Controller\MyController'
+        ***REMOVED***;
+
+        $controller = new Controller($array);
+
+        $this->apiControllerService->buildController($controller)->willReturn(true)->shouldBeCalled();
+        $this->apiControllerTestService->buildController($controller)->willReturn(true)->shouldBeCalled();
+        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
+
+        $this->schemaController->create(
+            "Gearing",
+            [
+                'name' => 'MyController',
+                'service' => 'factories',
+                'type' => 'Rest',
+            ***REMOVED***,
+            false
+       )->willReturn($controller)->shouldBeCalled();
+
+        $this->assertTrue($this->controllerService->createController($array));
+    }
+
     /**
      * @group px5p
      */

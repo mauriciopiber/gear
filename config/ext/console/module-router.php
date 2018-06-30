@@ -4,23 +4,11 @@ $options = implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
-            /** Module */
-            /** 2.1 */
-            'gear-module-create' => [
-                'options' => [
-                    'route' => 'gear module create <module> [--type=***REMOVED*** ' . $options,
-                    'defaults' => [
-                        'controller' => 'Gear\Module',
-                        'action' => 'create'
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***,
-
         	/** Module */
             /** 2.1 */
             'gear-module-as-project-create' => [
                 'options' => [
-                    'route' => 'gear module-as-project create <module>'
+                    'route' => 'gear module create <module>'
                     . ' <basepath> [--type=***REMOVED*** [--force***REMOVED*** [--staging=***REMOVED*** [--namespace=***REMOVED***' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module',
