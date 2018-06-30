@@ -125,8 +125,8 @@ class ControllerConstructor extends AbstractConstructor
         $this->consoleController = $consoleController;
         $this->consoleControllerTest = $controllerTest;
 
-        $this->apiController = $apiController;
-        $this->apiControllerTest = $apiControllerTest;
+        $this->apiControllerService = $apiController;
+        $this->apiControllerTestService = $apiControllerTest;
         //config
         $this->configService = $configService;
         $this->controllerConfig = $controllerManager;
@@ -197,10 +197,10 @@ class ControllerConstructor extends AbstractConstructor
 
     public function createModuleApi()
     {
-        $this->apiController->module();
-        $this->apiController->moduleFactory();
-        $this->apiControllerTest->module();
-        $this->apiControllerTest->moduleFactory();
+        $this->apiControllerService->module();
+        $this->apiControllerService->moduleFactory();
+        $this->apiControllerTestService->module();
+        $this->apiControllerTestService->moduleFactory();
         return true;
     }
 
@@ -237,7 +237,8 @@ class ControllerConstructor extends AbstractConstructor
         if ($this->controller instanceof ConsoleValidationStatus) {
             return $this->controller;
         }
-        if (!in_array($this->controller->getType(), ['Action', 'Console'***REMOVED***)) {
+
+        if (!in_array($this->controller->getType(), ['Action', 'Console', 'Rest'***REMOVED***)) {
             return false;
         }
 
@@ -253,6 +254,13 @@ class ControllerConstructor extends AbstractConstructor
             $this->getControllerTestService()->buildController($this->controller);
             return true;
         }
+
+        if ($this->controller->getType() == 'Rest') {
+            $this->getApiControllerService()->buildController($this->controller);
+            $this->getApiControllerTestService()->buildController($this->controller);
+            return true;
+        }
+
 
         $this->getConsoleController()->buildController($this->controller);
         $this->getConsoleControllerTest()->buildController($this->controller);

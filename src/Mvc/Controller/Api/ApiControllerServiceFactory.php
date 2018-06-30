@@ -33,7 +33,8 @@ class ApiControllerServiceFactory implements FactoryInterface
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get(Code::class)
+            $serviceLocator->get(Code::class),
+            $serviceLocator->get('Gear\Mvc\Factory\FactoryService')
         );
         unset($serviceLocator);
         return $factory;

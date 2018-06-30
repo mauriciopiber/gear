@@ -1,0 +1,21 @@
+module: GearAuth
+src:
+  0:
+    name: UserService
+    type: Service
+    namespace: User\Service
+    service: factories
+    dependency: User\Repository\UserRepository
+  1:
+    name: UserRepository
+    type: Repository
+    namespace: User\Repository
+    service: factories
+
+controller:
+  0:
+    name: UserController
+    type: Rest
+    service: factories
+    namespace: User\Controller
+    dependency: User\Service\UserService
