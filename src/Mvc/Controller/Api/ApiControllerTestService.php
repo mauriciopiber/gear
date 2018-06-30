@@ -73,4 +73,9 @@ class ApiControllerTestService extends AbstractControllerTestService
             'module' => $this->str('class', $this->getModule()->getModuleName()),
         ***REMOVED***;
     }
+
+    public function buildController()
+    {
+        return true;
+    }
 }
