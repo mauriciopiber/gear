@@ -1,8 +1,11 @@
 <?php
+
+$config = require_once __DIR__.'/../env.config.php';
+
 return array(
     'db' => array(
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=gear;host=localhost',
+        'dsn' => sprintf('mysql:dbname=%s;host=%s', $config['database'***REMOVED***, $config['host'***REMOVED***),
         'driver_options' => array(
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         )
@@ -14,9 +17,9 @@ return array(
                 'eventmanager' => 'orm_default',
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => array(
-                    'host' => 'localhost',
+                    'host' => $config['host'***REMOVED***,
                     'port' => '3306',
-                    'dbname' => 'gear',
+                    'dbname' => $config['database'***REMOVED***,
                     'charset' => 'utf8'
                 )
             )
@@ -32,7 +35,7 @@ return array(
     ),
     'phinx' => array(
         'adapter' => 'mysql',
-        'host' => 'localhost',
+        'host' => $config['host'***REMOVED***,
         'name'=> 'seller'
     ),
     'jenkins' => [
