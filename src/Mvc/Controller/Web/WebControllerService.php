@@ -77,8 +77,8 @@ class WebControllerService extends AbstractControllerService implements
             'attribute' => $this->getCode()->getUseAttribute($controller),
 
             'namespace' => $this->getCode()->getNamespace($controller),
-            'module' => $this->module->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),

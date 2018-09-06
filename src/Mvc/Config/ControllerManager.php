@@ -28,7 +28,7 @@ class ControllerManager extends AbstractConfigManager implements ModuleManagerIn
     {
         $this->controller = $controller;
 
-        $this->fileName = $this->module->getConfigExtFolder().'/controller.config.php';
+        $this->fileName = $this->getModule()->getConfigExtFolder().'/controller.config.php';
 
         $controllerConfig = require $this->fileName;
 
@@ -43,7 +43,7 @@ class ControllerManager extends AbstractConfigManager implements ModuleManagerIn
 
         $namespace = ($this->controller->getNamespace() !== null) ? $this->controller->getNamespace() : 'Controller';
 
-        $invokeName = sprintf($object, $this->module->getModuleName(), $namespace, $this->controller->getNameOff());
+        $invokeName = sprintf($object, $this->getModule()->getModuleName(), $namespace, $this->controller->getNameOff());
 
         if (!array_key_exists($invokeName, $invokables)) {
             if ($controller->isFactory()) {
@@ -57,7 +57,7 @@ class ControllerManager extends AbstractConfigManager implements ModuleManagerIn
 
             $invokables[$invokeName***REMOVED*** = sprintf(
                 '%s\%s\%s',
-                $this->module->getModuleName(),
+                $this->getModule()->getModuleName(),
                 $namespace,
                 $name
             );
