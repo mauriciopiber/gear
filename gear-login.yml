@@ -1,0 +1,8 @@
+module: GearLogin
+src:
+controller:
+  0:
+    name: LoginController
+    type: Rest
+    service: factories
+db:

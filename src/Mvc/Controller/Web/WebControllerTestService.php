@@ -40,8 +40,8 @@ class WebControllerTestService extends AbstractControllerTestService implements
         $options = [
             'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-            'module' => $this->module->getModuleName(),
-            'moduleUrl' => $this->str('url', $this->module->getModuleName()),
+            'module' => $this->getModule()->getModuleName(),
+            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $this->controller->getActions(),
             'controllerName' => $this->controller->getName(),
             'controllerUrl' => $this->str('url', $this->controller->getNameOff()),
