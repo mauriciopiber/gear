@@ -56,7 +56,7 @@ class FileCreator
         }
 
         if (! $this->location) {
-            throw new LocationNotFoundException();
+          throw new LocationNotFoundException($this->location);
         }
 
         $view = $this->renderViewModel($this->getRenderView());

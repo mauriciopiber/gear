@@ -88,6 +88,7 @@ class ApiControllerService extends AbstractControllerService
     {
         $this->controller = $controller;
         $this->location = $this->getCode()->getLocation($controller);
+        //var_dump($this->location, 'hehe');
         $this->fileName = sprintf('%s.php', $controller->getName());
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
@@ -109,7 +110,7 @@ class ApiControllerService extends AbstractControllerService
           ? $this->getCode()->getConstructor($controller)
           : '';
 
-        $this->template = 'template/module/mvc/rest-controller/controller.phtml';
+        $this->template = 'template/module/mvc/rest/controller/controller.phtml';
 
         $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);

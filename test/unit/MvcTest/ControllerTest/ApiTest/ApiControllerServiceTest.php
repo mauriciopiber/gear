@@ -88,9 +88,9 @@ class ApiControllerServiceTest extends TestCase
         );
     }
 
-        public function controller()
+    public function controller()
     {
-        return $this->getControllerScope('Console');
+        return $this->getControllerScope('Rest');
     }
 
     /**
@@ -98,12 +98,21 @@ class ApiControllerServiceTest extends TestCase
      * @group src-mvc-console
      * @dataProvider controller
      */
-    public function testConstructConsoleController($controller, $expected)
+    public function testConstructApiController($controller, $expected)
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+
+
+        $this->code = new \Gear\Creator\Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        //$this->code->setArrayService($this->array);
+        $this->service->setCode($this->code);
+        //$this->code->getLocation()->willReturn(vfsStream::url('modul'));
 
         $file = $this->service->buildController($controller);
 

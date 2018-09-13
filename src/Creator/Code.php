@@ -131,6 +131,10 @@ EOS;
                 if ($this->str('class', $data->getType()) == 'Console') {
                     return 'AbstractConsoleController';
                 }
+
+                if ($this->str('class', $data->getType()) == 'Rest') {
+                    return 'AbstractRestfulController';
+                }
             }
             return null;
         }
@@ -506,11 +510,15 @@ EOS;
 
         if ($data->getExtends() == null && $data instanceof Controller) {
             if ($this->str('class', $data->getType()) == 'Action') {
-                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractActionController';
+              $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractActionController';
             }
 
             if ($this->str('class', $data->getType()) == 'Console') {
-                $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractConsoleController';
+              $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractConsoleController';
+            }
+
+            if ($this->str('class', $data->getType()) == 'Rest') {
+              $this->uses[***REMOVED*** = 'Zend\Mvc\Controller\AbstractRestfulController';
             }
         }
 
