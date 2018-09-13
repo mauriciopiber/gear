@@ -8,6 +8,7 @@ use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Creator\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Mvc\Config\ControllerManager;
 
 /**
  * PHP Version 5
@@ -33,7 +34,8 @@ class ApiControllerTestServiceFactory implements FactoryInterface
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get(CodeTest::class)
+            $serviceLocator->get(CodeTest::class),
+            $serviceLocator->get(ControllerManager::class)
         );
         unset($serviceLocator);
         return $factory;

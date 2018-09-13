@@ -9,6 +9,7 @@ use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Creator\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Mvc\Config\ControllerManager;
 
 /**
  * @group Gear
@@ -36,6 +37,10 @@ class ApiControllerTestServiceFactoryTest extends TestCase
 
         $this->serviceLocator->get('GearBase\Util\String')
             ->willReturn($this->prophesize(StringService::class)->reveal())
+            ->shouldBeCalled();
+
+        $this->serviceLocator->get(ControllerManager::class)
+            ->willReturn($this->prophesize(ControllerManager::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ApiControllerTestServiceFactory();
