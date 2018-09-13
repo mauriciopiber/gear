@@ -10,12 +10,16 @@ use Gear\Creator\FileCreator\FileCreator;
 use GearTest\UtilTestTrait;
 use Gear\Module;
 use org\bovigo\vfs\vfsStream;
+use GearTest\ApiControllerScopeTrait;
+use Gear\Mvc\Config\ControllerManager;
 
 /**
  * @group Service
  */
 class ApiControllerTestServiceTest extends TestCase
 {
+    use ApiControllerScopeTrait;
+
     use UtilTestTrait;
 
     public function setUp()
@@ -26,12 +30,14 @@ class ApiControllerTestServiceTest extends TestCase
         $this->string = new StringService();
         $this->codeTest = $this->prophesize(CodeTest::class);
         $this->fileCreator = $this->createFileCreator();
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
         $this->service = new ApiControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
-            $this->codeTest->reveal()
+            $this->codeTest->reveal(),
+            $this->controllerManager->reveal()
         );
 
         $this->template = Module::LOCATION.'/../test/template/module/mvc/rest-test';
@@ -81,5 +87,48 @@ class ApiControllerTestServiceTest extends TestCase
             file_get_contents($fileName),
             file_get_contents($file)
         );
+    }
+
+
+    public function controller()
+    {
+        return $this->getControllerScope('Rest');
+    }
+
+
+    /**
+     * @group src-mvc
+     * @group src-mvc-console-test
+     * @dataProvider controller
+     */
+    public function testConstructControllerTest($controller, $expected)
+    {
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
+        $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
+
+        $this->codeTest = new \Gear\Creator\CodeTest();
+        $this->codeTest->setStringService($this->string);
+        $this->codeTest->setModule($this->module->reveal());
+        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        //$this->codeTest->setArrayService($this->array);
+
+        //$this->controllerManager = new \Gear\Mvc\Config\ControllerManager();
+        //$this->controllerManager->setModule($this->module->reveal());
+
+        //$this->service->setControllerManager($this->serviceManager);
+
+        $this->service->setCodeTest($this->codeTest);
+
+        $file = $this->service->buildController($controller);
+
+        if (!empty($controller->getActions())) {
+            $this->service->buildAction($controller);
+        }
+
+        $expected = $this->template.'/src/'.$expected.'.phtml';
+
+        $this->assertEquals(file_get_contents($expected), file_get_contents($file));
     }
 }
