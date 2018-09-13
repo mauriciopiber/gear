@@ -5,32 +5,6 @@ trait ApiControllerScopeTrait
 {
     public function getControllerScope($srcType)
     {
-        /**
-        $service = ['invokables', 'factories'***REMOVED***;
-
-
-        $dependency = [
-            '',
-            'Repository\MyRepository',
-            'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
-        ***REMOVED***;
-
-
-        $namespace = [
-            null,
-            'Another\Long\Namespaces'
-        ***REMOVED***;
-
-
-        $actions = [
-            [***REMOVED***,
-            [
-                [
-                    'name' => 'GetList'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***;
-        */
         $manyActions = [
             [
                 'name' => 'Get'
@@ -52,6 +26,7 @@ trait ApiControllerScopeTrait
 
 
         return [
+          /*
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('BasicDependenciesFactoryMany%s', $srcType),
@@ -209,6 +184,7 @@ trait ApiControllerScopeTrait
                 ***REMOVED***),
                 'basic-namespace'
             ***REMOVED***,
+            */
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
