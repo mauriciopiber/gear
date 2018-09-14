@@ -3,21 +3,21 @@
 function Gear_Module_Delete_Constructor_Files
 {
     modulePath=${1}
-    
-    if [ -d $modulePath/schema ***REMOVED***; then 
-    	sudo rm -R $modulePath/schema
-    fi            
-    
-    if [ -d $modulePath/src/$module ***REMOVED***; then 
-    	sudo rm -R $modulePath/src/$module
+
+    if [ -d $modulePath/schema ***REMOVED***; then
+    	`#sudo `rm -R $modulePath/schema
     fi
 
-    if [ -d $modulePath/test/unit/$moduleTest ***REMOVED***; then 
-    	sudo rm -R $modulePath/test/unit/$moduleTest
-    fi   
-    
+    if [ -d $modulePath/src/$module ***REMOVED***; then
+    	`#sudo `rm -R $modulePath/src/$module
+    fi
+
+    if [ -d $modulePath/test/unit/$moduleTest ***REMOVED***; then
+    	`#sudo `rm -R $modulePath/test/unit/$moduleTest
+    fi
+
     if [ -d "$modulePath/public/js" ***REMOVED***; then
-        sudo rm -R $modulePath/public/js	
+        `#sudo `rm -R $modulePath/public/js
     fi
 
     Gear_Module_Delete_Migrations "$modulePath"
@@ -26,9 +26,9 @@ function Gear_Module_Delete_Constructor_Files
 function Gear_Module_Delete_Migrations
 {
     modulePath=${1}
-    if [ "$(ls -A $modulePath/data/migrations)" ***REMOVED***; then 
-    	sudo rm -R $modulePath/data/migrations/* 
-    fi           
+    if [ "$(ls -A $modulePath/data/migrations)" ***REMOVED***; then
+    	`#sudo `rm -R $modulePath/data/migrations/*
+    fi
 }
 
 function Gear_Module_Schema_Reset
@@ -36,11 +36,11 @@ function Gear_Module_Schema_Reset
     # PARAMS
     module=${1}
     basePath=$(Gear_Util_GetBasePath)
-    
-    sudo php public/index.php gear schema delete $module --basepath=$basePath
-    sudo php public/index.php gear schema create $module --basepath=$basePath    
-    sudo php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
-    sudo php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
+
+    `#sudo `php public/index.php gear schema delete $module --basepath=$basePath
+    `#sudo `php public/index.php gear schema create $module --basepath=$basePath
+    `#sudo `php public/index.php gear schema controller create $module "IndexController" --basepath=$basePath --service="factories"
+    `#sudo `php public/index.php gear schema activity create $module "IndexController" "Index" --basepath=$basePath
 }
 
 
@@ -51,9 +51,9 @@ function Gear_Module_Deploy_Up
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     cd $modulePath
-    
-    sudo vendor/bin/phinx migrate
-    sudo script/load.sh
+
+    `#sudo `vendor/bin/phinx migrate
+    `#sudo `script/load.sh
 }
 
 
@@ -64,10 +64,10 @@ function Gear_Module_Reload
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     cd $modulePath
-    
-    sudo script/load.sh
-    sudo php public/index.php gear database module dump $module    
-    
+
+    `#sudo `script/load.sh
+    `#sudo `php public/index.php gear database module dump $module
+
 }
 
 
@@ -80,14 +80,14 @@ function Gear_Module_Run_Construct
     type=${4}
     gearfile=${5}
     ignore=${6}
-    
+
     if [ "$useOwnConstructor" == "0" ***REMOVED***; then
-        cd $modulePath    
+        cd $modulePath
     else
         cd $(Gear_Util_GetGearPath)
     fi
-     
-    sudo php public/index.php gear module construct $module $basePath --file=$modulePath/$gearfile
+
+    `#sudo `php public/index.php gear module construct $module $basePath --file=$modulePath/$gearfile
 }
 
 function Gear_Module_Run_InstallModule
@@ -98,8 +98,8 @@ function Gear_Module_Run_InstallModule
     module=$(Gear_Module_Util_GetModuleName "${1}")
     moduleUrl=$(Gear_Module_Util_GetModuleUrl "$module")
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
-        
-    cd $modulePath && sudo script/deploy-development.sh
+
+    cd $modulePath && `#sudo `script/deploy-development.sh
 }
 
 
@@ -113,7 +113,7 @@ function Gear_Module_Run_CreateModule
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
     type=${2}
 
-    cd $(Gear_Util_GetGearPath) && sudo php public/index.php gear module-as-project create $module $basePath \
+    cd $(Gear_Util_GetGearPath) && `#sudo `php public/index.php gear module create $module $basePath \
     --type=$type \
     --force \
     --staging="${moduleUrl}.$(Gear_Util_GetStaging)"
@@ -127,6 +127,6 @@ function Gear_Module_Run_DeleteModule
     modulePath=$(Gear_Module_Util_GetModulePath "$moduleUrl")
 
     if [ -d "$modulePath" ***REMOVED***; then
-        sudo rm -R $modulePath
+        `#sudo `rm -R $modulePath
     fi
 }

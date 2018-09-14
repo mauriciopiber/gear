@@ -43,7 +43,7 @@ class ConsoleRouterManager extends AbstractConfigManager implements ModuleManage
         }
 
         $this->action = $action;
-        $this->moduleUrl = $this->str('url', $this->module->getModuleName());
+        $this->moduleUrl = $this->str('url', $this->getModule()->getModuleName());
         $this->controllerUrl = $this->str('url', $controller);
         $this->actionUrl = $this->str('url', $this->action->getRoute());
 

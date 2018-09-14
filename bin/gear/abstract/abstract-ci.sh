@@ -15,7 +15,7 @@ function Gear_CI_Jenkins_Check
     #fake-composer gear-jenkins/ci
     #fake-composer gear-jenkins/src
 	
-	sudo php public/index.php gear jenkins suite create "module-$type"
+	`#sudo `php public/index.php gear jenkins suite create "module-$type"
 	status=$?
 	echo $status
 }
@@ -36,9 +36,9 @@ function Gear_Git_Setup
     
     
     echo "repository create"
-    sudo php public/index.php gear git repository create $name
+    `#sudo `php public/index.php gear git repository create $name
     echo "repository init"
-    sudo php public/index.php gear git repository init	
+    `#sudo `php public/index.php gear git repository init	
 }
 
 #function Gear_CI_Start_Repository
@@ -53,7 +53,7 @@ function Gear_CI_Repository_Check
 
     cd $(Gear_Util_GetGearPath)
 
-	sudo php public/index.php gear git repository read $name &> /dev/null
+	`#sudo `php public/index.php gear git repository read $name &> /dev/null
 	status=$?
 	
 	echo "$status"
@@ -77,11 +77,11 @@ function Gear_CI_SetUp
     
     
     echo "repository create"
-    sudo php public/index.php gear git repository create $name
+    `#sudo `php public/index.php gear git repository create $name
     echo "repository init"
-    sudo php public/index.php gear git repository init
+    `#sudo `php public/index.php gear git repository init
     echo "jenkins create"
-    sudo php public/index.php gear jenkins suite create "module-$type"
+    `#sudo `php public/index.php gear jenkins suite create "module-$type"
 }
 
 function Gear_CI_CopyJenkinsFile
@@ -138,7 +138,7 @@ function Gear_Jenkins_Indexing
 {
 	cd ${2}
     url=$(Gear_Util_ToUrl "${1}")
-    sudo php public/index.php gear jenkins job build "$url" --indexing	
+    `#sudo `php public/index.php gear jenkins job build "$url" --indexing	
 }
 
 function Gear_Git_Commit
@@ -147,7 +147,7 @@ function Gear_Git_Commit
 	basePath=${2}
 
 	cd $basePath	    
-    sudo php public/index.php gear deploy save "Build com sucesso $name" 	
+    `#sudo `php public/index.php gear deploy save "Build com sucesso $name" 	
 }
 
 
@@ -157,9 +157,9 @@ function Gear_CI_Build
 	basePath=${2}
 
 	cd $basePath	    
-    sudo php public/index.php gear deploy save "Primeiro Build com sucesso $name" 
+    `#sudo `php public/index.php gear deploy save "Primeiro Build com sucesso $name" 
     #"$increment"
     url=$(Gear_Util_ToUrl "$name")
-    sudo php public/index.php gear jenkins job build "$url" --indexing
-    #sudo php public/index.php gear jenkins job build "$url" '' 'master'		
+    `#sudo `php public/index.php gear jenkins job build "$url" --indexing
+    #`#sudo `php public/index.php gear jenkins job build "$url" '' 'master'		
 }
