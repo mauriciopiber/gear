@@ -66,7 +66,7 @@ pipeline {
     post {
         always {
             notifyBuild(currentBuild.result)
-            sh 'sudo chmod -R 777 data'
+            sh '`#sudo `chmod -R 777 data'
             deleteDir() /* clean up our workspace */
         }
     }
