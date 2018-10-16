@@ -161,6 +161,14 @@ trait ApiControllerScopeTrait
 
                 ***REMOVED***),
                 'basic-implements'
+            ***REMOVED***,*/
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('BasicMany%s', $srcType),
+                    'type' => $srcType,
+                    'actions' => $manyActions
+                ***REMOVED***),
+                'basic-many'
             ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([
@@ -173,18 +181,12 @@ trait ApiControllerScopeTrait
             ***REMOVED***,
             [
                 new \GearJson\Controller\Controller([
-                    'name' => sprintf('Basic%s', $srcType),
+                    'name' => sprintf('BasicNamespace%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
-                    'actions' => [
-                        [
-                            'name' => 'GetList',
-                        ***REMOVED***
-                    ***REMOVED***,
                 ***REMOVED***),
                 'basic-namespace'
             ***REMOVED***,
-            */
             [
                 new \GearJson\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),

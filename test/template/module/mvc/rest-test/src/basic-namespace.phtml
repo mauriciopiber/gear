@@ -1,17 +1,18 @@
-namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+<?php
+namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
 
-use PHPUnit\Framework\TestCase;
-use <?php echo $this->module?>\<?php echo $this->namespace;?>\<?php echo $this->controllerName;?>;
-use Zend\Http\Request;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use MyModule\Another\Long\Namespaces\BasicNamespaceRest;
+use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
- * @group <?php echo $this->controllerName.PHP_EOL; ?>
+ * @group BasicNamespaceRest
  * @group Controller
  */
-class <?php echo $this->controllerName; ?>Test extends TestCase
+class BasicNamespaceRestTest extends TestCase
 {
     use AclAssertTrait;
 
@@ -23,16 +24,20 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
 
     public function setUp()
     {
+        $this->setApplicationConfig(
+            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
+        );
+
         parent::setUp();
 
-        $this->controller = new <?php echo $this->controllerName;?>();
+        $this->controller = new BasicNamespaceRest();
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => '<?php echo $this->controllerName;?>'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicNamespaceRest'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()

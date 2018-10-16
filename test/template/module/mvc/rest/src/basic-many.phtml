@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Controller;
 
-use Zend\View\Model\ConsoleModel;
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\View\Model\JsonModel;
+use Zend\Mvc\Controller\AbstractRestfulController;
 
 /**
  * PHP Version 5
@@ -13,56 +13,7 @@ use Zend\Mvc\Controller\AbstractConsoleController;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class BasicManyConsole extends AbstractConsoleController
+class BasicManyRest extends AbstractRestfulController
 {
 
-    /**
-     * First Action
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function firstActionAction()
-    {
-        return new ConsoleModel([***REMOVED***);
-    }
-
-    /**
-     * Second Action
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function secondActionAction()
-    {
-        return new ConsoleModel([***REMOVED***);
-    }
-
-    /**
-     * Third Action
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function thirdActionAction()
-    {
-        return new ConsoleModel([***REMOVED***);
-    }
-
-    /**
-     * Four Action
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function fourActionAction()
-    {
-        return new ConsoleModel([***REMOVED***);
-    }
-
-    /**
-     * Five Action
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function fiveActionAction()
-    {
-        return new ConsoleModel([***REMOVED***);
-    }
 }

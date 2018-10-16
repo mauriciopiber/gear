@@ -151,17 +151,6 @@ class ConsoleControllerTestService extends AbstractControllerTestService
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
-            /**
-            $this->functions .= $this->getFileCreator()->renderPartial(
-                'template/module/mvc/console-controller/test-action.phtml',
-                [
-                    'actionName' => $actionName,
-                    'actionVar' => $actionVar,
-                    'controllerVar' => $controllerVar
-                ***REMOVED***
-            );
-            */
-
             $controller = $this->controller->getName();
 
             $routeUrl = sprintf(

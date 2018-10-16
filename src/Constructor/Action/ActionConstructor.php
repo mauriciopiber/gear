@@ -37,6 +37,12 @@ use Gear\Mvc\Controller\Console\{
     ConsoleControllerTestService,
     ConsoleControllerTestServiceTrait
 };
+use Gear\Mvc\Controller\Api\{
+    ApiControllerService,
+    ApiControllerServiceTrait,
+    ApiControllerTestService,
+    ApiControllerTestServiceTrait
+};
 use Gear\Mvc\Controller\Web\WebControllerServiceTrait;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
@@ -56,6 +62,11 @@ use Gear\Module\ModuleTypesInterface;
  */
 class ActionConstructor extends AbstractConstructor
 {
+
+    use ApiControllerServiceTrait;
+
+    use ApiControllerTestServiceTrait;
+
     use StringServiceTrait;
 
     use ModuleStructureTrait;
@@ -125,6 +136,8 @@ class ActionConstructor extends AbstractConstructor
         WebControllerTestService $controllerServiceTest,
         ConsoleControllerService $consoleController,
         ConsoleControllerTestService $consoleControllerTest,
+        ApiControllerService $apiController,
+        ApiControllerTestService $apiControllerTest,
         AppControllerService $appControllerService,
         AppControllerSpecService $appControllerTestService,
         Feature $feature,
@@ -147,6 +160,8 @@ class ActionConstructor extends AbstractConstructor
         $this->controllerTestService = $controllerServiceTest;
         $this->consoleController = $consoleController;
         $this->consoleControllerTest = $consoleControllerTest;
+        $this->apiControllerService = $apiController;
+        $this->apiControllerTestService = $apiControllerTest;
         $this->appControllerService = $appControllerService;
         $this->appControllerSpecService = $appControllerTestService;
         $this->feature = $feature;
@@ -197,6 +212,7 @@ class ActionConstructor extends AbstractConstructor
 
     public function createControllerAction($data)
     {
+
         $module = $this->getModule()->getModuleName();
 
         $this->action = $this->getActionSchema()->create(
@@ -204,6 +220,9 @@ class ActionConstructor extends AbstractConstructor
             $data,
             false
         );
+        $this->action->getController()->setType($data['type'***REMOVED***);
+
+        //var_dump($this->action);die();
 
         if ($this->action instanceof ConsoleValidationStatus) {
             return $this->action;
@@ -232,11 +251,20 @@ class ActionConstructor extends AbstractConstructor
             return true;
         }
 
+        if ($this->controller->isType('Console')) {
+          $this->getConsoleController()->buildAction($this->controller);
+          $this->getConsoleControllerTest()->buildAction($this->controller);
+          $this->getConsoleRouterManager()->create($this->action);
+          return true;
+        }
+
+        $this->getApiControllerService()->buildAction($this->controller);
+        $this->getApiControllerTestService()->buildAction($this->controller);
+        $this->getRouterManager()->create($this->action);
 
 
-        $this->getConsoleController()->buildAction($this->controller);
-        $this->getConsoleControllerTest()->buildAction($this->controller);
-        $this->getConsoleRouterManager()->create($this->action);
+
+
         return true;
     }
 }

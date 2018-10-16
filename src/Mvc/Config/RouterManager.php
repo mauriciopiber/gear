@@ -23,7 +23,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
     public function getRouter()
     {
         //arquivo onde será adicionado
-        $this->fileName = $this->module->getConfigExtFolder().'/route.config.php';
+        $this->fileName = $this->getModule()->getConfigExtFolder().'/route.config.php';
 
         if (!is_file($this->fileName)) {
             throw new \Exception(sprintf('Não pode continuar pois não encontrou o arquivo %s', $this->fileName));
@@ -38,11 +38,10 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
     {
         //ação que será adicionada.
         $this->action = $action;
-        $this->moduleUrl = $this->str('url', $this->module->getModuleName());
+        $this->moduleUrl = $this->str('url', $this->getModule()->getModuleName());
 
 
         $router = $this->getRouter();
-
 
         //se não existe o modo cadastrado, deve retornar exceção.
         if (!isset($router['routes'***REMOVED***[$this->moduleUrl***REMOVED***)) {
@@ -81,6 +80,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         $this->getArrayService()->arrayToFile($this->fileName, $router);
 
         $this->getLanguageService()->mergeLanguageUp();
+        return true;
     }
 
 
@@ -234,12 +234,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             ? $action->getController()->getNamespace()
             : 'Controller';
 
-        $invokeName = sprintf(
-            $object,
-            $this->module->getModuleName(),
-            $namespace,
-            $action->getController()->getNameOff()
-        );
+        $invokeName = $this->getCode()->getClassName($action);
 
         $actionName = $this->str('url', $action->getName());
 
@@ -277,21 +272,46 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         $route = sprintf('/%s', $controllerRoute);
         $controller = $this->getCode()->getClassName($action);
 
-        //cria o controller router
-        $router = [
-            'type' => 'segment',
-            'options' => array(
-                'route' => $route,
-                'defaults' => array(
-                    'controller' => $controller,
-                    'action' => 'list'
-                )
-            ),
-            'may_terminate' => true,
-            'child_routes' => [***REMOVED***
-        ***REMOVED***;
+//var_dump($action->getController());
+        $router = ($action->getController()->getType() === 'Rest')
+            ? $this->factoryControllerRest($route, $controller)
+            : $this->factoryControllerWeb($route, $controller);
+
 
         return $router;
+    }
+
+    public function factoryControllerWeb($route, $controller) {
+      //cria o controller router
+      return [
+          'type' => 'segment',
+          'options' => array(
+              'route' => $route,
+              'defaults' => array(
+                  'controller' => $controller,
+                  'action' => 'list'
+              )
+          ),
+          'may_terminate' => true,
+          'child_routes' => [***REMOVED***
+      ***REMOVED***;
+    }
+
+    public function factoryControllerRest($route, $controller) {
+      return [
+          'type' => 'segment',
+          'options' => array(
+            'constraints' => [
+                'id'     => '[a-zA-Z0-9***REMOVED***+',
+            ***REMOVED***,
+            'route' => $route.'[/:id***REMOVED***',
+            'defaults' => array(
+                'controller' => $controller,
+            )
+          ),
+          'may_terminate' => true,
+          'child_routes' => [***REMOVED***
+      ***REMOVED***;
     }
 
 
