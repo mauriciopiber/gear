@@ -12,6 +12,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryServiceTrait;
+use GearJson\Controller\Controller as ControllerValueObject;
 
 /**
  * PHP Version 5
@@ -29,11 +30,6 @@ class ApiControllerService extends AbstractControllerService
     use CodeTrait;
     use FileCreatorTrait;
     use FactoryServiceTrait;
-
-    public function actionToController($insertMethods)
-    {
-        return false;
-    }
 
     /**
      * Constructor
@@ -129,8 +125,42 @@ class ApiControllerService extends AbstractControllerService
         return $this->file->render();
     }
 
-    public function buildAction()
+
+    public function buildAction(ControllerValueObject $controller)
     {
-        return true;
+        $this->controller = $controller;
+        $this->location = $this->getCode()->getLocation($controller);
+        $this->fileName = sprintf('%s.php', $controller->getName());
+        $this->controllerFile = $this->location.'/'.$this->fileName;
+
+        $this->mergeActions();
+    }
+
+
+    public function actionToController($insertMethods)
+    { 
+
+        $this->functions = '';
+
+        foreach ($insertMethods as $method) {
+            $label = $this->str('label', $method->getName());
+
+            $this->functions .= <<<EOS
+
+    /**
+     * {$label}
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function {$this->str('var', $method->getName())}Action()
+    {
+        return new JsonModel([***REMOVED***);
+    }
+
+EOS;
+        }
+
+        $this->functions = explode(PHP_EOL, $this->functions);
+        return $this->functions;
     }
 }

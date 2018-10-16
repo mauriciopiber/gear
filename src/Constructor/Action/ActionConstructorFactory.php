@@ -22,6 +22,10 @@ use Gear\Mvc\Spec\Step\Step;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Column\ColumnService;
 use Gear\Table\TableService;
+use Gear\Mvc\Controller\Api\{
+    ApiControllerService,
+    ApiControllerTestService,
+};
 
 /**
  * PHP Version 5
@@ -54,6 +58,8 @@ class ActionConstructorFactory implements FactoryInterface
             $serviceLocator->get(WebControllerTestService::class),
             $serviceLocator->get(ConsoleControllerService::class),
             $serviceLocator->get(ConsoleControllerTestService::class),
+            $serviceLocator->get(ApiControllerService::class),
+            $serviceLocator->get(ApiControllerTestService::class),
             $serviceLocator->get(AppControllerService::class),
             $serviceLocator->get(AppControllerSpecService::class),
             $serviceLocator->get(Feature::class),

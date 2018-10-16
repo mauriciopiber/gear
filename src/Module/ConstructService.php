@@ -236,6 +236,10 @@ class ConstructService extends AbstractJsonService
                             $action['controllerNamespace'***REMOVED*** = $controller['namespace'***REMOVED***;
                         }
 
+                        if (isset($controller['type'***REMOVED***)) {
+                            $action['type'***REMOVED*** = $controller['type'***REMOVED***;
+                        }
+
                         $this->constructAction($module, $action);
                     }
                 }
@@ -412,7 +416,9 @@ class ConstructService extends AbstractJsonService
 
     public function constructAction($module, array $action)
     {
+
         $actionItem = new Action($action);
+        $actionItem->getController()->setType($action['type'***REMOVED***);
 
         if ($this->getActionSchema()->actionExist($module, $actionItem)) {
             $this->constructStatus->addSkipped(sprintf(
