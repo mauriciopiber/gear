@@ -31,19 +31,102 @@ class ControllerManagerTest extends TestCase
 
         $this->string = new \GearBase\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
+        $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
         $fileService    = new \GearBase\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
+        $code = new \Gear\Creator\Code();
+        $code->setModule($this->module->reveal());
+
+        $array = new \Gear\Util\Vector\ArrayService();
 
         $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager();
         $this->controllerManager->setFileCreator($this->fileCreator);
         $this->controllerManager->setStringService($this->string);
         $this->controllerManager->setModule($this->module->reveal());
+        $this->controllerManager->setCode($code);
+        $this->controllerManager->setArrayService($array);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';
+    }
+
+
+    public function testCreateControllerNamespace()
+    {
+      $controller = new \GearJson\Controller\Controller([
+        'name' => 'MyController',
+        'type' => 'Action',
+        'service' => 'factories',
+        'namespace' => 'MyNamespace'
+      ***REMOVED***);
+
+      file_put_contents(vfsStream::url('module/config/ext/controller.config.php'), <<<EOS
+      <?php return array (
+        'invokables' =>
+        array (
+          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+        ),
+      );
+EOS
+      );
+
+      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+      $this->assertTrue($this->controllerManager->create($controller));
+
+      $expected = [
+        'invokables' => [
+          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+        ***REMOVED***,
+        'factories' => [
+          'MyModule\MyNamespace\My' => 'MyModule\MyNamespace\MyControllerFactory',
+        ***REMOVED***,
+      ***REMOVED***;
+
+      $result = include vfsStream::url('module/config/ext/controller.config.php');
+      $this->assertEquals($result, $expected);
+
+
+    }
+
+
+    public function testCreateController()
+    {
+      $controller = new \GearJson\Controller\Controller([
+        'name' => 'MyController',
+        'type' => 'Action',
+        'service' => 'factories'
+      ***REMOVED***);
+
+      file_put_contents(vfsStream::url('module/config/ext/controller.config.php'), <<<EOS
+      <?php return array (
+        'invokables' =>
+        array (
+          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+        ),
+      );
+EOS
+      );
+
+      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+
+      $this->assertTrue($this->controllerManager->create($controller));
+
+      $expected = [
+        'invokables' => [
+          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+        ***REMOVED***,
+        'factories' => [
+          'MyModule\Controller\My' => 'MyModule\Controller\MyControllerFactory',
+        ***REMOVED***,
+      ***REMOVED***;
+
+      $result = include vfsStream::url('module/config/ext/controller.config.php');
+      $this->assertEquals($result, $expected);
+
+
     }
 
     public function testCreateModuleControllerConfig()

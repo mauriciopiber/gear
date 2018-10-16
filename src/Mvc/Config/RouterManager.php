@@ -71,16 +71,30 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         if (!array_key_exists(
             $act,
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
-        )
+        ) && ($action->getController()->getType() == 'Action' || !$this->defaultAction($action->getName()))
         ) {
-            $actionRoute = $this->getActionRoute($action);
-            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
+
+          $actionRoute = $this->getActionRoute($action);
+          $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
+
+
         }
 
         $this->getArrayService()->arrayToFile($this->fileName, $router);
 
         $this->getLanguageService()->mergeLanguageUp();
         return true;
+    }
+
+    public function defaultAction($action) {
+      $fix = $this->str('class', $action);
+      return in_array($fix, [
+        'GetList',
+        'Get',
+        'Create',
+        'Update',
+        'Delete'
+      ***REMOVED***);
     }
 
 
@@ -99,12 +113,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             ? $action->getController()->getNamespace()
             : 'Controller';
 
-        $controllerInvokable = sprintf(
-            '%s\%s\%s',
-            $this->getModule()->getModuleName(),
-            $namespace,
-            $table
-        );
+        $controllerInvokable = $this->getCode()->getServiceName($action->getController());
 
         switch ($this->str('url', $action->getName())) {
             case 'create':
@@ -211,7 +220,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
                     'options' => array(
                         'route' => '/'.$urlName,
                         'defaults' => array(
-                            'controller' => $this->getCode()->getClassName($action->getController()),
+                            'controller' => $controllerInvokable,
                             'action' => $actionName
                         )
                     ),
@@ -234,7 +243,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             ? $action->getController()->getNamespace()
             : 'Controller';
 
-        $invokeName = $this->getCode()->getClassName($action);
+        $invokeName = $this->getCode()->getServiceName($action->getController());
 
         $actionName = $this->str('url', $action->getName());
 
@@ -270,7 +279,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         }
 
         $route = sprintf('/%s', $controllerRoute);
-        $controller = $this->getCode()->getClassName($action);
+        $controller = $this->getCode()->getServiceName($action->getController());
 
 //var_dump($action->getController());
         $router = ($action->getController()->getType() === 'Rest')

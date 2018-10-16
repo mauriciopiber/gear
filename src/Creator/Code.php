@@ -42,6 +42,13 @@ class Code extends AbstractCode implements
         'translator' => 'translate'
     ***REMOVED***;
 
+    public function getServiceName($controller)
+    {
+      $object = '%s\%s\%s';
+      $namespace = ($controller->getNamespace() !== null) ? $controller->getNamespace() : 'Controller';
+      $invokeName = sprintf($object, $this->getModule()->getModuleName(), $namespace, $controller->getNameOff());
+      return $invokeName;
+    }
 
     public function getInterfaceUse($data)
     {

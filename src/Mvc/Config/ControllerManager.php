@@ -43,7 +43,7 @@ class ControllerManager extends AbstractConfigManager implements ModuleManagerIn
 
         $namespace = ($this->controller->getNamespace() !== null) ? $this->controller->getNamespace() : 'Controller';
 
-        $invokeName = sprintf($object, $this->getModule()->getModuleName(), $namespace, $this->controller->getNameOff());
+        $invokeName = $this->getCode()->getServiceName($this->controller);
 
         if (!array_key_exists($invokeName, $invokables)) {
             if ($controller->isFactory()) {
@@ -65,7 +65,7 @@ class ControllerManager extends AbstractConfigManager implements ModuleManagerIn
             $controllerConfig[$controller->getService()***REMOVED*** = $invokables;
             $this->getArrayService()->arrayToFile($this->fileName, $controllerConfig);
         }
-        return;
+        return true;
     }
 
     public function delete(Controller $controller)

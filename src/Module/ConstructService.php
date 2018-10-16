@@ -394,7 +394,7 @@ class ConstructService extends AbstractJsonService
 
         unset($controller['actions'***REMOVED***);
         $controllerItem = new Controller($controller);
-
+        
         if ($this->getControllerSchema()->controllerExist($module, $controllerItem)) {
             $this->constructStatus->addSkipped(sprintf(self::CONTROLLER_SKIP, $controllerItem->getName()));
 
