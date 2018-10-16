@@ -93,7 +93,7 @@ EOS
       $actionRoutes = $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***;
       $this->assertCount(1, $actionRoutes);
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['route'***REMOVED***, '/my-action');
-      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\MyController');
+      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\My');
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['action'***REMOVED***, 'my-action');
 
       //var_dump($routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***[0***REMOVED***['options'***REMOVED***);
@@ -129,7 +129,7 @@ EOS
       $actionRoutes = $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***;
       $this->assertCount(1, $actionRoutes);
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['route'***REMOVED***, '/my-action');
-      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\MyController');
+      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\My');
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['action'***REMOVED***, 'my-action');
 
       $expected = [
@@ -141,7 +141,7 @@ EOS
                     'id'     => '[a-zA-Z0-9***REMOVED***+',
                 ***REMOVED***,
                 'defaults' => [
-                    'controller' => 'MyModule\Controller\MyController',
+                    'controller' => 'MyModule\Controller\My',
                 ***REMOVED***,
             ***REMOVED***,
             'may_terminate' => true,
@@ -151,12 +151,63 @@ EOS
                 'options' => [
                   'route' => '/my-action',
                   'defaults' => [
-                    'controller' => 'MyModule\Controller\MyController',
+                    'controller' => 'MyModule\Controller\My',
                     'action' => 'my-action'
                   ***REMOVED***
                 ***REMOVED***
               ***REMOVED***
             ***REMOVED***
+        ***REMOVED***,
+       ***REMOVED***;
+      $this->assertEquals($expected, $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***);
+
+      //var_dump($routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***[0***REMOVED***['options'***REMOVED***);
+      //$this->assertArrayHasKey('routes', $routerFile['routes'***REMOVED***);
+      //var_dump($routerFile);
+    }
+
+    public function testCreateActionRestDefaultAction()
+    {
+      $action = new Action([
+        'name' =>  'GetList',
+        'controller' => 'MyController'
+      ***REMOVED***);
+      $action->getController()->setType('Rest');
+
+      $this->assertEquals('Rest', $action->getController()->getType());
+
+
+      $router = $this->router->create($action);
+      $this->assertTrue($router);
+
+
+      $routerFile = include vfsStream::url('module/config/ext/route.config.php');
+
+
+      $this->assertArrayHasKey('routes', $routerFile);
+      $this->assertArrayHasKey('my-module', $routerFile['routes'***REMOVED***);
+      $this->assertArrayHasKey('child_routes', $routerFile['routes'***REMOVED***['my-module'***REMOVED***);
+      $this->assertArrayHasKey('my', $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***);
+      $this->assertArrayHasKey('child_routes', $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***);
+
+      $actionRoutes = $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***;
+      $this->assertCount(0, $actionRoutes);
+
+
+      $expected = [
+        'my' => [
+            'type'    => 'segment',
+            'options' => [
+                'route'    => '/my-controller[/:id***REMOVED***',
+                'constraints' => [
+                    'id'     => '[a-zA-Z0-9***REMOVED***+',
+                ***REMOVED***,
+                'defaults' => [
+                    'controller' => 'MyModule\Controller\My',
+                ***REMOVED***,
+            ***REMOVED***,
+            'may_terminate' => true,
+            'child_routes' => [***REMOVED***
         ***REMOVED***,
        ***REMOVED***;
       $this->assertEquals($expected, $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***);
