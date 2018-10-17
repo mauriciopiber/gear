@@ -13,6 +13,9 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ApiControllerScopeTrait;
 use Gear\Mvc\Factory\FactoryService;
+use Gear\Creator\Injector\Injector;
+use Gear\Util\Vector\ArrayService;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
  * @group Service
@@ -33,16 +36,30 @@ class ApiControllerServiceTest extends TestCase
 
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
-        $this->code = $this->prophesize(Code::class);
+
+        $this->code = new Code();
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
+
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+
+
         $this->fileCreator = $this->createFileCreator();
         $this->factoryService = $this->prophesize(FactoryService::class);
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->injector = new Injector($this->arrayService);
 
         $this->service = new ApiControllerService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
-            $this->code->reveal(),
-            $this->factoryService->reveal()
+            $this->code,
+            $this->factoryService->reveal(),
+            $this->injector,
+            $this->arrayService
         );
 
         $this->template = Module::LOCATION.'/../test/template/module/mvc/rest';
@@ -51,6 +68,7 @@ class ApiControllerServiceTest extends TestCase
         $this->src = vfsStream::newDirectory('src')->at($this->root);
         $this->location = vfsStream::newDirectory('Controller')->at($this->src);
     }
+
 
     /**
      * @group rest1
@@ -107,13 +125,6 @@ class ApiControllerServiceTest extends TestCase
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 
-
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
-        //$this->code->setArrayService($this->array);
-        $this->service->setCode($this->code);
         //$this->code->getLocation()->willReturn(vfsStream::url('modul'));
 
         $file = $this->service->buildController($controller);

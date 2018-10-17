@@ -1,6 +1,7 @@
 <?php
 namespace Gear\Mvc\Controller\Api;
 
+use Gear\Creator\Injector\Injector;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
@@ -35,7 +36,9 @@ class ApiControllerTestServiceFactory implements FactoryInterface
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get(CodeTest::class),
-            $serviceLocator->get(ControllerManager::class)
+            $serviceLocator->get('Gear\Mvc\Factory\FactoryTestService'),
+            $serviceLocator->get(ControllerManager::class),
+            $serviceLocator->get(Injector::class)
         );
         unset($serviceLocator);
         return $factory;

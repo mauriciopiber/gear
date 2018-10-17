@@ -1,9 +1,9 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use MyModule\Controller\BasicRest;
-use Zend\Console\Request;
+use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
@@ -24,10 +24,6 @@ class BasicRestTest extends TestCase
 
     public function setUp()
     {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
         parent::setUp();
 
         $this->controller = new BasicRest();

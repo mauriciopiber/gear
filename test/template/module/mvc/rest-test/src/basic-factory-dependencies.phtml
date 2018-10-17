@@ -1,18 +1,18 @@
 <?php
-namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
+namespace MyModuleTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
-use MyModule\Another\Long\Namespaces\BasicNamespaceRest;
+use MyModule\Controller\BasicFactoryDependenciesRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
- * @group BasicNamespaceRest
+ * @group BasicFactoryDependenciesRest
  * @group Controller
  */
-class BasicNamespaceRestTest extends TestCase
+class BasicFactoryDependenciesRestTest extends TestCase
 {
     use AclAssertTrait;
 
@@ -26,9 +26,18 @@ class BasicNamespaceRestTest extends TestCase
     {
         parent::setUp();
 
-        $this->controller = new BasicNamespaceRest();
+        $this->myRepositoryOne = $this->prophesize('MyModule\Repository\MyRepositoryOne');
+        $this->myRepositoryTwo = $this->prophesize('MyModule\Repository\MyRepositoryTwo');
+        $this->myRepositoryThree = $this->prophesize('MyModule\Repository\MyRepositoryThree');
+
+        $this->controller = new BasicFactoryDependenciesRest(
+            $this->myRepositoryOne->reveal(),
+            $this->myRepositoryTwo->reveal(),
+            $this->myRepositoryThree->reveal()
+        );
+
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicNamespaceRest'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryDependenciesRest'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);

@@ -12,6 +12,9 @@ use Gear\Module;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ApiControllerScopeTrait;
 use Gear\Mvc\Config\ControllerManager;
+use Gear\Creator\Injector\Injector;
+use Gear\Util\Vector\ArrayService;
+use Gear\Mvc\Factory\FactoryTestService;
 
 /**
  * @group Service
@@ -32,12 +35,21 @@ class ApiControllerTestServiceTest extends TestCase
         $this->fileCreator = $this->createFileCreator();
         $this->controllerManager = $this->prophesize(ControllerManager::class);
 
+
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->injector = new Injector($this->arrayService);
+
+        $this->factoryService = $this->prophesize(FactoryTestService::class);
+
+
         $this->service = new ApiControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
             $this->codeTest->reveal(),
-            $this->controllerManager->reveal()
+            $this->factoryService->reveal(),
+            $this->controllerManager->reveal(),
+            $this->injector
         );
 
         $this->template = Module::LOCATION.'/../test/template/module/mvc/rest-test';

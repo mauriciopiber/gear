@@ -2,17 +2,17 @@
 namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
 
 use PHPUnit\Framework\TestCase;
-use MyModule\Another\Long\Namespaces\BasicNamespaceRest;
+use MyModule\Another\Long\Namespaces\BasicFactoryNamespaceRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
- * @group BasicNamespaceRest
+ * @group BasicFactoryNamespaceRest
  * @group Controller
  */
-class BasicNamespaceRestTest extends TestCase
+class BasicFactoryNamespaceRestTest extends TestCase
 {
     use AclAssertTrait;
 
@@ -26,9 +26,10 @@ class BasicNamespaceRestTest extends TestCase
     {
         parent::setUp();
 
-        $this->controller = new BasicNamespaceRest();
+        $this->controller = new BasicFactoryNamespaceRest();
+
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicNamespaceRest'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryNamespaceRest'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);

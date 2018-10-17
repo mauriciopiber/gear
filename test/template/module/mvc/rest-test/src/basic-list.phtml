@@ -1,18 +1,18 @@
 <?php
-namespace MyModuleTest\AnotherTest\LongTest\NamespacesTest;
+namespace MyModuleTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
-use MyModule\Another\Long\Namespaces\BasicNamespaceRest;
+use MyModule\Controller\BasicListRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
- * @group BasicNamespaceRest
+ * @group BasicListRest
  * @group Controller
  */
-class BasicNamespaceRestTest extends TestCase
+class BasicListRestTest extends TestCase
 {
     use AclAssertTrait;
 
@@ -26,9 +26,9 @@ class BasicNamespaceRestTest extends TestCase
     {
         parent::setUp();
 
-        $this->controller = new BasicNamespaceRest();
+        $this->controller = new BasicListRest();
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicNamespaceRest'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicListRest'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
@@ -42,5 +42,21 @@ class BasicNamespaceRestTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    public function testGetListAction()
+    {
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicListRest',
+            'Controller',
+            'GetList'
+        );
+
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\JsonModel', $result);
     }
 }

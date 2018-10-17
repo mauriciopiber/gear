@@ -15,5 +15,55 @@ use Zend\Mvc\Controller\AbstractRestfulController;
  */
 class BasicManyRest extends AbstractRestfulController
 {
+    /**
+     * Get
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function get($id)
+    {
+        return new JsonModel([***REMOVED***);
+    }
 
+    /**
+     * Get List
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function getList()
+    {
+        return new JsonModel([***REMOVED***);
+    }
+
+    /**
+     * Update
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function update($id, $data)
+    {
+        return new JsonModel([
+          $id, $data
+        ***REMOVED***);
+    }
+
+    /**
+     * Delete
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function delete($id)
+    {
+        return new JsonModel([$id***REMOVED***);
+    }
+
+    /**
+     * Create
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function create($data)
+    {
+        return new JsonModel($data);
+    }
 }
