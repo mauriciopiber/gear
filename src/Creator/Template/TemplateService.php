@@ -24,10 +24,11 @@ class TemplateService
 
     public function render($templateName, $config)
     {
+
         $view = new ViewModel($config);
         $view->setTemplate($templateName);
-
         $phpRenderer = $this->getRenderer();
+        //var_dump($phpRenderer);
 
         return $phpRenderer->render($view);
     }
