@@ -218,7 +218,7 @@ class Integration
     public function runController()
     {
         if ($this->type === null || $this->type == self::CONTROLLER) {
-            $this->controllerSuite->runControllerSuite(['action', 'console'***REMOVED***, $this->count, $this->longname);
+            $this->controllerSuite->runControllerSuite(['action', 'console', 'rest'***REMOVED***, $this->count, $this->longname);
         }
     }
 

@@ -16,6 +16,6 @@ class Location
 {
     public function getLocation()
     {
-        return realpath((new Module())->getLocation().'/../../test/integration/main/constructors');
+        return realpath((new Module())->getLocation().'/../test/integration/main/constructors');
     }
 }

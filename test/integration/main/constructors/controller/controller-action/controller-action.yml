@@ -1,60 +1,444 @@
 src:
-    - { name: ActionInterfaceOne, type: Interface }
-    - { name: ActionInterfaceTwo, type: Interface }
-    - { name: RepositoryInvokablesOne, type: Repository, service: invokables }
-    - { name: RepositoryInvokablesTwo, type: Repository, service: invokables }
-    - { name: RepositoryFactoriesOne, type: Repository, service: factories }
-    - { name: RepositoryFactoriesTwo, type: Repository, service: factories }
-    - { name: ServiceInvokablesOne, type: Service, service: invokables }
-    - { name: ServiceInvokablesTwo, type: Service, service: invokables }
-    - { name: ServiceFactoriesOne, type: Service, service: factories }
-    - { name: ServiceFactoriesTwo, type: Service, service: factories }
-    - { name: FormInvokablesOne, type: Form, service: invokables }
-    - { name: FormInvokablesTwo, type: Form, service: invokables }
-    - { name: FormFactoriesOne, type: Form, service: factories }
-    - { name: FormFactoriesTwo, type: Form, service: factories }
-    - { name: FilterInvokablesOne, type: Filter, service: invokables }
-    - { name: FilterInvokablesTwo, type: Filter, service: invokables }
-    - { name: FilterFactoriesOne, type: Filter, service: factories }
-    - { name: FilterFactoriesTwo, type: Filter, service: factories }
+    -
+        name: ActionInterfaceOne
+        type: Interface
+        service: ''
+    -
+        name: ActionInterfaceTwo
+        type: Interface
+        service: ''
+    -
+        name: RepositoryInvokablesOne
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryInvokablesTwo
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryFactoriesOne
+        type: Repository
+        service: factories
+    -
+        name: RepositoryFactoriesTwo
+        type: Repository
+        service: factories
+    -
+        name: ServiceInvokablesOne
+        type: Service
+        service: invokables
+    -
+        name: ServiceInvokablesTwo
+        type: Service
+        service: invokables
+    -
+        name: ServiceFactoriesOne
+        type: Service
+        service: factories
+    -
+        name: ServiceFactoriesTwo
+        type: Service
+        service: factories
+    -
+        name: FormInvokablesOne
+        type: Form
+        service: invokables
+    -
+        name: FormInvokablesTwo
+        type: Form
+        service: invokables
+    -
+        name: FormFactoriesOne
+        type: Form
+        service: factories
+    -
+        name: FormFactoriesTwo
+        type: Form
+        service: factories
+    -
+        name: FilterInvokablesOne
+        type: Filter
+        service: invokables
+    -
+        name: FilterInvokablesTwo
+        type: Filter
+        service: invokables
+    -
+        name: FilterFactoriesOne
+        type: Filter
+        service: factories
+    -
+        name: FilterFactoriesTwo
+        type: Filter
+        service: factories
 controller:
-    - { name: ActionExtesibleInvokablesOne, type: Action, service: invokables }
-    - { name: ActionExtesibleInvokablesTwo, type: Action, service: invokables }
-    - { name: ActionExtesibleFactoriesOne, type: Action, service: factories }
-    - { name: ActionExtesibleFactoriesTwo, type: Action, service: factories }
-    - { name: ActionInvokablesOne, type: Action, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionInvokablesTwo, type: Action, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionFactoriesOne, type: Action, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionFactoriesTwo, type: Action, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionNamespaceInvokablesOne, type: Action, namespace: ActionOneNamespace, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionNamespaceInvokablesTwo, type: Action, namespace: ActionOneNamespace\ActionTwoNamespace, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionNamespaceFactoriesOne, type: Action, namespace: ActionOneNamespace, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionNamespaceFactoriesTwo, type: Action, namespace: ActionOneNamespace\ActionTwoNamespace, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionExtendsInvokablesOne, type: Action, extends: Controller\ActionExtesibleInvokablesOne, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionExtendsInvokablesTwo, type: Action, extends: Controller\ActionExtesibleInvokablesTwo, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionExtendsFactoriesOne, type: Action, extends: Controller\ActionExtesibleFactoriesOne, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionExtendsFactoriesTwo, type: Action, extends: Controller\ActionExtesibleFactoriesTwo, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionImplementsInvokablesOne, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionImplementsInvokablesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionImplementsFactoriesOne, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionImplementsFactoriesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionImplementsManyInvokablesOne, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionImplementsManyInvokablesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionImplementsManyFactoriesOne, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionImplementsManyFactoriesTwo, type: Action, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyInvokablesOne, type: Action, service: invokables, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyInvokablesTwo, type: Action, service: invokables, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFactoriesOne, type: Action, service: factories, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFactoriesTwo, type: Action, service: factories, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyManyInvokablesOne, type: Action, service: invokables, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyManyInvokablesTwo, type: Action, service: invokables, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyManyFactoriesOne, type: Action, service: factories, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyManyFactoriesTwo, type: Action, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFullInvokablesOne, type: Action, extends: Controller\ActionExtesibleInvokablesOne, namespace: ActionOneNamespace, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFullInvokablesTwo, type: Action, extends: Controller\ActionExtesibleInvokablesTwo, namespace: ActionOneNamespace\ActionTwoNamespace, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: invokables, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFullFactoriesOne, type: Action, extends: Controller\ActionExtesibleFactoriesOne, namespace: ActionOneNamespace, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependencyFullFactoriesTwo, type: Action, extends: Controller\ActionExtesibleFactoriesTwo, namespace: ActionOneNamespace\ActionTwoNamespace, implements: [Interfaces\ActionInterfaceOne***REMOVED***, service: factories, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependenciesManyFullInvokablesOne, type: Action, extends: Controller\ActionExtesibleInvokablesOne, namespace: ActionOneNamespace, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependenciesManyFullInvokablesTwo, type: Action, extends: Controller\ActionExtesibleInvokablesTwo, namespace: ActionOneNamespace\ActionTwoNamespace, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: invokables, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ActionDependenciesManyFullFactoriesOne, type: Action, extends: Controller\ActionExtesibleFactoriesOne, namespace: ActionOneNamespace, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ActionDependenciesManyFullFactoriesTwo, type: Action, extends: Controller\ActionExtesibleFactoriesTwo, namespace: ActionOneNamespace\ActionTwoNamespace, implements: [Interfaces\ActionInterfaceOne, Interfaces\ActionInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    -
+        name: ActionExtesibleInvokablesOne
+        type: Action
+        service: invokables
+    -
+        name: ActionExtesibleInvokablesTwo
+        type: Action
+        service: invokables
+    -
+        name: ActionExtesibleFactoriesOne
+        type: Action
+        service: factories
+    -
+        name: ActionExtesibleFactoriesTwo
+        type: Action
+        service: factories
+    -
+        name: ActionInvokablesOne
+        type: Action
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionInvokablesTwo
+        type: Action
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionFactoriesOne
+        type: Action
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionFactoriesTwo
+        type: Action
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionNamespaceInvokablesOne
+        type: Action
+        namespace: ActionOneNamespace
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionNamespaceInvokablesTwo
+        type: Action
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionNamespaceFactoriesOne
+        type: Action
+        namespace: ActionOneNamespace
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionNamespaceFactoriesTwo
+        type: Action
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionExtendsInvokablesOne
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesOne
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionExtendsInvokablesTwo
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesTwo
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionExtendsFactoriesOne
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesOne
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionExtendsFactoriesTwo
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesTwo
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionImplementsInvokablesOne
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionImplementsInvokablesTwo
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionImplementsFactoriesOne
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionImplementsFactoriesTwo
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionImplementsManyInvokablesOne
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionImplementsManyInvokablesTwo
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionImplementsManyFactoriesOne
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionImplementsManyFactoriesTwo
+        type: Action
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyInvokablesOne
+        type: Action
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyInvokablesTwo
+        type: Action
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyFactoriesOne
+        type: Action
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyFactoriesTwo
+        type: Action
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyManyInvokablesOne
+        type: Action
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyManyInvokablesTwo
+        type: Action
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyManyFactoriesOne
+        type: Action
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyManyFactoriesTwo
+        type: Action
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyFullInvokablesOne
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesOne
+        namespace: ActionOneNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyFullInvokablesTwo
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesTwo
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependencyFullFactoriesOne
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesOne
+        namespace: ActionOneNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependencyFullFactoriesTwo
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesTwo
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependenciesManyFullInvokablesOne
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesOne
+        namespace: ActionOneNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependenciesManyFullInvokablesTwo
+        type: Action
+        extends: Controller\ActionExtesibleInvokablesTwo
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ActionDependenciesManyFullFactoriesOne
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesOne
+        namespace: ActionOneNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ActionDependenciesManyFullFactoriesTwo
+        type: Action
+        extends: Controller\ActionExtesibleFactoriesTwo
+        namespace: ActionOneNamespace\ActionTwoNamespace
+        implements:
+            - Interfaces\ActionInterfaceOne
+            - Interfaces\ActionInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }

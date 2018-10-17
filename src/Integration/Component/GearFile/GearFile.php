@@ -453,6 +453,7 @@ class GearFile
 
         $controller = $this->runGenerate('controller', $srcOptions);
 
+
         return $this->createGearfileComponent(['src' => $src, 'controller' => $controller***REMOVED***);
     }
 
@@ -602,12 +603,16 @@ class GearFile
         $this->serviceLabel = $this->getEntryConfigName();
 
         $this->type = $this->str('class', $entity['type'***REMOVED***);
+        //if ($this-)
         $this->typeLabel = $this->getTypeName($this->suite);
 
         $this->name = $this->getEntryName($entity['name'***REMOVED***);
 
         $this->entry['name'***REMOVED*** = $this->name;
         $this->entry['type'***REMOVED*** = $this->type;
+
+
+        //if ($this->entry['type'***REMOVED***)
 
         if (isset($entity['extends'***REMOVED***)) {
             $this->entry['extends'***REMOVED*** = $this->createExtends($entity);
@@ -673,6 +678,19 @@ class GearFile
 
     public function createAction($repeat)
     {
+
+        if ($this->type === 'Rest') {
+          $actions[***REMOVED*** = ['name' => sprintf('%s', 'GetList'), 'role' => 'guest'***REMOVED***;
+          if ($repeat == 1) {
+              return $actions;
+          }
+          $actions[***REMOVED*** = ['name' => sprintf('%s', 'Get'), 'role' => 'guest'***REMOVED***;
+          $actions[***REMOVED*** = ['name' => sprintf('%s', 'Create'), 'role' => 'guest'***REMOVED***;
+          $actions[***REMOVED*** = ['name' => sprintf('%s', 'Update'), 'role' => 'guest'***REMOVED***;
+          $actions[***REMOVED*** = ['name' => sprintf('%s', 'Delete'), 'role' => 'guest'***REMOVED***;
+          return $actions;
+        }
+
         $actions = [***REMOVED***;
 
         if ($repeat == 1) {
