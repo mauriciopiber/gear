@@ -7,6 +7,7 @@ use Gear\Docker\DockerServiceFactory;
 use Gear\Docker\DockerService;
 use GearBase\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Gear
@@ -27,6 +28,9 @@ class DockerServiceFactoryTest extends TestCase
             ->willReturn($this->prophesize(FileCreator::class)->reveal())
             ->shouldBeCalled();
 
+        $this->serviceLocator->get(ModuleStructure::class)
+            ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
+            ->shouldBeCalled();
         $factory = new DockerServiceFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());

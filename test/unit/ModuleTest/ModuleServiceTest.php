@@ -57,6 +57,7 @@ use Gear\Mvc\Controller\Web\{
 };
 use Gear\Module\ConstructService;
 use Gear\Module\ConstructServiceTrait;
+use Gear\Docker\DockerService;
 
 /**
  * @group Module
@@ -128,6 +129,8 @@ class ModuleServiceTest extends TestCase
 
         $this->actionConstructor = $this->prophesize(ActionConstructor::class);
         $this->controllerConstructor = $this->prophesize(ControllerConstructor::class);
+
+        $this->dockerService = $this->prophesize(DockerService::class);
 
         $this->config = [
             'gear' => [
@@ -202,8 +205,8 @@ class ModuleServiceTest extends TestCase
         $expected = $this->templates.'/deploy-development-cli.sh';
 
         $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents(vfsStream::url('module/deploy-development.sh'))
+            file_get_contents(vfsStream::url('module/deploy-development.sh')),
+            file_get_contents($expected)
         );
     }
 
@@ -577,7 +580,8 @@ class ModuleServiceTest extends TestCase
             $this->dir,
             $this->gearConfig->reveal(),
             $this->controllerConstructor->reveal(),
-            $this->actionConstructor->reveal()
+            $this->actionConstructor->reveal(),
+            $this->dockerService->reveal()
         );
     }
 }

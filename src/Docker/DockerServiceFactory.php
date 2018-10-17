@@ -5,6 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Docker\DockerService;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * PHP Version 5
@@ -28,9 +29,15 @@ class DockerServiceFactory implements FactoryInterface
     {
         $factory = new DockerService(
             $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get(FileCreator::class)
+            $serviceLocator->get(FileCreator::class),
+            $serviceLocator->get(ModuleStructure::class)
         );
         unset($serviceLocator);
         return $factory;
+    }
+
+    public function createDockerComposeFile()
+    {
+      return true;
     }
 }

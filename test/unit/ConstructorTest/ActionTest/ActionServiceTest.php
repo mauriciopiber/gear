@@ -9,7 +9,10 @@ use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\Controller\Console\{
     ConsoleControllerService,
     ConsoleControllerTestService,
-
+};
+use Gear\Mvc\Controller\Api\{
+    ApiControllerService,
+    ApiControllerTestService,
 };
 use Gear\Mvc\Config\ControllerManager;
 use GearJson\Action\ActionSchema;
@@ -74,6 +77,9 @@ class ActionConstructorTest extends TestCase
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
 
+        $this->apiController = $this->prophesize(ApiControllerService::class);
+        $this->apiControllerTest = $this->prophesize(ApiControllerTestService::class);
+
         $this->actionService = new ActionConstructor(
             $this->actionSchema->reveal(),
             $this->routerManager->reveal(),
@@ -84,6 +90,8 @@ class ActionConstructorTest extends TestCase
             $this->mvcControllerTest->reveal(),
             $this->mvcConsoleController->reveal(),
             $this->mvcConsoleControllerTest->reveal(),
+            $this->apiController->reveal(),
+            $this->apiControllerTest->reveal(),
             $this->appController->reveal(),
             $this->appControllerSpec->reveal(),
             $this->feature->reveal(),

@@ -97,6 +97,8 @@ use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Controller\ControllerConstructorTrait;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Constructor\Action\ActionConstructorTrait;
+use Gear\Docker\DockerService;
+use Gear\Docker\DockerServiceTrait;
 
 /**
  *
@@ -144,6 +146,7 @@ class ModuleService
     use DirServiceTrait;
     use GearConfigTrait;
     use ConstructServiceTrait;
+    use DockerServiceTrait;
 
     protected $type;
 
@@ -177,8 +180,10 @@ class ModuleService
         DirService $dirService,
         GearConfig $gearConfig,
         ControllerConstructor $controllerConstructor,
-        ActionConstructor $actionConstructor
+        ActionConstructor $actionConstructor,
+        DockerService $docker
     ) {
+        $this->dockerService = $docker;
         $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -331,6 +336,8 @@ class ModuleService
         $this->createDocs();
 
         $this->createJenkinsFile($this->type);
+
+        $this->getDockerService()->createDockerComposeFile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();

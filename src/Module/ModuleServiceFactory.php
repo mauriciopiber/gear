@@ -8,6 +8,7 @@ use Gear\Module\ModuleService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
+use Gear\Docker\DockerService;
 
 class ModuleServiceFactory implements FactoryInterface
 {
@@ -37,7 +38,8 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('GearBase\Util\Dir'),
             $serviceLocator->get('GearBase\GearConfig'),
             $serviceLocator->get(ControllerConstructor::class),
-            $serviceLocator->get(ActionConstructor::class)
+            $serviceLocator->get(ActionConstructor::class),
+            $serviceLocator->get(DockerService::class)
         );
     }
 }

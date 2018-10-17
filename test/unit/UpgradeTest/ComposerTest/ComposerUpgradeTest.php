@@ -131,7 +131,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "https://mirror.pibernetwork.com"
+            "url": "https://mirror.piber.network"
         },
         {
             "packagist": false
@@ -221,7 +221,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "https://mirror.pibernetwork.com"
+            "url": "https://mirror.piber.network"
         },
         {
             "packagist": false
