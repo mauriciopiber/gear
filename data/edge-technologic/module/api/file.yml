@@ -8,7 +8,7 @@ files:
     5: script/deploy-testing.sh
     6: script/deploy-development.sh
     23: script/deploy-staging.sh
-    30: script/install-staging.sh    
+    30: script/install-staging.sh
     7: script/load.sh
     8: codeception.yml
     9: test/unit.suite.yml
@@ -16,6 +16,7 @@ files:
     15: test/phpcs.xml
     16: test/phpunit-benchmark.xml
     17: test/phpunit-coverage-benchmark.xml
-    18: Jenkinsfile  
-    19: .gitignore    
-    20: schema/module.json    
+    18: Jenkinsfile
+    19: .gitignore
+    20: schema/module.json
+    41: docker-compose.yml

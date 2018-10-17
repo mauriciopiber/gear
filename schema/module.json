@@ -1643,6 +1643,28 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "DockerService",
+                "type": "Service",
+                "dependency": [
+                    {
+                        "class": "\\GearBase\\Util\\String\\StringService",
+                        "aliase": "GearBase\\Util\\String"
+                    },
+                    {
+                        "class": "Creator\\FileCreator\\FileCreator"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Docker",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
