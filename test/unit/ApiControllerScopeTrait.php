@@ -117,6 +117,15 @@ trait ApiControllerScopeTrait
                 ***REMOVED***),
                 'basic'
             ***REMOVED***,
+            [
+                new \GearJson\Controller\Controller([
+                    'name' => sprintf('Basic%s', $srcType),
+                    'type' => $srcType,
+                    'namespace' => 'CompleteController',
+                    'extends' => 'Controller\BasicController'
+                ***REMOVED***),
+                'basic-namespace-extends'
+            ***REMOVED***,
         ***REMOVED***;
     }
 }

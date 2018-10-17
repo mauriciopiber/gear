@@ -1,0 +1,499 @@
+src:
+    -
+        name: RestInterfaceOne
+        type: Interface
+        service: ''
+    -
+        name: RestInterfaceTwo
+        type: Interface
+        service: ''
+    -
+        name: RepositoryInvokablesOne
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryInvokablesTwo
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryFactoriesOne
+        type: Repository
+        service: factories
+    -
+        name: RepositoryFactoriesTwo
+        type: Repository
+        service: factories
+    -
+        name: ServiceInvokablesOne
+        type: Service
+        service: invokables
+    -
+        name: ServiceInvokablesTwo
+        type: Service
+        service: invokables
+    -
+        name: ServiceFactoriesOne
+        type: Service
+        service: factories
+    -
+        name: ServiceFactoriesTwo
+        type: Service
+        service: factories
+    -
+        name: FormInvokablesOne
+        type: Form
+        service: invokables
+    -
+        name: FormInvokablesTwo
+        type: Form
+        service: invokables
+    -
+        name: FormFactoriesOne
+        type: Form
+        service: factories
+    -
+        name: FormFactoriesTwo
+        type: Form
+        service: factories
+    -
+        name: FilterInvokablesOne
+        type: Filter
+        service: invokables
+    -
+        name: FilterInvokablesTwo
+        type: Filter
+        service: invokables
+    -
+        name: FilterFactoriesOne
+        type: Filter
+        service: factories
+    -
+        name: FilterFactoriesTwo
+        type: Filter
+        service: factories
+controller:
+    -
+        name: RestExtesibleInvokablesOne
+        type: Rest
+        service: invokables
+    -
+        name: RestExtesibleInvokablesTwo
+        type: Rest
+        service: invokables
+    -
+        name: RestExtesibleFactoriesOne
+        type: Rest
+        namespace: Rest
+        service: factories
+    -
+        name: RestExtesibleFactoriesTwo
+        type: Rest
+        service: factories
+    -
+        name: RestInvokablesOne
+        type: Rest
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestInvokablesTwo
+        type: Rest
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestFactoriesOne
+        type: Rest
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestFactoriesTwo
+        type: Rest
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestNamespaceInvokablesOne
+        type: Rest
+        namespace: RestOneNamespace
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestNamespaceInvokablesTwo
+        type: Rest
+        namespace: RestOneNamespace\RestTwoNamespace
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestNamespaceFactoriesOne
+        type: Rest
+        namespace: RestOneNamespace
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestNamespaceFactoriesTwo
+        type: Rest
+        namespace: RestOneNamespace\RestTwoNamespace
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestExtendsInvokablesOne
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesOne
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestExtendsInvokablesTwo
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesTwo
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestExtendsFactoriesOne
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesOne
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestExtendsFactoriesTwo
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesTwo
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestImplementsInvokablesOne
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestImplementsInvokablesTwo
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestImplementsFactoriesOne
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestImplementsFactoriesTwo
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestImplementsManyInvokablesOne
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestImplementsManyInvokablesTwo
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: invokables
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestImplementsManyFactoriesOne
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestImplementsManyFactoriesTwo
+        type: Rest
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: factories
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyInvokablesOne
+        type: Rest
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyInvokablesTwo
+        type: Rest
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyFactoriesOne
+        type: Rest
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyFactoriesTwo
+        type: Rest
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyManyInvokablesOne
+        type: Rest
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyManyInvokablesTwo
+        type: Rest
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyManyFactoriesOne
+        type: Rest
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyManyFactoriesTwo
+        type: Rest
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyFullInvokablesOne
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesOne
+        namespace: RestOneNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyFullInvokablesTwo
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesTwo
+        namespace: RestOneNamespace\RestTwoNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependencyFullFactoriesOne
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesOne
+        namespace: RestOneNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependencyFullFactoriesTwo
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesTwo
+        namespace: RestOneNamespace\RestTwoNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependenciesManyFullInvokablesOne
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesOne
+        namespace: RestOneNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependenciesManyFullInvokablesTwo
+        type: Rest
+        extends: Rest\RestExtesibleInvokablesTwo
+        namespace: RestOneNamespace\RestTwoNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }
+    -
+        name: RestDependenciesManyFullFactoriesOne
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesOne
+        namespace: RestOneNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: GetList, role: guest }
+    -
+        name: RestDependenciesManyFullFactoriesTwo
+        type: Rest
+        extends: Rest\RestExtesibleFactoriesTwo
+        namespace: RestOneNamespace\RestTwoNamespace
+        implements:
+            - Interfaces\RestInterfaceOne
+            - Interfaces\RestInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: GetList, role: guest }
+            - { name: Get, role: guest }
+            - { name: Create, role: guest }
+            - { name: Update, role: guest }
+            - { name: Delete, role: guest }

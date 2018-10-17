@@ -1,60 +1,444 @@
 src:
-    - { name: ConsoleInterfaceOne, type: Interface }
-    - { name: ConsoleInterfaceTwo, type: Interface }
-    - { name: RepositoryInvokablesOne, type: Repository, service: invokables }
-    - { name: RepositoryInvokablesTwo, type: Repository, service: invokables }
-    - { name: RepositoryFactoriesOne, type: Repository, service: factories }
-    - { name: RepositoryFactoriesTwo, type: Repository, service: factories }
-    - { name: ServiceInvokablesOne, type: Service, service: invokables }
-    - { name: ServiceInvokablesTwo, type: Service, service: invokables }
-    - { name: ServiceFactoriesOne, type: Service, service: factories }
-    - { name: ServiceFactoriesTwo, type: Service, service: factories }
-    - { name: FormInvokablesOne, type: Form, service: invokables }
-    - { name: FormInvokablesTwo, type: Form, service: invokables }
-    - { name: FormFactoriesOne, type: Form, service: factories }
-    - { name: FormFactoriesTwo, type: Form, service: factories }
-    - { name: FilterInvokablesOne, type: Filter, service: invokables }
-    - { name: FilterInvokablesTwo, type: Filter, service: invokables }
-    - { name: FilterFactoriesOne, type: Filter, service: factories }
-    - { name: FilterFactoriesTwo, type: Filter, service: factories }
+    -
+        name: ConsoleInterfaceOne
+        type: Interface
+        service: ''
+    -
+        name: ConsoleInterfaceTwo
+        type: Interface
+        service: ''
+    -
+        name: RepositoryInvokablesOne
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryInvokablesTwo
+        type: Repository
+        service: invokables
+    -
+        name: RepositoryFactoriesOne
+        type: Repository
+        service: factories
+    -
+        name: RepositoryFactoriesTwo
+        type: Repository
+        service: factories
+    -
+        name: ServiceInvokablesOne
+        type: Service
+        service: invokables
+    -
+        name: ServiceInvokablesTwo
+        type: Service
+        service: invokables
+    -
+        name: ServiceFactoriesOne
+        type: Service
+        service: factories
+    -
+        name: ServiceFactoriesTwo
+        type: Service
+        service: factories
+    -
+        name: FormInvokablesOne
+        type: Form
+        service: invokables
+    -
+        name: FormInvokablesTwo
+        type: Form
+        service: invokables
+    -
+        name: FormFactoriesOne
+        type: Form
+        service: factories
+    -
+        name: FormFactoriesTwo
+        type: Form
+        service: factories
+    -
+        name: FilterInvokablesOne
+        type: Filter
+        service: invokables
+    -
+        name: FilterInvokablesTwo
+        type: Filter
+        service: invokables
+    -
+        name: FilterFactoriesOne
+        type: Filter
+        service: factories
+    -
+        name: FilterFactoriesTwo
+        type: Filter
+        service: factories
 controller:
-    - { name: ConsoleExtesibleInvokablesOne, type: Console, service: invokables }
-    - { name: ConsoleExtesibleInvokablesTwo, type: Console, service: invokables }
-    - { name: ConsoleExtesibleFactoriesOne, type: Console, service: factories }
-    - { name: ConsoleExtesibleFactoriesTwo, type: Console, service: factories }
-    - { name: ConsoleInvokablesOne, type: Console, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleInvokablesTwo, type: Console, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleFactoriesOne, type: Console, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleFactoriesTwo, type: Console, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleNamespaceInvokablesOne, type: Console, namespace: ConsoleOneNamespace, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleNamespaceInvokablesTwo, type: Console, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleNamespaceFactoriesOne, type: Console, namespace: ConsoleOneNamespace, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleNamespaceFactoriesTwo, type: Console, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleExtendsInvokablesOne, type: Console, extends: Controller\ConsoleExtesibleInvokablesOne, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleExtendsInvokablesTwo, type: Console, extends: Controller\ConsoleExtesibleInvokablesTwo, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleExtendsFactoriesOne, type: Console, extends: Controller\ConsoleExtesibleFactoriesOne, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleExtendsFactoriesTwo, type: Console, extends: Controller\ConsoleExtesibleFactoriesTwo, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsInvokablesOne, type: Console, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsInvokablesTwo, type: Console, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsFactoriesOne, type: Console, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsFactoriesTwo, type: Console, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsManyInvokablesOne, type: Console, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsManyInvokablesTwo, type: Console, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsManyFactoriesOne, type: Console, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleImplementsManyFactoriesTwo, type: Console, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyInvokablesOne, type: Console, service: invokables, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyInvokablesTwo, type: Console, service: invokables, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFactoriesOne, type: Console, service: factories, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFactoriesTwo, type: Console, service: factories, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyManyInvokablesOne, type: Console, service: invokables, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyManyInvokablesTwo, type: Console, service: invokables, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyManyFactoriesOne, type: Console, service: factories, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyManyFactoriesTwo, type: Console, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFullInvokablesOne, type: Console, extends: Controller\ConsoleExtesibleInvokablesOne, namespace: ConsoleOneNamespace, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: invokables, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFullInvokablesTwo, type: Console, extends: Controller\ConsoleExtesibleInvokablesTwo, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: invokables, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFullFactoriesOne, type: Console, extends: Controller\ConsoleExtesibleFactoriesOne, namespace: ConsoleOneNamespace, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: factories, dependency: [Service\ServiceInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependencyFullFactoriesTwo, type: Console, extends: Controller\ConsoleExtesibleFactoriesTwo, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, implements: [Interfaces\ConsoleInterfaceOne***REMOVED***, service: factories, dependency: [Service\ServiceInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependenciesManyFullInvokablesOne, type: Console, extends: Controller\ConsoleExtesibleInvokablesOne, namespace: ConsoleOneNamespace, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: invokables, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependenciesManyFullInvokablesTwo, type: Console, extends: Controller\ConsoleExtesibleInvokablesTwo, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: invokables, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
-    - { name: ConsoleDependenciesManyFullFactoriesOne, type: Console, extends: Controller\ConsoleExtesibleFactoriesOne, namespace: ConsoleOneNamespace, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesOne, Service\ServiceInvokablesOne, Filter\FilterInvokablesOne, Form\FormInvokablesOne***REMOVED***, actions: [{ name: Index, role: guest }***REMOVED*** }
-    - { name: ConsoleDependenciesManyFullFactoriesTwo, type: Console, extends: Controller\ConsoleExtesibleFactoriesTwo, namespace: ConsoleOneNamespace\ConsoleTwoNamespace, implements: [Interfaces\ConsoleInterfaceOne, Interfaces\ConsoleInterfaceTwo***REMOVED***, service: factories, dependency: [Repository\RepositoryInvokablesTwo, Service\ServiceInvokablesTwo, Filter\FilterInvokablesTwo, Form\FormInvokablesTwo***REMOVED***, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    -
+        name: ConsoleExtesibleInvokablesOne
+        type: Console
+        service: invokables
+    -
+        name: ConsoleExtesibleInvokablesTwo
+        type: Console
+        service: invokables
+    -
+        name: ConsoleExtesibleFactoriesOne
+        type: Console
+        service: factories
+    -
+        name: ConsoleExtesibleFactoriesTwo
+        type: Console
+        service: factories
+    -
+        name: ConsoleInvokablesOne
+        type: Console
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleInvokablesTwo
+        type: Console
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleFactoriesOne
+        type: Console
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleFactoriesTwo
+        type: Console
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleNamespaceInvokablesOne
+        type: Console
+        namespace: ConsoleOneNamespace
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleNamespaceInvokablesTwo
+        type: Console
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleNamespaceFactoriesOne
+        type: Console
+        namespace: ConsoleOneNamespace
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleNamespaceFactoriesTwo
+        type: Console
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleExtendsInvokablesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesOne
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleExtendsInvokablesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesTwo
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleExtendsFactoriesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesOne
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleExtendsFactoriesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesTwo
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleImplementsInvokablesOne
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleImplementsInvokablesTwo
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleImplementsFactoriesOne
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleImplementsFactoriesTwo
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleImplementsManyInvokablesOne
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: invokables
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleImplementsManyInvokablesTwo
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: invokables
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleImplementsManyFactoriesOne
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: factories
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleImplementsManyFactoriesTwo
+        type: Console
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: factories
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyInvokablesOne
+        type: Console
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyInvokablesTwo
+        type: Console
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyFactoriesOne
+        type: Console
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyFactoriesTwo
+        type: Console
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyManyInvokablesOne
+        type: Console
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyManyInvokablesTwo
+        type: Console
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyManyFactoriesOne
+        type: Console
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyManyFactoriesTwo
+        type: Console
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyFullInvokablesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesOne
+        namespace: ConsoleOneNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyFullInvokablesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesTwo
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: invokables
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependencyFullFactoriesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesOne
+        namespace: ConsoleOneNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependencyFullFactoriesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesTwo
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+        service: factories
+        dependency:
+            - Service\ServiceInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependenciesManyFullInvokablesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesOne
+        namespace: ConsoleOneNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependenciesManyFullInvokablesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleInvokablesTwo
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: invokables
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
+    -
+        name: ConsoleDependenciesManyFullFactoriesOne
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesOne
+        namespace: ConsoleOneNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesOne
+            - Service\ServiceInvokablesOne
+            - Filter\FilterInvokablesOne
+            - Form\FormInvokablesOne
+        actions:
+            - { name: Index, role: guest }
+    -
+        name: ConsoleDependenciesManyFullFactoriesTwo
+        type: Console
+        extends: Controller\ConsoleExtesibleFactoriesTwo
+        namespace: ConsoleOneNamespace\ConsoleTwoNamespace
+        implements:
+            - Interfaces\ConsoleInterfaceOne
+            - Interfaces\ConsoleInterfaceTwo
+        service: factories
+        dependency:
+            - Repository\RepositoryInvokablesTwo
+            - Service\ServiceInvokablesTwo
+            - Filter\FilterInvokablesTwo
+            - Form\FormInvokablesTwo
+        actions:
+            - { name: One, role: guest }
+            - { name: Two, role: guest }
