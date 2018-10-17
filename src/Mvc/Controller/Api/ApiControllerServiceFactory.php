@@ -8,6 +8,8 @@ use Gear\Module\Structure\ModuleStructure;
 use GearBase\Util\String\StringService;
 use Gear\Creator\Code;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\Injector\Injector;
+use Gear\Util\Vector\ArrayService;
 
 /**
  * PHP Version 5
@@ -34,7 +36,9 @@ class ApiControllerServiceFactory implements FactoryInterface
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('GearBase\Util\String'),
             $serviceLocator->get(Code::class),
-            $serviceLocator->get('Gear\Mvc\Factory\FactoryService')
+            $serviceLocator->get('Gear\Mvc\Factory\FactoryService'),
+            $serviceLocator->get(Injector::class),
+            $serviceLocator->get(ArrayService::class)
         );
         unset($serviceLocator);
         return $factory;

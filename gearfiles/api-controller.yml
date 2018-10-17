@@ -27,4 +27,19 @@ controller:
       3:
         name: update
       4:
-        name: remove
+        name: delete
+  1:
+    name: MySecondController
+    namespace: MyNamespace
+    type: Rest
+    actions:
+      0:
+        name: getList
+      1:
+        name: get
+      2:
+        name: create
+      3:
+        name: update
+      4:
+        name: delete

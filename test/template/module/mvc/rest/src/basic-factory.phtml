@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Controller;
 
-use Zend\View\Model\ConsoleModel;
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\View\Model\JsonModel;
+use Zend\Mvc\Controller\AbstractRestfulController;
 
 /**
  * PHP Version 5
@@ -13,12 +13,12 @@ use Zend\Mvc\Controller\AbstractConsoleController;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class BasicFactoryConsole extends AbstractConsoleController
+class BasicFactoryRest extends AbstractRestfulController
 {
     /**
      * Constructor
      *
-     * @return BasicFactoryConsole
+     * @return BasicFactoryRest
      */
     public function __construct()
     {

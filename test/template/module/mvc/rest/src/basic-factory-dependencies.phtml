@@ -1,11 +1,11 @@
 <?php
 namespace MyModule\Controller;
 
-use Zend\View\Model\ConsoleModel;
+use Zend\View\Model\JsonModel;
 use MyModule\Repository\MyRepositoryOneTrait;
 use MyModule\Repository\MyRepositoryTwoTrait;
 use MyModule\Repository\MyRepositoryThreeTrait;
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use MyModule\Repository\MyRepositoryOne;
 use MyModule\Repository\MyRepositoryTwo;
 use MyModule\Repository\MyRepositoryThree;
@@ -19,7 +19,7 @@ use MyModule\Repository\MyRepositoryThree;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class BasicFactoryDependenciesConsole extends AbstractConsoleController
+class BasicFactoryDependenciesRest extends AbstractRestfulController
 {
     use MyRepositoryOneTrait;
 
@@ -34,7 +34,7 @@ class BasicFactoryDependenciesConsole extends AbstractConsoleController
      * @param MyRepositoryTwo   $myRepositoryTwo   My Repository Two
      * @param MyRepositoryThree $myRepositoryThree My Repository Three
      *
-     * @return BasicFactoryDependenciesConsole
+     * @return BasicFactoryDependenciesRest
      */
     public function __construct(
         MyRepositoryOne $myRepositoryOne,

@@ -13,6 +13,10 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use GearJson\Controller\Controller as ControllerValueObject;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Mvc\Config\ControllerManager;
+use Gear\Creator\Injector\Injector;
+use Gear\Creator\Injector\InjectorTrait;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Mvc\Factory\FactoryTestServiceTrait;
 
 /**
  * PHP Version 5
@@ -30,7 +34,8 @@ class ApiControllerTestService extends AbstractControllerTestService
     use StringServiceTrait;
     use CodeTestTrait;
     use FileCreatorTrait;
-
+    use InjectorTrait;
+    use FactoryTestServiceTrait;
 
     /**
      * Constructor
@@ -42,8 +47,12 @@ class ApiControllerTestService extends AbstractControllerTestService
         FileCreator $fileCreator,
         StringService $stringService,
         CodeTest $codeTest,
-        ControllerManager $controllerManager
+        FactoryTestService $factoryTest,
+        ControllerManager $controllerManager,
+        Injector $injector
     ) {
+        $this->factoryTestService = $factoryTest;
+        $this->injector = $injector;
         $this->module = $module;
         $this->fileCreator = $fileCreator;
         $this->stringService = $stringService;
@@ -98,7 +107,7 @@ class ApiControllerTestService extends AbstractControllerTestService
 
         $templateView = ($this->controller->isFactory()) ? 'factory' : 'invokable';
 
-        $this->template = 'template/module/mvc/rest-test/src/'.$templateView.'.phtml';
+        $this->template = 'template/module/mvc/rest-test/controller/'.$templateView.'.phtml';
 
         $this->file = $this->getFileCreator();
         $this->file->setLocation($this->location);
@@ -218,6 +227,18 @@ class ApiControllerTestService extends AbstractControllerTestService
         $controllerVar = $this->str('var-length', $this->controller->getName());
 
         foreach ($insertMethods as $method) {
+
+            $name = $this->str('class', $method->getName());
+
+            switch($name) {
+              case 'GetList': $template = 'get-list'; break;
+              case 'Get': $template = 'get'; break;
+              case 'Create': $template = 'create'; break;
+              case 'Update': $template = 'update'; break;
+              case 'Delete': $template = 'delete'; break;
+              default: $template = 'test-dispatch';
+            }
+
             $actionName = $this->str('class', $method->getName());
             $actionVar  = $this->str('var', $method->getName());
 
@@ -238,7 +259,7 @@ class ApiControllerTestService extends AbstractControllerTestService
             );
 
             $this->functions .= $this->getFileCreator()->renderPartial(
-                'template/module/mvc/rest-test/src/test-dispatch.phtml',
+                sprintf('template/module/mvc/rest-test/controller/%s.phtml', $template),
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,

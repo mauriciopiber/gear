@@ -13,6 +13,8 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use GearJson\Controller\Controller as ControllerValueObject;
+use Gear\Creator\Injector\Injector;
+use Gear\Creator\Injector\InjectorTrait;
 
 /**
  * PHP Version 5
@@ -25,6 +27,7 @@ use GearJson\Controller\Controller as ControllerValueObject;
  */
 class ApiControllerService extends AbstractControllerService
 {
+    use InjectorTrait;
     use ModuleStructureTrait;
     use StringServiceTrait;
     use CodeTrait;
@@ -41,8 +44,12 @@ class ApiControllerService extends AbstractControllerService
         FileCreator $fileCreator,
         StringService $stringService,
         Code $code,
-        FactoryService $factoryService
+        FactoryService $factoryService,
+        Injector $injector,
+        $arrayService
     ) {
+        $this->arrayService = $arrayService;
+        $this->injector = $injector;
         $this->factoryService = $factoryService;
         $this->module = $module;
         $this->fileCreator = $fileCreator;
@@ -136,28 +143,50 @@ class ApiControllerService extends AbstractControllerService
         $this->mergeActions();
     }
 
+    public function renderDefault($method) {
+      $label = $this->str('label', $method->getName());
+      $var = $this->str('var', $method->getName());
+      return <<<EOS
+
+/**
+* {$label}
+*
+* @return \Zend\View\Model\JsonModel
+*/
+public function {$var}Action()
+{
+  return new JsonModel([***REMOVED***);
+}
+
+EOS;
+    }
+
+    public function renderAction($action) {
+
+      $templateUrl = sprintf('template/module/mvc/rest/controller/%s.phtml', $action);
+      return $this->getFileCreator()->renderPartial($templateUrl, [***REMOVED***).PHP_EOL;
+
+    }
+
 
     public function actionToController($insertMethods)
-    { 
+    {
 
         $this->functions = '';
 
         foreach ($insertMethods as $method) {
             $label = $this->str('label', $method->getName());
+            $name = $this->str('class', $method->getName());
 
-            $this->functions .= <<<EOS
-
-    /**
-     * {$label}
-     *
-     * @return \Zend\View\Model\JsonModel
-     */
-    public function {$this->str('var', $method->getName())}Action()
-    {
-        return new JsonModel([***REMOVED***);
-    }
-
-EOS;
+            switch($name) {
+              case 'GetList': $template = $this->renderAction('get-list'); break;
+              case 'Get': $template = $this->renderAction('get'); break;
+              case 'Create': $template = $this->renderAction('create'); break;
+              case 'Update': $template = $this->renderAction('update'); break;
+              case 'Delete': $template = $this->renderAction('delete'); break;
+              default: $template = $this->renderDefault($method);
+            }
+            $this->functions .= $template;
         }
 
         $this->functions = explode(PHP_EOL, $this->functions);

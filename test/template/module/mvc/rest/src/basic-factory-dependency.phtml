@@ -1,9 +1,9 @@
 <?php
 namespace MyModule\Controller;
 
-use Zend\View\Model\ConsoleModel;
+use Zend\View\Model\JsonModel;
 use MyModule\Repository\MyRepositoryTrait;
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use MyModule\Repository\MyRepository;
 
 /**
@@ -15,7 +15,7 @@ use MyModule\Repository\MyRepository;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class BasicFactoryDependencyConsole extends AbstractConsoleController
+class BasicFactoryDependencyRest extends AbstractRestfulController
 {
     use MyRepositoryTrait;
 
@@ -24,7 +24,7 @@ class BasicFactoryDependencyConsole extends AbstractConsoleController
      *
      * @param MyRepository $myRepository My Repository
      *
-     * @return BasicFactoryDependencyConsole
+     * @return BasicFactoryDependencyRest
      */
     public function __construct(MyRepository $myRepository)
     {

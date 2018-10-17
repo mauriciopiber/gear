@@ -2,17 +2,17 @@
 namespace MyModuleTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
-use MyModule\Controller\BasicManyRest;
+use MyModule\Controller\BasicDependenciesFactoryManyRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
- * @group BasicManyRest
+ * @group BasicDependenciesFactoryManyRest
  * @group Controller
  */
-class BasicManyRestTest extends TestCase
+class BasicDependenciesFactoryManyRestTest extends TestCase
 {
     use AclAssertTrait;
 
@@ -26,9 +26,18 @@ class BasicManyRestTest extends TestCase
     {
         parent::setUp();
 
-        $this->controller = new BasicManyRest();
+        $this->myRepositoryOne = $this->prophesize('MyModule\Repository\MyRepositoryOne');
+        $this->myRepositoryTwo = $this->prophesize('MyModule\Repository\MyRepositoryTwo');
+        $this->myRepositoryThree = $this->prophesize('MyModule\Repository\MyRepositoryThree');
+
+        $this->controller = new BasicDependenciesFactoryManyRest(
+            $this->myRepositoryOne->reveal(),
+            $this->myRepositoryTwo->reveal(),
+            $this->myRepositoryThree->reveal()
+        );
+
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(array('controller' => 'BasicManyRest'));
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicDependenciesFactoryManyRest'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
@@ -49,7 +58,7 @@ class BasicManyRestTest extends TestCase
         $this->assertAcl(
             $this->schema,
             'MyModule',
-            'BasicManyRest',
+            'BasicDependenciesFactoryManyRest',
             'Controller',
             'Get'
         );
@@ -66,7 +75,7 @@ class BasicManyRestTest extends TestCase
         $this->assertAcl(
             $this->schema,
             'MyModule',
-            'BasicManyRest',
+            'BasicDependenciesFactoryManyRest',
             'Controller',
             'GetList'
         );
@@ -82,7 +91,7 @@ class BasicManyRestTest extends TestCase
         $this->assertAcl(
             $this->schema,
             'MyModule',
-            'BasicManyRest',
+            'BasicDependenciesFactoryManyRest',
             'Controller',
             'Update'
         );
@@ -100,7 +109,7 @@ class BasicManyRestTest extends TestCase
         $this->assertAcl(
             $this->schema,
             'MyModule',
-            'BasicManyRest',
+            'BasicDependenciesFactoryManyRest',
             'Controller',
             'Delete'
         );
@@ -118,7 +127,7 @@ class BasicManyRestTest extends TestCase
         $this->assertAcl(
             $this->schema,
             'MyModule',
-            'BasicManyRest',
+            'BasicDependenciesFactoryManyRest',
             'Controller',
             'Create'
         );
