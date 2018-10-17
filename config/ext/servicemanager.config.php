@@ -40,12 +40,9 @@
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
         'Gear\Creator\Template\TemplateService' => 'Gear\Creator\Template\TemplateServiceFactory',
-
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
-
         'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
-
         'Gear\Edge\Npm\NpmEdge' => 'Gear\Edge\Npm\NpmEdgeFactory',
         'Gear\Edge\Composer\ComposerEdge' => 'Gear\Edge\Composer\ComposerEdgeFactory',
         'Gear\Edge\Ant\AntEdge' => 'Gear\Edge\Ant\AntEdgeFactory',
@@ -95,7 +92,8 @@
         'Gear\Integration\Suite\Integration\Integration' => 'Gear\Integration\Suite\Integration\IntegrationFactory',
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory',
         'Gear\Mvc\Controller\Api\ApiControllerService' => 'Gear\Mvc\Controller\Api\ApiControllerServiceFactory',
-        'Gear\Mvc\Controller\Api\ApiControllerTestService' => 'Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory'
+        'Gear\Mvc\Controller\Api\ApiControllerTestService' => 'Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory',
+        'Gear\Docker\DockerService' => 'Gear\Docker\DockerServiceFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Column\ColumnService' => false,
