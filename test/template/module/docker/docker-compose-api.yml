@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  main:
+    image: pbr/dev-php-apache:v1.0.2
+    tty: true
+    volumes:
+      - /opt/composer-cache:/root/.composer/cache
+      - .:/var/www/module
+    environment:
+      - PHINX_ENVIRONMENT=DEVELOPMENT
+    ports:
+      - 8006:80
+  mysql:
+    image: mysql:5.7.22
+    environment:
+      MYSQL_ROOT_PASSWORD: gear
+    volumes:
+      - gear-database:/var/lib/mysql
+volumes:
+  gear-database:
+

@@ -220,9 +220,9 @@ class ActionConstructor extends AbstractConstructor
             $data,
             false
         );
-        $this->action->getController()->setType($data['type'***REMOVED***);
-
-        //var_dump($this->action);die();
+        if (isset($data['type'***REMOVED***)) {
+          $this->action->getController()->setType($data['type'***REMOVED***);
+        }
 
         if ($this->action instanceof ConsoleValidationStatus) {
             return $this->action;

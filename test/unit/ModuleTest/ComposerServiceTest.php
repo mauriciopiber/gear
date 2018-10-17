@@ -112,7 +112,7 @@ class ComposerServiceTest extends TestCase
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.pibernetwork.com"
+            "url" : "https://mirror.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -172,7 +172,7 @@ EOS;
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.pibernetwork.com"
+            "url" : "https://mirror.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -235,7 +235,7 @@ EOS;
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.pibernetwork.com"
+            "url" : "https://mirror.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***

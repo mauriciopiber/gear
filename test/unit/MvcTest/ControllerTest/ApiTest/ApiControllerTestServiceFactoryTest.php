@@ -10,6 +10,8 @@ use GearBase\Util\String\StringService;
 use Gear\Creator\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\Config\ControllerManager;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Creator\Injector\Injector;
 
 /**
  * @group Gear
@@ -41,6 +43,16 @@ class ApiControllerTestServiceFactoryTest extends TestCase
 
         $this->serviceLocator->get(ControllerManager::class)
             ->willReturn($this->prophesize(ControllerManager::class)->reveal())
+            ->shouldBeCalled();
+
+
+        $this->serviceLocator->get(Injector::class)
+            ->willReturn($this->prophesize(Injector::class)->reveal())
+            ->shouldBeCalled();
+
+
+        $this->serviceLocator->get(FactoryTestService::class)
+            ->willReturn($this->prophesize(FactoryTestService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ApiControllerTestServiceFactory();

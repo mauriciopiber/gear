@@ -46,8 +46,8 @@ class ComposerAutoloadTest extends TestCase
         $this->assertEquals('module/NewModule/test/unit', $file['autoload'***REMOVED***['psr-0'***REMOVED***['NewModuleTest'***REMOVED***);
 
         $this->assertEquals(
-            file_get_contents(__DIR__.'/_files/add-composer.json'),
-            file_get_contents(vfsStream::url('project/composer.json'))
+            trim(file_get_contents(__DIR__.'/_files/add-composer.json')),
+            trim(file_get_contents(vfsStream::url('project/composer.json')))
         );
     }
 
@@ -67,8 +67,8 @@ class ComposerAutoloadTest extends TestCase
         $this->assertArrayNotHasKey('MyModuleCliTest', $file['autoload'***REMOVED***['psr-0'***REMOVED***);
 
         $this->assertEquals(
-            file_get_contents(__DIR__.'/_files/del-composer.json'),
-            file_get_contents(vfsStream::url('project/composer.json'))
+            trim(file_get_contents(__DIR__.'/_files/del-composer.json')),
+            trim(file_get_contents(vfsStream::url('project/composer.json')))
         );
     }
 }
