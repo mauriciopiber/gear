@@ -36,6 +36,24 @@ trait UtilTestTrait
         return $base.'/'.$workFolder;
     }
 
+    public function createTemplate($name, $templatePath)
+    {
+      $view = new PhpRenderer();
+
+      $resolver = new AggregateResolver();
+
+      $map = new TemplatePathStack([
+          'script_paths' => [
+              $name => $templatePath,
+          ***REMOVED***
+      ***REMOVED***);
+
+      $resolver->attach($map);
+      $view->setResolver($resolver);
+
+      return $view;
+    }
+
 
     /**
      * Cria Zend\View\Renderer\PhpRenderer
