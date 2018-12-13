@@ -26,7 +26,7 @@ class CodeceptionServiceTest extends TestCase
         $this->codeception = new CodeceptionService();
         $this->codeception->setModule($this->module->reveal());
 
-        $this->codeception->setProjectFolder(vfsStream::url('project'));
+        $this->codeception->setModuleFolder(vfsStream::url('project'));
     }
 
     public function testAddModuleToProject()

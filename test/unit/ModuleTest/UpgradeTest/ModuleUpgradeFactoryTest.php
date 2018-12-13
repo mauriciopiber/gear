@@ -17,11 +17,9 @@ class ModuleUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->serviceLocator= $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
         $factory = new \Gear\Module\Upgrade\ModuleUpgradeFactory();
-
-
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->serviceLocator->get('console')->willReturn($console->reveal())->shouldBeCalled();
 
@@ -37,10 +35,6 @@ class ModuleUpgradeFactoryTest extends TestCase
                 ->willReturn($this->prophesize($className)->reveal())
                 ->shouldBeCalled();
         }
-
-
-
-
         $instance = $factory->createService($this->serviceLocator->reveal());
 
         $this->assertInstanceOf('Gear\Module\Upgrade\ModuleUpgrade', $instance);

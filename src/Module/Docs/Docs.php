@@ -23,7 +23,7 @@ class Docs extends AbstractJsonService
         $location = $this->getModule()->getDocsFolder();
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('docs-template/CHANGELOG.phtml'));
+        $file->setTemplate(sprintf('template/module/docs/CHANGELOG.phtml'));
         $file->setOptions($config);
         $file->setLocation($location);
         $file->setFileName('CHANGELOG.md');
@@ -41,7 +41,7 @@ class Docs extends AbstractJsonService
         $location = $this->getModule()->getDocsFolder();
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('docs-template/index-%s.phtml', $type));
+        $file->setTemplate(sprintf('template/module/docs/index-%s.phtml', $type));
         $file->setOptions($config);
         $file->setLocation($location);
         $file->setFileName('index.md');
@@ -61,7 +61,7 @@ class Docs extends AbstractJsonService
         $location = $this->getModule()->getMainFolder();
 
         $file = $this->getFileCreator();
-        $file->setTemplate('docs-template/mkdocs.phtml');
+        $file->setTemplate('template/module/docs/mkdocs.phtml');
         $file->setOptions($config);
         $file->setLocation($location);
         $file->setFileName('mkdocs.yml');
@@ -81,7 +81,7 @@ class Docs extends AbstractJsonService
         $location = $this->getModule()->getMainFolder();
 
         $file = $this->getFileCreator();
-        $file->setTemplate('docs-template/readme.phtml');
+        $file->setTemplate('template/module/docs/readme.phtml');
         $file->setOptions($config);
         $file->setLocation($location);
         $file->setFileName('README.md');

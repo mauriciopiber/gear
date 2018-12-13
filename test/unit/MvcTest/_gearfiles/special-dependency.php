@@ -1,6 +1,6 @@
 <?php return [
     [
-        'aliase' => Gear\Util\String\StringService,
+        'aliase' => 'Gear\Util\String\StringService',
         'class' => '\Gear\Util\String\StringService'
     ***REMOVED***,
     [

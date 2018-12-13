@@ -33,7 +33,7 @@ class BackupServiceFactoryTest extends TestCase
 
         $this->serviceLocator
           ->get('GearBase\Script')
-          ->willReturn($this->prophesize('GearBase\Script\ScriptService')->reveal())
+          ->willReturn($this->prophesize('Gear\Util\Script\ScriptService')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator

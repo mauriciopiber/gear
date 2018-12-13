@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Database;
 
-use GearBase\Script\ScriptService;
+use Gear\Util\Script\ScriptService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
