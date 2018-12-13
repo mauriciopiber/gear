@@ -7,8 +7,8 @@ use Gear\Module\Structure\ModuleStructureTrait;
 use Zend\Json\Json;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Edge\Composer\ComposerEdge;
-use GearBase\Config\GearConfig;
-use GearBase\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
 use Gear\Module\Structure\ModuleStructure;
 
 class ComposerService implements ModuleDiagnosticInterface

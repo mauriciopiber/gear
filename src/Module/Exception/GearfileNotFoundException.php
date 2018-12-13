@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Module\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class GearfileNotFoundException extends RuntimeException
 {

@@ -41,7 +41,7 @@ class VarcharTest extends TestCase
 
 
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \GearBase\Util\String\StringService());
+        $this->varchar->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->varchar->filterElement();
 
@@ -56,7 +56,7 @@ class VarcharTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \GearBase\Util\String\StringService());
+        $this->varchar->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->varchar->filterUniqueElement();
 
@@ -71,7 +71,7 @@ class VarcharTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \GearBase\Util\String\StringService());
+        $this->varchar->setStringService(new \Gear\Util\String\StringService());
 
         $value = $this->varchar->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -83,7 +83,7 @@ class VarcharTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \GearBase\Util\String\StringService());
+        $this->varchar->setStringService(new \Gear\Util\String\StringService());
 
         $value = $this->varchar->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);

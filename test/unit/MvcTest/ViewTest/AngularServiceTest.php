@@ -3,12 +3,12 @@ namespace GearTest\MvcTest\ViewTest;
 
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
-use GearJson\Db\Db;
-use GearBase\Util\String\StringService;
-use GearBase\Util\File\FileService;
-use GearBase\Util\Dir\DirService;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Db\Db;
+use Gear\Util\String\StringService;
+use Gear\Util\File\FileService;
+use Gear\Util\Dir\DirService;
 use Gear\Module;
 use Gear\Creator\Template\TemplateService;
 use Gear\Creator\FileCreator\FileCreator;

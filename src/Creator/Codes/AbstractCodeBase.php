@@ -3,12 +3,12 @@ namespace Gear\Creator\Codes;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirServiceAwareInterface;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirServiceAwareInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringServiceAwareInterface;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceAwareInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\FileNamespaceInterface;
 use Gear\Creator\FileLocationInterface;
@@ -16,9 +16,9 @@ use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Creator\AppDependencyTrait;
 //use Gear\Creator\ControllerDependencyTrait;
 //use Gear\Creator\SrcDependencyTrait;
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
-use GearJson\App\App;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\App\App;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 
 abstract class AbstractCodeBase implements

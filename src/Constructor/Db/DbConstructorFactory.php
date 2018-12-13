@@ -6,8 +6,8 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Column\ColumnService;
 use Gear\Table\TableService;
-use GearJson\Action\ActionSchema;
-//use GearJson\Db\DbSchema as DbSchema;
+use Gear\Schema\Action\ActionSchema;
+//use Gear\Schema\Db\DbSchema as DbSchema;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Entity\EntityService;
@@ -47,8 +47,8 @@ class DbConstructorFactory implements FactoryInterface
         $factory = new DbConstructor(
             $serviceLocator->get(ColumnService::class),
             $serviceLocator->get(TableService::class),
-            $serviceLocator->get('GearJson\Action'),
-            $serviceLocator->get('GearJson\Db'),
+            $serviceLocator->get('Gear\Schema\Action'),
+            $serviceLocator->get('Gear\Schema\Db'),
             $serviceLocator->get(Feature::class),
             $serviceLocator->get(Step::class),
             $serviceLocator->get(EntityService::class),

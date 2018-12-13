@@ -2,9 +2,9 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Module\ModuleConstructorInterface;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 use Exception;
 
 class ConfigService extends AbstractConfigManager implements ModuleConstructorInterface
@@ -31,7 +31,7 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
    /**
      * Função responsável por adicionar as configurações de um DB à um módulo já existente.
      *
-     * @param GearJson\Db\Db $table
+     * @param Gear\Schema\Db\Db $table
      *
      * @return null
      */

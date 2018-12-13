@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use Gear\Column\ColumnManager;
 
 /**
@@ -34,12 +34,12 @@ class RepositoryTestServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->repository->setModule($this->module->reveal());
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
         $this->repository->setStringService($this->string);
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
         $this->repository->setFileCreator($this->fileCreator);
 
@@ -54,7 +54,7 @@ class RepositoryTestServiceTest extends TestCase
         $this->codeTest = new \Gear\Creator\CodeTest;
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->repository->setCodeTest($this->codeTest);
 
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
@@ -66,7 +66,7 @@ class RepositoryTestServiceTest extends TestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->repository->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->repository->setSchemaService($this->schemaService->reveal());
     }
 
@@ -129,9 +129,9 @@ class RepositoryTestServiceTest extends TestCase
     {
         $table = $this->string->str('class', $tableName);
 
-        $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
-        $repository = new \GearJson\Src\Src(
+        $repository = new \Gear\Schema\Src\Src(
             [
                 'name' => sprintf('%sRepository', $table),
                 'type' => 'Repository',

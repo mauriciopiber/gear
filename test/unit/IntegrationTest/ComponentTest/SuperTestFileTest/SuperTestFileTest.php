@@ -14,7 +14,7 @@ class SuperTestFileTest extends TestCase
         parent::setUp();
 
         $this->persist = $this->prophesize('Gear\Integration\Util\Persist\Persist');
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
 
         $this->service = new SuperTestFile(
             $this->persist->reveal(),

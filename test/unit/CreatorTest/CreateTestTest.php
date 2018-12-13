@@ -44,7 +44,7 @@ class CreateTestTest extends TestCase
      */
     public function testGetFullClassName($name, $type, $namespace, $expected)
     {
-        $src = $this->prophesize('GearJson\Src\Src');
+        $src = $this->prophesize('Gear\Schema\Src\Src');
         $src->getName()->willReturn($name);
         $src->getType()->willReturn($type);
         $src->getNamespace()->willReturn($namespace);
@@ -57,7 +57,7 @@ class CreateTestTest extends TestCase
      */
     public function testGetNamespace($name, $type, $namespace, $expected)
     {
-        $src = $this->prophesize('GearJson\Src\Src');
+        $src = $this->prophesize('Gear\Schema\Src\Src');
         $src->getName()->willReturn($name);
         $src->getType()->willReturn($type);
         $src->getNamespace()->willReturn($namespace);

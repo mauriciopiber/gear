@@ -48,7 +48,7 @@ class ActionConstructorFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ActionConstructor(
-            $serviceLocator->get('GearJson\Action'),
+            $serviceLocator->get('Gear\Schema\Action'),
             //$serviceLocator->get(ConfigService::class),
             $serviceLocator->get(RouterManager::class),
             $serviceLocator->get(ConsoleRouterManager::class),
@@ -66,7 +66,7 @@ class ActionConstructorFactory implements FactoryInterface
             $serviceLocator->get(Page::class),
             $serviceLocator->get(Step::class),
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(TableService::class),
             $serviceLocator->get(ColumnService::class)
         );

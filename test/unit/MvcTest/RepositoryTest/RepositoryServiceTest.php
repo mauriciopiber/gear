@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
-use \GearJson\Src\Src;
+use \Gear\Schema\Src\Src;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
 
@@ -35,16 +35,16 @@ class RepositoryServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->repository->setModule($this->module->reveal());
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
         $this->repository->setStringService($this->string);
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer());
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
         $this->repository->setFileCreator($this->fileCreator);
 
-        $this->dirService = new \GearBase\Util\Dir\DirService();
+        $this->dirService = new \Gear\Util\Dir\DirService();
 
 
         $this->code = new \Gear\Creator\Code();
@@ -74,7 +74,7 @@ class RepositoryServiceTest extends TestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->repository->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->repository->setSchemaService($this->schemaService->reveal());
 
         $this->repositoryTest = $this->prophesize('Gear\Mvc\Repository\RepositoryTestService');
@@ -152,7 +152,7 @@ class RepositoryServiceTest extends TestCase
 
         $table = $this->string->str('class', $tableName);
 
-        $this->db = new \GearJson\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
 
         $createdBy = new \Gear\Column\Integer\ForeignKey(
             $this->prophesizeColumn('table', 'created_by', 'int'),

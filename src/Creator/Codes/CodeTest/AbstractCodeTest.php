@@ -2,10 +2,10 @@
 namespace Gear\Creator\Codes\CodeTest;
 
 use Gear\Creator\Codes\AbstractCodeBase;
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
-use GearJson\App\App;
-use GearJson\Db\Db;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\App\App;
+use Gear\Schema\Db\Db;
 
 /**
  * PHP Version 5

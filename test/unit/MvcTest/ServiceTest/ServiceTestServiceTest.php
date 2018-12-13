@@ -11,7 +11,7 @@ use PhpParser\ParserFactory;
 use GearTest\SingleDbTableTrait;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use Gear\Column\ColumnManager;
 
 /**
@@ -37,10 +37,10 @@ class ServiceTestServiceTest extends TestCase
         $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
 
@@ -51,7 +51,7 @@ class ServiceTestServiceTest extends TestCase
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
 
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
 
@@ -74,7 +74,7 @@ class ServiceTestServiceTest extends TestCase
         $this->serviceManager->setModule($this->module->reveal());
         $this->service->setServiceManager($this->serviceManager);
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->service->setSchemaService($this->schema->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
@@ -120,7 +120,7 @@ class ServiceTestServiceTest extends TestCase
             $this->module->map('ServiceTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
 
         $columnManager = new ColumnManager($columns);
         $this->db->setColumnManager($columnManager);
@@ -152,16 +152,16 @@ class ServiceTestServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
 
-        $this->repository = $this->prophesize('GearJson\Src\Src');
+        $this->repository = $this->prophesize('Gear\Schema\Src\Src');
         $this->repository->getName()->willReturn(sprintf('%sRepository', $table));
         $this->repository->getType()->willReturn('Repository');
         $this->repository->getNamespace()->willReturn($namespace);
         $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($this->repository->reveal())->shouldBeCalled();
 
-        $this->entity = $this->prophesize('GearJson\Src\Src');
+        $this->entity = $this->prophesize('Gear\Schema\Src\Src');
         $this->entity->getName()->willReturn(sprintf('%s', $table));
         $this->entity->getType()->willReturn('Entity');
         $this->entity->getNamespace()->willReturn(null);

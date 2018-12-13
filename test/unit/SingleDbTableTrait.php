@@ -16,7 +16,7 @@ trait SingleDbTableTrait
 
     public function getSingleColumns($tableName = 'single_db_table')
     {
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();

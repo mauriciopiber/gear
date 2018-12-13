@@ -26,11 +26,11 @@ class FormTestServiceTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form-test';
@@ -44,7 +44,7 @@ class FormTestServiceTest extends TestCase
 
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
         $this->form->setCodeTest($this->codeTest);
@@ -61,7 +61,7 @@ class FormTestServiceTest extends TestCase
         //$this->column = $this->prophesize('Gear\Column\ColumnService');
         //$this->form->setColumnService($this->column->reveal());
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->form->setSchemaService($this->schema->reveal());
 
         $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
@@ -124,7 +124,7 @@ class FormTestServiceTest extends TestCase
     {
         $table = $this->string->str('class', $tableName);
 
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
 
         $this->module->getModuleName()->willReturn('MyModule');
 
@@ -146,7 +146,7 @@ class FormTestServiceTest extends TestCase
             $this->module->map('FormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $src = new \GearJson\Src\Src(
+        $src = new \Gear\Schema\Src\Src(
             [
                 'name' => $table.'Form',
                 'type' => 'Form',

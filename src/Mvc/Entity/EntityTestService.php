@@ -12,11 +12,11 @@
 namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Db\Db;
-use GearJson\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Src\Src;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Integer\PrimaryKey;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class EntityTestService extends AbstractMvcTest
 {

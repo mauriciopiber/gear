@@ -2,9 +2,9 @@
 namespace Gear\Mvc\ControllerPlugin;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use Gear\Creator\CodeTestTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class ControllerPluginTestService extends AbstractMvcTest
 {

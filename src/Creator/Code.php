@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Creator;
 
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
-use GearJson\App\App;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
+use Gear\Schema\App\App;
 use Gear\Creator\FileExtendsInterface;
 use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;

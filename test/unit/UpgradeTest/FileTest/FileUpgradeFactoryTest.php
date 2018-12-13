@@ -16,8 +16,8 @@ class FileUpgradeFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
-            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        $this->serviceLocator->get('Gear\Config\GearConfig')->willReturn(
+            $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
         $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')

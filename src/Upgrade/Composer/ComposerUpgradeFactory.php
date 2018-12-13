@@ -12,10 +12,10 @@ class ComposerUpgradeFactory implements FactoryInterface
     {
         $factory = new ComposerUpgrade(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get('Gear\Edge\Composer\ComposerEdge'),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
         unset($serviceLocator);
         return $factory;

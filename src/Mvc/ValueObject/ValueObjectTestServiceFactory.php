@@ -27,7 +27,7 @@ class ValueObjectTestServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ValueObjectTestService(
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Creator\CodeTest')

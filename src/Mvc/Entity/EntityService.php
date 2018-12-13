@@ -13,10 +13,10 @@ namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\AbstractMvc;
 use Zend\Db\Metadata\Object\TableObject;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Schema\SchemaService;
-use GearJson\Src\SrcSchemaTrait;
-use GearJson\Src\SrcSchema;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Schema\Src\SrcSchemaTrait;
+use Gear\Schema\Src\SrcSchema;
 use Gear\Exception\InvalidArgumentException;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Script\ScriptService;
@@ -29,21 +29,21 @@ use Gear\Mvc\Config\ServiceManager;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\Dir\DirService;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearJson\Db\Db;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Schema\Db\Db;
 use Gear\Util\Glob\GlobServiceTrait;
 use Gear\Util\Glob\GlobService;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Gear\Mvc\Entity\DoctrineServiceTrait;
 use Gear\Table\UploadImage as UploadImageTable;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\EventManager;
-use GearBase\Util\String\StringService;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 
 class EntityService extends AbstractMvc
 {

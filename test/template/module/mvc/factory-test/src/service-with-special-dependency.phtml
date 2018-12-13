@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MyModule\BestNamespace\MySrcWithSpecialDependencyFactory;
 use MyModule\BestNamespace\MySrcWithSpecialDependency;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Zend\Console\Adapter\Posix;
 use Zend\Db\Adapter\Adapter;
 
@@ -20,7 +20,7 @@ class MySrcWithSpecialDependencyFactoryTest extends TestCase
     {
         $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
-        $this->serviceLocator->get('GearBase\Util\String')
+        $this->serviceLocator->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 

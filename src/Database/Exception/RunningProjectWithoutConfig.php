@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Database\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class RunningProjectWithoutConfig extends RuntimeException
 {

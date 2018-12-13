@@ -2,7 +2,7 @@
 namespace Gear\Mvc\View\App;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\App\App;
+use Gear\Schema\App\App;
 
 class AppServiceSpecService extends AbstractMvcTest
 {

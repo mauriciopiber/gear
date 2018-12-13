@@ -3,8 +3,8 @@ namespace Gear\Constructor\App;
 
 use Gear\Mvc\View\App\AppServiceServiceTrait;
 use Gear\Mvc\View\App\AppControllerServiceTrait;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\App\AppServiceTrait as SchemaApp;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\App\AppServiceTrait as SchemaApp;
 use Gear\Constructor\AbstractConstructor;
 
 class AppService extends AbstractConstructor

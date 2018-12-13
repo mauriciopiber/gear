@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Entity\EntityObjectFixer;
 
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObject;
 
 /**

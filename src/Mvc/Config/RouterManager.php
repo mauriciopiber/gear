@@ -2,8 +2,8 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Action\Action;
-use GearJson\Controller\Controller;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Controller\Controller;
 
 class RouterManager extends AbstractConfigManager implements ModuleManagerInterface
 {

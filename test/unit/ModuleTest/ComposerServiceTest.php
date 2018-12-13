@@ -5,9 +5,9 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ComposerService;
 use Gear\Creator\Template\TemplateService;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Util\Vector\ArrayService;
 use GearTest\UtilTestTrait;
 

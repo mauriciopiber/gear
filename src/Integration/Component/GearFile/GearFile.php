@@ -2,9 +2,9 @@
 namespace Gear\Integration\Component\GearFile;
 
 use Gear\Integration\Util\Persist\PersistTrait;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Integration\Suite\AbstractMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
@@ -14,7 +14,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Util\Numbers\NumberToStringInterface;
 use Gear\Table\UploadImage as UploadImageTable;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 use Exception;
 
 /**

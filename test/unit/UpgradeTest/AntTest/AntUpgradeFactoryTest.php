@@ -22,8 +22,8 @@ class AntUpgradeFactoryTest extends TestCase
         ->willReturn($consolePrompt->reveal())
         ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\Util\String')
-        ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+        $this->serviceLocator->get('Gear\Util\String\StringService')
+        ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
         ->shouldBeCalled();
 
         $this->serviceLocator->get(AntEdge::class)
@@ -33,8 +33,8 @@ class AntUpgradeFactoryTest extends TestCase
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
-            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        $this->serviceLocator->get('Gear\Config\GearConfig')->willReturn(
+            $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
         $factory = new \Gear\Upgrade\Ant\AntUpgradeFactory();

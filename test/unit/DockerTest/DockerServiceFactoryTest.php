@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Docker\DockerServiceFactory;
 use Gear\Docker\DockerService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -20,7 +20,7 @@ class DockerServiceFactoryTest extends TestCase
     {
         $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
 
-        $this->serviceLocator->get('GearBase\Util\String')
+        $this->serviceLocator->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 

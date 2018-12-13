@@ -11,11 +11,11 @@ use Gear\Edge\Ant\Exception\MissingTarget;
 use Gear\Edge\Ant\Exception\MissingDefault;
 use Gear\Edge\Ant\Exception\MissingImport;
 use Gear\Edge\Ant\Exception\MissingFiles;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
 use Exception;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 

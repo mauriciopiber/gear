@@ -13,10 +13,10 @@ class AntUpgradeFactory implements FactoryInterface
     {
         $factory = new AntUpgrade(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get(AntEdge::class),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
         unset($serviceLocator);
         return $factory;

@@ -2,7 +2,7 @@
 namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 
 class TraitTestService extends AbstractMvcTest
 {

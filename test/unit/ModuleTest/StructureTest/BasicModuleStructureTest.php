@@ -4,9 +4,9 @@ namespace GearTest\ModuleTest\StructureTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\Dir\DirService;
-use GearBase\Util\File\FileService;
-use GearBase\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Util\File\FileService;
+use Gear\Util\String\StringService;
 
 /**
  * @group Module

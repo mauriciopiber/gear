@@ -19,8 +19,8 @@ class TestFileFactoryTest extends TestCase
             ->willReturn($this->prophesize('Gear\Integration\Util\Persist\Persist')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\Util\String')
-            ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+        $this->serviceLocator->get('Gear\Util\String\StringService')
+            ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
             ->shouldBeCalled();
 
         $factory = new TestFileFactory();

@@ -12,9 +12,9 @@ class AntServiceFactory implements FactoryInterface
     {
         return new \Gear\Diagnostic\Ant\AntService(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get(AntEdge::class),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
     }
 }

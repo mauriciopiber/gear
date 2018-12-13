@@ -18,8 +18,8 @@ class DocsFactoryTest extends TestCase
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\Util\String')
-          ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+        $this->serviceLocator->get('Gear\Util\String\StringService')
+          ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator->get('Gear\Creator\FileCreator\FileCreator')

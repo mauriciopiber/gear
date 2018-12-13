@@ -27,16 +27,16 @@ class AppControllerServiceTest extends TestCase
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getPublicJsAppFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
-        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->dir = new \Gear\Util\Dir\DirService();
 
         $app = new \Gear\Mvc\View\App\AppControllerService();
         $app->setModule($this->module->reveal());
@@ -46,7 +46,7 @@ class AppControllerServiceTest extends TestCase
         $app->setDirService($this->dir);
 
 
-        $action = new \GearJson\Action\Action(
+        $action = new \Gear\Schema\Action\Action(
             [
                 'name' => 'MyAction',
                 'controller' => 'MyController'

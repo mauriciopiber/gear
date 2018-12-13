@@ -4,8 +4,8 @@ namespace GearTest\MvcTest\FactoryTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 
 /**
@@ -35,13 +35,13 @@ class FactoryTestServiceTest extends TestCase
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $stringService  = new \GearBase\Util\String\StringService();
+        $fileService    = new \Gear\Util\File\FileService();
+        $stringService  = new \Gear\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $codeFactoryTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
         $codeFactoryTest->setModule($this->module->reveal());
-        $codeFactoryTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $codeFactoryTest->setDirService(new \Gear\Util\Dir\DirService());
         $codeFactoryTest->setStringService($stringService);
 
         $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService();
@@ -54,7 +54,7 @@ class FactoryTestServiceTest extends TestCase
         $this->serviceManager->setModule($this->module->reveal());
         $this->factoryTest->setServiceManager($this->serviceManager);
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->factoryTest->setSchemaService($this->schema->reveal());
     }
 
@@ -121,7 +121,7 @@ class FactoryTestServiceTest extends TestCase
     {
         if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
-            $this->filter = $this->prophesize('GearJson\Src\Src');
+            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
             $this->filter->getNamespace()->willReturn($data->getNamespace());
@@ -129,7 +129,7 @@ class FactoryTestServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('GearJson\Src\Src');
+            $this->form = $this->prophesize('Gear\Schema\Src\Src');
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->form->getNamespace()->willReturn($data->getNamespace());
@@ -138,7 +138,7 @@ class FactoryTestServiceTest extends TestCase
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form->reveal());
 
             /**
-            $this->entity = $this->prophesize('GearJson\Src\Src');
+            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
             $this->entity->getName()->willReturn('MyTable');
             $this->entity->getType()->willReturn('Entity');
             $this->entity->getNamespace()->willReturn(null);

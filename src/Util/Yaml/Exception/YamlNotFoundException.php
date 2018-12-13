@@ -9,7 +9,7 @@
 
 namespace Gear\Util\Yaml\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class YamlNotFoundException extends RuntimeException
 {

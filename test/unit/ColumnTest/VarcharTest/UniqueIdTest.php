@@ -20,7 +20,7 @@ class UniqueIdTest extends TestCase
         $column->getName()->willReturn('my_column');
 
         $this->uniqueId = new UniqueId($column->reveal());
-        $this->uniqueId->setStringService(new \GearBase\Util\String\StringService());
+        $this->uniqueId->setStringService(new \Gear\Util\String\StringService());
     }
 
     public function values()

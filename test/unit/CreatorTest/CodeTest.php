@@ -2,11 +2,11 @@
 namespace GearTest\CreatorTest;
 
 use PHPUnit\Framework\TestCase;
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
 use Gear\Creator\Code;
 use Gear\Creator\ControllerDependency;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**

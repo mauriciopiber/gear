@@ -5,11 +5,11 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module;
 use Gear\Creator\Template\TemplateService    ;
-use GearBase\Util\File\FileService;
-use GearBase\Util\String\StringService;
+use Gear\Util\File\FileService;
+use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Code;
-use GearBase\Util\Dir\DirService;
+use Gear\Util\Dir\DirService;
 use Gear\Mvc\InterfaceService;
 use GearTest\UtilTestTrait;
 
@@ -66,7 +66,7 @@ class InterfaceTestServiceTest extends TestCase
     {
         return [
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'MyInterface',
                     'type' => 'Interface',
                     'namespace' => 'Interfaces'
@@ -74,7 +74,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-interface'
             ***REMOVED***,
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'NamespaceInterface',
                     'type' => 'Interface',
                     'namespace' => 'My\Very\Long\Namespaces'
@@ -82,7 +82,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-namespace'
             ***REMOVED***,
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'ExtendsInterface',
                     'type' => 'Interface',
                     'extends' => 'Interfaces\MyAnotherInterface',
@@ -91,7 +91,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-extends'
             ***REMOVED***,
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'SimpleDependencyInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependency',
@@ -100,7 +100,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-dependency'
             ***REMOVED***,
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'SimpleDependenciesInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,Repository\MyDependencyThree',
@@ -109,7 +109,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-dependencies'
             ***REMOVED***,
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'CompleteInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,My\Very\Long\Namespaces\MyDependencyThree',

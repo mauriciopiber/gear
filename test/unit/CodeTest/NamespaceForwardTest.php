@@ -21,10 +21,10 @@ class NamespaceForwardTest extends TestCase
         $this->assertArrayHasKey('use', $result);
 
         $this->assertEquals([
-            'use GearJson\Schema\SchemaService;',
-            'use GearJson\Schema\Loader\SchemaLoaderService;',
-            'use GearJson\Controller\ControllerSchema;',
-            'use GearJson\Action\ActionSchema;',
+            'use Gear\Schema\Schema\SchemaService;',
+            'use Gear\Schema\Schema\Loader\SchemaLoaderService;',
+            'use Gear\Schema\Controller\ControllerSchema;',
+            'use Gear\Schema\Action\ActionSchema;',
             'use Gear\Mvc\ConsoleController\ConsoleControllerTest;',
             'use Gear\Mvc\ConsoleController\ConsoleController;'
         ***REMOVED***, $result['use'***REMOVED***);
@@ -48,10 +48,10 @@ class NamespaceForwardTest extends TestCase
 
         $this->assertEquals([
             'use Gear\Creator\Template\TemplateService;',
-            'use GearBase\Util\File\FileService;',
-            'use GearBase\Util\String\StringService;',
+            'use Gear\Util\File\FileService;',
+            'use Gear\Util\String\StringService;',
             'use Gear\Creator\FileCreator\FileCreator;',
-            'use GearBase\Util\Dir\DirService;'
+            'use Gear\Util\Dir\DirService;'
         ***REMOVED***, $result['use'***REMOVED***);
 
         $this->assertArrayHasKey('code', $result);

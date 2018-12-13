@@ -3,8 +3,8 @@ namespace GearTest\CreatorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Creator\ClassObject;
-use GearJson\Controller\Controller;
-use GearJson\Src\Src;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Src\Src;
 
 class ClassObjectTest extends TestCase
 {

@@ -6,7 +6,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Project\Project;
 use Gear\Project\Composer\ComposerServiceTrait;
-use GearVersion\Service\VersionServiceTrait;
+use Gear\Version\VersionServiceTrait;
 //use Gear\Project\DeployServiceTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
@@ -17,18 +17,18 @@ use Gear\Upgrade\Npm\NpmUpgradeTrait;
 use Gear\Upgrade\Npm\NpmUpgrade;
 use Gear\Project\ProjectConfigTrait;
 use Gear\Project\Exception\BasePathNotFoundException;
-use GearBase\Config\GearConfig;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirService;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Project\Docs\Docs;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Project\Composer\ComposerService;
-use GearBase\Util\File\FileServiceTrait;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileServiceTrait;
+use Gear\Util\File\FileService;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com

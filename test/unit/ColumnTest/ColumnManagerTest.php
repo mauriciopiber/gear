@@ -14,7 +14,7 @@ use Gear\Column\Datetime\Datetime;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Service\ServiceTestService;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * @group Service

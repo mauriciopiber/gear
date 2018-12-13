@@ -50,7 +50,7 @@ EOS
       $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
       $this->module->getModuleName()->willReturn('MyModule');
 
-      $this->string = new \GearBase\Util\String\StringService();
+      $this->string = new \Gear\Util\String\StringService();
 
       $this->language = $this->prophesize(\Gear\Mvc\LanguageService::class);
 

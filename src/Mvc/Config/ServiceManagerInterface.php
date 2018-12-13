@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 
 interface ServiceManagerInterface
 {

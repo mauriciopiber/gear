@@ -28,11 +28,11 @@ class SearchTestServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/search-test';
@@ -42,7 +42,7 @@ class SearchTestServiceTest extends TestCase
         $this->form->setFileCreator($this->fileCreator);
         $this->form->setModule($this->module->reveal());
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
         $this->form->setSchemaService($this->schema->reveal());
 
@@ -69,7 +69,7 @@ class SearchTestServiceTest extends TestCase
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
 
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
         $this->form->setCodeTest($this->codeTest);
@@ -105,9 +105,9 @@ class SearchTestServiceTest extends TestCase
             $this->module->map('SearchFormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
 
-        $src = new \GearJson\Src\Src(
+        $src = new \Gear\Schema\Src\Src(
             [
                 'name' => $table.'SearchForm',
                 'type' => 'SearchForm',

@@ -36,7 +36,7 @@ trait AllColumnsDbTableTrait
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         foreach (['my_image_one', 'my_image_two'***REMOVED*** as $columnName) {
             $uploadImage = new UploadImage(
@@ -56,7 +56,7 @@ trait AllColumnsDbTableTrait
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyModule');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $columns = [***REMOVED***;
 

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Creator\Component\Constructor;
 
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\Exception\ParamsConflitException;
 
 /**

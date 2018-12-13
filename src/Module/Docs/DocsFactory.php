@@ -13,7 +13,7 @@ class DocsFactory implements FactoryInterface
     {
         $factory = new Docs(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(FileCreator::class)
         );
         unset($serviceLocator);

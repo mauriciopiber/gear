@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use GearTest\UtilTestTrait;
 
@@ -30,12 +30,12 @@ class ConsoleControllerTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console';
@@ -61,7 +61,7 @@ class ConsoleControllerTest extends TestCase
         $this->code = new \Gear\Creator\Code();
         $this->code->setStringService($this->string);
         $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new \Gear\Util\Dir\DirService());
         $this->code->setArrayService($this->array);
         $this->controller->setCode($this->code);
 

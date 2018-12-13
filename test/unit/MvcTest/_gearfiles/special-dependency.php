@@ -1,7 +1,7 @@
 <?php return [
     [
-        'aliase' => 'GearBase\Util\String',
-        'class' => '\GearBase\Util\String\StringService'
+        'aliase' => Gear\Util\String\StringService,
+        'class' => '\Gear\Util\String\StringService'
     ***REMOVED***,
     [
         'aliase' => 'console',

@@ -2,7 +2,7 @@
 namespace Gear\Integration\Suite\Src;
 
 use Gear\Integration\Suite\AbstractMinorSuite;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * PHP Version 5

@@ -3,8 +3,7 @@ namespace Gear\Cache;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use GearBase\RequestTrait;
-use GearBase\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirServiceTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -14,7 +13,21 @@ class CacheService implements ServiceLocatorAwareInterface
 {
     use DirServiceTrait;
 
-    use RequestTrait;
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
+    }
 
     use ServiceLocatorAwareTrait;
 

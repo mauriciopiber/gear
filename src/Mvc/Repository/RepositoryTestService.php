@@ -2,9 +2,9 @@
 namespace Gear\Mvc\Repository;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Src\Src;
-use GearJson\Db\Db;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class RepositoryTestService extends AbstractMvcTest
 {

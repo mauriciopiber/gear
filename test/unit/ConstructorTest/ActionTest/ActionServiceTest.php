@@ -15,8 +15,8 @@ use Gear\Mvc\Controller\Api\{
     ApiControllerTestService,
 };
 use Gear\Mvc\Config\ControllerManager;
-use GearJson\Action\ActionSchema;
-use GearBase\Util\String\StringService;
+use Gear\Schema\Action\ActionSchema;
+use Gear\Util\String\StringService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
@@ -26,11 +26,11 @@ use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
-use GearJson\Db\Db;
-use GearJson\Schema\SchemaService;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Column\ColumnManager;
 

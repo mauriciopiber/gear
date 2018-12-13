@@ -4,7 +4,7 @@ namespace GearTest\MvcTest\ControllerTest\ApiTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
 use GearTest\UtilTestTrait;
@@ -123,7 +123,7 @@ class ApiControllerTestServiceTest extends TestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         //$this->codeTest->setArrayService($this->array);
 
         //$this->controllerManager = new \Gear\Mvc\Config\ControllerManager();

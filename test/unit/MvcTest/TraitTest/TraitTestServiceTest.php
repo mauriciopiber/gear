@@ -30,8 +30,8 @@ class TraitTestServiceTest extends TestCase
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $stringService  = new \GearBase\Util\String\StringService();
+        $fileService    = new \Gear\Util\File\FileService();
+        $stringService  = new \Gear\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $codeTest = new \Gear\Creator\CodeTest();
@@ -53,7 +53,7 @@ class TraitTestServiceTest extends TestCase
     {
         $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $src = new \GearJson\Src\Src([
+        $src = new \Gear\Schema\Src\Src([
             'name' => 'MyService',
             'type' => 'Service'
         ***REMOVED***);

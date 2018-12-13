@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
 use Gear\Edge\File\FileEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 use Gear\Module\Docs\Docs;
 
 /**

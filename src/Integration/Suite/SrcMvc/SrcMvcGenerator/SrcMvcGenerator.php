@@ -13,7 +13,7 @@ use Gear\Integration\Component\MigrationFile\MigrationFile;
 use Gear\Integration\Util\Columns\Columns;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 /**
  * PHP Version 5

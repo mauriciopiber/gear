@@ -3,7 +3,7 @@ namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Column\ColumnService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Zend\ServiceManager\ServiceManager;
 
 /**
@@ -61,7 +61,7 @@ class ColumnServiceTest extends TestCase
     {
         $this->tableName = 'my_table';
 
-        $db = $this->prophesize('GearJson\Db\Db');
+        $db = $this->prophesize('Gear\Schema\Db\Db');
         $db->getTable()->willReturn($this->tableName)->shouldBeCalled();
         $db->getColumns()->willReturn(['id_my_table' => null***REMOVED***)->shouldBeCalled();
 

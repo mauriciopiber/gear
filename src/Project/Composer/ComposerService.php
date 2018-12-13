@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Project\Composer;
 
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Script\ScriptServiceTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;

@@ -31,14 +31,14 @@ class TraitServiceTest extends TestCase
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->string  = new \GearBase\Util\String\StringService();
+        $fileService    = new \Gear\Util\File\FileService();
+        $this->string  = new \Gear\Util\String\StringService();
         $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $code = new \Gear\Creator\Code();
         $code->setModule($this->module->reveal());
         $code->setStringService($this->string);
-        $code->setDirService(new \GearBase\Util\Dir\DirService());
+        $code->setDirService(new \Gear\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $code->setConstructorParams($constructorParams);
 
@@ -66,7 +66,7 @@ class TraitServiceTest extends TestCase
     {
         return [
             [
-                new \GearJson\Src\Src([
+                new \Gear\Schema\Src\Src([
                     'name' => 'MyTrait',
                     'type' => 'Repository',
                 ***REMOVED***),

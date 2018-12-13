@@ -38,7 +38,7 @@ class EmailTest extends TestCase
 
 
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \GearBase\Util\String\StringService());
+        $this->email->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->email->filterElement();
 
@@ -53,7 +53,7 @@ class EmailTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \GearBase\Util\String\StringService());
+        $this->email->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->email->filterUniqueElement();
 
@@ -68,7 +68,7 @@ class EmailTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \GearBase\Util\String\StringService());
+        $this->email->setStringService(new \Gear\Util\String\StringService());
 
         $value = $this->email->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -80,7 +80,7 @@ class EmailTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \GearBase\Util\String\StringService());
+        $this->email->setStringService(new \Gear\Util\String\StringService());
         $value = $this->email->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }

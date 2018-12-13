@@ -2,8 +2,8 @@
 namespace Gear\Mvc\Spec\Feature;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Action\Action;
-use GearJson\Db\Db;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Db\Db;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\UserType\Feature\Strict;

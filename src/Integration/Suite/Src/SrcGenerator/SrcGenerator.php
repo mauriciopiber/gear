@@ -5,7 +5,7 @@ use Gear\Integration\Component\GearFile\GearFileTrait;
 use Gear\Integration\Component\TestFile\TestFileTrait;
 use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Component\TestFile\TestFile;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 /**
  * PHP Version 5

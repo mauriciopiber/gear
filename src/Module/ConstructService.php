@@ -3,21 +3,21 @@ namespace Gear\Module;
 
 use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
-use GearJson\Db\DbSchemaTrait as DbSchemaTrait;
-use GearJson\Src\SrcSchemaTrait as SrcSchemaTrait;
-use GearJson\App\AppServiceTrait as AppSchemaTrait;
-use GearJson\Controller\ControllerSchemaTrait as ControllerSchemaTrait;
-use GearJson\Action\ActionSchemaTrait as ActionSchemaTrait;
-use GearJson\Db\DbSchema as DbSchema;
-use GearJson\Src\SrcSchema as SrcSchema;
-use GearJson\App\AppService as AppSchema;
-use GearJson\Controller\ControllerSchema as ControllerSchema;
-use GearJson\Action\ActionSchema as ActionSchema;
-use GearJson\Src\Src;
-use GearJson\Db\Db;
-use GearJson\Action\Action;
-use GearJson\Controller\Controller;
-use GearJson\App\App;
+use Gear\Schema\Db\DbSchemaTrait as DbSchemaTrait;
+use Gear\Schema\Src\SrcSchemaTrait as SrcSchemaTrait;
+use Gear\Schema\App\AppServiceTrait as AppSchemaTrait;
+use Gear\Schema\Controller\ControllerSchemaTrait as ControllerSchemaTrait;
+use Gear\Schema\Action\ActionSchemaTrait as ActionSchemaTrait;
+use Gear\Schema\Db\DbSchema as DbSchema;
+use Gear\Schema\Src\SrcSchema as SrcSchema;
+use Gear\Schema\App\AppService as AppSchema;
+use Gear\Schema\Controller\ControllerSchema as ControllerSchema;
+use Gear\Schema\Action\ActionSchema as ActionSchema;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\App\App;
 use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\App\AppServiceTrait;
 use Gear\Constructor\Src\SrcConstructorTrait;
@@ -29,9 +29,9 @@ use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Module\Exception\GearfileNotFoundException;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\ConstructStatusObject;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.

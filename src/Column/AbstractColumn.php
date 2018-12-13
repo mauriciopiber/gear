@@ -5,7 +5,7 @@ use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Gear\Column\UniqueInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 
 /**
  *

@@ -26,7 +26,7 @@ class GearFileFactory implements FactoryInterface
     {
         $factory = new GearFile(
             $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
         unset($serviceLocator);
         return $factory;

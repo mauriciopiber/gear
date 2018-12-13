@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Project\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class BasePathNotFoundException extends RuntimeException
 {

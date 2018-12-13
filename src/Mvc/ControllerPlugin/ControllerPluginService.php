@@ -4,9 +4,9 @@ namespace Gear\Mvc\ControllerPlugin;
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait;
 use Gear\Mvc\Config\ControllerPluginManagerTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use Gear\Creator\CodeTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class ControllerPluginService extends AbstractMvc
 {

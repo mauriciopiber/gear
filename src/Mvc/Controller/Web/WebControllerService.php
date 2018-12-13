@@ -7,9 +7,9 @@ use Gear\Module\ModuleConstructorInterface;
 use Gear\Constructor\Db\DbConstructorInterface;
 use Gear\Constructor\Controller\ControllerConstructorInterface;
 use Gear\Mvc\Controller\Web\WebControllerTestServiceTrait;
-use GearJson\Controller\Controller as ControllerJson;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Db\Db;
+use Gear\Schema\Controller\Controller as ControllerJson;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Db\Db;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 

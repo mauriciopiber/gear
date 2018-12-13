@@ -3,7 +3,7 @@ namespace Gear\Integration\Util\Columns;
 
 use Exception;
 use Gear\Integration\Util\Names\NamesReplaceInterface;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * PHP Version 5

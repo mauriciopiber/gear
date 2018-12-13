@@ -2,9 +2,9 @@
 namespace Gear\Mvc\Factory;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Src\Src;
-use GearJson\Db\Db;
-use GearJson\Controller\Controller;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Controller\Controller;
 use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestTrait;
 
 class FactoryTestService extends AbstractMvcTest

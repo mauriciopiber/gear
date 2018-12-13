@@ -3,16 +3,16 @@ namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Service\ServiceTestServiceTrait;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Service\ServiceColumnInterface;
 use Gear\Mvc\Service\ServiceCodeInterface;
 use Gear\Creator\Code;
-use GearJson\Src\Type\RepositoryInterface;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\Type\RepositoryInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class ServiceService extends AbstractMvc
 {

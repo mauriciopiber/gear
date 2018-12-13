@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 
 /**
@@ -30,12 +30,12 @@ class ConsoleControllerTestTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console-test';
@@ -77,7 +77,7 @@ class ConsoleControllerTestTest extends TestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 
         $this->controllerManager = new \Gear\Mvc\Config\ControllerManager();
@@ -148,7 +148,7 @@ class ConsoleControllerTestTest extends TestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 
         $this->controllerManager = new \Gear\Mvc\Config\ControllerManager();

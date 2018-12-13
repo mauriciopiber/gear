@@ -12,10 +12,10 @@
 namespace Gear\Mvc\Factory;
 
 use Gear\Mvc\AbstractMvc;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
-use GearJson\Src\Src;
-use GearJson\Controller\Controller;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Controller\Controller;
 use Gear\Mvc\Factory\Exception\WrongType;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;

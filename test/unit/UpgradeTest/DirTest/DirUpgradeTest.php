@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Upgrade\Dir\DirUpgrade;
 use Gear\Edge\Dir\DirEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 /**
  * @group Upgrade
@@ -21,7 +21,7 @@ class DirUpgradeTest extends TestCase
         vfsStream::setup('module');
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->dir = new \Gear\Util\Dir\DirService();
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->dirEdge = $this->prophesize(DirEdge::class);

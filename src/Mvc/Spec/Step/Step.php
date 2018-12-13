@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Spec\Step;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 class Step extends AbstractMvcTest
 {

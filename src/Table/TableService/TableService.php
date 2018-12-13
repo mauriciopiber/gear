@@ -4,9 +4,9 @@ namespace Gear\Table\TableService;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Table\Metadata\MetadataTrait;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 class TableService implements ServiceLocatorAwareInterface
 {
@@ -327,7 +327,7 @@ class TableService implements ServiceLocatorAwareInterface
 
     public function isExcludedKey($column)
     {
-        return in_array($column->getName(), \GearJson\Db\Db::excludeList());
+        return in_array($column->getName(), \Gear\Schema\Db\Db::excludeList());
     }
 
 

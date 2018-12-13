@@ -2,9 +2,9 @@
 namespace Gear\Integration\Component\SuperTestFile;
 
 use Gear\Integration\Util\Persist\PersistTrait;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Integration\Util\Persist\Persist;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Integration\Suite\Mvc\MvcMajorSuite;
 
 /**

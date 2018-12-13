@@ -38,7 +38,7 @@ class WebControllerTestServiceTest extends TestCase
         $this->controllerTest->setModule($this->module->reveal());
 
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
         $this->controllerTest->setStringService($this->string);
 
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
@@ -53,7 +53,7 @@ class WebControllerTestServiceTest extends TestCase
         $this->codeTest = new \Gear\Creator\CodeTest();
         $this->codeTest->setStringService($this->string);
         $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
 
         $this->controllerTest->setCodeTest($this->codeTest);
 
@@ -64,7 +64,7 @@ class WebControllerTestServiceTest extends TestCase
         $this->serviceManager->setModule($this->module->reveal());
         $this->controllerTest->setServiceManager($this->serviceManager);
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
         $uploadImage = new \Gear\Table\UploadImage(
@@ -126,7 +126,7 @@ class WebControllerTestServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $controller = new \GearJson\Controller\Controller([
+        $controller = new \Gear\Schema\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
@@ -139,7 +139,7 @@ class WebControllerTestServiceTest extends TestCase
             'user' => $userType
         ***REMOVED***);
 
-        $this->db = new \GearJson\Db\Db(
+        $this->db = new \Gear\Schema\Db\Db(
             [
                 'table' => $this->string->str('class', $tableName),
                 'user' => $userType
@@ -173,21 +173,21 @@ class WebControllerTestServiceTest extends TestCase
 
         $this->schemaService->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
 
-        $this->service = $this->prophesize('GearJson\Src\Src');
+        $this->service = $this->prophesize('Gear\Schema\Src\Src');
         $this->service->getName()->willReturn(sprintf('%sService', $table));
         $this->service->getType()->willReturn('Service');
         $this->service->getNamespace()->willReturn($namespace);
 
         $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($this->service->reveal())->shouldBeCalled();
 
-        $this->form = $this->prophesize('GearJson\Src\Src');
+        $this->form = $this->prophesize('Gear\Schema\Src\Src');
         $this->form->getName()->willReturn(sprintf('%sForm', $table));
         $this->form->getType()->willReturn('Form');
         $this->form->getNamespace()->willReturn($namespace);
 
         $this->schemaService->getSrcByDb($this->db, 'Form')->willReturn($this->form->reveal())->shouldBeCalled();
 
-        $this->search  = $this->prophesize('GearJson\Src\Src');
+        $this->search  = $this->prophesize('Gear\Schema\Src\Src');
         $this->search->getName()->willReturn(sprintf('%sSearchForm', $table));
         $this->search->getType()->willReturn('SearchForm');
         $this->search->getNamespace()->willReturn($namespace);

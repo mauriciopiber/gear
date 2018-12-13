@@ -5,8 +5,8 @@ use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
 
 class DirService implements ModuleDiagnosticInterface
 {

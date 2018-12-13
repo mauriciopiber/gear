@@ -14,7 +14,7 @@ namespace Gear\Mvc\ValueObject;
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 use Gear\Creator\CodeTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class ValueObjectService extends AbstractMvc
 {

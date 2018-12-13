@@ -4,9 +4,9 @@ namespace GearTest\ConstructorTest\DbTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\Db\DbConstructor;
-use GearJson\Action\ActionSchema;
+use Gear\Schema\Action\ActionSchema;
 use Exception;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Filter\FilterService;
@@ -17,7 +17,7 @@ use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 
 /**
  * @group fix-table
@@ -34,7 +34,7 @@ class DbConstructorTest extends TestCase
     public function setUp()
     {
 
-        $this->dbService = $this->prophesize('GearJson\Db\DbSchema');
+        $this->dbService = $this->prophesize('Gear\Schema\Db\DbSchema');
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         $this->columnService = $this->prophesize('Gear\Column\ColumnService');
@@ -86,7 +86,7 @@ class DbConstructorTest extends TestCase
         $table = 'MyTable';
         $module = 'MyModule';
 
-        $this->db = $this->prophesize('GearJson\Db\Db');
+        $this->db = $this->prophesize('Gear\Schema\Db\Db');
         $this->db->getTable()->willReturn($table)->shouldBeCalled();
         $this->db->getNamespace()->willReturn($table);
 

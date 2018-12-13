@@ -7,13 +7,13 @@
 namespace Gear\Constructor\Controller;
 
 use Gear\Module\ModuleTypesInterface;
-use GearJson\Controller\{
+use Gear\Schema\Controller\{
     Controller,
     ControllerSchema,
     ControllerSchemaTrait
 };
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use GearBase\Util\String\{
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\String\{
     StringServiceTrait,
     StringService
 };
@@ -47,8 +47,8 @@ use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\AbstractConstructor;
-use GearJson\Service\FactoriesInterface;
-use GearJson\Controller\Type\ActionInterface;
+use Gear\Schema\Service\FactoriesInterface;
+use Gear\Schema\Controller\Type\ActionInterface;
 
 class ControllerConstructor extends AbstractConstructor
 {

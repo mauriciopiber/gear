@@ -29,7 +29,7 @@ trait LongNameTableTrait
 
     public function getLongNameTableColumns()
     {
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $columns = [***REMOVED***;
 

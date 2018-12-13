@@ -39,7 +39,7 @@ class TelephoneTest extends TestCase
         $this->column->isNullable()->willReturn(true)->shouldBeCalled();
 
         $this->telephone = new Telephone($this->column->reveal());
-        $this->telephone->setStringService(new \GearBase\Util\String\StringService());
+        $this->telephone->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->telephone->filterElement();
 
@@ -54,7 +54,7 @@ class TelephoneTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->telephone = new Telephone($this->column->reveal());
-        $this->telephone->setStringService(new \GearBase\Util\String\StringService());
+        $this->telephone->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->telephone->filterUniqueElement();
 

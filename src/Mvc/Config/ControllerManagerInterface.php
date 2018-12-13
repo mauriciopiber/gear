@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Config;
 
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 
 interface ControllerManagerInterface
 {

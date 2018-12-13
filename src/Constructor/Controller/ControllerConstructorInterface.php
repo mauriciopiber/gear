@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Controller;
 
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 
 interface ControllerConstructorInterface
 {

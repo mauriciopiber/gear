@@ -2,7 +2,7 @@
 namespace Gear\Integration\Suite\Mvc;
 
 use Gear\Integration\Suite\Mvc\AbstractMvcMinorSuite;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * PHP Version 5

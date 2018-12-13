@@ -30,7 +30,7 @@ class FilterServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         //string
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter';
@@ -39,7 +39,7 @@ class FilterServiceTest extends TestCase
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new \Gear\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
 
@@ -74,7 +74,7 @@ class FilterServiceTest extends TestCase
         $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
         $this->filter->setInterfaceService($this->interface->reveal());
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->filter->setSchemaService($this->schemaService->reveal());
 
         //$this->column = $this->prophesize('Gear\Column\ColumnService');
@@ -159,7 +159,7 @@ class FilterServiceTest extends TestCase
         }
 
 
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
 
         $this->db->setColumnManager(new ColumnManager($columns));
         //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
@@ -169,7 +169,7 @@ class FilterServiceTest extends TestCase
         //$this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
         //$this->table->isNullable($this->db->getTable())->willReturn($nullable)->shouldBeCalled();
 
-        $filter = new \GearJson\Src\Src(
+        $filter = new \Gear\Schema\Src\Src(
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',
