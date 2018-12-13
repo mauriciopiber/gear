@@ -6796,16 +6796,16 @@
         },
         {
             "name": "mauriciopiber/gear-config",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-config.git",
-                "reference": "5ccd15600832baca6b19881ae818735c3125d42f"
+                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-config-0.1.0-18a461.tar",
-                "reference": "5ccd15600832baca6b19881ae818735c3125d42f",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-config-0.1.1-bfae33.tar",
+                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301",
                 "shasum": null
             },
             "require": {
@@ -6833,7 +6833,7 @@
                     "Gear\\Config\\Test\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T04:28:18+00:00"
+            "time": "2018-12-13T05:15:19+00:00"
         },
         {
             "name": "mauriciopiber/gear-deploy",
