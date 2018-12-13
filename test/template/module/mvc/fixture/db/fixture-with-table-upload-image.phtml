@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use MyModule\Entity\MyTable;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use GearImage\Fixture;
+use GearImage\FixtureTrait;
 
 /**
  * Fixture for My Table Entity.
@@ -24,7 +24,7 @@ class MyTableFixture extends AbstractFixture implements
     FixtureInterface,
     DependentFixtureInterface
 {
-    use Fixture;
+    use FixtureTrait;
 
     /**
      * Load Fixture

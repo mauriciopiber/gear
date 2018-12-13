@@ -3,11 +3,8 @@
     <import file="./test/ant-basic.xml"/>
     <import file="./test/ant-dev.xml"/>
     <import file="./test/ant-ci.xml"/>
-    <import file="./test/ant-namespace.xml"/>
     <import file="./test/ant-measure.xml"/>
-    <import file="./test/ant-benchmark.xml"/>
-    <target name="namespace" depends="set-vendor, phpcs-namespace, phpmd-namespace, phpcpd-namespace, unit-namespace"/>
-    <target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, unit"/>
-    <target name="ci" depends="prepare, set-vendor, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, unit-ci"/>
-    <target name="measure" depends="prepare, set-vendor, parallel-lint, unit-coverage-ci, phploc-ci, pdepend, phpdox"/>
+    <target name="dev" depends="parallel-lint, phpcs, phpmd, phpcpd, phpunit"/>
+    <target name="ci" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-ci"/>
+    <target name="measure" depends="prepare, parallel-lint, phpcs-ci, phpmd-ci, phpcpd-ci, phpunit-coverage-ci, phploc-ci, pdepend, phpdox"/>
 </project>

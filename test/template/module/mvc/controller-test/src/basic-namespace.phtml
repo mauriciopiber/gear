@@ -37,7 +37,7 @@ class BasicActionTest extends TestCase
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -46,5 +46,22 @@ class BasicActionTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    public function testFirstActionAction()
+    {
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicAction',
+            'Another\Long\Namespaces',
+            'FirstAction'
+        );
+
+        $this->routeMatch->setParam('action', 'first-action');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
     }
 }

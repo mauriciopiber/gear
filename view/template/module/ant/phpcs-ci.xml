@@ -1,5 +1,5 @@
-<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration" depends="set-vendor">
-    <exec executable="${vendor}/bin/phpcs" output="/dev/null">
+<target name="phpcs-ci" description="PHP_CodeSniffer Continuous Integration">
+    <exec executable="vendor/bin/phpcs" output="/dev/null">
         <arg value="--report=checkstyle"/>
         <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
         <arg value="--standard=test/phpcs.xml"/>

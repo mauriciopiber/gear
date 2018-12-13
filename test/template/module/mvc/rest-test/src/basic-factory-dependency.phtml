@@ -1,0 +1,51 @@
+<?php
+namespace MyModuleTest\ControllerTest;
+
+use PHPUnit\Framework\TestCase;
+use MyModule\Controller\BasicFactoryDependencyRest;
+use Zend\Http\Request;
+use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Router\RouteMatch;
+use GearBaseTest\Assertions\AclAssertTrait;
+
+/**
+ * @group BasicFactoryDependencyRest
+ * @group Controller
+ */
+class BasicFactoryDependencyRestTest extends TestCase
+{
+    use AclAssertTrait;
+
+    protected $controller;
+    protected $request;
+    protected $response;
+    protected $routeMatch;
+    protected $event;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->myRepository = $this->prophesize('MyModule\Repository\MyRepository');
+
+        $this->controller = new BasicFactoryDependencyRest(
+            $this->myRepository->reveal()
+        );
+
+        $this->request    = new Request();
+        $this->routeMatch = new RouteMatch(array('controller' => 'BasicFactoryDependencyRest'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
+
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
+    }
+
+    public function test404()
+    {
+        $this->routeMatch->setParam('action', 'action-that-doesnt-exist');
+        $result = $this->controller->dispatch($this->request);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+}

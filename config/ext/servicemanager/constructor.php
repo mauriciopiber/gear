@@ -1,11 +1,12 @@
 <?php
 return [
+    'factories' => [
+        Gear\Constructor\Src\SrcConstructor::class        => Gear\Constructor\Src\SrcConstructorFactory::class,
+        Gear\Constructor\Db\DbConstructor::class         => Gear\Constructor\Db\DbConstructorFactory::class,
+        Gear\Constructor\Action\ActionConstructor::class     => Gear\Constructor\Action\ActionConstructorFactory::class,
+        Gear\Constructor\Controller\ControllerConstructor::class => Gear\Constructor\Controller\ControllerConstructorFactory::class,
+    ***REMOVED***,
     'invokables' => [
-        'Gear\Module\Constructor\Controller' => 'Gear\Constructor\Controller\ControllerService',
-        'Gear\Module\Constructor\Action'     => 'Gear\Constructor\Action\ActionService',
-        'Gear\Module\Constructor\View'       => 'Gear\Constructor\View\ViewService',
-        'Gear\Module\Constructor\Test'       => 'Gear\Constructor\Test\TestService',
-        'Gear\Module\Constructor\Db'         => 'Gear\Constructor\Db\DbService',
-        'Gear\Module\Constructor\Src'        => 'Gear\Constructor\Src\SrcService',
+        'Gear\Module\Constructor\App'        => 'Gear\Constructor\App\AppService',
     ***REMOVED***
 ***REMOVED***;

@@ -1,0 +1,9 @@
+srcPath="src/${1}"
+testPath=test/unit/$(echo "${1}" | sed 's/.php//' | sed 's/\([a-zA-Z***REMOVED****\)/\1Test/g')".php"
+
+vendor/bin/parallel-lint $srcPath $testPath
+vendor/bin/phploc $srcPath $testPath
+vendor/bin/phpcs --standard=PSR2 $srcPath $testPath
+vendor/bin/phpcpd $srcPath $testPath
+vendor/bin/phpmd $srcPath,$testPath text test/phpmd.xml
+vendor/bin/phpunit $testPath

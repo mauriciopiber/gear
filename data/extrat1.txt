@@ -1,0 +1,72 @@
+       $this->module = $this->prophesize('Gear\Module\BasicModuleStructure');
+
+
+        $this->arrayService = new ArrayService();
+
+        $this->string = new StringService();
+
+        $template       = new TemplateService();
+
+        $templatePath = (new Module)->getLocation().'/../view';
+
+        $resolver = new AggregateResolver();
+
+        $map = new TemplatePathStack(array(
+            'script_paths' => array(
+                'template' => $templatePath,
+            )
+        ));
+
+        $resolver->attach($map);
+
+        $view = new PhpRenderer();
+
+        $view->setResolver($resolver);
+
+        $template->setRenderer($view);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
+
+        $this->template =  (new Module())->getLocation().'/../test/template/module/mvc/controller';
+
+
+        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+
+
+        $this->injector = new Injector($this->arrayService);
+
+        $this->controllerService = new WebControllerService();
+        $this->controllerService->setFileCreator($this->fileCreator);
+        $this->controllerService->setStringService($this->string);
+        $this->controllerService->setModule($this->module->reveal());
+        $this->controllerService->setInjector($this->injector);
+
+        $this->controllerService->setFactoryService($this->factory->reveal());
+        $this->controllerService->setArrayService($this->arrayService);
+
+
+        $this->code = new Code();
+        $this->code->setStringService($this->string);
+        $this->code->setModule($this->module->reveal());
+        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+
+        $constructorParams = new ConstructorParams($this->string);
+        $this->code->setConstructorParams($constructorParams);
+
+        $this->controllerService->setCode($this->code);
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->controllerService->setTableService($this->table->reveal());
+
+        $this->testing = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerTestService');
+        $this->controllerService->setControllerTestService($this->testing->reveal());
+
+        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->controllerService->setSchemaService($this->schema->reveal());
+
+        $uploadImage = new \Gear\Table\UploadImage(
+            $this->string,
+            $this->module->reveal()
+        );
+
+        $this->controllerService->setUploadImage($uploadImage);

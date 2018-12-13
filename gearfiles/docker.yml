@@ -1,0 +1,14 @@
+module: Gear
+
+src:
+    docs1:
+        name: DockerService
+        type: Service
+        namespace: Docker
+        service: factories
+        dependency:
+          0:
+            class: \GearBase\Util\String\StringService
+            aliase: GearBase\Util\String
+          1:
+            class: Creator\FileCreator\FileCreator

@@ -1,0 +1,22 @@
+<?php
+namespace MyModuleTest\ControllerTest;
+
+use PHPUnit\Framework\TestCase;
+use Zend\Mvc\Controller\ControllerManager;
+use MyModule\Controller\IndexController;
+use MyModule\Controller\IndexControllerFactory;
+
+class IndexControllerFactoryTest extends TestCase
+{
+    public function setUp()
+    {
+        $this->factory = new IndexControllerFactory();
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
+    }
+
+    public function testCreateFactory()
+    {
+        $instance = $this->factory->createService($this->controllerManager->reveal());
+        $this->assertInstanceOf(IndexController::class, $instance);
+    }
+}

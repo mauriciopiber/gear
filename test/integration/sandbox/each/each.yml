@@ -1,0 +1,177 @@
+controller:
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Action
+        name: SrcMvcCmpLwsUniNulController
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Controller
+        dependency:
+            - SrcMvcCompleteLowStrictUniqueNullable\Service\SrcMvcCmpLwsUniNulService
+            - SrcMvcCompleteLowStrictUniqueNullable\Form\SrcMvcCmpLwsUniNulForm
+            - SrcMvcCompleteLowStrictUniqueNullable\SearchForm\SrcMvcCmpLwsUniNulSearchForm
+        actions:
+            - { name: Create, role: admin }
+            - { name: Edit, role: admin }
+            - { name: List, role: admin }
+            - { name: View, role: admin }
+            - { name: Delete, role: admin }
+src:
+    -
+        name: SrcMvcCmpLwsUniNul
+        db: SrcMvcCmpLwsUniNul
+        type: Entity
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+    -
+        name: SrcMvcCmpLwsUniNulFixture
+        db: SrcMvcCmpLwsUniNul
+        type: Fixture
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email            
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Repository
+        name: SrcMvcCmpLwsUniNulRepository
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Repository
+        dependency:
+            doctrine.entitymanager.orm_default: \Doctrine\ORM\EntityManager
+            0: \GearBase\Repository\QueryBuilder
+    -            
+        name: SrcMvcCmpLwsUniNulService
+        type: Service
+        db: SrcMvcCmpLwsUniNul
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Service
+        dependency:
+            0: SrcMvcCompleteLowStrictUniqueNullable\Repository\SrcMvcCmpLwsUniNulRepository
+            memcached: \Zend\Cache\Storage\Adapter\Memcached
+            1: { class: \Zend\Authentication\AuthenticationService, aliase: zfcuser_auth_service, ig_t: true }
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Filter
+        name: SrcMvcCmpLwsUniNulFilter
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Filter                               
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: Form
+        name: SrcMvcCmpLwsUniNulForm
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Form
+        template: form-filter
+    -
+        db: SrcMvcCmpLwsUniNul
+        type: SearchForm
+        name: SrcMvcCmpLwsUniNulSearchForm
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\SearchForm
+        template: search-form                                 

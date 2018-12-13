@@ -1,12 +1,12 @@
 <?php
 namespace MyModuleTest\ConsolistsNamespaceTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\ServiceManager;
 use MyModule\ConsolistsNamespace\SpecialDependencyConsoleFactory;
 use MyModule\ConsolistsNamespace\SpecialDependencyConsole;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Zend\Console\Adapter\Posix;
 use Zend\Db\Adapter\Adapter;
 
@@ -23,7 +23,7 @@ class SpecialDependencyConsoleFactoryTest extends TestCase
 
         $this->serviceLocator = $this->prophesize(ServiceManager::class);
 
-        $this->serviceLocator->get('GearBase\Util\String')
+        $this->serviceLocator->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 

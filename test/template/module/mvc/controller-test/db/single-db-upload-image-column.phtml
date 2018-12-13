@@ -88,7 +88,7 @@ class UploadImageColumnControllerTest extends TestCase
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()
@@ -107,7 +107,13 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageColumnController', 'Create');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageColumnController',
+            'Custom\CustomNamespace',
+            'Create'
+        );
 
         $this->routeMatch->setParam('action', 'create');
 
@@ -234,7 +240,13 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageColumnController', 'Edit');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageColumnController',
+            'Custom\CustomNamespace',
+            'Edit'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageColumn');
 
@@ -352,7 +364,13 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageColumnController', 'List');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageColumnController',
+            'Custom\CustomNamespace',
+            'List'
+        );
 
         $this->uploadImageColumnService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
@@ -368,7 +386,13 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageColumnController', 'View');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageColumnController',
+            'Custom\CustomNamespace',
+            'View'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageColumn');
         //$this->entity->getIdUploadImageColumn()->willReturn(31)->shouldBeCalled();
@@ -424,7 +448,13 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'UploadImageColumnController', 'Delete');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'UploadImageColumnController',
+            'Custom\CustomNamespace',
+            'Delete'
+        );
 
         $this->uploadImageColumnService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 

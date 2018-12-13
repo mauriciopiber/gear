@@ -7,7 +7,7 @@ return [
             'eventmanager' => 'orm_default',
             'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
             'params' => [
-                'host' => 'localhost',
+                'host' => 'mysql',
                 'port' => '3306',
                 'dbname' => '<?php echo $this->moduleUline;?>',
                 'user' => 'root',
@@ -25,7 +25,7 @@ return [
         __NAMESPACE__ . '_driver' => [
             'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
             'paths' => [
-                __DIR__ . '/../../src/' . __NAMESPACE__ . '/Entity'
+                __DIR__ . '/../../src/Entity'
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***

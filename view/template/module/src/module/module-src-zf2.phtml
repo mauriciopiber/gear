@@ -1,0 +1,57 @@
+namespace <?php echo $this->module?>;
+
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
+use Zend\View\ViewEvent;
+use Zend\View\Renderer\PhpRenderer;
+
+/**
+ * PHP Version 5
+ *
+ * @category Module
+ * @package <?php echo $this->module.PHP_EOL;?>
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class Module
+{
+    const LOCATION = __DIR__;
+
+    /**
+     * Return default autoloader config
+     *
+     * @return array
+     */
+    public function getAutoloaderConfig()
+    {
+        return array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/../src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
+
+    /**
+     * Return module configurations
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+
+    /**
+     * Return Class Location on filesystem.
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return __DIR__;
+    }
+}

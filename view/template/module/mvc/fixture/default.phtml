@@ -35,15 +35,16 @@ class <?php echo $this->name;?> extends AbstractFixture<?php echo $this->impleme
         foreach ($this->getFixture() as $i => $fixture) {
             $reference = $i+1;
             $<?php echo $this->var;?> = new <?php echo str_replace('Fixture', '', $this->name);?>();
-<?php foreach ($this->fields as $field):?>
+<?php echo $this->fields;?>
+<?php /* foreach ($this->fields as $field):?>
 <?php echo $field.PHP_EOL;?>
-<?php endforeach;?>
+<?php endforeach; */ ?>
             $userReferenced = $this->getReferenceToEntity($reference);
             $<?php echo $this->var;?>->setCreated(new \DateTime('now'));
             $<?php echo $this->var;?>->setCreatedBy($userReferenced);
             $this->manager->persist($<?php echo $this->var;?>);
             $this->manager->flush();
-            $this->addReference("<?php echo $this->str('url', str_replace('Fixture', '', $this->name)); ?>-$reference", $<?php echo $this->var;?>);
+            $this->addReference("<?php echo $this->reference?>-$reference", $<?php echo $this->var;?>);
 <?php echo $this->load;?>
         }
     }

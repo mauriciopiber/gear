@@ -1,0 +1,27 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\View\Model\JsonModel;
+use Zend\Mvc\Controller\AbstractRestfulController;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicFactoryRest extends AbstractRestfulController
+{
+    /**
+     * Constructor
+     *
+     * @return BasicFactoryRest
+     */
+    public function __construct()
+    {
+        return $this;
+    }
+}

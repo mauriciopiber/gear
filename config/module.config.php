@@ -5,6 +5,7 @@ $consoleRoutes   = require 'ext/console.route.php';
 $consoleMessages = require 'ext/console.message.php';
 $serviceManager  = require 'ext/servicemanager.php';
 $speciality      = require 'speciality.types.php';
+$view = require 'view.config.php';
 
 return [
     'caches' => [
@@ -56,7 +57,8 @@ return [
                 'version' => '0.2.130',
                 'acl' => true,
                 'name' => __NAMESPACE__,
-                'git' => 'git@bitbucket.org:mauriciopiber/gear.git'
+                'git' => 'git@bitbucket.org:mauriciopiber/gear.git',
+                'type' => 'cli'
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***,
@@ -79,17 +81,7 @@ return [
             'Gear\Controller\Db'                 => 'Gear\Database\Controller\DbControllerFactory'
         ***REMOVED***,
     ***REMOVED***,
-    'view_manager' => [
-        'template_path_stack' => [
-            'gear' => __DIR__ . '/../view',
-            'template' => __DIR__ . '/../view',
-        ***REMOVED***,
-
-        'factories' => [
-            'arrayToYml' => 'Gear\Factory\ArrayToYmlHelperFactory',
-            'str' => 'Gear\Factory\StrHelperFactory'
-        ***REMOVED***
-    ***REMOVED***,
+    'view_manager' => $view,
     'db' => [
         'driver' => 'Pdo',
         'dsn' => 'mysql:dbname=gear;host=localhost',

@@ -37,7 +37,7 @@ class BasicFirstActionTest extends TestCase
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -50,7 +50,13 @@ class BasicFirstActionTest extends TestCase
 
     public function testFirstActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicFirstAction', 'FirstAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicFirstAction',
+            'Controller',
+            'FirstAction'
+        );
 
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);

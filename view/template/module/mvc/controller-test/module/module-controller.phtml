@@ -35,12 +35,18 @@ class IndexControllerTest extends TestCase
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = \<?php echo $this->module;?>\Module::LOCATION.'/../schema/module.json';
     }
 
     public function testIndexAction()
     {
-        $this->assertAcl($this->schema, '<?php echo $this->module;?>', 'IndexController', 'Index');
+        $this->assertAcl(
+            $this->schema,
+            '<?php echo $this->module;?>',
+            'IndexController',
+            'Controller',
+            'Index'
+        );
 
         $this->routeMatch->setParam('action', 'index');
         $result = $this->controller->dispatch($this->request);

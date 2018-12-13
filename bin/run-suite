@@ -1,0 +1,77 @@
+#!/bin/bash
+#set -ex
+
+#echo "Suite"
+
+# CONFIG
+modules=(
+#    "mvc/mvc-columns"
+    "mvc/mvc-complete"
+#    "mvc/mvc-usertypes"
+#    "mvc/mvc-constraints"
+)
+
+integrationFile="data/logs/integration.log"
+
+# END CONFIG 
+
+function RUN_TEST() 
+{
+    suite=${1}
+    test/integration/main/constructors/$suite/test.sh build-suite 0
+}
+
+function LOG_START_SUITE()
+{
+    dateNow=$(date +"%d/%m/%y %T")
+    template="$dateNow -> Started a new suite"
+    echo "$template" >> $integrationFile
+}
+
+function LOG_END_SUITE()
+{
+    dateNow=$(date +"%d/%m/%y %T")
+    template="$dateNow -> Ended the suite"
+    echo "$template" >> $integrationFile
+    echo "" >> $integrationFile
+}
+
+function LOG_INTEGRATION()
+{
+    testName=${1}
+    testTime=${2}
+    dateNow=$(date +"%d/%m/%y %T")
+    
+    template="$dateNow -> $testName -> $testTime"
+    
+    echo "$template" >> $integrationFile
+    #echo "$template"
+
+}
+
+function RUN_SUITE() 
+{
+    LOG_START_SUITE
+
+    for item in ${modules[****REMOVED***}
+    do
+        beginLoop=$(date +%s) 
+
+        RUN_TEST $item
+
+        endLoop=$(date +%s)
+    
+        timeUsed=$(expr $endLoop - $beginLoop)
+    
+        LOG_INTEGRATION $item $timeUsed
+        
+    done
+    
+    LOG_END_SUITE
+}
+
+echo "Suite run started"
+
+RUN_SUITE
+
+echo "Suite run ended"

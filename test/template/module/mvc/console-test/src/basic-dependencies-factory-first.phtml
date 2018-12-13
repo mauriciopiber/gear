@@ -46,7 +46,7 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -59,7 +59,13 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
 
     public function testFirstActionAction()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'BasicDependenciesFactoryFirstConsole', 'FirstAction');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'BasicDependenciesFactoryFirstConsole',
+            'Controller',
+            'FirstAction'
+        );
 
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);

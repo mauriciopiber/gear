@@ -1,0 +1,145 @@
+PHPUnit 5.7.26 by Sebastian Bergmann and contributors.
+
+.............................................................   61 / 1366 (  4%)
+.............................................................  122 / 1366 (  8%)
+.............................................................  183 / 1366 ( 13%)
+.............................................................  244 / 1366 ( 17%)
+....WW.......................................................  305 / 1366 ( 22%)
+........................................W..........Carregado database de vfs://module/data/my-load.mysql.sql
+..........  366 / 1366 ( 26%)
+.............................................................  427 / 1366 ( 31%)
+............................................F................  488 / 1366 ( 35%)
+.............................................................  549 / 1366 ( 40%)
+...................................W.........................  610 / 1366 ( 44%)
+.F..................................................EE.......  671 / 1366 ( 49%)
+................E..E..........................WEE............  732 / 1366 ( 53%)
+............F..............................................F.  793 / 1366 ( 58%)
+.............................................................  854 / 1366 ( 62%)
+.............................................................  915 / 1366 ( 66%)
+.............................................................  976 / 1366 ( 71%)
+............................................................. 1037 / 1366 ( 75%)
+.............vfs://module/MyServiceTraitTest.php
+.......................1......................... 1098 / 1366 ( 80%)
+...........array (
+  'username' => '',
+  'password' => '',
+  'host' => '',
+  'environment' => '',
+)..........................1........................ 1159 / 1366 ( 84%)
+............................................................. 1220 / 1366 ( 89%)
+............................................................. 1281 / 1366 ( 93%)
+............................................................. 1342 / 1366 ( 98%)
+.........W..............                                      1366 / 1366 (100%)
+
+Time: 16.57 minutes, Memory: 464.00MB
+
+
+
+3) GearTest\ModuleTest\ModuleServiceTest::testCreateModuleAsProjectWeb
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - setOptions(["module" => "My\Module"***REMOVED***)
+on Double\Gear\Creator\FileCreator\FileCreator\P2586 was not expected, expected calls were:
+  - setTemplate(exact("template/module/config/application.config.web.pht"...))
+  - setTemplate(exact("template/module/config/autoload/global.phtml"))
+  - setTemplate(exact("template/module/config/autoload/local.phtml"))
+  - setTemplate(exact("template/module/public/index.phtml"))
+  - setTemplate(exact("template/module/public/htaccess.phtml"))
+  - setTemplate(exact("template/module/init_autoloader.phtml"))
+  - setTemplate(exact("template/module/script/deploy-development-web.pht"...))
+  - setTemplate(exact("template/module/script/deploy-testing-web.phtml"))
+  - setTemplate(exact("template/module/script/load-web.phtml"))
+  - setTemplate(exact("template/module/phinx.phtml"))
+  - setTemplate(exact("template/module/test/module-test.phtml"))
+  - setTemplate(exact("template/module/module.phtml"))
+  - setTemplate(exact("template/module/jenkinsfile-web.phtml"))
+  - setTemplate(exact("template/module/gitignore-web.phtml"))
+  - setOptions(exact(["module" => "MyModule"***REMOVED***))
+  - setOptions(exact(["module" => "my_module"***REMOVED***))
+  - setOptions(exact(["module" => "my-module"***REMOVED***))
+  - setOptions(exact([***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module"***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module", "layout" => "gear-admin-interno"***REMOVED***))
+  - setOptions(exact(["moduleUrl" => "my-module"***REMOVED***))
+  - setLocation(exact("vfs://module/my-module/config"))
+  - setLocation(exact("vfs://module/my-module/config/autoload"))
+  - setLocation(exact("vfs://module/my-module/public"))
+  - setLocation(exact("vfs://module/my-module"))
+  - setLocation(exact("vfs://module/my-module/script"))
+  - setLocation(exact("vfs://module/my-module/test/unit/MyModuleTest"))
+  - setLocation(exact("vfs://module/my-module/src/MyModule"))
+  - setFileName(exact("application.config.php"))
+  - setFileName(exact("global.php"))
+  - setFileName(exact("local.php"))
+  - setFileName(exact("index.php"))
+  - setFileName(exact(".htaccess"))
+  - setFileName(exact("init_autoloader.php"))
+  - setFileName(exact("deploy-development.sh"))
+  - setFileName(exact("deploy-testing.sh"))
+  - setFileName(exact("load.sh"))
+  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("ModuleTest.php"))
+  - setFileName(exact("Module.php"))
+  - setFileName(exact("Jenkinsfile"))
+  - setFileName(exact(".gitignore"))
+  - render()
+
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:552
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:349
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:311
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ModuleServiceTest.php:442
+
+4) GearTest\ModuleTest\ModuleServiceTest::testCreateModuleAsProjectCli
+Prophecy\Exception\Call\UnexpectedCallException: Method call:
+  - setOptions(["module" => "My\Module"***REMOVED***)
+on Double\Gear\Creator\FileCreator\FileCreator\P2676 was not expected, expected calls were:
+  - setTemplate(exact("template/module/config/application.config.cli.pht"...))
+  - setTemplate(exact("template/module/config/autoload/global.phtml"))
+  - setTemplate(exact("template/module/config/autoload/local.phtml"))
+  - setTemplate(exact("template/module/public/index.phtml"))
+  - setTemplate(exact("template/module/public/htaccess.phtml"))
+  - setTemplate(exact("template/module/init_autoloader.phtml"))
+  - setTemplate(exact("template/module/script/deploy-development-cli.pht"...))
+  - setTemplate(exact("template/module/script/deploy-testing-cli.phtml"))
+  - setTemplate(exact("template/module/script/load-cli.phtml"))
+  - setTemplate(exact("template/module/phinx.phtml"))
+  - setTemplate(exact("template/module/test/module-test.phtml"))
+  - setTemplate(exact("template/module/module.phtml"))
+  - setTemplate(exact("template/module/jenkinsfile-cli.phtml"))
+  - setTemplate(exact("template/module/gitignore-cli.phtml"))
+  - setOptions(exact(["module" => "MyModule"***REMOVED***))
+  - setOptions(exact(["module" => "my_module"***REMOVED***))
+  - setOptions(exact(["module" => "my-module"***REMOVED***))
+  - setOptions(exact([***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module"***REMOVED***))
+  - setOptions(exact(["module" => "MyModule", "moduleUrl" => "my-module", "layout" => "gear-admin-interno"***REMOVED***))
+  - setOptions(exact(["moduleUrl" => "my-module"***REMOVED***))
+  - setLocation(exact("vfs://module/my-module/config"))
+  - setLocation(exact("vfs://module/my-module/config/autoload"))
+  - setLocation(exact("vfs://module/my-module/public"))
+  - setLocation(exact("vfs://module/my-module"))
+  - setLocation(exact("vfs://module/my-module/script"))
+  - setLocation(exact("vfs://module/my-module/test/unit/MyModuleTest"))
+  - setLocation(exact("vfs://module/my-module/src/MyModule"))
+  - setFileName(exact("application.config.php"))
+  - setFileName(exact("global.php"))
+  - setFileName(exact("local.php"))
+  - setFileName(exact("index.php"))
+  - setFileName(exact(".htaccess"))
+  - setFileName(exact("init_autoloader.php"))
+  - setFileName(exact("deploy-development.sh"))
+  - setFileName(exact("deploy-testing.sh"))
+  - setFileName(exact("load.sh"))
+  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("ModuleTest.php"))
+  - setFileName(exact("Module.php"))
+  - setFileName(exact("Jenkinsfile"))
+  - setFileName(exact(".gitignore"))
+  - render()
+
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:552
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:349
+/var/www/gear-package/gear/src/Gear/Module/ModuleService.php:311
+/var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ModuleServiceTest.php:867
+
+
+

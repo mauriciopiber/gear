@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="./unit/_bootstrap.php"
+    bootstrap="./../vendor/autoload.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -13,18 +13,18 @@
 >
     <testsuites>
         <testsuite name="sites">
-            <directory suffix="Test.php">./unit</directory>
+            <directory suffix="Test.php">./unit/</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-       	 	<directory suffix=".php">./../src/Gear/Module</directory>
-       	 	<exclude>
-       	 		<file>./../src/Gear/Module.php</file>
+            <directory suffix=".php">./../src</directory>
+            <exclude>
+                <file>./../src/Module.php</file>
             </exclude>
         </whitelist>
     </filter>
     <logging>
         <log type="coverage-html" target="./../build/coverage"/>
-	</logging>    
+    </logging>
 </phpunit>

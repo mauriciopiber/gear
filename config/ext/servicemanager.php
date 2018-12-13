@@ -3,14 +3,7 @@ return array_merge_recursive(
     [
         'abstract_factories' =>
         [
-            //'Gear\Upgrade\AbstractUpgradeFactory',
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-        ***REMOVED***,
-        'initializers' => [
-            'Gear\Initializer\DirInitializer',
-
-            'Gear\Initializer\ModuleInitializer',
-            'Gear\Initializer\TemplateInitializer'
         ***REMOVED***,
         'factories' => [
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',

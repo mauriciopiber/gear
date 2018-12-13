@@ -11,6 +11,12 @@ if [ "${construct[****REMOVED***}" == "" ***REMOVED***; then
 	
 fi 
 
+if [ "$cmd" == "ci" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "ci" "$module" "$type"
+	exit 0
+fi
+
 if [ "$cmd" == "custom" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "custom" "$module" "$build"
@@ -94,6 +100,11 @@ if [ "$cmd" == "reload" ***REMOVED***; then
 	exit 0	
 fi
 
+if [ "$cmd" == "build-suite" ***REMOVED***; then
+	
+	/bin/bash "$bin/gear/module/gear-module" "build-suite" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}"
+	exit 0	
+fi
 
 if [ "$cmd" == "test" ***REMOVED***; then
 	
@@ -120,7 +131,7 @@ fi
 if [ "$cmd" == "reconstruct" ***REMOVED***; then
 	
 	/bin/bash "$bin/gear/module/gear-module" "reconstruct" "$module" "$type" "$scriptDir" "${construct[****REMOVED***}" "0" "0"
-    /bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"	
+    #/bin/bash "$bin/gear/module/gear-module" "test" "$module" "$type" "$build"	
 	exit 0	
 fi
 

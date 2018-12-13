@@ -6,6 +6,7 @@ scriptDir="$( cd "$( dirname "${BASH_SOURCE[0***REMOVED***}" )" && pwd )"
 module="PbrSrc"
 type="web"
 construct=()
+construct+=("src-interface/src-interface.yml")
 construct+=("src-repository/src-repository.yml")
 construct+=("src-service/src-service.yml")
 construct+=("src-form/src-form.yml")

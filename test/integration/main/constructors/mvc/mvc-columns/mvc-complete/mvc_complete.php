@@ -5,6 +5,18 @@ use Phinx\Migration\AbstractMigration;
 class MvcComplete extends AbstractMigration
 {
     const TABLES = [
+        'column_int_foreign' => [
+            'nullable' => true,
+            'unique' => false,
+            'columns' => [
+                'column_int_foreign_name' => [
+                    'type' => 'string'
+                ***REMOVED***
+            ***REMOVED***,
+            'table' => [
+
+            ***REMOVED***
+        ***REMOVED***,
         'mvc_complete' => [
             'nullable' => false,
             'unique' => false,
@@ -85,18 +97,6 @@ class MvcComplete extends AbstractMigration
                     'type' => 'string'
                 ***REMOVED***
             ***REMOVED***
-        ***REMOVED***,
-        'column_int_foreign' => [
-            'nullable' => true,
-            'unique' => false,
-            'columns' => [
-                'column_int_foreign_name' => [
-                    'type' => 'string'
-                ***REMOVED***
-            ***REMOVED***,
-            'table' => [
-
-            ***REMOVED***
         ***REMOVED***
     ***REMOVED***;
 
@@ -145,6 +145,16 @@ class MvcComplete extends AbstractMigration
          return true;
     }
 
+    public function createColumnForeignKey(&$table, $columnName)
+    {
+        $table->addForeignKey(
+            $columnName,
+            'column_int_foreign',
+            'id_column_int_foreign',
+            ['delete'=> 'CASCADE', 'update'=> 'CASCADE'***REMOVED***
+        );
+    }
+
     public function createTable($tableName, $options)
     {
         $table = $this->table($tableName, ['id' => sprintf('id_%s', $tableName)***REMOVED***);
@@ -154,6 +164,10 @@ class MvcComplete extends AbstractMigration
             $unique = (isset($column['unique'***REMOVED***)) ? $column['unique'***REMOVED*** : $options['unique'***REMOVED***;
             //$properties = (isset($column['properties'***REMOVED***)) ? $column['properties'***REMOVED*** : [***REMOVED***;
             $this->createColumn($table, $columnName, $column['type'***REMOVED***, $nullable, $unique);
+
+            if (isset($column['properties'***REMOVED***) && in_array('foreignKey', $column['properties'***REMOVED***)) {
+                $this->createColumnForeignKey($table, $columnName);
+            }
         }
 
         $table->create();

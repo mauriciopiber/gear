@@ -1,7 +1,8 @@
 <?php
 namespace MyModule\MyModuleTest\EntityTest;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
+use MyModule\Entity\Table;
 
 /**
  * @group MyModule
@@ -13,7 +14,7 @@ class TableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->entity = new \MyModule\Entity\Table;
+        $this->entity = new Table();
     }
 
     public function testTableFieldsStartWithNull()
@@ -163,9 +164,8 @@ class TableTest extends TestCase
 
         $updatedBy = $this->prophesize('GearAdmin\Entity\User')->reveal();
 
-        return array(
-            array(
-                'My Controller',
+        return [
+            [
                 'Date Column',
                 'Date Pt Br Column',
                 'Datetime Column',
@@ -191,7 +191,7 @@ class TableTest extends TestCase
                 'Created',
                 $updatedBy,
                 'Updated'
-            )
-        );
+            ***REMOVED***
+        ***REMOVED***;
     }
 }

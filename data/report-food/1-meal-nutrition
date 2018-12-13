@@ -1,0 +1,33 @@
+
+SELECT
+    m.id_meal,
+    m.description,
+    tf.total_food,
+    tf.total_kcal,
+    tf.total_carb,
+    tf.total_protein,
+    tf.total_fat_t    
+FROM meal m
+INNER JOIN (
+    SELECT 
+        DISTINCT count(f.id_food) as total_food,
+        SUM(
+            ((1000/f.portion)*f.kcal)/(1000/mf.portion)
+        ) as total_kcal,
+        SUM(
+            ((1000/f.portion)*f.carb)/(1000/mf.portion)
+        ) as total_carb,
+        SUM(
+            ((1000/f.portion)*f.protein)/(1000/mf.portion)
+        ) as total_protein,
+        SUM(
+            ((1000/f.portion)*f.fat_t)/(1000/mf.portion)
+        ) as total_fat_t,
+        mf.id_meal as id_meal 
+    FROM meal_food mf 
+    INNER JOIN food f on f.id_food = mf.id_food GROUP BY mf.id_meal
+) as tf on tf.id_meal = m.id_meal
+
+\G;
+
+

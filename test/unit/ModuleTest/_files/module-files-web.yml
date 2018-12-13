@@ -1,0 +1,98 @@
+files:
+  0:
+    template: 'template/module/config/application-config/application.config.web.phtml'
+    options:
+      module: 'MyModule'
+    location: 'config'
+    filename: 'application.config.php'  
+  1:
+    template: 'template/module/config/autoload/global.phtml'
+    options:
+      module: 'my_module'
+    location: 'config/autoload'
+    filename: 'global.php'
+  2:
+    template: 'template/module/config/autoload/local.phtml'
+    options:
+      module: 'my-module'
+    location: 'config/autoload'
+    filename: 'local.php'        
+  3:
+    template: 'template/module/public/index.phtml'
+    location: 'public'
+    filename: 'index.php'        
+  4:
+    template: 'template/module/public/htaccess.phtml'
+    location: 'public'
+    filename: '.htaccess'       
+  5:
+    template: 'template/module/init_autoloader.phtml'
+    filename: 'init_autoloader.php'           
+  6:
+    template: 'template/module/script/deploy-development/deploy-development-web.phtml'
+    options:
+      module: 'MyModule'
+      moduleUrl: 'my-module'
+    location: 'script'
+    filename: 'deploy-development.sh'    
+  7:
+    template: 'template/module/script/deploy-testing/deploy-testing-web.phtml'
+    options:
+      module: 'my_module'
+    location: 'script'
+    filename: 'deploy-testing.sh'
+#  91:
+#    template: 'template/module/script/deploy-staging.phtml'
+#    location: 'script'
+#    options:
+#      host: null
+#      moduleUrl: 'my-module'
+#      git: 'git@bitbucket.org:mauriciopiber/module.git'
+#      module: 'MyModule'
+#      dbFile: 'my-module.mysql.sql'
+#    filename: 'deploy-staging.sh'   
+#  90:
+#    template: 'template/module/script/install-remote-staging.phtml'
+#    location: 'script'
+#    options:
+#      host: null
+#      moduleUrl: 'my-module'
+#    filename: 'install-staging.sh'               
+  8:
+    template: 'template/module/script/load-web.phtml'
+    options:
+      module: 'my_module'
+    location: 'script'
+    filename: 'load.sh'       
+  9:
+    template: 'template/module/phinx.phtml'
+    options:
+      module: 'my_module'
+    filename: 'phinx.yml'
+#  10:
+#    template: 'template/module/buildpath.phtml'
+#    filename: '.buildpath'
+  11:
+    template: 'template/module/test/module-test.phtml'
+    options:
+      module: 'MyModule'
+    location: 'test/unit'
+    filename: 'ModuleTest.php'
+  12:
+    template: 'template/module/src/module/module-web.phtml'
+    options:
+      module: 'MyModule'
+      moduleUrl: 'my-module'
+      layout: 'gear-admin-interno'
+    location: 'src'
+    filename: 'Module.php'         
+    
+  13:
+    template: 'template/module/jenkinsfile/jenkinsfile-web.phtml'
+    options:
+      moduleUrl: 'my-module'
+    filename: 'Jenkinsfile'      
+    
+  14:
+    template: 'template/module/git-ignore/gitignore-web.phtml'
+    filename: '.gitignore'                       

@@ -1,0 +1,101 @@
+<?php
+namespace MyModule\Controller;
+
+use Zend\View\Model\JsonModel;
+use MyModule\Repository\MyRepositoryOneTrait;
+use MyModule\Repository\MyRepositoryTwoTrait;
+use MyModule\Repository\MyRepositoryThreeTrait;
+use Zend\Mvc\Controller\AbstractRestfulController;
+use MyModule\Repository\MyRepositoryOne;
+use MyModule\Repository\MyRepositoryTwo;
+use MyModule\Repository\MyRepositoryThree;
+
+/**
+ * PHP Version 5
+ *
+ * @category Controller
+ * @package MyModule/Controller
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class BasicDependenciesFactoryManyRest extends AbstractRestfulController
+{
+    use MyRepositoryOneTrait;
+
+    use MyRepositoryTwoTrait;
+
+    use MyRepositoryThreeTrait;
+
+    /**
+     * Constructor
+     *
+     * @param MyRepositoryOne   $myRepositoryOne   My Repository One
+     * @param MyRepositoryTwo   $myRepositoryTwo   My Repository Two
+     * @param MyRepositoryThree $myRepositoryThree My Repository Three
+     *
+     * @return BasicDependenciesFactoryManyRest
+     */
+    public function __construct(
+        MyRepositoryOne $myRepositoryOne,
+        MyRepositoryTwo $myRepositoryTwo,
+        MyRepositoryThree $myRepositoryThree
+    ) {
+        $this->myRepositoryOne = $myRepositoryOne;
+        $this->myRepositoryTwo = $myRepositoryTwo;
+        $this->myRepositoryThree = $myRepositoryThree;
+
+        return $this;
+    }
+    /**
+     * Get
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function get($id)
+    {
+        return new JsonModel([***REMOVED***);
+    }
+
+    /**
+     * Get List
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function getList()
+    {
+        return new JsonModel([***REMOVED***);
+    }
+
+    /**
+     * Update
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function update($id, $data)
+    {
+        return new JsonModel([
+          $id, $data
+        ***REMOVED***);
+    }
+
+    /**
+     * Delete
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function delete($id)
+    {
+        return new JsonModel([$id***REMOVED***);
+    }
+
+    /**
+     * Create
+     *
+     * @return \Zend\View\Model\JsonModel
+     */
+    public function create($data)
+    {
+        return new JsonModel($data);
+    }
+}

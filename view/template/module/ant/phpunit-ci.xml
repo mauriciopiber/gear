@@ -1,0 +1,5 @@
+<target name="phpunit-ci" description="Run unit tests with PHPUnit">
+    <exec executable="vendor/bin/phpunit">
+        <arg value="--configuration=${basedir}/test/phpunit-ci.xml"/>
+    </exec>
+</target>

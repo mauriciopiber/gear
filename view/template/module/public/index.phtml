@@ -2,31 +2,6 @@ error_reporting(E_ALL);
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors',1);
 
-class Env {
-
-    public static $dev = 'gear.dev';
-
-    public static function define() {
-        $environment = getenv('PHINX_ENVIRONMENT');
-
-        if (empty($environment)) {
-            define('PHINX_ENVIRONMENT', 'DEVELOPMENT');
-            return;
-        }
-
-        if (!in_array($environment, ['DEVELOPMENT', 'TESTING', 'STAGING', 'PRODUCTION'***REMOVED***)) {
-            throw new \Exception('Não é seguro iniciar o sistema com o enviroment definido incorretamente: '.$environment);
-        }
-
-        define('PHINX_ENVIRONMENT', $environment);
-        return;
-
-    }
-}
-
-
-Env::define();
-
 chdir(dirname(__DIR__));
 
 // Decline static file requests back to the PHP built-in webserver

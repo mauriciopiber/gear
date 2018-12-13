@@ -1,0 +1,4 @@
+src:
+  0:
+    name: PibernetworkService
+    type: Service

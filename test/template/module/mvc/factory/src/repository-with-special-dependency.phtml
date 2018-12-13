@@ -27,7 +27,7 @@ class MySrcWithSpecialDependencyFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new MySrcWithSpecialDependency(
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get('console'),
             $serviceLocator->get(Adapter::class)
         );

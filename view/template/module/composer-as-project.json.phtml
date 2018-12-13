@@ -7,15 +7,15 @@
 <?php echo $this->requireDev;?>
     },
     "autoload" : {
-        "psr-0" : {
-            "<?php echo $this->module;?>" : "src",
-            "<?php echo $this->module;?>Test" : "test/unit"
+        "psr-4" : {
+            "<?php echo $this->module;?>\\" : "src",
+            "<?php echo $this->module;?>\\Test\\" : "test/unit"
         }
     },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.pibernetwork.com"
+            "url" : "https://mirror.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***

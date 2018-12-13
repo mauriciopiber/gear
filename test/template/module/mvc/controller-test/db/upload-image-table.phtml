@@ -53,7 +53,7 @@ class MyTableTableControllerTest extends TestCase
         $this->appendUploadImage = $this->prophesize('GearImage\Controller\Plugin\ImageControllerPlugin');
         $this->controller->getPluginManager()->setService('appendUploadImagePlugin', $this->appendUploadImage->reveal());
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()
@@ -72,7 +72,13 @@ class MyTableTableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'MyTableTableController', 'Create');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'MyTableTableController',
+            'MyTableTable',
+            'Create'
+        );
 
         $this->routeMatch->setParam('action', 'create');
 
@@ -194,7 +200,13 @@ class MyTableTableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'MyTableTableController', 'Edit');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'MyTableTableController',
+            'MyTableTable',
+            'Edit'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\MyTableTable');
 
@@ -305,7 +317,13 @@ class MyTableTableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'MyTableTableController', 'List');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'MyTableTableController',
+            'MyTableTable',
+            'List'
+        );
 
         $this->myTableTableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
@@ -321,7 +339,13 @@ class MyTableTableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'MyTableTableController', 'View');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'MyTableTableController',
+            'MyTableTable',
+            'View'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\MyTableTable');
         //$this->entity->getIdMyTableTable()->willReturn(31)->shouldBeCalled();
@@ -377,7 +401,13 @@ class MyTableTableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'MyTableTableController', 'Delete');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'MyTableTableController',
+            'MyTableTable',
+            'Delete'
+        );
 
         $this->myTableTableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 

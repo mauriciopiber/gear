@@ -1,0 +1,13 @@
+namespace <?php echo $this->namespace;?>;
+
+use Zend\View\Model\JsonModel;
+<?php echo $this->use;?>
+
+<?php echo $this->classDocs;?>
+class <?php echo $this->controllerName;?> extends <?php echo $this->extends;?><?php echo $this->implements;?>
+{
+<?php echo (!empty($this->attribute)) ? $this->attribute : '';?>
+<?php echo (!empty($this->attribute) && !empty($this->constructor)) ? PHP_EOL : '';?>
+<?php echo ($this->constructor) ? $this->constructor : '';?>
+<?php echo (empty($this->attribute) && empty($this->constructor)) ? PHP_EOL : '';?>
+}

@@ -1,49 +1,721 @@
 src:
-    - { db: SrcMvcBasic, type: Form, name: SrcMvcBasicForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasic\Form, template: form-filter }
-    - { db: SrcMvcBasicUploadImage, type: Form, name: SrcMvcBasicUploadImageForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicUnique, type: Form, name: SrcMvcBasicUniqueForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUnique\Form, template: form-filter }
-    - { db: SrcMvcBasicUniqueUploadImage, type: Form, name: SrcMvcBasicUniqueUploadImageForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicNullable, type: Form, name: SrcMvcBasicNullableForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicNullableUploadImage, type: Form, name: SrcMvcBasicNullableUploadImageForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicUniqueNullable, type: Form, name: SrcMvcBasicUniqueNullableForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicUniqueNullableUploadImage, type: Form, name: SrcMvcBasicUniqueNullableUploadImageForm, user: all, columns: {  }, service: factories, namespace: SrcMvcBasicUniqueNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrict, type: Form, name: SrcMvcBasicLowStrictForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrict\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictUploadImage, type: Form, name: SrcMvcBasicLowStrictUploadImageForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictUnique, type: Form, name: SrcMvcBasicLowStrictUniqueForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUnique\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictUniqueUploadImage, type: Form, name: SrcMvcBasicLowStrictUniqueUploadImageForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictNullable, type: Form, name: SrcMvcBasicLowStrictNullableForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictNullableUploadImage, type: Form, name: SrcMvcBasicLowStrictNullableUploadImageForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictUniqueNullable, type: Form, name: SrcMvcBasicLowStrictUniqueNullableForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicLowStrictUniqueNullableUploadImage, type: Form, name: SrcMvcBasicLowStrictUniqueNullableUploadImageForm, user: low-strict, columns: {  }, service: factories, namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicStrict, type: Form, name: SrcMvcBasicStrictForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrict\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictUploadImage, type: Form, name: SrcMvcBasicStrictUploadImageForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictUnique, type: Form, name: SrcMvcBasicStrictUniqueForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUnique\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictUniqueUploadImage, type: Form, name: SrcMvcBasicStrictUniqueUploadImageForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictNullable, type: Form, name: SrcMvcBasicStrictNullableForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictNullableUploadImage, type: Form, name: SrcMvcBasicStrictNullableUploadImageForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictUniqueNullable, type: Form, name: SrcMvcBasicStrictUniqueNullableForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcBasicStrictUniqueNullableUploadImage, type: Form, name: SrcMvcBasicStrictUniqueNullableUploadImageForm, user: strict, columns: {  }, service: factories, namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcComplete, type: Form, name: SrcMvcCompleteForm, user: all, columns: { column_text_html_complete: html, column_decimal_money_complete: money-pt-br, column_boolean_checkbox_complete: checkbox, column_int_checkbox_complete: checkbox, column_datetime_ptbr_complete: datetime-pt-br, column_date_ptbr_complete: date-pt-br, column_varchar_password_verify_complete: password-verify, column_varchar_upload_image_complete: upload-image, column_varchar_url_complete: url, column_varchar_unique_id_complete: unique-id, column_varchar_telephone_complete: telephone, column_varchar_email_complete: email }, service: factories, namespace: SrcMvcComplete\Form, template: form-filter }
-    - { db: SrcMvcCompleteUploadImage, type: Form, name: SrcMvcCompleteUploadImageForm, user: all, columns: { column_text_html_complete_upload_image: html, column_decimal_money_complete_upload_image: money-pt-br, column_boolean_checkbox_complete_upload_image: checkbox, column_int_checkbox_complete_upload_image: checkbox, column_datetime_ptbr_complete_upload_image: datetime-pt-br, column_date_ptbr_complete_upload_image: date-pt-br, column_varchar_password_verify_complete_upload_image: password-verify, column_varchar_upload_image_complete_upload_image: upload-image, column_varchar_url_complete_upload_image: url, column_varchar_unique_id_complete_upload_image: unique-id, column_varchar_telephone_complete_upload_image: telephone, column_varchar_email_complete_upload_image: email }, service: factories, namespace: SrcMvcCompleteUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteUnique, type: Form, name: SrcMvcCompleteUniqueForm, user: all, columns: { column_text_html_complete_unique: html, column_decimal_money_complete_unique: money-pt-br, column_boolean_checkbox_complete_unique: checkbox, column_int_checkbox_complete_unique: checkbox, column_datetime_ptbr_complete_unique: datetime-pt-br, column_date_ptbr_complete_unique: date-pt-br, column_varchar_password_verify_complete_unique: password-verify, column_varchar_upload_image_complete_unique: upload-image, column_varchar_url_complete_unique: url, column_varchar_unique_id_complete_unique: unique-id, column_varchar_telephone_complete_unique: telephone, column_varchar_email_complete_unique: email }, service: factories, namespace: SrcMvcCompleteUnique\Form, template: form-filter }
-    - { db: SrcMvcCompleteUniqueUploadImage, type: Form, name: SrcMvcCompleteUniqueUploadImageForm, user: all, columns: { column_text_html_complete_unique_upload_image: html, column_decimal_money_complete_unique_upload_image: money-pt-br, column_boolean_checkbox_complete_unique_upload_image: checkbox, column_int_checkbox_complete_unique_upload_image: checkbox, column_datetime_ptbr_complete_unique_upload_image: datetime-pt-br, column_date_ptbr_complete_unique_upload_image: date-pt-br, column_varchar_password_verify_complete_unique_upload_image: password-verify, column_varchar_upload_image_complete_unique_upload_image: upload-image, column_varchar_url_complete_unique_upload_image: url, column_varchar_unique_id_complete_unique_upload_image: unique-id, column_varchar_telephone_complete_unique_upload_image: telephone, column_varchar_email_complete_unique_upload_image: email }, service: factories, namespace: SrcMvcCompleteUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteNullable, type: Form, name: SrcMvcCompleteNullableForm, user: all, columns: { column_text_html_complete_nullable: html, column_decimal_money_complete_nullable: money-pt-br, column_boolean_checkbox_complete_nullable: checkbox, column_int_checkbox_complete_nullable: checkbox, column_datetime_ptbr_complete_nullable: datetime-pt-br, column_date_ptbr_complete_nullable: date-pt-br, column_varchar_password_verify_complete_nullable: password-verify, column_varchar_upload_image_complete_nullable: upload-image, column_varchar_url_complete_nullable: url, column_varchar_unique_id_complete_nullable: unique-id, column_varchar_telephone_complete_nullable: telephone, column_varchar_email_complete_nullable: email }, service: factories, namespace: SrcMvcCompleteNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteNullableUploadImage, type: Form, name: SrcMvcCompleteNullableUploadImageForm, user: all, columns: { column_text_html_complete_nullable_upload_image: html, column_decimal_money_complete_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_nullable_upload_image: checkbox, column_int_checkbox_complete_nullable_upload_image: checkbox, column_datetime_ptbr_complete_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_nullable_upload_image: password-verify, column_varchar_upload_image_complete_nullable_upload_image: upload-image, column_varchar_url_complete_nullable_upload_image: url, column_varchar_unique_id_complete_nullable_upload_image: unique-id, column_varchar_telephone_complete_nullable_upload_image: telephone, column_varchar_email_complete_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteUniqueNullable, type: Form, name: SrcMvcCompleteUniqueNullableForm, user: all, columns: { column_text_html_complete_unique_nullable: html, column_decimal_money_complete_unique_nullable: money-pt-br, column_boolean_checkbox_complete_unique_nullable: checkbox, column_int_checkbox_complete_unique_nullable: checkbox, column_datetime_ptbr_complete_unique_nullable: datetime-pt-br, column_date_ptbr_complete_unique_nullable: date-pt-br, column_varchar_password_verify_complete_unique_nullable: password-verify, column_varchar_upload_image_complete_unique_nullable: upload-image, column_varchar_url_complete_unique_nullable: url, column_varchar_unique_id_complete_unique_nullable: unique-id, column_varchar_telephone_complete_unique_nullable: telephone, column_varchar_email_complete_unique_nullable: email }, service: factories, namespace: SrcMvcCompleteUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteUniqueNullableUploadImage, type: Form, name: SrcMvcCompleteUniqueNullableUploadImageForm, user: all, columns: { column_text_html_complete_unique_nullable_upload_image: html, column_decimal_money_complete_unique_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_unique_nullable_upload_image: checkbox, column_int_checkbox_complete_unique_nullable_upload_image: checkbox, column_datetime_ptbr_complete_unique_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_unique_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_unique_nullable_upload_image: password-verify, column_varchar_upload_image_complete_unique_nullable_upload_image: upload-image, column_varchar_url_complete_unique_nullable_upload_image: url, column_varchar_unique_id_complete_unique_nullable_upload_image: unique-id, column_varchar_telephone_complete_unique_nullable_upload_image: telephone, column_varchar_email_complete_unique_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteUniqueNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrict, type: Form, name: SrcMvcCompleteLowStrictForm, user: low-strict, columns: { column_text_html_complete_low_strict: html, column_decimal_money_complete_low_strict: money-pt-br, column_boolean_checkbox_complete_low_strict: checkbox, column_int_checkbox_complete_low_strict: checkbox, column_datetime_ptbr_complete_low_strict: datetime-pt-br, column_date_ptbr_complete_low_strict: date-pt-br, column_varchar_password_verify_complete_low_strict: password-verify, column_varchar_upload_image_complete_low_strict: upload-image, column_varchar_url_complete_low_strict: url, column_varchar_unique_id_complete_low_strict: unique-id, column_varchar_telephone_complete_low_strict: telephone, column_varchar_email_complete_low_strict: email }, service: factories, namespace: SrcMvcCompleteLowStrict\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictUploadImage, type: Form, name: SrcMvcCompleteLowStrictUploadImageForm, user: low-strict, columns: { column_text_html_complete_low_strict_upload_image: html, column_decimal_money_complete_low_strict_upload_image: money-pt-br, column_boolean_checkbox_complete_low_strict_upload_image: checkbox, column_int_checkbox_complete_low_strict_upload_image: checkbox, column_datetime_ptbr_complete_low_strict_upload_image: datetime-pt-br, column_date_ptbr_complete_low_strict_upload_image: date-pt-br, column_varchar_password_verify_complete_low_strict_upload_image: password-verify, column_varchar_upload_image_complete_low_strict_upload_image: upload-image, column_varchar_url_complete_low_strict_upload_image: url, column_varchar_unique_id_complete_low_strict_upload_image: unique-id, column_varchar_telephone_complete_low_strict_upload_image: telephone, column_varchar_email_complete_low_strict_upload_image: email }, service: factories, namespace: SrcMvcCompleteLowStrictUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictUnique, type: Form, name: SrcMvcCompleteLowStrictUniqueForm, user: low-strict, columns: { column_text_html_complete_low_strict_unique: html, column_decimal_money_complete_low_strict_unique: money-pt-br, column_boolean_checkbox_complete_low_strict_unique: checkbox, column_int_checkbox_complete_low_strict_unique: checkbox, column_datetime_ptbr_complete_low_strict_unique: datetime-pt-br, column_date_ptbr_complete_low_strict_unique: date-pt-br, column_varchar_password_verify_complete_low_strict_unique: password-verify, column_varchar_upload_image_complete_low_strict_unique: upload-image, column_varchar_url_complete_low_strict_unique: url, column_varchar_unique_id_complete_low_strict_unique: unique-id, column_varchar_telephone_complete_low_strict_unique: telephone, column_varchar_email_complete_low_strict_unique: email }, service: factories, namespace: SrcMvcCompleteLowStrictUnique\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictUniqueUploadImage, type: Form, name: SrcMvcCompleteLowStrictUniqueUploadImageForm, user: low-strict, columns: { column_text_html_complete_low_strict_unique_upload_image: html, column_decimal_money_complete_low_strict_unique_upload_image: money-pt-br, column_boolean_checkbox_complete_low_strict_unique_upload_image: checkbox, column_int_checkbox_complete_low_strict_unique_upload_image: checkbox, column_datetime_ptbr_complete_low_strict_unique_upload_image: datetime-pt-br, column_date_ptbr_complete_low_strict_unique_upload_image: date-pt-br, column_varchar_password_verify_complete_low_strict_unique_upload_image: password-verify, column_varchar_upload_image_complete_low_strict_unique_upload_image: upload-image, column_varchar_url_complete_low_strict_unique_upload_image: url, column_varchar_unique_id_complete_low_strict_unique_upload_image: unique-id, column_varchar_telephone_complete_low_strict_unique_upload_image: telephone, column_varchar_email_complete_low_strict_unique_upload_image: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictNullable, type: Form, name: SrcMvcCompleteLowStrictNullableForm, user: low-strict, columns: { column_text_html_complete_low_strict_nullable: html, column_decimal_money_complete_low_strict_nullable: money-pt-br, column_boolean_checkbox_complete_low_strict_nullable: checkbox, column_int_checkbox_complete_low_strict_nullable: checkbox, column_datetime_ptbr_complete_low_strict_nullable: datetime-pt-br, column_date_ptbr_complete_low_strict_nullable: date-pt-br, column_varchar_password_verify_complete_low_strict_nullable: password-verify, column_varchar_upload_image_complete_low_strict_nullable: upload-image, column_varchar_url_complete_low_strict_nullable: url, column_varchar_unique_id_complete_low_strict_nullable: unique-id, column_varchar_telephone_complete_low_strict_nullable: telephone, column_varchar_email_complete_low_strict_nullable: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictNullableUploadImage, type: Form, name: SrcMvcCompleteLowStrictNullableUploadImageForm, user: low-strict, columns: { column_text_html_complete_low_strict_nullable_upload_image: html, column_decimal_money_complete_low_strict_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_low_strict_nullable_upload_image: checkbox, column_int_checkbox_complete_low_strict_nullable_upload_image: checkbox, column_datetime_ptbr_complete_low_strict_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_low_strict_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_low_strict_nullable_upload_image: password-verify, column_varchar_upload_image_complete_low_strict_nullable_upload_image: upload-image, column_varchar_url_complete_low_strict_nullable_upload_image: url, column_varchar_unique_id_complete_low_strict_nullable_upload_image: unique-id, column_varchar_telephone_complete_low_strict_nullable_upload_image: telephone, column_varchar_email_complete_low_strict_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteLowStrictNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictUniqueNullable, type: Form, name: SrcMvcCompleteLowStrictUniqueNullableForm, user: low-strict, columns: { column_text_html_complete_low_strict_unique_nullable: html, column_decimal_money_complete_low_strict_unique_nullable: money-pt-br, column_boolean_checkbox_complete_low_strict_unique_nullable: checkbox, column_int_checkbox_complete_low_strict_unique_nullable: checkbox, column_datetime_ptbr_complete_low_strict_unique_nullable: datetime-pt-br, column_date_ptbr_complete_low_strict_unique_nullable: date-pt-br, column_varchar_password_verify_complete_low_strict_unique_nullable: password-verify, column_varchar_upload_image_complete_low_strict_unique_nullable: upload-image, column_varchar_url_complete_low_strict_unique_nullable: url, column_varchar_unique_id_complete_low_strict_unique_nullable: unique-id, column_varchar_telephone_complete_low_strict_unique_nullable: telephone, column_varchar_email_complete_low_strict_unique_nullable: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteLowStrictUniqueNullableUploadImage, type: Form, name: SrcMvcCompleteLowStrictUniqueNullableUploadImageForm, user: low-strict, columns: { column_text_html_complete_low_strict_unique_nullable_upload_image: html, column_decimal_money_complete_low_strict_unique_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_low_strict_unique_nullable_upload_image: checkbox, column_int_checkbox_complete_low_strict_unique_nullable_upload_image: checkbox, column_datetime_ptbr_complete_low_strict_unique_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_low_strict_unique_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_low_strict_unique_nullable_upload_image: password-verify, column_varchar_upload_image_complete_low_strict_unique_nullable_upload_image: upload-image, column_varchar_url_complete_low_strict_unique_nullable_upload_image: url, column_varchar_unique_id_complete_low_strict_unique_nullable_upload_image: unique-id, column_varchar_telephone_complete_low_strict_unique_nullable_upload_image: telephone, column_varchar_email_complete_low_strict_unique_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrict, type: Form, name: SrcMvcCompleteStrictForm, user: strict, columns: { column_text_html_complete_strict: html, column_decimal_money_complete_strict: money-pt-br, column_boolean_checkbox_complete_strict: checkbox, column_int_checkbox_complete_strict: checkbox, column_datetime_ptbr_complete_strict: datetime-pt-br, column_date_ptbr_complete_strict: date-pt-br, column_varchar_password_verify_complete_strict: password-verify, column_varchar_upload_image_complete_strict: upload-image, column_varchar_url_complete_strict: url, column_varchar_unique_id_complete_strict: unique-id, column_varchar_telephone_complete_strict: telephone, column_varchar_email_complete_strict: email }, service: factories, namespace: SrcMvcCompleteStrict\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictUploadImage, type: Form, name: SrcMvcCompleteStrictUploadImageForm, user: strict, columns: { column_text_html_complete_strict_upload_image: html, column_decimal_money_complete_strict_upload_image: money-pt-br, column_boolean_checkbox_complete_strict_upload_image: checkbox, column_int_checkbox_complete_strict_upload_image: checkbox, column_datetime_ptbr_complete_strict_upload_image: datetime-pt-br, column_date_ptbr_complete_strict_upload_image: date-pt-br, column_varchar_password_verify_complete_strict_upload_image: password-verify, column_varchar_upload_image_complete_strict_upload_image: upload-image, column_varchar_url_complete_strict_upload_image: url, column_varchar_unique_id_complete_strict_upload_image: unique-id, column_varchar_telephone_complete_strict_upload_image: telephone, column_varchar_email_complete_strict_upload_image: email }, service: factories, namespace: SrcMvcCompleteStrictUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictUnique, type: Form, name: SrcMvcCompleteStrictUniqueForm, user: strict, columns: { column_text_html_complete_strict_unique: html, column_decimal_money_complete_strict_unique: money-pt-br, column_boolean_checkbox_complete_strict_unique: checkbox, column_int_checkbox_complete_strict_unique: checkbox, column_datetime_ptbr_complete_strict_unique: datetime-pt-br, column_date_ptbr_complete_strict_unique: date-pt-br, column_varchar_password_verify_complete_strict_unique: password-verify, column_varchar_upload_image_complete_strict_unique: upload-image, column_varchar_url_complete_strict_unique: url, column_varchar_unique_id_complete_strict_unique: unique-id, column_varchar_telephone_complete_strict_unique: telephone, column_varchar_email_complete_strict_unique: email }, service: factories, namespace: SrcMvcCompleteStrictUnique\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictUniqueUploadImage, type: Form, name: SrcMvcCompleteStrictUniqueUploadImageForm, user: strict, columns: { column_text_html_complete_strict_unique_upload_image: html, column_decimal_money_complete_strict_unique_upload_image: money-pt-br, column_boolean_checkbox_complete_strict_unique_upload_image: checkbox, column_int_checkbox_complete_strict_unique_upload_image: checkbox, column_datetime_ptbr_complete_strict_unique_upload_image: datetime-pt-br, column_date_ptbr_complete_strict_unique_upload_image: date-pt-br, column_varchar_password_verify_complete_strict_unique_upload_image: password-verify, column_varchar_upload_image_complete_strict_unique_upload_image: upload-image, column_varchar_url_complete_strict_unique_upload_image: url, column_varchar_unique_id_complete_strict_unique_upload_image: unique-id, column_varchar_telephone_complete_strict_unique_upload_image: telephone, column_varchar_email_complete_strict_unique_upload_image: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictNullable, type: Form, name: SrcMvcCompleteStrictNullableForm, user: strict, columns: { column_text_html_complete_strict_nullable: html, column_decimal_money_complete_strict_nullable: money-pt-br, column_boolean_checkbox_complete_strict_nullable: checkbox, column_int_checkbox_complete_strict_nullable: checkbox, column_datetime_ptbr_complete_strict_nullable: datetime-pt-br, column_date_ptbr_complete_strict_nullable: date-pt-br, column_varchar_password_verify_complete_strict_nullable: password-verify, column_varchar_upload_image_complete_strict_nullable: upload-image, column_varchar_url_complete_strict_nullable: url, column_varchar_unique_id_complete_strict_nullable: unique-id, column_varchar_telephone_complete_strict_nullable: telephone, column_varchar_email_complete_strict_nullable: email }, service: factories, namespace: SrcMvcCompleteStrictNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictNullableUploadImage, type: Form, name: SrcMvcCompleteStrictNullableUploadImageForm, user: strict, columns: { column_text_html_complete_strict_nullable_upload_image: html, column_decimal_money_complete_strict_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_strict_nullable_upload_image: checkbox, column_int_checkbox_complete_strict_nullable_upload_image: checkbox, column_datetime_ptbr_complete_strict_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_strict_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_strict_nullable_upload_image: password-verify, column_varchar_upload_image_complete_strict_nullable_upload_image: upload-image, column_varchar_url_complete_strict_nullable_upload_image: url, column_varchar_unique_id_complete_strict_nullable_upload_image: unique-id, column_varchar_telephone_complete_strict_nullable_upload_image: telephone, column_varchar_email_complete_strict_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteStrictNullableUploadImage\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictUniqueNullable, type: Form, name: SrcMvcCompleteStrictUniqueNullableForm, user: strict, columns: { column_text_html_complete_strict_unique_nullable: html, column_decimal_money_complete_strict_unique_nullable: money-pt-br, column_boolean_checkbox_complete_strict_unique_nullable: checkbox, column_int_checkbox_complete_strict_unique_nullable: checkbox, column_datetime_ptbr_complete_strict_unique_nullable: datetime-pt-br, column_date_ptbr_complete_strict_unique_nullable: date-pt-br, column_varchar_password_verify_complete_strict_unique_nullable: password-verify, column_varchar_upload_image_complete_strict_unique_nullable: upload-image, column_varchar_url_complete_strict_unique_nullable: url, column_varchar_unique_id_complete_strict_unique_nullable: unique-id, column_varchar_telephone_complete_strict_unique_nullable: telephone, column_varchar_email_complete_strict_unique_nullable: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullable\Form, template: form-filter }
-    - { db: SrcMvcCompleteStrictUniqueNullableUploadImage, type: Form, name: SrcMvcCompleteStrictUniqueNullableUploadImageForm, user: strict, columns: { column_text_html_complete_strict_unique_nullable_upload_image: html, column_decimal_money_complete_strict_unique_nullable_upload_image: money-pt-br, column_boolean_checkbox_complete_strict_unique_nullable_upload_image: checkbox, column_int_checkbox_complete_strict_unique_nullable_upload_image: checkbox, column_datetime_ptbr_complete_strict_unique_nullable_upload_image: datetime-pt-br, column_date_ptbr_complete_strict_unique_nullable_upload_image: date-pt-br, column_varchar_password_verify_complete_strict_unique_nullable_upload_image: password-verify, column_varchar_upload_image_complete_strict_unique_nullable_upload_image: upload-image, column_varchar_url_complete_strict_unique_nullable_upload_image: url, column_varchar_unique_id_complete_strict_unique_nullable_upload_image: unique-id, column_varchar_telephone_complete_strict_unique_nullable_upload_image: telephone, column_varchar_email_complete_strict_unique_nullable_upload_image: email }, service: factories, namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Form, template: form-filter }
+    -
+        name: SrcMvcBscForm
+        type: Form
+        db: SrcMvcBsc
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasic\Form
+        template: form-filter
+    -
+        name: SrcMvcBscUplForm
+        type: Form
+        db: SrcMvcBscUpl
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscUniForm
+        type: Form
+        db: SrcMvcBscUni
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcBscUniUplForm
+        type: Form
+        db: SrcMvcBscUniUpl
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscNulForm
+        type: Form
+        db: SrcMvcBscNul
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscNulUplForm
+        type: Form
+        db: SrcMvcBscNulUpl
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscUniNulForm
+        type: Form
+        db: SrcMvcBscUniNul
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscUniNulUplForm
+        type: Form
+        db: SrcMvcBscUniNulUpl
+        user: all
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicUniqueNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsForm
+        type: Form
+        db: SrcMvcBscLws
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrict\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsUplForm
+        type: Form
+        db: SrcMvcBscLwsUpl
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsUniForm
+        type: Form
+        db: SrcMvcBscLwsUni
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsUniUplForm
+        type: Form
+        db: SrcMvcBscLwsUniUpl
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsNulForm
+        type: Form
+        db: SrcMvcBscLwsNul
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsNulUplForm
+        type: Form
+        db: SrcMvcBscLwsNulUpl
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsUniNulForm
+        type: Form
+        db: SrcMvcBscLwsUniNul
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscLwsUniNulUplForm
+        type: Form
+        db: SrcMvcBscLwsUniNulUpl
+        user: low-strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicLowStrictUniqueNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrForm
+        type: Form
+        db: SrcMvcBscStr
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrict\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrUplForm
+        type: Form
+        db: SrcMvcBscStrUpl
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrUniForm
+        type: Form
+        db: SrcMvcBscStrUni
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrUniUplForm
+        type: Form
+        db: SrcMvcBscStrUniUpl
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrNulForm
+        type: Form
+        db: SrcMvcBscStrNul
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrNulUplForm
+        type: Form
+        db: SrcMvcBscStrNulUpl
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrUniNulForm
+        type: Form
+        db: SrcMvcBscStrUniNul
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcBscStrUniNulUplForm
+        type: Form
+        db: SrcMvcBscStrUniNulUpl
+        user: strict
+        columns: {  }
+        service: factories
+        namespace: SrcMvcBasicStrictUniqueNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpForm
+        type: Form
+        db: SrcMvcCmp
+        user: all
+        columns:
+            clm_txt_htl_cmp: html
+            clm_dec_mny_cmp: money-pt-br
+            clm_boo_chb_cmp: checkbox
+            clm_int_chb_cmp: checkbox
+            clm_dtt_pt_cmp: datetime-pt-br
+            clm_dat_pt_cmp: date-pt-br
+            clm_vrc_pas_ver_cmp: password-verify
+            clm_vrc_upl_img_cmp: upload-image
+            clm_vrc_url_cmp: url
+            clm_vrc_uni_id_cmp: unique-id
+            clm_vrc_tel_cmp: telephone
+            clm_vrc_eml_cmp: email
+        service: factories
+        namespace: SrcMvcComplete\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpUplForm
+        type: Form
+        db: SrcMvcCmpUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_upl: html
+            clm_dec_mny_cmp_upl: money-pt-br
+            clm_boo_chb_cmp_upl: checkbox
+            clm_int_chb_cmp_upl: checkbox
+            clm_dtt_pt_cmp_upl: datetime-pt-br
+            clm_dat_pt_cmp_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_upl: password-verify
+            clm_vrc_upl_img_cmp_upl: upload-image
+            clm_vrc_url_cmp_upl: url
+            clm_vrc_uni_id_cmp_upl: unique-id
+            clm_vrc_tel_cmp_upl: telephone
+            clm_vrc_eml_cmp_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpUniForm
+        type: Form
+        db: SrcMvcCmpUni
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni: html
+            clm_dec_mny_cmp_uni: money-pt-br
+            clm_boo_chb_cmp_uni: checkbox
+            clm_int_chb_cmp_uni: checkbox
+            clm_dtt_pt_cmp_uni: datetime-pt-br
+            clm_dat_pt_cmp_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_uni: password-verify
+            clm_vrc_upl_img_cmp_uni: upload-image
+            clm_vrc_url_cmp_uni: url
+            clm_vrc_uni_id_cmp_uni: unique-id
+            clm_vrc_tel_cmp_uni: telephone
+            clm_vrc_eml_cmp_uni: email
+        service: factories
+        namespace: SrcMvcCompleteUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpUniUplForm
+        type: Form
+        db: SrcMvcCmpUniUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_upl: html
+            clm_dec_mny_cmp_uni_upl: money-pt-br
+            clm_boo_chb_cmp_uni_upl: checkbox
+            clm_int_chb_cmp_uni_upl: checkbox
+            clm_dtt_pt_cmp_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_upl: upload-image
+            clm_vrc_url_cmp_uni_upl: url
+            clm_vrc_uni_id_cmp_uni_upl: unique-id
+            clm_vrc_tel_cmp_uni_upl: telephone
+            clm_vrc_eml_cmp_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpNulForm
+        type: Form
+        db: SrcMvcCmpNul
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul: html
+            clm_dec_mny_cmp_nul: money-pt-br
+            clm_boo_chb_cmp_nul: checkbox
+            clm_int_chb_cmp_nul: checkbox
+            clm_dtt_pt_cmp_nul: datetime-pt-br
+            clm_dat_pt_cmp_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_nul: password-verify
+            clm_vrc_upl_img_cmp_nul: upload-image
+            clm_vrc_url_cmp_nul: url
+            clm_vrc_uni_id_cmp_nul: unique-id
+            clm_vrc_tel_cmp_nul: telephone
+            clm_vrc_eml_cmp_nul: email
+        service: factories
+        namespace: SrcMvcCompleteNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpNulUplForm
+        type: Form
+        db: SrcMvcCmpNulUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_nul_upl: html
+            clm_dec_mny_cmp_nul_upl: money-pt-br
+            clm_boo_chb_cmp_nul_upl: checkbox
+            clm_int_chb_cmp_nul_upl: checkbox
+            clm_dtt_pt_cmp_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_nul_upl: upload-image
+            clm_vrc_url_cmp_nul_upl: url
+            clm_vrc_uni_id_cmp_nul_upl: unique-id
+            clm_vrc_tel_cmp_nul_upl: telephone
+            clm_vrc_eml_cmp_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpUniNulForm
+        type: Form
+        db: SrcMvcCmpUniNul
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul: html
+            clm_dec_mny_cmp_uni_nul: money-pt-br
+            clm_boo_chb_cmp_uni_nul: checkbox
+            clm_int_chb_cmp_uni_nul: checkbox
+            clm_dtt_pt_cmp_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_uni_nul: upload-image
+            clm_vrc_url_cmp_uni_nul: url
+            clm_vrc_uni_id_cmp_uni_nul: unique-id
+            clm_vrc_tel_cmp_uni_nul: telephone
+            clm_vrc_eml_cmp_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpUniNulUplForm
+        type: Form
+        db: SrcMvcCmpUniNulUpl
+        user: all
+        columns:
+            clm_txt_htl_cmp_uni_nul_upl: html
+            clm_dec_mny_cmp_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_uni_nul_upl: checkbox
+            clm_int_chb_cmp_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteUniqueNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsForm
+        type: Form
+        db: SrcMvcCmpLws
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws: html
+            clm_dec_mny_cmp_lws: money-pt-br
+            clm_boo_chb_cmp_lws: checkbox
+            clm_int_chb_cmp_lws: checkbox
+            clm_dtt_pt_cmp_lws: datetime-pt-br
+            clm_dat_pt_cmp_lws: date-pt-br
+            clm_vrc_pas_ver_cmp_lws: password-verify
+            clm_vrc_upl_img_cmp_lws: upload-image
+            clm_vrc_url_cmp_lws: url
+            clm_vrc_uni_id_cmp_lws: unique-id
+            clm_vrc_tel_cmp_lws: telephone
+            clm_vrc_eml_cmp_lws: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrict\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsUplForm
+        type: Form
+        db: SrcMvcCmpLwsUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_upl: html
+            clm_dec_mny_cmp_lws_upl: money-pt-br
+            clm_boo_chb_cmp_lws_upl: checkbox
+            clm_int_chb_cmp_lws_upl: checkbox
+            clm_dtt_pt_cmp_lws_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_upl: upload-image
+            clm_vrc_url_cmp_lws_upl: url
+            clm_vrc_uni_id_cmp_lws_upl: unique-id
+            clm_vrc_tel_cmp_lws_upl: telephone
+            clm_vrc_eml_cmp_lws_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsUniForm
+        type: Form
+        db: SrcMvcCmpLwsUni
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni: html
+            clm_dec_mny_cmp_lws_uni: money-pt-br
+            clm_boo_chb_cmp_lws_uni: checkbox
+            clm_int_chb_cmp_lws_uni: checkbox
+            clm_dtt_pt_cmp_lws_uni: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni: password-verify
+            clm_vrc_upl_img_cmp_lws_uni: upload-image
+            clm_vrc_url_cmp_lws_uni: url
+            clm_vrc_uni_id_cmp_lws_uni: unique-id
+            clm_vrc_tel_cmp_lws_uni: telephone
+            clm_vrc_eml_cmp_lws_uni: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsUniUplForm
+        type: Form
+        db: SrcMvcCmpLwsUniUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_upl: html
+            clm_dec_mny_cmp_lws_uni_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_upl: checkbox
+            clm_int_chb_cmp_lws_uni_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsNulForm
+        type: Form
+        db: SrcMvcCmpLwsNul
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul: html
+            clm_dec_mny_cmp_lws_nul: money-pt-br
+            clm_boo_chb_cmp_lws_nul: checkbox
+            clm_int_chb_cmp_lws_nul: checkbox
+            clm_dtt_pt_cmp_lws_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_nul: upload-image
+            clm_vrc_url_cmp_lws_nul: url
+            clm_vrc_uni_id_cmp_lws_nul: unique-id
+            clm_vrc_tel_cmp_lws_nul: telephone
+            clm_vrc_eml_cmp_lws_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsNulUplForm
+        type: Form
+        db: SrcMvcCmpLwsNulUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_nul_upl: html
+            clm_dec_mny_cmp_lws_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_nul_upl: checkbox
+            clm_int_chb_cmp_lws_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsUniNulForm
+        type: Form
+        db: SrcMvcCmpLwsUniNul
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul: html
+            clm_dec_mny_cmp_lws_uni_nul: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul: checkbox
+            clm_int_chb_cmp_lws_uni_nul: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul: upload-image
+            clm_vrc_url_cmp_lws_uni_nul: url
+            clm_vrc_uni_id_cmp_lws_uni_nul: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul: telephone
+            clm_vrc_eml_cmp_lws_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpLwsUniNulUplForm
+        type: Form
+        db: SrcMvcCmpLwsUniNulUpl
+        user: low-strict
+        columns:
+            clm_txt_htl_cmp_lws_uni_nul_upl: html
+            clm_dec_mny_cmp_lws_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_int_chb_cmp_lws_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_lws_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_lws_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_lws_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_lws_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_lws_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_lws_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_lws_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_lws_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteLowStrictUniqueNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrForm
+        type: Form
+        db: SrcMvcCmpStr
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str: html
+            clm_dec_mny_cmp_str: money-pt-br
+            clm_boo_chb_cmp_str: checkbox
+            clm_int_chb_cmp_str: checkbox
+            clm_dtt_pt_cmp_str: datetime-pt-br
+            clm_dat_pt_cmp_str: date-pt-br
+            clm_vrc_pas_ver_cmp_str: password-verify
+            clm_vrc_upl_img_cmp_str: upload-image
+            clm_vrc_url_cmp_str: url
+            clm_vrc_uni_id_cmp_str: unique-id
+            clm_vrc_tel_cmp_str: telephone
+            clm_vrc_eml_cmp_str: email
+        service: factories
+        namespace: SrcMvcCompleteStrict\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrUplForm
+        type: Form
+        db: SrcMvcCmpStrUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_upl: html
+            clm_dec_mny_cmp_str_upl: money-pt-br
+            clm_boo_chb_cmp_str_upl: checkbox
+            clm_int_chb_cmp_str_upl: checkbox
+            clm_dtt_pt_cmp_str_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_upl: password-verify
+            clm_vrc_upl_img_cmp_str_upl: upload-image
+            clm_vrc_url_cmp_str_upl: url
+            clm_vrc_uni_id_cmp_str_upl: unique-id
+            clm_vrc_tel_cmp_str_upl: telephone
+            clm_vrc_eml_cmp_str_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrUniForm
+        type: Form
+        db: SrcMvcCmpStrUni
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni: html
+            clm_dec_mny_cmp_str_uni: money-pt-br
+            clm_boo_chb_cmp_str_uni: checkbox
+            clm_int_chb_cmp_str_uni: checkbox
+            clm_dtt_pt_cmp_str_uni: datetime-pt-br
+            clm_dat_pt_cmp_str_uni: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni: password-verify
+            clm_vrc_upl_img_cmp_str_uni: upload-image
+            clm_vrc_url_cmp_str_uni: url
+            clm_vrc_uni_id_cmp_str_uni: unique-id
+            clm_vrc_tel_cmp_str_uni: telephone
+            clm_vrc_eml_cmp_str_uni: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUnique\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrUniUplForm
+        type: Form
+        db: SrcMvcCmpStrUniUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_upl: html
+            clm_dec_mny_cmp_str_uni_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_upl: checkbox
+            clm_int_chb_cmp_str_uni_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_upl: upload-image
+            clm_vrc_url_cmp_str_uni_upl: url
+            clm_vrc_uni_id_cmp_str_uni_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_upl: telephone
+            clm_vrc_eml_cmp_str_uni_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrNulForm
+        type: Form
+        db: SrcMvcCmpStrNul
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul: html
+            clm_dec_mny_cmp_str_nul: money-pt-br
+            clm_boo_chb_cmp_str_nul: checkbox
+            clm_int_chb_cmp_str_nul: checkbox
+            clm_dtt_pt_cmp_str_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul: password-verify
+            clm_vrc_upl_img_cmp_str_nul: upload-image
+            clm_vrc_url_cmp_str_nul: url
+            clm_vrc_uni_id_cmp_str_nul: unique-id
+            clm_vrc_tel_cmp_str_nul: telephone
+            clm_vrc_eml_cmp_str_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrNulUplForm
+        type: Form
+        db: SrcMvcCmpStrNulUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_nul_upl: html
+            clm_dec_mny_cmp_str_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_nul_upl: checkbox
+            clm_int_chb_cmp_str_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_nul_upl: upload-image
+            clm_vrc_url_cmp_str_nul_upl: url
+            clm_vrc_uni_id_cmp_str_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_nul_upl: telephone
+            clm_vrc_eml_cmp_str_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictNullableUploadImage\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrUniNulForm
+        type: Form
+        db: SrcMvcCmpStrUniNul
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul: html
+            clm_dec_mny_cmp_str_uni_nul: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul: checkbox
+            clm_int_chb_cmp_str_uni_nul: checkbox
+            clm_dtt_pt_cmp_str_uni_nul: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul: upload-image
+            clm_vrc_url_cmp_str_uni_nul: url
+            clm_vrc_uni_id_cmp_str_uni_nul: unique-id
+            clm_vrc_tel_cmp_str_uni_nul: telephone
+            clm_vrc_eml_cmp_str_uni_nul: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullable\Form
+        template: form-filter
+    -
+        name: SrcMvcCmpStrUniNulUplForm
+        type: Form
+        db: SrcMvcCmpStrUniNulUpl
+        user: strict
+        columns:
+            clm_txt_htl_cmp_str_uni_nul_upl: html
+            clm_dec_mny_cmp_str_uni_nul_upl: money-pt-br
+            clm_boo_chb_cmp_str_uni_nul_upl: checkbox
+            clm_int_chb_cmp_str_uni_nul_upl: checkbox
+            clm_dtt_pt_cmp_str_uni_nul_upl: datetime-pt-br
+            clm_dat_pt_cmp_str_uni_nul_upl: date-pt-br
+            clm_vrc_pas_ver_cmp_str_uni_nul_upl: password-verify
+            clm_vrc_upl_img_cmp_str_uni_nul_upl: upload-image
+            clm_vrc_url_cmp_str_uni_nul_upl: url
+            clm_vrc_uni_id_cmp_str_uni_nul_upl: unique-id
+            clm_vrc_tel_cmp_str_uni_nul_upl: telephone
+            clm_vrc_eml_cmp_str_uni_nul_upl: email
+        service: factories
+        namespace: SrcMvcCompleteStrictUniqueNullableUploadImage\Form
+        template: form-filter

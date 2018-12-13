@@ -87,7 +87,7 @@ class TableControllerTest extends TestCase
         $this->controller->setTableService($this->tableService->reveal());
         $this->controller->setTableSearchForm($this->tableSearchForm->reveal());
 
-        $this->schema = (new \MyModule\Module())->getLocation().'/../../schema/module.json';
+        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown()
@@ -106,7 +106,13 @@ class TableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Create');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'TableController',
+            'Controller',
+            'Create'
+        );
 
         $this->routeMatch->setParam('action', 'create');
 
@@ -233,7 +239,13 @@ class TableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Edit');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'TableController',
+            'Controller',
+            'Edit'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\Table');
 
@@ -351,7 +363,13 @@ class TableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'List');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'TableController',
+            'Controller',
+            'List'
+        );
 
         $this->tableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
@@ -367,7 +385,13 @@ class TableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'View');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'TableController',
+            'Controller',
+            'View'
+        );
 
         $this->entity = $this->prophesize('MyModule\Entity\Table');
         //$this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
@@ -423,7 +447,13 @@ class TableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl($this->schema, 'MyModule', 'TableController', 'Delete');
+        $this->assertAcl(
+            $this->schema,
+            'MyModule',
+            'TableController',
+            'Controller',
+            'Delete'
+        );
 
         $this->tableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 

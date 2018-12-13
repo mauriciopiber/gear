@@ -1340,6 +1340,331 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ColumnManager",
+                "type": "ValueObject",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Column",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "DbService",
+                "type": "Factory",
+                "dependency": [
+                    {
+                        "class": "Column\\ColumnService"
+                    },
+                    {
+                        "class": "Table\\TableService"
+                    },
+                    {
+                        "class": "\\GearJson\\Action\\ActionService"
+                    },
+                    {
+                        "class": "\\GearJson\\Db\\DbService"
+                    },
+                    {
+                        "class": "Mvc\\Spec\\Feature\\Feature"
+                    },
+                    {
+                        "class": "Mvc\\Spec\\Step\\Step"
+                    },
+                    {
+                        "class": "Mvc\\Entity\\EntityService"
+                    },
+                    {
+                        "class": "Mvc\\Search\\SearchService"
+                    },
+                    {
+                        "class": "Mvc\\Fixture\\FixtureService"
+                    },
+                    {
+                        "class": "Mvc\\Filter\\FilterService"
+                    },
+                    {
+                        "class": "Mvc\\Form\\FormService"
+                    },
+                    {
+                        "class": "Mvc\\Controller\\ControllerService"
+                    },
+                    {
+                        "class": "Mvc\\Controller\\ControllerTestService"
+                    },
+                    {
+                        "class": "Mvc\\Config\\ConfigService"
+                    },
+                    {
+                        "class": "Mvc\\LanguageService"
+                    },
+                    {
+                        "class": "Mvc\\ViewViewService"
+                    },
+                    {
+                        "class": "Mvc\\Repository\\RepositoryService"
+                    },
+                    {
+                        "class": "Mvc\\Service\\ServiceService"
+                    },
+                    {
+                        "class": "Module\\BasicModuleStructure"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Db",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTable",
+                "type": "Entity",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableRepository",
+                "type": "Repository",
+                "dependency": {
+                    "doctrine.entitymanager.orm_default": "\\Doctrine\\ORM\\EntityManager",
+                    "0": "\\GearBase\\Repository\\QueryBuilder"
+                },
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableService",
+                "type": "Service",
+                "dependency": {
+                    "0": "Repository\\MyTableRepository",
+                    "memcached": "\\Zend\\Cache\\Storage\\Adapter\\Memcached",
+                    "1": {
+                        "class": "\\Zend\\Authentication\\AuthenticationService",
+                        "aliase": "zfcuser_auth_service",
+                        "ig_t": true
+                    }
+                },
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableForm",
+                "type": "Form",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": "form-filter",
+                "implements": null
+            },
+            {
+                "name": "MyTableFilter",
+                "type": "Filter",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "MyTableSearchForm",
+                "type": "SearchForm",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "factories",
+                "template": "search-form",
+                "implements": null
+            },
+            {
+                "name": "MyTableFixture",
+                "type": "Fixture",
+                "dependency": null,
+                "db": "MyTable",
+                "columns": null,
+                "user": "all",
+                "namespace": null,
+                "extends": null,
+                "abstract": null,
+                "service": "invokables",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ActionService",
+                "type": "Factory",
+                "dependency": [
+                    "Mvc\\Spec\\Feature\\Feature",
+                    "GearJson\\Action\\ActionService",
+                    "Gear\\Mvc\\Config\\ConfigService",
+                    "Gear\\Mvc\\Config\\RouterManager",
+                    "Gear\\Mvc\\Config\\ConsoleRouterManager",
+                    "Gear\\Mvc\\Config\\NavigationManager",
+                    "Gear\\Mvc\\View\\ViewService",
+                    "Gear\\Mvc\\Controller\\ControllerService",
+                    "Gear\\Mvc\\ConsoleController\\ConsoleController",
+                    "Gear\\Mvc\\View\\App\\AppControllerService",
+                    "Gear\\Mvc\\Spec\\Feature\\Feature",
+                    "Gear\\Mvc\\Spec\\Page\\Page",
+                    "Gear\\Mvc\\Spec\\Step\\Step",
+                    "Gear\\Module\\BasicModuleStructure",
+                    "GearBase\\Util\\String\\StringService"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Action",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ControllerService",
+                "type": "Factory",
+                "dependency": [
+                    "\\GearBase\\Util\\String\\StringService",
+                    "\\GearJson\\Controller\\ControllerService",
+                    "Table\\TableService",
+                    "Module\\BasicModuleStructure",
+                    "Mvc\\Controller\\ControllerService",
+                    "Mvc\\ConsoleController\\ConsoleController",
+                    "Mvc\\ConsoleController\\ConsoleControllerTest",
+                    "Mvc\\Config\\ConfigService",
+                    "Mvc\\View\\ViewService",
+                    "Mvc\\LanguageService",
+                    "Mvc\\Config\\ControllerManager"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Constructor\\Controller",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ComposerService",
+                "type": "Factory",
+                "dependency": [
+                    {
+                        "class": "Gear\\Module\\BasicModuleStructure"
+                    },
+                    {
+                        "class": "Gear\\Edge\\ComposerEdge"
+                    },
+                    {
+                        "class": "Gear\\Creator\\FileCreator"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Module",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ApiControllerService",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Controller\\Api",
+                "extends": "Mvc\\Controller\\AbstractControllerService",
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "ApiControllerTestService",
+                "type": "Service",
+                "dependency": null,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Mvc\\Controller\\Api",
+                "extends": "Mvc\\Controller\\AbstractControllerTestService",
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
+            },
+            {
+                "name": "DockerService",
+                "type": "Service",
+                "dependency": [
+                    {
+                        "class": "\\GearBase\\Util\\String\\StringService",
+                        "aliase": "GearBase\\Util\\String"
+                    },
+                    {
+                        "class": "Creator\\FileCreator\\FileCreator"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Docker",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
@@ -1800,10 +2125,65 @@
                 "extends": null,
                 "db": null,
                 "columns": null
+            },
+            {
+                "name": "MyTableController",
+                "namespace": null,
+                "type": "Action",
+                "service": "factories",
+                "dependency": [
+                    "Form\\MyTableForm",
+                    "Form\\Search\\MyTableSearchForm",
+                    "Service\\MyTableService"
+                ***REMOVED***,
+                "implements": null,
+                "actions": [
+                    {
+                        "name": "Create",
+                        "role": "admin",
+                        "route": "create",
+                        "template": null
+                    },
+                    {
+                        "name": "Edit",
+                        "role": "admin",
+                        "route": "edit",
+                        "template": null
+                    },
+                    {
+                        "name": "List",
+                        "role": "admin",
+                        "route": "list",
+                        "template": null
+                    },
+                    {
+                        "name": "Delete",
+                        "role": "admin",
+                        "route": "delete",
+                        "template": null
+                    },
+                    {
+                        "name": "View",
+                        "role": "admin",
+                        "route": "view",
+                        "template": null
+                    }
+                ***REMOVED***,
+                "extends": null,
+                "db": null,
+                "columns": null,
+                "user": null
             }
         ***REMOVED***,
         "db": [
-
+            {
+                "table": "MyTable",
+                "columns": null,
+                "role": "admin",
+                "user": "all",
+                "service": "factories",
+                "namespace": null
+            }
         ***REMOVED***
     }
 }

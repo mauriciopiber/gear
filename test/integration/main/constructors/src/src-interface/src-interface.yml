@@ -1,31 +1,26 @@
-# Gear Test [6.1***REMOVED*** #
-modules: MyModule
-
 src:
-  0: 
-    type: Interface
-    name: CreateInterface
-  1: 
-    type: Interface
-    name: CreateInterfaceWithNamespace
-    namespace: InterfacesNamespace  
-  2:
-    name: InterfaceExtends
-    type: Interface
-    extends: Interfaces\CreateInterface
-  3:
-    name: InterfaceNamespaceExtends
-    type: Interface
-    namespace: InterfacesNamespace
-    extends: InterfacesNamespace\CreateInterfaceWithNamespace
-  4:
-    name: DependencyInterface
-    type: Interface
-    dependency: Repository\SrcRepository
-  5:
-    name: DependenciesInterface
-    type: Interface
-    dependency: Repository\SrcRepository,MyRepositoryNamespace\SrcRepositoryNamespace
-          
-    
-    
+    - { name: InterfaceOne, type: Interface }
+    - { name: InterfaceTwo, type: Interface }
+    - { name: InterfaceNamespaceOne, type: Interface, namespace: InterfaceOneNamespace }
+    - { name: InterfaceNamespaceTwo, type: Interface, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: InterfaceExtendsOne, type: Interface, extends: Interfaces\InterfaceOne }
+    - { name: InterfaceExtendsTwo, type: Interface, extends: Interfaces\InterfaceTwo }
+    - { name: InterfaceDependencyOne, type: Interface }
+    - { name: InterfaceDependencyTwo, type: Interface }
+    - { name: InterfaceDependencyManyOne, type: Interface }
+    - { name: InterfaceDependencyManyTwo, type: Interface }
+    - { name: InterfaceFullOne, type: Interface, extends: Interfaces\InterfaceOne, namespace: InterfaceOneNamespace }
+    - { name: InterfaceFullTwo, type: Interface, extends: Interfaces\InterfaceTwo, namespace: InterfaceOneNamespace\InterfaceTwoNamespace }
+    - { name: RepositoryBaseInvokablesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: RepositoryBaseInvokablesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: RepositoryBaseFactoriesOne, type: Repository, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: RepositoryBaseFactoriesTwo, type: Repository, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
+    - { name: ServiceBaseInvokablesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables }
+    - { name: ServiceBaseInvokablesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables }
+    - { name: ServiceBaseFactoriesOne, type: Service, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories }
+    - { name: ServiceBaseFactoriesTwo, type: Service, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories }
+controller:
+    - { name: ConsoleBaseInvokablesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: invokables, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseInvokablesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: invokables, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseFactoriesOne, type: Console, implements: [Interfaces\InterfaceOne***REMOVED***, service: factories, actions: [{ name: Index, role: guest }***REMOVED*** }
+    - { name: ConsoleBaseFactoriesTwo, type: Console, implements: [Interfaces\InterfaceTwo***REMOVED***, service: factories, actions: [{ name: One, role: guest }, { name: Two, role: guest }***REMOVED*** }

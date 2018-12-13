@@ -1,27 +1,13 @@
 require: 
-  doctrine/doctrine-module: "0.8.*"
-  doctrine/doctrine-orm-module: "0.8.*"
-  mauriciopiber/gear-base: "~0.2 || ~1.0"
-  robmorgan/phinx: "~0.6"
-  php: "^5.6 || ~7.1"
-  zendframework/zendframework: "^2.5.0"
-  zendframework/zend-mvc: "~2.6.0"
+  doctrine/doctrine-module: "^0.8"
+  doctrine/doctrine-orm-module: "^0.8"
+  zendframework/zendframework: "^2.5"
+  zendframework/zend-mvc: "^2.6"
   
-require-dev: 
-  sebastian/phpcpd: "~2.0"
-  phploc/phploc: "~2.0"
-  phpunit/phpunit: "~5.0"  
-  codeception/codeception: "~2.2"
-  squizlabs/php_codesniffer: "~2.0"
-  phpmd/phpmd: "~2.3"
-  jakub-onderka/php-parallel-lint: "~0.9"
-  pdepend/pdepend: "~2.0"
-  mauriciopiber/gear-json: "~0.2 || ~1.0"  
-  mauriciopiber/gear: "~0.2 || ~1.0"
-  mauriciopiber/gear-deploy: "~0.2 || ~1.0"
-  mauriciopiber/gear-jenkins: "~0.2 || ~1.0"
-  mauriciopiber/gear-version: "~0.2 || ~1.0"
-  johnkary/phpunit-speedtrap: "^1.0"
-  lox/xhprof: 'dev-master'
-  mauriciopiber/test-listener-xhprof : '^1.0.0'
-  
+require-dev:
+  mauriciopiber/gear: "^0.2 || ^1.0" 
+  mauriciopiber/gear-base: "^0.2 || ^1.0"
+  mauriciopiber/gear-json: "^0.2 || ^1.0"  
+  mauriciopiber/gear-deploy: "^0.2 || ^1.0"
+  mauriciopiber/gear-jenkins: "^0.2 || ^1.0"
+  mauriciopiber/gear-version: "^0.2 || ^1.0"

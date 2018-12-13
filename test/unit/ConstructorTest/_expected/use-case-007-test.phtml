@@ -1,0 +1,40 @@
+<?php
+namespace CatalogTest;
+
+use PHPUnit\Framework\TestCase;
+use Catalog\ProductTrait;
+
+class ProductTest extends TestCase
+{
+    use ProductTrait;
+
+    public function testSetProduct()
+    {
+        $mockProduct = $this->getMockSingleClass('Catalog\Product');
+        $this->setProduct($mockProduct);
+        $this->assertEquals($mockProduct, $this->getProduct());
+    }
+
+    public function testGetProduct()
+    {
+        $this->assertInstanceOf(
+            'Catalog\Product',
+            $this->getProduct()
+        );
+    }
+
+    public function testGetCategory()
+    {
+        $this->assertInstanceOf(
+            'Catalog\Category',
+            $this->getProduct()->getCategory()
+        );
+    }
+
+    public function testSetCategory()
+    {
+        $mockProduct = $this->getMockSingleClass('Catalog\Category');
+        $this->getProduct()->setCategory($mockProduct);
+        $this->assertEquals($mockProduct, $this->getProduct()->getCategory());
+    }
+}

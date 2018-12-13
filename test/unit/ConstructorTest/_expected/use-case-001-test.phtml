@@ -1,0 +1,25 @@
+<?php
+namespace ModuleUnitTest\FreeTest\MyClassTest;
+
+use PHPUnit\Framework\TestCase;
+use ModuleUnit\Free\MyClass\UnitSrcNameTrait;
+
+class UnitSrcNameTest extends TestCase
+{
+    use UnitSrcNameTrait;
+
+    public function testSetUnitSrcName()
+    {
+        $mockUnitSrcName = $this->getMockSingleClass('ModuleUnit\Free\MyClass\UnitSrcName');
+        $this->setUnitSrcName($mockUnitSrcName);
+        $this->assertEquals($mockUnitSrcName, $this->getUnitSrcName());
+    }
+
+    public function testGetUnitSrcName()
+    {
+        $this->assertInstanceOf(
+            'ModuleUnit\Free\MyClass\UnitSrcName',
+            $this->getUnitSrcName()
+        );
+    }
+}

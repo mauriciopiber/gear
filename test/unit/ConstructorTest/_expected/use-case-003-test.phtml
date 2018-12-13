@@ -1,0 +1,25 @@
+<?php
+namespace NoExtendsTest\TryWithoutExtendsTest;
+
+use PHPUnit\Framework\TestCase;
+use NoExtends\TryWithoutExtends\ClassWithoutExtendsTrait;
+
+class ClassWithoutExtendsTest extends TestCase
+{
+    use ClassWithoutExtendsTrait;
+
+    public function testSetClassWithoutExtends()
+    {
+        $mockClassWithoutExtends = $this->getMockSingleClass('NoExtends\TryWithoutExtends\ClassWithoutExtends');
+        $this->setClassWithoutExtends($mockClassWithoutExtends);
+        $this->assertEquals($mockClassWithoutExtends, $this->getClassWithoutExtends());
+    }
+
+    public function testGetClassWithoutExtends()
+    {
+        $this->assertInstanceOf(
+            'NoExtends\TryWithoutExtends\ClassWithoutExtends',
+            $this->getClassWithoutExtends()
+        );
+    }
+}

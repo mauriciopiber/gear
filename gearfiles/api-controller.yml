@@ -1,0 +1,50 @@
+
+# src:
+#   0:
+#     name: ApiControllerService
+#     type: Service
+#     namespace: Mvc\Controller\Api
+#     service: factories
+#     extends: Mvc\Controller\AbstractControllerService
+#   1:
+#     name: ApiControllerTestService
+#     type: Service
+#     namespace: Mvc\Controller\Api
+#     service: factories
+#     extends: Mvc\Controller\AbstractControllerTestService
+controller:
+  0:
+    name: ExerciseController
+    namespace: Exercise\Controller
+    type: Rest
+    actions:
+      0:
+        name: getList
+      1:
+        name: get
+      2:
+        name: create
+      3:
+        name: update
+      4:
+        name: delete
+    dependency:
+      0: Exercise\Service\ExerciseService
+src:
+  0:
+    name: ExerciseService
+    namespace: Exercise\Service
+    service: factories
+    type: Service
+    dependency:
+      0: Exercise\Filter\ExerciseFilter
+      1: Exercise\Repository\ExerciseRepository
+  1:
+    name: ExerciseFilter
+    namespace: Exercise\Filter
+    type: Filter
+  2:
+    name: ExerciseRepository
+    service: factories
+    namespace: Exercise\Repository
+    type: Repository

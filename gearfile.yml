@@ -1,49 +1,10 @@
-module: Gear
+module: GearBase
 
 src:
- #   constructor1: 
- #       name: Constructor
- #       type: Service
- #       namespace: Creator\Component\Constructor
- #       service: factories
-#        dependency:
-#          0: 
-#            class: GearBase\Util\String\StringService
-#            aliase: GearBase\Util\String
-#    constructor2: 
-#        name: ConstructorDocs
-#        type: Service
-#        namespace: Creator\Component\Constructor
-#        service: factories
-#        dependency:
-#          0: 
-#            class: GearBase\Util\String\StringService
-#            aliase: GearBase\Util\String
-#  uploadimagetable:
-#    name: UploadImage
-#    type: Factory
-#    namespace: Table
-#    service: factories
-#    dependency:
-#      0:
-#        class: \GearBase\Util\String\StringService
-#        aliase: GearBase\Util\String
-  uploadimagetabletrait:
-    name: UploadImage
-    type: Trait
-    namespace: Table
-    service: factories
-    dependency:
-      0:
-        class: \GearBase\Util\String\StringService
-        aliase: GearBase\Util\String      
-
-#  0:
-#    name: TestService
-#    type: Service
-           
-#  2:
-#    name: InterfaceCode
-#    type: Service
-#    namespace: Creator\Code\InterfaceCode
-#    extends: Creator\Code\AbstractCode
+  0:
+    name: ModuleScriptService
+    type: Service
+    namespace: Module\Script
+    dependency: 
+        0: Module\Structure\ModuleStructure
+        1: Creator\FileCreator

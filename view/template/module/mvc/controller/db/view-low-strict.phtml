@@ -6,13 +6,13 @@
      */
     public function viewAction()
     {
-        $id<?= $this->data?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
+        $<?php echo $this->idVar;?> = $this->getEvent()->getRouteMatch()->getParam('id', null);
 
-        if (!$id<?= $this->data?>) {
+        if (!$<?php echo $this->idVar;?>) {
             return $this->redirect()->toRoute(self::LISTS);
         }
 
-        $data = $this->get<?= $this->data?>Service()->selectViewById($id<?= $this->data?>);
+        $data = $this->get<?= $this->data?>Service()->selectViewById($<?php echo $this->idVar;?>);
 <?php echo $this->imageQuery;?>
 
         if (!$data) {

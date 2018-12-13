@@ -1,0 +1,15 @@
+return [
+    'router_class' => 'Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
+    'routes' => [
+        '<?php echo $this->moduleUrl;?>' => [
+            'type' => 'literal',
+            'options' => [
+                'route' => '/<?php echo $this->moduleUrl;?>',
+                'defaults' => [
+                    'controller' => '<?php echo $this->module;?>\Controller\Index',
+                ***REMOVED***
+            ***REMOVED***,
+            'may_terminate' => true,
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***;

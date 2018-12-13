@@ -2,17 +2,17 @@ files:
     0: README.md
     1: mkdocs.yml
     2: docs/index.md
-    16: docs/CHANGELOG.md
-    3: phpdox.xml
-    4: phinx.yml
-    5: script/deploy-testing.sh
-    6: script/deploy-development.sh
-    7: codeception.yml
-    8: test/unit.suite.yml
-    9: test/phpmd.xml
-    10: test/phpcs.xml
-    11: test/phpunit-benchmark.xml
-    12: test/phpunit-coverage-benchmark.xml
-    13: Jenkinsfile
-    14: .gitignore
-    15: schema/module.json
+    3: docs/CHANGELOG.md
+    4: phpdox.xml
+    6: script/deploy-testing.sh
+    7: script/deploy-development.sh
+    10: test/phpmd.xml
+    11: test/phpcs.xml
+    12: test/phpunit.xml
+    13: test/phpunit-ci.xml
+    14: test/phpunit-benchmark.xml
+    15: test/phpunit-coverage.xml
+    16: test/phpunit-coverage-ci.xml
+    17: Jenkinsfile
+    18: .gitignore
+    19: schema/module.json

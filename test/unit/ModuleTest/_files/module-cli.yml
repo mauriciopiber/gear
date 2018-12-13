@@ -1,0 +1,75 @@
+files:
+  0:
+    template: 'template/module/config/application-config/application.config.cli.phtml'
+    options:
+      module: 'CliModule'
+    location: 'config'
+    filename: 'application.config.php'  
+  1:
+    template: 'template/module/config/autoload/global.phtml'
+    options:
+      module: 'cli_module'
+    location: 'config/autoload'
+    filename: 'global.php'
+  2:
+    template: 'template/module/config/autoload/local.phtml'
+    options:
+      module: 'cli-module'
+    location: 'config/autoload'
+    filename: 'local.php'        
+  3:
+    template: 'template/module/public/index.phtml'
+    location: 'public'
+    filename: 'index.php'        
+  4:
+    template: 'template/module/public/htaccess.phtml'
+    location: 'public'
+    filename: '.htaccess'       
+  5:
+    template: 'template/module/init_autoloader.phtml'
+    filename: 'init_autoloader.php'           
+  6:
+    template: 'template/module/script/deploy-development/deploy-development-cli.phtml'
+    options:
+      module: 'CliModule'
+      moduleUrl: 'cli-module'
+    location: 'script'
+    filename: 'deploy-development.sh'    
+  7:
+    template: 'template/module/script/deploy-testing/deploy-testing-cli.phtml'
+    options:
+      module: 'cli_module'
+    location: 'script'
+    filename: 'deploy-testing.sh'    
+
+  9:
+    template: 'template/module/phinx.phtml'
+    options:
+      module: 'cli_module'
+    filename: 'phinx.yml'
+#  10:
+#    template: 'template/module/buildpath.phtml'
+#    filename: '.buildpath'
+  11:
+    template: 'template/module/test/module-test.phtml'
+    options:
+      module: 'CliModule'
+    location: 'test/unit'
+    filename: 'ModuleTest.php'
+  12:
+    template: 'template/module/src/module/module-cli.phtml'
+    options:
+      module: 'CliModule'
+      moduleUrl: 'cli-module'
+      layout: 'gear-admin-interno'
+    location: 'src'
+    filename: 'Module.php'                 
+   
+  13:
+    template: 'template/module/jenkinsfile/jenkinsfile-cli.phtml'
+    options:
+      moduleUrl: 'cli-module'
+    filename: 'Jenkinsfile'
+  14:
+    template: 'template/module/git-ignore/gitignore-common.phtml'
+    filename: '.gitignore'                       
