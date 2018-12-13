@@ -41,7 +41,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
 
     public function getAllPossibleColumnsUniqueNotNull()
     {
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $columns = [***REMOVED***;
 

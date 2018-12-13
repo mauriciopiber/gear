@@ -54,7 +54,7 @@ trait FactoryDataTrait
             $lowerType = strtolower($type['type'***REMOVED***);
 
             $factoryData[***REMOVED*** = [
-                new \GearJson\Src\Src(
+                new \Gear\Schema\Src\Src(
                     [
                         'name' => sprintf('MyTable%s', $type['type'***REMOVED***),
                         'type' => $type['type'***REMOVED***,
@@ -71,7 +71,7 @@ trait FactoryDataTrait
 
 
             $factoryData[***REMOVED*** = [
-                new \GearJson\Src\Src(
+                new \Gear\Schema\Src\Src(
                     [
                         'name' => sprintf('MyTable%s', $type['type'***REMOVED***),
                         'type' => $type['type'***REMOVED***,
@@ -88,7 +88,7 @@ trait FactoryDataTrait
         }
 
         $factoryData[***REMOVED*** = [
-            new \GearJson\Controller\Controller([
+            new \Gear\Schema\Controller\Controller([
                 'name' => 'MyTableController',
                 'service' => 'factories',
                 'db' => 'MyTable',
@@ -102,7 +102,7 @@ trait FactoryDataTrait
         ***REMOVED***;
 
         $factoryData[***REMOVED*** = [
-            new \GearJson\Controller\Controller([
+            new \Gear\Schema\Controller\Controller([
                 'name' => 'MyTableNamespaceController',
                 'service' => 'factories',
                 'db' => 'MyTable',

@@ -33,7 +33,7 @@ class ColumnServiceFactory implements FactoryInterface
         return new ColumnService(
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Table\TableService'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
     }
 }

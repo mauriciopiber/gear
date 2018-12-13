@@ -7,11 +7,11 @@ use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Edge\Npm\NpmEdge;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Project\ProjectLocationTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\Prompt\ConsolePrompt;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 class NpmUpgrade
 {

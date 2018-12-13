@@ -4,14 +4,14 @@ namespace GearTest\MvcTest\SpecTest\StepTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\UtilTestTrait;
 use Gear\Module;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Spec\Step\Step;
-use GearBase\Util\String\StringService;
-use GearBase\Util\Dir\DirService;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
 use Gear\Column\ColumnService;
 use Gear\Column\ColumnManager;
 

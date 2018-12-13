@@ -3,8 +3,8 @@ namespace Gear\Database\Phinx;
 
 use DateTime;
 use Gear\Project\ProjectLocationTrait;
-use GearBase\Util\String\StringService;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 

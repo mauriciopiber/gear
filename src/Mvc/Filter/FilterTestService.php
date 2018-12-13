@@ -4,7 +4,7 @@ namespace Gear\Mvc\Filter;
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class FilterTestService extends AbstractMvcTest
 {

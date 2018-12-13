@@ -13,10 +13,10 @@ use Zend\View\Resolver\TemplatePathStack;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\ComposerService;
 use Gear\Module\Tests\ModuleTestsService;
-use GearJson\Schema\SchemaService;
-use GearJson\Schema\Loader\SchemaLoaderService;
-use GearJson\Controller\ControllerSchema as ControllerSchema;
-use GearJson\Action\ActionSchema;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Schema\Schema\Loader\SchemaLoaderService;
+use Gear\Schema\Controller\ControllerSchema as ControllerSchema;
+use Gear\Schema\Action\ActionSchema;
 use Gear\Mvc\Controller\Console\{
     ConsoleControllerService,
     ConsoleControllerTestService,
@@ -44,10 +44,10 @@ use Gear\Module\Config\ApplicationConfig;
 use Gear\Autoload\ComposerAutoload;
 use Gear\Module;
 use Gear\Creator\Template\TemplateService;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
-use GearBase\Util\Dir\DirService;
-use GearBase\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Util\String\StringService;
 use Gear\Module\ModuleService;
 use Gear\Mvc\Controller\Web\{
     WebControllerService,
@@ -142,7 +142,7 @@ class ModuleServiceTest extends TestCase
 
         ***REMOVED***;
 
-        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
     }
 
     public function getNamespaces()

@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class SearchTestService extends AbstractMvcTest
 {

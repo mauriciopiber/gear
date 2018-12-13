@@ -16,8 +16,8 @@ class TraitTestServiceFactoryTest extends TestCase
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
-        $stringService = $this->prophesize('GearBase\Util\String\StringService');
-        $this->serviceLocator->get('GearBase\Util\String')->willReturn($stringService->reveal())->shouldBeCalled();
+        $stringService = $this->prophesize('Gear\Util\String\StringService');
+        $this->serviceLocator->get('Gear\Util\String\StringService')->willReturn($stringService->reveal())->shouldBeCalled();
 
         $fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
         $this->serviceLocator->get('Gear\Creator\FileCreator\FileCreator')->willReturn($fileCreator)->shouldBeCalled();

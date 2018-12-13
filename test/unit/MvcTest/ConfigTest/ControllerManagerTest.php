@@ -29,12 +29,12 @@ class ControllerManagerTest extends TestCase
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $code = new \Gear\Creator\Code();
@@ -55,7 +55,7 @@ class ControllerManagerTest extends TestCase
 
     public function testCreateControllerNamespace()
     {
-      $controller = new \GearJson\Controller\Controller([
+      $controller = new \Gear\Schema\Controller\Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories',
@@ -94,7 +94,7 @@ EOS
 
     public function testCreateController()
     {
-      $controller = new \GearJson\Controller\Controller([
+      $controller = new \Gear\Schema\Controller\Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories'

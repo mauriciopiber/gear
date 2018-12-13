@@ -5,11 +5,9 @@ use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Config\Exception\MissingApplicationConfig;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\RequestTrait;
 
 class ApplicationConfig
 {
-    use RequestTrait;
 
     use ModuleStructureTrait;
 
@@ -19,6 +17,22 @@ class ApplicationConfig
     {
         $this->module = $module;
         $this->request = $request;
+    }
+
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     /**

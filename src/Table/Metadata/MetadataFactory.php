@@ -23,7 +23,7 @@ class MetadataFactory implements FactoryInterface
             $location =
             $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')
             . '/'
-            . $serviceLocator->get('GearBase\Util\String')->str('url', $moduleName);
+            . $serviceLocator->get('Gear\Util\String\StringService')->str('url', $moduleName);
 
 
             if (is_dir($location)) {

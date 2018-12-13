@@ -14,7 +14,7 @@ class TraitTestServiceFactory implements FactoryInterface
         $factory = new TraitTestService(
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get('Gear\Creator\CodeTest')
         );
         unset($serviceLocator);

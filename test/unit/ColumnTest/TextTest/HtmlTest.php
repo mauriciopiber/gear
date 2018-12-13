@@ -20,7 +20,7 @@ class HtmlTest extends TestCase
         $column->getName()->willReturn('my_column');
 
         $this->html = new Html($column->reveal());
-        $this->html->setStringService(new \GearBase\Util\String\StringService());
+        $this->html->setStringService(new \Gear\Util\String\StringService());
     }
 
     public function values()

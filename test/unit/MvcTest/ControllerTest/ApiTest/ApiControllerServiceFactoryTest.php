@@ -6,7 +6,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Controller\Api\ApiControllerServiceFactory;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\Code;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\Factory\FactoryService;
@@ -36,7 +36,7 @@ class ApiControllerServiceFactoryTest extends TestCase
             ->willReturn($this->prophesize(FileCreator::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\Util\String')
+        $this->serviceLocator->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 

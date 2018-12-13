@@ -24,7 +24,7 @@ class ResolveNamesTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
 
         $this->service = new ResolveNames($this->stringService->reveal());
     }

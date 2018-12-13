@@ -2,7 +2,7 @@
 namespace Gear\Creator\FileCreator\App;
 
 use Gear\Creator\FileCreator\AbstractFileCreator;
-use GearJson\App\App;
+use Gear\Schema\App\App;
 
 class ConstructorArgs extends AbstractFileCreator
 {

@@ -3,7 +3,7 @@ namespace GearTest\ColumnTest\IntTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Column\Integer\ForeignKey;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * @group AbstractColumn

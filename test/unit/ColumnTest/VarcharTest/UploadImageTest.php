@@ -20,7 +20,7 @@ class UploadImageTest extends TestCase
         $this->column->getName()->willReturn('my_column');
 
         $this->uploadImage = new UploadImage($this->column->reveal());
-        $this->uploadImage->setStringService(new \GearBase\Util\String\StringService());
+        $this->uploadImage->setStringService(new \Gear\Util\String\StringService());
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/upload-image';
 

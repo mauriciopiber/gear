@@ -16,8 +16,8 @@ class DirUpgradeFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
 
-        $dir = $this->prophesize('GearBase\Util\Dir\DirService');
-        $this->serviceLocator->get('GearBase\Util\Dir')->willReturn($dir->reveal())->shouldBeCalled();
+        $dir = $this->prophesize('Gear\Util\Dir\DirService');
+        $this->serviceLocator->get('Gear\Util\Dir\DirService')->willReturn($dir->reveal())->shouldBeCalled();
 
         $edge = $this->prophesize(DirEdge::class);
         $this->serviceLocator->get(DirEdge::class)->willReturn($edge->reveal())->shouldBeCalled();
@@ -33,8 +33,8 @@ class DirUpgradeFactoryTest extends TestCase
             ->shouldBeCalled();
 
 
-        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
-            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        $this->serviceLocator->get('Gear\Config\GearConfig')->willReturn(
+            $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
 

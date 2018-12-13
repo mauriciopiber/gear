@@ -19,7 +19,7 @@ class AbstractCheckboxTest extends TestCase
         $column->getName()->willReturn('my_column')->shouldBeCalled();
 
         $this->abstractCheckbox->setColumn($column->reveal());
-        $this->abstractCheckbox->setStringService(new \GearBase\Util\String\StringService());
+        $this->abstractCheckbox->setStringService(new \Gear\Util\String\StringService());
     }
 
     public function testIntegrationActionSendKeysMark()

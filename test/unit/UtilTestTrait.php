@@ -8,7 +8,7 @@ use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
 use Zend\View\Resolver\TemplateMapResolver;
 use Gear\Creator\Template\TemplateService;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 

@@ -8,14 +8,15 @@
 		"doctrine/doctrine-module" : "^0.8",
 		"php" : "^7.0",
 		"zendframework/zend-mvc" : "^2.6",
-		"zendframework/zendframework" : "^2.5"
+		"zendframework/zendframework" : "^2.5",
+		"mauriciopiber/gear-util" : "^0.1",
+		"mauriciopiber/gear-schema" : "^0.3",
+		"mauriciopiber/gear-scripts" : "^0.1"
 	},
 	"require-dev" : {
-		"mauriciopiber/gear-base" : "^0.2 || ^1.0",
-		"mauriciopiber/gear-json" : "^0.2 || ^1.0",
-		"mauriciopiber/gear-deploy" : "^0.2.78 || ^1.0",
-		"mauriciopiber/gear-jenkins" : "^0.2 || ^1.0",
-		"mauriciopiber/gear-version" : "^0.2 || ^1.0",
+		"mauriciopiber/gear-deploy" : "^0.3",
+		"mauriciopiber/gear-jenkins" : "^0.3",
+		"mauriciopiber/gear-version" : "^0.3",
 		"sebastian/phpcpd" : "^2.0",
 		"phpunit/phpunit" : "^5.0",
 		"phploc/phploc" : "^4.0",
@@ -38,7 +39,7 @@
 	},
 	"repositories" : [{
 			"type" : "composer",
-			"url" : "https://mirror.pibernetwork.com"
+			"url" : "https://mirror.piber.network"
 		}
 	***REMOVED***,
 	"bin" : [

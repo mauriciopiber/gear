@@ -4,12 +4,12 @@
       'DoctrineModule',
       'DoctrineORMModule',
       'DoctrineDataFixtureModule',
-      'GearBase',
-      'GearJson',
-      'Gear',
-      'GearDeploy',
-      'GearJenkins',
-      'GearVersion',
+      'Gear\Deploy',
+      'Gear\Jenkins',
+      'Gear\Version',
+      'Gear\Util',
+      'Gear\Schema',
+      'Gear'
   ),
   'module_listener_options' =>
   array (

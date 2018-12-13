@@ -3,7 +3,7 @@ namespace GearTest\IntegrationTest\SuiteTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 /**
  * @group MinorSuite

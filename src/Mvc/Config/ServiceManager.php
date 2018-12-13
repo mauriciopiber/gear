@@ -2,8 +2,8 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Src\Src;
 
 class ServiceManager extends AbstractConfigManager
 {

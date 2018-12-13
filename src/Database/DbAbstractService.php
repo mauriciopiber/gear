@@ -3,17 +3,16 @@ namespace Gear\Database;
 
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use GearBase\Util\File\FileServiceTrait;
-use GearBase\Util\File\FileServiceAwareInterface;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirServiceAwareInterface;
-use GearBase\Util\String\StringServiceAwareInterface;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\File\FileServiceTrait;
+use Gear\Util\File\FileServiceAwareInterface;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirServiceAwareInterface;
+use Gear\Util\String\StringServiceAwareInterface;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Util\Vector\ArrayServiceAwareInterface;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\RequestTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Database\Connector\DbConnector\DbConnectorTrait;
 
@@ -29,8 +28,6 @@ abstract class DbAbstractService implements
 
     use MetadataTrait;
 
-    use RequestTrait;
-
     use ModuleStructureTrait;
 
     use ServiceLocatorAwareTrait;
@@ -44,6 +41,22 @@ abstract class DbAbstractService implements
     use FileServiceTrait;
 
     protected $schema;
+
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
+    }
 
     public function getProjectFolder()
     {

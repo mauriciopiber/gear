@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Composer\ComposerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 /**
  * @group Diagnostic

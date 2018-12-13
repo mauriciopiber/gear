@@ -4,15 +4,15 @@ namespace Gear\Mvc\Controller\Api;
 use Gear\Mvc\Controller\AbstractControllerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Util\String\StringService;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\Code;
 use Gear\Creator\CodeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryServiceTrait;
-use GearJson\Controller\Controller as ControllerValueObject;
+use Gear\Schema\Controller\Controller as ControllerValueObject;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
 

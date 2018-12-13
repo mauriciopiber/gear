@@ -25,7 +25,7 @@ class ResolveNamesFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ResolveNames(
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
         unset($serviceLocator);
         return $factory;

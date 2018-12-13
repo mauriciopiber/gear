@@ -4,10 +4,10 @@ namespace Gear\Mvc\View;
 use Gear\Mvc\AbstractMvc;
 use Gear\Column\Mvc\SearchFormInterface;
 use Gear\Mvc\View\AngularServiceTrait;
-use GearJson\Action\Action;
-use GearJson\Db\Db;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Db\Db;
 use Gear\Constructor\Helper;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Mvc\View\ViewColumnInterface;
 
@@ -286,7 +286,7 @@ class ViewService extends AbstractMvc
 
     /**
      * @create view/[moduleUrl***REMOVED***/[controllerUrl***REMOVED***/view.phtml
-     * @param GearJson\Action\Action $action
+     * @param Gear\Schema\Action\Action $action
      */
     public function createActionView($action)
     {

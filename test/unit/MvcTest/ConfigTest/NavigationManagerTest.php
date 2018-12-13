@@ -5,8 +5,8 @@ use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
 use GearTest\UtilTestTrait;
 
 /**
@@ -35,12 +35,12 @@ class NavigationManagerTest extends TestCase
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->templates = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/config/navigation';
@@ -116,14 +116,14 @@ class NavigationManagerTest extends TestCase
 
         file_put_contents(vfsStream::url('module/config/ext/navigation.config.php'), file_get_contents($actualFile));
 
-        $controller = new \GearJson\Controller\Controller(
+        $controller = new \Gear\Schema\Controller\Controller(
             [
                 'name' => 'MyController',
                 'object' => '%s\Controller\MyController'
             ***REMOVED***
         );
 
-        $action = new \GearJson\Action\Action(
+        $action = new \Gear\Schema\Action\Action(
             [
                 'controller' => $controller,
                 'name' => 'MyAction'
@@ -151,9 +151,9 @@ class NavigationManagerTest extends TestCase
 
         file_put_contents(vfsStream::url('module/config/ext/navigation.config.php'), file_get_contents($actualFile));
 
-        $db = new \GearJson\Db\Db(['table' => 'Table'***REMOVED***);
+        $db = new \Gear\Schema\Db\Db(['table' => 'Table'***REMOVED***);
 
-        $controller = new \GearJson\Controller\Controller(
+        $controller = new \Gear\Schema\Controller\Controller(
             [
                 'name' => 'TableController',
                 'object' => '%s\Controller\TabkeController'
@@ -186,7 +186,7 @@ class NavigationManagerTest extends TestCase
         $controller->setDb($db);
 
         foreach ($actions as $action) {
-            $controller->addAction(new \GearJson\Action\Action($action));
+            $controller->addAction(new \Gear\Schema\Action\Action($action));
         }
 
         $this->array = new \Gear\Util\Vector\ArrayService();

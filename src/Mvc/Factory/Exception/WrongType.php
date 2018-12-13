@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Mvc\Factory\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class WrongType extends RuntimeException
 {

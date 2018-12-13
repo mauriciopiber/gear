@@ -27,7 +27,7 @@ class UploadImageFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new UploadImage(
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(ModuleStructure::class)
         );
         unset($serviceLocator);

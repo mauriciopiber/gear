@@ -2,24 +2,24 @@
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($phpRenderer);
 
-        $fileService    = new \GearBase\Util\File\FileService();
-        $this->stringService  = new \GearBase\Util\String\StringService();
+        $fileService    = new \Gear\Util\File\FileService();
+        $this->stringService  = new \Gear\Util\String\StringService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
-        $this->dirService = new \GearBase\Util\Dir\DirService();
-        $this->stringService = new \GearBase\Util\String\StringService();
+        $this->dirService = new \Gear\Util\Dir\DirService();
+        $this->stringService = new \Gear\Util\String\StringService();
 
 
         $this->composer = $this->prophesize('Gear\Module\ComposerService');
         $this->testService = $this->prophesize('Gear\Module\TestService');
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
-        $this->schemaLoader = $this->prophesize('GearJson\Schema\Loader\SchemaLoaderService');
+        $this->schemaLoader = $this->prophesize('Gear\Schema\Schema\Loader\SchemaLoaderService');
 
-        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerSchema');
+        $this->schemaController = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
 
-        $this->schemaAction = $this->prophesize('GearJson\Action\ActionSchema');
+        $this->schemaAction = $this->prophesize('Gear\Schema\Action\ActionSchema');
 
         $this->consoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
 
@@ -51,7 +51,7 @@
 
         $this->docs = $this->prophesize('Gear\Module\Docs\Docs');
 
-        $this->dir = new \GearBase\Util\Dir\DirService();
+        $this->dir = new \Gear\Util\Dir\DirService();
 
         $this->feature = $this->prophesize('Gear\Mvc\Spec\Feature\Feature');
 

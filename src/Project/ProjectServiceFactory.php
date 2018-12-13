@@ -11,9 +11,9 @@ class ProjectServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $projectService = new ProjectService(
-            $serviceLocator->get('GearBase\GearConfig'),
-            $serviceLocator->get('GearBase\Util\Dir'),
-            $serviceLocator->get('GearBase\Util\File'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
+            $serviceLocator->get('Gear\Util\Dir\DirService'),
+            $serviceLocator->get('Gear\Util\File\FileService'),
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('Gear\Edge\Dir\DirEdge'),
             $serviceLocator->get('Gear\Project\Docs\Docs'),
@@ -23,7 +23,7 @@ class ProjectServiceFactory implements FactoryInterface
             $serviceLocator->get('config'),
             $serviceLocator->get('Gear\Project\Composer\ComposerService')
             //$serviceLocator->get('config'),
-            //$serviceLocator->get('GearBase\Util\String'),
+            //$serviceLocator->get('Gear\Util\String\StringService'),
             //$serviceLocator->get(FileCreator::class)
         );
         unset($serviceLocator);

@@ -1,7 +1,7 @@
 <?php
 namespace GearTest;
 
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 trait DatabaseColumnsMockerTrait
 {

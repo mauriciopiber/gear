@@ -10,9 +10,9 @@ class ModuleStructureFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $structure = new ModuleStructure(
-            $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('GearBase\Util\Dir'),
-            $serviceLocator->get('GearBase\Util\File')
+            $serviceLocator->get('Gear\Util\String\StringService'),
+            $serviceLocator->get('Gear\Util\Dir\DirService'),
+            $serviceLocator->get('Gear\Util\File\FileService')
         );
 
         $request = $serviceLocator->get('request');

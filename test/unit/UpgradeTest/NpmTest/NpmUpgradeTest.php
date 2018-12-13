@@ -6,7 +6,7 @@ use Gear\Upgrade\Npm\NpmUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Npm\NpmUpgrade;
 use Gear\Edge\Npm\NpmEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 /**
  * @group Service
@@ -23,7 +23,7 @@ class NpmUpgradeTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
         $this->gearConfig = $this->prophesize(GearConfig::class);
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
         $this->npmEdge = $this->prophesize(NpmEdge::class);
 
         $this->npmUpgrade = new NpmUpgrade(

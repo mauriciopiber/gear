@@ -3,8 +3,8 @@ namespace Gear\Mvc\Form;
 
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Config\ServiceManagerTrait;
-use GearJson\Src\Src;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class FormTestService extends AbstractMvcTest
 {

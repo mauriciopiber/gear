@@ -150,7 +150,7 @@ class SchemaToolService extends DbAbstractService
 
     /**
      *
-     * @param GearJson\Db\Db $db
+     * @param Gear\Schema\Db\Db $db
      * @return boolean
      */
     public function validatePrimaryKey($tableName)
@@ -171,7 +171,7 @@ class SchemaToolService extends DbAbstractService
     }
 
     /**
-     * @param GearJson\Db\Db $db
+     * @param Gear\Schema\Db\Db $db
      */
     public function fixPrimaryKey($tableName)
     {

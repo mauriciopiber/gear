@@ -15,18 +15,17 @@ use Gear\Creator\AppDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use GearBase\Util\File\FileServiceTrait;
-use GearBase\Util\File\FileServiceAwareInterface;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirServiceAwareInterface;
-use GearBase\Util\String\StringServiceAwareInterface;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\File\FileServiceTrait;
+use Gear\Util\File\FileServiceAwareInterface;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirServiceAwareInterface;
+use Gear\Util\String\StringServiceAwareInterface;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Util\Vector\ArrayServiceAwareInterface;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Creator\Template\TemplateServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\RequestTrait;
 
 abstract class AbstractJsonService implements
     ServiceLocatorAwareInterface,
@@ -37,8 +36,6 @@ abstract class AbstractJsonService implements
     ModuleStructureInterface,
     EventManagerAwareInterface
 {
-    use RequestTrait;
-
     use ModuleStructureTrait;
 
     use ServiceLocatorAwareTrait;
@@ -93,5 +90,21 @@ abstract class AbstractJsonService implements
             $this->dir = \GearBase\Module::getProjectFolder();
         }
         return $this->dir;
+    }
+
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 }

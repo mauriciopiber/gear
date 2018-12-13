@@ -3,7 +3,7 @@ namespace GearTest\CreatorTest\ComponentTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Creator\Component\Constructor\ConstructorParams;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * @group Service

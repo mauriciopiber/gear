@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Constructor;
 
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;

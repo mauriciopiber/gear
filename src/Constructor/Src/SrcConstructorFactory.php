@@ -15,7 +15,7 @@ class SrcConstructorFactory implements FactoryInterface
             $serviceLocator->get('Gear\Table\TableService'),
             $serviceLocator->get('Gear\Column\ColumnService'),
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearJson\Src'),
+            $serviceLocator->get('Gear\Schema\Src'),
             $serviceLocator->get('Gear\Mvc\Config\ServiceManager'),
             $serviceLocator->get('Gear\Mvc\TraitService'),
             $serviceLocator->get('Gear\Mvc\TraitTestService'),

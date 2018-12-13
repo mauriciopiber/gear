@@ -3,7 +3,7 @@ namespace Gear\Mvc\View\App;
 
 use Gear\Mvc\View\App\AppServiceSpecServiceTrait;
 use Gear\Mvc\AbstractMvc;
-use GearJson\App\App;
+use Gear\Schema\App\App;
 
 class AppServiceService extends AbstractMvc
 {

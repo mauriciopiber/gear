@@ -3,10 +3,10 @@ namespace GearTest\MvcTest\FixtureTest;
 
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
-use GearBase\Util\String\StringService;
-use GearBase\Util\File\FileService;
-use GearJson\Src\Src;
-use GearJson\Db\Db;
+use Gear\Util\String\StringService;
+use Gear\Util\File\FileService;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
 use GearTest\SingleDbTableTrait;
 use GearTest\DatabaseColumnsMockerTrait;
 use Gear\Creator\Template\TemplateService;
@@ -47,7 +47,7 @@ class FixtureServiceTest extends TestCase
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
 

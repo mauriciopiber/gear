@@ -24,12 +24,12 @@ class DocsTest extends TestCase
             $this->createTemplate('docs-template', __DIR__.'/..')
         );
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $this->template = __DIR__.'/expected';
     }

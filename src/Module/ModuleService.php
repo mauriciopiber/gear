@@ -43,12 +43,12 @@ use Gear\Mvc\Controller\Console\{
     ConsoleControllerTestServiceTrait
 };
 use Gear\Mvc\Config\ConfigService;
-use GearBase\RequestTrait;
-use GearVersion\Service\VersionServiceTrait;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Schema\Loader\SchemaLoaderServiceTrait;
-use GearJson\Controller\ControllerSchemaTrait;
-use GearJson\Action\ActionSchemaTrait;
+
+use Gear\Version\VersionServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\Loader\SchemaLoaderServiceTrait;
+use Gear\Schema\Controller\ControllerSchemaTrait;
+use Gear\Schema\Action\ActionSchemaTrait;
 use Gear\Module\Tests\{
     ModuleTestsServiceTrait,
     ModuleTestsService
@@ -62,7 +62,7 @@ use Gear\Module\Node\PackageTrait;
 use Gear\Module\Node\ProtractorTrait;
 use Gear\Module\Docs\DocsTrait;
 use Gear\Creator\FileCreator\FileCreator;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Docs\Docs;
 use Gear\Module\CodeceptionService;
@@ -73,10 +73,10 @@ use Gear\Module\Node\Karma;
 use Gear\Module\Node\Package;
 use Gear\Module\Node\Protractor;
 use Gear\Mvc\LanguageService;
-use GearJson\Schema\SchemaService as Schema;
-use GearJson\Schema\Loader\SchemaLoaderService as SchemaLoader;
-use GearJson\Controller\ControllerSchema as SchemaController;
-use GearJson\Action\ActionSchema as SchemaAction;
+use Gear\Schema\Schema\SchemaService as Schema;
+use Gear\Schema\Schema\Loader\SchemaLoaderService as SchemaLoader;
+use Gear\Schema\Controller\ControllerSchema as SchemaController;
+use Gear\Schema\Action\ActionSchema as SchemaAction;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\Step;
@@ -84,13 +84,13 @@ use Gear\Mvc\Spec\Step\StepTrait;
 use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Mvc\View\ViewService;
-use GearBase\Config\GearConfig;
-use GearBase\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
 use Gear\Module\ConstructService;
 use Gear\Module\ConstructServiceTrait;
 use Gear\Constructor\Controller\ControllerConstructor;
@@ -117,7 +117,6 @@ use Gear\Docker\DockerServiceTrait;
  */
 class ModuleService
 {
-    use RequestTrait;
     use ModuleStructureTrait;
     use FileCreatorTrait;
     use StringServiceTrait;
@@ -215,6 +214,22 @@ class ModuleService
 
         $this->controllerConstructor = $controllerConstructor;
         $this->actionConstructor = $actionConstructor;
+    }
+
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
 

@@ -28,12 +28,12 @@ class ComposerUpgradeFactoryTest extends TestCase
         ->shouldBeCalled();
 
 
-        $this->serviceLocator->get('GearBase\Util\String')
-        ->willReturn($this->prophesize('GearBase\Util\String\StringService'))
+        $this->serviceLocator->get('Gear\Util\String\StringService')
+        ->willReturn($this->prophesize('Gear\Util\String\StringService'))
         ->shouldBeCalled();
 
-        $this->serviceLocator->get('GearBase\GearConfig')->willReturn(
-            $this->prophesize('GearBase\Config\GearConfig')->reveal()
+        $this->serviceLocator->get('Gear\Config\GearConfig')->willReturn(
+            $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
 

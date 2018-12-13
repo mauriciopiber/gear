@@ -2,10 +2,10 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Action\Action;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Action\Action;
 use Gear\Creator\FileCreator\FileCreator;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 class NavigationManager extends AbstractConfigManager implements ModuleManagerInterface
 {

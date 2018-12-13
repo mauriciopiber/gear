@@ -4,7 +4,7 @@ namespace Gear\Creator\FileCreator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Model\ViewModel;
 use Gear\Creator\Template\TemplateServiceTrait;
-use GearBase\Util\File\FileServiceTrait;
+use Gear\Util\File\FileServiceTrait;
 use Gear\Creator\FileCreator\Exception\ViewNotFound;
 use Gear\Exception\FileCreator\FileNameNotFoundException;
 use Gear\Exception\FileCreator\LocationNotFoundException;

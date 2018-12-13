@@ -5,8 +5,8 @@ use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Edge\File\FileEdgeTrait;
 use Gear\Edge\File\FileEdge;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
 
 class FileService implements ModuleDiagnosticInterface
 {

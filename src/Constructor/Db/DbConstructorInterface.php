@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 interface DbConstructorInterface
 {

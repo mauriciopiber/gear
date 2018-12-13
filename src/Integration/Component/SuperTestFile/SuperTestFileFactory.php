@@ -26,7 +26,7 @@ class SuperTestFileFactory implements FactoryInterface
     {
         $factory = new SuperTestFile(
             $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
         unset($serviceLocator);
         return $factory;

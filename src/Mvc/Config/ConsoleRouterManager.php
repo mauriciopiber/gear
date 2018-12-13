@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Action\Action;
+use Gear\Schema\Action\Action;
 
 class ConsoleRouterManager extends AbstractConfigManager implements ModuleManagerInterface
 {

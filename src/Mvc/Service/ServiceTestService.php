@@ -2,12 +2,12 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\Db\Db;
-use GearJson\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Src\Src;
 use Gear\Mvc\Service\ServiceTestColumnInterface;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class ServiceTestService extends AbstractMvcTest
 {

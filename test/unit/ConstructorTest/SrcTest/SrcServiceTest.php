@@ -3,7 +3,7 @@ namespace GearTest\ConstructorTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Src\SrcConstructor;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
@@ -31,7 +31,7 @@ class SrcConstructorTest extends TestCase
         //$this->service->setSrcConstructor($schema);
         //$this->service->setRepositoryService($repository);
         //$this->service->setServiceManager($config);
-        $this->schema = $this->prophesize('GearJson\Src\SrcSchema');
+        $this->schema = $this->prophesize('Gear\Schema\Src\SrcSchema');
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
@@ -133,10 +133,10 @@ class SrcConstructorTest extends TestCase
 
         $tableObjectOne = $this->prophesize(TableObject::class);
 
-        $dbOne = $this->prophesize('GearJson\Db\Db');
+        $dbOne = $this->prophesize('Gear\Schema\Db\Db');
         $dbOne->getTable()->willReturn('MyEntityOne')->shouldBeCalled();
 
-        $srcOne = $this->prophesize('GearJson\Src\Src');
+        $srcOne = $this->prophesize('Gear\Schema\Src\Src');
         $srcOne->getDb()->willReturn($dbOne->reveal())->shouldBeCalled();
         $this->schema->create(
             'MyModule',
@@ -157,11 +157,11 @@ class SrcConstructorTest extends TestCase
 
         $tableObjectTwo = $this->prophesize(TableObject::class);
 
-        $dbTwo = $this->prophesize('GearJson\Db\Db');
+        $dbTwo = $this->prophesize('Gear\Schema\Db\Db');
         $dbTwo->getTable()->willReturn('MyEntityTwo')->shouldBeCalled();
 
 
-        $srcTwo = $this->prophesize('GearJson\Src\Src');
+        $srcTwo = $this->prophesize('Gear\Schema\Src\Src');
         $srcTwo->getDb()->willReturn($dbTwo->reveal())->shouldBeCalled();
         $this->schema->create(
             'MyModule',
@@ -207,7 +207,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyService';
         $type = 'Service';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -227,7 +227,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyRepository';
         $type = 'Repository';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -247,7 +247,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyForm';
         $type = 'Form';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -267,7 +267,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MySearchForm';
         $type = 'SearchForm';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -287,7 +287,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyFilter';
         $type = 'Filter';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -307,7 +307,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyEntity';
         $type = 'Entity';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -327,7 +327,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyFixture';
         $type = 'Fixture';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -347,7 +347,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyViewHelper';
         $type = 'ViewHelper';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -367,7 +367,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyControllerPlugin';
         $type = 'ControllerPlugin';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -388,7 +388,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyValueObject';
         $type = 'ValueObject';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -408,7 +408,7 @@ class SrcConstructorTest extends TestCase
         $name = 'MyInterface';
         $type = 'Interface';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -431,7 +431,7 @@ class SrcConstructorTest extends TestCase
         $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
         $this->columnManager = $this->prophesize('Gear\Column\ColumnManager');
 
-        $this->db = $this->prophesize('GearJson\Db\Db');
+        $this->db = $this->prophesize('Gear\Schema\Db\Db');
 
         $this->columnService->getColumnManager($this->db)->willReturn($this->columnManager->reveal())->shouldBeCalled();
         $this->tableService->getTableObject('My')->willReturn($this->tableObject->reveal())->shouldBeCalled();
@@ -440,7 +440,7 @@ class SrcConstructorTest extends TestCase
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
         $this->db->setColumnManager($this->columnManager->reveal())->shouldBeCalled();
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn($this->db->reveal())->shouldBeCalled();
 
@@ -487,7 +487,7 @@ class SrcConstructorTest extends TestCase
     {
         $type = 'Factory';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         //$this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -532,7 +532,7 @@ class SrcConstructorTest extends TestCase
     {
         $type = 'Trait';
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         //$this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -575,7 +575,7 @@ class SrcConstructorTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn($type)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 
@@ -599,7 +599,7 @@ class SrcConstructorTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->src = $this->prophesize('GearJson\Src\Src');
+        $this->src = $this->prophesize('Gear\Schema\Src\Src');
         $this->src->getType()->willReturn(null)->shouldBeCalled();
         $this->src->getDb()->willReturn(null)->shouldBeCalled();
 

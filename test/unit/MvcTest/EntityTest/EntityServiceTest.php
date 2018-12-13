@@ -4,7 +4,7 @@ namespace GearTest\MvcTest\EntityTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Entity\EntityService;
 use org\bovigo\vfs\vfsStream;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 
 /**
  * @group src-entity
@@ -23,14 +23,14 @@ class EntityServiceTest extends TestCase
         $this->entityTestService = $this->prophesize('Gear\Mvc\Entity\EntityTestService');
         $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
         //$this->srcService = $this->prophesize('Gear\Constructor\Src\SrcConstructor');
-        $this->srcService = $this->prophesize('GearJson\Src\SrcSchema');
+        $this->srcService = $this->prophesize('Gear\Schema\Src\SrcSchema');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
-        $this->schemaLoaderService = $this->prophesize('GearJson\Schema\Loader\SchemaLoaderService');
-        $this->dirService = $this->prophesize('GearBase\Util\Dir\DirService');
+        $this->schemaLoaderService = $this->prophesize('Gear\Schema\Schema\Loader\SchemaLoaderService');
+        $this->dirService = $this->prophesize('Gear\Util\Dir\DirService');
         $this->globService = $this->prophesize('Gear\Util\Glob\GlobService');
-        $this->stringService = new \GearBase\Util\String\StringService();
+        $this->stringService = new \Gear\Util\String\StringService();
 
 
         $this->entityFixerObject = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');

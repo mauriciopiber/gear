@@ -20,7 +20,7 @@ class TextTest extends TestCase
         $column->getName()->willReturn('my_column');
 
         $this->text = new Text($column->reveal());
-        $this->text->setStringService(new \GearBase\Util\String\StringService());
+        $this->text->setStringService(new \Gear\Util\String\StringService());
     }
 
     public function values()

@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Docker;
 
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
 

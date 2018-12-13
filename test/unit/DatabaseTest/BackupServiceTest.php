@@ -43,7 +43,7 @@ class BackupServiceTest extends TestCase
         ***REMOVED***;
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $this->string = new \GearBase\Util\String\StringService;
+        $this->string = new \Gear\Util\String\StringService;
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
 

@@ -6,14 +6,14 @@ use Gear\Creator\CodeTrait;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
 use Gear\Creator\FileCreator\App\InjectTrait;
 use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
-use GearJson\Db\Db as DbObject;
-use GearJson\App\App as AppObject;
-use GearJson\Src\Src as SrcObject;
+use Gear\Schema\Db\Db as DbObject;
+use Gear\Schema\App\App as AppObject;
+use Gear\Schema\Src\Src as SrcObject;
 use Gear\Exception\InvalidArgumentException;
 
 abstract class AbstractMvc extends AbstractJsonService

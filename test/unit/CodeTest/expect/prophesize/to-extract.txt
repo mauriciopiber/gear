@@ -1,10 +1,10 @@
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
-        $this->schemaLoader = $this->prophesize('GearJson\Schema\Loader\SchemaLoaderService');
+        $this->schemaLoader = $this->prophesize('Gear\Schema\Schema\Loader\SchemaLoaderService');
 
-        $this->schemaController = $this->prophesize('GearJson\Controller\ControllerSchema');
+        $this->schemaController = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
 
-        $this->schemaAction = $this->prophesize('GearJson\Action\ActionSchema');
+        $this->schemaAction = $this->prophesize('Gear\Schema\Action\ActionSchema');
 
         $this->consoleControllerTest = $this->prophesize('Gear\Mvc\ConsoleController\ConsoleControllerTest');
 

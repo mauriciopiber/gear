@@ -14,7 +14,7 @@ class MigrationFileTest extends TestCase
         parent::setUp();
 
         $this->persist = $this->prophesize('Gear\Integration\Util\Persist\Persist');
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
         $this->arrayService = $this->prophesize('Gear\Util\Vector\ArrayService');
 
         $this->service = new MigrationFile(

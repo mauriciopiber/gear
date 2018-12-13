@@ -16,7 +16,7 @@ class ModuleServiceFactory implements FactoryInterface
     {
         return new ModuleService(
             $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('Gear\Module\Docs\Docs'),
             $serviceLocator->get('Gear\Module\Composer'),
@@ -26,8 +26,8 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Module\Node\Package'),
             $serviceLocator->get('Gear\Module\Node\Gulpfile'),
             $serviceLocator->get('Gear\Mvc\LanguageService'),
-            $serviceLocator->get('GearJson\Schema'),
-            $serviceLocator->get('GearJson\Schema\Loader'),
+            $serviceLocator->get('Gear\Schema\Schema'),
+            $serviceLocator->get('Gear\Schema\Schema\Loader'),
             $serviceLocator->get('Gear\Mvc\Config\ConfigService'),
             $serviceLocator->get('Gear\Mvc\View\ViewService'),
             $serviceLocator->get('Request'),
@@ -35,8 +35,8 @@ class ModuleServiceFactory implements FactoryInterface
             $serviceLocator->get('Gear\Module\Config\ApplicationConfig'),
             $serviceLocator->get('Gear\Autoload\ComposerAutoload'),
             $serviceLocator->get('config'),
-            $serviceLocator->get('GearBase\Util\Dir'),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Util\Dir\DirService'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get(ControllerConstructor::class),
             $serviceLocator->get(ActionConstructor::class),
             $serviceLocator->get(DockerService::class)

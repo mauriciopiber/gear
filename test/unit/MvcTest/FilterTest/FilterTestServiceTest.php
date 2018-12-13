@@ -33,7 +33,7 @@ class FilterTestServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter-test';
@@ -46,7 +46,7 @@ class FilterTestServiceTest extends TestCase
 
         $this->codeTest->setModule($this->module->reveal());
         $this->codeTest->setFileCreator($this->fileCreator);
-        $this->codeTest->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setStringService($this->string);
 
 
@@ -79,7 +79,7 @@ class FilterTestServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $db = new \GearJson\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
+        $db = new \Gear\Schema\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
 
         $this->module->getTestFilterFolder()->willReturn(vfsStream::url('module'));
 
@@ -103,7 +103,7 @@ class FilterTestServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \GearJson\Src\Src(
+        $src = new \Gear\Schema\Src\Src(
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',
@@ -112,7 +112,7 @@ class FilterTestServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
 
         $this->filter->setSchemaService($this->schema->reveal());

@@ -2,8 +2,8 @@
 namespace Gear\Mvc\Search;
 
 use Gear\Mvc\AbstractMvc;
-use GearJson\Src\SrcTypesInterface;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Schema\Schema\SchemaServiceTrait;
 
 class SearchService extends AbstractMvc
 {

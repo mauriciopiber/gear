@@ -13,8 +13,8 @@ namespace Gear\Mvc\Filter;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Filter\FilterTestServiceTrait;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class FilterService extends AbstractMvc
 {

@@ -3,8 +3,8 @@ namespace GearTest\ServiceTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Controller\ControllerConstructor;
-use GearJson\Controller\Controller;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Schema\Controller\Controller;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Web\WebControllerService;
@@ -15,13 +15,13 @@ use Gear\Mvc\Controller\Console\{
 };
 use Gear\Mvc\Controller\Api\{ApiControllerService, ApiControllerTestService};
 use Gear\Mvc\Config\ControllerManager;
-use GearJson\Controller\ControllerSchema as SchemaController;
+use Gear\Schema\Controller\ControllerSchema as SchemaController;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Config\ConfigService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * @group m1
@@ -143,10 +143,10 @@ class ControllerServiceTest extends TestCase
      */
     public function testCreateActionDbController()
     {
-        $this->db = $this->prophesize('GearJson\Db\Db');
+        $this->db = $this->prophesize('Gear\Schema\Db\Db');
         $this->db->getTable()->willReturn('My')->shouldBeCalled();
 
-        $this->controller = $this->prophesize('GearJson\Controller\Controller');
+        $this->controller = $this->prophesize('Gear\Schema\Controller\Controller');
         $this->controller->getDb()->willReturn($this->db->reveal())->shouldBeCalled();
         $this->controller->getType()->willReturn('Action')->shouldBeCalled();
 
@@ -190,7 +190,7 @@ class ControllerServiceTest extends TestCase
      */
     public function testCreateControllerReturnNullWithoutAType()
     {
-        $this->controller = $this->prophesize('GearJson\Controller\Controller');
+        $this->controller = $this->prophesize('Gear\Schema\Controller\Controller');
 
         //$this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 

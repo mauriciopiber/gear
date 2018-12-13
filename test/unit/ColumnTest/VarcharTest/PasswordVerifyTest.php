@@ -15,7 +15,7 @@ class PasswordVerifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
 
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
@@ -54,7 +54,7 @@ class PasswordVerifyTest extends TestCase
 
 
         $this->passwordVerify = new PasswordVerify($this->column->reveal());
-        $this->passwordVerify->setStringService(new \GearBase\Util\String\StringService());
+        $this->passwordVerify->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->passwordVerify->getFilterFormElement();
 

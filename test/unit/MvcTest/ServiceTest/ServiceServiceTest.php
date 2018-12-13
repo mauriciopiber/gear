@@ -5,16 +5,16 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use GearTest\ScopeTrait;
 use \Gear\Module;
 use Gear\Mvc\Service\ServiceService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\Code;
 use Gear\Creator\Injector\Injector;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
 
@@ -55,7 +55,7 @@ class ServiceServiceTest extends TestCase
         $this->code = new Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new \Gear\Util\Dir\DirService());
 
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
@@ -80,7 +80,7 @@ class ServiceServiceTest extends TestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->service->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->service->setSchemaService($this->schemaService->reveal());
 
         $this->serviceTest = $this->prophesize('Gear\Mvc\Service\ServiceTestService');

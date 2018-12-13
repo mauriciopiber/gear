@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Column;
 
-use GearJson\Column\ColumnManagerInterface;
+use Gear\Schema\Column\ColumnManagerInterface;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Varchar\UploadImage;

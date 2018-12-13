@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Util\ResolveNames;
 
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
 use Gear\Integration\Util\Names\NamesReplaceInterface;
 

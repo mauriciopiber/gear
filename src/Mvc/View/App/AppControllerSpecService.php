@@ -2,8 +2,8 @@
 namespace Gear\Mvc\View\App;
 
 use Gear\Mvc\AbstractMvcTest;
-use GearJson\App\App;
-use GearJson\Action\Action;
+use Gear\Schema\App\App;
+use Gear\Schema\Action\Action;
 
 class AppControllerSpecService extends AbstractMvcTest
 {
@@ -20,7 +20,7 @@ class AppControllerSpecService extends AbstractMvcTest
         $version = $this->getGearVersion();
 
 
-        if ($action->getController() instanceof \GearJson\Controller\Controller) {
+        if ($action->getController() instanceof \Gear\Schema\Controller\Controller) {
             $controllerName = $action->getController()->getName();
         } else {
             $controllerName = $action->getController();

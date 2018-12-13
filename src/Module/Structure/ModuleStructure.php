@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Module\Structure;
 
-use GearBase\Util\File\FileServiceTrait;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\File\FileService;
-use GearBase\Util\Dir\DirService;
-use GearBase\Util\String\StringService;
+use Gear\Util\File\FileServiceTrait;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\File\FileService;
+use Gear\Util\Dir\DirService;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Exception\ResourceNotFound;
 use Gear\Module\ModuleTypesInterface;

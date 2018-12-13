@@ -6,8 +6,8 @@ use org\bovigo\vfs\vfsStream;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
 use Zend\View\Resolver\TemplatePathStack;
-use GearBase\Util\String\StringService;
-use GearBase\Util\File\FileService;
+use Gear\Util\String\StringService;
+use Gear\Util\File\FileService;
 use Gear\Module;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Creator\FileCreator\FileCreator;
@@ -25,8 +25,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
-use GearJson\Schema\SchemaService;
-use GearBase\Util\Dir\DirService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Util\Dir\DirService;
 use Gear\Table\UploadImage;
 
 /**
@@ -146,7 +146,7 @@ class WebControllerServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $controller = new \GearJson\Controller\Controller([
+        $controller = new \Gear\Schema\Controller\Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
@@ -180,7 +180,7 @@ class WebControllerServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \GearJson\Db\Db(
+        $this->db = new \Gear\Schema\Db\Db(
             [
                 'table' => $this->string->str('class', $tableName),
                 'user' => $userType

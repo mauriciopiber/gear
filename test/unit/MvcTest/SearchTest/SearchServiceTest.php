@@ -30,12 +30,12 @@ class SearchServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         //string
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         //file-render
         $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         //template
@@ -45,7 +45,7 @@ class SearchServiceTest extends TestCase
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new \Gear\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
 
@@ -81,7 +81,7 @@ class SearchServiceTest extends TestCase
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
         $this->search->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->search->setSchemaService($this->schemaService->reveal());
 
 
@@ -117,14 +117,14 @@ class SearchServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
 
         $this->table->hasUniqueConstraint($table)->willReturn(false);
         //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
         $this->table->isNullable($this->db->getTable())->willReturn($nullable);
 
-        $search = new \GearJson\Src\Src(
+        $search = new \Gear\Schema\Src\Src(
             [
                 'name' => sprintf('%sSearch', $table),
                 'type' => 'SearchForm',

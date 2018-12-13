@@ -53,7 +53,7 @@ trait ControllerScopeTrait
 
         return [
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependenciesFactoryMany%s', $srcType),
                     'type' => $srcType,
                     'actions' => $manyActions,
@@ -63,7 +63,7 @@ trait ControllerScopeTrait
                 'basic-dependencies-factory-many'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependenciesFactoryFirst%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -77,7 +77,7 @@ trait ControllerScopeTrait
                 'basic-dependencies-factory-first'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicFactoryDependencies%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree',
@@ -86,7 +86,7 @@ trait ControllerScopeTrait
                 'basic-factory-dependencies'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicFactoryDependency%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepository',
@@ -97,7 +97,7 @@ trait ControllerScopeTrait
             ***REMOVED***,
 
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicFactoryNamespace%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
@@ -107,7 +107,7 @@ trait ControllerScopeTrait
                 'basic-factory-namespace'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicFactory%s', $srcType),
                     'type' => $srcType,
                     'service' => 'factories'
@@ -115,7 +115,7 @@ trait ControllerScopeTrait
                 'basic-factory'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependenciesMany%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree',
@@ -124,7 +124,7 @@ trait ControllerScopeTrait
                 'basic-dependencies-many'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicFirst%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -136,7 +136,7 @@ trait ControllerScopeTrait
                 'basic-first'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependencyFirst%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -149,7 +149,7 @@ trait ControllerScopeTrait
                 'basic-dependency-first'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependenciesFirst%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -163,7 +163,7 @@ trait ControllerScopeTrait
             ***REMOVED***,
 
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicMany%s', $srcType),
                     'type' => $srcType,
                     'actions' => $manyActions
@@ -171,7 +171,7 @@ trait ControllerScopeTrait
                 'basic-many'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependencies%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree'
@@ -179,7 +179,7 @@ trait ControllerScopeTrait
                 'basic-dependencies'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicImplements%s', $srcType),
                     'type' => $srcType,
                     'implements' => 'Repository\RepositoryInterface'
@@ -188,7 +188,7 @@ trait ControllerScopeTrait
                 'basic-implements'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('BasicDependency%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepository'
@@ -197,7 +197,7 @@ trait ControllerScopeTrait
                 'basic-dependency'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
@@ -210,7 +210,7 @@ trait ControllerScopeTrait
                 'basic-namespace'
             ***REMOVED***,
             [
-                new \GearJson\Controller\Controller([
+                new \Gear\Schema\Controller\Controller([
                     'name' => sprintf('Basic%s', $srcType),
                     'type' => $srcType
                 ***REMOVED***),

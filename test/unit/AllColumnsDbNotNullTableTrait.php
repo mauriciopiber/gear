@@ -30,7 +30,7 @@ trait AllColumnsDbNotNullTableTrait
 
     public function getAllPossibleColumnsNotNull()
     {
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $columns = [***REMOVED***;
 

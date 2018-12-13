@@ -4,7 +4,7 @@ namespace GearTest\DiagnosticTest\AntTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Ant\AntService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Edge\Ant\AntEdge;
 
 /**
@@ -29,7 +29,7 @@ class AntServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->stringService = new StringService();
 
-        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
         $this->antEdge = $this->prophesize(AntEdge::class);
 
         $this->ant = new AntService(

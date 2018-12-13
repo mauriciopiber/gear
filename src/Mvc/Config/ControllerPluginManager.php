@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 
 class ControllerPluginManager extends AbstractConfigManager implements ModuleManagerInterface, ServiceManagerInterface
 {

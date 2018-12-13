@@ -3,8 +3,8 @@ namespace Gear\Mvc\View\App;
 
 use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
 use Gear\Mvc\AbstractMvc;
-use GearJson\App\App;
-use GearJson\Action\Action;
+use Gear\Schema\App\App;
+use Gear\Schema\Action\Action;
 
 class AppControllerService extends AbstractMvc
 {
@@ -22,7 +22,7 @@ class AppControllerService extends AbstractMvc
         $version = $this->getGearVersion();
 
 
-        if ($action->getController() instanceof \GearJson\Controller\Controller) {
+        if ($action->getController() instanceof \Gear\Schema\Controller\Controller) {
             $controllerName = $action->getController()->getName();
         } else {
             $controllerName = $action->getController();

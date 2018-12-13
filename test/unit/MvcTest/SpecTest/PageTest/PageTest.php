@@ -32,12 +32,12 @@ class PageTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/spec';

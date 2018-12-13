@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Table;
 
-use GearBase\Util\String\StringService;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 

@@ -12,12 +12,12 @@ use Gear\Module\Tests\{
     ModuleTestsService,
     ModuleTestsServiceTrait
 };
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Prompt\ConsolePrompt;
-use GearBase\Config\GearConfig;
-use GearBase\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
 use Gear\Module\Docs\Docs;
 use Gear\Module\Docs\DocsTrait;
 

@@ -17,7 +17,7 @@ class DockerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
         //$this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
@@ -26,7 +26,7 @@ class DockerServiceTest extends TestCase
             $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view')
         );
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->service = new DockerService(

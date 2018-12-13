@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
 use GearTest\UtilTestTrait;
 use Gear\Edge\Npm\NpmEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 /**
  * @group Module
@@ -25,7 +25,7 @@ class PackageTest extends TestCase
         $template       = new \Gear\Creator\Template\TemplateService();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
 
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
@@ -33,7 +33,7 @@ class PackageTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule');
 
 
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module';
 

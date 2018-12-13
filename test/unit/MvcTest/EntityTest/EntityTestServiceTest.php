@@ -7,14 +7,14 @@ use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
 use GearTest\AllColumnsDbUniqueNotNullTableTrait;
 use org\bovigo\vfs\vfsStream;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\Template\TemplateService;
 use Gear\Module;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Column\Tinyint\Checkbox;
-use GearJson\Db\Db;
-use GearJson\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Src\Src;
 use Gear\Mvc\Entity\EntityTestService;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Datetime\DatetimePtBr;
@@ -146,7 +146,7 @@ class EntityTestServiceTest extends TestCase
         //$this->column->getColumns($db, true)->willReturn($tableColumns);
 
 
-        $this->schema = $this->prophesize('GearJson\Schema\SchemaService');
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
 
         $this->schema->getSrcByDb($db, 'Entity')->willReturn($src)->shouldBeCalled();
 

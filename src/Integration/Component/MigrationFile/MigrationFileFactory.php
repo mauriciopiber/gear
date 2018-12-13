@@ -26,7 +26,7 @@ class MigrationFileFactory implements FactoryInterface
     {
         $factory = new MigrationFile(
             $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get('Gear\Util\Vector\ArrayService')
         );
         unset($serviceLocator);

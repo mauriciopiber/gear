@@ -13,8 +13,8 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
 use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
 use Gear\Integration\Suite\Integration\Exception\InvalidTypeException;
 use Gear\Integration\Suite\Integration\Exception\InvalidMaxCountException;
-use GearJson\Src\SrcTypesInterface;
-use GearJson\Controller\ControllerTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Schema\Controller\ControllerTypesInterface;
 
 /**
  * PHP Version 5

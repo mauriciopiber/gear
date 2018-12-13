@@ -37,8 +37,8 @@ class BackupServiceFactoryTest extends TestCase
           ->shouldBeCalled();
 
         $this->serviceLocator
-          ->get('GearBase\Util\String')
-          ->willReturn($this->prophesize('GearBase\Util\String\StringService')->reveal())
+          ->get('Gear\Util\String\StringService')
+          ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator

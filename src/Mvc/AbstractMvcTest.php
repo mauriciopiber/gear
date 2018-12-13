@@ -5,15 +5,15 @@ use Gear\Service\AbstractJsonService;
 use Gear\Creator\CodeTestTrait;
 use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
 use Gear\Creator\FileCreator\AppTest\VarsTrait;
-//use GearJson\Src\Src;
+//use Gear\Schema\Src\Src;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
 use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
-use GearJson\Src\Src as SrcObject;
-use GearJson\Db\Db as DbObject;
+use Gear\Schema\Src\Src as SrcObject;
+use Gear\Schema\Db\Db as DbObject;
 use Gear\Exception\InvalidArgumentException;
 
 abstract class AbstractMvcTest extends AbstractJsonService

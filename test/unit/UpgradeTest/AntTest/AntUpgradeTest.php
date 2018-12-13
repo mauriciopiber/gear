@@ -4,7 +4,7 @@ namespace GearTest\UpgradeTest\AntTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Ant\AntUpgrade;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Util\Yaml\YamlService;
 
 /**
@@ -32,7 +32,7 @@ class AntUpgradeTest extends TestCase
             ***REMOVED***
         ***REMOVED***;
 
-        $this->gearConfig = $this->prophesize('GearBase\Config\GearConfig');
+        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
 
         $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
 

@@ -38,7 +38,7 @@ class UrlTest extends TestCase
 
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->url->filterElement();
 
@@ -53,7 +53,7 @@ class UrlTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->url->filterUniqueElement();
 
@@ -68,7 +68,7 @@ class UrlTest extends TestCase
 
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->url->filterElement();
 
@@ -83,7 +83,7 @@ class UrlTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $filter = $this->url->filterUniqueElement();
 
@@ -98,7 +98,7 @@ class UrlTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $value = $this->url->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -110,7 +110,7 @@ class UrlTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \GearBase\Util\String\StringService());
+        $this->url->setStringService(new \Gear\Util\String\StringService());
 
         $value = $this->url->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);

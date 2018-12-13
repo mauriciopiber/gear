@@ -9,8 +9,8 @@ namespace Gear\Constructor\Src;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
-use GearJson\Src\SrcSchemaTrait as JsonSrc;
-use GearJson\Src\SrcSchema as SrcSchema;
+use Gear\Schema\Src\SrcSchemaTrait as JsonSrc;
+use Gear\Schema\Src\SrcSchema as SrcSchema;
 use Gear\Mvc\Form\FormServiceTrait;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
@@ -26,7 +26,7 @@ use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureInterface;
@@ -50,8 +50,8 @@ use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\InterfaceService;
 use Gear\Constructor\AbstractConstructor;
-use GearJson\Src\SrcTypesInterface;
-use GearJson\Src\Src;
+use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Schema\Src\Src;
 
 class SrcConstructor extends AbstractConstructor
 {
@@ -200,7 +200,7 @@ class SrcConstructor extends AbstractConstructor
      *
      * @param array $srcs
      *
-     * @return array[***REMOVED***|\GearBase\Util\ConsoleValidation\ConsoleValidationStatus
+     * @return array[***REMOVED***|\Gear\Util\ConsoleValidation\ConsoleValidationStatus
      */
     public function createAdditional(array $srcs)
     {

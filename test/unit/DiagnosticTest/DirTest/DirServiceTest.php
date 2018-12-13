@@ -6,7 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Diagnostic\Dir\DirService;
 use Gear\Edge\Dir\DirEdge;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfig;
 
 /**
  * @group Diagnostic
@@ -22,7 +22,7 @@ class DirServiceTest extends TestCase
         $root = vfsStream::setup('module');
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
         $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 

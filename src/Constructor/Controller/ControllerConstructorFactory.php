@@ -40,8 +40,8 @@ class ControllerConstructorFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $factory = new ControllerConstructor(
-            $serviceLocator->get('GearBase\Util\String'),
-            $serviceLocator->get('GearJson\Controller'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
+            $serviceLocator->get('Gear\Schema\Controller'),
             $serviceLocator->get(TableService::class),
             $serviceLocator->get(ColumnService::class),
             $serviceLocator->get(ModuleStructure::class),

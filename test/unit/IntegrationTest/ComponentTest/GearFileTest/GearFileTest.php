@@ -3,7 +3,7 @@ namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Integration\Component\GearFile\GearFile;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Integration\Suite\Mvc\MvcMinorSuite;
@@ -12,7 +12,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMinorSuite;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
 use Gear\Integration\Suite\Controller\ControllerMinorSuite;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Integration\Util\Columns\Columns;
 use Gear\Integration\Util\Columns\ColumnsTrait;
 use Gear\Integration\Util\ResolveNames\ResolveNamesTrait;

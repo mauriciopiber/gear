@@ -2,7 +2,7 @@
 namespace Gear\Creator\FileCreator\AppTest;
 
 use Gear\Creator\FileCreator\AbstractFileCreator;
-use GearJson\App\App;
+use Gear\Schema\App\App;
 
 class Vars extends AbstractFileCreator
 {

@@ -29,7 +29,7 @@ class SpecialDependencyConsoleFactory implements FactoryInterface
         $serviceLocator = $controllerManager->getServiceLocator();
 
         $factory = new SpecialDependencyConsole(
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get('console'),
             $serviceLocator->get(Adapter::class)
         );

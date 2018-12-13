@@ -5,7 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\Code;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Injector\Injector;
@@ -34,7 +34,7 @@ class ApiControllerServiceFactory implements FactoryInterface
         $factory = new ApiControllerService(
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('GearBase\Util\String'),
+            $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get(Code::class),
             $serviceLocator->get('Gear\Mvc\Factory\FactoryService'),
             $serviceLocator->get(Injector::class),

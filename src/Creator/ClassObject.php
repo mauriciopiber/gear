@@ -1,9 +1,9 @@
 <?php
 namespace Gear\Creator;
 
-use GearJson\Controller\Controller;
+use Gear\Schema\Controller\Controller;
 
-//use GearJson\Src\Src;
+//use Gear\Schema\Src\Src;
 
 class ClassObject
 {

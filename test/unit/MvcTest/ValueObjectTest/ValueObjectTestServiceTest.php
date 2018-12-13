@@ -13,7 +13,7 @@ class ValueObjectTestServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('GearBase\Util\String\StringService');
+        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');

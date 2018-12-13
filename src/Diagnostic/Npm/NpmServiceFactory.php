@@ -12,7 +12,7 @@ class NpmServiceFactory implements FactoryInterface
     {
         $factory = new NpmService(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get('Gear\Edge\Npm\NpmEdge')
         );
         unset($serviceLocator);

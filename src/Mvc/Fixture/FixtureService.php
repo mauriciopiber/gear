@@ -14,10 +14,10 @@ namespace Gear\Mvc\Fixture;
 use Gear\Mvc\AbstractMvc;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Column\Integer\PrimaryKey;
-use GearJson\Src\SrcTypesInterface;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Db\Db;
-use GearJson\Src\Src;
+use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Src\Src;
 use Zend\EventManager\EventManagerInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
@@ -58,7 +58,7 @@ class FixtureService extends AbstractMvc
 
     /**
      *
-     * @param \GearJson\Src\Src $src
+     * @param \Gear\Schema\Src\Src $src
      */
     public function createFixture($data)
     {

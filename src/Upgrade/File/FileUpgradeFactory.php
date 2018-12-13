@@ -13,7 +13,7 @@ class FileUpgradeFactory implements FactoryInterface
     {
         $factory = new FileUpgrade(
             $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('GearBase\GearConfig'),
+            $serviceLocator->get('Gear\Config\GearConfig'),
             $serviceLocator->get(FileEdge::class),
             $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Module'),

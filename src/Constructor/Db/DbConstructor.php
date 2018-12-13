@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
 //use Gear\Table\TableService\TableService;
-use GearJson\Db\DbSchemaTrait as DbSchemaTrait;
-use GearJson\Action\ActionSchemaTrait as ActionSchemaTrait;
+use Gear\Schema\Db\DbSchemaTrait as DbSchemaTrait;
+use Gear\Schema\Action\ActionSchemaTrait as ActionSchemaTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
@@ -39,12 +39,12 @@ use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Column\ColumnService;
-use GearJson\Db\DbSchema as DbSchema;
-use GearJson\Action\ActionSchema as ActionSchema;
+use Gear\Schema\Db\DbSchema as DbSchema;
+use Gear\Schema\Action\ActionSchema as ActionSchema;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Table\UploadImage as UploadImageTable;
-use GearJson\Service\FactoriesInterface;
+use Gear\Schema\Service\FactoriesInterface;
 
 class DbConstructor extends AbstractConstructor
 {

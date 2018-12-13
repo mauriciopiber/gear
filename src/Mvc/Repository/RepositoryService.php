@@ -11,11 +11,11 @@
  */
 namespace Gear\Mvc\Repository;
 
-use GearJson\Src\Src;
-use GearJson\Db\Db;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
 use Gear\Mvc\AbstractMvc;
-use GearJson\Schema\SchemaServiceTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Schema\SchemaServiceTrait;
+use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
 
@@ -153,7 +153,7 @@ class RepositoryService extends AbstractMvc
             $this->fileName  = $this->str('class', $this->db->getTable()).'Repository.php';
         }
 
-        if ($this->src instanceof \GearJson\Src\Src) {
+        if ($this->src instanceof \Gear\Schema\Src\Src) {
             $this->className = $this->src->getName();
             $this->fileName = $this->src->getName().'.php';
         }

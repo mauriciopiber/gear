@@ -3,7 +3,7 @@ namespace Gear\Mvc\View;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Config\AssetManagerTrait;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 class AngularService extends AbstractMvc
 {

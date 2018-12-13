@@ -3,15 +3,14 @@ namespace Gear\Database;
 
 use GearBase\Script\ScriptService;
 use Gear\Module\Structure\ModuleStructure;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
 use Zend\Console\Adapter\Posix;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Util\String\StringServiceAwareInterface;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\RequestTrait;
+use Gear\Util\String\StringServiceAwareInterface;
+use Gear\Util\String\StringServiceTrait;
 use Zend\Console\Request;
 
 class BackupService implements ModuleStructureInterface, StringServiceAwareInterface
@@ -23,8 +22,6 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
     use ProjectLocationTrait;
 
     use ScriptServiceTrait;
-
-    use RequestTrait;
 
     const LOADED = 'Carregado dump de %s';
 
@@ -46,6 +43,22 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
         $this->stringService = $string;
         $this->module = $module;
         $this->request = $request;
+    }
+
+    protected $request;
+
+    public function getRequest()
+    {
+        if (!isset($this->request)) {
+            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+        }
+        return $this->request;
+    }
+
+    public function setRequest($request)
+    {
+        $this->request = $request;
+        return $this;
     }
 
     public function projectLoad()

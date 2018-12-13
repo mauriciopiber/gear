@@ -4,9 +4,9 @@ namespace Gear\Mvc\ViewHelper;
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ViewHelper\ViewHelperTestServiceTrait;
 use Gear\Mvc\Config\ViewHelperManagerTrait;
-use GearJson\Src\Src;
-use GearJson\Src\SrcTypesInterface;
-use GearJson\Db\Db;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Schema\Db\Db;
 
 class ViewHelperService extends AbstractMvc
 {

@@ -9,7 +9,7 @@
 
 namespace Gear\Edge\Exception;
 
-use GearBase\Exception\RuntimeException;
+use Gear\Exception\RuntimeException;
 
 class ModuleTypeNotFoundException extends RuntimeException
 {

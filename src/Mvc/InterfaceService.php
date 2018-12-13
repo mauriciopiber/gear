@@ -5,12 +5,12 @@ use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
-use GearJson\Src\Src;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringServiceAwareInterface;
+use Gear\Schema\Src\Src;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceAwareInterface;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
-use GearBase\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirServiceTrait;
 
 class InterfaceService implements ServiceLocatorAwareInterface, ModuleStructureInterface, StringServiceAwareInterface
 {

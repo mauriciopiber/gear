@@ -2,16 +2,16 @@
 namespace Gear\Mvc\ValueObject;
 
 use Gear\Module\Structure\ModuleStructureInterface;
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\CodeTest;
 use Gear\Creator\CodeTestTrait;
-use GearJson\Src\Src;
+use Gear\Schema\Src\Src;
 use Gear\Module\Structure\ModuleStructure;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcTest;
 
 /**

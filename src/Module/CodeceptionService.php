@@ -5,7 +5,7 @@ use Gear\Service\AbstractJsonService;
 use Gear\Module\Structure\ModuleStructure;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Dumper;
-use GearBase\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 
 /**
  * Cria os arquivos necessários para rodar os testes utilizando codeception/codeception.
@@ -15,7 +15,7 @@ use GearBase\Project\ProjectLocationTrait;
  */
 class CodeceptionService extends AbstractJsonService
 {
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     protected $module;
 
@@ -133,7 +133,7 @@ class CodeceptionService extends AbstractJsonService
     {
         $yaml = new Parser();
 
-        $value = $yaml->parse(file_get_contents($this->getProjectFolder().'/codeception.yml'));
+        $value = $yaml->parse(file_get_contents($this->getModuleFolder().'/codeception.yml'));
 
 
         if (!isset($value['include'***REMOVED***)) {
@@ -152,7 +152,7 @@ class CodeceptionService extends AbstractJsonService
 
         $yaml = $dumper->dump($value, 4);
 
-        file_put_contents($this->getProjectFolder().'/codeception.yml', $yaml);
+        file_put_contents($this->getModuleFolder().'/codeception.yml', $yaml);
 
         return true;
     }
@@ -167,7 +167,7 @@ class CodeceptionService extends AbstractJsonService
 
         $yaml = new Parser();
 
-        $value = $yaml->parse(file_get_contents($this->getProjectFolder().'/codeception.yml'));
+        $value = $yaml->parse(file_get_contents($this->getModuleFolder().'/codeception.yml'));
 
         if (!isset($value['include'***REMOVED***)) {
             $value['include'***REMOVED*** = [***REMOVED***;
@@ -191,7 +191,7 @@ class CodeceptionService extends AbstractJsonService
 
         $yaml = $dumper->dump($value, 4);
 
-        file_put_contents($this->getProjectFolder().'/codeception.yml', $yaml);
+        file_put_contents($this->getModuleFolder().'/codeception.yml', $yaml);
 
         return true;
     }

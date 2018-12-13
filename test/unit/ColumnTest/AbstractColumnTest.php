@@ -15,7 +15,7 @@ class AbstractColumnTest extends TestCase
         parent::setUp();
 
         $this->abstractColumn = $this->getMockForAbstractClass('Gear\Column\AbstractColumn', [***REMOVED***, '', false);
-        $this->abstractColumn->setStringService(new \GearBase\Util\String\StringService());
+        $this->abstractColumn->setStringService(new \Gear\Util\String\StringService());
         $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $this->column->getCharacterMaximumLength()->willReturn(45);
     }

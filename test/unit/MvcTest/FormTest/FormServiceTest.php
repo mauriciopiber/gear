@@ -30,12 +30,12 @@ class FormServiceTest extends TestCase
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
         //string
-        $this->string = new \GearBase\Util\String\StringService();
+        $this->string = new \Gear\Util\String\StringService();
 
         //file-render
         $template       = new \Gear\Creator\Template\TemplateService    ();
         $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \GearBase\Util\File\FileService();
+        $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
         //template
@@ -46,7 +46,7 @@ class FormServiceTest extends TestCase
         $this->code = new \Gear\Creator\Code();
         $this->code->setModule($this->module->reveal());
         $this->code->setStringService($this->string);
-        $this->code->setDirService(new \GearBase\Util\Dir\DirService());
+        $this->code->setDirService(new \Gear\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
 
@@ -155,7 +155,7 @@ class FormServiceTest extends TestCase
 
 
 
-        $this->db = new \GearJson\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
 
 
         $columnManager = new ColumnManager($columns);
@@ -175,7 +175,7 @@ class FormServiceTest extends TestCase
 
         $this->form->setTableService($this->table->reveal());
 
-        $form = new \GearJson\Src\Src(
+        $form = new \Gear\Schema\Src\Src(
             [
                 'name' => sprintf('%sForm', $table),
                 'type' => 'Form',
@@ -184,7 +184,7 @@ class FormServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $schemaService = $this->prophesize('GearJson\Schema\SchemaService');
+        $schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $schemaService->getSrcByDb($this->db, 'Form')->willReturn($form);
 
         $this->form->setCode($this->code);

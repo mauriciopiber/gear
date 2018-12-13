@@ -2,7 +2,7 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
-use GearJson\Db\Db;
+use Gear\Schema\Db\Db;
 
 class UploadImageManager extends AbstractConfigManager implements ModuleManagerInterface
 {

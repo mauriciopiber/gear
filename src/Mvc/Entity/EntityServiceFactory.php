@@ -17,13 +17,13 @@ class EntityServiceFactory implements FactoryInterface
             $serviceLocator->get('scriptService'),
             $serviceLocator->get('Gear\Mvc\Entity\EntityTestService'),
             $serviceLocator->get('Gear\Table\TableService'),
-            $serviceLocator->get('GearJson\Src'),
+            $serviceLocator->get('Gear\Schema\Src'),
             $serviceLocator->get('Gear\Mvc\Config\ServiceManager'),
-            $serviceLocator->get('GearJson\Schema'),
-            $serviceLocator->get('GearBase\Util\Dir'),
+            $serviceLocator->get('Gear\Schema\Schema'),
+            $serviceLocator->get('Gear\Util\Dir\DirService'),
             $serviceLocator->get('Gear\Util\Glob\GlobService'),
             $serviceLocator->get('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer'),
-            $serviceLocator->get('GearBase\Util\String')
+            $serviceLocator->get('Gear\Util\String\StringService')
         );
     }
 }

@@ -5,12 +5,12 @@ use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Edge\Composer\ComposerEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Upgrade\ModuleUpgradeInterface;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
 use Gear\Module\Structure\ModuleStructure;
 
 class ComposerUpgrade implements ModuleUpgradeInterface

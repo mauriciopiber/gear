@@ -4,7 +4,7 @@ namespace GearTest\MvcTest\EntityTest\EntityObjectFixerTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObject;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 
 /**
  * @group Service

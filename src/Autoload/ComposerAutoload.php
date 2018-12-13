@@ -4,33 +4,33 @@ namespace Gear\Autoload;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Zend\Json\Json;
-use GearBase\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 
 class ComposerAutoload
 {
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     public function __construct(ModuleStructure $module)
     {
         $this->module = $module;
 
-        $this->fileLocation = $this->getProjectFolder().'/composer.json';
+        $this->fileLocation = $this->getModuleFolder().'/composer.json';
 
         $this->actualFile = Json::decode(file_get_contents($this->fileLocation), 1);
     }
 
     public function loadFile()
     {
-        $this->fileLocation = $this->getProjectFolder().'/composer.json';
+        $this->fileLocation = $this->getModuleFolder().'/composer.json';
 
         $this->actualFile = Json::decode(file_get_contents($this->fileLocation), 1);
     }
 
     public function saveFile()
     {
-        $this->fileLocation = $this->getProjectFolder().'/composer.json';
+        $this->fileLocation = $this->getModuleFolder().'/composer.json';
 
         $pretty = Json::prettyPrint(Json::encode($this->actualFile, 1));
 

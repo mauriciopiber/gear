@@ -4,24 +4,24 @@ namespace GearTest\ModuleTest;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ConstructService;
-use GearJson\Db\DbSchema;
-use GearJson\Src\SrcSchema;
-use GearJson\Controller\ControllerSchema;
-use GearJson\Action\ActionSchema;
-use GearJson\App\AppService as SchemaAppService;
+use Gear\Schema\Db\DbSchema;
+use Gear\Schema\Src\SrcSchema;
+use Gear\Schema\Controller\ControllerSchema;
+use Gear\Schema\Action\ActionSchema;
+use Gear\Schema\App\AppService as SchemaAppService;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Constructor\App\AppService;
-use GearJson\Src\Src;
-use GearJson\Db\Db;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
-use GearJson\App\App;
-use GearBase\Util\ConsoleValidation\ConsoleValidationStatus;
-use GearJson\Controller\Controller as ControllerObject;
-use GearJson\Action\Action as ActionObject;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
+use Gear\Schema\App\App;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Schema\Controller\Controller as ControllerObject;
+use Gear\Schema\Action\Action as ActionObject;
 
 /**
  * @group Module
@@ -352,9 +352,9 @@ EOS
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        //$srcschema = $this->prophesize('GearJson\Src\SrcSchema');
+        //$srcschema = $this->prophesize('Gear\Schema\Src\SrcSchema');
 
-        //$src = new \GearJson\Src\Src($data);
+        //$src = new \Gear\Schema\Src\Src($data);
 
         //$srcschema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
 
@@ -398,9 +398,9 @@ EOS
      */
     public function testAppDuplicade()
     {
-        $appschema = $this->prophesize('GearJson\App\AppService');
+        $appschema = $this->prophesize('Gear\Schema\App\AppService');
 
-        $app = new \GearJson\App\App(['name' => 'Gearing', 'type' => 'Service'***REMOVED***);
+        $app = new \Gear\Schema\App\App(['name' => 'Gearing', 'type' => 'Service'***REMOVED***);
 
         $appschema->appExist('Gearing', $app)->willReturn(true);
 
@@ -431,9 +431,9 @@ EOS
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        $app = new \GearJson\App\App($data);
+        $app = new \Gear\Schema\App\App($data);
 
-        $appschema = $this->prophesize('GearJson\App\AppService');
+        $appschema = $this->prophesize('Gear\Schema\App\AppService');
         $appschema->appExist('Gearing', $app)->willReturn(false);
 
         $appservice = $this->prophesize('Gear\Constructor\App\AppService');
@@ -468,9 +468,9 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \GearJson\Controller\Controller($data);
+        $controller = new \Gear\Schema\Controller\Controller($data);
 
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
         $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
@@ -502,9 +502,9 @@ EOS
      */
     public function testControllerDuplicade()
     {
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
 
-        $controller = new \GearJson\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
+        $controller = new \Gear\Schema\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
 
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(true);
 
@@ -536,7 +536,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \GearJson\Controller\Controller($data);
+        $controller = new \Gear\Schema\Controller\Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false);
 
@@ -704,11 +704,11 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \GearJson\Controller\Controller($data);
+        $controller = new \Gear\Schema\Controller\Controller($data);
 
 
 
-        $controllerschema = $this->prophesize('GearJson\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
         $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
@@ -725,9 +725,9 @@ EOS
         ***REMOVED***);
 
         //action
-        $actionschema = $this->prophesize('GearJson\Action\ActionSchema');
+        $actionschema = $this->prophesize('Gear\Schema\Action\ActionSchema');
 
-        $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $actionschema->actionExist('Gearing', $action)->willReturn(true);
         $this->construct->setActionSchema($actionschema->reveal());
 
@@ -767,7 +767,7 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \GearJson\Controller\Controller($data);
+        $controller = new \Gear\Schema\Controller\Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false)->shouldBeCalled();
 
@@ -780,7 +780,7 @@ EOS
         ***REMOVED***);
         //action
 
-        $action = new \GearJson\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $this->actionSchema->actionExist('Gearing', $action)->willReturn(false)->shouldBeCalled();
 
 

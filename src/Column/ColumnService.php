@@ -10,8 +10,8 @@ use Gear\Column\UniqueInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Table\TableService\TableServiceTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearJson\Db\Db;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Schema\Db\Db;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -107,7 +107,7 @@ class ColumnService
     }
 
     /**
-     * Extrai todos Gear\Column de um GearJson\Db\Db.
+     * Extrai todos Gear\Column de um Gear\Schema\Db\Db.
      *
      * @param Db $db Mvc
      *
@@ -181,7 +181,7 @@ class ColumnService
      * Transforma uma metadata de coluna simples em Gear\Column.
      *
      * @param Zend\Db\Metadata\Object\ColumnObject $column Coluna que será transformada em Gear\Column
-     * @param GearJson\Db\Db                       $db     Mvc
+     * @param Gear\Schema\Db\Db                       $db     Mvc
      *
      * @return \Gear\Column\UniqueInterface|unknown
      */

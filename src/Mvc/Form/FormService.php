@@ -12,9 +12,9 @@
 namespace Gear\Mvc\Form;
 
 use Gear\Mvc\AbstractMvc;
-use GearJson\Schema\SchemaServiceTrait;
+use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Form\FormTestServiceTrait;
-use GearJson\Src\SrcTypesInterface;
+use Gear\Schema\Src\SrcTypesInterface;
 
 class FormService extends AbstractMvc
 {

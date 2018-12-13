@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Upgrade\Dir;
 
-use GearBase\Util\String\StringServiceTrait;
+use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Dir\DirEdgeTrait;
@@ -9,10 +9,10 @@ use Gear\Edge\Dir\DirEdge;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Project\ProjectLocationTrait;
-use GearBase\Util\Dir\DirServiceTrait;
-use GearBase\Util\Dir\DirService;
-use GearBase\Config\GearConfig;
-use GearBase\Config\GearConfigTrait;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
 
 class DirUpgrade
 {

@@ -3,10 +3,10 @@ namespace GearTest\DatabaseTest\PhinxTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Database\Phinx\PhinxService;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use org\bovigo\vfs\vfsStream;
 use Gear\Creator\Template\TemplateService;
-use GearBase\Util\File\FileService;
+use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use DateTime;

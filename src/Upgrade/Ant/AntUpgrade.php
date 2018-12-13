@@ -6,13 +6,13 @@ use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Edge\Ant\AntEdge;
 use Gear\Project\ProjectLocationTrait;
-use GearBase\Config\GearConfigTrait;
-use GearBase\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
+use Gear\Config\GearConfig;
 use SimpleXmlElement;
 use Exception;
 use Gear\Module\Structure\ModuleStructureTrait;
-use GearBase\Util\String\StringServiceTrait;
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -87,7 +87,7 @@ class AntUpgrade
      *
      * @param Zend\Console\Adapter\Posix         $console       Console para exibir mensagens
      * @param Gear\Util\Prompt\ConsolePrompt     $consolePrompt Ferramenta pra manipular interações de usuário
-     * @param GearBase\Util\String\StringService $string        Ferramenta para manipular String
+     * @param Gear\Util\String\StringService $string        Ferramenta para manipular String
      * @param array                              $config        Configuração
      * @param Gear\Module\Structure\ModuleStructure   $module        Estrutura do Módulo
      */
