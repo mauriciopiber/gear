@@ -26,7 +26,7 @@ class FileUpgradeTest extends TestCase
         $this->projectService = $this->prophesize('Gear\Project\ProjectService');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->docs = $this->prophesize(Docs::class);

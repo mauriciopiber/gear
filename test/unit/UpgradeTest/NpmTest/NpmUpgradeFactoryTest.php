@@ -16,8 +16,8 @@ class NpmUpgradeFactoryTest extends TestCase
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
 
-        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
-          ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
+        $this->serviceLocator->get('Gear\Console\Prompt\ConsolePrompt')
+          ->willReturn($this->prophesize('Gear\Console\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator->get(ModuleStructure::class)

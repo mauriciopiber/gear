@@ -29,7 +29,7 @@ use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Module\Exception\GearfileNotFoundException;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\ConstructStatusObject;
 use Gear\Schema\Src\SrcTypesInterface;
 

@@ -26,7 +26,7 @@ use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureInterface;
@@ -200,7 +200,7 @@ class SrcConstructor extends AbstractConstructor
      *
      * @param array $srcs
      *
-     * @return array[***REMOVED***|\Gear\Util\ConsoleValidation\ConsoleValidationStatus
+     * @return array[***REMOVED***|\Gear\Console\ConsoleValidation\ConsoleValidationStatus
      */
     public function createAdditional(array $srcs)
     {

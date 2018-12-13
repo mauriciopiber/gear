@@ -4,7 +4,7 @@ namespace Gear\Upgrade\Composer;
 use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Edge\Composer\ComposerEdge;
-use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;

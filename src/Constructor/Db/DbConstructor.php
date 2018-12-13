@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 //use Gear\Table\TableService\TableService;
 use Gear\Schema\Db\DbSchemaTrait as DbSchemaTrait;
 use Gear\Schema\Action\ActionSchemaTrait as ActionSchemaTrait;

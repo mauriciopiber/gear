@@ -12,7 +12,7 @@ use Gear\Module\Tests\ModuleTestsService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Edge\Ant\AntEdge;
-use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Console\Prompt\ConsolePrompt;
 use GearTest\UtilTestTrait;
 
 /**

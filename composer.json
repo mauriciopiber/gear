@@ -11,7 +11,8 @@
 		"zendframework/zendframework" : "^2.5",
 		"mauriciopiber/gear-util" : "^0.1",
 		"mauriciopiber/gear-schema" : "^0.3",
-		"mauriciopiber/gear-scripts" : "^0.1"
+		"mauriciopiber/gear-scripts" : "^0.1",
+		"mauriciopiber/gear-console": "^0.1"
 	},
 	"require-dev" : {
 		"mauriciopiber/gear-deploy" : "^0.3",

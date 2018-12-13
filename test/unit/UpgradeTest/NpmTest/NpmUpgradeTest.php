@@ -21,7 +21,7 @@ class NpmUpgradeTest extends TestCase
         vfsStream::setup('module');
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
         $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->string = new \Gear\Util\String\StringService();
         $this->npmEdge = $this->prophesize(NpmEdge::class);

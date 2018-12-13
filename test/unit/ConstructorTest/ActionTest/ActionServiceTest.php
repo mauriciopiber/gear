@@ -30,7 +30,7 @@ use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Schema\SchemaService;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Column\ColumnManager;
 

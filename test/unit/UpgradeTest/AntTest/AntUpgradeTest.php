@@ -22,7 +22,7 @@ class AntUpgradeTest extends TestCase
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
         $this->string = new StringService();
         $this->config = [
             'gear' => [

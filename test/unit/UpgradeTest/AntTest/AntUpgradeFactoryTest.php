@@ -16,9 +16,9 @@ class AntUpgradeFactoryTest extends TestCase
     {
         $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
 
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
 
-        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
+        $this->serviceLocator->get('Gear\Console\Prompt\ConsolePrompt')
         ->willReturn($consolePrompt->reveal())
         ->shouldBeCalled();
 

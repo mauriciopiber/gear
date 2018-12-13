@@ -23,7 +23,7 @@ class DirUpgradeTest extends TestCase
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
         $this->dir = new \Gear\Util\Dir\DirService();
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
         $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 

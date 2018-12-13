@@ -18,10 +18,10 @@ class ConsolePromptFactoryTest extends TestCase
 
         $this->serviceLocator->get('Request')->willReturn($request->reveal())->shouldBeCalled();
 
-        $factory = new \Gear\Util\Prompt\ConsolePromptFactory();
+        $factory = new \Gear\Console\Prompt\ConsolePromptFactory();
 
         $instance = $factory->createService($this->serviceLocator->reveal());
 
-        $this->assertInstanceOf('Gear\Util\Prompt\ConsolePrompt', $instance);
+        $this->assertInstanceOf('Gear\Console\Prompt\ConsolePrompt', $instance);
     }
 }

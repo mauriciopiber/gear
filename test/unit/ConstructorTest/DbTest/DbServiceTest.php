@@ -17,7 +17,7 @@ use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Module\Structure\ModuleStructure;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 
 /**
  * @group fix-table

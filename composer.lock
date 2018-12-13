@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "a4ecb7f385cc4fed1a32e35f1ecbf9f7",
+    "content-hash": "e2cd11a7d2529829d9c4dafbda575af1",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1254,6 +1254,44 @@
             "time": "2013-12-12T15:42:53+00:00"
         },
         {
+            "name": "mauriciopiber/gear-console",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:mauriciopiber/gear-console.git",
+                "reference": "2d2b23463b671e2266efda04ff6b579561732cc9"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-console-0.1.1-e9f683.tar",
+                "reference": "2d2b23463b671e2266efda04ff6b579561732cc9",
+                "shasum": null
+            },
+            "require": {
+                "php": "^7.0",
+                "zendframework/zend-mvc": "^2.6",
+                "zendframework/zendframework": "^2.5"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^0.9",
+                "pdepend/pdepend": "^2.4",
+                "phploc/phploc": "^2.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.0",
+                "sebastian/phpcpd": "^2.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "theseer/phpdox": "^0.11.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gear\\Console\\": "src",
+                    "GearTest\\ConsoleTest\\": "test/unit"
+                }
+            },
+            "time": "2018-12-13T06:29:04+00:00"
+        },
+        {
             "name": "mauriciopiber/gear-locator",
             "version": "0.1.0",
             "source": {
@@ -1291,19 +1329,20 @@
         },
         {
             "name": "mauriciopiber/gear-schema",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-schema.git",
-                "reference": "ad22c623aab5c09cd47afa2db85438fa3e5e95a3"
+                "reference": "a872968ec01bf0331ddea3e97fe4c083065af1cb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-schema-0.3.0-188b7b.tar",
-                "reference": "ad22c623aab5c09cd47afa2db85438fa3e5e95a3",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-schema-0.3.1-41c80b.tar",
+                "reference": "a872968ec01bf0331ddea3e97fe4c083065af1cb",
                 "shasum": null
             },
             "require": {
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-locator": "^0.1",
                 "mauriciopiber/gear-scripts": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
@@ -1329,7 +1368,7 @@
                     "GearTest\\SchemaTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-13T03:09:52+00:00"
+            "time": "2018-12-13T06:33:31+00:00"
         },
         {
             "name": "mauriciopiber/gear-scripts",
@@ -1366,16 +1405,16 @@
         },
         {
             "name": "mauriciopiber/gear-util",
-            "version": "0.1.5",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-util.git",
-                "reference": "112b42d349895976c0380a94d5c346d98e99371e"
+                "reference": "8d92207bd381e3c6aefc0a3fe344bb93978fed83"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.5-93087a.tar",
-                "reference": "112b42d349895976c0380a94d5c346d98e99371e",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.6-dfa881.tar",
+                "reference": "8d92207bd381e3c6aefc0a3fe344bb93978fed83",
                 "shasum": null
             },
             "require": {
@@ -1403,7 +1442,7 @@
                     "Gear\\Util\\Test\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T22:30:11+00:00"
+            "time": "2018-12-13T06:13:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",

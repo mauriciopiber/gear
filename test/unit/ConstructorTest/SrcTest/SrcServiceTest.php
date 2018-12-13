@@ -3,7 +3,7 @@ namespace GearTest\ConstructorTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Src\SrcConstructor;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;

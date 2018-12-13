@@ -25,7 +25,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Project\Docs\Docs;
-use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Console\Prompt\ConsolePrompt;
 use Gear\Project\Composer\ComposerService;
 use Gear\Util\File\FileServiceTrait;
 use Gear\Util\File\FileService;

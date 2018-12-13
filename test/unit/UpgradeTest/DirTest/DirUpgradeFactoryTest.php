@@ -26,9 +26,9 @@ class DirUpgradeFactoryTest extends TestCase
 
         $this->serviceLocator->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
 
-        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
+        $this->serviceLocator->get('Gear\Console\Prompt\ConsolePrompt')
             ->willReturn($consolePrompt->reveal())
             ->shouldBeCalled();
 

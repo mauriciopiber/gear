@@ -20,7 +20,7 @@ use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Util\String\StringServiceTrait;

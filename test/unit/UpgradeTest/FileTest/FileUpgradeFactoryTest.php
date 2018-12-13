@@ -20,8 +20,8 @@ class FileUpgradeFactoryTest extends TestCase
             $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
-          ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
+        $this->serviceLocator->get('Gear\Console\Prompt\ConsolePrompt')
+          ->willReturn($this->prophesize('Gear\Console\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
 
         $this->serviceLocator->get('Gear\Module')

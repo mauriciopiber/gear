@@ -46,7 +46,7 @@ class PackageTest extends TestCase
         );
 
         $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
 
         $this->config = [***REMOVED***;
 

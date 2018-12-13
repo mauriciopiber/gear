@@ -17,7 +17,7 @@ class ProjectServiceFactory implements FactoryInterface
             $serviceLocator->get(FileCreator::class),
             $serviceLocator->get('Gear\Edge\Dir\DirEdge'),
             $serviceLocator->get('Gear\Project\Docs\Docs'),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
+            $serviceLocator->get('Gear\Console\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Upgrade\Ant\AntUpgrade'),
             $serviceLocator->get('Gear\Upgrade\Npm\NpmUpgrade'),
             $serviceLocator->get('config'),

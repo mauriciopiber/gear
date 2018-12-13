@@ -19,7 +19,7 @@ use Gear\Schema\Db\Db;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use Gear\Schema\App\App;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Schema\Controller\Controller as ControllerObject;
 use Gear\Schema\Action\Action as ActionObject;
 

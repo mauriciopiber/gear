@@ -4,7 +4,7 @@ namespace GearTest\ServiceTest\ConstructorTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Schema\Controller\Controller;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Web\WebControllerService;

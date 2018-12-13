@@ -24,7 +24,7 @@ class ComposerUpgradeTest extends TestCase
         $this->file = vfsStream::url('module/composer.json');
 
         $this->composerEdge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->consolePrompt = $this->prophesize('Gear\Console\Prompt\ConsolePrompt');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module');

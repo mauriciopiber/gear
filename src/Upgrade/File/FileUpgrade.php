@@ -4,7 +4,7 @@ namespace Gear\Upgrade\File;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Module\ModuleService;
 use Gear\Util\Console\ConsoleAwareTrait;
-use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Edge\File\FileEdgeTrait;
 use Gear\Edge\File\FileEdge;
 use Gear\Project\ProjectLocationTrait;
@@ -15,7 +15,7 @@ use Gear\Module\Tests\{
 use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
-use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Console\Prompt\ConsolePrompt;
 use Gear\Config\GearConfig;
 use Gear\Config\GearConfigTrait;
 use Gear\Module\Docs\Docs;

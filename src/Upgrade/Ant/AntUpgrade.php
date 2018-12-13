@@ -2,7 +2,7 @@
 namespace Gear\Upgrade\Ant;
 
 use Gear\Util\Console\ConsoleAwareTrait;
-use Gear\Util\Prompt\ConsolePromptTrait;
+use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Edge\Ant\AntEdge;
 use Gear\Project\ProjectLocationTrait;
@@ -86,7 +86,7 @@ class AntUpgrade
      * Construtor
      *
      * @param Zend\Console\Adapter\Posix         $console       Console para exibir mensagens
-     * @param Gear\Util\Prompt\ConsolePrompt     $consolePrompt Ferramenta pra manipular interações de usuário
+     * @param Gear\Console\Prompt\ConsolePrompt     $consolePrompt Ferramenta pra manipular interações de usuário
      * @param Gear\Util\String\StringService $string        Ferramenta para manipular String
      * @param array                              $config        Configuração
      * @param Gear\Module\Structure\ModuleStructure   $module        Estrutura do Módulo
