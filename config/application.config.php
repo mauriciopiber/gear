@@ -9,6 +9,7 @@
       'Gear\Version',
       'Gear\Util',
       'Gear\Schema',
+      'Gear\Config',
       'Gear'
   ),
   'module_listener_options' =>

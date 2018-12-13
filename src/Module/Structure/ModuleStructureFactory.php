@@ -36,7 +36,7 @@ class ModuleStructureFactory implements FactoryInterface
         $location = $request->getParam('basepath');
 
         if (!empty($location)) {
-            $str = $serviceLocator->get('stringService');
+            $str = $serviceLocator->get('Gear\Util\String\StringService');
             $mainFolder = realpath($location).'/'.$str->str('url', $moduleName);
             $structure->setMainFolder($mainFolder);
         }

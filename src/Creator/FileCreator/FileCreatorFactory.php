@@ -12,7 +12,7 @@ class FileCreatorFactory implements FactoryInterface
     {
         $serviceManager = $controllerManager->get('ServiceManager');
 
-        $file = $serviceManager->get('fileService');
+        $file = $serviceManager->get('Gear\Util\File\FileService');
         $template = $serviceManager->get(TemplateService::class);
 
         return new FileCreator($file, $template);
