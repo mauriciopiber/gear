@@ -1,0 +1,10 @@
+version: '3.1'
+services:
+  main:
+    image: pbr/dev-php:v1.0.2
+    tty: true
+    volumes:
+      - /opt/composer-cache:/root/.composer/cache
+      - .:/var/www/module
+    environment:
+      - PHINX_ENVIRONMENT=DEVELOPMENT
