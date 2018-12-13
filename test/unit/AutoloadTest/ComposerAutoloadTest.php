@@ -27,7 +27,7 @@ class ComposerAutoloadTest extends TestCase
 
     public function testAddModuleToProject()
     {
-        $this->autoload->setProjectFolder(vfsStream::url('project'));
+        $this->autoload->setModuleFolder(vfsStream::url('project'));
         $this->module->getModuleName()->willReturn('NewModule')->shouldBeCalled();
 
         $this->assertTrue($this->autoload->addModuleToProject());
@@ -53,7 +53,7 @@ class ComposerAutoloadTest extends TestCase
 
     public function testRemoveModuleFromProject()
     {
-        $this->autoload->setProjectFolder(vfsStream::url('project'));
+        $this->autoload->setModuleFolder(vfsStream::url('project'));
         $this->module->getModuleName()->willReturn('MyModuleCli')->shouldBeCalled();
 
         $this->assertTrue($this->autoload->removeModuleFromProject());

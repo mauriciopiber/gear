@@ -21,7 +21,7 @@ class ModuleServiceFactoryTest extends TestCase
 
         $expected = [
             'Gear\Creator\FileCreator\FileCreator' => 'Gear\Creator\FileCreator\FileCreator',
-            Gear\Util\String\StringService => 'Gear\Util\String\StringService',
+            'Gear\Util\String\StringService' => 'Gear\Util\String\StringService',
             ModuleStructure::class => 'Gear\Module\Structure\ModuleStructure',
             'Gear\Module\Docs\Docs' => 'Gear\Module\Docs\Docs',
             'Gear\Module\Composer' => 'Gear\Module\ComposerService',

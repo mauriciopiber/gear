@@ -5,8 +5,8 @@ use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Config\RouterManager;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
-use GearJson\Controller\Controller;
-use GearJson\Action\Action;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Action\Action;
 use GearTest\UtilTestTrait;
 
 /**

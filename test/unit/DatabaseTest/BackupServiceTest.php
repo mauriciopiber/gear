@@ -20,7 +20,7 @@ class BackupServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->script = $this->prophesize('GearBase\Script\ScriptService');
+        $this->script = $this->prophesize('Gear\Util\Script\ScriptService');
 
         $this->config = [
             'gear' => [
