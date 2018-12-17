@@ -5,7 +5,7 @@ services:
     tty: true
     volumes:
       - /opt/composer-cache:/root/.composer/cache
-      - .:/var/www/module
+      - .:/var/www/gear
       - /var/www/gear-package:/var/www/gear-package
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT

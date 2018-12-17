@@ -7,8 +7,11 @@
       'Gear\Deploy',
       'Gear\Jenkins',
       'Gear\Version',
+      'Gear\Console',
       'Gear\Util',
+      'Gear\Git',
       'Gear\Schema',
+      'Gear\Jira',
       'Gear\Config',
       'Gear'
   ),

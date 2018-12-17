@@ -362,13 +362,12 @@ class ModuleStructure
         return $this;
     }
 
-    /**
-    public function getFactoryFolder()
-    {
-        return $this->getSrcModuleFolder() . '/Factory';
-    }
+    /*
+      * public function getFactoryFolder()
+      * {
+      * return $this->getSrcModuleFolder() . '/Factory';
+      * }
     */
-
     public function ignoreAll($location)
     {
         $template = <<<EOS

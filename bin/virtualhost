@@ -10,7 +10,7 @@ function validate
 if [ "${1}" == "" ***REMOVED*** || [ "${2}" == "" ***REMOVED*** || [ "${3}" == "" ***REMOVED***; then
 
     validate
-    exit 1 
+    exit 1
 
 fi
 
@@ -21,23 +21,23 @@ projectEnvironment=${3}
 sudo ls -l /etc/apache2/sites-available/$projectHost.conf &> /dev/null
 
 if [ "$?" == 0 ***REMOVED***; then
-    
+
     sudo /usr/sbin/a2dissite $projectHost
     sudo rm /etc/apache2/sites-available/$projectHost.conf
 fi
 
 
 echo "<VirtualHost *:80>
-	DocumentRoot \""$projectDir/public/"\"
-	ServerName \""$projectHost"\"
-	SetEnv PHINX_ENVIRONMENT \""$projectEnvironment"\"
-	<Directory \""$projectDir"\">
-		Options Indexes MultiViews FollowSymLinks
-		AllowOverride All
-		Order allow,deny
-		Allow from all
-        Require all granted		
-	</Directory>
+  DocumentRoot \""$projectDir/public/"\"
+  ServerName \""$projectHost"\"
+  SetEnv PHINX_ENVIRONMENT \""$projectEnvironment"\"
+  <Directory \""$projectDir"\">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    Require all granted
+  </Directory>
 </VirtualHost>" | sudo tee -a /etc/apache2/sites-available/$projectHost.conf
 
 sudo /usr/sbin/a2ensite $projectHost

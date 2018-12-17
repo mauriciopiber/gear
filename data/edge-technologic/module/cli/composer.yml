@@ -1,13 +1,13 @@
-require: 
+require:
   doctrine/doctrine-module: "^0.8"
   doctrine/doctrine-orm-module: "^0.8"
   zendframework/zendframework: "^2.5"
   zendframework/zend-mvc: "^2.6"
-  
+
 require-dev:
-  mauriciopiber/gear: "^0.2 || ^1.0" 
+  mauriciopiber/gear: "^0.2 || ^1.0"
   mauriciopiber/gear-base: "^0.2 || ^1.0"
-  mauriciopiber/gear-json: "^0.2 || ^1.0"  
+  mauriciopiber/gear-json: "^0.2 || ^1.0"
   mauriciopiber/gear-deploy: "^0.2 || ^1.0"
   mauriciopiber/gear-jenkins: "^0.2 || ^1.0"
-  mauriciopiber/gear-version: "^0.2 || ^1.0"
+  mauriciopiber/gear-version: "^0.3"

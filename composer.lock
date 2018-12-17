@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "e2cd11a7d2529829d9c4dafbda575af1",
+    "content-hash": "9218afeb827384102ffe5db8ce180ff0",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1255,16 +1255,16 @@
         },
         {
             "name": "mauriciopiber/gear-console",
-            "version": "0.1.1",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-console.git",
-                "reference": "2d2b23463b671e2266efda04ff6b579561732cc9"
+                "reference": "c16ee8548e186d9f1684e4ac7c1b3a910ba73b19"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-console-0.1.1-e9f683.tar",
-                "reference": "2d2b23463b671e2266efda04ff6b579561732cc9",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-console-0.1.2-7dea71.tar",
+                "reference": "c16ee8548e186d9f1684e4ac7c1b3a910ba73b19",
                 "shasum": null
             },
             "require": {
@@ -1289,20 +1289,20 @@
                     "GearTest\\ConsoleTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-13T06:29:04+00:00"
+            "time": "2018-12-13T06:59:13+00:00"
         },
         {
             "name": "mauriciopiber/gear-locator",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-locator.git",
-                "reference": "d30f90984b3c9b0c81a3c3f8d0379d2a5dfdd824"
+                "reference": "bebe1d9f55d25a326257779b14ee4576412be76a"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-locator-0.1.0-89aae0.tar",
-                "reference": "d30f90984b3c9b0c81a3c3f8d0379d2a5dfdd824",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-locator-0.1.2-ba5c0e.tar",
+                "reference": "bebe1d9f55d25a326257779b14ee4576412be76a",
                 "shasum": null
             },
             "require": {
@@ -1325,7 +1325,7 @@
                     "Gear\\Locator\\Test\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T04:51:29+00:00"
+            "time": "2018-12-17T13:30:14+00:00"
         },
         {
             "name": "mauriciopiber/gear-schema",
@@ -1372,20 +1372,21 @@
         },
         {
             "name": "mauriciopiber/gear-scripts",
-            "version": "0.1.10",
+            "version": "0.1.14",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-scripts.git",
-                "reference": "dd45b102cd366dc0268572216e0a088ff3af51c3"
+                "reference": "720cb856af3c972cd2b8f89ff3eb6f1305da23b0"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.10-217fae.tar",
-                "reference": "dd45b102cd366dc0268572216e0a088ff3af51c3",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.14-8c5163.tar",
+                "reference": "720cb856af3c972cd2b8f89ff3eb6f1305da23b0",
                 "shasum": null
             },
             "bin": [
                 "src/rest/rest-actions",
+                "src/gear/calendar/calendar",
                 "src/rest/rest-fixture",
                 "src/db/db-create",
                 "src/db/db-restart",
@@ -1398,10 +1399,11 @@
                 "src/git/git-tag-create",
                 "src/git/git-tag-delete",
                 "src/git/git-release",
+                "src/git/git-remote-status",
                 "src/satis/satis-build"
             ***REMOVED***,
             "type": "library",
-            "time": "2018-12-13T03:32:17+00:00"
+            "time": "2018-12-17T14:13:14+00:00"
         },
         {
             "name": "mauriciopiber/gear-util",
@@ -4447,16 +4449,16 @@
         },
         {
             "name": "zendframework/zend-filter",
-            "version": "2.9.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-filter.git",
-                "reference": "875da9790e5cb16b9a12f41453d5f7c441452daf"
+                "reference": "1c3e6d02f9cd5f6c929c9859498f5efbe216e86f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/zendframework-zend-filter-875da9790e5cb16b9a12f41453d5f7c441452daf-zip-30cfb0.tar",
-                "reference": "875da9790e5cb16b9a12f41453d5f7c441452daf",
+                "url": "https://mirror.piber.network/dist/zendframework-zend-filter-1c3e6d02f9cd5f6c929c9859498f5efbe216e86f-zip-697d38.tar",
+                "reference": "1c3e6d02f9cd5f6c929c9859498f5efbe216e86f",
                 "shasum": ""
             },
             "require": {
@@ -4508,7 +4510,7 @@
                 "filter",
                 "zf"
             ***REMOVED***,
-            "time": "2018-12-12T23:14:25+00:00"
+            "time": "2018-12-17T16:00:04+00:00"
         },
         {
             "name": "zendframework/zend-form",
@@ -4817,16 +4819,16 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.8.2",
+            "version": "2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "3f02179e014d9ef0faccda2ad6c65d38adc338d8"
+                "reference": "799ad48ed1666d3c62126fec73dd20453b3a9e4d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/zendframework-zend-inputfilter-3f02179e014d9ef0faccda2ad6c65d38adc338d8-zip-a1d421.tar",
-                "reference": "3f02179e014d9ef0faccda2ad6c65d38adc338d8",
+                "url": "https://mirror.piber.network/dist/zendframework-zend-inputfilter-799ad48ed1666d3c62126fec73dd20453b3a9e4d-zip-15f169.tar",
+                "reference": "799ad48ed1666d3c62126fec73dd20453b3a9e4d",
                 "shasum": ""
             },
             "require": {
@@ -4866,7 +4868,7 @@
                 "inputfilter",
                 "zf"
             ***REMOVED***,
-            "time": "2018-05-14T17:38:03+00:00"
+            "time": "2018-12-13T22:51:54+00:00"
         },
         {
             "name": "zendframework/zend-json",
@@ -6218,16 +6220,16 @@
         },
         {
             "name": "zendframework/zend-validator",
-            "version": "2.10.2",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-validator.git",
-                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9"
+                "reference": "f0789b4c4c099afdd2ecc58cc209a26c64bd4f17"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/zendframework-zend-validator-38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9-zip-4b1418.tar",
-                "reference": "38109ed7d8e46cfa71bccbe7e6ca80cdd035f8c9",
+                "url": "https://mirror.piber.network/dist/zendframework-zend-validator-f0789b4c4c099afdd2ecc58cc209a26c64bd4f17-zip-254323.tar",
+                "reference": "f0789b4c4c099afdd2ecc58cc209a26c64bd4f17",
                 "shasum": ""
             },
             "require": {
@@ -6237,6 +6239,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.0.8 || ^5.7.15",
+                "psr/http-message": "^1.0",
                 "zendframework/zend-cache": "^2.6.1",
                 "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-config": "^2.6",
@@ -6250,6 +6253,7 @@
                 "zendframework/zend-uri": "^2.5"
             },
             "suggest": {
+                "psr/http-message": "psr/http-message, required when validating PSR-7 UploadedFileInterface instances via the Upload and UploadFile validators",
                 "zendframework/zend-db": "Zend\\Db component, required by the (No)RecordExists validator",
                 "zendframework/zend-filter": "Zend\\Filter component, required by the Digits validator",
                 "zendframework/zend-i18n": "Zend\\I18n component to allow translation of validation error messages",
@@ -6262,8 +6266,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.10.x-dev",
-                    "dev-develop": "2.11.x-dev"
+                    "dev-master": "2.11.x-dev",
+                    "dev-develop": "2.12.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\Validator",
@@ -6285,7 +6289,7 @@
                 "validator",
                 "zf2"
             ***REMOVED***,
-            "time": "2018-02-01T17:05:33+00:00"
+            "time": "2018-12-13T21:23:15+00:00"
         },
         {
             "name": "zendframework/zend-version",
@@ -6794,19 +6798,20 @@
         },
         {
             "name": "mauriciopiber/gear-calendar",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-calendar.git",
-                "reference": "cb5c99009eae02ca6a6a3874ed8947b0f0d317de"
+                "reference": "730621c324279d538022e36c26e203122b6d5edb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-calendar-0.1.0-ca7626.tar",
-                "reference": "cb5c99009eae02ca6a6a3874ed8947b0f0d317de",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-calendar-0.1.1-4b0c21.tar",
+                "reference": "730621c324279d538022e36c26e203122b6d5edb",
                 "shasum": null
             },
             "require": {
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-locator": "^0.1",
                 "mauriciopiber/gear-schedule": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
@@ -6831,7 +6836,7 @@
                     "GearTest\\CalendarTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T20:10:35+00:00"
+            "time": "2018-12-13T07:19:54+00:00"
         },
         {
             "name": "mauriciopiber/gear-config",
@@ -6876,21 +6881,21 @@
         },
         {
             "name": "mauriciopiber/gear-deploy",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-deploy.git",
-                "reference": "54b4706a4126e8f0866b6083213786de39469adf"
+                "reference": "14a0ed743994c822619fa5bf8825b5fbe19dc479"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-deploy-0.3.1-0d2e21.tar",
-                "reference": "54b4706a4126e8f0866b6083213786de39469adf",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-deploy-0.3.2-988164.tar",
+                "reference": "14a0ed743994c822619fa5bf8825b5fbe19dc479",
                 "shasum": null
             },
             "require": {
-                "cypresslab/gitelephant": "^1.0.14",
                 "mauriciopiber/gear-calendar": "^0.1",
+                "mauriciopiber/gear-config": "^0.1",
                 "mauriciopiber/gear-finance": "^0.1",
                 "mauriciopiber/gear-git": "^0.1",
                 "mauriciopiber/gear-jenkins": "^0.3",
@@ -6898,7 +6903,7 @@
                 "mauriciopiber/gear-schedule": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
                 "mauriciopiber/gear-version": "^0.3",
-                "php": ">=5.5",
+                "php": ">=7.0",
                 "zendframework/zend-mvc": "~2.6.0",
                 "zendframework/zendframework": "^2.5.1"
             },
@@ -6913,23 +6918,6 @@
                 "sebastian/phpcpd": "^2.0.2",
                 "squizlabs/php_codesniffer": "^2.0.0"
             },
-            "bin": [
-                "bin/build.sh",
-                "bin/push.sh",
-                "bin/release.sh",
-                "bin/git-remote-status.sh",
-                "bin/create-version",
-                "bin/done-issue",
-                "bin/work-issue",
-                "bin/fast-bug",
-                "bin/fast-requirement",
-                "bin/fast-story",
-                "bin/fast-release",
-                "bin/fast-version",
-                "bin/release-version",
-                "bin/work-log",
-                "bin/comment-issue"
-            ***REMOVED***,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -6937,23 +6925,24 @@
                     "GearTest\\DeployTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-13T01:14:43+00:00"
+            "time": "2018-12-17T14:46:14+00:00"
         },
         {
             "name": "mauriciopiber/gear-finance",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-finance.git",
-                "reference": "1bbb43244a63ab8a3ec48024c09670bb791baa90"
+                "reference": "cafe6ce02573729971224f86242031e648f597f4"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-finance-0.1.0-ece947.tar",
-                "reference": "1bbb43244a63ab8a3ec48024c09670bb791baa90",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-finance-0.1.1-c0cb56.tar",
+                "reference": "cafe6ce02573729971224f86242031e648f597f4",
                 "shasum": null
             },
             "require": {
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-schedule": "^0.1",
                 "mauriciopiber/gear-scripts": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
@@ -6978,23 +6967,24 @@
                     "GearTest\\FinanceTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T23:51:12+00:00"
+            "time": "2018-12-13T07:08:42+00:00"
         },
         {
             "name": "mauriciopiber/gear-git",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-git.git",
-                "reference": "80c8866109bd88f27230662d53dd7da240151fe4"
+                "reference": "a26b7a46dc6fc34284fcfbf98427f94d3f233e2f"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-git-0.1.0-aa8882.tar",
-                "reference": "80c8866109bd88f27230662d53dd7da240151fe4",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-git-0.1.2-692e47.tar",
+                "reference": "a26b7a46dc6fc34284fcfbf98427f94d3f233e2f",
                 "shasum": null
             },
             "require": {
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-locator": "^0.1",
                 "mauriciopiber/gear-scripts": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
@@ -7020,24 +7010,25 @@
                     "GearTest\\GitTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T23:06:34+00:00"
+            "time": "2018-12-17T14:38:41+00:00"
         },
         {
             "name": "mauriciopiber/gear-jenkins",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jenkins.git",
-                "reference": "e0eb4f8050cbdebadf32b893a1aa3b8ac9b04890"
+                "reference": "7805790d02cef02b0b6090a1bf202d780232e655"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jenkins-0.3.0-a453cb.tar",
-                "reference": "e0eb4f8050cbdebadf32b893a1aa3b8ac9b04890",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jenkins-0.3.1-6cfdb3.tar",
+                "reference": "7805790d02cef02b0b6090a1bf202d780232e655",
                 "shasum": null
             },
             "require": {
                 "mauriciopiber/gear-config": "^0.1",
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-locator": "^0.1",
                 "mauriciopiber/gear-scripts": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
@@ -7062,24 +7053,25 @@
                     "GearTest\\JenkinsTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-12T21:46:55+00:00"
+            "time": "2018-12-13T06:47:36+00:00"
         },
         {
             "name": "mauriciopiber/gear-jira",
-            "version": "0.1.1",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jira.git",
-                "reference": "6a99d03e2a48caf99a709678428e124686ddaef6"
+                "reference": "4302ae68d85c5844efa2290f83c604925e655223"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jira-0.1.1-6f15e5.tar",
-                "reference": "6a99d03e2a48caf99a709678428e124686ddaef6",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jira-0.1.3-c3fc13.tar",
+                "reference": "4302ae68d85c5844efa2290f83c604925e655223",
                 "shasum": null
             },
             "require": {
                 "mauriciopiber/gear-config": "^0.1",
+                "mauriciopiber/gear-console": "^0.1",
                 "mauriciopiber/gear-locator": "^0.1",
                 "mauriciopiber/gear-util": "^0.1",
                 "mauriciopiber/gear-version": "^0.3",
@@ -7110,7 +7102,7 @@
                     "GearTest\\JiraTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-13T01:06:06+00:00"
+            "time": "2018-12-17T13:09:10+00:00"
         },
         {
             "name": "mauriciopiber/gear-schedule",
