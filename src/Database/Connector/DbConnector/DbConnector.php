@@ -12,22 +12,22 @@ class DbConnector
     }
 
     /**
-    public function beginTransaction()
-    {
-        $this->adapter->getDriver()->getConnection()->beginTransaction();
-    }
-
-    public function commit()
-    {
-        $this->adapter->getDriver()->getConnection()->commit();
-
-    }
-
-    public function rollback()
-    {
-        $this->adapter->getDriver()->getConnection()->rollback();
-
-    }
+    * public function beginTransaction()
+    * {
+    *     $this->adapter->getDriver()->getConnection()->beginTransaction();
+    * }
+    *
+    * public function commit()
+    * {
+    *     $this->adapter->getDriver()->getConnection()->commit();
+    *
+    * }
+    *
+    * public function rollback()
+    * {
+    *     $this->adapter->getDriver()->getConnection()->rollback();
+    *
+    * }
     */
 
     public function getAdapter()

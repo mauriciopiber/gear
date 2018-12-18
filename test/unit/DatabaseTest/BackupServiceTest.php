@@ -16,6 +16,8 @@ class BackupServiceTest extends TestCase
 
     public $password = 'my-pass';
 
+    public $host = 'mysql';
+
     public function setUp()
     {
         parent::setUp();
@@ -34,7 +36,8 @@ class BackupServiceTest extends TestCase
                         'params' => [
                             'dbname'   => $this->dbname,
                             'user'     => $this->user,
-                            'password' => $this->password
+                            'password' => $this->password,
+                            'host' => $this->host
                         ***REMOVED***
                     ***REMOVED***
 
@@ -73,7 +76,7 @@ class BackupServiceTest extends TestCase
         $file = 'vfs://project/data/my-project.mysql.sql';
 
         $this->script->runScriptAt(
-            sprintf('mysql -u my-user --password=my-pass my-db < %s', $file)
+            sprintf('mysql -u my-user --password=my-pass -hmysql my-db < %s', $file)
         )->willReturn(true)
         ->shouldBeCalled();
 
@@ -94,7 +97,7 @@ class BackupServiceTest extends TestCase
         $file = 'vfs://project/data/my-project.mysql.sql';
 
         $this->script->runScriptAt(
-            sprintf('mysqldump -u my-user --password=my-pass --opt my-db > %s', $file)
+            sprintf('mysqldump -u my-user --password=my-pass -hmysql --opt my-db > %s', $file)
         )->willReturn(true)
         ->shouldBeCalled();
 
@@ -120,7 +123,7 @@ class BackupServiceTest extends TestCase
         file_put_contents(vfsStream::url('module/my-module.mysql.sql'), '...');
 
         $this->script->runScriptAt(
-            sprintf('mysql -u my-user --password=my-pass my-db < %s', $file)
+            sprintf('mysql -u my-user --password=my-pass -hmysql my-db < %s', $file)
         )->willReturn(true)
         ->shouldBeCalled();
 
@@ -148,7 +151,7 @@ class BackupServiceTest extends TestCase
 
 
         $this->script->runScriptAt(
-            sprintf('mysqldump -u my-user --password=my-pass --opt my-db > %s', $file)
+            sprintf('mysqldump -u my-user --password=my-pass -hmysql --opt my-db > %s', $file)
         )->willReturn(true)
         ->shouldBeCalled();
 
@@ -177,7 +180,7 @@ class BackupServiceTest extends TestCase
         file_put_contents(vfsStream::url('module/data/my-load.mysql.sql'), '...');
 
         $this->script->runScriptAt(
-            sprintf('mysqldump -u my-user --password=my-pass --opt my-db > %s', $file)
+            sprintf('mysqldump -u my-user --password=my-pass -hmysql --opt my-db > %s', $file)
         )->willReturn(true);
 
         $this->request->getParam('location')->willReturn('data/my-load.mysql.sql')->shouldBeCalled();
@@ -198,7 +201,7 @@ class BackupServiceTest extends TestCase
         file_put_contents(vfsStream::url('module/data/my-load.mysql.sql'), '...');
 
         $this->script->runScriptAt(
-            'mysql -u my-user --password=my-pass my-db < vfs://module/data/my-load.mysql.sql'
+            'mysql -u my-user --password=my-pass -hmysql my-db < vfs://module/data/my-load.mysql.sql'
             )->willReturn(true)
         ->shouldBeCalled();
 

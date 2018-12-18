@@ -145,14 +145,16 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
         $this->username = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***;
         $this->password = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['password'***REMOVED***;
         $this->dbname   = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['dbname'***REMOVED***;
+        $this->host = $this->config['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['host'***REMOVED***;
     }
 
     public function runLoad()
     {
         $command = sprintf(
-            "mysql -u %s --password=%s %s < %s",
+            "mysql -u %s --password=%s -h%s %s < %s",
             escapeshellcmd($this->username),
             escapeshellcmd($this->password),
+            escapeshellcmd($this->host),
             escapeshellcmd($this->dbname),
             escapeshellcmd($this->file)
         );
@@ -170,9 +172,10 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
     public function runDump()
     {
         $command = sprintf(
-            "mysqldump -u %s --password=%s --opt %s > %s",
+            "mysqldump -u %s --password=%s -h%s --opt %s > %s",
             escapeshellcmd($this->username),
             escapeshellcmd($this->password),
+            escapeshellcmd($this->host),
             escapeshellcmd($this->dbname),
             escapeshellcmd($this->file)
         );
@@ -219,9 +222,10 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
         }
 
         $command = sprintf(
-            "mysql -u %s --password=%s %s < %s",
+            "mysql -u %s --password=%s -h%s %s < %s",
             escapeshellcmd($this->username),
             escapeshellcmd($this->password),
+            escapeshellcmd($this->host),
             escapeshellcmd($this->dbname),
             escapeshellcmd($this->file)
         );
