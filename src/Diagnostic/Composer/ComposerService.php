@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Diagnostic\Composer;
 
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Zend\Json\Json;
@@ -19,7 +19,7 @@ class ComposerService implements ModuleDiagnosticInterface
 
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     static public $missingFile = 'Composer - Está faltando o arquivo composer.json';
 

@@ -46,8 +46,8 @@ class DirUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $this->dirUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->dirUpgrade->getProject());
+        $this->dirUpgrade->setModuleFolder('testing');
+        $this->assertEquals('testing', $this->dirUpgrade->getModuleFolder());
     }
 
 

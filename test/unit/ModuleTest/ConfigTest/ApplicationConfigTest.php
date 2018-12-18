@@ -27,7 +27,7 @@ class ApplicationConfigTest extends TestCase
             $this->request->reveal()
         );
 
-        $this->applicationConfig->setProject(vfsStream::url('project'));
+        $this->applicationConfig->setModuleFolder(vfsStream::url('project'));
 
         $this->setExpectedException('Gear\Module\Config\Exception\MissingApplicationConfig');
 
@@ -47,7 +47,7 @@ class ApplicationConfigTest extends TestCase
             $this->request->reveal()
         );
 
-        $this->applicationConfig->setProject(vfsStream::url('project'));
+        $this->applicationConfig->setModuleFolder(vfsStream::url('project'));
 
         $file = $this->applicationConfig->getApplicationConfig();
 
@@ -69,7 +69,7 @@ class ApplicationConfigTest extends TestCase
             $this->module->reveal(),
             $this->request->reveal()
         );
-        $this->applicationConfig->setProject(vfsStream::url('project'));
+        $this->applicationConfig->setModuleFolder(vfsStream::url('project'));
 
         $array = $this->applicationConfig->getApplicationConfigArray();
 
@@ -118,7 +118,7 @@ class ApplicationConfigTest extends TestCase
             $this->request->reveal()
         );
 
-        $this->applicationConfig->setProject(vfsStream::url('project'));
+        $this->applicationConfig->setModuleFolder(vfsStream::url('project'));
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('GearDeploy')->shouldBeCalled();
@@ -171,7 +171,7 @@ class ApplicationConfigTest extends TestCase
             $this->request->reveal()
         );
 
-        $this->applicationConfig->setProject(vfsStream::url('project'));
+        $this->applicationConfig->setModuleFolder(vfsStream::url('project'));
 
         $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $module->getModuleName()->willReturn('MyNewModule')->shouldBeCalled();

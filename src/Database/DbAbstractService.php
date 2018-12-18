@@ -15,6 +15,7 @@ use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Database\Connector\DbConnector\DbConnectorTrait;
+use Gear\Locator\ModuleLocatorTrait;
 
 abstract class DbAbstractService implements
     ServiceLocatorAwareInterface,
@@ -24,6 +25,8 @@ abstract class DbAbstractService implements
     ArrayServiceAwareInterface,
     ModuleStructureInterface
 {
+    use ModuleLocatorTrait;
+
     use DbConnectorTrait;
 
     use MetadataTrait;
@@ -63,7 +66,7 @@ abstract class DbAbstractService implements
         $module = $this->getModule()->getMainFolder();
 
         if (empty($module)) {
-            return \GearBase\Module::getProjectFolder();
+            return $this->getModuleFolder();
         }
         return $module;
     }

@@ -9,7 +9,3 @@ services:
       - .:/var/www/module
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT
-    ports:
-      - 8006:80
-volumes:
-  gear-database:

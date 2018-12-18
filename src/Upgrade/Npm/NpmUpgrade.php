@@ -6,7 +6,7 @@ use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Edge\Npm\NpmEdge;
 use Gear\Module\Structure\ModuleStructure;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
@@ -19,7 +19,7 @@ class NpmUpgrade
 
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use NpmEdgeTrait;
 

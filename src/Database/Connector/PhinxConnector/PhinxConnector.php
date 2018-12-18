@@ -1,16 +1,19 @@
-<?php
+$this->getModuleFolder()<?php
 namespace Gear\Database\Connector\PhinxConnector;
 
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Update;
 use Phinx\Db\Table;
+use Gear\Locator\ModuleLocatorTrait;
 
 class PhinxConnector
 {
+    use ModuleLocatorTrait;
+    
     public function __construct()
     {
-        $global = require \GearBase\Module::getProjectFolder().'/config/autoload/global.php';
-        $local  = require \GearBase\Module::getProjectFolder().'/config/autoload/local.php';
+        $global = require $this->getModuleFolder().'/config/autoload/global.php';
+        $local  = require $this->getModuleFolder().'/config/autoload/local.php';
         $config = array_merge($global['phinx'***REMOVED***, $local['phinx'***REMOVED***);
 
         $adapter = new \Phinx\Db\Adapter\MysqlAdapter($config);

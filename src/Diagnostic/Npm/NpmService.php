@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Diagnostic\Npm;
 
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Edge\Npm\NpmEdgeTrait;
 use Gear\Edge\Npm\NpmEdge;
 use Gear\Config\GearConfig;
@@ -12,7 +12,7 @@ use Gear\Module\Structure\ModuleStructure;
 
 class NpmService implements ModuleDiagnosticInterface
 {
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use NpmEdgeTrait;
 

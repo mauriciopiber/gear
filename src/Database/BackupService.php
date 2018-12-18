@@ -6,7 +6,7 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
 use Gear\Script\ScriptServiceTrait;
 use Zend\Console\Adapter\Posix;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringServiceAwareInterface;
@@ -19,7 +19,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
 
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use ScriptServiceTrait;
 
@@ -69,7 +69,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
 
         $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
 
-        $location = $this->getProject();
+        $location = $this->getModuleFolder();
 
         $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
 
@@ -89,7 +89,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
 
         $project = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
 
-        $location = $this->getProject();
+        $location = $this->getModuleFolder();
 
         $this->file = $location.'/data/'.$this->str('url', $project).'.mysql.sql';
 
@@ -194,7 +194,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
 
         $this->file = sprintf(
             '%s/%s',
-            $this->getProject(),
+            $this->getModuleFolder(),
             $this->getLocation()
         );
 
@@ -210,7 +210,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
 
         $this->file = sprintf(
             '%s/%s',
-            $this->getProject(),
+            $this->getModuleFolder(),
             $this->getLocation()
         );
 

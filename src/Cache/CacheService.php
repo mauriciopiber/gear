@@ -4,7 +4,7 @@ namespace Gear\Cache;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Util\Dir\DirServiceTrait;
-
+use Gear\Locator\ModuleLocatorTrait;
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
@@ -12,6 +12,8 @@ use Gear\Util\Dir\DirServiceTrait;
 class CacheService implements ServiceLocatorAwareInterface
 {
     use DirServiceTrait;
+
+    use ModuleLocatorTrait;
 
     protected $request;
 
@@ -36,7 +38,7 @@ class CacheService implements ServiceLocatorAwareInterface
      */
     public function renewFileCache()
     {
-        $dataFile = \GearBase\Module::getProjectFolder().'/data/cache/configcache';
+        $dataFile = $this->getModuleFolder().'/data/cache/configcache';
 
         if (is_dir($dataFile)) {
             foreach (glob($dataFile."/*") as $file) {
@@ -44,7 +46,7 @@ class CacheService implements ServiceLocatorAwareInterface
             }
         }
 
-        $dataFile = \GearBase\Module::getProjectFolder().'/data/DoctrineORMModule/Proxy';
+        $dataFile = $this->getModuleFolder().'/data/DoctrineORMModule/Proxy';
 
         if (is_dir($dataFile)) {
             foreach (glob($dataFile."/*") as $file) {
@@ -52,7 +54,7 @@ class CacheService implements ServiceLocatorAwareInterface
             }
         }
 
-        $dataFile = \GearBase\Module::getProjectFolder().'/data/DoctrineModule/cache';
+        $dataFile = $this->getModuleFolder().'/data/DoctrineModule/cache';
 
         if (is_dir($dataFile)) {
             foreach (glob($dataFile."/*") as $file) {
@@ -68,7 +70,7 @@ class CacheService implements ServiceLocatorAwareInterface
     {
         $script = realpath(__DIR__.'/../../bin/memcached');
         $scriptRunner = $this->getServiceLocator()->get('scriptService');
-        $scriptRunner->setLocation(\GearBase\Module::getProjectFolder());
+        $scriptRunner->setLocation($this->getModuleFolder());
         echo $scriptRunner->run($script);
         return true;
     }

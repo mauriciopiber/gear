@@ -2,7 +2,7 @@
 namespace Gear\Database\Phinx;
 
 use DateTime;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreator;
@@ -21,7 +21,7 @@ class PhinxService
 {
     private $now;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use StringServiceTrait;
 
@@ -74,7 +74,7 @@ class PhinxService
         $this->file = $this->getFileCreator();
         $this->file->setTemplate('template/database/migration.phtml');
         $this->file->setFileName($this->createFileName($name));
-        $this->file->setLocation($this->getProject().'/data/migrations');
+        $this->file->setLocation($this->getModuleFolder().'/data/migrations');
         $this->file->setOptions(
             ['name' => $this->createClassName($name)***REMOVED***
         );

@@ -8,7 +8,7 @@ use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Console\Prompt\ConsolePrompt;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Util\Dir\DirService;
 use Gear\Config\GearConfig;
@@ -24,7 +24,7 @@ class DirUpgrade
 
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use ConsolePromptTrait;
 

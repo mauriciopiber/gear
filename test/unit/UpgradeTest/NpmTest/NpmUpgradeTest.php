@@ -41,8 +41,8 @@ class NpmUpgradeTest extends TestCase
     public function testProjectTrait()
     {
 
-        $this->npmUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->npmUpgrade->getProject());
+        $this->npmUpgrade->setModuleFolder('testing');
+        $this->assertEquals('testing', $this->npmUpgrade->getModuleFolder());
     }
     /**
      * @group fix2

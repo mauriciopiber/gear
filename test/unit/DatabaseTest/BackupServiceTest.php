@@ -80,7 +80,7 @@ class BackupServiceTest extends TestCase
         $this->console->writeLine(sprintf(BackupService::LOADED, $file))->shouldBeCalled();
         //$this->console->writeLine('vfs://project/data/my-project.mysql.sql')->shouldBeCalled();
 
-        $this->backup->setProject(vfsStream::url('project'));
+        $this->backup->setModuleFolder(vfsStream::url('project'));
         $file = $this->backup->projectLoad();
 
         $this->assertEquals('vfs://project/data/my-project.mysql.sql', $file);
@@ -101,7 +101,7 @@ class BackupServiceTest extends TestCase
         $this->console->writeLine(sprintf(BackupService::DUMPED, $file))->shouldBeCalled();
         //$this->console->writeLine('vfs://project/data/my-project.mysql.sql')->shouldBeCalled();
 
-        $this->backup->setProject(vfsStream::url('project'));
+        $this->backup->setModuleFolder(vfsStream::url('project'));
 
         $file = $this->backup->projectDump();
 
@@ -173,7 +173,7 @@ class BackupServiceTest extends TestCase
         $module = vfsStream::setup('module');
         vfsStream::newDirectory('data')->at($module);
 
-        $this->backup->setProject(vfsStream::url('module'));
+        $this->backup->setModuleFolder(vfsStream::url('module'));
         file_put_contents(vfsStream::url('module/data/my-load.mysql.sql'), '...');
 
         $this->script->runScriptAt(
@@ -194,7 +194,7 @@ class BackupServiceTest extends TestCase
         $module = vfsStream::setup('module');
         vfsStream::newDirectory('data')->at($module);
 
-        $this->backup->setProject(vfsStream::url('module'));
+        $this->backup->setModuleFolder(vfsStream::url('module'));
         file_put_contents(vfsStream::url('module/data/my-load.mysql.sql'), '...');
 
         $this->script->runScriptAt(

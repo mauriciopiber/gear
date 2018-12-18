@@ -64,7 +64,7 @@ class PhinxServiceTest extends TestCase
 
         $this->root = vfsStream::setup('base');
 
-        $this->service->setProject(vfsStream::url('base'));
+        $this->service->setModuleFolder(vfsStream::url('base'));
 
         vfsStream::newDirectory('data')->at($this->root);
         vfsStream::newDirectory('data/migrations')->at($this->root);

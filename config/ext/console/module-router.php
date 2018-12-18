@@ -67,24 +67,6 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            'gear-module-diagnostic' => array(
-                'options' => array(
-                     'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--just=***REMOVED***',
-                    'defaults' => array(
-                        'controller' => 'Gear\Module',
-                        'action' => 'diagnostic'
-                    )
-                )
-            ),
-			'gear-module-upgrade' => array(
-                'options' => array(
-                    'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
-                    'defaults' => array(
-                        'controller' => 'Gear\Module',
-                        'action' => 'upgrade'
-                    )
-                )
-            ),
             'gear-module-construct' => array(
                 'options' => array(
                     'route' => 'gear module construct <module> [<basepath>***REMOVED*** [--file=***REMOVED***',

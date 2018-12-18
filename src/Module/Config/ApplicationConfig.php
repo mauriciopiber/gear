@@ -1,7 +1,8 @@
 <?php
 namespace Gear\Module\Config;
 
-use Gear\Project\ProjectLocationTrait;
+
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Module\Config\Exception\MissingApplicationConfig;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
@@ -11,7 +12,7 @@ class ApplicationConfig
 
     use ModuleStructureTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     public function __construct(ModuleStructure $module, $request)
     {
@@ -44,7 +45,7 @@ class ApplicationConfig
      */
     public function getApplicationConfig()
     {
-        $module = $this->getProject().'/config/application.config.php';
+        $module = $this->getModuleFolder().'/config/application.config.php';
 
         if (is_file($module)) {
             return $module;
@@ -104,7 +105,7 @@ class ApplicationConfig
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
-        $dataArray = str_replace("'".$this->getProject().'/config/', "__DIR__.'/", $dataArray);
+        $dataArray = str_replace("'".$this->getModuleFolder().'/config/', "__DIR__.'/", $dataArray);
 
         file_put_contents($applicationConfig, '<?php return ' . $dataArray . '; ?>');
 
@@ -174,7 +175,7 @@ class ApplicationConfig
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
 
-        $dataArray = str_replace("'".$this->getProject().'/config/', "__DIR__.'/", $dataArray);
+        $dataArray = str_replace("'".$this->getModuleFolder().'/config/', "__DIR__.'/", $dataArray);
 
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
@@ -212,7 +213,7 @@ class ApplicationConfig
         }
 
         $dataArray = preg_replace("/[0-9***REMOVED***+ \=\>/i", ' ', var_export($data, true));
-        $dataArray = str_replace("'".$this->getProject().'/config/', "__DIR__.'/", $dataArray);
+        $dataArray = str_replace("'".$this->getModuleFolder().'/config/', "__DIR__.'/", $dataArray);
 
         file_put_contents($this->getApplicationConfig(), '<?php return ' . $dataArray . '; ?>');
         //$this->getCacheService()->renewFileCache();

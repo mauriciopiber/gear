@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Upgrade\Composer;
 
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Edge\Composer\ComposerEdge;
 use Gear\Console\Prompt\ConsolePromptTrait;
@@ -19,7 +19,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
 
     use StringServiceTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use ComposerEdgeTrait;
 

@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "cakephp/cache",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cache.git",
@@ -51,16 +51,16 @@
         },
         {
             "name": "cakephp/collection",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/collection.git",
-                "reference": "a6a410771e0fa97613fa060bba861e666a821c2e"
+                "reference": "5e28b596c85d163f8c8350c213c34b6102b641ec"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/cakephp-collection-a6a410771e0fa97613fa060bba861e666a821c2e-zip-05aba8.tar",
-                "reference": "a6a410771e0fa97613fa060bba861e666a821c2e",
+                "url": "https://mirror.piber.network/dist/cakephp-collection-5e28b596c85d163f8c8350c213c34b6102b641ec-zip-3fa74e.tar",
+                "reference": "5e28b596c85d163f8c8350c213c34b6102b641ec",
                 "shasum": ""
             },
             "require": {
@@ -93,20 +93,20 @@
                 "collections",
                 "iterators"
             ***REMOVED***,
-            "time": "2018-09-15T21:32:30+00:00"
+            "time": "2018-12-14T09:39:58+00:00"
         },
         {
             "name": "cakephp/core",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
-                "reference": "ae0fd1dd3bdf2eb1cb0c291a0573dc898d9ce6d6"
+                "reference": "02b4d6579246d7011e5062058c50c041ab542fa9"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/cakephp-core-ae0fd1dd3bdf2eb1cb0c291a0573dc898d9ce6d6-zip-76e513.tar",
-                "reference": "ae0fd1dd3bdf2eb1cb0c291a0573dc898d9ce6d6",
+                "url": "https://mirror.piber.network/dist/cakephp-core-02b4d6579246d7011e5062058c50c041ab542fa9-zip-66aaaf.tar",
+                "reference": "02b4d6579246d7011e5062058c50c041ab542fa9",
                 "shasum": ""
             },
             "require": {
@@ -142,20 +142,20 @@
                 "core",
                 "framework"
             ***REMOVED***,
-            "time": "2018-11-13T02:29:05+00:00"
+            "time": "2018-12-13T23:20:56+00:00"
         },
         {
             "name": "cakephp/database",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "73f20ff84f032923b23627f28049044a7c264977"
+                "reference": "b5649125528f9230d81c7b870edecfbe19ecac21"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/cakephp-database-73f20ff84f032923b23627f28049044a7c264977-zip-950c0b.tar",
-                "reference": "73f20ff84f032923b23627f28049044a7c264977",
+                "url": "https://mirror.piber.network/dist/cakephp-database-b5649125528f9230d81c7b870edecfbe19ecac21-zip-db68af.tar",
+                "reference": "b5649125528f9230d81c7b870edecfbe19ecac21",
                 "shasum": ""
             },
             "require": {
@@ -192,20 +192,20 @@
                 "database abstraction",
                 "pdo"
             ***REMOVED***,
-            "time": "2018-11-01T20:19:53+00:00"
+            "time": "2018-12-14T12:11:25+00:00"
         },
         {
             "name": "cakephp/datasource",
-            "version": "3.7.0",
+            "version": "3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "174b9cc23aa82b00a816f4e82dbddcbee9a39ccb"
+                "reference": "d98a1675da0b62da834f86c976b2337db38adb49"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/cakephp-datasource-174b9cc23aa82b00a816f4e82dbddcbee9a39ccb-zip-115886.tar",
-                "reference": "174b9cc23aa82b00a816f4e82dbddcbee9a39ccb",
+                "url": "https://mirror.piber.network/dist/cakephp-datasource-d98a1675da0b62da834f86c976b2337db38adb49-zip-fa375f.tar",
+                "reference": "d98a1675da0b62da834f86c976b2337db38adb49",
                 "shasum": ""
             },
             "require": {
@@ -242,7 +242,7 @@
                 "entity",
                 "query"
             ***REMOVED***,
-            "time": "2018-12-02T03:04:13+00:00"
+            "time": "2018-12-13T23:20:56+00:00"
         },
         {
             "name": "cakephp/utility",
@@ -1407,16 +1407,16 @@
         },
         {
             "name": "mauriciopiber/gear-util",
-            "version": "0.1.6",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-util.git",
-                "reference": "8d92207bd381e3c6aefc0a3fe344bb93978fed83"
+                "reference": "9f4cab2a882b59ef596a8dc3adc2667973664b4d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.6-dfa881.tar",
-                "reference": "8d92207bd381e3c6aefc0a3fe344bb93978fed83",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.7-8a9422.tar",
+                "reference": "9f4cab2a882b59ef596a8dc3adc2667973664b4d",
                 "shasum": null
             },
             "require": {
@@ -1444,7 +1444,7 @@
                     "Gear\\Util\\Test\\": "test/unit"
                 }
             },
-            "time": "2018-12-13T06:13:34+00:00"
+            "time": "2018-12-17T18:28:01+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4819,34 +4819,38 @@
         },
         {
             "name": "zendframework/zend-inputfilter",
-            "version": "2.8.3",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-inputfilter.git",
-                "reference": "799ad48ed1666d3c62126fec73dd20453b3a9e4d"
+                "reference": "c34ca7a1bffe2d089edbf96166435bffca8aa940"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/zendframework-zend-inputfilter-799ad48ed1666d3c62126fec73dd20453b3a9e4d-zip-15f169.tar",
-                "reference": "799ad48ed1666d3c62126fec73dd20453b3a9e4d",
+                "url": "https://mirror.piber.network/dist/zendframework-zend-inputfilter-c34ca7a1bffe2d089edbf96166435bffca8aa940-zip-c48b09.tar",
+                "reference": "c34ca7a1bffe2d089edbf96166435bffca8aa940",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.6 || ^7.0",
-                "zendframework/zend-filter": "^2.6",
+                "zendframework/zend-filter": "^2.9.1",
                 "zendframework/zend-servicemanager": "^2.7.10 || ^3.3.1",
                 "zendframework/zend-stdlib": "^2.7 || ^3.0",
-                "zendframework/zend-validator": "^2.10.1"
+                "zendframework/zend-validator": "^2.11"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.7.23 || ^6.4.3",
+                "psr/http-message": "^1.0",
                 "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "suggest": {
+                "psr/http-message-implementation": "PSR-7 is required if you wish to validate PSR-7 UploadedFileInterface payloads"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8.x-dev",
-                    "dev-develop": "2.9.x-dev"
+                    "dev-master": "2.9.x-dev",
+                    "dev-develop": "2.10.x-dev"
                 },
                 "zf": {
                     "component": "Zend\\InputFilter",
@@ -4868,7 +4872,7 @@
                 "inputfilter",
                 "zf"
             ***REMOVED***,
-            "time": "2018-12-13T22:51:54+00:00"
+            "time": "2018-12-17T21:30:06+00:00"
         },
         {
             "name": "zendframework/zend-json",

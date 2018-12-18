@@ -50,8 +50,8 @@ class FileUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $this->fileUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->fileUpgrade->getProject());
+        $this->fileUpgrade->setModuleFolder('testing');
+        $this->assertEquals('testing', $this->fileUpgrade->getModuleFolder());
     }
 
     /**

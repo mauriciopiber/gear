@@ -12,7 +12,7 @@ class BackupServiceFactory implements FactoryInterface
         return new \Gear\Database\BackupService(
             $serviceLocator->get('config'),
             $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('GearBase\Script'),
+            $serviceLocator->get('Gear\Util\Script\ScriptService'),
             $serviceLocator->get('console'),
             $serviceLocator->get(ModuleStructure::class),
             $serviceLocator->get('request')

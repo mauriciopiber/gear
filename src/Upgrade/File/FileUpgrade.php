@@ -7,7 +7,7 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Console\Prompt\ConsolePromptTrait;
 use Gear\Edge\File\FileEdgeTrait;
 use Gear\Edge\File\FileEdge;
-use Gear\Project\ProjectLocationTrait;
+use Gear\Locator\ModuleLocatorTrait;
 use Gear\Module\Tests\{
     ModuleTestsService,
     ModuleTestsServiceTrait
@@ -29,7 +29,7 @@ class FileUpgrade
 
     use StringServiceTrait;
 
-    use ProjectLocationTrait;
+    use ModuleLocatorTrait;
 
     use FileEdgeTrait;
 
@@ -170,7 +170,7 @@ class FileUpgrade
 
     public function upgradeProjectFile($type, $file)
     {
-        $fileLocation = $this->getProject().'/'.$file;
+        $fileLocation = $this->getModuleFolder().'/'.$file;
 
         if (is_file($fileLocation)) {
             return;

@@ -87,7 +87,7 @@ abstract class AbstractJsonService implements
     public function getBaseDir()
     {
         if (empty($this->dir)) {
-            $this->dir = \GearBase\Module::getProjectFolder();
+            $this->dir = $this->getModuleFolder();
         }
         return $this->dir;
     }

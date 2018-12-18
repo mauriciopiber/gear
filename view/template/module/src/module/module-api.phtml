@@ -157,29 +157,6 @@ class Module
     }
 
     /**
-     * Create Log Errors for exceptions.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return array
-     */
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => [
-                'Zend\Log\Logger' => function () {
-                    $logger = new Logger;
-                    $writer = new Stream(
-                        __DIR__.'/../../../data/logs/'.date('Y-m-d-H-i').'-error.txt'
-                    );
-                    $logger->addWriter($writer);
-                    return $logger;
-                },
-            ***REMOVED***,
-        );
-    }
-
-    /**
      * Return Class Location on filesystem.
      *
      * @return string

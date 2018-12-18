@@ -1,14 +1,12 @@
 require:
-  mauriciopiber/gear-base: ~0.2 || ~1.0
-  doctrine/doctrine-module: ~0.8.0
-  doctrine/doctrine-orm-module: ~0.8.0
+  mauriciopiber/gear-util: ^0.1
   doctrine/orm: ~2.5.0
-  robmorgan/phinx: '*'
+  robmorgan/phinx: '^0.10'
   zendframework/zendframework: ^2.5.0
   zendframework/zend-mvc: ~2.6.0
 require-dev:
-  mauriciopiber/gear: ~0.2 || ~1.0
-  mauriciopiber/gear-json: ~0.2 || ~1.0
-  mauriciopiber/gear-deploy: ~0.2 || ~1.0
-  mauriciopiber/gear-jenkins: ~0.2 || ~1.0
-  mauriciopiber/gear-version: ~0.2 || ~1.0
+  mauriciopiber/gear: ^0.3
+  mauriciopiber/gear-schema: ^0.3
+  mauriciopiber/gear-deploy: ^0.3
+  mauriciopiber/gear-jenkins: ^0.3
+  mauriciopiber/gear-version: ^0.3

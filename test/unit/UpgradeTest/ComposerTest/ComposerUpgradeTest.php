@@ -45,8 +45,8 @@ class ComposerUpgradeTest extends TestCase
      */
     public function testProjectTrait()
     {
-        $this->composer->setProject('testing');
-        $this->assertEquals('testing', $this->composer->getProject());
+        $this->composer->setModuleFolder('testing');
+        $this->assertEquals('testing', $this->composer->getModuleFolder());
     }
 
     public function getModuleType()

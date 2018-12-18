@@ -576,8 +576,8 @@ EOS;
      */
     public function testProjectTrait()
     {
-        $this->antUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->antUpgrade->getProject());
+        $this->antUpgrade->setModuleFolder('testing');
+        $this->assertEquals('testing', $this->antUpgrade->getModuleFolder());
     }
 
     /**
