@@ -6,7 +6,6 @@ use MyModule\Controller\BasicListRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicListRest
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicListRestTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -32,8 +30,6 @@ class BasicListRestTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -46,14 +42,6 @@ class BasicListRestTest extends TestCase
 
     public function testGetListAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicListRest',
-            'Controller',
-            'GetList'
-        );
-
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());

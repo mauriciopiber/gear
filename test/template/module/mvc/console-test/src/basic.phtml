@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use MyModule\Controller\BasicConsole;
 use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicConsole
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicConsoleTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -24,10 +22,6 @@ class BasicConsoleTest extends TestCase
 
     public function setUp()
     {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
         parent::setUp();
 
         $this->controller = new BasicConsole();
@@ -36,8 +30,6 @@ class BasicConsoleTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()

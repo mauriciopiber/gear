@@ -5,7 +5,7 @@ use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use Zend\View\Model\JsonModel;
-use GearBaseTest\Assertions\AclAssertTrait;
+
 use <?php echo $this->module;?>\Controller\IndexController;
 
 /**
@@ -13,7 +13,6 @@ use <?php echo $this->module;?>\Controller\IndexController;
  */
 class IndexControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -31,20 +30,10 @@ class IndexControllerTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = \<?php echo $this->module;?>\Module::LOCATION.'/../schema/module.json';
     }
 
     public function testIndexAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            'IndexController',
-            'Controller',
-            'GetList'
-        );
-
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());

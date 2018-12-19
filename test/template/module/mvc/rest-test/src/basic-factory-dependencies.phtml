@@ -6,7 +6,6 @@ use MyModule\Controller\BasicFactoryDependenciesRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicFactoryDependenciesRest
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicFactoryDependenciesRestTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -41,8 +39,6 @@ class BasicFactoryDependenciesRestTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()

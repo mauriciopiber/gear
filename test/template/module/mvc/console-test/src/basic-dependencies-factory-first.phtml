@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractConsoleControllerTestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use MyModule\Controller\BasicDependenciesFactoryFirstConsole;
 use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group BasicDependenciesFactoryFirstConsole
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicDependenciesFactoryFirstConsoleTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -24,10 +22,6 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
 
     public function setUp()
     {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
         parent::setUp();
 
         $this->myRepositoryOne = $this->prophesize('MyModule\Repository\MyRepositoryOne');
@@ -45,8 +39,6 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -59,14 +51,6 @@ class BasicDependenciesFactoryFirstConsoleTest extends TestCase
 
     public function testFirstActionAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryFirstConsole',
-            'Controller',
-            'FirstAction'
-        );
-
         $this->routeMatch->setParam('action', 'first-action');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
