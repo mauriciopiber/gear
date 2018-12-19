@@ -5,7 +5,6 @@ COPY ./composer.json /var/www/composer.json
 COPY ./composer.lock /var/www/composer.lock
 RUN composer install --no-dev -o
 
-
 RUN git clone git@bitbucket.org:mauriciopiber/<?php echo $this->module;?>.git && cd <?php echo $this->module;?> && git pull origin master
 RUN mv /var/www/vendor /var/www/<?php echo $this->module;?>/vendor
 WORKDIR /var/www/<?php echo $this->module;?>
@@ -13,6 +12,6 @@ WORKDIR /var/www/<?php echo $this->module;?>
 RUN composer install --no-dev -o
 RUN rm -R /var/www/<?php echo $this->module;?>/.git
 
-FROM registry.piber.network/php:v1.0.3
+FROM registry.piber.network/php-apache:v1.0.3
 COPY --from=builder /var/www/<?php echo $this->module;?> /var/www/module
 ENV PHINX_ENVIRONMENT=PRODUCTION
