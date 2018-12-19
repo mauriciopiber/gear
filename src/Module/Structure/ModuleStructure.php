@@ -65,6 +65,15 @@ class ModuleStructure
         return $this->namespace;
     }
 
+    public function getNamespaceTest() {
+
+      $namespace = $this->getNamespace();
+
+      $names = explode('\\', $namespace);
+      $namespaceTest = implode('Test\\', $names).'Test';
+      return $namespaceTest;
+    }
+
     public function setStaging($staging)
     {
         $this->staging = $staging;

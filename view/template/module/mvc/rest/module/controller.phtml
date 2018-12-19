@@ -1,4 +1,4 @@
-namespace <?php echo $this->module;?>\Controller;
+namespace <?php echo $this->namespace;?>\Controller;
 
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
@@ -22,7 +22,7 @@ class IndexController extends AbstractRestfulController
     public function getList()
     {
         $consoleModel = new JsonModel([
-            '<?php echo $this->module;?>',
+            '<?php echo $this->namespace;?>',
             'Controller',
             'Index'
         ***REMOVED***);

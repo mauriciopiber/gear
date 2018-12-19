@@ -13,6 +13,20 @@ if (php_sapi_name() === 'cli-server') {
     unset($path);
 }
 
+$env = getenv('PHINX_ENVIRONMENT');
+$envs = [
+  'DEVELOPMENT',
+  'PRODUCTION'
+***REMOVED***;
+if (empty($env) || !in_array($env, $envs)) {
+  try {
+    throw new Exception(sprintf("Unable to start.\nCause: Invalid env: %s\nMust be %s", $env, implode(', ', $envs)));
+  } catch (Exception $e) {
+    echo $e->getMessage()."\n";
+    exit;
+  }
+}
+
 // Setup autoloading
 require 'init_autoloader.php';
 

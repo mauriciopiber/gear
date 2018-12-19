@@ -8,8 +8,12 @@
     },
     "autoload" : {
         "psr-4" : {
-            "<?php echo $this->module;?>\\" : "src",
-            "<?php echo $this->module;?>\\Test\\" : "test/unit"
+            "<?php echo $this->namespace;?>" : "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "<?php echo $this->namespaceTest;?>" : "test/unit"
         }
     },
     "repositories" : [

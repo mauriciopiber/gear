@@ -1372,16 +1372,16 @@
         },
         {
             "name": "mauriciopiber/gear-scripts",
-            "version": "0.1.14",
+            "version": "0.1.15",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-scripts.git",
-                "reference": "720cb856af3c972cd2b8f89ff3eb6f1305da23b0"
+                "reference": "90ef1fb7364768bc897954ce99978a401ae9ee56"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.14-8c5163.tar",
-                "reference": "720cb856af3c972cd2b8f89ff3eb6f1305da23b0",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.15-6ccaff.tar",
+                "reference": "90ef1fb7364768bc897954ce99978a401ae9ee56",
                 "shasum": null
             },
             "bin": [
@@ -1398,25 +1398,33 @@
                 "src/git/git-commit-push",
                 "src/git/git-tag-create",
                 "src/git/git-tag-delete",
+                "src/git/git-tag-last",
                 "src/git/git-release",
+                "src/git/git-init",
                 "src/git/git-remote-status",
-                "src/satis/satis-build"
+                "src/satis/satis-build",
+                "src/satis/satis-package-add",
+                "src/satis/satis-upgrade",
+                "src/do/do-record-create",
+                "src/deploy/build-image-server",
+                "src/deploy/bump-image-server",
+                "src/deploy/deploy-image-server"
             ***REMOVED***,
             "type": "library",
-            "time": "2018-12-17T14:13:14+00:00"
+            "time": "2018-12-19T11:52:27+00:00"
         },
         {
             "name": "mauriciopiber/gear-util",
-            "version": "0.1.7",
+            "version": "0.1.10",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-util.git",
-                "reference": "9f4cab2a882b59ef596a8dc3adc2667973664b4d"
+                "reference": "96759d8652cbc88226d2dcdeae87321e6b96dcdb"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.7-8a9422.tar",
-                "reference": "9f4cab2a882b59ef596a8dc3adc2667973664b4d",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-util-0.1.10-8210b5.tar",
+                "reference": "96759d8652cbc88226d2dcdeae87321e6b96dcdb",
                 "shasum": null
             },
             "require": {
@@ -1444,7 +1452,7 @@
                     "Gear\\Util\\Test\\": "test/unit"
                 }
             },
-            "time": "2018-12-17T18:28:01+00:00"
+            "time": "2018-12-19T12:56:07+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -7061,16 +7069,16 @@
         },
         {
             "name": "mauriciopiber/gear-jira",
-            "version": "0.1.3",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-jira.git",
-                "reference": "4302ae68d85c5844efa2290f83c604925e655223"
+                "reference": "5ad88b6f1333110ab6c2edb5fe7dff6a4cbae088"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jira-0.1.3-c3fc13.tar",
-                "reference": "4302ae68d85c5844efa2290f83c604925e655223",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-jira-0.1.5-9d650c.tar",
+                "reference": "5ad88b6f1333110ab6c2edb5fe7dff6a4cbae088",
                 "shasum": null
             },
             "require": {
@@ -7106,7 +7114,7 @@
                     "GearTest\\JiraTest\\": "test/unit"
                 }
             },
-            "time": "2018-12-17T13:09:10+00:00"
+            "time": "2018-12-19T03:49:10+00:00"
         },
         {
             "name": "mauriciopiber/gear-schedule",

@@ -1,7 +1,7 @@
 return [
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=<?php echo $this->module; ?>;host=mysql',
+        'dsn' => 'mysql:dbname=<?php echo $this->dbname; ?>;host=<?php echo $this->module;?>-mysql',
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
         ***REMOVED***
@@ -13,9 +13,9 @@ return [
                 'eventmanager' => 'orm_default',
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => [
-                    'host' => 'mysql',
+                    'host' => '<?php echo $this->module;?>-mysql',
                     'port' => '3306',
-                    'dbname' => '<?php echo $this->module; ?>',
+                    'dbname' => '<?php echo $this->dbname; ?>',
                     'charset' => 'utf8'
                 ***REMOVED***
             ***REMOVED***
@@ -31,7 +31,7 @@ return [
     ***REMOVED***,
     'phinx' => [
         'adapter' => 'mysql',
-        'host' => 'mysql',
-        'name'=> '<?php echo $this->module; ?>'
+        'host' => '<?php echo $this->module;?>-mysql',
+        'name'=> '<?php echo $this->dbname; ?>'
     ***REMOVED***
 ***REMOVED***;

@@ -113,9 +113,10 @@ class ModuleController extends AbstractConsoleController
         $moduleName      = $this->getRequest()->getParam('module');
         $basepath        = $this->getRequest()->getParam('basepath');
         $staging         = $this->getRequest()->getParam('staging', null);
+        $namespace       = $this->getRequest()->getParam('namespace', null);
 
         $module = $this->getModuleService();
-        $module->moduleAsProject($moduleName, $basepath, $type, $staging);
+        $module->moduleAsProject($moduleName, $basepath, $type, $staging, $namespace);
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

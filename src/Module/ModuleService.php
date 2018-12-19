@@ -264,9 +264,9 @@ class ModuleService
         $module,
         $location,
         $type = 'web',
-        $staging = null
+        $staging = null,
+        $namespace = null
     ) {
-
         $this->type = $type;
 
         if (!in_array($this->type, [
@@ -283,8 +283,11 @@ class ModuleService
 
         $this->staging = $staging;
 
-
         $moduleStructure = $this->getModule();
+
+        $this->namespace = !empty($namespace)
+            ? $namespace
+            : $this->str('class', $moduleStructure->getModuleName());
 
         if (!empty($location)) {
             $str = $this->getStringService();
@@ -326,9 +329,9 @@ class ModuleService
         $configService = $this->getConfigService();
         $configService->module($this->type, $this->staging);
 
-        $this->getComposerService()->createComposerAsProject($this->type);
+        $this->getComposerService()->createComposerAsProject($this->namespace, $this->type);
 
-        $this->createApplicationConfig($this->type);
+        $this->createApplicationConfig($this->namespace, $this->type);
 
         $this->createConfigGlobal();
 
@@ -338,6 +341,7 @@ class ModuleService
 
         $this->createInitAutoloader();
 
+        /**@TODO Replace by gear-scripts */
         $this->createDeploy();
 
         $this->getPhinxConfig();
@@ -353,6 +357,8 @@ class ModuleService
         $this->createJenkinsFile($this->type);
 
         $this->getDockerService()->createDockerComposeFile();
+        $this->getDockerService()->createDockerBuildFile();
+        $this->getDockerService()->createDockerIgnoreFile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();
@@ -496,11 +502,11 @@ class ModuleService
      *
      * @return string
      */
-    public function createApplicationConfig($type = 'web')
+    public function createApplicationConfig($namespace, $type = 'web')
     {
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/application-config/application.config.%s.phtml', $type));
-        $file->setOptions(['module' => $this->getModuleNamespace()***REMOVED***);
+        $file->setOptions(['module' => $namespace***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
         return $file->render();
@@ -515,7 +521,10 @@ class ModuleService
     {
         $file = $this->getFileCreator();
         $file->setTemplate('template/module/config/autoload/global.phtml');
-        $file->setOptions(['module' => $this->str('uline', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setOptions([
+          'module' => $this->str('url', $this->getModule()->getModuleName()),
+          'dbname' => $this->str('uline', $this->getModule()->getModuleName())
+        ***REMOVED***);
         $file->setFileName('global.php');
         $file->setLocation($this->getModule()->getConfigAutoloadFolder());
         return $file->render();
@@ -815,6 +824,7 @@ class ModuleService
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/src/module/module-%s.phtml', $this->type));
         $file->setOptions([
+            'namespace' => $this->namespace,
             'module' => $this->getModule()->getModuleName(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'layout' => $layoutName
@@ -838,6 +848,8 @@ class ModuleService
         $file->setTemplate('template/module/test/module-test.phtml');
         $file->setOptions(
             array(
+                'namespaceTest' => $this->getModule()->getNamespaceTest(),
+                'namespace' => $this->getModule()->getNamespace(),
                 'module' => $this->getModule()->getModuleName(),
             )
         );

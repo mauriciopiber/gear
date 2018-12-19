@@ -82,6 +82,7 @@ class ApiControllerService extends AbstractControllerService
 
     private function getConfig() {
         return [
+            'namespace' => $this->getModule()->getNamespace(),
             'module' => $this->str('class', $this->getModule()->getModuleName()),
         ***REMOVED***;
     }

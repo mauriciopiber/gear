@@ -1,8 +1,19 @@
+$modules = [
+  '<?php echo $this->module; ?>'
+***REMOVED***;
+
+if (getenv('PHINX_ENVIRONMENT') !== 'PRODUCTION') {
+  $modules = array_merge([
+    'Gear\Config',
+    'Gear\Git',
+    'Gear\Util',
+    'Gear\Console',
+    'Gear\Jira',
+  ***REMOVED***, $modules);
+}
+
 return [
-  'modules' =>
-  [
-    '<?php echo $this->module; ?>'
-  ***REMOVED***,
+  'modules' => $modules,
   'module_listener_options' =>
   [
     'module_paths' =>

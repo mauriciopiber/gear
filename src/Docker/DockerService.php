@@ -45,12 +45,45 @@ class DockerService
     public function createDockerComposeFile()
     {
         $type = $this->module->getType();
+        $module = $this->stringService->str('url', $this->module->getModuleName());
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/docker/docker-compose-%s.yml', $type));
-        $file->setOptions([***REMOVED***);
+        $file->setTemplate(sprintf('template/module/docker/docker-compose-%s', $type));
+        $file->setOptions([
+          'module' => $module
+        ***REMOVED***);
         $file->setLocation($this->module->getMainFolder());
         $file->setFileName('docker-compose.yml');
+        $render = $file->render();
+        return $render;
+    }
+
+    public function createDockerIgnoreFile()
+    {
+        $type = $this->module->getType();
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/docker/dockerignore', $type));
+        $file->setOptions([***REMOVED***);
+        $file->setLocation($this->module->getMainFolder());
+        $file->setFileName('.dockerignore');
+        $render = $file->render();
+        return $render;
+    }
+
+    public function createDockerBuildFile()
+    {
+        $type = $this->module->getType();
+        $module = $this->stringService->str('url', $this->module->getModuleName());
+
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/docker/dockerfile-%s', $type));
+        $file->setOptions([
+          'module' => $module
+        ***REMOVED***);
+        $file->setLocation($this->module->getMainFolder());
+        $file->setFileName('Dockerfile');
         $render = $file->render();
         return $render;
     }

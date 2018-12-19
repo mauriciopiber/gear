@@ -329,7 +329,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         $this->getFileCreator()->createFile(
             sprintf('template/module/config/route.config.%s.phtml', $type),
             [
-                'module' => $this->getModule()->getModuleName(),
+                'namespace' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ***REMOVED***,
             'route.config.php',

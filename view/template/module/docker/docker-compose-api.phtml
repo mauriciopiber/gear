@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  main:
+  <?php echo $this->module;?>:
     image: pbr/dev-php-apache:v1.0.2
     tty: true
     volumes:
@@ -10,12 +10,11 @@ services:
       - PHINX_ENVIRONMENT=DEVELOPMENT
     ports:
       - 8006:80
-  mysql:
+  <?php echo $this->module;?>-mysql:
     image: mysql:5.7.22
     environment:
       MYSQL_ROOT_PASSWORD: gear
     volumes:
-      - gear-database:/var/lib/mysql
+      - <?php echo $this->module;?>-database:/var/lib/mysql
 volumes:
-  gear-database:
-
+  <?php echo $this->module;?>-database:
