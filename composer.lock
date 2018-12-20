@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "9218afeb827384102ffe5db8ce180ff0",
+    "content-hash": "c573a71bd116a05305874735850d1070",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1254,6 +1254,47 @@
             "time": "2013-12-12T15:42:53+00:00"
         },
         {
+            "name": "mauriciopiber/gear-config",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:mauriciopiber/gear-config.git",
+                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-config-0.1.1-bfae33.tar",
+                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301",
+                "shasum": null
+            },
+            "require": {
+                "php": "^7.0",
+                "zendframework/zend-mvc": "~2.6.0",
+                "zendframework/zendframework": "^2.5"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^0.9",
+                "mauriciopiber/gear-scripts": "^0.1",
+                "mauriciopiber/gear-util": "^0.1",
+                "mikey179/vfsstream": "^1.6.2",
+                "pdepend/pdepend": "^2.4",
+                "phploc/phploc": "^2.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.0",
+                "sebastian/phpcpd": "^2.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "theseer/phpdox": "^0.11.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gear\\Config\\": "src",
+                    "Gear\\Config\\Test\\": "test/unit"
+                }
+            },
+            "time": "2018-12-13T05:15:19+00:00"
+        },
+        {
             "name": "mauriciopiber/gear-console",
             "version": "0.1.2",
             "source": {
@@ -1372,19 +1413,23 @@
         },
         {
             "name": "mauriciopiber/gear-scripts",
-            "version": "0.1.15",
+            "version": "0.1.18",
             "source": {
                 "type": "git",
                 "url": "git@bitbucket.org:mauriciopiber/gear-scripts.git",
-                "reference": "90ef1fb7364768bc897954ce99978a401ae9ee56"
+                "reference": "88b4e1a7e652dda5e99a555bbbf20af06a0cbaca"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.15-6ccaff.tar",
-                "reference": "90ef1fb7364768bc897954ce99978a401ae9ee56",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-scripts-0.1.18-e55f33.tar",
+                "reference": "88b4e1a7e652dda5e99a555bbbf20af06a0cbaca",
                 "shasum": null
             },
+            "require-dev": {
+                "mauriciopiber/gear-jira": "^0.1"
+            },
             "bin": [
+                "src/index",
                 "src/rest/rest-actions",
                 "src/gear/calendar/calendar",
                 "src/rest/rest-fixture",
@@ -1411,7 +1456,7 @@
                 "src/deploy/deploy-image-server"
             ***REMOVED***,
             "type": "library",
-            "time": "2018-12-19T11:52:27+00:00"
+            "time": "2018-12-19T23:34:26+00:00"
         },
         {
             "name": "mauriciopiber/gear-util",
@@ -6851,47 +6896,6 @@
             "time": "2018-12-13T07:19:54+00:00"
         },
         {
-            "name": "mauriciopiber/gear-config",
-            "version": "0.1.1",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:mauriciopiber/gear-config.git",
-                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-config-0.1.1-bfae33.tar",
-                "reference": "910dbaa55edac1c98e71d01d7cb4f7096d31b301",
-                "shasum": null
-            },
-            "require": {
-                "php": "^7.0",
-                "zendframework/zend-mvc": "~2.6.0",
-                "zendframework/zendframework": "^2.5"
-            },
-            "require-dev": {
-                "jakub-onderka/php-parallel-lint": "^0.9",
-                "mauriciopiber/gear-scripts": "^0.1",
-                "mauriciopiber/gear-util": "^0.1",
-                "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.4",
-                "phploc/phploc": "^2.0",
-                "phpmd/phpmd": "^2.6",
-                "phpunit/phpunit": "^5.0",
-                "sebastian/phpcpd": "^2.0",
-                "squizlabs/php_codesniffer": "^3.0",
-                "theseer/phpdox": "^0.11.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gear\\Config\\": "src",
-                    "Gear\\Config\\Test\\": "test/unit"
-                }
-            },
-            "time": "2018-12-13T05:15:19+00:00"
-        },
-        {
             "name": "mauriciopiber/gear-deploy",
             "version": "0.3.2",
             "source": {
@@ -7541,16 +7545,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.3.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "6ad28354c04b364c3c71a34e4a18b629cc3b231e"
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://mirror.piber.network/dist/squizlabs-php_codesniffer-6ad28354c04b364c3c71a34e4a18b629cc3b231e-zip-0db50b.tar",
-                "reference": "6ad28354c04b364c3c71a34e4a18b629cc3b231e",
+                "url": "https://mirror.piber.network/dist/squizlabs-php_codesniffer-379deb987e26c7cd103a7b387aea178baec96e48-zip-bcc397.tar",
+                "reference": "379deb987e26c7cd103a7b387aea178baec96e48",
                 "shasum": ""
             },
             "require": {
@@ -7588,7 +7592,7 @@
                 "phpcs",
                 "standards"
             ***REMOVED***,
-            "time": "2018-09-23T23:08:17+00:00"
+            "time": "2018-12-19T23:57:18+00:00"
         },
         {
             "name": "symfony/dependency-injection",

@@ -12,6 +12,7 @@
         "mauriciopiber/gear-util": "^0.1",
         "mauriciopiber/gear-schema": "^0.3",
         "mauriciopiber/gear-scripts": "^0.1",
+        "mauriciopiber/gear-config": "^0.1",
         "mauriciopiber/gear-console": "^0.1",
         "mauriciopiber/gear-locator": "^0.1"
     },

@@ -2,8 +2,8 @@
 return array(
     'module-construct'                 => 'Construct %s %s',
     'module-autoload'                  => 'Creating autoload namespace for %s %s',
-    'module-upgrade'                   => 'Upgrading module %s %s',
-    'module-diagnostic'                => 'Diagnosting module %s %s',
+    'module-upgrade'                   => 'Upgrading %s',
+    'module-diagnostic'                => 'Diagnosting %s',
     'module-create'                    => 'Creating new module %s %s',
     'module-fixture'                   => 'Importing fixture for %s %s',
     'module-delete'                    => 'Deleting old module %s %s',
