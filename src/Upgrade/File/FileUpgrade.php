@@ -20,10 +20,14 @@ use Gear\Config\GearConfig;
 use Gear\Config\GearConfigTrait;
 use Gear\Module\Docs\Docs;
 use Gear\Module\Docs\DocsTrait;
+use Gear\Docker\DockerService;
+use Gear\Docker\DockerServiceTrait;
 
 class FileUpgrade
 {
     use DocsTrait;
+
+    use DockerServiceTrait;
 
     use ModuleStructureTrait;
 
@@ -54,8 +58,10 @@ class FileUpgrade
         ConsolePrompt $consolePrompt,
         ModuleService $moduleService,
         ModuleTestsService $moduleTestsService,
-        Docs $docs
+        Docs $docs,
+        DockerService $dockerService
     ) {
+        $this->dockerService = $dockerService;
         $this->docs = $docs;
         $this->fileEdge = $fileEdge;
         $this->moduleService = $moduleService;
@@ -63,6 +69,16 @@ class FileUpgrade
         $this->module = $module;
         $this->consolePrompt = $consolePrompt;
         $this->gearConfig = $gearConfig;
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
     //use DirEdgeTrait;
 
@@ -144,6 +160,14 @@ class FileUpgrade
                 return $this->getModuleService()->createJenkinsFile($type);
             case '.gitignore':
                 return $this->getModuleService()->createGitIgnore($type);
+            case '.dockerignore':
+                return $this->getDockerService()->createDockerIgnoreFile();
+            case 'docker-compose.yml':
+                return $this->getDockerService()->createDockerComposeFile();
+            case 'Dockerfile':
+                return $this->getDockerService()->createDockerBuildFile();
+            case 'entrypoint.sh':
+                return $this->getDockerService()->createDockerEntryPointFile();
             default:
                 throw new \Exception('Implementar mapa para arquivo '.$fileName);
         }
@@ -151,7 +175,7 @@ class FileUpgrade
 
     public function upgradeModuleFile($type, $file)
     {
-        $fileLocation = $this->getModule()->getMainFolder().'/'.$file;
+        $fileLocation = $this->dir.'/'.$file;
 
         if (is_file($fileLocation)) {
             return;

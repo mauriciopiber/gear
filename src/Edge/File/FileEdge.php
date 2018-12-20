@@ -15,7 +15,11 @@ class FileEdge extends AbstractEdge implements ServiceLocatorAwareInterface
         $typeData = $this->getYamlService()->load($file);
         $commonData = $this->getYamlService()->load($common);
 
-        return array_merge($typeData, $commonData);
 
+        $all = array_merge(array_values($typeData['files'***REMOVED***), array_values($commonData['files'***REMOVED***));
+        $unique = array_unique($all);
+        return [
+            'files' => $unique
+        ***REMOVED***;
     }
 }

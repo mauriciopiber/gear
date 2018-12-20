@@ -16,3 +16,4 @@ files:
     17: Jenkinsfile
     18: .gitignore
     19: schema/module.json
+    20: entrypoint.sh

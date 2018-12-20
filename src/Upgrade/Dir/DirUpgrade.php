@@ -60,6 +60,17 @@ class DirUpgrade
         $this->consolePrompt = $consolePrompt;
         $this->gearConfig = $gearConfig;
         $this->dirEdge = $dirEdge;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     public function upgradeDir($baseDir, $writable)
@@ -157,13 +168,13 @@ EOS
 
         if (isset($this->edge['writable'***REMOVED***) && count($this->edge['writable'***REMOVED***)) {
             foreach ($this->edge['writable'***REMOVED*** as $writable) {
-                $this->upgradeWritable($this->getModule()->getMainFolder(), $writable);
+                $this->upgradeWritable($this->dir, $writable);
             }
         }
 
         if (isset($this->edge['ignore'***REMOVED***) && count($this->edge['ignore'***REMOVED***)) {
             foreach ($this->edge['ignore'***REMOVED*** as $ignore) {
-                $this->upgradeIgnore($this->getModule()->getMainFolder(), $ignore);
+                $this->upgradeIgnore($this->dir, $ignore);
             }
         }
 

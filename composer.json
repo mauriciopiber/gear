@@ -44,12 +44,13 @@
         {
             "type": "composer",
             "url": "https://mirror.piber.network"
-        }, {"packagist": false}
+        },
+        {
+            "packagist": false
+        }
     ***REMOVED***,
     "bin": [
         "bin/gear/module/gear-module",
-        "bin/gear/project/gear-project",
-        "bin/gear/project/gear-project-module",
         "bin/install-nodejs",
         "bin/install-db-module",
         "bin/install-db-project",

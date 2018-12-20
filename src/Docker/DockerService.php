@@ -42,6 +42,25 @@ class DockerService
         return $this;
     }
 
+    public function createDockerEntryPointFile()
+    {
+        $module = $this->str('url', $this->module->getModuleName());
+        $mod = explode('-', $module);
+        $module = implode(' ', $mod);
+
+        $type = $this->module->getType();
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/docker/entrypoint-%s', $type));
+        $file->setOptions([
+          'module' => $module
+        ***REMOVED***);
+        $file->setLocation($this->module->getMainFolder());
+        $file->setFileName('entrypoint.sh');
+        $render = $file->render();
+        return $render;
+    }
+
     public function createDockerComposeFile()
     {
         $type = $this->module->getType();

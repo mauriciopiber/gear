@@ -360,6 +360,12 @@ class ModuleService
         $this->getDockerService()->createDockerBuildFile();
         $this->getDockerService()->createDockerIgnoreFile();
 
+        if (in_array($this->type, [
+            ModuleTypesInterface::CLI,
+        ***REMOVED***)) {
+            $this->getDockerService()->createDockerEntryPointFile();
+        }
+
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();
             $this->getProtractorConfig();

@@ -18,7 +18,8 @@ class FileUpgradeFactory implements FactoryInterface
             $serviceLocator->get('Gear\Console\Prompt\ConsolePrompt'),
             $serviceLocator->get('Gear\Module'),
             $serviceLocator->get('Gear\Module\Tests'),
-            $serviceLocator->get('Gear\Module\Docs\Docs')
+            $serviceLocator->get('Gear\Module\Docs\Docs'),
+            $serviceLocator->get('Gear\Docker\DockerService')
         );
         unset($serviceLocator);
         return $factory;

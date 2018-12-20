@@ -104,6 +104,17 @@ class AntUpgrade
         $this->gearConfig = $gearConfig;
         $this->upgrades = [***REMOVED***;
         $this->antEdge = $antEdge;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     /**
@@ -259,7 +270,7 @@ class AntUpgrade
     public function replacePlaceholder($file)
     {
         if (strpos($file, '{$module}') !== false) {
-            $file = str_replace('{$module}', $this->getModule()->getModuleName(), $file);
+            $file = str_replace('{$module}', $this->moduleName, $file);
         }
         return $file;
     }
@@ -410,7 +421,7 @@ class AntUpgrade
      */
     public function upgrade($dir, $type = 'web', $edge)
     {
-        $name = $this->getGearConfig()->getCurrentName();
+        $name = $this->moduleName;
         $name = $this->str('url', $name);
 
         $this->createFiles($dir, $edge);
@@ -610,9 +621,7 @@ class AntUpgrade
             return $this->upgrades;
         }
 
-        $dir = $this->getModule()->getMainFolder();
-
-        $this->upgrade($dir, $type, $edge);
+        $this->upgrade($this->dir, $type, $edge);
 
         return $this->upgrades;
     }

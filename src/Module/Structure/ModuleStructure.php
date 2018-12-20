@@ -7,18 +7,19 @@ use Gear\Util\String\StringServiceTrait;
 use Gear\Util\File\FileService;
 use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
-use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Exception\ResourceNotFound;
 use Gear\Module\ModuleTypesInterface;
 use Gear\Locator\ModuleLocatorTrait;
+use Gear\Config\GearConfig;
+use Gear\Config\GearConfigTrait;
 
 class ModuleStructure
 {
+    use GearConfigTrait;
     use ModuleLocatorTrait;
     use FileServiceTrait;
     use StringServiceTrait;
     use DirServiceTrait;
-    use ModuleStructureTrait;
 
     /**
      * MainFolder must have a full path to a module in ZF2 Gear Modules.
@@ -44,8 +45,10 @@ class ModuleStructure
     public function __construct(
         StringService $stringService,
         DirService $dirService,
-        FileService $fileService
+        FileService $fileService,
+        GearConfig $gearConfig
     ) {
+        $this->gearConfig = $gearConfig;
         $this->stringService = $stringService;
         $this->dirService = $dirService;
         $this->fileService = $fileService;
@@ -65,13 +68,14 @@ class ModuleStructure
         return $this->namespace;
     }
 
-    public function getNamespaceTest() {
+    public function getNamespaceTest()
+    {
 
-      $namespace = $this->getNamespace();
+        $namespace = $this->getNamespace();
 
-      $names = explode('\\', $namespace);
-      $namespaceTest = implode('Test\\', $names).'Test';
-      return $namespaceTest;
+        $names = explode('\\', $namespace);
+        $namespaceTest = implode('Test\\', $names).'Test';
+        return $namespaceTest;
     }
 
     public function setStaging($staging)
@@ -129,7 +133,7 @@ class ModuleStructure
         if (empty($moduleName)) {
             $moduleName = $this->getModuleName();
             if (empty($moduleName)) {
-                $moduleName = $this->getModule()->getModuleName();
+                $moduleName =$this->getGearConfig()->getCurrentName();
             }
         }
 
@@ -319,7 +323,6 @@ class ModuleStructure
         $this->getDirService()->mkDir($this->getPublicFolder());
 
         if ($this->getType() === ModuleTypesInterface::WEB) {
-
             $this->getDirService()->mkDir($this->getPublicUploadFolder());
             $this->getDirService()->writable($this->getPublicUploadFolder());
 

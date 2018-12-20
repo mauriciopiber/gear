@@ -78,7 +78,7 @@ return [
             ***REMOVED***,
             'gear-module-upgrade' => [
                 'options' => [
-                    'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
+                    'route' => 'gear module upgrade [<module>***REMOVED*** [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
                     'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'upgrade'

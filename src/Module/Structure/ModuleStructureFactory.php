@@ -12,21 +12,17 @@ class ModuleStructureFactory implements FactoryInterface
         $structure = new ModuleStructure(
             $serviceLocator->get('Gear\Util\String\StringService'),
             $serviceLocator->get('Gear\Util\Dir\DirService'),
-            $serviceLocator->get('Gear\Util\File\FileService')
+            $serviceLocator->get('Gear\Util\File\FileService'),
+            $serviceLocator->get('Gear\Config\GearConfig')
         );
 
         $request = $serviceLocator->get('request');
 
-        $moduleName = $request->getParam('module');
+        $moduleName = $request->getParam('module', null);
         $namespace = $request->getParam('namespace', null);
         $staging = $request->getParam('staging', null);
         $type = $request->getParam('type', null);
 
-        if (empty($moduleName)) {
-            $structure->setModuleName(null);
-            $structure->setType($type);
-            return $structure;
-        }
 
         $structure->setNamespace($namespace);
         $structure->setStaging($staging);
@@ -42,6 +38,7 @@ class ModuleStructureFactory implements FactoryInterface
         }
 
         $structure->prepare();
+
         return $structure;
     }
 }

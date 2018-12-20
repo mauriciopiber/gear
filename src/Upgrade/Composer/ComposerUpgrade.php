@@ -71,6 +71,17 @@ class ComposerUpgrade implements ModuleUpgradeInterface
         $this->gearConfig = $gearConfig;
         $this->composerEdge = $composerEdge;
         $this->consolePrompt = $consolePrompt;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     public function prepare(array $php)
@@ -79,9 +90,9 @@ class ComposerUpgrade implements ModuleUpgradeInterface
         return \Zend\Json\Json::prettyPrint($json, 1);
     }
 
-    public function createNewComposer($dir)
+    public function createNewComposer()
     {
-        file_put_contents($dir.'/composer.json', $this->prepare([
+        file_put_contents($this->dir.'/composer.json', $this->prepare([
             'require' => [***REMOVED***,
             'require-dev' => [***REMOVED***
         ***REMOVED***));
@@ -98,9 +109,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
 
         $composer = $this->getComposerEdge()->getComposerModule($type);
 
-        $dir = $this->getModule()->getMainFolder();
-
-        $composerFile = $dir.'/composer.json';
+        $composerFile = $this->dir.'/composer.json';
 
         if (!is_file($composerFile)) {
             $confirm = $this->getConsolePrompt()->show(static::$shouldFile);
@@ -108,14 +117,14 @@ class ComposerUpgrade implements ModuleUpgradeInterface
                 return [***REMOVED***;
             }
 
-            $this->createNewComposer($dir);
+            $this->createNewComposer($this->dir);
         }
 
         $moduleComposer = \Zend\Json\Json::decode(file_get_contents($composerFile), 1);
 
         $newComposer = $this->upgrade($composer, $moduleComposer, __FUNCTION__);
 
-        file_put_contents($dir.'/composer.json', $this->prepare($newComposer));
+        file_put_contents($this->dir.'/composer.json', $this->prepare($newComposer));
 
         return $this->upgrades;
     }
@@ -164,7 +173,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
             return $file;
         }
 
-        $class = $this->str('class', $this->getModule()->getModuleName());
+        $class = $this->str('class', $this->moduleName);
 
         $file['autoload'***REMOVED*** = [
             'psr-0' => [
@@ -238,11 +247,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
     public function upgrade($edge, $file, $function)
     {
         if ($function == 'upgradeModule') {
-            $name = $this->getModule()->getModuleName();
-        }
-
-        if ($function == 'upgradeProject') {
-            $name = $this->config['gear'***REMOVED***['project'***REMOVED***['name'***REMOVED***;
+            $name = $this->moduleName;
         }
 
         $file = $this->upgradeName($file, $name);
@@ -256,7 +261,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
                 $require
                 === sprintf(
                     'mauriciopiber/%s',
-                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                    $this->getModule()->str('url', $this->moduleName)
                 )
             ) {
                 continue;
@@ -309,7 +314,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
                 $require
                 === sprintf(
                     'mauriciopiber/%s',
-                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                    $this->getModule()->str('url', $this->moduleName)
                 )
             ) {
                 continue;
