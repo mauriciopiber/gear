@@ -1,0 +1,9 @@
+require:
+  zendframework/zendframework: "^2.5"
+  zendframework/zend-mvc: "^2.6"
+  mauriciopiber/gear-console: "^0.1"
+  mauriciopiber/gear-util: "^0.1"
+require-dev:
+  mauriciopiber/gear: "^0.3"
+  mauriciopiber/gear-jenkins: "^0.3"
+  mauriciopiber/gear-version: "^0.3"

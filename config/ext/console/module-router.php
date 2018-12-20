@@ -1,10 +1,10 @@
 <?php
-$globalOptions = array('[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***', '[--cache***REMOVED***', '[--acl***REMOVED***', '[--memcached***REMOVED***');
+$globalOptions = ['[--verbose|-v***REMOVED***', '[--yes|-y***REMOVED***', '[--cache***REMOVED***', '[--acl***REMOVED***', '[--memcached***REMOVED***'***REMOVED***;
 $options = implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
-        	/** Module */
+          /** Module */
             /** 2.1 */
             'gear-module-as-project-create' => [
                 'options' => [
@@ -67,15 +67,33 @@ return [
                     ***REMOVED***
                 ***REMOVED***
             ***REMOVED***,
-            'gear-module-construct' => array(
-                'options' => array(
+            'gear-module-diagnostic' => [
+                'options' => [
+                     'route' => 'gear module diagnostic [<module>***REMOVED*** [<basepath>***REMOVED*** [--type=***REMOVED*** [--just=***REMOVED***',
+                    'defaults' => [
+                        'controller' => 'Gear\Module',
+                        'action' => 'diagnostic'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            'gear-module-upgrade' => [
+                'options' => [
+                    'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
+                    'defaults' => [
+                        'controller' => 'Gear\Module',
+                        'action' => 'upgrade'
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
+            'gear-module-construct' => [
+                'options' => [
                     'route' => 'gear module construct <module> [<basepath>***REMOVED*** [--file=***REMOVED***',
-                    'defaults' => array(
+                    'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'construct'
-                    )
-                )
-            ),
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***,
            'gear-module-fixture' => [
                 'options' => [
                     'route' => 'gear module fixture <module> [--append***REMOVED*** [--reset-increment***REMOVED***',

@@ -7,9 +7,12 @@ use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Config\GearConfigTrait;
 use Gear\Config\GearConfig;
+use Gear\Locator\ModuleLocatorTrait;
 
 class DirService implements ModuleDiagnosticInterface
 {
+    use ModuleLocatorTrait;
+    
     use ModuleStructureTrait;
 
     use DirEdgeTrait;
@@ -25,6 +28,17 @@ class DirService implements ModuleDiagnosticInterface
         $this->gearConfig = $config;
         $this->dirEdge = $dirEdge;
         $this->module = $module;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     public function diagnosticModuleWeb()
@@ -69,7 +83,7 @@ class DirService implements ModuleDiagnosticInterface
         $this->diagnosticEdge($edge);
 
 
-        return $this->diagnostic($this->module->getMainFolder(), $edge);
+        return $this->diagnostic($this->dir, $edge);
     }
 
     public function diagnostic($baseDir, $edge)

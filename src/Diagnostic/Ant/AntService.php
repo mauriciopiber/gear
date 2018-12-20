@@ -61,6 +61,17 @@ class AntService implements ModuleDiagnosticInterface
         $this->stringService = $stringService;
         $this->module = $module;
         $this->gearConfig = $gearConfig;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     /**
@@ -75,9 +86,7 @@ class AntService implements ModuleDiagnosticInterface
 
         $this->diagnosticEdge($edge);
 
-        $build = $this->module->getMainFolder();
-
-        return $this->diagnostic($build, $edge, __FUNCTION__);
+        return $this->diagnostic($this->dir, $edge, __FUNCTION__);
     }
 
     public function diagnosticEdge($edge)
@@ -126,7 +135,7 @@ class AntService implements ModuleDiagnosticInterface
     {
         $errors = [***REMOVED***;
 
-        $name = $this->str('url', $this->getGearConfig()->getCurrentName());
+        $name = $this->str('url', $this->moduleName);
 
         if (!$this->hasName($this->build, $name)) {
             $errors[***REMOVED*** = sprintf(static::$missingName, $name, 'build.xml');

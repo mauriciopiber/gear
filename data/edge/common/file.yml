@@ -15,3 +15,6 @@ files:
     13: test/phpunit-coverage-ci.xml
     14: Jenkinsfile
     15: .gitignore
+    16: .dockerignore
+    17: docker-compose.yml
+    18: Dockerfile

@@ -43,7 +43,7 @@
         {
             "type": "composer",
             "url": "https://mirror.piber.network"
-        }
+        }, {"packagist": false}
     ***REMOVED***,
     "bin": [
         "bin/gear/module/gear-module",

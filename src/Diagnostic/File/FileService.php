@@ -7,9 +7,12 @@ use Gear\Edge\File\FileEdge;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Config\GearConfigTrait;
 use Gear\Config\GearConfig;
+use Gear\Locator\ModuleLocatorTrait;
 
 class FileService implements ModuleDiagnosticInterface
 {
+    use ModuleLocatorTrait;
+
     use ModuleStructureTrait;
 
     use FileEdgeTrait;
@@ -23,6 +26,17 @@ class FileService implements ModuleDiagnosticInterface
         $this->gearConfig = $config;
         $this->fileEdge = $fileEdge;
         $this->module = $module;
+
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     public function diagnostic($baseDir, $edge)
@@ -54,9 +68,6 @@ class FileService implements ModuleDiagnosticInterface
 
         $this->diagnosticEdge($edge);
 
-
-        $baseDir = $this->getModule()->getMainFolder();
-
-        return $this->diagnostic($baseDir, $edge);
+        return $this->diagnostic($this->dir, $edge);
     }
 }

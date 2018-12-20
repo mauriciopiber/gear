@@ -1,8 +1,8 @@
 require:
-  doctrine/orm: ~2.5.0
   robmorgan/phinx: '^0.10'
   zendframework/zendframework: ^2.5.0
   zendframework/zend-mvc: ~2.6.0
+  mauriciopiber/gear-rest: ^0.1
 require-dev:
   mauriciopiber/gear-util: ^0.1
   mauriciopiber/gear: ^0.3

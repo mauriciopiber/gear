@@ -50,6 +50,16 @@ class ComposerService implements ModuleDiagnosticInterface
         $this->module = $module;
         $this->composerEdge = $composerEdge;
 
+        $this->dir = $this->getModule()->getMainFolder();
+        if (empty($this->dir)) {
+          $this->dir = $this->getModuleFolder();
+        }
+
+        $this->moduleName = $this->getModule()->getModuleName();
+
+        if (empty($this->moduleName)) {
+          $this->moduleName = $this->gearConfig->getCurrentName();
+        }
     }
 
     public function diagnosticModule($type = null)
@@ -59,9 +69,7 @@ class ComposerService implements ModuleDiagnosticInterface
         }
         $composer = $this->getComposerEdge()->getComposerModule($type);
 
-        $dir = $this->getModule()->getMainFolder();
-
-        $composerFile = $dir.'/composer.json';
+        $composerFile = $this->dir.'/composer.json';
 
         if (!is_file($composerFile)) {
             return [static::$missingFile***REMOVED***;
@@ -84,7 +92,7 @@ class ComposerService implements ModuleDiagnosticInterface
                 $package
                 === sprintf(
                     'mauriciopiber/%s',
-                    $this->getModule()->str('url', $this->getModule()->getModuleName())
+                    $this->getModule()->str('url', $this->moduleName)
                 )
             ) {
                 continue;
