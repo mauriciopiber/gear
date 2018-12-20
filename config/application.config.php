@@ -1,30 +1,33 @@
-<?php return array (
-  'modules' =>
-  array (
-      'DoctrineModule',
-      'DoctrineORMModule',
-      'DoctrineDataFixtureModule',
-      'Gear\Deploy',
-      'Gear\Jenkins',
-      'Gear\Version',
-      'Gear\Console',
-      'Gear\Util',
-      'Gear\Git',
-      'Gear\Schema',
-      'Gear\Jira',
-      'Gear\Config',
-      'Gear'
-  ),
-  'module_listener_options' =>
-  array (
-    'module_paths' =>
-    array (
-        '../.',
-        './vendor',
-    ),
-    'config_glob_paths' =>
-    array (
-        'config/autoload/{,*.}{global,local}.php',
-    ),
-  ),
-); ?>
+<?php
+$modules = [
+    'Gear\Version',
+    'Gear\Util',
+    'Gear\Console',
+    'Gear\Schema',
+    'Gear\Config',
+    'Gear'
+***REMOVED***;
+
+if (getenv('PHINX_ENVIRONMENT') !== 'PRODUCTION') {
+    $modules = array_merge([
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'DoctrineDataFixtureModule',
+        'Gear\Deploy',
+        'Gear\Jenkins',
+        'Gear\Jira',
+    ***REMOVED***, $modules);
+}
+
+return [
+    'modules' => $modules,
+    'module_listener_options' => [
+        'module_paths' => [
+            '../.',
+            './vendor',
+        ***REMOVED***,
+        'config_glob_paths' => [
+            'config/autoload/{,*.}{global,local}.php',
+        ***REMOVED***,
+    ***REMOVED***,
+***REMOVED***; ?>

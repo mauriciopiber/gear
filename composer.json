@@ -13,13 +13,13 @@
         "mauriciopiber/gear-schema": "^0.3",
         "mauriciopiber/gear-scripts": "^0.1",
         "mauriciopiber/gear-config": "^0.1",
+        "mauriciopiber/gear-version": "^0.3",
         "mauriciopiber/gear-console": "^0.1",
         "mauriciopiber/gear-locator": "^0.1"
     },
     "require-dev": {
         "mauriciopiber/gear-deploy": "^0.3",
         "mauriciopiber/gear-jenkins": "^0.3",
-        "mauriciopiber/gear-version": "^0.3",
         "sebastian/phpcpd": "^2.0",
         "phpunit/phpunit": "^5.0",
         "phploc/phploc": "^4.0",

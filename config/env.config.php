@@ -2,7 +2,7 @@
 $env = getenv('PHINX_ENVIRONMENT');
 $environments = [
   'DEVELOPMENT',
-  'TESTING'
+  'PRODUCTION'
 ***REMOVED***;
 
 if (!in_array($env, $environments)) {
@@ -27,7 +27,7 @@ if ($env === $environments[0***REMOVED***) { //develop
 if ($env === $environments[1***REMOVED***) { //testing
   return [
     'database' => 'gear',
-    'host' => 'localhost',
+    'host' => 'mysql',
     'user' => 'root',
     'pass' => 'gear'
   ***REMOVED***;

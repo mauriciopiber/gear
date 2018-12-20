@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "c573a71bd116a05305874735850d1070",
+    "content-hash": "e064ade678dd14f3c633c651d58b55d9",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -1498,6 +1498,47 @@
                 }
             },
             "time": "2018-12-19T12:56:07+00:00"
+        },
+        {
+            "name": "mauriciopiber/gear-version",
+            "version": "0.3.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
+                "reference": "37d90ad0e1612e4b49d4c435b8b29a95cfb558ad"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-version-0.3.1-80a812.tar",
+                "reference": "37d90ad0e1612e4b49d4c435b8b29a95cfb558ad",
+                "shasum": null
+            },
+            "require": {
+                "mauriciopiber/gear-config": "^0.1",
+                "mauriciopiber/gear-locator": "^0.1",
+                "mauriciopiber/gear-util": "^0.1",
+                "php": "^7.0.0",
+                "zendframework/zendframework": "^2.5.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2",
+                "jakub-onderka/php-parallel-lint": "^0.9",
+                "mikey179/vfsstream": "^1.6.2",
+                "pdepend/pdepend": "^2.0.3",
+                "phploc/phploc": "^2.1.5",
+                "phpmd/phpmd": "^2.3.2",
+                "phpunit/phpunit": "~5.0",
+                "sebastian/phpcpd": "^2.0.2",
+                "squizlabs/php_codesniffer": "^2.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GearTest\\VersionTest\\": "test/unit",
+                    "Gear\\Version\\": "src"
+                }
+            },
+            "time": "2018-12-13T00:57:44+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -7159,47 +7200,6 @@
                 }
             },
             "time": "2018-12-12T22:20:11+00:00"
-        },
-        {
-            "name": "mauriciopiber/gear-version",
-            "version": "0.3.1",
-            "source": {
-                "type": "git",
-                "url": "git@bitbucket.org:mauriciopiber/gear-version.git",
-                "reference": "37d90ad0e1612e4b49d4c435b8b29a95cfb558ad"
-            },
-            "dist": {
-                "type": "tar",
-                "url": "https://mirror.piber.network/dist/mauriciopiber-gear-version-0.3.1-80a812.tar",
-                "reference": "37d90ad0e1612e4b49d4c435b8b29a95cfb558ad",
-                "shasum": null
-            },
-            "require": {
-                "mauriciopiber/gear-config": "^0.1",
-                "mauriciopiber/gear-locator": "^0.1",
-                "mauriciopiber/gear-util": "^0.1",
-                "php": "^7.0.0",
-                "zendframework/zendframework": "^2.5.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^2",
-                "jakub-onderka/php-parallel-lint": "^0.9",
-                "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.0.3",
-                "phploc/phploc": "^2.1.5",
-                "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "~5.0",
-                "sebastian/phpcpd": "^2.0.2",
-                "squizlabs/php_codesniffer": "^2.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GearTest\\VersionTest\\": "test/unit",
-                    "Gear\\Version\\": "src"
-                }
-            },
-            "time": "2018-12-13T00:57:44+00:00"
         },
         {
             "name": "mikey179/vfsStream",

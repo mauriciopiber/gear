@@ -19,5 +19,5 @@ FROM registry.piber.network/php:v1.0.3
 COPY --from=builder /var/www/gear /var/www/module
 COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
-
+ENV PHINX_ENVIRONMENT PRODUCTION
 ENTRYPOINT ["/usr/bin/entrypoint.sh"***REMOVED***
