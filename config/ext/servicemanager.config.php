@@ -34,7 +34,8 @@
         'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
         'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
-        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
+        'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager',
+        'Gear\Module\Script\ModuleScriptService' => 'Gear\Module\Script\ModuleScriptService'
     ***REMOVED***,
     'factories' => [
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',

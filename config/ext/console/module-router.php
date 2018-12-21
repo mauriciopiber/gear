@@ -87,7 +87,7 @@ return [
             ***REMOVED***,
             'gear-module-construct' => [
                 'options' => [
-                    'route' => 'gear module construct <module> [<basepath>***REMOVED*** [--file=***REMOVED***',
+                    'route' => 'gear module construct [<module>***REMOVED*** [<basepath>***REMOVED*** [--file=***REMOVED***',
                     'defaults' => [
                         'controller' => 'Gear\Module',
                         'action' => 'construct'

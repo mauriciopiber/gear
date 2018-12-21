@@ -147,56 +147,9 @@ class Module implements
     {
         unset($console);
         return [
-            'Projects',
-            'gear project create' => 'Criar um novo projeto',
-
-            [ 'project', 'Required', 'Project Name'***REMOVED***,
-            [ '--database=', 'Required', 'A database to use'***REMOVED***,
-            [ '--username=', 'Required', 'Username of database'***REMOVED***,
-            [ '--password=', 'Required', 'Password of username'***REMOVED***,
-            [ '--host=', 'Optional', 'Host to create a Virtual Host'***REMOVED***,
-            [ '--git=', 'Optional', 'Git to use as remote repository'***REMOVED***,
-            [ '--nfs', 'Optional', 'Nfs to share and work on files'***REMOVED***,
-
-            'gear project dump-autoload' => 'Adiciona os módulos ao arquivo autoloader_namespace.php',
-            'gear project helper' => '',
-            'gear project diagnostics' => '',
-            'gear project fixture [--append***REMOVED*** [--reset-autoincrement***REMOVED***' => '',
-            'gear project setUpGlobal --host= --dbname=  --dbms= --environment= ' => '',
-            'gear project setUpLocal --username= --password= ' => '',
-            'gear project setUpEnvironment --environment=' => '',
-            'gear project setUpConfig --host= --dbname=  --username= --password= --environment= --dbms=' => '',
-            'gear project deploy <environment>' => '',
-            'gear project nfs' => '',
-            'gear project virtual-host' => '',
-            'gear project git' => '',
-
-            'Config',
-
-            'gear config add <path> <key> <value>' => 'Adiciona um valor em um array de configuração',
-            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
-            ['key', 'Required', 'Chave que será adicionada'***REMOVED***,
-            ['value', 'Required', 'Valor que será associado'***REMOVED***,
-
-            'gear config update <key> <value>' => 'Editar um valor em um array',
-            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
-            ['key', 'Required', 'Chave que será adicionada'***REMOVED***,
-            ['value', 'Required', 'Chave que será adicionada'***REMOVED***,
-
-            'gear config show <key>' => 'Exibir o valor de um array',
-            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
-            ['key', 'Required', 'Chave que será adicionada',***REMOVED***,
-
-            'gear config delete <key>' => 'Deletar um elemento de um array',
-            ['path', 'Required', 'Local onde será adicionado'***REMOVED***,
-            ['key', 'Required', 'Chave que será adicionada',***REMOVED***,
-
             //Module
             'Module',
             'gear module fixture  <module> [--append***REMOVED*** [--reset-increment***REMOVED***' => '',
-            'gear module create   <module> [--build=***REMOVED*** [--layout=***REMOVED*** [--no-layout***REMOVED***' => '',
-            'gear module create   <module> --light [--ci***REMOVED*** [--build=***REMOVED*** [--doctrine***REMOVED*** '
-            .'[--doctrine-fixture***REMOVED*** [--unit***REMOVED*** [--codeception***REMOVED*** [--gear***REMOVED***' => '',
             'gear module delete   <module>' => '',
             'gear module load     <module> [--before=***REMOVED*** [--after=***REMOVED***' => '',
             'gear module unload   <module>' => '',
@@ -205,7 +158,7 @@ class Module implements
             'gear module dump     <module> [--json***REMOVED*** [--array***REMOVED***' => '',
             'gear module entities <module>' => '',
             'gear module entity   <module> --entity=' => '',
-            'gear module-as-project create <module> <basepath> [--type=***REMOVED*** [--force***REMOVED*** [--staging=***REMOVED*** [--namespace***REMOVED***' => '',
+            'gear module create <module> <basepath> [--type=***REMOVED*** [--force***REMOVED*** [--staging=***REMOVED*** [--namespace***REMOVED***' => '',
             'gear module construct <module> [<basepath>***REMOVED*** [--file=***REMOVED***' => '',
 
             'Module/Constructor',
@@ -264,20 +217,7 @@ class Module implements
             ['[--default-role=***REMOVED***', 'Optional', ''***REMOVED***,
             ['[--columns=***REMOVED***', 'Optional', ''***REMOVED***,
 
-
-            'gear module test create|delete' => 'Criar um Test/Spec',
-            ['<module>', 'Required', 'Módulo'***REMOVED***,
-            ['--suite=', 'Required', 'Tipo, pode ser unit, karma ou protractor.'***REMOVED***,
-            ['--target=', 'Required', 'Local onde arquivo será salvo'***REMOVED***,
-
-            'gear module view create|delete ' => 'Criar uma View.',
-            ['<module>', 'Required', 'Módulo'***REMOVED***,
-            ['--target=', 'Required', 'View que será criada'***REMOVED***,
-
-
-
             'gear module dump-autoload <module>' => '',
-
 
             //database
             'Database',

@@ -1665,6 +1665,23 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "ModuleScriptService",
+                "type": "Service",
+                "dependency": [
+                    "Module\\Structure\\ModuleStructure",
+                    "Creator\\FileCreator"
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Module\\Script",
+                "extends": null,
+                "abstract": false,
+                "service": "invokables",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
