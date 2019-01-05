@@ -41,6 +41,7 @@ class FileService implements ModuleDiagnosticInterface
 
     public function diagnostic($baseDir, $edge)
     {
+        var_dump($baseDir);
         foreach ($edge['files'***REMOVED*** as $file) {
             if (!is_file($baseDir.'/'.$file)) {
                 $this->errors[***REMOVED*** = sprintf(static::$missingFile, $file);

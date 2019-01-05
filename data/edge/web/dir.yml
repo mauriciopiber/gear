@@ -1,19 +1,6 @@
 writable:
     0: build
-    1: data/logs
-    2: data/cache/configcache
-    3: data/DoctrineModule/cache
-    4: data/DoctrineORMModule/Proxy
-    5: data/session
-    6: data/migrations
-    7: node_modules
-    
+    1: docs
+
 ignore:
     0: build
-    1: data/logs
-    2: data/cache/configcache
-    3: data/DoctrineModule/cache
-    4: data/DoctrineORMModule/Proxy
-    5: data/session
-    6: node_modules
-    
