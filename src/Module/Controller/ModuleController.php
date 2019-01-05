@@ -119,8 +119,11 @@ class ModuleController extends AbstractConsoleController
         $module->moduleAsProject($moduleName, $basepath, $type, $staging, $namespace);
 
         $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
+        $console = new ConsoleModel();
+        $console->setErrorLevel(0);
+//var_dump($console);
+        return $console;
+        //return new ConsoleModel();
     }
 
 
