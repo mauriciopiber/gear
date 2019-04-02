@@ -46,14 +46,26 @@ class ComposerService extends AbstractMvc
         return $this;
     }
 
+    public function tokenizeNamespace($namespace)
+    {
+        //var_dump($namespace);
+        $fixed = preg_replace('/[\\\\***REMOVED***+/', '\\', $namespace);
+        $names = explode('\\', $fixed);
+        //var_dump($names);die();
+        return $names;
+        //return $namespace;
+    }
+
 
     public function createComposerAsProject($namespace, $type = 'web')
     {
-        $names = explode('\\', $namespace);
+        $names = $this->tokenizeNamespace($namespace);
         $namespace = implode('\\\\', $names).'\\\\';
         $namespaceTest = implode('Test\\\\', $names).'Test\\\\';
 
         $edge = $this->getComposerEdge()->getComposerModule($type);
+
+        //var_dump($namespace, $namespaceTest);die();
 
         return $this->getFileCreator()->createFile(
             'template/module/composer-as-project.json.phtml',

@@ -413,12 +413,12 @@ class ModuleServiceTest extends TestCase
         $moduleName = sprintf('%sModule', ucfirst($type));
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\Structure\ModuleStructure(
-            $this->stringService,
-            $this->dirService,
-            $this->fileService
-        );
-        $this->module->setRequestName($moduleName);
+        // $this->module = new \Gear\Module\Structure\ModuleStructure(
+        //     $this->stringService,
+        //     $this->dirService,
+        //     $this->fileService
+        // );
+        // $this->module->setRequestName($moduleName);
 
         $files = sprintf(__DIR__.'/_files/module-%s.yml', $type);
         $this->assertFileExists($files);

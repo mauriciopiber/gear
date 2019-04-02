@@ -66,6 +66,71 @@ class ComposerServiceTest extends TestCase
     }
 
     /**
+     * @group x4
+     */
+    public function testTokenizeNamespaceShort()
+    {
+        $expected = [
+            'First',
+            'Second'
+        ***REMOVED***;
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\Second')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\Second')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\Second')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\\Second')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\\\Second')
+        );
+    }
+
+    /**
+     * @group x4
+     */
+    public function testTokenizeNamespaceLong()
+    {
+        $expected = [
+            'First',
+            'Second',
+            'Third',
+            'Four',
+            'Five'
+        ***REMOVED***;
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\Second\Third\Four\Five')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\Second\\Third\\Four\\Five')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\Second\\\Third\\\Four\\\Five')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\\Second\\\\Third\\\\Four\\\\Five')
+        );
+        $this->assertEquals(
+            $expected,
+            $this->composer->tokenizeNamespace('First\\\\\Second\\\\\Third\\\\\Four\\\\\Five')
+        );
+    }
+
+    /**
      * @dataProvider configOneLevel
      * @group x1
      */
@@ -89,7 +154,7 @@ class ComposerServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $created = $this->composer->createComposerAsProject();
+        $created = $this->composer->createComposerAsProject($name);
 
         $this->assertStringEndsWith('composer.json', $created);
 
@@ -105,8 +170,12 @@ class ComposerServiceTest extends TestCase
     },
     "autoload" : {
         "psr-4" : {
-            "Gear\\\\Gearing\\\\" : "src",
-            "Gear\\\\Gearing\\\\Test\\\\" : "test/unit"
+            "Gear\\\\Gearing\\\\" : "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GearTest\\\\GearingTest\\\\" : "test/unit"
         }
     },
     "repositories" : [
@@ -149,7 +218,7 @@ EOS;
             ***REMOVED***
         );
 
-        $created = $this->composer->createComposerAsProject();
+        $created = $this->composer->createComposerAsProject($name);
 
         $this->assertStringEndsWith('composer.json', $created);
 
@@ -165,71 +234,12 @@ EOS;
     },
     "autoload" : {
         "psr-4" : {
-            "Gear\\\\Gearing\\\\MyOther\\\\" : "src",
-            "Gear\\\\Gearing\\\\MyOther\\\\Test\\\\" : "test/unit"
+            "Gear\\\\Gearing\\\\MyOther\\\\" : "src"
         }
     },
-    "repositories" : [
-        {
-            "type" : "composer",
-            "url" : "https://mirror.piber.network"
-        },
-        { "packagist" : false }
-    ***REMOVED***
-}
-EOS;
-
-        $file = file_get_contents($this->file);
-
-        $this->assertEquals($expected, $file);
-
-    }
-
-
-    public function testCreateComposer()
-    {
-        $root = vfsStream::setup('module');
-        $this->file = vfsStream::url('module/composer.json');
-
-        $this->module->getModuleName()->willReturn('Gearing');
-        $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
-
-        $this->edge->getComposerModule('web')->willReturn(
-            [
-                'require' => [
-                    'mpiber/package-1' => '1.0.0',
-                    'mpiber/package-2' => '2.0.0',
-                    'mpiber/package-3' => '3.0.0',
-                ***REMOVED***,
-                'require-dev' => [
-                    'mpiber/unit-1' => '^1.0.0',
-                    'mpiber/unit-2' => '*2.0.0'
-                ***REMOVED***
-
-            ***REMOVED***
-        );
-
-        $created = $this->composer->createComposerAsProject();
-
-        $this->assertStringEndsWith('composer.json', $created);
-
-
-        $expected = <<<EOS
-{
-    "name" : "mauriciopiber/gearing",
-    "require" : {
-        "mpiber/package-1": "1.0.0",
-        "mpiber/package-2": "2.0.0",
-        "mpiber/package-3": "3.0.0"
-    },
-    "require-dev" : {
-        "mpiber/unit-1": "^1.0.0",
-        "mpiber/unit-2": "*2.0.0"
-    },
-    "autoload" : {
-        "psr-4" : {
-            "Gearing\\\\" : "src",
-            "Gearing\\\\Test\\\\" : "test/unit"
+    "autoload-dev": {
+        "psr-4": {
+            "GearTest\\\\GearingTest\\\\MyOtherTest\\\\" : "test/unit"
         }
     },
     "repositories" : [

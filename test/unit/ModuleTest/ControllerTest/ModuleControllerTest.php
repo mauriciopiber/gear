@@ -137,7 +137,7 @@ class ModuleControllerTest extends TestCase
     {
         $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br')->willReturn(true);
+        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br', null)->willReturn(true);
 
         $this->controller->setModuleService($diagnostic->reveal());
 
