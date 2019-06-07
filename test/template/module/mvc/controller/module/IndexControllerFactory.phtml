@@ -23,7 +23,6 @@ class IndexControllerFactory implements FactoryInterface
      * @return MyModule\Controller\IndexController
      */
     {
-        unset($controllerManager);
         $indexController = new IndexController();
         return $indexController;
     }
