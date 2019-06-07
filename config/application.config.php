@@ -1,10 +1,8 @@
 <?php return array (
   'modules' =>
   array (
-      'DoctrineModule',
-      'DoctrineORMModule',
-      'DoctrineDataFixtureModule',
-      'Gear\Deploy',
+      'Zend\Router',
+      'Zend\Mvc\Console',
       'Gear\Jenkins',
       'Gear\Version',
       'Gear\Util',

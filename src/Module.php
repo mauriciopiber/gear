@@ -104,7 +104,7 @@ class Module implements
         $application = $event->getApplication();
 
         $serviceManager = $event->getApplication()->getServiceManager();
-        $this->setServiceLocator($serviceManager);
+        //$this->setServiceLocator($serviceManager);
         // get the shared events manager
         $sharedManager = $application->getEventManager()->getSharedManager();
 
