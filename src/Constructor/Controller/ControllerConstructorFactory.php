@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Constructor\Controller;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Table\TableService;
@@ -37,26 +37,26 @@ class ControllerConstructorFactory implements FactoryInterface
      *
      * @return ControllerService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ControllerConstructor(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('Gear\Schema\Controller'),
-            $serviceLocator->get(TableService::class),
-            $serviceLocator->get(ColumnService::class),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get(WebControllerService::class),
-            $serviceLocator->get(WebControllerTestService::class),
-            $serviceLocator->get(ConsoleControllerService::class),
-            $serviceLocator->get(ConsoleControllerTestService::class),
-            $serviceLocator->get(ApiControllerService::class),
-            $serviceLocator->get(ApiControllerTestService::class),
-            $serviceLocator->get(ConfigService::class),
-            $serviceLocator->get(ViewService::class),
-            $serviceLocator->get(LanguageService::class),
-            $serviceLocator->get(ControllerManager::class)
+            $container->get('Gear\Util\String\StringService'),
+            $container->get('Gear\Schema\Controller'),
+            $container->get(TableService::class),
+            $container->get(ColumnService::class),
+            $container->get(ModuleStructure::class),
+            $container->get(WebControllerService::class),
+            $container->get(WebControllerTestService::class),
+            $container->get(ConsoleControllerService::class),
+            $container->get(ConsoleControllerTestService::class),
+            $container->get(ApiControllerService::class),
+            $container->get(ApiControllerTestService::class),
+            $container->get(ConfigService::class),
+            $container->get(ViewService::class),
+            $container->get(LanguageService::class),
+            $container->get(ControllerManager::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

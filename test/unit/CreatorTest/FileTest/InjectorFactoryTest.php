@@ -11,16 +11,16 @@ class InjectorFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator
+        $this->container
             ->get('Gear\Util\Vector\ArrayService')
             ->willReturn($this->prophesize('Gear\Util\Vector\ArrayService'))
             ->shouldBeCalled();
 
         $factory = new \Gear\Creator\Injector\InjectorFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Creator\Injector\Injector', $instance);
     }

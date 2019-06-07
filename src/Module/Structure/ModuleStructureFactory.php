@@ -1,21 +1,21 @@
 <?php
 namespace Gear\Module\Structure;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
 
 class ModuleStructureFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $structure = new ModuleStructure(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('Gear\Util\Dir\DirService'),
-            $serviceLocator->get('Gear\Util\File\FileService')
+            $container->get('Gear\Util\String\StringService'),
+            $container->get('Gear\Util\Dir\DirService'),
+            $container->get('Gear\Util\File\FileService')
         );
 
-        $request = $serviceLocator->get('request');
+        $request = $container->get('request');
 
         $moduleName = $request->getParam('module');
         $namespace = $request->getParam('namespace', null);
@@ -36,7 +36,7 @@ class ModuleStructureFactory implements FactoryInterface
         $location = $request->getParam('basepath');
 
         if (!empty($location)) {
-            $str = $serviceLocator->get('Gear\Util\String\StringService');
+            $str = $container->get('Gear\Util\String\StringService');
             $mainFolder = realpath($location).'/'.$str->str('url', $moduleName);
             $structure->setMainFolder($mainFolder);
         }

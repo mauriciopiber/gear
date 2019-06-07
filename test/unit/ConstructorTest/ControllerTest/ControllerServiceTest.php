@@ -46,7 +46,6 @@ class ControllerServiceTest extends TestCase
         $this->apiControllerService = $this->prophesize(ApiControllerService::class);
         $this->apiControllerTestService = $this->prophesize(ApiControllerTestService::class);
 
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
 
         $this->schemaController = $this->prophesize(SchemaController::class);
@@ -75,11 +74,11 @@ class ControllerServiceTest extends TestCase
             $this->mvcConsoleControllerTest->reveal(),
             $this->apiControllerService->reveal(),
             $this->apiControllerTestService->reveal(),
-            //$this->controllerManager->reveal(),
+            //$this->container->reveal(),
             $this->configService->reveal(),
             $this->viewService->reveal(),
             $this->languageService->reveal(),
-            $this->controllerManager->reveal()
+            $this->container->reveal()
         );
 
     }
@@ -256,7 +255,6 @@ class ControllerServiceTest extends TestCase
 
         $this->mvcConsoleController->buildController($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcConsoleControllerTest->buildController($controller)->willReturn(true)->shouldBeCalled();
-        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
             'Gearing',
@@ -287,7 +285,6 @@ class ControllerServiceTest extends TestCase
 
         $this->apiControllerService->buildController($controller)->willReturn(true)->shouldBeCalled();
         $this->apiControllerTestService->buildController($controller)->willReturn(true)->shouldBeCalled();
-        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
             "Gearing",
@@ -319,7 +316,6 @@ class ControllerServiceTest extends TestCase
 
         $this->mvcController->buildController($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcControllerTest->buildController($controller)->willReturn(true)->shouldBeCalled();
-        $this->controllerManager->create($controller)->willReturn(true)->shouldBeCalled();
 
         $this->schemaController->create(
             "Gearing",

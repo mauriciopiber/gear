@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Project\Composer;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Project\Composer\ComposerService;
 use Gear\Creator\FileCreator\FileCreator;
 
@@ -11,16 +11,16 @@ use Gear\Creator\FileCreator\FileCreator;
  */
 class ComposerServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ComposerService(
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('scriptService'),
-            $serviceLocator->get('Gear\Edge\Composer\ComposerEdge'),
-            $serviceLocator->get('Gear\Util\Vector\ArrayService')
+            $container->get(FileCreator::class),
+            $container->get('Gear\Util\String\StringService'),
+            $container->get('scriptService'),
+            $container->get('Gear\Edge\Composer\ComposerEdge'),
+            $container->get('Gear\Util\Vector\ArrayService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Creator\Component\Constructor;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 
 /**
@@ -22,12 +22,12 @@ class ConstructorParamsFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Creator\Component\Constructor\ConstructorParams
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ConstructorParams(
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

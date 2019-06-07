@@ -1,22 +1,22 @@
 <?php
 namespace Gear\Diagnostic\File;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Diagnostic\File\FileService;
 use Gear\Edge\File\FileEdge;
 use Gear\Module\Structure\ModuleStructure;
 
 class FileServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new FileService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(FileEdge::class)
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(FileEdge::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,37 +1,37 @@
 <?php
 namespace Gear\Constructor\Src;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 #use Gear\Module\ConstructorServiceFactory;
 use Gear\Constructor\Src;
 use Gear\Module\Structure\ModuleStructure;
 
 class SrcConstructorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new SrcConstructor(
-            $serviceLocator->get('Gear\Table\TableService'),
-            $serviceLocator->get('Gear\Column\ColumnService'),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Schema\Src'),
-            $serviceLocator->get('Gear\Mvc\Config\ServiceManager'),
-            $serviceLocator->get('Gear\Mvc\TraitService'),
-            $serviceLocator->get('Gear\Mvc\TraitTestService'),
-            $serviceLocator->get('Gear\Mvc\Factory\FactoryService'),
-            $serviceLocator->get('Gear\Mvc\Factory\FactoryTestService'),
-            $serviceLocator->get('Gear\Mvc\Form\FormService'),
-            $serviceLocator->get('Gear\Mvc\Filter\FilterService'),
-            $serviceLocator->get('Gear\Mvc\Entity\EntityService'),
-            $serviceLocator->get('Gear\Mvc\Search\SearchService'),
-            $serviceLocator->get('Gear\Mvc\ValueObject\ValueObjectService'),
-            $serviceLocator->get('Gear\Mvc\ViewHelper\ViewHelperService'),
-            $serviceLocator->get('Gear\Mvc\ControllerPlugin\ControllerPluginService'),
-            $serviceLocator->get('Gear\Mvc\Repository\RepositoryService'),
-            $serviceLocator->get('Gear\Mvc\Service\ServiceService'),
-            $serviceLocator->get('Gear\Mvc\Fixture\FixtureService'),
-            $serviceLocator->get('Gear\Mvc\InterfaceService')
+            $container->get('Gear\Table\TableService'),
+            $container->get('Gear\Column\ColumnService'),
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Schema\Src'),
+            $container->get('Gear\Mvc\Config\ServiceManager'),
+            $container->get('Gear\Mvc\TraitService'),
+            $container->get('Gear\Mvc\TraitTestService'),
+            $container->get('Gear\Mvc\Factory\FactoryService'),
+            $container->get('Gear\Mvc\Factory\FactoryTestService'),
+            $container->get('Gear\Mvc\Form\FormService'),
+            $container->get('Gear\Mvc\Filter\FilterService'),
+            $container->get('Gear\Mvc\Entity\EntityService'),
+            $container->get('Gear\Mvc\Search\SearchService'),
+            $container->get('Gear\Mvc\ValueObject\ValueObjectService'),
+            $container->get('Gear\Mvc\ViewHelper\ViewHelperService'),
+            $container->get('Gear\Mvc\ControllerPlugin\ControllerPluginService'),
+            $container->get('Gear\Mvc\Repository\RepositoryService'),
+            $container->get('Gear\Mvc\Service\ServiceService'),
+            $container->get('Gear\Mvc\Fixture\FixtureService'),
+            $container->get('Gear\Mvc\InterfaceService')
         );
     }
 }

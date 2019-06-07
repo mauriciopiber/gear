@@ -13,8 +13,8 @@ use ZendDiagnostics\Check\PhpVersion;
 use ZendDiagnostics\Check\CpuPerformance;
 
 class Module implements
-    ConsoleUsageProviderInterface,
-    ConsoleBannerProviderInterface,
+  ConsoleUsageProviderInterface,
+  ConsoleBannerProviderInterface
 {
 
     protected $moduleManager;

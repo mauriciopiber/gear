@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class DbControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $controllerManager)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $dbService = $controllerManager->get('Gear\Module\Constructor\Db');
         $dbController = new \Gear\Constructor\Db\DbController($dbService);

@@ -1,26 +1,26 @@
 <?php
 namespace Gear\Module;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 use Gear\Module\ConstructService;
 
 class ConstructServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new ConstructService(
-            $serviceLocator->get('Gear\Schema\Db'),
-            $serviceLocator->get('Gear\Schema\Src'),
-            $serviceLocator->get('Gear\Schema\App'),
-            $serviceLocator->get('Gear\Schema\Controller'),
-            $serviceLocator->get('Gear\Schema\Action'),
-            $serviceLocator->get('Gear\Constructor\Db\DbConstructor'),
-            $serviceLocator->get('Gear\Constructor\Src\SrcConstructor'),
-            $serviceLocator->get('Gear\Constructor\App\AppService'),
-            $serviceLocator->get('Gear\Constructor\Controller\ControllerConstructor'),
-            $serviceLocator->get('Gear\Constructor\Action\ActionConstructor')
+            $container->get('Gear\Schema\Db'),
+            $container->get('Gear\Schema\Src'),
+            $container->get('Gear\Schema\App'),
+            $container->get('Gear\Schema\Controller'),
+            $container->get('Gear\Schema\Action'),
+            $container->get('Gear\Constructor\Db\DbConstructor'),
+            $container->get('Gear\Constructor\Src\SrcConstructor'),
+            $container->get('Gear\Constructor\App\AppService'),
+            $container->get('Gear\Constructor\Controller\ControllerConstructor'),
+            $container->get('Gear\Constructor\Action\ActionConstructor')
         );
     }
 }

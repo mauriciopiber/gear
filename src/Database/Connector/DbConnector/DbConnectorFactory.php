@@ -1,15 +1,15 @@
 <?php
 namespace Gear\Database\Connector\DbConnector;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class DbConnectorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new \Gear\Database\Connector\DbConnector\DbConnector(
-            $serviceLocator->get('Zend\Db\Adapter\Adapter')
+            $container->get('Zend\Db\Adapter\Adapter')
         );
     }
 }

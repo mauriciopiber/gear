@@ -13,33 +13,33 @@ class NpmUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
 
-        $this->serviceLocator->get('Gear\Util\Prompt\ConsolePrompt')
+        $this->container->get('Gear\Util\Prompt\ConsolePrompt')
           ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get(ModuleStructure::class)
+        $this->container->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Config\GearConfig')->willReturn(
+        $this->container->get('Gear\Config\GearConfig')->willReturn(
             $this->prophesize('Gear\Config\GearConfig')->reveal()
         )->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')->willReturn(
+        $this->container->get('Gear\Util\String\StringService')->willReturn(
             $this->prophesize('Gear\Util\String\StringService')->reveal()
         )->shouldBeCalled();
 
-        $this->serviceLocator->get(NpmEdge::class)
+        $this->container->get(NpmEdge::class)
         ->willReturn($this->prophesize(NpmEdge::class)->reveal())
         ->shouldBeCalled();
 
 
         $factory = new \Gear\Upgrade\Npm\NpmUpgradeFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Upgrade\Npm\NpmUpgrade', $instance);
     }

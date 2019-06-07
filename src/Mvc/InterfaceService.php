@@ -10,7 +10,9 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Util\Dir\DirServiceTrait;
 
-class InterfaceService, ModuleStructureInterface, StringServiceAwareInterface
+class InterfaceService implements
+ ModuleStructureInterface,
+ StringServiceAwareInterface
 {
     use FileCreatorTrait;
     use StringServiceTrait;

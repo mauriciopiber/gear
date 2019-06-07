@@ -1,18 +1,18 @@
 <?php
 namespace Gear\Creator\Injector;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Creator\Injector\Injector;
 
 class InjectorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new Injector(
-            $serviceLocator->get('Gear\Util\Vector\ArrayService')
+            $container->get('Gear\Util\Vector\ArrayService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

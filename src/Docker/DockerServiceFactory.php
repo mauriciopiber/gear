@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Docker;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Docker\DockerService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
@@ -25,14 +25,14 @@ class DockerServiceFactory implements FactoryInterface
      *
      * @return DockerService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new DockerService(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get(ModuleStructure::class)
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(FileCreator::class),
+            $container->get(ModuleStructure::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 

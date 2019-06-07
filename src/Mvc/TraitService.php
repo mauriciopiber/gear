@@ -9,7 +9,7 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 
-class TraitService, ModuleStructureInterface, StringServiceAwareInterface
+class TraitService implements ModuleStructureInterface, StringServiceAwareInterface
 {
     use FileCreatorTrait;
     use CodeTrait;

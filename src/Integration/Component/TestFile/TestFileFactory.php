@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Component\TestFile;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Component\TestFile\TestFile;
 
 /**
@@ -22,13 +22,13 @@ class TestFileFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Component\TestFile\TestFile
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new TestFile(
-            $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Integration\Util\Persist\Persist'),
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

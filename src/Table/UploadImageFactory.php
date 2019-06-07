@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Table;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Table\UploadImage;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -24,13 +24,13 @@ class UploadImageFactory implements FactoryInterface
      *
      * @return UploadImage
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new UploadImage(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(ModuleStructure::class)
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(ModuleStructure::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

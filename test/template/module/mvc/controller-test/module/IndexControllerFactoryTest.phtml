@@ -8,11 +8,10 @@ class IndexControllerFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
         $factory = new IndexControllerFactory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->createService($this->container->reveal());
 
         $this->assertInstanceOf('MyModule\Controller\IndexController', $instance);
     }

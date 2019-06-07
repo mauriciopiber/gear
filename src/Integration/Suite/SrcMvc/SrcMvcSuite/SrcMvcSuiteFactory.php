@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Suite\SrcMvc\SrcMvcSuite;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite;
 
 /**
@@ -22,13 +22,13 @@ class SrcMvcSuiteFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new SrcMvcSuite(
-            $serviceLocator->get('Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator'),
-            $serviceLocator->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
+            $container->get('Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator'),
+            $container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

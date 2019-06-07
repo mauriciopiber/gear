@@ -2,7 +2,7 @@
 namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Module\ComposerServiceFactory;
 use Gear\Module\ComposerService;
 use Gear\Module\Structure\ModuleStructure;
@@ -20,31 +20,31 @@ class ComposerServiceFactoryTest extends TestCase
 {
     public function testComposerServiceFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
-        $this->serviceLocator->get(ModuleStructure::class)
+        $this->container->get(ModuleStructure::class)
             ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(ComposerEdge::class)
+        $this->container->get(ComposerEdge::class)
             ->willReturn($this->prophesize(ComposerEdge::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(FileCreator::class)
+        $this->container->get(FileCreator::class)
             ->willReturn($this->prophesize(FileCreator::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(ArrayService::class)
+        $this->container->get(ArrayService::class)
             ->willReturn($this->prophesize(ArrayService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')
+        $this->container->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ComposerServiceFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf(ComposerService::class, $instance);
     }

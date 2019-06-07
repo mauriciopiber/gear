@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Edge\Dir;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Edge\Dir\DirEdge;
 
 class DirEdgeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new DirEdge(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

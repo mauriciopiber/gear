@@ -1,19 +1,19 @@
 <?php
 namespace Gear\Autoload;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Autoload\ComposerAutoload;
 use Gear\Module\Structure\ModuleStructure;
 
 class ComposerAutoloadFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ComposerAutoload(
-            $serviceLocator->get(ModuleStructure::class)
+            $container->get(ModuleStructure::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

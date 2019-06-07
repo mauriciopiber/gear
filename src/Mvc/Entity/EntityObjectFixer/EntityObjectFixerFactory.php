@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Entity\EntityObjectFixer;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 
 /**
@@ -22,12 +22,12 @@ class EntityObjectFixerFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new EntityObjectFixer(
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

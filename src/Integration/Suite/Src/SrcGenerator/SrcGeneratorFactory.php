@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Suite\Src\SrcGenerator;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator;
 
 /**
@@ -22,13 +22,13 @@ class SrcGeneratorFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new SrcGenerator(
-            $serviceLocator->get('Gear\Integration\Component\GearFile\GearFile'),
-            $serviceLocator->get('Gear\Integration\Component\TestFile\TestFile')
+            $container->get('Gear\Integration\Component\GearFile\GearFile'),
+            $container->get('Gear\Integration\Component\TestFile\TestFile')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Edge\Composer;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Edge\Composer\ComposerEdge;
 
 class ComposerEdgeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ComposerEdge(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

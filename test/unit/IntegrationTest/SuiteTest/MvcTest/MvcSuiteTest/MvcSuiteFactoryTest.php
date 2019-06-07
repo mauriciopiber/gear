@@ -13,19 +13,19 @@ class MvcSuiteFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator->get('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator')
+        $this->container->get('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator')
             ->willReturn($this->prophesize('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
+        $this->container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
             ->willReturn($this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile')->reveal())
             ->shouldBeCalled();
 
         $factory = new MvcSuiteFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite', $instance);
     }

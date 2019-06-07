@@ -1,24 +1,24 @@
 <?php
 namespace Gear\Upgrade\Dir;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Upgrade\Dir\DirUpgrade;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Module\Structure\ModuleStructure;
 
 class DirUpgradeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new DirUpgrade(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(DirEdge::class),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('Gear\Util\Dir\DirService')
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(DirEdge::class),
+            $container->get('Gear\Util\Prompt\ConsolePrompt'),
+            $container->get('Gear\Util\Dir\DirService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Module;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Module\ComposerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
@@ -27,16 +27,16 @@ class ComposerServiceFactory implements FactoryInterface
      *
      * @return ComposerService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ComposerService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get(ComposerEdge::class),
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get(ArrayService::class),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get(ModuleStructure::class),
+            $container->get(ComposerEdge::class),
+            $container->get(FileCreator::class),
+            $container->get(ArrayService::class),
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

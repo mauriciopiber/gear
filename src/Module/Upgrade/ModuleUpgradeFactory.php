@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Module\Upgrade;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Upgrade\ModuleUpgrade;
 use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Upgrade\Composer\ComposerUpgrade;
@@ -12,17 +12,17 @@ use Gear\Upgrade\Npm\NpmUpgrade;
 
 class ModuleUpgradeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ModuleUpgrade(
-            $serviceLocator->get('console'),
-            $serviceLocator->get(AntUpgrade::class),
-            $serviceLocator->get(ComposerUpgrade::class),
-            $serviceLocator->get(FileUpgrade::class),
-            $serviceLocator->get(DirUpgrade::class),
-            $serviceLocator->get(NpmUpgrade::class)
+            $container->get('console'),
+            $container->get(AntUpgrade::class),
+            $container->get(ComposerUpgrade::class),
+            $container->get(FileUpgrade::class),
+            $container->get(DirUpgrade::class),
+            $container->get(NpmUpgrade::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

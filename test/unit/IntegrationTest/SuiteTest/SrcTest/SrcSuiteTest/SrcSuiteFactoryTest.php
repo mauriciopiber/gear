@@ -13,19 +13,19 @@ class SrcSuiteFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator->get('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator')
+        $this->container->get('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator')
             ->willReturn($this->prophesize('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
+        $this->container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
             ->willReturn($this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile')->reveal())
             ->shouldBeCalled();
 
         $factory = new SrcSuiteFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Integration\Suite\Src\SrcSuite\SrcSuite', $instance);
     }

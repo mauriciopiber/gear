@@ -80,10 +80,7 @@ class ConsoleControllerTestTest extends TestCase
         $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 
-        $this->controllerManager = new \Gear\Mvc\Config\ControllerManager();
-        $this->controllerManager->setModule($this->module->reveal());
 
-        $this->controller->setControllerManager($this->controllerManager);
 
         $this->controller->setCodeTest($this->codeTest);
 
@@ -151,10 +148,7 @@ class ConsoleControllerTestTest extends TestCase
         $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         $this->codeTest->setArrayService($this->array);
 
-        $this->controllerManager = new \Gear\Mvc\Config\ControllerManager();
-        $this->controllerManager->setModule($this->module->reveal());
 
-        $this->controller->setControllerManager($this->controllerManager);
 
         $this->controller->setCodeTest($this->codeTest);
 

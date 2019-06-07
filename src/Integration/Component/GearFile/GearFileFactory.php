@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Component\GearFile;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Component\GearFile\GearFile;
 
 /**
@@ -22,13 +22,13 @@ class GearFileFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Component\GearFile\GearFile
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new GearFile(
-            $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Integration\Util\Persist\Persist'),
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

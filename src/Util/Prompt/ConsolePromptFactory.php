@@ -1,19 +1,19 @@
 <?php
 namespace Gear\Util\Prompt;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Util\Prompt\ConsolePrompt;
 
 class ConsolePromptFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $request = $serviceLocator->get('Request');
+        $request = $container->get('Request');
         $factory = new ConsolePrompt(
             $request->getParam('force', false)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

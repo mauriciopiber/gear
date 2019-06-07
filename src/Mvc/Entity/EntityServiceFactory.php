@@ -1,29 +1,29 @@
 <?php
 namespace Gear\Mvc\Entity;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Entity\DoctrineService;
 use Gear\Module\Structure\ModuleStructure;
 
 class EntityServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new EntityService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get(DoctrineService::class),
-            $serviceLocator->get('scriptService'),
-            $serviceLocator->get('Gear\Mvc\Entity\EntityTestService'),
-            $serviceLocator->get('Gear\Table\TableService'),
-            $serviceLocator->get('Gear\Schema\Src'),
-            $serviceLocator->get('Gear\Mvc\Config\ServiceManager'),
-            $serviceLocator->get('Gear\Schema\Schema'),
-            $serviceLocator->get('Gear\Util\Dir\DirService'),
-            $serviceLocator->get('Gear\Util\Glob\GlobService'),
-            $serviceLocator->get('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get(ModuleStructure::class),
+            $container->get(DoctrineService::class),
+            $container->get('scriptService'),
+            $container->get('Gear\Mvc\Entity\EntityTestService'),
+            $container->get('Gear\Table\TableService'),
+            $container->get('Gear\Schema\Src'),
+            $container->get('Gear\Mvc\Config\ServiceManager'),
+            $container->get('Gear\Schema\Schema'),
+            $container->get('Gear\Util\Dir\DirService'),
+            $container->get('Gear\Util\Glob\GlobService'),
+            $container->get('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer'),
+            $container->get('Gear\Util\String\StringService')
         );
     }
 }

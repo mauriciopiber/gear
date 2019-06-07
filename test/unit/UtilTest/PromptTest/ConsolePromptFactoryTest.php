@@ -11,16 +11,16 @@ class ConsolePromptFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
         $request = $this->prophesize('Zend\Console\Request');
         $request->getParam('force', false)->willReturn(true);
 
-        $this->serviceLocator->get('Request')->willReturn($request->reveal())->shouldBeCalled();
+        $this->container->get('Request')->willReturn($request->reveal())->shouldBeCalled();
 
         $factory = new \Gear\Util\Prompt\ConsolePromptFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Util\Prompt\ConsolePrompt', $instance);
     }
