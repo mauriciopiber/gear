@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Db\DbConstructorTrait;
 

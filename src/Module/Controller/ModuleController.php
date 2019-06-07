@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Module\Controller;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Cache\CacheServiceTrait;
 use Gear\Module\ModuleServiceTrait;

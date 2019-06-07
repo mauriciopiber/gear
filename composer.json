@@ -30,6 +30,8 @@
 		"mauriciopiber/gear-util" : "^1.0.0-alpha0",
 		"mauriciopiber/gear-schema": "^1.0.0-alpha0",
 		"mauriciopiber/gear-console": "^1.0.0-alpha0",
+		"mauriciopiber/gear-version": "^1.0.0-alpha0",
+		"mauriciopiber/gear-config": "^1.0.0-alpha0",
 		"mauriciopiber/gear-locator": "^1.0.0-alpha0",
 		"mauriciopiber/gear-scripts": "^1.0.0-alpha0"
 	},
