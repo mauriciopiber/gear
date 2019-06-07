@@ -17,7 +17,7 @@ class MigrationFileTraitTest extends TestCase
 
     use MigrationFileTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Component\MigrationFile\MigrationFile');

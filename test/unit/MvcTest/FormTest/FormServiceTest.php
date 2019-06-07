@@ -19,7 +19,7 @@ class FormServiceTest extends TestCase
     use FormDataTrait;
     use ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

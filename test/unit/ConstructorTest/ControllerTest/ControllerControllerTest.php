@@ -14,7 +14,7 @@ use Gear\Constructor\Controller\ControllerConstructor;
  */
 class ControllerControllerTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

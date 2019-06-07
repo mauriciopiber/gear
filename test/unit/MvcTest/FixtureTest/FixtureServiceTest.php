@@ -31,7 +31,7 @@ class FixtureServiceTest extends TestCase
     use SingleDbTableTrait;
     use DatabaseColumnsMockerTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         vfsStream::setup('module');

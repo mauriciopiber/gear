@@ -21,7 +21,7 @@ class WebControllerTestServiceTest extends TestCase
     use ControllerDataTrait;
     use ControllerScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -11,7 +11,7 @@ use Gear\Column\Varchar\UniqueId;
  */
 class UniqueIdTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

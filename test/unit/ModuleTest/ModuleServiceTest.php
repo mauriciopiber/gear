@@ -65,7 +65,7 @@ use Gear\Docker\DockerService;
  */
 class ModuleServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->root = vfsStream::setup('module');

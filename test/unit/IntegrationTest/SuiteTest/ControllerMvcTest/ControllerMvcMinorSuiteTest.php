@@ -11,7 +11,7 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcMajorSuite;
  */
 class ControllerMvcMinorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

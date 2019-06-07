@@ -10,7 +10,7 @@ use Gear\Column\Tinyint\Checkbox;
  */
 class CheckboxTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

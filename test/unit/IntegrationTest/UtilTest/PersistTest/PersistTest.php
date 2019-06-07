@@ -9,7 +9,7 @@ use Gear\Integration\Util\Persist\Persist;
  */
 class PersistTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

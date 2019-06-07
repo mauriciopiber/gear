@@ -6,7 +6,7 @@ use Gear\Code\NamespaceForward;
 
 class NamespaceForwardTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         $this->service = new NamespaceForward();
     }

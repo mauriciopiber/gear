@@ -13,7 +13,7 @@ class FactoryCodeTraitTest extends TestCase
 {
     use FactoryCodeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->factoryCodeSetUp = $this->prophesize('Gear\Creator\Codes\Code\FactoryCode\FactoryCode');
     }

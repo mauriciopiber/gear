@@ -17,7 +17,7 @@ class SearchTestServiceTest extends TestCase
     use UtilTestTrait;
     use SearchDataTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -22,7 +22,7 @@ class FilterTestServiceTest extends TestCase
     use FilterDataTrait;
     use ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         vfsStream::setup('module');

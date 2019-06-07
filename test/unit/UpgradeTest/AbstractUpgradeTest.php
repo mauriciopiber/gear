@@ -9,7 +9,7 @@ use Gear\Upgrade\AbstractUpgradeTrait;
  */
 class AbstractUpgradeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

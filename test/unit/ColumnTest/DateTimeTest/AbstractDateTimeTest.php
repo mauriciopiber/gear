@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class AbstractDateTimeTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

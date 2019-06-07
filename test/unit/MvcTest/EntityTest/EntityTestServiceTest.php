@@ -33,7 +33,7 @@ class EntityTestServiceTest extends TestCase
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         vfsStream::setup('module');

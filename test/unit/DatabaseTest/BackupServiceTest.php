@@ -16,7 +16,7 @@ class BackupServiceTest extends TestCase
 
     public $password = 'my-pass';
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

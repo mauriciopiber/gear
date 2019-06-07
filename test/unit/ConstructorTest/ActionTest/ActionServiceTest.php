@@ -39,7 +39,7 @@ use Gear\Column\ColumnManager;
  */
 class ActionConstructorTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

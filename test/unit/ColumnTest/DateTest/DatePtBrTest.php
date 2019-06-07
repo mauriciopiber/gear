@@ -10,7 +10,7 @@ use Gear\Column\Date\DatePtBr;
  */
 class DatePtBrTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

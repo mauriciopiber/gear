@@ -11,7 +11,7 @@ use Gear\Column\Varchar\Email;
  */
 class EmailTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

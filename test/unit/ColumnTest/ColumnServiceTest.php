@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceManager;
  */
 class ColumnServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
 
         $this->serviceLocator = new ServiceManager();

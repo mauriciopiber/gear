@@ -15,7 +15,7 @@ use Gear\Config\GearConfig;
  */
 class DirServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

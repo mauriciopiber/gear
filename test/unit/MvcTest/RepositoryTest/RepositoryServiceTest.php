@@ -20,7 +20,7 @@ class RepositoryServiceTest extends TestCase
     use ScopeTrait;
     use RepositoryDataTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

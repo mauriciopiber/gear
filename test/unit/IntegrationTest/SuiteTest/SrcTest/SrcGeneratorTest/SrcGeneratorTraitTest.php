@@ -17,7 +17,7 @@ class SrcGeneratorTraitTest extends TestCase
 
     use SrcGeneratorTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator');

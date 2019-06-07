@@ -9,7 +9,7 @@ use Gear\Mvc\ValueObject\ValueObjectTestService;
  */
 class ValueObjectTestServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

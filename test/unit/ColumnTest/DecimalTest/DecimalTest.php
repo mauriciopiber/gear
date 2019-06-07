@@ -9,7 +9,7 @@ use Gear\Column\Decimal\Decimal;
  */
 class DecimalTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

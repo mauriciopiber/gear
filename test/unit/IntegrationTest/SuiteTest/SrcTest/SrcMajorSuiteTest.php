@@ -10,7 +10,7 @@ use Gear\Integration\Suite\Src\SrcMajorSuite;
  */
 class SrcMajorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->srcMajorSuite = new SrcMajorSuite();

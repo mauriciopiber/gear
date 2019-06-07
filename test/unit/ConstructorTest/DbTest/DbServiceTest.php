@@ -31,7 +31,7 @@ class DbConstructorTest extends TestCase
 {
     use DbConstructorTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
 
         $this->dbService = $this->prophesize('Gear\Schema\Db\DbSchema');

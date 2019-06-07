@@ -15,7 +15,7 @@ use Zend\Stdlib\Parameters;
  */
 class DbControllerTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

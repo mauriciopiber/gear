@@ -11,7 +11,7 @@ use Zend\Json\Json;
  */
 class ComposerAutoloadTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');

@@ -15,7 +15,7 @@ use Gear\Edge\Ant\AntEdge;
 class AntServiceTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

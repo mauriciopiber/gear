@@ -17,7 +17,7 @@ class ConsoleControllerTestTest extends TestCase
 
     use ControllerScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         vfsStream::setup('module');

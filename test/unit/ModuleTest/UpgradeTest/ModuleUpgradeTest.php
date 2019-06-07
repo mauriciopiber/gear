@@ -19,7 +19,7 @@ class ModuleUpgradeTest extends TestCase
         ***REMOVED***;
     }
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

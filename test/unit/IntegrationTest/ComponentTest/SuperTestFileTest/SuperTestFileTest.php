@@ -9,7 +9,7 @@ use Gear\Integration\Component\SuperTestFile\SuperTestFile;
  */
 class SuperTestFileTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

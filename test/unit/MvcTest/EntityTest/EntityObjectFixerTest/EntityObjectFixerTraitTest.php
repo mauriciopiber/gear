@@ -17,7 +17,7 @@ class EntityObjectFixerTraitTest extends TestCase
 
     use EntityObjectFixerTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');

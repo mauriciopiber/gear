@@ -11,7 +11,7 @@ use Gear\Integration\Suite\Controller\ControllerMajorSuite;
  */
 class ControllerMinorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->majorSuite = $this->prophesize(ControllerMajorSuite::class);

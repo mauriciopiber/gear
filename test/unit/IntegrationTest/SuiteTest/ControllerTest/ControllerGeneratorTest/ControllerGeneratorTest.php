@@ -9,7 +9,7 @@ use Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator;
  */
 class ControllerGeneratorTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -17,7 +17,7 @@ use Gear\Module\ConstructStatusObject;
  */
 class ModuleControllerTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

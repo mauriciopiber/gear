@@ -28,7 +28,7 @@ class ServiceServiceTest extends TestCase
     use ServiceDataTrait;
     use ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

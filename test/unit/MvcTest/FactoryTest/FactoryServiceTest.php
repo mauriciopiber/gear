@@ -18,7 +18,7 @@ class FactoryServiceTest extends TestCase
 
     use FactoryDataTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

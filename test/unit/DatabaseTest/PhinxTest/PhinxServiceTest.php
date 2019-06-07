@@ -19,7 +19,7 @@ use Zend\View\Resolver\TemplatePathStack;
  */
 class PhinxServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

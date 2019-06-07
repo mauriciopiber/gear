@@ -9,7 +9,7 @@ use Gear\Integration\Util\Columns\Columns;
  */
 class ColumnsTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = new Columns();

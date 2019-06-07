@@ -17,7 +17,7 @@ class MvcGeneratorTraitTest extends TestCase
 
     use MvcGeneratorTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator');

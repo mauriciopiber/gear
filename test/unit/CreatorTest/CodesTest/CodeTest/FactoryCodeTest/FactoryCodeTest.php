@@ -9,7 +9,7 @@ use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
  */
 class FactoryCodeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = new FactoryCode();

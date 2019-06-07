@@ -9,7 +9,7 @@ use Gear\Creator\Codes\Code\AbstractCode;
  */
 class AbstractCodeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = $this->getMockForAbstractClass('Gear\Creator\Codes\Code\AbstractCode', [***REMOVED***, '', false);

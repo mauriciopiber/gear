@@ -17,7 +17,7 @@ class ValueObjectTestServiceTraitTest extends TestCase
 
     use ValueObjectTestServiceTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Mvc\ValueObject\ValueObjectTestService');

@@ -17,7 +17,7 @@ class ControllerMvcSuiteTraitTest extends TestCase
 
     use ControllerMvcSuiteTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite');
