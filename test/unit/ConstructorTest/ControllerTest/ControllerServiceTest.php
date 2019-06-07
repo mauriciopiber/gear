@@ -28,7 +28,7 @@ use Gear\Util\String\StringService;
  */
 class ControllerServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

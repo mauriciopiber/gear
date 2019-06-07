@@ -10,7 +10,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
  */
 class SrcMvcMajorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

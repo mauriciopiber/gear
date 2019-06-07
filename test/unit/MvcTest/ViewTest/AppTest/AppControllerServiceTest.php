@@ -12,7 +12,7 @@ class AppControllerServiceTest extends TestCase
 {
     use UtilTestTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -19,7 +19,7 @@ class SearchServiceTest extends TestCase
     use SearchDataTrait;
     use ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

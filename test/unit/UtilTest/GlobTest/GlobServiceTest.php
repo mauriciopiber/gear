@@ -9,7 +9,7 @@ use Gear\Util\Glob\GlobService;
  */
 class GlobServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = new GlobService();

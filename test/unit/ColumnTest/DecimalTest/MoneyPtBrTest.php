@@ -9,7 +9,7 @@ use Gear\Column\Decimal\MoneyPtBr;
  */
 class MoneyPtBrTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -15,7 +15,7 @@ use Gear\Creator\Component\Constructor\ConstructorParams;
  */
 class CodeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->code = new Code();

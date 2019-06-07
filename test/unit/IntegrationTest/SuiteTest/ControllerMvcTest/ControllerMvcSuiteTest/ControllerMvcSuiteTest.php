@@ -9,7 +9,7 @@ use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
  */
 class ControllerMvcSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

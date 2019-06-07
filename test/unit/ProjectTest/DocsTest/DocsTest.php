@@ -16,7 +16,7 @@ class DocsTest extends TestCase
     use UtilTestTrait;
     use DocsTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

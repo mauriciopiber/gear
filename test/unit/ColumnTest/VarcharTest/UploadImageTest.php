@@ -11,7 +11,7 @@ use Gear\Column\Varchar\UploadImage;
  */
 class UploadImageTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

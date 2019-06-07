@@ -8,7 +8,7 @@ use Gear\Schema\Src\Src;
 
 class ClassObjectTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->module = 'Module';

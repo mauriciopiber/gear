@@ -37,7 +37,7 @@ class ConstructServiceTest extends TestCase
     const MODULE_NAME = 'Gearing';
 
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

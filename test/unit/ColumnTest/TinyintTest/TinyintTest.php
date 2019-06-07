@@ -10,7 +10,7 @@ use Gear\Column\Tinyint\Tinyint;
  */
 class TinyintTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

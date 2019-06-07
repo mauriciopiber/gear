@@ -28,7 +28,7 @@ class ServiceTestServiceTest extends TestCase
     use ServiceDataTrait;
     use \GearTest\ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

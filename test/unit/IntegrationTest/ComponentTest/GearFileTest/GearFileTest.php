@@ -25,7 +25,7 @@ class GearFileTest extends TestCase
 {
     use ColumnsTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

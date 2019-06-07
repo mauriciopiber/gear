@@ -17,7 +17,7 @@ class PhinxServiceTraitTest extends TestCase
 
     use PhinxServiceTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Database\Phinx\PhinxService');

@@ -9,7 +9,7 @@ use Gear\Integration\Component\MigrationFile\MigrationFile;
  */
 class MigrationFileTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

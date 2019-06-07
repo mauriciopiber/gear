@@ -19,7 +19,7 @@ class FilterServiceTest extends TestCase
     use FilterDataTrait;
     use ScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

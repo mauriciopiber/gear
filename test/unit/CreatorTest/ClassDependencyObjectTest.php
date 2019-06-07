@@ -7,7 +7,7 @@ use Gear\Creator\ClassDependencyObject;
 class ClassDependencyObjectTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->module = 'Module';

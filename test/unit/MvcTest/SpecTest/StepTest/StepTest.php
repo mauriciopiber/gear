@@ -25,7 +25,7 @@ class StepTest extends TestCase
 
     use UtilTestTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->createVirtualDir('module/public/js/spec/e2e/index');

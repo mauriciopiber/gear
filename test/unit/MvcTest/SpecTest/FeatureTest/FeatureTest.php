@@ -35,7 +35,7 @@ class FeatureTest extends TestCase
     use AllColumnsDbUniqueTableTrait;
     use AllColumnsDbUniqueNotNullTableTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

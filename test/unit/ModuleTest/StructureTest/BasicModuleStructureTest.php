@@ -15,7 +15,7 @@ use Gear\Util\String\StringService;
 class ModuleStructureTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->module = vfsStream::setup('moduleDir');

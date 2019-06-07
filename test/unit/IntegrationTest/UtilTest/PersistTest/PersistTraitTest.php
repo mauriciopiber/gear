@@ -17,7 +17,7 @@ class PersistTraitTest extends TestCase
 
     use PersistTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Util\Persist\Persist');

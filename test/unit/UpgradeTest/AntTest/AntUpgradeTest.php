@@ -14,7 +14,7 @@ use Gear\Util\Yaml\YamlService;
  */
 class AntUpgradeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

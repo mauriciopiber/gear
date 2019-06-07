@@ -9,7 +9,7 @@ use Gear\Column\Time\Time;
  */
 class TimeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

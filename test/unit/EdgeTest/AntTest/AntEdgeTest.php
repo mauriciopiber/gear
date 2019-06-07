@@ -13,7 +13,7 @@ class AntEdgeTest extends TestCase
     use AntEdgeTrait;
 
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

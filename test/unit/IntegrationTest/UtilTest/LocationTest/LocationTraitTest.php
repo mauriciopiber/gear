@@ -17,7 +17,7 @@ class LocationTraitTest extends TestCase
 
     use LocationTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Util\Location\Location');

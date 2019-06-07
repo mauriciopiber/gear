@@ -21,7 +21,7 @@ use Gear\Util\String\StringService;
  */
 class ColumnManagerTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->columnManager = new ColumnManager([***REMOVED***);

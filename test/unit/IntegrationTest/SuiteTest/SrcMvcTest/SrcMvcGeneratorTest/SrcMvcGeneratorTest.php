@@ -9,7 +9,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator;
  */
 class SrcMvcGeneratorTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

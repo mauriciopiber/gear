@@ -10,7 +10,7 @@ use org\bovigo\vfs\vfsStream;
  */
 class CodeceptionServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

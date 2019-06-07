@@ -11,7 +11,7 @@ use Gear\Schema\Src\SrcTypesInterface;
  */
 class SrcMinorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -17,7 +17,7 @@ class SuperTestFileTraitTest extends TestCase
 
     use SuperTestFileTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile');

@@ -14,7 +14,7 @@ use Gear\Config\GearConfig;
  */
 class DirUpgradeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

@@ -9,7 +9,7 @@ use Gear\Integration\Suite\Integration\Integration;
  */
 class IntegrationTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

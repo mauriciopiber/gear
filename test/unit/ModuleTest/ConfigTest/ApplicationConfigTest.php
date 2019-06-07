@@ -11,7 +11,7 @@ use org\bovigo\vfs\vfsStream;
  */
 class ApplicationConfigTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');

@@ -41,7 +41,7 @@ class WebControllerServiceTest extends TestCase
     use ControllerDataTrait;
     use ControllerScopeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->vfsLocation = 'module/src/MyModule/Controller';

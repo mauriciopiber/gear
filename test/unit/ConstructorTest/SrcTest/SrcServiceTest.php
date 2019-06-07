@@ -25,7 +25,7 @@ use Gear\Column\ColumnManager;
 class SrcConstructorTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         //$this->service->setSrcConstructor($schema);

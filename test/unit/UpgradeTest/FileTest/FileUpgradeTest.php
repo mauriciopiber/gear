@@ -15,7 +15,7 @@ use Gear\Module\Docs\Docs;
  */
 class FileUpgradeTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

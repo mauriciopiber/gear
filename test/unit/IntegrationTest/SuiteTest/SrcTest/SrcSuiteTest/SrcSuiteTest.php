@@ -9,7 +9,7 @@ use Gear\Integration\Suite\Src\SrcSuite\SrcSuite;
  */
 class SrcSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

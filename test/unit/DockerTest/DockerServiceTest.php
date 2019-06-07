@@ -13,7 +13,7 @@ use GearTest\UtilTestTrait;
 class DockerServiceTest extends TestCase
 {
     use UtilTestTrait;
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

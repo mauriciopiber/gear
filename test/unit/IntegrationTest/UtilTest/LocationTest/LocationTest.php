@@ -9,7 +9,7 @@ use Gear\Integration\Util\Location\Location;
  */
 class LocationTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = new Location();

@@ -10,7 +10,7 @@ use Gear\Column\Date\Date;
  */
 class DateTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

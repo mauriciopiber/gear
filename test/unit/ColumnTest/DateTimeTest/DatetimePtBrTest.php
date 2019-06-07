@@ -11,7 +11,7 @@ use Gear\Column\Datetime\DatetimePtBr;
  */
 class DateTimePtBrTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

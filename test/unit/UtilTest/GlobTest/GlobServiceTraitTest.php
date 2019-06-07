@@ -17,7 +17,7 @@ class GlobServiceTraitTest extends TestCase
 
     use GlobServiceTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $serviceManager = new ServiceManager();
         $this->mocking = $this->prophesize('Gear\Util\Glob\GlobService');

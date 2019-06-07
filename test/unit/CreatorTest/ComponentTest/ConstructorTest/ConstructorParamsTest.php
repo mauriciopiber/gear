@@ -10,7 +10,7 @@ use Gear\Util\String\StringService;
  */
 class ConstructorParamsTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

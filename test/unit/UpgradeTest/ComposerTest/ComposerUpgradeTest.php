@@ -16,7 +16,7 @@ class ComposerUpgradeTest extends TestCase
 {
     use ComposerUpgradeTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

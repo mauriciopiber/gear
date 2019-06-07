@@ -11,7 +11,7 @@ use Gear\Column\Integer\PrimaryKey;
  */
 class PrimaryKeyTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

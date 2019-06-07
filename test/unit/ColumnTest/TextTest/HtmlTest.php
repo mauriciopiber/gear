@@ -11,7 +11,7 @@ use Gear\Column\Text\Html;
  */
 class HtmlTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 

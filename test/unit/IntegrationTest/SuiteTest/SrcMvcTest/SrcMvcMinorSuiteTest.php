@@ -11,7 +11,7 @@ use Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite;
  */
 class SrcMvcMinorSuiteTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->majorSuite = $this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite');
