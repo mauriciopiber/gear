@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Creator\Codes;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Util\Dir\DirServiceAwareInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
@@ -25,14 +23,12 @@ abstract class AbstractCodeBase implements
     FileNamespaceInterface,
     FileLocationInterface,
     ModuleStructureInterface,
-    ServiceLocatorAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface
 {
     use FileCreatorTrait;
     use ArrayServiceTrait;
     use DirServiceTrait;
-    use ServiceLocatorAwareTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleStructureTrait;

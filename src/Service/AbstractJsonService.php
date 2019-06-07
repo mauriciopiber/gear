@@ -13,8 +13,6 @@ use Gear\Table\Metadata\MetadataTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\AppDependencyTrait;
 use Gear\Util\Yaml\YamlServiceTrait;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Util\File\FileServiceTrait;
 use Gear\Util\File\FileServiceAwareInterface;
 use Gear\Util\Dir\DirServiceTrait;
@@ -28,7 +26,6 @@ use Gear\Creator\Template\TemplateServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
 
 abstract class AbstractJsonService implements
-    ServiceLocatorAwareInterface,
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
@@ -38,7 +35,6 @@ abstract class AbstractJsonService implements
 {
     use ModuleStructureTrait;
 
-    use ServiceLocatorAwareTrait;
 
     use ArrayServiceTrait;
 
@@ -97,7 +93,7 @@ abstract class AbstractJsonService implements
     public function getRequest()
     {
         if (!isset($this->request)) {
-            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+            $this->request = $this->get('application')->getMvcEvent()->getRequest();
         }
         return $this->request;
     }

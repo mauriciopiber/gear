@@ -14,10 +14,6 @@ trait IntegrationTrait
      */
     public function getIntegration()
     {
-        if (!isset($this->integration)) {
-            $name = 'Gear\Integration\Suite\Integration\Integration';
-            $this->integration = $this->getServiceLocator()->get($name);
-        }
         return $this->integration;
     }
 

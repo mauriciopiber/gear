@@ -83,7 +83,7 @@ class CodeceptionService extends AbstractJsonService
 
     public function dbOptions()
     {
-        $arrayConfig = $this->getServiceLocator()->get('config');
+        $arrayConfig = $this->get('config');
 
         return array(
             'username' => $arrayConfig['doctrine'***REMOVED***['connection'***REMOVED***['orm_default'***REMOVED***['params'***REMOVED***['user'***REMOVED***,

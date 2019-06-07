@@ -17,7 +17,7 @@ trait ProductTrait
     public function getProduct()
     {
         if (!isset($this->product)) {
-            $this->product = $this->getServiceLocator()->get('Catalog\Product');
+            $this->product = $this->get('Catalog\Product');
         }
         return $this->product;
     }

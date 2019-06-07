@@ -10,7 +10,7 @@ trait ViewServiceTrait
     public function getViewService()
     {
         if (! isset($this->viewService)) {
-            $this->viewService = $this->getServiceLocator()->get(ViewService::class);
+            $this->viewService = $this->get(ViewService::class);
         }
         return $this->viewService;
     }

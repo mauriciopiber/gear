@@ -183,7 +183,7 @@ class RepositoryService extends AbstractMvc
     public function getMappingService()
     {
         if (!isset($this->mappingService)) {
-            $this->mappingService = $this->getServiceLocator()->get('Gear\Mvc\Repository\MappingService');
+            $this->mappingService = $this->get('Gear\Mvc\Repository\MappingService');
         }
 
         return $this->mappingService;

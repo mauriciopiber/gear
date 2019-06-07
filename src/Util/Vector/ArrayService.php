@@ -1,12 +1,9 @@
 <?php
 namespace Gear\Util\Vector;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class ArrayService implements ServiceLocatorAwareInterface
+class ArrayService
 {
-    use ServiceLocatorAwareTrait;
 
     /**
      * Move um array utilizando 2 array_slice

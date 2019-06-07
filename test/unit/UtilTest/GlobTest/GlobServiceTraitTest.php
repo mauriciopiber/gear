@@ -2,7 +2,6 @@
 namespace GearTest\UtilTest\GlobTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Util\Glob\GlobServiceTrait;
 
@@ -13,22 +12,13 @@ use Gear\Util\Glob\GlobServiceTrait;
  */
 class GlobServiceTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use GlobServiceTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Util\Glob\GlobService');
-        $serviceManager->setService('Gear\Util\Glob\GlobService', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getGlobService();
-        $this->assertInstanceOf('Gear\Util\Glob\GlobService', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

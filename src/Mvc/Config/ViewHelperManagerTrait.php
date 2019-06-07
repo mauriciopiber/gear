@@ -9,9 +9,6 @@ trait ViewHelperManagerTrait
 
     public function getViewHelperManager()
     {
-        if (!isset($this->viewHelper)) {
-            $this->viewHelper = $this->getServiceLocator()->get(ViewHelperManager::class);
-        }
         return $this->viewHelper;
     }
 

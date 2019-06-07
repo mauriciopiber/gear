@@ -9,10 +9,6 @@ trait ConstructorArgsTrait
 
     public function getConstructorArgs()
     {
-        if (!isset($this->constructorArgs)) {
-            $name = 'Gear\Creator\FileCreator\App\ConstructorArgs';
-            $this->constructorArgs = $this->getServiceLocator()->get($name);
-        }
         return $this->constructorArgs;
     }
 

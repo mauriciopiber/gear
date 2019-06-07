@@ -20,7 +20,7 @@ class TableUniqueFilterTest extends AbstractFilterTestCase
               ->get('MyModule\Filter\TableUniqueFilter');
 
             $this->tableUniqueFilter
-              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+              ->setAdapter($this->bootstrap->get('Zend\Db\Adapter\Adapter'));
         }
         return $this->tableUniqueFilter;
     }

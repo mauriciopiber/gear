@@ -9,9 +9,6 @@ trait SchemaToolServiceTrait
 
     public function getSchemaToolService()
     {
-        if (!isset($this->schemaToolService)) {
-            $this->schemaToolService = $this->getServiceLocator()->get('Gear\Database\SchemaTool');
-        }
         return $this->schemaToolService;
     }
 

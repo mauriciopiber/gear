@@ -9,9 +9,6 @@ trait ConstructServiceTrait
 
     public function getConstructService()
     {
-        if (!isset($this->constructService)) {
-            $this->constructService = $this->getServiceLocator()->get('Gear\Module\Construct');
-        }
         return $this->constructService;
     }
 

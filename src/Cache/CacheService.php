@@ -1,15 +1,13 @@
 <?php
 namespace Gear\Cache;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Util\Dir\DirServiceTrait;
 
 /**
  * @author Mauricio Piber mauriciopiber@gmail.com
  * Classe responsável por rodar as builds do sistema
  */
-class CacheService implements ServiceLocatorAwareInterface
+class CacheService
 {
     use DirServiceTrait;
 
@@ -18,7 +16,7 @@ class CacheService implements ServiceLocatorAwareInterface
     public function getRequest()
     {
         if (!isset($this->request)) {
-            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+            $this->request = $this->get('application')->getMvcEvent()->getRequest();
         }
         return $this->request;
     }
@@ -29,7 +27,6 @@ class CacheService implements ServiceLocatorAwareInterface
         return $this;
     }
 
-    use ServiceLocatorAwareTrait;
 
     /**
      * @cautions
@@ -67,7 +64,7 @@ class CacheService implements ServiceLocatorAwareInterface
     public function renewMemcached()
     {
         $script = realpath(__DIR__.'/../../bin/memcached');
-        $scriptRunner = $this->getServiceLocator()->get('scriptService');
+        $scriptRunner = $this->get('scriptService');
         $scriptRunner->setLocation(\GearBase\Module::getProjectFolder());
         echo $scriptRunner->run($script);
         return true;

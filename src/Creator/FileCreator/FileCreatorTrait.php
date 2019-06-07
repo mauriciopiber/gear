@@ -10,9 +10,6 @@ trait FileCreatorTrait
 
     public function getFileCreator()
     {
-        if (!isset($this->fileCreator)) {
-            $this->fileCreator = $this->getServiceLocator()->get(FileCreator::class);
-        }
         return $this->fileCreator;
     }
 

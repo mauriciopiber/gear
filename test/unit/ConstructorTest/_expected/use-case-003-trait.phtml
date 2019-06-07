@@ -17,7 +17,7 @@ trait ClassWithoutExtendsTrait
     public function getClassWithoutExtends()
     {
         if (!isset($this->classWithoutExtends)) {
-            $this->classWithoutExtends = $this->getServiceLocator()->get('NoExtends\TryWithoutExtends\ClassWithoutExtends');
+            $this->classWithoutExtends = $this->get('NoExtends\TryWithoutExtends\ClassWithoutExtends');
         }
         return $this->classWithoutExtends;
     }

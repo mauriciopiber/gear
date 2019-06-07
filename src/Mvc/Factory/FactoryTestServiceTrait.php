@@ -9,9 +9,6 @@ trait FactoryTestServiceTrait
 
     public function getFactoryTestService()
     {
-        if (!isset($this->factoryTestService)) {
-            $this->factoryTestService = $this->getServiceLocator()->get(FactoryTestService::class);
-        }
         return $this->factoryTestService;
     }
 

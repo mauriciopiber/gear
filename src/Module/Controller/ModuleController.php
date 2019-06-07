@@ -38,7 +38,7 @@ class ModuleController extends AbstractConsoleController
     public function getConsoleAdapter()
     {
         if (!isset($this->console)) {
-            $this->console = $this->getServiceLocator()->get('console');
+            $this->console = $this->get('console');
         }
         return $this->console;
     }

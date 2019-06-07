@@ -9,10 +9,6 @@ trait InjectTrait
 
     public function getInject()
     {
-        if (!isset($this->inject)) {
-            $name = 'Gear\Creator\FileCreator\App\Inject';
-            $this->inject = $this->getServiceLocator()->get($name);
-        }
         return $this->inject;
     }
 

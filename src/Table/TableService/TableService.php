@@ -1,19 +1,16 @@
 <?php
 namespace Gear\Table\TableService;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Schema\Db\Db;
 
-class TableService implements ServiceLocatorAwareInterface
+class TableService
 {
     use ModuleStructureTrait;
     use MetadataTrait;
     use StringServiceTrait;
-    use ServiceLocatorAwareTrait;
 
     /**
      * Retorna as colunas válidas da tabela, com a exclusão das colunas básicas.

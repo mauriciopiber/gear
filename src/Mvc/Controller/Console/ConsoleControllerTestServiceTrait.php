@@ -15,11 +15,6 @@ trait ConsoleControllerTestServiceTrait
 
     public function getConsoleControllerTest()
     {
-        if (!isset($this->consoleControllerTest)) {
-            $this->consoleControllerTest = $this->getServiceLocator()->get(
-                ConsoleControllerTestService::class
-            );
-        }
         return $this->consoleControllerTest;
     }
 }

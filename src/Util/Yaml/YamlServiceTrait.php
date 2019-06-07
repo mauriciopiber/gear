@@ -9,10 +9,6 @@ trait YamlServiceTrait
 
     public function getYamlService()
     {
-        if (!isset($this->yamlService)) {
-            $name = 'Gear\Util\Yaml\YamlService';
-            $this->yamlService = $this->getServiceLocator()->get($name);
-        }
         return $this->yamlService;
     }
 

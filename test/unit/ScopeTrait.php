@@ -231,7 +231,6 @@ trait ScopeTrait
                         'name' => sprintf('BasicImplements%s', $srcType),
                         'type' => $srcType,
                         'implements' => [
-                            '\Zend\ServiceManager\ServiceLocatorAwareInterface'
 
                         ***REMOVED***,
                         'dependency' => [

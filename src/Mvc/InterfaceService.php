@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Mvc;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Schema\Src\Src;
@@ -12,12 +10,11 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Util\Dir\DirServiceTrait;
 
-class InterfaceService implements ServiceLocatorAwareInterface, ModuleStructureInterface, StringServiceAwareInterface
+class InterfaceService, ModuleStructureInterface, StringServiceAwareInterface
 {
     use FileCreatorTrait;
     use StringServiceTrait;
     use ModuleStructureTrait;
-    use ServiceLocatorAwareTrait;
     use CodeTrait;
     use DirServiceTrait;
 

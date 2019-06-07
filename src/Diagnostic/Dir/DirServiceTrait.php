@@ -9,9 +9,6 @@ trait DirServiceTrait
 
     public function getDirDiagnosticService()
     {
-        if (!isset($this->dirDiagService)) {
-            $this->dirDiagService = $this->getServiceLocator()->get('Gear\Diagnostic\Dir\DirService');
-        }
         return $this->dirDiagService;
     }
 

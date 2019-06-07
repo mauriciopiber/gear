@@ -14,9 +14,6 @@ trait ValueObjectTestServiceTrait
      */
     public function getValueObjectTestService()
     {
-        if (!isset($this->valueObjectTestService)) {
-            $this->valueObjectTestService = $this->getServiceLocator()->get(ValueObjectTestService::class);
-        }
         return $this->valueObjectTestService;
     }
 

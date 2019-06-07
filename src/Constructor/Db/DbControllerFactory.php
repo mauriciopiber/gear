@@ -8,7 +8,7 @@ class DbControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        $dbService = $controllerManager->getServiceLocator()->get('Gear\Module\Constructor\Db');
+        $dbService = $controllerManager->get('Gear\Module\Constructor\Db');
         $dbController = new \Gear\Constructor\Db\DbController($dbService);
         return $dbController;
     }

@@ -9,9 +9,6 @@ trait RouterManagerTrait
 
     public function getRouterManager()
     {
-        if (!isset($this->router)) {
-            $this->router = $this->getServiceLocator()->get(RouterManager::class);
-        }
         return $this->router;
     }
 

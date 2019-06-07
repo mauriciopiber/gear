@@ -9,10 +9,6 @@ trait DocsTrait
 
     public function getDocs()
     {
-        if (!isset($this->docs)) {
-            $name = 'Gear\Module\Docs\Docs';
-            $this->docs = $this->getServiceLocator()->get($name);
-        }
         return $this->docs;
     }
 

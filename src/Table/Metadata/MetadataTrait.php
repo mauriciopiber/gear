@@ -7,9 +7,6 @@ trait MetadataTrait
 
     public function getMetadata()
     {
-        if (!isset($this->metadata)) {
-            $this->metadata = $this->getServiceLocator()->get('Gear\Table\Metadata');
-        }
         return $this->metadata;
     }
 

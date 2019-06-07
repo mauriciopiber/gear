@@ -9,9 +9,6 @@ trait SearchTestServiceTrait
 
     public function getSearchTestService()
     {
-        if (!isset($this->searchTestService)) {
-            $this->searchTestService = $this->getServiceLocator()->get(SearchTestService::class);
-        }
         return $this->searchTestService;
     }
 

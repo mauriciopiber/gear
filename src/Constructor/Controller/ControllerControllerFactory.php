@@ -10,7 +10,7 @@ class ControllerControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $controllerManager)
     {
 
-        $controllerService = $controllerManager->getServiceLocator()->get('Gear\Module\Constructor\Controller');
+        $controllerService = $controllerManager->get('Gear\Module\Constructor\Controller');
         $controllerController = new ControllerController($controllerService);
         return $controllerController;
     }

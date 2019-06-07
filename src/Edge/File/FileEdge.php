@@ -1,11 +1,10 @@
 <?php
 namespace Gear\Edge\File;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Gear\Edge\AbstractEdge;
 
-class FileEdge extends AbstractEdge implements ServiceLocatorAwareInterface
+class FileEdge extends AbstractEdge
 {
     public function getFileModule($type = 'web')
     {

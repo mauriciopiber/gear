@@ -9,9 +9,6 @@ trait ServiceManagerTrait
 
     public function getServiceManager()
     {
-        if (!isset($this->serviceManager)) {
-            $this->serviceManager = $this->getServiceLocator()->get(ServiceManager::class);
-        }
         return $this->serviceManager;
     }
 

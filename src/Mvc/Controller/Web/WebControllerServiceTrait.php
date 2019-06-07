@@ -9,9 +9,6 @@ trait WebControllerServiceTrait
 
     public function getMvcController()
     {
-        if (!isset($this->mvcService)) {
-            $this->mvcService = $this->getServiceLocator()->get(WebControllerService::class);
-        }
         return $this->mvcService;
     }
 

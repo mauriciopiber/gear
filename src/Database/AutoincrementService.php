@@ -49,6 +49,6 @@ class AutoincrementService extends DbAbstractService
 
         $this->getDbConnector()->disconnect();
 
-        $this->getServiceLocator()->get('console')->writeLine(sprintf('Table truncaded and reseted "%s"', $table->getName()), 3);
+        $this->get('console')->writeLine(sprintf('Table truncaded and reseted "%s"', $table->getName()), 3);
     }
 }

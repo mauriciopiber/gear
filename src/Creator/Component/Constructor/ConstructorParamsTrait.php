@@ -14,10 +14,6 @@ trait ConstructorParamsTrait
      */
     public function getConstructorParams()
     {
-        if (!isset($this->constructorParams)) {
-            $name = 'Gear\Creator\Component\Constructor\ConstructorParams';
-            $this->constructorParams = $this->getServiceLocator()->get($name);
-        }
         return $this->constructorParams;
     }
 

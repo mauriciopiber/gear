@@ -9,9 +9,6 @@ trait AntServiceTrait
 
     public function getAntService()
     {
-        if (!isset($this->antService)) {
-            $this->antService = $this->getServiceLocator()->get('Gear\Diagnostic\Ant');
-        }
         return $this->antService;
     }
 

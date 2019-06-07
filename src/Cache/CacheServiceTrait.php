@@ -7,9 +7,6 @@ trait CacheServiceTrait
 
     public function getCacheService()
     {
-        if (!isset($this->cacheService)) {
-            $this->cacheService = $this->getServiceLocator()->get('cacheService');
-        }
         return $this->cacheService;
     }
 

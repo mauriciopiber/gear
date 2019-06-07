@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\SuiteTest\MvcTest\MvcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\Mvc\MvcGenerator\MvcGeneratorTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Suite\Mvc\MvcGenerator\MvcGeneratorTrait;
  */
 class MvcGeneratorTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use MvcGeneratorTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator');
-        $serviceManager->setService('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getMvcGenerator();
-        $this->assertInstanceOf('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

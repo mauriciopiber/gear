@@ -9,9 +9,6 @@ trait RepositoryServiceTrait
 
     public function getRepositoryService()
     {
-        if (!isset($this->repositoryService)) {
-            $this->repositoryService = $this->getServiceLocator()->get(RepositoryService::class);
-        }
         return $this->repositoryService;
     }
 

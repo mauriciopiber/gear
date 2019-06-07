@@ -9,9 +9,6 @@ trait PackageTrait
 
     public function getPackage()
     {
-        if (!isset($this->package)) {
-            $this->package = $this->getServiceLocator()->get('Gear\Module\Node\Package');
-        }
         return $this->package;
     }
 

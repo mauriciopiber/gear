@@ -9,10 +9,6 @@ trait FileUpgradeTrait
 
     public function getFileUpgrade()
     {
-        if (!isset($this->fileUpgrade)) {
-            $name = 'Gear\Upgrade\File\FileUpgrade';
-            $this->fileUpgrade = $this->getServiceLocator()->get($name);
-        }
         return $this->fileUpgrade;
     }
 

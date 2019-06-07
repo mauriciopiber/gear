@@ -23,9 +23,6 @@ trait UploadImageTrait
      */
     public function getUploadImage()
     {
-        if (!isset($this->uploadImage)) {
-            $this->uploadImage = $this->getServiceLocator()->get(UploadImage::class);
-        }
 
         return $this->uploadImage;
     }

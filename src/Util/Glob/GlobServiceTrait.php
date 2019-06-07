@@ -14,10 +14,6 @@ trait GlobServiceTrait
      */
     public function getGlobService()
     {
-        if (!isset($this->globService)) {
-            $name = 'Gear\Util\Glob\GlobService';
-            $this->globService = $this->getServiceLocator()->get($name);
-        }
         return $this->globService;
     }
 

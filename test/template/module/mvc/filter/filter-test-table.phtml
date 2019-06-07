@@ -20,7 +20,7 @@ class MyTableFilterTest extends AbstractFilterTestCase
               ->get('MyModule\Filter\MyTableFilter');
 
             $this->myTableFilter
-              ->setAdapter($this->bootstrap->getServiceLocator()->get('Zend\Db\Adapter\Adapter'));
+              ->setAdapter($this->bootstrap->get('Zend\Db\Adapter\Adapter'));
         }
         return $this->myTableFilter;
     }

@@ -14,11 +14,6 @@ class DockerServiceTraitTest extends TestCase
 {
     use DockerServiceTrait;
 
-    public function setUp() : void
-    {
-        $this->dockerServiceMock = $this->prophesize(DockerService::class);
-    }
-
     public function testGetEmpty()
     {
         $dockerService = $this->getDockerService();

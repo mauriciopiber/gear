@@ -16,9 +16,6 @@ trait ActionConstructorTrait
 
     public function getActionConstructor()
     {
-        if (!isset($this->actionConstructor)) {
-            $this->actionConstructor = $this->getServiceLocator()->get('Gear\Module\Constructor\Action');
-        }
         return $this->actionConstructor;
     }
 }

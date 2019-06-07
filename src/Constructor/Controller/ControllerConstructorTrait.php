@@ -15,9 +15,6 @@ trait ControllerConstructorTrait
 
     public function getControllerConstructor()
     {
-        if (!isset($this->controllerConstructor)) {
-            $this->controllerConstructor = $this->getServiceLocator()->get('Gear\Module\Constructor\Controller');
-        }
         return $this->controllerConstructor;
     }
 }

@@ -10,9 +10,6 @@ trait TemplateServiceTrait
 
     public function getTemplateService()
     {
-        if (!isset($this->templateService)) {
-            $this->templateService = $this->getServiceLocator()->get(TemplateService::class);
-        }
         return $this->templateService;
     }
 

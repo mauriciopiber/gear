@@ -419,7 +419,7 @@ EOS
     public function getScriptService()
     {
         if (!isset($this->scriptService)) {
-            $this->scriptService = $this->getServiceLocator()->get('scriptService');
+            $this->scriptService = $this->get('scriptService');
             $this->scriptService->setLocation(\GearBase\Module::getProjectFolder());
         }
         return $this->scriptService;
@@ -503,7 +503,7 @@ EOS
         $name = end($name);
         $this->projectConfig = new \Gear\Project\Project(
             array(
-                'host'  => $this->getServiceLocator()->get('config')['webhost'***REMOVED***,
+                'host'  => $this->get('config')['webhost'***REMOVED***,
                 'project' => $name,
                 'environment' => $environment
             )
@@ -1053,7 +1053,7 @@ EOS
     public function createBuildSh()
     {
 
-        $buildService = $this->getServiceLocator()->get('buildService');
+        $buildService = $this->get('buildService');
 
         $share = $buildService->getShared();
 

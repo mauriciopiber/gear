@@ -14,10 +14,6 @@ trait ResolveNamesTrait
      */
     public function getResolveNames()
     {
-        if (!isset($this->resolveNames)) {
-            $name = 'Gear\Integration\Util\ResolveNames\ResolveNames';
-            $this->resolveNames = $this->getServiceLocator()->get($name);
-        }
         return $this->resolveNames;
     }
 

@@ -9,10 +9,6 @@ trait FileServiceTrait
 
     public function getFileDiagnosticService()
     {
-        if (!isset($this->fileDiagService)) {
-            $name = 'Gear\Diagnostic\FileService';
-            $this->fileDiagService = $this->getServiceLocator()->get($name);
-        }
         return $this->fileDiagService;
     }
 

@@ -12,9 +12,6 @@ trait AutoincrementServiceTrait
 
     public function getAutoincrementService()
     {
-        if (!isset($this->autoincrementService)) {
-            $this->autoincrementService = $this->getServiceLocator()->get('autoincrementService');
-        }
         return $this->autoincrementService;
     }
 }

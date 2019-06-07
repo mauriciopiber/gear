@@ -9,9 +9,6 @@ trait DiagnosticServiceTrait
 
     public function getDiagnosticService()
     {
-        if (!isset($this->diagnosticService)) {
-            $this->diagnosticService = $this->getServiceLocator()->get('Gear\Module\Diagnostic');
-        }
         return $this->diagnosticService;
     }
 

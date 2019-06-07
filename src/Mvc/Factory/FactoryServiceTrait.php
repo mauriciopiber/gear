@@ -9,9 +9,6 @@ trait FactoryServiceTrait
 
     public function getFactoryService()
     {
-        if (!isset($this->factoryService)) {
-            $this->factoryService = $this->getServiceLocator()->get(FactoryService::class);
-        }
         return $this->factoryService;
     }
 

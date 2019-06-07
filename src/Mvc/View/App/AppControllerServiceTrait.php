@@ -9,9 +9,6 @@ trait AppControllerServiceTrait
 
     public function getAppControllerService()
     {
-        if (!isset($this->appControllerService)) {
-            $this->appControllerService = $this->getServiceLocator()->get(AppControllerService::class);
-        }
         return $this->appControllerService;
     }
 

@@ -9,9 +9,6 @@ trait GulpfileTrait
 
     public function getGulpfile()
     {
-        if (!isset($this->gulpfile)) {
-            $this->gulpfile = $this->getServiceLocator()->get('Gear\Module\Node\Gulpfile');
-        }
         return $this->gulpfile;
     }
 

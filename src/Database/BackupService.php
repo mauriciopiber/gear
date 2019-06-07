@@ -50,7 +50,7 @@ class BackupService implements ModuleStructureInterface, StringServiceAwareInter
     public function getRequest()
     {
         if (!isset($this->request)) {
-            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+            $this->request = $this->get('application')->getMvcEvent()->getRequest();
         }
         return $this->request;
     }
