@@ -99,36 +99,37 @@ class Module implements
 
 
 
-    public function onBootstrap(MvcEvent $event)
-    {
-        $application = $event->getApplication();
+    // public function onBootstrap(MvcEvent $event)
+    // {
+    //     $application = $event->getApplication();
 
-        $serviceManager = $event->getApplication()->getServiceManager();
-        //$this->setServiceLocator($serviceManager);
-        // get the shared events manager
-        $sharedManager = $application->getEventManager()->getSharedManager();
+    //     $serviceManager = $event->getApplication()->getServiceManager();
 
-        $sharedManager->attach(
-            'Zend\Mvc\Controller\AbstractActionController',
-            'dispatch',
-            function ($event) use ($serviceManager) {
-                $controller = $event->getTarget();
-                $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
-            },
-            2
-        );
+    //     // get the shared events manager
+    //     $sharedManager = $application->getEventManager()->getSharedManager();
 
-        $sharedManager->attach(
-            '*',
-            'init',
-            function ($event) use ($serviceManager) {
+    //     $sharedManager->attach(
+    //         'Zend\Mvc\Controller\AbstractActionController',
+    //         'dispatch',
+    //         function ($event) use ($serviceManager) {
+    //             $controller = $event->getTarget();
+    //             $controller->attach($serviceManager->get('SchemaListener'), 100);
+    //             //$controller->getEventManager()->attachAggregate();
+    //         },
+    //         2
+    //     );
 
-                $controller = $event->getTarget();
-                $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
-            },
-            2
-        );
-    }
+    //     $sharedManager->attach(
+    //         '*',
+    //         'init',
+    //         function ($event) use ($serviceManager) {
+
+    //             $controller = $event->getTarget();
+    //             $controller->getEventManager()->attachAggregate($serviceManager->get('SchemaListener'));
+    //         },
+    //         2
+    //     );
+    // }
 
     public function init(ModuleManager $moduleManager)
     {
