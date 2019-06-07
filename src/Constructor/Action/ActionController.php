@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Action;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Action\ActionConstructorTrait;
 use Gear\Constructor\Action\ActionConstructor;

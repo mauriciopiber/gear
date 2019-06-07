@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Database\Controller;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Database\SchemaToolServiceTrait;
 use Gear\Database\BackupServiceTrait;

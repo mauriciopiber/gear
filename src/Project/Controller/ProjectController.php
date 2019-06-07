@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Project\Controller;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Gear\Project\ProjectServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Module\ComposerServiceTrait;

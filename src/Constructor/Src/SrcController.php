@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Constructor\Src;
 
-use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Src\SrcConstructorTrait;
