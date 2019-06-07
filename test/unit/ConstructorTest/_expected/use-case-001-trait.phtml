@@ -17,7 +17,7 @@ trait UnitSrcNameTrait
     public function getUnitSrcName()
     {
         if (!isset($this->unitSrcName)) {
-            $this->unitSrcName = $this->getServiceLocator()->get('ModuleUnit\Free\MyClass\UnitSrcName');
+            $this->unitSrcName = $this->get('ModuleUnit\Free\MyClass\UnitSrcName');
         }
         return $this->unitSrcName;
     }

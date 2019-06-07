@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Database;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Util\File\FileServiceTrait;
 use Gear\Util\File\FileServiceAwareInterface;
 use Gear\Util\Dir\DirServiceTrait;
@@ -17,7 +15,6 @@ use Gear\Table\Metadata\MetadataTrait;
 use Gear\Database\Connector\DbConnector\DbConnectorTrait;
 
 abstract class DbAbstractService implements
-    ServiceLocatorAwareInterface,
     FileServiceAwareInterface,
     StringServiceAwareInterface,
     DirServiceAwareInterface,
@@ -30,7 +27,6 @@ abstract class DbAbstractService implements
 
     use ModuleStructureTrait;
 
-    use ServiceLocatorAwareTrait;
 
     use ArrayServiceTrait;
 
@@ -47,7 +43,7 @@ abstract class DbAbstractService implements
     public function getRequest()
     {
         if (!isset($this->request)) {
-            $this->request = $this->getServiceLocator()->get('application')->getMvcEvent()->getRequest();
+            $this->request = $this->get('application')->getMvcEvent()->getRequest();
         }
         return $this->request;
     }

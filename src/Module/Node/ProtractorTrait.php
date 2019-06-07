@@ -9,9 +9,6 @@ trait ProtractorTrait
 
     public function getProtractor()
     {
-        if (!isset($this->protractor)) {
-            $this->protractor = $this->getServiceLocator()->get('Gear\Module\Node\Protractor');
-        }
         return $this->protractor;
     }
 

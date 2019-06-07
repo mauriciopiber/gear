@@ -9,9 +9,6 @@ trait ViewHelperTestServiceTrait
 
     public function getViewHelperTestService()
     {
-        if (!isset($this->viewHelperTestService)) {
-            $this->viewHelperTestService = $this->getServiceLocator()->get(ViewHelperServiceTest::class);
-        }
         return $this->viewHelperTestService;
     }
 

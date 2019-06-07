@@ -9,10 +9,6 @@ trait ComposerAutoloadTrait
 
     public function getComposerAutoload()
     {
-        if (!isset($this->composerAutoload)) {
-            $name = 'Gear\Autoload\ComposerAutoload';
-            $this->composerAutoload = $this->getServiceLocator()->get($name);
-        }
         return $this->composerAutoload;
     }
 

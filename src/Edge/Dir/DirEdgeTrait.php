@@ -9,10 +9,6 @@ trait DirEdgeTrait
 
     public function getDirEdge()
     {
-        if (!isset($this->dirEdge)) {
-            $name = 'Gear\Edge\Dir\DirEdge';
-            $this->dirEdge = $this->getServiceLocator()->get($name);
-        }
         return $this->dirEdge;
     }
 

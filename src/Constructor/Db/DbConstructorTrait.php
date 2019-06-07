@@ -15,9 +15,6 @@ trait DbConstructorTrait
 
     public function getDbConstructor()
     {
-        if (!isset($this->dbConstructor)) {
-            $this->dbConstructor = $this->getServiceLocator()->get('Gear\Module\Constructor\Db');
-        }
         return $this->dbConstructor;
     }
 }

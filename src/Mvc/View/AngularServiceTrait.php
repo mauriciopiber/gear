@@ -9,9 +9,6 @@ trait AngularServiceTrait
 
     public function getAngularService()
     {
-        if (!isset($this->angularService)) {
-            $this->angularService = $this->getServiceLocator()->get(AngularService::class);
-        }
         return $this->angularService;
     }
 

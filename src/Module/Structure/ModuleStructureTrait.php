@@ -9,9 +9,6 @@ trait ModuleStructureTrait
 
     public function getModule()
     {
-        if (!isset($this->module)) {
-            $this->module = $this->getServiceLocator()->get(ModuleStructure::class);
-        }
         return $this->module;
     }
 

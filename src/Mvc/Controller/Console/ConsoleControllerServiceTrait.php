@@ -15,11 +15,6 @@ trait ConsoleControllerServiceTrait
 
     public function getConsoleController()
     {
-        if (!isset($this->consoleController)) {
-            $this->consoleController = $this->getServiceLocator()->get(
-                ConsoleControllerService::class
-            );
-        }
         return $this->consoleController;
     }
 }

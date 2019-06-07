@@ -295,7 +295,7 @@ class SchemaToolService extends DbAbstractService
 
     public function notifyCreated($columnName)
     {
-        $this->getServiceLocator()->get('console')->writeLine(sprintf('Criado %s', $columnName));
+        $this->get('console')->writeLine(sprintf('Criado %s', $columnName));
     }
 
     public function addForeignKey($table, $column, $tableReference, $reference)

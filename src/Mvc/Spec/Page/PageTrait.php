@@ -9,9 +9,6 @@ trait PageTrait
 
     public function getPage()
     {
-        if (!isset($this->page)) {
-            $this->page = $this->getServiceLocator()->get(Page::class);
-        }
         return $this->page;
     }
 

@@ -14,10 +14,6 @@ trait PersistTrait
      */
     public function getPersist()
     {
-        if (!isset($this->persist)) {
-            $name = 'Gear\Integration\Util\Persist\Persist';
-            $this->persist = $this->getServiceLocator()->get($name);
-        }
         return $this->persist;
     }
 

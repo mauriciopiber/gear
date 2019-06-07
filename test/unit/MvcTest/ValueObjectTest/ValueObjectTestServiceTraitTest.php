@@ -2,7 +2,6 @@
 namespace GearTest\MvcTest\ValueObjectTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 
@@ -13,22 +12,13 @@ use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
  */
 class ValueObjectTestServiceTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use ValueObjectTestServiceTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Mvc\ValueObject\ValueObjectTestService');
-        $serviceManager->setService('Gear\Mvc\ValueObject\ValueObjectTestService', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getValueObjectTestService();
-        $this->assertInstanceOf('Gear\Mvc\ValueObject\ValueObjectTestService', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

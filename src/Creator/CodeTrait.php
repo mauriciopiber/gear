@@ -9,9 +9,6 @@ trait CodeTrait
 
     public function getCode()
     {
-        if (!isset($this->code)) {
-            $this->code = $this->getServiceLocator()->get('Gear\Creator\Code');
-        }
         return $this->code;
     }
 

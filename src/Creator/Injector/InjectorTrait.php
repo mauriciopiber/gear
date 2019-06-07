@@ -9,10 +9,6 @@ trait InjectorTrait
 
     public function getInjector()
     {
-        if (!isset($this->injector)) {
-            $name = 'Gear\Creator\Injector\Injector';
-            $this->injector = $this->getServiceLocator()->get($name);
-        }
         return $this->injector;
     }
 

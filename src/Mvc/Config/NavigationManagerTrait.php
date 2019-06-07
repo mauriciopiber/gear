@@ -9,9 +9,6 @@ trait NavigationManagerTrait
 
     public function getNavigationManager()
     {
-        if (!isset($this->navigation)) {
-            $this->navigation = $this->getServiceLocator()->get(NavigationManager::class);
-        }
         return $this->navigation;
     }
 

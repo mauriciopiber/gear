@@ -9,10 +9,6 @@ trait ApplicationConfigTrait
 
     public function getApplicationConfig()
     {
-        if (!isset($this->applicationConfig)) {
-            $name = 'Gear\Module\Config\ApplicationConfig';
-            $this->applicationConfig = $this->getServiceLocator()->get($name);
-        }
         return $this->applicationConfig;
     }
 

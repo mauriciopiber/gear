@@ -12,9 +12,6 @@ trait ProjectServiceTrait
 
     public function getProjectService()
     {
-        if (!isset($this->projectService)) {
-            $this->projectService = $this->getServiceLocator()->get('projectService');
-        }
         return $this->projectService;
     }
 }

@@ -9,10 +9,6 @@ trait DirUpgradeTrait
 
     public function getDirUpgrade()
     {
-        if (!isset($this->dirUpgrade)) {
-            $name = 'Gear\Upgrade\Dir\DirUpgrade';
-            $this->dirUpgrade = $this->getServiceLocator()->get($name);
-        }
         return $this->dirUpgrade;
     }
 

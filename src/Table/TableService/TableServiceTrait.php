@@ -9,10 +9,6 @@ trait TableServiceTrait
 
     public function getTableService()
     {
-        if (!isset($this->tableService)) {
-            $name = 'Gear\Table\TableService';
-            $this->tableService = $this->getServiceLocator()->get($name);
-        }
         return $this->tableService;
     }
 

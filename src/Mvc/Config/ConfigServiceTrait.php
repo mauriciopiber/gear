@@ -9,9 +9,6 @@ trait ConfigServiceTrait
 
     public function getConfigService()
     {
-        if (!isset($this->configService)) {
-            $this->configService = $this->getServiceLocator()->get(ConfigService::class);
-        }
         return $this->configService;
     }
 

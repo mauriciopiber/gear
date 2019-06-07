@@ -8,7 +8,7 @@ class ActionControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllerManager)
     {
-        $actionService = $controllerManager->getServiceLocator()->get('Gear\Module\Constructor\Action');
+        $actionService = $controllerManager->get('Gear\Module\Constructor\Action');
         $actiocController = new \Gear\Constructor\Action\ActionController($actionService);
         return $actiocController;
     }

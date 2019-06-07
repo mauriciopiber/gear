@@ -2,7 +2,6 @@
 namespace GearTest\DatabaseTest\PhinxTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Database\Phinx\PhinxServiceTrait;
 
@@ -13,22 +12,13 @@ use Gear\Database\Phinx\PhinxServiceTrait;
  */
 class PhinxServiceTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use PhinxServiceTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Database\Phinx\PhinxService');
-        $serviceManager->setService('Gear\Database\Phinx\PhinxService', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getPhinxService();
-        $this->assertInstanceOf('Gear\Database\Phinx\PhinxService', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

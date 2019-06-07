@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerTest\ControllerSuiteTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuiteTrait;
  */
 class ControllerSuiteTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use ControllerSuiteTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite');
-        $serviceManager->setService('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getControllerSuite();
-        $this->assertInstanceOf('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

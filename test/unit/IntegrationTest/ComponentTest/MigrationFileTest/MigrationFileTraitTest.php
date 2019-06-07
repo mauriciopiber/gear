@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\ComponentTest\MigrationFileTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\MigrationFile\MigrationFileTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Component\MigrationFile\MigrationFileTrait;
  */
 class MigrationFileTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use MigrationFileTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Component\MigrationFile\MigrationFile');
-        $serviceManager->setService('Gear\Integration\Component\MigrationFile\MigrationFile', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getMigrationFile();
-        $this->assertInstanceOf('Gear\Integration\Component\MigrationFile\MigrationFile', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

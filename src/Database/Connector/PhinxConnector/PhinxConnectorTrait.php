@@ -9,10 +9,6 @@ trait PhinxConnectorTrait
 
     public function getPhinxConnector()
     {
-        if (!isset($this->phinxConnector)) {
-            $name = 'Gear\Database\PhinxConnector';
-            $this->phinxConnector = $this->getServiceLocator()->get($name);
-        }
         return $this->phinxConnector;
     }
 

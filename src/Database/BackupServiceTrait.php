@@ -12,9 +12,6 @@ trait BackupServiceTrait
 
     public function getBackupService()
     {
-        if (!isset($this->backupService)) {
-            $this->backupService = $this->getServiceLocator()->get('backupService');
-        }
         return $this->backupService;
     }
 }

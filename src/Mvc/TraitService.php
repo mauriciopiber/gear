@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Mvc;
 
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Util\String\StringServiceTrait;
@@ -11,14 +9,13 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 
-class TraitService implements ServiceLocatorAwareInterface, ModuleStructureInterface, StringServiceAwareInterface
+class TraitService, ModuleStructureInterface, StringServiceAwareInterface
 {
     use FileCreatorTrait;
     use CodeTrait;
     use ServiceManagerTrait;
     use StringServiceTrait;
     use ModuleStructureTrait;
-    use ServiceLocatorAwareTrait;
 
     public function createTrait(
         $src,

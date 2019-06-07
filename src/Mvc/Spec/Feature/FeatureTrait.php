@@ -9,9 +9,6 @@ trait FeatureTrait
 
     public function getFeature()
     {
-        if (!isset($this->feature)) {
-            $this->feature = $this->getServiceLocator()->get(Feature::class);
-        }
         return $this->feature;
     }
 

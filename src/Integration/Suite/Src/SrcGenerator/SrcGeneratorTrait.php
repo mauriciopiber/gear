@@ -14,10 +14,6 @@ trait SrcGeneratorTrait
      */
     public function getSrcGenerator()
     {
-        if (!isset($this->srcGenerator)) {
-            $name = 'Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator';
-            $this->srcGenerator = $this->getServiceLocator()->get($name);
-        }
         return $this->srcGenerator;
     }
 

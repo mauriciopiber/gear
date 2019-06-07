@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\UtilTest\ColumnsTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\Columns\ColumnsTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Util\Columns\ColumnsTrait;
  */
 class ColumnsTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use ColumnsTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Util\Columns\Columns');
-        $serviceManager->setService('Gear\Integration\Util\Columns\Columns', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getColumns();
-        $this->assertInstanceOf('Gear\Integration\Util\Columns\Columns', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

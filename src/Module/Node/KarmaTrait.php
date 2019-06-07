@@ -9,9 +9,6 @@ trait KarmaTrait
 
     public function getKarma()
     {
-        if (!isset($this->karma)) {
-            $this->karma = $this->getServiceLocator()->get('Gear\Module\Node\Karma');
-        }
         return $this->karma;
     }
 

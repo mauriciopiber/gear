@@ -9,10 +9,6 @@ trait ComposerEdgeTrait
 
     public function getComposerEdge()
     {
-        if (!isset($this->composerEdge)) {
-            $name = 'Gear\Edge\Composer\ComposerEdge';
-            $this->composerEdge = $this->getServiceLocator()->get($name);
-        }
         return $this->composerEdge;
     }
 

@@ -9,9 +9,6 @@ trait StepTrait
 
     public function getStep()
     {
-        if (!isset($this->step)) {
-            $this->step = $this->getServiceLocator()->get(Step::class);
-        }
         return $this->step;
     }
 

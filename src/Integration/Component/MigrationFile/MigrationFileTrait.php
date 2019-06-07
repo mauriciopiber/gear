@@ -14,10 +14,6 @@ trait MigrationFileTrait
      */
     public function getMigrationFile()
     {
-        if (!isset($this->migrationFile)) {
-            $name = 'Gear\Integration\Component\MigrationFile\MigrationFile';
-            $this->migrationFile = $this->getServiceLocator()->get($name);
-        }
         return $this->migrationFile;
     }
 

@@ -14,10 +14,6 @@ trait PhinxServiceTrait
      */
     public function getPhinxService()
     {
-        if (!isset($this->phinxService)) {
-            $name = 'Gear\Database\Phinx\PhinxService';
-            $this->phinxService = $this->getServiceLocator()->get($name);
-        }
         return $this->phinxService;
     }
 

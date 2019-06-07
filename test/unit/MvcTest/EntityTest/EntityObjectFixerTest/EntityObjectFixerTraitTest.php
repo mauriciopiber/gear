@@ -2,7 +2,6 @@
 namespace GearTest\MvcTest\EntityTest\EntityObjectFixerTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
 
@@ -13,22 +12,13 @@ use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
  */
 class EntityObjectFixerTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use EntityObjectFixerTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');
-        $serviceManager->setService('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getEntityObjectFixer();
-        $this->assertInstanceOf('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

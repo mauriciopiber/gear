@@ -14,10 +14,6 @@ trait ColumnServiceTrait
      */
     public function getColumnService()
     {
-        if (!isset($this->columnService)) {
-            $name = 'Gear\Column\ColumnService';
-            $this->columnService = $this->getServiceLocator()->get($name);
-        }
         return $this->columnService;
     }
 

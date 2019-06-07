@@ -9,9 +9,6 @@ trait ModuleTestsServiceTrait
 
     public function getModuleTestsService()
     {
-        if (!isset($this->moduleTestsService)) {
-            $this->moduleTestsService = $this->getServiceLocator()->get('Gear\Module\Tests');
-        }
         return $this->moduleTestsService;
     }
 

@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\UtilTest\LocationTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\Location\LocationTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Util\Location\LocationTrait;
  */
 class LocationTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use LocationTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Util\Location\Location');
-        $serviceManager->setService('Gear\Integration\Util\Location\Location', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getLocation();
-        $this->assertInstanceOf('Gear\Integration\Util\Location\Location', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

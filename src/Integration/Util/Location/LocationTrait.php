@@ -14,10 +14,6 @@ trait LocationTrait
      */
     public function getLocation()
     {
-        if (!isset($this->location)) {
-            $name = 'Gear\Integration\Util\Location\Location';
-            $this->location = $this->getServiceLocator()->get($name);
-        }
         return $this->location;
     }
 

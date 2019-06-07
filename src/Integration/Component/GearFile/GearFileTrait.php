@@ -14,10 +14,6 @@ trait GearFileTrait
      */
     public function getGearFile()
     {
-        if (!isset($this->gearFile)) {
-            $name = 'Gear\Integration\Component\GearFile\GearFile';
-            $this->gearFile = $this->getServiceLocator()->get($name);
-        }
         return $this->gearFile;
     }
 

@@ -12,10 +12,6 @@ trait ComposerServiceTrait
 
     public function getComposerService()
     {
-        if (!isset($this->composerService)) {
-            $name = 'Gear\Project\Composer\ComposerService';
-            $this->composerService = $this->getServiceLocator()->get($name);
-        }
         return $this->composerService;
     }
 

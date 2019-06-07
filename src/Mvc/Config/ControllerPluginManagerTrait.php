@@ -9,9 +9,6 @@ trait ControllerPluginManagerTrait
 
     public function getControllerPluginManager()
     {
-        if (!isset($this->controllerPlugin)) {
-            $this->controllerPlugin = $this->getServiceLocator()->get(ControllerPluginManager::class);
-        }
         return $this->controllerPlugin;
     }
 

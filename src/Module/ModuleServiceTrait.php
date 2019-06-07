@@ -9,9 +9,6 @@ trait ModuleServiceTrait
 
     public function getModuleService()
     {
-        if (!isset($this->moduleService)) {
-            $this->moduleService = $this->getServiceLocator()->get('Gear\Module');
-        }
         return $this->moduleService;
     }
 

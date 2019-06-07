@@ -11,15 +11,11 @@ use ZendDiagnostics\Check\ExtensionLoaded;
 use ZendDiagnostics\Check\ProcessRunning;
 use ZendDiagnostics\Check\PhpVersion;
 use ZendDiagnostics\Check\CpuPerformance;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 class Module implements
     ConsoleUsageProviderInterface,
     ConsoleBannerProviderInterface,
-    ServiceLocatorAwareInterface
 {
-    use ServiceLocatorAwareTrait;
 
     protected $moduleManager;
 

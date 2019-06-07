@@ -9,9 +9,6 @@ trait MappingServiceTrait
 
     public function getMappingService()
     {
-        if (!isset($this->mappingService)) {
-            $this->mappingService = $this->getServiceLocator()->get(MappingService::class);
-        }
         return $this->mappingService;
     }
 

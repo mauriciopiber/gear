@@ -1,10 +1,8 @@
 <?php
 namespace MyModule\Service;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use MyModule\Service\DbQueryInterface;
 use MyModule\Service\DbAdapterInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use MyModule\Service\DbQueryTrait;
 use MyModule\Service\DbAdapterTrait;
 
@@ -18,11 +16,9 @@ use MyModule\Service\DbAdapterTrait;
  * @link http://pibernetwork.com
  */
 class BasicImplementsDependenciesService implements
-    ServiceLocatorAwareInterface,
     DbQueryInterface,
     DbAdapterInterface
 {
-    use ServiceLocatorAwareTrait;
 
     use DbQueryTrait;
 

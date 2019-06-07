@@ -9,10 +9,6 @@ trait ArrayServiceTrait
 
     public function getArrayService()
     {
-        if (!isset($this->arrayService)) {
-            $serviceName = 'Gear\Util\Vector\ArrayService';
-            $this->arrayService = $this->getServiceLocator()->get($serviceName);
-        }
         return $this->arrayService;
     }
 

@@ -9,9 +9,6 @@ trait InterfaceServiceTrait
 
     public function getInterfaceService()
     {
-        if (!isset($this->interfaceService)) {
-            $this->interfaceService = $this->getServiceLocator()->get(InterfaceService::class);
-        }
         return $this->interfaceService;
     }
 

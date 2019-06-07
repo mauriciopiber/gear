@@ -9,10 +9,6 @@ trait ConsolePromptTrait
 
     public function getConsolePrompt()
     {
-        if (!isset($this->consolePrompt)) {
-            $name = 'Gear\Util\Prompt\ConsolePrompt';
-            $this->consolePrompt = $this->getServiceLocator()->get($name);
-        }
         return $this->consolePrompt;
     }
 

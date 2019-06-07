@@ -9,10 +9,6 @@ trait AntUpgradeTrait
 
     public function getAntUpgrade()
     {
-        if (!isset($this->antUpgrade)) {
-            $name = 'Gear\Upgrade\Ant\AntUpgrade';
-            $this->antUpgrade = $this->getServiceLocator()->get($name);
-        }
         return $this->antUpgrade;
     }
 

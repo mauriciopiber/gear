@@ -7,9 +7,6 @@ trait ProjectLocationTrait
 
     public function getProject()
     {
-        if (!isset($this->project)) {
-            $this->project = \GearBase\Module::getProjectFolder();
-        }
 
         return $this->project;
     }

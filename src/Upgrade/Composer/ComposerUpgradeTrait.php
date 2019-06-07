@@ -9,10 +9,6 @@ trait ComposerUpgradeTrait
 
     public function getComposerUpgrade()
     {
-        if (!isset($this->composerUpgrade)) {
-            $name = 'Gear\Upgrade\Composer\ComposerUpgrade';
-            $this->composerUpgrade = $this->getServiceLocator()->get($name);
-        }
         return $this->composerUpgrade;
     }
 

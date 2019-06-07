@@ -9,10 +9,6 @@ trait DbConnectorTrait
 
     public function getDbConnector()
     {
-        if (!isset($this->dbConnector)) {
-            $name = 'Gear\Database\DbConnector';
-            $this->dbConnector = $this->getServiceLocator()->get($name);
-        }
         return $this->dbConnector;
     }
 

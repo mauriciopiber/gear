@@ -14,10 +14,6 @@ trait MvcSuiteTrait
      */
     public function getMvcSuite()
     {
-        if (!isset($this->mvcSuite)) {
-            $name = 'Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite';
-            $this->mvcSuite = $this->getServiceLocator()->get($name);
-        }
         return $this->mvcSuite;
     }
 

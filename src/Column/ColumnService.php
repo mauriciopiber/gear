@@ -14,7 +14,6 @@ use Gear\Util\String\StringServiceTrait;
 use Gear\Schema\Db\Db;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 /**

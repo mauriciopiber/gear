@@ -314,7 +314,7 @@ class FixtureService extends AbstractMvc
         }
 
         $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
+        $executor = new ORMExecutor($this->get('doctrine.entitymanager.orm_default'), $purger);
         $executor->execute($loader->getFixtures(), $append);
     }
 
@@ -341,7 +341,7 @@ class FixtureService extends AbstractMvc
         }
 
         $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->getServiceLocator()->get('doctrine.entitymanager.orm_default'), $purger);
+        $executor = new ORMExecutor($this->get('doctrine.entitymanager.orm_default'), $purger);
         $executor->execute($loader->getFixtures(), $append);
     }
 }

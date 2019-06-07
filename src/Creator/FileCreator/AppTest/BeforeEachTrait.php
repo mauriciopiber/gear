@@ -9,10 +9,6 @@ trait BeforeEachTrait
 
     public function getBeforeEach()
     {
-        if (!isset($this->beforeEach)) {
-            $name = 'Gear\Creator\FileCreator\AppTest\BeforeEach';
-            $this->beforeEach = $this->getServiceLocator()->get($name);
-        }
         return $this->beforeEach;
     }
 

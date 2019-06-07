@@ -9,9 +9,6 @@ trait ControllerManagerTrait
 
     public function getControllerManager()
     {
-        if (!isset($this->controllerConfig)) {
-            $this->controllerConfig = $this->getServiceLocator()->get(ControllerManager::class);
-        }
         return $this->controllerConfig;
     }
 

@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\GearFile\GearFileTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Component\GearFile\GearFileTrait;
  */
 class GearFileTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use GearFileTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Component\GearFile\GearFile');
-        $serviceManager->setService('Gear\Integration\Component\GearFile\GearFile', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getGearFile();
-        $this->assertInstanceOf('Gear\Integration\Component\GearFile\GearFile', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()

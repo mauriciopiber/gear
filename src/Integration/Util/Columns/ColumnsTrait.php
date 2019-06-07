@@ -14,10 +14,6 @@ trait ColumnsTrait
      */
     public function getColumns()
     {
-        if (!isset($this->columns)) {
-            $name = 'Gear\Integration\Util\Columns\Columns';
-            $this->columns = $this->getServiceLocator()->get($name);
-        }
         return $this->columns;
     }
 

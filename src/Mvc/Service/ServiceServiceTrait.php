@@ -9,9 +9,6 @@ trait ServiceServiceTrait
 
     public function getServiceService()
     {
-        if (!isset($this->serviceService)) {
-            $this->serviceService = $this->getServiceLocator()->get(ServiceService::class);
-        }
         return $this->serviceService;
     }
 

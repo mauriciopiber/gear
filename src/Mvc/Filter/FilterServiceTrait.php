@@ -9,9 +9,6 @@ trait FilterServiceTrait
 
     public function getFilterService()
     {
-        if (!isset($this->filterService)) {
-            $this->filterService = $this->getServiceLocator()->get(FilterService::class);
-        }
         return $this->filterService;
     }
 

@@ -14,10 +14,6 @@ trait MvcGeneratorTrait
      */
     public function getMvcGenerator()
     {
-        if (!isset($this->mvcGenerator)) {
-            $name = 'Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator';
-            $this->mvcGenerator = $this->getServiceLocator()->get($name);
-        }
         return $this->mvcGenerator;
     }
 

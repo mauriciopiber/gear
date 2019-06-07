@@ -9,10 +9,6 @@ trait VarsTrait
 
     public function getVars()
     {
-        if (!isset($this->vars)) {
-            $name = 'Gear\Creator\FileCreator\AppTest\Vars';
-            $this->vars = $this->getServiceLocator()->get($name);
-        }
         return $this->vars;
     }
 

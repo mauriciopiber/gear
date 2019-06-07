@@ -14,10 +14,6 @@ trait TestFileTrait
      */
     public function getTestFile()
     {
-        if (!isset($this->testFile)) {
-            $name = 'Gear\Integration\Component\TestFile\TestFile';
-            $this->testFile = $this->getServiceLocator()->get($name);
-        }
         return $this->testFile;
     }
 

@@ -9,10 +9,6 @@ trait NpmEdgeTrait
 
     public function getNpmEdge()
     {
-        if (!isset($this->npmEdge)) {
-            $name = 'Gear\Edge\Npm\NpmEdge';
-            $this->npmEdge = $this->getServiceLocator()->get($name);
-        }
         return $this->npmEdge;
     }
 

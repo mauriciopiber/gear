@@ -9,9 +9,6 @@ trait WebControllerTestServiceTrait
 
     public function getControllerTestService()
     {
-        if (!isset($this->controllerTestService)) {
-            $this->controllerTestService = $this->getServiceLocator()->get(WebControllerTestService::class);
-        }
         return $this->controllerTestService;
     }
 

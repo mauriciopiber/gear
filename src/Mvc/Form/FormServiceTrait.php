@@ -9,9 +9,6 @@ trait FormServiceTrait
 
     public function getFormService()
     {
-        if (!isset($this->formService)) {
-            $this->formService = $this->getServiceLocator()->get(FormService::class);
-        }
         return $this->formService;
     }
 

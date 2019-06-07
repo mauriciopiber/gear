@@ -14,10 +14,6 @@ trait SuperTestFileTrait
      */
     public function getSuperTestFile()
     {
-        if (!isset($this->superTestFile)) {
-            $name = 'Gear\Integration\Component\SuperTestFile\SuperTestFile';
-            $this->superTestFile = $this->getServiceLocator()->get($name);
-        }
         return $this->superTestFile;
     }
 

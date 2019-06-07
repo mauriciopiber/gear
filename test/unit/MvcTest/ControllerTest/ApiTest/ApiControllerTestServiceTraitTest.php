@@ -14,11 +14,6 @@ class ApiControllerTestServiceTraitTest extends TestCase
 {
     use ApiControllerTestServiceTrait;
 
-    public function setUp() : void
-    {
-        $this->apiControllerTestServiceMock = $this->prophesize(ApiControllerTestService::class);
-    }
-
     public function testGetEmpty()
     {
         $apiControllerTest = $this->getApiControllerTestService();

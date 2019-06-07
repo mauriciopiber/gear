@@ -14,10 +14,6 @@ trait EntityObjectFixerTrait
      */
     public function getEntityObjectFixer()
     {
-        if (!isset($this->entityObjectFixer)) {
-            $name = 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer';
-            $this->entityObjectFixer = $this->getServiceLocator()->get($name);
-        }
         return $this->entityObjectFixer;
     }
 

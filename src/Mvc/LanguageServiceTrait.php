@@ -9,9 +9,6 @@ trait LanguageServiceTrait
 
     public function getLanguageService()
     {
-        if (!isset($this->languageService)) {
-            $this->languageService = $this->getServiceLocator()->get(LanguageService::class);
-        }
         return $this->languageService;
     }
 

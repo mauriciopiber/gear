@@ -9,10 +9,6 @@ trait NpmServiceTrait
 
     public function getNpmService()
     {
-        if (!isset($this->npmService)) {
-            $name = 'Gear\Diagnostic\Npm\NpmService';
-            $this->npmService = $this->getServiceLocator()->get($name);
-        }
         return $this->npmService;
     }
 

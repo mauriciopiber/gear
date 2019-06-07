@@ -16,9 +16,6 @@ trait ScriptServiceTrait
 
     public function getScriptService()
     {
-        if (!isset($this->scriptService)) {
-            $this->scriptService = $this->getServiceLocator()->get('scriptService');
-        }
         return $this->scriptService;
     }
 }

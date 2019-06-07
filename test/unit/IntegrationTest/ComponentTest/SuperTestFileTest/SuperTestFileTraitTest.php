@@ -2,7 +2,6 @@
 namespace GearTest\IntegrationTest\ComponentTest\SuperTestFileTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\SuperTestFile\SuperTestFileTrait;
 
@@ -13,22 +12,13 @@ use Gear\Integration\Component\SuperTestFile\SuperTestFileTrait;
  */
 class SuperTestFileTraitTest extends TestCase
 {
-    use ServiceLocatorAwareTrait;
 
     use SuperTestFileTrait;
-
-    public function setUp() : void
-    {
-        $serviceManager = new ServiceManager();
-        $this->mocking = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile');
-        $serviceManager->setService('Gear\Integration\Component\SuperTestFile\SuperTestFile', $this->mocking->reveal());
-        $this->setServiceLocator($serviceManager);
-    }
 
     public function testGet()
     {
         $serviceLocator = $this->getSuperTestFile();
-        $this->assertInstanceOf('Gear\Integration\Component\SuperTestFile\SuperTestFile', $serviceLocator);
+        $this->assertNull($serviceLocator);
     }
 
     public function testSet()
