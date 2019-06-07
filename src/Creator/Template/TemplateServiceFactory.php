@@ -26,9 +26,9 @@ class TemplateServiceFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new TemplateService(
-            $container->get('viewmanager')->getRenderer()
+            $container->get('ViewHelperManager')->getRenderer()
         );
-        
+
         return $factory;
     }
 }
