@@ -1,7 +1,7 @@
 <?php
 namespace GearTest\ProjectTest;
 
-use PHPunit_Framework_TestCase as TestCase;
+use PHPUnit_Framework_TestCase as TestCase;
 use Exception;
 use Gear\Project\Config\Local;
 
