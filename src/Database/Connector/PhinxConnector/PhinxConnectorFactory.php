@@ -1,12 +1,12 @@
 <?php
 namespace Gear\Database\Connector\PhinxConnector;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 
 class PhinxConnectorFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new \Gear\Database\Connector\PhinxConnector\PhinxConnector();
     }

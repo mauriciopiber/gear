@@ -13,31 +13,31 @@ class IntegrationFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator->get('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')
+        $this->container->get('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')
             ->willReturn($this->prophesize('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite')
+        $this->container->get('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite')
             ->willReturn($this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite')
+        $this->container->get('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite')
             ->willReturn($this->prophesize('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite')
+        $this->container->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite')
             ->willReturn($this->prophesize('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite')->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
+        $this->container->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
             ->willReturn($this->prophesize('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')->reveal())
             ->shouldBeCalled();
 
         $factory = new IntegrationFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Integration\Suite\Integration\Integration', $instance);
     }

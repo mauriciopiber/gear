@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Edge\Ant;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Edge\Ant\AntEdge;
 
 class AntEdgeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new AntEdge(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

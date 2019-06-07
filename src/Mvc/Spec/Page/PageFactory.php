@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Mvc\Spec\Page;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Spec\Page\Page;
 
 class PageFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new Page(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

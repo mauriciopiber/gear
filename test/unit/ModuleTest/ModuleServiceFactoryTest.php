@@ -15,7 +15,7 @@ class ModuleServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
         $factory = new \Gear\Module\ModuleServiceFactory();
 
@@ -47,13 +47,13 @@ class ModuleServiceFactoryTest extends TestCase
             'Gear\Docker\DockerService' => 'Gear\Docker\DockerService'
         ***REMOVED***;
 
-        $this->serviceLocator->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
+        $this->container->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
 
         foreach ($expected as $callable => $object) {
-            $this->serviceLocator->get($callable)->willReturn($this->prophesize($object)->reveal())->shouldBeCalled();
+            $this->container->get($callable)->willReturn($this->prophesize($object)->reveal())->shouldBeCalled();
         }
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Module\ModuleService', $instance);
     }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\ValueObject;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\ValueObject\ValueObjectTestService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
@@ -24,15 +24,15 @@ class ValueObjectTestServiceFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Mvc\ValueObject\ValueObjectTestService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ValueObjectTestService(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Creator\CodeTest')
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(FileCreator::class),
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Creator\CodeTest')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Mvc\Controller\Api;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
@@ -29,18 +29,18 @@ class ApiControllerServiceFactory implements FactoryInterface
      *
      * @return ApiControllerService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ApiControllerService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(Code::class),
-            $serviceLocator->get('Gear\Mvc\Factory\FactoryService'),
-            $serviceLocator->get(Injector::class),
-            $serviceLocator->get(ArrayService::class)
+            $container->get(ModuleStructure::class),
+            $container->get(FileCreator::class),
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(Code::class),
+            $container->get('Gear\Mvc\Factory\FactoryService'),
+            $container->get(Injector::class),
+            $container->get(ArrayService::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

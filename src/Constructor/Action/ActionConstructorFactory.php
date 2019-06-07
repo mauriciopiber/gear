@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Constructor\Action;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Mvc\Config\RouterManager;
 use Gear\Mvc\Config\ConsoleRouterManager;
@@ -45,32 +45,32 @@ class ActionConstructorFactory implements FactoryInterface
      *
      * @return ActionConstructor
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ActionConstructor(
-            $serviceLocator->get('Gear\Schema\Action'),
-            //$serviceLocator->get(ConfigService::class),
-            $serviceLocator->get(RouterManager::class),
-            $serviceLocator->get(ConsoleRouterManager::class),
-            $serviceLocator->get(NavigationManager::class),
-            $serviceLocator->get(ViewService::class),
-            $serviceLocator->get(WebControllerService::class),
-            $serviceLocator->get(WebControllerTestService::class),
-            $serviceLocator->get(ConsoleControllerService::class),
-            $serviceLocator->get(ConsoleControllerTestService::class),
-            $serviceLocator->get(ApiControllerService::class),
-            $serviceLocator->get(ApiControllerTestService::class),
-            $serviceLocator->get(AppControllerService::class),
-            $serviceLocator->get(AppControllerSpecService::class),
-            $serviceLocator->get(Feature::class),
-            $serviceLocator->get(Page::class),
-            $serviceLocator->get(Step::class),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(TableService::class),
-            $serviceLocator->get(ColumnService::class)
+            $container->get('Gear\Schema\Action'),
+            //$container->get(ConfigService::class),
+            $container->get(RouterManager::class),
+            $container->get(ConsoleRouterManager::class),
+            $container->get(NavigationManager::class),
+            $container->get(ViewService::class),
+            $container->get(WebControllerService::class),
+            $container->get(WebControllerTestService::class),
+            $container->get(ConsoleControllerService::class),
+            $container->get(ConsoleControllerTestService::class),
+            $container->get(ApiControllerService::class),
+            $container->get(ApiControllerTestService::class),
+            $container->get(AppControllerService::class),
+            $container->get(AppControllerSpecService::class),
+            $container->get(Feature::class),
+            $container->get(Page::class),
+            $container->get(Step::class),
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(TableService::class),
+            $container->get(ColumnService::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

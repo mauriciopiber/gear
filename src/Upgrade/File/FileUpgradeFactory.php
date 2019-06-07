@@ -1,26 +1,26 @@
 <?php
 namespace Gear\Upgrade\File;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Edge\File\FileEdge;
 use Gear\Module\Structure\ModuleStructure;
 
 class FileUpgradeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new FileUpgrade(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(FileEdge::class),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('Gear\Module'),
-            $serviceLocator->get('Gear\Module\Tests'),
-            $serviceLocator->get('Gear\Module\Docs\Docs')
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(FileEdge::class),
+            $container->get('Gear\Util\Prompt\ConsolePrompt'),
+            $container->get('Gear\Module'),
+            $container->get('Gear\Module\Tests'),
+            $container->get('Gear\Module\Docs\Docs')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

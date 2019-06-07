@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Component\MigrationFile;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Component\MigrationFile\MigrationFile;
 
 /**
@@ -22,14 +22,14 @@ class MigrationFileFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Component\MigrationFile\MigrationFile
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new MigrationFile(
-            $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('Gear\Util\Vector\ArrayService')
+            $container->get('Gear\Integration\Util\Persist\Persist'),
+            $container->get('Gear\Util\String\StringService'),
+            $container->get('Gear\Util\Vector\ArrayService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

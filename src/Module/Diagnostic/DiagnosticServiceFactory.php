@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Module\Diagnostic;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Diagnostic\Ant\{
     AntService
 };
@@ -22,18 +22,18 @@ use Gear\Module\Structure\ModuleStructure;
 
 class DiagnosticServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
 
 
         return new \Gear\Module\Diagnostic\DiagnosticService(
-            $serviceLocator->get('console'),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get(AntService::class),
-            $serviceLocator->get(ComposerService::class),
-            $serviceLocator->get(FileService::class),
-            $serviceLocator->get(DirService::class),
-            $serviceLocator->get(NpmService::class)
+            $container->get('console'),
+            $container->get(ModuleStructure::class),
+            $container->get(AntService::class),
+            $container->get(ComposerService::class),
+            $container->get(FileService::class),
+            $container->get(DirService::class),
+            $container->get(NpmService::class)
         );
     }
 }

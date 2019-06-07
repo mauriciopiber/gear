@@ -1,20 +1,20 @@
 <?php
 namespace Gear\Diagnostic\Dir;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Diagnostic\Dir\DirService;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Module\Structure\ModuleStructure;
 
 class DirServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new DirService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(DirEdge::class)
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(DirEdge::class)
         );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Column;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Column\ColumnService;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -28,12 +28,12 @@ class ColumnServiceFactory implements FactoryInterface
      *
      * @return \Gear\Column\ColumnService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new ColumnService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Table\TableService'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Table\TableService'),
+            $container->get('Gear\Util\String\StringService')
         );
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Component\SuperTestFile;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 
 /**
@@ -22,13 +22,13 @@ class SuperTestFileFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Component\SuperTestFile\SuperTestFile
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new SuperTestFile(
-            $serviceLocator->get('Gear\Integration\Util\Persist\Persist'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Integration\Util\Persist\Persist'),
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

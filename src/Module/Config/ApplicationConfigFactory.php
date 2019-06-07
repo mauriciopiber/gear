@@ -1,20 +1,20 @@
 <?php
 namespace Gear\Module\Config;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Config\ApplicationConfig;
 use Gear\Module\Structure\ModuleStructure;
 
 class ApplicationConfigFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ApplicationConfig(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Request')
+            $container->get(ModuleStructure::class),
+            $container->get('Request')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

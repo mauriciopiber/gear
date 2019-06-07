@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Constructor\Db;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Column\ColumnService;
 use Gear\Table\TableService;
@@ -42,30 +42,30 @@ class DbConstructorFactory implements FactoryInterface
      *
      * @return DbConstructor
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new DbConstructor(
-            $serviceLocator->get(ColumnService::class),
-            $serviceLocator->get(TableService::class),
-            $serviceLocator->get('Gear\Schema\Action'),
-            $serviceLocator->get('Gear\Schema\Db'),
-            $serviceLocator->get(Feature::class),
-            $serviceLocator->get(Step::class),
-            $serviceLocator->get(EntityService::class),
-            $serviceLocator->get(SearchService::class),
-            $serviceLocator->get(FixtureService::class),
-            $serviceLocator->get(FilterService::class),
-            $serviceLocator->get(FormService::class),
-            $serviceLocator->get(WebControllerService::class),
-            //$serviceLocator->get(ControllerTestService::class),
-            $serviceLocator->get(ConfigService::class),
-            $serviceLocator->get(LanguageService::class),
-            $serviceLocator->get(ViewViewService::class),
-            $serviceLocator->get(RepositoryService::class),
-            $serviceLocator->get(ServiceService::class),
-            $serviceLocator->get(ModuleStructure::class)
+            $container->get(ColumnService::class),
+            $container->get(TableService::class),
+            $container->get('Gear\Schema\Action'),
+            $container->get('Gear\Schema\Db'),
+            $container->get(Feature::class),
+            $container->get(Step::class),
+            $container->get(EntityService::class),
+            $container->get(SearchService::class),
+            $container->get(FixtureService::class),
+            $container->get(FilterService::class),
+            $container->get(FormService::class),
+            $container->get(WebControllerService::class),
+            //$container->get(ControllerTestService::class),
+            $container->get(ConfigService::class),
+            $container->get(LanguageService::class),
+            $container->get(ViewViewService::class),
+            $container->get(RepositoryService::class),
+            $container->get(ServiceService::class),
+            $container->get(ModuleStructure::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

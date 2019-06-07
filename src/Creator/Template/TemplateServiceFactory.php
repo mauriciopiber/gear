@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Creator\Template;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Creator\Template\TemplateService;
 
 /**
@@ -23,12 +23,12 @@ class TemplateServiceFactory implements FactoryInterface
      *
      * @return TemplateService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new TemplateService(
-            $serviceLocator->get('viewmanager')->getRenderer()
+            $container->get('viewmanager')->getRenderer()
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

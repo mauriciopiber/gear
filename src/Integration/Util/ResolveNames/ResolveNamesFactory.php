@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Util\ResolveNames;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Util\ResolveNames\ResolveNames;
 
 /**
@@ -22,12 +22,12 @@ class ResolveNamesFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Util\ResolveNames\ResolveNames
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ResolveNames(
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

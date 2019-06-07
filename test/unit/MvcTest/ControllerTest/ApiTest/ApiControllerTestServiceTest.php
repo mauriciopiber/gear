@@ -33,7 +33,6 @@ class ApiControllerTestServiceTest extends TestCase
         $this->string = new StringService();
         $this->codeTest = $this->prophesize(CodeTest::class);
         $this->fileCreator = $this->createFileCreator();
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
@@ -48,7 +47,7 @@ class ApiControllerTestServiceTest extends TestCase
             $this->string,
             $this->codeTest->reveal(),
             $this->factoryService->reveal(),
-            $this->controllerManager->reveal(),
+            $this->container->reveal(),
             $this->injector
         );
 
@@ -126,8 +125,6 @@ class ApiControllerTestServiceTest extends TestCase
         $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
         //$this->codeTest->setArrayService($this->array);
 
-        //$this->controllerManager = new \Gear\Mvc\Config\ControllerManager();
-        //$this->controllerManager->setModule($this->module->reveal());
 
         //$this->service->setControllerManager($this->serviceManager);
 

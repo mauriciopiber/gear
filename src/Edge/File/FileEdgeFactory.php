@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Edge\File;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Edge\File\FileEdge;
 
 class FileEdgeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new FileEdge(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

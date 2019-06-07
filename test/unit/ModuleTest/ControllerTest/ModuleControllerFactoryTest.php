@@ -15,11 +15,11 @@ class ModuleControllerFactoryTest extends TestCase
     public function testCreateFactory()
     {
 
-        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+        $this->container = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
         $factory = new \Gear\Module\Controller\ModuleControllerFactory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Module\Controller\ModuleController', $instance);
     }

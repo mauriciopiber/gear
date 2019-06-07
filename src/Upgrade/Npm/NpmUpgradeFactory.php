@@ -1,24 +1,24 @@
 <?php
 namespace Gear\Upgrade\Npm;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Upgrade\Npm\NpmUpgrade;
 use Gear\Edge\Npm\NpmEdge;
 use Gear\Module\Structure\ModuleStructure;
 
 class NpmUpgradeFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new NpmUpgrade(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(NpmEdge::class),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('Gear\Util\String\StringService')
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(NpmEdge::class),
+            $container->get('Gear\Util\Prompt\ConsolePrompt'),
+            $container->get('Gear\Util\String\StringService')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

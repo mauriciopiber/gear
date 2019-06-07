@@ -12,23 +12,23 @@ class DocsFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator->get(ModuleStructure::class)
+        $this->container->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')
+        $this->container->get('Gear\Util\String\StringService')
           ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Creator\FileCreator\FileCreator')
+        $this->container->get('Gear\Creator\FileCreator\FileCreator')
           ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
           ->shouldBeCalled();
 
         $factory = new \Gear\Module\Docs\DocsFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Module\Docs\Docs', $instance);
     }

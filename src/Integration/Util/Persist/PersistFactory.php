@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Util\Persist;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Util\Persist\Persist;
 
 /**
@@ -22,12 +22,12 @@ class PersistFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Util\Persist\Persist
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new Persist(
-            $serviceLocator->get('Gear\Integration\Util\Location\Location')
+            $container->get('Gear\Integration\Util\Location\Location')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

@@ -1,32 +1,32 @@
 <?php
 namespace Gear\Project;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Project\ProjectService;
 use Gear\Creator\FileCreator\FileCreator;
 
 class ProjectServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $projectService = new ProjectService(
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get('Gear\Util\Dir\DirService'),
-            $serviceLocator->get('Gear\Util\File\FileService'),
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('Gear\Edge\Dir\DirEdge'),
-            $serviceLocator->get('Gear\Project\Docs\Docs'),
-            $serviceLocator->get('Gear\Util\Prompt\ConsolePrompt'),
-            $serviceLocator->get('Gear\Upgrade\Ant\AntUpgrade'),
-            $serviceLocator->get('Gear\Upgrade\Npm\NpmUpgrade'),
-            $serviceLocator->get('config'),
-            $serviceLocator->get('Gear\Project\Composer\ComposerService')
-            //$serviceLocator->get('config'),
-            //$serviceLocator->get('Gear\Util\String\StringService'),
-            //$serviceLocator->get(FileCreator::class)
+            $container->get('Gear\Config\GearConfig'),
+            $container->get('Gear\Util\Dir\DirService'),
+            $container->get('Gear\Util\File\FileService'),
+            $container->get(FileCreator::class),
+            $container->get('Gear\Edge\Dir\DirEdge'),
+            $container->get('Gear\Project\Docs\Docs'),
+            $container->get('Gear\Util\Prompt\ConsolePrompt'),
+            $container->get('Gear\Upgrade\Ant\AntUpgrade'),
+            $container->get('Gear\Upgrade\Npm\NpmUpgrade'),
+            $container->get('config'),
+            $container->get('Gear\Project\Composer\ComposerService')
+            //$container->get('config'),
+            //$container->get('Gear\Util\String\StringService'),
+            //$container->get(FileCreator::class)
         );
-        unset($serviceLocator);
+        
         return $projectService;
     }
 }

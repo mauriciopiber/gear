@@ -1,21 +1,21 @@
 <?php
 namespace Gear\Diagnostic\Npm;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Diagnostic\Npm\NpmService;
 use Gear\Module\Structure\ModuleStructure;
 
 class NpmServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new NpmService(
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get('Gear\Edge\Npm\NpmEdge')
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get('Gear\Edge\Npm\NpmEdge')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

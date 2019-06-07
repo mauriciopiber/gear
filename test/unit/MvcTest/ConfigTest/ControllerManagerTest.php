@@ -42,12 +42,6 @@ class ControllerManagerTest extends TestCase
 
         $array = new \Gear\Util\Vector\ArrayService();
 
-        $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager();
-        $this->controllerManager->setFileCreator($this->fileCreator);
-        $this->controllerManager->setStringService($this->string);
-        $this->controllerManager->setModule($this->module->reveal());
-        $this->controllerManager->setCode($code);
-        $this->controllerManager->setArrayService($array);
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';
     }
@@ -74,7 +68,6 @@ EOS
 
       $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-      $this->assertTrue($this->controllerManager->create($controller));
 
       $expected = [
         'invokables' => [
@@ -112,7 +105,6 @@ EOS
 
       $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-      $this->assertTrue($this->controllerManager->create($controller));
 
       $expected = [
         'invokables' => [
@@ -134,7 +126,6 @@ EOS
         $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
 
-        $file = $this->controllerManager->module($controllers);
 
         $expected = $this->template.'/controller.config.phtml';
 

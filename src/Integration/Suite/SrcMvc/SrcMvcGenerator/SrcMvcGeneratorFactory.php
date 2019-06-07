@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Suite\SrcMvc\SrcMvcGenerator;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator;
 
 /**
@@ -22,16 +22,16 @@ class SrcMvcGeneratorFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new SrcMvcGenerator(
-            $serviceLocator->get('Gear\Integration\Component\GearFile\GearFile'),
-            $serviceLocator->get('Gear\Integration\Component\TestFile\TestFile'),
-            $serviceLocator->get('Gear\Integration\Component\MigrationFile\MigrationFile'),
-            $serviceLocator->get('Gear\Integration\Util\ResolveNames\ResolveNames'),
-            $serviceLocator->get('Gear\Integration\Util\Columns\Columns')
+            $container->get('Gear\Integration\Component\GearFile\GearFile'),
+            $container->get('Gear\Integration\Component\TestFile\TestFile'),
+            $container->get('Gear\Integration\Component\MigrationFile\MigrationFile'),
+            $container->get('Gear\Integration\Util\ResolveNames\ResolveNames'),
+            $container->get('Gear\Integration\Util\Columns\Columns')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

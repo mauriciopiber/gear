@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Integration\Suite\Integration;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Integration\Suite\Integration\Integration;
 
 /**
@@ -22,16 +22,16 @@ class IntegrationFactory implements FactoryInterface
      * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
      * @return \Gear\Integration\Suite\Integration\Integration
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new Integration(
-            $serviceLocator->get('Gear\Integration\Suite\Src\SrcSuite\SrcSuite'),
-            $serviceLocator->get('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite'),
-            $serviceLocator->get('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite'),
-            $serviceLocator->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite'),
-            $serviceLocator->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
+            $container->get('Gear\Integration\Suite\Src\SrcSuite\SrcSuite'),
+            $container->get('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite'),
+            $container->get('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite'),
+            $container->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite'),
+            $container->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

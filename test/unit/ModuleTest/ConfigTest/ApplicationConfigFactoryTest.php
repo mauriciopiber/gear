@@ -12,21 +12,21 @@ class ApplicationConfigFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->serviceLocator    = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
 
-        $this->serviceLocator
+        $this->container
           ->get(ModuleStructure::class)
           ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure'))
           ->shouldBeCalled();
 
-        $this->serviceLocator
+        $this->container
           ->get('Request')
           ->willReturn($this->prophesize('Zend\Console\Request'))
           ->shouldBeCalled();
 
         $factory = new \Gear\Module\Config\ApplicationConfigFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf('Gear\Module\Config\ApplicationConfig', $instance);
     }

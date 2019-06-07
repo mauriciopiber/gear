@@ -1,17 +1,17 @@
 <?php
 namespace Gear\Mvc\Spec\Feature;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Spec\Feature\Feature;
 
 class FeatureFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new Feature(
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

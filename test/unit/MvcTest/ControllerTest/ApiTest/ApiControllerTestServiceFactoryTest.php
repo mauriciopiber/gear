@@ -2,7 +2,7 @@
 namespace GearTest\MvcTest\ControllerTest\ApiTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
 use Gear\Module\Structure\ModuleStructure;
@@ -22,42 +22,37 @@ class ApiControllerTestServiceFactoryTest extends TestCase
 {
     public function testApiControllerTestServiceFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
 
-        $this->serviceLocator->get(ModuleStructure::class)
+        $this->container->get(ModuleStructure::class)
             ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(CodeTest::class)
+        $this->container->get(CodeTest::class)
             ->willReturn($this->prophesize(CodeTest::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(FileCreator::class)
+        $this->container->get(FileCreator::class)
             ->willReturn($this->prophesize(FileCreator::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')
+        $this->container->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(ControllerManager::class)
-            ->willReturn($this->prophesize(ControllerManager::class)->reveal())
-            ->shouldBeCalled();
-
-
-        $this->serviceLocator->get(Injector::class)
+        $this->container->get(Injector::class)
             ->willReturn($this->prophesize(Injector::class)->reveal())
             ->shouldBeCalled();
 
 
-        $this->serviceLocator->get(FactoryTestService::class)
+        $this->container->get(FactoryTestService::class)
             ->willReturn($this->prophesize(FactoryTestService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ApiControllerTestServiceFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null, null);
 
         $this->assertInstanceOf(ApiControllerTestService::class, $instance);
     }

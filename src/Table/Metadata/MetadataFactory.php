@@ -1,29 +1,29 @@
 <?php
 namespace Gear\Table\Metadata;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Db\Metadata\Metadata;
 use Gear\Module\Structure\ModuleStructure;
 
 class MetadataFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
 
         //se tem parametro módule
-        $module = $serviceLocator->get(ModuleStructure::class);
+        $module = $container->get(ModuleStructure::class);
         $module->prepare();
 
 
-        $moduleName = $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('module');
+        $moduleName = $container->get('application')->getMvcEvent()->getRequest()->getParam('module');
 
         //se tem parametro basepath
-        if ($serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')) {
+        if ($container->get('application')->getMvcEvent()->getRequest()->getParam('basepath')) {
             $location =
-            $serviceLocator->get('application')->getMvcEvent()->getRequest()->getParam('basepath')
+            $container->get('application')->getMvcEvent()->getRequest()->getParam('basepath')
             . '/'
-            . $serviceLocator->get('Gear\Util\String\StringService')->str('url', $moduleName);
+            . $container->get('Gear\Util\String\StringService')->str('url', $moduleName);
 
 
             if (is_dir($location)) {
@@ -48,7 +48,7 @@ class MetadataFactory implements FactoryInterface
 
             $adapter = new \Zend\Db\Adapter\Adapter($params);
         } else {
-            $adapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
+            $adapter = $container->get('Zend\Db\Adapter\Adapter');
         }
 
         $metadata = new Metadata($adapter);

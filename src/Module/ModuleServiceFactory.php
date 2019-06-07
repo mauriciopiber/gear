@@ -1,8 +1,8 @@
 <?php
 namespace Gear\Module;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\ModuleService;
 use Gear\Module\Structure\ModuleStructure;
@@ -12,34 +12,34 @@ use Gear\Docker\DockerService;
 
 class ModuleServiceFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         return new ModuleService(
-            $serviceLocator->get(FileCreator::class),
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get(ModuleStructure::class),
-            $serviceLocator->get('Gear\Module\Docs\Docs'),
-            $serviceLocator->get('Gear\Module\Composer'),
-            $serviceLocator->get('Gear\Module\Tests'),
-            $serviceLocator->get('Gear\Module\Node\Karma'),
-            $serviceLocator->get('Gear\Module\Node\Protractor'),
-            $serviceLocator->get('Gear\Module\Node\Package'),
-            $serviceLocator->get('Gear\Module\Node\Gulpfile'),
-            $serviceLocator->get('Gear\Mvc\LanguageService'),
-            $serviceLocator->get('Gear\Schema\Schema'),
-            $serviceLocator->get('Gear\Schema\Schema\Loader'),
-            $serviceLocator->get('Gear\Mvc\Config\ConfigService'),
-            $serviceLocator->get('Gear\Mvc\View\ViewService'),
-            $serviceLocator->get('Request'),
-            $serviceLocator->get('cacheService'),
-            $serviceLocator->get('Gear\Module\Config\ApplicationConfig'),
-            $serviceLocator->get('Gear\Autoload\ComposerAutoload'),
-            $serviceLocator->get('config'),
-            $serviceLocator->get('Gear\Util\Dir\DirService'),
-            $serviceLocator->get('Gear\Config\GearConfig'),
-            $serviceLocator->get(ControllerConstructor::class),
-            $serviceLocator->get(ActionConstructor::class),
-            $serviceLocator->get(DockerService::class)
+            $container->get(FileCreator::class),
+            $container->get('Gear\Util\String\StringService'),
+            $container->get(ModuleStructure::class),
+            $container->get('Gear\Module\Docs\Docs'),
+            $container->get('Gear\Module\Composer'),
+            $container->get('Gear\Module\Tests'),
+            $container->get('Gear\Module\Node\Karma'),
+            $container->get('Gear\Module\Node\Protractor'),
+            $container->get('Gear\Module\Node\Package'),
+            $container->get('Gear\Module\Node\Gulpfile'),
+            $container->get('Gear\Mvc\LanguageService'),
+            $container->get('Gear\Schema\Schema'),
+            $container->get('Gear\Schema\Schema\Loader'),
+            $container->get('Gear\Mvc\Config\ConfigService'),
+            $container->get('Gear\Mvc\View\ViewService'),
+            $container->get('Request'),
+            $container->get('cacheService'),
+            $container->get('Gear\Module\Config\ApplicationConfig'),
+            $container->get('Gear\Autoload\ComposerAutoload'),
+            $container->get('config'),
+            $container->get('Gear\Util\Dir\DirService'),
+            $container->get('Gear\Config\GearConfig'),
+            $container->get(ControllerConstructor::class),
+            $container->get(ActionConstructor::class),
+            $container->get(DockerService::class)
         );
     }
 }
