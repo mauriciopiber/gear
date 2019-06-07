@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "9508c1f3463fc29834136b94f18594a3",
+    "content-hash": "910e9152248e1325715fafd1d00a2a91",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -475,6 +475,67 @@
             "time": "2019-06-07T06:30:58+00:00"
         },
         {
+            "name": "mauriciopiber/gear-jenkins",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mauriciopiber/gear-jenkins.git",
+                "reference": "90cb3f7a9bc1a1c515e5dc8078996759dc345299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://satis/dist/mauriciopiber/gear-jenkins/mauriciopiber-gear-jenkins-90cb3f7a9bc1a1c515e5dc8078996759dc345299-zip-bdf9b7.zip",
+                "reference": "90cb3f7a9bc1a1c515e5dc8078996759dc345299"
+            },
+            "require": {
+                "mauriciopiber/gear-config": "^1.0.0-alpha0",
+                "mauriciopiber/gear-console": "^1.0.0-alpha0",
+                "mauriciopiber/gear-locator": "^1.0.0-alpha0",
+                "mauriciopiber/gear-scripts": "^1.0.0-alpha0",
+                "mauriciopiber/gear-util": "^1.0.0-alpha0",
+                "php": "^7.0",
+                "zendframework/zend-console": "^2.8.0",
+                "zendframework/zend-db": "^2.10.0",
+                "zendframework/zend-json": "^3.1.0",
+                "zendframework/zend-loader": "^2.6",
+                "zendframework/zend-log": "^2.10.0",
+                "zendframework/zend-modulemanager": "^2.8.2",
+                "zendframework/zend-mvc": "^3.1.1",
+                "zendframework/zend-navigation": "^2.9.0",
+                "zendframework/zend-servicemanager": "^3.4",
+                "zendframework/zend-stdlib": "^3.2.1",
+                "zendframework/zend-validator": "^2.12",
+                "zendframework/zend-view": "^2.11.2"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "mikey179/vfsstream": "^1.6.2",
+                "pdepend/pdepend": "^2.4",
+                "phploc/phploc": "^5.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^8.0",
+                "sebastian/phpcpd": "^4.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "theseer/phpdox": "^0.12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gear\\Jenkins\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "GearTest\\JenkinsTest\\": "test/unit"
+                }
+            },
+            "support": {
+                "source": "https://github.com/mauriciopiber/gear-jenkins/tree/1.0.0-alpha1",
+                "issues": "https://github.com/mauriciopiber/gear-jenkins/issues"
+            },
+            "time": "2019-06-07T04:57:56+00:00"
+        },
+        {
             "name": "mauriciopiber/gear-locator",
             "version": "1.0.0-alpha0",
             "source": {
@@ -834,6 +895,59 @@
                 "issues": "https://github.com/mauriciopiber/gear-util/issues"
             },
             "time": "2019-06-07T04:34:14+00:00"
+        },
+        {
+            "name": "mauriciopiber/gear-version",
+            "version": "1.0.0-alpha0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mauriciopiber/gear-version.git",
+                "reference": "928ba812bc6630a1b2010eb633551c0dac749172"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://satis/dist/mauriciopiber/gear-version/mauriciopiber-gear-version-928ba812bc6630a1b2010eb633551c0dac749172-zip-92105f.zip",
+                "reference": "928ba812bc6630a1b2010eb633551c0dac749172"
+            },
+            "require": {
+                "mauriciopiber/gear-config": "^1.0.0-alpha0",
+                "mauriciopiber/gear-locator": "^1.0.0-alpha0",
+                "mauriciopiber/gear-util": "^1.0.0-alpha0",
+                "php": "^7.0.0",
+                "zendframework/zend-console": "^2.8.0",
+                "zendframework/zend-db": "^2.10.0",
+                "zendframework/zend-eventmanager": "^3.2.1",
+                "zendframework/zend-loader": "^2.6",
+                "zendframework/zend-modulemanager": "^2.8.2",
+                "zendframework/zend-mvc": "^3.1.1",
+                "zendframework/zend-mvc-console": "^1.2",
+                "zendframework/zend-navigation": "^2.9.0",
+                "zendframework/zend-servicemanager": "^3.4",
+                "zendframework/zend-validator": "^2.12",
+                "zendframework/zend-view": "^2.11.2"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "mikey179/vfsstream": "^1.6.2",
+                "pdepend/pdepend": "^2.0.3",
+                "phploc/phploc": "^5.0.0",
+                "phpmd/phpmd": "^2.3.2",
+                "phpunit/phpunit": "~8.0",
+                "sebastian/phpcpd": "^4.0.2",
+                "squizlabs/php_codesniffer": "^3.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GearTest\\VersionTest\\": "test/unit",
+                    "Gear\\Version\\": "src"
+                }
+            },
+            "support": {
+                "source": "https://github.com/mauriciopiber/gear-version/tree/1.0.0-alpha0",
+                "issues": "https://github.com/mauriciopiber/gear-version/issues"
+            },
+            "time": "2019-06-07T22:25:13+00:00"
         },
         {
             "name": "psr/cache",
@@ -4291,16 +4405,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.2.0",
+            "version": "8.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b20b6db4bd6aceda2809ca00cb740149d726d8fb"
+                "reference": "047f771e34dccacb6c432a1a70e9980e087eac92"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis/dist/phpunit/phpunit/phpunit-phpunit-b20b6db4bd6aceda2809ca00cb740149d726d8fb-zip-367125.zip",
-                "reference": "b20b6db4bd6aceda2809ca00cb740149d726d8fb"
+                "url": "http://satis/dist/phpunit/phpunit/phpunit-phpunit-047f771e34dccacb6c432a1a70e9980e087eac92-zip-f1d564.zip",
+                "reference": "047f771e34dccacb6c432a1a70e9980e087eac92"
             },
             "require": {
                 "doctrine/instantiator": "^1.2.0",
@@ -4326,7 +4440,7 @@
                 "sebastian/global-state": "^3.0.0",
                 "sebastian/object-enumerator": "^3.0.3",
                 "sebastian/resource-operations": "^2.0.1",
-                "sebastian/type": "^1.0.0",
+                "sebastian/type": "^1.1.0",
                 "sebastian/version": "^2.0.1"
             },
             "require-dev": {
@@ -4369,7 +4483,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2019-06-07T04:47:30+00:00"
+            "time": "2019-06-07T14:04:13+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4977,16 +5091,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "c2362deb2d0b708abe0c4a6d35633c19ae40cd4a"
+                "reference": "79fd7f2f8acff994d4a330bb434b09b813479068"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis/dist/sebastian/type/sebastian-type-c2362deb2d0b708abe0c4a6d35633c19ae40cd4a-zip-447657.zip",
-                "reference": "c2362deb2d0b708abe0c4a6d35633c19ae40cd4a"
+                "url": "http://satis/dist/sebastian/type/sebastian-type-79fd7f2f8acff994d4a330bb434b09b813479068-zip-b4df8d.zip",
+                "reference": "79fd7f2f8acff994d4a330bb434b09b813479068"
             },
             "require": {
                 "php": "^7.2"
@@ -4997,12 +5111,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
                 "classmap": [
                     "src/"
+                ***REMOVED***,
+                "files": [
+                    "tests/_fixture/callback_function.php"
                 ***REMOVED***
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5018,7 +5135,7 @@
             ***REMOVED***,
             "description": "Collection of value objects that represent the types of the PHP type system",
             "homepage": "https://github.com/sebastianbergmann/type",
-            "time": "2019-06-06T11:58:04+00:00"
+            "time": "2019-06-07T09:58:20+00:00"
         },
         {
             "name": "sebastian/version",
@@ -5502,6 +5619,8 @@
         "mauriciopiber/gear-util": 15,
         "mauriciopiber/gear-schema": 15,
         "mauriciopiber/gear-console": 15,
+        "mauriciopiber/gear-version": 15,
+        "mauriciopiber/gear-jenkins": 15,
         "mauriciopiber/gear-config": 15,
         "mauriciopiber/gear-locator": 15,
         "mauriciopiber/gear-scripts": 15
