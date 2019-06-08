@@ -15,9 +15,19 @@ class ModuleStructureFactory implements FactoryInterface
             $container->get('Gear\Util\File\FileService')
         );
 
-        $request = $container->get('request');
+        $request = $container->get('application')->getMvcEvent()->getRequest();
+        // var_dump($request);
+        // var_dump($request->getParam('module'));
 
-        $moduleName = $request->getParam('module');
+        // //$request = $container->get('request');
+        // //var_dump($request->params()->get('module'));
+        // //var_dump(get_class_methods());
+        // //var_dump($request->params()->getArrayCopy());
+
+
+        // // $moduleName = $request->getParam('module');
+        // // var_dump($moduleName);
+        // die();
         $namespace = $request->getParam('namespace', null);
         $staging = $request->getParam('staging', null);
         $type = $request->getParam('type', null);

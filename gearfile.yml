@@ -1,10 +1,10 @@
-module: GearBase
+module: Gear
 
 src:
   0:
-    name: ModuleScriptService
+    name: ExampleService
     type: Service
-    namespace: Module\Script
-    dependency: 
+    namespace: Example
+    dependency:
         0: Module\Structure\ModuleStructure
         1: Creator\FileCreator

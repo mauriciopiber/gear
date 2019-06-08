@@ -152,6 +152,7 @@ class SrcConstructor extends AbstractConstructor
     public function create(array $data)
     {
         $module = $this->getModule()->getModuleName();
+        //var_dump($module);die();
 
         $this->src = $this->getSrcSchema()->create(
             $module,
