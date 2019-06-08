@@ -6,6 +6,7 @@ use Interop\Container\ContainerInterface;
 #use Gear\Module\ConstructorServiceFactory;
 use Gear\Constructor\Src;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Schema\Src\SrcSchema;
 
 class SrcConstructorFactory implements FactoryInterface
 {
@@ -15,7 +16,7 @@ class SrcConstructorFactory implements FactoryInterface
             $container->get('Gear\Table\TableService'),
             $container->get('Gear\Column\ColumnService'),
             $container->get(ModuleStructure::class),
-            $container->get('Gear\Schema\Src'),
+            $container->get(SrcSchema::class),
             $container->get('Gear\Mvc\Config\ServiceManager'),
             $container->get('Gear\Mvc\TraitService'),
             $container->get('Gear\Mvc\TraitTestService'),

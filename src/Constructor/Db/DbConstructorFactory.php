@@ -19,10 +19,11 @@ use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Mvc\Config\ConfigService;
 use Gear\Mvc\LanguageService;
-use Gear\Mvc\ViewViewService;
+use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Schema\Db\DbSchema;
 
 /**
  * PHP Version 5
@@ -47,8 +48,8 @@ class DbConstructorFactory implements FactoryInterface
         $factory = new DbConstructor(
             $container->get(ColumnService::class),
             $container->get(TableService::class),
-            $container->get('Gear\Schema\Action'),
-            $container->get('Gear\Schema\Db'),
+            $container->get(ActionSchema::class),
+            $container->get(DbSchema::class),
             $container->get(Feature::class),
             $container->get(Step::class),
             $container->get(EntityService::class),
@@ -60,12 +61,12 @@ class DbConstructorFactory implements FactoryInterface
             //$container->get(ControllerTestService::class),
             $container->get(ConfigService::class),
             $container->get(LanguageService::class),
-            $container->get(ViewViewService::class),
+            $container->get(ViewService::class),
             $container->get(RepositoryService::class),
             $container->get(ServiceService::class),
             $container->get(ModuleStructure::class)
         );
-        
+
         return $factory;
     }
 }
