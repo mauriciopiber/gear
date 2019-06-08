@@ -15,8 +15,9 @@ use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\Filter\FilterTestServiceTrait;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class FilterService extends AbstractMvc
+class FilterService extends AbstractMvc implements AbstractMvcInterface
 {
     public static $extends = '\Zend\InputFilter\InputFilter';
 

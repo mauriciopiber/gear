@@ -15,8 +15,9 @@ use Gear\Mvc\AbstractMvc;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Form\FormTestServiceTrait;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class FormService extends AbstractMvc
+class FormService extends AbstractMvc implements AbstractMvcInterface
 {
     static protected $defaultNamespace = 'Form';
 

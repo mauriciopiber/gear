@@ -29,8 +29,9 @@ use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Fixture\FixtureColumnInterface;
 use Gear\Exception\InvalidArgumentException;
+use Gear\Mvc\AbstractMvcInterface;
 
-class FixtureService extends AbstractMvc
+class FixtureService extends AbstractMvc implements AbstractMvcInterface
 {
     const DEPENDENCY_SEPARATOR = ',';
 

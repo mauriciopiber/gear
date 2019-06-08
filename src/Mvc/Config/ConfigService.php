@@ -6,9 +6,19 @@ use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Module\ModuleConstructorInterface;
 use Gear\Schema\Db\Db;
 use Exception;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
-class ConfigService extends AbstractConfigManager implements ModuleConstructorInterface
+class ConfigService implements ModuleConstructorInterface
 {
+    use ModuleStructureTrait;
+    use StringServiceTrait;
+    use FileCreatorTrait;
+
     use SchemaServiceTrait;
     use \Gear\Mvc\Config\AssetManagerTrait;
     use \Gear\Mvc\Config\RouterManagerTrait;
@@ -19,6 +29,16 @@ class ConfigService extends AbstractConfigManager implements ModuleConstructorIn
     use \Gear\Mvc\Config\ControllerManagerTrait;
     use \Gear\Mvc\Config\ControllerPluginManagerTrait;
     use \Gear\Mvc\Config\ViewHelperManagerTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        FileCreator $file
+    ) {
+        $this->setFileCreator($file);
+        $this->setStringService($string);
+        $this->setModule($module);
+    }
 
     protected $json;
 

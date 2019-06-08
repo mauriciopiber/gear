@@ -13,10 +13,6 @@ use Gear\Mvc\Config\ConsoleRouterManagerTrait;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use Gear\Mvc\View\ViewServiceTrait;
 
-use Gear\Mvc\View\App\AppControllerServiceTrait;
-use Gear\Mvc\View\App\AppControllerSpecServiceTrait;
-use Gear\Mvc\View\App\AppControllerService;
-use Gear\Mvc\View\App\AppControllerSpecService;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
@@ -77,10 +73,6 @@ class ActionConstructor extends AbstractConstructor
 
     use FeatureTrait;
 
-    use AppControllerServiceTrait;
-
-    use AppControllerSpecServiceTrait;
-
     /* schema */
     use ActionSchemaTrait;
 
@@ -138,8 +130,6 @@ class ActionConstructor extends AbstractConstructor
         ConsoleControllerTestService $consoleControllerTest,
         ApiControllerService $apiController,
         ApiControllerTestService $apiControllerTest,
-        AppControllerService $appControllerService,
-        AppControllerSpecService $appControllerTestService,
         Feature $feature,
         Page $page,
         Step $step,
@@ -162,8 +152,6 @@ class ActionConstructor extends AbstractConstructor
         $this->consoleControllerTest = $consoleControllerTest;
         $this->apiControllerService = $apiController;
         $this->apiControllerTestService = $apiControllerTest;
-        $this->appControllerService = $appControllerService;
-        $this->appControllerSpecService = $appControllerTestService;
         $this->feature = $feature;
         $this->page = $page;
         $this->step = $step;

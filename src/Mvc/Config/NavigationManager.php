@@ -6,8 +6,10 @@ use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Action\Action;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Schema\Db\Db;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class NavigationManager extends AbstractConfigManager implements ModuleManagerInterface
+class NavigationManager extends AbstractConfigManager implements ModuleManagerInterface,
+  AbstractConfigManagerInterface
 {
     use SchemaServiceTrait;
 

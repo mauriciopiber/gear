@@ -7,8 +7,9 @@ use Gear\Mvc\Config\ViewHelperManagerTrait;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Schema\Db\Db;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ViewHelperService extends AbstractMvc
+class ViewHelperService extends AbstractMvc implements AbstractMvcInterface
 {
     use ViewHelperManagerTrait;
     use ViewHelperTestServiceTrait;

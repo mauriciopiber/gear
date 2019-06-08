@@ -6,8 +6,11 @@ use Gear\Mvc\AbstractMvcTest;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Config\ControllerManagerTrait;
 use Gear\Mvc\Controller\AbstractControllerTestService;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class ConsoleControllerTestService extends AbstractControllerTestService
+class ConsoleControllerTestService
+    extends AbstractControllerTestService
+    implements AbstractMvcTestInterface
 {
     use ControllerManagerTrait;
 

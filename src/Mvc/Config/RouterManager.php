@@ -4,8 +4,10 @@ namespace Gear\Mvc\Config;
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class RouterManager extends AbstractConfigManager implements ModuleManagerInterface
+class RouterManager extends AbstractConfigManager implements ModuleManagerInterface,
+  AbstractConfigManagerInterface
 {
     use \Gear\Mvc\LanguageServiceTrait;
 

@@ -7,8 +7,9 @@ use Gear\Mvc\Config\ControllerPluginManagerTrait;
 use Gear\Schema\Src\Src;
 use Gear\Creator\CodeTrait;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ControllerPluginService extends AbstractMvc
+class ControllerPluginService extends AbstractMvc implements AbstractMvcInterface
 {
     use ControllerPluginManagerTrait;
     use ControllerPluginTestServiceTrait;

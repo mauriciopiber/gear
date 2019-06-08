@@ -4,8 +4,10 @@ namespace Gear\Mvc\Config;
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Src\Src;
 use Gear\Creator\FileCreator\FileCreator;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class ViewHelperManager extends AbstractConfigManager implements ModuleManagerInterface, ServiceManagerInterface
+class ViewHelperManager extends AbstractConfigManager implements ModuleManagerInterface, ServiceManagerInterface,
+  AbstractConfigManagerInterface
 {
     public function module(array $controllers)
     {

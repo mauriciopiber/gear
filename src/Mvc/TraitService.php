@@ -8,8 +8,9 @@ use Gear\Util\String\StringServiceAwareInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Mvc\AbstractMvcInterface;
 
-class TraitService implements ModuleStructureInterface, StringServiceAwareInterface
+class TraitService implements ModuleStructureInterface, StringServiceAwareInterface, AbstractMvcInterface
 {
     use FileCreatorTrait;
     use CodeTrait;

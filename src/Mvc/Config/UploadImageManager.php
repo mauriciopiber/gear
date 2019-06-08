@@ -3,8 +3,10 @@ namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Db\Db;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class UploadImageManager extends AbstractConfigManager implements ModuleManagerInterface
+class UploadImageManager extends AbstractConfigManager implements ModuleManagerInterface,
+  AbstractConfigManagerInterface
 {
     public function module(array $controllers)
     {

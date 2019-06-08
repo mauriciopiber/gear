@@ -15,6 +15,7 @@ use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Schema\Controller\Controller as ControllerValueObject;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
+use Gear\Mvc\AbstractMvcInterface;
 
 /**
  * PHP Version 5
@@ -25,7 +26,7 @@ use Gear\Creator\Injector\InjectorTrait;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ApiControllerService extends AbstractControllerService
+class ApiControllerService extends AbstractControllerService implements AbstractMvcInterface
 {
     use InjectorTrait;
     use ModuleStructureTrait;

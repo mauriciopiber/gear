@@ -23,7 +23,6 @@ use Gear\Mvc\Repository\RepositoryServiceTrait;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
-use Gear\Mvc\Search\SearchServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
@@ -46,7 +45,7 @@ use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryTestService;
-use Gear\Mvc\Search\SearchService;
+//use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\InterfaceService;
 use Gear\Constructor\AbstractConstructor;
@@ -83,7 +82,7 @@ class SrcConstructor extends AbstractConstructor
 
     use FilterServiceTrait;
 
-    use SearchServiceTrait;
+    //use SearchServiceTrait;
 
     use ValueObjectServiceTrait;
 
@@ -112,7 +111,7 @@ class SrcConstructor extends AbstractConstructor
         FormService $formService,
         FilterService $filterService,
         EntityService $entityService,
-        SearchService $searchService,
+        //SearchService $searchService,
         ValueObjectService $valueObjectService,
         ViewHelperService $viewHelperService,
         ControllerPluginService $controllerPluginService,
@@ -131,7 +130,7 @@ class SrcConstructor extends AbstractConstructor
         $this->filterService = $filterService;
         $this->formService = $formService;
         $this->entityService = $entityService;
-        $this->searchService = $searchService;
+        //$this->searchService = $searchService;
         $this->valueObjectService = $valueObjectService;
         $this->viewHelperService = $viewHelperService;
         $this->controllerPluginService = $controllerPluginService;

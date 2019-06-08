@@ -3,8 +3,12 @@ namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class ControllerManager extends AbstractConfigManager implements ModuleManagerInterface, ControllerManagerInterface
+class ControllerManager extends AbstractConfigManager implements
+  ModuleManagerInterface,
+  ControllerManagerInterface,
+  AbstractConfigManagerInterface
 {
 
     /**

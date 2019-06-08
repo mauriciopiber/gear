@@ -18,8 +18,9 @@ use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryInsertBeforeInterface;
 use Gear\Mvc\Repository\ColumnInterface\RepositoryUpdateBeforeInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class RepositoryService extends AbstractMvc
+class RepositoryService extends AbstractMvc implements AbstractMvcInterface
 {
     use SchemaServiceTrait;
     use \Gear\Mvc\Repository\RepositoryTestServiceTrait;
