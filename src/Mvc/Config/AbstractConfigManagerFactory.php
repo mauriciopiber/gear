@@ -5,6 +5,8 @@ use Zend\ServiceManager\Factory\AbstractFactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Mvc\Config\AbstractConfigManagerInterface;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Util\String\StringService;
 
 class AbstractConfigManagerFactory implements AbstractFactoryInterface
 {
@@ -23,7 +25,9 @@ class AbstractConfigManagerFactory implements AbstractFactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, $options = [***REMOVED***)
     {
         return new $requestedName(
-            $container->get(ModuleStructure::class)
+            $container->get(ModuleStructure::class),
+            $container->get(FileCreator::class),
+            $container->get(StringService::class)
         );
     }
 }

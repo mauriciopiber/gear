@@ -2,8 +2,9 @@
 namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class AssetManager extends AbstractConfigManager implements ModuleManagerInterface
+class AssetManager extends AbstractConfigManager implements ModuleManagerInterface, AbstractConfigManagerInterface
 {
 
     public function module(array $controllers)
