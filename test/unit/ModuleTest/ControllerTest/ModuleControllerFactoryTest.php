@@ -41,6 +41,15 @@ class ModuleControllerFactoryTest extends TestCase
         $this->container
           ->get(ComposerAutoload::class)
           ->willReturn($this->prophesize(ComposerAutoload::class)->reveal());
+        $this->container
+          ->get(DiagnosticService::class)
+          ->willReturn($this->prophesize(DiagnosticService::class)->reveal());
+        $this->container
+          ->get(ModuleUpgrade::class)
+          ->willReturn($this->prophesize(ModuleUpgrade::class)->reveal());
+        $this->container
+          ->get(ConstructService::class)
+          ->willReturn($this->prophesize(ConstructService::class)->reveal());
 
         $this->container
           ->get(ApplicationConfig::class)

@@ -20,9 +20,12 @@ class ModuleControllerFactory implements FactoryInterface
     {
         $moduleController = new ModuleController(
             $container->get(ModuleService::class),
-            $container->get(ComposerAutoload::class),
+            $container->get(DiagnosticService::class),
+            $container->get(ModuleUpgrade::class),
+            $container->get(ConstructService::class),
             $container->get(ApplicationConfig::class),
             $container->get(CacheService::class)//,
+            //$container->get(ComposerAutoload::class),
             // $container->get(EntityService::class),
             // $container->get(FixtureService::class),
             // $container->get(DiagnosticService::class),

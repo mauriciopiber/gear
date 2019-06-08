@@ -2,6 +2,8 @@
 namespace GearTest\ModuleTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Gear\Module;
 use Zend\Console\Request;
 use Zend\Mvc\Console\Router\RouteMatch;
 use Zend\Mvc\MvcEvent;
@@ -30,19 +32,28 @@ class ModuleControllerTest extends TestCase
     {
         parent::setUp();
         $this->module = $this->prophesize(ModuleService::class);
+        $this->applicationConfig = $this->prophesize(ApplicationConfig::class);
+        $this->cache = $this->prophesize(CacheService::class);
+        $this->moduleUpgrade = $this->prophesize(ModuleUpgrade::class);
+        $this->diagnostic = $this->prophesize(DiagnosticService::class);
+        $this->construct = $this->prophesize(ConstructService::class);
+        $this->console = $this->prophesize(Posix::class);
 
         $this->controller = new ModuleController(
-            $this->module->reveal()
+            $this->module->reveal(),
+            $this->diagnostic->reveal(),
+            $this->moduleUpgrade->reveal(),
+            $this->construct->reveal(),
+            $this->applicationConfig->reveal(),
+            $this->cache->reveal(),
+            $this->console->reveal()
         );
         $this->request    = new Request();
-        $this->routeMatch = new RouteMatch(['controller' => 'Gear\Module'***REMOVED***);
+        $this->routeMatch = new RouteMatch(['controller' => Module::class***REMOVED***);
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
 
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
-
-        $this->controller->setConsoleAdapter($console->reveal());
     }
 
     /**
@@ -50,13 +61,10 @@ class ModuleControllerTest extends TestCase
      */
     public function testConstructAction()
     {
-        $construct = $this->prophesize('Gear\Module\ConstructService');
 
         $status = new ConstructStatusObject();
 
-        $construct->construct(false, null, null)->willReturn($status)->shouldBeCalled();
-
-        $this->controller->setConstructService($construct->reveal());
+        $this->construct->construct(false, null, null)->willReturn($status)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'construct');
         $this->controller->dispatch($this->request);
@@ -69,13 +77,10 @@ class ModuleControllerTest extends TestCase
      */
     public function testConstructParamsAction()
     {
-        $construct = $this->prophesize('Gear\Module\ConstructService');
 
         $status = new ConstructStatusObject();
 
-        $construct->construct('Gears', 'gear-1.0.0.yml')->willReturn($status);
-
-        $this->controller->setConstructService($construct->reveal());
+        $this->construct->construct('Gears', 'gear-1.0.0.yml')->willReturn($status);
 
         $this->routeMatch->setParam('action', 'construct');
 
@@ -97,11 +102,8 @@ class ModuleControllerTest extends TestCase
      */
     public function testDiagnosticAction($type)
     {
-        $diagnostic = $this->prophesize('Gear\Module\Diagnostic\DiagnosticService');
 
-        $diagnostic->diagnostic($type, null)->willReturn(true);
-
-        $this->controller->setDiagnosticService($diagnostic->reveal());
+        $this->diagnostic->diagnostic($type, null)->willReturn(true);
 
         $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 
@@ -118,11 +120,7 @@ class ModuleControllerTest extends TestCase
      */
     public function testUpgradeModule($type)
     {
-        $diagnostic = $this->prophesize('Gear\Module\Upgrade\ModuleUpgrade');
-
-        $diagnostic->upgrade($type, null, false)->willReturn(true);
-
-        $this->controller->setModuleUpgrade($diagnostic->reveal());
+        $this->moduleUpgrade->upgrade($type, null, false)->willReturn(true);
 
         $this->request->setParams(new Parameters(['type' => $type***REMOVED***));
 
@@ -139,11 +137,8 @@ class ModuleControllerTest extends TestCase
      */
     public function testCreateModuleAsProject($type)
     {
-        $diagnostic = $this->prophesize('Gear\Module\ModuleService');
 
-        $diagnostic->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br')->willReturn(true);
-
-        $this->controller->setModuleService($diagnostic->reveal());
+        $this->module->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br')->willReturn(true);
 
         $this->request->setParams(new Parameters([
             'type' => $type,
@@ -161,14 +156,9 @@ class ModuleControllerTest extends TestCase
 
     public function testLoadModule()
     {
-        $diagnostic = $this->prophesize('Gear\Module\Config\ApplicationConfig');
-        $cache = $this->prophesize('Gear\Cache\CacheService');
 
-        $diagnostic->addModuleToProject()->willReturn(true)->shouldBeCalled();
-        $cache->renewFileCache()->willReturn(true)->shouldBeCalled();
-
-        $this->controller->setApplicationConfig($diagnostic->reveal());
-        $this->controller->setCacheService($cache->reveal());
+        $this->applicationConfig->addModuleToProject()->willReturn(true)->shouldBeCalled();
+        $this->cache->renewFileCache()->willReturn(true)->shouldBeCalled();
 
         //$this->request->setParams(new Parameters(['module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
 
@@ -180,16 +170,8 @@ class ModuleControllerTest extends TestCase
 
     public function testUnloadModule()
     {
-        $diagnostic = $this->prophesize('Gear\Module\Config\ApplicationConfig');
-        $cache = $this->prophesize('Gear\Cache\CacheService');
-
-        $diagnostic->unload()->willReturn(true)->shouldBeCalled();
-        $cache->renewFileCache()->willReturn(true)->shouldBeCalled();
-
-        $this->controller->setApplicationConfig($diagnostic->reveal());
-        $this->controller->setCacheService($cache->reveal());
-
-        //$this->request->setParams(new Parameters(['module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
+        $this->applicationConfig->unload()->willReturn(true)->shouldBeCalled();
+        $this->cache->renewFileCache()->willReturn(true)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'unload');
         $this->controller->dispatch($this->request);
