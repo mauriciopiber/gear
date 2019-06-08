@@ -1,11 +1,20 @@
 <?php
 namespace Gear\Edge;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Util\Yaml\YamlService;
+use Gear\Util\Yaml\YamlServiceTrait;
 
-abstract class AbstractEdge extends AbstractJsonService
+abstract class AbstractEdge implements AbstractEdgeInterface
 {
-    static protected $moduleDir = 'data/edge-technologic/module';
+    protected static $moduleDir = 'data/edge-technologic/module';
+
+    use YamlServiceTrait;
+
+    public function __construct(
+        YamlService $yaml
+    ) {
+        $this->setYamlService($yaml);
+    }
 
     public function getModuleLocation($type)
     {

@@ -8,14 +8,6 @@ use Gear\Util\Yaml\YamlServiceTrait;
 
 class ComposerEdge extends AbstractEdge
 {
-    use YamlServiceTrait;
-
-    public function __construct(
-        YamlService $yaml
-    ) {
-        $this->setYamlService($yaml);
-    }
-
     public function getComposerModule($type = 'web')
     {
         $file = $this->getModuleLocation($type).'/composer.yml';
