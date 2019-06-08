@@ -11,6 +11,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
+
 /**
  *
  * @author Mauricio Piber mauriciopiber@gmail.com

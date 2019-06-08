@@ -5,6 +5,7 @@ return array_merge_recursive(
         [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Gear\Mvc\Config\AbstractConfigManagerFactory',
+            'Gear\Edge\AbstractEdgeFactory',
             'Gear\Mvc\AbstractMvcFactory',
             'Gear\Mvc\AbstractMvcTestFactory'
          ***REMOVED***,
