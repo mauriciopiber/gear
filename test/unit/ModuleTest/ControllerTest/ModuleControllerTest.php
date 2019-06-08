@@ -8,6 +8,15 @@ use Zend\Mvc\MvcEvent;
 use Gear\Module\Controller\ModuleController;
 use Zend\Stdlib\Parameters;
 use Gear\Module\ConstructStatusObject;
+use Gear\Module\ModuleService;
+use Gear\Cache\CacheService;
+use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Fixture\FixtureService;
+use Gear\Module\Diagnostic\DiagnosticService;
+use Gear\Module\ConstructService;
+use Gear\Module\Upgrade\ModuleUpgrade;
+use Gear\Module\Config\ApplicationConfig;
+use Gear\Autoload\ComposerAutoload;
 
 /**
  * @group Module
@@ -20,8 +29,11 @@ class ModuleControllerTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
+        $this->module = $this->prophesize(ModuleService::class);
 
-        $this->controller = new ModuleController();
+        $this->controller = new ModuleController(
+            $this->module->reveal()
+        );
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(['controller' => 'Gear\Module'***REMOVED***);
         $this->event      = new MvcEvent();
