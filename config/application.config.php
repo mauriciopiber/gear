@@ -8,6 +8,7 @@
       'Gear\Util',
       'Gear\Schema',
       'Gear\Config',
+      'Gear\Console',
       'Gear'
   ),
   'module_listener_options' =>

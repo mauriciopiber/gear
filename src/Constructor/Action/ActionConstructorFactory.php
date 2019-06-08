@@ -26,6 +26,7 @@ use Gear\Mvc\Controller\Api\{
     ApiControllerService,
     ApiControllerTestService,
 };
+use Gear\Schema\Action\ActionSchema;
 
 /**
  * PHP Version 5
@@ -48,7 +49,7 @@ class ActionConstructorFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new ActionConstructor(
-            $container->get('Gear\Schema\Action'),
+            $container->get(ActionSchema::class),
             //$container->get(ConfigService::class),
             $container->get(RouterManager::class),
             $container->get(ConsoleRouterManager::class),
@@ -70,7 +71,7 @@ class ActionConstructorFactory implements FactoryInterface
             $container->get(TableService::class),
             $container->get(ColumnService::class)
         );
-        
+
         return $factory;
     }
 }

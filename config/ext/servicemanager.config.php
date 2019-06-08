@@ -41,7 +41,6 @@
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
         'Gear\Creator\Template\TemplateService' => 'Gear\Creator\Template\TemplateServiceFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
-        'Gear\Project\DiagnosticService' => 'Gear\Project\Diagnostic\DiagnosticServiceFactory',
         'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
         'Gear\Edge\Npm\NpmEdge' => 'Gear\Edge\Npm\NpmEdgeFactory',
         'Gear\Edge\Composer\ComposerEdge' => 'Gear\Edge\Composer\ComposerEdgeFactory',

@@ -5,26 +5,21 @@ use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Gear\Schema\Db\DbSchemaTrait as DbSchemaTrait;
 use Gear\Schema\Src\SrcSchemaTrait as SrcSchemaTrait;
-use Gear\Schema\App\AppServiceTrait as AppSchemaTrait;
 use Gear\Schema\Controller\ControllerSchemaTrait as ControllerSchemaTrait;
 use Gear\Schema\Action\ActionSchemaTrait as ActionSchemaTrait;
 use Gear\Schema\Db\DbSchema as DbSchema;
 use Gear\Schema\Src\SrcSchema as SrcSchema;
-use Gear\Schema\App\AppService as AppSchema;
 use Gear\Schema\Controller\ControllerSchema as ControllerSchema;
 use Gear\Schema\Action\ActionSchema as ActionSchema;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Controller\Controller;
-use Gear\Schema\App\App;
 use Gear\Constructor\Db\DbConstructorTrait;
-use Gear\Constructor\App\AppServiceTrait;
 use Gear\Constructor\Src\SrcConstructorTrait;
 use Gear\Constructor\Controller\ControllerConstructorTrait;
 use Gear\Constructor\Action\ActionConstructorTrait;
 use Gear\Constructor\Db\DbConstructor;
-use Gear\Constructor\App\AppService;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
@@ -52,8 +47,6 @@ class ConstructService extends AbstractJsonService
 
     use DbConstructorTrait;
 
-    use AppServiceTrait;
-
     use SrcConstructorTrait;
 
     use ControllerConstructorTrait;
@@ -63,8 +56,6 @@ class ConstructService extends AbstractJsonService
     use DbSchemaTrait;
 
     use SrcSchemaTrait;
-
-    use AppSchemaTrait;
 
     use ControllerSchemaTrait;
 
@@ -94,11 +85,6 @@ class ConstructService extends AbstractJsonService
 
     const DB_CREATED = 'Db tabela "%s" criado.';
 
-    const APP_SKIP = 'App nome "%s" do tipo "%s" já existe.';
-
-    const APP_VALIDATE = '';
-
-    const APP_CREATED = 'App nome "%s" do tipo "%s" criado.';
 
     /** @var $configlocation Localizaçao para encontrar o arquivo de configuração */
     protected $configLocation;
@@ -106,12 +92,10 @@ class ConstructService extends AbstractJsonService
     public function __construct(
         DbSchema $dbSchema,
         SrcSchema $srcSchema,
-        AppSchema $appSchema,
         ControllerSchema $controllerSchema,
         ActionSchema $actionSchema,
         DbConstructor $dbService,
         SrcConstructor $srcService,
-        AppService $appService,
         ControllerConstructor $controllerService,
         ActionConstructor $actionService
     ) {
@@ -120,13 +104,11 @@ class ConstructService extends AbstractJsonService
         $this->dbConstructor = $dbService;
         $this->srcConstructor = $srcService;
         $this->controllerConstructor = $controllerService;
-        $this->appConstructor = $appService;
 
         $this->actionSchema = $actionSchema;
         $this->dbSchema = $dbSchema;
         $this->srcSchema = $srcSchema;
         $this->controllerSchema = $controllerSchema;
-        $this->appService = $appSchema;
     }
 
     public function isEmpty(array $data, $key)
@@ -149,16 +131,6 @@ class ConstructService extends AbstractJsonService
         }
     }
 
-    public function constructAllApp(array $data)
-    {
-        if ($this->isEmpty($data, 'app')) {
-            return;
-        }
-
-        foreach ($data['app'***REMOVED*** as $app) {
-            $this->constructApp($app);
-        }
-    }
 
     public function constructAllSrc(array $data)
     {
@@ -245,10 +217,6 @@ class ConstructService extends AbstractJsonService
                 }
             }
         }
-
-        $this->constructAllApp($data);
-
-
         //return $constructList;
 
         return $this->constructStatus;
@@ -325,26 +293,6 @@ class ConstructService extends AbstractJsonService
         }
 
 
-    }
-
-    public function constructApp(array $app)
-    {
-
-        $appItem = new App($app);
-
-        if ($this->getAppService()->appExist($this->moduleName, $appItem)) {
-            $this->constructStatus->addSkipped(sprintf(self::APP_SKIP, $appItem->getName(), $appItem->getType()));
-
-            return;
-        }
-
-        $created = $this->getAppConstructor()->create($app);
-
-        if ($created) {
-            $this->constructStatus->addCreated(sprintf(self::APP_CREATED, $appItem->getName(), $appItem->getType()));
-        }
-
-        return null;
     }
 
     public function constructDb(array $db)

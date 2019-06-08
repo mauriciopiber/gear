@@ -9,6 +9,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Docker\DockerService;
+use Gear\Schema\Schema\Loader\SchemaLoaderService;
+use Gear\Schema\Schema\SchemaService;
 
 class ModuleServiceFactory implements FactoryInterface
 {
@@ -26,8 +28,8 @@ class ModuleServiceFactory implements FactoryInterface
             $container->get('Gear\Module\Node\Package'),
             $container->get('Gear\Module\Node\Gulpfile'),
             $container->get('Gear\Mvc\LanguageService'),
-            $container->get('Gear\Schema\Schema'),
-            $container->get('Gear\Schema\Schema\Loader'),
+            $container->get(SchemaService::class),
+            $container->get(SchemaLoaderService::class),
             $container->get('Gear\Mvc\Config\ConfigService'),
             $container->get('Gear\Mvc\View\ViewService'),
             $container->get('Request'),

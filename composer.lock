@@ -576,16 +576,16 @@
         },
         {
             "name": "mauriciopiber/gear-schema",
-            "version": "1.0.0-alpha0",
+            "version": "1.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-schema.git",
-                "reference": "a603d5b69c48b3f34925757e460d5ff0720f9597"
+                "reference": "40b8696d9320a317732261b36eb0a35c0d332afa"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-a603d5b69c48b3f34925757e460d5ff0720f9597-zip-172404.zip",
-                "reference": "a603d5b69c48b3f34925757e460d5ff0720f9597"
+                "url": "http://satis/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-40b8696d9320a317732261b36eb0a35c0d332afa-zip-183863.zip",
+                "reference": "40b8696d9320a317732261b36eb0a35c0d332afa"
             },
             "require": {
                 "mauriciopiber/gear-console": "^1.0.0-alpha0",
@@ -635,10 +635,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha0",
+                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha1",
                 "issues": "https://github.com/mauriciopiber/gear-schema/issues"
             },
-            "time": "2019-06-07T06:33:42+00:00"
+            "time": "2019-06-08T02:56:24+00:00"
         },
         {
             "name": "mauriciopiber/gear-scripts",
