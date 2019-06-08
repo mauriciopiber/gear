@@ -4,7 +4,13 @@ namespace Gear\Module\Tests;
 use Gear\Mvc\AbstractMvc;
 //use Gear\Edge\AntEdge\AntEdgeTrait;
 use Gear\Upgrade\Ant\AntUpgradeTrait;
-
+use Gear\Upgrade\Ant\AntUpgrade;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 /**
  *
  * @author Mauricio Piber mauriciopiber@gmail.com
@@ -14,6 +20,21 @@ use Gear\Upgrade\Ant\AntUpgradeTrait;
 class ModuleTestsService extends AbstractMvc
 {
     use AntUpgradeTrait;
+    use ModuleStructureTrait;
+    use FileCreatorTrait;
+    use StringServiceTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $string,
+        AntUpgrade $antUpgrade
+    ) {
+        $this->setModule($module);
+        $this->setAntUpgrade($antUpgrade);
+        $this->setFileCreator($fileCreator);
+        $this->setStringService($string);
+    }
 
 
     public function createTestsModuleAsProject($type = 'web')

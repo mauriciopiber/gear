@@ -11,6 +11,7 @@ use Gear\Constructor\Action\ActionConstructor;
 use Gear\Docker\DockerService;
 use Gear\Schema\Schema\Loader\SchemaLoaderService;
 use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Tests\ModuleTestsService;
 
 class ModuleServiceFactory implements FactoryInterface
 {
@@ -22,7 +23,7 @@ class ModuleServiceFactory implements FactoryInterface
             $container->get(ModuleStructure::class),
             $container->get('Gear\Module\Docs\Docs'),
             $container->get('Gear\Module\Composer'),
-            $container->get('Gear\Module\Tests'),
+            $container->get(ModuleTestsService::class),
             $container->get('Gear\Module\Node\Karma'),
             $container->get('Gear\Module\Node\Protractor'),
             $container->get('Gear\Module\Node\Package'),
