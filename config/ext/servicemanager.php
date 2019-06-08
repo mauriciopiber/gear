@@ -7,7 +7,7 @@ return array_merge_recursive(
         ***REMOVED***,
         'factories' => [
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
-            //'Gear\Module'                      => 'Gear\Module\ModuleServiceFactory',
+            'Gear\Module'                      => 'Gear\Module\ModuleServiceFactory',
             'Gear\Module\ModuleService'        => 'Gear\Module\ModuleServiceFactory',
             \Gear\Creator\FileCreator\FileCreator::class => \Gear\Creator\FileCreator\FileCreatorFactory::class,
             'Gear\Table\Metadata'              => 'Gear\Table\Metadata\MetadataFactory',

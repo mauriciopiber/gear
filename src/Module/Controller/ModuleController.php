@@ -13,6 +13,16 @@ use Gear\Module\Upgrade\ModuleUpgradeTrait;
 use Gear\Module\Config\ApplicationConfigTrait;
 use Gear\Autoload\ComposerAutoloadTrait;
 
+use Gear\Cache\CacheService;
+use Gear\Module\ModuleService;
+use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Fixture\FixtureService;
+use Gear\Module\Diagnostic\DiagnosticService;
+use Gear\Module\ConstructService;
+use Gear\Module\Upgrade\ModuleUpgrade;
+use Gear\Module\Config\ApplicationConfig;
+use Gear\Autoload\ComposerAutoload;
+
 /**
  * Funções para manipulação de Módulos
  */
@@ -29,6 +39,12 @@ class ModuleController extends AbstractConsoleController
     use DiagnosticServiceTrait;
     use ConstructServiceTrait;
     use ModuleUpgradeTrait;
+
+    public function __construct(
+        ModuleService $moduleService
+    ) {
+        $this->moduleService = $moduleService;
+    }
 
     public function setConsoleAdapter($console)
     {
