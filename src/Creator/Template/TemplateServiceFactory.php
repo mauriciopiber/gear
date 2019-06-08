@@ -4,6 +4,7 @@ namespace Gear\Creator\Template;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Creator\Template\TemplateService;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * PHP Version 5
@@ -26,7 +27,7 @@ class TemplateServiceFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new TemplateService(
-            $container->get('ViewHelperManager')->getRenderer()
+            $container->get(PhpRenderer::class)
         );
 
         return $factory;

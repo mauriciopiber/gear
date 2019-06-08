@@ -13,6 +13,25 @@ use Gear\Util\String\StringServiceTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 
+use \Gear\Mvc\Config\AssetManagerTrait;
+use \Gear\Mvc\Config\RouterManagerTrait;
+use \Gear\Mvc\Config\ConsoleRouterManagerTrait;
+use \Gear\Mvc\Config\NavigationManagerTrait;
+use \Gear\Mvc\Config\UploadImageManagerTrait;
+use \Gear\Mvc\Config\ServiceManagerTrait;
+use \Gear\Mvc\Config\ControllerManagerTrait;
+use \Gear\Mvc\Config\ControllerPluginManagerTrait;
+use \Gear\Mvc\Config\ViewHelperManagerTrait;
+use \Gear\Mvc\Config\AssetManager;
+use \Gear\Mvc\Config\RouterManager;
+use \Gear\Mvc\Config\ConsoleRouterManager;
+use \Gear\Mvc\Config\NavigationManager;
+use \Gear\Mvc\Config\UploadImageManager;
+use \Gear\Mvc\Config\ServiceManager;
+use \Gear\Mvc\Config\ControllerManager;
+use \Gear\Mvc\Config\ControllerPluginManager;
+use \Gear\Mvc\Config\ViewHelperManager;
+
 class ConfigService implements ModuleConstructorInterface
 {
     use ModuleStructureTrait;
@@ -20,24 +39,42 @@ class ConfigService implements ModuleConstructorInterface
     use FileCreatorTrait;
 
     use SchemaServiceTrait;
-    use \Gear\Mvc\Config\AssetManagerTrait;
-    use \Gear\Mvc\Config\RouterManagerTrait;
-    use \Gear\Mvc\Config\ConsoleRouterManagerTrait;
-    use \Gear\Mvc\Config\NavigationManagerTrait;
-    use \Gear\Mvc\Config\UploadImageManagerTrait;
-    use \Gear\Mvc\Config\ServiceManagerTrait;
-    use \Gear\Mvc\Config\ControllerManagerTrait;
-    use \Gear\Mvc\Config\ControllerPluginManagerTrait;
-    use \Gear\Mvc\Config\ViewHelperManagerTrait;
+    use AssetManagerTrait;
+    use RouterManagerTrait;
+    use ConsoleRouterManagerTrait;
+    use NavigationManagerTrait;
+    use UploadImageManagerTrait;
+    use ServiceManagerTrait;
+    use ControllerManagerTrait;
+    use ControllerPluginManagerTrait;
+    use ViewHelperManagerTrait;
 
     public function __construct(
         ModuleStructure $module,
         StringService $string,
-        FileCreator $file
+        FileCreator $file,
+        AssetManager $asset,
+        RouterManager $route,
+        ConsoleRouterManager $consoleRoute,
+        NavigationManager $navigationManager,
+        UploadImageManager $uploadImage,
+        ServiceManager $serviceManager,
+        ControllerManager $controllerManager,
+        ControllerPluginManager $controllerPluginManager,
+        ViewHelperManager $viewHelperManager
     ) {
         $this->setFileCreator($file);
         $this->setStringService($string);
         $this->setModule($module);
+        $this->setAssetManager($asset);
+        $this->setRouterManager($route);
+        $this->setConsoleRouterManager($consoleRoute);
+        $this->setNavigationManager($navigationManager);
+        $this->setUploadImageManager($uploadImage);
+        $this->setServiceManager($serviceManager);
+        $this->setControllerManager($controllerManager);
+        $this->setControllerPluginManager($controllerPluginManager);
+        $this->setViewHelperManager($viewHelperManager);
     }
 
     protected $json;
@@ -140,7 +177,6 @@ class ConfigService implements ModuleConstructorInterface
         ***REMOVED***;
 
         $this->getModuleConfig($type, $controller, null, $staging);
-
 
         switch ($type) {
             case 'web':

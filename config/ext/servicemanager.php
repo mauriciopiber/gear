@@ -15,6 +15,7 @@ return array_merge_recursive(
             \Gear\Creator\FileCreator\FileCreator::class => \Gear\Creator\FileCreator\FileCreatorFactory::class,
             'Gear\Table\Metadata'              => 'Gear\Table\Metadata\MetadataFactory',
             'Gear\Table\Table'                 => 'Gear\Table\TableService\TableFactory',
+            'Gear\Creator\Template\TemplateService'  => 'Gear\Creator\Template\TemplateServiceFactory',
         ***REMOVED***,
         'invokables' => [
             'Gear\Table\TableService'          => 'Gear\Table\TableService\TableService',
@@ -27,7 +28,6 @@ return array_merge_recursive(
             'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
             'SchemaListener'                   => 'Gear\Event\SchemaListener',
             'LogListener'                      => 'Gear\Event\LogListener',
-            'Gear\Creator\Template'            => 'Gear\Creator\TemplateService',
             'consoleService'                   => 'Gear\Service\ConsoleService',
         ***REMOVED***,
         'aliases' => [

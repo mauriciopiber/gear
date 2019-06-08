@@ -39,7 +39,6 @@
     'factories' => [
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
-        'Gear\Creator\Template\TemplateService' => 'Gear\Creator\Template\TemplateServiceFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
         'Gear\Util\YamlService' => 'Gear\Util\YamlServiceFactory',
         'Gear\Edge\Npm\NpmEdge' => 'Gear\Edge\Npm\NpmEdgeFactory',

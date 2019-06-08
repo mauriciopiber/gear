@@ -7,8 +7,9 @@ class TemplateService
 {
     protected $renderer;
 
-    public function __construct($renderer = null)
+    public function __construct($renderer)
     {
+        //var_dump($renderer);die();
         $this->renderer = $renderer;
     }
 
