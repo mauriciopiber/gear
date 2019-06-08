@@ -27,7 +27,7 @@ use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Entity\EntityService;
-use Gear\Mvc\Search\SearchService;
+//use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\Filter\FilterService;
 use Gear\Mvc\Form\FormService;
@@ -64,8 +64,6 @@ class DbConstructor extends AbstractConstructor
 
     use EntityServiceTrait;
 
-    use SearchServiceTrait;
-
     use FixtureServiceTrait;
 
     use FilterServiceTrait;
@@ -96,7 +94,7 @@ class DbConstructor extends AbstractConstructor
         Feature $feature,
         Step $step,
         EntityService $entityService,
-        SearchService $searchService,
+        //SearchService $searchService,
         FixtureService $fixtureService,
         FilterService $filterService,
         FormService $formService,
@@ -115,7 +113,7 @@ class DbConstructor extends AbstractConstructor
         $this->feature = $feature;
         $this->step = $step;
         $this->entityService = $entityService;
-        $this->searchService = $searchService;
+        //$this->searchService = $searchService;
         $this->fixtureService = $fixtureService;
         $this->filterService = $filterService;
         $this->formService = $formService;

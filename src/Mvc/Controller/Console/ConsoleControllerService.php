@@ -3,8 +3,9 @@ namespace Gear\Mvc\Controller\Console;
 
 use Gear\Schema\Controller\Controller as ControllerValueObject;
 use Gear\Mvc\Controller\AbstractControllerService;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ConsoleControllerService extends AbstractControllerService
+class ConsoleControllerService extends AbstractControllerService implements AbstractMvcInterface
 {
 
     public function module()

@@ -21,6 +21,25 @@ class Module implements
 
     const LOCATION = __DIR__;
 
+    public function onBootstrap(MvcEvent $e)
+{
+    $application = $e->getApplication();
+    $em = $application->getEventManager();
+    //handle the dispatch error (exception)
+    $em->attach(\Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'handleError'));
+    //handle the view render error (exception)
+    $em->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER_ERROR, array($this, 'handleError'));
+}
+
+public function handleError(MvcEvent $e)
+{
+    //get the exception
+    $exception = $e->getParam('exception');
+    //var_dump($e);die();
+    //echo $exception->xdebug_message;die();
+    //...handle the exception... maybe log it and redirect to another page,
+    //or send an email that an exception occurred...
+}
     /**
      * Set Console Banner
      *

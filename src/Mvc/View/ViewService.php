@@ -3,19 +3,18 @@ namespace Gear\Mvc\View;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Column\Mvc\SearchFormInterface;
-use Gear\Mvc\View\AngularServiceTrait;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Db\Db;
 use Gear\Constructor\Helper;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Mvc\View\ViewColumnInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ViewService extends AbstractMvc
+class ViewService extends AbstractMvc implements AbstractMvcInterface
 {
     use SchemaServiceTrait;
     use UploadImageTrait;
-    use AngularServiceTrait;
 
     protected $locationDir;
 

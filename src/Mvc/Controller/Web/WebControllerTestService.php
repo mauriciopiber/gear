@@ -14,11 +14,13 @@ use Gear\Column\Varchar\UniqueId;
 use Gear\Mvc\Controller\ColumnInterface\ControllerSetUpInterface;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
+use Gear\Mvc\AbstractMvcTestInterface;
 
 class WebControllerTestService extends AbstractControllerTestService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
-    ControllerConstructorInterface
+    ControllerConstructorInterface,
+    AbstractMvcTestInterface
 {
     use UploadImageTrait;
 

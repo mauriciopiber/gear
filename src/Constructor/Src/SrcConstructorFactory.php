@@ -25,7 +25,7 @@ class SrcConstructorFactory implements FactoryInterface
             $container->get('Gear\Mvc\Form\FormService'),
             $container->get('Gear\Mvc\Filter\FilterService'),
             $container->get('Gear\Mvc\Entity\EntityService'),
-            $container->get('Gear\Mvc\Search\SearchService'),
+            //$container->get('Gear\Mvc\Search\SearchService'),
             $container->get('Gear\Mvc\ValueObject\ValueObjectService'),
             $container->get('Gear\Mvc\ViewHelper\ViewHelperService'),
             $container->get('Gear\Mvc\ControllerPlugin\ControllerPluginService'),

@@ -3,8 +3,11 @@ namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Src\Src;
-
-class ControllerPluginManager extends AbstractConfigManager implements ModuleManagerInterface, ServiceManagerInterface
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
+class ControllerPluginManager extends AbstractConfigManager  implements
+   ModuleManagerInterface,
+   ServiceManagerInterface,
+  AbstractConfigManagerInterface
 {
     public function module(array $controllers)
     {

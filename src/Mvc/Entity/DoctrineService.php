@@ -7,11 +7,12 @@
 namespace Gear\Mvc\Entity;
 
 use Gear\Script\ScriptService;
+use Gear\Mvc\AbstractMvcInterface;
 
 /**
  * Classe Responsável pelos comandos relacionados ao DoctrineModule.
  */
-class DoctrineService extends ScriptService
+class DoctrineService extends ScriptService implements AbstractMvcInterface
 {
     /**
      * Retorna a localização do doctrine-module

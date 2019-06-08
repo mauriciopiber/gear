@@ -61,8 +61,6 @@ class ActionConstructorFactory implements FactoryInterface
             $container->get(ConsoleControllerTestService::class),
             $container->get(ApiControllerService::class),
             $container->get(ApiControllerTestService::class),
-            $container->get(AppControllerService::class),
-            $container->get(AppControllerSpecService::class),
             $container->get(Feature::class),
             $container->get(Page::class),
             $container->get(Step::class),

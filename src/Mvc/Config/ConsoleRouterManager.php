@@ -3,8 +3,10 @@ namespace Gear\Mvc\Config;
 
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Action\Action;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class ConsoleRouterManager extends AbstractConfigManager implements ModuleManagerInterface
+class ConsoleRouterManager extends AbstractConfigManager implements ModuleManagerInterface,
+  AbstractConfigManagerInterface
 {
     public function module(array $controllers)
     {

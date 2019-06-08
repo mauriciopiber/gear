@@ -4,8 +4,13 @@ use Gear\Mvc;
 return [
     'invokables' => [
         /* config */
-        Mvc\Config\ConfigService::class                            => Mvc\Config\ConfigService::class,
         /* config manager */
+    ***REMOVED***,
+    'factories' => [
+        Mvc\Config\ConfigService::class                           => Mvc\Config\ConfigServiceFactory::class,
+        Mvc\ValueObject\ValueObjectTestService::class             => Mvc\ValueObject\ValueObjectTestServiceFactory::class,
+        Mvc\TraitTestService::class                               => Mvc\TraitTestServiceFactory::class,
+        Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
         Mvc\Config\ConsoleRouterManager::class                     => Mvc\Config\ConsoleRouterManager::class,
         Mvc\Config\RouterManager::class                            => Mvc\Config\RouterManager::class,
         Mvc\Config\ServiceManager::class                           => Mvc\Config\ServiceManager::class,
@@ -32,7 +37,7 @@ return [
         Mvc\ViewHelper\ViewHelperServiceTest::class               => Mvc\ViewHelper\ViewHelperTestService::class,
         Mvc\View\App\AppControllerService::class                  => Mvc\View\App\AppControllerService::class,
         Mvc\View\App\AppControllerSpecService::class              => Mvc\View\App\AppControllerSpecService::class,
-        Mvc\LanguageService::class                                => Mvc\LanguageService::class,
+        //Mvc\LanguageService::class                                => Mvc\LanguageService::class,
         Mvc\Entity\EntityTestService::class                       => Mvc\Entity\EntityTestService::class,
         Mvc\Entity\DoctrineService::class                         => Mvc\Entity\DoctrineService::class,
         Mvc\Form\FormService::class                               => Mvc\Form\FormService::class,
@@ -54,9 +59,5 @@ return [
         Mvc\View\ViewService::class                               => Mvc\View\ViewService::class,
         Mvc\Search\SearchService::class                           => Mvc\Search\SearchService::class,
     ***REMOVED***,
-    'factories' => [
-        Mvc\ValueObject\ValueObjectTestService::class             => Mvc\ValueObject\ValueObjectTestServiceFactory::class,
-        Mvc\TraitTestService::class                               => Mvc\TraitTestServiceFactory::class,
-        Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
-    ***REMOVED***
+
 ***REMOVED***;

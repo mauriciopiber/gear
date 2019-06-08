@@ -11,7 +11,7 @@ use Gear\Schema\Action\ActionSchema;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Entity\EntityService;
-use Gear\Mvc\Search\SearchService;
+//use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\Filter\FilterService;
 use Gear\Mvc\Form\FormService;
@@ -53,7 +53,7 @@ class DbConstructorFactory implements FactoryInterface
             $container->get(Feature::class),
             $container->get(Step::class),
             $container->get(EntityService::class),
-            $container->get(SearchService::class),
+            //$container->get(SearchService::class),
             $container->get(FixtureService::class),
             $container->get(FilterService::class),
             $container->get(FormService::class),

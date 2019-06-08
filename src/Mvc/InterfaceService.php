@@ -9,10 +9,12 @@ use Gear\Util\String\StringServiceAwareInterface;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Util\Dir\DirServiceTrait;
+use Gear\Mvc\AbstractMvcInterface;
 
 class InterfaceService implements
  ModuleStructureInterface,
- StringServiceAwareInterface
+ StringServiceAwareInterface,
+ AbstractMvcInterface
 {
     use FileCreatorTrait;
     use StringServiceTrait;

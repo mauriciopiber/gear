@@ -4,8 +4,10 @@ namespace Gear\Mvc\Config;
 use Gear\Mvc\Config\AbstractConfigManager;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Src\Src;
+use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class ServiceManager extends AbstractConfigManager
+class ServiceManager extends AbstractConfigManager implements
+  AbstractConfigManagerInterface
 {
     use SchemaServiceTrait;
 

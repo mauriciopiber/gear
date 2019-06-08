@@ -17,8 +17,9 @@ use Gear\Schema\Src\Src;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class EntityTestService extends AbstractMvcTest
+class EntityTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     public function createEntityTest($data)
     {

@@ -7,8 +7,9 @@
 namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\AbstractMvcInterface;
 
-class LanguageService extends AbstractMvc
+class LanguageService extends AbstractMvc implements AbstractMvcInterface
 {
     public static function getAvaiable()
     {

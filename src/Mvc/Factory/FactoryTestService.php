@@ -6,8 +6,9 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Controller\Controller;
 use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestTrait;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class FactoryTestService extends AbstractMvcTest
+class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     use FactoryCodeTestTrait;
 

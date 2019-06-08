@@ -13,8 +13,9 @@ use Gear\Mvc\Service\ServiceCodeInterface;
 use Gear\Creator\Code;
 use Gear\Schema\Src\Type\RepositoryInterface;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ServiceService extends AbstractMvc
+class ServiceService extends AbstractMvc implements AbstractMvcInterface
 {
     use SchemaServiceTrait;
 

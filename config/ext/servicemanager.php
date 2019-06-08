@@ -4,7 +4,10 @@ return array_merge_recursive(
         'abstract_factories' =>
         [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-        ***REMOVED***,
+            'Gear\Mvc\Config\AbstractConfigManagerFactory',
+            'Gear\Mvc\AbstractMvcFactory',
+            'Gear\Mvc\AbstractMvcTestFactory'
+         ***REMOVED***,
         'factories' => [
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
             'Gear\Module'                      => 'Gear\Module\ModuleServiceFactory',
@@ -20,7 +23,6 @@ return array_merge_recursive(
             'Gear\Creator\Controller'          => 'Gear\Creator\ControllerDependency',
             'Gear\Creator\App'                 => 'Gear\Creator\AppDependency',
             'Gear\Creator\Src'                 => 'Gear\Creator\SrcDependency',
-            'Gear\Config\Config'               => 'Gear\Config\Service\ConfigService',
             'cacheService'                     => 'Gear\Cache\CacheService',
             'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
             'SchemaListener'                   => 'Gear\Event\SchemaListener',
@@ -29,7 +31,6 @@ return array_merge_recursive(
             'consoleService'                   => 'Gear\Service\ConsoleService',
         ***REMOVED***,
         'aliases' => [
-        	'Gear\Service\Mvc\ConfigService'   => 'configService',
             'dirService'                       => 'GearBase\Util\Dir',
             'fileService'                      => 'GearBase\Util\File',
             'stringService'                    => 'GearBase\Util\String'

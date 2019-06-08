@@ -19,8 +19,9 @@ use Gear\Schema\Controller\Controller;
 use Gear\Mvc\Factory\Exception\WrongType;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
+use Gear\Mvc\AbstractMvcInterface;
 
-class FactoryService extends AbstractMvc
+class FactoryService extends AbstractMvc implements AbstractMvcInterface
 {
     static protected $defaultFolder = null;
 

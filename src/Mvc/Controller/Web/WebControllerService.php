@@ -12,11 +12,13 @@ use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Db\Db;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
+use Gear\Mvc\AbstractMvcInterface;
 
 class WebControllerService extends AbstractControllerService implements
     ModuleConstructorInterface,
     DbConstructorInterface,
-    ControllerConstructorInterface
+    ControllerConstructorInterface,
+    AbstractMvcInterface
 {
     use UploadImageTrait;
 

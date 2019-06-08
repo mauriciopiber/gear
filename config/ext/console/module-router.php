@@ -4,7 +4,7 @@ $options = implode(' ', $globalOptions);
 return [
     'router' => [
         'routes' => [
-        	/** Module */
+            /** Module */
             /** 2.1 */
             'gear-module-as-project-create' => [
                 'options' => [
@@ -76,7 +76,7 @@ return [
                     )
                 )
             ),
-			'gear-module-upgrade' => array(
+            'gear-module-upgrade' => array(
                 'options' => array(
                     'route' => 'gear module upgrade <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--force***REMOVED*** [--just=***REMOVED***',
                     'defaults' => array(

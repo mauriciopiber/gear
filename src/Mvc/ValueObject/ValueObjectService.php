@@ -15,8 +15,9 @@ use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class ValueObjectService extends AbstractMvc
+class ValueObjectService extends AbstractMvc implements AbstractMvcInterface
 {
     use CodeTrait;
     use ValueObjectTestServiceTrait;
