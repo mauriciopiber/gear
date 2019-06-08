@@ -8,18 +8,15 @@ use Gear\Schema\Db\DbSchema;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Schema\Controller\ControllerSchema;
 use Gear\Schema\Action\ActionSchema;
-use Gear\Schema\App\AppService as SchemaAppService;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
-use Gear\Constructor\App\AppService;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
-use Gear\Schema\App\App;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Schema\Controller\Controller as ControllerObject;
 use Gear\Schema\Action\Action as ActionObject;
 
@@ -50,24 +47,22 @@ class ConstructServiceTest extends TestCase
         $this->srcSchema = $this->prophesize(SrcSchema::class);
         $this->controllerSchema = $this->prophesize(ControllerSchema::class);
         $this->actionSchema = $this->prophesize(ActionSchema::class);
-        $this->appSchema = $this->prophesize(SchemaAppService::class);
+
 
 
         $this->dbConstructor = $this->prophesize(DbConstructor::class);
         $this->srcConstructor = $this->prophesize(SrcConstructor::class);
         $this->controllerConstructor = $this->prophesize(ControllerConstructor::class);
         $this->actionConstructor = $this->prophesize(ActionConstructor::class);
-        $this->appService = $this->prophesize(AppService::class);
+
 
         $this->construct = new ConstructService(
             $this->dbSchema->reveal(),
             $this->srcSchema->reveal(),
-            $this->appSchema->reveal(),
             $this->controllerSchema->reveal(),
             $this->actionSchema->reveal(),
             $this->dbConstructor->reveal(),
             $this->srcConstructor->reveal(),
-            $this->appService->reveal(),
             $this->controllerConstructor->reveal(),
             $this->actionConstructor->reveal()
         );
@@ -78,7 +73,6 @@ class ConstructServiceTest extends TestCase
 
     public function testGetSchemaServices()
     {
-        $this->assertEquals($this->construct->getAppService(), $this->appSchema->reveal());
         $this->assertEquals($this->construct->getDbSchema(), $this->dbSchema->reveal());
         $this->assertEquals($this->construct->getSrcSchema(), $this->srcSchema->reveal());
         $this->assertEquals($this->construct->getActionSchema(), $this->actionSchema->reveal());
@@ -86,7 +80,6 @@ class ConstructServiceTest extends TestCase
 
         $this->assertEquals($this->construct->getDbConstructor(), $this->dbConstructor->reveal());
         $this->assertEquals($this->construct->getSrcConstructor(), $this->srcConstructor->reveal());
-        $this->assertEquals($this->construct->getAppConstructor(), $this->appService->reveal());
         $this->assertEquals($this->construct->getControllerConstructor(), $this->controllerConstructor->reveal());
         $this->assertEquals($this->construct->getActionConstructor(), $this->actionConstructor->reveal());
     }
@@ -352,12 +345,6 @@ EOS
     {
         $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
 
-        //$srcschema = $this->prophesize('Gear\Schema\Src\SrcSchema');
-
-        //$src = new \Gear\Schema\Src\Src($data);
-
-        //$srcschema->srcExist('Gearing', $src)->willReturn(false)->shouldBeCalled();
-
         $this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
         $this->consoleValidation->getErrors()->willReturn([
             'Src Gearing está com dados errados'
@@ -392,74 +379,6 @@ EOS
             'Src Gearing está com dados errados'
         );
     }
-
-    /**
-     * @group z2
-     */
-    public function testAppDuplicade()
-    {
-        $appschema = $this->prophesize('Gear\Schema\App\AppService');
-
-        $app = new \Gear\Schema\App\App(['name' => 'Gearing', 'type' => 'Service'***REMOVED***);
-
-        $appschema->appExist('Gearing', $app)->willReturn(true);
-
-        $this->construct->setAppService($appschema->reveal());
-
-        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
-
-module: Gearing
-app:
-  0:
-    name: Gearing
-    type: Service
-
-EOS
-            ));
-
-        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
-
-
-        $this->assertEquals($constructed->getSkipped()[0***REMOVED***, 'App nome "Gearing" do tipo "Service" já existe.');
-    }
-
-
-    /**
-     * @group z2
-     */
-    public function testAppCreate()
-    {
-        $data = ['name' => 'Gearing', 'type' => 'Service'***REMOVED***;
-
-        $app = new \Gear\Schema\App\App($data);
-
-        $appschema = $this->prophesize('Gear\Schema\App\AppService');
-        $appschema->appExist('Gearing', $app)->willReturn(false);
-
-        $appservice = $this->prophesize('Gear\Constructor\App\AppService');
-        $appservice->create($data)->willReturn(true);
-
-        $this->construct->setAppConstructor($appservice->reveal());
-        $this->construct->setAppService($appschema->reveal());
-
-        $this->construct->setConfigLocation($this->mockGearfileIO(<<<EOS
-
-module: Gearing
-app:
-  0:
-    name: Gearing
-    type: Service
-
-EOS
-            ));
-
-
-        $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
-
-
-        $this->assertEquals($constructed->getCreated()[0***REMOVED***, 'App nome "Gearing" do tipo "Service" criado.');
-    }
-
 
     /**
      * @group z3

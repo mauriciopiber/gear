@@ -2,7 +2,7 @@
 return [
     'factories' => [
         'Gear\Module\Structure\ModuleStructure' => 'Gear\Module\Structure\ModuleStructureFactory',
-        'Gear\Module\Diagnostic'      => 'Gear\Module\Diagnostic\DiagnosticServiceFactory',
+        'Gear\Module\Diagnostic\DiagnosticService'      => 'Gear\Module\Diagnostic\DiagnosticServiceFactory',
         'Gear\Module\Construct'       => 'Gear\Module\ConstructServiceFactory',
         'Gear\Module\Composer'        => 'Gear\Module\ComposerServiceFactory',
     ***REMOVED***,

@@ -18,6 +18,7 @@ use Gear\Mvc\View\ViewService;
 use Gear\Mvc\LanguageService;
 use Gear\Mvc\Config\ControllerManager;
 use Gear\Column\ColumnService;
+use Gear\Schema\Controller\ControllerSchema;
 
 /**
  * PHP Version 5
@@ -41,7 +42,7 @@ class ControllerConstructorFactory implements FactoryInterface
     {
         $factory = new ControllerConstructor(
             $container->get('Gear\Util\String\StringService'),
-            $container->get('Gear\Schema\Controller'),
+            $container->get(ControllerSchema::class),
             $container->get(TableService::class),
             $container->get(ColumnService::class),
             $container->get(ModuleStructure::class),
@@ -56,7 +57,7 @@ class ControllerConstructorFactory implements FactoryInterface
             $container->get(LanguageService::class),
             $container->get(ControllerManager::class)
         );
-        
+
         return $factory;
     }
 }
