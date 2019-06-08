@@ -3,7 +3,7 @@ namespace GearTest\ModuleTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
-use Zend\Mvc\Router\Console\RouteMatch;
+use Zend\Mvc\Console\Router\RouteMatch;
 use Zend\Mvc\MvcEvent;
 use Gear\Module\Controller\ModuleController;
 use Zend\Stdlib\Parameters;
@@ -43,14 +43,6 @@ class ModuleControllerTest extends TestCase
         $console = $this->prophesize('Zend\Console\Adapter\Posix');
 
         $this->controller->setConsoleAdapter($console->reveal());
-    }
-
-    public function testNotFound()
-    {
-        $this->routeMatch->setParam('action', 'not-found');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(404, $response->getStatusCode());
     }
 
     /**
