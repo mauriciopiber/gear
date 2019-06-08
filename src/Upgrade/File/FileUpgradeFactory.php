@@ -6,6 +6,7 @@ use Interop\Container\ContainerInterface;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Edge\File\FileEdge;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Tests\ModuleTestsService;
 
 class FileUpgradeFactory implements FactoryInterface
 {
@@ -17,10 +18,10 @@ class FileUpgradeFactory implements FactoryInterface
             $container->get(FileEdge::class),
             $container->get('Gear\Util\Prompt\ConsolePrompt'),
             $container->get('Gear\Module'),
-            $container->get('Gear\Module\Tests'),
+            $container->get(ModuleTestsService::class),
             $container->get('Gear\Module\Docs\Docs')
         );
-        
+
         return $factory;
     }
 }
