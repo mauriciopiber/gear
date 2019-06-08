@@ -3,7 +3,7 @@ namespace GearTest\ConstructorTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
-use Zend\Mvc\Router\Console\RouteMatch;
+use Zend\Mvc\Console\Router\RouteMatch;
 use Zend\Mvc\MvcEvent;
 use Gear\Constructor\Controller\ControllerController;
 use Zend\Stdlib\Parameters;
