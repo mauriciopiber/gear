@@ -2,7 +2,6 @@
 namespace Gear\Mvc;
 
 use Gear\Service\AbstractJsonService;
-use Gear\Creator\CodeTrait;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
@@ -15,9 +14,34 @@ use Gear\Schema\Db\Db as DbObject;
 use Gear\Schema\App\App as AppObject;
 use Gear\Schema\Src\Src as SrcObject;
 use Gear\Exception\InvalidArgumentException;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Creator\Code;
+use Gear\Creator\CodeTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 
-abstract class AbstractMvc extends AbstractJsonService
+abstract class AbstractMvc
 {
+
+    public function __construct(
+        ModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $string,
+        Code $code
+    ) {
+        $this->setCode($code);
+        $this->setModule($module);
+        $this->setFileCreator($fileCreator);
+        $this->setStringService($string);
+    }
+    use StringServiceTrait;
+
+    use FileCreatorTrait;
+
+    use ModuleStructureTrait;
     use GearVersionTrait;
     use InjectorTrait;
     use InjectTrait;

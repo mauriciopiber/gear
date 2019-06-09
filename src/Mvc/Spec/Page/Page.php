@@ -2,8 +2,9 @@
 namespace Gear\Mvc\Spec\Page;
 
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class Page extends AbstractMvcTest
+class Page extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     public function createIndexPage()
     {

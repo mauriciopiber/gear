@@ -4,7 +4,10 @@ namespace Gear\Mvc;
 use Zend\ServiceManager\Factory\AbstractFactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Mvc\AbstractMvcTestInterface;
-//use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Util\String\StringService;
+use Gear\Creator\CodeTest;
 
 class AbstractMvcTestFactory implements AbstractFactoryInterface
 {
@@ -23,6 +26,10 @@ class AbstractMvcTestFactory implements AbstractFactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, $options = [***REMOVED***)
     {
         return new $requestedName(
+            $container->get(ModuleStructure::class),
+            $container->get(FileCreator::class),
+            $container->get(StringService::class),
+            $container->get(CodeTest::class)
             //$container->get(ModuleStructure::class)
         );
     }

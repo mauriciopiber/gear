@@ -3,8 +3,9 @@ namespace Gear\Mvc\Spec\Step;
 
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Schema\Db\Db;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class Step extends AbstractMvcTest
+class Step extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     public function createIndexStep()
     {

@@ -1,8 +1,6 @@
 <?php
 namespace Gear\Mvc;
 
-use Gear\Service\AbstractJsonService;
-use Gear\Creator\CodeTestTrait;
 use Gear\Creator\FileCreator\AppTest\BeforeEachTrait;
 use Gear\Creator\FileCreator\AppTest\VarsTrait;
 //use Gear\Schema\Src\Src;
@@ -15,8 +13,16 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Schema\Src\Src as SrcObject;
 use Gear\Schema\Db\Db as DbObject;
 use Gear\Exception\InvalidArgumentException;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Creator\CodeTest;
+use Gear\Creator\CodeTestTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 
-abstract class AbstractMvcTest extends AbstractJsonService
+abstract class AbstractMvcTest
 {
     use ServiceManagerTrait;
     use SchemaServiceTrait;
@@ -27,6 +33,21 @@ abstract class AbstractMvcTest extends AbstractJsonService
     use CodeTestTrait;
     use BeforeEachTrait;
     use VarsTrait;
+    use StringServiceTrait;
+    use FileCreatorTrait;
+    use ModuleStructureTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $string,
+        CodeTest $codeTest
+    ) {
+        $this->setCodeTest($codeTest);
+        $this->setModule($module);
+        $this->setFileCreator($fileCreator);
+        $this->setStringService($string);
+    }
 
     public function forceDbTest($data, $type)
     {

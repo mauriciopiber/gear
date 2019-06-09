@@ -17,11 +17,11 @@ return array_merge_recursive(
             'Gear\Table\Metadata'              => 'Gear\Table\Metadata\MetadataFactory',
             'Gear\Table\Table'                 => 'Gear\Table\TableService\TableFactory',
             'Gear\Creator\Template\TemplateService'  => 'Gear\Creator\Template\TemplateServiceFactory',
+            'Gear\Creator\Code'                => 'Gear\Creator\CodeFactory',
+            'Gear\Creator\CodeTest'            => 'Gear\Creator\CodeTestFactory',
         ***REMOVED***,
         'invokables' => [
             'Gear\Table\TableService'          => 'Gear\Table\TableService\TableService',
-            'Gear\Creator\Code'                => 'Gear\Creator\Code',
-            'Gear\Creator\CodeTest'            => 'Gear\Creator\CodeTest',
             'Gear\Creator\Controller'          => 'Gear\Creator\ControllerDependency',
             'Gear\Creator\App'                 => 'Gear\Creator\AppDependency',
             'Gear\Creator\Src'                 => 'Gear\Creator\SrcDependency',
