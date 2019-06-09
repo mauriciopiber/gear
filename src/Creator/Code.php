@@ -10,12 +10,27 @@ use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
 use Gear\Creator\Codes\Code\AbstractCode;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
 
 class Code extends AbstractCode implements
     FileExtendsInterface,
     FileUseAttributeInterface,
     FileUseInterface
 {
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string
+    ) {
+        $this->setStringService($string);
+        $this->setModule($module);
+    }
+
+    use StringServiceTrait;
+
+    use ModuleStructureTrait;
     use ConstructorParamsTrait;
 
     const ARRAY_SEPARATOR = ',';
