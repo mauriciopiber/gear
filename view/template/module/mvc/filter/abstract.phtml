@@ -1,13 +1,11 @@
 namespace <?php echo $this->module;?>\Filter;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
 abstract class AbstractFilter extends InputFilter implements
-    ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
 
@@ -29,7 +27,7 @@ abstract class AbstractFilter extends InputFilter implements
     public function getTranslate()
     {
         if (!isset($this->translate)) {
-            $this->translate = $this->getServiceLocator()->get('translator');
+            $this->translate = $this->get('translator');
         }
         return $this->translate;
     }

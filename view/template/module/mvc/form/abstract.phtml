@@ -1,11 +1,9 @@
 namespace <?php echo $this->module;?>\Form;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Form\Form;
 
 abstract class AbstractForm extends Form implements
-    ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
 
@@ -34,7 +32,7 @@ abstract class AbstractForm extends Form implements
     public function getEntityManager()
     {
         if (!isset($this->entityManager)) {
-            $this->entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+            $this->entityManager = $this->get('doctrine.entitymanager.orm_default');
         }
         return $this->entityManager;
     }

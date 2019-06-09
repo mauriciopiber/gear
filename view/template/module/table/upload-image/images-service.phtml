@@ -3,7 +3,7 @@
     {
         if (!isset($this->imagemService)) {
             $this->imagemService =
-            $this->getServiceLocator()->get('GearImage\Service\ImagemService');
+            $this->get('GearImage\Service\ImagemService');
         }
         return $this->imagemService;
     }

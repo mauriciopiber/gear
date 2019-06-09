@@ -1,13 +1,11 @@
 namespace <?php echo $this->module;?>\Service;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 use Zend\Session\Container;
 
 abstract class AbstractService implements
-    ServiceLocatorAwareInterface
 {
     protected $serviceLocator;
 
@@ -80,7 +78,7 @@ abstract class AbstractService implements
 
     public function setSelectAllCache($resultSet)
     {
-        $cache = $this->getServiceLocator()->get('memcached');
+        $cache = $this->get('memcached');
 
 
         if ($cache->hasItem(sprintf('%sResult', $this->getSessionName()))) {
@@ -130,7 +128,7 @@ abstract class AbstractService implements
     public function getCache()
     {
         if (!isset($this->cache)) {
-            $this->cache = $this->getServiceLocator()->get('memcached');
+            $this->cache = $this->get('memcached');
         }
         return $this->cache;
     }

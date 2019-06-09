@@ -46,7 +46,7 @@ class ZendServiceLocator
 
     public function getServiceManager()
     {
-        return $this->getServiceLocator()->get('ServiceManager');
+        return $this->get('ServiceManager');
     }
 
     public function chroot()
