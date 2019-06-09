@@ -34,6 +34,7 @@ abstract class AbstractCodeBase implements
     use ModuleStructureTrait;
 
     const USE = 'use %s;';
+    /**/
 
     public function printUse($uses)
     {
