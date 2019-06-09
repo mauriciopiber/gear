@@ -225,21 +225,21 @@ trait ScopeTrait
                 ),
                 'basic-dependency',
             ***REMOVED***,
-            [
-                new \Gear\Schema\Src\Src(
-                    [
-                        'name' => sprintf('BasicImplements%s', $srcType),
-                        'type' => $srcType,
-                        'implements' => [
+            // [
+            //     new \Gear\Schema\Src\Src(
+            //         [
+            //             'name' => sprintf('BasicImplements%s', $srcType),
+            //             'type' => $srcType,
+            //             'implements' => [
 
-                        ***REMOVED***,
-                        'dependency' => [
-                            '\Zend\ServiceManager\ServiceLocatorAware'
-                        ***REMOVED***
-                    ***REMOVED***
-                ),
-                'basic-implements',
-            ***REMOVED***,
+            //             ***REMOVED***,
+            //             'dependency' => [
+            //                 '\Zend\ServiceManager\ServiceLocatorAware'
+            //             ***REMOVED***
+            //         ***REMOVED***
+            //     ),
+            //     'basic-implements',
+            // ***REMOVED***,
             [
                 new \Gear\Schema\Src\Src(
                     [

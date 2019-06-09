@@ -21,7 +21,7 @@ class <?php echo $this->class;?>Test extends \PHPUnit_Framework_TestCase
     public function get<?php echo $this->class;?>()
     {
         if (!isset($this-><?php echo $this->var;?>)) {
-            $this-><?php echo $this->var;?> = $this->bootstrap->getServiceLocator()->get(
+            $this-><?php echo $this->var;?> = $this->bootstrap->get(
                 '<?php echo $this->callable; ?>'
             );
         }

@@ -7,7 +7,7 @@
     public function getAuthService()
     {
         if (!$this->authService) {
-            $this->authService = $this->getServiceLocator()->get('zfcuser_auth_service');
+            $this->authService = $this->get('zfcuser_auth_service');
         }
         return $this->authService;
     }

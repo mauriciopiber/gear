@@ -24,7 +24,7 @@ class AbstractFilterTest extends \PHPUnit_Framework_TestCase
         ->disableOriginalConstructor()
         ->getMockForAbstractClass();
 
-        $abstract->setTranslate($this->bootstrap->getServiceLocator()->get('MvcTranslator'));
+        $abstract->setTranslate($this->bootstrap->get('MvcTranslator'));
 
 
         $validator = $abstract->getEmailAddressValidator('E-mail');
@@ -43,7 +43,7 @@ class AbstractFilterTest extends \PHPUnit_Framework_TestCase
         ->disableOriginalConstructor()
         ->getMockForAbstractClass();
 
-        $abstract->setTranslate($this->bootstrap->getServiceLocator()->get('MvcTranslator'));
+        $abstract->setTranslate($this->bootstrap->get('MvcTranslator'));
 
 
         $validator = $abstract->getEmailAddressValidator('E-mail');

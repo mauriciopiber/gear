@@ -17,7 +17,7 @@ class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestC
     public function get<?php echo $this->serviceNameClass;?>()
     {
         if (!isset($this-><?php echo $this->serviceNameUline;?>)) {
-            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->getServiceLocator()->get(
+            $this-><?php echo $this->serviceNameUline;?> = $this->bootstrap->get(
                 '<?php echo $this->module;?>\Controller\Plugin\<?php echo $this->serviceNameClass;?>'
             );
         }
