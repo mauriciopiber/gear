@@ -7,8 +7,9 @@ use Gear\Schema\Db\Db;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\UserType\Feature\Strict;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class Feature extends AbstractMvcTest
+class Feature extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     protected $dbLocation;
 

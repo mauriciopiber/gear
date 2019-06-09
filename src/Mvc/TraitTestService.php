@@ -3,16 +3,17 @@ namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvcTest;
 use Gear\Schema\Src\Src;
+use Gear\Mvc\AbstractMvcTestInterface;
 
-class TraitTestService extends AbstractMvcTest
+class TraitTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
-    public function __construct($module, $fileCreator, $string, $codeTest)
-    {
-        $this->module = $module;
-        $this->fileCreator = $fileCreator;
-        $this->stringService = $string;
-        $this->codeTest = $codeTest;
-    }
+    // public function __construct($module, $fileCreator, $string, $codeTest)
+    // {
+    //     $this->module = $module;
+    //     $this->fileCreator = $fileCreator;
+    //     $this->stringService = $string;
+    //     $this->codeTest = $codeTest;
+    // }
 
     public function createTraitTest(Src $src, $location = null)
     {

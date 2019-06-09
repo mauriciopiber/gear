@@ -12,6 +12,7 @@
 namespace Gear\Mvc\Entity;
 
 use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\AbstractMvcInterface;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Schema\SchemaService;
