@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Creator\FileCreator;
 
-use Doctrine\Common\Collections\ArrayCollection;
+//use Doctrine\Common\Collections\ArrayCollection;
 use Zend\View\Model\ViewModel;
 use Gear\Creator\Template\TemplateServiceTrait;
 use Gear\Util\File\FileServiceTrait;

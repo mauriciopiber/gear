@@ -38,8 +38,9 @@ class ServiceTestServiceTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->string = new \Gear\Util\String\StringService();
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
+        $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view');
+        $template       = new \Gear\Creator\Template\TemplateService($phpRenderer);
+        //$template->setRenderer();
         $fileService    = new \Gear\Util\File\FileService();
         $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
@@ -70,7 +71,11 @@ class ServiceTestServiceTest extends TestCase
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
 
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
+        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string
+        );
         $this->serviceManager->setModule($this->module->reveal());
         $this->service->setServiceManager($this->serviceManager);
 
@@ -209,9 +214,12 @@ class ServiceTestServiceTest extends TestCase
             $this->service->setFactoryTestService($this->factory->reveal());
         }
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setModule($this->module->reveal());
-        $serviceManager->setStringService($this->string);
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string
+        );
 
         $this->service->setServiceManager($serviceManager);
 
@@ -250,9 +258,11 @@ class ServiceTestServiceTest extends TestCase
             $this->service->setFactoryTestService($this->factory->reveal());
         }
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setModule($this->module->reveal());
-        $serviceManager->setStringService($this->string);
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string
+        );
 
         $this->service->setServiceManager($serviceManager);
 
