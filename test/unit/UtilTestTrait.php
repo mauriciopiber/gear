@@ -81,8 +81,7 @@ trait UtilTestTrait
     public function createFileCreator()
     {
         if ($this->fileCreator === null) {
-            $template       = new TemplateService();
-            $template->setRenderer($this->mockPhpRenderer());
+            $template       = new TemplateService($this->mockPhpRenderer());
 
             $fileService    = new FileService();
             $this->fileCreator = new FileCreator($fileService, $template);

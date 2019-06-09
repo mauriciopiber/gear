@@ -91,16 +91,6 @@ class ServiceTestService extends AbstractMvcTest
         $this->repository = $this->getSchemaService()->getSrcByDb($this->db, 'Repository');
         $repositoryName = $this->getServiceManager()->getServiceName($this->repository);
 
-        /**
-         * @TODO certeza que isso tá errado kkkkkkkk
-         */
-        if ($this->columnManager->isAssociatedWith(UploadImageColumn::class)) {
-            $fileCreator->addChildView([
-                'template' => 'template/module/table/upload-image/controller/mock-upload-image.phtml',
-                'placeholder' => 'extraColumns',
-                'config' => ['module' => $this->getModule()->getModuleName()***REMOVED***
-            ***REMOVED***);
-        }
 
         $optionsColumn = $this->columnManager->generateSchema(self::COLUMN_SCHEMA);
 
@@ -117,20 +107,20 @@ class ServiceTestService extends AbstractMvcTest
             'classUrl'         => $this->str('url', $this->src->getNameOff()),
             'module'           => $this->getModule()->getModuleName(),
             'moduleUrl'        => $this->str('url', $this->getModule()->getModuleName()),
-        ***REMOVED***);
+            ***REMOVED***);
 
-        $options = array_merge($options, $optionsColumn);
+            $options = array_merge($options, $optionsColumn);
 
-        $construct = [
-            'className'  => $this->src->getName(),
-            'table'      => $this->db->getTable(),
-            'service'    => $this->getServiceManager()->getServiceName($this->src),
-            'repository' => $repositoryName,
-            'setUp'      => $optionsColumn['setUp'***REMOVED***[0***REMOVED***,
-        ***REMOVED***;
+            $construct = [
+                'className'  => $this->src->getName(),
+                'table'      => $this->db->getTable(),
+                'service'    => $this->getServiceManager()->getServiceName($this->src),
+                'repository' => $repositoryName,
+                'setUp'      => $optionsColumn['setUp'***REMOVED***[0***REMOVED***,
+            ***REMOVED***;
 
-        $isTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
-        $isTableColumn = $this->columnManager->isAssociatedWith(UploadImageColumn::class);
+            $isTableImage = $this->getTableService()->verifyTableAssociation($this->db->getTable(), UploadImageTable::NAME);
+            $isTableColumn = $this->columnManager->isAssociatedWith(UploadImageColumn::class);
 
         if ($isTableImage || $isTableColumn) {
             $this->src->addDependency('\GearImage\Service\ImageService');
@@ -143,6 +133,15 @@ class ServiceTestService extends AbstractMvcTest
             'template/module/mvc/service-test/db/constructor/'.$this->src->getService().'.phtml',
             $construct
         );
+        /**
+         * @TODO certeza que isso tá errado kkkkkkkk
+         */
+        if ($this->columnManager->isAssociatedWith(UploadImageColumn::class)) {
+            $options['extraColumns'***REMOVED*** = $this->getFileCreator()->renderPartial(
+                'template/module/table/upload-image/controller/mock-upload-image.phtml',
+                ['module' => $this->getModule()->getModuleName()***REMOVED***
+            );
+        }
 
         $location = $this->getCodeTest()->getLocation($this->src);
 

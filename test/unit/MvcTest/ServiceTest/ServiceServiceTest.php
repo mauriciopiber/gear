@@ -86,9 +86,12 @@ class ServiceServiceTest extends TestCase
         $this->serviceTest = $this->prophesize('Gear\Mvc\Service\ServiceTestService');
         $this->service->setServiceTestService($this->serviceTest->reveal());
 
-        $this->serviceManager = new ServiceManager();
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->serviceManager->setStringService($this->string);
+        $this->serviceManager = new ServiceManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string
+        );
+
         $this->service->setServiceManager($this->serviceManager);
     }
 
