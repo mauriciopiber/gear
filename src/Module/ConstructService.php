@@ -24,7 +24,7 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Schema\Src\SrcSchemaTrait;
 use Gear\Schema\Src\SrcTypesInterface;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Symfony\Component\Yaml\Parser;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
@@ -189,6 +189,10 @@ class ConstructService
         }
 
         $data = $this->getGearfileConfig();
+
+        if ($data === null) {
+            return $this->constructStatus;
+        }
 
         $this->constructAllSrc($data);
 
@@ -428,7 +432,7 @@ class ConstructService
         }
 
         if ($configLocation) {
-            $basePath = $this->getBaseDir();
+            $basePath = $this->module->getBasePath();
 
             $configPath = $basePath.'/'.$configLocation;
 

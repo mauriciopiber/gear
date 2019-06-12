@@ -29,6 +29,7 @@ class ModuleStructureFactory implements FactoryInterface
             return $structure;
         }
 
+        $structure->setBasePath($request->getParam('basepath'));
         $structure->setNamespace($namespace);
         $structure->setStaging($staging);
         $structure->setModuleName($moduleName);

@@ -22,6 +22,7 @@ class DockerServiceTraitTest extends TestCase
 
     public function testSet()
     {
+        $this->dockerServiceMock = $this->prophesize(DockerService::class);
         $this->setDockerService($this->dockerServiceMock->reveal());
         $dockerService = $this->getDockerService();
 

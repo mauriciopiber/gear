@@ -24,11 +24,7 @@ class ComposerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $template       = new TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new FileService();
-        $fileCreator    = new FileCreator($fileService, $template);
+        $fileCreator    = $this->createFileCreator();
 
         $stringService  = new StringService();
         $arrayService   = new ArrayService();

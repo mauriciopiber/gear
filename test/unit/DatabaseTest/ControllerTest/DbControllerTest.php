@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ProjectTest\ControllerTest;
+namespace GearTest\DatabaseTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Console\Request;
@@ -25,14 +25,6 @@ class DbControllerTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-    }
-
-    public function testNotFound()
-    {
-        $this->routeMatch->setParam('action', 'not-found');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(404, $response->getStatusCode());
     }
 
     public function testProjectDump()

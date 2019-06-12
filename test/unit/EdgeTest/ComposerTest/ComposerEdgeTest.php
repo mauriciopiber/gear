@@ -16,9 +16,8 @@ class ComposerEdgeTest extends TestCase
      */
     public function testGetModuleWebLocation()
     {
-        $composer = new \Gear\Edge\Composer\ComposerEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $composer->setYamlService($yaml);
+        $composer = new \Gear\Edge\Composer\ComposerEdge($yaml);
         $web = $composer->getComposerModule('web');
         $this->assertArrayHasKey('require', $web);
         $this->assertArrayHasKey('require-dev', $web);
@@ -29,9 +28,8 @@ class ComposerEdgeTest extends TestCase
      */
     public function testGetModuleCliLocation()
     {
-        $composer = new \Gear\Edge\Composer\ComposerEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $composer->setYamlService($yaml);
+        $composer = new \Gear\Edge\Composer\ComposerEdge($yaml);
         $web = $composer->getComposerModule('cli');
         $this->assertArrayHasKey('require', $web);
         $this->assertArrayHasKey('require-dev', $web);
@@ -42,7 +40,8 @@ class ComposerEdgeTest extends TestCase
      */
     public function testUnfoundModuleType()
     {
-        $composer = new \Gear\Edge\Composer\ComposerEdge();
+        $yaml = new \Gear\Util\Yaml\YamlService();
+        $composer = new \Gear\Edge\Composer\ComposerEdge($yaml);
         $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $composer->getComposerModule(null);
 

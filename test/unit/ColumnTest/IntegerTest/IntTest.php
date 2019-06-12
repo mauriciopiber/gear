@@ -18,7 +18,6 @@ class IntTest extends TestCase
         $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
         $column->getDataType()->willReturn('int')->shouldBeCalled();
 
-
         $this->int = new Integer($column->reveal());
 
     }
@@ -27,7 +26,7 @@ class IntTest extends TestCase
     {
         return [
             [30, '30'***REMOVED***,
-            [01, '1'***REMOVED***,
+            [01, '01'***REMOVED***,
             [90, '90'***REMOVED***,
             [2123, '2123'***REMOVED***
         ***REMOVED***;
@@ -52,4 +51,3 @@ class IntTest extends TestCase
         $this->assertEquals($expected, $value);
     }
 }
-

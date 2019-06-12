@@ -18,8 +18,8 @@ class NpmEdgeTest extends TestCase
      */
     public function testGetModuleWebLocation()
     {
-        $composer = new \Gear\Edge\Npm\NpmEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
+        $composer = new \Gear\Edge\Npm\NpmEdge($yaml);
         $composer->setYamlService($yaml);
         $web = $composer->getNpmModule('web');
         $this->assertArrayHasKey('devDependencies', $web);

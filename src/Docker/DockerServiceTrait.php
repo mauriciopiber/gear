@@ -1,7 +1,7 @@
 <?php
 namespace Gear\Docker;
 
-use Gear\Docker\DockerServiceFactory;
+use Gear\Docker\DockerService;
 
 /**
  * PHP Version 5
