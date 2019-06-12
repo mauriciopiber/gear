@@ -1,10 +1,10 @@
 <?php
-namespace GearTest\ServiceTest\ConstructorTest;
+namespace GearTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Schema\Controller\Controller;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Column\ColumnManager;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Web\WebControllerService;
@@ -22,11 +22,12 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Config\ConfigService;
 use Gear\Util\String\StringService;
+//use Gear\Mvc\Config\ControllerManager;
 
 /**
  * @group m1
  */
-class ControllerServiceTest extends TestCase
+class ControllerConstructorTest extends TestCase
 {
     public function setUp() : void
     {
@@ -61,6 +62,8 @@ class ControllerServiceTest extends TestCase
 
         $this->configService = $this->prophesize(ConfigService::class);
 
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
+
 
         $this->controllerService = new ControllerConstructor(
             $this->stringService,
@@ -78,7 +81,7 @@ class ControllerServiceTest extends TestCase
             $this->configService->reveal(),
             $this->viewService->reveal(),
             $this->languageService->reveal(),
-            $this->container->reveal()
+            $this->controllerManager->reveal()
         );
 
     }

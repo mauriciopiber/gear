@@ -16,7 +16,7 @@ use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 use Gear\Mvc\Spec\Page\PageTrait;
 use Gear\Mvc\Spec\Step\StepTrait;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Util\String\StringServiceTrait;
@@ -186,8 +186,8 @@ class ActionConstructor extends AbstractConstructor
             ModuleTypesInterface::WEB
         ***REMOVED***)) {
             $this->viewService->createIndexView();
-            $this->appControllerSpecService->createTestIndexAction();
-            $this->appControllerService->createIndexController();
+            //$this->appControllerSpecService->createTestIndexAction();
+            //$this->appControllerService->createIndexController();
             $this->feature->createIndexFeature();
             $this->page->createIndexPage();
             $this->step->createIndexStep();
@@ -228,8 +228,8 @@ class ActionConstructor extends AbstractConstructor
             $this->getNavigationManager()->create($this->action);
             $this->getRouterManager()->create($this->action);
             $this->getViewService()->build($this->action);
-            $this->getAppControllerService()->build($this->action);
-            $this->getAppControllerSpecService()->build($this->action);
+            //$this->getAppControllerService()->build($this->action);
+            //$this->getAppControllerSpecService()->build($this->action);
             $this->getFeature()->build($this->action);
             if ($this->action->getController()->getDb() !== null) {
                 $this->getStep()->createTableStep($this->action->getController()->getDb());

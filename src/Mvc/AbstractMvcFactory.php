@@ -8,6 +8,9 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
 use Gear\Creator\Code;
+use Gear\Util\Dir\DirService;
+use Gear\Table\TableService\TableService;
+use Gear\Mvc\Config\ServiceManager;
 
 class AbstractMvcFactory implements AbstractFactoryInterface
 {
@@ -29,7 +32,10 @@ class AbstractMvcFactory implements AbstractFactoryInterface
             $container->get(ModuleStructure::class),
             $container->get(FileCreator::class),
             $container->get(StringService::class),
-            $container->get(Code::class)
+            $container->get(Code::class),
+            $container->get(DirService::class),
+            $container->get(TableService::class),
+            $container->get(ServiceManager::class)
         );
     }
 }

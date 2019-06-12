@@ -17,7 +17,7 @@ use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Module\Structure\ModuleStructure;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 
 /**
  * @group fix-table
@@ -41,7 +41,7 @@ class DbConstructorTest extends TestCase
         $this->repositoryService = $this->prophesize(RepositoryService::class);
         $this->formService = $this->prophesize(FormService::class);
         $this->filterService = $this->prophesize(FilterService::class);
-        $this->searchFormService = $this->prophesize(SearchService::class);
+        //$this->searchFormService = $this->prophesize(SearchService::class);
         $this->actionService = $this->prophesize(ActionSchema::class);
         $this->entityService = $this->prophesize(EntityService::class);
         $this->fixtureService = $this->prophesize(FixtureService::class);
@@ -62,7 +62,7 @@ class DbConstructorTest extends TestCase
             $this->feature->reveal(),
             $this->step->reveal(),
             $this->entityService->reveal(),
-            $this->searchFormService->reveal(),
+            //$this->searchFormService->reveal(),
             $this->fixtureService->reveal(),
             $this->filterService->reveal(),
             $this->formService->reveal(),
@@ -123,7 +123,7 @@ class DbConstructorTest extends TestCase
         $this->repositoryService->createRepository($this->db->reveal())->shouldBeCalled();
         $this->formService->createForm($this->db->reveal())->shouldBeCalled();
         $this->filterService->createFilter($this->db->reveal())->shouldBeCalled();
-        $this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
+//        $this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
         $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
         $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();
@@ -190,7 +190,7 @@ class DbConstructorTest extends TestCase
         $this->repositoryService->createRepository($this->db->reveal())->shouldBeCalled();
         $this->formService->createForm($this->db->reveal())->shouldBeCalled();
         $this->filterService->createFilter($this->db->reveal())->shouldBeCalled();
-        $this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
+        //$this->searchFormService->createSearchForm($this->db->reveal())->shouldBeCalled();
         $this->controllerService->introspectFromTable($this->db->reveal())->shouldBeCalled();
         $this->step->createTableStep($this->db->reveal())->shouldBeCalled();
         $this->feature->introspectFromTable($this->db->reveal())->shouldBeCalled();

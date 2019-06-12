@@ -26,6 +26,7 @@ use Gear\Mvc\Controller\Api\{
     ApiControllerService,
     ApiControllerTestService,
 };
+use Gear\Util\String\StringService;
 use Gear\Schema\Action\ActionSchema;
 
 /**
@@ -50,7 +51,6 @@ class ActionConstructorFactory implements FactoryInterface
     {
         $factory = new ActionConstructor(
             $container->get(ActionSchema::class),
-            //$container->get(ConfigService::class),
             $container->get(RouterManager::class),
             $container->get(ConsoleRouterManager::class),
             $container->get(NavigationManager::class),
@@ -65,7 +65,7 @@ class ActionConstructorFactory implements FactoryInterface
             $container->get(Page::class),
             $container->get(Step::class),
             $container->get(ModuleStructure::class),
-            $container->get('Gear\Util\String\StringService'),
+            $container->get(StringService::class),
             $container->get(TableService::class),
             $container->get(ColumnService::class)
         );

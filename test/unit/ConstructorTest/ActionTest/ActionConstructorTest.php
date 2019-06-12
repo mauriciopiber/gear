@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\ServiceTest\ConstructorTest;
+namespace GearTest\ ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Module\Structure\ModuleStructure;
@@ -30,7 +30,7 @@ use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Schema\SchemaService;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Column\ColumnManager;
 
@@ -92,8 +92,6 @@ class ActionConstructorTest extends TestCase
             $this->mvcConsoleControllerTest->reveal(),
             $this->apiController->reveal(),
             $this->apiControllerTest->reveal(),
-            $this->appController->reveal(),
-            $this->appControllerSpec->reveal(),
             $this->feature->reveal(),
             $this->page->reveal(),
             $this->step->reveal(),
@@ -116,8 +114,8 @@ class ActionConstructorTest extends TestCase
         )->shouldBeCalled();
 
         $this->viewService->createIndexView()->shouldBeCalled();
-        $this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
-        $this->appController->createIndexController()->shouldBeCalled();
+        //$this->appControllerSpec->createTestIndexAction()->shouldBeCalled();
+        //$this->appController->createIndexController()->shouldBeCalled();
         $this->feature->createIndexFeature()->shouldBeCalled();
         $this->page->createIndexPage()->shouldBeCalled();
         $this->step->createIndexStep()->shouldBeCalled();
@@ -148,7 +146,10 @@ class ActionConstructorTest extends TestCase
             'controller' => 'MyController'
         ***REMOVED***;
 
-        $this->assertEquals($this->consoleValidation->reveal(), $this->actionService->createControllerAction($arrayAction));
+        $this->assertEquals(
+            $this->consoleValidation->reveal(),
+            $this->actionService->createControllerAction($arrayAction)
+        );
     }
 
     /**
@@ -197,8 +198,8 @@ class ActionConstructorTest extends TestCase
         $this->mvcController->buildAction($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
 
-        $this->appController->build($action)->willReturn(true)->shouldBeCalled();
-        $this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
+        //$this->appController->build($action)->willReturn(true)->shouldBeCalled();
+        //$this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
         $this->feature->build($action)->willReturn(true)->shouldBeCalled();
 
         $this->step->createTableStep($action->getController()->getDb())->willReturn(true)->shouldBeCalled();
@@ -263,8 +264,7 @@ class ActionConstructorTest extends TestCase
         $this->mvcController->buildAction($controller)->willReturn(true)->shouldBeCalled();
         $this->mvcControllerTest->buildAction($controller)->willReturn(true)->shouldBeCalled();
 
-        $this->appController->build($action)->willReturn(true)->shouldBeCalled();
-        $this->appControllerSpec->build($action)->willReturn(true)->shouldBeCalled();
+
         $this->feature->build($action)->willReturn(true)->shouldBeCalled();
         //$this->page->build($action)->willReturn(true)->shouldBeCalled();
 
