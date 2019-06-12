@@ -1,6 +1,7 @@
 <?php
 namespace GearTest\ModuleTest;
 
+use GearTest\UtilTestTrait;
 use Gear\Module\ModuleTypesInterface;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
@@ -65,6 +66,8 @@ use Gear\Docker\DockerService;
  */
 class ModuleServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp() : void
     {
         parent::setUp();
@@ -75,16 +78,9 @@ class ModuleServiceTest extends TestCase
 
         $this->baseDir = (new Module)->getLocation();
 
-        $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
-
         $this->templates = $this->baseDir.'/../test/template/module/script';
 
-        $template       = new TemplateService();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new FileService();
-
-        $this->fileCreator    = new FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->stringService  = new StringService();
         $this->dirService = new DirService();
@@ -167,28 +163,6 @@ class ModuleServiceTest extends TestCase
         $this->module->getModuleName()->willReturn($data)->shouldBeCalled();
         $this->moduleService = $this->mockModuleRealCreator();
         $this->assertEquals($expected, $this->moduleService->getModuleNamespace());
-    }
-
-    /**
-     * Cria Zend\View\Renderer\PhpRenderer
-     */
-    public function mockPhpRenderer($templatePath)
-    {
-        $view = new PhpRenderer();
-
-        $resolver = new AggregateResolver();
-
-        $map = new TemplatePathStack([
-            'script_paths' => [
-                'template' => $templatePath,
-            ***REMOVED***
-        ***REMOVED***);
-
-        $resolver->attach($map);
-
-        $view->setResolver($resolver);
-
-        return $view;
     }
 
     /**
@@ -540,16 +514,7 @@ class ModuleServiceTest extends TestCase
 
     public function mockModuleRealCreator()
     {
-        $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
-
-        $this->templates = $this->baseDir.'/../test/template/module/script';
-
-        $template       = new TemplateService();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new FileService();
-
-        $this->fileCreator    = new FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         return $this->mockModule($this->fileCreator);
     }

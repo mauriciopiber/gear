@@ -65,6 +65,12 @@ class ModuleTestsServiceTest extends TestCase
             $this->string
         );
 
+        $this->test = new ModuleTestsService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->upgrade
+        );
     }
 
     /**
@@ -73,16 +79,10 @@ class ModuleTestsServiceTest extends TestCase
      */
     public function testCreateModuleBuild()
     {
-        $test = new ModuleTestsService();
-        $test->setModule($this->module->reveal());
-        $test->setStringService($this->string);
-        $test->setFileCreator($this->fileCreator);
-        $test->setAntUpgrade($this->upgrade);
-
         //$test->setAntEdge($this->edge->reveal());***REMOVED***
         $this->gearConfig->getCurrentName()->willReturn('MyModule')->shouldBeCalled();
 
-        $file = $test->copyBuildXmlFile();
+        $file = $this->test->copyBuildXmlFile();
 
         $this->assertFileExists($file);
     }
