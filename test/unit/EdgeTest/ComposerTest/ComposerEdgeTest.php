@@ -43,7 +43,7 @@ class ComposerEdgeTest extends TestCase
     public function testUnfoundModuleType()
     {
         $composer = new \Gear\Edge\Composer\ComposerEdge();
-        $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
+        $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $composer->getComposerModule(null);
 
     }

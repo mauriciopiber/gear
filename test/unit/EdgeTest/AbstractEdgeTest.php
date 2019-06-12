@@ -25,7 +25,7 @@ class AbstractEdgeTest extends TestCase
     public function testUnfoundModuleType()
     {
         $composer = $this->getMockForAbstractClass('Gear\Edge\Composer\ComposerEdge');
-        $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
+        $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $composer->getModuleLocation(null);
 
     }

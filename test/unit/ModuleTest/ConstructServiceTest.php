@@ -839,7 +839,7 @@ EOS;
 
     public function testGetGearfileConfigNotFoundException()
     {
-        $this->setExpectedException('Gear\Module\Exception\GearfileNotFoundException');
+        $this->expectException('Gear\Module\Exception\GearfileNotFoundException');
         $this->construct->setConfigLocation('/my-wrong/folder');
     }
 

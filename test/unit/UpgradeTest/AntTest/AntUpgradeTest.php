@@ -256,7 +256,7 @@ EOS;
 
     public function testFactoryNotDeveloped()
     {
-        $this->setExpectedException('Exception');
+        $this->expectException('Exception');
         $this->antUpgrade->moduleFactory('thisisneverhappen');
     }
 

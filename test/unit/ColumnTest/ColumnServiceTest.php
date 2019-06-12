@@ -35,7 +35,7 @@ class ColumnServiceTest extends TestCase
 
     public function testFactoryColumnsException()
     {
-        $this->setExpectedException('Exception');
+        $this->expectException('Exception');
         $this->column->getColumns();
     }
 

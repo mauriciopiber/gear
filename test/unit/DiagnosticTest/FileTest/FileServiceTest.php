@@ -40,7 +40,7 @@ class FileServiceTest extends TestCase
             'target' => ['piber' => null***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\File\Exception\MissingFiles');
+        $this->expectException('Gear\Edge\File\Exception\MissingFiles');
 
         $this->fileService->setFileEdge($this->fileEdge->reveal());
 

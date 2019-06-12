@@ -43,7 +43,7 @@ class DirEdgeTest extends TestCase
     public function testUnfoundModuleType()
     {
         $dir = new \Gear\Edge\Dir\DirEdge();
-        $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
+        $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $dir->getDirModule(null);
 
     }

@@ -28,7 +28,7 @@ class FileUpgradeFactoryTest extends TestCase
           ->willReturn($this->prophesize('Gear\Module\ModuleService')->reveal())
           ->shouldBeCalled();
 
-        $this->container->get('Gear\Module\Tests')
+        $this->container->get('Gear\Module\Tests\ModuleTestsService')
           ->willReturn($this->prophesize('Gear\Module\Tests\ModuleTestsService')->reveal())
           ->shouldBeCalled();
 

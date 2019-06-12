@@ -41,7 +41,7 @@ class FileEdgeTest extends TestCase
     public function testUnfoundModuleType()
     {
         $file = new \Gear\Edge\File\FileEdge();
-        $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
+        $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $file->getFileModule(null);
 
     }
