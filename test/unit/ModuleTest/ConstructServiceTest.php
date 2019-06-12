@@ -342,6 +342,7 @@ EOS
 
     /**
      * @group src
+     * @group final1
      */
     public function testSrcValidate()
     {
@@ -352,7 +353,9 @@ EOS
             'Src Gearing está com dados errados'
         ***REMOVED***)->shouldBeCalled();
 
-        $this->srcSchema->factory('Gearing', $data, false)->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
+        $this->srcSchema
+          ->factory('Gearing', $data, false)
+          ->willReturn($this->consoleValidation->reveal())->shouldBeCalled();
 
         //$this->construct->setSrcConstructor($srcschema->reveal());
 
@@ -365,7 +368,7 @@ src:
     type: Service
 
 EOS
-            ));
+        ));
 
         $constructed = $this->construct->construct(self::MODULE_NAME, $this->basepath, $this->config);
 
@@ -824,6 +827,9 @@ EOS;
         );
     }
 
+    /**
+     *  @group final2
+     */
     public function testSetConfigLocation()
     {
         $file = vfsStream::url('basepath/file.yml');
@@ -832,13 +838,17 @@ EOS;
 
         $expected = 'file.yml';
 
+        $this->module->getBasePath()->willReturn(vfsStream::url('basepath'));
+
         $this->construct->setConfigLocation($expected);
 
         $this->assertEquals('vfs://basepath/file.yml', $this->construct->getConfigLocation());
     }
 
 
-
+    /**
+     *  @group final2
+     */
     public function testGetGearfileConfigNotFoundException()
     {
         $this->expectException('Gear\Module\Exception\GearfileNotFoundException');

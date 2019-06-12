@@ -17,7 +17,11 @@ class AntEdgeTest extends TestCase
     {
         parent::setUp();
 
-        $this->ant = new \Gear\Edge\Ant\AntEdge();
+        $this->yaml = new \Gear\Util\Yaml\YamlService();
+
+        $this->ant = new \Gear\Edge\Ant\AntEdge(
+            $this->yaml
+        );
 
     }
     /**
@@ -25,9 +29,6 @@ class AntEdgeTest extends TestCase
      */
     public function testGetModuleWebLocation()
     {
-
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $this->ant->setYamlService($yaml);
         $web = $this->ant->getAntModule('web');
         $this->assertArrayHasKey('default', $web);
         $this->assertArrayHasKey('target', $web);
@@ -38,8 +39,6 @@ class AntEdgeTest extends TestCase
      */
     public function testGetModuleCliLocation()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $this->ant->setYamlService($yaml);
         $web = $this->ant->getAntModule('cli');
         $this->assertArrayHasKey('default', $web);
         $this->assertArrayHasKey('target', $web);

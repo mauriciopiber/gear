@@ -18,15 +18,17 @@ class CodeTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->code = new Code();
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $this->code->setModule($this->module->reveal());
-
         $this->string = new StringService();
-        $this->code->setStringService($this->string);
+
+        $this->code = new Code(
+            $this->module->reveal(),
+            $this->string
+        );
+
 
         $constructorParams = new ConstructorParams($this->string);
 
@@ -37,7 +39,7 @@ class CodeTest extends TestCase
     }
 
     /**
-     * @dataProvider testCodeData
+     * @dataProvider codeData
      */
     public function testGetUse($data, $template)
     {
@@ -46,7 +48,7 @@ class CodeTest extends TestCase
     }
 
 
-    public function testCodeData()
+    public function codeData()
     {
         return [
             [new Controller(['name' => 'MyController'***REMOVED***), 'my-controller'***REMOVED***,

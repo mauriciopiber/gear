@@ -16,9 +16,8 @@ class FileEdgeTest extends TestCase
      */
     public function testGetModuleWebLocation()
     {
-        $file = new \Gear\Edge\File\FileEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $file->setYamlService($yaml);
+        $file = new \Gear\Edge\File\FileEdge($yaml);
         $web = $file->getFileModule('web');
         $this->assertArrayHasKey('files', $web);
     }
@@ -28,9 +27,8 @@ class FileEdgeTest extends TestCase
      */
     public function testGetModuleCliLocation()
     {
-        $file = new \Gear\Edge\File\FileEdge();
         $yaml = new \Gear\Util\Yaml\YamlService();
-        $file->setYamlService($yaml);
+        $file = new \Gear\Edge\File\FileEdge($yaml);
         $web = $file->getFileModule('cli');
         $this->assertArrayHasKey('files', $web);
     }
@@ -40,7 +38,8 @@ class FileEdgeTest extends TestCase
      */
     public function testUnfoundModuleType()
     {
-        $file = new \Gear\Edge\File\FileEdge();
+        $yaml = new \Gear\Util\Yaml\YamlService();
+        $file = new \Gear\Edge\File\FileEdge($yaml);
         $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $file->getFileModule(null);
 

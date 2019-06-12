@@ -352,11 +352,6 @@ EOS;
         $this->assertEquals($template, $this->service->getCode());
     }
 
-    public function testCreateGearFileMvcWithConstraint()
-    {
-
-    }
-
 
     /**
      * @group x21

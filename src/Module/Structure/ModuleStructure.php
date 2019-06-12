@@ -10,9 +10,11 @@ use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Exception\ResourceNotFound;
 use Gear\Module\ModuleTypesInterface;
+use Gear\Locator\ModuleLocatorTrait;
 
 class ModuleStructure
 {
+    use ModuleLocatorTrait;
     use FileServiceTrait;
     use StringServiceTrait;
     use DirServiceTrait;
@@ -689,8 +691,8 @@ EOS;
 
     public function getBasePath()
     {
-        if (! isset($this->basePath)) {
-            $this->basePath = \GearBase\Module::getProjectFolder();
+        if (!isset($this->basePath)) {
+            $this->basePath = $this->getModuleFolder();
         }
         return $this->basePath;
     }

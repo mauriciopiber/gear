@@ -72,7 +72,6 @@ class ModuleController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, ['message' => 'module-construct'***REMOVED***);
 
-        var_dump("Run Here");
         $module = $this->getRequest()->getParam('module', false);
 
         $file = $this->getRequest()->getParam('file');
