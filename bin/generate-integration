@@ -15,7 +15,7 @@ if (php_sapi_name() === 'cli-server') {
 
 require 'init_autoloader.php';
 
-use GearBase\Util\String\StringService;
+use Gear\Util\String\StringService;
 use Gear\Integration\Util;
 use Gear\Integration\Component;
 use Gear\Integration\Util\Columns\Columns;
@@ -46,52 +46,52 @@ $location = new Location();
 $persist  = new Persist($location);
 
 $arrayService = new ArrayService();
-    
+
 $migrationFile = new MigrationFile(
     $persist,
     $string,
-    $arrayService    
+    $arrayService
 );
 
 $gearfile = new GearFile(
     $persist,
     $string
 );
-        
+
 $testFile = new TestFile($persist, $string);
 
 $superTestFile = new SuperTestFile($persist, $string);
- 
+
 $mvcGenerator = new MvcGenerator(
-    $gearfile, 
-    $testFile, 
-    $migrationFile, 
-    $names, 
+    $gearfile,
+    $testFile,
+    $migrationFile,
+    $names,
     $column
 );
 
 $srcGenerator = new SrcGenerator(
-    $gearfile, 
+    $gearfile,
     $testFile
 );
 
 $controllerGenerator = new ControllerGenerator(
-    $gearfile, 
+    $gearfile,
     $testFile
 );
 
 $srcMvcGenerator = new SrcMvcGenerator(
-    $gearfile, 
-    $testFile, 
-    $migrationFile, 
-    $names, 
+    $gearfile,
+    $testFile,
+    $migrationFile,
+    $names,
     $column
 );
 
 $controllerMvcGenerator = new ControllerMvcGenerator(
-    $gearfile, 
+    $gearfile,
     $testFile,
-    $names, 
+    $names,
     $column
 );
 
@@ -112,35 +112,35 @@ function getParam($type, $argv)
         'count' => 4,
         'type' => null
     ***REMOVED***;
-    
+
     $params = $argv;
     unset($params[0***REMOVED***);
     $params = array_values($params);
-    
+
     foreach ($params as $param) {
         $paramSet = explode('=', $param);
-        
+
         $paramName = str_replace('--', '', $paramSet[0***REMOVED***);
-        
+
         if (!in_array($paramName, array_keys($preset))) {
             throw new \Exception('Parameter not valid');
         }
-        
+
         if ($paramName != $type) {
             continue;
         }
-                
-        if (count($paramSet) == 1 && in_array($paramName, ['longname', 'min'***REMOVED***)) {    
+
+        if (count($paramSet) == 1 && in_array($paramName, ['longname', 'min'***REMOVED***)) {
             return true;
         }
-        
+
         if ($paramName == 'count') {
             return intval($paramSet[1***REMOVED***);
         }
         return $paramSet[1***REMOVED***;
     }
-    
+
     return $preset[$type***REMOVED***;
 }
 
-$integration->integrate(getParam('type', $argv), getParam('count', $argv), getParam('longname', $argv), getParam('min', $argv)); 
+$integration->integrate(getParam('type', $argv), getParam('count', $argv), getParam('longname', $argv), getParam('min', $argv));
