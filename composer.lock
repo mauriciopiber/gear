@@ -1826,16 +1826,16 @@
         },
         {
             "name": "zendframework/zend-config",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-config.git",
-                "reference": "6796f5dcba52c84ef2501d7313618989b5ef3023"
+                "reference": "012341361ae3cc97a99959e7cb7c9ebd04d49572"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis/dist/zendframework/zend-config/zendframework-zend-config-6796f5dcba52c84ef2501d7313618989b5ef3023-zip-c8155a.zip",
-                "reference": "6796f5dcba52c84ef2501d7313618989b5ef3023"
+                "url": "http://satis/dist/zendframework/zend-config/zendframework-zend-config-012341361ae3cc97a99959e7cb7c9ebd04d49572-zip-2b0fef.zip",
+                "reference": "012341361ae3cc97a99959e7cb7c9ebd04d49572"
             },
             "require": {
                 "ext-json": "*",
@@ -1862,8 +1862,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2.x-dev",
-                    "dev-develop": "3.3.x-dev"
+                    "dev-master": "3.3.x-dev",
+                    "dev-develop": "3.4.x-dev"
                 }
             },
             "autoload": {
@@ -1881,7 +1881,7 @@
                 "config",
                 "zf"
             ***REMOVED***,
-            "time": "2018-04-24T19:26:44+00:00"
+            "time": "2019-06-08T18:58:54+00:00"
         },
         {
             "name": "zendframework/zend-console",
@@ -5091,16 +5091,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "79fd7f2f8acff994d4a330bb434b09b813479068"
+                "reference": "b2a7f9aac51ce18cd7ac8b31e37c8ce5646fc741"
             },
             "dist": {
                 "type": "zip",
-                "url": "http://satis/dist/sebastian/type/sebastian-type-79fd7f2f8acff994d4a330bb434b09b813479068-zip-b4df8d.zip",
-                "reference": "79fd7f2f8acff994d4a330bb434b09b813479068"
+                "url": "http://satis/dist/sebastian/type/sebastian-type-b2a7f9aac51ce18cd7ac8b31e37c8ce5646fc741-zip-58a240.zip",
+                "reference": "b2a7f9aac51ce18cd7ac8b31e37c8ce5646fc741"
             },
             "require": {
                 "php": "^7.2"
@@ -5117,9 +5117,6 @@
             "autoload": {
                 "classmap": [
                     "src/"
-                ***REMOVED***,
-                "files": [
-                    "tests/_fixture/callback_function.php"
                 ***REMOVED***
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5135,7 +5132,7 @@
             ***REMOVED***,
             "description": "Collection of value objects that represent the types of the PHP type system",
             "homepage": "https://github.com/sebastianbergmann/type",
-            "time": "2019-06-07T09:58:20+00:00"
+            "time": "2019-06-08T04:53:27+00:00"
         },
         {
             "name": "sebastian/version",

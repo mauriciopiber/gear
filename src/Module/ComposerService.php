@@ -6,6 +6,7 @@ use Gear\Edge\Composer\ComposerEdge;
 use Gear\Edge\Composer\ComposerEdgeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\Vector\ArrayService;
+use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Mvc\AbstractMvc;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
@@ -19,6 +20,8 @@ class ComposerService extends AbstractMvc
     use StringServiceTrait;
 
     use ComposerEdgeTrait;
+
+    use ArrayServiceTrait;
 
     /**
      * Constructor
