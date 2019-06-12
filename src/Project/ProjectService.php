@@ -10,7 +10,6 @@ use Gear\Version\VersionServiceTrait;
 //use Gear\Project\DeployServiceTrait;
 use Gear\Edge\Dir\DirEdgeTrait;
 use Gear\Project\ProjectLocationTrait;
-use Gear\Project\Docs\DocsTrait;
 use Gear\Upgrade\Ant\AntUpgradeTrait;
 use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Upgrade\Npm\NpmUpgradeTrait;
@@ -24,7 +23,6 @@ use Gear\Util\Dir\DirService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Edge\Dir\DirEdge;
-use Gear\Project\Docs\Docs;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Project\Composer\ComposerService;
 use Gear\Util\File\FileServiceTrait;
@@ -42,8 +40,6 @@ class ProjectService extends AbstractJsonService
     use AntUpgradeTrait;
 
     use NpmUpgradeTrait;
-
-    use DocsTrait;
 
     use ProjectLocationTrait;
 
