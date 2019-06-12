@@ -21,12 +21,7 @@ class PackageTest extends TestCase
     {
         parent::setUp();
 
-
-        $template       = new \Gear\Creator\Template\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
