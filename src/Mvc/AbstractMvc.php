@@ -26,6 +26,8 @@ use Gear\Util\Dir\DirService;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
+use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Mvc\Config\ServiceManager;
 
 abstract class AbstractMvc
 {
@@ -36,7 +38,8 @@ abstract class AbstractMvc
         StringService $string,
         Code $code,
         DirService $dirService,
-        TableService $tableService
+        TableService $tableService,
+        ServiceManager $serviceManager
     ) {
         $this->setCode($code);
         $this->setModule($module);
@@ -44,7 +47,10 @@ abstract class AbstractMvc
         $this->setStringService($string);
         $this->setDirService($dirService);
         $this->setTableService($tableService);
+        $this->setServiceManager($serviceManager);
     }
+
+    use ServiceManagerTrait;
 
     use TableServiceTrait;
 

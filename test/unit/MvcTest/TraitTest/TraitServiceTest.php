@@ -5,6 +5,8 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use GearTest\UtilTestTrait;
+use Gear\Table\TableService\TableService;
+use Gear\Util\Dir\DirService;
 
 /**
  * @group mvc-trait
@@ -28,37 +30,35 @@ class TraitServiceTest extends TestCase
 
         $this->templates = $this->baseDir.'/../test/template/module/mvc/trait';
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new \Gear\Util\File\FileService();
         $this->string  = new \Gear\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
-        $code = new \Gear\Creator\Code();
-        $code->setModule($this->module->reveal());
-        $code->setStringService($this->string);
+        $code = new \Gear\Creator\Code(
+            $this->module->reveal(),
+            $this->string
+        );
         $code->setDirService(new \Gear\Util\Dir\DirService());
         $constructorParams = new ConstructorParams($this->string);
         $code->setConstructorParams($constructorParams);
 
-        $this->trait = new \Gear\Mvc\TraitService(
-            /*
+        $table = $this->prophesize(TableService::class);
+        $dir = $this->prophesize(DirService::class);
+
+        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
             $this->module->reveal(),
-            $fileCreator,
-            $stringService,
-            $codeTest
-            */
+            $this->fileCreator,
+            $this->string
         );
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setModule($this->module->reveal());
-        $serviceManager->setStringService($this->string);
-
-        $this->trait->setModule($this->module->reveal());
-        $this->trait->setFileCreator($fileCreator);
-        $this->trait->setStringService($this->string);
-        $this->trait->setCode($code);
+        $this->trait = new \Gear\Mvc\TraitService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $code,
+            $dir->reveal(),
+            $table->reveal(),
+            $serviceManager
+        );
         $this->trait->setServiceManager($serviceManager);
     }
 
