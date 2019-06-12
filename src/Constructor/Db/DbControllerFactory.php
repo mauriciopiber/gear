@@ -3,13 +3,16 @@ namespace Gear\Constructor\Db;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
+use Gear\Constructor\Db\DbConstructor;
+use Gear\Constructor\Db\DbController;
 
 class DbControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $dbService = $controllerManager->get('Gear\Module\Constructor\Db');
-        $dbController = new \Gear\Constructor\Db\DbController($dbService);
+        $dbController = new DbController(
+            $container->get(DbConstructor::class)
+        );
         return $dbController;
     }
 }
