@@ -185,27 +185,4 @@ class ApplicationConfigTest extends TestCase
 
         $this->assertContains('MyNewModule', $newFile['modules'***REMOVED***);
     }
-
-    public function testLoad()
-    {
-
-    }
-
-    public function testUnload()
-    {
-
-    }
-
-
-
-    public function testRegisterAfterModule()
-    {
-
-    }
-
-    public function testRegisterBeforeModule()
-    {
-
-    }
 }
-

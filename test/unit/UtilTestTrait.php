@@ -11,11 +11,33 @@ use Gear\Creator\Template\TemplateService;
 use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
-
+use Gear\Table\TableService\TableService;
+use Gear\Creator\Code;
 
 trait UtilTestTrait
 {
     protected $fileCreator;
+
+
+    public function dummyTableService() {
+        if (isset($this->tableService)) {
+            return $this;
+        }
+        $this->tableService = $this->prophesize(TableService::class)->reveal();
+        return $this;
+    }
+
+    public function dummyCode() {
+        if (isset($this->code)) {
+            return $this;
+        }
+        $this->code = $this->prophesize(Code::class)->reveal();
+        return $this;
+    }
+
+    public function dummyDir() {
+
+    }
 
     public function createVirtualDir($location)
     {
