@@ -16,6 +16,7 @@ use Gear\Mvc\View\ViewService;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\Varchar;
 use GearTest\UtilTestTrait;
+use Gear\Creator\Code;
 
 /**
  * @group View
@@ -35,20 +36,29 @@ class ViewServiceTest extends TestCase
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/view';
 
         $this->string = new StringService();
-
-        $template = new TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../view'));
-
-        $fileService        = new FileService();
-        $this->fileCreator  = new FileCreator($fileService, $template);
+        $this->fileCreator  = $this->createFileCreator();
 
         $this->dir = new DirService();
 
-        $this->view = new ViewService();
-        $this->view->setDirService($this->dir);
-        $this->view->setStringService($this->string);
-        $this->view->setFileCreator($this->fileCreator);
-        $this->view->setModule($this->module->reveal());
+        $this->code = new Code(
+            $this->module->reveal(),
+            $this->string
+        );
+
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+
+        $this->view = new ViewService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->dir,
+            $this->table->reveal()
+        );
+        // $this->view->setDirService($this->dir);
+        // $this->view->setStringService($this->string);
+        // $this->view->setFileCreator($this->fileCreator);
+        // $this->view->setModule($this->module->reveal());
         $this->view->setLocationDir(vfsStream::url('module'));
     }
 
