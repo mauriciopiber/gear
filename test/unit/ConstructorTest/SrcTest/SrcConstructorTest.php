@@ -3,7 +3,7 @@ namespace GearTest\ConstructorTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Constructor\Src\SrcConstructor;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Service\ServiceService;
@@ -65,7 +65,6 @@ class SrcConstructorTest extends TestCase
             $this->formService->reveal(),
             $this->filterService->reveal(),
             $this->entityService->reveal(),
-            $this->searchFormService->reveal(),
             $this->valueObjectService->reveal(),
             $this->viewHelperService->reveal(),
             $this->controllerPluginService->reveal(),
@@ -254,26 +253,6 @@ class SrcConstructorTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->formService->createForm($this->src->reveal())->willReturn(true)->shouldBeCalled();
-        $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
-
-        $this->assertCreateSrc($name, $type);
-    }
-
-    /**
-     * @group x6
-     */
-    public function testCreateSearchSrc()
-    {
-        $name = 'MySearchForm';
-        $type = 'SearchForm';
-
-        $this->src = $this->prophesize('Gear\Schema\Src\Src');
-        $this->src->getType()->willReturn($type)->shouldBeCalled();
-        $this->src->getDb()->willReturn(null)->shouldBeCalled();
-
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
-
-        $this->searchFormService->createSearchForm($this->src->reveal())->willReturn(true)->shouldBeCalled();
         $this->serviceManager->create($this->src)->willReturn(true)->shouldBeCalled();
 
         $this->assertCreateSrc($name, $type);

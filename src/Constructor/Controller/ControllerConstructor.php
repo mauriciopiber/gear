@@ -12,7 +12,7 @@ use Gear\Schema\Controller\{
     ControllerSchema,
     ControllerSchemaTrait
 };
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Util\String\{
     StringServiceTrait,
     StringService

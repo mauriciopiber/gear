@@ -1,32 +1,33 @@
 <?php
 namespace Gear\Module;
 
-use Gear\Service\AbstractJsonService;
-use Symfony\Component\Yaml\Parser;
-use Gear\Schema\Db\DbSchemaTrait as DbSchemaTrait;
-use Gear\Schema\Src\SrcSchemaTrait as SrcSchemaTrait;
-use Gear\Schema\Controller\ControllerSchemaTrait as ControllerSchemaTrait;
-use Gear\Schema\Action\ActionSchemaTrait as ActionSchemaTrait;
-use Gear\Schema\Db\DbSchema as DbSchema;
-use Gear\Schema\Src\SrcSchema as SrcSchema;
-use Gear\Schema\Controller\ControllerSchema as ControllerSchema;
-use Gear\Schema\Action\ActionSchema as ActionSchema;
-use Gear\Schema\Src\Src;
-use Gear\Schema\Db\Db;
-use Gear\Schema\Action\Action;
-use Gear\Schema\Controller\Controller;
-use Gear\Constructor\Db\DbConstructorTrait;
-use Gear\Constructor\Src\SrcConstructorTrait;
-use Gear\Constructor\Controller\ControllerConstructorTrait;
-use Gear\Constructor\Action\ActionConstructorTrait;
-use Gear\Constructor\Db\DbConstructor;
-use Gear\Constructor\Src\SrcConstructor;
-use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Constructor\Action\ActionConstructor;
-use Gear\Module\Exception\GearfileNotFoundException;
-use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Gear\Constructor\Action\ActionConstructorTrait;
+use Gear\Constructor\Controller\ControllerConstructor;
+use Gear\Constructor\Controller\ControllerConstructorTrait;
+use Gear\Constructor\Db\DbConstructor;
+use Gear\Constructor\Db\DbConstructorTrait;
+use Gear\Constructor\Src\SrcConstructor;
+use Gear\Constructor\Src\SrcConstructorTrait;
 use Gear\Module\ConstructStatusObject;
+use Gear\Module\Exception\GearfileNotFoundException;
+use Gear\Schema\Action\Action;
+use Gear\Schema\Action\ActionSchema;
+use Gear\Schema\Action\ActionSchemaTrait;
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Controller\ControllerSchema;
+use Gear\Schema\Controller\ControllerSchemaTrait;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Db\DbSchema;
+use Gear\Schema\Db\DbSchemaTrait;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Src\SrcSchema;
+use Gear\Schema\Src\SrcSchemaTrait;
 use Gear\Schema\Src\SrcTypesInterface;
+use Gear\Util\ConsoleValidation\ConsoleValidationStatus;
+use Symfony\Component\Yaml\Parser;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 
 /**
  * Cria os componentes para o módulo de acordo com o arquivo de configuração gear.
@@ -41,7 +42,7 @@ use Gear\Schema\Src\SrcTypesInterface;
  * @link     http://docs.pibernetwork.com/gear
  *
  */
-class ConstructService extends AbstractJsonService
+class ConstructService
 {
     private $constructStatus;
 
@@ -60,6 +61,8 @@ class ConstructService extends AbstractJsonService
     use ControllerSchemaTrait;
 
     use ActionSchemaTrait;
+
+    use ModuleStructureTrait;
 
     const CONTROLLER_SKIP = 'Controller "%s" já existe.';
 
@@ -90,6 +93,7 @@ class ConstructService extends AbstractJsonService
     protected $configLocation;
 
     public function __construct(
+        ModuleStructure $module,
         DbSchema $dbSchema,
         SrcSchema $srcSchema,
         ControllerSchema $controllerSchema,
@@ -99,7 +103,7 @@ class ConstructService extends AbstractJsonService
         ControllerConstructor $controllerService,
         ActionConstructor $actionService
     ) {
-
+        $this->setModule($module);
         $this->actionConstructor = $actionService;
         $this->dbConstructor = $dbService;
         $this->srcConstructor = $srcService;

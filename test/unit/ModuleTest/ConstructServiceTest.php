@@ -19,6 +19,7 @@ use Gear\Schema\Action\Action;
 use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Schema\Controller\Controller as ControllerObject;
 use Gear\Schema\Action\Action as ActionObject;
+use Gear\Module\Structure\ModuleStructure;
 
 /**
  * @group Module
@@ -48,15 +49,16 @@ class ConstructServiceTest extends TestCase
         $this->controllerSchema = $this->prophesize(ControllerSchema::class);
         $this->actionSchema = $this->prophesize(ActionSchema::class);
 
-
-
         $this->dbConstructor = $this->prophesize(DbConstructor::class);
         $this->srcConstructor = $this->prophesize(SrcConstructor::class);
         $this->controllerConstructor = $this->prophesize(ControllerConstructor::class);
         $this->actionConstructor = $this->prophesize(ActionConstructor::class);
 
+        $this->module = $this->Prophesize(ModuleStructure::class);
+
 
         $this->construct = new ConstructService(
+            $this->module->reveal(),
             $this->dbSchema->reveal(),
             $this->srcSchema->reveal(),
             $this->controllerSchema->reveal(),
@@ -66,7 +68,7 @@ class ConstructServiceTest extends TestCase
             $this->controllerConstructor->reveal(),
             $this->actionConstructor->reveal()
         );
-        $this->construct->setBaseDir($this->basepath);
+        //$this->construct->setBaseDir($this->basepath);
         //schema
 
     }

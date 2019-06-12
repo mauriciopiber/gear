@@ -46,7 +46,7 @@ class DbControllerTest extends TestCase
 
         $serviceManager->setService('Gear\Module\Constructor\Db', $dbService);
 
-        $db->setServiceLocator($serviceManager);
+        //$db->setServiceLocator($serviceManager);
 
         $request = new \Zend\Console\Request();
 

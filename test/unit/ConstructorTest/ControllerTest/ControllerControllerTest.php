@@ -29,13 +29,6 @@ class ControllerControllerTest extends TestCase
         $this->controller->setEvent($this->event);
     }
 
-    public function testNotFound()
-    {
-        $this->routeMatch->setParam('action', 'not-found');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(404, $response->getStatusCode());
-    }
 
     public function testCreateConsoleControllerWeb()
     {
