@@ -22,6 +22,10 @@ use Gear\Creator\Code;
 use Gear\Creator\CodeTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Table\TableService\TableService;
+use Gear\Table\TableService\TableServiceTrait;
 
 abstract class AbstractMvc
 {
@@ -30,23 +34,34 @@ abstract class AbstractMvc
         ModuleStructure $module,
         FileCreator $fileCreator,
         StringService $string,
-        Code $code
+        Code $code,
+        DirService $dirService,
+        TableService $tableService
     ) {
         $this->setCode($code);
         $this->setModule($module);
         $this->setFileCreator($fileCreator);
         $this->setStringService($string);
+        $this->setDirService($dirService);
+        $this->setTableService($tableService);
     }
+
+    use TableServiceTrait;
+
+    use DirServiceTrait;
+
     use StringServiceTrait;
 
     use FileCreatorTrait;
 
     use ModuleStructureTrait;
+
+    use CodeTrait;
+    // old
     use GearVersionTrait;
     use InjectorTrait;
     use InjectTrait;
     use ConstructorArgsTrait;
-    use CodeTrait;
     use InterfaceServiceTrait;
     use TraitServiceTrait;
     use FactoryServiceTrait;
