@@ -27,12 +27,8 @@ class TraitTestServiceTest extends TestCase
 
         $this->templates = $this->baseDir.'/../test/template/module/mvc/trait';
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new \Gear\Util\File\FileService();
         $stringService  = new \Gear\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileCreator    = $this->createFileCreator();
 
         $codeTest = new \Gear\Creator\CodeTest();
         $codeTest->setModule($this->module->reveal());

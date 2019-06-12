@@ -1,22 +1,13 @@
 <?php
 namespace Gear\Mvc;
 
-use Gear\Module\Structure\ModuleStructureTrait;
-use Gear\Module\Structure\ModuleStructureInterface;
-use Gear\Util\String\StringServiceTrait;
-use Gear\Util\String\StringServiceAwareInterface;
-use Gear\Mvc\Config\ServiceManagerTrait;
-use Gear\Creator\CodeTrait;
-use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\AbstractMvcInterface;
+use Gear\Mvc\Config\ServiceManagerTrait;
 
-class TraitService implements ModuleStructureInterface, StringServiceAwareInterface, AbstractMvcInterface
+class TraitService extends AbstractMvc implements AbstractMvcInterface
 {
-    use FileCreatorTrait;
-    use CodeTrait;
     use ServiceManagerTrait;
-    use StringServiceTrait;
-    use ModuleStructureTrait;
 
     public function createTrait(
         $src,
