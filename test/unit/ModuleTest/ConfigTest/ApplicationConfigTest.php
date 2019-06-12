@@ -29,7 +29,7 @@ class ApplicationConfigTest extends TestCase
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $this->setExpectedException('Gear\Module\Config\Exception\MissingApplicationConfig');
+        $this->expectException('Gear\Module\Config\Exception\MissingApplicationConfig');
 
         $file = $this->applicationConfig->getApplicationConfig();
     }

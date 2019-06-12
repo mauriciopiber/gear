@@ -40,7 +40,7 @@ class DirServiceTest extends TestCase
             'writable' => ['dir-one', 'dir-two'***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\Dir\Exception\MissingIgnore');
+        $this->expectException('Gear\Edge\Dir\Exception\MissingIgnore');
 
         $this->dirService->setDirEdge($this->dirEdge->reveal());
 
@@ -53,7 +53,7 @@ class DirServiceTest extends TestCase
             'ignores' => ['dir-one', 'dir-two'***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\Dir\Exception\MissingWritable');
+        $this->expectException('Gear\Edge\Dir\Exception\MissingWritable');
 
         $this->dirService->diagnosticModule('web');
     }

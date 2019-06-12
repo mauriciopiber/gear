@@ -51,7 +51,7 @@ class AntEdgeTest extends TestCase
      */
     public function testUnfoundModuleType()
     {
-        $this->setExpectedException('Gear\Edge\Exception\ModuleTypeNotFoundException');
+        $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $this->ant->getAntModule(null);
 
     }

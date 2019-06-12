@@ -18,7 +18,7 @@ class YamlServiceTest extends TestCase
 
         $file = null;
 
-        $this->setExpectedException('Gear\Util\Yaml\Exception\YamlNotFoundException');
+        $this->expectException('Gear\Util\Yaml\Exception\YamlNotFoundException');
 
         $yaml->load($file);
         //$this->

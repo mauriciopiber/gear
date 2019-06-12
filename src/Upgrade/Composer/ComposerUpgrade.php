@@ -76,7 +76,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
     public function prepare(array $php)
     {
         $json = str_replace('\/', '/', json_encode($php, JSON_UNESCAPED_UNICODE));
-        return \Zend\Json\Json::prettyPrint($json, 1);
+        return \Zend\Json\Json::prettyPrint($json);
     }
 
     public function createNewComposer($dir)

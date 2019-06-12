@@ -49,7 +49,7 @@ class AntServiceTest extends TestCase
             'target' => ['piber' => null***REMOVED***
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\Ant\Exception\MissingDefault');
+        $this->expectException('Gear\Edge\Ant\Exception\MissingDefault');
 
         $this->ant->diagnosticModule('web');
     }
@@ -64,7 +64,7 @@ class AntServiceTest extends TestCase
             'default' => 'piber'
         ***REMOVED***)->shouldBeCalled();
 
-        $this->setExpectedException('Gear\Edge\Ant\Exception\MissingTarget');
+        $this->expectException('Gear\Edge\Ant\Exception\MissingTarget');
 
         $this->ant->setAntEdge($edge->reveal());
 
