@@ -172,4 +172,9 @@ class DbConstructor extends AbstractConstructor
 
         return $db;
     }
+
+    public function delete()
+    {
+        return null;
+    }
 }

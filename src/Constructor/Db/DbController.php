@@ -9,6 +9,11 @@ class DbController extends AbstractConsoleController
 {
     use DbConstructorTrait;
 
+    public function __construct(DbConstructor $constructor)
+    {
+        $this->setDbConstructor($constructor);
+    }
+
     public function createAction()
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'db-create'));

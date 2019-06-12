@@ -2,7 +2,13 @@
 namespace GearTest\ConstructorTest\DbTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Mvc\Router\RouteMatch;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Console\Request;
+use Gear\Constructor\Db\DbController;
+use Zend\View\Model\ConsoleModel;
+use Gear\Module\Constructor\Db;
+use Gear\Constructor\Db\DbConstructor;
+use Zend\Router\RouteMatch;
 
 /*
  * Feature: Cadastro de Controller no Módulo.
@@ -16,72 +22,36 @@ use Zend\Mvc\Router\RouteMatch;
  */
 class DbControllerTest extends TestCase
 {
-    public function testTrait()
+    public function setUp() : void
     {
-        $dbService =  $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
-        ->disableOriginalConstructor()
-        ->setMethods(null)
-        ->getMock();
+        parent::setUp();
 
-        $db = new \Gear\Constructor\Db\DbController();
+        $this->dbConstructor = $this->prophesize(DbConstructor::class);
 
-        $db->setDbConstructor($dbService);
-
-        $this->assertEquals($dbService, $db->getDbConstructor());
+        $this->controller = new DbController(
+            $this->dbConstructor->reveal()
+        );
     }
 
     public function testCreateDb()
     {
-        $db = new \Gear\Constructor\Db\DbController();
-
-        $serviceManager = new \Zend\ServiceManager\ServiceManager();
-
-        $dbService = $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
-            ->disableOriginalConstructor()
-            ->setMethods(['create'***REMOVED***)
-            ->getMock();
-
-        $dbService->expects($this->at(0))->method('create')->willReturn(true);
-
-
-        $serviceManager->setService('Gear\Module\Constructor\Db', $dbService);
-
-        //$db->setServiceLocator($serviceManager);
-
-        $request = new \Zend\Console\Request();
+        $request = new Request();
 
         // Configurar Parâmetros de Despacho
-        $db->getEvent()->setRouteMatch(new RouteMatch([
+        $this->controller->getEvent()->setRouteMatch(new RouteMatch([
             'action' => 'create',
         ***REMOVED***));
 
-        $action = $db->dispatch($request);
+        $action = $this->controller->dispatch($request);
 
-        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $action);
+        $this->assertInstanceOf(ConsoleModel::class, $action);
     }
 
     public function testDeleteDb()
     {
-        $db = new \Gear\Constructor\Db\DbController();
+        $action = $this->controller->deleteAction();
 
-        $serviceManager = new \Zend\ServiceManager\ServiceManager();
-
-        $dbService =  $emMock = $this->getMockBuilder('Gear\Constructor\Db\DbConstructor')
-            ->disableOriginalConstructor()
-            ->setMethods(['delete'***REMOVED***)
-            ->getMock();
-
-        $dbService->expects($this->at(0))->method('delete')->willReturn(true);
-
-
-        $serviceManager->setService('Gear\Module\Constructor\Db', $dbService);
-
-        $db->setServiceLocator($serviceManager);
-
-
-        $action = $db->deleteAction();
-
-        $this->assertInstanceOf('Zend\View\Model\ConsoleModel', $action);
+        $this->assertInstanceOf(ConsoleModel::class, $action);
     }
 
 }
