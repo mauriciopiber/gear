@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
+use Gear\Mvc\Config\ConfigService;
 
 /**
  * @group module
@@ -33,11 +34,7 @@ class ConfigServiceTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->controllerPluginManager = $this->prophesize('Gear\Mvc\Config\ControllerPluginManager');
         $this->controllerManager  = $this->prophesize('Gear\Mvc\Config\ControllerManager');
@@ -57,6 +54,21 @@ class ConfigServiceTest extends TestCase
         $this->uploadImageManager = $this->prophesize('Gear\Mvc\Config\UploadImageManager');
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';///module.config.cli.php'
+        $this->config = new ConfigService(
+            $this->module->reveal(),
+            $this->string,
+            $this->fileCreator,
+            $this->assetManager->reveal(),
+            $this->routerManager->reveal(),
+            $this->consoleRouterManager->reveal(),
+            $this->navigationManager->reveal(),
+            $this->uploadImageManager->reveal(),
+            $this->serviceManager->reveal(),
+            $this->controllerManager->reveal(),
+            $this->controllerPluginManager->reveal(),
+            $this->viewHelperManager->reveal()
+        );
+
     }
 
     /**
@@ -73,21 +85,8 @@ class ConfigServiceTest extends TestCase
         $this->uploadImageManager->module($controllers)->willReturn(true)->shouldBeCalled();
 
 
-        $config = new \Gear\Mvc\Config\ConfigService();
-        $config->setModule($this->module->reveal());
-        $config->setFileCreator($this->fileCreator);
-        $config->setStringService($this->string);
-        $config->setControllerPluginManager($this->controllerPluginManager->reveal());
-        $config->setViewHelperManager($this->viewHelperManager->reveal());
-        $config->setServiceManager($this->serviceManager->reveal());
-        $config->setControllerManager($this->controllerManager->reveal());
-        $config->setAssetManager($this->assetManager->reveal());
-        $config->setRouterManager($this->routerManager->reveal());
-        $config->setConsoleRouterManager($this->consoleRouterManager->reveal());
-        $config->setNavigationManager($this->navigationManager->reveal());
-        $config->setUploadImageManager($this->uploadImageManager->reveal());
 
-        $this->assertTrue($config->module('web', 'my-module.stag01.pibernetwork.com'));
+        $this->assertTrue($this->config->module('web', 'my-module.stag01.pibernetwork.com'));
 
         $this->assertEquals(
             file_get_contents(vfsStream::url('module/config/module.config.php')),
@@ -100,24 +99,10 @@ class ConfigServiceTest extends TestCase
     {
         $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
-
         $this->consoleRouterManager->module($controllers)->willReturn(true)->shouldBeCalled();
 
-        $config = new \Gear\Mvc\Config\ConfigService();
-        $config->setModule($this->module->reveal());
-        $config->setFileCreator($this->fileCreator);
-        $config->setStringService($this->string);
-        $config->setControllerPluginManager($this->controllerPluginManager->reveal());
-        $config->setViewHelperManager($this->viewHelperManager->reveal());
-        $config->setServiceManager($this->serviceManager->reveal());
-        $config->setControllerManager($this->controllerManager->reveal());
-        $config->setAssetManager($this->assetManager->reveal());
-        $config->setRouterManager($this->routerManager->reveal());
-        $config->setConsoleRouterManager($this->consoleRouterManager->reveal());
-        $config->setNavigationManager($this->navigationManager->reveal());
-        $config->setUploadImageManager($this->uploadImageManager->reveal());
 
-        $this->assertTrue($config->module('cli'));
+        $this->assertTrue($this->config->module('cli'));
 
         $this->assertEquals(
             file_get_contents(vfsStream::url('module/config/module.config.php')),

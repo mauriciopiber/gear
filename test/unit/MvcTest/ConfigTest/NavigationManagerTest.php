@@ -8,6 +8,9 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use GearTest\UtilTestTrait;
+use Gear\Creator\Code;
+use Gear\Util\Vector\ArrayService;
+use Gear\Mvc\LanguageService;
 
 /**
  * @group Mvc
@@ -37,17 +40,20 @@ class NavigationManagerTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->templates = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/config/navigation';
 
-        $this->navigation = new \Gear\Mvc\Config\NavigationManager();
-        $this->navigation->setFileCreator($this->fileCreator);
-        $this->navigation->setStringService($this->string);
+        $this->navigation = new \Gear\Mvc\Config\NavigationManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->prophesize(Code::class)->reveal(),
+            $this->prophesize(ArrayService::class)->reveal(),
+            $this->prophesize(LanguageService::class)->reveal()
+        );
+        //$this->navigation->setFileCreator($this->fileCreator);
+        //$this->navigation->setStringService($this->string);
     }
 
     public function testModule()

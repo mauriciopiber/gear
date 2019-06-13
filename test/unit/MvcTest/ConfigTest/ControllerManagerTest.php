@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
+use Gear\Mvc\LanguageService;
 
 /**
  * @group module
@@ -25,23 +26,31 @@ class ControllerManagerTest extends TestCase
 
         $this->assertFileExists('vfs://module/config/ext');
 
+        $this->string = new \Gear\Util\String\StringService();
+
+        $this->fileCreator  = $this->createFileCreator();
+
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->code = new \Gear\Creator\Code(
+            $this->module->reveal(),
+            $this->string
+        );
+        //$code->setModule($this->module->reveal());
 
-        $template       = new \Gear\Creator\Template\TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
+        $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
 
-        $code = new \Gear\Creator\Code();
-        $code->setModule($this->module->reveal());
-
-        $array = new \Gear\Util\Vector\ArrayService();
-
+        $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->arrayService,
+            $this->prophesize(LanguageService::class)->reveal()
+        );
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';
     }
@@ -77,6 +86,8 @@ EOS
           'MyModule\MyNamespace\My' => 'MyModule\MyNamespace\MyControllerFactory',
         ***REMOVED***,
       ***REMOVED***;
+
+      $this->assertTrue($this->controllerManager->create($controller));
 
       $result = include vfsStream::url('module/config/ext/controller.config.php');
       $this->assertEquals($result, $expected);
@@ -115,18 +126,20 @@ EOS
         ***REMOVED***,
       ***REMOVED***;
 
+      $this->assertTrue($this->controllerManager->create($controller));
+
       $result = include vfsStream::url('module/config/ext/controller.config.php');
       $this->assertEquals($result, $expected);
-
-
     }
 
     public function testCreateModuleControllerConfig()
     {
-        $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+        $controllers = [
+          "MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"
+        ***REMOVED***;
 
-
-
+        $file = $this->controllerManager->module($controllers);
+        //$this->assertTrue($this->controllerManager->create($controller));
         $expected = $this->template.'/controller.config.phtml';
 
         $this->assertEquals(
