@@ -40,6 +40,8 @@ class ApiControllerTestServiceTest extends TestCase
 
         $this->factoryService = $this->prophesize(FactoryTestService::class);
 
+        $this->controllerManager = $this->prophesize(ControllerManager::class);
+
 
         $this->service = new ApiControllerTestService(
             $this->module->reveal(),
@@ -47,7 +49,7 @@ class ApiControllerTestServiceTest extends TestCase
             $this->string,
             $this->codeTest->reveal(),
             $this->factoryService->reveal(),
-            $this->container->reveal(),
+            $this->controllerManager->reveal(),
             $this->injector
         );
 

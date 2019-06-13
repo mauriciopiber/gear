@@ -28,6 +28,8 @@ use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Config\ServiceManager;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\Vector\ArrayServiceTrait;
 
 abstract class AbstractMvc
 {
@@ -39,8 +41,10 @@ abstract class AbstractMvc
         Code $code,
         DirService $dirService,
         TableService $tableService,
-        ServiceManager $serviceManager
+        ServiceManager $serviceManager,
+        ArrayService $array
     ) {
+        $this->setArrayService($array);
         $this->setCode($code);
         $this->setModule($module);
         $this->setFileCreator($fileCreator);
@@ -49,6 +53,8 @@ abstract class AbstractMvc
         $this->setTableService($tableService);
         $this->setServiceManager($serviceManager);
     }
+
+    use ArrayServiceTrait;
 
     use ServiceManagerTrait;
 

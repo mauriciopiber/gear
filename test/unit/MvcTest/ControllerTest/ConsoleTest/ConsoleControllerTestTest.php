@@ -7,6 +7,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
+use Gear\Util\Dir\DirService;
 
 /**
  * @group Fix4
@@ -32,21 +33,28 @@ class ConsoleControllerTestTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->dirService = new DirService();
+;
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console-test';
 
-        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerTestService();
-        $this->controller->setFileCreator($this->fileCreator);
-        $this->controller->setStringService($this->string);
-        $this->controller->setModule($this->module->reveal());
-
-
         $this->array = new \Gear\Util\Vector\ArrayService();
+
+        $this->codeTest = new \Gear\Creator\CodeTest(
+            $this->string,
+            $this->module->reveal(),
+            $this->dirService,
+            $this->array
+        );
+
+        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->codeTest
+        );
+
 
         $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
@@ -74,15 +82,6 @@ class ConsoleControllerTestTest extends TestCase
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
 
-        $this->codeTest = new \Gear\Creator\CodeTest();
-        $this->codeTest->setStringService($this->string);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeTest->setArrayService($this->array);
-
-
-
-        $this->controller->setCodeTest($this->codeTest);
 
         $file = $this->controller->buildController($controller);
 

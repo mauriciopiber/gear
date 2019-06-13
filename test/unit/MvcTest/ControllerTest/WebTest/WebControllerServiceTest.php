@@ -28,6 +28,7 @@ use Gear\Mvc\Controller\Web\WebControllerTestService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Util\Dir\DirService;
 use Gear\Table\UploadImage;
+use Gear\Mvc\Config\ServiceManager;
 
 /**
  * @group Fixing
@@ -53,36 +54,48 @@ class WebControllerServiceTest extends TestCase
 
 
         $this->module = $this->prophesize(ModuleStructure::class);
-        $this->arrayService = new ArrayService();
+        $this->array = new ArrayService();
 
         $this->string = new StringService();
 
         $this->factory = $this->prophesize(FactoryService::class);
 
-        $this->injector = new Injector($this->arrayService);
+        $this->injector = new Injector($this->array);
 
-        $this->controllerService = new WebControllerService();
-        $this->controllerService->setFileCreator($this->fileCreator);
-        $this->controllerService->setStringService($this->string);
-        $this->controllerService->setModule($this->module->reveal());
-        $this->controllerService->setInjector($this->injector);
-
-        $this->controllerService->setFactoryService($this->factory->reveal());
-        $this->controllerService->setArrayService($this->arrayService);
-
-
-        $this->code = new Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new DirService());
-
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
-
-        $this->controllerService->setCode($this->code);
+        $this->code = $this->createCode();
 
         $this->table = $this->prophesize(TableService::class);
-        $this->controllerService->setTableService($this->table->reveal());
+        //$this->controllerService->setTableService($this->table->reveal());
+
+        $this->controllerService = new WebControllerService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->prophesize(DirService::class)->reveal(),
+            $this->table->reveal(),
+            $this->prophesize(ServiceManager::class)->reveal(),
+            $this->array
+        );
+
+        // $this->controllerService->setFileCreator($this->fileCreator);
+        // $this->controllerService->setStringService($this->string);
+        // $this->controllerService->setModule($this->module->reveal());
+        // $this->controllerService->setInjector($this->injector);
+
+        // $this->controllerService->setFactoryService($this->factory->reveal());
+        // $this->controllerService->setArrayService($this->arrayService);
+
+
+        // $this->code = new Code();
+        // $this->code->setStringService($this->string);
+        // $this->code->setModule($this->module->reveal());
+        // $this->code->setDirService(new DirService());
+
+        // $constructorParams = new ConstructorParams($this->string);
+        // $this->code->setConstructorParams($constructorParams);
+
+        // $this->controllerService->setCode($this->code);
 
         $this->testing = $this->prophesize(WebControllerTestService::class);
         $this->controllerService->setControllerTestService($this->testing->reveal());

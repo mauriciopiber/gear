@@ -22,6 +22,7 @@ class ApiControllerServiceTraitTest extends TestCase
 
     public function testSet()
     {
+        $this->apiControllerServiceMock = $this->prophesize(ApiControllerService::class);
         $this->setApiControllerService($this->apiControllerServiceMock->reveal());
         $apiControllerService = $this->getApiControllerService();
 
