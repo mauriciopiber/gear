@@ -8,6 +8,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use GearTest\UtilTestTrait;
+use Gear\Creator\FileCreator\FileCreator;
 
 /**
  * @group Mvc
@@ -57,15 +58,25 @@ EOS
 
       $this->array = new \Gear\Util\Vector\ArrayService();
 
-      $this->code = new \Gear\Creator\Code();
-      $this->code->setModule($this->module->reveal());
+      $this->code = new \Gear\Creator\Code(
+          $this->module->reveal(),
+          $this->string
+      );
 
-      $this->router = new \Gear\Mvc\Config\RouterManager();
-      $this->router->setModule($this->module->reveal());
-      $this->router->setStringService($this->string);
-      $this->router->setCode($this->code);
-      $this->router->setArrayService($this->array);
-      $this->router->setLanguageService($this->language->reveal());
+      $this->fileCreator = $this->prophesize(FileCreator::class);
+
+
+
+
+
+      $this->router = new \Gear\Mvc\Config\RouterManager(
+          $this->module->reveal(),
+          $this->fileCreator->reveal(),
+          $this->string,
+          $this->code,
+          $this->array,
+          $this->language->reveal()
+      );
     }
 
     public function testCreateActionAction()

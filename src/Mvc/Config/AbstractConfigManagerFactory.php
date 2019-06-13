@@ -7,6 +7,9 @@ use Gear\Mvc\Config\AbstractConfigManagerInterface;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
+use Gear\Creator\Code;
+use Gear\Mvc\LanguageService;
+use Gear\Util\Vector\ArrayService;
 
 class AbstractConfigManagerFactory implements AbstractFactoryInterface
 {
@@ -27,7 +30,10 @@ class AbstractConfigManagerFactory implements AbstractFactoryInterface
         return new $requestedName(
             $container->get(ModuleStructure::class),
             $container->get(FileCreator::class),
-            $container->get(StringService::class)
+            $container->get(StringService::class),
+            $container->get(Code::class),
+            $container->get(ArrayService::class),
+            $container->get(LanguageService::class)
         );
     }
 }
