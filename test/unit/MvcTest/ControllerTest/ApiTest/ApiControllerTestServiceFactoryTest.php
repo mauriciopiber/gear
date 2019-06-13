@@ -50,6 +50,9 @@ class ApiControllerTestServiceFactoryTest extends TestCase
             ->willReturn($this->prophesize(FactoryTestService::class)->reveal())
             ->shouldBeCalled();
 
+        $this->container->get(ControllerManager::class)
+        ->willReturn($this->prophesize(ControllerManager::class)->reveal())
+        ->shouldBeCalled();
         $factory = new ApiControllerTestServiceFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);

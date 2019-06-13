@@ -13,31 +13,60 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Table\TableService\TableService;
 use Gear\Creator\Code;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Util\Dir\DirService;
+use Gear\Util\String\StringService;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 
 trait UtilTestTrait
 {
     protected $fileCreator;
 
+    protected $code;
 
-    public function dummyTableService() {
-        if (isset($this->tableService)) {
-            return $this;
+    protected $dir;
+
+    protected $constructorParams;
+
+    public function createConstructorParams()
+    {
+        if (isset($this->constructorParams)) {
+            return $this->constructorParams;
         }
-        $this->tableService = $this->prophesize(TableService::class)->reveal();
-        return $this;
+
+        $this->constructorParams = new ConstructorParams($this->createString());
+        return $this->constructorParams;
     }
 
-    public function dummyCode() {
-        if (isset($this->code)) {
-            return $this;
+    public function createString()
+    {
+        if (isset($this->string)) {
+            return $this->string;
         }
-        $this->code = $this->prophesize(Code::class)->reveal();
-        return $this;
+        $this->string = new StringService();
+        return $this->string;
     }
 
-    public function dummyDir() {
 
-    }
+    // public function dummyTableService() {
+    //     if (isset($this->tableService)) {
+    //         return $this;
+    //     }
+    //     $this->tableService = $this->prophesize(TableService::class)->reveal();
+    //     return $this;
+    // }
+
+    // public function dummyCode() {
+    //     if (isset($this->code)) {
+    //         return $this;
+    //     }
+    //     $this->code = $this->prophesize(Code::class)->reveal();
+    //     return $this;
+    // }
+
+    // public function dummyDir() {
+
+    // }
 
     public function createVirtualDir($location)
     {
@@ -110,5 +139,27 @@ trait UtilTestTrait
         }
 
         return $this->fileCreator;
+    }
+
+    public function createCode() {
+
+
+        if ($this->code) {
+            return $this->code;
+        }
+
+        $this->code = new Code(
+            $this->module ? $this->module->reveal() : $this->prophesize(ModuleStructure::class)->reveal(),
+            $this->string ? $this->string : $this->prophesize(StringService::class)->reveal(),
+            $this->dir ? $this->dir : new DirService(),
+            $this->createConstructorParams()
+        );
+
+        return $this->code;
+
+    }
+
+    public function createCodeMock() {
+
     }
 }

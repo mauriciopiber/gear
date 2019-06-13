@@ -8,6 +8,9 @@ use GearTest\ControllerScopeTrait;
 use Gear\Schema\Controller\Controller;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use GearTest\UtilTestTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Table\TableService\TableService;
+use Gear\Mvc\Config\ServiceManager;
 
 /**
  * @group Fix2
@@ -32,20 +35,37 @@ class ConsoleControllerTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console';
 
-        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerService();
-        $this->controller->setFileCreator($this->fileCreator);
-        $this->controller->setStringService($this->string);
-        $this->controller->setModule($this->module->reveal());
 
+        //     ModuleStructure $module,
+        // FileCreator $fileCreator,
+        // StringService $string,
+        // Code $code,
+        // DirService $dirService,
+        // TableService $tableService,
+        // ServiceManager $serviceManager,
+        // ArrayService $array
+
+        $this->code = $this->createCode();
+        //$this->code->setDirService(new \Gear\Util\Dir\DirService());
+        //$this->code->setArrayService($this->array);
+        //$this->controller->setCode($this->code);
         $this->array = new \Gear\Util\Vector\ArrayService();
+
+        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->prophesize(DirService::class)->reveal(),
+            $this->prophesize(TableService::class)->reveal(),
+            $this->prophesize(ServiceManager::class)->reveal(),
+            $this->array
+        );
+
 
         $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
@@ -57,13 +77,6 @@ class ConsoleControllerTest extends TestCase
 
         $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
         $this->controller->setTraitService($this->traitService->reveal());
-
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new \Gear\Util\Dir\DirService());
-        $this->code->setArrayService($this->array);
-        $this->controller->setCode($this->code);
 
         $constructorParams = new ConstructorParams($this->string);
         $this->code->setConstructorParams($constructorParams);
@@ -157,4 +170,3 @@ class ConsoleControllerTest extends TestCase
     }
 
 }
-

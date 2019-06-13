@@ -9,11 +9,15 @@ use Gear\Creator\FileExtendsInterface;
 use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Creator\Codes\Code\AbstractCode;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Dir\DirServiceTrait;
+
 
 class Code extends AbstractCode implements
     FileExtendsInterface,
@@ -22,10 +26,14 @@ class Code extends AbstractCode implements
 {
     public function __construct(
         ModuleStructure $module,
-        StringService $string
+        StringService $string,
+        DirService $dir,
+        ConstructorParams $constructor
     ) {
         $this->setStringService($string);
         $this->setModule($module);
+        $this->setDirService($dir);
+        $this->setConstructorParams($constructor);
     }
 
     use StringServiceTrait;

@@ -57,17 +57,9 @@ EOS
       $this->language = $this->prophesize(\Gear\Mvc\LanguageService::class);
 
       $this->array = new \Gear\Util\Vector\ArrayService();
-
-      $this->code = new \Gear\Creator\Code(
-          $this->module->reveal(),
-          $this->string
-      );
-
       $this->fileCreator = $this->prophesize(FileCreator::class);
 
-
-
-
+      $this->code = $this->createCode();
 
       $this->router = new \Gear\Mvc\Config\RouterManager(
           $this->module->reveal(),

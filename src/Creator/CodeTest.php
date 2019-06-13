@@ -6,12 +6,35 @@ use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use Gear\Schema\App\App;
 use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Dir\DirServiceTrait;
 
 class CodeTest extends AbstractCodeTest
 {
     const EMPTY = '';
 
     const CLEAR = ' ';
+
+    use StringServiceTrait;
+
+    use DirServiceTrait;
+
+    use ModuleStructureTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        DirService $dir
+    ) {
+        $this->setStringService($string);
+        $this->setModule($module);
+        $this->setDirService($dir);
+    }
+
 
     public function getPluginManager($pluginManager)
     {

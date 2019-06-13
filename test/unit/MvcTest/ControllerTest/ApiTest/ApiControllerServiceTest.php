@@ -37,13 +37,15 @@ class ApiControllerServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
 
-        $this->code = new Code();
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
 
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setDirService(new \Gear\Util\Dir\DirService());
+        $this->code = $this->createCode();
+
+        $constructorParams = new ConstructorParams($this->string);
+        //$this->code->setConstructorParams($constructorParams);
+
+        //$this->code->setStringService($this->string);
+        //$this->code->setModule($this->module->reveal());
+        //$this->code->setDirService(new \Gear\Util\Dir\DirService());
 
 
         $this->fileCreator = $this->createFileCreator();

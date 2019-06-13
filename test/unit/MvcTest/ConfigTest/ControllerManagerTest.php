@@ -6,6 +6,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
 use Gear\Mvc\LanguageService;
+use Gear\Util\Dir\DirService;
 
 /**
  * @group module
@@ -34,10 +35,7 @@ class ControllerManagerTest extends TestCase
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->code = new \Gear\Creator\Code(
-            $this->module->reveal(),
-            $this->string
-        );
+        $this->code = $this->createCode();
         //$code->setModule($this->module->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();

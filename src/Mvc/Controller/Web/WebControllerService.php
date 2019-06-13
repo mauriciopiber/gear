@@ -13,6 +13,7 @@ use Gear\Schema\Db\Db;
 use Gear\Table\UploadImageTrait;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\AbstractMvcInterface;
+use Gear\Creator\Template\TemplateServiceTrait;
 
 class WebControllerService extends AbstractControllerService implements
     ModuleConstructorInterface,
@@ -20,6 +21,8 @@ class WebControllerService extends AbstractControllerService implements
     ControllerConstructorInterface,
     AbstractMvcInterface
 {
+    use TemplateServiceTrait;
+
     use UploadImageTrait;
 
     use WebControllerTestServiceTrait;
