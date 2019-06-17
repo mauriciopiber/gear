@@ -132,7 +132,7 @@ class ModuleController extends AbstractConsoleController
      */
     public function moduleAsProjectAction()
     {
-        die('aqui');
+        //die('aqui');
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
         $type            = $this->getRequest()->getParam('type', 'web');
