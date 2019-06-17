@@ -11,9 +11,11 @@ use Gear\Creator\Code;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Config\ServiceManager;
+use Gear\Util\Vector\ArrayService;
 
 class AbstractMvcFactory implements AbstractFactoryInterface
 {
+
     public function canCreate(ContainerInterface $container, $requestedName)
     {
         if (!class_exists($requestedName)) {
@@ -28,6 +30,8 @@ class AbstractMvcFactory implements AbstractFactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, $options = [***REMOVED***)
     {
+        var_dump($requestedName);
+        //$VALUE+=1;
         return new $requestedName(
             $container->get(ModuleStructure::class),
             $container->get(FileCreator::class),
@@ -35,7 +39,8 @@ class AbstractMvcFactory implements AbstractFactoryInterface
             $container->get(Code::class),
             $container->get(DirService::class),
             $container->get(TableService::class),
-            $container->get(ServiceManager::class)
+            $container->get(ServiceManager::class),
+            $container->get(ArrayService::class)
         );
     }
 }

@@ -132,6 +132,7 @@ class ModuleController extends AbstractConsoleController
      */
     public function moduleAsProjectAction()
     {
+        die('aqui');
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-create'));
 
         $type            = $this->getRequest()->getParam('type', 'web');
@@ -164,86 +165,4 @@ class ModuleController extends AbstractConsoleController
         return new ConsoleModel();
     }
 
-    public function fixtureAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-fixture'));
-
-        $module = $this->getFixtureService();
-        $module->importModule();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    /**
-     * Carrega um módulo no projeto por meio do application.config.php
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function loadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
-
-        $module = $this->getApplicationConfig();
-        $module->addModuleToProject();
-
-        $this->getCacheService()->renewFileCache();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    /**
-     * Remove um módulo do application.config.php do projeto
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function unloadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
-
-        $module = $this->getApplicationConfig();
-        $module->unload();
-
-        $this->getCacheService()->renewFileCache();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-
-
-    public function entityAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entity'));
-
-        $request = $this->getRequest();
-        $prefix  = $request->getParam('prefix', false);
-        $tables  = $request->getParam('entity', array());
-
-        $entityService = $this->getEntityService();
-        $entityService->setUpEntity(array('prefix' => $prefix, 'tables' => $tables));
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    public function entitiesAction()
-    {
-
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entities'));
-
-
-        $request = $this->getRequest();
-        $entityService = $this->getEntityService();
-        $entityService->setUpEntities(array('prefix' => $request->getParam('prefix', false)));
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
 }

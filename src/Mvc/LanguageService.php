@@ -6,11 +6,31 @@
  */
 namespace Gear\Mvc;
 
-use Gear\Mvc\AbstractMvc;
-use Gear\Mvc\AbstractMvcInterface;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
-class LanguageService extends AbstractMvc implements AbstractMvcInterface
+class LanguageService
 {
+    use ModuleStructureTrait;
+
+    use StringServiceTrait;
+
+    use FileCreatorTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        FileCreator $fileCreator
+    ) {
+        $this->setFileCreator($fileCreator);
+        $this->setModule($module);
+        $this->setStringService($string);
+    }
+
     public static function getAvaiable()
     {
 
