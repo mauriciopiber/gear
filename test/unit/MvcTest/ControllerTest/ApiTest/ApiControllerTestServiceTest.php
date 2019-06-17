@@ -121,10 +121,12 @@ class ApiControllerTestServiceTest extends TestCase
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
 
-        $this->codeTest = new \Gear\Creator\CodeTest();
-        $this->codeTest->setStringService($this->string);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
+        $this->codeTest = new \Gear\Creator\CodeTest(
+            $this->module->reveal(),
+            $this->string,
+            new \Gear\Util\Dir\DirService(),
+            new \Gear\Util\Vector\ArrayService()
+        );
         //$this->codeTest->setArrayService($this->array);
 
 

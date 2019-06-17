@@ -42,8 +42,8 @@ class ConsoleControllerTestTest extends TestCase
         $this->array = new \Gear\Util\Vector\ArrayService();
 
         $this->codeTest = new \Gear\Creator\CodeTest(
-            $this->string,
             $this->module->reveal(),
+            $this->string,
             $this->dirService,
             $this->array
         );

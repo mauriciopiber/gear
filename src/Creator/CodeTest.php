@@ -12,6 +12,8 @@ use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Util\Dir\DirService;
 use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\Vector\ArrayServiceTrait;
 
 class CodeTest extends AbstractCodeTest
 {
@@ -25,14 +27,18 @@ class CodeTest extends AbstractCodeTest
 
     use ModuleStructureTrait;
 
+    use ArrayServiceTrait;
+
     public function __construct(
         ModuleStructure $module,
         StringService $string,
-        DirService $dir
+        DirService $dir,
+        ArrayService $arrayService
     ) {
         $this->setStringService($string);
         $this->setModule($module);
         $this->setDirService($dir);
+        $this->setArrayService($arrayService);
     }
 
 
