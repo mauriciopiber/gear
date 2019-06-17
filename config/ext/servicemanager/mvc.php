@@ -9,6 +9,7 @@ return [
     'factories' => [
         Mvc\Config\ConfigService::class                           => Mvc\Config\ConfigServiceFactory::class,
         Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
+        Mvc\LanguageService::class                                => Mvc\LanguageServiceFactory::class,
         // Mvc\ValueObject\ValueObjectTestService::class             => Mvc\ValueObject\ValueObjectTestServiceFactory::class,
         // Mvc\TraitTestService::class                               => Mvc\TraitTestServiceFactory::class,
         // Mvc\Controller\Web\WebControllerService::class             => Mvc\Controller\Web\WebControllerService::class,
@@ -28,7 +29,6 @@ return [
         // Mvc\ViewHelper\ViewHelperServiceTest::class               => Mvc\ViewHelper\ViewHelperTestService::class,
         // Mvc\View\App\AppControllerService::class                  => Mvc\View\App\AppControllerService::class,
         // Mvc\View\App\AppControllerSpecService::class              => Mvc\View\App\AppControllerSpecService::class,
-        // //Mvc\LanguageService::class                                => Mvc\LanguageService::class,
         // Mvc\Entity\EntityTestService::class                       => Mvc\Entity\EntityTestService::class,
         // Mvc\Entity\DoctrineService::class                         => Mvc\Entity\DoctrineService::class,
         // Mvc\Form\FormService::class                               => Mvc\Form\FormService::class,
