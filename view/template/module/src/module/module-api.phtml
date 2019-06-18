@@ -38,7 +38,7 @@ class Module
         $locator  = $app->getServiceManager();
         $view     = $locator->get('Zend\View\View');
         $strategy = $locator->get('ViewJsonStrategy');
-        $view->getEventManager()->attach($strategy, 100);
+        $strategy->attach($view->getEventManager(), 100);
 
         // attach a listener to check for errors
         $events = $mvcEvent->getTarget()->getEventManager();
