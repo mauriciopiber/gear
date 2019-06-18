@@ -40,8 +40,8 @@ class ZendServiceLocator
 
         $serviceLocator = new ServiceManager(new ServiceManagerConfig());
         $serviceLocator->setService('ApplicationConfig', $config);
-        $serviceLocator->get('ModuleManager')->loadModules();
-        $this->serviceLocator = $serviceLocator;
+        $container->get('ModuleManager')->loadModules();
+        $this->container = $serviceLocator;
     }
 
     public function getServiceManager()
@@ -72,22 +72,22 @@ class ZendServiceLocator
     public function getEntityManager()
     {
         if (!isset($this->entityManager)) {
-            $this->entityManager = $this->getServiceLocator()
+
             ->get('doctrine.entitymanager.orm_default');
         }
         return $this->entityManager;
     }
 
-    public function getServiceLocator()
+
     {
-        return $this->serviceLocator;
+        return $this->container;
     }
 
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function setServiceLocator(ContainerInterface $serviceLocator)
     {
-        if (!isset($this->serviceLocator)) {
-            $this->serviceLocator = $serviceLocator;
+        if (!isset($this->container)) {
+            $this->container = $serviceLocator;
         }
-        return $this->serviceLocator;
+        return $this->container;
     }
 }

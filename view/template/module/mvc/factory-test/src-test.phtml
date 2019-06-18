@@ -1,7 +1,7 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace; ?>;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>Factory;
 use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->class;?>;
 <?php echo $this->use;?>
@@ -15,12 +15,12 @@ class <?php echo $this->class;?>FactoryTest extends TestCase
 {
     public function test<?php echo $this->class;?>Factory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 <?php echo $this->dependency;?>
 
         $factory = new <?php echo $this->class;?>Factory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(<?php echo $this->class;?>::class, $instance);
     }

@@ -1,6 +1,6 @@
 namespace <?php echo $this->module;?>\Form;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Form\Form;
 
 abstract class AbstractForm extends Form implements
@@ -14,14 +14,14 @@ abstract class AbstractForm extends Form implements
         parent::__construct($formName);
     }
 
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function setServiceLocator(ContainerInterface $serviceLocator)
     {
-        $this->serviceLocator = $serviceLocator;
+        $this->container = $serviceLocator;
     }
 
-    public function getServiceLocator()
+
     {
-        return $this->serviceLocator;
+        return $this->container;
     }
 
     public function setEntityManager($entityManager)

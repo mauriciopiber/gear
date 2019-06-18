@@ -84,7 +84,7 @@ class Module
 
         if (!$request instanceof \Zend\Console\Request) {
             $serviceManager = $app->getServiceManager();
-            $serviceManager->get('router')->setTranslator($serviceManager->get('translator'));
+            $container->get('router')->setTranslator($container->get('translator'));
         }
     }
 
