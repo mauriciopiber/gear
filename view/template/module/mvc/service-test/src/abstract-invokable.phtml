@@ -8,7 +8,7 @@ use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this-
  */
 class <?php echo $this->className;?>Test extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = $this->getMockForAbstractClass('<?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>', [***REMOVED***, '', false);

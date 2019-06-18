@@ -10,7 +10,7 @@ use <?php echo $this->module;?>\Entity\<?php echo $this->className;?>;
  */
 class <?php echo $this->className;?>Test extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->entity = new <?php echo $this->className;?>();

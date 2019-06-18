@@ -20,7 +20,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
 <?php echo $this->extraFilter;?>
 <?php echo $this->static;?>
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->setApplicationConfig(
             include \GearBase\Module::getProjectFolder().'/config/application.config.php'

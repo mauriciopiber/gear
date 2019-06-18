@@ -10,7 +10,7 @@ class <?php echo $this->class;?>Test extends TestCase
 {
     protected $<?php echo $this->var;?>;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
     }

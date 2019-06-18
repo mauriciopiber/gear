@@ -7,7 +7,7 @@ use <?php echo $this->module;?>\Controller\IndexControllerFactory;
 
 class IndexControllerFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         $this->factory = new IndexControllerFactory();
         $this->controllerManager = $this->prophesize(ControllerManager::class);
