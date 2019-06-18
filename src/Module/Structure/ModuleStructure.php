@@ -57,12 +57,37 @@ class ModuleStructure
         return $this;
     }
 
+    public function normalizeQuotes($label, $size = 1)
+    {
+        if (!strpos($label, '\\') !== false) {
+            return $this->str('class', $label);
+        }
+
+        $module = $label;
+
+        $pieces = explode('\\', $module);
+        $fixStack = [***REMOVED***;
+
+        foreach ($pieces as $index => $piece) {
+            if (empty($piece)) {
+                continue;
+            }
+            $fixStack[***REMOVED*** = $this->str('class', $piece);
+        }
+
+        $quotes = str_repeat('\\', $size);
+
+
+        return implode($quotes, $fixStack);
+
+    }
+
     public function getNamespace()
     {
         if (empty($this->namespace)) {
-            return $this->moduleName;
+            return $this->normalizeQuotes($this->moduleName);
         }
-        return $this->namespace;
+        return $this->normalizeQuotes($this->namespace);
     }
 
     public function setStaging($staging)
@@ -85,19 +110,6 @@ class ModuleStructure
     public function getType()
     {
         return $this->type;
-    }
-
-    public function getRequestName()
-    {
-        if (! isset($this->requestName)) {
-            $this->requestName = $this->getServiceLocator()
-                ->get('application')
-                ->getMvcEvent()
-                ->getRequest()
-                ->getParam('module');
-        }
-
-        return $this->requestName;
     }
 
     public function setRequestName($requestName)

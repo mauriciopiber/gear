@@ -24,7 +24,50 @@ class ModuleStructureTest extends TestCase
         $this->dirService = $this->prophesize(DirService::class);
         $this->fileService = $this->prophesize(FileService::class);
 
-        $this->basicModuleStructure = new ModuleStructure($this->stringService, $this->dirService->reveal(), $this->fileService->reveal());
+        $this->basicModuleStructure = new ModuleStructure(
+            $this->stringService,
+            $this->dirService->reveal(),
+            $this->fileService->reveal()
+        );
+    }
+
+
+    public function normalizeDoubleQuote()
+    {
+        return [
+            ['My\\Data', 'My\\\\Data'***REMOVED***,
+            ['My\\\Data', 'My\\\\Data'***REMOVED***,
+            ['My\\\\Data', 'My\\\\Data'***REMOVED***,
+            ['My\\\\\\\\\Data', 'My\\\\Data'***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider normalizeDoubleQuote
+     */
+    public function testNormalizeDoubleQuote($input, $expect)
+    {
+        $output = $this->basicModuleStructure->normalizeQuotes($input, 2);
+        $this->assertEquals($expect, $output);
+    }
+
+    public function normalizeSingleQuote()
+    {
+        return [
+            ['My\\Data', 'My\\Data'***REMOVED***,
+            ['My\\\Data', 'My\\Data'***REMOVED***,
+            ['My\\\\Data', 'My\\Data'***REMOVED***,
+            ['My\\\\\\\\Data', 'My\\Data'***REMOVED***,
+        ***REMOVED***;
+    }
+
+    /**
+     * @dataProvider normalizeSingleQuote
+     */
+    public function testNormalizeSingleQuote($input, $expect)
+    {
+        $output = $this->basicModuleStructure->normalizeQuotes($input, 1);
+        $this->assertEquals($expect, $output);
     }
 
     public function wrapVfs($path)

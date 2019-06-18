@@ -12,7 +12,7 @@ class SrcController extends AbstractConsoleController
 
     public function __construct(SrcConstructor $srcService)
     {
-        $this->srcService = $srcService;
+        $this->setSrcConstructor($srcService);
     }
 
     public function createAction()
@@ -36,7 +36,7 @@ class SrcController extends AbstractConsoleController
 
 
 
-         $this->getSrcSchema()->create($data);
+         $this->getSrcConstructor()->create($data);
 
          $this->getEventManager()->trigger('gear.pos', $this);
 

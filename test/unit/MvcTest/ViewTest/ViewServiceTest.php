@@ -40,10 +40,7 @@ class ViewServiceTest extends TestCase
 
         $this->dir = new DirService();
 
-        $this->code = new Code(
-            $this->module->reveal(),
-            $this->string
-        );
+        $this->code = $this->createCode();
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
 

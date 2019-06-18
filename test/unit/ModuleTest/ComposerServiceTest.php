@@ -72,6 +72,9 @@ class ComposerServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn($name);
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn($name);
+
+        $this->module->normalizeQuotes($name, 2)->willReturn('Gear\\\\Gearing');
 
         $this->edge->getComposerModule('web')->willReturn(
             [
@@ -101,9 +104,16 @@ class ComposerServiceTest extends TestCase
     },
     "autoload" : {
         "psr-4" : {
-            "Gear\\\\Gearing\\\\" : "src",
+            "Gear\\\\Gearing\\\\" : "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "Gear\\\\Gearing\\\\Test\\\\" : "test/unit"
         }
+    },
+    "config": {
+        "secure-http": false
     },
     "repositories" : [
         {
@@ -132,6 +142,9 @@ EOS;
 
         $this->module->getModuleName()->willReturn($name);
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn($name);
+
+        $this->module->normalizeQuotes($name, 2)->willReturn('Gear\\\\Gearing\\\\MyOther');
 
         $this->edge->getComposerModule('web')->willReturn(
             [
@@ -161,9 +174,16 @@ EOS;
     },
     "autoload" : {
         "psr-4" : {
-            "Gear\\\\Gearing\\\\MyOther\\\\" : "src",
+            "Gear\\\\Gearing\\\\MyOther\\\\" : "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "Gear\\\\Gearing\\\\MyOther\\\\Test\\\\" : "test/unit"
         }
+    },
+    "config": {
+        "secure-http": false
     },
     "repositories" : [
         {
@@ -189,6 +209,9 @@ EOS;
 
         $this->module->getModuleName()->willReturn('Gearing');
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn('Gearing');
+
+        $this->module->normalizeQuotes('Gearing', 2)->willReturn('Gearing');
 
         $this->edge->getComposerModule('web')->willReturn(
             [
@@ -224,9 +247,16 @@ EOS;
     },
     "autoload" : {
         "psr-4" : {
-            "Gearing\\\\" : "src",
+            "Gearing\\\\" : "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "Gearing\\\\Test\\\\" : "test/unit"
         }
+    },
+    "config": {
+        "secure-http": false
     },
     "repositories" : [
         {

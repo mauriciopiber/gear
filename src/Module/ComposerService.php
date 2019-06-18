@@ -55,7 +55,7 @@ class ComposerService extends AbstractMvc
         $edge = $this->getComposerEdge()->getComposerModule($type);
 
         $namespace = $this->getModule()->getNamespace();
-        $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
+        $namespace = $this->getModule()->normalizeQuotes($namespace, 2);
 
         return $this->getFileCreator()->createFile(
             'template/module/composer-as-project.json.phtml',
