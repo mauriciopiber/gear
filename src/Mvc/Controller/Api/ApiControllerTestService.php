@@ -84,8 +84,11 @@ class ApiControllerTestService extends AbstractControllerTestService
     }
 
     private function getConfig() {
+        $namespace = $this->getModule()->getNamespace();
+        $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
+
         return [
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
+            'module' => $namespace
         ***REMOVED***;
     }
 
