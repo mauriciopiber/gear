@@ -46,10 +46,10 @@ class ServiceManager extends AbstractConfigManager implements
                 $type = $src->getType();
             }
 
-            return $this->getModule()->getModuleName().'\\'.$type.'\\'.$src->getName();
+            return $this->getModule()->getNamespace().'\\'.$type.'\\'.$src->getName();
         }
 
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
         $namespace .= $src->getNamespace();
 
@@ -76,10 +76,10 @@ class ServiceManager extends AbstractConfigManager implements
                 $type = $src->getType();
             }
 
-            return $this->getModule()->getModuleName().'\\'.$type.'\\'.$name;
+            return $this->getModule()->getNamespace().'\\'.$type.'\\'.$name;
         }
 
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
         $namespace .= $src->getNamespace();
 

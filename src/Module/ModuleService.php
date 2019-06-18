@@ -500,7 +500,7 @@ class ModuleService
     {
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/config/application-config/application.config.%s.phtml', $type));
-        $file->setOptions(['module' => $this->getModuleNamespace()***REMOVED***);
+        $file->setOptions(['module' => $this->getModule()->getNamespace()***REMOVED***);
         $file->setFileName('application.config.php');
         $file->setLocation($this->getModule()->getConfigFolder());
         return $file->render();
