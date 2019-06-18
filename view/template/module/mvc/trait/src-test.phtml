@@ -13,7 +13,7 @@ class <?php echo $this->class;?>TraitTest extends TestCase
 {
     use <?php echo $this->class;?>Trait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this-><?php echo $this->var;?>Mock = $this->prophesize(<?php echo $this->class;?>::class);
     }
