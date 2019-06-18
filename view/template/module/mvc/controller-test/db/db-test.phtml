@@ -31,7 +31,7 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
         $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../schema/module.json';
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         $refl = new \ReflectionObject($this);
         foreach ($refl->getProperties() as $prop) {

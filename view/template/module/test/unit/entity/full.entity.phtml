@@ -15,7 +15,7 @@ class <?php echo $this->serviceNameClass;?>Test extends TestCase
         $this->bootstrap = new \<?php echo $this->module;?>\ZendServiceLocator();
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         unset($this->bootstrap);
     }
