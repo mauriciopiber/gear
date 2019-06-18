@@ -1,11 +1,12 @@
 namespace <?php echo $this->module;?>Test\EntityTest;
 
 /**
+use PHPUnit\Framework\TestCase;
  * @group <?php echo $this->module.PHP_EOL;?>
  * @group <?php echo $this->serviceNameClass.PHP_EOL;?>
  * @group Entity
  */
-class <?php echo $this->serviceNameClass;?>Test extends \PHPUnit_Framework_TestCase
+class <?php echo $this->serviceNameClass;?>Test extends TestCase
 {
     protected $<?php echo $this->serviceNameUline;?>;
 
