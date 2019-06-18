@@ -1,18 +1,16 @@
 namespace <?php echo $this->module;?>Test\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use <?php echo $this->module?>\Controller\IndexController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group Controller
  */
 class IndexControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -24,30 +22,16 @@ class IndexControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
         $this->controller = new IndexController();
         $this->request    = new Request();
         $this->routeMatch = new RouteMatch(array('controller' => 'IndexController'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = \<?php echo $this->module;?>\Module::LOCATION.'/../schema/module.json';
     }
 
     public function testIndexAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            'IndexController',
-            'Controller',
-            'Index'
-        );
-
         $this->routeMatch->setParam('action', 'index');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

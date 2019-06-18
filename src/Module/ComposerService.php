@@ -54,10 +54,13 @@ class ComposerService extends AbstractMvc
     {
         $edge = $this->getComposerEdge()->getComposerModule($type);
 
+        $namespace = $this->getModule()->getNamespace();
+        $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
+
         return $this->getFileCreator()->createFile(
             'template/module/composer-as-project.json.phtml',
             array(
-                'module' => $this->getModuleNamespace(),
+                'module' => $namespace,
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'require' => $this->getArrayService()->toJson($edge['require'***REMOVED***, 2),
                 'requireDev' => $this->getArrayService()->toJson($edge['require-dev'***REMOVED***, 2)
@@ -65,29 +68,6 @@ class ComposerService extends AbstractMvc
             'composer.json',
             $this->getModule()->getMainFolder()
         );
-    }
-
-    public function createComposer()
-    {
-        $this->getFileCreator()->createFile(
-            'template/module/composer.json.phtml',
-            array(
-                'module' => $this->str('class', $this->getModule()->getModuleName()),
-                'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-            ),
-            'composer.json',
-            $this->getModule()->getMainFolder()
-        );
-
-
-        $initAutoloader = $this->getFileCreator();
-        $initAutoloader->setView('template/module/test/init_autoloader.phtml');
-        $initAutoloader->setOptions(['test' => 1***REMOVED***);
-        $initAutoloader->setFileName('init_autoloader.php');
-        $initAutoloader->setLocation($this->getModule()->getMainFolder());
-        $initAutoloader->render();
-
-        return;
     }
 
     public function getName()

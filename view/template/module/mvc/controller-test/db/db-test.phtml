@@ -1,11 +1,10 @@
 namespace <?php echo $this->module;?>Test\<?php echo $this->namespace;?>;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use <?php echo $this->module?>\<?php echo $this->testNamespace;?>\<?php echo $this->controllerName; ?>;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
 
 /**
  * @group <?php echo $this->module.PHP_EOL;?>
@@ -15,20 +14,14 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class <?php echo $this->controllerName; ?>Test extends TestCase
 {
-    use AclAssertTrait;
+
 <?php echo $this->extraColumns;?>
 <?php echo $this->extraFilter;?>
 <?php echo $this->static;?>
 
     public function setUp() : void
-    {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-        parent::setUp();
+    {        parent::setUp();
 <?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
-
-        $this->schema = (new \<?php echo $this->module;?>\Module())->getLocation().'/../schema/module.json';
     }
 
     protected function tearDown() : void
@@ -47,14 +40,6 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace; ?>',
-            'Create'
-        );
-
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -117,14 +102,6 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace; ?>',
-            'Edit'
-        );
-
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
 
         $this-><?php echo $this->tableVar;?>Service->selectById(31)->willReturn($this->entity);
@@ -158,14 +135,6 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace; ?>',
-            'List'
-        );
-
         $this-><?php echo $this->tableVar;?>Service->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -180,14 +149,6 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace; ?>',
-            'View'
-        );
-
         $this->entity = $this->prophesize('<?php echo $this->module;?>\Entity\<?php echo $this->table;?>');
         //$this->entity->getId<?php echo $this->table;?>()->willReturn(31)->shouldBeCalled();
 
@@ -242,14 +203,6 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace; ?>',
-            'Delete'
-        );
-
         $this-><?php echo $this->tableVar;?>Service->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
