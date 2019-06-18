@@ -138,13 +138,13 @@ class ModuleControllerTest extends TestCase
     public function testCreateModuleAsProject($type)
     {
 
-        $this->module->moduleAsProject('Gearing', '/var/www/teste', $type, 'stag.com.br')->willReturn(true);
+        $this->module->moduleAsProject('Gearing', '/var/www/teste', $type, 'Pbr\\Gearing')->willReturn(true);
 
         $this->request->setParams(new Parameters([
             'type' => $type,
             'module' => 'Gearing',
             'basepath' => '/var/www/teste',
-            'staging' => 'stag.com.br',
+            'namespace' => 'Pbr\\Gearing',
         ***REMOVED***));
 
         $this->routeMatch->setParam('action', 'module-as-project');
