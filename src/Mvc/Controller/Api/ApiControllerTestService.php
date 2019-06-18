@@ -263,7 +263,7 @@ class ApiControllerTestService extends AbstractControllerTestService
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
-                    'module' => $this->getModule()->getModuleName(),
+                    'module' => $this->getModule()->getNamespace(),
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'namespace' => $this->controller->getNamespace(),

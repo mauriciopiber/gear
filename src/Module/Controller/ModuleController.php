@@ -138,10 +138,16 @@ class ModuleController extends AbstractConsoleController
         $type            = $this->getRequest()->getParam('type', 'web');
         $moduleName      = $this->getRequest()->getParam('module');
         $basepath        = $this->getRequest()->getParam('basepath');
-        $staging         = $this->getRequest()->getParam('staging', null);
+
+        $namespace = $this->getRequest()->getParam('namespace', null);
 
         $module = $this->getModuleService();
-        $module->moduleAsProject($moduleName, $basepath, $type, $staging);
+        $module->moduleAsProject(
+            $moduleName,
+            $basepath,
+            $type,
+            $namespace
+        );
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
@@ -159,6 +165,89 @@ class ModuleController extends AbstractConsoleController
 
         $module = $this->getModuleUpgrade();
         $module->upgrade($type, $just, $force);
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function fixtureAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-fixture'));
+
+        $module = $this->getFixtureService();
+        $module->importModule();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    /**
+     * Carrega um módulo no projeto por meio do application.config.php
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function loadAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
+
+        $module = $this->getApplicationConfig();
+        $module->addModuleToProject();
+
+        $this->getCacheService()->renewFileCache();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    /**
+     * Remove um módulo do application.config.php do projeto
+     *
+     * @return \Zend\View\Model\ConsoleModel
+     */
+    public function unloadAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
+
+        $module = $this->getApplicationConfig();
+        $module->unload();
+
+        $this->getCacheService()->renewFileCache();
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+
+
+    public function entityAction()
+    {
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entity'));
+
+        $request = $this->getRequest();
+        $prefix  = $request->getParam('prefix', false);
+        $tables  = $request->getParam('entity', array());
+
+        $entityService = $this->getEntityService();
+        $entityService->setUpEntity(array('prefix' => $prefix, 'tables' => $tables));
+
+        $this->getEventManager()->trigger('gear.pos', $this);
+
+        return new ConsoleModel();
+    }
+
+    public function entitiesAction()
+    {
+
+        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entities'));
+
+
+        $request = $this->getRequest();
+        $entityService = $this->getEntityService();
+        $entityService->setUpEntities(array('prefix' => $request->getParam('prefix', false)));
 
         $this->getEventManager()->trigger('gear.pos', $this);
 

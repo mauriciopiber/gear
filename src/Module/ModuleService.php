@@ -815,7 +815,7 @@ class ModuleService
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/src/module/module-%s.phtml', $this->type));
         $file->setOptions([
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'layout' => $layoutName
         ***REMOVED***);
@@ -838,7 +838,7 @@ class ModuleService
         $file->setTemplate('template/module/test/module-test.phtml');
         $file->setOptions(
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             )
         );
         $file->setLocation($this->getModule()->getTestUnitModuleFolder());

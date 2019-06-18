@@ -42,7 +42,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
         $options = [
             'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $this->controller->getActions(),
             'controllerName' => $this->controller->getName(),
@@ -92,7 +92,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
     public function basicOptions()
     {
         return array(
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
             'moduleVar' => $this->str('var', $this->getModule()->getModuleName()),
@@ -159,7 +159,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
             $finalValue = $this->getFileColumns($columnsImage);
 
             $localOptions = [
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'class' => $this->controller->getNameOff(),
                 'columns' => $finalValue,
             ***REMOVED***;
@@ -236,7 +236,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
                 'namespace' => $this->getCodeTest()->getNamespace($this->controller),
                 'testNamespace' => $this->getCodeTest()->getTestNamespace($this->controller),
                 'setUp' => $this->setUp,
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),
                 'controllerNamespace' => $this->controller->getNamespace(),
@@ -313,7 +313,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
         return $this->getFileCreator()->createFile(
             'template/module/mvc/controller-test/module/module-controller-factory.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'IndexControllerFactoryTest.php',
@@ -329,7 +329,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
         return $this->getFileCreator()->createFile(
             'template/module/mvc/controller-test/module/module-controller.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
             ),
             'IndexControllerTest.php',
@@ -421,7 +421,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
-                    'module' => $this->getModule()->getModuleName(),
+                    'module' => $this->getModule()->getNamespace(),
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'controllerNamespace' => ($this->controller->getNamespace() !== null ? $this->controller->getNamespace() : 'Controller'),

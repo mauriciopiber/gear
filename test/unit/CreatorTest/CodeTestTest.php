@@ -2,6 +2,10 @@
 namespace GearTest\CreatorTest\FileCreatorTest\AppTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Creator\CodeTest;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Vector\ArrayService;
 
 /**
  * @group Creator
@@ -13,12 +17,22 @@ class CreateTestTest extends TestCase
     {
         parent::setUp();
 
-        $this->codeTest = new \Gear\Creator\CodeTest();
+        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $module->getModuleName()->willReturn('GearIt');
 
-        $this->codeTest->setModule($module->reveal());
+        $this->string = new StringService();
+
+        $this->codeTest = new CodeTest(
+            $this->module->reveal(),
+            $this->string,
+            new DirService(),
+            new ArrayService()
+            //new ConstructorParams($this->string)
+        );
+
+
+        $this->module->getModuleName()->willReturn('GearIt');
+
     }
 
 

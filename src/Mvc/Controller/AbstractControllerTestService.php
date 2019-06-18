@@ -8,7 +8,7 @@ abstract class AbstractControllerTestService extends AbstractMvcTest
     public function mergeConfig(array $config)
     {
           $options = [
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $this->controller->getActions(),
             'controllerName' => $this->controller->getName(),

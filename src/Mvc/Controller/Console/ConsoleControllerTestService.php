@@ -21,7 +21,7 @@ class ConsoleControllerTestService
         return $this->getFileCreator()->createFile(
             'template/module/mvc/console-test/module/module.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'IndexControllerTest.php',
             $this->getModule()->getTestControllerFolder()
@@ -33,7 +33,7 @@ class ConsoleControllerTestService
         return $this->getFileCreator()->createFile(
             'template/module/mvc/console-test/module/module-factory.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'IndexControllerFactoryTest.php',
             $this->getModule()->getTestControllerFolder()
@@ -46,7 +46,7 @@ class ConsoleControllerTestService
         $this->getFileCreator()->createFile(
             'template/module/mvc/console-controller/test-abstract.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'AbstractConsoleControllerTestCase.php',
             $this->getModule()->getTestControllerFolder()
@@ -175,7 +175,7 @@ class ConsoleControllerTestService
                 [
                     'actionName' => $actionName,
                     'routeUrl' => $routeUrl,
-                    'module' => $this->getModule()->getModuleName(),
+                    'module' => $this->getModule()->getNamespace(),
                     'actionNameUrl' => $this->str('url', $actionName),
                     'controllerName' => $controller,
                     'namespace' => $this->controller->getNamespace(),
