@@ -17,10 +17,10 @@ class ControllerManager extends AbstractConfigManager implements
     public function getServiceName(Controller $src)
     {
         if (empty($src->getNamespace())) {
-            return $this->getModule()->getModuleName().'\\Controller\\'.$src->getName();
+            return $this->getModule()->getNamespace().'\\Controller\\'.$src->getName();
         }
 
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
         $namespace .= $src->getNamespace();
 
@@ -61,7 +61,7 @@ class ControllerManager extends AbstractConfigManager implements
 
             $invokables[$invokeName***REMOVED*** = sprintf(
                 '%s\%s\%s',
-                $this->getModule()->getModuleName(),
+                $this->getModule()->getNamespace(),
                 $namespace,
                 $name
             );
