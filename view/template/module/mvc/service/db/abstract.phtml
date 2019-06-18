@@ -1,6 +1,6 @@
 namespace <?php echo $this->module;?>\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 use Zend\Session\Container;
@@ -154,7 +154,7 @@ abstract class AbstractService implements
     public function getRouteMatch()
     {
         if (!isset($this->routeMatch)) {
-            $this->routeMatch =$this->getServiceLocator()
+
               ->get('application')
               ->getMvcEvent()
               ->getRouteMatch();
@@ -175,13 +175,13 @@ abstract class AbstractService implements
         return $routeMatch->getParam('order') ? $routeMatch->getParam('order') : 'DESC';
     }
 
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    public function setServiceLocator(ContainerInterface $serviceLocator)
     {
-        $this->serviceLocator = $serviceLocator;
+        $this->container = $serviceLocator;
     }
 
-    public function getServiceLocator()
+
     {
-        return $this->serviceLocator;
+        return $this->container;
     }
 }

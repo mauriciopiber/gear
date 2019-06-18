@@ -16,16 +16,16 @@ class <?php echo $this->class;?>FactoryTest extends TestCase
 {
     public function test<?php echo $this->class;?>Factory()
     {
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
-        $this->serviceLocator = $this->prophesize(ServiceManager::class);
+
+        $this->container = $this->prophesize(ServiceManager::class);
 <?php echo $this->dependency;?>
 
-        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+
 
         $factory = new <?php echo $this->class;?>Factory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(<?php echo $this->class;?>::class, $instance);
     }

@@ -1,7 +1,7 @@
 namespace <?php echo $this->namespace;?>;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use <?php echo $this->namespace;?>\<?php echo $this->className;?>;
 <?php echo $this->use; ?>
 
@@ -11,18 +11,18 @@ class <?php echo $this->className;?>Factory implements FactoryInterface
     /**
      * Create <?php echo $this->className.PHP_EOL;?>
      *
-     * @param ServiceLocatorInterface $controllerManager Controller Manager
+     * @param ContainerInterface $container Controller Manager
      *
      * @return <?php echo $this->className.PHP_EOL;?>
      */
-    public function createService(ServiceLocatorInterface $controllerManager)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $serviceLocator = $controllerManager->getServiceLocator();
+        
 
         $factory = new <?php echo $this->className;?>(
 <?php echo $this->dependency;?>
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }
