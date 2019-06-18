@@ -13,7 +13,7 @@ class ConsoleControllerService extends AbstractControllerService implements Abst
         return $this->getFileCreator()->createFile(
             'template/module/mvc/console-controller/module.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'namespace' => $this->getModuleNamespace()
             ),
             'IndexController.php',
@@ -26,7 +26,7 @@ class ConsoleControllerService extends AbstractControllerService implements Abst
         return $this->getFileCreator()->createFile(
             'template/module/mvc/console-controller/module-factory.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'IndexControllerFactory.php',
             $this->getModule()->getControllerFolder()
@@ -47,7 +47,7 @@ class ConsoleControllerService extends AbstractControllerService implements Abst
             'attribute' => $this->getCode()->getUseAttribute($controller),
             'use' => $this->getCode()->getUse($controller),
             'namespace' => $this->getCode()->getNamespace($controller),
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),

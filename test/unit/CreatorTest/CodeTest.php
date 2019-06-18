@@ -8,6 +8,7 @@ use Gear\Creator\Code;
 use Gear\Creator\ControllerDependency;
 use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Util\Dir\DirService;
 
 /**
  * @group RefactoringSrc
@@ -26,13 +27,14 @@ class CodeTest extends TestCase
 
         $this->code = new Code(
             $this->module->reveal(),
-            $this->string
+            $this->string,
+            new DirService(),
+            new ConstructorParams($this->string)
         );
 
 
-        $constructorParams = new ConstructorParams($this->string);
 
-        $this->code->setConstructorParams($constructorParams);
+
 
         $this->template = (new \Gear\Module())->getLocation().'/../';
         $this->template .= 'test/template/module/code';

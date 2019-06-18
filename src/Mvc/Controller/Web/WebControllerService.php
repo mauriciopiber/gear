@@ -41,7 +41,7 @@ class WebControllerService extends AbstractControllerService implements
         return $this->getFileCreator()->createFile(
             $this->getTemplate('module'),
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'IndexController.php',
             $this->getModule()->getControllerFolder()
@@ -53,7 +53,7 @@ class WebControllerService extends AbstractControllerService implements
         return $this->getFileCreator()->createFile(
             $this->getTemplate('module-factory'),
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
             ),
             'IndexControllerFactory.php',
             $this->getModule()->getControllerFolder()
@@ -82,7 +82,7 @@ class WebControllerService extends AbstractControllerService implements
             'attribute' => $this->getCode()->getUseAttribute($controller),
 
             'namespace' => $this->getCode()->getNamespace($controller),
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),
@@ -245,7 +245,7 @@ class WebControllerService extends AbstractControllerService implements
             $options,
             [
                 'namespace' => $this->getCode()->getNamespace($this->controller),
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllerName' => $this->controller->getName(),
                 'controllerUrl' => $this->str('url', $this->controller->getName()),
@@ -271,7 +271,7 @@ class WebControllerService extends AbstractControllerService implements
             'dataUrl' => $this->str('url', $this->controller->getNameOff()),
             'tableUrl' => $this->str('url', $this->controller->getNameOff()),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'var' => $this->str('var', $this->controller->getNameOff()),
             'varLength' =>  $this->str('var-length', $this->controller->getNameOff())
         );

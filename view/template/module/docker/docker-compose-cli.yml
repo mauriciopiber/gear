@@ -5,11 +5,15 @@ services:
     image: registry.piber.network/dev-php:v1.0.7
     tty: true
     volumes:
-      - /opt/composer-cache:/root/.composer/cache
       - .:/var/www/module
+      - ~/.composer:/root/.composer
+      #- ~/.composer:
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT
     ports:
       - 8006:80
-volumes:
-  gear-database:
+    networks:
+      - satis
+networks:
+  satis:
+    external: true

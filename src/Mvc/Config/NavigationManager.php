@@ -18,7 +18,7 @@ class NavigationManager extends AbstractConfigManager implements ModuleManagerIn
         return $this->getFileCreator()->createFile(
             'template/module/config/navigation.config.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'moduleLabel' => $this->str('label', $this->getModule()->getModuleName()),
                 'controllers' => $controllers

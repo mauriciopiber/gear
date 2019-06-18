@@ -40,7 +40,7 @@ class CodeceptionService extends AbstractJsonService
     {
         return $this->getFileCreator()->createFile(
             'template/module/test/_bootstrap.phtml',
-            array('module' => $this->getModule()->getModuleName()),
+            array('module' => $this->getModule()->getNamespace()),
             '_bootstrap.php',
             $this->getModule()->getTestFolder()
         );
@@ -65,7 +65,7 @@ class CodeceptionService extends AbstractJsonService
     {
         return $this->getFileCreator()->createFile(
             'template/module/test/unit/UnitTester.phtml',
-            array('module' => $this->getModule()->getModuleName()),
+            array('module' => $this->getModule()->getNamespace()),
             'UnitTester.php',
             $this->getModule()->getTestUnitModuleFolder()
         );
@@ -75,7 +75,7 @@ class CodeceptionService extends AbstractJsonService
     {
         return $this->getFileCreator()->createFile(
             'template/module/test/support/UnitHelper.phtml',
-            array('module' => $this->getModule()->getModuleName()),
+            array('module' => $this->getModule()->getNamespace()),
             'UnitHelper.php',
             $this->getModule()->getTestSupportFolder()
         );
@@ -100,7 +100,7 @@ class CodeceptionService extends AbstractJsonService
         $fileCreator->setOptions(
             array_merge(
                 array(
-                    'module' => $this->getModule()->getModuleName(),
+                    'module' => $this->getModule()->getNamespace(),
                     'moduleUline' => $this->str('uline', $this->getModule()->getModuleName()),
                     'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
                 ),

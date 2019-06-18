@@ -13,7 +13,7 @@ class ConsoleRouterManager extends AbstractConfigManager implements ModuleManage
         $this->getFileCreator()->createFile(
             'template/module/config/console.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
                 'controllers' => $controllers
             ),

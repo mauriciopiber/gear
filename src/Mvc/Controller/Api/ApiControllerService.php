@@ -103,7 +103,7 @@ class ApiControllerService extends AbstractControllerService implements Abstract
             'attribute' => $this->getCode()->getUseAttribute($controller),
             'use' => $this->getCode()->getUse($controller),
             'namespace' => $this->getCode()->getNamespace($controller),
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'actions' => $controller->getAction(),
             'controllerName' => $controller->getName(),

@@ -41,7 +41,7 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://mirror.piber.network"
+            "url": "http://satis"
         },
         {
             "packagist": false

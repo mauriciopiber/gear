@@ -19,9 +19,11 @@ class IndexControllerFactory implements FactoryInterface
     /**
      * Create Index Controller
      *
+     * @param ServiceLocatorInterface $controllerManager Controller Manager\n
      *
      * @return MyModule\Controller\IndexController
      */
+    public function createService(ServiceLocatorInterface $controllerManager)
     {
         $indexController = new IndexController();
         return $indexController;

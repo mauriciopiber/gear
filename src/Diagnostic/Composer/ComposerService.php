@@ -23,13 +23,13 @@ class ComposerService implements ModuleDiagnosticInterface
 
     static public $missingFile = 'Composer - Está faltando o arquivo composer.json';
 
-    static public $satis = 'https://mirror.piber.network';
+    static public $satis = 'http://satis';
 
     static public $missingName = 'Composer - Adicione o nome corretamente';
 
     static public $missingAutoload = 'Composer - Adicione o Autoload PSR-0 no módulo';
 
-    static public $missingSatis = 'Composer - Adicione o repositório https://mirror.piber.network ao composer';
+    static public $missingSatis = 'Composer - Adicione o repositório http://satis ao composer';
 
     static public $missingPackFalse = 'Composer - Adicione a opção de desativar o packagist global no composer';
 

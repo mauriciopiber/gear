@@ -8,14 +8,21 @@
     },
     "autoload" : {
         "psr-4" : {
-            "<?php echo $this->module;?>\\" : "src",
+            "<?php echo $this->module;?>\\" : "src"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4" : {
             "<?php echo $this->module;?>\\Test\\" : "test/unit"
         }
+    },
+    "config": {
+        "secure-http": false
     },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.piber.network"
+            "url" : "http://satis"
         },
         { "packagist" : false }
     ***REMOVED***

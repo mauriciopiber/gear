@@ -4,15 +4,19 @@ namespace Gear\Module\Structure;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Util\File\FileService;
 
 class ModuleStructureFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
+        $string = $container->get(StringService::class);
         $structure = new ModuleStructure(
-            $container->get('Gear\Util\String\StringService'),
-            $container->get('Gear\Util\Dir\DirService'),
-            $container->get('Gear\Util\File\FileService')
+            $string,
+            $container->get(DirService::class),
+            $container->get(FileService::class)
         );
 
         $request = $container->get('Application')->getMvcEvent()->getRouteMatch();
@@ -38,8 +42,7 @@ class ModuleStructureFactory implements FactoryInterface
         $location = $request->getParam('basepath');
 
         if (!empty($location)) {
-            $str = $container->get('Gear\Util\String\StringService');
-            $mainFolder = realpath($location).'/'.$str->str('url', $moduleName);
+            $mainFolder = realpath($location).'/'.$string->str('url', $moduleName);
             $structure->setMainFolder($mainFolder);
         }
 

@@ -243,7 +243,7 @@ class ConfigService implements ModuleConstructorInterface
         $git = $this->getGit($git);
 
         $options = [
-            'module' => $this->getModule()->getModuleName(),
+            'module' => $this->getModule()->getNamespace(),
             'moduleUrl' => $this->str('url', $this->getModule()->getModuleName()),
             'controllers' => $controllers,
             'git' => $git
@@ -271,7 +271,7 @@ class ConfigService implements ModuleConstructorInterface
         $this->getFileCreator()->createFile(
             'template/module/config/db.mysql.config.phtml',
             [
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleDb' => $this->str('uline', $this->getModule()->getModuleName()),
             ***REMOVED***,
             'db.config.php',
@@ -284,7 +284,7 @@ class ConfigService implements ModuleConstructorInterface
         $this->getFileCreator()->createFile(
             'template/module/config/doctrine.mysql.config.phtml',
             array(
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'moduleUline' => $this->str('uline', $this->getModule()->getModuleName())
             ),
             'doctrine.config.php',

@@ -25,7 +25,7 @@ class ComposerUpgrade implements ModuleUpgradeInterface
 
     use ConsolePromptTrait;
 
-    static public $satisUrl = 'https://mirror.piber.network';
+    static public $satisUrl = 'http://satis';
 
     static public $shouldFile = 'Composer - Você quer criar o arquivo composer.json?';
 

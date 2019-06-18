@@ -37,13 +37,13 @@
             "MyModuleCli": "module/MyModuleCli/src",
             "MyModuleCliTest": "module/MyModuleCli/test/unit",
             "MyModuleWeb": "module/MyModuleWeb/src",
-            "MyModuleWebTest": "module/MyModuleWeb/test/unit"            
+            "MyModuleWebTest": "module/MyModuleWeb/test/unit"
         }
-    },    
+    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "https://mirror.piber.network"
+            "url" : "http://satis"
         },
         { "packagist" : false }
     ***REMOVED***
