@@ -83,7 +83,8 @@ class ApiControllerTestService extends AbstractControllerTestService
         return $file->render();
     }
 
-    private function getConfig() {
+    private function getConfig()
+    {
         $namespace = $this->getModule()->getNamespace();
         $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
 

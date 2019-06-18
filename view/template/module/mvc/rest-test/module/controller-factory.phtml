@@ -15,6 +15,7 @@ class IndexControllerFactoryTest extends TestCase
 
     public function testCreateFactory()
     {
+        $this->container = $this->prophesize(ControllerManager::class);
         $instance = $this->factory->__invoke($this->container->reveal(), null);
         $this->assertInstanceOf(IndexController::class, $instance);
     }
