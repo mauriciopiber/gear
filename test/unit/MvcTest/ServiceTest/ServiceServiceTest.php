@@ -17,6 +17,7 @@ use Gear\Util\Vector\ArrayService;
 use Gear\Schema\Db\Db;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
+use Gear\Util\Dir\DirService;
 
 /**
  * @group src-mvc
@@ -38,61 +39,28 @@ class ServiceServiceTest extends TestCase
 
         $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/service';
 
-        $this->service = new ServiceService();
-
-        //module
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->service->setModule($this->module->reveal());
-
-        //string
         $this->string = new StringService();
-        $this->service->setStringService($this->string);
-
         $this->fileCreator    = $this->createFileCreator();
-        $this->service->setFileCreator($this->fileCreator);
 
-        //code
-        $this->code = new Code();
-        $this->code->setModule($this->module->reveal());
-        $this->code->setStringService($this->string);
-        $this->code->setDirService(new \Gear\Util\Dir\DirService());
-
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
-
-        $this->service->setCode($this->code);
+        $this->code = $this->createCode();
 
 
-        //factory
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->service->setFactoryService($this->factory->reveal());
-
-        //trait
-        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
-        $this->service->setTraitService($this->trait->reveal());
-
-        //array
         $this->arrayService = new ArrayService();
-
-        //injector
-        $this->injector = new Injector($this->arrayService);
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->service->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->service->setSchemaService($this->schemaService->reveal());
-
-        $this->serviceTest = $this->prophesize('Gear\Mvc\Service\ServiceTestService');
-        $this->service->setServiceTestService($this->serviceTest->reveal());
-
-        $this->serviceManager = new ServiceManager(
+        $this->service = new ServiceService(
             $this->module->reveal(),
             $this->fileCreator,
-            $this->string
+            $this->string,
+            $this->code,
+            new DirService(),
+            $this->table->reveal(),
+            $this->arrayService
         );
 
-        $this->service->setServiceManager($this->serviceManager);
+        $this->injector = new Injector($this->arrayService);
+
     }
 
     /**
@@ -105,7 +73,7 @@ class ServiceServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
-        $this->factory->createFactory($data)->shouldBeCalled();
+        //$this->factory->createFactory($data)->shouldBeCalled();
 
         $file = $this->service->createService($data);
 
@@ -117,10 +85,10 @@ class ServiceServiceTest extends TestCase
         );
     }
 
-    /**
+    /*
      * @dataProvider tables
      * @group inter
-     */
+
     public function testInstrospectTable(
         $columns,
         $template,
@@ -198,6 +166,7 @@ class ServiceServiceTest extends TestCase
         $this->assertStringEndsWith($location.'/'.$serviceT->getName().'.php', $file);
     }
 
+    */
     public function src()
     {
         $srcType = 'Service';
@@ -223,12 +192,8 @@ class ServiceServiceTest extends TestCase
             $this->module->map('Service')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        if ($data->isFactory() && $data->getAbstract() == false) {
-            $this->factory->createFactory($data)->shouldBeCalled();
-        }
 
-
-        $this->serviceTest->createServiceTest($data)->shouldBeCalled();
+        //$this->serviceTest->createServiceTest($data)->shouldBeCalled();
 
         $file = $this->service->createService($data);
 

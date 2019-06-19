@@ -274,8 +274,6 @@ class SrcConstructor extends AbstractConstructor
             return self::TYPE_NOT_FOUND;
         }
 
-
-
         if ($this->src->isAbstract() === false) {
             $this->createTrait($this->src);
         }
