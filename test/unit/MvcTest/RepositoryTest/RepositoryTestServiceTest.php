@@ -8,6 +8,7 @@ use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Schema\Src\Src;
 use Gear\Column\ColumnManager;
+use Gear\Schema\Schema\SchemaService;
 
 /**
  * @group src-mvc
@@ -26,47 +27,27 @@ class RepositoryTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/RepositoryTest';
         $this->createVirtualDir($this->vfsLocation);
 
-
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository-test';
 
-        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService();
-
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->repository->setModule($this->module->reveal());
 
         $this->string = new \Gear\Util\String\StringService();
-        $this->repository->setStringService($this->string);
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-        $this->repository->setFileCreator($this->fileCreator);
-
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->serviceManager->setStringService($this->string);
-        $this->repository->setServiceManager($this->serviceManager);
-
-        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
-        $this->repository->setTraitTestService($this->traitTest->reveal());
-
-        $this->codeTest = new \Gear\Creator\CodeTest;
-        $this->codeTest->setStringService($this->string);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->repository->setCodeTest($this->codeTest);
-
-        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->repository->setFactoryTestService($this->factoryTest->reveal());
-
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
-        //$this->repository->setColumnService($this->column->reveal());
+        $this->fileCreator = $this->createFileCreator();
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->repository->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schemaService = $this->prophesize(SchemaService::class);
+
+
+        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->createCodeTest(),
+            $this->table->reveal(),
+            $this->createInjector()
+        );
         $this->repository->setSchemaService($this->schemaService->reveal());
     }
 
@@ -78,6 +59,7 @@ class RepositoryTestServiceTest extends TestCase
         $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
 
@@ -104,6 +86,7 @@ class RepositoryTestServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {
             $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
@@ -174,10 +157,6 @@ class RepositoryTestServiceTest extends TestCase
         $this->table->getPrimaryKeyColumnName($this->db->getTable())->willReturn('idMyController')->shouldBeCalled();
 
         $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
-
-        $this->traitTest->createTraitTest($repository)->shouldBeCalled();
-
-        $this->factoryTest->createFactoryTest($repository)->shouldBeCalled();
 
         $file = $this->repository->createRepositoryTest($this->db);
 

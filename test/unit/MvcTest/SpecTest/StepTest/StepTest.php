@@ -41,7 +41,17 @@ class StepTest extends TestCase
 
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/step';
 
-        $this->step = new Step();
+        $this->step = new Step(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->createTableService(),
+            $this->createArrayService(),
+            $this->createInjector()
+        );
         $this->step->setModule($this->module->reveal());
         $this->step->setStringService($this->string);
         $this->step->setFileCreator($this->fileCreator);

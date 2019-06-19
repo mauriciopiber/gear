@@ -35,31 +35,19 @@ class InterfaceTestServiceTest extends TestCase
 
         $this->templates = $this->baseDir.'/../test/template/module/mvc/interface';
 
-        $template       = new TemplateService();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new FileService();
-        $this->string  = new StringService();
-        $fileCreator    = new FileCreator($fileService, $template);
-
-        $code = new Code();
-        $code->setModule($this->module->reveal());
-        $code->setStringService($this->string);
-        $code->setDirService(new DirService());
+        $fileCreator    = $this->createFileCreator();
 
         $this->interface = new InterfaceService(
-            /*
             $this->module->reveal(),
-            $fileCreator,
-            $stringService,
-            $codeTest
-            */
+            $this->createFileCreator(),
+            $this->createString(),
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->createTableService(),
+            $this->createArrayService(),
+            $this->createInjector()
         );
-
-        $this->interface->setModule($this->module->reveal());
-        $this->interface->setFileCreator($fileCreator);
-        $this->interface->setStringService($this->string);
-        $this->interface->setCode($code);
     }
 
     public function getData()
@@ -129,6 +117,7 @@ class InterfaceTestServiceTest extends TestCase
     {
         $this->module->map('Interface')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->interface->create($src);
 

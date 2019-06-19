@@ -50,7 +50,9 @@ class ViewServiceTest extends TestCase
             $this->string,
             $this->code,
             $this->dir,
-            $this->table->reveal()
+            $this->table->reveal(),
+            $this->createArrayService(),
+            $this->createInjector()
         );
         // $this->view->setDirService($this->dir);
         // $this->view->setStringService($this->string);

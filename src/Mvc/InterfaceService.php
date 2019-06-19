@@ -10,8 +10,9 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Creator\CodeTrait;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Mvc\AbstractMvcInterface;
+use Gear\Mvc\AbstractMvc;
 
-class InterfaceService implements
+class InterfaceService extends AbstractMvc implements
  ModuleStructureInterface,
  StringServiceAwareInterface,
  AbstractMvcInterface
@@ -25,7 +26,7 @@ class InterfaceService implements
     //namespace
     //extends
     //dependency
-    public function create(Src $src)
+    public function create($src, $type = null)
     {
         $this->src = $src;
         $this->name = $this->src->getName();

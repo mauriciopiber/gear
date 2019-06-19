@@ -9,7 +9,7 @@ use MyModule\Repository\BasicExtendsRepository;
  */
 class BasicExtendsRepositoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->repository = new BasicExtendsRepository();

@@ -9,7 +9,7 @@ use MyModule\Basic\Feature\Issue\Task\LongNamespaceRepository;
  */
 class LongNamespaceRepositoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->repository = new LongNamespaceRepository();

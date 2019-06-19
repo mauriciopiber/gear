@@ -1,10 +1,10 @@
 <?php
 namespace Gear\Mvc\Spec\Page;
 
-use Gear\Mvc\AbstractMvcTest;
-use Gear\Mvc\AbstractMvcTestInterface;
+use Gear\Mvc\AbstractMvc;
+use Gear\Mvc\AbstractMvcInterface;
 
-class Page extends AbstractMvcTest implements AbstractMvcTestInterface
+class Page extends AbstractMvc implements AbstractMvcInterface
 {
     public function createIndexPage()
     {

@@ -33,33 +33,22 @@ class TraitServiceTest extends TestCase
         $this->string  = new \Gear\Util\String\StringService();
         $this->fileCreator    = $this->createFileCreator();
 
-        $code = new \Gear\Creator\Code(
-            $this->module->reveal(),
-            $this->string
-        );
-        $code->setDirService(new \Gear\Util\Dir\DirService());
-        $constructorParams = new ConstructorParams($this->string);
-        $code->setConstructorParams($constructorParams);
 
         $table = $this->prophesize(TableService::class);
         $dir = $this->prophesize(DirService::class);
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
-            $this->module->reveal(),
-            $this->fileCreator,
-            $this->string
-        );
 
         $this->trait = new \Gear\Mvc\TraitService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
-            $code,
+            $this->createCode(),
             $dir->reveal(),
             $table->reveal(),
-            $serviceManager
+            $this->createArrayService(),
+            $this->createInjector()
         );
-        $this->trait->setServiceManager($serviceManager);
+
     }
 
     public function getData()
@@ -81,7 +70,7 @@ class TraitServiceTest extends TestCase
      */
     public function testCreateSrcTrait($src, $template)
     {
-
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Repository')->willReturn(vfsStream::url('module'));
 
         $file = $this->trait->createTrait($src, vfsStream::url('module'));

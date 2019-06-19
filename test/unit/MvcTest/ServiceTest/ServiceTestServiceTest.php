@@ -60,7 +60,8 @@ class ServiceTestServiceTest extends TestCase
             $this->fileCreator,
             $this->string,
             $this->codeTest,
-            $this->table->reveal()
+            $this->table->reveal(),
+            $this->createInjector()
         );
         // $this->service->setFileCreator($this->fileCreator);
         // $this->service->setStringService($this->string);
@@ -204,7 +205,7 @@ class ServiceTestServiceTest extends TestCase
     {
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
 
@@ -229,8 +230,11 @@ class ServiceTestServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
 
-        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule');
+
+
+        $this->module->getModuleName()->willReturn('MyModule');
+
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
 
         if (!empty($data->getNamespace())) {
