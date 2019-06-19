@@ -13,7 +13,7 @@ class TableUniqueNotNullFilterTest extends TestCase
 {
     public static $validate = 'vendor/zendframework/zend-i18n-resources/languages/pt_BR/Zend_Validate.php';
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->filter = new TableUniqueNotNullFilter();
         $this->filter->setAdapter($this->getAdapterMock());

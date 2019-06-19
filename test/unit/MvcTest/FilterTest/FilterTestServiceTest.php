@@ -38,28 +38,17 @@ class FilterTestServiceTest extends TestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter-test';
 
-        $this->traitTestService = $this->prophesize('Gear\Mvc\TraitTestService');
-
-        $this->codeTest = new \Gear\Creator\CodeTest;
 
         $this->fileCreator = $this->createFileCreator();
 
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeTest->setStringService($this->string);
-
-
-
-        $this->filter = new \Gear\Mvc\Filter\FilterTestService();
-        $this->filter->setStringService($this->string);
-        $this->filter->setFileCreator($this->fileCreator);
-        $this->filter->setModule($this->module->reveal());
-
-        $this->filter->setCodeTest($this->codeTest);
-
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->filter->setFactoryTestService($this->factory->reveal());
+        $this->filter = new \Gear\Mvc\Filter\FilterTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->createCodeTest(),
+            $this->createTableService(),
+            $this->createInjector()
+        );
     }
 
     /**
@@ -120,7 +109,7 @@ class FilterTestServiceTest extends TestCase
         $columnManager = new ColumnManager($columns);
         $db->setColumnManager($columnManager);
 
-        $this->factory->createFactoryTest($src)->shouldBeCalled();
+        //$this->factory->createFactoryTest($src)->shouldBeCalled();
 
         $file = $this->filter->createFilterTest($db);
 
@@ -154,13 +143,7 @@ class FilterTestServiceTest extends TestCase
             $this->module->map('FilterTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setModule($this->module->reveal());
-        $serviceManager->setStringService($this->string);
-
-        $this->filter->setServiceManager($serviceManager);
-
-        $this->filter->setTraitTestService($this->traitTestService->reveal());
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->filter->createFilterTest($data);
 

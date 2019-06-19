@@ -58,7 +58,7 @@ class FormService extends AbstractMvc implements AbstractMvcInterface
         $this->columnManager = $this->db->getColumnManager();
         $this->tableName    = $this->str('class', $this->db->getTable());
 
-        $this->getFormTestService()->createFormTest($this->db);
+        //$this->getFormTestService()->createFormTest($this->db);
 
         $this->src = $this->getSchemaService()->getSrcByDb($this->db, 'Form');
 
@@ -66,8 +66,8 @@ class FormService extends AbstractMvc implements AbstractMvcInterface
 
         $inputValues = $this->getFormInputValues($this->db);
 
-        $this->getFactoryService()->createFactory($this->src);
-        $this->getTraitService()->createTrait($this->src);
+        //$this->getFactoryService()->createFactory($this->src);
+        //$this->getTraitService()->createTrait($this->src);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/full.form.phtml',
@@ -95,15 +95,6 @@ class FormService extends AbstractMvc implements AbstractMvcInterface
         $this->className = $this->src->getName();
 
         $location = $this->getCode()->getLocation($this->src);
-
-        if ($this->src->isFactory()) {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
-
-        $this->getTraitService()->createTrait($this->src);
-        $this->getInterfaceService()->createInterface($this->src, $location);
-
-        $this->getFormTestService()->createFormTest($this->src);
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form/src.phtml',

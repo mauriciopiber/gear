@@ -24,8 +24,8 @@ class FormTestService extends AbstractMvcTest
             'namespace' => $this->getCodeTest()->getNamespace($this->src),
             'testNamespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'serviceNameUline' => substr($this->str('var', $this->src->getName()), 0, 17),
-            'callable' => $this->getServiceManager()->getServiceName($this->src),
-            'service' => $this->getServiceManager()->getServiceName($this->src),
+            'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
+            'service' => $this->getCodeTest()->getServiceManagerName($this->src),
             'serviceNameClass'   => $this->src->getName(),
             'module'  => $this->getModule()->getModuleName()
         );
@@ -33,11 +33,6 @@ class FormTestService extends AbstractMvcTest
         $filename = $this->src->getName().'Test.php';
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->isFactory()) {
-            $this->getFactoryTestService()->createFactoryTest($this->src);
-        }
-
-        $this->getTraitTestService()->createTraitTest($this->src);
 
         $options['columns'***REMOVED*** = $this->columnManager->generateCode('getAssertFormElement', [***REMOVED***, [\Gear\Column\Varchar\UniqueId::class***REMOVED***);
 
@@ -51,18 +46,11 @@ class FormTestService extends AbstractMvcTest
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($this->src);
-
-            if ($this->src->isFactory()) {
-                $this->getFactoryTestService()->createFactoryTest($this->src);
-            }
-        }
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/form-test/src/test-src.phtml',
             array(
-                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'var' => $this->str('var-length', $this->src->getName()),

@@ -7,6 +7,7 @@ use GearTest\ScopeTrait;
 use GearTest\MvcTest\FormTest\FormDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Column\ColumnManager;
+use Gear\Schema\Schema\SchemaService;
 
 /**
  * @group db-form
@@ -28,48 +29,22 @@ class FormTestServiceTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form-test';
 
-        $this->form = new \Gear\Mvc\Form\FormTestService();
-        $this->form->setStringService($this->string);
-        $this->form->setFileCreator($this->fileCreator);
-        $this->form->setModule($this->module->reveal());
-
-        $this->codeTest = new \Gear\Creator\CodeTest();
-
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeTest->setStringService($this->string);
-
-        $this->form->setCodeTest($this->codeTest);
-
-        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
-        $this->form->setTraitTestService($this->traitTest->reveal());
-
-        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->form->setFactoryTestService($this->factoryTest->reveal());
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->form->setTableService($this->table->reveal());
 
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
-        //$this->form->setColumnService($this->column->reveal());
+        $this->form = new \Gear\Mvc\Form\FormTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->createCodeTest(),
+            $this->table->reveal(),
+            $this->createInjector()
+        );
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->form->setSchemaService($this->schema->reveal());
-
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $this->serviceManager->setStringService($this->string);
-        $this->serviceManager->setModule($this->module->reveal());
-
-        $this->form->setServiceManager($this->serviceManager);
-
+        $this->schema = $this->prophesize(SchemaService::class);
     }
 
     public function src()
@@ -88,6 +63,7 @@ class FormTestServiceTest extends TestCase
     {
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
 
         if (!empty($data->getNamespace())) {
@@ -95,14 +71,6 @@ class FormTestServiceTest extends TestCase
         } else {
             $this->module->map('FormTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $serviceManager->setModule($this->module->reveal());
-        $serviceManager->setStringService($this->string);
-
-        $this->form->setServiceManager($serviceManager);
-
-        $this->form->setTraitTestService($this->traitTest->reveal());
 
         $file = $this->form->createFormTest($data);
 
@@ -122,6 +90,7 @@ class FormTestServiceTest extends TestCase
      */
     public function testInstrospectTable($columns, $template, $nullable, $hasColumnImage, $hasTableImage, $tableName, $service, $namespace)
     {
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $table = $this->string->str('class', $tableName);
 
         $db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
@@ -155,15 +124,13 @@ class FormTestServiceTest extends TestCase
             ***REMOVED***
         );
 
+        $this->form->setSchemaService($this->schema->reveal());
         $this->schema->getSrcByDb($db, 'Form')->willReturn($src);
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
 
         $columnManager = new ColumnManager($columns);
         $db->setColumnManager($columnManager);
-
-        $this->traitTest->createTraitTest($src)->shouldBeCalled();
-        $this->factoryTest->createFactoryTest($src)->shouldBeCalled();
 
         $file = $this->form->createFormTest($db);
 
