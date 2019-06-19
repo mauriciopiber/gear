@@ -74,8 +74,8 @@ class WebControllerServiceTest extends TestCase
             $this->code,
             $this->prophesize(DirService::class)->reveal(),
             $this->table->reveal(),
-            $this->prophesize(ServiceManager::class)->reveal(),
-            $this->array
+            $this->array,
+            $this->injector
         );
 
         // $this->controllerService->setFileCreator($this->fileCreator);
@@ -113,7 +113,8 @@ class WebControllerServiceTest extends TestCase
 
     public function testCreateModuleController()
     {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
 
         $file = $this->controllerService->module();
@@ -128,7 +129,7 @@ class WebControllerServiceTest extends TestCase
 
     public function testCreateModuleControllerFactory()
     {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
 
         $file = $this->controllerService->moduleFactory();
@@ -210,9 +211,11 @@ class WebControllerServiceTest extends TestCase
 
         $this->schema->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
 
-        $this->factory->createFactory($controller)->shouldBeCalled();
+        //$this->factory->createFactory($controller)->shouldBeCalled();
 
-        $this->testing->introspectFromTable($this->db)->shouldBeCalled();
+        //$this->testing->introspectFromTable($this->db)->shouldBeCalled();
+
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controllerService->introspectFromTable($this->db);
 
@@ -239,6 +242,7 @@ class WebControllerServiceTest extends TestCase
     public function testConstructController($controller, $expected)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 

@@ -23,6 +23,8 @@ use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
+use Gear\Creator\Injector\Injector;
+
 
 abstract class AbstractMvcTest
 {
@@ -33,8 +35,7 @@ abstract class AbstractMvcTest
     use FactoryTestServiceTrait;
     use TraitTestServiceTrait;
     use CodeTestTrait;
-    use BeforeEachTrait;
-    use VarsTrait;
+
     use StringServiceTrait;
     use FileCreatorTrait;
     use ModuleStructureTrait;
@@ -45,13 +46,15 @@ abstract class AbstractMvcTest
         FileCreator $fileCreator,
         StringService $string,
         CodeTest $codeTest,
-        TableService $tableService
+        TableService $tableService,
+        Injector $injector
     ) {
         $this->setTableService($tableService);
         $this->setCodeTest($codeTest);
         $this->setModule($module);
         $this->setFileCreator($fileCreator);
         $this->setStringService($string);
+        $this->setInjector($injector);
     }
 
     public function forceDbTest($data, $type)

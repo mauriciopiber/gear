@@ -8,6 +8,7 @@ use GearTest\ControllerScopeTrait;
 use GearTest\MvcTest\ControllerTest\WebTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
 use Gear\Column\ColumnManager;
+use Gear\Creator\Injector\Injector;
 
 /**
  * @group Controller
@@ -31,38 +32,24 @@ class WebControllerTestServiceTest extends TestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/controller-test';
 
-
-        $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService();
-
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->controllerTest->setModule($this->module->reveal());
-
-
         $this->string = new \Gear\Util\String\StringService();
-        $this->controllerTest->setStringService($this->string);
-
-        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->controllerTest->setFactoryTestService($this->factoryTest->reveal());
-
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
-
-        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
-        $this->controllerTest->setInjector($this->injector);
-        $this->controllerTest->setFileCreator($this->createFileCreator());
-
-        $this->codeTest = new \Gear\Creator\CodeTest();
-        $this->codeTest->setStringService($this->string);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-
-        $this->controllerTest->setCodeTest($this->codeTest);
-
+        $this->codeTest = $this->createCodeTest();
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->controllerTest->setTableService($this->table->reveal());
+        $this->fileCreator = $this->createFileCreator();
 
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->controllerTest->setServiceManager($this->serviceManager);
+        $this->injector = new Injector($this->arrayService);
+
+        $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->codeTest,
+            $this->table->reveal(),
+            $this->injector
+        );
+
 
         $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
@@ -79,6 +66,7 @@ class WebControllerTestServiceTest extends TestCase
     public function testCreateModuleController()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
         $file = $this->controllerTest->module();
@@ -96,6 +84,7 @@ class WebControllerTestServiceTest extends TestCase
     public function testCreateModuleControllerFactory()
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url($this->vfsLocation))->shouldBeCalled();
 
         $file = $this->controllerTest->moduleFactory();
@@ -194,7 +183,9 @@ class WebControllerTestServiceTest extends TestCase
 
         $this->schemaService->getSrcByDb($this->db, 'SearchForm')->willReturn($this->search->reveal())->shouldBeCalled();
 
-        $this->factoryTest->createControllerFactoryTest($controller)->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+
+        //$this->factoryTest->createControllerFactoryTest($controller)->shouldBeCalled();
 
         $file = $this->controllerTest->introspectFromTable($this->db);
 
@@ -221,6 +212,7 @@ class WebControllerTestServiceTest extends TestCase
      */
     public function testConstructControllerTest($controller, $expected)
     {
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));

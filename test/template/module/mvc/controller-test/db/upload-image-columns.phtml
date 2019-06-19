@@ -54,7 +54,8 @@ class MyTableColumnControllerTest extends TestCase
     }
 
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->myTableColumnService = $this->prophesize('MyModule\MyTableColumn\MyTableColumnService');
         $this->myTableColumnForm = $this->prophesize('MyModule\MyTableColumn\MyTableColumnForm');
@@ -263,7 +264,8 @@ class MyTableColumnControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     /**
      * @group controller.edit

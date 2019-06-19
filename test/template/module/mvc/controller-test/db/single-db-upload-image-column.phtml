@@ -54,7 +54,8 @@ class UploadImageColumnControllerTest extends TestCase
     }
 
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->uploadImageColumnService = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnService');
         $this->uploadImageColumnForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnForm');
@@ -263,7 +264,8 @@ class UploadImageColumnControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     /**
      * @group controller.edit

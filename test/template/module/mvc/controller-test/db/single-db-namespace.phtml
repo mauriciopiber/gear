@@ -13,11 +13,12 @@ use Zend\Router\RouteMatch;
  * @group Controller
  * @group SingleDbTableController
  */
-class SingleDbTableControllerTest extends TestCase
+class  extends TestCase
 {
 
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->controller = new SingleDbTableController();
         $this->request    = new Request();

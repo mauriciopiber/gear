@@ -97,10 +97,6 @@ class WebControllerService extends AbstractControllerService implements
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->isFactory()) {
-            $this->getFactoryService()->createFactory($controller, $this->location);
-        }
-
         return $this->file->render();
     }
 
@@ -234,8 +230,8 @@ class WebControllerService extends AbstractControllerService implements
           ? $this->getCode()->getConstructor($this->controller)
           : '';
 
-        $this->getFactoryService()->createFactory($this->controller);
-        $this->getControllerTestService()->introspectFromTable($this->db);
+        //$this->getFactoryService()->createFactory($this->controller);
+        //$this->getControllerTestService()->introspectFromTable($this->db);
 
         $this->file = $this->getFileCreator();
         $this->file->setView($this->getTemplate('db'));
