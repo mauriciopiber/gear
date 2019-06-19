@@ -197,7 +197,7 @@ class ConsoleControllerTestService
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
         $options = [
-            'callable' => $this->getControllerManager()->getServiceName($controller),
+            'callable' => $this->getCodeTest()->getServiceManagerName($controller),
             'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
         ***REMOVED***;
@@ -220,9 +220,6 @@ class ConsoleControllerTestService
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($this->controller->isFactory()) {
-            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
-        }
 
         return $this->file->render();
     }

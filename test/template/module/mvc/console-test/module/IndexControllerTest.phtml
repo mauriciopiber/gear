@@ -5,15 +5,13 @@ use PHPUnit\Framework\TestCase;
 use MyModule\Controller\IndexController;
 use Zend\Console\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group Controller
  */
 class IndexControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -21,7 +19,7 @@ class IndexControllerTest extends TestCase
     protected $routeMatch;
     protected $event;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -31,20 +29,10 @@ class IndexControllerTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = \MyModule\Module::LOCATION.'/../schema/module.json';
     }
 
     public function testIndexAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'IndexController',
-            'Controller',
-            'Index'
-        );
-
         $this->routeMatch->setParam('action', 'index');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
