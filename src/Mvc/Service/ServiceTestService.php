@@ -2,6 +2,7 @@
 namespace Gear\Mvc\Service;
 
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Src\Src;
 use Gear\Mvc\Service\ServiceTestColumnInterface;
@@ -9,7 +10,7 @@ use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Schema\Src\SrcTypesInterface;
 
-class ServiceTestService extends AbstractMvcTest
+class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     //use ServiceManagerTrait;
 
@@ -161,16 +162,16 @@ class ServiceTestService extends AbstractMvcTest
     {
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->isFactory() && $this->src->isAbstract() === false) {
-            $this->getFactoryTestService()->createFactoryTest($this->src);
-        }
+        // if ($this->src->isFactory() && $this->src->isAbstract() === false) {
+        //     $this->getFactoryTestService()->createFactoryTest($this->src);
+        // }
 
-        if ($this->src->isAbstract() === false) {
-            $this->getTraitTestService()->createTraitTest($this->src);
-        }
+        // if ($this->src->isAbstract() === false) {
+        //     $this->getTraitTestService()->createTraitTest($this->src);
+        // }
 
         $options = [
-            'callable'      => $this->getServiceManager()->getServiceName($this->src),
+            'callable'      => $this->getCodeTest()->getServiceManagerName($this->src),
             //'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace'     => $this->getCodeTest()->getTestNamespace($this->src),
             'fileNamespace' => $this->getCodeTest()->getFileNamespace($this->src),

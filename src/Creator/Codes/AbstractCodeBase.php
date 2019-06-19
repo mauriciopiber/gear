@@ -18,6 +18,7 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\App\App;
 use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Schema\AbstractObject;
 
 abstract class AbstractCodeBase implements
     FileNamespaceInterface,
@@ -33,7 +34,66 @@ abstract class AbstractCodeBase implements
     use StringServiceTrait;
     use ModuleStructureTrait;
 
-    const USE = 'use %s;';
+    const USE_TMP = 'use %s;';
+
+    public function getServiceManagerName(AbstractObject $service)
+    {
+        $module = $this->getModule()->getNamespace();
+        $namespace = $service->getNamespace();
+
+        if ($namespace === null) {
+            if ($service instanceof Src) {
+                if ($service->getType() == 'SearchForm') {
+                    $type = 'Form\\Search';
+                } elseif ($service->getType() == 'ViewHelper') {
+                    $type = 'View\\Helper';
+                } else {
+                    $type = $service->getType();
+                }
+                $namespace = $type;
+            }
+            if ($service instanceof Controller) {
+                $namespace = 'Controller';
+            }
+        }
+
+        $invokeName = ($service instanceof Controller) ? $service->getNameOff() : $service->getName();
+
+        $object = '%s\%s\%s';
+
+        return sprintf($object, $module, $namespace, $invokeName);
+    }
+
+
+    public function getServiceManagerCall(AbstractObject $service)
+    {
+        $module = $this->getModule()->getNamespace();
+        $namespace = $service->getNamespace();
+
+        if ($namespace === null) {
+            if ($service instanceof Src) {
+                if ($service->getType() == 'SearchForm') {
+                    $type = 'Form\\Search';
+                } elseif ($service->getType() == 'ViewHelper') {
+                    $type = 'View\\Helper';
+                } else {
+                    $type = $service->getType();
+                }
+                $namespace = $type;
+            }
+            if ($service instanceof Controller) {
+                $namespace = 'Controller';
+            }
+        }
+
+        $invokeName = $service->getName() . 'Factory';
+
+        $object = '%s\%s\%s';
+
+        return sprintf($object, $module, $namespace, $invokeName);
+    }
+
+
     /**/
 
     public function printUse($uses)
@@ -41,7 +101,7 @@ abstract class AbstractCodeBase implements
         $html = '';
 
         foreach ($uses as $use) {
-            $html .= sprintf(self::USE, $use).PHP_EOL;
+            $html .= sprintf(self::USE_TMP, $use).PHP_EOL;
         }
 
         return $html;

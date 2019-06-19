@@ -33,6 +33,7 @@ class SrcConstructorTest extends TestCase
         //$this->service->setServiceManager($config);
         $this->schema = $this->prophesize('Gear\Schema\Src\SrcSchema');
         $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
+        $this->serviceTestService = $this->prophesize('Gear\Mvc\Service\ServiceTestService');
         $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
         $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
         $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
@@ -70,6 +71,7 @@ class SrcConstructorTest extends TestCase
             $this->controllerPluginService->reveal(),
             $this->repositoryService->reveal(),
             $this->serviceService->reveal(),
+            $this->serviceTestService->reveal(),
             $this->fixtureService->reveal(),
             $this->interfaceService->reveal()
         );

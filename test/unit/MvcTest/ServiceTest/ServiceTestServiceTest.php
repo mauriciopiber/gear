@@ -47,43 +47,43 @@ class ServiceTestServiceTest extends TestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/service-test';
 
-        $this->codeTest = new \Gear\Creator\CodeTest;
+        $this->codeTest = $this->createCodeTest();
 
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setFileCreator($this->fileCreator);
-
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeTest->setStringService($this->string);
-
-
-        $this->service = new \Gear\Mvc\Service\ServiceTestService();
-        $this->service->setFileCreator($this->fileCreator);
-        $this->service->setStringService($this->string);
-        $this->service->setModule($this->module->reveal());
-        $this->service->setCodeTest($this->codeTest);
-
-        $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->service->setFactoryTestService($this->factoryTest->reveal());
-
-        $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        //$this->service->setTableService($this->table->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
-
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager(
+        $this->service = new \Gear\Mvc\Service\ServiceTestService(
             $this->module->reveal(),
             $this->fileCreator,
-            $this->string
+            $this->string,
+            $this->codeTest,
+            $this->table->reveal()
         );
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->service->setServiceManager($this->serviceManager);
+        // $this->service->setFileCreator($this->fileCreator);
+        // $this->service->setStringService($this->string);
+        // $this->service->setModule($this->module->reveal());
+        // $this->service->setCodeTest($this->codeTest);
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->service->setSchemaService($this->schema->reveal());
+        // $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        // $this->service->setFactoryTestService($this->factoryTest->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->service->setTableService($this->table->reveal());
+        // $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+
+
+        // $this->serviceManager = new \Gear\Mvc\Config\ServiceManager(
+        //     $this->module->reveal(),
+        //     $this->fileCreator,
+        //     $this->string
+        // );
+        // $this->serviceManager->setModule($this->module->reveal());
+        // $this->service->setServiceManager($this->serviceManager);
+
+        // $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        // $this->service->setSchemaService($this->schema->reveal());
+
     }
 
     /**
@@ -176,10 +176,9 @@ class ServiceTestServiceTest extends TestCase
         $this->service->setSchemaService($schemaService->reveal());
 
 
-        $this->service->setTraitTestService($this->traitTest->reveal());
-
-        $this->traitTest->createTraitTest($serviceT)->shouldBeCalled();
-        $this->factoryTest->createFactoryTest($serviceT)->shouldBeCalled();
+        //$this->service->setTraitTestService($this->traitTest->reveal());
+        //$this->traitTest->createTraitTest($serviceT)->shouldBeCalled();
+        //$this->factoryTest->createFactoryTest($serviceT)->shouldBeCalled();
 
         $file = $this->service->createServiceTest($this->db);
 

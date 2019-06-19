@@ -8,6 +8,7 @@ use Gear\Mvc\ValueObject\ValueObjectService;
 use Gear\Mvc\TraitTestService;
 use Gear\Mvc\TraitService;
 use Gear\Mvc\Service\ServiceService;
+use Gear\Mvc\Service\ServiceTestService;
 use Gear\Mvc\Search\SearchService;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\InterfaceService;
@@ -49,6 +50,7 @@ class SrcConstructorFactory implements FactoryInterface
             $container->get(ControllerPluginService::class),
             $container->get(RepositoryService::class),
             $container->get(ServiceService::class),
+            $container->get(ServiceTestService::class),
             $container->get(FixtureService::class),
             $container->get(InterfaceService::class)
         );

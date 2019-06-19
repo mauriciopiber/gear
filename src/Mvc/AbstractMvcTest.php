@@ -21,6 +21,8 @@ use Gear\Creator\CodeTest;
 use Gear\Creator\CodeTestTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
+use Gear\Table\TableService\TableService;
+use Gear\Table\TableService\TableServiceTrait;
 
 abstract class AbstractMvcTest
 {
@@ -36,13 +38,16 @@ abstract class AbstractMvcTest
     use StringServiceTrait;
     use FileCreatorTrait;
     use ModuleStructureTrait;
+    use TableServiceTrait;
 
     public function __construct(
         ModuleStructure $module,
         FileCreator $fileCreator,
         StringService $string,
-        CodeTest $codeTest
+        CodeTest $codeTest,
+        TableService $tableService
     ) {
+        $this->setTableService($tableService);
         $this->setCodeTest($codeTest);
         $this->setModule($module);
         $this->setFileCreator($fileCreator);

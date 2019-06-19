@@ -6,51 +6,53 @@
  */
 namespace Gear\Constructor\Src;
 
-use Gear\Mvc\Config\ServiceManagerTrait;
-use Gear\Mvc\Config\ServiceManager;
-use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
-use Gear\Schema\Src\SrcSchemaTrait as JsonSrc;
-use Gear\Schema\Src\SrcSchema as SrcSchema;
-use Gear\Mvc\Form\FormServiceTrait;
-use Gear\Mvc\TraitServiceTrait;
-use Gear\Mvc\TraitTestServiceTrait;
-use Gear\Mvc\Entity\EntityServiceTrait;
-use Gear\Mvc\Filter\FilterServiceTrait;
-use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
-use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
-use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
-use Gear\Mvc\Repository\RepositoryServiceTrait;
-use Gear\Mvc\Service\ServiceServiceTrait;
-use Gear\Mvc\Factory\FactoryServiceTrait;
-use Gear\Mvc\Factory\FactoryTestServiceTrait;
-use Gear\Mvc\Fixture\FixtureServiceTrait;
-use Gear\Mvc\InterfaceServiceTrait;
+//use Gear\Mvc\Search\SearchService;
+use Gear\Column\ColumnService;
+use Gear\Column\ColumnServiceTrait;
 use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
-use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Constructor\AbstractConstructor;
+use Gear\Constructor\Src\Exception\SrcTypeNotFoundException;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureInterface;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Mvc\Config\ServiceManagerTrait;
+use Gear\Mvc\ControllerPlugin\ControllerPluginService;
+use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
+use Gear\Mvc\Entity\EntityService;
+use Gear\Mvc\Entity\EntityServiceTrait;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Factory\FactoryServiceTrait;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Mvc\Factory\FactoryTestServiceTrait;
+use Gear\Mvc\Filter\FilterService;
+use Gear\Mvc\Filter\FilterServiceTrait;
+use Gear\Mvc\Fixture\FixtureService;
+use Gear\Mvc\Fixture\FixtureServiceTrait;
+use Gear\Mvc\Form\FormService;
+use Gear\Mvc\Form\FormServiceTrait;
+use Gear\Mvc\InterfaceService;
+use Gear\Mvc\InterfaceServiceTrait;
+use Gear\Mvc\Repository\RepositoryService;
+use Gear\Mvc\Repository\RepositoryServiceTrait;
+use Gear\Mvc\Service\ServiceService;
+use Gear\Mvc\Service\ServiceServiceTrait;
+use Gear\Mvc\Service\ServiceTestService;
+use Gear\Mvc\Service\ServiceTestServiceTrait;
+use Gear\Mvc\TraitService;
+use Gear\Mvc\TraitServiceTrait;
+use Gear\Mvc\TraitTestService;
+use Gear\Mvc\TraitTestServiceTrait;
+use Gear\Mvc\ValueObject\ValueObjectService;
+use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
+use Gear\Mvc\ViewHelper\ViewHelperService;
+use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Src\SrcSchema as SrcSchema;
+use Gear\Schema\Src\SrcSchemaTrait as JsonSrc;
+use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
-use Gear\Column\ColumnServiceTrait;
-use Gear\Column\ColumnService;
-use Gear\Mvc\Form\FormService;
-use Gear\Mvc\TraitService;
-use Gear\Mvc\TraitTestService;
-use Gear\Mvc\Entity\EntityService;
-use Gear\Mvc\Filter\FilterService;
-use Gear\Mvc\ValueObject\ValueObjectService;
-use Gear\Mvc\ViewHelper\ViewHelperService;
-use Gear\Mvc\ControllerPlugin\ControllerPluginService;
-use Gear\Mvc\Repository\RepositoryService;
-use Gear\Mvc\Service\ServiceService;
-use Gear\Mvc\Factory\FactoryService;
-use Gear\Mvc\Factory\FactoryTestService;
-//use Gear\Mvc\Search\SearchService;
-use Gear\Mvc\Fixture\FixtureService;
-use Gear\Mvc\InterfaceService;
-use Gear\Constructor\AbstractConstructor;
-use Gear\Schema\Src\SrcTypesInterface;
-use Gear\Schema\Src\Src;
 
 class SrcConstructor extends AbstractConstructor
 {
@@ -94,6 +96,8 @@ class SrcConstructor extends AbstractConstructor
 
     use ServiceServiceTrait;
 
+    use ServiceTestServiceTrait;
+
     use FixtureServiceTrait;
 
     use InterfaceServiceTrait;
@@ -117,6 +121,7 @@ class SrcConstructor extends AbstractConstructor
         ControllerPluginService $controllerPluginService,
         RepositoryService $repositoryService,
         ServiceService $serviceService,
+        ServiceTestService $serviceTestService,
         FixtureService $fixtureService,
         InterfaceService $interfaceService
     ) {
@@ -136,6 +141,7 @@ class SrcConstructor extends AbstractConstructor
         $this->controllerPluginService = $controllerPluginService;
         $this->repositoryService = $repositoryService;
         $this->serviceService = $serviceService;
+        $this->setServiceTestService($serviceTestService);
         $this->fixtureService = $fixtureService;
         $this->interfaceService = $interfaceService;
     }
@@ -268,6 +274,16 @@ class SrcConstructor extends AbstractConstructor
             return self::TYPE_NOT_FOUND;
         }
 
+
+
+        if ($this->src->isAbstract() === false) {
+            $this->createTrait($this->src);
+        }
+
+        if ($this->src->isFactory() && $this->src->isAbstract() === false) {
+            $this->createFactory($this->src);
+        }
+
         try {
             switch ($this->src->getType()) {
                 case SrcTypesInterface::CONTROLLER_PLUGIN:
@@ -279,8 +295,8 @@ class SrcConstructor extends AbstractConstructor
                     $status = $service->createViewHelper($this->src);
                     break;
                 case SrcTypesInterface::SERVICE:
-                    $service = $this->getServiceService();
-                    $status = $service->createService($this->src);
+                    $this->getServiceService()->createService($this->src);
+                    $this->getServiceTestService()->createServiceTest($this->src);
                     break;
                 case SrcTypesInterface::ENTITY:
                     $entity = $this->getEntityService();
@@ -331,6 +347,6 @@ class SrcConstructor extends AbstractConstructor
         if (false === in_array($this->src->getType(), $notAService)) {
             $this->getServiceManager()->create($this->src);
         }
-        return $status;
+        return true;
     }
 }
