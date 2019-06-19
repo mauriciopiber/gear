@@ -88,47 +88,32 @@ class FilterService extends AbstractMvc implements AbstractMvcInterface
             \Gear\Column\Varchar\UniqueId::class
         ***REMOVED***);
 
-        /*
-        $inputValues = $this->getFilterValues();
-
-        $this->file->addChildView([
-            'template' => 'template/module/mvc/filter/collection/element.phtml',
-            'config' => ['elements' => $inputValues***REMOVED***,
-            'placeholder' => 'filterElements'
-        ***REMOVED***);
-        */
-
-
-        $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');
-
-        $this->file->setOptions($options);
-
-        $this->file->setFileName($this->src->getName().'.php');
-        $this->file->setLocation($location);
-
         if ($this->getTableService()->hasUniqueConstraint($this->tableName)) {
-            $this->file->addChildView([
-                'template' => 'template/module/mvc/filter/db/full.filter.header.unique.phtml',
-                'config' => [
-                    'class' => $this->str('class', $this->src->getName()),
-                    'var'     => $this->str('var-length', 'id'.$this->tableName),
-                ***REMOVED***,
-                'placeholder' => 'header'
-            ***REMOVED***);
+
+            $options['header'***REMOVED*** = $this->getFileCreator()
+                ->renderPartial(
+                    'template/module/mvc/filter/db/full.filter.header.unique.phtml',
+                    [
+                        'class' => $this->str('class', $this->src->getName()),
+                        'var'     => $this->str('var-length', 'id'.$this->tableName),
+                    ***REMOVED***
+                );
         } else {
-            $this->file->addChildView([
-                'template' => 'template/module/mvc/filter/db/full.filter.header.phtml',
-                'config' => [
-                    'class' => $this->str('class', $this->src->getName()),
-                    'var'     => $this->str('var-length', 'id'.$this->tableName),
-                ***REMOVED***,
-                'placeholder' => 'header'
-            ***REMOVED***);
+            $options['header'***REMOVED*** = $this->getFileCreator()
+                ->renderPartial(
+                    'template/module/mvc/filter/db/full.filter.header.phtml',
+                    [
+                        'class' => $this->str('class', $this->src->getName()),
+                        'var'     => $this->str('var-length', 'id'.$this->tableName),
+                    ***REMOVED***
+                );
         }
 
-        $this->getFilterTestService()->createFilterTest($this->db);
-
-        $this->getFactoryService()->createFactory($this->src);
+        $this->file = $this->getFileCreator();
+        $this->file->setTemplate('template/module/mvc/filter/full.filter.phtml');
+        $this->file->setFileName($this->src->getName().'.php');
+        $this->file->setLocation($location);
+        $this->file->setOptions($options);
 
         return $this->file->render();
     }
@@ -149,14 +134,14 @@ class FilterService extends AbstractMvc implements AbstractMvcInterface
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getTraitService()->createTrait($this->src);
-        $this->getInterfaceService()->createInterface($this->src, $location);
+        // $this->getTraitService()->createTrait($this->src);
+        // $this->getInterfaceService()->createInterface($this->src, $location);
 
-        $this->getFilterTestService()->createFilterTest($this->src);
+        // $this->getFilterTestService()->createFilterTest($this->src);
 
-        if ($this->src->isFactory()) {
-            $this->getFactoryService()->createFactory($this->src, $location);
-        }
+        // if ($this->src->isFactory()) {
+        //     $this->getFactoryService()->createFactory($this->src, $location);
+        // }
 
         $options = [
             'classDocs' => $this->getCode()->getClassDocs($this->src),

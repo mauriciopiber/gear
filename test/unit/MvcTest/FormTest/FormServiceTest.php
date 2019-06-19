@@ -29,56 +29,20 @@ class FormServiceTest extends TestCase
         //module
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
 
-        //string
-        $this->string = new \Gear\Util\String\StringService();
-
-        //file-render
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form';
 
-
-        //code
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setModule($this->module->reveal());
-        $this->code->setStringService($this->string);
-        $this->code->setDirService(new \Gear\Util\Dir\DirService());
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
-
-        //array
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
-
-        //injector
-        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
-
-        $this->form = new \Gear\Mvc\Form\FormService();
-
-        $this->form->setFileCreator($this->fileCreator);
-        $this->form->setStringService($this->string);
-        $this->form->setModule($this->module->reveal());
-        $this->form->setCode($this->code);
-
-
-        //form-test
-        $this->formTest = $this->prophesize('Gear\Mvc\Form\FormTestService');
-        $this->form->setFormTestService($this->formTest->reveal());
-
-        //trait
-        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
-        $this->form->setTraitService($this->trait->reveal());
-
-        //factory
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->form->setFactoryService($this->factory->reveal());
-
-        //interface
-        $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
-        $this->form->setInterfaceService($this->interface->reveal());
+        $this->form = new \Gear\Mvc\Form\FormService(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->createString(),
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->createTableService(),
+            $this->createArrayService(),
+            $this->createInjector()
+        );
     }
 
 
@@ -98,6 +62,7 @@ class FormServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {
 
@@ -107,19 +72,6 @@ class FormServiceTest extends TestCase
             $this->module->map('Form')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
 
-        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-
-            if (!empty($data->getNamespace())) {
-               $this->factory->createFactory(
-                   $data,
-                   vfsStream::url('module/src/MyModule').'/'.str_replace('\\', '/', $data->getNamespace())
-               )->shouldBeCalled();
-            } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
-            }
-        }
-
-        $this->formTest->createFormTest($data)->shouldBeCalled();
 
         $file = $this->form->createForm($data);
 
@@ -143,6 +95,7 @@ class FormServiceTest extends TestCase
         $table = $this->string->str('class', $tableName);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if ($namespace === null) {
             $location = $this->vfsLocation;
@@ -191,12 +144,6 @@ class FormServiceTest extends TestCase
 
         $this->form->setSchemaService($schemaService->reveal());
 
-
-
-        $this->trait->createTrait($form)->shouldBeCalled();
-        $this->factory->createFactory($form)->shouldBeCalled();
-
-        $this->formTest->createFormTest($this->db)->shouldBeCalled();
 
         $file = $this->form->createForm($this->db);
 

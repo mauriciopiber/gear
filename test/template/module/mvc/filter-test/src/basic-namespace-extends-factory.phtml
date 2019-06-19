@@ -9,7 +9,7 @@ use MyModule\Basic\Feature\Issue\Task\BasicNamespaceExtendsFactoryFilter;
  */
 class BasicNamespaceExtendsFactoryFilterTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->filter = new BasicNamespaceExtendsFactoryFilter();

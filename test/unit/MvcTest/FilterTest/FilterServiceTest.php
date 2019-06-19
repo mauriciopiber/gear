@@ -35,13 +35,8 @@ class FilterServiceTest extends TestCase
         //template
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter';
 
-               //code
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setModule($this->module->reveal());
-        $this->code->setStringService($this->string);
-        $this->code->setDirService(new \Gear\Util\Dir\DirService());
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
+        //code
+        $this->code = $this->createCode();
 
 
         //array
@@ -50,29 +45,37 @@ class FilterServiceTest extends TestCase
         //injector
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
-        $this->filter = new \Gear\Mvc\Filter\FilterService();
+        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
 
-        $this->filter->setFileCreator($this->createFileCreator());
-        $this->filter->setStringService($this->string);
-        $this->filter->setModule($this->module->reveal());
-        $this->filter->setCode($this->code);
+        $this->fileCreator = $this->createFileCreator();
 
+        $this->filter = new \Gear\Mvc\Filter\FilterService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->table->reveal(),
+            $this->arrayService,
+            $this->injector
+        );
 
-        //filter-test
-        $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
-        $this->filter->setFilterTestService($this->filterTest->reveal());
+        // //filter-test
+        // $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
+        // $this->filter->setFilterTestService($this->filterTest->reveal());
 
-        //trait
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->filter->setTraitService($this->traitService->reveal());
+        // //trait
+        // $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
+        // $this->filter->setTraitService($this->traitService->reveal());
 
-        //factory
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->filter->setFactoryService($this->factory->reveal());
+        // //factory
+        // $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+        // $this->filter->setFactoryService($this->factory->reveal());
 
-        //interface
-        $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
-        $this->filter->setInterfaceService($this->interface->reveal());
+        // //interface
+        // $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
+        // $this->filter->setInterfaceService($this->interface->reveal());
 
         $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
         $this->filter->setSchemaService($this->schemaService->reveal());
@@ -80,8 +83,7 @@ class FilterServiceTest extends TestCase
         //$this->column = $this->prophesize('Gear\Column\ColumnService');
         //$this->filter->setColumnService($this->column->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->filter->setTableService($this->table->reveal());
+        //$this->filter->setTableService($this->table->reveal());
 
     }
 
@@ -98,23 +100,12 @@ class FilterServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {
             $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
         } else {
             $this->module->map('Filter')->willReturn(vfsStream::url('module'))->shouldBeCalled();
-        }
-
-        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-            if (!empty($data->getNamespace())) {
-
-               $location = str_replace('\\', '/', $data->getNamespace());
-               $this->factory->createFactory($data, vfsStream::url('module/src/MyModule').'/'.$location)
-                 ->shouldBeCalled();
-
-            } else {
-                $this->factory->createFactory($data, vfsStream::url('module'))->shouldBeCalled();
-            }
         }
 
         $file = $this->filter->createFilter($data);
@@ -148,6 +139,7 @@ class FilterServiceTest extends TestCase
         $location = vfsStream::url('module');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if ($namespace === null) {
             $location = vfsStream::url('module/src/MyModule/Filter');
@@ -179,11 +171,6 @@ class FilterServiceTest extends TestCase
         );
 
         $this->schemaService->getSrcByDb($this->db, 'Filter')->willReturn($filter)->shouldBeCalled();
-
-
-        $this->filterTest->createFilterTest($this->db)->shouldBeCalled();
-
-        $this->factory->createFactory($filter)->shouldBeCalled();
 
         $file = $this->filter->createFilter($this->db);
 

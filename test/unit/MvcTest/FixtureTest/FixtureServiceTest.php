@@ -38,10 +38,8 @@ class FixtureServiceTest extends TestCase
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
         $this->string = new StringService();
-        $template       = new TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../view'));
-        $fileService    = new FileService();
-        $this->fileCreator    = new FileCreator($fileService, $template);
+
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->templates = (new Module)->getLocation().'/../test/template/module/mvc/fixture/db';
 
@@ -51,20 +49,19 @@ class FixtureServiceTest extends TestCase
 
         $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
 
-        $this->fixture = new FixtureService();
-        $this->fixture->setFileCreator($this->fileCreator);
-        $this->fixture->setStringService($this->string);
-        $this->fixture->setModule($this->module->reveal());
-        $this->fixture->setTableService($this->table->reveal());
+        $this->fixture = new FixtureService(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->table->reveal(),
+            $this->createArrayService(),
+            $this->createInjector()
+        );
         $this->fixture->setSchemaService($this->schemaService->reveal());
         $this->fixture->setConfigService($this->configService->reveal());
-
-        $this->code = new Code();
-        $this->code->setModule($this->module->reveal());
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
-        $this->fixture->setCode($this->code);
-
 
         $uploadImage = new \Gear\Table\UploadImage(
             $this->string,

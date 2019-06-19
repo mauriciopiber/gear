@@ -19,19 +19,11 @@ class FilterTestService extends AbstractMvcTest
     {
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($this->src, $location);
-
-            if ($this->src->isFactory()) {
-                $this->getFactoryTestService()->createFactoryTest($this->src, $location);
-            }
-        }
-
 
         return $this->getFileCreator()->createFile(
             'template/module/mvc/filter-test/src/test-src.phtml',
             array(
-                'callable' => $this->getServiceManager()->getServiceName($this->src),
+                'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
                 'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'var' => $this->str('var-length', $this->src->getName()),
@@ -244,9 +236,6 @@ class FilterTestService extends AbstractMvcTest
             ***REMOVED***
         );
 
-        if ($this->src->isFactory()) {
-            $this->getFactoryTestService()->createFactoryTest($this->src);
-        }
 
         //criar teste com fixture correta, passando válido.
 
