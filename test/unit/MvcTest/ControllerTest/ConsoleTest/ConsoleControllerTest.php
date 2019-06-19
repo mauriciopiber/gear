@@ -62,7 +62,6 @@ class ConsoleControllerTest extends TestCase
             $this->code,
             $this->prophesize(DirService::class)->reveal(),
             $this->prophesize(TableService::class)->reveal(),
-            $this->prophesize(ServiceManager::class)->reveal(),
             $this->array
         );
 
@@ -91,6 +90,7 @@ class ConsoleControllerTest extends TestCase
         $controller = new Controller(require __DIR__.'/../../_gearfiles/console-with-special-dependency.php');
 
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
@@ -113,6 +113,7 @@ class ConsoleControllerTest extends TestCase
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controller->module();
 
@@ -128,6 +129,7 @@ class ConsoleControllerTest extends TestCase
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controller->moduleFactory();
 
@@ -153,6 +155,7 @@ class ConsoleControllerTest extends TestCase
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
 

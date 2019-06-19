@@ -69,7 +69,8 @@ class ApiControllerTestServiceTest extends TestCase
     {
         $fileName = $this->template.'/module/module.phtml';
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()
             ->willReturn(vfsStream::url('module/test/unit/ControllerTest'))
             ->shouldBeCalled();
@@ -90,7 +91,7 @@ class ApiControllerTestServiceTest extends TestCase
     {
         $fileName = $this->template.'/module/module-factory.phtml';
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestControllerFolder()
             ->willReturn(vfsStream::url('module/test/unit/ControllerTest'))
             ->shouldBeCalled();
@@ -116,6 +117,7 @@ class ApiControllerTestServiceTest extends TestCase
      */
     public function testConstructControllerTest($controller, $expected)
     {
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));

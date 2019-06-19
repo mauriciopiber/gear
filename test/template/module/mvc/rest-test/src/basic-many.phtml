@@ -5,8 +5,7 @@ use PHPUnit\Framework\TestCase;
 use MyModule\Controller\BasicManyRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group BasicManyRest
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicManyRestTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -22,7 +20,7 @@ class BasicManyRestTest extends TestCase
     protected $routeMatch;
     protected $event;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -32,8 +30,6 @@ class BasicManyRestTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -46,14 +42,6 @@ class BasicManyRestTest extends TestCase
 
     public function testGetAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicManyRest',
-            'Controller',
-            'Get'
-        );
-
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -63,14 +51,6 @@ class BasicManyRestTest extends TestCase
 
     public function testGetListAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicManyRest',
-            'Controller',
-            'GetList'
-        );
-
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -79,14 +59,6 @@ class BasicManyRestTest extends TestCase
 
     public function testUpdateAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicManyRest',
-            'Controller',
-            'Update'
-        );
-
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
@@ -97,14 +69,6 @@ class BasicManyRestTest extends TestCase
 
     public function testDeleteAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicManyRest',
-            'Controller',
-            'Delete'
-        );
-
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
@@ -115,14 +79,6 @@ class BasicManyRestTest extends TestCase
 
     public function testCreateAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicManyRest',
-            'Controller',
-            'Create'
-        );
-
         $this->request->setMethod('POST');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use MyModule\Controller\TableController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group MyModule
@@ -16,7 +15,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class TableControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     public function mockUploadImage()
     {
@@ -32,7 +30,6 @@ class TableControllerTest extends TestCase
 
         $mockFilter = $this->getMockSingleClass('MyModule\Filter\TableFilter', array('isValid'));
         $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
-
 
         $factory = $this->getApplication()
         ->getServiceManager()
@@ -56,12 +53,8 @@ class TableControllerTest extends TestCase
         ->get('ServiceManager')->setService('MyModule\Form\TableForm', $factory);
     }
 
-    public function setUp()
-    {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-        parent::setUp();
+    public function setUp() : void
+    {        parent::setUp();
 
         $this->controller = new TableController();
         $this->request    = new Request();
@@ -86,11 +79,9 @@ class TableControllerTest extends TestCase
         $this->controller->setTableForm($this->tableForm->reveal());
         $this->controller->setTableService($this->tableService->reveal());
         $this->controller->setTableSearchForm($this->tableSearchForm->reveal());
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         $refl = new \ReflectionObject($this);
         foreach ($refl->getProperties() as $prop) {
@@ -106,14 +97,6 @@ class TableControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'TableController',
-            'Controller',
-            'Create'
-        );
-
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -239,14 +222,6 @@ class TableControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'TableController',
-            'Controller',
-            'Edit'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\Table');
 
         $this->tableService->selectById(31)->willReturn($this->entity);
@@ -272,14 +247,12 @@ class TableControllerTest extends TestCase
 
         $this->tableService->selectById(31)->willReturn($this->entity);
 
-
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
         $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
         $this->response->getStatusCode()->willReturn(303);
         $this->prg->__invoke($this->tableForm, 'my-module/table/edit', true)->willReturn($this->response->reveal());
         $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
-
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -289,9 +262,7 @@ class TableControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
-
-    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
 
     /**
      * @group controller.edit
@@ -363,14 +334,6 @@ class TableControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'TableController',
-            'Controller',
-            'List'
-        );
-
         $this->tableService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -385,14 +348,6 @@ class TableControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'TableController',
-            'Controller',
-            'View'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\Table');
         //$this->entity->getIdTable()->willReturn(31)->shouldBeCalled();
 
@@ -447,14 +402,6 @@ class TableControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'TableController',
-            'Controller',
-            'Delete'
-        );
-
         $this->tableService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');

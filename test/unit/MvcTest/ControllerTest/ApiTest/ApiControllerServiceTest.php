@@ -124,6 +124,7 @@ class ApiControllerServiceTest extends TestCase
     public function testConstructApiController($controller, $expected)
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));

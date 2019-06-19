@@ -102,7 +102,7 @@ class ApiControllerTestService extends AbstractControllerTestService
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
         $options = [
-            'callable' => $this->getControllerManager()->getServiceName($controller),
+            'callable' => $this->getCodeTest()->getServiceManagerName($controller),
             'namespaceFile' => $this->getCodeTest()->getNamespace($controller),
             'namespace' => $this->getCodeTest()->getTestNamespace($controller),
         ***REMOVED***;

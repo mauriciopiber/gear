@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\MyTableColumnTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use MyModule\MyTableColumn\MyTableColumnController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group MyModule
@@ -16,7 +15,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class MyTableColumnControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     public function mockUploadImage()
     {
@@ -32,7 +30,6 @@ class MyTableColumnControllerTest extends TestCase
 
         $mockFilter = $this->getMockSingleClass('MyModule\Filter\MyTableColumnFilter', array('isValid'));
         $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
-
 
         $factory = $this->getApplication()
         ->getServiceManager()
@@ -56,12 +53,8 @@ class MyTableColumnControllerTest extends TestCase
         ->get('ServiceManager')->setService('MyModule\Form\MyTableColumnForm', $factory);
     }
 
-    public function setUp()
-    {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-        parent::setUp();
+    public function setUp() : void
+    {        parent::setUp();
 
         $this->myTableColumnService = $this->prophesize('MyModule\MyTableColumn\MyTableColumnService');
         $this->myTableColumnForm = $this->prophesize('MyModule\MyTableColumn\MyTableColumnForm');
@@ -87,11 +80,9 @@ class MyTableColumnControllerTest extends TestCase
 
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         $refl = new \ReflectionObject($this);
         foreach ($refl->getProperties() as $prop) {
@@ -107,14 +98,6 @@ class MyTableColumnControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'MyTableColumnController',
-            'MyTableColumn',
-            'Create'
-        );
-
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -240,14 +223,6 @@ class MyTableColumnControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'MyTableColumnController',
-            'MyTableColumn',
-            'Edit'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\MyTableColumn');
 
         $this->myTableColumnService->selectById(31)->willReturn($this->entity);
@@ -273,14 +248,12 @@ class MyTableColumnControllerTest extends TestCase
 
         $this->myTableColumnService->selectById(31)->willReturn($this->entity);
 
-
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
         $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
         $this->response->getStatusCode()->willReturn(303);
         $this->prg->__invoke($this->myTableColumnForm, 'my-module/my-table-column/edit', true)->willReturn($this->response->reveal());
         $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
-
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -290,9 +263,7 @@ class MyTableColumnControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
-
-    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
 
     /**
      * @group controller.edit
@@ -364,14 +335,6 @@ class MyTableColumnControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'MyTableColumnController',
-            'MyTableColumn',
-            'List'
-        );
-
         $this->myTableColumnService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -386,14 +349,6 @@ class MyTableColumnControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'MyTableColumnController',
-            'MyTableColumn',
-            'View'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\MyTableColumn');
         //$this->entity->getIdMyTableColumn()->willReturn(31)->shouldBeCalled();
 
@@ -448,14 +403,6 @@ class MyTableColumnControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'MyTableColumnController',
-            'MyTableColumn',
-            'Delete'
-        );
-
         $this->myTableColumnService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
