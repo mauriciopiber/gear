@@ -86,11 +86,11 @@ class ServiceTestServiceTest extends TestCase
 
     }
 
-    /**
+    /*
      * @dataProvider tables
      * @group inter
      * @group mvc-service
-     */
+
     public function testInstrospectTable(
         $columns,
         $template,
@@ -189,6 +189,7 @@ class ServiceTestServiceTest extends TestCase
             file_get_contents($file)
         );
     }
+    */
 
     public function src()
     {
@@ -204,25 +205,10 @@ class ServiceTestServiceTest extends TestCase
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
 
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest'));
-
-        if ($data->getService() == 'factories') {
-            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-            $this->service->setFactoryTestService($this->factory->reveal());
-        }
-
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
-            $this->module->reveal(),
-            $this->fileCreator,
-            $this->string
-        );
-
-        $this->service->setServiceManager($serviceManager);
-
-        $this->service->setTraitTestService($this->traitTest->reveal());
 
         $file = $this->service->createServiceTest($data);
 

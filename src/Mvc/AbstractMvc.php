@@ -41,7 +41,6 @@ abstract class AbstractMvc
         Code $code,
         DirService $dirService,
         TableService $tableService,
-        ServiceManager $serviceManager,
         ArrayService $array
     ) {
         $this->setArrayService($array);
@@ -51,12 +50,9 @@ abstract class AbstractMvc
         $this->setStringService($string);
         $this->setDirService($dirService);
         $this->setTableService($tableService);
-        $this->setServiceManager($serviceManager);
     }
 
     use ArrayServiceTrait;
-
-    use ServiceManagerTrait;
 
     use TableServiceTrait;
 

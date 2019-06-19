@@ -70,16 +70,6 @@ class ServiceService extends AbstractMvc implements AbstractMvcInterface
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
-        // $this->getServiceTestService()->createServiceTest($this->src);
-
-        // if ($this->src->isAbstract() === false) {
-        //     $this->getTraitService()->createTrait($this->src);
-        // }
-
-        // if ($this->src->isFactory() && $this->src->isAbstract() === false) {
-        //     $this->getFactoryService()->createFactory($this->src);
-        // }
-
         $this->srcFile = $this->getFileCreator();
 
         return $this->srcFile->createFile(

@@ -39,7 +39,6 @@ class AbstractMvcFactory implements AbstractFactoryInterface
             $container->get(Code::class),
             $container->get(DirService::class),
             $container->get(TableService::class),
-            $container->get(ServiceManager::class),
             $container->get(ArrayService::class)
         );
     }
