@@ -128,7 +128,7 @@ class ConsoleControllerTest extends TestCase
     public function testCreateModuleControllerFactory()
     {
         $this->module->getControllerFolder()->willReturn(vfsStream::url('module/src/MyModule/Controller'))->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controller->moduleFactory();

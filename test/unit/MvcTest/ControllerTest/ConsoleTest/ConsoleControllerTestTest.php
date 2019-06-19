@@ -8,6 +8,7 @@ use GearTest\ControllerScopeTrait;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 use Gear\Util\Dir\DirService;
+use Gear\Table\TableService\TableService;
 
 /**
  * @group Fix4
@@ -52,7 +53,8 @@ class ConsoleControllerTestTest extends TestCase
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
-            $this->codeTest
+            $this->codeTest,
+            $this->prophesize(TableService::class)->reveal()
         );
 
 
@@ -60,14 +62,14 @@ class ConsoleControllerTestTest extends TestCase
 
         $this->controller->setInjector($this->injector);
 
-        $this->controller->setArrayService($this->array);
+        //$this->controller->setArrayService($this->array);
 
 
-        $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-        $this->controller->setFactoryTestService($this->factoryService->reveal());
+        // $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        // $this->controller->setFactoryTestService($this->factoryService->reveal());
 
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitTestService');
-        $this->controller->setTraitTestService($this->traitService->reveal());
+        // $this->traitService = $this->prophesize('Gear\Mvc\TraitTestService');
+        // $this->controller->setTraitTestService($this->traitService->reveal());
     }
 
     /**
@@ -77,6 +79,7 @@ class ConsoleControllerTestTest extends TestCase
     {
         $controller = new Controller(require __DIR__.'/../../_gearfiles/console-with-special-dependency.php');
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
@@ -97,7 +100,8 @@ class ConsoleControllerTestTest extends TestCase
     public function testCreateModuleController()
     {
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest/ControllerTest'))->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controller->module();
 
@@ -112,7 +116,8 @@ class ConsoleControllerTestTest extends TestCase
     public function testCreateModuleControllerFactory()
     {
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module/test/unit/MyModuleTest/ControllerTest'))->shouldBeCalled();
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->controller->moduleFactory();
 
@@ -136,20 +141,11 @@ class ConsoleControllerTestTest extends TestCase
      */
     public function testConstructControllerTest($controller, $expected)
     {
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->map('ControllerTest')->willReturn(vfsStream::url('module'));
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
-
-        $this->codeTest = new \Gear\Creator\CodeTest();
-        $this->codeTest->setStringService($this->string);
-        $this->codeTest->setModule($this->module->reveal());
-        $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeTest->setArrayService($this->array);
-
-
-
-        $this->controller->setCodeTest($this->codeTest);
 
         $file = $this->controller->buildController($controller);
 

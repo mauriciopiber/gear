@@ -1,14 +1,6 @@
 
     public function test<?php echo $this->actionName;?>Action()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName; ?>',
-            '<?php echo $this->controllerNamespace;?>',
-            '<?php echo $this->actionName;?>'
-        );
-
         $this->routeMatch->setParam('action', '<?php echo $this->actionNameUrl;?>');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
