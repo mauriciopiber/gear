@@ -17,12 +17,15 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
+use Gear\Util\Vector\ArrayService;
 
 trait UtilTestTrait
 {
     protected $fileCreator;
 
     protected $code;
+
+    protected $codeTest;
 
     protected $dir;
 
@@ -156,6 +159,37 @@ trait UtilTestTrait
         );
 
         return $this->code;
+    }
+
+    public function createModule()
+    {
+        if (isset($this->module)) {
+            return $this->module;
+        }
+        $this->module = $this->prophesize(ModuleStructure::class);
+        return $this->module;
+    }
+
+    public function createCodeTest() {
+
+        if ($this->codeTest) {
+            return $this->codeTest;
+        }
+
+        $this->codeTest = new \Gear\Creator\CodeTest(
+            $this->createModule()->reveal(),
+            $this->createString(),
+            new DirService(),
+            new ArrayService()
+        );
+
+        return $this->codeTest;
+
+        // $this->codeTest->setModule($this->module->reveal());
+        // $this->codeTest->setFileCreator($this->fileCreator);
+
+        // $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
+        // $this->codeTest->setStringService($this->string);
 
     }
 

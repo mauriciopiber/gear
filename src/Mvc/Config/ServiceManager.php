@@ -24,68 +24,16 @@ class ServiceManager extends AbstractConfigManager implements
             $this->file[$service***REMOVED*** = [***REMOVED***;
         }
 
-        $this->file[$service***REMOVED***[$this->getServiceName($src)***REMOVED*** = $this->getServiceCallable($src);
+        $name = $this->code->getServiceManagerName($src);
+        $call = $this->code->getServiceManagerCall($src);
+
+        $this->file[$service***REMOVED***[$name***REMOVED*** = $call;
 
         $this->getArrayService()->arrayToFile(
             $this->getModule()->getConfigExtFolder().'/servicemanager.config.php',
             $this->file
         );
     }
-
-    /**
-     * Retorna o Nome que o ServiceManager deve usar para localizar a classe.
-     */
-    public function getServiceName(Src $src)
-    {
-        if (empty($src->getNamespace())) {
-            if ($src->getType() == 'SearchForm') {
-                $type = 'Form\\Search';
-            } elseif ($src->getType() == 'ViewHelper') {
-                $type = 'View\\Helper';
-            } else {
-                $type = $src->getType();
-            }
-
-            return $this->getModule()->getNamespace().'\\'.$type.'\\'.$src->getName();
-        }
-
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
-
-        $namespace .= $src->getNamespace();
-
-        return $namespace.'\\'.$src->getName();
-    }
-
-    /**
-     * Retorna o objecto que o ServiceManager deve chamar.
-     */
-    public function getServiceCallable(Src $src)
-    {
-        $name = $src->getName();
-
-        if ($src->isFactory()) {
-            $name .= 'Factory';
-        }
-
-        if (empty($src->getNamespace())) {
-            if ($src->getType() == 'SearchForm') {
-                $type = 'Form\\Search';
-            } elseif ($src->getType() == 'ViewHelper') {
-                $type = 'View\\Helper';
-            } else {
-                $type = $src->getType();
-            }
-
-            return $this->getModule()->getNamespace().'\\'.$type.'\\'.$name;
-        }
-
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
-
-        $namespace .= $src->getNamespace();
-
-        return $namespace.'\\'.$name;
-    }
-
 
     public function getServiceManager()
     {

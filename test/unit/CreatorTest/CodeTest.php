@@ -321,4 +321,89 @@ EOS;
 
         $this->assertEquals(file_get_contents($this->template.'/class-docs/simple.phtml'), $this->code->getClassDocs($src));
     }
+
+    public function testGetServiceManagerService()
+    {
+        $src = new Src([
+            'name' => 'MyService',
+            'type' => 'Service'
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+        $expected = 'MyModule\Service\MyService';
+        $serviceName = $this->code->getServiceManagerName($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
+
+    public function testGetServiceManagerServiceNamespace()
+    {
+        $src = new Src([
+            'name' => 'MyService',
+            'namespace' => 'MyJoin'
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+        $expected = 'MyModule\MyJoin\MyService';
+        $serviceName = $this->code->getServiceManagerName($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
+
+    public function testGetServiceManagerWithModuleNamespace()
+    {
+        $src = new Src([
+            'name' => 'MyService',
+            'type' => 'Service',
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('Pbr\MyModule')->shouldBeCalled();
+        $expected = 'Pbr\MyModule\Service\MyService';
+        $serviceName = $this->code->getServiceManagerName($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
+
+    public function testGetServiceManagerWithModuleNamespaceNamespace()
+    {
+        $src = new Src([
+            'name' => 'MyService',
+            'type' => 'Service',
+            'namespace' => 'MyJoin'
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('Pbr\MyModule')->shouldBeCalled();
+        $expected = 'Pbr\MyModule\MyJoin\MyService';
+        $serviceName = $this->code->getServiceManagerName($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
+
+    public function testGetServiceManagerController()
+    {
+        $src = new Controller([
+            'name' => 'MyController',
+            'namespace' => 'MyJoin'
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('Pbr\MyModule')->shouldBeCalled();
+        $expected = 'Pbr\MyModule\MyJoin\My';
+        $serviceName = $this->code->getServiceManagerName($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
+
+    public function testGetServiceManagerCallController()
+    {
+        $src = new Controller([
+            'name' => 'MyController',
+            'namespace' => 'MyJoin'
+        ***REMOVED***);
+
+        $this->module->getNamespace()->willReturn('Pbr\MyModule')->shouldBeCalled();
+        $expected = 'Pbr\MyModule\MyJoin\MyControllerFactory';
+        $serviceName = $this->code->getServiceManagerCall($src);
+
+        $this->assertEquals($serviceName, $expected);
+    }
 }

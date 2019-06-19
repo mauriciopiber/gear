@@ -8,6 +8,7 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
 use Gear\Creator\CodeTest;
+use Gear\Table\TableService\TableService;
 
 class AbstractMvcTestFactory implements AbstractFactoryInterface
 {
@@ -29,7 +30,8 @@ class AbstractMvcTestFactory implements AbstractFactoryInterface
             $container->get(ModuleStructure::class),
             $container->get(FileCreator::class),
             $container->get(StringService::class),
-            $container->get(CodeTest::class)
+            $container->get(CodeTest::class),
+            $container->get(TableService::class)
             //$container->get(ModuleStructure::class)
         );
     }

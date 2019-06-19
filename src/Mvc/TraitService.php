@@ -28,10 +28,6 @@ class TraitService extends AbstractMvc implements AbstractMvcInterface
         $trait->setFileName($name.'Trait.php');
         $trait->setLocation($location);
 
-        $callable = $this->getServiceManager()->getServiceCallable($src);
-
-        $service = $this->getServiceManager()->getServiceName($src);
-
         $trait->setOptions(
             [
                 'classDocs' => $this->getCode()->getClassDocs($src),
@@ -43,8 +39,6 @@ class TraitService extends AbstractMvc implements AbstractMvcInterface
                 'lenght' => $this->str('var-length', $name, ['offset' => 'mock'***REMOVED***),
                 'srcType' => $src->getType(),
                 'srcName' => $src->getName(),
-                'service' => $service,
-                'callable' => $callable
             ***REMOVED***
         );
 
