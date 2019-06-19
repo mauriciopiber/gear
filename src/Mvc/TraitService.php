@@ -30,8 +30,9 @@ class TraitService extends AbstractMvc implements AbstractMvcInterface
 
         $trait->setOptions(
             [
+                'callable' => $this->getCode()->getServiceManagerName($src),
                 'classDocs' => $this->getCode()->getClassDocs($src),
-                'module' => $this->getModule()->getModuleName(),
+                'module' => $this->getModule()->getNamespace(),
                 'namespace' => $this->getCode()->getNamespace($src),
                 'class' => $this->str('class', $name),
                 'label' => $this->str('label', $name),

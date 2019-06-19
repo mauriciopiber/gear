@@ -31,6 +31,13 @@ class ModuleStructureTest extends TestCase
         );
     }
 
+    public function testGetNamespaceFromModule()
+    {
+        $this->basicModuleStructure->prepare();
+        $namespace = $this->basicModuleStructure->getNamespace();
+        $this->assertEquals('Gear', $namespace);
+    }
+
 
     public function normalizeDoubleQuote()
     {

@@ -20,7 +20,7 @@ abstract class AbstractCodeTest extends AbstractCodeBase
 {
     public function getFileNamespace($data)
     {
-        $module = $this->getModule()->getModuleName();
+        $module = $this->getModule()->getNamespace();
 
         if (!empty($data->getNamespace())) {
             $namespace = ($data->getNamespace()[0***REMOVED*** != '\\') ? $module.'\\' : '';
@@ -83,39 +83,39 @@ abstract class AbstractCodeTest extends AbstractCodeBase
         return str_replace('Test', '', $data->getType());
     }
 
-    /**
-     * Retorna o nome completo da classe que será utilizada.
-     * no formato [Module***REMOVED***\[Namespace***REMOVED***\[Name***REMOVED***
-     * Essa função deve ser transferida para abstractCode, serve para retornar todo caminho para uma classe.
-     */
-    public function getFullClassName($data)
-    {
-        if (!empty($data->getNamespace())) {
-            $psr = explode('\\', $data->getNamespace());
+    // /**
+    //  * Retorna o nome completo da classe que será utilizada.
+    //  * no formato [Module***REMOVED***\[Namespace***REMOVED***\[Name***REMOVED***
+    //  * Essa função deve ser transferida para abstractCode, serve para retornar todo caminho para uma classe.
+    //  */
+    // public function getFullClassName($data)
+    // {
+    //     if (!empty($data->getNamespace())) {
+    //         $psr = explode('\\', $data->getNamespace());
 
-            foreach ($psr as $i => $item) {
-                $psr[$i***REMOVED*** = $item;
-            }
+    //         foreach ($psr as $i => $item) {
+    //             $psr[$i***REMOVED*** = $item;
+    //         }
 
-            $implode = implode('\\', $psr);
+    //         $implode = implode('\\', $psr);
 
-            $namespace = $implode;
-        } else {
-            if ($data instanceof Src) {
-                if ($data->getType() == 'SearchForm') {
-                    $namespace = 'Form\Search';
-                } elseif ($data->getType() == 'ViewHelper') {
-                    $namespace = 'View\Helper';
-                } else {
-                    $namespace = $data->getType();
-                }
-            } else {
-                $namespace = 'Controller';
-            }
-        }
+    //         $namespace = $implode;
+    //     } else {
+    //         if ($data instanceof Src) {
+    //             if ($data->getType() == 'SearchForm') {
+    //                 $namespace = 'Form\Search';
+    //             } elseif ($data->getType() == 'ViewHelper') {
+    //                 $namespace = 'View\Helper';
+    //             } else {
+    //                 $namespace = $data->getType();
+    //             }
+    //         } else {
+    //             $namespace = 'Controller';
+    //         }
+    //     }
 
-        return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
-    }
+    //     return $this->getModule()->getModuleName().'\\'.$namespace.'\\'.$data->getName();
+    // }
 
     public function getLocationPath($data)
     {

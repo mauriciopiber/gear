@@ -57,8 +57,10 @@ class ModuleStructure
         return $this;
     }
 
-    public function normalizeQuotes($label, $size = 1)
-    {
+    public function normalizeQuotes(
+        String $label,
+        Int $size = 1
+    ) {
         if (!strpos($label, '\\') !== false) {
             return $this->str('class', $label);
         }
@@ -84,6 +86,16 @@ class ModuleStructure
 
     public function getNamespace()
     {
+        if (empty($this->namespace)) {
+            $moduleFile = $this->getSrcFolder().'/Module.php';
+
+            $module = file_get_contents($moduleFile);
+            preg_match('/namespace[ ***REMOVED****([\/a-zA-Z***REMOVED***+)/', $module, $matches);
+
+            if (isset($matches[1***REMOVED***)) {
+                $this->namespace = $matches[1***REMOVED***;
+            }
+        }
         if (empty($this->namespace)) {
             return $this->normalizeQuotes($this->moduleName);
         }
@@ -131,9 +143,6 @@ class ModuleStructure
 
         if (empty($moduleName)) {
             $moduleName = $this->getModuleName();
-            if (empty($moduleName)) {
-                $moduleName = $this->getModule()->getModuleName();
-            }
         }
 
         $this->setModuleName($moduleName);
