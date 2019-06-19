@@ -82,10 +82,6 @@ class WebControllerTestService extends AbstractControllerTestService implements
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($controller->isFactory()) {
-            $this->getFactoryTestService()->createControllerFactoryTest($controller, $this->location);
-        }
-
         return $this->file->render();
     }
 
@@ -282,14 +278,14 @@ class WebControllerTestService extends AbstractControllerTestService implements
             $construct['mockusertype'***REMOVED*** = $user->getMockZfcAuthenticate();
         }
 
-        $options['service'***REMOVED*** = $this->getServiceManager()
-          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Service'));
+        $options['service'***REMOVED*** = $this->getCodeTest()
+          ->getServiceManagerName($this->getSchemaService()->getSrcByDb($this->db, 'Service'));
 
-        $options['form'***REMOVED*** = $this->getServiceManager()
-          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'Form'));
+        $options['form'***REMOVED*** = $this->getCodeTest()
+          ->getServiceManagerName($this->getSchemaService()->getSrcByDb($this->db, 'Form'));
 
-        $options['search'***REMOVED*** = $this->getServiceManager()
-          ->getServiceName($this->getSchemaService()->getSrcByDb($this->db, 'SearchForm'));
+        $options['search'***REMOVED*** = $this->getCodeTest()
+          ->getServiceManagerName($this->getSchemaService()->getSrcByDb($this->db, 'SearchForm'));
 
         $options['constructor'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/mvc/controller-test/db/constructor/'.$this->controller->getService().'.phtml',
@@ -302,7 +298,7 @@ class WebControllerTestService extends AbstractControllerTestService implements
         $this->file->setView('template/module/mvc/controller-test/db/db-test.phtml');
         $this->file->setOptions($options);
 
-        $this->getFactoryTestService()->createControllerFactoryTest($this->controller);
+        //$this->getFactoryTestService()->createControllerFactoryTest($this->controller);
 
 
         return $this->file->render();

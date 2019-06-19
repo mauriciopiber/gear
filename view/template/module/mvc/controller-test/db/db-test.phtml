@@ -20,7 +20,8 @@ class <?php echo $this->controllerName; ?>Test extends TestCase
 <?php echo $this->static;?>
 
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 <?php echo ($this->constructor) ? $this->constructor.PHP_EOL : '';?>
     }
 

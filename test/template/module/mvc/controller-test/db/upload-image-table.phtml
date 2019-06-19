@@ -16,8 +16,10 @@ use Zend\Router\RouteMatch;
 class MyTableTableControllerTest extends TestCase
 {
 
+
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->myTableTableService = $this->prophesize('MyModule\MyTableTable\MyTableTableService');
         $this->myTableTableForm = $this->prophesize('MyModule\MyTableTable\MyTableTableForm');

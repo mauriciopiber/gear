@@ -16,8 +16,10 @@ use Zend\Router\RouteMatch;
 class SingleDbTableControllerTest extends TestCase
 {
 
+
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->singleDbTableService = $this->prophesize('MyModule\Service\SingleDbTableService');
         $this->singleDbTableForm = $this->prophesize('MyModule\Form\SingleDbTableForm');

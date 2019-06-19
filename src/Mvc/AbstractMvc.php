@@ -6,9 +6,6 @@ use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Schema\Controller\Controller;
-use Gear\Creator\FileCreator\App\ConstructorArgsTrait;
-use Gear\Creator\FileCreator\App\InjectTrait;
-use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
 use Gear\Schema\Db\Db as DbObject;
 use Gear\Schema\App\App as AppObject;
@@ -30,6 +27,8 @@ use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;
+use Gear\Creator\Injector\Injector;
+use Gear\Creator\Injector\InjectorTrait;
 
 abstract class AbstractMvc
 {
@@ -41,7 +40,8 @@ abstract class AbstractMvc
         Code $code,
         DirService $dirService,
         TableService $tableService,
-        ArrayService $array
+        ArrayService $array,
+        Injector $injector
     ) {
         $this->setArrayService($array);
         $this->setCode($code);
@@ -50,7 +50,10 @@ abstract class AbstractMvc
         $this->setStringService($string);
         $this->setDirService($dirService);
         $this->setTableService($tableService);
+        $this->setInjector($injector);
     }
+
+    use InjectorTrait;
 
     use ArrayServiceTrait;
 
@@ -65,14 +68,7 @@ abstract class AbstractMvc
     use ModuleStructureTrait;
 
     use CodeTrait;
-    // old
-    use GearVersionTrait;
-    use InjectorTrait;
-    use InjectTrait;
-    use ConstructorArgsTrait;
-    use InterfaceServiceTrait;
-    use TraitServiceTrait;
-    use FactoryServiceTrait;
+
 
     /**
      * Resolve all Modules Namespaces to PSR-4 folders

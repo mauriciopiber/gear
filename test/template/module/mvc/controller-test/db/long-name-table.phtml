@@ -16,8 +16,10 @@ use Zend\Router\RouteMatch;
 class MyVeryLongTableNameExampleControllerTest extends TestCase
 {
 
+
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->myVeryLongTableNameExampleService = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleService');
         $this->myVeryLongTableNameExampleForm = $this->prophesize('MyModule\Custom\CustomNamespace\MyVeryLongTableNameExampleForm');

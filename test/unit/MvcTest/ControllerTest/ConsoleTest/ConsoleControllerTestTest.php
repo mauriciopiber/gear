@@ -48,17 +48,18 @@ class ConsoleControllerTestTest extends TestCase
             $this->dirService,
             $this->array
         );
+        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
         $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
             $this->codeTest,
-            $this->prophesize(TableService::class)->reveal()
+            $this->prophesize(TableService::class)->reveal(),
+            $this->injector
         );
 
 
-        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
         $this->controller->setInjector($this->injector);
 

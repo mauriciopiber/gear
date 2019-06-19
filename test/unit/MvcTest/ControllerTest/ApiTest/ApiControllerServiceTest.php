@@ -61,7 +61,8 @@ class ApiControllerServiceTest extends TestCase
             $this->code,
             $this->factoryService->reveal(),
             $this->injector,
-            $this->arrayService
+            $this->arrayService,
+            $this->injector
         );
 
         $this->template = Module::LOCATION.'/../test/template/module/mvc/rest';

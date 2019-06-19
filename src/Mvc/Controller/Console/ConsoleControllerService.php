@@ -70,10 +70,6 @@ class ConsoleControllerService extends AbstractControllerService implements Abst
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->isFactory()) {
-            $this->getFactoryService()->createFactory($controller, $this->location);
-        }
-
         return $this->file->render();
     }
 

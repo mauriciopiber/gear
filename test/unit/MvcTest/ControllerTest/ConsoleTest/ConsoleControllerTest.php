@@ -54,6 +54,7 @@ class ConsoleControllerTest extends TestCase
         //$this->code->setArrayService($this->array);
         //$this->controller->setCode($this->code);
         $this->array = new \Gear\Util\Vector\ArrayService();
+        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
 
         $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerService(
             $this->module->reveal(),
@@ -62,23 +63,9 @@ class ConsoleControllerTest extends TestCase
             $this->code,
             $this->prophesize(DirService::class)->reveal(),
             $this->prophesize(TableService::class)->reveal(),
-            $this->array
+            $this->array,
+            $this->injector
         );
-
-
-        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
-
-        $this->controller->setInjector($this->injector);
-        $this->controller->setArrayService($this->array);
-
-        $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->controller->setFactoryService($this->factoryService->reveal());
-
-        $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
-        $this->controller->setTraitService($this->traitService->reveal());
-
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
     }
 
 

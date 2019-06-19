@@ -54,7 +54,8 @@ class MyTableAllControllerTest extends TestCase
     }
 
     public function setUp() : void
-    {        parent::setUp();
+    {
+        parent::setUp();
 
         $this->myTableAllService = $this->prophesize('MyModule\MyTableAll\MyTableAllService');
         $this->myTableAllForm = $this->prophesize('MyModule\MyTableAll\MyTableAllForm');
@@ -266,7 +267,8 @@ class MyTableAllControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
+    }
 
     /**
      * @group controller.edit

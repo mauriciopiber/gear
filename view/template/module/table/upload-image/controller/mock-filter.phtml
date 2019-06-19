@@ -8,7 +8,6 @@
         $mockFilter = $this->getMockSingleClass('<?php echo $this->module;?>\Filter\<?php echo $this->class;?>Filter', array('isValid'));
         $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
 
-
         $factory = $this->getApplication()
         ->getServiceManager()
         ->get('ServiceManager')->get('<?php echo $this->module;?>\Form\<?php echo $this->class;?>Form');
