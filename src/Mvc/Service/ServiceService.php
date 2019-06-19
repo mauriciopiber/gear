@@ -61,7 +61,7 @@ class ServiceService extends AbstractMvc implements AbstractMvcInterface
             'uses'       => $this->getCode()->getUse($this->src),
             'attributes' => $this->getCode()->getUseAttribute($this->src),
             'namespace'  => $this->getCode()->getNamespace($this->src),
-            'module'     => $this->getModule()->getModuleName(),
+            'module'     => $this->getModule()->getNamespace(),
             'abstract'   => $this->src->getAbstract(),
             'class'      => $this->src->getName(),
         ***REMOVED***;

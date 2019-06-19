@@ -74,6 +74,7 @@ class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInter
         return parent::createTest($data, SrcTypesInterface::SERVICE);
     }
 
+    /*
     public function createDbTest()
     {
         $this->columnManager = $this->db->getColumnManager();
@@ -134,9 +135,7 @@ class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInter
             'template/module/mvc/service-test/db/constructor/'.$this->src->getService().'.phtml',
             $construct
         );
-        /**
-         * @TODO certeza que isso tá errado kkkkkkkk
-         */
+
         if ($this->columnManager->isAssociatedWith(UploadImageColumn::class)) {
             $options['extraColumns'***REMOVED*** = $this->getFileCreator()->renderPartial(
                 'template/module/table/upload-image/controller/mock-upload-image.phtml',
@@ -157,6 +156,7 @@ class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInter
 
         return $fileCreator->render();
     }
+    */
 
     public function createSrcTest()
     {
@@ -177,7 +177,7 @@ class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInter
             'fileNamespace' => $this->getCodeTest()->getFileNamespace($this->src),
             'var'           => $this->str('var-length', $this->src->getName()),
             'className'     => $this->src->getName(),
-            'module'        => $this->getModule()->getModuleName()
+            'module'        => $this->getModule()->getNamespace()
         ***REMOVED***;
 
         if ($this->src->isFactory()) {
