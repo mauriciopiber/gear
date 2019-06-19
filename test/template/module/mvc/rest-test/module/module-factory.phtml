@@ -8,15 +8,16 @@ use MyModule\Controller\IndexControllerFactory;
 
 class IndexControllerFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         $this->factory = new IndexControllerFactory();
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
+
     }
 
     public function testCreateFactory()
     {
-        $instance = $this->factory->createService($this->controllerManager->reveal());
+        $this->container = $this->prophesize(ControllerManager::class);
+        $instance = $this->factory->__invoke($this->container->reveal(), null);
         $this->assertInstanceOf(IndexController::class, $instance);
     }
 }

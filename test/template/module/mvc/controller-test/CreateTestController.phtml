@@ -5,8 +5,7 @@ use MyModuleTest\ControllerTest\AbstractControllerTestCase;
 use MyModule\Controller\MyController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group MyController
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class MyControllerTest extends AbstractControllerTestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -22,7 +20,7 @@ class MyControllerTest extends AbstractControllerTestCase
     protected $routeMatch;
     protected $event;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -32,8 +30,6 @@ class MyControllerTest extends AbstractControllerTestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()

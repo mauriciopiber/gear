@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\ControllerTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use MyModule\Controller\BasicDependencyAction;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group BasicDependencyAction
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicDependencyActionTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -22,12 +20,8 @@ class BasicDependencyActionTest extends TestCase
     protected $routeMatch;
     protected $event;
 
-    public function setUp()
+    public function setUp() : void
     {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-
         parent::setUp();
 
         $this->controller = new BasicDependencyAction();
@@ -36,8 +30,6 @@ class BasicDependencyActionTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()

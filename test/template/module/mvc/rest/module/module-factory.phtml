@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Controller;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Controller\IndexController;
 
 /**
@@ -19,13 +19,13 @@ class IndexControllerFactory implements FactoryInterface
     /**
      * Create Index Controller
      *
-     * @param ServiceLocatorInterface $controllerManager Controller Manager
+     * @param ContainerInterface $container Controller Manager
      *
      * @return IndexController
      */
-    public function createService(ServiceLocatorInterface $controllerManager)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        unset($controllerManager);
+        unset($container);
         $indexController = new IndexController();
         return $indexController;
     }

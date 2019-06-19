@@ -5,8 +5,7 @@ use PHPUnit\Framework\TestCase;
 use MyModule\Controller\BasicDependenciesFactoryManyRest;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group BasicDependenciesFactoryManyRest
@@ -14,7 +13,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class BasicDependenciesFactoryManyRestTest extends TestCase
 {
-    use AclAssertTrait;
 
     protected $controller;
     protected $request;
@@ -22,7 +20,7 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
     protected $routeMatch;
     protected $event;
 
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -41,8 +39,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
         $this->controller->setEvent($this->event);
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
     public function test404()
@@ -55,14 +51,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
 
     public function testGetAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryManyRest',
-            'Controller',
-            'Get'
-        );
-
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
@@ -72,14 +60,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
 
     public function testGetListAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryManyRest',
-            'Controller',
-            'GetList'
-        );
-
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -88,14 +68,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
 
     public function testUpdateAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryManyRest',
-            'Controller',
-            'Update'
-        );
-
         $this->request->setMethod('PUT');
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
@@ -106,14 +78,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
 
     public function testDeleteAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryManyRest',
-            'Controller',
-            'Delete'
-        );
-
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);
@@ -124,14 +88,6 @@ class BasicDependenciesFactoryManyRestTest extends TestCase
 
     public function testCreateAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'BasicDependenciesFactoryManyRest',
-            'Controller',
-            'Create'
-        );
-
         $this->request->setMethod('POST');
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();

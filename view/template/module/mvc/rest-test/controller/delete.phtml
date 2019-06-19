@@ -1,14 +1,6 @@
 
     public function testDeleteAction()
     {
-        $this->assertAcl(
-            $this->schema,
-            '<?php echo $this->module;?>',
-            '<?php echo $this->controllerName;?>',
-            '<?php echo $this->namespace;?>',
-            '<?php echo $this->actionName;?>'
-        );
-
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
         $result = $this->controller->dispatch($this->request);

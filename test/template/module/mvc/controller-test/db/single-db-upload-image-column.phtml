@@ -1,12 +1,11 @@
 <?php
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase as TestCase;
+use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use MyModule\Custom\CustomNamespace\UploadImageColumnController;
 use Zend\Http\Request;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\RouteMatch;
-use GearBaseTest\Assertions\AclAssertTrait;
+use Zend\Router\RouteMatch;
 
 /**
  * @group MyModule
@@ -16,7 +15,6 @@ use GearBaseTest\Assertions\AclAssertTrait;
  */
 class UploadImageColumnControllerTest extends TestCase
 {
-    use AclAssertTrait;
 
     public function mockUploadImage()
     {
@@ -32,7 +30,6 @@ class UploadImageColumnControllerTest extends TestCase
 
         $mockFilter = $this->getMockSingleClass('MyModule\Filter\UploadImageColumnFilter', array('isValid'));
         $mockFilter->expects($this->any())->method('isValid')->willReturn(true);
-
 
         $factory = $this->getApplication()
         ->getServiceManager()
@@ -56,12 +53,8 @@ class UploadImageColumnControllerTest extends TestCase
         ->get('ServiceManager')->setService('MyModule\Form\UploadImageColumnForm', $factory);
     }
 
-    public function setUp()
-    {
-        $this->setApplicationConfig(
-            include \GearBase\Module::getProjectFolder().'/config/application.config.php'
-        );
-        parent::setUp();
+    public function setUp() : void
+    {        parent::setUp();
 
         $this->uploadImageColumnService = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnService');
         $this->uploadImageColumnForm = $this->prophesize('MyModule\Custom\CustomNamespace\UploadImageColumnForm');
@@ -87,11 +80,9 @@ class UploadImageColumnControllerTest extends TestCase
 
         $this->url = $this->prophesize('Zend\Mvc\Controller\Plugin\Url');
         $this->controller->getPluginManager()->setService('url', $this->url->reveal());
-
-        $this->schema = (new \MyModule\Module())->getLocation().'/../schema/module.json';
     }
 
-    protected function tearDown()
+    protected function tearDown() : void
     {
         $refl = new \ReflectionObject($this);
         foreach ($refl->getProperties() as $prop) {
@@ -107,14 +98,6 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testEnterCreatePage()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'UploadImageColumnController',
-            'Custom\CustomNamespace',
-            'Create'
-        );
-
         $this->routeMatch->setParam('action', 'create');
 
         $result = $this->controller->dispatch($this->request);
@@ -240,14 +223,6 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testDisplayEditSuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'UploadImageColumnController',
-            'Custom\CustomNamespace',
-            'Edit'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageColumn');
 
         $this->uploadImageColumnService->selectById(31)->willReturn($this->entity);
@@ -273,14 +248,12 @@ class UploadImageColumnControllerTest extends TestCase
 
         $this->uploadImageColumnService->selectById(31)->willReturn($this->entity);
 
-
         $this->prg = $this->prophesize('Zend\Mvc\Controller\Plugin\FilePostRedirectGet');
         $this->prg->setController($this->controller)->shouldBeCalled();
         $this->response = $this->prophesize('Zend\Http\PhpEnvironment\Response');
         $this->response->getStatusCode()->willReturn(303);
         $this->prg->__invoke($this->uploadImageColumnForm, 'my-module/upload-image-column/edit', true)->willReturn($this->response->reveal());
         $this->controller->getPluginManager()->setService('filepostredirectget', $this->prg->reveal());
-
 
         $this->routeMatch->setParam('action', 'edit');
         $this->routeMatch->setParam('id', 31);
@@ -290,9 +263,7 @@ class UploadImageColumnControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
 
         $this->assertEquals(303, $result->getStatusCode());
-        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);
-
-    }
+        $this->assertInstanceOf('Zend\Http\PhpEnvironment\Response', $result);    }
 
     /**
      * @group controller.edit
@@ -364,14 +335,6 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testWhenListDisplaySuccessful()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'UploadImageColumnController',
-            'Custom\CustomNamespace',
-            'List'
-        );
-
         $this->uploadImageColumnService->selectAll()->willReturn([***REMOVED***)->shouldBeCalled();
 
         $this->routeMatch->setParam('action', 'list');
@@ -386,14 +349,6 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testWhenViewDisplaySuccessfulWithValidId()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'UploadImageColumnController',
-            'Custom\CustomNamespace',
-            'View'
-        );
-
         $this->entity = $this->prophesize('MyModule\Entity\UploadImageColumn');
         //$this->entity->getIdUploadImageColumn()->willReturn(31)->shouldBeCalled();
 
@@ -448,14 +403,6 @@ class UploadImageColumnControllerTest extends TestCase
      */
     public function testDeleteSucessfullAndRedirectToListWithFailNotFound()
     {
-        $this->assertAcl(
-            $this->schema,
-            'MyModule',
-            'UploadImageColumnController',
-            'Custom\CustomNamespace',
-            'Delete'
-        );
-
         $this->uploadImageColumnService->delete(6000)->willReturn(['success' => false, 'error' => 'EntityNotFound'***REMOVED***);
 
         $this->routeMatch->setParam('action', 'delete');
