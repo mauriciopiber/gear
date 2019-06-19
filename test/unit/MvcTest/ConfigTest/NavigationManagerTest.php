@@ -61,6 +61,7 @@ class NavigationManagerTest extends TestCase
         $controllers = ["MyModule\Controller\IndexController" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->navigation->setModule($this->module->reveal());
 
         $file = $this->navigation->module($controllers);

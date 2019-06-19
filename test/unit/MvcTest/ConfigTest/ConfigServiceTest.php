@@ -31,6 +31,7 @@ class ConfigServiceTest extends TestCase
         $this->module->getConfigFolder()->willReturn(vfsStream::url('module/config'))->shouldBeCalled();
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $this->string = new \Gear\Util\String\StringService();
 
