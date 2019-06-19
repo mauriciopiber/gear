@@ -229,6 +229,7 @@ class ServiceTestServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestServiceFolder()->willReturn(vfsStream::url('module'));
 
@@ -237,21 +238,6 @@ class ServiceTestServiceTest extends TestCase
         } else {
             $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
-
-        if ($data->getService() == 'factories') {
-            $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
-            $this->service->setFactoryTestService($this->factory->reveal());
-        }
-
-        $serviceManager = new \Gear\Mvc\Config\ServiceManager(
-            $this->module->reveal(),
-            $this->fileCreator,
-            $this->string
-        );
-
-        $this->service->setServiceManager($serviceManager);
-
-        $this->service->setTraitTestService($this->traitTest->reveal());
 
         $file = $this->service->createServiceTest($data);
 

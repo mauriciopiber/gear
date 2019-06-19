@@ -9,7 +9,7 @@ use MyModule\Service\BasicAbstractService;
  */
 class BasicAbstractServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->service = $this->getMockForAbstractClass('MyModule\Service\BasicAbstractService', [***REMOVED***, '', false);
