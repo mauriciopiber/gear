@@ -34,21 +34,23 @@ class PageTest extends TestCase
 
         $this->string = new \Gear\Util\String\StringService();
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view'));
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/spec';
     }
 
     public function testCreateIndexFeature()
     {
-        $feature = new \Gear\Mvc\Spec\Page\Page();
-        $feature->setModule($this->module->reveal());
-        $feature->setStringService($this->string);
-        $feature->setFileCreator($this->fileCreator);
+        $feature = new \Gear\Mvc\Spec\Page\Page(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->createTableService(),
+            $this->createArrayService(),
+            $this->createInjector()
+        );
+
 
 
         $file = $feature->createIndexPage();

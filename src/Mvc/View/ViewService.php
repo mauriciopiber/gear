@@ -309,36 +309,33 @@ class ViewService extends AbstractMvc implements AbstractMvcInterface
 
         $file = $this->getFileCreator();
 
-        $file->addChildView(
-            [
-                'template' => sprintf('template/module/view/view/view.%s.phtml', $dbType),
-                'placeholder' => 'actions',
-                'config' => [
-                    'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
-                    'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
-                    'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
-                    'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
-                    'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
-                ***REMOVED***
-            ***REMOVED***
-        );
-
         $this->images = '';
         if ($this->getTableService()->verifyTableAssociation($this->tableName)) {
             $this->images = $this->getUploadImage()->getViewView($this->tableName);
         }
+        $options =  [
+            'images' => $this->images,
+            'label' => $this->str('label', $action->getController()->getNameOff()),
+            'class' => $this->str('class', $action->getController()->getNameOff()),
+            'values' => $viewValues,
+        ***REMOVED***;
+
+        $options['actions'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            sprintf('template/module/view/view/view.%s.phtml', $dbType),
+            [
+                'routeEdit' =>  sprintf('%s/%s/edit', $moduleUrl, $tableUrl),
+                'routeList' =>  sprintf('%s/%s/list', $moduleUrl, $tableUrl),
+                'routeView' =>  sprintf('%s/%s/view', $moduleUrl, $tableUrl),
+                'routeCreate' =>  sprintf('%s/%s/create', $moduleUrl, $tableUrl),
+                'routeDelete' =>  sprintf('%s/%s/delete', $moduleUrl, $tableUrl),
+            ***REMOVED***
+        );
+
 
         $file->setTemplate('template/module/view/view/view.phtml');
         $file->setLocation($this->getLocationDir());
         $file->setFileName('view.phtml');
-        $file->setOptions(
-            [
-                'images' => $this->images,
-                'label' => $this->str('label', $action->getController()->getNameOff()),
-                'class' => $this->str('class', $action->getController()->getNameOff()),
-                'values' => $viewValues,
-            ***REMOVED***
-        );
+        $file->setOptions($options);
 
         return $file->render();
     }

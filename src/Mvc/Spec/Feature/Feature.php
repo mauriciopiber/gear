@@ -7,10 +7,15 @@ use Gear\Schema\Db\Db;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\UserType\Feature\Strict;
-use Gear\Mvc\AbstractMvcTestInterface;
+use Gear\Mvc\AbstractMvcInterface;
+use Gear\Mvc\AbstractMvc;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Schema\Schema\SchemaServiceTrait;
 
-class Feature extends AbstractMvcTest implements AbstractMvcTestInterface
+class Feature extends AbstractMvc implements AbstractMvcInterface
 {
+    use SchemaServiceTrait;
+
     protected $dbLocation;
 
     const TEMPLATE = [
@@ -764,7 +769,7 @@ class Feature extends AbstractMvcTest implements AbstractMvcTestInterface
             return;
         }
 
-        $version = $this->getGearVersion();
+        $version = '0.0.99';
 
         $controllerName = $action->getController()->getNameOff();
 

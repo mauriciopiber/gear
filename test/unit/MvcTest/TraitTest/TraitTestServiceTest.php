@@ -30,15 +30,14 @@ class TraitTestServiceTest extends TestCase
         $stringService  = new \Gear\Util\String\StringService();
         $fileCreator    = $this->createFileCreator();
 
-        $codeTest = new \Gear\Creator\CodeTest();
-        $codeTest->setModule($this->module->reveal());
-        $codeTest->setStringService($stringService);
 
         $this->traitTest = new \Gear\Mvc\TraitTestService(
             $this->module->reveal(),
             $fileCreator,
             $stringService,
-            $codeTest
+            $this->createCodeTest(),
+            $this->createTableService(),
+            $this->createInjector()
         );
     }
 
@@ -47,6 +46,7 @@ class TraitTestServiceTest extends TestCase
      */
     public function testCreateTraitTest()
     {
+        $this->module->getNamespace()->willReturn('GearIt')->shouldBeCalled();
         $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
         $src = new \Gear\Schema\Src\Src([

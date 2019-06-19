@@ -14,7 +14,7 @@ class MyServiceTraitTest extends TestCase
 {
     use MyServiceTrait;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->myServiceMock = $this->prophesize(MyService::class);
     }

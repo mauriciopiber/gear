@@ -1,11 +1,11 @@
 <?php
 namespace Gear\Mvc\Spec\Step;
 
-use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvc;
 use Gear\Schema\Db\Db;
-use Gear\Mvc\AbstractMvcTestInterface;
+use Gear\Mvc\AbstractMvcInterface;
 
-class Step extends AbstractMvcTest implements AbstractMvcTestInterface
+class Step extends AbstractMvc implements AbstractMvcInterface
 {
     public function createIndexStep()
     {

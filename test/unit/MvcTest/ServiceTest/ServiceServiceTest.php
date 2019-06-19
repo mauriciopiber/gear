@@ -56,7 +56,8 @@ class ServiceServiceTest extends TestCase
             $this->code,
             new DirService(),
             $this->table->reveal(),
-            $this->arrayService
+            $this->arrayService,
+            $this->createInjector()
         );
 
         $this->injector = new Injector($this->arrayService);

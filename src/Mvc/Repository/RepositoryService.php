@@ -65,11 +65,6 @@ class RepositoryService extends AbstractMvc implements AbstractMvcInterface
 
         $location = $this->getCode()->getLocation($this->src);
 
-        $this->getRepositoryTestService()->createRepositoryTest($this->db);
-
-        $this->getTraitService()->createTrait($this->src);
-        $this->getFactoryService()->createFactory($this->src);
-
         $options = [
             'use' => ($this->src->isFactory()) ? $this->getCode()->getUseConstructor($this->src) : '',
             'package' => $this->getCode()->getClassDocsPackage($this->src),
@@ -106,17 +101,6 @@ class RepositoryService extends AbstractMvc implements AbstractMvcInterface
     public function createSrc()
     {
         $location = $this->getCode()->getLocation($this->src);
-
-        //$this->getAbstract();
-        $this->getRepositoryTestService()->createRepositoryTest($this->src);
-
-        if ($this->src->getAbstract() == false) {
-            $this->getTraitService()->createTrait($this->src);
-        }
-
-        if ($this->src->isFactory() && $this->src->getAbstract() == false) {
-            $this->getFactoryService()->createFactory($this->src);
-        }
 
         $options = [
             'class'      => $this->src->getName(),

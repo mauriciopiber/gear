@@ -9,7 +9,7 @@ use MyModule\Basic\BasicNamespaceRepository;
  */
 class BasicNamespaceRepositoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $this->repository = new BasicNamespaceRepository();

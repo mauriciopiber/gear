@@ -30,55 +30,40 @@ class RepositoryServiceTest extends TestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository';
 
-        $this->repository = new \Gear\Mvc\Repository\RepositoryService();
-
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->repository->setModule($this->module->reveal());
 
         $this->string = new \Gear\Util\String\StringService();
-        $this->repository->setStringService($this->string);
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($this->mockPhpRenderer());
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-        $this->repository->setFileCreator($this->fileCreator);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->dirService = new \Gear\Util\Dir\DirService();
 
 
-        $this->code = new \Gear\Creator\Code();
-        $this->code->setStringService($this->string);
-        $this->code->setModule($this->module->reveal());
-        $this->code->setDirService($this->dirService);
-
-        $constructorParams = new ConstructorParams($this->string);
-        $this->code->setConstructorParams($constructorParams);
-
-        $this->repository->setCode($this->code);
-
-        $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
-        $this->repository->setFactoryService($this->factory->reveal());
-
-        $this->trait = $this->prophesize('Gear\Mvc\TraitService');
-        $this->repository->setTraitService($this->trait->reveal());
-
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
 
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
-        $this->repository->setInjector($this->injector);
 
         //$this->column = $this->prophesize('Gear\Column\ColumnService');
         //$this->repository->setColumnService($this->column->reveal());
 
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->repository->setTableService($this->table->reveal());
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->repository->setSchemaService($this->schemaService->reveal());
+        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        //$this->repository->setSchemaService($this->schema->reveal());
 
-        $this->repositoryTest = $this->prophesize('Gear\Mvc\Repository\RepositoryTestService');
-        $this->repository->setRepositoryTestService($this->repositoryTest->reveal());
+
+
+        $this->repository = new \Gear\Mvc\Repository\RepositoryService(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->table->reveal(),
+            $this->arrayService,
+            $this->injector
+        );
     }
 
     /**
@@ -89,9 +74,9 @@ class RepositoryServiceTest extends TestCase
         $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
-        $this->factory->createFactory($data)->shouldBeCalled();
 
         $file = $this->repository->createRepository($data);
 
@@ -119,18 +104,13 @@ class RepositoryServiceTest extends TestCase
     public function testCreateSrc($data, $template)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {
             $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
         } else {
             $this->module->map('Repository')->willReturn(vfsStream::url('module'))->shouldBeCalled();
         }
-
-        if ($data->getService() == 'factories' && $data->getAbstract() == false) {
-            $this->factory->createFactory($data)->shouldBeCalled();
-        }
-
-        $this->repositoryTest->createRepositoryTest($data)->shouldBeCalled();
 
         $file = $this->repository->createRepository($data);
 
@@ -149,6 +129,7 @@ class RepositoryServiceTest extends TestCase
     public function testInstrospectTable($columns, $template, $nullable, $tableName, $namespace, $service)
     {
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $table = $this->string->str('class', $tableName);
 
@@ -201,17 +182,22 @@ class RepositoryServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->schemaService->getSrcByDb($this->db, 'Repository')->willReturn($repository);
+        $this->schema->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
-        $this->mapping = new \Gear\Mvc\Repository\MappingService();
-        $this->mapping->setStringService($this->string);
-        //$this->mapping->setColumnService($this->column->reveal());
-        $this->mapping->setTableService($this->table->reveal());
+        $this->mapping = new \Gear\Mvc\Repository\MappingService(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->createDirService(),
+            //$this->factoryService->reveal(),
+            $this->table->reveal(),
+            $this->arrayService,
+            $this->injector
+        );
+
         $this->repository->setMappingService($this->mapping);
-
-        $this->repositoryTest->createRepositoryTest($this->db)->shouldBeCalled();
-        $this->trait->createTrait($repository)->shouldBeCalled();
-        $this->factory->createFactory($repository)->shouldBeCalled();
+        $this->repository->setSchemaService($this->schema->reveal());
 
         $file = $this->repository->createRepository($this->db);
 

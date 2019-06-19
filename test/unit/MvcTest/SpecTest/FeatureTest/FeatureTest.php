@@ -58,25 +58,35 @@ class FeatureTest extends TestCase
 
         $this->dir = new DirService();
 
-        $this->feature = new Feature();
-        $this->feature->setStringService($this->string);
-        $this->feature->setFileCreator($this->fileCreator);
-        $this->feature->setDirService($this->dir);
-        $this->feature->setModule($this->module->reveal());
 
         $this->table = $this->prophesize(TableService::class);
-        $this->feature->setTableService($this->table->reveal());
+
+        $this->schema = $this->prophesize(SchemaService::class);
+
+        $this->feature = new Feature(
+            $this->module->reveal(),
+            $this->createFileCreator(),
+            $this->string,
+            $this->createCode(),
+            $this->dir,
+            //$this->factoryService->reveal(),
+            $this->table->reveal(),
+            $this->createArrayService(),
+            $this->createInjector()
+        );
+
+        $this->feature->setSchemaService($this->schema->reveal());
 
         //$this->column = $this->prophesize(ColumnService::class);
         //$this->feature->setColumnService($this->column->reveal());
 
-        $this->schema = $this->prophesize(SchemaService::class);
-        $this->feature->setSchemaService($this->schema->reveal());
+        // $this->schema = $this->prophesize(SchemaService::class);
+        // $this->feature->setSchemaService($this->schema->reveal());
     }
 
     public function testIntrospectFromTable()
     {
-        $this->feature->setGearVersion('0.0.99');
+        //$this->feature->setGearVersion('0.0.99');
         $this->table->isNullable('myTable')->willReturn(true)->shouldBeCalled();
         $this->table->hasUniqueConstraint('myTable')->willReturn(true)->shouldBeCalled();
 
@@ -123,7 +133,7 @@ class FeatureTest extends TestCase
      */
     public function testCreateAction()
     {
-        $this->feature->setGearVersion('0.0.99');
+        //$this->feature->setGearVersion('0.0.99');
 
         $controller = new Controller(['name' => 'MyController'***REMOVED***);
 

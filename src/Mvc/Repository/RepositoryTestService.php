@@ -20,7 +20,7 @@ class RepositoryTestService extends AbstractMvcTest
     public function createSrcTest()
     {
         $options = [
-            'callable' => $this->getServiceManager()->getServiceName($this->src),
+            'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'className'  => $this->src->getName(),
@@ -29,14 +29,6 @@ class RepositoryTestService extends AbstractMvcTest
         ***REMOVED***;
 
         $location = $this->getCodeTest()->getLocation($this->src);
-
-        if ($this->src->getAbstract() !== true) {
-            $this->getTraitTestService()->createTraitTest($this->src);
-        }
-
-        if ($this->src->isFactory() && $this->src->getAbstract() == false) {
-            $this->getFactoryTestService()->createFactoryTest($this->src);
-        }
 
         if ($this->src->isFactory()) {
             $templateView = ($this->src->getAbstract() === true) ? 'abstract-factory' : 'factory';
@@ -70,7 +62,6 @@ class RepositoryTestService extends AbstractMvcTest
 
         $location = $this->getCodeTest()->getLocation($this->src);
 
-        $this->getFactoryTestService()->createFactoryTest($this->src);
 
         $options = [
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
@@ -90,8 +81,6 @@ class RepositoryTestService extends AbstractMvcTest
         $options['persist'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdatePersist', [***REMOVED***);
         $options['data'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdateData', [***REMOVED***);
         $options['hydrator'***REMOVED***['update'***REMOVED*** = $this->columnManager->generateCode('getRepositoryTestUpdateHydrator', [***REMOVED***);
-
-        $this->getTraitTestService()->createTraitTest($this->src);
 
         $options['idTable'***REMOVED*** = $this->str(
             'class',
