@@ -165,7 +165,7 @@ EOS;
      */
     public function getNamespace($data)
     {
-        $class = new ClassObject($data, $this->getModule()->getModuleName());
+        $class = new ClassObject($data, $this->getModule()->getNamespace());
 
         return $class->getNamespace();
     }

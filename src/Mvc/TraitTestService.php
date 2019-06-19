@@ -30,9 +30,9 @@ class TraitTestService extends AbstractMvcTest implements AbstractMvcTestInterfa
         $trait->setOptions(
             array(
                 //'test' => 'piber'
-                'module'    => $this->getModule()->getModuleName(),
+                'module'    => $this->getModule()->getNamespace(),
                 'namespace' => $this->getCodeTest()->getNamespace($src),
-                'fullclass' => $this->getCodeTest()->getFullClassName($src),
+                'fullclass' => $this->getCodeTest()->getServiceManagerName($src),
                 'class' => $this->str('class', $name),
                 'var' => $this->str('var', $name),
                 'length' => $this->str('var-length', $name),
