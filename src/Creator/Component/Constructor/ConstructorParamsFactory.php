@@ -19,7 +19,7 @@ class ConstructorParamsFactory implements FactoryInterface
     /**
      * Create ConstructorParams
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Creator\Component\Constructor\ConstructorParams
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -27,7 +27,7 @@ class ConstructorParamsFactory implements FactoryInterface
         $factory = new ConstructorParams(
             $container->get('Gear\Util\String\StringService')
         );
-        
+
         return $factory;
     }
 }

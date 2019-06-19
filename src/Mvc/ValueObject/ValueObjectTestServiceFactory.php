@@ -21,7 +21,7 @@ class ValueObjectTestServiceFactory implements FactoryInterface
     /**
      * Create ValueObjectTestService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Mvc\ValueObject\ValueObjectTestService
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -32,7 +32,7 @@ class ValueObjectTestServiceFactory implements FactoryInterface
             $container->get(ModuleStructure::class),
             $container->get('Gear\Creator\CodeTest')
         );
-        
+
         return $factory;
     }
 }

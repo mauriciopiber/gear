@@ -2,7 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Custom\CustomNamespace\MyTableFormFactory;
 use MyModule\Custom\CustomNamespace\MyTableForm;
 use MyModule\Custom\CustomNamespace\MyTableFilter;
@@ -19,11 +19,11 @@ use Zend\Uri\Uri;
  */
 class MyTableFormFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
         $this->entityManager = $this->prophesize(EntityManager::class);
         $this->filter = $this->prophesize(MyTableFilter::class);
         $this->request = $this->prophesize(Request::class);
@@ -40,21 +40,21 @@ class MyTableFormFactoryTest extends TestCase
         $this->filter->setAdapter($this->adapter->reveal())->shouldNotBeCalled();
         $this->filter->getInputFilter(30)->willReturn($this->filter->reveal());
 
-        $this->serviceLocator->get('doctrine.entitymanager.orm_default')
+        $this->container->get('doctrine.entitymanager.orm_default')
           ->willReturn($this->entityManager->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get(MyTableFilter::class)
+        $this->container->get(MyTableFilter::class)
           ->willReturn($this->filter->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get(Adapter::class)->willReturn($this->adapter->reveal());
-        $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
-        $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
+        $this->container->get(Adapter::class)->willReturn($this->adapter->reveal());
+        $this->container->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
+        $this->container->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
         $factory = new MyTableFormFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MyTableForm::class, $instance);
     }

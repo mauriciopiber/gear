@@ -2,7 +2,7 @@
 namespace MyModuleTest\RepositoryTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Repository\MyTableRepositoryFactory;
 use MyModule\Repository\MyTableRepository;
 use Doctrine\ORM\EntityManager;
@@ -17,19 +17,19 @@ class MyTableRepositoryFactoryTest extends TestCase
 {
     public function testMyTableRepositoryFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
-        $this->serviceLocator->get('doctrine.entitymanager.orm_default')
+        $this->container->get('doctrine.entitymanager.orm_default')
             ->willReturn($this->prophesize(EntityManager::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(QueryBuilder::class)
+        $this->container->get(QueryBuilder::class)
             ->willReturn($this->prophesize(QueryBuilder::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MyTableRepositoryFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MyTableRepository::class, $instance);
     }

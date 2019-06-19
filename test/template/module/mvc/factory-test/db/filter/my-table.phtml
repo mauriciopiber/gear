@@ -2,7 +2,7 @@
 namespace MyModuleTest\FilterTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Filter\MyTableFilterFactory;
 use MyModule\Filter\MyTableFilter;
 use Zend\Db\Adapter\Adapter;
@@ -17,19 +17,19 @@ class MyTableFilterFactoryTest extends TestCase
 {
     public function testMyTableFilterFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
-        $this->serviceLocator->get(Adapter::class)
+        $this->container->get(Adapter::class)
             ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('translate')
+        $this->container->get('translate')
             ->willReturn($this->prophesize(Translator::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MyTableFilterFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MyTableFilter::class, $instance);
     }

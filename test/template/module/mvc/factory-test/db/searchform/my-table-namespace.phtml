@@ -2,7 +2,7 @@
 namespace MyModuleTest\CustomTest\CustomNamespaceTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Custom\CustomNamespace\MyTableSearchFormFactory;
 use MyModule\Custom\CustomNamespace\MyTableSearchForm;
 use Doctrine\ORM\EntityManager;
@@ -16,14 +16,14 @@ class MyTableSearchFormFactoryTest extends TestCase
 {
     public function testMyTableSearchFormFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
         $this->entityManager = $this->prophesize(EntityManager::class);
-        $this->serviceLocator->get('doctrine.entitymanager.orm_default')->willReturn($this->entityManager);
+        $this->container->get('doctrine.entitymanager.orm_default')->willReturn($this->entityManager);
 
         $factory = new MyTableSearchFormFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MyTableSearchForm::class, $instance);
     }

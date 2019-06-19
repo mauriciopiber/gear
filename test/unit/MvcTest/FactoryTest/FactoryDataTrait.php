@@ -45,8 +45,6 @@ trait FactoryDataTrait
             ['type' => 'Repository'***REMOVED***,
             ['type' => 'Service'***REMOVED***,
             ['type' => 'Filter'***REMOVED***,
-            ['type' => 'Form', 'template' => 'form-filter'***REMOVED***,
-            ['type' => 'SearchForm', 'template' => 'search-form'***REMOVED***
         ***REMOVED***;
 
         foreach ($types as $type) {

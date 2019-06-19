@@ -2,7 +2,7 @@
 namespace MyModuleTest\FastestNamespaceTest;
 
 use PHPUnit\Framework\TestCase;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\FastestNamespace\MySrcWithSpecialDependencyFactory;
 use MyModule\FastestNamespace\MySrcWithSpecialDependency;
 use Gear\Util\String\StringService;
@@ -18,23 +18,23 @@ class MySrcWithSpecialDependencyFactoryTest extends TestCase
 {
     public function testMySrcWithSpecialDependencyFactory()
     {
-        $this->serviceLocator = $this->prophesize(ServiceLocatorInterface::class);
+        $this->container = $this->prophesize(ContainerInterface::class);
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')
+        $this->container->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('console')
+        $this->container->get('console')
             ->willReturn($this->prophesize(Posix::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(Adapter::class)
+        $this->container->get(Adapter::class)
             ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MySrcWithSpecialDependencyFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MySrcWithSpecialDependency::class, $instance);
     }

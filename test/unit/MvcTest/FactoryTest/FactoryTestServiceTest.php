@@ -7,6 +7,7 @@ use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
+use Gear\Table\TableService\TableService;
 
 /**
  * @group db-factory
@@ -32,30 +33,23 @@ class FactoryTestServiceTest extends TestCase
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory-test';
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($phpRenderer);
+        $this->string  = new \Gear\Util\String\StringService();
+        $fileCreator    = $this->createFileCreator();
 
-        $fileService    = new \Gear\Util\File\FileService();
-        $stringService  = new \Gear\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->codeFactoryTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
+        $this->codeFactoryTest->setModule($this->module->reveal());
+        $this->codeFactoryTest->setDirService(new \Gear\Util\Dir\DirService());
+        $this->codeFactoryTest->setStringService($this->string);
 
-        $codeFactoryTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
-        $codeFactoryTest->setModule($this->module->reveal());
-        $codeFactoryTest->setDirService(new \Gear\Util\Dir\DirService());
-        $codeFactoryTest->setStringService($stringService);
-
-        $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService();
-        $this->factoryTest->setStringService($stringService);
-        $this->factoryTest->setFileCreator($fileCreator);
-        $this->factoryTest->setModule($this->module->reveal());
-        $this->factoryTest->setFactoryCodeTest($codeFactoryTest);
-
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->factoryTest->setServiceManager($this->serviceManager);
-
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->factoryTest->setSchemaService($this->schema->reveal());
+        $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->createCodeTest(),
+            $this->prophesize(TableService::class)->reveal(),
+            $this->createInjector(),
+            $this->codeFactoryTest
+        );
     }
 
     /**
@@ -65,6 +59,7 @@ class FactoryTestServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestUnitModuleFolder()->willReturn($location)->shouldBeCalled();
 
         $data = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
@@ -81,6 +76,7 @@ class FactoryTestServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestUnitModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
@@ -97,6 +93,7 @@ class FactoryTestServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getTestUnitModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
@@ -119,6 +116,7 @@ class FactoryTestServiceTest extends TestCase
      */
     public function testCreateFactoryForDb($data, $template)
     {
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
             $this->filter = $this->prophesize('Gear\Schema\Src\Src');

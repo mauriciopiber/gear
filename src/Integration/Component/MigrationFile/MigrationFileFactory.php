@@ -19,7 +19,7 @@ class MigrationFileFactory implements FactoryInterface
     /**
      * Create MigrationFile
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Component\MigrationFile\MigrationFile
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -29,7 +29,7 @@ class MigrationFileFactory implements FactoryInterface
             $container->get('Gear\Util\String\StringService'),
             $container->get('Gear\Util\Vector\ArrayService')
         );
-        
+
         return $factory;
     }
 }

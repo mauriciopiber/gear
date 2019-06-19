@@ -20,7 +20,7 @@ class PhinxServiceFactory implements FactoryInterface
     /**
      * Create PhinxService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Database\Phinx\PhinxService
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -29,7 +29,7 @@ class PhinxServiceFactory implements FactoryInterface
             $container->get('Gear\Util\String\StringService'),
             $container->get(FileCreator::class)
         );
-        
+
         return $factory;
     }
 }

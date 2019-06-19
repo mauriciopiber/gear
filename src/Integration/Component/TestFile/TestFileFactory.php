@@ -19,7 +19,7 @@ class TestFileFactory implements FactoryInterface
     /**
      * Create TestFile
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Component\TestFile\TestFile
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -28,7 +28,7 @@ class TestFileFactory implements FactoryInterface
             $container->get('Gear\Integration\Util\Persist\Persist'),
             $container->get('Gear\Util\String\StringService')
         );
-        
+
         return $factory;
     }
 }

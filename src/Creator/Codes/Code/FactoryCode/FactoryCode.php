@@ -14,8 +14,8 @@ use Gear\Creator\Codes\Code\AbstractCode;
  */
 class FactoryCode extends AbstractCode
 {
-    const FACTORY_SERVICE_LOCATOR_STRING = '$serviceLocator->get(\'%s\')';
-    const FACTORY_SERVICE_LOCATOR_CLASS = '$serviceLocator->get(%s::class)';
+    const FACTORY_SERVICE_LOCATOR_STRING = '$container->get(\'%s\')';
+    const FACTORY_SERVICE_LOCATOR_CLASS = '$container->get(%s::class)';
 
     /**
      * @TODO FIX
@@ -57,8 +57,8 @@ class FactoryCode extends AbstractCode
 
         $templates['memcached'***REMOVED*** = <<<EOS
 {$indent}(extension_loaded('memcached'))
-{$indent}? \$serviceLocator->get('memcached')
-{$indent}: \$serviceLocator->get('filesystem')
+{$indent}? \$container->get('memcached')
+{$indent}: \$container->get('filesystem')
 EOS;
 
 

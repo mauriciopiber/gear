@@ -1,7 +1,7 @@
 <?php
 namespace MyModule\Custom\CustomNamespace;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use GearBase\Factory\AbstractFactory;
 use MyModule\Custom\CustomNamespace\MyTableSearchForm;
 
@@ -20,14 +20,14 @@ class MyTableSearchFormFactory extends AbstractFactory
     /**
      * Create MyTableSearchForm
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return MyTableSearchForm
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $form = new MyTableSearchForm(
-            $serviceLocator->get('doctrine.entitymanager.orm_default')
+            $container->get('doctrine.entitymanager.orm_default')
         );
         return $form;
     }

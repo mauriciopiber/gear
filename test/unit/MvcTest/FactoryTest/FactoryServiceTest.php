@@ -60,7 +60,7 @@ class FactoryServiceTest extends TestCase
             $this->codeFactory
         );
 
-        $this->schema = $this->prophesize(SchemaService::class)->reveal();
+        $this->schema = $this->prophesize(SchemaService::class);
     }
 
     /**
@@ -195,6 +195,7 @@ class FactoryServiceTest extends TestCase
         $location = vfsStream::url('module');
 
         $this->module->map('Service')->willReturn($location);
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
 
         $expected = 'dependencies';

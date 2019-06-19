@@ -13,14 +13,14 @@ class MyControllerFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->controllerManager = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+        $this->container = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceManager');
-        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+        $this->container = $this->prophesize('Zend\ServiceManager\ServiceManager');
+
 
         $factory = new MyControllerFactory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf('MyModule\Controller\MyController', $instance);
     }

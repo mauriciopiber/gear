@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Service\MyService;
 use MyModule\Repository\DependencyOne;
 use MyModule\Service\DependencyTwo;
@@ -21,17 +21,17 @@ class MyServiceFactory implements FactoryInterface
     /**
      * Create MyService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return MyService
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new MyService(
-            $serviceLocator->get(DependencyOne::class),
-            $serviceLocator->get(DependencyTwo::class)
+            $container->get(DependencyOne::class),
+            $container->get(DependencyTwo::class)
         );
-        unset($serviceLocator);
+
         return $factory;
     }
 }

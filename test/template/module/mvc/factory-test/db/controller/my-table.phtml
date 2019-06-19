@@ -19,27 +19,27 @@ class MyTableControllerFactoryTest extends TestCase
 {
     public function testMyTableControllerFactory()
     {
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
-        $this->serviceLocator = $this->prophesize(ServiceManager::class);
 
-        $this->serviceLocator->get(MyTableService::class)
+        $this->container = $this->prophesize(ServiceManager::class);
+
+        $this->container->get(MyTableService::class)
             ->willReturn($this->prophesize(MyTableService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(MyTableForm::class)
+        $this->container->get(MyTableForm::class)
             ->willReturn($this->prophesize(MyTableForm::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(MyTableSearchForm::class)
+        $this->container->get(MyTableSearchForm::class)
             ->willReturn($this->prophesize(MyTableSearchForm::class)->reveal())
             ->shouldBeCalled();
 
-        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+
 
         $factory = new MyTableControllerFactory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(MyTableController::class, $instance);
     }
