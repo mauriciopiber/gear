@@ -18,6 +18,7 @@ use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Util\Vector\ArrayService;
+use Gear\Creator\Injector\Injector;
 
 trait UtilTestTrait
 {
@@ -29,6 +30,8 @@ trait UtilTestTrait
 
     protected $dir;
 
+    protected $tableService;
+
     protected $constructorParams;
 
     public function createConstructorParams()
@@ -39,6 +42,43 @@ trait UtilTestTrait
 
         $this->constructorParams = new ConstructorParams($this->createString());
         return $this->constructorParams;
+    }
+
+    public function createTableService()
+    {
+        if (!empty($this->tableService)) {
+            return $this->tableService;
+        }
+
+        $this->tableService = new TableService();
+        return $this->tableService;
+    }
+    public function createDirService()
+    {
+        if (isset($this->dirService)) {
+            return $this->dirService;
+        }
+
+        $this->dirService = new DirService();
+        return $this->dirService;
+    }
+
+    public function createArrayService()
+    {
+        if (isset($this->arrayService)) {
+            return $this->arrayService;
+        }
+        $this->arrayService = new ArrayService();
+        return $this->arrayService;
+    }
+
+    public function createInjector() {
+        if (isset($this->injector)) {
+            return $this->injector;
+        }
+
+        $this->injector = new Injector($this->createArrayService());
+        return $this->injector;
     }
 
     public function createString()

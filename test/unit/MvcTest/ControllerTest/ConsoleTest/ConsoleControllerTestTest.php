@@ -60,9 +60,6 @@ class ConsoleControllerTestTest extends TestCase
         );
 
 
-
-        $this->controller->setInjector($this->injector);
-
         //$this->controller->setArrayService($this->array);
 
 
