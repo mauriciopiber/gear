@@ -51,6 +51,7 @@ EOS
       $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
       $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
       $this->module->getModuleName()->willReturn('MyModule');
+      $this->module->getNamespace()->willReturn('MyModule');
 
       $this->string = new \Gear\Util\String\StringService();
 

@@ -11,21 +11,21 @@ class ControllerManager extends AbstractConfigManager implements
   AbstractConfigManagerInterface
 {
 
-    /**
-     * Retorna o Nome que o ServiceManager deve usar para localizar a classe.
-     */
-    public function getServiceName(Controller $src)
-    {
-        if (empty($src->getNamespace())) {
-            return $this->getModule()->getNamespace().'\\Controller\\'.$src->getName();
-        }
+    // /**
+    //  * Retorna o Nome que o ServiceManager deve usar para localizar a classe.
+    //  */
+    // public function getServiceName(Controller $src)
+    // {
+    //     if (empty($src->getNamespace())) {
+    //         return $this->getModule()->getNamespace().'\\Controller\\'.$src->getName();
+    //     }
 
-        $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
+    //     $namespace = ($src->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
-        $namespace .= $src->getNamespace();
+    //     $namespace .= $src->getNamespace();
 
-        return $namespace.'\\'.$src->getName();
-    }
+    //     return $namespace.'\\'.$src->getName();
+    // }
 
     /* insertController */
     public function create(Controller $controller)
@@ -47,7 +47,7 @@ class ControllerManager extends AbstractConfigManager implements
 
         $namespace = ($this->controller->getNamespace() !== null) ? $this->controller->getNamespace() : 'Controller';
 
-        $invokeName = $this->getCode()->getServiceName($this->controller);
+        $invokeName = $this->getCode()->getServiceManagerName($this->controller);
 
         if (!array_key_exists($invokeName, $invokables)) {
             if ($controller->isFactory()) {

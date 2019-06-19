@@ -115,7 +115,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             ? $action->getController()->getNamespace()
             : 'Controller';
 
-        $controllerInvokable = $this->getCode()->getServiceName($action->getController());
+        $controllerInvokable = $this->getCode()->getServiceManagerName($action->getController());
 
         switch ($this->str('url', $action->getName())) {
             case 'create':
@@ -245,7 +245,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             ? $action->getController()->getNamespace()
             : 'Controller';
 
-        $invokeName = $this->getCode()->getServiceName($action->getController());
+        $invokeName = $this->getCode()->getServiceManagerName($action->getController());
 
         $actionName = $this->str('url', $action->getName());
 
@@ -281,7 +281,7 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         }
 
         $route = sprintf('/%s', $controllerRoute);
-        $controller = $this->getCode()->getServiceName($action->getController());
+        $controller = $this->getCode()->getServiceManagerName($action->getController());
 
 //var_dump($action->getController());
         $router = ($action->getController()->getType() === 'Rest')

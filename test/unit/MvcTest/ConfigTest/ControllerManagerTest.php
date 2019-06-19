@@ -42,11 +42,11 @@ class ControllerManagerTest extends TestCase
 
 
         $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager(
-            $this->module->reveal(),
-            $this->fileCreator,
-            $this->string,
-            $this->code,
-            $this->arrayService,
+          $this->module->reveal(),
+          $this->fileCreator,
+          $this->string,
+          $this->code,
+          $this->arrayService,
             $this->prophesize(LanguageService::class)->reveal()
         );
 
@@ -61,20 +61,21 @@ class ControllerManagerTest extends TestCase
         'type' => 'Action',
         'service' => 'factories',
         'namespace' => 'MyNamespace'
-      ***REMOVED***);
+        ***REMOVED***);
 
-      file_put_contents(vfsStream::url('module/config/ext/controller.config.php'), <<<EOS
-      <?php return array (
-        'invokables' =>
-        array (
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
-        ),
-      );
+        file_put_contents(vfsStream::url('module/config/ext/controller.config.php'), <<<EOS
+        <?php return array (
+          'invokables' =>
+          array (
+            'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          ),
+        );
 EOS
       );
 
-      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
+      //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+      $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
       $expected = [
         'invokables' => [
@@ -112,7 +113,8 @@ EOS
 EOS
       );
 
-      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+      //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+      $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
 
       $expected = [
