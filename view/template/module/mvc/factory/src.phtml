@@ -11,7 +11,7 @@ class <?php echo $this->className;?>Factory implements FactoryInterface
     /**
      * Create <?php echo $this->className.PHP_EOL;?>
      *
-     * @param ContainerInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return <?php echo $this->className.PHP_EOL;?>
      */
@@ -20,7 +20,7 @@ class <?php echo $this->className;?>Factory implements FactoryInterface
         $factory = new <?php echo $this->className;?>(
 <?php echo $this->dependency;?>
         );
-        
+
         return $factory;
     }
 }

@@ -34,7 +34,7 @@ class ControllerConstructorFactory implements FactoryInterface
     /**
      * Create ControllerService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return ControllerService
      */

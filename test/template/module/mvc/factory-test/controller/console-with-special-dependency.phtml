@@ -19,27 +19,27 @@ class SpecialDependencyConsoleFactoryTest extends TestCase
 {
     public function testSpecialDependencyConsoleFactory()
     {
-        $this->controllerManager = $this->prophesize(ControllerManager::class);
 
-        $this->serviceLocator = $this->prophesize(ServiceManager::class);
 
-        $this->serviceLocator->get('Gear\Util\String\StringService')
+        $this->container = $this->prophesize(ServiceManager::class);
+
+        $this->container->get('Gear\Util\String\StringService')
             ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get('console')
+        $this->container->get('console')
             ->willReturn($this->prophesize(Posix::class)->reveal())
             ->shouldBeCalled();
 
-        $this->serviceLocator->get(Adapter::class)
+        $this->container->get(Adapter::class)
             ->willReturn($this->prophesize(Adapter::class)->reveal())
             ->shouldBeCalled();
 
-        $this->controllerManager->getServiceLocator()->willReturn($this->serviceLocator->reveal());
+
 
         $factory = new SpecialDependencyConsoleFactory();
 
-        $instance = $factory->createService($this->controllerManager->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf(SpecialDependencyConsole::class, $instance);
     }

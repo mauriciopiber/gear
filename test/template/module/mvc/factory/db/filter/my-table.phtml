@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Filter;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Filter\MyTableFilter;
 use Zend\Db\Adapter\Adapter;
 
@@ -20,17 +20,17 @@ class MyTableFilterFactory implements FactoryInterface
     /**
      * Create MyTableFilter
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return MyTableFilter
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new MyTableFilter(
-            $serviceLocator->get(Adapter::class),
-            $serviceLocator->get('translate')
+            $container->get(Adapter::class),
+            $container->get('translate')
         );
-        unset($serviceLocator);
+
         return $factory;
     }
 }

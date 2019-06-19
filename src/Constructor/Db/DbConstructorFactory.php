@@ -39,7 +39,7 @@ class DbConstructorFactory implements FactoryInterface
     /**
      * Create DbConstructor
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return DbConstructor
      */

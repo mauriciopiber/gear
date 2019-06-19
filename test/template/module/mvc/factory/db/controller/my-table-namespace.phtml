@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\Custom\CustomNamespace;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\Custom\CustomNamespace\MyTableNamespaceController;
 use MyModule\Custom\CustomNamespace\MyTableService;
 use MyModule\Custom\CustomNamespace\MyTableForm;
@@ -22,20 +22,20 @@ class MyTableNamespaceControllerFactory implements FactoryInterface
     /**
      * Create MyTableNamespaceController
      *
-     * @param ServiceLocatorInterface $controllerManager Controller Manager
+     * @param ContainerInterface $container Controller Manager
      *
      * @return MyTableNamespaceController
      */
-    public function createService(ServiceLocatorInterface $controllerManager)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $serviceLocator = $controllerManager->getServiceLocator();
+        
 
         $factory = new MyTableNamespaceController(
-            $serviceLocator->get(MyTableService::class),
-            $serviceLocator->get(MyTableForm::class),
-            $serviceLocator->get(MyTableSearchForm::class)
+            $container->get(MyTableService::class),
+            $container->get(MyTableForm::class),
+            $container->get(MyTableSearchForm::class)
         );
-        unset($serviceLocator);
+        
         return $factory;
     }
 }

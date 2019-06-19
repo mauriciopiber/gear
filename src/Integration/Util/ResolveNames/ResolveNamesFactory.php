@@ -19,7 +19,7 @@ class ResolveNamesFactory implements FactoryInterface
     /**
      * Create ResolveNames
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Util\ResolveNames\ResolveNames
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -27,7 +27,7 @@ class ResolveNamesFactory implements FactoryInterface
         $factory = new ResolveNames(
             $container->get('Gear\Util\String\StringService')
         );
-        
+
         return $factory;
     }
 }

@@ -19,7 +19,7 @@ class IntegrationFactory implements FactoryInterface
     /**
      * Create Integration
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Suite\Integration\Integration
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -31,7 +31,7 @@ class IntegrationFactory implements FactoryInterface
             $container->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite'),
             $container->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
         );
-        
+
         return $factory;
     }
 }

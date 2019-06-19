@@ -19,7 +19,7 @@ class GearFileFactory implements FactoryInterface
     /**
      * Create GearFile
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Component\GearFile\GearFile
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -28,7 +28,7 @@ class GearFileFactory implements FactoryInterface
             $container->get('Gear\Integration\Util\Persist\Persist'),
             $container->get('Gear\Util\String\StringService')
         );
-        
+
         return $factory;
     }
 }

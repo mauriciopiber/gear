@@ -6,7 +6,6 @@ use Gear\Creator\FileCreator\AppTest\VarsTrait;
 //use Gear\Schema\Src\Src;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\TraitTestServiceTrait;
-use Gear\Creator\Injector\InjectorTrait;
 use Gear\Util\GearVersionTrait;
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Mvc\Config\ServiceManagerTrait;
@@ -24,6 +23,7 @@ use Gear\Util\String\StringServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Creator\Injector\Injector;
+use Gear\Creator\Injector\InjectorTrait;
 
 
 abstract class AbstractMvcTest

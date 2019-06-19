@@ -15,13 +15,13 @@ use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
 class FactoryCodeTest extends AbstractCodeTest
 {
     const TEMPLATE_ALIASE = <<<EOS
-        \$this->serviceLocator->get('%s')
+        \$this->container->get('%s')
             ->willReturn(\$this->prophesize(%s::class)->reveal())
             ->shouldBeCalled();
 EOS;
 
     const TEMPLATE_CLASS = <<<EOS
-        \$this->serviceLocator->get(%s::class)
+        \$this->container->get(%s::class)
             ->willReturn(\$this->prophesize(%s::class)->reveal())
             ->shouldBeCalled();
 EOS;

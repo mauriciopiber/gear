@@ -21,7 +21,7 @@ class DockerServiceFactory implements FactoryInterface
     /**
      * Create DockerService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return DockerService
      */
@@ -32,7 +32,7 @@ class DockerServiceFactory implements FactoryInterface
             $container->get(FileCreator::class),
             $container->get(ModuleStructure::class)
         );
-        
+
         return $factory;
     }
 

@@ -43,7 +43,7 @@ class ActionConstructorFactory implements FactoryInterface
     /**
      * Create ActionConstructor
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return ActionConstructor
      */

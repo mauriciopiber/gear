@@ -19,7 +19,7 @@ class PersistFactory implements FactoryInterface
     /**
      * Create Persist
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Util\Persist\Persist
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -27,7 +27,7 @@ class PersistFactory implements FactoryInterface
         $factory = new Persist(
             $container->get('Gear\Integration\Util\Location\Location')
         );
-        
+
         return $factory;
     }
 }

@@ -6,10 +6,36 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Controller\Controller;
 use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestTrait;
+use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
 use Gear\Mvc\AbstractMvcTestInterface;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\CodeTest;
+use Gear\Util\String\StringService;
+use Gear\Table\TableService\TableService;
+use Gear\Creator\Injector\Injector;
 
 class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
+
+    public function __construct(
+        ModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $string,
+        CodeTest $codeTest,
+        TableService $tableService,
+        Injector $injector,
+        FactoryCodeTest $factoryCodeTest
+    ) {
+        $this->setTableService($tableService);
+        $this->setCodeTest($codeTest);
+        $this->setModule($module);
+        $this->setFileCreator($fileCreator);
+        $this->setStringService($string);
+        $this->setInjector($injector);
+        $this->setFactoryCodeTest($factoryCodeTest);
+    }
+
     use FactoryCodeTestTrait;
 
 
@@ -43,7 +69,7 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
             'moduleUrl'    => $this->str('url', $this->getModule()->getModuleName()),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
             'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),
-            'fullclass' => $this->getFactoryCodeTest()->getFullClassName($src),
+            'fullclass' => $this->getCodeTest()->getServiceManagerName($src),
             'class' => $this->str('class', $name),
             'group' => $src->getType()
         ***REMOVED***;
@@ -80,7 +106,7 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
             'use'       => $this->getFactoryCodeTest()->getUse($src),
             'module'    => $this->getModule()->getModuleName(),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
-            'fullclass' => $this->getFactoryCodeTest()->getFullClassName($src),
+            'fullclass' => $this->getCodeTest()->getServiceManagerName($src),
             'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),
             'class' => $this->str('class', $name),
             'group' => 'Controller'

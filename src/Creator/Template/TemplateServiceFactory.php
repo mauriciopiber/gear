@@ -20,7 +20,7 @@ class TemplateServiceFactory implements FactoryInterface
     /**
      * Create TemplateService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return TemplateService
      */

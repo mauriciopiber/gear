@@ -1,7 +1,7 @@
 <?php
 namespace MyModule\Custom\CustomNamespace;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 use GearBase\Hydrator\DateHydrator;
 use GearBase\Factory\AbstractFactory;
 use MyModule\Custom\CustomNamespace\MyTableForm;
@@ -23,19 +23,19 @@ class MyTableFormFactory extends AbstractFactory
     /**
      * Create MyTableForm
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return MyTableForm
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $form = new MyTableForm(
-            $serviceLocator->get('doctrine.entitymanager.orm_default')
+            $container->get('doctrine.entitymanager.orm_default')
         );
 
         $idMyTable = null;
-        $request = $serviceLocator->get('Request');
-        $translate = $serviceLocator->get('Translator');
+        $request = $container->get('Request');
+        $translate = $container->get('Translator');
         if ($request instanceof \Zend\Http\Request
             && preg_match('/'.$translate->translate('edit').'/', $request->getUri()->getPath())
         ) {
@@ -44,10 +44,10 @@ class MyTableFormFactory extends AbstractFactory
             }
         }
 
-        $filter = $serviceLocator->get(MyTableFilter::class);
+        $filter = $container->get(MyTableFilter::class);
         $form->setInputFilter($filter->getInputFilter($idMyTable));
 
-        $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $hydrator = new DateHydrator($entityManager, MyTable::class);
 
         $form->setHydrator($hydrator);

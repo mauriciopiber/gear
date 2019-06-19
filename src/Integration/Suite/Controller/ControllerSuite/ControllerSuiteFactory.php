@@ -19,7 +19,7 @@ class ControllerSuiteFactory implements FactoryInterface
     /**
      * Create ControllerSuite
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -28,7 +28,7 @@ class ControllerSuiteFactory implements FactoryInterface
             $container->get('Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator'),
             $container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
         );
-        
+
         return $factory;
     }
 }

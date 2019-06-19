@@ -20,7 +20,7 @@ class UploadImageFactory implements FactoryInterface
     /**
      * Create UploadImage
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return UploadImage
      */
@@ -30,7 +30,7 @@ class UploadImageFactory implements FactoryInterface
             $container->get('Gear\Util\String\StringService'),
             $container->get(ModuleStructure::class)
         );
-        
+
         return $factory;
     }
 }

@@ -19,7 +19,7 @@ class MvcGeneratorFactory implements FactoryInterface
     /**
      * Create MvcGenerator
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -31,7 +31,7 @@ class MvcGeneratorFactory implements FactoryInterface
             $container->get('Gear\Integration\Util\ResolveNames\ResolveNames'),
             $container->get('Gear\Integration\Util\Columns\Columns')
         );
-        
+
         return $factory;
     }
 }

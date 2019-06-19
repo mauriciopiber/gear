@@ -25,7 +25,7 @@ class ApiControllerServiceFactory implements FactoryInterface
     /**
      * Create ApiControllerService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return ApiControllerService
      */
@@ -40,7 +40,7 @@ class ApiControllerServiceFactory implements FactoryInterface
             $container->get(Injector::class),
             $container->get(ArrayService::class)
         );
-        
+
         return $factory;
     }
 }

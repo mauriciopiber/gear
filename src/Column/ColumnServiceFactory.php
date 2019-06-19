@@ -24,7 +24,7 @@ class ColumnServiceFactory implements FactoryInterface
     /**
      * Cria o Serviço.
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager da aplicação
+     * @param ServiceLocatorInterface $container ServiceManager da aplicação
      *
      * @return \Gear\Column\ColumnService
      */

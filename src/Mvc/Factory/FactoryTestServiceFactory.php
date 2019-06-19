@@ -13,7 +13,6 @@ class FactoryTestServiceFactory implements FactoryInterface
         $options = [***REMOVED***
     ) {
         $factory = new FactoryTestService(
-
         );
 
         return $factory;

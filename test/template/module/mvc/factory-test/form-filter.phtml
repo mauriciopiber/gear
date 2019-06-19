@@ -11,11 +11,11 @@ use MyModule\Form\MyFormFactory;
  */
 class MyFormFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
-        $this->serviceLocator = $this->prophesize('Zend\ServiceManager\ServiceLocatorInterface');
+        $this->container = $this->prophesize('Zend\ServiceManager\ContainerInterface');
         $this->entityManager = $this->prophesize('Doctrine\ORM\EntityManager');
         $this->filter = $this->prophesize('MyModule\Filter\MyFilter');
         $this->request = $this->prophesize('Zend\Http\Request');
@@ -32,21 +32,21 @@ class MyFormFactoryTest extends TestCase
         $this->filter->setAdapter($this->adapter->reveal())->shouldBeCalled();
         $this->filter->getInputFilter(30)->willReturn($this->filter->reveal());
 
-        $this->serviceLocator->get('doctrine.entitymanager.orm_default')
+        $this->container->get('doctrine.entitymanager.orm_default')
           ->willReturn($this->entityManager->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('MyModule\Filter\MyFilter')
+        $this->container->get('MyModule\Filter\MyFilter')
           ->willReturn($this->filter->reveal())
           ->shouldBeCalled();
 
-        $this->serviceLocator->get('Zend\Db\Adapter\Adapter')->willReturn($this->adapter->reveal());
-        $this->serviceLocator->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
-        $this->serviceLocator->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
+        $this->container->get('Zend\Db\Adapter\Adapter')->willReturn($this->adapter->reveal());
+        $this->container->get('Request')->willReturn($this->request->reveal())->shouldBeCalled();
+        $this->container->get('Translator')->willReturn($this->translator->reveal())->shouldBeCalled();
 
         $factory = new MyFormFactory();
 
-        $instance = $factory->createService($this->serviceLocator->reveal());
+        $instance = $factory->__invoke($this->container->reveal(), null);
 
         $this->assertInstanceOf('MyModule\Form\MyForm', $instance);
     }

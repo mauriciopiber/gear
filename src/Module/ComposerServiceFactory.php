@@ -23,7 +23,7 @@ class ComposerServiceFactory implements FactoryInterface
     /**
      * Create ComposerService
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      *
      * @return ComposerService
      */
@@ -36,7 +36,7 @@ class ComposerServiceFactory implements FactoryInterface
             $container->get(ArrayService::class),
             $container->get('Gear\Util\String\StringService')
         );
-        
+
         return $factory;
     }
 }

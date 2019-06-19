@@ -19,7 +19,7 @@ class SrcMvcSuiteFactory implements FactoryInterface
     /**
      * Create SrcMvcSuite
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ServiceLocatorInterface $container ServiceManager instance
      * @return \Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite
      */
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
@@ -28,7 +28,7 @@ class SrcMvcSuiteFactory implements FactoryInterface
             $container->get('Gear\Integration\Suite\SrcMvc\SrcMvcGenerator\SrcMvcGenerator'),
             $container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
         );
-        
+
         return $factory;
     }
 }

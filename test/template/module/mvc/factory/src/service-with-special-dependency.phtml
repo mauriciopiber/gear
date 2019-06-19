@@ -1,8 +1,8 @@
 <?php
 namespace MyModule\BestNamespace;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Interop\Container\ContainerInterface;
 use MyModule\BestNamespace\MySrcWithSpecialDependency;
 use Zend\Db\Adapter\Adapter;
 
@@ -20,18 +20,18 @@ class MySrcWithSpecialDependencyFactory implements FactoryInterface
     /**
      * Create MySrcWithSpecialDependency
      *
-     * @param ServiceLocatorInterface $serviceLocator ServiceManager instance
+     * @param ContainerInterface $container ServiceManager instance
      *
      * @return MySrcWithSpecialDependency
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
         $factory = new MySrcWithSpecialDependency(
-            $serviceLocator->get('Gear\Util\String\StringService'),
-            $serviceLocator->get('console'),
-            $serviceLocator->get(Adapter::class)
+            $container->get('Gear\Util\String\StringService'),
+            $container->get('console'),
+            $container->get(Adapter::class)
         );
-        unset($serviceLocator);
+
         return $factory;
     }
 }
