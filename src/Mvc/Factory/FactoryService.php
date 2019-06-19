@@ -20,9 +20,43 @@ use Gear\Mvc\Factory\Exception\WrongType;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
 use Gear\Mvc\AbstractMvcInterface;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\Code;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Table\TableService\TableService;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Util\Vector\ArrayService;
+use Gear\Creator\Injector\Injector;
+use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
+//use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
 
 class FactoryService extends AbstractMvc implements AbstractMvcInterface
 {
+    public function __construct(
+        ModuleStructure $module,
+        FileCreator $fileCreator,
+        StringService $string,
+        Code $code,
+        DirService $dirService,
+        TableService $tableService,
+        ArrayService $array,
+        Injector $injector,
+        FactoryCode $factoryCode
+    ) {
+        $this->setArrayService($array);
+        $this->setCode($code);
+        $this->setModule($module);
+        $this->setFileCreator($fileCreator);
+        $this->setStringService($string);
+        $this->setDirService($dirService);
+        $this->setTableService($tableService);
+        $this->setInjector($injector);
+        $this->setFactoryCode($factoryCode);
+    }
+
+
     static protected $defaultFolder = null;
 
     use FactoryCodeTrait;
@@ -36,7 +70,7 @@ class FactoryService extends AbstractMvc implements AbstractMvcInterface
     public function createFactory($src)
     {
         $file = $this->createFactoryFactory($src);
-        $this->getFactoryTestService()->createFactoryTest($src);
+        //$this->getFactoryTestService()->createFactoryTest($src);
         return $file;
     }
 

@@ -8,6 +8,7 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use GearTest\UtilTestTrait;
+use Gear\Schema\Schema\SchemaService;
 
 /**
  * @group db-factory
@@ -34,36 +35,32 @@ class FactoryServiceTest extends TestCase
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory';
 
-        $template       = new \Gear\Creator\Template\TemplateService    ();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new \Gear\Util\File\FileService();
+        $fileCreator    = $this->createFileCreator();
         $this->string  = new \Gear\Util\String\StringService();
-        $fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $this->codeFactory = new \Gear\Creator\Codes\Code\FactoryCode\FactoryCode();
+        $this->codeFactory->setModule($this->module->reveal());
+        $this->codeFactory->setStringService($this->string);
+        $this->codeFactory->setDirService(new \Gear\Util\Dir\DirService());
 
-        $codefactory = new \Gear\Creator\Codes\Code\FactoryCode\FactoryCode();
-        $codefactory->setModule($this->module->reveal());
-        $codefactory->setStringService($this->string);
-        $codefactory->setDirService(new \Gear\Util\Dir\DirService());
+
+
+        $this->code = $this->createCode();
         //$constructorParams = new ConstructorParams($this->string);
         //$code->setConstructorParams($constructorParams);
 
-        $this->factory = new \Gear\Mvc\Factory\FactoryService();
-        $this->factory->setStringService($this->string);
-        $this->factory->setFileCreator($fileCreator);
-        $this->factory->setModule($this->module->reveal());
-        $this->factory->setFactoryCode($codefactory);
+        $this->factory = new \Gear\Mvc\Factory\FactoryService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->createDirService(),
+            $this->createTableService(),
+            $this->createArrayService(),
+            $this->createInjector(),
+            $this->codeFactory
+        );
 
-
-        $this->factoryTest = $this->prophesize(\Gear\Mvc\Factory\FactoryTestService::class);
-        $this->factory->setFactoryTestService($this->factoryTest->reveal());
-
-        $this->serviceManager = new \Gear\Mvc\Config\ServiceManager();
-        $this->serviceManager->setModule($this->module->reveal());
-        $this->factory->setServiceManager($this->serviceManager);
-
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
-        $this->factory->setSchemaService($this->schema->reveal());
+        $this->schema = $this->prophesize(SchemaService::class)->reveal();
     }
 
     /**
@@ -74,6 +71,7 @@ class FactoryServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule');
         $this->module->getSrcModuleFolder()->willReturn($location);
 
         $data = new Controller(require __DIR__.'/../_gearfiles/console-with-special-dependency.php');
@@ -90,6 +88,7 @@ class FactoryServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule');
         $this->module->getSrcModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
@@ -106,6 +105,7 @@ class FactoryServiceTest extends TestCase
     {
         $location = vfsStream::url('module');
 
+        $this->module->getNamespace()->willReturn('MyModule');
         $this->module->getSrcModuleFolder()->willReturn($location);
 
         $data = new Src(require __DIR__.'/../_gearfiles/repository-with-special-dependency.php');
@@ -133,6 +133,7 @@ class FactoryServiceTest extends TestCase
         $this->module->map($data->getType())->willReturn(vfsStream::url('module'));
         $this->module->map('Controller')->willReturn(vfsStream::url('module'));
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
+        $this->module->getNamespace()->willReturn('MyModule');
 
         /**
         if ($data instanceof Src && $data->getTemplate() == 'search-form') {

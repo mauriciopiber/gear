@@ -42,10 +42,7 @@ class EntityTestServiceTest extends TestCase
 
         $this->string = new StringService();
 
-        $template       = new TemplateService();
-        $template->setRenderer($this->mockPhpRenderer((new Module)->getLocation().'/../view'));
-        $fileService    = new FileService();
-        $this->fileCreator    = new FileCreator($fileService, $template);
+        $this->fileCreator    = $this->createFileCreator();
 
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/entity-test';
 
@@ -98,14 +95,19 @@ class EntityTestServiceTest extends TestCase
 
         $src = new Src(['name' => $table, 'type' => 'Entity'***REMOVED***);
 
-        $this->entity = new EntityTestService();
-        $this->entity->setStringService($this->string);
-        $this->entity->setFileCreator($this->fileCreator);
-        $this->entity->setModule($this->module->reveal());
-
         $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+
+        $this->entity = new EntityTestService(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->createCodeTest(),
+            $this->table->reveal(),
+            $this->createInjector()
+        );
+
+
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
-        $this->entity->setTableService($this->table->reveal());
 
         $this->column = $this->prophesize('Gear\Column\ColumnService');
 
