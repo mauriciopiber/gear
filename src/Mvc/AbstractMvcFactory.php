@@ -12,6 +12,7 @@ use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
+use Gear\Creator\Injector\Injector;
 
 class AbstractMvcFactory implements AbstractFactoryInterface
 {
@@ -39,7 +40,8 @@ class AbstractMvcFactory implements AbstractFactoryInterface
             $container->get(Code::class),
             $container->get(DirService::class),
             $container->get(TableService::class),
-            $container->get(ArrayService::class)
+            $container->get(ArrayService::class),
+            $container->get(Injector::class)
         );
     }
 }
