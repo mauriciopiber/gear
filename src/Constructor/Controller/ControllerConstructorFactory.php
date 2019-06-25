@@ -20,7 +20,8 @@ use Gear\Mvc\Config\ControllerManager;
 use Gear\Column\ColumnService;
 use Gear\Schema\Controller\ControllerSchema;
 use Gear\Module\ConstructStatusObject;
-
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Mvc\Factory\FactoryService;
 
 /**
  * PHP Version 5
@@ -48,6 +49,8 @@ class ControllerConstructorFactory implements FactoryInterface
             $container->get(TableService::class),
             $container->get(ColumnService::class),
             $container->get(ModuleStructure::class),
+            $container->get(FactoryService::class),
+            $container->get(FactoryTestService::class),
             $container->get(WebControllerService::class),
             $container->get(WebControllerTestService::class),
             $container->get(ConsoleControllerService::class),

@@ -31,12 +31,12 @@
         'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService',
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject',
         'Gear\Creator\Codes\Code\AbstractCode' => 'Gear\Creator\Codes\Code\AbstractCode',
-        'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCode',
         'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
-        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest',
         'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
     ***REMOVED***,
     'factories' => [
+        'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCodeFactory',
+        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestFactory',
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',

@@ -130,10 +130,6 @@ class ApiControllerService extends AbstractControllerService implements Abstract
         $this->file->setFileName(sprintf('%s.php', $controller->getName()));
         $this->file->setOptions($options);
 
-        if ($controller->isFactory()) {
-            $this->getFactoryService()->createFactory($controller, $this->location);
-        }
-
         return $this->file->render();
     }
 

@@ -52,6 +52,10 @@ use Gear\Schema\Controller\Type\ActionInterface;
 use Gear\Module\ConstructStatusObject;
 use Gear\Module\ConstructStatusObjectTrait;
 use Gear\Schema\Controller\Exception\ControllerExist;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Factory\FactoryServiceTrait;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Mvc\Factory\FactoryTestServiceTrait;
 
 class ControllerConstructor extends AbstractConstructor
 {
@@ -66,6 +70,10 @@ class ControllerConstructor extends AbstractConstructor
     static public $defaultType = ActionInterface::NAME;
 
     static public $defaultNamespace = '%s\Controller\\';
+
+    use FactoryServiceTrait;
+
+    use FactoryTestServiceTrait;
 
     use ControllerSchemaTrait;
 
@@ -114,6 +122,8 @@ class ControllerConstructor extends AbstractConstructor
         TableService $tableService,
         ColumnService $columnService,
         ModuleStructure $basicModuleStructure,
+        FactoryService $factoryService,
+        FactoryTestService $factoryTestService,
         WebControllerService $controllerService,
         WebControllerTestService $controllerTestService,
         ConsoleControllerService $consoleController,
@@ -146,6 +156,9 @@ class ControllerConstructor extends AbstractConstructor
         $this->viewService = $viewService;
         //language
         $this->languageService = $languageService;
+
+        $this->setFactoryService($factoryService);
+        $this->setFactoryTestService($factoryTestService);
 
         $this->setConstructStatusObject($constructStatusObject);
         return $this;
@@ -299,6 +312,12 @@ class ControllerConstructor extends AbstractConstructor
 
     public function successful($status)
     {
+
+        if ($this->controller->isFactory()) {
+            $this->getFactoryService()->createFactory($this->controller);
+            $this->getFactoryTestService()->createControllerFactoryTest($this->controller);
+        }
+
         $status->addCreated(
             sprintf(
                 self::CONTROLLER_CREATED,
