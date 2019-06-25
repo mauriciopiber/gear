@@ -245,7 +245,8 @@ class ControllerConstructor extends AbstractConstructor
         $this->getViewService()           ->introspectFromTable($this->db);
         $this->getLanguageService()       ->introspectFromTable($this->db);
 
-        return true;
+        $status = $this->getConstructStatusObject();
+        return $status;
     }
 
     public function createController($data = array())
