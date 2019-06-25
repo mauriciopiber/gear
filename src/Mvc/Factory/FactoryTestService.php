@@ -104,7 +104,7 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
 
         $options = [
             'use'       => $this->getFactoryCodeTest()->getUse($src),
-            'module'    => $this->getModule()->getModuleName(),
+            'module'    => $this->getModule()->getNamespace(),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
             'fullclass' => $this->getCodeTest()->getServiceManagerName($src),
             'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),

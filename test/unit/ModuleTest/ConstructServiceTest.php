@@ -831,6 +831,4 @@ EOS;
 
         return vfsStream::url(self::GEARFILE_URL);
     }
-
-
 }

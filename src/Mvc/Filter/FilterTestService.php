@@ -29,7 +29,7 @@ class FilterTestService extends AbstractMvcTest implements AbstractMvcTestInterf
                 'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
                 'var' => $this->str('var-length', $this->src->getName()),
                 'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getModuleName(),
+                'module'  => $this->getModule()->getNamespace(),
             ),
             $this->src->getName().'Test.php',
             $location
