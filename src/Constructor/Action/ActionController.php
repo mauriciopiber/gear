@@ -28,7 +28,7 @@ class ActionController extends AbstractConsoleController
             'dependency' => $this->getRequest()->getParam('dependency'),
             'db'         => $this->getRequest()->getParam('db'),
             'columns'    => $this->getRequest()->getParam('columns'),
-            'controllerNamespace' =>
+            'namespace' =>
                 $this->getRequest()->getParam('controllerNamespace')
         ***REMOVED***;
 

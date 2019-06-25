@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\CreatorTest\FileCreatorTest\AppTest;
+namespace GearTest\CreatorTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Creator\CodeTest;
@@ -53,18 +53,18 @@ class CreateTestTest extends TestCase
     }
 
 
-    /**
-     * @dataProvider getFullClassNameFixture
-     */
-    public function testGetFullClassName($name, $type, $namespace, $expected)
-    {
-        $src = $this->prophesize('Gear\Schema\Src\Src');
-        $src->getName()->willReturn($name);
-        $src->getType()->willReturn($type);
-        $src->getNamespace()->willReturn($namespace);
+    // /**
+    //  * @dataProvider getFullClassNameFixture
+    //  */
+    // public function testGetFullClassName($name, $type, $namespace, $expected)
+    // {
+    //     $src = $this->prophesize('Gear\Schema\Src\Src');
+    //     $src->getName()->willReturn($name);
+    //     $src->getType()->willReturn($type);
+    //     $src->getNamespace()->willReturn($namespace);
 
-        $this->assertEquals($expected, $this->codeTest->getFullClassName($src->reveal()));
-    }
+    //     $this->assertEquals($expected, $this->codeTest->getFullClassName($src->reveal()));
+    // }
 
     /**
      * @dataProvider getNamespaceFixture
