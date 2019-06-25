@@ -51,9 +51,16 @@ use Gear\Schema\Service\FactoriesInterface;
 use Gear\Schema\Controller\Type\ActionInterface;
 use Gear\Module\ConstructStatusObject;
 use Gear\Module\ConstructStatusObjectTrait;
+use Gear\Schema\Controller\Exception\ControllerExist;
 
 class ControllerConstructor extends AbstractConstructor
 {
+    const CONTROLLER_SKIP = 'Controller "%s" já existe.';
+
+    const CONTROLLER_VALIDATE = 'Controller "%s" apresentou erros na formatação:';
+
+    const CONTROLLER_CREATED = 'Controller "%s" criado.';
+
     static public $defaultService = FactoriesInterface::NAME;
 
     static public $defaultType = ActionInterface::NAME;
@@ -230,16 +237,35 @@ class ControllerConstructor extends AbstractConstructor
 
     public function createController($data = array())
     {
+        $status = $this->getConstructStatusObject();
+
         $module = $this->getModule()->getModuleName();
 
-        $this->controller = $this->getControllerSchema()->create(
-            $module,
-            $data,
-            false
-        );
+
+        try {
+            $this->controller = $this->getControllerSchema()->create(
+                $module,
+                $data,
+                false
+            );
+        } catch (ControllerExist $e) {
+            $status->addSkipped(
+                sprintf(self::CONTROLLER_SKIPPED, $data['name'***REMOVED***, $data['type'***REMOVED***)
+            );
+            return $status;
+        }
 
         if ($this->controller instanceof ConsoleValidationStatus) {
-            return $this->controller;
+            $status->addValidated(
+                sprintf(
+                    self::CONTROLLER_VALIDATE,
+                    (isset($data['name'***REMOVED***) ? $data['name'***REMOVED*** : ''),
+                    (isset($data['type'***REMOVED***) ? $data['type'***REMOVED*** : '')
+                )
+            );
+
+            $status->addValidated($this->controller->getErrors());
+            return $status;
         }
 
         if (!in_array($this->controller->getType(), ['Action', 'Console', 'Rest'***REMOVED***)) {
@@ -252,22 +278,34 @@ class ControllerConstructor extends AbstractConstructor
         }
 
         $this->getControllerManager()->create($this->controller);
-        die('piber1');
+
         if ($this->controller->getType() == 'Action') {
             $this->getMvcController()->buildController($this->controller);
             $this->getControllerTestService()->buildController($this->controller);
-            return true;
+            return $this->successful($status);
         }
 
         if ($this->controller->getType() == 'Rest') {
             $this->getApiControllerService()->buildController($this->controller);
             $this->getApiControllerTestService()->buildController($this->controller);
-            return true;
+            return $this->successful($status);
         }
 
 
         $this->getConsoleController()->buildController($this->controller);
         $this->getConsoleControllerTest()->buildController($this->controller);
-        return true;
+        return $this->successful($status);
+    }
+
+    public function successful($status)
+    {
+        $status->addCreated(
+            sprintf(
+                self::CONTROLLER_CREATED,
+                $this->controller->getName(),
+                $this->controller->getType()
+            )
+        );
+        return $status;
     }
 }
