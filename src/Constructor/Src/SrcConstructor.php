@@ -19,22 +19,32 @@ use Gear\Mvc\Config\ServiceManager;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Mvc\ControllerPlugin\ControllerPluginService;
 use Gear\Mvc\ControllerPlugin\ControllerPluginServiceTrait;
+use Gear\Mvc\ControllerPlugin\ControllerPluginTestService;
+use Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait;
 use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Entity\EntityServiceTrait;
+use Gear\Mvc\Entity\EntityTestService;
+use Gear\Mvc\Entity\EntityTestServiceTrait;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
 use Gear\Mvc\Filter\FilterService;
 use Gear\Mvc\Filter\FilterServiceTrait;
+use Gear\Mvc\Filter\FilterTestService;
+use Gear\Mvc\Filter\FilterTestServiceTrait;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Mvc\Form\FormService;
 use Gear\Mvc\Form\FormServiceTrait;
+use Gear\Mvc\Form\FormTestService;
+use Gear\Mvc\Form\FormTestServiceTrait;
 use Gear\Mvc\InterfaceService;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Repository\RepositoryService;
 use Gear\Mvc\Repository\RepositoryServiceTrait;
+use Gear\Mvc\Repository\RepositoryTestService;
+use Gear\Mvc\Repository\RepositoryTestServiceTrait;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Mvc\Service\ServiceServiceTrait;
 use Gear\Mvc\Service\ServiceTestService;
@@ -45,8 +55,12 @@ use Gear\Mvc\TraitTestService;
 use Gear\Mvc\TraitTestServiceTrait;
 use Gear\Mvc\ValueObject\ValueObjectService;
 use Gear\Mvc\ValueObject\ValueObjectServiceTrait;
+use Gear\Mvc\ValueObject\ValueObjectTestService;
+use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 use Gear\Mvc\ViewHelper\ViewHelperService;
 use Gear\Mvc\ViewHelper\ViewHelperServiceTrait;
+use Gear\Mvc\ViewHelper\ViewHelperTestService;
+use Gear\Mvc\ViewHelper\ViewHelperTestServiceTrait;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Src\SrcSchema as SrcSchema;
 use Gear\Schema\Src\SrcSchemaTrait as JsonSrc;
@@ -55,11 +69,12 @@ use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Module\ConstructStatusObject;
 use Gear\Module\ConstructStatusObjectTrait;
+use Gear\Schema\Src\Exception\SrcExist;
 
 class SrcConstructor extends AbstractConstructor
 {
 
-    const SRC_SKIP = 'Src nome "%s" do tipo "%s" já existe.';
+    const SRC_SKIPPED = 'Src nome "%s" do tipo "%s" já existe.';
 
     const SRC_VALIDATE = 'Src %s retornou erros durante validação';
 
@@ -91,19 +106,32 @@ class SrcConstructor extends AbstractConstructor
 
     use FormServiceTrait;
 
+    use FormTestServiceTrait;
+
     use EntityServiceTrait;
+
+    use EntityTestServiceTrait;
 
     use FilterServiceTrait;
 
-    //use SearchServiceTrait;
+    use FilterTestServiceTrait;
 
+    //use SearchServiceTrait;
     use ValueObjectServiceTrait;
+
+    use ValueObjectTestServiceTrait;
 
     use ViewHelperServiceTrait;
 
+    use ViewHelperTestServiceTrait;
+
     use ControllerPluginServiceTrait;
 
+    use ControllerPluginTestServiceTrait;
+
     use RepositoryServiceTrait;
+
+    use RepositoryTestServiceTrait;
 
     use ServiceServiceTrait;
 
@@ -124,13 +152,20 @@ class SrcConstructor extends AbstractConstructor
         FactoryService $factoryService,
         FactoryTestService $factoryTestService,
         FormService $formService,
+        FormTestService $formTestService,
         FilterService $filterService,
+        FilterTestService $filterTestService,
         EntityService $entityService,
+        EntityTestService $entityTestService,
         //SearchService $searchService,
         ValueObjectService $valueObjectService,
+        ValueObjectTestService $valueObjectTestService,
         ViewHelperService $viewHelperService,
+        ViewHelperTestService $viewHelperTestService,
         ControllerPluginService $controllerPluginService,
+        ControllerPluginTestService $controllerPluginTestService,
         RepositoryService $repositoryService,
+        RepositoryTestService $repositoryTestService,
         ServiceService $serviceService,
         ServiceTestService $serviceTestService,
         FixtureService $fixtureService,
@@ -146,13 +181,20 @@ class SrcConstructor extends AbstractConstructor
         $this->factoryService = $factoryService;
         $this->factoryTestService = $factoryTestService;
         $this->filterService = $filterService;
+        $this->setFilterTestService($filterTestService);
         $this->formService = $formService;
+        $this->setFormTestService($formTestService);
         $this->entityService = $entityService;
+        $this->setEntityTestService($entityTestService);
         //$this->searchService = $searchService;
         $this->valueObjectService = $valueObjectService;
+        $this->setValueObjectTestService($valueObjectTestService);
         $this->viewHelperService = $viewHelperService;
+        $this->setViewHelperTestService($viewHelperTestService);
         $this->controllerPluginService = $controllerPluginService;
+        $this->setControllerPluginTestService($controllerPluginTestService);
         $this->repositoryService = $repositoryService;
+        $this->setRepositoryTestService($repositoryTestService);
         $this->serviceService = $serviceService;
         $this->setServiceTestService($serviceTestService);
         $this->fixtureService = $fixtureService;
@@ -175,34 +217,47 @@ class SrcConstructor extends AbstractConstructor
         $module = $this->getModule()->getModuleName();
         //var_dump($module);die();
 
-        $this->src = $this->getSrcSchema()->create(
-            $module,
-            $data,
-            false
-        );
+        try {
+            $this->src = $this->getSrcSchema()->create(
+                $module,
+                $data,
+                false
+            );
+        } catch (SrcExist $e) {
+            $status->addSkipped(
+                sprintf(self::SRC_SKIPPED, $data['name'***REMOVED***, $data['type'***REMOVED***)
+            );
+            return $status;
+        }
+
 
         if ($this->src instanceof ConsoleValidationStatus) {
-            return $this->src;
+            $status->addValidated(
+                sprintf(
+                    self::SRC_VALIDATE,
+                    (isset($data['name'***REMOVED***) ? $data['name'***REMOVED*** : ''),
+                    (isset($data['type'***REMOVED***) ? $data['type'***REMOVED*** : '')
+                )
+            );
+            $status->addValidated($this->src->getErrors());
+            return $status;
         }
 
         if ($this->src->getDb() !== null) {
             $this->setDbOptions($this->src);
         }
 
-        $factory = $this->factory();
+        $this->factory();
 
-        if ($factory) {
-            $status->addCreated(
-                sprintf(
-                    self::SRC_CREATED,
-                    $this->src->getName(),
-                    $this->src->getType()
-                )
-            );
-            return $status;
-        }
+        $status->addCreated(
+            sprintf(
+                self::SRC_CREATED,
+                $this->src->getName(),
+                $this->src->getType()
+            )
+        );
+        return $status;
 
-        throw new Exception('Error while creating src, must check code');
     }
 
     /**
@@ -298,51 +353,44 @@ class SrcConstructor extends AbstractConstructor
 
     private function factory()
     {
-        if ($this->src->isAbstract() === false) {
-            $this->createTrait($this->src);
-        }
-
-        if ($this->src->isFactory() && $this->src->isAbstract() === false) {
-            $this->createFactory($this->src);
-        }
 
         try {
             switch ($this->src->getType()) {
                 case SrcTypesInterface::CONTROLLER_PLUGIN:
-                    $service = $this->getControllerPluginService();
-                    $status = $service->createControllerPlugin($this->src);
+                    $this->getControllerPluginService()
+                      ->createControllerPlugin($this->src);
+                    $this->getControllerPluginTestService()
+                      ->createControllerPluginTest($this->src);
                     break;
                 case SrcTypesInterface::VIEW_HELPER:
-                    $service = $this->getViewHelperService();
-                    $status = $service->createViewHelper($this->src);
+                    $this->getViewHelperService()
+                      ->createViewHelper($this->src);
+                    $this->getViewHelperTestService()
+                      ->createViewHelperTest($this->src);
                     break;
                 case SrcTypesInterface::SERVICE:
                     $this->getServiceService()->createService($this->src);
                     $this->getServiceTestService()->createServiceTest($this->src);
                     break;
                 case SrcTypesInterface::ENTITY:
-                    $entity = $this->getEntityService();
-                    $status = $entity->createEntity($this->src);
+                    $this->getEntityService()->createEntity($this->src);
+                    $this->getEntityTestService()->createEntityTest($this->src);
                     break;
                 case SrcTypesInterface::REPOSITORY:
-                    $repository = $this->getRepositoryService();
-                    $status = $repository->createRepository($this->src);
+                    $this->getRepositoryService()->createRepository($this->src);
+                    $this->getRepositoryTestService()->createRepositoryTest($this->src);
                     break;
                 case SrcTypesInterface::FORM:
-                    $form = $this->getFormService();
-                    $status = $form->createForm($this->src);
-                    break;
-                case SrcTypesInterface::SEARCH_FORM:
-                    $search = $this->getSearchService();
-                    $status = $search->createSearchForm($this->src);
+                    $this->getFormService()->createForm($this->src);
+                    $this->getFormTestService()->createFormTest($this->src);
                     break;
                 case SrcTypesInterface::FILTER:
-                    $filter = $this->getFilterService();
-                    $status = $filter->createFilter($this->src);
+                    $this->getFilterService()->createFilter($this->src);
+                    $this->getFilterTestService()->createFilterTest($this->src);
                     break;
                 case SrcTypesInterface::VALUE_OBJECT:
-                    $valueObject = $this->getValueObjectService();
-                    $status = $valueObject->createValueObject($this->src);
+                    $this->getValueObjectService()->createValueObject($this->src);
+                    $this->getValueObjectTestService()->createValueObjectTest($this->src);
                     break;
                 case SrcTypesInterface::FIXTURE:
                     $fixture = $this->getFixtureService();
@@ -358,6 +406,14 @@ class SrcConstructor extends AbstractConstructor
             }
         } catch (\Exception $exception) {
             throw $exception;
+        }
+
+        if ($this->src->isAbstract() === false) {
+            $this->createTrait($this->src);
+        }
+
+        if ($this->src->isFactory() && $this->src->isAbstract() === false) {
+            $this->createFactory($this->src);
         }
 
         $notAService = [

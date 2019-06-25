@@ -13,6 +13,7 @@ use Gear\Schema\Src\Src;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 
 /**
  * PHP Version 5
@@ -23,7 +24,9 @@ use Gear\Mvc\AbstractMvcTest;
  * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
  * @link http://pibernetwork.com
  */
-class ValueObjectTestService extends AbstractMvcTest implements ModuleStructureInterface
+class ValueObjectTestService extends AbstractMvcTest implements
+    ModuleStructureInterface,
+    AbstractMvcTestInterface
 {
     use StringServiceTrait;
 
@@ -35,29 +38,6 @@ class ValueObjectTestService extends AbstractMvcTest implements ModuleStructureI
 
     const TEMPLATE = 'template/module/mvc/value-object-test/test-src.phtml';
 
-    /**
-     * Constructor
-     *
-     * @param StringService $stringService String Service
-     * @param FileCreator   $fileCreator   File Creator
-     * @param ModuleAware   $module        Module Aware
-     *
-     * @return \Gear\Mvc\ValueObject\ValueObjectTestService
-     */
-    public function __construct(
-        StringService $stringService,
-        FileCreator $fileCreator,
-        ModuleStructure $module,
-        CodeTest $codeTest
-    ) {
-
-        $this->stringService = $stringService;
-        $this->fileCreator = $fileCreator;
-        $this->module = $module;
-        $this->codeTest = $codeTest;
-
-        return $this;
-    }
 
     public function createValueObjectTest($data)
     {
