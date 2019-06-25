@@ -8,6 +8,7 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 use Gear\Table\TableService\TableService;
+use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
 
 /**
  * @group db-factory
@@ -36,10 +37,12 @@ class FactoryTestServiceTest extends TestCase
         $this->string  = new \Gear\Util\String\StringService();
         $fileCreator    = $this->createFileCreator();
 
-        $this->codeFactoryTest = new \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest();
-        $this->codeFactoryTest->setModule($this->module->reveal());
-        $this->codeFactoryTest->setDirService(new \Gear\Util\Dir\DirService());
-        $this->codeFactoryTest->setStringService($this->string);
+        $this->codeFactoryTest = new FactoryCodeTest(
+            $this->module->reveal(),
+            $this->string,
+            new \Gear\Util\Dir\DirService(),
+            new \Gear\Util\Vector\ArrayService()
+        );
 
         $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService(
             $this->module->reveal(),

@@ -3,12 +3,15 @@ namespace GearTest\MvcTest\ValueObjectTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Mvc\ValueObject\ValueObjectTestService;
+use GearTest\UtilTestTrait;
 
 /**
  * @group Service
  */
 class ValueObjectTestServiceTest extends TestCase
 {
+    use UtilTestTrait;
+
     public function setUp() : void
     {
         parent::setUp();
@@ -19,10 +22,12 @@ class ValueObjectTestServiceTest extends TestCase
         $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');
 
         $this->service = new ValueObjectTestService(
-            $this->stringService->reveal(),
-            $this->fileCreator->reveal(),
             $this->module->reveal(),
-            $this->codeTest->reveal()
+            $this->fileCreator->reveal(),
+            $this->stringService->reveal(),
+            $this->codeTest->reveal(),
+            $this->createTableService(),
+            $this->createInjector()
         );
     }
 

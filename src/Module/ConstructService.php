@@ -201,7 +201,8 @@ class ConstructService
 
         $this->constructAllSrc($data);
 
-        $this->constructAllDb($data);
+        //$this->constructAllDb($data);
+
         if (isset($data['controller'***REMOVED***)) {
             foreach ($data['controller'***REMOVED*** as $controller) {
                 $this->constructController($module, $controller);
@@ -285,26 +286,26 @@ class ConstructService
         $this->constructStatus->merge($created);
     }
 
-    public function constructDb(array $db)
-    {
-        $canCreate = $this->dbSchema->canCreate($this->moduleName, $db);
+    // public function constructDb(array $db)
+    // {
+    //     $canCreate = $this->dbSchema->canCreate($this->moduleName, $db);
 
-        if ($canCreate === false) {
-            $this->addSkipName($db, 'table', self::DB_SKIP);
-            return;
-        }
+    //     if ($canCreate === false) {
+    //         $this->addSkipName($db, 'table', self::DB_SKIP);
+    //         return;
+    //     }
 
-        if ($canCreate instanceof ConsoleValidationStatus) {
-            $this->addValidateName($db, 'table', self::DB_VALIDATE);
-            $this->constructStatus->addValidated($canCreate->getErrors());
-            return;
-        }
+    //     if ($canCreate instanceof ConsoleValidationStatus) {
+    //         $this->addValidateName($db, 'table', self::DB_VALIDATE);
+    //         $this->constructStatus->addValidated($canCreate->getErrors());
+    //         return;
+    //     }
 
-        $db = $this->getDbConstructor()->create($canCreate);
-        $this->constructStatus->addCreated(sprintf(self::DB_CREATED, $db->getTable()));
+    //     $db = $this->getDbConstructor()->create($canCreate);
+    //     $this->constructStatus->addCreated(sprintf(self::DB_CREATED, $db->getTable()));
 
-        return;
-    }
+    //     return;
+    // }
 
 
     public function addSkipName($db, $key, $message)
@@ -329,63 +330,18 @@ class ConstructService
 
     public function constructController($module, array $controller)
     {
+        $created = $this->getControllerConstructor()
+            ->createController((new Controller($controller))->export());
 
-        unset($controller['actions'***REMOVED***);
-        $controllerItem = new Controller($controller);
-
-        if ($this->getControllerSchema()->controllerExist($module, $controllerItem)) {
-            $this->constructStatus->addSkipped(sprintf(self::CONTROLLER_SKIP, $controllerItem->getName()));
-
-            return;
-        }
-
-        $created = $this->getControllerConstructor()->createController($controller);
-
-        if ($created instanceof ConsoleValidationStatus) {
-            $this->constructStatus->addValidated(sprintf(self::CONTROLLER_VALIDATE, $controllerItem->getName()));
-            $this->constructStatus->addValidated($created->getErrors());
-            return;
-        }
-
-        $this->constructStatus->addCreated(sprintf(self::CONTROLLER_CREATED, $controllerItem->getName()));
-
-        return;
+        $this->constructStatus->merge($created);
     }
 
     public function constructAction($module, array $action)
     {
+        $created = $this->getActionConstructor()
+            ->createControllerAction((new Action($action))->export());
 
-        $actionItem = new Action($action);
-        if (isset($action['type'***REMOVED***)) {
-            $actionItem->getController()->setType($action['type'***REMOVED***);
-        }
-
-
-        if ($this->getActionSchema()->actionExist($module, $actionItem)) {
-            $this->constructStatus->addSkipped(sprintf(
-                self::ACTION_SKIP,
-                $actionItem->getName(),
-                $actionItem->getController()->getName()//->getName()
-            ));
-
-            return;
-        }
-
-        $created = $this->getActionConstructor()->createControllerAction($action);
-
-        if ($created instanceof ConsoleValidationStatus) {
-            $this->constructStatus->addValidated(sprintf(self::ACTION_VALIDATE, $actionItem->getName(), $actionItem->getController()->getName()));
-            $this->constructStatus->addValidated($created->getErrors());
-            return;
-        }
-
-        $this->constructStatus->addCreated(sprintf(
-            self::ACTION_CREATED,
-            $actionItem->getName(),
-            $actionItem->getController()->getName()//->getName()
-        ));
-
-        return;
+        $this->constructStatus->merge($created);
     }
 
     /**
