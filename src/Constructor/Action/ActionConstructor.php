@@ -52,12 +52,20 @@ use Gear\Constructor\AbstractConstructor;
 use Gear\Table\TableService\TableService;
 use Gear\Column\ColumnService;
 use Gear\Module\ModuleTypesInterface;
+use Gear\Module\ConstructStatusObject;
+use Gear\Module\ConstructStatusObjectTrait;
+use Gear\Schema\Action\Exception\ActionExist;
 
 /**
  * @group m1
  */
 class ActionConstructor extends AbstractConstructor
 {
+    const ACTION_SKIP = 'Action "%s" do Controller "%s" já existe.';
+
+    const ACTION_VALIDATE = 'Action "%s" do Controller "%s" apresentou erros na formatação';
+
+    const ACTION_CREATED = 'Action "%s" do Controller "%s" criado.';
 
     use ApiControllerServiceTrait;
 
@@ -96,6 +104,8 @@ class ActionConstructor extends AbstractConstructor
 
     /* mvc view */
     use ViewServiceTrait;
+
+    use ConstructStatusObjectTrait;
 
     /**
      * Constructor
@@ -136,7 +146,8 @@ class ActionConstructor extends AbstractConstructor
         ModuleStructure $basicModuleStructure,
         StringService $stringService,
         TableService $tableService,
-        ColumnService $columnService
+        ColumnService $columnService,
+        ConstructStatusObject $constructStatusObject
     ) {
         parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
@@ -155,6 +166,7 @@ class ActionConstructor extends AbstractConstructor
         $this->feature = $feature;
         $this->page = $page;
         $this->step = $step;
+        $this->setConstructStatusObject($constructStatusObject);
 
         return $this;
     }
@@ -200,20 +212,38 @@ class ActionConstructor extends AbstractConstructor
 
     public function createControllerAction($data)
     {
+        $status = $this->getConstructStatusObject();
 
         $module = $this->getModule()->getModuleName();
 
-        $this->action = $this->getActionSchema()->create(
-            $module,
-            $data,
-            false
-        );
+        try {
+            $this->action = $this->getActionSchema()->create(
+                $module,
+                $data,
+                false
+            );
+        } catch (ActionExist $e) {
+            $status->addSkipped(
+                sprintf(self::ACTION_SKIPPED, $data['controller'***REMOVED***, $data['name'***REMOVED***)
+            );
+            return $status;
+        }
+
         if (isset($data['type'***REMOVED***)) {
-          $this->action->getController()->setType($data['type'***REMOVED***);
+            $this->action->getController()->setType($data['type'***REMOVED***);
         }
 
         if ($this->action instanceof ConsoleValidationStatus) {
-            return $this->action;
+            $status->addValidated(
+                sprintf(
+                    self::ACTION_VALIDATE,
+                    (isset($data['controller'***REMOVED***) ? $data['controller'***REMOVED*** : ''),
+                    (isset($data['name'***REMOVED***) ? $data['name'***REMOVED*** : '')
+                )
+            );
+
+            $status->addValidated($this->action->getErrors());
+            return $status;
         }
 
         $this->controller = $this->action->getController();
@@ -234,16 +264,14 @@ class ActionConstructor extends AbstractConstructor
             if ($this->action->getController()->getDb() !== null) {
                 $this->getStep()->createTableStep($this->action->getController()->getDb());
             }
-
-            //$this->getPage()->build($this->action);
-            return true;
+            return $this->successful($status);
         }
 
         if ($this->controller->isType('Console')) {
-          $this->getConsoleController()->buildAction($this->controller);
-          $this->getConsoleControllerTest()->buildAction($this->controller);
-          $this->getConsoleRouterManager()->create($this->action);
-          return true;
+            $this->getConsoleController()->buildAction($this->controller);
+            $this->getConsoleControllerTest()->buildAction($this->controller);
+            $this->getConsoleRouterManager()->create($this->action);
+            return $this->successful($status);
         }
 
         $this->getApiControllerService()->buildAction($this->controller);
@@ -253,6 +281,19 @@ class ActionConstructor extends AbstractConstructor
 
 
 
-        return true;
+        return $this->successful($status);
+    }
+
+    public function successful($status)
+    {
+        $status->addCreated(
+            sprintf(
+                self::ACTION_CREATED,
+                $this->action->getController()->getName(),
+                $this->action->getName()
+            )
+        );
+        return $status;
+
     }
 }

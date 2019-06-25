@@ -5,6 +5,7 @@ use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Action\ActionConstructorTrait;
 use Gear\Constructor\Action\ActionConstructor;
+use Gear\Module\ConstructStatusObject;
 
 class ActionController extends AbstractConsoleController
 {
@@ -12,7 +13,7 @@ class ActionController extends AbstractConsoleController
 
     public function __construct(ActionConstructor $actionService)
     {
-        $this->actionService = $actionService;
+        $this->actionConstructor = $actionService;
     }
 
     public function createAction()
@@ -30,7 +31,10 @@ class ActionController extends AbstractConsoleController
         ***REMOVED***;
 
         $action = $this->getActionConstructor();
-        $action->createControllerAction($data);
+        $data = $action->createControllerAction($data);
+        if ($data instanceof ConstructStatusObject) {
+            $data->render();
+        }
 
         $this->getEventManager()->trigger('gear.pos', $this);
 
