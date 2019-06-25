@@ -5,7 +5,7 @@ return [
             /** 3.3 */
             'gear-module-constructor-controller' => [
                 'options' => [
-                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--extends=***REMOVED*** [--type=***REMOVED*** [--namespace=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns***REMOVED*** [--service=***REMOVED*** ' . $options,
+                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--extends=***REMOVED*** [--type=***REMOVED*** [--namespace=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED*** [--service=***REMOVED*** ' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module\Constructor\Controller',
                         'action' => 'create'

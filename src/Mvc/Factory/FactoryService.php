@@ -32,7 +32,7 @@ use Gear\Creator\Injector\Injector;
 use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
 //use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
 
-class FactoryService extends AbstractMvc implements AbstractMvcInterface
+class FactoryService extends AbstractMvc
 {
     public function __construct(
         ModuleStructure $module,
