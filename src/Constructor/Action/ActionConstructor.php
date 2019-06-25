@@ -212,6 +212,7 @@ class ActionConstructor extends AbstractConstructor
 
     public function createControllerAction($data)
     {
+        var_dump($data);
         $status = $this->getConstructStatusObject();
 
         $module = $this->getModule()->getModuleName();
