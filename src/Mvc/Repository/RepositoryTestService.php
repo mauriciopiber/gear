@@ -2,11 +2,13 @@
 namespace Gear\Mvc\Repository;
 
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Db\Db;
 use Gear\Schema\Src\SrcTypesInterface;
 
-class RepositoryTestService extends AbstractMvcTest
+class RepositoryTestService extends AbstractMvcTest implements
+    AbstractMvcTestInterface
 {
     const KEY_INSERT = 88;
 

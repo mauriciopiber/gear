@@ -280,32 +280,9 @@ class ConstructService
 
     public function constructSrc(array $src)
     {
-        $srcItem = $this->getSrcSchema()->factory($this->moduleName, $src, false);
+        $created = $this->getSrcConstructor()->create((new Src($src))->export());
 
-        if ($srcItem instanceof ConsoleValidationStatus) {
-            $this->constructStatus->addValidated(
-                sprintf(
-                    self::SRC_VALIDATE,
-                    (isset($src['name'***REMOVED***) ? $src['name'***REMOVED*** : ''),
-                    (isset($src['type'***REMOVED***) ? $src['type'***REMOVED*** : '')
-                )
-            );
-            $this->constructStatus->addValidated($srcItem->getErrors());
-            return;
-        }
-
-        if ($this->getSrcSchema()->srcExist($this->moduleName, $srcItem)) {
-            $this->constructStatus->addSkipped(sprintf(self::SRC_SKIP, $srcItem->getName(), $srcItem->getType()));
-            return;
-        }
-
-        $created = $this->getSrcConstructor()->create($srcItem->export());
-
-        if ($created) {
-            $this->constructStatus->addCreated(sprintf(self::SRC_CREATED, $srcItem->getName(), $srcItem->getType()));
-        }
-
-
+        $this->constructStatus->merge($created);
     }
 
     public function constructDb(array $db)

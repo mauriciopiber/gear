@@ -2,11 +2,12 @@
 namespace Gear\Mvc\Form;
 
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 use Gear\Mvc\Config\ServiceManagerTrait;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Src\SrcTypesInterface;
 
-class FormTestService extends AbstractMvcTest
+class FormTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     public function createFormTest($data)
     {

@@ -2,11 +2,12 @@
 namespace Gear\Mvc\Filter;
 
 use Gear\Mvc\AbstractMvcTest;
+use Gear\Mvc\AbstractMvcTestInterface;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\UniqueId;
 use Gear\Schema\Src\SrcTypesInterface;
 
-class FilterTestService extends AbstractMvcTest
+class FilterTestService extends AbstractMvcTest implements AbstractMvcTestInterface
 {
     //use ServiceManagerTrait;
 
