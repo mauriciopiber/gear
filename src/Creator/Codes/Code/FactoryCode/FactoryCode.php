@@ -2,6 +2,9 @@
 namespace Gear\Creator\Codes\Code\FactoryCode;
 
 use Gear\Creator\Codes\Code\AbstractCode;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
 
 /**
  * PHP Version 5
@@ -14,6 +17,16 @@ use Gear\Creator\Codes\Code\AbstractCode;
  */
 class FactoryCode extends AbstractCode
 {
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        DirService $dir
+    ) {
+        $this->setStringService($string);
+        $this->setModule($module);
+        $this->setDirService($dir);
+    }
+
     const FACTORY_SERVICE_LOCATOR_STRING = '$container->get(\'%s\')';
     const FACTORY_SERVICE_LOCATOR_CLASS = '$container->get(%s::class)';
 

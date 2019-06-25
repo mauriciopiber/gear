@@ -2,6 +2,14 @@
 namespace Gear\Creator\Codes\CodeTest\FactoryCode;
 
 use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Util\Dir\DirService;
+use Gear\Util\Dir\DirServiceTrait;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\Vector\ArrayServiceTrait;
 
 /**
  * PHP Version 5
@@ -14,6 +22,27 @@ use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
  */
 class FactoryCodeTest extends AbstractCodeTest
 {
+    use StringServiceTrait;
+
+    use DirServiceTrait;
+
+    use ModuleStructureTrait;
+
+    use ArrayServiceTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        DirService $dir,
+        ArrayService $arrayService
+    ) {
+        $this->setStringService($string);
+        $this->setModule($module);
+        $this->setDirService($dir);
+        $this->setArrayService($arrayService);
+    }
+
+
     const TEMPLATE_ALIASE = <<<EOS
         \$this->container->get('%s')
             ->willReturn(\$this->prophesize(%s::class)->reveal())

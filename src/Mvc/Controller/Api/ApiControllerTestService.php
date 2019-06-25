@@ -125,10 +125,6 @@ class ApiControllerTestService extends AbstractControllerTestService
         $this->file->setFileName($this->fileName);
         $this->file->setOptions($options);
 
-        if ($this->controller->isFactory()) {
-            $this->getFactoryTestService()->createControllerFactoryTest($this->controller, $this->location);
-        }
-
         return $this->file->render();
     }
 
