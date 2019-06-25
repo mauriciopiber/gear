@@ -33,7 +33,8 @@ use Gear\Schema\Schema\SchemaService;
 use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Zend\Db\Metadata\Object\TableObject;
 use Gear\Column\ColumnManager;
-
+use Gear\Module\ConstructStatusObject;
+use Zend\Console\Adapter\Posix as Console;
 /**
  * @group m1
  */
@@ -80,6 +81,10 @@ class ActionConstructorTest extends TestCase
         $this->apiController = $this->prophesize(ApiControllerService::class);
         $this->apiControllerTest = $this->prophesize(ApiControllerTestService::class);
 
+        $this->status = new ConstructStatusObject(
+            $this->prophesize(Console::class)->reveal()
+        );
+
         $this->actionService = new ActionConstructor(
             $this->actionSchema->reveal(),
             $this->routerManager->reveal(),
@@ -98,7 +103,8 @@ class ActionConstructorTest extends TestCase
             $this->module->reveal(),
             $this->stringService,
             $this->tableService->reveal(),
-            $this->columnService->reveal()
+            $this->columnService->reveal(),
+            $this->status
         );
     }
 
@@ -146,10 +152,16 @@ class ActionConstructorTest extends TestCase
             'controller' => 'MyController'
         ***REMOVED***;
 
-        $this->assertEquals(
-            $this->consoleValidation->reveal(),
+
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
             $this->actionService->createControllerAction($arrayAction)
         );
+
+        // $this->assertEquals(
+        //     $this->consoleValidation->reveal(),
+
+        // );
     }
 
     /**
@@ -218,7 +230,11 @@ class ActionConstructorTest extends TestCase
         $action->getController()->getDb()->setTableObject($tableObject->reveal());
         $action->getController()->getDb()->setColumnManager($columnManager->reveal());
 
-        $this->assertTrue($this->actionService->createControllerAction($arrayAction));
+
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->actionService->createControllerAction($arrayAction)
+        );
     }
 
 
@@ -268,7 +284,12 @@ class ActionConstructorTest extends TestCase
         $this->feature->build($action)->willReturn(true)->shouldBeCalled();
         //$this->page->build($action)->willReturn(true)->shouldBeCalled();
 
-        $this->assertTrue($this->actionService->createControllerAction($arrayAction));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->actionService->createControllerAction($arrayAction)
+        );
+
+        //$this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }
 
     /**
@@ -311,6 +332,11 @@ class ActionConstructorTest extends TestCase
 
         $this->consoleRouterManager->create($action)->willReturn(true)->shouldBeCalled();
 
-        $this->assertTrue($this->actionService->createControllerAction($arrayAction));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->actionService->createControllerAction($arrayAction)
+        );
+
+        //$this->assertTrue($this->actionService->createControllerAction($arrayAction));
     }
 }
