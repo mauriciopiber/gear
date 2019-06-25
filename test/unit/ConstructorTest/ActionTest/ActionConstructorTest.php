@@ -2,6 +2,8 @@
 namespace GearTest\ ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Column\ColumnService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\Action\ActionConstructor;
 use Gear\Mvc\Controller\Web\WebControllerService;
@@ -35,6 +37,7 @@ use Zend\Db\Metadata\Object\TableObject;
 use Gear\Column\ColumnManager;
 use Gear\Module\ConstructStatusObject;
 use Zend\Console\Adapter\Posix as Console;
+
 /**
  * @group m1
  */
@@ -75,8 +78,8 @@ class ActionConstructorTest extends TestCase
 
         $this->stringService = new StringService();
 
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
+        $this->tableService = $this->prophesize(TableService::class);
+        $this->columnService = $this->prophesize(ColumnService::class);
 
         $this->apiController = $this->prophesize(ApiControllerService::class);
         $this->apiControllerTest = $this->prophesize(ApiControllerTestService::class);

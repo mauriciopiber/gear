@@ -22,6 +22,11 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\View\ViewService;
 use Gear\Mvc\Config\ConfigService;
 use Gear\Util\String\StringService;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Zend\Console\Adapter\Posix as Console;
+use Gear\Module\ConstructStatusObject;
+
 //use Gear\Mvc\Config\ControllerManager;
 
 /**
@@ -65,12 +70,21 @@ class ControllerConstructorTest extends TestCase
         $this->controllerManager = $this->prophesize(ControllerManager::class);
 
 
+        $this->factory = $this->prophesize(FactoryService::class);
+        $this->factoryTest = $this->prophesize(FactoryTestService::class);
+
+        $this->status = new ConstructStatusObject(
+            $this->prophesize(Console::class)->reveal()
+        );
+
         $this->controllerService = new ControllerConstructor(
             $this->stringService,
             $this->schemaController->reveal(),
             $this->tableService->reveal(),
             $this->columnService->reveal(),
             $this->module->reveal(),
+            $this->factory->reveal(),
+            $this->factoryTest->reveal(),
             $this->mvcController->reveal(),
             $this->mvcControllerTest->reveal(),
             $this->mvcConsoleController->reveal(),
@@ -81,7 +95,8 @@ class ControllerConstructorTest extends TestCase
             $this->configService->reveal(),
             $this->viewService->reveal(),
             $this->languageService->reveal(),
-            $this->controllerManager->reveal()
+            $this->controllerManager->reveal(),
+            $this->status
         );
 
     }
@@ -183,8 +198,10 @@ class ControllerConstructorTest extends TestCase
             'type' => 'Action',
         ***REMOVED***;
 
-        $this->assertTrue($this->controllerService->createController($array));
-
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->controllerService->createController($array)
+        );
     }
 
     /**
@@ -238,7 +255,11 @@ class ControllerConstructorTest extends TestCase
             'type' => 'Action',
         ***REMOVED***;
 
-        $this->assertEquals($this->consoleValidation->reveal(), $this->controllerService->createController($array));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->controllerService->createController($array)
+        );
+        //$this->assertEquals($this->consoleValidation->reveal(), $this->controllerService->createController($array));
     }
 
     /**
@@ -267,9 +288,13 @@ class ControllerConstructorTest extends TestCase
                 'type' => 'Console',
             ***REMOVED***,
             false
-       )->willReturn($controller)->shouldBeCalled();
+        )->willReturn($controller)->shouldBeCalled();
 
-       $this->assertTrue($this->controllerService->createController($array));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->controllerService->createController($array)
+        );
+        //$this->assertTrue($this->controllerService->createController($array));
     }
 
         /**
@@ -297,9 +322,14 @@ class ControllerConstructorTest extends TestCase
                 'type' => 'Rest',
             ***REMOVED***,
             false
-       )->willReturn($controller)->shouldBeCalled();
+        )->willReturn($controller)->shouldBeCalled();
 
-        $this->assertTrue($this->controllerService->createController($array));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->controllerService->createController($array)
+        );
+
+        //$this->assertTrue($this->controllerService->createController($array));
     }
 
     /**
@@ -328,8 +358,13 @@ class ControllerConstructorTest extends TestCase
                 'type' => 'Action',
             ***REMOVED***,
             false
-       )->willReturn($controller)->shouldBeCalled();
+        )->willReturn($controller)->shouldBeCalled();
 
-        $this->assertTrue($this->controllerService->createController($array));
+        $this->assertInstanceOf(
+            ConstructStatusObject::class,
+            $this->controllerService->createController($array)
+        );
+
+        //$this->assertTrue($this->controllerService->createController($array));
     }
 }
