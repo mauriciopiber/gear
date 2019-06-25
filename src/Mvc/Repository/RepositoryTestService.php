@@ -27,7 +27,7 @@ class RepositoryTestService extends AbstractMvcTest implements
             'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
             'className'  => $this->src->getName(),
             'var'        => $this->str('var-length', $this->src->getName()),
-            'module'     => $this->getModule()->getModuleName()
+            'module'     => $this->getModule()->getNamespace()
         ***REMOVED***;
 
         $location = $this->getCodeTest()->getLocation($this->src);
