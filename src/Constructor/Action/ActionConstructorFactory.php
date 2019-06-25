@@ -28,6 +28,7 @@ use Gear\Mvc\Controller\Api\{
 };
 use Gear\Util\String\StringService;
 use Gear\Schema\Action\ActionSchema;
+use Gear\Module\ConstructStatusObject;
 
 /**
  * PHP Version 5
@@ -67,7 +68,8 @@ class ActionConstructorFactory implements FactoryInterface
             $container->get(ModuleStructure::class),
             $container->get(StringService::class),
             $container->get(TableService::class),
-            $container->get(ColumnService::class)
+            $container->get(ColumnService::class),
+            $container->get(ConstructStatusObject::class)
         );
 
         return $factory;
