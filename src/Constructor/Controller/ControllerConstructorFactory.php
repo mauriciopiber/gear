@@ -19,6 +19,8 @@ use Gear\Mvc\LanguageService;
 use Gear\Mvc\Config\ControllerManager;
 use Gear\Column\ColumnService;
 use Gear\Schema\Controller\ControllerSchema;
+use Gear\Module\ConstructStatusObject;
+
 
 /**
  * PHP Version 5
@@ -55,7 +57,8 @@ class ControllerConstructorFactory implements FactoryInterface
             $container->get(ConfigService::class),
             $container->get(ViewService::class),
             $container->get(LanguageService::class),
-            $container->get(ControllerManager::class)
+            $container->get(ControllerManager::class),
+            $container->get(ConstructStatusObject::class)
         );
 
         return $factory;

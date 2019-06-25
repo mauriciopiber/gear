@@ -3,6 +3,7 @@ namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
+use Gear\Module\ConstructStatusObject;
 use Gear\Module\ConstructService;
 use Gear\Schema\Db\DbSchema;
 use Gear\Schema\Src\SrcSchema;
@@ -20,6 +21,7 @@ use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
 use Gear\Schema\Controller\Controller as ControllerObject;
 use Gear\Schema\Action\Action as ActionObject;
 use Gear\Module\Structure\ModuleStructure;
+use Zend\Console\Adapter\Posix as Console;
 
 /**
  * @group Module
@@ -56,6 +58,10 @@ class ConstructServiceTest extends TestCase
 
         $this->module = $this->Prophesize(ModuleStructure::class);
 
+        $this->status = new ConstructStatusObject(
+            $this->prophesize(Console::class)->reveal()
+        );
+
 
         $this->construct = new ConstructService(
             $this->module->reveal(),
@@ -66,7 +72,8 @@ class ConstructServiceTest extends TestCase
             $this->dbConstructor->reveal(),
             $this->srcConstructor->reveal(),
             $this->controllerConstructor->reveal(),
-            $this->actionConstructor->reveal()
+            $this->actionConstructor->reveal(),
+            $this->status
         );
         //$this->construct->setBaseDir($this->basepath);
         //schema

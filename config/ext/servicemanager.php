@@ -13,6 +13,7 @@ return array_merge_recursive(
             'Zend\Db\Adapter\Adapter'          => 'Zend\Db\Adapter\AdapterServiceFactory',
             'Gear\Module'                      => 'Gear\Module\ModuleServiceFactory',
             'Gear\Module\ModuleService'        => 'Gear\Module\ModuleServiceFactory',
+            'Gear\Module\ConstructStatusObject' => 'Gear\Module\ConstructStatusObjectFactory',
             \Gear\Creator\FileCreator\FileCreator::class => \Gear\Creator\FileCreator\FileCreatorFactory::class,
             'Gear\Table\Metadata'              => 'Gear\Table\Metadata\MetadataFactory',
             'Gear\Table\Table'                 => 'Gear\Table\TableService\TableFactory',
@@ -37,8 +38,9 @@ return array_merge_recursive(
             'stringService'                    => 'GearBase\Util\String'
         ***REMOVED***,
         'shared' => [
-    	    \Gear\Creator\FileCreator\FileCreator::class                 => false,
-            'Gear\Autoload\Namespaces'         => false,
+            'Gear\Module\ConstructStatusObject' => false,
+    	    \Gear\Creator\FileCreator\FileCreator::class => false,
+            'Gear\Autoload\Namespaces' => false,
         ***REMOVED***,
     ***REMOVED***,
     require __DIR__.'/servicemanager/mvc.php',

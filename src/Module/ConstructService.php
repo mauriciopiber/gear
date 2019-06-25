@@ -10,6 +10,7 @@ use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Src\SrcConstructorTrait;
 use Gear\Module\ConstructStatusObject;
+use Gear\Module\ConstructStatusObjectTrait;
 use Gear\Module\Exception\GearfileNotFoundException;
 use Gear\Schema\Action\Action;
 use Gear\Schema\Action\ActionSchema;
@@ -45,6 +46,8 @@ use Gear\Module\Structure\ModuleStructureTrait;
 class ConstructService
 {
     private $constructStatus;
+
+    use ConstructStatusObjectTrait;
 
     use DbConstructorTrait;
 
@@ -101,7 +104,8 @@ class ConstructService
         DbConstructor $dbService,
         SrcConstructor $srcService,
         ControllerConstructor $controllerService,
-        ActionConstructor $actionService
+        ActionConstructor $actionService,
+        ConstructStatusObject $construct
     ) {
         $this->setModule($module);
         $this->actionConstructor = $actionService;
@@ -113,6 +117,7 @@ class ConstructService
         $this->dbSchema = $dbSchema;
         $this->srcSchema = $srcSchema;
         $this->controllerSchema = $controllerSchema;
+        $this->setConstructStatusObject($construct);
     }
 
     public function isEmpty(array $data, $key)
@@ -182,7 +187,7 @@ class ConstructService
     {
 
         $this->moduleName = $module;
-        $this->constructStatus = new ConstructStatusObject();
+        $this->constructStatus = $this->getConstructStatusObject();
 
         if (!empty($fileConfig) && empty($this->configLocation)) {
             $this->setConfigLocation($fileConfig);

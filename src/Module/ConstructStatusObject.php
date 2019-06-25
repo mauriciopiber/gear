@@ -1,6 +1,8 @@
 <?php
 namespace Gear\Module;
 
+use Zend\Console\Adapter\Posix as Console;
+
 class ConstructStatusObject
 {
     private $skipped = [***REMOVED***;
@@ -8,6 +10,11 @@ class ConstructStatusObject
     private $created = [***REMOVED***;
 
     private $validated = [***REMOVED***;
+
+    public function __construct(Console $console)
+    {
+        $this->console = $console;
+    }
 
     public function getSkipped() : array
     {
@@ -78,5 +85,49 @@ class ConstructStatusObject
     public function hasValidated()
     {
         return !empty($this->validated);
+    }
+
+    public function render()
+    {
+        if ($this->hasCreated()) {
+            foreach ($this->getCreated() as $msg) {
+                $this->console->writeLine($msg, 0, 3);
+            }
+        }
+
+        if ($this->hasSkipped()) {
+            foreach ($this->getSkipped() as $msg) {
+                $this->console->writeLine($msg, 0, 4);
+            }
+        }
+
+        if ($this->hasValidated()) {
+            foreach ($this->getValidated() as $msg) {
+                $this->console->writeLine($msg, 0, 2);
+            }
+        }
+    }
+
+    public function merge(ConstructStatusObject $status)
+    {
+        if ($status->hasCreated()) {
+            foreach ($status->getCreated() as $msg) {
+                $this->setCreated($msg);
+            }
+        }
+
+        if ($status->hasSkipped()) {
+            foreach ($status->getSkipped() as $msg) {
+                $this->setSkipped($msg);
+            }
+        }
+
+        if ($status->hasValidated()) {
+            foreach ($status->getValidated() as $msg) {
+                $this->setValidated($msg);
+            }
+        }
+        unset($status);
+        return $this;
     }
 }

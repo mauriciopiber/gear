@@ -21,6 +21,7 @@ use Gear\Module\ConstructService;
 use Gear\Module\Upgrade\ModuleUpgrade;
 use Gear\Module\Config\ApplicationConfig;
 use Gear\Autoload\ComposerAutoload;
+use Gear\Module\ConstructorStatusObject;
 
 /**
  * Funções para manipulação de Módulos
@@ -55,18 +56,18 @@ class ModuleController extends AbstractConsoleController
         $this->applicationConfig = $applicationConfig;
     }
 
-    public function setConsoleAdapter($console)
-    {
-        $this->console = $console;
-    }
+    // public function setConsoleAdapter($console)
+    // {
+    //     $this->console = $console;
+    // }
 
-    public function getConsoleAdapter()
-    {
-        if (!isset($this->console)) {
-            $this->console = $this->get('console');
-        }
-        return $this->console;
-    }
+    // public function getConsoleAdapter()
+    // {
+    //     if (!isset($this->console)) {
+    //         $this->console = $this->get('console');
+    //     }
+    //     return $this->console;
+    // }
 
     public function constructAction()
     {
@@ -78,26 +79,9 @@ class ModuleController extends AbstractConsoleController
 
         $data = $this->getConstructService()->construct($module, $file);
 
-        $this->console = $this->getConsole();
-
-        if ($data->hasCreated()) {
-            foreach ($data->getCreated() as $msg) {
-                $this->console->writeLine($msg, 0, 3);
-            }
+        if ($data instanceof ConstructorStatusObject) {
+            $data->render();
         }
-
-        if ($data->hasSkipped()) {
-            foreach ($data->getSkipped() as $msg) {
-                $this->console->writeLine($msg, 0, 4);
-            }
-        }
-
-        if ($data->hasValidated()) {
-            foreach ($data->getValidated() as $msg) {
-                $this->console->writeLine($msg, 0, 2);
-            }
-        }
-
 
         $this->getEventManager()->trigger('gear.pos', $this);
         $model = new ConsoleModel();

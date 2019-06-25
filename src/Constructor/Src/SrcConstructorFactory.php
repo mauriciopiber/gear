@@ -26,6 +26,7 @@ use Interop\Container\ContainerInterface;
 use Gear\Constructor\Src;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Src\SrcSchema;
+use Gear\Module\ConstructStatusObject;
 
 class SrcConstructorFactory implements FactoryInterface
 {
@@ -52,7 +53,8 @@ class SrcConstructorFactory implements FactoryInterface
             $container->get(ServiceService::class),
             $container->get(ServiceTestService::class),
             $container->get(FixtureService::class),
-            $container->get(InterfaceService::class)
+            $container->get(InterfaceService::class),
+            $container->get(ConstructStatusObject::class)
         );
     }
 }

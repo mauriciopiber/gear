@@ -13,6 +13,7 @@ use Gear\Schema\Controller\ControllerSchema;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\ConstructService;
+use Gear\Module\ConstructStatusObject;
 
 class ConstructServiceFactory implements FactoryInterface
 {
@@ -27,7 +28,8 @@ class ConstructServiceFactory implements FactoryInterface
             $container->get(DbConstructor::class),
             $container->get(SrcConstructor::class),
             $container->get(ControllerConstructor::class),
-            $container->get(ActionConstructor::class)
+            $container->get(ActionConstructor::class),
+            $container->get(ConstructStatusObject::class)
         );
     }
 }

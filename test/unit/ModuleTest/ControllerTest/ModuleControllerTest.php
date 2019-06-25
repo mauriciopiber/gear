@@ -62,7 +62,7 @@ class ModuleControllerTest extends TestCase
     public function testConstructAction()
     {
 
-        $status = new ConstructStatusObject();
+        $status = new ConstructStatusObject($this->console->reveal());
 
         $this->construct->construct(false, null, null)->willReturn($status)->shouldBeCalled();
 
@@ -78,7 +78,7 @@ class ModuleControllerTest extends TestCase
     public function testConstructParamsAction()
     {
 
-        $status = new ConstructStatusObject();
+        $status = new ConstructStatusObject($this->console->reveal());
 
         $this->construct->construct('Gears', 'gear-1.0.0.yml')->willReturn($status);
 

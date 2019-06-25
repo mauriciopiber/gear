@@ -49,6 +49,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Constructor\AbstractConstructor;
 use Gear\Schema\Service\FactoriesInterface;
 use Gear\Schema\Controller\Type\ActionInterface;
+use Gear\Module\ConstructStatusObject;
+use Gear\Module\ConstructStatusObjectTrait;
 
 class ControllerConstructor extends AbstractConstructor
 {
@@ -79,6 +81,8 @@ class ControllerConstructor extends AbstractConstructor
     use LanguageServiceTrait;
 
     use ControllerManagerTrait;
+
+    use ConstructStatusObjectTrait;
 
     /**
      * Constructor
@@ -112,7 +116,8 @@ class ControllerConstructor extends AbstractConstructor
         ConfigService $configService,
         ViewService $viewService,
         LanguageService $languageService,
-        ControllerManager $controllerManager
+        ControllerManager $controllerManager,
+        ConstructStatusObject $constructStatusObject
     ) {
         parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
@@ -135,7 +140,7 @@ class ControllerConstructor extends AbstractConstructor
         //language
         $this->languageService = $languageService;
 
-
+        $this->setConstructStatusObject($constructStatusObject);
         return $this;
     }
 
@@ -233,7 +238,6 @@ class ControllerConstructor extends AbstractConstructor
             false
         );
 
-
         if ($this->controller instanceof ConsoleValidationStatus) {
             return $this->controller;
         }
@@ -248,7 +252,7 @@ class ControllerConstructor extends AbstractConstructor
         }
 
         $this->getControllerManager()->create($this->controller);
-
+        die('piber1');
         if ($this->controller->getType() == 'Action') {
             $this->getMvcController()->buildController($this->controller);
             $this->getControllerTestService()->buildController($this->controller);
