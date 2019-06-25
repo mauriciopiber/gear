@@ -15,7 +15,7 @@ return [
             /** 3.4 */
             'gear-module-constructor-activity' => [
                 'options' => [
-                    'route' => 'gear module activity create <module> [<basepath>***REMOVED*** <parent>  [--template=***REMOVED*** --name= [--route=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** '.implode(' ',$globalOptions),
+                    'route' => 'gear module activity create <module> [<basepath>***REMOVED*** <parent>  [--template=***REMOVED*** --name= [--route=***REMOVED*** [--role=***REMOVED*** [--dependency=***REMOVED*** [--controllerNamespace=***REMOVED*** '.implode(' ',$globalOptions),
                     'defaults' => [
                         'controller' => 'Gear\Module\Constructor\Action',
                         'action' => 'create'

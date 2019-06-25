@@ -43,10 +43,11 @@ php public/index.php gear module activity create \
   $MODULE \
   $BASEPATH \
   FoodController \
-  --name=Create
+  --name=Create \
+  --controllerNamespace=Food\\Controller
 
-php public/index.php gear module activity create \
-  $MODULE \
-  $BASEPATH \
-  FoodController \
-  --name=Update
+# php public/index.php gear module activity create \
+#   $MODULE \
+#   $BASEPATH \
+#   FoodController \
+#   --name=Update
