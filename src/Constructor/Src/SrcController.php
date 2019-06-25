@@ -5,6 +5,7 @@ use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
 use Gear\Constructor\Src\SrcConstructor;
 use Gear\Constructor\Src\SrcConstructorTrait;
+use Gear\Module\ConstructStatusObject;
 
 class SrcController extends AbstractConsoleController
 {
@@ -19,7 +20,7 @@ class SrcController extends AbstractConsoleController
     {
         $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'src-create'));
 
-         $data = [
+        $data = [
             'name'       => $this->getRequest()->getParam('name'),
             'type'       => $this->getRequest()->getParam('type'),
             'dependency' => $this->getRequest()->getParam('dependency'),
@@ -32,15 +33,16 @@ class SrcController extends AbstractConsoleController
             'implements' => $this->getRequest()->getParam('implements'),
             'user'       => $this->getRequest()->getParam('user'),
             'service'    => $this->getRequest()->getParam('service', 'invokables')
-         ***REMOVED***;
+        ***REMOVED***;
 
+        $console = $this->getSrcConstructor()->create($data);
+        if ($console instanceof ConstructStatusObject) {
+            $console->render();
+        }
 
+        $this->getEventManager()->trigger('gear.pos', $this);
 
-         $this->getSrcConstructor()->create($data);
-
-         $this->getEventManager()->trigger('gear.pos', $this);
-
-         return new ConsoleModel();
+        return new ConsoleModel();
     }
 
     public function deleteAction()

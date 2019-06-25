@@ -53,10 +53,21 @@ use Gear\Schema\Src\SrcSchemaTrait as JsonSrc;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
+use Gear\Module\ConstructStatusObject;
+use Gear\Module\ConstructStatusObjectTrait;
 
 class SrcConstructor extends AbstractConstructor
 {
+
+    const SRC_SKIP = 'Src nome "%s" do tipo "%s" já existe.';
+
+    const SRC_VALIDATE = 'Src %s retornou erros durante validação';
+
+    const SRC_CREATED = 'Src nome "%s" do tipo "%s" criado.';
+
     const TYPE_NOT_FOUND = 'Type not allowed';
+
+    use ConstructStatusObjectTrait;
 
     use TableServiceTrait;
 
@@ -123,9 +134,11 @@ class SrcConstructor extends AbstractConstructor
         ServiceService $serviceService,
         ServiceTestService $serviceTestService,
         FixtureService $fixtureService,
-        InterfaceService $interfaceService
+        InterfaceService $interfaceService,
+        ConstructStatusObject $status
     ) {
         parent::__construct($module, null, $tableService, $columnService);
+        $this->setConstructStatusObject($status);
         $this->srcSchema = $srcSchema;
         $this->serviceManager = $serviceManager;
         $this->traitService = $traitService;
@@ -157,6 +170,8 @@ class SrcConstructor extends AbstractConstructor
 
     public function create(array $data)
     {
+        $status = $this->getConstructStatusObject();
+
         $module = $this->getModule()->getModuleName();
         //var_dump($module);die();
 
@@ -174,7 +189,20 @@ class SrcConstructor extends AbstractConstructor
             $this->setDbOptions($this->src);
         }
 
-        return $this->factory();
+        $factory = $this->factory();
+
+        if ($factory) {
+            $status->addCreated(
+                sprintf(
+                    self::SRC_CREATED,
+                    $this->src->getName(),
+                    $this->src->getType()
+                )
+            );
+            return $status;
+        }
+
+        throw new Exception('Error while creating src, must check code');
     }
 
     /**
@@ -270,10 +298,6 @@ class SrcConstructor extends AbstractConstructor
 
     private function factory()
     {
-        if ($this->src->getType() == null) {
-            return self::TYPE_NOT_FOUND;
-        }
-
         if ($this->src->isAbstract() === false) {
             $this->createTrait($this->src);
         }
