@@ -131,7 +131,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "http://satis"
+            "url": "https://satis.piber.network"
         },
         {
             "packagist": false
@@ -221,7 +221,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "http://satis"
+            "url": "https://satis.piber.network"
         },
         {
             "packagist": false

@@ -39,6 +39,9 @@ abstract class AbstractCodeBase implements
     public function getServiceManagerName(AbstractObject $service)
     {
         $module = $this->getModule()->getNamespace();
+
+        var_dump('aqui 4344444444');
+        var_dump($module);
         $namespace = $service->getNamespace();
 
         if ($namespace === null) {

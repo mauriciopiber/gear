@@ -3,6 +3,7 @@ namespace GearTest\ModuleTest\StructureTest;
 
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Dir\DirService;
 use Gear\Util\File\FileService;
@@ -29,6 +30,70 @@ class ModuleStructureTest extends TestCase
             $this->dirService->reveal(),
             $this->fileService->reveal()
         );
+    }
+
+    public function testGetNamespaceFromFile()
+    {
+        $module = <<<EOS
+<?php
+namespace Pbr\MyApiModule;
+
+use Zend\ModuleManager\ModuleManager;
+use Zend\Mvc\MvcEvent;
+use Zend\Validator\AbstractValidator;
+use Zend\View\ViewEvent;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\Http\Request as HttpRequest;
+use Zend\View\Model\JsonModel;
+use Zend\View\Model\ModelInterface;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream;
+
+/**
+ * PHP Version 5
+ *
+ * @category Module
+ * @package Pbr\MyApiModule
+ * @author Mauricio Piber <mauriciopiber@gmail.com>
+ * @license GPL3-0 http://www.gnu.org/licenses/gpl-3.0.en.html
+ * @link http://pibernetwork.com
+ */
+class Module
+{
+    const LOCATION = __DIR__;
+
+    /**
+     * Config executed on Bootstrap
+     *
+     * @param MvcEvent \$mvcEvent Mvc Event
+     *
+     * @return void
+     */
+    public function onBootstrap(MvcEvent \$mvcEvent)
+    {
+        // attach the JSON view strategy
+        \$app      = \$mvcEvent->getTarget();
+        \$locator  = \$app->getServiceManager();
+        \$view     = \$locator->get('Zend\View\View');
+        \$strategy = \$locator->get('ViewJsonStrategy');
+        \$strategy->attach(\$view->getEventManager(), 100);
+
+        // attach a listener to check for errors
+        \$events = \$mvcEvent->getTarget()->getEventManager();
+        \$events->attach(MvcEvent::EVENT_RENDER, array(\$this, 'onRenderError'));
+    }
+}
+EOS;
+
+        vfsStream::newDirectory('src')->at(vfsStreamWrapper::getRoot());
+
+        file_put_contents(vfsStream::url('moduleDir/src/Module.php'), $module);
+
+        $this->basicModuleStructure->setMainFolder(vfsStream::url('moduleDir'));
+        $this->basicModuleStructure->prepare();
+        $namespace = $this->basicModuleStructure->getNamespace();
+
+        $this->assertEquals($namespace, 'Pbr\MyApiModule');
     }
 
     public function testGetNamespaceFromModule()

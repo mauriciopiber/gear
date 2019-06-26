@@ -112,13 +112,10 @@ class ComposerServiceTest extends TestCase
             "Gear\\\\Gearing\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -182,13 +179,10 @@ EOS;
             "Gear\\\\Gearing\\\\MyOther\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -255,13 +249,10 @@ EOS;
             "Gearing\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***

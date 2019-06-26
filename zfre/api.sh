@@ -3,11 +3,11 @@ set -ex
 MODULE=my-api-module
 BASEPATH=/var/www/gear-package
 
-php public/index.php gear schema delete "$MODULE" "$BASEPATH"
-php public/index.php gear schema create "$MODULE" "$BASEPATH"
+#php public/index.php gear schema delete "$MODULE" "$BASEPATH"
+#php public/index.php gear schema create "$MODULE" "$BASEPATH"
 #cat ../gear-package/my-api-module/schema/module.json
 
-php public/index.php gear schema dump my-api-module /var/www/gear-package
+#php public/index.php gear schema dump my-api-module /var/www/gear-package
 
 php public/index.php gear module src create \
   "$MODULE" \
@@ -18,6 +18,7 @@ php public/index.php gear module src create \
   --extends=\\Gear\\Rest\\Repository\\AbstractRestRepository
 
 
+exit 0
 
 php public/index.php gear module src create \
   $MODULE \
