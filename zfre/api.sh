@@ -15,6 +15,8 @@ php public/index.php gear module src create \
   --name=FoodRepository \
   --namespace=Food\\Repository \
   --type=Repository \
+  --service=factories \
+  --dependency="\Zend\Db\Adapter\Adapter" \
   --extends=\\Gear\\Rest\\Repository\\AbstractRestRepository
 
 

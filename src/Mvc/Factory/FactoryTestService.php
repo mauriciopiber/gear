@@ -41,11 +41,11 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
 
     public function createConstructorSnippet($src)
     {
-        $dependency = $this->getFactoryCodeTest()->getConstructorDependency($src);
-        echo $dependency.PHP_EOL;
+        // $dependency = $this->getFactoryCodeTest()->getConstructorDependency($src);
+        // echo $dependency.PHP_EOL;
 
-        $constructor = $this->getFactoryCodeTest()->getConstructor($src);
-        echo $constructor.PHP_EOL;
+        // $constructor = $this->getFactoryCodeTest()->getConstructor($src);
+        // echo $constructor.PHP_EOL;
     }
 
     public function createFactoryTest($src, $location = null)
@@ -65,7 +65,7 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
         $options = [
             'use'       => $this->getFactoryCodeTest()->getUse($src),
             'classUrl' => $this->str('url', str_replace($src->getType(), '', $src->getName())),
-            'module'    => $this->getModule()->getModuleName(),
+            'module'    => $this->getModule()->getNamespace(),
             'moduleUrl'    => $this->str('url', $this->getModule()->getModuleName()),
             'namespace' => $this->getFactoryCodeTest()->getNamespace($src),
             'testNamespace' => $this->getFactoryCodeTest()->getTestNamespace($src),
