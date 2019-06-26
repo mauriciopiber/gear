@@ -1,0 +1,20 @@
+name: gear
+test:
+  - image: php
+    run:
+      - install
+      - phpcs
+      - phpmd
+      - phpcpd
+      - phpunit-ci
+collect:
+  - phpcs
+  - phpmd
+  - phpcpd
+  - phpunit
+  - phpunit:coverage
+deploy:
+  source:
+    version: true
+    changelog: true
+    release: true
