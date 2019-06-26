@@ -12,7 +12,7 @@
 >
     <testsuites>
         <testsuite name="sites">
-            <directory suffix="Test.php">./unit/EdgeTest</directory>
+            <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
     <filter>
