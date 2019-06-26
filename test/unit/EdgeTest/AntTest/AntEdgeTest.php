@@ -3,6 +3,7 @@ namespace GearTest\EdgeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Edge\Ant\AntEdgeTrait;
+use Gear\Edge\Ant\AntEdge;
 
 /**
  * @group Edge
@@ -24,9 +25,7 @@ class AntEdgeTest extends TestCase
         );
 
     }
-    /**
-     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
-     */
+
     public function testGetModuleWebLocation()
     {
         $web = $this->ant->getAntModule('web');
@@ -34,9 +33,6 @@ class AntEdgeTest extends TestCase
         $this->assertArrayHasKey('target', $web);
     }
 
-    /**
-     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
-     */
     public function testGetModuleCliLocation()
     {
         $web = $this->ant->getAntModule('cli');
@@ -44,10 +40,6 @@ class AntEdgeTest extends TestCase
         $this->assertArrayHasKey('target', $web);
     }
 
-
-    /**
-     * @covers Gear\Edge\AntEdge\AntEdge::getAntModule
-     */
     public function testUnfoundModuleType()
     {
         $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
@@ -55,11 +47,6 @@ class AntEdgeTest extends TestCase
 
     }
 
-
-    /**
-     * @group Gear
-     * @group AntEdge
-    */
     public function testSet()
     {
         $mockAntEdge = $this->prophesize(

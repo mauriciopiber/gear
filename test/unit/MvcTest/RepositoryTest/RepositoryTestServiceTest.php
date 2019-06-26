@@ -85,6 +85,7 @@ class RepositoryTestServiceTest extends TestCase
      */
     public function testCreateSrc($data, $template)
     {
+
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 

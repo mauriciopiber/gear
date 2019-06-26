@@ -11,9 +11,6 @@ class DirEdgeTest extends TestCase
 {
     use DirEdgeTrait;
 
-    /**
-     * @covers Gear\Edge\DirEdge::getDirModule
-     */
     public function testGetModuleWebLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -23,9 +20,6 @@ class DirEdgeTest extends TestCase
         $this->assertArrayHasKey('writable', $web);
     }
 
-    /**
-     * @covers Gear\Edge\DirEdge::getDirModule
-     */
     public function testGetModuleCliLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -35,9 +29,6 @@ class DirEdgeTest extends TestCase
         $this->assertArrayHasKey('writable', $web);
     }
 
-    /**
-     * @covers Gear\Edge\DirEdge::getDirModule
-     */
     public function testUnfoundModuleType()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -47,10 +38,6 @@ class DirEdgeTest extends TestCase
 
     }
 
-    /**
-     * @group Gear
-     * @group DirEdge
-    */
     public function testSet()
     {
         $mockDirEdge = $this->prophesize(
