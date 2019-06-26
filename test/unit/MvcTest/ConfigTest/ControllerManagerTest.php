@@ -42,11 +42,11 @@ class ControllerManagerTest extends TestCase
 
 
         $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager(
-          $this->module->reveal(),
-          $this->fileCreator,
-          $this->string,
-          $this->code,
-          $this->arrayService,
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->arrayService,
             $this->prophesize(LanguageService::class)->reveal()
         );
 

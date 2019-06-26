@@ -16,19 +16,22 @@ php public/index.php gear module src create \
   --namespace=Food\\Repository \
   --type=Repository \
   --service=factories \
-  --dependency="\Zend\Db\Adapter\Adapter" \
+  --dependency="\Zend\Db\Adapter\Adapter:ig_t" \
   --extends=\\Gear\\Rest\\Repository\\AbstractRestRepository
 
 
-exit 0
 
 php public/index.php gear module src create \
   $MODULE \
   $BASEPATH \
   --name=FoodService \
   --namespace=Food\\Service \
+  --service=factories \
+  --dependency=Food\\Repository\\FoodRepository \
   --type=Service \
   --extends=\\Gear\\Rest\\Service\\AbstractRestService
+
+exit 1
 
 php public/index.php gear module src create \
   $MODULE \

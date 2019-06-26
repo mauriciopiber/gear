@@ -72,8 +72,8 @@ class FilterService extends AbstractMvc implements AbstractMvcInterface
 
 
         $this->src->setDependency([
-            '\Zend\Db\Adapter\Adapter',
-            'translator' => '\Zend\Mvc\I18n\Translator'
+            0 => '\Zend\Db\Adapter\Adapter:ig_t',
+            1 => ['aliase' => 'translator', 'class'=> '\Zend\Mvc\I18n\Translator', 'ig_t' => true***REMOVED***
         ***REMOVED***);
 
         $options['constructor'***REMOVED*** =  $this->getCode()->getConstructor($this->src);

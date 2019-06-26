@@ -31,7 +31,7 @@ class AbstractMvcFactory implements AbstractFactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, $options = [***REMOVED***)
     {
-        var_dump($requestedName);
+        //var_dump($requestedName);
         //$VALUE+=1;
         return new $requestedName(
             $container->get(ModuleStructure::class),

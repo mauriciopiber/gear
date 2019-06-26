@@ -576,16 +576,16 @@
         },
         {
             "name": "mauriciopiber/gear-schema",
-            "version": "1.0.0-alpha2",
+            "version": "1.0.0-alpha6",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-schema.git",
-                "reference": "c58a9ec6e75212809f8300accf052403a9bb1c82"
+                "reference": "613ba388ed94fce74cad72a16500d3a26ecae719"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-c58a9ec6e75212809f8300accf052403a9bb1c82-zip-26efa3.zip",
-                "reference": "c58a9ec6e75212809f8300accf052403a9bb1c82"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-613ba388ed94fce74cad72a16500d3a26ecae719-zip-bcc826.zip",
+                "reference": "613ba388ed94fce74cad72a16500d3a26ecae719"
             },
             "require": {
                 "mauriciopiber/gear-console": "^1.0.0-alpha0",
@@ -635,10 +635,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha2",
+                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha6",
                 "issues": "https://github.com/mauriciopiber/gear-schema/issues"
             },
-            "time": "2019-06-17T23:13:32+00:00"
+            "time": "2019-06-26T22:32:51+00:00"
         },
         {
             "name": "mauriciopiber/gear-scripts",
@@ -1210,16 +1210,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "6379ee07398643e09e6ed1e87d9c62dfcad7f4eb"
+                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-6379ee07398643e09e6ed1e87d9c62dfcad7f4eb-zip-11de33.zip",
-                "reference": "6379ee07398643e09e6ed1e87d9c62dfcad7f4eb"
+                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-9198eea354be75794a7b1064de00d9ae9ae5090f-zip-e4323e.zip",
+                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1269,20 +1269,20 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-06-08T06:33:08+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64"
+                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-d50bbeeb0e17e6dd4124ea391eff235e932cbf64-zip-6ff781.zip",
-                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64"
+                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-b592b26a24265a35172d8a2094d8b10f22b7cc39-zip-92f91a.zip",
+                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1343,20 +1343,20 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-05T13:25:51+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "bf2af40d738dec5e433faea7b00daa4431d0a4cf"
+                "reference": "b9896d034463ad6fd2bf17e2bf9418caecd6313d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/filesystem/symfony-filesystem-bf2af40d738dec5e433faea7b00daa4431d0a4cf-zip-645214.zip",
-                "reference": "bf2af40d738dec5e433faea7b00daa4431d0a4cf"
+                "url": "https://satis.piber.network/dist/symfony/filesystem/symfony-filesystem-b9896d034463ad6fd2bf17e2bf9418caecd6313d-zip-0426f0.zip",
+                "reference": "b9896d034463ad6fd2bf17e2bf9418caecd6313d"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1392,7 +1392,7 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-03T20:27:40+00:00"
+            "time": "2019-06-23T08:51:25+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1625,7 +1625,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -5228,16 +5228,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "fea7f73e278ee0337349a5a68b867fc656bb33f3"
+                "reference": "b851928be349c065197fdc0832f78d85139e3903"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-fea7f73e278ee0337349a5a68b867fc656bb33f3-zip-f14299.zip",
-                "reference": "fea7f73e278ee0337349a5a68b867fc656bb33f3"
+                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-b851928be349c065197fdc0832f78d85139e3903-zip-7ea9cc.zip",
+                "reference": "b851928be349c065197fdc0832f78d85139e3903"
             },
             "require": {
                 "php": "^7.1.3",
@@ -5296,20 +5296,20 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-06-15T04:08:07+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
+                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176-zip-4d12f2.zip",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
+                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a-zip-b608c0.zip",
+                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
             },
             "require": {
                 "php": "^7.1.3"
@@ -5344,7 +5344,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-26T20:47:49+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "theseer/directoryscanner",

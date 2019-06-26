@@ -515,6 +515,7 @@ EOS;
 
     public function getUse($data)
     {
+        //var_dump($data);
         $this->uses = [***REMOVED***;
 
         if (!empty($data->getImplements())) {

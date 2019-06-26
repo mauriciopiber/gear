@@ -40,8 +40,6 @@ abstract class AbstractCodeBase implements
     {
         $module = $this->getModule()->getNamespace();
 
-        var_dump('aqui 4344444444');
-        var_dump($module);
         $namespace = $service->getNamespace();
 
         if ($namespace === null) {

@@ -134,9 +134,8 @@ class FactoryServiceTest extends TestCase
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getNamespace()->willReturn('MyModule');
 
-        /**
+        /*
         if ($data instanceof Src && $data->getTemplate() == 'search-form') {
-
 
             $this->filter = $this->prophesize('Gear\Schema\Src\Src');
             $this->filter->getName()->willReturn('MyTableFilter');

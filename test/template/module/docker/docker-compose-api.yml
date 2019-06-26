@@ -6,6 +6,7 @@ services:
     volumes:
       - /opt/composer-cache:/root/.composer/cache
       - .:/var/www/module
+      - ~/.composer/auth.json:/root/.composer/auth.json
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT
     ports:

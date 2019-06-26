@@ -128,6 +128,8 @@ class WebControllerTestServiceTest extends TestCase
             'user' => $userType
         ***REMOVED***);
 
+        //var_dump($controller);
+
         $this->db = new \Gear\Schema\Db\Db(
             [
                 'table' => $this->string->str('class', $tableName),

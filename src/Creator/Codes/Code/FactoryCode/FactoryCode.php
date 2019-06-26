@@ -51,6 +51,10 @@ class FactoryCode extends AbstractCode
         $allDeps = count($values);
 
         foreach ($values as $alias => $dependency) {
+
+            if (isset($dependency['aliase'***REMOVED***) && !empty($dependency['aliase'***REMOVED***)) {
+                $alias = $dependency['aliase'***REMOVED***;
+            }
             $text .= $this->getDependencyCallable($indent, $alias, $dependency);
 
             if ($iterator < $allDeps-1) {
