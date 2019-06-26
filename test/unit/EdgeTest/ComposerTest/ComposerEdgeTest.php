@@ -11,9 +11,6 @@ class ComposerEdgeTest extends TestCase
 {
     use ComposerEdgeTrait;
 
-    /**
-     * @covers Gear\Edge\ComposerEdge::getComposerModule
-     */
     public function testGetModuleWebLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -23,9 +20,6 @@ class ComposerEdgeTest extends TestCase
         $this->assertArrayHasKey('require-dev', $web);
     }
 
-    /**
-     * @covers Gear\Edge\ComposerEdge::getComposerModule
-     */
     public function testGetModuleCliLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -35,9 +29,6 @@ class ComposerEdgeTest extends TestCase
         $this->assertArrayHasKey('require-dev', $web);
     }
 
-    /**
-     * @covers Gear\Edge\ComposerEdge::getComposerModule
-     */
     public function testUnfoundModuleType()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -47,10 +38,6 @@ class ComposerEdgeTest extends TestCase
 
     }
 
-    /**
-     * @group Gear
-     * @group ComposerEdge
-    */
     public function testSet()
     {
         $mockComposerEdge = $this->prophesize(

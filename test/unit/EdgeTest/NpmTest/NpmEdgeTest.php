@@ -12,10 +12,6 @@ class NpmEdgeTest extends TestCase
 {
     use NpmEdgeTrait;
 
-
-    /**
-     * @covers Gear\Edge\NpmEdge::getNpmModule
-     */
     public function testGetModuleWebLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -25,10 +21,6 @@ class NpmEdgeTest extends TestCase
         $this->assertArrayHasKey('devDependencies', $web);
     }
 
-    /**
-     * @group Gear
-     * @group NpmEdge
-    */
     public function testSet()
     {
         $mockNpmEdge = $this->prophesize(

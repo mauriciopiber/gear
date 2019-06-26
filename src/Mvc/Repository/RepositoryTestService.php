@@ -21,6 +21,7 @@ class RepositoryTestService extends AbstractMvcTest implements
 
     public function createSrcTest()
     {
+        $module = $this->getModule()->getModuleName();
         $options = [
             'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
             'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),

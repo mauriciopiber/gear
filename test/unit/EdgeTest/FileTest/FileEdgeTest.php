@@ -11,9 +11,6 @@ class FileEdgeTest extends TestCase
 {
     use FileEdgeTrait;
 
-    /**
-     * @covers Gear\Edge\FileEdge::getFileModule
-     */
     public function testGetModuleWebLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -22,9 +19,6 @@ class FileEdgeTest extends TestCase
         $this->assertArrayHasKey('files', $web);
     }
 
-    /**
-     * @covers Gear\Edge\FileEdge::getFileModule
-     */
     public function testGetModuleCliLocation()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
@@ -33,9 +27,6 @@ class FileEdgeTest extends TestCase
         $this->assertArrayHasKey('files', $web);
     }
 
-    /**
-     * @covers Gear\Edge\FileEdge::getFileModule
-     */
     public function testUnfoundModuleType()
     {
         $yaml = new \Gear\Util\Yaml\YamlService();
