@@ -7,6 +7,7 @@ services:
       - /opt/composer-cache:/root/.composer/cache
       - .:/var/www/module
       - /var/www/gear-factory:/var/www/gear-package
+      - ~/.composer/auth.json:/root/.composer/auth.json
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT
     networks:

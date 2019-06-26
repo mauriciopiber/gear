@@ -36,9 +36,6 @@
 		"mauriciopiber/gear-locator": "^1.0.0-alpha0",
 		"mauriciopiber/gear-scripts": "^1.0.0-alpha0"
 	},
-	    "config": {
-					"secure-http": false
-			},
 	"require-dev" : {
 		"sebastian/phpcpd" : "^4.0",
 		"phpunit/phpunit" : "^8.0",
@@ -58,25 +55,7 @@
 	},
 	"repositories" : [    {
 					"type": "composer",
-					"url": "http://satis"
+					"url": "https://satis.piber.network"
 			}, { "packagist": false }
-	***REMOVED***,
-	"bin" : [
-		"bin/gear/module/gear-module",
-		"bin/gear/project/gear-project",
-		"bin/gear/project/gear-project-module",
-		"bin/install-nodejs",
-		"bin/install-db-module",
-		"bin/install-db-project",
-		"bin/drop-nodejs-cache",
-		"bin/memcached",
-		"bin/database",
-		"bin/nfs",
-		"bin/virtualhost",
-		"bin/git",
-		"bin/gulp",
-		"bin/merge-migrations",
-		"bin/unload-module",
-		"bin/undo"
 	***REMOVED***
 }
