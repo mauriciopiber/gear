@@ -144,6 +144,7 @@ class FilterService extends AbstractMvc implements AbstractMvcInterface
         // }
 
         $options = [
+            'implements' => $this->getCode()->getImplements($this->src),
             'classDocs' => $this->getCode()->getClassDocs($this->src),
             'namespace' => $this->getCode()->getNamespace($this->src),
             'extends'    => $this->getCode()->getExtends($this->src),

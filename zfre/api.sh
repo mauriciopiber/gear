@@ -24,26 +24,24 @@ php public/index.php gear module src create \
 php public/index.php gear module src create \
   $MODULE \
   $BASEPATH \
-  --name=FoodService \
-  --namespace=Food\\Service \
+  --name=FoodFilter \
+  --namespace=Food\\Filter \
   --service=factories \
-  --dependency=Food\\Repository\\FoodRepository \
-  --type=Service \
-  --extends=\\Gear\\Rest\\Service\\AbstractRestService
+  --implements=\\Gear\\Rest\\Filter\\RestFilterInterface \
+  --dependency="\\Zend\\Db\\Adapter\\Adapter:ig_t" \
+  --type=Filter \
+  --extends=\\Zend\\InputFilter\\InputFilter
 
 
 php public/index.php gear module src create \
   $MODULE \
   $BASEPATH \
-  --name=FoodFilter \
-  --namespace=Food\\Filter \
+  --name=FoodService \
+  --namespace=Food\\Service \
   --service=factories \
-  --implements="PbrFood\Rest\Filter\RestFilterInterface" \
-  --dependency="\Zend\Db\Adapter\Adapter:ig_t" \
-  --type=Filter \
-  --extends=\\Zend\\InputFilter\\InputFilter
-
-exit 1
+  --dependency=Food\\Filter\\FoodFilter,Food\\Repository\\FoodRepository \
+  --type=Service \
+  --extends=\\Gear\\Rest\\Service\\AbstractRestService
 
 php public/index.php gear module controller create \
   $MODULE \
@@ -53,16 +51,24 @@ php public/index.php gear module controller create \
   --type=Rest \
   --extends=\\Gear\\Rest\\Controller\\AbstractRestController
 
-cat ../gear-package/my-api-module/schema/module.json
-
-php public/index.php gear schema dump my-api-module /var/www/gear-package
 
 php public/index.php gear module activity create \
   $MODULE \
   $BASEPATH \
   FoodController \
-  --name=Create \
+  --name=GetList \
   --controllerNamespace=Food\\Controller
+
+php public/index.php gear module activity create \
+  $MODULE \
+  $BASEPATH \
+  FoodController \
+  --name=Get \
+  --controllerNamespace=Food\\Controller
+
+exit 1
+
+
 
 php public/index.php gear module activity create \
   $MODULE \
