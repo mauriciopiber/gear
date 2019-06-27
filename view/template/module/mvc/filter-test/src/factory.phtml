@@ -1,0 +1,27 @@
+namespace <?php echo $this->module;?>Test\<?php echo $this->namespaceFile;?>;
+
+use PHPUnit\Framework\TestCase;
+use <?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>;
+
+/**
+ * @group Filter
+ */
+class <?php echo $this->className;?>Test extends TestCase
+{
+    public function setUp() : void
+    {
+        parent::setUp();
+<?php echo $this->dependency;?>
+
+<?php echo $this->constructor;?>
+    }
+
+    public function testClassExists()
+    {
+        $this->assertInstanceOf(
+            '<?php echo $this->module;?>\<?php echo $this->namespace;?>\<?php echo $this->className;?>',
+            $this->filter->getInputFilter()
+        );
+    }
+<?php echo $this->functions;?>
+}

@@ -31,15 +31,19 @@ php public/index.php gear module src create \
   --type=Service \
   --extends=\\Gear\\Rest\\Service\\AbstractRestService
 
-exit 1
 
 php public/index.php gear module src create \
   $MODULE \
   $BASEPATH \
   --name=FoodFilter \
   --namespace=Food\\Filter \
+  --service=factories \
+  --implements="PbrFood\Rest\Filter\RestFilterInterface" \
+  --dependency="\Zend\Db\Adapter\Adapter:ig_t" \
   --type=Filter \
-  --extends=\\Gear\\Rest\\Filter\\AbstractRestFilter
+  --extends=\\Zend\\InputFilter\\InputFilter
+
+exit 1
 
 php public/index.php gear module controller create \
   $MODULE \

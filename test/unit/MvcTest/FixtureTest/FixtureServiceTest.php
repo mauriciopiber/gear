@@ -122,6 +122,8 @@ class FixtureServiceTest extends TestCase
 
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
 
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
+
         $file = $this->fixture->createFixture($this->db);
 
         $expected = $this->templates.'/fixture-with-column-upload-image.phtml';
@@ -250,6 +252,7 @@ class FixtureServiceTest extends TestCase
         $tableUrl = $this->string->str('url', $tableName);
         $primaryKey = sprintf('id_%s', $tableUrl);
 
+        $this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -299,6 +302,7 @@ class FixtureServiceTest extends TestCase
         $tableUrl = $this->string->str('url', $tableName);
         $primaryKey = sprintf('id_%s', $tableUrl);
 
+        $this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -332,6 +336,7 @@ class FixtureServiceTest extends TestCase
      */
     public function testCreateCreateControllerDb($columns, $template)
     {
+        //$this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -383,6 +388,7 @@ EOS;
 
     public function testFixtureSingleDependency()
     {
+        //$this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->db = new Db(['table' => 'SingleDbTable'***REMOVED***);
@@ -424,6 +430,7 @@ EOS;
 
     public function testFixtureDependency()
     {
+        //$this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->db = new Db(['table' => 'SingleDbTable'***REMOVED***);

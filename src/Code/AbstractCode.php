@@ -27,7 +27,7 @@ abstract class AbstractCode extends AbstractCodeBase
         }
 
         if ($src->getNamespace() === null) {
-            $namespace = $this->getModule()->getModuleName().'\\';
+            $namespace = $this->getModule()->getNamespace().'\\';
 
             if ($src instanceof Controller) {
                 $namespace .= 'Controller';

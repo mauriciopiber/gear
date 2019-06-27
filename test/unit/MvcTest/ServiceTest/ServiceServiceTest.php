@@ -71,7 +71,7 @@ class ServiceServiceTest extends TestCase
     {
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
@@ -184,7 +184,7 @@ class ServiceServiceTest extends TestCase
      */
     public function testCreateSrc($data, $template)
     {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {

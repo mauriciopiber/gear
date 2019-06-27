@@ -21,7 +21,7 @@ class CodeTest extends TestCase
         parent::setUp();
 
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->module->getModuleName()->willReturn('MyModule');
+        $this->module->getNamespace()->willReturn('MyModule');
 
         $this->string = new StringService();
 
