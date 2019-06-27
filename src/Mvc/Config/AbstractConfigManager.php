@@ -3,7 +3,6 @@ namespace Gear\Mvc\Config;
 
 //use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\AbstractConfigManagerInterface;
-use Gear\Creator\CodeTrait;
 //use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Module\Structure\ModuleStructure;
@@ -11,7 +10,8 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
-use Gear\Creator\Code;
+use Gear\Code\Code;
+use Gear\Code\CodeTrait;
 use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Mvc\LanguageService;

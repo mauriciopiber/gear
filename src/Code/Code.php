@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Code;
 
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
@@ -10,7 +10,7 @@ use Gear\Creator\FileUseAttributeInterface;
 use Gear\Creator\FileUseInterface;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
 use Gear\Creator\Component\Constructor\ConstructorParams;
-use Gear\Creator\Codes\Code\AbstractCode;
+use Gear\Code\AbstractCode;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;
@@ -18,6 +18,7 @@ use Gear\Util\String\StringServiceTrait;
 use Gear\Util\Dir\DirService;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Schema\AbstractObject;
+use Gear\Code\ClassObject;
 
 class Code extends AbstractCode implements
     FileExtendsInterface,

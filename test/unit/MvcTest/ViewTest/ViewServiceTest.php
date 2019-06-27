@@ -16,7 +16,7 @@ use Gear\Mvc\View\ViewService;
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Column\Varchar\Varchar;
 use GearTest\UtilTestTrait;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 
 /**
  * @group View

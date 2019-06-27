@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\Codes\CodeTest\FactoryCode;
+namespace Gear\Code\FactoryCode;
 
-use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
+use Gear\Code\FactoryCode\FactoryCodeTest;
 
 /**
  * PHP Version 5
@@ -19,7 +19,7 @@ trait FactoryCodeTestTrait
     /**
      * Get Factory Code Test
      *
-     * @return Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest
+     * @return Gear\Code\FactoryCode\FactoryCodeTest
      */
     public function getFactoryCodeTest()
     {
@@ -31,7 +31,7 @@ trait FactoryCodeTestTrait
      *
      * @param FactoryCodeTest $factoryCodeTest Factory Code Test
      *
-     * @return \Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest
+     * @return \Gear\Code\FactoryCode\FactoryCodeTest
      */
     public function setFactoryCodeTest(
         FactoryCodeTest $factoryCodeTest

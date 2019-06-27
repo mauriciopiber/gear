@@ -7,7 +7,7 @@ use Gear\Mvc\AbstractMvcInterface;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Config\ServiceManager;

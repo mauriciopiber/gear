@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\Codes\Code\FactoryCode;
+namespace Gear\Code\FactoryCode;
 
-use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
+use Gear\Code\FactoryCode\FactoryCode;
 
 /**
  * PHP Version 5
@@ -19,7 +19,7 @@ trait FactoryCodeTrait
     /**
      * Get Factory Code
      *
-     * @return Gear\Creator\Codes\Code\FactoryCode\FactoryCode
+     * @return Gear\Code\FactoryCode\FactoryCode
      */
     public function getFactoryCode()
     {
@@ -31,7 +31,7 @@ trait FactoryCodeTrait
      *
      * @param FactoryCode $factoryCode Factory Code
      *
-     * @return \Gear\Creator\Codes\Code\FactoryCode\FactoryCode
+     * @return \Gear\Code\FactoryCode\FactoryCode
      */
     public function setFactoryCode(
         FactoryCode $factoryCode

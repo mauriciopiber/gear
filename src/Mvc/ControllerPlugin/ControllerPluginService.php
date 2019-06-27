@@ -5,7 +5,7 @@ use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ControllerPlugin\ControllerPluginTestServiceTrait;
 use Gear\Mvc\Config\ControllerPluginManagerTrait;
 use Gear\Schema\Src\Src;
-use Gear\Creator\CodeTrait;
+use Gear\Code\CodeTrait;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcInterface;
 

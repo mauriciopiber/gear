@@ -19,7 +19,7 @@ class ValueObjectTestServiceTest extends TestCase
         $this->stringService = $this->prophesize('Gear\Util\String\StringService');
         $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
         $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->codeTest = $this->prophesize('Gear\Creator\CodeTest');
+        $this->codeTest = $this->prophesize('Gear\Code\CodeTest');
 
         $this->service = new ValueObjectTestService(
             $this->module->reveal(),

@@ -10,7 +10,7 @@ use GearTest\ScopeTrait;
 use \Gear\Module;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\Injector\Injector;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;

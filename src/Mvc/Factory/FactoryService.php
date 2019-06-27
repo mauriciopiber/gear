@@ -18,19 +18,19 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Mvc\Factory\Exception\WrongType;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
-use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
+use Gear\Code\FactoryCode\FactoryCodeTrait;
 use Gear\Mvc\AbstractMvcInterface;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use Gear\Creator\Injector\Injector;
-use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
-//use Gear\Creator\Codes\Code\FactoryCode\FactoryCodeTrait;
+use Gear\Code\FactoryCode\FactoryCode;
+//use Gear\Code\FactoryCode\FactoryCodeTrait;
 
 class FactoryService extends AbstractMvc
 {

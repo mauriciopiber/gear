@@ -1,8 +1,8 @@
 <?php
-namespace GearTest\CreatorTest;
+namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Creator\ClassDependencyObject;
+use Gear\Code\ClassDependencyObject;
 
 class ClassDependencyObjectTest extends TestCase
 {
@@ -61,7 +61,7 @@ class ClassDependencyObjectTest extends TestCase
             ***REMOVED***
         ***REMOVED***;
         // [['Repository\Dependency'***REMOVED***, 'Dependency, 'Repository', 'Dependency'***REMOVED***;
-        
+
     }
 
     /**

@@ -8,7 +8,7 @@ use Gear\Creator\Template\TemplateService    ;
 use Gear\Util\File\FileService;
 use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\Dir\DirService;
 use Gear\Mvc\InterfaceService;
 use GearTest\UtilTestTrait;

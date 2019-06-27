@@ -8,7 +8,7 @@ use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 use Gear\Table\TableService\TableService;
-use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
+use Gear\Code\FactoryCode\FactoryCodeTest;
 
 /**
  * @group db-factory

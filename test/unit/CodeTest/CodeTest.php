@@ -4,7 +4,7 @@ namespace GearTest\CreatorTest;
 use PHPUnit\Framework\TestCase;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\ControllerDependency;
 use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;

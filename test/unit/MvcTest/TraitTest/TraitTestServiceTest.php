@@ -65,7 +65,7 @@ class TraitTestServiceTest extends TestCase
     {
         $this->assertInstanceOf('Gear\Module\Structure\ModuleStructure', $this->traitTest->getModule());
         $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->traitTest->getFileCreator());
-        $this->assertInstanceOf('Gear\Creator\CodeTest', $this->traitTest->getCodeTest());
+        $this->assertInstanceOf('Gear\Code\CodeTest', $this->traitTest->getCodeTest());
     }
 
 }

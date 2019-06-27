@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
 use GearTest\UtilTestTrait;
 use Gear\Module;
@@ -123,7 +123,7 @@ class ApiControllerTestServiceTest extends TestCase
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
 
-        $this->codeTest = new \Gear\Creator\CodeTest(
+        $this->codeTest = new \Gear\Code\CodeTest(
             $this->module->reveal(),
             $this->string,
             new \Gear\Util\Dir\DirService(),

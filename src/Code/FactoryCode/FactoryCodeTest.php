@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\Codes\CodeTest\FactoryCode;
+namespace Gear\Code\FactoryCode;
 
-use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
+use Gear\Code\AbstractCodeTest;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;

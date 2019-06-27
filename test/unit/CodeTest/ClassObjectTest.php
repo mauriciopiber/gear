@@ -1,8 +1,8 @@
 <?php
-namespace GearTest\CreatorTest;
+namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Creator\ClassObject;
+use Gear\Code\ClassObject;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Src\Src;
 
@@ -13,7 +13,7 @@ class ClassObjectTest extends TestCase
         parent::setUp();
         $this->module = 'Module';
     }
-    
+
     public function testController()
     {
         $controller = new Controller(
@@ -21,19 +21,19 @@ class ClassObjectTest extends TestCase
                 'name' => 'MyController',
                 'namespace' => 'AnotherNamespace',
                 'type' => 'Action'
-            ***REMOVED***    
+            ***REMOVED***
         );
-        
-        
+
+
         $class = new ClassObject($controller, $this->module);
-        
+
         $this->assertEquals($class->getNamespace(), 'Module\AnotherNamespace');
         $this->assertEquals($class->getFullName(), 'Module\AnotherNamespace\MyController');
         $this->assertEquals($class->getAbsoluteFullName(), '\Module\AnotherNamespace\MyController');
         $this->assertEquals($class->getName(), 'MyController');
-        
+
     }
-    
+
     public function testSrc()
     {
         $src = new Src(
@@ -43,14 +43,13 @@ class ClassObjectTest extends TestCase
                 'type' => 'Service'
             ***REMOVED***
         );
-        
-        
+
+
         $class = new ClassObject($src, $this->module);
-        
+
         $this->assertEquals($class->getNamespace(), 'Module\AnotherNamespace');
         $this->assertEquals($class->getFullName(), 'Module\AnotherNamespace\MyService');
         $this->assertEquals($class->getAbsoluteFullName(), '\Module\AnotherNamespace\MyService');
         $this->assertEquals($class->getName(), 'MyService');
     }
 }
-

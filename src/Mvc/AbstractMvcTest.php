@@ -16,15 +16,14 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use Gear\Creator\CodeTest;
-use Gear\Creator\CodeTestTrait;
+use Gear\Code\CodeTest;
+use Gear\Code\CodeTestTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
-
 
 abstract class AbstractMvcTest
 {

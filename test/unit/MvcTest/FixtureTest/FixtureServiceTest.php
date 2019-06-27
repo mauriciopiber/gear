@@ -13,7 +13,7 @@ use Gear\Creator\Template\TemplateService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
 use Gear\Column\Integer\ForeignKey;

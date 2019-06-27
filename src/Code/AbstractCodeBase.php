@@ -1,5 +1,5 @@
 <?php
-namespace Gear\Creator\Codes;
+namespace Gear\Code;
 
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Util\Dir\DirServiceAwareInterface;

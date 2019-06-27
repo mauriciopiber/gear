@@ -37,7 +37,7 @@ class FactoryServiceTest extends TestCase
 
         $fileCreator    = $this->createFileCreator();
         $this->string  = new \Gear\Util\String\StringService();
-        $this->codeFactory = new \Gear\Creator\Codes\Code\FactoryCode\FactoryCode(
+        $this->codeFactory = new \Gear\Code\FactoryCode\FactoryCode(
             $this->module->reveal(),
             $this->string,
             new \Gear\Util\Dir\DirService()

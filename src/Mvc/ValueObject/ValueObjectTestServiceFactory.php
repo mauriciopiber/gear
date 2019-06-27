@@ -30,7 +30,7 @@ class ValueObjectTestServiceFactory implements FactoryInterface
             $container->get('Gear\Util\String\StringService'),
             $container->get(FileCreator::class),
             $container->get(ModuleStructure::class),
-            $container->get('Gear\Creator\CodeTest')
+            $container->get('Gear\Code\CodeTest')
         );
 
         return $factory;

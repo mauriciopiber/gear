@@ -18,8 +18,8 @@ return array_merge_recursive(
             'Gear\Table\Metadata'              => 'Gear\Table\Metadata\MetadataFactory',
             'Gear\Table\Table'                 => 'Gear\Table\TableService\TableFactory',
             'Gear\Creator\Template\TemplateService'  => 'Gear\Creator\Template\TemplateServiceFactory',
-            'Gear\Creator\Code'                => 'Gear\Creator\CodeFactory',
-            'Gear\Creator\CodeTest'            => 'Gear\Creator\CodeTestFactory',
+            'Gear\Code\Code'                => 'Gear\Code\CodeFactory',
+            'Gear\Code\CodeTest'            => 'Gear\Code\CodeTestFactory',
         ***REMOVED***,
         'invokables' => [
             'Gear\Table\TableService'          => 'Gear\Table\TableService\TableService',

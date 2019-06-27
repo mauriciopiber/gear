@@ -1,8 +1,8 @@
 <?php
-namespace Gear\Creator\Codes\Code;
+namespace Gear\Code;
 
-use Gear\Creator\Codes\AbstractCodeBase;
-use Gear\Creator\ClassObject;
+use Gear\CodeAbstractCodeBase;
+use Gear\Code\ClassObject;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\App\App;

@@ -1,26 +1,24 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Code\FactoryCode;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Gear\Creator\Code;
+use Gear\Code\FactoryCode\FactoryCode;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;
-use Gear\Creator\Component\Constructor\ConstructorParams;
 
-class CodeFactory implements FactoryInterface
+class FactoryCodeFactory implements FactoryInterface
 {
     public function __invoke(
         ContainerInterface $container,
         $requestedName = null,
         $options = [***REMOVED***
     ) {
-        $factory = new Code(
+        $factory = new FactoryCode(
             $container->get(ModuleStructure::class),
             $container->get(StringService::class),
-            $container->get(DirService::class),
-            $container->get(ConstructorParams::class)
+            $container->get(DirService::class)
         );
 
         return $factory;

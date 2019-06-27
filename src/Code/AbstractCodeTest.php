@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\Codes\CodeTest;
+namespace Gear\Code;
 
-use Gear\Creator\Codes\AbstractCodeBase;
+use Gear\CodeAbstractCodeBase;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\App\App;

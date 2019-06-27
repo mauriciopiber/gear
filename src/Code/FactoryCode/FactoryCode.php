@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator\Codes\Code\FactoryCode;
+namespace Gear\Code\FactoryCode;
 
-use Gear\Creator\Codes\Code\AbstractCode;
+use Gear\Code\AbstractCode;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;

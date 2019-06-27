@@ -14,7 +14,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Template\TemplateService;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\ControllerDependency;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\Vector\ArrayService;
 use GearTest\MvcTest\ControllerTest\WebTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;

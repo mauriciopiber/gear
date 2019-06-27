@@ -1,7 +1,7 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Code;
 
-use Gear\Creator\Code;
+use Gear\Code\Code;
 
 trait CodeTrait
 {

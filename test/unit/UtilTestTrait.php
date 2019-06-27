@@ -12,7 +12,7 @@ use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Table\TableService\TableService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
@@ -216,7 +216,7 @@ trait UtilTestTrait
             return $this->codeTest;
         }
 
-        $this->codeTest = new \Gear\Creator\CodeTest(
+        $this->codeTest = new \Gear\Code\CodeTest(
             $this->createModule()->reveal(),
             $this->createString(),
             new DirService(),

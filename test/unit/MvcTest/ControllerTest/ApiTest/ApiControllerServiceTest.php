@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\FileCreator\FileCreator;
 use GearTest\UtilTestTrait;
 use Gear\Module;

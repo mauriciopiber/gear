@@ -8,7 +8,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use GearTest\UtilTestTrait;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\Vector\ArrayService;
 use Gear\Mvc\LanguageService;
 

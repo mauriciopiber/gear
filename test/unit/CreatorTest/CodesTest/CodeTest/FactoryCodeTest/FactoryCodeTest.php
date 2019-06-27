@@ -2,7 +2,7 @@
 namespace GearTest\CreatorTest\CodesTest\CodeTest\FactoryCodeTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Creator\Codes\Code\FactoryCode\FactoryCode;
+use Gear\Code\FactoryCode\FactoryCode;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
@@ -25,6 +25,6 @@ class FactoryCodeTest extends TestCase
 
     public function testClassExists()
     {
-        $this->assertInstanceOf('Gear\Creator\Codes\Code\FactoryCode\FactoryCode', $this->service);
+        $this->assertInstanceOf('Gear\Code\FactoryCode\FactoryCode', $this->service);
     }
 }

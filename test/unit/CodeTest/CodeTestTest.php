@@ -2,7 +2,7 @@
 namespace GearTest\CreatorTest;
 
 use PHPUnit\Framework\TestCase;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;
 use Gear\Util\Vector\ArrayService;

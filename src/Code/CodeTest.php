@@ -1,11 +1,11 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Code;
 
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
 use Gear\Schema\App\App;
-use Gear\Creator\Codes\CodeTest\AbstractCodeTest;
+use Gear\Code\AbstractCodeTest;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;

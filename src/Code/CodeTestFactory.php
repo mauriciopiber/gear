@@ -1,9 +1,9 @@
 <?php
-namespace Gear\Creator;
+namespace Gear\Code;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;
