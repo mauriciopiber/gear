@@ -216,23 +216,6 @@ class ModuleService
         $this->actionConstructor = $actionConstructor;
     }
 
-    protected $request;
-
-    public function getRequest()
-    {
-        if (!isset($this->request)) {
-            $this->request = $this->get('application')->getMvcEvent()->getRequest();
-        }
-        return $this->request;
-    }
-
-    public function setRequest($request)
-    {
-        $this->request = $request;
-        return $this;
-    }
-
-
     public function getModuleNamespace()
     {
         if (!strpos($this->getModule()->getModuleName(), '\\') !== false) {
@@ -472,8 +455,10 @@ class ModuleService
             case 'web':
                 $template = 'web';
                 break;
-            case 'cli':
             case 'api':
+                $template = 'api';
+                break;
+            case 'cli':
             case 'src':
             case 'src-zf2':
             case 'src-zf3':
@@ -485,6 +470,13 @@ class ModuleService
         $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $template));
         $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
+        $file->setLocation($this->getModule()->getMainFolder());
+        $file->render();
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/jenkinsfile/pipeline-%s.phtml', $template));
+        $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('pipeline.yaml');
         $file->setLocation($this->getModule()->getMainFolder());
         return $file->render();
     }

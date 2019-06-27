@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "cakephp/cache",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cache.git",
-                "reference": "a354c07ba284508d119d0a05e2f9583b592a2e64"
+                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-a354c07ba284508d119d0a05e2f9583b592a2e64-zip-2994e3.zip",
-                "reference": "a354c07ba284508d119d0a05e2f9583b592a2e64"
+                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-f7ff72a590f9dc69a9788fb78045a70fc86723fc-zip-a1eb27.zip",
+                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -47,20 +47,20 @@
                 "caching",
                 "cakephp"
             ***REMOVED***,
-            "time": "2019-04-17T01:27:05+00:00"
+            "time": "2019-06-24T11:34:33+00:00"
         },
         {
             "name": "cakephp/collection",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/collection.git",
-                "reference": "4c3b790d4703cc88cb75815b0e7f02a1a82b8d57"
+                "reference": "5f22678fc2d151082e331b20677d9696563af549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/collection/cakephp-collection-4c3b790d4703cc88cb75815b0e7f02a1a82b8d57-zip-9ac0a0.zip",
-                "reference": "4c3b790d4703cc88cb75815b0e7f02a1a82b8d57"
+                "url": "https://satis.piber.network/dist/cakephp/collection/cakephp-collection-5f22678fc2d151082e331b20677d9696563af549-zip-e4e0bb.zip",
+                "reference": "5f22678fc2d151082e331b20677d9696563af549"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -92,11 +92,11 @@
                 "collections",
                 "iterators"
             ***REMOVED***,
-            "time": "2019-01-08T15:11:44+00:00"
+            "time": "2019-02-26T20:10:41+00:00"
         },
         {
             "name": "cakephp/core",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
@@ -145,16 +145,16 @@
         },
         {
             "name": "cakephp/database",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "f1659560bf7d58bfb73c7a00c450ee45ceee9fdb"
+                "reference": "5b13801f599e715841ef3b54ef6303fad647ed66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/database/cakephp-database-f1659560bf7d58bfb73c7a00c450ee45ceee9fdb-zip-9fcc3f.zip",
-                "reference": "f1659560bf7d58bfb73c7a00c450ee45ceee9fdb"
+                "url": "https://satis.piber.network/dist/cakephp/database/cakephp-database-5b13801f599e715841ef3b54ef6303fad647ed66-zip-196c56.zip",
+                "reference": "5b13801f599e715841ef3b54ef6303fad647ed66"
             },
             "require": {
                 "cakephp/cache": "^3.6.0",
@@ -188,20 +188,20 @@
                 "database abstraction",
                 "pdo"
             ***REMOVED***,
-            "time": "2019-06-19T16:05:01+00:00"
+            "time": "2019-06-25T10:56:49+00:00"
         },
         {
             "name": "cakephp/datasource",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "09f54671c8af4f588c3712060d8fe457b9690b76"
+                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-09f54671c8af4f588c3712060d8fe457b9690b76-zip-e59140.zip",
-                "reference": "09f54671c8af4f588c3712060d8fe457b9690b76"
+                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-a8fb302598d0038c8b5f0f83763dded27ef4e780-zip-d76841.zip",
+                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -237,11 +237,11 @@
                 "entity",
                 "query"
             ***REMOVED***,
-            "time": "2019-04-29T13:46:25+00:00"
+            "time": "2019-06-13T02:05:57+00:00"
         },
         {
             "name": "cakephp/log",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/log.git",
@@ -285,7 +285,7 @@
         },
         {
             "name": "cakephp/utility",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
@@ -845,16 +845,16 @@
         },
         {
             "name": "mauriciopiber/gear-util",
-            "version": "1.0.0-alpha2",
+            "version": "1.0.0-alpha3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-util.git",
-                "reference": "25e519542c65afeec13d438c3da777692ee46e39"
+                "reference": "c462d2057dc68e27570709d89ea0548478294a6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-util/mauriciopiber-gear-util-25e519542c65afeec13d438c3da777692ee46e39-zip-d472cc.zip",
-                "reference": "25e519542c65afeec13d438c3da777692ee46e39"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-util/mauriciopiber-gear-util-c462d2057dc68e27570709d89ea0548478294a6b-zip-dcb78f.zip",
+                "reference": "c462d2057dc68e27570709d89ea0548478294a6b"
             },
             "require": {
                 "php": "^7.0",
@@ -891,10 +891,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-util/tree/1.0.0-alpha2",
+                "source": "https://github.com/mauriciopiber/gear-util/tree/1.0.0-alpha3",
                 "issues": "https://github.com/mauriciopiber/gear-util/issues"
             },
-            "time": "2019-06-07T04:34:14+00:00"
+            "time": "2019-06-27T22:35:07+00:00"
         },
         {
             "name": "mauriciopiber/gear-version",

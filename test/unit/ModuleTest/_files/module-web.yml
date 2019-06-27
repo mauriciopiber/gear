@@ -4,7 +4,7 @@ files:
     options:
       module: 'WebModule'
     location: 'config'
-    filename: 'application.config.php'  
+    filename: 'application.config.php'
   1:
     template: 'template/module/config/autoload/global.phtml'
     options:
@@ -16,25 +16,25 @@ files:
     options:
       module: 'web-module'
     location: 'config/autoload'
-    filename: 'local.php'        
+    filename: 'local.php'
   3:
     template: 'template/module/public/index.phtml'
     location: 'public'
-    filename: 'index.php'        
+    filename: 'index.php'
   4:
     template: 'template/module/public/htaccess.phtml'
     location: 'public'
-    filename: '.htaccess'       
+    filename: '.htaccess'
   5:
     template: 'template/module/init_autoloader.phtml'
-    filename: 'init_autoloader.php'           
+    filename: 'init_autoloader.php'
   6:
     template: 'template/module/script/deploy-development/deploy-development-web.phtml'
     options:
       module: 'WebModule'
       moduleUrl: 'web-module'
     location: 'script'
-    filename: 'deploy-development.sh'    
+    filename: 'deploy-development.sh'
   7:
     template: 'template/module/script/deploy-testing/deploy-testing-web.phtml'
     options:
@@ -50,20 +50,20 @@ files:
 #      git: 'git@bitbucket.org:mauriciopiber/module.git'
 #      module: 'WebModule'
 #      dbFile: 'web-module.mysql.sql'
-#    filename: 'deploy-staging.sh'   
+#    filename: 'deploy-staging.sh'
 #  90:
 #    template: 'template/module/script/install-remote-staging.phtml'
 #    location: 'script'
 #    options:
 #      host: null
 #      moduleUrl: 'web-module'
-#    filename: 'install-staging.sh'               
+#    filename: 'install-staging.sh'
   8:
     template: 'template/module/script/load-web.phtml'
     options:
       module: 'web_module'
     location: 'script'
-    filename: 'load.sh'       
+    filename: 'load.sh'
   9:
     template: 'template/module/phinx.phtml'
     options:
@@ -85,14 +85,18 @@ files:
       moduleUrl: 'web-module'
       layout: 'gear-admin-interno'
     location: 'src'
-    filename: 'Module.php'         
-    
+    filename: 'Module.php'
+
   13:
     template: 'template/module/jenkinsfile/jenkinsfile-web.phtml'
     options:
       moduleUrl: 'web-module'
-    filename: 'Jenkinsfile'      
-    
+    filename: 'Jenkinsfile'
   14:
+    template: 'template/module/jenkinsfile/pipeline-web.phtml'
+    options:
+      moduleUrl: 'web-module'
+    filename: 'pipeline.yaml'
+  15:
     template: 'template/module/git-ignore/gitignore-web.phtml'
-    filename: '.gitignore'                       
+    filename: '.gitignore'
