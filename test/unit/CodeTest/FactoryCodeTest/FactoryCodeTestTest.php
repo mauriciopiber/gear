@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\CreatorTest\CodesTest\CodeTestTest\FactoryCodeTest;
+namespace GearTest\CodeTest\FactoryCodeTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Code\FactoryCode\FactoryCodeTest;

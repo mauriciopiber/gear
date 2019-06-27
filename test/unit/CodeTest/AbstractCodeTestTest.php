@@ -1,5 +1,5 @@
 <?php
-namespace GearTest\CreatorTest\CodesTest\CodeTestTest;
+namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
 use Gear\Code\AbstractCodeTest;
