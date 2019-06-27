@@ -70,7 +70,7 @@ class Code extends AbstractCode implements
     // {
     //   $object = '%s\%s\%s';
     //   $namespace = ($controller->getNamespace() !== null) ? $controller->getNamespace() : 'Controller';
-    //   $invokeName = sprintf($object, $this->getModule()->getModuleName(), $namespace, $controller->getNameOff());
+    //   $invokeName = sprintf($object, $this->getModule()->getNamespace(), $namespace, $controller->getNameOff());
     //   return $invokeName;
     // }
 
@@ -193,10 +193,10 @@ EOS;
                     $type = $data->getType();
                 }
 
-                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName();
+                return $this->getModule()->getNamespace().'\\'.$type.'\\'.$data->getName();
             }
 
-            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
             $namespace .= $data->getNamespace().'\\'.$data->getName();
         }
@@ -204,10 +204,10 @@ EOS;
         if ($data instanceof Controller) {
             if (empty($data->getNamespace())) {
                 $type = 'Controller';
-                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$data->getName();
+                return $this->getModule()->getNamespace().'\\'.$type.'\\'.$data->getName();
             }
 
-            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+            $namespace = ($data->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
             $namespace .= $data->getNamespace().'\\'.$data->getName();
         }
@@ -224,10 +224,10 @@ EOS;
 
             if (empty($controller->getNamespace())) {
                 $type = 'Controller';
-                return $this->getModule()->getModuleName().'\\'.$type.'\\'.$name;
+                return $this->getModule()->getNamespace().'\\'.$type.'\\'.$name;
             }
 
-            $namespace = ($controller->getNamespace() != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+            $namespace = ($controller->getNamespace() != '\\') ? $this->getModule()->getNamespace().'\\' : '';
 
             $namespace .= $controller->getNamespace().'\\'.$name;
         }
@@ -295,7 +295,7 @@ EOS;
 
     public function getConstructorDocs($data)
     {
-        $classObject = new ClassObject($data, $this->getModule()->getModuleName());
+        $classObject = new ClassObject($data, $this->getModule()->getNamespace());
 
         $params = $this->getDocsParams($classObject->getDependency());
         $namespace = $classObject->getName();
@@ -352,7 +352,7 @@ EOS;
         $constructorData = [***REMOVED***;
 
         foreach ($dependency as $i => $dependencyInstance) {
-            $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getModuleName(), $i);
+            $dependencyObject = new ClassDependencyObject($dependencyInstance, $this->getModule()->getNamespace(), $i);
             $item = $dependencyObject->getName();
             $name = $this->str('class', $item);
 
@@ -490,7 +490,7 @@ EOS;
 
             $depNamespace = ($srcType[0***REMOVED*** == '\\')
                 ? sprintf('%s\%s%s', ltrim($srcType, '\\'), $srcName, $expand)
-                : sprintf('%s\%s\%s%s', $this->getModule()->getModuleName(), $srcType, $srcName, $expand);
+                : sprintf('%s\%s\%s%s', $this->getModule()->getNamespace(), $srcType, $srcName, $expand);
 
             $deps[***REMOVED*** = $depNamespace;
         }
@@ -672,7 +672,7 @@ EOS;
             */
 
             if (in_array($dependencyClass, $ignoreList)
-                || in_array($this->getModule()->getModuleName().'\\'.$dependencyClass, $ignoreList)
+                || in_array($this->getModule()->getNamespace().'\\'.$dependencyClass, $ignoreList)
             ) {
                 continue;
             }

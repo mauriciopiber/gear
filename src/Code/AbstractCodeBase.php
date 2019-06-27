@@ -177,7 +177,7 @@ abstract class AbstractCodeBase implements
             $item = $item['class'***REMOVED***;
         }
 
-        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getModuleName().'\\' : '';
+        $namespace = ($item[0***REMOVED*** != '\\') ? $this->getModule()->getNamespace().'\\' : '';
         $item = ltrim($item, '\\');
         $extendsItem = explode('\\', $item);
         return $namespace.implode('\\', $extendsItem);
