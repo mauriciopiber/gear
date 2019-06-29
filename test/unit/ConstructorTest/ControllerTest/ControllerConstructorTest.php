@@ -2,6 +2,8 @@
 namespace GearTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\TableObject;
+use Gear\Schema\Db\Db;
 use Gear\Constructor\Controller\ControllerConstructor;
 use Gear\Schema\Controller\Controller;
 use Gear\Console\ConsoleValidation\ConsoleValidationStatus;
@@ -160,10 +162,10 @@ class ControllerConstructorTest extends TestCase
      */
     public function testCreateActionDbController()
     {
-        $this->db = $this->prophesize('Gear\Schema\Db\Db');
+        $this->db = $this->prophesize(Db::class);
         $this->db->getTable()->willReturn('My')->shouldBeCalled();
 
-        $this->controller = $this->prophesize('Gear\Schema\Controller\Controller');
+        $this->controller = $this->prophesize(Controller::class);
         $this->controller->getDb()->willReturn($this->db->reveal())->shouldBeCalled();
         $this->controller->getType()->willReturn('Action')->shouldBeCalled();
 
@@ -177,7 +179,7 @@ class ControllerConstructorTest extends TestCase
             false
         )->willReturn($this->controller->reveal())->shouldBeCalled();
 
-        $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+        $this->tableObject = $this->prophesize(TableObject::class);
         $this->tableService->getTableObject('My')->willReturn($this->tableObject->reveal())->shouldBeCalled();
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
 
@@ -209,7 +211,7 @@ class ControllerConstructorTest extends TestCase
      */
     public function testCreateControllerReturnNullWithoutAType()
     {
-        $this->controller = $this->prophesize('Gear\Schema\Controller\Controller');
+        $this->controller = $this->prophesize(Controller::class);
 
         //$this->consoleValidation = $this->prophesize(ConsoleValidationStatus::class);
 

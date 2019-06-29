@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\ServiceTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Mvc\TraitTestService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
@@ -36,7 +41,7 @@ class ServiceTestServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
         $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new \Gear\Util\String\StringService();
         $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view');
         $template       = new \Gear\Creator\Template\TemplateService($phpRenderer);
@@ -49,7 +54,7 @@ class ServiceTestServiceTest extends TestCase
 
         $this->codeTest = $this->createCodeTest();
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         //$this->service->setTableService($this->table->reveal());
 
         $this->arrayService = new \Gear\Util\Vector\ArrayService();
@@ -68,10 +73,10 @@ class ServiceTestServiceTest extends TestCase
         // $this->service->setModule($this->module->reveal());
         // $this->service->setCodeTest($this->codeTest);
 
-        // $this->factoryTest = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        // $this->factoryTest = $this->prophesize(FactoryTestService::class);
         // $this->service->setFactoryTestService($this->factoryTest->reveal());
 
-        // $this->traitTest = $this->prophesize('Gear\Mvc\TraitTestService');
+        // $this->traitTest = $this->prophesize(TraitTestService::class);
 
 
         // $this->serviceManager = new \Gear\Mvc\Config\ServiceManager(
@@ -82,7 +87,7 @@ class ServiceTestServiceTest extends TestCase
         // $this->serviceManager->setModule($this->module->reveal());
         // $this->service->setServiceManager($this->serviceManager);
 
-        // $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        // $this->schema = $this->prophesize(SchemaService::class);
         // $this->service->setSchemaService($this->schema->reveal());
 
     }
@@ -158,16 +163,16 @@ class ServiceTestServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $schemaService = $this->prophesize(SchemaService::class);
         $schemaService->getSrcByDb($this->db, 'Service')->willReturn($serviceT);
 
-        $this->repository = $this->prophesize('Gear\Schema\Src\Src');
+        $this->repository = $this->prophesize(Src::class);
         $this->repository->getName()->willReturn(sprintf('%sRepository', $table));
         $this->repository->getType()->willReturn('Repository');
         $this->repository->getNamespace()->willReturn($namespace);
         $schemaService->getSrcByDb($this->db, 'Repository')->willReturn($this->repository->reveal())->shouldBeCalled();
 
-        $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+        $this->entity = $this->prophesize(Src::class);
         $this->entity->getName()->willReturn(sprintf('%s', $table));
         $this->entity->getType()->willReturn('Entity');
         $this->entity->getNamespace()->willReturn(null);

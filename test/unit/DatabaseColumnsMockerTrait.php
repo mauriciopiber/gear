@@ -2,6 +2,8 @@
 namespace GearTest;
 
 use Gear\Util\String\StringService;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Module\Structure\ModuleStructure;
 
 trait DatabaseColumnsMockerTrait
 {
@@ -9,7 +11,7 @@ trait DatabaseColumnsMockerTrait
     {
         $this->string = new StringService();
 
-        $this->localModule = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->localModule = $this->prophesize(ModuleStructure::class);
         $this->localModule->getModuleName()->willReturn($module);
 
         $return = [***REMOVED***;
@@ -29,7 +31,7 @@ trait DatabaseColumnsMockerTrait
 
     public function createMetadataColumn($tableName, array $data)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($data['type'***REMOVED***)->shouldBeCalled();
         $column->getName()->willReturn($data['name'***REMOVED***);
         $column->getTableName()->willReturn($tableName);

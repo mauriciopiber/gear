@@ -2,6 +2,9 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerMvcTest\ControllerMvcSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuiteFactory;
 
 /**
@@ -13,14 +16,14 @@ class ControllerMvcSuiteFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator')->reveal())
+        $this->container->get(ControllerMvcGenerator::class)
+            ->willReturn($this->prophesize(ControllerMvcGenerator::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Component\SuperTestFile\SuperTestFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile')->reveal())
+        $this->container->get(SuperTestFile::class)
+            ->willReturn($this->prophesize(SuperTestFile::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ControllerMvcSuiteFactory();

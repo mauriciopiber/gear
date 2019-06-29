@@ -2,12 +2,15 @@
 namespace GearTest;
 
 use Gear\Column\Varchar\UploadImage;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Module\Structure\ModuleStructure;
 
 trait AllColumnsDbTableTrait
 {
     public function prophesizeColumn($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -18,7 +21,7 @@ trait AllColumnsDbTableTrait
 
     public function prophesizeForeignKey($tableName, $columnName, $foreignType, $tableReference = false)
     {
-        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $foreignKey = $this->prophesize(ConstraintObject::class);
         $foreignKey->getType()->willReturn($foreignType)->shouldBeCalled();
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
 
@@ -33,7 +36,7 @@ trait AllColumnsDbTableTrait
     {
         $columns = [***REMOVED***;
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyModule');
 
         $this->string = new \Gear\Util\String\StringService();
@@ -53,7 +56,7 @@ trait AllColumnsDbTableTrait
 
     public function getAllPossibleColumns($tableName = 'table')
     {
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyModule');
 
         $this->string = new \Gear\Util\String\StringService();
@@ -153,7 +156,7 @@ trait AllColumnsDbTableTrait
         );
 
 
-        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn = $this->prophesize(ColumnObject::class);
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('varchar_column');
         $varcharColumn->getTableName()->willReturn($tableName);

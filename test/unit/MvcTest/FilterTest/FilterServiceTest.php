@@ -2,6 +2,14 @@
 namespace GearTest\MvcTest\FilterTest;
 
 use PHPUnit\Framework\TestCase as TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Mvc\TraitService;
+use Gear\Mvc\InterfaceService;
+use Gear\Mvc\Filter\FilterTestService;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ScopeTrait;
@@ -27,7 +35,7 @@ class FilterServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
         //module
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         //string
         $this->string = new \Gear\Util\String\StringService();
@@ -45,7 +53,7 @@ class FilterServiceTest extends TestCase
         //injector
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->fileCreator = $this->createFileCreator();
 
@@ -62,25 +70,25 @@ class FilterServiceTest extends TestCase
         );
 
         // //filter-test
-        // $this->filterTest = $this->prophesize('Gear\Mvc\Filter\FilterTestService');
+        // $this->filterTest = $this->prophesize(FilterTestService::class);
         // $this->filter->setFilterTestService($this->filterTest->reveal());
 
         // //trait
-        // $this->traitService = $this->prophesize('Gear\Mvc\TraitService');
+        // $this->traitService = $this->prophesize(TraitService::class);
         // $this->filter->setTraitService($this->traitService->reveal());
 
         // //factory
-        // $this->factory = $this->prophesize('Gear\Mvc\Factory\FactoryService');
+        // $this->factory = $this->prophesize(FactoryService::class);
         // $this->filter->setFactoryService($this->factory->reveal());
 
         // //interface
-        // $this->interface = $this->prophesize('Gear\Mvc\InterfaceService');
+        // $this->interface = $this->prophesize(InterfaceService::class);
         // $this->filter->setInterfaceService($this->interface->reveal());
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schemaService = $this->prophesize(SchemaService::class);
         $this->filter->setSchemaService($this->schemaService->reveal());
 
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->column = $this->prophesize(ColumnService::class);
         //$this->filter->setColumnService($this->column->reveal());
 
         //$this->filter->setTableService($this->table->reveal());

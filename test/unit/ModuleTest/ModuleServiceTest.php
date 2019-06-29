@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest;
 
 use GearTest\UtilTestTrait;
+use Gear\Config\GearConfig;
 use Gear\Module\ModuleTypesInterface;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
@@ -138,7 +139,7 @@ class ModuleServiceTest extends TestCase
 
         ***REMOVED***;
 
-        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
     }
 
     public function getNamespaces()
@@ -421,7 +422,7 @@ class ModuleServiceTest extends TestCase
 
     public function mockModuleFakeCreator()
     {
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
+        $this->fileCreator = $this->prophesize(FileCreator::class);
         return $this->mockModule($this->fileCreator->reveal());
     }
 

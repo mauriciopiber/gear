@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\SpecTest\FeatureTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\Spec\Feature\Feature;
 use Gear\Mvc\Spec\Feature\FeatureTrait;
 
 /**
@@ -14,7 +15,7 @@ class FeatureTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Mvc\Spec\Feature\Feature')->reveal();
+        $mocking = $this->prophesize(Feature::class)->reveal();
         $this->setFeature($mocking);
         $this->assertEquals($mocking, $this->getFeature());
     }

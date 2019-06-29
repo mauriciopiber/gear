@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Upgrade\ModuleUpgrade;
 use Gear\Module\Upgrade\ModuleUpgradeTrait;
 
 /**
@@ -15,7 +16,7 @@ class ModuleUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Module\Upgrade\ModuleUpgrade')->reveal();
+        $mocking = $this->prophesize(ModuleUpgrade::class)->reveal();
         $this->setModuleUpgrade($mocking);
         $this->assertEquals($mocking, $this->getModuleUpgrade());
     }

@@ -2,6 +2,9 @@
 namespace GearTest\ModuleTest\NodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Yaml\Parser;
 use GearTest\UtilTestTrait;
@@ -23,7 +26,7 @@ class PackageTest extends TestCase
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'));
         $this->module->getModuleName()->willReturn('MyModule');
 
@@ -40,8 +43,8 @@ class PackageTest extends TestCase
             file_get_contents((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/npm.yml')
         );
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
 
         $this->config = [***REMOVED***;
 

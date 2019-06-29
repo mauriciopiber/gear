@@ -2,6 +2,8 @@
 namespace GearTest\DiagnosticTest\DirTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Diagnostic\Dir\DirService;
@@ -21,8 +23,8 @@ class DirServiceTest extends TestCase
 
         $root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->stringService = $this->prophesize(StringService::class);
         $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 

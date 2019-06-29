@@ -2,6 +2,9 @@
 namespace GearTest\MvcTest\ControllerTest\ConsoleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\TraitTestService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
@@ -30,7 +33,7 @@ class ConsoleControllerTestTest extends TestCase
 
         $this->assertFileExists('vfs://module/test/unit/MyModuleTest/ControllerTest');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new \Gear\Util\String\StringService();
 
@@ -63,10 +66,10 @@ class ConsoleControllerTestTest extends TestCase
         //$this->controller->setArrayService($this->array);
 
 
-        // $this->factoryService = $this->prophesize('Gear\Mvc\Factory\FactoryTestService');
+        // $this->factoryService = $this->prophesize(FactoryTestService::class);
         // $this->controller->setFactoryTestService($this->factoryService->reveal());
 
-        // $this->traitService = $this->prophesize('Gear\Mvc\TraitTestService');
+        // $this->traitService = $this->prophesize(TraitTestService::class);
         // $this->controller->setTraitTestService($this->traitService->reveal());
     }
 

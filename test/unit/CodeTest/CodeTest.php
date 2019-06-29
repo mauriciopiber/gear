@@ -2,6 +2,7 @@
 namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use Gear\Code\Code;
@@ -20,7 +21,7 @@ class CodeTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getNamespace()->willReturn('MyModule');
 
         $this->string = new StringService();

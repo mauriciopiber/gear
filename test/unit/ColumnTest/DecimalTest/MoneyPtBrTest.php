@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\DecimalTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Decimal\MoneyPtBr;
 
 /**
@@ -13,7 +14,7 @@ class MoneyPtBrTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('decimal')->shouldBeCalled();
 
 

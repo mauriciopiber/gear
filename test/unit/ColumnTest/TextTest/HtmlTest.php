@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\HtmlTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Text\Html;
 
 /**
@@ -15,7 +16,7 @@ class HtmlTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('text')->shouldBeCalled();
         $column->getName()->willReturn('my_column');
 

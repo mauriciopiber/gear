@@ -2,6 +2,10 @@
 namespace GearTest\ProjectTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Request;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Script\ScriptService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Gear\Database\BackupService;
 
@@ -20,7 +24,7 @@ class BackupServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->script = $this->prophesize('Gear\Util\Script\ScriptService');
+        $this->script = $this->prophesize(ScriptService::class);
 
         $this->config = [
             'gear' => [
@@ -41,18 +45,18 @@ class BackupServiceTest extends TestCase
                 ***REMOVED***
             ***REMOVED***
         ***REMOVED***;
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new \Gear\Util\String\StringService;
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->console = $this->prophesize(Posix::class);
 
         $project = vfsStream::setup('project');
         vfsStream::newDirectory('data')->at($project);
 
         file_put_contents(vfsStream::url('project/data/my-project.mysql.sql'), '...');
 
-        $this->request = $this->prophesize('Zend\Console\Request');
+        $this->request = $this->prophesize(Request::class);
 
         $this->backup = new BackupService(
             $this->config,

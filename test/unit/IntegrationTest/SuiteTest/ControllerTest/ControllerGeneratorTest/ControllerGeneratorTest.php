@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerTest\ControllerGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Component\TestFile\TestFile;
+use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator;
 
 /**
@@ -13,8 +15,8 @@ class ControllerGeneratorTest extends TestCase
     {
         parent::setUp();
 
-        $this->gearFile = $this->prophesize('Gear\Integration\Component\GearFile\GearFile');
-        $this->testFile = $this->prophesize('Gear\Integration\Component\TestFile\TestFile');
+        $this->gearFile = $this->prophesize(GearFile::class);
+        $this->testFile = $this->prophesize(TestFile::class);
 
         $this->service = new ControllerGenerator(
             $this->gearFile->reveal(),

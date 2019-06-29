@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\SpecTest\PageTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Page\PageTrait;
 
 /**
@@ -14,7 +15,7 @@ class PageTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Mvc\Spec\Page\Page')->reveal();
+        $mocking = $this->prophesize(Page::class)->reveal();
         $this->setPage($mocking);
         $this->assertEquals($mocking, $this->getPage());
     }

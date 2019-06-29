@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\SrcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Src\SrcMajorSuite;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Schema\Src\SrcTypesInterface;
 
@@ -15,7 +16,7 @@ class SrcMinorSuiteTest extends TestCase
     {
         parent::setUp();
 
-        $this->majorSuite = $this->prophesize('Gear\Integration\Suite\Src\SrcMajorSuite');
+        $this->majorSuite = $this->prophesize(SrcMajorSuite::class);
         $this->srcMinorSuite = new SrcMinorSuite($this->majorSuite->reveal(), SrcTypesInterface::SERVICE, '1', true);
     }
 

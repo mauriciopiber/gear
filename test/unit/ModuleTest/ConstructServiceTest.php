@@ -395,7 +395,7 @@ EOS
 
     public function testControllerDuplicade()
     {
-        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize(ControllerSchema::class);
 
         $controller = new \Gear\Schema\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
 
@@ -597,10 +597,10 @@ EOS
 
 
 
-        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize(ControllerSchema::class);
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
-        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
+        $controllerservice = $this->prophesize(ControllerConstructor::class);
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
@@ -614,7 +614,7 @@ EOS
         ***REMOVED***);
 
         //action
-        $actionschema = $this->prophesize('Gear\Schema\Action\ActionSchema');
+        $actionschema = $this->prophesize(ActionSchema::class);
 
         $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $actionschema->actionExist('Gearing', $action)->willReturn(true);
@@ -768,7 +768,7 @@ EOS;
 
     public function testDefaultLocation()
     {
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
 
         $module->getMainFolder()->willReturn('whatthafuck');
 

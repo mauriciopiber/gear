@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\DatetimeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Datetime\DatetimePtBr;
 
 /**
@@ -15,7 +16,7 @@ class DateTimePtBrTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('datetime')->shouldBeCalled();
 
 

@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\File\FileService;
 use Gear\Diagnostic\File\FileServiceTrait;
 
 /**
@@ -15,7 +16,7 @@ class FileServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Diagnostic\File\FileService')->reveal();
+        $mocking = $this->prophesize(FileService::class)->reveal();
         $this->setFileDiagnosticService($mocking);
         $this->assertEquals($mocking, $this->getFileDiagnosticService());
     }

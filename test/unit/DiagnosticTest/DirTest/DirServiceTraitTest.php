@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\DirTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\Dir\DirService;
 use Gear\Diagnostic\Dir\DirServiceTrait;
 
 /**
@@ -15,7 +16,7 @@ class DirServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Diagnostic\Dir\DirService')->reveal();
+        $mocking = $this->prophesize(DirService::class)->reveal();
         $this->setDirDiagnosticService($mocking);
         $this->assertEquals($mocking, $this->getDirDiagnosticService());
     }

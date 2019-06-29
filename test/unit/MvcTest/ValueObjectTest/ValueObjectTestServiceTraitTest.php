@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\ValueObjectTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\ValueObject\ValueObjectTestService;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
 
@@ -23,7 +24,7 @@ class ValueObjectTestServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Mvc\ValueObject\ValueObjectTestService')->reveal();
+        $mocking = $this->prophesize(ValueObjectTestService::class)->reveal();
         $this->setValueObjectTestService($mocking);
         $this->assertEquals($mocking, $this->getValueObjectTestService());
     }

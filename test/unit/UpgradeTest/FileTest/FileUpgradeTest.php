@@ -2,6 +2,12 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Project\ProjectService;
+use Gear\Module\Tests\ModuleTestsService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\ModuleService;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
@@ -21,12 +27,12 @@ class FileUpgradeTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->moduleService = $this->prophesize('Gear\Module\ModuleService');
-        $this->projectService = $this->prophesize('Gear\Project\ProjectService');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->moduleService = $this->prophesize(ModuleService::class);
+        $this->projectService = $this->prophesize(ProjectService::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->moduleTests = $this->prophesize(ModuleTestsService::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->docs = $this->prophesize(Docs::class);

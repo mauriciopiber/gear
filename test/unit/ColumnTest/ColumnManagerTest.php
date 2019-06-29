@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use GearImage\Service\ImageService;
 use Gear\Column\ColumnManager;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;
@@ -411,7 +412,7 @@ EOS;
 
     const SERVICE_TEST_SET_UP = <<<EOS
 
-        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
+        \$this->imageService = \$this->prophesize(ImageService::class);
         \$this->service->setImageService(\$this->imageService->reveal());
 
 EOS;

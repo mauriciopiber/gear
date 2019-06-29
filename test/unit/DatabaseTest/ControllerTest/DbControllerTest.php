@@ -2,6 +2,8 @@
 namespace GearTest\DatabaseTest\ControllerTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\Phinx\PhinxService;
+use Gear\Database\BackupService;
 use Zend\Console\Request;
 use Zend\Mvc\Console\Router\RouteMatch;
 use Zend\Mvc\MvcEvent;
@@ -29,7 +31,7 @@ class DbControllerTest extends TestCase
 
     public function testProjectDump()
     {
-        $backup = $this->prophesize('Gear\Database\BackupService');
+        $backup = $this->prophesize(BackupService::class);
 
         $backup->projectDump()->willReturn(true);
 
@@ -46,7 +48,7 @@ class DbControllerTest extends TestCase
 
     public function testCreateMigration()
     {
-        $phinx = $this->prophesize('Gear\Database\Phinx\PhinxService');
+        $phinx = $this->prophesize(PhinxService::class);
 
         $phinx->createMigration(null, null)->willReturn(true);
 
@@ -63,7 +65,7 @@ class DbControllerTest extends TestCase
 
     public function testProjectLoad()
     {
-        $backup = $this->prophesize('Gear\Database\BackupService');
+        $backup = $this->prophesize(BackupService::class);
 
         $backup->projectLoad()->willReturn(true);
 
@@ -79,7 +81,7 @@ class DbControllerTest extends TestCase
 
     public function testModuleDump()
     {
-        $backup = $this->prophesize('Gear\Database\BackupService');
+        $backup = $this->prophesize(BackupService::class);
 
         $backup->moduleDump()->willReturn(true);
 
@@ -95,7 +97,7 @@ class DbControllerTest extends TestCase
 
     public function testModuleLoad()
     {
-        $backup = $this->prophesize('Gear\Database\BackupService');
+        $backup = $this->prophesize(BackupService::class);
 
         $backup->moduleLoad()->willReturn(true);
 

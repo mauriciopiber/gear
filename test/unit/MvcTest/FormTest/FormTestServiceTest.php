@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\FormTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\FormTest\FormDataTrait;
@@ -25,7 +27,7 @@ class FormTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new \Gear\Util\String\StringService();
 
@@ -33,7 +35,7 @@ class FormTestServiceTest extends TestCase
 
         $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form-test';
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->form = new \Gear\Mvc\Form\FormTestService(
             $this->module->reveal(),

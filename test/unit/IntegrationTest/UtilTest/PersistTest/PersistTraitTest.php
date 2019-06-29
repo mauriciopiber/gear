@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\PersistTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\Persist\Persist;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\Persist\PersistTrait;
 
@@ -23,7 +24,7 @@ class PersistTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Util\Persist\Persist')->reveal();
+        $mocking = $this->prophesize(Persist::class)->reveal();
         $this->setPersist($mocking);
         $this->assertEquals($mocking, $this->getPersist());
     }

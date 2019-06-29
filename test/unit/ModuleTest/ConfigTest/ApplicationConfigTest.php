@@ -2,6 +2,8 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Request;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 //use org\bovigo\vfs\vfsStreamWrapper;
 
@@ -14,8 +16,8 @@ class ApplicationConfigTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->request = $this->prophesize('Zend\Console\Request');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->request = $this->prophesize(Request::class);
     }
 
     public function testMissingApplicationConfigOnGetApplicationConfig()
@@ -120,7 +122,7 @@ class ApplicationConfigTest extends TestCase
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('GearDeploy')->shouldBeCalled();
         $this->applicationConfig->setModule($module->reveal());
         $array = $this->applicationConfig->removeModuleFromProject();
@@ -173,7 +175,7 @@ class ApplicationConfigTest extends TestCase
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyNewModule')->shouldBeCalled();
 
         $this->applicationConfig->setModule($module->reveal());

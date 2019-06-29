@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\File\FileUpgrade;
 use Gear\Upgrade\File\FileUpgradeTrait;
 
 /**
@@ -14,7 +15,7 @@ class FileUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Upgrade\File\FileUpgrade')->reveal();
+        $mocking = $this->prophesize(FileUpgrade::class)->reveal();
         $this->setFileUpgrade($mocking);
         $this->assertEquals($mocking, $this->getFileUpgrade());
     }

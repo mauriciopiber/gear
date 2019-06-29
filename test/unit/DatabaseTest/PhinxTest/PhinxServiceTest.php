@@ -2,6 +2,7 @@
 namespace GearTest\DatabaseTest\PhinxTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Database\Phinx\PhinxService;
 use Gear\Util\String\StringService;
 use org\bovigo\vfs\vfsStream;
@@ -24,7 +25,7 @@ class PhinxServiceTest extends TestCase
         parent::setUp();
 
 
-        //$this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        //$this->module = $this->prophesize(ModuleStructure::class);
         //$this->module->getPublicJsSpecEndFolder()
         //->willReturn(vfsStream::url('module/public/js/spec/e2e'))
         //->shouldBeCalled();

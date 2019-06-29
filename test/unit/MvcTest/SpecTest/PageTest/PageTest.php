@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\SpecTest\PageTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
@@ -25,7 +26,7 @@ class PageTest extends TestCase
 
         $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();

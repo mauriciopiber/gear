@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\SpecTest\StepTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\Spec\Step\Step;
 use Gear\Mvc\Spec\Step\StepTrait;
 
 /**
@@ -14,7 +15,7 @@ class StepTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Mvc\Spec\Step\Step')->reveal();
+        $mocking = $this->prophesize(Step::class)->reveal();
         $this->setStep($mocking);
         $this->assertEquals($mocking, $this->getStep());
     }

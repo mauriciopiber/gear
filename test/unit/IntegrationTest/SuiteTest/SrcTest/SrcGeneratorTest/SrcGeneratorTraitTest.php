@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\SrcTest\SrcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\Src\SrcGenerator\SrcGeneratorTrait;
 
@@ -23,7 +24,7 @@ class SrcGeneratorTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator')->reveal();
+        $mocking = $this->prophesize(SrcGenerator::class)->reveal();
         $this->setSrcGenerator($mocking);
         $this->assertEquals($mocking, $this->getSrcGenerator());
     }

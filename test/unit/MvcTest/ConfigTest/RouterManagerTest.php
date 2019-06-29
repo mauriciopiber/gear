@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Config\RouterManager;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -48,7 +49,7 @@ EOS
 );
 
 
-      $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+      $this->module = $this->prophesize(ModuleStructure::class);
       $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
       $this->module->getModuleName()->willReturn('MyModule');
       $this->module->getNamespace()->willReturn('MyModule');

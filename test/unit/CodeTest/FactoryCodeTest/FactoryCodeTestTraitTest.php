@@ -2,6 +2,7 @@
 namespace GearTest\CodeTest\FactoryCodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Code\FactoryCode\FactoryCodeTest;
 use Gear\Code\FactoryCode\FactoryCodeTestTrait;
 
 /**
@@ -15,7 +16,7 @@ class FactoryCodeTestTraitTest extends TestCase
 
     public function setUp() : void
     {
-        $this->factoryCodeTestSetUp = $this->prophesize('Gear\Code\FactoryCode\FactoryCodeTest');
+        $this->factoryCodeTestSetUp = $this->prophesize(FactoryCodeTest::class);
     }
 
     public function testSet()
@@ -24,7 +25,7 @@ class FactoryCodeTestTraitTest extends TestCase
         $factoryCodeTestSetUp = $this->getFactoryCodeTest();
 
         $this->assertInstanceOf(
-            'Gear\Code\FactoryCode\FactoryCodeTest',
+            FactoryCodeTest::class,
             $factoryCodeTestSetUp
         );
 

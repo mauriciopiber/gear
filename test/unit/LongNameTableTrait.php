@@ -1,11 +1,13 @@
 <?php
 namespace GearTest;
 
+use Zend\Db\Metadata\Object\ColumnObject;
+use Zend\Db\Metadata\Object\ConstraintObject;
 trait LongNameTableTrait
 {
     public function prophesizeColumnLongName($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -16,7 +18,7 @@ trait LongNameTableTrait
 
     public function prophesizeForeignKeyLongName($tableName, $columnName, $foreignType, $tableReference = false)
     {
-        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $foreignKey = $this->prophesize(ConstraintObject::class);
         $foreignKey->getType()->willReturn($foreignType)->shouldBeCalled();
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
 
@@ -39,7 +41,7 @@ trait LongNameTableTrait
         );
 
 
-        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn = $this->prophesize(ColumnObject::class);
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('my_very_long_column');
         $varcharColumn->getTableName()->willReturn('my_very_long_table_name_example');

@@ -1,11 +1,12 @@
 <?php
 namespace GearTest;
 
+use Zend\Db\Metadata\Object\ColumnObject;
 trait SingleDbTableTrait
 {
     public function prophesizeSingleColumn($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -18,7 +19,7 @@ trait SingleDbTableTrait
     {
         $this->string = new \Gear\Util\String\StringService();
 
-        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn = $this->prophesize(ColumnObject::class);
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('single_db_column');
         $varcharColumn->getTableName()->willReturn($tableName);

@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\Factory;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use Gear\Schema\Src\Src;
@@ -25,7 +26,7 @@ class FactoryServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
 
 
@@ -137,18 +138,18 @@ class FactoryServiceTest extends TestCase
         /*
         if ($data instanceof Src && $data->getTemplate() == 'search-form') {
 
-            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
+            $this->filter = $this->prophesize(Src::class);
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('Gear\Schema\Src\Src');
+            $this->form = $this->prophesize(Src::class);
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
 
-            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+            $this->entity = $this->prophesize(Src::class);
             $this->entity->getName()->willReturn('MyTableEntity');
             $this->entity->getType()->willReturn('Entity');
             $this->schema->getSrcByDb($data->getDb(), 'Entity')->willReturn($this->entity);
@@ -156,7 +157,7 @@ class FactoryServiceTest extends TestCase
 
         if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
-            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
+            $this->filter = $this->prophesize(Src::class);
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
             $this->filter->getNamespace()->willReturn($data->getNamespace());
@@ -164,7 +165,7 @@ class FactoryServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('Gear\Schema\Src\Src');
+            $this->form = $this->prophesize(Src::class);
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->form->getNamespace()->willReturn($data->getNamespace());
@@ -172,7 +173,7 @@ class FactoryServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
 
-            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+            $this->entity = $this->prophesize(Src::class);
             $this->entity->getName()->willReturn('MyTable');
             $this->entity->getType()->willReturn('Entity');
             $this->entity->getNamespace()->willReturn(null);

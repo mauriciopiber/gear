@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -15,7 +16,7 @@ class ModuleServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
         $factory = new \Gear\Module\ModuleServiceFactory();
 

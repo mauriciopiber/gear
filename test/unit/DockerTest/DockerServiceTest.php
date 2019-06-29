@@ -2,6 +2,9 @@
 namespace GearTest\DockerTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Docker\DockerService;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -17,9 +20,9 @@ class DockerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
-        //$this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->stringService = $this->prophesize(StringService::class);
+        //$this->fileCreator = $this->prophesize(FileCreator::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
 
 
         $template       = new \Gear\Creator\Template\TemplateService(

@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\RepositoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
@@ -29,13 +31,13 @@ class RepositoryTestServiceTest extends TestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository-test';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new \Gear\Util\String\StringService();
 
         $this->fileCreator = $this->createFileCreator();
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->schemaService = $this->prophesize(SchemaService::class);
 

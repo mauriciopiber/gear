@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\EntityTest\EntityObjectFixerTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerTrait;
 
@@ -23,7 +24,7 @@ class EntityObjectFixerTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer')->reveal();
+        $mocking = $this->prophesize(EntityObjectFixer::class)->reveal();
         $this->setEntityObjectFixer($mocking);
         $this->assertEquals($mocking, $this->getEntityObjectFixer());
     }

@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\UtilTest\ResolveNamesTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Util\String\StringService;
 use Gear\Integration\Util\ResolveNames\ResolveNamesFactory;
 
 /**
@@ -13,10 +15,10 @@ class ResolveNamesFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Util\String\StringService')
-            ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
+        $this->container->get(StringService::class)
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new ResolveNamesFactory();

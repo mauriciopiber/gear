@@ -2,6 +2,15 @@
 namespace GearTest\ConstructorTest\DbTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\TableObject;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Db\DbSchema;
+use Gear\Mvc\View\ViewService;
+use Gear\Mvc\LanguageService;
+use Gear\Mvc\Controller\Web\WebControllerService;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Column\ColumnService;
+use Gear\Column\ColumnManager;
 use Gear\Constructor\Db\DbConstructorTrait;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Schema\Action\ActionSchema;
@@ -34,10 +43,10 @@ class DbConstructorTest extends TestCase
     public function setUp() : void
     {
 
-        $this->dbService = $this->prophesize('Gear\Schema\Db\DbSchema');
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        $this->columnService = $this->prophesize('Gear\Column\ColumnService');
+        $this->dbService = $this->prophesize(DbSchema::class);
+        $this->configService = $this->prophesize(ConfigService::class);
+        $this->tableService = $this->prophesize(TableService::class);
+        $this->columnService = $this->prophesize(ColumnService::class);
         $this->repositoryService = $this->prophesize(RepositoryService::class);
         $this->formService = $this->prophesize(FormService::class);
         $this->filterService = $this->prophesize(FilterService::class);
@@ -48,11 +57,11 @@ class DbConstructorTest extends TestCase
         $this->feature = $this->prophesize(Feature::class);
         $this->step = $this->prophesize(Step::class);
         $this->module = $this->prophesize(ModuleStructure::class);
-        $this->serviceService = $this->prophesize('Gear\Mvc\Service\ServiceService');
-        $this->languageService = $this->prophesize('Gear\Mvc\LanguageService');
-        $this->controllerService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');
-        //$this->controllerTestService = $this->prophesize('Gear\Mvc\Controller\Web\WebControllerService');
-        $this->viewService = $this->prophesize('Gear\Mvc\View\ViewService');
+        $this->serviceService = $this->prophesize(ServiceService::class);
+        $this->languageService = $this->prophesize(LanguageService::class);
+        $this->controllerService = $this->prophesize(WebControllerService::class);
+        //$this->controllerTestService = $this->prophesize(WebControllerService::class);
+        $this->viewService = $this->prophesize(ViewService::class);
 
         $this->service = new DbConstructor(
             $this->columnService->reveal(),
@@ -86,7 +95,7 @@ class DbConstructorTest extends TestCase
         $table = 'MyTable';
         $module = 'MyModule';
 
-        $this->db = $this->prophesize('Gear\Schema\Db\Db');
+        $this->db = $this->prophesize(Db::class);
         $this->db->getTable()->willReturn($table)->shouldBeCalled();
         $this->db->getNamespace()->willReturn($table);
 
@@ -108,10 +117,10 @@ class DbConstructorTest extends TestCase
         )->willReturn($this->db->reveal())
         ->shouldBeCalled();
 
-        $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+        $this->tableObject = $this->prophesize(TableObject::class);
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
 
-        $this->columnManager = $this->prophesize('Gear\Column\ColumnManager');
+        $this->columnManager = $this->prophesize(ColumnManager::class);
         $this->db->setColumnManager($this->columnManager->reveal())->shouldBeCalled();
 
         $this->columnService->getColumnManager($this->db)->willReturn($this->columnManager->reveal())->shouldBeCalled();
@@ -172,12 +181,12 @@ class DbConstructorTest extends TestCase
         )->willReturn($this->db->reveal())
         ->shouldBeCalled();
 
-        $this->tableObject = $this->prophesize('Zend\Db\Metadata\Object\TableObject');
+        $this->tableObject = $this->prophesize(TableObject::class);
 
         $this->db->setTableObject($this->tableObject->reveal())->shouldBeCalled();
 
 
-        $this->columnManager = $this->prophesize('Gear\Column\ColumnManager');
+        $this->columnManager = $this->prophesize(ColumnManager::class);
         $this->db->setColumnManager($this->columnManager->reveal())->shouldBeCalled();
 
         $this->columnService->getColumnManager($this->db)->willReturn($this->columnManager->reveal())->shouldBeCalled();

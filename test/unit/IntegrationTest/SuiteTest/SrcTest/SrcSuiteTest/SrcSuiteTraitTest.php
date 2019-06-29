@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\SrcTest\SrcSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Src\SrcSuite\SrcSuite;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\Src\SrcSuite\SrcSuiteTrait;
 
@@ -23,7 +24,7 @@ class SrcSuiteTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')->reveal();
+        $mocking = $this->prophesize(SrcSuite::class)->reveal();
         $this->setSrcSuite($mocking);
         $this->assertEquals($mocking, $this->getSrcSuite());
     }

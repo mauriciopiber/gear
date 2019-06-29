@@ -2,6 +2,8 @@
 namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Src\Src;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Code\CodeTest;
 use Gear\Util\String\StringService;
 use Gear\Util\Dir\DirService;
@@ -17,7 +19,7 @@ class CreateTestTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
 
         $this->string = new StringService();
@@ -58,7 +60,7 @@ class CreateTestTest extends TestCase
     //  */
     // public function testGetFullClassName($name, $type, $namespace, $expected)
     // {
-    //     $src = $this->prophesize('Gear\Schema\Src\Src');
+    //     $src = $this->prophesize(Src::class);
     //     $src->getName()->willReturn($name);
     //     $src->getType()->willReturn($type);
     //     $src->getNamespace()->willReturn($namespace);
@@ -71,7 +73,7 @@ class CreateTestTest extends TestCase
      */
     public function testGetNamespace($name, $type, $namespace, $expected)
     {
-        $src = $this->prophesize('Gear\Schema\Src\Src');
+        $src = $this->prophesize(Src::class);
         $src->getName()->willReturn($name);
         $src->getType()->willReturn($type);
         $src->getNamespace()->willReturn($namespace);

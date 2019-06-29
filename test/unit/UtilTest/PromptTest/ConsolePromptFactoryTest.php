@@ -2,6 +2,8 @@
 namespace GearTest\UtilTest\PromptTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Request;
+use Interop\Container\ContainerInterface;
 
 /**
  * @group Gear
@@ -11,9 +13,9 @@ class ConsolePromptFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $request = $this->prophesize('Zend\Console\Request');
+        $request = $this->prophesize(Request::class);
         $request->getParam('force', false)->willReturn(true);
 
         $this->container->get('Request')->willReturn($request->reveal())->shouldBeCalled();

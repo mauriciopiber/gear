@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\ValueObjectTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Code\CodeTest;
 use Gear\Mvc\ValueObject\ValueObjectTestService;
 use GearTest\UtilTestTrait;
 
@@ -16,10 +20,10 @@ class ValueObjectTestServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->codeTest = $this->prophesize('Gear\Code\CodeTest');
+        $this->stringService = $this->prophesize(StringService::class);
+        $this->fileCreator = $this->prophesize(FileCreator::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->codeTest = $this->prophesize(CodeTest::class);
 
         $this->service = new ValueObjectTestService(
             $this->module->reveal(),

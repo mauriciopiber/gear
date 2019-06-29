@@ -2,6 +2,7 @@
 namespace GearTest\UtilTest\ConsoleTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
 use Gear\Util\Console\ConsoleAwareTrait;
 
 /**
@@ -14,7 +15,7 @@ class ConsoleAwareTraitTest extends TestCase
 
     public function testTrait()
     {
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $console = $this->prophesize(Posix::class);
         $this->setConsole($console->reveal());
         $this->assertEquals($console->reveal(), $this->getConsole());
     }

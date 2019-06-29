@@ -2,6 +2,7 @@
 namespace GearTest\CreatorTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
 
 /**
@@ -14,7 +15,7 @@ class InjectorTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Creator\Injector\Injector')->reveal();
+        $mocking = $this->prophesize(Injector::class)->reveal();
         $this->setInjector($mocking);
         $this->assertEquals($mocking, $this->getInjector());
     }

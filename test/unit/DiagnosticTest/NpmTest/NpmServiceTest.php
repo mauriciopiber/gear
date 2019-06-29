@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\NpmTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Npm\NpmService;
 use Gear\Edge\Npm\NpmEdge;
@@ -22,7 +23,7 @@ class NpmServiceTest extends TestCase
         $this->file = vfsStream::url('module/package.json');
 
         $this->npmEdge = $this->prophesize(NpmEdge::class);
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 
         $this->npmService = new NpmService(

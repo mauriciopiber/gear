@@ -2,6 +2,7 @@
 namespace GearTest\ServiceTest\MvcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\UtilTestTrait;
 
@@ -18,7 +19,7 @@ class TraitTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('GearIt');
 
         $this->baseDir = (new \Gear\Module)->getLocation();
@@ -63,7 +64,7 @@ class TraitTestServiceTest extends TestCase
 
     public function testDependency()
     {
-        $this->assertInstanceOf('Gear\Module\Structure\ModuleStructure', $this->traitTest->getModule());
+        $this->assertInstanceOf(ModuleStructure::class, $this->traitTest->getModule());
         $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->traitTest->getFileCreator());
         $this->assertInstanceOf('Gear\Code\CodeTest', $this->traitTest->getCodeTest());
     }

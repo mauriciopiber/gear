@@ -2,6 +2,12 @@
 namespace GearTest\IntegrationTest\SuiteTest\MvcTest\MvcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
+use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Component\TestFile\TestFile;
+use Gear\Integration\Component\MigrationFile\MigrationFile;
+use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Suite\Mvc\MvcGenerator\MvcGeneratorFactory;
 
 /**
@@ -13,26 +19,26 @@ class MvcGeneratorFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Component\GearFile\GearFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\GearFile\GearFile')->reveal())
+        $this->container->get(GearFile::class)
+            ->willReturn($this->prophesize(GearFile::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Component\TestFile\TestFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\TestFile\TestFile')->reveal())
+        $this->container->get(TestFile::class)
+            ->willReturn($this->prophesize(TestFile::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Component\MigrationFile\MigrationFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\MigrationFile\MigrationFile')->reveal())
+        $this->container->get(MigrationFile::class)
+            ->willReturn($this->prophesize(MigrationFile::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Util\ResolveNames\ResolveNames')
-            ->willReturn($this->prophesize('Gear\Integration\Util\ResolveNames\ResolveNames')->reveal())
+        $this->container->get(ResolveNames::class)
+            ->willReturn($this->prophesize(ResolveNames::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Util\Columns\Columns')
-            ->willReturn($this->prophesize('Gear\Integration\Util\Columns\Columns')->reveal())
+        $this->container->get(Columns::class)
+            ->willReturn($this->prophesize(Columns::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MvcGeneratorFactory();

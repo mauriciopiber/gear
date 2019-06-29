@@ -2,6 +2,12 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Zend\Db\Metadata\Metadata;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Db\Db;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Column\ColumnService;
 use Gear\Util\String\StringService;
 use Zend\ServiceManager\ServiceManager;
@@ -19,10 +25,10 @@ class ColumnServiceTest extends TestCase
 
         $this->serviceLocator = new ServiceManager();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->metadata = $this->prophesize('Zend\Db\Metadata\Metadata');
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->metadata = $this->prophesize(Metadata::class);
+        $this->tableService = $this->prophesize(TableService::class);
         $this->string = new StringService();
 
         $this->column = new ColumnService(
@@ -61,12 +67,12 @@ class ColumnServiceTest extends TestCase
     {
         $this->tableName = 'my_table';
 
-        $db = $this->prophesize('Gear\Schema\Db\Db');
+        $db = $this->prophesize(Db::class);
         $db->getTable()->willReturn($this->tableName)->shouldBeCalled();
         $db->getColumns()->willReturn(['id_my_table' => null***REMOVED***)->shouldBeCalled();
 
 
-        $pkey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $pkey = $this->prophesize(ConstraintObject::class);
         //$pkey->getName('_zf_table_PRIMARY')->willReturn()->shouldBeCalled();
         //$pkey->getTableName($this->tableName)->willReturn()->shouldBeCalled();
         $pkey->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
@@ -74,7 +80,7 @@ class ColumnServiceTest extends TestCase
 
         $columns = [***REMOVED***;
 
-        $column01 = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column01 = $this->prophesize(ColumnObject::class);
         $column01->getName()->willReturn('id_my_table')->shouldBeCalled();
         $column01->getDataType()->willReturn('int')->shouldBeCalled();
 

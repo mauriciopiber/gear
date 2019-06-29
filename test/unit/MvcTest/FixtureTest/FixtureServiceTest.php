@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\FixtureTest;
 
 use org\bovigo\vfs\vfsStream;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\DateTime\DateTime;
 use PHPUnit\Framework\TestCase;
 use Gear\Util\String\StringService;
 use Gear\Util\File\FileService;
@@ -36,18 +41,18 @@ class FixtureServiceTest extends TestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
         $this->templates = (new Module)->getLocation().'/../test/template/module/mvc/fixture/db';
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schemaService = $this->prophesize(SchemaService::class);
 
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+        $this->configService = $this->prophesize(ConfigService::class);
 
         $this->fixture = new FixtureService(
             $this->module->reveal(),
@@ -182,12 +187,12 @@ class FixtureServiceTest extends TestCase
         $foreignKey->setStringService($this->string);
 
         /*
-        $primaryKey = $this->prophesize('Gear\Column\Integer\PrimaryKey');
-        $created = $this->prophesize('Gear\Column\DateTime\DateTime');
-        $updated = $this->prophesize('Gear\Column\DateTime\DateTime');
-        $createdBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
-        $updatedBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
-        $foreignKey = $this->prophesize('Gear\Column\Integer\ForeignKey');
+        $primaryKey = $this->prophesize(PrimaryKey::class);
+        $created = $this->prophesize(DateTime::class);
+        $updated = $this->prophesize(DateTime::class);
+        $createdBy = $this->prophesize(ForeignKey::class);
+        $updatedBy = $this->prophesize(ForeignKey::class);
+        $foreignKey = $this->prophesize(ForeignKey::class);
 
         */
         //$foreignKey->getTableName()->willReturn('MyAnotherTable');
@@ -398,7 +403,7 @@ EOS;
         $foreigns = [***REMOVED***;
 
         foreach ($dependencies as $dependency) {
-            $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+            $foreignKey = $this->prophesize(ConstraintObject::class);
             $foreignKey->getReferencedTableName()->willReturn($dependency)->shouldBeCalled();
             $foreigns[***REMOVED*** = $foreignKey->reveal();
         }
@@ -440,7 +445,7 @@ EOS;
         $foreigns = [***REMOVED***;
 
         foreach ($dependencies as $dependency) {
-            $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+            $foreignKey = $this->prophesize(ConstraintObject::class);
             $foreignKey->getReferencedTableName()->willReturn($dependency)->shouldBeCalled();
             $foreigns[***REMOVED*** = $foreignKey->reveal();
         }

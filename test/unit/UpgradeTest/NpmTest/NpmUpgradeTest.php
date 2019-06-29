@@ -2,6 +2,8 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Upgrade\Npm\NpmUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Npm\NpmUpgrade;
@@ -20,8 +22,8 @@ class NpmUpgradeTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->string = new \Gear\Util\String\StringService();
         $this->npmEdge = $this->prophesize(NpmEdge::class);

@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
@@ -31,7 +32,7 @@ class ControllerManagerTest extends TestCase
 
         $this->fileCreator  = $this->createFileCreator();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 

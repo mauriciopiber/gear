@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\ViewTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Table\TableService\TableService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use org\bovigo\vfs\vfsStream;
 use Gear\Schema\Controller\Controller;
 use Gear\Schema\Action\Action;
@@ -31,7 +36,7 @@ class ViewServiceTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->template = (new Module())->getLocation().'/../test/template/module/mvc/view';
 
@@ -42,7 +47,7 @@ class ViewServiceTest extends TestCase
 
         $this->code = $this->createCode();
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->view = new ViewService(
             $this->module->reveal(),
@@ -65,11 +70,11 @@ class ViewServiceTest extends TestCase
     {
         $this->string = new StringService();
 
-        $primaryKeyConst = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $primaryKeyConst = $this->prophesize(ConstraintObject::class);
         $primaryKeyConst->getType()->willReturn('PRIMARY KEY')->shouldBeCalled();
         $primaryKeyConst->getColumns()->willReturn(['id_my'***REMOVED***)->shouldBeCalled();
 
-        $primaryKey = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $primaryKey = $this->prophesize(ColumnObject::class);
         $primaryKey->getDataType()->willReturn('int')->shouldBeCalled();
         $primaryKey->getName()->willReturn('id_my')->shouldBeCalled();
         $primaryKey->getTableName()->willReturn('my')->shouldBeCalled();
@@ -77,7 +82,7 @@ class ViewServiceTest extends TestCase
         $primaryKey = new PrimaryKey($primaryKey->reveal(), $primaryKeyConst->reveal());
         $primaryKey->setStringService($this->string);
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $column->getName()->willReturn('dep_name')->shouldBeCalled();
         $column->getTableName()->willReturn('my')->shouldBeCalled();
@@ -88,7 +93,7 @@ class ViewServiceTest extends TestCase
         //$db = new Db(['table' => 'My', 'user' => $userType***REMOVED***);
 
         $columnManager = new \Gear\Column\ColumnManager([$primaryKey, $foreignKey***REMOVED***);
-        //$this->columns = $this->prophesize('Gear\Column\ColumnService');
+        //$this->columns = $this->prophesize(ColumnService::class);
         //$this->columns->getColumns($db)->willReturn()->shouldBeCalled();
 
         return [[$columnManager***REMOVED******REMOVED***;
@@ -144,7 +149,7 @@ class ViewServiceTest extends TestCase
 
         $action = $this->createAction('Edit', 'all', $columns);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
         $this->view->setTableService($this->table->reveal());
@@ -188,7 +193,7 @@ class ViewServiceTest extends TestCase
 
         $action = $this->createAction('View', 'all', $columns);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
 
         $this->view->setTableService($this->table->reveal());
@@ -228,7 +233,7 @@ class ViewServiceTest extends TestCase
 
         $action = $this->createAction('List', $userType, $columns);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         //$this->table->verifyTableAssociation('My')->willReturn(false)->shouldBeCalled();
         $this->table->getPrimaryKeyColumnName('My')->willreturn('id_my')->shouldBeCalled();
 

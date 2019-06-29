@@ -2,6 +2,19 @@
 namespace GearTest\MvcTest\EntityTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Glob\GlobService;
+use Gear\Util\Dir\DirService;
+use Gear\Table\TableService\TableService;
+use Gear\Script\ScriptService;
+use Gear\Schema\Src\SrcSchema;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Schema\Schema\Loader\SchemaLoaderService;
+use Gear\Mvc\Entity\EntityTestService;
+use Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer;
+use Gear\Mvc\Entity\DoctrineService;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Constructor\Src\SrcConstructor;
 use Gear\Mvc\Entity\EntityService;
 use org\bovigo\vfs\vfsStream;
 use Gear\Schema\Src\Src;
@@ -17,23 +30,23 @@ class EntityServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->doctrineService = $this->prophesize('Gear\Mvc\Entity\DoctrineService');
-        $this->scriptService = $this->prophesize('Gear\Script\ScriptService');
-        $this->entityTestService = $this->prophesize('Gear\Mvc\Entity\EntityTestService');
-        $this->tableService = $this->prophesize('Gear\Table\TableService\TableService');
-        //$this->srcService = $this->prophesize('Gear\Constructor\Src\SrcConstructor');
-        $this->srcService = $this->prophesize('Gear\Schema\Src\SrcSchema');
-        $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->doctrineService = $this->prophesize(DoctrineService::class);
+        $this->scriptService = $this->prophesize(ScriptService::class);
+        $this->entityTestService = $this->prophesize(EntityTestService::class);
+        $this->tableService = $this->prophesize(TableService::class);
+        //$this->srcService = $this->prophesize(SrcConstructor::class);
+        $this->srcService = $this->prophesize(SrcSchema::class);
+        $this->serviceManager = $this->prophesize(ServiceManager::class);
+        $this->schemaService = $this->prophesize(SchemaService::class);
 
-        $this->schemaLoaderService = $this->prophesize('Gear\Schema\Schema\Loader\SchemaLoaderService');
-        $this->dirService = $this->prophesize('Gear\Util\Dir\DirService');
-        $this->globService = $this->prophesize('Gear\Util\Glob\GlobService');
+        $this->schemaLoaderService = $this->prophesize(SchemaLoaderService::class);
+        $this->dirService = $this->prophesize(DirService::class);
+        $this->globService = $this->prophesize(GlobService::class);
         $this->stringService = new \Gear\Util\String\StringService();
 
 
-        $this->entityFixerObject = $this->prophesize('Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer');
+        $this->entityFixerObject = $this->prophesize(EntityObjectFixer::class);
 
         $this->moduleName = 'MyModule';
 

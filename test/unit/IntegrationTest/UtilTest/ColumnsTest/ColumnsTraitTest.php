@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\ColumnsTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\Columns\Columns;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\Columns\ColumnsTrait;
 
@@ -23,7 +24,7 @@ class ColumnsTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Util\Columns\Columns')->reveal();
+        $mocking = $this->prophesize(Columns::class)->reveal();
         $this->setColumns($mocking);
         $this->assertEquals($mocking, $this->getColumns());
     }

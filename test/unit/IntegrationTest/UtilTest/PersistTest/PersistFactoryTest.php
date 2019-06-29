@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\UtilTest\PersistTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Integration\Util\Location\Location;
 use Gear\Integration\Util\Persist\PersistFactory;
 
 /**
@@ -13,10 +15,10 @@ class PersistFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Util\Location\Location')
-            ->willReturn($this->prophesize('Gear\Integration\Util\Location\Location')->reveal())
+        $this->container->get(Location::class)
+            ->willReturn($this->prophesize(Location::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new PersistFactory();

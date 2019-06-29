@@ -1,12 +1,15 @@
 <?php
 namespace GearTest;
 
+use Gear\Module\Structure\ModuleStructure;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
 trait AllColumnsDbUniqueNotNullTableTrait
 {
 
     public function prophesizeColumnUniqueNotNull($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -18,7 +21,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
 
     public function prophesizeForeignKeyUniqueNotNull($tableName, $columnName, $foreignType, $tableReference = false)
     {
-        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $foreignKey = $this->prophesize(ConstraintObject::class);
         $foreignKey->getType()->willReturn($foreignType)->shouldBeCalled();
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
 
@@ -31,7 +34,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
 
     public function prophesizeUniqueNotNull($tableName, $columnName)
     {
-        $unique = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $unique = $this->prophesize(ConstraintObject::class);
         $unique->getType()->willReturn('UNIQUE');//->shouldBeCalled();
         $unique->getColumns()->willReturn([$columnName***REMOVED***);//->shouldBeCalled();
         $unique->getReferencedTableName()->willReturn($tableName);
@@ -146,7 +149,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
             $this->prophesizeColumnUniqueNotNull('table', 'upload_image_column_unique_not_null', 'varchar')
         );
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyModule');
 
         $columns[19***REMOVED***->setModule($module->reveal());
@@ -158,7 +161,7 @@ trait AllColumnsDbUniqueNotNullTableTrait
         $columns[20***REMOVED***->setUniqueConstraint($this->prophesizeUnique('table', 'url_column_unique_not_null'));
 
 
-        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn = $this->prophesize(ColumnObject::class);
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('varchar_column_unique_not_null');
         $varcharColumn->getTableName()->willReturn('table');

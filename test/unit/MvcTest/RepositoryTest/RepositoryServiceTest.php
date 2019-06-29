@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\RepositoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
@@ -30,7 +34,7 @@ class RepositoryServiceTest extends TestCase
 
         $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new \Gear\Util\String\StringService();
 
@@ -43,12 +47,12 @@ class RepositoryServiceTest extends TestCase
 
         $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
 
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->column = $this->prophesize(ColumnService::class);
         //$this->repository->setColumnService($this->column->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
         //$this->repository->setSchemaService($this->schema->reveal());
 
 
@@ -141,7 +145,7 @@ class RepositoryServiceTest extends TestCase
             'email'
         );
 
-        //$schema = $this->prophesize('Gear\Table\TableService\TableService');
+        //$schema = $this->prophesize(TableService::class);
         //$schema->getReferencedTableValidColumnName('user')
         //->willReturn('email');
 

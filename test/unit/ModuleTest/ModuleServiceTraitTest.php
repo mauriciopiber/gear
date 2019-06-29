@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\ModuleService;
 use Gear\Module\ModuleServiceTrait;
 
 /**
@@ -15,7 +16,7 @@ class ModuleServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Module\ModuleService')->reveal();
+        $mocking = $this->prophesize(ModuleService::class)->reveal();
         $this->setModuleService($mocking);
         $this->assertEquals($mocking, $this->getModuleService());
     }

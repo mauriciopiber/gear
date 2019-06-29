@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\SuiteTest\SrcTest\SrcSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 use Gear\Integration\Suite\Src\SrcSuite\SrcSuite;
 
 /**
@@ -13,8 +15,8 @@ class SrcSuiteTest extends TestCase
     {
         parent::setUp();
 
-        $this->srcGenerator = $this->prophesize('Gear\Integration\Suite\Src\SrcGenerator\SrcGenerator');
-        $this->superTestFile = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile');
+        $this->srcGenerator = $this->prophesize(SrcGenerator::class);
+        $this->superTestFile = $this->prophesize(SuperTestFile::class);
 
         $this->service = new SrcSuite(
             $this->srcGenerator->reveal(),

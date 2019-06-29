@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\ResolveNamesTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Gear\Integration\Suite\Src\SrcMinorSuite;
 use Gear\Integration\Suite\SrcMvc\SrcMvcMinorSuite;
@@ -24,7 +25,7 @@ class ResolveNamesTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
+        $this->stringService = $this->prophesize(StringService::class);
 
         $this->service = new ResolveNames($this->stringService->reveal());
     }

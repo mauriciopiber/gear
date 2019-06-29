@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\SuiteTest\MvcTest\MvcSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
 
 /**
@@ -13,8 +15,8 @@ class MvcSuiteTest extends TestCase
     {
         parent::setUp();
 
-        $this->mvcGenerator = $this->prophesize('Gear\Integration\Suite\Mvc\MvcGenerator\MvcGenerator');
-        $this->superTestFile = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile');
+        $this->mvcGenerator = $this->prophesize(MvcGenerator::class);
+        $this->superTestFile = $this->prophesize(SuperTestFile::class);
 
         $this->service = new MvcSuite(
             $this->mvcGenerator->reveal(),

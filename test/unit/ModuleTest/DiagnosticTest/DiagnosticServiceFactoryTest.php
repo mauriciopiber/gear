@@ -2,6 +2,8 @@
 namespace GearTest\ModuleTest\DiagnosticTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Interop\Container\ContainerInterface;
 use Gear\Diagnostic\Ant\{
     AntService
 };
@@ -29,10 +31,10 @@ class DiagnosticServiceFactoryTest extends TestCase
 {
     public function testCreateDiagnostic()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $module = $this->prophesize(ModuleStructure::class);
+        $console = $this->prophesize(Posix::class);
 
         $this->container->get('console')->willReturn($console);
         $this->container->get(ModuleStructure::class)->willReturn($module);

@@ -2,6 +2,7 @@
 namespace GearTest\ServiceTest\MvcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module;
 use Gear\Creator\Template\TemplateService    ;
@@ -26,7 +27,7 @@ class InterfaceTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
 
         $this->baseDir = (new Module)->getLocation();

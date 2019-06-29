@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Upgrade\Ant\AntUpgradeTrait;
 
 /**
@@ -15,7 +16,7 @@ class AntUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Upgrade\Ant\AntUpgrade')->reveal();
+        $mocking = $this->prophesize(AntUpgrade::class)->reveal();
         $this->setAntUpgrade($mocking);
         $this->assertEquals($mocking, $this->getAntUpgrade());
     }

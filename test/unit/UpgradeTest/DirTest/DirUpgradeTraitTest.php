@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Dir\DirUpgrade;
 use Gear\Upgrade\Dir\DirUpgradeTrait;
 
 /**
@@ -14,7 +15,7 @@ class DirUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Upgrade\Dir\DirUpgrade')->reveal();
+        $mocking = $this->prophesize(DirUpgrade::class)->reveal();
         $this->setDirUpgrade($mocking);
         $this->assertEquals($mocking, $this->getDirUpgrade());
     }

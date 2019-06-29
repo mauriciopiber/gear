@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerTest\ControllerSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite;
 
 /**
@@ -13,8 +15,8 @@ class ControllerSuiteTest extends TestCase
     {
         parent::setUp();
 
-        $this->controllerGenerator = $this->prophesize('Gear\Integration\Suite\Controller\ControllerGenerator\ControllerGenerator');
-        $this->superTestFile = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile');
+        $this->controllerGenerator = $this->prophesize(ControllerGenerator::class);
+        $this->superTestFile = $this->prophesize(SuperTestFile::class);
 
         $this->service = new ControllerSuite(
             $this->controllerGenerator->reveal(),

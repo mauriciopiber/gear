@@ -2,6 +2,7 @@
 namespace GearTest\AutoloadTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Autoload\ComposerAutoload;
 use org\bovigo\vfs\vfsStream;
 use Zend\Json\Json;
@@ -14,7 +15,7 @@ class ComposerAutoloadTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->mockFile = file_get_contents(__DIR__.'/_files/composer.json');
 

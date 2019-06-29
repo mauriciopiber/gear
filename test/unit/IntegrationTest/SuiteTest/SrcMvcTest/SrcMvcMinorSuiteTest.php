@@ -14,7 +14,7 @@ class SrcMvcMinorSuiteTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->majorSuite = $this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcMajorSuite');
+        $this->majorSuite = $this->prophesize(SrcMvcMajorSuite::class);
         $this->srcMvcMinorSuite = new SrcMvcMinorSuite($this->majorSuite->reveal(), 'service', null, null, null, null, true);
     }
 

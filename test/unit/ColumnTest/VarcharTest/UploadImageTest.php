@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\UploadImage;
 
 /**
@@ -15,7 +16,7 @@ class UploadImageTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column');
 

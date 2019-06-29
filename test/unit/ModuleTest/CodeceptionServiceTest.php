@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\CodeceptionService;
 use org\bovigo\vfs\vfsStream;
 
@@ -21,7 +22,7 @@ class CodeceptionServiceTest extends TestCase
         file_put_contents(vfsStream::url('project/codeception.yml'), $this->mockFile);
 
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->codeception = new CodeceptionService();
         $this->codeception->setModule($this->module->reveal());

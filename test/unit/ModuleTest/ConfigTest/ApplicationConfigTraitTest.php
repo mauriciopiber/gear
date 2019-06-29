@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Config\ApplicationConfig;
 use Gear\Module\Config\ApplicationConfigTrait;
 
 /**
@@ -14,7 +15,7 @@ class ApplicationConfigTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Module\Config\ApplicationConfig')->reveal();
+        $mocking = $this->prophesize(ApplicationConfig::class)->reveal();
         $this->setApplicationConfig($mocking);
         $this->assertEquals($mocking, $this->getApplicationConfig());
     }

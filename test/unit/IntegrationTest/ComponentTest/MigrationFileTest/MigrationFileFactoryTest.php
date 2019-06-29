@@ -2,6 +2,10 @@
 namespace GearTest\IntegrationTest\ComponentTest\MigrationFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Integration\Util\Persist\Persist;
 use Gear\Integration\Component\MigrationFile\MigrationFileFactory;
 
 /**
@@ -13,18 +17,18 @@ class MigrationFileFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Util\Persist\Persist')
-            ->willReturn($this->prophesize('Gear\Integration\Util\Persist\Persist')->reveal())
+        $this->container->get(Persist::class)
+            ->willReturn($this->prophesize(Persist::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Util\String\StringService')
-            ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
+        $this->container->get(StringService::class)
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Util\Vector\ArrayService')
-            ->willReturn($this->prophesize('Gear\Util\Vector\ArrayService')->reveal())
+        $this->container->get(ArrayService::class)
+            ->willReturn($this->prophesize(ArrayService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new MigrationFileFactory();

@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\FilterTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -30,7 +32,7 @@ class FilterTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
 
         $this->string = new \Gear\Util\String\StringService();
@@ -101,7 +103,7 @@ class FilterTestServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
 
         $this->filter->setSchemaService($this->schema->reveal());

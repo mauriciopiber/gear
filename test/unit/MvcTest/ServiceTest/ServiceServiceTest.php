@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\ServiceTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
@@ -39,7 +41,7 @@ class ServiceServiceTest extends TestCase
 
         $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/service';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
         $this->fileCreator    = $this->createFileCreator();
 
@@ -47,7 +49,7 @@ class ServiceServiceTest extends TestCase
 
 
         $this->arrayService = new ArrayService();
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->service = new ServiceService(
             $this->module->reveal(),

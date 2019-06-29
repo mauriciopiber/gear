@@ -2,6 +2,7 @@
 namespace GearTest\UtilTest\PromptTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Util\Prompt\ConsolePromptTrait;
 
 /**
@@ -14,7 +15,7 @@ class ConsolePromptTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal();
+        $mocking = $this->prophesize(ConsolePrompt::class)->reveal();
         $this->setConsolePrompt($mocking);
         $this->assertEquals($mocking, $this->getConsolePrompt());
     }

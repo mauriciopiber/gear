@@ -2,6 +2,12 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Gear\Upgrade\Npm\NpmUpgrade;
+use Gear\Upgrade\File\FileUpgrade;
+use Gear\Upgrade\Dir\DirUpgrade;
+use Gear\Upgrade\Composer\ComposerUpgrade;
+use Gear\Upgrade\Ant\AntUpgrade;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\Upgrade\ModuleUpgrade;
 use Gear\Upgrade\AbstractUpgrade;
@@ -25,17 +31,17 @@ class ModuleUpgradeTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->console = $this->prophesize(Posix::class);
 
-        $this->composer = $this->prophesize('Gear\Upgrade\Composer\ComposerUpgrade');
+        $this->composer = $this->prophesize(ComposerUpgrade::class);
 
-        $this->npm = $this->prophesize('Gear\Upgrade\Npm\NpmUpgrade');
+        $this->npm = $this->prophesize(NpmUpgrade::class);
 
-        $this->ant = $this->prophesize('Gear\Upgrade\Ant\AntUpgrade');
+        $this->ant = $this->prophesize(AntUpgrade::class);
 
-        $this->file = $this->prophesize('Gear\Upgrade\File\FileUpgrade');
+        $this->file = $this->prophesize(FileUpgrade::class);
 
-        $this->dir = $this->prophesize('Gear\Upgrade\Dir\DirUpgrade');
+        $this->dir = $this->prophesize(DirUpgrade::class);
 
         $this->upgrade = new ModuleUpgrade(
             $this->console->reveal(),

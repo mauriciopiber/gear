@@ -2,6 +2,10 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Util\Dir\DirService;
+use Gear\Config\GearConfig;
 use Gear\Edge\Dir\DirEdge;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -13,28 +17,28 @@ class DirUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
 
-        $dir = $this->prophesize('Gear\Util\Dir\DirService');
-        $this->container->get('Gear\Util\Dir\DirService')->willReturn($dir->reveal())->shouldBeCalled();
+        $dir = $this->prophesize(DirService::class);
+        $this->container->get(DirService::class)->willReturn($dir->reveal())->shouldBeCalled();
 
         $edge = $this->prophesize(DirEdge::class);
         $this->container->get(DirEdge::class)->willReturn($edge->reveal())->shouldBeCalled();
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
 
         $this->container->get(ModuleStructure::class)->willReturn($module->reveal())->shouldBeCalled();
 
-        $consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $consolePrompt = $this->prophesize(ConsolePrompt::class);
 
-        $this->container->get('Gear\Util\Prompt\ConsolePrompt')
+        $this->container->get(ConsolePrompt::class)
             ->willReturn($consolePrompt->reveal())
             ->shouldBeCalled();
 
 
-        $this->container->get('Gear\Config\GearConfig')->willReturn(
-            $this->prophesize('Gear\Config\GearConfig')->reveal()
+        $this->container->get(GearConfig::class)->willReturn(
+            $this->prophesize(GearConfig::class)->reveal()
         )->shouldBeCalled();
 
 

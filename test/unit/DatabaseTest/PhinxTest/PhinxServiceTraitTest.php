@@ -2,6 +2,7 @@
 namespace GearTest\DatabaseTest\PhinxTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\Phinx\PhinxService;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Database\Phinx\PhinxServiceTrait;
 
@@ -23,7 +24,7 @@ class PhinxServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Database\Phinx\PhinxService')->reveal();
+        $mocking = $this->prophesize(PhinxService::class)->reveal();
         $this->setPhinxService($mocking);
         $this->assertEquals($mocking, $this->getPhinxService());
     }
