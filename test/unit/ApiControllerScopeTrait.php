@@ -1,6 +1,7 @@
 <?php
 namespace GearTest;
 
+use Gear\Schema\Controller\Controller;
 trait ApiControllerScopeTrait
 {
     public function getControllerScope($srcType)
@@ -27,7 +28,7 @@ trait ApiControllerScopeTrait
 
         return [
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicDependenciesFactoryMany%s', $srcType),
                     'type' => $srcType,
                     'actions' => $manyActions,
@@ -37,7 +38,7 @@ trait ApiControllerScopeTrait
                 'basic-dependencies-factory-many'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicFactoryDependencies%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepositoryOne,Repository\MyRepositoryTwo,Repository\MyRepositoryThree',
@@ -46,7 +47,7 @@ trait ApiControllerScopeTrait
                 'basic-factory-dependencies'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicFactoryDependency%s', $srcType),
                     'type' => $srcType,
                     'dependency' => 'Repository\MyRepository',
@@ -56,7 +57,7 @@ trait ApiControllerScopeTrait
                 'basic-factory-dependency'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicFactoryNamespace%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
@@ -66,7 +67,7 @@ trait ApiControllerScopeTrait
                 'basic-factory-namespace'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicFactory%s', $srcType),
                     'type' => $srcType,
                     'service' => 'factories'
@@ -74,7 +75,7 @@ trait ApiControllerScopeTrait
                 'basic-factory'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicList%s', $srcType),
                     'type' => $srcType,
                     'actions' => [
@@ -86,7 +87,7 @@ trait ApiControllerScopeTrait
                 'basic-list'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicImplements%s', $srcType),
                     'type' => $srcType,
                     'implements' => 'Repository\RepositoryInterface'
@@ -95,7 +96,7 @@ trait ApiControllerScopeTrait
                 'basic-implements'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicMany%s', $srcType),
                     'type' => $srcType,
                     'actions' => $manyActions
@@ -103,7 +104,7 @@ trait ApiControllerScopeTrait
                 'basic-many'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('BasicNamespace%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'Another\Long\Namespaces',
@@ -111,14 +112,14 @@ trait ApiControllerScopeTrait
                 'basic-namespace'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('Basic%s', $srcType),
                     'type' => $srcType
                 ***REMOVED***),
                 'basic'
             ***REMOVED***,
             [
-                new \Gear\Schema\Controller\Controller([
+                new Controller([
                     'name' => sprintf('Basic%s', $srcType),
                     'type' => $srcType,
                     'namespace' => 'CompleteController',

@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\ControllerTest\ApiTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Dir\DirService;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
@@ -35,7 +36,7 @@ class ApiControllerTestServiceTest extends TestCase
         $this->fileCreator = $this->createFileCreator();
 
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
         $this->injector = new Injector($this->arrayService);
 
         $this->factoryService = $this->prophesize(FactoryTestService::class);
@@ -123,11 +124,11 @@ class ApiControllerTestServiceTest extends TestCase
         $this->module->getTestUnitModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getTestControllerFolder()->willReturn(vfsStream::url('module'));
 
-        $this->codeTest = new \Gear\Code\CodeTest(
+        $this->codeTest = new CodeTest(
             $this->module->reveal(),
             $this->string,
-            new \Gear\Util\Dir\DirService(),
-            new \Gear\Util\Vector\ArrayService()
+            new DirService(),
+            new ArrayService()
         );
         //$this->codeTest->setArrayService($this->array);
 

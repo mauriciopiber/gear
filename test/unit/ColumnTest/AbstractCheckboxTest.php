@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Zend\Db\Metadata\Object\ColumnObject;
 
 /**
@@ -20,7 +21,7 @@ class AbstractCheckboxTest extends TestCase
         $column->getName()->willReturn('my_column')->shouldBeCalled();
 
         $this->abstractCheckbox->setColumn($column->reveal());
-        $this->abstractCheckbox->setStringService(new \Gear\Util\String\StringService());
+        $this->abstractCheckbox->setStringService(new StringService());
     }
 
     public function testIntegrationActionSendKeysMark()

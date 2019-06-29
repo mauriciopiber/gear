@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Module\Structure\ModuleStructure;
@@ -78,7 +79,7 @@ class AntUpgradeTest extends TestCase
 
         foreach ($type as $typeId) {
 
-            $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/'.$typeId[1***REMOVED***.'/'.$typeId[0***REMOVED***.'/ant.yml');
+            $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/'.$typeId[1***REMOVED***.'/'.$typeId[0***REMOVED***.'/ant.yml');
 
 
             foreach ($target['target'***REMOVED*** as $build => $dependency) {
@@ -422,7 +423,7 @@ EOS;
             ***REMOVED***, $upgraded
         );
 
-        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+        //$expectedFile = (new Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
         //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
 
         $expectedFile = $this->getCleanXml();
@@ -521,7 +522,7 @@ EOS;
             ***REMOVED***, $upgraded
         );
 
-        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+        //$expectedFile = (new Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
         //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
 
         $expectedFile =  <<<EOS

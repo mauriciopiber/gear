@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Config\ControllerManager;
+use Gear\Module;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -28,7 +33,7 @@ class ControllerManagerTest extends TestCase
 
         $this->assertFileExists('vfs://module/config/ext');
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator  = $this->createFileCreator();
 
@@ -39,10 +44,10 @@ class ControllerManagerTest extends TestCase
         $this->code = $this->createCode();
         //$code->setModule($this->module->reveal());
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
 
-        $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager(
+        $this->controllerManager  = new ControllerManager(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -51,13 +56,13 @@ class ControllerManagerTest extends TestCase
             $this->prophesize(LanguageService::class)->reveal()
         );
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';
+        $this->template = (new Module())->getLocation().'/../test/template/module/config';
     }
 
 
     public function testCreateControllerNamespace()
     {
-      $controller = new \Gear\Schema\Controller\Controller([
+      $controller = new Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories',
@@ -98,7 +103,7 @@ EOS
 
     public function testCreateController()
     {
-      $controller = new \Gear\Schema\Controller\Controller([
+      $controller = new Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories'

@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\UniqueId;
 
@@ -21,7 +22,7 @@ class UniqueIdTest extends TestCase
         $column->getName()->willReturn('my_column');
 
         $this->uniqueId = new UniqueId($column->reveal());
-        $this->uniqueId->setStringService(new \Gear\Util\String\StringService());
+        $this->uniqueId->setStringService(new StringService());
     }
 
     public function values()

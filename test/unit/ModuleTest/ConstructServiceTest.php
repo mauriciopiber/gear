@@ -356,7 +356,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerConstructor
           ->createController($controller->export())
@@ -397,7 +397,7 @@ EOS
     {
         $controllerschema = $this->prophesize(ControllerSchema::class);
 
-        $controller = new \Gear\Schema\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
+        $controller = new Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
 
         //$controllerschema->controllerExist('Gearing', $controller)->willReturn(true);
 
@@ -426,7 +426,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false);
 
@@ -593,7 +593,7 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
 
 
@@ -616,7 +616,7 @@ EOS
         //action
         $actionschema = $this->prophesize(ActionSchema::class);
 
-        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $actionschema->actionExist('Gearing', $action)->willReturn(true);
         $this->construct->setActionSchema($actionschema->reveal());
 
@@ -650,7 +650,7 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false)->shouldBeCalled();
 
@@ -663,7 +663,7 @@ EOS
         ***REMOVED***);
         //action
 
-        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $this->actionSchema->actionExist('Gearing', $action)->willReturn(false)->shouldBeCalled();
 
 

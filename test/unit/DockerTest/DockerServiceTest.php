@@ -2,6 +2,9 @@
 namespace GearTest\DockerTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\File\FileService;
+use Gear\Module;
+use Gear\Creator\Template\TemplateService;
 use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
@@ -25,12 +28,12 @@ class DockerServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
 
 
-        $template       = new \Gear\Creator\Template\TemplateService(
-            $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view')
+        $template       = new TemplateService(
+            $this->mockPhpRenderer((new Module)->getLocation().'/../view')
         );
 
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->service = new DockerService(
             $this->stringService->reveal(),
@@ -38,7 +41,7 @@ class DockerServiceTest extends TestCase
             $this->module->reveal()
         );
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/docker';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/docker';
 
         vfsStream::setup('module');
     }

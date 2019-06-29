@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Composer\ComposerUpgradeFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Util\Prompt\ConsolePrompt;
@@ -20,7 +21,7 @@ class ComposerUpgradeFactoryTest extends TestCase
     {
         $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $factory = new \Gear\Upgrade\Composer\ComposerUpgradeFactory();
+        $factory = new ComposerUpgradeFactory();
 
         $consolePrompt = $this->prophesize(ConsolePrompt::class);
 

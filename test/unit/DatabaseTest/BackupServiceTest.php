@@ -2,6 +2,7 @@
 namespace GearTest\ProjectTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Zend\Console\Request;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Script\ScriptService;
@@ -47,7 +48,7 @@ class BackupServiceTest extends TestCase
         ***REMOVED***;
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService;
+        $this->string = new StringService;
 
         $this->console = $this->prophesize(Posix::class);
 

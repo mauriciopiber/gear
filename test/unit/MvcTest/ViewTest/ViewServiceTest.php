@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\ViewTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Column\ColumnManager;
 use Zend\Db\Metadata\Object\ConstraintObject;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Table\TableService\TableService;
@@ -92,7 +93,7 @@ class ViewServiceTest extends TestCase
 
         //$db = new Db(['table' => 'My', 'user' => $userType***REMOVED***);
 
-        $columnManager = new \Gear\Column\ColumnManager([$primaryKey, $foreignKey***REMOVED***);
+        $columnManager = new ColumnManager([$primaryKey, $foreignKey***REMOVED***);
         //$this->columns = $this->prophesize(ColumnService::class);
         //$this->columns->getColumns($db)->willReturn()->shouldBeCalled();
 

@@ -2,6 +2,7 @@
 namespace GearTest;
 
 use Symfony\Component\Yaml\Parser;
+use Gear\Schema\Src\Src;
 
 trait ScopeTrait
 {
@@ -9,7 +10,7 @@ trait ScopeTrait
     {
         return [
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicNamespaceExtendsFactory%s', $srcType),
                         'type' => $srcType,
@@ -21,7 +22,7 @@ trait ScopeTrait
                 'basic-namespace-extends-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicNamespaceFactory%s', $srcType),
                         'type' => $srcType,
@@ -33,7 +34,7 @@ trait ScopeTrait
             ***REMOVED***,
 
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicFactory%s', $srcType),
                         'type' => $srcType,
@@ -43,7 +44,7 @@ trait ScopeTrait
                 'basic-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicExtends%s', $srcType),
                         'type' => $srcType,
@@ -54,7 +55,7 @@ trait ScopeTrait
                 'basic-extends',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('LongNamespace%s', $srcType),
                         'type' => $srcType,
@@ -64,7 +65,7 @@ trait ScopeTrait
                 'long-namespace',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('Basic%s', $srcType),
                         'type' => $srcType
@@ -80,7 +81,7 @@ trait ScopeTrait
 
         return [
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('AbstractCompleteInvokables%s', $srcType),
                         'type' => $srcType,
@@ -95,7 +96,7 @@ trait ScopeTrait
                 'abstract-complete-invokables',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('AbstractCompleteFactories%s', $srcType),
                         'type' => $srcType,
@@ -111,7 +112,7 @@ trait ScopeTrait
             ***REMOVED***,
 
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('CompleteInvokables%s', $srcType),
                         'type' => $srcType,
@@ -125,7 +126,7 @@ trait ScopeTrait
                 'complete-invokables',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('CompleteFactories%s', $srcType),
                         'type' => $srcType,
@@ -139,7 +140,7 @@ trait ScopeTrait
                 'complete-factories',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('CompleteFactories%s', $srcType),
                         'type' => $srcType,
@@ -153,7 +154,7 @@ trait ScopeTrait
                 'complete-factories',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicDependenciesFactory%s', $srcType),
                         'type' => $srcType,
@@ -164,7 +165,7 @@ trait ScopeTrait
                 'basic-dependencies-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicDependencyFactory%s', $srcType),
                         'type' => $srcType,
@@ -175,7 +176,7 @@ trait ScopeTrait
                 'basic-dependency-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicFactory%s', $srcType),
                         'type' => $srcType,
@@ -185,7 +186,7 @@ trait ScopeTrait
                 'basic-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicAbstractFactory%s', $srcType),
                         'type' => $srcType,
@@ -196,7 +197,7 @@ trait ScopeTrait
                 'basic-abstract-factory',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicAbstract%s', $srcType),
                         'type' => $srcType,
@@ -206,7 +207,7 @@ trait ScopeTrait
                 'basic-abstract',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicDependencies%s', $srcType),
                         'type' => $srcType,
@@ -216,7 +217,7 @@ trait ScopeTrait
                 'basic-dependencies',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicDependency%s', $srcType),
                         'type' => $srcType,
@@ -226,7 +227,7 @@ trait ScopeTrait
                 'basic-dependency',
             ***REMOVED***,
             // [
-            //     new \Gear\Schema\Src\Src(
+            //     new Src(
             //         [
             //             'name' => sprintf('BasicImplements%s', $srcType),
             //             'type' => $srcType,
@@ -241,7 +242,7 @@ trait ScopeTrait
             //     'basic-implements',
             // ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicExtends%s', $srcType),
                         'type' => $srcType,
@@ -251,7 +252,7 @@ trait ScopeTrait
                 'basic-extends',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('BasicNamespace%s', $srcType),
                         'type' => $srcType,
@@ -261,7 +262,7 @@ trait ScopeTrait
                 'basic-namespace',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('LongNamespace%s', $srcType),
                         'type' => $srcType,
@@ -271,7 +272,7 @@ trait ScopeTrait
                 'long-namespace',
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('Basic%s', $srcType),
                         'type' => $srcType

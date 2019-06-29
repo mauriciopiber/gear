@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\FormTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Form\FormTestService;
+use Gear\Module;
 use Gear\Table\TableService\TableService;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
@@ -29,15 +34,15 @@ class FormTestServiceTest extends TestCase
 
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form-test';
+        $this->template = (new Module())->getLocation().'/../test/template/module/mvc/form-test';
 
         $this->table = $this->prophesize(TableService::class);
 
-        $this->form = new \Gear\Mvc\Form\FormTestService(
+        $this->form = new FormTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -95,7 +100,7 @@ class FormTestServiceTest extends TestCase
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $table = $this->string->str('class', $tableName);
 
-        $db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
+        $db = new Db(['table' => $table***REMOVED***);
 
         $this->module->getModuleName()->willReturn('MyModule');
 
@@ -117,7 +122,7 @@ class FormTestServiceTest extends TestCase
             $this->module->map('FormTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $src = new \Gear\Schema\Src\Src(
+        $src = new Src(
             [
                 'name' => $table.'Form',
                 'type' => 'Form',

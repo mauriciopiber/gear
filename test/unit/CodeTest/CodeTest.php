@@ -2,6 +2,8 @@
 namespace GearTest\CodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module;
+use Gear\Creator\SrcDependency;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
@@ -37,7 +39,7 @@ class CodeTest extends TestCase
 
 
 
-        $this->template = (new \Gear\Module())->getLocation().'/../';
+        $this->template = (new Module())->getLocation().'/../';
         $this->template .= 'test/template/module/code';
     }
 
@@ -284,7 +286,7 @@ use GearBase\Repository\QueryBuilder;
 EOS;
 
         /*
-        $this->srcDependency = new \Gear\Creator\SrcDependency();
+        $this->srcDependency = new SrcDependency();
         $this->srcDependency->setModule($this->module->reveal());
         $this->code->setSrcDependency($this->srcDependency);
         */

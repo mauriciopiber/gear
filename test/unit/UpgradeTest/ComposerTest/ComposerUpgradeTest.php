@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Edge\Composer\ComposerEdge;
@@ -32,7 +33,7 @@ class ComposerUpgradeTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module');
         $this->gearConfig = $this->prophesize(GearConfig::class);
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->composer = new ComposerUpgrade(
             $this->module->reveal(),

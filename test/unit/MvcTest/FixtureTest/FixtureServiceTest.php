@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\FixtureTest;
 
 use org\bovigo\vfs\vfsStream;
+use Gear\Table\UploadImage;
 use Gear\Table\TableService\TableService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Mvc\Config\ConfigService;
@@ -68,7 +69,7 @@ class FixtureServiceTest extends TestCase
         $this->fixture->setSchemaService($this->schemaService->reveal());
         $this->fixture->setConfigService($this->configService->reveal());
 
-        $uploadImage = new \Gear\Table\UploadImage(
+        $uploadImage = new UploadImage(
             $this->string,
             $this->module->reveal()
         );

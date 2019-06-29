@@ -2,6 +2,13 @@
 namespace GearTest\MvcTest\FilterTest;
 
 use PHPUnit\Framework\TestCase as TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Filter\FilterService;
+use Gear\Module;
+use Gear\Creator\Injector\Injector;
 use Gear\Table\TableService\TableService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Mvc\TraitService;
@@ -38,26 +45,26 @@ class FilterServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
 
         //string
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         //template
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/filter';
 
         //code
         $this->code = $this->createCode();
 
 
         //array
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
         //injector
-        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
+        $this->injector = new Injector($this->arrayService);
 
         $this->table = $this->prophesize(TableService::class);
 
         $this->fileCreator = $this->createFileCreator();
 
-        $this->filter = new \Gear\Mvc\Filter\FilterService(
+        $this->filter = new FilterService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -159,7 +166,7 @@ class FilterServiceTest extends TestCase
         }
 
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new Db(['table' => $table***REMOVED***);
 
         $this->db->setColumnManager(new ColumnManager($columns));
         //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
@@ -169,7 +176,7 @@ class FilterServiceTest extends TestCase
         //$this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage)->shouldBeCalled();
         //$this->table->isNullable($this->db->getTable())->willReturn($nullable)->shouldBeCalled();
 
-        $filter = new \Gear\Schema\Src\Src(
+        $filter = new Src(
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',

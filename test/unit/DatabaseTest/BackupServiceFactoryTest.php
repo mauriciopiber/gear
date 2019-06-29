@@ -2,6 +2,7 @@
 namespace GearTest\ProjectTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\BackupServiceFactory;
 use Zend\Console\Request;
 use Zend\Console\Adapter\Posix;
 use Interop\Container\ContainerInterface;
@@ -18,7 +19,7 @@ class BackupServiceFactoryTest extends TestCase
     {
         $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $factory = new \Gear\Database\BackupServiceFactory();
+        $factory = new BackupServiceFactory();
 
         $this->container
           ->get('config')

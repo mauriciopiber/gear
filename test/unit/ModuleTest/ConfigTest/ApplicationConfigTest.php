@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Config\ApplicationConfig;
 use Zend\Console\Request;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
@@ -24,7 +25,7 @@ class ApplicationConfigTest extends TestCase
     {
         $root = vfsStream::setup('project');
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -44,7 +45,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -67,7 +68,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -115,7 +116,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -168,7 +169,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );

@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\FactoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Module;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
@@ -29,23 +34,23 @@ class FactoryTestServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory-test';
 
-        $this->string  = new \Gear\Util\String\StringService();
+        $this->string  = new StringService();
         $fileCreator    = $this->createFileCreator();
 
         $this->codeFactoryTest = new FactoryCodeTest(
             $this->module->reveal(),
             $this->string,
-            new \Gear\Util\Dir\DirService(),
-            new \Gear\Util\Vector\ArrayService()
+            new DirService(),
+            new ArrayService()
         );
 
-        $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService(
+        $this->factoryTest = new FactoryTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,

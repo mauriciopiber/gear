@@ -2,6 +2,7 @@
 namespace GearTest\UtilTest\YamlTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Yaml\YamlService;
 use Gear\Util\Yaml\YamlServiceTrait;
 use org\bovigo\vfs\vfsStream;
 
@@ -14,7 +15,7 @@ class YamlServiceTest extends TestCase
 
     public function testThrowFileNotFound()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
+        $yaml = new YamlService();
 
         $file = null;
 
@@ -44,7 +45,7 @@ EOS;
         file_put_contents($gearfile, $gearfileConfig);
 
 
-        $yaml = new \Gear\Util\Yaml\YamlService();
+        $yaml = new YamlService();
 
         $file = $yaml->load($gearfile);
 
@@ -74,7 +75,7 @@ options:
 EOS;
 
 
-        $yaml = new \Gear\Util\Yaml\YamlService();
+        $yaml = new YamlService();
 
         $file = $yaml->parse($yamlFile);
 

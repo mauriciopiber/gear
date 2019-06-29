@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Config\RouterManager;
 use org\bovigo\vfs\vfsStream;
@@ -54,16 +56,16 @@ EOS
       $this->module->getModuleName()->willReturn('MyModule');
       $this->module->getNamespace()->willReturn('MyModule');
 
-      $this->string = new \Gear\Util\String\StringService();
+      $this->string = new StringService();
 
       $this->language = $this->prophesize(\Gear\Mvc\LanguageService::class);
 
-      $this->array = new \Gear\Util\Vector\ArrayService();
+      $this->array = new ArrayService();
       $this->fileCreator = $this->prophesize(FileCreator::class);
 
       $this->code = $this->createCode();
 
-      $this->router = new \Gear\Mvc\Config\RouterManager(
+      $this->router = new RouterManager(
           $this->module->reveal(),
           $this->fileCreator->reveal(),
           $this->string,

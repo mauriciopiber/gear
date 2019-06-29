@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Upgrade\Npm\NpmUpgradeTrait;
@@ -25,7 +26,7 @@ class NpmUpgradeTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
         $this->npmEdge = $this->prophesize(NpmEdge::class);
 
         $this->npmUpgrade = new NpmUpgrade(

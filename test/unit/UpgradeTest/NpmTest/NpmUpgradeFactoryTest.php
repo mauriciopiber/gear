@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Npm\NpmUpgradeFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Util\Prompt\ConsolePrompt;
@@ -41,7 +42,7 @@ class NpmUpgradeFactoryTest extends TestCase
         ->shouldBeCalled();
 
 
-        $factory = new \Gear\Upgrade\Npm\NpmUpgradeFactory();
+        $factory = new NpmUpgradeFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\EntityTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Gear\Util\Glob\GlobService;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
@@ -43,7 +44,7 @@ class EntityServiceTest extends TestCase
         $this->schemaLoaderService = $this->prophesize(SchemaLoaderService::class);
         $this->dirService = $this->prophesize(DirService::class);
         $this->globService = $this->prophesize(GlobService::class);
-        $this->stringService = new \Gear\Util\String\StringService();
+        $this->stringService = new StringService();
 
 
         $this->entityFixerObject = $this->prophesize(EntityObjectFixer::class);

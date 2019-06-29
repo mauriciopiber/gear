@@ -2,6 +2,7 @@
 namespace GearTest\AutoloadTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Autoload\ComposerAutoloadFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -18,7 +19,7 @@ class ComposerAutoloadFactoryTest extends TestCase
 
         $this->container->get(ModuleStructure::class)->willReturn($module)->shouldBeCalled();
 
-        $factory = new \Gear\Autoload\ComposerAutoloadFactory();
+        $factory = new ComposerAutoloadFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

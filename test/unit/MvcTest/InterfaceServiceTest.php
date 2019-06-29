@@ -2,6 +2,7 @@
 namespace GearTest\ServiceTest\MvcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Src\Src;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module;
@@ -55,7 +56,7 @@ class InterfaceTestServiceTest extends TestCase
     {
         return [
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'MyInterface',
                     'type' => 'Interface',
                     'namespace' => 'Interfaces'
@@ -63,7 +64,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-interface'
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'NamespaceInterface',
                     'type' => 'Interface',
                     'namespace' => 'My\Very\Long\Namespaces'
@@ -71,7 +72,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-namespace'
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'ExtendsInterface',
                     'type' => 'Interface',
                     'extends' => 'Interfaces\MyAnotherInterface',
@@ -80,7 +81,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-extends'
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'SimpleDependencyInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependency',
@@ -89,7 +90,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-dependency'
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'SimpleDependenciesInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,Repository\MyDependencyThree',
@@ -98,7 +99,7 @@ class InterfaceTestServiceTest extends TestCase
                 'simple-dependencies'
             ***REMOVED***,
             [
-                new \Gear\Schema\Src\Src([
+                new Src([
                     'name' => 'CompleteInterface',
                     'type' => 'Interface',
                     'dependency' => 'Repository\MyDependencyOne,Repository\MyDependencyTwo,My\Very\Long\Namespaces\MyDependencyThree',

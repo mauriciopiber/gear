@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
 use Gear\Mvc\Config\ViewHelperManager;
 use Gear\Mvc\Config\UploadImageManager;
 use Gear\Mvc\Config\ServiceManager;
@@ -43,7 +45,7 @@ class ConfigServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
@@ -64,7 +66,7 @@ class ConfigServiceTest extends TestCase
         $this->navigationManager = $this->prophesize(NavigationManager::class);
         $this->uploadImageManager = $this->prophesize(UploadImageManager::class);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';///module.config.cli.php'
+        $this->template = (new Module())->getLocation().'/../test/template/module/config';///module.config.cli.php'
         $this->config = new ConfigService(
             $this->module->reveal(),
             $this->string,

@@ -2,6 +2,13 @@
 namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Table\UploadImage;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
+use Gear\Module;
 use Gear\Table\TableService\TableService;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Schema\SchemaService;
@@ -34,18 +41,18 @@ class WebControllerTestServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/controller-test';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/controller-test';
 
         $this->module = $this->prophesize(ModuleStructure::class);
-        $this->string = new \Gear\Util\String\StringService();
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->string = new StringService();
+        $this->arrayService = new ArrayService();
         $this->codeTest = $this->createCodeTest();
         $this->table = $this->prophesize(TableService::class);
         $this->fileCreator = $this->createFileCreator();
 
         $this->injector = new Injector($this->arrayService);
 
-        $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService(
+        $this->controllerTest = new WebControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -58,7 +65,7 @@ class WebControllerTestServiceTest extends TestCase
         $this->schemaService = $this->prophesize(SchemaService::class);
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
-        $uploadImage = new \Gear\Table\UploadImage(
+        $uploadImage = new UploadImage(
             $this->string,
             $this->module->reveal()
         );
@@ -119,7 +126,7 @@ class WebControllerTestServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $controller = new \Gear\Schema\Controller\Controller([
+        $controller = new Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
@@ -134,7 +141,7 @@ class WebControllerTestServiceTest extends TestCase
 
         //var_dump($controller);
 
-        $this->db = new \Gear\Schema\Db\Db(
+        $this->db = new Db(
             [
                 'table' => $this->string->str('class', $tableName),
                 'user' => $userType

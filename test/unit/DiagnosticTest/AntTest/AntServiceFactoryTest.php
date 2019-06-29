@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\Ant\AntServiceFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Config\GearConfig;
@@ -36,7 +37,7 @@ class AntServiceFactoryTest extends TestCase
         ->willReturn($this->prophesize(GearConfig::class)->reveal())
         ->shouldBeCalled();
 
-        $factory = new \Gear\Diagnostic\Ant\AntServiceFactory();
+        $factory = new AntServiceFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

@@ -2,6 +2,12 @@
 namespace GearTest\ModuleTest\DocsTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Util\File\FileService;
+use Gear\Module\Docs\Docs;
+use Gear\Module;
+use Gear\Creator\Template\TemplateService;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -22,18 +28,18 @@ class DocsTest extends TestCase
         vfsStream::setup('module');
 
 
-        $template       = new \Gear\Creator\Template\TemplateService(
-            $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view')
+        $template       = new TemplateService(
+            $this->mockPhpRenderer((new Module)->getLocation().'/../view')
         );
 
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/docs';
+        $this->template = (new Module())->getLocation().'/../test/template/module/docs';
     }
 
     public function testCreateIndexDocs()
@@ -43,7 +49,7 @@ class DocsTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getDocsFolder()->willReturn(vfsStream::url('module/docs'))->shouldBeCalled();
 
-        $this->docs = new \Gear\Module\Docs\Docs(
+        $this->docs = new Module\Docs\Docs(
             $this->module->reveal(),
             $this->string,
             $this->fileCreator
@@ -64,7 +70,7 @@ class DocsTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->docs = new \Gear\Module\Docs\Docs(
+        $this->docs = new Module\Docs\Docs(
             $this->module->reveal(),
             $this->string,
             $this->fileCreator
@@ -85,7 +91,7 @@ class DocsTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $this->docs = new \Gear\Module\Docs\Docs(
+        $this->docs = new Module\Docs\Docs(
             $this->module->reveal(),
             $this->string,
             $this->fileCreator

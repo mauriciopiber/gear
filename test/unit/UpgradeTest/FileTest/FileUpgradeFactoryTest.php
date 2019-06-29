@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\File\FileUpgradeFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Module\Tests\ModuleTestsService;
@@ -49,7 +50,7 @@ class FileUpgradeFactoryTest extends TestCase
           ->willReturn($this->prophesize(Docs::class)->reveal())
           ->shouldBeCalled();
 
-        $factory = new \Gear\Upgrade\File\FileUpgradeFactory();
+        $factory = new FileUpgradeFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Upgrade\ModuleUpgradeFactory;
 use Zend\Console\Adapter\Posix;
 use Interop\Container\ContainerInterface;
 use Gear\Upgrade\Ant\AntUpgrade;
@@ -21,7 +22,7 @@ class ModuleUpgradeFactoryTest extends TestCase
     {
         $this->container= $this->prophesize(ContainerInterface::class);
 
-        $factory = new \Gear\Module\Upgrade\ModuleUpgradeFactory();
+        $factory = new ModuleUpgradeFactory();
         $console = $this->prophesize(Posix::class);
         $this->container->get('console')->willReturn($console->reveal())->shouldBeCalled();
 

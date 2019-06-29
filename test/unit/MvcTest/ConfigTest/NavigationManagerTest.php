@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Config\NavigationManager;
+use Gear\Module;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Config\NavigationManagerTrait;
 use org\bovigo\vfs\vfsStream;
@@ -39,13 +43,13 @@ class NavigationManagerTest extends TestCase
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->templates = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/config/navigation';
+        $this->templates = (new Module())->getLocation().'/../test/template/module/mvc/config/navigation';
 
-        $this->navigation = new \Gear\Mvc\Config\NavigationManager(
+        $this->navigation = new NavigationManager(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -101,7 +105,7 @@ class NavigationManagerTest extends TestCase
 
 
 
-        $this->array = new \Gear\Util\Vector\ArrayService();
+        $this->array = new ArrayService();
         //$this->array->setStringService($this->string);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -124,21 +128,21 @@ class NavigationManagerTest extends TestCase
 
         file_put_contents(vfsStream::url('module/config/ext/navigation.config.php'), file_get_contents($actualFile));
 
-        $controller = new \Gear\Schema\Controller\Controller(
+        $controller = new Controller(
             [
                 'name' => 'MyController',
                 'object' => '%s\Controller\MyController'
             ***REMOVED***
         );
 
-        $action = new \Gear\Schema\Action\Action(
+        $action = new Action(
             [
                 'controller' => $controller,
                 'name' => 'MyAction'
             ***REMOVED***
         );
 
-        $this->array = new \Gear\Util\Vector\ArrayService();
+        $this->array = new ArrayService();
         //$this->array->setStringService($this->string);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
@@ -159,9 +163,9 @@ class NavigationManagerTest extends TestCase
 
         file_put_contents(vfsStream::url('module/config/ext/navigation.config.php'), file_get_contents($actualFile));
 
-        $db = new \Gear\Schema\Db\Db(['table' => 'Table'***REMOVED***);
+        $db = new Db(['table' => 'Table'***REMOVED***);
 
-        $controller = new \Gear\Schema\Controller\Controller(
+        $controller = new Controller(
             [
                 'name' => 'TableController',
                 'object' => '%s\Controller\TabkeController'
@@ -194,10 +198,10 @@ class NavigationManagerTest extends TestCase
         $controller->setDb($db);
 
         foreach ($actions as $action) {
-            $controller->addAction(new \Gear\Schema\Action\Action($action));
+            $controller->addAction(new Action($action));
         }
 
-        $this->array = new \Gear\Util\Vector\ArrayService();
+        $this->array = new ArrayService();
         //$this->array->setStringService($this->string);
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();

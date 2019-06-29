@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\ControllerTest\ConsoleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Mvc\Controller\Console\ConsoleControllerService;
+use Gear\Module;
+use Gear\Creator\Injector\Injector;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -34,11 +39,11 @@ class ConsoleControllerTest extends TestCase
 
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console';
+        $this->template = (new Module())->getLocation().'/../test/template/module/mvc/console';
 
 
         //     ModuleStructure $module,
@@ -51,13 +56,13 @@ class ConsoleControllerTest extends TestCase
         // ArrayService $array
 
         $this->code = $this->createCode();
-        //$this->code->setDirService(new \Gear\Util\Dir\DirService());
+        //$this->code->setDirService(new DirService());
         //$this->code->setArrayService($this->array);
         //$this->controller->setCode($this->code);
-        $this->array = new \Gear\Util\Vector\ArrayService();
-        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
+        $this->array = new ArrayService();
+        $this->injector = new Injector($this->array);
 
-        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerService(
+        $this->controller = new ConsoleControllerService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,

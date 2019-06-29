@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\DirTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\Dir\DirServiceFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Config\GearConfig;
 use Gear\Edge\Dir\DirEdge;
@@ -28,7 +29,7 @@ class DirServiceFactoryTest extends TestCase
         $dirEdge = $this->prophesize(DirEdge::class);
         $this->container->get(DirEdge::class)->willReturn($dirEdge->reveal())->shouldBeCalled();
 
-        $factory = new \Gear\Diagnostic\Dir\DirServiceFactory();
+        $factory = new DirServiceFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

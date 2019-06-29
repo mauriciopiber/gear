@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\FormTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Form\FormService;
+use Gear\Module;
 use Gear\Table\TableService\TableService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Module\Structure\ModuleStructure;
@@ -34,9 +38,9 @@ class FormServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
 
         //template
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/form';
 
-        $this->form = new \Gear\Mvc\Form\FormService(
+        $this->form = new FormService(
             $this->module->reveal(),
             $this->createFileCreator(),
             $this->createString(),
@@ -112,7 +116,7 @@ class FormServiceTest extends TestCase
 
 
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new Db(['table' => $table***REMOVED***);
 
 
         $columnManager = new ColumnManager($columns);
@@ -132,7 +136,7 @@ class FormServiceTest extends TestCase
 
         $this->form->setTableService($this->table->reveal());
 
-        $form = new \Gear\Schema\Src\Src(
+        $form = new Src(
             [
                 'name' => sprintf('%sForm', $table),
                 'type' => 'Form',

@@ -2,6 +2,7 @@
 namespace GearTest\DatabaseTest\PhinxTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\Phinx\PhinxServiceFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
@@ -25,7 +26,7 @@ class PhinxServiceFactoryTest extends TestCase
           ->willReturn($this->prophesize(FileCreator::class)->reveal())
           ->shouldBeCalled();
 
-        $factory = new \Gear\Database\Phinx\PhinxServiceFactory();
+        $factory = new PhinxServiceFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

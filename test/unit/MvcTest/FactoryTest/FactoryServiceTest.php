@@ -2,6 +2,11 @@
 namespace GearTest\MvcTest\Factory;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Module;
+use Gear\Code\FactoryCode\FactoryCode;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
@@ -30,25 +35,25 @@ class FactoryServiceTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule');
 
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory';
 
         $fileCreator    = $this->createFileCreator();
-        $this->string  = new \Gear\Util\String\StringService();
-        $this->codeFactory = new \Gear\Code\FactoryCode\FactoryCode(
+        $this->string  = new StringService();
+        $this->codeFactory = new FactoryCode(
             $this->module->reveal(),
             $this->string,
-            new \Gear\Util\Dir\DirService()
+            new DirService()
         );
 
         $this->code = $this->createCode();
         //$constructorParams = new ConstructorParams($this->string);
         //$code->setConstructorParams($constructorParams);
 
-        $this->factory = new \Gear\Mvc\Factory\FactoryService(
+        $this->factory = new FactoryService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -199,7 +204,7 @@ class FactoryServiceTest extends TestCase
 
         $expected = 'dependencies';
 
-        $src = new \Gear\Schema\Src\Src([
+        $src = new Src([
             'name' => 'MyService',
             'type' => 'Service',
             'service' => 'factories',

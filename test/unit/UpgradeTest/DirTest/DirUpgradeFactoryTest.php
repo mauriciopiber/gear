@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Dir\DirUpgradeFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Util\Dir\DirService;
@@ -42,7 +43,7 @@ class DirUpgradeFactoryTest extends TestCase
         )->shouldBeCalled();
 
 
-        $factory = new \Gear\Upgrade\Dir\DirUpgradeFactory();
+        $factory = new DirUpgradeFactory();
 
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);

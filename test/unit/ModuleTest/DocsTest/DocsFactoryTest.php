@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\DocsTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Docs\DocsFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
@@ -29,7 +30,7 @@ class DocsFactoryTest extends TestCase
           ->willReturn($this->prophesize(FileCreator::class)->reveal())
           ->shouldBeCalled();
 
-        $factory = new \Gear\Module\Docs\DocsFactory();
+        $factory = new DocsFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Config\ApplicationConfigFactory;
 use Zend\Console\Request;
 use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
@@ -26,7 +27,7 @@ class ApplicationConfigFactoryTest extends TestCase
           ->willReturn($this->prophesize(Request::class))
           ->shouldBeCalled();
 
-        $factory = new \Gear\Module\Config\ApplicationConfigFactory();
+        $factory = new ApplicationConfigFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

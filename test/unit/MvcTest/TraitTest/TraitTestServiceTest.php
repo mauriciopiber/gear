@@ -2,6 +2,10 @@
 namespace GearTest\ServiceTest\MvcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Src\Src;
+use Gear\Mvc\TraitTestService;
+use Gear\Module;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\UtilTestTrait;
@@ -22,17 +26,17 @@ class TraitTestServiceTest extends TestCase
         $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('GearIt');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->templates = $this->baseDir.'/../test/template/module/mvc/trait';
 
-        $stringService  = new \Gear\Util\String\StringService();
+        $stringService  = new StringService();
         $fileCreator    = $this->createFileCreator();
 
 
-        $this->traitTest = new \Gear\Mvc\TraitTestService(
+        $this->traitTest = new TraitTestService(
             $this->module->reveal(),
             $fileCreator,
             $stringService,
@@ -50,7 +54,7 @@ class TraitTestServiceTest extends TestCase
         $this->module->getNamespace()->willReturn('GearIt')->shouldBeCalled();
         $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $src = new \Gear\Schema\Src\Src([
+        $src = new Src([
             'name' => 'MyService',
             'type' => 'Service'
         ***REMOVED***);

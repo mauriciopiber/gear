@@ -388,7 +388,7 @@ class ModuleServiceTest extends TestCase
         $moduleName = sprintf('%sModule', ucfirst($type));
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\Structure\ModuleStructure(
+        $this->module = new ModuleStructure(
             $this->stringService,
             $this->dirService,
             $this->fileService

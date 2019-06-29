@@ -2,6 +2,9 @@
 namespace GearTest;
 
 use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Util\String\StringService;
+use Gear\Column\Varchar\Varchar;
+use Gear\Column\Integer\PrimaryKey;
 use Zend\Db\Metadata\Object\ConstraintObject;
 trait LongNameTableTrait
 {
@@ -31,11 +34,11 @@ trait LongNameTableTrait
 
     public function getLongNameTableColumns()
     {
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $columns = [***REMOVED***;
 
-        $columns[***REMOVED*** = new \Gear\Column\Integer\PrimaryKey(
+        $columns[***REMOVED*** = new PrimaryKey(
             $this->prophesizeColumnLongName('my_very_long_table_name_example', 'id_my_very_long_table_name_example', 'int'),
             $this->prophesizeForeignKeyLongName('my_very_long_table_name_example', 'id_my_very_long_table_name_example', 'PRIMARY KEY')
         );
@@ -48,7 +51,7 @@ trait LongNameTableTrait
         $varcharColumn->isNullable()->willReturn(true);
         $varcharColumn->getCharacterMaximumLength()->willReturn(45);
 
-        $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
+        $column = new Varchar($varcharColumn->reveal());
         //$column->setUniqueConstraint($this->prophesizeUnique('table', 'varchar_column'));
 
 

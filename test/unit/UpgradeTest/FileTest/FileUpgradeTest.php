@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Project\ProjectService;
@@ -122,7 +123,7 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
         $yaml = new YamlService();
-        $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
+        $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
 
 
         $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
@@ -185,8 +186,8 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
         $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
-        $file = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
-        $common = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
+        $file = $this->yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
+        $common = $this->yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
 
         $target = array_merge_recursive($file, $common);
 

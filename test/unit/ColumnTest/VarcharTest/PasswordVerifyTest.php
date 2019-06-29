@@ -2,6 +2,8 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\PasswordVerify;
 
@@ -16,14 +18,14 @@ class PasswordVerifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
 
         $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column');
 
-        $base = (new \Gear\Module())->getLocation();
+        $base = (new Module())->getLocation();
 
         $this->template = $base.'/../test/template/module/column/varchar/password-verify';
     }
@@ -55,7 +57,7 @@ class PasswordVerifyTest extends TestCase
 
 
         $this->passwordVerify = new PasswordVerify($this->column->reveal());
-        $this->passwordVerify->setStringService(new \Gear\Util\String\StringService());
+        $this->passwordVerify->setStringService(new StringService());
 
         $filter = $this->passwordVerify->getFilterFormElement();
 

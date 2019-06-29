@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Ant\AntUpgradeFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Util\String\StringService;
 use Gear\Util\Prompt\ConsolePrompt;
@@ -41,7 +42,7 @@ class AntUpgradeFactoryTest extends TestCase
             $this->prophesize(GearConfig::class)->reveal()
         )->shouldBeCalled();
 
-        $factory = new \Gear\Upgrade\Ant\AntUpgradeFactory();
+        $factory = new AntUpgradeFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

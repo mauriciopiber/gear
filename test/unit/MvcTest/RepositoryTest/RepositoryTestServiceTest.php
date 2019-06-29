@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\RepositoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Repository\RepositoryTestService;
+use Gear\Module;
 use Gear\Table\TableService\TableService;
 use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
@@ -29,11 +33,11 @@ class RepositoryTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/RepositoryTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository-test';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/repository-test';
 
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator = $this->createFileCreator();
 
@@ -42,7 +46,7 @@ class RepositoryTestServiceTest extends TestCase
         $this->schemaService = $this->prophesize(SchemaService::class);
 
 
-        $this->repository = new \Gear\Mvc\Repository\RepositoryTestService(
+        $this->repository = new RepositoryTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -115,9 +119,9 @@ class RepositoryTestServiceTest extends TestCase
     {
         $table = $this->string->str('class', $tableName);
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
+        $this->db = new Db(['table' => sprintf('%s', $table)***REMOVED***);
 
-        $repository = new \Gear\Schema\Src\Src(
+        $repository = new Src(
             [
                 'name' => sprintf('%sRepository', $table),
                 'type' => 'Repository',

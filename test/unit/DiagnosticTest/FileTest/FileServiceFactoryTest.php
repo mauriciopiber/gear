@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\File\FileServiceFactory;
 use Interop\Container\ContainerInterface;
 use Gear\Config\GearConfig;
 use Gear\Edge\File\FileEdge;
@@ -28,7 +29,7 @@ class FileServiceFactoryTest extends TestCase
         $fileEdge = $this->prophesize(FileEdge::class);
         $this->container->get(FileEdge::class)->willReturn($fileEdge->reveal())->shouldBeCalled();
 
-        $factory = new \Gear\Diagnostic\File\FileServiceFactory();
+        $factory = new FileServiceFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

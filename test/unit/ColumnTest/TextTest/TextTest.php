@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\TextTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Text\Text;
 
@@ -21,7 +22,7 @@ class TextTest extends TestCase
         $column->getName()->willReturn('my_column');
 
         $this->text = new Text($column->reveal());
-        $this->text->setStringService(new \Gear\Util\String\StringService());
+        $this->text->setStringService(new StringService());
     }
 
     public function values()

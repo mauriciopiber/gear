@@ -2,6 +2,8 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\UploadImage;
 
@@ -21,9 +23,9 @@ class UploadImageTest extends TestCase
         $this->column->getName()->willReturn('my_column');
 
         $this->uploadImage = new UploadImage($this->column->reveal());
-        $this->uploadImage->setStringService(new \Gear\Util\String\StringService());
+        $this->uploadImage->setStringService(new StringService());
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/upload-image';
+        $this->template = (new Module())->getLocation().'/../test/template/module/column/varchar/upload-image';
 
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
     }

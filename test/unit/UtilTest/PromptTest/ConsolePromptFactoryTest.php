@@ -2,6 +2,7 @@
 namespace GearTest\UtilTest\PromptTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Prompt\ConsolePromptFactory;
 use Zend\Console\Request;
 use Interop\Container\ContainerInterface;
 
@@ -20,7 +21,7 @@ class ConsolePromptFactoryTest extends TestCase
 
         $this->container->get('Request')->willReturn($request->reveal())->shouldBeCalled();
 
-        $factory = new \Gear\Util\Prompt\ConsolePromptFactory();
+        $factory = new ConsolePromptFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

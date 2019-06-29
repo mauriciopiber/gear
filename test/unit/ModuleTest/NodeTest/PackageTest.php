@@ -2,6 +2,10 @@
 namespace GearTest\ModuleTest\NodeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Upgrade\Npm\NpmUpgrade;
+use Gear\Module\Node\Package;
+use Gear\Module;
 use Zend\Console\Adapter\Posix;
 use Gear\Util\Prompt\ConsolePrompt;
 use Gear\Module\Structure\ModuleStructure;
@@ -31,16 +35,16 @@ class PackageTest extends TestCase
         $this->module->getModuleName()->willReturn('MyModule');
 
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module';
+        $this->template = (new Module())->getLocation().'/../test/template/module';
 
         vfsStream::setup('module');
 
         $parser = new Parser();
 
         $files = $parser->parse(
-            file_get_contents((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/npm.yml')
+            file_get_contents((new Module())->getLocation().'/../data/edge-technologic/module/web/npm.yml')
         );
 
         $this->console = $this->prophesize(Posix::class);
@@ -53,7 +57,7 @@ class PackageTest extends TestCase
 
         $this->gearConfig = $this->prophesize(GearConfig::class);
 
-        $this->upgrade = new \Gear\Upgrade\Npm\NpmUpgrade(
+        $this->upgrade = new NpmUpgrade(
             $this->module->reveal(),
             $this->gearConfig->reveal(),
             $this->edge->reveal(),
@@ -70,7 +74,7 @@ class PackageTest extends TestCase
     public function testCreateModulePackage()
     {
 
-        $test = new \Gear\Module\Node\Package();
+        $test = new Module\Node\Package();
         $test->setModule($this->module->reveal());
         $test->setStringService($this->string);
         $test->setFileCreator($this->fileCreator);

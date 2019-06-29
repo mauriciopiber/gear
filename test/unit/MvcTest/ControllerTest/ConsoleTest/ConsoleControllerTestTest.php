@@ -2,6 +2,12 @@
 namespace GearTest\MvcTest\ControllerTest\ConsoleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Mvc\Controller\Console\ConsoleControllerTestService;
+use Gear\Module;
+use Gear\Creator\Injector\Injector;
+use Gear\Code\CodeTest;
 use Gear\Mvc\TraitTestService;
 use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Module\Structure\ModuleStructure;
@@ -35,25 +41,25 @@ class ConsoleControllerTestTest extends TestCase
 
         $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->dirService = new DirService();
 ;
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/console-test';
+        $this->template = (new Module())->getLocation().'/../test/template/module/mvc/console-test';
 
-        $this->array = new \Gear\Util\Vector\ArrayService();
+        $this->array = new ArrayService();
 
-        $this->codeTest = new \Gear\Code\CodeTest(
+        $this->codeTest = new CodeTest(
             $this->module->reveal(),
             $this->string,
             $this->dirService,
             $this->array
         );
-        $this->injector = new \Gear\Creator\Injector\Injector($this->array);
+        $this->injector = new Injector($this->array);
 
-        $this->controller = new \Gear\Mvc\Controller\Console\ConsoleControllerTestService(
+        $this->controller = new ConsoleControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
