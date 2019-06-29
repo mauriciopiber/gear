@@ -412,7 +412,7 @@ EOS;
 
     const SERVICE_TEST_SET_UP = <<<EOS
 
-        \$this->imageService = \$this->prophesize(ImageService::class);
+        \$this->imageService = \$this->prophesize('GearImage\Service\ImageService');
         \$this->service->setImageService(\$this->imageService->reveal());
 
 EOS;
