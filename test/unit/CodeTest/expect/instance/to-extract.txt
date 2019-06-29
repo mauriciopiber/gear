@@ -1,9 +1,0 @@
-
-        $template       = new \Gear\Creator\Template\TemplateService();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->stringService  = new \Gear\Util\String\StringService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
-
-        $this->dirService = new \Gear\Util\Dir\DirService();
