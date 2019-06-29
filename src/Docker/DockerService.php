@@ -54,4 +54,17 @@ class DockerService
         $render = $file->render();
         return $render;
     }
+
+    public function createDockerfile()
+    {
+        $type = $this->module->getType();
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/docker/dockerfile-%s.yml', $type));
+        $file->setOptions([***REMOVED***);
+        $file->setLocation($this->module->getMainFolder());
+        $file->setFileName('Dockerfile');
+        $render = $file->render();
+        return $render;
+    }
 }

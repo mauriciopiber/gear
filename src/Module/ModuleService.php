@@ -336,6 +336,7 @@ class ModuleService
         $this->createJenkinsFile($this->type);
 
         $this->getDockerService()->createDockerComposeFile();
+        $this->getDockerService()->createDockerfile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();
