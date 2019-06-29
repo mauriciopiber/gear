@@ -75,11 +75,8 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
         ) && ($action->getController()->getType() == 'Action' || !$this->defaultAction($action->getName()))
         ) {
-
-          $actionRoute = $this->getActionRoute($action);
-          $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
-
-
+            $actionRoute = $this->getActionRoute($action);
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
         }
 
         $this->getArrayService()->arrayToFile($this->fileName, $router);
@@ -273,11 +270,11 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         $controller = $action->getController();
 
         if ($action->getController()->getDb() === null) {
-            $controllerRoute = $this->str('url', $controller->getName());
+            $controllerRoute = $this->str('url', $controller->getNameOff());
             $controllerName = $controller->getName();
         } else {
             $controllerRoute = $this->str('url', $controller->getNameOff());
-            $controllerName = $controller->getNameOff();
+            $controllerName = $controller->getName();
         }
 
         $route = sprintf('/%s', $controllerRoute);

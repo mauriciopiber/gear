@@ -58,7 +58,7 @@ abstract class AbstractCodeBase implements
             }
         }
 
-        $invokeName = ($service instanceof Controller) ? $service->getNameOff() : $service->getName();
+        $invokeName = $service->getName();
 
         $object = '%s\%s\%s';
 

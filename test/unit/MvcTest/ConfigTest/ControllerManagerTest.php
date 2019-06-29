@@ -73,7 +73,7 @@ class ControllerManagerTest extends TestCase
         <?php return array (
           'invokables' =>
           array (
-            'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+            'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
           ),
         );
 EOS
@@ -85,10 +85,10 @@ EOS
 
       $expected = [
         'invokables' => [
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ***REMOVED***,
         'factories' => [
-          'MyModule\MyNamespace\My' => 'MyModule\MyNamespace\MyControllerFactory',
+          'MyModule\MyNamespace\MyController' => 'MyModule\MyNamespace\MyControllerFactory',
         ***REMOVED***,
       ***REMOVED***;
 
@@ -113,7 +113,7 @@ EOS
       <?php return array (
         'invokables' =>
         array (
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ),
       );
 EOS
@@ -125,10 +125,10 @@ EOS
 
       $expected = [
         'invokables' => [
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ***REMOVED***,
         'factories' => [
-          'MyModule\Controller\My' => 'MyModule\Controller\MyControllerFactory',
+          'MyModule\Controller\MyController' => 'MyModule\Controller\MyControllerFactory',
         ***REMOVED***,
       ***REMOVED***;
 

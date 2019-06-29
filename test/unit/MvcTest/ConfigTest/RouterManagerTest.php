@@ -1,6 +1,7 @@
 <?php
 namespace GearTest\MvcTest\ConfigTest;
 
+use Gear\Mvc\LanguageService;
 use PHPUnit\Framework\TestCase;
 use Gear\Util\Vector\ArrayService;
 use Gear\Util\String\StringService;
@@ -25,13 +26,13 @@ class RouterManagerTest extends TestCase
 
     public function setUp() : void
     {
-      parent::setUp();
-      vfsStream::setup('module');
+        parent::setUp();
+        vfsStream::setup('module');
 
-      vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
-      vfsStream::newDirectory('config/ext')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('config')->at(vfsStreamWrapper::getRoot());
+        vfsStream::newDirectory('config/ext')->at(vfsStreamWrapper::getRoot());
 
-      file_put_contents(vfsStream::url('module/config/ext/route.config.php'), <<<EOS
+        file_put_contents(vfsStream::url('module/config/ext/route.config.php'), <<<EOS
 <?php return [
     'router_class' => 'Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',
     'routes' => [
@@ -40,7 +41,7 @@ class RouterManagerTest extends TestCase
             'options' => [
                 'route' => '/my-module',
                 'defaults' => [
-                    'controller' => 'MyModule\Controller\Index'
+                    'controller' => 'MyModule\Controller\IndexController'
                 ***REMOVED***
             ***REMOVED***,
             'may_terminate' => true,
@@ -51,28 +52,28 @@ EOS
 );
 
 
-      $this->module = $this->prophesize(ModuleStructure::class);
-      $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
-      $this->module->getModuleName()->willReturn('MyModule');
-      $this->module->getNamespace()->willReturn('MyModule');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
+        $this->module->getModuleName()->willReturn('MyModule');
+        $this->module->getNamespace()->willReturn('MyModule');
 
-      $this->string = new StringService();
+        $this->string = new StringService();
 
-      $this->language = $this->prophesize(\Gear\Mvc\LanguageService::class);
+        $this->language = $this->prophesize(LanguageService::class);
 
-      $this->array = new ArrayService();
-      $this->fileCreator = $this->prophesize(FileCreator::class);
+        $this->array = new ArrayService();
+        $this->fileCreator = $this->prophesize(FileCreator::class);
 
-      $this->code = $this->createCode();
+        $this->code = $this->createCode();
 
-      $this->router = new RouterManager(
-          $this->module->reveal(),
-          $this->fileCreator->reveal(),
-          $this->string,
-          $this->code,
-          $this->array,
-          $this->language->reveal()
-      );
+        $this->router = new RouterManager(
+            $this->module->reveal(),
+            $this->fileCreator->reveal(),
+            $this->string,
+            $this->code,
+            $this->array,
+            $this->language->reveal()
+        );
     }
 
     public function testCreateActionAction()
@@ -101,7 +102,7 @@ EOS
       $actionRoutes = $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***;
       $this->assertCount(1, $actionRoutes);
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['route'***REMOVED***, '/my-action');
-      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\My');
+      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\MyController');
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['action'***REMOVED***, 'my-action');
 
       //var_dump($routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***[0***REMOVED***['options'***REMOVED***);
@@ -137,19 +138,19 @@ EOS
       $actionRoutes = $routerFile['routes'***REMOVED***['my-module'***REMOVED***['child_routes'***REMOVED***['my'***REMOVED***['child_routes'***REMOVED***;
       $this->assertCount(1, $actionRoutes);
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['route'***REMOVED***, '/my-action');
-      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\My');
+      $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['controller'***REMOVED***, 'MyModule\Controller\MyController');
       $this->assertEquals($actionRoutes['my-action'***REMOVED***['options'***REMOVED***['defaults'***REMOVED***['action'***REMOVED***, 'my-action');
 
       $expected = [
         'my' => [
             'type'    => 'segment',
             'options' => [
-                'route'    => '/my-controller[/:id***REMOVED***',
+                'route'    => '/my[/:id***REMOVED***',
                 'constraints' => [
                     'id'     => '[a-zA-Z0-9***REMOVED***+',
                 ***REMOVED***,
                 'defaults' => [
-                    'controller' => 'MyModule\Controller\My',
+                    'controller' => 'MyModule\Controller\MyController',
                 ***REMOVED***,
             ***REMOVED***,
             'may_terminate' => true,
@@ -159,7 +160,7 @@ EOS
                 'options' => [
                   'route' => '/my-action',
                   'defaults' => [
-                    'controller' => 'MyModule\Controller\My',
+                    'controller' => 'MyModule\Controller\MyController',
                     'action' => 'my-action'
                   ***REMOVED***
                 ***REMOVED***
@@ -206,12 +207,12 @@ EOS
         'my' => [
             'type'    => 'segment',
             'options' => [
-                'route'    => '/my-controller[/:id***REMOVED***',
+                'route'    => '/my[/:id***REMOVED***',
                 'constraints' => [
                     'id'     => '[a-zA-Z0-9***REMOVED***+',
                 ***REMOVED***,
                 'defaults' => [
-                    'controller' => 'MyModule\Controller\My',
+                    'controller' => 'MyModule\Controller\MyController',
                 ***REMOVED***,
             ***REMOVED***,
             'may_terminate' => true,
