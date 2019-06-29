@@ -390,7 +390,7 @@ EOS;
         ***REMOVED***);
 
         $this->module->getNamespace()->willReturn('Pbr\MyModule')->shouldBeCalled();
-        $expected = 'Pbr\MyModule\MyJoin\My';
+        $expected = 'Pbr\MyModule\MyJoin\MyController';
         $serviceName = $this->code->getServiceManagerName($src);
 
         $this->assertEquals($serviceName, $expected);
