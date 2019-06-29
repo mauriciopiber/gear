@@ -2,6 +2,16 @@
 namespace GearTest\MvcTest\ServiceTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Util\File\FileService;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Service\ServiceTestService;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Module;
+use Gear\Creator\Template\TemplateService;
+use Gear\Creator\Injector\Injector;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Table\TableService\TableService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Mvc\TraitTestService;
@@ -42,25 +52,25 @@ class ServiceTestServiceTest extends TestCase
         $this->assertFileExists(vfsStream::url($this->vfsLocation));
 
         $this->module = $this->prophesize(ModuleStructure::class);
-        $this->string = new \Gear\Util\String\StringService();
-        $phpRenderer = $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view');
-        $template       = new \Gear\Creator\Template\TemplateService($phpRenderer);
+        $this->string = new StringService();
+        $phpRenderer = $this->mockPhpRenderer((new Module)->getLocation().'/../view');
+        $template       = new TemplateService($phpRenderer);
         //$template->setRenderer();
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/service-test';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/service-test';
 
         $this->codeTest = $this->createCodeTest();
 
         $this->table = $this->prophesize(TableService::class);
         //$this->service->setTableService($this->table->reveal());
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
-        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
+        $this->arrayService = new ArrayService();
+        $this->injector = new Injector($this->arrayService);
 
-        $this->service = new \Gear\Mvc\Service\ServiceTestService(
+        $this->service = new ServiceTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -79,7 +89,7 @@ class ServiceTestServiceTest extends TestCase
         // $this->traitTest = $this->prophesize(TraitTestService::class);
 
 
-        // $this->serviceManager = new \Gear\Mvc\Config\ServiceManager(
+        // $this->serviceManager = new ServiceManager(
         //     $this->module->reveal(),
         //     $this->fileCreator,
         //     $this->string
@@ -131,7 +141,7 @@ class ServiceTestServiceTest extends TestCase
             $this->module->map('ServiceTest')->willReturn(vfsStream::url($location))->shouldBeCalled();
         }
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => $table, 'user' => $user***REMOVED***);
+        $this->db = new Db(['table' => $table, 'user' => $user***REMOVED***);
 
         $columnManager = new ColumnManager($columns);
         $this->db->setColumnManager($columnManager);
