@@ -29,6 +29,7 @@ use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
+use Gear\Mvc\MvcRestTrait;
 
 abstract class AbstractMvc
 {
@@ -52,6 +53,8 @@ abstract class AbstractMvc
         $this->setTableService($tableService);
         $this->setInjector($injector);
     }
+
+    use MvcRestTrait;
 
     use InjectorTrait;
 

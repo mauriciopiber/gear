@@ -113,8 +113,10 @@ class ApiControllerService extends AbstractControllerService implements Abstract
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
+        var_dump($controller);
+        var_dump($this->isRest($controller));
 
-        $options['constructor'***REMOVED*** = ($controller->isFactory())
+        $options['constructor'***REMOVED*** = ($controller->isFactory() && !$this->isRest($controller))
           ? $this->getCode()->getConstructor($controller)
           : '';
 

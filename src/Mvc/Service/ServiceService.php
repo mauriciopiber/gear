@@ -66,7 +66,7 @@ class ServiceService extends AbstractMvc implements AbstractMvcInterface
             'class'      => $this->src->getName(),
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($this->src->isFactory())
+        $options['constructor'***REMOVED*** = ($this->src->isFactory() && !$this->isRest($this->src))
           ? $this->getCode()->getConstructor($this->src)
           : '';
 
