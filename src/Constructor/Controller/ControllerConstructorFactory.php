@@ -22,6 +22,7 @@ use Gear\Schema\Controller\ControllerSchema;
 use Gear\Module\ConstructStatusObject;
 use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Mvc\Factory\FactoryService;
+use Gear\Mvc\Config\RouterManager;
 
 /**
  * PHP Version 5
@@ -61,7 +62,8 @@ class ControllerConstructorFactory implements FactoryInterface
             $container->get(ViewService::class),
             $container->get(LanguageService::class),
             $container->get(ControllerManager::class),
-            $container->get(ConstructStatusObject::class)
+            $container->get(ConstructStatusObject::class),
+            $container->get(RouterManager::class)
         );
 
         return $factory;

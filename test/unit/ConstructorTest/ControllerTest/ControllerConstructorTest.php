@@ -28,6 +28,7 @@ use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryTestService;
 use Zend\Console\Adapter\Posix as Console;
 use Gear\Module\ConstructStatusObject;
+use Gear\Mvc\Config\RouterManager;
 
 //use Gear\Mvc\Config\ControllerManager;
 
@@ -79,6 +80,8 @@ class ControllerConstructorTest extends TestCase
             $this->prophesize(Console::class)->reveal()
         );
 
+        $this->router = $this->prophesize(RouterManager::class);
+
         $this->controllerService = new ControllerConstructor(
             $this->stringService,
             $this->schemaController->reveal(),
@@ -98,7 +101,8 @@ class ControllerConstructorTest extends TestCase
             $this->viewService->reveal(),
             $this->languageService->reveal(),
             $this->controllerManager->reveal(),
-            $this->status
+            $this->status,
+            $this->router->reveal()
         );
 
     }

@@ -56,6 +56,8 @@ use Gear\Mvc\Factory\FactoryService;
 use Gear\Mvc\Factory\FactoryServiceTrait;
 use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Mvc\Factory\FactoryTestServiceTrait;
+use Gear\Mvc\Config\RouterManager;
+use Gear\Mvc\Config\RouterManagerTrait;
 
 class ControllerConstructor extends AbstractConstructor
 {
@@ -70,6 +72,8 @@ class ControllerConstructor extends AbstractConstructor
     static public $defaultType = ActionInterface::NAME;
 
     static public $defaultNamespace = '%s\Controller\\';
+
+    use RouterManagerTrait;
 
     use FactoryServiceTrait;
 
@@ -134,10 +138,12 @@ class ControllerConstructor extends AbstractConstructor
         ViewService $viewService,
         LanguageService $languageService,
         ControllerManager $controllerManager,
-        ConstructStatusObject $constructStatusObject
+        ConstructStatusObject $constructStatusObject,
+        RouterManager $routerManager
     ) {
         parent::__construct($basicModuleStructure, $stringService, $tableService, $columnService);
 
+        $this->setRouterManager($routerManager);
         //schema
         $this->controllerSchema = $controllerSchema;
         //controller action
@@ -264,7 +270,7 @@ class ControllerConstructor extends AbstractConstructor
             );
         } catch (ControllerExist $e) {
             $status->addSkipped(
-                sprintf(self::CONTROLLER_SKIPPED, $data['name'***REMOVED***, $data['type'***REMOVED***)
+                sprintf(self::CONTROLLER_SKIP, $data['name'***REMOVED***, $data['type'***REMOVED***)
             );
             return $status;
         }
@@ -302,6 +308,7 @@ class ControllerConstructor extends AbstractConstructor
         if ($this->controller->getType() == 'Rest') {
             $this->getApiControllerService()->buildController($this->controller);
             $this->getApiControllerTestService()->buildController($this->controller);
+            $this->getRouterManager()->createController($this->controller);
             return $this->successful($status);
         }
 
