@@ -2,9 +2,12 @@ module: Gear
 
 src:
   0:
-    name: ExampleService
+    name: KubeService
     type: Service
-    namespace: Example
+    namespace: Kube
+    service: factories
     dependency:
         0: Module\Structure\ModuleStructure
-        1: Creator\FileCreator
+        1: Creator\FileCreator\FileCreator
+        2: \Gear\Util\String\StringService
+        3: Code\Code

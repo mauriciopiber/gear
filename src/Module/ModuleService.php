@@ -99,6 +99,8 @@ use Gear\Constructor\Action\ActionConstructor;
 use Gear\Constructor\Action\ActionConstructorTrait;
 use Gear\Docker\DockerService;
 use Gear\Docker\DockerServiceTrait;
+use Gear\Kube\KubeService;
+use Gear\Kube\KubeServiceTrait;
 
 /**
  *
@@ -146,6 +148,7 @@ class ModuleService
     use GearConfigTrait;
     use ConstructServiceTrait;
     use DockerServiceTrait;
+    use KubeServiceTrait;
 
     protected $type;
 
@@ -180,8 +183,10 @@ class ModuleService
         GearConfig $gearConfig,
         ControllerConstructor $controllerConstructor,
         ActionConstructor $actionConstructor,
-        DockerService $docker
+        DockerService $docker,
+        KubeService $kube
     ) {
+        $this->setKubeService($kube);
         $this->dockerService = $docker;
         $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
@@ -332,6 +337,9 @@ class ModuleService
         $this->createModuleFile();
 
         $this->createDocs();
+
+
+        $this->createKube();
 
         $this->createJenkinsFile($this->type);
 
@@ -794,6 +802,10 @@ class ModuleService
         return $this->getGulpfile()->createFile();
     }
 
+    public function createKube()
+    {
+        return $this->getKubeService()->createKube();
+    }
     /**
      * Cria arquivo src/$module/Module.php, arquivo principal com bootstrap do módulo
      *

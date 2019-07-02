@@ -60,6 +60,7 @@ use Gear\Mvc\Controller\Web\{
 use Gear\Module\ConstructService;
 use Gear\Module\ConstructServiceTrait;
 use Gear\Docker\DockerService;
+use Gear\Kube\KubeService;
 
 /**
  * @group Module
@@ -128,6 +129,8 @@ class ModuleServiceTest extends TestCase
         $this->controllerConstructor = $this->prophesize(ControllerConstructor::class);
 
         $this->dockerService = $this->prophesize(DockerService::class);
+
+        $this->kube = $this->prophesize(KubeService::class);
 
         $this->config = [
             'gear' => [
@@ -460,7 +463,8 @@ class ModuleServiceTest extends TestCase
             $this->gearConfig->reveal(),
             $this->controllerConstructor->reveal(),
             $this->actionConstructor->reveal(),
-            $this->dockerService->reveal()
+            $this->dockerService->reveal(),
+            $this->kube->reveal()
         );
     }
 }

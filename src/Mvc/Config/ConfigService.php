@@ -222,12 +222,31 @@ class ConfigService implements ModuleConstructorInterface
                 break;
         }
 
+        $this->createConfigVersion();
+
 
 
 
         return true;
     }
 
+    public function createConfigVersion()
+    {
+        $path = $this->getModule()->getConfigFolder() . '/version';
+        $version = '0.1.0';
+
+        file_put_contents($path, $version);
+
+        $path = $this->getModule()->getConfigFolder() . '/strategy';
+        $strategy = 'major';
+
+        file_put_contents($path, $strategy);
+
+        $path = $this->getModule()->getConfigFolder() . '/stability';
+        $stability = 'alpha';
+
+        file_put_contents($path, $stability);
+    }
 
     public function getGit($git = null)
     {

@@ -4,9 +4,7 @@
             {
                 "name": "ArrayService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Util\\Vector",
                 "extends": null,
@@ -17,9 +15,7 @@
             {
                 "name": "ColumnService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Column",
                 "extends": null,
@@ -30,9 +26,7 @@
             {
                 "name": "AppServiceSpecService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\View\\App",
                 "extends": "Mvc\\AbstractMvcTest",
@@ -43,9 +37,7 @@
             {
                 "name": "AppControllerSpecService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\View\\App",
                 "extends": "Mvc\\AbstractMvcTest",
@@ -97,9 +89,7 @@
             {
                 "name": "Vars",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Creator\\FileCreator\\AppTest",
                 "extends": "Creator\\FileCreator\\AbstractFileCreator",
@@ -110,9 +100,7 @@
             {
                 "name": "BeforeEach",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Creator\\FileCreator\\AppTest",
                 "extends": "Creator\\FileCreator\\AbstractFileCreator",
@@ -123,9 +111,7 @@
             {
                 "name": "ConstructorArgs",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Creator\\FileCreator\\App",
                 "extends": "Creator\\FileCreator\\AbstractFileCreator",
@@ -136,9 +122,7 @@
             {
                 "name": "Inject",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Creator\\FileCreator\\App",
                 "extends": "Creator\\FileCreator\\AbstractFileCreator",
@@ -149,9 +133,7 @@
             {
                 "name": "TableService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Table",
                 "extends": null,
@@ -162,9 +144,7 @@
             {
                 "name": "MetadataService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Table",
                 "extends": null,
@@ -175,9 +155,7 @@
             {
                 "name": "Use",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Generator\\Code",
                 "extends": null,
@@ -188,9 +166,7 @@
             {
                 "name": "UseStack",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Generator\\Code",
                 "extends": null,
@@ -201,9 +177,7 @@
             {
                 "name": "DiagnosticService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Project",
                 "extends": "Service\\AbstractJsonService",
@@ -214,9 +188,7 @@
             {
                 "name": "NpmService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Diagnostic",
                 "extends": null,
@@ -227,9 +199,7 @@
             {
                 "name": "FileService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Diagnostic",
                 "extends": null,
@@ -240,9 +210,7 @@
             {
                 "name": "ComposerService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Diagnostic",
                 "extends": null,
@@ -253,9 +221,7 @@
             {
                 "name": "YamlService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Util\\Yaml",
                 "extends": "Service\\AbstractJsonService",
@@ -266,9 +232,7 @@
             {
                 "name": "ComposerEdge",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Edge",
                 "extends": "Edge\\AbstractEdge",
@@ -279,9 +243,7 @@
             {
                 "name": "ComposerUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -292,9 +254,7 @@
             {
                 "name": "NpmEdge",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Edge",
                 "extends": "Edge\\AbstractEdge",
@@ -305,9 +265,7 @@
             {
                 "name": "NpmUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -318,9 +276,7 @@
             {
                 "name": "AntEdge",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Edge",
                 "extends": "Edge\\AbstractEdge",
@@ -331,9 +287,7 @@
             {
                 "name": "FileEdge",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Edge",
                 "extends": "Edge\\AbstractEdge",
@@ -344,9 +298,7 @@
             {
                 "name": "DirEdge",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Edge",
                 "extends": "Edge\\AbstractEdge",
@@ -357,9 +309,7 @@
             {
                 "name": "ModuleUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Module\\Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -370,9 +320,7 @@
             {
                 "name": "ProjectUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Project\\Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -383,9 +331,7 @@
             {
                 "name": "AbstractUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": null,
@@ -396,9 +342,7 @@
             {
                 "name": "AntUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -409,9 +353,7 @@
             {
                 "name": "DirUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -422,9 +364,7 @@
             {
                 "name": "FileUpgrade",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Upgrade",
                 "extends": "Service\\AbstractJsonService",
@@ -435,9 +375,7 @@
             {
                 "name": "ConsolePrompt",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Util\\Prompt",
                 "extends": null,
@@ -448,9 +386,7 @@
             {
                 "name": "ComposerService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Project\\Composer",
                 "extends": null,
@@ -461,9 +397,7 @@
             {
                 "name": "Docs",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Module\\Docs",
                 "extends": "Service\\AbstractJsonService",
@@ -474,9 +408,7 @@
             {
                 "name": "Docs",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Project\\Docs",
                 "extends": "Service\\AbstractJsonService",
@@ -487,9 +419,7 @@
             {
                 "name": "Feature",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\Spec\\Feature",
                 "extends": null,
@@ -500,9 +430,7 @@
             {
                 "name": "Page",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\Spec\\Page",
                 "extends": null,
@@ -513,9 +441,7 @@
             {
                 "name": "Step",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\Spec\\Step",
                 "extends": null,
@@ -526,9 +452,7 @@
             {
                 "name": "UnitTest",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Mvc\\Spec\\UnitTest",
                 "extends": null,
@@ -539,9 +463,7 @@
             {
                 "name": "ApplicationConfig",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Module\\Config",
                 "extends": null,
@@ -552,9 +474,7 @@
             {
                 "name": "ComposerAutoload",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Autoload",
                 "extends": null,
@@ -565,9 +485,7 @@
             {
                 "name": "Injector",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Creator\\File",
                 "extends": null,
@@ -578,18 +496,14 @@
             {
                 "name": "PhinxService",
                 "type": "Service",
-                "dependency": [
-
-                ***REMOVED***,
+                "dependency": [***REMOVED***,
                 "db": null,
                 "namespace": "Database\\Phinx",
                 "extends": null,
                 "abstract": false,
                 "service": "factories",
                 "template": null,
-                "implements": [
-
-                ***REMOVED***
+                "implements": [***REMOVED***
             },
             {
                 "name": "ConstructorParams",
@@ -1665,6 +1579,33 @@
                 "service": "factories",
                 "template": null,
                 "implements": null
+            },
+            {
+                "name": "KubeService",
+                "type": "Service",
+                "dependency": [
+                    {
+                        "class": "Module\\Structure\\ModuleStructure"
+                    },
+                    {
+                        "class": "Creator\\FileCreator\\FileCreator"
+                    },
+                    {
+                        "class": "\\Gear\\Util\\String\\StringService"
+                    },
+                    {
+                        "class": "Code\\Code"
+                    }
+                ***REMOVED***,
+                "db": null,
+                "columns": null,
+                "user": null,
+                "namespace": "Kube",
+                "extends": null,
+                "abstract": false,
+                "service": "factories",
+                "template": null,
+                "implements": null
             }
         ***REMOVED***,
         "controller": [
@@ -2117,9 +2058,7 @@
                         "role": "guest",
                         "route": "delete",
                         "db": null,
-                        "dependency": [
-
-                        ***REMOVED***
+                        "dependency": [***REMOVED***
                     }
                 ***REMOVED***,
                 "extends": null,

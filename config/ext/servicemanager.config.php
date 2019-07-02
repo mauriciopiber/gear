@@ -86,7 +86,8 @@
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory',
         'Gear\Mvc\Controller\Api\ApiControllerService' => 'Gear\Mvc\Controller\Api\ApiControllerServiceFactory',
         'Gear\Mvc\Controller\Api\ApiControllerTestService' => 'Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory',
-        'Gear\Docker\DockerService' => 'Gear\Docker\DockerServiceFactory'
+        'Gear\Docker\DockerService' => 'Gear\Docker\DockerServiceFactory',
+        'Gear\Kube\KubeService' => 'Gear\Kube\KubeServiceFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Column\ColumnService' => false,

@@ -45,7 +45,8 @@ class ModuleServiceFactoryTest extends TestCase
             'Gear\Config\GearConfig' => 'Gear\Config\GearConfig',
             'Gear\Constructor\Controller\ControllerConstructor' => 'Gear\Constructor\Controller\ControllerConstructor',
             'Gear\Constructor\Action\ActionConstructor' => 'Gear\Constructor\Action\ActionConstructor',
-            'Gear\Docker\DockerService' => 'Gear\Docker\DockerService'
+            'Gear\Docker\DockerService' => 'Gear\Docker\DockerService',
+            'Gear\Kube\KubeService' => 'Gear\Kube\KubeService'
         ***REMOVED***;
 
         $this->container->get('config')->willReturn([***REMOVED***)->shouldBeCalled();
