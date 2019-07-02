@@ -90,18 +90,42 @@ class FileUpgrade
         $found = false;
 
         switch ($fileName) {
+            /** @Deprecated  */
             case 'codeception.yml':
                 return $this->getModuleService()->getCodeception();
+            /** @Deprecated  */
             case 'script/deploy-development.sh':
                 return $this->getModuleService()->getScriptDevelopment($type);
+            /** @Deprecated  */
             case 'data/config.json':
                 return $this->getModuleService()->getGulpfileConfig();
+            /** @Deprecated  */
             case 'gulpfile.js':
-                 return $this->getModuleService()->getGulpfileJs();
+                return $this->getModuleService()->getGulpfileJs();
+            /** @Deprecated  */
             case 'public/js/spec/end2end.conf.js':
                 return $this->getModuleService()->getProtractorConfig();
+            /** @Deprecated  */
             case 'public/js/spec/karma.conf.js':
                 return $this->getModuleService()->getKarmaConfig();
+            /** @Deprecated  */
+            case 'test/unit.suite.yml':
+                return $this->getModuleService()->getUnitSuiteConfig();
+            /** @Deprecated  */
+            case 'script/deploy-testing.sh':
+                return $this->getModuleService()->getScriptTesting($type);
+            /** @Deprecated  */
+            case 'script/deploy-staging.sh':
+                return $this->getModuleService()->getStagingScript();
+            /** @Deprecated  */
+            case 'script/install-staging.sh':
+                return $this->getModuleService()->getInstallStagingScript();
+            /** @Deprecated  */
+            case 'test/phpunit-benchmark.xml':
+                return $this->getModuleTestsService()->createPhpunitBenchmarkConfigFile();
+            /** @Deprecated  */
+            case 'script/load.sh':
+                return $this->getModuleService()->getScriptLoad($type);
             case 'phinx.yml':
                 return $this->getModuleService()->getPhinxConfig();
             case 'mkdocs.yml':
@@ -114,22 +138,10 @@ class FileUpgrade
                 return $this->docs->createReadme();
             case 'phpdox.xml':
                 return $this->getModuleService()->getPhpdoxConfig();
-            case 'test/unit.suite.yml':
-                return $this->getModuleService()->getUnitSuiteConfig();
-            case 'script/deploy-testing.sh':
-                return $this->getModuleService()->getScriptTesting($type);
-            case 'script/deploy-staging.sh':
-                return $this->getModuleService()->getStagingScript();
-            case 'script/install-staging.sh':
-                return $this->getModuleService()->getInstallStagingScript();
-            case 'script/load.sh':
-                return $this->getModuleService()->getScriptLoad($type);
             case 'schema/module.json':
                 return $this->getModuleService()->getSchemaConfig();
             case 'test/phpmd.xml':
                 return $this->getModuleService()->getPhpmdConfig();
-            case 'test/phpunit-benchmark.xml':
-                return $this->getModuleTestsService()->createPhpunitBenchmarkConfigFile();
             case 'test/phpunit.xml':
                 return $this->getModuleTestsService()->createPhpunitConfigFile();
             case 'test/phpunit-coverage.xml':
@@ -144,6 +156,15 @@ class FileUpgrade
                 return $this->getModuleService()->createJenkinsFile($type);
             case '.gitignore':
                 return $this->getModuleService()->createGitIgnore($type);
+            case 'docker-compose.yml':
+            case 'docker-compose.yaml':
+                return $this->getModuleService()->createDockerCompose();
+            case 'Dockerfile':
+                return $this->getModuleService()->createDockerFile();
+            case 'kube.yaml':
+                return $this->getModuleService()->createKube();
+            case 'pipeline.yaml':
+                return $this->getModuleService()->createJenkinsPipeline($type);
             default:
                 throw new \Exception('Implementar mapa para arquivo '.$fileName);
         }

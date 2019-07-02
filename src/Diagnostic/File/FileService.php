@@ -45,6 +45,7 @@ class FileService implements ModuleDiagnosticInterface
 
     public function diagnosticModule($type = null)
     {
+
         if (empty($type)) {
             $type = $this->gearConfig->getCurrentType();
         }

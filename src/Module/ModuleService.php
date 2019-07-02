@@ -342,9 +342,10 @@ class ModuleService
         $this->createKube();
 
         $this->createJenkinsFile($this->type);
+        $this->createJenkinsPipeline($this->type);
 
-        $this->getDockerService()->createDockerComposeFile();
-        $this->getDockerService()->createDockerfile();
+        $this->createDockerCompose();
+        $this->createDockerfile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();
@@ -366,6 +367,16 @@ class ModuleService
 
         $this->createIndex();
         return true;
+    }
+
+    public function createDockerCompose()
+    {
+        return $this->getDockerService()->createDockerComposeFile();
+    }
+
+    public function createDockerFile()
+    {
+        return $this->getDockerService()->createDockerfile();
     }
 
     public function createIndex()
@@ -451,16 +462,9 @@ class ModuleService
         $this->getCacheService()->renewFileCache();
     }
 
-    /**
-     * Cria arquivo config/application.config.php para módulos as project
-     *
-     * @param string $type Tipo do módulo Web|Cli
-     *
-     * @return string
-     */
-    public function createJenkinsFile($type = 'web')
+    public function getTemplate($type)
     {
-        switch($type) {
+        switch ($type) {
             case 'web':
                 $template = 'web';
                 break;
@@ -474,13 +478,32 @@ class ModuleService
                 $template = 'cli';
                 break;
         }
+        return $template;
+    }
+
+    /**
+     * Cria arquivo config/application.config.php para módulos as project
+     *
+     * @param string $type Tipo do módulo Web|Cli
+     *
+     * @return string
+     */
+    public function createJenkinsFile($type = 'web')
+    {
+        $template = $this->getTemplate($type);
+
 
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $template));
         $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
         $file->setFileName('Jenkinsfile');
         $file->setLocation($this->getModule()->getMainFolder());
-        $file->render();
+        return $file->render();
+    }
+
+    public function createJenkinsPipeline($type = 'api')
+    {
+        $template = $this->getTemplate($type);
 
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/jenkinsfile/pipeline-%s.phtml', $template));
@@ -488,6 +511,7 @@ class ModuleService
         $file->setFileName('pipeline.yaml');
         $file->setLocation($this->getModule()->getMainFolder());
         return $file->render();
+
     }
 
     /**

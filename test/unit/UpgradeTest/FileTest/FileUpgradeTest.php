@@ -76,6 +76,82 @@ class FileUpgradeTest extends TestCase
     /**
      * @group xmxm
      */
+    public function testFactoryUpgradeModuleApi()
+    {
+        //$this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptDevelopment('api')->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->mockDocs();
+
+        $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptTesting('api')->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getStagingScript()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptLoad('api')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createGitIgnore('api')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createJenkinsFile('api')->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createJenkinsPipeline('api')->willReturn(true)->shouldBeCalled();
+
+
+        $this->moduleService->createDockerCompose()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createDockerFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createKube()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->create
+
+        $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleTests->createPhpunitConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
+        //$this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
+
+        $yaml = new YamlService();
+        $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/api/file.yml');
+
+        $common = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
+
+        $this->fileEdge->getFileModule('api')->willReturn(array_merge($common, $target))->shouldBeCalled();
+
+        $upgrades = $this->fileUpgrade->upgradeModule('api', true);
+
+        $expected = [***REMOVED***;
+
+        foreach ($target['files'***REMOVED*** as $file) {
+            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Module');
+        }
+
+        $this->assertEquals($expected, $upgrades);
+    }
+
+
+    /**
+     * @group xmxm
+     */
     public function testFactoryUpgradeModuleWeb()
     {
         $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
