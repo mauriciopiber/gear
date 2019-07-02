@@ -45,6 +45,6 @@ class KubeServiceTest extends TestCase
 
         $expect = file_get_contents($this->templates.'/kube-api.yaml');
 
-        $this->assertEquals($expect, file_get_contents($file));
+        $this->assertEquals(trim($expect), file_get_contents($file));
     }
 }

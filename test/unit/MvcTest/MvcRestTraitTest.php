@@ -29,7 +29,7 @@ class MvcRestTraitTest extends TestCase
         $controller = new Controller([
           'name' => 'MyController',
           'type' => 'Rest',
-          'extends' => 'Gear\Rest\Controller\AbstractRestController',
+          'extends' => '\Gear\Rest\Controller\AbstractRestController',
         ***REMOVED***);
 
         $this->assertTrue($this->isRest($controller));
@@ -50,7 +50,7 @@ class MvcRestTraitTest extends TestCase
         $src = new Src([
           'name' => 'MyRepository',
           'type' => 'Repository',
-          'extends' => 'Gear\Rest\Repository\AbstractRestRepository'
+          'extends' => '\Gear\Rest\Repository\AbstractRestRepository'
         ***REMOVED***);
 
         $this->assertTrue($this->isRest($src));
@@ -71,7 +71,7 @@ class MvcRestTraitTest extends TestCase
         $src = new Src([
           'name' => 'MyService',
           'type' => 'Service',
-          'extends' => 'Gear\Rest\Service\AbstractRestService'
+          'extends' => '\Gear\Rest\Service\AbstractRestService'
         ***REMOVED***);
 
         $this->assertTrue($this->isRest($src));
@@ -92,7 +92,7 @@ class MvcRestTraitTest extends TestCase
         $src = new Src([
           'name' => 'MyFilter',
           'type' => 'Filter',
-          'implements' => 'Gear\Rest\Filter\RestFilterInterface'
+          'implements' => '\Gear\Rest\Filter\RestFilterInterface'
         ***REMOVED***);
 
         $this->assertTrue($this->isRest($src));

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <?php echo $this->module.PHP_EOL;?>
+spec:
+  selector:
+    matchLabels:
+      run: <?php echo $this->module.PHP_EOL;?>
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: <?php echo $this->module.PHP_EOL;?>
+    spec:
+      containers:
+        - name: <?php echo $this->module.PHP_EOL;?>
+          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
+      imagePullSecrets:
+        - name: registry-auth

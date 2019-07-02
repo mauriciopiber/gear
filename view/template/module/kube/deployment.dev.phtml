@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <?php echo $this->module;?>-dev
+spec:
+  selector:
+    matchLabels:
+      run: <?php echo $this->module;?>-dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: <?php echo $this->module;?>-dev
+    spec:
+      containers:
+        - name: <?php echo $this->module;?>-dev
+          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
+      imagePullSecrets:
+        - name: registry-auth

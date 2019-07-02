@@ -57,12 +57,36 @@ class KubeService
     {
         $type = $this->module->getType();
 
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/kube/kube-%s.phtml', $type));
-        $file->setOptions([
+        $options = [
             'module' => $this->str('url', $this->getModule()->getModuleName()),
             'version' => '0.1.0'
-        ***REMOVED***);
+        ***REMOVED***;
+
+
+        $options['deployment'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/deployment.phtml',
+            $options
+        );
+
+        $options['deploymentDev'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/deployment.dev.phtml',
+            $options
+        );
+
+
+        $options['ingress'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/ingress.phtml',
+            $options
+        );
+
+        $options['ingressDev'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/ingress.dev.phtml',
+            $options
+        );
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/kube/kube-%s.phtml', $type));
+        $file->setOptions($options);
         $file->setLocation($this->module->getMainFolder());
         $file->setFileName('kube.yaml');
         $render = $file->render();

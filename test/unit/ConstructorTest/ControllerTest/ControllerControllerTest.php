@@ -42,6 +42,7 @@ class ControllerControllerTest extends TestCase
             'columns' => 'columns',
             'type' => 'type',
             'extends' => 'extends',
+            'dependency' => 'dependency'
         ***REMOVED***)->willReturn(true)->shouldBeCalled();
 
         $this->controller->setControllerConstructor($controllerService->reveal());
@@ -56,6 +57,7 @@ class ControllerControllerTest extends TestCase
             'columns' => 'columns',
             'type' => 'type',
             'extends' => 'extends',
+            'dependency' => 'dependency'
         ***REMOVED***));
 
         $this->routeMatch->setParam('action', 'create');

@@ -96,7 +96,7 @@ class ApiControllerService extends AbstractControllerService implements Abstract
     {
         $this->controller = $controller;
         $this->location = $this->getCode()->getLocation($controller);
-        //var_dump($this->location, 'hehe');
+        // var_dump($this->location, 'hehe');
         $this->fileName = sprintf('%s.php', $controller->getName());
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
@@ -113,8 +113,8 @@ class ApiControllerService extends AbstractControllerService implements Abstract
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
-        var_dump($controller);
-        var_dump($this->isRest($controller));
+        // var_dump($controller);
+        // var_dump($this->isRest($controller));
 
         $options['constructor'***REMOVED*** = ($controller->isFactory() && !$this->isRest($controller))
           ? $this->getCode()->getConstructor($controller)

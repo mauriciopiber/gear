@@ -1,43 +1,7 @@
 # Version v1.0.0
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: <?php echo $this->module.PHP_EOL;?>
-spec:
-  selector:
-    matchLabels:
-      run: <?php echo $this->module.PHP_EOL;?>
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        run: <?php echo $this->module.PHP_EOL;?>
-    spec:
-      containers:
-        - name: <?php echo $this->module.PHP_EOL;?>
-          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
-      imagePullSecrets:
-        - name: registry-auth
+<?php echo $this->deployment; ?>
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: <?php echo $this->module;?>-dev
-spec:
-  selector:
-    matchLabels:
-      run: <?php echo $this->module;?>-dev
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        run: <?php echo $this->module;?>-dev
-    spec:
-      containers:
-        - name: <?php echo $this->module;?>-dev
-          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
-      imagePullSecrets:
-        - name: registry-auth
+<?php echo $this->deploymentDev; ?>
 ---
 kind: Service
 apiVersion: v1
@@ -63,42 +27,6 @@ spec:
   ports:
     - port: 80 # Default port for image
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: <?php echo $this->module;?>-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /*
-spec:
-  tls:
-    - secretName: letsencrypt-prod
-  rules:
-  - host: <?php echo $this->module;?>.piber.network
-    http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: <?php echo $this->module;?>-service
-          servicePort: 80
+<?php echo $this->ingress; ?>
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: <?php echo $this->module;?>-dev-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /*
-spec:
-  tls:
-    - secretName: letsencrypt-prod
-  rules:
-  - host: <?php echo $this->module;?>.dev.piber.network
-    http:
-      paths:
-      - path: /*
-        backend:
-          serviceName: <?php echo $this->module;?>-dev-service
-          servicePort: 80
----
----
+<?php echo $this->ingressDev; ?>
