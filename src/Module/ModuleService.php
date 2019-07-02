@@ -339,7 +339,9 @@ class ModuleService
         $this->createDocs();
 
 
-        $this->createKube();
+        if ($this->type === ModuleTypesInterface::API) {
+            $this->createKube();
+        }
 
         $this->createJenkinsFile($this->type);
         $this->createJenkinsPipeline($this->type);
