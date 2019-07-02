@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   main:
-    image: registry.piber.network/dev-apache-php:v1.0.7
+    image: registry.piber.network/dev-apache-php:v1.0.8
     tty: true
     volumes:
       - /opt/composer-cache:/root/.composer/cache
