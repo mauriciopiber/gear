@@ -6,6 +6,7 @@ use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Util\String\StringService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
 
 /**
  * PHP Version 5
@@ -22,6 +23,8 @@ class DockerService
 
     use FileCreatorTrait;
 
+    use ModuleStructureTrait;
+
     /**
      * Constructor
      *
@@ -35,7 +38,7 @@ class DockerService
         FileCreator $fileCreator,
         ModuleStructure $module
     ) {
-        $this->stringService = $stringService;
+        $this->setStringService($stringService);
         $this->fileCreator = $fileCreator;
         $this->module = $module;
 
@@ -47,8 +50,10 @@ class DockerService
         $type = $this->module->getType();
 
         $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/docker/docker-compose-%s.yml', $type));
-        $file->setOptions([***REMOVED***);
+        $file->setTemplate(sprintf('template/module/docker/docker-compose-%s.phtml', $type));
+        $file->setOptions([
+            'module' => $this->str('uline', $this->getModule()->getModuleName())
+        ***REMOVED***);
         $file->setLocation($this->module->getMainFolder());
         $file->setFileName('docker-compose.yml');
         $render = $file->render();

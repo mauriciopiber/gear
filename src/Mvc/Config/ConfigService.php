@@ -187,7 +187,7 @@ class ConfigService implements ModuleConstructorInterface
                 $this->getViewHelperManager()->module($controller);
                 $this->getUploadImageManager()->module($controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();
@@ -196,7 +196,7 @@ class ConfigService implements ModuleConstructorInterface
             case 'cli':
                 $this->getConsoleRouterManager()->module($controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();
@@ -208,7 +208,7 @@ class ConfigService implements ModuleConstructorInterface
                 $this->getViewConfig($type);
                 $this->getRouterManager()->module($type, $controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();

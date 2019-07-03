@@ -5,3 +5,5 @@ require:
   zendframework/zend-inputfilter: ^2.10
   mauriciopiber/gear-util: ^1.0.0-alpha0
   mauriciopiber/gear-rest: ^1.0.0-alpha0
+  mauriciopiber/gear-locator: ^1.0.0-alpha0
+  mauriciopiber/gear-env: ^1.0.0-alpha0

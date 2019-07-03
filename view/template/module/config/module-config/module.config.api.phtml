@@ -1,7 +1,6 @@
 namespace <?php echo $this->module;?>;
 
 $db                 = require 'ext/db.config.php';
-$doctrine           = require 'ext/doctrine.config.php';
 $route              = require 'ext/route.config.php';
 $view               = require 'ext/view.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
@@ -37,7 +36,6 @@ return [
     ***REMOVED***,
     'gear'               => $gear,
     'db'                 => $db,
-    'doctrine'           => $doctrine,
     'view_manager'       => $view,
     'controllers'        => $controller,
     'router'             => $route,

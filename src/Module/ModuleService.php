@@ -320,7 +320,7 @@ class ModuleService
 
         $this->createConfigGlobal();
 
-        $this->createConfigLocal();
+        //$this->createConfigLocal();
 
         $this->createPublicIndex();
 
@@ -554,15 +554,15 @@ class ModuleService
      * @return string
      */
 
-    public function createConfigLocal()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/autoload/local.phtml');
-        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('local.php');
-        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
-        return $file->render();
-    }
+    // public function createConfigLocal()
+    // {
+    //     $file = $this->getFileCreator();
+    //     $file->setTemplate('template/module/config/autoload/local.phtml');
+    //     $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+    //     $file->setFileName('local.php');
+    //     $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+    //     return $file->render();
+    // }
 
     /**
      * Cria arquivo public/index.php e arquivo public/.htaccess para módulos as project
@@ -737,7 +737,7 @@ class ModuleService
 
         $template = 'template/module/phinx.phtml';
         $options = ['module' => $moduleUline***REMOVED***;
-        $fileName = 'phinx.yml';
+        $fileName = 'phinx.php';
         $location = $this->getModule()->getMainFolder();
 
         $file = $this->getFileCreator();

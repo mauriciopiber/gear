@@ -1,4 +1,6 @@
+$env = new Gear\Env\Env();
+
 return [
     'driver' => 'Pdo',
-    'dsn' => 'mysql:dbname=<?php echo $this->moduleDb;?>;host=mysql',
+    'dsn' => $env->getDns();
 ***REMOVED***;

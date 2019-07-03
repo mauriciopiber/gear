@@ -1,7 +1,6 @@
 namespace <?php echo $this->module;?>;
 
 $db                 = require 'ext/db.config.php';
-$doctrine           = require 'ext/doctrine.config.php';
 $translator         = require 'ext/translator.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
 $controller         = require 'ext/controller.config.php';
@@ -32,7 +31,6 @@ return [
     'gear'               => $gear,
     'db'                 => $db,
     'console'            => $console,
-    'doctrine'           => $doctrine,
     'translator'         => $translator,
     'controllers'        => $controller,
     'service_manager'    => $servicemanager,

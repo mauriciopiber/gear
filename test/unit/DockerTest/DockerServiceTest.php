@@ -23,7 +23,7 @@ class DockerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize(StringService::class);
+        $this->stringService = new StringService;
         //$this->fileCreator = $this->prophesize(FileCreator::class);
         $this->module = $this->prophesize(ModuleStructure::class);
 
@@ -36,7 +36,7 @@ class DockerServiceTest extends TestCase
         $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->service = new DockerService(
-            $this->stringService->reveal(),
+            $this->stringService,
             $this->fileCreator,
             $this->module->reveal()
         );
@@ -54,6 +54,7 @@ class DockerServiceTest extends TestCase
     public function testCreaterDockerCompose()
     {
       $this->module->getType()->willReturn('api')->shouldBeCalled();
+      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
       $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
       $expected = file_get_contents($this->templates.'/docker-compose-api.yml');

@@ -11,12 +11,12 @@ files:
       module: 'web_module'
     location: 'config/autoload'
     filename: 'global.php'
-  2:
-    template: 'template/module/config/autoload/local.phtml'
-    options:
-      module: 'web-module'
-    location: 'config/autoload'
-    filename: 'local.php'
+  # 2:
+  #   template: 'template/module/config/autoload/local.phtml'
+  #   options:
+  #     module: 'web-module'
+  #   location: 'config/autoload'
+  #   filename: 'local.php'
   3:
     template: 'template/module/public/index.phtml'
     location: 'public'
@@ -68,7 +68,7 @@ files:
     template: 'template/module/phinx.phtml'
     options:
       module: 'web_module'
-    filename: 'phinx.yml'
+    filename: 'phinx.php'
 #  10:
 #    template: 'template/module/buildpath.phtml'
 #    filename: '.buildpath'
