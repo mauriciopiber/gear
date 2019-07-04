@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerMvcTest\ControllerMvcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGeneratorTrait;
 
@@ -23,7 +24,7 @@ class ControllerMvcGeneratorTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator')->reveal();
+        $mocking = $this->prophesize(ControllerMvcGenerator::class)->reveal();
         $this->setControllerMvcGenerator($mocking);
         $this->assertEquals($mocking, $this->getControllerMvcGenerator());
     }

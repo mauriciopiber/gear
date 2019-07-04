@@ -6,9 +6,9 @@ use Gear\Schema\Controller\Controller;
 use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
 class ControllerManager extends AbstractConfigManager implements
-  ModuleManagerInterface,
-  ControllerManagerInterface,
-  AbstractConfigManagerInterface
+    ModuleManagerInterface,
+    ControllerManagerInterface,
+    AbstractConfigManagerInterface
 {
 
     // /**

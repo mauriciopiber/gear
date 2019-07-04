@@ -2,6 +2,8 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Zend\Db\Metadata\Object\ColumnObject;
 
 /**
  * @group AbstractColumn
@@ -15,11 +17,11 @@ class AbstractCheckboxTest extends TestCase
         parent::setUp();
 
         $this->abstractCheckbox = $this->getMockForAbstractClass('Gear\Column\Integer\AbstractCheckbox', [***REMOVED***, '', false);
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getName()->willReturn('my_column')->shouldBeCalled();
 
         $this->abstractCheckbox->setColumn($column->reveal());
-        $this->abstractCheckbox->setStringService(new \Gear\Util\String\StringService());
+        $this->abstractCheckbox->setStringService(new StringService());
     }
 
     public function testIntegrationActionSendKeysMark()

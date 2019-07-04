@@ -21,9 +21,13 @@ class ModuleStructureFactory implements FactoryInterface
 
         $request = $container->get('Application')->getMvcEvent()->getRouteMatch();
 
+
         $moduleName = $request->getParam('module');
 
-        $namespace = $request->getParam('namespace', null);
+        $namespace = $request->getParam('action') == 'module-as-project'
+            ? $request->getParam('namespace')
+            : null;
+
         $staging = $request->getParam('staging', null);
         $type = $request->getParam('type', null);
 

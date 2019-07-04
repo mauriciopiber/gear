@@ -2,6 +2,9 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\Email;
 
 /**
@@ -15,11 +18,11 @@ class EmailTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/email';
+        $this->template = (new Module())->getLocation().'/../test/template/module/column/varchar/email';
     }
 
     public function values()
@@ -38,7 +41,7 @@ class EmailTest extends TestCase
 
 
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \Gear\Util\String\StringService());
+        $this->email->setStringService(new StringService());
 
         $filter = $this->email->filterElement();
 
@@ -53,7 +56,7 @@ class EmailTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \Gear\Util\String\StringService());
+        $this->email->setStringService(new StringService());
 
         $filter = $this->email->filterUniqueElement();
 
@@ -68,7 +71,7 @@ class EmailTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \Gear\Util\String\StringService());
+        $this->email->setStringService(new StringService());
 
         $value = $this->email->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -80,7 +83,7 @@ class EmailTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->email = new Email($this->column->reveal());
-        $this->email->setStringService(new \Gear\Util\String\StringService());
+        $this->email->setStringService(new StringService());
         $value = $this->email->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);
     }

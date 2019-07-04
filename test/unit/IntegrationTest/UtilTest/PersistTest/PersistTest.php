@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\PersistTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\Location\Location;
 use Gear\Integration\Util\Persist\Persist;
 
 /**
@@ -13,7 +14,7 @@ class PersistTest extends TestCase
     {
         parent::setUp();
 
-        $this->location = $this->prophesize('Gear\Integration\Util\Location\Location');
+        $this->location = $this->prophesize(Location::class);
 
         $this->service = new Persist(
             $this->location->reveal()

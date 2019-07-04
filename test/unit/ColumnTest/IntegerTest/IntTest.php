@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\IntegerTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Integer\Integer;
 
 /**
@@ -15,7 +16,7 @@ class IntTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('int')->shouldBeCalled();
 
         $this->int = new Integer($column->reveal());

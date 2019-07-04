@@ -2,6 +2,7 @@
 namespace GearTest\DatabaseTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\BackupService;
 use Gear\Database\BackupServiceTrait;
 
 /**
@@ -13,7 +14,7 @@ class BackupServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Database\BackupService')->reveal();
+        $mocking = $this->prophesize(BackupService::class)->reveal();
         $this->setBackupService($mocking);
         $this->assertEquals($mocking, $this->getBackupService());
     }

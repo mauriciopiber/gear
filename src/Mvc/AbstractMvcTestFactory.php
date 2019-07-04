@@ -7,7 +7,7 @@ use Gear\Mvc\AbstractMvcTestInterface;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Table\TableService\TableService;
 use Gear\Creator\Injector\Injector;
 

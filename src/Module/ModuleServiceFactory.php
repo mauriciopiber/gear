@@ -12,6 +12,7 @@ use Gear\Docker\DockerService;
 use Gear\Schema\Schema\Loader\SchemaLoaderService;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Module\Tests\ModuleTestsService;
+use Gear\Kube\KubeService;
 
 class ModuleServiceFactory implements FactoryInterface
 {
@@ -42,7 +43,8 @@ class ModuleServiceFactory implements FactoryInterface
             $container->get('Gear\Config\GearConfig'),
             $container->get(ControllerConstructor::class),
             $container->get(ActionConstructor::class),
-            $container->get(DockerService::class)
+            $container->get(DockerService::class),
+            $container->get(KubeService::class)
         );
     }
 }

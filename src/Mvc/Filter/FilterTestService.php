@@ -20,17 +20,42 @@ class FilterTestService extends AbstractMvcTest implements AbstractMvcTestInterf
     {
         $location = $this->getCodeTest()->getLocation($this->src);
 
+        $options = [
+            'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
+            'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
+            'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
+            'var' => $this->str('var-length', $this->src->getName()),
+            'className'   => $this->src->getName(),
+            'module'  => $this->getModule()->getNamespace(),
+        ***REMOVED***;
+
+
+        if ($this->src->isFactory()) {
+            $templateView = ($this->src->getAbstract() === true)
+                ? 'abstract-factory'
+                : 'factory';
+
+            $options['dependency'***REMOVED*** = $this->getCodeTest()
+                ->getConstructorDependency($this->src);
+
+            if ($this->src->getAbstract() === true) {
+                $options['dependencyReveal'***REMOVED*** = $this->getCodeTest()
+                    ->getDependencyReveal($this->src);
+            } else {
+                $options['constructor'***REMOVED*** = $this->getCodeTest()
+                    ->getConstructor($this->src);
+            }
+        } else {
+            //add abstract-factory
+            $templateView = ($this->src->getAbstract() === true)
+                ? 'abstract-invokable'
+                : 'invokable';
+        }
+
 
         return $this->getFileCreator()->createFile(
-            'template/module/mvc/filter-test/src/test-src.phtml',
-            array(
-                'callable' => $this->getCodeTest()->getServiceManagerName($this->src),
-                'namespaceFile' => $this->getCodeTest()->getNamespace($this->src),
-                'namespace' => $this->getCodeTest()->getTestNamespace($this->src),
-                'var' => $this->str('var-length', $this->src->getName()),
-                'className'   => $this->src->getName(),
-                'module'  => $this->getModule()->getNamespace(),
-            ),
+            'template/module/mvc/filter-test/src/'.$templateView.'.phtml',
+            $options,
             $this->src->getName().'Test.php',
             $location
         );

@@ -91,8 +91,7 @@ class ModuleStructure
 
             if (is_file($moduleFile)) {
                 $module = file_get_contents($moduleFile);
-                preg_match('/namespace[ ***REMOVED****([\/a-zA-Z***REMOVED***+)/', $module, $matches);
-
+                preg_match('/namespace[ ***REMOVED****([\\\\A-Za-z***REMOVED****)/', $module, $matches);
                 if (isset($matches[1***REMOVED***)) {
                     $this->namespace = $matches[1***REMOVED***;
                 }

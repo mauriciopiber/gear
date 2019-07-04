@@ -187,7 +187,7 @@ class ConfigService implements ModuleConstructorInterface
                 $this->getViewHelperManager()->module($controller);
                 $this->getUploadImageManager()->module($controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();
@@ -196,7 +196,7 @@ class ConfigService implements ModuleConstructorInterface
             case 'cli':
                 $this->getConsoleRouterManager()->module($controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();
@@ -208,7 +208,7 @@ class ConfigService implements ModuleConstructorInterface
                 $this->getViewConfig($type);
                 $this->getRouterManager()->module($type, $controller);
                 $this->getDbConfig();
-                $this->getDoctrineConfig();
+                //$this->getDoctrineConfig();
                 $this->getControllerManager()->module($controller);
                 $this->getControllerPluginManager()->module($controller);
                 $this->getCacheConfig();
@@ -222,12 +222,31 @@ class ConfigService implements ModuleConstructorInterface
                 break;
         }
 
+        $this->createConfigVersion();
+
 
 
 
         return true;
     }
 
+    public function createConfigVersion()
+    {
+        $path = $this->getModule()->getConfigFolder() . '/version';
+        $version = '0.1.0';
+
+        file_put_contents($path, $version);
+
+        $path = $this->getModule()->getConfigFolder() . '/strategy';
+        $strategy = 'major';
+
+        file_put_contents($path, $strategy);
+
+        $path = $this->getModule()->getConfigFolder() . '/stability';
+        $stability = 'alpha';
+
+        file_put_contents($path, $stability);
+    }
 
     public function getGit($git = null)
     {

@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Mvc\Controller\ControllerManager;
 use Gear\Module\ModuleService;
 use Gear\Module\Controller\ModuleControllerFactory;
 use Gear\Module\Controller\ModuleController;
@@ -26,7 +27,7 @@ class ModuleControllerFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container = $this->prophesize('Zend\Mvc\Controller\ControllerManager');
+        $this->container = $this->prophesize(ControllerManager::class);
 
         $this->container
           ->get(ModuleService::class)

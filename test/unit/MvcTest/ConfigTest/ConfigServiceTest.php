@@ -2,6 +2,18 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
+use Gear\Mvc\Config\ViewHelperManager;
+use Gear\Mvc\Config\UploadImageManager;
+use Gear\Mvc\Config\ServiceManager;
+use Gear\Mvc\Config\RouterManager;
+use Gear\Mvc\Config\NavigationManager;
+use Gear\Mvc\Config\ControllerPluginManager;
+use Gear\Mvc\Config\ControllerManager;
+use Gear\Mvc\Config\ConsoleRouterManager;
+use Gear\Mvc\Config\AssetManager;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
@@ -26,35 +38,35 @@ class ConfigServiceTest extends TestCase
 
         $this->assertFileExists('vfs://module/config');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         //$this->module->getMainFolder(vfsStream::url('module'));
         $this->module->getConfigFolder()->willReturn(vfsStream::url('module/config'))->shouldBeCalled();
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->controllerPluginManager = $this->prophesize('Gear\Mvc\Config\ControllerPluginManager');
-        $this->controllerManager  = $this->prophesize('Gear\Mvc\Config\ControllerManager');
+        $this->controllerPluginManager = $this->prophesize(ControllerPluginManager::class);
+        $this->controllerManager  = $this->prophesize(ControllerManager::class);
 
         $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
 
         $this->controllerManager->module($controllers)->willReturn(true)->shouldBeCalled();
 
-        $this->serviceManager = $this->prophesize('Gear\Mvc\Config\ServiceManager');
+        $this->serviceManager = $this->prophesize(ServiceManager::class);
         $this->serviceManager->module()->willReturn(true)->shouldBeCalled();
 
-        $this->viewHelperManager = $this->prophesize('Gear\Mvc\Config\ViewHelperManager');
-        $this->assetManager = $this->prophesize('Gear\Mvc\Config\AssetManager');
-        $this->consoleRouterManager = $this->prophesize('Gear\Mvc\Config\ConsoleRouterManager');
-        $this->routerManager = $this->prophesize('Gear\Mvc\Config\RouterManager');
-        $this->navigationManager = $this->prophesize('Gear\Mvc\Config\NavigationManager');
-        $this->uploadImageManager = $this->prophesize('Gear\Mvc\Config\UploadImageManager');
+        $this->viewHelperManager = $this->prophesize(ViewHelperManager::class);
+        $this->assetManager = $this->prophesize(AssetManager::class);
+        $this->consoleRouterManager = $this->prophesize(ConsoleRouterManager::class);
+        $this->routerManager = $this->prophesize(RouterManager::class);
+        $this->navigationManager = $this->prophesize(NavigationManager::class);
+        $this->uploadImageManager = $this->prophesize(UploadImageManager::class);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';///module.config.cli.php'
+        $this->template = (new Module())->getLocation().'/../test/template/module/config';///module.config.cli.php'
         $this->config = new ConfigService(
             $this->module->reveal(),
             $this->string,
@@ -95,7 +107,6 @@ class ConfigServiceTest extends TestCase
         );
     }
 
-
     public function testConfigCli()
     {
         $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
@@ -108,6 +119,20 @@ class ConfigServiceTest extends TestCase
         $this->assertEquals(
             file_get_contents(vfsStream::url('module/config/module.config.php')),
             file_get_contents($this->template.'/module.config.cli.phtml')
+        );
+    }
+
+    public function testConfigApi()
+    {
+        $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+
+        $this->routerManager->module('api', $controllers)->willReturn(true)->shouldBeCalled();
+
+        $this->assertTrue($this->config->module('api'));
+
+        $this->assertEquals(
+            file_get_contents(vfsStream::url('module/config/module.config.php')),
+            file_get_contents($this->template.'/module.config.api.phtml')
         );
     }
 }

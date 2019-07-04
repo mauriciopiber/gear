@@ -99,6 +99,8 @@ use Gear\Constructor\Action\ActionConstructor;
 use Gear\Constructor\Action\ActionConstructorTrait;
 use Gear\Docker\DockerService;
 use Gear\Docker\DockerServiceTrait;
+use Gear\Kube\KubeService;
+use Gear\Kube\KubeServiceTrait;
 
 /**
  *
@@ -146,6 +148,7 @@ class ModuleService
     use GearConfigTrait;
     use ConstructServiceTrait;
     use DockerServiceTrait;
+    use KubeServiceTrait;
 
     protected $type;
 
@@ -180,8 +183,10 @@ class ModuleService
         GearConfig $gearConfig,
         ControllerConstructor $controllerConstructor,
         ActionConstructor $actionConstructor,
-        DockerService $docker
+        DockerService $docker,
+        KubeService $kube
     ) {
+        $this->setKubeService($kube);
         $this->dockerService = $docker;
         $this->gearConfig = $gearConfig;
         $this->fileCreator = $fileCreator;
@@ -215,23 +220,6 @@ class ModuleService
         $this->controllerConstructor = $controllerConstructor;
         $this->actionConstructor = $actionConstructor;
     }
-
-    protected $request;
-
-    public function getRequest()
-    {
-        if (!isset($this->request)) {
-            $this->request = $this->get('application')->getMvcEvent()->getRequest();
-        }
-        return $this->request;
-    }
-
-    public function setRequest($request)
-    {
-        $this->request = $request;
-        return $this;
-    }
-
 
     public function getModuleNamespace()
     {
@@ -332,7 +320,7 @@ class ModuleService
 
         $this->createConfigGlobal();
 
-        $this->createConfigLocal();
+        //$this->createConfigLocal();
 
         $this->createPublicIndex();
 
@@ -350,9 +338,16 @@ class ModuleService
 
         $this->createDocs();
 
-        $this->createJenkinsFile($this->type);
 
-        $this->getDockerService()->createDockerComposeFile();
+        if ($this->type === ModuleTypesInterface::API) {
+            $this->createKube();
+        }
+
+        $this->createJenkinsFile($this->type);
+        $this->createJenkinsPipeline($this->type);
+
+        $this->createDockerCompose();
+        $this->createDockerfile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
             $this->getKarmaConfig();
@@ -374,6 +369,16 @@ class ModuleService
 
         $this->createIndex();
         return true;
+    }
+
+    public function createDockerCompose()
+    {
+        return $this->getDockerService()->createDockerComposeFile();
+    }
+
+    public function createDockerFile()
+    {
+        return $this->getDockerService()->createDockerfile();
     }
 
     public function createIndex()
@@ -459,6 +464,25 @@ class ModuleService
         $this->getCacheService()->renewFileCache();
     }
 
+    public function getTemplate($type)
+    {
+        switch ($type) {
+            case 'web':
+                $template = 'web';
+                break;
+            case 'api':
+                $template = 'api';
+                break;
+            case 'cli':
+            case 'src':
+            case 'src-zf2':
+            case 'src-zf3':
+                $template = 'cli';
+                break;
+        }
+        return $template;
+    }
+
     /**
      * Cria arquivo config/application.config.php para módulos as project
      *
@@ -468,18 +492,8 @@ class ModuleService
      */
     public function createJenkinsFile($type = 'web')
     {
-        switch($type) {
-            case 'web':
-                $template = 'web';
-                break;
-            case 'cli':
-            case 'api':
-            case 'src':
-            case 'src-zf2':
-            case 'src-zf3':
-                $template = 'cli';
-                break;
-        }
+        $template = $this->getTemplate($type);
+
 
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/jenkinsfile/jenkinsfile-%s.phtml', $template));
@@ -487,6 +501,19 @@ class ModuleService
         $file->setFileName('Jenkinsfile');
         $file->setLocation($this->getModule()->getMainFolder());
         return $file->render();
+    }
+
+    public function createJenkinsPipeline($type = 'api')
+    {
+        $template = $this->getTemplate($type);
+
+        $file = $this->getFileCreator();
+        $file->setTemplate(sprintf('template/module/jenkinsfile/pipeline-%s.phtml', $template));
+        $file->setOptions(['moduleUrl' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+        $file->setFileName('pipeline.yaml');
+        $file->setLocation($this->getModule()->getMainFolder());
+        return $file->render();
+
     }
 
     /**
@@ -527,15 +554,15 @@ class ModuleService
      * @return string
      */
 
-    public function createConfigLocal()
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/config/autoload/local.phtml');
-        $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
-        $file->setFileName('local.php');
-        $file->setLocation($this->getModule()->getConfigAutoloadFolder());
-        return $file->render();
-    }
+    // public function createConfigLocal()
+    // {
+    //     $file = $this->getFileCreator();
+    //     $file->setTemplate('template/module/config/autoload/local.phtml');
+    //     $file->setOptions(['module' => $this->str('url', $this->getModule()->getModuleName())***REMOVED***);
+    //     $file->setFileName('local.php');
+    //     $file->setLocation($this->getModule()->getConfigAutoloadFolder());
+    //     return $file->render();
+    // }
 
     /**
      * Cria arquivo public/index.php e arquivo public/.htaccess para módulos as project
@@ -710,7 +737,7 @@ class ModuleService
 
         $template = 'template/module/phinx.phtml';
         $options = ['module' => $moduleUline***REMOVED***;
-        $fileName = 'phinx.yml';
+        $fileName = 'phinx.php';
         $location = $this->getModule()->getMainFolder();
 
         $file = $this->getFileCreator();
@@ -801,6 +828,10 @@ class ModuleService
         return $this->getGulpfile()->createFile();
     }
 
+    public function createKube()
+    {
+        return $this->getKubeService()->createKube();
+    }
     /**
      * Cria arquivo src/$module/Module.php, arquivo principal com bootstrap do módulo
      *

@@ -1,9 +1,0 @@
-
-        $template       = new TemplateService();
-        $template->setRenderer($phpRenderer);
-
-        $fileService    = new FileService();
-        $this->stringService  = new StringService();
-        $this->fileCreator    = new FileCreator($fileService, $template);
-
-        $this->dirService = new DirService();

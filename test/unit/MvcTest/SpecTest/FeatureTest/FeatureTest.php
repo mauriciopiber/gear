@@ -2,6 +2,7 @@
 namespace GearTest\MvcTest\SpecTest\FeatureTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Schema\Action\Action;
@@ -43,7 +44,7 @@ class FeatureTest extends TestCase
 
         $this->assertFileExists(vfsStream::url('module/public/js/spec/e2e/index'));
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();
@@ -276,7 +277,7 @@ class FeatureTest extends TestCase
 
         $this->feature->setModule($this->module->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(true)->shouldBeCalled();
         $this->feature->setTableService($this->table->reveal());
@@ -304,7 +305,7 @@ class FeatureTest extends TestCase
 
         $this->feature->setModule($this->module->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->table->isNullable('MyController')->willReturn(true)->shouldBeCalled();
         $this->table->hasUniqueConstraint('MyController')->willReturn(false)->shouldBeCalled();
         $this->feature->setTableService($this->table->reveal());

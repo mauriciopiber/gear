@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\ComponentTest\SuperTestFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\SuperTestFile\SuperTestFileTrait;
 
@@ -23,7 +24,7 @@ class SuperTestFileTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Component\SuperTestFile\SuperTestFile')->reveal();
+        $mocking = $this->prophesize(SuperTestFile::class)->reveal();
         $this->setSuperTestFile($mocking);
         $this->assertEquals($mocking, $this->getSuperTestFile());
     }

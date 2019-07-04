@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "c4ffba0808a50c7dd93c0600d8e5028f",
+    "content-hash": "c196323fd4e1f200ef8191762dec4482",
     "packages": [
         {
             "name": "cakephp/cache",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cache.git",
-                "reference": "a354c07ba284508d119d0a05e2f9583b592a2e64"
+                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-a354c07ba284508d119d0a05e2f9583b592a2e64-zip-2994e3.zip",
-                "reference": "a354c07ba284508d119d0a05e2f9583b592a2e64"
+                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-f7ff72a590f9dc69a9788fb78045a70fc86723fc-zip-a1eb27.zip",
+                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -47,20 +47,20 @@
                 "caching",
                 "cakephp"
             ***REMOVED***,
-            "time": "2019-04-17T01:27:05+00:00"
+            "time": "2019-06-24T11:34:33+00:00"
         },
         {
             "name": "cakephp/collection",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/collection.git",
-                "reference": "4c3b790d4703cc88cb75815b0e7f02a1a82b8d57"
+                "reference": "5f22678fc2d151082e331b20677d9696563af549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/collection/cakephp-collection-4c3b790d4703cc88cb75815b0e7f02a1a82b8d57-zip-9ac0a0.zip",
-                "reference": "4c3b790d4703cc88cb75815b0e7f02a1a82b8d57"
+                "url": "https://satis.piber.network/dist/cakephp/collection/cakephp-collection-5f22678fc2d151082e331b20677d9696563af549-zip-e4e0bb.zip",
+                "reference": "5f22678fc2d151082e331b20677d9696563af549"
             },
             "require": {
                 "php": ">=5.6.0"
@@ -92,11 +92,11 @@
                 "collections",
                 "iterators"
             ***REMOVED***,
-            "time": "2019-01-08T15:11:44+00:00"
+            "time": "2019-02-26T20:10:41+00:00"
         },
         {
             "name": "cakephp/core",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
@@ -145,16 +145,16 @@
         },
         {
             "name": "cakephp/database",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "f1659560bf7d58bfb73c7a00c450ee45ceee9fdb"
+                "reference": "5b13801f599e715841ef3b54ef6303fad647ed66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/database/cakephp-database-f1659560bf7d58bfb73c7a00c450ee45ceee9fdb-zip-9fcc3f.zip",
-                "reference": "f1659560bf7d58bfb73c7a00c450ee45ceee9fdb"
+                "url": "https://satis.piber.network/dist/cakephp/database/cakephp-database-5b13801f599e715841ef3b54ef6303fad647ed66-zip-196c56.zip",
+                "reference": "5b13801f599e715841ef3b54ef6303fad647ed66"
             },
             "require": {
                 "cakephp/cache": "^3.6.0",
@@ -188,20 +188,20 @@
                 "database abstraction",
                 "pdo"
             ***REMOVED***,
-            "time": "2019-06-19T16:05:01+00:00"
+            "time": "2019-06-25T10:56:49+00:00"
         },
         {
             "name": "cakephp/datasource",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "09f54671c8af4f588c3712060d8fe457b9690b76"
+                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-09f54671c8af4f588c3712060d8fe457b9690b76-zip-e59140.zip",
-                "reference": "09f54671c8af4f588c3712060d8fe457b9690b76"
+                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-a8fb302598d0038c8b5f0f83763dded27ef4e780-zip-d76841.zip",
+                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -237,11 +237,11 @@
                 "entity",
                 "query"
             ***REMOVED***,
-            "time": "2019-04-29T13:46:25+00:00"
+            "time": "2019-06-13T02:05:57+00:00"
         },
         {
             "name": "cakephp/log",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/log.git",
@@ -285,7 +285,7 @@
         },
         {
             "name": "cakephp/utility",
-            "version": "3.7.9",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
@@ -575,17 +575,63 @@
             "time": "2019-06-05T00:09:35+00:00"
         },
         {
-            "name": "mauriciopiber/gear-schema",
-            "version": "1.0.0-alpha2",
+            "name": "mauriciopiber/gear-rest",
+            "version": "1.0.0-alpha0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:mauriciopiber/gear-schema.git",
-                "reference": "c58a9ec6e75212809f8300accf052403a9bb1c82"
+                "url": "git@github.com:mauriciopiber/gear-rest.git",
+                "reference": "44e7afade8b0f5aa0d4ee4f5f4633c9163bebcfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-c58a9ec6e75212809f8300accf052403a9bb1c82-zip-26efa3.zip",
-                "reference": "c58a9ec6e75212809f8300accf052403a9bb1c82"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-rest/mauriciopiber-gear-rest-44e7afade8b0f5aa0d4ee4f5f4633c9163bebcfc-zip-1826d6.zip",
+                "reference": "44e7afade8b0f5aa0d4ee4f5f4633c9163bebcfc"
+            },
+            "require": {
+                "php": "^7.0",
+                "zendframework/zend-db": "^2.8.1",
+                "zendframework/zend-http": "^2.5.4",
+                "zendframework/zend-json": "^3.1.0",
+                "zendframework/zend-modulemanager": "^2.7.2",
+                "zendframework/zend-mvc": "^2.7.15 || ^3.0.2",
+                "zendframework/zend-servicemanager": "^2.7.6 || ^3.1"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "^1.0",
+                "mauriciopiber/gear-scripts": "^1.0.0-alpha1",
+                "pdepend/pdepend": "^2.4",
+                "phploc/phploc": "^5.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^8.0",
+                "sebastian/phpcpd": "^4.1",
+                "squizlabs/php_codesniffer": "^3.0",
+                "theseer/phpdox": "^0.12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gear\\Rest\\": "src",
+                    "Gear\\Rest\\Test\\": "test/unit"
+                }
+            },
+            "support": {
+                "source": "https://github.com/mauriciopiber/gear-rest/tree/1.0.0-alpha0",
+                "issues": "https://github.com/mauriciopiber/gear-rest/issues"
+            },
+            "time": "2019-06-09T10:53:31+00:00"
+        },
+        {
+            "name": "mauriciopiber/gear-schema",
+            "version": "1.0.0-alpha6",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mauriciopiber/gear-schema.git",
+                "reference": "613ba388ed94fce74cad72a16500d3a26ecae719"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-schema/mauriciopiber-gear-schema-613ba388ed94fce74cad72a16500d3a26ecae719-zip-bcc826.zip",
+                "reference": "613ba388ed94fce74cad72a16500d3a26ecae719"
             },
             "require": {
                 "mauriciopiber/gear-console": "^1.0.0-alpha0",
@@ -635,10 +681,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha2",
+                "source": "https://github.com/mauriciopiber/gear-schema/tree/1.0.0-alpha6",
                 "issues": "https://github.com/mauriciopiber/gear-schema/issues"
             },
-            "time": "2019-06-17T23:13:32+00:00"
+            "time": "2019-06-26T22:32:51+00:00"
         },
         {
             "name": "mauriciopiber/gear-scripts",
@@ -845,16 +891,16 @@
         },
         {
             "name": "mauriciopiber/gear-util",
-            "version": "1.0.0-alpha2",
+            "version": "1.0.0-alpha3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-util.git",
-                "reference": "25e519542c65afeec13d438c3da777692ee46e39"
+                "reference": "c462d2057dc68e27570709d89ea0548478294a6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-util/mauriciopiber-gear-util-25e519542c65afeec13d438c3da777692ee46e39-zip-d472cc.zip",
-                "reference": "25e519542c65afeec13d438c3da777692ee46e39"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-util/mauriciopiber-gear-util-c462d2057dc68e27570709d89ea0548478294a6b-zip-dcb78f.zip",
+                "reference": "c462d2057dc68e27570709d89ea0548478294a6b"
             },
             "require": {
                 "php": "^7.0",
@@ -891,10 +937,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-util/tree/1.0.0-alpha2",
+                "source": "https://github.com/mauriciopiber/gear-util/tree/1.0.0-alpha3",
                 "issues": "https://github.com/mauriciopiber/gear-util/issues"
             },
-            "time": "2019-06-07T04:34:14+00:00"
+            "time": "2019-06-27T22:35:07+00:00"
         },
         {
             "name": "mauriciopiber/gear-version",
@@ -1210,16 +1256,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "6379ee07398643e09e6ed1e87d9c62dfcad7f4eb"
+                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-6379ee07398643e09e6ed1e87d9c62dfcad7f4eb-zip-11de33.zip",
-                "reference": "6379ee07398643e09e6ed1e87d9c62dfcad7f4eb"
+                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-9198eea354be75794a7b1064de00d9ae9ae5090f-zip-e4323e.zip",
+                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1269,20 +1315,20 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-06-08T06:33:08+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64"
+                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-d50bbeeb0e17e6dd4124ea391eff235e932cbf64-zip-6ff781.zip",
-                "reference": "d50bbeeb0e17e6dd4124ea391eff235e932cbf64"
+                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-b592b26a24265a35172d8a2094d8b10f22b7cc39-zip-92f91a.zip",
+                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1343,20 +1389,20 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-05T13:25:51+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "bf2af40d738dec5e433faea7b00daa4431d0a4cf"
+                "reference": "b9896d034463ad6fd2bf17e2bf9418caecd6313d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/filesystem/symfony-filesystem-bf2af40d738dec5e433faea7b00daa4431d0a4cf-zip-645214.zip",
-                "reference": "bf2af40d738dec5e433faea7b00daa4431d0a4cf"
+                "url": "https://satis.piber.network/dist/symfony/filesystem/symfony-filesystem-b9896d034463ad6fd2bf17e2bf9418caecd6313d-zip-0426f0.zip",
+                "reference": "b9896d034463ad6fd2bf17e2bf9418caecd6313d"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1392,7 +1438,7 @@
             ***REMOVED***,
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-03T20:27:40+00:00"
+            "time": "2019-06-23T08:51:25+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1625,7 +1671,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -5228,16 +5274,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "fea7f73e278ee0337349a5a68b867fc656bb33f3"
+                "reference": "b851928be349c065197fdc0832f78d85139e3903"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-fea7f73e278ee0337349a5a68b867fc656bb33f3-zip-f14299.zip",
-                "reference": "fea7f73e278ee0337349a5a68b867fc656bb33f3"
+                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-b851928be349c065197fdc0832f78d85139e3903-zip-7ea9cc.zip",
+                "reference": "b851928be349c065197fdc0832f78d85139e3903"
             },
             "require": {
                 "php": "^7.1.3",
@@ -5296,20 +5342,20 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-06-15T04:08:07+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.3.1",
+            "version": "v4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
+                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176-zip-4d12f2.zip",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
+                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a-zip-b608c0.zip",
+                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
             },
             "require": {
                 "php": "^7.1.3"
@@ -5344,7 +5390,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-26T20:47:49+00:00"
+            "time": "2019-06-13T11:03:18+00:00"
         },
         {
             "name": "theseer/directoryscanner",
@@ -5613,6 +5659,7 @@
     "aliases": [***REMOVED***,
     "minimum-stability": "stable",
     "stability-flags": {
+        "mauriciopiber/gear-rest": 15,
         "mauriciopiber/gear-util": 15,
         "mauriciopiber/gear-schema": 15,
         "mauriciopiber/gear-console": 15,

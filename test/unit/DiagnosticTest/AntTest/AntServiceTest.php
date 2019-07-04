@@ -2,6 +2,8 @@
 namespace GearTest\DiagnosticTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Config\GearConfig;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\Ant\AntService;
 use Gear\Util\String\StringService;
@@ -26,10 +28,10 @@ class AntServiceTest extends TestCase
 
         $this->assertFileExists(vfsStream::url('module/test'));
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->stringService = new StringService();
 
-        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->antEdge = $this->prophesize(AntEdge::class);
 
         $this->ant = new AntService(

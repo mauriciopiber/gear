@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Component\GearFile\GearFile;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\GearFile\GearFileTrait;
 
@@ -23,7 +24,7 @@ class GearFileTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Component\GearFile\GearFile')->reveal();
+        $mocking = $this->prophesize(GearFile::class)->reveal();
         $this->setGearFile($mocking);
         $this->assertEquals($mocking, $this->getGearFile());
     }

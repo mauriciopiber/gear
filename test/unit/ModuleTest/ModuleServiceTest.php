@@ -2,6 +2,7 @@
 namespace GearTest\ModuleTest;
 
 use GearTest\UtilTestTrait;
+use Gear\Config\GearConfig;
 use Gear\Module\ModuleTypesInterface;
 use PHPUnit\Framework\TestCase;
 use org\bovigo\vfs\vfsStream;
@@ -59,6 +60,7 @@ use Gear\Mvc\Controller\Web\{
 use Gear\Module\ConstructService;
 use Gear\Module\ConstructServiceTrait;
 use Gear\Docker\DockerService;
+use Gear\Kube\KubeService;
 
 /**
  * @group Module
@@ -128,6 +130,8 @@ class ModuleServiceTest extends TestCase
 
         $this->dockerService = $this->prophesize(DockerService::class);
 
+        $this->kube = $this->prophesize(KubeService::class);
+
         $this->config = [
             'gear' => [
                 'project' => [
@@ -138,7 +142,7 @@ class ModuleServiceTest extends TestCase
 
         ***REMOVED***;
 
-        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
     }
 
     public function getNamespaces()
@@ -387,7 +391,7 @@ class ModuleServiceTest extends TestCase
         $moduleName = sprintf('%sModule', ucfirst($type));
         $location = vfsStream::url('module');
 
-        $this->module = new \Gear\Module\Structure\ModuleStructure(
+        $this->module = new ModuleStructure(
             $this->stringService,
             $this->dirService,
             $this->fileService
@@ -421,7 +425,7 @@ class ModuleServiceTest extends TestCase
 
     public function mockModuleFakeCreator()
     {
-        $this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
+        $this->fileCreator = $this->prophesize(FileCreator::class);
         return $this->mockModule($this->fileCreator->reveal());
     }
 
@@ -459,7 +463,8 @@ class ModuleServiceTest extends TestCase
             $this->gearConfig->reveal(),
             $this->controllerConstructor->reveal(),
             $this->actionConstructor->reveal(),
-            $this->dockerService->reveal()
+            $this->dockerService->reveal(),
+            $this->kube->reveal()
         );
     }
 }

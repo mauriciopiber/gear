@@ -7,7 +7,7 @@ use Gear\Schema\Src\Src;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Util\String\StringServiceAwareInterface;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use Gear\Creator\CodeTrait;
+use Gear\Code\CodeTrait;
 use Gear\Util\Dir\DirServiceTrait;
 use Gear\Mvc\AbstractMvcInterface;
 use Gear\Mvc\AbstractMvc;

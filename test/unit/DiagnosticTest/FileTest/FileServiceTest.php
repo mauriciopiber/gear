@@ -2,6 +2,8 @@
 namespace GearTest\DiagnosticTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use Gear\Diagnostic\File\FileService;
 use Gear\Edge\File\FileEdge;
@@ -22,8 +24,8 @@ class FileServiceTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/build.xml');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->stringService = $this->prophesize(StringService::class);
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 

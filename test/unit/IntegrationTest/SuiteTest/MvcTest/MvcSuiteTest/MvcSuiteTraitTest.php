@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\SuiteTest\MvcTest\MvcSuiteTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuiteTrait;
 
@@ -23,7 +24,7 @@ class MvcSuiteTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')->reveal();
+        $mocking = $this->prophesize(MvcSuite::class)->reveal();
         $this->setMvcSuite($mocking);
         $this->assertEquals($mocking, $this->getMvcSuite());
     }

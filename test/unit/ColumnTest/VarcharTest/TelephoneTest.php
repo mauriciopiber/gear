@@ -2,6 +2,9 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\Telephone;
 
 /**
@@ -15,13 +18,13 @@ class TelephoneTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column');
 
 
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/telephone';
+        $this->template = (new Module())->getLocation().'/../test/template/module/column/varchar/telephone';
     }
 
     public function values()
@@ -39,7 +42,7 @@ class TelephoneTest extends TestCase
         $this->column->isNullable()->willReturn(true)->shouldBeCalled();
 
         $this->telephone = new Telephone($this->column->reveal());
-        $this->telephone->setStringService(new \Gear\Util\String\StringService());
+        $this->telephone->setStringService(new StringService());
 
         $filter = $this->telephone->filterElement();
 
@@ -54,7 +57,7 @@ class TelephoneTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->telephone = new Telephone($this->column->reveal());
-        $this->telephone->setStringService(new \Gear\Util\String\StringService());
+        $this->telephone->setStringService(new StringService());
 
         $filter = $this->telephone->filterUniqueElement();
 

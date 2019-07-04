@@ -2,6 +2,8 @@
 namespace GearTest\EdgeTest\FileTest\FileEdgeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Yaml\YamlService;
+use Gear\Edge\File\FileEdge;
 use Gear\Edge\File\FileEdgeTrait;
 
 /**
@@ -13,24 +15,24 @@ class FileEdgeTest extends TestCase
 
     public function testGetModuleWebLocation()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $file = new \Gear\Edge\File\FileEdge($yaml);
+        $yaml = new YamlService();
+        $file = new FileEdge($yaml);
         $web = $file->getFileModule('web');
         $this->assertArrayHasKey('files', $web);
     }
 
     public function testGetModuleCliLocation()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $file = new \Gear\Edge\File\FileEdge($yaml);
+        $yaml = new YamlService();
+        $file = new FileEdge($yaml);
         $web = $file->getFileModule('cli');
         $this->assertArrayHasKey('files', $web);
     }
 
     public function testUnfoundModuleType()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $file = new \Gear\Edge\File\FileEdge($yaml);
+        $yaml = new YamlService();
+        $file = new FileEdge($yaml);
         $this->expectException('Gear\Edge\Exception\ModuleTypeNotFoundException');
         $web = $file->getFileModule(null);
 

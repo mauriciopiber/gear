@@ -2,6 +2,10 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Edge\Composer\ComposerEdge;
 use Gear\Upgrade\Composer\ComposerUpgradeTrait;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Composer\ComposerUpgrade;
@@ -23,13 +27,13 @@ class ComposerUpgradeTest extends TestCase
         $root = vfsStream::setup('module');
         $this->file = vfsStream::url('module/composer.json');
 
-        $this->composerEdge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->composerEdge = $this->prophesize(ComposerEdge::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
         $this->module->str('url', 'MyModule')->willReturn('my-module');
         $this->gearConfig = $this->prophesize(GearConfig::class);
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->composer = new ComposerUpgrade(
             $this->module->reveal(),
@@ -131,7 +135,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "http://satis"
+            "url": "https://satis.piber.network"
         },
         {
             "packagist": false
@@ -221,7 +225,7 @@ EOS;
     "repositories": [
         {
             "type": "composer",
-            "url": "http://satis"
+            "url": "https://satis.piber.network"
         },
         {
             "packagist": false

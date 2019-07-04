@@ -2,6 +2,17 @@
 namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Table\UploadImage;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Controller\Web\WebControllerTestService;
+use Gear\Module;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\ControllerScopeTrait;
@@ -30,18 +41,18 @@ class WebControllerTestServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/controller-test';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/controller-test';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->string = new \Gear\Util\String\StringService();
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->string = new StringService();
+        $this->arrayService = new ArrayService();
         $this->codeTest = $this->createCodeTest();
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->fileCreator = $this->createFileCreator();
 
         $this->injector = new Injector($this->arrayService);
 
-        $this->controllerTest = new \Gear\Mvc\Controller\Web\WebControllerTestService(
+        $this->controllerTest = new WebControllerTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -51,10 +62,10 @@ class WebControllerTestServiceTest extends TestCase
         );
 
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schemaService = $this->prophesize(SchemaService::class);
         $this->controllerTest->setSchemaService($this->schemaService->reveal());
 
-        $uploadImage = new \Gear\Table\UploadImage(
+        $uploadImage = new UploadImage(
             $this->string,
             $this->module->reveal()
         );
@@ -115,7 +126,7 @@ class WebControllerTestServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $controller = new \Gear\Schema\Controller\Controller([
+        $controller = new Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
@@ -128,7 +139,9 @@ class WebControllerTestServiceTest extends TestCase
             'user' => $userType
         ***REMOVED***);
 
-        $this->db = new \Gear\Schema\Db\Db(
+        //var_dump($controller);
+
+        $this->db = new Db(
             [
                 'table' => $this->string->str('class', $tableName),
                 'user' => $userType
@@ -162,21 +175,21 @@ class WebControllerTestServiceTest extends TestCase
 
         $this->schemaService->getControllerByDb($this->db)->willReturn($controller)->shouldBeCalled();
 
-        $this->service = $this->prophesize('Gear\Schema\Src\Src');
+        $this->service = $this->prophesize(Src::class);
         $this->service->getName()->willReturn(sprintf('%sService', $table));
         $this->service->getType()->willReturn('Service');
         $this->service->getNamespace()->willReturn($namespace);
 
         $this->schemaService->getSrcByDb($this->db, 'Service')->willReturn($this->service->reveal())->shouldBeCalled();
 
-        $this->form = $this->prophesize('Gear\Schema\Src\Src');
+        $this->form = $this->prophesize(Src::class);
         $this->form->getName()->willReturn(sprintf('%sForm', $table));
         $this->form->getType()->willReturn('Form');
         $this->form->getNamespace()->willReturn($namespace);
 
         $this->schemaService->getSrcByDb($this->db, 'Form')->willReturn($this->form->reveal())->shouldBeCalled();
 
-        $this->search  = $this->prophesize('Gear\Schema\Src\Src');
+        $this->search  = $this->prophesize(Src::class);
         $this->search->getName()->willReturn(sprintf('%sSearchForm', $table));
         $this->search->getType()->willReturn('SearchForm');
         $this->search->getNamespace()->willReturn($namespace);

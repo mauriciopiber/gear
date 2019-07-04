@@ -1,11 +1,14 @@
 <?php
 namespace GearTest;
 
+use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Util\String\StringService;
+use Gear\Column\Varchar\Varchar;
 trait SingleDbTableTrait
 {
     public function prophesizeSingleColumn($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -16,16 +19,16 @@ trait SingleDbTableTrait
 
     public function getSingleColumns($tableName = 'single_db_table')
     {
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
-        $varcharColumn = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $varcharColumn = $this->prophesize(ColumnObject::class);
         $varcharColumn->getDataType()->willReturn('varchar')->shouldBeCalled();
         $varcharColumn->getName()->willReturn('single_db_column');
         $varcharColumn->getTableName()->willReturn($tableName);
         $varcharColumn->isNullable()->willReturn(true);
         $varcharColumn->getCharacterMaximumLength()->willReturn(60);
 
-        $column = new \Gear\Column\Varchar\Varchar($varcharColumn->reveal());
+        $column = new Varchar($varcharColumn->reveal());
         $columns[***REMOVED*** = $column;
 
         foreach ($columns as $column) {

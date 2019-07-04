@@ -2,6 +2,9 @@
 namespace GearTest\IntegrationTest\ComponentTest\MigrationFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Integration\Util\Persist\Persist;
 use Gear\Integration\Component\MigrationFile\MigrationFile;
 
 /**
@@ -13,9 +16,9 @@ class MigrationFileTest extends TestCase
     {
         parent::setUp();
 
-        $this->persist = $this->prophesize('Gear\Integration\Util\Persist\Persist');
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
-        $this->arrayService = $this->prophesize('Gear\Util\Vector\ArrayService');
+        $this->persist = $this->prophesize(Persist::class);
+        $this->stringService = $this->prophesize(StringService::class);
+        $this->arrayService = $this->prophesize(ArrayService::class);
 
         $this->service = new MigrationFile(
             $this->persist->reveal(),

@@ -2,6 +2,8 @@
 namespace GearTest\EdgeTest\NpmTest\NpmEdgeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Yaml\YamlService;
+use Gear\Edge\Npm\NpmEdge;
 use Gear\Edge\Npm\NpmEdgeTrait;
 
 /**
@@ -14,8 +16,8 @@ class NpmEdgeTest extends TestCase
 
     public function testGetModuleWebLocation()
     {
-        $yaml = new \Gear\Util\Yaml\YamlService();
-        $composer = new \Gear\Edge\Npm\NpmEdge($yaml);
+        $yaml = new YamlService();
+        $composer = new NpmEdge($yaml);
         $composer->setYamlService($yaml);
         $web = $composer->getNpmModule('web');
         $this->assertArrayHasKey('devDependencies', $web);

@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\Persist\Persist;
+use Gear\Integration\Suite\MinorSuiteInterface;
 use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Util\String\StringService;
 use Symfony\Component\Yaml\Yaml;
@@ -29,7 +31,7 @@ class GearFileTest extends TestCase
     {
         parent::setUp();
 
-        $this->persist = $this->prophesize('Gear\Integration\Util\Persist\Persist');
+        $this->persist = $this->prophesize(Persist::class);
         $this->stringService = new StringService();
 
         $this->service = new GearFile(
@@ -37,7 +39,7 @@ class GearFileTest extends TestCase
             $this->stringService
         );
 
-        $this->suite = $this->prophesize('Gear\Integration\Suite\MinorSuiteInterface');
+        $this->suite = $this->prophesize(MinorSuiteInterface::class);
         $this->suite->isUsingLongName()->willReturn(true);
 
         $this->columns = new Columns();

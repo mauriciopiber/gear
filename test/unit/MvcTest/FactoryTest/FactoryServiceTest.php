@@ -2,6 +2,12 @@
 namespace GearTest\MvcTest\Factory;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Mvc\Factory\FactoryService;
+use Gear\Module;
+use Gear\Code\FactoryCode\FactoryCode;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use Gear\Schema\Src\Src;
@@ -25,29 +31,29 @@ class FactoryServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
 
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory';
 
         $fileCreator    = $this->createFileCreator();
-        $this->string  = new \Gear\Util\String\StringService();
-        $this->codeFactory = new \Gear\Creator\Codes\Code\FactoryCode\FactoryCode(
+        $this->string  = new StringService();
+        $this->codeFactory = new FactoryCode(
             $this->module->reveal(),
             $this->string,
-            new \Gear\Util\Dir\DirService()
+            new DirService()
         );
 
         $this->code = $this->createCode();
         //$constructorParams = new ConstructorParams($this->string);
         //$code->setConstructorParams($constructorParams);
 
-        $this->factory = new \Gear\Mvc\Factory\FactoryService(
+        $this->factory = new FactoryService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -134,22 +140,21 @@ class FactoryServiceTest extends TestCase
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module'));
         $this->module->getNamespace()->willReturn('MyModule');
 
-        /**
+        /*
         if ($data instanceof Src && $data->getTemplate() == 'search-form') {
 
-
-            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
+            $this->filter = $this->prophesize(Src::class);
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('Gear\Schema\Src\Src');
+            $this->form = $this->prophesize(Src::class);
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
 
-            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+            $this->entity = $this->prophesize(Src::class);
             $this->entity->getName()->willReturn('MyTableEntity');
             $this->entity->getType()->willReturn('Entity');
             $this->schema->getSrcByDb($data->getDb(), 'Entity')->willReturn($this->entity);
@@ -157,7 +162,7 @@ class FactoryServiceTest extends TestCase
 
         if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
-            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
+            $this->filter = $this->prophesize(Src::class);
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
             $this->filter->getNamespace()->willReturn($data->getNamespace());
@@ -165,7 +170,7 @@ class FactoryServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('Gear\Schema\Src\Src');
+            $this->form = $this->prophesize(Src::class);
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->form->getNamespace()->willReturn($data->getNamespace());
@@ -173,7 +178,7 @@ class FactoryServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form);
 
-            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+            $this->entity = $this->prophesize(Src::class);
             $this->entity->getName()->willReturn('MyTable');
             $this->entity->getType()->willReturn('Entity');
             $this->entity->getNamespace()->willReturn(null);
@@ -199,7 +204,7 @@ class FactoryServiceTest extends TestCase
 
         $expected = 'dependencies';
 
-        $src = new \Gear\Schema\Src\Src([
+        $src = new Src([
             'name' => 'MyService',
             'type' => 'Service',
             'service' => 'factories',

@@ -7,7 +7,7 @@ use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Api\ApiControllerTestService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\Config\ControllerManager;
 

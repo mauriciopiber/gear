@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Npm\NpmUpgrade;
 use Gear\Upgrade\Npm\NpmUpgradeTrait;
 
 /**
@@ -14,7 +15,7 @@ class NpmUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Upgrade\Npm\NpmUpgrade')->reveal();
+        $mocking = $this->prophesize(NpmUpgrade::class)->reveal();
         $this->setNpmUpgrade($mocking);
         $this->assertEquals($mocking, $this->getNpmUpgrade());
     }

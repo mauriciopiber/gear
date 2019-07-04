@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\LocationTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\Location\Location;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\Location\LocationTrait;
 
@@ -23,7 +24,7 @@ class LocationTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Util\Location\Location')->reveal();
+        $mocking = $this->prophesize(Location::class)->reveal();
         $this->setLocation($mocking);
         $this->assertEquals($mocking, $this->getLocation());
     }

@@ -2,6 +2,7 @@
 namespace GearTest;
 
 use org\bovigo\vfs\vfsStream;
+use Gear\Code\CodeTest;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
@@ -12,7 +13,7 @@ use Gear\Util\File\FileService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Table\TableService\TableService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\Dir\DirService;
 use Gear\Util\String\StringService;
@@ -216,7 +217,7 @@ trait UtilTestTrait
             return $this->codeTest;
         }
 
-        $this->codeTest = new \Gear\Creator\CodeTest(
+        $this->codeTest = new CodeTest(
             $this->createModule()->reveal(),
             $this->createString(),
             new DirService(),
@@ -228,7 +229,7 @@ trait UtilTestTrait
         // $this->codeTest->setModule($this->module->reveal());
         // $this->codeTest->setFileCreator($this->fileCreator);
 
-        // $this->codeTest->setDirService(new \Gear\Util\Dir\DirService());
+        // $this->codeTest->setDirService(new DirService());
         // $this->codeTest->setStringService($this->string);
 
     }

@@ -2,6 +2,9 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Config\ApplicationConfigFactory;
+use Zend\Console\Request;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -12,19 +15,19 @@ class ApplicationConfigFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
         $this->container
           ->get(ModuleStructure::class)
-          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure'))
+          ->willReturn($this->prophesize(ModuleStructure::class))
           ->shouldBeCalled();
 
         $this->container
           ->get('Request')
-          ->willReturn($this->prophesize('Zend\Console\Request'))
+          ->willReturn($this->prophesize(Request::class))
           ->shouldBeCalled();
 
-        $factory = new \Gear\Module\Config\ApplicationConfigFactory();
+        $factory = new ApplicationConfigFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

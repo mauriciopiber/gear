@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\ServiceTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Table\TableService\TableService;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\ServiceTest\ServiceDataTrait;
 use GearTest\UtilTestTrait;
@@ -10,7 +12,7 @@ use GearTest\ScopeTrait;
 use \Gear\Module;
 use Gear\Mvc\Service\ServiceService;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\Injector\Injector;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
@@ -39,7 +41,7 @@ class ServiceServiceTest extends TestCase
 
         $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/service';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
         $this->fileCreator    = $this->createFileCreator();
 
@@ -47,7 +49,7 @@ class ServiceServiceTest extends TestCase
 
 
         $this->arrayService = new ArrayService();
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->service = new ServiceService(
             $this->module->reveal(),
@@ -71,7 +73,7 @@ class ServiceServiceTest extends TestCase
     {
         $data = new Src(require __DIR__.'/../_gearfiles/service-with-special-dependency.php');
 
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getSrcModuleFolder()->willReturn(vfsStream::url('module/src/MyModule'));
 
@@ -184,7 +186,7 @@ class ServiceServiceTest extends TestCase
      */
     public function testCreateSrc($data, $template)
     {
-        $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
+        //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         if (!empty($data->getNamespace())) {

@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\TinyintTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Tinyint\Checkbox;
 
 /**
@@ -14,7 +15,7 @@ class CheckboxTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('tinyint')->shouldBeCalled();
 
 

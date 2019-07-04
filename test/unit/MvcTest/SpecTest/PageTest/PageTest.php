@@ -2,6 +2,10 @@
 namespace GearTest\MvcTest\SpecTest\PageTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Mvc\Spec\Page\Page;
+use Gear\Module;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
@@ -25,21 +29,21 @@ class PageTest extends TestCase
 
         $this->assertFileExists('vfs://module/public/js/spec/e2e/index');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getPublicJsSpecEndFolder()
           ->willReturn(vfsStream::url('module/public/js/spec/e2e'))
           ->shouldBeCalled();
 
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/spec';
+        $this->template = (new Module())->getLocation().'/../test/template/module/mvc/spec';
     }
 
     public function testCreateIndexFeature()
     {
-        $feature = new \Gear\Mvc\Spec\Page\Page(
+        $feature = new Page(
             $this->module->reveal(),
             $this->createFileCreator(),
             $this->string,

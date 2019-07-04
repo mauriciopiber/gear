@@ -1,37 +1,13 @@
+$env = new Gear\Env\Env();
+
 return [
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=<?php echo $this->module; ?>;host=mysql',
+        'dsn' => $env->getDns(),
+        'username' => $env->getUser(),
+        'password' => $env->getPass(),
         'driver_options' => [
             \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-        ***REMOVED***
-    ***REMOVED***,
-    'doctrine' => [
-        'connection' => [
-            'orm_default' => [
-                'configuration' => 'orm_default',
-                'eventmanager' => 'orm_default',
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => [
-                    'host' => 'mysql',
-                    'port' => '3306',
-                    'dbname' => '<?php echo $this->module; ?>',
-                    'charset' => 'utf8'
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-        'configuration' => [
-            'orm_default' => [
-                'metadata_cache' => 'filesystem',
-                'query_cache' => 'filesystem',
-                'result_cache' => 'filesystem',
-                'hydration_cache' => 'filesystem',
-            ***REMOVED***
         ***REMOVED***,
     ***REMOVED***,
-    'phinx' => [
-        'adapter' => 'mysql',
-        'host' => 'mysql',
-        'name'=> '<?php echo $this->module; ?>'
-    ***REMOVED***
 ***REMOVED***;

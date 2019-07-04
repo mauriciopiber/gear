@@ -2,6 +2,7 @@
 namespace GearTest\AutoloadTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Autoload\ComposerAutoload;
 use Gear\Autoload\ComposerAutoloadTrait;
 
 /**
@@ -14,7 +15,7 @@ class ComposerAutoloadTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Autoload\ComposerAutoload')->reveal();
+        $mocking = $this->prophesize(ComposerAutoload::class)->reveal();
         $this->setComposerAutoload($mocking);
         $this->assertEquals($mocking, $this->getComposerAutoload());
     }

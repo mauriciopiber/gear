@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <?php echo $this->module;?>-dev
+spec:
+  selector:
+    matchLabels:
+      run: <?php echo $this->module;?>-dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: <?php echo $this->module;?>-dev
+    spec:
+      containers:
+        - name: <?php echo $this->module;?>-dev
+          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
+          env:
+            - name: PHINX_ENVIRONMENT
+              value: STAGING
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root
+                  key: mysql
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_NAME
+              value: "<?php echo $moduleLine;?>_stag"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "vendor/bin/phinx migrate -e STAGING"***REMOVED***
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "0.10"
+            limits:
+              memory: "512Mi"
+              cpu: "0.20"
+      volumes:
+        - name: mysql-root
+          secret:
+            secretName: mysql-root
+      imagePullSecrets:
+        - name: registry-auth

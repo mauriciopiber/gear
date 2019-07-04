@@ -356,7 +356,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerConstructor
           ->createController($controller->export())
@@ -395,9 +395,9 @@ EOS
 
     public function testControllerDuplicade()
     {
-        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize(ControllerSchema::class);
 
-        $controller = new \Gear\Schema\Controller\Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
+        $controller = new Controller(['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***);
 
         //$controllerschema->controllerExist('Gearing', $controller)->willReturn(true);
 
@@ -426,7 +426,7 @@ EOS
     {
         $data = ['name' => 'Gearing', 'object' => '%s\Controller\Gearing'***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false);
 
@@ -593,14 +593,14 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
 
 
-        $controllerschema = $this->prophesize('Gear\Schema\Controller\ControllerSchema');
+        $controllerschema = $this->prophesize(ControllerSchema::class);
         $controllerschema->controllerExist('Gearing', $controller)->willReturn(false);
 
-        $controllerservice = $this->prophesize('Gear\Constructor\Controller\ControllerConstructor');
+        $controllerservice = $this->prophesize(ControllerConstructor::class);
         $controllerservice->createController($data)->willReturn(true);
 
         $this->construct->setControllerConstructor($controllerservice->reveal());
@@ -614,9 +614,9 @@ EOS
         ***REMOVED***);
 
         //action
-        $actionschema = $this->prophesize('Gear\Schema\Action\ActionSchema');
+        $actionschema = $this->prophesize(ActionSchema::class);
 
-        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $actionschema->actionExist('Gearing', $action)->willReturn(true);
         $this->construct->setActionSchema($actionschema->reveal());
 
@@ -650,7 +650,7 @@ EOS
             'service' => 'invokables',
         ***REMOVED***;
 
-        $controller = new \Gear\Schema\Controller\Controller($data);
+        $controller = new Controller($data);
 
         $this->controllerSchema->controllerExist('Gearing', $controller)->willReturn(false)->shouldBeCalled();
 
@@ -663,7 +663,7 @@ EOS
         ***REMOVED***);
         //action
 
-        $action = new \Gear\Schema\Action\Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
+        $action = new Action(['name' => 'GearIt', 'controller' => 'Gearing'***REMOVED***);
         $this->actionSchema->actionExist('Gearing', $action)->willReturn(false)->shouldBeCalled();
 
 
@@ -768,7 +768,7 @@ EOS;
 
     public function testDefaultLocation()
     {
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
 
         $module->getMainFolder()->willReturn('whatthafuck');
 

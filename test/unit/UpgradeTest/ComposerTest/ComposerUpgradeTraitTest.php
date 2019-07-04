@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Composer\ComposerUpgrade;
 use Gear\Upgrade\Composer\ComposerUpgradeTrait;
 
 /**
@@ -15,7 +16,7 @@ class ComposerUpgradeTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Upgrade\Composer\ComposerUpgrade')->reveal();
+        $mocking = $this->prophesize(ComposerUpgrade::class)->reveal();
         $this->setComposerUpgrade($mocking);
         $this->assertEquals($mocking, $this->getComposerUpgrade());
     }

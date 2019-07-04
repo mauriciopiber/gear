@@ -2,6 +2,12 @@
 namespace GearTest\MvcTest\FixtureTest;
 
 use org\bovigo\vfs\vfsStream;
+use Gear\Table\UploadImage;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Mvc\Config\ConfigService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\DateTime\DateTime;
 use PHPUnit\Framework\TestCase;
 use Gear\Util\String\StringService;
 use Gear\Util\File\FileService;
@@ -13,7 +19,7 @@ use Gear\Creator\Template\TemplateService;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module;
 use Gear\Mvc\Fixture\FixtureService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Column\ColumnManager;
 use Gear\Column\Integer\ForeignKey;
@@ -36,18 +42,18 @@ class FixtureServiceTest extends TestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
         $this->templates = (new Module)->getLocation().'/../test/template/module/mvc/fixture/db';
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
-        $this->schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schemaService = $this->prophesize(SchemaService::class);
 
-        $this->configService = $this->prophesize('Gear\Mvc\Config\ConfigService');
+        $this->configService = $this->prophesize(ConfigService::class);
 
         $this->fixture = new FixtureService(
             $this->module->reveal(),
@@ -63,7 +69,7 @@ class FixtureServiceTest extends TestCase
         $this->fixture->setSchemaService($this->schemaService->reveal());
         $this->fixture->setConfigService($this->configService->reveal());
 
-        $uploadImage = new \Gear\Table\UploadImage(
+        $uploadImage = new UploadImage(
             $this->string,
             $this->module->reveal()
         );
@@ -121,6 +127,8 @@ class FixtureServiceTest extends TestCase
         $service->setDb($this->db);
 
         $this->schemaService->getSrcByDb($this->db, 'Fixture')->willReturn($service);
+
+        $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
 
         $file = $this->fixture->createFixture($this->db);
 
@@ -180,12 +188,12 @@ class FixtureServiceTest extends TestCase
         $foreignKey->setStringService($this->string);
 
         /*
-        $primaryKey = $this->prophesize('Gear\Column\Integer\PrimaryKey');
-        $created = $this->prophesize('Gear\Column\DateTime\DateTime');
-        $updated = $this->prophesize('Gear\Column\DateTime\DateTime');
-        $createdBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
-        $updatedBy = $this->prophesize('Gear\Column\Integer\ForeignKey');
-        $foreignKey = $this->prophesize('Gear\Column\Integer\ForeignKey');
+        $primaryKey = $this->prophesize(PrimaryKey::class);
+        $created = $this->prophesize(DateTime::class);
+        $updated = $this->prophesize(DateTime::class);
+        $createdBy = $this->prophesize(ForeignKey::class);
+        $updatedBy = $this->prophesize(ForeignKey::class);
+        $foreignKey = $this->prophesize(ForeignKey::class);
 
         */
         //$foreignKey->getTableName()->willReturn('MyAnotherTable');
@@ -250,6 +258,7 @@ class FixtureServiceTest extends TestCase
         $tableUrl = $this->string->str('url', $tableName);
         $primaryKey = sprintf('id_%s', $tableUrl);
 
+        $this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -299,6 +308,7 @@ class FixtureServiceTest extends TestCase
         $tableUrl = $this->string->str('url', $tableName);
         $primaryKey = sprintf('id_%s', $tableUrl);
 
+        $this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -332,6 +342,7 @@ class FixtureServiceTest extends TestCase
      */
     public function testCreateCreateControllerDb($columns, $template)
     {
+        //$this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getFixtureFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
@@ -383,6 +394,7 @@ EOS;
 
     public function testFixtureSingleDependency()
     {
+        //$this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->db = new Db(['table' => 'SingleDbTable'***REMOVED***);
@@ -392,7 +404,7 @@ EOS;
         $foreigns = [***REMOVED***;
 
         foreach ($dependencies as $dependency) {
-            $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+            $foreignKey = $this->prophesize(ConstraintObject::class);
             $foreignKey->getReferencedTableName()->willReturn($dependency)->shouldBeCalled();
             $foreigns[***REMOVED*** = $foreignKey->reveal();
         }
@@ -424,6 +436,7 @@ EOS;
 
     public function testFixtureDependency()
     {
+        //$this->module->getNamespace()->willReturn($moduleName)->shouldBeCalled();
         $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->db = new Db(['table' => 'SingleDbTable'***REMOVED***);
@@ -433,7 +446,7 @@ EOS;
         $foreigns = [***REMOVED***;
 
         foreach ($dependencies as $dependency) {
-            $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+            $foreignKey = $this->prophesize(ConstraintObject::class);
             $foreignKey->getReferencedTableName()->willReturn($dependency)->shouldBeCalled();
             $foreigns[***REMOVED*** = $foreignKey->reveal();
         }

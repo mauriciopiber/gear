@@ -2,6 +2,10 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Dir\DirService;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use Gear\Upgrade\Dir\DirUpgrade;
@@ -20,14 +24,14 @@ class DirUpgradeTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->dir = new \Gear\Util\Dir\DirService();
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->dir = new DirService();
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->dirEdge = $this->prophesize(DirEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
 
-        $this->dirUpgrade = new \Gear\Upgrade\Dir\DirUpgrade(
+        $this->dirUpgrade = new DirUpgrade(
             $this->module->reveal(),
             $this->gearConfig->reveal(),
             $this->dirEdge->reveal(),
@@ -106,15 +110,15 @@ class DirUpgradeTest extends TestCase
         $upgrades = $this->dirUpgrade->upgradeModule($type, $force = true);
 
         $this->assertEquals([
-            sprintf(\Gear\Upgrade\Dir\DirUpgrade::$dirWrite, 'package-folder-1'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$writable, 'package-folder-1'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$ignore, 'package-folder-1'),
-            sprintf(\Gear\Upgrade\Dir\DirUpgrade::$dirWrite, 'package-folder-2'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$writable, 'package-folder-2'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$ignore, 'package-folder-2'),
-            sprintf(\Gear\Upgrade\Dir\DirUpgrade::$dirWrite, 'package-folder-3'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$writable, 'package-folder-3'),
-            //sprintf(\Gear\Upgrade\Dir\DirUpgrade::$ignore, 'package-folder-3')
+            sprintf(DirUpgrade::$dirWrite, 'package-folder-1'),
+            //sprintf(DirUpgrade::$writable, 'package-folder-1'),
+            //sprintf(DirUpgrade::$ignore, 'package-folder-1'),
+            sprintf(DirUpgrade::$dirWrite, 'package-folder-2'),
+            //sprintf(DirUpgrade::$writable, 'package-folder-2'),
+            //sprintf(DirUpgrade::$ignore, 'package-folder-2'),
+            sprintf(DirUpgrade::$dirWrite, 'package-folder-3'),
+            //sprintf(DirUpgrade::$writable, 'package-folder-3'),
+            //sprintf(DirUpgrade::$ignore, 'package-folder-3')
         ***REMOVED***, $upgrades);
     }
 

@@ -2,6 +2,10 @@
 namespace GearTest\ModuleTest\DocsTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Docs\DocsFactory;
+use Interop\Container\ContainerInterface;
+use Gear\Util\String\StringService;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -12,21 +16,21 @@ class DocsFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
         $this->container->get(ModuleStructure::class)
-          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
+          ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
           ->shouldBeCalled();
 
-        $this->container->get('Gear\Util\String\StringService')
-          ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
+        $this->container->get(StringService::class)
+          ->willReturn($this->prophesize(StringService::class)->reveal())
           ->shouldBeCalled();
 
-        $this->container->get('Gear\Creator\FileCreator\FileCreator')
-          ->willReturn($this->prophesize('Gear\Creator\FileCreator\FileCreator')->reveal())
+        $this->container->get(FileCreator::class)
+          ->willReturn($this->prophesize(FileCreator::class)->reveal())
           ->shouldBeCalled();
 
-        $factory = new \Gear\Module\Docs\DocsFactory();
+        $factory = new DocsFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

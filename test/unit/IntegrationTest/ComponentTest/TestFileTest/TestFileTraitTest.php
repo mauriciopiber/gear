@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\ComponentTest\TestFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Component\TestFile\TestFile;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\TestFile\TestFileTrait;
 
@@ -23,7 +24,7 @@ class TestFileTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Component\TestFile\TestFile')->reveal();
+        $mocking = $this->prophesize(TestFile::class)->reveal();
         $this->setTestFile($mocking);
         $this->assertEquals($mocking, $this->getTestFile());
     }

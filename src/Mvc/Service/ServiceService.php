@@ -10,7 +10,7 @@ use Gear\Column\Varchar\UploadImage as UploadImageColumn;
 use Gear\Table\UploadImage as UploadImageTable;
 use Gear\Mvc\Service\ServiceColumnInterface;
 use Gear\Mvc\Service\ServiceCodeInterface;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Schema\Src\Type\RepositoryInterface;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcInterface;
@@ -66,7 +66,7 @@ class ServiceService extends AbstractMvc implements AbstractMvcInterface
             'class'      => $this->src->getName(),
         ***REMOVED***;
 
-        $options['constructor'***REMOVED*** = ($this->src->isFactory())
+        $options['constructor'***REMOVED*** = ($this->src->isFactory() && !$this->isRest($this->src))
           ? $this->getCode()->getConstructor($this->src)
           : '';
 

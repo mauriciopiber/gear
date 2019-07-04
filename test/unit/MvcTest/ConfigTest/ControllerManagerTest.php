@@ -2,6 +2,12 @@
 namespace GearTest\MvcTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Schema\Controller\Controller;
+use Gear\Mvc\Config\ControllerManager;
+use Gear\Module;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
 use GearTest\UtilTestTrait;
@@ -27,36 +33,36 @@ class ControllerManagerTest extends TestCase
 
         $this->assertFileExists('vfs://module/config/ext');
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator  = $this->createFileCreator();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getConfigExtFolder()->willReturn(vfsStream::url('module/config/ext'))->shouldBeCalled();
         //$this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
 
         $this->code = $this->createCode();
         //$code->setModule($this->module->reveal());
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
 
-        $this->controllerManager  = new \Gear\Mvc\Config\ControllerManager(
-          $this->module->reveal(),
-          $this->fileCreator,
-          $this->string,
-          $this->code,
-          $this->arrayService,
+        $this->controllerManager  = new ControllerManager(
+            $this->module->reveal(),
+            $this->fileCreator,
+            $this->string,
+            $this->code,
+            $this->arrayService,
             $this->prophesize(LanguageService::class)->reveal()
         );
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/config';
+        $this->template = (new Module())->getLocation().'/../test/template/module/config';
     }
 
 
     public function testCreateControllerNamespace()
     {
-      $controller = new \Gear\Schema\Controller\Controller([
+      $controller = new Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories',
@@ -67,7 +73,7 @@ class ControllerManagerTest extends TestCase
         <?php return array (
           'invokables' =>
           array (
-            'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+            'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
           ),
         );
 EOS
@@ -79,10 +85,10 @@ EOS
 
       $expected = [
         'invokables' => [
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ***REMOVED***,
         'factories' => [
-          'MyModule\MyNamespace\My' => 'MyModule\MyNamespace\MyControllerFactory',
+          'MyModule\MyNamespace\MyController' => 'MyModule\MyNamespace\MyControllerFactory',
         ***REMOVED***,
       ***REMOVED***;
 
@@ -97,7 +103,7 @@ EOS
 
     public function testCreateController()
     {
-      $controller = new \Gear\Schema\Controller\Controller([
+      $controller = new Controller([
         'name' => 'MyController',
         'type' => 'Action',
         'service' => 'factories'
@@ -107,7 +113,7 @@ EOS
       <?php return array (
         'invokables' =>
         array (
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ),
       );
 EOS
@@ -119,10 +125,10 @@ EOS
 
       $expected = [
         'invokables' => [
-          'MyModule\Controller\Index' => 'MyModule\Controller\IndexController',
+          'MyModule\Controller\IndexController' => 'MyModule\Controller\IndexController',
         ***REMOVED***,
         'factories' => [
-          'MyModule\Controller\My' => 'MyModule\Controller\MyControllerFactory',
+          'MyModule\Controller\MyController' => 'MyModule\Controller\MyControllerFactory',
         ***REMOVED***,
       ***REMOVED***;
 

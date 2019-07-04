@@ -2,6 +2,11 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\Npm\NpmUpgradeFactory;
+use Interop\Container\ContainerInterface;
+use Gear\Util\String\StringService;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Config\GearConfig;
 use Gear\Edge\Npm\NpmEdge;
 use Gear\Module\Structure\ModuleStructure;
 
@@ -13,23 +18,23 @@ class NpmUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
 
-        $this->container->get('Gear\Util\Prompt\ConsolePrompt')
-          ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
+        $this->container->get(ConsolePrompt::class)
+          ->willReturn($this->prophesize(ConsolePrompt::class)->reveal())
           ->shouldBeCalled();
 
         $this->container->get(ModuleStructure::class)
-          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
+          ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
           ->shouldBeCalled();
 
-        $this->container->get('Gear\Config\GearConfig')->willReturn(
-            $this->prophesize('Gear\Config\GearConfig')->reveal()
+        $this->container->get(GearConfig::class)->willReturn(
+            $this->prophesize(GearConfig::class)->reveal()
         )->shouldBeCalled();
 
-        $this->container->get('Gear\Util\String\StringService')->willReturn(
-            $this->prophesize('Gear\Util\String\StringService')->reveal()
+        $this->container->get(StringService::class)->willReturn(
+            $this->prophesize(StringService::class)->reveal()
         )->shouldBeCalled();
 
         $this->container->get(NpmEdge::class)
@@ -37,7 +42,7 @@ class NpmUpgradeFactoryTest extends TestCase
         ->shouldBeCalled();
 
 
-        $factory = new \Gear\Upgrade\Npm\NpmUpgradeFactory();
+        $factory = new NpmUpgradeFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

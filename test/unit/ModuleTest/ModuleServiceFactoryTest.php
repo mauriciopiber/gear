@@ -2,6 +2,8 @@
 namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\ModuleServiceFactory;
+use Interop\Container\ContainerInterface;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -15,9 +17,9 @@ class ModuleServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $factory = new \Gear\Module\ModuleServiceFactory();
+        $factory = new ModuleServiceFactory();
 
         $expected = [
             'Gear\Creator\FileCreator\FileCreator' => 'Gear\Creator\FileCreator\FileCreator',
@@ -43,7 +45,8 @@ class ModuleServiceFactoryTest extends TestCase
             'Gear\Config\GearConfig' => 'Gear\Config\GearConfig',
             'Gear\Constructor\Controller\ControllerConstructor' => 'Gear\Constructor\Controller\ControllerConstructor',
             'Gear\Constructor\Action\ActionConstructor' => 'Gear\Constructor\Action\ActionConstructor',
-            'Gear\Docker\DockerService' => 'Gear\Docker\DockerService'
+            'Gear\Docker\DockerService' => 'Gear\Docker\DockerService',
+            'Gear\Kube\KubeService' => 'Gear\Kube\KubeService'
         ***REMOVED***;
 
         $this->container->get('config')->willReturn([***REMOVED***)->shouldBeCalled();

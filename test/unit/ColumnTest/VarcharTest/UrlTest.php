@@ -2,6 +2,9 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\Url;
 
 /**
@@ -15,11 +18,11 @@ class UrlTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/url';
+        $this->template = (new Module())->getLocation().'/../test/template/module/column/varchar/url';
     }
 
     public function values()
@@ -38,7 +41,7 @@ class UrlTest extends TestCase
 
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $filter = $this->url->filterElement();
 
@@ -53,7 +56,7 @@ class UrlTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $filter = $this->url->filterUniqueElement();
 
@@ -68,7 +71,7 @@ class UrlTest extends TestCase
 
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $filter = $this->url->filterElement();
 
@@ -83,7 +86,7 @@ class UrlTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $filter = $this->url->filterUniqueElement();
 
@@ -98,7 +101,7 @@ class UrlTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $value = $this->url->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -110,7 +113,7 @@ class UrlTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->url = new Url($this->column->reveal());
-        $this->url->setStringService(new \Gear\Util\String\StringService());
+        $this->url->setStringService(new StringService());
 
         $value = $this->url->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);

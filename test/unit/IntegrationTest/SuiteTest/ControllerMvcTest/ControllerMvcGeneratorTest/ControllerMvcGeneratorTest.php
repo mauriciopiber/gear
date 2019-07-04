@@ -2,6 +2,10 @@
 namespace GearTest\IntegrationTest\SuiteTest\ControllerMvcTest\ControllerMvcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
+use Gear\Integration\Util\Columns\Columns;
+use Gear\Integration\Component\TestFile\TestFile;
+use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Suite\ControllerMvc\ControllerMvcGenerator\ControllerMvcGenerator;
 
 /**
@@ -13,10 +17,10 @@ class ControllerMvcGeneratorTest extends TestCase
     {
         parent::setUp();
 
-        $this->gearFile = $this->prophesize('Gear\Integration\Component\GearFile\GearFile');
-        $this->testFile = $this->prophesize('Gear\Integration\Component\TestFile\TestFile');
-        $this->resolveNames = $this->prophesize('Gear\Integration\Util\ResolveNames\ResolveNames');
-        $this->columns = $this->prophesize('Gear\Integration\Util\Columns\Columns');
+        $this->gearFile = $this->prophesize(GearFile::class);
+        $this->testFile = $this->prophesize(TestFile::class);
+        $this->resolveNames = $this->prophesize(ResolveNames::class);
+        $this->columns = $this->prophesize(Columns::class);
 
         $this->service = new ControllerMvcGenerator(
             $this->gearFile->reveal(),

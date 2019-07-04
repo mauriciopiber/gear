@@ -1,6 +1,8 @@
 <?php
 namespace GearTest\MvcTest\FactoryTest;
 
+use Gear\Schema\Controller\Controller;
+use Gear\Schema\Src\Src;
 trait FactoryDataTrait
 {
     public function getFactoryData()
@@ -52,7 +54,7 @@ trait FactoryDataTrait
             $lowerType = strtolower($type['type'***REMOVED***);
 
             $factoryData[***REMOVED*** = [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('MyTable%s', $type['type'***REMOVED***),
                         'type' => $type['type'***REMOVED***,
@@ -69,7 +71,7 @@ trait FactoryDataTrait
 
 
             $factoryData[***REMOVED*** = [
-                new \Gear\Schema\Src\Src(
+                new Src(
                     [
                         'name' => sprintf('MyTable%s', $type['type'***REMOVED***),
                         'type' => $type['type'***REMOVED***,
@@ -86,7 +88,7 @@ trait FactoryDataTrait
         }
 
         $factoryData[***REMOVED*** = [
-            new \Gear\Schema\Controller\Controller([
+            new Controller([
                 'name' => 'MyTableController',
                 'service' => 'factories',
                 'db' => 'MyTable',
@@ -100,7 +102,7 @@ trait FactoryDataTrait
         ***REMOVED***;
 
         $factoryData[***REMOVED*** = [
-            new \Gear\Schema\Controller\Controller([
+            new Controller([
                 'name' => 'MyTableNamespaceController',
                 'service' => 'factories',
                 'db' => 'MyTable',

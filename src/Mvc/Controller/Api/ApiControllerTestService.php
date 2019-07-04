@@ -6,8 +6,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
-use Gear\Creator\CodeTest;
-use Gear\Creator\CodeTestTrait;
+use Gear\Code\CodeTest;
+use Gear\Code\CodeTestTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Schema\Controller\Controller as ControllerValueObject;
@@ -86,7 +86,7 @@ class ApiControllerTestService extends AbstractControllerTestService
     private function getConfig()
     {
         $namespace = $this->getModule()->getNamespace();
-        $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
+        //$namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
 
         return [
             'module' => $namespace

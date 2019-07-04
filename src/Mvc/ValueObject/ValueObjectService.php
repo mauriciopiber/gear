@@ -13,7 +13,7 @@ namespace Gear\Mvc\ValueObject;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\ValueObject\ValueObjectTestServiceTrait;
-use Gear\Creator\CodeTrait;
+use Gear\Code\CodeTrait;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Mvc\AbstractMvcInterface;
 

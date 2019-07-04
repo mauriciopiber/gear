@@ -2,6 +2,8 @@
 namespace GearTest\IntegrationTest\ComponentTest\SuperTestFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Integration\Util\Persist\Persist;
 use Gear\Integration\Component\SuperTestFile\SuperTestFile;
 
 /**
@@ -13,8 +15,8 @@ class SuperTestFileTest extends TestCase
     {
         parent::setUp();
 
-        $this->persist = $this->prophesize('Gear\Integration\Util\Persist\Persist');
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
+        $this->persist = $this->prophesize(Persist::class);
+        $this->stringService = $this->prophesize(StringService::class);
 
         $this->service = new SuperTestFile(
             $this->persist->reveal(),

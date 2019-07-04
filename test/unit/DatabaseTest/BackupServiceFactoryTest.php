@@ -2,6 +2,12 @@
 namespace GearTest\ProjectTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Database\BackupServiceFactory;
+use Zend\Console\Request;
+use Zend\Console\Adapter\Posix;
+use Interop\Container\ContainerInterface;
+use Gear\Util\String\StringService;
+use Gear\Util\Script\ScriptService;
 use Gear\Module\Structure\ModuleStructure;
 
 /**
@@ -11,9 +17,9 @@ class BackupServiceFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $factory = new \Gear\Database\BackupServiceFactory();
+        $factory = new BackupServiceFactory();
 
         $this->container
           ->get('config')
@@ -22,28 +28,28 @@ class BackupServiceFactoryTest extends TestCase
 
         $this->container
           ->get(ModuleStructure::class)
-          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
+          ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
           ->shouldBeCalled();
 
           $this->container
           ->get('request')
-          ->willReturn($this->prophesize('Zend\Console\Request')->reveal())
+          ->willReturn($this->prophesize(Request::class)->reveal())
           ->shouldBeCalled();
 
 
         $this->container
           ->get('GearBase\Script')
-          ->willReturn($this->prophesize('Gear\Util\Script\ScriptService')->reveal())
+          ->willReturn($this->prophesize(ScriptService::class)->reveal())
           ->shouldBeCalled();
 
         $this->container
-          ->get('Gear\Util\String\StringService')
-          ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
+          ->get(StringService::class)
+          ->willReturn($this->prophesize(StringService::class)->reveal())
           ->shouldBeCalled();
 
         $this->container
           ->get('console')
-          ->willReturn($this->prophesize('Zend\Console\Adapter\Posix')->reveal())
+          ->willReturn($this->prophesize(Posix::class)->reveal())
           ->shouldBeCalled();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);

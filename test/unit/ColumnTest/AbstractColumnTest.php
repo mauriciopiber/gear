@@ -2,6 +2,8 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Zend\Db\Metadata\Object\ColumnObject;
 
 /**
  * @group AbstractColumn
@@ -15,8 +17,8 @@ class AbstractColumnTest extends TestCase
         parent::setUp();
 
         $this->abstractColumn = $this->getMockForAbstractClass('Gear\Column\AbstractColumn', [***REMOVED***, '', false);
-        $this->abstractColumn->setStringService(new \Gear\Util\String\StringService());
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->abstractColumn->setStringService(new StringService());
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getCharacterMaximumLength()->willReturn(45);
     }
 

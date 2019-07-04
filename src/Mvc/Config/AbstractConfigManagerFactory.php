@@ -7,7 +7,7 @@ use Gear\Mvc\Config\AbstractConfigManagerInterface;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Mvc\LanguageService;
 use Gear\Util\Vector\ArrayService;
 

@@ -2,6 +2,9 @@
 namespace GearTest\ColumnTest\VarcharTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Module;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Varchar\Varchar;
 
 /**
@@ -15,12 +18,12 @@ class VarcharTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('varchar')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column');
         $this->column->getCharacterMaximumLength()->willReturn(45);
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/column/varchar/varchar';
+        $this->template = (new Module())->getLocation().'/../test/template/module/column/varchar/varchar';
 
     }
 
@@ -41,7 +44,7 @@ class VarcharTest extends TestCase
 
 
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \Gear\Util\String\StringService());
+        $this->varchar->setStringService(new StringService());
 
         $filter = $this->varchar->filterElement();
 
@@ -56,7 +59,7 @@ class VarcharTest extends TestCase
         $this->column->getTableName()->willReturn('my_table')->shouldBeCalled();
 
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \Gear\Util\String\StringService());
+        $this->varchar->setStringService(new StringService());
 
         $filter = $this->varchar->filterUniqueElement();
 
@@ -71,7 +74,7 @@ class VarcharTest extends TestCase
     public function testGetValueView($iterator, $expected)
     {
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \Gear\Util\String\StringService());
+        $this->varchar->setStringService(new StringService());
 
         $value = $this->varchar->getValue($iterator);
         $this->assertEquals($expected, $value);
@@ -83,7 +86,7 @@ class VarcharTest extends TestCase
     public function testGetValueDb($iterator, $expected)
     {
         $this->varchar = new Varchar($this->column->reveal());
-        $this->varchar->setStringService(new \Gear\Util\String\StringService());
+        $this->varchar->setStringService(new StringService());
 
         $value = $this->varchar->getValueDatabase($iterator);
         $this->assertEquals($expected, $value);

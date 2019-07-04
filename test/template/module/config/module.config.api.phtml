@@ -1,0 +1,22 @@
+<?php
+namespace MyModule;
+
+$db                 = require 'ext/db.config.php';
+$route              = require 'ext/route.config.php';
+$view               = require 'ext/view.config.php';
+$servicemanager     = require 'ext/servicemanager.config.php';
+$controller         = require 'ext/controller.config.php';
+$controllerPlugins  = require 'ext/controller.plugin.config.php';
+$cache              = require 'ext/cache.config.php';
+
+return [
+    'session_config' => [
+        'save_path' => __DIR__.'/../data/session'
+    ***REMOVED***,
+    'db'                 => $db,
+    'view_manager'       => $view,
+    'controllers'        => $controller,
+    'router'             => $route,
+    'service_manager'    => $servicemanager,
+    'controller_plugins' => $controllerPlugins,
+***REMOVED***;

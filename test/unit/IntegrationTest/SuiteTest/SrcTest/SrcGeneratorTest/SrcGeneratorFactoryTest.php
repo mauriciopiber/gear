@@ -2,6 +2,9 @@
 namespace GearTest\IntegrationTest\SuiteTest\SrcTest\SrcGeneratorTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Integration\Component\TestFile\TestFile;
+use Gear\Integration\Component\GearFile\GearFile;
 use Gear\Integration\Suite\Src\SrcGenerator\SrcGeneratorFactory;
 
 /**
@@ -13,14 +16,14 @@ class SrcGeneratorFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Component\GearFile\GearFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\GearFile\GearFile')->reveal())
+        $this->container->get(GearFile::class)
+            ->willReturn($this->prophesize(GearFile::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Component\TestFile\TestFile')
-            ->willReturn($this->prophesize('Gear\Integration\Component\TestFile\TestFile')->reveal())
+        $this->container->get(TestFile::class)
+            ->willReturn($this->prophesize(TestFile::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new SrcGeneratorFactory();

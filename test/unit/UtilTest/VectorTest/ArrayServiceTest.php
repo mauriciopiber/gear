@@ -2,6 +2,7 @@
 namespace GearTest\Util\Vector;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;
 
 /**
@@ -30,7 +31,7 @@ class ArrayServiceTest extends TestCase
     public function testReplaceLine()
     {
 
-        $arrayService = new \Gear\Util\Vector\ArrayService();
+        $arrayService = new ArrayService();
 
         $oldArray = [
             'a', 'b', 'c', 'd', 'e', 'f'
@@ -51,7 +52,7 @@ class ArrayServiceTest extends TestCase
 
     public function testMove()
     {
-        $arrayService = new \Gear\Util\Vector\ArrayService();
+        $arrayService = new ArrayService();
 
         $oldArray = [
             'a', 'b', 'c', 'd', 'e', 'f'
@@ -70,7 +71,7 @@ class ArrayServiceTest extends TestCase
 
     public function testReplaceRange()
     {
-        $arrayService = new \Gear\Util\Vector\ArrayService();
+        $arrayService = new ArrayService();
 
         $oldArray = [
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'
@@ -97,7 +98,7 @@ class ArrayServiceTest extends TestCase
         ***REMOVED***;
 
 
-        $arrayService = new \Gear\Util\Vector\ArrayService();
+        $arrayService = new ArrayService();
 
         $expected = <<<EOS
     "value": "1",

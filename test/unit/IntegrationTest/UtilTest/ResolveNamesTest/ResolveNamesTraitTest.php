@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\UtilTest\ResolveNamesTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Util\ResolveNames\ResolveNames;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Util\ResolveNames\ResolveNamesTrait;
 
@@ -23,7 +24,7 @@ class ResolveNamesTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Util\ResolveNames\ResolveNames')->reveal();
+        $mocking = $this->prophesize(ResolveNames::class)->reveal();
         $this->setResolveNames($mocking);
         $this->assertEquals($mocking, $this->getResolveNames());
     }

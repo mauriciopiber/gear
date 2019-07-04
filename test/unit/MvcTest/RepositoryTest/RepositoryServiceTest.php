@@ -2,6 +2,19 @@
 namespace GearTest\MvcTest\RepositoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Repository\RepositoryService;
+use Gear\Mvc\Repository\MappingService;
+use Gear\Module;
+use Gear\Creator\Injector\Injector;
+use Gear\Column\Integer\ForeignKey;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use org\bovigo\vfs\vfsStream;
 use GearTest\ScopeTrait;
 use GearTest\MvcTest\RepositoryTest\RepositoryDataTrait;
@@ -28,32 +41,32 @@ class RepositoryServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/repository';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/repository';
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
         $this->fileCreator    = $this->createFileCreator();
 
-        $this->dirService = new \Gear\Util\Dir\DirService();
+        $this->dirService = new DirService();
 
 
-        $this->arrayService = new \Gear\Util\Vector\ArrayService();
+        $this->arrayService = new ArrayService();
 
-        $this->injector = new \Gear\Creator\Injector\Injector($this->arrayService);
+        $this->injector = new Injector($this->arrayService);
 
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->column = $this->prophesize(ColumnService::class);
         //$this->repository->setColumnService($this->column->reveal());
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
         //$this->repository->setSchemaService($this->schema->reveal());
 
 
 
-        $this->repository = new \Gear\Mvc\Repository\RepositoryService(
+        $this->repository = new RepositoryService(
             $this->module->reveal(),
             $this->createFileCreator(),
             $this->string,
@@ -133,15 +146,15 @@ class RepositoryServiceTest extends TestCase
 
         $table = $this->string->str('class', $tableName);
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => sprintf('%s', $table)***REMOVED***);
+        $this->db = new Db(['table' => sprintf('%s', $table)***REMOVED***);
 
-        $createdBy = new \Gear\Column\Integer\ForeignKey(
+        $createdBy = new ForeignKey(
             $this->prophesizeColumn('table', 'created_by', 'int'),
             $this->prophesizeForeignKey('table', 'created_by', 'FOREIGN KEY', 'user'),
             'email'
         );
 
-        //$schema = $this->prophesize('Gear\Table\TableService\TableService');
+        //$schema = $this->prophesize(TableService::class);
         //$schema->getReferencedTableValidColumnName('user')
         //->willReturn('email');
 
@@ -184,7 +197,7 @@ class RepositoryServiceTest extends TestCase
 
         $this->schema->getSrcByDb($this->db, 'Repository')->willReturn($repository);
 
-        $this->mapping = new \Gear\Mvc\Repository\MappingService(
+        $this->mapping = new MappingService(
             $this->module->reveal(),
             $this->createFileCreator(),
             $this->string,

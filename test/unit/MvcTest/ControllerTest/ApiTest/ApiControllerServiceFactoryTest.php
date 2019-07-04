@@ -7,7 +7,7 @@ use Gear\Mvc\Controller\Api\ApiControllerServiceFactory;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Mvc\Factory\FactoryService;
 use Gear\Creator\Injector\Injector;

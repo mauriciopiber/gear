@@ -7,13 +7,13 @@ use Gear\Mvc\Factory\FactoryTestService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
-use Gear\Creator\CodeTest;
+use Gear\Code\CodeTest;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
 use Gear\Mvc\Config\ServiceManager;
 use Gear\Util\Vector\ArrayService;
 use Gear\Creator\Injector\Injector;
-use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
+use Gear\Code\FactoryCode\FactoryCodeTest;
 
 class FactoryTestServiceFactory implements FactoryInterface
 {

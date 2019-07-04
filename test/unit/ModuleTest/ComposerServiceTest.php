@@ -2,6 +2,8 @@
 namespace GearTest\ModuleTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Edge\Composer\ComposerEdge;
 use org\bovigo\vfs\vfsStream;
 use Gear\Module\ComposerService;
 use Gear\Creator\Template\TemplateService;
@@ -29,8 +31,8 @@ class ComposerServiceTest extends TestCase
         $stringService  = new StringService();
         $arrayService   = new ArrayService();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->edge = $this->prophesize('Gear\Edge\Composer\ComposerEdge');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->edge = $this->prophesize(ComposerEdge::class);
 
         $this->composer = new ComposerService(
             $this->module->reveal(),
@@ -112,13 +114,10 @@ class ComposerServiceTest extends TestCase
             "Gear\\\\Gearing\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -182,13 +181,10 @@ EOS;
             "Gear\\\\Gearing\\\\MyOther\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***
@@ -255,13 +251,10 @@ EOS;
             "Gearing\\\\Test\\\\" : "test/unit"
         }
     },
-    "config": {
-        "secure-http": false
-    },
     "repositories" : [
         {
             "type" : "composer",
-            "url" : "http://satis"
+            "url" : "https://satis.piber.network"
         },
         { "packagist" : false }
     ***REMOVED***

@@ -2,6 +2,9 @@
 namespace GearTest\ModuleTest\ConfigTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module\Config\ApplicationConfig;
+use Zend\Console\Request;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 //use org\bovigo\vfs\vfsStreamWrapper;
 
@@ -14,15 +17,15 @@ class ApplicationConfigTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->request = $this->prophesize('Zend\Console\Request');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->request = $this->prophesize(Request::class);
     }
 
     public function testMissingApplicationConfigOnGetApplicationConfig()
     {
         $root = vfsStream::setup('project');
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -42,7 +45,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -65,7 +68,7 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
@@ -113,14 +116,14 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('GearDeploy')->shouldBeCalled();
         $this->applicationConfig->setModule($module->reveal());
         $array = $this->applicationConfig->removeModuleFromProject();
@@ -166,14 +169,14 @@ class ApplicationConfigTest extends TestCase
         vfsStream::newDirectory('config')->at($root);
         file_put_contents(vfsStream::url('project/config/application.config.php'), $expected);
 
-        $this->applicationConfig = new \Gear\Module\Config\ApplicationConfig(
+        $this->applicationConfig = new ApplicationConfig(
             $this->module->reveal(),
             $this->request->reveal()
         );
 
         $this->applicationConfig->setProject(vfsStream::url('project'));
 
-        $module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $module = $this->prophesize(ModuleStructure::class);
         $module->getModuleName()->willReturn('MyNewModule')->shouldBeCalled();
 
         $this->applicationConfig->setModule($module->reveal());

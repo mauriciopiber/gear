@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest\TimeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Time\Time;
 
 /**
@@ -13,7 +14,7 @@ class TimeTest extends TestCase
     {
         parent::setUp();
 
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn('time')->shouldBeCalled();
 
 

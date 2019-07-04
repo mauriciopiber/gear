@@ -2,6 +2,11 @@
 namespace GearTest\ServiceTest\MvcTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Src\Src;
+use Gear\Mvc\TraitTestService;
+use Gear\Module;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\UtilTestTrait;
 
@@ -18,20 +23,20 @@ class TraitTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('GearIt');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->templates = $this->baseDir.'/../test/template/module/mvc/trait';
 
-        $stringService  = new \Gear\Util\String\StringService();
+        $stringService  = new StringService();
         $fileCreator    = $this->createFileCreator();
 
 
-        $this->traitTest = new \Gear\Mvc\TraitTestService(
+        $this->traitTest = new TraitTestService(
             $this->module->reveal(),
             $fileCreator,
             $stringService,
@@ -49,7 +54,7 @@ class TraitTestServiceTest extends TestCase
         $this->module->getNamespace()->willReturn('GearIt')->shouldBeCalled();
         $this->module->map('ServiceTest')->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
-        $src = new \Gear\Schema\Src\Src([
+        $src = new Src([
             'name' => 'MyService',
             'type' => 'Service'
         ***REMOVED***);
@@ -63,9 +68,9 @@ class TraitTestServiceTest extends TestCase
 
     public function testDependency()
     {
-        $this->assertInstanceOf('Gear\Module\Structure\ModuleStructure', $this->traitTest->getModule());
+        $this->assertInstanceOf(ModuleStructure::class, $this->traitTest->getModule());
         $this->assertInstanceOf('Gear\Creator\FileCreator\FileCreator', $this->traitTest->getFileCreator());
-        $this->assertInstanceOf('Gear\Creator\CodeTest', $this->traitTest->getCodeTest());
+        $this->assertInstanceOf('Gear\Code\CodeTest', $this->traitTest->getCodeTest());
     }
 
 }

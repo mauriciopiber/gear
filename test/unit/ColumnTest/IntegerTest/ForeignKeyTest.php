@@ -2,6 +2,8 @@
 namespace GearTest\ColumnTest\IntTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
 use Gear\Column\Integer\ForeignKey;
 use Gear\Util\String\StringService;
 
@@ -16,11 +18,11 @@ class ForeignKeyTest extends TestCase
     {
         parent::setUp();
 
-        $this->column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $this->column = $this->prophesize(ColumnObject::class);
         $this->column->getDataType()->willReturn('int')->shouldBeCalled();
         $this->column->getName()->willReturn('my_column')->shouldBeCalled();
 
-        $this->constraint = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $this->constraint = $this->prophesize(ConstraintObject::class);
         $this->constraint->getType()->willReturn('FOREIGN KEY')->shouldBeCalled();
         $this->constraint->getColumns()->willReturn(['my_column'***REMOVED***)->shouldBeCalled();
     }

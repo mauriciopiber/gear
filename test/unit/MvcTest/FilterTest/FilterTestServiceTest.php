@@ -2,6 +2,13 @@
 namespace GearTest\MvcTest\FilterTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\String\StringService;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Filter\FilterTestService;
+use Gear\Module;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -30,18 +37,18 @@ class FilterTestServiceTest extends TestCase
         $this->vfsLocation = 'module/test/unit/MyModuleTest/FilterTest';
         $this->createVirtualDir($this->vfsLocation);
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
 
-        $this->string = new \Gear\Util\String\StringService();
+        $this->string = new StringService();
 
 
-        $this->template = (new \Gear\Module())->getLocation().'/../test/template/module/mvc/filter-test';
+        $this->template = (new Module())->getLocation().'/../test/template/module/mvc/filter-test';
 
 
         $this->fileCreator = $this->createFileCreator();
 
-        $this->filter = new \Gear\Mvc\Filter\FilterTestService(
+        $this->filter = new FilterTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -68,7 +75,7 @@ class FilterTestServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $db = new \Gear\Schema\Db\Db(['table' => sprintf('%sTable', $table)***REMOVED***);
+        $db = new Db(['table' => sprintf('%sTable', $table)***REMOVED***);
 
         $this->module->getTestFilterFolder()->willReturn(vfsStream::url('module'));
 
@@ -92,7 +99,7 @@ class FilterTestServiceTest extends TestCase
 
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $src = new \Gear\Schema\Src\Src(
+        $src = new Src(
             [
                 'name' => sprintf('%sFilter', $table),
                 'type' => 'Filter',
@@ -101,7 +108,7 @@ class FilterTestServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
         $this->schema->getSrcByDb($db, 'Filter')->willReturn($src);
 
         $this->filter->setSchemaService($this->schema->reveal());

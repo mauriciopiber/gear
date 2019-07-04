@@ -2,6 +2,9 @@
 namespace GearTest\CreatorTest\FileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Creator\Injector\InjectorFactory;
+use Interop\Container\ContainerInterface;
+use Gear\Util\Vector\ArrayService;
 
 /**
  * @group Gear
@@ -11,14 +14,14 @@ class InjectorFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
         $this->container
-            ->get('Gear\Util\Vector\ArrayService')
-            ->willReturn($this->prophesize('Gear\Util\Vector\ArrayService'))
+            ->get(ArrayService::class)
+            ->willReturn($this->prophesize(ArrayService::class))
             ->shouldBeCalled();
 
-        $factory = new \Gear\Creator\Injector\InjectorFactory();
+        $factory = new InjectorFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

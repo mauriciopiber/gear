@@ -2,6 +2,13 @@
 namespace GearTest\ModuleTest\DiagnosticTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Diagnostic\Npm\NpmService;
+use Gear\Diagnostic\File\FileService;
+use Gear\Diagnostic\Dir\DirService;
+use Gear\Diagnostic\Composer\ComposerService;
+use Gear\Diagnostic\Ant\AntService;
 use Gear\Module\Diagnostic\DiagnosticService;
 
 /**
@@ -16,18 +23,18 @@ class DiagnosticServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->console = $this->prophesize(Posix::class);
 
-        $this->composer = $this->prophesize('Gear\Diagnostic\Composer\ComposerService');
+        $this->composer = $this->prophesize(ComposerService::class);
 
-        $this->npm = $this->prophesize('Gear\Diagnostic\Npm\NpmService');
+        $this->npm = $this->prophesize(NpmService::class);
 
-        $this->ant = $this->prophesize('Gear\Diagnostic\Ant\AntService');
+        $this->ant = $this->prophesize(AntService::class);
 
-        $this->file = $this->prophesize('Gear\Diagnostic\File\FileService');
+        $this->file = $this->prophesize(FileService::class);
 
-        $this->dir = $this->prophesize('Gear\Diagnostic\Dir\DirService');
+        $this->dir = $this->prophesize(DirService::class);
 
         $this->diagnostic = new DiagnosticService(
             $this->console->reveal(),

@@ -2,6 +2,7 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Console\Adapter\Posix;
 use Gear\Upgrade\AbstractUpgradeTrait;
 
 /**
@@ -13,7 +14,7 @@ class AbstractUpgradeTest extends TestCase
     {
         parent::setUp();
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
+        $this->console = $this->prophesize(Posix::class);
         $this->upgrade = $this->getMockForAbstractClass('Gear\Upgrade\AbstractUpgrade', [***REMOVED***, '', false);
     }
 

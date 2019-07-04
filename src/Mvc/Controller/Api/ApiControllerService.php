@@ -6,8 +6,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
-use Gear\Creator\Code;
-use Gear\Creator\CodeTrait;
+use Gear\Code\Code;
+use Gear\Code\CodeTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
 use Gear\Mvc\Factory\FactoryService;
@@ -84,7 +84,7 @@ class ApiControllerService extends AbstractControllerService implements Abstract
     private function getConfig()
     {
         $namespace = $this->getModule()->getNamespace();
-        $namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
+        //$namespace = preg_replace('/\\\\/i', '\\\\\\\\', $namespace);
 
         return [
             'module' => $namespace
@@ -96,7 +96,7 @@ class ApiControllerService extends AbstractControllerService implements Abstract
     {
         $this->controller = $controller;
         $this->location = $this->getCode()->getLocation($controller);
-        //var_dump($this->location, 'hehe');
+        // var_dump($this->location, 'hehe');
         $this->fileName = sprintf('%s.php', $controller->getName());
         $this->controllerFile = $this->location.'/'.$this->fileName;
 
@@ -113,8 +113,10 @@ class ApiControllerService extends AbstractControllerService implements Abstract
             'controllerName' => $controller->getName(),
             'controllerUrl' => $this->str('url', $controller->getName()),
         ***REMOVED***;
+        // var_dump($controller);
+        // var_dump($this->isRest($controller));
 
-        $options['constructor'***REMOVED*** = ($controller->isFactory())
+        $options['constructor'***REMOVED*** = ($controller->isFactory() && !$this->isRest($controller))
           ? $this->getCode()->getConstructor($controller)
           : '';
 

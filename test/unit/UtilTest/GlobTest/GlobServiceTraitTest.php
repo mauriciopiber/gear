@@ -2,6 +2,7 @@
 namespace GearTest\UtilTest\GlobTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Glob\GlobService;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Util\Glob\GlobServiceTrait;
 
@@ -23,7 +24,7 @@ class GlobServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Util\Glob\GlobService')->reveal();
+        $mocking = $this->prophesize(GlobService::class)->reveal();
         $this->setGlobService($mocking);
         $this->assertEquals($mocking, $this->getGlobService());
     }

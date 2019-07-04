@@ -6,8 +6,9 @@ use Gear\Schema\Action\Action;
 use Gear\Schema\Controller\Controller;
 use Gear\Mvc\Config\AbstractConfigManagerInterface;
 
-class RouterManager extends AbstractConfigManager implements ModuleManagerInterface,
-  AbstractConfigManagerInterface
+class RouterManager extends AbstractConfigManager implements
+    ModuleManagerInterface,
+    AbstractConfigManagerInterface
 {
     use \Gear\Mvc\LanguageServiceTrait;
 
@@ -33,18 +34,6 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         //carrega arquivo
         $router = require $this->fileName;
 
-        return $router;
-    }
-
-    public function create(Action $action)
-    {
-        //ação que será adicionada.
-        $this->action = $action;
-        $this->moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-
-
-        $router = $this->getRouter();
-
         //se não existe o modo cadastrado, deve retornar exceção.
         if (!isset($router['routes'***REMOVED***[$this->moduleUrl***REMOVED***)) {
             throw new \Exception(
@@ -54,6 +43,41 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
                 )
             );
         }
+
+        return $router;
+    }
+
+    public function createController(Controller $controller)
+    {
+        $this->controller = $controller;
+        $this->moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+        $router = $this->getRouter();
+
+
+        //se não tem nenhuma rota filha, é pq não tem nenhum controller cadastrado.
+        if (!isset($router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED*** = [***REMOVED***;
+        }
+
+        $contRouteName = $this->str('url', $controller->getNameOff());
+
+        if (!array_key_exists($contRouteName, $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
+            $controllerRoute = $this->getControllerRoute($controller);
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED*** = $controllerRoute;
+        }
+
+        $this->getArrayService()->arrayToFile($this->fileName, $router);
+
+        return true;
+    }
+
+    public function create(Action $action)
+    {
+        //ação que será adicionada.
+        $this->action = $action;
+        $this->moduleUrl = $this->str('url', $this->getModule()->getModuleName());
+
+        $router = $this->getRouter();
 
         //se não tem nenhuma rota filha, é pq não tem nenhum controller cadastrado.
         if (!isset($router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***)) {
@@ -75,11 +99,8 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
             $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***
         ) && ($action->getController()->getType() == 'Action' || !$this->defaultAction($action->getName()))
         ) {
-
-          $actionRoute = $this->getActionRoute($action);
-          $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
-
-
+            $actionRoute = $this->getActionRoute($action);
+            $router['routes'***REMOVED***[$this->moduleUrl***REMOVED***['child_routes'***REMOVED***[$contRouteName***REMOVED***['child_routes'***REMOVED***[$act***REMOVED*** = $actionRoute;
         }
 
         $this->getArrayService()->arrayToFile($this->fileName, $router);
@@ -88,15 +109,16 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         return true;
     }
 
-    public function defaultAction($action) {
-      $fix = $this->str('class', $action);
-      return in_array($fix, [
-        'GetList',
-        'Get',
-        'Create',
-        'Update',
-        'Delete'
-      ***REMOVED***);
+    public function defaultAction($action)
+    {
+        $fix = $this->str('class', $action);
+        return in_array($fix, [
+            'GetList',
+            'Get',
+            'Create',
+            'Update',
+            'Delete'
+        ***REMOVED***);
     }
 
 
@@ -268,25 +290,30 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
         return $this->factory($action);
     }
 
-    public function getControllerRoute(Action $action)
+    public function getControllerRoute($action)
     {
-        $controller = $action->getController();
+        if ($action instanceof Action) {
+            $controller = $action->getController();
+        } else {
+            $controller = $action;
+        }
 
-        if ($action->getController()->getDb() === null) {
-            $controllerRoute = $this->str('url', $controller->getName());
+
+        if ($controller->getDb() === null) {
+            $controllerRoute = $this->str('url', $controller->getNameOff());
             $controllerName = $controller->getName();
         } else {
             $controllerRoute = $this->str('url', $controller->getNameOff());
-            $controllerName = $controller->getNameOff();
+            $controllerName = $controller->getName();
         }
 
         $route = sprintf('/%s', $controllerRoute);
-        $controller = $this->getCode()->getServiceManagerName($action->getController());
+        $controllerName = $this->getCode()->getServiceManagerName($controller);
 
-//var_dump($action->getController());
-        $router = ($action->getController()->getType() === 'Rest')
-            ? $this->factoryControllerRest($route, $controller)
-            : $this->factoryControllerWeb($route, $controller);
+//var_dump($controller);
+        $router = ($controller->getType() === 'Rest')
+            ? $this->factoryControllerRest($route, $controllerName)
+            : $this->factoryControllerWeb($route, $controllerName);
 
 
         return $router;
@@ -294,35 +321,35 @@ class RouterManager extends AbstractConfigManager implements ModuleManagerInterf
 
     public function factoryControllerWeb($route, $controller) {
       //cria o controller router
-      return [
-          'type' => 'segment',
-          'options' => array(
-              'route' => $route,
-              'defaults' => array(
-                  'controller' => $controller,
-                  'action' => 'list'
-              )
-          ),
-          'may_terminate' => true,
-          'child_routes' => [***REMOVED***
-      ***REMOVED***;
+        return [
+            'type' => 'segment',
+            'options' => array(
+                'route' => $route,
+                'defaults' => array(
+                    'controller' => $controller,
+                    'action' => 'list'
+                )
+            ),
+            'may_terminate' => true,
+            'child_routes' => [***REMOVED***
+        ***REMOVED***;
     }
 
     public function factoryControllerRest($route, $controller) {
-      return [
-          'type' => 'segment',
-          'options' => array(
-            'constraints' => [
-                'id'     => '[a-zA-Z0-9***REMOVED***+',
-            ***REMOVED***,
-            'route' => $route.'[/:id***REMOVED***',
-            'defaults' => array(
-                'controller' => $controller,
-            )
-          ),
-          'may_terminate' => true,
-          'child_routes' => [***REMOVED***
-      ***REMOVED***;
+        return [
+            'type' => 'segment',
+            'options' => array(
+                'constraints' => [
+                    'id'     => '[a-zA-Z0-9***REMOVED***+',
+                ***REMOVED***,
+                'route' => $route.'[/:id***REMOVED***',
+                'defaults' => array(
+                    'controller' => $controller,
+                )
+            ),
+            'may_terminate' => true,
+            'child_routes' => [***REMOVED***
+        ***REMOVED***;
     }
 
 

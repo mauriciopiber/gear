@@ -2,6 +2,13 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Project\ProjectService;
+use Gear\Module\Tests\ModuleTestsService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\ModuleService;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\File\FileUpgrade;
 use Gear\Util\Yaml\YamlService;
@@ -21,12 +28,12 @@ class FileUpgradeTest extends TestCase
 
         vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->moduleService = $this->prophesize('Gear\Module\ModuleService');
-        $this->projectService = $this->prophesize('Gear\Project\ProjectService');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->moduleTests = $this->prophesize('Gear\Module\Tests\ModuleTestsService');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->moduleService = $this->prophesize(ModuleService::class);
+        $this->projectService = $this->prophesize(ProjectService::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->moduleTests = $this->prophesize(ModuleTestsService::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->fileEdge = $this->prophesize(FileEdge::class);
         $this->gearConfig = $this->prophesize(GearConfig::class);
         $this->docs = $this->prophesize(Docs::class);
@@ -63,6 +70,82 @@ class FileUpgradeTest extends TestCase
         $this->assertEquals($this->fileUpgrade->getModuleService(), $this->moduleService->reveal());
         $this->assertEquals($this->fileUpgrade->getModule(), $this->module->reveal());
         $this->assertEquals($this->fileUpgrade->getConsolePrompt(), $this->consolePrompt->reveal());
+    }
+
+
+    /**
+     * @group xmxm
+     */
+    public function testFactoryUpgradeModuleApi()
+    {
+        //$this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptDevelopment('api')->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->mockDocs();
+
+        $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptTesting('api')->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getStagingScript()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->getScriptLoad('api')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createGitIgnore('api')->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->createJenkinsFile('api')->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createJenkinsPipeline('api')->willReturn(true)->shouldBeCalled();
+
+
+        $this->moduleService->createDockerCompose()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createDockerFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createKube()->willReturn(true)->shouldBeCalled();
+
+        //$this->moduleService->create
+
+        $this->moduleService->getPhpmdConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleService->getPhpcsDocsConfig()->willReturn(true)->shouldBeCalled();
+
+        $this->moduleTests->createPhpunitConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCiConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageConfigFile()->willReturn(true)->shouldBeCalled();
+        $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
+        //$this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
+
+        $yaml = new YamlService();
+        $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/api/file.yml');
+
+        $common = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
+
+        $this->fileEdge->getFileModule('api')->willReturn(array_merge($common, $target))->shouldBeCalled();
+
+        $upgrades = $this->fileUpgrade->upgradeModule('api', true);
+
+        $expected = [***REMOVED***;
+
+        foreach ($target['files'***REMOVED*** as $file) {
+            $expected[***REMOVED*** = sprintf(FileUpgrade::$created, $file, 'Module');
+        }
+
+        $this->assertEquals($expected, $upgrades);
     }
 
 
@@ -116,7 +199,7 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
         $yaml = new YamlService();
-        $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
+        $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/web/file.yml');
 
 
         $this->fileEdge->getFileModule('web')->willReturn($target)->shouldBeCalled();
@@ -179,8 +262,8 @@ class FileUpgradeTest extends TestCase
         $this->moduleTests->createPhpunitCoverageCiConfigFile()->willReturn(true)->shouldBeCalled();
         $this->moduleTests->createPhpunitBenchmarkConfigFile()->willReturn(true)->shouldBeCalled();
 
-        $file = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
-        $common = $this->yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
+        $file = $this->yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/cli/file.yml');
+        $common = $this->yaml->load((new Module())->getLocation().'/../data/edge-technologic/module/common/file.yml');
 
         $target = array_merge_recursive($file, $common);
 

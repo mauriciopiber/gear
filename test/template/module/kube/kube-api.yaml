@@ -1,0 +1,160 @@
+# Version v1.0.0
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-module
+spec:
+  selector:
+    matchLabels:
+      run: my-module
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: my-module
+    spec:
+      containers:
+        - name: my-module
+          image: registry.piber.network/my-module:0.1.0
+          env:
+            - name: PHINX_ENVIRONMENT
+              value: PRODUCTION
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root
+                  key: mysql
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_NAME
+              value: "my_module_prod"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "vendor/bin/phinx migrate -e PRODUCTION"***REMOVED***
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "0.10"
+            limits:
+              memory: "512Mi"
+              cpu: "0.20"
+      volumes:
+        - name: mysql-root
+          secret:
+            secretName: mysql-root
+      imagePullSecrets:
+        - name: registry-auth
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-module-dev
+spec:
+  selector:
+    matchLabels:
+      run: my-module-dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: my-module-dev
+    spec:
+      containers:
+        - name: my-module-dev
+          image: registry.piber.network/my-module:0.1.0
+          env:
+            - name: PHINX_ENVIRONMENT
+              value: STAGING
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-root
+                  key: mysql
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_NAME
+              value: "my_module_stag"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "vendor/bin/phinx migrate -e STAGING"***REMOVED***
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "0.10"
+            limits:
+              memory: "512Mi"
+              cpu: "0.20"
+      volumes:
+        - name: mysql-root
+          secret:
+            secretName: mysql-root
+      imagePullSecrets:
+        - name: registry-auth
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-module-service
+  labels:
+    run: my-module
+spec:
+  selector:
+    run: my-module
+  ports:
+    - port: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-module-dev-service
+  labels:
+    run: my-module-dev
+spec:
+  selector:
+    run: my-module-dev
+  ports:
+    - port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-module-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /*
+spec:
+  tls:
+    - secretName: letsencrypt-prod
+  rules:
+  - host: my-module.piber.network
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: my-module-service
+          servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-module-dev-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /*
+spec:
+  tls:
+    - secretName: letsencrypt-prod
+  rules:
+  - host: my-module.dev.piber.network
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: my-module-dev-service
+          servicePort: 80

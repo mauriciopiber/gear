@@ -2,6 +2,14 @@
 namespace GearTest\MvcTest\FormTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Src\Src;
+use Gear\Schema\Db\Db;
+use Gear\Mvc\Form\FormService;
+use Gear\Module;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use org\bovigo\vfs\vfsStream;
 use GearTest\SingleDbTableTrait;
 use GearTest\ScopeTrait;
@@ -27,12 +35,12 @@ class FormServiceTest extends TestCase
         $this->createVirtualDir($this->vfsLocation);
 
         //module
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         //template
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/mvc/form';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/mvc/form';
 
-        $this->form = new \Gear\Mvc\Form\FormService(
+        $this->form = new FormService(
             $this->module->reveal(),
             $this->createFileCreator(),
             $this->createString(),
@@ -108,19 +116,19 @@ class FormServiceTest extends TestCase
 
 
 
-        $this->db = new \Gear\Schema\Db\Db(['table' => $table***REMOVED***);
+        $this->db = new Db(['table' => $table***REMOVED***);
 
 
         $columnManager = new ColumnManager($columns);
         $this->db->setColumnManager($columnManager);
 
 
-        //$this->column = $this->prophesize('Gear\Column\ColumnService');
+        //$this->column = $this->prophesize(ColumnService::class);
         //$this->column->getColumns($this->db)->willReturn($columns)->shouldBeCalled();
 
         //$this->column->verifyColumnAssociation($this->db, 'Gear\Column\Varchar\UploadImage')->willReturn($hasColumnImage);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
         $this->table->hasUniqueConstraint($table)->willReturn(false);
         //$this->table->getReferencedTableValidColumnName('MyService')->willReturn(sprintf('id%s', $table));
         $this->table->verifyTableAssociation($this->db->getTable(), 'upload_image')->willReturn($hasTableImage);
@@ -128,7 +136,7 @@ class FormServiceTest extends TestCase
 
         $this->form->setTableService($this->table->reveal());
 
-        $form = new \Gear\Schema\Src\Src(
+        $form = new Src(
             [
                 'name' => sprintf('%sForm', $table),
                 'type' => 'Form',
@@ -137,7 +145,7 @@ class FormServiceTest extends TestCase
             ***REMOVED***
         );
 
-        $schemaService = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $schemaService = $this->prophesize(SchemaService::class);
         $schemaService->getSrcByDb($this->db, 'Form')->willReturn($form);
 
         $this->form->setCode($this->code);

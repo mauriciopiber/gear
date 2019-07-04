@@ -2,6 +2,12 @@
 namespace GearTest\IntegrationTest\SuiteTest\IntegrationTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Integration\Suite\Src\SrcSuite\SrcSuite;
+use Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite;
+use Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite;
+use Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite;
+use Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite;
 use Gear\Integration\Suite\Integration\IntegrationFactory;
 
 /**
@@ -13,26 +19,26 @@ class IntegrationFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\Src\SrcSuite\SrcSuite')->reveal())
+        $this->container->get(SrcSuite::class)
+            ->willReturn($this->prophesize(SrcSuite::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\SrcMvc\SrcMvcSuite\SrcMvcSuite')->reveal())
+        $this->container->get(SrcMvcSuite::class)
+            ->willReturn($this->prophesize(SrcMvcSuite::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\Controller\ControllerSuite\ControllerSuite')->reveal())
+        $this->container->get(ControllerSuite::class)
+            ->willReturn($this->prophesize(ControllerSuite::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\ControllerMvc\ControllerMvcSuite\ControllerMvcSuite')->reveal())
+        $this->container->get(ControllerMvcSuite::class)
+            ->willReturn($this->prophesize(ControllerMvcSuite::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')
-            ->willReturn($this->prophesize('Gear\Integration\Suite\Mvc\MvcSuite\MvcSuite')->reveal())
+        $this->container->get(MvcSuite::class)
+            ->willReturn($this->prophesize(MvcSuite::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new IntegrationFactory();

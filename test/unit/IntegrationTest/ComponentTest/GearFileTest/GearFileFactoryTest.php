@@ -2,6 +2,9 @@
 namespace GearTest\IntegrationTest\ComponentTest\GearFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Interop\Container\ContainerInterface;
+use Gear\Util\String\StringService;
+use Gear\Integration\Util\Persist\Persist;
 use Gear\Integration\Component\GearFile\GearFileFactory;
 
 /**
@@ -13,14 +16,14 @@ class GearFileFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Integration\Util\Persist\Persist')
-            ->willReturn($this->prophesize('Gear\Integration\Util\Persist\Persist')->reveal())
+        $this->container->get(Persist::class)
+            ->willReturn($this->prophesize(Persist::class)->reveal())
             ->shouldBeCalled();
 
-        $this->container->get('Gear\Util\String\StringService')
-            ->willReturn($this->prophesize('Gear\Util\String\StringService')->reveal())
+        $this->container->get(StringService::class)
+            ->willReturn($this->prophesize(StringService::class)->reveal())
             ->shouldBeCalled();
 
         $factory = new GearFileFactory();

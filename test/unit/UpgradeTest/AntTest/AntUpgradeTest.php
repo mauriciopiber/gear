@@ -2,6 +2,12 @@
 namespace GearTest\UpgradeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Module;
+use Zend\Console\Adapter\Posix;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Edge\Ant\AntEdge;
+use Gear\Config\GearConfig;
 use org\bovigo\vfs\vfsStream;
 use Gear\Upgrade\Ant\AntUpgrade;
 use Gear\Util\String\StringService;
@@ -20,9 +26,9 @@ class AntUpgradeTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->console = $this->prophesize('Zend\Console\Adapter\Posix');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
-        $this->consolePrompt = $this->prophesize('Gear\Util\Prompt\ConsolePrompt');
+        $this->console = $this->prophesize(Posix::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
+        $this->consolePrompt = $this->prophesize(ConsolePrompt::class);
         $this->string = new StringService();
         $this->config = [
             'gear' => [
@@ -32,9 +38,9 @@ class AntUpgradeTest extends TestCase
             ***REMOVED***
         ***REMOVED***;
 
-        $this->gearConfig = $this->prophesize('Gear\Config\GearConfig');
+        $this->gearConfig = $this->prophesize(GearConfig::class);
 
-        $this->edge = $this->prophesize('Gear\Edge\Ant\AntEdge');
+        $this->edge = $this->prophesize(AntEdge::class);
 
         $this->antUpgrade = new AntUpgrade(
             $this->module->reveal(),
@@ -73,7 +79,7 @@ class AntUpgradeTest extends TestCase
 
         foreach ($type as $typeId) {
 
-            $target = $yaml->load((new \Gear\Module())->getLocation().'/../data/edge-technologic/'.$typeId[1***REMOVED***.'/'.$typeId[0***REMOVED***.'/ant.yml');
+            $target = $yaml->load((new Module())->getLocation().'/../data/edge-technologic/'.$typeId[1***REMOVED***.'/'.$typeId[0***REMOVED***.'/ant.yml');
 
 
             foreach ($target['target'***REMOVED*** as $build => $dependency) {
@@ -417,7 +423,7 @@ EOS;
             ***REMOVED***, $upgraded
         );
 
-        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+        //$expectedFile = (new Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
         //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
 
         $expectedFile = $this->getCleanXml();
@@ -516,7 +522,7 @@ EOS;
             ***REMOVED***, $upgraded
         );
 
-        //$expectedFile = (new \Gear\Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
+        //$expectedFile = (new Module())->getLocation().'/../..'.sprintf('/test/template/module/build-%s.phtml', $type);
         //$this->assertEquals(file_get_contents($expectedFile), file_get_contents(vfsStream::url('module/build.xml')));
 
         $expectedFile =  <<<EOS

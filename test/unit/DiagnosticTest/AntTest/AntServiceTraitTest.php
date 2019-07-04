@@ -2,6 +2,7 @@
 namespace GearTest\DiagnosticTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Diagnostic\Ant\AntService;
 use Gear\Diagnostic\Ant\AntServiceTrait;
 
 /**
@@ -15,7 +16,7 @@ class AntServiceTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Diagnostic\Ant\AntService')->reveal();
+        $mocking = $this->prophesize(AntService::class)->reveal();
         $this->setAntService($mocking);
         $this->assertEquals($mocking, $this->getAntService());
     }

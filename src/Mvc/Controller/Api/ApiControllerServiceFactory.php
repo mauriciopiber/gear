@@ -6,7 +6,7 @@ use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Api\ApiControllerService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Injector\Injector;
 use Gear\Util\Vector\ArrayService;

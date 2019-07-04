@@ -3,12 +3,9 @@ namespace Gear\Mvc;
 
 use Gear\Mvc\AbstractMvc;
 use Gear\Mvc\AbstractMvcInterface;
-use Gear\Mvc\Config\ServiceManagerTrait;
 
 class TraitService extends AbstractMvc implements AbstractMvcInterface
 {
-    use ServiceManagerTrait;
-
     public function createTrait(
         $src,
         $location = null,

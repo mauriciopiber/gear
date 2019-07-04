@@ -2,6 +2,7 @@
 namespace GearTest\ColumnTest;
 
 use PHPUnit\Framework\TestCase;
+use GearImage\Service\ImageService;
 use Gear\Column\ColumnManager;
 use Zend\Db\Metadata\Object\ColumnObject;
 use Zend\Db\Metadata\Object\ConstraintObject;

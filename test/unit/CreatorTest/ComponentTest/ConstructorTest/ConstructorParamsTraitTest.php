@@ -2,6 +2,7 @@
 namespace GearTest\CreatorTest\ComponentTest\ConstructorTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Creator\Component\Constructor\ConstructorParams;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Creator\Component\Constructor\ConstructorParamsTrait;
 
@@ -23,7 +24,7 @@ class ConstructorParamsTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Creator\Component\Constructor\ConstructorParams')->reveal();
+        $mocking = $this->prophesize(ConstructorParams::class)->reveal();
         $this->setConstructorParams($mocking);
         $this->assertEquals($mocking, $this->getConstructorParams());
     }

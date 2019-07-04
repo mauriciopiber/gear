@@ -2,6 +2,7 @@
 namespace GearTest\IntegrationTest\ComponentTest\MigrationFileTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Integration\Component\MigrationFile\MigrationFile;
 use Zend\ServiceManager\ServiceManager;
 use Gear\Integration\Component\MigrationFile\MigrationFileTrait;
 
@@ -23,7 +24,7 @@ class MigrationFileTraitTest extends TestCase
 
     public function testSet()
     {
-        $mocking = $this->prophesize('Gear\Integration\Component\MigrationFile\MigrationFile')->reveal();
+        $mocking = $this->prophesize(MigrationFile::class)->reveal();
         $this->setMigrationFile($mocking);
         $this->assertEquals($mocking, $this->getMigrationFile());
     }

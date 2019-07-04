@@ -2,13 +2,19 @@
 namespace GearTest\MvcTest\FactoryTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Vector\ArrayService;
+use Gear\Util\String\StringService;
+use Gear\Util\Dir\DirService;
+use Gear\Mvc\Factory\FactoryTestService;
+use Gear\Module;
+use Gear\Module\Structure\ModuleStructure;
 use org\bovigo\vfs\vfsStream;
 use GearTest\MvcTest\FactoryTest\FactoryDataTrait;
 use Gear\Schema\Src\Src;
 use Gear\Schema\Controller\Controller;
 use GearTest\UtilTestTrait;
 use Gear\Table\TableService\TableService;
-use Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest;
+use Gear\Code\FactoryCode\FactoryCodeTest;
 
 /**
  * @group db-factory
@@ -25,26 +31,26 @@ class FactoryTestServiceTest extends TestCase
 
         $this->root = vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
         $this->module->getModuleName()->willReturn('MyModule');
 
-        $this->baseDir = (new \Gear\Module)->getLocation();
+        $this->baseDir = (new Module)->getLocation();
 
         $phpRenderer = $this->mockPhpRenderer($this->baseDir.'/../view');
 
         $this->template = $this->baseDir.'/../test/template/module/mvc/factory-test';
 
-        $this->string  = new \Gear\Util\String\StringService();
+        $this->string  = new StringService();
         $fileCreator    = $this->createFileCreator();
 
         $this->codeFactoryTest = new FactoryCodeTest(
             $this->module->reveal(),
             $this->string,
-            new \Gear\Util\Dir\DirService(),
-            new \Gear\Util\Vector\ArrayService()
+            new DirService(),
+            new ArrayService()
         );
 
-        $this->factoryTest = new \Gear\Mvc\Factory\FactoryTestService(
+        $this->factoryTest = new FactoryTestService(
             $this->module->reveal(),
             $this->fileCreator,
             $this->string,
@@ -122,7 +128,7 @@ class FactoryTestServiceTest extends TestCase
         $this->module->getNamespace()->willReturn('MyModule')->shouldBeCalled();
         if ($data instanceof Src && $data->getTemplate() == 'form-filter') {
 
-            $this->filter = $this->prophesize('Gear\Schema\Src\Src');
+            $this->filter = $this->prophesize(Src::class);
             $this->filter->getName()->willReturn('MyTableFilter');
             $this->filter->getType()->willReturn('Filter');
             $this->filter->getNamespace()->willReturn($data->getNamespace());
@@ -130,7 +136,7 @@ class FactoryTestServiceTest extends TestCase
 
             $this->schema->getSrcByDb($data->getDb(), 'Filter')->willReturn($this->filter->reveal());
 
-            $this->form = $this->prophesize('Gear\Schema\Src\Src');
+            $this->form = $this->prophesize(Src::class);
             $this->form->getName()->willReturn('MyTableForm');
             $this->form->getType()->willReturn('Form');
             $this->form->getNamespace()->willReturn($data->getNamespace());
@@ -139,7 +145,7 @@ class FactoryTestServiceTest extends TestCase
             $this->schema->getSrcByDb($data->getDb(), 'Form')->willReturn($this->form->reveal());
 
             /**
-            $this->entity = $this->prophesize('Gear\Schema\Src\Src');
+            $this->entity = $this->prophesize(Src::class);
             $this->entity->getName()->willReturn('MyTable');
             $this->entity->getType()->willReturn('Entity');
             $this->entity->getNamespace()->willReturn(null);

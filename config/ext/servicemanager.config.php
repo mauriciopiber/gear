@@ -30,13 +30,13 @@
         'Gear\Mvc\Util\Glob\GlobService' => 'Gear\Mvc\Util\Glob\GlobService',
         'Gear\Util\Glob\GlobService' => 'Gear\Util\Glob\GlobService',
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObject' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObject',
-        'Gear\Creator\Codes\Code\AbstractCode' => 'Gear\Creator\Codes\Code\AbstractCode',
-        'Gear\Creator\Codes\CodeTest\AbstractCodeTest' => 'Gear\Creator\Codes\CodeTest\AbstractCodeTest',
+        'Gear\Code\Codes\Code\AbstractCode' => 'Gear\Code\Codes\Code\AbstractCode',
+        'Gear\Code\Codes\CodeTest\AbstractCodeTest' => 'Gear\Code\Codes\CodeTest\AbstractCodeTest',
         'Gear\Column\ColumnManager' => 'Gear\Column\ColumnManager'
     ***REMOVED***,
     'factories' => [
-        'Gear\Creator\Codes\Code\FactoryCode\FactoryCode' => 'Gear\Creator\Codes\Code\FactoryCode\FactoryCodeFactory',
-        'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTest' => 'Gear\Creator\Codes\CodeTest\FactoryCode\FactoryCodeTestFactory',
+        'Gear\Code\FactoryCode\FactoryCode' => 'Gear\Code\FactoryCode\FactoryCodeFactory',
+        'Gear\Code\FactoryCode\FactoryCodeTest' => 'Gear\Code\FactoryCode\FactoryCodeTestFactory',
         'Gear\Column\ColumnService' => 'Gear\Column\ColumnServiceFactory',
         'Gear\Table\UploadImage' => 'Gear\Table\UploadImageFactory',
         'Gear\Mvc\TraitTest' => 'Gear\Mvc\TraitTestServiceFactory',
@@ -86,7 +86,8 @@
         'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixer' => 'Gear\Mvc\Entity\EntityObjectFixer\EntityObjectFixerFactory',
         'Gear\Mvc\Controller\Api\ApiControllerService' => 'Gear\Mvc\Controller\Api\ApiControllerServiceFactory',
         'Gear\Mvc\Controller\Api\ApiControllerTestService' => 'Gear\Mvc\Controller\Api\ApiControllerTestServiceFactory',
-        'Gear\Docker\DockerService' => 'Gear\Docker\DockerServiceFactory'
+        'Gear\Docker\DockerService' => 'Gear\Docker\DockerServiceFactory',
+        'Gear\Kube\KubeService' => 'Gear\Kube\KubeServiceFactory'
     ***REMOVED***,
     'shared' => [
         'Gear\Column\ColumnService' => false,

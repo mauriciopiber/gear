@@ -28,6 +28,7 @@ class ControllerController extends AbstractConsoleController
             'columns' => $this->getRequest()->getParam('columns', '{}'),
             'type' => $this->getRequest()->getParam('type'),
             'extends' => $this->getRequest()->getParam('extends'),
+            'dependency' => $this->getRequest()->getParam('dependency'),
         ***REMOVED***;
 
         $controller = $this->getControllerConstructor();

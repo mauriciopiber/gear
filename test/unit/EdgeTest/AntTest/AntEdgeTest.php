@@ -2,6 +2,7 @@
 namespace GearTest\EdgeTest\AntTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\Yaml\YamlService;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Edge\Ant\AntEdge;
 
@@ -18,9 +19,9 @@ class AntEdgeTest extends TestCase
     {
         parent::setUp();
 
-        $this->yaml = new \Gear\Util\Yaml\YamlService();
+        $this->yaml = new YamlService();
 
-        $this->ant = new \Gear\Edge\Ant\AntEdge(
+        $this->ant = new AntEdge(
             $this->yaml
         );
 

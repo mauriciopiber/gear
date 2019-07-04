@@ -2,6 +2,12 @@
 namespace GearTest\DockerTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Util\File\FileService;
+use Gear\Module;
+use Gear\Creator\Template\TemplateService;
+use Gear\Util\String\StringService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Creator\FileCreator\FileCreator;
 use Gear\Docker\DockerService;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -17,25 +23,25 @@ class DockerServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->stringService = $this->prophesize('Gear\Util\String\StringService');
-        //$this->fileCreator = $this->prophesize('Gear\Creator\FileCreator\FileCreator');
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->stringService = new StringService;
+        //$this->fileCreator = $this->prophesize(FileCreator::class);
+        $this->module = $this->prophesize(ModuleStructure::class);
 
 
-        $template       = new \Gear\Creator\Template\TemplateService(
-            $this->mockPhpRenderer((new \Gear\Module)->getLocation().'/../view')
+        $template       = new TemplateService(
+            $this->mockPhpRenderer((new Module)->getLocation().'/../view')
         );
 
-        $fileService    = new \Gear\Util\File\FileService();
-        $this->fileCreator    = new \Gear\Creator\FileCreator\FileCreator($fileService, $template);
+        $fileService    = new FileService();
+        $this->fileCreator    = new FileCreator($fileService, $template);
 
         $this->service = new DockerService(
-            $this->stringService->reveal(),
+            $this->stringService,
             $this->fileCreator,
             $this->module->reveal()
         );
 
-        $this->templates =  (new \Gear\Module())->getLocation().'/../test/template/module/docker';
+        $this->templates =  (new Module())->getLocation().'/../test/template/module/docker';
 
         vfsStream::setup('module');
     }
@@ -48,6 +54,7 @@ class DockerServiceTest extends TestCase
     public function testCreaterDockerCompose()
     {
       $this->module->getType()->willReturn('api')->shouldBeCalled();
+      $this->module->getModuleName()->willReturn('MyModule')->shouldBeCalled();
       $this->module->getMainFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
 
       $expected = file_get_contents($this->templates.'/docker-compose-api.yml');

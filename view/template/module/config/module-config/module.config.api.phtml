@@ -1,7 +1,6 @@
 namespace <?php echo $this->module;?>;
 
 $db                 = require 'ext/db.config.php';
-$doctrine           = require 'ext/doctrine.config.php';
 $route              = require 'ext/route.config.php';
 $view               = require 'ext/view.config.php';
 $servicemanager     = require 'ext/servicemanager.config.php';
@@ -9,35 +8,11 @@ $controller         = require 'ext/controller.config.php';
 $controllerPlugins  = require 'ext/controller.plugin.config.php';
 $cache              = require 'ext/cache.config.php';
 
-$fixture            = array(
-    __NAMESPACE__.'_fixture' => __DIR__ . '/../src/Fixture'
-);
-$gear = [
-    'modules' => [
-        '<?php echo $this->moduleUrl;?>' => [
-            'version' => '0.1.0',
-            'acl' => true,
-            'name' => __NAMESPACE__,
-            'git' => '<?php echo $this->git;?>',
-            'environment' => [
-                'DEVELOPMENT' => '<?php echo $this->development;?>',
-                'TESTING' => '<?php echo $this->testing;?>',
-                'STAGING' => '<?php echo $this->staging;?>'
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***;
-
 return [
-    'bjyauthorize' => [
-        'acl_key' => __NAMESPACE__
-    ***REMOVED***,
     'session_config' => [
         'save_path' => __DIR__.'/../data/session'
     ***REMOVED***,
-    'gear'               => $gear,
     'db'                 => $db,
-    'doctrine'           => $doctrine,
     'view_manager'       => $view,
     'controllers'        => $controller,
     'router'             => $route,

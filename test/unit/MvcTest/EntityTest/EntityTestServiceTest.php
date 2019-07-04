@@ -2,6 +2,12 @@
 namespace GearTest\MvcTest\EntityTest;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Metadata\Object\ConstraintObject;
+use Zend\Db\Metadata\Object\ColumnObject;
+use Gear\Table\TableService\TableService;
+use Gear\Schema\Schema\SchemaService;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Column\ColumnService;
 use GearTest\AllColumnsDbTableTrait;
 use GearTest\AllColumnsDbNotNullTableTrait;
 use GearTest\AllColumnsDbUniqueTableTrait;
@@ -38,7 +44,7 @@ class EntityTestServiceTest extends TestCase
         parent::setUp();
         vfsStream::setup('module');
 
-        $this->module = $this->prophesize('Gear\Module\Structure\ModuleStructure');
+        $this->module = $this->prophesize(ModuleStructure::class);
 
         $this->string = new StringService();
 
@@ -57,7 +63,7 @@ class EntityTestServiceTest extends TestCase
 
     public function createColumn($tableName, $columnName, $columnType)
     {
-        $column = $this->prophesize('Zend\Db\Metadata\Object\ColumnObject');
+        $column = $this->prophesize(ColumnObject::class);
         $column->getDataType()->willReturn($columnType)->shouldBeCalled();
         $column->getName()->willReturn($columnName);
         $column->getTableName()->willReturn($tableName);
@@ -67,7 +73,7 @@ class EntityTestServiceTest extends TestCase
 
     public function createForeign($tableName, $columnName, $type, $columnReference, $tableReference)
     {
-        $foreignKey = $this->prophesize('Zend\Db\Metadata\Object\ConstraintObject');
+        $foreignKey = $this->prophesize(ConstraintObject::class);
         $foreignKey->getType()->willReturn($type)->shouldBeCalled();
         $foreignKey->getColumns()->willReturn([$columnName***REMOVED***)->shouldBeCalled();
         $foreignKey->getReferencedTableName()->willReturn($tableReference);
@@ -95,7 +101,7 @@ class EntityTestServiceTest extends TestCase
 
         $src = new Src(['name' => $table, 'type' => 'Entity'***REMOVED***);
 
-        $this->table = $this->prophesize('Gear\Table\TableService\TableService');
+        $this->table = $this->prophesize(TableService::class);
 
         $this->entity = new EntityTestService(
             $this->module->reveal(),
@@ -109,7 +115,7 @@ class EntityTestServiceTest extends TestCase
 
         $this->table->getPrimaryKeyColumns($tableName)->willReturn(['idMyController'***REMOVED***);
 
-        $this->column = $this->prophesize('Gear\Column\ColumnService');
+        $this->column = $this->prophesize(ColumnService::class);
 
         $tableColumns[***REMOVED*** = new ForeignKey(
             $this->createColumn('table', 'created_by', 'int'),
@@ -148,7 +154,7 @@ class EntityTestServiceTest extends TestCase
         //$this->column->getColumns($db, true)->willReturn($tableColumns);
 
 
-        $this->schema = $this->prophesize('Gear\Schema\Schema\SchemaService');
+        $this->schema = $this->prophesize(SchemaService::class);
 
         $this->schema->getSrcByDb($db, 'Entity')->willReturn($src)->shouldBeCalled();
 

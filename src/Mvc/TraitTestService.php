@@ -19,6 +19,8 @@ class TraitTestService extends AbstractMvcTest implements AbstractMvcTestInterfa
     {
         $location = $this->getCodeTest()->getLocation($src);
 
+
+        //var_dump($this->getCodeTest()->getServiceManagerName($src));
         //$callable = $this->getServiceManager()->getServiceCallable($src);
 
         $name = $src->getName();

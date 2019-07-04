@@ -2,6 +2,8 @@
 namespace GearTest\MvcTest\ControllerTest\WebTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Schema\Db\Db;
+use Gear\Schema\Controller\Controller;
 use org\bovigo\vfs\vfsStream;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Resolver\AggregateResolver;
@@ -14,7 +16,7 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\Template\TemplateService;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\ControllerDependency;
-use Gear\Creator\Code;
+use Gear\Code\Code;
 use Gear\Util\Vector\ArrayService;
 use GearTest\MvcTest\ControllerTest\WebTest\ControllerDataTrait;
 use GearTest\UtilTestTrait;
@@ -160,7 +162,7 @@ class WebControllerServiceTest extends TestCase
     ) {
         $table = $this->string->str('class', $tableName);
 
-        $controller = new \Gear\Schema\Controller\Controller([
+        $controller = new Controller([
             'name' => $this->string->str('class', $tableName).'Controller',
             'namespace' => $namespace,
             'service' => $service,
@@ -194,7 +196,7 @@ class WebControllerServiceTest extends TestCase
             $location .= '/'.str_replace('\\', '/', $namespace);
         }
 
-        $this->db = new \Gear\Schema\Db\Db(
+        $this->db = new Db(
             [
                 'table' => $this->string->str('class', $tableName),
                 'user' => $userType

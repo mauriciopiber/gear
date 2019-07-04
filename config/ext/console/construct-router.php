@@ -5,7 +5,7 @@ return [
             /** 3.3 */
             'gear-module-constructor-controller' => [
                 'options' => [
-                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--extends=***REMOVED*** [--type=***REMOVED*** [--namespace=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED*** [--service=***REMOVED*** ' . $options,
+                    'route' => 'gear module controller create <module> [<basepath>***REMOVED*** --name= [--extends=***REMOVED*** [--type=***REMOVED*** [--namespace=***REMOVED*** [--dependency=***REMOVED*** [--object=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED*** [--service=***REMOVED*** ' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module\Constructor\Controller',
                         'action' => 'create'
@@ -67,7 +67,7 @@ return [
             /** 3.2 */
             'gear-src-create' => [
                 'options' => [
-                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
+                    'route' => 'gear module src create <module> [<basepath>***REMOVED*** --type= --name= [--namespace=***REMOVED*** [--service=***REMOVED*** [--template=***REMOVED*** [--implements=***REMOVED*** [--abstract***REMOVED*** [--dependency==***REMOVED*** [--extends=***REMOVED*** [--db=***REMOVED*** [--columns=***REMOVED***' . $options,
                     'defaults' => [
                         'controller' => 'Gear\Module\Constructor\Src',
                         'action' => 'create'

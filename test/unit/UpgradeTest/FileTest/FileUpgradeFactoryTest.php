@@ -2,6 +2,12 @@
 namespace GearTest\UpgradeTest;
 
 use PHPUnit\Framework\TestCase;
+use Gear\Upgrade\File\FileUpgradeFactory;
+use Interop\Container\ContainerInterface;
+use Gear\Util\Prompt\ConsolePrompt;
+use Gear\Module\Tests\ModuleTestsService;
+use Gear\Module\ModuleService;
+use Gear\Config\GearConfig;
 use Gear\Edge\File\FileEdge;
 use Gear\Module\Docs\Docs;
 use Gear\Module\Structure\ModuleStructure;
@@ -14,26 +20,26 @@ class FileUpgradeFactoryTest extends TestCase
 {
     public function testCreateFactory()
     {
-        $this->container    = $this->prophesize('Interop\Container\ContainerInterface');
+        $this->container    = $this->prophesize(ContainerInterface::class);
 
-        $this->container->get('Gear\Config\GearConfig')->willReturn(
-            $this->prophesize('Gear\Config\GearConfig')->reveal()
+        $this->container->get(GearConfig::class)->willReturn(
+            $this->prophesize(GearConfig::class)->reveal()
         )->shouldBeCalled();
 
-        $this->container->get('Gear\Util\Prompt\ConsolePrompt')
-          ->willReturn($this->prophesize('Gear\Util\Prompt\ConsolePrompt')->reveal())
+        $this->container->get(ConsolePrompt::class)
+          ->willReturn($this->prophesize(ConsolePrompt::class)->reveal())
           ->shouldBeCalled();
 
         $this->container->get('Gear\Module')
-          ->willReturn($this->prophesize('Gear\Module\ModuleService')->reveal())
+          ->willReturn($this->prophesize(ModuleService::class)->reveal())
           ->shouldBeCalled();
 
-        $this->container->get('Gear\Module\Tests\ModuleTestsService')
-          ->willReturn($this->prophesize('Gear\Module\Tests\ModuleTestsService')->reveal())
+        $this->container->get(ModuleTestsService::class)
+          ->willReturn($this->prophesize(ModuleTestsService::class)->reveal())
           ->shouldBeCalled();
 
         $this->container->get(ModuleStructure::class)
-          ->willReturn($this->prophesize('Gear\Module\Structure\ModuleStructure')->reveal())
+          ->willReturn($this->prophesize(ModuleStructure::class)->reveal())
           ->shouldBeCalled();
 
         $this->container->get(FileEdge::class)
@@ -44,7 +50,7 @@ class FileUpgradeFactoryTest extends TestCase
           ->willReturn($this->prophesize(Docs::class)->reveal())
           ->shouldBeCalled();
 
-        $factory = new \Gear\Upgrade\File\FileUpgradeFactory();
+        $factory = new FileUpgradeFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);
 

@@ -15,8 +15,8 @@ use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Structure\ModuleStructureTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Creator\FileCreator\FileCreatorTrait;
-use Gear\Creator\Code;
-use Gear\Creator\CodeTrait;
+use Gear\Code\Code;
+use Gear\Code\CodeTrait;
 use Gear\Util\String\StringService;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Util\Dir\DirService;
@@ -29,6 +29,7 @@ use Gear\Util\Vector\ArrayService;
 use Gear\Util\Vector\ArrayServiceTrait;
 use Gear\Creator\Injector\Injector;
 use Gear\Creator\Injector\InjectorTrait;
+use Gear\Mvc\MvcRestTrait;
 
 abstract class AbstractMvc
 {
@@ -52,6 +53,8 @@ abstract class AbstractMvc
         $this->setTableService($tableService);
         $this->setInjector($injector);
     }
+
+    use MvcRestTrait;
 
     use InjectorTrait;
 
