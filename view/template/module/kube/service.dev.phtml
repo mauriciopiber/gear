@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: <?php echo $this->module;?>-dev-service
+  labels:
+    run: <?php echo $this->module;?>-dev
+spec:
+  selector:
+    run: <?php echo $this->module;?>-dev
+  ports:
+    - port: 80

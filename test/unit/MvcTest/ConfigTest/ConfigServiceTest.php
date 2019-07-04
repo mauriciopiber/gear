@@ -107,7 +107,6 @@ class ConfigServiceTest extends TestCase
         );
     }
 
-
     public function testConfigCli()
     {
         $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
@@ -120,6 +119,20 @@ class ConfigServiceTest extends TestCase
         $this->assertEquals(
             file_get_contents(vfsStream::url('module/config/module.config.php')),
             file_get_contents($this->template.'/module.config.cli.phtml')
+        );
+    }
+
+    public function testConfigApi()
+    {
+        $controllers = ["MyModule\Controller\Index" => "MyModule\Controller\IndexControllerFactory"***REMOVED***;
+
+        $this->routerManager->module('api', $controllers)->willReturn(true)->shouldBeCalled();
+
+        $this->assertTrue($this->config->module('api'));
+
+        $this->assertEquals(
+            file_get_contents(vfsStream::url('module/config/module.config.php')),
+            file_get_contents($this->template.'/module.config.api.phtml')
         );
     }
 }

@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: <?php echo $this->module;?>-service
+  labels:
+    run: <?php echo $this->module.PHP_EOL;?>
+spec:
+  selector:
+    run: <?php echo $this->module.PHP_EOL;?>
+  ports:
+    - port: 80

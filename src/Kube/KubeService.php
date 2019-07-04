@@ -59,6 +59,7 @@ class KubeService
 
         $options = [
             'module' => $this->str('url', $this->getModule()->getModuleName()),
+            'moduleLine' => $this->str('uline', $this->getModule()->getModuleName()),
             'version' => '0.1.0'
         ***REMOVED***;
 
@@ -70,6 +71,16 @@ class KubeService
 
         $options['deploymentDev'***REMOVED*** = $this->getFileCreator()->renderPartial(
             'template/module/kube/deployment.dev.phtml',
+            $options
+        );
+
+        $options['service'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/service.phtml',
+            $options
+        );
+
+        $options['serviceDev'***REMOVED*** = $this->getFileCreator()->renderPartial(
+            'template/module/kube/service.dev.phtml',
             $options
         );
 
