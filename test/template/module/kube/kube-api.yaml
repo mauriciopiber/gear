@@ -36,7 +36,7 @@ spec:
                 command: ["/bin/sh", "-c", "vendor/bin/phinx migrate -e PRODUCTION"***REMOVED***
           resources:
             requests:
-              memory: "2562Mi"
+              memory: "256Mi"
               cpu: "0.10"
             limits:
               memory: "512Mi"
@@ -85,7 +85,7 @@ spec:
                 command: ["/bin/sh", "-c", "vendor/bin/phinx migrate -e STAGING"***REMOVED***
           resources:
             requests:
-              memory: "2562Mi"
+              memory: "256Mi"
               cpu: "0.10"
             limits:
               memory: "512Mi"
