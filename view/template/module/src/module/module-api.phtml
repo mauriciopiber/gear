@@ -43,6 +43,7 @@ class Module
         // attach a listener to check for errors
         $events = $mvcEvent->getTarget()->getEventManager();
         $events->attach(MvcEvent::EVENT_RENDER, array($this, 'onRenderError'));
+
     }
 
     public function shouldRender($event)
