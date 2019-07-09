@@ -16,3 +16,6 @@ files:
     17: Jenkinsfile
     18: .gitignore
     19: schema/module.json
+    20: pipeline.yaml
+    21: Jenkinsfile
+    22: phinx.php

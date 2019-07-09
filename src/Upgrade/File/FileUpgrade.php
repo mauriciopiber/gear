@@ -126,7 +126,7 @@ class FileUpgrade
             /** @Deprecated  */
             case 'script/load.sh':
                 return $this->getModuleService()->getScriptLoad($type);
-            case 'phinx.yml':
+            case 'phinx.php':
                 return $this->getModuleService()->getPhinxConfig();
             case 'mkdocs.yml':
                 return $this->docs->createConfig();

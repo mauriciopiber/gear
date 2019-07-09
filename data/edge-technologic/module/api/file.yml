@@ -4,7 +4,7 @@ files:
     2: docs/index.md
     21: docs/CHANGELOG.md
     3: phpdox.xml
-    4: phinx.yml
+    4: phinx.php
     14: test/phpmd.xml
     15: test/phpcs.xml
     18: Jenkinsfile

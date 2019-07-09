@@ -10,6 +10,10 @@ services:
       - ~/.composer/auth.json:/root/.composer/auth.json
     environment:
       - PHINX_ENVIRONMENT=DEVELOPMENT
+      - DB_NAME=gear
+      - DB_USER=root
+      - DB_PASS=gear
+      - DB_HOST=mysql
     networks:
       - satis
   mysql:

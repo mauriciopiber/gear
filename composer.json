@@ -36,6 +36,7 @@
         "mauriciopiber/gear-config": "^1.0.0-alpha0",
         "mauriciopiber/gear-locator": "^1.0.0-alpha0",
         "mauriciopiber/gear-scripts": "^1.0.0-alpha0",
+        "mauriciopiber/gear-env": "^1.0.0-alpha0",
         "zendframework/zend-mvc-console": "^1.2"
     },
     "require-dev": {

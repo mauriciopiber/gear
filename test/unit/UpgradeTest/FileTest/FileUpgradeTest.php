@@ -182,6 +182,7 @@ class FileUpgradeTest extends TestCase
 
         $this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
 
+
         $this->moduleService->getScriptLoad('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->createGitIgnore('web')->willReturn(true)->shouldBeCalled();
@@ -232,11 +233,16 @@ class FileUpgradeTest extends TestCase
      */
     public function testFactoryUpgradeModuleCli()
     {
+        $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptDevelopment('cli')->willReturn(true)->shouldBeCalled();
 
         //$this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
+
+
+        $this->moduleService->createJenkinsFile('cli')->willReturn(true)->shouldBeCalled();
+        $this->moduleService->createJenkinsPipeline('cli')->willReturn(true)->shouldBeCalled();
 
         $this->mockDocs();
 

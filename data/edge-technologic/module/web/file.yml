@@ -4,7 +4,7 @@ files:
     2: docs/index.md
     3: docs/CHANGELOG.md
     4: phpdox.xml
-    5: phinx.yml
+    5: phinx.php
     6: script/deploy-testing.sh
     7: script/deploy-development.sh
     8: script/deploy-staging.sh

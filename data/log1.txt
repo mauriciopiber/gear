@@ -76,7 +76,7 @@ on Double\Gear\Creator\FileCreator\FileCreator\P2586 was not expected, expected 
   - setFileName(exact("deploy-development.sh"))
   - setFileName(exact("deploy-testing.sh"))
   - setFileName(exact("load.sh"))
-  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("phinx.php"))
   - setFileName(exact("ModuleTest.php"))
   - setFileName(exact("Module.php"))
   - setFileName(exact("Jenkinsfile"))
@@ -129,7 +129,7 @@ on Double\Gear\Creator\FileCreator\FileCreator\P2676 was not expected, expected 
   - setFileName(exact("deploy-development.sh"))
   - setFileName(exact("deploy-testing.sh"))
   - setFileName(exact("load.sh"))
-  - setFileName(exact("phinx.yml"))
+  - setFileName(exact("phinx.php"))
   - setFileName(exact("ModuleTest.php"))
   - setFileName(exact("Module.php"))
   - setFileName(exact("Jenkinsfile"))
@@ -140,6 +140,3 @@ on Double\Gear\Creator\FileCreator\FileCreator\P2676 was not expected, expected 
 /var/www/gear-package/gear/src/Gear/Module/ModuleService.php:349
 /var/www/gear-package/gear/src/Gear/Module/ModuleService.php:311
 /var/www/gear-package/gear/test/unit/GearTest/ModuleTest/ModuleServiceTest.php:867
-
-
-
