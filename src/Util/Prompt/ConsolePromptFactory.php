@@ -9,11 +9,14 @@ class ConsolePromptFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $request = $container->get('Request');
+        $request = $container->get('Application')->getMvcEvent()->getRouteMatch();
+
+
+        $force = $request->getParam('force');
         $factory = new ConsolePrompt(
-            $request->getParam('force', false)
+            $force
         );
-        
+
         return $factory;
     }
 }

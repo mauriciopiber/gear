@@ -7,7 +7,6 @@ class ModuleUpgrade extends AbstractUpgrade
 {
     public function upgrade($type = 'web', $just = null, $force = false)
     {
-
         if ($this->checkJust($just) === false) {
             return false;
         }
