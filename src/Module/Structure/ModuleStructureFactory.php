@@ -18,18 +18,18 @@ class ModuleStructureFactory implements FactoryInterface
             $container->get(DirService::class),
             $container->get(FileService::class)
         );
+//var_dump(get_class($container->get('Application')));
+        $routeMatch = $container->get('Application')->getMvcEvent()->getRouteMatch();
 
-        $request = $container->get('Application')->getMvcEvent()->getRouteMatch();
 
+        $moduleName = $routeMatch->getParam('module');
 
-        $moduleName = $request->getParam('module');
-
-        $namespace = $request->getParam('action') == 'module-as-project'
-            ? $request->getParam('namespace')
+        $namespace = $routeMatch->getParam('action') == 'module-as-project'
+            ? $routeMatch->getParam('namespace')
             : null;
 
-        $staging = $request->getParam('staging', null);
-        $type = $request->getParam('type', null);
+        //$staging = $routeMatch->getParam('staging', null);
+        $type = $routeMatch->getParam('type', null);
 
         if (empty($moduleName)) {
             $structure->setModuleName(null);
@@ -37,13 +37,13 @@ class ModuleStructureFactory implements FactoryInterface
             return $structure;
         }
 
-        $structure->setBasePath($request->getParam('basepath'));
+        $structure->setBasePath($routeMatch->getParam('basepath'));
         $structure->setNamespace($namespace);
-        $structure->setStaging($staging);
+//        $structure->setStaging($staging);
         $structure->setModuleName($moduleName);
         $structure->setType($type);
 
-        $location = $request->getParam('basepath');
+        $location = $routeMatch->getParam('basepath');
 
         if (!empty($location)) {
             $mainFolder = realpath($location).'/'.$string->str('url', $moduleName);

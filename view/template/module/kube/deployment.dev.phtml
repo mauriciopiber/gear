@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: <?php echo $this->module;?>-dev
-          image: registry.piber.network/<?php echo $this->module;?>:<?php echo $this->version.PHP_EOL;?>
+          image: registry.piber.network/<?php echo $this->module;?>-dev:<?php echo $this->version.PHP_EOL;?>
           env:
             - name: PHINX_ENVIRONMENT
               value: STAGING

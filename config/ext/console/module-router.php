@@ -69,7 +69,7 @@ return [
             ***REMOVED***,
             'gear-module-diagnostic' => array(
                 'options' => array(
-                     'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--just=***REMOVED***',
+                     'route' => 'gear module diagnostic <module> [<basepath>***REMOVED*** [--type=***REMOVED*** [--just=***REMOVED*** [--force***REMOVED***',
                     'defaults' => array(
                         'controller' => 'Gear\Module',
                         'action' => 'diagnostic'
