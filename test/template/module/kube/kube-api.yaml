@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
         - name: my-module
+          imagePullPolicy: Always
           image: registry.piber.network/my-module:0.1.0
           env:
             - name: PHINX_ENVIRONMENT
@@ -64,7 +65,8 @@ spec:
     spec:
       containers:
         - name: my-module-dev
-          image: registry.piber.network/my-module-dev:0.1.0
+          imagePullPolicy: Always
+          image: registry.piber.network/my-module:0.1.0
           env:
             - name: PHINX_ENVIRONMENT
               value: STAGING
