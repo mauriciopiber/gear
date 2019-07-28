@@ -3,8 +3,6 @@
   array (
       'Zend\Router',
       'Zend\Mvc\Console',
-      'Gear\Jenkins',
-      'Gear\Version',
       'Gear\Util',
       'Gear\Schema',
       'Gear\Config',

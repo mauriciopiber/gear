@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ***REMOVED***,
-    "content-hash": "8a99cf94566f14f663e98f7392257caa",
+    "content-hash": "de613caa12545abc704e210a226b6612",
     "packages": [
         {
             "name": "cakephp/cache",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/cache.git",
-                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
+                "reference": "f2b840c9a9b8ba9ab12c5db031d96a312d270536"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-f7ff72a590f9dc69a9788fb78045a70fc86723fc-zip-a1eb27.zip",
-                "reference": "f7ff72a590f9dc69a9788fb78045a70fc86723fc"
+                "url": "https://satis.piber.network/dist/cakephp/cache/cakephp-cache-f2b840c9a9b8ba9ab12c5db031d96a312d270536-zip-db08f1.zip",
+                "reference": "f2b840c9a9b8ba9ab12c5db031d96a312d270536"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -47,11 +47,11 @@
                 "caching",
                 "cakephp"
             ***REMOVED***,
-            "time": "2019-06-24T11:34:33+00:00"
+            "time": "2019-07-12T13:57:37+00:00"
         },
         {
             "name": "cakephp/collection",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/collection.git",
@@ -96,7 +96,7 @@
         },
         {
             "name": "cakephp/core",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/core.git",
@@ -145,7 +145,7 @@
         },
         {
             "name": "cakephp/database",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
@@ -192,16 +192,16 @@
         },
         {
             "name": "cakephp/datasource",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
+                "reference": "c46eff4f12fd72f01dd6987d5bfa0d7e5c92af70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-a8fb302598d0038c8b5f0f83763dded27ef4e780-zip-d76841.zip",
-                "reference": "a8fb302598d0038c8b5f0f83763dded27ef4e780"
+                "url": "https://satis.piber.network/dist/cakephp/datasource/cakephp-datasource-c46eff4f12fd72f01dd6987d5bfa0d7e5c92af70-zip-1c41ad.zip",
+                "reference": "c46eff4f12fd72f01dd6987d5bfa0d7e5c92af70"
             },
             "require": {
                 "cakephp/core": "^3.6.0",
@@ -237,11 +237,11 @@
                 "entity",
                 "query"
             ***REMOVED***,
-            "time": "2019-06-13T02:05:57+00:00"
+            "time": "2019-07-09T14:11:51+00:00"
         },
         {
             "name": "cakephp/log",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/log.git",
@@ -285,7 +285,7 @@
         },
         {
             "name": "cakephp/utility",
-            "version": "3.8.0",
+            "version": "3.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
@@ -525,67 +525,6 @@
             "time": "2019-07-03T20:49:10+00:00"
         },
         {
-            "name": "mauriciopiber/gear-jenkins",
-            "version": "1.0.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:mauriciopiber/gear-jenkins.git",
-                "reference": "90cb3f7a9bc1a1c515e5dc8078996759dc345299"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-jenkins/mauriciopiber-gear-jenkins-90cb3f7a9bc1a1c515e5dc8078996759dc345299-zip-bdf9b7.zip",
-                "reference": "90cb3f7a9bc1a1c515e5dc8078996759dc345299"
-            },
-            "require": {
-                "mauriciopiber/gear-config": "^1.0.0-alpha0",
-                "mauriciopiber/gear-console": "^1.0.0-alpha0",
-                "mauriciopiber/gear-locator": "^1.0.0-alpha0",
-                "mauriciopiber/gear-scripts": "^1.0.0-alpha0",
-                "mauriciopiber/gear-util": "^1.0.0-alpha0",
-                "php": "^7.0",
-                "zendframework/zend-console": "^2.8.0",
-                "zendframework/zend-db": "^2.10.0",
-                "zendframework/zend-json": "^3.1.0",
-                "zendframework/zend-loader": "^2.6",
-                "zendframework/zend-log": "^2.10.0",
-                "zendframework/zend-modulemanager": "^2.8.2",
-                "zendframework/zend-mvc": "^3.1.1",
-                "zendframework/zend-navigation": "^2.9.0",
-                "zendframework/zend-servicemanager": "^3.4",
-                "zendframework/zend-stdlib": "^3.2.1",
-                "zendframework/zend-validator": "^2.12",
-                "zendframework/zend-view": "^2.11.2"
-            },
-            "require-dev": {
-                "jakub-onderka/php-parallel-lint": "^1.0",
-                "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.4",
-                "phploc/phploc": "^5.0",
-                "phpmd/phpmd": "^2.6",
-                "phpunit/phpunit": "^8.0",
-                "sebastian/phpcpd": "^4.0",
-                "squizlabs/php_codesniffer": "^3.0",
-                "theseer/phpdox": "^0.12.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gear\\Jenkins\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "GearTest\\JenkinsTest\\": "test/unit"
-                }
-            },
-            "support": {
-                "source": "https://github.com/mauriciopiber/gear-jenkins/tree/1.0.0-alpha1",
-                "issues": "https://github.com/mauriciopiber/gear-jenkins/issues"
-            },
-            "time": "2019-06-07T04:57:56+00:00"
-        },
-        {
             "name": "mauriciopiber/gear-locator",
             "version": "1.0.0-alpha0",
             "source": {
@@ -626,21 +565,22 @@
         },
         {
             "name": "mauriciopiber/gear-rest",
-            "version": "1.0.0-alpha3",
+            "version": "1.0.0-alpha4",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-rest.git",
-                "reference": "b1c43a2e8bcca1527b42fae1a9f6cdee28b95066"
+                "reference": "0c4ac8db62a6e53bed61eb2c9a9f164c2809299d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-rest/mauriciopiber-gear-rest-b1c43a2e8bcca1527b42fae1a9f6cdee28b95066-zip-1ff110.zip",
-                "reference": "b1c43a2e8bcca1527b42fae1a9f6cdee28b95066"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-rest/mauriciopiber-gear-rest-0c4ac8db62a6e53bed61eb2c9a9f164c2809299d-zip-f42578.zip",
+                "reference": "0c4ac8db62a6e53bed61eb2c9a9f164c2809299d"
             },
             "require": {
                 "php": "^7.0",
                 "zendframework/zend-db": "^2.8.1",
                 "zendframework/zend-http": "^2.5.4",
+                "zendframework/zend-inputfilter": "^2.8.1",
                 "zendframework/zend-json": "^3.1.0",
                 "zendframework/zend-modulemanager": "^2.7.2",
                 "zendframework/zend-mvc": "^2.7.15 || ^3.0.2",
@@ -648,7 +588,6 @@
             },
             "require-dev": {
                 "jakub-onderka/php-parallel-lint": "^1.0",
-                "mauriciopiber/gear-scripts": "^1.0.0-alpha1",
                 "pdepend/pdepend": "^2.4",
                 "phploc/phploc": "^5.0",
                 "phpmd/phpmd": "^2.6",
@@ -660,15 +599,19 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Gear\\Rest\\": "src",
+                    "Gear\\Rest\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
                     "Gear\\Rest\\Test\\": "test/unit"
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-rest/tree/1.0.0-alpha3",
+                "source": "https://github.com/mauriciopiber/gear-rest/tree/1.0.0-alpha4",
                 "issues": "https://github.com/mauriciopiber/gear-rest/issues"
             },
-            "time": "2019-07-09T19:31:10+00:00"
+            "time": "2019-07-21T00:53:40+00:00"
         },
         {
             "name": "mauriciopiber/gear-schema",
@@ -1019,59 +962,6 @@
                 "issues": "https://github.com/mauriciopiber/gear-util/issues"
             },
             "time": "2019-06-27T22:35:07+00:00"
-        },
-        {
-            "name": "mauriciopiber/gear-version",
-            "version": "1.0.0-alpha0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:mauriciopiber/gear-version.git",
-                "reference": "928ba812bc6630a1b2010eb633551c0dac749172"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-version/mauriciopiber-gear-version-928ba812bc6630a1b2010eb633551c0dac749172-zip-92105f.zip",
-                "reference": "928ba812bc6630a1b2010eb633551c0dac749172"
-            },
-            "require": {
-                "mauriciopiber/gear-config": "^1.0.0-alpha0",
-                "mauriciopiber/gear-locator": "^1.0.0-alpha0",
-                "mauriciopiber/gear-util": "^1.0.0-alpha0",
-                "php": "^7.0.0",
-                "zendframework/zend-console": "^2.8.0",
-                "zendframework/zend-db": "^2.10.0",
-                "zendframework/zend-eventmanager": "^3.2.1",
-                "zendframework/zend-loader": "^2.6",
-                "zendframework/zend-modulemanager": "^2.8.2",
-                "zendframework/zend-mvc": "^3.1.1",
-                "zendframework/zend-mvc-console": "^1.2",
-                "zendframework/zend-navigation": "^2.9.0",
-                "zendframework/zend-servicemanager": "^3.4",
-                "zendframework/zend-validator": "^2.12",
-                "zendframework/zend-view": "^2.11.2"
-            },
-            "require-dev": {
-                "jakub-onderka/php-parallel-lint": "^1.0",
-                "mikey179/vfsstream": "^1.6.2",
-                "pdepend/pdepend": "^2.0.3",
-                "phploc/phploc": "^5.0.0",
-                "phpmd/phpmd": "^2.3.2",
-                "phpunit/phpunit": "~8.0",
-                "sebastian/phpcpd": "^4.0.2",
-                "squizlabs/php_codesniffer": "^3.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GearTest\\VersionTest\\": "test/unit",
-                    "Gear\\Version\\": "src"
-                }
-            },
-            "support": {
-                "source": "https://github.com/mauriciopiber/gear-version/tree/1.0.0-alpha0",
-                "issues": "https://github.com/mauriciopiber/gear-version/issues"
-            },
-            "time": "2019-06-07T22:25:13+00:00"
         },
         {
             "name": "psr/cache",
@@ -4155,16 +4045,16 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "4e9924b2c157a3eb64395460fcf56b31badc8374"
+                "reference": "7425e155cf22cdd2b4dd3458a7da4cf6c0201562"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpmd/phpmd/phpmd-phpmd-4e9924b2c157a3eb64395460fcf56b31badc8374-zip-66676a.zip",
-                "reference": "4e9924b2c157a3eb64395460fcf56b31badc8374"
+                "url": "https://satis.piber.network/dist/phpmd/phpmd/phpmd-phpmd-7425e155cf22cdd2b4dd3458a7da4cf6c0201562-zip-7e2e7c.zip",
+                "reference": "7425e155cf22cdd2b4dd3458a7da4cf6c0201562"
             },
             "require": {
                 "ext-xml": "*",
@@ -4191,20 +4081,20 @@
             "authors": [
                 {
                     "name": "Manuel Pichler",
+                    "role": "Project Founder",
                     "email": "github@manuel-pichler.de",
-                    "homepage": "https://github.com/manuelpichler",
-                    "role": "Project Founder"
+                    "homepage": "https://github.com/manuelpichler"
                 },
                 {
                     "name": "Other contributors",
-                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors"
                 },
                 {
                     "name": "Marc Würth",
+                    "role": "Project Maintainer",
                     "email": "ravage@bluewin.ch",
-                    "homepage": "https://github.com/ravage84",
-                    "role": "Project Maintainer"
+                    "homepage": "https://github.com/ravage84"
                 }
             ***REMOVED***,
             "description": "PHPMD is a spin-off project of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD.",
@@ -4216,7 +4106,7 @@
                 "phpmd",
                 "pmd"
             ***REMOVED***,
-            "time": "2017-01-20T14:41:10+00:00"
+            "time": "2019-07-05T23:07:02+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -4529,16 +4419,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.2.4",
+            "version": "8.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "25fe0b5031b24722f66a75ad479a074cccc1bb37"
+                "reference": "c1b8534b3730f20f58600124129197bf1183dc92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpunit/phpunit/phpunit-phpunit-25fe0b5031b24722f66a75ad479a074cccc1bb37-zip-ccccf1.zip",
-                "reference": "25fe0b5031b24722f66a75ad479a074cccc1bb37"
+                "url": "https://satis.piber.network/dist/phpunit/phpunit/phpunit-phpunit-c1b8534b3730f20f58600124129197bf1183dc92-zip-fa8e17.zip",
+                "reference": "c1b8534b3730f20f58600124129197bf1183dc92"
             },
             "require": {
                 "doctrine/instantiator": "^1.2.0",
@@ -4607,7 +4497,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2019-07-03T08:30:33+00:00"
+            "time": "2019-07-15T06:26:24+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -5741,8 +5631,6 @@
         "mauriciopiber/gear-util": 15,
         "mauriciopiber/gear-schema": 15,
         "mauriciopiber/gear-console": 15,
-        "mauriciopiber/gear-version": 15,
-        "mauriciopiber/gear-jenkins": 15,
         "mauriciopiber/gear-config": 15,
         "mauriciopiber/gear-locator": 15,
         "mauriciopiber/gear-scripts": 15,

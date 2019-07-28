@@ -1,0 +1,16 @@
+files:
+    0: README.md
+    1: mkdocs.yml
+    2: docs/index.md
+    3: docs/CHANGELOG.md
+    4: phpdox.xml
+    10: test/phpmd.xml
+    11: test/phpcs.xml
+    12: test/phpunit.xml
+    13: test/phpunit-ci.xml
+    14: test/phpunit-benchmark.xml
+    15: test/phpunit-coverage.xml
+    16: test/phpunit-coverage-ci.xml
+    18: .gitignore
+    20: pipeline.yaml
+    21: Jenkinsfile

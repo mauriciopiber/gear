@@ -44,7 +44,7 @@ use Gear\Mvc\Controller\Console\{
 };
 use Gear\Mvc\Config\ConfigService;
 
-use Gear\Version\VersionServiceTrait;
+
 use Gear\Schema\Schema\SchemaServiceTrait;
 use Gear\Schema\Schema\Loader\SchemaLoaderServiceTrait;
 use Gear\Schema\Controller\ControllerSchemaTrait;
@@ -134,7 +134,7 @@ class ModuleService
     use ComposerServiceTrait;
     use ViewServiceTrait;
     use CacheServiceTrait;
-    use VersionServiceTrait;
+
     use ConfigServiceTrait;
     use CodeceptionServiceTrait;
     use LanguageServiceTrait;

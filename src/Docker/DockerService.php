@@ -64,6 +64,10 @@ class DockerService
     {
         $type = $this->module->getType();
 
+        if (in_array($type, ['src'***REMOVED***)) {
+            return;
+        }
+
         $file = $this->getFileCreator();
         $file->setTemplate(sprintf('template/module/docker/dockerfile-%s.yml', $type));
         $file->setOptions([***REMOVED***);
