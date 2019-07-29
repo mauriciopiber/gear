@@ -1,11 +1,35 @@
 <?php
 namespace Gear\Module\Node;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Upgrade\Npm\NpmUpgradeTrait;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
+use Gear\Upgrade\Npm\NpmUpgrade;
 
-class Package extends AbstractJsonService
+class Package
 {
+    use FileCreatorTrait;
+
+    use StringServiceTrait;
+
+    use ModuleStructureTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        FileCreator $file,
+        NpmUpgrade $npmUpgrade
+    ) {
+        $this->setNpmUpgrade($npmUpgrade);
+        $this->module = $module;
+        $this->stringService = $string;
+        $this->fileCreator = $file;
+    }
+
     use NpmUpgradeTrait;
 
     public function create()

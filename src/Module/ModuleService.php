@@ -51,20 +51,14 @@ use Gear\Module\Tests\{
 };
 use Gear\Mvc\LanguageServiceTrait;
 use Gear\Module\ComposerServiceTrait;
-use Gear\Module\Node\GulpfileTrait;
-use Gear\Module\Node\KarmaTrait;
 use Gear\Module\Node\PackageTrait;
-use Gear\Module\Node\ProtractorTrait;
 use Gear\Module\Docs\DocsTrait;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Docs\Docs;
 use Gear\Module\ComposerService;
-use Gear\Module\Node\Gulpfile;
-use Gear\Module\Node\Karma;
 use Gear\Module\Node\Package;
-use Gear\Module\Node\Protractor;
 use Gear\Mvc\LanguageService;
 use Gear\Schema\Schema\SchemaService as Schema;
 use Gear\Schema\Schema\Loader\SchemaLoaderService as SchemaLoader;
@@ -119,10 +113,7 @@ class ModuleService
     use StepTrait;
     use PageTrait;
     use DocsTrait;
-    use GulpfileTrait;
-    use KarmaTrait;
     use PackageTrait;
-    use ProtractorTrait;
     use ModuleTestsServiceTrait;
     use ComposerServiceTrait;
     use ViewServiceTrait;
@@ -155,10 +146,7 @@ class ModuleService
         Docs $docs,
         ComposerService $composer,
         ModuleTestsService $test,
-        Karma $karma,
-        Protractor $protractor,
         Package $package,
-        Gulpfile $gulpfile,
         LanguageService $language,
         Schema $schema,
         SchemaLoader $schemaLoader,
@@ -183,11 +171,7 @@ class ModuleService
         $this->docs = $docs;
         $this->composerService = $composer;
         $this->moduleTestsService = $test;
-
-        $this->karma = $karma;
-        $this->protractor = $protractor;
         $this->package = $package;
-        $this->gulpfile = $gulpfile;
         $this->languageService = $language;
 
         $this->schemaService = $schema;
@@ -312,7 +296,7 @@ class ModuleService
 
         $this->createInitAutoloader();
 
-        $this->createDeploy();
+        //$this->createDeploy();
 
         $this->getPhinxConfig();
 
@@ -336,18 +320,10 @@ class ModuleService
         $this->createDockerfile();
 
         if ($this->type === ModuleTypesInterface::WEB) {
-            $this->getKarmaConfig();
-            $this->getProtractorConfig();
-            $this->getProtractor()->report();
-            $this->getPackageConfig();
-            $this->getGulpFileConfig();
-            $this->getGulpFileJs();
-            $this->createAdditionalViewFiles();
 
-            if (!empty($this->staging)) {
-                $this->getStagingScript();
-                $this->getInstallStagingScript();
-            }
+            $this->getPackageConfig();
+
+            $this->createAdditionalViewFiles();
 
             $languageService = $this->getLanguageService();
             $languageService->module();
@@ -582,44 +558,6 @@ class ModuleService
         return $file->render();
     }
 
-    /**
-     * Cria script de deploy para ambiente de desenvolvimento
-     *
-     * @param string $type Tipo Web|Cli
-     *
-     * @return string
-     */
-    public function getScriptDevelopment($type)
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/deploy-development/deploy-development-%s.phtml', $type));
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-
-        $file->setFileName('deploy-development.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-
-    public function getStagingScript()
-    {
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-
-        $options = [***REMOVED***;
-        $options['host'***REMOVED*** = $this->getStaging();
-        $options['moduleUrl'***REMOVED*** = $moduleUrl;
-
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/deploy-staging.phtml');
-        $file->setOptions($options);
-        $file->setFileName('deploy-staging.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
     public function getStaging()
     {
         if (empty($this->staging)) {
@@ -634,75 +572,6 @@ class ModuleService
         return $this;
     }
 
-    public function getInstallStagingScript()
-    {
-        $moduleUrl = $this->str('url', $this->getModule()->getModuleName());
-
-        $options = [***REMOVED***;
-        $options['host'***REMOVED*** = $this->getStaging();
-        $options['moduleUrl'***REMOVED*** = $moduleUrl;
-        $options['git'***REMOVED*** = $this->getConfigService()->getGit();
-        $options['module'***REMOVED*** = $this->str('class', $this->getModule()->getModuleName());
-        $options['dbFile'***REMOVED*** = sprintf('%s.mysql.sql', $moduleUrl);
-
-        $file = $this->getFileCreator();
-        $file->setTemplate('template/module/script/install-remote-staging.phtml');
-        $file->setOptions($options);
-        $file->setFileName('install-staging.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-
-    /**
-     * Cria script de deploy para ambiente de teste
-     *
-     * @return string
-     */
-    public function getScriptTesting($type)
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/deploy-testing/deploy-testing-%s.phtml', $type));
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-        $file->setFileName('deploy-testing.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-    /**
-     * Cria script de load, facilitador de sinalizador de atualizações completas no gear
-     *
-     * @return string
-     */
-    public function getScriptLoad($type)
-    {
-        $file = $this->getFileCreator();
-        $file->setTemplate(sprintf('template/module/script/load-%s.phtml', $type));
-        $file->setOptions([
-            'module' => $this->str('class', $this->getModule()->getModuleName()),
-            'moduleUrl' => $this->str('url', $this->getModule()->getModuleName())
-        ***REMOVED***);
-        $file->setFileName('load.sh');
-        $file->setLocation($this->getModule()->getScriptFolder());
-        return $file->render();
-    }
-
-    /**
-     * Cria todos scripts obrigatórios para o módulo.
-     */
-    public function createDeploy()
-    {
-        $this->getScriptDevelopment($this->type);
-        $this->getScriptTesting($this->type);
-
-        if (in_array($this->type, [ModuleTypesInterface::WEB, ModuleTypesInterface::API***REMOVED***)) {
-            $this->getScriptLoad($this->type);
-        }
-
-    }
 
     /**
      * Cria o arquivo phinx.xml para configuração das migrations
@@ -753,46 +622,6 @@ class ModuleService
     public function getPackageConfig()
     {
         return $this->getPackage()->create();
-    }
-
-    /**
-     * Cria arquivo public/js/spec/karma.conf.js para testes unitários js
-     *
-     * @return string
-     */
-    public function getKarmaConfig()
-    {
-        return $this->getKarma()->create();
-    }
-
-    /**
-     * Cria arquivo public/js/spec/end2end.conf.js para testes de integração end2end
-     *
-     * @return string
-     */
-    public function getProtractorConfig()
-    {
-        return $this->getProtractor()->create();
-    }
-
-    /**
-     * Cria arquivo data/config.js para configuração do gulpfile.js.
-     *
-     * @return string
-     */
-    public function getGulpfileConfig()
-    {
-        return $this->getGulpfile()->createFileConfig();
-    }
-
-    /**
-     * Cria arquivo gulpfile.js para integração de arquivos js e css.
-     *
-     * @return string
-     */
-    public function getGulpfileJs()
-    {
-        return $this->getGulpfile()->createFile();
     }
 
     public function createKube()

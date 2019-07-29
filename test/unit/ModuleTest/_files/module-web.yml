@@ -28,19 +28,6 @@ files:
   5:
     template: 'template/module/init_autoloader.phtml'
     filename: 'init_autoloader.php'
-  6:
-    template: 'template/module/script/deploy-development/deploy-development-web.phtml'
-    options:
-      module: 'WebModule'
-      moduleUrl: 'web-module'
-    location: 'script'
-    filename: 'deploy-development.sh'
-  7:
-    template: 'template/module/script/deploy-testing/deploy-testing-web.phtml'
-    options:
-      module: 'web_module'
-    location: 'script'
-    filename: 'deploy-testing.sh'
 #  91:
 #    template: 'template/module/script/deploy-staging.phtml'
 #    location: 'script'
@@ -58,12 +45,6 @@ files:
 #      host: null
 #      moduleUrl: 'web-module'
 #    filename: 'install-staging.sh'
-  8:
-    template: 'template/module/script/load-web.phtml'
-    options:
-      module: 'web_module'
-    location: 'script'
-    filename: 'load.sh'
   9:
     template: 'template/module/phinx.phtml'
     options:

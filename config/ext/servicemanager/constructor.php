@@ -5,8 +5,5 @@ return [
         Gear\Constructor\Db\DbConstructor::class         => Gear\Constructor\Db\DbConstructorFactory::class,
         Gear\Constructor\Action\ActionConstructor::class     => Gear\Constructor\Action\ActionConstructorFactory::class,
         Gear\Constructor\Controller\ControllerConstructor::class => Gear\Constructor\Controller\ControllerConstructorFactory::class,
-    ***REMOVED***,
-    'invokables' => [
-        'Gear\Module\Constructor\App'        => 'Gear\Constructor\App\AppService',
     ***REMOVED***
 ***REMOVED***;

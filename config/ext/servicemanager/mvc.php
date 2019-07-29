@@ -2,10 +2,6 @@
 use Gear\Mvc;
 
 return [
-    'invokables' => [
-        /* config */
-        /* config manager */
-    ***REMOVED***,
     'factories' => [
         Mvc\Config\ConfigService::class                           => Mvc\Config\ConfigServiceFactory::class,
         Mvc\Entity\EntityService::class                           => Mvc\Entity\EntityServiceFactory::class,
@@ -14,5 +10,4 @@ return [
         Mvc\Factory\FactoryTestService::class                     => Mvc\Factory\FactoryTestServiceFactory::class,
 
     ***REMOVED***,
-
 ***REMOVED***;

@@ -1,13 +1,26 @@
 <?php
 namespace Gear\Module\Docs;
 
-use Gear\Service\AbstractJsonService;
+use Gear\Util\String\StringService;
+use Gear\Util\String\StringServiceTrait;
+use Gear\Module\Structure\ModuleStructure;
+use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Creator\FileCreator\FileCreator;
+use Gear\Creator\FileCreator\FileCreatorTrait;
 
-class Docs extends AbstractJsonService
+class Docs
 {
+    use FileCreatorTrait;
 
-    public function __construct($module, $string, $file)
-    {
+    use StringServiceTrait;
+
+    use ModuleStructureTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        FileCreator $file
+    ) {
         $this->module = $module;
         $this->stringService = $string;
         $this->fileCreator = $file;

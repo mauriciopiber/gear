@@ -6,7 +6,7 @@ use Gear\Util\String\StringService;
 use Gear\Util\Glob\GlobService;
 use Gear\Util\Dir\DirService;
 use Gear\Table\TableService\TableService;
-use Gear\Script\ScriptService;
+use Gear\Util\Script\ScriptService;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Schema\Schema\SchemaService;
 use Gear\Schema\Schema\Loader\SchemaLoaderService;
@@ -103,7 +103,7 @@ return [
 EOS
             );
 
-        $this->scriptService->run('mv vfs://module/src/Gear/Module/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
+        //$this->scriptService->run('mv vfs://module/src/Gear/Module/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
 
         $srcs = [
             new Src([
@@ -124,12 +124,12 @@ EOS
         $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
 
-        $this->doctrineService->getOrmConvertMapping()->willReturn('orm-convert-mapping')->shouldBeCalled();
-        $this->doctrineService->getOrmGenerateEntities()->willReturn('orm-generate-entities')->shouldBeCalled();
+        //$this->doctrineService->getOrmConvertMapping()->willReturn('orm-convert-mapping')->shouldBeCalled();
+        //$this->doctrineService->getOrmGenerateEntities()->willReturn('orm-generate-entities')->shouldBeCalled();
 
 
-        $this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
-        $this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
+       // $this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
+       // $this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
 
         $this->service->setModule($this->module->reveal());
 
@@ -157,7 +157,7 @@ return [
 EOS
             );
 
-        $this->scriptService->run('mv vfs://module/src/MyModule/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
+        //$this->scriptService->run('mv vfs://module/src/MyModule/Entity/* vfs://module/src/Entity/')->shouldBeCalled();
 
         $srcs = [
             new Src([
@@ -178,12 +178,12 @@ EOS
         $this->schemaService->getModuleName()->willReturn($this->moduleName)->shouldBeCalled();
 
 
-        $this->doctrineService->getOrmConvertMapping()->willReturn('orm-convert-mapping')->shouldBeCalled();
-        $this->doctrineService->getOrmGenerateEntities()->willReturn('orm-generate-entities')->shouldBeCalled();
+        //$this->doctrineService->getOrmConvertMapping()->willReturn('orm-convert-mapping')->shouldBeCalled();
+        //$this->doctrineService->getOrmGenerateEntities()->willReturn('orm-generate-entities')->shouldBeCalled();
 
 
-        $this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
-        $this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
+        //$this->scriptService->run('orm-convert-mapping')->willReturn(true)->shouldBeCalled();
+        //$this->scriptService->run('orm-generate-entities')->willReturn(true)->shouldBeCalled();
 
         $this->service->setModule($this->module->reveal());
 

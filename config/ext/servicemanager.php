@@ -21,22 +21,6 @@ return array_merge_recursive(
             'Gear\Code\Code'                => 'Gear\Code\CodeFactory',
             'Gear\Code\CodeTest'            => 'Gear\Code\CodeTestFactory',
         ***REMOVED***,
-        'invokables' => [
-            'Gear\Table\TableService'          => 'Gear\Table\TableService\TableService',
-            'Gear\Creator\Controller'          => 'Gear\Creator\ControllerDependency',
-            'Gear\Creator\App'                 => 'Gear\Creator\AppDependency',
-            'Gear\Creator\Src'                 => 'Gear\Creator\SrcDependency',
-            'cacheService'                     => 'Gear\Cache\CacheService',
-            'Gear\Autoload\Namespaces'         => 'Gear\Autoload\Namespaces',
-            'SchemaListener'                   => 'Gear\Event\SchemaListener',
-            'LogListener'                      => 'Gear\Event\LogListener',
-            'consoleService'                   => 'Gear\Service\ConsoleService',
-        ***REMOVED***,
-        'aliases' => [
-            'dirService'                       => 'GearBase\Util\Dir',
-            'fileService'                      => 'GearBase\Util\File',
-            'stringService'                    => 'GearBase\Util\String'
-        ***REMOVED***,
         'shared' => [
             'Gear\Module\ConstructStatusObject' => false,
     	    \Gear\Creator\FileCreator\FileCreator::class => false,
@@ -46,7 +30,5 @@ return array_merge_recursive(
     require __DIR__.'/servicemanager/mvc.php',
     require __DIR__.'/servicemanager/constructor.php',
     require __DIR__.'/servicemanager/module.php',
-    require __DIR__.'/servicemanager/database.php',
-    require __DIR__.'/servicemanager/project.php',
     require __DIR__.'/servicemanager.config.php'
 );

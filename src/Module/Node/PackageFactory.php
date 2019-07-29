@@ -1,21 +1,23 @@
 <?php
-namespace Gear\Module\Docs;
+namespace Gear\Module\Node;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Gear\Module\Docs\Docs;
+use Gear\Module\Node\Package;
 use Gear\Creator\FileCreator\FileCreator;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Util\String\StringService;
+use Gear\Upgrade\Npm\NpmUpgrade;
 
-class DocsFactory implements FactoryInterface
+class PackageFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName = null, $options = [***REMOVED***)
     {
-        $factory = new Docs(
+        $factory = new Package(
             $container->get(ModuleStructure::class),
             $container->get(StringService::class),
-            $container->get(FileCreator::class)
+            $container->get(FileCreator::class),
+            $container->get(NpmUpgrade::class)
         );
 
         return $factory;

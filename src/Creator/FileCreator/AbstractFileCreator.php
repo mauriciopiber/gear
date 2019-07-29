@@ -1,9 +1,7 @@
 <?php
 namespace Gear\Creator\FileCreator;
 
-use Gear\Service\AbstractJsonService;
-
-abstract class AbstractFileCreator extends AbstractJsonService
+abstract class AbstractFileCreator
 {
     /**
      * Retorna apenas os nomes de uma coleção de dependências.

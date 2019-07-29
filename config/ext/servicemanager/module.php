@@ -6,15 +6,6 @@ return [
         'Gear\Module\ConstructService'       => 'Gear\Module\ConstructServiceFactory',
         'Gear\Module\Composer'        => 'Gear\Module\ComposerServiceFactory',
         'Gear\Module\Tests\ModuleTestsService'  => 'Gear\Module\Tests\ModuleTestsServiceFactory',
-    ***REMOVED***,
-    'invokables' =>
-    [
-        'Gear\Module\Codeception'     => 'Gear\Module\CodeceptionService',
-        'scriptService'               => 'Gear\Script\ScriptService',
-
-        'Gear\Module\Node\Package'    => 'Gear\Module\Node\Package',
-        'Gear\Module\Node\Gulpfile'   => 'Gear\Module\Node\Gulpfile',
-        'Gear\Module\Node\Protractor' => 'Gear\Module\Node\Protractor',
-        'Gear\Module\Node\Karma'      => 'Gear\Module\Node\Karma',
+        'Gear\Module\Node\Package'    => 'Gear\Module\Node\PackageFactory',
     ***REMOVED***,
 ***REMOVED***;

@@ -144,16 +144,6 @@ class FileUpgradeTest extends TestCase
      */
     public function testFactoryUpgradeModuleWeb()
     {
-        $this->moduleService->getScriptDevelopment('web')->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getGulpfileJs()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getProtractorConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getKarmaConfig()->willReturn(true)->shouldBeCalled();
-
         $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
         $this->mockDocs();
@@ -162,14 +152,6 @@ class FileUpgradeTest extends TestCase
 
         $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
 
-        $this->moduleService->getScriptTesting('web')->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getStagingScript()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getInstallStagingScript()->willReturn(true)->shouldBeCalled();
-
-
-        $this->moduleService->getScriptLoad('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->createGitIgnore('web')->willReturn(true)->shouldBeCalled();
 
@@ -221,9 +203,6 @@ class FileUpgradeTest extends TestCase
     {
         $this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
         //$this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getScriptDevelopment('cli')->willReturn(true)->shouldBeCalled();
-
         //$this->moduleService->getPhinxConfig()->willReturn(true)->shouldBeCalled();
 
 
@@ -237,8 +216,6 @@ class FileUpgradeTest extends TestCase
         $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
 
         //$this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getScriptTesting('cli')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->createGitIgnore('cli')->willReturn(true)->shouldBeCalled();
 

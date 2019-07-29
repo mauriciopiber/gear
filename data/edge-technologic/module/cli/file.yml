@@ -4,8 +4,6 @@ files:
     2: docs/index.md
     3: docs/CHANGELOG.md
     4: phpdox.xml
-    6: script/deploy-testing.sh
-    7: script/deploy-development.sh
     10: test/phpmd.xml
     11: test/phpcs.xml
     12: test/phpunit.xml

@@ -168,68 +168,6 @@ class ModuleServiceTest extends TestCase
         $this->moduleService = $this->mockModuleRealCreator();
         $this->assertEquals($expected, $this->moduleService->getModuleNamespace());
     }
-
-    /**
-     * @group module1
-     */
-    public function testScriptDeploy()
-    {
-        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleRealCreator();
-
-        $this->moduleService->getScriptDevelopment('cli');
-
-        $expected = $this->templates.'/deploy-development-cli.sh';
-
-        $this->assertEquals(
-            file_get_contents(vfsStream::url('module/deploy-development.sh')),
-            file_get_contents($expected)
-        );
-    }
-
-    /**
-     * @group script2
-     */
-    public function testScriptInstallStaging()
-    {
-        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleRealCreator();
-
-        $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
-        $this->configService->getGit()->willReturn('git@bitbucket.org:mauriciopiber/gear-it.git')->shouldBeCalled();
-
-        $this->moduleService->getInstallStagingScript();
-
-        $expected = $this->templates.'/install-staging.sh';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents(vfsStream::url('module/install-staging.sh'))
-        );
-    }
-
-    /**
-     * @group script2
-     */
-    public function testScriptDeployStaging()
-    {
-        $this->module->getScriptFolder()->willReturn(vfsStream::url('module'))->shouldBeCalled();
-
-        $this->moduleService = $this->mockModuleRealCreator();
-
-        $this->moduleService->setStaging('gear-it.stag01.pibernetwork.com');
-        $this->moduleService->getStagingScript();
-
-        $expected = $this->templates.'/deploy-staging.sh';
-
-        $this->assertEquals(
-            file_get_contents($expected),
-            file_get_contents(vfsStream::url('module/deploy-staging.sh'))
-        );
-    }
-
     /**
      * @group gitignore
      */
@@ -445,10 +383,7 @@ class ModuleServiceTest extends TestCase
             $this->docs->reveal(),
             $this->composer->reveal(),
             $this->testService->reveal(),
-            $this->karma->reveal(),
-            $this->protractor->reveal(),
             $this->package->reveal(),
-            $this->gulpfile->reveal(),
             $this->languageService->reveal(),
             $this->schema->reveal(),
             $this->schemaLoader->reveal(),

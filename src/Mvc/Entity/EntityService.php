@@ -19,8 +19,8 @@ use Gear\Schema\Schema\SchemaService;
 use Gear\Schema\Src\SrcSchemaTrait;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Exception\InvalidArgumentException;
-use Gear\Script\ScriptServiceTrait;
-use Gear\Script\ScriptService;
+use Gear\Util\Script\ScriptServiceTrait;
+use Gear\Util\Script\ScriptService;
 use Gear\Table\TableService\TableService;
 use Gear\Table\TableService\TableServiceTrait;
 use Gear\Mvc\Entity\EntityTestServiceTrait;
@@ -183,9 +183,9 @@ class EntityService extends AbstractMvc
     {
         $doctrineService = $this->getDoctrineService();
         $scriptService = $this->getScriptService();
-        $scriptService->run($doctrineService->getOrmConvertMapping());
+        //$scriptService->run($doctrineService->getOrmConvertMapping());
         $this->moveEntity();
-        $scriptService->run($doctrineService->getOrmGenerateEntities());
+        //$scriptService->run($doctrineService->getOrmGenerateEntities());
         $this->moveEntity();
     }
 
@@ -246,7 +246,7 @@ class EntityService extends AbstractMvc
         );
 
 
-        $this->getScriptService()->run($cmd);
+        //$this->getScriptService()->run($cmd);
     }
 
 

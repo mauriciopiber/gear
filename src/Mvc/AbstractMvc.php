@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Mvc;
 
-use Gear\Service\AbstractJsonService;
 use Gear\Mvc\TraitServiceTrait;
 use Gear\Mvc\InterfaceServiceTrait;
 use Gear\Mvc\Factory\FactoryServiceTrait;

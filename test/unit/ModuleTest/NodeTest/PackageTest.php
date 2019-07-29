@@ -74,11 +74,13 @@ class PackageTest extends TestCase
     public function testCreateModulePackage()
     {
 
-        $test = new Module\Node\Package();
-        $test->setModule($this->module->reveal());
-        $test->setStringService($this->string);
-        $test->setFileCreator($this->fileCreator);
-        $test->setNpmUpgrade($this->upgrade);
+        $test = new Module\Node\Package(
+            $this->module->reveal(),
+            $this->string,
+            $this->fileCreator,
+            $this->upgrade
+        );
+
         //$test->setAntEdge($this->edge->reveal());
 
         $file = $test->create();

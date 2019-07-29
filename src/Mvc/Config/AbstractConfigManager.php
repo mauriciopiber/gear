@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Mvc\Config;
 
-//use Gear\Service\AbstractJsonService;
 use Gear\Mvc\Config\AbstractConfigManagerInterface;
 //use Gear\Module\Structure\ModuleStructureInterface;
 use Gear\Module\Structure\ModuleStructureTrait;

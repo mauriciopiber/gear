@@ -6,7 +6,7 @@
  */
 namespace Gear\Mvc\Entity;
 
-use Gear\Script\ScriptService;
+use Gear\Util\Script\ScriptService;
 use Gear\Mvc\AbstractMvcInterface;
 
 /**

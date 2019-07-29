@@ -5,15 +5,6 @@ files:
     3: docs/CHANGELOG.md
     4: phpdox.xml
     5: phinx.php
-    6: script/deploy-testing.sh
-    7: script/deploy-development.sh
-    8: script/deploy-staging.sh
-    9: script/install-staging.sh
-    10: script/load.sh
-    13: gulpfile.js
-    14: data/config.json
-    15: public/js/spec/end2end.conf.js
-    16: public/js/spec/karma.conf.js
     17: test/phpmd.xml
     18: test/phpcs.xml
     19: test/phpunit.xml
