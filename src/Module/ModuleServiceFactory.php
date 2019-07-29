@@ -35,8 +35,6 @@ class ModuleServiceFactory implements FactoryInterface
             $container->get('Gear\Mvc\Config\ConfigService'),
             $container->get('Gear\Mvc\View\ViewService'),
             $container->get('Request'),
-            $container->get('cacheService'),
-            $container->get('Gear\Module\Config\ApplicationConfig'),
             $container->get('Gear\Autoload\ComposerAutoload'),
             $container->get('config'),
             $container->get('Gear\Util\Dir\DirService'),

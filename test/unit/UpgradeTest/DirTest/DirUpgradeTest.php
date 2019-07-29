@@ -45,14 +45,6 @@ class DirUpgradeTest extends TestCase
         return [['cli'***REMOVED***, ['web'***REMOVED******REMOVED***;
     }
 
-    /**
-     * @group ProjectUpgrade
-     */
-    public function testProjectTrait()
-    {
-        $this->dirUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->dirUpgrade->getProject());
-    }
 
 
     public function testDependency()

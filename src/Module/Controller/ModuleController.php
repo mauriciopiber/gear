@@ -3,23 +3,19 @@ namespace Gear\Module\Controller;
 
 use Zend\Mvc\Console\Controller\AbstractConsoleController;
 use Zend\View\Model\ConsoleModel;
-use Gear\Cache\CacheServiceTrait;
 use Gear\Module\ModuleServiceTrait;
 use Gear\Mvc\Entity\EntityServiceTrait;
 use Gear\Mvc\Fixture\FixtureServiceTrait;
 use Gear\Module\Diagnostic\DiagnosticServiceTrait;
 use Gear\Module\ConstructServiceTrait;
 use Gear\Module\Upgrade\ModuleUpgradeTrait;
-use Gear\Module\Config\ApplicationConfigTrait;
 use Gear\Autoload\ComposerAutoloadTrait;
-use Gear\Cache\CacheService;
 use Gear\Module\ModuleService;
 use Gear\Mvc\Entity\EntityService;
 use Gear\Mvc\Fixture\FixtureService;
 use Gear\Module\Diagnostic\DiagnosticService;
 use Gear\Module\ConstructService;
 use Gear\Module\Upgrade\ModuleUpgrade;
-use Gear\Module\Config\ApplicationConfig;
 use Gear\Autoload\ComposerAutoload;
 use Gear\Module\ConstructorStatusObject;
 
@@ -31,8 +27,6 @@ class ModuleController extends AbstractConsoleController
     protected $console;
 
     use ComposerAutoloadTrait;
-    use ApplicationConfigTrait;
-    use CacheServiceTrait;
     use ModuleServiceTrait;
     use EntityServiceTrait;
     use FixtureServiceTrait;
@@ -44,16 +38,12 @@ class ModuleController extends AbstractConsoleController
         ModuleService $moduleService,
         DiagnosticService $diagnosticService,
         ModuleUpgrade $moduleUpgrade,
-        ConstructService $constructService,
-        ApplicationConfig $applicationConfig,
-        CacheService $cacheService
+        ConstructService $constructService
     ) {
-        $this->cacheService = $cacheService;
         $this->constructService = $constructService;
         $this->moduleUpgrade = $moduleUpgrade;
         $this->diagnosticService = $diagnosticService;
         $this->moduleService = $moduleService;
-        $this->applicationConfig = $applicationConfig;
     }
 
     // public function setConsoleAdapter($console)
@@ -154,88 +144,4 @@ class ModuleController extends AbstractConsoleController
 
         return new ConsoleModel();
     }
-
-    public function fixtureAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-fixture'));
-
-        $module = $this->getFixtureService();
-        $module->importModule();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    /**
-     * Carrega um módulo no projeto por meio do application.config.php
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function loadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-load'));
-
-        $module = $this->getApplicationConfig();
-        $module->addModuleToProject();
-
-        $this->getCacheService()->renewFileCache();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    /**
-     * Remove um módulo do application.config.php do projeto
-     *
-     * @return \Zend\View\Model\ConsoleModel
-     */
-    public function unloadAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-unload'));
-
-        $module = $this->getApplicationConfig();
-        $module->unload();
-
-        $this->getCacheService()->renewFileCache();
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-
-
-    public function entityAction()
-    {
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entity'));
-
-        $request = $this->getRequest();
-        $prefix  = $request->getParam('prefix', false);
-        $tables  = $request->getParam('entity', array());
-
-        $entityService = $this->getEntityService();
-        $entityService->setUpEntity(array('prefix' => $prefix, 'tables' => $tables));
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
-    public function entitiesAction()
-    {
-
-        $this->getEventManager()->trigger('gear.pre', $this, array('message' => 'module-entities'));
-
-
-        $request = $this->getRequest();
-        $entityService = $this->getEntityService();
-        $entityService->setUpEntities(array('prefix' => $request->getParam('prefix', false)));
-
-        $this->getEventManager()->trigger('gear.pos', $this);
-
-        return new ConsoleModel();
-    }
-
 }

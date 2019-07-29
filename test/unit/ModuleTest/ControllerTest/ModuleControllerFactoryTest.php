@@ -35,7 +35,8 @@ class ModuleControllerFactoryTest extends TestCase
 
         $this->container
           ->get(CacheService::class)
-          ->willReturn($this->prophesize(CacheService::class)->reveal());
+          ->willReturn($this->prophesize(CacheService::class)->reveal())
+          ->shouldNotBeCalled();
         $this->container
           ->get(EntityService::class)
           ->willReturn($this->prophesize(EntityService::class)->reveal());
@@ -54,7 +55,8 @@ class ModuleControllerFactoryTest extends TestCase
 
         $this->container
           ->get(ApplicationConfig::class)
-          ->willReturn($this->prophesize(ApplicationConfig::class)->reveal());
+          ->willReturn($this->prophesize(ApplicationConfig::class)->reveal())
+          ->shouldNotBeCalled();
         $factory = new ModuleControllerFactory();
 
         $instance = $factory->__invoke($this->container->reveal(), null, null);

@@ -577,14 +577,6 @@ EOS;
 
     }
 
-    /**
-     * @group ProjectUpgrade
-     */
-    public function testProjectTrait()
-    {
-        $this->antUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->antUpgrade->getProject());
-    }
 
     /**
      * @group tfl

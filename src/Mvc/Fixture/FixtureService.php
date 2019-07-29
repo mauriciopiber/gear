@@ -12,7 +12,7 @@
 namespace Gear\Mvc\Fixture;
 
 use Gear\Mvc\AbstractMvc;
-use Gear\Database\SchemaToolServiceTrait;
+
 use Gear\Column\Integer\PrimaryKey;
 use Gear\Schema\Src\SrcTypesInterface;
 use Gear\Schema\Schema\SchemaServiceTrait;
@@ -22,7 +22,7 @@ use Zend\EventManager\EventManagerInterface;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Gear\Database\AutoincrementServiceTrait;
+
 use Gear\Mvc\Config\ConfigServiceTrait;
 use Gear\Table\UploadImageTrait;
 use Gear\Column\Varchar\UploadImage as UploadImageColumn;
@@ -43,11 +43,7 @@ class FixtureService extends AbstractMvc implements AbstractMvcInterface
 
     use UploadImageTrait;
 
-    use AutoincrementServiceTrait;
-
     use SchemaServiceTrait;
-
-    use SchemaToolServiceTrait;
 
     use ConfigServiceTrait;
 
@@ -294,55 +290,5 @@ class FixtureService extends AbstractMvc implements AbstractMvcInterface
             $this->setEventManager(new \Zend\EventManager\EventManager());
         }
         return $this->event;
-    }
-
-
-    public function importProject()
-    {
-        $reset = $this->getRequest()->getParam('reset-autoincrement');
-        $append = $this->getRequest()->getParam('append');
-        $this->getEventManager()->trigger('loadFixtures', $this);
-
-        $loader = new Loader();
-
-        foreach ($this->getLoadedFixtures() as $fixture) {
-            $loader->loadFromDirectory(realpath($fixture));
-        }
-
-
-        if ($reset) {
-            $this->getAutoincrementService()->autoincrementDatabase();
-        }
-
-        $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->get('doctrine.entitymanager.orm_default'), $purger);
-        $executor->execute($loader->getFixtures(), $append);
-    }
-
-
-    public function importModule()
-    {
-
-        $module = $this->getRequest()->getParam('module');
-        $append = $this->getRequest()->getParam('append');
-        $reset = $this->getRequest()->getParam('reset-autoincrement');
-
-        $this->getEventManager()->trigger('loadFixtures', $this);
-
-        $loader = new Loader();
-
-        foreach ($this->getLoadedFixtures() as $moduleName => $fixture) {
-            if ($module == $moduleName) {
-                $loader->loadFromDirectory(realpath($fixture));
-            }
-        }
-
-        if ($reset) {
-            $this->getAutoincrementService()->autoincrementDatabase();
-        }
-
-        $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->get('doctrine.entitymanager.orm_default'), $purger);
-        $executor->execute($loader->getFixtures(), $append);
     }
 }

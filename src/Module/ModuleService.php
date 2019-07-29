@@ -17,12 +17,8 @@
 
 namespace Gear\Module;
 
-use Gear\Module\Config\ApplicationConfig;
-use Gear\Module\Config\ApplicationConfigTrait;
 use Gear\Autoload\ComposerAutoload;
 use Gear\Autoload\ComposerAutoloadTrait;
-use Gear\Cache\CacheServiceTrait;
-use Gear\Cache\CacheService;
 use Gear\Mvc\View\ViewServiceTrait;
 use Gear\Mvc\View\App\AppControllerServiceTrait;
 use Gear\Mvc\View\App\AppControllerService;
@@ -53,7 +49,6 @@ use Gear\Module\Tests\{
     ModuleTestsServiceTrait,
     ModuleTestsService
 };
-use Gear\Module\CodeceptionServiceTrait;
 use Gear\Mvc\LanguageServiceTrait;
 use Gear\Module\ComposerServiceTrait;
 use Gear\Module\Node\GulpfileTrait;
@@ -65,8 +60,6 @@ use Gear\Creator\FileCreator\FileCreator;
 use Gear\Util\String\StringService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Module\Docs\Docs;
-use Gear\Module\CodeceptionService;
-
 use Gear\Module\ComposerService;
 use Gear\Module\Node\Gulpfile;
 use Gear\Module\Node\Karma;
@@ -133,16 +126,13 @@ class ModuleService
     use ModuleTestsServiceTrait;
     use ComposerServiceTrait;
     use ViewServiceTrait;
-    use CacheServiceTrait;
 
     use ConfigServiceTrait;
-    use CodeceptionServiceTrait;
     use LanguageServiceTrait;
     use SchemaServiceTrait;
     use SchemaLoaderServiceTrait;
     use ControllerSchemaTrait;
     use ActionSchemaTrait;
-    use ApplicationConfigTrait;
     use ComposerAutoloadTrait;
     use DirServiceTrait;
     use GearConfigTrait;
@@ -175,8 +165,6 @@ class ModuleService
         ConfigService $configService,
         ViewService $viewService,
         $request,
-        CacheService $cache,
-        ApplicationConfig $applicationConfig,
         ComposerAutoload $autoload,
         array $config,
         DirService $dirService,
@@ -209,9 +197,7 @@ class ModuleService
         $this->viewService = $viewService;
 
         $this->request = $request;
-        $this->cacheService = $cache;
 
-        $this->applicationConfig = $applicationConfig;
         $this->composerAutoload = $autoload;
         $this->config = $config;
 
@@ -437,14 +423,6 @@ class ModuleService
     public function getPhpcsDocsConfig()
     {
         return $this->getModuleTestsService()->copyDocSniff();
-    }
-
-    /**
-     * Criar o arquivo test/unit.suite.yml
-     */
-    public function getUnitSuiteConfig()
-    {
-        return $this->getCodeceptionService()->unitSuiteYml();
     }
 
     /**
@@ -747,17 +725,6 @@ class ModuleService
         $file->setLocation($location);
 
         return $file->render();
-    }
-
-    /**
-     * Cria arquivo codeception.yml principal referência para os testes unitários
-     *
-     * @return string
-     */
-    public function getCodeception()
-    {
-        $codeceptionService = $this->getCodeceptionService();
-        return $codeceptionService->codeceptYml();
     }
 
     /**

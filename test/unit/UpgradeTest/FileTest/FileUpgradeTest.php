@@ -51,16 +51,6 @@ class FileUpgradeTest extends TestCase
         $this->yaml = new YamlService();
     }
 
-
-    /**
-     * @group ProjectUpgrade
-     */
-    public function testProjectTrait()
-    {
-        $this->fileUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->fileUpgrade->getProject());
-    }
-
     /**
      * @group fix2
      */
@@ -154,8 +144,6 @@ class FileUpgradeTest extends TestCase
      */
     public function testFactoryUpgradeModuleWeb()
     {
-        $this->moduleService->getCodeception()->willReturn(true)->shouldBeCalled();
-
         $this->moduleService->getScriptDevelopment('web')->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getGulpfileConfig()->willReturn(true)->shouldBeCalled();
@@ -173,8 +161,6 @@ class FileUpgradeTest extends TestCase
         $this->moduleService->getPhpdoxConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getSchemaConfig()->willReturn(true)->shouldBeCalled();
-
-        $this->moduleService->getUnitSuiteConfig()->willReturn(true)->shouldBeCalled();
 
         $this->moduleService->getScriptTesting('web')->willReturn(true)->shouldBeCalled();
 

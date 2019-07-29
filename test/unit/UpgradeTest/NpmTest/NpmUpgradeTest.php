@@ -39,15 +39,6 @@ class NpmUpgradeTest extends TestCase
     }
 
     /**
-     * @group ProjectUpgrade
-     */
-    public function testProjectTrait()
-    {
-
-        $this->npmUpgrade->setProject('testing');
-        $this->assertEquals('testing', $this->npmUpgrade->getProject());
-    }
-    /**
      * @group fix2
      */
     public function testDependency()

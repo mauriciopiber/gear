@@ -1,11 +1,10 @@
 <?php
 namespace Gear\Util\Yaml;
 
-use Gear\Service\AbstractJsonService;
 use Symfony\Component\Yaml\Parser;
 use Gear\Util\Yaml\Exception\YamlNotFoundException;
 
-class YamlService extends AbstractJsonService
+class YamlService
 {
     public function parse($data)
     {

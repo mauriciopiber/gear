@@ -7,7 +7,6 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\File\FileEdgeTrait;
 use Gear\Edge\File\FileEdge;
-use Gear\Project\ProjectLocationTrait;
 use Gear\Module\Tests\{
     ModuleTestsService,
     ModuleTestsServiceTrait
@@ -28,8 +27,6 @@ class FileUpgrade
     use ModuleStructureTrait;
 
     use StringServiceTrait;
-
-    use ProjectLocationTrait;
 
     use FileEdgeTrait;
 

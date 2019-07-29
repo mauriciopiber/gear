@@ -1,7 +1,6 @@
 <?php
 namespace Gear\Diagnostic\Ant;
 
-use Gear\Project\ProjectLocationTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Edge\Ant\AntEdge;
 use Gear\Diagnostic\ModuleDiagnosticInterface;
@@ -40,7 +39,7 @@ class AntService implements ModuleDiagnosticInterface
 
     const MISSING_IMPORT = 'Ant - Está faltando o import %s';
 
-    use ProjectLocationTrait;
+    //use ProjectLocationTrait;
 
     use AntEdgeTrait;
 

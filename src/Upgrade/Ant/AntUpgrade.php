@@ -5,7 +5,6 @@ use Gear\Util\Console\ConsoleAwareTrait;
 use Gear\Util\Prompt\ConsolePromptTrait;
 use Gear\Edge\Ant\AntEdgeTrait;
 use Gear\Edge\Ant\AntEdge;
-use Gear\Project\ProjectLocationTrait;
 use Gear\Config\GearConfigTrait;
 use Gear\Config\GearConfig;
 use SimpleXmlElement;
@@ -34,8 +33,6 @@ class AntUpgrade
     use StringServiceTrait;
 
     use ModuleStructureTrait;
-
-    use ProjectLocationTrait;
 
     use AntEdgeTrait;
 

@@ -455,8 +455,6 @@ class ModuleServiceTest extends TestCase
             $this->configService->reveal(),
             $this->viewService->reveal(),
             $this->request->reveal(),
-            $this->cache->reveal(),
-            $this->applicationConfig->reveal(),
             $this->autoload->reveal(),
             $this->config,
             $this->dir,

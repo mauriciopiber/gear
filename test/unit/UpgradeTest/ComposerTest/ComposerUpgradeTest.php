@@ -44,15 +44,6 @@ class ComposerUpgradeTest extends TestCase
         );
     }
 
-    /**
-     * @group ProjectUpgrade
-     */
-    public function testProjectTrait()
-    {
-        $this->composer->setProject('testing');
-        $this->assertEquals('testing', $this->composer->getProject());
-    }
-
     public function getModuleType()
     {
         return [['cli', 'web'***REMOVED******REMOVED***;

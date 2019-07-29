@@ -44,8 +44,6 @@ class ModuleControllerTest extends TestCase
             $this->diagnostic->reveal(),
             $this->moduleUpgrade->reveal(),
             $this->construct->reveal(),
-            $this->applicationConfig->reveal(),
-            $this->cache->reveal(),
             $this->console->reveal()
         );
         $this->request    = new Request();
@@ -148,32 +146,6 @@ class ModuleControllerTest extends TestCase
         ***REMOVED***));
 
         $this->routeMatch->setParam('action', 'module-as-project');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-
-    public function testLoadModule()
-    {
-
-        $this->applicationConfig->addModuleToProject()->willReturn(true)->shouldBeCalled();
-        $this->cache->renewFileCache()->willReturn(true)->shouldBeCalled();
-
-        //$this->request->setParams(new Parameters(['module' => 'Gearing', 'basepath' => '/var/www/teste'***REMOVED***));
-
-        $this->routeMatch->setParam('action', 'load');
-        $this->controller->dispatch($this->request);
-        $response = $this->controller->getResponse();
-        $this->assertEquals(200, $response->getStatusCode());
-    }
-
-    public function testUnloadModule()
-    {
-        $this->applicationConfig->unload()->willReturn(true)->shouldBeCalled();
-        $this->cache->renewFileCache()->willReturn(true)->shouldBeCalled();
-
-        $this->routeMatch->setParam('action', 'unload');
         $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());

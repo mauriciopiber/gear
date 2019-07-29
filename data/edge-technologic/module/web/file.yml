@@ -10,8 +10,6 @@ files:
     8: script/deploy-staging.sh
     9: script/install-staging.sh
     10: script/load.sh
-    11: codeception.yml
-    12: test/unit.suite.yml
     13: gulpfile.js
     14: data/config.json
     15: public/js/spec/end2end.conf.js
