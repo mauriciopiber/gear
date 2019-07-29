@@ -21,7 +21,7 @@ use Gear\Mvc\Spec\Page\Page;
 use Gear\Mvc\Spec\Step\Step;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Column\ColumnService;
-use Gear\Table\TableService;
+use Gear\Table\TableService\TableService;
 use Gear\Mvc\Controller\Api\{
     ApiControllerService,
     ApiControllerTestService,

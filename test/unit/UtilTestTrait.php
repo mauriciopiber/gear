@@ -20,6 +20,7 @@ use Gear\Util\String\StringService;
 use Gear\Creator\Component\Constructor\ConstructorParams;
 use Gear\Util\Vector\ArrayService;
 use Gear\Creator\Injector\Injector;
+use Zend\Db\Metadata\Metadata;
 
 trait UtilTestTrait
 {
@@ -51,9 +52,15 @@ trait UtilTestTrait
             return $this->tableService;
         }
 
-        $this->tableService = new TableService();
+        $metadata = $this->prophesize(Metadata::class);
+        $this->tableService = new TableService(
+            $this->createModule()->reveal(),
+            $this->createString(),
+            $metadata->reveal()
+        );
         return $this->tableService;
     }
+
     public function createDirService()
     {
         if (isset($this->dirService)) {

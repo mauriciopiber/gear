@@ -5,7 +5,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Mvc\Controller\Web\WebControllerService;
 use Gear\Mvc\Controller\Web\WebControllerTestService;
-use Gear\Table\TableService;
+use Gear\Table\TableService\TableService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Mvc\Controller\Console\{
     ConsoleControllerService,

@@ -8,6 +8,7 @@ use Gear\Mvc\Entity\DoctrineService;
 use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Src\SrcSchema;
 use Gear\Schema\Schema\SchemaService;
+use Gear\Util\Script\ScriptService;
 
 class EntityServiceFactory implements FactoryInterface
 {
@@ -16,9 +17,9 @@ class EntityServiceFactory implements FactoryInterface
         return new EntityService(
             $container->get(ModuleStructure::class),
             $container->get(DoctrineService::class),
-            $container->get('scriptService'),
+            $container->get(ScriptService::class),
             $container->get('Gear\Mvc\Entity\EntityTestService'),
-            $container->get('Gear\Table\TableService'),
+            $container->get('Gear\Table\TableService\TableService'),
             $container->get(SrcSchema::class),
             $container->get('Gear\Mvc\Config\ServiceManager'),
             $container->get(SchemaService::class),

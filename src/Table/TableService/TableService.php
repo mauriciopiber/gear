@@ -4,13 +4,29 @@ namespace Gear\Table\TableService;
 use Gear\Table\Metadata\MetadataTrait;
 use Gear\Util\String\StringServiceTrait;
 use Gear\Module\Structure\ModuleStructureTrait;
+use Gear\Module\Structure\ModuleStructure;
 use Gear\Schema\Db\Db;
+use Zend\Db\Metadata\Metadata;
+use Gear\Util\String\StringService;
 
 class TableService
 {
-    use ModuleStructureTrait;
-    use MetadataTrait;
     use StringServiceTrait;
+
+    use ModuleStructureTrait;
+
+    use MetadataTrait;
+
+    public function __construct(
+        ModuleStructure $module,
+        StringService $string,
+        Metadata $metadata
+    ) {
+        $this->metadata = $metadata;
+        $this->stringService = $string;
+        $this->module = $module;
+    }
+
 
     /**
      * Retorna as colunas válidas da tabela, com a exclusão das colunas básicas.

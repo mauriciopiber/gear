@@ -32,7 +32,7 @@ class ColumnServiceFactory implements FactoryInterface
     {
         return new ColumnService(
             $container->get(ModuleStructure::class),
-            $container->get('Gear\Table\TableService'),
+            $container->get('Gear\Table\TableService\TableService'),
             $container->get('Gear\Util\String\StringService')
         );
     }

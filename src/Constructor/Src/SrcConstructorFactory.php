@@ -2,7 +2,7 @@
 namespace Gear\Constructor\Src;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
-use Gear\Table\TableService;
+use Gear\Table\TableService\TableService;
 use Gear\Mvc\ViewHelper\ViewHelperService;
 use Gear\Mvc\ViewHelper\ViewHelperTestService;
 use Gear\Mvc\ValueObject\ValueObjectService;

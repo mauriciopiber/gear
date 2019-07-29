@@ -5,7 +5,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Gear\Constructor\Db\DbConstructor;
 use Gear\Column\ColumnService;
-use Gear\Table\TableService;
+use Gear\Table\TableService\TableService;
 use Gear\Schema\Action\ActionSchema;
 //use Gear\Schema\Db\DbSchema as DbSchema;
 use Gear\Mvc\Spec\Feature\Feature;
