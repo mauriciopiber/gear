@@ -14,6 +14,10 @@ class TraitService extends AbstractMvc implements AbstractMvcInterface
         $isSearchForm = false,
         $specialName = null
     ) {
+
+        if ($this->getCode()->skipApi($src)) {
+            return;
+        }
         if ($name === null) {
             $name = $src->getName();
         }

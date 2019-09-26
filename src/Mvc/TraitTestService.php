@@ -17,6 +17,10 @@ class TraitTestService extends AbstractMvcTest implements AbstractMvcTestInterfa
 
     public function createTraitTest(Src $src, $location = null)
     {
+        if ($this->getCodeTest()->skipApi($src)) {
+            return;
+        }
+
         $location = $this->getCodeTest()->getLocation($src);
 
 

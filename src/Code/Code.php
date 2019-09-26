@@ -340,6 +340,11 @@ EOS;
      */
     public function getConstructor($data)
     {
+
+        if ($this->skipApi($data)) {
+            return '';
+        }
+
         $dependency = $data->getDependency();
         if (!is_array($dependency) || count($dependency)==0) {
             $html = $this->getConstructorDocs($data);
@@ -478,6 +483,9 @@ EOS;
         $dependencies = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
         foreach ($dependencies as $dependency) {
+            if ($this->skipApi($data)) {
+                continue;
+            }
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                 continue;
             }
@@ -516,6 +524,8 @@ EOS;
 
     public function getUse($data)
     {
+
+
         //var_dump($data);
         $this->uses = [***REMOVED***;
 
@@ -558,8 +568,10 @@ EOS;
 
             $values = array_map("unserialize", array_unique(array_map("serialize", $data->getDependency())));
 
-            foreach ($values as $item) {
-                $this->uses[***REMOVED*** = $this->resolveNamespace($item);
+            if (!$this->skipApi($data)) {
+                foreach ($values as $item) {
+                    $this->uses[***REMOVED*** = $this->resolveNamespace($item);
+                }
             }
         }
 
@@ -658,6 +670,10 @@ EOS;
         $now = 0;
 
         foreach ($dependencies as $i => $dependency) {
+
+            if ($this->skipApi($data)) {
+                continue;
+            }
 
             if (is_array($dependency) && isset($dependency['ig_t'***REMOVED***) && $dependency['ig_t'***REMOVED*** === true) {
                 continue;

@@ -162,6 +162,10 @@ class ServiceTestService extends AbstractMvcTest implements AbstractMvcTestInter
     {
         $location = $this->getCodeTest()->getLocation($this->src);
 
+
+        if ($this->getCodeTest()->skipApi($this->src)) {
+            $this->src->addDependency('\\Gear\\Rest\\User\\Service\\UserService');
+        }
         // if ($this->src->isFactory() && $this->src->isAbstract() === false) {
         //     $this->getFactoryTestService()->createFactoryTest($this->src);
         // }

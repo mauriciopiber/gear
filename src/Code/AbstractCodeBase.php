@@ -36,6 +36,18 @@ abstract class AbstractCodeBase implements
 
     const USE_TMP = 'use %s;';
 
+    public function skipApi($src)
+    {
+
+        $extends = $src->getExtends();
+
+        $start = substr($extends, 0, 10);
+
+        $rest = preg_replace('/\\\\/', '', $start);
+
+        return ($rest === 'GearRest');
+    }
+
     public function getServiceManagerName(AbstractObject $service)
     {
         $module = $this->getModule()->getNamespace();

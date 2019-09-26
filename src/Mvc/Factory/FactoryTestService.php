@@ -50,6 +50,10 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
 
     public function createFactoryTest($src, $location = null)
     {
+        if ($this->getCodeTest()->skipApi($src)) {
+            return;
+        }
+
         if ($src instanceof Controller) {
             return $this->createControllerFactoryTest($src, $location);
         }
@@ -97,6 +101,10 @@ class FactoryTestService extends AbstractMvcTest implements AbstractMvcTestInter
 
     public function createControllerFactoryTest(Controller $src, $location = null)
     {
+        if ($this->getCodeTest()->skipApi($src)) {
+            return;
+        }
+
         $location = $this->getFactoryCodeTest()->getLocation($src);
 
         $name = $src->getName();

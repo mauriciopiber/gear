@@ -164,6 +164,10 @@ class FactoryService extends AbstractMvc
 
     public function createFactoryFactory($data)
     {
+        if ($this->getCode()->skipApi($data)) {
+            return;
+        }
+
         if ($data instanceof Controller) {
             return $this->createFactoryController($data);
         }
