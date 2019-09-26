@@ -565,16 +565,16 @@
         },
         {
             "name": "mauriciopiber/gear-rest",
-            "version": "1.0.0-alpha4",
+            "version": "1.0.0-alpha15",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mauriciopiber/gear-rest.git",
-                "reference": "0c4ac8db62a6e53bed61eb2c9a9f164c2809299d"
+                "reference": "b212a3d23b0fe484a491a532c6d4d7117d4fe7fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mauriciopiber/gear-rest/mauriciopiber-gear-rest-0c4ac8db62a6e53bed61eb2c9a9f164c2809299d-zip-f42578.zip",
-                "reference": "0c4ac8db62a6e53bed61eb2c9a9f164c2809299d"
+                "url": "https://satis.piber.network/dist/mauriciopiber/gear-rest/mauriciopiber-gear-rest-b212a3d23b0fe484a491a532c6d4d7117d4fe7fa-zip-8d3e47.zip",
+                "reference": "b212a3d23b0fe484a491a532c6d4d7117d4fe7fa"
             },
             "require": {
                 "php": "^7.0",
@@ -608,10 +608,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/mauriciopiber/gear-rest/tree/1.0.0-alpha4",
+                "source": "https://github.com/mauriciopiber/gear-rest/tree/1.0.0-alpha15",
                 "issues": "https://github.com/mauriciopiber/gear-rest/issues"
             },
-            "time": "2019-07-21T00:53:40+00:00"
+            "time": "2019-08-03T20:46:50+00:00"
         },
         {
             "name": "mauriciopiber/gear-schema",
@@ -1224,16 +1224,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
+                "reference": "a17a2aea43950ce83a0603ed301bac362eb86870"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-9198eea354be75794a7b1064de00d9ae9ae5090f-zip-e4323e.zip",
-                "reference": "9198eea354be75794a7b1064de00d9ae9ae5090f"
+                "url": "https://satis.piber.network/dist/symfony/config/symfony-config-a17a2aea43950ce83a0603ed301bac362eb86870-zip-1fdd48.zip",
+                "reference": "a17a2aea43950ce83a0603ed301bac362eb86870"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1283,20 +1283,20 @@
             ***REMOVED***,
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-08T06:33:08+00:00"
+            "time": "2019-07-18T10:34:59+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-b592b26a24265a35172d8a2094d8b10f22b7cc39-zip-92f91a.zip",
-                "reference": "b592b26a24265a35172d8a2094d8b10f22b7cc39"
+                "url": "https://satis.piber.network/dist/symfony/console/symfony-console-8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9-zip-0c9d9a.zip",
+                "reference": "8b0ae5742ce9aaa8b0075665862c1ca397d1c1d9"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1357,11 +1357,11 @@
             ***REMOVED***,
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-13T11:03:18+00:00"
+            "time": "2019-07-24T17:13:59+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -1639,16 +1639,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "c60ecf5ba842324433b46f58dc7afc4487dbab99"
+                "reference": "34d29c2acd1ad65688f58452fd48a46bd996d5a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/yaml/symfony-yaml-c60ecf5ba842324433b46f58dc7afc4487dbab99-zip-131274.zip",
-                "reference": "c60ecf5ba842324433b46f58dc7afc4487dbab99"
+                "url": "https://satis.piber.network/dist/symfony/yaml/symfony-yaml-34d29c2acd1ad65688f58452fd48a46bd996d5a6-zip-959159.zip",
+                "reference": "34d29c2acd1ad65688f58452fd48a46bd996d5a6"
             },
             "require": {
                 "php": "^7.1.3",
@@ -1693,7 +1693,7 @@
             ***REMOVED***,
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-06T14:04:46+00:00"
+            "time": "2019-07-24T14:47:54+00:00"
         },
         {
             "name": "zendframework/zend-authentication",
@@ -3567,22 +3567,22 @@
         },
         {
             "name": "mikey179/vfsstream",
-            "version": "v1.6.6",
+            "version": "v1.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bovigo/vfsStream.git",
-                "reference": "095238a0711c974ae5b4ebf4c4534a23f3f6c99d"
+                "reference": "2b544ac3a21bcc4dde5d90c4ae8d06f4319055fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/mikey179/vfsstream/mikey179-vfsstream-095238a0711c974ae5b4ebf4c4534a23f3f6c99d-zip-f362ba.zip",
-                "reference": "095238a0711c974ae5b4ebf4c4534a23f3f6c99d"
+                "url": "https://satis.piber.network/dist/mikey179/vfsstream/mikey179-vfsstream-2b544ac3a21bcc4dde5d90c4ae8d06f4319055fb-zip-34deae.zip",
+                "reference": "2b544ac3a21bcc4dde5d90c4ae8d06f4319055fb"
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.5"
+                "phpunit/phpunit": "^4.5|^5.0"
             },
             "type": "library",
             "extra": {
@@ -3602,13 +3602,13 @@
             "authors": [
                 {
                     "name": "Frank Kleine",
-                    "homepage": "http://frankkleine.de/",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://frankkleine.de/"
                 }
             ***REMOVED***,
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
-            "time": "2019-04-08T13:54:32+00:00"
+            "time": "2019-08-01T01:38:37+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4045,16 +4045,16 @@
         },
         {
             "name": "phpmd/phpmd",
-            "version": "2.6.1",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "7425e155cf22cdd2b4dd3458a7da4cf6c0201562"
+                "reference": "a05a999c644f4bc9a204846017db7bb7809fbe4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpmd/phpmd/phpmd-phpmd-7425e155cf22cdd2b4dd3458a7da4cf6c0201562-zip-7e2e7c.zip",
-                "reference": "7425e155cf22cdd2b4dd3458a7da4cf6c0201562"
+                "url": "https://satis.piber.network/dist/phpmd/phpmd/phpmd-phpmd-a05a999c644f4bc9a204846017db7bb7809fbe4c-zip-bd8145.zip",
+                "reference": "a05a999c644f4bc9a204846017db7bb7809fbe4c"
             },
             "require": {
                 "ext-xml": "*",
@@ -4062,13 +4062,15 @@
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0",
+                "gregwar/rst": "^1.0",
+                "mikey179/vfsstream": "^1.6.4",
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27",
                 "squizlabs/php_codesniffer": "^2.0"
             },
             "bin": [
                 "src/bin/phpmd"
             ***REMOVED***,
-            "type": "project",
+            "type": "library",
             "autoload": {
                 "psr-0": {
                     "PHPMD\\": "src/main/php"
@@ -4086,19 +4088,19 @@
                     "homepage": "https://github.com/manuelpichler"
                 },
                 {
-                    "name": "Other contributors",
-                    "role": "Contributors",
-                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors"
-                },
-                {
                     "name": "Marc Würth",
                     "role": "Project Maintainer",
                     "email": "ravage@bluewin.ch",
                     "homepage": "https://github.com/ravage84"
+                },
+                {
+                    "name": "Other contributors",
+                    "role": "Contributors",
+                    "homepage": "https://github.com/phpmd/phpmd/graphs/contributors"
                 }
             ***REMOVED***,
             "description": "PHPMD is a spin-off project of PHP Depend and aims to be a PHP equivalent of the well known Java tool PMD.",
-            "homepage": "http://phpmd.org/",
+            "homepage": "https://phpmd.org/",
             "keywords": [
                 "mess detection",
                 "mess detector",
@@ -4106,7 +4108,7 @@
                 "phpmd",
                 "pmd"
             ***REMOVED***,
-            "time": "2019-07-05T23:07:02+00:00"
+            "time": "2019-07-30T21:13:32+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -4172,16 +4174,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "7.0.6",
+            "version": "7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "d471d0d2b529a67c6a722dd446c4ec90881ac315"
+                "reference": "7743bbcfff2a907e9ee4a25be13d0f8ec5e73800"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpunit/php-code-coverage/phpunit-php-code-coverage-d471d0d2b529a67c6a722dd446c4ec90881ac315-zip-bb1568.zip",
-                "reference": "d471d0d2b529a67c6a722dd446c4ec90881ac315"
+                "url": "https://satis.piber.network/dist/phpunit/php-code-coverage/phpunit-php-code-coverage-7743bbcfff2a907e9ee4a25be13d0f8ec5e73800-zip-33d25f.zip",
+                "reference": "7743bbcfff2a907e9ee4a25be13d0f8ec5e73800"
             },
             "require": {
                 "ext-dom": "*",
@@ -4189,7 +4191,7 @@
                 "php": "^7.2",
                 "phpunit/php-file-iterator": "^2.0.2",
                 "phpunit/php-text-template": "^1.2.1",
-                "phpunit/php-token-stream": "^3.0.2",
+                "phpunit/php-token-stream": "^3.1.0",
                 "sebastian/code-unit-reverse-lookup": "^1.0.1",
                 "sebastian/environment": "^4.2.2",
                 "sebastian/version": "^2.0.1",
@@ -4219,8 +4221,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ***REMOVED***,
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -4230,7 +4232,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2019-07-08T05:29:42+00:00"
+            "time": "2019-07-25T05:31:54+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4371,16 +4373,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c"
+                "reference": "e899757bb3df5ff6e95089132f32cd59aac2220a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpunit/php-token-stream/phpunit-php-token-stream-c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c-zip-446826.zip",
-                "reference": "c4a66b97f040e3e20b3aa2a243230a1c3a9f7c8c"
+                "url": "https://satis.piber.network/dist/phpunit/php-token-stream/phpunit-php-token-stream-e899757bb3df5ff6e95089132f32cd59aac2220a-zip-df0a37.zip",
+                "reference": "e899757bb3df5ff6e95089132f32cd59aac2220a"
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -4392,7 +4394,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -4415,20 +4417,20 @@
             "keywords": [
                 "tokenizer"
             ***REMOVED***,
-            "time": "2019-07-08T05:24:54+00:00"
+            "time": "2019-07-25T05:29:42+00:00"
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.2.5",
+            "version": "8.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c1b8534b3730f20f58600124129197bf1183dc92"
+                "reference": "c319d08ebd31e137034c84ad7339054709491485"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/phpunit/phpunit/phpunit-phpunit-c1b8534b3730f20f58600124129197bf1183dc92-zip-fa8e17.zip",
-                "reference": "c1b8534b3730f20f58600124129197bf1183dc92"
+                "url": "https://satis.piber.network/dist/phpunit/phpunit/phpunit-phpunit-c319d08ebd31e137034c84ad7339054709491485-zip-58a086.zip",
+                "reference": "c319d08ebd31e137034c84ad7339054709491485"
             },
             "require": {
                 "doctrine/instantiator": "^1.2.0",
@@ -4443,7 +4445,7 @@
                 "phar-io/version": "^2.0.1",
                 "php": "^7.2",
                 "phpspec/prophecy": "^1.8.1",
-                "phpunit/php-code-coverage": "^7.0.5",
+                "phpunit/php-code-coverage": "^7.0.7",
                 "phpunit/php-file-iterator": "^2.0.2",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.1.2",
@@ -4471,7 +4473,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.2-dev"
+                    "dev-master": "8.3-dev"
                 }
             },
             "autoload": {
@@ -4486,8 +4488,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ***REMOVED***,
             "description": "The PHP Unit Testing framework.",
@@ -4497,7 +4499,7 @@
                 "testing",
                 "xunit"
             ***REMOVED***,
-            "time": "2019-07-15T06:26:24+00:00"
+            "time": "2019-08-03T15:41:47+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -5242,16 +5244,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "b851928be349c065197fdc0832f78d85139e3903"
+                "reference": "9ad1b83d474ae17156f6914cb81ffe77aeac3a9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-b851928be349c065197fdc0832f78d85139e3903-zip-7ea9cc.zip",
-                "reference": "b851928be349c065197fdc0832f78d85139e3903"
+                "url": "https://satis.piber.network/dist/symfony/dependency-injection/symfony-dependency-injection-9ad1b83d474ae17156f6914cb81ffe77aeac3a9b-zip-e05bda.zip",
+                "reference": "9ad1b83d474ae17156f6914cb81ffe77aeac3a9b"
             },
             "require": {
                 "php": "^7.1.3",
@@ -5310,20 +5312,20 @@
             ***REMOVED***,
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-15T04:08:07+00:00"
+            "time": "2019-07-26T07:03:43+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
+                "reference": "9638d41e3729459860bb96f6247ccb61faaa45f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a-zip-b608c0.zip",
-                "reference": "33c21f7d5d3dc8a140c282854a7e13aeb5d0f91a"
+                "url": "https://satis.piber.network/dist/symfony/finder/symfony-finder-9638d41e3729459860bb96f6247ccb61faaa45f2-zip-5b6057.zip",
+                "reference": "9638d41e3729459860bb96f6247ccb61faaa45f2"
             },
             "require": {
                 "php": "^7.1.3"
@@ -5358,7 +5360,7 @@
             ***REMOVED***,
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-13T11:03:18+00:00"
+            "time": "2019-06-28T13:16:30+00:00"
         },
         {
             "name": "theseer/directoryscanner",

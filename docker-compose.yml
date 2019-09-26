@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   main:
-    image: registry.piber.network/dev-php:v1.0.8
+    image: registry.piber.network/dev-php:v1.0.9
     tty: true
     volumes:
       - /opt/composer-cache:/root/.composer/cache
@@ -14,18 +14,11 @@ services:
       - DB_USER=root
       - DB_PASS=gear
       - DB_HOST=mysql
-    networks:
-      - satis
   mysql:
     image: mysql:5.7.22
     environment:
       MYSQL_ROOT_PASSWORD: gear
     volumes:
       - gear-database:/var/lib/mysql
-    networks:
-      - satis
-networks:
-  satis:
-    external: true
 volumes:
   gear-database:
